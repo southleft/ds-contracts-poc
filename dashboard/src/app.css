@@ -75,8 +75,15 @@ a {
 
 .shell {
   display: grid;
-  grid-template-columns: 250px 1fr; /* no layout-width token exists */
-  min-height: 100vh;
+  /* minmax(0, 1fr) is load-bearing: a bare 1fr means minmax(auto, 1fr), so
+     any unbreakable content (mono token paths, wide samples) silently pushes
+     the layout past the viewport with no scrollbar to show it. */
+  grid-template-columns: 250px minmax(0, 1fr); /* no layout-width token exists */
+  min-height: 100dvh;
+}
+
+.shell > main {
+  min-width: 0;
 }
 
 .sidebar {
@@ -88,7 +95,8 @@ a {
   gap: var(--space-400);
   position: sticky;
   top: 0;
-  height: 100vh;
+  max-height: 100dvh;
+  overflow-y: auto;
 }
 
 .brand-name {
@@ -155,6 +163,7 @@ a {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
   gap: var(--space-200);
   padding: var(--space-150) var(--space-400);
   border-bottom: var(--border-width-100) solid var(--color-border-subtle);
@@ -563,9 +572,32 @@ a {
   align-items: start;
 }
 
-@media (min-width: 1360px) {
+/* Fluid columns: as many panels side-by-side as genuinely fit (1 → 2 → 3),
+   never overflowing — no rigid breakpoint jump to a three-column layout. */
+@media (min-width: 1100px) {
   .detail-grid {
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr) minmax(0, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
+  }
+}
+
+/* Long unbreakable strings (token paths, keys, import lines) must wrap
+   rather than define a column's minimum width. */
+.content code,
+.content .mono,
+.content pre {
+  overflow-wrap: anywhere;
+}
+.content pre {
+  white-space: pre-wrap;
+}
+
+/* Tokens table: drop the Figma-name column before it can pinch */
+@media (max-width: 1080px) {
+  .token-row {
+    grid-template-columns: 96px 104px minmax(0, 1fr);
+  }
+  .token-figma {
+    display: none;
   }
 }
 
@@ -839,8 +871,8 @@ a {
 .token-row {
   display: grid;
   /* preview + literal value columns — no token */
-  grid-template-columns: 96px 104px minmax(200px, 1fr) minmax(160px, 1fr);
-  gap: var(--space-300);
+  grid-template-columns: 96px 104px minmax(120px, 1fr) minmax(100px, 1fr);
+  gap: var(--space-200);
   align-items: center;
   padding: var(--space-100) 0;
   border-bottom: var(--border-width-100) solid var(--color-border-subtle);
