@@ -1,0 +1,86 @@
+{
+  "passed": 16,
+  "total": 16,
+  "results": [
+    {
+      "id": "refuse-unknown-token-reference",
+      "claim": "C2-refusal",
+      "pass": true
+    },
+    {
+      "id": "refuse-schema-invalid-contract",
+      "claim": "C2-refusal",
+      "pass": true
+    },
+    {
+      "id": "refuse-incomplete-mode-set",
+      "claim": "C2-refusal",
+      "pass": true
+    },
+    {
+      "id": "deterministic-regeneration",
+      "claim": "C1-determinism",
+      "pass": true
+    },
+    {
+      "id": "baseline-parity-clean",
+      "claim": "C3-detection",
+      "pass": true
+    },
+    {
+      "id": "detect-code-added-prop",
+      "claim": "C3-detection",
+      "pass": true
+    },
+    {
+      "id": "detect-code-removed-prop",
+      "claim": "C3-detection",
+      "pass": true
+    },
+    {
+      "id": "detect-code-enum-drift",
+      "claim": "C3-detection",
+      "pass": true
+    },
+    {
+      "id": "detect-code-default-drift",
+      "claim": "C3-detection",
+      "pass": true
+    },
+    {
+      "id": "detect-figma-missing-property",
+      "claim": "C3-detection",
+      "pass": true
+    },
+    {
+      "id": "detect-figma-extra-property",
+      "claim": "C3-detection",
+      "pass": true
+    },
+    {
+      "id": "detect-figma-variant-options-drift",
+      "claim": "C3-detection",
+      "pass": true
+    },
+    {
+      "id": "detect-token-alias-drift",
+      "claim": "C3-detection",
+      "pass": true
+    },
+    {
+      "id": "detect-token-missing-variable",
+      "claim": "C3-detection",
+      "pass": true
+    },
+    {
+      "id": "detect-token-extra-variable",
+      "claim": "C3-detection",
+      "pass": true
+    },
+    {
+      "id": "promotion-converges",
+      "claim": "C4-convergence",
+      "pass": true
+    }
+  ]
+}

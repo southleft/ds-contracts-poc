@@ -39,6 +39,8 @@ Requires Node ≥ 20.
 npm install
 npm run build        # tokens → CSS, schema → JSON Schema, contracts → components
 npm run storybook    # browse the generated components at http://localhost:6006
+npm run parity       # three-surface drift report (code / Figma / tokens vs contract)
+npm run eval         # 16-case validation suite → evals/results.json
 ```
 
 Try the loop: edit `contracts/button.contract.json` (add a value to the `size` enum, or point a token binding at a different token), run `npm run build`, and watch the component, its styles, and its stories update. Point a binding at a token that doesn't exist and the build **fails** — that's the contract↔token integrity gate.
@@ -68,9 +70,11 @@ Try the loop: edit `contracts/button.contract.json` (add a value to the `size` e
 4. [Code generation](docs/04-code-generation.md) — what gets emitted and how to add a component
 5. [Figma sync](docs/05-figma-sync.md) — the MCP-driven design side: setup, generation, fidelity scope
 6. [The parity loop](docs/06-parity-loop.md) — drift detection, promotion flow, and the executed two-direction demo
+7. [Validation](docs/07-validation.md) — claims → evals → evidence (16/16 passing), live round-trip results, and the designed AI-adherence eval
 
 ## Status — all three phases executed
 
 **Phase 1 ✅** contract → code generation with token integrity checking, visualized in Storybook.
 **Phase 2 ✅** contract → Figma generation: variable collections (Light/Dark modes, aliases, scopes, codeSyntax) and component sets, in [DS Contracts POC](https://www.figma.com/design/8nim1d0IPnehMxA7B7SYxC/DS-Contracts-POC); anchors written back into the contracts.
 **Phase 3 ✅** the parity loop (`npm run parity`): three-way drift detection with promotion patches, proven in both directions — a hand-added code prop promoted into the contract and pushed to Figma, and a designer's Figma token change promoted into `tokens/` and rebuilt into CSS. See [docs/06-parity-loop.md](docs/06-parity-loop.md) for the evidence trail.
+**Validation ✅** 16/16 deterministic evals (`npm run eval`) covering determinism, refusal of invalid states, ten drift classes, and promotion convergence — plus a live Figma token round-trip verified lossless (92 tokens, zero diff). See [docs/07-validation.md](docs/07-validation.md).

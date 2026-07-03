@@ -13,7 +13,8 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "figma:plan": "tsx scripts/generate-figma.ts",
-    "parity": "tsx parity/diff.ts"
+    "parity": "tsx parity/diff.ts",
+    "eval": "tsx evals/run.ts"
   },
   "engines": {
     "node": ">=20"

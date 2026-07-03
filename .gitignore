@@ -3,3 +3,4 @@ storybook-static/
 dist/
 *.log
 .DS_Store
+evals/.scratch/

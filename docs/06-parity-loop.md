@@ -54,7 +54,7 @@ Snapshots are committed as point-in-time evidence; in CI you'd refresh them head
 ## Operational learnings (read before touching the bridge)
 
 - **Multi-file routing can lie.** With several figma-console-mcp server instances running, `figma_execute` was observed executing in a file *not* reported as active (`figma_get_status` said "DS Contracts POC"; the code ran in a FigJam board). `figma_navigate` to the target URL repaired routing. Consequence: **every write script starts with a file guard** (`figma.root.name` / `figma.fileKey` check) — the generator emits them automatically.
-- **`figma_export_tokens` returned empty** on a file whose 92 variables were readable via `figma_execute` on the same connection (v1.34.0) — reported upstream; `parity/extract-figma.plugin.js` is the deterministic fallback either way.
+- **Server/plugin version skew breaks tools silently.** `figma_export_tokens` returned empty while `figma_execute` read all 92 variables on the same connection — root cause: the Desktop Bridge plugin was still 1.33.0 against a 1.34.0 server. Re-importing the plugin fixed it (export then round-tripped losslessly — see docs/07). Check `pluginVersion` vs `bundledPluginVersion` in `figma_get_status` before debugging anything else.
 - **Figma's default variant is positional** (top-left), not declaration-ordered — hence the generator's default-first axis ordering.
 - Set-level `addComponentProperty` works fine for adding BOOLEAN/TEXT properties to an *existing* component set (the add-before-`combineAsVariants` rule applies to initial authoring, where TEXT props must be linked to nodes inside variants).
 
