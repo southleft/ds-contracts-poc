@@ -11,7 +11,8 @@
     "build": "npm run tokens && npm run schema && npm run generate",
     "typecheck": "tsc --noEmit",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "figma:plan": "tsx scripts/generate-figma.ts"
   },
   "engines": {
     "node": ">=20"

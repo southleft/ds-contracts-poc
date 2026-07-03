@@ -1,10 +1,27 @@
-# 5 · Figma Sync (Phases 2–3)
+# 5 · Figma Sync (Phase 2 executed · Phase 3 planned)
 
-How the same contracts that generate code will generate — and then continuously validate — the Figma side. Phase 2/3 are not built yet; this doc records the verified plan so anyone can pick it up. All tool capabilities below were verified against the [Figma Console MCP](https://docs.figma-console-mcp.southleft.com/) source (v1.33.x, July 2026).
+How the same contracts that generate code also generate — and will continuously validate — the Figma side. **Phase 2 ran on July 3, 2026** (results below). All figma-console-mcp capabilities cited were verified against its source (v1.33.x, July 2026).
 
-**Target file:** [DS Contracts POC](https://www.figma.com/design/8nim1d0IPnehMxA7B7SYxC/DS-Contracts-POC) (`fileKey: 8nim1d0IPnehMxA7B7SYxC`, already recorded in each contract's `anchors.figma`).
+**Target file:** [DS Contracts POC](https://www.figma.com/design/8nim1d0IPnehMxA7B7SYxC/DS-Contracts-POC) (`fileKey: 8nim1d0IPnehMxA7B7SYxC`).
 
-## Bridge setup (one-time)
+## Phase 2 results (executed July 3, 2026)
+
+`npm run figma:plan` (`scripts/generate-figma.ts`) reads `tokens/` + `contracts/` and emits deterministic Plugin API scripts into `figma-sync/`. Those scripts are **transport-agnostic** — they run unchanged through any tool that executes Plugin API JS in the file. This run used the official Figma MCP's `use_figma` (the figma-console session had dropped); replaying them through figma-console's `figma_execute` is equivalent.
+
+| Script | Result |
+|---|---|
+| `01-tokens.js` | **Primitives** collection (mode `Value`, 56 variables) + **Semantic** collection (modes `Light`/`Dark`, 36 variables), aliases mirroring the DTCG graph, scopes set per type, `codeSyntax.WEB` = the generated CSS custom property names |
+| `02-badge.js` | `Badge` component set — 4 variants, properties `Variant`, `Label` (TEXT). nodeId `6:10`, key `89f1fb…` |
+| `03-button.js` | `Button` component set — 9 variants (3×3), properties `Variant`, `Size`, `Label` (TEXT), `Disabled` (BOOLEAN). nodeId `5:21`, key `1b5d2a…` |
+
+Node IDs and component-set keys were **written back into each contract's `anchors.figma`** — from here on, parity matches by anchor, not by name. Scripts are idempotent-safe: the token script upserts; component scripts skip (returning the existing id/key) if a set with the same name exists. To rebuild a set from a changed contract, delete it in Figma and re-run.
+
+**Fidelity notes from the run (all deliberate):**
+- `fontSize` is not variable-bindable in the Plugin API — set numerically from the resolved token value. Same for font family/weight (static Inter Medium).
+- The `Disabled` BOOLEAN property is declared for API parity but not visually linked; interaction states (hover/focus/disabled) are CSS-side concerns, not represented as Figma variants.
+- Visual verification: section screenshot matches the Storybook Matrix stories (colors, padding scale, radii, type scale) in light mode.
+
+## Bridge setup for figma-console-mcp (one-time)
 
 The MCP talks to Figma through a **companion plugin over WebSocket** (ports 9223–9232), not Chrome DevTools — writes execute Plugin API JavaScript inside Figma's sandbox. This deliberately avoids the Variables **REST** API, which is Enterprise-plan-only; the Plugin API path works on any plan.
 
@@ -13,9 +30,9 @@ The MCP talks to Figma through a **companion plugin over WebSocket** (ports 9223
 3. In Figma: *Plugins → Development → Import plugin from manifest* → `~/.figma-console-mcp/plugin/manifest.json` (auto-copied on server start) → run **Figma Desktop Bridge**. Status should read `Local · ready`.
 4. Use the **local** server mode. The hosted/remote variant is read-only-ish, has fewer tools, and can't write token files to disk.
 
-⚠️ **Plan gate:** light + dark modes in one variable collection requires a **Professional+** file (Starter allows 1 mode per collection). Fallback on Starter: two collections (`Semantic Light` / `Semantic Dark`) — uglier, workable.
+⚠️ **Plan gate:** light + dark modes in one variable collection requires a **Professional+** file (Starter allows 1 mode per collection). Confirmed working on the target file.
 
-## Phase 2 — contract → Figma generation
+## Phase 2 — contract → Figma generation (reference plan)
 
 ### Tokens → variables
 

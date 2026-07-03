@@ -13,7 +13,13 @@
     {
       "name": "variant",
       "description": "Visual prominence of the action.",
-      "type": { "enum": ["primary", "secondary", "danger"] },
+      "type": {
+        "enum": [
+          "primary",
+          "secondary",
+          "danger"
+        ]
+      },
       "default": "primary",
       "bindings": {
         "figma": {
@@ -25,13 +31,21 @@
             "danger": "Danger"
           }
         },
-        "code": { "prop": "variant" }
+        "code": {
+          "prop": "variant"
+        }
       }
     },
     {
       "name": "size",
       "description": "Control density.",
-      "type": { "enum": ["sm", "md", "lg"] },
+      "type": {
+        "enum": [
+          "sm",
+          "md",
+          "lg"
+        ]
+      },
       "default": "md",
       "bindings": {
         "figma": {
@@ -43,7 +57,9 @@
             "lg": "Large"
           }
         },
-        "code": { "prop": "size" }
+        "code": {
+          "prop": "size"
+        }
       }
     },
     {
@@ -52,8 +68,13 @@
       "type": "boolean",
       "default": false,
       "bindings": {
-        "figma": { "kind": "BOOLEAN", "property": "Disabled" },
-        "code": { "prop": "disabled" }
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Disabled"
+        },
+        "code": {
+          "prop": "disabled"
+        }
       }
     },
     {
@@ -62,12 +83,21 @@
       "type": "text",
       "default": "Button",
       "bindings": {
-        "figma": { "kind": "TEXT", "property": "Label" },
-        "code": { "prop": "children" }
+        "figma": {
+          "kind": "TEXT",
+          "property": "Label"
+        },
+        "code": {
+          "prop": "children"
+        }
       }
     }
   ],
-  "states": ["hover", "focus-visible", "disabled"],
+  "states": [
+    "hover",
+    "focus-visible",
+    "disabled"
+  ],
   "anatomy": {
     "root": {
       "tokens": {
@@ -108,8 +138,8 @@
   "anchors": {
     "figma": {
       "fileKey": "8nim1d0IPnehMxA7B7SYxC",
-      "componentSetKey": null,
-      "nodeId": null
+      "componentSetKey": "1b5d2a573f3f39404af396bdbe944a30ca0eaec3",
+      "nodeId": "5:21"
     },
     "code": {
       "importPath": "src/components/Button",

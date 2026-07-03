@@ -13,7 +13,14 @@
     {
       "name": "variant",
       "description": "The feedback tone being communicated.",
-      "type": { "enum": ["info", "success", "warning", "danger"] },
+      "type": {
+        "enum": [
+          "info",
+          "success",
+          "warning",
+          "danger"
+        ]
+      },
       "default": "info",
       "bindings": {
         "figma": {
@@ -26,7 +33,9 @@
             "danger": "Danger"
           }
         },
-        "code": { "prop": "variant" }
+        "code": {
+          "prop": "variant"
+        }
       }
     },
     {
@@ -35,8 +44,13 @@
       "type": "text",
       "default": "Badge",
       "bindings": {
-        "figma": { "kind": "TEXT", "property": "Label" },
-        "code": { "prop": "children" }
+        "figma": {
+          "kind": "TEXT",
+          "property": "Label"
+        },
+        "code": {
+          "prop": "children"
+        }
       }
     }
   ],
@@ -61,8 +75,8 @@
   "anchors": {
     "figma": {
       "fileKey": "8nim1d0IPnehMxA7B7SYxC",
-      "componentSetKey": null,
-      "nodeId": null
+      "componentSetKey": "89f1fb2d4580116cea4be5d4ca340de216a27819",
+      "nodeId": "6:10"
     },
     "code": {
       "importPath": "src/components/Badge",
