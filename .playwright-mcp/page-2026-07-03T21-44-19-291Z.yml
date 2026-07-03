@@ -1,0 +1,94 @@
+- generic [ref=e3]:
+  - complementary [ref=e4]:
+    - generic [ref=e5]:
+      - link "Contract Hub" [ref=e6] [cursor=pointer]:
+        - /url: "#/"
+      - paragraph [ref=e7]: The governed source, visualized
+    - navigation "Primary" [ref=e8]:
+      - link "Overview" [ref=e9] [cursor=pointer]:
+        - /url: "#/"
+      - link "Components" [ref=e10] [cursor=pointer]:
+        - /url: "#/components"
+      - link "Tokens" [ref=e11] [cursor=pointer]:
+        - /url: "#/tokens"
+      - link "Governance" [ref=e12] [cursor=pointer]:
+        - /url: "#/governance"
+      - link "Parity" [ref=e13] [cursor=pointer]:
+        - /url: "#/parity"
+    - generic [ref=e14]:
+      - text: ds-contracts-poc
+      - text: catalog v0.1.0
+  - generic [ref=e15]:
+    - banner [ref=e16]:
+      - generic [ref=e17]: Overview
+      - generic [ref=e18]:
+        - generic [ref=e19]: catalog v0.1.0 · d423625
+        - button "Dark mode" [ref=e20] [cursor=pointer]
+    - main [ref=e21]:
+      - generic [ref=e22]:
+        - generic [ref=e23]:
+          - heading "One contract. Two surfaces. Zero drift." [level=1] [ref=e24]
+          - paragraph [ref=e25]: A machine-readable contract is the single source of truth between the Figma library and the React codebase. Everything on this page is read live from the governed artifacts.
+        - region "System status" [ref=e26]:
+          - generic [ref=e27]:
+            - generic [ref=e28]: Components
+            - generic [ref=e29]: "10"
+            - generic [ref=e30]: 2 native to canvas
+          - generic [ref=e31]:
+            - generic [ref=e32]: Tokens
+            - generic [ref=e33]: "118"
+            - generic [ref=e34]: custom properties · 59 semantic
+          - generic [ref=e35]:
+            - generic [ref=e36]: Evals
+            - generic [ref=e37]: 26/26
+            - generic [ref=e38]: claims passing
+          - generic [ref=e39]:
+            - generic [ref=e40]: Parity
+            - generic [ref=e41]: Clean
+            - generic [ref=e42]: 0 drift findings · 10 contracts checked
+          - generic [ref=e43]:
+            - generic [ref=e44]: Adherence
+            - generic [ref=e45]: 100 vs 69
+            - generic [ref=e46]: governed vs ungoverned
+        - generic [ref=e47]:
+          - heading "The loop" [level=2] [ref=e48]
+          - generic [ref=e49]:
+            - generic [ref=e50]:
+              - generic [ref=e51]:
+                - generic [ref=e52]: Code surface
+                - generic [ref=e53]: React + Storybook
+              - generic [ref=e54]: ←
+              - generic [ref=e55]:
+                - generic [ref=e56]: Contract
+                - generic [ref=e57]: the governed source
+              - generic [ref=e58]: →
+              - generic [ref=e59]:
+                - generic [ref=e60]: Design surface
+                - generic [ref=e61]: Figma variables + components
+            - generic [ref=e62]: parity check
+            - paragraph [ref=e63]: changes on either side are promoted into the contract — never synced side-to-side
+        - generic [ref=e64]:
+          - heading "Adherence, A/B" [level=2] [ref=e65]
+          - paragraph [ref=e66]: The same five screens were generated twice — once with the governed catalog in context, once without it. The judge scored both arms against the org rules.
+          - generic [ref=e68]:
+            - strong [ref=e69]: With governed catalog
+            - text: — 100 · 5/5 screens adherent · 0/253 violations
+          - generic [ref=e73]:
+            - strong [ref=e74]: Without
+            - text: — 69 · 0/5 adherent · 91/283 violations
+          - generic [ref=e77]:
+            - heading "Ungoverned violations, by rule" [level=3] [ref=e78]
+            - generic [ref=e79]:
+              - generic [ref=e80]: components-from-catalog
+              - generic [ref=e83]: "66"
+            - generic [ref=e84]:
+              - generic [ref=e85]: tokens-only
+              - generic [ref=e88]: "22"
+            - generic [ref=e89]:
+              - generic [ref=e90]: no-style-overrides
+              - generic [ref=e93]: "3"
+        - generic [ref=e95]:
+          - heading "Show the gaps, never fake it" [level=2] [ref=e96]
+          - paragraph [ref=e97]: "When the governed generator hit a real limitation, it reported the gap instead of inventing a workaround:"
+          - blockquote [ref=e98]: "GAP: TableHeaderCell has no legal parent slot (Table accepts only TableRow, TableRow accepts only TableCell), so the header row uses TableCell."
+          - paragraph [ref=e99]: That defect in the vocabulary was promoted through the standard loop as ds.table-row v1.1.0 — the row's cells slot was widened to accept header cells, the catalog was re-emitted, and the corrected composition became legal on both surfaces.

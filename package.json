@@ -18,7 +18,9 @@
     "build:lib": "vite build && tsc -p tsconfig.build.json",
     "verify:package": "node scripts/verify-package.mjs",
     "catalog": "tsx scripts/generate-catalog.ts",
-    "judge": "tsx parity/judge.ts"
+    "judge": "tsx parity/judge.ts",
+    "dashboard": "vite --config dashboard/vite.config.ts",
+    "build:dashboard": "vite build --config dashboard/vite.config.ts"
   },
   "engines": {
     "node": ">=20"

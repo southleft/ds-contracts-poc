@@ -22,11 +22,13 @@ Same model, same tasks. Every output scored by the deterministic judge. Results 
 
 | | **Arm A (governed)** | **Arm B (ungoverned)** |
 |---|---|---|
-| Mean adherence score | **100** | 65 |
+| Mean adherence score | **100** | 69 |
 | Fully adherent screens | **5 / 5** | 0 / 5 |
-| Violations / checks | **0 / 253** | 101 / 283 |
+| Violations / checks | **0 / 253** | 91 / 283 |
 
-Arm B's violation profile is exactly the pathology the proposal describes: **76** invented props/values/components (`components-from-catalog`), **22** literal colors and pixel values (`tokens-only`), **3** style overrides. Plausible-looking screens, every one a lookalike. Arm A produced zero violations *including on the full-page composition* — with the same model, the only variable being the governed source.
+Arm B's violation profile is exactly the pathology the proposal describes: **66** invented props/values/components (`components-from-catalog`), **22** literal colors and pixel values (`tokens-only`), **3** style overrides. Plausible-looking screens, every one a lookalike. Arm A produced zero violations *including on the full-page composition* — with the same model, the only variable being the governed source.
+
+(Scoring footnote: the initial run scored arm B at 65 with 101 violations. After the TableHeaderCell gap below was promoted — widening the vocabulary — re-scoring against the current catalog gives 69/91, because compositions that were illegal became legal *for everyone*. The judge always scores against the current catalog; the promotion honestly improved both arms' world.)
 
 Because this design system is private and novel, these numbers are free of the training-data contamination that flatters public-DS evals (Material, Atlassian) — the PoC doubles as a clean adherence instrument.
 
