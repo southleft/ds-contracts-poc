@@ -1,5 +1,5 @@
 /* GENERATED FILE — DO NOT EDIT.
- * Source of truth: contracts/button.contract.json (ds.button v1.1.0)
+ * Source of truth: contracts/button.contract.json (ds.button v1.2.0)
  * Regenerate with: npm run generate
  */
 
@@ -71,6 +71,9 @@
 
 .root:focus-visible {
   outline-color: var(--color-border-focus);
+}
+
+.root:focus-visible {
   outline-width: var(--border-width-focus);
 }
 

@@ -19,7 +19,15 @@
  */
 import { readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
-import { ContractSchema, type Contract, type Prop } from '../scripts/contract-schema.js';
+import {
+  ContractSchema,
+  componentRefsOf,
+  slotFigmaProperty,
+  slotVisibilityProperty,
+  slotsOf,
+  type Contract,
+  type Prop,
+} from '../scripts/contract-schema.js';
 import { extractCode, type CodeExtract } from './extract-code.js';
 
 const ROOT = process.cwd();
@@ -54,6 +62,7 @@ interface FigmaPropertyDef {
   type: string;
   defaultValue: unknown;
   variantOptions: string[] | null;
+  preferredValues?: Array<{ type: string; key: string }> | null;
 }
 interface FigmaSet {
   name: string;
@@ -61,6 +70,7 @@ interface FigmaSet {
   key: string;
   variantCount: number;
   properties: Record<string, FigmaPropertyDef>;
+  nestedInstances?: string[];
 }
 const figmaComponents: { sets: FigmaSet[] } = JSON.parse(
   readFileSync(path.join(ROOT, 'parity', 'snapshots', 'figma-components.json'), 'utf8'),
@@ -91,6 +101,28 @@ for (const contract of contracts) {
   }
 
   const contractCodeProps = contract.props.filter((p) => p.type !== 'text');
+
+  // Named text props (title) and named slots (actions) must exist in code —
+  // presence-only checks (their TS types are string / ReactNode).
+  for (const expected of [
+    ...contract.props
+      .filter((p) => p.type === 'text' && p.bindings.code.prop !== 'children')
+      .map((p) => ({ name: p.bindings.code.prop, kind: 'text prop' })),
+    ...slotsOf(contract)
+      .filter((s) => s.slot.name !== 'children')
+      .map((s) => ({ name: s.slot.name, kind: 'slot prop' })),
+  ]) {
+    if (!extracted.props.some((cp) => cp.name === expected.name)) {
+      add({
+        surface: 'code',
+        classification: 'behind',
+        subject: `${contract.name}.${expected.name}`,
+        detail: `Contract ${expected.kind} "${expected.name}" missing from ${contract.name}Props`,
+        remedy: 'npm run generate',
+      });
+    }
+  }
+
   for (const p of contractCodeProps) {
     const codeName = p.bindings.code.prop;
     const found = extracted.props.find((cp) => cp.name === codeName);
@@ -128,7 +160,11 @@ for (const contract of contracts) {
     }
   }
 
-  const contractPropNames = new Set(contractCodeProps.map((p) => p.bindings.code.prop));
+  const contractPropNames = new Set([
+    ...contractCodeProps.map((p) => p.bindings.code.prop),
+    ...contract.props.filter((p) => p.type === 'text').map((p) => p.bindings.code.prop),
+    ...slotsOf(contract).map((s) => s.slot.name),
+  ]);
   for (const cp of extracted.props) {
     if (contractPropNames.has(cp.name)) continue;
     // Code declares a prop the contract doesn't know — code is AHEAD.
@@ -228,6 +264,67 @@ for (const contract of contracts) {
           remedy: 'Reorder the set so the contract-default variant is first',
         });
       }
+    }
+  }
+
+  // Slots: INSTANCE_SWAP property per slot; optional slots additionally get a
+  // "Show X" BOOLEAN. `accepts` must round-trip as preferredValues whose keys
+  // are the accepted contracts' componentSetKey anchors.
+  const byIdAll = new Map(contracts.map((c) => [c.id, c]));
+  for (const { slot, part } of slotsOf(contract)) {
+    const propertyName = slotFigmaProperty(slot);
+    expectedNames.add(propertyName);
+    const def = figmaProps.get(propertyName);
+    if (!def) {
+      add({
+        surface: 'figma',
+        classification: 'behind',
+        subject: `${contract.name}.${propertyName}`,
+        detail: `Contract slot "${slot.name}" has no INSTANCE_SWAP property on the Figma component`,
+        remedy: 'Re-run the component sync script',
+      });
+    } else if (slot.accepts && slot.accepts.length > 0) {
+      const expectedKeys = slot.accepts
+        .map((id) => byIdAll.get(id)?.anchors.figma.componentSetKey)
+        .filter((k): k is string => Boolean(k))
+        .sort();
+      const gotKeys = (def.preferredValues ?? []).map((p) => p.key).sort();
+      if (expectedKeys.length > 0 && expectedKeys.join('|') !== gotKeys.join('|')) {
+        add({
+          surface: 'figma',
+          classification: 'mismatch',
+          subject: `${contract.name}.${propertyName} (accepts)`,
+          detail: `Slot accepts [${slot.accepts.join(', ')}] but Figma preferredValues keys differ`,
+          remedy: 'Adopt into contract (promotion) or re-sync preferredValues',
+        });
+      }
+    }
+    if (part.optional) {
+      const visibilityName = slotVisibilityProperty(slot);
+      expectedNames.add(visibilityName);
+      if (!figmaProps.get(visibilityName)) {
+        add({
+          surface: 'figma',
+          classification: 'behind',
+          subject: `${contract.name}.${visibilityName}`,
+          detail: `Optional slot "${slot.name}" has no visibility BOOLEAN on the Figma component`,
+          remedy: 'Re-run the component sync script',
+        });
+      }
+    }
+  }
+
+  // Nested component refs: the composing instance must exist in Figma.
+  for (const { ref } of componentRefsOf(contract)) {
+    const dep = byIdAll.get(ref.id)!;
+    if (!(set.nestedInstances ?? []).includes(dep.name)) {
+      add({
+        surface: 'figma',
+        classification: 'behind',
+        subject: `${contract.name}.${dep.name}`,
+        detail: `Contract composes ${ref.id} but no ${dep.name} instance exists inside the Figma component`,
+        remedy: 'Re-run the component sync script',
+      });
     }
   }
 

@@ -45,9 +45,17 @@ Rules of thumb:
 - `"text"` props map to `children` in code and a `TEXT` property in Figma.
 - `"boolean"` props map to the native attribute where the element supports it (`disabled` on `<button>`), otherwise a `data-*` attribute.
 
-## Anatomy & token bindings
+## Anatomy & token bindings (v2 — composition)
 
-Anatomy names the component's internal parts (CEM's slots/parts, Curtis's anatomy). The `root` part carries **token bindings**: CSS property → DTCG token reference. The CSS Module is generated from these; there is no handwritten style layer.
+Anatomy is a **nested tree** of named parts (CEM's slots/parts, Curtis's anatomy). Every part can carry **token bindings** (CSS property → DTCG token reference — the CSS Module and the Figma node styling are both generated from these; there is no handwritten style layer), a **layout** block (`display`/`direction`/`align`/`justify` → flexbox on the code side, auto-layout on the Figma side), and one of three composition roles:
+
+| Part field | Meaning | Code output | Figma output |
+|---|---|---|---|
+| `component: { id, props? }` | Fixed instance of another contract; `props` spelled canonically, mapped through the *child's* bindings | imported `<Child prop="…">` | nested instance with properties set |
+| `slot: { name, accepts?, acceptsMode?, min?, max?, required?, figmaProperty? }` | Constrained insertion point; `accepts` lists contract IDs resolved via anchors | `children` / `ReactNode` prop | INSTANCE_SWAP (Slot-utility default) with `preferredValues` = accepted contracts' component keys; optional parts get a `Show X` BOOLEAN |
+| `content: { prop }` | Text bound to a declared text prop | `{title}` in the part's element | text node linked to the TEXT property |
+
+Parts with none of these are structural (frames/elements containing `parts`). `optional: true` renders conditionally in code and toggles visibility in Figma. Composition rules: part names are unique per contract; cycles and unknown contract refs **fail the build**; sync scripts emit in dependency order. See [docs/08](08-composition-and-spec.md) for the design rationale.
 
 ```jsonc
 "anatomy": {

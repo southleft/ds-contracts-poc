@@ -19,7 +19,19 @@
   },
   "radius": {
     "control": { "$type": "dimension", "$value": "{radius.200}" },
-    "badge": { "$type": "dimension", "$value": "{radius.pill}" }
+    "badge": { "$type": "dimension", "$value": "{radius.pill}" },
+    "card": { "$type": "dimension", "$value": "{radius.200}" },
+    "avatar": { "$type": "dimension", "$value": "{radius.pill}" }
+  },
+  "size": {
+    "avatar": {
+      "$type": "dimension",
+      "sm": { "$value": "{space.300}" },
+      "md": { "$value": "{space.400}" }
+    },
+    "card": {
+      "width": { "$type": "dimension", "$value": "{container.sm}" }
+    }
   },
   "border": {
     "width": {
@@ -40,6 +52,17 @@
     },
     "badge": {
       "size": { "$type": "dimension", "$value": "{font.size.100}" }
+    },
+    "title": {
+      "size": { "$type": "dimension", "$value": "{font.size.300}" },
+      "weight": { "$type": "fontWeight", "$value": "{font.weight.semibold}" }
+    },
+    "avatar": {
+      "size": {
+        "$type": "dimension",
+        "sm": { "$value": "{font.size.100}" },
+        "md": { "$value": "{font.size.200}" }
+      }
     }
   }
 }

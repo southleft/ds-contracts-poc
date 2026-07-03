@@ -7,7 +7,10 @@
       "foreground": {
         "$value": "{color.gray.900}"
       },
-      "$type": "color"
+      "$type": "color",
+      "raised": {
+        "$value": "{color.white}"
+      }
     },
     "action": {
       "primary": {
@@ -49,7 +52,10 @@
       "focus": {
         "$value": "{color.blue.500}"
       },
-      "$type": "color"
+      "$type": "color",
+      "subtle": {
+        "$value": "{color.gray.200}"
+      }
     },
     "feedback": {
       "info": {
@@ -85,6 +91,15 @@
         }
       },
       "$type": "color"
+    },
+    "identity": {
+      "$type": "color",
+      "background": {
+        "$value": "{color.blue.100}"
+      },
+      "foreground": {
+        "$value": "{color.blue.700}"
+      }
     }
   }
 }

@@ -70,11 +70,13 @@ Try the loop: edit `contracts/button.contract.json` (add a value to the `size` e
 4. [Code generation](docs/04-code-generation.md) — what gets emitted and how to add a component
 5. [Figma sync](docs/05-figma-sync.md) — the MCP-driven design side: setup, generation, fidelity scope
 6. [The parity loop](docs/06-parity-loop.md) — drift detection, promotion flow, and the executed two-direction demo
-7. [Validation](docs/07-validation.md) — claims → evals → evidence (16/16 passing), live round-trip results, and the designed AI-adherence eval
+7. [Validation](docs/07-validation.md) — claims → evals → evidence (22/22 passing), live round-trip results, and the designed AI-adherence eval
+8. [Composition & the spec](docs/08-composition-and-spec.md) — slots, nested components, the A2UI/json-render/CEM comparison, and the road to a contributable contract spec
 
 ## Status — all three phases executed
 
 **Phase 1 ✅** contract → code generation with token integrity checking, visualized in Storybook.
 **Phase 2 ✅** contract → Figma generation: variable collections (Light/Dark modes, aliases, scopes, codeSyntax) and component sets, in [DS Contracts POC](https://www.figma.com/design/8nim1d0IPnehMxA7B7SYxC/DS-Contracts-POC); anchors written back into the contracts.
 **Phase 3 ✅** the parity loop (`npm run parity`): three-way drift detection with promotion patches, proven in both directions — a hand-added code prop promoted into the contract and pushed to Figma, and a designer's Figma token change promoted into `tokens/` and rebuilt into CSS. See [docs/06-parity-loop.md](docs/06-parity-loop.md) for the evidence trail.
-**Validation ✅** 16/16 deterministic evals (`npm run eval`) covering determinism, refusal of invalid states, ten drift classes, and promotion convergence — plus a live Figma token round-trip verified lossless (92 tokens, zero diff). See [docs/07-validation.md](docs/07-validation.md).
+**Validation ✅** 22/22 deterministic evals (`npm run eval`) covering determinism, refusal of invalid states (including circular/unknown composition), fourteen drift classes, and promotion convergence — plus a live Figma token round-trip verified lossless (zero diff). See [docs/07-validation.md](docs/07-validation.md).
+**Composition ✅** slots (default + constrained/optional), nested component refs, and bound text parts — one contract (`ds.card`) generating both surfaces, with `accepts` round-tripping as Figma `preferredValues` verified against anchors. See [docs/08-composition-and-spec.md](docs/08-composition-and-spec.md) for the schema decisions and the contributable-spec roadmap.

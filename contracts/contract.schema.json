@@ -37,7 +37,11 @@
             "span",
             "div",
             "a",
-            "input"
+            "input",
+            "article",
+            "section",
+            "header",
+            "footer"
           ]
         },
         "role": {
@@ -95,6 +99,9 @@
                 "type": "boolean"
               }
             ]
+          },
+          "required": {
+            "type": "boolean"
           },
           "bindings": {
             "type": "object",
@@ -172,44 +179,7 @@
         "type": "string"
       },
       "additionalProperties": {
-        "type": "object",
-        "properties": {
-          "description": {
-            "type": "string"
-          },
-          "slot": {
-            "type": "boolean"
-          },
-          "optional": {
-            "type": "boolean"
-          },
-          "tokens": {
-            "type": "object",
-            "propertyNames": {
-              "type": "string"
-            },
-            "additionalProperties": {
-              "type": "string",
-              "pattern": "^\\{[a-z0-9.{}-]+\\}$"
-            }
-          },
-          "states": {
-            "type": "object",
-            "propertyNames": {
-              "type": "string"
-            },
-            "additionalProperties": {
-              "type": "object",
-              "propertyNames": {
-                "type": "string"
-              },
-              "additionalProperties": {
-                "type": "string",
-                "pattern": "^\\{[a-z0-9.{}-]+\\}$"
-              }
-            }
-          }
-        }
+        "$ref": "#/definitions/__schema0"
       }
     },
     "a11y": {
@@ -303,5 +273,172 @@
     "props",
     "anatomy",
     "anchors"
-  ]
+  ],
+  "definitions": {
+    "__schema0": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "element": {
+          "type": "string"
+        },
+        "layout": {
+          "type": "object",
+          "properties": {
+            "display": {
+              "type": "string",
+              "enum": [
+                "flex",
+                "inline-flex"
+              ]
+            },
+            "direction": {
+              "type": "string",
+              "enum": [
+                "row",
+                "column"
+              ]
+            },
+            "align": {
+              "type": "string",
+              "enum": [
+                "start",
+                "center",
+                "end",
+                "stretch"
+              ]
+            },
+            "justify": {
+              "type": "string",
+              "enum": [
+                "start",
+                "center",
+                "end",
+                "space-between"
+              ]
+            }
+          }
+        },
+        "tokens": {
+          "type": "object",
+          "propertyNames": {
+            "type": "string"
+          },
+          "additionalProperties": {
+            "type": "string",
+            "pattern": "^\\{[a-z0-9.{}-]+\\}$"
+          }
+        },
+        "states": {
+          "type": "object",
+          "propertyNames": {
+            "type": "string"
+          },
+          "additionalProperties": {
+            "type": "object",
+            "propertyNames": {
+              "type": "string"
+            },
+            "additionalProperties": {
+              "type": "string",
+              "pattern": "^\\{[a-z0-9.{}-]+\\}$"
+            }
+          }
+        },
+        "content": {
+          "type": "object",
+          "properties": {
+            "prop": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "prop"
+          ]
+        },
+        "slot": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "accepts": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "acceptsMode": {
+              "type": "string",
+              "enum": [
+                "prefer",
+                "restrict",
+                "open"
+              ]
+            },
+            "min": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9007199254740991
+            },
+            "max": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 9007199254740991
+            },
+            "required": {
+              "type": "boolean"
+            },
+            "figmaProperty": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "name"
+          ]
+        },
+        "component": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "props": {
+              "type": "object",
+              "propertyNames": {
+                "type": "string"
+              },
+              "additionalProperties": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "boolean"
+                  }
+                ]
+              }
+            }
+          },
+          "required": [
+            "id"
+          ]
+        },
+        "optional": {
+          "type": "boolean"
+        },
+        "parts": {
+          "type": "object",
+          "propertyNames": {
+            "type": "string"
+          },
+          "additionalProperties": {
+            "$ref": "#/definitions/__schema0"
+          }
+        }
+      }
+    }
+  }
 }

@@ -399,6 +399,13 @@
           "values": {
             "Value": 0.5
           }
+        },
+        {
+          "name": "container/sm",
+          "type": "FLOAT",
+          "values": {
+            "Value": 320
+          }
         }
       ]
     },
@@ -695,6 +702,110 @@
           "values": {
             "Light": "{color/red/700}",
             "Dark": "{color/red/100}"
+          }
+        },
+        {
+          "name": "radius/card",
+          "type": "FLOAT",
+          "values": {
+            "Light": "{radius/200}",
+            "Dark": "{radius/200}"
+          }
+        },
+        {
+          "name": "radius/avatar",
+          "type": "FLOAT",
+          "values": {
+            "Light": "{radius/pill}",
+            "Dark": "{radius/pill}"
+          }
+        },
+        {
+          "name": "size/avatar/sm",
+          "type": "FLOAT",
+          "values": {
+            "Light": "{space/300}",
+            "Dark": "{space/300}"
+          }
+        },
+        {
+          "name": "size/avatar/md",
+          "type": "FLOAT",
+          "values": {
+            "Light": "{space/400}",
+            "Dark": "{space/400}"
+          }
+        },
+        {
+          "name": "size/card/width",
+          "type": "FLOAT",
+          "values": {
+            "Light": "{container/sm}",
+            "Dark": "{container/sm}"
+          }
+        },
+        {
+          "name": "font/title/size",
+          "type": "FLOAT",
+          "values": {
+            "Light": "{font/size/300}",
+            "Dark": "{font/size/300}"
+          }
+        },
+        {
+          "name": "font/title/weight",
+          "type": "FLOAT",
+          "values": {
+            "Light": "{font/weight/semibold}",
+            "Dark": "{font/weight/semibold}"
+          }
+        },
+        {
+          "name": "font/avatar/size/sm",
+          "type": "FLOAT",
+          "values": {
+            "Light": "{font/size/100}",
+            "Dark": "{font/size/100}"
+          }
+        },
+        {
+          "name": "font/avatar/size/md",
+          "type": "FLOAT",
+          "values": {
+            "Light": "{font/size/200}",
+            "Dark": "{font/size/200}"
+          }
+        },
+        {
+          "name": "color/surface/raised",
+          "type": "COLOR",
+          "values": {
+            "Light": "{color/white}",
+            "Dark": "{color/gray/700}"
+          }
+        },
+        {
+          "name": "color/border/subtle",
+          "type": "COLOR",
+          "values": {
+            "Light": "{color/gray/200}",
+            "Dark": "{color/gray/600}"
+          }
+        },
+        {
+          "name": "color/identity/background",
+          "type": "COLOR",
+          "values": {
+            "Light": "{color/blue/100}",
+            "Dark": "{color/blue/900}"
+          }
+        },
+        {
+          "name": "color/identity/foreground",
+          "type": "COLOR",
+          "values": {
+            "Light": "{color/blue/700}",
+            "Dark": "{color/blue/100}"
           }
         }
       ]

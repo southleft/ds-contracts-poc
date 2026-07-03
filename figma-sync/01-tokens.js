@@ -468,6 +468,15 @@ const PRIMITIVES = [
     "codeSyntax": "var(--border-width-200)"
   },
   {
+    "name": "container/sm",
+    "type": "FLOAT",
+    "value": 320,
+    "scopes": [
+      "WIDTH_HEIGHT"
+    ],
+    "codeSyntax": "var(--container-sm)"
+  },
+  {
     "name": "font/family/sans",
     "type": "STRING",
     "value": "Inter, system-ui, -apple-system, sans-serif",
@@ -648,6 +657,56 @@ const SEMANTIC = [
     "codeSyntax": "var(--radius-badge)"
   },
   {
+    "name": "radius/card",
+    "type": "FLOAT",
+    "light": "radius/200",
+    "dark": "radius/200",
+    "scopes": [
+      "CORNER_RADIUS"
+    ],
+    "codeSyntax": "var(--radius-card)"
+  },
+  {
+    "name": "radius/avatar",
+    "type": "FLOAT",
+    "light": "radius/pill",
+    "dark": "radius/pill",
+    "scopes": [
+      "CORNER_RADIUS"
+    ],
+    "codeSyntax": "var(--radius-avatar)"
+  },
+  {
+    "name": "size/avatar/sm",
+    "type": "FLOAT",
+    "light": "space/300",
+    "dark": "space/300",
+    "scopes": [
+      "WIDTH_HEIGHT"
+    ],
+    "codeSyntax": "var(--size-avatar-sm)"
+  },
+  {
+    "name": "size/avatar/md",
+    "type": "FLOAT",
+    "light": "space/400",
+    "dark": "space/400",
+    "scopes": [
+      "WIDTH_HEIGHT"
+    ],
+    "codeSyntax": "var(--size-avatar-md)"
+  },
+  {
+    "name": "size/card/width",
+    "type": "FLOAT",
+    "light": "container/sm",
+    "dark": "container/sm",
+    "scopes": [
+      "WIDTH_HEIGHT"
+    ],
+    "codeSyntax": "var(--size-card-width)"
+  },
+  {
     "name": "border/width/focus",
     "type": "FLOAT",
     "light": "border-width/200",
@@ -718,10 +777,50 @@ const SEMANTIC = [
     "codeSyntax": "var(--font-badge-size)"
   },
   {
+    "name": "font/title/size",
+    "type": "FLOAT",
+    "light": "font/size/300",
+    "dark": "font/size/300",
+    "scopes": [
+      "FONT_SIZE"
+    ],
+    "codeSyntax": "var(--font-title-size)"
+  },
+  {
+    "name": "font/title/weight",
+    "type": "FLOAT",
+    "light": "font/weight/semibold",
+    "dark": "font/weight/semibold",
+    "scopes": [
+      "FONT_WEIGHT"
+    ],
+    "codeSyntax": "var(--font-title-weight)"
+  },
+  {
+    "name": "font/avatar/size/sm",
+    "type": "FLOAT",
+    "light": "font/size/100",
+    "dark": "font/size/100",
+    "scopes": [
+      "FONT_SIZE"
+    ],
+    "codeSyntax": "var(--font-avatar-size-sm)"
+  },
+  {
+    "name": "font/avatar/size/md",
+    "type": "FLOAT",
+    "light": "font/size/200",
+    "dark": "font/size/200",
+    "scopes": [
+      "FONT_SIZE"
+    ],
+    "codeSyntax": "var(--font-avatar-size-md)"
+  },
+  {
     "name": "color/surface/background",
     "type": "COLOR",
     "light": "color/gray/50",
-    "dark": "color/gray/900",
+    "dark": "color/gray/800",
     "scopes": [
       "ALL_FILLS",
       "STROKE_COLOR"
@@ -738,6 +837,17 @@ const SEMANTIC = [
       "STROKE_COLOR"
     ],
     "codeSyntax": "var(--color-surface-foreground)"
+  },
+  {
+    "name": "color/surface/raised",
+    "type": "COLOR",
+    "light": "color/white",
+    "dark": "color/gray/700",
+    "scopes": [
+      "ALL_FILLS",
+      "STROKE_COLOR"
+    ],
+    "codeSyntax": "var(--color-surface-raised)"
   },
   {
     "name": "color/action/primary/background",
@@ -850,6 +960,17 @@ const SEMANTIC = [
     "codeSyntax": "var(--color-border-focus)"
   },
   {
+    "name": "color/border/subtle",
+    "type": "COLOR",
+    "light": "color/gray/200",
+    "dark": "color/gray/600",
+    "scopes": [
+      "ALL_FILLS",
+      "STROKE_COLOR"
+    ],
+    "codeSyntax": "var(--color-border-subtle)"
+  },
+  {
     "name": "color/feedback/info/background",
     "type": "COLOR",
     "light": "color/blue/100",
@@ -936,6 +1057,28 @@ const SEMANTIC = [
       "STROKE_COLOR"
     ],
     "codeSyntax": "var(--color-feedback-danger-foreground)"
+  },
+  {
+    "name": "color/identity/background",
+    "type": "COLOR",
+    "light": "color/blue/100",
+    "dark": "color/blue/900",
+    "scopes": [
+      "ALL_FILLS",
+      "STROKE_COLOR"
+    ],
+    "codeSyntax": "var(--color-identity-background)"
+  },
+  {
+    "name": "color/identity/foreground",
+    "type": "COLOR",
+    "light": "color/blue/700",
+    "dark": "color/blue/100",
+    "scopes": [
+      "ALL_FILLS",
+      "STROKE_COLOR"
+    ],
+    "codeSyntax": "var(--color-identity-foreground)"
   }
 ];
 
@@ -952,7 +1095,6 @@ const collections = await figma.variables.getLocalVariableCollectionsAsync();
 const allVars = await figma.variables.getLocalVariablesAsync();
 const varsIn = (col) => allVars.filter((v) => v.variableCollectionId === col.id);
 
-// --- Primitives ---
 let prim = collections.find((c) => c.name === 'Primitives');
 if (!prim) prim = figma.variables.createVariableCollection('Primitives');
 if (prim.modes[0].name !== 'Value') prim.renameMode(prim.modes[0].modeId, 'Value');
@@ -972,7 +1114,6 @@ for (const t of PRIMITIVES) {
   v.setVariableCodeSyntax('WEB', t.codeSyntax);
 }
 
-// --- Semantic ---
 let sem = collections.find((c) => c.name === 'Semantic');
 if (!sem) sem = figma.variables.createVariableCollection('Semantic');
 if (sem.modes[0].name !== 'Light') sem.renameMode(sem.modes[0].modeId, 'Light');

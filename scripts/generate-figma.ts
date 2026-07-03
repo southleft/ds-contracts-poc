@@ -1,36 +1,48 @@
 /**
- * Contract → Figma sync-script generator.
+ * Contract → Figma sync-script generator. (v2 — composition)
  *
  * Reads tokens/ and contracts/ and emits deterministic Figma Plugin API
  * scripts into figma-sync/. The scripts are TRANSPORT-AGNOSTIC: they run
  * unchanged through any tool that executes Plugin API JS in the file —
  * the Figma MCP's `use_figma`, or figma-console-mcp's `figma_execute`.
  *
- *   figma-sync/01-tokens.js   variables: Primitives (Value) + Semantic (Light/Dark),
- *                             aliases mirroring the DTCG alias graph, scopes,
- *                             codeSyntax.WEB = the generated CSS custom property
- *   figma-sync/02-<name>.js   one component set per contract (variant matrix,
- *                             variable bindings, Label/Boolean properties)
+ *   figma-sync/01-tokens.js   variables (collections, modes, aliases, scopes,
+ *                             codeSyntax) — unchanged from v1
+ *   figma-sync/NN-<name>.js   one component (set) per contract, emitted in
+ *                             dependency order. v2 compiles each contract's
+ *                             anatomy tree into a NODE SPEC executed by a
+ *                             generic runtime: nested auto-layout frames,
+ *                             fixed instances of dependency contracts,
+ *                             TEXT-bound content parts, and slots
+ *                             (Slot-utility placeholder + INSTANCE_SWAP with
+ *                             preferredValues resolved from `accepts`;
+ *                             optional slots get a "Show X" BOOLEAN).
  *
- * All scripts are idempotent-safe: token script upserts; component scripts
- * skip if a set with the same name already exists (return its id/key).
- *
- * Known fidelity scope (deliberate, documented in docs/05-figma-sync.md):
- * - fontSize is not variable-bindable in the Plugin API → set numerically
- *   from the resolved token value.
- * - font-family/weight are set statically (Inter Medium).
- * - Interaction states (hover/focus/disabled) are CSS concerns; boolean props
- *   like Disabled are declared for API parity but not visually linked.
+ * Fidelity scope (deliberate, documented in docs/05 + docs/08):
+ * - fontSize/family/weight are not variable-bindable → set numerically from
+ *   resolved token values (weight → Inter style name).
+ * - Interaction states are CSS concerns; not represented in Figma.
+ * - Slot `accepts` maps to INSTANCE_SWAP preferredValues (soft constraint);
+ *   Figma's native SLOT property type + SlotSettings is the upgrade target.
  */
 import { mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
-import { ContractSchema, type Contract } from './contract-schema.js';
+import {
+  ContractSchema,
+  pascal,
+  slotFigmaProperty,
+  slotVisibilityProperty,
+  sortByDependencies,
+  type Contract,
+  type Part,
+  type Prop,
+} from './contract-schema.js';
 
 const ROOT = process.cwd();
 const OUT = path.join(ROOT, 'figma-sync');
 
 // ---------------------------------------------------------------------------
-// Token loading
+// Token loading (shared with v1)
 // ---------------------------------------------------------------------------
 
 type TokenEntry = { value: unknown; type: string };
@@ -70,7 +82,6 @@ const aliasTarget = (v: unknown): string | null =>
 const figmaName = (dotPath: string) => dotPath.split('.').join('/');
 const cssVarName = (dotPath: string) => `var(--${dotPath.split('.').join('-')})`;
 
-/** Resolve a token path through aliases to its literal value. */
 function resolveLiteral(dotPath: string): unknown {
   const all = new Map([...primitives, ...semantic, ...light]);
   let entry = all.get(dotPath);
@@ -90,21 +101,28 @@ const px = (v: unknown): number => {
   return n;
 };
 
+const FONT_STYLE_BY_WEIGHT: Record<number, string> = {
+  400: 'Regular',
+  500: 'Medium',
+  600: 'Semi Bold',
+  700: 'Bold',
+};
+
 function figmaType(entry: TokenEntry): 'COLOR' | 'FLOAT' | 'STRING' {
   if (entry.type === 'color') return 'COLOR';
   if (entry.type === 'fontFamily') return 'STRING';
-  return 'FLOAT'; // dimension, fontWeight, number
+  return 'FLOAT';
 }
 
 function figmaValue(entry: TokenEntry): unknown {
-  if (entry.type === 'color') return entry.value; // hex string; script converts
-  if (entry.type === 'fontFamily') return entry.value;
+  if (entry.type === 'color' || entry.type === 'fontFamily') return entry.value;
   return px(entry.value);
 }
 
 function scopesFor(dotPath: string, entry: TokenEntry): string[] {
   if (entry.type === 'color') return ['ALL_FILLS', 'STROKE_COLOR'];
   if (dotPath.startsWith('space')) return ['GAP', 'WIDTH_HEIGHT'];
+  if (dotPath.startsWith('size') || dotPath.startsWith('container')) return ['WIDTH_HEIGHT'];
   if (dotPath.startsWith('radius')) return ['CORNER_RADIUS'];
   if (dotPath.startsWith('border-width') || dotPath.startsWith('border.width'))
     return ['STROKE_FLOAT'];
@@ -116,7 +134,7 @@ function scopesFor(dotPath: string, entry: TokenEntry): string[] {
 }
 
 // ---------------------------------------------------------------------------
-// 01-tokens.js
+// 01-tokens.js (unchanged mechanism from v1)
 // ---------------------------------------------------------------------------
 
 function buildTokensScript(): string {
@@ -128,15 +146,7 @@ function buildTokensScript(): string {
     codeSyntax: cssVarName(p),
   }));
 
-  // Semantic = mode-independent aliases (same target both modes) + mode-varying.
-  const sem: Array<{
-    name: string;
-    type: string;
-    light: string;
-    dark: string;
-    scopes: string[];
-    codeSyntax: string;
-  }> = [];
+  const sem: Array<Record<string, unknown>> = [];
   for (const [p, entry] of semantic) {
     const target = aliasTarget(entry.value);
     if (!target) throw new Error(`Semantic token "${p}" must be an alias`);
@@ -184,7 +194,6 @@ const collections = await figma.variables.getLocalVariableCollectionsAsync();
 const allVars = await figma.variables.getLocalVariablesAsync();
 const varsIn = (col) => allVars.filter((v) => v.variableCollectionId === col.id);
 
-// --- Primitives ---
 let prim = collections.find((c) => c.name === 'Primitives');
 if (!prim) prim = figma.variables.createVariableCollection('Primitives');
 if (prim.modes[0].name !== 'Value') prim.renameMode(prim.modes[0].modeId, 'Value');
@@ -204,7 +213,6 @@ for (const t of PRIMITIVES) {
   v.setVariableCodeSyntax('WEB', t.codeSyntax);
 }
 
-// --- Semantic ---
 let sem = collections.find((c) => c.name === 'Semantic');
 if (!sem) sem = figma.variables.createVariableCollection('Semantic');
 if (sem.modes[0].name !== 'Light') sem.renameMode(sem.modes[0].modeId, 'Light');
@@ -238,47 +246,216 @@ return {
 }
 
 // ---------------------------------------------------------------------------
-// Component scripts
+// Node specs — the compiled form of a contract's anatomy tree
 // ---------------------------------------------------------------------------
 
-const CSS_TO_FIGMA_BINDINGS: Record<string, string[]> = {
-  'background-color': ['__fill__'],
-  color: ['__textFill__'],
-  'padding-inline': ['paddingLeft', 'paddingRight'],
-  'padding-block': ['paddingTop', 'paddingBottom'],
-  'border-radius': ['topLeftRadius', 'topRightRadius', 'bottomLeftRadius', 'bottomRightRadius'],
-  gap: ['itemSpacing'],
-  'font-size': ['__fontSize__'], // not variable-bindable → numeric
-  'font-family': [], // static Inter (documented fidelity scope)
-  'font-weight': [], // static Medium (documented fidelity scope)
+interface LayoutSpec {
+  mode: 'HORIZONTAL' | 'VERTICAL';
+  primary: 'MIN' | 'CENTER' | 'MAX' | 'SPACE_BETWEEN';
+  counter: 'MIN' | 'CENTER' | 'MAX';
+  stretchChildren?: boolean;
+}
+
+interface NodeSpec {
+  type: 'root' | 'frame' | 'text' | 'instance' | 'slot';
+  name: string;
+  layout?: LayoutSpec;
+  bindings?: Record<string, string>;
+  fill?: string;
+  stroke?: string;
+  fixedWidth?: { px: number; varName: string };
+  fixedHeight?: { px: number; varName: string };
+  // text
+  characters?: string;
+  fontSize?: number;
+  fontStyle?: string;
+  textFill?: string;
+  contentProp?: string;
+  // instance
+  dep?: string;
+  depProps?: Record<string, string | boolean>;
+  // slot
+  slotProperty?: string;
+  slotOptional?: boolean;
+  slotAccepts?: string[];
+  children?: NodeSpec[];
+}
+
+interface TextCtx {
+  textFill?: string;
+  fontSize?: number;
+  fontStyle?: string;
+}
+
+const ALIGN_FIGMA: Record<string, 'MIN' | 'CENTER' | 'MAX'> = {
+  start: 'MIN',
+  center: 'CENTER',
+  end: 'MAX',
+  stretch: 'MIN',
 };
+const JUSTIFY_FIGMA: Record<string, LayoutSpec['primary']> = {
+  start: 'MIN',
+  center: 'CENTER',
+  end: 'MAX',
+  'space-between': 'SPACE_BETWEEN',
+};
+
+function layoutSpec(part: Part, isRoot: boolean): LayoutSpec {
+  const l = part.layout;
+  if (!l && isRoot) {
+    return { mode: 'HORIZONTAL', primary: 'CENTER', counter: 'CENTER' };
+  }
+  return {
+    mode: l?.direction === 'column' ? 'VERTICAL' : 'HORIZONTAL',
+    primary: l?.justify ? JUSTIFY_FIGMA[l.justify] : 'MIN',
+    counter: l?.align ? ALIGN_FIGMA[l.align] : 'MIN',
+    stretchChildren: l?.align === 'stretch' || undefined,
+  };
+}
+
+/** Distribute a part's CSS token bindings into Figma spec fields. */
+function applyTokens(
+  spec: NodeSpec,
+  tokens: Record<string, string>,
+  subst: Record<string, string>,
+  ctx: TextCtx,
+): TextCtx {
+  const next: TextCtx = { ...ctx };
+  for (const [cssProp, ref] of Object.entries(tokens)) {
+    let tokenPath = ref.slice(1, -1);
+    for (const [propName, value] of Object.entries(subst)) {
+      tokenPath = tokenPath.replaceAll(`{${propName}}`, value);
+    }
+    const varName = figmaName(tokenPath);
+    switch (cssProp) {
+      case 'background-color':
+        spec.fill = varName;
+        break;
+      case 'border-color':
+        spec.stroke = varName;
+        break;
+      case 'border-width':
+        spec.bindings = { ...spec.bindings, strokeWeight: varName };
+        break;
+      case 'color':
+        next.textFill = varName;
+        break;
+      case 'font-size':
+        next.fontSize = px(resolveLiteral(tokenPath));
+        break;
+      case 'font-weight':
+        next.fontStyle = FONT_STYLE_BY_WEIGHT[px(resolveLiteral(tokenPath))] ?? 'Medium';
+        break;
+      case 'font-family':
+        break; // Inter (documented fidelity scope)
+      case 'padding-inline':
+        spec.bindings = { ...spec.bindings, paddingLeft: varName, paddingRight: varName };
+        break;
+      case 'padding-block':
+        spec.bindings = { ...spec.bindings, paddingTop: varName, paddingBottom: varName };
+        break;
+      case 'gap':
+        spec.bindings = { ...spec.bindings, itemSpacing: varName };
+        break;
+      case 'border-radius':
+        spec.bindings = {
+          ...spec.bindings,
+          topLeftRadius: varName,
+          topRightRadius: varName,
+          bottomLeftRadius: varName,
+          bottomRightRadius: varName,
+        };
+        break;
+      case 'width':
+        spec.fixedWidth = { px: px(resolveLiteral(tokenPath)), varName };
+        break;
+      case 'height':
+        spec.fixedHeight = { px: px(resolveLiteral(tokenPath)), varName };
+        break;
+      default:
+        break; // outline-* etc. are state/CSS concerns
+    }
+  }
+  return next;
+}
+
+const isEnum = (p: Prop): p is Prop & { type: { enum: string[] } } =>
+  typeof p.type === 'object' && 'enum' in p.type;
+
+function partToSpec(
+  name: string,
+  part: Part,
+  contract: Contract,
+  byId: Map<string, Contract>,
+  ctx: TextCtx,
+): NodeSpec {
+  if (part.component) {
+    const dep = byId.get(part.component.id)!;
+    const depProps: Record<string, string | boolean> = {};
+    for (const [propName, value] of Object.entries(part.component.props ?? {})) {
+      const depProp = dep.props.find((p) => p.name === propName);
+      if (!depProp) continue;
+      if (typeof value === 'boolean') depProps[depProp.bindings.figma.property] = value;
+      else depProps[depProp.bindings.figma.property] = depProp.bindings.figma.values?.[value] ?? value;
+    }
+    return { type: 'instance', name, dep: dep.name, depProps };
+  }
+  if (part.slot) {
+    const spec: NodeSpec = {
+      type: 'slot',
+      name,
+      layout: layoutSpec(part, false),
+      slotProperty: slotFigmaProperty(part.slot),
+      slotOptional: part.optional || undefined,
+      slotAccepts: (part.slot.accepts ?? []).map((id) => byId.get(id)!.name),
+    };
+    applyTokens(spec, part.tokens ?? {}, {}, ctx);
+    return spec;
+  }
+  if (part.content) {
+    const prop = contract.props.find(
+      (p) => p.type === 'text' && p.bindings.code.prop === part.content!.prop,
+    )!;
+    const spec: NodeSpec = { type: 'text', name };
+    const textCtx = applyTokens(spec, part.tokens ?? {}, {}, ctx);
+    spec.characters = typeof prop.default === 'string' ? prop.default : contract.name;
+    spec.fontSize = textCtx.fontSize ?? 16;
+    spec.fontStyle = textCtx.fontStyle ?? 'Medium';
+    spec.textFill = textCtx.textFill;
+    spec.contentProp = prop.bindings.figma.property;
+    return spec;
+  }
+  const spec: NodeSpec = { type: 'frame', name, layout: layoutSpec(part, false) };
+  const childCtx = applyTokens(spec, part.tokens ?? {}, {}, ctx);
+  spec.children = Object.entries(part.parts ?? {}).map(([childName, child]) =>
+    partToSpec(childName, child, contract, byId, childCtx),
+  );
+  return spec;
+}
+
+// ---------------------------------------------------------------------------
+// Component script emission
+// ---------------------------------------------------------------------------
 
 interface VariantSpec {
   name: string;
-  bindings: Record<string, string>; // figma binding field → variable name
-  fill: string | null;
-  textFill: string | null;
-  fontSize: number;
   row: number;
   col: number;
+  spec: NodeSpec;
 }
 
-function buildComponentScript(contract: Contract): string {
-  const enums = contract.props.filter(
-    (p): p is (typeof contract.props)[number] & { type: { enum: string[] } } =>
-      typeof p.type === 'object' && 'enum' in p.type,
-  );
+function buildComponentScript(contract: Contract, byId: Map<string, Contract>): string {
+  const enums = contract.props.filter(isEnum);
   const rowProp = enums[0];
   const colProp = enums[1] ?? null;
-  const textProp = contract.props.find((p) => p.type === 'text');
-  const boolProps = contract.props.filter((p) => p.type === 'boolean');
+  const textProp = contract.props.find(
+    (p) => p.type === 'text' && p.bindings.code.prop === 'children',
+  );
+  const boolPropsData = contract.props
+    .filter((p) => p.type === 'boolean')
+    .map((p) => ({ property: p.bindings.figma.property, default: p.default === true }));
   const label = typeof textProp?.default === 'string' ? textProp.default : contract.name;
 
-  const root = contract.anatomy.root;
-  if (!root?.tokens) throw new Error(`${contract.id}: anatomy.root.tokens required`);
-
-  // Figma's default variant is POSITIONAL (top-left), so the contract-default
-  // combo must occupy row 0 / col 0: order each axis default-value-first.
   const orderedValues = (p: { type: { enum: string[] }; default?: unknown }) => {
     const values = [...p.type.enum];
     const i = p.default !== undefined ? values.indexOf(String(p.default)) : -1;
@@ -289,9 +466,11 @@ function buildComponentScript(contract: Contract): string {
     return values;
   };
 
+  const root = contract.anatomy.root;
   const variants: VariantSpec[] = [];
   const rowValues = rowProp ? orderedValues(rowProp) : [''];
   const colValues = colProp ? orderedValues(colProp) : [''];
+  const fontStyles = new Set<string>(['Medium']);
 
   for (let r = 0; r < rowValues.length; r++) {
     for (let c = 0; c < colValues.length; c++) {
@@ -310,48 +489,47 @@ function buildComponentScript(contract: Contract): string {
         );
       }
 
-      const spec: VariantSpec = {
-        name: nameParts.join(', '),
-        bindings: {},
-        fill: null,
-        textFill: null,
-        fontSize: 16,
-        row: r,
-        col: c,
+      const rootSpec: NodeSpec = {
+        type: 'root',
+        name: nameParts.join(', ') || contract.name,
+        layout: layoutSpec(root, true),
       };
-
-      for (const [cssProp, ref] of Object.entries(root.tokens)) {
-        let tokenPath = ref.slice(1, -1);
-        for (const [propName, value] of Object.entries(subst)) {
-          tokenPath = tokenPath.replaceAll(`{${propName}}`, value);
-        }
-        const targets = CSS_TO_FIGMA_BINDINGS[cssProp];
-        if (!targets) throw new Error(`${contract.id}: no Figma mapping for CSS "${cssProp}"`);
-        for (const target of targets) {
-          if (target === '__fill__') spec.fill = figmaName(tokenPath);
-          else if (target === '__textFill__') spec.textFill = figmaName(tokenPath);
-          else if (target === '__fontSize__') spec.fontSize = px(resolveLiteral(tokenPath));
-          else spec.bindings[target] = figmaName(tokenPath);
-        }
+      const ctx = applyTokens(rootSpec, root.tokens ?? {}, subst, {});
+      if (root.parts) {
+        rootSpec.children = Object.entries(root.parts).map(([childName, child]) =>
+          partToSpec(childName, child, contract, byId, ctx),
+        );
+      } else if (textProp) {
+        rootSpec.children = [
+          {
+            type: 'text',
+            name: 'label',
+            characters: label,
+            fontSize: ctx.fontSize ?? 16,
+            fontStyle: ctx.fontStyle ?? 'Medium',
+            textFill: ctx.textFill,
+            contentProp: textProp.bindings.figma.property,
+          },
+        ];
       }
-      variants.push(spec);
+      const collectStyles = (s: NodeSpec) => {
+        if (s.fontStyle) fontStyles.add(s.fontStyle);
+        (s.children ?? []).forEach(collectStyles);
+      };
+      collectStyles(rootSpec);
+      variants.push({ name: rootSpec.name, row: r, col: c, spec: rootSpec });
     }
   }
-
-  const boolPropsData = boolProps.map((p) => ({
-    property: p.bindings.figma.property,
-    default: p.default === true,
-  }));
 
   return `// GENERATED by scripts/generate-figma.ts — DO NOT EDIT.
 // Source of truth: contracts/${contract.id.replace('ds.', '')}.contract.json (${contract.id} v${contract.version})
 const SET_NAME = ${JSON.stringify(contract.name)};
 const DESCRIPTION = ${JSON.stringify(`${contract.description} — governed by contract ${contract.id} v${contract.version}`)};
-const LABEL = ${JSON.stringify(label)};
-const LABEL_PROPERTY = ${JSON.stringify(textProp?.bindings.figma.property ?? 'Label')};
+const IS_SET = ${variants.length > 1};
 const BOOL_PROPS = ${JSON.stringify(boolPropsData)};
+const FONT_STYLES = ${JSON.stringify([...fontStyles])};
 const VARIANTS = ${JSON.stringify(variants, null, 2)};
-const COL_W = 220, ROW_H = 90, PAD = 40;
+const COL_W = 380, ROW_H = 240, PAD = 40;
 
 // File guard: multi-file bridge routing has been observed to hit the wrong
 // file — never write without verifying the target.
@@ -360,9 +538,11 @@ if (EXPECTED_FILE_KEY && figma.fileKey && figma.fileKey !== EXPECTED_FILE_KEY) {
   throw new Error('WRONG FILE: expected ' + EXPECTED_FILE_KEY + ', got ' + figma.fileKey);
 }
 
-// Skip if the set already exists (idempotency guard).
+await figma.loadAllPagesAsync();
+
+// Skip if the component (set) already exists (idempotency guard).
 const existing = figma.currentPage.findOne(
-  (n) => n.type === 'COMPONENT_SET' && n.name === SET_NAME,
+  (n) => (n.type === 'COMPONENT_SET' || n.type === 'COMPONENT') && n.name === SET_NAME,
 );
 if (existing) return { skipped: true, nodeId: existing.id, key: existing.key };
 
@@ -374,8 +554,154 @@ const need = (name) => {
   if (!v) throw new Error('Missing variable: ' + name);
   return v;
 };
+const boundPaint = (varName) =>
+  figma.variables.setBoundVariableForPaint(
+    { type: 'SOLID', color: { r: 0, g: 0, b: 0 } },
+    'color',
+    need(varName),
+  );
 
-await figma.loadFontAsync({ family: 'Inter', style: 'Medium' });
+for (const style of FONT_STYLES) {
+  await figma.loadFontAsync({ family: 'Inter', style });
+}
+
+function findComponentByName(name) {
+  for (const page of figma.root.children) {
+    const hit = page.findOne(
+      (n) => (n.type === 'COMPONENT_SET' || n.type === 'COMPONENT') && n.name === name,
+    );
+    if (hit) return hit;
+  }
+  throw new Error('Dependency component not found in file: ' + name + ' (run its sync script first)');
+}
+
+function setInstanceProps(inst, props) {
+  const available = Object.keys(inst.componentProperties);
+  const resolved = {};
+  for (const [wanted, value] of Object.entries(props)) {
+    const key = available.find((k) => k === wanted || k.startsWith(wanted + '#'));
+    if (key) resolved[key] = value;
+  }
+  if (Object.keys(resolved).length > 0) inst.setProperties(resolved);
+}
+
+let _slotUtil = null;
+async function ensureSlotUtility() {
+  if (_slotUtil) return _slotUtil;
+  for (const page of figma.root.children) {
+    const hit = page.findOne((n) => n.type === 'COMPONENT' && n.name === 'Slot');
+    if (hit) { _slotUtil = hit; return hit; }
+  }
+  const util = figma.createComponent();
+  util.name = 'Slot';
+  util.layoutMode = 'HORIZONTAL';
+  util.primaryAxisAlignItems = 'CENTER';
+  util.counterAxisAlignItems = 'CENTER';
+  util.paddingLeft = util.paddingRight = 12;
+  util.paddingTop = util.paddingBottom = 8;
+  util.cornerRadius = 4;
+  util.fills = [];
+  util.strokes = [{ type: 'SOLID', color: { r: 0.6, g: 0.62, b: 0.68 } }];
+  util.dashPattern = [4, 4];
+  const t = figma.createText();
+  t.fontName = { family: 'Inter', style: 'Medium' };
+  t.fontSize = 12;
+  t.characters = 'Slot';
+  t.fills = [{ type: 'SOLID', color: { r: 0.6, g: 0.62, b: 0.68 } }];
+  util.appendChild(t);
+  let utilities = figma.currentPage.findOne((n) => n.type === 'SECTION' && n.name === 'Utilities');
+  if (!utilities) {
+    utilities = figma.createSection();
+    utilities.name = 'Utilities';
+    let maxX = 0;
+    for (const n of figma.currentPage.children) {
+      if (n !== utilities) maxX = Math.max(maxX, n.x + n.width);
+    }
+    utilities.x = maxX + 100;
+    utilities.y = 0;
+    utilities.resizeWithoutConstraints(240, 160);
+  }
+  utilities.appendChild(util);
+  util.x = 40; util.y = 40;
+  _slotUtil = util;
+  return util;
+}
+
+function applyFrameSpec(node, spec) {
+  const l = spec.layout || { mode: 'HORIZONTAL', primary: 'MIN', counter: 'MIN' };
+  node.layoutMode = l.mode;
+  node.primaryAxisAlignItems = l.primary;
+  node.counterAxisAlignItems = l.counter;
+  node.primaryAxisSizingMode = 'AUTO';
+  node.counterAxisSizingMode = 'AUTO';
+  if (node.type === 'FRAME') node.fills = [];
+  for (const [field, varName] of Object.entries(spec.bindings || {})) {
+    node.setBoundVariable(field, need(varName));
+  }
+  if (spec.fill) node.fills = [boundPaint(spec.fill)];
+  if (spec.stroke) {
+    node.strokes = [boundPaint(spec.stroke)];
+    node.strokeAlign = 'INSIDE';
+  }
+  if (spec.fixedWidth || spec.fixedHeight) {
+    const w = spec.fixedWidth ? spec.fixedWidth.px : node.width;
+    const h = spec.fixedHeight ? spec.fixedHeight.px : node.height;
+    node.resize(w, h);
+    const horizontalIsPrimary = l.mode === 'HORIZONTAL';
+    if (spec.fixedWidth) {
+      if (horizontalIsPrimary) node.primaryAxisSizingMode = 'FIXED';
+      else node.counterAxisSizingMode = 'FIXED';
+      node.setBoundVariable('width', need(spec.fixedWidth.varName));
+    }
+    if (spec.fixedHeight) {
+      if (horizontalIsPrimary) node.counterAxisSizingMode = 'FIXED';
+      else node.primaryAxisSizingMode = 'FIXED';
+      node.setBoundVariable('height', need(spec.fixedHeight.varName));
+    }
+  }
+}
+
+async function buildNode(spec, registry) {
+  let node;
+  if (spec.type === 'text') {
+    node = figma.createText();
+    node.fontName = { family: 'Inter', style: spec.fontStyle || 'Medium' };
+    node.fontSize = spec.fontSize || 16;
+    node.characters = spec.characters || '';
+    if (spec.textFill) node.fills = [boundPaint(spec.textFill)];
+    if (spec.contentProp) {
+      registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });
+    }
+  } else if (spec.type === 'instance') {
+    const target = findComponentByName(spec.dep);
+    const main = target.type === 'COMPONENT_SET' ? target.defaultVariant : target;
+    node = main.createInstance();
+    if (spec.depProps) setInstanceProps(node, spec.depProps);
+  } else if (spec.type === 'slot') {
+    const util = await ensureSlotUtility();
+    node = figma.createFrame();
+    applyFrameSpec(node, spec);
+    const inst = util.createInstance();
+    node.appendChild(inst);
+    registry.slots.push({ spec, wrapper: node, instance: inst });
+  } else {
+    node = spec.type === 'root' ? figma.createComponent() : figma.createFrame();
+    applyFrameSpec(node, spec);
+  }
+  node.name = spec.name;
+  for (const child of spec.children || []) {
+    const childNode = await buildNode(child, registry);
+    node.appendChild(childNode);
+    if (
+      spec.layout && spec.layout.stretchChildren &&
+      !child.fixedWidth && child.type !== 'instance' &&
+      'layoutSizingHorizontal' in childNode
+    ) {
+      try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { /* HUG-only nodes */ }
+    }
+  }
+  return node;
+}
 
 // Find or create the Components section, placed clear of existing content.
 let section = figma.currentPage.findOne((n) => n.type === 'SECTION' && n.name === 'Components');
@@ -389,81 +715,73 @@ if (!section) {
   section.x = maxX + 100;
   section.y = 0;
 }
-// Place this set below whatever the section already contains.
 let startY = PAD;
 for (const n of section.children) startY = Math.max(startY, n.y + n.height + PAD);
 
-const comps = [];
-for (const spec of VARIANTS) {
-  const comp = figma.createComponent();
-  comp.name = spec.name;
-  comp.layoutMode = 'HORIZONTAL';
-  comp.primaryAxisAlignItems = 'CENTER';
-  comp.counterAxisAlignItems = 'CENTER';
-  comp.layoutSizingHorizontal = 'HUG';
-  comp.layoutSizingVertical = 'HUG';
-  for (const [field, varName] of Object.entries(spec.bindings)) {
-    comp.setBoundVariable(field, need(varName));
+// Build every variant, then add properties BEFORE combining.
+const built = [];
+for (const v of VARIANTS) {
+  const registry = { texts: [], slots: [] };
+  const comp = await buildNode(v.spec, registry);
+  built.push({ v, comp, registry });
+}
+for (const b of built) {
+  for (const t of b.registry.texts) {
+    const key = b.comp.addComponentProperty(t.prop, 'TEXT', t.default);
+    t.node.componentPropertyReferences = { characters: key };
   }
-  if (spec.fill) {
-    comp.fills = [
-      figma.variables.setBoundVariableForPaint(
-        { type: 'SOLID', color: { r: 0, g: 0, b: 0 } },
-        'color',
-        need(spec.fill),
-      ),
-    ];
+  for (const s of b.registry.slots) {
+    const util = await ensureSlotUtility();
+    const preferred = [];
+    for (const depName of s.spec.slotAccepts || []) {
+      const target = findComponentByName(depName);
+      preferred.push({
+        type: target.type === 'COMPONENT_SET' ? 'COMPONENT_SET' : 'COMPONENT',
+        key: target.key,
+      });
+    }
+    const key = b.comp.addComponentProperty(
+      s.spec.slotProperty,
+      'INSTANCE_SWAP',
+      util.id,
+      preferred.length > 0 ? { preferredValues: preferred } : undefined,
+    );
+    s.instance.componentPropertyReferences = { mainComponent: key };
+    if (s.spec.slotOptional) {
+      const vkey = b.comp.addComponentProperty('Show ' + s.spec.slotProperty, 'BOOLEAN', true);
+      s.wrapper.componentPropertyReferences = { visible: vkey };
+    }
   }
-
-  const text = figma.createText();
-  text.fontName = { family: 'Inter', style: 'Medium' };
-  text.fontSize = spec.fontSize;
-  text.characters = LABEL;
-  if (spec.textFill) {
-    text.fills = [
-      figma.variables.setBoundVariableForPaint(
-        { type: 'SOLID', color: { r: 0, g: 0, b: 0 } },
-        'color',
-        need(spec.textFill),
-      ),
-    ];
-  }
-  comp.appendChild(text);
-
-  // Properties must be added per-variant BEFORE combineAsVariants.
-  const labelKey = comp.addComponentProperty(LABEL_PROPERTY, 'TEXT', LABEL);
-  text.componentPropertyReferences = { characters: labelKey };
   for (const bp of BOOL_PROPS) {
-    // Declared for API parity with the contract; visual treatment of
-    // interaction states is a documented fidelity gap (see docs/05).
-    comp.addComponentProperty(bp.property, 'BOOLEAN', bp.default);
+    b.comp.addComponentProperty(bp.property, 'BOOLEAN', bp.default);
   }
-  comps.push(comp);
 }
 
-const set = figma.combineAsVariants(comps, section);
-set.name = SET_NAME;
-set.description = DESCRIPTION;
-
-// Grid layout: rows × cols from the contract's variant matrix, matched by
-// name (child order after combineAsVariants is not guaranteed).
-const specByName = new Map(VARIANTS.map((s) => [s.name, s]));
-for (const child of set.children) {
-  const spec = specByName.get(child.name);
-  if (!spec) continue;
-  child.x = PAD + spec.col * COL_W;
-  child.y = PAD + spec.row * ROW_H;
+let target;
+if (IS_SET) {
+  target = figma.combineAsVariants(built.map((b) => b.comp), section);
+  const specByName = new Map(VARIANTS.map((s) => [s.name, s]));
+  for (const child of target.children) {
+    const spec = specByName.get(child.name);
+    if (!spec) continue;
+    child.x = PAD + spec.col * COL_W;
+    child.y = PAD + spec.row * ROW_H;
+  }
+  let maxX = 0, maxY = 0;
+  for (const child of target.children) {
+    maxX = Math.max(maxX, child.x + child.width);
+    maxY = Math.max(maxY, child.y + child.height);
+  }
+  target.resizeWithoutConstraints(maxX + PAD, maxY + PAD);
+} else {
+  target = built[0].comp;
+  section.appendChild(target);
 }
-let maxX = 0, maxY = 0;
-for (const child of set.children) {
-  maxX = Math.max(maxX, child.x + child.width);
-  maxY = Math.max(maxY, child.y + child.height);
-}
-set.resizeWithoutConstraints(maxX + PAD, maxY + PAD);
-set.x = PAD;
-set.y = startY;
+target.name = SET_NAME;
+target.description = DESCRIPTION;
+target.x = PAD;
+target.y = startY;
 
-// Grow the section to fit.
 let sMaxX = 0, sMaxY = 0;
 for (const n of section.children) {
   sMaxX = Math.max(sMaxX, n.x + n.width);
@@ -471,13 +789,14 @@ for (const n of section.children) {
 }
 section.resizeWithoutConstraints(sMaxX + PAD, sMaxY + PAD);
 
+const propNames = Object.keys(target.componentPropertyDefinitions || {});
 return {
-  createdNodeIds: [set.id],
-  nodeId: set.id,
-  key: set.key,
+  createdNodeIds: [target.id],
+  nodeId: target.id,
+  key: target.key,
   sectionId: section.id,
-  variants: set.children.length,
-  properties: Object.keys(set.componentPropertyDefinitions),
+  variants: IS_SET ? target.children.length : 1,
+  properties: propNames,
 };
 `;
 }
@@ -489,17 +808,19 @@ return {
 mkdirSync(OUT, { recursive: true });
 writeFileSync(path.join(OUT, '01-tokens.js'), buildTokensScript());
 
-const contractFiles = readdirSync(path.join(ROOT, 'contracts'))
+const contracts = readdirSync(path.join(ROOT, 'contracts'))
   .filter((f) => f.endsWith('.contract.json'))
-  .sort();
+  .map((f) => ContractSchema.parse(read(path.join('contracts', f))));
+const ordered = sortByDependencies(contracts); // dependency order + cycle/ref gate
+const byId = new Map(contracts.map((c) => [c.id, c]));
+
 let index = 2;
 const emitted = ['01-tokens.js'];
-for (const file of contractFiles) {
-  const contract = ContractSchema.parse(read(path.join('contracts', file)));
+for (const contract of ordered) {
   const outName = `${String(index).padStart(2, '0')}-${contract.name.toLowerCase()}.js`;
-  writeFileSync(path.join(OUT, outName), buildComponentScript(contract));
+  writeFileSync(path.join(OUT, outName), buildComponentScript(contract, byId));
   emitted.push(outName);
   index++;
 }
 
-console.log(`✔ Emitted figma-sync scripts: ${emitted.join(', ')}`);
+console.log(`✔ Emitted figma-sync scripts (dependency order): ${emitted.join(', ')}`);

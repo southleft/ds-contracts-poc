@@ -121,9 +121,24 @@ interface Case {
 }
 
 const BTN_TSX = 'src/components/Button/Button.tsx';
+const CARD_TSX = 'src/components/Card/Card.tsx';
 const CONTRACT = 'contracts/button.contract.json';
 const FIGMA_COMPONENTS = 'parity/snapshots/figma-components.json';
 const FIGMA_TOKENS = 'parity/snapshots/figma-tokens.json';
+
+const MINIMAL_CONTRACT = (id: string, name: string, refId: string) => ({
+  id,
+  name,
+  version: '1.0.0',
+  description: 'Eval fixture.',
+  semantics: { element: 'div' },
+  props: [],
+  anatomy: { root: { parts: { inner: { component: { id: refId } } } } },
+  anchors: {
+    figma: { fileKey: null, componentSetKey: null },
+    code: { importPath: `src/components/${name}`, export: name },
+  },
+});
 
 const cases: Case[] = [
   {
@@ -297,6 +312,80 @@ const cases: Case[] = [
       });
       if (parity().status === 0) throw new Error('Drift not detected');
       expectFinding(readReport(), 'figma-tokens', 'ahead', 'Semantic/color/action/tertiary/background');
+    },
+  },
+  {
+    id: 'refuse-circular-dependency',
+    claim: 'C2-refusal',
+    run: () => {
+      writeFileSync(
+        path.join(SCRATCH, 'contracts', 'x.contract.json'),
+        JSON.stringify(MINIMAL_CONTRACT('ds.x', 'X', 'ds.y')),
+      );
+      writeFileSync(
+        path.join(SCRATCH, 'contracts', 'y.contract.json'),
+        JSON.stringify(MINIMAL_CONTRACT('ds.y', 'Y', 'ds.x')),
+      );
+      const r = generate();
+      if (r.status === 0) throw new Error('Generator accepted a circular composition');
+      if (!r.out.includes('Circular')) throw new Error('Cycle not named in error');
+    },
+  },
+  {
+    id: 'refuse-unknown-component-ref',
+    claim: 'C2-refusal',
+    run: () => {
+      replaceInFile('contracts/card.contract.json', '"id": "ds.avatar"', '"id": "ds.ghost"');
+      const r = generate();
+      if (r.status === 0) throw new Error('Generator accepted an unknown component ref');
+      if (!r.out.includes('unknown contract')) throw new Error('Unknown ref not named');
+    },
+  },
+  {
+    id: 'detect-figma-missing-slot-property',
+    claim: 'C3-detection',
+    run: () => {
+      editJson(FIGMA_COMPONENTS, (s) => {
+        const card = s.sets.find((x: any) => x.name === 'Card');
+        delete card.properties['Actions#2:15'];
+      });
+      if (parity().status === 0) throw new Error('Drift not detected');
+      expectFinding(readReport(), 'figma', 'behind', 'Card.Actions');
+    },
+  },
+  {
+    id: 'detect-figma-missing-nested-instance',
+    claim: 'C3-detection',
+    run: () => {
+      editJson(FIGMA_COMPONENTS, (s) => {
+        const card = s.sets.find((x: any) => x.name === 'Card');
+        card.nestedInstances = card.nestedInstances.filter((n: string) => n !== 'Avatar');
+      });
+      if (parity().status === 0) throw new Error('Drift not detected');
+      expectFinding(readReport(), 'figma', 'behind', 'Card.Avatar');
+    },
+  },
+  {
+    id: 'detect-figma-accepts-drift',
+    claim: 'C3-detection',
+    run: () => {
+      editJson(FIGMA_COMPONENTS, (s) => {
+        const card = s.sets.find((x: any) => x.name === 'Card');
+        card.properties['Actions#2:15'].preferredValues = [
+          { type: 'COMPONENT_SET', key: '1b5d2a573f3f39404af396bdbe944a30ca0eaec3' },
+        ]; // Badge dropped from preferredValues in Figma
+      });
+      if (parity().status === 0) throw new Error('Drift not detected');
+      expectFinding(readReport(), 'figma', 'mismatch', 'Card.Actions (accepts)');
+    },
+  },
+  {
+    id: 'detect-code-removed-slot-prop',
+    claim: 'C3-detection',
+    run: () => {
+      replaceInFile(CARD_TSX, /\s*actions\?: ReactNode;/, '');
+      if (parity().status === 0) throw new Error('Drift not detected');
+      expectFinding(readReport(), 'code', 'behind', 'Card.actions');
     },
   },
   {

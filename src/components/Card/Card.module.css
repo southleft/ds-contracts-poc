@@ -1,0 +1,54 @@
+/* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/card.contract.json (ds.card v1.0.0)
+ * Regenerate with: npm run generate
+ */
+
+.root {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  border-style: solid;
+  width: var(--size-card-width);
+  background-color: var(--color-surface-raised);
+  border-color: var(--color-border-subtle);
+  border-width: var(--border-width-100);
+  border-radius: var(--radius-card);
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--space-gap-control);
+  padding-inline: var(--space-inset-x-md);
+  padding-block: var(--space-inset-y-md);
+}
+
+.title {
+  color: var(--color-surface-foreground);
+  font-family: var(--font-control-family);
+  font-size: var(--font-title-size);
+  font-weight: var(--font-title-weight);
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: var(--space-gap-control);
+  padding-inline: var(--space-inset-x-md);
+  padding-block: var(--space-inset-y-md);
+  color: var(--color-surface-foreground);
+  font-family: var(--font-control-family);
+  font-size: var(--font-control-size-sm);
+}
+
+.footer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--space-gap-control);
+  padding-inline: var(--space-inset-x-md);
+  padding-block: var(--space-inset-y-md);
+}

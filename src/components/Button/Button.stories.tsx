@@ -1,6 +1,6 @@
 /**
  * GENERATED FILE — DO NOT EDIT.
- * Source of truth: contracts/button.contract.json (ds.button v1.1.0)
+ * Source of truth: contracts/button.contract.json (ds.button v1.2.0)
  * Regenerate with: npm run generate
  */
 import type { Meta, StoryObj } from '@storybook/react-vite';

@@ -1,5 +1,5 @@
 /**
- * The contract schema — the shape of the single source of truth.
+ * The contract schema — the shape of the single source of truth. (v2)
  *
  * Defined in Zod so the generator gets runtime validation + inferred TS types,
  * and a JSON Schema can be emitted for editor tooling and non-TS consumers
@@ -9,6 +9,21 @@
  *   - member model shape: Custom Elements Manifest (props/slots/parts)
  *   - prop/value binding grammar: Figma Code Connect
  *   - dual-anchor identity: DTCG $extensions pattern (rename-safe IDs per side)
+ *
+ * v2 adds COMPOSITION — the three concrete decisions:
+ *   1. Anatomy is a NESTED TREE (parts contain parts). Contracts are authored
+ *      and reviewed by humans; a tree reads like the component. (Streaming
+ *      payload formats like A2UI flatten to adjacency lists — that is a
+ *      transport concern; a contract is a source document.)
+ *   2. SLOTS are constrained insertion points: `accepts` lists contract IDs.
+ *      Each surface resolves those IDs through the referenced contracts'
+ *      anchors (code importPath / Figma componentSetKey → INSTANCE_SWAP
+ *      preferredValues). CEM declares slots but cannot constrain them; the
+ *      constraint is what makes generation and parity checkable.
+ *   3. NESTED COMPONENT REFS point at other contracts by ID with fixed prop
+ *      values (spelled in canonical values; each surface maps them through
+ *      the child contract's own bindings). Composition never duplicates a
+ *      child's definition.
  */
 import * as z from 'zod';
 
@@ -32,6 +47,8 @@ export const PropSchema = z.object({
   /** "boolean" | "text" | { enum: [...] } */
   type: z.union([z.literal('boolean'), z.literal('text'), EnumTypeSchema]),
   default: z.union([z.string(), z.boolean()]).optional(),
+  /** Text props may be required (no default in the code signature). */
+  required: z.boolean().optional(),
   /** How this prop manifests on each side. Neither side is primary;
    *  the contract owns the canonical name and value set. */
   bindings: z.object({
@@ -47,17 +64,80 @@ export const PropSchema = z.object({
   }),
 });
 
-export const PartSchema = z.object({
-  description: z.string().optional(),
-  /** Accepts arbitrary children (maps to a Figma INSTANCE_SWAP / code ReactNode). */
-  slot: z.boolean().optional(),
-  optional: z.boolean().optional(),
-  /** CSS property → token reference. This is where style decisions live —
-   *  the CSS Module is GENERATED from these bindings, never handwritten. */
-  tokens: z.record(z.string(), TokenRefSchema).optional(),
-  /** interaction state → (CSS property → token reference) overrides */
-  states: z.record(z.string(), z.record(z.string(), TokenRefSchema)).optional(),
+export const LayoutSchema = z.object({
+  display: z.enum(['flex', 'inline-flex']).optional(),
+  direction: z.enum(['row', 'column']).optional(),
+  align: z.enum(['start', 'center', 'end', 'stretch']).optional(),
+  justify: z.enum(['start', 'center', 'end', 'space-between']).optional(),
 });
+
+/** A constrained insertion point — Nathan Curtis's slot model, aligned with
+ *  Figma's two-tier constraint design (preferredValues = prefer;
+ *  allowPreferredValuesOnly = restrict). */
+export const SlotSchema = z.object({
+  /** "children" = the default slot (React children). Any other name becomes
+   *  a ReactNode prop of that name. */
+  name: z.string(),
+  /** Contract IDs this slot accepts. Omit = unconstrained. Resolved
+   *  per-surface via each referenced contract's anchors. */
+  accepts: z.array(z.string()).optional(),
+  /** prefer (default): accepts guides pickers/generators. restrict: only
+   *  accepts is legal. open: explicitly anything (the Subframe escape hatch).
+   *  Compatibility rule: widening is a minor version; narrowing is major. */
+  acceptsMode: z.enum(['prefer', 'restrict', 'open']).optional(),
+  /** Arity bounds (map to Figma SlotSettings min/maxChildren). */
+  min: z.number().int().min(0).optional(),
+  max: z.number().int().min(1).optional(),
+  required: z.boolean().optional(),
+  /** Figma property name. Default: PascalCase(name). */
+  figmaProperty: z.string().optional(),
+});
+
+/** A fixed instance of another contract, embedded in this component. */
+export const ComponentRefSchema = z.object({
+  /** The child contract's id, e.g. "ds.avatar". */
+  id: z.string(),
+  /** Fixed prop values, spelled canonically; mapped through the CHILD
+   *  contract's bindings on each surface. */
+  props: z.record(z.string(), z.union([z.string(), z.boolean()])).optional(),
+});
+
+export interface Part {
+  description?: string;
+  /** HTML element for this part (code side). Defaults: div (structural),
+   *  span (content). Root uses semantics.element. */
+  element?: string;
+  layout?: z.infer<typeof LayoutSchema>;
+  /** CSS property → token reference. The CSS Module AND the Figma bindings
+   *  are generated from these — there is no handwritten style layer. */
+  tokens?: Record<string, string>;
+  /** interaction state → (CSS property → token reference). Root-level only
+   *  in the current generators. */
+  states?: Record<string, Record<string, string>>;
+  /** Text content bound to a text prop: { prop: "title" }. */
+  content?: { prop: string };
+  slot?: z.infer<typeof SlotSchema>;
+  component?: z.infer<typeof ComponentRefSchema>;
+  /** Optional parts render conditionally (code: when the slot prop is
+   *  provided; Figma: a "Show X" BOOLEAN controls visibility). */
+  optional?: boolean;
+  parts?: Record<string, Part>;
+}
+
+export const PartSchema: z.ZodType<Part> = z.lazy(() =>
+  z.object({
+    description: z.string().optional(),
+    element: z.string().optional(),
+    layout: LayoutSchema.optional(),
+    tokens: z.record(z.string(), TokenRefSchema).optional(),
+    states: z.record(z.string(), z.record(z.string(), TokenRefSchema)).optional(),
+    content: z.object({ prop: z.string() }).optional(),
+    slot: SlotSchema.optional(),
+    component: ComponentRefSchema.optional(),
+    optional: z.boolean().optional(),
+    parts: z.record(z.string(), PartSchema).optional(),
+  }),
+);
 
 export const ContractSchema = z.object({
   $schema: z.string().optional(),
@@ -69,7 +149,7 @@ export const ContractSchema = z.object({
   status: z.enum(['draft', 'stable', 'deprecated']).default('draft'),
   description: z.string(),
   semantics: z.object({
-    element: z.enum(['button', 'span', 'div', 'a', 'input']),
+    element: z.enum(['button', 'span', 'div', 'a', 'input', 'article', 'section', 'header', 'footer']),
     role: z.string().optional(),
   }),
   props: z.array(PropSchema),
@@ -99,4 +179,73 @@ export const ContractSchema = z.object({
 
 export type Contract = z.infer<typeof ContractSchema>;
 export type Prop = z.infer<typeof PropSchema>;
-export type Part = z.infer<typeof PartSchema>;
+export type Slot = z.infer<typeof SlotSchema>;
+export type ComponentRef = z.infer<typeof ComponentRefSchema>;
+export type Layout = z.infer<typeof LayoutSchema>;
+
+// ---------------------------------------------------------------------------
+// Shared composition helpers (used by both generators and the differ)
+// ---------------------------------------------------------------------------
+
+export interface WalkedPart {
+  name: string;
+  part: Part;
+  path: string[];
+}
+
+/** Depth-first walk over a contract's anatomy tree. */
+export function walkAnatomy(contract: Contract): WalkedPart[] {
+  const out: WalkedPart[] = [];
+  const visit = (name: string, part: Part, path: string[]) => {
+    out.push({ name, part, path });
+    for (const [childName, child] of Object.entries(part.parts ?? {})) {
+      visit(childName, child, [...path, childName]);
+    }
+  };
+  for (const [name, part] of Object.entries(contract.anatomy)) visit(name, part, [name]);
+  return out;
+}
+
+export const slotsOf = (contract: Contract) =>
+  walkAnatomy(contract).filter((w) => w.part.slot).map((w) => ({ ...w, slot: w.part.slot! }));
+
+export const componentRefsOf = (contract: Contract) =>
+  walkAnatomy(contract)
+    .filter((w) => w.part.component)
+    .map((w) => ({ ...w, ref: w.part.component! }));
+
+export const pascal = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
+
+export const slotFigmaProperty = (slot: Slot) => slot.figmaProperty ?? pascal(slot.name);
+export const slotVisibilityProperty = (slot: Slot) => `Show ${slotFigmaProperty(slot)}`;
+
+/** Topologically sort contracts by composition dependencies; throws on
+ *  cycles and unknown references — invalid states are refused, not rendered. */
+export function sortByDependencies(contracts: Contract[]): Contract[] {
+  const byId = new Map(contracts.map((c) => [c.id, c]));
+  const sorted: Contract[] = [];
+  const state = new Map<string, 'visiting' | 'done'>();
+  const visit = (c: Contract, chain: string[]) => {
+    if (state.get(c.id) === 'done') return;
+    if (state.get(c.id) === 'visiting') {
+      throw new Error(`Circular contract dependency: ${[...chain, c.id].join(' → ')}`);
+    }
+    state.set(c.id, 'visiting');
+    for (const { ref } of componentRefsOf(c)) {
+      const dep = byId.get(ref.id);
+      if (!dep) throw new Error(`${c.id}: references unknown contract "${ref.id}"`);
+      visit(dep, [...chain, c.id]);
+    }
+    for (const { slot } of slotsOf(c)) {
+      for (const acceptedId of slot.accepts ?? []) {
+        if (!byId.has(acceptedId)) {
+          throw new Error(`${c.id}: slot "${slot.name}" accepts unknown contract "${acceptedId}"`);
+        }
+      }
+    }
+    state.set(c.id, 'done');
+    sorted.push(c);
+  };
+  for (const c of contracts) visit(c, []);
+  return sorted;
+}

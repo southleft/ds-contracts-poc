@@ -1,0 +1,139 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "ds.card",
+  "name": "Card",
+  "version": "1.0.0",
+  "status": "draft",
+  "description": "Groups related content behind one subject. Composes an Avatar, a bound title, a default body slot, and a constrained actions slot.",
+  "semantics": {
+    "element": "article"
+  },
+  "props": [
+    {
+      "name": "title",
+      "description": "Card heading, bound to the header title part on both surfaces.",
+      "type": "text",
+      "default": "Card title",
+      "required": true,
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Title"
+        },
+        "code": {
+          "prop": "title"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "flex",
+        "direction": "column",
+        "align": "stretch"
+      },
+      "tokens": {
+        "width": "{size.card.width}",
+        "background-color": "{color.surface.raised}",
+        "border-color": "{color.border.subtle}",
+        "border-width": "{border-width.100}",
+        "border-radius": "{radius.card}"
+      },
+      "parts": {
+        "header": {
+          "element": "header",
+          "layout": {
+            "direction": "row",
+            "align": "center"
+          },
+          "tokens": {
+            "gap": "{space.gap.control}",
+            "padding-inline": "{space.inset-x.md}",
+            "padding-block": "{space.inset-y.md}"
+          },
+          "parts": {
+            "avatar": {
+              "description": "Fixed identity anchor — an instance of ds.avatar.",
+              "component": {
+                "id": "ds.avatar",
+                "props": {
+                  "size": "sm"
+                }
+              }
+            },
+            "title": {
+              "element": "span",
+              "content": {
+                "prop": "title"
+              },
+              "tokens": {
+                "color": "{color.surface.foreground}",
+                "font-family": "{font.control.family}",
+                "font-size": "{font.title.size}",
+                "font-weight": "{font.title.weight}"
+              }
+            }
+          }
+        },
+        "body": {
+          "description": "Default slot — the card's main content.",
+          "layout": {
+            "direction": "column",
+            "align": "stretch"
+          },
+          "tokens": {
+            "gap": "{space.gap.control}",
+            "padding-inline": "{space.inset-x.md}",
+            "padding-block": "{space.inset-y.md}",
+            "color": "{color.surface.foreground}",
+            "font-family": "{font.control.family}",
+            "font-size": "{font.control.size.sm}"
+          },
+          "slot": {
+            "name": "children",
+            "figmaProperty": "Body",
+            "required": true
+          }
+        },
+        "footer": {
+          "element": "footer",
+          "description": "Constrained actions slot — only actions-grade components.",
+          "optional": true,
+          "layout": {
+            "direction": "row",
+            "align": "center",
+            "justify": "end"
+          },
+          "tokens": {
+            "gap": "{space.gap.control}",
+            "padding-inline": "{space.inset-x.md}",
+            "padding-block": "{space.inset-y.md}"
+          },
+          "slot": {
+            "name": "actions",
+            "accepts": [
+              "ds.button",
+              "ds.badge"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "a11y": {
+    "contrast": "AA"
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": "8nim1d0IPnehMxA7B7SYxC",
+      "componentSetKey": "7cd7011e4f2374161cd212f02992c7fd0f899430",
+      "nodeId": "2:21"
+    },
+    "code": {
+      "importPath": "src/components/Card",
+      "export": "Card"
+    }
+  }
+}

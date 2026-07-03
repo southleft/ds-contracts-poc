@@ -1,0 +1,29 @@
+/* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/avatar.contract.json (ds.avatar v1.0.0)
+ * Regenerate with: npm run generate
+ */
+
+.root {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: var(--radius-avatar);
+  background-color: var(--color-identity-background);
+  color: var(--color-identity-foreground);
+  font-family: var(--font-control-family);
+  font-weight: var(--font-control-weight);
+}
+
+.size-sm {
+  width: var(--size-avatar-sm);
+  height: var(--size-avatar-sm);
+  font-size: var(--font-avatar-size-sm);
+}
+
+.size-md {
+  width: var(--size-avatar-md);
+  height: var(--size-avatar-md);
+  font-size: var(--font-avatar-size-md);
+}

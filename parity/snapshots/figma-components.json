@@ -8,40 +8,13 @@
       "key": "1b5d2a573f3f39404af396bdbe944a30ca0eaec3",
       "variantCount": 9,
       "properties": {
-        "Label#5:18": {
-          "type": "TEXT",
-          "defaultValue": "Button",
-          "variantOptions": null
-        },
-        "Disabled#5:19": {
-          "type": "BOOLEAN",
-          "defaultValue": false,
-          "variantOptions": null
-        },
-        "Variant": {
-          "type": "VARIANT",
-          "defaultValue": "Primary",
-          "variantOptions": [
-            "Primary",
-            "Secondary",
-            "Danger"
-          ]
-        },
-        "Size": {
-          "type": "VARIANT",
-          "defaultValue": "Medium",
-          "variantOptions": [
-            "Small",
-            "Medium",
-            "Large"
-          ]
-        },
-        "Loading#new": {
-          "type": "BOOLEAN",
-          "defaultValue": false,
-          "variantOptions": null
-        }
-      }
+        "Loading#2:0": { "type": "BOOLEAN", "defaultValue": false, "variantOptions": null, "preferredValues": null },
+        "Label#5:18": { "type": "TEXT", "defaultValue": "Button", "variantOptions": null, "preferredValues": null },
+        "Disabled#5:19": { "type": "BOOLEAN", "defaultValue": false, "variantOptions": null, "preferredValues": null },
+        "Variant": { "type": "VARIANT", "defaultValue": "Primary", "variantOptions": ["Primary", "Secondary", "Danger"], "preferredValues": null },
+        "Size": { "type": "VARIANT", "defaultValue": "Medium", "variantOptions": ["Small", "Medium", "Large"], "preferredValues": null }
+      },
+      "nestedInstances": []
     },
     {
       "name": "Badge",
@@ -49,22 +22,37 @@
       "key": "89f1fb2d4580116cea4be5d4ca340de216a27819",
       "variantCount": 4,
       "properties": {
-        "Label#6:4": {
-          "type": "TEXT",
-          "defaultValue": "Badge",
-          "variantOptions": null
-        },
-        "Variant": {
-          "type": "VARIANT",
-          "defaultValue": "Info",
-          "variantOptions": [
-            "Info",
-            "Success",
-            "Warning",
-            "Danger"
-          ]
-        }
-      }
+        "Label#6:4": { "type": "TEXT", "defaultValue": "Badge", "variantOptions": null, "preferredValues": null },
+        "Variant": { "type": "VARIANT", "defaultValue": "Info", "variantOptions": ["Info", "Success", "Warning", "Danger"], "preferredValues": null }
+      },
+      "nestedInstances": []
+    },
+    {
+      "name": "Avatar",
+      "nodeId": "2:20",
+      "key": "b39059e770141b713f28ae1816be3ed756cd79da",
+      "variantCount": 2,
+      "properties": {
+        "Initials#2:12": { "type": "TEXT", "defaultValue": "AB", "variantOptions": null, "preferredValues": null },
+        "Size": { "type": "VARIANT", "defaultValue": "Small", "variantOptions": ["Small", "Medium"], "preferredValues": null }
+      },
+      "nestedInstances": []
+    },
+    {
+      "name": "Card",
+      "nodeId": "2:21",
+      "key": "7cd7011e4f2374161cd212f02992c7fd0f899430",
+      "variantCount": 1,
+      "properties": {
+        "Title#2:13": { "type": "TEXT", "defaultValue": "Card title", "variantOptions": null, "preferredValues": null },
+        "Body#2:14": { "type": "INSTANCE_SWAP", "defaultValue": "2:26", "variantOptions": null, "preferredValues": [] },
+        "Actions#2:15": { "type": "INSTANCE_SWAP", "defaultValue": "2:26", "variantOptions": null, "preferredValues": [
+          { "type": "COMPONENT_SET", "key": "1b5d2a573f3f39404af396bdbe944a30ca0eaec3" },
+          { "type": "COMPONENT_SET", "key": "89f1fb2d4580116cea4be5d4ca340de216a27819" }
+        ] },
+        "Show Actions#2:16": { "type": "BOOLEAN", "defaultValue": true, "variantOptions": null, "preferredValues": null }
+      },
+      "nestedInstances": ["Avatar", "Slot"]
     }
   ]
 }

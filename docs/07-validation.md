@@ -1,6 +1,8 @@
 # 7 · Validation — Claims, Evals, Evidence
 
-This PoC makes four falsifiable claims. Each is backed by an automated eval (`npm run eval`, 16 cases, runs the real pipeline in a scratch copy — not mocks) or an executed live-Figma check. Current status: **16/16 deterministic evals pass** (`evals/results.json`), both live checks pass. This section is written to be lifted into a PRD.
+This PoC makes four falsifiable claims. Each is backed by an automated eval (`npm run eval`, 22 cases, runs the real pipeline in a scratch copy — not mocks) or an executed live-Figma check. Current status: **22/22 deterministic evals pass** (`evals/results.json`), all live checks pass. This section is written to be lifted into a PRD.
+
+**Round 4 addendum (composition):** the suite now also covers slots and nested components — refusal of circular/unknown composition (`refuse-circular-dependency`, `refuse-unknown-component-ref`), detection of missing slot properties, missing nested instances, slot-`accepts` drift against anchors, and removed slot props (`detect-figma-missing-slot-property`, `detect-figma-missing-nested-instance`, `detect-figma-accepts-drift`, `detect-code-removed-slot-prop`). See [docs/08](08-composition-and-spec.md).
 
 ## The claims and their evidence
 
@@ -58,8 +60,8 @@ This is the loop's key property: the system never oscillates and never lies abou
 
 ## What is NOT yet validated (say this in the PRD too)
 
-1. **Composition/nesting** — contracts currently describe flat components (Button, Badge). Card-containing-Avatar is the designed-but-unbuilt schema extension, and it's where contract models historically get hard. Highest-priority next validation.
-2. **Scale** — 2 components, 92 tokens, 1 brand. No evidence yet about 60-component, multi-brand systems (variant-matrix explosion, token-set size, diff noise).
+1. **Deep/complex composition** — one level of nesting (Card ⊃ Avatar), two slots, four components. Not yet exercised: multi-level trees, parent→child prop mapping, slot arity enforcement, nested-part states.
+2. **Scale** — 4 components, 106 tokens, 1 brand. No evidence yet about 60-component, multi-brand systems (variant-matrix explosion, token-set size, diff noise).
 3. **Organizational behavior** — the promotion flow works mechanically; whether teams *accept* contract PRs as the arbitration door is a people question no eval answers.
 4. **Visual fidelity** — out of scope by design. The loop guards structure and bindings; taste stays human.
 5. **AI generation adherence** — designed but not run; see below.

@@ -1,6 +1,6 @@
 {
-  "passed": 16,
-  "total": 16,
+  "passed": 22,
+  "total": 22,
   "results": [
     {
       "id": "refuse-unknown-token-reference",
@@ -74,6 +74,36 @@
     },
     {
       "id": "detect-token-extra-variable",
+      "claim": "C3-detection",
+      "pass": true
+    },
+    {
+      "id": "refuse-circular-dependency",
+      "claim": "C2-refusal",
+      "pass": true
+    },
+    {
+      "id": "refuse-unknown-component-ref",
+      "claim": "C2-refusal",
+      "pass": true
+    },
+    {
+      "id": "detect-figma-missing-slot-property",
+      "claim": "C3-detection",
+      "pass": true
+    },
+    {
+      "id": "detect-figma-missing-nested-instance",
+      "claim": "C3-detection",
+      "pass": true
+    },
+    {
+      "id": "detect-figma-accepts-drift",
+      "claim": "C3-detection",
+      "pass": true
+    },
+    {
+      "id": "detect-code-removed-slot-prop",
       "claim": "C3-detection",
       "pass": true
     },

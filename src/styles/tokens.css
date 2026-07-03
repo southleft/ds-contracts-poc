@@ -51,6 +51,7 @@
   --radius-pill: 999px;
   --border-width-100: 1px;
   --border-width-200: 2px;
+  --container-sm: 320px;
   --font-family-sans: Inter, system-ui, -apple-system, sans-serif;
   --font-size-100: 12px;
   --font-size-200: 14px;
@@ -69,6 +70,11 @@
   --space-gap-control: var(--space-100);
   --radius-control: var(--radius-200);
   --radius-badge: var(--radius-pill);
+  --radius-card: var(--radius-200);
+  --radius-avatar: var(--radius-pill);
+  --size-avatar-sm: var(--space-300);
+  --size-avatar-md: var(--space-400);
+  --size-card-width: var(--container-sm);
   --border-width-focus: var(--border-width-200);
   --font-control-family: var(--font-family-sans);
   --font-control-weight: var(--font-weight-medium);
@@ -76,8 +82,13 @@
   --font-control-size-md: var(--font-size-300);
   --font-control-size-lg: var(--font-size-400);
   --font-badge-size: var(--font-size-100);
+  --font-title-size: var(--font-size-300);
+  --font-title-weight: var(--font-weight-semibold);
+  --font-avatar-size-sm: var(--font-size-100);
+  --font-avatar-size-md: var(--font-size-200);
   --color-surface-background: var(--color-gray-50);
   --color-surface-foreground: var(--color-gray-900);
+  --color-surface-raised: var(--color-white);
   --color-action-primary-background: var(--color-blue-600);
   --color-action-primary-background-hover: var(--color-blue-700);
   --color-action-primary-foreground: var(--color-white);
@@ -88,6 +99,7 @@
   --color-action-danger-background-hover: var(--color-red-700);
   --color-action-danger-foreground: var(--color-white);
   --color-border-focus: var(--color-blue-500);
+  --color-border-subtle: var(--color-gray-200);
   --color-feedback-info-background: var(--color-blue-100);
   --color-feedback-info-foreground: var(--color-blue-700);
   --color-feedback-success-background: var(--color-green-100);
@@ -96,4 +108,6 @@
   --color-feedback-warning-foreground: var(--color-amber-700);
   --color-feedback-danger-background: var(--color-red-100);
   --color-feedback-danger-foreground: var(--color-red-700);
+  --color-identity-background: var(--color-blue-100);
+  --color-identity-foreground: var(--color-blue-700);
 }
