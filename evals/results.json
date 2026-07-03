@@ -1,6 +1,6 @@
 {
-  "passed": 22,
-  "total": 22,
+  "passed": 24,
+  "total": 24,
   "results": [
     {
       "id": "refuse-unknown-token-reference",
@@ -104,6 +104,16 @@
     },
     {
       "id": "detect-code-removed-slot-prop",
+      "claim": "C3-detection",
+      "pass": true
+    },
+    {
+      "id": "refuse-defaultContent-outside-accepts",
+      "claim": "C2-refusal",
+      "pass": true
+    },
+    {
+      "id": "detect-figma-missing-multislot-content",
       "claim": "C3-detection",
       "pass": true
     },

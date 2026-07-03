@@ -1,0 +1,96 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "ds.table-row",
+  "name": "TableRow",
+  "version": "1.0.0",
+  "status": "draft",
+  "description": "A selectable row of table cells.",
+  "semantics": {
+    "element": "div",
+    "role": "row"
+  },
+  "props": [
+    {
+      "name": "state",
+      "description": "Data state of the row.",
+      "type": {
+        "enum": [
+          "default",
+          "selected"
+        ]
+      },
+      "default": "default",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "State",
+          "values": {
+            "default": "Default",
+            "selected": "Selected"
+          }
+        },
+        "code": {
+          "prop": "state"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "flex",
+        "direction": "row",
+        "align": "center"
+      },
+      "tokens": {
+        "background-color": "{color.table.row.{state}}"
+      },
+      "parts": {
+        "cells": {
+          "description": "The row's cells. Multi-child slot: renders its default content directly in Figma (INSTANCE_SWAP cannot hold multiple children — see docs/08).",
+          "layout": {
+            "direction": "row",
+            "align": "center"
+          },
+          "slot": {
+            "name": "children",
+            "figmaProperty": "Cells",
+            "required": true,
+            "accepts": [
+              "ds.table-cell"
+            ],
+            "defaultContent": [
+              {
+                "id": "ds.table-cell",
+                "text": "Ada Lovelace"
+              },
+              {
+                "id": "ds.table-cell",
+                "text": "Engineering"
+              },
+              {
+                "id": "ds.table-cell",
+                "text": "Active"
+              }
+            ]
+          }
+        }
+      }
+    }
+  },
+  "a11y": {
+    "contrast": "AA"
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": "8nim1d0IPnehMxA7B7SYxC",
+      "componentSetKey": "2630a1f30455c0b4d906930e9b3815cc0437fe1f",
+      "nodeId": "2:70"
+    },
+    "code": {
+      "importPath": "src/components/TableRow",
+      "export": "TableRow"
+    }
+  }
+}

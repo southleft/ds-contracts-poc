@@ -72,11 +72,13 @@ Try the loop: edit `contracts/button.contract.json` (add a value to the `size` e
 6. [The parity loop](docs/06-parity-loop.md) — drift detection, promotion flow, and the executed two-direction demo
 7. [Validation](docs/07-validation.md) — claims → evals → evidence (22/22 passing), live round-trip results, and the designed AI-adherence eval
 8. [Composition & the spec](docs/08-composition-and-spec.md) — slots, nested components, the A2UI/json-render/CEM comparison, and the road to a contributable contract spec
+9. [Advanced components](docs/09-advanced-components.md) — the DataTable family, the INSTANCE_SWAP ceiling, npm packaging, and the headless-hook design for behavior-heavy components
 
 ## Status — all three phases executed
 
 **Phase 1 ✅** contract → code generation with token integrity checking, visualized in Storybook.
 **Phase 2 ✅** contract → Figma generation: variable collections (Light/Dark modes, aliases, scopes, codeSyntax) and component sets, in [DS Contracts POC](https://www.figma.com/design/8nim1d0IPnehMxA7B7SYxC/DS-Contracts-POC); anchors written back into the contracts.
 **Phase 3 ✅** the parity loop (`npm run parity`): three-way drift detection with promotion patches, proven in both directions — a hand-added code prop promoted into the contract and pushed to Figma, and a designer's Figma token change promoted into `tokens/` and rebuilt into CSS. See [docs/06-parity-loop.md](docs/06-parity-loop.md) for the evidence trail.
-**Validation ✅** 22/22 deterministic evals (`npm run eval`) covering determinism, refusal of invalid states (including circular/unknown composition), fourteen drift classes, and promotion convergence — plus a live Figma token round-trip verified lossless (zero diff). See [docs/07-validation.md](docs/07-validation.md).
+**Validation ✅** 24/24 deterministic evals (`npm run eval`) covering determinism, refusal of invalid states (including circular/unknown composition and slot-content violations), sixteen drift classes, and promotion convergence — plus a live Figma token round-trip verified lossless (zero diff). See [docs/07-validation.md](docs/07-validation.md).
 **Composition ✅** slots (default + constrained/optional), nested component refs, and bound text parts — one contract (`ds.card`) generating both surfaces, with `accepts` round-tripping as Figma `preferredValues` verified against anchors. See [docs/08-composition-and-spec.md](docs/08-composition-and-spec.md) for the schema decisions and the contributable-spec roadmap.
+**Advanced composition ✅** the DataTable family (Table ⊃ Row ⊃ Cell, three levels): parent→child prop mapping, slot default content, data states — and the whole system packaged as an npm library with an SSR product-environment smoke test (`npm run build:lib && npm run verify:package`). See [docs/09-advanced-components.md](docs/09-advanced-components.md).

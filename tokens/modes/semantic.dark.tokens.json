@@ -10,6 +10,9 @@
       "$type": "color",
       "raised": {
         "$value": "{color.gray.700}"
+      },
+      "sunken": {
+        "$value": "{color.gray.800}"
       }
     },
     "action": {
@@ -99,6 +102,17 @@
       },
       "foreground": {
         "$value": "{color.blue.100}"
+      }
+    },
+    "table": {
+      "$type": "color",
+      "row": {
+        "default": {
+          "$value": "{color.gray.700}"
+        },
+        "selected": {
+          "$value": "{color.blue.900}"
+        }
       }
     }
   }

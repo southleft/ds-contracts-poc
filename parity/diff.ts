@@ -273,6 +273,24 @@ for (const contract of contracts) {
   const byIdAll = new Map(contracts.map((c) => [c.id, c]));
   for (const { slot, part } of slotsOf(contract)) {
     const propertyName = slotFigmaProperty(slot);
+    // Multi-child slot (defaultContent > 1): inexpressible as INSTANCE_SWAP —
+    // no property expected; instead the content components must exist as
+    // nested instances. (Native SLOT property is the migration target.)
+    if ((slot.defaultContent?.length ?? 0) > 1) {
+      for (const id of new Set(slot.defaultContent!.map((i) => i.id))) {
+        const dep = byIdAll.get(id)!;
+        if (!(set.nestedInstances ?? []).includes(dep.name)) {
+          add({
+            surface: 'figma',
+            classification: 'behind',
+            subject: `${contract.name}.${dep.name}`,
+            detail: `Multi-child slot "${slot.name}" declares ${id} default content but no ${dep.name} instance exists inside the Figma component`,
+            remedy: 'Re-run the component sync script',
+          });
+        }
+      }
+      continue;
+    }
     expectedNames.add(propertyName);
     const def = figmaProps.get(propertyName);
     if (!def) {

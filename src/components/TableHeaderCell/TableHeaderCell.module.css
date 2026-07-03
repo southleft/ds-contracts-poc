@@ -1,0 +1,25 @@
+/* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/table-header-cell.contract.json (ds.table-header-cell v1.0.0)
+ * Regenerate with: npm run generate
+ */
+
+.root {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border: 0;
+  width: var(--size-table-cell-width);
+  padding-inline: var(--space-inset-x-sm);
+  color: var(--color-surface-foreground);
+  font-family: var(--font-control-family);
+  font-size: var(--font-control-size-sm);
+  font-weight: var(--font-title-weight);
+}
+
+.density-comfortable {
+  padding-block: var(--space-table-cell-y-comfortable);
+}
+
+.density-compact {
+  padding-block: var(--space-table-cell-y-compact);
+}

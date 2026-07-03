@@ -1,6 +1,8 @@
 # 7 · Validation — Claims, Evals, Evidence
 
-This PoC makes four falsifiable claims. Each is backed by an automated eval (`npm run eval`, 22 cases, runs the real pipeline in a scratch copy — not mocks) or an executed live-Figma check. Current status: **22/22 deterministic evals pass** (`evals/results.json`), all live checks pass. This section is written to be lifted into a PRD.
+This PoC makes four falsifiable claims. Each is backed by an automated eval (`npm run eval`, 24 cases, runs the real pipeline in a scratch copy — not mocks) or an executed live-Figma check. Current status: **24/24 deterministic evals pass** (`evals/results.json`), all live checks pass. This section is written to be lifted into a PRD.
+
+**Round 5 addendum (advanced composition + packaging):** the table family adds refusal of slot defaultContent outside `accepts` (`refuse-defaultContent-outside-accepts`) and detection of missing multi-child slot content (`detect-figma-missing-multislot-content`) — plus the npm product-environment smoke test (`npm run verify:package`: SSR-renders a composed screen from `dist/`). See [docs/09](09-advanced-components.md).
 
 **Round 4 addendum (composition):** the suite now also covers slots and nested components — refusal of circular/unknown composition (`refuse-circular-dependency`, `refuse-unknown-component-ref`), detection of missing slot properties, missing nested instances, slot-`accepts` drift against anchors, and removed slot props (`detect-figma-missing-slot-property`, `detect-figma-missing-nested-instance`, `detect-figma-accepts-drift`, `detect-code-removed-slot-prop`). See [docs/08](08-composition-and-spec.md).
 

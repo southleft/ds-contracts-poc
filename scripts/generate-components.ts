@@ -130,11 +130,39 @@ const isStructural = (part: Part) =>
 // Contract-level validation (beyond the Zod schema)
 // ---------------------------------------------------------------------------
 
-function validateContract(contract: Contract, errors: string[]) {
+function validateContract(contract: Contract, byId: Map<string, Contract>, errors: string[]) {
+  const enumNames = new Set(enumProps(contract).map((p) => p.name));
+  const hasChildrenText = (dep: Contract) =>
+    dep.props.some((p) => p.type === 'text' && p.bindings.code.prop === 'children');
   const seen = new Set<string>();
   for (const { name, path: p, part } of walkAnatomy(contract)) {
     if (seen.has(name)) errors.push(`${contract.id}: duplicate anatomy part name "${name}"`);
     seen.add(name);
+    if (part.component) {
+      const dep = byId.get(part.component.id);
+      for (const [propName, value] of Object.entries(part.component.props ?? {})) {
+        if (dep && !dep.props.some((dp) => dp.name === propName)) {
+          errors.push(`${contract.id}: part "${name}" sets unknown ${dep.id} prop "${propName}"`);
+        }
+        const parentRef = typeof value === 'string' ? value.match(/^\{([a-z][\w-]*)\}$/) : null;
+        if (parentRef && !enumNames.has(parentRef[1])) {
+          errors.push(
+            `${contract.id}: part "${name}" maps "{${parentRef[1]}}" but no enum prop "${parentRef[1]}" exists on this contract`,
+          );
+        }
+      }
+      if (part.component.text !== undefined && dep && !hasChildrenText(dep)) {
+        errors.push(`${contract.id}: part "${name}" sets text but ${dep.id} has no children text prop`);
+      }
+    }
+    for (const item of part.slot?.defaultContent ?? []) {
+      const dep = byId.get(item.id);
+      if (item.text !== undefined && dep && !hasChildrenText(dep)) {
+        errors.push(
+          `${contract.id}: slot "${part.slot!.name}" defaultContent sets text but ${dep.id} has no children text prop`,
+        );
+      }
+    }
     if (p[0] !== 'root' || p.length > 1) {
       // substitution placeholders are only supported on the root part
       for (const ref of Object.values(part.tokens ?? {})) {
@@ -315,15 +343,78 @@ const ELEMENT_META: Record<string, { attrs: string; el: string; supportsDisabled
   footer: { attrs: 'HTMLAttributes', el: 'HTMLElement', supportsDisabled: false },
 };
 
-function depAttrString(dep: Contract, fixedProps: Record<string, string | boolean>): string {
+const PARENT_PROP_REF = /^\{([a-z][\w-]*)\}$/;
+
+function depAttrString(
+  dep: Contract,
+  fixedProps: Record<string, string | boolean>,
+  parent?: Contract,
+): string {
   const parts: string[] = [];
   for (const [propName, value] of Object.entries(fixedProps)) {
     const depProp = dep.props.find((p) => p.name === propName);
     const codeName = depProp?.bindings.code.prop ?? propName;
-    if (typeof value === 'boolean') parts.push(value ? ` ${codeName}` : '');
-    else parts.push(` ${codeName}="${value}"`);
+    if (typeof value === 'boolean') {
+      parts.push(value ? ` ${codeName}` : '');
+      continue;
+    }
+    const parentRef = value.match(PARENT_PROP_REF);
+    if (parentRef && parent) {
+      // Parent→child prop mapping: `density: "{density}"` → density={density}
+      const parentProp = parent.props.find((p) => p.name === parentRef[1]);
+      parts.push(` ${codeName}={${parentProp?.bindings.code.prop ?? parentRef[1]}}`);
+    } else {
+      parts.push(` ${codeName}="${value}"`);
+    }
   }
   return parts.join('');
+}
+
+/** Sample JSX for slot defaultContent — recursive: an item whose contract has
+ *  its own default-slot defaultContent renders that too (Table → Row → Cell). */
+function sampleJSX(
+  items: Array<{ id: string; props?: Record<string, string | boolean>; text?: string }>,
+  byId: Map<string, Contract>,
+  depth = 0,
+): string {
+  if (depth > 3) return '';
+  return items
+    .map((item) => {
+      const dep = byId.get(item.id)!;
+      const attrs = depAttrString(dep, item.props ?? {});
+      const childrenText = textProps(dep).find((p) => p.bindings.code.prop === 'children');
+      const nestedDefault = slotsOf(dep).find(
+        (s) => s.slot.name === 'children' && (s.slot.defaultContent?.length ?? 0) > 0,
+      );
+      if (item.text !== undefined) return `<${dep.name}${attrs}>${item.text}</${dep.name}>`;
+      if (nestedDefault) {
+        return `<${dep.name}${attrs}>\n${sampleJSX(nestedDefault.slot.defaultContent!, byId, depth + 1)}\n</${dep.name}>`;
+      }
+      if (typeof childrenText?.default === 'string') {
+        return `<${dep.name}${attrs}>${childrenText.default}</${dep.name}>`;
+      }
+      return `<${dep.name}${attrs} />`;
+    })
+    .join('\n');
+}
+
+/** All contracts referenced by a slot-sample tree (for story imports). */
+function sampleDeps(
+  items: Array<{ id: string }>,
+  byId: Map<string, Contract>,
+  out = new Set<string>(),
+  depth = 0,
+): Set<string> {
+  if (depth > 3) return out;
+  for (const item of items) {
+    const dep = byId.get(item.id)!;
+    out.add(dep.name);
+    const nested = slotsOf(dep).find(
+      (s) => s.slot.name === 'children' && (s.slot.defaultContent?.length ?? 0) > 0,
+    );
+    if (nested) sampleDeps(nested.slot.defaultContent!, byId, out, depth + 1);
+  }
+  return out;
 }
 
 function generateTsx(contract: Contract, byId: Map<string, Contract>): string {
@@ -393,10 +484,11 @@ function generateTsx(contract: Contract, byId: Map<string, Contract>): string {
   const renderPart = (partName: string, part: Part): string => {
     if (part.component) {
       const dep = byId.get(part.component.id)!;
-      const attrs = depAttrString(dep, part.component.props ?? {});
+      const attrs = depAttrString(dep, part.component.props ?? {}, contract);
       const depChildren = textProps(dep).find((p) => p.bindings.code.prop === 'children');
-      return typeof depChildren?.default === 'string'
-        ? `<${dep.name}${attrs}>${depChildren.default}</${dep.name}>`
+      const text = part.component.text ?? (typeof depChildren?.default === 'string' ? depChildren.default : undefined);
+      return text !== undefined
+        ? `<${dep.name}${attrs}>${text}</${dep.name}>`
         : `<${dep.name}${attrs} />`;
     }
     if (part.slot) {
@@ -493,9 +585,17 @@ function generateStories(contract: Contract, byId: Map<string, Contract>): strin
   for (const { slot } of slots) {
     argTypes.push(`    ${slot.name}: { control: false },`);
   }
-  if (hasDefaultSlot) {
+  const defaultSlot = slotsOf(contract).find((s) => s.slot.name === 'children');
+  const defaultSample =
+    defaultSlot && (defaultSlot.slot.defaultContent?.length ?? 0) > 0
+      ? sampleJSX(defaultSlot.slot.defaultContent!, byId)
+      : null;
+  if (hasDefaultSlot && !defaultSample) {
     argTypes.push(`    children: { control: 'text' },`);
     args.push(`    children: 'The quick brown fox jumps over the lazy dog.',`);
+  }
+  if (defaultSample) {
+    argTypes.push(`    children: { control: false },`);
   }
 
   const variantStories =
@@ -510,27 +610,47 @@ export const ${pascal(v)}: Story = {
           .join('\n')
       : '';
 
-  // One story per constrained named slot, filled with a sample instance of
-  // the first accepted contract.
+  // One story per constrained named slot, filled with the slot's
+  // defaultContent when declared, else a sample of the first accepted contract.
   const slotSampleImports = new Set<string>();
+  if (defaultSample) {
+    for (const n of sampleDeps(defaultSlot!.slot.defaultContent!, byId)) slotSampleImports.add(n);
+  }
   let slotStories = '';
   for (const { slot } of slots) {
-    const acceptedId = slot.accepts?.[0];
-    if (!acceptedId) continue;
-    const dep = byId.get(acceptedId)!;
-    slotSampleImports.add(dep.name);
-    const depLabel = textDefault(dep);
+    let sample: string;
+    if ((slot.defaultContent?.length ?? 0) > 0) {
+      sample = `<>${sampleJSX(slot.defaultContent!, byId)}</>`;
+      for (const n of sampleDeps(slot.defaultContent!, byId)) slotSampleImports.add(n);
+    } else {
+      const acceptedId = slot.accepts?.[0];
+      if (!acceptedId) continue;
+      const dep = byId.get(acceptedId)!;
+      slotSampleImports.add(dep.name);
+      sample = `<${dep.name}>${textDefault(dep)}</${dep.name}>`;
+    }
     slotStories += `
-/** The "${slot.name}" slot accepts: ${(slot.accepts ?? []).join(', ')}. */
+/** The "${slot.name}" slot accepts: ${(slot.accepts ?? []).join(', ') || 'anything'}. */
 export const With${pascal(slot.name)}: Story = {
   render: (args) => (
-    <${name} {...args} ${slot.name}={<${dep.name}>${depLabel}</${dep.name}>} />
+    <${name} {...args} ${slot.name}={${sample}} />
   ),
 };`;
   }
 
+  // A shared render fills the default slot with its declared sample content
+  // for every args-only story (Playground, per-variant, Disabled).
+  const metaRender = defaultSample
+    ? `
+  render: (args) => (
+    <${name} {...args}>
+      ${defaultSample.split('\n').join('\n      ')}
+    </${name}>
+  ),`
+    : '';
+
   let matrixStory = '';
-  if (enums.length > 0) {
+  if (enums.length > 0 && !defaultSample) {
     const rowProp = enums[0];
     const colProp = enums[1];
     const cells: string[] = [];
@@ -592,7 +712,7 @@ const meta = {
   tags: ['autodocs'],
   parameters: {
     docs: { description: { component: ${JSON.stringify(contract.description)} } },
-  },
+  },${metaRender}
   argTypes: {
 ${argTypes.join('\n')}
   },
@@ -646,7 +766,7 @@ async function main() {
   const prettierBase = { singleQuote: true, printWidth: 100 };
 
   for (const contract of ordered) {
-    validateContract(contract, errors);
+    validateContract(contract, byId, errors);
     if (errors.length > 0 && errors.some((e) => e.startsWith(contract.id))) continue;
 
     const css = generateCss(contract, tokenInventory, errors);

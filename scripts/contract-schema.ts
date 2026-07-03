@@ -71,6 +71,15 @@ export const LayoutSchema = z.object({
   justify: z.enum(['start', 'center', 'end', 'space-between']).optional(),
 });
 
+/** Design-time default content for a slot (Curtis's fifth slot property).
+ *  Renders as instances inside the slot in Figma and as the sample in code
+ *  stories — never baked into the generated component itself. */
+export const SlotContentItemSchema = z.object({
+  id: z.string(),
+  props: z.record(z.string(), z.union([z.string(), z.boolean()])).optional(),
+  text: z.string().optional(),
+});
+
 /** A constrained insertion point — Nathan Curtis's slot model, aligned with
  *  Figma's two-tier constraint design (preferredValues = prefer;
  *  allowPreferredValuesOnly = restrict). */
@@ -91,6 +100,12 @@ export const SlotSchema = z.object({
   required: z.boolean().optional(),
   /** Figma property name. Default: PascalCase(name). */
   figmaProperty: z.string().optional(),
+  /** Sample content (see SlotContentItemSchema). Items must be drawn from
+   *  `accepts` when accepts is present. NOTE: a slot whose default content
+   *  has MULTIPLE items is a multi-child slot — inexpressible as a Figma
+   *  INSTANCE_SWAP; it renders its content directly (no swap property) until
+   *  the native SLOT property migration. */
+  defaultContent: z.array(SlotContentItemSchema).optional(),
 });
 
 /** A fixed instance of another contract, embedded in this component. */
@@ -98,8 +113,13 @@ export const ComponentRefSchema = z.object({
   /** The child contract's id, e.g. "ds.avatar". */
   id: z.string(),
   /** Fixed prop values, spelled canonically; mapped through the CHILD
-   *  contract's bindings on each surface. */
+   *  contract's bindings on each surface. A string value of the form
+   *  "{parentProp}" maps the PARENT's enum prop into the child per variant
+   *  (code: `childProp={parentProp}`; Figma: resolved per variant combo). */
   props: z.record(z.string(), z.union([z.string(), z.boolean()])).optional(),
+  /** Overrides the child's `children` text prop (code: JSX children;
+   *  Figma: TEXT property override on the instance). */
+  text: z.string().optional(),
 });
 
 export interface Part {
@@ -241,6 +261,18 @@ export function sortByDependencies(contracts: Contract[]): Contract[] {
         if (!byId.has(acceptedId)) {
           throw new Error(`${c.id}: slot "${slot.name}" accepts unknown contract "${acceptedId}"`);
         }
+      }
+      for (const item of slot.defaultContent ?? []) {
+        const dep = byId.get(item.id);
+        if (!dep) {
+          throw new Error(`${c.id}: slot "${slot.name}" defaultContent references unknown contract "${item.id}"`);
+        }
+        if (slot.accepts && slot.accepts.length > 0 && !slot.accepts.includes(item.id)) {
+          throw new Error(
+            `${c.id}: slot "${slot.name}" defaultContent includes "${item.id}" which is not in accepts`,
+          );
+        }
+        visit(dep, [...chain, c.id]);
       }
     }
     state.set(c.id, 'done');

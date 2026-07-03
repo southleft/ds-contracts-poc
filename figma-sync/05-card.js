@@ -262,12 +262,34 @@ async function buildNode(spec, registry) {
     node = main.createInstance();
     if (spec.depProps) setInstanceProps(node, spec.depProps);
   } else if (spec.type === 'slot') {
-    const util = await ensureSlotUtility();
     node = figma.createFrame();
     applyFrameSpec(node, spec);
-    const inst = util.createInstance();
-    node.appendChild(inst);
-    registry.slots.push({ spec, wrapper: node, instance: inst });
+    const defaults = spec.slotDefault || [];
+    if (defaults.length === 0) {
+      const util = await ensureSlotUtility();
+      const inst = util.createInstance();
+      node.appendChild(inst);
+      registry.slots.push({ spec, wrapper: node, instance: inst, defaultId: null });
+    } else {
+      const instances = [];
+      for (const item of defaults) {
+        const target = findComponentByName(item.dep);
+        const main = target.type === 'COMPONENT_SET' ? target.defaultVariant : target;
+        const inst = main.createInstance();
+        if (item.props) setInstanceProps(inst, item.props);
+        node.appendChild(inst);
+        if (spec.layout && spec.layout.stretchChildren) {
+          try { inst.layoutSizingHorizontal = 'FILL'; } catch (e) { /* fixed-size deps */ }
+        }
+        instances.push({ inst, main });
+      }
+      if (defaults.length === 1) {
+        // Single default → still expressible as a swap property.
+        registry.slots.push({ spec, wrapper: node, instance: instances[0].inst, defaultId: instances[0].main.id });
+      }
+      // >1 → multi-child slot: content rendered directly, no swap property
+      // (INSTANCE_SWAP holds exactly one instance; native SLOT is the fix).
+    }
   } else {
     node = spec.type === 'root' ? figma.createComponent() : figma.createFrame();
     applyFrameSpec(node, spec);
@@ -327,7 +349,7 @@ for (const b of built) {
     const key = b.comp.addComponentProperty(
       s.spec.slotProperty,
       'INSTANCE_SWAP',
-      util.id,
+      s.defaultId || util.id,
       preferred.length > 0 ? { preferredValues: preferred } : undefined,
     );
     s.instance.componentPropertyReferences = { mainComponent: key };

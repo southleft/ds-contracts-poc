@@ -477,6 +477,24 @@ const PRIMITIVES = [
     "codeSyntax": "var(--container-sm)"
   },
   {
+    "name": "container/xs",
+    "type": "FLOAT",
+    "value": 120,
+    "scopes": [
+      "WIDTH_HEIGHT"
+    ],
+    "codeSyntax": "var(--container-xs)"
+  },
+  {
+    "name": "container/md",
+    "type": "FLOAT",
+    "value": 480,
+    "scopes": [
+      "WIDTH_HEIGHT"
+    ],
+    "codeSyntax": "var(--container-md)"
+  },
+  {
     "name": "font/family/sans",
     "type": "STRING",
     "value": "Inter, system-ui, -apple-system, sans-serif",
@@ -637,6 +655,28 @@ const SEMANTIC = [
     "codeSyntax": "var(--space-gap-control)"
   },
   {
+    "name": "space/table/cell-y/comfortable",
+    "type": "FLOAT",
+    "light": "space/150",
+    "dark": "space/150",
+    "scopes": [
+      "GAP",
+      "WIDTH_HEIGHT"
+    ],
+    "codeSyntax": "var(--space-table-cell-y-comfortable)"
+  },
+  {
+    "name": "space/table/cell-y/compact",
+    "type": "FLOAT",
+    "light": "space/50",
+    "dark": "space/50",
+    "scopes": [
+      "GAP",
+      "WIDTH_HEIGHT"
+    ],
+    "codeSyntax": "var(--space-table-cell-y-compact)"
+  },
+  {
     "name": "radius/control",
     "type": "FLOAT",
     "light": "radius/200",
@@ -705,6 +745,26 @@ const SEMANTIC = [
       "WIDTH_HEIGHT"
     ],
     "codeSyntax": "var(--size-card-width)"
+  },
+  {
+    "name": "size/table/width",
+    "type": "FLOAT",
+    "light": "container/md",
+    "dark": "container/md",
+    "scopes": [
+      "WIDTH_HEIGHT"
+    ],
+    "codeSyntax": "var(--size-table-width)"
+  },
+  {
+    "name": "size/table/cell-width",
+    "type": "FLOAT",
+    "light": "container/xs",
+    "dark": "container/xs",
+    "scopes": [
+      "WIDTH_HEIGHT"
+    ],
+    "codeSyntax": "var(--size-table-cell-width)"
   },
   {
     "name": "border/width/focus",
@@ -848,6 +908,17 @@ const SEMANTIC = [
       "STROKE_COLOR"
     ],
     "codeSyntax": "var(--color-surface-raised)"
+  },
+  {
+    "name": "color/surface/sunken",
+    "type": "COLOR",
+    "light": "color/gray/100",
+    "dark": "color/gray/800",
+    "scopes": [
+      "ALL_FILLS",
+      "STROKE_COLOR"
+    ],
+    "codeSyntax": "var(--color-surface-sunken)"
   },
   {
     "name": "color/action/primary/background",
@@ -1079,6 +1150,28 @@ const SEMANTIC = [
       "STROKE_COLOR"
     ],
     "codeSyntax": "var(--color-identity-foreground)"
+  },
+  {
+    "name": "color/table/row/default",
+    "type": "COLOR",
+    "light": "color/white",
+    "dark": "color/gray/700",
+    "scopes": [
+      "ALL_FILLS",
+      "STROKE_COLOR"
+    ],
+    "codeSyntax": "var(--color-table-row-default)"
+  },
+  {
+    "name": "color/table/row/selected",
+    "type": "COLOR",
+    "light": "color/blue/100",
+    "dark": "color/blue/900",
+    "scopes": [
+      "ALL_FILLS",
+      "STROKE_COLOR"
+    ],
+    "codeSyntax": "var(--color-table-row-selected)"
   }
 ];
 

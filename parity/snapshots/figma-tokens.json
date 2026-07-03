@@ -406,6 +406,20 @@
           "values": {
             "Value": 320
           }
+        },
+        {
+          "name": "container/xs",
+          "type": "FLOAT",
+          "values": {
+            "Value": 120
+          }
+        },
+        {
+          "name": "container/md",
+          "type": "FLOAT",
+          "values": {
+            "Value": 480
+          }
         }
       ]
     },
@@ -806,6 +820,62 @@
           "values": {
             "Light": "{color/blue/700}",
             "Dark": "{color/blue/100}"
+          }
+        },
+        {
+          "name": "size/table/width",
+          "type": "FLOAT",
+          "values": {
+            "Light": "{container/md}",
+            "Dark": "{container/md}"
+          }
+        },
+        {
+          "name": "size/table/cell-width",
+          "type": "FLOAT",
+          "values": {
+            "Light": "{container/xs}",
+            "Dark": "{container/xs}"
+          }
+        },
+        {
+          "name": "space/table/cell-y/comfortable",
+          "type": "FLOAT",
+          "values": {
+            "Light": "{space/150}",
+            "Dark": "{space/150}"
+          }
+        },
+        {
+          "name": "space/table/cell-y/compact",
+          "type": "FLOAT",
+          "values": {
+            "Light": "{space/50}",
+            "Dark": "{space/50}"
+          }
+        },
+        {
+          "name": "color/surface/sunken",
+          "type": "COLOR",
+          "values": {
+            "Light": "{color/gray/100}",
+            "Dark": "{color/gray/800}"
+          }
+        },
+        {
+          "name": "color/table/row/default",
+          "type": "COLOR",
+          "values": {
+            "Light": "{color/white}",
+            "Dark": "{color/gray/700}"
+          }
+        },
+        {
+          "name": "color/table/row/selected",
+          "type": "COLOR",
+          "values": {
+            "Light": "{color/blue/100}",
+            "Dark": "{color/blue/900}"
           }
         }
       ]

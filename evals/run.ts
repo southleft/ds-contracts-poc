@@ -389,6 +389,32 @@ const cases: Case[] = [
     },
   },
   {
+    id: 'refuse-defaultContent-outside-accepts',
+    claim: 'C2-refusal',
+    run: () => {
+      replaceInFile(
+        'contracts/table.contract.json',
+        '"defaultContent": [\n              {\n                "id": "ds.table-row"\n              },',
+        '"defaultContent": [\n              {\n                "id": "ds.badge"\n              },',
+      );
+      const r = generate();
+      if (r.status === 0) throw new Error('Generator accepted defaultContent outside accepts');
+      if (!r.out.includes('not in accepts')) throw new Error('Violation not named');
+    },
+  },
+  {
+    id: 'detect-figma-missing-multislot-content',
+    claim: 'C3-detection',
+    run: () => {
+      editJson(FIGMA_COMPONENTS, (s) => {
+        const table = s.sets.find((x: any) => x.name === 'Table');
+        table.nestedInstances = table.nestedInstances.filter((n: string) => n !== 'TableRow');
+      });
+      if (parity().status === 0) throw new Error('Drift not detected');
+      expectFinding(readReport(), 'figma', 'behind', 'Table.TableRow');
+    },
+  },
+  {
     id: 'promotion-converges',
     claim: 'C4-convergence',
     run: () => {

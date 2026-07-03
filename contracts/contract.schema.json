@@ -393,6 +393,39 @@
             },
             "figmaProperty": {
               "type": "string"
+            },
+            "defaultContent": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "props": {
+                    "type": "object",
+                    "propertyNames": {
+                      "type": "string"
+                    },
+                    "additionalProperties": {
+                      "anyOf": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "type": "boolean"
+                        }
+                      ]
+                    }
+                  },
+                  "text": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "id"
+                ]
+              }
             }
           },
           "required": [
@@ -420,6 +453,9 @@
                   }
                 ]
               }
+            },
+            "text": {
+              "type": "string"
             }
           },
           "required": [

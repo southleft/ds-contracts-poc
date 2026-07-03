@@ -1,0 +1,86 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "ds.table-header-cell",
+  "name": "TableHeaderCell",
+  "version": "1.0.0",
+  "status": "draft",
+  "description": "A column header cell.",
+  "semantics": {
+    "element": "div",
+    "role": "columnheader"
+  },
+  "props": [
+    {
+      "name": "density",
+      "description": "Vertical rhythm, normally driven by the owning Table.",
+      "type": {
+        "enum": [
+          "comfortable",
+          "compact"
+        ]
+      },
+      "default": "comfortable",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Density",
+          "values": {
+            "comfortable": "Comfortable",
+            "compact": "Compact"
+          }
+        },
+        "code": {
+          "prop": "density"
+        }
+      }
+    },
+    {
+      "name": "children",
+      "description": "Column label.",
+      "type": "text",
+      "default": "Header",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Label"
+        },
+        "code": {
+          "prop": "children"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "flex",
+        "direction": "row",
+        "align": "center"
+      },
+      "tokens": {
+        "width": "{size.table.cell-width}",
+        "padding-inline": "{space.inset-x.sm}",
+        "padding-block": "{space.table.cell-y.{density}}",
+        "color": "{color.surface.foreground}",
+        "font-family": "{font.control.family}",
+        "font-size": "{font.control.size.sm}",
+        "font-weight": "{font.title.weight}"
+      }
+    }
+  },
+  "a11y": {
+    "contrast": "AA"
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": "8nim1d0IPnehMxA7B7SYxC",
+      "componentSetKey": "91bf99af47cb2e09190eed770012e9c99661294f",
+      "nodeId": "2:53"
+    },
+    "code": {
+      "importPath": "src/components/TableHeaderCell",
+      "export": "TableHeaderCell"
+    }
+  }
+}

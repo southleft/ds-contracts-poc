@@ -52,6 +52,8 @@
   --border-width-100: 1px;
   --border-width-200: 2px;
   --container-sm: 320px;
+  --container-xs: 120px;
+  --container-md: 480px;
   --font-family-sans: Inter, system-ui, -apple-system, sans-serif;
   --font-size-100: 12px;
   --font-size-200: 14px;
@@ -68,6 +70,8 @@
   --space-inset-y-md: var(--space-100);
   --space-inset-y-lg: var(--space-150);
   --space-gap-control: var(--space-100);
+  --space-table-cell-y-comfortable: var(--space-150);
+  --space-table-cell-y-compact: var(--space-50);
   --radius-control: var(--radius-200);
   --radius-badge: var(--radius-pill);
   --radius-card: var(--radius-200);
@@ -75,6 +79,8 @@
   --size-avatar-sm: var(--space-300);
   --size-avatar-md: var(--space-400);
   --size-card-width: var(--container-sm);
+  --size-table-width: var(--container-md);
+  --size-table-cell-width: var(--container-xs);
   --border-width-focus: var(--border-width-200);
   --font-control-family: var(--font-family-sans);
   --font-control-weight: var(--font-weight-medium);
@@ -89,6 +95,7 @@
   --color-surface-background: var(--color-gray-50);
   --color-surface-foreground: var(--color-gray-900);
   --color-surface-raised: var(--color-white);
+  --color-surface-sunken: var(--color-gray-100);
   --color-action-primary-background: var(--color-blue-600);
   --color-action-primary-background-hover: var(--color-blue-700);
   --color-action-primary-foreground: var(--color-white);
@@ -110,4 +117,6 @@
   --color-feedback-danger-foreground: var(--color-red-700);
   --color-identity-background: var(--color-blue-100);
   --color-identity-foreground: var(--color-blue-700);
+  --color-table-row-default: var(--color-white);
+  --color-table-row-selected: var(--color-blue-100);
 }

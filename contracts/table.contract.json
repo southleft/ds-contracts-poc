@@ -1,0 +1,139 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "ds.table",
+  "name": "Table",
+  "version": "1.0.0",
+  "status": "draft",
+  "description": "Structured data in rows and columns. Composes header cells (with the Table's density mapped into them), and a body slot of rows.",
+  "semantics": {
+    "element": "div",
+    "role": "table"
+  },
+  "props": [
+    {
+      "name": "density",
+      "description": "Vertical rhythm of the whole table; mapped into the fixed header cells.",
+      "type": {
+        "enum": [
+          "comfortable",
+          "compact"
+        ]
+      },
+      "default": "comfortable",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Density",
+          "values": {
+            "comfortable": "Comfortable",
+            "compact": "Compact"
+          }
+        },
+        "code": {
+          "prop": "density"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "flex",
+        "direction": "column",
+        "align": "stretch"
+      },
+      "tokens": {
+        "width": "{size.table.width}",
+        "background-color": "{color.surface.raised}",
+        "border-color": "{color.border.subtle}",
+        "border-width": "{border-width.100}",
+        "border-radius": "{radius.card}"
+      },
+      "parts": {
+        "header": {
+          "description": "Fixed 3-column sample header; density flows down via parent-prop mapping.",
+          "layout": {
+            "direction": "row",
+            "align": "center"
+          },
+          "tokens": {
+            "background-color": "{color.surface.sunken}"
+          },
+          "parts": {
+            "nameHeader": {
+              "component": {
+                "id": "ds.table-header-cell",
+                "props": {
+                  "density": "{density}"
+                },
+                "text": "Name"
+              }
+            },
+            "roleHeader": {
+              "component": {
+                "id": "ds.table-header-cell",
+                "props": {
+                  "density": "{density}"
+                },
+                "text": "Role"
+              }
+            },
+            "statusHeader": {
+              "component": {
+                "id": "ds.table-header-cell",
+                "props": {
+                  "density": "{density}"
+                },
+                "text": "Status"
+              }
+            }
+          }
+        },
+        "body": {
+          "description": "Rows. Multi-child slot: renders its default content directly in Figma (see docs/08).",
+          "layout": {
+            "direction": "column",
+            "align": "stretch"
+          },
+          "slot": {
+            "name": "children",
+            "figmaProperty": "Rows",
+            "required": true,
+            "accepts": [
+              "ds.table-row"
+            ],
+            "defaultContent": [
+              {
+                "id": "ds.table-row"
+              },
+              {
+                "id": "ds.table-row",
+                "props": {
+                  "state": "selected"
+                }
+              },
+              {
+                "id": "ds.table-row"
+              }
+            ]
+          }
+        }
+      }
+    }
+  },
+  "a11y": {
+    "contrast": "AA"
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": "8nim1d0IPnehMxA7B7SYxC",
+      "componentSetKey": "d3e8c9c378ea2fd072c2eb08545a30565fa77614",
+      "nodeId": "2:154"
+    },
+    "code": {
+      "importPath": "src/components/Table",
+      "export": "Table"
+    }
+  }
+}

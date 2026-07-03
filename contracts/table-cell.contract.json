@@ -1,0 +1,85 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "ds.table-cell",
+  "name": "TableCell",
+  "version": "1.0.0",
+  "status": "draft",
+  "description": "A single data cell in a table row.",
+  "semantics": {
+    "element": "div",
+    "role": "cell"
+  },
+  "props": [
+    {
+      "name": "density",
+      "description": "Vertical rhythm, normally driven by the owning Table.",
+      "type": {
+        "enum": [
+          "comfortable",
+          "compact"
+        ]
+      },
+      "default": "comfortable",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Density",
+          "values": {
+            "comfortable": "Comfortable",
+            "compact": "Compact"
+          }
+        },
+        "code": {
+          "prop": "density"
+        }
+      }
+    },
+    {
+      "name": "children",
+      "description": "Cell content.",
+      "type": "text",
+      "default": "Cell",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Content"
+        },
+        "code": {
+          "prop": "children"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "flex",
+        "direction": "row",
+        "align": "center"
+      },
+      "tokens": {
+        "width": "{size.table.cell-width}",
+        "padding-inline": "{space.inset-x.sm}",
+        "padding-block": "{space.table.cell-y.{density}}",
+        "color": "{color.surface.foreground}",
+        "font-family": "{font.control.family}",
+        "font-size": "{font.control.size.sm}"
+      }
+    }
+  },
+  "a11y": {
+    "contrast": "AA"
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": "8nim1d0IPnehMxA7B7SYxC",
+      "componentSetKey": "b440cb0ab4bd83de2491b2302ab1ccb9c3e0f2d1",
+      "nodeId": "2:48"
+    },
+    "code": {
+      "importPath": "src/components/TableCell",
+      "export": "TableCell"
+    }
+  }
+}

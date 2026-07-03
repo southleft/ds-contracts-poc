@@ -8,11 +8,44 @@
       "key": "1b5d2a573f3f39404af396bdbe944a30ca0eaec3",
       "variantCount": 9,
       "properties": {
-        "Loading#2:0": { "type": "BOOLEAN", "defaultValue": false, "variantOptions": null, "preferredValues": null },
-        "Label#5:18": { "type": "TEXT", "defaultValue": "Button", "variantOptions": null, "preferredValues": null },
-        "Disabled#5:19": { "type": "BOOLEAN", "defaultValue": false, "variantOptions": null, "preferredValues": null },
-        "Variant": { "type": "VARIANT", "defaultValue": "Primary", "variantOptions": ["Primary", "Secondary", "Danger"], "preferredValues": null },
-        "Size": { "type": "VARIANT", "defaultValue": "Medium", "variantOptions": ["Small", "Medium", "Large"], "preferredValues": null }
+        "Loading#2:0": {
+          "type": "BOOLEAN",
+          "defaultValue": false,
+          "variantOptions": null,
+          "preferredValues": null
+        },
+        "Label#5:18": {
+          "type": "TEXT",
+          "defaultValue": "Button",
+          "variantOptions": null,
+          "preferredValues": null
+        },
+        "Disabled#5:19": {
+          "type": "BOOLEAN",
+          "defaultValue": false,
+          "variantOptions": null,
+          "preferredValues": null
+        },
+        "Variant": {
+          "type": "VARIANT",
+          "defaultValue": "Primary",
+          "variantOptions": [
+            "Primary",
+            "Secondary",
+            "Danger"
+          ],
+          "preferredValues": null
+        },
+        "Size": {
+          "type": "VARIANT",
+          "defaultValue": "Medium",
+          "variantOptions": [
+            "Small",
+            "Medium",
+            "Large"
+          ],
+          "preferredValues": null
+        }
       },
       "nestedInstances": []
     },
@@ -22,8 +55,23 @@
       "key": "89f1fb2d4580116cea4be5d4ca340de216a27819",
       "variantCount": 4,
       "properties": {
-        "Label#6:4": { "type": "TEXT", "defaultValue": "Badge", "variantOptions": null, "preferredValues": null },
-        "Variant": { "type": "VARIANT", "defaultValue": "Info", "variantOptions": ["Info", "Success", "Warning", "Danger"], "preferredValues": null }
+        "Label#6:4": {
+          "type": "TEXT",
+          "defaultValue": "Badge",
+          "variantOptions": null,
+          "preferredValues": null
+        },
+        "Variant": {
+          "type": "VARIANT",
+          "defaultValue": "Info",
+          "variantOptions": [
+            "Info",
+            "Success",
+            "Warning",
+            "Danger"
+          ],
+          "preferredValues": null
+        }
       },
       "nestedInstances": []
     },
@@ -33,8 +81,21 @@
       "key": "b39059e770141b713f28ae1816be3ed756cd79da",
       "variantCount": 2,
       "properties": {
-        "Initials#2:12": { "type": "TEXT", "defaultValue": "AB", "variantOptions": null, "preferredValues": null },
-        "Size": { "type": "VARIANT", "defaultValue": "Small", "variantOptions": ["Small", "Medium"], "preferredValues": null }
+        "Initials#2:12": {
+          "type": "TEXT",
+          "defaultValue": "AB",
+          "variantOptions": null,
+          "preferredValues": null
+        },
+        "Size": {
+          "type": "VARIANT",
+          "defaultValue": "Small",
+          "variantOptions": [
+            "Small",
+            "Medium"
+          ],
+          "preferredValues": null
+        }
       },
       "nestedInstances": []
     },
@@ -44,15 +105,134 @@
       "key": "7cd7011e4f2374161cd212f02992c7fd0f899430",
       "variantCount": 1,
       "properties": {
-        "Title#2:13": { "type": "TEXT", "defaultValue": "Card title", "variantOptions": null, "preferredValues": null },
-        "Body#2:14": { "type": "INSTANCE_SWAP", "defaultValue": "2:26", "variantOptions": null, "preferredValues": [] },
-        "Actions#2:15": { "type": "INSTANCE_SWAP", "defaultValue": "2:26", "variantOptions": null, "preferredValues": [
-          { "type": "COMPONENT_SET", "key": "1b5d2a573f3f39404af396bdbe944a30ca0eaec3" },
-          { "type": "COMPONENT_SET", "key": "89f1fb2d4580116cea4be5d4ca340de216a27819" }
-        ] },
-        "Show Actions#2:16": { "type": "BOOLEAN", "defaultValue": true, "variantOptions": null, "preferredValues": null }
+        "Title#2:13": {
+          "type": "TEXT",
+          "defaultValue": "Card title",
+          "variantOptions": null,
+          "preferredValues": null
+        },
+        "Body#2:14": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "2:26",
+          "variantOptions": null,
+          "preferredValues": []
+        },
+        "Actions#2:15": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "2:26",
+          "variantOptions": null,
+          "preferredValues": [
+            {
+              "type": "COMPONENT_SET",
+              "key": "1b5d2a573f3f39404af396bdbe944a30ca0eaec3"
+            },
+            {
+              "type": "COMPONENT_SET",
+              "key": "89f1fb2d4580116cea4be5d4ca340de216a27819"
+            }
+          ]
+        },
+        "Show Actions#2:16": {
+          "type": "BOOLEAN",
+          "defaultValue": true,
+          "variantOptions": null,
+          "preferredValues": null
+        }
       },
-      "nestedInstances": ["Avatar", "Slot"]
+      "nestedInstances": [
+        "Avatar",
+        "Slot"
+      ]
+    },
+    {
+      "name": "TableCell",
+      "nodeId": "2:48",
+      "key": "b440cb0ab4bd83de2491b2302ab1ccb9c3e0f2d1",
+      "variantCount": 2,
+      "properties": {
+        "Content#2:19": {
+          "type": "TEXT",
+          "defaultValue": "Cell",
+          "variantOptions": null,
+          "preferredValues": null
+        },
+        "Density": {
+          "type": "VARIANT",
+          "defaultValue": "Comfortable",
+          "variantOptions": [
+            "Comfortable",
+            "Compact"
+          ],
+          "preferredValues": null
+        }
+      },
+      "nestedInstances": []
+    },
+    {
+      "name": "TableHeaderCell",
+      "nodeId": "2:53",
+      "key": "91bf99af47cb2e09190eed770012e9c99661294f",
+      "variantCount": 2,
+      "properties": {
+        "Label#2:22": {
+          "type": "TEXT",
+          "defaultValue": "Header",
+          "variantOptions": null,
+          "preferredValues": null
+        },
+        "Density": {
+          "type": "VARIANT",
+          "defaultValue": "Comfortable",
+          "variantOptions": [
+            "Comfortable",
+            "Compact"
+          ],
+          "preferredValues": null
+        }
+      },
+      "nestedInstances": []
+    },
+    {
+      "name": "TableRow",
+      "nodeId": "2:70",
+      "key": "2630a1f30455c0b4d906930e9b3815cc0437fe1f",
+      "variantCount": 2,
+      "properties": {
+        "State": {
+          "type": "VARIANT",
+          "defaultValue": "Default",
+          "variantOptions": [
+            "Default",
+            "Selected"
+          ],
+          "preferredValues": null
+        }
+      },
+      "nestedInstances": [
+        "TableCell"
+      ]
+    },
+    {
+      "name": "Table",
+      "nodeId": "2:154",
+      "key": "d3e8c9c378ea2fd072c2eb08545a30565fa77614",
+      "variantCount": 2,
+      "properties": {
+        "Density": {
+          "type": "VARIANT",
+          "defaultValue": "Comfortable",
+          "variantOptions": [
+            "Comfortable",
+            "Compact"
+          ],
+          "preferredValues": null
+        }
+      },
+      "nestedInstances": [
+        "TableHeaderCell",
+        "TableRow",
+        "TableCell"
+      ]
     }
   ]
 }
