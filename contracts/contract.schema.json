@@ -1,0 +1,307 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^ds\\.[a-z][a-z0-9-]*$"
+    },
+    "name": {
+      "type": "string"
+    },
+    "version": {
+      "type": "string"
+    },
+    "status": {
+      "default": "draft",
+      "type": "string",
+      "enum": [
+        "draft",
+        "stable",
+        "deprecated"
+      ]
+    },
+    "description": {
+      "type": "string"
+    },
+    "semantics": {
+      "type": "object",
+      "properties": {
+        "element": {
+          "type": "string",
+          "enum": [
+            "button",
+            "span",
+            "div",
+            "a",
+            "input"
+          ]
+        },
+        "role": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "element"
+      ]
+    },
+    "props": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "type": {
+            "anyOf": [
+              {
+                "type": "string",
+                "const": "boolean"
+              },
+              {
+                "type": "string",
+                "const": "text"
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "enum": {
+                    "minItems": 1,
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "required": [
+                  "enum"
+                ]
+              }
+            ]
+          },
+          "default": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "boolean"
+              }
+            ]
+          },
+          "bindings": {
+            "type": "object",
+            "properties": {
+              "figma": {
+                "type": "object",
+                "properties": {
+                  "kind": {
+                    "type": "string",
+                    "enum": [
+                      "VARIANT",
+                      "BOOLEAN",
+                      "TEXT",
+                      "INSTANCE_SWAP"
+                    ]
+                  },
+                  "property": {
+                    "type": "string"
+                  },
+                  "values": {
+                    "type": "object",
+                    "propertyNames": {
+                      "type": "string"
+                    },
+                    "additionalProperties": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "required": [
+                  "kind",
+                  "property"
+                ]
+              },
+              "code": {
+                "type": "object",
+                "properties": {
+                  "prop": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "prop"
+                ]
+              }
+            },
+            "required": [
+              "figma",
+              "code"
+            ]
+          }
+        },
+        "required": [
+          "name",
+          "type",
+          "bindings"
+        ]
+      }
+    },
+    "states": {
+      "default": [],
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "hover",
+          "focus-visible",
+          "disabled"
+        ]
+      }
+    },
+    "anatomy": {
+      "type": "object",
+      "propertyNames": {
+        "type": "string"
+      },
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "description": {
+            "type": "string"
+          },
+          "slot": {
+            "type": "boolean"
+          },
+          "optional": {
+            "type": "boolean"
+          },
+          "tokens": {
+            "type": "object",
+            "propertyNames": {
+              "type": "string"
+            },
+            "additionalProperties": {
+              "type": "string",
+              "pattern": "^\\{[a-z0-9.{}-]+\\}$"
+            }
+          },
+          "states": {
+            "type": "object",
+            "propertyNames": {
+              "type": "string"
+            },
+            "additionalProperties": {
+              "type": "object",
+              "propertyNames": {
+                "type": "string"
+              },
+              "additionalProperties": {
+                "type": "string",
+                "pattern": "^\\{[a-z0-9.{}-]+\\}$"
+              }
+            }
+          }
+        }
+      }
+    },
+    "a11y": {
+      "type": "object",
+      "properties": {
+        "focusVisible": {
+          "type": "boolean"
+        },
+        "minHitArea": {
+          "type": "number"
+        },
+        "contrast": {
+          "type": "string",
+          "enum": [
+            "AA",
+            "AAA"
+          ]
+        }
+      }
+    },
+    "anchors": {
+      "type": "object",
+      "properties": {
+        "figma": {
+          "type": "object",
+          "properties": {
+            "fileKey": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "componentSetKey": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "nodeId": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          },
+          "required": [
+            "fileKey",
+            "componentSetKey"
+          ]
+        },
+        "code": {
+          "type": "object",
+          "properties": {
+            "importPath": {
+              "type": "string"
+            },
+            "export": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "importPath",
+            "export"
+          ]
+        }
+      },
+      "required": [
+        "figma",
+        "code"
+      ]
+    }
+  },
+  "required": [
+    "id",
+    "name",
+    "version",
+    "description",
+    "semantics",
+    "props",
+    "anatomy",
+    "anchors"
+  ]
+}

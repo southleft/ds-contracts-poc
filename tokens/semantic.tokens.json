@@ -1,0 +1,45 @@
+{
+  "space": {
+    "inset-x": {
+      "$type": "dimension",
+      "sm": { "$value": "{space.150}" },
+      "md": { "$value": "{space.200}" },
+      "lg": { "$value": "{space.300}" }
+    },
+    "inset-y": {
+      "$type": "dimension",
+      "sm": { "$value": "{space.50}" },
+      "md": { "$value": "{space.100}" },
+      "lg": { "$value": "{space.150}" }
+    },
+    "gap": {
+      "$type": "dimension",
+      "control": { "$value": "{space.100}" }
+    }
+  },
+  "radius": {
+    "control": { "$type": "dimension", "$value": "{radius.200}" },
+    "badge": { "$type": "dimension", "$value": "{radius.pill}" }
+  },
+  "border": {
+    "width": {
+      "$type": "dimension",
+      "focus": { "$value": "{border-width.200}" }
+    }
+  },
+  "font": {
+    "control": {
+      "family": { "$type": "fontFamily", "$value": "{font.family.sans}" },
+      "weight": { "$type": "fontWeight", "$value": "{font.weight.medium}" },
+      "size": {
+        "$type": "dimension",
+        "sm": { "$value": "{font.size.200}" },
+        "md": { "$value": "{font.size.300}" },
+        "lg": { "$value": "{font.size.400}" }
+      }
+    },
+    "badge": {
+      "size": { "$type": "dimension", "$value": "{font.size.100}" }
+    }
+  }
+}

@@ -1,0 +1,73 @@
+# 5 · Figma Sync (Phases 2–3)
+
+How the same contracts that generate code will generate — and then continuously validate — the Figma side. Phase 2/3 are not built yet; this doc records the verified plan so anyone can pick it up. All tool capabilities below were verified against the [Figma Console MCP](https://docs.figma-console-mcp.southleft.com/) source (v1.33.x, July 2026).
+
+**Target file:** [DS Contracts POC](https://www.figma.com/design/8nim1d0IPnehMxA7B7SYxC/DS-Contracts-POC) (`fileKey: 8nim1d0IPnehMxA7B7SYxC`, already recorded in each contract's `anchors.figma`).
+
+## Bridge setup (one-time)
+
+The MCP talks to Figma through a **companion plugin over WebSocket** (ports 9223–9232), not Chrome DevTools — writes execute Plugin API JavaScript inside Figma's sandbox. This deliberately avoids the Variables **REST** API, which is Enterprise-plan-only; the Plugin API path works on any plan.
+
+1. Figma **Desktop** app (not web), with the target file open and edit access.
+2. Run the local MCP server (`npx -y figma-console-mcp@latest` registered in your MCP client) with a `FIGMA_ACCESS_TOKEN` (File content: read, Variables: read, Comments: read/write).
+3. In Figma: *Plugins → Development → Import plugin from manifest* → `~/.figma-console-mcp/plugin/manifest.json` (auto-copied on server start) → run **Figma Desktop Bridge**. Status should read `Local · ready`.
+4. Use the **local** server mode. The hosted/remote variant is read-only-ish, has fewer tools, and can't write token files to disk.
+
+⚠️ **Plan gate:** light + dark modes in one variable collection requires a **Professional+** file (Starter allows 1 mode per collection). Fallback on Starter: two collections (`Semantic Light` / `Semantic Dark`) — uglier, workable.
+
+## Phase 2 — contract → Figma generation
+
+### Tokens → variables
+
+| Step | Tool | Notes |
+|---|---|---|
+| Create **Primitives** collection (1 mode) + variables | `figma_setup_design_tokens` | Batches of ≤100 tokens; values keyed by mode *name*; hex colors auto-converted |
+| Create **Semantic** collection (Light/Dark) | `figma_setup_design_tokens` / `figma_create_variable_collection` + `figma_add_mode` | ≤4 modes per call |
+| Alias semantic → primitive per mode | `figma_execute` with `figma.variables.createVariableAlias()` | The alias graph must mirror the DTCG alias graph |
+| Set `codeSyntax.WEB` to the generated CSS var names (`var(--color-action-primary-background)`) | `figma_execute` (`variable.setVariableCodeSyntax`) | **Not** handled by the token tools — script it |
+| Set variable scopes | `figma_execute` (`variable.scopes`) | Also not round-tripped by the token pipeline |
+
+Known MCP limitations to design around (verified in source):
+
+- `figma_import_tokens` applies **value updates only** — creations, deletions, and alias re-targeting are *reported in its plan but not applied*. Creation must go through `figma_setup_design_tokens` / `figma_batch_create_variables`.
+- The MCP's DTCG dialect is hex-string colors / unit-string dimensions — which is exactly why `tokens/` uses that dialect (see [token pipeline](03-token-pipeline.md)).
+
+### Contracts → component sets
+
+No declarative "component set from contract" tool exists; the generator scripts the Plugin API via `figma_execute`:
+
+1. For each combination in the contract's variant matrix (enum props × values, e.g. 3 variants × 3 sizes): create a `COMPONENT` node named `Variant=Primary, Size=Medium` (using the **Figma-side spellings from `bindings.figma.values`**), auto-layout, padding/fills **bound to the semantic variables** created above (`setBoundVariable`) — never raw values.
+2. `figma.combineAsVariants(nodes, parent)` → the component set; variant property names come from the node names.
+3. `figma_add_component_property` for BOOLEAN (`Disabled`) and TEXT (`Label`) props per `bindings.figma`.
+4. `figma_arrange_component_set` for a readable grid; `figma_set_description` with the contract's `description`.
+5. Screenshot-verify (`figma_capture_screenshot`) and iterate — max 3 passes, per the MCP's own guidance.
+6. **Write back anchors:** the new component set key/nodeId → `anchors.figma` in the contract. From now on, parity matches by anchor, not name.
+
+Execution constraints: `figma_execute` is capped at 30s per call — generate one component set per call, not the whole library. Batch variable creation exists for a reason; use it.
+
+### Fidelity scope (say this out loud in demos)
+
+Phase 2 targets **structural fidelity**: correct variant matrix, property definitions, token/variable bindings, auto-layout basics. It does not target pixel-perfect visual artistry. The parity claim is about *structure and bindings*, which is what drifts and what breaks AI generation — not about taste, which stays human.
+
+## Phase 3 — the diagnostic loop
+
+Three extractors normalize each surface into contract-shaped data, then a three-way diff:
+
+| Extractor | Source | Via |
+|---|---|---|
+| `extract-figma` | Component set + variables | `figma_analyze_component_set` (variant axes, property definitions, per-variant diffs, slots) + `figma_get_component_for_development_deep` (bound variables resolved to token names) |
+| `extract-code` | Generated/edited React source | TS type introspection + the story files; trivial in this repo because code was generated from the contract |
+| the contract itself | `contracts/*.contract.json` | — |
+
+**Diff semantics:** `figma ⟷ contract` and `code ⟷ contract` (never `figma ⟷ code` directly). Each discrepancy is classified: side ahead of contract (→ propose contract patch = the promotion flow) or side behind contract (→ regenerate that side).
+
+The MCP's `figma_check_design_parity` tool is a useful accelerant here — note it takes a `codeSpec` you must construct (it does not read source files itself), compares spec-level structure (tokens, props/variants both directions, a11y, spacing/visuals vs the default variant), and returns scored discrepancies + per-side action items. Our contract makes constructing `codeSpec` nearly free.
+
+**The demo that settles the argument:** hand-add a `loading` prop in `Button.tsx` → parity flags code-ahead → accept the generated contract patch (PR) → regeneration sprouts a `Loading` boolean on the Figma component set. Then reverse: change `color.action.primary.background` (dark mode) in Figma → parity flags → token PR → CSS custom properties rebuild → Storybook reflects it. Both directions, one arbitration door.
+
+## Open items
+
+- [ ] Confirm the target file's plan tier supports 2 modes per collection.
+- [ ] Contract schema extension for composition/nesting (Card + Avatar) before generating container components.
+- [ ] Decide where extraction artifacts live (`parity/` directory, gitignored snapshots vs committed baselines).
+- [ ] Wire `figma_check_design_parity` scoring into CI once extraction is scripted.

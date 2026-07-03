@@ -1,0 +1,37 @@
+/* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/badge.contract.json (ds.badge v1.0.0)
+ * Regenerate with: npm run generate
+ */
+
+.root {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  padding-inline: var(--space-inset-x-sm);
+  padding-block: var(--space-inset-y-sm);
+  border-radius: var(--radius-badge);
+  font-family: var(--font-control-family);
+  font-weight: var(--font-control-weight);
+  font-size: var(--font-badge-size);
+}
+
+.variant-info {
+  background-color: var(--color-feedback-info-background);
+  color: var(--color-feedback-info-foreground);
+}
+
+.variant-success {
+  background-color: var(--color-feedback-success-background);
+  color: var(--color-feedback-success-foreground);
+}
+
+.variant-warning {
+  background-color: var(--color-feedback-warning-background);
+  color: var(--color-feedback-warning-foreground);
+}
+
+.variant-danger {
+  background-color: var(--color-feedback-danger-background);
+  color: var(--color-feedback-danger-foreground);
+}

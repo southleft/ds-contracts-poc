@@ -1,0 +1,7 @@
+/* Theme the preview canvas with the same semantic tokens the components use,
+   so the light/dark toolbar toggle exercises the full token pipeline. */
+body {
+  background: var(--color-surface-background);
+  color: var(--color-surface-foreground);
+  font-family: var(--font-control-family);
+}

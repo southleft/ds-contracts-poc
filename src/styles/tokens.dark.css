@@ -1,0 +1,27 @@
+/**
+ * GENERATED FILE — DO NOT EDIT.
+ * Source of truth: tokens/*.tokens.json — regenerate with: npm run tokens
+ */
+
+[data-theme="dark"] {
+  --color-surface-background: var(--color-gray-900);
+  --color-surface-foreground: var(--color-gray-100);
+  --color-action-primary-background: var(--color-blue-500);
+  --color-action-primary-background-hover: var(--color-blue-400);
+  --color-action-primary-foreground: var(--color-white);
+  --color-action-secondary-background: var(--color-gray-700);
+  --color-action-secondary-background-hover: var(--color-gray-600);
+  --color-action-secondary-foreground: var(--color-gray-100);
+  --color-action-danger-background: var(--color-red-500);
+  --color-action-danger-background-hover: var(--color-red-400);
+  --color-action-danger-foreground: var(--color-white);
+  --color-border-focus: var(--color-blue-300);
+  --color-feedback-info-background: var(--color-blue-900);
+  --color-feedback-info-foreground: var(--color-blue-100);
+  --color-feedback-success-background: var(--color-green-900);
+  --color-feedback-success-foreground: var(--color-green-100);
+  --color-feedback-warning-background: var(--color-amber-900);
+  --color-feedback-warning-foreground: var(--color-amber-100);
+  --color-feedback-danger-background: var(--color-red-900);
+  --color-feedback-danger-foreground: var(--color-red-100);
+}

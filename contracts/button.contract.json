@@ -1,0 +1,119 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "ds.button",
+  "name": "Button",
+  "version": "1.0.0",
+  "status": "draft",
+  "description": "Triggers an action or event. Use one primary button per context.",
+  "semantics": {
+    "element": "button",
+    "role": "button"
+  },
+  "props": [
+    {
+      "name": "variant",
+      "description": "Visual prominence of the action.",
+      "type": { "enum": ["primary", "secondary", "danger"] },
+      "default": "primary",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Variant",
+          "values": {
+            "primary": "Primary",
+            "secondary": "Secondary",
+            "danger": "Danger"
+          }
+        },
+        "code": { "prop": "variant" }
+      }
+    },
+    {
+      "name": "size",
+      "description": "Control density.",
+      "type": { "enum": ["sm", "md", "lg"] },
+      "default": "md",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Size",
+          "values": {
+            "sm": "Small",
+            "md": "Medium",
+            "lg": "Large"
+          }
+        },
+        "code": { "prop": "size" }
+      }
+    },
+    {
+      "name": "disabled",
+      "description": "Prevents interaction and communicates unavailability.",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": { "kind": "BOOLEAN", "property": "Disabled" },
+        "code": { "prop": "disabled" }
+      }
+    },
+    {
+      "name": "children",
+      "description": "Button label.",
+      "type": "text",
+      "default": "Button",
+      "bindings": {
+        "figma": { "kind": "TEXT", "property": "Label" },
+        "code": { "prop": "children" }
+      }
+    }
+  ],
+  "states": ["hover", "focus-visible", "disabled"],
+  "anatomy": {
+    "root": {
+      "tokens": {
+        "background-color": "{color.action.{variant}.background}",
+        "color": "{color.action.{variant}.foreground}",
+        "padding-inline": "{space.inset-x.{size}}",
+        "padding-block": "{space.inset-y.{size}}",
+        "border-radius": "{radius.control}",
+        "gap": "{space.gap.control}",
+        "font-family": "{font.control.family}",
+        "font-weight": "{font.control.weight}",
+        "font-size": "{font.control.size.{size}}"
+      },
+      "states": {
+        "hover": {
+          "background-color": "{color.action.{variant}.background-hover}"
+        },
+        "focus-visible": {
+          "outline-color": "{color.border.focus}",
+          "outline-width": "{border.width.focus}"
+        },
+        "disabled": {
+          "opacity": "{opacity.disabled}"
+        }
+      }
+    },
+    "icon": {
+      "description": "Optional leading icon.",
+      "slot": true,
+      "optional": true
+    }
+  },
+  "a11y": {
+    "focusVisible": true,
+    "minHitArea": 44,
+    "contrast": "AA"
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": "8nim1d0IPnehMxA7B7SYxC",
+      "componentSetKey": null,
+      "nodeId": null
+    },
+    "code": {
+      "importPath": "src/components/Button",
+      "export": "Button"
+    }
+  }
+}
