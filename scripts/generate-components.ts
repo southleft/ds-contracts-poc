@@ -226,6 +226,12 @@ function generateCss(contract: Contract, tokenInventory: Set<string>, errors: st
   const hasBorder = 'border-width' in rootTokens || 'border-color' in rootTokens;
   if (hasBorder) rootDecls.push('border-style: solid');
   else rootDecls.push('border: 0');
+  // Fluid components: a max-width binding means "fill available space up to
+  // the token" — components are never rigid (fixed `width` is reserved for
+  // genuinely fixed shapes like Avatar). min-width: fit-content keeps the
+  // component from collapsing below its content's floor (e.g. table cells'
+  // min-widths); containers narrower than that should scroll.
+  if ('max-width' in rootTokens) rootDecls.push('width: 100%', 'min-width: fit-content');
   if (contract.semantics.element === 'button') rootDecls.push('cursor: pointer');
 
   const enumRules = new Map<string, Map<string, string>>(); // class → decls

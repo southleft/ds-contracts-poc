@@ -1,0 +1,143 @@
+- generic [ref=f3e3]:
+  - complementary [ref=f3e4]:
+    - generic [ref=f3e5]:
+      - link "Contract Hub" [ref=f3e6] [cursor=pointer]:
+        - /url: "#/"
+      - paragraph [ref=f3e7]: The governed source, visualized
+    - navigation "Primary" [ref=f3e8]:
+      - link "Overview" [ref=f3e9] [cursor=pointer]:
+        - /url: "#/"
+      - link "Components" [ref=f3e10] [cursor=pointer]:
+        - /url: "#/components"
+      - link "Tokens" [ref=f3e11] [cursor=pointer]:
+        - /url: "#/tokens"
+      - link "Governance" [ref=f3e12] [cursor=pointer]:
+        - /url: "#/governance"
+      - link "Parity" [ref=f3e13] [cursor=pointer]:
+        - /url: "#/parity"
+    - generic [ref=f3e14]:
+      - text: ds-contracts-poc
+      - text: catalog v0.1.0
+  - generic [ref=f3e15]:
+    - banner [ref=f3e16]:
+      - generic [ref=f3e17]: Components
+      - generic [ref=f3e18]:
+        - generic [ref=f3e19]: catalog v0.1.0 · 8407354
+        - button "Dark mode" [ref=f3e20] [cursor=pointer]
+    - main [ref=f3e21]:
+      - generic [ref=f3e946]:
+        - generic [ref=f3e947]:
+          - heading "Components" [level=1] [ref=f3e948]
+          - paragraph [ref=f3e949]: This is the system's entire vocabulary — 10 concepts in the catalog, each governed by one contract that anchors both the React export and the Figma component set. Open any card to see the contract and both generated surfaces side by side.
+        - generic [ref=f3e950]:
+          - link "Avatar v1.0.0 Represents a person or entity with initials. Non-interactive. Code ✓ · Figma ✓ 1 prop · 0 named slots · text children" [ref=f3e951] [cursor=pointer]:
+            - /url: "#/components/ds.avatar"
+            - generic [ref=f3e952]:
+              - generic [ref=f3e953]: Avatar
+              - generic [ref=f3e954]:
+                - generic [ref=f3e955]: v1.0.0
+                - status [ref=f3e956]: draft
+            - paragraph [ref=f3e957]: Represents a person or entity with initials. Non-interactive.
+            - generic [ref=f3e958]:
+              - generic [ref=f3e959]: Code ✓ · Figma ✓
+              - generic [ref=f3e960]: 1 prop · 0 named slots · text children
+          - link "Badge v1.0.0 Communicates status or categorization at a glance. Non-interactive. Code ✓ · Figma ✓ 1 prop · 0 named slots · text children" [ref=f3e961] [cursor=pointer]:
+            - /url: "#/components/ds.badge"
+            - generic [ref=f3e962]:
+              - generic [ref=f3e963]: Badge
+              - generic [ref=f3e964]:
+                - generic [ref=f3e965]: v1.0.0
+                - status [ref=f3e966]: draft
+            - paragraph [ref=f3e967]: Communicates status or categorization at a glance. Non-interactive.
+            - generic [ref=f3e968]:
+              - generic [ref=f3e969]: Code ✓ · Figma ✓
+              - generic [ref=f3e970]: 1 prop · 0 named slots · text children
+          - link "Button v1.2.0 Triggers an action or event. Use one primary button per context. Code ✓ · Figma ✓ 4 props · 0 named slots · text children" [ref=f3e971] [cursor=pointer]:
+            - /url: "#/components/ds.button"
+            - generic [ref=f3e972]:
+              - generic [ref=f3e973]: Button
+              - generic [ref=f3e974]:
+                - generic [ref=f3e975]: v1.2.0
+                - status [ref=f3e976]: draft
+            - paragraph [ref=f3e977]: Triggers an action or event. Use one primary button per context.
+            - generic [ref=f3e978]:
+              - generic [ref=f3e979]: Code ✓ · Figma ✓
+              - generic [ref=f3e980]: 4 props · 0 named slots · text children
+          - link "Card v1.1.0 Groups related content behind one subject. Composes an Avatar, a bound title, a default body slot, and a constrained actions slot. Code ✓ · Figma ✓ 1 prop · 1 named slot · slot children" [ref=f3e981] [cursor=pointer]:
+            - /url: "#/components/ds.card"
+            - generic [ref=f3e982]:
+              - generic [ref=f3e983]: Card
+              - generic [ref=f3e984]:
+                - generic [ref=f3e985]: v1.1.0
+                - status [ref=f3e986]: draft
+            - paragraph [ref=f3e987]: Groups related content behind one subject. Composes an Avatar, a bound title, a default body slot, and a constrained actions slot.
+            - generic [ref=f3e988]:
+              - generic [ref=f3e989]: Code ✓ · Figma ✓
+              - generic [ref=f3e990]: 1 prop · 1 named slot · slot children
+          - 'link "Inline v1.0.0 Horizontal layout primitive — lays children out in a row with a token-governed gap, vertically centered. Code ✓ · Figma: native auto-layout 1 prop · 0 named slots · slot children" [ref=f3e991] [cursor=pointer]':
+            - /url: "#/components/ds.inline"
+            - generic [ref=f3e992]:
+              - generic [ref=f3e993]: Inline
+              - generic [ref=f3e994]:
+                - generic [ref=f3e995]: v1.0.0
+                - status [ref=f3e996]: draft
+            - paragraph [ref=f3e997]: Horizontal layout primitive — lays children out in a row with a token-governed gap, vertically centered.
+            - generic [ref=f3e998]:
+              - generic [ref=f3e999]: "Code ✓ · Figma: native auto-layout"
+              - generic [ref=f3e1000]: 1 prop · 0 named slots · slot children
+          - 'link "Stack v1.0.0 Vertical layout primitive — stacks children with a token-governed gap. Screens compose from Stack/Inline instead of raw styled divs. Code ✓ · Figma: native auto-layout 1 prop · 0 named slots · slot children" [ref=f3e1001] [cursor=pointer]':
+            - /url: "#/components/ds.stack"
+            - generic [ref=f3e1002]:
+              - generic [ref=f3e1003]: Stack
+              - generic [ref=f3e1004]:
+                - generic [ref=f3e1005]: v1.0.0
+                - status [ref=f3e1006]: draft
+            - paragraph [ref=f3e1007]: Vertical layout primitive — stacks children with a token-governed gap. Screens compose from Stack/Inline instead of raw styled divs.
+            - generic [ref=f3e1008]:
+              - generic [ref=f3e1009]: "Code ✓ · Figma: native auto-layout"
+              - generic [ref=f3e1010]: 1 prop · 0 named slots · slot children
+          - link "TableCell v1.1.0 A single data cell in a table row. Code ✓ · Figma ✓ 1 prop · 0 named slots · text children" [ref=f3e1011] [cursor=pointer]:
+            - /url: "#/components/ds.table-cell"
+            - generic [ref=f3e1012]:
+              - generic [ref=f3e1013]: TableCell
+              - generic [ref=f3e1014]:
+                - generic [ref=f3e1015]: v1.1.0
+                - status [ref=f3e1016]: draft
+            - paragraph [ref=f3e1017]: A single data cell in a table row.
+            - generic [ref=f3e1018]:
+              - generic [ref=f3e1019]: Code ✓ · Figma ✓
+              - generic [ref=f3e1020]: 1 prop · 0 named slots · text children
+          - link "TableHeaderCell v1.1.0 A column header cell. Code ✓ · Figma ✓ 1 prop · 0 named slots · text children" [ref=f3e1021] [cursor=pointer]:
+            - /url: "#/components/ds.table-header-cell"
+            - generic [ref=f3e1022]:
+              - generic [ref=f3e1023]: TableHeaderCell
+              - generic [ref=f3e1024]:
+                - generic [ref=f3e1025]: v1.1.0
+                - status [ref=f3e1026]: draft
+            - paragraph [ref=f3e1027]: A column header cell.
+            - generic [ref=f3e1028]:
+              - generic [ref=f3e1029]: Code ✓ · Figma ✓
+              - generic [ref=f3e1030]: 1 prop · 0 named slots · text children
+          - link "TableRow v1.1.0 A selectable row of table cells. Code ✓ · Figma ✓ 1 prop · 0 named slots · slot children" [ref=f3e1031] [cursor=pointer]:
+            - /url: "#/components/ds.table-row"
+            - generic [ref=f3e1032]:
+              - generic [ref=f3e1033]: TableRow
+              - generic [ref=f3e1034]:
+                - generic [ref=f3e1035]: v1.1.0
+                - status [ref=f3e1036]: draft
+            - paragraph [ref=f3e1037]: A selectable row of table cells.
+            - generic [ref=f3e1038]:
+              - generic [ref=f3e1039]: Code ✓ · Figma ✓
+              - generic [ref=f3e1040]: 1 prop · 0 named slots · slot children
+          - link "Table v1.1.0 Structured data in rows and columns. Composes header cells (with the Table's density mapped into them), and a body slot of rows. Code ✓ · Figma ✓ 1 prop · 0 named slots · slot children" [ref=f3e1041] [cursor=pointer]:
+            - /url: "#/components/ds.table"
+            - generic [ref=f3e1042]:
+              - generic [ref=f3e1043]: Table
+              - generic [ref=f3e1044]:
+                - generic [ref=f3e1045]: v1.1.0
+                - status [ref=f3e1046]: draft
+            - paragraph [ref=f3e1047]: Structured data in rows and columns. Composes header cells (with the Table's density mapped into them), and a body slot of rows.
+            - generic [ref=f3e1048]:
+              - generic [ref=f3e1049]: Code ✓ · Figma ✓
+              - generic [ref=f3e1050]: 1 prop · 0 named slots · slot children
+        - paragraph [ref=f3e1051]: "source: catalog/catalog.json"

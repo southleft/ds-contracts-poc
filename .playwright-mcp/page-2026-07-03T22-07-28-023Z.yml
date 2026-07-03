@@ -1,0 +1,213 @@
+- generic [ref=f3e3]:
+  - complementary [ref=f3e4]:
+    - generic [ref=f3e5]:
+      - link "Contract Hub" [ref=f3e6] [cursor=pointer]:
+        - /url: "#/"
+      - paragraph [ref=f3e7]: The governed source, visualized
+    - navigation "Primary" [ref=f3e8]:
+      - link "Overview" [ref=f3e9] [cursor=pointer]:
+        - /url: "#/"
+      - link "Components" [ref=f3e10] [cursor=pointer]:
+        - /url: "#/components"
+      - link "Tokens" [ref=f3e11] [cursor=pointer]:
+        - /url: "#/tokens"
+      - link "Governance" [ref=f3e12] [cursor=pointer]:
+        - /url: "#/governance"
+      - link "Parity" [ref=f3e13] [cursor=pointer]:
+        - /url: "#/parity"
+    - generic [ref=f3e14]:
+      - text: ds-contracts-poc
+      - text: catalog v0.1.0
+  - generic [ref=f3e15]:
+    - banner [ref=f3e16]:
+      - generic [ref=f3e17]: Governance
+      - generic [ref=f3e18]:
+        - generic [ref=f3e19]: catalog v0.1.0 · 8407354
+        - button "Dark mode" [ref=f3e20] [cursor=pointer]
+    - main [ref=f3e21]:
+      - generic [ref=f3e622]:
+        - generic [ref=f3e623]:
+          - heading "Governance" [level=1] [ref=f3e624]
+          - paragraph [ref=f3e625]: The org rules ship inside the catalog, so every consumer — human or agent — reads the same constitution. Deterministic rules are enforced by the judge; the rest guide the agent.
+        - generic [ref=f3e626]:
+          - heading "Org rules · 7" [level=2] [ref=f3e627]
+          - paragraph [ref=f3e628]: The rules every generated screen is held to — each one is either mechanically checkable (enforced by the judge) or advisory (guides the agent).
+          - generic [ref=f3e629]:
+            - generic [ref=f3e630]:
+              - generic [ref=f3e631]:
+                - generic [ref=f3e632]: components-from-catalog
+                - paragraph [ref=f3e633]: Every UI element comes from the catalog. Unknown components are gaps to report, never to invent.
+              - status [ref=f3e634]: deterministic
+            - generic [ref=f3e635]:
+              - generic [ref=f3e636]:
+                - generic [ref=f3e637]: tokens-only
+                - paragraph [ref=f3e638]: No literal colors or pixel values anywhere. All styling flows through design tokens (var(--…)) — and in screens, styling flows only through components.
+              - status [ref=f3e639]: deterministic
+            - generic [ref=f3e640]:
+              - generic [ref=f3e641]:
+                - generic [ref=f3e642]: no-raw-equivalents
+                - paragraph [ref=f3e643]: Never use raw HTML elements the system provides a component for.
+                - generic [ref=f3e644]:
+                  - generic [ref=f3e645]: <button>
+                  - generic [ref=f3e646]: <table>
+                  - generic [ref=f3e647]: <input>
+                  - generic [ref=f3e648]: <select>
+              - status [ref=f3e649]: deterministic
+            - generic [ref=f3e650]:
+              - generic [ref=f3e651]:
+                - generic [ref=f3e652]: no-style-overrides
+                - paragraph [ref=f3e653]: No className or style props on system components. If a component can't express it, that's a gap in the contract — report it.
+              - status [ref=f3e654]: deterministic
+            - generic [ref=f3e655]:
+              - generic [ref=f3e656]:
+                - generic [ref=f3e657]: one-primary-action
+                - paragraph [ref=f3e658]: At most one primary Button per screen.
+              - status [ref=f3e659]: deterministic
+            - generic [ref=f3e660]:
+              - generic [ref=f3e661]:
+                - generic [ref=f3e662]: layout-via-primitives
+                - paragraph [ref=f3e663]: Compose layout with Stack and Inline, not hand-styled wrappers.
+              - status [ref=f3e664]: deterministic
+            - generic [ref=f3e665]:
+              - generic [ref=f3e666]:
+                - generic [ref=f3e667]: avatars-are-people
+                - paragraph [ref=f3e668]: Avatars represent people or entities, never decoration.
+              - status [ref=f3e669]: guidance
+          - paragraph [ref=f3e670]: "source: catalog/catalog.json (compiled from context/rules.json)"
+        - generic [ref=f3e671]:
+          - heading "Judge playground" [level=2] [ref=f3e672]
+          - paragraph [ref=f3e673]: Paste any React screen below and score it against the catalog — the same deterministic judge that scored the A/B eval, run live against whatever you paste.
+          - textbox "Screen source to judge" [ref=f3e674]: "import { Button, Stack } from 'ds-contracts-poc'; export function Screen() { return ( <Stack gap=\"md\"> <Button variant=\"primary\">Save</Button> </Stack> ); }"
+          - button "Judge this screen" [ref=f3e676] [cursor=pointer]
+          - paragraph [ref=f3e677]: the judge parses the pasted source with the TypeScript compiler and checks every element and prop against catalog/catalog.json — no LLM, no rubric drift
+        - generic [ref=f3e678]:
+          - heading "Adherence per screen" [level=2] [ref=f3e679]
+          - paragraph [ref=f3e680]: Judge scores for the same 5 screens, generated with and without the governed catalog — the per-screen detail behind the Overview meters. Rendered with the system's own TableRow / TableCell components.
+          - table "Adherence per screen" [ref=f3e681]:
+            - row "Screen Governed Ungoverned" [ref=f3e682]:
+              - generic [ref=f3e683]:
+                - columnheader "Screen" [ref=f3e684]
+                - columnheader "Governed" [ref=f3e685]
+                - columnheader "Ungoverned" [ref=f3e686]
+            - row "account-overview 100 ✓ 68 · 31 violations" [ref=f3e687]:
+              - generic [ref=f3e688]:
+                - cell "account-overview" [ref=f3e689]
+                - cell "100 ✓" [ref=f3e690]
+                - cell "68 · 31 violations" [ref=f3e691]
+            - row "notification-center 100 ✓ 74 · 9 violations" [ref=f3e692]:
+              - generic [ref=f3e693]:
+                - cell "notification-center" [ref=f3e694]
+                - cell "100 ✓" [ref=f3e695]
+                - cell "74 · 9 violations" [ref=f3e696]
+            - row "pricing-section 100 ✓ 46 · 28 violations" [ref=f3e697]:
+              - generic [ref=f3e698]:
+                - cell "pricing-section" [ref=f3e699]
+                - cell "100 ✓" [ref=f3e700]
+                - cell "46 · 28 violations" [ref=f3e701]
+            - row "team-settings 100 ✓ 72 · 16 violations" [ref=f3e702]:
+              - generic [ref=f3e703]:
+                - cell "team-settings" [ref=f3e704]
+                - cell "100 ✓" [ref=f3e705]
+                - cell "72 · 16 violations" [ref=f3e706]
+            - row "user-directory 100 ✓ 83 · 7 violations" [ref=f3e707]:
+              - generic [ref=f3e708]:
+                - cell "user-directory" [ref=f3e709]
+                - cell "100 ✓" [ref=f3e710]
+                - cell "83 · 7 violations" [ref=f3e711]
+          - paragraph [ref=f3e712]: Governed mean 100 · Ungoverned mean 69 · 91 violations across 5 ungoverned screens
+          - paragraph [ref=f3e713]: "source: evals/adherence/results.json"
+        - generic [ref=f3e714]:
+          - heading "Eval suite · 26/26 passing" [level=2] [ref=f3e715]
+          - paragraph [ref=f3e716]: The PoC's core claims as falsifiable checks — each case runs the real pipeline in a scratch copy of the repo and asserts the exact expected behavior.
+          - generic [ref=f3e717]:
+            - generic [ref=f3e718]:
+              - heading "C1 — Determinism" [level=3] [ref=f3e719]
+              - list [ref=f3e720]:
+                - listitem [ref=f3e721]:
+                  - generic [ref=f3e722]: ✓
+                  - generic [ref=f3e723]: deterministic-regeneration
+            - generic [ref=f3e724]:
+              - heading "C2 — Refusal" [level=3] [ref=f3e725]
+              - list [ref=f3e726]:
+                - listitem [ref=f3e727]:
+                  - generic [ref=f3e728]: ✓
+                  - generic [ref=f3e729]: refuse-unknown-token-reference
+                - listitem [ref=f3e730]:
+                  - generic [ref=f3e731]: ✓
+                  - generic [ref=f3e732]: refuse-schema-invalid-contract
+                - listitem [ref=f3e733]:
+                  - generic [ref=f3e734]: ✓
+                  - generic [ref=f3e735]: refuse-incomplete-mode-set
+                - listitem [ref=f3e736]:
+                  - generic [ref=f3e737]: ✓
+                  - generic [ref=f3e738]: refuse-circular-dependency
+                - listitem [ref=f3e739]:
+                  - generic [ref=f3e740]: ✓
+                  - generic [ref=f3e741]: refuse-unknown-component-ref
+                - listitem [ref=f3e742]:
+                  - generic [ref=f3e743]: ✓
+                  - generic [ref=f3e744]: refuse-defaultContent-outside-accepts
+            - generic [ref=f3e745]:
+              - heading "C3 — Detection" [level=3] [ref=f3e746]
+              - list [ref=f3e747]:
+                - listitem [ref=f3e748]:
+                  - generic [ref=f3e749]: ✓
+                  - generic [ref=f3e750]: baseline-parity-clean
+                - listitem [ref=f3e751]:
+                  - generic [ref=f3e752]: ✓
+                  - generic [ref=f3e753]: detect-code-added-prop
+                - listitem [ref=f3e754]:
+                  - generic [ref=f3e755]: ✓
+                  - generic [ref=f3e756]: detect-code-removed-prop
+                - listitem [ref=f3e757]:
+                  - generic [ref=f3e758]: ✓
+                  - generic [ref=f3e759]: detect-code-enum-drift
+                - listitem [ref=f3e760]:
+                  - generic [ref=f3e761]: ✓
+                  - generic [ref=f3e762]: detect-code-default-drift
+                - listitem [ref=f3e763]:
+                  - generic [ref=f3e764]: ✓
+                  - generic [ref=f3e765]: detect-figma-missing-property
+                - listitem [ref=f3e766]:
+                  - generic [ref=f3e767]: ✓
+                  - generic [ref=f3e768]: detect-figma-extra-property
+                - listitem [ref=f3e769]:
+                  - generic [ref=f3e770]: ✓
+                  - generic [ref=f3e771]: detect-figma-variant-options-drift
+                - listitem [ref=f3e772]:
+                  - generic [ref=f3e773]: ✓
+                  - generic [ref=f3e774]: detect-token-alias-drift
+                - listitem [ref=f3e775]:
+                  - generic [ref=f3e776]: ✓
+                  - generic [ref=f3e777]: detect-token-missing-variable
+                - listitem [ref=f3e778]:
+                  - generic [ref=f3e779]: ✓
+                  - generic [ref=f3e780]: detect-token-extra-variable
+                - listitem [ref=f3e781]:
+                  - generic [ref=f3e782]: ✓
+                  - generic [ref=f3e783]: detect-figma-missing-slot-property
+                - listitem [ref=f3e784]:
+                  - generic [ref=f3e785]: ✓
+                  - generic [ref=f3e786]: detect-figma-missing-nested-instance
+                - listitem [ref=f3e787]:
+                  - generic [ref=f3e788]: ✓
+                  - generic [ref=f3e789]: detect-figma-accepts-drift
+                - listitem [ref=f3e790]:
+                  - generic [ref=f3e791]: ✓
+                  - generic [ref=f3e792]: detect-code-removed-slot-prop
+                - listitem [ref=f3e793]:
+                  - generic [ref=f3e794]: ✓
+                  - generic [ref=f3e795]: detect-figma-missing-multislot-content
+                - listitem [ref=f3e796]:
+                  - generic [ref=f3e797]: ✓
+                  - generic [ref=f3e798]: judge-passes-canonical-screen
+                - listitem [ref=f3e799]:
+                  - generic [ref=f3e800]: ✓
+                  - generic [ref=f3e801]: judge-catches-all-violation-classes
+            - generic [ref=f3e802]:
+              - heading "C4 — Convergence" [level=3] [ref=f3e803]
+              - list [ref=f3e804]:
+                - listitem [ref=f3e805]:
+                  - generic [ref=f3e806]: ✓
+                  - generic [ref=f3e807]: promotion-converges
+          - paragraph [ref=f3e808]: "source: evals/results.json"

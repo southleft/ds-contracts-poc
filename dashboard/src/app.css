@@ -42,6 +42,21 @@ a {
   color: var(--color-gray-400);
 }
 
+/* provenance micro-label — names the artifact a module's data is read from */
+.source-line {
+  margin: var(--space-100) 0 0;
+  font-size: var(--font-size-100);
+  color: var(--color-gray-600);
+}
+
+[data-theme='dark'] .source-line {
+  color: var(--color-gray-400);
+}
+
+.source-path {
+  word-break: break-word;
+}
+
 .micro {
   font-family: var(--font-control-family);
   font-size: var(--font-size-100);
@@ -464,7 +479,9 @@ a {
 .comp-card-badges {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   gap: var(--space-100);
+  min-width: 0;
 }
 
 .comp-card-desc {
@@ -821,11 +838,18 @@ a {
 
 .token-row {
   display: grid;
-  grid-template-columns: 96px minmax(220px, 1fr) minmax(180px, 1fr); /* preview column — no token */
+  /* preview + literal value columns — no token */
+  grid-template-columns: 96px 104px minmax(200px, 1fr) minmax(160px, 1fr);
   gap: var(--space-300);
   align-items: center;
   padding: var(--space-100) 0;
   border-bottom: var(--border-width-100) solid var(--color-border-subtle);
+}
+
+.token-value {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .token-preview {
@@ -859,6 +883,7 @@ a {
   height: var(--space-100);
   background: var(--color-action-primary-background);
   min-width: var(--border-width-200);
+  max-width: 100%; /* hard cap — a bar can never spill past its track */
 }
 
 .specimen {
@@ -1005,6 +1030,156 @@ a {
   font-size: var(--font-size-100);
 }
 
+/* ------------------------------------------------- dev controls (run/judge) */
+
+.run-controls {
+  display: flex;
+  align-items: center;
+  gap: var(--space-200);
+  flex-wrap: wrap;
+  font-size: var(--font-size-100);
+}
+
+.run-error {
+  color: var(--color-feedback-danger-foreground);
+  font-size: var(--font-size-100);
+}
+
+.run-output {
+  margin: 0;
+  padding: var(--space-200) var(--space-300);
+  background: var(--color-surface-sunken);
+  border: var(--border-width-100) solid var(--color-border-subtle);
+  border-left: 3px solid var(--color-action-primary-background); /* Carbon accent width — no 3px token exists */
+  font-size: var(--font-size-100);
+  line-height: 1.6;
+  white-space: pre-wrap;
+  word-break: break-word;
+  overflow-x: auto;
+  max-height: 420px; /* output viewport — no token */
+  overflow-y: auto;
+}
+
+.run-note {
+  margin: 0;
+  font-size: var(--font-size-100);
+  max-width: 640px;
+  line-height: 1.6;
+}
+
+.judge-input {
+  width: 100%;
+  max-width: 780px; /* editor width — no token */
+  padding: var(--space-200);
+  background: var(--color-surface-sunken);
+  color: var(--color-surface-foreground);
+  border: var(--border-width-100) solid var(--color-border-subtle);
+  border-radius: 0; /* keep the chrome square — override UA rounding */
+  font-size: var(--font-size-100);
+  line-height: 1.6;
+  resize: vertical;
+}
+
+.judge-input:focus-visible {
+  outline: var(--border-width-focus) solid var(--color-border-focus);
+  outline-offset: calc(-1 * var(--border-width-focus));
+}
+
+.judge-result {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-200);
+}
+
+.judge-score {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-200);
+  background: var(--color-surface-raised);
+  border: var(--border-width-100) solid var(--color-border-subtle);
+  border-left: 3px solid var(--color-action-primary-background); /* Carbon accent width — no 3px token exists */
+  padding: var(--space-200) var(--space-300);
+  width: fit-content;
+}
+
+.finding-row--judge {
+  grid-template-columns: auto 1fr;
+}
+
+/* -------------------------------------------------------- props playground */
+
+.playground {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-200);
+  margin-bottom: var(--space-200);
+}
+
+.playground .sub-label {
+  margin-top: 0;
+}
+
+.pg-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-200);
+  align-items: flex-end;
+}
+
+.pg-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-50);
+}
+
+.pg-field--check {
+  flex-direction: row;
+  align-items: center;
+  gap: var(--space-100);
+  padding-bottom: var(--space-100);
+}
+
+.pg-label {
+  font-size: var(--font-size-100);
+  color: var(--color-gray-600);
+}
+
+[data-theme='dark'] .pg-label {
+  color: var(--color-gray-400);
+}
+
+.pg-select,
+.pg-input {
+  background: var(--color-surface-sunken);
+  color: var(--color-surface-foreground);
+  border: var(--border-width-100) solid var(--color-border-subtle);
+  border-radius: 0; /* keep the chrome square — override UA rounding */
+  padding: var(--space-50) var(--space-100);
+  font-size: var(--font-size-100);
+}
+
+.pg-input {
+  width: 140px; /* control width — no token */
+}
+
+.pg-select:focus-visible,
+.pg-input:focus-visible {
+  outline: var(--border-width-focus) solid var(--color-border-focus);
+  outline-offset: calc(-1 * var(--border-width-focus));
+}
+
+.pg-stage {
+  border: var(--border-width-100) dashed var(--color-border-subtle);
+  background: var(--color-surface-background);
+  padding: var(--space-300);
+  overflow-x: auto;
+}
+
+.sample-caption {
+  margin: 0 0 var(--space-200);
+  font-size: var(--font-size-100);
+}
+
 /* ------------------------------------------------------------- responsive */
 
 @media (max-width: 860px) {
@@ -1060,7 +1235,7 @@ a {
   }
 
   .token-row {
-    grid-template-columns: 96px 1fr;
+    grid-template-columns: 96px 104px 1fr;
   }
 
   .token-figma {

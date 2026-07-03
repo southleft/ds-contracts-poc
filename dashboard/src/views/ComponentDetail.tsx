@@ -1,13 +1,16 @@
+import { useState } from 'react';
 import type { ReactNode } from 'react';
 import { Badge, Button } from '../../../src/components';
 import {
+  contractFilePath,
   figmaNodeUrl,
   figmaSetByName,
   findingsForComponent,
   getComponent,
 } from '../data';
-import type { AnatomyNode, CatalogProp } from '../data';
-import { renderSample } from '../samples';
+import type { AnatomyNode, CatalogProp, ComponentEntry } from '../data';
+import { renderSample, SAMPLE_TEXT } from '../samples';
+import { Source } from '../ui';
 
 function statusVariant(status: string): 'info' | 'success' | 'warning' | 'danger' {
   if (status === 'stable') return 'success';
@@ -42,6 +45,108 @@ function propTypeCell(prop: CatalogProp) {
     );
   }
   return <span className="mono">{prop.type}</span>;
+}
+
+/**
+ * Interactive props playground — controls are generated from the catalog
+ * entry itself (a select per enum prop, a checkbox per boolean, a text input
+ * for string props and text children) and drive the REAL component from
+ * src/components, re-rendered live on every change.
+ */
+function Playground({ component }: { component: ComponentEntry }) {
+  const [values, setValues] = useState<Record<string, unknown>>(() => {
+    const initial: Record<string, unknown> = {};
+    for (const prop of component.props) {
+      if (prop.default !== undefined) {
+        initial[prop.name] = prop.default;
+      } else if (Array.isArray(prop.type)) {
+        initial[prop.name] = prop.type[0];
+      } else if (prop.type === 'boolean') {
+        initial[prop.name] = false;
+      }
+    }
+    return initial;
+  });
+  const [childText, setChildText] = useState(SAMPLE_TEXT[component.name] ?? '');
+
+  const hasTextChildren = component.children.kind === 'text';
+  const setValue = (name: string, value: unknown) =>
+    setValues((previous) => ({ ...previous, [name]: value }));
+
+  // Omit empty string-prop values so component defaults apply.
+  const stageProps: Record<string, unknown> = {};
+  for (const [name, value] of Object.entries(values)) {
+    if (value === '' || value === undefined) continue;
+    stageProps[name] = value;
+  }
+
+  return (
+    <div className="playground">
+      <h3 className="micro sub-label">Playground</h3>
+      <div className="pg-controls">
+        {component.props.map((prop) => {
+          const controlId = `pg-${component.id}-${prop.name}`;
+          if (Array.isArray(prop.type)) {
+            return (
+              <label className="pg-field" key={prop.name} htmlFor={controlId}>
+                <span className="pg-label mono">{prop.name}</span>
+                <select
+                  id={controlId}
+                  className="pg-select mono"
+                  value={String(values[prop.name] ?? prop.type[0])}
+                  onChange={(event) => setValue(prop.name, event.target.value)}
+                >
+                  {prop.type.map((option) => (
+                    <option key={option} value={option}>
+                      {option}
+                    </option>
+                  ))}
+                </select>
+              </label>
+            );
+          }
+          if (prop.type === 'boolean') {
+            return (
+              <label className="pg-field pg-field--check" key={prop.name} htmlFor={controlId}>
+                <input
+                  id={controlId}
+                  type="checkbox"
+                  checked={Boolean(values[prop.name])}
+                  onChange={(event) => setValue(prop.name, event.target.checked)}
+                />
+                <span className="pg-label mono">{prop.name}</span>
+              </label>
+            );
+          }
+          return (
+            <label className="pg-field" key={prop.name} htmlFor={controlId}>
+              <span className="pg-label mono">{prop.name}</span>
+              <input
+                id={controlId}
+                className="pg-input mono"
+                type="text"
+                value={String(values[prop.name] ?? '')}
+                onChange={(event) => setValue(prop.name, event.target.value)}
+              />
+            </label>
+          );
+        })}
+        {hasTextChildren ? (
+          <label className="pg-field" htmlFor={`pg-${component.id}-children`}>
+            <span className="pg-label mono">children</span>
+            <input
+              id={`pg-${component.id}-children`}
+              className="pg-input mono"
+              type="text"
+              value={childText}
+              onChange={(event) => setChildText(event.target.value)}
+            />
+          </label>
+        ) : null}
+      </div>
+      <div className="pg-stage">{renderSample(component.name, stageProps, childText)}</div>
+    </div>
+  );
 }
 
 function AnatomyPart({ name, node }: { name: string; node: AnatomyNode }) {
@@ -156,12 +261,21 @@ export function ComponentDetail({ id }: { id: string }) {
             </code>
           ) : null}
         </div>
+        <p className="section-lede muted">
+          The three panels below show one component from three vantage points: both outer
+          surfaces are generated from the contract in the middle — neither is hand-maintained.
+        </p>
       </header>
 
       <div className="detail-grid">
         {/* ------------------------------------------------ Code surface */}
         <section className="panel">
           <h2 className="micro panel-title">Code surface</h2>
+          <Playground key={component.id} component={component} />
+          <p className="sample-caption muted">
+            sample content · components + tokens are real, rendered from src/components
+          </p>
+          <h3 className="micro sub-label">Matrix</h3>
           {rowProp ? (
             <p className="matrix-caption micro">
               {rowProp.name}
@@ -195,6 +309,7 @@ export function ComponentDetail({ id }: { id: string }) {
           <p className="judge-line muted">
             governed by contract <span className="mono">{component.id}</span> v{component.version}
           </p>
+          <Source path="src/components (live render) · catalog/catalog.json (prop space)" />
         </section>
 
         {/* ------------------------------------------ Contract (center) */}
@@ -315,6 +430,7 @@ export function ComponentDetail({ id }: { id: string }) {
               </div>
             </>
           ) : null}
+          <Source path={contractFilePath(component.id)} />
         </section>
 
         {/* ------------------------------------------------ Design surface */}
@@ -367,6 +483,7 @@ export function ComponentDetail({ id }: { id: string }) {
               </p>
             </div>
           )}
+          <Source path="parity/snapshots/figma-components.json" />
         </section>
       </div>
 
@@ -389,6 +506,7 @@ export function ComponentDetail({ id }: { id: string }) {
           ))}
         </div>
       )}
+      <Source path="parity/report.json" />
     </div>
   );
 }

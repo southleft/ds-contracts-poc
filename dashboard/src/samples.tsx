@@ -28,16 +28,32 @@ import type {
   TableRowProps,
 } from '../../src/components';
 
-export function renderSample(name: string, props: Record<string, unknown> = {}): ReactNode {
+/** Default text children per component, used when no override is supplied. */
+export const SAMPLE_TEXT: Record<string, string> = {
+  Avatar: 'AB',
+  Badge: 'Badge',
+  Button: 'Button',
+  TableCell: 'Cell',
+  TableHeaderCell: 'Header',
+};
+
+export function renderSample(
+  name: string,
+  props: Record<string, unknown> = {},
+  childText?: string,
+): ReactNode {
+  const text = (fallback: string) =>
+    childText !== undefined && childText !== '' ? childText : fallback;
+
   switch (name) {
     case 'Avatar':
-      return <Avatar {...(props as AvatarProps)}>AB</Avatar>;
+      return <Avatar {...(props as AvatarProps)}>{text('AB')}</Avatar>;
 
     case 'Badge':
-      return <Badge {...(props as BadgeProps)}>Badge</Badge>;
+      return <Badge {...(props as BadgeProps)}>{text('Badge')}</Badge>;
 
     case 'Button':
-      return <Button {...(props as ButtonProps)}>Button</Button>;
+      return <Button {...(props as ButtonProps)}>{text('Button')}</Button>;
 
     case 'Card': {
       const title = typeof props['title'] === 'string' ? (props['title'] as string) : 'Card title';
@@ -101,10 +117,12 @@ export function renderSample(name: string, props: Record<string, unknown> = {}):
       );
 
     case 'TableCell':
-      return <TableCell {...(props as TableCellProps)}>Cell</TableCell>;
+      return <TableCell {...(props as TableCellProps)}>{text('Cell')}</TableCell>;
 
     case 'TableHeaderCell':
-      return <TableHeaderCell {...(props as TableHeaderCellProps)}>Header</TableHeaderCell>;
+      return (
+        <TableHeaderCell {...(props as TableHeaderCellProps)}>{text('Header')}</TableHeaderCell>
+      );
 
     default:
       return <span className="muted">No sample available.</span>;

@@ -2,7 +2,7 @@
   "$schema": "./contract.schema.json",
   "id": "ds.table-cell",
   "name": "TableCell",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "status": "draft",
   "description": "A single data cell in a table row.",
   "semantics": {
@@ -59,12 +59,12 @@
         "align": "center"
       },
       "tokens": {
-        "width": "{size.table.cell-width}",
         "padding-inline": "{space.inset-x.sm}",
         "padding-block": "{space.table.cell-y.{density}}",
         "color": "{color.surface.foreground}",
         "font-family": "{font.control.family}",
-        "font-size": "{font.control.size.sm}"
+        "font-size": "{font.control.size.sm}",
+        "min-width": "{size.table.cell-width}"
       }
     }
   },

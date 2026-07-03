@@ -1,0 +1,217 @@
+- generic [ref=f3e3]:
+  - complementary [ref=f3e4]:
+    - generic [ref=f3e5]:
+      - link "Contract Hub" [ref=f3e6] [cursor=pointer]:
+        - /url: "#/"
+      - paragraph [ref=f3e7]: The governed source, visualized
+    - navigation "Primary" [ref=f3e8]:
+      - link "Overview" [ref=f3e9] [cursor=pointer]:
+        - /url: "#/"
+      - link "Components" [ref=f3e10] [cursor=pointer]:
+        - /url: "#/components"
+      - link "Tokens" [ref=f3e11] [cursor=pointer]:
+        - /url: "#/tokens"
+      - link "Governance" [ref=f3e12] [cursor=pointer]:
+        - /url: "#/governance"
+      - link "Parity" [ref=f3e13] [cursor=pointer]:
+        - /url: "#/parity"
+    - generic [ref=f3e14]:
+      - text: ds-contracts-poc
+      - text: catalog v0.1.0
+  - generic [ref=f3e15]:
+    - banner [ref=f3e16]:
+      - generic [ref=f3e17]: Components
+      - generic [ref=f3e18]:
+        - generic [ref=f3e19]: catalog v0.1.0 · 8407354
+        - button "Dark mode" [ref=f3e20] [cursor=pointer]
+    - main [ref=f3e21]:
+      - generic [ref=f3e423]:
+        - link "← Components" [ref=f3e424] [cursor=pointer]:
+          - /url: "#/components"
+        - generic [ref=f3e425]:
+          - generic [ref=f3e426]:
+            - heading "Button" [level=1] [ref=f3e427]
+            - generic [ref=f3e428]: ds.button
+            - generic [ref=f3e429]: v1.2.0
+            - status [ref=f3e430]: draft
+          - paragraph [ref=f3e431]: Triggers an action or event. Use one primary button per context.
+          - generic [ref=f3e432]:
+            - link "Open in Figma ↗" [ref=f3e433] [cursor=pointer]:
+              - /url: https://www.figma.com/design/8nim1d0IPnehMxA7B7SYxC/DS-Contracts-POC?node-id=5-21
+            - code [ref=f3e434]: "import { Button } from 'src/components/Button'"
+          - paragraph [ref=f3e435]: "The three panels below show one component from three vantage points: both outer surfaces are generated from the contract in the middle — neither is hand-maintained."
+        - generic [ref=f3e436]:
+          - generic [ref=f3e437]:
+            - heading "Code surface" [level=2] [ref=f3e438]
+            - generic [ref=f3e439]:
+              - heading "Playground" [level=3] [ref=f3e440]
+              - generic [ref=f3e441]:
+                - generic [ref=f3e442]:
+                  - generic [ref=f3e443]: variant
+                  - combobox "variant" [ref=f3e444]:
+                    - option "primary" [selected]
+                    - option "secondary"
+                    - option "danger"
+                - generic [ref=f3e445]:
+                  - generic [ref=f3e446]: size
+                  - combobox "size" [ref=f3e447]:
+                    - option "sm"
+                    - option "md" [selected]
+                    - option "lg"
+                - generic [ref=f3e448]:
+                  - checkbox "disabled" [ref=f3e449]
+                  - generic [ref=f3e450]: disabled
+                - generic [ref=f3e451]:
+                  - checkbox "loading" [ref=f3e452]
+                  - generic [ref=f3e453]: loading
+                - generic [ref=f3e454]:
+                  - generic [ref=f3e455]: children
+                  - textbox "children" [ref=f3e456]: Button
+              - button "Button" [ref=f3e458] [cursor=pointer]
+            - paragraph [ref=f3e459]: sample content · components + tokens are real, rendered from src/components
+            - heading "Matrix" [level=3] [ref=f3e460]
+            - paragraph [ref=f3e461]: variant × size
+            - generic [ref=f3e463]:
+              - generic [ref=f3e464]: sm
+              - generic [ref=f3e465]: md
+              - generic [ref=f3e466]: lg
+              - generic [ref=f3e467]: primary
+              - button "Button" [ref=f3e469] [cursor=pointer]
+              - button "Button" [ref=f3e471] [cursor=pointer]
+              - button "Button" [ref=f3e473] [cursor=pointer]
+              - generic [ref=f3e474]: secondary
+              - button "Button" [ref=f3e476] [cursor=pointer]
+              - button "Button" [ref=f3e478] [cursor=pointer]
+              - button "Button" [ref=f3e480] [cursor=pointer]
+              - generic [ref=f3e481]: danger
+              - button "Button" [ref=f3e483] [cursor=pointer]
+              - button "Button" [ref=f3e485] [cursor=pointer]
+              - button "Button" [ref=f3e487] [cursor=pointer]
+            - paragraph [ref=f3e488]: governed by contract ds.button v1.2.0
+            - paragraph [ref=f3e489]: "source: src/components (live render) · catalog/catalog.json (prop space)"
+          - generic [ref=f3e490]:
+            - heading "The contract (source of truth)" [level=2] [ref=f3e491]
+            - heading "Props" [level=3] [ref=f3e492]
+            - table [ref=f3e494]:
+              - rowgroup [ref=f3e495]:
+                - row "name type default required" [ref=f3e496]:
+                  - columnheader "name" [ref=f3e497]
+                  - columnheader "type" [ref=f3e498]
+                  - columnheader "default" [ref=f3e499]
+                  - columnheader "required" [ref=f3e500]
+              - rowgroup [ref=f3e501]:
+                - row "variant primary secondary danger primary —" [ref=f3e502]:
+                  - cell "variant" [ref=f3e503]
+                  - cell "primary secondary danger" [ref=f3e504]:
+                    - generic [ref=f3e505]:
+                      - generic [ref=f3e506]: primary
+                      - generic [ref=f3e507]: secondary
+                      - generic [ref=f3e508]: danger
+                  - cell "primary" [ref=f3e509]
+                  - cell "—" [ref=f3e510]
+                - row "size sm md lg md —" [ref=f3e511]:
+                  - cell "size" [ref=f3e512]
+                  - cell "sm md lg" [ref=f3e513]:
+                    - generic [ref=f3e514]:
+                      - generic [ref=f3e515]: sm
+                      - generic [ref=f3e516]: md
+                      - generic [ref=f3e517]: lg
+                  - cell "md" [ref=f3e518]
+                  - cell "—" [ref=f3e519]
+                - row "disabled boolean false —" [ref=f3e520]:
+                  - cell "disabled" [ref=f3e521]
+                  - cell "boolean" [ref=f3e522]
+                  - cell "false" [ref=f3e523]
+                  - cell "—" [ref=f3e524]
+                - row "loading boolean false —" [ref=f3e525]:
+                  - cell "loading" [ref=f3e526]
+                  - cell "boolean" [ref=f3e527]
+                  - cell "false" [ref=f3e528]
+                  - cell "—" [ref=f3e529]
+            - heading "Children & slots" [level=3] [ref=f3e530]
+            - generic [ref=f3e532]:
+              - generic [ref=f3e533]: children
+              - generic [ref=f3e535]: text
+            - heading "Anatomy token bindings" [level=3] [ref=f3e536]
+            - generic [ref=f3e538]:
+              - generic [ref=f3e539]: root
+              - generic [ref=f3e540]:
+                - generic [ref=f3e541]: background-color
+                - generic [ref=f3e542]: →
+                - generic [ref=f3e543]: "{color.action.{variant}.background}"
+              - generic [ref=f3e544]:
+                - generic [ref=f3e545]: color
+                - generic [ref=f3e546]: →
+                - generic [ref=f3e547]: "{color.action.{variant}.foreground}"
+              - generic [ref=f3e548]:
+                - generic [ref=f3e549]: padding-inline
+                - generic [ref=f3e550]: →
+                - generic [ref=f3e551]: "{space.inset-x.{size}}"
+              - generic [ref=f3e552]:
+                - generic [ref=f3e553]: padding-block
+                - generic [ref=f3e554]: →
+                - generic [ref=f3e555]: "{space.inset-y.{size}}"
+              - generic [ref=f3e556]:
+                - generic [ref=f3e557]: border-radius
+                - generic [ref=f3e558]: →
+                - generic [ref=f3e559]: "{radius.control}"
+              - generic [ref=f3e560]:
+                - generic [ref=f3e561]: gap
+                - generic [ref=f3e562]: →
+                - generic [ref=f3e563]: "{space.gap.control}"
+              - generic [ref=f3e564]:
+                - generic [ref=f3e565]: font-family
+                - generic [ref=f3e566]: →
+                - generic [ref=f3e567]: "{font.control.family}"
+              - generic [ref=f3e568]:
+                - generic [ref=f3e569]: font-weight
+                - generic [ref=f3e570]: →
+                - generic [ref=f3e571]: "{font.control.weight}"
+              - generic [ref=f3e572]:
+                - generic [ref=f3e573]: font-size
+                - generic [ref=f3e574]: →
+                - generic [ref=f3e575]: "{font.control.size.{size}}"
+            - heading "States" [level=3] [ref=f3e576]
+            - generic [ref=f3e577]:
+              - generic [ref=f3e578]: hover
+              - generic [ref=f3e579]: focus-visible
+              - generic [ref=f3e580]: disabled
+            - heading "Dual identity" [level=3] [ref=f3e581]
+            - generic [ref=f3e582]:
+              - generic [ref=f3e583]:
+                - generic [ref=f3e584]: Figma anchor
+                - generic "1b5d2a573f3f39404af396bdbe944a30ca0eaec3" [ref=f3e585]: set 1b5d2a573f3f…
+                - generic [ref=f3e586]: node 5:21
+              - generic [ref=f3e587]:
+                - generic [ref=f3e588]: Code anchor
+                - generic [ref=f3e589]: src/components/Button
+                - generic [ref=f3e590]: export Button
+            - paragraph [ref=f3e591]: "source: contracts/button.contract.json"
+          - generic [ref=f3e592]:
+            - heading "Design surface (Figma)" [level=2] [ref=f3e593]
+            - paragraph [ref=f3e594]:
+              - strong [ref=f3e595]: "9"
+              - text: variants published in the component set.
+            - generic [ref=f3e596]:
+              - generic [ref=f3e598]: Loading BOOLEAN
+              - generic [ref=f3e600]: Label TEXT
+              - generic [ref=f3e602]: Disabled BOOLEAN
+              - generic [ref=f3e603]:
+                - generic [ref=f3e604]: Variant VARIANT
+                - generic [ref=f3e605]:
+                  - generic [ref=f3e606]: Primary
+                  - generic [ref=f3e607]: Secondary
+                  - generic [ref=f3e608]: Danger
+              - generic [ref=f3e609]:
+                - generic [ref=f3e610]: Size VARIANT
+                - generic [ref=f3e611]:
+                  - generic [ref=f3e612]: Small
+                  - generic [ref=f3e613]: Medium
+                  - generic [ref=f3e614]: Large
+            - paragraph [ref=f3e615]: key 1b5d2a573f3f3940…
+            - link "Open in Figma" [ref=f3e616] [cursor=pointer]:
+              - /url: https://www.figma.com/design/8nim1d0IPnehMxA7B7SYxC/DS-Contracts-POC?node-id=5-21
+              - button "Open in Figma" [ref=f3e617]
+            - paragraph [ref=f3e618]: "source: parity/snapshots/figma-components.json"
+        - generic [ref=f3e619]: ✓ In parity — code, Figma, and tokens match contract ds.button v1.2.0
+        - paragraph [ref=f3e620]: "source: parity/report.json"

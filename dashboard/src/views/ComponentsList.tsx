@@ -1,6 +1,7 @@
 import { Badge } from '../../../src/components';
 import { components } from '../data';
 import type { ComponentEntry } from '../data';
+import { Source } from '../ui';
 
 function statusVariant(status: string): 'info' | 'success' | 'warning' | 'danger' {
   if (status === 'stable') return 'success';
@@ -20,8 +21,9 @@ export function ComponentsList() {
       <header className="page-head">
         <h1 className="page-title">Components</h1>
         <p className="page-lede">
-          {components.length} concepts in the catalog, each governed by one contract that anchors
-          both the React export and the Figma component set.
+          This is the system's entire vocabulary — {components.length} concepts in the catalog,
+          each governed by one contract that anchors both the React export and the Figma component
+          set. Open any card to see the contract and both generated surfaces side by side.
         </p>
       </header>
 
@@ -51,6 +53,7 @@ export function ComponentsList() {
           </a>
         ))}
       </div>
+      <Source path="catalog/catalog.json" />
     </div>
   );
 }

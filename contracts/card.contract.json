@@ -2,7 +2,7 @@
   "$schema": "./contract.schema.json",
   "id": "ds.card",
   "name": "Card",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "status": "draft",
   "description": "Groups related content behind one subject. Composes an Avatar, a bound title, a default body slot, and a constrained actions slot.",
   "semantics": {
@@ -35,11 +35,11 @@
         "align": "stretch"
       },
       "tokens": {
-        "width": "{size.card.width}",
         "background-color": "{color.surface.raised}",
         "border-color": "{color.border.subtle}",
         "border-width": "{border-width.100}",
-        "border-radius": "{radius.card}"
+        "border-radius": "{radius.card}",
+        "max-width": "{size.card.width}"
       },
       "parts": {
         "header": {

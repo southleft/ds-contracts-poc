@@ -373,6 +373,14 @@ function applyTokens(
       case 'width':
         spec.fixedWidth = { px: px(resolveLiteral(tokenPath)), varName };
         break;
+      case 'max-width':
+        // Fluid-up-to on the code side; a canvas component renders at its
+        // natural (max) width — the token still binds the dimension.
+        spec.fixedWidth = { px: px(resolveLiteral(tokenPath)), varName };
+        break;
+      case 'min-width':
+        spec.bindings = { ...spec.bindings, minWidth: varName };
+        break;
       case 'height':
         spec.fixedHeight = { px: px(resolveLiteral(tokenPath)), varName };
         break;

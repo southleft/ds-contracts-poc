@@ -2,7 +2,7 @@
   "$schema": "./contract.schema.json",
   "id": "ds.table",
   "name": "Table",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "status": "draft",
   "description": "Structured data in rows and columns. Composes header cells (with the Table's density mapped into them), and a body slot of rows.",
   "semantics": {
@@ -44,11 +44,11 @@
         "align": "stretch"
       },
       "tokens": {
-        "width": "{size.table.width}",
         "background-color": "{color.surface.raised}",
         "border-color": "{color.border.subtle}",
         "border-width": "{border-width.100}",
-        "border-radius": "{radius.card}"
+        "border-radius": "{radius.card}",
+        "max-width": "{size.table.width}"
       },
       "parts": {
         "header": {

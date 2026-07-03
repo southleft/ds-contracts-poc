@@ -1,6 +1,6 @@
 /**
  * GENERATED FILE — DO NOT EDIT.
- * Source of truth: contracts/table-header-cell.contract.json (ds.table-header-cell v1.0.0)
+ * Source of truth: contracts/table-header-cell.contract.json (ds.table-header-cell v1.1.0)
  * Regenerate with: npm run generate
  */
 import { forwardRef } from 'react';

@@ -1,0 +1,76 @@
+- generic [ref=f3e3]:
+  - complementary [ref=f3e4]:
+    - generic [ref=f3e5]:
+      - link "Contract Hub" [ref=f3e6] [cursor=pointer]:
+        - /url: "#/"
+      - paragraph [ref=f3e7]: The governed source, visualized
+    - navigation "Primary" [ref=f3e8]:
+      - link "Overview" [ref=f3e9] [cursor=pointer]:
+        - /url: "#/"
+      - link "Components" [ref=f3e10] [cursor=pointer]:
+        - /url: "#/components"
+      - link "Tokens" [ref=f3e11] [cursor=pointer]:
+        - /url: "#/tokens"
+      - link "Governance" [ref=f3e12] [cursor=pointer]:
+        - /url: "#/governance"
+      - link "Parity" [ref=f3e13] [cursor=pointer]:
+        - /url: "#/parity"
+    - generic [ref=f3e14]:
+      - text: ds-contracts-poc
+      - text: catalog v0.1.0
+  - generic [ref=f3e15]:
+    - banner [ref=f3e16]:
+      - generic [ref=f3e17]: Parity
+      - generic [ref=f3e18]:
+        - generic [ref=f3e19]: catalog v0.1.0 · 8407354
+        - button "Dark mode" [ref=f3e20] [cursor=pointer]
+    - main [ref=f3e21]:
+      - generic [ref=f3e813]:
+        - generic [ref=f3e814]:
+          - heading "Parity" [level=1] [ref=f3e815]
+          - paragraph [ref=f3e816]: "This page answers one question: do the shipped code and the published Figma library still match the contract? The parity check diffs both surfaces against the contract — never against each other. Last checked at commit 8407354."
+        - generic [ref=f3e817]:
+          - generic [ref=f3e818]: ✓
+          - generic [ref=f3e819]:
+            - paragraph [ref=f3e820]: Parity clean — code, Figma, and tokens all match the contract
+            - paragraph [ref=f3e821]: 10 contracts checked · 0 findings
+        - paragraph [ref=f3e822]: "source: parity/report.json"
+        - generic [ref=f3e823]:
+          - heading "Run it yourself" [level=2] [ref=f3e824]
+          - paragraph [ref=f3e825]: This button executes the actual parity differ in the repo, right now — nothing on this page is pre-recorded.
+          - generic [ref=f3e826]:
+            - button "Run parity check" [active] [ref=f3e827] [cursor=pointer]
+            - generic [ref=f3e859]: exit code 0
+          - generic [ref=f3e860]: ✔ Parity clean — code, Figma, and tokens all match the contract.
+          - paragraph [ref=f3e861]: this executed npm run parity against the repo — parity/report.json was rewritten and Vite hot-reloaded the data above
+        - generic [ref=f3e828]:
+          - heading "Checked contracts · 10" [level=2] [ref=f3e829]
+          - paragraph [ref=f3e830]: Every contract the differ verified on its last run — full coverage of the catalog, not a sample.
+          - generic [ref=f3e831]:
+            - generic [ref=f3e832]: ds.avatar@1.0.0
+            - generic [ref=f3e833]: ds.badge@1.0.0
+            - generic [ref=f3e834]: ds.button@1.2.0
+            - generic [ref=f3e835]: ds.card@1.1.0
+            - generic [ref=f3e836]: ds.inline@1.0.0
+            - generic [ref=f3e837]: ds.stack@1.0.0
+            - generic [ref=f3e838]: ds.table-cell@1.1.0
+            - generic [ref=f3e839]: ds.table-header-cell@1.1.0
+            - generic [ref=f3e840]: ds.table-row@1.1.0
+            - generic [ref=f3e841]: ds.table@1.1.0
+          - paragraph [ref=f3e842]: "source: parity/report.json"
+        - generic [ref=f3e843]:
+          - heading "How findings are classified" [level=2] [ref=f3e844]
+          - paragraph [ref=f3e845]: Every possible drift falls into one of three classes, and each class has exactly one prescribed remedy — so a finding is always actionable.
+          - generic [ref=f3e846]:
+            - generic [ref=f3e847]:
+              - status [ref=f3e848]: ahead
+              - paragraph [ref=f3e849]: A surface gained a capability the contract lacks.
+              - paragraph [ref=f3e850]: Propose a contract patch — the change is promoted, never synced sideways.
+            - generic [ref=f3e851]:
+              - status [ref=f3e852]: behind
+              - paragraph [ref=f3e853]: A surface is missing something the contract declares.
+              - paragraph [ref=f3e854]: Regenerate that surface from the contract.
+            - generic [ref=f3e855]:
+              - status [ref=f3e856]: mismatch
+              - paragraph [ref=f3e857]: The surfaces disagree with each other or with the contract.
+              - paragraph [ref=f3e858]: The contract is canonical — correct the surfaces to match it.

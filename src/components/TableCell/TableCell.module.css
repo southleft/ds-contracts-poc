@@ -1,5 +1,5 @@
 /* GENERATED FILE — DO NOT EDIT.
- * Source of truth: contracts/table-cell.contract.json (ds.table-cell v1.0.0)
+ * Source of truth: contracts/table-cell.contract.json (ds.table-cell v1.1.0)
  * Regenerate with: npm run generate
  */
 
@@ -8,11 +8,11 @@
   flex-direction: row;
   align-items: center;
   border: 0;
-  width: var(--size-table-cell-width);
   padding-inline: var(--space-inset-x-sm);
   color: var(--color-surface-foreground);
   font-family: var(--font-control-family);
   font-size: var(--font-control-size-sm);
+  min-width: var(--size-table-cell-width);
 }
 
 .density-comfortable {

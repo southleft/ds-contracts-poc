@@ -4,6 +4,7 @@
  * catalog, the raw contracts, and the parity / eval reports.
  */
 import catalogJson from '../../catalog/catalog.json';
+import accountOverviewRaw from '../../evals/adherence/arm-a/account-overview.tsx?raw';
 import parityJson from '../../parity/report.json';
 import evalsJson from '../../evals/results.json';
 import adherenceJson from '../../evals/adherence/results.json';
@@ -148,6 +149,11 @@ export function getComponent(id: string): ComponentEntry | undefined {
   return components.find((component) => component.id === id);
 }
 
+/** Repo path of the raw contract file backing a catalog id (ds.table-row → contracts/table-row.contract.json). */
+export function contractFilePath(id: string): string {
+  return `contracts/${id.replace(/^ds\./, '')}.contract.json`;
+}
+
 export const nativeComponentCount = components.filter(
   (component) => component.figma.representation === 'native',
 ).length;
@@ -238,6 +244,19 @@ export function evalsByClaim(): Map<string, EvalResult[]> {
   }
   return groups;
 }
+
+// ---------------------------------------------------------------------------
+// The reported GAP — extracted verbatim from the governed generator's actual
+// output (evals/adherence/arm-a/account-overview.tsx), not restated by hand.
+// ---------------------------------------------------------------------------
+
+function extractGapComment(source: string): string | undefined {
+  const match = /\{\/\*\s*(GAP:[\s\S]*?)\*\/\}/.exec(source);
+  return match ? match[1].replace(/\s+/g, ' ').trim() : undefined;
+}
+
+/** The `{/* GAP: … *\/}` comment as written by the generator, or undefined. */
+export const reportedGap = extractGapComment(accountOverviewRaw);
 
 // ---------------------------------------------------------------------------
 // Adherence A/B
