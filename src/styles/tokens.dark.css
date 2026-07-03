@@ -4,7 +4,7 @@
  */
 
 [data-theme="dark"] {
-  --color-surface-background: var(--color-gray-900);
+  --color-surface-background: var(--color-gray-800);
   --color-surface-foreground: var(--color-gray-100);
   --color-action-primary-background: var(--color-blue-500);
   --color-action-primary-background-hover: var(--color-blue-400);

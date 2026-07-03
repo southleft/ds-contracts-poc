@@ -277,9 +277,21 @@ function buildComponentScript(contract: Contract): string {
   const root = contract.anatomy.root;
   if (!root?.tokens) throw new Error(`${contract.id}: anatomy.root.tokens required`);
 
+  // Figma's default variant is POSITIONAL (top-left), so the contract-default
+  // combo must occupy row 0 / col 0: order each axis default-value-first.
+  const orderedValues = (p: { type: { enum: string[] }; default?: unknown }) => {
+    const values = [...p.type.enum];
+    const i = p.default !== undefined ? values.indexOf(String(p.default)) : -1;
+    if (i > 0) {
+      values.splice(i, 1);
+      values.unshift(String(p.default));
+    }
+    return values;
+  };
+
   const variants: VariantSpec[] = [];
-  const rowValues = rowProp ? rowProp.type.enum : [''];
-  const colValues = colProp ? colProp.type.enum : [''];
+  const rowValues = rowProp ? orderedValues(rowProp) : [''];
+  const colValues = colProp ? orderedValues(colProp) : [''];
 
   for (let r = 0; r < rowValues.length; r++) {
     for (let c = 0; c < colValues.length; c++) {
@@ -340,6 +352,13 @@ const LABEL_PROPERTY = ${JSON.stringify(textProp?.bindings.figma.property ?? 'La
 const BOOL_PROPS = ${JSON.stringify(boolPropsData)};
 const VARIANTS = ${JSON.stringify(variants, null, 2)};
 const COL_W = 220, ROW_H = 90, PAD = 40;
+
+// File guard: multi-file bridge routing has been observed to hit the wrong
+// file — never write without verifying the target.
+const EXPECTED_FILE_KEY = ${JSON.stringify(contract.anchors.figma.fileKey)};
+if (EXPECTED_FILE_KEY && figma.fileKey && figma.fileKey !== EXPECTED_FILE_KEY) {
+  throw new Error('WRONG FILE: expected ' + EXPECTED_FILE_KEY + ', got ' + figma.fileKey);
+}
 
 // Skip if the set already exists (idempotency guard).
 const existing = figma.currentPage.findOne(
@@ -426,11 +445,14 @@ const set = figma.combineAsVariants(comps, section);
 set.name = SET_NAME;
 set.description = DESCRIPTION;
 
-// Grid layout: rows × cols from the contract's variant matrix.
-for (let i = 0; i < set.children.length; i++) {
-  const spec = VARIANTS[i];
-  set.children[i].x = PAD + spec.col * COL_W;
-  set.children[i].y = PAD + spec.row * ROW_H;
+// Grid layout: rows × cols from the contract's variant matrix, matched by
+// name (child order after combineAsVariants is not guaranteed).
+const specByName = new Map(VARIANTS.map((s) => [s.name, s]));
+for (const child of set.children) {
+  const spec = specByName.get(child.name);
+  if (!spec) continue;
+  child.x = PAD + spec.col * COL_W;
+  child.y = PAD + spec.row * ROW_H;
 }
 let maxX = 0, maxY = 0;
 for (const child of set.children) {

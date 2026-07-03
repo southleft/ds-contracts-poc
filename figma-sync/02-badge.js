@@ -81,6 +81,13 @@ const VARIANTS = [
 ];
 const COL_W = 220, ROW_H = 90, PAD = 40;
 
+// File guard: multi-file bridge routing has been observed to hit the wrong
+// file — never write without verifying the target.
+const EXPECTED_FILE_KEY = "8nim1d0IPnehMxA7B7SYxC";
+if (EXPECTED_FILE_KEY && figma.fileKey && figma.fileKey !== EXPECTED_FILE_KEY) {
+  throw new Error('WRONG FILE: expected ' + EXPECTED_FILE_KEY + ', got ' + figma.fileKey);
+}
+
 // Skip if the set already exists (idempotency guard).
 const existing = figma.currentPage.findOne(
   (n) => n.type === 'COMPONENT_SET' && n.name === SET_NAME,
@@ -166,11 +173,14 @@ const set = figma.combineAsVariants(comps, section);
 set.name = SET_NAME;
 set.description = DESCRIPTION;
 
-// Grid layout: rows × cols from the contract's variant matrix.
-for (let i = 0; i < set.children.length; i++) {
-  const spec = VARIANTS[i];
-  set.children[i].x = PAD + spec.col * COL_W;
-  set.children[i].y = PAD + spec.row * ROW_H;
+// Grid layout: rows × cols from the contract's variant matrix, matched by
+// name (child order after combineAsVariants is not guaranteed).
+const specByName = new Map(VARIANTS.map((s) => [s.name, s]));
+for (const child of set.children) {
+  const spec = specByName.get(child.name);
+  if (!spec) continue;
+  child.x = PAD + spec.col * COL_W;
+  child.y = PAD + spec.row * ROW_H;
 }
 let maxX = 0, maxY = 0;
 for (const child of set.children) {

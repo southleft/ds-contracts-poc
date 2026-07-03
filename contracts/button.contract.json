@@ -2,7 +2,7 @@
   "$schema": "./contract.schema.json",
   "id": "ds.button",
   "name": "Button",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "status": "draft",
   "description": "Triggers an action or event. Use one primary button per context.",
   "semantics": {
@@ -74,6 +74,21 @@
         },
         "code": {
           "prop": "disabled"
+        }
+      }
+    },
+    {
+      "name": "loading",
+      "description": "Shows a busy indicator while an async action resolves.",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Loading"
+        },
+        "code": {
+          "prop": "loading"
         }
       }
     },

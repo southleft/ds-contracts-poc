@@ -56,6 +56,8 @@ Try the loop: edit `contracts/button.contract.json` (add a value to the `size` e
 | `src/styles/tokens*.css` | Generated CSS custom properties (`:root` + `[data-theme="dark"]`) | ❌ Generated |
 | `src/components/` | Generated components, styles, stories | ❌ Generated |
 | `.storybook/` | Storybook 10 config + theme (light/dark) toolbar | ✅ Yes |
+| `figma-sync/` | Generated Plugin API scripts (contract → Figma), transport-agnostic | ❌ Generated (`npm run figma:plan`) |
+| `parity/` | The diagnostic loop: extractors, three-way differ, snapshots | ✅ Yes (snapshots refreshed by tooling) |
 | `docs/` | The full documentation set — start at `01-architecture.md` | ✅ Yes |
 
 ## Documentation
@@ -64,10 +66,11 @@ Try the loop: edit `contracts/button.contract.json` (add a value to the `size` e
 2. [Contract specification](docs/02-contract-spec.md) — every field, with examples
 3. [Token pipeline](docs/03-token-pipeline.md) — DTCG dialect decisions, modes, the Style Dictionary build
 4. [Code generation](docs/04-code-generation.md) — what gets emitted and how to add a component
-5. [Figma sync (phases 2–3)](docs/05-figma-sync.md) — the MCP-driven design side and the parity loop
+5. [Figma sync](docs/05-figma-sync.md) — the MCP-driven design side: setup, generation, fidelity scope
+6. [The parity loop](docs/06-parity-loop.md) — drift detection, promotion flow, and the executed two-direction demo
 
-## Status
+## Status — all three phases executed
 
-**Phase 1 (this repo, working):** contract → code generation with token integrity checking, visualized in Storybook.
-**Phase 2 (planned):** contract → Figma generation (variables, component sets) via the Figma Console MCP. Target file: [DS Contracts POC](https://www.figma.com/design/8nim1d0IPnehMxA7B7SYxC/DS-Contracts-POC).
-**Phase 3 (planned):** bi-directional drift detection and contract promotion.
+**Phase 1 ✅** contract → code generation with token integrity checking, visualized in Storybook.
+**Phase 2 ✅** contract → Figma generation: variable collections (Light/Dark modes, aliases, scopes, codeSyntax) and component sets, in [DS Contracts POC](https://www.figma.com/design/8nim1d0IPnehMxA7B7SYxC/DS-Contracts-POC); anchors written back into the contracts.
+**Phase 3 ✅** the parity loop (`npm run parity`): three-way drift detection with promotion patches, proven in both directions — a hand-added code prop promoted into the contract and pushed to Figma, and a designer's Figma token change promoted into `tokens/` and rebuilt into CSS. See [docs/06-parity-loop.md](docs/06-parity-loop.md) for the evidence trail.

@@ -1,6 +1,6 @@
 /**
  * GENERATED FILE — DO NOT EDIT.
- * Source of truth: contracts/button.contract.json (ds.button v1.0.0)
+ * Source of truth: contracts/button.contract.json (ds.button v1.1.0)
  * Regenerate with: npm run generate
  */
 import type { Meta, StoryObj } from '@storybook/react-vite';
@@ -28,12 +28,17 @@ const meta = {
       control: 'boolean',
       description: 'Prevents interaction and communicates unavailability.',
     },
+    loading: {
+      control: 'boolean',
+      description: 'Shows a busy indicator while an async action resolves.',
+    },
     children: { control: 'text', description: 'Button label.' },
   },
   args: {
     variant: 'primary',
     size: 'md',
     disabled: false,
+    loading: false,
     children: 'Button',
   },
 } satisfies Meta<typeof Button>;

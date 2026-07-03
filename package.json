@@ -12,7 +12,8 @@
     "typecheck": "tsc --noEmit",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "figma:plan": "tsx scripts/generate-figma.ts"
+    "figma:plan": "tsx scripts/generate-figma.ts",
+    "parity": "tsx parity/diff.ts"
   },
   "engines": {
     "node": ">=20"

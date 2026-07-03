@@ -1,0 +1,70 @@
+{
+  "fileName": "DS Contracts POC",
+  "fileKey": "8nim1d0IPnehMxA7B7SYxC",
+  "sets": [
+    {
+      "name": "Button",
+      "nodeId": "5:21",
+      "key": "1b5d2a573f3f39404af396bdbe944a30ca0eaec3",
+      "variantCount": 9,
+      "properties": {
+        "Label#5:18": {
+          "type": "TEXT",
+          "defaultValue": "Button",
+          "variantOptions": null
+        },
+        "Disabled#5:19": {
+          "type": "BOOLEAN",
+          "defaultValue": false,
+          "variantOptions": null
+        },
+        "Variant": {
+          "type": "VARIANT",
+          "defaultValue": "Primary",
+          "variantOptions": [
+            "Primary",
+            "Secondary",
+            "Danger"
+          ]
+        },
+        "Size": {
+          "type": "VARIANT",
+          "defaultValue": "Medium",
+          "variantOptions": [
+            "Small",
+            "Medium",
+            "Large"
+          ]
+        },
+        "Loading#new": {
+          "type": "BOOLEAN",
+          "defaultValue": false,
+          "variantOptions": null
+        }
+      }
+    },
+    {
+      "name": "Badge",
+      "nodeId": "6:10",
+      "key": "89f1fb2d4580116cea4be5d4ca340de216a27819",
+      "variantCount": 4,
+      "properties": {
+        "Label#6:4": {
+          "type": "TEXT",
+          "defaultValue": "Badge",
+          "variantOptions": null
+        },
+        "Variant": {
+          "type": "VARIANT",
+          "defaultValue": "Info",
+          "variantOptions": [
+            "Info",
+            "Success",
+            "Warning",
+            "Danger"
+          ]
+        }
+      }
+    }
+  ]
+}
