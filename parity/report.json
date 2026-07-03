@@ -5,9 +5,11 @@
     "ds.badge@1.0.0",
     "ds.button@1.2.0",
     "ds.card@1.0.0",
+    "ds.inline@1.0.0",
+    "ds.stack@1.0.0",
     "ds.table-cell@1.0.0",
     "ds.table-header-cell@1.0.0",
-    "ds.table-row@1.0.0",
+    "ds.table-row@1.1.0",
     "ds.table@1.0.0"
   ]
 }

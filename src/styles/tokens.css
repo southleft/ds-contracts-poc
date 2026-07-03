@@ -70,6 +70,9 @@
   --space-inset-y-md: var(--space-100);
   --space-inset-y-lg: var(--space-150);
   --space-gap-control: var(--space-100);
+  --space-gap-sm: var(--space-100);
+  --space-gap-md: var(--space-200);
+  --space-gap-lg: var(--space-300);
   --space-table-cell-y-comfortable: var(--space-150);
   --space-table-cell-y-compact: var(--space-50);
   --radius-control: var(--radius-200);

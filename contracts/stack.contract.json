@@ -1,0 +1,64 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "ds.stack",
+  "name": "Stack",
+  "version": "1.0.0",
+  "status": "draft",
+  "description": "Vertical layout primitive — stacks children with a token-governed gap. Screens compose from Stack/Inline instead of raw styled divs.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "gap",
+      "description": "Space between children.",
+      "type": {
+        "enum": [
+          "sm",
+          "md",
+          "lg"
+        ]
+      },
+      "default": "md",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Gap",
+          "values": {
+            "sm": "Small",
+            "md": "Medium",
+            "lg": "Large"
+          }
+        },
+        "code": {
+          "prop": "gap"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "flex",
+        "direction": "column",
+        "align": "stretch"
+      },
+      "tokens": {
+        "gap": "{space.gap.{gap}}"
+      }
+    }
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": "8nim1d0IPnehMxA7B7SYxC",
+      "componentSetKey": null,
+      "nodeId": null
+    },
+    "code": {
+      "importPath": "src/components/Stack",
+      "export": "Stack"
+    }
+  },
+  "figmaRepresentation": "native"
+}

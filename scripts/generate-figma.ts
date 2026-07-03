@@ -882,6 +882,7 @@ const byId = new Map(contracts.map((c) => [c.id, c]));
 let index = 2;
 const emitted = ['01-tokens.js'];
 for (const contract of ordered) {
+  if (contract.figmaRepresentation === 'native') continue; // maps to native canvas capability
   const outName = `${String(index).padStart(2, '0')}-${contract.name.toLowerCase()}.js`;
   writeFileSync(path.join(OUT, outName), buildComponentScript(contract, byId));
   emitted.push(outName);

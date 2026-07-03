@@ -1,0 +1,41 @@
+{
+  "description": "Org-authored rules — the Figma Context stand-in. Every generating surface reads these before producing output. Rules with enforcement 'judge' are checked deterministically by parity/judge.ts; 'agent' rules guide generation and are reviewed by humans.",
+  "rules": [
+    {
+      "id": "components-from-catalog",
+      "statement": "Every UI element comes from the catalog. Unknown components are gaps to report, never to invent.",
+      "enforcement": "judge"
+    },
+    {
+      "id": "tokens-only",
+      "statement": "No literal colors or pixel values anywhere. All styling flows through design tokens (var(--…)) — and in screens, styling flows only through components.",
+      "enforcement": "judge"
+    },
+    {
+      "id": "no-raw-equivalents",
+      "statement": "Never use raw HTML elements the system provides a component for.",
+      "forbiddenRawElements": ["button", "table", "input", "select"],
+      "enforcement": "judge"
+    },
+    {
+      "id": "no-style-overrides",
+      "statement": "No className or style props on system components. If a component can't express it, that's a gap in the contract — report it.",
+      "enforcement": "judge"
+    },
+    {
+      "id": "one-primary-action",
+      "statement": "At most one primary Button per screen.",
+      "enforcement": "judge"
+    },
+    {
+      "id": "layout-via-primitives",
+      "statement": "Compose layout with Stack and Inline, not hand-styled wrappers.",
+      "enforcement": "judge"
+    },
+    {
+      "id": "avatars-are-people",
+      "statement": "Avatars represent people or entities, never decoration.",
+      "enforcement": "agent"
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "reports": [
+    {
+      "file": "evals/adherence/arm-a/account-overview.tsx",
+      "elements": 31,
+      "checks": 85,
+      "violations": [],
+      "score": 100,
+      "adherent": true
+    },
+    {
+      "file": "evals/adherence/arm-a/notification-center.tsx",
+      "elements": 10,
+      "checks": 37,
+      "violations": [],
+      "score": 100,
+      "adherent": true
+    },
+    {
+      "file": "evals/adherence/arm-a/pricing-section.tsx",
+      "elements": 8,
+      "checks": 26,
+      "violations": [],
+      "score": 100,
+      "adherent": true
+    },
+    {
+      "file": "evals/adherence/arm-a/team-settings.tsx",
+      "elements": 17,
+      "checks": 42,
+      "violations": [],
+      "score": 100,
+      "adherent": true
+    },
+    {
+      "file": "evals/adherence/arm-a/user-directory.tsx",
+      "elements": 24,
+      "checks": 63,
+      "violations": [],
+      "score": 100,
+      "adherent": true
+    }
+  ]
+}

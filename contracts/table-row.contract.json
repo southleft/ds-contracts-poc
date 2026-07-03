@@ -2,7 +2,7 @@
   "$schema": "./contract.schema.json",
   "id": "ds.table-row",
   "name": "TableRow",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "status": "draft",
   "description": "A selectable row of table cells.",
   "semantics": {
@@ -58,7 +58,8 @@
             "figmaProperty": "Cells",
             "required": true,
             "accepts": [
-              "ds.table-cell"
+              "ds.table-cell",
+              "ds.table-header-cell"
             ],
             "defaultContent": [
               {

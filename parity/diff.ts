@@ -207,6 +207,7 @@ const normalizeFigmaProps = (set: FigmaSet) => {
 };
 
 for (const contract of contracts) {
+  if (contract.figmaRepresentation === 'native') continue; // no Figma component expected
   const anchorKey = contract.anchors.figma.componentSetKey;
   const set =
     figmaComponents.sets.find((s) => anchorKey && s.key === anchorKey) ??

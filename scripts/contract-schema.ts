@@ -174,6 +174,12 @@ export const ContractSchema = z.object({
   }),
   props: z.array(PropSchema),
   states: z.array(z.enum(['hover', 'focus-visible', 'disabled'])).default([]),
+  /** How this contract manifests in Figma. 'component' (default) generates a
+   *  component (set). 'native' means the concept maps to a native canvas
+   *  capability (e.g. layout primitives ARE auto-layout) — no Figma component
+   *  is generated and parity does not expect one; the code surface is still
+   *  fully generated and checked. */
+  figmaRepresentation: z.enum(['component', 'native']).optional(),
   anatomy: z.record(z.string(), PartSchema),
   a11y: z
     .object({

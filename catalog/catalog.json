@@ -1,0 +1,561 @@
+{
+  "system": {
+    "name": "DS Contracts POC",
+    "catalogVersion": "0.1.0",
+    "gitCommit": "d423625",
+    "source": "Compiled from contracts/*.contract.json + tokens/ + context/rules.json — do not edit."
+  },
+  "package": {
+    "name": "ds-contracts-poc",
+    "usage": "import { Button, Card, Table } from 'ds-contracts-poc'; import 'ds-contracts-poc/styles.css';",
+    "stylesheet": "ds-contracts-poc/styles.css"
+  },
+  "rules": [
+    {
+      "id": "components-from-catalog",
+      "statement": "Every UI element comes from the catalog. Unknown components are gaps to report, never to invent.",
+      "enforcement": "judge"
+    },
+    {
+      "id": "tokens-only",
+      "statement": "No literal colors or pixel values anywhere. All styling flows through design tokens (var(--…)) — and in screens, styling flows only through components.",
+      "enforcement": "judge"
+    },
+    {
+      "id": "no-raw-equivalents",
+      "statement": "Never use raw HTML elements the system provides a component for.",
+      "forbiddenRawElements": [
+        "button",
+        "table",
+        "input",
+        "select"
+      ],
+      "enforcement": "judge"
+    },
+    {
+      "id": "no-style-overrides",
+      "statement": "No className or style props on system components. If a component can't express it, that's a gap in the contract — report it.",
+      "enforcement": "judge"
+    },
+    {
+      "id": "one-primary-action",
+      "statement": "At most one primary Button per screen.",
+      "enforcement": "judge"
+    },
+    {
+      "id": "layout-via-primitives",
+      "statement": "Compose layout with Stack and Inline, not hand-styled wrappers.",
+      "enforcement": "judge"
+    },
+    {
+      "id": "avatars-are-people",
+      "statement": "Avatars represent people or entities, never decoration.",
+      "enforcement": "agent"
+    }
+  ],
+  "tokens": {
+    "guidance": "Screens should not need tokens directly — styling flows through components. Where a token is unavoidable, use var(--…) with a name from this list, preferring semantic names.",
+    "semanticCssVariables": [
+      "--space-inset-x-sm",
+      "--space-inset-x-md",
+      "--space-inset-x-lg",
+      "--space-inset-y-sm",
+      "--space-inset-y-md",
+      "--space-inset-y-lg",
+      "--space-gap-control",
+      "--space-gap-sm",
+      "--space-gap-md",
+      "--space-gap-lg",
+      "--space-table-cell-y-comfortable",
+      "--space-table-cell-y-compact",
+      "--radius-control",
+      "--radius-badge",
+      "--radius-card",
+      "--radius-avatar",
+      "--size-avatar-sm",
+      "--size-avatar-md",
+      "--size-card-width",
+      "--size-table-width",
+      "--size-table-cell-width",
+      "--border-width-focus",
+      "--font-control-family",
+      "--font-control-weight",
+      "--font-control-size-sm",
+      "--font-control-size-md",
+      "--font-control-size-lg",
+      "--font-badge-size",
+      "--font-title-size",
+      "--font-title-weight",
+      "--font-avatar-size-sm",
+      "--font-avatar-size-md",
+      "--color-surface-background",
+      "--color-surface-foreground",
+      "--color-surface-raised",
+      "--color-surface-sunken",
+      "--color-action-primary-background",
+      "--color-action-primary-background-hover",
+      "--color-action-primary-foreground",
+      "--color-action-secondary-background",
+      "--color-action-secondary-background-hover",
+      "--color-action-secondary-foreground",
+      "--color-action-danger-background",
+      "--color-action-danger-background-hover",
+      "--color-action-danger-foreground",
+      "--color-border-focus",
+      "--color-border-subtle",
+      "--color-feedback-info-background",
+      "--color-feedback-info-foreground",
+      "--color-feedback-success-background",
+      "--color-feedback-success-foreground",
+      "--color-feedback-warning-background",
+      "--color-feedback-warning-foreground",
+      "--color-feedback-danger-background",
+      "--color-feedback-danger-foreground",
+      "--color-identity-background",
+      "--color-identity-foreground",
+      "--color-table-row-default",
+      "--color-table-row-selected"
+    ],
+    "allCssVariables": [
+      "--color-white",
+      "--color-black",
+      "--color-gray-50",
+      "--color-gray-100",
+      "--color-gray-200",
+      "--color-gray-300",
+      "--color-gray-400",
+      "--color-gray-500",
+      "--color-gray-600",
+      "--color-gray-700",
+      "--color-gray-800",
+      "--color-gray-900",
+      "--color-blue-100",
+      "--color-blue-300",
+      "--color-blue-400",
+      "--color-blue-500",
+      "--color-blue-600",
+      "--color-blue-700",
+      "--color-blue-900",
+      "--color-red-100",
+      "--color-red-300",
+      "--color-red-400",
+      "--color-red-500",
+      "--color-red-600",
+      "--color-red-700",
+      "--color-red-900",
+      "--color-green-100",
+      "--color-green-500",
+      "--color-green-600",
+      "--color-green-700",
+      "--color-green-900",
+      "--color-amber-100",
+      "--color-amber-500",
+      "--color-amber-600",
+      "--color-amber-700",
+      "--color-amber-900",
+      "--space-50",
+      "--space-100",
+      "--space-150",
+      "--space-200",
+      "--space-300",
+      "--space-400",
+      "--radius-100",
+      "--radius-200",
+      "--radius-pill",
+      "--border-width-100",
+      "--border-width-200",
+      "--container-sm",
+      "--container-xs",
+      "--container-md",
+      "--font-family-sans",
+      "--font-size-100",
+      "--font-size-200",
+      "--font-size-300",
+      "--font-size-400",
+      "--font-weight-regular",
+      "--font-weight-medium",
+      "--font-weight-semibold",
+      "--opacity-disabled",
+      "--space-inset-x-sm",
+      "--space-inset-x-md",
+      "--space-inset-x-lg",
+      "--space-inset-y-sm",
+      "--space-inset-y-md",
+      "--space-inset-y-lg",
+      "--space-gap-control",
+      "--space-gap-sm",
+      "--space-gap-md",
+      "--space-gap-lg",
+      "--space-table-cell-y-comfortable",
+      "--space-table-cell-y-compact",
+      "--radius-control",
+      "--radius-badge",
+      "--radius-card",
+      "--radius-avatar",
+      "--size-avatar-sm",
+      "--size-avatar-md",
+      "--size-card-width",
+      "--size-table-width",
+      "--size-table-cell-width",
+      "--border-width-focus",
+      "--font-control-family",
+      "--font-control-weight",
+      "--font-control-size-sm",
+      "--font-control-size-md",
+      "--font-control-size-lg",
+      "--font-badge-size",
+      "--font-title-size",
+      "--font-title-weight",
+      "--font-avatar-size-sm",
+      "--font-avatar-size-md",
+      "--color-surface-background",
+      "--color-surface-foreground",
+      "--color-surface-raised",
+      "--color-surface-sunken",
+      "--color-action-primary-background",
+      "--color-action-primary-background-hover",
+      "--color-action-primary-foreground",
+      "--color-action-secondary-background",
+      "--color-action-secondary-background-hover",
+      "--color-action-secondary-foreground",
+      "--color-action-danger-background",
+      "--color-action-danger-background-hover",
+      "--color-action-danger-foreground",
+      "--color-border-focus",
+      "--color-border-subtle",
+      "--color-feedback-info-background",
+      "--color-feedback-info-foreground",
+      "--color-feedback-success-background",
+      "--color-feedback-success-foreground",
+      "--color-feedback-warning-background",
+      "--color-feedback-warning-foreground",
+      "--color-feedback-danger-background",
+      "--color-feedback-danger-foreground",
+      "--color-identity-background",
+      "--color-identity-foreground",
+      "--color-table-row-default",
+      "--color-table-row-selected"
+    ]
+  },
+  "components": [
+    {
+      "id": "ds.avatar",
+      "name": "Avatar",
+      "version": "1.0.0",
+      "status": "draft",
+      "description": "Represents a person or entity with initials. Non-interactive.",
+      "figma": {
+        "representation": "component",
+        "componentSetKey": "b39059e770141b713f28ae1816be3ed756cd79da"
+      },
+      "props": [
+        {
+          "name": "size",
+          "type": [
+            "sm",
+            "md"
+          ],
+          "default": "sm",
+          "description": "Avatar diameter."
+        }
+      ],
+      "children": {
+        "kind": "text",
+        "description": "Initials (1–2 characters)."
+      },
+      "slots": []
+    },
+    {
+      "id": "ds.badge",
+      "name": "Badge",
+      "version": "1.0.0",
+      "status": "draft",
+      "description": "Communicates status or categorization at a glance. Non-interactive.",
+      "figma": {
+        "representation": "component",
+        "componentSetKey": "89f1fb2d4580116cea4be5d4ca340de216a27819"
+      },
+      "props": [
+        {
+          "name": "variant",
+          "type": [
+            "info",
+            "success",
+            "warning",
+            "danger"
+          ],
+          "default": "info",
+          "description": "The feedback tone being communicated."
+        }
+      ],
+      "children": {
+        "kind": "text",
+        "description": "Badge label."
+      },
+      "slots": []
+    },
+    {
+      "id": "ds.button",
+      "name": "Button",
+      "version": "1.2.0",
+      "status": "draft",
+      "description": "Triggers an action or event. Use one primary button per context.",
+      "figma": {
+        "representation": "component",
+        "componentSetKey": "1b5d2a573f3f39404af396bdbe944a30ca0eaec3"
+      },
+      "props": [
+        {
+          "name": "variant",
+          "type": [
+            "primary",
+            "secondary",
+            "danger"
+          ],
+          "default": "primary",
+          "description": "Visual prominence of the action."
+        },
+        {
+          "name": "size",
+          "type": [
+            "sm",
+            "md",
+            "lg"
+          ],
+          "default": "md",
+          "description": "Control density."
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "default": false,
+          "description": "Prevents interaction and communicates unavailability."
+        },
+        {
+          "name": "loading",
+          "type": "boolean",
+          "default": false,
+          "description": "Shows a busy indicator while an async action resolves."
+        }
+      ],
+      "children": {
+        "kind": "text",
+        "description": "Button label."
+      },
+      "slots": []
+    },
+    {
+      "id": "ds.card",
+      "name": "Card",
+      "version": "1.0.0",
+      "status": "draft",
+      "description": "Groups related content behind one subject. Composes an Avatar, a bound title, a default body slot, and a constrained actions slot.",
+      "figma": {
+        "representation": "component",
+        "componentSetKey": "7cd7011e4f2374161cd212f02992c7fd0f899430"
+      },
+      "props": [
+        {
+          "name": "title",
+          "type": "string",
+          "default": "Card title",
+          "required": true,
+          "description": "Card heading, bound to the header title part on both surfaces."
+        }
+      ],
+      "children": {
+        "kind": "slot",
+        "accepts": [],
+        "acceptsMode": "open",
+        "description": "Default slot — the card's main content."
+      },
+      "slots": [
+        {
+          "prop": "actions",
+          "accepts": [
+            "Button",
+            "Badge"
+          ],
+          "acceptsMode": "prefer",
+          "optional": true,
+          "description": "Constrained actions slot — only actions-grade components."
+        }
+      ]
+    },
+    {
+      "id": "ds.inline",
+      "name": "Inline",
+      "version": "1.0.0",
+      "status": "draft",
+      "description": "Horizontal layout primitive — lays children out in a row with a token-governed gap, vertically centered.",
+      "figma": {
+        "representation": "native"
+      },
+      "props": [
+        {
+          "name": "gap",
+          "type": [
+            "sm",
+            "md",
+            "lg"
+          ],
+          "default": "md",
+          "description": "Space between children."
+        }
+      ],
+      "children": {
+        "kind": "slot",
+        "accepts": [],
+        "acceptsMode": "open",
+        "description": "Any catalog content."
+      },
+      "slots": []
+    },
+    {
+      "id": "ds.stack",
+      "name": "Stack",
+      "version": "1.0.0",
+      "status": "draft",
+      "description": "Vertical layout primitive — stacks children with a token-governed gap. Screens compose from Stack/Inline instead of raw styled divs.",
+      "figma": {
+        "representation": "native"
+      },
+      "props": [
+        {
+          "name": "gap",
+          "type": [
+            "sm",
+            "md",
+            "lg"
+          ],
+          "default": "md",
+          "description": "Space between children."
+        }
+      ],
+      "children": {
+        "kind": "slot",
+        "accepts": [],
+        "acceptsMode": "open",
+        "description": "Any catalog content."
+      },
+      "slots": []
+    },
+    {
+      "id": "ds.table-cell",
+      "name": "TableCell",
+      "version": "1.0.0",
+      "status": "draft",
+      "description": "A single data cell in a table row.",
+      "figma": {
+        "representation": "component",
+        "componentSetKey": "b440cb0ab4bd83de2491b2302ab1ccb9c3e0f2d1"
+      },
+      "props": [
+        {
+          "name": "density",
+          "type": [
+            "comfortable",
+            "compact"
+          ],
+          "default": "comfortable",
+          "description": "Vertical rhythm, normally driven by the owning Table."
+        }
+      ],
+      "children": {
+        "kind": "text",
+        "description": "Cell content."
+      },
+      "slots": []
+    },
+    {
+      "id": "ds.table-header-cell",
+      "name": "TableHeaderCell",
+      "version": "1.0.0",
+      "status": "draft",
+      "description": "A column header cell.",
+      "figma": {
+        "representation": "component",
+        "componentSetKey": "91bf99af47cb2e09190eed770012e9c99661294f"
+      },
+      "props": [
+        {
+          "name": "density",
+          "type": [
+            "comfortable",
+            "compact"
+          ],
+          "default": "comfortable",
+          "description": "Vertical rhythm, normally driven by the owning Table."
+        }
+      ],
+      "children": {
+        "kind": "text",
+        "description": "Column label."
+      },
+      "slots": []
+    },
+    {
+      "id": "ds.table-row",
+      "name": "TableRow",
+      "version": "1.1.0",
+      "status": "draft",
+      "description": "A selectable row of table cells.",
+      "figma": {
+        "representation": "component",
+        "componentSetKey": "2630a1f30455c0b4d906930e9b3815cc0437fe1f"
+      },
+      "props": [
+        {
+          "name": "state",
+          "type": [
+            "default",
+            "selected"
+          ],
+          "default": "default",
+          "description": "Data state of the row."
+        }
+      ],
+      "children": {
+        "kind": "slot",
+        "accepts": [
+          "TableCell",
+          "TableHeaderCell"
+        ],
+        "acceptsMode": "prefer",
+        "description": "The row's cells. Multi-child slot: renders its default content directly in Figma (INSTANCE_SWAP cannot hold multiple children — see docs/08)."
+      },
+      "slots": []
+    },
+    {
+      "id": "ds.table",
+      "name": "Table",
+      "version": "1.0.0",
+      "status": "draft",
+      "description": "Structured data in rows and columns. Composes header cells (with the Table's density mapped into them), and a body slot of rows.",
+      "figma": {
+        "representation": "component",
+        "componentSetKey": "d3e8c9c378ea2fd072c2eb08545a30565fa77614"
+      },
+      "props": [
+        {
+          "name": "density",
+          "type": [
+            "comfortable",
+            "compact"
+          ],
+          "default": "comfortable",
+          "description": "Vertical rhythm of the whole table; mapped into the fixed header cells."
+        }
+      ],
+      "children": {
+        "kind": "slot",
+        "accepts": [
+          "TableRow"
+        ],
+        "acceptsMode": "prefer",
+        "description": "Rows. Multi-child slot: renders its default content directly in Figma (see docs/08)."
+      },
+      "slots": []
+    }
+  ]
+}

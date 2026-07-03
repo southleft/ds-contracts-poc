@@ -1,0 +1,23 @@
+/* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/stack.contract.json (ds.stack v1.0.0)
+ * Regenerate with: npm run generate
+ */
+
+.root {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  border: 0;
+}
+
+.gap-sm {
+  gap: var(--space-gap-sm);
+}
+
+.gap-md {
+  gap: var(--space-gap-md);
+}
+
+.gap-lg {
+  gap: var(--space-gap-lg);
+}

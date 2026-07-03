@@ -1,6 +1,6 @@
 {
-  "passed": 24,
-  "total": 24,
+  "passed": 26,
+  "total": 26,
   "results": [
     {
       "id": "refuse-unknown-token-reference",
@@ -114,6 +114,16 @@
     },
     {
       "id": "detect-figma-missing-multislot-content",
+      "claim": "C3-detection",
+      "pass": true
+    },
+    {
+      "id": "judge-passes-canonical-screen",
+      "claim": "C3-detection",
+      "pass": true
+    },
+    {
+      "id": "judge-catches-all-violation-classes",
       "claim": "C3-detection",
       "pass": true
     },

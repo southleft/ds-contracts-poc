@@ -877,6 +877,30 @@
             "Light": "{color/blue/100}",
             "Dark": "{color/blue/900}"
           }
+        },
+        {
+          "name": "space/gap/sm",
+          "type": "FLOAT",
+          "values": {
+            "Light": "{space/100}",
+            "Dark": "{space/100}"
+          }
+        },
+        {
+          "name": "space/gap/md",
+          "type": "FLOAT",
+          "values": {
+            "Light": "{space/200}",
+            "Dark": "{space/200}"
+          }
+        },
+        {
+          "name": "space/gap/lg",
+          "type": "FLOAT",
+          "values": {
+            "Light": "{space/300}",
+            "Dark": "{space/300}"
+          }
         }
       ]
     }

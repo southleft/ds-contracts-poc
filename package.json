@@ -16,7 +16,9 @@
     "parity": "tsx parity/diff.ts",
     "eval": "tsx evals/run.ts",
     "build:lib": "vite build && tsc -p tsconfig.build.json",
-    "verify:package": "node scripts/verify-package.mjs"
+    "verify:package": "node scripts/verify-package.mjs",
+    "catalog": "tsx scripts/generate-catalog.ts",
+    "judge": "tsx parity/judge.ts"
   },
   "engines": {
     "node": ">=20"

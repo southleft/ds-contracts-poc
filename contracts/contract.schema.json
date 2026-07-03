@@ -173,6 +173,13 @@
         ]
       }
     },
+    "figmaRepresentation": {
+      "type": "string",
+      "enum": [
+        "component",
+        "native"
+      ]
+    },
     "anatomy": {
       "type": "object",
       "propertyNames": {

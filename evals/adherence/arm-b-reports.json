@@ -1,0 +1,413 @@
+{
+  "reports": [
+    {
+      "file": "evals/adherence/arm-b/account-overview.tsx",
+      "elements": 38,
+      "checks": 97,
+      "violations": [
+        {
+          "rule": "components-from-catalog",
+          "detail": "<Stack gap=\"large\"> — legal values: sm | md | lg"
+        },
+        {
+          "rule": "components-from-catalog",
+          "detail": "<Inline gap=\"medium\"> — legal values: sm | md | lg"
+        },
+        {
+          "rule": "components-from-catalog",
+          "detail": "<Inline> has no prop \"align\""
+        },
+        {
+          "rule": "components-from-catalog",
+          "detail": "<Avatar> has no prop \"name\""
+        },
+        {
+          "rule": "components-from-catalog",
+          "detail": "<Avatar size=\"large\"> — legal values: sm | md"
+        },
+        {
+          "rule": "components-from-catalog",
+          "detail": "<Stack gap=\"xsmall\"> — legal values: sm | md | lg"
+        },
+        {
+          "rule": "components-from-catalog",
+          "detail": "<Inline gap=\"small\"> — legal values: sm | md | lg"
+        },
+        {
+          "rule": "components-from-catalog",
+          "detail": "<Inline> has no prop \"align\""
+        },
+        {
+          "rule": "components-from-catalog",
+          "detail": "<Badge> has no prop \"tone\""
+        },
+        {
+          "rule": "components-from-catalog",
+          "detail": "<Inline gap=\"medium\"> — legal values: sm | md | lg"
+        },
+        {
+          "rule": "components-from-catalog",
+          "detail": "<Inline> has no prop \"align\""
+        },
+        {
+          "rule": "components-from-catalog",
+          "detail": "<Card> missing required prop \"title\""
+        },
+        {
+          "rule": "components-from-catalog",
+          "detail": "<Stack gap=\"small\"> — legal values: sm | md | lg"
+        },
+        {
+          "rule": "components-from-catalog",
+          "detail": "<Inline gap=\"small\"> — legal values: sm | md | lg"
+        },
+        {
+          "rule": "components-from-catalog",
+          "detail": "<Stack gap=\"small\"> — legal values: sm | md | lg"
+        },
+        {
+          "rule": "components-from-catalog",
+          "detail": "<Card> missing required prop \"title\""
+        },
+        {
+          "rule": "components-from-catalog",
+          "detail": "<TableRow> has no prop \"selected\""
+        },
+        {
+          "rule": "components-from-catalog",
+          "detail": "<TableCell> takes text content, got <Inline> — that's a contract gap, not a slot"
+        },
+        {
+          "rule": "components-from-catalog",
+          "detail": "<Inline gap=\"small\"> — legal values: sm | md | lg"
+        },
+        {
+          "rule": "components-from-catalog",
+          "detail": "<Inline> has no prop \"align\""
+        },
+        {
+          "rule": "components-from-catalog",
+          "detail": "<Avatar> has no prop \"name\""
+        },
+        {
+          "rule": "components-from-catalog",
+          "detail": "<Avatar size=\"small\"> — legal values: sm | md"
+        },
+        {
+          "rule": "components-from-catalog",
+          "detail": "<TableCell> takes text content, got <Badge> — that's a contract gap, not a slot"
+        },
+        {
+          "rule": "components-from-catalog",
+          "detail": "<Badge> has no prop \"tone\""
+        },
+        {
+          "rule": "components-from-catalog",
+          "detail": "<Inline gap=\"small\"> — legal values: sm | md | lg"
+        },
+        {
+          "rule": "components-from-catalog",
+          "detail": "<Inline> has no prop \"align\""
+        },
+        {
+          "rule": "components-from-catalog",
+          "detail": "<Inline> has no prop \"justify\""
+        },
+        {
+          "rule": "tokens-only",
+          "detail": "Literal color #6b7280"
+        },
+        {
+          "rule": "tokens-only",
+          "detail": "Literal color #4b5563"
+        },
+        {
+          "rule": "tokens-only",
+          "detail": "Literal dimension 32px"
+        },
+        {
+          "rule": "tokens-only",
+          "detail": "Literal dimension 24px"
+        }
+      ],
+      "score": 68,
+      "adherent": false
+    },
+    {
+      "file": "evals/adherence/arm-b/notification-center.tsx",
+      "elements": 13,
+      "checks": 35,
+      "violations": [
+        {
+          "rule": "components-from-catalog",
+          "detail": "<Card> missing required prop \"title\""
+        },
+        {
+          "rule": "components-from-catalog",
+          "detail": "<Card> missing required prop \"title\""
+        },
+        {
+          "rule": "components-from-catalog",
+          "detail": "<Inline> has no prop \"align\""
+        },
+        {
+          "rule": "components-from-catalog",
+          "detail": "<Inline> has no prop \"justify\""
+        },
+        {
+          "rule": "components-from-catalog",
+          "detail": "<Badge> has no prop \"tone\""
+        },
+        {
+          "rule": "components-from-catalog",
+          "detail": "<Inline> has no prop \"justify\""
+        },
+        {
+          "rule": "components-from-catalog",
+          "detail": "<Button variant=\"ghost\"> — legal values: primary | secondary | danger"
+        },
+        {
+          "rule": "tokens-only",
+          "detail": "Literal color #6b7280"
+        },
+        {
+          "rule": "tokens-only",
+          "detail": "Literal color #4b5563"
+        }
+      ],
+      "score": 74,
+      "adherent": false
+    },
+    {
+      "file": "evals/adherence/arm-b/pricing-section.tsx",
+      "elements": 16,
+      "checks": 52,
+      "violations": [
+        {
+          "rule": "components-from-catalog",
+          "detail": "<Stack gap=\"large\"> — legal values: sm | md | lg"
+        },
+        {
+          "rule": "components-from-catalog",
+          "detail": "<Stack> has no prop \"align\""
+        },
+        {
+          "rule": "components-from-catalog",
+          "detail": "<Stack gap=\"small\"> — legal values: sm | md | lg"
+        },
+        {
+          "rule": "components-from-catalog",
+          "detail": "<Stack> has no prop \"align\""
+        },
+        {
+          "rule": "components-from-catalog",
+          "detail": "<Inline gap=\"large\"> — legal values: sm | md | lg"
+        },
+        {
+          "rule": "components-from-catalog",
+          "detail": "<Inline> has no prop \"align\""
+        },
+        {
+          "rule": "no-style-overrides",
+          "detail": "style override on <Card>"
+        },
+        {
+          "rule": "components-from-catalog",
+          "detail": "<Card> missing required prop \"title\""
+        },
+        {
+          "rule": "components-from-catalog",
+          "detail": "<Stack gap=\"medium\"> — legal values: sm | md | lg"
+        },
+        {
+          "rule": "components-from-catalog",
+          "detail": "<Inline gap=\"small\"> — legal values: sm | md | lg"
+        },
+        {
+          "rule": "components-from-catalog",
+          "detail": "<Inline> has no prop \"align\""
+        },
+        {
+          "rule": "components-from-catalog",
+          "detail": "<Badge variant=\"primary\"> — legal values: info | success | warning | danger"
+        },
+        {
+          "rule": "components-from-catalog",
+          "detail": "<Button> has no prop \"fullWidth\""
+        },
+        {
+          "rule": "tokens-only",
+          "detail": "Literal color #6b7280"
+        },
+        {
+          "rule": "tokens-only",
+          "detail": "Literal color #4f46e5"
+        },
+        {
+          "rule": "tokens-only",
+          "detail": "Literal color #e5e7eb"
+        },
+        {
+          "rule": "tokens-only",
+          "detail": "Literal color #6b7280"
+        },
+        {
+          "rule": "tokens-only",
+          "detail": "Literal color #4b5563"
+        },
+        {
+          "rule": "tokens-only",
+          "detail": "Literal dimension 64px"
+        },
+        {
+          "rule": "tokens-only",
+          "detail": "Literal dimension 24px"
+        },
+        {
+          "rule": "tokens-only",
+          "detail": "Literal dimension 2px"
+        },
+        {
+          "rule": "tokens-only",
+          "detail": "Literal dimension 1px"
+        },
+        {
+          "rule": "tokens-only",
+          "detail": "Literal dimension 12px"
+        },
+        {
+          "rule": "tokens-only",
+          "detail": "Literal dimension 32px"
+        },
+        {
+          "rule": "tokens-only",
+          "detail": "Literal dimension 2px"
+        },
+        {
+          "rule": "tokens-only",
+          "detail": "Literal dimension 8px"
+        },
+        {
+          "rule": "tokens-only",
+          "detail": "Literal color function rgba(…)"
+        },
+        {
+          "rule": "tokens-only",
+          "detail": "Literal color function rgba(…)"
+        }
+      ],
+      "score": 46,
+      "adherent": false
+    },
+    {
+      "file": "evals/adherence/arm-b/team-settings.tsx",
+      "elements": 24,
+      "checks": 58,
+      "violations": [
+        {
+          "rule": "components-from-catalog",
+          "detail": "<Stack gap=\"large\"> — legal values: sm | md | lg"
+        },
+        {
+          "rule": "no-style-overrides",
+          "detail": "style override on <Stack>"
+        },
+        {
+          "rule": "components-from-catalog",
+          "detail": "<Card> missing required prop \"title\""
+        },
+        {
+          "rule": "components-from-catalog",
+          "detail": "<Stack gap=\"medium\"> — legal values: sm | md | lg"
+        },
+        {
+          "rule": "no-style-overrides",
+          "detail": "style override on <Stack>"
+        },
+        {
+          "rule": "components-from-catalog",
+          "detail": "<Stack gap=\"small\"> — legal values: sm | md | lg"
+        },
+        {
+          "rule": "components-from-catalog",
+          "detail": "<Inline gap=\"small\"> — legal values: sm | md | lg"
+        },
+        {
+          "rule": "components-from-catalog",
+          "detail": "<Stack gap=\"medium\"> — legal values: sm | md | lg"
+        },
+        {
+          "rule": "components-from-catalog",
+          "detail": "<TableRow> has no prop \"selected\""
+        },
+        {
+          "rule": "components-from-catalog",
+          "detail": "<TableCell> takes text content, got <Inline> — that's a contract gap, not a slot"
+        },
+        {
+          "rule": "components-from-catalog",
+          "detail": "<Inline gap=\"small\"> — legal values: sm | md | lg"
+        },
+        {
+          "rule": "components-from-catalog",
+          "detail": "<Inline> has no prop \"align\""
+        },
+        {
+          "rule": "components-from-catalog",
+          "detail": "<Avatar> has no prop \"name\""
+        },
+        {
+          "rule": "components-from-catalog",
+          "detail": "<TableCell> takes text content, got <Badge> — that's a contract gap, not a slot"
+        },
+        {
+          "rule": "components-from-catalog",
+          "detail": "<Badge> has no prop \"tone\""
+        },
+        {
+          "rule": "tokens-only",
+          "detail": "Literal color #6b7280"
+        }
+      ],
+      "score": 72,
+      "adherent": false
+    },
+    {
+      "file": "evals/adherence/arm-b/user-directory.tsx",
+      "elements": 16,
+      "checks": 41,
+      "violations": [
+        {
+          "rule": "components-from-catalog",
+          "detail": "<Inline> has no prop \"align\""
+        },
+        {
+          "rule": "components-from-catalog",
+          "detail": "<Badge> has no prop \"tone\""
+        },
+        {
+          "rule": "components-from-catalog",
+          "detail": "<TableCell> takes text content, got <Inline> — that's a contract gap, not a slot"
+        },
+        {
+          "rule": "components-from-catalog",
+          "detail": "<Inline> has no prop \"align\""
+        },
+        {
+          "rule": "components-from-catalog",
+          "detail": "<Avatar> has no prop \"name\""
+        },
+        {
+          "rule": "components-from-catalog",
+          "detail": "<TableCell> takes text content, got <Badge> — that's a contract gap, not a slot"
+        },
+        {
+          "rule": "components-from-catalog",
+          "detail": "<Badge> has no prop \"tone\""
+        }
+      ],
+      "score": 83,
+      "adherent": false
+    }
+  ]
+}

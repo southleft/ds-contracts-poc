@@ -28,6 +28,15 @@
       "$type": "dimension",
       "control": {
         "$value": "{space.100}"
+      },
+      "sm": {
+        "$value": "{space.100}"
+      },
+      "md": {
+        "$value": "{space.200}"
+      },
+      "lg": {
+        "$value": "{space.300}"
       }
     },
     "table": {

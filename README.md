@@ -40,7 +40,7 @@ npm install
 npm run build        # tokens → CSS, schema → JSON Schema, contracts → components
 npm run storybook    # browse the generated components at http://localhost:6006
 npm run parity       # three-surface drift report (code / Figma / tokens vs contract)
-npm run eval         # 16-case validation suite → evals/results.json
+npm run eval         # 26-case validation suite -> evals/results.json
 ```
 
 Try the loop: edit `contracts/button.contract.json` (add a value to the `size` enum, or point a token binding at a different token), run `npm run build`, and watch the component, its styles, and its stories update. Point a binding at a token that doesn't exist and the build **fails** — that's the contract↔token integrity gate.
@@ -73,6 +73,7 @@ Try the loop: edit `contracts/button.contract.json` (add a value to the `size` e
 7. [Validation](docs/07-validation.md) — claims → evals → evidence (22/22 passing), live round-trip results, and the designed AI-adherence eval
 8. [Composition & the spec](docs/08-composition-and-spec.md) — slots, nested components, the A2UI/json-render/CEM comparison, and the road to a contributable contract spec
 9. [Advanced components](docs/09-advanced-components.md) — the DataTable family, the INSTANCE_SWAP ceiling, npm packaging, and the headless-hook design for behavior-heavy components
+10. [Honest generation](docs/10-honest-generation.md) — the catalog, the deterministic adherence judge, and the A/B eval: governed 100/100 vs ungoverned 65, with an organically discovered + promoted contract gap
 
 ## Status — all three phases executed
 
@@ -81,4 +82,5 @@ Try the loop: edit `contracts/button.contract.json` (add a value to the `size` e
 **Phase 3 ✅** the parity loop (`npm run parity`): three-way drift detection with promotion patches, proven in both directions — a hand-added code prop promoted into the contract and pushed to Figma, and a designer's Figma token change promoted into `tokens/` and rebuilt into CSS. See [docs/06-parity-loop.md](docs/06-parity-loop.md) for the evidence trail.
 **Validation ✅** 24/24 deterministic evals (`npm run eval`) covering determinism, refusal of invalid states (including circular/unknown composition and slot-content violations), sixteen drift classes, and promotion convergence — plus a live Figma token round-trip verified lossless (zero diff). See [docs/07-validation.md](docs/07-validation.md).
 **Composition ✅** slots (default + constrained/optional), nested component refs, and bound text parts — one contract (`ds.card`) generating both surfaces, with `accepts` round-tripping as Figma `preferredValues` verified against anchors. See [docs/08-composition-and-spec.md](docs/08-composition-and-spec.md) for the schema decisions and the contributable-spec roadmap.
+**Honest generation ✅** governed catalog (`npm run catalog`) + deterministic adherence judge (`npm run judge`) + A/B eval: catalog-constrained agents scored **100/100 (5/5 screens adherent, 0/253 violations)** vs **65 (0/5, 101 violations)** ungoverned — including a full-page composition, and an organically surfaced contract gap promoted through the standard loop. See [docs/10-honest-generation.md](docs/10-honest-generation.md).
 **Advanced composition ✅** the DataTable family (Table ⊃ Row ⊃ Cell, three levels): parent→child prop mapping, slot default content, data states — and the whole system packaged as an npm library with an SSR product-environment smoke test (`npm run build:lib && npm run verify:package`). See [docs/09-advanced-components.md](docs/09-advanced-components.md).

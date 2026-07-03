@@ -33,9 +33,12 @@ const TSX = path.join(SCRATCH, 'node_modules', '.bin', 'tsx');
 function resetScratch() {
   rmSync(SCRATCH, { recursive: true, force: true });
   mkdirSync(SCRATCH, { recursive: true });
-  for (const dir of ['contracts', 'tokens', 'scripts', 'parity', 'src']) {
+  for (const dir of ['contracts', 'tokens', 'scripts', 'parity', 'src', 'catalog', 'context']) {
     cpSync(path.join(ROOT, dir), path.join(SCRATCH, dir), { recursive: true });
   }
+  cpSync(path.join(ROOT, 'evals', 'fixtures'), path.join(SCRATCH, 'evals', 'fixtures'), {
+    recursive: true,
+  });
   for (const file of ['package.json', 'tsconfig.json']) {
     cpSync(path.join(ROOT, file), path.join(SCRATCH, file));
   }
@@ -412,6 +415,33 @@ const cases: Case[] = [
       });
       if (parity().status === 0) throw new Error('Drift not detected');
       expectFinding(readReport(), 'figma', 'behind', 'Table.TableRow');
+    },
+  },
+  {
+    id: 'judge-passes-canonical-screen',
+    claim: 'C3-detection',
+    run: () => {
+      const r = run(TSX, ['parity/judge.ts', 'evals/fixtures/good-screen.tsx']);
+      if (r.status !== 0) throw new Error(`Judge failed the canonical screen:\n${r.out}`);
+    },
+  },
+  {
+    id: 'judge-catches-all-violation-classes',
+    claim: 'C3-detection',
+    run: () => {
+      const r = run(TSX, ['parity/judge.ts', 'evals/fixtures/bad-screen.tsx', '--json', 'judge-out.json']);
+      if (r.status === 0) throw new Error('Judge passed a screen seeded with violations');
+      const report = JSON.parse(readFileSync(path.join(SCRATCH, 'judge-out.json'), 'utf8')).reports[0];
+      const rules = new Set(report.violations.map((v: { rule: string }) => v.rule));
+      for (const expected of [
+        'components-from-catalog',
+        'no-raw-equivalents',
+        'no-style-overrides',
+        'tokens-only',
+        'one-primary-action',
+      ]) {
+        if (!rules.has(expected)) throw new Error(`Judge missed violation class: ${expected}`);
+      }
     },
   },
   {
