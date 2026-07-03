@@ -1,0 +1,410 @@
+- generic [ref=f14e3]:
+  - complementary [ref=f14e4]:
+    - generic [ref=f14e5]:
+      - link "Contract Hub" [ref=f14e6] [cursor=pointer]:
+        - /url: "#/"
+      - paragraph [ref=f14e7]: The governed source, visualized
+    - navigation "Main" [ref=f14e8]:
+      - link "Overview" [ref=f14e9] [cursor=pointer]:
+        - /url: "#/"
+      - link "Components" [ref=f14e10] [cursor=pointer]:
+        - /url: "#/components"
+      - link "Tokens" [ref=f14e11] [cursor=pointer]:
+        - /url: "#/tokens"
+      - link "Governance" [ref=f14e12] [cursor=pointer]:
+        - /url: "#/governance"
+      - link "Parity" [ref=f14e13] [cursor=pointer]:
+        - /url: "#/parity"
+    - generic [ref=f14e14]:
+      - text: ds-contracts-poc
+      - text: catalog v0.1.0
+  - generic [ref=f14e15]:
+    - banner [ref=f14e16]:
+      - generic [ref=f14e17]: components
+      - generic [ref=f14e18]:
+        - generic [ref=f14e19]: catalog v0.1.0 · 8407354
+        - button "Switch to dark mode" [ref=f14e20]:
+          - img
+          - generic [ref=f14e21]: Dark
+    - main [ref=f14e22]:
+      - generic [ref=f14e424]:
+        - link "← Components" [ref=f14e425] [cursor=pointer]:
+          - /url: "#/components"
+        - generic [ref=f14e426]:
+          - heading "Card" [level=1] [ref=f14e427]
+          - code [ref=f14e428]: ds.card
+          - generic [ref=f14e429]: v1.1.0
+          - generic [ref=f14e430]: draft
+        - paragraph [ref=f14e431]: Groups related content behind one subject. Composes an Avatar, a bound title, a default body slot, and a constrained actions slot.
+        - generic [ref=f14e432]:
+          - code [ref=f14e433]: "import { Card } from 'src/components/Card'"
+          - link "Open in Figma" [ref=f14e434] [cursor=pointer]:
+            - /url: https://www.figma.com/design/8nim1d0IPnehMxA7B7SYxC/DS-Contracts-POC?node-id=2-21
+            - text: Open in Figma
+            - img
+      - paragraph [ref=f14e435]: ✓ In parity — both surfaces match this contract (last differ run)
+      - generic [ref=f14e436]:
+        - generic [ref=f14e437]:
+          - heading "Try it" [level=2] [ref=f14e438]
+          - paragraph [ref=f14e439]: The component itself, rendered live from the generated package. Change any prop — the controls are built from the contract, so illegal values aren't even offered.
+        - generic [ref=f14e440]:
+          - generic [ref=f14e442]:
+            - generic [ref=f14e443]: title
+            - textbox "title" [ref=f14e444]: Card title
+          - article [ref=f14e446]:
+            - generic [ref=f14e447]:
+              - img [ref=f14e448]: AB
+              - generic [ref=f14e449]: Card title
+            - generic [ref=f14e450]: Revenue is tracking 12% ahead of plan. Two accounts need follow-up before Friday.
+            - button "View report" [ref=f14e452] [cursor=pointer]
+          - paragraph [ref=f14e453]:
+            - text: Live render of the real generated component from
+            - code [ref=f14e454]: src/components/Card
+            - text: — the controls above are generated from the catalog entry, so only contract-legal values are offered.
+      - generic [ref=f14e455]:
+        - generic [ref=f14e456]:
+          - heading "Binding map — one contract, two surfaces" [level=2] [ref=f14e457]
+          - paragraph [ref=f14e458]: Every prop, value, and slot the contract declares, next to how it manifests in code and in Figma. The status column is computed live against the Figma snapshot — it's a verification, not an illustration.
+        - table [ref=f14e460]:
+          - rowgroup [ref=f14e461]:
+            - row "Kind Contract (canonical) Code surface Design surface (Figma) Match" [ref=f14e462]:
+              - columnheader "Kind" [ref=f14e463]
+              - columnheader "Contract (canonical)" [ref=f14e464]
+              - columnheader "Code surface" [ref=f14e465]
+              - columnheader "Design surface (Figma)" [ref=f14e466]
+              - columnheader "Match" [ref=f14e467]
+          - rowgroup [ref=f14e468]:
+            - 'row "text title: text title Title TEXT ✓ property present as TEXT" [ref=f14e469]':
+              - cell "text" [ref=f14e470]:
+                - generic [ref=f14e471]: text
+              - 'cell "title: text" [ref=f14e472]':
+                - generic [ref=f14e473]: "title: text"
+              - cell "title" [ref=f14e474]:
+                - code [ref=f14e475]: title
+              - cell "Title TEXT" [ref=f14e476]:
+                - generic [ref=f14e477]: Title TEXT
+              - cell "✓ property present as TEXT" [ref=f14e478]:
+                - generic "property present as TEXT" [ref=f14e479]:
+                  - text: ✓
+                  - generic [ref=f14e480]: property present as TEXT
+            - 'row "slot slot: children (open) children: ReactNode Body INSTANCE_SWAP ✓ slot represented in Figma" [ref=f14e481]':
+              - cell "slot" [ref=f14e482]:
+                - generic [ref=f14e483]: slot
+              - 'cell "slot: children (open)" [ref=f14e484]':
+                - generic [ref=f14e485]: "slot: children (open)"
+              - 'cell "children: ReactNode" [ref=f14e486]':
+                - code [ref=f14e487]: "children: ReactNode"
+              - cell "Body INSTANCE_SWAP" [ref=f14e488]:
+                - generic [ref=f14e489]: Body INSTANCE_SWAP
+              - cell "✓ slot represented in Figma" [ref=f14e490]:
+                - generic "slot represented in Figma" [ref=f14e491]:
+                  - text: ✓
+                  - generic [ref=f14e492]: slot represented in Figma
+            - 'row "slot slot: actions accepts Button, Badge actions?: ReactNode Body INSTANCE_SWAP ✓ slot represented in Figma" [ref=f14e493]':
+              - cell "slot" [ref=f14e494]:
+                - generic [ref=f14e495]: slot
+              - 'cell "slot: actions accepts Button, Badge" [ref=f14e496]':
+                - generic [ref=f14e497]: "slot: actions accepts Button, Badge"
+              - 'cell "actions?: ReactNode" [ref=f14e498]':
+                - code [ref=f14e499]: "actions?: ReactNode"
+              - cell "Body INSTANCE_SWAP" [ref=f14e500]:
+                - generic [ref=f14e501]: Body INSTANCE_SWAP
+              - cell "✓ slot represented in Figma" [ref=f14e502]:
+                - generic "slot represented in Figma" [ref=f14e503]:
+                  - text: ✓
+                  - generic [ref=f14e504]: slot represented in Figma
+        - paragraph [ref=f14e505]:
+          - text: "source:"
+          - code [ref=f14e506]: contracts/card.contract.json · parity/snapshots/figma-components.json
+      - generic [ref=f14e507]:
+        - generic [ref=f14e508]:
+          - heading "Token bindings — the styling contract" [level=2] [ref=f14e509]
+          - paragraph [ref=f14e510]: "Where every visual decision comes from: each anatomy part binds CSS properties to design tokens. The resolved value is read live from the loaded stylesheet (flip the theme to watch it change); the Figma column is verified against the variables actually in the file."
+        - table [ref=f14e512]:
+          - rowgroup [ref=f14e513]:
+            - row "Part CSS property Token Resolved (live) Figma variable In Figma" [ref=f14e514]:
+              - columnheader "Part" [ref=f14e515]
+              - columnheader "CSS property" [ref=f14e516]
+              - columnheader "Token" [ref=f14e517]
+              - columnheader "Resolved (live)" [ref=f14e518]
+              - columnheader "Figma variable" [ref=f14e519]
+              - columnheader "In Figma" [ref=f14e520]
+          - rowgroup [ref=f14e521]:
+            - 'row "root background-color {color.surface.raised} #FFFFFF color/surface/raised ✓ variable exists in the Figma file (from parity/snapshots/figma-tokens.json)" [ref=f14e522]':
+              - cell "root" [ref=f14e523]
+              - cell "background-color" [ref=f14e524]
+              - 'cell "{color.surface.raised}" [ref=f14e525]':
+                - code [ref=f14e526]: "{color.surface.raised}"
+              - cell "#FFFFFF" [ref=f14e527]:
+                - generic [ref=f14e530]: "#FFFFFF"
+              - cell "color/surface/raised" [ref=f14e531]
+              - cell "✓ variable exists in the Figma file (from parity/snapshots/figma-tokens.json)" [ref=f14e532]:
+                - generic "variable exists in the Figma file (from parity/snapshots/figma-tokens.json)" [ref=f14e533]:
+                  - text: ✓
+                  - generic [ref=f14e534]: variable exists in the Figma file (from parity/snapshots/figma-tokens.json)
+            - 'row "root border-color {color.border.subtle} #E5E7EB color/border/subtle ✓ variable exists in the Figma file (from parity/snapshots/figma-tokens.json)" [ref=f14e535]':
+              - cell "root" [ref=f14e536]
+              - cell "border-color" [ref=f14e537]
+              - 'cell "{color.border.subtle}" [ref=f14e538]':
+                - code [ref=f14e539]: "{color.border.subtle}"
+              - cell "#E5E7EB" [ref=f14e540]:
+                - generic [ref=f14e543]: "#E5E7EB"
+              - cell "color/border/subtle" [ref=f14e544]
+              - cell "✓ variable exists in the Figma file (from parity/snapshots/figma-tokens.json)" [ref=f14e545]:
+                - generic "variable exists in the Figma file (from parity/snapshots/figma-tokens.json)" [ref=f14e546]:
+                  - text: ✓
+                  - generic [ref=f14e547]: variable exists in the Figma file (from parity/snapshots/figma-tokens.json)
+            - 'row "root border-width {border-width.100} 1px border-width/100 ✓ variable exists in the Figma file (from parity/snapshots/figma-tokens.json)" [ref=f14e548]':
+              - cell "root" [ref=f14e549]
+              - cell "border-width" [ref=f14e550]
+              - 'cell "{border-width.100}" [ref=f14e551]':
+                - code [ref=f14e552]: "{border-width.100}"
+              - cell "1px" [ref=f14e553]:
+                - generic [ref=f14e555]: 1px
+              - cell "border-width/100" [ref=f14e556]
+              - cell "✓ variable exists in the Figma file (from parity/snapshots/figma-tokens.json)" [ref=f14e557]:
+                - generic "variable exists in the Figma file (from parity/snapshots/figma-tokens.json)" [ref=f14e558]:
+                  - text: ✓
+                  - generic [ref=f14e559]: variable exists in the Figma file (from parity/snapshots/figma-tokens.json)
+            - 'row "root border-radius {radius.card} 8px radius/card ✓ variable exists in the Figma file (from parity/snapshots/figma-tokens.json)" [ref=f14e560]':
+              - cell "root" [ref=f14e561]
+              - cell "border-radius" [ref=f14e562]
+              - 'cell "{radius.card}" [ref=f14e563]':
+                - code [ref=f14e564]: "{radius.card}"
+              - cell "8px" [ref=f14e565]:
+                - generic [ref=f14e567]: 8px
+              - cell "radius/card" [ref=f14e568]
+              - cell "✓ variable exists in the Figma file (from parity/snapshots/figma-tokens.json)" [ref=f14e569]:
+                - generic "variable exists in the Figma file (from parity/snapshots/figma-tokens.json)" [ref=f14e570]:
+                  - text: ✓
+                  - generic [ref=f14e571]: variable exists in the Figma file (from parity/snapshots/figma-tokens.json)
+            - 'row "root max-width {size.card.width} 320px size/card/width ✓ variable exists in the Figma file (from parity/snapshots/figma-tokens.json)" [ref=f14e572]':
+              - cell "root" [ref=f14e573]
+              - cell "max-width" [ref=f14e574]
+              - 'cell "{size.card.width}" [ref=f14e575]':
+                - code [ref=f14e576]: "{size.card.width}"
+              - cell "320px" [ref=f14e577]:
+                - generic [ref=f14e579]: 320px
+              - cell "size/card/width" [ref=f14e580]
+              - cell "✓ variable exists in the Figma file (from parity/snapshots/figma-tokens.json)" [ref=f14e581]:
+                - generic "variable exists in the Figma file (from parity/snapshots/figma-tokens.json)" [ref=f14e582]:
+                  - text: ✓
+                  - generic [ref=f14e583]: variable exists in the Figma file (from parity/snapshots/figma-tokens.json)
+            - 'row "header gap {space.gap.control} 8px space/gap/control ✓ variable exists in the Figma file (from parity/snapshots/figma-tokens.json)" [ref=f14e584]':
+              - cell "header" [ref=f14e585]
+              - cell "gap" [ref=f14e586]
+              - 'cell "{space.gap.control}" [ref=f14e587]':
+                - code [ref=f14e588]: "{space.gap.control}"
+              - cell "8px" [ref=f14e589]:
+                - generic [ref=f14e591]: 8px
+              - cell "space/gap/control" [ref=f14e592]
+              - cell "✓ variable exists in the Figma file (from parity/snapshots/figma-tokens.json)" [ref=f14e593]:
+                - generic "variable exists in the Figma file (from parity/snapshots/figma-tokens.json)" [ref=f14e594]:
+                  - text: ✓
+                  - generic [ref=f14e595]: variable exists in the Figma file (from parity/snapshots/figma-tokens.json)
+            - 'row "header padding-inline {space.inset-x.md} 16px space/inset-x/md ✓ variable exists in the Figma file (from parity/snapshots/figma-tokens.json)" [ref=f14e596]':
+              - cell "header" [ref=f14e597]
+              - cell "padding-inline" [ref=f14e598]
+              - 'cell "{space.inset-x.md}" [ref=f14e599]':
+                - code [ref=f14e600]: "{space.inset-x.md}"
+              - cell "16px" [ref=f14e601]:
+                - generic [ref=f14e603]: 16px
+              - cell "space/inset-x/md" [ref=f14e604]
+              - cell "✓ variable exists in the Figma file (from parity/snapshots/figma-tokens.json)" [ref=f14e605]:
+                - generic "variable exists in the Figma file (from parity/snapshots/figma-tokens.json)" [ref=f14e606]:
+                  - text: ✓
+                  - generic [ref=f14e607]: variable exists in the Figma file (from parity/snapshots/figma-tokens.json)
+            - 'row "header padding-block {space.inset-y.md} 8px space/inset-y/md ✓ variable exists in the Figma file (from parity/snapshots/figma-tokens.json)" [ref=f14e608]':
+              - cell "header" [ref=f14e609]
+              - cell "padding-block" [ref=f14e610]
+              - 'cell "{space.inset-y.md}" [ref=f14e611]':
+                - code [ref=f14e612]: "{space.inset-y.md}"
+              - cell "8px" [ref=f14e613]:
+                - generic [ref=f14e615]: 8px
+              - cell "space/inset-y/md" [ref=f14e616]
+              - cell "✓ variable exists in the Figma file (from parity/snapshots/figma-tokens.json)" [ref=f14e617]:
+                - generic "variable exists in the Figma file (from parity/snapshots/figma-tokens.json)" [ref=f14e618]:
+                  - text: ✓
+                  - generic [ref=f14e619]: variable exists in the Figma file (from parity/snapshots/figma-tokens.json)
+            - 'row "title color {color.surface.foreground} #111827 color/surface/foreground ✓ variable exists in the Figma file (from parity/snapshots/figma-tokens.json)" [ref=f14e620]':
+              - cell "title" [ref=f14e621]
+              - cell "color" [ref=f14e622]
+              - 'cell "{color.surface.foreground}" [ref=f14e623]':
+                - code [ref=f14e624]: "{color.surface.foreground}"
+              - cell "#111827" [ref=f14e625]:
+                - generic [ref=f14e628]: "#111827"
+              - cell "color/surface/foreground" [ref=f14e629]
+              - cell "✓ variable exists in the Figma file (from parity/snapshots/figma-tokens.json)" [ref=f14e630]:
+                - generic "variable exists in the Figma file (from parity/snapshots/figma-tokens.json)" [ref=f14e631]:
+                  - text: ✓
+                  - generic [ref=f14e632]: variable exists in the Figma file (from parity/snapshots/figma-tokens.json)
+            - 'row "title font-family {font.control.family} Inter, system-ui, -apple-system, sans-serif font/control/family ✓ variable exists in the Figma file (from parity/snapshots/figma-tokens.json)" [ref=f14e633]':
+              - cell "title" [ref=f14e634]
+              - cell "font-family" [ref=f14e635]
+              - 'cell "{font.control.family}" [ref=f14e636]':
+                - code [ref=f14e637]: "{font.control.family}"
+              - cell "Inter, system-ui, -apple-system, sans-serif" [ref=f14e638]:
+                - generic [ref=f14e640]: Inter, system-ui, -apple-system, sans-serif
+              - cell "font/control/family" [ref=f14e641]
+              - cell "✓ variable exists in the Figma file (from parity/snapshots/figma-tokens.json)" [ref=f14e642]:
+                - generic "variable exists in the Figma file (from parity/snapshots/figma-tokens.json)" [ref=f14e643]:
+                  - text: ✓
+                  - generic [ref=f14e644]: variable exists in the Figma file (from parity/snapshots/figma-tokens.json)
+            - 'row "title font-size {font.title.size} 16px font/title/size ✓ variable exists in the Figma file (from parity/snapshots/figma-tokens.json)" [ref=f14e645]':
+              - cell "title" [ref=f14e646]
+              - cell "font-size" [ref=f14e647]
+              - 'cell "{font.title.size}" [ref=f14e648]':
+                - code [ref=f14e649]: "{font.title.size}"
+              - cell "16px" [ref=f14e650]:
+                - generic [ref=f14e652]: 16px
+              - cell "font/title/size" [ref=f14e653]
+              - cell "✓ variable exists in the Figma file (from parity/snapshots/figma-tokens.json)" [ref=f14e654]:
+                - generic "variable exists in the Figma file (from parity/snapshots/figma-tokens.json)" [ref=f14e655]:
+                  - text: ✓
+                  - generic [ref=f14e656]: variable exists in the Figma file (from parity/snapshots/figma-tokens.json)
+            - 'row "title font-weight {font.title.weight} 600 font/title/weight ✓ variable exists in the Figma file (from parity/snapshots/figma-tokens.json)" [ref=f14e657]':
+              - cell "title" [ref=f14e658]
+              - cell "font-weight" [ref=f14e659]
+              - 'cell "{font.title.weight}" [ref=f14e660]':
+                - code [ref=f14e661]: "{font.title.weight}"
+              - cell "600" [ref=f14e662]:
+                - generic [ref=f14e664]: "600"
+              - cell "font/title/weight" [ref=f14e665]
+              - cell "✓ variable exists in the Figma file (from parity/snapshots/figma-tokens.json)" [ref=f14e666]:
+                - generic "variable exists in the Figma file (from parity/snapshots/figma-tokens.json)" [ref=f14e667]:
+                  - text: ✓
+                  - generic [ref=f14e668]: variable exists in the Figma file (from parity/snapshots/figma-tokens.json)
+            - 'row "body gap {space.gap.control} 8px space/gap/control ✓ variable exists in the Figma file (from parity/snapshots/figma-tokens.json)" [ref=f14e669]':
+              - cell "body" [ref=f14e670]
+              - cell "gap" [ref=f14e671]
+              - 'cell "{space.gap.control}" [ref=f14e672]':
+                - code [ref=f14e673]: "{space.gap.control}"
+              - cell "8px" [ref=f14e674]:
+                - generic [ref=f14e676]: 8px
+              - cell "space/gap/control" [ref=f14e677]
+              - cell "✓ variable exists in the Figma file (from parity/snapshots/figma-tokens.json)" [ref=f14e678]:
+                - generic "variable exists in the Figma file (from parity/snapshots/figma-tokens.json)" [ref=f14e679]:
+                  - text: ✓
+                  - generic [ref=f14e680]: variable exists in the Figma file (from parity/snapshots/figma-tokens.json)
+            - 'row "body padding-inline {space.inset-x.md} 16px space/inset-x/md ✓ variable exists in the Figma file (from parity/snapshots/figma-tokens.json)" [ref=f14e681]':
+              - cell "body" [ref=f14e682]
+              - cell "padding-inline" [ref=f14e683]
+              - 'cell "{space.inset-x.md}" [ref=f14e684]':
+                - code [ref=f14e685]: "{space.inset-x.md}"
+              - cell "16px" [ref=f14e686]:
+                - generic [ref=f14e688]: 16px
+              - cell "space/inset-x/md" [ref=f14e689]
+              - cell "✓ variable exists in the Figma file (from parity/snapshots/figma-tokens.json)" [ref=f14e690]:
+                - generic "variable exists in the Figma file (from parity/snapshots/figma-tokens.json)" [ref=f14e691]:
+                  - text: ✓
+                  - generic [ref=f14e692]: variable exists in the Figma file (from parity/snapshots/figma-tokens.json)
+            - 'row "body padding-block {space.inset-y.md} 8px space/inset-y/md ✓ variable exists in the Figma file (from parity/snapshots/figma-tokens.json)" [ref=f14e693]':
+              - cell "body" [ref=f14e694]
+              - cell "padding-block" [ref=f14e695]
+              - 'cell "{space.inset-y.md}" [ref=f14e696]':
+                - code [ref=f14e697]: "{space.inset-y.md}"
+              - cell "8px" [ref=f14e698]:
+                - generic [ref=f14e700]: 8px
+              - cell "space/inset-y/md" [ref=f14e701]
+              - cell "✓ variable exists in the Figma file (from parity/snapshots/figma-tokens.json)" [ref=f14e702]:
+                - generic "variable exists in the Figma file (from parity/snapshots/figma-tokens.json)" [ref=f14e703]:
+                  - text: ✓
+                  - generic [ref=f14e704]: variable exists in the Figma file (from parity/snapshots/figma-tokens.json)
+            - 'row "body color {color.surface.foreground} #111827 color/surface/foreground ✓ variable exists in the Figma file (from parity/snapshots/figma-tokens.json)" [ref=f14e705]':
+              - cell "body" [ref=f14e706]
+              - cell "color" [ref=f14e707]
+              - 'cell "{color.surface.foreground}" [ref=f14e708]':
+                - code [ref=f14e709]: "{color.surface.foreground}"
+              - cell "#111827" [ref=f14e710]:
+                - generic [ref=f14e713]: "#111827"
+              - cell "color/surface/foreground" [ref=f14e714]
+              - cell "✓ variable exists in the Figma file (from parity/snapshots/figma-tokens.json)" [ref=f14e715]:
+                - generic "variable exists in the Figma file (from parity/snapshots/figma-tokens.json)" [ref=f14e716]:
+                  - text: ✓
+                  - generic [ref=f14e717]: variable exists in the Figma file (from parity/snapshots/figma-tokens.json)
+            - 'row "body font-family {font.control.family} Inter, system-ui, -apple-system, sans-serif font/control/family ✓ variable exists in the Figma file (from parity/snapshots/figma-tokens.json)" [ref=f14e718]':
+              - cell "body" [ref=f14e719]
+              - cell "font-family" [ref=f14e720]
+              - 'cell "{font.control.family}" [ref=f14e721]':
+                - code [ref=f14e722]: "{font.control.family}"
+              - cell "Inter, system-ui, -apple-system, sans-serif" [ref=f14e723]:
+                - generic [ref=f14e725]: Inter, system-ui, -apple-system, sans-serif
+              - cell "font/control/family" [ref=f14e726]
+              - cell "✓ variable exists in the Figma file (from parity/snapshots/figma-tokens.json)" [ref=f14e727]:
+                - generic "variable exists in the Figma file (from parity/snapshots/figma-tokens.json)" [ref=f14e728]:
+                  - text: ✓
+                  - generic [ref=f14e729]: variable exists in the Figma file (from parity/snapshots/figma-tokens.json)
+            - 'row "body font-size {font.control.size.sm} 14px font/control/size/sm ✓ variable exists in the Figma file (from parity/snapshots/figma-tokens.json)" [ref=f14e730]':
+              - cell "body" [ref=f14e731]
+              - cell "font-size" [ref=f14e732]
+              - 'cell "{font.control.size.sm}" [ref=f14e733]':
+                - code [ref=f14e734]: "{font.control.size.sm}"
+              - cell "14px" [ref=f14e735]:
+                - generic [ref=f14e737]: 14px
+              - cell "font/control/size/sm" [ref=f14e738]
+              - cell "✓ variable exists in the Figma file (from parity/snapshots/figma-tokens.json)" [ref=f14e739]:
+                - generic "variable exists in the Figma file (from parity/snapshots/figma-tokens.json)" [ref=f14e740]:
+                  - text: ✓
+                  - generic [ref=f14e741]: variable exists in the Figma file (from parity/snapshots/figma-tokens.json)
+            - 'row "footer gap {space.gap.control} 8px space/gap/control ✓ variable exists in the Figma file (from parity/snapshots/figma-tokens.json)" [ref=f14e742]':
+              - cell "footer" [ref=f14e743]
+              - cell "gap" [ref=f14e744]
+              - 'cell "{space.gap.control}" [ref=f14e745]':
+                - code [ref=f14e746]: "{space.gap.control}"
+              - cell "8px" [ref=f14e747]:
+                - generic [ref=f14e749]: 8px
+              - cell "space/gap/control" [ref=f14e750]
+              - cell "✓ variable exists in the Figma file (from parity/snapshots/figma-tokens.json)" [ref=f14e751]:
+                - generic "variable exists in the Figma file (from parity/snapshots/figma-tokens.json)" [ref=f14e752]:
+                  - text: ✓
+                  - generic [ref=f14e753]: variable exists in the Figma file (from parity/snapshots/figma-tokens.json)
+            - 'row "footer padding-inline {space.inset-x.md} 16px space/inset-x/md ✓ variable exists in the Figma file (from parity/snapshots/figma-tokens.json)" [ref=f14e754]':
+              - cell "footer" [ref=f14e755]
+              - cell "padding-inline" [ref=f14e756]
+              - 'cell "{space.inset-x.md}" [ref=f14e757]':
+                - code [ref=f14e758]: "{space.inset-x.md}"
+              - cell "16px" [ref=f14e759]:
+                - generic [ref=f14e761]: 16px
+              - cell "space/inset-x/md" [ref=f14e762]
+              - cell "✓ variable exists in the Figma file (from parity/snapshots/figma-tokens.json)" [ref=f14e763]:
+                - generic "variable exists in the Figma file (from parity/snapshots/figma-tokens.json)" [ref=f14e764]:
+                  - text: ✓
+                  - generic [ref=f14e765]: variable exists in the Figma file (from parity/snapshots/figma-tokens.json)
+            - 'row "footer padding-block {space.inset-y.md} 8px space/inset-y/md ✓ variable exists in the Figma file (from parity/snapshots/figma-tokens.json)" [ref=f14e766]':
+              - cell "footer" [ref=f14e767]
+              - cell "padding-block" [ref=f14e768]
+              - 'cell "{space.inset-y.md}" [ref=f14e769]':
+                - code [ref=f14e770]: "{space.inset-y.md}"
+              - cell "8px" [ref=f14e771]:
+                - generic [ref=f14e773]: 8px
+              - cell "space/inset-y/md" [ref=f14e774]
+              - cell "✓ variable exists in the Figma file (from parity/snapshots/figma-tokens.json)" [ref=f14e775]:
+                - generic "variable exists in the Figma file (from parity/snapshots/figma-tokens.json)" [ref=f14e776]:
+                  - text: ✓
+                  - generic [ref=f14e777]: variable exists in the Figma file (from parity/snapshots/figma-tokens.json)
+        - paragraph [ref=f14e778]:
+          - text: "source:"
+          - code [ref=f14e779]: contracts/card.contract.json · src/styles/tokens.css (live) · parity/snapshots/figma-tokens.json
+      - generic [ref=f14e780]:
+        - generic [ref=f14e781]:
+          - heading "Design surface detail" [level=2] [ref=f14e782]
+          - paragraph [ref=f14e783]: What the published Figma component set actually exposes, read from the latest extraction — identity is anchored by key, so renames on either side can't fork it.
+        - generic [ref=f14e784]:
+          - generic [ref=f14e786]: 1 variants published
+          - generic [ref=f14e787]:
+            - generic [ref=f14e788]:
+              - generic [ref=f14e789]: Title
+              - generic [ref=f14e790]: TEXT
+            - generic [ref=f14e791]:
+              - generic [ref=f14e792]: Body
+              - generic [ref=f14e793]: INSTANCE_SWAP
+            - generic [ref=f14e794]:
+              - generic [ref=f14e795]: Actions
+              - generic [ref=f14e796]: INSTANCE_SWAP
+            - generic [ref=f14e797]:
+              - generic [ref=f14e798]: Show Actions
+              - generic [ref=f14e799]: BOOLEAN
+            - paragraph [ref=f14e800]: key 7cd7011e4f237416…
+        - paragraph [ref=f14e801]:
+          - text: "source:"
+          - code [ref=f14e802]: parity/snapshots/figma-components.json

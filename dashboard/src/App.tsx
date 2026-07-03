@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import type { ReactNode } from 'react';
-import { Button } from '../../src/components';
+import { Moon, Sun } from 'lucide-react';
+import { Button } from './components/ui';
+import { cn } from './lib/utils';
 import { catalog } from './data';
 import { Overview } from './views/Overview';
 import { ComponentsList } from './views/ComponentsList';
@@ -34,6 +36,9 @@ export function App() {
   const [theme, setTheme] = useState<Theme>('light');
 
   useEffect(() => {
+    // Chrome (shadcn) keys off .dark; the design-system samples key off
+    // [data-theme] — one toggle drives both worlds.
+    document.documentElement.classList.toggle('dark', theme === 'dark');
     document.documentElement.dataset.theme = theme;
   }, [theme]);
 
@@ -45,78 +50,86 @@ export function App() {
   const section = segments[0] ?? '';
 
   let view: ReactNode;
-  let sectionLabel: string;
   if (section === 'components' && segments[1]) {
     view = <ComponentDetail id={decodeURIComponent(segments[1])} />;
-    sectionLabel = 'Components';
   } else if (section === 'components') {
     view = <ComponentsList />;
-    sectionLabel = 'Components';
   } else if (section === 'tokens') {
     view = <Tokens />;
-    sectionLabel = 'Tokens';
   } else if (section === 'governance') {
     view = <Governance />;
-    sectionLabel = 'Governance';
   } else if (section === 'parity') {
     view = <Parity />;
-    sectionLabel = 'Parity';
   } else {
     view = <Overview />;
-    sectionLabel = 'Overview';
   }
 
   return (
-    <div className="shell">
-      <aside className="sidebar">
-        <div className="brand">
-          <a className="brand-name" href="#/">
+    <div className="flex min-h-dvh flex-col md:flex-row">
+      {navigator.webdriver ? (
+        <div className="bg-destructive fixed inset-x-0 top-0 z-50 px-4 py-2 text-center text-sm font-medium text-white">
+          QA automation browser — the viewport is pinned and will crop. Review at{' '}
+          <code>http://localhost:5180</code> in your own browser.
+        </div>
+      ) : null}
+
+      <aside className="bg-sidebar text-sidebar-foreground md:sticky md:top-0 md:flex md:h-dvh md:w-56 md:shrink-0 md:flex-col md:overflow-y-auto">
+        <div className="px-5 pt-5 pb-2">
+          <a href="#/" className="text-lg font-semibold tracking-tight text-white">
             Contract Hub
           </a>
-          <p className="brand-sub">The governed source, visualized</p>
+          <p className="text-sidebar-foreground/60 mt-0.5 text-xs">The governed source, visualized</p>
         </div>
-        <nav className="nav" aria-label="Primary">
+        <nav aria-label="Main" className="flex flex-row flex-wrap gap-1 px-3 py-3 md:flex-col md:gap-0.5">
           {NAV_ITEMS.map((item) => {
-            const isActive =
-              item.section === '' ? section === '' : section === item.section;
+            const active = item.section === section || (item.section === 'components' && section === 'components');
             return (
               <a
                 key={item.href}
                 href={item.href}
-                className={isActive ? 'active' : undefined}
-                aria-current={isActive ? 'page' : undefined}
+                aria-current={active ? 'page' : undefined}
+                className={cn(
+                  'rounded-md px-3 py-2 text-sm outline-none focus-visible:ring-2 focus-visible:ring-white/60',
+                  active
+                    ? 'bg-sidebar-accent text-sidebar-accent-foreground font-medium'
+                    : 'hover:bg-sidebar-accent/60 hover:text-sidebar-accent-foreground',
+                )}
               >
                 {item.label}
               </a>
             );
           })}
         </nav>
-        <div className="sidebar-foot mono">
+        <div className="mt-auto hidden px-5 py-4 font-mono text-[11px] text-white/40 md:block">
           {catalog.package.name}
           <br />
           catalog v{catalog.system.catalogVersion}
         </div>
       </aside>
 
-      <div className="main">
-        <header className="topbar">
-          <span className="topbar-section micro">{sectionLabel}</span>
-          <div className="topbar-meta">
-            <span className="muted">
-              catalog v{catalog.system.catalogVersion} ·{' '}
-              <span className="mono">{catalog.system.gitCommit}</span>
+      <div className="min-w-0 flex-1">
+        <header className="bg-background/95 sticky top-0 z-40 flex flex-wrap items-center justify-between gap-2 border-b px-4 py-2.5 backdrop-blur md:px-8">
+          <span className="text-muted-foreground text-xs font-medium tracking-widest uppercase">
+            {section === '' ? 'Overview' : section}
+          </span>
+          <div className="flex items-center gap-3">
+            <span className="text-muted-foreground hidden font-mono text-xs sm:inline">
+              catalog v{catalog.system.catalogVersion} · {catalog.system.gitCommit}
             </span>
             <Button
-              variant="secondary"
+              variant="outline"
               size="sm"
-              aria-pressed={theme === 'dark'}
-              onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+              aria-label={theme === 'light' ? 'Switch to dark mode' : 'Switch to light mode'}
+              onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
             >
-              {theme === 'dark' ? 'Light mode' : 'Dark mode'}
+              {theme === 'light' ? <Moon aria-hidden /> : <Sun aria-hidden />}
+              <span className="hidden sm:inline">{theme === 'light' ? 'Dark' : 'Light'}</span>
             </Button>
           </div>
         </header>
-        <main className="content">{view}</main>
+        <main className="mx-auto w-full max-w-6xl min-w-0 space-y-10 px-4 py-6 md:px-8 md:py-8">
+          {view}
+        </main>
       </div>
     </div>
   );

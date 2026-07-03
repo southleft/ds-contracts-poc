@@ -1,59 +1,41 @@
-import { Badge } from '../../../src/components';
+import { Badge, Card, CardContent, CardDescription, CardHeader, CardTitle, Section, Source } from '../components/ui';
 import { components } from '../data';
-import type { ComponentEntry } from '../data';
-import { Source } from '../ui';
-
-function statusVariant(status: string): 'info' | 'success' | 'warning' | 'danger' {
-  if (status === 'stable') return 'success';
-  if (status === 'deprecated') return 'danger';
-  return 'info';
-}
-
-function surfaceLine(component: ComponentEntry): string {
-  return component.figma.representation === 'component'
-    ? 'Code ✓ · Figma ✓'
-    : 'Code ✓ · Figma: native auto-layout';
-}
 
 export function ComponentsList() {
   return (
-    <div className="page">
-      <header className="page-head">
-        <h1 className="page-title">Components</h1>
-        <p className="page-lede">
-          This is the system's entire vocabulary — {components.length} concepts in the catalog,
-          each governed by one contract that anchors both the React export and the Figma component
-          set. Open any card to see the contract and both generated surfaces side by side.
-        </p>
-      </header>
-
-      <div className="comp-grid">
-        {components.map((component) => (
+    <Section
+      title="Components"
+      lead="Every component the catalog governs. Each one is generated to code (always) and to Figma (unless the concept maps to a native canvas feature). Open one to see the contract and both surfaces mapped against it."
+    >
+      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-3">
+        {components.map((c) => (
           <a
-            key={component.id}
-            className="comp-card"
-            href={`#/components/${encodeURIComponent(component.id)}`}
+            key={c.id}
+            href={`#/components/${encodeURIComponent(c.id)}`}
+            className="focus-visible:ring-ring rounded-xl outline-none focus-visible:ring-2"
           >
-            <div className="comp-card-head">
-              <span className="comp-card-name">{component.name}</span>
-              <span className="comp-card-badges">
-                <span className="chip mono">v{component.version}</span>
-                <Badge variant={statusVariant(component.status)}>{component.status}</Badge>
-              </span>
-            </div>
-            <p className="comp-card-desc">{component.description}</p>
-            <div className="comp-card-meta muted">
-              <span>{surfaceLine(component)}</span>
-              <span>
-                {component.props.length} {component.props.length === 1 ? 'prop' : 'props'} ·{' '}
-                {component.slots.length} named {component.slots.length === 1 ? 'slot' : 'slots'} ·{' '}
-                {component.children.kind} children
-              </span>
-            </div>
+            <Card className="hover:border-primary/40 h-full gap-3 transition-colors">
+              <CardHeader>
+                <div className="flex flex-wrap items-center gap-2">
+                  <CardTitle>{c.name}</CardTitle>
+                  <Badge variant="outline" className="font-mono">
+                    v{c.version}
+                  </Badge>
+                  <Badge variant={c.status === 'stable' ? 'success' : 'secondary'}>{c.status}</Badge>
+                </div>
+                <CardDescription className="line-clamp-2">{c.description}</CardDescription>
+              </CardHeader>
+              <CardContent className="text-muted-foreground flex flex-wrap gap-x-4 gap-y-1 text-xs">
+                <span>Code ✓</span>
+                <span>{c.figma.representation === 'native' ? 'Figma: native auto-layout' : 'Figma ✓'}</span>
+                <span>{c.props.length} props</span>
+                <span>{c.slots.length + (c.children.kind === 'slot' ? 1 : 0)} slots</span>
+              </CardContent>
+            </Card>
           </a>
         ))}
       </div>
       <Source path="catalog/catalog.json" />
-    </div>
+    </Section>
   );
 }

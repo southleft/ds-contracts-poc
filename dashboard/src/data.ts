@@ -354,3 +354,52 @@ export function semanticTokensByGroup(): Map<string, TokenInfo[]> {
   }
   return groups;
 }
+
+// ---------------------------------------------------------------------------
+// Mapping helpers (rebuild round): token ↔ contract usage, and the Figma
+// variable inventory for live in-Figma verification of every token row.
+// ---------------------------------------------------------------------------
+
+import figmaTokensJson from '../../parity/snapshots/figma-tokens.json';
+
+interface FigmaTokensSnapshot {
+  collections: Array<{ name: string; variables: Array<{ name: string }> }>;
+}
+
+/** Every variable name that exists in the Figma file (slash paths). */
+export const figmaVariableNames: Set<string> = new Set(
+  (figmaTokensJson as unknown as FigmaTokensSnapshot).collections.flatMap((c) =>
+    c.variables.map((v) => v.name),
+  ),
+);
+
+function walkAnatomyRefs(node: AnatomyNode, out: Set<string>): void {
+  for (const ref of Object.values(node.tokens ?? {})) {
+    // strip braces; keep {prop} placeholders visible in the path
+    out.add(ref.slice(1, -1));
+  }
+  for (const stateDecls of Object.values(node.states ?? {})) {
+    for (const ref of Object.values(stateDecls)) out.add(ref.slice(1, -1));
+  }
+  for (const child of Object.values(node.parts ?? {})) walkAnatomyRefs(child, out);
+}
+
+/**
+ * dot-path token (or substitution family like "space.inset-x.{size}") →
+ * component names that bind it. A token like "space.inset-x.sm" matches a
+ * binding "space.inset-x.{size}" family.
+ */
+export function tokenUsedBy(dotPath: string): string[] {
+  const users: string[] = [];
+  for (const contract of rawContracts) {
+    const refs = new Set<string>();
+    for (const part of Object.values(contract.anatomy)) walkAnatomyRefs(part, refs);
+    const hit = [...refs].some((ref) => {
+      if (ref === dotPath) return true;
+      const pattern = ref.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').replace(/\\\{[a-z][\w-]*\\\}/g, '[\\w-]+');
+      return new RegExp(`^${pattern}$`).test(dotPath);
+    });
+    if (hit) users.push(contract.name);
+  }
+  return users.sort();
+}

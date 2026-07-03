@@ -1,5 +1,6 @@
 import { defineConfig, type Plugin } from 'vite';
 import react from '@vitejs/plugin-react';
+import tailwindcss from '@tailwindcss/vite';
 import { execFile } from 'node:child_process';
 import { randomUUID } from 'node:crypto';
 import { readFile, unlink, writeFile } from 'node:fs/promises';
@@ -168,7 +169,7 @@ function devApiPlugin(): Plugin {
 
 export default defineConfig({
   root: dashboardRoot,
-  plugins: [react(), devApiPlugin()],
+  plugins: [react(), tailwindcss(), devApiPlugin()],
   server: {
     port: 5180,
     fs: {

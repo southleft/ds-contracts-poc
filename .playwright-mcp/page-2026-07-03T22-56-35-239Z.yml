@@ -1,0 +1,118 @@
+- generic [ref=f14e3]:
+  - complementary [ref=f14e4]:
+    - generic [ref=f14e5]:
+      - link "Contract Hub" [ref=f14e6] [cursor=pointer]:
+        - /url: "#/"
+      - paragraph [ref=f14e7]: The governed source, visualized
+    - navigation "Main" [ref=f14e8]:
+      - link "Overview" [ref=f14e9] [cursor=pointer]:
+        - /url: "#/"
+      - link "Components" [ref=f14e10] [cursor=pointer]:
+        - /url: "#/components"
+      - link "Tokens" [ref=f14e11] [cursor=pointer]:
+        - /url: "#/tokens"
+      - link "Governance" [ref=f14e12] [cursor=pointer]:
+        - /url: "#/governance"
+      - link "Parity" [ref=f14e13] [cursor=pointer]:
+        - /url: "#/parity"
+    - generic [ref=f14e14]:
+      - text: ds-contracts-poc
+      - text: catalog v0.1.0
+  - generic [ref=f14e15]:
+    - banner [ref=f14e16]:
+      - generic [ref=f14e17]: Overview
+      - generic [ref=f14e18]:
+        - generic [ref=f14e19]: catalog v0.1.0 · 8407354
+        - button "Switch to dark mode" [ref=f14e20]:
+          - img
+          - generic [ref=f14e21]: Dark
+    - main [ref=f14e22]:
+      - generic [ref=f14e219]:
+        - heading "One contract. Two surfaces. Zero drift." [level=1] [ref=f14e220]
+        - paragraph [ref=f14e221]: A machine-readable contract is the single source of truth between the Figma library and the React codebase. Everything on this page is read live from the governed artifacts — nothing is typed in by hand.
+      - generic [ref=f14e222]:
+        - generic [ref=f14e223]:
+          - heading "System status" [level=2] [ref=f14e224]
+          - paragraph [ref=f14e225]: "Computed from the artifacts the pipeline itself produces: what exists, whether the surfaces agree, and whether the checks pass."
+        - generic [ref=f14e226]:
+          - generic [ref=f14e227]:
+            - generic [ref=f14e228]:
+              - generic [ref=f14e229]: Components
+              - generic [ref=f14e230]: "10"
+            - generic [ref=f14e231]: 2 map to native canvas features
+          - generic [ref=f14e232]:
+            - generic [ref=f14e233]:
+              - generic [ref=f14e234]: Tokens
+              - generic [ref=f14e235]: "118"
+            - generic [ref=f14e236]: custom properties · 59 semantic
+          - generic [ref=f14e237]:
+            - generic [ref=f14e238]:
+              - generic [ref=f14e239]: Evals
+              - generic [ref=f14e240]: 26/26
+            - generic [ref=f14e241]: deterministic claims passing
+          - generic [ref=f14e242]:
+            - generic [ref=f14e243]:
+              - generic [ref=f14e244]: Parity
+              - generic [ref=f14e245]: Clean
+            - generic [ref=f14e246]: 10 contracts checked · 0 drift findings
+          - generic [ref=f14e247]:
+            - generic [ref=f14e248]:
+              - generic [ref=f14e249]: Adherence
+              - generic [ref=f14e250]: 100 vs 69
+            - generic [ref=f14e251]: governed vs ungoverned generation
+        - paragraph [ref=f14e252]:
+          - text: "source:"
+          - code [ref=f14e253]: catalog/catalog.json · parity/report.json · evals/results.json · evals/adherence/results.json
+      - generic [ref=f14e254]:
+        - generic [ref=f14e255]:
+          - heading "The loop" [level=2] [ref=f14e256]
+          - paragraph [ref=f14e257]: Both surfaces are generated from the contract, and the parity check verifies each one against it — surfaces are never copied into each other.
+        - generic [ref=f14e258]:
+          - generic [ref=f14e260]:
+            - paragraph [ref=f14e261]: Code surface
+            - paragraph [ref=f14e262]: React + CSS Modules + Storybook
+          - generic [ref=f14e264]:
+            - paragraph [ref=f14e265]: CONTRACT
+            - paragraph [ref=f14e266]: the governed source — contracts/*.contract.json + tokens/
+          - generic [ref=f14e268]:
+            - paragraph [ref=f14e269]: Design surface
+            - paragraph [ref=f14e270]: Figma variables + component sets
+        - paragraph [ref=f14e271]: changes on either side are promoted into the contract — never synced side-to-side
+      - generic [ref=f14e272]:
+        - generic [ref=f14e273]:
+          - heading "Adherence, A/B" [level=2] [ref=f14e274]
+          - paragraph [ref=f14e275]: Does governance change what an AI generates? The same 5 screens were generated twice — once with the governed catalog in context, once without. The deterministic judge scored both arms against the org rules.
+        - generic [ref=f14e276]:
+          - generic [ref=f14e277]:
+            - paragraph [ref=f14e278]: With governed catalog — 100 · 5/5 screens adherent · 0/253 violations
+            - 'img "With governed catalog: mean score 100 of 100" [ref=f14e279]'
+          - generic [ref=f14e281]:
+            - paragraph [ref=f14e282]: Without — 69 · 0/5 screens adherent · 91/283 violations
+            - 'img "Without: mean score 69 of 100" [ref=f14e283]'
+          - generic [ref=f14e285]:
+            - paragraph [ref=f14e286]: Ungoverned violations, by rule
+            - generic [ref=f14e287]:
+              - code [ref=f14e288]: components-from-catalog
+              - generic [ref=f14e291]: "66"
+            - generic [ref=f14e292]:
+              - code [ref=f14e293]: tokens-only
+              - generic [ref=f14e296]: "22"
+            - generic [ref=f14e297]:
+              - code [ref=f14e298]: no-style-overrides
+              - generic [ref=f14e301]: "3"
+        - paragraph [ref=f14e302]:
+          - text: "source:"
+          - code [ref=f14e303]: evals/adherence/results.json
+      - generic [ref=f14e304]:
+        - generic [ref=f14e305]:
+          - heading "Show the gaps, never fake it" [level=2] [ref=f14e306]
+          - paragraph [ref=f14e307]: During the eval, the governed generator hit something the contracts couldn't express — and reported it instead of inventing a lookalike. The quote below is extracted from the generator's actual output file, not restated.
+        - alert [ref=f14e308]:
+          - generic [ref=f14e309]: "GAP: TableHeaderCell has no legal parent slot (Table accepts only TableRow, TableRow accepts only TableCell), so the header row uses TableCell."
+          - generic [ref=f14e310]:
+            - text: Promoted through the standard loop as
+            - generic [ref=f14e311]: ds.table-row v1.1.0
+            - text: — the slot's accepts list was widened (a minor version, per the compatibility rule), and the corrected composition became legal for every consumer.
+        - paragraph [ref=f14e312]:
+          - text: "source:"
+          - code [ref=f14e313]: evals/adherence/arm-a/account-overview.tsx (?raw import) · catalog/catalog.json

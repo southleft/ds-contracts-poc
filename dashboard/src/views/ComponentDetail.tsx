@@ -1,521 +1,393 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import type { ReactNode } from 'react';
-import { Badge, Button } from '../../../src/components';
+import { ExternalLink } from 'lucide-react';
 import {
-  contractFilePath,
-  figmaNodeUrl,
-  figmaSetByName,
-  findingsForComponent,
-  getComponent,
+  Badge, Button, Card, CardContent, CardHeader, CardTitle, Check, Checkbox, Input, Label,
+  NativeSelect, Section, Source, Table, TableBody, TableCell, TableHead, TableHeader, TableRow,
+} from '../components/ui';
+import {
+  contractFilePath, figmaNodeUrl, figmaSetByName, figmaVariableNames, findingsForComponent,
+  getComponent, type AnatomyNode, type ComponentEntry, type RawProp,
 } from '../data';
-import type { AnatomyNode, CatalogProp, ComponentEntry } from '../data';
-import { renderSample, SAMPLE_TEXT } from '../samples';
-import { Source } from '../ui';
+import { renderSample } from '../samples';
+import { resolveVar, useThemeVersion } from '../lib/use-theme-version';
 
-function statusVariant(status: string): 'info' | 'success' | 'warning' | 'danger' {
-  if (status === 'stable') return 'success';
-  if (status === 'deprecated') return 'danger';
-  return 'info';
+/* ------------------------------------------------ binding map (the point) */
+
+interface BindingRow {
+  kind: string;
+  contract: ReactNode;
+  code: ReactNode;
+  figma: ReactNode;
+  ok: boolean | null; // null = not applicable (native representation)
+  okLabel: string;
 }
 
-function classificationVariant(
-  classification: 'ahead' | 'behind' | 'mismatch',
-): 'info' | 'warning' | 'danger' {
-  if (classification === 'ahead') return 'warning';
-  if (classification === 'behind') return 'info';
-  return 'danger';
-}
-
-function formatDefault(value: unknown): string {
-  if (value === undefined) return '—';
-  if (typeof value === 'string') return value;
-  return JSON.stringify(value);
-}
-
-function propTypeCell(prop: CatalogProp) {
-  if (Array.isArray(prop.type)) {
-    return (
-      <span className="chip-row">
-        {prop.type.map((value) => (
-          <span key={value} className="chip mono">
-            {value}
-          </span>
-        ))}
-      </span>
-    );
+function figmaPropsOf(entry: ComponentEntry): Map<string, { type: string; variantOptions: string[] | null }> {
+  const set = figmaSetByName(entry.name);
+  const map = new Map<string, { type: string; variantOptions: string[] | null }>();
+  if (!set) return map;
+  for (const [key, def] of Object.entries(set.properties)) {
+    map.set(key.split('#')[0], { type: def.type, variantOptions: def.variantOptions ?? null });
   }
-  return <span className="mono">{prop.type}</span>;
+  return map;
 }
 
-/**
- * Interactive props playground — controls are generated from the catalog
- * entry itself (a select per enum prop, a checkbox per boolean, a text input
- * for string props and text children) and drive the REAL component from
- * src/components, re-rendered live on every change.
- */
-function Playground({ component }: { component: ComponentEntry }) {
-  const [values, setValues] = useState<Record<string, unknown>>(() => {
-    const initial: Record<string, unknown> = {};
-    for (const prop of component.props) {
-      if (prop.default !== undefined) {
-        initial[prop.name] = prop.default;
-      } else if (Array.isArray(prop.type)) {
-        initial[prop.name] = prop.type[0];
-      } else if (prop.type === 'boolean') {
-        initial[prop.name] = false;
+function bindingRows(entry: ComponentEntry): BindingRow[] {
+  const native = entry.figma.representation === 'native';
+  const figmaProps = figmaPropsOf(entry);
+  const rows: BindingRow[] = [];
+
+  for (const prop of entry.contract?.props ?? []) {
+    const figmaBinding = prop.bindings?.figma;
+    const codeName = prop.bindings?.code?.prop ?? prop.name;
+    const live = figmaBinding ? figmaProps.get(figmaBinding.property) : undefined;
+    const isEnum = typeof prop.type === 'object';
+
+    let ok: boolean | null = null;
+    let okLabel = 'native representation — no Figma property expected';
+    if (!native && figmaBinding) {
+      if (!live) {
+        ok = false;
+        okLabel = `Figma property "${figmaBinding.property}" not found in the published set`;
+      } else if (isEnum) {
+        const want = (prop.type as { enum: string[] }).enum.map((v) => figmaBinding.values?.[v] ?? v);
+        ok = want.every((v) => live.variantOptions?.includes(v));
+        okLabel = ok ? 'every contract value exists as a Figma variant option' : 'variant options diverge from the contract';
+      } else {
+        ok = live.type === figmaBinding.kind;
+        okLabel = ok ? `property present as ${live.type}` : `expected ${figmaBinding.kind}, Figma has ${live.type}`;
       }
     }
-    return initial;
-  });
-  const [childText, setChildText] = useState(SAMPLE_TEXT[component.name] ?? '');
 
-  const hasTextChildren = component.children.kind === 'text';
-  const setValue = (name: string, value: unknown) =>
-    setValues((previous) => ({ ...previous, [name]: value }));
+    rows.push({
+      kind: isEnum ? 'enum' : prop.type === 'boolean' ? 'boolean' : 'text',
+      contract: (
+        <span className="font-mono text-xs">
+          {prop.name}
+          {isEnum ? `: ${(prop.type as { enum: string[] }).enum.join(' | ')}` : `: ${prop.type}`}
+        </span>
+      ),
+      code: <code className="text-xs">{codeName}{prop.required ? '' : '?'}</code>,
+      figma: figmaBinding ? (
+        <span className="font-mono text-xs">
+          {figmaBinding.property} <span className="text-muted-foreground">{figmaBinding.kind}</span>
+        </span>
+      ) : '—',
+      ok,
+      okLabel,
+    });
 
-  // Omit empty string-prop values so component defaults apply.
-  const stageProps: Record<string, unknown> = {};
-  for (const [name, value] of Object.entries(values)) {
-    if (value === '' || value === undefined) continue;
-    stageProps[name] = value;
+    // one row per enum VALUE — the spelling map is the contract's core trick
+    if (isEnum && figmaBinding?.values) {
+      for (const value of (prop.type as { enum: string[] }).enum) {
+        const figmaValue = figmaBinding.values[value] ?? value;
+        const present = native ? null : (figmaProps.get(figmaBinding.property)?.variantOptions ?? []).includes(figmaValue);
+        rows.push({
+          kind: 'value',
+          contract: <span className="text-muted-foreground pl-4 font-mono text-xs">· {value}</span>,
+          code: <code className="text-xs">"{value}"</code>,
+          figma: <span className="font-mono text-xs">{figmaValue}</span>,
+          ok: present,
+          okLabel: present ? 'variant option exists in Figma' : 'variant option missing in Figma',
+        });
+      }
+    }
   }
 
+  // slots (named + default) from the catalog entry
+  const slotDefs = [
+    ...(entry.children.kind === 'slot' ? [{ prop: 'children', accepts: entry.children.accepts ?? [], optional: false }] : []),
+    ...entry.slots.map((s) => ({ prop: s.prop, accepts: s.accepts, optional: s.optional })),
+  ];
+  const set = figmaSetByName(entry.name);
+  for (const slot of slotDefs) {
+    const figmaProp = [...figmaPropsOf(entry).entries()].find(([, d]) => d.type === 'INSTANCE_SWAP');
+    const multi = slot.accepts.length > 0 && (set?.nestedInstances ?? []).some((n) => slot.accepts.includes(n));
+    const ok = entry.figma.representation === 'native' ? null : Boolean(figmaProp) || multi;
+    rows.push({
+      kind: 'slot',
+      contract: (
+        <span className="font-mono text-xs">
+          slot: {slot.prop}
+          {slot.accepts.length > 0 ? ` accepts ${slot.accepts.join(', ')}` : ' (open)'}
+        </span>
+      ),
+      code: <code className="text-xs">{slot.prop}{slot.optional ? '?' : ''}: ReactNode</code>,
+      figma: multi
+        ? <span className="text-xs">rendered content (multi-child — INSTANCE_SWAP can't hold it; native SLOT is the migration target)</span>
+        : figmaProp
+          ? <span className="font-mono text-xs">{figmaProp[0]} INSTANCE_SWAP</span>
+          : '—',
+      ok,
+      okLabel: ok === null ? 'native representation' : ok ? 'slot represented in Figma' : 'slot missing in Figma',
+    });
+  }
+
+  return rows;
+}
+
+/* -------------------------------------------------- token binding mapping */
+
+interface TokenRow {
+  part: string;
+  cssProp: string;
+  refPath: string;   // may contain {prop} placeholders
+  expansions: string[]; // concrete dot-paths
+}
+
+function collectTokenRows(entry: ComponentEntry): TokenRow[] {
+  const rows: TokenRow[] = [];
+  const enums = new Map<string, string[]>();
+  for (const p of entry.contract?.props ?? []) {
+    if (typeof p.type === 'object') enums.set(p.name, p.type.enum);
+  }
+  const expand = (ref: string): string[] => {
+    const m = ref.match(/\{([a-z][\w-]*)\}/);
+    if (!m) return [ref];
+    const values = enums.get(m[1]) ?? [];
+    return values.flatMap((v) => expand(ref.replace(`{${m[1]}}`, v)));
+  };
+  const visit = (name: string, node: AnatomyNode) => {
+    for (const [cssProp, ref] of Object.entries(node.tokens ?? {})) {
+      const path = ref.slice(1, -1);
+      rows.push({ part: name, cssProp, refPath: path, expansions: expand(path) });
+    }
+    for (const [state, decls] of Object.entries(node.states ?? {})) {
+      for (const [cssProp, ref] of Object.entries(decls)) {
+        const path = ref.slice(1, -1);
+        rows.push({ part: `${name}:${state}`, cssProp, refPath: path, expansions: expand(path) });
+      }
+    }
+    for (const [childName, child] of Object.entries(node.parts ?? {})) visit(childName, child);
+  };
+  if (entry.contract) visit('root', entry.contract.anatomy.root);
+  return rows;
+}
+
+function TokenValue({ dotPath }: { dotPath: string }) {
+  useThemeVersion();
+  const cssVar = `--${dotPath.split('.').join('-')}`;
+  const value = resolveVar(cssVar);
+  const isColor = /^(#|rgb|oklch|hsl)/.test(value);
   return (
-    <div className="playground">
-      <h3 className="micro sub-label">Playground</h3>
-      <div className="pg-controls">
-        {component.props.map((prop) => {
-          const controlId = `pg-${component.id}-${prop.name}`;
-          if (Array.isArray(prop.type)) {
-            return (
-              <label className="pg-field" key={prop.name} htmlFor={controlId}>
-                <span className="pg-label mono">{prop.name}</span>
-                <select
-                  id={controlId}
-                  className="pg-select mono"
-                  value={String(values[prop.name] ?? prop.type[0])}
-                  onChange={(event) => setValue(prop.name, event.target.value)}
-                >
-                  {prop.type.map((option) => (
-                    <option key={option} value={option}>
-                      {option}
-                    </option>
-                  ))}
-                </select>
-              </label>
-            );
-          }
-          if (prop.type === 'boolean') {
-            return (
-              <label className="pg-field pg-field--check" key={prop.name} htmlFor={controlId}>
-                <input
-                  id={controlId}
-                  type="checkbox"
-                  checked={Boolean(values[prop.name])}
-                  onChange={(event) => setValue(prop.name, event.target.checked)}
-                />
-                <span className="pg-label mono">{prop.name}</span>
-              </label>
-            );
-          }
-          return (
-            <label className="pg-field" key={prop.name} htmlFor={controlId}>
-              <span className="pg-label mono">{prop.name}</span>
-              <input
-                id={controlId}
-                className="pg-input mono"
-                type="text"
-                value={String(values[prop.name] ?? '')}
-                onChange={(event) => setValue(prop.name, event.target.value)}
+    <span className="inline-flex items-center gap-1.5">
+      {isColor ? <span className="inline-block size-3.5 shrink-0 rounded-sm border" style={{ background: `var(${cssVar})` }} /> : null}
+      <span className="text-muted-foreground text-xs tabular-nums">{value || '—'}</span>
+    </span>
+  );
+}
+
+/* -------------------------------------------------------------- playground */
+
+function Playground({ entry }: { entry: ComponentEntry }) {
+  const [props, setProps] = useState<Record<string, unknown>>({});
+  const [childText, setChildText] = useState('');
+  const hasTextChildren = entry.children.kind === 'text';
+
+  return (
+    <div className="space-y-3">
+      <div className="flex flex-wrap items-end gap-x-4 gap-y-2">
+        {entry.props.map((p) =>
+          Array.isArray(p.type) ? (
+            <div key={p.name} className="space-y-1">
+              <Label htmlFor={`pg-${p.name}`} className="text-muted-foreground block text-xs">{p.name}</Label>
+              <NativeSelect
+                id={`pg-${p.name}`}
+                value={String(props[p.name] ?? p.default ?? p.type[0])}
+                onChange={(e) => setProps((s) => ({ ...s, [p.name]: e.target.value }))}
+              >
+                {p.type.map((v) => <option key={v} value={v}>{v}</option>)}
+              </NativeSelect>
+            </div>
+          ) : p.type === 'boolean' ? (
+            <Label key={p.name} htmlFor={`pg-${p.name}`} className="flex items-center gap-2 pb-2 text-xs">
+              <Checkbox
+                id={`pg-${p.name}`}
+                checked={Boolean(props[p.name] ?? p.default ?? false)}
+                onChange={(e) => setProps((s) => ({ ...s, [p.name]: e.target.checked }))}
               />
-            </label>
-          );
-        })}
+              {p.name}
+            </Label>
+          ) : (
+            <div key={p.name} className="space-y-1">
+              <Label htmlFor={`pg-${p.name}`} className="text-muted-foreground block text-xs">{p.name}</Label>
+              <Input
+                id={`pg-${p.name}`}
+                className="w-44"
+                value={String(props[p.name] ?? p.default ?? '')}
+                onChange={(e) => setProps((s) => ({ ...s, [p.name]: e.target.value }))}
+              />
+            </div>
+          ),
+        )}
         {hasTextChildren ? (
-          <label className="pg-field" htmlFor={`pg-${component.id}-children`}>
-            <span className="pg-label mono">children</span>
-            <input
-              id={`pg-${component.id}-children`}
-              className="pg-input mono"
-              type="text"
-              value={childText}
-              onChange={(event) => setChildText(event.target.value)}
-            />
-          </label>
+          <div className="space-y-1">
+            <Label htmlFor="pg-children" className="text-muted-foreground block text-xs">children</Label>
+            <Input id="pg-children" className="w-44" value={childText} placeholder="text content" onChange={(e) => setChildText(e.target.value)} />
+          </div>
         ) : null}
       </div>
-      <div className="pg-stage">{renderSample(component.name, stageProps, childText)}</div>
+      <div className="bg-background overflow-x-auto rounded-lg border border-dashed p-6">
+        {renderSample(entry.name, props, childText || undefined)}
+      </div>
+      <p className="text-muted-foreground text-xs">
+        Live render of the real generated component from <code>src/components/{entry.name}</code> — the controls above are
+        generated from the catalog entry, so only contract-legal values are offered.
+      </p>
     </div>
   );
 }
 
-function AnatomyPart({ name, node }: { name: string; node: AnatomyNode }) {
-  return (
-    <div className="anatomy-part">
-      <div className="anatomy-name mono">
-        {name}
-        {node.optional ? <span className="muted"> · optional</span> : null}
-      </div>
-      {node.component ? (
-        <div className="anatomy-instance muted">
-          instance of <span className="mono">{node.component.id}</span>
-        </div>
-      ) : null}
-      {node.slot ? (
-        <div className="anatomy-instance muted">
-          slot <span className="mono">{node.slot.name}</span>
-          {node.slot.accepts && node.slot.accepts.length > 0 ? (
-            <>
-              {' '}
-              accepts{' '}
-              {node.slot.accepts.map((id) => (
-                <span key={id} className="chip mono">
-                  {id}
-                </span>
-              ))}
-            </>
-          ) : null}
-        </div>
-      ) : null}
-      {node.tokens
-        ? Object.entries(node.tokens).map(([cssProp, tokenRef]) => (
-            <div className="binding-row mono" key={cssProp}>
-              <span className="binding-prop">{cssProp}</span>
-              <span className="binding-arrow" aria-hidden="true">
-                →
-              </span>
-              <span className="binding-token">{tokenRef}</span>
-            </div>
-          ))
-        : null}
-      {node.parts
-        ? Object.entries(node.parts).map(([childName, child]) => (
-            <AnatomyPart key={childName} name={`${name}.${childName}`} node={child} />
-          ))
-        : null}
-    </div>
-  );
-}
+/* ------------------------------------------------------------------ view */
 
 export function ComponentDetail({ id }: { id: string }) {
-  const component = getComponent(id);
+  const entry = getComponent(id);
+  const rows = useMemo(() => (entry ? bindingRows(entry) : []), [entry]);
+  const tokenRows = useMemo(() => (entry ? collectTokenRows(entry) : []), [entry]);
+  useThemeVersion();
 
-  if (!component) {
-    return (
-      <div className="page">
-        <p>
-          Unknown component <span className="mono">{id}</span>.{' '}
-          <a href="#/components">Back to components</a>
-        </p>
-      </div>
-    );
+  if (!entry) {
+    return <p className="text-muted-foreground">Unknown component id: {id}</p>;
   }
+  const native = entry.figma.representation === 'native';
+  const findings = findingsForComponent(entry.name);
+  const nodeId = entry.contract?.anchors.figma.nodeId ?? null;
 
-  const contract = component.contract;
-  const figmaSet = figmaSetByName(component.name);
-  const findings = findingsForComponent(component.name);
-  const isFigmaComponent = component.figma.representation === 'component';
-
-  const enumProps = component.props.filter((prop) => Array.isArray(prop.type));
-  const rowProp = enumProps[0];
-  const colProp = enumProps[1];
-  const rows: (string | undefined)[] = rowProp ? (rowProp.type as string[]) : [undefined];
-  const cols: (string | undefined)[] = colProp ? (colProp.type as string[]) : [undefined];
-
-  const sampleProps = (row: string | undefined, col: string | undefined) => {
-    const props: Record<string, unknown> = {};
-    if (rowProp && row !== undefined) props[rowProp.name] = row;
-    if (colProp && col !== undefined) props[colProp.name] = col;
-    return props;
-  };
-
-  const figmaUrl =
-    isFigmaComponent && contract && contract.anchors.figma.nodeId
-      ? figmaNodeUrl(contract.anchors.figma.nodeId)
-      : undefined;
-
-  return (
-    <div className="page">
-      <a className="back-link muted" href="#/components">
-        ← Components
-      </a>
-
-      <header className="detail-head">
-        <div className="detail-head-title">
-          <h1 className="page-title">{component.name}</h1>
-          <span className="mono muted">{component.id}</span>
-          <span className="chip mono">v{component.version}</span>
-          <Badge variant={statusVariant(component.status)}>{component.status}</Badge>
-        </div>
-        <p className="page-lede">{component.description}</p>
-        <div className="detail-links">
-          {figmaUrl ? (
-            <a href={figmaUrl} target="_blank" rel="noreferrer">
-              Open in Figma ↗
-            </a>
-          ) : null}
-          {contract ? (
-            <code className="import-snippet mono">
-              import {'{'} {contract.anchors.code.export} {'}'} from '
-              {contract.anchors.code.importPath}'
-            </code>
-          ) : null}
-        </div>
-        <p className="section-lede muted">
-          The three panels below show one component from three vantage points: both outer
-          surfaces are generated from the contract in the middle — neither is hand-maintained.
-        </p>
-      </header>
-
-      <div className="detail-grid">
-        {/* ------------------------------------------------ Code surface */}
-        <section className="panel">
-          <h2 className="micro panel-title">Code surface</h2>
-          <Playground key={component.id} component={component} />
-          <p className="sample-caption muted">
-            sample content · components + tokens are real, rendered from src/components
-          </p>
-          <h3 className="micro sub-label">Matrix</h3>
-          {rowProp ? (
-            <p className="matrix-caption micro">
-              {rowProp.name}
-              {colProp ? ` × ${colProp.name}` : ''}
-            </p>
-          ) : null}
-          <div className="matrix-scroll">
-            <div
-              className="matrix"
-              style={{ gridTemplateColumns: `auto repeat(${cols.length}, auto)` }}
-            >
-              <span className="matrix-corner" aria-hidden="true" />
-              {cols.map((col, index) => (
-                <span key={col ?? index} className="matrix-col-label micro">
-                  {colProp && col !== undefined ? col : ''}
-                </span>
-              ))}
-              {rows.map((row, rowIndex) => (
-                <MatrixRow
-                  key={row ?? rowIndex}
-                  label={rowProp && row !== undefined ? row : ''}
-                  cells={cols.map((col, colIndex) => (
-                    <div key={col ?? colIndex} className="matrix-cell">
-                      {renderSample(component.name, sampleProps(row, col))}
-                    </div>
-                  ))}
-                />
-              ))}
-            </div>
-          </div>
-          <p className="judge-line muted">
-            governed by contract <span className="mono">{component.id}</span> v{component.version}
-          </p>
-          <Source path="src/components (live render) · catalog/catalog.json (prop space)" />
-        </section>
-
-        {/* ------------------------------------------ Contract (center) */}
-        <section className="panel panel--contract">
-          <h2 className="micro panel-title">The contract (source of truth)</h2>
-
-          <h3 className="micro sub-label">Props</h3>
-          <div className="table-scroll">
-            <table className="props-table">
-            <thead>
-              <tr>
-                <th className="micro">name</th>
-                <th className="micro">type</th>
-                <th className="micro">default</th>
-                <th className="micro">required</th>
-              </tr>
-            </thead>
-            <tbody>
-              {component.props.map((prop) => (
-                <tr key={prop.name}>
-                  <td className="mono">{prop.name}</td>
-                  <td>{propTypeCell(prop)}</td>
-                  <td className="mono">{formatDefault(prop.default)}</td>
-                  <td>{prop.required ? '✓' : '—'}</td>
-                </tr>
-              ))}
-              </tbody>
-            </table>
-          </div>
-
-          <h3 className="micro sub-label">Children &amp; slots</h3>
-          <div className="policy-block">
-            <div className="policy-row">
-              <span className="policy-key muted">children</span>
-              <span>
-                <span className="chip mono">{component.children.kind}</span>
-                {component.children.accepts && component.children.accepts.length > 0 ? (
-                  <>
-                    {' '}
-                    accepts{' '}
-                    {component.children.accepts.map((name) => (
-                      <span key={name} className="chip mono">
-                        {name}
-                      </span>
-                    ))}
-                  </>
-                ) : null}
-                {component.children.acceptsMode ? (
-                  <span className="muted"> · mode: {component.children.acceptsMode}</span>
-                ) : null}
-              </span>
-            </div>
-            {component.slots.map((slot) => (
-              <div className="policy-row" key={slot.prop}>
-                <span className="policy-key muted">slot: {slot.prop}</span>
-                <span>
-                  accepts{' '}
-                  {slot.accepts.map((name) => (
-                    <span key={name} className="chip mono">
-                      {name}
-                    </span>
-                  ))}
-                  <span className="muted">
-                    {' '}
-                    · mode: {slot.acceptsMode}
-                    {slot.optional ? ' · optional' : ''}
-                  </span>
-                </span>
-              </div>
-            ))}
-          </div>
-
-          {contract ? (
-            <>
-              <h3 className="micro sub-label">Anatomy token bindings</h3>
-              <div className="anatomy">
-                <AnatomyPart name="root" node={contract.anatomy.root} />
-              </div>
-
-              {contract.states.length > 0 ? (
-                <>
-                  <h3 className="micro sub-label">States</h3>
-                  <div className="chip-row">
-                    {contract.states.map((state) => (
-                      <span key={state} className="chip mono">
-                        {state}
-                      </span>
-                    ))}
-                  </div>
-                </>
-              ) : null}
-
-              <h3 className="micro sub-label">Dual identity</h3>
-              <div className="identity-block">
-                <div className="identity-half">
-                  <span className="micro">Figma anchor</span>
-                  {contract.anchors.figma.componentSetKey ? (
-                    <>
-                      <span
-                        className="mono identity-line"
-                        title={contract.anchors.figma.componentSetKey}
-                      >
-                        set {contract.anchors.figma.componentSetKey.slice(0, 12)}…
-                      </span>
-                      <span className="mono identity-line">
-                        node {contract.anchors.figma.nodeId}
-                      </span>
-                    </>
-                  ) : (
-                    <span className="identity-line muted">native auto-layout — no set</span>
-                  )}
-                </div>
-                <div className="identity-half">
-                  <span className="micro">Code anchor</span>
-                  <span className="mono identity-line">{contract.anchors.code.importPath}</span>
-                  <span className="mono identity-line">export {contract.anchors.code.export}</span>
-                </div>
-              </div>
-            </>
-          ) : null}
-          <Source path={contractFilePath(component.id)} />
-        </section>
-
-        {/* ------------------------------------------------ Design surface */}
-        <section className="panel">
-          <h2 className="micro panel-title">Design surface (Figma)</h2>
-          {isFigmaComponent && figmaSet ? (
-            <>
-              <p>
-                <strong>{figmaSet.variantCount}</strong>{' '}
-                {figmaSet.variantCount === 1 ? 'variant' : 'variants'} published in the component
-                set.
-              </p>
-              <div className="figma-props">
-                {Object.entries(figmaSet.properties).map(([rawName, property]) => {
-                  const name = rawName.split('#')[0];
-                  return (
-                    <div className="figma-prop" key={rawName}>
-                      <span className="figma-prop-name">
-                        {name} <span className="muted mono">{property.type}</span>
-                      </span>
-                      {property.variantOptions ? (
-                        <span className="chip-row">
-                          {property.variantOptions.map((option) => (
-                            <span key={option} className="chip mono">
-                              {option}
-                            </span>
-                          ))}
-                        </span>
-                      ) : null}
-                    </div>
-                  );
-                })}
-              </div>
-              <p className="mono muted key-line" title={figmaSet.key}>
-                key {figmaSet.key.slice(0, 16)}…
-              </p>
-              {figmaUrl ? (
-                <a className="button-link" href={figmaUrl} target="_blank" rel="noreferrer">
-                  <Button variant="secondary" size="sm" tabIndex={-1}>
-                    Open in Figma
-                  </Button>
-                </a>
-              ) : null}
-            </>
-          ) : (
-            <div className="native-note">
-              <p>
-                This concept maps to <strong>native Figma auto-layout</strong> — no component is
-                generated, and parity doesn't expect one.
-              </p>
-            </div>
-          )}
-          <Source path="parity/snapshots/figma-components.json" />
-        </section>
-      </div>
-
-      {/* --------------------------------------------------- Parity strip */}
-      {findings.length === 0 ? (
-        <div className="parity-strip parity-strip--clean">
-          ✓ In parity — code, Figma, and tokens match contract {component.id} v{component.version}
-        </div>
-      ) : (
-        <div className="findings">
-          {findings.map((finding, index) => (
-            <div className="finding-row" key={index}>
-              <Badge variant={classificationVariant(finding.classification)}>
-                {finding.classification}
-              </Badge>
-              <span className="mono">{finding.subject}</span>
-              <span>{finding.detail}</span>
-              <span className="muted">{finding.remedy}</span>
-            </div>
-          ))}
-        </div>
-      )}
-      <Source path="parity/report.json" />
-    </div>
-  );
-}
-
-function MatrixRow({ label, cells }: { label: string; cells: ReactNode[] }) {
   return (
     <>
-      <span className="matrix-row-label micro">{label}</span>
-      {cells}
+      <div className="space-y-2">
+        <a href="#/components" className="text-muted-foreground text-sm hover:underline">← Components</a>
+        <div className="flex flex-wrap items-center gap-2">
+          <h1 className="text-2xl font-semibold tracking-tight">{entry.name}</h1>
+          <code className="text-muted-foreground text-sm">{entry.id}</code>
+          <Badge variant="outline" className="font-mono">v{entry.version}</Badge>
+          <Badge variant={entry.status === 'stable' ? 'success' : 'secondary'}>{entry.status}</Badge>
+        </div>
+        <p className="text-muted-foreground max-w-3xl text-sm">{entry.description}</p>
+        <div className="flex flex-wrap items-center gap-3 pt-1">
+          <code className="bg-muted rounded-md px-2 py-1 text-xs">
+            import {'{'} {entry.name} {'}'} from '{entry.contract?.anchors.code.importPath}'
+          </code>
+          {!native && nodeId ? (
+            <Button asChild variant="outline" size="sm">
+              <a href={figmaNodeUrl(nodeId)} target="_blank" rel="noreferrer">
+                Open in Figma <ExternalLink aria-hidden />
+              </a>
+            </Button>
+          ) : (
+            <Badge variant="secondary">Figma: native auto-layout</Badge>
+          )}
+        </div>
+      </div>
+
+      {findings.length === 0 ? (
+        <p className="text-success text-sm font-medium">✓ In parity — both surfaces match this contract (last differ run)</p>
+      ) : (
+        <p className="text-destructive text-sm font-medium">✕ {findings.length} drift finding(s) — see Parity</p>
+      )}
+
+      <Section
+        title="Try it"
+        lead="The component itself, rendered live from the generated package. Change any prop — the controls are built from the contract, so illegal values aren't even offered."
+      >
+        <Playground entry={entry} />
+      </Section>
+
+      <Section
+        title="Binding map — one contract, two surfaces"
+        lead="Every prop, value, and slot the contract declares, next to how it manifests in code and in Figma. The status column is computed live against the Figma snapshot — it's a verification, not an illustration."
+      >
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead className="w-24">Kind</TableHead>
+              <TableHead>Contract (canonical)</TableHead>
+              <TableHead>Code surface</TableHead>
+              <TableHead>Design surface (Figma)</TableHead>
+              <TableHead className="w-16">Match</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {rows.map((row, i) => (
+              <TableRow key={i}>
+                <TableCell><Badge variant="outline" className="text-[10px]">{row.kind}</Badge></TableCell>
+                <TableCell>{row.contract}</TableCell>
+                <TableCell>{row.code}</TableCell>
+                <TableCell>{row.figma}</TableCell>
+                <TableCell>{row.ok === null ? <span className="text-muted-foreground text-xs">n/a</span> : <Check ok={row.ok} label={row.okLabel} />}</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+        <Source path={`${contractFilePath(entry.id)} · parity/snapshots/figma-components.json`} />
+      </Section>
+
+      <Section
+        title="Token bindings — the styling contract"
+        lead="Where every visual decision comes from: each anatomy part binds CSS properties to design tokens. The resolved value is read live from the loaded stylesheet (flip the theme to watch it change); the Figma column is verified against the variables actually in the file."
+      >
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead>Part</TableHead>
+              <TableHead>CSS property</TableHead>
+              <TableHead>Token</TableHead>
+              <TableHead>Resolved (live)</TableHead>
+              <TableHead>Figma variable</TableHead>
+              <TableHead className="w-16">In Figma</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {tokenRows.flatMap((row) =>
+              row.expansions.map((dotPath, j) => (
+                <TableRow key={`${row.part}-${row.cssProp}-${j}`}>
+                  <TableCell className="font-mono text-xs">{j === 0 ? row.part : ''}</TableCell>
+                  <TableCell className="font-mono text-xs">{j === 0 ? row.cssProp : ''}</TableCell>
+                  <TableCell><code className="text-xs">{`{${dotPath}}`}</code></TableCell>
+                  <TableCell><TokenValue dotPath={dotPath} /></TableCell>
+                  <TableCell className="font-mono text-xs">{dotPath.split('.').join('/')}</TableCell>
+                  <TableCell>
+                    <Check
+                      ok={figmaVariableNames.has(dotPath.split('.').join('/'))}
+                      label="variable exists in the Figma file (from parity/snapshots/figma-tokens.json)"
+                    />
+                  </TableCell>
+                </TableRow>
+              )),
+            )}
+          </TableBody>
+        </Table>
+        <Source path={`${contractFilePath(entry.id)} · src/styles/tokens.css (live) · parity/snapshots/figma-tokens.json`} />
+      </Section>
+
+      {!native ? (
+        <Section
+          title="Design surface detail"
+          lead="What the published Figma component set actually exposes, read from the latest extraction — identity is anchored by key, so renames on either side can't fork it."
+        >
+          <Card className="max-w-xl gap-3">
+            <CardHeader>
+              <CardTitle className="text-sm">{figmaSetByName(entry.name)?.variantCount ?? '?'} variants published</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-2 text-sm">
+              {Object.entries(figmaSetByName(entry.name)?.properties ?? {}).map(([key, def]) => (
+                <div key={key} className="flex flex-wrap items-center gap-2">
+                  <span className="font-medium">{key.split('#')[0]}</span>
+                  <Badge variant="outline" className="text-[10px]">{def.type}</Badge>
+                  {(def.variantOptions ?? []).map((v) => (
+                    <code key={v} className="bg-muted rounded px-1.5 py-0.5 text-xs">{v}</code>
+                  ))}
+                </div>
+              ))}
+              <p className="text-muted-foreground font-mono text-xs">
+                key {entry.contract?.anchors.figma.componentSetKey?.slice(0, 16)}…
+              </p>
+            </CardContent>
+          </Card>
+          <Source path="parity/snapshots/figma-components.json" />
+        </Section>
+      ) : null}
     </>
   );
 }
