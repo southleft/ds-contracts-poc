@@ -1,5 +1,6 @@
 import { Badge, Card, CardContent, CardDescription, CardHeader, CardTitle, Section, Source } from '../components/ui';
 import { components } from '../data';
+import { renderSample } from '../samples';
 
 export function ComponentsList() {
   return (
@@ -15,6 +16,11 @@ export function ComponentsList() {
             className="focus-visible:ring-ring rounded-xl outline-none focus-visible:ring-2"
           >
             <Card className="hover:border-primary/40 h-full gap-3 transition-colors">
+              <div className="mx-5 flex h-24 items-center overflow-hidden rounded-md border border-dashed bg-[var(--color-surface-background)] px-3" aria-hidden>
+                <div className="pointer-events-none origin-left scale-[0.65] whitespace-nowrap">
+                  {renderSample(c.name)}
+                </div>
+              </div>
               <CardHeader>
                 <div className="flex flex-wrap items-center gap-2">
                   <CardTitle>{c.name}</CardTitle>

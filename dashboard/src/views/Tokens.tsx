@@ -1,4 +1,5 @@
-import { Check, Section, Source, Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '../components/ui';
+import { useMemo, useState } from 'react';
+import { Check, Input, Section, Source, Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '../components/ui';
 import { figmaVariableNames, semanticTokensByGroup, tokenUsedBy } from '../data';
 import { resolveVar, useThemeVersion } from '../lib/use-theme-version';
 
@@ -26,7 +27,22 @@ function Preview({ cssVar, type }: { cssVar: string; type: string }) {
 
 export function Tokens() {
   useThemeVersion();
-  const groups = semanticTokensByGroup();
+  const [query, setQuery] = useState('');
+  const allGroups = semanticTokensByGroup();
+  const groups = useMemo(() => {
+    if (!query.trim()) return allGroups;
+    const q = query.trim().toLowerCase();
+    const filtered = new Map<string, typeof allGroups extends Map<string, infer V> ? V : never>();
+    for (const [group, tokens] of allGroups) {
+      const hits = tokens.filter(
+        (t) => t.dotPath.includes(q) || t.figmaName.includes(q) || tokenUsedBy(t.dotPath).some((n) => n.toLowerCase().includes(q)),
+      );
+      if (hits.length > 0) filtered.set(group, hits);
+    }
+    return filtered;
+  }, [query, allGroups]);
+  const total = [...allGroups.values()].reduce((n, t) => n + t.length, 0);
+  const shown = [...groups.values()].reduce((n, t) => n + t.length, 0);
 
   return (
     <>
@@ -38,10 +54,28 @@ export function Tokens() {
           the CSS custom property the code consumes, and the Figma variable designers consume — verified to exist in the
           file. "Used by" shows which contracts bind it.
         </p>
+        <div className="mt-4 flex max-w-md items-center gap-3">
+          <Input
+            type="search"
+            aria-label="Filter tokens"
+            placeholder="Filter by token path, Figma name, or component…"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+          />
+          <span className="text-muted-foreground shrink-0 text-xs tabular-nums">
+            {shown}/{total}
+          </span>
+        </div>
       </div>
 
+      {shown === 0 ? <p className="text-muted-foreground text-sm">No tokens match "{query}".</p> : null}
       {[...groups.entries()].map(([group, tokens]) => (
-        <Section key={group} title={group} lead="">
+        <details key={group} open className="group">
+          <summary className="focus-visible:ring-ring cursor-pointer list-none rounded-md py-1 text-base font-semibold outline-none select-none focus-visible:ring-2">
+            <span className="text-muted-foreground mr-2 inline-block transition-transform group-open:rotate-90">›</span>
+            {group}
+            <span className="text-muted-foreground ml-2 text-xs font-normal tabular-nums">{tokens.length}</span>
+          </summary>
           <Table>
             <TableHeader>
               <TableRow>
@@ -87,7 +121,7 @@ export function Tokens() {
               })}
             </TableBody>
           </Table>
-        </Section>
+        </details>
       ))}
       <Source path="tokens/semantic.tokens.json · tokens/modes/semantic.light.tokens.json · src/styles/tokens.css (live) · parity/snapshots/figma-tokens.json · contracts/*.contract.json (used-by)" />
     </>

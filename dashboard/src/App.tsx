@@ -10,6 +10,7 @@ import { ComponentDetail } from './views/ComponentDetail';
 import { Tokens } from './views/Tokens';
 import { Governance } from './views/Governance';
 import { Parity } from './views/Parity';
+import { Context } from './views/Context';
 
 type Theme = 'light' | 'dark';
 
@@ -18,6 +19,7 @@ const NAV_ITEMS = [
   { href: '#/components', label: 'Components', section: 'components' },
   { href: '#/tokens', label: 'Tokens', section: 'tokens' },
   { href: '#/governance', label: 'Governance', section: 'governance' },
+  { href: '#/context', label: 'Context', section: 'context' },
   { href: '#/parity', label: 'Parity', section: 'parity' },
 ];
 
@@ -58,6 +60,8 @@ export function App() {
     view = <Tokens />;
   } else if (section === 'governance') {
     view = <Governance />;
+  } else if (section === 'context') {
+    view = <Context />;
   } else if (section === 'parity') {
     view = <Parity />;
   } else {

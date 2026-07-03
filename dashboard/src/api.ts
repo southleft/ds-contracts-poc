@@ -76,3 +76,46 @@ export function runTask(task: RunTask): Promise<ApiResponse<RunResult>> {
 export function judgeSource(source: string): Promise<ApiResponse<JudgeResult>> {
   return post<JudgeResult>('/api/judge', { source });
 }
+
+/* --------------------------------------------- contract + context editing */
+
+export interface RegenStep {
+  step: string;
+  exitCode: number;
+  output: string;
+}
+
+export interface AddPropResult {
+  ok: boolean;
+  contractId: string;
+  version: string;
+  steps: RegenStep[];
+}
+
+export interface AddPropPayload {
+  contractId: string;
+  name: string;
+  kind: 'enum' | 'boolean';
+  values?: string[];
+  default?: string | boolean;
+  description?: string;
+}
+
+export function addProp(payload: AddPropPayload): Promise<ApiResponse<AddPropResult>> {
+  return post<AddPropResult>('/api/contract/add-prop', payload);
+}
+
+export interface EditableRule {
+  id: string;
+  statement: string;
+  enforcement: 'judge' | 'agent';
+  forbiddenRawElements?: string[];
+}
+
+export function saveRules(rules: EditableRule[]): Promise<ApiResponse<{ ok: boolean; count: number; steps: RegenStep[] }>> {
+  return post('/api/context/rules', { rules });
+}
+
+export function saveMemory(content: string): Promise<ApiResponse<{ ok: boolean; steps: RegenStep[] }>> {
+  return post('/api/context/memory', { content });
+}

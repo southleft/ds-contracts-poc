@@ -1,0 +1,240 @@
+- generic [ref=f16e3]:
+  - complementary [ref=f16e4]:
+    - generic [ref=f16e5]:
+      - link "Contract Hub" [ref=f16e6] [cursor=pointer]:
+        - /url: "#/"
+      - paragraph [ref=f16e7]: The governed source, visualized
+    - navigation "Main" [ref=f16e8]:
+      - link "Overview" [ref=f16e9] [cursor=pointer]:
+        - /url: "#/"
+      - link "Components" [ref=f16e10] [cursor=pointer]:
+        - /url: "#/components"
+      - link "Tokens" [ref=f16e11] [cursor=pointer]:
+        - /url: "#/tokens"
+      - link "Governance" [ref=f16e12] [cursor=pointer]:
+        - /url: "#/governance"
+      - link "Context" [ref=f16e13] [cursor=pointer]:
+        - /url: "#/context"
+      - link "Parity" [ref=f16e14] [cursor=pointer]:
+        - /url: "#/parity"
+    - generic [ref=f16e15]:
+      - text: ds-contracts-poc
+      - text: catalog v0.1.0
+  - generic [ref=f16e16]:
+    - banner [ref=f16e17]:
+      - generic [ref=f16e18]: components
+      - generic [ref=f16e19]:
+        - generic [ref=f16e20]: catalog v0.1.0 · 0b59301
+        - button "Switch to dark mode" [ref=f16e21]:
+          - img
+          - generic [ref=f16e22]: Dark
+    - main [ref=f16e23]:
+      - generic [ref=f16e24]:
+        - generic [ref=f16e25]:
+          - heading "Components" [level=2] [ref=f16e26]
+          - paragraph [ref=f16e27]: Every component the catalog governs. Each one is generated to code (always) and to Figma (unless the concept maps to a native canvas feature). Open one to see the contract and both surfaces mapped against it.
+        - generic [ref=f16e28]:
+          - link "Avatar v1.0.0 draft Represents a person or entity with initials. Non-interactive. Code ✓ Figma ✓ 1 props 0 slots" [ref=f16e29] [cursor=pointer]:
+            - /url: "#/components/ds.avatar"
+            - generic [ref=f16e30]:
+              - generic [ref=f16e31]:
+                - generic:
+                  - img: AB
+              - generic [ref=f16e32]:
+                - generic [ref=f16e33]:
+                  - generic [ref=f16e34]: Avatar
+                  - generic [ref=f16e35]: v1.0.0
+                  - generic [ref=f16e36]: draft
+                - generic [ref=f16e37]: Represents a person or entity with initials. Non-interactive.
+              - generic [ref=f16e38]:
+                - generic [ref=f16e39]: Code ✓
+                - generic [ref=f16e40]: Figma ✓
+                - generic [ref=f16e41]: 1 props
+                - generic [ref=f16e42]: 0 slots
+          - link "Badge v1.0.0 draft Communicates status or categorization at a glance. Non-interactive. Code ✓ Figma ✓ 1 props 0 slots" [ref=f16e43] [cursor=pointer]:
+            - /url: "#/components/ds.badge"
+            - generic [ref=f16e44]:
+              - generic [ref=f16e45]:
+                - generic:
+                  - status: Badge
+              - generic [ref=f16e46]:
+                - generic [ref=f16e47]:
+                  - generic [ref=f16e48]: Badge
+                  - generic [ref=f16e49]: v1.0.0
+                  - generic [ref=f16e50]: draft
+                - generic [ref=f16e51]: Communicates status or categorization at a glance. Non-interactive.
+              - generic [ref=f16e52]:
+                - generic [ref=f16e53]: Code ✓
+                - generic [ref=f16e54]: Figma ✓
+                - generic [ref=f16e55]: 1 props
+                - generic [ref=f16e56]: 0 slots
+          - link "Button v1.2.0 draft Triggers an action or event. Use one primary button per context. Code ✓ Figma ✓ 4 props 0 slots" [ref=f16e57] [cursor=pointer]:
+            - /url: "#/components/ds.button"
+            - generic [ref=f16e58]:
+              - generic [ref=f16e59]:
+                - generic:
+                  - button: Button
+              - generic [ref=f16e60]:
+                - generic [ref=f16e61]:
+                  - generic [ref=f16e62]: Button
+                  - generic [ref=f16e63]: v1.2.0
+                  - generic [ref=f16e64]: draft
+                - generic [ref=f16e65]: Triggers an action or event. Use one primary button per context.
+              - generic [ref=f16e66]:
+                - generic [ref=f16e67]: Code ✓
+                - generic [ref=f16e68]: Figma ✓
+                - generic [ref=f16e69]: 4 props
+                - generic [ref=f16e70]: 0 slots
+          - link "Card v1.1.0 draft Groups related content behind one subject. Composes an Avatar, a bound title, a default body slot, and a constrained actions slot. Code ✓ Figma ✓ 1 props 2 slots" [ref=f16e71] [cursor=pointer]:
+            - /url: "#/components/ds.card"
+            - generic [ref=f16e72]:
+              - generic [ref=f16e73]:
+                - generic:
+                  - article:
+                    - generic:
+                      - img: AB
+                      - generic: Card title
+                    - generic: Revenue is tracking 12% ahead of plan. Two accounts need follow-up before Friday.
+                    - generic:
+                      - button: View report
+              - generic [ref=f16e74]:
+                - generic [ref=f16e75]:
+                  - generic [ref=f16e76]: Card
+                  - generic [ref=f16e77]: v1.1.0
+                  - generic [ref=f16e78]: draft
+                - generic [ref=f16e79]: Groups related content behind one subject. Composes an Avatar, a bound title, a default body slot, and a constrained actions slot.
+              - generic [ref=f16e80]:
+                - generic [ref=f16e81]: Code ✓
+                - generic [ref=f16e82]: Figma ✓
+                - generic [ref=f16e83]: 1 props
+                - generic [ref=f16e84]: 2 slots
+          - 'link "Inline v1.0.0 draft Horizontal layout primitive — lays children out in a row with a token-governed gap, vertically centered. Code ✓ Figma: native auto-layout 1 props 1 slots" [ref=f16e85] [cursor=pointer]':
+            - /url: "#/components/ds.inline"
+            - generic [ref=f16e86]:
+              - generic [ref=f16e87]:
+                - generic:
+                  - generic:
+                    - status: Info
+                    - status: Success
+                    - status: Warning
+              - generic [ref=f16e88]:
+                - generic [ref=f16e89]:
+                  - generic [ref=f16e90]: Inline
+                  - generic [ref=f16e91]: v1.0.0
+                  - generic [ref=f16e92]: draft
+                - generic [ref=f16e93]: Horizontal layout primitive — lays children out in a row with a token-governed gap, vertically centered.
+              - generic [ref=f16e94]:
+                - generic [ref=f16e95]: Code ✓
+                - generic [ref=f16e96]: "Figma: native auto-layout"
+                - generic [ref=f16e97]: 1 props
+                - generic [ref=f16e98]: 1 slots
+          - 'link "Stack v1.0.0 draft Vertical layout primitive — stacks children with a token-governed gap. Screens compose from Stack/Inline instead of raw styled divs. Code ✓ Figma: native auto-layout 1 props 1 slots" [ref=f16e99] [cursor=pointer]':
+            - /url: "#/components/ds.stack"
+            - generic [ref=f16e100]:
+              - generic [ref=f16e101]:
+                - generic:
+                  - generic:
+                    - status: Info
+                    - status: Success
+                    - status: Warning
+              - generic [ref=f16e102]:
+                - generic [ref=f16e103]:
+                  - generic [ref=f16e104]: Stack
+                  - generic [ref=f16e105]: v1.0.0
+                  - generic [ref=f16e106]: draft
+                - generic [ref=f16e107]: Vertical layout primitive — stacks children with a token-governed gap. Screens compose from Stack/Inline instead of raw styled divs.
+              - generic [ref=f16e108]:
+                - generic [ref=f16e109]: Code ✓
+                - generic [ref=f16e110]: "Figma: native auto-layout"
+                - generic [ref=f16e111]: 1 props
+                - generic [ref=f16e112]: 1 slots
+          - link "TableCell v1.1.0 draft A single data cell in a table row. Code ✓ Figma ✓ 1 props 0 slots" [ref=f16e113] [cursor=pointer]:
+            - /url: "#/components/ds.table-cell"
+            - generic [ref=f16e114]:
+              - generic [ref=f16e115]:
+                - generic:
+                  - cell: Cell
+              - generic [ref=f16e116]:
+                - generic [ref=f16e117]:
+                  - generic [ref=f16e118]: TableCell
+                  - generic [ref=f16e119]: v1.1.0
+                  - generic [ref=f16e120]: draft
+                - generic [ref=f16e121]: A single data cell in a table row.
+              - generic [ref=f16e122]:
+                - generic [ref=f16e123]: Code ✓
+                - generic [ref=f16e124]: Figma ✓
+                - generic [ref=f16e125]: 1 props
+                - generic [ref=f16e126]: 0 slots
+          - link "TableHeaderCell v1.1.0 draft A column header cell. Code ✓ Figma ✓ 1 props 0 slots" [ref=f16e127] [cursor=pointer]:
+            - /url: "#/components/ds.table-header-cell"
+            - generic [ref=f16e128]:
+              - generic [ref=f16e129]:
+                - generic:
+                  - columnheader: Header
+              - generic [ref=f16e130]:
+                - generic [ref=f16e131]:
+                  - generic [ref=f16e132]: TableHeaderCell
+                  - generic [ref=f16e133]: v1.1.0
+                  - generic [ref=f16e134]: draft
+                - generic [ref=f16e135]: A column header cell.
+              - generic [ref=f16e136]:
+                - generic [ref=f16e137]: Code ✓
+                - generic [ref=f16e138]: Figma ✓
+                - generic [ref=f16e139]: 1 props
+                - generic [ref=f16e140]: 0 slots
+          - link "TableRow v1.1.0 draft A selectable row of table cells. Code ✓ Figma ✓ 1 props 1 slots" [ref=f16e141] [cursor=pointer]:
+            - /url: "#/components/ds.table-row"
+            - generic [ref=f16e142]:
+              - generic [ref=f16e143]:
+                - generic:
+                  - row:
+                    - generic:
+                      - cell: Jordan Reyes
+                      - cell: Engineer
+                      - cell: Active
+              - generic [ref=f16e144]:
+                - generic [ref=f16e145]:
+                  - generic [ref=f16e146]: TableRow
+                  - generic [ref=f16e147]: v1.1.0
+                  - generic [ref=f16e148]: draft
+                - generic [ref=f16e149]: A selectable row of table cells.
+              - generic [ref=f16e150]:
+                - generic [ref=f16e151]: Code ✓
+                - generic [ref=f16e152]: Figma ✓
+                - generic [ref=f16e153]: 1 props
+                - generic [ref=f16e154]: 1 slots
+          - link "Table v1.1.0 draft Structured data in rows and columns. Composes header cells (with the Table's density mapped into them), and a body slot of rows. Code ✓ Figma ✓ 1 props 1 slots" [ref=f16e155] [cursor=pointer]:
+            - /url: "#/components/ds.table"
+            - generic [ref=f16e156]:
+              - generic [ref=f16e157]:
+                - generic:
+                  - table:
+                    - generic:
+                      - columnheader: Name
+                      - columnheader: Role
+                      - columnheader: Status
+                    - generic:
+                      - row:
+                        - generic:
+                          - cell: Jordan Reyes
+                          - cell: Engineer
+                          - cell: Active
+                      - row:
+                        - generic:
+                          - cell: Priya Nair
+                          - cell: Design
+                          - cell: Active
+              - generic [ref=f16e158]:
+                - generic [ref=f16e159]:
+                  - generic [ref=f16e160]: Table
+                  - generic [ref=f16e161]: v1.1.0
+                  - generic [ref=f16e162]: draft
+                - generic [ref=f16e163]: Structured data in rows and columns. Composes header cells (with the Table's density mapped into them), and a body slot of rows.
+              - generic [ref=f16e164]:
+                - generic [ref=f16e165]: Code ✓
+                - generic [ref=f16e166]: Figma ✓
+                - generic [ref=f16e167]: 1 props
+                - generic [ref=f16e168]: 1 slots
+        - paragraph [ref=f16e169]:
+          - text: "source:"
+          - code [ref=f16e170]: catalog/catalog.json

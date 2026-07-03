@@ -2,9 +2,11 @@ import { useMemo, useState } from 'react';
 import type { ReactNode } from 'react';
 import { ExternalLink } from 'lucide-react';
 import {
-  Badge, Button, Card, CardContent, CardHeader, CardTitle, Check, Checkbox, Input, Label,
-  NativeSelect, Section, Source, Table, TableBody, TableCell, TableHead, TableHeader, TableRow,
+  Alert, AlertDescription, AlertTitle, Badge, Button, Card, CardContent, CardHeader, CardTitle,
+  Check, Checkbox, Input, Label, NativeSelect, Section, Source, Table, TableBody, TableCell,
+  TableHead, TableHeader, TableRow,
 } from '../components/ui';
+import { addProp, UNAVAILABLE_NOTE, type AddPropResult, type ApiResponse } from '../api';
 import {
   contractFilePath, figmaNodeUrl, figmaSetByName, figmaVariableNames, findingsForComponent,
   getComponent, type AnatomyNode, type ComponentEntry, type RawProp,
@@ -239,6 +241,94 @@ function Playground({ entry }: { entry: ComponentEntry }) {
   );
 }
 
+/* ---------------------------------------------------- evolve the contract */
+
+function EvolveContract({ entry }: { entry: ComponentEntry }) {
+  const [name, setName] = useState('');
+  const [kind, setKind] = useState<'enum' | 'boolean'>('boolean');
+  const [values, setValues] = useState('subtle, strong');
+  const [description, setDescription] = useState('');
+  const [busy, setBusy] = useState(false);
+  const [result, setResult] = useState<ApiResponse<AddPropResult> | null>(null);
+
+  const submit = async () => {
+    setBusy(true);
+    setResult(
+      await addProp({
+        contractId: entry.id,
+        name,
+        kind,
+        ...(kind === 'enum' ? { values: values.split(',').map((v) => v.trim()).filter(Boolean) } : {}),
+        ...(description ? { description } : {}),
+      }),
+    );
+    setBusy(false);
+  };
+
+  return (
+    <div className="max-w-3xl space-y-3">
+      <div className="flex flex-wrap items-end gap-x-4 gap-y-2">
+        <div className="space-y-1">
+          <Label htmlFor="ev-name" className="text-muted-foreground block text-xs">prop name (camelCase)</Label>
+          <Input id="ev-name" className="w-44" value={name} placeholder="elevated" onChange={(e) => setName(e.target.value)} />
+        </div>
+        <div className="space-y-1">
+          <Label htmlFor="ev-kind" className="text-muted-foreground block text-xs">kind</Label>
+          <NativeSelect id="ev-kind" value={kind} onChange={(e) => setKind(e.target.value as 'enum' | 'boolean')}>
+            <option value="boolean">boolean</option>
+            <option value="enum">enum</option>
+          </NativeSelect>
+        </div>
+        {kind === 'enum' ? (
+          <div className="space-y-1">
+            <Label htmlFor="ev-values" className="text-muted-foreground block text-xs">values (comma-separated, kebab-case)</Label>
+            <Input id="ev-values" className="w-64" value={values} onChange={(e) => setValues(e.target.value)} />
+          </div>
+        ) : null}
+        <div className="min-w-56 flex-1 space-y-1">
+          <Label htmlFor="ev-desc" className="text-muted-foreground block text-xs">description (optional)</Label>
+          <Input id="ev-desc" value={description} onChange={(e) => setDescription(e.target.value)} />
+        </div>
+        <Button onClick={submit} disabled={busy || name.trim().length === 0}>
+          {busy ? 'Generating…' : 'Add property + regenerate'}
+        </Button>
+      </div>
+
+      {result?.status === 'unavailable' ? <p className="text-muted-foreground text-sm">{UNAVAILABLE_NOTE}</p> : null}
+      {result?.status === 'error' ? <p className="text-destructive text-sm">{result.message}</p> : null}
+      {result?.status === 'ok' ? (
+        <Alert variant="success">
+          <AlertTitle>
+            {result.data.contractId} → v{result.data.version} — regenerated
+          </AlertTitle>
+          <AlertDescription>
+            <ul className="mt-1 space-y-1 font-mono text-xs">
+              {result.data.steps.map((s) => (
+                <li key={s.step}>
+                  {s.step === 'parity check' && s.exitCode !== 0 ? '△' : s.exitCode === 0 ? '✓' : '✕'} {s.step}
+                  {s.step === 'parity check' && s.exitCode !== 0
+                    ? ' — Figma is now BEHIND the contract (expected: the new property exists in code but not yet on the canvas). That finding is the promotion model working.'
+                    : ''}
+                </li>
+              ))}
+            </ul>
+            <p className="mt-2">
+              The page data reloads via HMR — check the Binding Map above and the Playground (the new control appears).
+              Storybook, if running, has the new prop too. The Figma push runs through the sync scripts in an MCP
+              session; until then Parity honestly reports the gap.
+            </p>
+          </AlertDescription>
+        </Alert>
+      ) : null}
+      <p className="text-muted-foreground text-xs">
+        This writes the real contract file (minor version bump), regenerates the React component + stories + catalog +
+        Figma sync scripts, and re-runs parity. If generation fails, the contract rolls back — invalid states are
+        refused, never half-applied.
+      </p>
+    </div>
+  );
+}
+
 /* ------------------------------------------------------------------ view */
 
 export function ComponentDetail({ id }: { id: string }) {
@@ -292,6 +382,13 @@ export function ComponentDetail({ id }: { id: string }) {
         lead="The component itself, rendered live from the generated package. Change any prop — the controls are built from the contract, so illegal values aren't even offered."
       >
         <Playground entry={entry} />
+      </Section>
+
+      <Section
+        title="Evolve the contract"
+        lead="Product engineers change the system by changing the contract — here, live. Add a property and watch it regenerate the code surface immediately; the design surface's pending state shows up in Parity, which is exactly how the promotion model is supposed to feel."
+      >
+        <EvolveContract entry={entry} />
       </Section>
 
       <Section

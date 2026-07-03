@@ -60,7 +60,14 @@ export interface Rule {
   forbiddenRawElements?: string[];
 }
 
+export interface CatalogContext {
+  memory: string | null;
+  references: string[];
+  guidance?: string;
+}
+
 export interface Catalog {
+  context?: CatalogContext;
   system: { name: string; catalogVersion: string; gitCommit: string; source: string };
   package: { name: string; usage: string; stylesheet: string };
   rules: Rule[];

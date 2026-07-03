@@ -655,6 +655,39 @@ const SEMANTIC = [
     "codeSyntax": "var(--space-gap-control)"
   },
   {
+    "name": "space/gap/sm",
+    "type": "FLOAT",
+    "light": "space/100",
+    "dark": "space/100",
+    "scopes": [
+      "GAP",
+      "WIDTH_HEIGHT"
+    ],
+    "codeSyntax": "var(--space-gap-sm)"
+  },
+  {
+    "name": "space/gap/md",
+    "type": "FLOAT",
+    "light": "space/200",
+    "dark": "space/200",
+    "scopes": [
+      "GAP",
+      "WIDTH_HEIGHT"
+    ],
+    "codeSyntax": "var(--space-gap-md)"
+  },
+  {
+    "name": "space/gap/lg",
+    "type": "FLOAT",
+    "light": "space/300",
+    "dark": "space/300",
+    "scopes": [
+      "GAP",
+      "WIDTH_HEIGHT"
+    ],
+    "codeSyntax": "var(--space-gap-lg)"
+  },
+  {
     "name": "space/table/cell-y/comfortable",
     "type": "FLOAT",
     "light": "space/150",

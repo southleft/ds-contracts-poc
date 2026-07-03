@@ -101,6 +101,21 @@ const gitCommit = execSync('git rev-parse --short HEAD', { encoding: 'utf8' }).t
 const pkg = read('package.json');
 const rules = read('context/rules.json');
 
+// Context beyond the rules: standing memory + reference files an agent may
+// consult for judgment calls the deterministic rules don't cover.
+let memory: string | null = null;
+try {
+  memory = readFileSync(path.join(ROOT, 'context', 'memory.md'), 'utf8');
+} catch {
+  /* optional */
+}
+let references: string[] = [];
+try {
+  references = readdirSync(path.join(ROOT, 'context', 'references')).filter((f) => !f.startsWith('.'));
+} catch {
+  /* optional */
+}
+
 const catalog = {
   system: {
     name: 'DS Contracts POC',
@@ -114,6 +129,12 @@ const catalog = {
     stylesheet: `${pkg.name}/styles.css`,
   },
   rules: rules.rules,
+  context: {
+    memory,
+    references,
+    guidance:
+      'Memory is standing intent; rules are the constitution (judge-enforced where deterministic); references are consultable files for judgment calls. Deterministic checks always win over interpretation.',
+  },
   tokens: {
     guidance: 'Screens should not need tokens directly — styling flows through components. Where a token is unavoidable, use var(--…) with a name from this list, preferring semantic names.',
     semanticCssVariables: semanticVars,

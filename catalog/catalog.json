@@ -2,7 +2,7 @@
   "system": {
     "name": "DS Contracts POC",
     "catalogVersion": "0.1.0",
-    "gitCommit": "8407354",
+    "gitCommit": "0b59301",
     "source": "Compiled from contracts/*.contract.json + tokens/ + context/rules.json — do not edit."
   },
   "package": {
@@ -53,6 +53,13 @@
       "enforcement": "agent"
     }
   ],
+  "context": {
+    "memory": "# System memory\n\nWhat this design system is and is for — the standing context every generating\nsurface reads before producing anything. Edit freely (or via Contract Hub's\nContext page); this ships inside the catalog.\n\n- This system serves data-dense B2B product surfaces: settings, directories,\n  billing, member management.\n- Tone: quiet and information-first. Color signals state, never decoration.\n- Density matters: tables and forms should hold up at compact rhythm.\n- When a request needs something the catalog lacks, report the gap — never\n  approximate with lookalikes.\n",
+    "references": [
+      "README.md"
+    ],
+    "guidance": "Memory is standing intent; rules are the constitution (judge-enforced where deterministic); references are consultable files for judgment calls. Deterministic checks always win over interpretation."
+  },
   "tokens": {
     "guidance": "Screens should not need tokens directly — styling flows through components. Where a token is unavoidable, use var(--…) with a name from this list, preferring semantic names.",
     "semanticCssVariables": [
