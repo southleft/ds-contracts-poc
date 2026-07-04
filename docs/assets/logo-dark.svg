@@ -1,6 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="Design System Contracts logo: a diamond between two angle brackets">
-  <!-- Dark-theme variant: gray/100 strokes, blue/400 diamond. -->
-  <polyline points="24,14 6,32 24,50" fill="none" stroke="#F3F4F6" stroke-width="5" stroke-linecap="square" stroke-linejoin="miter"/>
-  <polyline points="40,14 58,32 40,50" fill="none" stroke="#F3F4F6" stroke-width="5" stroke-linecap="square" stroke-linejoin="miter"/>
-  <path d="M32 21 L43 32 L32 43 L21 32 Z" fill="#60A5FA"/>
-</svg>
