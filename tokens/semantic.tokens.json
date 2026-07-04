@@ -67,6 +67,16 @@
     "avatar": {
       "$type": "dimension",
       "$value": "{radius.pill}"
+    },
+    "banner": {
+      "card": {
+        "$type": "dimension",
+        "$value": "{radius.200}"
+      },
+      "section": {
+        "$type": "dimension",
+        "$value": "{radius.none}"
+      }
     }
   },
   "size": {
@@ -93,6 +103,12 @@
       "cell-width": {
         "$type": "dimension",
         "$value": "{container.xs}"
+      }
+    },
+    "banner": {
+      "width": {
+        "$type": "dimension",
+        "$value": "{container.lg}"
       }
     }
   },

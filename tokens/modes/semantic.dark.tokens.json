@@ -93,7 +93,15 @@
           "$value": "{color.red.100}"
         }
       },
-      "$type": "color"
+      "$type": "color",
+      "error": {
+        "background": {
+          "$value": "{color.red.900}"
+        },
+        "foreground": {
+          "$value": "{color.red.100}"
+        }
+      }
     },
     "identity": {
       "$type": "color",

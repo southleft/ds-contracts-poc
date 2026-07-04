@@ -221,7 +221,11 @@ function applyFrameSpec(node, spec) {
 
 async function buildNode(spec, registry) {
   let node;
-  if (spec.type === 'text') {
+  if (spec.type === 'svg') {
+    node = figma.createNodeFromSvg(spec.svg);
+    node.fills = [];
+    node.clipsContent = false;
+  } else if (spec.type === 'text') {
     node = figma.createText();
     node.fontName = { family: 'Inter', style: spec.fontStyle || 'Medium' };
     node.fontSize = spec.fontSize || 16;
@@ -269,10 +273,15 @@ async function buildNode(spec, registry) {
     applyFrameSpec(node, spec);
   }
   node.name = spec.name;
+  if (spec.visibleProp) {
+    registry.visibles.push({ node, prop: spec.visibleProp, default: spec.visibleDefault === true });
+  }
   for (const child of spec.children || []) {
     const childNode = await buildNode(child, registry);
     node.appendChild(childNode);
-    if (
+    if (child.grow && 'layoutSizingHorizontal' in childNode) {
+      try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { /* HUG-only nodes */ }
+    } else if (
       spec.layout && spec.layout.stretchChildren &&
       !child.fixedWidth && child.type !== 'instance' &&
       'layoutSizingHorizontal' in childNode
@@ -301,7 +310,7 @@ for (const n of section.children) startY = Math.max(startY, n.y + n.height + PAD
 // Build every variant, then add properties BEFORE combining.
 const built = [];
 for (const v of VARIANTS) {
-  const registry = { texts: [], slots: [] };
+  const registry = { texts: [], slots: [], visibles: [] };
   const comp = await buildNode(v.spec, registry);
   built.push({ v, comp, registry });
 }
@@ -332,8 +341,17 @@ for (const b of built) {
       s.wrapper.componentPropertyReferences = { visible: vkey };
     }
   }
+  const boolKeys = {};
   for (const bp of BOOL_PROPS) {
-    b.comp.addComponentProperty(bp.property, 'BOOLEAN', bp.default);
+    boolKeys[bp.property] = b.comp.addComponentProperty(bp.property, 'BOOLEAN', bp.default);
+  }
+  // visibleWhen parts: visibility follows the BOOLEAN property, and the
+  // canvas default matches the contract default.
+  for (const vis of b.registry.visibles) {
+    const key = boolKeys[vis.prop];
+    if (!key) continue;
+    vis.node.componentPropertyReferences = { visible: key };
+    vis.node.visible = vis.default;
   }
 }
 

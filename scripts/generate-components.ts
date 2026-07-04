@@ -56,6 +56,24 @@ function collectTokenPaths(node: unknown, prefix: string[], out: Set<string>): v
   }
 }
 
+/** Icon assets are SOURCE (like tokens): assets/icons/<name>.svg, inlined by
+ *  the generator on the code side and rendered as vectors in Figma. */
+function loadIconAssets(): Map<string, string> {
+  try {
+    return new Map(
+      readdirSync(path.join(ROOT, 'assets', 'icons'))
+        .filter((f) => f.endsWith('.svg'))
+        .map((f) => [
+          f.replace(/\.svg$/, ''),
+          readFileSync(path.join(ROOT, 'assets', 'icons', f), 'utf8').trim(),
+        ]),
+    );
+  } catch {
+    return new Map();
+  }
+}
+const iconAssets = loadIconAssets();
+
 function loadTokenInventory(): Set<string> {
   const files = [
     path.join(TOKENS_DIR, 'primitives.tokens.json'),
@@ -181,6 +199,34 @@ function validateContract(contract: Contract, byId: Map<string, Contract>, error
         errors.push(
           `${contract.id}: part "${name}" binds content to unknown text prop "${part.content.prop}"`,
         );
+      }
+    }
+    if (part.visibleWhen) {
+      const vwProp = contract.props.find((pr) => pr.name === part.visibleWhen!.prop);
+      if (!vwProp) {
+        errors.push(`${contract.id}: part "${name}" visibleWhen references unknown prop "${part.visibleWhen.prop}"`);
+      } else if (part.visibleWhen.equals !== undefined && !(typeof vwProp.type === 'object' && vwProp.type.enum.includes(part.visibleWhen.equals))) {
+        errors.push(`${contract.id}: part "${name}" visibleWhen.equals "${part.visibleWhen.equals}" is not a value of prop "${part.visibleWhen.prop}"`);
+      }
+    }
+    if (part.icon) {
+      const ref = part.icon.asset.match(/^\{([a-z][\w-]*)\}$/);
+      const assets = ref
+        ? (() => {
+            const p = contract.props.find((pr) => pr.name === ref[1]);
+            return p && typeof p.type === 'object' ? p.type.enum : [];
+          })()
+        : [part.icon.asset];
+      for (const asset of assets) {
+        if (!iconAssets.has(asset)) {
+          errors.push(`${contract.id}: part "${name}" needs icon asset "assets/icons/${asset}.svg" which does not exist`);
+        }
+      }
+    }
+    for (const value of Object.values(part.attrs ?? {})) {
+      const ref = value.match(/^\{([a-z][\w-]*)\}$/);
+      if (ref && !contract.props.some((pr) => pr.name === ref[1])) {
+        errors.push(`${contract.id}: part "${name}" attrs references unknown prop "${ref[1]}"`);
       }
     }
   }
@@ -315,6 +361,21 @@ function generateCss(contract: Contract, tokenInventory: Set<string>, errors: st
       if (part.layout?.align) decls.push(`align-items: ${ALIGN_CSS[part.layout.align]}`);
       if (part.layout?.justify) decls.push(`justify-content: ${JUSTIFY_CSS[part.layout.justify]}`);
     }
+    if (part.layout?.grow) decls.push('flex: 1 1 auto', 'min-width: 0');
+    if (part.icon) {
+      decls.push('display: inline-flex', 'flex-shrink: 0');
+      if (part.element === 'button') {
+        decls.push(
+          'align-items: center',
+          'justify-content: center',
+          'background: none',
+          'border: none',
+          'padding: 0',
+          'color: inherit',
+          'cursor: pointer',
+        );
+      }
+    }
     for (const [cssProp, ref] of Object.entries(part.tokens ?? {})) {
       const refPath = stripBraces(ref);
       if (checkToken(refPath, `anatomy.${name}.tokens.${cssProp}`)) {
@@ -328,6 +389,9 @@ function generateCss(contract: Contract, tokenInventory: Set<string>, errors: st
     lines.push('', `.${name} {`);
     for (const d of decls) lines.push(`  ${d};`);
     lines.push('}');
+    if (part.icon && part.element) {
+      lines.push('', `.${name}Glyph {`, '  display: inline-flex;', '}');
+    }
   }
 
   return lines.join('\n') + '\n';
@@ -430,6 +494,8 @@ function generateTsx(contract: Contract, byId: Map<string, Contract>): string {
   const bools = boolProps(contract);
   const texts = namedTextProps(contract);
   const slots = namedSlots(contract);
+  const codePropOf = (propName: string) =>
+    contract.props.find((p) => p.name === propName)?.bindings.code.prop ?? propName;
   const deps = [
     ...new Set(
       walkAnatomy(contract)
@@ -481,13 +547,68 @@ function generateTsx(contract: Contract, byId: Map<string, Contract>): string {
     if (p.name === 'disabled' && nativeDisabled) continue;
     elementAttrs.push(`data-${p.name}={${p.bindings.code.prop} || undefined}`);
   }
-  if (contract.semantics.role && contract.semantics.role !== contract.semantics.element) {
+  const roleByProp = contract.semantics.roleByProp;
+  let roleMapConst = '';
+  if (roleByProp) {
+    roleMapConst = `const ROLE_MAP: Record<string, string> = ${JSON.stringify(roleByProp.map)};\n\n`;
+    elementAttrs.push(`role={ROLE_MAP[${codePropOf(roleByProp.prop)}]}`);
+  } else if (contract.semantics.role && contract.semantics.role !== contract.semantics.element) {
     elementAttrs.push(`role="${contract.semantics.role}"`);
   }
   elementAttrs.push('{...rest}');
 
+  // Icon assets this contract needs (fixed names + enum expansions).
+  const neededIcons = new Map<string, string>();
+  for (const { part } of walkAnatomy(contract)) {
+    if (!part.icon) continue;
+    const m = part.icon.asset.match(/^\{([a-z][\w-]*)\}$/);
+    if (m) {
+      const enumProp = contract.props.find((p) => p.name === m[1]);
+      if (enumProp && isEnum(enumProp)) {
+        for (const v of enumProp.type.enum) neededIcons.set(v, iconAssets.get(v) ?? '');
+      }
+    } else {
+      neededIcons.set(part.icon.asset, iconAssets.get(part.icon.asset) ?? '');
+    }
+  }
+  const iconsConst =
+    neededIcons.size > 0
+      ? `const ICONS: Record<string, string> = {\n${[...neededIcons.entries()]
+          .map(([k, v]) => `  ${JSON.stringify(k)}: ${JSON.stringify(v)},`)
+          .join('\n')}\n};\n\n`
+      : '';
+
+  const partAttrString = (part: Part): string =>
+    Object.entries(part.attrs ?? {})
+      .map(([attr, value]) => {
+        const ref = value.match(/^\{([a-z][\w-]*)\}$/);
+        return ref ? ` ${attr}={${codePropOf(ref[1])}}` : ` ${attr}=${JSON.stringify(value)}`;
+      })
+      .join('');
+
+  const wrapVisibleWhen = (part: Part, jsx: string): string => {
+    if (!part.visibleWhen) return jsx;
+    const codeName = codePropOf(part.visibleWhen.prop);
+    const cond =
+      part.visibleWhen.equals !== undefined ? `${codeName} === '${part.visibleWhen.equals}'` : codeName;
+    return `{${cond} ? (${jsx}) : null}`;
+  };
+
   // Recursive JSX for the anatomy tree.
   const renderPart = (partName: string, part: Part): string => {
+    if (part.icon) {
+      const ref = part.icon.asset.match(/^\{([a-z][\w-]*)\}$/);
+      const keyExpr = ref ? codePropOf(ref[1]) : JSON.stringify(part.icon.asset);
+      const glyph = `dangerouslySetInnerHTML={{ __html: ICONS[${keyExpr}] }}`;
+      // A bare icon is decorative (aria-hidden). An icon on an interactive
+      // element (element/attrs declared) keeps the element semantics — the
+      // accessible name comes from attrs (e.g. aria-label) — and only the
+      // glyph itself is hidden.
+      const node = part.element
+        ? `<${part.element} className={styles.${partName}}${partAttrString(part)}><span aria-hidden="true" className={styles.${partName}Glyph} ${glyph} /></${part.element}>`
+        : `<span className={styles.${partName}} aria-hidden="true" ${glyph} />`;
+      return wrapVisibleWhen(part, node);
+    }
     if (part.component) {
       const dep = byId.get(part.component.id)!;
       const attrs = depAttrString(dep, part.component.props ?? {}, contract);
@@ -500,21 +621,27 @@ function generateTsx(contract: Contract, byId: Map<string, Contract>): string {
     if (part.slot) {
       const el = part.element ?? 'div';
       const expr = part.slot.name === 'children' ? 'children' : part.slot.name;
-      const node = `<${el} className={styles.${partName}}>{${expr}}</${el}>`;
-      return part.optional ? `{${expr} != null ? ${node} : null}` : node;
+      const node = `<${el} className={styles.${partName}}${partAttrString(part)}>{${expr}}</${el}>`;
+      return part.optional ? `{${expr} != null ? ${node} : null}` : wrapVisibleWhen(part, node);
     }
     if (part.content) {
       const el = part.element ?? 'span';
       const prop = contract.props.find(
         (p) => p.type === 'text' && p.bindings.code.prop === part.content!.prop,
       )!;
-      return `<${el} className={styles.${partName}}>{${prop.bindings.code.prop}}</${el}>`;
+      return wrapVisibleWhen(
+        part,
+        `<${el} className={styles.${partName}}${partAttrString(part)}>{${prop.bindings.code.prop}}</${el}>`,
+      );
     }
     const el = part.element ?? 'div';
     const inner = Object.entries(part.parts ?? {})
       .map(([childName, child]) => renderPart(childName, child))
       .join('\n');
-    return `<${el} className={styles.${partName}}>\n${inner}\n</${el}>`;
+    return wrapVisibleWhen(
+      part,
+      `<${el} className={styles.${partName}}${partAttrString(part)}>\n${inner}\n</${el}>`,
+    );
   };
 
   const root = contract.anatomy.root;
@@ -539,7 +666,7 @@ import { forwardRef } from 'react';
 import type { ${typeImports} } from 'react';
 ${depImports}${depImports ? '\n' : ''}import styles from './${name}.module.css';
 
-export interface ${name}Props extends ${meta.attrs}<${meta.el}> {
+${iconsConst}${roleMapConst}export interface ${name}Props extends ${meta.attrs}<${meta.el}> {
 ${propLines.join('\n')}
 }
 
@@ -659,6 +786,10 @@ export const With${pascal(slot.name)}: Story = {
   if (enums.length > 0 && !defaultSample) {
     const rowProp = enums[0];
     const colProp = enums[1];
+    // Required text props must appear in every cell or the story won't typecheck.
+    const requiredTextAttrs = contract.props
+      .filter((p) => p.type === 'text' && p.required && typeof p.default === 'string')
+      .map((p) => `${p.bindings.code.prop}="${p.default}"`);
     const cells: string[] = [];
     for (const row of rowProp.type.enum) {
       const rowCells = (colProp ? colProp.type.enum : [null])
@@ -666,8 +797,11 @@ export const With${pascal(slot.name)}: Story = {
           const attrs = [
             `${rowProp.bindings.code.prop}="${row}"`,
             ...(colProp && col ? [`${colProp.bindings.code.prop}="${col}"`] : []),
+            ...requiredTextAttrs,
           ].join(' ');
-          return `        <${name} ${attrs}>${label}</${name}>`;
+          return hasDefaultSlot
+            ? `        <${name} ${attrs}>${label}</${name}>`
+            : `        <${name} ${attrs} />`;
         })
         .join('\n');
       cells.push(rowCells);

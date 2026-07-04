@@ -420,6 +420,28 @@
           "values": {
             "Value": 480
           }
+        },
+        {
+          "name": "radius/none",
+          "type": "FLOAT",
+          "scopes": [
+            "CORNER_RADIUS"
+          ],
+          "codeSyntax": "var(--radius-none)",
+          "values": {
+            "Value": 0
+          }
+        },
+        {
+          "name": "container/lg",
+          "type": "FLOAT",
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": "var(--container-lg)",
+          "values": {
+            "Value": 640
+          }
         }
       ]
     },
@@ -900,6 +922,68 @@
           "values": {
             "Light": "{space/300}",
             "Dark": "{space/300}"
+          }
+        },
+        {
+          "name": "radius/banner/card",
+          "type": "FLOAT",
+          "scopes": [
+            "CORNER_RADIUS"
+          ],
+          "codeSyntax": "var(--radius-banner-card)",
+          "values": {
+            "Light": "{radius/200}",
+            "Dark": "{radius/200}"
+          }
+        },
+        {
+          "name": "radius/banner/section",
+          "type": "FLOAT",
+          "scopes": [
+            "CORNER_RADIUS"
+          ],
+          "codeSyntax": "var(--radius-banner-section)",
+          "values": {
+            "Light": "{radius/none}",
+            "Dark": "{radius/none}"
+          }
+        },
+        {
+          "name": "size/banner/width",
+          "type": "FLOAT",
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": "var(--size-banner-width)",
+          "values": {
+            "Light": "{container/lg}",
+            "Dark": "{container/lg}"
+          }
+        },
+        {
+          "name": "color/feedback/error/background",
+          "type": "COLOR",
+          "scopes": [
+            "ALL_FILLS",
+            "STROKE_COLOR"
+          ],
+          "codeSyntax": "var(--color-feedback-error-background)",
+          "values": {
+            "Light": "{color/red/100}",
+            "Dark": "{color/red/900}"
+          }
+        },
+        {
+          "name": "color/feedback/error/foreground",
+          "type": "COLOR",
+          "scopes": [
+            "ALL_FILLS",
+            "STROKE_COLOR"
+          ],
+          "codeSyntax": "var(--color-feedback-error-foreground)",
+          "values": {
+            "Light": "{color/red/700}",
+            "Dark": "{color/red/100}"
           }
         }
       ]

@@ -7,6 +7,7 @@ import type { ReactNode } from 'react';
 import {
   Avatar,
   Badge,
+  Banner,
   Button,
   Card,
   Inline,
@@ -19,6 +20,7 @@ import {
 import type {
   AvatarProps,
   BadgeProps,
+  BannerProps,
   ButtonProps,
   InlineProps,
   StackProps,
@@ -51,6 +53,26 @@ export function renderSample(
 
     case 'Badge':
       return <Badge {...(props as BadgeProps)}>{text('Badge')}</Badge>;
+
+    case 'Banner': {
+      const p = props as Partial<BannerProps>;
+      return (
+        <Banner
+          {...p}
+          title={typeof p.title === 'string' && p.title !== '' ? p.title : 'Scheduled maintenance'}
+          description={
+            typeof p.description === 'string'
+              ? p.description
+              : 'Contract sync pauses Saturday 02:00–03:00 UTC while tokens republish.'
+          }
+          endContent={
+            <Button variant="secondary" size="sm">
+              Learn more
+            </Button>
+          }
+        />
+      );
+    }
 
     case 'Button':
       return <Button {...(props as ButtonProps)}>{text('Button')}</Button>;

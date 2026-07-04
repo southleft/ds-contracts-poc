@@ -46,6 +46,27 @@
         },
         "role": {
           "type": "string"
+        },
+        "roleByProp": {
+          "type": "object",
+          "properties": {
+            "prop": {
+              "type": "string"
+            },
+            "map": {
+              "type": "object",
+              "propertyNames": {
+                "type": "string"
+              },
+              "additionalProperties": {
+                "type": "string"
+              }
+            }
+          },
+          "required": [
+            "prop",
+            "map"
+          ]
         }
       },
       "required": [
@@ -325,6 +346,9 @@
                 "end",
                 "space-between"
               ]
+            },
+            "grow": {
+              "type": "boolean"
             }
           }
         },
@@ -467,6 +491,43 @@
           },
           "required": [
             "id"
+          ]
+        },
+        "icon": {
+          "type": "object",
+          "properties": {
+            "asset": {
+              "type": "string"
+            },
+            "size": {
+              "type": "number"
+            }
+          },
+          "required": [
+            "asset"
+          ]
+        },
+        "attrs": {
+          "type": "object",
+          "propertyNames": {
+            "type": "string"
+          },
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "visibleWhen": {
+          "type": "object",
+          "properties": {
+            "prop": {
+              "type": "string"
+            },
+            "equals": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "prop"
           ]
         },
         "optional": {

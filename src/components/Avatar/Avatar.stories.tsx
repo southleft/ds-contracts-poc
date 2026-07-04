@@ -50,8 +50,8 @@ export const Matrix: Story = {
         justifyItems: 'start',
       }}
     >
-      <Avatar size="sm">AB</Avatar>
-      <Avatar size="md">AB</Avatar>
+      <Avatar size="sm" />
+      <Avatar size="md" />
     </div>
   ),
 };

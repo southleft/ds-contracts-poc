@@ -64,10 +64,10 @@ export const Matrix: Story = {
         justifyItems: 'start',
       }}
     >
-      <Badge variant="info">Badge</Badge>
-      <Badge variant="success">Badge</Badge>
-      <Badge variant="warning">Badge</Badge>
-      <Badge variant="danger">Badge</Badge>
+      <Badge variant="info" />
+      <Badge variant="success" />
+      <Badge variant="warning" />
+      <Badge variant="danger" />
     </div>
   ),
 };

@@ -151,6 +151,9 @@
     "$type": "dimension",
     "pill": {
       "$value": "999px"
+    },
+    "none": {
+      "$value": "0px"
     }
   },
   "border-width": {
@@ -172,6 +175,9 @@
     },
     "md": {
       "$value": "480px"
+    },
+    "lg": {
+      "$value": "640px"
     }
   },
   "font": {

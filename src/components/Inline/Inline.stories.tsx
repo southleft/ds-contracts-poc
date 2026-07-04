@@ -55,9 +55,9 @@ export const Matrix: Story = {
         justifyItems: 'start',
       }}
     >
-      <Inline gap="sm">Inline</Inline>
-      <Inline gap="md">Inline</Inline>
-      <Inline gap="lg">Inline</Inline>
+      <Inline gap="sm" />
+      <Inline gap="md" />
+      <Inline gap="lg" />
     </div>
   ),
 };

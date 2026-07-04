@@ -137,7 +137,7 @@ function scopesFor(dotPath: string, entry: TokenEntry): string[] {
 // 01-tokens.js (unchanged mechanism from v1)
 // ---------------------------------------------------------------------------
 
-function buildTokensScript(): string {
+function buildTokensScript(fileKey: string | null): string {
   const prim = [...primitives].map(([p, entry]) => ({
     name: figmaName(p),
     type: figmaType(entry),
@@ -180,6 +180,13 @@ function buildTokensScript(): string {
 // Upserts variable collections: Primitives (mode "Value"), Semantic (modes "Light"/"Dark").
 const PRIMITIVES = ${JSON.stringify(prim, null, 2)};
 const SEMANTIC = ${JSON.stringify(sem, null, 2)};
+
+// File guard: multi-file bridge routing has been observed to hit the wrong
+// file — never write without verifying the target.
+const EXPECTED_FILE_KEY = ${JSON.stringify(fileKey)};
+if (EXPECTED_FILE_KEY && figma.fileKey && figma.fileKey !== EXPECTED_FILE_KEY) {
+  throw new Error('WRONG FILE: expected ' + EXPECTED_FILE_KEY + ', got ' + figma.fileKey);
+}
 
 function hexToRgb(hex) {
   const h = hex.replace('#', '');
@@ -257,7 +264,7 @@ interface LayoutSpec {
 }
 
 interface NodeSpec {
-  type: 'root' | 'frame' | 'text' | 'instance' | 'slot';
+  type: 'root' | 'frame' | 'text' | 'instance' | 'slot' | 'svg';
   name: string;
   layout?: LayoutSpec;
   bindings?: Record<string, string>;
@@ -265,6 +272,16 @@ interface NodeSpec {
   stroke?: string;
   fixedWidth?: { px: number; varName: string };
   fixedHeight?: { px: number; varName: string };
+  /** CSS grow → layoutSizingHorizontal FILL after append. */
+  grow?: boolean;
+  /** visibleWhen on a boolean prop → node visibility bound to its BOOLEAN
+   *  component property. (visibleWhen.equals is resolved at compile time:
+   *  the part is simply omitted from non-matching variants.) */
+  visibleProp?: string;
+  visibleDefault?: boolean;
+  // svg (icon parts) — markup with currentColor resolved to the variant's
+  // literal foreground color (SVG paint is not variable-bindable on import)
+  svg?: string;
   // text
   characters?: string;
   fontSize?: number;
@@ -287,6 +304,8 @@ interface NodeSpec {
 
 interface TextCtx {
   textFill?: string;
+  /** Token dot-path behind textFill — icon parts resolve it to a literal hex. */
+  textFillPath?: string;
   fontSize?: number;
   fontStyle?: string;
 }
@@ -343,6 +362,7 @@ function applyTokens(
         break;
       case 'color':
         next.textFill = varName;
+        next.textFillPath = tokenPath;
         break;
       case 'font-size':
         next.fontSize = px(resolveLiteral(tokenPath));
@@ -394,6 +414,40 @@ function applyTokens(
 const isEnum = (p: Prop): p is Prop & { type: { enum: string[] } } =>
   typeof p.type === 'object' && 'enum' in p.type;
 
+// Icon assets (assets/icons/*.svg) — same source the code generator inlines.
+const iconAssets = new Map<string, string>();
+{
+  const dir = path.join(ROOT, 'assets', 'icons');
+  try {
+    for (const f of readdirSync(dir)) {
+      if (f.endsWith('.svg')) {
+        iconAssets.set(f.replace(/\.svg$/, ''), readFileSync(path.join(dir, f), 'utf8').trim());
+      }
+    }
+  } catch {
+    /* no icons dir — contracts without icon parts */
+  }
+}
+
+/** Compile an icon part to a concrete SVG for one variant: resolve the
+ *  `{prop}` asset reference through subst, and bake currentColor to the
+ *  inherited foreground color's literal value (SVG paint is not
+ *  variable-bindable on import — documented fidelity scope). */
+function iconSvg(part: Part, subst: Record<string, string>, ctx: TextCtx): string {
+  let asset = part.icon!.asset;
+  const ref = asset.match(PARENT_PROP_REF);
+  if (ref) {
+    const resolved = subst[ref[1]];
+    if (resolved === undefined)
+      throw new Error(`Cannot resolve icon asset reference "{${ref[1]}}"`);
+    asset = resolved;
+  }
+  const svg = iconAssets.get(asset);
+  if (!svg) throw new Error(`Unknown icon asset "${asset}" (expected assets/icons/${asset}.svg)`);
+  const hex = ctx.textFillPath ? String(resolveLiteral(ctx.textFillPath)) : '#000000';
+  return svg.replaceAll('currentColor', hex);
+}
+
 const PARENT_PROP_REF = /^\{([a-z][\w-]*)\}$/;
 
 /** Map canonical prop values to Figma property/value pairs through the CHILD
@@ -428,6 +482,30 @@ function mapDepProps(
   return out;
 }
 
+/** visibleWhen on a boolean prop → runtime visibility binding fields.
+ *  (Enum-valued visibleWhen.equals never reaches here — those parts are
+ *  filtered out of non-matching variants at compile time.) */
+function applyVisibleWhen(spec: NodeSpec, part: Part, contract: Contract): void {
+  if (!part.visibleWhen || part.visibleWhen.equals !== undefined) return;
+  const prop = contract.props.find((p) => p.name === part.visibleWhen!.prop);
+  if (!prop || prop.type !== 'boolean') return;
+  spec.visibleProp = prop.bindings.figma.property;
+  spec.visibleDefault = prop.default === true;
+}
+
+/** Drop parts whose visibleWhen.equals doesn't match this variant's values. */
+function variantParts(
+  parts: Record<string, Part>,
+  subst: Record<string, string>,
+): Array<[string, Part]> {
+  return Object.entries(parts).filter(([, p]) => {
+    const vw = p.visibleWhen;
+    if (!vw || vw.equals === undefined) return true;
+    const value = subst[vw.prop];
+    return value === undefined || value === vw.equals;
+  });
+}
+
 function partToSpec(
   name: string,
   part: Part,
@@ -436,6 +514,16 @@ function partToSpec(
   ctx: TextCtx,
   subst: Record<string, string>,
 ): NodeSpec {
+  if (part.icon) {
+    const spec: NodeSpec = {
+      type: 'svg',
+      name,
+      svg: iconSvg(part, subst, ctx),
+      grow: part.layout?.grow || undefined,
+    };
+    applyVisibleWhen(spec, part, contract);
+    return spec;
+  }
   if (part.component) {
     const dep = byId.get(part.component.id)!;
     return {
@@ -461,6 +549,7 @@ function partToSpec(
       });
     }
     applyTokens(spec, part.tokens ?? {}, {}, ctx);
+    applyVisibleWhen(spec, part, contract);
     return spec;
   }
   if (part.content) {
@@ -474,13 +563,20 @@ function partToSpec(
     spec.fontStyle = textCtx.fontStyle ?? 'Medium';
     spec.textFill = textCtx.textFill;
     spec.contentProp = prop.bindings.figma.property;
+    applyVisibleWhen(spec, part, contract);
     return spec;
   }
-  const spec: NodeSpec = { type: 'frame', name, layout: layoutSpec(part, false) };
+  const spec: NodeSpec = {
+    type: 'frame',
+    name,
+    layout: layoutSpec(part, false),
+    grow: part.layout?.grow || undefined,
+  };
   const childCtx = applyTokens(spec, part.tokens ?? {}, {}, ctx);
-  spec.children = Object.entries(part.parts ?? {}).map(([childName, child]) =>
+  spec.children = variantParts(part.parts ?? {}, subst).map(([childName, child]) =>
     partToSpec(childName, child, contract, byId, childCtx, subst),
   );
+  applyVisibleWhen(spec, part, contract);
   return spec;
 }
 
@@ -547,7 +643,7 @@ function buildComponentScript(contract: Contract, byId: Map<string, Contract>): 
       };
       const ctx = applyTokens(rootSpec, root.tokens ?? {}, subst, {});
       if (root.parts) {
-        rootSpec.children = Object.entries(root.parts).map(([childName, child]) =>
+        rootSpec.children = variantParts(root.parts, subst).map(([childName, child]) =>
           partToSpec(childName, child, contract, byId, ctx, subst),
         );
       } else if (textProp) {
@@ -580,7 +676,7 @@ const IS_SET = ${variants.length > 1};
 const BOOL_PROPS = ${JSON.stringify(boolPropsData)};
 const FONT_STYLES = ${JSON.stringify([...fontStyles])};
 const VARIANTS = ${JSON.stringify(variants, null, 2)};
-const COL_W = 380, ROW_H = 240, PAD = 40;
+const COL_W = ${Math.max(380, ...variants.map((v) => (v.spec.fixedWidth?.px ?? 0) + 60))}, ROW_H = 240, PAD = 40;
 
 // File guard: multi-file bridge routing has been observed to hit the wrong
 // file — never write without verifying the target.
@@ -714,7 +810,11 @@ function applyFrameSpec(node, spec) {
 
 async function buildNode(spec, registry) {
   let node;
-  if (spec.type === 'text') {
+  if (spec.type === 'svg') {
+    node = figma.createNodeFromSvg(spec.svg);
+    node.fills = [];
+    node.clipsContent = false;
+  } else if (spec.type === 'text') {
     node = figma.createText();
     node.fontName = { family: 'Inter', style: spec.fontStyle || 'Medium' };
     node.fontSize = spec.fontSize || 16;
@@ -762,10 +862,15 @@ async function buildNode(spec, registry) {
     applyFrameSpec(node, spec);
   }
   node.name = spec.name;
+  if (spec.visibleProp) {
+    registry.visibles.push({ node, prop: spec.visibleProp, default: spec.visibleDefault === true });
+  }
   for (const child of spec.children || []) {
     const childNode = await buildNode(child, registry);
     node.appendChild(childNode);
-    if (
+    if (child.grow && 'layoutSizingHorizontal' in childNode) {
+      try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { /* HUG-only nodes */ }
+    } else if (
       spec.layout && spec.layout.stretchChildren &&
       !child.fixedWidth && child.type !== 'instance' &&
       'layoutSizingHorizontal' in childNode
@@ -794,7 +899,7 @@ for (const n of section.children) startY = Math.max(startY, n.y + n.height + PAD
 // Build every variant, then add properties BEFORE combining.
 const built = [];
 for (const v of VARIANTS) {
-  const registry = { texts: [], slots: [] };
+  const registry = { texts: [], slots: [], visibles: [] };
   const comp = await buildNode(v.spec, registry);
   built.push({ v, comp, registry });
 }
@@ -825,8 +930,17 @@ for (const b of built) {
       s.wrapper.componentPropertyReferences = { visible: vkey };
     }
   }
+  const boolKeys = {};
   for (const bp of BOOL_PROPS) {
-    b.comp.addComponentProperty(bp.property, 'BOOLEAN', bp.default);
+    boolKeys[bp.property] = b.comp.addComponentProperty(bp.property, 'BOOLEAN', bp.default);
+  }
+  // visibleWhen parts: visibility follows the BOOLEAN property, and the
+  // canvas default matches the contract default.
+  for (const vis of b.registry.visibles) {
+    const key = boolKeys[vis.prop];
+    if (!key) continue;
+    vis.node.componentPropertyReferences = { visible: key };
+    vis.node.visible = vis.default;
   }
 }
 
@@ -879,11 +993,14 @@ return {
 // ---------------------------------------------------------------------------
 
 mkdirSync(OUT, { recursive: true });
-writeFileSync(path.join(OUT, '01-tokens.js'), buildTokensScript());
 
 const contracts = readdirSync(path.join(ROOT, 'contracts'))
   .filter((f) => f.endsWith('.contract.json'))
   .map((f) => ContractSchema.parse(read(path.join('contracts', f))));
+writeFileSync(
+  path.join(OUT, '01-tokens.js'),
+  buildTokensScript(contracts[0]?.anchors.figma.fileKey ?? null),
+);
 const ordered = sortByDependencies(contracts); // dependency order + cycle/ref gate
 const byId = new Map(contracts.map((c) => [c.id, c]));
 

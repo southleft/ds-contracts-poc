@@ -233,6 +233,73 @@
         "TableRow",
         "TableCell"
       ]
+    },
+    {
+      "name": "Banner",
+      "nodeId": "11:184",
+      "key": "6acb10544bd5dce1800d610744c0e346fc12bfb9",
+      "description": "Persistent inline notification for page- or section-level feedback. API mirrors industry convention (Astryx Banner): status drives color, icon, and ARIA role; dismissable banners expose a close affordance; endContent carries actions. — governed by contract ds.banner v1.0.0",
+      "variantCount": 8,
+      "properties": {
+        "Title#11:40": {
+          "type": "TEXT",
+          "defaultValue": "Banner title",
+          "variantOptions": null,
+          "preferredValues": null
+        },
+        "Description#11:41": {
+          "type": "TEXT",
+          "defaultValue": "Supporting detail that explains what happened and what to do next.",
+          "variantOptions": null,
+          "preferredValues": null
+        },
+        "EndContent#11:42": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "2:26",
+          "variantOptions": null,
+          "preferredValues": [
+            {
+              "type": "COMPONENT_SET",
+              "key": "1b5d2a573f3f39404af396bdbe944a30ca0eaec3"
+            }
+          ]
+        },
+        "Show EndContent#11:43": {
+          "type": "BOOLEAN",
+          "defaultValue": true,
+          "variantOptions": null,
+          "preferredValues": null
+        },
+        "Dismissable#11:44": {
+          "type": "BOOLEAN",
+          "defaultValue": false,
+          "variantOptions": null,
+          "preferredValues": null
+        },
+        "Status": {
+          "type": "VARIANT",
+          "defaultValue": "Info",
+          "variantOptions": [
+            "Info",
+            "Success",
+            "Warning",
+            "Error"
+          ],
+          "preferredValues": null
+        },
+        "Container": {
+          "type": "VARIANT",
+          "defaultValue": "Card",
+          "variantOptions": [
+            "Card",
+            "Section"
+          ],
+          "preferredValues": null
+        }
+      },
+      "nestedInstances": [
+        "Slot"
+      ]
     }
   ]
 }

@@ -450,6 +450,15 @@ const PRIMITIVES = [
     "codeSyntax": "var(--radius-pill)"
   },
   {
+    "name": "radius/none",
+    "type": "FLOAT",
+    "value": 0,
+    "scopes": [
+      "CORNER_RADIUS"
+    ],
+    "codeSyntax": "var(--radius-none)"
+  },
+  {
     "name": "border-width/100",
     "type": "FLOAT",
     "value": 1,
@@ -493,6 +502,15 @@ const PRIMITIVES = [
       "WIDTH_HEIGHT"
     ],
     "codeSyntax": "var(--container-md)"
+  },
+  {
+    "name": "container/lg",
+    "type": "FLOAT",
+    "value": 640,
+    "scopes": [
+      "WIDTH_HEIGHT"
+    ],
+    "codeSyntax": "var(--container-lg)"
   },
   {
     "name": "font/family/sans",
@@ -750,6 +768,26 @@ const SEMANTIC = [
     "codeSyntax": "var(--radius-avatar)"
   },
   {
+    "name": "radius/banner/card",
+    "type": "FLOAT",
+    "light": "radius/200",
+    "dark": "radius/200",
+    "scopes": [
+      "CORNER_RADIUS"
+    ],
+    "codeSyntax": "var(--radius-banner-card)"
+  },
+  {
+    "name": "radius/banner/section",
+    "type": "FLOAT",
+    "light": "radius/none",
+    "dark": "radius/none",
+    "scopes": [
+      "CORNER_RADIUS"
+    ],
+    "codeSyntax": "var(--radius-banner-section)"
+  },
+  {
     "name": "size/avatar/sm",
     "type": "FLOAT",
     "light": "space/300",
@@ -798,6 +836,16 @@ const SEMANTIC = [
       "WIDTH_HEIGHT"
     ],
     "codeSyntax": "var(--size-table-cell-width)"
+  },
+  {
+    "name": "size/banner/width",
+    "type": "FLOAT",
+    "light": "container/lg",
+    "dark": "container/lg",
+    "scopes": [
+      "WIDTH_HEIGHT"
+    ],
+    "codeSyntax": "var(--size-banner-width)"
   },
   {
     "name": "border/width/focus",
@@ -1163,6 +1211,28 @@ const SEMANTIC = [
     "codeSyntax": "var(--color-feedback-danger-foreground)"
   },
   {
+    "name": "color/feedback/error/background",
+    "type": "COLOR",
+    "light": "color/red/100",
+    "dark": "color/red/900",
+    "scopes": [
+      "ALL_FILLS",
+      "STROKE_COLOR"
+    ],
+    "codeSyntax": "var(--color-feedback-error-background)"
+  },
+  {
+    "name": "color/feedback/error/foreground",
+    "type": "COLOR",
+    "light": "color/red/700",
+    "dark": "color/red/100",
+    "scopes": [
+      "ALL_FILLS",
+      "STROKE_COLOR"
+    ],
+    "codeSyntax": "var(--color-feedback-error-foreground)"
+  },
+  {
     "name": "color/identity/background",
     "type": "COLOR",
     "light": "color/blue/100",
@@ -1207,6 +1277,13 @@ const SEMANTIC = [
     "codeSyntax": "var(--color-table-row-selected)"
   }
 ];
+
+// File guard: multi-file bridge routing has been observed to hit the wrong
+// file — never write without verifying the target.
+const EXPECTED_FILE_KEY = "8nim1d0IPnehMxA7B7SYxC";
+if (EXPECTED_FILE_KEY && figma.fileKey && figma.fileKey !== EXPECTED_FILE_KEY) {
+  throw new Error('WRONG FILE: expected ' + EXPECTED_FILE_KEY + ', got ' + figma.fileKey);
+}
 
 function hexToRgb(hex) {
   const h = hex.replace('#', '');

@@ -55,9 +55,9 @@ export const Matrix: Story = {
         justifyItems: 'start',
       }}
     >
-      <Stack gap="sm">Stack</Stack>
-      <Stack gap="md">Stack</Stack>
-      <Stack gap="lg">Stack</Stack>
+      <Stack gap="sm" />
+      <Stack gap="md" />
+      <Stack gap="lg" />
     </div>
   ),
 };

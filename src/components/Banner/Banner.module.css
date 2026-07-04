@@ -1,0 +1,98 @@
+/* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/banner.contract.json (ds.banner v1.0.0)
+ * Regenerate with: npm run generate
+ */
+
+.root {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  border: 0;
+  width: 100%;
+  min-width: fit-content;
+  max-width: var(--size-banner-width);
+  gap: var(--space-gap-control);
+  padding-inline: var(--space-inset-x-md);
+  padding-block: var(--space-inset-y-lg);
+}
+
+.status-info {
+  background-color: var(--color-feedback-info-background);
+  color: var(--color-feedback-info-foreground);
+}
+
+.status-success {
+  background-color: var(--color-feedback-success-background);
+  color: var(--color-feedback-success-foreground);
+}
+
+.status-warning {
+  background-color: var(--color-feedback-warning-background);
+  color: var(--color-feedback-warning-foreground);
+}
+
+.status-error {
+  background-color: var(--color-feedback-error-background);
+  color: var(--color-feedback-error-foreground);
+}
+
+.container-card {
+  border-radius: var(--radius-banner-card);
+}
+
+.container-section {
+  border-radius: var(--radius-banner-section);
+}
+
+.statusIcon {
+  display: inline-flex;
+  flex-shrink: 0;
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  min-width: 0;
+  gap: var(--space-inset-y-sm);
+}
+
+.title {
+  font-family: var(--font-control-family);
+  font-size: var(--font-control-size-md);
+  font-weight: var(--font-title-weight);
+}
+
+.descriptionText {
+  font-family: var(--font-control-family);
+  font-size: var(--font-control-size-sm);
+}
+
+.endArea {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--space-gap-sm);
+}
+
+.endContent {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.close {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  padding: 0;
+  color: inherit;
+  cursor: pointer;
+}
+
+.closeGlyph {
+  display: inline-flex;
+}

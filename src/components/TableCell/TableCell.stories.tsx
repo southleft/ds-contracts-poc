@@ -52,8 +52,8 @@ export const Matrix: Story = {
         justifyItems: 'start',
       }}
     >
-      <TableCell density="comfortable">Cell</TableCell>
-      <TableCell density="compact">Cell</TableCell>
+      <TableCell density="comfortable" />
+      <TableCell density="compact" />
     </div>
   ),
 };

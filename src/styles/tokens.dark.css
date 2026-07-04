@@ -27,6 +27,8 @@
   --color-feedback-warning-foreground: var(--color-amber-100);
   --color-feedback-danger-background: var(--color-red-900);
   --color-feedback-danger-foreground: var(--color-red-100);
+  --color-feedback-error-background: var(--color-red-900);
+  --color-feedback-error-foreground: var(--color-red-100);
   --color-identity-background: var(--color-blue-900);
   --color-identity-foreground: var(--color-blue-100);
   --color-table-row-default: var(--color-gray-700);

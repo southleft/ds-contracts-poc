@@ -33,7 +33,7 @@ const TSX = path.join(SCRATCH, 'node_modules', '.bin', 'tsx');
 function resetScratch() {
   rmSync(SCRATCH, { recursive: true, force: true });
   mkdirSync(SCRATCH, { recursive: true });
-  for (const dir of ['contracts', 'tokens', 'scripts', 'parity', 'src', 'catalog', 'context']) {
+  for (const dir of ['contracts', 'tokens', 'scripts', 'parity', 'src', 'catalog', 'context', 'assets']) {
     cpSync(path.join(ROOT, dir), path.join(SCRATCH, dir), { recursive: true });
   }
   cpSync(path.join(ROOT, 'evals', 'fixtures'), path.join(SCRATCH, 'evals', 'fixtures'), {

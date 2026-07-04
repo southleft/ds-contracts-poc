@@ -1,0 +1,150 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "ds.banner",
+  "name": "Banner",
+  "version": "1.0.0",
+  "status": "draft",
+  "description": "Persistent inline notification for page- or section-level feedback. API mirrors industry convention (Astryx Banner): status drives color, icon, and ARIA role; dismissable banners expose a close affordance; endContent carries actions.",
+  "semantics": {
+    "element": "div",
+    "roleByProp": {
+      "prop": "status",
+      "map": { "info": "status", "success": "status", "warning": "alert", "error": "alert" }
+    }
+  },
+  "props": [
+    {
+      "name": "status",
+      "description": "Feedback tone — drives the color scheme, the leading icon, and the ARIA role (error/warning announce as alerts).",
+      "type": { "enum": ["info", "success", "warning", "error"] },
+      "default": "info",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Status",
+          "values": { "info": "Info", "success": "Success", "warning": "Warning", "error": "Error" }
+        },
+        "code": { "prop": "status" }
+      }
+    },
+    {
+      "name": "container",
+      "description": "card = standalone with radius; section = full-bleed, square.",
+      "type": { "enum": ["card", "section"] },
+      "default": "card",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Container",
+          "values": { "card": "Card", "section": "Section" }
+        },
+        "code": { "prop": "container" }
+      }
+    },
+    {
+      "name": "isDismissable",
+      "description": "Shows the close affordance. Keep error banners until resolved.",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": { "kind": "BOOLEAN", "property": "Dismissable" },
+        "code": { "prop": "isDismissable" }
+      }
+    },
+    {
+      "name": "title",
+      "description": "Prominent header text.",
+      "type": "text",
+      "default": "Banner title",
+      "required": true,
+      "bindings": {
+        "figma": { "kind": "TEXT", "property": "Title" },
+        "code": { "prop": "title" }
+      }
+    },
+    {
+      "name": "description",
+      "description": "Secondary text below the title.",
+      "type": "text",
+      "default": "Supporting detail that explains what happened and what to do next.",
+      "bindings": {
+        "figma": { "kind": "TEXT", "property": "Description" },
+        "code": { "prop": "description" }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "layout": { "display": "flex", "direction": "row", "align": "start" },
+      "tokens": {
+        "max-width": "{size.banner.width}",
+        "background-color": "{color.feedback.{status}.background}",
+        "color": "{color.feedback.{status}.foreground}",
+        "border-radius": "{radius.banner.{container}}",
+        "gap": "{space.gap.control}",
+        "padding-inline": "{space.inset-x.md}",
+        "padding-block": "{space.inset-y.lg}"
+      },
+      "parts": {
+        "statusIcon": {
+          "description": "Leading icon, selected by status. Decorative — hidden from assistive tech.",
+          "icon": { "asset": "{status}" }
+        },
+        "body": {
+          "layout": { "direction": "column", "grow": true },
+          "tokens": { "gap": "{space.inset-y.sm}" },
+          "parts": {
+            "title": {
+              "element": "div",
+              "content": { "prop": "title" },
+              "tokens": {
+                "font-family": "{font.control.family}",
+                "font-size": "{font.control.size.md}",
+                "font-weight": "{font.title.weight}"
+              }
+            },
+            "descriptionText": {
+              "element": "div",
+              "content": { "prop": "description" },
+              "tokens": {
+                "font-family": "{font.control.family}",
+                "font-size": "{font.control.size.sm}"
+              }
+            }
+          }
+        },
+        "endArea": {
+          "layout": { "direction": "row", "align": "center" },
+          "tokens": { "gap": "{space.gap.sm}" },
+          "parts": {
+            "endContent": {
+              "description": "End-aligned action slot — typically a secondary Button.",
+              "slot": { "name": "endContent", "accepts": ["ds.button"], "acceptsMode": "prefer" },
+              "optional": true,
+              "layout": { "direction": "row", "align": "center" }
+            },
+            "close": {
+              "description": "Close affordance — rendered only when isDismissable.",
+              "element": "button",
+              "visibleWhen": { "prop": "isDismissable" },
+              "icon": { "asset": "close" },
+              "attrs": { "aria-label": "Dismiss", "type": "button", "data-action": "dismiss" }
+            }
+          }
+        }
+      }
+    }
+  },
+  "a11y": {
+    "contrast": "AA"
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": "8nim1d0IPnehMxA7B7SYxC",
+      "componentSetKey": "6acb10544bd5dce1800d610744c0e346fc12bfb9",
+      "nodeId": "11:184"
+    },
+    "code": { "importPath": "src/components/Banner", "export": "Banner" }
+  }
+}

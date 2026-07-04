@@ -69,6 +69,17 @@ export const LayoutSchema = z.object({
   direction: z.enum(['row', 'column']).optional(),
   align: z.enum(['start', 'center', 'end', 'stretch']).optional(),
   justify: z.enum(['start', 'center', 'end', 'space-between']).optional(),
+  /** Part takes remaining space (code: flex 1 1 auto; Figma: fill container). */
+  grow: z.boolean().optional(),
+});
+
+/** Conditional part visibility (schema v4, gap G1): the part renders only
+ *  when the prop matches. Boolean props map to Figma visibility bindings;
+ *  enum conditions resolve per variant. */
+export const VisibleWhenSchema = z.object({
+  prop: z.string(),
+  /** Omit for boolean props (truthy). */
+  equals: z.string().optional(),
 });
 
 /** Design-time default content for a slot (Curtis's fifth slot property).
@@ -138,6 +149,9 @@ export interface Part {
   content?: { prop: string };
   slot?: z.infer<typeof SlotSchema>;
   component?: z.infer<typeof ComponentRefSchema>;
+  icon?: { asset: string; size?: number };
+  attrs?: Record<string, string>;
+  visibleWhen?: z.infer<typeof VisibleWhenSchema>;
   /** Optional parts render conditionally (code: when the slot prop is
    *  provided; Figma: a "Show X" BOOLEAN controls visibility). */
   optional?: boolean;
@@ -154,6 +168,15 @@ export const PartSchema: z.ZodType<Part> = z.lazy(() =>
     content: z.object({ prop: z.string() }).optional(),
     slot: SlotSchema.optional(),
     component: ComponentRefSchema.optional(),
+    /** Icon part (v4, gap G6): renders assets/icons/<asset>.svg inline on the
+     *  code side and as a vector in Figma. '{prop}' substitutes an enum prop
+     *  (icon-by-status). Icons are always decorative (aria-hidden). */
+    icon: z.object({ asset: z.string(), size: z.number().optional() }).optional(),
+    /** v4, gap G2: HTML/ARIA attributes on this part's element — literal
+     *  strings or '{prop}' references. Code-side surface; Figma ignores. */
+    attrs: z.record(z.string(), z.string()).optional(),
+    /** v4, gap G1. */
+    visibleWhen: VisibleWhenSchema.optional(),
     optional: z.boolean().optional(),
     parts: z.record(z.string(), PartSchema).optional(),
   }),
@@ -171,6 +194,11 @@ export const ContractSchema = z.object({
   semantics: z.object({
     element: z.enum(['button', 'span', 'div', 'a', 'input', 'article', 'section', 'header', 'footer']),
     role: z.string().optional(),
+    /** v4, gap G7: ARIA role driven by an enum prop (e.g. Banner: error →
+     *  alert, info → status). Code emits a lookup; overrides `role`. */
+    roleByProp: z
+      .object({ prop: z.string(), map: z.record(z.string(), z.string()) })
+      .optional(),
   }),
   props: z.array(PropSchema),
   states: z.array(z.enum(['hover', 'focus-visible', 'disabled'])).default([]),
