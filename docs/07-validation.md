@@ -1,10 +1,10 @@
 # 7 · Validation — Claims, Evals, Evidence
 
-This PoC makes four falsifiable claims. Each is backed by an automated eval (`npm run eval`, 24 cases, runs the real pipeline in a scratch copy — not mocks) or an executed live-Figma check. Current status: **24/24 deterministic evals pass** (`evals/results.json`), all live checks pass. This section is written to be lifted into a PRD.
+This PoC makes four falsifiable claims. Each is backed by an automated eval (`npm run eval`, 24 cases, runs the real pipeline in a scratch copy — not mocks) or an executed live design-tool check. Current status: **24/24 deterministic evals pass** (`evals/results.json`), all live checks pass. This section is written to be lifted into a PRD.
 
-**Round 5 addendum (advanced composition + packaging):** the table family adds refusal of slot defaultContent outside `accepts` (`refuse-defaultContent-outside-accepts`) and detection of missing multi-child slot content (`detect-figma-missing-multislot-content`) — plus the npm product-environment smoke test (`npm run verify:package`: SSR-renders a composed screen from `dist/`). See [docs/09](09-advanced-components.md).
+**Round 5 addendum (advanced composition + packaging):** the table family adds refusal of slot defaultContent outside `accepts` (`refuse-defaultContent-outside-accepts`) and detection of missing multi-child slot content (`detect-design-missing-multislot-content`) — plus the npm product-environment smoke test (`npm run verify:package`: SSR-renders a composed screen from `dist/`). See [docs/09](09-advanced-components.md).
 
-**Round 4 addendum (composition):** the suite now also covers slots and nested components — refusal of circular/unknown composition (`refuse-circular-dependency`, `refuse-unknown-component-ref`), detection of missing slot properties, missing nested instances, slot-`accepts` drift against anchors, and removed slot props (`detect-figma-missing-slot-property`, `detect-figma-missing-nested-instance`, `detect-figma-accepts-drift`, `detect-code-removed-slot-prop`). See [docs/08](08-composition-and-spec.md).
+**Round 4 addendum (composition):** the suite now also covers slots and nested components — refusal of circular/unknown composition (`refuse-circular-dependency`, `refuse-unknown-component-ref`), detection of missing slot properties, missing nested instances, slot-`accepts` drift against anchors, and removed slot props (`detect-design-missing-slot-property`, `detect-design-missing-nested-instance`, `detect-design-accepts-drift`, `detect-code-removed-slot-prop`). See [docs/08](08-composition-and-spec.md).
 
 ## The claims and their evidence
 
@@ -36,28 +36,30 @@ Why it matters for the PRD: determinism is what separates "generate from your de
 | `detect-code-removed-prop` | prop deleted from code → `code BEHIND` | ✅ |
 | `detect-code-enum-drift` | enum value added in code → `code MISMATCH` | ✅ |
 | `detect-code-default-drift` | default changed in code → `code MISMATCH` | ✅ |
-| `detect-figma-missing-property` | property missing from Figma set → `figma BEHIND` | ✅ |
-| `detect-figma-extra-property` | property added in Figma → `figma AHEAD` + patch | ✅ |
-| `detect-figma-variant-options-drift` | variant option added in Figma → `figma MISMATCH` | ✅ |
-| `detect-token-alias-drift` | variable alias retargeted in Figma → `figma-tokens MISMATCH` + adoption patch | ✅ |
-| `detect-token-missing-variable` | token with no Figma variable → `figma-tokens BEHIND` | ✅ |
-| `detect-token-extra-variable` | Figma variable with no token → `figma-tokens AHEAD` | ✅ |
+| `detect-design-missing-property` | property missing from the canvas set → `design BEHIND` | ✅ |
+| `detect-design-extra-property` | property added on the canvas → `design AHEAD` + patch | ✅ |
+| `detect-design-variant-options-drift` | variant option added on the canvas → `design MISMATCH` | ✅ |
+| `detect-token-alias-drift` | variable alias retargeted in the design tool → `design-tokens MISMATCH` + adoption patch | ✅ |
+| `detect-token-missing-variable` | token with no design-tool variable → `design-tokens BEHIND` | ✅ |
+| `detect-token-extra-variable` | design-tool variable with no token → `design-tokens AHEAD` | ✅ |
+
+*Eval ids and drift labels are shown here with the neutral `design` surface label; the ids and report labels on disk (`evals/`, `parity/report.json`) name the reference design tool's surface.*
 
 ### C4 — Promotion converges
 *Applying the differ's own proposed patch returns the system to parity, with only the correct next step remaining.*
 
 | Eval | Result |
 |---|---|
-| `promotion-converges` — code drifts ahead → differ's patch applied to the contract verbatim → regenerate → assert zero code findings and exactly one remaining finding: `figma BEHIND` on the new property (the correct next action) | ✅ |
+| `promotion-converges` — code drifts ahead → differ's patch applied to the contract verbatim → regenerate → assert zero code findings and exactly one remaining finding: `design BEHIND` on the new property (the correct next action) | ✅ |
 
 This is the loop's key property: the system never oscillates and never lies about what to do next.
 
-## Live-Figma evals (executed July 3, 2026, not headless-repeatable yet)
+## Live design-tool evals (executed July 3, 2026, not headless-repeatable yet)
 
 | Check | Result |
 |---|---|
-| **Token round-trip losslessness** — `figma_export_tokens` (DTCG) → `figma_import_tokens` dry-run of the exported payload | ✅ **92 tokens parsed · 0 create · 0 update · 0 rename · 0 delete · 92 unchanged** (figma-console-mcp v1.34.0) |
-| **Export completeness** — exported DTCG carries scopes, `codeSyntax`, per-mode alias references, and Figma `variableId`/`collectionId` in `$extensions` (the dual-ID rename-survival pattern) | ✅ verified, including the previously promoted dark-mode change |
+| **Token round-trip losslessness** — the sync bridge's DTCG token export → dry-run re-import of the exported payload | ✅ **92 tokens parsed · 0 create · 0 update · 0 rename · 0 delete · 92 unchanged** (sync bridge v1.34.0) |
+| **Export completeness** — exported DTCG carries scopes, code-syntax metadata, per-mode alias references, and the design tool's variable/collection IDs in `$extensions` (the dual-ID rename-survival pattern) | ✅ verified, including the previously promoted dark-mode change |
 | **Two-direction promotion on live surfaces** | ✅ executed end-to-end — see [docs/06](06-parity-loop.md) |
 
 ## What is NOT yet validated (say this in the PRD too)
@@ -87,4 +89,4 @@ npm run eval      # 16 deterministic evals → evals/results.json
 npm run parity    # current three-surface drift report
 ```
 
-Live checks additionally need Figma Desktop + the figma-console-mcp Desktop Bridge (v1.34+; keep the plugin re-imported when the server updates — version skew between server and plugin was the root cause of an export failure during this work).
+Live checks additionally need the design tool's desktop app plus the sync bridge, v1.34+ (setup detail in the internal appendix, docs/internal/figma-sync.md). Keep the bridge's in-tool client updated with its server — client/server version skew was the root cause of an export failure during this work.

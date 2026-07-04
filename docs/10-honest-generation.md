@@ -1,15 +1,15 @@
 # 10 · Honest Generation — Catalog, Judge, and the A/B Number
 
-Round 6 (July 3, 2026) built the consumption side of the thesis: a governed **catalog** every generating surface reads first, a deterministic **adherence judge** that enforces it, and the **A/B eval** that quantifies what governance is worth. This round produces the numbers and the narrative for the leadership demo. Figma Make is deliberately out of scope — this PoC models what a Make-class surface *becomes* when constrained to a governed source.
+Round 6 (July 3, 2026) built the consumption side of the thesis: a governed **catalog** every generating surface reads first, a deterministic **adherence judge** that enforces it, and the **A/B eval** that quantifies what governance is worth. This round produces the numbers and the narrative for the leadership demo. Commercial AI-generation surfaces (including the reference design tool's own) are deliberately out of scope — this PoC models what such a surface *becomes* when constrained to a governed source.
 
 ## The artifacts
 
 | Artifact | Command | What it is |
 |---|---|---|
 | `catalog/catalog.json` | `npm run catalog` | The contract set + tokens + org rules compiled into one machine-readable, versioned (package version + git commit) generation constraint — the A2UI/json-render move, emitted from the same source that generates both component surfaces |
-| `context/rules.json` | — | Org-authored rules (the **Figma Context stand-in**): tokens-only, one-primary-action, no raw equivalents, no style overrides, layout via primitives… Each tagged `judge` (deterministic) or `agent` (guidance) |
+| `context/rules.json` | — | Org-authored rules (a stand-in for **a design tool's org-level context feature**): tokens-only, one-primary-action, no raw equivalents, no style overrides, layout via primitives… Each tagged `judge` (deterministic) or `agent` (guidance) |
 | `parity/judge.ts` | `npm run judge -- <screen.tsx>` | Scores ANY React screen against the catalog — unknown components, illegal props/enum values, missing required props, slot-acceptance, raw-element equivalents, style overrides, literal colors/dimensions, unknown tokens, primary-budget. No LLM, no rubric drift: **the catalog is the spec, so adherence is checked, not judged** |
-| `Stack` / `Inline` | contracts | Layout primitives so screens are 100% catalog-composable. Marked `figmaRepresentation: "native"` — a new schema field acknowledging that some contracts map to native canvas capabilities (layout **is** auto-layout), not Figma components |
+| `Stack` / `Inline` | contracts | Layout primitives so screens are 100% catalog-composable. Marked `"native"` in a new design-representation schema field acknowledging that some contracts map to native canvas capabilities (layout **is** auto-layout), not canvas components |
 
 ## The experiment
 

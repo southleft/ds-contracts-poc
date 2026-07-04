@@ -192,7 +192,10 @@ export const ContractSchema = z.object({
   status: z.enum(['draft', 'stable', 'deprecated']).default('draft'),
   description: z.string(),
   semantics: z.object({
-    element: z.enum(['button', 'span', 'div', 'a', 'input', 'article', 'section', 'header', 'footer']),
+    element: z.enum([
+      'button', 'span', 'div', 'a', 'input', 'article', 'section', 'header', 'footer',
+      'label', 'nav', 'hr', 'ul', 'li', 'p', 'textarea', 'select', 'fieldset',
+    ]),
     role: z.string().optional(),
     /** v4, gap G7: ARIA role driven by an enum prop (e.g. Banner: error →
      *  alert, info → status). Code emits a lookup; overrides `role`. */

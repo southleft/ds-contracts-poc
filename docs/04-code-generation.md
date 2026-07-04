@@ -23,7 +23,7 @@
 - **Text props** map to `children`.
 - **Anatomy token bindings** become CSS declarations `property: var(--token-path)`. References without placeholders land on `.root`; references with one `{prop}` placeholder expand across that enum's values. State bindings get pseudo-class selectors (`:hover:not(:disabled)`, `:focus-visible`, `:disabled`).
 - **A small static base** (flex centering, `border: 0`, cursor rules, focus outline style/offset) is currently templated rather than contract-governed — a known gap, candidate for a contract `layout` block in a future schema version.
-- **Stories**: a `Playground` story with contract defaults, one story per value of the first enum prop, `Disabled` when a disabled prop exists, and a `Matrix` story rendering every legal combination of the first two enum props — the visual you'll compare against the Figma component set in phase 3.
+- **Stories**: a `Playground` story with contract defaults, one story per value of the first enum prop, `Disabled` when a disabled prop exists, and a `Matrix` story rendering every legal combination of the first two enum props — the visual you'll compare against the canvas component set in phase 3.
 
 ## Adding a component (the whole workflow)
 

@@ -19,10 +19,10 @@ Components only ever bind to **semantic** tokens (`color.action.primary.backgrou
 
 This repo intentionally uses the **legacy/draft DTCG dialect** — hex-string colors (`"$value": "#2563EB"`) and unit-string dimensions (`"$value": "16px"`) — *not* the DTCG 2025.10 stable object forms (`{colorSpace, components, hex}` / `{value, unit}`). Two reasons:
 
-1. **The Figma Console MCP speaks this dialect.** Its `figma_import_tokens`/`figma_export_tokens` pipeline converts colors via hex and would not convert object-colors (verified against its source, July 2026). Since that MCP is the phase-2 bridge, matching its dialect keeps the round-trip lossless.
+1. **The design-tool sync bridge speaks this dialect.** The bridge's token import/export pipeline converts colors via hex and would not convert object-colors (verified against its source, July 2026). Since that bridge is the phase-2 path to the design tool, matching its dialect keeps the round-trip lossless. (Bridge specifics live in the internal appendix, docs/internal/figma-sync.md.)
 2. **The dialect is trivial to compile.** Values are already CSS-ready strings and single-level aliases, so the build needs no token framework at all (see below).
 
-Migration to 2025.10 object forms is mechanical (a value-shape transform) and should happen when the MCP supports it. Track it; don't preempt it.
+Migration to 2025.10 object forms is mechanical (a value-shape transform) and should happen when the bridge supports it. Track it; don't preempt it.
 
 **Modes** are handled as separate files per mode, mirroring the mental model of the DTCG Resolver Module (still a draft; explicitly not implementable yet). When the resolver stabilizes, these files become resolver `contexts` without restructuring.
 
@@ -53,13 +53,13 @@ Note the dark block's `var()` references point at primitives that live only in `
 
 ### Naming convention
 
-CSS custom property = token path joined with `-`: `color.action.primary.background` → `--color-action-primary-background`. The generator computes variable names with the same rule, which is what lets it validate contract bindings against the token inventory. In phase 2, the same names are written to Figma variables' `codeSyntax.WEB` so Dev Mode shows the real CSS variable for every Figma variable.
+CSS custom property = token path joined with `-`: `color.action.primary.background` → `--color-action-primary-background`. The generator computes variable names with the same rule, which is what lets it validate contract bindings against the token inventory. In phase 2, the same names are written into each design-tool variable's web code-syntax metadata, so the tool's developer view shows the real CSS variable for every design-tool variable.
 
-## Figma mapping (phase 2 preview)
+## Design-tool mapping (phase 2 preview)
 
-| Token layer | Figma structure |
+| Token layer | Canvas structure |
 |---|---|
 | `primitives.tokens.json` | Collection **Primitives**, single mode |
 | `semantic.tokens.json` + `modes/*` | Collection **Semantic**, modes **Light**/**Dark**, values as variable aliases into Primitives |
 
-Note: Figma's per-collection mode count is plan-gated (Starter = 1, Professional = 10). Light + dark in one collection requires a Professional+ file. See [Figma sync doc](05-figma-sync.md).
+Note: the reference design tool gates per-collection mode counts by plan tier; light + dark in one collection requires a paid tier. Details in the internal sync appendix.

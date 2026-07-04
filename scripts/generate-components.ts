@@ -411,6 +411,15 @@ const ELEMENT_META: Record<string, { attrs: string; el: string; supportsDisabled
   section: { attrs: 'HTMLAttributes', el: 'HTMLElement', supportsDisabled: false },
   header: { attrs: 'HTMLAttributes', el: 'HTMLElement', supportsDisabled: false },
   footer: { attrs: 'HTMLAttributes', el: 'HTMLElement', supportsDisabled: false },
+  label: { attrs: 'LabelHTMLAttributes', el: 'HTMLLabelElement', supportsDisabled: false },
+  nav: { attrs: 'HTMLAttributes', el: 'HTMLElement', supportsDisabled: false },
+  hr: { attrs: 'HTMLAttributes', el: 'HTMLHRElement', supportsDisabled: false },
+  ul: { attrs: 'HTMLAttributes', el: 'HTMLUListElement', supportsDisabled: false },
+  li: { attrs: 'LiHTMLAttributes', el: 'HTMLLIElement', supportsDisabled: false },
+  p: { attrs: 'HTMLAttributes', el: 'HTMLParagraphElement', supportsDisabled: false },
+  textarea: { attrs: 'TextareaHTMLAttributes', el: 'HTMLTextAreaElement', supportsDisabled: true },
+  select: { attrs: 'SelectHTMLAttributes', el: 'HTMLSelectElement', supportsDisabled: true },
+  fieldset: { attrs: 'FieldsetHTMLAttributes', el: 'HTMLFieldSetElement', supportsDisabled: true },
 };
 
 const PARENT_PROP_REF = /^\{([a-z][\w-]*)\}$/;

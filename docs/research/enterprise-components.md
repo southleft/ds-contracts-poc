@@ -6,8 +6,6 @@
 
 **The headline:** the big systems agree on structure to a remarkable degree, and almost every "missing feature" reduces to one of **six schema gaps**: conditional part visibility, prop→HTML/ARIA attribute bindings, part-level (not root-only) state tokens, icon-by-enum-value asset handling, structured a11y relationships (label/describedby/live-region), and a declared behavior/events boundary. No gap requires rethinking the model — all six are additive fields on existing schema objects.
 
----
-
 ## 1 · Text input / TextField
 
 The classic complexity benchmark. Every surveyed system converges on the same five-zone anatomy; the differences are naming and how validation messaging is switched.
@@ -96,8 +94,8 @@ textfield
 > visibleWhen?: Array<{ prop: string; equals: string | boolean }>  // AND semantics
 > ```
 > - **Code:** `{invalid && <span className={s.errorText}>{invalidText}</span>}` — and the generator derives the "replace" rule mechanically when two sibling parts have complementary predicates (`equals: true` / `equals: false`).
-> - **Figma:** for boolean props, bind node visibility to the BOOLEAN component property (`componentPropertyReferences.visible` — native Figma capability, zero new machinery); for enum props, show/hide the node per variant combo during variant generation (the generator already iterates combos for token substitution).
-> - **Differ:** for each `visibleWhen` part, assert the Figma node's visibility binding / per-variant visibility matches.
+> - **Canvas:** for boolean props, bind node visibility to the boolean component property (a native design-tool visibility binding, zero new machinery); for enum props, show/hide the node per variant combo during variant generation (the generator already iterates combos for token substitution).
+> - **Differ:** for each `visibleWhen` part, assert the canvas node's visibility binding / per-variant visibility matches.
 
 **G2 — Prop→HTML-attribute bindings on a *part*.** `placeholder`, `maxLength`, `type`, `autocomplete`, `readonly`, `value` are attributes **of the nested `input` part**, not of the root, and not classes/tokens. The current code binding (`code: { prop }`) can only surface a prop as a React prop; nothing routes it to an attribute on an inner element.
 
@@ -107,7 +105,7 @@ textfield
 > // e.g. input part: { placeholder: { prop: "placeholder" }, maxlength: { prop: "maxLength" }, type: { const: "text" } }
 > ```
 > - **Code:** rendered as JSX attributes on that part's element.
-> - **Figma:** placeholder is *display content* — cover it with a TEXT property bound to the placeholder text node (`content: { prop: "placeholder" }` on a ghost-text part); the rest (`maxlength`, `autocomplete`) are **code-only surface**, exactly like `:hover` is CSS-only — the differ ignores them on the Figma side by rule.
+> - **Canvas:** placeholder is *display content* — cover it with a text property bound to the placeholder text node (`content: { prop: "placeholder" }` on a ghost-text part); the rest (`maxlength`, `autocomplete`) are **code-only surface**, exactly like `:hover` is CSS-only — the differ ignores them on the canvas side by rule.
 
 **G3 — Part-level states (docs/08 known gap, now load-bearing).** The focus ring and invalid border live on `fieldWrapper`, not root; `focus-within` (not `focus-visible`) is the correct pseudo-class for composite fields. Additionally, *data-state token overrides* are needed: `fieldWrapper` border-color per validation status.
 
@@ -119,7 +117,7 @@ textfield
 > // fieldWrapper: [{ when: { prop: "status", equals: "invalid" }, tokens: { "border-color": "{color.border.danger}" } }]
 > ```
 > - **Code:** emits `.status-invalid .fieldWrapper { … }` (or data-attribute selector `[data-status="invalid"]`).
-> - **Figma:** the status enum is a variant axis; `tokensWhen` styles that part in the matching variant combos — same per-combo machinery as `{placeholder}` substitution, generalized to parts whose token *path* doesn't encode the prop.
+> - **Canvas:** the status enum is a variant axis; `tokensWhen` styles that part in the matching variant combos — same per-combo machinery as `{placeholder}` substitution, generalized to parts whose token *path* doesn't encode the prop.
 
 **G4 — A11y relationships.** The current `a11y` block (`focusVisible`/`minHitArea`/`contrast`) can't express label-for, describedby chains, or aria-invalid.
 
@@ -135,12 +133,10 @@ textfield
 > }
 > ```
 > - **Code:** generator mints stable ids (`${componentId}-label`) and emits `htmlFor`/`aria-describedby`; conditional relationships follow the same predicate as G1 so the describedby always points at the *visible* message.
-> - **Figma:** no-op (code-only surface); recorded for documentation/annotations.
+> - **Canvas:** no-op (code-only surface); recorded for documentation/annotations.
 > - `aria-invalid`/`aria-required` route through G2 `attrs`: `{ "aria-invalid": { prop: "invalid" } }`.
 
-**G5 — Prop relevance rules (small, deferrable).** `invalidText` is meaningless without `invalid`; `counter` requires `maxLength`. A `relevantWhen?: { prop, equals }` field on `PropSchema` would let generators order Storybook controls and Figma property visibility (Figma's conditional property visibility maps 1:1). Low cost, low urgency — G1 predicates already prevent wrong *rendering*.
-
----
+**G5 — Prop relevance rules (small, deferrable).** `invalidText` is meaningless without `invalid`; `counter` requires `maxLength`. A `relevantWhen?: { prop, equals }` field on `PropSchema` would let generators order Storybook controls and canvas property visibility (the design tool's conditional property visibility maps 1:1). Low cost, low urgency — G1 predicates already prevent wrong *rendering*.
 
 ## 2 · Inline notification / Alert / Banner
 
@@ -191,8 +187,8 @@ notification
 > componentByValue?: { prop: string; refs: Record<string, ComponentRef> }
 > ```
 > - **Code:** Option A: `<Icon name={kind} />`; Option B: a switch on the prop.
-> - **Figma:** Option A: per-variant instance with `Name` variant set (the Table density machinery, verbatim). Option B: different instances per variant combo.
-> - **Recommendation:** build `ds.icon` as an enum-prop contract (name axis) and ship Option A now; record Option B as a schema extension only if icon sets outgrow one component set. **Prerequisite:** an `assets` convention for the SVG bodies — a `ds.icon` contract whose `name` enum values map to SVG files (code) and to variants of an Icon component set (Figma). This is the one genuinely new *pipeline* piece (asset ingestion), though schema-wise it is just a contract.
+> - **Canvas:** Option A: per-variant instance with `Name` variant set (the Table density machinery, verbatim). Option B: different instances per variant combo.
+> - **Recommendation:** build `ds.icon` as an enum-prop contract (name axis) and ship Option A now; record Option B as a schema extension only if icon sets outgrow one component set. **Prerequisite:** an `assets` convention for the SVG bodies — a `ds.icon` contract whose `name` enum values map to SVG files (code) and to variants of an Icon component set (canvas). This is the one genuinely new *pipeline* piece (asset ingestion), though schema-wise it is just a contract.
 
 **G7 — Live-region a11y.** Nothing in `a11y` or `semantics` can say "this is a polite/assertive live region," and Carbon shows the role must be *prop-controllable* in the general case.
 
@@ -207,7 +203,7 @@ notification
 > }
 > ```
 > - **Code:** emits `role`/`aria-live`/`aria-atomic` on the root element; if `roleProp` is set, generates the enum prop pass-through.
-> - **Figma:** no-op; flows into the component description ("announces politely on appear").
+> - **Canvas:** no-op; flows into the component description ("announces politely on appear").
 > - **Differ:** asserts the role attribute in the rendered output (the `verify:package` harness already asserts roles).
 
 **G8 — Dismissible → close button + event.** `closeButton` visibility is G1 (`visibleWhen: [{ prop: "dismissible", equals: true }]`). The *event* (`onDismiss`) is the first concrete instance of the docs/09 `behavior` field:
@@ -218,9 +214,7 @@ notification
 > // [{ name: "onDismiss" }]
 > ```
 > - **Code:** typed callback prop on the generated component; the generated close button calls it. No state machine needed — dismissal state lives with the consumer (all five systems agree: the notification does not hide itself).
-> - **Figma:** no-op (code-only surface).
-
----
+> - **Canvas:** no-op (code-only surface).
 
 ## 3 · Data table, enterprise tier
 
@@ -259,32 +253,28 @@ ARIA APG draws the same line at the semantics level: a **table** is "a static ta
 > }
 > ```
 > - **Code:** generated shell imports the hook; events become typed callback props. Hook file is human-owned, never generated over.
-> - **Figma:** invisible by design. **Differ:** checks the events appear in the generated prop types; ignores hook internals.
+> - **Canvas:** invisible by design. **Differ:** checks the events appear in the generated prop types; ignores hook internals.
 
-**G10 — Selection/expansion column parts need `visibleWhen` on *component refs inside repeated children*.** `ds.table-row` gains a `selectable` context: the checkbox cell renders only when the *table* is selectable. Today parent→child mapping passes *values*; combined with G1 this works (`selectable` mapped down, checkbox cell `visibleWhen selectable`) — but note the docs/09 multi-level mapping gap: mapped props don't reach slot-provided rows. **The context-propagation design flagged in docs/09 becomes a prerequisite for enterprise table** (code: React context; Figma: per-variant nested overrides).
+**G10 — Selection/expansion column parts need `visibleWhen` on *component refs inside repeated children*.** `ds.table-row` gains a `selectable` context: the checkbox cell renders only when the *table* is selectable. Today parent→child mapping passes *values*; combined with G1 this works (`selectable` mapped down, checkbox cell `visibleWhen selectable`) — but note the docs/09 multi-level mapping gap: mapped props don't reach slot-provided rows. **The context-propagation design flagged in docs/09 becomes a prerequisite for enterprise table** (code: React context; canvas: per-variant nested overrides).
 
 **G11 — Per-column configuration.** Already logged in docs/09 (column alignment/width). Minimal fix: `align`/`width` props on `ds.table-header-cell`/`ds.table-cell` with `tokensWhen`/substitution — no new schema field required, just contracts. The `columnContentTypes` idea (Polaris) stays out of the contract: it is instance data, not component API.
 
 **A11y additions the table consumes from earlier gaps:** `aria-sort` via G2 `attrs` (`{ "aria-sort": { prop: "sortState" } }` on header cell), `aria-selected`/`aria-expanded` via G2 on row, select-all checkbox `aria-label` via G4.
 
----
-
 ## 4 · Consolidated schema additions (minimal set)
 
-| # | Field | Where | Shape (abbreviated) | Code output | Figma output |
+| # | Field | Where | Shape (abbreviated) | Code output | Canvas output |
 |---|---|---|---|---|---|
-| G1 | `visibleWhen` | `Part` | `[{ prop, equals }]` | conditional JSX | BOOLEAN prop → visibility binding; enum → per-variant visibility |
+| G1 | `visibleWhen` | `Part` | `[{ prop, equals }]` | conditional JSX | boolean prop → visibility binding; enum → per-variant visibility |
 | G2 | `attrs` | `Part` | `Record<attr, { prop } \| { const }>` | JSX attributes (incl. `aria-*`) | code-only (placeholder via TEXT-bound ghost part) |
 | G3 | part-level `states` + `tokensWhen` | `Part` | enum widened (`focus-within`, `readonly`); `[{ when, tokens }]` | nested selectors / data-attr rules | per-variant part styling |
 | G4 | `relationships` | `a11y` | `[{ type, from, to, when? }]` | generated ids + `htmlFor`/`aria-describedby` | annotation only |
-| G5 | `relevantWhen` | `Prop` | `{ prop, equals }` | Storybook control gating | Figma conditional property visibility |
+| G5 | `relevantWhen` | `Prop` | `{ prop, equals }` | Storybook control gating | design-tool conditional property visibility |
 | G6 | icon-by-value | (none — convention) | `ds.icon` contract, `props: { name: "{kind}" }` | `<Icon name={kind}/>` | per-variant icon instance |
 | G7 | `liveRegion` | `a11y` | `{ role, roleProp?, atomic? }` | `role`/`aria-live` on root | description text |
 | G8/G9 | `behavior` | contract root | `{ hook?, events? }` | typed callbacks + hook import | invisible |
 
 Ordering constraint: G1 and G3 are consumed by all three components; G2/G4 by TextField and Table; G6/G7/G8 by Notification; G9/G10 only by Table.
-
----
 
 ## 5 · Build order (prioritized)
 

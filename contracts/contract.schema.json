@@ -41,7 +41,16 @@
             "article",
             "section",
             "header",
-            "footer"
+            "footer",
+            "label",
+            "nav",
+            "hr",
+            "ul",
+            "li",
+            "p",
+            "textarea",
+            "select",
+            "fieldset"
           ]
         },
         "role": {

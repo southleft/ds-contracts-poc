@@ -7,13 +7,13 @@ One contract per component, at `contracts/<component>.contract.json`. The author
 | Field | Type | Purpose |
 |---|---|---|
 | `id` | `ds.<kebab-name>` | **Stable canonical identity. Never renamed.** Display names can change on either side; the `id` is what survives. |
-| `name` | string | Display/export name (`Button`). Drives the code export and the Figma component set name. |
+| `name` | string | Display/export name (`Button`). Drives the code export and the canvas component set name. |
 | `version` | semver string | Bumped when the contract changes. The unit of change management. |
 | `status` | `draft` \| `stable` \| `deprecated` | Governance lifecycle. |
-| `description` | string | Usage intent. Flows into Storybook autodocs and (phase 2) the Figma component description — the same sentence in both surfaces, from one source. |
+| `description` | string | Usage intent. Flows into Storybook autodocs and (phase 2) the canvas component description — the same sentence in both surfaces, from one source. |
 | `semantics` | `{ element, role? }` | The HTML element the code renderer uses, and the ARIA role if it differs. |
 | `props` | `Prop[]` | The canonical API. See below. |
-| `states` | `("hover" \| "focus-visible" \| "disabled")[]` | Interaction states the component must support. Drives CSS pseudo-class rules (code) and, in phase 2, variant pseudo-state frames (Figma). |
+| `states` | `("hover" \| "focus-visible" \| "disabled")[]` | Interaction states the component must support. Drives CSS pseudo-class rules (code) and, in phase 2, variant pseudo-state frames (canvas). |
 | `anatomy` | `Record<partName, Part>` | Named internal parts with **token bindings** — where all styling decisions live. |
 | `a11y` | object | Executable accessibility requirements (`focusVisible`, `minHitArea`, `contrast`). Phase 1 records them; later phases enforce them. |
 | `anchors` | object | Per-side identity anchors. See below. |
@@ -29,11 +29,11 @@ Each prop declares its canonical name, type, default — and **bindings**, which
   "type": { "enum": ["primary", "secondary", "danger"] },   // or "boolean" or "text"
   "default": "primary",
   "bindings": {
-    "figma": {
-      "kind": "VARIANT",                    // VARIANT | BOOLEAN | TEXT | INSTANCE_SWAP
-      "property": "Variant",                // Figma component property name
+    "design": {
+      "kind": "VARIANT",                    // variant | boolean | text | instance-swap
+      "property": "Variant",                // canvas component property name
       "values": { "primary": "Primary", "secondary": "Secondary", "danger": "Danger" }
-    },                                      //  ^ canonical value → Figma variant value
+    },                                      //  ^ canonical value → canvas variant value
     "code": { "prop": "variant" }           // React prop name
   }
 }
@@ -41,21 +41,21 @@ Each prop declares its canonical name, type, default — and **bindings**, which
 
 Rules of thumb:
 
-- **The canonical value set lives here and only here.** Figma spelling (`"Primary"`) and code spelling (`"primary"`) are *renderings* of the canonical value.
-- `"text"` props map to `children` in code and a `TEXT` property in Figma.
+- **The canonical value set lives here and only here.** Canvas spelling (`"Primary"`) and code spelling (`"primary"`) are *renderings* of the canonical value.
+- `"text"` props map to `children` in code and a text property on the canvas.
 - `"boolean"` props map to the native attribute where the element supports it (`disabled` on `<button>`), otherwise a `data-*` attribute.
 
 ## Anatomy & token bindings (v2 — composition)
 
-Anatomy is a **nested tree** of named parts (CEM's slots/parts, Curtis's anatomy). Every part can carry **token bindings** (CSS property → DTCG token reference — the CSS Module and the Figma node styling are both generated from these; there is no handwritten style layer), a **layout** block (`display`/`direction`/`align`/`justify` → flexbox on the code side, auto-layout on the Figma side), and one of three composition roles:
+Anatomy is a **nested tree** of named parts (CEM's slots/parts, Curtis's anatomy). Every part can carry **token bindings** (CSS property → DTCG token reference — the CSS Module and the canvas node styling are both generated from these; there is no handwritten style layer), a **layout** block (`display`/`direction`/`align`/`justify` → flexbox on the code side, auto-layout on the canvas side), and one of three composition roles:
 
-| Part field | Meaning | Code output | Figma output |
+| Part field | Meaning | Code output | Canvas output |
 |---|---|---|---|
 | `component: { id, props? }` | Fixed instance of another contract; `props` spelled canonically, mapped through the *child's* bindings | imported `<Child prop="…">` | nested instance with properties set |
-| `slot: { name, accepts?, acceptsMode?, min?, max?, required?, figmaProperty? }` | Constrained insertion point; `accepts` lists contract IDs resolved via anchors | `children` / `ReactNode` prop | INSTANCE_SWAP (Slot-utility default) with `preferredValues` = accepted contracts' component keys; optional parts get a `Show X` BOOLEAN |
-| `content: { prop }` | Text bound to a declared text prop | `{title}` in the part's element | text node linked to the TEXT property |
+| `slot: { name, accepts?, acceptsMode?, min?, max?, required?, designProperty? }` | Constrained insertion point; `accepts` lists contract IDs resolved via anchors | `children` / `ReactNode` prop | instance-swap slot property (Slot-utility default) whose preferred values are the accepted contracts' component keys; optional parts get a `Show X` boolean |
+| `content: { prop }` | Text bound to a declared text prop | `{title}` in the part's element | text node linked to the text property |
 
-Parts with none of these are structural (frames/elements containing `parts`). `optional: true` renders conditionally in code and toggles visibility in Figma. Composition rules: part names are unique per contract; cycles and unknown contract refs **fail the build**; sync scripts emit in dependency order. See [docs/08](08-composition-and-spec.md) for the design rationale.
+Parts with none of these are structural (frames/elements containing `parts`). `optional: true` renders conditionally in code and toggles visibility on the canvas. Composition rules: part names are unique per contract; cycles and unknown contract refs **fail the build**; sync scripts emit in dependency order. See [docs/08](08-composition-and-spec.md) for the design rationale.
 
 ```jsonc
 "anatomy": {
@@ -82,12 +82,12 @@ Parts with none of these are structural (frames/elements containing `parts`). `o
 
 ```jsonc
 "anchors": {
-  "figma": { "fileKey": "8nim1d0IPnehMxA7B7SYxC", "componentSetKey": null, "nodeId": null },
-  "code":  { "importPath": "src/components/Button", "export": "Button" }
+  "design": { /* the design tool's stable file/component-set/node identifiers */ },
+  "code":   { "importPath": "src/components/Button", "export": "Button" }
 }
 ```
 
-This is the DTCG `$extensions` dual-ID pattern applied to components. After phase 2 first generates the Figma component set, its key/nodeId are written back here. From then on, renames on either side never fork identity — parity checks match by anchor, not by name.
+This is the DTCG `$extensions` dual-ID pattern applied to components. After phase 2 first generates the canvas component set, its stable identifiers are written back here. From then on, renames on either side never fork identity — parity checks match by anchor, not by name. (In the reference implementation the design-side keys — here and in prop bindings — are namespaced after the bound commercial design tool; the concrete key shapes are documented in docs/internal/figma-sync.md.)
 
 ## Versioning & change policy
 

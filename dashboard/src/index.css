@@ -118,12 +118,18 @@
   display: none; /* the Section header already shows the doc title */
 }
 .doc-prose h2 {
-  margin: 2rem 0 0.75rem;
-  padding-top: 1rem;
-  border-top: 1px solid var(--border);
+  margin: 2.25rem 0 0.75rem;
   font-size: 1.15rem;
   font-weight: 600;
   letter-spacing: -0.01em;
+}
+/* A rule right next to a heading (or opening the document) doubles up
+   visually — headings carry their own separation. */
+.doc-prose h1 + hr,
+.doc-prose hr:first-child,
+.doc-prose hr + hr,
+.doc-prose hr:has(+ h2) {
+  display: none;
 }
 .doc-prose h3 {
   margin: 1.5rem 0 0.5rem;
