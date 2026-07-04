@@ -1,3 +1,8 @@
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/logo-dark.svg">
+  <img alt="" src="docs/assets/logo-light.svg" width="72" height="72">
+</picture>
+
 # Design System Contracts
 
 **A proof of concept that a design system's source of truth should be neither the design file nor the code — but a machine-readable *contract* that sits between them and generates both.**

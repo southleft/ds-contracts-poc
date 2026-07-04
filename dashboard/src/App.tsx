@@ -88,7 +88,12 @@ export function App() {
 
       <aside className="bg-sidebar text-sidebar-foreground md:sticky md:top-0 md:flex md:h-dvh md:w-56 md:shrink-0 md:flex-col md:overflow-y-auto">
         <div className="px-5 pt-5 pb-2">
-          <a href="#/" className="text-lg font-semibold tracking-tight text-white">
+          <a href="#/" className="flex items-center gap-2 text-lg font-semibold tracking-tight text-white">
+            <svg viewBox="0 0 64 64" className="size-5 shrink-0" aria-hidden>
+              <polyline points="24,14 6,32 24,50" fill="none" stroke="currentColor" strokeWidth="6" strokeLinecap="square" />
+              <polyline points="40,14 58,32 40,50" fill="none" stroke="currentColor" strokeWidth="6" strokeLinecap="square" />
+              <path d="M32 21 L43 32 L32 43 L21 32 Z" fill="#60A5FA" />
+            </svg>
             Contract Hub
           </a>
           <p className="text-sidebar-foreground/60 mt-0.5 text-xs">The governed source, visualized</p>
