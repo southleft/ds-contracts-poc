@@ -5,6 +5,7 @@
 
 .root {
   display: inline-flex;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
   border-style: solid;

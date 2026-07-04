@@ -21,9 +21,9 @@ const meta = {
   },
   render: (args) => (
     <AvatarGroup {...args}>
-      <Avatar>AB</Avatar>
-      <Avatar>CD</Avatar>
-      <Avatar>EF</Avatar>
+      <Avatar size="md">AB</Avatar>
+      <Avatar size="md">CD</Avatar>
+      <Avatar size="md">EF</Avatar>
     </AvatarGroup>
   ),
   argTypes: {

@@ -39,18 +39,21 @@ const VARIANTS = [
             {
               "dep": "Avatar",
               "props": {
+                "Size": "Medium",
                 "Initials": "AB"
               }
             },
             {
               "dep": "Avatar",
               "props": {
+                "Size": "Medium",
                 "Initials": "CD"
               }
             },
             {
               "dep": "Avatar",
               "props": {
+                "Size": "Medium",
                 "Initials": "EF"
               }
             }
@@ -63,12 +66,12 @@ const VARIANTS = [
           "type": "text",
           "name": "overflowText",
           "fixedWidth": {
-            "px": 24,
-            "varName": "size/avatar/sm"
+            "px": 32,
+            "varName": "size/avatar/md"
           },
           "fixedHeight": {
-            "px": 24,
-            "varName": "size/avatar/sm"
+            "px": 32,
+            "varName": "size/avatar/md"
           },
           "fill": "color/action/secondary/background",
           "bindings": {
@@ -78,7 +81,7 @@ const VARIANTS = [
             "bottomRightRadius": "radius/pill"
           },
           "characters": "+3",
-          "fontSize": 12,
+          "fontSize": 14,
           "fontStyle": "Medium",
           "textFill": "color/text/secondary",
           "contentProp": "Overflow"

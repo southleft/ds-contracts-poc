@@ -83,7 +83,8 @@
         "body": {
           "layout": {
             "direction": "column",
-            "grow": true
+            "grow": true,
+            "align": "stretch"
           },
           "tokens": {
             "gap": "{space.inset-y.sm}"

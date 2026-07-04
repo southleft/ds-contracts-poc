@@ -22,12 +22,12 @@
 }
 
 .overflowText {
-  width: var(--size-avatar-sm);
-  height: var(--size-avatar-sm);
+  width: var(--size-avatar-md);
+  height: var(--size-avatar-md);
   background-color: var(--color-action-secondary-background);
   color: var(--color-text-secondary);
   border-radius: var(--radius-pill);
   font-family: var(--font-control-family);
-  font-size: var(--font-avatar-size-sm);
+  font-size: var(--font-avatar-size-md);
   font-weight: var(--font-control-weight);
 }

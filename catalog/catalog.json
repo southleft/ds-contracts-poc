@@ -2,7 +2,7 @@
   "system": {
     "name": "DS Contracts POC",
     "catalogVersion": "0.1.0",
-    "gitCommit": "a21b4f4",
+    "gitCommit": "769972c",
     "source": "Compiled from contracts/*.contract.json + tokens/ + context/rules.json — do not edit."
   },
   "package": {
@@ -1353,10 +1353,7 @@
         }
       ],
       "children": {
-        "kind": "slot",
-        "accepts": [],
-        "acceptsMode": "open",
-        "description": "Any catalog content."
+        "kind": "none"
       },
       "slots": []
     },

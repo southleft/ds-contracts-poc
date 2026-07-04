@@ -4,7 +4,7 @@ const SET_NAME = "Kbd";
 const DESCRIPTION = "Renders a keyboard shortcut as a styled key badge for tooltips, menus, and help text. API mirrors industry convention (Astryx Kbd); multi-key parsing (\"mod+K\" into separate badges) is display logic — a documented gap, one badge per component for now. — governed by contract ds.kbd v1.0.0";
 const IS_SET = false;
 const BOOL_PROPS = [];
-const TEXT_PROPS = [{"property":"Keys","default":"⌘K"}];
+const TEXT_PROPS = [];
 const FONT_STYLES = ["Medium"];
 const VARIANTS = [
   {
@@ -31,7 +31,18 @@ const VARIANTS = [
         "paddingRight": "space/inset-x/xs",
         "paddingTop": "space/inset-y/xs",
         "paddingBottom": "space/inset-y/xs"
-      }
+      },
+      "children": [
+        {
+          "type": "text",
+          "name": "keysText",
+          "characters": "⌘K",
+          "fontSize": 12,
+          "fontStyle": "Medium",
+          "textFill": "color/surface/foreground",
+          "contentProp": "Keys"
+        }
+      ]
     }
   }
 ];

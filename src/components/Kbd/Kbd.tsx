@@ -20,7 +20,7 @@ export const Kbd = forwardRef<HTMLElement, KbdProps>(function Kbd(
   const classes = [styles.root, className].filter(Boolean).join(' ');
   return (
     <kbd ref={ref} className={classes} {...rest}>
-      {children}
+      <span className={styles.keysText}>{keys}</span>
     </kbd>
   );
 });

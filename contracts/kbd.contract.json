@@ -29,9 +29,6 @@
   "states": [],
   "anatomy": {
     "root": {
-      "content": {
-        "prop": "keys"
-      },
       "tokens": {
         "background-color": "{color.surface.sunken}",
         "color": "{color.surface.foreground}",
@@ -42,6 +39,20 @@
         "padding-block": "{space.inset-y.xs}",
         "font-family": "{font.code.family}",
         "font-size": "{font.badge.size}"
+      },
+      "layout": {
+        "display": "inline-flex",
+        "direction": "row",
+        "align": "center",
+        "justify": "center"
+      },
+      "parts": {
+        "keysText": {
+          "element": "span",
+          "content": {
+            "prop": "keys"
+          }
+        }
       }
     }
   },

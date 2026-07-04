@@ -47,7 +47,8 @@ const VARIANTS = [
           "layout": {
             "mode": "VERTICAL",
             "primary": "MIN",
-            "counter": "MIN"
+            "counter": "MIN",
+            "stretchChildren": true
           },
           "grow": true,
           "bindings": {
@@ -146,7 +147,8 @@ const VARIANTS = [
           "layout": {
             "mode": "VERTICAL",
             "primary": "MIN",
-            "counter": "MIN"
+            "counter": "MIN",
+            "stretchChildren": true
           },
           "grow": true,
           "bindings": {
@@ -245,7 +247,8 @@ const VARIANTS = [
           "layout": {
             "mode": "VERTICAL",
             "primary": "MIN",
-            "counter": "MIN"
+            "counter": "MIN",
+            "stretchChildren": true
           },
           "grow": true,
           "bindings": {

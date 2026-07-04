@@ -55,14 +55,23 @@
             "defaultContent": [
               {
                 "id": "ds.avatar",
+                "props": {
+                  "size": "md"
+                },
                 "text": "AB"
               },
               {
                 "id": "ds.avatar",
+                "props": {
+                  "size": "md"
+                },
                 "text": "CD"
               },
               {
                 "id": "ds.avatar",
+                "props": {
+                  "size": "md"
+                },
                 "text": "EF"
               }
             ]
@@ -74,13 +83,13 @@
             "prop": "overflowLabel"
           },
           "tokens": {
-            "width": "{size.avatar.sm}",
-            "height": "{size.avatar.sm}",
+            "width": "{size.avatar.md}",
+            "height": "{size.avatar.md}",
             "background-color": "{color.action.secondary.background}",
             "color": "{color.text.secondary}",
             "border-radius": "{radius.pill}",
             "font-family": "{font.control.family}",
-            "font-size": "{font.avatar.size.sm}",
+            "font-size": "{font.avatar.size.md}",
             "font-weight": "{font.control.weight}"
           },
           "layout": {
