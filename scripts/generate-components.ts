@@ -127,6 +127,9 @@ function enumProps(contract: Contract) {
 function boolProps(contract: Contract) {
   return contract.props.filter((p) => p.type === 'boolean');
 }
+function numberProps(contract: Contract) {
+  return contract.props.filter((p) => p.type === 'number');
+}
 function textProps(contract: Contract) {
   return contract.props.filter((p) => p.type === 'text');
 }
@@ -357,6 +360,7 @@ function generateCss(contract: Contract, tokenInventory: Set<string>, errors: st
   }
   lines.push(...stateRules);
 
+  const usedAnimations = new Set<string>();
   // Nested parts (no substitutions; validated above).
   for (const { name, part, path: p } of walkAnatomy(contract)) {
     if (p[0] === 'root' && p.length === 1) continue;
@@ -387,8 +391,24 @@ function generateCss(contract: Contract, tokenInventory: Set<string>, errors: st
       }
     }
     const nestedSubRules: string[] = [];
+    if (part.animation) {
+      decls.push(
+        part.animation === 'spin'
+          ? 'animation: ds-spin 0.8s linear infinite'
+          : 'animation: ds-pulse 1.6s ease-in-out infinite',
+      );
+      usedAnimations.add(part.animation);
+    }
     for (const [cssProp, ref] of Object.entries(part.tokens ?? {})) {
       const refPath = stripBraces(ref);
+      // overlap: the gap token becomes a negative child margin (CSS gap
+      // cannot be negative); the canvas side uses negative itemSpacing.
+      if (cssProp === 'gap' && part.layout?.overlap) {
+        if (checkToken(refPath, `anatomy.${name}.tokens.gap`)) {
+          nestedSubRules.push(`\n.${name} > * + * {\n  margin-left: ${cssVar(refPath)};\n}`);
+        }
+        continue;
+      }
       const phs = placeholdersIn(refPath);
       if (phs.length === 1) {
         // Per-enum-value descendant rule under the root's variant class.
@@ -416,6 +436,13 @@ function generateCss(contract: Contract, tokenInventory: Set<string>, errors: st
     if (part.icon && part.element) {
       lines.push('', `.${name}Glyph {`, '  display: inline-flex;', '}');
     }
+  }
+
+  if (usedAnimations.has('spin')) {
+    lines.push('', '@keyframes ds-spin {', '  to { transform: rotate(360deg); }', '}');
+  }
+  if (usedAnimations.has('pulse')) {
+    lines.push('', '@keyframes ds-pulse {', '  0%, 100% { opacity: 1; }', '  50% { opacity: 0.45; }', '}');
   }
 
   return lines.join('\n') + '\n';
@@ -550,6 +577,8 @@ function generateTsx(contract: Contract, byId: Map<string, Contract>): string {
       propLines.push(`${doc}  ${p.bindings.code.prop}?: ${union};`);
     } else if (p.type === 'boolean') {
       propLines.push(`${doc}  ${p.bindings.code.prop}?: boolean;`);
+    } else if (p.type === 'number') {
+      propLines.push(`${doc}  ${p.bindings.code.prop}?: number;`);
     } else if (p.bindings.code.prop !== 'children') {
       propLines.push(`${doc}  ${p.bindings.code.prop}${p.required ? '' : '?'}: string;`);
     }
@@ -562,6 +591,9 @@ function generateTsx(contract: Contract, byId: Map<string, Contract>): string {
   const destructured: string[] = [];
   for (const p of enums) destructured.push(`${p.bindings.code.prop} = '${p.default}'`);
   for (const p of bools) destructured.push(`${p.bindings.code.prop} = ${p.default === true}`);
+  for (const p of numberProps(contract)) {
+    destructured.push(`${p.bindings.code.prop} = ${typeof p.default === 'number' ? p.default : 0}`);
+  }
   for (const p of texts) {
     destructured.push(
       p.required || p.default === undefined
@@ -678,6 +710,21 @@ function generateTsx(contract: Contract, byId: Map<string, Contract>): string {
         `<${el} className={styles.${partName}}${partAttrString(part)}>{${prop.bindings.code.prop}}</${el}>`,
       );
     }
+    if (part.text !== undefined) {
+      const el = part.element ?? 'span';
+      return wrapVisibleWhen(
+        part,
+        `<${el} className={styles.${partName}}${partAttrString(part)}>${part.text}</${el}>`,
+      );
+    }
+    if (part.meter) {
+      const v = codePropOf(part.meter.valueProp);
+      const m = codePropOf(part.meter.maxProp);
+      return wrapVisibleWhen(
+        part,
+        `<div className={styles.${partName}} style={{ width: \`\${Math.min(100, Math.max(0, (${v} / ${m}) * 100))}%\` }} />`,
+      );
+    }
     const el = part.element ?? 'div';
     const inner = Object.entries(part.parts ?? {})
       .map(([childName, child]) => renderPart(childName, child))
@@ -754,6 +801,9 @@ function generateStories(contract: Contract, byId: Map<string, Contract>): strin
     } else if (p.type === 'boolean') {
       argTypes.push(`    ${codeName}: { control: 'boolean'${desc} },`);
       args.push(`    ${codeName}: ${p.default === true},`);
+    } else if (p.type === 'number') {
+      argTypes.push(`    ${codeName}: { control: { type: 'number' }${desc} },`);
+      if (typeof p.default === 'number') args.push(`    ${codeName}: ${p.default},`);
     } else {
       argTypes.push(`    ${codeName}: { control: 'text'${desc} },`);
       if (typeof p.default === 'string') args.push(`    ${codeName}: '${p.default}',`);

@@ -1,0 +1,146 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "ds.progress-bar",
+  "name": "ProgressBar",
+  "version": "1.0.0",
+  "status": "draft",
+  "description": "Horizontal bar showing completion progress. API mirrors industry convention (Astryx ProgressBar): number-valued value/max drive the fill; the canvas renders the defaults' fraction as its honest static state. Indeterminate mode needs animation on the canvas — a documented boundary.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "variant",
+      "description": "Semantic color of the fill.",
+      "type": {
+        "enum": [
+          "accent",
+          "success",
+          "warning",
+          "error",
+          "neutral"
+        ]
+      },
+      "default": "accent",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Variant",
+          "values": {
+            "accent": "Accent",
+            "success": "Success",
+            "warning": "Warning",
+            "error": "Error",
+            "neutral": "Neutral"
+          }
+        },
+        "code": {
+          "prop": "variant"
+        }
+      }
+    },
+    {
+      "name": "value",
+      "description": "Current progress value.",
+      "type": "number",
+      "default": 60,
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Value"
+        },
+        "code": {
+          "prop": "value"
+        }
+      }
+    },
+    {
+      "name": "max",
+      "description": "Maximum value.",
+      "type": "number",
+      "default": 100,
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Max"
+        },
+        "code": {
+          "prop": "max"
+        }
+      }
+    },
+    {
+      "name": "label",
+      "description": "Accessible name — screen readers must know what is progressing.",
+      "type": "text",
+      "default": "Progress",
+      "required": true,
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Label"
+        },
+        "code": {
+          "prop": "label"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "flex",
+        "direction": "column"
+      },
+      "attrs": {
+        "role": "progressbar",
+        "aria-label": "{label}"
+      },
+      "tokens": {
+        "max-width": "{size.progress.width}"
+      },
+      "parts": {
+        "track": {
+          "layout": {
+            "direction": "row",
+            "align": "center"
+          },
+          "tokens": {
+            "width": "{size.progress.width}",
+            "height": "{size.progress.height}",
+            "background-color": "{color.progress.track}",
+            "border-radius": "{radius.100}"
+          },
+          "parts": {
+            "fill": {
+              "meter": {
+                "valueProp": "value",
+                "maxProp": "max"
+              },
+              "tokens": {
+                "height": "{size.progress.height}",
+                "background-color": "{color.progress.{variant}}",
+                "border-radius": "{radius.100}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "a11y": {
+    "contrast": "AA"
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": "8nim1d0IPnehMxA7B7SYxC",
+      "componentSetKey": "b18870547d3ca85fb933e46457fde0d02d782fb3",
+      "nodeId": "11:1249"
+    },
+    "code": {
+      "importPath": "src/components/ProgressBar",
+      "export": "ProgressBar"
+    }
+  }
+}

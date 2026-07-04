@@ -1,0 +1,70 @@
+/* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/switch.contract.json (ds.switch v1.0.0)
+ * Regenerate with: npm run generate
+ */
+
+.root {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  border: 0;
+  gap: var(--space-gap-sm);
+  font-family: var(--font-control-family);
+  color: var(--color-surface-foreground);
+}
+
+.track {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: var(--size-switch-width);
+  height: var(--size-switch-height);
+  border-radius: var(--radius-pill);
+  padding-inline: var(--space-inset-y-xs);
+  padding-block: var(--space-inset-y-xs);
+}
+
+.value-off .track {
+  background-color: var(--color-switch-off-track);
+}
+
+.value-on .track {
+  background-color: var(--color-switch-on-track);
+}
+
+.spacerStart {
+  display: flex;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.thumb {
+  width: var(--size-switch-thumb);
+  height: var(--size-switch-thumb);
+  background-color: var(--color-switch-thumb);
+  border-radius: var(--radius-pill);
+}
+
+.spacerEnd {
+  display: flex;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.textCol {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  min-width: 0;
+  gap: var(--space-inset-y-xs);
+}
+
+.labelText {
+  font-size: var(--font-control-size-sm);
+  font-weight: var(--font-control-weight);
+}
+
+.descriptionText {
+  font-size: var(--font-control-size-sm);
+  color: var(--color-text-secondary);
+}

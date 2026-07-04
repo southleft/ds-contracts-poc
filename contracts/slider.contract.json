@@ -1,0 +1,144 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "ds.slider",
+  "name": "Slider",
+  "version": "1.0.0",
+  "status": "draft",
+  "description": "Numeric selection within bounds — the static surface of a slider: label, filled track to the current value, and thumb. API mirrors industry convention (Astryx Slider); drag behavior and range mode are declared boundaries.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "value",
+      "description": "Current value — positions the thumb.",
+      "type": "number",
+      "default": 40,
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Value"
+        },
+        "code": {
+          "prop": "value"
+        }
+      }
+    },
+    {
+      "name": "max",
+      "description": "Maximum value.",
+      "type": "number",
+      "default": 100,
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Max"
+        },
+        "code": {
+          "prop": "max"
+        }
+      }
+    },
+    {
+      "name": "label",
+      "description": "Always rendered.",
+      "type": "text",
+      "default": "Volume",
+      "required": true,
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Label"
+        },
+        "code": {
+          "prop": "label"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "flex",
+        "direction": "column"
+      },
+      "tokens": {
+        "max-width": "{size.slider.width}",
+        "gap": "{space.inset-y.sm}",
+        "font-family": "{font.control.family}",
+        "color": "{color.surface.foreground}"
+      },
+      "parts": {
+        "labelText": {
+          "element": "span",
+          "content": {
+            "prop": "label"
+          },
+          "tokens": {
+            "font-size": "{font.control.size.sm}",
+            "font-weight": "{font.control.weight}"
+          }
+        },
+        "trackRow": {
+          "layout": {
+            "direction": "row",
+            "align": "center"
+          },
+          "tokens": {
+            "width": "{size.slider.width}"
+          },
+          "parts": {
+            "filled": {
+              "meter": {
+                "valueProp": "value",
+                "maxProp": "max"
+              },
+              "tokens": {
+                "height": "{size.slider.track}",
+                "background-color": "{color.progress.accent}",
+                "border-radius": "{radius.100}"
+              }
+            },
+            "thumb": {
+              "element": "span",
+              "text": "",
+              "tokens": {
+                "width": "{size.slider.thumb}",
+                "height": "{size.slider.thumb}",
+                "background-color": "{color.switch.thumb}",
+                "border-color": "{color.progress.accent}",
+                "border-width": "{border-width.200}",
+                "border-radius": "{radius.pill}"
+              }
+            },
+            "remainder": {
+              "layout": {
+                "grow": true
+              },
+              "tokens": {
+                "height": "{size.slider.track}",
+                "background-color": "{color.progress.track}",
+                "border-radius": "{radius.100}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "a11y": {
+    "contrast": "AA"
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": "8nim1d0IPnehMxA7B7SYxC",
+      "componentSetKey": "8aac8c4b2be87b47b944650ec1a4c07bdfeb12f7",
+      "nodeId": "11:1260"
+    },
+    "code": {
+      "importPath": "src/components/Slider",
+      "export": "Slider"
+    }
+  }
+}

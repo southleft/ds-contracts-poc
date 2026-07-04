@@ -1497,6 +1497,268 @@
       "nestedInstances": [
         "Slot"
       ]
+    },
+    {
+      "name": "AccordionItem",
+      "nodeId": "11:1171",
+      "key": "ba5ec62aa3c19bf86b7bcff8eb61ef1e86daad35",
+      "description": "A collapsible content row: trigger with a state chevron, content revealed when open. API mirrors industry convention (Astryx Collapsible) with the open state flattened to a closed/open enum so both surfaces render both states; expand/collapse behavior is a declared boundary. — governed by contract ds.accordion-item v1.0.0",
+      "variantCount": 2,
+      "properties": {
+        "Title#11:530": {
+          "type": "TEXT",
+          "defaultValue": "Section title",
+          "variantOptions": null,
+          "preferredValues": null
+        },
+        "Children#11:531": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "2:26",
+          "variantOptions": null,
+          "preferredValues": []
+        },
+        "State": {
+          "type": "VARIANT",
+          "defaultValue": "Closed",
+          "variantOptions": [
+            "Closed",
+            "Open"
+          ],
+          "preferredValues": null
+        }
+      },
+      "nestedInstances": []
+    },
+    {
+      "name": "AvatarGroup",
+      "nodeId": "11:1172",
+      "key": "41e084d38457f2aebd4611e3ebd922a56c2c392d",
+      "description": "Stacked avatars with an overflow count. API mirrors industry convention (Astryx AvatarGroup): overlapping layout — expressed as a negative-margin child rule in CSS and negative item spacing on the canvas. — governed by contract ds.avatar-group v1.0.0",
+      "variantCount": 1,
+      "properties": {
+        "Overflow#11:533": {
+          "type": "TEXT",
+          "defaultValue": "+3",
+          "variantOptions": null,
+          "preferredValues": null
+        }
+      },
+      "nestedInstances": [
+        "Avatar"
+      ]
+    },
+    {
+      "name": "BreadcrumbItem",
+      "nodeId": "11:1182",
+      "key": "7b9283aad1ddc94a1a597804a79a330316b3aaa1",
+      "description": "One link in a breadcrumb trail with its leading separator. API mirrors industry convention (Astryx BreadcrumbItem); the first item is authored with hasSeparator off (positional part logic is a documented gap), and aria-current needs conditional attributes — also documented. — governed by contract ds.breadcrumb-item v1.0.0",
+      "variantCount": 1,
+      "properties": {
+        "Label#11:534": {
+          "type": "TEXT",
+          "defaultValue": "Page",
+          "variantOptions": null,
+          "preferredValues": null
+        },
+        "Separator#11:535": {
+          "type": "BOOLEAN",
+          "defaultValue": true,
+          "variantOptions": null,
+          "preferredValues": null
+        },
+        "Href#11:536": {
+          "type": "TEXT",
+          "defaultValue": "#",
+          "variantOptions": null,
+          "preferredValues": null
+        }
+      },
+      "nestedInstances": []
+    },
+    {
+      "name": "Breadcrumbs",
+      "nodeId": "11:1186",
+      "key": "853821e9b58b03010cfeda157fd8ffcf2338bb15",
+      "description": "Navigation trail from root to the current page. API mirrors industry convention (Astryx Breadcrumbs): a nav landmark holding BreadcrumbItems; keep trails to five levels or fewer. — governed by contract ds.breadcrumbs v1.0.0",
+      "variantCount": 1,
+      "properties": {
+        "Label#11:537": {
+          "type": "TEXT",
+          "defaultValue": "Breadcrumb",
+          "variantOptions": null,
+          "preferredValues": null
+        }
+      },
+      "nestedInstances": [
+        "BreadcrumbItem"
+      ]
+    },
+    {
+      "name": "Pagination",
+      "nodeId": "11:1233",
+      "key": "51d18c28f5ef424142d682db4ec7fd35b9091257",
+      "description": "Steps through pages of content, below a table or list. API mirrors industry convention (Astryx Pagination) with three display variants; page math and click behavior are declared boundaries — the pages variant shows a representative trail. — governed by contract ds.pagination v1.0.0",
+      "variantCount": 3,
+      "properties": {
+        "Label#11:542": {
+          "type": "TEXT",
+          "defaultValue": "Pagination",
+          "variantOptions": null,
+          "preferredValues": null
+        },
+        "PageLabel#11:543": {
+          "type": "TEXT",
+          "defaultValue": "Page 2 of 10",
+          "variantOptions": null,
+          "preferredValues": null
+        },
+        "Variant": {
+          "type": "VARIANT",
+          "defaultValue": "Pages",
+          "variantOptions": [
+            "Pages",
+            "Compact",
+            "Dots"
+          ],
+          "preferredValues": null
+        }
+      },
+      "nestedInstances": []
+    },
+    {
+      "name": "ProgressBar",
+      "nodeId": "11:1249",
+      "key": "b18870547d3ca85fb933e46457fde0d02d782fb3",
+      "description": "Horizontal bar showing completion progress. API mirrors industry convention (Astryx ProgressBar): number-valued value/max drive the fill; the canvas renders the defaults' fraction as its honest static state. Indeterminate mode needs animation on the canvas — a documented boundary. — governed by contract ds.progress-bar v1.0.0",
+      "variantCount": 5,
+      "properties": {
+        "Value#11:561": {
+          "type": "TEXT",
+          "defaultValue": "60",
+          "variantOptions": null,
+          "preferredValues": null
+        },
+        "Max#11:562": {
+          "type": "TEXT",
+          "defaultValue": "100",
+          "variantOptions": null,
+          "preferredValues": null
+        },
+        "Label#11:563": {
+          "type": "TEXT",
+          "defaultValue": "Progress",
+          "variantOptions": null,
+          "preferredValues": null
+        },
+        "Variant": {
+          "type": "VARIANT",
+          "defaultValue": "Accent",
+          "variantOptions": [
+            "Accent",
+            "Success",
+            "Warning",
+            "Error",
+            "Neutral"
+          ],
+          "preferredValues": null
+        }
+      },
+      "nestedInstances": []
+    },
+    {
+      "name": "Skeleton",
+      "nodeId": "11:1259",
+      "key": "2da0d4e2438f9b37a9ce159eafb4477f622b10bb",
+      "description": "Pulsing placeholder previewing the shape of loading content. API mirrors industry convention (Astryx Skeleton) with the free-form width/height flattened to a shape variant; the pulse is CSS-only — the canvas shows the static shape. — governed by contract ds.skeleton v1.0.0",
+      "variantCount": 3,
+      "properties": {
+        "Variant": {
+          "type": "VARIANT",
+          "defaultValue": "Text",
+          "variantOptions": [
+            "Text",
+            "Rect",
+            "Circle"
+          ],
+          "preferredValues": null
+        }
+      },
+      "nestedInstances": []
+    },
+    {
+      "name": "Slider",
+      "nodeId": "11:1260",
+      "key": "8aac8c4b2be87b47b944650ec1a4c07bdfeb12f7",
+      "description": "Numeric selection within bounds — the static surface of a slider: label, filled track to the current value, and thumb. API mirrors industry convention (Astryx Slider); drag behavior and range mode are declared boundaries. — governed by contract ds.slider v1.0.0",
+      "variantCount": 1,
+      "properties": {
+        "Label#11:564": {
+          "type": "TEXT",
+          "defaultValue": "Volume",
+          "variantOptions": null,
+          "preferredValues": null
+        },
+        "Value#11:565": {
+          "type": "TEXT",
+          "defaultValue": "40",
+          "variantOptions": null,
+          "preferredValues": null
+        },
+        "Max#11:566": {
+          "type": "TEXT",
+          "defaultValue": "100",
+          "variantOptions": null,
+          "preferredValues": null
+        }
+      },
+      "nestedInstances": []
+    },
+    {
+      "name": "Spinner",
+      "nodeId": "11:1267",
+      "key": "3cb0569208b199ceccb18b4c4439add4f5fea661",
+      "description": "Animated loading indicator for processes of unknown duration. API mirrors industry convention (Astryx Spinner); the size scale needs per-variant icon sizing and the rotation itself is CSS-only — the canvas shows the static arc. — governed by contract ds.spinner v1.0.0",
+      "variantCount": 1,
+      "properties": {
+        "Label#11:567": {
+          "type": "TEXT",
+          "defaultValue": "Loading",
+          "variantOptions": null,
+          "preferredValues": null
+        }
+      },
+      "nestedInstances": []
+    },
+    {
+      "name": "Switch",
+      "nodeId": "11:1286",
+      "key": "7936496ebfb63f0f4908a29b7edd6dae340e4e23",
+      "description": "Toggle for on/off settings that take effect immediately. API mirrors industry convention (Astryx Switch) with the boolean value flattened to an off/on enum so both surfaces render both states truthfully; toggle behavior is a declared boundary. — governed by contract ds.switch v1.0.0",
+      "variantCount": 2,
+      "properties": {
+        "Label#11:572": {
+          "type": "TEXT",
+          "defaultValue": "Enable notifications",
+          "variantOptions": null,
+          "preferredValues": null
+        },
+        "Description#11:573": {
+          "type": "TEXT",
+          "defaultValue": "Takes effect immediately.",
+          "variantOptions": null,
+          "preferredValues": null
+        },
+        "Value": {
+          "type": "VARIANT",
+          "defaultValue": "Off",
+          "variantOptions": [
+            "Off",
+            "On"
+          ],
+          "preferredValues": null
+        }
+      },
+      "nestedInstances": []
     }
   ]
 }

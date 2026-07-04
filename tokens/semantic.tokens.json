@@ -71,6 +71,12 @@
         "$type": "dimension",
         "$value": "{space.150}"
       }
+    },
+    "avatarGroup": {
+      "overlap": {
+        "$type": "dimension",
+        "$value": "{space.overlap}"
+      }
     }
   },
   "radius": {
@@ -98,6 +104,17 @@
       "section": {
         "$type": "dimension",
         "$value": "{radius.none}"
+      }
+    },
+    "skeleton": {
+      "text": {
+        "$value": "{radius.100}"
+      },
+      "rect": {
+        "$value": "{radius.200}"
+      },
+      "circle": {
+        "$value": "{radius.pill}"
       }
     }
   },
@@ -179,6 +196,90 @@
       "lg": {
         "$type": "dimension",
         "$value": "{control.lg}"
+      }
+    },
+    "progress": {
+      "width": {
+        "$type": "dimension",
+        "$value": "{container.sm}"
+      },
+      "height": {
+        "$type": "dimension",
+        "$value": "{space.100}"
+      }
+    },
+    "slider": {
+      "width": {
+        "$type": "dimension",
+        "$value": "{container.sm}"
+      },
+      "track": {
+        "$type": "dimension",
+        "$value": "{space.50}"
+      },
+      "thumb": {
+        "$type": "dimension",
+        "$value": "{space.200}"
+      }
+    },
+    "switch": {
+      "width": {
+        "$type": "dimension",
+        "$value": "{space.400}"
+      },
+      "height": {
+        "$type": "dimension",
+        "$value": "{space.250}"
+      },
+      "thumb": {
+        "$type": "dimension",
+        "$value": "{space.200}"
+      }
+    },
+    "spinner": {
+      "sm": {
+        "$type": "dimension",
+        "$value": "{space.150}"
+      },
+      "md": {
+        "$type": "dimension",
+        "$value": "{space.200}"
+      },
+      "lg": {
+        "$type": "dimension",
+        "$value": "{space.300}"
+      }
+    },
+    "skeleton": {
+      "text": {
+        "width": {
+          "$type": "dimension",
+          "$value": "{container.xs}"
+        },
+        "height": {
+          "$type": "dimension",
+          "$value": "{space.150}"
+        }
+      },
+      "rect": {
+        "width": {
+          "$type": "dimension",
+          "$value": "{container.sm}"
+        },
+        "height": {
+          "$type": "dimension",
+          "$value": "{space.400}"
+        }
+      },
+      "circle": {
+        "width": {
+          "$type": "dimension",
+          "$value": "{space.400}"
+        },
+        "height": {
+          "$type": "dimension",
+          "$value": "{space.400}"
+        }
       }
     }
   },

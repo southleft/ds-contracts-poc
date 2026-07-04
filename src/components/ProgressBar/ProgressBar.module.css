@@ -1,0 +1,48 @@
+/* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/progress-bar.contract.json (ds.progress-bar v1.0.0)
+ * Regenerate with: npm run generate
+ */
+
+.root {
+  display: flex;
+  flex-direction: column;
+  border: 0;
+  width: 100%;
+  min-width: fit-content;
+  max-width: var(--size-progress-width);
+}
+
+.track {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: var(--size-progress-width);
+  height: var(--size-progress-height);
+  background-color: var(--color-progress-track);
+  border-radius: var(--radius-100);
+}
+
+.fill {
+  height: var(--size-progress-height);
+  border-radius: var(--radius-100);
+}
+
+.variant-accent .fill {
+  background-color: var(--color-progress-accent);
+}
+
+.variant-success .fill {
+  background-color: var(--color-progress-success);
+}
+
+.variant-warning .fill {
+  background-color: var(--color-progress-warning);
+}
+
+.variant-error .fill {
+  background-color: var(--color-progress-error);
+}
+
+.variant-neutral .fill {
+  background-color: var(--color-progress-neutral);
+}

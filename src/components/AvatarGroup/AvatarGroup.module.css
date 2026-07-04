@@ -1,0 +1,33 @@
+/* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/avatar-group.contract.json (ds.avatar-group v1.0.0)
+ * Regenerate with: npm run generate
+ */
+
+.root {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  border: 0;
+  gap: var(--space-gap-sm);
+}
+
+.stack {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.stack > * + * {
+  margin-left: var(--space-avatarGroup-overlap);
+}
+
+.overflowText {
+  width: var(--size-avatar-sm);
+  height: var(--size-avatar-sm);
+  background-color: var(--color-action-secondary-background);
+  color: var(--color-text-secondary);
+  border-radius: var(--radius-pill);
+  font-family: var(--font-control-family);
+  font-size: var(--font-avatar-size-sm);
+  font-weight: var(--font-control-weight);
+}

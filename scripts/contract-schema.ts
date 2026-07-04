@@ -44,9 +44,9 @@ const EnumTypeSchema = z.object({
 export const PropSchema = z.object({
   name: z.string(),
   description: z.string().optional(),
-  /** "boolean" | "text" | { enum: [...] } */
-  type: z.union([z.literal('boolean'), z.literal('text'), EnumTypeSchema]),
-  default: z.union([z.string(), z.boolean()]).optional(),
+  /** "boolean" | "text" | "number" | { enum: [...] } */
+  type: z.union([z.literal('boolean'), z.literal('text'), z.literal('number'), EnumTypeSchema]),
+  default: z.union([z.string(), z.boolean(), z.number()]).optional(),
   /** Text props may be required (no default in the code signature). */
   required: z.boolean().optional(),
   /** How this prop manifests on each side. Neither side is primary;
@@ -71,6 +71,9 @@ export const LayoutSchema = z.object({
   justify: z.enum(['start', 'center', 'end', 'space-between']).optional(),
   /** Part takes remaining space (code: flex 1 1 auto; Figma: fill container). */
   grow: z.boolean().optional(),
+  /** Children overlap (AvatarGroup): the gap token is applied as a NEGATIVE
+   *  child margin in CSS and as negative itemSpacing on the canvas. */
+  overlap: z.boolean().optional(),
 });
 
 /** Conditional part visibility (schema v4, gap G1): the part renders only
@@ -147,6 +150,16 @@ export interface Part {
   states?: Record<string, Record<string, string>>;
   /** Text content bound to a text prop: { prop: "title" }. */
   content?: { prop: string };
+  /** Static literal text (a page number, an ellipsis) — same on both
+   *  surfaces, not bound to any prop. */
+  text?: string;
+  /** Progress fill: width = (valueProp / maxProp) as a percentage of the
+   *  parent track. Code computes live; the canvas renders the defaults'
+   *  fraction (its honest static state). */
+  meter?: { valueProp: string; maxProp: string };
+  /** CSS-side motion (spin for spinners, pulse for skeletons). Not
+   *  representable on the canvas — documented fidelity scope. */
+  animation?: 'spin' | 'pulse';
   slot?: z.infer<typeof SlotSchema>;
   component?: z.infer<typeof ComponentRefSchema>;
   icon?: { asset: string; size?: number };
@@ -166,6 +179,9 @@ export const PartSchema: z.ZodType<Part> = z.lazy(() =>
     tokens: z.record(z.string(), TokenRefSchema).optional(),
     states: z.record(z.string(), z.record(z.string(), TokenRefSchema)).optional(),
     content: z.object({ prop: z.string() }).optional(),
+    text: z.string().optional(),
+    meter: z.object({ valueProp: z.string(), maxProp: z.string() }).optional(),
+    animation: z.enum(['spin', 'pulse']).optional(),
     slot: SlotSchema.optional(),
     component: ComponentRefSchema.optional(),
     /** Icon part (v4, gap G6): renders assets/icons/<asset>.svg inline on the

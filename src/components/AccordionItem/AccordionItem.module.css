@@ -1,0 +1,57 @@
+/* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/accordion-item.contract.json (ds.accordion-item v1.0.0)
+ * Regenerate with: npm run generate
+ */
+
+.root {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  border-style: solid;
+  width: 100%;
+  min-width: fit-content;
+  max-width: var(--size-card-width);
+  border-color: var(--color-border-subtle);
+  border-width: var(--border-width-100);
+  border-radius: var(--radius-card);
+  background-color: var(--color-surface-raised);
+  font-family: var(--font-control-family);
+  color: var(--color-surface-foreground);
+}
+
+.trigger {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--space-gap-sm);
+  padding-inline: var(--space-inset-x-sm);
+  padding-block: var(--space-inset-y-md);
+}
+
+.chevron svg {
+  width: 14px;
+  height: 14px;
+}
+
+.chevron {
+  display: inline-flex;
+  flex-shrink: 0;
+  color: var(--color-text-secondary);
+}
+
+.titleText {
+  flex: 1 1 auto;
+  min-width: 0;
+  font-size: var(--font-control-size-sm);
+  font-weight: var(--font-control-weight);
+}
+
+.contentArea {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding-inline: var(--space-inset-x-sm);
+  padding-block: var(--space-inset-y-md);
+  font-size: var(--font-control-size-sm);
+  color: var(--color-text-secondary);
+}

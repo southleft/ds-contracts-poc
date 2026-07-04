@@ -753,6 +753,18 @@
           }
         },
         {
+          "name": "space/overlap",
+          "type": "FLOAT",
+          "scopes": [
+            "WIDTH_HEIGHT",
+            "GAP"
+          ],
+          "codeSyntax": "var(--space-overlap)",
+          "values": {
+            "Value": -8
+          }
+        },
+        {
           "name": "radius/100",
           "type": "FLOAT",
           "scopes": [
@@ -1236,6 +1248,19 @@
           }
         },
         {
+          "name": "space/avatarGroup/overlap",
+          "type": "FLOAT",
+          "scopes": [
+            "WIDTH_HEIGHT",
+            "GAP"
+          ],
+          "codeSyntax": "var(--space-avatarGroup-overlap)",
+          "values": {
+            "Light": "{space/overlap}",
+            "Dark": "{space/overlap}"
+          }
+        },
+        {
           "name": "radius/control",
           "type": "FLOAT",
           "scopes": [
@@ -1305,6 +1330,42 @@
           "values": {
             "Light": "{radius/none}",
             "Dark": "{radius/none}"
+          }
+        },
+        {
+          "name": "radius/skeleton/text",
+          "type": "FLOAT",
+          "scopes": [
+            "CORNER_RADIUS"
+          ],
+          "codeSyntax": "var(--radius-skeleton-text)",
+          "values": {
+            "Light": "{radius/100}",
+            "Dark": "{radius/100}"
+          }
+        },
+        {
+          "name": "radius/skeleton/rect",
+          "type": "FLOAT",
+          "scopes": [
+            "CORNER_RADIUS"
+          ],
+          "codeSyntax": "var(--radius-skeleton-rect)",
+          "values": {
+            "Light": "{radius/200}",
+            "Dark": "{radius/200}"
+          }
+        },
+        {
+          "name": "radius/skeleton/circle",
+          "type": "FLOAT",
+          "scopes": [
+            "CORNER_RADIUS"
+          ],
+          "codeSyntax": "var(--radius-skeleton-circle)",
+          "values": {
+            "Light": "{radius/pill}",
+            "Dark": "{radius/pill}"
           }
         },
         {
@@ -1497,6 +1558,210 @@
           "values": {
             "Light": "{control/lg}",
             "Dark": "{control/lg}"
+          }
+        },
+        {
+          "name": "size/progress/width",
+          "type": "FLOAT",
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": "var(--size-progress-width)",
+          "values": {
+            "Light": "{container/sm}",
+            "Dark": "{container/sm}"
+          }
+        },
+        {
+          "name": "size/progress/height",
+          "type": "FLOAT",
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": "var(--size-progress-height)",
+          "values": {
+            "Light": "{space/100}",
+            "Dark": "{space/100}"
+          }
+        },
+        {
+          "name": "size/slider/width",
+          "type": "FLOAT",
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": "var(--size-slider-width)",
+          "values": {
+            "Light": "{container/sm}",
+            "Dark": "{container/sm}"
+          }
+        },
+        {
+          "name": "size/slider/track",
+          "type": "FLOAT",
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": "var(--size-slider-track)",
+          "values": {
+            "Light": "{space/50}",
+            "Dark": "{space/50}"
+          }
+        },
+        {
+          "name": "size/slider/thumb",
+          "type": "FLOAT",
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": "var(--size-slider-thumb)",
+          "values": {
+            "Light": "{space/200}",
+            "Dark": "{space/200}"
+          }
+        },
+        {
+          "name": "size/switch/width",
+          "type": "FLOAT",
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": "var(--size-switch-width)",
+          "values": {
+            "Light": "{space/400}",
+            "Dark": "{space/400}"
+          }
+        },
+        {
+          "name": "size/switch/height",
+          "type": "FLOAT",
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": "var(--size-switch-height)",
+          "values": {
+            "Light": "{space/250}",
+            "Dark": "{space/250}"
+          }
+        },
+        {
+          "name": "size/switch/thumb",
+          "type": "FLOAT",
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": "var(--size-switch-thumb)",
+          "values": {
+            "Light": "{space/200}",
+            "Dark": "{space/200}"
+          }
+        },
+        {
+          "name": "size/spinner/sm",
+          "type": "FLOAT",
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": "var(--size-spinner-sm)",
+          "values": {
+            "Light": "{space/150}",
+            "Dark": "{space/150}"
+          }
+        },
+        {
+          "name": "size/spinner/md",
+          "type": "FLOAT",
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": "var(--size-spinner-md)",
+          "values": {
+            "Light": "{space/200}",
+            "Dark": "{space/200}"
+          }
+        },
+        {
+          "name": "size/spinner/lg",
+          "type": "FLOAT",
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": "var(--size-spinner-lg)",
+          "values": {
+            "Light": "{space/300}",
+            "Dark": "{space/300}"
+          }
+        },
+        {
+          "name": "size/skeleton/text/width",
+          "type": "FLOAT",
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": "var(--size-skeleton-text-width)",
+          "values": {
+            "Light": "{container/xs}",
+            "Dark": "{container/xs}"
+          }
+        },
+        {
+          "name": "size/skeleton/text/height",
+          "type": "FLOAT",
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": "var(--size-skeleton-text-height)",
+          "values": {
+            "Light": "{space/150}",
+            "Dark": "{space/150}"
+          }
+        },
+        {
+          "name": "size/skeleton/rect/width",
+          "type": "FLOAT",
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": "var(--size-skeleton-rect-width)",
+          "values": {
+            "Light": "{container/sm}",
+            "Dark": "{container/sm}"
+          }
+        },
+        {
+          "name": "size/skeleton/rect/height",
+          "type": "FLOAT",
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": "var(--size-skeleton-rect-height)",
+          "values": {
+            "Light": "{space/400}",
+            "Dark": "{space/400}"
+          }
+        },
+        {
+          "name": "size/skeleton/circle/width",
+          "type": "FLOAT",
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": "var(--size-skeleton-circle-width)",
+          "values": {
+            "Light": "{space/400}",
+            "Dark": "{space/400}"
+          }
+        },
+        {
+          "name": "size/skeleton/circle/height",
+          "type": "FLOAT",
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": "var(--size-skeleton-circle-height)",
+          "values": {
+            "Light": "{space/400}",
+            "Dark": "{space/400}"
           }
         },
         {
@@ -2885,6 +3150,136 @@
           "values": {
             "Light": "{color/gray/700}",
             "Dark": "{color/gray/200}"
+          }
+        },
+        {
+          "name": "color/switch/off/track",
+          "type": "COLOR",
+          "scopes": [
+            "ALL_FILLS",
+            "STROKE_COLOR"
+          ],
+          "codeSyntax": "var(--color-switch-off-track)",
+          "values": {
+            "Light": "{color/gray/300}",
+            "Dark": "{color/gray/500}"
+          }
+        },
+        {
+          "name": "color/switch/on/track",
+          "type": "COLOR",
+          "scopes": [
+            "ALL_FILLS",
+            "STROKE_COLOR"
+          ],
+          "codeSyntax": "var(--color-switch-on-track)",
+          "values": {
+            "Light": "{color/blue/600}",
+            "Dark": "{color/blue/500}"
+          }
+        },
+        {
+          "name": "color/switch/thumb",
+          "type": "COLOR",
+          "scopes": [
+            "ALL_FILLS",
+            "STROKE_COLOR"
+          ],
+          "codeSyntax": "var(--color-switch-thumb)",
+          "values": {
+            "Light": "{color/white}",
+            "Dark": "{color/white}"
+          }
+        },
+        {
+          "name": "color/progress/track",
+          "type": "COLOR",
+          "scopes": [
+            "ALL_FILLS",
+            "STROKE_COLOR"
+          ],
+          "codeSyntax": "var(--color-progress-track)",
+          "values": {
+            "Light": "{color/gray/200}",
+            "Dark": "{color/gray/600}"
+          }
+        },
+        {
+          "name": "color/progress/accent",
+          "type": "COLOR",
+          "scopes": [
+            "ALL_FILLS",
+            "STROKE_COLOR"
+          ],
+          "codeSyntax": "var(--color-progress-accent)",
+          "values": {
+            "Light": "{color/blue/600}",
+            "Dark": "{color/blue/400}"
+          }
+        },
+        {
+          "name": "color/progress/success",
+          "type": "COLOR",
+          "scopes": [
+            "ALL_FILLS",
+            "STROKE_COLOR"
+          ],
+          "codeSyntax": "var(--color-progress-success)",
+          "values": {
+            "Light": "{color/green/600}",
+            "Dark": "{color/green/500}"
+          }
+        },
+        {
+          "name": "color/progress/warning",
+          "type": "COLOR",
+          "scopes": [
+            "ALL_FILLS",
+            "STROKE_COLOR"
+          ],
+          "codeSyntax": "var(--color-progress-warning)",
+          "values": {
+            "Light": "{color/amber/500}",
+            "Dark": "{color/amber/500}"
+          }
+        },
+        {
+          "name": "color/progress/error",
+          "type": "COLOR",
+          "scopes": [
+            "ALL_FILLS",
+            "STROKE_COLOR"
+          ],
+          "codeSyntax": "var(--color-progress-error)",
+          "values": {
+            "Light": "{color/red/600}",
+            "Dark": "{color/red/500}"
+          }
+        },
+        {
+          "name": "color/progress/neutral",
+          "type": "COLOR",
+          "scopes": [
+            "ALL_FILLS",
+            "STROKE_COLOR"
+          ],
+          "codeSyntax": "var(--color-progress-neutral)",
+          "values": {
+            "Light": "{color/gray/500}",
+            "Dark": "{color/gray/400}"
+          }
+        },
+        {
+          "name": "color/skeleton",
+          "type": "COLOR",
+          "scopes": [
+            "ALL_FILLS",
+            "STROKE_COLOR"
+          ],
+          "codeSyntax": "var(--color-skeleton)",
+          "values": {
+            "Light": "{color/gray/200}",
+            "Dark": "{color/gray/600}"
           }
         }
       ]

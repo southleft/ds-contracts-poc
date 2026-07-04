@@ -96,4 +96,14 @@
   --color-nav-selected-foreground: var(--color-blue-100);
   --color-nav-default-background: var(--color-gray-700);
   --color-nav-default-foreground: var(--color-gray-200);
+  --color-switch-off-track: var(--color-gray-500);
+  --color-switch-on-track: var(--color-blue-500);
+  --color-switch-thumb: var(--color-white);
+  --color-progress-track: var(--color-gray-600);
+  --color-progress-accent: var(--color-blue-400);
+  --color-progress-success: var(--color-green-500);
+  --color-progress-warning: var(--color-amber-500);
+  --color-progress-error: var(--color-red-500);
+  --color-progress-neutral: var(--color-gray-400);
+  --color-skeleton: var(--color-gray-600);
 }

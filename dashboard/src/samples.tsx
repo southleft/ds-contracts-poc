@@ -5,10 +5,20 @@
  */
 import type { ReactNode } from 'react';
 import {
+  AccordionItem,
   Avatar,
+  AvatarGroup,
   Badge,
   Banner,
   Blockquote,
+  BreadcrumbItem,
+  Breadcrumbs,
+  Pagination,
+  ProgressBar,
+  Skeleton,
+  Slider,
+  Spinner,
+  Switch,
   ChatMessage,
   ChatMessageMetadata,
   ChatSystemMessage,
@@ -403,6 +413,81 @@ export function renderSample(
     case 'TypeaheadItem': {
       const p = props as Record<string, unknown>;
       return <TypeaheadItem {...p} label={(p.label as string) || 'Jordan Reyes'} description={(p.description as string) ?? 'Engineer · Platform'} icon={<Avatar size="sm">JR</Avatar>} />;
+    }
+
+    case 'AccordionItem': {
+      const p = props as Record<string, unknown>;
+      return (
+        <AccordionItem state="open" {...p} title={(p.title as string) || 'What is a contract?'}>
+          A versioned JSON file both surfaces are generated from.
+        </AccordionItem>
+      );
+    }
+
+    case 'AvatarGroup':
+      return (
+        <AvatarGroup {...(props as Record<string, unknown>)}>
+          <Avatar>AB</Avatar>
+          <Avatar>CD</Avatar>
+          <Avatar>EF</Avatar>
+        </AvatarGroup>
+      );
+
+    case 'BreadcrumbItem': {
+      const p = props as Record<string, unknown>;
+      return <BreadcrumbItem {...p} label={(p.label as string) || 'Components'} href="#" />;
+    }
+
+    case 'Breadcrumbs': {
+      const p = props as Record<string, unknown>;
+      return (
+        <Breadcrumbs {...p} label={(p.label as string) || 'Breadcrumb'}>
+          <BreadcrumbItem label="Home" hasSeparator={false} href="#" />
+          <BreadcrumbItem label="Components" href="#" />
+          <BreadcrumbItem label="ProgressBar" href="#" />
+        </Breadcrumbs>
+      );
+    }
+
+    case 'Pagination': {
+      const p = props as Record<string, unknown>;
+      return <Pagination {...p} label={(p.label as string) || 'Pagination'} />;
+    }
+
+    case 'ProgressBar': {
+      const p = props as Record<string, unknown>;
+      return (
+        <div style={{ width: '100%', minWidth: 220 }}>
+          <ProgressBar {...p} label={(p.label as string) || 'Sync progress'} />
+        </div>
+      );
+    }
+
+    case 'Skeleton':
+      return <Skeleton {...(props as Record<string, unknown>)} />;
+
+    case 'Slider': {
+      const p = props as Record<string, unknown>;
+      return (
+        <div style={{ width: '100%', minWidth: 220 }}>
+          <Slider {...p} label={(p.label as string) || 'Volume'} />
+        </div>
+      );
+    }
+
+    case 'Spinner': {
+      const p = props as Record<string, unknown>;
+      return (
+        <span style={{ display: 'inline-flex', alignItems: 'center', gap: 8 }}>
+          <Spinner {...p} label={(p.label as string) || 'Loading'} />
+          <span style={{ fontSize: 13 }}>Loading…</span>
+        </span>
+      );
+    }
+
+    case 'Switch': {
+      const p = props as Record<string, unknown>;
+      return <Switch value="on" {...p} label={(p.label as string) || 'Enable notifications'} />;
     }
 
     default:

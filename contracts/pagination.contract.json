@@ -1,0 +1,268 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "ds.pagination",
+  "name": "Pagination",
+  "version": "1.0.0",
+  "status": "draft",
+  "description": "Steps through pages of content, below a table or list. API mirrors industry convention (Astryx Pagination) with three display variants; page math and click behavior are declared boundaries — the pages variant shows a representative trail.",
+  "semantics": {
+    "element": "nav"
+  },
+  "props": [
+    {
+      "name": "variant",
+      "description": "Numbered trail, compact page label, or dot indicators.",
+      "type": {
+        "enum": [
+          "pages",
+          "compact",
+          "dots"
+        ]
+      },
+      "default": "pages",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Variant",
+          "values": {
+            "pages": "Pages",
+            "compact": "Compact",
+            "dots": "Dots"
+          }
+        },
+        "code": {
+          "prop": "variant"
+        }
+      }
+    },
+    {
+      "name": "pageLabel",
+      "description": "The compact variant's label text.",
+      "type": "text",
+      "default": "Page 2 of 10",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "PageLabel"
+        },
+        "code": {
+          "prop": "pageLabel"
+        }
+      }
+    },
+    {
+      "name": "label",
+      "description": "Accessible label for the navigation landmark.",
+      "type": "text",
+      "default": "Pagination",
+      "required": true,
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Label"
+        },
+        "code": {
+          "prop": "label"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "flex",
+        "direction": "row",
+        "align": "center"
+      },
+      "attrs": {
+        "aria-label": "{label}"
+      },
+      "tokens": {
+        "gap": "{space.gap.sm}",
+        "font-family": "{font.control.family}",
+        "font-size": "{font.control.size.sm}",
+        "color": "{color.surface.foreground}"
+      },
+      "parts": {
+        "prevButton": {
+          "element": "button",
+          "icon": {
+            "asset": "chevron-left",
+            "size": 14
+          },
+          "attrs": {
+            "aria-label": "Previous page",
+            "type": "button"
+          },
+          "tokens": {
+            "color": "{color.text.secondary}"
+          }
+        },
+        "pagesGroup": {
+          "visibleWhen": {
+            "prop": "variant",
+            "equals": "pages"
+          },
+          "layout": {
+            "direction": "row",
+            "align": "center"
+          },
+          "tokens": {
+            "gap": "{space.inset-y.xs}"
+          },
+          "parts": {
+            "pageOne": {
+              "element": "button",
+              "text": "1",
+              "attrs": {
+                "type": "button"
+              },
+              "tokens": {
+                "padding-inline": "{space.inset-y.md}",
+                "padding-block": "{space.inset-y.sm}",
+                "border-radius": "{radius.100}",
+                "color": "{color.text.secondary}"
+              }
+            },
+            "pageCurrent": {
+              "element": "button",
+              "text": "2",
+              "attrs": {
+                "type": "button",
+                "aria-current": "page"
+              },
+              "tokens": {
+                "padding-inline": "{space.inset-y.md}",
+                "padding-block": "{space.inset-y.sm}",
+                "border-radius": "{radius.100}",
+                "background-color": "{color.nav.selected.background}",
+                "color": "{color.nav.selected.foreground}",
+                "font-weight": "{font.title.weight}"
+              }
+            },
+            "pageThree": {
+              "element": "button",
+              "text": "3",
+              "attrs": {
+                "type": "button"
+              },
+              "tokens": {
+                "padding-inline": "{space.inset-y.md}",
+                "padding-block": "{space.inset-y.sm}",
+                "border-radius": "{radius.100}",
+                "color": "{color.text.secondary}"
+              }
+            },
+            "ellipsis": {
+              "element": "span",
+              "text": "…",
+              "tokens": {
+                "color": "{color.text.secondary}"
+              }
+            },
+            "pageLast": {
+              "element": "button",
+              "text": "10",
+              "attrs": {
+                "type": "button"
+              },
+              "tokens": {
+                "padding-inline": "{space.inset-y.md}",
+                "padding-block": "{space.inset-y.sm}",
+                "border-radius": "{radius.100}",
+                "color": "{color.text.secondary}"
+              }
+            }
+          }
+        },
+        "compactText": {
+          "element": "span",
+          "content": {
+            "prop": "pageLabel"
+          },
+          "visibleWhen": {
+            "prop": "variant",
+            "equals": "compact"
+          },
+          "tokens": {
+            "color": "{color.text.secondary}"
+          }
+        },
+        "dotsGroup": {
+          "visibleWhen": {
+            "prop": "variant",
+            "equals": "dots"
+          },
+          "layout": {
+            "direction": "row",
+            "align": "center"
+          },
+          "tokens": {
+            "gap": "{space.inset-y.sm}"
+          },
+          "parts": {
+            "dotActive": {
+              "element": "span",
+              "text": "",
+              "tokens": {
+                "width": "{size.dot}",
+                "height": "{size.dot}",
+                "border-radius": "{radius.pill}",
+                "background-color": "{color.status.accent}"
+              }
+            },
+            "dotTwo": {
+              "element": "span",
+              "text": "",
+              "tokens": {
+                "width": "{size.dot}",
+                "height": "{size.dot}",
+                "border-radius": "{radius.pill}",
+                "background-color": "{color.status.neutral}"
+              }
+            },
+            "dotThree": {
+              "element": "span",
+              "text": "",
+              "tokens": {
+                "width": "{size.dot}",
+                "height": "{size.dot}",
+                "border-radius": "{radius.pill}",
+                "background-color": "{color.status.neutral}"
+              }
+            }
+          }
+        },
+        "nextButton": {
+          "element": "button",
+          "icon": {
+            "asset": "chevron-right",
+            "size": 14
+          },
+          "attrs": {
+            "aria-label": "Next page",
+            "type": "button"
+          },
+          "tokens": {
+            "color": "{color.text.secondary}"
+          }
+        }
+      }
+    }
+  },
+  "a11y": {
+    "contrast": "AA"
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": "8nim1d0IPnehMxA7B7SYxC",
+      "componentSetKey": "51d18c28f5ef424142d682db4ec7fd35b9091257",
+      "nodeId": "11:1233"
+    },
+    "code": {
+      "importPath": "src/components/Pagination",
+      "export": "Pagination"
+    }
+  }
+}

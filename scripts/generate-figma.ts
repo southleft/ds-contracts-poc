@@ -279,6 +279,9 @@ interface NodeSpec {
    *  the part is simply omitted from non-matching variants.) */
   visibleProp?: string;
   visibleDefault?: boolean;
+  /** Meter fill: fraction of the parent track's width (the canvas renders
+   *  the contract defaults' state). Runtime resizes after append. */
+  pct?: number;
   // svg (icon parts) — markup with currentColor resolved to the variant's
   // literal foreground color (SVG paint is not variable-bindable on import)
   svg?: string;
@@ -608,6 +611,27 @@ function partToSpec(
     applyVisibleWhen(spec, part, contract);
     return spec;
   }
+  if (part.text !== undefined) {
+    const spec: NodeSpec = { type: 'text', name };
+    const textCtx = applyTokens(spec, part.tokens ?? {}, subst, ctx);
+    spec.characters = part.text;
+    spec.fontSize = textCtx.fontSize ?? 14;
+    spec.fontStyle = textCtx.fontStyle ?? 'Medium';
+    spec.textFill = textCtx.textFill;
+    applyVisibleWhen(spec, part, contract);
+    return spec;
+  }
+  if (part.meter) {
+    const num = (propName: string, fallback: number) => {
+      const pr = contract.props.find((p) => p.name === propName);
+      return typeof pr?.default === 'number' ? pr.default : fallback;
+    };
+    const fraction = Math.min(1, Math.max(0, num(part.meter.valueProp, 0) / (num(part.meter.maxProp, 100) || 100)));
+    const spec: NodeSpec = { type: 'frame', name, layout: { mode: 'HORIZONTAL', primary: 'MIN', counter: 'MIN' }, pct: fraction, children: [] };
+    applyTokens(spec, part.tokens ?? {}, subst, ctx);
+    applyVisibleWhen(spec, part, contract);
+    return spec;
+  }
   if (part.content) {
     const prop = contract.props.find(
       (p) => p.type === 'text' && p.bindings.code.prop === part.content!.prop,
@@ -746,10 +770,15 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
   };
   variants.forEach((v) => collectBound(v.spec));
   const textOnlyProps = contract.props
-    .filter((p) => p.type === 'text' && !boundTextProps.has(p.bindings.figma.property))
+    .filter(
+      (p) =>
+        (p.type === 'text' || p.type === 'number') &&
+        !boundTextProps.has(p.bindings.figma.property),
+    )
     .map((p) => ({
       property: p.bindings.figma.property,
-      default: typeof p.default === 'string' ? p.default : '',
+      default:
+        typeof p.default === 'string' ? p.default : typeof p.default === 'number' ? String(p.default) : '',
     }));
 
   return {
@@ -923,6 +952,30 @@ async function buildNode(spec, registry) {
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });
     }
+    if (spec.fill || spec.fixedWidth || spec.fixedHeight || spec.bindings) {
+      // Styled static text (page chips, dots, thumbs): wrap in a frame so
+      // fills/dimensions/radius apply to a container, not the glyphs.
+      const wrap = figma.createFrame();
+      wrap.layoutMode = 'HORIZONTAL';
+      wrap.primaryAxisAlignItems = 'CENTER';
+      wrap.counterAxisAlignItems = 'CENTER';
+      wrap.primaryAxisSizingMode = 'AUTO';
+      wrap.counterAxisSizingMode = 'AUTO';
+      wrap.fills = [];
+      for (const [field, varName] of Object.entries(spec.bindings || {})) {
+        wrap.setBoundVariable(field, need(varName));
+      }
+      if (spec.fill) wrap.fills = [boundPaint(spec.fill)];
+      if (spec.stroke) { wrap.strokes = [boundPaint(spec.stroke)]; wrap.strokeAlign = 'INSIDE'; }
+      if (spec.characters) wrap.appendChild(node); else node.remove();
+      if (spec.fixedWidth || spec.fixedHeight) {
+        wrap.resize(spec.fixedWidth ? spec.fixedWidth.px : wrap.width, spec.fixedHeight ? spec.fixedHeight.px : wrap.height);
+        if (spec.fixedWidth) { wrap.primaryAxisSizingMode = 'FIXED'; wrap.setBoundVariable('width', need(spec.fixedWidth.varName)); }
+        if (spec.fixedHeight) { wrap.counterAxisSizingMode = 'FIXED'; wrap.setBoundVariable('height', need(spec.fixedHeight.varName)); }
+      }
+      wrap.name = spec.name;
+      node = wrap;
+    }
   } else if (spec.type === 'instance') {
     const target = findComponentByName(spec.dep);
     const main = target.type === 'COMPONENT_SET' ? target.defaultVariant : target;
@@ -968,6 +1021,12 @@ async function buildNode(spec, registry) {
   for (const child of spec.children || []) {
     const childNode = await buildNode(child, registry);
     node.appendChild(childNode);
+    if (child.pct != null) {
+      try {
+        childNode.resize(Math.max(1, Math.round(node.width * child.pct)), childNode.height);
+        childNode.primaryAxisSizingMode = 'FIXED';
+      } catch (e) { /* track not fixed-width */ }
+    }
     if (child.grow && 'layoutSizingHorizontal' in childNode) {
       try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { /* HUG-only nodes */ }
     } else if (
@@ -1210,6 +1269,30 @@ async function buildNode(spec, registry) {
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });
     }
+    if (spec.fill || spec.fixedWidth || spec.fixedHeight || spec.bindings) {
+      // Styled static text (page chips, dots, thumbs): wrap in a frame so
+      // fills/dimensions/radius apply to a container, not the glyphs.
+      const wrap = figma.createFrame();
+      wrap.layoutMode = 'HORIZONTAL';
+      wrap.primaryAxisAlignItems = 'CENTER';
+      wrap.counterAxisAlignItems = 'CENTER';
+      wrap.primaryAxisSizingMode = 'AUTO';
+      wrap.counterAxisSizingMode = 'AUTO';
+      wrap.fills = [];
+      for (const [field, varName] of Object.entries(spec.bindings || {})) {
+        wrap.setBoundVariable(field, need(varName));
+      }
+      if (spec.fill) wrap.fills = [boundPaint(spec.fill)];
+      if (spec.stroke) { wrap.strokes = [boundPaint(spec.stroke)]; wrap.strokeAlign = 'INSIDE'; }
+      if (spec.characters) wrap.appendChild(node); else node.remove();
+      if (spec.fixedWidth || spec.fixedHeight) {
+        wrap.resize(spec.fixedWidth ? spec.fixedWidth.px : wrap.width, spec.fixedHeight ? spec.fixedHeight.px : wrap.height);
+        if (spec.fixedWidth) { wrap.primaryAxisSizingMode = 'FIXED'; wrap.setBoundVariable('width', need(spec.fixedWidth.varName)); }
+        if (spec.fixedHeight) { wrap.counterAxisSizingMode = 'FIXED'; wrap.setBoundVariable('height', need(spec.fixedHeight.varName)); }
+      }
+      wrap.name = spec.name;
+      node = wrap;
+    }
   } else if (spec.type === 'instance') {
     const target = findComponentByName(spec.dep);
     const main = target.type === 'COMPONENT_SET' ? target.defaultVariant : target;
@@ -1252,6 +1335,12 @@ async function buildNode(spec, registry) {
   for (const child of spec.children || []) {
     const childNode = await buildNode(child, registry);
     node.appendChild(childNode);
+    if (child.pct != null) {
+      try {
+        childNode.resize(Math.max(1, Math.round(node.width * child.pct)), childNode.height);
+        childNode.primaryAxisSizingMode = 'FIXED';
+      } catch (e) { /* track not fixed-width */ }
+    }
     if (child.grow && 'layoutSizingHorizontal' in childNode) {
       try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { /* HUG-only nodes */ }
     } else if (

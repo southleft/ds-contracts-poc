@@ -1,0 +1,145 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "ds.accordion-item",
+  "name": "AccordionItem",
+  "version": "1.0.0",
+  "status": "draft",
+  "description": "A collapsible content row: trigger with a state chevron, content revealed when open. API mirrors industry convention (Astryx Collapsible) with the open state flattened to a closed/open enum so both surfaces render both states; expand/collapse behavior is a declared boundary.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "state",
+      "description": "Closed shows only the trigger; open reveals the content and rotates the chevron.",
+      "type": {
+        "enum": [
+          "closed",
+          "open"
+        ]
+      },
+      "default": "closed",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "State",
+          "values": {
+            "closed": "Closed",
+            "open": "Open"
+          }
+        },
+        "code": {
+          "prop": "state"
+        }
+      }
+    },
+    {
+      "name": "title",
+      "description": "The always-visible trigger text.",
+      "type": "text",
+      "default": "Section title",
+      "required": true,
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Title"
+        },
+        "code": {
+          "prop": "title"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "flex",
+        "direction": "column",
+        "align": "stretch"
+      },
+      "tokens": {
+        "max-width": "{size.card.width}",
+        "border-color": "{color.border.subtle}",
+        "border-width": "{border-width.100}",
+        "border-radius": "{radius.card}",
+        "background-color": "{color.surface.raised}",
+        "font-family": "{font.control.family}",
+        "color": "{color.surface.foreground}"
+      },
+      "parts": {
+        "trigger": {
+          "layout": {
+            "direction": "row",
+            "align": "center"
+          },
+          "tokens": {
+            "gap": "{space.gap.sm}",
+            "padding-inline": "{space.inset-x.sm}",
+            "padding-block": "{space.inset-y.md}"
+          },
+          "parts": {
+            "chevron": {
+              "description": "Direction follows the state: right when closed, down when open.",
+              "icon": {
+                "asset": "{state}",
+                "size": 14
+              },
+              "tokens": {
+                "color": "{color.text.secondary}"
+              }
+            },
+            "titleText": {
+              "element": "span",
+              "content": {
+                "prop": "title"
+              },
+              "layout": {
+                "grow": true
+              },
+              "tokens": {
+                "font-size": "{font.control.size.sm}",
+                "font-weight": "{font.control.weight}"
+              }
+            }
+          }
+        },
+        "contentArea": {
+          "description": "Revealed content — open state only.",
+          "slot": {
+            "name": "children",
+            "acceptsMode": "open"
+          },
+          "visibleWhen": {
+            "prop": "state",
+            "equals": "open"
+          },
+          "layout": {
+            "direction": "column",
+            "align": "stretch"
+          },
+          "tokens": {
+            "padding-inline": "{space.inset-x.sm}",
+            "padding-block": "{space.inset-y.md}",
+            "font-size": "{font.control.size.sm}",
+            "color": "{color.text.secondary}"
+          }
+        }
+      }
+    }
+  },
+  "a11y": {
+    "contrast": "AA"
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": "8nim1d0IPnehMxA7B7SYxC",
+      "componentSetKey": "ba5ec62aa3c19bf86b7bcff8eb61ef1e86daad35",
+      "nodeId": "11:1171"
+    },
+    "code": {
+      "importPath": "src/components/AccordionItem",
+      "export": "AccordionItem"
+    }
+  }
+}

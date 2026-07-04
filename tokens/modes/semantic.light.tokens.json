@@ -446,6 +446,54 @@
           "$value": "{color.gray.700}"
         }
       }
+    },
+    "switch": {
+      "off": {
+        "track": {
+          "$type": "color",
+          "$value": "{color.gray.300}"
+        }
+      },
+      "on": {
+        "track": {
+          "$type": "color",
+          "$value": "{color.blue.600}"
+        }
+      },
+      "thumb": {
+        "$type": "color",
+        "$value": "{color.white}"
+      }
+    },
+    "progress": {
+      "track": {
+        "$type": "color",
+        "$value": "{color.gray.200}"
+      },
+      "accent": {
+        "$type": "color",
+        "$value": "{color.blue.600}"
+      },
+      "success": {
+        "$type": "color",
+        "$value": "{color.green.600}"
+      },
+      "warning": {
+        "$type": "color",
+        "$value": "{color.amber.500}"
+      },
+      "error": {
+        "$type": "color",
+        "$value": "{color.red.600}"
+      },
+      "neutral": {
+        "$type": "color",
+        "$value": "{color.gray.500}"
+      }
+    },
+    "skeleton": {
+      "$type": "color",
+      "$value": "{color.gray.200}"
     }
   }
 }

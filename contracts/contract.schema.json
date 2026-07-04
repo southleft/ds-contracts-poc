@@ -107,6 +107,10 @@
                 "const": "text"
               },
               {
+                "type": "string",
+                "const": "number"
+              },
+              {
                 "type": "object",
                 "properties": {
                   "enum": {
@@ -130,6 +134,9 @@
               },
               {
                 "type": "boolean"
+              },
+              {
+                "type": "number"
               }
             ]
           },
@@ -361,6 +368,9 @@
             },
             "grow": {
               "type": "boolean"
+            },
+            "overlap": {
+              "type": "boolean"
             }
           }
         },
@@ -399,6 +409,31 @@
           },
           "required": [
             "prop"
+          ]
+        },
+        "text": {
+          "type": "string"
+        },
+        "meter": {
+          "type": "object",
+          "properties": {
+            "valueProp": {
+              "type": "string"
+            },
+            "maxProp": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "valueProp",
+            "maxProp"
+          ]
+        },
+        "animation": {
+          "type": "string",
+          "enum": [
+            "spin",
+            "pulse"
           ]
         },
         "slot": {

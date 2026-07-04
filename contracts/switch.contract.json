@@ -1,0 +1,175 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "ds.switch",
+  "name": "Switch",
+  "version": "1.0.0",
+  "status": "draft",
+  "description": "Toggle for on/off settings that take effect immediately. API mirrors industry convention (Astryx Switch) with the boolean value flattened to an off/on enum so both surfaces render both states truthfully; toggle behavior is a declared boundary.",
+  "semantics": {
+    "element": "label"
+  },
+  "props": [
+    {
+      "name": "value",
+      "description": "On or off — drives the track color and thumb position.",
+      "type": {
+        "enum": [
+          "off",
+          "on"
+        ]
+      },
+      "default": "off",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Value",
+          "values": {
+            "off": "Off",
+            "on": "On"
+          }
+        },
+        "code": {
+          "prop": "value"
+        }
+      }
+    },
+    {
+      "name": "label",
+      "description": "Always rendered — users must know what they are toggling.",
+      "type": "text",
+      "default": "Enable notifications",
+      "required": true,
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Label"
+        },
+        "code": {
+          "prop": "label"
+        }
+      }
+    },
+    {
+      "name": "description",
+      "description": "Secondary text below the label.",
+      "type": "text",
+      "default": "Takes effect immediately.",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Description"
+        },
+        "code": {
+          "prop": "description"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "flex",
+        "direction": "row",
+        "align": "start"
+      },
+      "tokens": {
+        "gap": "{space.gap.sm}",
+        "font-family": "{font.control.family}",
+        "color": "{color.surface.foreground}"
+      },
+      "parts": {
+        "track": {
+          "description": "The switch track. Thumb position is expressed structurally: a growing spacer sits on the off side.",
+          "layout": {
+            "direction": "row",
+            "align": "center"
+          },
+          "tokens": {
+            "width": "{size.switch.width}",
+            "height": "{size.switch.height}",
+            "background-color": "{color.switch.{value}.track}",
+            "border-radius": "{radius.pill}",
+            "padding-inline": "{space.inset-y.xs}",
+            "padding-block": "{space.inset-y.xs}"
+          },
+          "parts": {
+            "spacerStart": {
+              "layout": {
+                "grow": true
+              },
+              "visibleWhen": {
+                "prop": "value",
+                "equals": "on"
+              }
+            },
+            "thumb": {
+              "element": "span",
+              "text": "",
+              "tokens": {
+                "width": "{size.switch.thumb}",
+                "height": "{size.switch.thumb}",
+                "background-color": "{color.switch.thumb}",
+                "border-radius": "{radius.pill}"
+              }
+            },
+            "spacerEnd": {
+              "layout": {
+                "grow": true
+              },
+              "visibleWhen": {
+                "prop": "value",
+                "equals": "off"
+              }
+            }
+          }
+        },
+        "textCol": {
+          "layout": {
+            "direction": "column",
+            "grow": true
+          },
+          "tokens": {
+            "gap": "{space.inset-y.xs}"
+          },
+          "parts": {
+            "labelText": {
+              "element": "span",
+              "content": {
+                "prop": "label"
+              },
+              "tokens": {
+                "font-size": "{font.control.size.sm}",
+                "font-weight": "{font.control.weight}"
+              }
+            },
+            "descriptionText": {
+              "element": "span",
+              "content": {
+                "prop": "description"
+              },
+              "tokens": {
+                "font-size": "{font.control.size.sm}",
+                "color": "{color.text.secondary}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "a11y": {
+    "contrast": "AA"
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": "8nim1d0IPnehMxA7B7SYxC",
+      "componentSetKey": "7936496ebfb63f0f4908a29b7edd6dae340e4e23",
+      "nodeId": "11:1286"
+    },
+    "code": {
+      "importPath": "src/components/Switch",
+      "export": "Switch"
+    }
+  }
+}

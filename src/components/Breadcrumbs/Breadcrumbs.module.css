@@ -1,0 +1,19 @@
+/* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/breadcrumbs.contract.json (ds.breadcrumbs v1.0.0)
+ * Regenerate with: npm run generate
+ */
+
+.root {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border: 0;
+  gap: var(--space-inset-y-sm);
+}
+
+.trail {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--space-inset-y-sm);
+}

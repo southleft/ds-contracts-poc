@@ -1,0 +1,53 @@
+/* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/slider.contract.json (ds.slider v1.0.0)
+ * Regenerate with: npm run generate
+ */
+
+.root {
+  display: flex;
+  flex-direction: column;
+  border: 0;
+  width: 100%;
+  min-width: fit-content;
+  max-width: var(--size-slider-width);
+  gap: var(--space-inset-y-sm);
+  font-family: var(--font-control-family);
+  color: var(--color-surface-foreground);
+}
+
+.labelText {
+  font-size: var(--font-control-size-sm);
+  font-weight: var(--font-control-weight);
+}
+
+.trackRow {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: var(--size-slider-width);
+}
+
+.filled {
+  height: var(--size-slider-track);
+  background-color: var(--color-progress-accent);
+  border-radius: var(--radius-100);
+}
+
+.thumb {
+  width: var(--size-slider-thumb);
+  height: var(--size-slider-thumb);
+  background-color: var(--color-switch-thumb);
+  border-color: var(--color-progress-accent);
+  border-width: var(--border-width-200);
+  border-radius: var(--radius-pill);
+  border-style: solid;
+}
+
+.remainder {
+  display: flex;
+  flex: 1 1 auto;
+  min-width: 0;
+  height: var(--size-slider-track);
+  background-color: var(--color-progress-track);
+  border-radius: var(--radius-100);
+}

@@ -1,0 +1,132 @@
+/* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/pagination.contract.json (ds.pagination v1.0.0)
+ * Regenerate with: npm run generate
+ */
+
+.root {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border: 0;
+  gap: var(--space-gap-sm);
+  font-family: var(--font-control-family);
+  font-size: var(--font-control-size-sm);
+  color: var(--color-surface-foreground);
+}
+
+.prevButton svg {
+  width: 14px;
+  height: 14px;
+}
+
+.prevButton {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  padding: 0;
+  color: inherit;
+  cursor: pointer;
+  color: var(--color-text-secondary);
+}
+
+.prevButtonGlyph {
+  display: inline-flex;
+}
+
+.pagesGroup {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--space-inset-y-xs);
+}
+
+.pageOne {
+  padding-inline: var(--space-inset-y-md);
+  padding-block: var(--space-inset-y-sm);
+  border-radius: var(--radius-100);
+  color: var(--color-text-secondary);
+}
+
+.pageCurrent {
+  padding-inline: var(--space-inset-y-md);
+  padding-block: var(--space-inset-y-sm);
+  border-radius: var(--radius-100);
+  background-color: var(--color-nav-selected-background);
+  color: var(--color-nav-selected-foreground);
+  font-weight: var(--font-title-weight);
+}
+
+.pageThree {
+  padding-inline: var(--space-inset-y-md);
+  padding-block: var(--space-inset-y-sm);
+  border-radius: var(--radius-100);
+  color: var(--color-text-secondary);
+}
+
+.ellipsis {
+  color: var(--color-text-secondary);
+}
+
+.pageLast {
+  padding-inline: var(--space-inset-y-md);
+  padding-block: var(--space-inset-y-sm);
+  border-radius: var(--radius-100);
+  color: var(--color-text-secondary);
+}
+
+.compactText {
+  color: var(--color-text-secondary);
+}
+
+.dotsGroup {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--space-inset-y-sm);
+}
+
+.dotActive {
+  width: var(--size-dot);
+  height: var(--size-dot);
+  border-radius: var(--radius-pill);
+  background-color: var(--color-status-accent);
+}
+
+.dotTwo {
+  width: var(--size-dot);
+  height: var(--size-dot);
+  border-radius: var(--radius-pill);
+  background-color: var(--color-status-neutral);
+}
+
+.dotThree {
+  width: var(--size-dot);
+  height: var(--size-dot);
+  border-radius: var(--radius-pill);
+  background-color: var(--color-status-neutral);
+}
+
+.nextButton svg {
+  width: 14px;
+  height: 14px;
+}
+
+.nextButton {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  padding: 0;
+  color: inherit;
+  cursor: pointer;
+  color: var(--color-text-secondary);
+}
+
+.nextButtonGlyph {
+  display: inline-flex;
+}

@@ -1,0 +1,114 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "ds.breadcrumb-item",
+  "name": "BreadcrumbItem",
+  "version": "1.0.0",
+  "status": "draft",
+  "description": "One link in a breadcrumb trail with its leading separator. API mirrors industry convention (Astryx BreadcrumbItem); the first item is authored with hasSeparator off (positional part logic is a documented gap), and aria-current needs conditional attributes — also documented.",
+  "semantics": {
+    "element": "span"
+  },
+  "props": [
+    {
+      "name": "hasSeparator",
+      "description": "Leading separator — off for the first item in a trail.",
+      "type": "boolean",
+      "default": true,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Separator"
+        },
+        "code": {
+          "prop": "hasSeparator"
+        }
+      }
+    },
+    {
+      "name": "label",
+      "description": "The crumb text.",
+      "type": "text",
+      "default": "Page",
+      "required": true,
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Label"
+        },
+        "code": {
+          "prop": "label"
+        }
+      }
+    },
+    {
+      "name": "href",
+      "description": "Navigation target. Current-page items conventionally point at themselves.",
+      "type": "text",
+      "default": "#",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Href"
+        },
+        "code": {
+          "prop": "href"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "inline-flex",
+        "direction": "row",
+        "align": "center"
+      },
+      "tokens": {
+        "gap": "{space.inset-y.sm}",
+        "font-family": "{font.control.family}",
+        "font-size": "{font.control.size.sm}"
+      },
+      "parts": {
+        "separatorIcon": {
+          "icon": {
+            "asset": "chevron-right",
+            "size": 12
+          },
+          "visibleWhen": {
+            "prop": "hasSeparator"
+          },
+          "tokens": {
+            "color": "{color.text.secondary}"
+          }
+        },
+        "link": {
+          "element": "a",
+          "content": {
+            "prop": "label"
+          },
+          "attrs": {
+            "href": "{href}"
+          },
+          "tokens": {
+            "color": "{color.text.secondary}"
+          }
+        }
+      }
+    }
+  },
+  "a11y": {
+    "contrast": "AA"
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": "8nim1d0IPnehMxA7B7SYxC",
+      "componentSetKey": "7b9283aad1ddc94a1a597804a79a330316b3aaa1",
+      "nodeId": "11:1182"
+    },
+    "code": {
+      "importPath": "src/components/BreadcrumbItem",
+      "export": "BreadcrumbItem"
+    }
+  }
+}

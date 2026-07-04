@@ -1,0 +1,24 @@
+/* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/spinner.contract.json (ds.spinner v1.0.0)
+ * Regenerate with: npm run generate
+ */
+
+.root {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  border: 0;
+  color: var(--color-action-primary-background);
+}
+
+.arc {
+  display: inline-flex;
+  flex-shrink: 0;
+  animation: ds-spin 0.8s linear infinite;
+}
+
+@keyframes ds-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

@@ -211,7 +211,10 @@
     "400": {
       "$value": "32px"
     },
-    "$type": "dimension"
+    "$type": "dimension",
+    "overlap": {
+      "$value": "-8px"
+    }
   },
   "radius": {
     "100": {

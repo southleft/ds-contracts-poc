@@ -2,7 +2,7 @@
   "system": {
     "name": "DS Contracts POC",
     "catalogVersion": "0.1.0",
-    "gitCommit": "050c3aa",
+    "gitCommit": "a21b4f4",
     "source": "Compiled from contracts/*.contract.json + tokens/ + context/rules.json — do not edit."
   },
   "package": {
@@ -80,12 +80,16 @@
       "--space-list-compact",
       "--space-list-balanced",
       "--space-list-spacious",
+      "--space-avatarGroup-overlap",
       "--radius-control",
       "--radius-badge",
       "--radius-card",
       "--radius-avatar",
       "--radius-banner-card",
       "--radius-banner-section",
+      "--radius-skeleton-text",
+      "--radius-skeleton-rect",
+      "--radius-skeleton-circle",
       "--size-avatar-sm",
       "--size-avatar-md",
       "--size-card-width",
@@ -102,6 +106,23 @@
       "--size-toolbar-sm",
       "--size-toolbar-md",
       "--size-toolbar-lg",
+      "--size-progress-width",
+      "--size-progress-height",
+      "--size-slider-width",
+      "--size-slider-track",
+      "--size-slider-thumb",
+      "--size-switch-width",
+      "--size-switch-height",
+      "--size-switch-thumb",
+      "--size-spinner-sm",
+      "--size-spinner-md",
+      "--size-spinner-lg",
+      "--size-skeleton-text-width",
+      "--size-skeleton-text-height",
+      "--size-skeleton-rect-width",
+      "--size-skeleton-rect-height",
+      "--size-skeleton-circle-width",
+      "--size-skeleton-circle-height",
       "--border-width-focus",
       "--border-width-divider-subtle",
       "--border-width-divider-strong",
@@ -209,7 +230,17 @@
       "--color-nav-selected-background",
       "--color-nav-selected-foreground",
       "--color-nav-default-background",
-      "--color-nav-default-foreground"
+      "--color-nav-default-foreground",
+      "--color-switch-off-track",
+      "--color-switch-on-track",
+      "--color-switch-thumb",
+      "--color-progress-track",
+      "--color-progress-accent",
+      "--color-progress-success",
+      "--color-progress-warning",
+      "--color-progress-error",
+      "--color-progress-neutral",
+      "--color-skeleton"
     ],
     "allCssVariables": [
       "--color-white",
@@ -274,6 +305,7 @@
       "--space-250",
       "--space-300",
       "--space-400",
+      "--space-overlap",
       "--radius-100",
       "--radius-200",
       "--radius-pill",
@@ -314,12 +346,16 @@
       "--space-list-compact",
       "--space-list-balanced",
       "--space-list-spacious",
+      "--space-avatarGroup-overlap",
       "--radius-control",
       "--radius-badge",
       "--radius-card",
       "--radius-avatar",
       "--radius-banner-card",
       "--radius-banner-section",
+      "--radius-skeleton-text",
+      "--radius-skeleton-rect",
+      "--radius-skeleton-circle",
       "--size-avatar-sm",
       "--size-avatar-md",
       "--size-card-width",
@@ -336,6 +372,23 @@
       "--size-toolbar-sm",
       "--size-toolbar-md",
       "--size-toolbar-lg",
+      "--size-progress-width",
+      "--size-progress-height",
+      "--size-slider-width",
+      "--size-slider-track",
+      "--size-slider-thumb",
+      "--size-switch-width",
+      "--size-switch-height",
+      "--size-switch-thumb",
+      "--size-spinner-sm",
+      "--size-spinner-md",
+      "--size-spinner-lg",
+      "--size-skeleton-text-width",
+      "--size-skeleton-text-height",
+      "--size-skeleton-rect-width",
+      "--size-skeleton-rect-height",
+      "--size-skeleton-circle-width",
+      "--size-skeleton-circle-height",
       "--border-width-focus",
       "--border-width-divider-subtle",
       "--border-width-divider-strong",
@@ -443,10 +496,56 @@
       "--color-nav-selected-background",
       "--color-nav-selected-foreground",
       "--color-nav-default-background",
-      "--color-nav-default-foreground"
+      "--color-nav-default-foreground",
+      "--color-switch-off-track",
+      "--color-switch-on-track",
+      "--color-switch-thumb",
+      "--color-progress-track",
+      "--color-progress-accent",
+      "--color-progress-success",
+      "--color-progress-warning",
+      "--color-progress-error",
+      "--color-progress-neutral",
+      "--color-skeleton"
     ]
   },
   "components": [
+    {
+      "id": "ds.accordion-item",
+      "name": "AccordionItem",
+      "version": "1.0.0",
+      "status": "draft",
+      "description": "A collapsible content row: trigger with a state chevron, content revealed when open. API mirrors industry convention (Astryx Collapsible) with the open state flattened to a closed/open enum so both surfaces render both states; expand/collapse behavior is a declared boundary.",
+      "figma": {
+        "representation": "component",
+        "componentSetKey": "ba5ec62aa3c19bf86b7bcff8eb61ef1e86daad35"
+      },
+      "props": [
+        {
+          "name": "state",
+          "type": [
+            "closed",
+            "open"
+          ],
+          "default": "closed",
+          "description": "Closed shows only the trigger; open reveals the content and rotates the chevron."
+        },
+        {
+          "name": "title",
+          "type": "string",
+          "default": "Section title",
+          "required": true,
+          "description": "The always-visible trigger text."
+        }
+      ],
+      "children": {
+        "kind": "slot",
+        "accepts": [],
+        "acceptsMode": "open",
+        "description": "Revealed content — open state only."
+      },
+      "slots": []
+    },
     {
       "id": "ds.avatar",
       "name": "Avatar",
@@ -471,6 +570,33 @@
       "children": {
         "kind": "text",
         "description": "Initials (1–2 characters)."
+      },
+      "slots": []
+    },
+    {
+      "id": "ds.avatar-group",
+      "name": "AvatarGroup",
+      "version": "1.0.0",
+      "status": "draft",
+      "description": "Stacked avatars with an overflow count. API mirrors industry convention (Astryx AvatarGroup): overlapping layout — expressed as a negative-margin child rule in CSS and negative item spacing on the canvas.",
+      "figma": {
+        "representation": "component",
+        "componentSetKey": "41e084d38457f2aebd4611e3ebd922a56c2c392d"
+      },
+      "props": [
+        {
+          "name": "overflowLabel",
+          "type": "string",
+          "default": "+3",
+          "description": "The +N overflow indicator text."
+        }
+      ],
+      "children": {
+        "kind": "slot",
+        "accepts": [
+          "Avatar"
+        ],
+        "acceptsMode": "prefer"
       },
       "slots": []
     },
@@ -595,6 +721,70 @@
           "description": "Attribution, rendered in a semantic footer."
         }
       ]
+    },
+    {
+      "id": "ds.breadcrumb-item",
+      "name": "BreadcrumbItem",
+      "version": "1.0.0",
+      "status": "draft",
+      "description": "One link in a breadcrumb trail with its leading separator. API mirrors industry convention (Astryx BreadcrumbItem); the first item is authored with hasSeparator off (positional part logic is a documented gap), and aria-current needs conditional attributes — also documented.",
+      "figma": {
+        "representation": "component",
+        "componentSetKey": "7b9283aad1ddc94a1a597804a79a330316b3aaa1"
+      },
+      "props": [
+        {
+          "name": "hasSeparator",
+          "type": "boolean",
+          "default": true,
+          "description": "Leading separator — off for the first item in a trail."
+        },
+        {
+          "name": "label",
+          "type": "string",
+          "default": "Page",
+          "required": true,
+          "description": "The crumb text."
+        },
+        {
+          "name": "href",
+          "type": "string",
+          "default": "#",
+          "description": "Navigation target. Current-page items conventionally point at themselves."
+        }
+      ],
+      "children": {
+        "kind": "none"
+      },
+      "slots": []
+    },
+    {
+      "id": "ds.breadcrumbs",
+      "name": "Breadcrumbs",
+      "version": "1.0.0",
+      "status": "draft",
+      "description": "Navigation trail from root to the current page. API mirrors industry convention (Astryx Breadcrumbs): a nav landmark holding BreadcrumbItems; keep trails to five levels or fewer.",
+      "figma": {
+        "representation": "component",
+        "componentSetKey": "853821e9b58b03010cfeda157fd8ffcf2338bb15"
+      },
+      "props": [
+        {
+          "name": "label",
+          "type": "string",
+          "default": "Breadcrumb",
+          "required": true,
+          "description": "Accessible label for the navigation landmark."
+        }
+      ],
+      "children": {
+        "kind": "slot",
+        "accepts": [
+          "BreadcrumbItem"
+        ],
+        "acceptsMode": "prefer"
+      },
+      "slots": []
     },
     {
       "id": "ds.button",
@@ -1315,6 +1505,94 @@
       "slots": []
     },
     {
+      "id": "ds.pagination",
+      "name": "Pagination",
+      "version": "1.0.0",
+      "status": "draft",
+      "description": "Steps through pages of content, below a table or list. API mirrors industry convention (Astryx Pagination) with three display variants; page math and click behavior are declared boundaries — the pages variant shows a representative trail.",
+      "figma": {
+        "representation": "component",
+        "componentSetKey": "51d18c28f5ef424142d682db4ec7fd35b9091257"
+      },
+      "props": [
+        {
+          "name": "variant",
+          "type": [
+            "pages",
+            "compact",
+            "dots"
+          ],
+          "default": "pages",
+          "description": "Numbered trail, compact page label, or dot indicators."
+        },
+        {
+          "name": "pageLabel",
+          "type": "string",
+          "default": "Page 2 of 10",
+          "description": "The compact variant's label text."
+        },
+        {
+          "name": "label",
+          "type": "string",
+          "default": "Pagination",
+          "required": true,
+          "description": "Accessible label for the navigation landmark."
+        }
+      ],
+      "children": {
+        "kind": "none"
+      },
+      "slots": []
+    },
+    {
+      "id": "ds.progress-bar",
+      "name": "ProgressBar",
+      "version": "1.0.0",
+      "status": "draft",
+      "description": "Horizontal bar showing completion progress. API mirrors industry convention (Astryx ProgressBar): number-valued value/max drive the fill; the canvas renders the defaults' fraction as its honest static state. Indeterminate mode needs animation on the canvas — a documented boundary.",
+      "figma": {
+        "representation": "component",
+        "componentSetKey": "b18870547d3ca85fb933e46457fde0d02d782fb3"
+      },
+      "props": [
+        {
+          "name": "variant",
+          "type": [
+            "accent",
+            "success",
+            "warning",
+            "error",
+            "neutral"
+          ],
+          "default": "accent",
+          "description": "Semantic color of the fill."
+        },
+        {
+          "name": "value",
+          "type": "string",
+          "default": 60,
+          "description": "Current progress value."
+        },
+        {
+          "name": "max",
+          "type": "string",
+          "default": 100,
+          "description": "Maximum value."
+        },
+        {
+          "name": "label",
+          "type": "string",
+          "default": "Progress",
+          "required": true,
+          "description": "Accessible name — screen readers must know what is progressing."
+        }
+      ],
+      "children": {
+        "kind": "none"
+      },
+      "slots": []
+    },
+    {
       "id": "ds.section",
       "name": "Section",
       "version": "1.0.0",
@@ -1398,6 +1676,93 @@
       ]
     },
     {
+      "id": "ds.skeleton",
+      "name": "Skeleton",
+      "version": "1.0.0",
+      "status": "draft",
+      "description": "Pulsing placeholder previewing the shape of loading content. API mirrors industry convention (Astryx Skeleton) with the free-form width/height flattened to a shape variant; the pulse is CSS-only — the canvas shows the static shape.",
+      "figma": {
+        "representation": "component",
+        "componentSetKey": "2da0d4e2438f9b37a9ce159eafb4477f622b10bb"
+      },
+      "props": [
+        {
+          "name": "variant",
+          "type": [
+            "text",
+            "rect",
+            "circle"
+          ],
+          "default": "text",
+          "description": "The shape being previewed."
+        }
+      ],
+      "children": {
+        "kind": "none"
+      },
+      "slots": []
+    },
+    {
+      "id": "ds.slider",
+      "name": "Slider",
+      "version": "1.0.0",
+      "status": "draft",
+      "description": "Numeric selection within bounds — the static surface of a slider: label, filled track to the current value, and thumb. API mirrors industry convention (Astryx Slider); drag behavior and range mode are declared boundaries.",
+      "figma": {
+        "representation": "component",
+        "componentSetKey": "8aac8c4b2be87b47b944650ec1a4c07bdfeb12f7"
+      },
+      "props": [
+        {
+          "name": "value",
+          "type": "string",
+          "default": 40,
+          "description": "Current value — positions the thumb."
+        },
+        {
+          "name": "max",
+          "type": "string",
+          "default": 100,
+          "description": "Maximum value."
+        },
+        {
+          "name": "label",
+          "type": "string",
+          "default": "Volume",
+          "required": true,
+          "description": "Always rendered."
+        }
+      ],
+      "children": {
+        "kind": "none"
+      },
+      "slots": []
+    },
+    {
+      "id": "ds.spinner",
+      "name": "Spinner",
+      "version": "1.0.0",
+      "status": "draft",
+      "description": "Animated loading indicator for processes of unknown duration. API mirrors industry convention (Astryx Spinner); the size scale needs per-variant icon sizing and the rotation itself is CSS-only — the canvas shows the static arc.",
+      "figma": {
+        "representation": "component",
+        "componentSetKey": "3cb0569208b199ceccb18b4c4439add4f5fea661"
+      },
+      "props": [
+        {
+          "name": "label",
+          "type": "string",
+          "default": "Loading",
+          "required": true,
+          "description": "What is loading — announced to screen readers."
+        }
+      ],
+      "children": {
+        "kind": "none"
+      },
+      "slots": []
+    },
+    {
       "id": "ds.stack",
       "name": "Stack",
       "version": "1.0.0",
@@ -1462,6 +1827,45 @@
         "accepts": [],
         "acceptsMode": "open",
         "description": "Any catalog content."
+      },
+      "slots": []
+    },
+    {
+      "id": "ds.switch",
+      "name": "Switch",
+      "version": "1.0.0",
+      "status": "draft",
+      "description": "Toggle for on/off settings that take effect immediately. API mirrors industry convention (Astryx Switch) with the boolean value flattened to an off/on enum so both surfaces render both states truthfully; toggle behavior is a declared boundary.",
+      "figma": {
+        "representation": "component",
+        "componentSetKey": "7936496ebfb63f0f4908a29b7edd6dae340e4e23"
+      },
+      "props": [
+        {
+          "name": "value",
+          "type": [
+            "off",
+            "on"
+          ],
+          "default": "off",
+          "description": "On or off — drives the track color and thumb position."
+        },
+        {
+          "name": "label",
+          "type": "string",
+          "default": "Enable notifications",
+          "required": true,
+          "description": "Always rendered — users must know what they are toggling."
+        },
+        {
+          "name": "description",
+          "type": "string",
+          "default": "Takes effect immediately.",
+          "description": "Secondary text below the label."
+        }
+      ],
+      "children": {
+        "kind": "none"
       },
       "slots": []
     },

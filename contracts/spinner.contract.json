@@ -1,0 +1,68 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "ds.spinner",
+  "name": "Spinner",
+  "version": "1.0.0",
+  "status": "draft",
+  "description": "Animated loading indicator for processes of unknown duration. API mirrors industry convention (Astryx Spinner); the size scale needs per-variant icon sizing and the rotation itself is CSS-only — the canvas shows the static arc.",
+  "semantics": {
+    "element": "span",
+    "role": "status"
+  },
+  "props": [
+    {
+      "name": "label",
+      "description": "What is loading — announced to screen readers.",
+      "type": "text",
+      "default": "Loading",
+      "required": true,
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Label"
+        },
+        "code": {
+          "prop": "label"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "inline-flex",
+        "direction": "row",
+        "align": "center"
+      },
+      "attrs": {
+        "aria-label": "{label}"
+      },
+      "tokens": {
+        "color": "{color.action.primary.background}"
+      },
+      "parts": {
+        "arc": {
+          "icon": {
+            "asset": "spinner"
+          },
+          "animation": "spin"
+        }
+      }
+    }
+  },
+  "a11y": {
+    "contrast": "AA"
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": "8nim1d0IPnehMxA7B7SYxC",
+      "componentSetKey": "3cb0569208b199ceccb18b4c4439add4f5fea661",
+      "nodeId": "11:1267"
+    },
+    "code": {
+      "importPath": "src/components/Spinner",
+      "export": "Spinner"
+    }
+  }
+}

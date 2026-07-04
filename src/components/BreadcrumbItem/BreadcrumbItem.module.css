@@ -1,0 +1,29 @@
+/* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/breadcrumb-item.contract.json (ds.breadcrumb-item v1.0.0)
+ * Regenerate with: npm run generate
+ */
+
+.root {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  border: 0;
+  gap: var(--space-inset-y-sm);
+  font-family: var(--font-control-family);
+  font-size: var(--font-control-size-sm);
+}
+
+.separatorIcon svg {
+  width: 12px;
+  height: 12px;
+}
+
+.separatorIcon {
+  display: inline-flex;
+  flex-shrink: 0;
+  color: var(--color-text-secondary);
+}
+
+.link {
+  color: var(--color-text-secondary);
+}

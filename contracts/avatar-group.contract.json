@@ -1,0 +1,110 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "ds.avatar-group",
+  "name": "AvatarGroup",
+  "version": "1.0.0",
+  "status": "draft",
+  "description": "Stacked avatars with an overflow count. API mirrors industry convention (Astryx AvatarGroup): overlapping layout — expressed as a negative-margin child rule in CSS and negative item spacing on the canvas.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "overflowLabel",
+      "description": "The +N overflow indicator text.",
+      "type": "text",
+      "default": "+3",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Overflow"
+        },
+        "code": {
+          "prop": "overflowLabel"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "inline-flex",
+        "direction": "row",
+        "align": "center"
+      },
+      "tokens": {
+        "gap": "{space.gap.sm}"
+      },
+      "parts": {
+        "stack": {
+          "layout": {
+            "direction": "row",
+            "align": "center",
+            "overlap": true
+          },
+          "tokens": {
+            "gap": "{space.avatarGroup.overlap}"
+          },
+          "slot": {
+            "name": "children",
+            "accepts": [
+              "ds.avatar"
+            ],
+            "acceptsMode": "prefer",
+            "defaultContent": [
+              {
+                "id": "ds.avatar",
+                "text": "AB"
+              },
+              {
+                "id": "ds.avatar",
+                "text": "CD"
+              },
+              {
+                "id": "ds.avatar",
+                "text": "EF"
+              }
+            ]
+          }
+        },
+        "overflowText": {
+          "element": "span",
+          "content": {
+            "prop": "overflowLabel"
+          },
+          "tokens": {
+            "width": "{size.avatar.sm}",
+            "height": "{size.avatar.sm}",
+            "background-color": "{color.action.secondary.background}",
+            "color": "{color.text.secondary}",
+            "border-radius": "{radius.pill}",
+            "font-family": "{font.control.family}",
+            "font-size": "{font.avatar.size.sm}",
+            "font-weight": "{font.control.weight}"
+          },
+          "layout": {
+            "display": "inline-flex",
+            "direction": "row",
+            "align": "center",
+            "justify": "center"
+          }
+        }
+      }
+    }
+  },
+  "a11y": {
+    "contrast": "AA"
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": "8nim1d0IPnehMxA7B7SYxC",
+      "componentSetKey": "41e084d38457f2aebd4611e3ebd922a56c2c392d",
+      "nodeId": "11:1172"
+    },
+    "code": {
+      "importPath": "src/components/AvatarGroup",
+      "export": "AvatarGroup"
+    }
+  }
+}

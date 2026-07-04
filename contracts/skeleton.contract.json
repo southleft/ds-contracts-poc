@@ -1,0 +1,78 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "ds.skeleton",
+  "name": "Skeleton",
+  "version": "1.0.0",
+  "status": "draft",
+  "description": "Pulsing placeholder previewing the shape of loading content. API mirrors industry convention (Astryx Skeleton) with the free-form width/height flattened to a shape variant; the pulse is CSS-only — the canvas shows the static shape.",
+  "semantics": {
+    "element": "span"
+  },
+  "props": [
+    {
+      "name": "variant",
+      "description": "The shape being previewed.",
+      "type": {
+        "enum": [
+          "text",
+          "rect",
+          "circle"
+        ]
+      },
+      "default": "text",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Variant",
+          "values": {
+            "text": "Text",
+            "rect": "Rect",
+            "circle": "Circle"
+          }
+        },
+        "code": {
+          "prop": "variant"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "inline-flex",
+        "direction": "row"
+      },
+      "attrs": {
+        "aria-hidden": "true"
+      },
+      "parts": {
+        "block": {
+          "element": "span",
+          "text": "",
+          "animation": "pulse",
+          "tokens": {
+            "width": "{size.skeleton.{variant}.width}",
+            "height": "{size.skeleton.{variant}.height}",
+            "background-color": "{color.skeleton}",
+            "border-radius": "{radius.skeleton.{variant}}"
+          }
+        }
+      }
+    }
+  },
+  "a11y": {
+    "contrast": "AA"
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": "8nim1d0IPnehMxA7B7SYxC",
+      "componentSetKey": "2da0d4e2438f9b37a9ce159eafb4477f622b10bb",
+      "nodeId": "11:1259"
+    },
+    "code": {
+      "importPath": "src/components/Skeleton",
+      "export": "Skeleton"
+    }
+  }
+}

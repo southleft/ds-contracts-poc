@@ -2,9 +2,13 @@
 
 *July 3, 2026. Source: full sweep of the Astryx component index (astryx.atmeta.com/components, 93 components, `@astryxdesign/core` v0.1.2 — prop tables recovered from the docs site's own component registry). Astryx is mirrored at the **API level**: prop names, types, enum vocabularies, and slot shapes. Every component below is either generated from a contract, or its absence is attributed to a specific named gap — never silently skipped.*
 
-**The scoreboard (updated after round two):** **40 components in the catalog**, 38 of them mirroring Astryx APIs directly — the original set plus Blockquote, Checkbox, Code, Divider, EmptyState, IconButton, StatusDot, TextArea, TextField, Toast, Token, and the second wave: **ChatMessage, ChatMessageMetadata, ChatSystemMessage, Citation, Field, Kbd, List, ListItem, MetadataList, MetadataListItem, Section, SideNavItem, Tab, TabList, Toolbar, TopNav, TopNavItem, TypeaheadItem**. Stack and Inline are system layout primitives. The remaining Astryx components fall into **two honest categories**: static components blocked by a *named schema gap*, and behavior-heavy components outside the contract's declared boundary (contracts own API/anatomy/tokens; interactive behavior is a hand-written layer beside the generated shells).
+**The scoreboard (updated after round three):** **50 components in the catalog**, 48 of them mirroring Astryx APIs directly — the original set plus Blockquote, Checkbox, Code, Divider, EmptyState, IconButton, StatusDot, TextArea, TextField, Toast, Token, and the second wave: **ChatMessage, ChatMessageMetadata, ChatSystemMessage, Citation, Field, Kbd, List, ListItem, MetadataList, MetadataListItem, Section, SideNavItem, Tab, TabList, Toolbar, TopNav, TopNavItem, TypeaheadItem**. Stack and Inline are system layout primitives. The remaining Astryx components fall into **two honest categories**: static components blocked by a *named schema gap*, and behavior-heavy components outside the contract's declared boundary (contracts own API/anatomy/tokens; interactive behavior is a hand-written layer beside the generated shells).
 
-## Mirrored in round two (18 more contracts)
+## Mirrored in round three (10 advanced contracts)
+
+Switch (off/on flattened to an enum; thumb position expressed structurally with growing spacers), ProgressBar and Slider (**number-valued props** landed: value/max drive a live percentage fill in code and the defaults' fraction on the canvas), Pagination (pages/compact/dots variants using **static text parts** — literal page chips and dots), Breadcrumbs + BreadcrumbItem (separator as a visibility-bound part; the first item authored without one), AvatarGroup (**overlap layout** — negative child margins in CSS, negative item spacing on the canvas), Spinner (**spin animation**, CSS-only), Skeleton (**pulse animation**; width/height flattened to a shape variant), AccordionItem (state-driven chevron via asset-by-enum; content revealed only in the open variant). Schema capabilities added this round: `number` prop type, `meter` parts, `text` static parts, `layout.overlap`, and `animation` — five features, ten components.
+
+## Mirrored in round two (18 contracts)
 
 The chat family (per-sender bubble tokens; per-status delivery icons; divider lines via `visibleWhen.equals`), the navigation family (Tab/TabList, TopNav/TopNavItem, SideNavItem — selection flattened to a `state` enum so both surfaces render it truthfully), the list families (List/ListItem, MetadataList/MetadataListItem with multi-child default content), the form-infrastructure Field wrapper (htmlFor association via an `inputID` prop), plus Toolbar, Section, Citation (label/number variants via `visibleWhen.equals`), Kbd, and TypeaheadItem. Flavor deviations, disclosed: `isSelected` booleans became `state` enums (boolean-conditional tokens are still a gap); `status={type,message}` objects remain out (structured-object props); Section drops the `transparent` variant (transparent color tokens).
 
@@ -31,11 +35,9 @@ Props deliberately omitted from otherwise-mirrored APIs (all function-valued or 
 | Component | Blocking gap |
 |---|---|
 | Text, Heading | **>2 variant axes** (type × color × weight × size) and **element-by-prop** (`as`, `level` change the rendered tag) |
-| ProgressBar, AspectRatio, Skeleton, NumberInput | **Number-valued props** (value/max/ratio/width) — schema has text/boolean/enum only |
-| Switch | **Boolean-conditional tokens** (on/off track color) — visibleWhen shows/hides but can't restyle |
-| Breadcrumbs | **Positional part logic** ("separator on all but first") |
+| AspectRatio, NumberInput | **Number-driven dimensions/native numeric inputs** — number props exist now; these need them wired to size and to form controls |
 | Divider (orientation) | **Per-enum-value property overrides** (horizontal thickness=height, vertical thickness=width) |
-| Spinner, Skeleton (shimmer), isLoading states | **Animation tokens/keyframes** not in the token pipeline |
+| isLoading states, Skeleton gradient shimmer | **Animation exists (spin/pulse)**; per-enum icon sizing and gradient keyframes are the remaining motion gaps |
 | ButtonGroup, AvatarGroup | **Sibling-selector styling** (shared borders, overlap) not emitted by the CSS generator |
 | FormLayout, Grid, Layout | **Layout-by-enum** (direction/column props change flex/grid structure, not just token values) |
 | ChatMessage (alignment), Kbd (multi-key) | Shipped with the noted subset; the full behavior needs layout-by-enum / value parsing |

@@ -1,0 +1,61 @@
+/* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/skeleton.contract.json (ds.skeleton v1.0.0)
+ * Regenerate with: npm run generate
+ */
+
+.root {
+  display: inline-flex;
+  flex-direction: row;
+  border: 0;
+}
+
+.block {
+  animation: ds-pulse 1.6s ease-in-out infinite;
+  background-color: var(--color-skeleton);
+}
+
+.variant-text .block {
+  width: var(--size-skeleton-text-width);
+}
+
+.variant-rect .block {
+  width: var(--size-skeleton-rect-width);
+}
+
+.variant-circle .block {
+  width: var(--size-skeleton-circle-width);
+}
+
+.variant-text .block {
+  height: var(--size-skeleton-text-height);
+}
+
+.variant-rect .block {
+  height: var(--size-skeleton-rect-height);
+}
+
+.variant-circle .block {
+  height: var(--size-skeleton-circle-height);
+}
+
+.variant-text .block {
+  border-radius: var(--radius-skeleton-text);
+}
+
+.variant-rect .block {
+  border-radius: var(--radius-skeleton-rect);
+}
+
+.variant-circle .block {
+  border-radius: var(--radius-skeleton-circle);
+}
+
+@keyframes ds-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.45;
+  }
+}
