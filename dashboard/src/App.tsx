@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import type { ReactNode } from 'react';
-import { Moon, Sun } from 'lucide-react';
+import { ChevronRight, Moon, Sun } from 'lucide-react';
 import { Button } from './components/ui';
 import { cn } from './lib/utils';
-import { catalog } from './data';
+import { catalog, components } from './data';
 import { Overview } from './views/Overview';
 import { ComponentsList } from './views/ComponentsList';
 import { ComponentDetail } from './views/ComponentDetail';
@@ -52,6 +52,11 @@ export function App() {
 
   const segments = hash.replace(/^#\/?/, '').split('/').filter(Boolean);
   const section = segments[0] ?? '';
+  const activeComponentId =
+    section === 'components' && segments[1] ? decodeURIComponent(segments[1]) : null;
+  // null = follow the route (open while browsing components); a boolean means
+  // the user toggled it manually and their choice wins.
+  const [componentsOpen, setComponentsOpen] = useState<boolean | null>(null);
 
   let view: ReactNode;
   if (section === 'components' && segments[1]) {
@@ -90,21 +95,80 @@ export function App() {
         </div>
         <nav aria-label="Main" className="flex flex-row flex-wrap gap-1 px-3 py-3 md:flex-col md:gap-0.5">
           {NAV_ITEMS.map((item) => {
-            const active = item.section === section || (item.section === 'components' && section === 'components');
+            const active = item.section === section;
+            if (item.section !== 'components') {
+              return (
+                <a
+                  key={item.href}
+                  href={item.href}
+                  aria-current={active ? 'page' : undefined}
+                  className={cn(
+                    'rounded-md px-3 py-2 text-sm outline-none focus-visible:ring-2 focus-visible:ring-white/60',
+                    active
+                      ? 'bg-sidebar-accent text-sidebar-accent-foreground font-medium'
+                      : 'hover:bg-sidebar-accent/60 hover:text-sidebar-accent-foreground',
+                  )}
+                >
+                  {item.label}
+                </a>
+              );
+            }
+            const open = componentsOpen ?? active;
             return (
-              <a
-                key={item.href}
-                href={item.href}
-                aria-current={active ? 'page' : undefined}
-                className={cn(
-                  'rounded-md px-3 py-2 text-sm outline-none focus-visible:ring-2 focus-visible:ring-white/60',
-                  active
-                    ? 'bg-sidebar-accent text-sidebar-accent-foreground font-medium'
-                    : 'hover:bg-sidebar-accent/60 hover:text-sidebar-accent-foreground',
-                )}
-              >
-                {item.label}
-              </a>
+              <div key={item.href} className="md:min-w-0">
+                <div className="flex items-center">
+                  <a
+                    href={item.href}
+                    aria-current={active && !activeComponentId ? 'page' : undefined}
+                    className={cn(
+                      'flex-1 rounded-md px-3 py-2 text-sm outline-none focus-visible:ring-2 focus-visible:ring-white/60',
+                      active
+                        ? 'bg-sidebar-accent text-sidebar-accent-foreground font-medium'
+                        : 'hover:bg-sidebar-accent/60 hover:text-sidebar-accent-foreground',
+                    )}
+                  >
+                    {item.label}
+                    <span className="text-sidebar-foreground/50 ml-1.5 font-mono text-[10px]">
+                      {components.length}
+                    </span>
+                  </a>
+                  <button
+                    type="button"
+                    aria-label={open ? 'Collapse component list' : 'Expand component list'}
+                    aria-expanded={open}
+                    onClick={() => setComponentsOpen(!open)}
+                    className="hover:bg-sidebar-accent/60 hidden rounded-md p-2 outline-none focus-visible:ring-2 focus-visible:ring-white/60 md:block"
+                  >
+                    <ChevronRight
+                      aria-hidden
+                      className={cn('size-3.5 transition-transform', open && 'rotate-90')}
+                    />
+                  </button>
+                </div>
+                {open ? (
+                  <ul className="border-sidebar-accent mt-0.5 mb-1 ml-4 hidden border-l pl-1 md:block">
+                    {components.map((c) => {
+                      const current = activeComponentId === c.id;
+                      return (
+                        <li key={c.id}>
+                          <a
+                            href={`#/components/${encodeURIComponent(c.id)}`}
+                            aria-current={current ? 'page' : undefined}
+                            className={cn(
+                              'block truncate rounded-md px-2 py-1 text-[13px] outline-none focus-visible:ring-2 focus-visible:ring-white/60',
+                              current
+                                ? 'bg-sidebar-accent text-sidebar-accent-foreground font-medium'
+                                : 'text-sidebar-foreground/75 hover:bg-sidebar-accent/60 hover:text-sidebar-accent-foreground',
+                            )}
+                          >
+                            {c.name}
+                          </a>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                ) : null}
+              </div>
             );
           })}
         </nav>
