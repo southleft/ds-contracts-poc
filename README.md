@@ -95,7 +95,8 @@ One file; two faithful renderings; a differ that can mechanically prove both. Co
 9. [Composition & the Road to a Contributable Spec](docs/08-composition-and-spec.md)
 10. [Honest Generation](docs/10-honest-generation.md) · the catalog, the deterministic judge, and the 100-vs-69 A/B result
 11. [Brownfield Adoption](docs/11-brownfield-adoption.md) · the plan for connecting pre-existing design + code libraries — extraction, reconciliation, diagnostic-first
-12. [Astryx Coverage Map](docs/research/astryx-coverage.md) · every component in a 93-component industry library: mirrored, gap-blocked, or behavior-bounded
+12. [Roadmap](docs/12-roadmap.md) · four phases toward a component contract spec, each with a falsifiable exit criterion
+13. [Astryx Coverage Map](docs/research/astryx-coverage.md) · every component in a 93-component industry library: mirrored, gap-blocked, or behavior-bounded
 
 ## Honesty as a design principle
 
@@ -107,4 +108,6 @@ Not everything is expressible yet, and nothing here pretends otherwise:
 
 ## Status
 
-A working proof of concept, validated end-to-end: generation into both surfaces, the parity loop run in both directions with receipts, 26/26 evals, and a measured 100-vs-69 governed-generation result. The reference design-tool integration lives behind a transport-agnostic script boundary (`docs/internal/`) — the contract format itself is tool-agnostic, and the road to a contributable spec is sketched in [docs/08](docs/08-composition-and-spec.md).
+A working proof of concept, validated end-to-end: generation into both surfaces, the parity loop run in both directions with receipts, 26/26 evals, and a measured 100-vs-69 governed-generation result. The reference design-tool integration lives behind a transport-agnostic script boundary (`docs/internal/`) — the contract format itself is tool-agnostic.
+
+Where this goes next is public: the **[roadmap](ROADMAP.md)** runs from hardening the loop, through brownfield adoption of pre-existing libraries, to candidacy as a vendor-neutral **component contract specification** — with this repository as the reference implementation and conformance suite. The spec groundwork is in [docs/08](docs/08-composition-and-spec.md).
