@@ -300,6 +300,463 @@
       "nestedInstances": [
         "Slot"
       ]
+    },
+    {
+      "name": "Blockquote",
+      "nodeId": "11:270",
+      "key": "b6dd9d18639b0b053e55d307b2a8dbf1d4af3cef",
+      "description": "Styled quotation block with an accent left border for quotes, testimonials, and excerpts. API mirrors industry convention (Astryx Blockquote): content plus an optional cite slot rendered in semantic footer/cite markup. — governed by contract ds.blockquote v1.0.0",
+      "variantCount": 1,
+      "properties": {
+        "Children#11:45": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "2:26",
+          "variantOptions": null,
+          "preferredValues": []
+        },
+        "Cite#11:46": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "2:26",
+          "variantOptions": null,
+          "preferredValues": []
+        },
+        "Show Cite#11:47": {
+          "type": "BOOLEAN",
+          "defaultValue": true,
+          "variantOptions": null,
+          "preferredValues": null
+        }
+      },
+      "nestedInstances": [
+        "Slot"
+      ]
+    },
+    {
+      "name": "Checkbox",
+      "nodeId": "11:315",
+      "key": "9bc54e5a3f7c074b9ed016dfac8edff95ec45e23",
+      "description": "Toggles a single on/off value — settings, terms acceptance, opt-ins. API mirrors industry convention (Astryx CheckboxInput): checked, unchecked, and indeterminate are prop-driven appearance states. — governed by contract ds.checkbox v1.0.0",
+      "variantCount": 6,
+      "properties": {
+        "Label#11:60": {
+          "type": "TEXT",
+          "defaultValue": "Checkbox label",
+          "variantOptions": null,
+          "preferredValues": null
+        },
+        "Description#11:61": {
+          "type": "TEXT",
+          "defaultValue": "Supporting detail for this option.",
+          "variantOptions": null,
+          "preferredValues": null
+        },
+        "Value": {
+          "type": "VARIANT",
+          "defaultValue": "Unchecked",
+          "variantOptions": [
+            "Unchecked",
+            "Checked",
+            "Indeterminate"
+          ],
+          "preferredValues": null
+        },
+        "Size": {
+          "type": "VARIANT",
+          "defaultValue": "Medium",
+          "variantOptions": [
+            "Medium",
+            "Small"
+          ],
+          "preferredValues": null
+        }
+      },
+      "nestedInstances": []
+    },
+    {
+      "name": "Code",
+      "nodeId": "11:316",
+      "key": "d64c49cb8606d9f9275de6ab5c635708276cd047",
+      "description": "Inline code element with monospace font and muted background. API mirrors industry convention (Astryx Code); block code is a separate component family. — governed by contract ds.code v1.0.0",
+      "variantCount": 1,
+      "properties": {
+        "Content#11:62": {
+          "type": "TEXT",
+          "defaultValue": "npm run build",
+          "variantOptions": null,
+          "preferredValues": null
+        }
+      },
+      "nestedInstances": []
+    },
+    {
+      "name": "Divider",
+      "nodeId": "11:320",
+      "key": "1bd0e157dee768b650c50a752a164562fc606822",
+      "description": "Visual separator dividing content into distinct sections. API mirrors industry convention (Astryx Divider) at the variant level; orientation requires per-enum-value property overrides — a documented schema gap. — governed by contract ds.divider v1.0.0",
+      "variantCount": 2,
+      "properties": {
+        "Variant": {
+          "type": "VARIANT",
+          "defaultValue": "Subtle",
+          "variantOptions": [
+            "Subtle",
+            "Strong"
+          ],
+          "preferredValues": null
+        }
+      },
+      "nestedInstances": []
+    },
+    {
+      "name": "EmptyState",
+      "nodeId": "11:321",
+      "key": "b0dd99f2822be1712c8984d1b59bd31bd8ab866d",
+      "description": "Placeholder for a content area with no data — empty lists, zero results, first-time setup. API mirrors industry convention (Astryx EmptyState): always a title and a next step; the icon is decorative. — governed by contract ds.empty-state v1.0.0",
+      "variantCount": 1,
+      "properties": {
+        "Title#11:63": {
+          "type": "TEXT",
+          "defaultValue": "Nothing here yet",
+          "variantOptions": null,
+          "preferredValues": null
+        },
+        "Description#11:64": {
+          "type": "TEXT",
+          "defaultValue": "When items are added they will show up in this list.",
+          "variantOptions": null,
+          "preferredValues": null
+        },
+        "Icon#11:65": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "2:26",
+          "variantOptions": null,
+          "preferredValues": []
+        },
+        "Show Icon#11:66": {
+          "type": "BOOLEAN",
+          "defaultValue": true,
+          "variantOptions": null,
+          "preferredValues": null
+        },
+        "Actions#11:67": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "2:26",
+          "variantOptions": null,
+          "preferredValues": [
+            {
+              "type": "COMPONENT_SET",
+              "key": "1b5d2a573f3f39404af396bdbe944a30ca0eaec3"
+            }
+          ]
+        },
+        "Show Actions#11:68": {
+          "type": "BOOLEAN",
+          "defaultValue": true,
+          "variantOptions": null,
+          "preferredValues": null
+        }
+      },
+      "nestedInstances": [
+        "Slot"
+      ]
+    },
+    {
+      "name": "IconButton",
+      "nodeId": "11:378",
+      "key": "ba2cfd0b9f6f47a728081edaf340c37cdeb53123",
+      "description": "A button showing only an icon, for toolbars, table rows, and compact UI. API mirrors industry convention (Astryx IconButton): the required label is the accessible name and is never rendered visibly. — governed by contract ds.icon-button v1.0.0",
+      "variantCount": 12,
+      "properties": {
+        "Icon#11:93": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "2:26",
+          "variantOptions": null,
+          "preferredValues": []
+        },
+        "Disabled#11:94": {
+          "type": "BOOLEAN",
+          "defaultValue": false,
+          "variantOptions": null,
+          "preferredValues": null
+        },
+        "Label#11:350": {
+          "type": "TEXT",
+          "defaultValue": "Action",
+          "variantOptions": null,
+          "preferredValues": null
+        },
+        "Variant": {
+          "type": "VARIANT",
+          "defaultValue": "Secondary",
+          "variantOptions": [
+            "Secondary",
+            "Primary",
+            "Ghost",
+            "Destructive"
+          ],
+          "preferredValues": null
+        },
+        "Size": {
+          "type": "VARIANT",
+          "defaultValue": "Medium",
+          "variantOptions": [
+            "Medium",
+            "Small",
+            "Large"
+          ],
+          "preferredValues": null
+        }
+      },
+      "nestedInstances": [
+        "Slot"
+      ]
+    },
+    {
+      "name": "StatusDot",
+      "nodeId": "11:384",
+      "key": "f66c5a1c366d1d37292459b9b9a56d80bf2a5034",
+      "description": "Small colored dot communicating status — presence, severity, activity. API mirrors industry convention (Astryx StatusDot): five semantic variants with a required accessible label. — governed by contract ds.status-dot v1.0.0",
+      "variantCount": 5,
+      "properties": {
+        "Label#11:344": {
+          "type": "TEXT",
+          "defaultValue": "Status",
+          "variantOptions": null,
+          "preferredValues": null
+        },
+        "Variant": {
+          "type": "VARIANT",
+          "defaultValue": "Neutral",
+          "variantOptions": [
+            "Neutral",
+            "Success",
+            "Warning",
+            "Error",
+            "Accent"
+          ],
+          "preferredValues": null
+        }
+      },
+      "nestedInstances": []
+    },
+    {
+      "name": "TextArea",
+      "nodeId": "11:415",
+      "key": "2cb4581bfc1e7d9b0b5e32260d783accaea973ef",
+      "description": "Multi-line text input for longer-form content — comments, descriptions, messages. API mirrors industry convention (Astryx TextArea); wrapping-label anatomy gives implicit association. — governed by contract ds.text-area v1.0.0",
+      "variantCount": 3,
+      "properties": {
+        "Label#11:107": {
+          "type": "TEXT",
+          "defaultValue": "Label",
+          "variantOptions": null,
+          "preferredValues": null
+        },
+        "Description#11:108": {
+          "type": "TEXT",
+          "defaultValue": "Helper text that explains the expected content.",
+          "variantOptions": null,
+          "preferredValues": null
+        },
+        "Placeholder#11:109": {
+          "type": "TEXT",
+          "defaultValue": "Write something…",
+          "variantOptions": null,
+          "preferredValues": null
+        },
+        "Required#11:110": {
+          "type": "BOOLEAN",
+          "defaultValue": false,
+          "variantOptions": null,
+          "preferredValues": null
+        },
+        "Size": {
+          "type": "VARIANT",
+          "defaultValue": "Medium",
+          "variantOptions": [
+            "Medium",
+            "Small",
+            "Large"
+          ],
+          "preferredValues": null
+        }
+      },
+      "nestedInstances": []
+    },
+    {
+      "name": "TextField",
+      "nodeId": "11:446",
+      "key": "83b5ead2b038477a13c0647de71ee55bf458e0b3",
+      "description": "Single-line text input for short-form values — names, emails, search queries. API mirrors industry convention (Astryx TextInput): required label, description, size scale. The wrapping-label anatomy gives implicit label association. — governed by contract ds.text-field v1.0.0",
+      "variantCount": 3,
+      "properties": {
+        "Label#11:126": {
+          "type": "TEXT",
+          "defaultValue": "Label",
+          "variantOptions": null,
+          "preferredValues": null
+        },
+        "Description#11:127": {
+          "type": "TEXT",
+          "defaultValue": "Helper text that explains the expected value.",
+          "variantOptions": null,
+          "preferredValues": null
+        },
+        "Placeholder#11:128": {
+          "type": "TEXT",
+          "defaultValue": "Enter a value…",
+          "variantOptions": null,
+          "preferredValues": null
+        },
+        "Required#11:129": {
+          "type": "BOOLEAN",
+          "defaultValue": false,
+          "variantOptions": null,
+          "preferredValues": null
+        },
+        "Disabled#11:130": {
+          "type": "BOOLEAN",
+          "defaultValue": false,
+          "variantOptions": null,
+          "preferredValues": null
+        },
+        "Size": {
+          "type": "VARIANT",
+          "defaultValue": "Medium",
+          "variantOptions": [
+            "Medium",
+            "Small",
+            "Large"
+          ],
+          "preferredValues": null
+        }
+      },
+      "nestedInstances": []
+    },
+    {
+      "name": "Toast",
+      "nodeId": "11:461",
+      "key": "0abc553b16f20807f50d984a41dc6cb936958a93",
+      "description": "Brief non-blocking notification confirming an action. API mirrors industry convention (Astryx Toast): the visual element — positioning, stacking, and auto-dismiss belong to the behavior layer and are a declared boundary. — governed by contract ds.toast v1.0.0",
+      "variantCount": 2,
+      "properties": {
+        "Children#11:137": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "2:26",
+          "variantOptions": null,
+          "preferredValues": []
+        },
+        "EndContent#11:138": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "2:26",
+          "variantOptions": null,
+          "preferredValues": [
+            {
+              "type": "COMPONENT_SET",
+              "key": "1b5d2a573f3f39404af396bdbe944a30ca0eaec3"
+            }
+          ]
+        },
+        "Show EndContent#11:139": {
+          "type": "BOOLEAN",
+          "defaultValue": true,
+          "variantOptions": null,
+          "preferredValues": null
+        },
+        "Type": {
+          "type": "VARIANT",
+          "defaultValue": "Info",
+          "variantOptions": [
+            "Info",
+            "Error"
+          ],
+          "preferredValues": null
+        }
+      },
+      "nestedInstances": [
+        "Slot"
+      ]
+    },
+    {
+      "name": "Token",
+      "nodeId": "11:726",
+      "key": "25fa6e1c9a512109e7bbc4b341bbbde5ede1f7ec",
+      "description": "Small inline element for discrete associated data — tags, categories, active filters. API mirrors industry convention (Astryx Token): 11-color vocabulary with size scale; removal and click behavior are a declared boundary. — governed by contract ds.token v1.0.0",
+      "variantCount": 33,
+      "properties": {
+        "Label#11:338": {
+          "type": "TEXT",
+          "defaultValue": "Token",
+          "variantOptions": null,
+          "preferredValues": null
+        },
+        "Icon#11:339": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "2:26",
+          "variantOptions": null,
+          "preferredValues": []
+        },
+        "Show Icon#11:340": {
+          "type": "BOOLEAN",
+          "defaultValue": true,
+          "variantOptions": null,
+          "preferredValues": null
+        },
+        "EndContent#11:341": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "2:26",
+          "variantOptions": null,
+          "preferredValues": [
+            {
+              "type": "COMPONENT_SET",
+              "key": "89f1fb2d4580116cea4be5d4ca340de216a27819"
+            }
+          ]
+        },
+        "Show EndContent#11:342": {
+          "type": "BOOLEAN",
+          "defaultValue": true,
+          "variantOptions": null,
+          "preferredValues": null
+        },
+        "Disabled#11:343": {
+          "type": "BOOLEAN",
+          "defaultValue": false,
+          "variantOptions": null,
+          "preferredValues": null
+        },
+        "Color": {
+          "type": "VARIANT",
+          "defaultValue": "Default",
+          "variantOptions": [
+            "Default",
+            "Red",
+            "Orange",
+            "Yellow",
+            "Green",
+            "Teal",
+            "Cyan",
+            "Blue",
+            "Purple",
+            "Pink",
+            "Gray"
+          ],
+          "preferredValues": null
+        },
+        "Size": {
+          "type": "VARIANT",
+          "defaultValue": "Medium",
+          "variantOptions": [
+            "Medium",
+            "Small",
+            "Large"
+          ],
+          "preferredValues": null
+        }
+      },
+      "nestedInstances": [
+        "Slot"
+      ]
     }
   ]
 }

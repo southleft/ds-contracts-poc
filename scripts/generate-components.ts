@@ -182,11 +182,18 @@ function validateContract(contract: Contract, byId: Map<string, Contract>, error
       }
     }
     if (p[0] !== 'root' || p.length > 1) {
-      // substitution placeholders are only supported on the root part
+      // Nested parts support single-placeholder substitutions (v4) — emitted
+      // as descendant rules under the root's enum class. Two placeholders on
+      // one nested token stays unsupported.
       for (const ref of Object.values(part.tokens ?? {})) {
-        if (placeholdersIn(stripBraces(ref)).length > 0) {
+        const phs = placeholdersIn(stripBraces(ref));
+        if (phs.length > 1) {
           errors.push(
-            `${contract.id}: part "${name}" uses a {prop} substitution — only the root part supports substitutions`,
+            `${contract.id}: part "${name}" token "${ref}" uses ${phs.length} substitutions — nested parts support at most one`,
+          );
+        } else if (phs.length === 1 && !enumProps(contract).some((pr) => pr.name === phs[0])) {
+          errors.push(
+            `${contract.id}: part "${name}" token "${ref}" substitutes unknown enum prop "${phs[0]}"`,
           );
         }
       }
@@ -364,6 +371,9 @@ function generateCss(contract: Contract, tokenInventory: Set<string>, errors: st
     if (part.layout?.grow) decls.push('flex: 1 1 auto', 'min-width: 0');
     if (part.icon) {
       decls.push('display: inline-flex', 'flex-shrink: 0');
+      if (part.icon.size) {
+        lines.push('', `.${name} svg {`, `  width: ${part.icon.size}px;`, `  height: ${part.icon.size}px;`, '}');
+      }
       if (part.element === 'button') {
         decls.push(
           'align-items: center',
@@ -376,8 +386,19 @@ function generateCss(contract: Contract, tokenInventory: Set<string>, errors: st
         );
       }
     }
+    const nestedSubRules: string[] = [];
     for (const [cssProp, ref] of Object.entries(part.tokens ?? {})) {
       const refPath = stripBraces(ref);
+      const phs = placeholdersIn(refPath);
+      if (phs.length === 1) {
+        // Per-enum-value descendant rule under the root's variant class.
+        for (const value of enums.get(phs[0]) ?? []) {
+          const resolved = refPath.replaceAll(`{${phs[0]}}`, value);
+          if (!checkToken(resolved, `anatomy.${name}.tokens.${cssProp}`)) continue;
+          nestedSubRules.push(`\n.${phs[0]}-${value} .${name} {\n  ${cssProp}: ${cssVar(resolved)};\n}`);
+        }
+        continue;
+      }
       if (checkToken(refPath, `anatomy.${name}.tokens.${cssProp}`)) {
         decls.push(`${cssProp}: ${cssVar(refPath)}`);
       }
@@ -385,10 +406,13 @@ function generateCss(contract: Contract, tokenInventory: Set<string>, errors: st
     if ((part.tokens && ('border-width' in part.tokens || 'border-color' in part.tokens))) {
       decls.push('border-style: solid');
     }
-    if (decls.length === 0) continue;
-    lines.push('', `.${name} {`);
-    for (const d of decls) lines.push(`  ${d};`);
-    lines.push('}');
+    if (decls.length === 0 && nestedSubRules.length === 0) continue;
+    if (decls.length > 0) {
+      lines.push('', `.${name} {`);
+      for (const d of decls) lines.push(`  ${d};`);
+      lines.push('}');
+    }
+    lines.push(...nestedSubRules);
     if (part.icon && part.element) {
       lines.push('', `.${name}Glyph {`, '  display: inline-flex;', '}');
     }
@@ -420,6 +444,10 @@ const ELEMENT_META: Record<string, { attrs: string; el: string; supportsDisabled
   textarea: { attrs: 'TextareaHTMLAttributes', el: 'HTMLTextAreaElement', supportsDisabled: true },
   select: { attrs: 'SelectHTMLAttributes', el: 'HTMLSelectElement', supportsDisabled: true },
   fieldset: { attrs: 'FieldsetHTMLAttributes', el: 'HTMLFieldSetElement', supportsDisabled: true },
+  // Plain HTMLAttributes: BlockquoteHTMLAttributes declares `cite: string`,
+  // which collides with slot props named cite (Astryx Blockquote API).
+  blockquote: { attrs: 'HTMLAttributes', el: 'HTMLQuoteElement', supportsDisabled: false },
+  code: { attrs: 'HTMLAttributes', el: 'HTMLElement', supportsDisabled: false },
 };
 
 const PARENT_PROP_REF = /^\{([a-z][\w-]*)\}$/;
@@ -554,7 +582,10 @@ function generateTsx(contract: Contract, byId: Map<string, Contract>): string {
   if (nativeDisabled) elementAttrs.push('disabled={disabled}');
   for (const p of bools) {
     if (p.name === 'disabled' && nativeDisabled) continue;
-    elementAttrs.push(`data-${p.name}={${p.bindings.code.prop} || undefined}`);
+    // data-* attributes must be lowercase — kebab-case the prop name
+    // (camelCase data attrs trigger React DOM warnings).
+    const dataName = p.name.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase();
+    elementAttrs.push(`data-${dataName}={${p.bindings.code.prop} || undefined}`);
   }
   const roleByProp = contract.semantics.roleByProp;
   let roleMapConst = '';
@@ -587,11 +618,14 @@ function generateTsx(contract: Contract, byId: Map<string, Contract>): string {
           .join('\n')}\n};\n\n`
       : '';
 
+  const NUMERIC_ATTRS = new Set(['rows', 'cols', 'tabIndex', 'colSpan', 'rowSpan']);
   const partAttrString = (part: Part): string =>
     Object.entries(part.attrs ?? {})
       .map(([attr, value]) => {
         const ref = value.match(/^\{([a-z][\w-]*)\}$/);
-        return ref ? ` ${attr}={${codePropOf(ref[1])}}` : ` ${attr}=${JSON.stringify(value)}`;
+        if (ref) return ` ${attr}={${codePropOf(ref[1])}}`;
+        if (NUMERIC_ATTRS.has(attr) && /^\d+$/.test(value)) return ` ${attr}={${value}}`;
+        return ` ${attr}=${JSON.stringify(value)}`;
       })
       .join('');
 

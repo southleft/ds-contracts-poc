@@ -1,0 +1,85 @@
+/* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/icon-button.contract.json (ds.icon-button v1.0.0)
+ * Regenerate with: npm run generate
+ */
+
+.root {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  cursor: pointer;
+  border-radius: var(--radius-control);
+}
+
+.root:focus-visible {
+  outline-style: solid;
+  outline-offset: 2px;
+}
+
+.size-sm {
+  width: var(--size-icon-button-sm);
+  height: var(--size-icon-button-sm);
+}
+
+.size-md {
+  width: var(--size-icon-button-md);
+  height: var(--size-icon-button-md);
+}
+
+.size-lg {
+  width: var(--size-icon-button-lg);
+  height: var(--size-icon-button-lg);
+}
+
+.variant-primary {
+  background-color: var(--color-action-primary-background);
+  color: var(--color-action-primary-foreground);
+}
+
+.variant-secondary {
+  background-color: var(--color-action-secondary-background);
+  color: var(--color-action-secondary-foreground);
+}
+
+.variant-ghost {
+  background-color: var(--color-action-ghost-background);
+  color: var(--color-action-ghost-foreground);
+}
+
+.variant-destructive {
+  background-color: var(--color-action-destructive-background);
+  color: var(--color-action-destructive-foreground);
+}
+
+.variant-primary:hover:not(:disabled) {
+  background-color: var(--color-action-primary-background-hover);
+}
+
+.variant-secondary:hover:not(:disabled) {
+  background-color: var(--color-action-secondary-background-hover);
+}
+
+.variant-ghost:hover:not(:disabled) {
+  background-color: var(--color-action-ghost-background-hover);
+}
+
+.variant-destructive:hover:not(:disabled) {
+  background-color: var(--color-action-destructive-background-hover);
+}
+
+.root:focus-visible {
+  outline-color: var(--color-border-focus);
+}
+
+.root:focus-visible {
+  outline-width: var(--border-width-focus);
+}
+
+.iconSlot {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}

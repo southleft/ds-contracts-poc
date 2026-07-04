@@ -195,6 +195,7 @@ export const ContractSchema = z.object({
     element: z.enum([
       'button', 'span', 'div', 'a', 'input', 'article', 'section', 'header', 'footer',
       'label', 'nav', 'hr', 'ul', 'li', 'p', 'textarea', 'select', 'fieldset',
+      'blockquote', 'code',
     ]),
     role: z.string().optional(),
     /** v4, gap G7: ARIA role driven by an enum prop (e.g. Banner: error →

@@ -1,0 +1,28 @@
+/* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/blockquote.contract.json (ds.blockquote v1.0.0)
+ * Regenerate with: npm run generate
+ */
+
+.root {
+  display: flex;
+  flex-direction: column;
+  border: 0;
+  border-left-width: var(--border-width-divider-strong);
+  border-left-color: var(--color-divider-strong);
+  padding-inline: var(--space-inset-x-md);
+  padding-block: var(--space-inset-y-md);
+  gap: var(--space-gap-sm);
+  color: var(--color-text-secondary);
+  font-family: var(--font-control-family);
+  font-size: var(--font-control-size-md);
+}
+
+.quote {
+  display: flex;
+  flex-direction: column;
+}
+
+.citation {
+  display: flex;
+  font-size: var(--font-control-size-sm);
+}

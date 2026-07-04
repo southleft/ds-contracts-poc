@@ -1,0 +1,160 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "ds.icon-button",
+  "name": "IconButton",
+  "version": "1.0.0",
+  "status": "draft",
+  "description": "A button showing only an icon, for toolbars, table rows, and compact UI. API mirrors industry convention (Astryx IconButton): the required label is the accessible name and is never rendered visibly.",
+  "semantics": {
+    "element": "button"
+  },
+  "props": [
+    {
+      "name": "variant",
+      "description": "Visual style. Ghost sits on the surface wash (transparent tokens are a documented gap).",
+      "type": {
+        "enum": [
+          "primary",
+          "secondary",
+          "ghost",
+          "destructive"
+        ]
+      },
+      "default": "secondary",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Variant",
+          "values": {
+            "primary": "Primary",
+            "secondary": "Secondary",
+            "ghost": "Ghost",
+            "destructive": "Destructive"
+          }
+        },
+        "code": {
+          "prop": "variant"
+        }
+      }
+    },
+    {
+      "name": "size",
+      "description": "Square control size.",
+      "type": {
+        "enum": [
+          "sm",
+          "md",
+          "lg"
+        ]
+      },
+      "default": "md",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Size",
+          "values": {
+            "sm": "Small",
+            "md": "Medium",
+            "lg": "Large"
+          }
+        },
+        "code": {
+          "prop": "size"
+        }
+      }
+    },
+    {
+      "name": "isDisabled",
+      "description": "Disables the button.",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Disabled"
+        },
+        "code": {
+          "prop": "isDisabled"
+        }
+      }
+    },
+    {
+      "name": "label",
+      "description": "Accessible name (aria-label). Be specific: \"Delete conversation\", not \"Delete\".",
+      "type": "text",
+      "default": "Action",
+      "required": true,
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Label"
+        },
+        "code": {
+          "prop": "label"
+        }
+      }
+    }
+  ],
+  "states": [
+    "hover",
+    "focus-visible"
+  ],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "inline-flex",
+        "direction": "row",
+        "align": "center",
+        "justify": "center"
+      },
+      "attrs": {
+        "aria-label": "{label}",
+        "type": "button"
+      },
+      "tokens": {
+        "width": "{size.icon-button.{size}}",
+        "height": "{size.icon-button.{size}}",
+        "background-color": "{color.action.{variant}.background}",
+        "color": "{color.action.{variant}.foreground}",
+        "border-radius": "{radius.control}"
+      },
+      "parts": {
+        "iconSlot": {
+          "description": "The icon. Pass an Icon-sized element; it inherits the variant's foreground color.",
+          "slot": {
+            "name": "icon",
+            "acceptsMode": "open"
+          },
+          "layout": {
+            "direction": "row",
+            "align": "center",
+            "justify": "center"
+          }
+        }
+      },
+      "states": {
+        "hover": {
+          "background-color": "{color.action.{variant}.background-hover}"
+        },
+        "focus-visible": {
+          "outline-color": "{color.border.focus}",
+          "outline-width": "{border.width.focus}"
+        }
+      }
+    }
+  },
+  "a11y": {
+    "contrast": "AA"
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": "8nim1d0IPnehMxA7B7SYxC",
+      "componentSetKey": "ba2cfd0b9f6f47a728081edaf340c37cdeb53123",
+      "nodeId": "11:378"
+    },
+    "code": {
+      "importPath": "src/components/IconButton",
+      "export": "IconButton"
+    }
+  }
+}

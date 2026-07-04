@@ -1,0 +1,85 @@
+/* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/token.contract.json (ds.token v1.0.0)
+ * Regenerate with: npm run generate
+ */
+
+.root {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  border: 0;
+  border-radius: var(--radius-100);
+  gap: var(--space-inset-y-sm);
+  padding-inline: var(--space-inset-x-xs);
+  padding-block: var(--space-inset-y-xs);
+  font-family: var(--font-control-family);
+  font-size: var(--font-badge-size);
+  font-weight: var(--font-control-weight);
+}
+
+.color-default {
+  background-color: var(--color-token-default-background);
+  color: var(--color-token-default-foreground);
+}
+
+.color-red {
+  background-color: var(--color-token-red-background);
+  color: var(--color-token-red-foreground);
+}
+
+.color-orange {
+  background-color: var(--color-token-orange-background);
+  color: var(--color-token-orange-foreground);
+}
+
+.color-yellow {
+  background-color: var(--color-token-yellow-background);
+  color: var(--color-token-yellow-foreground);
+}
+
+.color-green {
+  background-color: var(--color-token-green-background);
+  color: var(--color-token-green-foreground);
+}
+
+.color-teal {
+  background-color: var(--color-token-teal-background);
+  color: var(--color-token-teal-foreground);
+}
+
+.color-cyan {
+  background-color: var(--color-token-cyan-background);
+  color: var(--color-token-cyan-foreground);
+}
+
+.color-blue {
+  background-color: var(--color-token-blue-background);
+  color: var(--color-token-blue-foreground);
+}
+
+.color-purple {
+  background-color: var(--color-token-purple-background);
+  color: var(--color-token-purple-foreground);
+}
+
+.color-pink {
+  background-color: var(--color-token-pink-background);
+  color: var(--color-token-pink-foreground);
+}
+
+.color-gray {
+  background-color: var(--color-token-gray-background);
+  color: var(--color-token-gray-foreground);
+}
+
+.iconSlot {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.endContent {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}

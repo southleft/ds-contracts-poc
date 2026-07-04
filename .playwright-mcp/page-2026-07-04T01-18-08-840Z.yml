@@ -1,0 +1,482 @@
+- generic [ref=e3]:
+  - complementary [ref=e4]:
+    - generic [ref=e5]:
+      - link "Contract Hub" [ref=e6] [cursor=pointer]:
+        - /url: "#/"
+      - paragraph [ref=e7]: The governed source, visualized
+    - navigation "Main" [ref=e8]:
+      - link "Overview" [ref=e9] [cursor=pointer]:
+        - /url: "#/"
+      - link "Components" [ref=e10] [cursor=pointer]:
+        - /url: "#/components"
+      - link "Tokens" [ref=e11] [cursor=pointer]:
+        - /url: "#/tokens"
+      - link "Governance" [ref=e12] [cursor=pointer]:
+        - /url: "#/governance"
+      - link "Context" [ref=e13] [cursor=pointer]:
+        - /url: "#/context"
+      - link "Parity" [ref=e14] [cursor=pointer]:
+        - /url: "#/parity"
+      - link "Docs" [ref=e15] [cursor=pointer]:
+        - /url: "#/docs"
+    - generic [ref=e16]:
+      - text: ds-contracts-poc
+      - text: catalog v0.1.0
+  - generic [ref=e17]:
+    - banner [ref=e18]:
+      - generic [ref=e19]: components
+      - generic [ref=e20]:
+        - generic [ref=e21]: catalog v0.1.0 · 94e7528
+        - button "Switch to dark mode" [ref=e22]:
+          - img
+          - generic [ref=e23]: Dark
+    - main [ref=e24]:
+      - generic [ref=e25]:
+        - generic [ref=e26]:
+          - heading "Components" [level=2] [ref=e27]
+          - paragraph [ref=e28]: Every component the catalog governs. Each one is generated to code (always) and to Figma (unless the concept maps to a native canvas feature). Open one to see the contract and both surfaces mapped against it.
+        - generic [ref=e29]:
+          - link "Avatar v1.0.0 draft Represents a person or entity with initials. Non-interactive. Code ✓ Figma ✓ 1 props 0 slots" [ref=e30] [cursor=pointer]:
+            - /url: "#/components/ds.avatar"
+            - generic [ref=e31]:
+              - generic [ref=e32]:
+                - generic:
+                  - img: AB
+              - generic [ref=e33]:
+                - generic [ref=e34]:
+                  - generic [ref=e35]: Avatar
+                  - generic [ref=e36]: v1.0.0
+                  - generic [ref=e37]: draft
+                - generic [ref=e38]: Represents a person or entity with initials. Non-interactive.
+              - generic [ref=e39]:
+                - generic [ref=e40]: Code ✓
+                - generic [ref=e41]: Figma ✓
+                - generic [ref=e42]: 1 props
+                - generic [ref=e43]: 0 slots
+          - link "Badge v1.0.0 draft Communicates status or categorization at a glance. Non-interactive. Code ✓ Figma ✓ 1 props 0 slots" [ref=e44] [cursor=pointer]:
+            - /url: "#/components/ds.badge"
+            - generic [ref=e45]:
+              - generic [ref=e46]:
+                - generic:
+                  - status: Badge
+              - generic [ref=e47]:
+                - generic [ref=e48]:
+                  - generic [ref=e49]: Badge
+                  - generic [ref=e50]: v1.0.0
+                  - generic [ref=e51]: draft
+                - generic [ref=e52]: Communicates status or categorization at a glance. Non-interactive.
+              - generic [ref=e53]:
+                - generic [ref=e54]: Code ✓
+                - generic [ref=e55]: Figma ✓
+                - generic [ref=e56]: 1 props
+                - generic [ref=e57]: 0 slots
+          - 'link "Banner v1.0.0 draft Persistent inline notification for page- or section-level feedback. API mirrors industry convention (Astryx Banner): status drives color, icon, and ARIA role; dismissable banners expose a close affordance; endContent carries actions. Code ✓ Figma ✓ 5 props 1 slots" [ref=e58] [cursor=pointer]':
+            - /url: "#/components/ds.banner"
+            - generic [ref=e59]:
+              - generic [ref=e60]:
+                - generic:
+                  - status:
+                    - generic:
+                      - img
+                    - generic:
+                      - generic: Scheduled maintenance
+                      - generic: Contract sync pauses Saturday 02:00–03:00 UTC while tokens republish.
+                    - generic:
+                      - generic:
+                        - button: Learn more
+              - generic [ref=e61]:
+                - generic [ref=e62]:
+                  - generic [ref=e63]: Banner
+                  - generic [ref=e64]: v1.0.0
+                  - generic [ref=e65]: draft
+                - generic [ref=e66]: "Persistent inline notification for page- or section-level feedback. API mirrors industry convention (Astryx Banner): status drives color, icon, and ARIA role; dismissable banners expose a close affordance; endContent carries actions."
+              - generic [ref=e67]:
+                - generic [ref=e68]: Code ✓
+                - generic [ref=e69]: Figma ✓
+                - generic [ref=e70]: 5 props
+                - generic [ref=e71]: 1 slots
+          - 'link "Blockquote v1.0.0 draft Styled quotation block with an accent left border for quotes, testimonials, and excerpts. API mirrors industry convention (Astryx Blockquote): content plus an optional cite slot rendered in semantic footer/cite markup. Code ✓ Figma ✓ 0 props 2 slots" [ref=e72] [cursor=pointer]':
+            - /url: "#/components/ds.blockquote"
+            - generic [ref=e73]:
+              - generic [ref=e74]:
+                - generic:
+                  - blockquote:
+                    - generic: The contract is the source of truth; both surfaces are renderers.
+                    - generic: Design Systems Handbook
+              - generic [ref=e75]:
+                - generic [ref=e76]:
+                  - generic [ref=e77]: Blockquote
+                  - generic [ref=e78]: v1.0.0
+                  - generic [ref=e79]: draft
+                - generic [ref=e80]: "Styled quotation block with an accent left border for quotes, testimonials, and excerpts. API mirrors industry convention (Astryx Blockquote): content plus an optional cite slot rendered in semantic footer/cite markup."
+              - generic [ref=e81]:
+                - generic [ref=e82]: Code ✓
+                - generic [ref=e83]: Figma ✓
+                - generic [ref=e84]: 0 props
+                - generic [ref=e85]: 2 slots
+          - link "Button v1.2.0 draft Triggers an action or event. Use one primary button per context. Code ✓ Figma ✓ 4 props 0 slots" [ref=e86] [cursor=pointer]:
+            - /url: "#/components/ds.button"
+            - generic [ref=e87]:
+              - generic [ref=e88]:
+                - generic:
+                  - button: Button
+              - generic [ref=e89]:
+                - generic [ref=e90]:
+                  - generic [ref=e91]: Button
+                  - generic [ref=e92]: v1.2.0
+                  - generic [ref=e93]: draft
+                - generic [ref=e94]: Triggers an action or event. Use one primary button per context.
+              - generic [ref=e95]:
+                - generic [ref=e96]: Code ✓
+                - generic [ref=e97]: Figma ✓
+                - generic [ref=e98]: 4 props
+                - generic [ref=e99]: 0 slots
+          - link "Card v1.1.0 draft Groups related content behind one subject. Composes an Avatar, a bound title, a default body slot, and a constrained actions slot. Code ✓ Figma ✓ 1 props 2 slots" [ref=e100] [cursor=pointer]:
+            - /url: "#/components/ds.card"
+            - generic [ref=e101]:
+              - generic [ref=e102]:
+                - generic:
+                  - article:
+                    - generic:
+                      - img: AB
+                      - generic: Card title
+                    - generic: Revenue is tracking 12% ahead of plan. Two accounts need follow-up before Friday.
+                    - generic:
+                      - button: View report
+              - generic [ref=e103]:
+                - generic [ref=e104]:
+                  - generic [ref=e105]: Card
+                  - generic [ref=e106]: v1.1.0
+                  - generic [ref=e107]: draft
+                - generic [ref=e108]: Groups related content behind one subject. Composes an Avatar, a bound title, a default body slot, and a constrained actions slot.
+              - generic [ref=e109]:
+                - generic [ref=e110]: Code ✓
+                - generic [ref=e111]: Figma ✓
+                - generic [ref=e112]: 1 props
+                - generic [ref=e113]: 2 slots
+          - 'link "Checkbox v1.0.0 draft Toggles a single on/off value — settings, terms acceptance, opt-ins. API mirrors industry convention (Astryx CheckboxInput): checked, unchecked, and indeterminate are prop-driven appearance states. Code ✓ Figma ✓ 4 props 0 slots" [ref=e114] [cursor=pointer]':
+            - /url: "#/components/ds.checkbox"
+            - generic [ref=e115]:
+              - generic [ref=e116]:
+                - generic:
+                  - generic:
+                    - generic:
+                      - generic: Email me weekly summaries
+                      - generic: Sent every Monday morning.
+              - generic [ref=e117]:
+                - generic [ref=e118]:
+                  - generic [ref=e119]: Checkbox
+                  - generic [ref=e120]: v1.0.0
+                  - generic [ref=e121]: draft
+                - generic [ref=e122]: "Toggles a single on/off value — settings, terms acceptance, opt-ins. API mirrors industry convention (Astryx CheckboxInput): checked, unchecked, and indeterminate are prop-driven appearance states."
+              - generic [ref=e123]:
+                - generic [ref=e124]: Code ✓
+                - generic [ref=e125]: Figma ✓
+                - generic [ref=e126]: 4 props
+                - generic [ref=e127]: 0 slots
+          - link "Code v1.0.0 draft Inline code element with monospace font and muted background. API mirrors industry convention (Astryx Code); block code is a separate component family. Code ✓ Figma ✓ 0 props 0 slots" [ref=e128] [cursor=pointer]:
+            - /url: "#/components/ds.code"
+            - generic [ref=e129]:
+              - generic [ref=e130]:
+                - generic:
+                  - code: npm run parity
+              - generic [ref=e131]:
+                - generic [ref=e132]:
+                  - generic [ref=e133]: Code
+                  - generic [ref=e134]: v1.0.0
+                  - generic [ref=e135]: draft
+                - generic [ref=e136]: Inline code element with monospace font and muted background. API mirrors industry convention (Astryx Code); block code is a separate component family.
+              - generic [ref=e137]:
+                - generic [ref=e138]: Code ✓
+                - generic [ref=e139]: Figma ✓
+                - generic [ref=e140]: 0 props
+                - generic [ref=e141]: 0 slots
+          - link "Divider v1.0.0 draft Visual separator dividing content into distinct sections. API mirrors industry convention (Astryx Divider) at the variant level; orientation requires per-enum-value property overrides — a documented schema gap. Code ✓ Figma ✓ 1 props 1 slots" [ref=e142] [cursor=pointer]:
+            - /url: "#/components/ds.divider"
+            - generic [ref=e143]:
+              - generic [ref=e144]:
+                - generic:
+                  - generic:
+                    - separator
+              - generic [ref=e145]:
+                - generic [ref=e146]:
+                  - generic [ref=e147]: Divider
+                  - generic [ref=e148]: v1.0.0
+                  - generic [ref=e149]: draft
+                - generic [ref=e150]: Visual separator dividing content into distinct sections. API mirrors industry convention (Astryx Divider) at the variant level; orientation requires per-enum-value property overrides — a documented schema gap.
+              - generic [ref=e151]:
+                - generic [ref=e152]: Code ✓
+                - generic [ref=e153]: Figma ✓
+                - generic [ref=e154]: 1 props
+                - generic [ref=e155]: 1 slots
+          - 'link "EmptyState v1.0.0 draft Placeholder for a content area with no data — empty lists, zero results, first-time setup. API mirrors industry convention (Astryx EmptyState): always a title and a next step; the icon is decorative. Code ✓ Figma ✓ 2 props 2 slots" [ref=e156] [cursor=pointer]':
+            - /url: "#/components/ds.empty-state"
+            - generic [ref=e157]:
+              - generic [ref=e158]:
+                - generic:
+                  - generic:
+                    - generic: No reports yet
+                    - generic: Run your first parity check to see results here.
+                    - generic:
+                      - button: Run check
+              - generic [ref=e159]:
+                - generic [ref=e160]:
+                  - generic [ref=e161]: EmptyState
+                  - generic [ref=e162]: v1.0.0
+                  - generic [ref=e163]: draft
+                - generic [ref=e164]: "Placeholder for a content area with no data — empty lists, zero results, first-time setup. API mirrors industry convention (Astryx EmptyState): always a title and a next step; the icon is decorative."
+              - generic [ref=e165]:
+                - generic [ref=e166]: Code ✓
+                - generic [ref=e167]: Figma ✓
+                - generic [ref=e168]: 2 props
+                - generic [ref=e169]: 2 slots
+          - 'link "IconButton v1.0.0 draft A button showing only an icon, for toolbars, table rows, and compact UI. API mirrors industry convention (Astryx IconButton): the required label is the accessible name and is never rendered visibly. Code ✓ Figma ✓ 4 props 1 slots" [ref=e170] [cursor=pointer]':
+            - /url: "#/components/ds.icon-button"
+            - generic [ref=e171]:
+              - generic [ref=e172]:
+                - generic:
+                  - button:
+                    - generic:
+                      - img
+              - generic [ref=e173]:
+                - generic [ref=e174]:
+                  - generic [ref=e175]: IconButton
+                  - generic [ref=e176]: v1.0.0
+                  - generic [ref=e177]: draft
+                - generic [ref=e178]: "A button showing only an icon, for toolbars, table rows, and compact UI. API mirrors industry convention (Astryx IconButton): the required label is the accessible name and is never rendered visibly."
+              - generic [ref=e179]:
+                - generic [ref=e180]: Code ✓
+                - generic [ref=e181]: Figma ✓
+                - generic [ref=e182]: 4 props
+                - generic [ref=e183]: 1 slots
+          - 'link "Inline v1.0.0 draft Horizontal layout primitive — lays children out in a row with a token-governed gap, vertically centered. Code ✓ Figma: native auto-layout 1 props 1 slots" [ref=e184] [cursor=pointer]':
+            - /url: "#/components/ds.inline"
+            - generic [ref=e185]:
+              - generic [ref=e186]:
+                - generic:
+                  - generic:
+                    - status: Info
+                    - status: Success
+                    - status: Warning
+              - generic [ref=e187]:
+                - generic [ref=e188]:
+                  - generic [ref=e189]: Inline
+                  - generic [ref=e190]: v1.0.0
+                  - generic [ref=e191]: draft
+                - generic [ref=e192]: Horizontal layout primitive — lays children out in a row with a token-governed gap, vertically centered.
+              - generic [ref=e193]:
+                - generic [ref=e194]: Code ✓
+                - generic [ref=e195]: "Figma: native auto-layout"
+                - generic [ref=e196]: 1 props
+                - generic [ref=e197]: 1 slots
+          - 'link "Stack v1.0.0 draft Vertical layout primitive — stacks children with a token-governed gap. Screens compose from Stack/Inline instead of raw styled divs. Code ✓ Figma: native auto-layout 1 props 1 slots" [ref=e198] [cursor=pointer]':
+            - /url: "#/components/ds.stack"
+            - generic [ref=e199]:
+              - generic [ref=e200]:
+                - generic:
+                  - generic:
+                    - status: Info
+                    - status: Success
+                    - status: Warning
+              - generic [ref=e201]:
+                - generic [ref=e202]:
+                  - generic [ref=e203]: Stack
+                  - generic [ref=e204]: v1.0.0
+                  - generic [ref=e205]: draft
+                - generic [ref=e206]: Vertical layout primitive — stacks children with a token-governed gap. Screens compose from Stack/Inline instead of raw styled divs.
+              - generic [ref=e207]:
+                - generic [ref=e208]: Code ✓
+                - generic [ref=e209]: "Figma: native auto-layout"
+                - generic [ref=e210]: 1 props
+                - generic [ref=e211]: 1 slots
+          - 'link "StatusDot v1.0.0 draft Small colored dot communicating status — presence, severity, activity. API mirrors industry convention (Astryx StatusDot): five semantic variants with a required accessible label. Code ✓ Figma ✓ 2 props 1 slots" [ref=e212] [cursor=pointer]':
+            - /url: "#/components/ds.status-dot"
+            - generic [ref=e213]:
+              - generic [ref=e214]:
+                - generic:
+                  - generic:
+                    - img
+                    - generic: Online
+              - generic [ref=e215]:
+                - generic [ref=e216]:
+                  - generic [ref=e217]: StatusDot
+                  - generic [ref=e218]: v1.0.0
+                  - generic [ref=e219]: draft
+                - generic [ref=e220]: "Small colored dot communicating status — presence, severity, activity. API mirrors industry convention (Astryx StatusDot): five semantic variants with a required accessible label."
+              - generic [ref=e221]:
+                - generic [ref=e222]: Code ✓
+                - generic [ref=e223]: Figma ✓
+                - generic [ref=e224]: 2 props
+                - generic [ref=e225]: 1 slots
+          - link "TableCell v1.1.0 draft A single data cell in a table row. Code ✓ Figma ✓ 1 props 0 slots" [ref=e226] [cursor=pointer]:
+            - /url: "#/components/ds.table-cell"
+            - generic [ref=e227]:
+              - generic [ref=e228]:
+                - generic:
+                  - cell: Cell
+              - generic [ref=e229]:
+                - generic [ref=e230]:
+                  - generic [ref=e231]: TableCell
+                  - generic [ref=e232]: v1.1.0
+                  - generic [ref=e233]: draft
+                - generic [ref=e234]: A single data cell in a table row.
+              - generic [ref=e235]:
+                - generic [ref=e236]: Code ✓
+                - generic [ref=e237]: Figma ✓
+                - generic [ref=e238]: 1 props
+                - generic [ref=e239]: 0 slots
+          - link "TableHeaderCell v1.1.0 draft A column header cell. Code ✓ Figma ✓ 1 props 0 slots" [ref=e240] [cursor=pointer]:
+            - /url: "#/components/ds.table-header-cell"
+            - generic [ref=e241]:
+              - generic [ref=e242]:
+                - generic:
+                  - columnheader: Header
+              - generic [ref=e243]:
+                - generic [ref=e244]:
+                  - generic [ref=e245]: TableHeaderCell
+                  - generic [ref=e246]: v1.1.0
+                  - generic [ref=e247]: draft
+                - generic [ref=e248]: A column header cell.
+              - generic [ref=e249]:
+                - generic [ref=e250]: Code ✓
+                - generic [ref=e251]: Figma ✓
+                - generic [ref=e252]: 1 props
+                - generic [ref=e253]: 0 slots
+          - link "TableRow v1.1.0 draft A selectable row of table cells. Code ✓ Figma ✓ 1 props 1 slots" [ref=e254] [cursor=pointer]:
+            - /url: "#/components/ds.table-row"
+            - generic [ref=e255]:
+              - generic [ref=e256]:
+                - generic:
+                  - row:
+                    - generic:
+                      - cell: Jordan Reyes
+                      - cell: Engineer
+                      - cell: Active
+              - generic [ref=e257]:
+                - generic [ref=e258]:
+                  - generic [ref=e259]: TableRow
+                  - generic [ref=e260]: v1.1.0
+                  - generic [ref=e261]: draft
+                - generic [ref=e262]: A selectable row of table cells.
+              - generic [ref=e263]:
+                - generic [ref=e264]: Code ✓
+                - generic [ref=e265]: Figma ✓
+                - generic [ref=e266]: 1 props
+                - generic [ref=e267]: 1 slots
+          - link "Table v1.1.0 draft Structured data in rows and columns. Composes header cells (with the Table's density mapped into them), and a body slot of rows. Code ✓ Figma ✓ 1 props 1 slots" [ref=e268] [cursor=pointer]:
+            - /url: "#/components/ds.table"
+            - generic [ref=e269]:
+              - generic [ref=e270]:
+                - generic:
+                  - table:
+                    - generic:
+                      - columnheader: Name
+                      - columnheader: Role
+                      - columnheader: Status
+                    - generic:
+                      - row:
+                        - generic:
+                          - cell: Jordan Reyes
+                          - cell: Engineer
+                          - cell: Active
+                      - row:
+                        - generic:
+                          - cell: Priya Nair
+                          - cell: Design
+                          - cell: Active
+              - generic [ref=e271]:
+                - generic [ref=e272]:
+                  - generic [ref=e273]: Table
+                  - generic [ref=e274]: v1.1.0
+                  - generic [ref=e275]: draft
+                - generic [ref=e276]: Structured data in rows and columns. Composes header cells (with the Table's density mapped into them), and a body slot of rows.
+              - generic [ref=e277]:
+                - generic [ref=e278]: Code ✓
+                - generic [ref=e279]: Figma ✓
+                - generic [ref=e280]: 1 props
+                - generic [ref=e281]: 1 slots
+          - link "TextArea v1.0.0 draft Multi-line text input for longer-form content — comments, descriptions, messages. API mirrors industry convention (Astryx TextArea); wrapping-label anatomy gives implicit association. Code ✓ Figma ✓ 5 props 0 slots" [ref=e282] [cursor=pointer]:
+            - /url: "#/components/ds.text-area"
+            - generic [ref=e283]:
+              - generic [ref=e284]:
+                - generic:
+                  - generic:
+                    - generic:
+                      - generic: Feedback
+                    - generic: Helper text that explains the expected content.
+                    - textbox:
+                      - /placeholder: Write something…
+              - generic [ref=e285]:
+                - generic [ref=e286]:
+                  - generic [ref=e287]: TextArea
+                  - generic [ref=e288]: v1.0.0
+                  - generic [ref=e289]: draft
+                - generic [ref=e290]: Multi-line text input for longer-form content — comments, descriptions, messages. API mirrors industry convention (Astryx TextArea); wrapping-label anatomy gives implicit association.
+              - generic [ref=e291]:
+                - generic [ref=e292]: Code ✓
+                - generic [ref=e293]: Figma ✓
+                - generic [ref=e294]: 5 props
+                - generic [ref=e295]: 0 slots
+          - 'link "TextField v1.0.0 draft Single-line text input for short-form values — names, emails, search queries. API mirrors industry convention (Astryx TextInput): required label, description, size scale. The wrapping-label anatomy gives implicit label association. Code ✓ Figma ✓ 6 props 0 slots" [ref=e296] [cursor=pointer]':
+            - /url: "#/components/ds.text-field"
+            - generic [ref=e297]:
+              - generic [ref=e298]:
+                - generic:
+                  - generic:
+                    - generic:
+                      - generic: Email address
+                    - generic: Helper text that explains the expected value.
+                    - textbox:
+                      - /placeholder: Enter a value…
+              - generic [ref=e299]:
+                - generic [ref=e300]:
+                  - generic [ref=e301]: TextField
+                  - generic [ref=e302]: v1.0.0
+                  - generic [ref=e303]: draft
+                - generic [ref=e304]: "Single-line text input for short-form values — names, emails, search queries. API mirrors industry convention (Astryx TextInput): required label, description, size scale. The wrapping-label anatomy gives implicit label association."
+              - generic [ref=e305]:
+                - generic [ref=e306]: Code ✓
+                - generic [ref=e307]: Figma ✓
+                - generic [ref=e308]: 6 props
+                - generic [ref=e309]: 0 slots
+          - 'link "Toast v1.0.0 draft Brief non-blocking notification confirming an action. API mirrors industry convention (Astryx Toast): the visual element — positioning, stacking, and auto-dismiss belong to the behavior layer and are a declared boundary. Code ✓ Figma ✓ 1 props 2 slots" [ref=e310] [cursor=pointer]':
+            - /url: "#/components/ds.toast"
+            - generic [ref=e311]:
+              - generic [ref=e312]:
+                - generic:
+                  - status:
+                    - generic: Contract v1.1.0 published.
+                    - generic:
+                      - button: Undo
+              - generic [ref=e313]:
+                - generic [ref=e314]:
+                  - generic [ref=e315]: Toast
+                  - generic [ref=e316]: v1.0.0
+                  - generic [ref=e317]: draft
+                - generic [ref=e318]: "Brief non-blocking notification confirming an action. API mirrors industry convention (Astryx Toast): the visual element — positioning, stacking, and auto-dismiss belong to the behavior layer and are a declared boundary."
+              - generic [ref=e319]:
+                - generic [ref=e320]: Code ✓
+                - generic [ref=e321]: Figma ✓
+                - generic [ref=e322]: 1 props
+                - generic [ref=e323]: 2 slots
+          - 'link "Token v1.0.0 draft Small inline element for discrete associated data — tags, categories, active filters. API mirrors industry convention (Astryx Token): 11-color vocabulary with size scale; removal and click behavior are a declared boundary. Code ✓ Figma ✓ 4 props 2 slots" [ref=e324] [cursor=pointer]':
+            - /url: "#/components/ds.token"
+            - generic [ref=e325]:
+              - generic [ref=e326]:
+                - generic:
+                  - generic:
+                    - generic: design-tokens
+              - generic [ref=e327]:
+                - generic [ref=e328]:
+                  - generic [ref=e329]: Token
+                  - generic [ref=e330]: v1.0.0
+                  - generic [ref=e331]: draft
+                - generic [ref=e332]: "Small inline element for discrete associated data — tags, categories, active filters. API mirrors industry convention (Astryx Token): 11-color vocabulary with size scale; removal and click behavior are a declared boundary."
+              - generic [ref=e333]:
+                - generic [ref=e334]: Code ✓
+                - generic [ref=e335]: Figma ✓
+                - generic [ref=e336]: 4 props
+                - generic [ref=e337]: 2 slots
+        - paragraph [ref=e338]:
+          - text: "source:"
+          - code [ref=e339]: catalog/catalog.json

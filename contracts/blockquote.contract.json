@@ -1,0 +1,69 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "ds.blockquote",
+  "name": "Blockquote",
+  "version": "1.0.0",
+  "status": "draft",
+  "description": "Styled quotation block with an accent left border for quotes, testimonials, and excerpts. API mirrors industry convention (Astryx Blockquote): content plus an optional cite slot rendered in semantic footer/cite markup.",
+  "semantics": {
+    "element": "blockquote"
+  },
+  "props": [],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "flex",
+        "direction": "column"
+      },
+      "tokens": {
+        "border-left-width": "{border.width.divider.strong}",
+        "border-left-color": "{color.divider.strong}",
+        "padding-inline": "{space.inset-x.md}",
+        "padding-block": "{space.inset-y.md}",
+        "gap": "{space.gap.sm}",
+        "color": "{color.text.secondary}",
+        "font-family": "{font.control.family}",
+        "font-size": "{font.control.size.md}"
+      },
+      "parts": {
+        "quote": {
+          "description": "The quoted content.",
+          "slot": {
+            "name": "children",
+            "acceptsMode": "open"
+          },
+          "layout": {
+            "direction": "column"
+          }
+        },
+        "citation": {
+          "description": "Attribution, rendered in a semantic footer.",
+          "element": "footer",
+          "slot": {
+            "name": "cite",
+            "acceptsMode": "open"
+          },
+          "optional": true,
+          "tokens": {
+            "font-size": "{font.control.size.sm}"
+          }
+        }
+      }
+    }
+  },
+  "a11y": {
+    "contrast": "AA"
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": "8nim1d0IPnehMxA7B7SYxC",
+      "componentSetKey": "b6dd9d18639b0b053e55d307b2a8dbf1d4af3cef",
+      "nodeId": "11:270"
+    },
+    "code": {
+      "importPath": "src/components/Blockquote",
+      "export": "Blockquote"
+    }
+  }
+}

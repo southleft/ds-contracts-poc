@@ -1,0 +1,108 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "ds.toast",
+  "name": "Toast",
+  "version": "1.0.0",
+  "status": "draft",
+  "description": "Brief non-blocking notification confirming an action. API mirrors industry convention (Astryx Toast): the visual element — positioning, stacking, and auto-dismiss belong to the behavior layer and are a declared boundary.",
+  "semantics": {
+    "element": "div",
+    "roleByProp": {
+      "prop": "type",
+      "map": {
+        "info": "status",
+        "error": "alert"
+      }
+    }
+  },
+  "props": [
+    {
+      "name": "type",
+      "description": "Info confirms; error persists until dismissed (behavior layer).",
+      "type": {
+        "enum": [
+          "info",
+          "error"
+        ]
+      },
+      "default": "info",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Type",
+          "values": {
+            "info": "Info",
+            "error": "Error"
+          }
+        },
+        "code": {
+          "prop": "type"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "flex",
+        "direction": "row",
+        "align": "center"
+      },
+      "tokens": {
+        "max-width": "{size.card.width}",
+        "background-color": "{color.toast.{type}.background}",
+        "color": "{color.toast.{type}.foreground}",
+        "border-radius": "{radius.control}",
+        "gap": "{space.gap.sm}",
+        "padding-inline": "{space.inset-x.md}",
+        "padding-block": "{space.inset-y.md}",
+        "font-family": "{font.control.family}",
+        "font-size": "{font.control.size.sm}"
+      },
+      "parts": {
+        "body": {
+          "description": "Primary message content.",
+          "slot": {
+            "name": "children",
+            "acceptsMode": "open"
+          },
+          "layout": {
+            "direction": "row",
+            "align": "center",
+            "grow": true
+          }
+        },
+        "endContent": {
+          "description": "Trailing content — an Undo button, a link.",
+          "slot": {
+            "name": "endContent",
+            "accepts": [
+              "ds.button"
+            ],
+            "acceptsMode": "prefer"
+          },
+          "optional": true,
+          "layout": {
+            "direction": "row",
+            "align": "center"
+          }
+        }
+      }
+    }
+  },
+  "a11y": {
+    "contrast": "AA"
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": "8nim1d0IPnehMxA7B7SYxC",
+      "componentSetKey": "0abc553b16f20807f50d984a41dc6cb936958a93",
+      "nodeId": "11:461"
+    },
+    "code": {
+      "importPath": "src/components/Toast",
+      "export": "Toast"
+    }
+  }
+}

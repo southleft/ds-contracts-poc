@@ -4,6 +4,7 @@ const SET_NAME = "Badge";
 const DESCRIPTION = "Communicates status or categorization at a glance. Non-interactive. — governed by contract ds.badge v1.0.0";
 const IS_SET = true;
 const BOOL_PROPS = [];
+const TEXT_PROPS = [];
 const FONT_STYLES = ["Medium"];
 const VARIANTS = [
   {
@@ -408,6 +409,9 @@ for (const b of built) {
   const boolKeys = {};
   for (const bp of BOOL_PROPS) {
     boolKeys[bp.property] = b.comp.addComponentProperty(bp.property, 'BOOLEAN', bp.default);
+  }
+  for (const tp of TEXT_PROPS) {
+    b.comp.addComponentProperty(tp.property, 'TEXT', tp.default);
   }
   // visibleWhen parts: visibility follows the BOOLEAN property, and the
   // canvas default matches the contract default.

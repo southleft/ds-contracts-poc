@@ -1,0 +1,195 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "ds.checkbox",
+  "name": "Checkbox",
+  "version": "1.0.0",
+  "status": "draft",
+  "description": "Toggles a single on/off value — settings, terms acceptance, opt-ins. API mirrors industry convention (Astryx CheckboxInput): checked, unchecked, and indeterminate are prop-driven appearance states.",
+  "semantics": {
+    "element": "label"
+  },
+  "props": [
+    {
+      "name": "value",
+      "description": "Checked, unchecked, or indeterminate (partial selection in a group).",
+      "type": {
+        "enum": [
+          "unchecked",
+          "checked",
+          "indeterminate"
+        ]
+      },
+      "default": "unchecked",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Value",
+          "values": {
+            "unchecked": "Unchecked",
+            "checked": "Checked",
+            "indeterminate": "Indeterminate"
+          }
+        },
+        "code": {
+          "prop": "value"
+        }
+      }
+    },
+    {
+      "name": "size",
+      "description": "Control size.",
+      "type": {
+        "enum": [
+          "sm",
+          "md"
+        ]
+      },
+      "default": "md",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Size",
+          "values": {
+            "sm": "Small",
+            "md": "Medium"
+          }
+        },
+        "code": {
+          "prop": "size"
+        }
+      }
+    },
+    {
+      "name": "label",
+      "description": "Always rendered — users must know what they are toggling.",
+      "type": "text",
+      "default": "Checkbox label",
+      "required": true,
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Label"
+        },
+        "code": {
+          "prop": "label"
+        }
+      }
+    },
+    {
+      "name": "description",
+      "description": "Secondary text below the label.",
+      "type": "text",
+      "default": "Supporting detail for this option.",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Description"
+        },
+        "code": {
+          "prop": "description"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "flex",
+        "direction": "row",
+        "align": "start"
+      },
+      "tokens": {
+        "gap": "{space.gap.sm}",
+        "font-family": "{font.control.family}",
+        "color": "{color.surface.foreground}"
+      },
+      "parts": {
+        "box": {
+          "description": "The visual checkbox. Fill and glyph follow the value prop.",
+          "layout": {
+            "direction": "row",
+            "align": "center",
+            "justify": "center"
+          },
+          "tokens": {
+            "width": "{size.checkbox.{size}}",
+            "height": "{size.checkbox.{size}}",
+            "background-color": "{color.checkbox.{value}.background}",
+            "border-color": "{color.checkbox.{value}.border}",
+            "border-width": "{border-width.100}",
+            "border-radius": "{radius.100}",
+            "color": "{color.checkbox.icon}"
+          },
+          "parts": {
+            "checkGlyph": {
+              "icon": {
+                "asset": "check",
+                "size": 12
+              },
+              "visibleWhen": {
+                "prop": "value",
+                "equals": "checked"
+              }
+            },
+            "dashGlyph": {
+              "icon": {
+                "asset": "dash",
+                "size": 12
+              },
+              "visibleWhen": {
+                "prop": "value",
+                "equals": "indeterminate"
+              }
+            }
+          }
+        },
+        "textCol": {
+          "layout": {
+            "direction": "column",
+            "grow": true
+          },
+          "tokens": {
+            "gap": "{space.inset-y.xs}"
+          },
+          "parts": {
+            "labelText": {
+              "element": "span",
+              "content": {
+                "prop": "label"
+              },
+              "tokens": {
+                "font-size": "{font.control.size.sm}",
+                "font-weight": "{font.control.weight}"
+              }
+            },
+            "descriptionText": {
+              "element": "span",
+              "content": {
+                "prop": "description"
+              },
+              "tokens": {
+                "font-size": "{font.control.size.sm}",
+                "color": "{color.text.secondary}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "a11y": {
+    "contrast": "AA"
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": "8nim1d0IPnehMxA7B7SYxC",
+      "componentSetKey": "9bc54e5a3f7c074b9ed016dfac8edff95ec45e23",
+      "nodeId": "11:315"
+    },
+    "code": {
+      "importPath": "src/components/Checkbox",
+      "export": "Checkbox"
+    }
+  }
+}

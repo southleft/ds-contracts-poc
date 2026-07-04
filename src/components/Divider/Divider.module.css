@@ -1,0 +1,24 @@
+/* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/divider.contract.json (ds.divider v1.0.0)
+ * Regenerate with: npm run generate
+ */
+
+.root {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  width: 100%;
+  min-width: fit-content;
+  max-width: var(--size-divider-length);
+}
+
+.variant-subtle {
+  background-color: var(--color-divider-subtle);
+  height: var(--border-width-divider-subtle);
+}
+
+.variant-strong {
+  background-color: var(--color-divider-strong);
+  height: var(--border-width-divider-strong);
+}

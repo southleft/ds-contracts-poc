@@ -1,0 +1,191 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "ds.text-area",
+  "name": "TextArea",
+  "version": "1.0.0",
+  "status": "draft",
+  "description": "Multi-line text input for longer-form content — comments, descriptions, messages. API mirrors industry convention (Astryx TextArea); wrapping-label anatomy gives implicit association.",
+  "semantics": {
+    "element": "label"
+  },
+  "props": [
+    {
+      "name": "size",
+      "description": "Control size scale (affects padding and text size).",
+      "type": {
+        "enum": [
+          "sm",
+          "md",
+          "lg"
+        ]
+      },
+      "default": "md",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Size",
+          "values": {
+            "sm": "Small",
+            "md": "Medium",
+            "lg": "Large"
+          }
+        },
+        "code": {
+          "prop": "size"
+        }
+      }
+    },
+    {
+      "name": "isRequired",
+      "description": "Marks the field required.",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Required"
+        },
+        "code": {
+          "prop": "isRequired"
+        }
+      }
+    },
+    {
+      "name": "label",
+      "description": "Field label — always rendered.",
+      "type": "text",
+      "default": "Label",
+      "required": true,
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Label"
+        },
+        "code": {
+          "prop": "label"
+        }
+      }
+    },
+    {
+      "name": "description",
+      "description": "Helper text between the label and the textarea.",
+      "type": "text",
+      "default": "Helper text that explains the expected content.",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Description"
+        },
+        "code": {
+          "prop": "description"
+        }
+      }
+    },
+    {
+      "name": "placeholder",
+      "description": "Hint shown when empty.",
+      "type": "text",
+      "default": "Write something…",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Placeholder"
+        },
+        "code": {
+          "prop": "placeholder"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "flex",
+        "direction": "column",
+        "align": "stretch"
+      },
+      "tokens": {
+        "max-width": "{size.card.width}",
+        "gap": "{space.inset-y.sm}",
+        "font-family": "{font.control.family}",
+        "color": "{color.surface.foreground}"
+      },
+      "parts": {
+        "labelRow": {
+          "layout": {
+            "direction": "row",
+            "align": "center"
+          },
+          "tokens": {
+            "gap": "{space.inset-y.sm}",
+            "font-size": "{font.control.size.sm}",
+            "font-weight": "{font.control.weight}"
+          },
+          "parts": {
+            "labelText": {
+              "element": "span",
+              "content": {
+                "prop": "label"
+              }
+            },
+            "requiredMark": {
+              "icon": {
+                "asset": "asterisk",
+                "size": 10
+              },
+              "visibleWhen": {
+                "prop": "isRequired"
+              },
+              "tokens": {
+                "color": "{color.action.danger.background}"
+              }
+            }
+          }
+        },
+        "descriptionText": {
+          "element": "span",
+          "content": {
+            "prop": "description"
+          },
+          "tokens": {
+            "font-size": "{font.control.size.sm}",
+            "color": "{color.text.secondary}"
+          }
+        },
+        "input": {
+          "element": "textarea",
+          "attrs": {
+            "rows": "3",
+            "placeholder": "{placeholder}"
+          },
+          "tokens": {
+            "background-color": "{color.input.background}",
+            "border-color": "{color.border.subtle}",
+            "border-width": "{border-width.100}",
+            "border-radius": "{radius.control}",
+            "padding-inline": "{space.inset-x.sm}",
+            "padding-block": "{space.inset-y.{size}}",
+            "font-size": "{font.control.size.{size}}",
+            "font-family": "{font.control.family}",
+            "color": "{color.surface.foreground}"
+          }
+        }
+      }
+    }
+  },
+  "a11y": {
+    "contrast": "AA"
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": "8nim1d0IPnehMxA7B7SYxC",
+      "componentSetKey": "2cb4581bfc1e7d9b0b5e32260d783accaea973ef",
+      "nodeId": "11:415"
+    },
+    "code": {
+      "importPath": "src/components/TextArea",
+      "export": "TextArea"
+    }
+  }
+}

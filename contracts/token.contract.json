@@ -1,0 +1,182 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "ds.token",
+  "name": "Token",
+  "version": "1.0.0",
+  "status": "draft",
+  "description": "Small inline element for discrete associated data — tags, categories, active filters. API mirrors industry convention (Astryx Token): 11-color vocabulary with size scale; removal and click behavior are a declared boundary.",
+  "semantics": {
+    "element": "span"
+  },
+  "props": [
+    {
+      "name": "color",
+      "description": "Color variant.",
+      "type": {
+        "enum": [
+          "default",
+          "red",
+          "orange",
+          "yellow",
+          "green",
+          "teal",
+          "cyan",
+          "blue",
+          "purple",
+          "pink",
+          "gray"
+        ]
+      },
+      "default": "default",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Color",
+          "values": {
+            "default": "Default",
+            "red": "Red",
+            "orange": "Orange",
+            "yellow": "Yellow",
+            "green": "Green",
+            "teal": "Teal",
+            "cyan": "Cyan",
+            "blue": "Blue",
+            "purple": "Purple",
+            "pink": "Pink",
+            "gray": "Gray"
+          }
+        },
+        "code": {
+          "prop": "color"
+        }
+      }
+    },
+    {
+      "name": "size",
+      "description": "Token size.",
+      "type": {
+        "enum": [
+          "sm",
+          "md",
+          "lg"
+        ]
+      },
+      "default": "md",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Size",
+          "values": {
+            "sm": "Small",
+            "md": "Medium",
+            "lg": "Large"
+          }
+        },
+        "code": {
+          "prop": "size"
+        }
+      }
+    },
+    {
+      "name": "isDisabled",
+      "description": "Reduces opacity and blocks interactions.",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Disabled"
+        },
+        "code": {
+          "prop": "isDisabled"
+        }
+      }
+    },
+    {
+      "name": "label",
+      "description": "Text label inside the token.",
+      "type": "text",
+      "default": "Token",
+      "required": true,
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Label"
+        },
+        "code": {
+          "prop": "label"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "inline-flex",
+        "direction": "row",
+        "align": "center"
+      },
+      "tokens": {
+        "background-color": "{color.token.{color}.background}",
+        "color": "{color.token.{color}.foreground}",
+        "border-radius": "{radius.100}",
+        "gap": "{space.inset-y.sm}",
+        "padding-inline": "{space.inset-x.xs}",
+        "padding-block": "{space.inset-y.xs}",
+        "font-family": "{font.control.family}",
+        "font-size": "{font.badge.size}",
+        "font-weight": "{font.control.weight}"
+      },
+      "parts": {
+        "iconSlot": {
+          "description": "Icon before the label.",
+          "slot": {
+            "name": "icon",
+            "acceptsMode": "open"
+          },
+          "optional": true,
+          "layout": {
+            "direction": "row",
+            "align": "center"
+          }
+        },
+        "labelText": {
+          "element": "span",
+          "content": {
+            "prop": "label"
+          }
+        },
+        "endContent": {
+          "description": "Content after the label — a count Badge, a chevron.",
+          "slot": {
+            "name": "endContent",
+            "accepts": [
+              "ds.badge"
+            ],
+            "acceptsMode": "prefer"
+          },
+          "optional": true,
+          "layout": {
+            "direction": "row",
+            "align": "center"
+          }
+        }
+      }
+    }
+  },
+  "a11y": {
+    "contrast": "AA"
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": "8nim1d0IPnehMxA7B7SYxC",
+      "componentSetKey": "25fa6e1c9a512109e7bbc4b341bbbde5ede1f7ec",
+      "nodeId": "11:726"
+    },
+    "code": {
+      "importPath": "src/components/Token",
+      "export": "Token"
+    }
+  }
+}

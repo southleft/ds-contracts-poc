@@ -1,0 +1,56 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "ds.code",
+  "name": "Code",
+  "version": "1.0.0",
+  "status": "draft",
+  "description": "Inline code element with monospace font and muted background. API mirrors industry convention (Astryx Code); block code is a separate component family.",
+  "semantics": {
+    "element": "code"
+  },
+  "props": [
+    {
+      "name": "children",
+      "description": "The code content.",
+      "type": "text",
+      "default": "npm run build",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Content"
+        },
+        "code": {
+          "prop": "children"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "tokens": {
+        "background-color": "{color.surface.sunken}",
+        "color": "{color.surface.foreground}",
+        "border-radius": "{radius.100}",
+        "padding-inline": "{space.inset-x.xs}",
+        "padding-block": "{space.inset-y.xs}",
+        "font-family": "{font.code.family}",
+        "font-size": "{font.control.size.sm}"
+      }
+    }
+  },
+  "a11y": {
+    "contrast": "AA"
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": "8nim1d0IPnehMxA7B7SYxC",
+      "componentSetKey": "d64c49cb8606d9f9275de6ab5c635708276cd047",
+      "nodeId": "11:316"
+    },
+    "code": {
+      "importPath": "src/components/Code",
+      "export": "Code"
+    }
+  }
+}

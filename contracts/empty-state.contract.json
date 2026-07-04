@@ -1,0 +1,133 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "ds.empty-state",
+  "name": "EmptyState",
+  "version": "1.0.0",
+  "status": "draft",
+  "description": "Placeholder for a content area with no data — empty lists, zero results, first-time setup. API mirrors industry convention (Astryx EmptyState): always a title and a next step; the icon is decorative.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "title",
+      "description": "Primary message.",
+      "type": "text",
+      "default": "Nothing here yet",
+      "required": true,
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Title"
+        },
+        "code": {
+          "prop": "title"
+        }
+      }
+    },
+    {
+      "name": "description",
+      "description": "Secondary text explaining what will appear here and how.",
+      "type": "text",
+      "default": "When items are added they will show up in this list.",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Description"
+        },
+        "code": {
+          "prop": "description"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "flex",
+        "direction": "column",
+        "align": "center"
+      },
+      "tokens": {
+        "max-width": "{size.card.width}",
+        "gap": "{space.gap.sm}",
+        "padding-inline": "{space.inset-x.lg}",
+        "padding-block": "{space.inset-x.lg}",
+        "font-family": "{font.control.family}",
+        "color": "{color.surface.foreground}"
+      },
+      "parts": {
+        "iconArea": {
+          "description": "Decorative icon or illustration above the title.",
+          "slot": {
+            "name": "icon",
+            "acceptsMode": "open"
+          },
+          "optional": true,
+          "layout": {
+            "direction": "row",
+            "align": "center",
+            "justify": "center"
+          },
+          "attrs": {
+            "aria-hidden": "true"
+          }
+        },
+        "title": {
+          "element": "span",
+          "content": {
+            "prop": "title"
+          },
+          "tokens": {
+            "font-size": "{font.control.size.md}",
+            "font-weight": "{font.title.weight}"
+          }
+        },
+        "descriptionText": {
+          "element": "span",
+          "content": {
+            "prop": "description"
+          },
+          "tokens": {
+            "font-size": "{font.control.size.sm}",
+            "color": "{color.text.secondary}"
+          }
+        },
+        "actions": {
+          "description": "Action buttons below the description.",
+          "slot": {
+            "name": "actions",
+            "accepts": [
+              "ds.button"
+            ],
+            "acceptsMode": "prefer"
+          },
+          "optional": true,
+          "layout": {
+            "direction": "row",
+            "align": "center"
+          },
+          "tokens": {
+            "gap": "{space.gap.sm}",
+            "padding-block": "{space.inset-y.sm}"
+          }
+        }
+      }
+    }
+  },
+  "a11y": {
+    "contrast": "AA"
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": "8nim1d0IPnehMxA7B7SYxC",
+      "componentSetKey": "b0dd99f2822be1712c8984d1b59bd31bd8ab866d",
+      "nodeId": "11:321"
+    },
+    "code": {
+      "importPath": "src/components/EmptyState",
+      "export": "EmptyState"
+    }
+  }
+}

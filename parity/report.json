@@ -4,13 +4,24 @@
     "ds.avatar@1.0.0",
     "ds.badge@1.0.0",
     "ds.banner@1.0.0",
+    "ds.blockquote@1.0.0",
     "ds.button@1.2.0",
     "ds.card@1.1.0",
+    "ds.checkbox@1.0.0",
+    "ds.code@1.0.0",
+    "ds.divider@1.0.0",
+    "ds.empty-state@1.0.0",
+    "ds.icon-button@1.0.0",
     "ds.inline@1.0.0",
     "ds.stack@1.0.0",
+    "ds.status-dot@1.0.0",
     "ds.table-cell@1.1.0",
     "ds.table-header-cell@1.1.0",
     "ds.table-row@1.1.0",
-    "ds.table@1.1.0"
+    "ds.table@1.1.0",
+    "ds.text-area@1.0.0",
+    "ds.text-field@1.0.0",
+    "ds.toast@1.0.0",
+    "ds.token@1.0.0"
   ]
 }

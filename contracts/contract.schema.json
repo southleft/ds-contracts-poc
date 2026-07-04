@@ -50,7 +50,9 @@
             "p",
             "textarea",
             "select",
-            "fieldset"
+            "fieldset",
+            "blockquote",
+            "code"
           ]
         },
         "role": {

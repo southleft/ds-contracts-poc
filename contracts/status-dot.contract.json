@@ -1,0 +1,88 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "ds.status-dot",
+  "name": "StatusDot",
+  "version": "1.0.0",
+  "status": "draft",
+  "description": "Small colored dot communicating status — presence, severity, activity. API mirrors industry convention (Astryx StatusDot): five semantic variants with a required accessible label.",
+  "semantics": {
+    "element": "span",
+    "role": "img"
+  },
+  "props": [
+    {
+      "name": "variant",
+      "description": "Semantic color variant.",
+      "type": {
+        "enum": [
+          "success",
+          "warning",
+          "error",
+          "accent",
+          "neutral"
+        ]
+      },
+      "default": "neutral",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Variant",
+          "values": {
+            "success": "Success",
+            "warning": "Warning",
+            "error": "Error",
+            "accent": "Accent",
+            "neutral": "Neutral"
+          }
+        },
+        "code": {
+          "prop": "variant"
+        }
+      }
+    },
+    {
+      "name": "label",
+      "description": "Accessible label announced by screen readers — status must never be conveyed by color alone.",
+      "type": "text",
+      "default": "Status",
+      "required": true,
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Label"
+        },
+        "code": {
+          "prop": "label"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "attrs": {
+        "aria-label": "{label}"
+      },
+      "tokens": {
+        "background-color": "{color.status.{variant}}",
+        "width": "{size.dot}",
+        "height": "{size.dot}",
+        "border-radius": "{radius.pill}"
+      }
+    }
+  },
+  "a11y": {
+    "contrast": "AA"
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": "8nim1d0IPnehMxA7B7SYxC",
+      "componentSetKey": "f66c5a1c366d1d37292459b9b9a56d80bf2a5034",
+      "nodeId": "11:384"
+    },
+    "code": {
+      "importPath": "src/components/StatusDot",
+      "export": "StatusDot"
+    }
+  }
+}

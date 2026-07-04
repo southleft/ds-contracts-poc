@@ -2,7 +2,7 @@
   "system": {
     "name": "DS Contracts POC",
     "catalogVersion": "0.1.0",
-    "gitCommit": "2395716",
+    "gitCommit": "94e7528",
     "source": "Compiled from contracts/*.contract.json + tokens/ + context/rules.json — do not edit."
   },
   "package": {
@@ -66,9 +66,11 @@
       "--space-inset-x-sm",
       "--space-inset-x-md",
       "--space-inset-x-lg",
+      "--space-inset-x-xs",
       "--space-inset-y-sm",
       "--space-inset-y-md",
       "--space-inset-y-lg",
+      "--space-inset-y-xs",
       "--space-gap-control",
       "--space-gap-sm",
       "--space-gap-md",
@@ -87,7 +89,16 @@
       "--size-table-width",
       "--size-table-cell-width",
       "--size-banner-width",
+      "--size-icon-button-sm",
+      "--size-icon-button-md",
+      "--size-icon-button-lg",
+      "--size-checkbox-sm",
+      "--size-checkbox-md",
+      "--size-dot",
+      "--size-divider-length",
       "--border-width-focus",
+      "--border-width-divider-subtle",
+      "--border-width-divider-strong",
       "--font-control-family",
       "--font-control-weight",
       "--font-control-size-sm",
@@ -98,6 +109,7 @@
       "--font-title-weight",
       "--font-avatar-size-sm",
       "--font-avatar-size-md",
+      "--font-code-family",
       "--color-surface-background",
       "--color-surface-foreground",
       "--color-surface-raised",
@@ -111,6 +123,12 @@
       "--color-action-danger-background",
       "--color-action-danger-background-hover",
       "--color-action-danger-foreground",
+      "--color-action-destructive-background",
+      "--color-action-destructive-background-hover",
+      "--color-action-destructive-foreground",
+      "--color-action-ghost-background",
+      "--color-action-ghost-foreground",
+      "--color-action-ghost-background-hover",
       "--color-border-focus",
       "--color-border-subtle",
       "--color-feedback-info-background",
@@ -126,7 +144,50 @@
       "--color-identity-background",
       "--color-identity-foreground",
       "--color-table-row-default",
-      "--color-table-row-selected"
+      "--color-table-row-selected",
+      "--color-token-default-background",
+      "--color-token-default-foreground",
+      "--color-token-gray-background",
+      "--color-token-gray-foreground",
+      "--color-token-red-background",
+      "--color-token-red-foreground",
+      "--color-token-orange-background",
+      "--color-token-orange-foreground",
+      "--color-token-yellow-background",
+      "--color-token-yellow-foreground",
+      "--color-token-green-background",
+      "--color-token-green-foreground",
+      "--color-token-teal-background",
+      "--color-token-teal-foreground",
+      "--color-token-cyan-background",
+      "--color-token-cyan-foreground",
+      "--color-token-blue-background",
+      "--color-token-blue-foreground",
+      "--color-token-purple-background",
+      "--color-token-purple-foreground",
+      "--color-token-pink-background",
+      "--color-token-pink-foreground",
+      "--color-status-success",
+      "--color-status-warning",
+      "--color-status-error",
+      "--color-status-accent",
+      "--color-status-neutral",
+      "--color-divider-subtle",
+      "--color-divider-strong",
+      "--color-input-background",
+      "--color-input-placeholder",
+      "--color-toast-info-background",
+      "--color-toast-info-foreground",
+      "--color-toast-error-background",
+      "--color-toast-error-foreground",
+      "--color-text-secondary",
+      "--color-checkbox-unchecked-background",
+      "--color-checkbox-unchecked-border",
+      "--color-checkbox-checked-background",
+      "--color-checkbox-checked-border",
+      "--color-checkbox-indeterminate-background",
+      "--color-checkbox-indeterminate-border",
+      "--color-checkbox-icon"
     ],
     "allCssVariables": [
       "--color-white",
@@ -165,10 +226,30 @@
       "--color-amber-600",
       "--color-amber-700",
       "--color-amber-900",
+      "--color-orange-100",
+      "--color-orange-700",
+      "--color-orange-900",
+      "--color-yellow-100",
+      "--color-yellow-700",
+      "--color-yellow-900",
+      "--color-teal-100",
+      "--color-teal-700",
+      "--color-teal-900",
+      "--color-cyan-100",
+      "--color-cyan-700",
+      "--color-cyan-900",
+      "--color-purple-100",
+      "--color-purple-700",
+      "--color-purple-900",
+      "--color-pink-100",
+      "--color-pink-700",
+      "--color-pink-900",
+      "--space-25",
       "--space-50",
       "--space-100",
       "--space-150",
       "--space-200",
+      "--space-250",
       "--space-300",
       "--space-400",
       "--radius-100",
@@ -182,6 +263,7 @@
       "--container-md",
       "--container-lg",
       "--font-family-sans",
+      "--font-family-mono",
       "--font-size-100",
       "--font-size-200",
       "--font-size-300",
@@ -190,12 +272,17 @@
       "--font-weight-medium",
       "--font-weight-semibold",
       "--opacity-disabled",
+      "--control-sm",
+      "--control-md",
+      "--control-lg",
       "--space-inset-x-sm",
       "--space-inset-x-md",
       "--space-inset-x-lg",
+      "--space-inset-x-xs",
       "--space-inset-y-sm",
       "--space-inset-y-md",
       "--space-inset-y-lg",
+      "--space-inset-y-xs",
       "--space-gap-control",
       "--space-gap-sm",
       "--space-gap-md",
@@ -214,7 +301,16 @@
       "--size-table-width",
       "--size-table-cell-width",
       "--size-banner-width",
+      "--size-icon-button-sm",
+      "--size-icon-button-md",
+      "--size-icon-button-lg",
+      "--size-checkbox-sm",
+      "--size-checkbox-md",
+      "--size-dot",
+      "--size-divider-length",
       "--border-width-focus",
+      "--border-width-divider-subtle",
+      "--border-width-divider-strong",
       "--font-control-family",
       "--font-control-weight",
       "--font-control-size-sm",
@@ -225,6 +321,7 @@
       "--font-title-weight",
       "--font-avatar-size-sm",
       "--font-avatar-size-md",
+      "--font-code-family",
       "--color-surface-background",
       "--color-surface-foreground",
       "--color-surface-raised",
@@ -238,6 +335,12 @@
       "--color-action-danger-background",
       "--color-action-danger-background-hover",
       "--color-action-danger-foreground",
+      "--color-action-destructive-background",
+      "--color-action-destructive-background-hover",
+      "--color-action-destructive-foreground",
+      "--color-action-ghost-background",
+      "--color-action-ghost-foreground",
+      "--color-action-ghost-background-hover",
       "--color-border-focus",
       "--color-border-subtle",
       "--color-feedback-info-background",
@@ -253,7 +356,50 @@
       "--color-identity-background",
       "--color-identity-foreground",
       "--color-table-row-default",
-      "--color-table-row-selected"
+      "--color-table-row-selected",
+      "--color-token-default-background",
+      "--color-token-default-foreground",
+      "--color-token-gray-background",
+      "--color-token-gray-foreground",
+      "--color-token-red-background",
+      "--color-token-red-foreground",
+      "--color-token-orange-background",
+      "--color-token-orange-foreground",
+      "--color-token-yellow-background",
+      "--color-token-yellow-foreground",
+      "--color-token-green-background",
+      "--color-token-green-foreground",
+      "--color-token-teal-background",
+      "--color-token-teal-foreground",
+      "--color-token-cyan-background",
+      "--color-token-cyan-foreground",
+      "--color-token-blue-background",
+      "--color-token-blue-foreground",
+      "--color-token-purple-background",
+      "--color-token-purple-foreground",
+      "--color-token-pink-background",
+      "--color-token-pink-foreground",
+      "--color-status-success",
+      "--color-status-warning",
+      "--color-status-error",
+      "--color-status-accent",
+      "--color-status-neutral",
+      "--color-divider-subtle",
+      "--color-divider-strong",
+      "--color-input-background",
+      "--color-input-placeholder",
+      "--color-toast-info-background",
+      "--color-toast-info-foreground",
+      "--color-toast-error-background",
+      "--color-toast-error-foreground",
+      "--color-text-secondary",
+      "--color-checkbox-unchecked-background",
+      "--color-checkbox-unchecked-border",
+      "--color-checkbox-checked-background",
+      "--color-checkbox-checked-border",
+      "--color-checkbox-indeterminate-background",
+      "--color-checkbox-indeterminate-border",
+      "--color-checkbox-icon"
     ]
   },
   "components": [
@@ -380,6 +526,33 @@
       ]
     },
     {
+      "id": "ds.blockquote",
+      "name": "Blockquote",
+      "version": "1.0.0",
+      "status": "draft",
+      "description": "Styled quotation block with an accent left border for quotes, testimonials, and excerpts. API mirrors industry convention (Astryx Blockquote): content plus an optional cite slot rendered in semantic footer/cite markup.",
+      "figma": {
+        "representation": "component",
+        "componentSetKey": "b6dd9d18639b0b053e55d307b2a8dbf1d4af3cef"
+      },
+      "props": [],
+      "children": {
+        "kind": "slot",
+        "accepts": [],
+        "acceptsMode": "open",
+        "description": "The quoted content."
+      },
+      "slots": [
+        {
+          "prop": "cite",
+          "accepts": [],
+          "acceptsMode": "open",
+          "optional": true,
+          "description": "Attribution, rendered in a semantic footer."
+        }
+      ]
+    },
+    {
       "id": "ds.button",
       "name": "Button",
       "version": "1.2.0",
@@ -468,6 +641,207 @@
       ]
     },
     {
+      "id": "ds.checkbox",
+      "name": "Checkbox",
+      "version": "1.0.0",
+      "status": "draft",
+      "description": "Toggles a single on/off value — settings, terms acceptance, opt-ins. API mirrors industry convention (Astryx CheckboxInput): checked, unchecked, and indeterminate are prop-driven appearance states.",
+      "figma": {
+        "representation": "component",
+        "componentSetKey": "9bc54e5a3f7c074b9ed016dfac8edff95ec45e23"
+      },
+      "props": [
+        {
+          "name": "value",
+          "type": [
+            "unchecked",
+            "checked",
+            "indeterminate"
+          ],
+          "default": "unchecked",
+          "description": "Checked, unchecked, or indeterminate (partial selection in a group)."
+        },
+        {
+          "name": "size",
+          "type": [
+            "sm",
+            "md"
+          ],
+          "default": "md",
+          "description": "Control size."
+        },
+        {
+          "name": "label",
+          "type": "string",
+          "default": "Checkbox label",
+          "required": true,
+          "description": "Always rendered — users must know what they are toggling."
+        },
+        {
+          "name": "description",
+          "type": "string",
+          "default": "Supporting detail for this option.",
+          "description": "Secondary text below the label."
+        }
+      ],
+      "children": {
+        "kind": "none"
+      },
+      "slots": []
+    },
+    {
+      "id": "ds.code",
+      "name": "Code",
+      "version": "1.0.0",
+      "status": "draft",
+      "description": "Inline code element with monospace font and muted background. API mirrors industry convention (Astryx Code); block code is a separate component family.",
+      "figma": {
+        "representation": "component",
+        "componentSetKey": "d64c49cb8606d9f9275de6ab5c635708276cd047"
+      },
+      "props": [],
+      "children": {
+        "kind": "text",
+        "description": "The code content."
+      },
+      "slots": []
+    },
+    {
+      "id": "ds.divider",
+      "name": "Divider",
+      "version": "1.0.0",
+      "status": "draft",
+      "description": "Visual separator dividing content into distinct sections. API mirrors industry convention (Astryx Divider) at the variant level; orientation requires per-enum-value property overrides — a documented schema gap.",
+      "figma": {
+        "representation": "component",
+        "componentSetKey": "1bd0e157dee768b650c50a752a164562fc606822"
+      },
+      "props": [
+        {
+          "name": "variant",
+          "type": [
+            "subtle",
+            "strong"
+          ],
+          "default": "subtle",
+          "description": "Visual weight of the line."
+        }
+      ],
+      "children": {
+        "kind": "slot",
+        "accepts": [],
+        "acceptsMode": "open",
+        "description": "Any catalog content."
+      },
+      "slots": []
+    },
+    {
+      "id": "ds.empty-state",
+      "name": "EmptyState",
+      "version": "1.0.0",
+      "status": "draft",
+      "description": "Placeholder for a content area with no data — empty lists, zero results, first-time setup. API mirrors industry convention (Astryx EmptyState): always a title and a next step; the icon is decorative.",
+      "figma": {
+        "representation": "component",
+        "componentSetKey": "b0dd99f2822be1712c8984d1b59bd31bd8ab866d"
+      },
+      "props": [
+        {
+          "name": "title",
+          "type": "string",
+          "default": "Nothing here yet",
+          "required": true,
+          "description": "Primary message."
+        },
+        {
+          "name": "description",
+          "type": "string",
+          "default": "When items are added they will show up in this list.",
+          "description": "Secondary text explaining what will appear here and how."
+        }
+      ],
+      "children": {
+        "kind": "none"
+      },
+      "slots": [
+        {
+          "prop": "icon",
+          "accepts": [],
+          "acceptsMode": "open",
+          "optional": true,
+          "description": "Decorative icon or illustration above the title."
+        },
+        {
+          "prop": "actions",
+          "accepts": [
+            "Button"
+          ],
+          "acceptsMode": "prefer",
+          "optional": true,
+          "description": "Action buttons below the description."
+        }
+      ]
+    },
+    {
+      "id": "ds.icon-button",
+      "name": "IconButton",
+      "version": "1.0.0",
+      "status": "draft",
+      "description": "A button showing only an icon, for toolbars, table rows, and compact UI. API mirrors industry convention (Astryx IconButton): the required label is the accessible name and is never rendered visibly.",
+      "figma": {
+        "representation": "component",
+        "componentSetKey": "ba2cfd0b9f6f47a728081edaf340c37cdeb53123"
+      },
+      "props": [
+        {
+          "name": "variant",
+          "type": [
+            "primary",
+            "secondary",
+            "ghost",
+            "destructive"
+          ],
+          "default": "secondary",
+          "description": "Visual style. Ghost sits on the surface wash (transparent tokens are a documented gap)."
+        },
+        {
+          "name": "size",
+          "type": [
+            "sm",
+            "md",
+            "lg"
+          ],
+          "default": "md",
+          "description": "Square control size."
+        },
+        {
+          "name": "isDisabled",
+          "type": "boolean",
+          "default": false,
+          "description": "Disables the button."
+        },
+        {
+          "name": "label",
+          "type": "string",
+          "default": "Action",
+          "required": true,
+          "description": "Accessible name (aria-label). Be specific: \"Delete conversation\", not \"Delete\"."
+        }
+      ],
+      "children": {
+        "kind": "none"
+      },
+      "slots": [
+        {
+          "prop": "icon",
+          "accepts": [],
+          "acceptsMode": "open",
+          "optional": false,
+          "description": "The icon. Pass an Icon-sized element; it inherits the variant's foreground color."
+        }
+      ]
+    },
+    {
       "id": "ds.inline",
       "name": "Inline",
       "version": "1.0.0",
@@ -515,6 +889,45 @@
           ],
           "default": "md",
           "description": "Space between children."
+        }
+      ],
+      "children": {
+        "kind": "slot",
+        "accepts": [],
+        "acceptsMode": "open",
+        "description": "Any catalog content."
+      },
+      "slots": []
+    },
+    {
+      "id": "ds.status-dot",
+      "name": "StatusDot",
+      "version": "1.0.0",
+      "status": "draft",
+      "description": "Small colored dot communicating status — presence, severity, activity. API mirrors industry convention (Astryx StatusDot): five semantic variants with a required accessible label.",
+      "figma": {
+        "representation": "component",
+        "componentSetKey": "f66c5a1c366d1d37292459b9b9a56d80bf2a5034"
+      },
+      "props": [
+        {
+          "name": "variant",
+          "type": [
+            "success",
+            "warning",
+            "error",
+            "accent",
+            "neutral"
+          ],
+          "default": "neutral",
+          "description": "Semantic color variant."
+        },
+        {
+          "name": "label",
+          "type": "string",
+          "default": "Status",
+          "required": true,
+          "description": "Accessible label announced by screen readers — status must never be conveyed by color alone."
         }
       ],
       "children": {
@@ -641,6 +1054,230 @@
         "description": "Rows. Multi-child slot: renders its default content directly in Figma (see docs/08)."
       },
       "slots": []
+    },
+    {
+      "id": "ds.text-area",
+      "name": "TextArea",
+      "version": "1.0.0",
+      "status": "draft",
+      "description": "Multi-line text input for longer-form content — comments, descriptions, messages. API mirrors industry convention (Astryx TextArea); wrapping-label anatomy gives implicit association.",
+      "figma": {
+        "representation": "component",
+        "componentSetKey": "2cb4581bfc1e7d9b0b5e32260d783accaea973ef"
+      },
+      "props": [
+        {
+          "name": "size",
+          "type": [
+            "sm",
+            "md",
+            "lg"
+          ],
+          "default": "md",
+          "description": "Control size scale (affects padding and text size)."
+        },
+        {
+          "name": "isRequired",
+          "type": "boolean",
+          "default": false,
+          "description": "Marks the field required."
+        },
+        {
+          "name": "label",
+          "type": "string",
+          "default": "Label",
+          "required": true,
+          "description": "Field label — always rendered."
+        },
+        {
+          "name": "description",
+          "type": "string",
+          "default": "Helper text that explains the expected content.",
+          "description": "Helper text between the label and the textarea."
+        },
+        {
+          "name": "placeholder",
+          "type": "string",
+          "default": "Write something…",
+          "description": "Hint shown when empty."
+        }
+      ],
+      "children": {
+        "kind": "none"
+      },
+      "slots": []
+    },
+    {
+      "id": "ds.text-field",
+      "name": "TextField",
+      "version": "1.0.0",
+      "status": "draft",
+      "description": "Single-line text input for short-form values — names, emails, search queries. API mirrors industry convention (Astryx TextInput): required label, description, size scale. The wrapping-label anatomy gives implicit label association.",
+      "figma": {
+        "representation": "component",
+        "componentSetKey": "83b5ead2b038477a13c0647de71ee55bf458e0b3"
+      },
+      "props": [
+        {
+          "name": "size",
+          "type": [
+            "sm",
+            "md",
+            "lg"
+          ],
+          "default": "md",
+          "description": "Control size scale."
+        },
+        {
+          "name": "isRequired",
+          "type": "boolean",
+          "default": false,
+          "description": "Marks the field required — shows the indicator beside the label."
+        },
+        {
+          "name": "isDisabled",
+          "type": "boolean",
+          "default": false,
+          "description": "Disabled state."
+        },
+        {
+          "name": "label",
+          "type": "string",
+          "default": "Label",
+          "required": true,
+          "description": "Field label — always rendered; placeholders are not labels."
+        },
+        {
+          "name": "description",
+          "type": "string",
+          "default": "Helper text that explains the expected value.",
+          "description": "Helper text between the label and the input."
+        },
+        {
+          "name": "placeholder",
+          "type": "string",
+          "default": "Enter a value…",
+          "description": "Hint shown when the field is empty. Never a substitute for the label."
+        }
+      ],
+      "children": {
+        "kind": "none"
+      },
+      "slots": []
+    },
+    {
+      "id": "ds.toast",
+      "name": "Toast",
+      "version": "1.0.0",
+      "status": "draft",
+      "description": "Brief non-blocking notification confirming an action. API mirrors industry convention (Astryx Toast): the visual element — positioning, stacking, and auto-dismiss belong to the behavior layer and are a declared boundary.",
+      "figma": {
+        "representation": "component",
+        "componentSetKey": "0abc553b16f20807f50d984a41dc6cb936958a93"
+      },
+      "props": [
+        {
+          "name": "type",
+          "type": [
+            "info",
+            "error"
+          ],
+          "default": "info",
+          "description": "Info confirms; error persists until dismissed (behavior layer)."
+        }
+      ],
+      "children": {
+        "kind": "slot",
+        "accepts": [],
+        "acceptsMode": "open",
+        "description": "Primary message content."
+      },
+      "slots": [
+        {
+          "prop": "endContent",
+          "accepts": [
+            "Button"
+          ],
+          "acceptsMode": "prefer",
+          "optional": true,
+          "description": "Trailing content — an Undo button, a link."
+        }
+      ]
+    },
+    {
+      "id": "ds.token",
+      "name": "Token",
+      "version": "1.0.0",
+      "status": "draft",
+      "description": "Small inline element for discrete associated data — tags, categories, active filters. API mirrors industry convention (Astryx Token): 11-color vocabulary with size scale; removal and click behavior are a declared boundary.",
+      "figma": {
+        "representation": "component",
+        "componentSetKey": "25fa6e1c9a512109e7bbc4b341bbbde5ede1f7ec"
+      },
+      "props": [
+        {
+          "name": "color",
+          "type": [
+            "default",
+            "red",
+            "orange",
+            "yellow",
+            "green",
+            "teal",
+            "cyan",
+            "blue",
+            "purple",
+            "pink",
+            "gray"
+          ],
+          "default": "default",
+          "description": "Color variant."
+        },
+        {
+          "name": "size",
+          "type": [
+            "sm",
+            "md",
+            "lg"
+          ],
+          "default": "md",
+          "description": "Token size."
+        },
+        {
+          "name": "isDisabled",
+          "type": "boolean",
+          "default": false,
+          "description": "Reduces opacity and blocks interactions."
+        },
+        {
+          "name": "label",
+          "type": "string",
+          "default": "Token",
+          "required": true,
+          "description": "Text label inside the token."
+        }
+      ],
+      "children": {
+        "kind": "none"
+      },
+      "slots": [
+        {
+          "prop": "icon",
+          "accepts": [],
+          "acceptsMode": "open",
+          "optional": true,
+          "description": "Icon before the label."
+        },
+        {
+          "prop": "endContent",
+          "accepts": [
+            "Badge"
+          ],
+          "acceptsMode": "prefer",
+          "optional": true,
+          "description": "Content after the label — a count Badge, a chevron."
+        }
+      ]
     }
   ]
 }

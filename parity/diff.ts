@@ -243,7 +243,9 @@ for (const contract of contracts) {
     if (isEnum(p)) {
       const want = p.type.enum.map((v) => p.bindings.figma.values?.[v] ?? v);
       const got = def.variantOptions ?? [];
-      if (want.join('|') !== got.join('|')) {
+      // Order-insensitive: the canvas presents the default variant first;
+      // option ORDER is presentation, not contract API.
+      if ([...want].sort().join('|') !== [...got].sort().join('|')) {
         add({
           surface: 'figma',
           classification: 'mismatch',

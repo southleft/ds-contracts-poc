@@ -1,0 +1,62 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "ds.divider",
+  "name": "Divider",
+  "version": "1.0.0",
+  "status": "draft",
+  "description": "Visual separator dividing content into distinct sections. API mirrors industry convention (Astryx Divider) at the variant level; orientation requires per-enum-value property overrides — a documented schema gap.",
+  "semantics": {
+    "element": "hr",
+    "role": "separator"
+  },
+  "props": [
+    {
+      "name": "variant",
+      "description": "Visual weight of the line.",
+      "type": {
+        "enum": [
+          "subtle",
+          "strong"
+        ]
+      },
+      "default": "subtle",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Variant",
+          "values": {
+            "subtle": "Subtle",
+            "strong": "Strong"
+          }
+        },
+        "code": {
+          "prop": "variant"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "tokens": {
+        "background-color": "{color.divider.{variant}}",
+        "height": "{border.width.divider.{variant}}",
+        "max-width": "{size.divider.length}"
+      }
+    }
+  },
+  "a11y": {
+    "contrast": "AA"
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": "8nim1d0IPnehMxA7B7SYxC",
+      "componentSetKey": "1bd0e157dee768b650c50a752a164562fc606822",
+      "nodeId": "11:320"
+    },
+    "code": {
+      "importPath": "src/components/Divider",
+      "export": "Divider"
+    }
+  }
+}

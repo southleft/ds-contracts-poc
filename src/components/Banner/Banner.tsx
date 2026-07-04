@@ -68,7 +68,7 @@ export const Banner = forwardRef<HTMLDivElement, BannerProps>(function Banner(
     <div
       ref={ref}
       className={classes}
-      data-isDismissable={isDismissable || undefined}
+      data-is-dismissable={isDismissable || undefined}
       role={ROLE_MAP[status]}
       {...rest}
     >

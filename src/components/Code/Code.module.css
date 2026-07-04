@@ -1,0 +1,18 @@
+/* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/code.contract.json (ds.code v1.0.0)
+ * Regenerate with: npm run generate
+ */
+
+.root {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  background-color: var(--color-surface-sunken);
+  color: var(--color-surface-foreground);
+  border-radius: var(--radius-100);
+  padding-inline: var(--space-inset-x-xs);
+  padding-block: var(--space-inset-y-xs);
+  font-family: var(--font-code-family);
+  font-size: var(--font-control-size-sm);
+}

@@ -1,0 +1,208 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "ds.text-field",
+  "name": "TextField",
+  "version": "1.0.0",
+  "status": "draft",
+  "description": "Single-line text input for short-form values — names, emails, search queries. API mirrors industry convention (Astryx TextInput): required label, description, size scale. The wrapping-label anatomy gives implicit label association.",
+  "semantics": {
+    "element": "label"
+  },
+  "props": [
+    {
+      "name": "size",
+      "description": "Control size scale.",
+      "type": {
+        "enum": [
+          "sm",
+          "md",
+          "lg"
+        ]
+      },
+      "default": "md",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Size",
+          "values": {
+            "sm": "Small",
+            "md": "Medium",
+            "lg": "Large"
+          }
+        },
+        "code": {
+          "prop": "size"
+        }
+      }
+    },
+    {
+      "name": "isRequired",
+      "description": "Marks the field required — shows the indicator beside the label.",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Required"
+        },
+        "code": {
+          "prop": "isRequired"
+        }
+      }
+    },
+    {
+      "name": "isDisabled",
+      "description": "Disabled state.",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Disabled"
+        },
+        "code": {
+          "prop": "isDisabled"
+        }
+      }
+    },
+    {
+      "name": "label",
+      "description": "Field label — always rendered; placeholders are not labels.",
+      "type": "text",
+      "default": "Label",
+      "required": true,
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Label"
+        },
+        "code": {
+          "prop": "label"
+        }
+      }
+    },
+    {
+      "name": "description",
+      "description": "Helper text between the label and the input.",
+      "type": "text",
+      "default": "Helper text that explains the expected value.",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Description"
+        },
+        "code": {
+          "prop": "description"
+        }
+      }
+    },
+    {
+      "name": "placeholder",
+      "description": "Hint shown when the field is empty. Never a substitute for the label.",
+      "type": "text",
+      "default": "Enter a value…",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Placeholder"
+        },
+        "code": {
+          "prop": "placeholder"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "flex",
+        "direction": "column",
+        "align": "stretch"
+      },
+      "tokens": {
+        "max-width": "{size.card.width}",
+        "gap": "{space.inset-y.sm}",
+        "font-family": "{font.control.family}",
+        "color": "{color.surface.foreground}"
+      },
+      "parts": {
+        "labelRow": {
+          "layout": {
+            "direction": "row",
+            "align": "center"
+          },
+          "tokens": {
+            "gap": "{space.inset-y.sm}",
+            "font-size": "{font.control.size.sm}",
+            "font-weight": "{font.control.weight}"
+          },
+          "parts": {
+            "labelText": {
+              "element": "span",
+              "content": {
+                "prop": "label"
+              }
+            },
+            "requiredMark": {
+              "description": "Required indicator — shown only when isRequired.",
+              "icon": {
+                "asset": "asterisk",
+                "size": 10
+              },
+              "visibleWhen": {
+                "prop": "isRequired"
+              },
+              "tokens": {
+                "color": "{color.action.danger.background}"
+              }
+            }
+          }
+        },
+        "descriptionText": {
+          "element": "span",
+          "content": {
+            "prop": "description"
+          },
+          "tokens": {
+            "font-size": "{font.control.size.sm}",
+            "color": "{color.text.secondary}"
+          }
+        },
+        "input": {
+          "description": "The real input control. Code renders a native input; the canvas shows the placeholder bound to the same property.",
+          "element": "input",
+          "attrs": {
+            "type": "text",
+            "placeholder": "{placeholder}"
+          },
+          "tokens": {
+            "background-color": "{color.input.background}",
+            "border-color": "{color.border.subtle}",
+            "border-width": "{border-width.100}",
+            "border-radius": "{radius.control}",
+            "padding-inline": "{space.inset-x.sm}",
+            "padding-block": "{space.inset-y.{size}}",
+            "font-size": "{font.control.size.{size}}",
+            "font-family": "{font.control.family}",
+            "color": "{color.surface.foreground}"
+          }
+        }
+      }
+    }
+  },
+  "a11y": {
+    "contrast": "AA"
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": "8nim1d0IPnehMxA7B7SYxC",
+      "componentSetKey": "83b5ead2b038477a13c0647de71ee55bf458e0b3",
+      "nodeId": "11:446"
+    },
+    "code": {
+      "importPath": "src/components/TextField",
+      "export": "TextField"
+    }
+  }
+}

@@ -10,6 +10,10 @@
       },
       "lg": {
         "$value": "{space.300}"
+      },
+      "xs": {
+        "$type": "dimension",
+        "$value": "{space.100}"
       }
     },
     "inset-y": {
@@ -22,6 +26,10 @@
       },
       "lg": {
         "$value": "{space.150}"
+      },
+      "xs": {
+        "$type": "dimension",
+        "$value": "{space.25}"
       }
     },
     "gap": {
@@ -110,6 +118,40 @@
         "$type": "dimension",
         "$value": "{container.lg}"
       }
+    },
+    "icon-button": {
+      "sm": {
+        "$type": "dimension",
+        "$value": "{control.sm}"
+      },
+      "md": {
+        "$type": "dimension",
+        "$value": "{control.md}"
+      },
+      "lg": {
+        "$type": "dimension",
+        "$value": "{control.lg}"
+      }
+    },
+    "checkbox": {
+      "sm": {
+        "$type": "dimension",
+        "$value": "{space.200}"
+      },
+      "md": {
+        "$type": "dimension",
+        "$value": "{space.250}"
+      }
+    },
+    "dot": {
+      "$type": "dimension",
+      "$value": "{space.100}"
+    },
+    "divider": {
+      "length": {
+        "$type": "dimension",
+        "$value": "{container.sm}"
+      }
     }
   },
   "border": {
@@ -117,6 +159,14 @@
       "$type": "dimension",
       "focus": {
         "$value": "{border-width.200}"
+      },
+      "divider": {
+        "subtle": {
+          "$value": "{border-width.100}"
+        },
+        "strong": {
+          "$value": "{border-width.200}"
+        }
       }
     }
   },
@@ -168,6 +218,12 @@
         "md": {
           "$value": "{font.size.200}"
         }
+      }
+    },
+    "code": {
+      "family": {
+        "$type": "fontFamily",
+        "$value": "{font.family.mono}"
       }
     }
   }

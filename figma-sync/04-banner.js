@@ -4,6 +4,7 @@ const SET_NAME = "Banner";
 const DESCRIPTION = "Persistent inline notification for page- or section-level feedback. API mirrors industry convention (Astryx Banner): status drives color, icon, and ARIA role; dismissable banners expose a close affordance; endContent carries actions. — governed by contract ds.banner v1.0.0";
 const IS_SET = true;
 const BOOL_PROPS = [{"property":"Dismissable","default":false}];
+const TEXT_PROPS = [];
 const FONT_STYLES = ["Medium","Semi Bold"];
 const VARIANTS = [
   {
@@ -1104,6 +1105,9 @@ for (const b of built) {
   const boolKeys = {};
   for (const bp of BOOL_PROPS) {
     boolKeys[bp.property] = b.comp.addComponentProperty(bp.property, 'BOOLEAN', bp.default);
+  }
+  for (const tp of TEXT_PROPS) {
+    b.comp.addComponentProperty(tp.property, 'TEXT', tp.default);
   }
   // visibleWhen parts: visibility follows the BOOLEAN property, and the
   // canvas default matches the contract default.

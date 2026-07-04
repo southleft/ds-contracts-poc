@@ -1,0 +1,103 @@
+/* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/checkbox.contract.json (ds.checkbox v1.0.0)
+ * Regenerate with: npm run generate
+ */
+
+.root {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  border: 0;
+  gap: var(--space-gap-sm);
+  font-family: var(--font-control-family);
+  color: var(--color-surface-foreground);
+}
+
+.box {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  border-width: var(--border-width-100);
+  border-radius: var(--radius-100);
+  color: var(--color-checkbox-icon);
+  border-style: solid;
+}
+
+.size-sm .box {
+  width: var(--size-checkbox-sm);
+}
+
+.size-md .box {
+  width: var(--size-checkbox-md);
+}
+
+.size-sm .box {
+  height: var(--size-checkbox-sm);
+}
+
+.size-md .box {
+  height: var(--size-checkbox-md);
+}
+
+.value-unchecked .box {
+  background-color: var(--color-checkbox-unchecked-background);
+}
+
+.value-checked .box {
+  background-color: var(--color-checkbox-checked-background);
+}
+
+.value-indeterminate .box {
+  background-color: var(--color-checkbox-indeterminate-background);
+}
+
+.value-unchecked .box {
+  border-color: var(--color-checkbox-unchecked-border);
+}
+
+.value-checked .box {
+  border-color: var(--color-checkbox-checked-border);
+}
+
+.value-indeterminate .box {
+  border-color: var(--color-checkbox-indeterminate-border);
+}
+
+.checkGlyph svg {
+  width: 12px;
+  height: 12px;
+}
+
+.checkGlyph {
+  display: inline-flex;
+  flex-shrink: 0;
+}
+
+.dashGlyph svg {
+  width: 12px;
+  height: 12px;
+}
+
+.dashGlyph {
+  display: inline-flex;
+  flex-shrink: 0;
+}
+
+.textCol {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  min-width: 0;
+  gap: var(--space-inset-y-xs);
+}
+
+.labelText {
+  font-size: var(--font-control-size-sm);
+  font-weight: var(--font-control-weight);
+}
+
+.descriptionText {
+  font-size: var(--font-control-size-sm);
+  color: var(--color-text-secondary);
+}
