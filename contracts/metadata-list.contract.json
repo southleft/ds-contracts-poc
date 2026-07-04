@@ -1,0 +1,109 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "ds.metadata-list",
+  "name": "MetadataList",
+  "version": "1.0.0",
+  "status": "draft",
+  "description": "Key–value pairs for object attributes — detail panels, settings summaries, record information. API mirrors industry convention (Astryx MetadataList); multi-column layout and collapse behavior are documented boundaries.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "title",
+      "description": "Heading above the list.",
+      "type": "text",
+      "default": "Details",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Title"
+        },
+        "code": {
+          "prop": "title"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "flex",
+        "direction": "column",
+        "align": "stretch"
+      },
+      "tokens": {
+        "max-width": "{size.card.width}",
+        "gap": "{space.gap.sm}",
+        "font-family": "{font.control.family}"
+      },
+      "parts": {
+        "titleText": {
+          "element": "span",
+          "content": {
+            "prop": "title"
+          },
+          "tokens": {
+            "font-size": "{font.control.size.sm}",
+            "font-weight": "{font.title.weight}",
+            "color": "{color.surface.foreground}"
+          }
+        },
+        "items": {
+          "slot": {
+            "name": "children",
+            "accepts": [
+              "ds.metadata-list-item"
+            ],
+            "acceptsMode": "prefer",
+            "defaultContent": [
+              {
+                "id": "ds.metadata-list-item",
+                "props": {
+                  "label": "Owner",
+                  "value": "Design Infrastructure"
+                }
+              },
+              {
+                "id": "ds.metadata-list-item",
+                "props": {
+                  "label": "Status",
+                  "value": "Active"
+                }
+              },
+              {
+                "id": "ds.metadata-list-item",
+                "props": {
+                  "label": "Updated",
+                  "value": "2 hours ago"
+                }
+              }
+            ]
+          },
+          "layout": {
+            "direction": "column",
+            "align": "stretch"
+          },
+          "tokens": {
+            "gap": "{space.gap.sm}"
+          }
+        }
+      }
+    }
+  },
+  "a11y": {
+    "contrast": "AA"
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": "8nim1d0IPnehMxA7B7SYxC",
+      "componentSetKey": "f4c106dcd1de208ef1018b6d8ee4e30cdc030f0d",
+      "nodeId": "11:970"
+    },
+    "code": {
+      "importPath": "src/components/MetadataList",
+      "export": "MetadataList"
+    }
+  }
+}

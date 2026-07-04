@@ -82,4 +82,18 @@
   --color-checkbox-indeterminate-background: var(--color-blue-500);
   --color-checkbox-indeterminate-border: var(--color-blue-500);
   --color-checkbox-icon: var(--color-white);
+  --color-section-section: var(--color-gray-700);
+  --color-section-muted: var(--color-gray-800);
+  --color-chat-user-background: var(--color-blue-900);
+  --color-chat-user-foreground: var(--color-gray-100);
+  --color-chat-assistant-background: var(--color-gray-700);
+  --color-chat-assistant-foreground: var(--color-gray-100);
+  --color-chat-system-background: var(--color-gray-800);
+  --color-chat-system-foreground: var(--color-gray-300);
+  --color-tab-default-foreground: var(--color-gray-300);
+  --color-tab-selected-foreground: var(--color-blue-400);
+  --color-nav-selected-background: var(--color-blue-900);
+  --color-nav-selected-foreground: var(--color-blue-100);
+  --color-nav-default-background: var(--color-gray-700);
+  --color-nav-default-foreground: var(--color-gray-200);
 }

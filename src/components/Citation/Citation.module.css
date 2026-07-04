@@ -1,0 +1,19 @@
+/* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/citation.contract.json (ds.citation v1.0.0)
+ * Regenerate with: npm run generate
+ */
+
+.root {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  border: 0;
+  background-color: var(--color-surface-sunken);
+  color: var(--color-text-secondary);
+  border-radius: var(--radius-100);
+  padding-inline: var(--space-inset-x-xs);
+  padding-block: var(--space-inset-y-xs);
+  font-family: var(--font-control-family);
+  font-size: var(--font-badge-size);
+  font-weight: var(--font-control-weight);
+}

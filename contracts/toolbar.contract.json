@@ -1,0 +1,142 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "ds.toolbar",
+  "name": "Toolbar",
+  "version": "1.0.0",
+  "status": "draft",
+  "description": "General-purpose toolbar container with start, center, and end content areas for contextual actions. API mirrors industry convention (Astryx Toolbar); roving-tabindex keyboard behavior is a declared boundary.",
+  "semantics": {
+    "element": "div",
+    "role": "toolbar"
+  },
+  "props": [
+    {
+      "name": "size",
+      "description": "Minimum toolbar height; children keep their own sizes.",
+      "type": {
+        "enum": [
+          "sm",
+          "md",
+          "lg"
+        ]
+      },
+      "default": "md",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Size",
+          "values": {
+            "sm": "Small",
+            "md": "Medium",
+            "lg": "Large"
+          }
+        },
+        "code": {
+          "prop": "size"
+        }
+      }
+    },
+    {
+      "name": "label",
+      "description": "Accessible label for the toolbar.",
+      "type": "text",
+      "default": "Toolbar",
+      "required": true,
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Label"
+        },
+        "code": {
+          "prop": "label"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "flex",
+        "direction": "row",
+        "align": "center",
+        "justify": "space-between"
+      },
+      "attrs": {
+        "aria-label": "{label}"
+      },
+      "tokens": {
+        "max-width": "{size.banner.width}",
+        "min-height": "{size.toolbar.{size}}",
+        "background-color": "{color.surface.raised}",
+        "border-color": "{color.border.subtle}",
+        "border-width": "{border-width.100}",
+        "border-radius": "{radius.control}",
+        "gap": "{space.gap.md}",
+        "padding-inline": "{space.inset-x.sm}",
+        "padding-block": "{space.inset-y.sm}"
+      },
+      "parts": {
+        "startContent": {
+          "description": "Start-aligned actions — buttons, segmented controls, selectors.",
+          "slot": {
+            "name": "startContent",
+            "acceptsMode": "open"
+          },
+          "optional": true,
+          "layout": {
+            "direction": "row",
+            "align": "center"
+          },
+          "tokens": {
+            "gap": "{space.gap.sm}"
+          }
+        },
+        "centerContent": {
+          "description": "Centered content.",
+          "slot": {
+            "name": "centerContent",
+            "acceptsMode": "open"
+          },
+          "optional": true,
+          "layout": {
+            "direction": "row",
+            "align": "center"
+          },
+          "tokens": {
+            "gap": "{space.gap.sm}"
+          }
+        },
+        "endContent": {
+          "description": "End-aligned primary actions, selectors, badges.",
+          "slot": {
+            "name": "endContent",
+            "acceptsMode": "open"
+          },
+          "optional": true,
+          "layout": {
+            "direction": "row",
+            "align": "center"
+          },
+          "tokens": {
+            "gap": "{space.gap.sm}"
+          }
+        }
+      }
+    }
+  },
+  "a11y": {
+    "contrast": "AA"
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": "8nim1d0IPnehMxA7B7SYxC",
+      "componentSetKey": "e56c9f77a873e973aa6f567d0c275710cb039795",
+      "nodeId": "11:1097"
+    },
+    "code": {
+      "importPath": "src/components/Toolbar",
+      "export": "Toolbar"
+    }
+  }
+}

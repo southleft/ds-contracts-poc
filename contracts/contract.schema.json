@@ -52,7 +52,8 @@
             "select",
             "fieldset",
             "blockquote",
-            "code"
+            "code",
+            "kbd"
           ]
         },
         "role": {

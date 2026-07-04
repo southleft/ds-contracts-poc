@@ -1,0 +1,45 @@
+/* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/tab.contract.json (ds.tab v1.0.0)
+ * Regenerate with: npm run generate
+ */
+
+.root {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  border: 0;
+  cursor: pointer;
+  background-color: var(--color-surface-background);
+  font-family: var(--font-control-family);
+  font-size: var(--font-control-size-sm);
+  gap: var(--space-inset-y-sm);
+  padding-inline: var(--space-inset-x-sm);
+  padding-block: var(--space-inset-y-md);
+  border-radius: var(--radius-100);
+}
+
+.state-default {
+  color: var(--color-tab-default-foreground);
+  font-weight: var(--font-tab-default-weight);
+}
+
+.state-selected {
+  color: var(--color-tab-selected-foreground);
+  font-weight: var(--font-tab-selected-weight);
+}
+
+.root:hover:not(:disabled) {
+  background-color: var(--color-surface-sunken);
+}
+
+.iconSlot {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.endContent {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}

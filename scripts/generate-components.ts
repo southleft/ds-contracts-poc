@@ -448,6 +448,7 @@ const ELEMENT_META: Record<string, { attrs: string; el: string; supportsDisabled
   // which collides with slot props named cite (Astryx Blockquote API).
   blockquote: { attrs: 'HTMLAttributes', el: 'HTMLQuoteElement', supportsDisabled: false },
   code: { attrs: 'HTMLAttributes', el: 'HTMLElement', supportsDisabled: false },
+  kbd: { attrs: 'HTMLAttributes', el: 'HTMLElement', supportsDisabled: false },
 };
 
 const PARENT_PROP_REF = /^\{([a-z][\w-]*)\}$/;
@@ -777,12 +778,14 @@ function generateStories(contract: Contract, byId: Map<string, Contract>): strin
   const variantStories =
     enums.length > 0
       ? enums[0].type.enum
-          .map(
-            (v) => `
-export const ${pascal(v)}: Story = {
+          .map((v) => {
+            // A story named after the component itself collides with its import.
+            const storyName = pascal(v) === name ? `${pascal(v)}Variant` : pascal(v);
+            return `
+export const ${storyName}: Story = {
   args: { ${enums[0].bindings.code.prop}: '${v}' },
-};`,
-          )
+};`;
+          })
           .join('\n')
       : '';
 
@@ -803,7 +806,14 @@ export const ${pascal(v)}: Story = {
       if (!acceptedId) continue;
       const dep = byId.get(acceptedId)!;
       slotSampleImports.add(dep.name);
-      sample = `<${dep.name}>${textDefault(dep)}</${dep.name}>`;
+      const requiredAttrs = dep.props
+        .filter((p) => p.type === 'text' && p.required && p.bindings.code.prop !== 'children' && typeof p.default === 'string')
+        .map((p) => ` ${p.bindings.code.prop}="${p.default}"`)
+        .join('');
+      const hasChildren = dep.props.some((p) => p.type === 'text' && p.bindings.code.prop === 'children');
+      sample = hasChildren
+        ? `<${dep.name}${requiredAttrs}>${textDefault(dep)}</${dep.name}>`
+        : `<${dep.name}${requiredAttrs} />`;
     }
     slotStories += `
 /** The "${slot.name}" slot accepts: ${(slot.accepts ?? []).join(', ') || 'anything'}. */

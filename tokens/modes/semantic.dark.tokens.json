@@ -368,6 +368,84 @@
         "$type": "color",
         "$value": "{color.white}"
       }
+    },
+    "section": {
+      "section": {
+        "$type": "color",
+        "$value": "{color.gray.700}"
+      },
+      "muted": {
+        "$type": "color",
+        "$value": "{color.gray.800}"
+      }
+    },
+    "chat": {
+      "user": {
+        "background": {
+          "$type": "color",
+          "$value": "{color.blue.900}"
+        },
+        "foreground": {
+          "$type": "color",
+          "$value": "{color.gray.100}"
+        }
+      },
+      "assistant": {
+        "background": {
+          "$type": "color",
+          "$value": "{color.gray.700}"
+        },
+        "foreground": {
+          "$type": "color",
+          "$value": "{color.gray.100}"
+        }
+      },
+      "system": {
+        "background": {
+          "$type": "color",
+          "$value": "{color.gray.800}"
+        },
+        "foreground": {
+          "$type": "color",
+          "$value": "{color.gray.300}"
+        }
+      }
+    },
+    "tab": {
+      "default": {
+        "foreground": {
+          "$type": "color",
+          "$value": "{color.gray.300}"
+        }
+      },
+      "selected": {
+        "foreground": {
+          "$type": "color",
+          "$value": "{color.blue.400}"
+        }
+      }
+    },
+    "nav": {
+      "selected": {
+        "background": {
+          "$type": "color",
+          "$value": "{color.blue.900}"
+        },
+        "foreground": {
+          "$type": "color",
+          "$value": "{color.blue.100}"
+        }
+      },
+      "default": {
+        "background": {
+          "$type": "color",
+          "$value": "{color.gray.700}"
+        },
+        "foreground": {
+          "$type": "color",
+          "$value": "{color.gray.200}"
+        }
+      }
     }
   }
 }

@@ -1,0 +1,81 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "ds.tab-list",
+  "name": "TabList",
+  "version": "1.0.0",
+  "status": "draft",
+  "description": "Tab-style navigation container holding Tab items. API mirrors industry convention (Astryx TabList); roving-tabindex keyboard behavior and controlled selection are declared boundaries.",
+  "semantics": {
+    "element": "div",
+    "role": "tablist"
+  },
+  "props": [],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "flex",
+        "direction": "row",
+        "align": "center"
+      },
+      "tokens": {
+        "gap": "{space.inset-y.sm}",
+        "border-color": "{color.border.subtle}",
+        "padding-block": "{space.inset-y.xs}"
+      },
+      "parts": {
+        "tabs": {
+          "slot": {
+            "name": "children",
+            "accepts": [
+              "ds.tab"
+            ],
+            "acceptsMode": "prefer",
+            "defaultContent": [
+              {
+                "id": "ds.tab",
+                "props": {
+                  "label": "Overview",
+                  "state": "selected"
+                }
+              },
+              {
+                "id": "ds.tab",
+                "props": {
+                  "label": "Components"
+                }
+              },
+              {
+                "id": "ds.tab",
+                "props": {
+                  "label": "Tokens"
+                }
+              }
+            ]
+          },
+          "layout": {
+            "direction": "row",
+            "align": "center"
+          },
+          "tokens": {
+            "gap": "{space.inset-y.sm}"
+          }
+        }
+      }
+    }
+  },
+  "a11y": {
+    "contrast": "AA"
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": "8nim1d0IPnehMxA7B7SYxC",
+      "componentSetKey": "21786b6e7ff33e3d9ede5edb8ca07a56f3dbb8af",
+      "nodeId": "11:1034"
+    },
+    "code": {
+      "importPath": "src/components/TabList",
+      "export": "TabList"
+    }
+  }
+}

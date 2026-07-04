@@ -1,0 +1,118 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "ds.chat-message-metadata",
+  "name": "ChatMessageMetadata",
+  "version": "1.0.0",
+  "status": "draft",
+  "description": "Metadata row for a chat message: delivery status, timestamp, and footer content. API mirrors industry convention (Astryx ChatMessageMetadata): status drives the icon.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "status",
+      "description": "Delivery status — drives the leading icon.",
+      "type": {
+        "enum": [
+          "sending",
+          "sent",
+          "delivered",
+          "read",
+          "error"
+        ]
+      },
+      "default": "sent",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Status",
+          "values": {
+            "sending": "Sending",
+            "sent": "Sent",
+            "delivered": "Delivered",
+            "read": "Read",
+            "error": "Error"
+          }
+        },
+        "code": {
+          "prop": "status"
+        }
+      }
+    },
+    {
+      "name": "timestamp",
+      "description": "Display timestamp text.",
+      "type": "text",
+      "default": "2:14 PM",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Timestamp"
+        },
+        "code": {
+          "prop": "timestamp"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "flex",
+        "direction": "row",
+        "align": "center"
+      },
+      "tokens": {
+        "gap": "{space.inset-y.sm}",
+        "font-family": "{font.control.family}",
+        "font-size": "{font.badge.size}",
+        "color": "{color.text.secondary}"
+      },
+      "parts": {
+        "statusIcon": {
+          "description": "Delivery status glyph, selected by status. Decorative.",
+          "icon": {
+            "asset": "{status}",
+            "size": 12
+          }
+        },
+        "timestampText": {
+          "element": "span",
+          "content": {
+            "prop": "timestamp"
+          }
+        },
+        "footer": {
+          "description": "Footer content — model info, reactions, a copy affordance.",
+          "slot": {
+            "name": "footer",
+            "acceptsMode": "open"
+          },
+          "optional": true,
+          "layout": {
+            "direction": "row",
+            "align": "center"
+          },
+          "tokens": {
+            "gap": "{space.inset-y.sm}"
+          }
+        }
+      }
+    }
+  },
+  "a11y": {
+    "contrast": "AA"
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": "8nim1d0IPnehMxA7B7SYxC",
+      "componentSetKey": "25f176c40364af596d09a7d897e371208934ff43",
+      "nodeId": "11:789"
+    },
+    "code": {
+      "importPath": "src/components/ChatMessageMetadata",
+      "export": "ChatMessageMetadata"
+    }
+  }
+}

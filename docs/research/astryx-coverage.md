@@ -2,9 +2,13 @@
 
 *July 3, 2026. Source: full sweep of the Astryx component index (astryx.atmeta.com/components, 93 components, `@astryxdesign/core` v0.1.2 — prop tables recovered from the docs site's own component registry). Astryx is mirrored at the **API level**: prop names, types, enum vocabularies, and slot shapes. Every component below is either generated from a contract, or its absence is attributed to a specific named gap — never silently skipped.*
 
-**The scoreboard:** 22 components in the catalog. 19 mirror Astryx APIs directly (Banner, Button, Badge, Avatar, Card, Table family, Blockquote, Checkbox, Code, Divider, EmptyState, IconButton, StatusDot, TextArea, TextField, Toast, Token); 3 are system primitives (Stack, Inline, plus the table cells' density plumbing). The remaining Astryx components fall into **two honest categories**: static components blocked by a *named schema gap*, and behavior-heavy components outside the contract's declared boundary (contracts own API/anatomy/tokens; interactive behavior is a hand-written layer beside the generated shells).
+**The scoreboard (updated after round two):** **40 components in the catalog**, 38 of them mirroring Astryx APIs directly — the original set plus Blockquote, Checkbox, Code, Divider, EmptyState, IconButton, StatusDot, TextArea, TextField, Toast, Token, and the second wave: **ChatMessage, ChatMessageMetadata, ChatSystemMessage, Citation, Field, Kbd, List, ListItem, MetadataList, MetadataListItem, Section, SideNavItem, Tab, TabList, Toolbar, TopNav, TopNavItem, TypeaheadItem**. Stack and Inline are system layout primitives. The remaining Astryx components fall into **two honest categories**: static components blocked by a *named schema gap*, and behavior-heavy components outside the contract's declared boundary (contracts own API/anatomy/tokens; interactive behavior is a hand-written layer beside the generated shells).
 
-## Mirrored this round (11 new contracts)
+## Mirrored in round two (18 more contracts)
+
+The chat family (per-sender bubble tokens; per-status delivery icons; divider lines via `visibleWhen.equals`), the navigation family (Tab/TabList, TopNav/TopNavItem, SideNavItem — selection flattened to a `state` enum so both surfaces render it truthfully), the list families (List/ListItem, MetadataList/MetadataListItem with multi-child default content), the form-infrastructure Field wrapper (htmlFor association via an `inputID` prop), plus Toolbar, Section, Citation (label/number variants via `visibleWhen.equals`), Kbd, and TypeaheadItem. Flavor deviations, disclosed: `isSelected` booleans became `state` enums (boolean-conditional tokens are still a gap); `status={type,message}` objects remain out (structured-object props); Section drops the `transparent` variant (transparent color tokens).
+
+## Mirrored in round one (11 contracts)
 
 | Contract | Astryx source | API mirrored | Notable schema feature exercised |
 |---|---|---|---|
@@ -33,8 +37,9 @@ Props deliberately omitted from otherwise-mirrored APIs (all function-valued or 
 | Divider (orientation) | **Per-enum-value property overrides** (horizontal thickness=height, vertical thickness=width) |
 | Spinner, Skeleton (shimmer), isLoading states | **Animation tokens/keyframes** not in the token pipeline |
 | ButtonGroup, AvatarGroup | **Sibling-selector styling** (shared borders, overlap) not emitted by the CSS generator |
-| Kbd | **Value parsing** ("mod+K" → key badges) is display logic, not anatomy |
-| Field, Toolbar, Section, FormLayout, Grid, Layout, List, MetadataList, TypeaheadItem, Citation, Timestamp, Thumbnail, ChatMessage family, TopNav/SideNav families, VisuallyHidden, Overlay | Expressible subsets exist; deferred on priority, not capability — most need only the gaps above or none at all |
+| FormLayout, Grid, Layout | **Layout-by-enum** (direction/column props change flex/grid structure, not just token values) |
+| ChatMessage (alignment), Kbd (multi-key) | Shipped with the noted subset; the full behavior needs layout-by-enum / value parsing |
+| Timestamp, Thumbnail, VisuallyHidden, Overlay | Runtime formatting, image sources, raw-CSS utilities, or positioned overlays — small dedicated features, deferred on priority |
 
 ## Behavior boundary (declared, per the date-picker doctrine)
 

@@ -1,0 +1,62 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "ds.kbd",
+  "name": "Kbd",
+  "version": "1.0.0",
+  "status": "draft",
+  "description": "Renders a keyboard shortcut as a styled key badge for tooltips, menus, and help text. API mirrors industry convention (Astryx Kbd); multi-key parsing (\"mod+K\" into separate badges) is display logic — a documented gap, one badge per component for now.",
+  "semantics": {
+    "element": "kbd"
+  },
+  "props": [
+    {
+      "name": "keys",
+      "description": "The shortcut text, e.g. \"⌘K\".",
+      "type": "text",
+      "default": "⌘K",
+      "required": true,
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Keys"
+        },
+        "code": {
+          "prop": "keys"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "content": {
+        "prop": "keys"
+      },
+      "tokens": {
+        "background-color": "{color.surface.sunken}",
+        "color": "{color.surface.foreground}",
+        "border-color": "{color.border.subtle}",
+        "border-width": "{border-width.100}",
+        "border-radius": "{radius.100}",
+        "padding-inline": "{space.inset-x.xs}",
+        "padding-block": "{space.inset-y.xs}",
+        "font-family": "{font.code.family}",
+        "font-size": "{font.badge.size}"
+      }
+    }
+  },
+  "a11y": {
+    "contrast": "AA"
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": "8nim1d0IPnehMxA7B7SYxC",
+      "componentSetKey": "798616e092adf3047e8e3586844c2bcb0530fe0a",
+      "nodeId": "11:856"
+    },
+    "code": {
+      "importPath": "src/components/Kbd",
+      "export": "Kbd"
+    }
+  }
+}

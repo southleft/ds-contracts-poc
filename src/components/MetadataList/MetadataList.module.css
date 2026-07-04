@@ -1,0 +1,29 @@
+/* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/metadata-list.contract.json (ds.metadata-list v1.0.0)
+ * Regenerate with: npm run generate
+ */
+
+.root {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  border: 0;
+  width: 100%;
+  min-width: fit-content;
+  max-width: var(--size-card-width);
+  gap: var(--space-gap-sm);
+  font-family: var(--font-control-family);
+}
+
+.titleText {
+  font-size: var(--font-control-size-sm);
+  font-weight: var(--font-title-weight);
+  color: var(--color-surface-foreground);
+}
+
+.items {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: var(--space-gap-sm);
+}

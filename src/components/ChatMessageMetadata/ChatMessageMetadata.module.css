@@ -1,0 +1,32 @@
+/* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/chat-message-metadata.contract.json (ds.chat-message-metadata v1.0.0)
+ * Regenerate with: npm run generate
+ */
+
+.root {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border: 0;
+  gap: var(--space-inset-y-sm);
+  font-family: var(--font-control-family);
+  font-size: var(--font-badge-size);
+  color: var(--color-text-secondary);
+}
+
+.statusIcon svg {
+  width: 12px;
+  height: 12px;
+}
+
+.statusIcon {
+  display: inline-flex;
+  flex-shrink: 0;
+}
+
+.footer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--space-inset-y-sm);
+}

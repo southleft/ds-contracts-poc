@@ -1,0 +1,35 @@
+/* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/section.contract.json (ds.section v1.0.0)
+ * Regenerate with: npm run generate
+ */
+
+.root {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  border-style: solid;
+  width: 100%;
+  min-width: fit-content;
+  max-width: var(--size-card-width);
+  border-color: var(--color-border-subtle);
+  border-width: var(--border-width-100);
+  border-radius: var(--radius-card);
+  gap: var(--space-gap-sm);
+  padding-inline: var(--space-inset-x-md);
+  padding-block: var(--space-inset-x-md);
+}
+
+.variant-section {
+  background-color: var(--color-section-section);
+}
+
+.variant-muted {
+  background-color: var(--color-section-muted);
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: var(--space-gap-sm);
+}

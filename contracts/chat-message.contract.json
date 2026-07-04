@@ -1,0 +1,157 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "ds.chat-message",
+  "name": "ChatMessage",
+  "version": "1.0.0",
+  "status": "draft",
+  "description": "Sender-context wrapper for a chat message: avatar, name, bubble content, and metadata. API mirrors industry convention (Astryx ChatMessage); sender-based alignment flipping needs layout-by-enum — a documented gap; the bubble color follows sender.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "sender",
+      "description": "Who sent it — drives the bubble color scheme.",
+      "type": {
+        "enum": [
+          "user",
+          "assistant",
+          "system"
+        ]
+      },
+      "default": "assistant",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Sender",
+          "values": {
+            "user": "User",
+            "assistant": "Assistant",
+            "system": "System"
+          }
+        },
+        "code": {
+          "prop": "sender"
+        }
+      }
+    },
+    {
+      "name": "name",
+      "description": "Sender name shown above the message body.",
+      "type": "text",
+      "default": "Assistant",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Name"
+        },
+        "code": {
+          "prop": "name"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "flex",
+        "direction": "row",
+        "align": "start"
+      },
+      "tokens": {
+        "max-width": "{size.banner.width}",
+        "gap": "{space.gap.sm}",
+        "font-family": "{font.control.family}"
+      },
+      "parts": {
+        "avatarSlot": {
+          "description": "Avatar beside the message.",
+          "slot": {
+            "name": "avatar",
+            "accepts": [
+              "ds.avatar"
+            ],
+            "acceptsMode": "prefer"
+          },
+          "optional": true,
+          "layout": {
+            "direction": "row",
+            "align": "start"
+          }
+        },
+        "body": {
+          "layout": {
+            "direction": "column",
+            "grow": true
+          },
+          "tokens": {
+            "gap": "{space.inset-y.sm}"
+          },
+          "parts": {
+            "nameText": {
+              "element": "span",
+              "content": {
+                "prop": "name"
+              },
+              "tokens": {
+                "font-size": "{font.badge.size}",
+                "font-weight": "{font.title.weight}",
+                "color": "{color.text.secondary}"
+              }
+            },
+            "bubble": {
+              "description": "The message bubble — free-form content.",
+              "slot": {
+                "name": "children",
+                "acceptsMode": "open"
+              },
+              "layout": {
+                "direction": "column",
+                "align": "stretch"
+              },
+              "tokens": {
+                "background-color": "{color.chat.{sender}.background}",
+                "color": "{color.chat.{sender}.foreground}",
+                "border-radius": "{radius.card}",
+                "gap": "{space.inset-y.sm}",
+                "padding-inline": "{space.inset-x.sm}",
+                "padding-block": "{space.inset-y.md}",
+                "font-size": "{font.control.size.sm}"
+              }
+            },
+            "metadataSlot": {
+              "description": "Timestamp and delivery status below the bubble.",
+              "slot": {
+                "name": "metadata",
+                "accepts": [
+                  "ds.chat-message-metadata"
+                ],
+                "acceptsMode": "prefer"
+              },
+              "optional": true,
+              "layout": {
+                "direction": "row",
+                "align": "center"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "a11y": {
+    "contrast": "AA"
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": "8nim1d0IPnehMxA7B7SYxC",
+      "componentSetKey": "4af367f1f1c5044640cd31d2cbdd3e575b1bbb54",
+      "nodeId": "11:826"
+    },
+    "code": {
+      "importPath": "src/components/ChatMessage",
+      "export": "ChatMessage"
+    }
+  }
+}

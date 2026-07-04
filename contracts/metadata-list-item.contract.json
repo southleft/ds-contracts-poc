@@ -1,0 +1,110 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "ds.metadata-list-item",
+  "name": "MetadataListItem",
+  "version": "1.0.0",
+  "status": "draft",
+  "description": "One key–value pair in a MetadataList: a label and a value area. API mirrors industry convention (Astryx MetadataListItem).",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "label",
+      "description": "The key text.",
+      "type": "text",
+      "default": "Label",
+      "required": true,
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Label"
+        },
+        "code": {
+          "prop": "label"
+        }
+      }
+    },
+    {
+      "name": "value",
+      "description": "The value text. Use the children slot instead for rich values.",
+      "type": "text",
+      "default": "Value",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Value"
+        },
+        "code": {
+          "prop": "value"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "flex",
+        "direction": "row",
+        "align": "start"
+      },
+      "tokens": {
+        "gap": "{space.gap.md}",
+        "font-family": "{font.control.family}",
+        "font-size": "{font.control.size.sm}"
+      },
+      "parts": {
+        "iconSlot": {
+          "description": "Icon before the label.",
+          "slot": {
+            "name": "icon",
+            "acceptsMode": "open"
+          },
+          "optional": true,
+          "layout": {
+            "direction": "row",
+            "align": "center"
+          }
+        },
+        "labelText": {
+          "element": "span",
+          "content": {
+            "prop": "label"
+          },
+          "tokens": {
+            "color": "{color.text.secondary}",
+            "min-width": "{container.xs}"
+          }
+        },
+        "valueText": {
+          "element": "span",
+          "content": {
+            "prop": "value"
+          },
+          "layout": {
+            "grow": true
+          },
+          "tokens": {
+            "color": "{color.surface.foreground}",
+            "font-weight": "{font.control.weight}"
+          }
+        }
+      }
+    }
+  },
+  "a11y": {
+    "contrast": "AA"
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": "8nim1d0IPnehMxA7B7SYxC",
+      "componentSetKey": "84ae8763e0d2378b67b49878f355b264327d6c8a",
+      "nodeId": "11:964"
+    },
+    "code": {
+      "importPath": "src/components/MetadataListItem",
+      "export": "MetadataListItem"
+    }
+  }
+}

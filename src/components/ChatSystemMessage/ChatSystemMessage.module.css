@@ -1,0 +1,41 @@
+/* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/chat-system-message.contract.json (ds.chat-system-message v1.0.0)
+ * Regenerate with: npm run generate
+ */
+
+.root {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  width: 100%;
+  min-width: fit-content;
+  max-width: var(--size-card-width);
+  gap: var(--space-gap-sm);
+  font-family: var(--font-control-family);
+  font-size: var(--font-badge-size);
+  color: var(--color-text-secondary);
+}
+
+.lineStart {
+  display: flex;
+  flex: 1 1 auto;
+  min-width: 0;
+  height: var(--border-width-divider-subtle);
+  background-color: var(--color-divider-subtle);
+}
+
+.iconSlot {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.lineEnd {
+  display: flex;
+  flex: 1 1 auto;
+  min-width: 0;
+  height: var(--border-width-divider-subtle);
+  background-color: var(--color-divider-subtle);
+}

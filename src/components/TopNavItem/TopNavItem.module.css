@@ -1,0 +1,38 @@
+/* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/top-nav-item.contract.json (ds.top-nav-item v1.0.0)
+ * Regenerate with: npm run generate
+ */
+
+.root {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  border: 0;
+  border-radius: var(--radius-control);
+  gap: var(--space-inset-y-sm);
+  padding-inline: var(--space-inset-x-sm);
+  padding-block: var(--space-inset-y-md);
+  font-family: var(--font-control-family);
+  font-size: var(--font-control-size-sm);
+  font-weight: var(--font-control-weight);
+}
+
+.state-default {
+  background-color: var(--color-nav-default-background);
+  color: var(--color-nav-default-foreground);
+}
+
+.state-selected {
+  background-color: var(--color-nav-selected-background);
+  color: var(--color-nav-selected-foreground);
+}
+
+.root:hover:not(:disabled) {
+  background-color: var(--color-surface-sunken);
+}
+
+.iconSlot {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}

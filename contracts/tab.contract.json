@@ -1,0 +1,134 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "ds.tab",
+  "name": "Tab",
+  "version": "1.0.0",
+  "status": "draft",
+  "description": "A single tab in a TabList. API mirrors industry convention (Astryx Tab) with selection flattened to a state enum so both surfaces render it truthfully; selection behavior itself is a declared boundary.",
+  "semantics": {
+    "element": "button",
+    "role": "tab"
+  },
+  "props": [
+    {
+      "name": "state",
+      "description": "Selection state — selected tabs render semibold in the accent color.",
+      "type": {
+        "enum": [
+          "default",
+          "selected"
+        ]
+      },
+      "default": "default",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "State",
+          "values": {
+            "default": "Default",
+            "selected": "Selected"
+          }
+        },
+        "code": {
+          "prop": "state"
+        }
+      }
+    },
+    {
+      "name": "label",
+      "description": "Visible tab text.",
+      "type": "text",
+      "default": "Tab",
+      "required": true,
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Label"
+        },
+        "code": {
+          "prop": "label"
+        }
+      }
+    }
+  ],
+  "states": [
+    "hover"
+  ],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "inline-flex",
+        "direction": "row",
+        "align": "center"
+      },
+      "attrs": {
+        "type": "button"
+      },
+      "tokens": {
+        "background-color": "{color.surface.background}",
+        "color": "{color.tab.{state}.foreground}",
+        "font-weight": "{font.tab.{state}.weight}",
+        "font-family": "{font.control.family}",
+        "font-size": "{font.control.size.sm}",
+        "gap": "{space.inset-y.sm}",
+        "padding-inline": "{space.inset-x.sm}",
+        "padding-block": "{space.inset-y.md}",
+        "border-radius": "{radius.100}"
+      },
+      "states": {
+        "hover": {
+          "background-color": "{color.surface.sunken}"
+        }
+      },
+      "parts": {
+        "iconSlot": {
+          "slot": {
+            "name": "icon",
+            "acceptsMode": "open"
+          },
+          "optional": true,
+          "layout": {
+            "direction": "row",
+            "align": "center"
+          }
+        },
+        "labelText": {
+          "element": "span",
+          "content": {
+            "prop": "label"
+          }
+        },
+        "endContent": {
+          "description": "Badge count or status dot after the label.",
+          "slot": {
+            "name": "endContent",
+            "accepts": [
+              "ds.badge",
+              "ds.status-dot"
+            ],
+            "acceptsMode": "prefer"
+          },
+          "optional": true,
+          "layout": {
+            "direction": "row",
+            "align": "center"
+          }
+        }
+      }
+    }
+  },
+  "a11y": {
+    "contrast": "AA"
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": "8nim1d0IPnehMxA7B7SYxC",
+      "componentSetKey": "5f7bce1453ff86d3147e96d9249f9313497f3d68",
+      "nodeId": "11:1033"
+    },
+    "code": {
+      "importPath": "src/components/Tab",
+      "export": "Tab"
+    }
+  }
+}

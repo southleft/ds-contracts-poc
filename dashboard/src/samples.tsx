@@ -9,6 +9,24 @@ import {
   Badge,
   Banner,
   Blockquote,
+  ChatMessage,
+  ChatMessageMetadata,
+  ChatSystemMessage,
+  Citation,
+  Field,
+  Kbd,
+  List,
+  ListItem,
+  MetadataList,
+  MetadataListItem,
+  Section as DsSection,
+  SideNavItem,
+  Tab,
+  TabList,
+  Toolbar,
+  TopNav,
+  TopNavItem,
+  TypeaheadItem,
   Button,
   Card,
   Checkbox,
@@ -245,6 +263,146 @@ export function renderSample(
     case 'Token': {
       const p = props as Partial<TokenProps>;
       return <Token {...p} label={p.label || 'design-tokens'} />;
+    }
+
+    case 'ChatMessage':
+      return (
+        <ChatMessage
+          {...(props as Record<string, unknown>)}
+          avatar={<Avatar>AI</Avatar>}
+          metadata={<ChatMessageMetadata status="read" timestamp="2:14 PM" />}
+        >
+          Parity is clean — all three surfaces match the contracts.
+        </ChatMessage>
+      );
+
+    case 'ChatMessageMetadata':
+      return <ChatMessageMetadata {...(props as Record<string, unknown>)} />;
+
+    case 'ChatSystemMessage': {
+      const p = props as Record<string, unknown>;
+      return <ChatSystemMessage variant="divider" {...p} message={(p.message as string) || 'Today'} />;
+    }
+
+    case 'Citation': {
+      const p = props as Record<string, unknown>;
+      return <Citation {...p} sourceTitle={(p.sourceTitle as string) || 'astryx.atmeta.com'} href="#" />;
+    }
+
+    case 'Field': {
+      const p = props as Record<string, unknown>;
+      return (
+        <Field {...p} label={(p.label as string) || 'Workspace name'} inputID="field-control">
+          <input
+            id="field-control"
+            placeholder="Acme Inc."
+            style={{ padding: '8px 12px', border: '1px solid var(--color-border-subtle)', borderRadius: 8, font: 'inherit', background: 'var(--color-input-background)', color: 'inherit' }}
+          />
+        </Field>
+      );
+    }
+
+    case 'Kbd': {
+      const p = props as Record<string, unknown>;
+      return <Kbd {...p} keys={(p.keys as string) || '⌘K'} />;
+    }
+
+    case 'List':
+      return (
+        <List {...(props as Record<string, unknown>)}>
+          <ListItem label="Design tokens" description="232 governed values" endContent={<Badge variant="success">Synced</Badge>} />
+          <ListItem label="Contracts" description="One JSON file per component" />
+          <ListItem label="Parity checks" description="Three surfaces, one differ" />
+        </List>
+      );
+
+    case 'ListItem': {
+      const p = props as Record<string, unknown>;
+      return (
+        <ul style={{ listStyle: 'none', margin: 0, padding: 0, minWidth: 240 }}>
+          <ListItem {...p} label={(p.label as string) || 'List item'} endContent={<Badge variant="info">3</Badge>} />
+        </ul>
+      );
+    }
+
+    case 'MetadataList':
+      return (
+        <MetadataList {...(props as Record<string, unknown>)}>
+          <MetadataListItem label="Owner" value="Design Infrastructure" />
+          <MetadataListItem label="Status" value="Active" />
+          <MetadataListItem label="Updated" value="2 hours ago" />
+        </MetadataList>
+      );
+
+    case 'MetadataListItem': {
+      const p = props as Record<string, unknown>;
+      return <MetadataListItem {...p} label={(p.label as string) || 'Owner'} />;
+    }
+
+    case 'Section':
+      return (
+        <DsSection {...(props as Record<string, unknown>)}>
+          <span style={{ fontSize: 13 }}>Grouped page content lives inside a Section.</span>
+        </DsSection>
+      );
+
+    case 'SideNavItem': {
+      const p = props as Record<string, unknown>;
+      return (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 4, minWidth: 200 }}>
+          <SideNavItem label="Overview" state="selected" href="#" endContent={<Badge variant="info">4</Badge>} />
+          <SideNavItem {...p} label={(p.label as string) || 'Components'} href="#" />
+        </div>
+      );
+    }
+
+    case 'Tab': {
+      const p = props as Record<string, unknown>;
+      return <Tab {...p} label={(p.label as string) || 'Overview'} />;
+    }
+
+    case 'TabList':
+      return (
+        <TabList {...(props as Record<string, unknown>)}>
+          <Tab label="Overview" state="selected" />
+          <Tab label="Components" endContent={<Badge variant="info">40</Badge>} />
+          <Tab label="Tokens" />
+        </TabList>
+      );
+
+    case 'Toolbar': {
+      const p = props as Record<string, unknown>;
+      return (
+        <Toolbar
+          {...p}
+          label={(p.label as string) || 'Document actions'}
+          startContent={<><Token label="draft" /><Token label="v1.0.0" color="blue" /></>}
+          endContent={<Button variant="primary" size="sm">Publish</Button>}
+        />
+      );
+    }
+
+    case 'TopNav': {
+      const p = props as Record<string, unknown>;
+      return (
+        <TopNav
+          {...p}
+          label={(p.label as string) || 'Main'}
+          heading={<strong style={{ fontSize: 14 }}>Contract Hub</strong>}
+          startContent={<><TopNavItem label="Overview" state="selected" href="#" /><TopNavItem label="Components" href="#" /></>}
+          endContent={<Avatar>TJ</Avatar>}
+        />
+      );
+    }
+
+    case 'TopNavItem': {
+      const p = props as Record<string, unknown>;
+      return <TopNavItem {...p} label={(p.label as string) || 'Overview'} href="#" />;
+    }
+
+    case 'TypeaheadItem': {
+      const p = props as Record<string, unknown>;
+      return <TypeaheadItem {...p} label={(p.label as string) || 'Jordan Reyes'} description={(p.description as string) ?? 'Engineer · Platform'} icon={<Avatar size="sm">JR</Avatar>} />;
     }
 
     default:

@@ -1,0 +1,131 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "ds.typeahead-item",
+  "name": "TypeaheadItem",
+  "version": "1.0.0",
+  "status": "draft",
+  "description": "Default dropdown item for search results: label with optional icon and description. API mirrors industry convention (Astryx TypeaheadItem) with the item object flattened to explicit props.",
+  "semantics": {
+    "element": "div",
+    "role": "option"
+  },
+  "props": [
+    {
+      "name": "label",
+      "description": "Primary result text.",
+      "type": "text",
+      "default": "Search result",
+      "required": true,
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Label"
+        },
+        "code": {
+          "prop": "label"
+        }
+      }
+    },
+    {
+      "name": "description",
+      "description": "Secondary text below the label.",
+      "type": "text",
+      "default": "Supporting detail about this result.",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Description"
+        },
+        "code": {
+          "prop": "description"
+        }
+      }
+    }
+  ],
+  "states": [
+    "hover"
+  ],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "flex",
+        "direction": "row",
+        "align": "center"
+      },
+      "tokens": {
+        "max-width": "{size.card.width}",
+        "background-color": "{color.surface.raised}",
+        "border-radius": "{radius.100}",
+        "gap": "{space.gap.sm}",
+        "padding-inline": "{space.inset-x.sm}",
+        "padding-block": "{space.inset-y.md}",
+        "font-family": "{font.control.family}",
+        "color": "{color.surface.foreground}"
+      },
+      "states": {
+        "hover": {
+          "background-color": "{color.surface.sunken}"
+        }
+      },
+      "parts": {
+        "iconSlot": {
+          "description": "Icon or avatar before the label.",
+          "slot": {
+            "name": "icon",
+            "acceptsMode": "open"
+          },
+          "optional": true,
+          "layout": {
+            "direction": "row",
+            "align": "center"
+          }
+        },
+        "textCol": {
+          "layout": {
+            "direction": "column",
+            "grow": true
+          },
+          "tokens": {
+            "gap": "{space.inset-y.xs}"
+          },
+          "parts": {
+            "labelText": {
+              "element": "span",
+              "content": {
+                "prop": "label"
+              },
+              "tokens": {
+                "font-size": "{font.control.size.sm}",
+                "font-weight": "{font.control.weight}"
+              }
+            },
+            "descriptionText": {
+              "element": "span",
+              "content": {
+                "prop": "description"
+              },
+              "tokens": {
+                "font-size": "{font.control.size.sm}",
+                "color": "{color.text.secondary}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "a11y": {
+    "contrast": "AA"
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": "8nim1d0IPnehMxA7B7SYxC",
+      "componentSetKey": "e71ef70ee99e707af6c5eaa57b6336ae906b5690",
+      "nodeId": "11:1119"
+    },
+    "code": {
+      "importPath": "src/components/TypeaheadItem",
+      "export": "TypeaheadItem"
+    }
+  }
+}

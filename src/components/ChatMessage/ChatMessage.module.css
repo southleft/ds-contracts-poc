@@ -1,0 +1,77 @@
+/* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/chat-message.contract.json (ds.chat-message v1.0.0)
+ * Regenerate with: npm run generate
+ */
+
+.root {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  border: 0;
+  width: 100%;
+  min-width: fit-content;
+  max-width: var(--size-banner-width);
+  gap: var(--space-gap-sm);
+  font-family: var(--font-control-family);
+}
+
+.avatarSlot {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  min-width: 0;
+  gap: var(--space-inset-y-sm);
+}
+
+.nameText {
+  font-size: var(--font-badge-size);
+  font-weight: var(--font-title-weight);
+  color: var(--color-text-secondary);
+}
+
+.bubble {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  border-radius: var(--radius-card);
+  gap: var(--space-inset-y-sm);
+  padding-inline: var(--space-inset-x-sm);
+  padding-block: var(--space-inset-y-md);
+  font-size: var(--font-control-size-sm);
+}
+
+.sender-user .bubble {
+  background-color: var(--color-chat-user-background);
+}
+
+.sender-assistant .bubble {
+  background-color: var(--color-chat-assistant-background);
+}
+
+.sender-system .bubble {
+  background-color: var(--color-chat-system-background);
+}
+
+.sender-user .bubble {
+  color: var(--color-chat-user-foreground);
+}
+
+.sender-assistant .bubble {
+  color: var(--color-chat-assistant-foreground);
+}
+
+.sender-system .bubble {
+  color: var(--color-chat-system-foreground);
+}
+
+.metadataSlot {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}

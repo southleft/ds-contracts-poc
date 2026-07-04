@@ -1,0 +1,21 @@
+/* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/tab-list.contract.json (ds.tab-list v1.0.0)
+ * Regenerate with: npm run generate
+ */
+
+.root {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border-style: solid;
+  gap: var(--space-inset-y-sm);
+  border-color: var(--color-border-subtle);
+  padding-block: var(--space-inset-y-xs);
+}
+
+.tabs {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--space-inset-y-sm);
+}

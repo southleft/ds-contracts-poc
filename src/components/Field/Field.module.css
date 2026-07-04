@@ -1,0 +1,48 @@
+/* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/field.contract.json (ds.field v1.0.0)
+ * Regenerate with: npm run generate
+ */
+
+.root {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  border: 0;
+  width: 100%;
+  min-width: fit-content;
+  max-width: var(--size-card-width);
+  gap: var(--space-inset-y-sm);
+  font-family: var(--font-control-family);
+  color: var(--color-surface-foreground);
+}
+
+.labelRow {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--space-inset-y-sm);
+  font-size: var(--font-control-size-sm);
+  font-weight: var(--font-control-weight);
+}
+
+.requiredMark svg {
+  width: 10px;
+  height: 10px;
+}
+
+.requiredMark {
+  display: inline-flex;
+  flex-shrink: 0;
+  color: var(--color-action-danger-background);
+}
+
+.descriptionText {
+  font-size: var(--font-control-size-sm);
+  color: var(--color-text-secondary);
+}
+
+.control {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}

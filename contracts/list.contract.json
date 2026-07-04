@@ -1,0 +1,115 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "ds.list",
+  "name": "List",
+  "version": "1.0.0",
+  "status": "draft",
+  "description": "Vertical collection of items with consistent density. API mirrors industry convention (Astryx List); dividers need sibling-selector styling and marker styles need list-style tokens — documented gaps.",
+  "semantics": {
+    "element": "ul"
+  },
+  "props": [
+    {
+      "name": "density",
+      "description": "Item spacing density.",
+      "type": {
+        "enum": [
+          "compact",
+          "balanced",
+          "spacious"
+        ]
+      },
+      "default": "balanced",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Density",
+          "values": {
+            "compact": "Compact",
+            "balanced": "Balanced",
+            "spacious": "Spacious"
+          }
+        },
+        "code": {
+          "prop": "density"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "flex",
+        "direction": "column",
+        "align": "stretch"
+      },
+      "tokens": {
+        "max-width": "{size.card.width}",
+        "background-color": "{color.surface.raised}",
+        "border-color": "{color.border.subtle}",
+        "border-width": "{border-width.100}",
+        "border-radius": "{radius.card}",
+        "gap": "{space.list.{density}}",
+        "padding-inline": "{space.inset-y.sm}",
+        "padding-block": "{space.inset-y.sm}"
+      },
+      "parts": {
+        "items": {
+          "description": "The list rows.",
+          "slot": {
+            "name": "children",
+            "accepts": [
+              "ds.list-item"
+            ],
+            "acceptsMode": "prefer",
+            "defaultContent": [
+              {
+                "id": "ds.list-item",
+                "props": {
+                  "label": "Design tokens",
+                  "description": "210 governed values"
+                }
+              },
+              {
+                "id": "ds.list-item",
+                "props": {
+                  "label": "Contracts",
+                  "description": "One JSON file per component"
+                }
+              },
+              {
+                "id": "ds.list-item",
+                "props": {
+                  "label": "Parity checks",
+                  "description": "Three surfaces, one differ"
+                }
+              }
+            ]
+          },
+          "layout": {
+            "direction": "column",
+            "align": "stretch"
+          },
+          "tokens": {
+            "gap": "{space.list.{density}}"
+          }
+        }
+      }
+    }
+  },
+  "a11y": {
+    "contrast": "AA"
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": "8nim1d0IPnehMxA7B7SYxC",
+      "componentSetKey": "e506f83390b9f1495394675f91c6aa03a9317162",
+      "nodeId": "11:963"
+    },
+    "code": {
+      "importPath": "src/components/List",
+      "export": "List"
+    }
+  }
+}

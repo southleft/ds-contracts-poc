@@ -1,0 +1,163 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "ds.field",
+  "name": "Field",
+  "version": "1.0.0",
+  "status": "draft",
+  "description": "Form field wrapper providing a label, description, and required indicator around any control. API mirrors industry convention (Astryx Field): the label targets the control via inputID; validation status needs structured-object props — a documented gap.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "isRequired",
+      "description": "Shows the required indicator beside the label.",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Required"
+        },
+        "code": {
+          "prop": "isRequired"
+        }
+      }
+    },
+    {
+      "name": "label",
+      "description": "Always rendered — even custom controls need names.",
+      "type": "text",
+      "default": "Field label",
+      "required": true,
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Label"
+        },
+        "code": {
+          "prop": "label"
+        }
+      }
+    },
+    {
+      "name": "inputID",
+      "description": "The wrapped control's id, used for the label's htmlFor association.",
+      "type": "text",
+      "default": "field-control",
+      "required": true,
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "InputID"
+        },
+        "code": {
+          "prop": "inputID"
+        }
+      }
+    },
+    {
+      "name": "description",
+      "description": "Helper text between the label and the control.",
+      "type": "text",
+      "default": "Helper text for the wrapped control.",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Description"
+        },
+        "code": {
+          "prop": "description"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "flex",
+        "direction": "column",
+        "align": "stretch"
+      },
+      "tokens": {
+        "max-width": "{size.card.width}",
+        "gap": "{space.inset-y.sm}",
+        "font-family": "{font.control.family}",
+        "color": "{color.surface.foreground}"
+      },
+      "parts": {
+        "labelRow": {
+          "element": "label",
+          "layout": {
+            "direction": "row",
+            "align": "center"
+          },
+          "attrs": {
+            "htmlFor": "{inputID}"
+          },
+          "tokens": {
+            "gap": "{space.inset-y.sm}",
+            "font-size": "{font.control.size.sm}",
+            "font-weight": "{font.control.weight}"
+          },
+          "parts": {
+            "labelText": {
+              "element": "span",
+              "content": {
+                "prop": "label"
+              }
+            },
+            "requiredMark": {
+              "icon": {
+                "asset": "asterisk",
+                "size": 10
+              },
+              "visibleWhen": {
+                "prop": "isRequired"
+              },
+              "tokens": {
+                "color": "{color.action.danger.background}"
+              }
+            }
+          }
+        },
+        "descriptionText": {
+          "element": "span",
+          "content": {
+            "prop": "description"
+          },
+          "tokens": {
+            "font-size": "{font.control.size.sm}",
+            "color": "{color.text.secondary}"
+          }
+        },
+        "control": {
+          "description": "The wrapped form control.",
+          "slot": {
+            "name": "children",
+            "acceptsMode": "open"
+          },
+          "layout": {
+            "direction": "column",
+            "align": "stretch"
+          }
+        }
+      }
+    }
+  },
+  "a11y": {
+    "contrast": "AA"
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": "8nim1d0IPnehMxA7B7SYxC",
+      "componentSetKey": "e690d926c7f929fb354ba4aa0d3b355db929c444",
+      "nodeId": "11:845"
+    },
+    "code": {
+      "importPath": "src/components/Field",
+      "export": "Field"
+    }
+  }
+}

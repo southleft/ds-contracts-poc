@@ -2,7 +2,7 @@
   "system": {
     "name": "DS Contracts POC",
     "catalogVersion": "0.1.0",
-    "gitCommit": "94e7528",
+    "gitCommit": "050c3aa",
     "source": "Compiled from contracts/*.contract.json + tokens/ + context/rules.json — do not edit."
   },
   "package": {
@@ -77,6 +77,9 @@
       "--space-gap-lg",
       "--space-table-cell-y-comfortable",
       "--space-table-cell-y-compact",
+      "--space-list-compact",
+      "--space-list-balanced",
+      "--space-list-spacious",
       "--radius-control",
       "--radius-badge",
       "--radius-card",
@@ -96,6 +99,9 @@
       "--size-checkbox-md",
       "--size-dot",
       "--size-divider-length",
+      "--size-toolbar-sm",
+      "--size-toolbar-md",
+      "--size-toolbar-lg",
       "--border-width-focus",
       "--border-width-divider-subtle",
       "--border-width-divider-strong",
@@ -110,6 +116,8 @@
       "--font-avatar-size-sm",
       "--font-avatar-size-md",
       "--font-code-family",
+      "--font-tab-default-weight",
+      "--font-tab-selected-weight",
       "--color-surface-background",
       "--color-surface-foreground",
       "--color-surface-raised",
@@ -187,7 +195,21 @@
       "--color-checkbox-checked-border",
       "--color-checkbox-indeterminate-background",
       "--color-checkbox-indeterminate-border",
-      "--color-checkbox-icon"
+      "--color-checkbox-icon",
+      "--color-section-section",
+      "--color-section-muted",
+      "--color-chat-user-background",
+      "--color-chat-user-foreground",
+      "--color-chat-assistant-background",
+      "--color-chat-assistant-foreground",
+      "--color-chat-system-background",
+      "--color-chat-system-foreground",
+      "--color-tab-default-foreground",
+      "--color-tab-selected-foreground",
+      "--color-nav-selected-background",
+      "--color-nav-selected-foreground",
+      "--color-nav-default-background",
+      "--color-nav-default-foreground"
     ],
     "allCssVariables": [
       "--color-white",
@@ -289,6 +311,9 @@
       "--space-gap-lg",
       "--space-table-cell-y-comfortable",
       "--space-table-cell-y-compact",
+      "--space-list-compact",
+      "--space-list-balanced",
+      "--space-list-spacious",
       "--radius-control",
       "--radius-badge",
       "--radius-card",
@@ -308,6 +333,9 @@
       "--size-checkbox-md",
       "--size-dot",
       "--size-divider-length",
+      "--size-toolbar-sm",
+      "--size-toolbar-md",
+      "--size-toolbar-lg",
       "--border-width-focus",
       "--border-width-divider-subtle",
       "--border-width-divider-strong",
@@ -322,6 +350,8 @@
       "--font-avatar-size-sm",
       "--font-avatar-size-md",
       "--font-code-family",
+      "--font-tab-default-weight",
+      "--font-tab-selected-weight",
       "--color-surface-background",
       "--color-surface-foreground",
       "--color-surface-raised",
@@ -399,7 +429,21 @@
       "--color-checkbox-checked-border",
       "--color-checkbox-indeterminate-background",
       "--color-checkbox-indeterminate-border",
-      "--color-checkbox-icon"
+      "--color-checkbox-icon",
+      "--color-section-section",
+      "--color-section-muted",
+      "--color-chat-user-background",
+      "--color-chat-user-foreground",
+      "--color-chat-assistant-background",
+      "--color-chat-assistant-foreground",
+      "--color-chat-system-background",
+      "--color-chat-system-foreground",
+      "--color-tab-default-foreground",
+      "--color-tab-selected-foreground",
+      "--color-nav-selected-background",
+      "--color-nav-selected-foreground",
+      "--color-nav-default-background",
+      "--color-nav-default-foreground"
     ]
   },
   "components": [
@@ -641,6 +685,144 @@
       ]
     },
     {
+      "id": "ds.chat-message-metadata",
+      "name": "ChatMessageMetadata",
+      "version": "1.0.0",
+      "status": "draft",
+      "description": "Metadata row for a chat message: delivery status, timestamp, and footer content. API mirrors industry convention (Astryx ChatMessageMetadata): status drives the icon.",
+      "figma": {
+        "representation": "component",
+        "componentSetKey": "25f176c40364af596d09a7d897e371208934ff43"
+      },
+      "props": [
+        {
+          "name": "status",
+          "type": [
+            "sending",
+            "sent",
+            "delivered",
+            "read",
+            "error"
+          ],
+          "default": "sent",
+          "description": "Delivery status — drives the leading icon."
+        },
+        {
+          "name": "timestamp",
+          "type": "string",
+          "default": "2:14 PM",
+          "description": "Display timestamp text."
+        }
+      ],
+      "children": {
+        "kind": "none"
+      },
+      "slots": [
+        {
+          "prop": "footer",
+          "accepts": [],
+          "acceptsMode": "open",
+          "optional": true,
+          "description": "Footer content — model info, reactions, a copy affordance."
+        }
+      ]
+    },
+    {
+      "id": "ds.chat-message",
+      "name": "ChatMessage",
+      "version": "1.0.0",
+      "status": "draft",
+      "description": "Sender-context wrapper for a chat message: avatar, name, bubble content, and metadata. API mirrors industry convention (Astryx ChatMessage); sender-based alignment flipping needs layout-by-enum — a documented gap; the bubble color follows sender.",
+      "figma": {
+        "representation": "component",
+        "componentSetKey": "4af367f1f1c5044640cd31d2cbdd3e575b1bbb54"
+      },
+      "props": [
+        {
+          "name": "sender",
+          "type": [
+            "user",
+            "assistant",
+            "system"
+          ],
+          "default": "assistant",
+          "description": "Who sent it — drives the bubble color scheme."
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "default": "Assistant",
+          "description": "Sender name shown above the message body."
+        }
+      ],
+      "children": {
+        "kind": "slot",
+        "accepts": [],
+        "acceptsMode": "open",
+        "description": "The message bubble — free-form content."
+      },
+      "slots": [
+        {
+          "prop": "avatar",
+          "accepts": [
+            "Avatar"
+          ],
+          "acceptsMode": "prefer",
+          "optional": true,
+          "description": "Avatar beside the message."
+        },
+        {
+          "prop": "metadata",
+          "accepts": [
+            "ChatMessageMetadata"
+          ],
+          "acceptsMode": "prefer",
+          "optional": true,
+          "description": "Timestamp and delivery status below the bubble."
+        }
+      ]
+    },
+    {
+      "id": "ds.chat-system-message",
+      "name": "ChatSystemMessage",
+      "version": "1.0.0",
+      "status": "draft",
+      "description": "Centered system message for non-sender chat content — date separators, membership changes, status notices. API mirrors industry convention (Astryx ChatSystemMessage): the divider variant adds a line on each side.",
+      "figma": {
+        "representation": "component",
+        "componentSetKey": "2c5056fcf5f0b075ec7be6019f20eb8cdc9d5efb"
+      },
+      "props": [
+        {
+          "name": "variant",
+          "type": [
+            "default",
+            "divider"
+          ],
+          "default": "default",
+          "description": "Plain centered text, or text between divider lines."
+        },
+        {
+          "name": "message",
+          "type": "string",
+          "default": "Today",
+          "required": true,
+          "description": "Short factual string — a date, a join notice, a status change."
+        }
+      ],
+      "children": {
+        "kind": "none"
+      },
+      "slots": [
+        {
+          "prop": "icon",
+          "accepts": [],
+          "acceptsMode": "open",
+          "optional": true
+        }
+      ]
+    },
+    {
       "id": "ds.checkbox",
       "name": "Checkbox",
       "version": "1.0.0",
@@ -682,6 +864,51 @@
           "type": "string",
           "default": "Supporting detail for this option.",
           "description": "Secondary text below the label."
+        }
+      ],
+      "children": {
+        "kind": "none"
+      },
+      "slots": []
+    },
+    {
+      "id": "ds.citation",
+      "name": "Citation",
+      "version": "1.0.0",
+      "status": "draft",
+      "description": "Inline reference to an external source — attribution in AI-generated responses, articles, anywhere provenance matters. API mirrors industry convention (Astryx Citation): label chips or compact numbered badges.",
+      "figma": {
+        "representation": "component",
+        "componentSetKey": "84b0a3c9abb3122d60820f8047a8b6d200956067"
+      },
+      "props": [
+        {
+          "name": "variant",
+          "type": [
+            "label",
+            "number"
+          ],
+          "default": "label",
+          "description": "Label chip with the source title, or a compact numbered badge. Don't mix both in one paragraph."
+        },
+        {
+          "name": "sourceTitle",
+          "type": "string",
+          "default": "example.com",
+          "required": true,
+          "description": "The source's display title (label variant)."
+        },
+        {
+          "name": "number",
+          "type": "string",
+          "default": "1",
+          "description": "Display index (number variant)."
+        },
+        {
+          "name": "href",
+          "type": "string",
+          "default": "https://example.com",
+          "description": "Source URL."
         }
       ],
       "children": {
@@ -783,6 +1010,52 @@
       ]
     },
     {
+      "id": "ds.field",
+      "name": "Field",
+      "version": "1.0.0",
+      "status": "draft",
+      "description": "Form field wrapper providing a label, description, and required indicator around any control. API mirrors industry convention (Astryx Field): the label targets the control via inputID; validation status needs structured-object props — a documented gap.",
+      "figma": {
+        "representation": "component",
+        "componentSetKey": "e690d926c7f929fb354ba4aa0d3b355db929c444"
+      },
+      "props": [
+        {
+          "name": "isRequired",
+          "type": "boolean",
+          "default": false,
+          "description": "Shows the required indicator beside the label."
+        },
+        {
+          "name": "label",
+          "type": "string",
+          "default": "Field label",
+          "required": true,
+          "description": "Always rendered — even custom controls need names."
+        },
+        {
+          "name": "inputID",
+          "type": "string",
+          "default": "field-control",
+          "required": true,
+          "description": "The wrapped control's id, used for the label's htmlFor association."
+        },
+        {
+          "name": "description",
+          "type": "string",
+          "default": "Helper text for the wrapped control.",
+          "description": "Helper text between the label and the control."
+        }
+      ],
+      "children": {
+        "kind": "slot",
+        "accepts": [],
+        "acceptsMode": "open",
+        "description": "The wrapped form control."
+      },
+      "slots": []
+    },
+    {
       "id": "ds.icon-button",
       "name": "IconButton",
       "version": "1.0.0",
@@ -871,6 +1144,260 @@
       "slots": []
     },
     {
+      "id": "ds.kbd",
+      "name": "Kbd",
+      "version": "1.0.0",
+      "status": "draft",
+      "description": "Renders a keyboard shortcut as a styled key badge for tooltips, menus, and help text. API mirrors industry convention (Astryx Kbd); multi-key parsing (\"mod+K\" into separate badges) is display logic — a documented gap, one badge per component for now.",
+      "figma": {
+        "representation": "component",
+        "componentSetKey": "798616e092adf3047e8e3586844c2bcb0530fe0a"
+      },
+      "props": [
+        {
+          "name": "keys",
+          "type": "string",
+          "default": "⌘K",
+          "required": true,
+          "description": "The shortcut text, e.g. \"⌘K\"."
+        }
+      ],
+      "children": {
+        "kind": "slot",
+        "accepts": [],
+        "acceptsMode": "open",
+        "description": "Any catalog content."
+      },
+      "slots": []
+    },
+    {
+      "id": "ds.list-item",
+      "name": "ListItem",
+      "version": "1.0.0",
+      "status": "draft",
+      "description": "A single row in a List: label with optional description, leading and trailing content. API mirrors industry convention (Astryx ListItem); click/link behavior is a declared boundary.",
+      "figma": {
+        "representation": "component",
+        "componentSetKey": "470b0337773739a1521b294855bed053c8e7eb33"
+      },
+      "props": [
+        {
+          "name": "label",
+          "type": "string",
+          "default": "List item",
+          "required": true,
+          "description": "Primary text."
+        },
+        {
+          "name": "description",
+          "type": "string",
+          "default": "Supporting detail for this item.",
+          "description": "Secondary content below the label."
+        }
+      ],
+      "children": {
+        "kind": "none"
+      },
+      "slots": [
+        {
+          "prop": "startContent",
+          "accepts": [],
+          "acceptsMode": "open",
+          "optional": true,
+          "description": "Leading content — icon or avatar."
+        },
+        {
+          "prop": "endContent",
+          "accepts": [
+            "Badge"
+          ],
+          "acceptsMode": "prefer",
+          "optional": true,
+          "description": "Trailing content — badge, count, chevron."
+        }
+      ]
+    },
+    {
+      "id": "ds.list",
+      "name": "List",
+      "version": "1.0.0",
+      "status": "draft",
+      "description": "Vertical collection of items with consistent density. API mirrors industry convention (Astryx List); dividers need sibling-selector styling and marker styles need list-style tokens — documented gaps.",
+      "figma": {
+        "representation": "component",
+        "componentSetKey": "e506f83390b9f1495394675f91c6aa03a9317162"
+      },
+      "props": [
+        {
+          "name": "density",
+          "type": [
+            "compact",
+            "balanced",
+            "spacious"
+          ],
+          "default": "balanced",
+          "description": "Item spacing density."
+        }
+      ],
+      "children": {
+        "kind": "slot",
+        "accepts": [
+          "ListItem"
+        ],
+        "acceptsMode": "prefer",
+        "description": "The list rows."
+      },
+      "slots": []
+    },
+    {
+      "id": "ds.metadata-list-item",
+      "name": "MetadataListItem",
+      "version": "1.0.0",
+      "status": "draft",
+      "description": "One key–value pair in a MetadataList: a label and a value area. API mirrors industry convention (Astryx MetadataListItem).",
+      "figma": {
+        "representation": "component",
+        "componentSetKey": "84ae8763e0d2378b67b49878f355b264327d6c8a"
+      },
+      "props": [
+        {
+          "name": "label",
+          "type": "string",
+          "default": "Label",
+          "required": true,
+          "description": "The key text."
+        },
+        {
+          "name": "value",
+          "type": "string",
+          "default": "Value",
+          "description": "The value text. Use the children slot instead for rich values."
+        }
+      ],
+      "children": {
+        "kind": "none"
+      },
+      "slots": [
+        {
+          "prop": "icon",
+          "accepts": [],
+          "acceptsMode": "open",
+          "optional": true,
+          "description": "Icon before the label."
+        }
+      ]
+    },
+    {
+      "id": "ds.metadata-list",
+      "name": "MetadataList",
+      "version": "1.0.0",
+      "status": "draft",
+      "description": "Key–value pairs for object attributes — detail panels, settings summaries, record information. API mirrors industry convention (Astryx MetadataList); multi-column layout and collapse behavior are documented boundaries.",
+      "figma": {
+        "representation": "component",
+        "componentSetKey": "f4c106dcd1de208ef1018b6d8ee4e30cdc030f0d"
+      },
+      "props": [
+        {
+          "name": "title",
+          "type": "string",
+          "default": "Details",
+          "description": "Heading above the list."
+        }
+      ],
+      "children": {
+        "kind": "slot",
+        "accepts": [
+          "MetadataListItem"
+        ],
+        "acceptsMode": "prefer"
+      },
+      "slots": []
+    },
+    {
+      "id": "ds.section",
+      "name": "Section",
+      "version": "1.0.0",
+      "status": "draft",
+      "description": "The standard way to create page regions and group related content — settings groups, form sections, sidebar areas. API mirrors industry convention (Astryx Section) at the variant level; the transparent variant needs transparent color tokens — a documented gap.",
+      "figma": {
+        "representation": "component",
+        "componentSetKey": "f47b739d72cc4bfc159e1b656f78e5dbceaf0200"
+      },
+      "props": [
+        {
+          "name": "variant",
+          "type": [
+            "section",
+            "muted"
+          ],
+          "default": "section",
+          "description": "Background treatment. Muted only to call attention."
+        }
+      ],
+      "children": {
+        "kind": "slot",
+        "accepts": [],
+        "acceptsMode": "open"
+      },
+      "slots": []
+    },
+    {
+      "id": "ds.side-nav-item",
+      "name": "SideNavItem",
+      "version": "1.0.0",
+      "status": "draft",
+      "description": "A sidebar navigation row: icon, label, and trailing content, with a selected state. API mirrors industry convention (Astryx SideNavItem); nesting and collapse are behavior-layer boundaries.",
+      "figma": {
+        "representation": "component",
+        "componentSetKey": "155b665997cadb6f418aa74bdd0ad9b00e348e97"
+      },
+      "props": [
+        {
+          "name": "state",
+          "type": [
+            "default",
+            "selected"
+          ],
+          "default": "default",
+          "description": "Whether this item is the current page."
+        },
+        {
+          "name": "label",
+          "type": "string",
+          "default": "Navigation item",
+          "required": true,
+          "description": "Item text."
+        },
+        {
+          "name": "href",
+          "type": "string",
+          "default": "#",
+          "description": "Navigation target URL."
+        }
+      ],
+      "children": {
+        "kind": "none"
+      },
+      "slots": [
+        {
+          "prop": "icon",
+          "accepts": [],
+          "acceptsMode": "open",
+          "optional": true
+        },
+        {
+          "prop": "endContent",
+          "accepts": [
+            "Badge"
+          ],
+          "acceptsMode": "prefer",
+          "optional": true,
+          "description": "Trailing badge or count."
+        }
+      ]
+    },
+    {
       "id": "ds.stack",
       "name": "Stack",
       "version": "1.0.0",
@@ -935,6 +1462,76 @@
         "accepts": [],
         "acceptsMode": "open",
         "description": "Any catalog content."
+      },
+      "slots": []
+    },
+    {
+      "id": "ds.tab",
+      "name": "Tab",
+      "version": "1.0.0",
+      "status": "draft",
+      "description": "A single tab in a TabList. API mirrors industry convention (Astryx Tab) with selection flattened to a state enum so both surfaces render it truthfully; selection behavior itself is a declared boundary.",
+      "figma": {
+        "representation": "component",
+        "componentSetKey": "5f7bce1453ff86d3147e96d9249f9313497f3d68"
+      },
+      "props": [
+        {
+          "name": "state",
+          "type": [
+            "default",
+            "selected"
+          ],
+          "default": "default",
+          "description": "Selection state — selected tabs render semibold in the accent color."
+        },
+        {
+          "name": "label",
+          "type": "string",
+          "default": "Tab",
+          "required": true,
+          "description": "Visible tab text."
+        }
+      ],
+      "children": {
+        "kind": "none"
+      },
+      "slots": [
+        {
+          "prop": "icon",
+          "accepts": [],
+          "acceptsMode": "open",
+          "optional": true
+        },
+        {
+          "prop": "endContent",
+          "accepts": [
+            "Badge",
+            "StatusDot"
+          ],
+          "acceptsMode": "prefer",
+          "optional": true,
+          "description": "Badge count or status dot after the label."
+        }
+      ]
+    },
+    {
+      "id": "ds.tab-list",
+      "name": "TabList",
+      "version": "1.0.0",
+      "status": "draft",
+      "description": "Tab-style navigation container holding Tab items. API mirrors industry convention (Astryx TabList); roving-tabindex keyboard behavior and controlled selection are declared boundaries.",
+      "figma": {
+        "representation": "component",
+        "componentSetKey": "21786b6e7ff33e3d9ede5edb8ca07a56f3dbb8af"
+      },
+      "props": [],
+      "children": {
+        "kind": "slot",
+        "accepts": [
+          "Tab"
+        ],
+        "acceptsMode": "prefer"
       },
       "slots": []
     },
@@ -1276,6 +1873,194 @@
           "acceptsMode": "prefer",
           "optional": true,
           "description": "Content after the label — a count Badge, a chevron."
+        }
+      ]
+    },
+    {
+      "id": "ds.toolbar",
+      "name": "Toolbar",
+      "version": "1.0.0",
+      "status": "draft",
+      "description": "General-purpose toolbar container with start, center, and end content areas for contextual actions. API mirrors industry convention (Astryx Toolbar); roving-tabindex keyboard behavior is a declared boundary.",
+      "figma": {
+        "representation": "component",
+        "componentSetKey": "e56c9f77a873e973aa6f567d0c275710cb039795"
+      },
+      "props": [
+        {
+          "name": "size",
+          "type": [
+            "sm",
+            "md",
+            "lg"
+          ],
+          "default": "md",
+          "description": "Minimum toolbar height; children keep their own sizes."
+        },
+        {
+          "name": "label",
+          "type": "string",
+          "default": "Toolbar",
+          "required": true,
+          "description": "Accessible label for the toolbar."
+        }
+      ],
+      "children": {
+        "kind": "none"
+      },
+      "slots": [
+        {
+          "prop": "startContent",
+          "accepts": [],
+          "acceptsMode": "open",
+          "optional": true,
+          "description": "Start-aligned actions — buttons, segmented controls, selectors."
+        },
+        {
+          "prop": "centerContent",
+          "accepts": [],
+          "acceptsMode": "open",
+          "optional": true,
+          "description": "Centered content."
+        },
+        {
+          "prop": "endContent",
+          "accepts": [],
+          "acceptsMode": "open",
+          "optional": true,
+          "description": "End-aligned primary actions, selectors, badges."
+        }
+      ]
+    },
+    {
+      "id": "ds.top-nav-item",
+      "name": "TopNavItem",
+      "version": "1.0.0",
+      "status": "draft",
+      "description": "A navigation item in a TopNav or SideNav context. API mirrors industry convention (Astryx TopNavItem) with selection flattened to a state enum; the selected state applies aria-current.",
+      "figma": {
+        "representation": "component",
+        "componentSetKey": "a4db1fe283d2bfb60891ec71398cf8472b2292dc"
+      },
+      "props": [
+        {
+          "name": "state",
+          "type": [
+            "default",
+            "selected"
+          ],
+          "default": "default",
+          "description": "Whether this item is the current page."
+        },
+        {
+          "name": "label",
+          "type": "string",
+          "default": "Nav item",
+          "required": true,
+          "description": "Visible item text."
+        },
+        {
+          "name": "href",
+          "type": "string",
+          "default": "#",
+          "description": "Navigation target URL."
+        }
+      ],
+      "children": {
+        "kind": "none"
+      },
+      "slots": [
+        {
+          "prop": "icon",
+          "accepts": [],
+          "acceptsMode": "open",
+          "optional": true
+        }
+      ]
+    },
+    {
+      "id": "ds.top-nav",
+      "name": "TopNav",
+      "version": "1.0.0",
+      "status": "draft",
+      "description": "Horizontal main navigation bar with heading, start, center, and end areas. API mirrors industry convention (Astryx TopNav); hover menus and mega-menus are behavior-layer boundaries.",
+      "figma": {
+        "representation": "component",
+        "componentSetKey": "c82dd683a88f085e804e8d315c8f75dc6f261807"
+      },
+      "props": [
+        {
+          "name": "label",
+          "type": "string",
+          "default": "Main",
+          "required": true,
+          "description": "Accessible label for the navigation landmark."
+        }
+      ],
+      "children": {
+        "kind": "none"
+      },
+      "slots": [
+        {
+          "prop": "heading",
+          "accepts": [],
+          "acceptsMode": "open",
+          "optional": true,
+          "description": "Logo or brand at the start edge."
+        },
+        {
+          "prop": "startContent",
+          "accepts": [
+            "TopNavItem"
+          ],
+          "acceptsMode": "prefer",
+          "optional": true,
+          "description": "Primary navigation items after the heading."
+        },
+        {
+          "prop": "endContent",
+          "accepts": [],
+          "acceptsMode": "open",
+          "optional": true,
+          "description": "Search, icons, user profile at the end edge."
+        }
+      ]
+    },
+    {
+      "id": "ds.typeahead-item",
+      "name": "TypeaheadItem",
+      "version": "1.0.0",
+      "status": "draft",
+      "description": "Default dropdown item for search results: label with optional icon and description. API mirrors industry convention (Astryx TypeaheadItem) with the item object flattened to explicit props.",
+      "figma": {
+        "representation": "component",
+        "componentSetKey": "e71ef70ee99e707af6c5eaa57b6336ae906b5690"
+      },
+      "props": [
+        {
+          "name": "label",
+          "type": "string",
+          "default": "Search result",
+          "required": true,
+          "description": "Primary result text."
+        },
+        {
+          "name": "description",
+          "type": "string",
+          "default": "Supporting detail about this result.",
+          "description": "Secondary text below the label."
+        }
+      ],
+      "children": {
+        "kind": "none"
+      },
+      "slots": [
+        {
+          "prop": "icon",
+          "accepts": [],
+          "acceptsMode": "open",
+          "optional": true,
+          "description": "Icon or avatar before the label."
         }
       ]
     }

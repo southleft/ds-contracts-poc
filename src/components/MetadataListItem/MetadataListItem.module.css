@@ -1,0 +1,32 @@
+/* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/metadata-list-item.contract.json (ds.metadata-list-item v1.0.0)
+ * Regenerate with: npm run generate
+ */
+
+.root {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  border: 0;
+  gap: var(--space-gap-md);
+  font-family: var(--font-control-family);
+  font-size: var(--font-control-size-sm);
+}
+
+.iconSlot {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.labelText {
+  color: var(--color-text-secondary);
+  min-width: var(--container-xs);
+}
+
+.valueText {
+  flex: 1 1 auto;
+  min-width: 0;
+  color: var(--color-surface-foreground);
+  font-weight: var(--font-control-weight);
+}

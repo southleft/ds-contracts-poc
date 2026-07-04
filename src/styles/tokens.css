@@ -103,6 +103,9 @@
   --space-gap-lg: var(--space-300);
   --space-table-cell-y-comfortable: var(--space-150);
   --space-table-cell-y-compact: var(--space-50);
+  --space-list-compact: var(--space-50);
+  --space-list-balanced: var(--space-100);
+  --space-list-spacious: var(--space-150);
   --radius-control: var(--radius-200);
   --radius-badge: var(--radius-pill);
   --radius-card: var(--radius-200);
@@ -122,6 +125,9 @@
   --size-checkbox-md: var(--space-250);
   --size-dot: var(--space-100);
   --size-divider-length: var(--container-sm);
+  --size-toolbar-sm: var(--control-sm);
+  --size-toolbar-md: var(--control-md);
+  --size-toolbar-lg: var(--control-lg);
   --border-width-focus: var(--border-width-200);
   --border-width-divider-subtle: var(--border-width-100);
   --border-width-divider-strong: var(--border-width-200);
@@ -136,6 +142,8 @@
   --font-avatar-size-sm: var(--font-size-100);
   --font-avatar-size-md: var(--font-size-200);
   --font-code-family: var(--font-family-mono);
+  --font-tab-default-weight: var(--font-weight-medium);
+  --font-tab-selected-weight: var(--font-weight-semibold);
   --color-surface-background: var(--color-gray-50);
   --color-surface-foreground: var(--color-gray-900);
   --color-surface-raised: var(--color-white);
@@ -214,4 +222,18 @@
   --color-checkbox-indeterminate-background: var(--color-blue-600);
   --color-checkbox-indeterminate-border: var(--color-blue-600);
   --color-checkbox-icon: var(--color-white);
+  --color-section-section: var(--color-white);
+  --color-section-muted: var(--color-gray-100);
+  --color-chat-user-background: var(--color-blue-100);
+  --color-chat-user-foreground: var(--color-gray-900);
+  --color-chat-assistant-background: var(--color-gray-100);
+  --color-chat-assistant-foreground: var(--color-gray-900);
+  --color-chat-system-background: var(--color-gray-50);
+  --color-chat-system-foreground: var(--color-gray-600);
+  --color-tab-default-foreground: var(--color-gray-600);
+  --color-tab-selected-foreground: var(--color-blue-600);
+  --color-nav-selected-background: var(--color-blue-100);
+  --color-nav-selected-foreground: var(--color-blue-700);
+  --color-nav-default-background: var(--color-white);
+  --color-nav-default-foreground: var(--color-gray-700);
 }

@@ -57,6 +57,20 @@
           "$value": "{space.50}"
         }
       }
+    },
+    "list": {
+      "compact": {
+        "$type": "dimension",
+        "$value": "{space.50}"
+      },
+      "balanced": {
+        "$type": "dimension",
+        "$value": "{space.100}"
+      },
+      "spacious": {
+        "$type": "dimension",
+        "$value": "{space.150}"
+      }
     }
   },
   "radius": {
@@ -152,6 +166,20 @@
         "$type": "dimension",
         "$value": "{container.sm}"
       }
+    },
+    "toolbar": {
+      "sm": {
+        "$type": "dimension",
+        "$value": "{control.sm}"
+      },
+      "md": {
+        "$type": "dimension",
+        "$value": "{control.md}"
+      },
+      "lg": {
+        "$type": "dimension",
+        "$value": "{control.lg}"
+      }
     }
   },
   "border": {
@@ -224,6 +252,20 @@
       "family": {
         "$type": "fontFamily",
         "$value": "{font.family.mono}"
+      }
+    },
+    "tab": {
+      "default": {
+        "weight": {
+          "$type": "fontWeight",
+          "$value": "{font.weight.medium}"
+        }
+      },
+      "selected": {
+        "weight": {
+          "$type": "fontWeight",
+          "$value": "{font.weight.semibold}"
+        }
       }
     }
   }

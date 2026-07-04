@@ -1,0 +1,46 @@
+/* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/list-item.contract.json (ds.list-item v1.0.0)
+ * Regenerate with: npm run generate
+ */
+
+.root {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border: 0;
+  gap: var(--space-gap-sm);
+  padding-inline: var(--space-inset-x-sm);
+  padding-block: var(--space-inset-y-md);
+  font-family: var(--font-control-family);
+  color: var(--color-surface-foreground);
+}
+
+.startContent {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.textCol {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  min-width: 0;
+  gap: var(--space-inset-y-xs);
+}
+
+.labelText {
+  font-size: var(--font-control-size-sm);
+  font-weight: var(--font-control-weight);
+}
+
+.descriptionText {
+  font-size: var(--font-control-size-sm);
+  color: var(--color-text-secondary);
+}
+
+.endContent {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}

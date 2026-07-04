@@ -1,0 +1,44 @@
+/* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/top-nav.contract.json (ds.top-nav v1.0.0)
+ * Regenerate with: npm run generate
+ */
+
+.root {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  border-style: solid;
+  width: 100%;
+  min-width: fit-content;
+  max-width: var(--size-banner-width);
+  background-color: var(--color-surface-raised);
+  border-color: var(--color-border-subtle);
+  border-width: var(--border-width-100);
+  gap: var(--space-gap-md);
+  padding-inline: var(--space-inset-x-md);
+  padding-block: var(--space-inset-y-md);
+}
+
+.heading {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--space-gap-sm);
+}
+
+.startContent {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex: 1 1 auto;
+  min-width: 0;
+  gap: var(--space-inset-y-sm);
+}
+
+.endContent {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--space-gap-sm);
+}

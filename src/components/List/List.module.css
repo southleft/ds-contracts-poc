@@ -1,0 +1,50 @@
+/* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/list.contract.json (ds.list v1.0.0)
+ * Regenerate with: npm run generate
+ */
+
+.root {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  border-style: solid;
+  width: 100%;
+  min-width: fit-content;
+  max-width: var(--size-card-width);
+  background-color: var(--color-surface-raised);
+  border-color: var(--color-border-subtle);
+  border-width: var(--border-width-100);
+  border-radius: var(--radius-card);
+  padding-inline: var(--space-inset-y-sm);
+  padding-block: var(--space-inset-y-sm);
+}
+
+.density-compact {
+  gap: var(--space-list-compact);
+}
+
+.density-balanced {
+  gap: var(--space-list-balanced);
+}
+
+.density-spacious {
+  gap: var(--space-list-spacious);
+}
+
+.items {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.density-compact .items {
+  gap: var(--space-list-compact);
+}
+
+.density-balanced .items {
+  gap: var(--space-list-balanced);
+}
+
+.density-spacious .items {
+  gap: var(--space-list-spacious);
+}

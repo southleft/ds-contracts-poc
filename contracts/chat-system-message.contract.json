@@ -1,0 +1,132 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "ds.chat-system-message",
+  "name": "ChatSystemMessage",
+  "version": "1.0.0",
+  "status": "draft",
+  "description": "Centered system message for non-sender chat content — date separators, membership changes, status notices. API mirrors industry convention (Astryx ChatSystemMessage): the divider variant adds a line on each side.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "variant",
+      "description": "Plain centered text, or text between divider lines.",
+      "type": {
+        "enum": [
+          "default",
+          "divider"
+        ]
+      },
+      "default": "default",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Variant",
+          "values": {
+            "default": "Default",
+            "divider": "Divider"
+          }
+        },
+        "code": {
+          "prop": "variant"
+        }
+      }
+    },
+    {
+      "name": "message",
+      "description": "Short factual string — a date, a join notice, a status change.",
+      "type": "text",
+      "default": "Today",
+      "required": true,
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Message"
+        },
+        "code": {
+          "prop": "message"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "flex",
+        "direction": "row",
+        "align": "center",
+        "justify": "center"
+      },
+      "tokens": {
+        "max-width": "{size.card.width}",
+        "gap": "{space.gap.sm}",
+        "font-family": "{font.control.family}",
+        "font-size": "{font.badge.size}",
+        "color": "{color.text.secondary}"
+      },
+      "parts": {
+        "lineStart": {
+          "description": "Left divider line — divider variant only.",
+          "layout": {
+            "grow": true
+          },
+          "visibleWhen": {
+            "prop": "variant",
+            "equals": "divider"
+          },
+          "tokens": {
+            "height": "{border.width.divider.subtle}",
+            "background-color": "{color.divider.subtle}"
+          }
+        },
+        "iconSlot": {
+          "slot": {
+            "name": "icon",
+            "acceptsMode": "open"
+          },
+          "optional": true,
+          "layout": {
+            "direction": "row",
+            "align": "center"
+          }
+        },
+        "messageText": {
+          "element": "span",
+          "content": {
+            "prop": "message"
+          }
+        },
+        "lineEnd": {
+          "description": "Right divider line — divider variant only.",
+          "layout": {
+            "grow": true
+          },
+          "visibleWhen": {
+            "prop": "variant",
+            "equals": "divider"
+          },
+          "tokens": {
+            "height": "{border.width.divider.subtle}",
+            "background-color": "{color.divider.subtle}"
+          }
+        }
+      }
+    }
+  },
+  "a11y": {
+    "contrast": "AA"
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": "8nim1d0IPnehMxA7B7SYxC",
+      "componentSetKey": "2c5056fcf5f0b075ec7be6019f20eb8cdc9d5efb",
+      "nodeId": "11:839"
+    },
+    "code": {
+      "importPath": "src/components/ChatSystemMessage",
+      "export": "ChatSystemMessage"
+    }
+  }
+}

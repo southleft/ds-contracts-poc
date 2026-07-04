@@ -1,0 +1,152 @@
+- generic [ref=f1e3]:
+  - complementary [ref=f1e4]:
+    - generic [ref=f1e5]:
+      - link "Contract Hub" [ref=f1e6] [cursor=pointer]:
+        - /url: "#/"
+      - paragraph [ref=f1e7]: The governed source, visualized
+    - navigation "Main" [ref=f1e8]:
+      - link "Overview" [ref=f1e9] [cursor=pointer]:
+        - /url: "#/"
+      - link "Components" [ref=f1e10] [cursor=pointer]:
+        - /url: "#/components"
+      - link "Tokens" [ref=f1e11] [cursor=pointer]:
+        - /url: "#/tokens"
+      - link "Governance" [ref=f1e12] [cursor=pointer]:
+        - /url: "#/governance"
+      - link "Context" [ref=f1e13] [cursor=pointer]:
+        - /url: "#/context"
+      - link "Parity" [ref=f1e14] [cursor=pointer]:
+        - /url: "#/parity"
+      - link "Docs" [ref=f1e15] [cursor=pointer]:
+        - /url: "#/docs"
+    - generic [ref=f1e16]:
+      - text: ds-contracts-poc
+      - text: catalog v0.1.0
+  - generic [ref=f1e17]:
+    - banner [ref=f1e18]:
+      - generic [ref=f1e19]: docs
+      - generic [ref=f1e20]:
+        - generic [ref=f1e21]: catalog v0.1.0 · 94e7528
+        - button "Switch to dark mode" [ref=f1e22]:
+          - img
+          - generic [ref=f1e23]: Dark
+    - main [ref=f1e24]:
+      - generic [ref=f1e25]:
+        - heading "Documentation" [level=1] [ref=f1e26]
+        - paragraph [ref=f1e27]:
+          - text: The concept, the contract spec, and the evidence — rendered straight from the repo's
+          - code [ref=f1e28]: docs/
+          - text: folder. These are the working documents the system was built against, not a summary written for this page.
+      - generic [ref=f1e29]:
+        - heading "The Bridge — Why This Exists" [level=2] [ref=f1e31]
+        - generic [ref=f1e32]:
+          - navigation "Documentation" [ref=f1e33]:
+            - list [ref=f1e34]:
+              - listitem [ref=f1e35]:
+                - link "The Bridge — Why This Exists" [ref=f1e36] [cursor=pointer]:
+                  - /url: "#/docs/00-the-bridge"
+              - listitem [ref=f1e37]:
+                - link "Architecture & the Contract Model" [ref=f1e38] [cursor=pointer]:
+                  - /url: "#/docs/01-architecture"
+              - listitem [ref=f1e39]:
+                - link "Contract Specification" [ref=f1e40] [cursor=pointer]:
+                  - /url: "#/docs/02-contract-spec"
+              - listitem [ref=f1e41]:
+                - link "Token Pipeline" [ref=f1e42] [cursor=pointer]:
+                  - /url: "#/docs/03-token-pipeline"
+              - listitem [ref=f1e43]:
+                - link "Code Generation" [ref=f1e44] [cursor=pointer]:
+                  - /url: "#/docs/04-code-generation"
+              - listitem [ref=f1e45]:
+                - link "The Parity Loop (Phase 3 — executed)" [ref=f1e46] [cursor=pointer]:
+                  - /url: "#/docs/06-parity-loop"
+              - listitem [ref=f1e47]:
+                - link "Validation — Claims, Evals, Evidence" [ref=f1e48] [cursor=pointer]:
+                  - /url: "#/docs/07-validation"
+              - listitem [ref=f1e49]:
+                - link "Composition & the Road to a Contributable Spec" [ref=f1e50] [cursor=pointer]:
+                  - /url: "#/docs/08-composition-and-spec"
+              - listitem [ref=f1e51]:
+                - link "Advanced Components — the DataTable Round" [ref=f1e52] [cursor=pointer]:
+                  - /url: "#/docs/09-advanced-components"
+              - listitem [ref=f1e53]:
+                - link "Honest Generation — Catalog, Judge, and the A/B Number" [ref=f1e54] [cursor=pointer]:
+                  - /url: "#/docs/10-honest-generation"
+              - listitem [ref=f1e55]:
+                - link "Enterprise Components — Spec-Gap Report" [ref=f1e56] [cursor=pointer]:
+                  - /url: "#/docs/enterprise-components"
+          - article [ref=f1e57]:
+            - paragraph [ref=f1e58]: Every organization that takes design systems seriously eventually splits into two camps, usually without noticing.
+            - paragraph [ref=f1e59]:
+              - text: Some organizations come in from the
+              - strong [ref=f1e60]: code side
+              - text: . Their design system is an npm package. The components are real, tested, and shipped — and the design files are an approximation of them, redrawn by hand, aging from the moment they're published. Designers work against a picture of the product, not the product. When an engineer adds a prop or changes a default, no one redraws anything, and the picture quietly becomes fiction.
+            - paragraph [ref=f1e61]:
+              - text: Other organizations come in from the
+              - strong [ref=f1e62]: design side
+              - text: . Their design system is a canvas library. The components are beautifully specified, every variant enumerated — and the code is an approximation of
+              - emphasis [ref=f1e63]: them
+              - text: ", rebuilt by hand, drifting from the moment it's merged. Engineers work against screenshots and redlines. When a designer restructures a component, no one refactors anything, and the library becomes a wish list."
+            - paragraph [ref=f1e64]:
+              - text: Both camps are answering the same question —
+              - emphasis [ref=f1e65]: where does the truth live?
+              - text: "— and both answers fail the same way: whichever side is declared canonical, the other side becomes a hand-maintained copy. Copies drift. Drift erodes trust. Eroded trust is why design reviews devolve into archaeology (\"is the file right, or is prod right?\") and why every design system team ends up with a human whose actual job is reconciliation."
+            - heading "The position this proof of concept takes" [level=2] [ref=f1e66]
+            - paragraph [ref=f1e67]:
+              - strong [ref=f1e68]: The source of truth is neither surface.
+              - text: It's a machine-readable
+              - strong [ref=f1e69]: contract
+              - text: that sits between them.
+            - paragraph [ref=f1e70]:
+              - text: "A contract is a small, versioned JSON document that captures everything both sides must agree on: the component's API (props, types, enum vocabularies, defaults, what's required), its anatomy (the parts it's made of and how they nest), its bindings to design tokens (never raw values), its slots (what it accepts, and how strictly), and its semantics (element, ARIA role). The canvas library and the code library are both"
+              - strong [ref=f1e71]: renderers
+              - text: of that contract — generated from it on the first pass, validated against it forever after.
+            - paragraph [ref=f1e72]:
+              - text: That second half is the important half. Generation is a party trick; lots of tools generate code or draw components once. The contract model is
+              - strong [ref=f1e73]: generative first, diagnostic forever
+              - text: ": after the first pass, a three-way differ continuously compares the contract, the code, and the canvas, and classifies every difference as"
+              - emphasis [ref=f1e74]: ahead
+              - text: (a surface has something the contract doesn't),
+              - emphasis [ref=f1e75]: behind
+              - text: (a surface is missing something the contract has), or
+              - emphasis [ref=f1e76]: mismatched
+              - text: . Nothing syncs side-to-side. Ever.
+            - heading "Fluidity, not enforcement" [level=2] [ref=f1e77]
+            - paragraph [ref=f1e78]:
+              - text: The bridge would be worthless if it only policed. Real teams evolve their systems from both ends — an engineer adds a
+              - code [ref=f1e79]: loading
+              - text: prop because the product needed it; a designer adjusts a surface color because the old one failed in context. Both of those are
+              - emphasis [ref=f1e80]: good
+              - text: changes that started on the "wrong" side.
+            - paragraph [ref=f1e81]:
+              - text: So the loop is built around
+              - strong [ref=f1e82]: promotion
+              - text: ": when a surface runs ahead of the contract, that difference becomes a reviewable proposal"
+              - emphasis [ref=f1e83]: to the contract
+              - text: . Accept it, and the contract version bumps and regenerates the other side — the designer's color change flows to code, the engineer's prop flows to the canvas, and both surfaces stay honest without either being demoted. Reject it, and the surface is flagged as drift to be reverted. Either way there is exactly one arbiter, and it's a diffable, reviewable, version-controlled file — the same governance model that made Git work for code and made the DTCG token format work for design tokens. This proof of concept runs that playbook one level up, at the component-API layer.
+            - heading "What \"validated\" means here" [level=2] [ref=f1e84]
+            - paragraph [ref=f1e85]: "This isn't an architecture diagram — the loop in these docs has been run end to end, in both directions, with the receipts committed:"
+            - list [ref=f1e86]:
+              - listitem [ref=f1e87]:
+                - strong [ref=f1e88]: One contract, two surfaces
+                - text: ": every component in the catalog is generated into working, accessible React (with stories and a publishable package) and into a native canvas library (variants, mode-aware variables, slot properties) from the same JSON — including composition three levels deep and enterprise patterns mirrored from a shipping industry component library."
+              - listitem [ref=f1e89]:
+                - strong [ref=f1e90]: Deterministic honesty
+                - text: ": a mutation-tested eval suite proves the differ detects every class of drift it claims to, refuses illegal contracts, converges after promotion, and regenerates byte-identically."
+              - listitem [ref=f1e91]:
+                - strong [ref=f1e92]: Governed generation measurably wins
+                - text: ": the same AI model building the same screens scored"
+                - strong [ref=f1e93]: 100/100 adherence with zero violations
+                - text: when constrained by the contract catalog, versus
+                - strong [ref=f1e94]: 69/100 with 91 violations
+                - text: (invented APIs, hard-coded values, style overrides) without it. And when the constrained agent hit a real gap in the system, it
+                - emphasis [ref=f1e95]: reported the gap instead of faking around it
+                - text: — the gap became a contract proposal, the proposal became a version bump, and the score went back to 100. That's the loop working under pressure.
+            - paragraph [ref=f1e96]:
+              - text: "The rest of these docs walk the same path in detail: the contract spec, the token pipeline, generation into each surface, the parity loop, the validation evidence, and the road toward a contributable spec. Start with"
+              - link "Architecture & the Contract Model" [ref=f1e97] [cursor=pointer]:
+                - /url: "#/docs/01-architecture"
+              - text: .
+        - paragraph [ref=f1e98]:
+          - text: "source:"
+          - code [ref=f1e99]: docs/00-the-bridge.md

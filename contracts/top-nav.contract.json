@@ -1,0 +1,117 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "ds.top-nav",
+  "name": "TopNav",
+  "version": "1.0.0",
+  "status": "draft",
+  "description": "Horizontal main navigation bar with heading, start, center, and end areas. API mirrors industry convention (Astryx TopNav); hover menus and mega-menus are behavior-layer boundaries.",
+  "semantics": {
+    "element": "nav"
+  },
+  "props": [
+    {
+      "name": "label",
+      "description": "Accessible label for the navigation landmark.",
+      "type": "text",
+      "default": "Main",
+      "required": true,
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Label"
+        },
+        "code": {
+          "prop": "label"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "flex",
+        "direction": "row",
+        "align": "center",
+        "justify": "space-between"
+      },
+      "attrs": {
+        "aria-label": "{label}"
+      },
+      "tokens": {
+        "max-width": "{size.banner.width}",
+        "background-color": "{color.surface.raised}",
+        "border-color": "{color.border.subtle}",
+        "border-width": "{border-width.100}",
+        "gap": "{space.gap.md}",
+        "padding-inline": "{space.inset-x.md}",
+        "padding-block": "{space.inset-y.md}"
+      },
+      "parts": {
+        "heading": {
+          "description": "Logo or brand at the start edge.",
+          "slot": {
+            "name": "heading",
+            "acceptsMode": "open"
+          },
+          "optional": true,
+          "layout": {
+            "direction": "row",
+            "align": "center"
+          },
+          "tokens": {
+            "gap": "{space.gap.sm}"
+          }
+        },
+        "startContent": {
+          "description": "Primary navigation items after the heading.",
+          "slot": {
+            "name": "startContent",
+            "accepts": [
+              "ds.top-nav-item"
+            ],
+            "acceptsMode": "prefer"
+          },
+          "optional": true,
+          "layout": {
+            "direction": "row",
+            "align": "center",
+            "grow": true
+          },
+          "tokens": {
+            "gap": "{space.inset-y.sm}"
+          }
+        },
+        "endContent": {
+          "description": "Search, icons, user profile at the end edge.",
+          "slot": {
+            "name": "endContent",
+            "acceptsMode": "open"
+          },
+          "optional": true,
+          "layout": {
+            "direction": "row",
+            "align": "center"
+          },
+          "tokens": {
+            "gap": "{space.gap.sm}"
+          }
+        }
+      }
+    }
+  },
+  "a11y": {
+    "contrast": "AA"
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": "8nim1d0IPnehMxA7B7SYxC",
+      "componentSetKey": "c82dd683a88f085e804e8d315c8f75dc6f261807",
+      "nodeId": "11:1109"
+    },
+    "code": {
+      "importPath": "src/components/TopNav",
+      "export": "TopNav"
+    }
+  }
+}

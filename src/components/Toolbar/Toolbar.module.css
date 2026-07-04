@@ -1,0 +1,55 @@
+/* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/toolbar.contract.json (ds.toolbar v1.0.0)
+ * Regenerate with: npm run generate
+ */
+
+.root {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  border-style: solid;
+  width: 100%;
+  min-width: fit-content;
+  max-width: var(--size-banner-width);
+  background-color: var(--color-surface-raised);
+  border-color: var(--color-border-subtle);
+  border-width: var(--border-width-100);
+  border-radius: var(--radius-control);
+  gap: var(--space-gap-md);
+  padding-inline: var(--space-inset-x-sm);
+  padding-block: var(--space-inset-y-sm);
+}
+
+.size-sm {
+  min-height: var(--size-toolbar-sm);
+}
+
+.size-md {
+  min-height: var(--size-toolbar-md);
+}
+
+.size-lg {
+  min-height: var(--size-toolbar-lg);
+}
+
+.startContent {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--space-gap-sm);
+}
+
+.centerContent {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--space-gap-sm);
+}
+
+.endContent {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--space-gap-sm);
+}

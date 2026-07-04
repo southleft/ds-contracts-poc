@@ -1197,6 +1197,45 @@
           }
         },
         {
+          "name": "space/list/compact",
+          "type": "FLOAT",
+          "scopes": [
+            "WIDTH_HEIGHT",
+            "GAP"
+          ],
+          "codeSyntax": "var(--space-list-compact)",
+          "values": {
+            "Light": "{space/50}",
+            "Dark": "{space/50}"
+          }
+        },
+        {
+          "name": "space/list/balanced",
+          "type": "FLOAT",
+          "scopes": [
+            "WIDTH_HEIGHT",
+            "GAP"
+          ],
+          "codeSyntax": "var(--space-list-balanced)",
+          "values": {
+            "Light": "{space/100}",
+            "Dark": "{space/100}"
+          }
+        },
+        {
+          "name": "space/list/spacious",
+          "type": "FLOAT",
+          "scopes": [
+            "WIDTH_HEIGHT",
+            "GAP"
+          ],
+          "codeSyntax": "var(--space-list-spacious)",
+          "values": {
+            "Light": "{space/150}",
+            "Dark": "{space/150}"
+          }
+        },
+        {
           "name": "radius/control",
           "type": "FLOAT",
           "scopes": [
@@ -1425,6 +1464,42 @@
           }
         },
         {
+          "name": "size/toolbar/sm",
+          "type": "FLOAT",
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": "var(--size-toolbar-sm)",
+          "values": {
+            "Light": "{control/sm}",
+            "Dark": "{control/sm}"
+          }
+        },
+        {
+          "name": "size/toolbar/md",
+          "type": "FLOAT",
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": "var(--size-toolbar-md)",
+          "values": {
+            "Light": "{control/md}",
+            "Dark": "{control/md}"
+          }
+        },
+        {
+          "name": "size/toolbar/lg",
+          "type": "FLOAT",
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": "var(--size-toolbar-lg)",
+          "values": {
+            "Light": "{control/lg}",
+            "Dark": "{control/lg}"
+          }
+        },
+        {
           "name": "border/width/focus",
           "type": "FLOAT",
           "scopes": [
@@ -1590,6 +1665,30 @@
           "values": {
             "Light": "{font/family/mono}",
             "Dark": "{font/family/mono}"
+          }
+        },
+        {
+          "name": "font/tab/default/weight",
+          "type": "FLOAT",
+          "scopes": [
+            "FONT_WEIGHT"
+          ],
+          "codeSyntax": "var(--font-tab-default-weight)",
+          "values": {
+            "Light": "{font/weight/medium}",
+            "Dark": "{font/weight/medium}"
+          }
+        },
+        {
+          "name": "font/tab/selected/weight",
+          "type": "FLOAT",
+          "scopes": [
+            "FONT_WEIGHT"
+          ],
+          "codeSyntax": "var(--font-tab-selected-weight)",
+          "values": {
+            "Light": "{font/weight/semibold}",
+            "Dark": "{font/weight/semibold}"
           }
         },
         {
@@ -2604,6 +2703,188 @@
           "values": {
             "Light": "{color/white}",
             "Dark": "{color/white}"
+          }
+        },
+        {
+          "name": "color/section/section",
+          "type": "COLOR",
+          "scopes": [
+            "ALL_FILLS",
+            "STROKE_COLOR"
+          ],
+          "codeSyntax": "var(--color-section-section)",
+          "values": {
+            "Light": "{color/white}",
+            "Dark": "{color/gray/700}"
+          }
+        },
+        {
+          "name": "color/section/muted",
+          "type": "COLOR",
+          "scopes": [
+            "ALL_FILLS",
+            "STROKE_COLOR"
+          ],
+          "codeSyntax": "var(--color-section-muted)",
+          "values": {
+            "Light": "{color/gray/100}",
+            "Dark": "{color/gray/800}"
+          }
+        },
+        {
+          "name": "color/chat/user/background",
+          "type": "COLOR",
+          "scopes": [
+            "ALL_FILLS",
+            "STROKE_COLOR"
+          ],
+          "codeSyntax": "var(--color-chat-user-background)",
+          "values": {
+            "Light": "{color/blue/100}",
+            "Dark": "{color/blue/900}"
+          }
+        },
+        {
+          "name": "color/chat/user/foreground",
+          "type": "COLOR",
+          "scopes": [
+            "ALL_FILLS",
+            "STROKE_COLOR"
+          ],
+          "codeSyntax": "var(--color-chat-user-foreground)",
+          "values": {
+            "Light": "{color/gray/900}",
+            "Dark": "{color/gray/100}"
+          }
+        },
+        {
+          "name": "color/chat/assistant/background",
+          "type": "COLOR",
+          "scopes": [
+            "ALL_FILLS",
+            "STROKE_COLOR"
+          ],
+          "codeSyntax": "var(--color-chat-assistant-background)",
+          "values": {
+            "Light": "{color/gray/100}",
+            "Dark": "{color/gray/700}"
+          }
+        },
+        {
+          "name": "color/chat/assistant/foreground",
+          "type": "COLOR",
+          "scopes": [
+            "ALL_FILLS",
+            "STROKE_COLOR"
+          ],
+          "codeSyntax": "var(--color-chat-assistant-foreground)",
+          "values": {
+            "Light": "{color/gray/900}",
+            "Dark": "{color/gray/100}"
+          }
+        },
+        {
+          "name": "color/chat/system/background",
+          "type": "COLOR",
+          "scopes": [
+            "ALL_FILLS",
+            "STROKE_COLOR"
+          ],
+          "codeSyntax": "var(--color-chat-system-background)",
+          "values": {
+            "Light": "{color/gray/50}",
+            "Dark": "{color/gray/800}"
+          }
+        },
+        {
+          "name": "color/chat/system/foreground",
+          "type": "COLOR",
+          "scopes": [
+            "ALL_FILLS",
+            "STROKE_COLOR"
+          ],
+          "codeSyntax": "var(--color-chat-system-foreground)",
+          "values": {
+            "Light": "{color/gray/600}",
+            "Dark": "{color/gray/300}"
+          }
+        },
+        {
+          "name": "color/tab/default/foreground",
+          "type": "COLOR",
+          "scopes": [
+            "ALL_FILLS",
+            "STROKE_COLOR"
+          ],
+          "codeSyntax": "var(--color-tab-default-foreground)",
+          "values": {
+            "Light": "{color/gray/600}",
+            "Dark": "{color/gray/300}"
+          }
+        },
+        {
+          "name": "color/tab/selected/foreground",
+          "type": "COLOR",
+          "scopes": [
+            "ALL_FILLS",
+            "STROKE_COLOR"
+          ],
+          "codeSyntax": "var(--color-tab-selected-foreground)",
+          "values": {
+            "Light": "{color/blue/600}",
+            "Dark": "{color/blue/400}"
+          }
+        },
+        {
+          "name": "color/nav/selected/background",
+          "type": "COLOR",
+          "scopes": [
+            "ALL_FILLS",
+            "STROKE_COLOR"
+          ],
+          "codeSyntax": "var(--color-nav-selected-background)",
+          "values": {
+            "Light": "{color/blue/100}",
+            "Dark": "{color/blue/900}"
+          }
+        },
+        {
+          "name": "color/nav/selected/foreground",
+          "type": "COLOR",
+          "scopes": [
+            "ALL_FILLS",
+            "STROKE_COLOR"
+          ],
+          "codeSyntax": "var(--color-nav-selected-foreground)",
+          "values": {
+            "Light": "{color/blue/700}",
+            "Dark": "{color/blue/100}"
+          }
+        },
+        {
+          "name": "color/nav/default/background",
+          "type": "COLOR",
+          "scopes": [
+            "ALL_FILLS",
+            "STROKE_COLOR"
+          ],
+          "codeSyntax": "var(--color-nav-default-background)",
+          "values": {
+            "Light": "{color/white}",
+            "Dark": "{color/gray/700}"
+          }
+        },
+        {
+          "name": "color/nav/default/foreground",
+          "type": "COLOR",
+          "scopes": [
+            "ALL_FILLS",
+            "STROKE_COLOR"
+          ],
+          "codeSyntax": "var(--color-nav-default-foreground)",
+          "values": {
+            "Light": "{color/gray/700}",
+            "Dark": "{color/gray/200}"
           }
         }
       ]

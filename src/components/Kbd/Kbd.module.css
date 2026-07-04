@@ -1,0 +1,20 @@
+/* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/kbd.contract.json (ds.kbd v1.0.0)
+ * Regenerate with: npm run generate
+ */
+
+.root {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-style: solid;
+  background-color: var(--color-surface-sunken);
+  color: var(--color-surface-foreground);
+  border-color: var(--color-border-subtle);
+  border-width: var(--border-width-100);
+  border-radius: var(--radius-100);
+  padding-inline: var(--space-inset-x-xs);
+  padding-block: var(--space-inset-y-xs);
+  font-family: var(--font-code-family);
+  font-size: var(--font-badge-size);
+}

@@ -1,0 +1,132 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "ds.top-nav-item",
+  "name": "TopNavItem",
+  "version": "1.0.0",
+  "status": "draft",
+  "description": "A navigation item in a TopNav or SideNav context. API mirrors industry convention (Astryx TopNavItem) with selection flattened to a state enum; the selected state applies aria-current.",
+  "semantics": {
+    "element": "a"
+  },
+  "props": [
+    {
+      "name": "state",
+      "description": "Whether this item is the current page.",
+      "type": {
+        "enum": [
+          "default",
+          "selected"
+        ]
+      },
+      "default": "default",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "State",
+          "values": {
+            "default": "Default",
+            "selected": "Selected"
+          }
+        },
+        "code": {
+          "prop": "state"
+        }
+      }
+    },
+    {
+      "name": "label",
+      "description": "Visible item text.",
+      "type": "text",
+      "default": "Nav item",
+      "required": true,
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Label"
+        },
+        "code": {
+          "prop": "label"
+        }
+      }
+    },
+    {
+      "name": "href",
+      "description": "Navigation target URL.",
+      "type": "text",
+      "default": "#",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Href"
+        },
+        "code": {
+          "prop": "href"
+        }
+      }
+    }
+  ],
+  "states": [
+    "hover"
+  ],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "inline-flex",
+        "direction": "row",
+        "align": "center"
+      },
+      "attrs": {
+        "href": "{href}"
+      },
+      "tokens": {
+        "background-color": "{color.nav.{state}.background}",
+        "color": "{color.nav.{state}.foreground}",
+        "border-radius": "{radius.control}",
+        "gap": "{space.inset-y.sm}",
+        "padding-inline": "{space.inset-x.sm}",
+        "padding-block": "{space.inset-y.md}",
+        "font-family": "{font.control.family}",
+        "font-size": "{font.control.size.sm}",
+        "font-weight": "{font.control.weight}"
+      },
+      "states": {
+        "hover": {
+          "background-color": "{color.surface.sunken}"
+        }
+      },
+      "parts": {
+        "iconSlot": {
+          "slot": {
+            "name": "icon",
+            "acceptsMode": "open"
+          },
+          "optional": true,
+          "layout": {
+            "direction": "row",
+            "align": "center"
+          }
+        },
+        "labelText": {
+          "element": "span",
+          "content": {
+            "prop": "label"
+          }
+        }
+      }
+    }
+  },
+  "a11y": {
+    "contrast": "AA"
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": "8nim1d0IPnehMxA7B7SYxC",
+      "componentSetKey": "a4db1fe283d2bfb60891ec71398cf8472b2292dc",
+      "nodeId": "11:1108"
+    },
+    "code": {
+      "importPath": "src/components/TopNavItem",
+      "export": "TopNavItem"
+    }
+  }
+}
