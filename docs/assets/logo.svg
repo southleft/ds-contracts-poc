@@ -1,8 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1080" role="img" aria-label="Design System Contracts logo: a blue diamond between two angle brackets on a black tile">
-  <!-- Companion mark to the Southleft brand glyph: the same chevron-wedge
-       construction, with the contract (diamond) in place of the S. -->
-  <rect width="1080" height="1080"/>
-  <path d="M125.4,301.5 L0,540.2 l123.2,236.7 h125.2 l-126.2,-236.7 127.4,-238.7 h-124.2Z" fill="#fff"/>
-  <path d="M831.5,301.5 l126.3,236.7 -127.4,238.7 h124.2 l125.4,-238.7 -123.2,-236.7 h-125.3Z" fill="#fff"/>
-  <path d="M540 324 L755 539 L540 754 L325 539 Z" fill="#60A5FA"/>
-</svg>

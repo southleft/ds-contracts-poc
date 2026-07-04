@@ -1,9 +1,11 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 96" role="img" aria-label="Design System Contracts">
-  <g transform="scale(0.08889)">
-    <rect width="1080" height="1080"/>
-    <path d="M125.4,301.5 L0,540.2 l123.2,236.7 h125.2 l-126.2,-236.7 127.4,-238.7 h-124.2Z" fill="#fff"/>
-    <path d="M831.5,301.5 l126.3,236.7 -127.4,238.7 h124.2 l125.4,-238.7 -123.2,-236.7 h-125.3Z" fill="#fff"/>
-    <path d="M540 324 L755 539 L540 754 L325 539 Z" fill="#60A5FA"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 332 96" role="img" aria-label="Design System Contracts">
+  <!-- Storybook sidebar lockup. The brand slot scales the image to the sidebar
+       width, so a tight two-line box renders large; a wide one-line box renders tiny. -->
+  <g transform="translate(4 16) scale(1)">
+    <polyline points="24,14 6,32 24,50" fill="none" stroke="#111827" stroke-width="5" stroke-linecap="square" stroke-linejoin="miter"/>
+    <polyline points="40,14 58,32 40,50" fill="none" stroke="#111827" stroke-width="5" stroke-linecap="square" stroke-linejoin="miter"/>
+    <path d="M32 21 L43 32 L32 43 L21 32 Z" fill="#2563EB"/>
   </g>
-  <text x="120" y="62" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="36" font-weight="600" letter-spacing="-0.5" fill="#111827">Design System Contracts</text>
+  <text x="76" y="42" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="30" font-weight="650" letter-spacing="-0.5" fill="#111827">Design System</text>
+  <text x="76" y="78" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="30" font-weight="650" letter-spacing="-0.5" fill="#111827">Contracts</text>
 </svg>
