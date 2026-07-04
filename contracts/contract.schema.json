@@ -201,6 +201,81 @@
         ]
       }
     },
+    "events": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "pattern": "^[a-z][a-zA-Z0-9]*$"
+          },
+          "description": {
+            "type": "string"
+          },
+          "bindings": {
+            "type": "object",
+            "properties": {
+              "code": {
+                "type": "object",
+                "properties": {
+                  "prop": {
+                    "type": "string",
+                    "pattern": "^on[A-Z][a-zA-Z0-9]*$"
+                  }
+                },
+                "required": [
+                  "prop"
+                ]
+              }
+            },
+            "required": [
+              "code"
+            ]
+          },
+          "trigger": {
+            "type": "string"
+          },
+          "toggles": {
+            "type": "object",
+            "properties": {
+              "prop": {
+                "type": "string"
+              },
+              "between": {
+                "type": "array",
+                "items": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "string"
+                  }
+                ]
+              },
+              "aria": {
+                "type": "string",
+                "enum": [
+                  "expanded",
+                  "checked",
+                  "pressed",
+                  "selected"
+                ]
+              }
+            },
+            "required": [
+              "prop",
+              "between"
+            ]
+          }
+        },
+        "required": [
+          "name",
+          "bindings",
+          "trigger"
+        ]
+      }
+    },
     "states": {
       "default": [],
       "type": "array",

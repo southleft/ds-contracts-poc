@@ -1,6 +1,6 @@
 /**
  * GENERATED FILE — DO NOT EDIT.
- * Source of truth: contracts/accordion-item.contract.json (ds.accordion-item v1.0.0)
+ * Source of truth: contracts/accordion-item.contract.json (ds.accordion-item v1.1.0)
  * Regenerate with: npm run generate
  */
 import type { Meta, StoryObj } from '@storybook/react-vite';
@@ -14,7 +14,7 @@ const meta = {
     docs: {
       description: {
         component:
-          'A collapsible content row: trigger with a state chevron, content revealed when open. API mirrors industry convention (Astryx Collapsible) with the open state flattened to a closed/open enum so both surfaces render both states; expand/collapse behavior is a declared boundary.',
+          'A collapsible content row: trigger with a state chevron, content revealed when open. API mirrors industry convention (Astryx Collapsible) with the open state flattened to a closed/open enum so both surfaces render both states; the toggle itself is contract-declared (onToggle + aria-expanded, generated); richer behavior stays a declared boundary.',
       },
     },
   },
@@ -26,10 +26,14 @@ const meta = {
         'Closed shows only the trigger; open reveals the content and rotates the chevron.',
     },
     title: { control: 'text', description: 'The always-visible trigger text.' },
+    onToggle: {
+      control: false,
+      description:
+        'Fires when the trigger is activated; uncontrolled instances flip state closed/open themselves.',
+    },
     children: { control: 'text' },
   },
   args: {
-    state: 'closed',
     title: 'Section title',
     children: 'The quick brown fox jumps over the lazy dog.',
   },

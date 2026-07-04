@@ -2,7 +2,7 @@
   "system": {
     "name": "DS Contracts POC",
     "catalogVersion": "0.1.0",
-    "gitCommit": "769972c",
+    "gitCommit": "1a04957",
     "source": "Compiled from contracts/*.contract.json + tokens/ + context/rules.json — do not edit."
   },
   "package": {
@@ -513,9 +513,9 @@
     {
       "id": "ds.accordion-item",
       "name": "AccordionItem",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "status": "draft",
-      "description": "A collapsible content row: trigger with a state chevron, content revealed when open. API mirrors industry convention (Astryx Collapsible) with the open state flattened to a closed/open enum so both surfaces render both states; expand/collapse behavior is a declared boundary.",
+      "description": "A collapsible content row: trigger with a state chevron, content revealed when open. API mirrors industry convention (Astryx Collapsible) with the open state flattened to a closed/open enum so both surfaces render both states; the toggle itself is contract-declared (onToggle + aria-expanded, generated); richer behavior stays a declared boundary.",
       "figma": {
         "representation": "component",
         "componentSetKey": "ba5ec62aa3c19bf86b7bcff8eb61ef1e86daad35"
@@ -536,6 +536,13 @@
           "default": "Section title",
           "required": true,
           "description": "The always-visible trigger text."
+        }
+      ],
+      "events": [
+        {
+          "prop": "onToggle",
+          "type": "() => void",
+          "description": "Fires when the trigger is activated; uncontrolled instances flip state closed/open themselves."
         }
       ],
       "children": {
@@ -1015,7 +1022,7 @@
     {
       "id": "ds.checkbox",
       "name": "Checkbox",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "status": "draft",
       "description": "Toggles a single on/off value — settings, terms acceptance, opt-ins. API mirrors industry convention (Astryx CheckboxInput): checked, unchecked, and indeterminate are prop-driven appearance states.",
       "figma": {
@@ -1054,6 +1061,13 @@
           "type": "string",
           "default": "Supporting detail for this option.",
           "description": "Secondary text below the label."
+        }
+      ],
+      "events": [
+        {
+          "prop": "onToggle",
+          "type": "() => void",
+          "description": "Fires when the box is activated; uncontrolled instances flip unchecked/checked (indeterminate resolves to checked)."
         }
       ],
       "children": {
@@ -1830,7 +1844,7 @@
     {
       "id": "ds.switch",
       "name": "Switch",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "status": "draft",
       "description": "Toggle for on/off settings that take effect immediately. API mirrors industry convention (Astryx Switch) with the boolean value flattened to an off/on enum so both surfaces render both states truthfully; toggle behavior is a declared boundary.",
       "figma": {
@@ -1859,6 +1873,13 @@
           "type": "string",
           "default": "Takes effect immediately.",
           "description": "Secondary text below the label."
+        }
+      ],
+      "events": [
+        {
+          "prop": "onToggle",
+          "type": "() => void",
+          "description": "Fires when the track is activated; uncontrolled instances flip value off/on themselves."
         }
       ],
       "children": {

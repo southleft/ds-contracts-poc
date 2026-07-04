@@ -1,6 +1,6 @@
 /**
  * GENERATED FILE — DO NOT EDIT.
- * Source of truth: contracts/checkbox.contract.json (ds.checkbox v1.0.0)
+ * Source of truth: contracts/checkbox.contract.json (ds.checkbox v1.1.0)
  * Regenerate with: npm run generate
  */
 import type { Meta, StoryObj } from '@storybook/react-vite';
@@ -30,9 +30,13 @@ const meta = {
       description: 'Always rendered — users must know what they are toggling.',
     },
     description: { control: 'text', description: 'Secondary text below the label.' },
+    onToggle: {
+      control: false,
+      description:
+        'Fires when the box is activated; uncontrolled instances flip unchecked/checked (indeterminate resolves to checked).',
+    },
   },
   args: {
-    value: 'unchecked',
     size: 'md',
     label: 'Checkbox label',
     description: 'Supporting detail for this option.',

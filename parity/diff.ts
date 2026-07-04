@@ -111,6 +111,8 @@ for (const contract of contracts) {
     ...slotsOf(contract)
       .filter((s) => s.slot.name !== 'children')
       .map((s) => ({ name: s.slot.name, kind: 'slot prop' })),
+    // v6: declared events are contract API — a missing callback is code BEHIND.
+    ...(contract.events ?? []).map((e) => ({ name: e.bindings.code.prop, kind: 'event callback' })),
   ]) {
     if (!extracted.props.some((cp) => cp.name === expected.name)) {
       add({
@@ -164,6 +166,7 @@ for (const contract of contracts) {
     ...contractCodeProps.map((p) => p.bindings.code.prop),
     ...contract.props.filter((p) => p.type === 'text').map((p) => p.bindings.code.prop),
     ...slotsOf(contract).map((s) => s.slot.name),
+    ...(contract.events ?? []).map((e) => e.bindings.code.prop),
   ]);
   for (const cp of extracted.props) {
     if (contractPropNames.has(cp.name)) continue;

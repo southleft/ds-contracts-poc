@@ -241,6 +241,46 @@ function validateContract(contract: Contract, byId: Map<string, Contract>, error
     }
   }
   if (!contract.anatomy.root) errors.push(`${contract.id}: anatomy must have a "root" part`);
+
+  // v6 events: the declared interaction surface must be mechanically checkable.
+  const partByName = new Map(walkAnatomy(contract).map((w) => [w.name, w.part]));
+  const seenEventProps = new Set<string>();
+  for (const ev of contract.events ?? []) {
+    const codeProp = ev.bindings.code.prop;
+    if (seenEventProps.has(codeProp)) {
+      errors.push(`${contract.id}: duplicate event code prop "${codeProp}"`);
+    }
+    seenEventProps.add(codeProp);
+    if (contract.props.some((p) => p.bindings.code.prop === codeProp)) {
+      errors.push(`${contract.id}: event "${ev.name}" code prop "${codeProp}" collides with a data prop`);
+    }
+    const trigger = partByName.get(ev.trigger);
+    if (!trigger) {
+      errors.push(`${contract.id}: event "${ev.name}" trigger references unknown part "${ev.trigger}"`);
+    } else if (ev.trigger !== 'root' && trigger.element !== 'button') {
+      // Interactivity must be honest: a clickable part is a <button> so
+      // keyboard activation comes from the platform, not a bolted-on handler.
+      errors.push(
+        `${contract.id}: event "${ev.name}" trigger part "${ev.trigger}" must have element "button" (got "${trigger.element ?? 'div'}")`,
+      );
+    }
+    if (ev.toggles) {
+      const prop = contract.props.find((p) => p.name === ev.toggles!.prop);
+      if (!prop) {
+        errors.push(`${contract.id}: event "${ev.name}" toggles unknown prop "${ev.toggles.prop}"`);
+      } else if (!(typeof prop.type === 'object' && 'enum' in prop.type)) {
+        errors.push(`${contract.id}: event "${ev.name}" toggles non-enum prop "${ev.toggles.prop}"`);
+      } else {
+        for (const v of ev.toggles.between) {
+          if (!prop.type.enum.includes(v)) {
+            errors.push(
+              `${contract.id}: event "${ev.name}" toggles between "${v}" which is not a value of "${ev.toggles.prop}"`,
+            );
+          }
+        }
+      }
+    }
+  }
 }
 
 // ---------------------------------------------------------------------------
@@ -373,6 +413,21 @@ function generateCss(contract: Contract, tokenInventory: Set<string>, errors: st
       if (part.layout?.justify) decls.push(`justify-content: ${JUSTIFY_CSS[part.layout.justify]}`);
     }
     if (part.layout?.grow) decls.push('flex: 1 1 auto', 'min-width: 0');
+    // Event-trigger buttons: neutralize UA button styles BEFORE token decls
+    // so the contract's tokens (padding, background, font) win.
+    if (part.element === 'button' && (contract.events ?? []).some((e) => e.trigger === name)) {
+      decls.push(
+        'appearance: none',
+        'background: none',
+        'border: none',
+        'margin: 0',
+        'padding: 0',
+        'font: inherit',
+        'color: inherit',
+        'text-align: inherit',
+        'cursor: pointer',
+      );
+    }
     if (part.icon) {
       decls.push('display: inline-flex', 'flex-shrink: 0');
       if (part.icon.size) {
@@ -569,6 +624,11 @@ function generateTsx(contract: Contract, byId: Map<string, Contract>): string {
     ),
   ];
 
+  const events = contract.events ?? [];
+  const toggledCodeProps = new Set(
+    events.filter((e) => e.toggles).map((e) => codePropOf(e.toggles!.prop)),
+  );
+
   const propLines: string[] = [];
   for (const p of contract.props) {
     const doc = p.description ? `  /** ${p.description} */\n` : '';
@@ -587,9 +647,21 @@ function generateTsx(contract: Contract, byId: Map<string, Contract>): string {
     const doc = part.description ? `  /** ${part.description} */\n` : '';
     propLines.push(`${doc}  ${slot.name}?: ReactNode;`);
   }
+  for (const ev of events) {
+    const doc = ev.description ?? `Fires when the ${ev.trigger} is activated.`;
+    propLines.push(`  /** ${doc} */\n  ${ev.bindings.code.prop}?: () => void;`);
+  }
 
   const destructured: string[] = [];
-  for (const p of enums) destructured.push(`${p.bindings.code.prop} = '${p.default}'`);
+  // A toggled enum prop follows the controlled/uncontrolled pattern: no
+  // destructure default — undefined means "uncontrolled", backed by useState.
+  for (const p of enums) {
+    destructured.push(
+      toggledCodeProps.has(p.bindings.code.prop)
+        ? `${p.bindings.code.prop}: ${p.bindings.code.prop}Prop`
+        : `${p.bindings.code.prop} = '${p.default}'`,
+    );
+  }
   for (const p of bools) destructured.push(`${p.bindings.code.prop} = ${p.default === true}`);
   for (const p of numberProps(contract)) {
     destructured.push(`${p.bindings.code.prop} = ${typeof p.default === 'number' ? p.default : 0}`);
@@ -602,7 +674,50 @@ function generateTsx(contract: Contract, byId: Map<string, Contract>): string {
     );
   }
   for (const { slot } of slots) destructured.push(slot.name);
+  for (const ev of events) destructured.push(ev.bindings.code.prop);
   destructured.push('className', 'children', '...rest');
+
+  // Body prelude: uncontrolled state + handlers for declared events.
+  const prelude: string[] = [];
+  for (const ev of events) {
+    if (!ev.toggles) continue;
+    const prop = contract.props.find((p) => p.name === ev.toggles!.prop)!;
+    const code = prop.bindings.code.prop;
+    const union = (prop.type as { enum: string[] }).enum.map((v) => `'${v}'`).join(' | ');
+    prelude.push(
+      `  const [${code}Uncontrolled, set${pascal(code)}Uncontrolled] = useState<${union}>('${prop.default}');`,
+      `  const ${code} = ${code}Prop ?? ${code}Uncontrolled;`,
+    );
+  }
+  for (const ev of events) {
+    const body: string[] = [];
+    if (ev.toggles) {
+      const prop = contract.props.find((p) => p.name === ev.toggles!.prop)!;
+      const code = prop.bindings.code.prop;
+      const [off, on] = ev.toggles.between;
+      body.push(`set${pascal(code)}Uncontrolled(${code} === '${on}' ? '${off}' : '${on}');`);
+    }
+    body.push(`${ev.bindings.code.prop}?.();`);
+    prelude.push(`  const handle${pascal(ev.name)} = () => { ${body.join(' ')} };`);
+  }
+
+  /** onClick + ARIA state for a part that is an event trigger. */
+  const eventAttrsFor = (partName: string, partEl: string): string => {
+    const ev = events.find((e) => e.trigger === partName);
+    if (!ev) return '';
+    let s = partEl === 'button' ? ' type="button"' : '';
+    s += ` onClick={handle${pascal(ev.name)}}`;
+    if (ev.toggles?.aria) {
+      const prop = contract.props.find((p) => p.name === ev.toggles!.prop)!;
+      const code = prop.bindings.code.prop;
+      const [off, on] = ev.toggles.between;
+      const others = (prop.type as { enum: string[] }).enum.filter((v) => v !== off && v !== on);
+      s += others.length
+        ? ` aria-${ev.toggles.aria}={${code} === '${on}' ? true : ${code} === '${off}' ? false : 'mixed'}`
+        : ` aria-${ev.toggles.aria}={${code} === '${on}'}`;
+    }
+    return s;
+  };
 
   const classParts = [
     'styles.root',
@@ -627,6 +742,10 @@ function generateTsx(contract: Contract, byId: Map<string, Contract>): string {
     elementAttrs.push(`role={ROLE_MAP[${codePropOf(roleByProp.prop)}]}`);
   } else if (contract.semantics.role && contract.semantics.role !== contract.semantics.element) {
     elementAttrs.push(`role="${contract.semantics.role}"`);
+  }
+  const rootEvent = events.find((e) => e.trigger === 'root');
+  if (rootEvent) {
+    elementAttrs.push(`onClick={handle${pascal(rootEvent.name)}}`);
   }
   elementAttrs.push('{...rest}');
 
@@ -681,7 +800,7 @@ function generateTsx(contract: Contract, byId: Map<string, Contract>): string {
       // accessible name comes from attrs (e.g. aria-label) — and only the
       // glyph itself is hidden.
       const node = part.element
-        ? `<${part.element} className={styles.${partName}}${partAttrString(part)}><span aria-hidden="true" className={styles.${partName}Glyph} ${glyph} /></${part.element}>`
+        ? `<${part.element} className={styles.${partName}}${partAttrString(part)}${eventAttrsFor(partName, part.element)}><span aria-hidden="true" className={styles.${partName}Glyph} ${glyph} /></${part.element}>`
         : `<span className={styles.${partName}} aria-hidden="true" ${glyph} />`;
       return wrapVisibleWhen(part, node);
     }
@@ -707,7 +826,7 @@ function generateTsx(contract: Contract, byId: Map<string, Contract>): string {
       )!;
       return wrapVisibleWhen(
         part,
-        `<${el} className={styles.${partName}}${partAttrString(part)}>{${prop.bindings.code.prop}}</${el}>`,
+        `<${el} className={styles.${partName}}${partAttrString(part)}${eventAttrsFor(partName, el)}>{${prop.bindings.code.prop}}</${el}>`,
       );
     }
     if (part.text !== undefined) {
@@ -731,7 +850,7 @@ function generateTsx(contract: Contract, byId: Map<string, Contract>): string {
       .join('\n');
     return wrapVisibleWhen(
       part,
-      `<${el} className={styles.${partName}}${partAttrString(part)}>\n${inner}\n</${el}>`,
+      `<${el} className={styles.${partName}}${partAttrString(part)}${eventAttrsFor(partName, el)}>\n${inner}\n</${el}>`,
     );
   };
 
@@ -753,7 +872,7 @@ function generateTsx(contract: Contract, byId: Map<string, Contract>): string {
  * Source of truth: contracts/${contract.id.replace('ds.', '')}.contract.json (${contract.id} v${contract.version})
  * Regenerate with: npm run generate
  */
-import { forwardRef } from 'react';
+import { forwardRef${events.some((e) => e.toggles) ? ', useState' : ''} } from 'react';
 import type { ${typeImports} } from 'react';
 ${depImports}${depImports ? '\n' : ''}import styles from './${name}.module.css';
 
@@ -766,7 +885,7 @@ export const ${name} = forwardRef<${meta.el}, ${name}Props>(function ${name}(
   { ${destructured.join(', ')} },
   ref,
 ) {
-  const classes = [${classParts.join(', ')}].filter(Boolean).join(' ');
+${prelude.length > 0 ? prelude.join('\n') + '\n' : ''}  const classes = [${classParts.join(', ')}].filter(Boolean).join(' ');
   return (
     <${el} ${elementAttrs.join(' ')}>
       ${rootInner}
@@ -788,6 +907,9 @@ function generateStories(contract: Contract, byId: Map<string, Contract>): strin
   const hasDefaultSlot = slotsOf(contract).some((s) => s.slot.name === 'children');
   const label = textDefault(contract);
 
+  const storyEvents = contract.events ?? [];
+  const toggledPropNames = new Set(storyEvents.filter((e) => e.toggles).map((e) => e.toggles!.prop));
+
   const argTypes: string[] = [];
   const args: string[] = [];
   for (const p of contract.props) {
@@ -797,7 +919,12 @@ function generateStories(contract: Contract, byId: Map<string, Contract>): strin
       argTypes.push(
         `    ${codeName}: { control: 'select', options: [${p.type.enum.map((v) => `'${v}'`).join(', ')}]${desc} },`,
       );
-      if (p.default !== undefined) args.push(`    ${codeName}: '${p.default}',`);
+      // Toggled props get NO default arg: undefined = uncontrolled, so the
+      // component is actually interactive in the Playground. Setting the
+      // control switches it to controlled — the standard React pattern.
+      if (p.default !== undefined && !toggledPropNames.has(p.name)) {
+        args.push(`    ${codeName}: '${p.default}',`);
+      }
     } else if (p.type === 'boolean') {
       argTypes.push(`    ${codeName}: { control: 'boolean'${desc} },`);
       args.push(`    ${codeName}: ${p.default === true},`);
@@ -811,6 +938,10 @@ function generateStories(contract: Contract, byId: Map<string, Contract>): strin
   }
   for (const { slot } of slots) {
     argTypes.push(`    ${slot.name}: { control: false },`);
+  }
+  for (const ev of storyEvents) {
+    const evDesc = (ev.description ?? `Fires when the ${ev.trigger} is activated.`).replace(/'/g, "\\'");
+    argTypes.push(`    ${ev.bindings.code.prop}: { control: false, description: '${evDesc}' },`);
   }
   const defaultSlot = slotsOf(contract).find((s) => s.slot.name === 'children');
   const defaultSample =

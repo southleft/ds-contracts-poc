@@ -78,6 +78,33 @@ Parts with none of these are structural (frames/elements containing `parts`). `o
 
 **The integrity gate:** at generation time, every reference — *after* expansion — must resolve to a real token in `tokens/`. A binding to a nonexistent token fails the build with the exact contract path and missing token named. The contract and the token set cannot silently disagree.
 
+## Events (v6 — the interaction surface)
+
+A contract can declare **what interactions exist** without ever describing how they're implemented:
+
+```jsonc
+"events": [{
+  "name": "toggle",
+  "bindings": { "code": { "prop": "onToggle" } },   // code-only, by declared fidelity limit
+  "trigger": "trigger",                              // the anatomy part that fires it
+  "toggles": {                                       // optional: a generatable toggle
+    "prop": "state",                                 // enum prop being flipped
+    "between": ["closed", "open"],                   // activation flips within this pair
+    "aria": "expanded"                               // → aria-expanded on the trigger
+  }
+}]
+```
+
+What each surface does with this:
+
+- **Code (generated):** an optional callback prop (`onToggle?: () => void`), and — when `toggles` is present — the complete toggle: an uncontrolled `useState` fallback (so the component is interactive out of the box), the controlled/uncontrolled resolution (`stateProp ?? internal`), a click handler on the trigger, and the ARIA state attribute. Values of the toggled enum *outside* the pair render `aria-*="mixed"` and resolve to the pair's second value on activation — exactly Checkbox's `indeterminate`.
+- **Design (description only):** the canvas cannot run behavior, so events surface as component-description text (`Event (code): onToggle — …`) in the properties panel. A declared fidelity limit, like animation.
+- **Differ:** the callback is contract API. Deleting `onToggle` from code is `code BEHIND` (eval: `detect-code-removed-event`); a handwritten `onX` prop the contract doesn't declare is `code AHEAD` like any other prop.
+
+Guardrails, enforced at build time: a trigger part must be a `<button>` (keyboard activation comes from the platform, not a bolted-on handler), `toggles.prop` must be an enum containing both `between` values, and event prop names must be `on*` and collision-free.
+
+**What events deliberately do NOT cover:** drag, typeahead, focus trapping, animation timing — behavior whose truth can't be verified on both surfaces. That stays a hand-written layer, and the contract refuses to pretend otherwise.
+
 ## Anchors
 
 ```jsonc

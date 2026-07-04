@@ -1,5 +1,5 @@
 /* GENERATED FILE — DO NOT EDIT.
- * Source of truth: contracts/accordion-item.contract.json (ds.accordion-item v1.0.0)
+ * Source of truth: contracts/accordion-item.contract.json (ds.accordion-item v1.1.0)
  * Regenerate with: npm run generate
  */
 
@@ -23,6 +23,15 @@
   display: flex;
   flex-direction: row;
   align-items: center;
+  appearance: none;
+  background: none;
+  border: none;
+  margin: 0;
+  padding: 0;
+  font: inherit;
+  color: inherit;
+  text-align: inherit;
+  cursor: pointer;
   gap: var(--space-gap-sm);
   padding-inline: var(--space-inset-x-sm);
   padding-block: var(--space-inset-y-md);

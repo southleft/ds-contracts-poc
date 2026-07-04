@@ -1,8 +1,10 @@
 # 7 · Validation — Claims, Evals, Evidence
 
-This PoC makes four falsifiable claims. Each is backed by an automated eval (`npm run eval`, 26 cases, runs the real pipeline in a scratch copy — not mocks) or an executed live design-tool check. Current status: **26/26 deterministic evals pass** (`evals/results.json`), all live checks pass. This section is written to be lifted into a PRD.
+This PoC makes four falsifiable claims. Each is backed by an automated eval (`npm run eval`, 27 cases, runs the real pipeline in a scratch copy — not mocks) or an executed live design-tool check. Current status: **27/27 deterministic evals pass** (`evals/results.json`), all live checks pass. This section is written to be lifted into a PRD.
 
 **Round 6 addendum (governed generation):** two eval cases exercise the deterministic generation judge itself — `judge-passes-canonical-screen` and `judge-catches-all-violation-classes` — backing the measured 100-vs-69 governed-generation A/B result in [docs/10](10-honest-generation.md).
+
+**Round 7 addendum (events — the interaction surface):** contracts now declare events (`onToggle` + generated toggle + ARIA state; [docs/02 § Events](02-contract-spec.md)); a declared event callback deleted from code is detected as `code BEHIND` (`detect-code-removed-event`).
 
 **Round 5 addendum (advanced composition + packaging):** the table family adds refusal of slot defaultContent outside `accepts` (`refuse-defaultContent-outside-accepts`) and detection of missing multi-child slot content (`detect-design-missing-multislot-content`) — plus the npm product-environment smoke test (`npm run verify:package`: SSR-renders a composed screen from `dist/`). See [docs/09](09-advanced-components.md).
 

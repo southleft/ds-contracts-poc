@@ -198,6 +198,37 @@ export const PartSchema: z.ZodType<Part> = z.lazy(() =>
   }),
 );
 
+/** v6: the interaction SURFACE, declared — never the implementation.
+ *  An event is a code-side callback (`bindings.code.prop`, e.g. `onToggle`)
+ *  fired when the `trigger` part is activated. When `toggles` is present the
+ *  generator also emits the whole toggle mechanically: an uncontrolled
+ *  fallback (useState) so the component is interactive out of the box, the
+ *  flip between exactly two values of an enum prop, and the matching ARIA
+ *  state attribute on the trigger. Values of the toggled enum OUTSIDE the
+ *  pair map to aria-*="mixed" (e.g. Checkbox `indeterminate`).
+ *  The canvas cannot run behavior, so the design surface reflects events as
+ *  component-description text only — a declared fidelity limit, like
+ *  animation. Complex behavior (drag, typeahead, focus trapping) stays a
+ *  hand-written layer; contracts refuse to pretend otherwise. */
+export const EventSchema = z.object({
+  name: z.string().regex(/^[a-z][a-zA-Z0-9]*$/),
+  description: z.string().optional(),
+  bindings: z.object({
+    code: z.object({ prop: z.string().regex(/^on[A-Z][a-zA-Z0-9]*$/) }),
+  }),
+  /** Anatomy part (by name) whose activation fires the event; 'root' allowed. */
+  trigger: z.string(),
+  toggles: z
+    .object({
+      prop: z.string(),
+      /** [offValue, onValue] — activation flips to the other member; any
+       *  non-member value flips to onValue (indeterminate → checked). */
+      between: z.tuple([z.string(), z.string()]),
+      aria: z.enum(['expanded', 'checked', 'pressed', 'selected']).optional(),
+    })
+    .optional(),
+});
+
 export const ContractSchema = z.object({
   $schema: z.string().optional(),
   /** Stable canonical id, never renamed. e.g. "ds.button" */
@@ -221,6 +252,7 @@ export const ContractSchema = z.object({
       .optional(),
   }),
   props: z.array(PropSchema),
+  events: z.array(EventSchema).optional(),
   states: z.array(z.enum(['hover', 'focus-visible', 'disabled'])).default([]),
   /** How this contract manifests in Figma. 'component' (default) generates a
    *  component (set). 'native' means the concept maps to a native canvas
@@ -253,6 +285,7 @@ export const ContractSchema = z.object({
 
 export type Contract = z.infer<typeof ContractSchema>;
 export type Prop = z.infer<typeof PropSchema>;
+export type ContractEvent = z.infer<typeof EventSchema>;
 export type Slot = z.infer<typeof SlotSchema>;
 export type ComponentRef = z.infer<typeof ComponentRefSchema>;
 export type Layout = z.infer<typeof LayoutSchema>;

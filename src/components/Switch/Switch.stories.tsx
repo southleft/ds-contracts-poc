@@ -1,6 +1,6 @@
 /**
  * GENERATED FILE — DO NOT EDIT.
- * Source of truth: contracts/switch.contract.json (ds.switch v1.0.0)
+ * Source of truth: contracts/switch.contract.json (ds.switch v1.1.0)
  * Regenerate with: npm run generate
  */
 import type { Meta, StoryObj } from '@storybook/react-vite';
@@ -29,9 +29,13 @@ const meta = {
       description: 'Always rendered — users must know what they are toggling.',
     },
     description: { control: 'text', description: 'Secondary text below the label.' },
+    onToggle: {
+      control: false,
+      description:
+        'Fires when the track is activated; uncontrolled instances flip value off/on themselves.',
+    },
   },
   args: {
-    value: 'off',
     label: 'Enable notifications',
     description: 'Takes effect immediately.',
   },

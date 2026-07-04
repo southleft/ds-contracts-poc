@@ -2,9 +2,9 @@
   "$schema": "./contract.schema.json",
   "id": "ds.accordion-item",
   "name": "AccordionItem",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "status": "draft",
-  "description": "A collapsible content row: trigger with a state chevron, content revealed when open. API mirrors industry convention (Astryx Collapsible) with the open state flattened to a closed/open enum so both surfaces render both states; expand/collapse behavior is a declared boundary.",
+  "description": "A collapsible content row: trigger with a state chevron, content revealed when open. API mirrors industry convention (Astryx Collapsible) with the open state flattened to a closed/open enum so both surfaces render both states; the toggle itself is contract-declared (onToggle + aria-expanded, generated); richer behavior stays a declared boundary.",
   "semantics": {
     "element": "div"
   },
@@ -102,10 +102,11 @@
                 "font-weight": "{font.control.weight}"
               }
             }
-          }
+          },
+          "element": "button"
         },
         "contentArea": {
-          "description": "Revealed content — open state only.",
+          "description": "Revealed content \u2014 open state only.",
           "slot": {
             "name": "children",
             "acceptsMode": "open"
@@ -141,5 +142,25 @@
       "importPath": "src/components/AccordionItem",
       "export": "AccordionItem"
     }
-  }
+  },
+  "events": [
+    {
+      "name": "toggle",
+      "description": "Fires when the trigger is activated; uncontrolled instances flip state closed/open themselves.",
+      "bindings": {
+        "code": {
+          "prop": "onToggle"
+        }
+      },
+      "trigger": "trigger",
+      "toggles": {
+        "prop": "state",
+        "between": [
+          "closed",
+          "open"
+        ],
+        "aria": "expanded"
+      }
+    }
+  ]
 }

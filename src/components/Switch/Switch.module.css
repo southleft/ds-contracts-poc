@@ -1,5 +1,5 @@
 /* GENERATED FILE — DO NOT EDIT.
- * Source of truth: contracts/switch.contract.json (ds.switch v1.0.0)
+ * Source of truth: contracts/switch.contract.json (ds.switch v1.1.0)
  * Regenerate with: npm run generate
  */
 
@@ -17,6 +17,15 @@
   display: flex;
   flex-direction: row;
   align-items: center;
+  appearance: none;
+  background: none;
+  border: none;
+  margin: 0;
+  padding: 0;
+  font: inherit;
+  color: inherit;
+  text-align: inherit;
+  cursor: pointer;
   width: var(--size-switch-width);
   height: var(--size-switch-height);
   border-radius: var(--radius-pill);

@@ -1,5 +1,5 @@
 /* GENERATED FILE — DO NOT EDIT.
- * Source of truth: contracts/checkbox.contract.json (ds.checkbox v1.0.0)
+ * Source of truth: contracts/checkbox.contract.json (ds.checkbox v1.1.0)
  * Regenerate with: npm run generate
  */
 
@@ -18,6 +18,15 @@
   flex-direction: row;
   align-items: center;
   justify-content: center;
+  appearance: none;
+  background: none;
+  border: none;
+  margin: 0;
+  padding: 0;
+  font: inherit;
+  color: inherit;
+  text-align: inherit;
+  cursor: pointer;
   border-width: var(--border-width-100);
   border-radius: var(--radius-100);
   color: var(--color-checkbox-icon);

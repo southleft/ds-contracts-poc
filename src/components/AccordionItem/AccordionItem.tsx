@@ -1,9 +1,9 @@
 /**
  * GENERATED FILE — DO NOT EDIT.
- * Source of truth: contracts/accordion-item.contract.json (ds.accordion-item v1.0.0)
+ * Source of truth: contracts/accordion-item.contract.json (ds.accordion-item v1.1.0)
  * Regenerate with: npm run generate
  */
-import { forwardRef } from 'react';
+import { forwardRef, useState } from 'react';
 import type { HTMLAttributes } from 'react';
 import styles from './AccordionItem.module.css';
 
@@ -18,24 +18,37 @@ export interface AccordionItemProps extends HTMLAttributes<HTMLDivElement> {
   state?: 'closed' | 'open';
   /** The always-visible trigger text. */
   title: string;
+  /** Fires when the trigger is activated; uncontrolled instances flip state closed/open themselves. */
+  onToggle?: () => void;
 }
 
-/** A collapsible content row: trigger with a state chevron, content revealed when open. API mirrors industry convention (Astryx Collapsible) with the open state flattened to a closed/open enum so both surfaces render both states; expand/collapse behavior is a declared boundary. */
+/** A collapsible content row: trigger with a state chevron, content revealed when open. API mirrors industry convention (Astryx Collapsible) with the open state flattened to a closed/open enum so both surfaces render both states; the toggle itself is contract-declared (onToggle + aria-expanded, generated); richer behavior stays a declared boundary. */
 export const AccordionItem = forwardRef<HTMLDivElement, AccordionItemProps>(function AccordionItem(
-  { state = 'closed', title, className, children, ...rest },
+  { state: stateProp, title, onToggle, className, children, ...rest },
   ref,
 ) {
+  const [stateUncontrolled, setStateUncontrolled] = useState<'closed' | 'open'>('closed');
+  const state = stateProp ?? stateUncontrolled;
+  const handleToggle = () => {
+    setStateUncontrolled(state === 'open' ? 'closed' : 'open');
+    onToggle?.();
+  };
   const classes = [styles.root, styles[`state-${state}`], className].filter(Boolean).join(' ');
   return (
     <div ref={ref} className={classes} {...rest}>
-      <div className={styles.trigger}>
+      <button
+        className={styles.trigger}
+        type="button"
+        onClick={handleToggle}
+        aria-expanded={state === 'open'}
+      >
         <span
           className={styles.chevron}
           aria-hidden="true"
           dangerouslySetInnerHTML={{ __html: ICONS[state] }}
         />
         <span className={styles.titleText}>{title}</span>
-      </div>
+      </button>
       {state === 'open' ? <div className={styles.contentArea}>{children}</div> : null}
     </div>
   );

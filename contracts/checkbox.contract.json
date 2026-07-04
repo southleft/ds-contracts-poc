@@ -2,9 +2,9 @@
   "$schema": "./contract.schema.json",
   "id": "ds.checkbox",
   "name": "Checkbox",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "status": "draft",
-  "description": "Toggles a single on/off value — settings, terms acceptance, opt-ins. API mirrors industry convention (Astryx CheckboxInput): checked, unchecked, and indeterminate are prop-driven appearance states.",
+  "description": "Toggles a single on/off value \u2014 settings, terms acceptance, opt-ins. API mirrors industry convention (Astryx CheckboxInput): checked, unchecked, and indeterminate are prop-driven appearance states.",
   "semantics": {
     "element": "label"
   },
@@ -61,7 +61,7 @@
     },
     {
       "name": "label",
-      "description": "Always rendered — users must know what they are toggling.",
+      "description": "Always rendered \u2014 users must know what they are toggling.",
       "type": "text",
       "default": "Checkbox label",
       "required": true,
@@ -142,6 +142,10 @@
                 "equals": "indeterminate"
               }
             }
+          },
+          "element": "button",
+          "attrs": {
+            "role": "checkbox"
           }
         },
         "textCol": {
@@ -191,5 +195,25 @@
       "importPath": "src/components/Checkbox",
       "export": "Checkbox"
     }
-  }
+  },
+  "events": [
+    {
+      "name": "toggle",
+      "description": "Fires when the box is activated; uncontrolled instances flip unchecked/checked (indeterminate resolves to checked).",
+      "bindings": {
+        "code": {
+          "prop": "onToggle"
+        }
+      },
+      "trigger": "box",
+      "toggles": {
+        "prop": "value",
+        "between": [
+          "unchecked",
+          "checked"
+        ],
+        "aria": "checked"
+      }
+    }
+  ]
 }

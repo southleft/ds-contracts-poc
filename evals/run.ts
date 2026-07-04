@@ -392,6 +392,21 @@ const cases: Case[] = [
     },
   },
   {
+    // v6 events: a contract-declared event callback is API surface — an
+    // engineer deleting onToggle from the code must surface as code BEHIND.
+    id: 'detect-code-removed-event',
+    claim: 'C3-detection',
+    run: () => {
+      replaceInFile(
+        'src/components/AccordionItem/AccordionItem.tsx',
+        /\s*\/\*\* Fires when the trigger is activated[^*]*\*\/\n\s*onToggle\?: \(\) => void;/,
+        '',
+      );
+      if (parity().status === 0) throw new Error('Drift not detected');
+      expectFinding(readReport(), 'code', 'behind', 'AccordionItem.onToggle');
+    },
+  },
+  {
     id: 'refuse-defaultContent-outside-accepts',
     claim: 'C2-refusal',
     run: () => {

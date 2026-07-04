@@ -2,7 +2,7 @@
   "$schema": "./contract.schema.json",
   "id": "ds.switch",
   "name": "Switch",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "status": "draft",
   "description": "Toggle for on/off settings that take effect immediately. API mirrors industry convention (Astryx Switch) with the boolean value flattened to an off/on enum so both surfaces render both states truthfully; toggle behavior is a declared boundary.",
   "semantics": {
@@ -11,7 +11,7 @@
   "props": [
     {
       "name": "value",
-      "description": "On or off — drives the track color and thumb position.",
+      "description": "On or off \u2014 drives the track color and thumb position.",
       "type": {
         "enum": [
           "off",
@@ -35,7 +35,7 @@
     },
     {
       "name": "label",
-      "description": "Always rendered — users must know what they are toggling.",
+      "description": "Always rendered \u2014 users must know what they are toggling.",
       "type": "text",
       "default": "Enable notifications",
       "required": true,
@@ -122,6 +122,10 @@
                 "equals": "off"
               }
             }
+          },
+          "element": "button",
+          "attrs": {
+            "role": "switch"
           }
         },
         "textCol": {
@@ -171,5 +175,25 @@
       "importPath": "src/components/Switch",
       "export": "Switch"
     }
-  }
+  },
+  "events": [
+    {
+      "name": "toggle",
+      "description": "Fires when the track is activated; uncontrolled instances flip value off/on themselves.",
+      "bindings": {
+        "code": {
+          "prop": "onToggle"
+        }
+      },
+      "trigger": "track",
+      "toggles": {
+        "prop": "value",
+        "between": [
+          "off",
+          "on"
+        ],
+        "aria": "checked"
+      }
+    }
+  ]
 }

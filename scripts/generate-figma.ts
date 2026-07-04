@@ -783,7 +783,17 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
 
   return {
     setName: contract.name,
-    description: `${contract.description} — governed by contract ${contract.id} v${contract.version}`,
+    // Events are code-only by declared fidelity limit (the canvas cannot run
+    // behavior) — surfaced here as description text so designers see the
+    // interaction surface in the properties panel.
+    description:
+      `${contract.description} — governed by contract ${contract.id} v${contract.version}` +
+      (contract.events ?? [])
+        .map((e) => {
+          const t = e.toggles ? ` Toggles ${e.toggles.prop}: ${e.toggles.between.join(' ⇄ ')}.` : '';
+          return `\nEvent (code): ${e.bindings.code.prop} — fires on ${e.trigger} activation.${t}`;
+        })
+        .join(''),
     isSet: variants.length > 1,
     boolProps: boolPropsData,
     textProps: textOnlyProps,

@@ -150,6 +150,15 @@ const catalog = {
       ? { representation: 'native' }
       : { representation: 'component', componentSetKey: c.anchors.figma.componentSetKey },
     props: catalogProps(c),
+    ...(c.events && c.events.length > 0
+      ? {
+          events: c.events.map((e) => ({
+            prop: e.bindings.code.prop,
+            type: '() => void',
+            ...(e.description ? { description: e.description } : {}),
+          })),
+        }
+      : {}),
     children: catalogChildren(c),
     slots: catalogNamedSlots(c),
   })),
