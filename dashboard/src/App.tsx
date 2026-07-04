@@ -11,6 +11,7 @@ import { Tokens } from './views/Tokens';
 import { Governance } from './views/Governance';
 import { Parity } from './views/Parity';
 import { Context } from './views/Context';
+import { Docs } from './views/Docs';
 
 type Theme = 'light' | 'dark';
 
@@ -21,6 +22,7 @@ const NAV_ITEMS = [
   { href: '#/governance', label: 'Governance', section: 'governance' },
   { href: '#/context', label: 'Context', section: 'context' },
   { href: '#/parity', label: 'Parity', section: 'parity' },
+  { href: '#/docs', label: 'Docs', section: 'docs' },
 ];
 
 function useHashRoute(): string {
@@ -64,6 +66,8 @@ export function App() {
     view = <Context />;
   } else if (section === 'parity') {
     view = <Parity />;
+  } else if (section === 'docs') {
+    view = <Docs slug={segments[1] ? decodeURIComponent(segments[1]) : undefined} />;
   } else {
     view = <Overview />;
   }

@@ -104,3 +104,114 @@
     overflow-wrap: anywhere;
   }
 }
+
+/* Rendered repo markdown (Docs view). Wide content (tables, code blocks)
+   scrolls inside its own box — never the page. */
+.doc-prose {
+  font-size: 0.9rem;
+  line-height: 1.65;
+}
+.doc-prose > :first-child {
+  margin-top: 0;
+}
+.doc-prose h1 {
+  display: none; /* the Section header already shows the doc title */
+}
+.doc-prose h2 {
+  margin: 2rem 0 0.75rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+  font-size: 1.15rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+.doc-prose h3 {
+  margin: 1.5rem 0 0.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+}
+.doc-prose h4 {
+  margin: 1.25rem 0 0.5rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+.doc-prose p {
+  margin: 0.75rem 0;
+}
+.doc-prose ul,
+.doc-prose ol {
+  margin: 0.75rem 0;
+  padding-left: 1.5rem;
+}
+.doc-prose ul {
+  list-style: disc;
+}
+.doc-prose ol {
+  list-style: decimal;
+}
+.doc-prose li {
+  margin: 0.3rem 0;
+}
+.doc-prose li > ul,
+.doc-prose li > ol {
+  margin: 0.3rem 0;
+}
+.doc-prose a {
+  color: var(--primary);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.doc-prose blockquote {
+  margin: 1rem 0;
+  border-left: 3px solid var(--border);
+  padding-left: 1rem;
+  color: var(--muted-foreground);
+}
+.doc-prose code {
+  background: var(--muted);
+  border-radius: 4px;
+  padding: 0.1em 0.35em;
+  font-size: 0.85em;
+}
+.doc-prose pre {
+  margin: 1rem 0;
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--muted);
+  padding: 0.9rem 1rem;
+}
+.doc-prose pre code {
+  background: none;
+  border-radius: 0;
+  padding: 0;
+  overflow-wrap: normal;
+  white-space: pre;
+}
+.doc-prose table {
+  display: block;
+  margin: 1rem 0;
+  max-width: 100%;
+  overflow-x: auto;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+}
+.doc-prose th,
+.doc-prose td {
+  border: 1px solid var(--border);
+  padding: 0.4rem 0.65rem;
+  text-align: left;
+  vertical-align: top;
+}
+.doc-prose th {
+  background: var(--muted);
+  font-weight: 600;
+}
+.doc-prose hr {
+  margin: 2rem 0;
+  border: 0;
+  border-top: 1px solid var(--border);
+}
+.doc-prose img {
+  max-width: 100%;
+}

@@ -1,0 +1,214 @@
+- generic [ref=e3]:
+  - complementary [ref=e4]:
+    - generic [ref=e5]:
+      - link "Contract Hub" [ref=e6] [cursor=pointer]:
+        - /url: "#/"
+      - paragraph [ref=e7]: The governed source, visualized
+    - navigation "Main" [ref=e8]:
+      - link "Overview" [ref=e9] [cursor=pointer]:
+        - /url: "#/"
+      - link "Components" [ref=e10] [cursor=pointer]:
+        - /url: "#/components"
+      - link "Tokens" [ref=e11] [cursor=pointer]:
+        - /url: "#/tokens"
+      - link "Governance" [ref=e12] [cursor=pointer]:
+        - /url: "#/governance"
+      - link "Context" [ref=e13] [cursor=pointer]:
+        - /url: "#/context"
+      - link "Parity" [ref=e14] [cursor=pointer]:
+        - /url: "#/parity"
+      - link "Docs" [ref=e15] [cursor=pointer]:
+        - /url: "#/docs"
+    - generic [ref=e16]:
+      - text: ds-contracts-poc
+      - text: catalog v0.1.0
+  - generic [ref=e17]:
+    - banner [ref=e18]:
+      - generic [ref=e19]: docs
+      - generic [ref=e20]:
+        - generic [ref=e21]: catalog v0.1.0 · 2395716
+        - button "Switch to dark mode" [ref=e22]:
+          - img
+          - generic [ref=e23]: Dark
+    - main [ref=e24]:
+      - generic [ref=e25]:
+        - heading "Documentation" [level=1] [ref=e26]
+        - paragraph [ref=e27]:
+          - text: The concept, the contract spec, and the evidence — rendered straight from the repo's
+          - code [ref=e28]: docs/
+          - text: folder. These are the working documents the system was built against, not a summary written for this page.
+      - generic [ref=e29]:
+        - heading "Architecture & the Contract Model" [level=2] [ref=e31]
+        - generic [ref=e32]:
+          - navigation "Documentation" [ref=e33]:
+            - list [ref=e34]:
+              - listitem [ref=e35]:
+                - link "Architecture & the Contract Model" [ref=e36] [cursor=pointer]:
+                  - /url: "#/docs/01-architecture"
+              - listitem [ref=e37]:
+                - link "Contract Specification" [ref=e38] [cursor=pointer]:
+                  - /url: "#/docs/02-contract-spec"
+              - listitem [ref=e39]:
+                - link "Token Pipeline" [ref=e40] [cursor=pointer]:
+                  - /url: "#/docs/03-token-pipeline"
+              - listitem [ref=e41]:
+                - link "Code Generation" [ref=e42] [cursor=pointer]:
+                  - /url: "#/docs/04-code-generation"
+              - listitem [ref=e43]:
+                - link "Figma Sync (Phase 2 executed · Phase 3 planned)" [ref=e44] [cursor=pointer]:
+                  - /url: "#/docs/05-figma-sync"
+              - listitem [ref=e45]:
+                - link "The Parity Loop (Phase 3 — executed)" [ref=e46] [cursor=pointer]:
+                  - /url: "#/docs/06-parity-loop"
+              - listitem [ref=e47]:
+                - link "Validation — Claims, Evals, Evidence" [ref=e48] [cursor=pointer]:
+                  - /url: "#/docs/07-validation"
+              - listitem [ref=e49]:
+                - link "Composition & the Road to a Contributable Spec" [ref=e50] [cursor=pointer]:
+                  - /url: "#/docs/08-composition-and-spec"
+              - listitem [ref=e51]:
+                - link "Advanced Components — the DataTable Round" [ref=e52] [cursor=pointer]:
+                  - /url: "#/docs/09-advanced-components"
+              - listitem [ref=e53]:
+                - link "Honest Generation — Catalog, Judge, and the A/B Number" [ref=e54] [cursor=pointer]:
+                  - /url: "#/docs/10-honest-generation"
+              - listitem [ref=e55]:
+                - link "Enterprise Components — Spec-Gap Report" [ref=e56] [cursor=pointer]:
+                  - /url: "#/docs/enterprise-components"
+          - article [ref=e57]:
+            - heading "The problem this PoC exists to settle" [level=2] [ref=e58]
+            - paragraph [ref=e59]: "Every design system team eventually argues about where the canonical source of truth lives: the Figma library or the code library. Both answers are wrong in the same way — each leaves the other side as a hand-maintained copy that drifts. Developers outnumber designers, so code accumulates decisions design never signed off on; design files freeze into snapshots of intent that stop being true."
+            - paragraph [ref=e60]:
+              - text: "The position this PoC takes:"
+              - strong [ref=e61]: the source of truth is neither surface. It's a machine-readable contract that sits between them.
+              - text: The Figma library and the React library are both
+              - emphasis [ref=e62]: renderers
+              - text: of the contract — generated from it on first pass, validated against it forever after.
+            - paragraph [ref=e63]:
+              - text: "This isn't a novel claim (see the spring 2026 essays from izaias, TJ Pitre, and Cristian Morales Achiardi converging on it), but nobody has shipped it: every existing artifact makes one side primary. Custom Elements Manifest, Storybook manifests, and story.to.design are code-first. Supernova and the EightShapes Specs plugin are Figma-first. Subframe and Knapsack own both ends and are proprietary. The token layer is the exception — the DTCG format proved a neutral, Git-versioned, tool-agnostic artifact can govern both sides."
+              - strong [ref=e64]: This PoC runs the DTCG playbook one level up, at the component-API layer.
+            - 'heading "The model: generative first, diagnostic forever after" [level=2] [ref=e65]'
+            - paragraph [ref=e66]: "Two prior architectures compete in the literature:"
+            - list [ref=e67]:
+              - listitem [ref=e68]:
+                - strong [ref=e69]: Compile-forward
+                - text: "(izaias): the contract is generative; everything downstream is regenerated; Figma is demoted to a renderer. Clean, but has no answer for when code legitimately gets ahead of design."
+              - listitem [ref=e70]:
+                - strong [ref=e71]: Reconcile-bidirectionally
+                - text: "(the diagnostic layer): both artifacts stay live; tooling diffs and repairs. Honest about reality, but under-specified about"
+                - emphasis [ref=e72]: arbitration
+                - text: — when design and code disagree, who wins, by what rule?
+            - paragraph [ref=e73]: "This PoC is a deliberate hybrid:"
+            - list [ref=e74]:
+              - listitem [ref=e75]:
+                - strong [ref=e76]: First pass is generative.
+                - text: "The contract compiles both sides. Code side: React components, CSS Modules, CSF3 stories ("
+                - code [ref=e77]: npm run build
+                - text: ", working today). Figma side: variables with modes/aliases and component sets with variant properties (phase 2, via the Figma Console MCP)."
+              - listitem [ref=e78]:
+                - strong [ref=e79]: Steady state is diagnostic.
+                - text: Both surfaces are live and humans edit them. Parity tooling reads each side back into contract-shaped data and diffs both against the contract (phase 3).
+              - listitem [ref=e80]:
+                - strong [ref=e81]: "The arbitration rule:"
+                - text: neither side ever syncs directly to the other.
+                - strong [ref=e82]:
+                  - text: A change on either side is a
+                  - emphasis [ref=e83]: proposal
+                  - text: to the contract.
+                - text: Drift detection produces a contract diff; a human accepts it as a contract PR; merging regenerates the
+                - emphasis [ref=e84]: other
+                - text: side.
+            - code [ref=e86]: code change ──extract──▶ contract diff ──PR + review──▶ contract ──generate──▶ Figma Figma change ──extract──▶ contract diff ──PR + review──▶ contract ──generate──▶ code
+            - paragraph [ref=e87]:
+              - text: The contract wins not because it's sacred but because
+              - strong [ref=e88]: it is the only place a change becomes canonical.
+              - text: "A developer adding a prop and a designer adding a variant go through the same door: a reviewable, versionable, diffable change to a JSON file in Git. That's what \"keep both sides honest\" looks like as a mechanism instead of a slogan."
+            - heading "Why the style mapping lives in the contract" [level=3] [ref=e89]
+            - paragraph [ref=e90]:
+              - text: "A subtle failure mode in contract-first proposals: if the contract declares"
+              - code [ref=e91]: "variant: primary | secondary"
+              - text: but a handwritten "resolver" maps those values to styles, drift hasn't been eliminated — it's moved into the resolver. So in this PoC, the contract's
+              - strong [ref=e92]: anatomy
+              - text: section binds each named part directly to design token references (
+              - code [ref=e93]: "\"background-color\": \"{color.action.{variant}.background}\""
+              - text: ), and the CSS Module is
+              - emphasis [ref=e94]: generated
+              - text: from those bindings. There is no handwritten style layer to drift. The generator fails the build if a binding references a token that doesn't exist — contract and tokens cannot silently disagree.
+            - heading "What each phase proves" [level=2] [ref=e95]
+            - table [ref=e96]:
+              - rowgroup [ref=e97]:
+                - row "Phase Deliverable Proves" [ref=e98]:
+                  - columnheader "Phase" [ref=e99]
+                  - columnheader "Deliverable" [ref=e100]
+                  - columnheader "Proves" [ref=e101]
+              - rowgroup [ref=e102]:
+                - row "1 (done) Contract schema, DTCG tokens, generator, Storybook The contract is generative for code; token integrity is enforceable at build time" [ref=e103]:
+                  - cell "1 (done)" [ref=e104]:
+                    - strong [ref=e105]: "1"
+                    - text: (done)
+                  - cell "Contract schema, DTCG tokens, generator, Storybook" [ref=e106]
+                  - cell "The contract is generative for code; token integrity is enforceable at build time" [ref=e107]
+                - row "2 Figma variables + component sets generated from the same contracts The contract is generative for design; one definition, two renderers" [ref=e108]:
+                  - cell "2" [ref=e109]:
+                    - strong [ref=e110]: "2"
+                  - cell "Figma variables + component sets generated from the same contracts" [ref=e111]
+                  - cell "The contract is generative for design; one definition, two renderers" [ref=e112]
+                - row "3 Extraction + three-way diff + promotion flow The contract is diagnostic; the arbitration model works in both directions" [ref=e113]:
+                  - cell "3" [ref=e114]:
+                    - strong [ref=e115]: "3"
+                  - cell "Extraction + three-way diff + promotion flow" [ref=e116]
+                  - cell "The contract is diagnostic; the arbitration model works in both directions" [ref=e117]
+            - paragraph [ref=e118]:
+              - text: "The phase-3 demo that settles the argument: add a prop by hand in"
+              - code [ref=e119]: Button.tsx
+              - text: → parity flags code-ahead-of-contract → accept the generated contract patch → the Figma component set sprouts the property automatically. Then the reverse, starting from a variable change in Figma.
+            - heading "Design lineage (assembled, not invented)" [level=2] [ref=e120]
+            - table [ref=e121]:
+              - rowgroup [ref=e122]:
+                - row "Piece of the contract Borrowed from" [ref=e123]:
+                  - columnheader "Piece of the contract" [ref=e124]
+                  - columnheader "Borrowed from" [ref=e125]
+              - rowgroup [ref=e126]:
+                - row "Member model (props / slots / parts) Custom Elements Manifest" [ref=e127]:
+                  - cell "Member model (props / slots / parts)" [ref=e128]
+                  - cell "Custom Elements Manifest" [ref=e129]:
+                    - link "Custom Elements Manifest" [ref=e130] [cursor=pointer]:
+                      - /url: https://github.com/webcomponents/custom-elements-manifest
+                - row "Prop/value binding grammar (\"primary\" ↔ \"Primary\") Figma Code Connect" [ref=e131]:
+                  - cell "Prop/value binding grammar (\"primary\" ↔ \"Primary\")" [ref=e132]:
+                    - text: Prop/value binding grammar (
+                    - code [ref=e133]: "\"primary\""
+                    - text: ↔
+                    - code [ref=e134]: "\"Primary\""
+                    - text: )
+                  - cell "Figma Code Connect" [ref=e135]:
+                    - link "Figma Code Connect" [ref=e136] [cursor=pointer]:
+                      - /url: https://developers.figma.com/docs/code-connect/
+                - row "Dual-anchor identity (rename-safe IDs per side) DTCG $extensions pattern" [ref=e137]:
+                  - cell "Dual-anchor identity (rename-safe IDs per side)" [ref=e138]
+                  - cell "DTCG $extensions pattern" [ref=e139]:
+                    - link "DTCG $extensions" [ref=e140] [cursor=pointer]:
+                      - /url: https://www.designtokens.org/
+                      - text: DTCG
+                      - code [ref=e141]: $extensions
+                    - text: pattern
+                - row "Token format DTCG (see token pipeline doc for dialect notes)" [ref=e142]:
+                  - cell "Token format" [ref=e143]
+                  - cell "DTCG (see token pipeline doc for dialect notes)" [ref=e144]:
+                    - text: DTCG (see
+                    - link "token pipeline doc" [ref=e145] [cursor=pointer]:
+                      - /url: "#/docs/03-token-pipeline"
+                    - text: for dialect notes)
+                - row "Spec taxonomy (anatomy, properties, a11y) Nathan Curtis's component specifications" [ref=e146]:
+                  - cell "Spec taxonomy (anatomy, properties, a11y)" [ref=e147]
+                  - cell "Nathan Curtis's component specifications" [ref=e148]:
+                    - text: Nathan Curtis's
+                    - link "component specifications" [ref=e149] [cursor=pointer]:
+                      - /url: https://medium.com/eightshapes-llc/component-specifications-1492ca4c94c
+            - paragraph [ref=e150]:
+              - text: "One cautionary datapoint shaped the scope: Specify built a standalone \"design API\" business between Figma and Git and sunset. This PoC deliberately proves a"
+              - strong [ref=e151]: format + generators + linters
+              - text: — plain files in a repo — not a hosted middleman.
+        - paragraph [ref=e152]:
+          - text: "source:"
+          - code [ref=e153]: docs/01-architecture.md

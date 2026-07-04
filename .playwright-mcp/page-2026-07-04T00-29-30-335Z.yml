@@ -1,0 +1,345 @@
+- generic [ref=e3]:
+  - complementary [ref=e4]:
+    - generic [ref=e5]:
+      - link "Contract Hub" [ref=e6] [cursor=pointer]:
+        - /url: "#/"
+      - paragraph [ref=e7]: The governed source, visualized
+    - navigation "Main" [ref=e8]:
+      - link "Overview" [ref=e9] [cursor=pointer]:
+        - /url: "#/"
+      - link "Components" [ref=e10] [cursor=pointer]:
+        - /url: "#/components"
+      - link "Tokens" [ref=e11] [cursor=pointer]:
+        - /url: "#/tokens"
+      - link "Governance" [ref=e12] [cursor=pointer]:
+        - /url: "#/governance"
+      - link "Context" [ref=e13] [cursor=pointer]:
+        - /url: "#/context"
+      - link "Parity" [ref=e14] [cursor=pointer]:
+        - /url: "#/parity"
+      - link "Docs" [ref=e15] [cursor=pointer]:
+        - /url: "#/docs"
+    - generic [ref=e16]:
+      - text: ds-contracts-poc
+      - text: catalog v0.1.0
+  - generic [ref=e17]:
+    - banner [ref=e18]:
+      - generic [ref=e19]: docs
+      - generic [ref=e20]:
+        - generic [ref=e21]: catalog v0.1.0 · 2395716
+        - button "Switch to dark mode" [ref=e22]:
+          - img
+          - generic [ref=e23]: Dark
+    - main [ref=e24]:
+      - generic [ref=e25]:
+        - heading "Documentation" [level=1] [ref=e26]
+        - paragraph [ref=e27]:
+          - text: The concept, the contract spec, and the evidence — rendered straight from the repo's
+          - code [ref=e28]: docs/
+          - text: folder. These are the working documents the system was built against, not a summary written for this page.
+      - generic [ref=e29]:
+        - heading "Contract Specification" [level=2] [ref=e154]
+        - generic [ref=e32]:
+          - navigation "Documentation" [ref=e33]:
+            - list [ref=e34]:
+              - listitem [ref=e35]:
+                - link "Architecture & the Contract Model" [ref=e36] [cursor=pointer]:
+                  - /url: "#/docs/01-architecture"
+              - listitem [ref=e37]:
+                - link "Contract Specification" [ref=e38] [cursor=pointer]:
+                  - /url: "#/docs/02-contract-spec"
+              - listitem [ref=e39]:
+                - link "Token Pipeline" [ref=e40] [cursor=pointer]:
+                  - /url: "#/docs/03-token-pipeline"
+              - listitem [ref=e41]:
+                - link "Code Generation" [ref=e42] [cursor=pointer]:
+                  - /url: "#/docs/04-code-generation"
+              - listitem [ref=e43]:
+                - link "Figma Sync (Phase 2 executed · Phase 3 planned)" [ref=e44] [cursor=pointer]:
+                  - /url: "#/docs/05-figma-sync"
+              - listitem [ref=e45]:
+                - link "The Parity Loop (Phase 3 — executed)" [ref=e46] [cursor=pointer]:
+                  - /url: "#/docs/06-parity-loop"
+              - listitem [ref=e47]:
+                - link "Validation — Claims, Evals, Evidence" [ref=e48] [cursor=pointer]:
+                  - /url: "#/docs/07-validation"
+              - listitem [ref=e49]:
+                - link "Composition & the Road to a Contributable Spec" [ref=e50] [cursor=pointer]:
+                  - /url: "#/docs/08-composition-and-spec"
+              - listitem [ref=e51]:
+                - link "Advanced Components — the DataTable Round" [ref=e52] [cursor=pointer]:
+                  - /url: "#/docs/09-advanced-components"
+              - listitem [ref=e53]:
+                - link "Honest Generation — Catalog, Judge, and the A/B Number" [ref=e54] [cursor=pointer]:
+                  - /url: "#/docs/10-honest-generation"
+              - listitem [ref=e55]:
+                - link "Enterprise Components — Spec-Gap Report" [ref=e56] [cursor=pointer]:
+                  - /url: "#/docs/enterprise-components"
+          - article [ref=e57]:
+            - paragraph [ref=e155]:
+              - text: One contract per component, at
+              - code [ref=e156]: contracts/<component>.contract.json
+              - text: . The authoritative schema is defined in Zod at
+              - code [ref=e157]: scripts/contract-schema.ts
+              - text: ;
+              - code [ref=e158]: npm run schema
+              - text: emits
+              - code [ref=e159]: contracts/contract.schema.json
+              - text: so editors validate contracts inline (every contract's
+              - code [ref=e160]: $schema
+              - text: field points at it).
+            - heading "Top-level fields" [level=2] [ref=e161]
+            - table [ref=e162]:
+              - rowgroup [ref=e163]:
+                - row "Field Type Purpose" [ref=e164]:
+                  - columnheader "Field" [ref=e165]
+                  - columnheader "Type" [ref=e166]
+                  - columnheader "Purpose" [ref=e167]
+              - rowgroup [ref=e168]:
+                - row "id ds.<kebab-name> Stable canonical identity. Never renamed. Display names can change on either side; the id is what survives." [ref=e169]:
+                  - cell "id" [ref=e170]:
+                    - code [ref=e171]: id
+                  - cell "ds.<kebab-name>" [ref=e172]:
+                    - code [ref=e173]: ds.<kebab-name>
+                  - cell "Stable canonical identity. Never renamed. Display names can change on either side; the id is what survives." [ref=e174]:
+                    - strong [ref=e175]: Stable canonical identity. Never renamed.
+                    - text: Display names can change on either side; the
+                    - code [ref=e176]: id
+                    - text: is what survives.
+                - row "name string Display/export name (Button). Drives the code export and the Figma component set name." [ref=e177]:
+                  - cell "name" [ref=e178]:
+                    - code [ref=e179]: name
+                  - cell "string" [ref=e180]
+                  - cell "Display/export name (Button). Drives the code export and the Figma component set name." [ref=e181]:
+                    - text: Display/export name (
+                    - code [ref=e182]: Button
+                    - text: ). Drives the code export and the Figma component set name.
+                - row "version semver string Bumped when the contract changes. The unit of change management." [ref=e183]:
+                  - cell "version" [ref=e184]:
+                    - code [ref=e185]: version
+                  - cell "semver string" [ref=e186]
+                  - cell "Bumped when the contract changes. The unit of change management." [ref=e187]
+                - row "status draft | stable | deprecated Governance lifecycle." [ref=e188]:
+                  - cell "status" [ref=e189]:
+                    - code [ref=e190]: status
+                  - cell "draft | stable | deprecated" [ref=e191]:
+                    - code [ref=e192]: draft
+                    - text: "|"
+                    - code [ref=e193]: stable
+                    - text: "|"
+                    - code [ref=e194]: deprecated
+                  - cell "Governance lifecycle." [ref=e195]
+                - row "description string Usage intent. Flows into Storybook autodocs and (phase 2) the Figma component description — the same sentence in both surfaces, from one source." [ref=e196]:
+                  - cell "description" [ref=e197]:
+                    - code [ref=e198]: description
+                  - cell "string" [ref=e199]
+                  - cell "Usage intent. Flows into Storybook autodocs and (phase 2) the Figma component description — the same sentence in both surfaces, from one source." [ref=e200]
+                - 'row "semantics { element, role? } The HTML element the code renderer uses, and the ARIA role if it differs." [ref=e201]':
+                  - cell "semantics" [ref=e202]:
+                    - code [ref=e203]: semantics
+                  - 'cell "{ element, role? }" [ref=e204]':
+                    - code [ref=e205]: "{ element, role? }"
+                  - cell "The HTML element the code renderer uses, and the ARIA role if it differs." [ref=e206]
+                - row "props Prop[] The canonical API. See below." [ref=e207]:
+                  - cell "props" [ref=e208]:
+                    - code [ref=e209]: props
+                  - cell "Prop[]" [ref=e210]:
+                    - code [ref=e211]: Prop[]
+                  - cell "The canonical API. See below." [ref=e212]
+                - row "states (\"hover\" | \"focus-visible\" | \"disabled\")[] Interaction states the component must support. Drives CSS pseudo-class rules (code) and, in phase 2, variant pseudo-state frames (Figma)." [ref=e213]:
+                  - cell "states" [ref=e214]:
+                    - code [ref=e215]: states
+                  - cell "(\"hover\" | \"focus-visible\" | \"disabled\")[]" [ref=e216]:
+                    - code [ref=e217]: ("hover" | "focus-visible" | "disabled")[]
+                  - cell "Interaction states the component must support. Drives CSS pseudo-class rules (code) and, in phase 2, variant pseudo-state frames (Figma)." [ref=e218]
+                - row "anatomy Record<partName, Part> Named internal parts with token bindings — where all styling decisions live." [ref=e219]:
+                  - cell "anatomy" [ref=e220]:
+                    - code [ref=e221]: anatomy
+                  - cell "Record<partName, Part>" [ref=e222]:
+                    - code [ref=e223]: Record<partName, Part>
+                  - cell "Named internal parts with token bindings — where all styling decisions live." [ref=e224]:
+                    - text: Named internal parts with
+                    - strong [ref=e225]: token bindings
+                    - text: — where all styling decisions live.
+                - row "a11y object Executable accessibility requirements (focusVisible, minHitArea, contrast). Phase 1 records them; later phases enforce them." [ref=e226]:
+                  - cell "a11y" [ref=e227]:
+                    - code [ref=e228]: a11y
+                  - cell "object" [ref=e229]
+                  - cell "Executable accessibility requirements (focusVisible, minHitArea, contrast). Phase 1 records them; later phases enforce them." [ref=e230]:
+                    - text: Executable accessibility requirements (
+                    - code [ref=e231]: focusVisible
+                    - text: ","
+                    - code [ref=e232]: minHitArea
+                    - text: ","
+                    - code [ref=e233]: contrast
+                    - text: ). Phase 1 records them; later phases enforce them.
+                - row "anchors object Per-side identity anchors. See below." [ref=e234]:
+                  - cell "anchors" [ref=e235]:
+                    - code [ref=e236]: anchors
+                  - cell "object" [ref=e237]
+                  - cell "Per-side identity anchors. See below." [ref=e238]
+            - heading "Props" [level=2] [ref=e239]
+            - paragraph [ref=e240]:
+              - text: Each prop declares its canonical name, type, default — and
+              - strong [ref=e241]: bindings
+              - text: ", which describe how the one canonical prop manifests on each side. This is the Code Connect idea folded into the source of truth:"
+            - code [ref=e243]: "{ \"name\": \"variant\", \"description\": \"Visual prominence of the action.\", \"type\": { \"enum\": [\"primary\", \"secondary\", \"danger\"] }, // or \"boolean\" or \"text\" \"default\": \"primary\", \"bindings\": { \"figma\": { \"kind\": \"VARIANT\", // VARIANT | BOOLEAN | TEXT | INSTANCE_SWAP \"property\": \"Variant\", // Figma component property name \"values\": { \"primary\": \"Primary\", \"secondary\": \"Secondary\", \"danger\": \"Danger\" } }, // ^ canonical value → Figma variant value \"code\": { \"prop\": \"variant\" } // React prop name } }"
+            - paragraph [ref=e244]: "Rules of thumb:"
+            - list [ref=e245]:
+              - listitem [ref=e246]:
+                - strong [ref=e247]: The canonical value set lives here and only here.
+                - text: Figma spelling (
+                - code [ref=e248]: "\"Primary\""
+                - text: ) and code spelling (
+                - code [ref=e249]: "\"primary\""
+                - text: ) are
+                - emphasis [ref=e250]: renderings
+                - text: of the canonical value.
+              - listitem [ref=e251]:
+                - code [ref=e252]: "\"text\""
+                - text: props map to
+                - code [ref=e253]: children
+                - text: in code and a
+                - code [ref=e254]: TEXT
+                - text: property in Figma.
+              - listitem [ref=e255]:
+                - code [ref=e256]: "\"boolean\""
+                - text: props map to the native attribute where the element supports it (
+                - code [ref=e257]: disabled
+                - text: "on"
+                - code [ref=e258]: <button>
+                - text: ), otherwise a
+                - code [ref=e259]: data-*
+                - text: attribute.
+            - heading "Anatomy & token bindings (v2 — composition)" [level=2] [ref=e260]
+            - paragraph [ref=e261]:
+              - text: Anatomy is a
+              - strong [ref=e262]: nested tree
+              - text: of named parts (CEM's slots/parts, Curtis's anatomy). Every part can carry
+              - strong [ref=e263]: token bindings
+              - text: (CSS property → DTCG token reference — the CSS Module and the Figma node styling are both generated from these; there is no handwritten style layer), a
+              - strong [ref=e264]: layout
+              - text: block (
+              - code [ref=e265]: display
+              - text: /
+              - code [ref=e266]: direction
+              - text: /
+              - code [ref=e267]: align
+              - text: /
+              - code [ref=e268]: justify
+              - text: "→ flexbox on the code side, auto-layout on the Figma side), and one of three composition roles:"
+            - table [ref=e269]:
+              - rowgroup [ref=e270]:
+                - row "Part field Meaning Code output Figma output" [ref=e271]:
+                  - columnheader "Part field" [ref=e272]
+                  - columnheader "Meaning" [ref=e273]
+                  - columnheader "Code output" [ref=e274]
+                  - columnheader "Figma output" [ref=e275]
+              - rowgroup [ref=e276]:
+                - 'row "component: { id, props? } Fixed instance of another contract; props spelled canonically, mapped through the child''s bindings imported <Child prop=\"…\"> nested instance with properties set" [ref=e277]':
+                  - 'cell "component: { id, props? }" [ref=e278]':
+                    - code [ref=e279]: "component: { id, props? }"
+                  - cell "Fixed instance of another contract; props spelled canonically, mapped through the child's bindings" [ref=e280]:
+                    - text: Fixed instance of another contract;
+                    - code [ref=e281]: props
+                    - text: spelled canonically, mapped through the
+                    - emphasis [ref=e282]: child's
+                    - text: bindings
+                  - cell "imported <Child prop=\"…\">" [ref=e283]:
+                    - text: imported
+                    - code [ref=e284]: <Child prop="…">
+                  - cell "nested instance with properties set" [ref=e285]
+                - 'row "slot: { name, accepts?, acceptsMode?, min?, max?, required?, figmaProperty? } Constrained insertion point; accepts lists contract IDs resolved via anchors children / ReactNode prop INSTANCE_SWAP (Slot-utility default) with preferredValues = accepted contracts'' component keys; optional parts get a Show X BOOLEAN" [ref=e286]':
+                  - 'cell "slot: { name, accepts?, acceptsMode?, min?, max?, required?, figmaProperty? }" [ref=e287]':
+                    - code [ref=e288]: "slot: { name, accepts?, acceptsMode?, min?, max?, required?, figmaProperty? }"
+                  - cell "Constrained insertion point; accepts lists contract IDs resolved via anchors" [ref=e289]:
+                    - text: Constrained insertion point;
+                    - code [ref=e290]: accepts
+                    - text: lists contract IDs resolved via anchors
+                  - cell "children / ReactNode prop" [ref=e291]:
+                    - code [ref=e292]: children
+                    - text: /
+                    - code [ref=e293]: ReactNode
+                    - text: prop
+                  - cell "INSTANCE_SWAP (Slot-utility default) with preferredValues = accepted contracts' component keys; optional parts get a Show X BOOLEAN" [ref=e294]:
+                    - text: INSTANCE_SWAP (Slot-utility default) with
+                    - code [ref=e295]: preferredValues
+                    - text: = accepted contracts' component keys; optional parts get a
+                    - code [ref=e296]: Show X
+                    - text: BOOLEAN
+                - 'row "content: { prop } Text bound to a declared text prop {title} in the part''s element text node linked to the TEXT property" [ref=e297]':
+                  - 'cell "content: { prop }" [ref=e298]':
+                    - code [ref=e299]: "content: { prop }"
+                  - cell "Text bound to a declared text prop" [ref=e300]
+                  - 'cell "{title} in the part''s element" [ref=e301]':
+                    - code [ref=e302]: "{title}"
+                    - text: in the part's element
+                  - cell "text node linked to the TEXT property" [ref=e303]
+            - paragraph [ref=e304]:
+              - text: Parts with none of these are structural (frames/elements containing
+              - code [ref=e305]: parts
+              - text: ).
+              - code [ref=e306]: "optional: true"
+              - text: "renders conditionally in code and toggles visibility in Figma. Composition rules: part names are unique per contract; cycles and unknown contract refs"
+              - strong [ref=e307]: fail the build
+              - text: ; sync scripts emit in dependency order. See
+              - link "docs/08" [ref=e308] [cursor=pointer]:
+                - /url: "#/docs/08-composition-and-spec"
+              - text: for the design rationale.
+            - code [ref=e310]: "\"anatomy\": { \"root\": { \"tokens\": { \"background-color\": \"{color.action.{variant}.background}\", \"padding-inline\": \"{space.inset-x.{size}}\", \"border-radius\": \"{radius.control}\" }, \"states\": { \"hover\": { \"background-color\": \"{color.action.{variant}.background-hover}\" }, \"disabled\": { \"opacity\": \"{opacity.disabled}\" } } }, \"icon\": { \"slot\": true, \"optional\": true } }"
+            - paragraph [ref=e311]:
+              - strong [ref=e312]: "Substitution:"
+              - text: a
+              - code [ref=e313]: "{propName}"
+              - text: placeholder inside a token path expands over that enum prop's values.
+              - code [ref=e314]: "{color.action.{variant}.background}"
+              - text: with
+              - code [ref=e315]: "variant: primary|secondary|danger"
+              - text: produces three CSS rules (
+              - code [ref=e316]: ".variant-primary { … }"
+              - text: etc.). One placeholder per reference in phase 1.
+            - paragraph [ref=e317]:
+              - strong [ref=e318]: "The integrity gate:"
+              - text: at generation time, every reference —
+              - emphasis [ref=e319]: after
+              - text: expansion — must resolve to a real token in
+              - code [ref=e320]: tokens/
+              - text: . A binding to a nonexistent token fails the build with the exact contract path and missing token named. The contract and the token set cannot silently disagree.
+            - heading "Anchors" [level=2] [ref=e321]
+            - code [ref=e323]: "\"anchors\": { \"figma\": { \"fileKey\": \"8nim1d0IPnehMxA7B7SYxC\", \"componentSetKey\": null, \"nodeId\": null }, \"code\": { \"importPath\": \"src/components/Button\", \"export\": \"Button\" } }"
+            - paragraph [ref=e324]:
+              - text: This is the DTCG
+              - code [ref=e325]: $extensions
+              - text: dual-ID pattern applied to components. After phase 2 first generates the Figma component set, its key/nodeId are written back here. From then on, renames on either side never fork identity — parity checks match by anchor, not by name.
+            - heading "Versioning & change policy" [level=2] [ref=e326]
+            - list [ref=e327]:
+              - listitem [ref=e328]:
+                - text: Any change to
+                - code [ref=e329]: props
+                - text: ","
+                - code [ref=e330]: states
+                - text: ","
+                - code [ref=e331]: anatomy
+                - text: ", or"
+                - code [ref=e332]: a11y
+                - text: bumps
+                - code [ref=e333]: version
+                - text: "(semver semantics: added optional prop = minor; removed/renamed prop or value = major)."
+              - listitem [ref=e334]:
+                - text: Contract changes land as PRs. The PR diff
+                - emphasis [ref=e335]: is
+                - text: the design-system change review — one artifact, reviewable by designers and engineers alike.
+              - listitem [ref=e336]: Phase 3's promotion flow generates these PRs from drift detected on either surface.
+            - heading "Schema evolution" [level=2] [ref=e337]
+            - paragraph [ref=e338]:
+              - text: The schema itself will grow (composition/nesting, layout block, behavior/events, multi-placeholder substitution are known gaps — see
+              - link "architecture doc" [ref=e339] [cursor=pointer]:
+                - /url: "#/docs/01-architecture"
+              - text: ). Schema changes happen in
+              - code [ref=e340]: scripts/contract-schema.ts
+              - text: ", are reflected by"
+              - code [ref=e341]: npm run schema
+              - text: ", and must keep existing contracts parsing (add optional fields; never repurpose existing ones)."
+        - paragraph [ref=e152]:
+          - text: "source:"
+          - code [ref=e153]: docs/02-contract-spec.md
