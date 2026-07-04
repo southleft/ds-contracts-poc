@@ -94,7 +94,8 @@ One file; two faithful renderings; a differ that can mechanically prove both. Co
 8. [Validation — Claims, Evals, Evidence](docs/07-validation.md) · what's proven and how
 9. [Composition & the Road to a Contributable Spec](docs/08-composition-and-spec.md)
 10. [Honest Generation](docs/10-honest-generation.md) · the catalog, the deterministic judge, and the 100-vs-69 A/B result
-11. [Astryx Coverage Map](docs/research/astryx-coverage.md) · every component in a 93-component industry library: mirrored, gap-blocked, or behavior-bounded
+11. [Brownfield Adoption](docs/11-brownfield-adoption.md) · the plan for connecting pre-existing design + code libraries — extraction, reconciliation, diagnostic-first
+12. [Astryx Coverage Map](docs/research/astryx-coverage.md) · every component in a 93-component industry library: mirrored, gap-blocked, or behavior-bounded
 
 ## Honesty as a design principle
 
