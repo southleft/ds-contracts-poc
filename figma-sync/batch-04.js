@@ -195,26 +195,19 @@ async function buildNode(spec, registry) {
   return node;
 }
 
-let section = figma.currentPage.findOne((n) => n.type === 'SECTION' && n.name === 'Components');
-if (!section) {
-  section = figma.createSection();
-  section.name = 'Components';
-  let maxX = 0;
-  for (const n of figma.currentPage.children) {
-    if (n !== section) maxX = Math.max(maxX, n.x + n.width);
-  }
-  section.x = maxX + 100;
-  section.y = 0;
-}
-
 async function syncOne(C) {
-  const existing = figma.currentPage.findOne(
-    (n) => (n.type === 'COMPONENT_SET' || n.type === 'COMPONENT') && n.name === C.setName,
-  );
+  let existing = null;
+  for (const page of figma.root.children) {
+    existing = page.findOne(
+      (n) => (n.type === 'COMPONENT_SET' || n.type === 'COMPONENT') && n.name === C.setName,
+    );
+    if (existing) break;
+  }
   if (existing) return { name: C.setName, skipped: true, nodeId: existing.id, key: existing.key };
 
-  let startY = PAD;
-  for (const n of section.children) startY = Math.max(startY, n.y + n.height + PAD);
+  // One page per component (see figma-sync/arrange.js for the file layout).
+  let compPage = figma.root.children.find((p) => p.name === C.setName);
+  if (!compPage) { compPage = figma.createPage(); compPage.name = C.setName; }
 
   const built = [];
   for (const v of C.variants) {
@@ -266,35 +259,39 @@ async function syncOne(C) {
 
   let target;
   if (C.isSet) {
-    target = figma.combineAsVariants(built.map((b) => b.comp), section);
+    target = figma.combineAsVariants(built.map((b) => b.comp), compPage);
+    // Tight grid: rows = first axis, columns = second; per-track max sizing.
     const specByName = new Map(C.variants.map((s) => [s.name, s]));
+    const rowsN = Math.max(...C.variants.map((v) => v.row)) + 1;
+    const colsN = Math.max(...C.variants.map((v) => v.col)) + 1;
+    const colWs = new Array(colsN).fill(0);
+    const rowHs = new Array(rowsN).fill(0);
     for (const child of target.children) {
       const spec = specByName.get(child.name);
       if (!spec) continue;
-      child.x = PAD + spec.col * C.colW;
-      child.y = PAD + spec.row * ROW_H;
+      colWs[spec.col] = Math.max(colWs[spec.col], child.width);
+      rowHs[spec.row] = Math.max(rowHs[spec.row], child.height);
     }
-    let maxX = 0, maxY = 0;
     for (const child of target.children) {
-      maxX = Math.max(maxX, child.x + child.width);
-      maxY = Math.max(maxY, child.y + child.height);
+      const spec = specByName.get(child.name);
+      if (!spec) continue;
+      let x = PAD, y = PAD;
+      for (let i = 0; i < spec.col; i++) x += colWs[i] + PAD;
+      for (let i = 0; i < spec.row; i++) y += rowHs[i] + PAD;
+      child.x = x;
+      child.y = y;
     }
-    target.resizeWithoutConstraints(maxX + PAD, maxY + PAD);
+    const totalW = colWs.reduce((a, b) => a + b, 0) + PAD * (colsN + 1);
+    const totalH = rowHs.reduce((a, b) => a + b, 0) + PAD * (rowsN + 1);
+    target.resizeWithoutConstraints(totalW, totalH);
   } else {
     target = built[0].comp;
-    section.appendChild(target);
+    compPage.appendChild(target);
   }
   target.name = C.setName;
   target.description = C.description;
-  target.x = PAD;
-  target.y = startY;
-
-  let sMaxX = 0, sMaxY = 0;
-  for (const n of section.children) {
-    sMaxX = Math.max(sMaxX, n.x + n.width);
-    sMaxY = Math.max(sMaxY, n.y + n.height);
-  }
-  section.resizeWithoutConstraints(sMaxX + PAD, sMaxY + PAD);
+  target.x = 100;
+  target.y = 100;
 
   return {
     name: C.setName,

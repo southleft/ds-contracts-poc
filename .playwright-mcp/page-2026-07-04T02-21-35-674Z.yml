@@ -1,0 +1,38 @@
+- generic [ref=e3]:
+  - generic [ref=e4]:
+    - banner "Storybook" [ref=e6]:
+      - heading "Storybook" [level=1] [ref=e7]
+      - img
+      - generic [ref=e11]:
+        - generic [ref=e13]:
+          - link "Skip to content" [ref=e14] [cursor=pointer]:
+            - /url: "#storybook-preview-wrapper"
+          - link "Storybook" [ref=e16] [cursor=pointer]:
+            - /url: ./
+            - img "Storybook" [ref=e17]
+          - switch "Settings" [ref=e22] [cursor=pointer]:
+            - img [ref=e23]
+        - generic [ref=e26]: Search for components
+        - search [ref=e27]:
+          - combobox "Search for components" [ref=e28]:
+            - generic:
+              - img
+            - searchbox "Search for components" [ref=e29]
+            - code:
+              - generic: ⌘
+              - text: K
+          - button "Create a new story" [ref=e30] [cursor=pointer]:
+            - img [ref=e31]
+        - navigation "Stories" [ref=e34]:
+          - heading "Stories" [level=2] [ref=e35]
+    - separator "Sidebar resize handle" [ref=e55]
+  - generic [ref=e57]:
+    - region "Toolbar" [ref=e58]:
+      - heading "Toolbar" [level=2] [ref=e59]
+      - toolbar [ref=e60]
+    - main "Main preview area" [ref=e61]:
+      - heading "Main preview area" [level=2] [ref=e62]
+      - generic [ref=e63]:
+        - progressbar "Content is loading..." [ref=e65]
+        - iframe [ref=e70]:
+          
