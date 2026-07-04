@@ -1,6 +1,8 @@
 # 7 · Validation — Claims, Evals, Evidence
 
-This PoC makes four falsifiable claims. Each is backed by an automated eval (`npm run eval`, 24 cases, runs the real pipeline in a scratch copy — not mocks) or an executed live design-tool check. Current status: **24/24 deterministic evals pass** (`evals/results.json`), all live checks pass. This section is written to be lifted into a PRD.
+This PoC makes four falsifiable claims. Each is backed by an automated eval (`npm run eval`, 26 cases, runs the real pipeline in a scratch copy — not mocks) or an executed live design-tool check. Current status: **26/26 deterministic evals pass** (`evals/results.json`), all live checks pass. This section is written to be lifted into a PRD.
+
+**Round 6 addendum (governed generation):** two eval cases exercise the deterministic generation judge itself — `judge-passes-canonical-screen` and `judge-catches-all-violation-classes` — backing the measured 100-vs-69 governed-generation A/B result in [docs/10](10-honest-generation.md).
 
 **Round 5 addendum (advanced composition + packaging):** the table family adds refusal of slot defaultContent outside `accepts` (`refuse-defaultContent-outside-accepts`) and detection of missing multi-child slot content (`detect-design-missing-multislot-content`) — plus the npm product-environment smoke test (`npm run verify:package`: SSR-renders a composed screen from `dist/`). See [docs/09](09-advanced-components.md).
 
@@ -64,21 +66,31 @@ This is the loop's key property: the system never oscillates and never lies abou
 
 ## What is NOT yet validated (say this in the PRD too)
 
-1. **Deep/complex composition** — one level of nesting (Card ⊃ Avatar), two slots, four components. Not yet exercised: multi-level trees, parent→child prop mapping, slot arity enforcement, nested-part states.
-2. **Scale** — 4 components, 106 tokens, 1 brand. No evidence yet about 60-component, multi-brand systems (variant-matrix explosion, token-set size, diff noise).
+1. **Deep/complex composition** — one level of nesting is exercised across many contracts (Card ⊃ Avatar, ChatMessage ⊃ Avatar, Toolbar ⊃ IconButton, …). Not yet exercised: multi-level trees, slot arity enforcement, nested-part states.
+2. **Multi-brand scale** — 50 components and 264 tokens, but one brand and one mode pair. No evidence yet about multi-brand systems (variant-matrix explosion per brand, token-set size, diff noise).
 3. **Organizational behavior** — the promotion flow works mechanically; whether teams *accept* contract PRs as the arbitration door is a people question no eval answers.
-4. **Visual fidelity** — out of scope by design. The loop guards structure and bindings; taste stays human.
-5. **AI generation adherence** — designed but not run; see below.
+4. **Visual fidelity** — out of scope by design; the loop guards structure and bindings, taste stays human. In practice this scope line matters more than it sounds: see "What 'parity clean' does and doesn't mean" below.
+5. **Fresh-file rebuild** — the canvas library was built up incrementally in one file. Regenerating the whole library into a *blank* file from the current scripts has not been run end-to-end as a single operation.
 
-## Designed next eval: AI adherence (the PRD's headline metric)
+## What "parity clean" does and doesn't mean
+
+The differ verifies the **contracted API surface** on every component: props and their types, variant axes and option sets, boolean and text properties, slot properties and their `accepts`/preferred values, nested component instances, and every token variable (name, mode values, alias targets). That is what "parity clean" asserts — and each of those checks has a corresponding drift eval above.
+
+It does **not** inspect anatomy internals: part-level layout and alignment, icon glyphs, meter geometry, static text parts, or `visibleWhen` wiring inside variants. Those are generated from the contract, but post-generation damage to them is invisible to the differ. This is not hypothetical: a July 2026 visual audit found a canvas-only defect (a chat bubble collapsing to hug-width because canvas and CSS have different `align` defaults) on a component the differ reported clean, because the defect lived below the API surface. The honest statement is therefore: *parity clean means the API contract holds on all three surfaces; anatomy fidelity is enforced at generation time and re-verified visually, not continuously.* Extending the differ one level down — an anatomy checksum per variant — is the identified next engineering round.
+
+**Snapshot provenance:** the token snapshot the differ reads (`parity/snapshots/figma-tokens.json`) has been *derived* from `tokens/` since the token pipeline stabilized, rather than re-extracted from the design tool on every run. A full live extraction of all 264 variables (names, per-mode values, alias targets) was diffed against the derived snapshot on July 3, 2026: **264/264 exact matches, zero differences**. Derivation is safe today, but a periodic live re-extraction belongs in the loop so the check never becomes self-referential.
+
+## AI adherence (the PRD's headline metric) — designed, then executed
 
 Public design systems can't measure model adherence honestly — Material and Atlassian are in every frontier model's training data, so strong results flatter the ceiling. **This PoC's design system is private and novel, which makes it a clean adherence instrument.**
 
-Harness design (buildable on what exists today):
+Harness design:
 
-- **Tasks:** N generation prompts ("build a settings form using this design system", …) given to an agent in two arms: (A) with the contracts + tokens as context, (B) without.
+- **Tasks:** generation prompts ("build a settings form using this design system", …) given to an agent in two arms: (A) with the compiled contract catalog as context, (B) without.
 - **Judges are deterministic, not LLM:** run the existing extraction + differ over each output — do all props/values exist in the contract? Are all colors/spacing `var(--…)` references into `tokens.css` (zero hex/px literals)? Are variant combinations legal? The parity differ **is** the judge; no rubric drift.
-- **Metric:** adherence rate per arm; the claim to test is that arm A approaches 100% *because the checks are structural*, and the gap A−B quantifies what the contract layer is worth.
+- **Metric:** adherence rate per arm; the gap A−B quantifies what the contract layer is worth.
+
+**Executed result:** ungoverned arm **69/100 with 91 violations**; governed arm **100/100 with zero violations**, including honest gap-reporting when the system lacked a needed component. Full write-up, judge internals, and the two judge evals: [docs/10 — Honest Generation](10-honest-generation.md).
 
 ## Reproducing everything
 
