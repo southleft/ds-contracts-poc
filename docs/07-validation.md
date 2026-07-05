@@ -1,8 +1,10 @@
 # 7 · Validation — Claims, Evals, Evidence
 
-This PoC makes four falsifiable claims. Each is backed by an automated eval (`npm run eval`, 27 cases, runs the real pipeline in a scratch copy — not mocks) or an executed live design-tool check. Current status: **27/27 deterministic evals pass** (`evals/results.json`), all live checks pass. This section is written to be lifted into a PRD.
+This PoC makes five falsifiable claims. Each is backed by an automated eval (`npm run eval`, 28 cases, runs the real pipeline in a scratch copy — not mocks) or an executed live design-tool check. Current status: **28/28 deterministic evals pass** (`evals/results.json`), all live checks pass. This section is written to be lifted into a PRD.
 
 **Round 6 addendum (governed generation):** two eval cases exercise the deterministic generation judge itself — `judge-passes-canonical-screen` and `judge-catches-all-violation-classes` — backing the measured 100-vs-69 governed-generation A/B result in [docs/10](10-honest-generation.md).
+
+**Round 8 addendum (brownfield extraction):** the extraction adapters (react-tsx + CEM) are eval-covered — `extract-foreign-library` proves both read a foreign-convention library into schema-valid proposals with correct enums, defaults, and events. See [docs/13](13-try-it-with-your-system.md).
 
 **Round 7 addendum (events — the interaction surface):** contracts now declare events (`onToggle` + generated toggle + ARIA state; [docs/02 § Events](02-contract-spec.md)); a declared event callback deleted from code is detected as `code BEHIND` (`detect-code-removed-event`).
 
@@ -57,6 +59,16 @@ Why it matters for the PRD: determinism is what separates "generate from your de
 | `promotion-converges` — code drifts ahead → differ's patch applied to the contract verbatim → regenerate → assert zero code findings and exactly one remaining finding: `design BEHIND` on the new property (the correct next action) | ✅ |
 
 This is the loop's key property: the system never oscillates and never lies about what to do next.
+
+### C5 — Pre-existing libraries are extractable
+
+*The pipeline runs in reverse: real, foreign-convention component sources — not this repo's generated output — extract into schema-valid proposed contracts.*
+
+| Eval | Result |
+|---|---|
+| `extract-foreign-library` — both adapters run against fixtures written in conventions this repo's generator never emits (type-alias props behind `memo`, legacy `defaultProps`, a Custom Elements Manifest): enums, defaults, and events must extract correctly and every proposal must parse against the contract schema | ✅ |
+
+Live receipt: the same tooling run against this repo's own surfaces reconciles 46/48 components with 102 property agreements ([docs/13](13-try-it-with-your-system.md) documents the two honest residual classes).
 
 ## Live design-tool evals (executed July 3, 2026, not headless-repeatable yet)
 

@@ -1,0 +1,5 @@
+{
+  "code": { "adapter": "cem", "manifest": "extract/fixtures/foreign-wc/custom-elements.json" },
+  "idPrefix": "acme",
+  "out": "extract/fixtures/.out-wc"
+}

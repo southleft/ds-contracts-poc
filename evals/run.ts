@@ -33,7 +33,7 @@ const TSX = path.join(SCRATCH, 'node_modules', '.bin', 'tsx');
 function resetScratch() {
   rmSync(SCRATCH, { recursive: true, force: true });
   mkdirSync(SCRATCH, { recursive: true });
-  for (const dir of ['contracts', 'tokens', 'scripts', 'parity', 'src', 'catalog', 'context', 'assets']) {
+  for (const dir of ['contracts', 'tokens', 'scripts', 'parity', 'src', 'catalog', 'context', 'assets', 'extract']) {
     cpSync(path.join(ROOT, dir), path.join(SCRATCH, dir), { recursive: true });
   }
   cpSync(path.join(ROOT, 'evals', 'fixtures'), path.join(SCRATCH, 'evals', 'fixtures'), {
@@ -389,6 +389,44 @@ const cases: Case[] = [
       replaceInFile(CARD_TSX, /\s*actions\?: ReactNode;/, '');
       if (parity().status === 0) throw new Error('Drift not detected');
       expectFinding(readReport(), 'code', 'behind', 'Card.actions');
+    },
+  },
+  {
+    // Brownfield (roadmap Phase 2): both extraction adapters must read a
+    // FOREIGN library — conventions this repo's generator never emits — into
+    // schema-valid proposals with correct kinds, values, defaults, events.
+    id: 'extract-foreign-library',
+    claim: 'C5-extraction',
+    run: () => {
+      for (const cfg of ['extract/fixtures/foreign-react.config.json', 'extract/fixtures/foreign-wc.config.json']) {
+        const r = run(TSX, ['extract/run.ts', 'code', cfg]);
+        if (r.status !== 0) throw new Error(`Extraction failed for ${cfg}:\n${r.out}`);
+      }
+      const chip = JSON.parse(
+        readFileSync(path.join(SCRATCH, 'extract/fixtures/.out-react/contracts/chip.contract.json'), 'utf8'),
+      );
+      const tone = chip.props.find((p: any) => p.name === 'tone');
+      if (tone?.type?.enum?.join('|') !== 'neutral|info|success|critical' || tone.default !== 'neutral') {
+        throw new Error('Chip.tone: one-hop alias enum or destructure default not extracted');
+      }
+      if (chip.events?.[0]?.bindings?.code?.prop !== 'onRemove') {
+        throw new Error('Chip: onRemove not proposed as a declared event');
+      }
+      const alert = JSON.parse(
+        readFileSync(path.join(SCRATCH, 'extract/fixtures/.out-react/contracts/alert.contract.json'), 'utf8'),
+      );
+      if (alert.props.find((p: any) => p.name === 'severity')?.default !== 'info') {
+        throw new Error('Alert.severity: legacy defaultProps default not extracted');
+      }
+      const badge = JSON.parse(
+        readFileSync(path.join(SCRATCH, 'extract/fixtures/.out-wc/contracts/fancy-badge.contract.json'), 'utf8'),
+      );
+      if (badge.props.find((p: any) => p.name === 'appearance')?.type?.enum?.length !== 3) {
+        throw new Error('FancyBadge.appearance: CEM text-union enum not extracted');
+      }
+      if (badge.events?.[0]?.bindings?.code?.prop !== 'onDismiss') {
+        throw new Error('FancyBadge: CEM event fb-dismiss not mapped to onDismiss');
+      }
     },
   },
   {

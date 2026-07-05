@@ -20,7 +20,9 @@
     "catalog": "tsx scripts/generate-catalog.ts",
     "judge": "tsx parity/judge.ts",
     "dashboard": "vite --config dashboard/vite.config.ts",
-    "build:dashboard": "vite build --config dashboard/vite.config.ts"
+    "build:dashboard": "vite build --config dashboard/vite.config.ts",
+    "extract:code": "tsx extract/run.ts code",
+    "reconcile": "tsx extract/run.ts reconcile"
   },
   "engines": {
     "node": ">=20"

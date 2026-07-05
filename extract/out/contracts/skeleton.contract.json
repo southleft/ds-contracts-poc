@@ -1,0 +1,53 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "ds.skeleton",
+  "name": "Skeleton",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "PROPOSED contract extracted from src/components/Skeleton/Skeleton.tsx (react-tsx adapter) — API surface only; anatomy, tokens, and design bindings await reconciliation and human review.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "variant",
+      "description": "The shape being previewed.",
+      "type": {
+        "enum": [
+          "text",
+          "rect",
+          "circle"
+        ]
+      },
+      "default": "text",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Variant",
+          "values": {
+            "text": "Text",
+            "rect": "Rect",
+            "circle": "Circle"
+          }
+        },
+        "code": {
+          "prop": "variant"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {}
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "src/components/Skeleton/Skeleton",
+      "export": "Skeleton"
+    }
+  }
+}

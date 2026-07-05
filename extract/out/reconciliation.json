@@ -1,0 +1,890 @@
+{
+  "matched": [
+    {
+      "component": "AccordionItem",
+      "codeSource": "src/components/AccordionItem/AccordionItem.tsx",
+      "designName": "AccordionItem",
+      "findings": [
+        {
+          "status": "agree",
+          "codeProp": "state",
+          "designProp": "State"
+        },
+        {
+          "status": "agree",
+          "codeProp": "title",
+          "designProp": "Title"
+        }
+      ]
+    },
+    {
+      "component": "Avatar",
+      "codeSource": "src/components/Avatar/Avatar.tsx",
+      "designName": "Avatar",
+      "findings": [
+        {
+          "status": "agree",
+          "codeProp": "size",
+          "designProp": "Size"
+        },
+        {
+          "status": "design-only",
+          "designProp": "Initials",
+          "detail": "no matching code prop — a design TEXT property with no code counterpart is often bound to React `children` (invisible in a props interface); confirm before treating as drift"
+        }
+      ]
+    },
+    {
+      "component": "AvatarGroup",
+      "codeSource": "src/components/AvatarGroup/AvatarGroup.tsx",
+      "designName": "AvatarGroup",
+      "findings": [
+        {
+          "status": "agree",
+          "codeProp": "overflowLabel",
+          "designProp": "Overflow",
+          "detail": "matched via alias rule (overflowLabel ⇄ Overflow)"
+        }
+      ]
+    },
+    {
+      "component": "Badge",
+      "codeSource": "src/components/Badge/Badge.tsx",
+      "designName": "Badge",
+      "findings": [
+        {
+          "status": "agree",
+          "codeProp": "variant",
+          "designProp": "Variant"
+        },
+        {
+          "status": "design-only",
+          "designProp": "Label",
+          "detail": "no matching code prop — a design TEXT property with no code counterpart is often bound to React `children` (invisible in a props interface); confirm before treating as drift"
+        }
+      ]
+    },
+    {
+      "component": "Banner",
+      "codeSource": "src/components/Banner/Banner.tsx",
+      "designName": "Banner",
+      "findings": [
+        {
+          "status": "agree",
+          "codeProp": "status",
+          "designProp": "Status"
+        },
+        {
+          "status": "agree",
+          "codeProp": "container",
+          "designProp": "Container"
+        },
+        {
+          "status": "agree",
+          "codeProp": "isDismissable",
+          "designProp": "Dismissable",
+          "detail": "matched via alias rule (isDismissable ⇄ Dismissable)"
+        },
+        {
+          "status": "agree",
+          "codeProp": "title",
+          "designProp": "Title"
+        },
+        {
+          "status": "agree",
+          "codeProp": "description",
+          "designProp": "Description"
+        }
+      ]
+    },
+    {
+      "component": "Blockquote",
+      "codeSource": "src/components/Blockquote/Blockquote.tsx",
+      "designName": "Blockquote",
+      "findings": []
+    },
+    {
+      "component": "BreadcrumbItem",
+      "codeSource": "src/components/BreadcrumbItem/BreadcrumbItem.tsx",
+      "designName": "BreadcrumbItem",
+      "findings": [
+        {
+          "status": "agree",
+          "codeProp": "hasSeparator",
+          "designProp": "Separator",
+          "detail": "matched via alias rule (hasSeparator ⇄ Separator)"
+        },
+        {
+          "status": "agree",
+          "codeProp": "label",
+          "designProp": "Label"
+        },
+        {
+          "status": "agree",
+          "codeProp": "href",
+          "designProp": "Href"
+        }
+      ]
+    },
+    {
+      "component": "Breadcrumbs",
+      "codeSource": "src/components/Breadcrumbs/Breadcrumbs.tsx",
+      "designName": "Breadcrumbs",
+      "findings": [
+        {
+          "status": "agree",
+          "codeProp": "label",
+          "designProp": "Label"
+        }
+      ]
+    },
+    {
+      "component": "Button",
+      "codeSource": "src/components/Button/Button.tsx",
+      "designName": "Button",
+      "findings": [
+        {
+          "status": "agree",
+          "codeProp": "variant",
+          "designProp": "Variant"
+        },
+        {
+          "status": "agree",
+          "codeProp": "size",
+          "designProp": "Size"
+        },
+        {
+          "status": "agree",
+          "codeProp": "disabled",
+          "designProp": "Disabled"
+        },
+        {
+          "status": "agree",
+          "codeProp": "loading",
+          "designProp": "Loading"
+        },
+        {
+          "status": "design-only",
+          "designProp": "Label",
+          "detail": "no matching code prop — a design TEXT property with no code counterpart is often bound to React `children` (invisible in a props interface); confirm before treating as drift"
+        }
+      ]
+    },
+    {
+      "component": "Card",
+      "codeSource": "src/components/Card/Card.tsx",
+      "designName": "Card",
+      "findings": [
+        {
+          "status": "agree",
+          "codeProp": "title",
+          "designProp": "Title"
+        }
+      ]
+    },
+    {
+      "component": "ChatMessage",
+      "codeSource": "src/components/ChatMessage/ChatMessage.tsx",
+      "designName": "ChatMessage",
+      "findings": [
+        {
+          "status": "agree",
+          "codeProp": "sender",
+          "designProp": "Sender"
+        },
+        {
+          "status": "agree",
+          "codeProp": "name",
+          "designProp": "Name"
+        }
+      ]
+    },
+    {
+      "component": "ChatMessageMetadata",
+      "codeSource": "src/components/ChatMessageMetadata/ChatMessageMetadata.tsx",
+      "designName": "ChatMessageMetadata",
+      "findings": [
+        {
+          "status": "agree",
+          "codeProp": "status",
+          "designProp": "Status"
+        },
+        {
+          "status": "agree",
+          "codeProp": "timestamp",
+          "designProp": "Timestamp"
+        }
+      ]
+    },
+    {
+      "component": "ChatSystemMessage",
+      "codeSource": "src/components/ChatSystemMessage/ChatSystemMessage.tsx",
+      "designName": "ChatSystemMessage",
+      "findings": [
+        {
+          "status": "agree",
+          "codeProp": "variant",
+          "designProp": "Variant"
+        },
+        {
+          "status": "agree",
+          "codeProp": "message",
+          "designProp": "Message"
+        }
+      ]
+    },
+    {
+      "component": "Checkbox",
+      "codeSource": "src/components/Checkbox/Checkbox.tsx",
+      "designName": "Checkbox",
+      "findings": [
+        {
+          "status": "agree",
+          "codeProp": "value",
+          "designProp": "Value"
+        },
+        {
+          "status": "agree",
+          "codeProp": "size",
+          "designProp": "Size"
+        },
+        {
+          "status": "agree",
+          "codeProp": "label",
+          "designProp": "Label"
+        },
+        {
+          "status": "agree",
+          "codeProp": "description",
+          "designProp": "Description"
+        }
+      ]
+    },
+    {
+      "component": "Citation",
+      "codeSource": "src/components/Citation/Citation.tsx",
+      "designName": "Citation",
+      "findings": [
+        {
+          "status": "agree",
+          "codeProp": "variant",
+          "designProp": "Variant"
+        },
+        {
+          "status": "agree",
+          "codeProp": "sourceTitle",
+          "designProp": "Source",
+          "detail": "matched via alias rule (sourceTitle ⇄ Source)"
+        },
+        {
+          "status": "agree",
+          "codeProp": "number",
+          "designProp": "Number"
+        },
+        {
+          "status": "agree",
+          "codeProp": "href",
+          "designProp": "Href"
+        }
+      ]
+    },
+    {
+      "component": "Divider",
+      "codeSource": "src/components/Divider/Divider.tsx",
+      "designName": "Divider",
+      "findings": [
+        {
+          "status": "agree",
+          "codeProp": "variant",
+          "designProp": "Variant"
+        }
+      ]
+    },
+    {
+      "component": "EmptyState",
+      "codeSource": "src/components/EmptyState/EmptyState.tsx",
+      "designName": "EmptyState",
+      "findings": [
+        {
+          "status": "agree",
+          "codeProp": "title",
+          "designProp": "Title"
+        },
+        {
+          "status": "agree",
+          "codeProp": "description",
+          "designProp": "Description"
+        }
+      ]
+    },
+    {
+      "component": "Field",
+      "codeSource": "src/components/Field/Field.tsx",
+      "designName": "Field",
+      "findings": [
+        {
+          "status": "agree",
+          "codeProp": "isRequired",
+          "designProp": "Required",
+          "detail": "matched via alias rule (isRequired ⇄ Required)"
+        },
+        {
+          "status": "agree",
+          "codeProp": "label",
+          "designProp": "Label"
+        },
+        {
+          "status": "agree",
+          "codeProp": "inputID",
+          "designProp": "InputID"
+        },
+        {
+          "status": "agree",
+          "codeProp": "description",
+          "designProp": "Description"
+        }
+      ]
+    },
+    {
+      "component": "IconButton",
+      "codeSource": "src/components/IconButton/IconButton.tsx",
+      "designName": "IconButton",
+      "findings": [
+        {
+          "status": "agree",
+          "codeProp": "variant",
+          "designProp": "Variant"
+        },
+        {
+          "status": "agree",
+          "codeProp": "size",
+          "designProp": "Size"
+        },
+        {
+          "status": "agree",
+          "codeProp": "isDisabled",
+          "designProp": "Disabled",
+          "detail": "matched via alias rule (isDisabled ⇄ Disabled)"
+        },
+        {
+          "status": "agree",
+          "codeProp": "label",
+          "designProp": "Label"
+        }
+      ]
+    },
+    {
+      "component": "Kbd",
+      "codeSource": "src/components/Kbd/Kbd.tsx",
+      "designName": "Kbd",
+      "findings": [
+        {
+          "status": "agree",
+          "codeProp": "keys",
+          "designProp": "Keys"
+        }
+      ]
+    },
+    {
+      "component": "List",
+      "codeSource": "src/components/List/List.tsx",
+      "designName": "List",
+      "findings": [
+        {
+          "status": "agree",
+          "codeProp": "density",
+          "designProp": "Density"
+        }
+      ]
+    },
+    {
+      "component": "ListItem",
+      "codeSource": "src/components/ListItem/ListItem.tsx",
+      "designName": "ListItem",
+      "findings": [
+        {
+          "status": "agree",
+          "codeProp": "label",
+          "designProp": "Label"
+        },
+        {
+          "status": "agree",
+          "codeProp": "description",
+          "designProp": "Description"
+        }
+      ]
+    },
+    {
+      "component": "MetadataList",
+      "codeSource": "src/components/MetadataList/MetadataList.tsx",
+      "designName": "MetadataList",
+      "findings": [
+        {
+          "status": "agree",
+          "codeProp": "title",
+          "designProp": "Title"
+        }
+      ]
+    },
+    {
+      "component": "MetadataListItem",
+      "codeSource": "src/components/MetadataListItem/MetadataListItem.tsx",
+      "designName": "MetadataListItem",
+      "findings": [
+        {
+          "status": "agree",
+          "codeProp": "label",
+          "designProp": "Label"
+        },
+        {
+          "status": "agree",
+          "codeProp": "value",
+          "designProp": "Value"
+        }
+      ]
+    },
+    {
+      "component": "Pagination",
+      "codeSource": "src/components/Pagination/Pagination.tsx",
+      "designName": "Pagination",
+      "findings": [
+        {
+          "status": "agree",
+          "codeProp": "variant",
+          "designProp": "Variant"
+        },
+        {
+          "status": "agree",
+          "codeProp": "pageLabel",
+          "designProp": "PageLabel"
+        },
+        {
+          "status": "agree",
+          "codeProp": "label",
+          "designProp": "Label"
+        }
+      ]
+    },
+    {
+      "component": "ProgressBar",
+      "codeSource": "src/components/ProgressBar/ProgressBar.tsx",
+      "designName": "ProgressBar",
+      "findings": [
+        {
+          "status": "agree",
+          "codeProp": "variant",
+          "designProp": "Variant"
+        },
+        {
+          "status": "agree",
+          "codeProp": "value",
+          "designProp": "Value"
+        },
+        {
+          "status": "agree",
+          "codeProp": "max",
+          "designProp": "Max"
+        },
+        {
+          "status": "agree",
+          "codeProp": "label",
+          "designProp": "Label"
+        }
+      ]
+    },
+    {
+      "component": "Section",
+      "codeSource": "src/components/Section/Section.tsx",
+      "designName": "Section",
+      "findings": [
+        {
+          "status": "agree",
+          "codeProp": "variant",
+          "designProp": "Variant"
+        }
+      ]
+    },
+    {
+      "component": "SideNavItem",
+      "codeSource": "src/components/SideNavItem/SideNavItem.tsx",
+      "designName": "SideNavItem",
+      "findings": [
+        {
+          "status": "agree",
+          "codeProp": "state",
+          "designProp": "State"
+        },
+        {
+          "status": "agree",
+          "codeProp": "label",
+          "designProp": "Label"
+        },
+        {
+          "status": "agree",
+          "codeProp": "href",
+          "designProp": "Href"
+        }
+      ]
+    },
+    {
+      "component": "Skeleton",
+      "codeSource": "src/components/Skeleton/Skeleton.tsx",
+      "designName": "Skeleton",
+      "findings": [
+        {
+          "status": "agree",
+          "codeProp": "variant",
+          "designProp": "Variant"
+        }
+      ]
+    },
+    {
+      "component": "Slider",
+      "codeSource": "src/components/Slider/Slider.tsx",
+      "designName": "Slider",
+      "findings": [
+        {
+          "status": "agree",
+          "codeProp": "value",
+          "designProp": "Value"
+        },
+        {
+          "status": "agree",
+          "codeProp": "max",
+          "designProp": "Max"
+        },
+        {
+          "status": "agree",
+          "codeProp": "label",
+          "designProp": "Label"
+        }
+      ]
+    },
+    {
+      "component": "Spinner",
+      "codeSource": "src/components/Spinner/Spinner.tsx",
+      "designName": "Spinner",
+      "findings": [
+        {
+          "status": "agree",
+          "codeProp": "label",
+          "designProp": "Label"
+        }
+      ]
+    },
+    {
+      "component": "StatusDot",
+      "codeSource": "src/components/StatusDot/StatusDot.tsx",
+      "designName": "StatusDot",
+      "findings": [
+        {
+          "status": "agree",
+          "codeProp": "variant",
+          "designProp": "Variant"
+        },
+        {
+          "status": "agree",
+          "codeProp": "label",
+          "designProp": "Label"
+        }
+      ]
+    },
+    {
+      "component": "Switch",
+      "codeSource": "src/components/Switch/Switch.tsx",
+      "designName": "Switch",
+      "findings": [
+        {
+          "status": "agree",
+          "codeProp": "value",
+          "designProp": "Value"
+        },
+        {
+          "status": "agree",
+          "codeProp": "label",
+          "designProp": "Label"
+        },
+        {
+          "status": "agree",
+          "codeProp": "description",
+          "designProp": "Description"
+        }
+      ]
+    },
+    {
+      "component": "Tab",
+      "codeSource": "src/components/Tab/Tab.tsx",
+      "designName": "Tab",
+      "findings": [
+        {
+          "status": "agree",
+          "codeProp": "state",
+          "designProp": "State"
+        },
+        {
+          "status": "agree",
+          "codeProp": "label",
+          "designProp": "Label"
+        }
+      ]
+    },
+    {
+      "component": "Table",
+      "codeSource": "src/components/Table/Table.tsx",
+      "designName": "Table",
+      "findings": [
+        {
+          "status": "agree",
+          "codeProp": "density",
+          "designProp": "Density"
+        }
+      ]
+    },
+    {
+      "component": "TableCell",
+      "codeSource": "src/components/TableCell/TableCell.tsx",
+      "designName": "TableCell",
+      "findings": [
+        {
+          "status": "agree",
+          "codeProp": "density",
+          "designProp": "Density"
+        },
+        {
+          "status": "design-only",
+          "designProp": "Content",
+          "detail": "no matching code prop — a design TEXT property with no code counterpart is often bound to React `children` (invisible in a props interface); confirm before treating as drift"
+        }
+      ]
+    },
+    {
+      "component": "TableHeaderCell",
+      "codeSource": "src/components/TableHeaderCell/TableHeaderCell.tsx",
+      "designName": "TableHeaderCell",
+      "findings": [
+        {
+          "status": "agree",
+          "codeProp": "density",
+          "designProp": "Density"
+        },
+        {
+          "status": "design-only",
+          "designProp": "Label",
+          "detail": "no matching code prop — a design TEXT property with no code counterpart is often bound to React `children` (invisible in a props interface); confirm before treating as drift"
+        }
+      ]
+    },
+    {
+      "component": "TableRow",
+      "codeSource": "src/components/TableRow/TableRow.tsx",
+      "designName": "TableRow",
+      "findings": [
+        {
+          "status": "agree",
+          "codeProp": "state",
+          "designProp": "State"
+        }
+      ]
+    },
+    {
+      "component": "TextArea",
+      "codeSource": "src/components/TextArea/TextArea.tsx",
+      "designName": "TextArea",
+      "findings": [
+        {
+          "status": "agree",
+          "codeProp": "size",
+          "designProp": "Size"
+        },
+        {
+          "status": "agree",
+          "codeProp": "isRequired",
+          "designProp": "Required",
+          "detail": "matched via alias rule (isRequired ⇄ Required)"
+        },
+        {
+          "status": "agree",
+          "codeProp": "label",
+          "designProp": "Label"
+        },
+        {
+          "status": "agree",
+          "codeProp": "description",
+          "designProp": "Description"
+        },
+        {
+          "status": "agree",
+          "codeProp": "placeholder",
+          "designProp": "Placeholder"
+        }
+      ]
+    },
+    {
+      "component": "TextField",
+      "codeSource": "src/components/TextField/TextField.tsx",
+      "designName": "TextField",
+      "findings": [
+        {
+          "status": "agree",
+          "codeProp": "size",
+          "designProp": "Size"
+        },
+        {
+          "status": "agree",
+          "codeProp": "isRequired",
+          "designProp": "Required",
+          "detail": "matched via alias rule (isRequired ⇄ Required)"
+        },
+        {
+          "status": "agree",
+          "codeProp": "isDisabled",
+          "designProp": "Disabled",
+          "detail": "matched via alias rule (isDisabled ⇄ Disabled)"
+        },
+        {
+          "status": "agree",
+          "codeProp": "label",
+          "designProp": "Label"
+        },
+        {
+          "status": "agree",
+          "codeProp": "description",
+          "designProp": "Description"
+        },
+        {
+          "status": "agree",
+          "codeProp": "placeholder",
+          "designProp": "Placeholder"
+        }
+      ]
+    },
+    {
+      "component": "Toast",
+      "codeSource": "src/components/Toast/Toast.tsx",
+      "designName": "Toast",
+      "findings": [
+        {
+          "status": "agree",
+          "codeProp": "type",
+          "designProp": "Type"
+        }
+      ]
+    },
+    {
+      "component": "Token",
+      "codeSource": "src/components/Token/Token.tsx",
+      "designName": "Token",
+      "findings": [
+        {
+          "status": "agree",
+          "codeProp": "color",
+          "designProp": "Color"
+        },
+        {
+          "status": "agree",
+          "codeProp": "size",
+          "designProp": "Size"
+        },
+        {
+          "status": "agree",
+          "codeProp": "isDisabled",
+          "designProp": "Disabled",
+          "detail": "matched via alias rule (isDisabled ⇄ Disabled)"
+        },
+        {
+          "status": "agree",
+          "codeProp": "label",
+          "designProp": "Label"
+        }
+      ]
+    },
+    {
+      "component": "Toolbar",
+      "codeSource": "src/components/Toolbar/Toolbar.tsx",
+      "designName": "Toolbar",
+      "findings": [
+        {
+          "status": "agree",
+          "codeProp": "size",
+          "designProp": "Size"
+        },
+        {
+          "status": "agree",
+          "codeProp": "label",
+          "designProp": "Label"
+        }
+      ]
+    },
+    {
+      "component": "TopNav",
+      "codeSource": "src/components/TopNav/TopNav.tsx",
+      "designName": "TopNav",
+      "findings": [
+        {
+          "status": "agree",
+          "codeProp": "label",
+          "designProp": "Label"
+        }
+      ]
+    },
+    {
+      "component": "TopNavItem",
+      "codeSource": "src/components/TopNavItem/TopNavItem.tsx",
+      "designName": "TopNavItem",
+      "findings": [
+        {
+          "status": "agree",
+          "codeProp": "state",
+          "designProp": "State"
+        },
+        {
+          "status": "agree",
+          "codeProp": "label",
+          "designProp": "Label"
+        },
+        {
+          "status": "agree",
+          "codeProp": "href",
+          "designProp": "Href"
+        }
+      ]
+    },
+    {
+      "component": "TypeaheadItem",
+      "codeSource": "src/components/TypeaheadItem/TypeaheadItem.tsx",
+      "designName": "TypeaheadItem",
+      "findings": [
+        {
+          "status": "agree",
+          "codeProp": "label",
+          "designProp": "Label"
+        },
+        {
+          "status": "agree",
+          "codeProp": "description",
+          "designProp": "Description"
+        }
+      ]
+    }
+  ],
+  "codeOnly": [
+    {
+      "name": "Inline",
+      "source": "src/components/Inline/Inline.tsx"
+    },
+    {
+      "name": "Stack",
+      "source": "src/components/Stack/Stack.tsx"
+    }
+  ],
+  "designOnly": [
+    "Code",
+    "TabList"
+  ],
+  "stats": {
+    "components": 48,
+    "matched": 46,
+    "propsAgree": 102,
+    "propsDiffer": 5
+  }
+}

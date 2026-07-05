@@ -1,0 +1,2140 @@
+[
+  {
+    "name": "AccordionItem",
+    "source": "src/components/AccordionItem/AccordionItem.tsx",
+    "adapter": "react-tsx",
+    "props": [
+      {
+        "name": "state",
+        "optional": true,
+        "description": "Closed shows only the trigger; open reveals the content and rotates the chevron.",
+        "kind": "enum",
+        "values": [
+          "closed",
+          "open"
+        ],
+        "confidence": "declared"
+      },
+      {
+        "name": "title",
+        "optional": false,
+        "description": "The always-visible trigger text.",
+        "kind": "string",
+        "confidence": "declared"
+      },
+      {
+        "name": "onToggle",
+        "optional": true,
+        "description": "Fires when the trigger is activated; uncontrolled instances flip state closed/open themselves.",
+        "kind": "event",
+        "confidence": "declared"
+      }
+    ],
+    "cssVars": [
+      "size-card-width",
+      "color-border-subtle",
+      "border-width-100",
+      "radius-card",
+      "color-surface-raised",
+      "font-control-family",
+      "color-surface-foreground",
+      "space-gap-sm",
+      "space-inset-x-sm",
+      "space-inset-y-md",
+      "color-text-secondary",
+      "font-control-size-sm",
+      "font-control-weight"
+    ]
+  },
+  {
+    "name": "Avatar",
+    "source": "src/components/Avatar/Avatar.tsx",
+    "adapter": "react-tsx",
+    "props": [
+      {
+        "name": "size",
+        "optional": true,
+        "description": "Avatar diameter.",
+        "kind": "enum",
+        "values": [
+          "sm",
+          "md"
+        ],
+        "confidence": "declared",
+        "default": "sm"
+      }
+    ],
+    "cssVars": [
+      "radius-avatar",
+      "color-identity-background",
+      "color-identity-foreground",
+      "font-control-family",
+      "font-control-weight",
+      "size-avatar-sm",
+      "font-avatar-size-sm",
+      "size-avatar-md",
+      "font-avatar-size-md"
+    ]
+  },
+  {
+    "name": "AvatarGroup",
+    "source": "src/components/AvatarGroup/AvatarGroup.tsx",
+    "adapter": "react-tsx",
+    "props": [
+      {
+        "name": "overflowLabel",
+        "optional": true,
+        "description": "The +N overflow indicator text.",
+        "kind": "string",
+        "confidence": "declared",
+        "default": "+3"
+      }
+    ],
+    "cssVars": [
+      "space-gap-sm",
+      "size-avatar-md",
+      "color-action-secondary-background",
+      "color-text-secondary",
+      "radius-pill",
+      "font-control-family",
+      "font-avatar-size-md",
+      "font-control-weight"
+    ]
+  },
+  {
+    "name": "Badge",
+    "source": "src/components/Badge/Badge.tsx",
+    "adapter": "react-tsx",
+    "props": [
+      {
+        "name": "variant",
+        "optional": true,
+        "description": "The feedback tone being communicated.",
+        "kind": "enum",
+        "values": [
+          "info",
+          "success",
+          "warning",
+          "danger"
+        ],
+        "confidence": "declared",
+        "default": "info"
+      }
+    ],
+    "cssVars": [
+      "space-inset-x-sm",
+      "space-inset-y-sm",
+      "radius-badge",
+      "font-control-family",
+      "font-control-weight",
+      "font-badge-size",
+      "color-feedback-info-background",
+      "color-feedback-info-foreground",
+      "color-feedback-success-background",
+      "color-feedback-success-foreground",
+      "color-feedback-warning-background",
+      "color-feedback-warning-foreground",
+      "color-feedback-danger-background",
+      "color-feedback-danger-foreground"
+    ]
+  },
+  {
+    "name": "Banner",
+    "source": "src/components/Banner/Banner.tsx",
+    "adapter": "react-tsx",
+    "props": [
+      {
+        "name": "status",
+        "optional": true,
+        "description": "Feedback tone — drives the color scheme, the leading icon, and the ARIA role (error/warning announce as alerts).",
+        "kind": "enum",
+        "values": [
+          "info",
+          "success",
+          "warning",
+          "error"
+        ],
+        "confidence": "declared",
+        "default": "info"
+      },
+      {
+        "name": "container",
+        "optional": true,
+        "description": "card = standalone with radius; section = full-bleed, square.",
+        "kind": "enum",
+        "values": [
+          "card",
+          "section"
+        ],
+        "confidence": "declared",
+        "default": "card"
+      },
+      {
+        "name": "isDismissable",
+        "optional": true,
+        "description": "Shows the close affordance. Keep error banners until resolved.",
+        "kind": "boolean",
+        "confidence": "declared",
+        "default": false
+      },
+      {
+        "name": "title",
+        "optional": false,
+        "description": "Prominent header text.",
+        "kind": "string",
+        "confidence": "declared"
+      },
+      {
+        "name": "description",
+        "optional": true,
+        "description": "Secondary text below the title.",
+        "kind": "string",
+        "confidence": "declared",
+        "default": "Supporting detail that explains what happened and what to do next."
+      },
+      {
+        "name": "endContent",
+        "optional": true,
+        "description": "End-aligned action slot — typically a secondary Button.",
+        "kind": "node",
+        "confidence": "declared"
+      }
+    ],
+    "cssVars": [
+      "size-banner-width",
+      "space-gap-control",
+      "space-inset-x-md",
+      "space-inset-y-lg",
+      "color-feedback-info-background",
+      "color-feedback-info-foreground",
+      "color-feedback-success-background",
+      "color-feedback-success-foreground",
+      "color-feedback-warning-background",
+      "color-feedback-warning-foreground",
+      "color-feedback-error-background",
+      "color-feedback-error-foreground",
+      "radius-banner-card",
+      "radius-banner-section",
+      "space-inset-y-sm",
+      "font-control-family",
+      "font-control-size-md",
+      "font-title-weight",
+      "font-control-size-sm",
+      "space-gap-sm"
+    ]
+  },
+  {
+    "name": "Blockquote",
+    "source": "src/components/Blockquote/Blockquote.tsx",
+    "adapter": "react-tsx",
+    "props": [
+      {
+        "name": "cite",
+        "optional": true,
+        "description": "Attribution, rendered in a semantic footer.",
+        "kind": "node",
+        "confidence": "declared"
+      }
+    ],
+    "cssVars": [
+      "border-width-divider-strong",
+      "color-divider-strong",
+      "space-inset-x-md",
+      "space-inset-y-md",
+      "space-gap-sm",
+      "color-text-secondary",
+      "font-control-family",
+      "font-control-size-md",
+      "font-control-size-sm"
+    ]
+  },
+  {
+    "name": "BreadcrumbItem",
+    "source": "src/components/BreadcrumbItem/BreadcrumbItem.tsx",
+    "adapter": "react-tsx",
+    "props": [
+      {
+        "name": "hasSeparator",
+        "optional": true,
+        "description": "Leading separator — off for the first item in a trail.",
+        "kind": "boolean",
+        "confidence": "declared",
+        "default": true
+      },
+      {
+        "name": "label",
+        "optional": false,
+        "description": "The crumb text.",
+        "kind": "string",
+        "confidence": "declared"
+      },
+      {
+        "name": "href",
+        "optional": true,
+        "description": "Navigation target. Current-page items conventionally point at themselves.",
+        "kind": "string",
+        "confidence": "declared",
+        "default": "#"
+      }
+    ],
+    "cssVars": [
+      "space-inset-y-sm",
+      "font-control-family",
+      "font-control-size-sm",
+      "color-text-secondary"
+    ]
+  },
+  {
+    "name": "Breadcrumbs",
+    "source": "src/components/Breadcrumbs/Breadcrumbs.tsx",
+    "adapter": "react-tsx",
+    "props": [
+      {
+        "name": "label",
+        "optional": false,
+        "description": "Accessible label for the navigation landmark.",
+        "kind": "string",
+        "confidence": "declared"
+      }
+    ],
+    "cssVars": [
+      "space-inset-y-sm"
+    ]
+  },
+  {
+    "name": "Button",
+    "source": "src/components/Button/Button.tsx",
+    "adapter": "react-tsx",
+    "props": [
+      {
+        "name": "variant",
+        "optional": true,
+        "description": "Visual prominence of the action.",
+        "kind": "enum",
+        "values": [
+          "primary",
+          "secondary",
+          "danger"
+        ],
+        "confidence": "declared",
+        "default": "primary"
+      },
+      {
+        "name": "size",
+        "optional": true,
+        "description": "Control density.",
+        "kind": "enum",
+        "values": [
+          "sm",
+          "md",
+          "lg"
+        ],
+        "confidence": "declared",
+        "default": "md"
+      },
+      {
+        "name": "disabled",
+        "optional": true,
+        "description": "Prevents interaction and communicates unavailability.",
+        "kind": "boolean",
+        "confidence": "declared",
+        "default": false
+      },
+      {
+        "name": "loading",
+        "optional": true,
+        "description": "Shows a busy indicator while an async action resolves.",
+        "kind": "boolean",
+        "confidence": "declared",
+        "default": false
+      }
+    ],
+    "cssVars": [
+      "radius-control",
+      "space-gap-control",
+      "font-control-family",
+      "font-control-weight",
+      "color-action-primary-background",
+      "color-action-primary-foreground",
+      "color-action-secondary-background",
+      "color-action-secondary-foreground",
+      "color-action-danger-background",
+      "color-action-danger-foreground",
+      "space-inset-x-sm",
+      "space-inset-y-sm",
+      "font-control-size-sm",
+      "space-inset-x-md",
+      "space-inset-y-md",
+      "font-control-size-md",
+      "space-inset-x-lg",
+      "space-inset-y-lg",
+      "font-control-size-lg",
+      "color-action-primary-background-hover",
+      "color-action-secondary-background-hover",
+      "color-action-danger-background-hover",
+      "color-border-focus",
+      "border-width-focus",
+      "opacity-disabled"
+    ]
+  },
+  {
+    "name": "Card",
+    "source": "src/components/Card/Card.tsx",
+    "adapter": "react-tsx",
+    "props": [
+      {
+        "name": "title",
+        "optional": false,
+        "description": "Card heading, bound to the header title part on both surfaces.",
+        "kind": "string",
+        "confidence": "declared"
+      },
+      {
+        "name": "actions",
+        "optional": true,
+        "description": "Constrained actions slot — only actions-grade components.",
+        "kind": "node",
+        "confidence": "declared"
+      }
+    ],
+    "cssVars": [
+      "color-surface-raised",
+      "color-border-subtle",
+      "border-width-100",
+      "radius-card",
+      "size-card-width",
+      "space-gap-control",
+      "space-inset-x-md",
+      "space-inset-y-md",
+      "color-surface-foreground",
+      "font-control-family",
+      "font-title-size",
+      "font-title-weight",
+      "font-control-size-sm"
+    ]
+  },
+  {
+    "name": "ChatMessage",
+    "source": "src/components/ChatMessage/ChatMessage.tsx",
+    "adapter": "react-tsx",
+    "props": [
+      {
+        "name": "sender",
+        "optional": true,
+        "description": "Who sent it — drives the bubble color scheme.",
+        "kind": "enum",
+        "values": [
+          "user",
+          "assistant",
+          "system"
+        ],
+        "confidence": "declared",
+        "default": "assistant"
+      },
+      {
+        "name": "name",
+        "optional": true,
+        "description": "Sender name shown above the message body.",
+        "kind": "string",
+        "confidence": "declared",
+        "default": "Assistant"
+      },
+      {
+        "name": "avatar",
+        "optional": true,
+        "description": "Avatar beside the message.",
+        "kind": "node",
+        "confidence": "declared"
+      },
+      {
+        "name": "metadata",
+        "optional": true,
+        "description": "Timestamp and delivery status below the bubble.",
+        "kind": "node",
+        "confidence": "declared"
+      }
+    ],
+    "cssVars": [
+      "size-banner-width",
+      "space-gap-sm",
+      "font-control-family",
+      "space-inset-y-sm",
+      "font-badge-size",
+      "font-title-weight",
+      "color-text-secondary",
+      "radius-card",
+      "space-inset-x-sm",
+      "space-inset-y-md",
+      "font-control-size-sm",
+      "color-chat-user-background",
+      "color-chat-assistant-background",
+      "color-chat-system-background",
+      "color-chat-user-foreground",
+      "color-chat-assistant-foreground",
+      "color-chat-system-foreground"
+    ]
+  },
+  {
+    "name": "ChatMessageMetadata",
+    "source": "src/components/ChatMessageMetadata/ChatMessageMetadata.tsx",
+    "adapter": "react-tsx",
+    "props": [
+      {
+        "name": "status",
+        "optional": true,
+        "description": "Delivery status — drives the leading icon.",
+        "kind": "enum",
+        "values": [
+          "sending",
+          "sent",
+          "delivered",
+          "read",
+          "error"
+        ],
+        "confidence": "declared",
+        "default": "sent"
+      },
+      {
+        "name": "timestamp",
+        "optional": true,
+        "description": "Display timestamp text.",
+        "kind": "string",
+        "confidence": "declared",
+        "default": "2:14 PM"
+      },
+      {
+        "name": "footer",
+        "optional": true,
+        "description": "Footer content — model info, reactions, a copy affordance.",
+        "kind": "node",
+        "confidence": "declared"
+      }
+    ],
+    "cssVars": [
+      "space-inset-y-sm",
+      "font-control-family",
+      "font-badge-size",
+      "color-text-secondary"
+    ]
+  },
+  {
+    "name": "ChatSystemMessage",
+    "source": "src/components/ChatSystemMessage/ChatSystemMessage.tsx",
+    "adapter": "react-tsx",
+    "props": [
+      {
+        "name": "variant",
+        "optional": true,
+        "description": "Plain centered text, or text between divider lines.",
+        "kind": "enum",
+        "values": [
+          "default",
+          "divider"
+        ],
+        "confidence": "declared",
+        "default": "default"
+      },
+      {
+        "name": "message",
+        "optional": false,
+        "description": "Short factual string — a date, a join notice, a status change.",
+        "kind": "string",
+        "confidence": "declared"
+      },
+      {
+        "name": "icon",
+        "optional": true,
+        "kind": "node",
+        "confidence": "declared"
+      }
+    ],
+    "cssVars": [
+      "size-card-width",
+      "space-gap-sm",
+      "font-control-family",
+      "font-badge-size",
+      "color-text-secondary",
+      "border-width-divider-subtle",
+      "color-divider-subtle"
+    ]
+  },
+  {
+    "name": "Checkbox",
+    "source": "src/components/Checkbox/Checkbox.tsx",
+    "adapter": "react-tsx",
+    "props": [
+      {
+        "name": "value",
+        "optional": true,
+        "description": "Checked, unchecked, or indeterminate (partial selection in a group).",
+        "kind": "enum",
+        "values": [
+          "unchecked",
+          "checked",
+          "indeterminate"
+        ],
+        "confidence": "declared"
+      },
+      {
+        "name": "size",
+        "optional": true,
+        "description": "Control size.",
+        "kind": "enum",
+        "values": [
+          "sm",
+          "md"
+        ],
+        "confidence": "declared",
+        "default": "md"
+      },
+      {
+        "name": "label",
+        "optional": false,
+        "description": "Always rendered — users must know what they are toggling.",
+        "kind": "string",
+        "confidence": "declared"
+      },
+      {
+        "name": "description",
+        "optional": true,
+        "description": "Secondary text below the label.",
+        "kind": "string",
+        "confidence": "declared",
+        "default": "Supporting detail for this option."
+      },
+      {
+        "name": "onToggle",
+        "optional": true,
+        "description": "Fires when the box is activated; uncontrolled instances flip unchecked/checked (indeterminate resolves to checked).",
+        "kind": "event",
+        "confidence": "declared"
+      }
+    ],
+    "cssVars": [
+      "space-gap-sm",
+      "font-control-family",
+      "color-surface-foreground",
+      "border-width-100",
+      "radius-100",
+      "color-checkbox-icon",
+      "size-checkbox-sm",
+      "size-checkbox-md",
+      "color-checkbox-unchecked-background",
+      "color-checkbox-checked-background",
+      "color-checkbox-indeterminate-background",
+      "color-checkbox-unchecked-border",
+      "color-checkbox-checked-border",
+      "color-checkbox-indeterminate-border",
+      "space-inset-y-xs",
+      "font-control-size-sm",
+      "font-control-weight",
+      "color-text-secondary"
+    ]
+  },
+  {
+    "name": "Citation",
+    "source": "src/components/Citation/Citation.tsx",
+    "adapter": "react-tsx",
+    "props": [
+      {
+        "name": "variant",
+        "optional": true,
+        "description": "Label chip with the source title, or a compact numbered badge. Don't mix both in one paragraph.",
+        "kind": "enum",
+        "values": [
+          "label",
+          "number"
+        ],
+        "confidence": "declared",
+        "default": "label"
+      },
+      {
+        "name": "sourceTitle",
+        "optional": false,
+        "description": "The source's display title (label variant).",
+        "kind": "string",
+        "confidence": "declared"
+      },
+      {
+        "name": "number",
+        "optional": true,
+        "description": "Display index (number variant).",
+        "kind": "string",
+        "confidence": "declared",
+        "default": "1"
+      },
+      {
+        "name": "href",
+        "optional": true,
+        "description": "Source URL.",
+        "kind": "string",
+        "confidence": "declared",
+        "default": "https://example.com"
+      }
+    ],
+    "cssVars": [
+      "color-surface-sunken",
+      "color-text-secondary",
+      "radius-100",
+      "space-inset-x-xs",
+      "space-inset-y-xs",
+      "font-control-family",
+      "font-badge-size",
+      "font-control-weight"
+    ]
+  },
+  {
+    "name": "Divider",
+    "source": "src/components/Divider/Divider.tsx",
+    "adapter": "react-tsx",
+    "props": [
+      {
+        "name": "variant",
+        "optional": true,
+        "description": "Visual weight of the line.",
+        "kind": "enum",
+        "values": [
+          "subtle",
+          "strong"
+        ],
+        "confidence": "declared",
+        "default": "subtle"
+      }
+    ],
+    "cssVars": [
+      "size-divider-length",
+      "color-divider-subtle",
+      "border-width-divider-subtle",
+      "color-divider-strong",
+      "border-width-divider-strong"
+    ]
+  },
+  {
+    "name": "EmptyState",
+    "source": "src/components/EmptyState/EmptyState.tsx",
+    "adapter": "react-tsx",
+    "props": [
+      {
+        "name": "title",
+        "optional": false,
+        "description": "Primary message.",
+        "kind": "string",
+        "confidence": "declared"
+      },
+      {
+        "name": "description",
+        "optional": true,
+        "description": "Secondary text explaining what will appear here and how.",
+        "kind": "string",
+        "confidence": "declared",
+        "default": "When items are added they will show up in this list."
+      },
+      {
+        "name": "icon",
+        "optional": true,
+        "description": "Decorative icon or illustration above the title.",
+        "kind": "node",
+        "confidence": "declared"
+      },
+      {
+        "name": "actions",
+        "optional": true,
+        "description": "Action buttons below the description.",
+        "kind": "node",
+        "confidence": "declared"
+      }
+    ],
+    "cssVars": [
+      "size-card-width",
+      "space-gap-sm",
+      "space-inset-x-lg",
+      "font-control-family",
+      "color-surface-foreground",
+      "font-control-size-md",
+      "font-title-weight",
+      "font-control-size-sm",
+      "color-text-secondary",
+      "space-inset-y-sm"
+    ]
+  },
+  {
+    "name": "Field",
+    "source": "src/components/Field/Field.tsx",
+    "adapter": "react-tsx",
+    "props": [
+      {
+        "name": "isRequired",
+        "optional": true,
+        "description": "Shows the required indicator beside the label.",
+        "kind": "boolean",
+        "confidence": "declared",
+        "default": false
+      },
+      {
+        "name": "label",
+        "optional": false,
+        "description": "Always rendered — even custom controls need names.",
+        "kind": "string",
+        "confidence": "declared"
+      },
+      {
+        "name": "inputID",
+        "optional": false,
+        "description": "The wrapped control's id, used for the label's htmlFor association.",
+        "kind": "string",
+        "confidence": "declared"
+      },
+      {
+        "name": "description",
+        "optional": true,
+        "description": "Helper text between the label and the control.",
+        "kind": "string",
+        "confidence": "declared",
+        "default": "Helper text for the wrapped control."
+      }
+    ],
+    "cssVars": [
+      "size-card-width",
+      "space-inset-y-sm",
+      "font-control-family",
+      "color-surface-foreground",
+      "font-control-size-sm",
+      "font-control-weight",
+      "color-action-danger-background",
+      "color-text-secondary"
+    ]
+  },
+  {
+    "name": "IconButton",
+    "source": "src/components/IconButton/IconButton.tsx",
+    "adapter": "react-tsx",
+    "props": [
+      {
+        "name": "variant",
+        "optional": true,
+        "description": "Visual style. Ghost sits on the surface wash (transparent tokens are a documented gap).",
+        "kind": "enum",
+        "values": [
+          "primary",
+          "secondary",
+          "ghost",
+          "destructive"
+        ],
+        "confidence": "declared",
+        "default": "secondary"
+      },
+      {
+        "name": "size",
+        "optional": true,
+        "description": "Square control size.",
+        "kind": "enum",
+        "values": [
+          "sm",
+          "md",
+          "lg"
+        ],
+        "confidence": "declared",
+        "default": "md"
+      },
+      {
+        "name": "isDisabled",
+        "optional": true,
+        "description": "Disables the button.",
+        "kind": "boolean",
+        "confidence": "declared",
+        "default": false
+      },
+      {
+        "name": "label",
+        "optional": false,
+        "description": "Accessible name (aria-label). Be specific: \"Delete conversation\", not \"Delete\".",
+        "kind": "string",
+        "confidence": "declared"
+      },
+      {
+        "name": "icon",
+        "optional": true,
+        "description": "The icon. Pass an Icon-sized element; it inherits the variant's foreground color.",
+        "kind": "node",
+        "confidence": "declared"
+      }
+    ],
+    "cssVars": [
+      "radius-control",
+      "size-icon-button-sm",
+      "size-icon-button-md",
+      "size-icon-button-lg",
+      "color-action-primary-background",
+      "color-action-primary-foreground",
+      "color-action-secondary-background",
+      "color-action-secondary-foreground",
+      "color-action-ghost-background",
+      "color-action-ghost-foreground",
+      "color-action-destructive-background",
+      "color-action-destructive-foreground",
+      "color-action-primary-background-hover",
+      "color-action-secondary-background-hover",
+      "color-action-ghost-background-hover",
+      "color-action-destructive-background-hover",
+      "color-border-focus",
+      "border-width-focus"
+    ]
+  },
+  {
+    "name": "Inline",
+    "source": "src/components/Inline/Inline.tsx",
+    "adapter": "react-tsx",
+    "props": [
+      {
+        "name": "gap",
+        "optional": true,
+        "description": "Space between children.",
+        "kind": "enum",
+        "values": [
+          "sm",
+          "md",
+          "lg"
+        ],
+        "confidence": "declared",
+        "default": "md"
+      }
+    ],
+    "cssVars": [
+      "space-gap-sm",
+      "space-gap-md",
+      "space-gap-lg"
+    ]
+  },
+  {
+    "name": "Kbd",
+    "source": "src/components/Kbd/Kbd.tsx",
+    "adapter": "react-tsx",
+    "props": [
+      {
+        "name": "keys",
+        "optional": false,
+        "description": "The shortcut text, e.g. \"⌘K\".",
+        "kind": "string",
+        "confidence": "declared"
+      }
+    ],
+    "cssVars": [
+      "color-surface-sunken",
+      "color-surface-foreground",
+      "color-border-subtle",
+      "border-width-100",
+      "radius-100",
+      "space-inset-x-xs",
+      "space-inset-y-xs",
+      "font-code-family",
+      "font-badge-size"
+    ]
+  },
+  {
+    "name": "List",
+    "source": "src/components/List/List.tsx",
+    "adapter": "react-tsx",
+    "props": [
+      {
+        "name": "density",
+        "optional": true,
+        "description": "Item spacing density.",
+        "kind": "enum",
+        "values": [
+          "compact",
+          "balanced",
+          "spacious"
+        ],
+        "confidence": "declared",
+        "default": "balanced"
+      }
+    ],
+    "cssVars": [
+      "size-card-width",
+      "color-surface-raised",
+      "color-border-subtle",
+      "border-width-100",
+      "radius-card",
+      "space-inset-y-sm",
+      "space-list-compact",
+      "space-list-balanced",
+      "space-list-spacious"
+    ]
+  },
+  {
+    "name": "ListItem",
+    "source": "src/components/ListItem/ListItem.tsx",
+    "adapter": "react-tsx",
+    "props": [
+      {
+        "name": "label",
+        "optional": false,
+        "description": "Primary text.",
+        "kind": "string",
+        "confidence": "declared"
+      },
+      {
+        "name": "description",
+        "optional": true,
+        "description": "Secondary content below the label.",
+        "kind": "string",
+        "confidence": "declared",
+        "default": "Supporting detail for this item."
+      },
+      {
+        "name": "startContent",
+        "optional": true,
+        "description": "Leading content — icon or avatar.",
+        "kind": "node",
+        "confidence": "declared"
+      },
+      {
+        "name": "endContent",
+        "optional": true,
+        "description": "Trailing content — badge, count, chevron.",
+        "kind": "node",
+        "confidence": "declared"
+      }
+    ],
+    "cssVars": [
+      "space-gap-sm",
+      "space-inset-x-sm",
+      "space-inset-y-md",
+      "font-control-family",
+      "color-surface-foreground",
+      "space-inset-y-xs",
+      "font-control-size-sm",
+      "font-control-weight",
+      "color-text-secondary"
+    ]
+  },
+  {
+    "name": "MetadataList",
+    "source": "src/components/MetadataList/MetadataList.tsx",
+    "adapter": "react-tsx",
+    "props": [
+      {
+        "name": "title",
+        "optional": true,
+        "description": "Heading above the list.",
+        "kind": "string",
+        "confidence": "declared",
+        "default": "Details"
+      }
+    ],
+    "cssVars": [
+      "size-card-width",
+      "space-gap-sm",
+      "font-control-family",
+      "font-control-size-sm",
+      "font-title-weight",
+      "color-surface-foreground"
+    ]
+  },
+  {
+    "name": "MetadataListItem",
+    "source": "src/components/MetadataListItem/MetadataListItem.tsx",
+    "adapter": "react-tsx",
+    "props": [
+      {
+        "name": "label",
+        "optional": false,
+        "description": "The key text.",
+        "kind": "string",
+        "confidence": "declared"
+      },
+      {
+        "name": "value",
+        "optional": true,
+        "description": "The value text. Use the children slot instead for rich values.",
+        "kind": "string",
+        "confidence": "declared",
+        "default": "Value"
+      },
+      {
+        "name": "icon",
+        "optional": true,
+        "description": "Icon before the label.",
+        "kind": "node",
+        "confidence": "declared"
+      }
+    ],
+    "cssVars": [
+      "space-gap-md",
+      "font-control-family",
+      "font-control-size-sm",
+      "color-text-secondary",
+      "container-xs",
+      "color-surface-foreground",
+      "font-control-weight"
+    ]
+  },
+  {
+    "name": "Pagination",
+    "source": "src/components/Pagination/Pagination.tsx",
+    "adapter": "react-tsx",
+    "props": [
+      {
+        "name": "variant",
+        "optional": true,
+        "description": "Numbered trail, compact page label, or dot indicators.",
+        "kind": "enum",
+        "values": [
+          "pages",
+          "compact",
+          "dots"
+        ],
+        "confidence": "declared",
+        "default": "pages"
+      },
+      {
+        "name": "pageLabel",
+        "optional": true,
+        "description": "The compact variant's label text.",
+        "kind": "string",
+        "confidence": "declared",
+        "default": "Page 2 of 10"
+      },
+      {
+        "name": "label",
+        "optional": false,
+        "description": "Accessible label for the navigation landmark.",
+        "kind": "string",
+        "confidence": "declared"
+      }
+    ],
+    "cssVars": [
+      "space-gap-sm",
+      "font-control-family",
+      "font-control-size-sm",
+      "color-surface-foreground",
+      "color-text-secondary",
+      "space-inset-y-xs",
+      "space-inset-y-md",
+      "space-inset-y-sm",
+      "radius-100",
+      "color-nav-selected-background",
+      "color-nav-selected-foreground",
+      "font-title-weight",
+      "size-dot",
+      "radius-pill",
+      "color-status-accent",
+      "color-status-neutral"
+    ]
+  },
+  {
+    "name": "ProgressBar",
+    "source": "src/components/ProgressBar/ProgressBar.tsx",
+    "adapter": "react-tsx",
+    "props": [
+      {
+        "name": "variant",
+        "optional": true,
+        "description": "Semantic color of the fill.",
+        "kind": "enum",
+        "values": [
+          "accent",
+          "success",
+          "warning",
+          "error",
+          "neutral"
+        ],
+        "confidence": "declared",
+        "default": "accent"
+      },
+      {
+        "name": "value",
+        "optional": true,
+        "description": "Current progress value.",
+        "kind": "number",
+        "confidence": "declared",
+        "default": 60
+      },
+      {
+        "name": "max",
+        "optional": true,
+        "description": "Maximum value.",
+        "kind": "number",
+        "confidence": "declared",
+        "default": 100
+      },
+      {
+        "name": "label",
+        "optional": false,
+        "description": "Accessible name — screen readers must know what is progressing.",
+        "kind": "string",
+        "confidence": "declared"
+      }
+    ],
+    "cssVars": [
+      "size-progress-width",
+      "size-progress-height",
+      "color-progress-track",
+      "radius-100",
+      "color-progress-accent",
+      "color-progress-success",
+      "color-progress-warning",
+      "color-progress-error",
+      "color-progress-neutral"
+    ]
+  },
+  {
+    "name": "Section",
+    "source": "src/components/Section/Section.tsx",
+    "adapter": "react-tsx",
+    "props": [
+      {
+        "name": "variant",
+        "optional": true,
+        "description": "Background treatment. Muted only to call attention.",
+        "kind": "enum",
+        "values": [
+          "section",
+          "muted"
+        ],
+        "confidence": "declared",
+        "default": "section"
+      }
+    ],
+    "cssVars": [
+      "size-card-width",
+      "color-border-subtle",
+      "border-width-100",
+      "radius-card",
+      "space-gap-sm",
+      "space-inset-x-md",
+      "color-section-section",
+      "color-section-muted"
+    ]
+  },
+  {
+    "name": "SideNavItem",
+    "source": "src/components/SideNavItem/SideNavItem.tsx",
+    "adapter": "react-tsx",
+    "props": [
+      {
+        "name": "state",
+        "optional": true,
+        "description": "Whether this item is the current page.",
+        "kind": "enum",
+        "values": [
+          "default",
+          "selected"
+        ],
+        "confidence": "declared",
+        "default": "default"
+      },
+      {
+        "name": "label",
+        "optional": false,
+        "description": "Item text.",
+        "kind": "string",
+        "confidence": "declared"
+      },
+      {
+        "name": "href",
+        "optional": true,
+        "description": "Navigation target URL.",
+        "kind": "string",
+        "confidence": "declared",
+        "default": "#"
+      },
+      {
+        "name": "icon",
+        "optional": true,
+        "kind": "node",
+        "confidence": "declared"
+      },
+      {
+        "name": "endContent",
+        "optional": true,
+        "description": "Trailing badge or count.",
+        "kind": "node",
+        "confidence": "declared"
+      }
+    ],
+    "cssVars": [
+      "size-card-width",
+      "radius-control",
+      "space-gap-sm",
+      "space-inset-x-sm",
+      "space-inset-y-md",
+      "font-control-family",
+      "font-control-size-sm",
+      "font-control-weight",
+      "color-nav-default-background",
+      "color-nav-default-foreground",
+      "color-nav-selected-background",
+      "color-nav-selected-foreground",
+      "color-surface-sunken"
+    ]
+  },
+  {
+    "name": "Skeleton",
+    "source": "src/components/Skeleton/Skeleton.tsx",
+    "adapter": "react-tsx",
+    "props": [
+      {
+        "name": "variant",
+        "optional": true,
+        "description": "The shape being previewed.",
+        "kind": "enum",
+        "values": [
+          "text",
+          "rect",
+          "circle"
+        ],
+        "confidence": "declared",
+        "default": "text"
+      }
+    ],
+    "cssVars": [
+      "color-skeleton",
+      "size-skeleton-text-width",
+      "size-skeleton-rect-width",
+      "size-skeleton-circle-width",
+      "size-skeleton-text-height",
+      "size-skeleton-rect-height",
+      "size-skeleton-circle-height",
+      "radius-skeleton-text",
+      "radius-skeleton-rect",
+      "radius-skeleton-circle"
+    ]
+  },
+  {
+    "name": "Slider",
+    "source": "src/components/Slider/Slider.tsx",
+    "adapter": "react-tsx",
+    "props": [
+      {
+        "name": "value",
+        "optional": true,
+        "description": "Current value — positions the thumb.",
+        "kind": "number",
+        "confidence": "declared",
+        "default": 40
+      },
+      {
+        "name": "max",
+        "optional": true,
+        "description": "Maximum value.",
+        "kind": "number",
+        "confidence": "declared",
+        "default": 100
+      },
+      {
+        "name": "label",
+        "optional": false,
+        "description": "Always rendered.",
+        "kind": "string",
+        "confidence": "declared"
+      }
+    ],
+    "cssVars": [
+      "size-slider-width",
+      "space-inset-y-sm",
+      "font-control-family",
+      "color-surface-foreground",
+      "font-control-size-sm",
+      "font-control-weight",
+      "size-slider-track",
+      "color-progress-accent",
+      "radius-100",
+      "size-slider-thumb",
+      "color-switch-thumb",
+      "border-width-200",
+      "radius-pill",
+      "color-progress-track"
+    ]
+  },
+  {
+    "name": "Spinner",
+    "source": "src/components/Spinner/Spinner.tsx",
+    "adapter": "react-tsx",
+    "props": [
+      {
+        "name": "label",
+        "optional": false,
+        "description": "What is loading — announced to screen readers.",
+        "kind": "string",
+        "confidence": "declared"
+      }
+    ],
+    "cssVars": [
+      "color-action-primary-background"
+    ]
+  },
+  {
+    "name": "Stack",
+    "source": "src/components/Stack/Stack.tsx",
+    "adapter": "react-tsx",
+    "props": [
+      {
+        "name": "gap",
+        "optional": true,
+        "description": "Space between children.",
+        "kind": "enum",
+        "values": [
+          "sm",
+          "md",
+          "lg"
+        ],
+        "confidence": "declared",
+        "default": "md"
+      }
+    ],
+    "cssVars": [
+      "space-gap-sm",
+      "space-gap-md",
+      "space-gap-lg"
+    ]
+  },
+  {
+    "name": "StatusDot",
+    "source": "src/components/StatusDot/StatusDot.tsx",
+    "adapter": "react-tsx",
+    "props": [
+      {
+        "name": "variant",
+        "optional": true,
+        "description": "Semantic color variant.",
+        "kind": "enum",
+        "values": [
+          "success",
+          "warning",
+          "error",
+          "accent",
+          "neutral"
+        ],
+        "confidence": "declared",
+        "default": "neutral"
+      },
+      {
+        "name": "label",
+        "optional": false,
+        "description": "Accessible label announced by screen readers — status must never be conveyed by color alone.",
+        "kind": "string",
+        "confidence": "declared"
+      }
+    ],
+    "cssVars": [
+      "size-dot",
+      "radius-pill",
+      "color-status-success",
+      "color-status-warning",
+      "color-status-error",
+      "color-status-accent",
+      "color-status-neutral"
+    ]
+  },
+  {
+    "name": "Switch",
+    "source": "src/components/Switch/Switch.tsx",
+    "adapter": "react-tsx",
+    "props": [
+      {
+        "name": "value",
+        "optional": true,
+        "description": "On or off — drives the track color and thumb position.",
+        "kind": "enum",
+        "values": [
+          "off",
+          "on"
+        ],
+        "confidence": "declared"
+      },
+      {
+        "name": "label",
+        "optional": false,
+        "description": "Always rendered — users must know what they are toggling.",
+        "kind": "string",
+        "confidence": "declared"
+      },
+      {
+        "name": "description",
+        "optional": true,
+        "description": "Secondary text below the label.",
+        "kind": "string",
+        "confidence": "declared",
+        "default": "Takes effect immediately."
+      },
+      {
+        "name": "onToggle",
+        "optional": true,
+        "description": "Fires when the track is activated; uncontrolled instances flip value off/on themselves.",
+        "kind": "event",
+        "confidence": "declared"
+      }
+    ],
+    "cssVars": [
+      "space-gap-sm",
+      "font-control-family",
+      "color-surface-foreground",
+      "size-switch-width",
+      "size-switch-height",
+      "radius-pill",
+      "space-inset-y-xs",
+      "color-switch-off-track",
+      "color-switch-on-track",
+      "size-switch-thumb",
+      "color-switch-thumb",
+      "font-control-size-sm",
+      "font-control-weight",
+      "color-text-secondary"
+    ]
+  },
+  {
+    "name": "Tab",
+    "source": "src/components/Tab/Tab.tsx",
+    "adapter": "react-tsx",
+    "props": [
+      {
+        "name": "state",
+        "optional": true,
+        "description": "Selection state — selected tabs render semibold in the accent color.",
+        "kind": "enum",
+        "values": [
+          "default",
+          "selected"
+        ],
+        "confidence": "declared",
+        "default": "default"
+      },
+      {
+        "name": "label",
+        "optional": false,
+        "description": "Visible tab text.",
+        "kind": "string",
+        "confidence": "declared"
+      },
+      {
+        "name": "icon",
+        "optional": true,
+        "kind": "node",
+        "confidence": "declared"
+      },
+      {
+        "name": "endContent",
+        "optional": true,
+        "description": "Badge count or status dot after the label.",
+        "kind": "node",
+        "confidence": "declared"
+      }
+    ],
+    "cssVars": [
+      "color-surface-background",
+      "font-control-family",
+      "font-control-size-sm",
+      "space-inset-y-sm",
+      "space-inset-x-sm",
+      "space-inset-y-md",
+      "radius-100",
+      "color-tab-default-foreground",
+      "font-tab-default-weight",
+      "color-tab-selected-foreground",
+      "font-tab-selected-weight",
+      "color-surface-sunken"
+    ]
+  },
+  {
+    "name": "Table",
+    "source": "src/components/Table/Table.tsx",
+    "adapter": "react-tsx",
+    "props": [
+      {
+        "name": "density",
+        "optional": true,
+        "description": "Vertical rhythm of the whole table; mapped into the fixed header cells.",
+        "kind": "enum",
+        "values": [
+          "comfortable",
+          "compact"
+        ],
+        "confidence": "declared",
+        "default": "comfortable"
+      }
+    ],
+    "cssVars": [
+      "color-surface-raised",
+      "color-border-subtle",
+      "border-width-100",
+      "radius-card",
+      "size-table-width",
+      "color-surface-sunken"
+    ]
+  },
+  {
+    "name": "TableCell",
+    "source": "src/components/TableCell/TableCell.tsx",
+    "adapter": "react-tsx",
+    "props": [
+      {
+        "name": "density",
+        "optional": true,
+        "description": "Vertical rhythm, normally driven by the owning Table.",
+        "kind": "enum",
+        "values": [
+          "comfortable",
+          "compact"
+        ],
+        "confidence": "declared",
+        "default": "comfortable"
+      }
+    ],
+    "cssVars": [
+      "space-inset-x-sm",
+      "color-surface-foreground",
+      "font-control-family",
+      "font-control-size-sm",
+      "size-table-cell-width",
+      "space-table-cell-y-comfortable",
+      "space-table-cell-y-compact"
+    ]
+  },
+  {
+    "name": "TableHeaderCell",
+    "source": "src/components/TableHeaderCell/TableHeaderCell.tsx",
+    "adapter": "react-tsx",
+    "props": [
+      {
+        "name": "density",
+        "optional": true,
+        "description": "Vertical rhythm, normally driven by the owning Table.",
+        "kind": "enum",
+        "values": [
+          "comfortable",
+          "compact"
+        ],
+        "confidence": "declared",
+        "default": "comfortable"
+      }
+    ],
+    "cssVars": [
+      "space-inset-x-sm",
+      "color-surface-foreground",
+      "font-control-family",
+      "font-control-size-sm",
+      "font-title-weight",
+      "size-table-cell-width",
+      "space-table-cell-y-comfortable",
+      "space-table-cell-y-compact"
+    ]
+  },
+  {
+    "name": "TableRow",
+    "source": "src/components/TableRow/TableRow.tsx",
+    "adapter": "react-tsx",
+    "props": [
+      {
+        "name": "state",
+        "optional": true,
+        "description": "Data state of the row.",
+        "kind": "enum",
+        "values": [
+          "default",
+          "selected"
+        ],
+        "confidence": "declared",
+        "default": "default"
+      }
+    ],
+    "cssVars": [
+      "color-table-row-default",
+      "color-table-row-selected"
+    ]
+  },
+  {
+    "name": "TextArea",
+    "source": "src/components/TextArea/TextArea.tsx",
+    "adapter": "react-tsx",
+    "props": [
+      {
+        "name": "size",
+        "optional": true,
+        "description": "Control size scale (affects padding and text size).",
+        "kind": "enum",
+        "values": [
+          "sm",
+          "md",
+          "lg"
+        ],
+        "confidence": "declared",
+        "default": "md"
+      },
+      {
+        "name": "isRequired",
+        "optional": true,
+        "description": "Marks the field required.",
+        "kind": "boolean",
+        "confidence": "declared",
+        "default": false
+      },
+      {
+        "name": "label",
+        "optional": false,
+        "description": "Field label — always rendered.",
+        "kind": "string",
+        "confidence": "declared"
+      },
+      {
+        "name": "description",
+        "optional": true,
+        "description": "Helper text between the label and the textarea.",
+        "kind": "string",
+        "confidence": "declared",
+        "default": "Helper text that explains the expected content."
+      },
+      {
+        "name": "placeholder",
+        "optional": true,
+        "description": "Hint shown when empty.",
+        "kind": "string",
+        "confidence": "declared",
+        "default": "Write something…"
+      }
+    ],
+    "cssVars": [
+      "size-card-width",
+      "space-inset-y-sm",
+      "font-control-family",
+      "color-surface-foreground",
+      "font-control-size-sm",
+      "font-control-weight",
+      "color-action-danger-background",
+      "color-text-secondary",
+      "color-input-background",
+      "color-border-subtle",
+      "border-width-100",
+      "radius-control",
+      "space-inset-x-sm",
+      "space-inset-y-md",
+      "space-inset-y-lg",
+      "font-control-size-md",
+      "font-control-size-lg"
+    ]
+  },
+  {
+    "name": "TextField",
+    "source": "src/components/TextField/TextField.tsx",
+    "adapter": "react-tsx",
+    "props": [
+      {
+        "name": "size",
+        "optional": true,
+        "description": "Control size scale.",
+        "kind": "enum",
+        "values": [
+          "sm",
+          "md",
+          "lg"
+        ],
+        "confidence": "declared",
+        "default": "md"
+      },
+      {
+        "name": "isRequired",
+        "optional": true,
+        "description": "Marks the field required — shows the indicator beside the label.",
+        "kind": "boolean",
+        "confidence": "declared",
+        "default": false
+      },
+      {
+        "name": "isDisabled",
+        "optional": true,
+        "description": "Disabled state.",
+        "kind": "boolean",
+        "confidence": "declared",
+        "default": false
+      },
+      {
+        "name": "label",
+        "optional": false,
+        "description": "Field label — always rendered; placeholders are not labels.",
+        "kind": "string",
+        "confidence": "declared"
+      },
+      {
+        "name": "description",
+        "optional": true,
+        "description": "Helper text between the label and the input.",
+        "kind": "string",
+        "confidence": "declared",
+        "default": "Helper text that explains the expected value."
+      },
+      {
+        "name": "placeholder",
+        "optional": true,
+        "description": "Hint shown when the field is empty. Never a substitute for the label.",
+        "kind": "string",
+        "confidence": "declared",
+        "default": "Enter a value…"
+      }
+    ],
+    "cssVars": [
+      "size-card-width",
+      "space-inset-y-sm",
+      "font-control-family",
+      "color-surface-foreground",
+      "font-control-size-sm",
+      "font-control-weight",
+      "color-action-danger-background",
+      "color-text-secondary",
+      "color-input-background",
+      "color-border-subtle",
+      "border-width-100",
+      "radius-control",
+      "space-inset-x-sm",
+      "space-inset-y-md",
+      "space-inset-y-lg",
+      "font-control-size-md",
+      "font-control-size-lg"
+    ]
+  },
+  {
+    "name": "Toast",
+    "source": "src/components/Toast/Toast.tsx",
+    "adapter": "react-tsx",
+    "props": [
+      {
+        "name": "type",
+        "optional": true,
+        "description": "Info confirms; error persists until dismissed (behavior layer).",
+        "kind": "enum",
+        "values": [
+          "info",
+          "error"
+        ],
+        "confidence": "declared",
+        "default": "info"
+      },
+      {
+        "name": "endContent",
+        "optional": true,
+        "description": "Trailing content — an Undo button, a link.",
+        "kind": "node",
+        "confidence": "declared"
+      }
+    ],
+    "cssVars": [
+      "size-card-width",
+      "radius-control",
+      "space-gap-sm",
+      "space-inset-x-md",
+      "space-inset-y-md",
+      "font-control-family",
+      "font-control-size-sm",
+      "color-toast-info-background",
+      "color-toast-info-foreground",
+      "color-toast-error-background",
+      "color-toast-error-foreground"
+    ]
+  },
+  {
+    "name": "Token",
+    "source": "src/components/Token/Token.tsx",
+    "adapter": "react-tsx",
+    "props": [
+      {
+        "name": "color",
+        "optional": true,
+        "description": "Color variant.",
+        "kind": "enum",
+        "values": [
+          "default",
+          "red",
+          "orange",
+          "yellow",
+          "green",
+          "teal",
+          "cyan",
+          "blue",
+          "purple",
+          "pink",
+          "gray"
+        ],
+        "confidence": "declared",
+        "default": "default"
+      },
+      {
+        "name": "size",
+        "optional": true,
+        "description": "Token size.",
+        "kind": "enum",
+        "values": [
+          "sm",
+          "md",
+          "lg"
+        ],
+        "confidence": "declared",
+        "default": "md"
+      },
+      {
+        "name": "isDisabled",
+        "optional": true,
+        "description": "Reduces opacity and blocks interactions.",
+        "kind": "boolean",
+        "confidence": "declared",
+        "default": false
+      },
+      {
+        "name": "label",
+        "optional": false,
+        "description": "Text label inside the token.",
+        "kind": "string",
+        "confidence": "declared"
+      },
+      {
+        "name": "icon",
+        "optional": true,
+        "description": "Icon before the label.",
+        "kind": "node",
+        "confidence": "declared"
+      },
+      {
+        "name": "endContent",
+        "optional": true,
+        "description": "Content after the label — a count Badge, a chevron.",
+        "kind": "node",
+        "confidence": "declared"
+      }
+    ],
+    "cssVars": [
+      "radius-100",
+      "space-inset-y-sm",
+      "space-inset-x-xs",
+      "space-inset-y-xs",
+      "font-control-family",
+      "font-badge-size",
+      "font-control-weight",
+      "color-token-default-background",
+      "color-token-default-foreground",
+      "color-token-red-background",
+      "color-token-red-foreground",
+      "color-token-orange-background",
+      "color-token-orange-foreground",
+      "color-token-yellow-background",
+      "color-token-yellow-foreground",
+      "color-token-green-background",
+      "color-token-green-foreground",
+      "color-token-teal-background",
+      "color-token-teal-foreground",
+      "color-token-cyan-background",
+      "color-token-cyan-foreground",
+      "color-token-blue-background",
+      "color-token-blue-foreground",
+      "color-token-purple-background",
+      "color-token-purple-foreground",
+      "color-token-pink-background",
+      "color-token-pink-foreground",
+      "color-token-gray-background",
+      "color-token-gray-foreground"
+    ]
+  },
+  {
+    "name": "Toolbar",
+    "source": "src/components/Toolbar/Toolbar.tsx",
+    "adapter": "react-tsx",
+    "props": [
+      {
+        "name": "size",
+        "optional": true,
+        "description": "Minimum toolbar height; children keep their own sizes.",
+        "kind": "enum",
+        "values": [
+          "sm",
+          "md",
+          "lg"
+        ],
+        "confidence": "declared",
+        "default": "md"
+      },
+      {
+        "name": "label",
+        "optional": false,
+        "description": "Accessible label for the toolbar.",
+        "kind": "string",
+        "confidence": "declared"
+      },
+      {
+        "name": "startContent",
+        "optional": true,
+        "description": "Start-aligned actions — buttons, segmented controls, selectors.",
+        "kind": "node",
+        "confidence": "declared"
+      },
+      {
+        "name": "centerContent",
+        "optional": true,
+        "description": "Centered content.",
+        "kind": "node",
+        "confidence": "declared"
+      },
+      {
+        "name": "endContent",
+        "optional": true,
+        "description": "End-aligned primary actions, selectors, badges.",
+        "kind": "node",
+        "confidence": "declared"
+      }
+    ],
+    "cssVars": [
+      "size-banner-width",
+      "color-surface-raised",
+      "color-border-subtle",
+      "border-width-100",
+      "radius-control",
+      "space-gap-md",
+      "space-inset-x-sm",
+      "space-inset-y-sm",
+      "size-toolbar-sm",
+      "size-toolbar-md",
+      "size-toolbar-lg",
+      "space-gap-sm"
+    ]
+  },
+  {
+    "name": "TopNav",
+    "source": "src/components/TopNav/TopNav.tsx",
+    "adapter": "react-tsx",
+    "props": [
+      {
+        "name": "label",
+        "optional": false,
+        "description": "Accessible label for the navigation landmark.",
+        "kind": "string",
+        "confidence": "declared"
+      },
+      {
+        "name": "heading",
+        "optional": true,
+        "description": "Logo or brand at the start edge.",
+        "kind": "node",
+        "confidence": "declared"
+      },
+      {
+        "name": "startContent",
+        "optional": true,
+        "description": "Primary navigation items after the heading.",
+        "kind": "node",
+        "confidence": "declared"
+      },
+      {
+        "name": "endContent",
+        "optional": true,
+        "description": "Search, icons, user profile at the end edge.",
+        "kind": "node",
+        "confidence": "declared"
+      }
+    ],
+    "cssVars": [
+      "size-banner-width",
+      "color-surface-raised",
+      "color-border-subtle",
+      "border-width-100",
+      "space-gap-md",
+      "space-inset-x-md",
+      "space-inset-y-md",
+      "space-gap-sm",
+      "space-inset-y-sm"
+    ]
+  },
+  {
+    "name": "TopNavItem",
+    "source": "src/components/TopNavItem/TopNavItem.tsx",
+    "adapter": "react-tsx",
+    "props": [
+      {
+        "name": "state",
+        "optional": true,
+        "description": "Whether this item is the current page.",
+        "kind": "enum",
+        "values": [
+          "default",
+          "selected"
+        ],
+        "confidence": "declared",
+        "default": "default"
+      },
+      {
+        "name": "label",
+        "optional": false,
+        "description": "Visible item text.",
+        "kind": "string",
+        "confidence": "declared"
+      },
+      {
+        "name": "href",
+        "optional": true,
+        "description": "Navigation target URL.",
+        "kind": "string",
+        "confidence": "declared",
+        "default": "#"
+      },
+      {
+        "name": "icon",
+        "optional": true,
+        "kind": "node",
+        "confidence": "declared"
+      }
+    ],
+    "cssVars": [
+      "radius-control",
+      "space-inset-y-sm",
+      "space-inset-x-sm",
+      "space-inset-y-md",
+      "font-control-family",
+      "font-control-size-sm",
+      "font-control-weight",
+      "color-nav-default-background",
+      "color-nav-default-foreground",
+      "color-nav-selected-background",
+      "color-nav-selected-foreground",
+      "color-surface-sunken"
+    ]
+  },
+  {
+    "name": "TypeaheadItem",
+    "source": "src/components/TypeaheadItem/TypeaheadItem.tsx",
+    "adapter": "react-tsx",
+    "props": [
+      {
+        "name": "label",
+        "optional": false,
+        "description": "Primary result text.",
+        "kind": "string",
+        "confidence": "declared"
+      },
+      {
+        "name": "description",
+        "optional": true,
+        "description": "Secondary text below the label.",
+        "kind": "string",
+        "confidence": "declared",
+        "default": "Supporting detail about this result."
+      },
+      {
+        "name": "icon",
+        "optional": true,
+        "description": "Icon or avatar before the label.",
+        "kind": "node",
+        "confidence": "declared"
+      }
+    ],
+    "cssVars": [
+      "size-card-width",
+      "color-surface-raised",
+      "radius-100",
+      "space-gap-sm",
+      "space-inset-x-sm",
+      "space-inset-y-md",
+      "font-control-family",
+      "color-surface-foreground",
+      "color-surface-sunken",
+      "space-inset-y-xs",
+      "font-control-size-sm",
+      "font-control-weight",
+      "color-text-secondary"
+    ]
+  }
+]

@@ -14,7 +14,7 @@ The contract-as-source-of-truth loop, demonstrated end to end.
 - [x] 264 DTCG tokens compiled to CSS custom properties and design-tool variables (light + dark)
 - [x] Three-way parity differ: every drift classified *ahead / behind / mismatched* with a proposed remedy
 - [x] Promotion loop executed in both directions on live surfaces, with receipts ([docs/06](06-parity-loop.md))
-- [x] 27/27 deterministic machinery evals ([docs/07](07-validation.md))
+- [x] 28/28 deterministic machinery evals ([docs/07](07-validation.md))
 - [x] Governed AI generation measured: 100/100 with the contract catalog vs 69/100 without ([docs/10](10-honest-generation.md))
 - [x] Coverage attributed against a full 93-component industry library ([coverage map](research/astryx-coverage.md))
 
@@ -36,9 +36,9 @@ Close the honesty gaps the PoC itself documented, so every claim survives advers
 
 Connect **pre-existing** design and code libraries — no rewrite, no regeneration. Full plan: [docs/11](11-brownfield-adoption.md).
 
-- [ ] **Generalized code extractor** — configurable conventions, common React patterns beyond this repo's layout
-- [ ] **Generalized design extractor** — arbitrary file structure, discovery by published components
-- [ ] **Binding inference** — propose `figma`↔`code` name/value mappings with per-field confidence
+- [x] **Generalized code extractor (v0)** — `npm run extract:code`: react-tsx adapter (any props-type convention, forwardRef/memo, defaults, `on*` events) **plus a CEM adapter** covering any Custom-Elements-Manifest-publishing library; eval-covered (`extract-foreign-library`), walkthrough in [docs/13](13-try-it-with-your-system.md)
+- [x] **Generalized design extractor (v0)** — `extract/figma-dump.js`: read-only, any file, API-surface properties only
+- [ ] **Binding inference** — propose `figma`↔`code` name/value mappings with per-field confidence *(started: transparent alias rules + abbreviation mapping in `npm run reconcile`; confidence scoring and value-mapping inference still open)*
 - [ ] **Reconciliation UI** — side-by-side proposal merge in the Contract Hub; extraction → contract v1 in minutes per component
 - [ ] **Foreign token import** — contracts reference an org's *existing* DTCG / Style Dictionary tokens, not this repo's
 - [ ] **Public pilot** — run extraction on a real open-source library + community design kit pair; publish the drift report

@@ -34,7 +34,7 @@ There's a second reason, and it's becoming the bigger one: **AI generation.** In
 | `figma-sync/` | Generated, transport-agnostic scripts that build the canvas library: variant sets, bound variables, slot properties, mode-aware theming. | ❌ Generated |
 | `parity/` | The three-way differ: classifies every difference between contract, code, and canvas as *ahead*, *behind*, or *mismatched* — with a proposed remedy. | ✅ |
 | `catalog/` + `context/` | The compiled generation constraint (every API + every token + the governance rules) that an AI agent — or a human — can be held to, plus the org rules and memory that feed it. | catalog ❌ · rules ✅ |
-| `evals/` | 27 deterministic checks on the machinery itself: byte-identical regeneration, refusal of illegal contracts, detection of every claimed drift class, convergence after promotion. | ✅ |
+| `evals/` | 28 deterministic checks on the machinery itself: byte-identical regeneration, refusal of illegal contracts, detection of every claimed drift class, convergence after promotion. | ✅ |
 | `dashboard/` | The **Contract Hub** — a local app visualizing the whole system: live component previews, per-prop binding maps across all three surfaces, token provenance, one-click parity runs, contract editing with regeneration, and the full docs. | ✅ |
 | `docs/` | The working documents — start at [Getting Started](docs/00-getting-started.md). | ✅ |
 
@@ -56,10 +56,21 @@ npm run parity   # ① clean — code, canvas, and tokens all match the contract
 # ② edit any contract in contracts/ — add an enum value, change a token binding
 npm run build && npm run parity
 #    ③ the differ reports exactly what is now behind, and how to fix it
-npm run eval     # ④ 27 checks that detection, refusal, and convergence still hold
+npm run eval     # ④ 28 checks that detection, refusal, and convergence still hold
 ```
 
 That honest red state in step ③ is the product. Most design-system tooling shows you the happy path; this one is built to tell you precisely when and where the surfaces have stopped agreeing. (Point a token binding at a token that doesn't exist and the *build itself* fails — the contract↔token integrity gate.)
+
+## Try it with your own design system
+
+The model isn't specific to these components, React, or any tool — and you can test that claim on **your** library:
+
+```bash
+npm run extract:code   # your components → schema-valid PROPOSED contracts (API surface only)
+npm run reconcile      # → the disagreement report: where your code and design libraries diverge
+```
+
+Two adapters ship today — `react-tsx` (function components, forwardRef/memo, any props-type convention, defaults, `on*` events) and `cem` (**any** library publishing a Custom Elements Manifest: Web Components, Lit, Shoelace-style systems). Adapters normalize into one shape, so everything downstream is framework-blind. Extraction proposes and reports; it never guesses your anatomy or silently auto-matches names. Full walkthrough: [docs/13 — Try It With Your Own System](docs/13-try-it-with-your-system.md).
 
 ## How a contract reads
 
@@ -101,7 +112,8 @@ One file; two faithful renderings; a differ that can mechanically prove both. Co
 10. [Honest Generation](docs/10-honest-generation.md) · the catalog, the deterministic judge, and the 100-vs-69 A/B result
 11. [Brownfield Adoption](docs/11-brownfield-adoption.md) · the plan for connecting pre-existing design + code libraries — extraction, reconciliation, diagnostic-first
 12. [Roadmap](docs/12-roadmap.md) · four phases toward a component contract spec, each with a falsifiable exit criterion
-13. [Astryx Coverage Map](docs/research/astryx-coverage.md) · every component in a 93-component industry library: mirrored, gap-blocked, or behavior-bounded
+13. [Try It With Your Own System](docs/13-try-it-with-your-system.md) · extraction adapters, the design dump, and the disagreement report
+14. [Astryx Coverage Map](docs/research/astryx-coverage.md) · every component in a 93-component industry library: mirrored, gap-blocked, or behavior-bounded
 
 ## Honesty as a design principle
 
@@ -113,6 +125,6 @@ Not everything is expressible yet, and nothing here pretends otherwise:
 
 ## Status
 
-A working proof of concept, validated end-to-end: generation into both surfaces, the parity loop run in both directions with receipts, 27/27 evals, and a measured 100-vs-69 governed-generation result. The reference design-tool integration lives behind a transport-agnostic script boundary (`docs/internal/`) — the contract format itself is tool-agnostic.
+A working proof of concept, validated end-to-end: generation into both surfaces, the parity loop run in both directions with receipts, 28/28 evals, and a measured 100-vs-69 governed-generation result. The reference design-tool integration lives behind a transport-agnostic script boundary (`docs/internal/`) — the contract format itself is tool-agnostic.
 
 Where this goes next is public: the **[roadmap](ROADMAP.md)** runs from hardening the loop, through brownfield adoption of pre-existing libraries, to candidacy as a vendor-neutral **component contract specification** — with this repository as the reference implementation and conformance suite. The spec groundwork is in [docs/08](docs/08-composition-and-spec.md).

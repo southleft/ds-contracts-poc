@@ -231,8 +231,11 @@ export const EventSchema = z.object({
 
 export const ContractSchema = z.object({
   $schema: z.string().optional(),
-  /** Stable canonical id, never renamed. e.g. "ds.button" */
-  id: z.string().regex(/^ds\.[a-z][a-z0-9-]*$/),
+  /** Stable canonical id, never renamed. e.g. "ds.button". The namespace
+   *  before the dot is the owning system's — brownfield extractions use
+   *  their own (e.g. "acme.chip"); full package-qualified namespacing is a
+   *  Phase 3 spec item. */
+  id: z.string().regex(/^[a-z][a-z0-9-]*\.[a-z][a-z0-9-]*$/),
   /** Display / export name. e.g. "Button" */
   name: z.string(),
   version: z.string(),

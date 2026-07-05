@@ -1,5 +1,7 @@
 # 11 · Brownfield Adoption — Connecting Pre-Existing Libraries
 
+> **Status:** extraction v0 shipped — `npm run extract:code` + `npm run reconcile`, two adapters (React/TS + Custom Elements Manifest), eval-covered. Hands-on guide: [docs/13](13-try-it-with-your-system.md).
+
 Everything in this repo so far is **greenfield**: the contract came first and generated both surfaces. No real organization starts there. Atlassian, Shopify, and Google each have a mature code library, a mature design library, and years of accumulated drift between them. Nobody is going to regenerate Polaris.
 
 So the adoption question is not *"will you rebuild on contracts?"* It is:

@@ -1,0 +1,28 @@
+{
+  "schemaVersion": "1.0.0",
+  "readme": "FIXTURE: a Custom Elements Manifest in the shape Web Component libraries publish — proves the cem adapter reads the standard format.",
+  "modules": [
+    {
+      "kind": "javascript-module",
+      "path": "src/fancy-badge.js",
+      "declarations": [
+        {
+          "kind": "class",
+          "customElement": true,
+          "name": "FancyBadge",
+          "tagName": "fancy-badge",
+          "description": "A status badge web component.",
+          "attributes": [
+            { "name": "appearance", "type": { "text": "'subtle' | 'bold' | 'outline'" }, "default": "'subtle'" },
+            { "name": "pill", "type": { "text": "boolean" }, "default": "false" },
+            { "name": "count", "type": { "text": "number" } },
+            { "name": "label", "type": { "text": "string" }, "description": "Accessible label." }
+          ],
+          "events": [
+            { "name": "fb-dismiss", "description": "Fired when the badge is dismissed." }
+          ]
+        }
+      ]
+    }
+  ]
+}

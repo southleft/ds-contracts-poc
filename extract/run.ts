@@ -1,0 +1,86 @@
+/**
+ * Brownfield extraction CLI.
+ *
+ *   npm run extract:code  [-- path/to/extract.config.json]
+ *     → <out>/code-extraction.json      raw extraction (adapter output)
+ *     → <out>/contracts/*.contract.json ContractSchema-valid PROPOSALS
+ *     → <out>/proposals.md              per-component inference/skip notes
+ *
+ *   npm run reconcile     [-- path/to/extract.config.json]
+ *     → <out>/reconciliation.{md,json}  the disagreement report
+ *
+ * With no config file, defaults run against THIS repo's own library and
+ * parity snapshot — a fresh clone can watch the whole loop work before
+ * pointing it at their system (see docs/13).
+ */
+import { writeFileSync, mkdirSync, readFileSync, existsSync } from 'node:fs';
+import path from 'node:path';
+import { loadConfig, outDir, idPrefix } from './config.js';
+import { extractReactTsx } from './adapters/react-tsx.js';
+import { extractCem } from './adapters/cem.js';
+import { proposeContract, proposalsReport } from './propose.js';
+import { loadDesign, reconcile, writeReconciliation } from './reconcile.js';
+import type { ExtractedComponent } from './types.js';
+
+const [, , command, configArg] = process.argv;
+const { config, from } = loadConfig(configArg);
+const out = outDir(config);
+
+function runExtract(): ExtractedComponent[] {
+  if (config.code.adapter === 'react-tsx') {
+    if (!config.code.root) throw new Error('react-tsx adapter needs code.root');
+    return extractReactTsx(config.code.root);
+  }
+  if (!config.code.manifest) throw new Error('cem adapter needs code.manifest');
+  return extractCem(config.code.manifest);
+}
+
+if (command === 'code') {
+  console.log(`Config: ${from}`);
+  const extracted = runExtract();
+  if (extracted.length === 0) {
+    throw new Error('No components found — check code.root / code.manifest and that props are visible in source.');
+  }
+  mkdirSync(path.join(out, 'contracts'), { recursive: true });
+  writeFileSync(path.join(out, 'code-extraction.json'), JSON.stringify(extracted, null, 2) + '\n');
+  const results = extracted.map((component) => ({
+    component,
+    proposal: proposeContract(component, idPrefix(config)),
+  }));
+  for (const { component, proposal } of results) {
+    writeFileSync(
+      path.join(out, 'contracts', `${(proposal.contract.id as string).replace(/^[^.]+\./, '')}.contract.json`),
+      JSON.stringify(proposal.contract, null, 2) + '\n',
+    );
+  }
+  writeFileSync(path.join(out, 'proposals.md'), proposalsReport(results) + '\n');
+  console.log(
+    `✔ Extracted ${extracted.length} component(s) → ${out}/code-extraction.json\n` +
+      `✔ ${results.length} proposed contract(s) → ${out}/contracts/ (all schema-valid)\n` +
+      `✔ Review notes → ${out}/proposals.md\n` +
+      `Next: dump your design library with extract/figma-dump.js, then npm run reconcile`,
+  );
+} else if (command === 'reconcile') {
+  console.log(`Config: ${from}`);
+  const extractionPath = path.join(out, 'code-extraction.json');
+  if (!existsSync(extractionPath)) {
+    throw new Error(`${extractionPath} not found — run \`npm run extract:code\` first.`);
+  }
+  const codeSide = JSON.parse(readFileSync(extractionPath, 'utf8')) as ExtractedComponent[];
+  const designSource = config.design?.source;
+  if (!designSource) {
+    throw new Error(
+      'No design.source in config. Run extract/figma-dump.js in your design file, save the JSON, and point design.source at it (or use "parity-snapshot" in this repo).',
+    );
+  }
+  const designSide = loadDesign(designSource);
+  const r = reconcile(codeSide, designSide);
+  writeReconciliation(r, out);
+  console.log(
+    `✔ Reconciled ${r.stats.matched}/${r.stats.components} components — ` +
+      `${r.stats.propsAgree} properties agree, ${r.stats.propsDiffer} need a decision\n` +
+      `✔ Report → ${out}/reconciliation.md`,
+  );
+} else {
+  throw new Error(`Unknown command "${command}" — use "code" or "reconcile"`);
+}
