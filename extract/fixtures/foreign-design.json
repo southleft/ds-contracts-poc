@@ -1,0 +1,50 @@
+{
+  "fileName": "FIXTURE: foreign design library",
+  "fileKey": null,
+  "extractedAt": "design-dump-v1",
+  "components": [
+    {
+      "name": "Chip",
+      "nodeId": "0:1",
+      "page": "Chips",
+      "variantProps": {
+        "Tone": [
+          "Neutral",
+          "Info",
+          "Success",
+          "Critical"
+        ],
+        "Size": [
+          "Compact",
+          "Regular"
+        ]
+      },
+      "boolProps": [
+        "Removable"
+      ],
+      "textProps": [
+        "Text"
+      ],
+      "swapProps": []
+    },
+    {
+      "name": "Alert",
+      "nodeId": "0:2",
+      "page": "Alerts",
+      "variantProps": {
+        "Severity": [
+          "Info",
+          "Warning",
+          "Danger"
+        ]
+      },
+      "boolProps": [
+        "Dismissible"
+      ],
+      "textProps": [
+        "Heading"
+      ],
+      "swapProps": []
+    }
+  ]
+}

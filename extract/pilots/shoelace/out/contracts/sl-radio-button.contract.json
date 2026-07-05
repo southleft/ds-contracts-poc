@@ -1,0 +1,119 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "sl.sl-radio-button",
+  "name": "SlRadioButton",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "PROPOSED contract extracted from extract/pilots/shoelace/custom-elements.json (components/radio-button/radio-button.js) (cem adapter) — API surface only; anatomy, tokens, and design bindings await reconciliation and human review.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "value",
+      "description": "The radio's value. When selected, the radio group will receive this value.",
+      "type": "text",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Value"
+        },
+        "code": {
+          "prop": "value"
+        }
+      }
+    },
+    {
+      "name": "disabled",
+      "description": "Disables the radio button.",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Disabled"
+        },
+        "code": {
+          "prop": "disabled"
+        }
+      }
+    },
+    {
+      "name": "size",
+      "description": "The radio button's size. When used inside a radio group, the size will be determined by the radio group's size so\nthis attribute can typically be omitted.",
+      "type": {
+        "enum": [
+          "small",
+          "medium",
+          "large"
+        ]
+      },
+      "default": "medium",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Size",
+          "values": {
+            "small": "Small",
+            "medium": "Medium",
+            "large": "Large"
+          }
+        },
+        "code": {
+          "prop": "size"
+        }
+      }
+    },
+    {
+      "name": "pill",
+      "description": "Draws a pill-style radio button with rounded edges.",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Pill"
+        },
+        "code": {
+          "prop": "pill"
+        }
+      }
+    }
+  ],
+  "events": [
+    {
+      "name": "blur",
+      "description": "Emitted when the button loses focus. (CEM event \"sl-blur\")",
+      "bindings": {
+        "code": {
+          "prop": "onBlur"
+        }
+      },
+      "trigger": "root"
+    },
+    {
+      "name": "focus",
+      "description": "Emitted when the button gains focus. (CEM event \"sl-focus\")",
+      "bindings": {
+        "code": {
+          "prop": "onFocus"
+        }
+      },
+      "trigger": "root"
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {}
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "extract/pilots/shoelace/custom-elements.json (components/radio-button/radio-button.js)",
+      "export": "SlRadioButton"
+    }
+  }
+}

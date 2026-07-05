@@ -430,6 +430,48 @@ const cases: Case[] = [
     },
   },
   {
+    // Roadmap Phase 2 exit criterion, first half: the diagnostic loop runs
+    // green→red→green on two surfaces this repo did NOT generate — foreign-
+    // convention React source + a design dump, refereed by extracted
+    // proposals, with correct per-surface classifications.
+    id: 'diagnose-foreign-green-red-green',
+    claim: 'C5-extraction',
+    run: () => {
+      const CFG = 'extract/fixtures/foreign-react.config.json';
+      const diagnose = () => run(TSX, ['parity/diagnose.ts', CFG]);
+      let r = run(TSX, ['extract/run.ts', 'code', CFG]);
+      if (r.status !== 0) throw new Error(`Extraction failed:\n${r.out}`);
+      if (diagnose().status !== 0) throw new Error('Baseline not green on foreign surfaces');
+      // red on the design surface
+      editJson('extract/fixtures/foreign-design.json', (d) => {
+        d.components[0].variantProps.Tone = ['Neutral', 'Info', 'Success'];
+      });
+      r = diagnose();
+      if (r.status === 0 || !r.out.includes('[design MISMATCH] Chip.Tone')) {
+        throw new Error(`Design drift not caught/classified:\n${r.out}`);
+      }
+      editJson('extract/fixtures/foreign-design.json', (d) => {
+        d.components[0].variantProps.Tone = ['Neutral', 'Info', 'Success', 'Critical'];
+      });
+      // red on the code surface
+      replaceInFile(
+        'extract/fixtures/foreign-react/Chip.tsx',
+        "size?: 'compact' | 'regular';",
+        "size?: 'compact' | 'regular' | 'spacious';",
+      );
+      r = diagnose();
+      if (r.status === 0 || !r.out.includes('[code MISMATCH] Chip.size')) {
+        throw new Error(`Code drift not caught/classified:\n${r.out}`);
+      }
+      replaceInFile(
+        'extract/fixtures/foreign-react/Chip.tsx',
+        "size?: 'compact' | 'regular' | 'spacious';",
+        "size?: 'compact' | 'regular';",
+      );
+      if (diagnose().status !== 0) throw new Error('Did not return to green after revert');
+    },
+  },
+  {
     // v6 events: a contract-declared event callback is API surface — an
     // engineer deleting onToggle from the code must surface as code BEHIND.
     id: 'detect-code-removed-event',

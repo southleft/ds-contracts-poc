@@ -1,6 +1,6 @@
 # 7 · Validation — Claims, Evals, Evidence
 
-This PoC makes five falsifiable claims. Each is backed by an automated eval (`npm run eval`, 28 cases, runs the real pipeline in a scratch copy — not mocks) or an executed live design-tool check. Current status: **28/28 deterministic evals pass** (`evals/results.json`), all live checks pass. This section is written to be lifted into a PRD.
+This PoC makes five falsifiable claims. Each is backed by an automated eval (`npm run eval`, 29 cases, runs the real pipeline in a scratch copy — not mocks) or an executed live design-tool check. Current status: **29/29 deterministic evals pass** (`evals/results.json`), all live checks pass. This section is written to be lifted into a PRD.
 
 **Round 6 addendum (governed generation):** two eval cases exercise the deterministic generation judge itself — `judge-passes-canonical-screen` and `judge-catches-all-violation-classes` — backing the measured 100-vs-69 governed-generation A/B result in [docs/10](10-honest-generation.md).
 
@@ -67,8 +67,9 @@ This is the loop's key property: the system never oscillates and never lies abou
 | Eval | Result |
 |---|---|
 | `extract-foreign-library` — both adapters run against fixtures written in conventions this repo's generator never emits (type-alias props behind `memo`, legacy `defaultProps`, a Custom Elements Manifest): enums, defaults, and events must extract correctly and every proposal must parse against the contract schema | ✅ |
+| `diagnose-foreign-green-red-green` — `npm run diagnose` referees foreign code + a design dump against extracted proposals: baseline green; a dropped design variant option → `design MISMATCH`; an added code enum value → `code MISMATCH`; reverts return to green | ✅ |
 
-Live receipt: the same tooling run against this repo's own surfaces reconciles 46/48 components with 102 property agreements ([docs/13](13-try-it-with-your-system.md) documents the two honest residual classes).
+Live receipts: extraction against **Shoelace v2.20.1** (58/58 components, 411 props, 113 events, all proposals schema-valid — `extract/pilots/shoelace/`), and against this repo's own surfaces reconciling 46/48 components with 102 property agreements ([docs/13](13-try-it-with-your-system.md) documents the two honest residual classes).
 
 ## Live design-tool evals (executed July 3, 2026, not headless-repeatable yet)
 

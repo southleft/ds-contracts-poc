@@ -1,0 +1,347 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "sl.sl-format-date",
+  "name": "SlFormatDate",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "PROPOSED contract extracted from extract/pilots/shoelace/custom-elements.json (components/format-date/format-date.js) (cem adapter) — API surface only; anatomy, tokens, and design bindings await reconciliation and human review.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "weekday",
+      "description": "The format for displaying the weekday.",
+      "type": {
+        "enum": [
+          "narrow",
+          "short",
+          "long"
+        ]
+      },
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Weekday",
+          "values": {
+            "narrow": "Narrow",
+            "short": "Short",
+            "long": "Long"
+          }
+        },
+        "code": {
+          "prop": "weekday"
+        }
+      }
+    },
+    {
+      "name": "era",
+      "description": "The format for displaying the era.",
+      "type": {
+        "enum": [
+          "narrow",
+          "short",
+          "long"
+        ]
+      },
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Era",
+          "values": {
+            "narrow": "Narrow",
+            "short": "Short",
+            "long": "Long"
+          }
+        },
+        "code": {
+          "prop": "era"
+        }
+      }
+    },
+    {
+      "name": "year",
+      "description": "The format for displaying the year.",
+      "type": {
+        "enum": [
+          "numeric",
+          "2-digit"
+        ]
+      },
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Year",
+          "values": {
+            "numeric": "Numeric",
+            "2-digit": "2 Digit"
+          }
+        },
+        "code": {
+          "prop": "year"
+        }
+      }
+    },
+    {
+      "name": "month",
+      "description": "The format for displaying the month.",
+      "type": {
+        "enum": [
+          "numeric",
+          "2-digit",
+          "narrow",
+          "short",
+          "long"
+        ]
+      },
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Month",
+          "values": {
+            "numeric": "Numeric",
+            "2-digit": "2 Digit",
+            "narrow": "Narrow",
+            "short": "Short",
+            "long": "Long"
+          }
+        },
+        "code": {
+          "prop": "month"
+        }
+      }
+    },
+    {
+      "name": "day",
+      "description": "The format for displaying the day.",
+      "type": {
+        "enum": [
+          "numeric",
+          "2-digit"
+        ]
+      },
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Day",
+          "values": {
+            "numeric": "Numeric",
+            "2-digit": "2 Digit"
+          }
+        },
+        "code": {
+          "prop": "day"
+        }
+      }
+    },
+    {
+      "name": "hour",
+      "description": "The format for displaying the hour.",
+      "type": {
+        "enum": [
+          "numeric",
+          "2-digit"
+        ]
+      },
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Hour",
+          "values": {
+            "numeric": "Numeric",
+            "2-digit": "2 Digit"
+          }
+        },
+        "code": {
+          "prop": "hour"
+        }
+      }
+    },
+    {
+      "name": "minute",
+      "description": "The format for displaying the minute.",
+      "type": {
+        "enum": [
+          "numeric",
+          "2-digit"
+        ]
+      },
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Minute",
+          "values": {
+            "numeric": "Numeric",
+            "2-digit": "2 Digit"
+          }
+        },
+        "code": {
+          "prop": "minute"
+        }
+      }
+    },
+    {
+      "name": "second",
+      "description": "The format for displaying the second.",
+      "type": {
+        "enum": [
+          "numeric",
+          "2-digit"
+        ]
+      },
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Second",
+          "values": {
+            "numeric": "Numeric",
+            "2-digit": "2 Digit"
+          }
+        },
+        "code": {
+          "prop": "second"
+        }
+      }
+    },
+    {
+      "name": "time-zone-name",
+      "description": "The format for displaying the time.",
+      "type": {
+        "enum": [
+          "short",
+          "long"
+        ]
+      },
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Time Zone Name",
+          "values": {
+            "short": "Short",
+            "long": "Long"
+          }
+        },
+        "code": {
+          "prop": "time-zone-name"
+        }
+      }
+    },
+    {
+      "name": "time-zone",
+      "description": "The time zone to express the time in.",
+      "type": "text",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Time Zone"
+        },
+        "code": {
+          "prop": "time-zone"
+        }
+      }
+    },
+    {
+      "name": "hour-format",
+      "description": "The format for displaying the hour.",
+      "type": {
+        "enum": [
+          "auto",
+          "12",
+          "24"
+        ]
+      },
+      "default": "auto",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Hour Format",
+          "values": {
+            "12": "12",
+            "24": "24",
+            "auto": "Auto"
+          }
+        },
+        "code": {
+          "prop": "hour-format"
+        }
+      }
+    },
+    {
+      "name": "timeZoneName",
+      "description": "The format for displaying the time.",
+      "type": {
+        "enum": [
+          "short",
+          "long"
+        ]
+      },
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Time Zone Name",
+          "values": {
+            "short": "Short",
+            "long": "Long"
+          }
+        },
+        "code": {
+          "prop": "timeZoneName"
+        }
+      }
+    },
+    {
+      "name": "timeZone",
+      "description": "The time zone to express the time in.",
+      "type": "text",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Time Zone"
+        },
+        "code": {
+          "prop": "timeZone"
+        }
+      }
+    },
+    {
+      "name": "hourFormat",
+      "description": "The format for displaying the hour.",
+      "type": {
+        "enum": [
+          "auto",
+          "12",
+          "24"
+        ]
+      },
+      "default": "auto",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Hour Format",
+          "values": {
+            "12": "12",
+            "24": "24",
+            "auto": "Auto"
+          }
+        },
+        "code": {
+          "prop": "hourFormat"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {}
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "extract/pilots/shoelace/custom-elements.json (components/format-date/format-date.js)",
+      "export": "SlFormatDate"
+    }
+  }
+}

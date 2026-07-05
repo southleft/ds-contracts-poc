@@ -1,0 +1,110 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "sl.sl-menu-item",
+  "name": "SlMenuItem",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "PROPOSED contract extracted from extract/pilots/shoelace/custom-elements.json (components/menu-item/menu-item.js) (cem adapter) — API surface only; anatomy, tokens, and design bindings await reconciliation and human review.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "type",
+      "description": "The type of menu item to render. To use `checked`, this value must be set to `checkbox`.",
+      "type": {
+        "enum": [
+          "normal",
+          "checkbox"
+        ]
+      },
+      "default": "normal",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Type",
+          "values": {
+            "normal": "Normal",
+            "checkbox": "Checkbox"
+          }
+        },
+        "code": {
+          "prop": "type"
+        }
+      }
+    },
+    {
+      "name": "checked",
+      "description": "Draws the item in a checked state.",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Checked"
+        },
+        "code": {
+          "prop": "checked"
+        }
+      }
+    },
+    {
+      "name": "value",
+      "description": "A unique value to store in the menu item. This can be used as a way to identify menu items when selected.",
+      "type": "text",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Value"
+        },
+        "code": {
+          "prop": "value"
+        }
+      }
+    },
+    {
+      "name": "loading",
+      "description": "Draws the menu item in a loading state.",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Loading"
+        },
+        "code": {
+          "prop": "loading"
+        }
+      }
+    },
+    {
+      "name": "disabled",
+      "description": "Draws the menu item in a disabled state, preventing selection.",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Disabled"
+        },
+        "code": {
+          "prop": "disabled"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {}
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "extract/pilots/shoelace/custom-elements.json (components/menu-item/menu-item.js)",
+      "export": "SlMenuItem"
+    }
+  }
+}

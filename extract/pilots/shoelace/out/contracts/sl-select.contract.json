@@ -1,0 +1,426 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "sl.sl-select",
+  "name": "SlSelect",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "PROPOSED contract extracted from extract/pilots/shoelace/custom-elements.json (components/select/select.js) (cem adapter) — API surface only; anatomy, tokens, and design bindings await reconciliation and human review.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "name",
+      "description": "The name of the select, submitted as a name/value pair with form data.",
+      "type": "text",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Name"
+        },
+        "code": {
+          "prop": "name"
+        }
+      }
+    },
+    {
+      "name": "size",
+      "description": "The select's size.",
+      "type": {
+        "enum": [
+          "small",
+          "medium",
+          "large"
+        ]
+      },
+      "default": "medium",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Size",
+          "values": {
+            "small": "Small",
+            "medium": "Medium",
+            "large": "Large"
+          }
+        },
+        "code": {
+          "prop": "size"
+        }
+      }
+    },
+    {
+      "name": "placeholder",
+      "description": "Placeholder text to show as a hint when the select is empty.",
+      "type": "text",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Placeholder"
+        },
+        "code": {
+          "prop": "placeholder"
+        }
+      }
+    },
+    {
+      "name": "multiple",
+      "description": "Allows more than one option to be selected.",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Multiple"
+        },
+        "code": {
+          "prop": "multiple"
+        }
+      }
+    },
+    {
+      "name": "max-options-visible",
+      "description": "The maximum number of selected options to show when `multiple` is true. After the maximum, \"+n\" will be shown to\nindicate the number of additional items that are selected. Set to 0 to remove the limit.",
+      "type": "number",
+      "default": 3,
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Max Options Visible"
+        },
+        "code": {
+          "prop": "max-options-visible"
+        }
+      }
+    },
+    {
+      "name": "disabled",
+      "description": "Disables the select control.",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Disabled"
+        },
+        "code": {
+          "prop": "disabled"
+        }
+      }
+    },
+    {
+      "name": "clearable",
+      "description": "Adds a clear button when the select is not empty.",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Clearable"
+        },
+        "code": {
+          "prop": "clearable"
+        }
+      }
+    },
+    {
+      "name": "open",
+      "description": "Indicates whether or not the select is open. You can toggle this attribute to show and hide the menu, or you can\nuse the `show()` and `hide()` methods and this attribute will reflect the select's open state.",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Open"
+        },
+        "code": {
+          "prop": "open"
+        }
+      }
+    },
+    {
+      "name": "hoist",
+      "description": "Enable this option to prevent the listbox from being clipped when the component is placed inside a container with\n`overflow: auto|scroll`. Hoisting uses a fixed positioning strategy that works in many, but not all, scenarios.",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Hoist"
+        },
+        "code": {
+          "prop": "hoist"
+        }
+      }
+    },
+    {
+      "name": "filled",
+      "description": "Draws a filled select.",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Filled"
+        },
+        "code": {
+          "prop": "filled"
+        }
+      }
+    },
+    {
+      "name": "pill",
+      "description": "Draws a pill-style select with rounded edges.",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Pill"
+        },
+        "code": {
+          "prop": "pill"
+        }
+      }
+    },
+    {
+      "name": "label",
+      "description": "The select's label. If you need to display HTML, use the `label` slot instead.",
+      "type": "text",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Label"
+        },
+        "code": {
+          "prop": "label"
+        }
+      }
+    },
+    {
+      "name": "placement",
+      "description": "The preferred placement of the select's menu. Note that the actual placement may vary as needed to keep the listbox\ninside of the viewport.",
+      "type": {
+        "enum": [
+          "top",
+          "bottom"
+        ]
+      },
+      "default": "bottom",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Placement",
+          "values": {
+            "top": "Top",
+            "bottom": "Bottom"
+          }
+        },
+        "code": {
+          "prop": "placement"
+        }
+      }
+    },
+    {
+      "name": "help-text",
+      "description": "The select's help text. If you need to display HTML, use the `help-text` slot instead.",
+      "type": "text",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Help Text"
+        },
+        "code": {
+          "prop": "help-text"
+        }
+      }
+    },
+    {
+      "name": "form",
+      "description": "By default, form controls are associated with the nearest containing `<form>` element. This attribute allows you\nto place the form control outside of a form and associate it with the form that has this `id`. The form must be in\nthe same document or shadow root for this to work.",
+      "type": "text",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Form"
+        },
+        "code": {
+          "prop": "form"
+        }
+      }
+    },
+    {
+      "name": "required",
+      "description": "The select's required attribute.",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Required"
+        },
+        "code": {
+          "prop": "required"
+        }
+      }
+    },
+    {
+      "name": "displayLabel",
+      "type": "text",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Display Label"
+        },
+        "code": {
+          "prop": "displayLabel"
+        }
+      }
+    },
+    {
+      "name": "maxOptionsVisible",
+      "description": "The maximum number of selected options to show when `multiple` is true. After the maximum, \"+n\" will be shown to\nindicate the number of additional items that are selected. Set to 0 to remove the limit.",
+      "type": "number",
+      "default": 3,
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Max Options Visible"
+        },
+        "code": {
+          "prop": "maxOptionsVisible"
+        }
+      }
+    },
+    {
+      "name": "helpText",
+      "description": "The select's help text. If you need to display HTML, use the `help-text` slot instead.",
+      "type": "text",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Help Text"
+        },
+        "code": {
+          "prop": "helpText"
+        }
+      }
+    }
+  ],
+  "events": [
+    {
+      "name": "change",
+      "description": "Emitted when the control's value changes. (CEM event \"sl-change\")",
+      "bindings": {
+        "code": {
+          "prop": "onChange"
+        }
+      },
+      "trigger": "root"
+    },
+    {
+      "name": "clear",
+      "description": "Emitted when the control's value is cleared. (CEM event \"sl-clear\")",
+      "bindings": {
+        "code": {
+          "prop": "onClear"
+        }
+      },
+      "trigger": "root"
+    },
+    {
+      "name": "input",
+      "description": "Emitted when the control receives input. (CEM event \"sl-input\")",
+      "bindings": {
+        "code": {
+          "prop": "onInput"
+        }
+      },
+      "trigger": "root"
+    },
+    {
+      "name": "focus",
+      "description": "Emitted when the control gains focus. (CEM event \"sl-focus\")",
+      "bindings": {
+        "code": {
+          "prop": "onFocus"
+        }
+      },
+      "trigger": "root"
+    },
+    {
+      "name": "blur",
+      "description": "Emitted when the control loses focus. (CEM event \"sl-blur\")",
+      "bindings": {
+        "code": {
+          "prop": "onBlur"
+        }
+      },
+      "trigger": "root"
+    },
+    {
+      "name": "show",
+      "description": "Emitted when the select's menu opens. (CEM event \"sl-show\")",
+      "bindings": {
+        "code": {
+          "prop": "onShow"
+        }
+      },
+      "trigger": "root"
+    },
+    {
+      "name": "afterShow",
+      "description": "Emitted after the select's menu opens and all animations are complete. (CEM event \"sl-after-show\")",
+      "bindings": {
+        "code": {
+          "prop": "onAfterShow"
+        }
+      },
+      "trigger": "root"
+    },
+    {
+      "name": "hide",
+      "description": "Emitted when the select's menu closes. (CEM event \"sl-hide\")",
+      "bindings": {
+        "code": {
+          "prop": "onHide"
+        }
+      },
+      "trigger": "root"
+    },
+    {
+      "name": "afterHide",
+      "description": "Emitted after the select's menu closes and all animations are complete. (CEM event \"sl-after-hide\")",
+      "bindings": {
+        "code": {
+          "prop": "onAfterHide"
+        }
+      },
+      "trigger": "root"
+    },
+    {
+      "name": "invalid",
+      "description": "Emitted when the form control has been checked for validity and its constraints aren't satisfied. (CEM event \"sl-invalid\")",
+      "bindings": {
+        "code": {
+          "prop": "onInvalid"
+        }
+      },
+      "trigger": "root"
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {}
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "extract/pilots/shoelace/custom-elements.json (components/select/select.js)",
+      "export": "SlSelect"
+    }
+  }
+}

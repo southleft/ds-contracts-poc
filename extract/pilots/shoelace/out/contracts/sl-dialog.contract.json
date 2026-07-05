@@ -1,0 +1,148 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "sl.sl-dialog",
+  "name": "SlDialog",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "PROPOSED contract extracted from extract/pilots/shoelace/custom-elements.json (components/dialog/dialog.js) (cem adapter) — API surface only; anatomy, tokens, and design bindings await reconciliation and human review.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "open",
+      "description": "Indicates whether or not the dialog is open. You can toggle this attribute to show and hide the dialog, or you can\nuse the `show()` and `hide()` methods and this attribute will reflect the dialog's open state.",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Open"
+        },
+        "code": {
+          "prop": "open"
+        }
+      }
+    },
+    {
+      "name": "label",
+      "description": "The dialog's label as displayed in the header. You should always include a relevant label even when using\n`no-header`, as it is required for proper accessibility. If you need to display HTML, use the `label` slot instead.",
+      "type": "text",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Label"
+        },
+        "code": {
+          "prop": "label"
+        }
+      }
+    },
+    {
+      "name": "no-header",
+      "description": "Disables the header. This will also remove the default close button, so please ensure you provide an easy,\naccessible way for users to dismiss the dialog.",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "No Header"
+        },
+        "code": {
+          "prop": "no-header"
+        }
+      }
+    },
+    {
+      "name": "noHeader",
+      "description": "Disables the header. This will also remove the default close button, so please ensure you provide an easy,\naccessible way for users to dismiss the dialog.",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "No Header"
+        },
+        "code": {
+          "prop": "noHeader"
+        }
+      }
+    }
+  ],
+  "events": [
+    {
+      "name": "show",
+      "description": "Emitted when the dialog opens. (CEM event \"sl-show\")",
+      "bindings": {
+        "code": {
+          "prop": "onShow"
+        }
+      },
+      "trigger": "root"
+    },
+    {
+      "name": "afterShow",
+      "description": "Emitted after the dialog opens and all animations are complete. (CEM event \"sl-after-show\")",
+      "bindings": {
+        "code": {
+          "prop": "onAfterShow"
+        }
+      },
+      "trigger": "root"
+    },
+    {
+      "name": "hide",
+      "description": "Emitted when the dialog closes. (CEM event \"sl-hide\")",
+      "bindings": {
+        "code": {
+          "prop": "onHide"
+        }
+      },
+      "trigger": "root"
+    },
+    {
+      "name": "afterHide",
+      "description": "Emitted after the dialog closes and all animations are complete. (CEM event \"sl-after-hide\")",
+      "bindings": {
+        "code": {
+          "prop": "onAfterHide"
+        }
+      },
+      "trigger": "root"
+    },
+    {
+      "name": "initialFocus",
+      "description": "Emitted when the dialog opens and is ready to receive focus. Calling `event.preventDefault()` will prevent focusing and allow you to set it on a different element, such as an input. (CEM event \"sl-initial-focus\")",
+      "bindings": {
+        "code": {
+          "prop": "onInitialFocus"
+        }
+      },
+      "trigger": "root"
+    },
+    {
+      "name": "requestClose",
+      "description": "Emitted when the user attempts to close the dialog by clicking the close button, clicking the overlay, or pressing escape. Calling `event.preventDefault()` will keep the dialog open. Avoid using this unless closing the dialog will result in destructive behavior such as data loss. (CEM event \"sl-request-close\")",
+      "bindings": {
+        "code": {
+          "prop": "onRequestClose"
+        }
+      },
+      "trigger": "root"
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {}
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "extract/pilots/shoelace/custom-elements.json (components/dialog/dialog.js)",
+      "export": "SlDialog"
+    }
+  }
+}

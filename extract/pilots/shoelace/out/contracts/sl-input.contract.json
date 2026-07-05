@@ -1,0 +1,627 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "sl.sl-input",
+  "name": "SlInput",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "PROPOSED contract extracted from extract/pilots/shoelace/custom-elements.json (components/input/input.js) (cem adapter) — API surface only; anatomy, tokens, and design bindings await reconciliation and human review.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "title",
+      "type": "text",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Title"
+        },
+        "code": {
+          "prop": "title"
+        }
+      }
+    },
+    {
+      "name": "name",
+      "description": "The name of the input, submitted as a name/value pair with form data.",
+      "type": "text",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Name"
+        },
+        "code": {
+          "prop": "name"
+        }
+      }
+    },
+    {
+      "name": "value",
+      "description": "The current value of the input, submitted as a name/value pair with form data.",
+      "type": "text",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Value"
+        },
+        "code": {
+          "prop": "value"
+        }
+      }
+    },
+    {
+      "name": "size",
+      "description": "The input's size.",
+      "type": {
+        "enum": [
+          "small",
+          "medium",
+          "large"
+        ]
+      },
+      "default": "medium",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Size",
+          "values": {
+            "small": "Small",
+            "medium": "Medium",
+            "large": "Large"
+          }
+        },
+        "code": {
+          "prop": "size"
+        }
+      }
+    },
+    {
+      "name": "filled",
+      "description": "Draws a filled input.",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Filled"
+        },
+        "code": {
+          "prop": "filled"
+        }
+      }
+    },
+    {
+      "name": "pill",
+      "description": "Draws a pill-style input with rounded edges.",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Pill"
+        },
+        "code": {
+          "prop": "pill"
+        }
+      }
+    },
+    {
+      "name": "label",
+      "description": "The input's label. If you need to display HTML, use the `label` slot instead.",
+      "type": "text",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Label"
+        },
+        "code": {
+          "prop": "label"
+        }
+      }
+    },
+    {
+      "name": "help-text",
+      "description": "The input's help text. If you need to display HTML, use the `help-text` slot instead.",
+      "type": "text",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Help Text"
+        },
+        "code": {
+          "prop": "help-text"
+        }
+      }
+    },
+    {
+      "name": "clearable",
+      "description": "Adds a clear button when the input is not empty.",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Clearable"
+        },
+        "code": {
+          "prop": "clearable"
+        }
+      }
+    },
+    {
+      "name": "disabled",
+      "description": "Disables the input.",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Disabled"
+        },
+        "code": {
+          "prop": "disabled"
+        }
+      }
+    },
+    {
+      "name": "placeholder",
+      "description": "Placeholder text to show as a hint when the input is empty.",
+      "type": "text",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Placeholder"
+        },
+        "code": {
+          "prop": "placeholder"
+        }
+      }
+    },
+    {
+      "name": "readonly",
+      "description": "Makes the input readonly.",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Readonly"
+        },
+        "code": {
+          "prop": "readonly"
+        }
+      }
+    },
+    {
+      "name": "password-toggle",
+      "description": "Adds a button to toggle the password's visibility. Only applies to password types.",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Password Toggle"
+        },
+        "code": {
+          "prop": "password-toggle"
+        }
+      }
+    },
+    {
+      "name": "password-visible",
+      "description": "Determines whether or not the password is currently visible. Only applies to password input types.",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Password Visible"
+        },
+        "code": {
+          "prop": "password-visible"
+        }
+      }
+    },
+    {
+      "name": "no-spin-buttons",
+      "description": "Hides the browser's built-in increment/decrement spin buttons for number inputs.",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "No Spin Buttons"
+        },
+        "code": {
+          "prop": "no-spin-buttons"
+        }
+      }
+    },
+    {
+      "name": "form",
+      "description": "By default, form controls are associated with the nearest containing `<form>` element. This attribute allows you\nto place the form control outside of a form and associate it with the form that has this `id`. The form must be in\nthe same document or shadow root for this to work.",
+      "type": "text",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Form"
+        },
+        "code": {
+          "prop": "form"
+        }
+      }
+    },
+    {
+      "name": "required",
+      "description": "Makes the input a required field.",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Required"
+        },
+        "code": {
+          "prop": "required"
+        }
+      }
+    },
+    {
+      "name": "pattern",
+      "description": "A regular expression pattern to validate input against.",
+      "type": "text",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Pattern"
+        },
+        "code": {
+          "prop": "pattern"
+        }
+      }
+    },
+    {
+      "name": "minlength",
+      "description": "The minimum length of input that will be considered valid.",
+      "type": "number",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Minlength"
+        },
+        "code": {
+          "prop": "minlength"
+        }
+      }
+    },
+    {
+      "name": "maxlength",
+      "description": "The maximum length of input that will be considered valid.",
+      "type": "number",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Maxlength"
+        },
+        "code": {
+          "prop": "maxlength"
+        }
+      }
+    },
+    {
+      "name": "autocapitalize",
+      "description": "Controls whether and how text input is automatically capitalized as it is entered by the user.",
+      "type": {
+        "enum": [
+          "off",
+          "none",
+          "on",
+          "sentences",
+          "words",
+          "characters"
+        ]
+      },
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Autocapitalize",
+          "values": {
+            "off": "Off",
+            "none": "None",
+            "on": "On",
+            "sentences": "Sentences",
+            "words": "Words",
+            "characters": "Characters"
+          }
+        },
+        "code": {
+          "prop": "autocapitalize"
+        }
+      }
+    },
+    {
+      "name": "autocorrect",
+      "description": "Indicates whether the browser's autocorrect feature is on or off.",
+      "type": {
+        "enum": [
+          "off",
+          "on"
+        ]
+      },
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Autocorrect",
+          "values": {
+            "off": "Off",
+            "on": "On"
+          }
+        },
+        "code": {
+          "prop": "autocorrect"
+        }
+      }
+    },
+    {
+      "name": "autocomplete",
+      "description": "Specifies what permission the browser has to provide assistance in filling out form field values. Refer to\n[this page on MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete) for available values.",
+      "type": "text",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Autocomplete"
+        },
+        "code": {
+          "prop": "autocomplete"
+        }
+      }
+    },
+    {
+      "name": "autofocus",
+      "description": "Indicates that the input should receive focus on page load.",
+      "type": "boolean",
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Autofocus"
+        },
+        "code": {
+          "prop": "autofocus"
+        }
+      }
+    },
+    {
+      "name": "enterkeyhint",
+      "description": "Used to customize the label or icon of the Enter key on virtual keyboards.",
+      "type": {
+        "enum": [
+          "enter",
+          "done",
+          "go",
+          "next",
+          "previous",
+          "search",
+          "send"
+        ]
+      },
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Enterkeyhint",
+          "values": {
+            "enter": "Enter",
+            "done": "Done",
+            "go": "Go",
+            "next": "Next",
+            "previous": "Previous",
+            "search": "Search",
+            "send": "Send"
+          }
+        },
+        "code": {
+          "prop": "enterkeyhint"
+        }
+      }
+    },
+    {
+      "name": "spellcheck",
+      "description": "Enables spell checking on the input.",
+      "type": "boolean",
+      "default": true,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Spellcheck"
+        },
+        "code": {
+          "prop": "spellcheck"
+        }
+      }
+    },
+    {
+      "name": "inputmode",
+      "description": "Tells the browser what type of data will be entered by the user, allowing it to display the appropriate virtual\nkeyboard on supportive devices.",
+      "type": {
+        "enum": [
+          "none",
+          "text",
+          "decimal",
+          "numeric",
+          "tel",
+          "search",
+          "email",
+          "url"
+        ]
+      },
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Inputmode",
+          "values": {
+            "none": "None",
+            "text": "Text",
+            "decimal": "Decimal",
+            "numeric": "Numeric",
+            "tel": "Tel",
+            "search": "Search",
+            "email": "Email",
+            "url": "Url"
+          }
+        },
+        "code": {
+          "prop": "inputmode"
+        }
+      }
+    },
+    {
+      "name": "defaultValue",
+      "description": "The default value of the form control. Primarily used for resetting the form control.",
+      "type": "text",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Default Value"
+        },
+        "code": {
+          "prop": "defaultValue"
+        }
+      }
+    },
+    {
+      "name": "helpText",
+      "description": "The input's help text. If you need to display HTML, use the `help-text` slot instead.",
+      "type": "text",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Help Text"
+        },
+        "code": {
+          "prop": "helpText"
+        }
+      }
+    },
+    {
+      "name": "passwordToggle",
+      "description": "Adds a button to toggle the password's visibility. Only applies to password types.",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Password Toggle"
+        },
+        "code": {
+          "prop": "passwordToggle"
+        }
+      }
+    },
+    {
+      "name": "passwordVisible",
+      "description": "Determines whether or not the password is currently visible. Only applies to password input types.",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Password Visible"
+        },
+        "code": {
+          "prop": "passwordVisible"
+        }
+      }
+    },
+    {
+      "name": "noSpinButtons",
+      "description": "Hides the browser's built-in increment/decrement spin buttons for number inputs.",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "No Spin Buttons"
+        },
+        "code": {
+          "prop": "noSpinButtons"
+        }
+      }
+    }
+  ],
+  "events": [
+    {
+      "name": "blur",
+      "description": "Emitted when the control loses focus. (CEM event \"sl-blur\")",
+      "bindings": {
+        "code": {
+          "prop": "onBlur"
+        }
+      },
+      "trigger": "root"
+    },
+    {
+      "name": "change",
+      "description": "Emitted when an alteration to the control's value is committed by the user. (CEM event \"sl-change\")",
+      "bindings": {
+        "code": {
+          "prop": "onChange"
+        }
+      },
+      "trigger": "root"
+    },
+    {
+      "name": "clear",
+      "description": "Emitted when the clear button is activated. (CEM event \"sl-clear\")",
+      "bindings": {
+        "code": {
+          "prop": "onClear"
+        }
+      },
+      "trigger": "root"
+    },
+    {
+      "name": "focus",
+      "description": "Emitted when the control gains focus. (CEM event \"sl-focus\")",
+      "bindings": {
+        "code": {
+          "prop": "onFocus"
+        }
+      },
+      "trigger": "root"
+    },
+    {
+      "name": "input",
+      "description": "Emitted when the control receives input. (CEM event \"sl-input\")",
+      "bindings": {
+        "code": {
+          "prop": "onInput"
+        }
+      },
+      "trigger": "root"
+    },
+    {
+      "name": "invalid",
+      "description": "Emitted when the form control has been checked for validity and its constraints aren't satisfied. (CEM event \"sl-invalid\")",
+      "bindings": {
+        "code": {
+          "prop": "onInvalid"
+        }
+      },
+      "trigger": "root"
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {}
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "extract/pilots/shoelace/custom-elements.json (components/input/input.js)",
+      "export": "SlInput"
+    }
+  }
+}

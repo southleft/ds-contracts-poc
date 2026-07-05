@@ -1,6 +1,6 @@
 {
-  "passed": 28,
-  "total": 28,
+  "passed": 29,
+  "total": 29,
   "results": [
     {
       "id": "refuse-unknown-token-reference",
@@ -109,6 +109,11 @@
     },
     {
       "id": "extract-foreign-library",
+      "claim": "C5-extraction",
+      "pass": true
+    },
+    {
+      "id": "diagnose-foreign-green-red-green",
       "claim": "C5-extraction",
       "pass": true
     },

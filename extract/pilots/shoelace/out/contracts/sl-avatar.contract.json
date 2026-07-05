@@ -1,0 +1,131 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "sl.sl-avatar",
+  "name": "SlAvatar",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "PROPOSED contract extracted from extract/pilots/shoelace/custom-elements.json (components/avatar/avatar.js) (cem adapter) — API surface only; anatomy, tokens, and design bindings await reconciliation and human review.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "image",
+      "description": "The image source to use for the avatar.",
+      "type": "text",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Image"
+        },
+        "code": {
+          "prop": "image"
+        }
+      }
+    },
+    {
+      "name": "label",
+      "description": "A label to use to describe the avatar to assistive devices.",
+      "type": "text",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Label"
+        },
+        "code": {
+          "prop": "label"
+        }
+      }
+    },
+    {
+      "name": "initials",
+      "description": "Initials to use as a fallback when no image is available (1-2 characters max recommended).",
+      "type": "text",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Initials"
+        },
+        "code": {
+          "prop": "initials"
+        }
+      }
+    },
+    {
+      "name": "loading",
+      "description": "Indicates how the browser should load the image.",
+      "type": {
+        "enum": [
+          "eager",
+          "lazy"
+        ]
+      },
+      "default": "eager",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Loading",
+          "values": {
+            "eager": "Eager",
+            "lazy": "Lazy"
+          }
+        },
+        "code": {
+          "prop": "loading"
+        }
+      }
+    },
+    {
+      "name": "shape",
+      "description": "The shape of the avatar.",
+      "type": {
+        "enum": [
+          "circle",
+          "square",
+          "rounded"
+        ]
+      },
+      "default": "circle",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Shape",
+          "values": {
+            "circle": "Circle",
+            "square": "Square",
+            "rounded": "Rounded"
+          }
+        },
+        "code": {
+          "prop": "shape"
+        }
+      }
+    }
+  ],
+  "events": [
+    {
+      "name": "error",
+      "description": "The image could not be loaded. This may because of an invalid URL, a temporary network condition, or some unknown cause. (CEM event \"sl-error\")",
+      "bindings": {
+        "code": {
+          "prop": "onError"
+        }
+      },
+      "trigger": "root"
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {}
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "extract/pilots/shoelace/custom-elements.json (components/avatar/avatar.js)",
+      "export": "SlAvatar"
+    }
+  }
+}

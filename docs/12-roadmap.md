@@ -14,7 +14,7 @@ The contract-as-source-of-truth loop, demonstrated end to end.
 - [x] 264 DTCG tokens compiled to CSS custom properties and design-tool variables (light + dark)
 - [x] Three-way parity differ: every drift classified *ahead / behind / mismatched* with a proposed remedy
 - [x] Promotion loop executed in both directions on live surfaces, with receipts ([docs/06](06-parity-loop.md))
-- [x] 28/28 deterministic machinery evals ([docs/07](07-validation.md))
+- [x] 29/29 deterministic machinery evals ([docs/07](07-validation.md))
 - [x] Governed AI generation measured: 100/100 with the contract catalog vs 69/100 without ([docs/10](10-honest-generation.md))
 - [x] Coverage attributed against a full 93-component industry library ([coverage map](research/astryx-coverage.md))
 
@@ -41,9 +41,9 @@ Connect **pre-existing** design and code libraries — no rewrite, no regenerati
 - [ ] **Binding inference** — propose `figma`↔`code` name/value mappings with per-field confidence *(started: transparent alias rules + abbreviation mapping in `npm run reconcile`; confidence scoring and value-mapping inference still open)*
 - [ ] **Reconciliation UI** — side-by-side proposal merge in the Contract Hub; extraction → contract v1 in minutes per component
 - [ ] **Foreign token import** — contracts reference an org's *existing* DTCG / Style Dictionary tokens, not this repo's
-- [ ] **Public pilot** — run extraction on a real open-source library + community design kit pair; publish the drift report
+- [ ] **Public pilot** — run extraction on a real open-source library + community design kit pair; publish the drift report *(code half executed: Shoelace v2.20.1, 58/58 components → schema-valid proposals, receipts in `extract/pilots/shoelace/`; design-kit half pending)*
 
-**Exit criterion:** the diagnostic loop runs green→red→green on two surfaces this repo did not generate, and a design system team confirms the pilot drift report is true — every finding real, none missed within declared scope.
+**Exit criterion:** the diagnostic loop runs green→red→green on two surfaces this repo did not generate *(✅ eval-proven: `diagnose-foreign-green-red-green` — `npm run diagnose` referees foreign code + a design dump)*, and a design system team confirms the pilot drift report is true — every finding real, none missed within declared scope.
 
 ## Phase 3 — Spec candidacy
 

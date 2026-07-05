@@ -1,0 +1,6 @@
+{
+  "contractsDir": "extract/pilots/shoelace/out/contracts",
+  "codeAdapter": "cem",
+  "designChecked": false,
+  "findings": []
+}

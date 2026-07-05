@@ -1,0 +1,512 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "sl.sl-button",
+  "name": "SlButton",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "PROPOSED contract extracted from extract/pilots/shoelace/custom-elements.json (components/button/button.js) (cem adapter) — API surface only; anatomy, tokens, and design bindings await reconciliation and human review.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "title",
+      "type": "text",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Title"
+        },
+        "code": {
+          "prop": "title"
+        }
+      }
+    },
+    {
+      "name": "variant",
+      "description": "The button's theme variant.",
+      "type": {
+        "enum": [
+          "default",
+          "primary",
+          "success",
+          "neutral",
+          "warning",
+          "danger",
+          "text"
+        ]
+      },
+      "default": "default",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Variant",
+          "values": {
+            "default": "Default",
+            "primary": "Primary",
+            "success": "Success",
+            "neutral": "Neutral",
+            "warning": "Warning",
+            "danger": "Danger",
+            "text": "Text"
+          }
+        },
+        "code": {
+          "prop": "variant"
+        }
+      }
+    },
+    {
+      "name": "size",
+      "description": "The button's size.",
+      "type": {
+        "enum": [
+          "small",
+          "medium",
+          "large"
+        ]
+      },
+      "default": "medium",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Size",
+          "values": {
+            "small": "Small",
+            "medium": "Medium",
+            "large": "Large"
+          }
+        },
+        "code": {
+          "prop": "size"
+        }
+      }
+    },
+    {
+      "name": "caret",
+      "description": "Draws the button with a caret. Used to indicate that the button triggers a dropdown menu or similar behavior.",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Caret"
+        },
+        "code": {
+          "prop": "caret"
+        }
+      }
+    },
+    {
+      "name": "disabled",
+      "description": "Disables the button.",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Disabled"
+        },
+        "code": {
+          "prop": "disabled"
+        }
+      }
+    },
+    {
+      "name": "loading",
+      "description": "Draws the button in a loading state.",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Loading"
+        },
+        "code": {
+          "prop": "loading"
+        }
+      }
+    },
+    {
+      "name": "outline",
+      "description": "Draws an outlined button.",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Outline"
+        },
+        "code": {
+          "prop": "outline"
+        }
+      }
+    },
+    {
+      "name": "pill",
+      "description": "Draws a pill-style button with rounded edges.",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Pill"
+        },
+        "code": {
+          "prop": "pill"
+        }
+      }
+    },
+    {
+      "name": "circle",
+      "description": "Draws a circular icon button. When this attribute is present, the button expects a single `<sl-icon>` in the\ndefault slot.",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Circle"
+        },
+        "code": {
+          "prop": "circle"
+        }
+      }
+    },
+    {
+      "name": "type",
+      "description": "The type of button. Note that the default value is `button` instead of `submit`, which is opposite of how native\n`<button>` elements behave. When the type is `submit`, the button will submit the surrounding form.",
+      "type": {
+        "enum": [
+          "button",
+          "submit",
+          "reset"
+        ]
+      },
+      "default": "button",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Type",
+          "values": {
+            "button": "Button",
+            "submit": "Submit",
+            "reset": "Reset"
+          }
+        },
+        "code": {
+          "prop": "type"
+        }
+      }
+    },
+    {
+      "name": "name",
+      "description": "The name of the button, submitted as a name/value pair with form data, but only when this button is the submitter.\nThis attribute is ignored when `href` is present.",
+      "type": "text",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Name"
+        },
+        "code": {
+          "prop": "name"
+        }
+      }
+    },
+    {
+      "name": "value",
+      "description": "The value of the button, submitted as a pair with the button's name as part of the form data, but only when this\nbutton is the submitter. This attribute is ignored when `href` is present.",
+      "type": "text",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Value"
+        },
+        "code": {
+          "prop": "value"
+        }
+      }
+    },
+    {
+      "name": "href",
+      "description": "When set, the underlying button will be rendered as an `<a>` with this `href` instead of a `<button>`.",
+      "type": "text",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Href"
+        },
+        "code": {
+          "prop": "href"
+        }
+      }
+    },
+    {
+      "name": "target",
+      "description": "Tells the browser where to open the link. Only used when `href` is present.",
+      "type": {
+        "enum": [
+          "_blank",
+          "_parent",
+          "_self",
+          "_top"
+        ]
+      },
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Target",
+          "values": {
+            "_blank": "Blank",
+            "_parent": "Parent",
+            "_self": "Self",
+            "_top": "Top"
+          }
+        },
+        "code": {
+          "prop": "target"
+        }
+      }
+    },
+    {
+      "name": "rel",
+      "description": "When using `href`, this attribute will map to the underlying link's `rel` attribute. Unlike regular links, the\ndefault is `noreferrer noopener` to prevent security exploits. However, if you're using `target` to point to a\nspecific tab/window, this will prevent that from working correctly. You can remove or change the default value by\nsetting the attribute to an empty string or a value of your choice, respectively.",
+      "type": "text",
+      "default": "noreferrer noopener",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Rel"
+        },
+        "code": {
+          "prop": "rel"
+        }
+      }
+    },
+    {
+      "name": "form",
+      "description": "The \"form owner\" to associate the button with. If omitted, the closest containing form will be used instead. The\nvalue of this attribute must be an id of a form in the same document or shadow root as the button.",
+      "type": "text",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Form"
+        },
+        "code": {
+          "prop": "form"
+        }
+      }
+    },
+    {
+      "name": "formaction",
+      "description": "Used to override the form owner's `action` attribute.",
+      "type": "text",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Formaction"
+        },
+        "code": {
+          "prop": "formaction"
+        }
+      }
+    },
+    {
+      "name": "formenctype",
+      "description": "Used to override the form owner's `enctype` attribute.",
+      "type": {
+        "enum": [
+          "application/x-www-form-urlencoded",
+          "multipart/form-data",
+          "text/plain"
+        ]
+      },
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Formenctype",
+          "values": {
+            "application/x-www-form-urlencoded": "Application/X Www Form Urlencoded",
+            "multipart/form-data": "Multipart/Form Data",
+            "text/plain": "Text/Plain"
+          }
+        },
+        "code": {
+          "prop": "formenctype"
+        }
+      }
+    },
+    {
+      "name": "formmethod",
+      "description": "Used to override the form owner's `method` attribute.",
+      "type": {
+        "enum": [
+          "post",
+          "get"
+        ]
+      },
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Formmethod",
+          "values": {
+            "post": "Post",
+            "get": "Get"
+          }
+        },
+        "code": {
+          "prop": "formmethod"
+        }
+      }
+    },
+    {
+      "name": "formnovalidate",
+      "description": "Used to override the form owner's `novalidate` attribute.",
+      "type": "boolean",
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Formnovalidate"
+        },
+        "code": {
+          "prop": "formnovalidate"
+        }
+      }
+    },
+    {
+      "name": "invalid",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Invalid"
+        },
+        "code": {
+          "prop": "invalid"
+        }
+      }
+    },
+    {
+      "name": "formAction",
+      "description": "Used to override the form owner's `action` attribute.",
+      "type": "text",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Form Action"
+        },
+        "code": {
+          "prop": "formAction"
+        }
+      }
+    },
+    {
+      "name": "formEnctype",
+      "description": "Used to override the form owner's `enctype` attribute.",
+      "type": {
+        "enum": [
+          "application/x-www-form-urlencoded",
+          "multipart/form-data",
+          "text/plain"
+        ]
+      },
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Form Enctype",
+          "values": {
+            "application/x-www-form-urlencoded": "Application/X Www Form Urlencoded",
+            "multipart/form-data": "Multipart/Form Data",
+            "text/plain": "Text/Plain"
+          }
+        },
+        "code": {
+          "prop": "formEnctype"
+        }
+      }
+    },
+    {
+      "name": "formMethod",
+      "description": "Used to override the form owner's `method` attribute.",
+      "type": {
+        "enum": [
+          "post",
+          "get"
+        ]
+      },
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Form Method",
+          "values": {
+            "post": "Post",
+            "get": "Get"
+          }
+        },
+        "code": {
+          "prop": "formMethod"
+        }
+      }
+    },
+    {
+      "name": "formNoValidate",
+      "description": "Used to override the form owner's `novalidate` attribute.",
+      "type": "boolean",
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Form No Validate"
+        },
+        "code": {
+          "prop": "formNoValidate"
+        }
+      }
+    }
+  ],
+  "events": [
+    {
+      "name": "blur",
+      "description": "Emitted when the button loses focus. (CEM event \"sl-blur\")",
+      "bindings": {
+        "code": {
+          "prop": "onBlur"
+        }
+      },
+      "trigger": "root"
+    },
+    {
+      "name": "focus",
+      "description": "Emitted when the button gains focus. (CEM event \"sl-focus\")",
+      "bindings": {
+        "code": {
+          "prop": "onFocus"
+        }
+      },
+      "trigger": "root"
+    },
+    {
+      "name": "invalid",
+      "description": "Emitted when the form control has been checked for validity and its constraints aren't satisfied. (CEM event \"sl-invalid\")",
+      "bindings": {
+        "code": {
+          "prop": "onInvalid"
+        }
+      },
+      "trigger": "root"
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {}
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "extract/pilots/shoelace/custom-elements.json (components/button/button.js)",
+      "export": "SlButton"
+    }
+  }
+}

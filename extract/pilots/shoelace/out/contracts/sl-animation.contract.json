@@ -1,0 +1,224 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "sl.sl-animation",
+  "name": "SlAnimation",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "PROPOSED contract extracted from extract/pilots/shoelace/custom-elements.json (components/animation/animation.js) (cem adapter) — API surface only; anatomy, tokens, and design bindings await reconciliation and human review.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "name",
+      "description": "The name of the built-in animation to use. For custom animations, use the `keyframes` prop.",
+      "type": "text",
+      "default": "none",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Name"
+        },
+        "code": {
+          "prop": "name"
+        }
+      }
+    },
+    {
+      "name": "play",
+      "description": "Plays the animation. When omitted, the animation will be paused. This attribute will be automatically removed when\nthe animation finishes or gets canceled.",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Play"
+        },
+        "code": {
+          "prop": "play"
+        }
+      }
+    },
+    {
+      "name": "delay",
+      "description": "The number of milliseconds to delay the start of the animation.",
+      "type": "number",
+      "default": 0,
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Delay"
+        },
+        "code": {
+          "prop": "delay"
+        }
+      }
+    },
+    {
+      "name": "duration",
+      "description": "The number of milliseconds each iteration of the animation takes to complete.",
+      "type": "number",
+      "default": 1000,
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Duration"
+        },
+        "code": {
+          "prop": "duration"
+        }
+      }
+    },
+    {
+      "name": "easing",
+      "description": "The easing function to use for the animation. This can be a Shoelace easing function or a custom easing function\nsuch as `cubic-bezier(0, 1, .76, 1.14)`.",
+      "type": "text",
+      "default": "linear",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Easing"
+        },
+        "code": {
+          "prop": "easing"
+        }
+      }
+    },
+    {
+      "name": "end-delay",
+      "description": "The number of milliseconds to delay after the active period of an animation sequence.",
+      "type": "number",
+      "default": 0,
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "End Delay"
+        },
+        "code": {
+          "prop": "end-delay"
+        }
+      }
+    },
+    {
+      "name": "iteration-start",
+      "description": "The offset at which to start the animation, usually between 0 (start) and 1 (end).",
+      "type": "number",
+      "default": 0,
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Iteration Start"
+        },
+        "code": {
+          "prop": "iteration-start"
+        }
+      }
+    },
+    {
+      "name": "playback-rate",
+      "description": "Sets the animation's playback rate. The default is `1`, which plays the animation at a normal speed. Setting this\nto `2`, for example, will double the animation's speed. A negative value can be used to reverse the animation. This\nvalue can be changed without causing the animation to restart.",
+      "type": "number",
+      "default": 1,
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Playback Rate"
+        },
+        "code": {
+          "prop": "playback-rate"
+        }
+      }
+    },
+    {
+      "name": "endDelay",
+      "description": "The number of milliseconds to delay after the active period of an animation sequence.",
+      "type": "number",
+      "default": 0,
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "End Delay"
+        },
+        "code": {
+          "prop": "endDelay"
+        }
+      }
+    },
+    {
+      "name": "iterationStart",
+      "description": "The offset at which to start the animation, usually between 0 (start) and 1 (end).",
+      "type": "number",
+      "default": 0,
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Iteration Start"
+        },
+        "code": {
+          "prop": "iterationStart"
+        }
+      }
+    },
+    {
+      "name": "playbackRate",
+      "description": "Sets the animation's playback rate. The default is `1`, which plays the animation at a normal speed. Setting this\nto `2`, for example, will double the animation's speed. A negative value can be used to reverse the animation. This\nvalue can be changed without causing the animation to restart.",
+      "type": "number",
+      "default": 1,
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Playback Rate"
+        },
+        "code": {
+          "prop": "playbackRate"
+        }
+      }
+    }
+  ],
+  "events": [
+    {
+      "name": "cancel",
+      "description": "Emitted when the animation is canceled. (CEM event \"sl-cancel\")",
+      "bindings": {
+        "code": {
+          "prop": "onCancel"
+        }
+      },
+      "trigger": "root"
+    },
+    {
+      "name": "finish",
+      "description": "Emitted when the animation finishes. (CEM event \"sl-finish\")",
+      "bindings": {
+        "code": {
+          "prop": "onFinish"
+        }
+      },
+      "trigger": "root"
+    },
+    {
+      "name": "start",
+      "description": "Emitted when the animation starts or restarts. (CEM event \"sl-start\")",
+      "bindings": {
+        "code": {
+          "prop": "onStart"
+        }
+      },
+      "trigger": "root"
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {}
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "extract/pilots/shoelace/custom-elements.json (components/animation/animation.js)",
+      "export": "SlAnimation"
+    }
+  }
+}

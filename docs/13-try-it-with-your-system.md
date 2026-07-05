@@ -7,7 +7,9 @@ What you get today (extraction v0):
 1. **Proposed contracts** for your components — schema-valid, API-surface only
 2. **The disagreement report** — where your code library and your design library disagree with *each other*, before any contract is adopted
 
-What you don't get yet: anatomy/token inference (deliberately — anatomy stays human-owned), and running the three-way differ against un-generated surfaces (the next Phase 2 slice).
+3. **A continuous referee** — `npm run diagnose` checks your real surfaces against the contracts on every run, generating nothing
+
+What you don't get yet: anatomy/token inference (deliberately — anatomy stays human-owned), token-surface checks against foreign token systems, and the reconciliation UI (both on the [roadmap](12-roadmap.md)).
 
 ## 0 · See it work before pointing it at your system
 
@@ -70,9 +72,21 @@ npm run reconcile
 
 Calibration receipt: run against this repo's own (contract-generated, known-aligned) surfaces, reconciliation matches 46/48 components — the two unmatched are the layout primitives that intentionally have no canvas sets — with 102 properties agreeing and the only flags being design text properties bound to React `children`, which a props interface genuinely cannot show. On *your* system, the flags will be real drift: that's the point.
 
-## 4 · From report to adoption
+## 4 · Diagnose — the referee, running continuously
 
-The sequence from here is [docs/11](11-brownfield-adoption.md): humans arbitrate each disagreement (code-is-right / design-is-right / neither), decisions land in the proposed contracts, and you adopt **diagnostic-only** — the contract as referee over your existing libraries, generating nothing. Wiring the three-way differ to extraction-shaped (rather than generated) surfaces is the next slice on the [roadmap](12-roadmap.md).
+Once you've reviewed the proposals (edited or not), the differ can referee your real surfaces against them — generating nothing:
+
+```bash
+npm run diagnose        # contracts vs your code (and your design dump, if configured)
+```
+
+Same classification semantics as the greenfield differ — every finding is `ahead` / `behind` / `mismatch` with a remedy, on the API surface only. Without a design dump, design checks are *skipped and said to be skipped*, never silently passed. Wire it into CI and drift stops accumulating silently — that is the whole "keep your libraries, add a referee" pitch, now literal. The green→red→green loop on non-generated surfaces is eval-proven (`diagnose-foreign-green-red-green`).
+
+Real-library receipt: extraction + diagnose ran against **Shoelace v2.20.1** — 58/58 components, 411 props, 113 events, every proposal schema-valid. Receipts and honesty notes: [`extract/pilots/shoelace/`](../extract/pilots/shoelace/README.md).
+
+## 5 · From report to adoption
+
+The sequence from here is [docs/11](11-brownfield-adoption.md): humans arbitrate each disagreement (code-is-right / design-is-right / neither), decisions land in the proposed contracts, and `npm run diagnose` becomes your CI gate — the contract as referee over your existing libraries, generating nothing. Later, per component and per layer, generation is opt-in ([docs/11 Phase 4](11-brownfield-adoption.md)).
 
 ## Honesty box
 

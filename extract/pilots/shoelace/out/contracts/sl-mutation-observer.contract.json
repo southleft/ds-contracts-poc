@@ -1,0 +1,188 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "sl.sl-mutation-observer",
+  "name": "SlMutationObserver",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "PROPOSED contract extracted from extract/pilots/shoelace/custom-elements.json (components/mutation-observer/mutation-observer.js) (cem adapter) — API surface only; anatomy, tokens, and design bindings await reconciliation and human review.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "attr",
+      "description": "Watches for changes to attributes. To watch only specific attributes, separate them by a space, e.g.\n`attr=\"class id title\"`. To watch all attributes, use `*`.",
+      "type": "text",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Attr"
+        },
+        "code": {
+          "prop": "attr"
+        }
+      }
+    },
+    {
+      "name": "attr-old-value",
+      "description": "Indicates whether or not the attribute's previous value should be recorded when monitoring changes.",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Attr Old Value"
+        },
+        "code": {
+          "prop": "attr-old-value"
+        }
+      }
+    },
+    {
+      "name": "char-data",
+      "description": "Watches for changes to the character data contained within the node.",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Char Data"
+        },
+        "code": {
+          "prop": "char-data"
+        }
+      }
+    },
+    {
+      "name": "char-data-old-value",
+      "description": "Indicates whether or not the previous value of the node's text should be recorded.",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Char Data Old Value"
+        },
+        "code": {
+          "prop": "char-data-old-value"
+        }
+      }
+    },
+    {
+      "name": "child-list",
+      "description": "Watches for the addition or removal of new child nodes.",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Child List"
+        },
+        "code": {
+          "prop": "child-list"
+        }
+      }
+    },
+    {
+      "name": "disabled",
+      "description": "Disables the observer.",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Disabled"
+        },
+        "code": {
+          "prop": "disabled"
+        }
+      }
+    },
+    {
+      "name": "attrOldValue",
+      "description": "Indicates whether or not the attribute's previous value should be recorded when monitoring changes.",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Attr Old Value"
+        },
+        "code": {
+          "prop": "attrOldValue"
+        }
+      }
+    },
+    {
+      "name": "charData",
+      "description": "Watches for changes to the character data contained within the node.",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Char Data"
+        },
+        "code": {
+          "prop": "charData"
+        }
+      }
+    },
+    {
+      "name": "charDataOldValue",
+      "description": "Indicates whether or not the previous value of the node's text should be recorded.",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Char Data Old Value"
+        },
+        "code": {
+          "prop": "charDataOldValue"
+        }
+      }
+    },
+    {
+      "name": "childList",
+      "description": "Watches for the addition or removal of new child nodes.",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Child List"
+        },
+        "code": {
+          "prop": "childList"
+        }
+      }
+    }
+  ],
+  "events": [
+    {
+      "name": "mutation",
+      "description": "Emitted when a mutation occurs. (CEM event \"sl-mutation\")",
+      "bindings": {
+        "code": {
+          "prop": "onMutation"
+        }
+      },
+      "trigger": "root"
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {}
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "extract/pilots/shoelace/custom-elements.json (components/mutation-observer/mutation-observer.js)",
+      "export": "SlMutationObserver"
+    }
+  }
+}

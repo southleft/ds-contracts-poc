@@ -1,0 +1,5828 @@
+[
+  {
+    "name": "SlAlert",
+    "source": "extract/pilots/shoelace/custom-elements.json (components/alert/alert.js)",
+    "adapter": "cem",
+    "props": [
+      {
+        "name": "open",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "description": "Indicates whether or not the alert is open. You can toggle this attribute to show and hide the alert, or you can\nuse the `show()` and `hide()` methods and this attribute will reflect the alert's open state.",
+        "confidence": "declared"
+      },
+      {
+        "name": "closable",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "description": "Enables a close button that allows the user to dismiss the alert.",
+        "confidence": "declared"
+      },
+      {
+        "name": "variant",
+        "optional": true,
+        "kind": "enum",
+        "values": [
+          "primary",
+          "success",
+          "neutral",
+          "warning",
+          "danger"
+        ],
+        "default": "primary",
+        "description": "The alert's theme variant.",
+        "confidence": "declared"
+      },
+      {
+        "name": "duration",
+        "optional": true,
+        "kind": "other",
+        "default": "Infinity",
+        "description": "The length of time, in milliseconds, the alert will show before closing itself. If the user interacts with\nthe alert before it closes (e.g. moves the mouse over it), the timer will restart. Defaults to `Infinity`, meaning\nthe alert will not close on its own.",
+        "confidence": "declared"
+      },
+      {
+        "name": "countdown",
+        "optional": true,
+        "kind": "enum",
+        "values": [
+          "rtl",
+          "ltr"
+        ],
+        "description": "Enables a countdown that indicates the remaining time the alert will be displayed.\nTypically used to indicate the remaining time before a whole app refresh.",
+        "confidence": "declared"
+      },
+      {
+        "name": "dependencies",
+        "optional": true,
+        "kind": "other",
+        "default": "{ 'sl-icon-button': SlIconButton }",
+        "confidence": "declared"
+      },
+      {
+        "name": "base",
+        "optional": true,
+        "kind": "other",
+        "confidence": "declared"
+      },
+      {
+        "name": "countdownElement",
+        "optional": true,
+        "kind": "other",
+        "confidence": "declared"
+      },
+      {
+        "name": "onShow",
+        "kind": "event",
+        "optional": true,
+        "description": "Emitted when the alert opens. (CEM event \"sl-show\")",
+        "confidence": "inferred"
+      },
+      {
+        "name": "onAfterShow",
+        "kind": "event",
+        "optional": true,
+        "description": "Emitted after the alert opens and all animations are complete. (CEM event \"sl-after-show\")",
+        "confidence": "inferred"
+      },
+      {
+        "name": "onHide",
+        "kind": "event",
+        "optional": true,
+        "description": "Emitted when the alert closes. (CEM event \"sl-hide\")",
+        "confidence": "inferred"
+      },
+      {
+        "name": "onAfterHide",
+        "kind": "event",
+        "optional": true,
+        "description": "Emitted after the alert closes and all animations are complete. (CEM event \"sl-after-hide\")",
+        "confidence": "inferred"
+      }
+    ]
+  },
+  {
+    "name": "SlAnimatedImage",
+    "source": "extract/pilots/shoelace/custom-elements.json (components/animated-image/animated-image.js)",
+    "adapter": "cem",
+    "props": [
+      {
+        "name": "src",
+        "optional": true,
+        "kind": "string",
+        "description": "The path to the image to load.",
+        "confidence": "declared"
+      },
+      {
+        "name": "alt",
+        "optional": true,
+        "kind": "string",
+        "description": "A description of the image used by assistive devices.",
+        "confidence": "declared"
+      },
+      {
+        "name": "play",
+        "optional": true,
+        "kind": "boolean",
+        "description": "Plays the animation. When this attribute is remove, the animation will pause.",
+        "confidence": "declared"
+      },
+      {
+        "name": "dependencies",
+        "optional": true,
+        "kind": "other",
+        "default": "{ 'sl-icon': SlIcon }",
+        "confidence": "declared"
+      },
+      {
+        "name": "animatedImage",
+        "optional": true,
+        "kind": "other",
+        "confidence": "declared"
+      },
+      {
+        "name": "frozenFrame",
+        "optional": true,
+        "kind": "string",
+        "confidence": "declared"
+      },
+      {
+        "name": "isLoaded",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "confidence": "declared"
+      },
+      {
+        "name": "onLoad",
+        "kind": "event",
+        "optional": true,
+        "description": "Emitted when the image loads successfully. (CEM event \"sl-load\")",
+        "confidence": "inferred"
+      },
+      {
+        "name": "onError",
+        "kind": "event",
+        "optional": true,
+        "description": "Emitted when the image fails to load. (CEM event \"sl-error\")",
+        "confidence": "inferred"
+      }
+    ]
+  },
+  {
+    "name": "SlAnimation",
+    "source": "extract/pilots/shoelace/custom-elements.json (components/animation/animation.js)",
+    "adapter": "cem",
+    "props": [
+      {
+        "name": "name",
+        "optional": true,
+        "kind": "string",
+        "default": "none",
+        "description": "The name of the built-in animation to use. For custom animations, use the `keyframes` prop.",
+        "confidence": "declared"
+      },
+      {
+        "name": "play",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "description": "Plays the animation. When omitted, the animation will be paused. This attribute will be automatically removed when\nthe animation finishes or gets canceled.",
+        "confidence": "declared"
+      },
+      {
+        "name": "delay",
+        "optional": true,
+        "kind": "number",
+        "default": 0,
+        "description": "The number of milliseconds to delay the start of the animation.",
+        "confidence": "declared"
+      },
+      {
+        "name": "direction",
+        "optional": true,
+        "kind": "other",
+        "default": "normal",
+        "description": "Determines the direction of playback as well as the behavior when reaching the end of an iteration.\n[Learn more](https://developer.mozilla.org/en-US/docs/Web/CSS/animation-direction)",
+        "confidence": "declared"
+      },
+      {
+        "name": "duration",
+        "optional": true,
+        "kind": "number",
+        "default": 1000,
+        "description": "The number of milliseconds each iteration of the animation takes to complete.",
+        "confidence": "declared"
+      },
+      {
+        "name": "easing",
+        "optional": true,
+        "kind": "string",
+        "default": "linear",
+        "description": "The easing function to use for the animation. This can be a Shoelace easing function or a custom easing function\nsuch as `cubic-bezier(0, 1, .76, 1.14)`.",
+        "confidence": "declared"
+      },
+      {
+        "name": "end-delay",
+        "optional": true,
+        "kind": "number",
+        "default": 0,
+        "description": "The number of milliseconds to delay after the active period of an animation sequence.",
+        "confidence": "declared"
+      },
+      {
+        "name": "fill",
+        "optional": true,
+        "kind": "other",
+        "default": "auto",
+        "description": "Sets how the animation applies styles to its target before and after its execution.",
+        "confidence": "declared"
+      },
+      {
+        "name": "iterations",
+        "optional": true,
+        "kind": "other",
+        "default": "Infinity",
+        "description": "The number of iterations to run before the animation completes. Defaults to `Infinity`, which loops.",
+        "confidence": "declared"
+      },
+      {
+        "name": "iteration-start",
+        "optional": true,
+        "kind": "number",
+        "default": 0,
+        "description": "The offset at which to start the animation, usually between 0 (start) and 1 (end).",
+        "confidence": "declared"
+      },
+      {
+        "name": "playback-rate",
+        "optional": true,
+        "kind": "number",
+        "default": 1,
+        "description": "Sets the animation's playback rate. The default is `1`, which plays the animation at a normal speed. Setting this\nto `2`, for example, will double the animation's speed. A negative value can be used to reverse the animation. This\nvalue can be changed without causing the animation to restart.",
+        "confidence": "declared"
+      },
+      {
+        "name": "defaultSlot",
+        "optional": true,
+        "kind": "other",
+        "confidence": "declared"
+      },
+      {
+        "name": "endDelay",
+        "optional": true,
+        "kind": "number",
+        "default": 0,
+        "description": "The number of milliseconds to delay after the active period of an animation sequence.",
+        "confidence": "declared"
+      },
+      {
+        "name": "iterationStart",
+        "optional": true,
+        "kind": "number",
+        "default": 0,
+        "description": "The offset at which to start the animation, usually between 0 (start) and 1 (end).",
+        "confidence": "declared"
+      },
+      {
+        "name": "keyframes",
+        "optional": true,
+        "kind": "other",
+        "description": "The keyframes to use for the animation. If this is set, `name` will be ignored.",
+        "confidence": "declared"
+      },
+      {
+        "name": "playbackRate",
+        "optional": true,
+        "kind": "number",
+        "default": 1,
+        "description": "Sets the animation's playback rate. The default is `1`, which plays the animation at a normal speed. Setting this\nto `2`, for example, will double the animation's speed. A negative value can be used to reverse the animation. This\nvalue can be changed without causing the animation to restart.",
+        "confidence": "declared"
+      },
+      {
+        "name": "currentTime",
+        "optional": true,
+        "kind": "other",
+        "description": "Gets and sets the current animation time.",
+        "confidence": "declared"
+      },
+      {
+        "name": "onCancel",
+        "kind": "event",
+        "optional": true,
+        "description": "Emitted when the animation is canceled. (CEM event \"sl-cancel\")",
+        "confidence": "inferred"
+      },
+      {
+        "name": "onFinish",
+        "kind": "event",
+        "optional": true,
+        "description": "Emitted when the animation finishes. (CEM event \"sl-finish\")",
+        "confidence": "inferred"
+      },
+      {
+        "name": "onStart",
+        "kind": "event",
+        "optional": true,
+        "description": "Emitted when the animation starts or restarts. (CEM event \"sl-start\")",
+        "confidence": "inferred"
+      }
+    ]
+  },
+  {
+    "name": "SlAvatar",
+    "source": "extract/pilots/shoelace/custom-elements.json (components/avatar/avatar.js)",
+    "adapter": "cem",
+    "props": [
+      {
+        "name": "image",
+        "optional": true,
+        "kind": "string",
+        "description": "The image source to use for the avatar.",
+        "confidence": "declared"
+      },
+      {
+        "name": "label",
+        "optional": true,
+        "kind": "string",
+        "description": "A label to use to describe the avatar to assistive devices.",
+        "confidence": "declared"
+      },
+      {
+        "name": "initials",
+        "optional": true,
+        "kind": "string",
+        "description": "Initials to use as a fallback when no image is available (1-2 characters max recommended).",
+        "confidence": "declared"
+      },
+      {
+        "name": "loading",
+        "optional": true,
+        "kind": "enum",
+        "values": [
+          "eager",
+          "lazy"
+        ],
+        "default": "eager",
+        "description": "Indicates how the browser should load the image.",
+        "confidence": "declared"
+      },
+      {
+        "name": "shape",
+        "optional": true,
+        "kind": "enum",
+        "values": [
+          "circle",
+          "square",
+          "rounded"
+        ],
+        "default": "circle",
+        "description": "The shape of the avatar.",
+        "confidence": "declared"
+      },
+      {
+        "name": "dependencies",
+        "optional": true,
+        "kind": "other",
+        "default": "{ 'sl-icon': SlIcon }",
+        "confidence": "declared"
+      },
+      {
+        "name": "onError",
+        "kind": "event",
+        "optional": true,
+        "description": "The image could not be loaded. This may because of an invalid URL, a temporary network condition, or some unknown cause. (CEM event \"sl-error\")",
+        "confidence": "inferred"
+      }
+    ]
+  },
+  {
+    "name": "SlBadge",
+    "source": "extract/pilots/shoelace/custom-elements.json (components/badge/badge.js)",
+    "adapter": "cem",
+    "props": [
+      {
+        "name": "variant",
+        "optional": true,
+        "kind": "enum",
+        "values": [
+          "primary",
+          "success",
+          "neutral",
+          "warning",
+          "danger"
+        ],
+        "default": "primary",
+        "description": "The badge's theme variant.",
+        "confidence": "declared"
+      },
+      {
+        "name": "pill",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "description": "Draws a pill-style badge with rounded edges.",
+        "confidence": "declared"
+      },
+      {
+        "name": "pulse",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "description": "Makes the badge pulsate to draw attention.",
+        "confidence": "declared"
+      }
+    ]
+  },
+  {
+    "name": "SlBreadcrumb",
+    "source": "extract/pilots/shoelace/custom-elements.json (components/breadcrumb/breadcrumb.js)",
+    "adapter": "cem",
+    "props": [
+      {
+        "name": "label",
+        "optional": true,
+        "kind": "string",
+        "description": "The label to use for the breadcrumb control. This will not be shown on the screen, but it will be announced by\nscreen readers and other assistive devices to provide more context for users.",
+        "confidence": "declared"
+      },
+      {
+        "name": "dependencies",
+        "optional": true,
+        "kind": "other",
+        "default": "{ 'sl-icon': SlIcon }",
+        "confidence": "declared"
+      },
+      {
+        "name": "defaultSlot",
+        "optional": true,
+        "kind": "other",
+        "confidence": "declared"
+      },
+      {
+        "name": "separatorSlot",
+        "optional": true,
+        "kind": "other",
+        "confidence": "declared"
+      }
+    ]
+  },
+  {
+    "name": "SlBreadcrumbItem",
+    "source": "extract/pilots/shoelace/custom-elements.json (components/breadcrumb-item/breadcrumb-item.js)",
+    "adapter": "cem",
+    "props": [
+      {
+        "name": "href",
+        "optional": true,
+        "kind": "other",
+        "description": "Optional URL to direct the user to when the breadcrumb item is activated. When set, a link will be rendered\ninternally. When unset, a button will be rendered instead.",
+        "confidence": "declared"
+      },
+      {
+        "name": "target",
+        "optional": true,
+        "kind": "enum",
+        "values": [
+          "_blank",
+          "_parent",
+          "_self",
+          "_top"
+        ],
+        "description": "Tells the browser where to open the link. Only used when `href` is set.",
+        "confidence": "declared"
+      },
+      {
+        "name": "rel",
+        "optional": true,
+        "kind": "string",
+        "default": "noreferrer noopener",
+        "description": "The `rel` attribute to use on the link. Only used when `href` is set.",
+        "confidence": "declared"
+      },
+      {
+        "name": "defaultSlot",
+        "optional": true,
+        "kind": "other",
+        "confidence": "declared"
+      }
+    ]
+  },
+  {
+    "name": "SlButton",
+    "source": "extract/pilots/shoelace/custom-elements.json (components/button/button.js)",
+    "adapter": "cem",
+    "props": [
+      {
+        "name": "title",
+        "optional": true,
+        "kind": "string",
+        "confidence": "declared"
+      },
+      {
+        "name": "variant",
+        "optional": true,
+        "kind": "enum",
+        "values": [
+          "default",
+          "primary",
+          "success",
+          "neutral",
+          "warning",
+          "danger",
+          "text"
+        ],
+        "default": "default",
+        "description": "The button's theme variant.",
+        "confidence": "declared"
+      },
+      {
+        "name": "size",
+        "optional": true,
+        "kind": "enum",
+        "values": [
+          "small",
+          "medium",
+          "large"
+        ],
+        "default": "medium",
+        "description": "The button's size.",
+        "confidence": "declared"
+      },
+      {
+        "name": "caret",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "description": "Draws the button with a caret. Used to indicate that the button triggers a dropdown menu or similar behavior.",
+        "confidence": "declared"
+      },
+      {
+        "name": "disabled",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "description": "Disables the button.",
+        "confidence": "declared"
+      },
+      {
+        "name": "loading",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "description": "Draws the button in a loading state.",
+        "confidence": "declared"
+      },
+      {
+        "name": "outline",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "description": "Draws an outlined button.",
+        "confidence": "declared"
+      },
+      {
+        "name": "pill",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "description": "Draws a pill-style button with rounded edges.",
+        "confidence": "declared"
+      },
+      {
+        "name": "circle",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "description": "Draws a circular icon button. When this attribute is present, the button expects a single `<sl-icon>` in the\ndefault slot.",
+        "confidence": "declared"
+      },
+      {
+        "name": "type",
+        "optional": true,
+        "kind": "enum",
+        "values": [
+          "button",
+          "submit",
+          "reset"
+        ],
+        "default": "button",
+        "description": "The type of button. Note that the default value is `button` instead of `submit`, which is opposite of how native\n`<button>` elements behave. When the type is `submit`, the button will submit the surrounding form.",
+        "confidence": "declared"
+      },
+      {
+        "name": "name",
+        "optional": true,
+        "kind": "string",
+        "description": "The name of the button, submitted as a name/value pair with form data, but only when this button is the submitter.\nThis attribute is ignored when `href` is present.",
+        "confidence": "declared"
+      },
+      {
+        "name": "value",
+        "optional": true,
+        "kind": "string",
+        "description": "The value of the button, submitted as a pair with the button's name as part of the form data, but only when this\nbutton is the submitter. This attribute is ignored when `href` is present.",
+        "confidence": "declared"
+      },
+      {
+        "name": "href",
+        "optional": true,
+        "kind": "string",
+        "description": "When set, the underlying button will be rendered as an `<a>` with this `href` instead of a `<button>`.",
+        "confidence": "declared"
+      },
+      {
+        "name": "target",
+        "optional": true,
+        "kind": "enum",
+        "values": [
+          "_blank",
+          "_parent",
+          "_self",
+          "_top"
+        ],
+        "description": "Tells the browser where to open the link. Only used when `href` is present.",
+        "confidence": "declared"
+      },
+      {
+        "name": "rel",
+        "optional": true,
+        "kind": "string",
+        "default": "noreferrer noopener",
+        "description": "When using `href`, this attribute will map to the underlying link's `rel` attribute. Unlike regular links, the\ndefault is `noreferrer noopener` to prevent security exploits. However, if you're using `target` to point to a\nspecific tab/window, this will prevent that from working correctly. You can remove or change the default value by\nsetting the attribute to an empty string or a value of your choice, respectively.",
+        "confidence": "declared"
+      },
+      {
+        "name": "download",
+        "optional": true,
+        "kind": "other",
+        "description": "Tells the browser to download the linked file as this filename. Only used when `href` is present.",
+        "confidence": "declared"
+      },
+      {
+        "name": "form",
+        "optional": true,
+        "kind": "string",
+        "description": "The \"form owner\" to associate the button with. If omitted, the closest containing form will be used instead. The\nvalue of this attribute must be an id of a form in the same document or shadow root as the button.",
+        "confidence": "declared"
+      },
+      {
+        "name": "formaction",
+        "optional": true,
+        "kind": "string",
+        "description": "Used to override the form owner's `action` attribute.",
+        "confidence": "declared"
+      },
+      {
+        "name": "formenctype",
+        "optional": true,
+        "kind": "enum",
+        "values": [
+          "application/x-www-form-urlencoded",
+          "multipart/form-data",
+          "text/plain"
+        ],
+        "description": "Used to override the form owner's `enctype` attribute.",
+        "confidence": "declared"
+      },
+      {
+        "name": "formmethod",
+        "optional": true,
+        "kind": "enum",
+        "values": [
+          "post",
+          "get"
+        ],
+        "description": "Used to override the form owner's `method` attribute.",
+        "confidence": "declared"
+      },
+      {
+        "name": "formnovalidate",
+        "optional": true,
+        "kind": "boolean",
+        "description": "Used to override the form owner's `novalidate` attribute.",
+        "confidence": "declared"
+      },
+      {
+        "name": "formtarget",
+        "optional": true,
+        "kind": "other",
+        "description": "Used to override the form owner's `target` attribute.",
+        "confidence": "declared"
+      },
+      {
+        "name": "dependencies",
+        "optional": true,
+        "kind": "other",
+        "default": "{ 'sl-icon': SlIcon, 'sl-spinner': SlSpinner }",
+        "confidence": "declared"
+      },
+      {
+        "name": "button",
+        "optional": true,
+        "kind": "other",
+        "confidence": "declared"
+      },
+      {
+        "name": "invalid",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "confidence": "declared"
+      },
+      {
+        "name": "formAction",
+        "optional": true,
+        "kind": "string",
+        "description": "Used to override the form owner's `action` attribute.",
+        "confidence": "declared"
+      },
+      {
+        "name": "formEnctype",
+        "optional": true,
+        "kind": "enum",
+        "values": [
+          "application/x-www-form-urlencoded",
+          "multipart/form-data",
+          "text/plain"
+        ],
+        "description": "Used to override the form owner's `enctype` attribute.",
+        "confidence": "declared"
+      },
+      {
+        "name": "formMethod",
+        "optional": true,
+        "kind": "enum",
+        "values": [
+          "post",
+          "get"
+        ],
+        "description": "Used to override the form owner's `method` attribute.",
+        "confidence": "declared"
+      },
+      {
+        "name": "formNoValidate",
+        "optional": true,
+        "kind": "boolean",
+        "description": "Used to override the form owner's `novalidate` attribute.",
+        "confidence": "declared"
+      },
+      {
+        "name": "formTarget",
+        "optional": true,
+        "kind": "other",
+        "description": "Used to override the form owner's `target` attribute.",
+        "confidence": "declared"
+      },
+      {
+        "name": "validity",
+        "optional": true,
+        "kind": "other",
+        "description": "Gets the validity state object",
+        "confidence": "declared"
+      },
+      {
+        "name": "validationMessage",
+        "optional": true,
+        "kind": "other",
+        "description": "Gets the validation message",
+        "confidence": "declared"
+      },
+      {
+        "name": "onBlur",
+        "kind": "event",
+        "optional": true,
+        "description": "Emitted when the button loses focus. (CEM event \"sl-blur\")",
+        "confidence": "inferred"
+      },
+      {
+        "name": "onFocus",
+        "kind": "event",
+        "optional": true,
+        "description": "Emitted when the button gains focus. (CEM event \"sl-focus\")",
+        "confidence": "inferred"
+      },
+      {
+        "name": "onInvalid",
+        "kind": "event",
+        "optional": true,
+        "description": "Emitted when the form control has been checked for validity and its constraints aren't satisfied. (CEM event \"sl-invalid\")",
+        "confidence": "inferred"
+      }
+    ]
+  },
+  {
+    "name": "SlButtonGroup",
+    "source": "extract/pilots/shoelace/custom-elements.json (components/button-group/button-group.js)",
+    "adapter": "cem",
+    "props": [
+      {
+        "name": "label",
+        "optional": true,
+        "kind": "string",
+        "description": "A label to use for the button group. This won't be displayed on the screen, but it will be announced by assistive\ndevices when interacting with the control and is strongly recommended.",
+        "confidence": "declared"
+      },
+      {
+        "name": "defaultSlot",
+        "optional": true,
+        "kind": "other",
+        "confidence": "declared"
+      },
+      {
+        "name": "disableRole",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "confidence": "declared"
+      }
+    ]
+  },
+  {
+    "name": "SlCard",
+    "source": "extract/pilots/shoelace/custom-elements.json (components/card/card.js)",
+    "adapter": "cem",
+    "props": []
+  },
+  {
+    "name": "SlCarousel",
+    "source": "extract/pilots/shoelace/custom-elements.json (components/carousel/carousel.js)",
+    "adapter": "cem",
+    "props": [
+      {
+        "name": "loop",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "description": "When set, allows the user to navigate the carousel in the same direction indefinitely.",
+        "confidence": "declared"
+      },
+      {
+        "name": "navigation",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "description": "When set, show the carousel's navigation.",
+        "confidence": "declared"
+      },
+      {
+        "name": "pagination",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "description": "When set, show the carousel's pagination indicators.",
+        "confidence": "declared"
+      },
+      {
+        "name": "autoplay",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "description": "When set, the slides will scroll automatically when the user is not interacting with them.",
+        "confidence": "declared"
+      },
+      {
+        "name": "autoplay-interval",
+        "optional": true,
+        "kind": "number",
+        "default": 3000,
+        "description": "Specifies the amount of time, in milliseconds, between each automatic scroll.",
+        "confidence": "declared"
+      },
+      {
+        "name": "slides-per-page",
+        "optional": true,
+        "kind": "number",
+        "default": 1,
+        "description": "Specifies how many slides should be shown at a given time.",
+        "confidence": "declared"
+      },
+      {
+        "name": "slides-per-move",
+        "optional": true,
+        "kind": "number",
+        "default": 1,
+        "description": "Specifies the number of slides the carousel will advance when scrolling, useful when specifying a `slides-per-page`\ngreater than one. It can't be higher than `slides-per-page`.",
+        "confidence": "declared"
+      },
+      {
+        "name": "orientation",
+        "optional": true,
+        "kind": "enum",
+        "values": [
+          "horizontal",
+          "vertical"
+        ],
+        "default": "horizontal",
+        "description": "Specifies the orientation in which the carousel will lay out.",
+        "confidence": "declared"
+      },
+      {
+        "name": "mouse-dragging",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "description": "When set, it is possible to scroll through the slides by dragging them with the mouse.",
+        "confidence": "declared"
+      },
+      {
+        "name": "dependencies",
+        "optional": true,
+        "kind": "other",
+        "default": "{ 'sl-icon': SlIcon }",
+        "confidence": "declared"
+      },
+      {
+        "name": "autoplayInterval",
+        "optional": true,
+        "kind": "number",
+        "default": 3000,
+        "description": "Specifies the amount of time, in milliseconds, between each automatic scroll.",
+        "confidence": "declared"
+      },
+      {
+        "name": "slidesPerPage",
+        "optional": true,
+        "kind": "number",
+        "default": 1,
+        "description": "Specifies how many slides should be shown at a given time.",
+        "confidence": "declared"
+      },
+      {
+        "name": "slidesPerMove",
+        "optional": true,
+        "kind": "number",
+        "default": 1,
+        "description": "Specifies the number of slides the carousel will advance when scrolling, useful when specifying a `slides-per-page`\ngreater than one. It can't be higher than `slides-per-page`.",
+        "confidence": "declared"
+      },
+      {
+        "name": "mouseDragging",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "description": "When set, it is possible to scroll through the slides by dragging them with the mouse.",
+        "confidence": "declared"
+      },
+      {
+        "name": "scrollContainer",
+        "optional": true,
+        "kind": "other",
+        "confidence": "declared"
+      },
+      {
+        "name": "paginationContainer",
+        "optional": true,
+        "kind": "other",
+        "confidence": "declared"
+      },
+      {
+        "name": "activeSlide",
+        "optional": true,
+        "kind": "number",
+        "default": 0,
+        "confidence": "declared"
+      },
+      {
+        "name": "scrolling",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "confidence": "declared"
+      },
+      {
+        "name": "dragging",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "confidence": "declared"
+      },
+      {
+        "name": "onSlideChange",
+        "kind": "event",
+        "optional": true,
+        "description": "Emitted when the active slide changes. (CEM event \"sl-slide-change\")",
+        "confidence": "inferred"
+      }
+    ]
+  },
+  {
+    "name": "SlCarouselItem",
+    "source": "extract/pilots/shoelace/custom-elements.json (components/carousel-item/carousel-item.js)",
+    "adapter": "cem",
+    "props": []
+  },
+  {
+    "name": "SlCheckbox",
+    "source": "extract/pilots/shoelace/custom-elements.json (components/checkbox/checkbox.js)",
+    "adapter": "cem",
+    "props": [
+      {
+        "name": "title",
+        "optional": true,
+        "kind": "string",
+        "confidence": "declared"
+      },
+      {
+        "name": "name",
+        "optional": true,
+        "kind": "string",
+        "description": "The name of the checkbox, submitted as a name/value pair with form data.",
+        "confidence": "declared"
+      },
+      {
+        "name": "value",
+        "optional": true,
+        "kind": "string",
+        "description": "The current value of the checkbox, submitted as a name/value pair with form data.",
+        "confidence": "declared"
+      },
+      {
+        "name": "size",
+        "optional": true,
+        "kind": "enum",
+        "values": [
+          "small",
+          "medium",
+          "large"
+        ],
+        "default": "medium",
+        "description": "The checkbox's size.",
+        "confidence": "declared"
+      },
+      {
+        "name": "disabled",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "description": "Disables the checkbox.",
+        "confidence": "declared"
+      },
+      {
+        "name": "checked",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "description": "Draws the checkbox in a checked state.",
+        "confidence": "declared"
+      },
+      {
+        "name": "indeterminate",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "description": "Draws the checkbox in an indeterminate state. This is usually applied to checkboxes that represents a \"select\nall/none\" behavior when associated checkboxes have a mix of checked and unchecked states.",
+        "confidence": "declared"
+      },
+      {
+        "name": "form",
+        "optional": true,
+        "kind": "string",
+        "description": "By default, form controls are associated with the nearest containing `<form>` element. This attribute allows you\nto place the form control outside of a form and associate it with the form that has this `id`. The form must be in\nthe same document or shadow root for this to work.",
+        "confidence": "declared"
+      },
+      {
+        "name": "required",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "description": "Makes the checkbox a required field.",
+        "confidence": "declared"
+      },
+      {
+        "name": "help-text",
+        "optional": true,
+        "kind": "string",
+        "description": "The checkbox's help text. If you need to display HTML, use the `help-text` slot instead.",
+        "confidence": "declared"
+      },
+      {
+        "name": "dependencies",
+        "optional": true,
+        "kind": "other",
+        "default": "{ 'sl-icon': SlIcon }",
+        "confidence": "declared"
+      },
+      {
+        "name": "input",
+        "optional": true,
+        "kind": "other",
+        "confidence": "declared"
+      },
+      {
+        "name": "defaultChecked",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "description": "The default value of the form control. Primarily used for resetting the form control.",
+        "confidence": "declared"
+      },
+      {
+        "name": "helpText",
+        "optional": true,
+        "kind": "string",
+        "description": "The checkbox's help text. If you need to display HTML, use the `help-text` slot instead.",
+        "confidence": "declared"
+      },
+      {
+        "name": "validity",
+        "optional": true,
+        "kind": "other",
+        "description": "Gets the validity state object",
+        "confidence": "declared"
+      },
+      {
+        "name": "validationMessage",
+        "optional": true,
+        "kind": "other",
+        "description": "Gets the validation message",
+        "confidence": "declared"
+      },
+      {
+        "name": "onBlur",
+        "kind": "event",
+        "optional": true,
+        "description": "Emitted when the checkbox loses focus. (CEM event \"sl-blur\")",
+        "confidence": "inferred"
+      },
+      {
+        "name": "onChange",
+        "kind": "event",
+        "optional": true,
+        "description": "Emitted when the checked state changes. (CEM event \"sl-change\")",
+        "confidence": "inferred"
+      },
+      {
+        "name": "onFocus",
+        "kind": "event",
+        "optional": true,
+        "description": "Emitted when the checkbox gains focus. (CEM event \"sl-focus\")",
+        "confidence": "inferred"
+      },
+      {
+        "name": "onInput",
+        "kind": "event",
+        "optional": true,
+        "description": "Emitted when the checkbox receives input. (CEM event \"sl-input\")",
+        "confidence": "inferred"
+      },
+      {
+        "name": "onInvalid",
+        "kind": "event",
+        "optional": true,
+        "description": "Emitted when the form control has been checked for validity and its constraints aren't satisfied. (CEM event \"sl-invalid\")",
+        "confidence": "inferred"
+      }
+    ]
+  },
+  {
+    "name": "SlColorPicker",
+    "source": "extract/pilots/shoelace/custom-elements.json (components/color-picker/color-picker.js)",
+    "adapter": "cem",
+    "props": [
+      {
+        "name": "value",
+        "optional": true,
+        "kind": "string",
+        "description": "The current value of the color picker. The value's format will vary based the `format` attribute. To get the value\nin a specific format, use the `getFormattedValue()` method. The value is submitted as a name/value pair with form\ndata.",
+        "confidence": "declared"
+      },
+      {
+        "name": "label",
+        "optional": true,
+        "kind": "string",
+        "description": "The color picker's label. This will not be displayed, but it will be announced by assistive devices. If you need to\ndisplay HTML, you can use the `label` slot` instead.",
+        "confidence": "declared"
+      },
+      {
+        "name": "format",
+        "optional": true,
+        "kind": "enum",
+        "values": [
+          "hex",
+          "rgb",
+          "hsl",
+          "hsv"
+        ],
+        "default": "hex",
+        "description": "The format to use. If opacity is enabled, these will translate to HEXA, RGBA, HSLA, and HSVA respectively. The color\npicker will accept user input in any format (including CSS color names) and convert it to the desired format.",
+        "confidence": "declared"
+      },
+      {
+        "name": "inline",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "description": "Renders the color picker inline rather than in a dropdown.",
+        "confidence": "declared"
+      },
+      {
+        "name": "size",
+        "optional": true,
+        "kind": "enum",
+        "values": [
+          "small",
+          "medium",
+          "large"
+        ],
+        "default": "medium",
+        "description": "Determines the size of the color picker's trigger. This has no effect on inline color pickers.",
+        "confidence": "declared"
+      },
+      {
+        "name": "no-format-toggle",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "description": "Removes the button that lets users toggle between format.",
+        "confidence": "declared"
+      },
+      {
+        "name": "name",
+        "optional": true,
+        "kind": "string",
+        "description": "The name of the form control, submitted as a name/value pair with form data.",
+        "confidence": "declared"
+      },
+      {
+        "name": "disabled",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "description": "Disables the color picker.",
+        "confidence": "declared"
+      },
+      {
+        "name": "hoist",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "description": "Enable this option to prevent the panel from being clipped when the component is placed inside a container with\n`overflow: auto|scroll`. Hoisting uses a fixed positioning strategy that works in many, but not all, scenarios.",
+        "confidence": "declared"
+      },
+      {
+        "name": "opacity",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "description": "Shows the opacity slider. Enabling this will cause the formatted value to be HEXA, RGBA, or HSLA.",
+        "confidence": "declared"
+      },
+      {
+        "name": "uppercase",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "description": "By default, values are lowercase. With this attribute, values will be uppercase instead.",
+        "confidence": "declared"
+      },
+      {
+        "name": "swatches",
+        "optional": true,
+        "kind": "other",
+        "description": "One or more predefined color swatches to display as presets in the color picker. Can include any format the color\npicker can parse, including HEX(A), RGB(A), HSL(A), HSV(A), and CSS color names. Each color must be separated by a\nsemicolon (`;`). Alternatively, you can pass an array of color values to this property using JavaScript.",
+        "confidence": "declared"
+      },
+      {
+        "name": "form",
+        "optional": true,
+        "kind": "string",
+        "description": "By default, form controls are associated with the nearest containing `<form>` element. This attribute allows you\nto place the form control outside of a form and associate it with the form that has this `id`. The form must be in\nthe same document or shadow root for this to work.",
+        "confidence": "declared"
+      },
+      {
+        "name": "required",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "description": "Makes the color picker a required field.",
+        "confidence": "declared"
+      },
+      {
+        "name": "dependencies",
+        "optional": true,
+        "kind": "other",
+        "default": "{ 'sl-button-group': SlButtonGroup, 'sl-button': SlButton, 'sl-dropdown': SlDropdown, 'sl-icon': SlIcon, 'sl-input': SlInput, 'sl-visually-hidden': SlVisuallyHidden }",
+        "confidence": "declared"
+      },
+      {
+        "name": "base",
+        "optional": true,
+        "kind": "other",
+        "confidence": "declared"
+      },
+      {
+        "name": "input",
+        "optional": true,
+        "kind": "other",
+        "confidence": "declared"
+      },
+      {
+        "name": "dropdown",
+        "optional": true,
+        "kind": "other",
+        "confidence": "declared"
+      },
+      {
+        "name": "previewButton",
+        "optional": true,
+        "kind": "other",
+        "confidence": "declared"
+      },
+      {
+        "name": "trigger",
+        "optional": true,
+        "kind": "other",
+        "confidence": "declared"
+      },
+      {
+        "name": "defaultValue",
+        "optional": true,
+        "kind": "string",
+        "description": "The default value of the form control. Primarily used for resetting the form control.",
+        "confidence": "declared"
+      },
+      {
+        "name": "noFormatToggle",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "description": "Removes the button that lets users toggle between format.",
+        "confidence": "declared"
+      },
+      {
+        "name": "validity",
+        "optional": true,
+        "kind": "other",
+        "description": "Gets the validity state object",
+        "confidence": "declared"
+      },
+      {
+        "name": "validationMessage",
+        "optional": true,
+        "kind": "other",
+        "description": "Gets the validation message",
+        "confidence": "declared"
+      },
+      {
+        "name": "onBlur",
+        "kind": "event",
+        "optional": true,
+        "description": "Emitted when the color picker loses focus. (CEM event \"sl-blur\")",
+        "confidence": "inferred"
+      },
+      {
+        "name": "onChange",
+        "kind": "event",
+        "optional": true,
+        "description": "Emitted when the color picker's value changes. (CEM event \"sl-change\")",
+        "confidence": "inferred"
+      },
+      {
+        "name": "onFocus",
+        "kind": "event",
+        "optional": true,
+        "description": "Emitted when the color picker receives focus. (CEM event \"sl-focus\")",
+        "confidence": "inferred"
+      },
+      {
+        "name": "onInput",
+        "kind": "event",
+        "optional": true,
+        "description": "Emitted when the color picker receives input. (CEM event \"sl-input\")",
+        "confidence": "inferred"
+      },
+      {
+        "name": "onInvalid",
+        "kind": "event",
+        "optional": true,
+        "description": "Emitted when the form control has been checked for validity and its constraints aren't satisfied. (CEM event \"sl-invalid\")",
+        "confidence": "inferred"
+      }
+    ]
+  },
+  {
+    "name": "SlCopyButton",
+    "source": "extract/pilots/shoelace/custom-elements.json (components/copy-button/copy-button.js)",
+    "adapter": "cem",
+    "props": [
+      {
+        "name": "value",
+        "optional": true,
+        "kind": "string",
+        "description": "The text value to copy.",
+        "confidence": "declared"
+      },
+      {
+        "name": "from",
+        "optional": true,
+        "kind": "string",
+        "description": "An id that references an element in the same document from which data will be copied. If both this and `value` are\npresent, this value will take precedence. By default, the target element's `textContent` will be copied. To copy an\nattribute, append the attribute name wrapped in square brackets, e.g. `from=\"el[value]\"`. To copy a property,\nappend a dot and the property name, e.g. `from=\"el.value\"`.",
+        "confidence": "declared"
+      },
+      {
+        "name": "disabled",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "description": "Disables the copy button.",
+        "confidence": "declared"
+      },
+      {
+        "name": "copy-label",
+        "optional": true,
+        "kind": "string",
+        "description": "A custom label to show in the tooltip.",
+        "confidence": "declared"
+      },
+      {
+        "name": "success-label",
+        "optional": true,
+        "kind": "string",
+        "description": "A custom label to show in the tooltip after copying.",
+        "confidence": "declared"
+      },
+      {
+        "name": "error-label",
+        "optional": true,
+        "kind": "string",
+        "description": "A custom label to show in the tooltip when a copy error occurs.",
+        "confidence": "declared"
+      },
+      {
+        "name": "feedback-duration",
+        "optional": true,
+        "kind": "number",
+        "default": 1000,
+        "description": "The length of time to show feedback before restoring the default trigger.",
+        "confidence": "declared"
+      },
+      {
+        "name": "tooltip-placement",
+        "optional": true,
+        "kind": "enum",
+        "values": [
+          "top",
+          "right",
+          "bottom",
+          "left"
+        ],
+        "default": "top",
+        "description": "The preferred placement of the tooltip.",
+        "confidence": "declared"
+      },
+      {
+        "name": "hoist",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "description": "Enable this option to prevent the tooltip from being clipped when the component is placed inside a container with\n`overflow: auto|hidden|scroll`. Hoisting uses a fixed positioning strategy that works in many, but not all,\nscenarios.",
+        "confidence": "declared"
+      },
+      {
+        "name": "dependencies",
+        "optional": true,
+        "kind": "other",
+        "default": "{ 'sl-icon': SlIcon, 'sl-tooltip': SlTooltip }",
+        "confidence": "declared"
+      },
+      {
+        "name": "copyIcon",
+        "optional": true,
+        "kind": "other",
+        "confidence": "declared"
+      },
+      {
+        "name": "successIcon",
+        "optional": true,
+        "kind": "other",
+        "confidence": "declared"
+      },
+      {
+        "name": "errorIcon",
+        "optional": true,
+        "kind": "other",
+        "confidence": "declared"
+      },
+      {
+        "name": "tooltip",
+        "optional": true,
+        "kind": "other",
+        "confidence": "declared"
+      },
+      {
+        "name": "isCopying",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "confidence": "declared"
+      },
+      {
+        "name": "status",
+        "optional": true,
+        "kind": "enum",
+        "values": [
+          "rest",
+          "success",
+          "error"
+        ],
+        "default": "rest",
+        "confidence": "declared"
+      },
+      {
+        "name": "copyLabel",
+        "optional": true,
+        "kind": "string",
+        "description": "A custom label to show in the tooltip.",
+        "confidence": "declared"
+      },
+      {
+        "name": "successLabel",
+        "optional": true,
+        "kind": "string",
+        "description": "A custom label to show in the tooltip after copying.",
+        "confidence": "declared"
+      },
+      {
+        "name": "errorLabel",
+        "optional": true,
+        "kind": "string",
+        "description": "A custom label to show in the tooltip when a copy error occurs.",
+        "confidence": "declared"
+      },
+      {
+        "name": "feedbackDuration",
+        "optional": true,
+        "kind": "number",
+        "default": 1000,
+        "description": "The length of time to show feedback before restoring the default trigger.",
+        "confidence": "declared"
+      },
+      {
+        "name": "tooltipPlacement",
+        "optional": true,
+        "kind": "enum",
+        "values": [
+          "top",
+          "right",
+          "bottom",
+          "left"
+        ],
+        "default": "top",
+        "description": "The preferred placement of the tooltip.",
+        "confidence": "declared"
+      },
+      {
+        "name": "onCopy",
+        "kind": "event",
+        "optional": true,
+        "description": "Emitted when the data has been copied. (CEM event \"sl-copy\")",
+        "confidence": "inferred"
+      },
+      {
+        "name": "onError",
+        "kind": "event",
+        "optional": true,
+        "description": "Emitted when the data could not be copied. (CEM event \"sl-error\")",
+        "confidence": "inferred"
+      }
+    ]
+  },
+  {
+    "name": "SlDetails",
+    "source": "extract/pilots/shoelace/custom-elements.json (components/details/details.js)",
+    "adapter": "cem",
+    "props": [
+      {
+        "name": "open",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "description": "Indicates whether or not the details is open. You can toggle this attribute to show and hide the details, or you\ncan use the `show()` and `hide()` methods and this attribute will reflect the details' open state.",
+        "confidence": "declared"
+      },
+      {
+        "name": "summary",
+        "optional": true,
+        "kind": "string",
+        "description": "The summary to show in the header. If you need to display HTML, use the `summary` slot instead.",
+        "confidence": "declared"
+      },
+      {
+        "name": "disabled",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "description": "Disables the details so it can't be toggled.",
+        "confidence": "declared"
+      },
+      {
+        "name": "dependencies",
+        "optional": true,
+        "kind": "other",
+        "default": "{ 'sl-icon': SlIcon }",
+        "confidence": "declared"
+      },
+      {
+        "name": "details",
+        "optional": true,
+        "kind": "other",
+        "confidence": "declared"
+      },
+      {
+        "name": "header",
+        "optional": true,
+        "kind": "other",
+        "confidence": "declared"
+      },
+      {
+        "name": "body",
+        "optional": true,
+        "kind": "other",
+        "confidence": "declared"
+      },
+      {
+        "name": "expandIconSlot",
+        "optional": true,
+        "kind": "other",
+        "confidence": "declared"
+      },
+      {
+        "name": "detailsObserver",
+        "optional": true,
+        "kind": "other",
+        "confidence": "declared"
+      },
+      {
+        "name": "onShow",
+        "kind": "event",
+        "optional": true,
+        "description": "Emitted when the details opens. (CEM event \"sl-show\")",
+        "confidence": "inferred"
+      },
+      {
+        "name": "onAfterShow",
+        "kind": "event",
+        "optional": true,
+        "description": "Emitted after the details opens and all animations are complete. (CEM event \"sl-after-show\")",
+        "confidence": "inferred"
+      },
+      {
+        "name": "onHide",
+        "kind": "event",
+        "optional": true,
+        "description": "Emitted when the details closes. (CEM event \"sl-hide\")",
+        "confidence": "inferred"
+      },
+      {
+        "name": "onAfterHide",
+        "kind": "event",
+        "optional": true,
+        "description": "Emitted after the details closes and all animations are complete. (CEM event \"sl-after-hide\")",
+        "confidence": "inferred"
+      }
+    ]
+  },
+  {
+    "name": "SlDialog",
+    "source": "extract/pilots/shoelace/custom-elements.json (components/dialog/dialog.js)",
+    "adapter": "cem",
+    "props": [
+      {
+        "name": "open",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "description": "Indicates whether or not the dialog is open. You can toggle this attribute to show and hide the dialog, or you can\nuse the `show()` and `hide()` methods and this attribute will reflect the dialog's open state.",
+        "confidence": "declared"
+      },
+      {
+        "name": "label",
+        "optional": true,
+        "kind": "string",
+        "description": "The dialog's label as displayed in the header. You should always include a relevant label even when using\n`no-header`, as it is required for proper accessibility. If you need to display HTML, use the `label` slot instead.",
+        "confidence": "declared"
+      },
+      {
+        "name": "no-header",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "description": "Disables the header. This will also remove the default close button, so please ensure you provide an easy,\naccessible way for users to dismiss the dialog.",
+        "confidence": "declared"
+      },
+      {
+        "name": "dependencies",
+        "optional": true,
+        "kind": "other",
+        "default": "{ 'sl-icon-button': SlIconButton }",
+        "confidence": "declared"
+      },
+      {
+        "name": "modal",
+        "optional": true,
+        "kind": "other",
+        "default": "new Modal(this)",
+        "description": "Exposes the internal modal utility that controls focus trapping. To temporarily disable focus trapping and allow third-party modals spawned from an active Shoelace modal, call `modal.activateExternal()` when the third-party modal opens. Upon closing, call `modal.deactivateExternal()` to restore Shoelace's focus trapping.",
+        "confidence": "declared"
+      },
+      {
+        "name": "dialog",
+        "optional": true,
+        "kind": "other",
+        "confidence": "declared"
+      },
+      {
+        "name": "panel",
+        "optional": true,
+        "kind": "other",
+        "confidence": "declared"
+      },
+      {
+        "name": "overlay",
+        "optional": true,
+        "kind": "other",
+        "confidence": "declared"
+      },
+      {
+        "name": "noHeader",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "description": "Disables the header. This will also remove the default close button, so please ensure you provide an easy,\naccessible way for users to dismiss the dialog.",
+        "confidence": "declared"
+      },
+      {
+        "name": "onShow",
+        "kind": "event",
+        "optional": true,
+        "description": "Emitted when the dialog opens. (CEM event \"sl-show\")",
+        "confidence": "inferred"
+      },
+      {
+        "name": "onAfterShow",
+        "kind": "event",
+        "optional": true,
+        "description": "Emitted after the dialog opens and all animations are complete. (CEM event \"sl-after-show\")",
+        "confidence": "inferred"
+      },
+      {
+        "name": "onHide",
+        "kind": "event",
+        "optional": true,
+        "description": "Emitted when the dialog closes. (CEM event \"sl-hide\")",
+        "confidence": "inferred"
+      },
+      {
+        "name": "onAfterHide",
+        "kind": "event",
+        "optional": true,
+        "description": "Emitted after the dialog closes and all animations are complete. (CEM event \"sl-after-hide\")",
+        "confidence": "inferred"
+      },
+      {
+        "name": "onInitialFocus",
+        "kind": "event",
+        "optional": true,
+        "description": "Emitted when the dialog opens and is ready to receive focus. Calling `event.preventDefault()` will prevent focusing and allow you to set it on a different element, such as an input. (CEM event \"sl-initial-focus\")",
+        "confidence": "inferred"
+      },
+      {
+        "name": "onRequestClose",
+        "kind": "event",
+        "optional": true,
+        "description": "Emitted when the user attempts to close the dialog by clicking the close button, clicking the overlay, or pressing escape. Calling `event.preventDefault()` will keep the dialog open. Avoid using this unless closing the dialog will result in destructive behavior such as data loss. (CEM event \"sl-request-close\")",
+        "confidence": "inferred"
+      }
+    ]
+  },
+  {
+    "name": "SlDivider",
+    "source": "extract/pilots/shoelace/custom-elements.json (components/divider/divider.js)",
+    "adapter": "cem",
+    "props": [
+      {
+        "name": "vertical",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "description": "Draws the divider in a vertical orientation.",
+        "confidence": "declared"
+      }
+    ]
+  },
+  {
+    "name": "SlDrawer",
+    "source": "extract/pilots/shoelace/custom-elements.json (components/drawer/drawer.js)",
+    "adapter": "cem",
+    "props": [
+      {
+        "name": "open",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "description": "Indicates whether or not the drawer is open. You can toggle this attribute to show and hide the drawer, or you can\nuse the `show()` and `hide()` methods and this attribute will reflect the drawer's open state.",
+        "confidence": "declared"
+      },
+      {
+        "name": "label",
+        "optional": true,
+        "kind": "string",
+        "description": "The drawer's label as displayed in the header. You should always include a relevant label even when using\n`no-header`, as it is required for proper accessibility. If you need to display HTML, use the `label` slot instead.",
+        "confidence": "declared"
+      },
+      {
+        "name": "placement",
+        "optional": true,
+        "kind": "enum",
+        "values": [
+          "top",
+          "end",
+          "bottom",
+          "start"
+        ],
+        "default": "end",
+        "description": "The direction from which the drawer will open.",
+        "confidence": "declared"
+      },
+      {
+        "name": "contained",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "description": "By default, the drawer slides out of its containing block (usually the viewport). To make the drawer slide out of\nits parent element, set this attribute and add `position: relative` to the parent.",
+        "confidence": "declared"
+      },
+      {
+        "name": "no-header",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "description": "Removes the header. This will also remove the default close button, so please ensure you provide an easy,\naccessible way for users to dismiss the drawer.",
+        "confidence": "declared"
+      },
+      {
+        "name": "dependencies",
+        "optional": true,
+        "kind": "other",
+        "default": "{ 'sl-icon-button': SlIconButton }",
+        "confidence": "declared"
+      },
+      {
+        "name": "modal",
+        "optional": true,
+        "kind": "other",
+        "default": "new Modal(this)",
+        "description": "Exposes the internal modal utility that controls focus trapping. To temporarily disable focus trapping and allow third-party modals spawned from an active Shoelace modal, call `modal.activateExternal()` when the third-party modal opens. Upon closing, call `modal.deactivateExternal()` to restore Shoelace's focus trapping.",
+        "confidence": "declared"
+      },
+      {
+        "name": "drawer",
+        "optional": true,
+        "kind": "other",
+        "confidence": "declared"
+      },
+      {
+        "name": "panel",
+        "optional": true,
+        "kind": "other",
+        "confidence": "declared"
+      },
+      {
+        "name": "overlay",
+        "optional": true,
+        "kind": "other",
+        "confidence": "declared"
+      },
+      {
+        "name": "noHeader",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "description": "Removes the header. This will also remove the default close button, so please ensure you provide an easy,\naccessible way for users to dismiss the drawer.",
+        "confidence": "declared"
+      },
+      {
+        "name": "onShow",
+        "kind": "event",
+        "optional": true,
+        "description": "Emitted when the drawer opens. (CEM event \"sl-show\")",
+        "confidence": "inferred"
+      },
+      {
+        "name": "onAfterShow",
+        "kind": "event",
+        "optional": true,
+        "description": "Emitted after the drawer opens and all animations are complete. (CEM event \"sl-after-show\")",
+        "confidence": "inferred"
+      },
+      {
+        "name": "onHide",
+        "kind": "event",
+        "optional": true,
+        "description": "Emitted when the drawer closes. (CEM event \"sl-hide\")",
+        "confidence": "inferred"
+      },
+      {
+        "name": "onAfterHide",
+        "kind": "event",
+        "optional": true,
+        "description": "Emitted after the drawer closes and all animations are complete. (CEM event \"sl-after-hide\")",
+        "confidence": "inferred"
+      },
+      {
+        "name": "onInitialFocus",
+        "kind": "event",
+        "optional": true,
+        "description": "Emitted when the drawer opens and is ready to receive focus. Calling `event.preventDefault()` will prevent focusing and allow you to set it on a different element, such as an input. (CEM event \"sl-initial-focus\")",
+        "confidence": "inferred"
+      },
+      {
+        "name": "onRequestClose",
+        "kind": "event",
+        "optional": true,
+        "description": "Emitted when the user attempts to close the drawer by clicking the close button, clicking the overlay, or pressing escape. Calling `event.preventDefault()` will keep the drawer open. Avoid using this unless closing the drawer will result in destructive behavior such as data loss. (CEM event \"sl-request-close\")",
+        "confidence": "inferred"
+      }
+    ]
+  },
+  {
+    "name": "SlDropdown",
+    "source": "extract/pilots/shoelace/custom-elements.json (components/dropdown/dropdown.js)",
+    "adapter": "cem",
+    "props": [
+      {
+        "name": "open",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "description": "Indicates whether or not the dropdown is open. You can toggle this attribute to show and hide the dropdown, or you\ncan use the `show()` and `hide()` methods and this attribute will reflect the dropdown's open state.",
+        "confidence": "declared"
+      },
+      {
+        "name": "placement",
+        "optional": true,
+        "kind": "other",
+        "default": "bottom-start",
+        "description": "The preferred placement of the dropdown panel. Note that the actual placement may vary as needed to keep the panel\ninside of the viewport.",
+        "confidence": "declared"
+      },
+      {
+        "name": "disabled",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "description": "Disables the dropdown so the panel will not open.",
+        "confidence": "declared"
+      },
+      {
+        "name": "stay-open-on-select",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "description": "By default, the dropdown is closed when an item is selected. This attribute will keep it open instead. Useful for\ndropdowns that allow for multiple interactions.",
+        "confidence": "declared"
+      },
+      {
+        "name": "distance",
+        "optional": true,
+        "kind": "number",
+        "default": 0,
+        "description": "The distance in pixels from which to offset the panel away from its trigger.",
+        "confidence": "declared"
+      },
+      {
+        "name": "skidding",
+        "optional": true,
+        "kind": "number",
+        "default": 0,
+        "description": "The distance in pixels from which to offset the panel along its trigger.",
+        "confidence": "declared"
+      },
+      {
+        "name": "hoist",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "description": "Enable this option to prevent the panel from being clipped when the component is placed inside a container with\n`overflow: auto|scroll`. Hoisting uses a fixed positioning strategy that works in many, but not all, scenarios.",
+        "confidence": "declared"
+      },
+      {
+        "name": "sync",
+        "optional": true,
+        "kind": "enum",
+        "values": [
+          "width",
+          "height",
+          "both"
+        ],
+        "default": "undefined",
+        "description": "Syncs the popup width or height to that of the trigger element.",
+        "confidence": "declared"
+      },
+      {
+        "name": "dependencies",
+        "optional": true,
+        "kind": "other",
+        "default": "{ 'sl-popup': SlPopup }",
+        "confidence": "declared"
+      },
+      {
+        "name": "popup",
+        "optional": true,
+        "kind": "other",
+        "confidence": "declared"
+      },
+      {
+        "name": "trigger",
+        "optional": true,
+        "kind": "other",
+        "confidence": "declared"
+      },
+      {
+        "name": "panel",
+        "optional": true,
+        "kind": "other",
+        "confidence": "declared"
+      },
+      {
+        "name": "stayOpenOnSelect",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "description": "By default, the dropdown is closed when an item is selected. This attribute will keep it open instead. Useful for\ndropdowns that allow for multiple interactions.",
+        "confidence": "declared"
+      },
+      {
+        "name": "containingElement",
+        "optional": true,
+        "kind": "other",
+        "description": "The dropdown will close when the user interacts outside of this element (e.g. clicking). Useful for composing other\ncomponents that use a dropdown internally.",
+        "confidence": "declared"
+      },
+      {
+        "name": "onShow",
+        "kind": "event",
+        "optional": true,
+        "description": "Emitted when the dropdown opens. (CEM event \"sl-show\")",
+        "confidence": "inferred"
+      },
+      {
+        "name": "onAfterShow",
+        "kind": "event",
+        "optional": true,
+        "description": "Emitted after the dropdown opens and all animations are complete. (CEM event \"sl-after-show\")",
+        "confidence": "inferred"
+      },
+      {
+        "name": "onHide",
+        "kind": "event",
+        "optional": true,
+        "description": "Emitted when the dropdown closes. (CEM event \"sl-hide\")",
+        "confidence": "inferred"
+      },
+      {
+        "name": "onAfterHide",
+        "kind": "event",
+        "optional": true,
+        "description": "Emitted after the dropdown closes and all animations are complete. (CEM event \"sl-after-hide\")",
+        "confidence": "inferred"
+      }
+    ]
+  },
+  {
+    "name": "SlFormatBytes",
+    "source": "extract/pilots/shoelace/custom-elements.json (components/format-bytes/format-bytes.js)",
+    "adapter": "cem",
+    "props": [
+      {
+        "name": "value",
+        "optional": true,
+        "kind": "number",
+        "default": 0,
+        "description": "The number to format in bytes.",
+        "confidence": "declared"
+      },
+      {
+        "name": "unit",
+        "optional": true,
+        "kind": "enum",
+        "values": [
+          "byte",
+          "bit"
+        ],
+        "default": "byte",
+        "description": "The type of unit to display.",
+        "confidence": "declared"
+      },
+      {
+        "name": "display",
+        "optional": true,
+        "kind": "enum",
+        "values": [
+          "long",
+          "short",
+          "narrow"
+        ],
+        "default": "short",
+        "description": "Determines how to display the result, e.g. \"100 bytes\", \"100 b\", or \"100b\".",
+        "confidence": "declared"
+      }
+    ]
+  },
+  {
+    "name": "SlFormatDate",
+    "source": "extract/pilots/shoelace/custom-elements.json (components/format-date/format-date.js)",
+    "adapter": "cem",
+    "props": [
+      {
+        "name": "date",
+        "optional": true,
+        "kind": "other",
+        "default": "new Date()",
+        "description": "The date/time to format. If not set, the current date and time will be used. When passing a string, it's strongly\nrecommended to use the ISO 8601 format to ensure timezones are handled correctly. To convert a date to this format\nin JavaScript, use [`date.toISOString()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toISOString).",
+        "confidence": "declared"
+      },
+      {
+        "name": "weekday",
+        "optional": true,
+        "kind": "enum",
+        "values": [
+          "narrow",
+          "short",
+          "long"
+        ],
+        "description": "The format for displaying the weekday.",
+        "confidence": "declared"
+      },
+      {
+        "name": "era",
+        "optional": true,
+        "kind": "enum",
+        "values": [
+          "narrow",
+          "short",
+          "long"
+        ],
+        "description": "The format for displaying the era.",
+        "confidence": "declared"
+      },
+      {
+        "name": "year",
+        "optional": true,
+        "kind": "enum",
+        "values": [
+          "numeric",
+          "2-digit"
+        ],
+        "description": "The format for displaying the year.",
+        "confidence": "declared"
+      },
+      {
+        "name": "month",
+        "optional": true,
+        "kind": "enum",
+        "values": [
+          "numeric",
+          "2-digit",
+          "narrow",
+          "short",
+          "long"
+        ],
+        "description": "The format for displaying the month.",
+        "confidence": "declared"
+      },
+      {
+        "name": "day",
+        "optional": true,
+        "kind": "enum",
+        "values": [
+          "numeric",
+          "2-digit"
+        ],
+        "description": "The format for displaying the day.",
+        "confidence": "declared"
+      },
+      {
+        "name": "hour",
+        "optional": true,
+        "kind": "enum",
+        "values": [
+          "numeric",
+          "2-digit"
+        ],
+        "description": "The format for displaying the hour.",
+        "confidence": "declared"
+      },
+      {
+        "name": "minute",
+        "optional": true,
+        "kind": "enum",
+        "values": [
+          "numeric",
+          "2-digit"
+        ],
+        "description": "The format for displaying the minute.",
+        "confidence": "declared"
+      },
+      {
+        "name": "second",
+        "optional": true,
+        "kind": "enum",
+        "values": [
+          "numeric",
+          "2-digit"
+        ],
+        "description": "The format for displaying the second.",
+        "confidence": "declared"
+      },
+      {
+        "name": "time-zone-name",
+        "optional": true,
+        "kind": "enum",
+        "values": [
+          "short",
+          "long"
+        ],
+        "description": "The format for displaying the time.",
+        "confidence": "declared"
+      },
+      {
+        "name": "time-zone",
+        "optional": true,
+        "kind": "string",
+        "description": "The time zone to express the time in.",
+        "confidence": "declared"
+      },
+      {
+        "name": "hour-format",
+        "optional": true,
+        "kind": "enum",
+        "values": [
+          "auto",
+          "12",
+          "24"
+        ],
+        "default": "auto",
+        "description": "The format for displaying the hour.",
+        "confidence": "declared"
+      },
+      {
+        "name": "timeZoneName",
+        "optional": true,
+        "kind": "enum",
+        "values": [
+          "short",
+          "long"
+        ],
+        "description": "The format for displaying the time.",
+        "confidence": "declared"
+      },
+      {
+        "name": "timeZone",
+        "optional": true,
+        "kind": "string",
+        "description": "The time zone to express the time in.",
+        "confidence": "declared"
+      },
+      {
+        "name": "hourFormat",
+        "optional": true,
+        "kind": "enum",
+        "values": [
+          "auto",
+          "12",
+          "24"
+        ],
+        "default": "auto",
+        "description": "The format for displaying the hour.",
+        "confidence": "declared"
+      }
+    ]
+  },
+  {
+    "name": "SlFormatNumber",
+    "source": "extract/pilots/shoelace/custom-elements.json (components/format-number/format-number.js)",
+    "adapter": "cem",
+    "props": [
+      {
+        "name": "value",
+        "optional": true,
+        "kind": "number",
+        "default": 0,
+        "description": "The number to format.",
+        "confidence": "declared"
+      },
+      {
+        "name": "type",
+        "optional": true,
+        "kind": "enum",
+        "values": [
+          "currency",
+          "decimal",
+          "percent"
+        ],
+        "default": "decimal",
+        "description": "The formatting style to use.",
+        "confidence": "declared"
+      },
+      {
+        "name": "no-grouping",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "description": "Turns off grouping separators.",
+        "confidence": "declared"
+      },
+      {
+        "name": "currency",
+        "optional": true,
+        "kind": "string",
+        "default": "USD",
+        "description": "The [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) currency code to use when formatting.",
+        "confidence": "declared"
+      },
+      {
+        "name": "currency-display",
+        "optional": true,
+        "kind": "enum",
+        "values": [
+          "symbol",
+          "narrowSymbol",
+          "code",
+          "name"
+        ],
+        "default": "symbol",
+        "description": "How to display the currency.",
+        "confidence": "declared"
+      },
+      {
+        "name": "minimum-integer-digits",
+        "optional": true,
+        "kind": "number",
+        "description": "The minimum number of integer digits to use. Possible values are 1-21.",
+        "confidence": "declared"
+      },
+      {
+        "name": "minimum-fraction-digits",
+        "optional": true,
+        "kind": "number",
+        "description": "The minimum number of fraction digits to use. Possible values are 0-20.",
+        "confidence": "declared"
+      },
+      {
+        "name": "maximum-fraction-digits",
+        "optional": true,
+        "kind": "number",
+        "description": "The maximum number of fraction digits to use. Possible values are 0-0.",
+        "confidence": "declared"
+      },
+      {
+        "name": "minimum-significant-digits",
+        "optional": true,
+        "kind": "number",
+        "description": "The minimum number of significant digits to use. Possible values are 1-21.",
+        "confidence": "declared"
+      },
+      {
+        "name": "maximum-significant-digits",
+        "optional": true,
+        "kind": "number",
+        "description": "The maximum number of significant digits to use,. Possible values are 1-21.",
+        "confidence": "declared"
+      },
+      {
+        "name": "noGrouping",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "description": "Turns off grouping separators.",
+        "confidence": "declared"
+      },
+      {
+        "name": "currencyDisplay",
+        "optional": true,
+        "kind": "enum",
+        "values": [
+          "symbol",
+          "narrowSymbol",
+          "code",
+          "name"
+        ],
+        "default": "symbol",
+        "description": "How to display the currency.",
+        "confidence": "declared"
+      },
+      {
+        "name": "minimumIntegerDigits",
+        "optional": true,
+        "kind": "number",
+        "description": "The minimum number of integer digits to use. Possible values are 1-21.",
+        "confidence": "declared"
+      },
+      {
+        "name": "minimumFractionDigits",
+        "optional": true,
+        "kind": "number",
+        "description": "The minimum number of fraction digits to use. Possible values are 0-20.",
+        "confidence": "declared"
+      },
+      {
+        "name": "maximumFractionDigits",
+        "optional": true,
+        "kind": "number",
+        "description": "The maximum number of fraction digits to use. Possible values are 0-0.",
+        "confidence": "declared"
+      },
+      {
+        "name": "minimumSignificantDigits",
+        "optional": true,
+        "kind": "number",
+        "description": "The minimum number of significant digits to use. Possible values are 1-21.",
+        "confidence": "declared"
+      },
+      {
+        "name": "maximumSignificantDigits",
+        "optional": true,
+        "kind": "number",
+        "description": "The maximum number of significant digits to use,. Possible values are 1-21.",
+        "confidence": "declared"
+      }
+    ]
+  },
+  {
+    "name": "SlIcon",
+    "source": "extract/pilots/shoelace/custom-elements.json (components/icon/icon.js)",
+    "adapter": "cem",
+    "props": [
+      {
+        "name": "name",
+        "optional": true,
+        "kind": "other",
+        "description": "The name of the icon to draw. Available names depend on the icon library being used.",
+        "confidence": "declared"
+      },
+      {
+        "name": "src",
+        "optional": true,
+        "kind": "other",
+        "description": "An external URL of an SVG file. Be sure you trust the content you are including, as it will be executed as code and\ncan result in XSS attacks.",
+        "confidence": "declared"
+      },
+      {
+        "name": "label",
+        "optional": true,
+        "kind": "string",
+        "description": "An alternate description to use for assistive devices. If omitted, the icon will be considered presentational and\nignored by assistive devices.",
+        "confidence": "declared"
+      },
+      {
+        "name": "library",
+        "optional": true,
+        "kind": "string",
+        "default": "default",
+        "description": "The name of a registered custom icon library.",
+        "confidence": "declared"
+      },
+      {
+        "name": "onLoad",
+        "kind": "event",
+        "optional": true,
+        "description": "Emitted when the icon has loaded. When using `spriteSheet: true` this will not emit. (CEM event \"sl-load\")",
+        "confidence": "inferred"
+      },
+      {
+        "name": "onError",
+        "kind": "event",
+        "optional": true,
+        "description": "Emitted when the icon fails to load due to an error. When using `spriteSheet: true` this will not emit. (CEM event \"sl-error\")",
+        "confidence": "inferred"
+      }
+    ]
+  },
+  {
+    "name": "SlIconButton",
+    "source": "extract/pilots/shoelace/custom-elements.json (components/icon-button/icon-button.js)",
+    "adapter": "cem",
+    "props": [
+      {
+        "name": "name",
+        "optional": true,
+        "kind": "other",
+        "description": "The name of the icon to draw. Available names depend on the icon library being used.",
+        "confidence": "declared"
+      },
+      {
+        "name": "library",
+        "optional": true,
+        "kind": "other",
+        "description": "The name of a registered custom icon library.",
+        "confidence": "declared"
+      },
+      {
+        "name": "src",
+        "optional": true,
+        "kind": "other",
+        "description": "An external URL of an SVG file. Be sure you trust the content you are including, as it will be executed as code and\ncan result in XSS attacks.",
+        "confidence": "declared"
+      },
+      {
+        "name": "href",
+        "optional": true,
+        "kind": "other",
+        "description": "When set, the underlying button will be rendered as an `<a>` with this `href` instead of a `<button>`.",
+        "confidence": "declared"
+      },
+      {
+        "name": "target",
+        "optional": true,
+        "kind": "enum",
+        "values": [
+          "_blank",
+          "_parent",
+          "_self",
+          "_top"
+        ],
+        "description": "Tells the browser where to open the link. Only used when `href` is set.",
+        "confidence": "declared"
+      },
+      {
+        "name": "download",
+        "optional": true,
+        "kind": "other",
+        "description": "Tells the browser to download the linked file as this filename. Only used when `href` is set.",
+        "confidence": "declared"
+      },
+      {
+        "name": "label",
+        "optional": true,
+        "kind": "string",
+        "description": "A description that gets read by assistive devices. For optimal accessibility, you should always include a label\nthat describes what the icon button does.",
+        "confidence": "declared"
+      },
+      {
+        "name": "disabled",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "description": "Disables the button.",
+        "confidence": "declared"
+      },
+      {
+        "name": "dependencies",
+        "optional": true,
+        "kind": "other",
+        "default": "{ 'sl-icon': SlIcon }",
+        "confidence": "declared"
+      },
+      {
+        "name": "button",
+        "optional": true,
+        "kind": "other",
+        "confidence": "declared"
+      },
+      {
+        "name": "onBlur",
+        "kind": "event",
+        "optional": true,
+        "description": "Emitted when the icon button loses focus. (CEM event \"sl-blur\")",
+        "confidence": "inferred"
+      },
+      {
+        "name": "onFocus",
+        "kind": "event",
+        "optional": true,
+        "description": "Emitted when the icon button gains focus. (CEM event \"sl-focus\")",
+        "confidence": "inferred"
+      }
+    ]
+  },
+  {
+    "name": "SlImageComparer",
+    "source": "extract/pilots/shoelace/custom-elements.json (components/image-comparer/image-comparer.js)",
+    "adapter": "cem",
+    "props": [
+      {
+        "name": "position",
+        "optional": true,
+        "kind": "number",
+        "default": 50,
+        "description": "The position of the divider as a percentage.",
+        "confidence": "declared"
+      },
+      {
+        "name": "scopedElement",
+        "optional": true,
+        "kind": "other",
+        "default": "{ 'sl-icon': SlIcon }",
+        "confidence": "declared"
+      },
+      {
+        "name": "base",
+        "optional": true,
+        "kind": "other",
+        "confidence": "declared"
+      },
+      {
+        "name": "handle",
+        "optional": true,
+        "kind": "other",
+        "confidence": "declared"
+      },
+      {
+        "name": "onChange",
+        "kind": "event",
+        "optional": true,
+        "description": "Emitted when the position changes. (CEM event \"sl-change\")",
+        "confidence": "inferred"
+      }
+    ]
+  },
+  {
+    "name": "SlInclude",
+    "source": "extract/pilots/shoelace/custom-elements.json (components/include/include.js)",
+    "adapter": "cem",
+    "props": [
+      {
+        "name": "src",
+        "optional": true,
+        "kind": "string",
+        "description": "The location of the HTML file to include. Be sure you trust the content you are including as it will be executed as\ncode and can result in XSS attacks.",
+        "confidence": "declared"
+      },
+      {
+        "name": "mode",
+        "optional": true,
+        "kind": "enum",
+        "values": [
+          "cors",
+          "no-cors",
+          "same-origin"
+        ],
+        "default": "cors",
+        "description": "The fetch mode to use.",
+        "confidence": "declared"
+      },
+      {
+        "name": "allow-scripts",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "description": "Allows included scripts to be executed. Be sure you trust the content you are including as it will be executed as\ncode and can result in XSS attacks.",
+        "confidence": "declared"
+      },
+      {
+        "name": "allowScripts",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "description": "Allows included scripts to be executed. Be sure you trust the content you are including as it will be executed as\ncode and can result in XSS attacks.",
+        "confidence": "declared"
+      },
+      {
+        "name": "onLoad",
+        "kind": "event",
+        "optional": true,
+        "description": "Emitted when the included file is loaded. (CEM event \"sl-load\")",
+        "confidence": "inferred"
+      },
+      {
+        "name": "onError",
+        "kind": "event",
+        "optional": true,
+        "description": "Emitted when the included file fails to load due to an error. (CEM event \"sl-error\")",
+        "confidence": "inferred"
+      }
+    ]
+  },
+  {
+    "name": "SlInput",
+    "source": "extract/pilots/shoelace/custom-elements.json (components/input/input.js)",
+    "adapter": "cem",
+    "props": [
+      {
+        "name": "title",
+        "optional": true,
+        "kind": "string",
+        "confidence": "declared"
+      },
+      {
+        "name": "type",
+        "optional": true,
+        "kind": "other",
+        "default": "text",
+        "description": "The type of input. Works the same as a native `<input>` element, but only a subset of types are supported. Defaults\nto `text`.",
+        "confidence": "declared"
+      },
+      {
+        "name": "name",
+        "optional": true,
+        "kind": "string",
+        "description": "The name of the input, submitted as a name/value pair with form data.",
+        "confidence": "declared"
+      },
+      {
+        "name": "value",
+        "optional": true,
+        "kind": "string",
+        "description": "The current value of the input, submitted as a name/value pair with form data.",
+        "confidence": "declared"
+      },
+      {
+        "name": "size",
+        "optional": true,
+        "kind": "enum",
+        "values": [
+          "small",
+          "medium",
+          "large"
+        ],
+        "default": "medium",
+        "description": "The input's size.",
+        "confidence": "declared"
+      },
+      {
+        "name": "filled",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "description": "Draws a filled input.",
+        "confidence": "declared"
+      },
+      {
+        "name": "pill",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "description": "Draws a pill-style input with rounded edges.",
+        "confidence": "declared"
+      },
+      {
+        "name": "label",
+        "optional": true,
+        "kind": "string",
+        "description": "The input's label. If you need to display HTML, use the `label` slot instead.",
+        "confidence": "declared"
+      },
+      {
+        "name": "help-text",
+        "optional": true,
+        "kind": "string",
+        "description": "The input's help text. If you need to display HTML, use the `help-text` slot instead.",
+        "confidence": "declared"
+      },
+      {
+        "name": "clearable",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "description": "Adds a clear button when the input is not empty.",
+        "confidence": "declared"
+      },
+      {
+        "name": "disabled",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "description": "Disables the input.",
+        "confidence": "declared"
+      },
+      {
+        "name": "placeholder",
+        "optional": true,
+        "kind": "string",
+        "description": "Placeholder text to show as a hint when the input is empty.",
+        "confidence": "declared"
+      },
+      {
+        "name": "readonly",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "description": "Makes the input readonly.",
+        "confidence": "declared"
+      },
+      {
+        "name": "password-toggle",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "description": "Adds a button to toggle the password's visibility. Only applies to password types.",
+        "confidence": "declared"
+      },
+      {
+        "name": "password-visible",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "description": "Determines whether or not the password is currently visible. Only applies to password input types.",
+        "confidence": "declared"
+      },
+      {
+        "name": "no-spin-buttons",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "description": "Hides the browser's built-in increment/decrement spin buttons for number inputs.",
+        "confidence": "declared"
+      },
+      {
+        "name": "form",
+        "optional": true,
+        "kind": "string",
+        "description": "By default, form controls are associated with the nearest containing `<form>` element. This attribute allows you\nto place the form control outside of a form and associate it with the form that has this `id`. The form must be in\nthe same document or shadow root for this to work.",
+        "confidence": "declared"
+      },
+      {
+        "name": "required",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "description": "Makes the input a required field.",
+        "confidence": "declared"
+      },
+      {
+        "name": "pattern",
+        "optional": true,
+        "kind": "string",
+        "description": "A regular expression pattern to validate input against.",
+        "confidence": "declared"
+      },
+      {
+        "name": "minlength",
+        "optional": true,
+        "kind": "number",
+        "description": "The minimum length of input that will be considered valid.",
+        "confidence": "declared"
+      },
+      {
+        "name": "maxlength",
+        "optional": true,
+        "kind": "number",
+        "description": "The maximum length of input that will be considered valid.",
+        "confidence": "declared"
+      },
+      {
+        "name": "min",
+        "optional": true,
+        "kind": "other",
+        "description": "The input's minimum value. Only applies to date and number input types.",
+        "confidence": "declared"
+      },
+      {
+        "name": "max",
+        "optional": true,
+        "kind": "other",
+        "description": "The input's maximum value. Only applies to date and number input types.",
+        "confidence": "declared"
+      },
+      {
+        "name": "step",
+        "optional": true,
+        "kind": "other",
+        "description": "Specifies the granularity that the value must adhere to, or the special value `any` which means no stepping is\nimplied, allowing any numeric value. Only applies to date and number input types.",
+        "confidence": "declared"
+      },
+      {
+        "name": "autocapitalize",
+        "optional": true,
+        "kind": "enum",
+        "values": [
+          "off",
+          "none",
+          "on",
+          "sentences",
+          "words",
+          "characters"
+        ],
+        "description": "Controls whether and how text input is automatically capitalized as it is entered by the user.",
+        "confidence": "declared"
+      },
+      {
+        "name": "autocorrect",
+        "optional": true,
+        "kind": "enum",
+        "values": [
+          "off",
+          "on"
+        ],
+        "description": "Indicates whether the browser's autocorrect feature is on or off.",
+        "confidence": "declared"
+      },
+      {
+        "name": "autocomplete",
+        "optional": true,
+        "kind": "string",
+        "description": "Specifies what permission the browser has to provide assistance in filling out form field values. Refer to\n[this page on MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete) for available values.",
+        "confidence": "declared"
+      },
+      {
+        "name": "autofocus",
+        "optional": true,
+        "kind": "boolean",
+        "description": "Indicates that the input should receive focus on page load.",
+        "confidence": "declared"
+      },
+      {
+        "name": "enterkeyhint",
+        "optional": true,
+        "kind": "enum",
+        "values": [
+          "enter",
+          "done",
+          "go",
+          "next",
+          "previous",
+          "search",
+          "send"
+        ],
+        "description": "Used to customize the label or icon of the Enter key on virtual keyboards.",
+        "confidence": "declared"
+      },
+      {
+        "name": "spellcheck",
+        "optional": true,
+        "kind": "boolean",
+        "default": true,
+        "description": "Enables spell checking on the input.",
+        "confidence": "declared"
+      },
+      {
+        "name": "inputmode",
+        "optional": true,
+        "kind": "enum",
+        "values": [
+          "none",
+          "text",
+          "decimal",
+          "numeric",
+          "tel",
+          "search",
+          "email",
+          "url"
+        ],
+        "description": "Tells the browser what type of data will be entered by the user, allowing it to display the appropriate virtual\nkeyboard on supportive devices.",
+        "confidence": "declared"
+      },
+      {
+        "name": "dependencies",
+        "optional": true,
+        "kind": "other",
+        "default": "{ 'sl-icon': SlIcon }",
+        "confidence": "declared"
+      },
+      {
+        "name": "input",
+        "optional": true,
+        "kind": "other",
+        "confidence": "declared"
+      },
+      {
+        "name": "defaultValue",
+        "optional": true,
+        "kind": "string",
+        "description": "The default value of the form control. Primarily used for resetting the form control.",
+        "confidence": "declared"
+      },
+      {
+        "name": "helpText",
+        "optional": true,
+        "kind": "string",
+        "description": "The input's help text. If you need to display HTML, use the `help-text` slot instead.",
+        "confidence": "declared"
+      },
+      {
+        "name": "passwordToggle",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "description": "Adds a button to toggle the password's visibility. Only applies to password types.",
+        "confidence": "declared"
+      },
+      {
+        "name": "passwordVisible",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "description": "Determines whether or not the password is currently visible. Only applies to password input types.",
+        "confidence": "declared"
+      },
+      {
+        "name": "noSpinButtons",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "description": "Hides the browser's built-in increment/decrement spin buttons for number inputs.",
+        "confidence": "declared"
+      },
+      {
+        "name": "valueAsDate",
+        "optional": true,
+        "kind": "other",
+        "description": "Gets or sets the current value as a `Date` object. Returns `null` if the value can't be converted. This will use the native `<input type=\"{{type}}\">` implementation and may result in an error.",
+        "confidence": "declared"
+      },
+      {
+        "name": "valueAsNumber",
+        "optional": true,
+        "kind": "other",
+        "description": "Gets or sets the current value as a number. Returns `NaN` if the value can't be converted.",
+        "confidence": "declared"
+      },
+      {
+        "name": "validity",
+        "optional": true,
+        "kind": "other",
+        "description": "Gets the validity state object",
+        "confidence": "declared"
+      },
+      {
+        "name": "validationMessage",
+        "optional": true,
+        "kind": "other",
+        "description": "Gets the validation message",
+        "confidence": "declared"
+      },
+      {
+        "name": "onBlur",
+        "kind": "event",
+        "optional": true,
+        "description": "Emitted when the control loses focus. (CEM event \"sl-blur\")",
+        "confidence": "inferred"
+      },
+      {
+        "name": "onChange",
+        "kind": "event",
+        "optional": true,
+        "description": "Emitted when an alteration to the control's value is committed by the user. (CEM event \"sl-change\")",
+        "confidence": "inferred"
+      },
+      {
+        "name": "onClear",
+        "kind": "event",
+        "optional": true,
+        "description": "Emitted when the clear button is activated. (CEM event \"sl-clear\")",
+        "confidence": "inferred"
+      },
+      {
+        "name": "onFocus",
+        "kind": "event",
+        "optional": true,
+        "description": "Emitted when the control gains focus. (CEM event \"sl-focus\")",
+        "confidence": "inferred"
+      },
+      {
+        "name": "onInput",
+        "kind": "event",
+        "optional": true,
+        "description": "Emitted when the control receives input. (CEM event \"sl-input\")",
+        "confidence": "inferred"
+      },
+      {
+        "name": "onInvalid",
+        "kind": "event",
+        "optional": true,
+        "description": "Emitted when the form control has been checked for validity and its constraints aren't satisfied. (CEM event \"sl-invalid\")",
+        "confidence": "inferred"
+      }
+    ]
+  },
+  {
+    "name": "SlMenu",
+    "source": "extract/pilots/shoelace/custom-elements.json (components/menu/menu.js)",
+    "adapter": "cem",
+    "props": [
+      {
+        "name": "defaultSlot",
+        "optional": true,
+        "kind": "other",
+        "confidence": "declared"
+      },
+      {
+        "name": "onSelect",
+        "kind": "event",
+        "optional": true,
+        "description": "Emitted when a menu item is selected. (CEM event \"sl-select\")",
+        "confidence": "inferred"
+      }
+    ]
+  },
+  {
+    "name": "SlMenuItem",
+    "source": "extract/pilots/shoelace/custom-elements.json (components/menu-item/menu-item.js)",
+    "adapter": "cem",
+    "props": [
+      {
+        "name": "type",
+        "optional": true,
+        "kind": "enum",
+        "values": [
+          "normal",
+          "checkbox"
+        ],
+        "default": "normal",
+        "description": "The type of menu item to render. To use `checked`, this value must be set to `checkbox`.",
+        "confidence": "declared"
+      },
+      {
+        "name": "checked",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "description": "Draws the item in a checked state.",
+        "confidence": "declared"
+      },
+      {
+        "name": "value",
+        "optional": true,
+        "kind": "string",
+        "description": "A unique value to store in the menu item. This can be used as a way to identify menu items when selected.",
+        "confidence": "declared"
+      },
+      {
+        "name": "loading",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "description": "Draws the menu item in a loading state.",
+        "confidence": "declared"
+      },
+      {
+        "name": "disabled",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "description": "Draws the menu item in a disabled state, preventing selection.",
+        "confidence": "declared"
+      },
+      {
+        "name": "dependencies",
+        "optional": true,
+        "kind": "other",
+        "default": "{ 'sl-icon': SlIcon, 'sl-popup': SlPopup, 'sl-spinner': SlSpinner }",
+        "confidence": "declared"
+      },
+      {
+        "name": "defaultSlot",
+        "optional": true,
+        "kind": "other",
+        "confidence": "declared"
+      },
+      {
+        "name": "menuItem",
+        "optional": true,
+        "kind": "other",
+        "confidence": "declared"
+      }
+    ]
+  },
+  {
+    "name": "SlMenuLabel",
+    "source": "extract/pilots/shoelace/custom-elements.json (components/menu-label/menu-label.js)",
+    "adapter": "cem",
+    "props": []
+  },
+  {
+    "name": "SlMutationObserver",
+    "source": "extract/pilots/shoelace/custom-elements.json (components/mutation-observer/mutation-observer.js)",
+    "adapter": "cem",
+    "props": [
+      {
+        "name": "attr",
+        "optional": true,
+        "kind": "string",
+        "description": "Watches for changes to attributes. To watch only specific attributes, separate them by a space, e.g.\n`attr=\"class id title\"`. To watch all attributes, use `*`.",
+        "confidence": "declared"
+      },
+      {
+        "name": "attr-old-value",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "description": "Indicates whether or not the attribute's previous value should be recorded when monitoring changes.",
+        "confidence": "declared"
+      },
+      {
+        "name": "char-data",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "description": "Watches for changes to the character data contained within the node.",
+        "confidence": "declared"
+      },
+      {
+        "name": "char-data-old-value",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "description": "Indicates whether or not the previous value of the node's text should be recorded.",
+        "confidence": "declared"
+      },
+      {
+        "name": "child-list",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "description": "Watches for the addition or removal of new child nodes.",
+        "confidence": "declared"
+      },
+      {
+        "name": "disabled",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "description": "Disables the observer.",
+        "confidence": "declared"
+      },
+      {
+        "name": "attrOldValue",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "description": "Indicates whether or not the attribute's previous value should be recorded when monitoring changes.",
+        "confidence": "declared"
+      },
+      {
+        "name": "charData",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "description": "Watches for changes to the character data contained within the node.",
+        "confidence": "declared"
+      },
+      {
+        "name": "charDataOldValue",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "description": "Indicates whether or not the previous value of the node's text should be recorded.",
+        "confidence": "declared"
+      },
+      {
+        "name": "childList",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "description": "Watches for the addition or removal of new child nodes.",
+        "confidence": "declared"
+      },
+      {
+        "name": "onMutation",
+        "kind": "event",
+        "optional": true,
+        "description": "Emitted when a mutation occurs. (CEM event \"sl-mutation\")",
+        "confidence": "inferred"
+      }
+    ]
+  },
+  {
+    "name": "SlOption",
+    "source": "extract/pilots/shoelace/custom-elements.json (components/option/option.js)",
+    "adapter": "cem",
+    "props": [
+      {
+        "name": "value",
+        "optional": true,
+        "kind": "string",
+        "description": "The option's value. When selected, the containing form control will receive this value. The value must be unique\nfrom other options in the same group. Values may not contain spaces, as spaces are used as delimiters when listing\nmultiple values.",
+        "confidence": "declared"
+      },
+      {
+        "name": "disabled",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "description": "Draws the option in a disabled state, preventing selection.",
+        "confidence": "declared"
+      },
+      {
+        "name": "dependencies",
+        "optional": true,
+        "kind": "other",
+        "default": "{ 'sl-icon': SlIcon }",
+        "confidence": "declared"
+      },
+      {
+        "name": "defaultSlot",
+        "optional": true,
+        "kind": "other",
+        "confidence": "declared"
+      },
+      {
+        "name": "current",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "confidence": "declared"
+      },
+      {
+        "name": "selected",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "confidence": "declared"
+      },
+      {
+        "name": "hasHover",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "confidence": "declared"
+      }
+    ]
+  },
+  {
+    "name": "SlPopup",
+    "source": "extract/pilots/shoelace/custom-elements.json (components/popup/popup.js)",
+    "adapter": "cem",
+    "props": [
+      {
+        "name": "anchor",
+        "optional": true,
+        "kind": "other",
+        "description": "The element the popup will be anchored to. If the anchor lives outside of the popup, you can provide the anchor\nelement `id`, a DOM element reference, or a `VirtualElement`. If the anchor lives inside the popup, use the\n`anchor` slot instead.",
+        "confidence": "declared"
+      },
+      {
+        "name": "active",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "description": "Activates the positioning logic and shows the popup. When this attribute is removed, the positioning logic is torn\ndown and the popup will be hidden.",
+        "confidence": "declared"
+      },
+      {
+        "name": "placement",
+        "optional": true,
+        "kind": "other",
+        "default": "top",
+        "description": "The preferred placement of the popup. Note that the actual placement will vary as configured to keep the\npanel inside of the viewport.",
+        "confidence": "declared"
+      },
+      {
+        "name": "strategy",
+        "optional": true,
+        "kind": "enum",
+        "values": [
+          "absolute",
+          "fixed"
+        ],
+        "default": "absolute",
+        "description": "Determines how the popup is positioned. The `absolute` strategy works well in most cases, but if overflow is\nclipped, using a `fixed` position strategy can often workaround it.",
+        "confidence": "declared"
+      },
+      {
+        "name": "distance",
+        "optional": true,
+        "kind": "number",
+        "default": 0,
+        "description": "The distance in pixels from which to offset the panel away from its anchor.",
+        "confidence": "declared"
+      },
+      {
+        "name": "skidding",
+        "optional": true,
+        "kind": "number",
+        "default": 0,
+        "description": "The distance in pixels from which to offset the panel along its anchor.",
+        "confidence": "declared"
+      },
+      {
+        "name": "arrow",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "description": "Attaches an arrow to the popup. The arrow's size and color can be customized using the `--arrow-size` and\n`--arrow-color` custom properties. For additional customizations, you can also target the arrow using\n`::part(arrow)` in your stylesheet.",
+        "confidence": "declared"
+      },
+      {
+        "name": "arrow-placement",
+        "optional": true,
+        "kind": "enum",
+        "values": [
+          "start",
+          "end",
+          "center",
+          "anchor"
+        ],
+        "default": "anchor",
+        "description": "The placement of the arrow. The default is `anchor`, which will align the arrow as close to the center of the\nanchor as possible, considering available space and `arrow-padding`. A value of `start`, `end`, or `center` will\nalign the arrow to the start, end, or center of the popover instead.",
+        "confidence": "declared"
+      },
+      {
+        "name": "arrow-padding",
+        "optional": true,
+        "kind": "number",
+        "default": 10,
+        "description": "The amount of padding between the arrow and the edges of the popup. If the popup has a border-radius, for example,\nthis will prevent it from overflowing the corners.",
+        "confidence": "declared"
+      },
+      {
+        "name": "flip",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "description": "When set, placement of the popup will flip to the opposite site to keep it in view. You can use\n`flipFallbackPlacements` to further configure how the fallback placement is determined.",
+        "confidence": "declared"
+      },
+      {
+        "name": "flip-fallback-placements",
+        "optional": true,
+        "kind": "string",
+        "description": "If the preferred placement doesn't fit, popup will be tested in these fallback placements until one fits. Must be a\nstring of any number of placements separated by a space, e.g. \"top bottom left\". If no placement fits, the flip\nfallback strategy will be used instead.",
+        "confidence": "declared"
+      },
+      {
+        "name": "flip-fallback-strategy",
+        "optional": true,
+        "kind": "enum",
+        "values": [
+          "best-fit",
+          "initial"
+        ],
+        "default": "best-fit",
+        "description": "When neither the preferred placement nor the fallback placements fit, this value will be used to determine whether\nthe popup should be positioned using the best available fit based on available space or as it was initially\npreferred.",
+        "confidence": "declared"
+      },
+      {
+        "name": "flipBoundary",
+        "optional": true,
+        "kind": "other",
+        "description": "The flip boundary describes clipping element(s) that overflow will be checked relative to when flipping. By\ndefault, the boundary includes overflow ancestors that will cause the element to be clipped. If needed, you can\nchange the boundary by passing a reference to one or more elements to this property.",
+        "confidence": "declared"
+      },
+      {
+        "name": "flip-padding",
+        "optional": true,
+        "kind": "number",
+        "default": 0,
+        "description": "The amount of padding, in pixels, to exceed before the flip behavior will occur.",
+        "confidence": "declared"
+      },
+      {
+        "name": "shift",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "description": "Moves the popup along the axis to keep it in view when clipped.",
+        "confidence": "declared"
+      },
+      {
+        "name": "shiftBoundary",
+        "optional": true,
+        "kind": "other",
+        "description": "The shift boundary describes clipping element(s) that overflow will be checked relative to when shifting. By\ndefault, the boundary includes overflow ancestors that will cause the element to be clipped. If needed, you can\nchange the boundary by passing a reference to one or more elements to this property.",
+        "confidence": "declared"
+      },
+      {
+        "name": "shift-padding",
+        "optional": true,
+        "kind": "number",
+        "default": 0,
+        "description": "The amount of padding, in pixels, to exceed before the shift behavior will occur.",
+        "confidence": "declared"
+      },
+      {
+        "name": "auto-size",
+        "optional": true,
+        "kind": "enum",
+        "values": [
+          "horizontal",
+          "vertical",
+          "both"
+        ],
+        "description": "When set, this will cause the popup to automatically resize itself to prevent it from overflowing.",
+        "confidence": "declared"
+      },
+      {
+        "name": "sync",
+        "optional": true,
+        "kind": "enum",
+        "values": [
+          "width",
+          "height",
+          "both"
+        ],
+        "description": "Syncs the popup's width or height to that of the anchor element.",
+        "confidence": "declared"
+      },
+      {
+        "name": "autoSizeBoundary",
+        "optional": true,
+        "kind": "other",
+        "description": "The auto-size boundary describes clipping element(s) that overflow will be checked relative to when resizing. By\ndefault, the boundary includes overflow ancestors that will cause the element to be clipped. If needed, you can\nchange the boundary by passing a reference to one or more elements to this property.",
+        "confidence": "declared"
+      },
+      {
+        "name": "auto-size-padding",
+        "optional": true,
+        "kind": "number",
+        "default": 0,
+        "description": "The amount of padding, in pixels, to exceed before the auto-size behavior will occur.",
+        "confidence": "declared"
+      },
+      {
+        "name": "hover-bridge",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "description": "When a gap exists between the anchor and the popup element, this option will add a \"hover bridge\" that fills the\ngap using an invisible element. This makes listening for events such as `mouseenter` and `mouseleave` more sane\nbecause the pointer never technically leaves the element. The hover bridge will only be drawn when the popover is\nactive.",
+        "confidence": "declared"
+      },
+      {
+        "name": "popup",
+        "optional": true,
+        "kind": "other",
+        "description": "A reference to the internal popup container. Useful for animating and styling the popup with JavaScript.",
+        "confidence": "declared"
+      },
+      {
+        "name": "arrowPlacement",
+        "optional": true,
+        "kind": "enum",
+        "values": [
+          "start",
+          "end",
+          "center",
+          "anchor"
+        ],
+        "default": "anchor",
+        "description": "The placement of the arrow. The default is `anchor`, which will align the arrow as close to the center of the\nanchor as possible, considering available space and `arrow-padding`. A value of `start`, `end`, or `center` will\nalign the arrow to the start, end, or center of the popover instead.",
+        "confidence": "declared"
+      },
+      {
+        "name": "arrowPadding",
+        "optional": true,
+        "kind": "number",
+        "default": 10,
+        "description": "The amount of padding between the arrow and the edges of the popup. If the popup has a border-radius, for example,\nthis will prevent it from overflowing the corners.",
+        "confidence": "declared"
+      },
+      {
+        "name": "flipFallbackPlacements",
+        "optional": true,
+        "kind": "string",
+        "description": "If the preferred placement doesn't fit, popup will be tested in these fallback placements until one fits. Must be a\nstring of any number of placements separated by a space, e.g. \"top bottom left\". If no placement fits, the flip\nfallback strategy will be used instead.",
+        "confidence": "declared"
+      },
+      {
+        "name": "flipFallbackStrategy",
+        "optional": true,
+        "kind": "enum",
+        "values": [
+          "best-fit",
+          "initial"
+        ],
+        "default": "best-fit",
+        "description": "When neither the preferred placement nor the fallback placements fit, this value will be used to determine whether\nthe popup should be positioned using the best available fit based on available space or as it was initially\npreferred.",
+        "confidence": "declared"
+      },
+      {
+        "name": "flipPadding",
+        "optional": true,
+        "kind": "number",
+        "default": 0,
+        "description": "The amount of padding, in pixels, to exceed before the flip behavior will occur.",
+        "confidence": "declared"
+      },
+      {
+        "name": "shiftPadding",
+        "optional": true,
+        "kind": "number",
+        "default": 0,
+        "description": "The amount of padding, in pixels, to exceed before the shift behavior will occur.",
+        "confidence": "declared"
+      },
+      {
+        "name": "autoSize",
+        "optional": true,
+        "kind": "enum",
+        "values": [
+          "horizontal",
+          "vertical",
+          "both"
+        ],
+        "description": "When set, this will cause the popup to automatically resize itself to prevent it from overflowing.",
+        "confidence": "declared"
+      },
+      {
+        "name": "autoSizePadding",
+        "optional": true,
+        "kind": "number",
+        "default": 0,
+        "description": "The amount of padding, in pixels, to exceed before the auto-size behavior will occur.",
+        "confidence": "declared"
+      },
+      {
+        "name": "hoverBridge",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "description": "When a gap exists between the anchor and the popup element, this option will add a \"hover bridge\" that fills the\ngap using an invisible element. This makes listening for events such as `mouseenter` and `mouseleave` more sane\nbecause the pointer never technically leaves the element. The hover bridge will only be drawn when the popover is\nactive.",
+        "confidence": "declared"
+      },
+      {
+        "name": "onReposition",
+        "kind": "event",
+        "optional": true,
+        "description": "Emitted when the popup is repositioned. This event can fire a lot, so avoid putting expensive operations in your listener or consider debouncing it. (CEM event \"sl-reposition\")",
+        "confidence": "inferred"
+      }
+    ]
+  },
+  {
+    "name": "SlProgressBar",
+    "source": "extract/pilots/shoelace/custom-elements.json (components/progress-bar/progress-bar.js)",
+    "adapter": "cem",
+    "props": [
+      {
+        "name": "value",
+        "optional": true,
+        "kind": "number",
+        "default": 0,
+        "description": "The current progress as a percentage, 0 to 100.",
+        "confidence": "declared"
+      },
+      {
+        "name": "indeterminate",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "description": "When true, percentage is ignored, the label is hidden, and the progress bar is drawn in an indeterminate state.",
+        "confidence": "declared"
+      },
+      {
+        "name": "label",
+        "optional": true,
+        "kind": "string",
+        "description": "A custom label for assistive devices.",
+        "confidence": "declared"
+      }
+    ]
+  },
+  {
+    "name": "SlProgressRing",
+    "source": "extract/pilots/shoelace/custom-elements.json (components/progress-ring/progress-ring.js)",
+    "adapter": "cem",
+    "props": [
+      {
+        "name": "value",
+        "optional": true,
+        "kind": "number",
+        "default": 0,
+        "description": "The current progress as a percentage, 0 to 100.",
+        "confidence": "declared"
+      },
+      {
+        "name": "label",
+        "optional": true,
+        "kind": "string",
+        "description": "A custom label for assistive devices.",
+        "confidence": "declared"
+      },
+      {
+        "name": "indicator",
+        "optional": true,
+        "kind": "other",
+        "confidence": "declared"
+      },
+      {
+        "name": "indicatorOffset",
+        "optional": true,
+        "kind": "string",
+        "confidence": "declared"
+      }
+    ]
+  },
+  {
+    "name": "SlQrCode",
+    "source": "extract/pilots/shoelace/custom-elements.json (components/qr-code/qr-code.js)",
+    "adapter": "cem",
+    "props": [
+      {
+        "name": "value",
+        "optional": true,
+        "kind": "string",
+        "description": "The QR code's value.",
+        "confidence": "declared"
+      },
+      {
+        "name": "label",
+        "optional": true,
+        "kind": "string",
+        "description": "The label for assistive devices to announce. If unspecified, the value will be used instead.",
+        "confidence": "declared"
+      },
+      {
+        "name": "size",
+        "optional": true,
+        "kind": "number",
+        "default": 128,
+        "description": "The size of the QR code, in pixels.",
+        "confidence": "declared"
+      },
+      {
+        "name": "fill",
+        "optional": true,
+        "kind": "string",
+        "default": "black",
+        "description": "The fill color. This can be any valid CSS color, but not a CSS custom property.",
+        "confidence": "declared"
+      },
+      {
+        "name": "background",
+        "optional": true,
+        "kind": "string",
+        "default": "white",
+        "description": "The background color. This can be any valid CSS color or `transparent`. It cannot be a CSS custom property.",
+        "confidence": "declared"
+      },
+      {
+        "name": "radius",
+        "optional": true,
+        "kind": "number",
+        "default": 0,
+        "description": "The edge radius of each module. Must be between 0 and 0.5.",
+        "confidence": "declared"
+      },
+      {
+        "name": "error-correction",
+        "optional": true,
+        "kind": "enum",
+        "values": [
+          "L",
+          "M",
+          "Q",
+          "H"
+        ],
+        "default": "H",
+        "description": "The level of error correction to use. [Learn more](https://www.qrcode.com/en/about/error_correction.html)",
+        "confidence": "declared"
+      },
+      {
+        "name": "canvas",
+        "optional": true,
+        "kind": "other",
+        "confidence": "declared"
+      },
+      {
+        "name": "errorCorrection",
+        "optional": true,
+        "kind": "enum",
+        "values": [
+          "L",
+          "M",
+          "Q",
+          "H"
+        ],
+        "default": "H",
+        "description": "The level of error correction to use. [Learn more](https://www.qrcode.com/en/about/error_correction.html)",
+        "confidence": "declared"
+      }
+    ]
+  },
+  {
+    "name": "SlRadio",
+    "source": "extract/pilots/shoelace/custom-elements.json (components/radio/radio.js)",
+    "adapter": "cem",
+    "props": [
+      {
+        "name": "value",
+        "optional": true,
+        "kind": "string",
+        "description": "The radio's value. When selected, the radio group will receive this value.",
+        "confidence": "declared"
+      },
+      {
+        "name": "size",
+        "optional": true,
+        "kind": "enum",
+        "values": [
+          "small",
+          "medium",
+          "large"
+        ],
+        "default": "medium",
+        "description": "The radio's size. When used inside a radio group, the size will be determined by the radio group's size so this\nattribute can typically be omitted.",
+        "confidence": "declared"
+      },
+      {
+        "name": "disabled",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "description": "Disables the radio.",
+        "confidence": "declared"
+      },
+      {
+        "name": "dependencies",
+        "optional": true,
+        "kind": "other",
+        "default": "{ 'sl-icon': SlIcon }",
+        "confidence": "declared"
+      },
+      {
+        "name": "checked",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "confidence": "declared"
+      },
+      {
+        "name": "onBlur",
+        "kind": "event",
+        "optional": true,
+        "description": "Emitted when the control loses focus. (CEM event \"sl-blur\")",
+        "confidence": "inferred"
+      },
+      {
+        "name": "onFocus",
+        "kind": "event",
+        "optional": true,
+        "description": "Emitted when the control gains focus. (CEM event \"sl-focus\")",
+        "confidence": "inferred"
+      }
+    ]
+  },
+  {
+    "name": "SlRadioButton",
+    "source": "extract/pilots/shoelace/custom-elements.json (components/radio-button/radio-button.js)",
+    "adapter": "cem",
+    "props": [
+      {
+        "name": "value",
+        "optional": true,
+        "kind": "string",
+        "description": "The radio's value. When selected, the radio group will receive this value.",
+        "confidence": "declared"
+      },
+      {
+        "name": "disabled",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "description": "Disables the radio button.",
+        "confidence": "declared"
+      },
+      {
+        "name": "size",
+        "optional": true,
+        "kind": "enum",
+        "values": [
+          "small",
+          "medium",
+          "large"
+        ],
+        "default": "medium",
+        "description": "The radio button's size. When used inside a radio group, the size will be determined by the radio group's size so\nthis attribute can typically be omitted.",
+        "confidence": "declared"
+      },
+      {
+        "name": "pill",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "description": "Draws a pill-style radio button with rounded edges.",
+        "confidence": "declared"
+      },
+      {
+        "name": "input",
+        "optional": true,
+        "kind": "other",
+        "confidence": "declared"
+      },
+      {
+        "name": "hiddenInput",
+        "optional": true,
+        "kind": "other",
+        "confidence": "declared"
+      },
+      {
+        "name": "onBlur",
+        "kind": "event",
+        "optional": true,
+        "description": "Emitted when the button loses focus. (CEM event \"sl-blur\")",
+        "confidence": "inferred"
+      },
+      {
+        "name": "onFocus",
+        "kind": "event",
+        "optional": true,
+        "description": "Emitted when the button gains focus. (CEM event \"sl-focus\")",
+        "confidence": "inferred"
+      }
+    ]
+  },
+  {
+    "name": "SlRadioGroup",
+    "source": "extract/pilots/shoelace/custom-elements.json (components/radio-group/radio-group.js)",
+    "adapter": "cem",
+    "props": [
+      {
+        "name": "label",
+        "optional": true,
+        "kind": "string",
+        "description": "The radio group's label. Required for proper accessibility. If you need to display HTML, use the `label` slot\ninstead.",
+        "confidence": "declared"
+      },
+      {
+        "name": "help-text",
+        "optional": true,
+        "kind": "string",
+        "description": "The radio groups's help text. If you need to display HTML, use the `help-text` slot instead.",
+        "confidence": "declared"
+      },
+      {
+        "name": "name",
+        "optional": true,
+        "kind": "string",
+        "default": "option",
+        "description": "The name of the radio group, submitted as a name/value pair with form data.",
+        "confidence": "declared"
+      },
+      {
+        "name": "value",
+        "optional": true,
+        "kind": "string",
+        "description": "The current value of the radio group, submitted as a name/value pair with form data.",
+        "confidence": "declared"
+      },
+      {
+        "name": "size",
+        "optional": true,
+        "kind": "enum",
+        "values": [
+          "small",
+          "medium",
+          "large"
+        ],
+        "default": "medium",
+        "description": "The radio group's size. This size will be applied to all child radios and radio buttons.",
+        "confidence": "declared"
+      },
+      {
+        "name": "form",
+        "optional": true,
+        "kind": "string",
+        "description": "By default, form controls are associated with the nearest containing `<form>` element. This attribute allows you\nto place the form control outside of a form and associate it with the form that has this `id`. The form must be in\nthe same document or shadow root for this to work.",
+        "confidence": "declared"
+      },
+      {
+        "name": "required",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "description": "Ensures a child radio is checked before allowing the containing form to submit.",
+        "confidence": "declared"
+      },
+      {
+        "name": "dependencies",
+        "optional": true,
+        "kind": "other",
+        "default": "{ 'sl-button-group': SlButtonGroup }",
+        "confidence": "declared"
+      },
+      {
+        "name": "defaultSlot",
+        "optional": true,
+        "kind": "other",
+        "confidence": "declared"
+      },
+      {
+        "name": "validationInput",
+        "optional": true,
+        "kind": "other",
+        "confidence": "declared"
+      },
+      {
+        "name": "defaultValue",
+        "optional": true,
+        "kind": "string",
+        "confidence": "declared"
+      },
+      {
+        "name": "helpText",
+        "optional": true,
+        "kind": "string",
+        "description": "The radio groups's help text. If you need to display HTML, use the `help-text` slot instead.",
+        "confidence": "declared"
+      },
+      {
+        "name": "validity",
+        "optional": true,
+        "kind": "other",
+        "description": "Gets the validity state object",
+        "confidence": "declared"
+      },
+      {
+        "name": "validationMessage",
+        "optional": true,
+        "kind": "other",
+        "description": "Gets the validation message",
+        "confidence": "declared"
+      },
+      {
+        "name": "onChange",
+        "kind": "event",
+        "optional": true,
+        "description": "Emitted when the radio group's selected value changes. (CEM event \"sl-change\")",
+        "confidence": "inferred"
+      },
+      {
+        "name": "onInput",
+        "kind": "event",
+        "optional": true,
+        "description": "Emitted when the radio group receives user input. (CEM event \"sl-input\")",
+        "confidence": "inferred"
+      },
+      {
+        "name": "onInvalid",
+        "kind": "event",
+        "optional": true,
+        "description": "Emitted when the form control has been checked for validity and its constraints aren't satisfied. (CEM event \"sl-invalid\")",
+        "confidence": "inferred"
+      }
+    ]
+  },
+  {
+    "name": "SlRange",
+    "source": "extract/pilots/shoelace/custom-elements.json (components/range/range.js)",
+    "adapter": "cem",
+    "props": [
+      {
+        "name": "title",
+        "optional": true,
+        "kind": "string",
+        "confidence": "declared"
+      },
+      {
+        "name": "name",
+        "optional": true,
+        "kind": "string",
+        "description": "The name of the range, submitted as a name/value pair with form data.",
+        "confidence": "declared"
+      },
+      {
+        "name": "value",
+        "optional": true,
+        "kind": "number",
+        "default": 0,
+        "description": "The current value of the range, submitted as a name/value pair with form data.",
+        "confidence": "declared"
+      },
+      {
+        "name": "label",
+        "optional": true,
+        "kind": "string",
+        "description": "The range's label. If you need to display HTML, use the `label` slot instead.",
+        "confidence": "declared"
+      },
+      {
+        "name": "help-text",
+        "optional": true,
+        "kind": "string",
+        "description": "The range's help text. If you need to display HTML, use the help-text slot instead.",
+        "confidence": "declared"
+      },
+      {
+        "name": "disabled",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "description": "Disables the range.",
+        "confidence": "declared"
+      },
+      {
+        "name": "min",
+        "optional": true,
+        "kind": "number",
+        "default": 0,
+        "description": "The minimum acceptable value of the range.",
+        "confidence": "declared"
+      },
+      {
+        "name": "max",
+        "optional": true,
+        "kind": "number",
+        "default": 100,
+        "description": "The maximum acceptable value of the range.",
+        "confidence": "declared"
+      },
+      {
+        "name": "step",
+        "optional": true,
+        "kind": "number",
+        "default": 1,
+        "description": "The interval at which the range will increase and decrease.",
+        "confidence": "declared"
+      },
+      {
+        "name": "tooltip",
+        "optional": true,
+        "kind": "enum",
+        "values": [
+          "top",
+          "bottom",
+          "none"
+        ],
+        "default": "top",
+        "description": "The preferred placement of the range's tooltip.",
+        "confidence": "declared"
+      },
+      {
+        "name": "form",
+        "optional": true,
+        "kind": "string",
+        "description": "By default, form controls are associated with the nearest containing `<form>` element. This attribute allows you\nto place the form control outside of a form and associate it with the form that has this `id`. The form must be in\nthe same document or shadow root for this to work.",
+        "confidence": "declared"
+      },
+      {
+        "name": "input",
+        "optional": true,
+        "kind": "other",
+        "confidence": "declared"
+      },
+      {
+        "name": "output",
+        "optional": true,
+        "kind": "other",
+        "confidence": "declared"
+      },
+      {
+        "name": "helpText",
+        "optional": true,
+        "kind": "string",
+        "description": "The range's help text. If you need to display HTML, use the help-text slot instead.",
+        "confidence": "declared"
+      },
+      {
+        "name": "tooltipFormatter",
+        "optional": true,
+        "kind": "other",
+        "description": "A function used to format the tooltip's value. The range's value is passed as the first and only argument. The\nfunction should return a string to display in the tooltip.",
+        "confidence": "declared"
+      },
+      {
+        "name": "defaultValue",
+        "optional": true,
+        "kind": "number",
+        "default": 0,
+        "description": "The default value of the form control. Primarily used for resetting the form control.",
+        "confidence": "declared"
+      },
+      {
+        "name": "validity",
+        "optional": true,
+        "kind": "other",
+        "description": "Gets the validity state object",
+        "confidence": "declared"
+      },
+      {
+        "name": "validationMessage",
+        "optional": true,
+        "kind": "other",
+        "description": "Gets the validation message",
+        "confidence": "declared"
+      },
+      {
+        "name": "onBlur",
+        "kind": "event",
+        "optional": true,
+        "description": "Emitted when the control loses focus. (CEM event \"sl-blur\")",
+        "confidence": "inferred"
+      },
+      {
+        "name": "onChange",
+        "kind": "event",
+        "optional": true,
+        "description": "Emitted when an alteration to the control's value is committed by the user. (CEM event \"sl-change\")",
+        "confidence": "inferred"
+      },
+      {
+        "name": "onFocus",
+        "kind": "event",
+        "optional": true,
+        "description": "Emitted when the control gains focus. (CEM event \"sl-focus\")",
+        "confidence": "inferred"
+      },
+      {
+        "name": "onInput",
+        "kind": "event",
+        "optional": true,
+        "description": "Emitted when the control receives input. (CEM event \"sl-input\")",
+        "confidence": "inferred"
+      },
+      {
+        "name": "onInvalid",
+        "kind": "event",
+        "optional": true,
+        "description": "Emitted when the form control has been checked for validity and its constraints aren't satisfied. (CEM event \"sl-invalid\")",
+        "confidence": "inferred"
+      }
+    ]
+  },
+  {
+    "name": "SlRating",
+    "source": "extract/pilots/shoelace/custom-elements.json (components/rating/rating.js)",
+    "adapter": "cem",
+    "props": [
+      {
+        "name": "label",
+        "optional": true,
+        "kind": "string",
+        "description": "A label that describes the rating to assistive devices.",
+        "confidence": "declared"
+      },
+      {
+        "name": "value",
+        "optional": true,
+        "kind": "number",
+        "default": 0,
+        "description": "The current rating.",
+        "confidence": "declared"
+      },
+      {
+        "name": "max",
+        "optional": true,
+        "kind": "number",
+        "default": 5,
+        "description": "The highest rating to show.",
+        "confidence": "declared"
+      },
+      {
+        "name": "precision",
+        "optional": true,
+        "kind": "number",
+        "default": 1,
+        "description": "The precision at which the rating will increase and decrease. For example, to allow half-star ratings, set this\nattribute to `0.5`.",
+        "confidence": "declared"
+      },
+      {
+        "name": "readonly",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "description": "Makes the rating readonly.",
+        "confidence": "declared"
+      },
+      {
+        "name": "disabled",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "description": "Disables the rating.",
+        "confidence": "declared"
+      },
+      {
+        "name": "getSymbol",
+        "optional": true,
+        "kind": "other",
+        "description": "A function that customizes the symbol to be rendered. The first and only argument is the rating's current value.\nThe function should return a string containing trusted HTML of the symbol to render at the specified value. Works\nwell with `<sl-icon>` elements.",
+        "confidence": "declared"
+      },
+      {
+        "name": "dependencies",
+        "optional": true,
+        "kind": "other",
+        "default": "{ 'sl-icon': SlIcon }",
+        "confidence": "declared"
+      },
+      {
+        "name": "rating",
+        "optional": true,
+        "kind": "other",
+        "confidence": "declared"
+      },
+      {
+        "name": "onChange",
+        "kind": "event",
+        "optional": true,
+        "description": "Emitted when the rating's value changes. (CEM event \"sl-change\")",
+        "confidence": "inferred"
+      },
+      {
+        "name": "onHover",
+        "kind": "event",
+        "optional": true,
+        "description": "Emitted when the user hovers over a value. The `phase` property indicates when hovering starts, moves to a new value, or ends. The `value` property tells what the rating's value would be if the user were to commit to the hovered value. (CEM event \"sl-hover\")",
+        "confidence": "inferred"
+      }
+    ]
+  },
+  {
+    "name": "SlRelativeTime",
+    "source": "extract/pilots/shoelace/custom-elements.json (components/relative-time/relative-time.js)",
+    "adapter": "cem",
+    "props": [
+      {
+        "name": "date",
+        "optional": true,
+        "kind": "other",
+        "default": "new Date()",
+        "description": "The date from which to calculate time from. If not set, the current date and time will be used. When passing a\nstring, it's strongly recommended to use the ISO 8601 format to ensure timezones are handled correctly. To convert\na date to this format in JavaScript, use [`date.toISOString()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toISOString).",
+        "confidence": "declared"
+      },
+      {
+        "name": "format",
+        "optional": true,
+        "kind": "enum",
+        "values": [
+          "long",
+          "short",
+          "narrow"
+        ],
+        "default": "long",
+        "description": "The formatting style to use.",
+        "confidence": "declared"
+      },
+      {
+        "name": "numeric",
+        "optional": true,
+        "kind": "enum",
+        "values": [
+          "always",
+          "auto"
+        ],
+        "default": "auto",
+        "description": "When `auto`, values such as \"yesterday\" and \"tomorrow\" will be shown when possible. When `always`, values such as\n\"1 day ago\" and \"in 1 day\" will be shown.",
+        "confidence": "declared"
+      },
+      {
+        "name": "sync",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "description": "Keep the displayed value up to date as time passes.",
+        "confidence": "declared"
+      }
+    ]
+  },
+  {
+    "name": "SlResizeObserver",
+    "source": "extract/pilots/shoelace/custom-elements.json (components/resize-observer/resize-observer.js)",
+    "adapter": "cem",
+    "props": [
+      {
+        "name": "disabled",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "description": "Disables the observer.",
+        "confidence": "declared"
+      },
+      {
+        "name": "onResize",
+        "kind": "event",
+        "optional": true,
+        "description": "Emitted when the element is resized. (CEM event \"sl-resize\")",
+        "confidence": "inferred"
+      }
+    ]
+  },
+  {
+    "name": "SlSelect",
+    "source": "extract/pilots/shoelace/custom-elements.json (components/select/select.js)",
+    "adapter": "cem",
+    "props": [
+      {
+        "name": "name",
+        "optional": true,
+        "kind": "string",
+        "description": "The name of the select, submitted as a name/value pair with form data.",
+        "confidence": "declared"
+      },
+      {
+        "name": "value",
+        "optional": true,
+        "kind": "other",
+        "description": "The default value of the form control. Primarily used for resetting the form control.",
+        "confidence": "declared"
+      },
+      {
+        "name": "size",
+        "optional": true,
+        "kind": "enum",
+        "values": [
+          "small",
+          "medium",
+          "large"
+        ],
+        "default": "medium",
+        "description": "The select's size.",
+        "confidence": "declared"
+      },
+      {
+        "name": "placeholder",
+        "optional": true,
+        "kind": "string",
+        "description": "Placeholder text to show as a hint when the select is empty.",
+        "confidence": "declared"
+      },
+      {
+        "name": "multiple",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "description": "Allows more than one option to be selected.",
+        "confidence": "declared"
+      },
+      {
+        "name": "max-options-visible",
+        "optional": true,
+        "kind": "number",
+        "default": 3,
+        "description": "The maximum number of selected options to show when `multiple` is true. After the maximum, \"+n\" will be shown to\nindicate the number of additional items that are selected. Set to 0 to remove the limit.",
+        "confidence": "declared"
+      },
+      {
+        "name": "disabled",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "description": "Disables the select control.",
+        "confidence": "declared"
+      },
+      {
+        "name": "clearable",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "description": "Adds a clear button when the select is not empty.",
+        "confidence": "declared"
+      },
+      {
+        "name": "open",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "description": "Indicates whether or not the select is open. You can toggle this attribute to show and hide the menu, or you can\nuse the `show()` and `hide()` methods and this attribute will reflect the select's open state.",
+        "confidence": "declared"
+      },
+      {
+        "name": "hoist",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "description": "Enable this option to prevent the listbox from being clipped when the component is placed inside a container with\n`overflow: auto|scroll`. Hoisting uses a fixed positioning strategy that works in many, but not all, scenarios.",
+        "confidence": "declared"
+      },
+      {
+        "name": "filled",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "description": "Draws a filled select.",
+        "confidence": "declared"
+      },
+      {
+        "name": "pill",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "description": "Draws a pill-style select with rounded edges.",
+        "confidence": "declared"
+      },
+      {
+        "name": "label",
+        "optional": true,
+        "kind": "string",
+        "description": "The select's label. If you need to display HTML, use the `label` slot instead.",
+        "confidence": "declared"
+      },
+      {
+        "name": "placement",
+        "optional": true,
+        "kind": "enum",
+        "values": [
+          "top",
+          "bottom"
+        ],
+        "default": "bottom",
+        "description": "The preferred placement of the select's menu. Note that the actual placement may vary as needed to keep the listbox\ninside of the viewport.",
+        "confidence": "declared"
+      },
+      {
+        "name": "help-text",
+        "optional": true,
+        "kind": "string",
+        "description": "The select's help text. If you need to display HTML, use the `help-text` slot instead.",
+        "confidence": "declared"
+      },
+      {
+        "name": "form",
+        "optional": true,
+        "kind": "string",
+        "description": "By default, form controls are associated with the nearest containing `<form>` element. This attribute allows you\nto place the form control outside of a form and associate it with the form that has this `id`. The form must be in\nthe same document or shadow root for this to work.",
+        "confidence": "declared"
+      },
+      {
+        "name": "required",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "description": "The select's required attribute.",
+        "confidence": "declared"
+      },
+      {
+        "name": "getTag",
+        "optional": true,
+        "kind": "other",
+        "description": "A function that customizes the tags to be rendered when multiple=true. The first argument is the option, the second\nis the current tag's index.  The function should return either a Lit TemplateResult or a string containing trusted HTML of the symbol to render at\nthe specified value.",
+        "confidence": "declared"
+      },
+      {
+        "name": "dependencies",
+        "optional": true,
+        "kind": "other",
+        "default": "{ 'sl-icon': SlIcon, 'sl-popup': SlPopup, 'sl-tag': SlTag }",
+        "confidence": "declared"
+      },
+      {
+        "name": "popup",
+        "optional": true,
+        "kind": "other",
+        "confidence": "declared"
+      },
+      {
+        "name": "combobox",
+        "optional": true,
+        "kind": "other",
+        "confidence": "declared"
+      },
+      {
+        "name": "displayInput",
+        "optional": true,
+        "kind": "other",
+        "confidence": "declared"
+      },
+      {
+        "name": "valueInput",
+        "optional": true,
+        "kind": "other",
+        "confidence": "declared"
+      },
+      {
+        "name": "listbox",
+        "optional": true,
+        "kind": "other",
+        "confidence": "declared"
+      },
+      {
+        "name": "displayLabel",
+        "optional": true,
+        "kind": "string",
+        "confidence": "declared"
+      },
+      {
+        "name": "currentOption",
+        "optional": true,
+        "kind": "other",
+        "confidence": "declared"
+      },
+      {
+        "name": "selectedOptions",
+        "optional": true,
+        "kind": "other",
+        "default": "[]",
+        "confidence": "declared"
+      },
+      {
+        "name": "defaultValue",
+        "optional": true,
+        "kind": "other",
+        "description": "The default value of the form control. Primarily used for resetting the form control.",
+        "confidence": "declared"
+      },
+      {
+        "name": "maxOptionsVisible",
+        "optional": true,
+        "kind": "number",
+        "default": 3,
+        "description": "The maximum number of selected options to show when `multiple` is true. After the maximum, \"+n\" will be shown to\nindicate the number of additional items that are selected. Set to 0 to remove the limit.",
+        "confidence": "declared"
+      },
+      {
+        "name": "helpText",
+        "optional": true,
+        "kind": "string",
+        "description": "The select's help text. If you need to display HTML, use the `help-text` slot instead.",
+        "confidence": "declared"
+      },
+      {
+        "name": "validity",
+        "optional": true,
+        "kind": "other",
+        "description": "Gets the validity state object",
+        "confidence": "declared"
+      },
+      {
+        "name": "validationMessage",
+        "optional": true,
+        "kind": "other",
+        "description": "Gets the validation message",
+        "confidence": "declared"
+      },
+      {
+        "name": "onChange",
+        "kind": "event",
+        "optional": true,
+        "description": "Emitted when the control's value changes. (CEM event \"sl-change\")",
+        "confidence": "inferred"
+      },
+      {
+        "name": "onClear",
+        "kind": "event",
+        "optional": true,
+        "description": "Emitted when the control's value is cleared. (CEM event \"sl-clear\")",
+        "confidence": "inferred"
+      },
+      {
+        "name": "onInput",
+        "kind": "event",
+        "optional": true,
+        "description": "Emitted when the control receives input. (CEM event \"sl-input\")",
+        "confidence": "inferred"
+      },
+      {
+        "name": "onFocus",
+        "kind": "event",
+        "optional": true,
+        "description": "Emitted when the control gains focus. (CEM event \"sl-focus\")",
+        "confidence": "inferred"
+      },
+      {
+        "name": "onBlur",
+        "kind": "event",
+        "optional": true,
+        "description": "Emitted when the control loses focus. (CEM event \"sl-blur\")",
+        "confidence": "inferred"
+      },
+      {
+        "name": "onShow",
+        "kind": "event",
+        "optional": true,
+        "description": "Emitted when the select's menu opens. (CEM event \"sl-show\")",
+        "confidence": "inferred"
+      },
+      {
+        "name": "onAfterShow",
+        "kind": "event",
+        "optional": true,
+        "description": "Emitted after the select's menu opens and all animations are complete. (CEM event \"sl-after-show\")",
+        "confidence": "inferred"
+      },
+      {
+        "name": "onHide",
+        "kind": "event",
+        "optional": true,
+        "description": "Emitted when the select's menu closes. (CEM event \"sl-hide\")",
+        "confidence": "inferred"
+      },
+      {
+        "name": "onAfterHide",
+        "kind": "event",
+        "optional": true,
+        "description": "Emitted after the select's menu closes and all animations are complete. (CEM event \"sl-after-hide\")",
+        "confidence": "inferred"
+      },
+      {
+        "name": "onInvalid",
+        "kind": "event",
+        "optional": true,
+        "description": "Emitted when the form control has been checked for validity and its constraints aren't satisfied. (CEM event \"sl-invalid\")",
+        "confidence": "inferred"
+      }
+    ]
+  },
+  {
+    "name": "SlSkeleton",
+    "source": "extract/pilots/shoelace/custom-elements.json (components/skeleton/skeleton.js)",
+    "adapter": "cem",
+    "props": [
+      {
+        "name": "effect",
+        "optional": true,
+        "kind": "enum",
+        "values": [
+          "pulse",
+          "sheen",
+          "none"
+        ],
+        "default": "none",
+        "description": "Determines which effect the skeleton will use.",
+        "confidence": "declared"
+      }
+    ]
+  },
+  {
+    "name": "SlSpinner",
+    "source": "extract/pilots/shoelace/custom-elements.json (components/spinner/spinner.js)",
+    "adapter": "cem",
+    "props": []
+  },
+  {
+    "name": "SlSplitPanel",
+    "source": "extract/pilots/shoelace/custom-elements.json (components/split-panel/split-panel.js)",
+    "adapter": "cem",
+    "props": [
+      {
+        "name": "position",
+        "optional": true,
+        "kind": "number",
+        "default": 50,
+        "description": "The current position of the divider from the primary panel's edge as a percentage 0-100. Defaults to 50% of the\ncontainer's initial size.",
+        "confidence": "declared"
+      },
+      {
+        "name": "position-in-pixels",
+        "optional": true,
+        "kind": "number",
+        "description": "The current position of the divider from the primary panel's edge in pixels.",
+        "confidence": "declared"
+      },
+      {
+        "name": "vertical",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "description": "Draws the split panel in a vertical orientation with the start and end panels stacked.",
+        "confidence": "declared"
+      },
+      {
+        "name": "disabled",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "description": "Disables resizing. Note that the position may still change as a result of resizing the host element.",
+        "confidence": "declared"
+      },
+      {
+        "name": "primary",
+        "optional": true,
+        "kind": "enum",
+        "values": [
+          "start",
+          "end"
+        ],
+        "description": "If no primary panel is designated, both panels will resize proportionally when the host element is resized. If a\nprimary panel is designated, it will maintain its size and the other panel will grow or shrink as needed when the\nhost element is resized.",
+        "confidence": "declared"
+      },
+      {
+        "name": "snap",
+        "optional": true,
+        "kind": "other",
+        "description": "Either one or more space-separated values at which the divider should snap, in pixels, percentages, or repeat expressions e.g. `'100px 50% 500px' or `repeat(50%) 10px`,\nor a function which takes in a `SnapFunctionParams`, and returns a position to snap to, e.g. `({ pos }) => Math.round(pos / 8) * 8`.",
+        "confidence": "declared"
+      },
+      {
+        "name": "snap-threshold",
+        "optional": true,
+        "kind": "number",
+        "default": 12,
+        "description": "How close the divider must be to a snap point until snapping occurs.",
+        "confidence": "declared"
+      },
+      {
+        "name": "divider",
+        "optional": true,
+        "kind": "other",
+        "confidence": "declared"
+      },
+      {
+        "name": "positionInPixels",
+        "optional": true,
+        "kind": "number",
+        "description": "The current position of the divider from the primary panel's edge in pixels.",
+        "confidence": "declared"
+      },
+      {
+        "name": "snapThreshold",
+        "optional": true,
+        "kind": "number",
+        "default": 12,
+        "description": "How close the divider must be to a snap point until snapping occurs.",
+        "confidence": "declared"
+      },
+      {
+        "name": "onReposition",
+        "kind": "event",
+        "optional": true,
+        "description": "Emitted when the divider's position changes. (CEM event \"sl-reposition\")",
+        "confidence": "inferred"
+      }
+    ]
+  },
+  {
+    "name": "SlSwitch",
+    "source": "extract/pilots/shoelace/custom-elements.json (components/switch/switch.js)",
+    "adapter": "cem",
+    "props": [
+      {
+        "name": "title",
+        "optional": true,
+        "kind": "string",
+        "confidence": "declared"
+      },
+      {
+        "name": "name",
+        "optional": true,
+        "kind": "string",
+        "description": "The name of the switch, submitted as a name/value pair with form data.",
+        "confidence": "declared"
+      },
+      {
+        "name": "value",
+        "optional": true,
+        "kind": "string",
+        "description": "The current value of the switch, submitted as a name/value pair with form data.",
+        "confidence": "declared"
+      },
+      {
+        "name": "size",
+        "optional": true,
+        "kind": "enum",
+        "values": [
+          "small",
+          "medium",
+          "large"
+        ],
+        "default": "medium",
+        "description": "The switch's size.",
+        "confidence": "declared"
+      },
+      {
+        "name": "disabled",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "description": "Disables the switch.",
+        "confidence": "declared"
+      },
+      {
+        "name": "checked",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "description": "Draws the switch in a checked state.",
+        "confidence": "declared"
+      },
+      {
+        "name": "form",
+        "optional": true,
+        "kind": "string",
+        "description": "By default, form controls are associated with the nearest containing `<form>` element. This attribute allows you\nto place the form control outside of a form and associate it with the form that has this `id`. The form must be in\nthe same document or shadow root for this to work.",
+        "confidence": "declared"
+      },
+      {
+        "name": "required",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "description": "Makes the switch a required field.",
+        "confidence": "declared"
+      },
+      {
+        "name": "help-text",
+        "optional": true,
+        "kind": "string",
+        "description": "The switch's help text. If you need to display HTML, use the `help-text` slot instead.",
+        "confidence": "declared"
+      },
+      {
+        "name": "input",
+        "optional": true,
+        "kind": "other",
+        "confidence": "declared"
+      },
+      {
+        "name": "defaultChecked",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "description": "The default value of the form control. Primarily used for resetting the form control.",
+        "confidence": "declared"
+      },
+      {
+        "name": "helpText",
+        "optional": true,
+        "kind": "string",
+        "description": "The switch's help text. If you need to display HTML, use the `help-text` slot instead.",
+        "confidence": "declared"
+      },
+      {
+        "name": "validity",
+        "optional": true,
+        "kind": "other",
+        "description": "Gets the validity state object",
+        "confidence": "declared"
+      },
+      {
+        "name": "validationMessage",
+        "optional": true,
+        "kind": "other",
+        "description": "Gets the validation message",
+        "confidence": "declared"
+      },
+      {
+        "name": "onBlur",
+        "kind": "event",
+        "optional": true,
+        "description": "Emitted when the control loses focus. (CEM event \"sl-blur\")",
+        "confidence": "inferred"
+      },
+      {
+        "name": "onChange",
+        "kind": "event",
+        "optional": true,
+        "description": "Emitted when the control's checked state changes. (CEM event \"sl-change\")",
+        "confidence": "inferred"
+      },
+      {
+        "name": "onInput",
+        "kind": "event",
+        "optional": true,
+        "description": "Emitted when the control receives input. (CEM event \"sl-input\")",
+        "confidence": "inferred"
+      },
+      {
+        "name": "onFocus",
+        "kind": "event",
+        "optional": true,
+        "description": "Emitted when the control gains focus. (CEM event \"sl-focus\")",
+        "confidence": "inferred"
+      },
+      {
+        "name": "onInvalid",
+        "kind": "event",
+        "optional": true,
+        "description": "Emitted when the form control has been checked for validity and its constraints aren't satisfied. (CEM event \"sl-invalid\")",
+        "confidence": "inferred"
+      }
+    ]
+  },
+  {
+    "name": "SlTab",
+    "source": "extract/pilots/shoelace/custom-elements.json (components/tab/tab.js)",
+    "adapter": "cem",
+    "props": [
+      {
+        "name": "panel",
+        "optional": true,
+        "kind": "string",
+        "description": "The name of the tab panel this tab is associated with. The panel must be located in the same tab group.",
+        "confidence": "declared"
+      },
+      {
+        "name": "active",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "description": "Draws the tab in an active state.",
+        "confidence": "declared"
+      },
+      {
+        "name": "closable",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "description": "Makes the tab closable and shows a close button.",
+        "confidence": "declared"
+      },
+      {
+        "name": "disabled",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "description": "Disables the tab and prevents selection.",
+        "confidence": "declared"
+      },
+      {
+        "name": "dependencies",
+        "optional": true,
+        "kind": "other",
+        "default": "{ 'sl-icon-button': SlIconButton }",
+        "confidence": "declared"
+      },
+      {
+        "name": "tab",
+        "optional": true,
+        "kind": "other",
+        "confidence": "declared"
+      },
+      {
+        "name": "onClose",
+        "kind": "event",
+        "optional": true,
+        "description": "Emitted when the tab is closable and the close button is activated. (CEM event \"sl-close\")",
+        "confidence": "inferred"
+      }
+    ]
+  },
+  {
+    "name": "SlTabGroup",
+    "source": "extract/pilots/shoelace/custom-elements.json (components/tab-group/tab-group.js)",
+    "adapter": "cem",
+    "props": [
+      {
+        "name": "placement",
+        "optional": true,
+        "kind": "enum",
+        "values": [
+          "top",
+          "bottom",
+          "start",
+          "end"
+        ],
+        "default": "top",
+        "description": "The placement of the tabs.",
+        "confidence": "declared"
+      },
+      {
+        "name": "activation",
+        "optional": true,
+        "kind": "enum",
+        "values": [
+          "auto",
+          "manual"
+        ],
+        "default": "auto",
+        "description": "When set to auto, navigating tabs with the arrow keys will instantly show the corresponding tab panel. When set to\nmanual, the tab will receive focus but will not show until the user presses spacebar or enter.",
+        "confidence": "declared"
+      },
+      {
+        "name": "no-scroll-controls",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "description": "Disables the scroll arrows that appear when tabs overflow.",
+        "confidence": "declared"
+      },
+      {
+        "name": "fixed-scroll-controls",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "description": "Prevent scroll buttons from being hidden when inactive.",
+        "confidence": "declared"
+      },
+      {
+        "name": "dependencies",
+        "optional": true,
+        "kind": "other",
+        "default": "{ 'sl-icon-button': SlIconButton, 'sl-resize-observer': SlResizeObserver }",
+        "confidence": "declared"
+      },
+      {
+        "name": "tabGroup",
+        "optional": true,
+        "kind": "other",
+        "confidence": "declared"
+      },
+      {
+        "name": "body",
+        "optional": true,
+        "kind": "other",
+        "confidence": "declared"
+      },
+      {
+        "name": "nav",
+        "optional": true,
+        "kind": "other",
+        "confidence": "declared"
+      },
+      {
+        "name": "indicator",
+        "optional": true,
+        "kind": "other",
+        "confidence": "declared"
+      },
+      {
+        "name": "noScrollControls",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "description": "Disables the scroll arrows that appear when tabs overflow.",
+        "confidence": "declared"
+      },
+      {
+        "name": "fixedScrollControls",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "description": "Prevent scroll buttons from being hidden when inactive.",
+        "confidence": "declared"
+      },
+      {
+        "name": "onTabShow",
+        "kind": "event",
+        "optional": true,
+        "description": "Emitted when a tab is shown. (CEM event \"sl-tab-show\")",
+        "confidence": "inferred"
+      },
+      {
+        "name": "onTabHide",
+        "kind": "event",
+        "optional": true,
+        "description": "Emitted when a tab is hidden. (CEM event \"sl-tab-hide\")",
+        "confidence": "inferred"
+      }
+    ]
+  },
+  {
+    "name": "SlTabPanel",
+    "source": "extract/pilots/shoelace/custom-elements.json (components/tab-panel/tab-panel.js)",
+    "adapter": "cem",
+    "props": [
+      {
+        "name": "name",
+        "optional": true,
+        "kind": "string",
+        "description": "The tab panel's name.",
+        "confidence": "declared"
+      },
+      {
+        "name": "active",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "description": "When true, the tab panel will be shown.",
+        "confidence": "declared"
+      }
+    ]
+  },
+  {
+    "name": "SlTag",
+    "source": "extract/pilots/shoelace/custom-elements.json (components/tag/tag.js)",
+    "adapter": "cem",
+    "props": [
+      {
+        "name": "variant",
+        "optional": true,
+        "kind": "enum",
+        "values": [
+          "primary",
+          "success",
+          "neutral",
+          "warning",
+          "danger",
+          "text"
+        ],
+        "default": "neutral",
+        "description": "The tag's theme variant.",
+        "confidence": "declared"
+      },
+      {
+        "name": "size",
+        "optional": true,
+        "kind": "enum",
+        "values": [
+          "small",
+          "medium",
+          "large"
+        ],
+        "default": "medium",
+        "description": "The tag's size.",
+        "confidence": "declared"
+      },
+      {
+        "name": "pill",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "description": "Draws a pill-style tag with rounded edges.",
+        "confidence": "declared"
+      },
+      {
+        "name": "removable",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "description": "Makes the tag removable and shows a remove button.",
+        "confidence": "declared"
+      },
+      {
+        "name": "dependencies",
+        "optional": true,
+        "kind": "other",
+        "default": "{ 'sl-icon-button': SlIconButton }",
+        "confidence": "declared"
+      },
+      {
+        "name": "onRemove",
+        "kind": "event",
+        "optional": true,
+        "description": "Emitted when the remove button is activated. (CEM event \"sl-remove\")",
+        "confidence": "inferred"
+      }
+    ]
+  },
+  {
+    "name": "SlTextarea",
+    "source": "extract/pilots/shoelace/custom-elements.json (components/textarea/textarea.js)",
+    "adapter": "cem",
+    "props": [
+      {
+        "name": "title",
+        "optional": true,
+        "kind": "string",
+        "confidence": "declared"
+      },
+      {
+        "name": "name",
+        "optional": true,
+        "kind": "string",
+        "description": "The name of the textarea, submitted as a name/value pair with form data.",
+        "confidence": "declared"
+      },
+      {
+        "name": "value",
+        "optional": true,
+        "kind": "string",
+        "description": "The current value of the textarea, submitted as a name/value pair with form data.",
+        "confidence": "declared"
+      },
+      {
+        "name": "size",
+        "optional": true,
+        "kind": "enum",
+        "values": [
+          "small",
+          "medium",
+          "large"
+        ],
+        "default": "medium",
+        "description": "The textarea's size.",
+        "confidence": "declared"
+      },
+      {
+        "name": "filled",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "description": "Draws a filled textarea.",
+        "confidence": "declared"
+      },
+      {
+        "name": "label",
+        "optional": true,
+        "kind": "string",
+        "description": "The textarea's label. If you need to display HTML, use the `label` slot instead.",
+        "confidence": "declared"
+      },
+      {
+        "name": "help-text",
+        "optional": true,
+        "kind": "string",
+        "description": "The textarea's help text. If you need to display HTML, use the `help-text` slot instead.",
+        "confidence": "declared"
+      },
+      {
+        "name": "placeholder",
+        "optional": true,
+        "kind": "string",
+        "description": "Placeholder text to show as a hint when the input is empty.",
+        "confidence": "declared"
+      },
+      {
+        "name": "rows",
+        "optional": true,
+        "kind": "number",
+        "default": 4,
+        "description": "The number of rows to display by default.",
+        "confidence": "declared"
+      },
+      {
+        "name": "resize",
+        "optional": true,
+        "kind": "enum",
+        "values": [
+          "none",
+          "vertical",
+          "auto"
+        ],
+        "default": "vertical",
+        "description": "Controls how the textarea can be resized.",
+        "confidence": "declared"
+      },
+      {
+        "name": "disabled",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "description": "Disables the textarea.",
+        "confidence": "declared"
+      },
+      {
+        "name": "readonly",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "description": "Makes the textarea readonly.",
+        "confidence": "declared"
+      },
+      {
+        "name": "form",
+        "optional": true,
+        "kind": "string",
+        "description": "By default, form controls are associated with the nearest containing `<form>` element. This attribute allows you\nto place the form control outside of a form and associate it with the form that has this `id`. The form must be in\nthe same document or shadow root for this to work.",
+        "confidence": "declared"
+      },
+      {
+        "name": "required",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "description": "Makes the textarea a required field.",
+        "confidence": "declared"
+      },
+      {
+        "name": "minlength",
+        "optional": true,
+        "kind": "number",
+        "description": "The minimum length of input that will be considered valid.",
+        "confidence": "declared"
+      },
+      {
+        "name": "maxlength",
+        "optional": true,
+        "kind": "number",
+        "description": "The maximum length of input that will be considered valid.",
+        "confidence": "declared"
+      },
+      {
+        "name": "autocapitalize",
+        "optional": true,
+        "kind": "enum",
+        "values": [
+          "off",
+          "none",
+          "on",
+          "sentences",
+          "words",
+          "characters"
+        ],
+        "description": "Controls whether and how text input is automatically capitalized as it is entered by the user.",
+        "confidence": "declared"
+      },
+      {
+        "name": "autocorrect",
+        "optional": true,
+        "kind": "string",
+        "description": "Indicates whether the browser's autocorrect feature is on or off.",
+        "confidence": "declared"
+      },
+      {
+        "name": "autocomplete",
+        "optional": true,
+        "kind": "string",
+        "description": "Specifies what permission the browser has to provide assistance in filling out form field values. Refer to\n[this page on MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete) for available values.",
+        "confidence": "declared"
+      },
+      {
+        "name": "autofocus",
+        "optional": true,
+        "kind": "boolean",
+        "description": "Indicates that the input should receive focus on page load.",
+        "confidence": "declared"
+      },
+      {
+        "name": "enterkeyhint",
+        "optional": true,
+        "kind": "enum",
+        "values": [
+          "enter",
+          "done",
+          "go",
+          "next",
+          "previous",
+          "search",
+          "send"
+        ],
+        "description": "Used to customize the label or icon of the Enter key on virtual keyboards.",
+        "confidence": "declared"
+      },
+      {
+        "name": "spellcheck",
+        "optional": true,
+        "kind": "boolean",
+        "default": true,
+        "description": "Enables spell checking on the textarea.",
+        "confidence": "declared"
+      },
+      {
+        "name": "inputmode",
+        "optional": true,
+        "kind": "enum",
+        "values": [
+          "none",
+          "text",
+          "decimal",
+          "numeric",
+          "tel",
+          "search",
+          "email",
+          "url"
+        ],
+        "description": "Tells the browser what type of data will be entered by the user, allowing it to display the appropriate virtual\nkeyboard on supportive devices.",
+        "confidence": "declared"
+      },
+      {
+        "name": "input",
+        "optional": true,
+        "kind": "other",
+        "confidence": "declared"
+      },
+      {
+        "name": "sizeAdjuster",
+        "optional": true,
+        "kind": "other",
+        "confidence": "declared"
+      },
+      {
+        "name": "helpText",
+        "optional": true,
+        "kind": "string",
+        "description": "The textarea's help text. If you need to display HTML, use the `help-text` slot instead.",
+        "confidence": "declared"
+      },
+      {
+        "name": "defaultValue",
+        "optional": true,
+        "kind": "string",
+        "description": "The default value of the form control. Primarily used for resetting the form control.",
+        "confidence": "declared"
+      },
+      {
+        "name": "validity",
+        "optional": true,
+        "kind": "other",
+        "description": "Gets the validity state object",
+        "confidence": "declared"
+      },
+      {
+        "name": "validationMessage",
+        "optional": true,
+        "kind": "other",
+        "description": "Gets the validation message",
+        "confidence": "declared"
+      },
+      {
+        "name": "onBlur",
+        "kind": "event",
+        "optional": true,
+        "description": "Emitted when the control loses focus. (CEM event \"sl-blur\")",
+        "confidence": "inferred"
+      },
+      {
+        "name": "onChange",
+        "kind": "event",
+        "optional": true,
+        "description": "Emitted when an alteration to the control's value is committed by the user. (CEM event \"sl-change\")",
+        "confidence": "inferred"
+      },
+      {
+        "name": "onFocus",
+        "kind": "event",
+        "optional": true,
+        "description": "Emitted when the control gains focus. (CEM event \"sl-focus\")",
+        "confidence": "inferred"
+      },
+      {
+        "name": "onInput",
+        "kind": "event",
+        "optional": true,
+        "description": "Emitted when the control receives input. (CEM event \"sl-input\")",
+        "confidence": "inferred"
+      },
+      {
+        "name": "onInvalid",
+        "kind": "event",
+        "optional": true,
+        "description": "Emitted when the form control has been checked for validity and its constraints aren't satisfied. (CEM event \"sl-invalid\")",
+        "confidence": "inferred"
+      }
+    ]
+  },
+  {
+    "name": "SlTooltip",
+    "source": "extract/pilots/shoelace/custom-elements.json (components/tooltip/tooltip.js)",
+    "adapter": "cem",
+    "props": [
+      {
+        "name": "content",
+        "optional": true,
+        "kind": "string",
+        "description": "The tooltip's content. If you need to display HTML, use the `content` slot instead.",
+        "confidence": "declared"
+      },
+      {
+        "name": "placement",
+        "optional": true,
+        "kind": "other",
+        "default": "top",
+        "description": "The preferred placement of the tooltip. Note that the actual placement may vary as needed to keep the tooltip\ninside of the viewport.",
+        "confidence": "declared"
+      },
+      {
+        "name": "disabled",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "description": "Disables the tooltip so it won't show when triggered.",
+        "confidence": "declared"
+      },
+      {
+        "name": "distance",
+        "optional": true,
+        "kind": "number",
+        "default": 8,
+        "description": "The distance in pixels from which to offset the tooltip away from its target.",
+        "confidence": "declared"
+      },
+      {
+        "name": "open",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "description": "Indicates whether or not the tooltip is open. You can use this in lieu of the show/hide methods.",
+        "confidence": "declared"
+      },
+      {
+        "name": "skidding",
+        "optional": true,
+        "kind": "number",
+        "default": 0,
+        "description": "The distance in pixels from which to offset the tooltip along its target.",
+        "confidence": "declared"
+      },
+      {
+        "name": "trigger",
+        "optional": true,
+        "kind": "string",
+        "default": "hover focus",
+        "description": "Controls how the tooltip is activated. Possible options include `click`, `hover`, `focus`, and `manual`. Multiple\noptions can be passed by separating them with a space. When manual is used, the tooltip must be activated\nprogrammatically.",
+        "confidence": "declared"
+      },
+      {
+        "name": "hoist",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "description": "Enable this option to prevent the tooltip from being clipped when the component is placed inside a container with\n`overflow: auto|hidden|scroll`. Hoisting uses a fixed positioning strategy that works in many, but not all,\nscenarios.",
+        "confidence": "declared"
+      },
+      {
+        "name": "dependencies",
+        "optional": true,
+        "kind": "other",
+        "default": "{ 'sl-popup': SlPopup }",
+        "confidence": "declared"
+      },
+      {
+        "name": "defaultSlot",
+        "optional": true,
+        "kind": "other",
+        "confidence": "declared"
+      },
+      {
+        "name": "body",
+        "optional": true,
+        "kind": "other",
+        "confidence": "declared"
+      },
+      {
+        "name": "popup",
+        "optional": true,
+        "kind": "other",
+        "confidence": "declared"
+      },
+      {
+        "name": "onShow",
+        "kind": "event",
+        "optional": true,
+        "description": "Emitted when the tooltip begins to show. (CEM event \"sl-show\")",
+        "confidence": "inferred"
+      },
+      {
+        "name": "onAfterShow",
+        "kind": "event",
+        "optional": true,
+        "description": "Emitted after the tooltip has shown and all animations are complete. (CEM event \"sl-after-show\")",
+        "confidence": "inferred"
+      },
+      {
+        "name": "onHide",
+        "kind": "event",
+        "optional": true,
+        "description": "Emitted when the tooltip begins to hide. (CEM event \"sl-hide\")",
+        "confidence": "inferred"
+      },
+      {
+        "name": "onAfterHide",
+        "kind": "event",
+        "optional": true,
+        "description": "Emitted after the tooltip has hidden and all animations are complete. (CEM event \"sl-after-hide\")",
+        "confidence": "inferred"
+      }
+    ]
+  },
+  {
+    "name": "SlTree",
+    "source": "extract/pilots/shoelace/custom-elements.json (components/tree/tree.js)",
+    "adapter": "cem",
+    "props": [
+      {
+        "name": "selection",
+        "optional": true,
+        "kind": "enum",
+        "values": [
+          "single",
+          "multiple",
+          "leaf"
+        ],
+        "default": "single",
+        "description": "The selection behavior of the tree. Single selection allows only one node to be selected at a time. Multiple\ndisplays checkboxes and allows more than one node to be selected. Leaf allows only leaf nodes to be selected.",
+        "confidence": "declared"
+      },
+      {
+        "name": "defaultSlot",
+        "optional": true,
+        "kind": "other",
+        "confidence": "declared"
+      },
+      {
+        "name": "expandedIconSlot",
+        "optional": true,
+        "kind": "other",
+        "confidence": "declared"
+      },
+      {
+        "name": "collapsedIconSlot",
+        "optional": true,
+        "kind": "other",
+        "confidence": "declared"
+      },
+      {
+        "name": "onSelectionChange",
+        "kind": "event",
+        "optional": true,
+        "description": "Emitted when a tree item is selected or deselected. (CEM event \"sl-selection-change\")",
+        "confidence": "inferred"
+      }
+    ]
+  },
+  {
+    "name": "SlTreeItem",
+    "source": "extract/pilots/shoelace/custom-elements.json (components/tree-item/tree-item.js)",
+    "adapter": "cem",
+    "props": [
+      {
+        "name": "expanded",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "description": "Expands the tree item.",
+        "confidence": "declared"
+      },
+      {
+        "name": "selected",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "description": "Draws the tree item in a selected state.",
+        "confidence": "declared"
+      },
+      {
+        "name": "disabled",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "description": "Disables the tree item.",
+        "confidence": "declared"
+      },
+      {
+        "name": "lazy",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "description": "Enables lazy loading behavior.",
+        "confidence": "declared"
+      },
+      {
+        "name": "dependencies",
+        "optional": true,
+        "kind": "other",
+        "default": "{ 'sl-checkbox': SlCheckbox, 'sl-icon': SlIcon, 'sl-spinner': SlSpinner }",
+        "confidence": "declared"
+      },
+      {
+        "name": "indeterminate",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "confidence": "declared"
+      },
+      {
+        "name": "isLeaf",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "confidence": "declared"
+      },
+      {
+        "name": "loading",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "confidence": "declared"
+      },
+      {
+        "name": "selectable",
+        "optional": true,
+        "kind": "boolean",
+        "default": false,
+        "confidence": "declared"
+      },
+      {
+        "name": "defaultSlot",
+        "optional": true,
+        "kind": "other",
+        "confidence": "declared"
+      },
+      {
+        "name": "childrenSlot",
+        "optional": true,
+        "kind": "other",
+        "confidence": "declared"
+      },
+      {
+        "name": "itemElement",
+        "optional": true,
+        "kind": "other",
+        "confidence": "declared"
+      },
+      {
+        "name": "childrenContainer",
+        "optional": true,
+        "kind": "other",
+        "confidence": "declared"
+      },
+      {
+        "name": "expandButtonSlot",
+        "optional": true,
+        "kind": "other",
+        "confidence": "declared"
+      },
+      {
+        "name": "onExpand",
+        "kind": "event",
+        "optional": true,
+        "description": "Emitted when the tree item expands. (CEM event \"sl-expand\")",
+        "confidence": "inferred"
+      },
+      {
+        "name": "onAfterExpand",
+        "kind": "event",
+        "optional": true,
+        "description": "Emitted after the tree item expands and all animations are complete. (CEM event \"sl-after-expand\")",
+        "confidence": "inferred"
+      },
+      {
+        "name": "onCollapse",
+        "kind": "event",
+        "optional": true,
+        "description": "Emitted when the tree item collapses. (CEM event \"sl-collapse\")",
+        "confidence": "inferred"
+      },
+      {
+        "name": "onAfterCollapse",
+        "kind": "event",
+        "optional": true,
+        "description": "Emitted after the tree item collapses and all animations are complete. (CEM event \"sl-after-collapse\")",
+        "confidence": "inferred"
+      },
+      {
+        "name": "onLazyChange",
+        "kind": "event",
+        "optional": true,
+        "description": "Emitted when the tree item's lazy state changes. (CEM event \"sl-lazy-change\")",
+        "confidence": "inferred"
+      },
+      {
+        "name": "onLazyLoad",
+        "kind": "event",
+        "optional": true,
+        "description": "Emitted when a lazy item is selected. Use this event to asynchronously load data and append items to the tree before expanding. After appending new items, remove the `lazy` attribute to remove the loading state and update the tree. (CEM event \"sl-lazy-load\")",
+        "confidence": "inferred"
+      }
+    ]
+  },
+  {
+    "name": "SlVisuallyHidden",
+    "source": "extract/pilots/shoelace/custom-elements.json (components/visually-hidden/visually-hidden.js)",
+    "adapter": "cem",
+    "props": []
+  }
+]

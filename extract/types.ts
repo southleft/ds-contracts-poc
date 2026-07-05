@@ -68,6 +68,11 @@ export interface ExtractConfig {
   idPrefix?: string;
   /** Output directory (default "extract/out") */
   out?: string;
+  diagnose?: {
+    /** Directory of adopted/proposed contracts to referee against
+     *  (default: "<out>/contracts") */
+    contracts?: string;
+  };
 }
 
 export const normalizeName = (s: string): string =>

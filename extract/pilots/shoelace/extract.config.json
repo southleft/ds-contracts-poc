@@ -1,0 +1,6 @@
+{
+  "code": { "adapter": "cem", "manifest": "extract/pilots/shoelace/custom-elements.json" },
+  "idPrefix": "sl",
+  "out": "extract/pilots/shoelace/out",
+  "diagnose": { "contracts": "extract/pilots/shoelace/out/contracts" }
+}

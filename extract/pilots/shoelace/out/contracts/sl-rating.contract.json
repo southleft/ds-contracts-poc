@@ -1,0 +1,138 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "sl.sl-rating",
+  "name": "SlRating",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "PROPOSED contract extracted from extract/pilots/shoelace/custom-elements.json (components/rating/rating.js) (cem adapter) — API surface only; anatomy, tokens, and design bindings await reconciliation and human review.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "label",
+      "description": "A label that describes the rating to assistive devices.",
+      "type": "text",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Label"
+        },
+        "code": {
+          "prop": "label"
+        }
+      }
+    },
+    {
+      "name": "value",
+      "description": "The current rating.",
+      "type": "number",
+      "default": 0,
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Value"
+        },
+        "code": {
+          "prop": "value"
+        }
+      }
+    },
+    {
+      "name": "max",
+      "description": "The highest rating to show.",
+      "type": "number",
+      "default": 5,
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Max"
+        },
+        "code": {
+          "prop": "max"
+        }
+      }
+    },
+    {
+      "name": "precision",
+      "description": "The precision at which the rating will increase and decrease. For example, to allow half-star ratings, set this\nattribute to `0.5`.",
+      "type": "number",
+      "default": 1,
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Precision"
+        },
+        "code": {
+          "prop": "precision"
+        }
+      }
+    },
+    {
+      "name": "readonly",
+      "description": "Makes the rating readonly.",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Readonly"
+        },
+        "code": {
+          "prop": "readonly"
+        }
+      }
+    },
+    {
+      "name": "disabled",
+      "description": "Disables the rating.",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Disabled"
+        },
+        "code": {
+          "prop": "disabled"
+        }
+      }
+    }
+  ],
+  "events": [
+    {
+      "name": "change",
+      "description": "Emitted when the rating's value changes. (CEM event \"sl-change\")",
+      "bindings": {
+        "code": {
+          "prop": "onChange"
+        }
+      },
+      "trigger": "root"
+    },
+    {
+      "name": "hover",
+      "description": "Emitted when the user hovers over a value. The `phase` property indicates when hovering starts, moves to a new value, or ends. The `value` property tells what the rating's value would be if the user were to commit to the hovered value. (CEM event \"sl-hover\")",
+      "bindings": {
+        "code": {
+          "prop": "onHover"
+        }
+      },
+      "trigger": "root"
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {}
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "extract/pilots/shoelace/custom-elements.json (components/rating/rating.js)",
+      "export": "SlRating"
+    }
+  }
+}

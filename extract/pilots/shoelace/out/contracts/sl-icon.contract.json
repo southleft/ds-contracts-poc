@@ -1,0 +1,78 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "sl.sl-icon",
+  "name": "SlIcon",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "PROPOSED contract extracted from extract/pilots/shoelace/custom-elements.json (components/icon/icon.js) (cem adapter) — API surface only; anatomy, tokens, and design bindings await reconciliation and human review.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "label",
+      "description": "An alternate description to use for assistive devices. If omitted, the icon will be considered presentational and\nignored by assistive devices.",
+      "type": "text",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Label"
+        },
+        "code": {
+          "prop": "label"
+        }
+      }
+    },
+    {
+      "name": "library",
+      "description": "The name of a registered custom icon library.",
+      "type": "text",
+      "default": "default",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Library"
+        },
+        "code": {
+          "prop": "library"
+        }
+      }
+    }
+  ],
+  "events": [
+    {
+      "name": "load",
+      "description": "Emitted when the icon has loaded. When using `spriteSheet: true` this will not emit. (CEM event \"sl-load\")",
+      "bindings": {
+        "code": {
+          "prop": "onLoad"
+        }
+      },
+      "trigger": "root"
+    },
+    {
+      "name": "error",
+      "description": "Emitted when the icon fails to load due to an error. When using `spriteSheet: true` this will not emit. (CEM event \"sl-error\")",
+      "bindings": {
+        "code": {
+          "prop": "onError"
+        }
+      },
+      "trigger": "root"
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {}
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "extract/pilots/shoelace/custom-elements.json (components/icon/icon.js)",
+      "export": "SlIcon"
+    }
+  }
+}

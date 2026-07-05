@@ -1,0 +1,165 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "sl.sl-split-panel",
+  "name": "SlSplitPanel",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "PROPOSED contract extracted from extract/pilots/shoelace/custom-elements.json (components/split-panel/split-panel.js) (cem adapter) — API surface only; anatomy, tokens, and design bindings await reconciliation and human review.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "position",
+      "description": "The current position of the divider from the primary panel's edge as a percentage 0-100. Defaults to 50% of the\ncontainer's initial size.",
+      "type": "number",
+      "default": 50,
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Position"
+        },
+        "code": {
+          "prop": "position"
+        }
+      }
+    },
+    {
+      "name": "position-in-pixels",
+      "description": "The current position of the divider from the primary panel's edge in pixels.",
+      "type": "number",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Position In Pixels"
+        },
+        "code": {
+          "prop": "position-in-pixels"
+        }
+      }
+    },
+    {
+      "name": "vertical",
+      "description": "Draws the split panel in a vertical orientation with the start and end panels stacked.",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Vertical"
+        },
+        "code": {
+          "prop": "vertical"
+        }
+      }
+    },
+    {
+      "name": "disabled",
+      "description": "Disables resizing. Note that the position may still change as a result of resizing the host element.",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Disabled"
+        },
+        "code": {
+          "prop": "disabled"
+        }
+      }
+    },
+    {
+      "name": "primary",
+      "description": "If no primary panel is designated, both panels will resize proportionally when the host element is resized. If a\nprimary panel is designated, it will maintain its size and the other panel will grow or shrink as needed when the\nhost element is resized.",
+      "type": {
+        "enum": [
+          "start",
+          "end"
+        ]
+      },
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Primary",
+          "values": {
+            "start": "Start",
+            "end": "End"
+          }
+        },
+        "code": {
+          "prop": "primary"
+        }
+      }
+    },
+    {
+      "name": "snap-threshold",
+      "description": "How close the divider must be to a snap point until snapping occurs.",
+      "type": "number",
+      "default": 12,
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Snap Threshold"
+        },
+        "code": {
+          "prop": "snap-threshold"
+        }
+      }
+    },
+    {
+      "name": "positionInPixels",
+      "description": "The current position of the divider from the primary panel's edge in pixels.",
+      "type": "number",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Position In Pixels"
+        },
+        "code": {
+          "prop": "positionInPixels"
+        }
+      }
+    },
+    {
+      "name": "snapThreshold",
+      "description": "How close the divider must be to a snap point until snapping occurs.",
+      "type": "number",
+      "default": 12,
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Snap Threshold"
+        },
+        "code": {
+          "prop": "snapThreshold"
+        }
+      }
+    }
+  ],
+  "events": [
+    {
+      "name": "reposition",
+      "description": "Emitted when the divider's position changes. (CEM event \"sl-reposition\")",
+      "bindings": {
+        "code": {
+          "prop": "onReposition"
+        }
+      },
+      "trigger": "root"
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {}
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "extract/pilots/shoelace/custom-elements.json (components/split-panel/split-panel.js)",
+      "export": "SlSplitPanel"
+    }
+  }
+}

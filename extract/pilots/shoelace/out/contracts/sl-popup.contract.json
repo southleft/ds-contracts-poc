@@ -1,0 +1,510 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "sl.sl-popup",
+  "name": "SlPopup",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "PROPOSED contract extracted from extract/pilots/shoelace/custom-elements.json (components/popup/popup.js) (cem adapter) — API surface only; anatomy, tokens, and design bindings await reconciliation and human review.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "active",
+      "description": "Activates the positioning logic and shows the popup. When this attribute is removed, the positioning logic is torn\ndown and the popup will be hidden.",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Active"
+        },
+        "code": {
+          "prop": "active"
+        }
+      }
+    },
+    {
+      "name": "strategy",
+      "description": "Determines how the popup is positioned. The `absolute` strategy works well in most cases, but if overflow is\nclipped, using a `fixed` position strategy can often workaround it.",
+      "type": {
+        "enum": [
+          "absolute",
+          "fixed"
+        ]
+      },
+      "default": "absolute",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Strategy",
+          "values": {
+            "absolute": "Absolute",
+            "fixed": "Fixed"
+          }
+        },
+        "code": {
+          "prop": "strategy"
+        }
+      }
+    },
+    {
+      "name": "distance",
+      "description": "The distance in pixels from which to offset the panel away from its anchor.",
+      "type": "number",
+      "default": 0,
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Distance"
+        },
+        "code": {
+          "prop": "distance"
+        }
+      }
+    },
+    {
+      "name": "skidding",
+      "description": "The distance in pixels from which to offset the panel along its anchor.",
+      "type": "number",
+      "default": 0,
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Skidding"
+        },
+        "code": {
+          "prop": "skidding"
+        }
+      }
+    },
+    {
+      "name": "arrow",
+      "description": "Attaches an arrow to the popup. The arrow's size and color can be customized using the `--arrow-size` and\n`--arrow-color` custom properties. For additional customizations, you can also target the arrow using\n`::part(arrow)` in your stylesheet.",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Arrow"
+        },
+        "code": {
+          "prop": "arrow"
+        }
+      }
+    },
+    {
+      "name": "arrow-placement",
+      "description": "The placement of the arrow. The default is `anchor`, which will align the arrow as close to the center of the\nanchor as possible, considering available space and `arrow-padding`. A value of `start`, `end`, or `center` will\nalign the arrow to the start, end, or center of the popover instead.",
+      "type": {
+        "enum": [
+          "start",
+          "end",
+          "center",
+          "anchor"
+        ]
+      },
+      "default": "anchor",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Arrow Placement",
+          "values": {
+            "start": "Start",
+            "end": "End",
+            "center": "Center",
+            "anchor": "Anchor"
+          }
+        },
+        "code": {
+          "prop": "arrow-placement"
+        }
+      }
+    },
+    {
+      "name": "arrow-padding",
+      "description": "The amount of padding between the arrow and the edges of the popup. If the popup has a border-radius, for example,\nthis will prevent it from overflowing the corners.",
+      "type": "number",
+      "default": 10,
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Arrow Padding"
+        },
+        "code": {
+          "prop": "arrow-padding"
+        }
+      }
+    },
+    {
+      "name": "flip",
+      "description": "When set, placement of the popup will flip to the opposite site to keep it in view. You can use\n`flipFallbackPlacements` to further configure how the fallback placement is determined.",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Flip"
+        },
+        "code": {
+          "prop": "flip"
+        }
+      }
+    },
+    {
+      "name": "flip-fallback-placements",
+      "description": "If the preferred placement doesn't fit, popup will be tested in these fallback placements until one fits. Must be a\nstring of any number of placements separated by a space, e.g. \"top bottom left\". If no placement fits, the flip\nfallback strategy will be used instead.",
+      "type": "text",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Flip Fallback Placements"
+        },
+        "code": {
+          "prop": "flip-fallback-placements"
+        }
+      }
+    },
+    {
+      "name": "flip-fallback-strategy",
+      "description": "When neither the preferred placement nor the fallback placements fit, this value will be used to determine whether\nthe popup should be positioned using the best available fit based on available space or as it was initially\npreferred.",
+      "type": {
+        "enum": [
+          "best-fit",
+          "initial"
+        ]
+      },
+      "default": "best-fit",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Flip Fallback Strategy",
+          "values": {
+            "best-fit": "Best Fit",
+            "initial": "Initial"
+          }
+        },
+        "code": {
+          "prop": "flip-fallback-strategy"
+        }
+      }
+    },
+    {
+      "name": "flip-padding",
+      "description": "The amount of padding, in pixels, to exceed before the flip behavior will occur.",
+      "type": "number",
+      "default": 0,
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Flip Padding"
+        },
+        "code": {
+          "prop": "flip-padding"
+        }
+      }
+    },
+    {
+      "name": "shift",
+      "description": "Moves the popup along the axis to keep it in view when clipped.",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Shift"
+        },
+        "code": {
+          "prop": "shift"
+        }
+      }
+    },
+    {
+      "name": "shift-padding",
+      "description": "The amount of padding, in pixels, to exceed before the shift behavior will occur.",
+      "type": "number",
+      "default": 0,
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Shift Padding"
+        },
+        "code": {
+          "prop": "shift-padding"
+        }
+      }
+    },
+    {
+      "name": "auto-size",
+      "description": "When set, this will cause the popup to automatically resize itself to prevent it from overflowing.",
+      "type": {
+        "enum": [
+          "horizontal",
+          "vertical",
+          "both"
+        ]
+      },
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Auto Size",
+          "values": {
+            "horizontal": "Horizontal",
+            "vertical": "Vertical",
+            "both": "Both"
+          }
+        },
+        "code": {
+          "prop": "auto-size"
+        }
+      }
+    },
+    {
+      "name": "sync",
+      "description": "Syncs the popup's width or height to that of the anchor element.",
+      "type": {
+        "enum": [
+          "width",
+          "height",
+          "both"
+        ]
+      },
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Sync",
+          "values": {
+            "width": "Width",
+            "height": "Height",
+            "both": "Both"
+          }
+        },
+        "code": {
+          "prop": "sync"
+        }
+      }
+    },
+    {
+      "name": "auto-size-padding",
+      "description": "The amount of padding, in pixels, to exceed before the auto-size behavior will occur.",
+      "type": "number",
+      "default": 0,
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Auto Size Padding"
+        },
+        "code": {
+          "prop": "auto-size-padding"
+        }
+      }
+    },
+    {
+      "name": "hover-bridge",
+      "description": "When a gap exists between the anchor and the popup element, this option will add a \"hover bridge\" that fills the\ngap using an invisible element. This makes listening for events such as `mouseenter` and `mouseleave` more sane\nbecause the pointer never technically leaves the element. The hover bridge will only be drawn when the popover is\nactive.",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Hover Bridge"
+        },
+        "code": {
+          "prop": "hover-bridge"
+        }
+      }
+    },
+    {
+      "name": "arrowPlacement",
+      "description": "The placement of the arrow. The default is `anchor`, which will align the arrow as close to the center of the\nanchor as possible, considering available space and `arrow-padding`. A value of `start`, `end`, or `center` will\nalign the arrow to the start, end, or center of the popover instead.",
+      "type": {
+        "enum": [
+          "start",
+          "end",
+          "center",
+          "anchor"
+        ]
+      },
+      "default": "anchor",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Arrow Placement",
+          "values": {
+            "start": "Start",
+            "end": "End",
+            "center": "Center",
+            "anchor": "Anchor"
+          }
+        },
+        "code": {
+          "prop": "arrowPlacement"
+        }
+      }
+    },
+    {
+      "name": "arrowPadding",
+      "description": "The amount of padding between the arrow and the edges of the popup. If the popup has a border-radius, for example,\nthis will prevent it from overflowing the corners.",
+      "type": "number",
+      "default": 10,
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Arrow Padding"
+        },
+        "code": {
+          "prop": "arrowPadding"
+        }
+      }
+    },
+    {
+      "name": "flipFallbackPlacements",
+      "description": "If the preferred placement doesn't fit, popup will be tested in these fallback placements until one fits. Must be a\nstring of any number of placements separated by a space, e.g. \"top bottom left\". If no placement fits, the flip\nfallback strategy will be used instead.",
+      "type": "text",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Flip Fallback Placements"
+        },
+        "code": {
+          "prop": "flipFallbackPlacements"
+        }
+      }
+    },
+    {
+      "name": "flipFallbackStrategy",
+      "description": "When neither the preferred placement nor the fallback placements fit, this value will be used to determine whether\nthe popup should be positioned using the best available fit based on available space or as it was initially\npreferred.",
+      "type": {
+        "enum": [
+          "best-fit",
+          "initial"
+        ]
+      },
+      "default": "best-fit",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Flip Fallback Strategy",
+          "values": {
+            "best-fit": "Best Fit",
+            "initial": "Initial"
+          }
+        },
+        "code": {
+          "prop": "flipFallbackStrategy"
+        }
+      }
+    },
+    {
+      "name": "flipPadding",
+      "description": "The amount of padding, in pixels, to exceed before the flip behavior will occur.",
+      "type": "number",
+      "default": 0,
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Flip Padding"
+        },
+        "code": {
+          "prop": "flipPadding"
+        }
+      }
+    },
+    {
+      "name": "shiftPadding",
+      "description": "The amount of padding, in pixels, to exceed before the shift behavior will occur.",
+      "type": "number",
+      "default": 0,
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Shift Padding"
+        },
+        "code": {
+          "prop": "shiftPadding"
+        }
+      }
+    },
+    {
+      "name": "autoSize",
+      "description": "When set, this will cause the popup to automatically resize itself to prevent it from overflowing.",
+      "type": {
+        "enum": [
+          "horizontal",
+          "vertical",
+          "both"
+        ]
+      },
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Auto Size",
+          "values": {
+            "horizontal": "Horizontal",
+            "vertical": "Vertical",
+            "both": "Both"
+          }
+        },
+        "code": {
+          "prop": "autoSize"
+        }
+      }
+    },
+    {
+      "name": "autoSizePadding",
+      "description": "The amount of padding, in pixels, to exceed before the auto-size behavior will occur.",
+      "type": "number",
+      "default": 0,
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Auto Size Padding"
+        },
+        "code": {
+          "prop": "autoSizePadding"
+        }
+      }
+    },
+    {
+      "name": "hoverBridge",
+      "description": "When a gap exists between the anchor and the popup element, this option will add a \"hover bridge\" that fills the\ngap using an invisible element. This makes listening for events such as `mouseenter` and `mouseleave` more sane\nbecause the pointer never technically leaves the element. The hover bridge will only be drawn when the popover is\nactive.",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Hover Bridge"
+        },
+        "code": {
+          "prop": "hoverBridge"
+        }
+      }
+    }
+  ],
+  "events": [
+    {
+      "name": "reposition",
+      "description": "Emitted when the popup is repositioned. This event can fire a lot, so avoid putting expensive operations in your listener or consider debouncing it. (CEM event \"sl-reposition\")",
+      "bindings": {
+        "code": {
+          "prop": "onReposition"
+        }
+      },
+      "trigger": "root"
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {}
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "extract/pilots/shoelace/custom-elements.json (components/popup/popup.js)",
+      "export": "SlPopup"
+    }
+  }
+}

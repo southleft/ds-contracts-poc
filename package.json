@@ -22,7 +22,8 @@
     "dashboard": "vite --config dashboard/vite.config.ts",
     "build:dashboard": "vite build --config dashboard/vite.config.ts",
     "extract:code": "tsx extract/run.ts code",
-    "reconcile": "tsx extract/run.ts reconcile"
+    "reconcile": "tsx extract/run.ts reconcile",
+    "diagnose": "tsx parity/diagnose.ts"
   },
   "engines": {
     "node": ">=20"

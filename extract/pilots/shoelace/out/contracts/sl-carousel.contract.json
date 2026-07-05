@@ -1,0 +1,285 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "sl.sl-carousel",
+  "name": "SlCarousel",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "PROPOSED contract extracted from extract/pilots/shoelace/custom-elements.json (components/carousel/carousel.js) (cem adapter) — API surface only; anatomy, tokens, and design bindings await reconciliation and human review.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "loop",
+      "description": "When set, allows the user to navigate the carousel in the same direction indefinitely.",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Loop"
+        },
+        "code": {
+          "prop": "loop"
+        }
+      }
+    },
+    {
+      "name": "navigation",
+      "description": "When set, show the carousel's navigation.",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Navigation"
+        },
+        "code": {
+          "prop": "navigation"
+        }
+      }
+    },
+    {
+      "name": "pagination",
+      "description": "When set, show the carousel's pagination indicators.",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Pagination"
+        },
+        "code": {
+          "prop": "pagination"
+        }
+      }
+    },
+    {
+      "name": "autoplay",
+      "description": "When set, the slides will scroll automatically when the user is not interacting with them.",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Autoplay"
+        },
+        "code": {
+          "prop": "autoplay"
+        }
+      }
+    },
+    {
+      "name": "autoplay-interval",
+      "description": "Specifies the amount of time, in milliseconds, between each automatic scroll.",
+      "type": "number",
+      "default": 3000,
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Autoplay Interval"
+        },
+        "code": {
+          "prop": "autoplay-interval"
+        }
+      }
+    },
+    {
+      "name": "slides-per-page",
+      "description": "Specifies how many slides should be shown at a given time.",
+      "type": "number",
+      "default": 1,
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Slides Per Page"
+        },
+        "code": {
+          "prop": "slides-per-page"
+        }
+      }
+    },
+    {
+      "name": "slides-per-move",
+      "description": "Specifies the number of slides the carousel will advance when scrolling, useful when specifying a `slides-per-page`\ngreater than one. It can't be higher than `slides-per-page`.",
+      "type": "number",
+      "default": 1,
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Slides Per Move"
+        },
+        "code": {
+          "prop": "slides-per-move"
+        }
+      }
+    },
+    {
+      "name": "orientation",
+      "description": "Specifies the orientation in which the carousel will lay out.",
+      "type": {
+        "enum": [
+          "horizontal",
+          "vertical"
+        ]
+      },
+      "default": "horizontal",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Orientation",
+          "values": {
+            "horizontal": "Horizontal",
+            "vertical": "Vertical"
+          }
+        },
+        "code": {
+          "prop": "orientation"
+        }
+      }
+    },
+    {
+      "name": "mouse-dragging",
+      "description": "When set, it is possible to scroll through the slides by dragging them with the mouse.",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Mouse Dragging"
+        },
+        "code": {
+          "prop": "mouse-dragging"
+        }
+      }
+    },
+    {
+      "name": "autoplayInterval",
+      "description": "Specifies the amount of time, in milliseconds, between each automatic scroll.",
+      "type": "number",
+      "default": 3000,
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Autoplay Interval"
+        },
+        "code": {
+          "prop": "autoplayInterval"
+        }
+      }
+    },
+    {
+      "name": "slidesPerPage",
+      "description": "Specifies how many slides should be shown at a given time.",
+      "type": "number",
+      "default": 1,
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Slides Per Page"
+        },
+        "code": {
+          "prop": "slidesPerPage"
+        }
+      }
+    },
+    {
+      "name": "slidesPerMove",
+      "description": "Specifies the number of slides the carousel will advance when scrolling, useful when specifying a `slides-per-page`\ngreater than one. It can't be higher than `slides-per-page`.",
+      "type": "number",
+      "default": 1,
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Slides Per Move"
+        },
+        "code": {
+          "prop": "slidesPerMove"
+        }
+      }
+    },
+    {
+      "name": "mouseDragging",
+      "description": "When set, it is possible to scroll through the slides by dragging them with the mouse.",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Mouse Dragging"
+        },
+        "code": {
+          "prop": "mouseDragging"
+        }
+      }
+    },
+    {
+      "name": "activeSlide",
+      "type": "number",
+      "default": 0,
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Active Slide"
+        },
+        "code": {
+          "prop": "activeSlide"
+        }
+      }
+    },
+    {
+      "name": "scrolling",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Scrolling"
+        },
+        "code": {
+          "prop": "scrolling"
+        }
+      }
+    },
+    {
+      "name": "dragging",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Dragging"
+        },
+        "code": {
+          "prop": "dragging"
+        }
+      }
+    }
+  ],
+  "events": [
+    {
+      "name": "slideChange",
+      "description": "Emitted when the active slide changes. (CEM event \"sl-slide-change\")",
+      "bindings": {
+        "code": {
+          "prop": "onSlideChange"
+        }
+      },
+      "trigger": "root"
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {}
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "extract/pilots/shoelace/custom-elements.json (components/carousel/carousel.js)",
+      "export": "SlCarousel"
+    }
+  }
+}

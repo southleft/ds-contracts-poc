@@ -1,0 +1,198 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "sl.sl-radio-group",
+  "name": "SlRadioGroup",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "PROPOSED contract extracted from extract/pilots/shoelace/custom-elements.json (components/radio-group/radio-group.js) (cem adapter) — API surface only; anatomy, tokens, and design bindings await reconciliation and human review.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "label",
+      "description": "The radio group's label. Required for proper accessibility. If you need to display HTML, use the `label` slot\ninstead.",
+      "type": "text",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Label"
+        },
+        "code": {
+          "prop": "label"
+        }
+      }
+    },
+    {
+      "name": "help-text",
+      "description": "The radio groups's help text. If you need to display HTML, use the `help-text` slot instead.",
+      "type": "text",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Help Text"
+        },
+        "code": {
+          "prop": "help-text"
+        }
+      }
+    },
+    {
+      "name": "name",
+      "description": "The name of the radio group, submitted as a name/value pair with form data.",
+      "type": "text",
+      "default": "option",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Name"
+        },
+        "code": {
+          "prop": "name"
+        }
+      }
+    },
+    {
+      "name": "value",
+      "description": "The current value of the radio group, submitted as a name/value pair with form data.",
+      "type": "text",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Value"
+        },
+        "code": {
+          "prop": "value"
+        }
+      }
+    },
+    {
+      "name": "size",
+      "description": "The radio group's size. This size will be applied to all child radios and radio buttons.",
+      "type": {
+        "enum": [
+          "small",
+          "medium",
+          "large"
+        ]
+      },
+      "default": "medium",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Size",
+          "values": {
+            "small": "Small",
+            "medium": "Medium",
+            "large": "Large"
+          }
+        },
+        "code": {
+          "prop": "size"
+        }
+      }
+    },
+    {
+      "name": "form",
+      "description": "By default, form controls are associated with the nearest containing `<form>` element. This attribute allows you\nto place the form control outside of a form and associate it with the form that has this `id`. The form must be in\nthe same document or shadow root for this to work.",
+      "type": "text",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Form"
+        },
+        "code": {
+          "prop": "form"
+        }
+      }
+    },
+    {
+      "name": "required",
+      "description": "Ensures a child radio is checked before allowing the containing form to submit.",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Required"
+        },
+        "code": {
+          "prop": "required"
+        }
+      }
+    },
+    {
+      "name": "defaultValue",
+      "type": "text",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Default Value"
+        },
+        "code": {
+          "prop": "defaultValue"
+        }
+      }
+    },
+    {
+      "name": "helpText",
+      "description": "The radio groups's help text. If you need to display HTML, use the `help-text` slot instead.",
+      "type": "text",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Help Text"
+        },
+        "code": {
+          "prop": "helpText"
+        }
+      }
+    }
+  ],
+  "events": [
+    {
+      "name": "change",
+      "description": "Emitted when the radio group's selected value changes. (CEM event \"sl-change\")",
+      "bindings": {
+        "code": {
+          "prop": "onChange"
+        }
+      },
+      "trigger": "root"
+    },
+    {
+      "name": "input",
+      "description": "Emitted when the radio group receives user input. (CEM event \"sl-input\")",
+      "bindings": {
+        "code": {
+          "prop": "onInput"
+        }
+      },
+      "trigger": "root"
+    },
+    {
+      "name": "invalid",
+      "description": "Emitted when the form control has been checked for validity and its constraints aren't satisfied. (CEM event \"sl-invalid\")",
+      "bindings": {
+        "code": {
+          "prop": "onInvalid"
+        }
+      },
+      "trigger": "root"
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {}
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "extract/pilots/shoelace/custom-elements.json (components/radio-group/radio-group.js)",
+      "export": "SlRadioGroup"
+    }
+  }
+}
