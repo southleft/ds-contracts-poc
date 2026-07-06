@@ -45,6 +45,27 @@
         "Heading"
       ],
       "swapProps": []
+    },
+    {
+      "name": "Tag",
+      "nodeId": "0:3",
+      "page": "Tags",
+      "variantProps": {
+        "Intent": [
+          "Neutral",
+          "Brand",
+          "Danger"
+        ],
+        "Density": [
+          "Cozy",
+          "Compact"
+        ]
+      },
+      "boolProps": [
+        "Interactive"
+      ],
+      "textProps": [],
+      "swapProps": []
     }
   ]
 }

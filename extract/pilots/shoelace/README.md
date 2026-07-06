@@ -23,6 +23,10 @@ npm run diagnose     -- extract/pilots/shoelace/extract.config.json
 
 Read `out/proposals.md` for the per-component review notes (every inference and every skip), and e.g. `out/contracts/sl-button.contract.json` for a representative proposal: a 7-value `variant` axis, 3-value `size`, five booleans, and three declared events — extracted, not authored.
 
+## Attribution
+
+`custom-elements.json` is Shoelace's published manifest, © Cory LaViska, [MIT-licensed](https://github.com/shoelace-style/shoelace/blob/next/LICENSE.md), included here verbatim for reproducibility. The extracted proposals are derived metadata about Shoelace's public API. This pilot is not affiliated with or endorsed by the Shoelace project.
+
 ## Honesty notes
 
 - **The clean diagnose baseline is by construction** — the proposals were extracted from the same manifest they're checked against. Its value is mechanical: the referee runs end-to-end on a foreign library. The *meaningful* red/green comes when the second surface lands (below), or when Shoelace ships a version whose manifest drifts from these committed proposals — at which point `npm run diagnose` here reports exactly what changed.

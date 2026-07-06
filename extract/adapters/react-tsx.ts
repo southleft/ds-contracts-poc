@@ -86,9 +86,14 @@ function classifyMember(
   if (t.kind === ts.SyntaxKind.StringKeyword) return { kind: 'string', confidence: 'declared' };
   if (t.kind === ts.SyntaxKind.NumberKeyword) return { kind: 'number', confidence: 'declared' };
   if (ts.isFunctionTypeNode(t)) return { kind: 'event', confidence: 'declared' };
-  if (ts.isTypeReferenceNode(t) && ts.isIdentifier(t.typeName)) {
-    const ref = t.typeName.text;
-    if (ref === 'ReactNode' || ref === 'ReactElement' || ref === 'JSX') {
+  if (ts.isTypeReferenceNode(t)) {
+    // ReactNode or React.ReactNode (qualified) — both are node props
+    const ref = ts.isIdentifier(t.typeName)
+      ? t.typeName.text
+      : ts.isQualifiedName(t.typeName)
+        ? t.typeName.right.text
+        : '';
+    if (ref === 'ReactNode' || ref === 'ReactElement') {
       return { kind: 'node', confidence: 'declared' };
     }
   }
@@ -101,11 +106,103 @@ function jsDocText(node: ts.Node): string | undefined {
   return typeof c === 'string' ? c : undefined;
 }
 
-function membersOf(
-  typeName: string | ts.TypeLiteralNode,
-  table: TypeTable,
-): ts.PropertySignature[] {
+/** cva('base', { variants: {...}, defaultVariants: {...} }) tables — the
+ *  shadcn-era convention. The variant axes and defaults are fully syntactic
+ *  in the config object, so `VariantProps<typeof buttonVariants>` resolves
+ *  to real enum props without a type checker. */
+interface CvaTable {
+  variants: Map<string, string[]>;
+  defaults: Map<string, string | boolean>;
+}
+function collectCvaTables(sf: ts.SourceFile): Map<string, CvaTable> {
+  const tables = new Map<string, CvaTable>();
+  const keyText = (n: ts.PropertyName): string | null =>
+    ts.isIdentifier(n) || ts.isStringLiteral(n) ? n.text : null;
+  const visit = (node: ts.Node) => {
+    if (
+      ts.isVariableDeclaration(node) &&
+      ts.isIdentifier(node.name) &&
+      node.initializer &&
+      ts.isCallExpression(node.initializer) &&
+      ts.isIdentifier(node.initializer.expression) &&
+      node.initializer.expression.text === 'cva'
+    ) {
+      const cfg = node.initializer.arguments.find(ts.isObjectLiteralExpression);
+      if (cfg) {
+        const table: CvaTable = { variants: new Map(), defaults: new Map() };
+        for (const prop of cfg.properties) {
+          if (!ts.isPropertyAssignment(prop) || !prop.name) continue;
+          const section = keyText(prop.name);
+          if (section === 'variants' && ts.isObjectLiteralExpression(prop.initializer)) {
+            for (const axis of prop.initializer.properties) {
+              if (!ts.isPropertyAssignment(axis) || !axis.name) continue;
+              const axisName = keyText(axis.name);
+              if (!axisName || !ts.isObjectLiteralExpression(axis.initializer)) continue;
+              const options = axis.initializer.properties
+                .map((o) => (ts.isPropertyAssignment(o) && o.name ? keyText(o.name) : null))
+                .filter((x): x is string => x !== null);
+              if (options.length > 0) table.variants.set(axisName, options);
+            }
+          }
+          if (section === 'defaultVariants' && ts.isObjectLiteralExpression(prop.initializer)) {
+            for (const d of prop.initializer.properties) {
+              if (!ts.isPropertyAssignment(d) || !d.name) continue;
+              const dn = keyText(d.name);
+              if (!dn) continue;
+              if (ts.isStringLiteral(d.initializer)) table.defaults.set(dn, d.initializer.text);
+              else if (d.initializer.kind === ts.SyntaxKind.TrueKeyword) table.defaults.set(dn, true);
+              else if (d.initializer.kind === ts.SyntaxKind.FalseKeyword) table.defaults.set(dn, false);
+            }
+          }
+        }
+        tables.set(node.name.text, table);
+      }
+    }
+    ts.forEachChild(node, visit);
+  };
+  visit(sf);
+  return tables;
+}
+
+/** VariantProps<typeof X> in a type expression → cva-derived props. */
+function cvaPropsFrom(type: ts.TypeNode, cvaTables: Map<string, CvaTable>): ExtractedProp[] {
+  const out: ExtractedProp[] = [];
+  const parts = ts.isIntersectionTypeNode(type) ? type.types : [type];
+  for (const t of parts) {
+    if (
+      ts.isTypeReferenceNode(t) &&
+      ts.isIdentifier(t.typeName) &&
+      t.typeName.text === 'VariantProps' &&
+      t.typeArguments?.length === 1 &&
+      ts.isTypeQueryNode(t.typeArguments[0]) &&
+      ts.isIdentifier(t.typeArguments[0].exprName)
+    ) {
+      const table = cvaTables.get(t.typeArguments[0].exprName.text);
+      if (!table) continue;
+      for (const [axis, options] of table.variants) {
+        const isBool = options.every((o) => o === 'true' || o === 'false');
+        out.push({
+          name: axis,
+          optional: true, // cva variant props are always optional
+          ...(isBool ? { kind: 'boolean' as const } : { kind: 'enum' as const, values: options }),
+          ...(table.defaults.has(axis) ? { default: table.defaults.get(axis) } : {}),
+          confidence: 'declared', // literally declared in the cva config
+        });
+      }
+    }
+  }
+  return out;
+}
+
+type PropsTypeRef = string | ts.TypeLiteralNode | ts.IntersectionTypeNode;
+
+function membersOf(typeName: PropsTypeRef, table: TypeTable): ts.PropertySignature[] {
   if (typeof typeName !== 'string') {
+    if (ts.isIntersectionTypeNode(typeName)) {
+      return typeName.types
+        .filter(ts.isTypeLiteralNode)
+        .flatMap((t) => t.members.filter(ts.isPropertySignature));
+    }
     return typeName.members.filter(ts.isPropertySignature);
   }
   const iface = table.interfaces.get(typeName);
@@ -123,17 +220,25 @@ function membersOf(
   return [];
 }
 
+/** The type node behind a props-type ref, for cva/VariantProps scanning. */
+function typeNodeOf(typeName: PropsTypeRef, table: TypeTable): ts.TypeNode | null {
+  if (typeof typeName !== 'string') return typeName;
+  const alias = table.aliases.get(typeName);
+  return alias ? alias.type : null;
+}
+
 /** PascalCase components exported from this file → their props-type name. */
-function findComponents(sf: ts.SourceFile): Map<string, string | ts.TypeLiteralNode> {
-  const found = new Map<string, string | ts.TypeLiteralNode>();
-  const paramTypeOf = (fn: ts.SignatureDeclaration): string | ts.TypeLiteralNode | null => {
+function findComponents(sf: ts.SourceFile): Map<string, PropsTypeRef> {
+  const found = new Map<string, PropsTypeRef>();
+  const paramTypeOf = (fn: ts.SignatureDeclaration): PropsTypeRef | null => {
     const p = fn.parameters[0];
     if (!p?.type) return null;
     if (ts.isTypeReferenceNode(p.type) && ts.isIdentifier(p.type.typeName)) return p.type.typeName.text;
     if (ts.isTypeLiteralNode(p.type)) return p.type;
+    if (ts.isIntersectionTypeNode(p.type)) return p.type;
     return null;
   };
-  const record = (name: string, propsType: string | ts.TypeLiteralNode | null) => {
+  const record = (name: string, propsType: PropsTypeRef | null) => {
     if (!/^[A-Z]/.test(name)) return;
     found.set(name, propsType ?? `${name}Props`);
   };
@@ -206,7 +311,16 @@ function collectDefaults(sf: ts.SourceFile, componentName: string): Map<string, 
   return defaults;
 }
 
-export function extractReactTsx(root: string): ExtractedComponent[] {
+export interface SkippedComponent {
+  name: string;
+  source: string;
+  reason: string;
+}
+
+export function extractReactTsx(
+  root: string,
+  skipped?: SkippedComponent[],
+): ExtractedComponent[] {
   if (!existsSync(root) || !statSync(root).isDirectory()) {
     throw new Error(`react-tsx adapter: root directory not found: ${root}`);
   }
@@ -216,15 +330,37 @@ export function extractReactTsx(root: string): ExtractedComponent[] {
     const src = readFileSync(file, 'utf8');
     const sf = ts.createSourceFile(path.basename(file), src, ts.ScriptTarget.Latest, true);
     const table = collectTypes(sf);
+    const cvaTables = collectCvaTables(sf);
     for (const [componentName, propsType] of findComponents(sf)) {
       if (seen.has(componentName)) continue;
       const members = membersOf(propsType, table);
-      if (members.length === 0) continue; // not a props-taking component we can see
+      const typeNode = typeNodeOf(propsType, table);
+      const cvaProps = typeNode ? cvaPropsFrom(typeNode, cvaTables) : [];
+      if (members.length === 0 && cvaProps.length === 0) {
+        // A component we can SEE but cannot READ is reported, never
+        // silently dropped — silent omission is the failure mode this
+        // tool exists to eliminate.
+        skipped?.push({
+          name: componentName,
+          source: path.relative(process.cwd(), file),
+          reason:
+            typeof propsType === 'string'
+              ? `props type "${propsType}" not found in this file (imported/composed types are outside single-file extraction)`
+              : 'props type has no readable members (composed from imported types?)',
+        });
+        continue;
+      }
       seen.add(componentName);
       const defaults = collectDefaults(sf, componentName);
-      const props: ExtractedProp[] = [];
+      const props: ExtractedProp[] = [...cvaProps];
+      for (const [i, p] of cvaProps.entries()) {
+        if (defaults.has(p.name) && p.default === undefined) {
+          props[i] = { ...p, default: defaults.get(p.name) };
+        }
+      }
       for (const m of members) {
         if (!m.name || !ts.isIdentifier(m.name)) continue;
+        if (props.some((x) => x.name === (m.name as ts.Identifier).text)) continue;
         const cls = classifyMember(m, table);
         if (!cls) continue;
         props.push({

@@ -119,7 +119,7 @@ const expectFinding = (
 
 interface Case {
   id: string;
-  claim: 'C1-determinism' | 'C2-refusal' | 'C3-detection' | 'C4-convergence';
+  claim: 'C1-determinism' | 'C2-refusal' | 'C3-detection' | 'C4-convergence' | 'C5-extraction';
   run: () => void; // throws on failure
 }
 
@@ -417,6 +417,20 @@ const cases: Case[] = [
       );
       if (alert.props.find((p: any) => p.name === 'severity')?.default !== 'info') {
         throw new Error('Alert.severity: legacy defaultProps default not extracted');
+      }
+      const tag = JSON.parse(
+        readFileSync(path.join(SCRATCH, 'extract/fixtures/.out-react/contracts/tag.contract.json'), 'utf8'),
+      );
+      const intent = tag.props.find((p: any) => p.name === 'intent');
+      if (intent?.type?.enum?.join('|') !== 'neutral|brand|danger' || intent.default !== 'neutral') {
+        throw new Error('Tag.intent: cva variant axis or defaultVariants default not extracted');
+      }
+      if (tag.props.find((p: any) => p.name === 'interactive')?.type !== 'boolean') {
+        throw new Error('Tag.interactive: inline intersection member not extracted');
+      }
+      const notes = readFileSync(path.join(SCRATCH, 'extract/fixtures/.out-react/proposals.md'), 'utf8');
+      if (!notes.includes('**Opaque**') || !notes.includes('NOT extractable')) {
+        throw new Error('Unreadable component was silently dropped instead of reported');
       }
       const badge = JSON.parse(
         readFileSync(path.join(SCRATCH, 'extract/fixtures/.out-wc/contracts/fancy-badge.contract.json'), 'utf8'),

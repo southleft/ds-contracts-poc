@@ -107,7 +107,9 @@ for (const contract of contracts) {
           });
         }
       }
-      if (p.default !== undefined && found.default !== undefined && p.default !== found.default) {
+      // Compare stringified: adapters may surface 5 vs "5" for the same
+      // authored default — a type-representation difference, not drift.
+      if (p.default !== undefined && found.default !== undefined && String(p.default) !== String(found.default)) {
         add({
           surface: 'code',
           classification: 'mismatch',

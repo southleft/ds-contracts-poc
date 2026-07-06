@@ -23,6 +23,15 @@
   "include": [
     "src",
     "scripts",
-    ".storybook"
+    ".storybook",
+    "extract",
+    "parity",
+    "evals"
+  ],
+  "exclude": [
+    "extract/fixtures",
+    "evals/.scratch",
+    "evals/adherence",
+    "evals/fixtures"
   ]
 }

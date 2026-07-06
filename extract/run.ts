@@ -16,7 +16,7 @@
 import { writeFileSync, mkdirSync, readFileSync, existsSync } from 'node:fs';
 import path from 'node:path';
 import { loadConfig, outDir, idPrefix } from './config.js';
-import { extractReactTsx } from './adapters/react-tsx.js';
+import { extractReactTsx, type SkippedComponent } from './adapters/react-tsx.js';
 import { extractCem } from './adapters/cem.js';
 import { proposeContract, proposalsReport } from './propose.js';
 import { loadDesign, reconcile, writeReconciliation } from './reconcile.js';
@@ -26,10 +26,11 @@ const [, , command, configArg] = process.argv;
 const { config, from } = loadConfig(configArg);
 const out = outDir(config);
 
+const skipped: SkippedComponent[] = [];
 function runExtract(): ExtractedComponent[] {
   if (config.code.adapter === 'react-tsx') {
     if (!config.code.root) throw new Error('react-tsx adapter needs code.root');
-    return extractReactTsx(config.code.root);
+    return extractReactTsx(config.code.root, skipped);
   }
   if (!config.code.manifest) throw new Error('cem adapter needs code.manifest');
   return extractCem(config.code.manifest);
@@ -53,10 +54,21 @@ if (command === 'code') {
       JSON.stringify(proposal.contract, null, 2) + '\n',
     );
   }
-  writeFileSync(path.join(out, 'proposals.md'), proposalsReport(results) + '\n');
+  let report = proposalsReport(results);
+  if (skipped.length > 0) {
+    report +=
+      '\n## Components seen but NOT extractable (review required)\n\n' +
+      'These components were found but their props could not be read — reported, never silently dropped:\n\n' +
+      skipped.map((s) => `- **${s.name}** (\`${s.source}\`) — ${s.reason}`).join('\n') +
+      '\n';
+  }
+  writeFileSync(path.join(out, 'proposals.md'), report + '\n');
   console.log(
     `✔ Extracted ${extracted.length} component(s) → ${out}/code-extraction.json\n` +
       `✔ ${results.length} proposed contract(s) → ${out}/contracts/ (all schema-valid)\n` +
+      (skipped.length > 0
+        ? `⚠ ${skipped.length} component(s) seen but not extractable — listed in ${out}/proposals.md\n`
+        : '') +
       `✔ Review notes → ${out}/proposals.md\n` +
       `Next: dump your design library with extract/figma-dump.js, then npm run reconcile`,
   );

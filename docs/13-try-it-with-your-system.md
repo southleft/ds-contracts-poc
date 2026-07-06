@@ -46,7 +46,7 @@ npm run extract:code
 
 | Adapter | Input | Covers |
 |---|---|---|
-| `react-tsx` | a directory of `.tsx`/`.ts` source | React/TypeScript: function components, `forwardRef`/`memo` wrappers, interface or type-alias props (any name), one-hop local type aliases, destructure defaults, legacy `defaultProps`, JSDoc descriptions |
+| `react-tsx` | a directory of `.tsx`/`.ts` source | React/TypeScript: function components, `forwardRef`/`memo` wrappers, interface or type-alias props (any name), intersection types, **cva + `VariantProps` variant axes and `defaultVariants`** (the shadcn-era convention), one-hop local type aliases, destructure defaults, legacy `defaultProps`, JSDoc descriptions |
 | `cem` | a `custom-elements.json` path | **any library that ships a Custom Elements Manifest** — Web Components, Lit, FAST, Shoelace-style systems — regardless of authoring framework |
 
 The CEM adapter is the framework-agnosticism proof: adapters normalize into one shared shape, so everything downstream (proposals, reconciliation, eventually the differ) is framework-blind. A Vue/Svelte adapter is the same ~200-line pattern against their SFC tooling.
@@ -90,6 +90,6 @@ The sequence from here is [docs/11](11-brownfield-adoption.md): humans arbitrate
 
 ## Honesty box
 
-- Extraction is single-file syntactic (no TypeScript type checker): props composed from imported/spread types in other files won't be seen. Every heuristic fill is marked `confidence: "inferred"`.
+- Extraction is single-file syntactic (no TypeScript type checker): props composed from *imported* types in other files won't be read — but any component the adapter can see and cannot read is **listed in `proposals.md` with the reason**, never silently dropped. Every heuristic fill is marked `confidence: "inferred"`.
 - CEM extraction trusts the manifest — CEM describes, it doesn't verify (that gap is why the differ exists).
 - The alias rules were calibrated on one system (this one). Expect your naming conventions to add rules; the matcher is ~30 lines and reports every alias hit.
