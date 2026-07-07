@@ -1064,6 +1064,54 @@
           "values": {
             "Value": "#9333EA"
           }
+        },
+        {
+          "name": "color/teal/300",
+          "type": "COLOR",
+          "scopes": [
+            "ALL_FILLS",
+            "STROKE_COLOR"
+          ],
+          "codeSyntax": "var(--color-teal-300)",
+          "values": {
+            "Value": "#5EEAD4"
+          }
+        },
+        {
+          "name": "color/teal/400",
+          "type": "COLOR",
+          "scopes": [
+            "ALL_FILLS",
+            "STROKE_COLOR"
+          ],
+          "codeSyntax": "var(--color-teal-400)",
+          "values": {
+            "Value": "#2DD4BF"
+          }
+        },
+        {
+          "name": "color/teal/500",
+          "type": "COLOR",
+          "scopes": [
+            "ALL_FILLS",
+            "STROKE_COLOR"
+          ],
+          "codeSyntax": "var(--color-teal-500)",
+          "values": {
+            "Value": "#14B8A6"
+          }
+        },
+        {
+          "name": "color/teal/600",
+          "type": "COLOR",
+          "scopes": [
+            "ALL_FILLS",
+            "STROKE_COLOR"
+          ],
+          "codeSyntax": "var(--color-teal-600)",
+          "values": {
+            "Value": "#0D9488"
+          }
         }
       ]
     },
@@ -1084,7 +1132,7 @@
           "codeSyntax": "var(--brand-accent-100)",
           "values": {
             "Default": "{color/blue/100}",
-            "Aurora": "{color/purple/100}"
+            "Aurora": "{color/teal/100}"
           }
         },
         {
@@ -1097,7 +1145,7 @@
           "codeSyntax": "var(--brand-accent-300)",
           "values": {
             "Default": "{color/blue/300}",
-            "Aurora": "{color/purple/300}"
+            "Aurora": "{color/teal/300}"
           }
         },
         {
@@ -1110,7 +1158,7 @@
           "codeSyntax": "var(--brand-accent-400)",
           "values": {
             "Default": "{color/blue/400}",
-            "Aurora": "{color/purple/400}"
+            "Aurora": "{color/teal/400}"
           }
         },
         {
@@ -1123,7 +1171,7 @@
           "codeSyntax": "var(--brand-accent-500)",
           "values": {
             "Default": "{color/blue/500}",
-            "Aurora": "{color/purple/500}"
+            "Aurora": "{color/teal/500}"
           }
         },
         {
@@ -1136,7 +1184,7 @@
           "codeSyntax": "var(--brand-accent-600)",
           "values": {
             "Default": "{color/blue/600}",
-            "Aurora": "{color/purple/600}"
+            "Aurora": "{color/teal/600}"
           }
         },
         {
@@ -1149,7 +1197,7 @@
           "codeSyntax": "var(--brand-accent-700)",
           "values": {
             "Default": "{color/blue/700}",
-            "Aurora": "{color/purple/700}"
+            "Aurora": "{color/teal/700}"
           }
         },
         {
@@ -1162,7 +1210,7 @@
           "codeSyntax": "var(--brand-accent-900)",
           "values": {
             "Default": "{color/blue/900}",
-            "Aurora": "{color/purple/900}"
+            "Aurora": "{color/teal/900}"
           }
         },
         {
@@ -1175,6 +1223,30 @@
           "values": {
             "Default": "{radius/200}",
             "Aurora": "{radius/none}"
+          }
+        },
+        {
+          "name": "brand/font/control-family",
+          "type": "STRING",
+          "scopes": [
+            "FONT_FAMILY"
+          ],
+          "codeSyntax": "var(--brand-font-control-family)",
+          "values": {
+            "Default": "{font/family/sans}",
+            "Aurora": "{font/family/mono}"
+          }
+        },
+        {
+          "name": "brand/font/control-weight",
+          "type": "FLOAT",
+          "scopes": [
+            "FONT_WEIGHT"
+          ],
+          "codeSyntax": "var(--brand-font-control-weight)",
+          "values": {
+            "Default": "{font/weight/medium}",
+            "Aurora": "{font/weight/semibold}"
           }
         }
       ]
@@ -1968,8 +2040,8 @@
           ],
           "codeSyntax": "var(--font-control-family)",
           "values": {
-            "Light": "{font/family/sans}",
-            "Dark": "{font/family/sans}"
+            "Light": "{brand/font/control-family}",
+            "Dark": "{brand/font/control-family}"
           }
         },
         {
@@ -1980,8 +2052,8 @@
           ],
           "codeSyntax": "var(--font-control-weight)",
           "values": {
-            "Light": "{font/weight/medium}",
-            "Dark": "{font/weight/medium}"
+            "Light": "{brand/font/control-weight}",
+            "Dark": "{brand/font/control-weight}"
           }
         },
         {

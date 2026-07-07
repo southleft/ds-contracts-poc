@@ -1,0 +1,751 @@
+{
+  "fileName": "Shoelace interactive UI library (Community)",
+  "fileKey": "nl9P0h3brratHTdncjzKIr",
+  "extractedAt": "design-dump-v1",
+  "components": [
+    {
+      "name": "Slot",
+      "nodeId": "63:235",
+      "page": "Slots",
+      "variantProps": {},
+      "boolProps": [],
+      "textProps": [],
+      "swapProps": []
+    },
+    {
+      "name": "Alert",
+      "nodeId": "25:725",
+      "page": "Alert",
+      "variantProps": {
+        "variant": [
+          "primary",
+          "success",
+          "neutral",
+          "warning",
+          "danger"
+        ]
+      },
+      "boolProps": [
+        "showTitle",
+        "showIcon",
+        "closable"
+      ],
+      "textProps": [
+        "alert",
+        "alertTitle"
+      ],
+      "swapProps": []
+    },
+    {
+      "name": "Avatar",
+      "nodeId": "69:725",
+      "page": "Avatar",
+      "variantProps": {
+        "type": [
+          "default",
+          "initials",
+          "image"
+        ],
+        "shape": [
+          "circle",
+          "square",
+          "rounded"
+        ]
+      },
+      "boolProps": [],
+      "textProps": [
+        "initials"
+      ],
+      "swapProps": []
+    },
+    {
+      "name": "Badge",
+      "nodeId": "37:6",
+      "page": "Badge",
+      "variantProps": {},
+      "boolProps": [],
+      "textProps": [],
+      "swapProps": []
+    },
+    {
+      "name": "_Breadcrumb item",
+      "nodeId": "73:474",
+      "page": "Breadcrumb",
+      "variantProps": {
+        "isLink": [
+          "false",
+          "true"
+        ]
+      },
+      "boolProps": [
+        "showPrexix",
+        "showSeparator",
+        "showSuffix"
+      ],
+      "textProps": [
+        "label"
+      ],
+      "swapProps": []
+    },
+    {
+      "name": "Breadcrumb",
+      "nodeId": "73:538",
+      "page": "Breadcrumb",
+      "variantProps": {},
+      "boolProps": [],
+      "textProps": [],
+      "swapProps": []
+    },
+    {
+      "name": "Button",
+      "nodeId": "84:1674",
+      "page": "Button",
+      "variantProps": {
+        "variant": [
+          "default",
+          "text",
+          "primary",
+          "success",
+          "neutral",
+          "warning",
+          "danger"
+        ],
+        "size": [
+          "medium",
+          "small",
+          "large"
+        ],
+        "state": [
+          "default",
+          "hover",
+          "active",
+          "disabled",
+          "focus",
+          "deafult"
+        ],
+        "isOutline": [
+          "true",
+          "false"
+        ],
+        "isPill": [
+          "false",
+          "true"
+        ],
+        "isCircle": [
+          "false",
+          "true"
+        ]
+      },
+      "boolProps": [
+        "showLabel",
+        "showSuffix",
+        "showPrefix"
+      ],
+      "textProps": [
+        "label"
+      ],
+      "swapProps": []
+    },
+    {
+      "name": "Button group",
+      "nodeId": "376:3540",
+      "page": "Button Group",
+      "variantProps": {
+        "position": [
+          "left",
+          "center",
+          "right",
+          "position4"
+        ],
+        "size": [
+          "large",
+          "small",
+          "medium"
+        ],
+        "type": [
+          "default",
+          "primary"
+        ],
+        "isPill": [
+          "false",
+          "true"
+        ]
+      },
+      "boolProps": [
+        "isPill"
+      ],
+      "textProps": [],
+      "swapProps": []
+    },
+    {
+      "name": "Checkbox",
+      "nodeId": "43:32",
+      "page": "Checkbox",
+      "variantProps": {
+        "state": [
+          "default",
+          "disabled",
+          "hover"
+        ],
+        "size": [
+          "medium",
+          "large",
+          "small"
+        ],
+        "isChecked": [
+          "false",
+          "true"
+        ],
+        "isIndeterminate": [
+          "false",
+          "true"
+        ]
+      },
+      "boolProps": [
+        "showValue"
+      ],
+      "textProps": [
+        "value"
+      ],
+      "swapProps": []
+    },
+    {
+      "name": "Details",
+      "nodeId": "84:1356",
+      "page": "Details",
+      "variantProps": {
+        "isOpen": [
+          "true",
+          "false"
+        ],
+        "isDisabled": [
+          "false",
+          "true"
+        ]
+      },
+      "boolProps": [],
+      "textProps": [
+        "summary"
+      ],
+      "swapProps": []
+    },
+    {
+      "name": "Dialog",
+      "nodeId": "75:855",
+      "page": "Dialog",
+      "variantProps": {},
+      "boolProps": [],
+      "textProps": [
+        "title"
+      ],
+      "swapProps": []
+    },
+    {
+      "name": "Divider",
+      "nodeId": "84:1579",
+      "page": "Divider",
+      "variantProps": {
+        "isVertical": [
+          "false",
+          "true"
+        ]
+      },
+      "boolProps": [],
+      "textProps": [],
+      "swapProps": []
+    },
+    {
+      "name": "Drawer",
+      "nodeId": "139:2400",
+      "page": "Drawer",
+      "variantProps": {
+        "placement": [
+          "end",
+          "start",
+          "bottom",
+          "top"
+        ]
+      },
+      "boolProps": [
+        "showDrawer"
+      ],
+      "textProps": [
+        "title"
+      ],
+      "swapProps": []
+    },
+    {
+      "name": "Dropdown",
+      "nodeId": "93:5750",
+      "page": "Dropdown",
+      "variantProps": {},
+      "boolProps": [],
+      "textProps": [],
+      "swapProps": []
+    },
+    {
+      "name": "_Image Comparer Handler",
+      "nodeId": "512:3570",
+      "page": "Image Comparer",
+      "variantProps": {},
+      "boolProps": [],
+      "textProps": [],
+      "swapProps": []
+    },
+    {
+      "name": "Image Comparer",
+      "nodeId": "512:3589",
+      "page": "Image Comparer",
+      "variantProps": {
+        "position": [
+          "middle",
+          "left",
+          "right"
+        ]
+      },
+      "boolProps": [],
+      "textProps": [],
+      "swapProps": []
+    },
+    {
+      "name": "Icon",
+      "nodeId": "45:53",
+      "page": "Icon Button",
+      "variantProps": {
+        "variant": [
+          "material"
+        ],
+        "size": [
+          "medium",
+          "small",
+          "large",
+          "x-large"
+        ],
+        "state": [
+          "default",
+          "hover",
+          "active",
+          "disabled"
+        ]
+      },
+      "boolProps": [],
+      "textProps": [
+        "icon"
+      ],
+      "swapProps": []
+    },
+    {
+      "name": "input",
+      "nodeId": "205:7468",
+      "page": "Input",
+      "variantProps": {
+        "size": [
+          "medium",
+          "large",
+          "small"
+        ],
+        "state": [
+          "default",
+          "disabled",
+          "hover",
+          "focus"
+        ],
+        "alignement": [
+          "vertical",
+          "horizontal"
+        ],
+        "display": [
+          "placeholder",
+          "content"
+        ],
+        "isPill": [
+          "false",
+          "true"
+        ],
+        "variant": [
+          "default"
+        ]
+      },
+      "boolProps": [
+        "showHelp",
+        "showLabel",
+        "showValue",
+        "showSuffix",
+        "showPrefix"
+      ],
+      "textProps": [
+        "value",
+        "label",
+        "helpText"
+      ],
+      "swapProps": []
+    },
+    {
+      "name": "Menu",
+      "nodeId": "93:5131",
+      "page": "Menu",
+      "variantProps": {
+        "variant": [
+          "prefilled",
+          "empty"
+        ]
+      },
+      "boolProps": [],
+      "textProps": [],
+      "swapProps": []
+    },
+    {
+      "name": "Menu Item",
+      "nodeId": "63:489",
+      "page": "Menu Item and Labels",
+      "variantProps": {
+        "isSelected": [
+          "false",
+          "true"
+        ],
+        "state": [
+          "default",
+          "hover",
+          "active",
+          "disabled"
+        ]
+      },
+      "boolProps": [
+        "showSuffix",
+        "showPrefix"
+      ],
+      "textProps": [
+        "label"
+      ],
+      "swapProps": []
+    },
+    {
+      "name": "Menu submenu",
+      "nodeId": "93:5355",
+      "page": "Menu Item and Labels",
+      "variantProps": {
+        "state": [
+          "default",
+          "hover",
+          "disabled"
+        ]
+      },
+      "boolProps": [
+        "showSuffix"
+      ],
+      "textProps": [
+        "label"
+      ],
+      "swapProps": []
+    },
+    {
+      "name": "Menu title",
+      "nodeId": "93:5348",
+      "page": "Menu Item and Labels",
+      "variantProps": {},
+      "boolProps": [],
+      "textProps": [],
+      "swapProps": []
+    },
+    {
+      "name": "Radio",
+      "nodeId": "212:2661",
+      "page": "Radio",
+      "variantProps": {
+        "isCheched": [
+          "false",
+          "true"
+        ],
+        "size": [
+          "large",
+          "small",
+          "medium"
+        ],
+        "state": [
+          "default",
+          "hover",
+          "disabled"
+        ]
+      },
+      "boolProps": [
+        "showValue"
+      ],
+      "textProps": [
+        "value"
+      ],
+      "swapProps": []
+    },
+    {
+      "name": "radio group",
+      "nodeId": "212:2840",
+      "page": "Radio Group",
+      "variantProps": {
+        "variant": [
+          "default"
+        ],
+        "direction": [
+          "vertical",
+          "horizontal"
+        ],
+        "size": [
+          "medium",
+          "large",
+          "small"
+        ]
+      },
+      "boolProps": [
+        "showLabel",
+        "showHelp"
+      ],
+      "textProps": [
+        "label",
+        "help"
+      ],
+      "swapProps": []
+    },
+    {
+      "name": "radio group button",
+      "nodeId": "214:2187",
+      "page": "Radio Group",
+      "variantProps": {
+        "state": [
+          "disabled",
+          "default",
+          "hover",
+          "pressed"
+        ],
+        "isPill": [
+          "true",
+          "false"
+        ],
+        "isSelected": [
+          "true",
+          "false"
+        ],
+        "size": [
+          "small",
+          "medium",
+          "large"
+        ],
+        "position": [
+          "left",
+          "center",
+          "right"
+        ]
+      },
+      "boolProps": [],
+      "textProps": [],
+      "swapProps": []
+    },
+    {
+      "name": "Range",
+      "nodeId": "212:243",
+      "page": "Range",
+      "variantProps": {
+        "state": [
+          "default",
+          "disabled",
+          "hover"
+        ]
+      },
+      "boolProps": [
+        "showTooltip",
+        "showHelp",
+        "showLabel"
+      ],
+      "textProps": [
+        "label",
+        "helpText"
+      ],
+      "swapProps": []
+    },
+    {
+      "name": "_ellipse",
+      "nodeId": "212:409",
+      "page": "Range",
+      "variantProps": {
+        "state": [
+          "default",
+          "hover"
+        ]
+      },
+      "boolProps": [],
+      "textProps": [],
+      "swapProps": []
+    },
+    {
+      "name": "select",
+      "nodeId": "586:6186",
+      "page": "Select",
+      "variantProps": {
+        "Property 1": [
+          "Default"
+        ]
+      },
+      "boolProps": [],
+      "textProps": [],
+      "swapProps": []
+    },
+    {
+      "name": "Skeleton",
+      "nodeId": "63:467",
+      "page": "Skeleton",
+      "variantProps": {
+        "type": [
+          "text",
+          "avatar-square",
+          "avatar-rounded",
+          "avatar-pill"
+        ]
+      },
+      "boolProps": [],
+      "textProps": [],
+      "swapProps": []
+    },
+    {
+      "name": "Tab",
+      "nodeId": "54:58",
+      "page": "Tab",
+      "variantProps": {
+        "state": [
+          "active",
+          "default",
+          "disabled"
+        ],
+        "showBorder": [
+          "true",
+          "false"
+        ],
+        "placement": [
+          "top",
+          "none",
+          "bottom",
+          "start",
+          "end"
+        ]
+      },
+      "boolProps": [
+        "closable"
+      ],
+      "textProps": [
+        "tab"
+      ],
+      "swapProps": []
+    },
+    {
+      "name": "Tab Group",
+      "nodeId": "63:185",
+      "page": "Tab Group",
+      "variantProps": {
+        "placement": [
+          "top",
+          "bottom",
+          "start",
+          "end"
+        ]
+      },
+      "boolProps": [],
+      "textProps": [],
+      "swapProps": []
+    },
+    {
+      "name": "Tag",
+      "nodeId": "43:120",
+      "page": "Tag",
+      "variantProps": {
+        "variant": [
+          "primary",
+          "success",
+          "neutral",
+          "warning",
+          "danger"
+        ],
+        "size": [
+          "medium",
+          "small",
+          "large"
+        ],
+        "isPill": [
+          "true",
+          "false"
+        ]
+      },
+      "boolProps": [
+        "removable"
+      ],
+      "textProps": [
+        "label"
+      ],
+      "swapProps": []
+    },
+    {
+      "name": "Textarea",
+      "nodeId": "38:26",
+      "page": "Textarea",
+      "variantProps": {
+        "size": [
+          "medium"
+        ],
+        "state": [
+          "default",
+          "filled",
+          "disabled"
+        ]
+      },
+      "boolProps": [
+        "showLabel",
+        "showHelp",
+        "isResizable"
+      ],
+      "textProps": [
+        "label",
+        "value",
+        "help"
+      ],
+      "swapProps": []
+    },
+    {
+      "name": "Tooltip",
+      "nodeId": "37:142",
+      "page": "Tooltip",
+      "variantProps": {
+        "placement": [
+          "bottom",
+          "bottomLeft",
+          "bottomRight",
+          "left",
+          "right",
+          "topLeft",
+          "topRight",
+          "top"
+        ]
+      },
+      "boolProps": [],
+      "textProps": [
+        "text",
+        "Text"
+      ],
+      "swapProps": []
+    },
+    {
+      "name": "_demo / header",
+      "nodeId": "68:431",
+      "page": "Internal",
+      "variantProps": {},
+      "boolProps": [],
+      "textProps": [
+        "Name"
+      ],
+      "swapProps": []
+    },
+    {
+      "name": "Color Swatch",
+      "nodeId": "240:10521",
+      "page": "Internal",
+      "variantProps": {},
+      "boolProps": [],
+      "textProps": [],
+      "swapProps": []
+    }
+  ]
+}

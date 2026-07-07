@@ -3,37 +3,47 @@
     "accent": {
       "100": {
         "$type": "color",
-        "$value": "{color.purple.100}"
+        "$value": "{color.teal.100}"
       },
       "300": {
         "$type": "color",
-        "$value": "{color.purple.300}"
+        "$value": "{color.teal.300}"
       },
       "400": {
         "$type": "color",
-        "$value": "{color.purple.400}"
+        "$value": "{color.teal.400}"
       },
       "500": {
         "$type": "color",
-        "$value": "{color.purple.500}"
+        "$value": "{color.teal.500}"
       },
       "600": {
         "$type": "color",
-        "$value": "{color.purple.600}"
+        "$value": "{color.teal.600}"
       },
       "700": {
         "$type": "color",
-        "$value": "{color.purple.700}"
+        "$value": "{color.teal.700}"
       },
       "900": {
         "$type": "color",
-        "$value": "{color.purple.900}"
+        "$value": "{color.teal.900}"
       }
     },
     "radius": {
       "control": {
         "$type": "dimension",
         "$value": "{radius.none}"
+      }
+    },
+    "font": {
+      "control-family": {
+        "$type": "fontFamily",
+        "$value": "{font.family.mono}"
+      },
+      "control-weight": {
+        "$type": "fontWeight",
+        "$value": "{font.weight.semibold}"
       }
     }
   }

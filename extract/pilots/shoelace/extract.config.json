@@ -1,6 +1,14 @@
 {
-  "code": { "adapter": "cem", "manifest": "extract/pilots/shoelace/custom-elements.json" },
+  "code": {
+    "adapter": "cem",
+    "manifest": "extract/pilots/shoelace/custom-elements.json"
+  },
   "idPrefix": "sl",
   "out": "extract/pilots/shoelace/out",
-  "diagnose": { "contracts": "extract/pilots/shoelace/out/contracts" }
+  "diagnose": {
+    "contracts": "extract/pilots/shoelace/out/contracts"
+  },
+  "design": {
+    "source": "extract/pilots/shoelace/design.json"
+  }
 }

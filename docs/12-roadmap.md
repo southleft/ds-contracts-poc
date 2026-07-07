@@ -11,7 +11,7 @@ Where this project intends to go, in public. Each phase has a **falsifiable exit
 The contract-as-source-of-truth loop, demonstrated end to end.
 
 - [x] 50 component contracts generating a typed React library and a native design-tool library from the same JSON
-- [x] 276 DTCG tokens compiled to CSS custom properties and design-tool variables (light + dark × Default/Aurora brand modes)
+- [x] 282 DTCG tokens compiled to CSS custom properties and design-tool variables (light + dark × Default/Aurora brand modes)
 - [x] Three-way parity differ: every drift classified *ahead / behind / mismatched* with a proposed remedy
 - [x] Promotion loop executed in both directions on live surfaces, with receipts ([docs/06](06-parity-loop.md))
 - [x] 31/31 deterministic machinery evals ([docs/07](07-validation.md))
@@ -41,7 +41,7 @@ Connect **pre-existing** design and code libraries — no rewrite, no regenerati
 - [ ] **Binding inference** — propose `figma`↔`code` name/value mappings with per-field confidence *(started: transparent alias rules + abbreviation mapping in `npm run reconcile`; confidence scoring and value-mapping inference still open)*
 - [ ] **Reconciliation UI** — side-by-side proposal merge in the Contract Hub; extraction → contract v1 in minutes per component
 - [ ] **Foreign token import** — contracts reference an org's *existing* DTCG / Style Dictionary tokens, not this repo's
-- [ ] **Public pilot** — run extraction on a real open-source library + community design kit pair; publish the drift report *(code half executed: Shoelace v2.20.1, 58/58 components → schema-valid proposals, receipts in `extract/pilots/shoelace/`; design-kit half pending)*
+- [x] **Public pilot** — Shoelace v2.20.1 (CEM extraction, 58/58) reconciled against the community Shoelace Figma kit (28 sets, dumped read-only): 42 property agreements, 236 human decisions itemized — the drift report is real, committed, and reproducible (`extract/pilots/shoelace/`)
 
 **Exit criterion:** the diagnostic loop runs green→red→green on two surfaces this repo did not generate *(✅ eval-proven: `diagnose-foreign-green-red-green` — `npm run diagnose` referees foreign code + a design dump)*, and a design system team confirms the pilot drift report is true — every finding real, none missed within declared scope.
 

@@ -35,6 +35,16 @@
         "$type": "dimension",
         "$value": "{radius.200}"
       }
+    },
+    "font": {
+      "control-family": {
+        "$type": "fontFamily",
+        "$value": "{font.family.sans}"
+      },
+      "control-weight": {
+        "$type": "fontWeight",
+        "$value": "{font.weight.medium}"
+      }
     }
   }
 }

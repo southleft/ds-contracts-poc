@@ -2,7 +2,7 @@
   "system": {
     "name": "DS Contracts POC",
     "catalogVersion": "0.1.0",
-    "gitCommit": "4690402",
+    "gitCommit": "69c9893",
     "source": "Compiled from contracts/*.contract.json + tokens/ + context/rules.json — do not edit."
   },
   "package": {
@@ -286,6 +286,10 @@
       "--color-yellow-700",
       "--color-yellow-900",
       "--color-teal-100",
+      "--color-teal-300",
+      "--color-teal-400",
+      "--color-teal-500",
+      "--color-teal-600",
       "--color-teal-700",
       "--color-teal-900",
       "--color-cyan-100",
@@ -800,7 +804,7 @@
     {
       "id": "ds.button",
       "name": "Button",
-      "version": "1.2.0",
+      "version": "1.3.0",
       "status": "draft",
       "description": "Triggers an action or event. Use one primary button per context.",
       "figma": {
@@ -838,7 +842,7 @@
           "name": "loading",
           "type": "boolean",
           "default": false,
-          "description": "Shows a busy indicator while an async action resolves."
+          "description": "Shows a spinning busy indicator beside the label while an async action resolves."
         }
       ],
       "children": {

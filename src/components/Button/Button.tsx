@@ -1,11 +1,16 @@
 /**
  * GENERATED FILE — DO NOT EDIT.
- * Source of truth: contracts/button.contract.json (ds.button v1.2.0)
+ * Source of truth: contracts/button.contract.json (ds.button v1.3.0)
  * Regenerate with: npm run generate
  */
 import { forwardRef } from 'react';
 import type { ButtonHTMLAttributes } from 'react';
 import styles from './Button.module.css';
+
+const ICONS: Record<string, string> = {
+  spinner:
+    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M 10 2.5 A 7.5 7.5 0 0 1 17.5 10" stroke-linecap="round"/></svg>',
+};
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   /** Visual prominence of the action. */
@@ -14,7 +19,7 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   size?: 'sm' | 'md' | 'lg';
   /** Prevents interaction and communicates unavailability. */
   disabled?: boolean;
-  /** Shows a busy indicator while an async action resolves. */
+  /** Shows a spinning busy indicator beside the label while an async action resolves. */
   loading?: boolean;
 }
 
@@ -42,7 +47,14 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button
       data-loading={loading || undefined}
       {...rest}
     >
-      {children}
+      {loading ? (
+        <span
+          className={styles.loadingSpinner}
+          aria-hidden="true"
+          dangerouslySetInnerHTML={{ __html: ICONS['spinner'] }}
+        />
+      ) : null}
+      <span className={styles.label}>{children}</span>
     </button>
   );
 });

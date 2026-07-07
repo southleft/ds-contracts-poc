@@ -7,7 +7,7 @@
 
 **A proof of concept that a design system's source of truth should be neither the design file nor the code — but a machine-readable *contract* that sits between them and generates both.**
 
-50 components. 276 tokens across three collections — primitives, brand, semantic — in light + dark themes × two brands. Two surfaces — a working React library and a native design-tool library — generated from the same JSON files and continuously proven to match them by a three-way differ. Nothing is hand-maintained twice, and nothing pretends to be in sync when it isn't.
+50 components. 282 tokens across three collections — primitives, brand, semantic — light + dark themes × two brands (accent, radius, and typography are brand decisions). Two surfaces — a working React library and a native design-tool library — generated from the same JSON files and continuously proven to match them by a three-way differ. Nothing is hand-maintained twice, and nothing pretends to be in sync when it isn't.
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="docs/assets/contract-flow-dark.svg">
@@ -29,7 +29,7 @@ There's a second reason, and it's becoming the bigger one: **AI generation.** In
 | Path | What it is | Edit by hand? |
 |---|---|---|
 | `contracts/` | **The source of truth.** 50 component contracts — buttons through banners, form fields, chat messages, navigation, progress meters, switches. APIs mirror a shipping industry component library ([coverage map](docs/research/astryx-coverage.md)) on this system's own tokens. | ✅ This is where changes happen |
-| `tokens/` | 276 DTCG design tokens: primitives → **brand modes** (accent ramp + control radius per brand) → semantic aliases → light/dark mode files. One pipeline compiles them to CSS custom properties *and* design-tool variable collections. Adding a brand touches ONLY this directory — eval-proven. | ✅ |
+| `tokens/` | 282 DTCG design tokens: primitives → **brand modes** (accent ramp + control radius per brand) → semantic aliases → light/dark mode files. One pipeline compiles them to CSS custom properties *and* design-tool variable collections. Adding a brand touches ONLY this directory — eval-proven. | ✅ |
 | `src/components/` | The generated React library — typed, accessible, CSF3 stories, publishable package build. | ❌ Generated, never edited |
 | `figma-sync/` | Generated, transport-agnostic scripts that build the canvas library: variant sets, bound variables, slot properties, mode-aware theming. | ❌ Generated |
 | `parity/` | The three-way differ: classifies every difference between contract, code, and canvas as *ahead*, *behind*, or *mismatched* — with a proposed remedy. | ✅ |

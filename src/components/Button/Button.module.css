@@ -1,10 +1,11 @@
 /* GENERATED FILE — DO NOT EDIT.
- * Source of truth: contracts/button.contract.json (ds.button v1.2.0)
+ * Source of truth: contracts/button.contract.json (ds.button v1.3.0)
  * Regenerate with: npm run generate
  */
 
 .root {
   display: inline-flex;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
   border: 0;
@@ -79,4 +80,21 @@
 
 .root:disabled {
   opacity: var(--opacity-disabled);
+}
+
+.loadingSpinner svg {
+  width: 14px;
+  height: 14px;
+}
+
+.loadingSpinner {
+  display: inline-flex;
+  flex-shrink: 0;
+  animation: ds-spin 0.8s linear infinite;
+}
+
+@keyframes ds-spin {
+  to {
+    transform: rotate(360deg);
+  }
 }

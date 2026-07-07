@@ -33,6 +33,20 @@ Read `out/proposals.md` for the per-component review notes (every inference and 
 - **CEM is trusted input.** The manifest describes Shoelace's API; it is not verified against Shoelace's TypeScript source. (CEM describes, contracts verify — [docs/08](../../../docs/08-composition-and-spec.md).)
 - **`slot`-typed and complex props** are outside declared extraction scope and appear in `out/proposals.md` as review items, not silently dropped.
 
-## The missing half: the design surface
+## The design half — COMPLETE (2026-07-06)
 
-The pilot completes when a community **Shoelace Figma kit** is dumped with `extract/figma-dump.js` and reconciled against this extraction (`npm run reconcile`). That produces the credibility artifact the roadmap names: a true drift report between a real library and a real design kit, neither of which this project controls. Blocked only on access to a copy of a community kit in a design file we can run the dump in.
+A copy of the community **Shoelace Figma kit** ("Shoelace interactive UI library", 28 public component sets) was dumped read-only (`design.json`) and reconciled against the CEM extraction:
+
+```
+28/58 code components matched a design set · 42 properties agree · 236 need a human decision
+```
+
+**This is the roadmap's credibility artifact**: a true drift report between a shipping library and a real community kit, neither of which this project controls. Highlights (`out/reconciliation.md`):
+
+- **The kit encodes interaction states as variant axes** (`state: default/hover/active/disabled/focus`) — a canvas-only convention the code API has no counterpart for. This is the single biggest structured-drift class between kits and libraries, and the report names every instance.
+- **Real kit typos surface mechanically**: Button's state axis contains `deafult`, Radio's checked axis is `isCheched`, Breadcrumb has `showPrexix`, Input has `alignement` — exactly the kind of silent rot a reconciliation exists to find.
+- **Booleans modeled as true/false variant axes** (`isPill`, `isOutline`) are auto-matched to code booleans (`pill`, `outline`) with the mapping flagged, not silently — two transparent conventions (is-prefix + bool-axis) recover most of the naming gap.
+- **Coverage drift runs both ways**: 30 code components have no kit counterpart (Carousel, Tree, ColorPicker, …) and the kit's `show*` slot-visibility booleans have no code API — both are decisions for a reconciliation workshop, not defects in either artifact.
+- Code-only form-association props (`form`, `formaction`, `name`, `value`) appear throughout — kits never model form participation; a real contract v1 would declare them code-only, the same way this repo declares events.
+
+Every number above is reproducible: the dump JSON, config, and full report are committed beside this file.

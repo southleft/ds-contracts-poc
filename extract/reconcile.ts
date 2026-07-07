@@ -90,14 +90,35 @@ export interface Reconciliation {
   stats: { components: number; matched: number; propsAgree: number; propsDiffer: number };
 }
 
-export function reconcile(codeSide: ExtractedComponent[], designSide: DesignComponent[]): Reconciliation {
+export interface ReconcileOpts {
+  /** Vendor prefix on code component names absent from design names —
+   *  "sl" matches SlButton ⇄ Button. Reported when used, never silent. */
+  stripCodePrefix?: string;
+}
+
+/** A design VARIANT axis whose options are exactly true/false is a boolean
+ *  modeled the canvas way — an extremely common kit convention. */
+const isBoolAxis = (options: string[]): boolean => {
+  const set = new Set(options.map(normValue));
+  return set.size === 2 && set.has('true') && set.has('false');
+};
+
+export function reconcile(
+  codeSide: ExtractedComponent[],
+  designSide: DesignComponent[],
+  opts: ReconcileOpts = {},
+): Reconciliation {
   const designByNorm = new Map(designSide.map((d) => [normalizeName(d.name), d]));
   const matched: ComponentReconciliation[] = [];
   const codeOnly: { name: string; source: string }[] = [];
   const usedDesign = new Set<string>();
+  const prefix = opts.stripCodePrefix ? normalizeName(opts.stripCodePrefix) : null;
 
   for (const c of codeSide) {
-    const d = designByNorm.get(normalizeName(c.name));
+    const norm = normalizeName(c.name);
+    const d =
+      designByNorm.get(norm) ??
+      (prefix && norm.startsWith(prefix) ? designByNorm.get(norm.slice(prefix.length)) : undefined);
     if (!d) {
       codeOnly.push({ name: c.name, source: c.source });
       continue;
@@ -127,6 +148,22 @@ export function reconcile(codeSide: ExtractedComponent[], designSide: DesignComp
               },
         );
         continue;
+      }
+      // Boolean code prop modeled as a true/false VARIANT axis in the kit
+      if (p.kind === 'boolean') {
+        const axisHit = Object.entries(d.variantProps).find(
+          ([dn, options]) => aliasMatch(dn, p.name) && isBoolAxis(options),
+        );
+        if (axisHit) {
+          claimedDesign.add(axisHit[0]);
+          findings.push({
+            status: 'agree',
+            codeProp: p.name,
+            designProp: axisHit[0],
+            detail: `boolean modeled as a true/false variant axis in design (${p.name} ⇄ ${axisHit[0]})`,
+          });
+          continue;
+        }
       }
       const boolHit = d.boolProps.find((dn) => aliasMatch(dn, p.name));
       if (p.kind === 'boolean' && boolHit) {

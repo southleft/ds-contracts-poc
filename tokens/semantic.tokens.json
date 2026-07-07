@@ -303,11 +303,11 @@
     "control": {
       "family": {
         "$type": "fontFamily",
-        "$value": "{font.family.sans}"
+        "$value": "{brand.font.control-family}"
       },
       "weight": {
         "$type": "fontWeight",
-        "$value": "{font.weight.medium}"
+        "$value": "{brand.font.control-weight}"
       },
       "size": {
         "$type": "dimension",

@@ -2,7 +2,7 @@
   "$schema": "./contract.schema.json",
   "id": "ds.button",
   "name": "Button",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "status": "draft",
   "description": "Triggers an action or event. Use one primary button per context.",
   "semantics": {
@@ -79,7 +79,7 @@
     },
     {
       "name": "loading",
-      "description": "Shows a busy indicator while an async action resolves.",
+      "description": "Shows a spinning busy indicator beside the label while an async action resolves.",
       "type": "boolean",
       "default": false,
       "bindings": {
@@ -136,6 +136,31 @@
         },
         "disabled": {
           "opacity": "{opacity.disabled}"
+        }
+      },
+      "layout": {
+        "display": "inline-flex",
+        "direction": "row",
+        "align": "center",
+        "justify": "center"
+      },
+      "parts": {
+        "loadingSpinner": {
+          "description": "Busy indicator, shown while loading.",
+          "icon": {
+            "asset": "spinner",
+            "size": 14
+          },
+          "animation": "spin",
+          "visibleWhen": {
+            "prop": "loading"
+          }
+        },
+        "label": {
+          "element": "span",
+          "content": {
+            "prop": "children"
+          }
         }
       }
     }

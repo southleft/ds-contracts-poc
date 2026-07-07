@@ -86,7 +86,9 @@ if (command === 'code') {
     );
   }
   const designSide = loadDesign(designSource);
-  const r = reconcile(codeSide, designSide);
+  // The contract-id prefix doubles as the vendor prefix on code names
+  // (SlButton ⇄ kit "Button") — every prefix-stripped match is flagged.
+  const r = reconcile(codeSide, designSide, { stripCodePrefix: idPrefix(config) });
   writeReconciliation(r, out);
   console.log(
     `✔ Reconciled ${r.stats.matched}/${r.stats.components} components — ` +

@@ -1,6 +1,6 @@
 /**
  * GENERATED FILE — DO NOT EDIT.
- * Source of truth: contracts/button.contract.json (ds.button v1.2.0)
+ * Source of truth: contracts/button.contract.json (ds.button v1.3.0)
  * Regenerate with: npm run generate
  */
 import type { Meta, StoryObj } from '@storybook/react-vite';
@@ -30,7 +30,8 @@ const meta = {
     },
     loading: {
       control: 'boolean',
-      description: 'Shows a busy indicator while an async action resolves.',
+      description:
+        'Shows a spinning busy indicator beside the label while an async action resolves.',
     },
     children: { control: 'text', description: 'Button label.' },
   },

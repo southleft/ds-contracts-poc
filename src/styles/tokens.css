@@ -47,6 +47,10 @@
   --color-yellow-700: #A16207;
   --color-yellow-900: #713F12;
   --color-teal-100: #CCFBF1;
+  --color-teal-300: #5EEAD4;
+  --color-teal-400: #2DD4BF;
+  --color-teal-500: #14B8A6;
+  --color-teal-600: #0D9488;
   --color-teal-700: #0F766E;
   --color-teal-900: #134E4A;
   --color-cyan-100: #CFFAFE;
@@ -102,6 +106,8 @@
   --brand-accent-700: var(--color-blue-700);
   --brand-accent-900: var(--color-blue-900);
   --brand-radius-control: var(--radius-200);
+  --brand-font-control-family: var(--font-family-sans);
+  --brand-font-control-weight: var(--font-weight-medium);
   --space-inset-x-sm: var(--space-150);
   --space-inset-x-md: var(--space-200);
   --space-inset-x-lg: var(--space-300);
@@ -165,8 +171,8 @@
   --border-width-focus: var(--border-width-200);
   --border-width-divider-subtle: var(--border-width-100);
   --border-width-divider-strong: var(--border-width-200);
-  --font-control-family: var(--font-family-sans);
-  --font-control-weight: var(--font-weight-medium);
+  --font-control-family: var(--brand-font-control-family);
+  --font-control-weight: var(--brand-font-control-weight);
   --font-control-size-sm: var(--font-size-200);
   --font-control-size-md: var(--font-size-300);
   --font-control-size-lg: var(--font-size-400);

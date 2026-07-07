@@ -1,0 +1,1744 @@
+{
+  "matched": [
+    {
+      "component": "SlAlert",
+      "codeSource": "extract/pilots/shoelace/custom-elements.json (components/alert/alert.js)",
+      "designName": "Alert",
+      "findings": [
+        {
+          "status": "code-only",
+          "codeProp": "open",
+          "detail": "boolean — no matching design property"
+        },
+        {
+          "status": "agree",
+          "codeProp": "closable",
+          "designProp": "closable"
+        },
+        {
+          "status": "agree",
+          "codeProp": "variant",
+          "designProp": "variant"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "countdown",
+          "detail": "enum [rtl, ltr] — no matching design property"
+        },
+        {
+          "status": "design-only",
+          "designProp": "showTitle",
+          "detail": "no matching code prop"
+        },
+        {
+          "status": "design-only",
+          "designProp": "showIcon",
+          "detail": "no matching code prop"
+        },
+        {
+          "status": "design-only",
+          "designProp": "alert",
+          "detail": "no matching code prop — a design TEXT property with no code counterpart is often bound to React `children` (invisible in a props interface); confirm before treating as drift"
+        },
+        {
+          "status": "design-only",
+          "designProp": "alertTitle",
+          "detail": "no matching code prop — a design TEXT property with no code counterpart is often bound to React `children` (invisible in a props interface); confirm before treating as drift"
+        }
+      ]
+    },
+    {
+      "component": "SlAvatar",
+      "codeSource": "extract/pilots/shoelace/custom-elements.json (components/avatar/avatar.js)",
+      "designName": "Avatar",
+      "findings": [
+        {
+          "status": "code-only",
+          "codeProp": "image",
+          "detail": "string — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "label",
+          "detail": "string — no matching design property"
+        },
+        {
+          "status": "agree",
+          "codeProp": "initials",
+          "designProp": "initials"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "loading",
+          "detail": "enum [eager, lazy] — no matching design property"
+        },
+        {
+          "status": "agree",
+          "codeProp": "shape",
+          "designProp": "shape"
+        },
+        {
+          "status": "design-only",
+          "designProp": "type",
+          "detail": "variant [default, initials, image] — no matching code prop"
+        }
+      ]
+    },
+    {
+      "component": "SlBadge",
+      "codeSource": "extract/pilots/shoelace/custom-elements.json (components/badge/badge.js)",
+      "designName": "Badge",
+      "findings": [
+        {
+          "status": "code-only",
+          "codeProp": "variant",
+          "detail": "enum [primary, success, neutral, warning, danger] — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "pill",
+          "detail": "boolean — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "pulse",
+          "detail": "boolean — no matching design property"
+        }
+      ]
+    },
+    {
+      "component": "SlBreadcrumb",
+      "codeSource": "extract/pilots/shoelace/custom-elements.json (components/breadcrumb/breadcrumb.js)",
+      "designName": "Breadcrumb",
+      "findings": [
+        {
+          "status": "code-only",
+          "codeProp": "label",
+          "detail": "string — no matching design property"
+        }
+      ]
+    },
+    {
+      "component": "SlBreadcrumbItem",
+      "codeSource": "extract/pilots/shoelace/custom-elements.json (components/breadcrumb-item/breadcrumb-item.js)",
+      "designName": "_Breadcrumb item",
+      "findings": [
+        {
+          "status": "code-only",
+          "codeProp": "target",
+          "detail": "enum [_blank, _parent, _self, _top] — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "rel",
+          "detail": "string — no matching design property"
+        },
+        {
+          "status": "design-only",
+          "designProp": "isLink",
+          "detail": "variant [false, true] — no matching code prop"
+        },
+        {
+          "status": "design-only",
+          "designProp": "showPrexix",
+          "detail": "no matching code prop"
+        },
+        {
+          "status": "design-only",
+          "designProp": "showSeparator",
+          "detail": "no matching code prop"
+        },
+        {
+          "status": "design-only",
+          "designProp": "showSuffix",
+          "detail": "no matching code prop"
+        },
+        {
+          "status": "design-only",
+          "designProp": "label",
+          "detail": "no matching code prop — a design TEXT property with no code counterpart is often bound to React `children` (invisible in a props interface); confirm before treating as drift"
+        }
+      ]
+    },
+    {
+      "component": "SlButton",
+      "codeSource": "extract/pilots/shoelace/custom-elements.json (components/button/button.js)",
+      "designName": "Button",
+      "findings": [
+        {
+          "status": "code-only",
+          "codeProp": "title",
+          "detail": "string — no matching design property"
+        },
+        {
+          "status": "agree",
+          "codeProp": "variant",
+          "designProp": "variant"
+        },
+        {
+          "status": "agree",
+          "codeProp": "size",
+          "designProp": "size"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "caret",
+          "detail": "boolean — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "disabled",
+          "detail": "boolean — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "loading",
+          "detail": "boolean — no matching design property"
+        },
+        {
+          "status": "agree",
+          "codeProp": "outline",
+          "designProp": "isOutline",
+          "detail": "boolean modeled as a true/false variant axis in design (outline ⇄ isOutline)"
+        },
+        {
+          "status": "agree",
+          "codeProp": "pill",
+          "designProp": "isPill",
+          "detail": "boolean modeled as a true/false variant axis in design (pill ⇄ isPill)"
+        },
+        {
+          "status": "agree",
+          "codeProp": "circle",
+          "designProp": "isCircle",
+          "detail": "boolean modeled as a true/false variant axis in design (circle ⇄ isCircle)"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "type",
+          "detail": "enum [button, submit, reset] — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "name",
+          "detail": "string — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "value",
+          "detail": "string — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "href",
+          "detail": "string — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "target",
+          "detail": "enum [_blank, _parent, _self, _top] — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "rel",
+          "detail": "string — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "form",
+          "detail": "string — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "formaction",
+          "detail": "string — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "formenctype",
+          "detail": "enum [application/x-www-form-urlencoded, multipart/form-data, text/plain] — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "formmethod",
+          "detail": "enum [post, get] — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "formnovalidate",
+          "detail": "boolean — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "invalid",
+          "detail": "boolean — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "formAction",
+          "detail": "string — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "formEnctype",
+          "detail": "enum [application/x-www-form-urlencoded, multipart/form-data, text/plain] — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "formMethod",
+          "detail": "enum [post, get] — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "formNoValidate",
+          "detail": "boolean — no matching design property"
+        },
+        {
+          "status": "design-only",
+          "designProp": "state",
+          "detail": "variant [default, hover, active, disabled, focus, deafult] — no matching code prop"
+        },
+        {
+          "status": "design-only",
+          "designProp": "showLabel",
+          "detail": "no matching code prop"
+        },
+        {
+          "status": "design-only",
+          "designProp": "showSuffix",
+          "detail": "no matching code prop"
+        },
+        {
+          "status": "design-only",
+          "designProp": "showPrefix",
+          "detail": "no matching code prop"
+        },
+        {
+          "status": "design-only",
+          "designProp": "label",
+          "detail": "no matching code prop — a design TEXT property with no code counterpart is often bound to React `children` (invisible in a props interface); confirm before treating as drift"
+        }
+      ]
+    },
+    {
+      "component": "SlButtonGroup",
+      "codeSource": "extract/pilots/shoelace/custom-elements.json (components/button-group/button-group.js)",
+      "designName": "Button group",
+      "findings": [
+        {
+          "status": "code-only",
+          "codeProp": "label",
+          "detail": "string — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "disableRole",
+          "detail": "boolean — no matching design property"
+        },
+        {
+          "status": "design-only",
+          "designProp": "position",
+          "detail": "variant [left, center, right, position4] — no matching code prop"
+        },
+        {
+          "status": "design-only",
+          "designProp": "size",
+          "detail": "variant [large, small, medium] — no matching code prop"
+        },
+        {
+          "status": "design-only",
+          "designProp": "type",
+          "detail": "variant [default, primary] — no matching code prop"
+        },
+        {
+          "status": "design-only",
+          "designProp": "isPill",
+          "detail": "variant [false, true] — no matching code prop"
+        },
+        {
+          "status": "design-only",
+          "designProp": "isPill",
+          "detail": "no matching code prop"
+        }
+      ]
+    },
+    {
+      "component": "SlCheckbox",
+      "codeSource": "extract/pilots/shoelace/custom-elements.json (components/checkbox/checkbox.js)",
+      "designName": "Checkbox",
+      "findings": [
+        {
+          "status": "code-only",
+          "codeProp": "title",
+          "detail": "string — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "name",
+          "detail": "string — no matching design property"
+        },
+        {
+          "status": "agree",
+          "codeProp": "value",
+          "designProp": "value"
+        },
+        {
+          "status": "agree",
+          "codeProp": "size",
+          "designProp": "size"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "disabled",
+          "detail": "boolean — no matching design property"
+        },
+        {
+          "status": "agree",
+          "codeProp": "checked",
+          "designProp": "isChecked",
+          "detail": "boolean modeled as a true/false variant axis in design (checked ⇄ isChecked)"
+        },
+        {
+          "status": "agree",
+          "codeProp": "indeterminate",
+          "designProp": "isIndeterminate",
+          "detail": "boolean modeled as a true/false variant axis in design (indeterminate ⇄ isIndeterminate)"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "form",
+          "detail": "string — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "required",
+          "detail": "boolean — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "help-text",
+          "detail": "string — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "defaultChecked",
+          "detail": "boolean — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "helpText",
+          "detail": "string — no matching design property"
+        },
+        {
+          "status": "design-only",
+          "designProp": "state",
+          "detail": "variant [default, disabled, hover] — no matching code prop"
+        },
+        {
+          "status": "design-only",
+          "designProp": "showValue",
+          "detail": "no matching code prop"
+        }
+      ]
+    },
+    {
+      "component": "SlDetails",
+      "codeSource": "extract/pilots/shoelace/custom-elements.json (components/details/details.js)",
+      "designName": "Details",
+      "findings": [
+        {
+          "status": "agree",
+          "codeProp": "open",
+          "designProp": "isOpen",
+          "detail": "boolean modeled as a true/false variant axis in design (open ⇄ isOpen)"
+        },
+        {
+          "status": "agree",
+          "codeProp": "summary",
+          "designProp": "summary"
+        },
+        {
+          "status": "agree",
+          "codeProp": "disabled",
+          "designProp": "isDisabled",
+          "detail": "boolean modeled as a true/false variant axis in design (disabled ⇄ isDisabled)"
+        }
+      ]
+    },
+    {
+      "component": "SlDialog",
+      "codeSource": "extract/pilots/shoelace/custom-elements.json (components/dialog/dialog.js)",
+      "designName": "Dialog",
+      "findings": [
+        {
+          "status": "code-only",
+          "codeProp": "open",
+          "detail": "boolean — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "label",
+          "detail": "string — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "no-header",
+          "detail": "boolean — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "noHeader",
+          "detail": "boolean — no matching design property"
+        },
+        {
+          "status": "design-only",
+          "designProp": "title",
+          "detail": "no matching code prop — a design TEXT property with no code counterpart is often bound to React `children` (invisible in a props interface); confirm before treating as drift"
+        }
+      ]
+    },
+    {
+      "component": "SlDivider",
+      "codeSource": "extract/pilots/shoelace/custom-elements.json (components/divider/divider.js)",
+      "designName": "Divider",
+      "findings": [
+        {
+          "status": "agree",
+          "codeProp": "vertical",
+          "designProp": "isVertical",
+          "detail": "boolean modeled as a true/false variant axis in design (vertical ⇄ isVertical)"
+        }
+      ]
+    },
+    {
+      "component": "SlDrawer",
+      "codeSource": "extract/pilots/shoelace/custom-elements.json (components/drawer/drawer.js)",
+      "designName": "Drawer",
+      "findings": [
+        {
+          "status": "code-only",
+          "codeProp": "open",
+          "detail": "boolean — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "label",
+          "detail": "string — no matching design property"
+        },
+        {
+          "status": "agree",
+          "codeProp": "placement",
+          "designProp": "placement"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "contained",
+          "detail": "boolean — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "no-header",
+          "detail": "boolean — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "noHeader",
+          "detail": "boolean — no matching design property"
+        },
+        {
+          "status": "design-only",
+          "designProp": "showDrawer",
+          "detail": "no matching code prop"
+        },
+        {
+          "status": "design-only",
+          "designProp": "title",
+          "detail": "no matching code prop — a design TEXT property with no code counterpart is often bound to React `children` (invisible in a props interface); confirm before treating as drift"
+        }
+      ]
+    },
+    {
+      "component": "SlDropdown",
+      "codeSource": "extract/pilots/shoelace/custom-elements.json (components/dropdown/dropdown.js)",
+      "designName": "Dropdown",
+      "findings": [
+        {
+          "status": "code-only",
+          "codeProp": "open",
+          "detail": "boolean — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "disabled",
+          "detail": "boolean — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "stay-open-on-select",
+          "detail": "boolean — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "distance",
+          "detail": "number — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "skidding",
+          "detail": "number — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "hoist",
+          "detail": "boolean — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "sync",
+          "detail": "enum [width, height, both] — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "stayOpenOnSelect",
+          "detail": "boolean — no matching design property"
+        }
+      ]
+    },
+    {
+      "component": "SlIcon",
+      "codeSource": "extract/pilots/shoelace/custom-elements.json (components/icon/icon.js)",
+      "designName": "Icon",
+      "findings": [
+        {
+          "status": "code-only",
+          "codeProp": "label",
+          "detail": "string — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "library",
+          "detail": "string — no matching design property"
+        },
+        {
+          "status": "design-only",
+          "designProp": "variant",
+          "detail": "variant [material] — no matching code prop"
+        },
+        {
+          "status": "design-only",
+          "designProp": "size",
+          "detail": "variant [medium, small, large, x-large] — no matching code prop"
+        },
+        {
+          "status": "design-only",
+          "designProp": "state",
+          "detail": "variant [default, hover, active, disabled] — no matching code prop"
+        },
+        {
+          "status": "design-only",
+          "designProp": "icon",
+          "detail": "no matching code prop — a design TEXT property with no code counterpart is often bound to React `children` (invisible in a props interface); confirm before treating as drift"
+        }
+      ]
+    },
+    {
+      "component": "SlImageComparer",
+      "codeSource": "extract/pilots/shoelace/custom-elements.json (components/image-comparer/image-comparer.js)",
+      "designName": "Image Comparer",
+      "findings": [
+        {
+          "status": "code-only",
+          "codeProp": "position",
+          "detail": "number — no matching design property"
+        },
+        {
+          "status": "design-only",
+          "designProp": "position",
+          "detail": "variant [middle, left, right] — no matching code prop"
+        }
+      ]
+    },
+    {
+      "component": "SlInput",
+      "codeSource": "extract/pilots/shoelace/custom-elements.json (components/input/input.js)",
+      "designName": "input",
+      "findings": [
+        {
+          "status": "code-only",
+          "codeProp": "title",
+          "detail": "string — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "name",
+          "detail": "string — no matching design property"
+        },
+        {
+          "status": "agree",
+          "codeProp": "value",
+          "designProp": "value"
+        },
+        {
+          "status": "agree",
+          "codeProp": "size",
+          "designProp": "size"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "filled",
+          "detail": "boolean — no matching design property"
+        },
+        {
+          "status": "agree",
+          "codeProp": "pill",
+          "designProp": "isPill",
+          "detail": "boolean modeled as a true/false variant axis in design (pill ⇄ isPill)"
+        },
+        {
+          "status": "agree",
+          "codeProp": "label",
+          "designProp": "label"
+        },
+        {
+          "status": "agree",
+          "codeProp": "help-text",
+          "designProp": "helpText"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "clearable",
+          "detail": "boolean — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "disabled",
+          "detail": "boolean — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "placeholder",
+          "detail": "string — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "readonly",
+          "detail": "boolean — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "password-toggle",
+          "detail": "boolean — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "password-visible",
+          "detail": "boolean — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "no-spin-buttons",
+          "detail": "boolean — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "form",
+          "detail": "string — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "required",
+          "detail": "boolean — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "pattern",
+          "detail": "string — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "minlength",
+          "detail": "number — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "maxlength",
+          "detail": "number — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "autocapitalize",
+          "detail": "enum [off, none, on, sentences, words, characters] — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "autocorrect",
+          "detail": "enum [off, on] — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "autocomplete",
+          "detail": "string — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "autofocus",
+          "detail": "boolean — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "enterkeyhint",
+          "detail": "enum [enter, done, go, next, previous, search, send] — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "spellcheck",
+          "detail": "boolean — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "inputmode",
+          "detail": "enum [none, text, decimal, numeric, tel, search, email, url] — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "defaultValue",
+          "detail": "string — no matching design property"
+        },
+        {
+          "status": "agree",
+          "codeProp": "helpText",
+          "designProp": "helpText"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "passwordToggle",
+          "detail": "boolean — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "passwordVisible",
+          "detail": "boolean — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "noSpinButtons",
+          "detail": "boolean — no matching design property"
+        },
+        {
+          "status": "design-only",
+          "designProp": "state",
+          "detail": "variant [default, disabled, hover, focus] — no matching code prop"
+        },
+        {
+          "status": "design-only",
+          "designProp": "alignement",
+          "detail": "variant [vertical, horizontal] — no matching code prop"
+        },
+        {
+          "status": "design-only",
+          "designProp": "display",
+          "detail": "variant [placeholder, content] — no matching code prop"
+        },
+        {
+          "status": "design-only",
+          "designProp": "variant",
+          "detail": "variant [default] — no matching code prop"
+        },
+        {
+          "status": "design-only",
+          "designProp": "showHelp",
+          "detail": "no matching code prop"
+        },
+        {
+          "status": "design-only",
+          "designProp": "showLabel",
+          "detail": "no matching code prop"
+        },
+        {
+          "status": "design-only",
+          "designProp": "showValue",
+          "detail": "no matching code prop"
+        },
+        {
+          "status": "design-only",
+          "designProp": "showSuffix",
+          "detail": "no matching code prop"
+        },
+        {
+          "status": "design-only",
+          "designProp": "showPrefix",
+          "detail": "no matching code prop"
+        }
+      ]
+    },
+    {
+      "component": "SlMenu",
+      "codeSource": "extract/pilots/shoelace/custom-elements.json (components/menu/menu.js)",
+      "designName": "Menu",
+      "findings": [
+        {
+          "status": "design-only",
+          "designProp": "variant",
+          "detail": "variant [prefilled, empty] — no matching code prop"
+        }
+      ]
+    },
+    {
+      "component": "SlMenuItem",
+      "codeSource": "extract/pilots/shoelace/custom-elements.json (components/menu-item/menu-item.js)",
+      "designName": "Menu Item",
+      "findings": [
+        {
+          "status": "code-only",
+          "codeProp": "type",
+          "detail": "enum [normal, checkbox] — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "checked",
+          "detail": "boolean — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "value",
+          "detail": "string — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "loading",
+          "detail": "boolean — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "disabled",
+          "detail": "boolean — no matching design property"
+        },
+        {
+          "status": "design-only",
+          "designProp": "isSelected",
+          "detail": "variant [false, true] — no matching code prop"
+        },
+        {
+          "status": "design-only",
+          "designProp": "state",
+          "detail": "variant [default, hover, active, disabled] — no matching code prop"
+        },
+        {
+          "status": "design-only",
+          "designProp": "showSuffix",
+          "detail": "no matching code prop"
+        },
+        {
+          "status": "design-only",
+          "designProp": "showPrefix",
+          "detail": "no matching code prop"
+        },
+        {
+          "status": "design-only",
+          "designProp": "label",
+          "detail": "no matching code prop — a design TEXT property with no code counterpart is often bound to React `children` (invisible in a props interface); confirm before treating as drift"
+        }
+      ]
+    },
+    {
+      "component": "SlRadio",
+      "codeSource": "extract/pilots/shoelace/custom-elements.json (components/radio/radio.js)",
+      "designName": "Radio",
+      "findings": [
+        {
+          "status": "agree",
+          "codeProp": "value",
+          "designProp": "value"
+        },
+        {
+          "status": "agree",
+          "codeProp": "size",
+          "designProp": "size"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "disabled",
+          "detail": "boolean — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "checked",
+          "detail": "boolean — no matching design property"
+        },
+        {
+          "status": "design-only",
+          "designProp": "isCheched",
+          "detail": "variant [false, true] — no matching code prop"
+        },
+        {
+          "status": "design-only",
+          "designProp": "state",
+          "detail": "variant [default, hover, disabled] — no matching code prop"
+        },
+        {
+          "status": "design-only",
+          "designProp": "showValue",
+          "detail": "no matching code prop"
+        }
+      ]
+    },
+    {
+      "component": "SlRadioGroup",
+      "codeSource": "extract/pilots/shoelace/custom-elements.json (components/radio-group/radio-group.js)",
+      "designName": "radio group",
+      "findings": [
+        {
+          "status": "agree",
+          "codeProp": "label",
+          "designProp": "label"
+        },
+        {
+          "status": "agree",
+          "codeProp": "help-text",
+          "designProp": "help",
+          "detail": "matched via alias rule (help-text ⇄ help)"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "name",
+          "detail": "string — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "value",
+          "detail": "string — no matching design property"
+        },
+        {
+          "status": "agree",
+          "codeProp": "size",
+          "designProp": "size"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "form",
+          "detail": "string — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "required",
+          "detail": "boolean — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "defaultValue",
+          "detail": "string — no matching design property"
+        },
+        {
+          "status": "agree",
+          "codeProp": "helpText",
+          "designProp": "help",
+          "detail": "matched via alias rule (helpText ⇄ help)"
+        },
+        {
+          "status": "design-only",
+          "designProp": "variant",
+          "detail": "variant [default] — no matching code prop"
+        },
+        {
+          "status": "design-only",
+          "designProp": "direction",
+          "detail": "variant [vertical, horizontal] — no matching code prop"
+        },
+        {
+          "status": "design-only",
+          "designProp": "showLabel",
+          "detail": "no matching code prop"
+        },
+        {
+          "status": "design-only",
+          "designProp": "showHelp",
+          "detail": "no matching code prop"
+        }
+      ]
+    },
+    {
+      "component": "SlRange",
+      "codeSource": "extract/pilots/shoelace/custom-elements.json (components/range/range.js)",
+      "designName": "Range",
+      "findings": [
+        {
+          "status": "code-only",
+          "codeProp": "title",
+          "detail": "string — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "name",
+          "detail": "string — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "value",
+          "detail": "number — no matching design property"
+        },
+        {
+          "status": "agree",
+          "codeProp": "label",
+          "designProp": "label"
+        },
+        {
+          "status": "agree",
+          "codeProp": "help-text",
+          "designProp": "helpText"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "disabled",
+          "detail": "boolean — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "min",
+          "detail": "number — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "max",
+          "detail": "number — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "step",
+          "detail": "number — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "tooltip",
+          "detail": "enum [top, bottom, none] — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "form",
+          "detail": "string — no matching design property"
+        },
+        {
+          "status": "agree",
+          "codeProp": "helpText",
+          "designProp": "helpText"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "defaultValue",
+          "detail": "number — no matching design property"
+        },
+        {
+          "status": "design-only",
+          "designProp": "state",
+          "detail": "variant [default, disabled, hover] — no matching code prop"
+        },
+        {
+          "status": "design-only",
+          "designProp": "showTooltip",
+          "detail": "no matching code prop"
+        },
+        {
+          "status": "design-only",
+          "designProp": "showHelp",
+          "detail": "no matching code prop"
+        },
+        {
+          "status": "design-only",
+          "designProp": "showLabel",
+          "detail": "no matching code prop"
+        }
+      ]
+    },
+    {
+      "component": "SlSelect",
+      "codeSource": "extract/pilots/shoelace/custom-elements.json (components/select/select.js)",
+      "designName": "select",
+      "findings": [
+        {
+          "status": "code-only",
+          "codeProp": "name",
+          "detail": "string — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "size",
+          "detail": "enum [small, medium, large] — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "placeholder",
+          "detail": "string — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "multiple",
+          "detail": "boolean — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "max-options-visible",
+          "detail": "number — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "disabled",
+          "detail": "boolean — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "clearable",
+          "detail": "boolean — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "open",
+          "detail": "boolean — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "hoist",
+          "detail": "boolean — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "filled",
+          "detail": "boolean — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "pill",
+          "detail": "boolean — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "label",
+          "detail": "string — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "placement",
+          "detail": "enum [top, bottom] — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "help-text",
+          "detail": "string — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "form",
+          "detail": "string — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "required",
+          "detail": "boolean — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "displayLabel",
+          "detail": "string — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "maxOptionsVisible",
+          "detail": "number — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "helpText",
+          "detail": "string — no matching design property"
+        },
+        {
+          "status": "design-only",
+          "designProp": "Property 1",
+          "detail": "variant [Default] — no matching code prop"
+        }
+      ]
+    },
+    {
+      "component": "SlSkeleton",
+      "codeSource": "extract/pilots/shoelace/custom-elements.json (components/skeleton/skeleton.js)",
+      "designName": "Skeleton",
+      "findings": [
+        {
+          "status": "code-only",
+          "codeProp": "effect",
+          "detail": "enum [pulse, sheen, none] — no matching design property"
+        },
+        {
+          "status": "design-only",
+          "designProp": "type",
+          "detail": "variant [text, avatar-square, avatar-rounded, avatar-pill] — no matching code prop"
+        }
+      ]
+    },
+    {
+      "component": "SlTab",
+      "codeSource": "extract/pilots/shoelace/custom-elements.json (components/tab/tab.js)",
+      "designName": "Tab",
+      "findings": [
+        {
+          "status": "code-only",
+          "codeProp": "panel",
+          "detail": "string — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "active",
+          "detail": "boolean — no matching design property"
+        },
+        {
+          "status": "agree",
+          "codeProp": "closable",
+          "designProp": "closable"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "disabled",
+          "detail": "boolean — no matching design property"
+        },
+        {
+          "status": "design-only",
+          "designProp": "state",
+          "detail": "variant [active, default, disabled] — no matching code prop"
+        },
+        {
+          "status": "design-only",
+          "designProp": "showBorder",
+          "detail": "variant [true, false] — no matching code prop"
+        },
+        {
+          "status": "design-only",
+          "designProp": "placement",
+          "detail": "variant [top, none, bottom, start, end] — no matching code prop"
+        },
+        {
+          "status": "design-only",
+          "designProp": "tab",
+          "detail": "no matching code prop — a design TEXT property with no code counterpart is often bound to React `children` (invisible in a props interface); confirm before treating as drift"
+        }
+      ]
+    },
+    {
+      "component": "SlTabGroup",
+      "codeSource": "extract/pilots/shoelace/custom-elements.json (components/tab-group/tab-group.js)",
+      "designName": "Tab Group",
+      "findings": [
+        {
+          "status": "agree",
+          "codeProp": "placement",
+          "designProp": "placement"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "activation",
+          "detail": "enum [auto, manual] — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "no-scroll-controls",
+          "detail": "boolean — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "fixed-scroll-controls",
+          "detail": "boolean — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "noScrollControls",
+          "detail": "boolean — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "fixedScrollControls",
+          "detail": "boolean — no matching design property"
+        }
+      ]
+    },
+    {
+      "component": "SlTag",
+      "codeSource": "extract/pilots/shoelace/custom-elements.json (components/tag/tag.js)",
+      "designName": "Tag",
+      "findings": [
+        {
+          "status": "options-differ",
+          "codeProp": "variant",
+          "designProp": "variant",
+          "detail": "code [primary, success, neutral, warning, danger, text] vs design [primary, success, neutral, warning, danger]"
+        },
+        {
+          "status": "agree",
+          "codeProp": "size",
+          "designProp": "size"
+        },
+        {
+          "status": "agree",
+          "codeProp": "pill",
+          "designProp": "isPill",
+          "detail": "boolean modeled as a true/false variant axis in design (pill ⇄ isPill)"
+        },
+        {
+          "status": "agree",
+          "codeProp": "removable",
+          "designProp": "removable"
+        },
+        {
+          "status": "design-only",
+          "designProp": "label",
+          "detail": "no matching code prop — a design TEXT property with no code counterpart is often bound to React `children` (invisible in a props interface); confirm before treating as drift"
+        }
+      ]
+    },
+    {
+      "component": "SlTextarea",
+      "codeSource": "extract/pilots/shoelace/custom-elements.json (components/textarea/textarea.js)",
+      "designName": "Textarea",
+      "findings": [
+        {
+          "status": "code-only",
+          "codeProp": "title",
+          "detail": "string — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "name",
+          "detail": "string — no matching design property"
+        },
+        {
+          "status": "agree",
+          "codeProp": "value",
+          "designProp": "value"
+        },
+        {
+          "status": "options-differ",
+          "codeProp": "size",
+          "designProp": "size",
+          "detail": "code [small, medium, large] vs design [medium]"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "filled",
+          "detail": "boolean — no matching design property"
+        },
+        {
+          "status": "agree",
+          "codeProp": "label",
+          "designProp": "label"
+        },
+        {
+          "status": "agree",
+          "codeProp": "help-text",
+          "designProp": "help",
+          "detail": "matched via alias rule (help-text ⇄ help)"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "placeholder",
+          "detail": "string — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "rows",
+          "detail": "number — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "resize",
+          "detail": "enum [none, vertical, auto] — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "disabled",
+          "detail": "boolean — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "readonly",
+          "detail": "boolean — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "form",
+          "detail": "string — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "required",
+          "detail": "boolean — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "minlength",
+          "detail": "number — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "maxlength",
+          "detail": "number — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "autocapitalize",
+          "detail": "enum [off, none, on, sentences, words, characters] — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "autocorrect",
+          "detail": "string — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "autocomplete",
+          "detail": "string — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "autofocus",
+          "detail": "boolean — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "enterkeyhint",
+          "detail": "enum [enter, done, go, next, previous, search, send] — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "spellcheck",
+          "detail": "boolean — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "inputmode",
+          "detail": "enum [none, text, decimal, numeric, tel, search, email, url] — no matching design property"
+        },
+        {
+          "status": "agree",
+          "codeProp": "helpText",
+          "designProp": "help",
+          "detail": "matched via alias rule (helpText ⇄ help)"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "defaultValue",
+          "detail": "string — no matching design property"
+        },
+        {
+          "status": "design-only",
+          "designProp": "state",
+          "detail": "variant [default, filled, disabled] — no matching code prop"
+        },
+        {
+          "status": "design-only",
+          "designProp": "showLabel",
+          "detail": "no matching code prop"
+        },
+        {
+          "status": "design-only",
+          "designProp": "showHelp",
+          "detail": "no matching code prop"
+        },
+        {
+          "status": "design-only",
+          "designProp": "isResizable",
+          "detail": "no matching code prop"
+        }
+      ]
+    },
+    {
+      "component": "SlTooltip",
+      "codeSource": "extract/pilots/shoelace/custom-elements.json (components/tooltip/tooltip.js)",
+      "designName": "Tooltip",
+      "findings": [
+        {
+          "status": "code-only",
+          "codeProp": "content",
+          "detail": "string — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "disabled",
+          "detail": "boolean — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "distance",
+          "detail": "number — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "open",
+          "detail": "boolean — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "skidding",
+          "detail": "number — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "trigger",
+          "detail": "string — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "hoist",
+          "detail": "boolean — no matching design property"
+        },
+        {
+          "status": "design-only",
+          "designProp": "placement",
+          "detail": "variant [bottom, bottomLeft, bottomRight, left, right, topLeft, topRight, top] — no matching code prop"
+        },
+        {
+          "status": "design-only",
+          "designProp": "text",
+          "detail": "no matching code prop — a design TEXT property with no code counterpart is often bound to React `children` (invisible in a props interface); confirm before treating as drift"
+        },
+        {
+          "status": "design-only",
+          "designProp": "Text",
+          "detail": "no matching code prop — a design TEXT property with no code counterpart is often bound to React `children` (invisible in a props interface); confirm before treating as drift"
+        }
+      ]
+    }
+  ],
+  "codeOnly": [
+    {
+      "name": "SlAnimatedImage",
+      "source": "extract/pilots/shoelace/custom-elements.json (components/animated-image/animated-image.js)"
+    },
+    {
+      "name": "SlAnimation",
+      "source": "extract/pilots/shoelace/custom-elements.json (components/animation/animation.js)"
+    },
+    {
+      "name": "SlCard",
+      "source": "extract/pilots/shoelace/custom-elements.json (components/card/card.js)"
+    },
+    {
+      "name": "SlCarousel",
+      "source": "extract/pilots/shoelace/custom-elements.json (components/carousel/carousel.js)"
+    },
+    {
+      "name": "SlCarouselItem",
+      "source": "extract/pilots/shoelace/custom-elements.json (components/carousel-item/carousel-item.js)"
+    },
+    {
+      "name": "SlColorPicker",
+      "source": "extract/pilots/shoelace/custom-elements.json (components/color-picker/color-picker.js)"
+    },
+    {
+      "name": "SlCopyButton",
+      "source": "extract/pilots/shoelace/custom-elements.json (components/copy-button/copy-button.js)"
+    },
+    {
+      "name": "SlFormatBytes",
+      "source": "extract/pilots/shoelace/custom-elements.json (components/format-bytes/format-bytes.js)"
+    },
+    {
+      "name": "SlFormatDate",
+      "source": "extract/pilots/shoelace/custom-elements.json (components/format-date/format-date.js)"
+    },
+    {
+      "name": "SlFormatNumber",
+      "source": "extract/pilots/shoelace/custom-elements.json (components/format-number/format-number.js)"
+    },
+    {
+      "name": "SlIconButton",
+      "source": "extract/pilots/shoelace/custom-elements.json (components/icon-button/icon-button.js)"
+    },
+    {
+      "name": "SlInclude",
+      "source": "extract/pilots/shoelace/custom-elements.json (components/include/include.js)"
+    },
+    {
+      "name": "SlMenuLabel",
+      "source": "extract/pilots/shoelace/custom-elements.json (components/menu-label/menu-label.js)"
+    },
+    {
+      "name": "SlMutationObserver",
+      "source": "extract/pilots/shoelace/custom-elements.json (components/mutation-observer/mutation-observer.js)"
+    },
+    {
+      "name": "SlOption",
+      "source": "extract/pilots/shoelace/custom-elements.json (components/option/option.js)"
+    },
+    {
+      "name": "SlPopup",
+      "source": "extract/pilots/shoelace/custom-elements.json (components/popup/popup.js)"
+    },
+    {
+      "name": "SlProgressBar",
+      "source": "extract/pilots/shoelace/custom-elements.json (components/progress-bar/progress-bar.js)"
+    },
+    {
+      "name": "SlProgressRing",
+      "source": "extract/pilots/shoelace/custom-elements.json (components/progress-ring/progress-ring.js)"
+    },
+    {
+      "name": "SlQrCode",
+      "source": "extract/pilots/shoelace/custom-elements.json (components/qr-code/qr-code.js)"
+    },
+    {
+      "name": "SlRadioButton",
+      "source": "extract/pilots/shoelace/custom-elements.json (components/radio-button/radio-button.js)"
+    },
+    {
+      "name": "SlRating",
+      "source": "extract/pilots/shoelace/custom-elements.json (components/rating/rating.js)"
+    },
+    {
+      "name": "SlRelativeTime",
+      "source": "extract/pilots/shoelace/custom-elements.json (components/relative-time/relative-time.js)"
+    },
+    {
+      "name": "SlResizeObserver",
+      "source": "extract/pilots/shoelace/custom-elements.json (components/resize-observer/resize-observer.js)"
+    },
+    {
+      "name": "SlSpinner",
+      "source": "extract/pilots/shoelace/custom-elements.json (components/spinner/spinner.js)"
+    },
+    {
+      "name": "SlSplitPanel",
+      "source": "extract/pilots/shoelace/custom-elements.json (components/split-panel/split-panel.js)"
+    },
+    {
+      "name": "SlSwitch",
+      "source": "extract/pilots/shoelace/custom-elements.json (components/switch/switch.js)"
+    },
+    {
+      "name": "SlTabPanel",
+      "source": "extract/pilots/shoelace/custom-elements.json (components/tab-panel/tab-panel.js)"
+    },
+    {
+      "name": "SlTree",
+      "source": "extract/pilots/shoelace/custom-elements.json (components/tree/tree.js)"
+    },
+    {
+      "name": "SlTreeItem",
+      "source": "extract/pilots/shoelace/custom-elements.json (components/tree-item/tree-item.js)"
+    },
+    {
+      "name": "SlVisuallyHidden",
+      "source": "extract/pilots/shoelace/custom-elements.json (components/visually-hidden/visually-hidden.js)"
+    }
+  ],
+  "designOnly": [
+    "Slot",
+    "_Image Comparer Handler",
+    "Menu submenu",
+    "Menu title",
+    "radio group button",
+    "_ellipse",
+    "_demo / header",
+    "Color Swatch"
+  ],
+  "stats": {
+    "components": 58,
+    "matched": 28,
+    "propsAgree": 42,
+    "propsDiffer": 236
+  }
+}

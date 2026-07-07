@@ -414,6 +414,10 @@ const cases: Case[] = [
             ]),
           ),
           radius: { control: { $type: 'dimension', $value: '{radius.100}' } },
+          font: {
+            'control-family': { $type: 'fontFamily', $value: '{font.family.sans}' },
+            'control-weight': { $type: 'fontWeight', $value: '{font.weight.medium}' },
+          },
         },
       };
       const nocturnePath = path.join(SCRATCH, 'tokens', 'modes', 'brand.nocturne.tokens.json');
