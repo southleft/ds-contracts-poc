@@ -89,6 +89,7 @@ Live receipts: extraction against **Shoelace v2.20.1** (58/58 components, 411 pr
 | **Token round-trip losslessness** — the sync bridge's DTCG token export → dry-run re-import of the exported payload | ✅ **92 tokens parsed · 0 create · 0 update · 0 rename · 0 delete · 92 unchanged** (sync bridge v1.34.0) |
 | **Export completeness** — exported DTCG carries scopes, code-syntax metadata, per-mode alias references, and the design tool's variable/collection IDs in `$extensions` (the dual-ID rename-survival pattern) | ✅ verified, including the previously promoted dark-mode change |
 | **Two-direction promotion on live surfaces** | ✅ executed end-to-end — see [docs/06](06-parity-loop.md) |
+| **Fresh-file rebuild** (2026-07-06) — the entire library regenerated into a BLANK file via the Sync Runner plugin (`figma-sync/plugin/`): 282 variables across all three collections, 48 component sets built + arranged onto 50 pages in one run, then verified by `npm run diagnose` — **all 50 contracts hold with zero findings** on the rebuilt surface. The exercise flushed out three generator bugs masked by 8 months of incremental building (Slot utility never created, cross-page `combineAsVariants`, slot `accepts` missing from build order) — the exact bug class this check exists to catch | ✅ |
 
 ## What is NOT yet validated (say this in the PRD too)
 
@@ -96,7 +97,6 @@ Live receipts: extraction against **Shoelace v2.20.1** (58/58 components, 411 pr
 2. **Multi-brand at organizational scale** — the brand DIMENSION is now proven (two live brand modes on both surfaces; adding a brand is token-layer-only, eval `brand-added-token-layer-only`; see C6). Unevidenced: many-brand portfolios (10+ brands), brand-specific component OVERRIDES beyond token decisions, and cross-brand governance workflows.
 3. **Organizational behavior** — the promotion flow works mechanically; whether teams *accept* contract PRs as the arbitration door is a people question no eval answers.
 4. **Visual fidelity** — out of scope by design; the loop guards structure and bindings, taste stays human. In practice this scope line matters more than it sounds: see "What 'parity clean' does and doesn't mean" below.
-5. **Fresh-file rebuild** — the canvas library was built up incrementally in one file. Regenerating the whole library into a *blank* file from the current scripts has not been run end-to-end as a single operation.
 
 ## What "parity clean" does and doesn't mean
 

@@ -9,7 +9,7 @@ const SEMANTIC = [{"name":"space/inset-x/sm","type":"FLOAT","light":"space/150",
 
 // File guard: multi-file bridge routing has been observed to hit the wrong
 // file — never write without verifying the target.
-const EXPECTED_FILE_KEY = "NObAfcl7SUZQkXozUNnRyF";
+const EXPECTED_FILE_KEY = "8nim1d0IPnehMxA7B7SYxC";
 if (EXPECTED_FILE_KEY && figma.fileKey && figma.fileKey !== EXPECTED_FILE_KEY) {
   throw new Error('WRONG FILE: expected ' + EXPECTED_FILE_KEY + ', got ' + figma.fileKey);
 }

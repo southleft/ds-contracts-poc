@@ -196,28 +196,41 @@ function cvaPropsFrom(type: ts.TypeNode, cvaTables: Map<string, CvaTable>): Extr
 
 type PropsTypeRef = string | ts.TypeLiteralNode | ts.IntersectionTypeNode;
 
-function membersOf(typeName: PropsTypeRef, table: TypeTable): ts.PropertySignature[] {
+function membersOf(
+  typeName: PropsTypeRef,
+  table: TypeTable,
+): { resolved: boolean; members: ts.PropertySignature[] } {
   if (typeof typeName !== 'string') {
     if (ts.isIntersectionTypeNode(typeName)) {
-      return typeName.types
-        .filter(ts.isTypeLiteralNode)
-        .flatMap((t) => t.members.filter(ts.isPropertySignature));
+      return {
+        resolved: true,
+        members: typeName.types
+          .filter(ts.isTypeLiteralNode)
+          .flatMap((t) => t.members.filter(ts.isPropertySignature)),
+      };
     }
-    return typeName.members.filter(ts.isPropertySignature);
+    return { resolved: true, members: typeName.members.filter(ts.isPropertySignature) };
   }
   const iface = table.interfaces.get(typeName);
-  if (iface) return iface.members.filter(ts.isPropertySignature);
+  // An interface that RESOLVES but has no own members (extends-only, e.g.
+  // `interface CodeProps extends HTMLAttributes<...> {}`) is a legitimate
+  // zero-own-prop component API — extract it as such, don't skip it.
+  if (iface) return { resolved: true, members: iface.members.filter(ts.isPropertySignature) };
   const alias = table.aliases.get(typeName);
   if (alias) {
-    // type X = { ... }  or  type X = Base & { ... } (literal members only)
-    if (ts.isTypeLiteralNode(alias.type)) return alias.type.members.filter(ts.isPropertySignature);
+    if (ts.isTypeLiteralNode(alias.type)) {
+      return { resolved: true, members: alias.type.members.filter(ts.isPropertySignature) };
+    }
     if (ts.isIntersectionTypeNode(alias.type)) {
-      return alias.type.types
-        .filter(ts.isTypeLiteralNode)
-        .flatMap((t) => t.members.filter(ts.isPropertySignature));
+      return {
+        resolved: true,
+        members: alias.type.types
+          .filter(ts.isTypeLiteralNode)
+          .flatMap((t) => t.members.filter(ts.isPropertySignature)),
+      };
     }
   }
-  return [];
+  return { resolved: false, members: [] };
 }
 
 /** The type node behind a props-type ref, for cva/VariantProps scanning. */
@@ -333,10 +346,10 @@ export function extractReactTsx(
     const cvaTables = collectCvaTables(sf);
     for (const [componentName, propsType] of findComponents(sf)) {
       if (seen.has(componentName)) continue;
-      const members = membersOf(propsType, table);
+      const { resolved, members } = membersOf(propsType, table);
       const typeNode = typeNodeOf(propsType, table);
       const cvaProps = typeNode ? cvaPropsFrom(typeNode, cvaTables) : [];
-      if (members.length === 0 && cvaProps.length === 0) {
+      if (!resolved && members.length === 0 && cvaProps.length === 0) {
         // A component we can SEE but cannot READ is reported, never
         // silently dropped — silent omission is the failure mode this
         // tool exists to eliminate.

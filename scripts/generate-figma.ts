@@ -883,7 +883,7 @@ const COL_W = ${data.colW}, ROW_H = 240, PAD = 40;
 
 // File guard: multi-file bridge routing has been observed to hit the wrong
 // file — never write without verifying the target.
-const EXPECTED_FILE_KEY = ${JSON.stringify(contract.anchors.figma.fileKey)};
+const EXPECTED_FILE_KEY = ${JSON.stringify(process.env.FIGMA_FILE_KEY ?? contract.anchors.figma.fileKey)};
 if (EXPECTED_FILE_KEY && figma.fileKey && figma.fileKey !== EXPECTED_FILE_KEY) {
   throw new Error('WRONG FILE: expected ' + EXPECTED_FILE_KEY + ', got ' + figma.fileKey);
 }
@@ -1175,6 +1175,8 @@ for (const b of built) {
 
 let target;
 if (IS_SET) {
+  // combineAsVariants requires the nodes to already be ON the parent page.
+  for (const b of built) compPage.appendChild(b.comp);
   target = figma.combineAsVariants(built.map((b) => b.comp), compPage);
   // Tight grid: rows = first axis, columns = second; per-track max sizing.
   const specByName = new Map(VARIANTS.map((s) => [s.name, s]));
@@ -1214,7 +1216,6 @@ return {
   createdNodeIds: [target.id],
   nodeId: target.id,
   key: target.key,
-  sectionId: section.id,
   variants: IS_SET ? target.children.length : 1,
   properties: propNames,
 };
@@ -1288,7 +1289,32 @@ async function ensureSlotUtility() {
     const hit = page.findOne((n) => n.type === 'COMPONENT' && n.name === 'Slot');
     if (hit) { _slotUtil = hit; return hit; }
   }
-  throw new Error('Slot utility component missing — run a per-component sync script first.');
+  // Fresh file: create it (found by the 2026-07-06 fresh-file rebuild test —
+  // the lookup-only version threw in a blank file).
+  await figma.loadFontAsync({ family: 'Inter', style: 'Medium' });
+  const util = figma.createComponent();
+  util.name = 'Slot';
+  util.layoutMode = 'HORIZONTAL';
+  util.primaryAxisAlignItems = 'CENTER';
+  util.counterAxisAlignItems = 'CENTER';
+  util.paddingLeft = util.paddingRight = 12;
+  util.paddingTop = util.paddingBottom = 8;
+  util.cornerRadius = 4;
+  util.fills = [];
+  util.strokes = [{ type: 'SOLID', color: { r: 0.6, g: 0.62, b: 0.68 } }];
+  util.dashPattern = [4, 4];
+  const t = figma.createText();
+  t.fontName = { family: 'Inter', style: 'Medium' };
+  t.fontSize = 12;
+  t.characters = 'Slot';
+  t.fills = [{ type: 'SOLID', color: { r: 0.6, g: 0.62, b: 0.68 } }];
+  util.appendChild(t);
+  let utilPage = figma.root.children.find((p) => p.name === 'Utilities');
+  if (!utilPage) { utilPage = figma.createPage(); utilPage.name = 'Utilities'; }
+  utilPage.appendChild(util);
+  util.x = 100; util.y = 100;
+  _slotUtil = util;
+  return util;
 }
 
 function applyFrameSpec(node, spec) {
@@ -1489,6 +1515,8 @@ async function syncOne(C) {
 
   let target;
   if (C.isSet) {
+    // combineAsVariants requires the nodes to already be ON the parent page.
+    for (const b of built) compPage.appendChild(b.comp);
     target = figma.combineAsVariants(built.map((b) => b.comp), compPage);
     // Tight grid: rows = first axis, columns = second; per-track max sizing.
     const specByName = new Map(C.variants.map((s) => [s.name, s]));

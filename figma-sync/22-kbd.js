@@ -342,6 +342,8 @@ for (const b of built) {
 
 let target;
 if (IS_SET) {
+  // combineAsVariants requires the nodes to already be ON the parent page.
+  for (const b of built) compPage.appendChild(b.comp);
   target = figma.combineAsVariants(built.map((b) => b.comp), compPage);
   // Tight grid: rows = first axis, columns = second; per-track max sizing.
   const specByName = new Map(VARIANTS.map((s) => [s.name, s]));
@@ -381,7 +383,6 @@ return {
   createdNodeIds: [target.id],
   nodeId: target.id,
   key: target.key,
-  sectionId: section.id,
   variants: IS_SET ? target.children.length : 1,
   properties: propNames,
 };

@@ -25,12 +25,12 @@ The contract-as-source-of-truth loop, demonstrated end to end.
 Close the honesty gaps the PoC itself documented, so every claim survives adversarial review.
 
 - [ ] **Anatomy-level parity** — extend the differ below the API surface with a per-variant anatomy fingerprint (part tree, layout, bindings), closing the gap described in [docs/07 § What "parity clean" does and doesn't mean](07-validation.md)
-- [ ] **Fresh-file rebuild eval** — one command regenerates the entire canvas library into a blank file; assert parity clean against the result
+- [x] **Fresh-file rebuild** — executed 2026-07-06 via the Sync Runner dev plugin: blank file → 282 variables + 48 sets + arranged pages in one run, `diagnose` clean across all 50 contracts; caught three generator bugs incremental building had masked (docs/07 live checks)
 - [ ] **Live token re-extraction in the loop** — the token snapshot is periodically re-extracted from the design tool, not only derived from `tokens/` (verified manually 264/264 on 2026-07-03; make it automatic)
 - [ ] **Visual regression baseline** — screenshot-per-variant-grid comparison, so the class of defect found in the July 2026 visual audit is caught mechanically
 - [ ] **Close the declared schema gaps** ([docs/08](08-composition-and-spec.md)): nested-part states, parent→child prop mapping, slot `min`/`max` + `restrict` enforcement, slot default content
 
-**Exit criterion:** the differ (not a human with a screenshot) catches a hand-made change to a part's layout inside one variant; a blank file rebuilds to parity in one run.
+**Exit criterion:** the differ (not a human with a screenshot) catches a hand-made change to a part's layout inside one variant; ~~a blank file rebuilds to parity in one run~~ *(✅ done — 2026-07-06, verified by diagnose)*.
 
 ## Phase 2 — Brownfield adoption
 

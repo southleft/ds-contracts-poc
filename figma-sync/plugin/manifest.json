@@ -3,9 +3,16 @@
   "id": "ds-contracts-sync-runner",
   "api": "1.0.0",
   "main": "code.js",
-  "editorType": ["figma"],
+  "editorType": [
+    "figma"
+  ],
   "networkAccess": {
-    "allowedDomains": ["http://127.0.0.1:8765", "http://localhost:8765"],
+    "allowedDomains": [
+      "none"
+    ],
+    "devAllowedDomains": [
+      "http://localhost:8765"
+    ],
     "reasoning": "Fetches the generated figma-sync scripts from the local dev server (npm run figma:serve) so the full library can be rebuilt without pasting scripts."
   }
 }

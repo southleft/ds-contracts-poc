@@ -2,18 +2,26 @@
 // local server (npm run figma:serve), in order, in the CURRENT file.
 // This is the from-disk transport for full-library operations (fresh-file
 // rebuild, big re-syncs) — no copy/paste, no per-script size caps.
-const BASE = 'http://127.0.0.1:8765';
+const BASE = 'http://localhost:8765';
 
 async function main() {
   figma.notify('Sync Runner: fetching script list…');
   const list = await (await fetch(BASE + '/runner-manifest.json')).json();
   const results = [];
+  const progress = (payload) =>
+    fetch(BASE + '/runner-result', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    }).catch(() => {});
   for (const name of list.scripts) {
     figma.notify('Running ' + name + '…', { timeout: 1500 });
+    await progress({ phase: 'starting', script: name, when: Date.now(), soFar: results });
     const code = await (await fetch(BASE + '/' + name)).text();
     try {
       const result = await new Function('return (async () => {\n' + code + '\n})()')();
       results.push({ script: name, ok: true, result });
+      await progress({ phase: 'finished', script: name, when: Date.now(), soFar: results });
     } catch (e) {
       results.push({ script: name, ok: false, error: String(e && e.message ? e.message : e) });
       break; // dependency order matters — stop on first failure

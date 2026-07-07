@@ -146,6 +146,9 @@ for (const contract of contracts) {
 
   // ---- design ⟷ contract ---------------------------------------------
   if (!designByName) continue;
+  // Native-representation contracts (layout primitives) intentionally have
+  // no design component set — the concept IS the canvas capability.
+  if (contract.figmaRepresentation === 'native') continue;
   const d = designByName.get(normalizeName(contract.name));
   if (!d) {
     add({

@@ -348,9 +348,15 @@ export function sortByDependencies(contracts: Contract[]): Contract[] {
     }
     for (const { slot } of slotsOf(c)) {
       for (const acceptedId of slot.accepts ?? []) {
-        if (!byId.has(acceptedId)) {
+        const dep = byId.get(acceptedId);
+        if (!dep) {
           throw new Error(`${c.id}: slot "${slot.name}" accepts unknown contract "${acceptedId}"`);
         }
+        // accepts is a BUILD-ORDER dependency: the canvas slot's preferred
+        // values resolve through the accepted component's key, so it must
+        // exist first. (Found by the 2026-07-06 fresh-file rebuild — masked
+        // in the original file where every component already existed.)
+        visit(dep, [...chain, c.id]);
       }
       for (const item of slot.defaultContent ?? []) {
         const dep = byId.get(item.id);
