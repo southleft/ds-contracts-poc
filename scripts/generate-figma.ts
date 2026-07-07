@@ -1549,10 +1549,11 @@ mkdirSync(OUT, { recursive: true });
 const contracts = readdirSync(path.join(ROOT, 'contracts'))
   .filter((f) => f.endsWith('.contract.json'))
   .map((f) => ContractSchema.parse(read(path.join('contracts', f))));
-writeFileSync(
-  path.join(OUT, '01-tokens.js'),
-  buildTokensScript(contracts[0]?.anchors.figma.fileKey ?? null),
-);
+// FIGMA_FILE_KEY: rebuild-into-a-fresh-file support — overrides the anchor
+// file key baked into every script's WRONG FILE guard. FIGMA_BATCH_LIMIT:
+// transport cap per batch script (the desktop bridge accepts ~50k chars).
+const targetFileKey = process.env.FIGMA_FILE_KEY ?? contracts[0]?.anchors.figma.fileKey ?? null;
+writeFileSync(path.join(OUT, '01-tokens.js'), buildTokensScript(targetFileKey));
 const ordered = sortByDependencies(contracts); // dependency order + cycle/ref gate
 const byId = new Map(contracts.map((c) => [c.id, c]));
 
@@ -1568,9 +1569,9 @@ for (const contract of ordered) {
 
 // Batch scripts: all components in dependency order, chunked so each script
 // stays transport-friendly. Existing components skip, so re-runs are safe.
-const BATCH_LIMIT = 60_000;
+const BATCH_LIMIT = Number(process.env.FIGMA_BATCH_LIMIT ?? 60_000);
 const batchable = ordered.filter((c) => c.figmaRepresentation !== 'native');
-const fileKey = contracts[0]?.anchors.figma.fileKey ?? null;
+const fileKey = targetFileKey;
 const batches: ComponentData[][] = [[]];
 for (const contract of batchable) {
   const data = compileComponentData(contract, byId);
