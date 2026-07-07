@@ -1016,6 +1016,166 @@
           "values": {
             "Value": 44
           }
+        },
+        {
+          "name": "color/purple/300",
+          "type": "COLOR",
+          "scopes": [
+            "ALL_FILLS",
+            "STROKE_COLOR"
+          ],
+          "codeSyntax": "var(--color-purple-300)",
+          "values": {
+            "Value": "#D8B4FE"
+          }
+        },
+        {
+          "name": "color/purple/400",
+          "type": "COLOR",
+          "scopes": [
+            "ALL_FILLS",
+            "STROKE_COLOR"
+          ],
+          "codeSyntax": "var(--color-purple-400)",
+          "values": {
+            "Value": "#C084FC"
+          }
+        },
+        {
+          "name": "color/purple/500",
+          "type": "COLOR",
+          "scopes": [
+            "ALL_FILLS",
+            "STROKE_COLOR"
+          ],
+          "codeSyntax": "var(--color-purple-500)",
+          "values": {
+            "Value": "#A855F7"
+          }
+        },
+        {
+          "name": "color/purple/600",
+          "type": "COLOR",
+          "scopes": [
+            "ALL_FILLS",
+            "STROKE_COLOR"
+          ],
+          "codeSyntax": "var(--color-purple-600)",
+          "values": {
+            "Value": "#9333EA"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Brand",
+      "modes": [
+        "Default",
+        "Aurora"
+      ],
+      "variables": [
+        {
+          "name": "brand/accent/100",
+          "type": "COLOR",
+          "scopes": [
+            "ALL_FILLS",
+            "STROKE_COLOR"
+          ],
+          "codeSyntax": "var(--brand-accent-100)",
+          "values": {
+            "Default": "{color/blue/100}",
+            "Aurora": "{color/purple/100}"
+          }
+        },
+        {
+          "name": "brand/accent/300",
+          "type": "COLOR",
+          "scopes": [
+            "ALL_FILLS",
+            "STROKE_COLOR"
+          ],
+          "codeSyntax": "var(--brand-accent-300)",
+          "values": {
+            "Default": "{color/blue/300}",
+            "Aurora": "{color/purple/300}"
+          }
+        },
+        {
+          "name": "brand/accent/400",
+          "type": "COLOR",
+          "scopes": [
+            "ALL_FILLS",
+            "STROKE_COLOR"
+          ],
+          "codeSyntax": "var(--brand-accent-400)",
+          "values": {
+            "Default": "{color/blue/400}",
+            "Aurora": "{color/purple/400}"
+          }
+        },
+        {
+          "name": "brand/accent/500",
+          "type": "COLOR",
+          "scopes": [
+            "ALL_FILLS",
+            "STROKE_COLOR"
+          ],
+          "codeSyntax": "var(--brand-accent-500)",
+          "values": {
+            "Default": "{color/blue/500}",
+            "Aurora": "{color/purple/500}"
+          }
+        },
+        {
+          "name": "brand/accent/600",
+          "type": "COLOR",
+          "scopes": [
+            "ALL_FILLS",
+            "STROKE_COLOR"
+          ],
+          "codeSyntax": "var(--brand-accent-600)",
+          "values": {
+            "Default": "{color/blue/600}",
+            "Aurora": "{color/purple/600}"
+          }
+        },
+        {
+          "name": "brand/accent/700",
+          "type": "COLOR",
+          "scopes": [
+            "ALL_FILLS",
+            "STROKE_COLOR"
+          ],
+          "codeSyntax": "var(--brand-accent-700)",
+          "values": {
+            "Default": "{color/blue/700}",
+            "Aurora": "{color/purple/700}"
+          }
+        },
+        {
+          "name": "brand/accent/900",
+          "type": "COLOR",
+          "scopes": [
+            "ALL_FILLS",
+            "STROKE_COLOR"
+          ],
+          "codeSyntax": "var(--brand-accent-900)",
+          "values": {
+            "Default": "{color/blue/900}",
+            "Aurora": "{color/purple/900}"
+          }
+        },
+        {
+          "name": "brand/radius/control",
+          "type": "FLOAT",
+          "scopes": [
+            "CORNER_RADIUS"
+          ],
+          "codeSyntax": "var(--brand-radius-control)",
+          "values": {
+            "Default": "{radius/200}",
+            "Aurora": "{radius/none}"
+          }
         }
       ]
     },
@@ -1268,8 +1428,8 @@
           ],
           "codeSyntax": "var(--radius-control)",
           "values": {
-            "Light": "{radius/200}",
-            "Dark": "{radius/200}"
+            "Light": "{brand/radius/control}",
+            "Dark": "{brand/radius/control}"
           }
         },
         {
@@ -2017,8 +2177,8 @@
           ],
           "codeSyntax": "var(--color-action-primary-background)",
           "values": {
-            "Light": "{color/blue/600}",
-            "Dark": "{color/blue/500}"
+            "Light": "{brand/accent/600}",
+            "Dark": "{brand/accent/500}"
           }
         },
         {
@@ -2030,8 +2190,8 @@
           ],
           "codeSyntax": "var(--color-action-primary-background-hover)",
           "values": {
-            "Light": "{color/blue/700}",
-            "Dark": "{color/blue/400}"
+            "Light": "{brand/accent/700}",
+            "Dark": "{brand/accent/400}"
           }
         },
         {
@@ -2212,8 +2372,8 @@
           ],
           "codeSyntax": "var(--color-border-focus)",
           "values": {
-            "Light": "{color/blue/500}",
-            "Dark": "{color/blue/300}"
+            "Light": "{brand/accent/500}",
+            "Dark": "{brand/accent/300}"
           }
         },
         {
@@ -2368,8 +2528,8 @@
           ],
           "codeSyntax": "var(--color-identity-background)",
           "values": {
-            "Light": "{color/blue/100}",
-            "Dark": "{color/blue/900}"
+            "Light": "{brand/accent/100}",
+            "Dark": "{brand/accent/900}"
           }
         },
         {
@@ -2381,8 +2541,8 @@
           ],
           "codeSyntax": "var(--color-identity-foreground)",
           "values": {
-            "Light": "{color/blue/700}",
-            "Dark": "{color/blue/100}"
+            "Light": "{brand/accent/700}",
+            "Dark": "{brand/accent/100}"
           }
         },
         {
@@ -2407,8 +2567,8 @@
           ],
           "codeSyntax": "var(--color-table-row-selected)",
           "values": {
-            "Light": "{color/blue/100}",
-            "Dark": "{color/blue/900}"
+            "Light": "{brand/accent/100}",
+            "Dark": "{brand/accent/900}"
           }
         },
         {
@@ -2745,8 +2905,8 @@
           ],
           "codeSyntax": "var(--color-status-accent)",
           "values": {
-            "Light": "{color/blue/600}",
-            "Dark": "{color/blue/400}"
+            "Light": "{brand/accent/600}",
+            "Dark": "{brand/accent/400}"
           }
         },
         {
@@ -2914,8 +3074,8 @@
           ],
           "codeSyntax": "var(--color-checkbox-checked-background)",
           "values": {
-            "Light": "{color/blue/600}",
-            "Dark": "{color/blue/500}"
+            "Light": "{brand/accent/600}",
+            "Dark": "{brand/accent/500}"
           }
         },
         {
@@ -2927,8 +3087,8 @@
           ],
           "codeSyntax": "var(--color-checkbox-checked-border)",
           "values": {
-            "Light": "{color/blue/600}",
-            "Dark": "{color/blue/500}"
+            "Light": "{brand/accent/600}",
+            "Dark": "{brand/accent/500}"
           }
         },
         {
@@ -2940,8 +3100,8 @@
           ],
           "codeSyntax": "var(--color-checkbox-indeterminate-background)",
           "values": {
-            "Light": "{color/blue/600}",
-            "Dark": "{color/blue/500}"
+            "Light": "{brand/accent/600}",
+            "Dark": "{brand/accent/500}"
           }
         },
         {
@@ -2953,8 +3113,8 @@
           ],
           "codeSyntax": "var(--color-checkbox-indeterminate-border)",
           "values": {
-            "Light": "{color/blue/600}",
-            "Dark": "{color/blue/500}"
+            "Light": "{brand/accent/600}",
+            "Dark": "{brand/accent/500}"
           }
         },
         {
@@ -3005,8 +3165,8 @@
           ],
           "codeSyntax": "var(--color-chat-user-background)",
           "values": {
-            "Light": "{color/blue/100}",
-            "Dark": "{color/blue/900}"
+            "Light": "{brand/accent/100}",
+            "Dark": "{brand/accent/900}"
           }
         },
         {
@@ -3096,8 +3256,8 @@
           ],
           "codeSyntax": "var(--color-tab-selected-foreground)",
           "values": {
-            "Light": "{color/blue/600}",
-            "Dark": "{color/blue/400}"
+            "Light": "{brand/accent/600}",
+            "Dark": "{brand/accent/400}"
           }
         },
         {
@@ -3109,8 +3269,8 @@
           ],
           "codeSyntax": "var(--color-nav-selected-background)",
           "values": {
-            "Light": "{color/blue/100}",
-            "Dark": "{color/blue/900}"
+            "Light": "{brand/accent/100}",
+            "Dark": "{brand/accent/900}"
           }
         },
         {
@@ -3122,8 +3282,8 @@
           ],
           "codeSyntax": "var(--color-nav-selected-foreground)",
           "values": {
-            "Light": "{color/blue/700}",
-            "Dark": "{color/blue/100}"
+            "Light": "{brand/accent/700}",
+            "Dark": "{brand/accent/100}"
           }
         },
         {
@@ -3174,8 +3334,8 @@
           ],
           "codeSyntax": "var(--color-switch-on-track)",
           "values": {
-            "Light": "{color/blue/600}",
-            "Dark": "{color/blue/500}"
+            "Light": "{brand/accent/600}",
+            "Dark": "{brand/accent/500}"
           }
         },
         {
@@ -3213,8 +3373,8 @@
           ],
           "codeSyntax": "var(--color-progress-accent)",
           "values": {
-            "Light": "{color/blue/600}",
-            "Dark": "{color/blue/400}"
+            "Light": "{brand/accent/600}",
+            "Dark": "{brand/accent/400}"
           }
         },
         {

@@ -63,3 +63,15 @@ CSS custom property = token path joined with `-`: `color.action.primary.backgrou
 | `semantic.tokens.json` + `modes/*` | Collection **Semantic**, modes **Light**/**Dark**, values as variable aliases into Primitives |
 
 Note: the reference design tool gates per-collection mode counts by plan tier; light + dark in one collection requires a paid tier. Details in the internal sync appendix.
+
+## The brand dimension (v7 — multi-brand)
+
+Brands are a second mode axis, orthogonal to light/dark: **theme picks the step, brand picks the ramp.**
+
+- `tokens/modes/brand.<name>.tokens.json` — one file per brand, discovered dynamically. Each holds only the brand DECISIONS (an accent ramp `brand.accent.*` and `brand.radius.control`), expressed strictly as aliases into primitives. `default` is required.
+- Accent-role semantic tokens alias `{brand.accent.*}`; literal-color semantics (`feedback.info`, `color.token.blue`) deliberately stay on their named ramps.
+- CSS: the default brand lands in `:root`; every other brand becomes a `[data-brand="<name>"]` block in `src/styles/tokens.brands.css` — one file, so import sites never change.
+- Design tool: a `Brand` variable collection with one mode per brand; semantic variables alias through it. Switching a frame's Brand mode rebrands every instance inside it.
+- Guarantees, eval-enforced (`brand-added-token-layer-only`): adding a brand leaves every generated component **byte-identical**; an incomplete brand file (missing tokens vs `default`) is refused naming the brand.
+
+Adding a brand is therefore a one-file operation: write `tokens/modes/brand.acme.tokens.json`, run `npm run build`, re-run the token sync. Nothing else in the repository changes.

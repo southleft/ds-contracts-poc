@@ -11,10 +11,10 @@ Where this project intends to go, in public. Each phase has a **falsifiable exit
 The contract-as-source-of-truth loop, demonstrated end to end.
 
 - [x] 50 component contracts generating a typed React library and a native design-tool library from the same JSON
-- [x] 264 DTCG tokens compiled to CSS custom properties and design-tool variables (light + dark)
+- [x] 276 DTCG tokens compiled to CSS custom properties and design-tool variables (light + dark × Default/Aurora brand modes)
 - [x] Three-way parity differ: every drift classified *ahead / behind / mismatched* with a proposed remedy
 - [x] Promotion loop executed in both directions on live surfaces, with receipts ([docs/06](06-parity-loop.md))
-- [x] 30/30 deterministic machinery evals ([docs/07](07-validation.md))
+- [x] 31/31 deterministic machinery evals ([docs/07](07-validation.md))
 - [x] Governed AI generation measured: 100/100 with the contract catalog vs 69/100 without ([docs/10](10-honest-generation.md))
 - [x] Coverage attributed against a full 93-component industry library ([coverage map](research/astryx-coverage.md))
 

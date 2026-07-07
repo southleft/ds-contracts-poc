@@ -75,15 +75,33 @@ export const Matrix: Story = {
         justifyItems: 'start',
       }}
     >
-      <Button variant="primary" size="sm" />
-      <Button variant="primary" size="md" />
-      <Button variant="primary" size="lg" />
-      <Button variant="secondary" size="sm" />
-      <Button variant="secondary" size="md" />
-      <Button variant="secondary" size="lg" />
-      <Button variant="danger" size="sm" />
-      <Button variant="danger" size="md" />
-      <Button variant="danger" size="lg" />
+      <Button variant="primary" size="sm">
+        Button
+      </Button>
+      <Button variant="primary" size="md">
+        Button
+      </Button>
+      <Button variant="primary" size="lg">
+        Button
+      </Button>
+      <Button variant="secondary" size="sm">
+        Button
+      </Button>
+      <Button variant="secondary" size="md">
+        Button
+      </Button>
+      <Button variant="secondary" size="lg">
+        Button
+      </Button>
+      <Button variant="danger" size="sm">
+        Button
+      </Button>
+      <Button variant="danger" size="md">
+        Button
+      </Button>
+      <Button variant="danger" size="lg">
+        Button
+      </Button>
     </div>
   ),
 };

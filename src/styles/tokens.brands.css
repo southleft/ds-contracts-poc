@@ -1,0 +1,15 @@
+/**
+ * GENERATED FILE — DO NOT EDIT.
+ * Source of truth: tokens/*.tokens.json — regenerate with: npm run tokens
+ */
+
+[data-brand="aurora"] {
+  --brand-accent-100: var(--color-purple-100);
+  --brand-accent-300: var(--color-purple-300);
+  --brand-accent-400: var(--color-purple-400);
+  --brand-accent-500: var(--color-purple-500);
+  --brand-accent-600: var(--color-purple-600);
+  --brand-accent-700: var(--color-purple-700);
+  --brand-accent-900: var(--color-purple-900);
+  --brand-radius-control: var(--radius-none);
+}

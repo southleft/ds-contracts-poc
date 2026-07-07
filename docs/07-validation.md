@@ -1,6 +1,6 @@
 # 7 · Validation — Claims, Evals, Evidence
 
-This PoC makes five falsifiable claims. Each is backed by an automated eval (`npm run eval`, 30 cases, runs the real pipeline in a scratch copy — not mocks) or an executed live design-tool check. Current status: **30/30 deterministic evals pass** (`evals/results.json`), all live checks pass. This section is written to be lifted into a PRD.
+This PoC makes five falsifiable claims. Each is backed by an automated eval (`npm run eval`, 31 cases, runs the real pipeline in a scratch copy — not mocks) or an executed live design-tool check. Current status: **31/31 deterministic evals pass** (`evals/results.json`), all live checks pass. This section is written to be lifted into a PRD.
 
 **Round 6 addendum (governed generation):** two eval cases exercise the deterministic generation judge itself — `judge-passes-canonical-screen` and `judge-catches-all-violation-classes` — backing the measured 100-vs-69 governed-generation A/B result in [docs/10](10-honest-generation.md).
 
@@ -61,6 +61,16 @@ Why it matters for the PRD: determinism is what separates "generate from your de
 
 This is the loop's key property: the system never oscillates and never lies about what to do next.
 
+### C6 — Brands are a token-layer dimension
+
+*Theming never leaks into components: a brand is a set of token decisions (accent ramp, control radius), and both surfaces pick them up as modes.*
+
+| Eval | Result |
+|---|---|
+| `brand-added-token-layer-only` — add a third brand file → every generated component is **byte-identical** (SHA-256 over the tree), a `[data-brand]` CSS block is emitted, the design-tool sync script gains the mode — and an incomplete brand file is refused naming the brand | ✅ |
+
+Live receipts (2026-07-06): the Brand collection (modes Default/Aurora) exists in the design file with 17 accent-role semantics + control radius re-aliased through it, verified by full live extraction; the same components render blue/rounded vs purple/square in Storybook, the Contract Hub, AND on the canvas purely by mode switch — screenshots on the file's Start Here page ("Brand Modes").
+
 ### C5 — Pre-existing libraries are extractable
 
 *The pipeline runs in reverse: real, foreign-convention component sources — not this repo's generated output — extract into schema-valid proposed contracts.*
@@ -83,7 +93,7 @@ Live receipts: extraction against **Shoelace v2.20.1** (58/58 components, 411 pr
 ## What is NOT yet validated (say this in the PRD too)
 
 1. **Deep/complex composition** — one level of nesting is exercised across many contracts (Card ⊃ Avatar, ChatMessage ⊃ Avatar, Toolbar ⊃ IconButton, …). Not yet exercised: multi-level trees, slot arity enforcement, nested-part states.
-2. **Multi-brand scale** — 50 components and 264 tokens, but one brand and one mode pair. No evidence yet about multi-brand systems (variant-matrix explosion per brand, token-set size, diff noise).
+2. **Multi-brand at organizational scale** — the brand DIMENSION is now proven (two live brand modes on both surfaces; adding a brand is token-layer-only, eval `brand-added-token-layer-only`; see C6). Unevidenced: many-brand portfolios (10+ brands), brand-specific component OVERRIDES beyond token decisions, and cross-brand governance workflows.
 3. **Organizational behavior** — the promotion flow works mechanically; whether teams *accept* contract PRs as the arbitration door is a people question no eval answers.
 4. **Visual fidelity** — out of scope by design; the loop guards structure and bindings, taste stays human. In practice this scope line matters more than it sounds: see "What 'parity clean' does and doesn't mean" below.
 5. **Fresh-file rebuild** — the canvas library was built up incrementally in one file. Regenerating the whole library into a *blank* file from the current scripts has not been run end-to-end as a single operation.

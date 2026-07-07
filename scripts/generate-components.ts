@@ -1099,7 +1099,10 @@ export const With${pascal(slot.name)}: Story = {
             ...(colProp && col ? [`${colProp.bindings.code.prop}="${col}"`] : []),
             ...requiredTextAttrs,
           ].join(' ');
-          return hasDefaultSlot
+          // Children arrive via a slot OR a children-bound text prop
+          // (Button's label) — either way the matrix cell needs content,
+          // or every cell renders as an empty pill.
+          return hasDefaultSlot || textProps(contract).some((p) => p.bindings.code.prop === 'children')
             ? `        <${name} ${attrs}>${label}</${name}>`
             : `        <${name} ${attrs} />`;
         })

@@ -1,6 +1,6 @@
 {
-  "passed": 30,
-  "total": 30,
+  "passed": 31,
+  "total": 31,
   "results": [
     {
       "id": "refuse-unknown-token-reference",
@@ -105,6 +105,11 @@
     {
       "id": "detect-code-removed-slot-prop",
       "claim": "C3-detection",
+      "pass": true
+    },
+    {
+      "id": "brand-added-token-layer-only",
+      "claim": "C6-theming",
       "pass": true
     },
     {

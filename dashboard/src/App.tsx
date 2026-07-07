@@ -14,6 +14,7 @@ import { Context } from './views/Context';
 import { Docs } from './views/Docs';
 
 type Theme = 'light' | 'dark';
+type Brand = 'default' | 'aurora';
 
 const NAV_ITEMS = [
   { href: '#/', label: 'Overview', section: '' },
@@ -38,6 +39,7 @@ function useHashRoute(): string {
 export function App() {
   const hash = useHashRoute();
   const [theme, setTheme] = useState<Theme>('light');
+  const [brand, setBrand] = useState<Brand>('default');
 
   useEffect(() => {
     // Chrome (shadcn) keys off .dark; the design-system samples key off
@@ -45,6 +47,12 @@ export function App() {
     document.documentElement.classList.toggle('dark', theme === 'dark');
     document.documentElement.dataset.theme = theme;
   }, [theme]);
+
+  useEffect(() => {
+    // Brand mode drives only the generated token layer ([data-brand]) —
+    // the Hub chrome deliberately does NOT rebrand; only the samples do.
+    document.documentElement.dataset.brand = brand;
+  }, [brand]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -193,6 +201,19 @@ export function App() {
             <span className="text-muted-foreground hidden font-mono text-xs sm:inline">
               catalog v{catalog.system.catalogVersion} · {catalog.system.gitCommit}
             </span>
+            <Button
+              variant="outline"
+              size="sm"
+              aria-label={`Switch brand mode (current: ${brand})`}
+              onClick={() => setBrand(brand === 'default' ? 'aurora' : 'default')}
+            >
+              <span
+                aria-hidden
+                className="inline-block size-3 rounded-full"
+                style={{ background: 'var(--color-action-primary-background)' }}
+              />
+              <span className="hidden capitalize sm:inline">{brand}</span>
+            </Button>
             <Button
               variant="outline"
               size="sm"

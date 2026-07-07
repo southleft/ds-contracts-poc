@@ -6,6 +6,7 @@ import './index.css';
 // live component samples (and flip with [data-theme]).
 import '../../src/styles/tokens.css';
 import '../../src/styles/tokens.dark.css';
+import '../../src/styles/tokens.brands.css';
 import { App } from './App';
 
 const container = document.getElementById('root');

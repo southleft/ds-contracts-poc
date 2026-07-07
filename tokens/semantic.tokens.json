@@ -82,7 +82,7 @@
   "radius": {
     "control": {
       "$type": "dimension",
-      "$value": "{radius.200}"
+      "$value": "{brand.radius.control}"
     },
     "badge": {
       "$type": "dimension",

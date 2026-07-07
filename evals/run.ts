@@ -119,7 +119,7 @@ const expectFinding = (
 
 interface Case {
   id: string;
-  claim: 'C1-determinism' | 'C2-refusal' | 'C3-detection' | 'C4-convergence' | 'C5-extraction';
+  claim: 'C1-determinism' | 'C2-refusal' | 'C3-detection' | 'C4-convergence' | 'C5-extraction' | 'C6-theming';
   run: () => void; // throws on failure
 }
 
@@ -389,6 +389,56 @@ const cases: Case[] = [
       replaceInFile(CARD_TSX, /\s*actions\?: ReactNode;/, '');
       if (parity().status === 0) throw new Error('Drift not detected');
       expectFinding(readReport(), 'code', 'behind', 'Card.actions');
+    },
+  },
+  {
+    // The multi-brand claim, mechanized: adding a brand is a TOKEN-LAYER-ONLY
+    // operation. A new brand file must (a) leave every generated component
+    // byte-identical, (b) emit a [data-brand] CSS block, (c) add a mode to
+    // the design-tool Brand collection — and an incomplete brand file must
+    // be refused by name.
+    id: 'brand-added-token-layer-only',
+    claim: 'C6-theming',
+    run: () => {
+      let r = buildTokens();
+      if (r.status !== 0) throw new Error(`Baseline token build failed:\n${r.out}`);
+      r = generate();
+      if (r.status !== 0) throw new Error(`Baseline generate failed:\n${r.out}`);
+      const before = hashTree('src/components');
+      const nocturne = {
+        brand: {
+          accent: Object.fromEntries(
+            ['100', '300', '400', '500', '600', '700', '900'].map((s) => [
+              s,
+              { $type: 'color', $value: `{color.red.${s}}` },
+            ]),
+          ),
+          radius: { control: { $type: 'dimension', $value: '{radius.100}' } },
+        },
+      };
+      const nocturnePath = path.join(SCRATCH, 'tokens', 'modes', 'brand.nocturne.tokens.json');
+      writeFileSync(nocturnePath, JSON.stringify(nocturne, null, 2));
+      r = buildTokens();
+      if (r.status !== 0) throw new Error(`Token build failed with new brand:\n${r.out}`);
+      r = generate();
+      if (r.status !== 0) throw new Error(`Generate failed with new brand:\n${r.out}`);
+      if (hashTree('src/components') !== before) {
+        throw new Error('Adding a brand CHANGED generated component output — theming leaked out of the token layer');
+      }
+      const css = readFileSync(path.join(SCRATCH, 'src', 'styles', 'tokens.brands.css'), 'utf8');
+      if (!css.includes('[data-brand="nocturne"]')) throw new Error('No [data-brand="nocturne"] CSS block emitted');
+      r = run(TSX, ['scripts/generate-figma.ts']);
+      if (r.status !== 0) throw new Error(`figma:plan failed with new brand:\n${r.out}`);
+      const tokScript = readFileSync(path.join(SCRATCH, 'figma-sync', '01-tokens.js'), 'utf8');
+      if (!tokScript.includes('"Nocturne"')) throw new Error('Brand mode "Nocturne" missing from the design-tool sync script');
+      // incomplete brand file → refused by name
+      const broken = JSON.parse(JSON.stringify(nocturne));
+      delete broken.brand.radius;
+      writeFileSync(nocturnePath, JSON.stringify(broken, null, 2));
+      r = buildTokens();
+      rmSync(nocturnePath);
+      if (r.status === 0) throw new Error('Incomplete brand file was ACCEPTED');
+      if (!r.out.includes('brand "nocturne"')) throw new Error(`Refusal did not name the brand:\n${r.out.slice(0, 300)}`);
     },
   },
   {

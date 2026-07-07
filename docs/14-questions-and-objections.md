@@ -30,7 +30,7 @@ The architecture is adapter-shaped at both ends. Code side: adapters normalize a
 
 ### "What stops the contract itself from being wrong or rotting?"
 
-Three mechanisms. **Refusal**: invalid contracts fail the build by name — unknown tokens, defaults outside enums, duplicate identities, malformed references, incomplete mode sets (claims C2 in [docs/07](07-validation.md), adversarially swept). **Verification**: the differ continuously classifies every divergence between contract and both surfaces as ahead/behind/mismatched with a remedy; 30 deterministic evals prove each detection class. **Convergence**: applying the differ's own proposed patch returns the system to parity (eval: `promotion-converges`) — the loop never oscillates and never lies about the next step.
+Three mechanisms. **Refusal**: invalid contracts fail the build by name — unknown tokens, defaults outside enums, duplicate identities, malformed references, incomplete mode sets (claims C2 in [docs/07](07-validation.md), adversarially swept). **Verification**: the differ continuously classifies every divergence between contract and both surfaces as ahead/behind/mismatched with a remedy; 31 deterministic evals prove each detection class. **Convergence**: applying the differ's own proposed patch returns the system to parity (eval: `promotion-converges`) — the loop never oscillates and never lies about the next step.
 
 ### "Why should I believe the AI-adherence number? Everyone's benchmarks flatter themselves."
 
@@ -38,7 +38,7 @@ The design of the measurement matters more than the number. The judged system is
 
 ### "What's known NOT to work yet?"
 
-Stated in one place, deliberately: anatomy below the API surface is generated but not continuously verified (a visual audit caught a canvas-only defect the differ missed — [docs/07 § What "parity clean" does and doesn't mean](07-validation.md)); fresh-file canvas rebuild hasn't run as a single operation; multi-brand scale is unevidenced; single-file extraction can't read cross-file type composition (reported, never silent); the reconciliation alias rules are calibrated on one system; and organizational acceptance of promotion is untested. Each has a roadmap line. If any of these is disqualifying for your case, the docs would rather tell you now.
+Stated in one place, deliberately: anatomy below the API surface is generated but not continuously verified (a visual audit caught a canvas-only defect the differ missed — [docs/07 § What "parity clean" does and doesn't mean](07-validation.md)); fresh-file canvas rebuild hasn't run as a single operation; multi-brand is proven as a token-layer dimension (two brands, eval-backed) but not at 10+-brand portfolio scale; single-file extraction can't read cross-file type composition (reported, never silent); the reconciliation alias rules are calibrated on one system; and organizational acceptance of promotion is untested. Each has a roadmap line. If any of these is disqualifying for your case, the docs would rather tell you now.
 
 ### "Is this trying to become a standard? Under whose control?"
 

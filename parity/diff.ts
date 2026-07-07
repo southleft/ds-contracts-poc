@@ -459,6 +459,24 @@ checkTokens(
   'Primitives',
   [...primitives].map(([p, v]) => ({ path: p, perMode: { Value: v } })),
 );
+// Brand collection: one mode per tokens/modes/brand.*.tokens.json file.
+const brandFiles = readdirSync(path.join(ROOT, 'tokens', 'modes'))
+  .filter((f) => /^brand\.[a-z][a-z0-9-]*\.tokens\.json$/.test(f))
+  .sort();
+const brandModeMaps = brandFiles.map((f) => ({
+  mode: f.replace(/^brand\.|\.tokens\.json$/g, '').replace(/^./, (c) => c.toUpperCase()),
+  tokens: readTokens(`tokens/modes/${f}`),
+}));
+if (brandModeMaps.length > 0) {
+  const first = brandModeMaps[0].tokens;
+  checkTokens(
+    'Brand',
+    [...first.keys()].map((p) => ({
+      path: p,
+      perMode: Object.fromEntries(brandModeMaps.map(({ mode, tokens }) => [mode, tokens.get(p)])),
+    })),
+  );
+}
 checkTokens('Semantic', [
   ...[...semantic].map(([p, v]) => ({ path: p, perMode: { Light: v, Dark: v } })),
   ...[...light].map(([p, v]) => ({ path: p, perMode: { Light: v, Dark: dark.get(p) } })),

@@ -172,6 +172,22 @@
       },
       "900": {
         "$value": "#581C87"
+      },
+      "300": {
+        "$type": "color",
+        "$value": "#D8B4FE"
+      },
+      "400": {
+        "$type": "color",
+        "$value": "#C084FC"
+      },
+      "500": {
+        "$type": "color",
+        "$value": "#A855F7"
+      },
+      "600": {
+        "$type": "color",
+        "$value": "#9333EA"
       }
     },
     "pink": {

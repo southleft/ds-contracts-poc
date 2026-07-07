@@ -1,0 +1,40 @@
+{
+  "brand": {
+    "accent": {
+      "100": {
+        "$type": "color",
+        "$value": "{color.purple.100}"
+      },
+      "300": {
+        "$type": "color",
+        "$value": "{color.purple.300}"
+      },
+      "400": {
+        "$type": "color",
+        "$value": "{color.purple.400}"
+      },
+      "500": {
+        "$type": "color",
+        "$value": "{color.purple.500}"
+      },
+      "600": {
+        "$type": "color",
+        "$value": "{color.purple.600}"
+      },
+      "700": {
+        "$type": "color",
+        "$value": "{color.purple.700}"
+      },
+      "900": {
+        "$type": "color",
+        "$value": "{color.purple.900}"
+      }
+    },
+    "radius": {
+      "control": {
+        "$type": "dimension",
+        "$value": "{radius.none}"
+      }
+    }
+  }
+}
