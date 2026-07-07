@@ -17,7 +17,7 @@ Fresh clone, zero config — the defaults run against this repo's own library:
 
 ```bash
 npm install
-npm run extract:code   # 48 components → extract/out/contracts/*.contract.json + proposals.md
+npm run extract:code   # 50 components → extract/out/contracts/*.contract.json + proposals.md
 npm run reconcile      # → extract/out/reconciliation.md (vs this repo's design snapshot)
 ```
 
@@ -70,7 +70,7 @@ npm run reconcile
 
 `extract/out/reconciliation.md` lists, per component: properties both surfaces agree on, option sets that differ, code-only props, design-only properties, and components that exist on only one side. Matching is transparent — normalized names plus two calibrated alias rules (`isDismissable ⇄ Dismissable`, `overflowLabel ⇄ Overflow`), each flagged when used; nothing else is silently guessed.
 
-Calibration receipt: run against this repo's own (contract-generated, known-aligned) surfaces, reconciliation matches 46/48 components — the two unmatched are the layout primitives that intentionally have no canvas sets — with 102 properties agreeing and the only flags being design text properties bound to React `children`, which a props interface genuinely cannot show. On *your* system, the flags will be real drift: that's the point.
+Calibration receipt: run against this repo's own (contract-generated, known-aligned) surfaces, reconciliation matches 48/50 components — the two unmatched are the layout primitives that intentionally have no canvas sets — with 102 properties agreeing and the only flags being design text properties bound to React `children`, which a props interface genuinely cannot show. On *your* system, the flags will be real drift: that's the point.
 
 ## 4 · Diagnose — the referee, running continuously
 

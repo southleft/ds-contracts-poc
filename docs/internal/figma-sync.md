@@ -47,7 +47,7 @@ The MCP talks to Figma through a **companion plugin over WebSocket** (ports 9223
 Known MCP limitations to design around (verified in source):
 
 - `figma_import_tokens` applies **value updates only** — creations, deletions, and alias re-targeting are *reported in its plan but not applied*. Creation must go through `figma_setup_design_tokens` / `figma_batch_create_variables`.
-- The MCP's DTCG dialect is hex-string colors / unit-string dimensions — which is exactly why `tokens/` uses that dialect (see [token pipeline](03-token-pipeline.md)).
+- The MCP's DTCG dialect is hex-string colors / unit-string dimensions — which is exactly why `tokens/` uses that dialect (see [token pipeline](../03-token-pipeline.md)).
 
 ### Contracts → component sets
 
@@ -88,3 +88,13 @@ The MCP's `figma_check_design_parity` tool is a useful accelerant here — note 
 - [ ] Contract schema extension for composition/nesting (Card + Avatar) before generating container components.
 - [ ] Decide where extraction artifacts live (`parity/` directory, gitignored snapshots vs committed baselines).
 - [ ] Wire `figma_check_design_parity` scoring into CI once extraction is scripted.
+
+## Full-library runs: the Sync Runner plugin
+
+For whole-library operations (fresh-file rebuild, mass re-sync), pasting scripts through a bridge is slow and size-capped. The from-disk transport is a development plugin:
+
+1. `npm run figma:serve` — serves `figma-sync/` locally with the runner manifest (tokens → batches → arrange) and a result sink.
+2. In Figma desktop: **Plugins → Development → Import plugin from manifest…** → `figma-sync/plugin/manifest.json` (one-time).
+3. Run **DS Contracts Sync Runner** in the target file. It executes every script in dependency order, stops on first failure, and POSTs per-script results to `figma-sync/.runner-result.json`.
+
+To target a fresh file, regenerate scripts with the guard retargeted: `FIGMA_FILE_KEY=<newFileKey> npm run figma:plan`. The 2026-07-06 fresh-file rebuild ran this way end to end (see docs/07 live checks).

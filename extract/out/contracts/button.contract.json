@@ -78,7 +78,7 @@
     },
     {
       "name": "loading",
-      "description": "Shows a busy indicator while an async action resolves.",
+      "description": "Shows a spinning busy indicator beside the label while an async action resolves.",
       "type": "boolean",
       "default": false,
       "bindings": {

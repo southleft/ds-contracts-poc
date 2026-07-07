@@ -343,7 +343,7 @@
       {
         "name": "loading",
         "optional": true,
-        "description": "Shows a busy indicator while an async action resolves.",
+        "description": "Shows a spinning busy indicator beside the label while an async action resolves.",
         "kind": "boolean",
         "confidence": "declared",
         "default": false
@@ -681,6 +681,21 @@
       "font-control-family",
       "font-badge-size",
       "font-control-weight"
+    ]
+  },
+  {
+    "name": "Code",
+    "source": "src/components/Code/Code.tsx",
+    "adapter": "react-tsx",
+    "props": [],
+    "cssVars": [
+      "color-surface-sunken",
+      "color-surface-foreground",
+      "radius-100",
+      "space-inset-x-xs",
+      "space-inset-y-xs",
+      "font-code-family",
+      "font-control-size-sm"
     ]
   },
   {
@@ -1641,6 +1656,17 @@
     "cssVars": [
       "color-table-row-default",
       "color-table-row-selected"
+    ]
+  },
+  {
+    "name": "TabList",
+    "source": "src/components/TabList/TabList.tsx",
+    "adapter": "react-tsx",
+    "props": [],
+    "cssVars": [
+      "space-inset-y-sm",
+      "color-border-subtle",
+      "space-inset-y-xs"
     ]
   },
   {

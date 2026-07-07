@@ -31,7 +31,7 @@ There's a second reason, and it's becoming the bigger one: **AI generation.** In
 | `contracts/` | **The source of truth.** 50 component contracts — buttons through banners, form fields, chat messages, navigation, progress meters, switches. APIs mirror a shipping industry component library ([coverage map](docs/research/astryx-coverage.md)) on this system's own tokens. | ✅ This is where changes happen |
 | `tokens/` | 282 DTCG design tokens: primitives → **brand modes** (accent ramp + control radius per brand) → semantic aliases → light/dark mode files. One pipeline compiles them to CSS custom properties *and* design-tool variable collections. Adding a brand touches ONLY this directory — eval-proven. | ✅ |
 | `src/components/` | The generated React library — typed, accessible, CSF3 stories, publishable package build. | ❌ Generated, never edited |
-| `figma-sync/` | Generated, transport-agnostic scripts that build the canvas library: variant sets, bound variables, slot properties, mode-aware theming. | ❌ Generated |
+| `figma-sync/` | Generated, transport-agnostic scripts that build the canvas library — plus the **Sync Runner** dev plugin (`plugin/`) that executes them from disk for full-library operations. A from-blank rebuild of the entire library ran this way and verified clean. | ❌ Generated (`plugin/`, `arrange.js` hand-maintained) |
 | `parity/` | The three-way differ: classifies every difference between contract, code, and canvas as *ahead*, *behind*, or *mismatched* — with a proposed remedy. | ✅ |
 | `catalog/` + `context/` | The compiled generation constraint (every API + every token + the governance rules) that an AI agent — or a human — can be held to, plus the org rules and memory that feed it. | catalog ❌ · rules ✅ |
 | `evals/` | 31 deterministic checks on the machinery itself: byte-identical regeneration, refusal of illegal contracts, detection of every claimed drift class, convergence after promotion. | ✅ |
@@ -126,7 +126,7 @@ Not everything is expressible yet, and nothing here pretends otherwise:
 
 ## Status
 
-A working proof of concept, validated end-to-end: generation into both surfaces, the parity loop run in both directions with receipts, 31/31 evals, and a measured 100-vs-69 governed-generation result. The reference design-tool integration lives behind a transport-agnostic script boundary (`docs/internal/`) — the contract format itself is tool-agnostic.
+A **completed** proof of concept, validated end-to-end: generation into both surfaces, the parity loop run in both directions with receipts, 31/31 evals, a measured 100-vs-69 governed-generation result, a finished public pilot (Shoelace code reconciled against its community design kit — real drift, mechanically found), and the whole canvas library rebuilt from a blank file and verified against the contracts with zero findings. The reference design-tool integration lives behind a transport-agnostic script boundary (`docs/internal/`) — the contract format itself is tool-agnostic.
 
 MIT-licensed, and contributions follow one norm above all: [no capability claim without an eval behind it](CONTRIBUTING.md). Skeptical? Good — start with [Questions & Objections](docs/14-questions-and-objections.md).
 

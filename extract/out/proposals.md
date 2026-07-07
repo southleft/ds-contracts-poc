@@ -1,6 +1,6 @@
 # Proposed contracts — extraction report
 
-48 component(s) extracted. Every proposal parses against the contract schema, but a proposal is a STARTING POINT: confirm inferred design bindings via `npm run reconcile`, then review the notes below per component.
+50 component(s) extracted. Every proposal parses against the contract schema, but a proposal is a STARTING POINT: confirm inferred design bindings via `npm run reconcile`, then review the notes below per component.
 
 ## AccordionItem
 
@@ -128,6 +128,13 @@
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
 - prop `variant`: figma binding INFERRED as VARIANT "Variant" — confirm against the design library (reconcile step)
+
+## Code
+
+- source: `src/components/Code/Code.tsx` (react-tsx)
+- proposed: 0 props, 0 events
+- anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
+- semantics.element defaulted to "div" — set the real host element
 
 ## Divider
 
@@ -332,6 +339,13 @@
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
 - prop `state`: figma binding INFERRED as VARIANT "State" — confirm against the design library (reconcile step)
+
+## TabList
+
+- source: `src/components/TabList/TabList.tsx` (react-tsx)
+- proposed: 0 props, 0 events
+- anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
+- semantics.element defaulted to "div" — set the real host element
 
 ## TextArea
 

@@ -289,6 +289,18 @@
       ]
     },
     {
+      "component": "Code",
+      "codeSource": "src/components/Code/Code.tsx",
+      "designName": "Code",
+      "findings": [
+        {
+          "status": "design-only",
+          "designProp": "Content",
+          "detail": "no matching code prop — a design TEXT property with no code counterpart is often bound to React `children` (invisible in a props interface); confirm before treating as drift"
+        }
+      ]
+    },
+    {
       "component": "Divider",
       "codeSource": "src/components/Divider/Divider.tsx",
       "designName": "Divider",
@@ -687,6 +699,12 @@
       ]
     },
     {
+      "component": "TabList",
+      "codeSource": "src/components/TabList/TabList.tsx",
+      "designName": "TabList",
+      "findings": []
+    },
+    {
       "component": "TextArea",
       "codeSource": "src/components/TextArea/TextArea.tsx",
       "designName": "TextArea",
@@ -877,14 +895,11 @@
       "source": "src/components/Stack/Stack.tsx"
     }
   ],
-  "designOnly": [
-    "Code",
-    "TabList"
-  ],
+  "designOnly": [],
   "stats": {
-    "components": 48,
-    "matched": 46,
+    "components": 50,
+    "matched": 48,
     "propsAgree": 102,
-    "propsDiffer": 5
+    "propsDiffer": 6
   }
 }
