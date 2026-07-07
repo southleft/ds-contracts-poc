@@ -24,7 +24,7 @@ import path from 'node:path';
 import ts from 'typescript';
 import type { ExtractedComponent, ExtractedProp } from '../types.js';
 
-const SKIP_FILE = /\.(stories|test|spec|d)\.tsx?$/;
+const SKIP_FILE = /\.(stories|story|test|spec|demos?|d)\.tsx?$/;
 const SKIP_DIR = new Set(['node_modules', 'dist', 'build', 'coverage', '.git', '__tests__', '__mocks__']);
 
 function* walkFiles(dir: string): Generator<string> {

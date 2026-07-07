@@ -1,6 +1,6 @@
 {
-  "passed": 29,
-  "total": 29,
+  "passed": 30,
+  "total": 30,
   "results": [
     {
       "id": "refuse-unknown-token-reference",
@@ -105,6 +105,11 @@
     {
       "id": "detect-code-removed-slot-prop",
       "claim": "C3-detection",
+      "pass": true
+    },
+    {
+      "id": "refuse-contract-edge-cases",
+      "claim": "C2-refusal",
       "pass": true
     },
     {

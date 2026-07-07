@@ -1,6 +1,6 @@
 # 7 · Validation — Claims, Evals, Evidence
 
-This PoC makes five falsifiable claims. Each is backed by an automated eval (`npm run eval`, 29 cases, runs the real pipeline in a scratch copy — not mocks) or an executed live design-tool check. Current status: **29/29 deterministic evals pass** (`evals/results.json`), all live checks pass. This section is written to be lifted into a PRD.
+This PoC makes five falsifiable claims. Each is backed by an automated eval (`npm run eval`, 30 cases, runs the real pipeline in a scratch copy — not mocks) or an executed live design-tool check. Current status: **30/30 deterministic evals pass** (`evals/results.json`), all live checks pass. This section is written to be lifted into a PRD.
 
 **Round 6 addendum (governed generation):** two eval cases exercise the deterministic generation judge itself — `judge-passes-canonical-screen` and `judge-catches-all-violation-classes` — backing the measured 100-vs-69 governed-generation A/B result in [docs/10](10-honest-generation.md).
 
@@ -31,6 +31,7 @@ Why it matters for the PRD: determinism is what separates "generate from your de
 | `refuse-unknown-token-reference` — contract binds a token that doesn't exist → generator must fail naming it | ✅ |
 | `refuse-schema-invalid-contract` — structurally invalid contract → generator must fail | ✅ |
 | `refuse-incomplete-mode-set` — token defined in light but not dark → token build must fail | ✅ |
+| `refuse-contract-edge-cases` — adversarial sweep (2026-07-06): defaults outside enums, duplicate design-property bindings, incomplete figma value maps, required text without defaults, malformed token refs, duplicate contract names/ids — each refused BY NAME, and a refused contract fails fast instead of crashing dependents | ✅ |
 
 ### C3 — Drift on any surface is detected, classified, and actionable
 *Ten drift classes across three surfaces; each caught with the correct classification (`ahead`/`behind`/`mismatch`) and, where applicable, a machine-generated promotion patch.*

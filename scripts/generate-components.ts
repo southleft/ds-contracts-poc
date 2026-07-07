@@ -242,6 +242,72 @@ function validateContract(contract: Contract, byId: Map<string, Contract>, error
   }
   if (!contract.anatomy.root) errors.push(`${contract.id}: anatomy must have a "root" part`);
 
+  // Identity + consistency gates (added after an adversarial refusal sweep
+  // found these invalid states passing silently — C2 means NAMED refusal).
+  if (!/^[A-Z][A-Za-z0-9]*$/.test(contract.name)) {
+    errors.push(`${contract.id}: contract name "${contract.name}" must be PascalCase — it becomes the exported component and its file names`);
+  }
+  const seenPropNames = new Set<string>();
+  const seenFigmaProps = new Set<string>();
+  for (const p of contract.props) {
+    if (seenPropNames.has(p.name)) {
+      errors.push(`${contract.id}: duplicate prop name "${p.name}"`);
+    }
+    seenPropNames.add(p.name);
+    if (!/^[a-z][A-Za-z0-9]*$/.test(p.bindings.code.prop)) {
+      errors.push(`${contract.id}: prop "${p.name}" code binding "${p.bindings.code.prop}" is not a legal camelCase identifier`);
+    }
+    const figProp = p.bindings.figma.property;
+    if (seenFigmaProps.has(figProp)) {
+      errors.push(`${contract.id}: two props bind the same design property "${figProp}" — the canvas cannot host both`);
+    }
+    seenFigmaProps.add(figProp);
+    // type/default consistency
+    if (p.default !== undefined) {
+      if (isEnum(p) && (typeof p.default !== 'string' || !p.type.enum.includes(p.default))) {
+        errors.push(`${contract.id}: prop "${p.name}" default ${JSON.stringify(p.default)} is not one of its enum values [${p.type.enum.join(', ')}]`);
+      }
+      if (p.type === 'boolean' && typeof p.default !== 'boolean') {
+        errors.push(`${contract.id}: boolean prop "${p.name}" default must be a boolean (got ${JSON.stringify(p.default)})`);
+      }
+      if (p.type === 'number' && typeof p.default !== 'number') {
+        errors.push(`${contract.id}: number prop "${p.name}" default must be a number (got ${JSON.stringify(p.default)})`);
+      }
+      if (p.type === 'text' && typeof p.default !== 'string') {
+        errors.push(`${contract.id}: text prop "${p.name}" default must be a string (got ${JSON.stringify(p.default)})`);
+      }
+    }
+    // Required text props need a default: it is the canvas TEXT property's
+    // default value AND the sample every generated story/matrix cell uses.
+    if (p.type === 'text' && p.required && typeof p.default !== 'string') {
+      errors.push(`${contract.id}: required text prop "${p.name}" must declare a string default (canvas default + story sample)`);
+    }
+    // The figma values map, when present, must cover the enum exactly.
+    if (isEnum(p) && p.bindings.figma.values) {
+      const mapKeys = Object.keys(p.bindings.figma.values);
+      for (const v of p.type.enum) {
+        if (!mapKeys.includes(v)) {
+          errors.push(`${contract.id}: prop "${p.name}" figma values map is missing enum value "${v}"`);
+        }
+      }
+      for (const k of mapKeys) {
+        if (!p.type.enum.includes(k)) {
+          errors.push(`${contract.id}: prop "${p.name}" figma values map has key "${k}" which is not an enum value`);
+        }
+      }
+    }
+  }
+  // Token refs must be well-formed {path} or {path.{prop}.path} shapes —
+  // a malformed ref must be refused by NAME, not crash downstream.
+  const TOKEN_REF = /^\{[^{}]*(\{[a-z][\w-]*\}[^{}]*)*\}$/;
+  for (const { name, part } of walkAnatomy(contract)) {
+    for (const [cssProp, ref] of Object.entries(part.tokens ?? {})) {
+      if (!TOKEN_REF.test(ref) || ref === '{}') {
+        errors.push(`${contract.id}: part "${name}" token "${cssProp}" ref ${JSON.stringify(ref)} is malformed — expected "{token.path}" with optional "{prop}" placeholders`);
+      }
+    }
+  }
+
   // v6 events: the declared interaction surface must be mechanically checkable.
   const partByName = new Map(walkAnatomy(contract).map((w) => [w.name, w.part]));
   const seenEventProps = new Set<string>();
@@ -1126,6 +1192,22 @@ async function main() {
     parsedContracts.push(parsed.data);
   }
 
+  // Identity gates: contract ids and names must be unique across the set —
+  // a duplicate id silently forks identity in the dependency map; a
+  // duplicate name silently clobbers the other contract's generated output.
+  const seenIds = new Map<string, string>();
+  const seenNames = new Map<string, string>();
+  for (const c of parsedContracts) {
+    if (seenIds.has(c.id)) {
+      errors.push(`${c.id}: duplicate contract id (also declared by "${seenIds.get(c.id)}")`);
+    }
+    seenIds.set(c.id, c.name);
+    if (seenNames.has(c.name)) {
+      errors.push(`${c.id}: duplicate contract name "${c.name}" (also used by ${seenNames.get(c.name)}) — would overwrite src/components/${c.name}/`);
+    }
+    seenNames.set(c.name, c.id);
+  }
+
   // Composition graph gate: cycles and unknown refs are refused.
   let ordered: Contract[] = parsedContracts;
   if (errors.length === 0) {
@@ -1136,6 +1218,16 @@ async function main() {
     }
   }
   const byId = new Map(parsedContracts.map((c) => [c.id, c]));
+
+  // Fail fast on parse/identity/graph errors: a refused contract leaves
+  // dangling refs in byId, and generating dependents against a broken map
+  // crashes with an unnamed TypeError INSTEAD of the named refusal — the
+  // exact opposite of C2. Name the violations and stop.
+  if (errors.length > 0) {
+    console.error(`✘ Refused — ${errors.length} contract violation(s):`);
+    for (const e of errors) console.error(`  - ${e}`);
+    process.exit(1);
+  }
 
   const prettierBase = { singleQuote: true, printWidth: 100 };
 

@@ -392,6 +392,59 @@ const cases: Case[] = [
     },
   },
   {
+    // Adversarial refusal sweep (2026-07-06): these invalid states once
+    // passed the generator SILENTLY. Each must now be refused BY NAME —
+    // C2 is "fails loudly naming the violation", not "happens to break".
+    id: 'refuse-contract-edge-cases',
+    claim: 'C2-refusal',
+    run: () => {
+      const BADGE = 'contracts/badge.contract.json';
+      const pristine = readFileSync(path.join(SCRATCH, BADGE), 'utf8');
+      const expectRefusal = (label: string, needle: string, mutate: (c: any) => void) => {
+        editJson(BADGE, mutate);
+        const r = generate();
+        writeFileSync(path.join(SCRATCH, BADGE), pristine);
+        if (r.status === 0) throw new Error(`${label}: ACCEPTED (must refuse)`);
+        if (!r.out.includes(needle)) throw new Error(`${label}: refused but violation not named — wanted "${needle}" in:\n${r.out.slice(0, 600)}`);
+      };
+      expectRefusal('default-not-in-enum', 'is not one of its enum values', (c) => {
+        c.props.find((p: any) => typeof p.type === 'object').default = 'nonexistent';
+      });
+      expectRefusal('duplicate-figma-property', 'two props bind the same design property', (c) => {
+        const first = c.props.find((p: any) => typeof p.type === 'object');
+        c.props.push({ name: 'zzz', type: { enum: ['a', 'b'] }, default: 'a',
+          bindings: { figma: { kind: 'VARIANT', property: first.bindings.figma.property, values: { a: 'A', b: 'B' } }, code: { prop: 'zzz' } } });
+      });
+      expectRefusal('figma-values-map-missing-value', 'figma values map is missing enum value', (c) => {
+        const p = c.props.find((x: any) => typeof x.type === 'object' && x.bindings.figma.values);
+        delete p.bindings.figma.values[p.type.enum[0]];
+      });
+      expectRefusal('required-text-no-default', 'must declare a string default', (c) => {
+        c.props.push({ name: 'must', type: 'text', required: true,
+          bindings: { figma: { kind: 'TEXT', property: 'Must' }, code: { prop: 'must' } } });
+      });
+      expectRefusal('malformed-token-ref', 'must be brace-wrapped', (c) => {
+        c.anatomy.root.tokens['background-color'] = '{color.token.default.background';
+      });
+      // duplicate contract NAME across files → would clobber generated output
+      const dupe = JSON.parse(pristine);
+      dupe.id = 'ds.badge-two';
+      writeFileSync(path.join(SCRATCH, 'contracts', 'zz-dupe.contract.json'), JSON.stringify(dupe, null, 2));
+      const r = generate();
+      rmSync(path.join(SCRATCH, 'contracts', 'zz-dupe.contract.json'));
+      if (r.status === 0 || !r.out.includes('duplicate contract name')) {
+        throw new Error(`duplicate-contract-name: not refused by name:\n${r.out.slice(0, 400)}`);
+      }
+      // and a refused contract must FAIL FAST by name — never crash a
+      // dependent contract with an unnamed TypeError (the bug this found)
+      editJson(BADGE, (c) => { c.props.find((p: any) => typeof p.type === 'object').type.enum = []; });
+      const r2 = generate();
+      writeFileSync(path.join(SCRATCH, BADGE), pristine);
+      if (r2.status === 0) throw new Error('empty-enum: ACCEPTED');
+      if (r2.out.includes('TypeError')) throw new Error('empty-enum: crashed downstream instead of failing fast with the named refusal');
+    },
+  },
+  {
     // Brownfield (roadmap Phase 2): both extraction adapters must read a
     // FOREIGN library — conventions this repo's generator never emits — into
     // schema-valid proposals with correct kinds, values, defaults, events.
