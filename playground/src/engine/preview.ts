@@ -14,6 +14,13 @@ export type PreviewResult =
   | { ok: true; doc: string }
   | { ok: false; error: string };
 
+/** Chosen prop values for the single-instance preview (canonical spellings). */
+export type PreviewPropOverrides = Record<string, string | boolean | number>;
+
+export type StatePreviewResult =
+  | { ok: true; doc: string; instanceHtml: string | null }
+  | { ok: false; error: string };
+
 const FRAME_BODY_CSS = `
   html { color-scheme: light; }
   html[data-theme="dark"] { color-scheme: dark; }
@@ -26,6 +33,26 @@ const FRAME_BODY_CSS = `
   }
 `;
 
+function assembleDoc(
+  emitted: { html: string; css: string },
+  theme: 'light' | 'dark',
+  extraCss = '',
+): string {
+  const { stylesheets } = activeTokens();
+  return [
+    '<!doctype html>',
+    `<html${theme === 'dark' ? ' data-theme="dark"' : ''}>`,
+    '<head><meta charset="utf-8">',
+    `<style>${stylesheets.base}\n${stylesheets.dark}\n${stylesheets.brands}</style>`,
+    `<style>${FRAME_BODY_CSS}</style>`,
+    `<style>${emitted.css}</style>`,
+    ...(extraCss ? [`<style>${extraCss}</style>`] : []),
+    '</head><body>',
+    emitted.html,
+    '</body></html>',
+  ].join('\n');
+}
+
 export function buildPreview(
   contract: Contract,
   contracts: Map<string, Contract>,
@@ -33,23 +60,78 @@ export function buildPreview(
 ): PreviewResult {
   // The ACTIVE token source: repo stylesheets by default; a pasted user tree
   // swaps in a stylesheet regenerated from the paste (token-source.ts).
-  const { inventory, stylesheets } = activeTokens();
+  const { inventory } = activeTokens();
   let emitted: { html: string; css: string };
   try {
     emitted = emitHtml(contract, { tokens: inventory, icons, contracts });
   } catch (e) {
     return { ok: false, error: e instanceof Error ? e.message : String(e) };
   }
-  const doc = [
-    '<!doctype html>',
-    `<html${theme === 'dark' ? ' data-theme="dark"' : ''}>`,
-    '<head><meta charset="utf-8">',
-    `<style>${stylesheets.base}\n${stylesheets.dark}\n${stylesheets.brands}</style>`,
-    `<style>${FRAME_BODY_CSS}</style>`,
-    `<style>${emitted.css}</style>`,
-    '</head><body>',
-    emitted.html,
-    '</body></html>',
-  ].join('\n');
-  return { ok: true, doc };
+  return { ok: true, doc: assembleDoc(emitted, theme) };
+}
+
+// ---------------------------------------------------------------------------
+// Single-instance preview at a chosen prop state
+// ---------------------------------------------------------------------------
+
+/** The chosen values written in as the CLONE's prop defaults — the emitter's
+ *  own "default" showcase item then IS the requested state. The real emitter
+ *  renders every state; core/ stays untouched. */
+function withOverridesAsDefaults(contract: Contract, overrides: PreviewPropOverrides): Contract {
+  const clone = structuredClone(contract);
+  for (const prop of clone.props) {
+    if (prop.name in overrides) prop.default = overrides[prop.name];
+  }
+  return clone;
+}
+
+/** CSS appended to the showcase doc so ONLY the first item (the chosen
+ *  state) renders — the other items stay in the markup, just hidden. */
+const SINGLE_ITEM_CSS = `
+  .showcase > .showcase__item:nth-child(n + 2) { display: none; }
+  .showcase__label { display: none; }
+`;
+
+/** The first showcase item's inner markup, label stripped — the comparison
+ *  signature for "did this control change anything visible?". Markup is the
+ *  whole story: the emitted CSS is state-independent (every enum value is
+ *  compiled up front), so identical markup means an identical render. */
+function instanceSignature(html: string): string | null {
+  try {
+    const doc = new DOMParser().parseFromString(html, 'text/html');
+    const item = doc.querySelector('.showcase__item');
+    if (!item) return null;
+    item.querySelector('.showcase__label')?.remove();
+    return item.innerHTML.trim();
+  } catch {
+    return null;
+  }
+}
+
+/** Live preview of ONE instance at a chosen prop state. Same pipeline as
+ *  buildPreview — emitHtml over the active tokens — with the chosen values
+ *  substituted as defaults (see withOverridesAsDefaults) and the showcase
+ *  narrowed to its first item by CSS. */
+export function buildPreviewAtState(
+  contract: Contract,
+  contracts: Map<string, Contract>,
+  theme: 'light' | 'dark',
+  overrides: PreviewPropOverrides,
+): StatePreviewResult {
+  const { inventory } = activeTokens();
+  let emitted: { html: string; css: string };
+  try {
+    emitted = emitHtml(withOverridesAsDefaults(contract, overrides), {
+      tokens: inventory,
+      icons,
+      contracts,
+    });
+  } catch (e) {
+    return { ok: false, error: e instanceof Error ? e.message : String(e) };
+  }
+  return {
+    ok: true,
+    doc: assembleDoc(emitted, theme, SINGLE_ITEM_CSS),
+    instanceHtml: instanceSignature(emitted.html),
+  };
 }

@@ -46,9 +46,11 @@ import {
   type WorkspaceEntry,
   type WorkspaceSource,
 } from '../engine/workspace';
+import { buildPreviewAtState, type PreviewPropOverrides } from '../engine/preview';
 import type { ReceiptGroup, Receipts } from '../receipts';
 import { ContractEditor, type ContractEditorHandle } from '../components/ContractEditor';
 import { CopyButton } from '../components/CopyButton';
+import { PreviewControls, sanitizeOverrides } from '../components/PreviewControls';
 import { PreviewFrame } from '../components/PreviewFrame';
 import { ReceiptsPanel } from '../components/ReceiptsPanel';
 
@@ -849,6 +851,63 @@ export function Playground() {
   const previewTarget = validation.status === 'valid' ? validation : null;
   const stale = !previewTarget && lastGood.current;
 
+  // ------------------------------------------ interactive preview controls
+  // Single (controls + one instance at the chosen props) is the default;
+  // All variants is the classic showcase grid, one row per axis value.
+  const [previewMode, setPreviewMode] = useState<'single' | 'all'>('single');
+  const [previewOverrides, setPreviewOverrides] = useState<PreviewPropOverrides>({});
+  // The prop whose last toggle changed nothing visible — honest inline note.
+  const [previewNoteProp, setPreviewNoteProp] = useState<string | null>(null);
+  const lastChangedProp = useRef<string | null>(null);
+  const prevInstance = useRef<{ stateKey: string; sig: string | null } | null>(null);
+
+  const previewData = previewTarget ?? lastGood.current;
+  const previewContractId = previewData?.contract.id ?? null;
+  // A different contract in the frame resets the chosen state.
+  useEffect(() => {
+    setPreviewOverrides({});
+    setPreviewNoteProp(null);
+    lastChangedProp.current = null;
+    prevInstance.current = null;
+  }, [previewContractId]);
+
+  const activeOverrides = useMemo(
+    () => (previewData ? sanitizeOverrides(previewData.contract, previewOverrides) : {}),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [previewData?.contract, previewOverrides],
+  );
+
+  const singlePreview = useMemo(() => {
+    if (!previewData || outputTab !== 'preview' || previewMode !== 'single') return null;
+    return buildPreviewAtState(previewData.contract, previewData.contracts, theme, activeOverrides);
+    // buildPreviewAtState reads the active token source.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [previewData?.contract, previewData?.contracts, theme, activeOverrides, tokenSource, outputTab, previewMode]);
+
+  // Honest-note bookkeeping: when a control change leaves the instance
+  // markup byte-identical, the change had no visible effect BY DESIGN (the
+  // emitted CSS is state-independent) — say so on that control.
+  useEffect(() => {
+    if (!singlePreview?.ok) return;
+    const stateKey = JSON.stringify(activeOverrides);
+    const prev = prevInstance.current;
+    if (
+      prev &&
+      prev.stateKey !== stateKey &&
+      lastChangedProp.current &&
+      prev.sig !== null &&
+      singlePreview.instanceHtml !== null
+    ) {
+      setPreviewNoteProp(prev.sig === singlePreview.instanceHtml ? lastChangedProp.current : null);
+    }
+    prevInstance.current = { stateKey, sig: singlePreview.instanceHtml };
+  }, [singlePreview, activeOverrides]);
+
+  const handlePreviewControl = (name: string, value: string | boolean | number) => {
+    lastChangedProp.current = name;
+    setPreviewOverrides((o) => ({ ...o, [name]: value }));
+  };
+
   // ------------------------------------------- workspace entry rendering
   const wsEntryRow = (entry: WorkspaceEntry) => (
     <div key={entry.id} className="ws__row">
@@ -1483,18 +1542,59 @@ export function Playground() {
                 Contract invalid — showing the last valid render. Fix the named refusals to update.
               </div>
             ) : null}
-            {previewTarget ? (
-              <PreviewFrame
-                contract={previewTarget.contract}
-                contracts={previewTarget.contracts}
-                title="Contract preview"
-              />
-            ) : lastGood.current ? (
-              <PreviewFrame
-                contract={lastGood.current.contract}
-                contracts={lastGood.current.contracts}
-                title="Contract preview (last valid)"
-              />
+            {previewData ? (
+              <>
+                <div className="preview__bar">
+                  <div className="seg" role="group" aria-label="Preview mode">
+                    <button
+                      type="button"
+                      className={`seg__btn${previewMode === 'single' ? ' is-active' : ''}`}
+                      aria-pressed={previewMode === 'single'}
+                      onClick={() => setPreviewMode('single')}
+                    >
+                      Single
+                    </button>
+                    <button
+                      type="button"
+                      className={`seg__btn${previewMode === 'all' ? ' is-active' : ''}`}
+                      aria-pressed={previewMode === 'all'}
+                      onClick={() => setPreviewMode('all')}
+                    >
+                      All variants
+                    </button>
+                  </div>
+                  <span className="preview__bar-hint">
+                    {previewMode === 'single'
+                      ? 'One instance at the props you pick — rendered live by the same HTML emitter.'
+                      : 'Every variant value and boolean, one row each.'}
+                  </span>
+                </div>
+                {previewMode === 'single' ? (
+                  <>
+                    <PreviewControls
+                      contract={previewData.contract}
+                      overrides={activeOverrides}
+                      onChange={handlePreviewControl}
+                      notedProp={previewNoteProp}
+                    />
+                    {singlePreview?.ok ? (
+                      <iframe
+                        sandbox=""
+                        srcDoc={singlePreview.doc}
+                        title={previewTarget ? 'Contract preview — chosen state' : 'Contract preview — chosen state (last valid)'}
+                      />
+                    ) : singlePreview ? (
+                      <div className="output__error">{singlePreview.error}</div>
+                    ) : null}
+                  </>
+                ) : (
+                  <PreviewFrame
+                    contract={previewData.contract}
+                    contracts={previewData.contracts}
+                    title={previewTarget ? 'Contract preview' : 'Contract preview (last valid)'}
+                  />
+                )}
+              </>
             ) : (
               <div className="pane__body hint">Nothing to render yet.</div>
             )}

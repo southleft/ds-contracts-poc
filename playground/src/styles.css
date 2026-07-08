@@ -1169,6 +1169,125 @@ label {
   background: transparent;
 }
 
+/* Two-way segmented control — square corners, Carbon-simple. Active segment
+ * gets the surface + a 2px inner accent baseline; never a pill. */
+
+.seg {
+  display: inline-flex;
+  border: 1px solid var(--pg-border-strong);
+}
+
+.seg__btn {
+  border: none;
+  border-radius: 0;
+  background: none;
+  padding: 3px 12px;
+  font-size: 12px;
+  color: var(--pg-muted);
+  cursor: pointer;
+}
+
+.seg__btn + .seg__btn {
+  border-left: 1px solid var(--pg-border-strong);
+}
+
+.seg__btn.is-active {
+  background: var(--pg-surface);
+  color: var(--pg-fg);
+  font-weight: 600;
+  box-shadow: inset 0 -2px 0 var(--pg-accent);
+}
+
+/* preview mode bar + per-prop controls strip */
+
+.preview__bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 14px;
+  border-bottom: 1px solid var(--pg-border);
+  flex-shrink: 0;
+}
+
+.preview__bar-hint {
+  font-size: 11.5px;
+  color: var(--pg-faint);
+}
+
+.pv-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 10px 16px;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--pg-border);
+  flex-shrink: 0;
+}
+
+.pv-control {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 110px;
+  max-width: 220px;
+}
+
+.pv-control--events {
+  max-width: none;
+}
+
+.pv-control__label {
+  font-size: 11px;
+  font-family: var(--pg-mono);
+  color: var(--pg-muted);
+}
+
+.pv-control select,
+.pv-control input[type='text'],
+.pv-control input[type='number'] {
+  font-size: 12px;
+  padding: 3px 6px;
+}
+
+.pv-control__check {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--pg-fg);
+  margin: 0;
+  padding: 4px 0;
+  cursor: pointer;
+}
+
+.pv-control__check input {
+  width: auto;
+}
+
+.pv-tag {
+  display: inline-block;
+  align-self: flex-start;
+  border: 1px solid var(--pg-border-strong);
+  padding: 1px 6px;
+  font-size: 10.5px;
+  font-family: var(--pg-mono);
+  color: var(--pg-muted);
+}
+
+.pv-events {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-family: var(--pg-mono);
+  color: var(--pg-muted);
+}
+
+.pv-note {
+  font-size: 11px;
+  color: var(--pg-warn);
+}
+
 .preview__stale {
   padding: 6px 14px;
   font-size: 12px;
