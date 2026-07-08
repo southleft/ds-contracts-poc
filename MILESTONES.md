@@ -95,7 +95,7 @@ Five features, each shipped with a consuming contract: `elementByProp`
 surfaces), `stylesWhen` (whitelisted conditional literals), `overlay`
 (out-of-flow anatomy for tooltips/popups), `arrayOf` structured props (code-only
 with `kind: NONE`, skipped by every design-side consumer). Plus
-pending-first-sync parity classification. **Eval suite: 49/49.**
+pending-first-sync parity classification. **Eval suite: 52/52.**
 
 ## 2026-07-08 — Code Editor Simulator (Hub)
 
@@ -106,7 +106,7 @@ client-side — API diff, an amendSet-mirrored canvas plan (ADDED/REBUILT/
 EXTRA-reported over the enum cartesian product, all-defaults combo first), and
 spec-policy version advice. Illegal edits are refused by the schema's own
 names and never reach either surface; both keep rendering the last governed
-version. Dashboard-only change; 49/49 evals unaffected.
+version. Dashboard-only change; 52/52 evals unaffected.
 
 ## 2026-07-08 — State previews + canvas text styles (schema v8)
 
@@ -119,7 +119,7 @@ hand-built State axis without the opt-in is the kit-rot detector (all four
 pilot systems carry rotting hand-built state axes). Plus named Figma
 TextStyles minted from semantic typography tokens, upserted by identity
 marker, ridden by matching text nodes. Button v1.5.0 ships previews.
-**Eval suite: 49/49.**
+**Eval suite: 52/52.**
 
 
 ## 2026-07-08 — Full-circle sync: drift acknowledged → resolved → ratchet retired
@@ -137,6 +137,30 @@ zero creates, zero duplicates, zero extras; the snapshot was re-extracted and
 system. Also surfaced for the queue: `figma.fileKey` is null in the dev-plugin
 runtime, so WRONG-FILE guards only bind over the bridge transport — a
 file-identity marker check is the fix.
+
+
+## 2026-07-08 — Round-trip identity, both directions (anatomy extraction)
+
+The "anatomy is human-owned" stub era ends. Both reverse directions now
+propose FULL contracts — API and anatomy and token bindings:
+
+- **Code → contract**: the css-module adapter inverts the generator's emission
+  model (class nesting → parts, `var(--a-b-c)` → `{a.b.c}` refereed against
+  the real token tree, variant-class families → substituted refs, pseudo-class
+  rules → states, uncontrolled-toggle pattern → events).
+- **Design → contract**: the node-tree dump proposes contracts from the drawn
+  structure (variable bindings → token refs, per-variant enum substitution,
+  spacers reconstructed with visibility conditions, propRefs → text/slot/
+  optional parts, nested instances → component refs).
+
+The proof standard is **round-trip identity**: this repo's own generated
+components re-extracted and compared to their shipping contracts. Badge,
+Switch, Card: **zero mismatches in both directions** (code: 28 matched /
+21 code-absent named; design: 82 matched / 31 canvas-absent named), red-tested
+— a retokenized property, a deleted part, or an uncorrelated cross-variant
+binding each fail by name. Unbound/raw values are always reported with
+nearest-token candidates, never invented. Receipts: `extract/ROUNDTRIP-CODE.md`,
+`extract/figma/ROUNDTRIP.md`. **Eval suite: 52/52.**
 
 
 ---

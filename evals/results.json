@@ -1,6 +1,6 @@
 {
-  "passed": 49,
-  "total": 49,
+  "passed": 52,
+  "total": 52,
   "results": [
     {
       "id": "refuse-unknown-token-reference",
@@ -244,6 +244,21 @@
     },
     {
       "id": "extract-raw-values-never-invented",
+      "claim": "C5-extraction",
+      "pass": true
+    },
+    {
+      "id": "design-roundtrip-anatomy-zero-mismatch",
+      "claim": "C5-extraction",
+      "pass": true
+    },
+    {
+      "id": "design-propose-unbound-fill-named-never-invented",
+      "claim": "C5-extraction",
+      "pass": true
+    },
+    {
+      "id": "design-roundtrip-uncorrelated-binding-is-mismatch-not-guess",
       "claim": "C5-extraction",
       "pass": true
     }

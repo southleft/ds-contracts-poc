@@ -1081,6 +1081,52 @@ const cases: Case[] = [
       if (!notes.includes('var(--text-muted) which resolves to NO token')) throw new Error('Unresolvable css var not refused by name');
     },
   },
+  {
+    // DESIGN→CONTRACT round-trip identity: live node-tree dumps of three
+    // contract-generated sets must re-propose contracts with ZERO MISMATCH.
+    id: 'design-roundtrip-anatomy-zero-mismatch',
+    claim: 'C5-extraction',
+    run: () => {
+      const r = run(TSX, ['extract/figma/roundtrip.ts']);
+      if (r.status !== 0) throw new Error(`Round-trip receipt failed:\n${r.out}`);
+      for (const name of ['Badge', 'Switch', 'Card']) {
+        const line = r.out.split('\n').find((l) => l.startsWith(`${name}:`));
+        if (!line || !/MISMATCH 0$/.test(line.trim()))
+          throw new Error(`${name}: expected zero MISMATCH — got: ${line ?? '(no summary line)'}`);
+        if (!/MATCHED [1-9]/.test(line)) throw new Error(`${name}: vacuous receipt (no matched facts)`);
+      }
+    },
+  },
+  {
+    // Unbound fills are REPORTED with nearest-token candidates, never invented.
+    id: 'design-propose-unbound-fill-named-never-invented',
+    claim: 'C5-extraction',
+    run: () => {
+      editJson('extract/figma/fixtures/main-file-dumps.json', (d) => {
+        for (const v of d.Badge.variants) v.fill = { hex: '3b82f6' };
+      });
+      const r = run(TSX, ['extract/figma/propose.ts', 'extract/figma/fixtures/main-file-dumps.json', '--out', 'extract/out/figma']);
+      if (r.status !== 0) throw new Error(`Proposal failed on an unbound fill:\n${r.out}`);
+      const proposed = JSON.parse(readFileSync(path.join(SCRATCH, 'extract', 'out', 'figma', 'badge.contract.proposed.json'), 'utf8'));
+      if (proposed.anatomy.root.tokens?.['background-color']) throw new Error('Proposal fabricated a token for an unbound fill');
+      const report = readFileSync(path.join(SCRATCH, 'extract', 'out', 'figma', 'figma-proposals.md'), 'utf8');
+      if (!report.includes('UNBOUND Badge:root fill = #3b82f6')) throw new Error('Unbound fill not named in the report');
+      if (!report.includes('{color.blue.500}')) throw new Error('Nearest-token suggestions missing');
+    },
+  },
+  {
+    // Uncorrelated cross-variant binding is drift, never a guess.
+    id: 'design-roundtrip-uncorrelated-binding-is-mismatch-not-guess',
+    claim: 'C5-extraction',
+    run: () => {
+      editJson('extract/figma/fixtures/main-file-dumps.json', (d) => {
+        d.Badge.variants[2].fill.var = 'color/feedback/success/background';
+      });
+      const r = run(TSX, ['extract/figma/roundtrip.ts']);
+      if (r.status === 0) throw new Error('Receipt passed despite an uncorrelated cross-variant binding');
+      if (!r.out.includes('part root background-color')) throw new Error('Mismatch not named');
+    },
+  },
 ];
 
 // ---------------------------------------------------------------------------
