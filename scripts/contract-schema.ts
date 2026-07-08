@@ -41,28 +41,56 @@ const EnumTypeSchema = z.strictObject({
   enum: z.array(z.string()).min(1),
 });
 
-export const PropSchema = z.strictObject({
-  name: z.string(),
-  description: z.string().optional(),
-  /** "boolean" | "text" | "number" | { enum: [...] } */
-  type: z.union([z.literal('boolean'), z.literal('text'), z.literal('number'), EnumTypeSchema]),
-  default: z.union([z.string(), z.boolean(), z.number()]).optional(),
-  /** Text props may be required (no default in the code signature). */
-  required: z.boolean().optional(),
-  /** How this prop manifests on each side. Neither side is primary;
-   *  the contract owns the canonical name and value set. */
-  bindings: z.strictObject({
-    figma: z.strictObject({
-      kind: z.enum(['VARIANT', 'BOOLEAN', 'TEXT', 'INSTANCE_SWAP']),
-      property: z.string(),
-      /** canonical value → Figma variant value, e.g. { "primary": "Primary" } */
-      values: z.record(z.string(), z.string()).optional(),
-    }),
-    code: z.strictObject({
-      prop: z.string(),
-    }),
-  }),
+/** v7: a structured/array prop — a list of records with scalar fields
+ *  (Breadcrumbs items, Select options). CODE-ONLY by declared fidelity
+ *  limit: the canvas has no list-of-records property type, so the figma
+ *  binding kind is 'NONE' and every design-side consumer skips the prop.
+ *  Code renders `Array<{ field: type; … }>` with no default (an optional
+ *  array — undefined means "not provided", never a silent []). */
+const ArrayTypeSchema = z.strictObject({
+  arrayOf: z.record(z.string(), z.enum(['text', 'number', 'boolean'])),
 });
+
+export const PropSchema = z
+  .strictObject({
+    name: z.string(),
+    description: z.string().optional(),
+    /** "boolean" | "text" | "number" | { enum: [...] } | { arrayOf: {...} } */
+    type: z.union([
+      z.literal('boolean'),
+      z.literal('text'),
+      z.literal('number'),
+      EnumTypeSchema,
+      ArrayTypeSchema,
+    ]),
+    default: z.union([z.string(), z.boolean(), z.number()]).optional(),
+    /** Text props may be required (no default in the code signature). */
+    required: z.boolean().optional(),
+    /** How this prop manifests on each side. Neither side is primary;
+     *  the contract owns the canonical name and value set. */
+    bindings: z.strictObject({
+      figma: z.strictObject({
+        /** 'NONE' (v7): the prop has no canvas manifestation — a declared
+         *  fidelity limit; only legal (and required) for arrayOf props. */
+        kind: z.enum(['VARIANT', 'BOOLEAN', 'TEXT', 'INSTANCE_SWAP', 'NONE']),
+        /** Required unless kind is 'NONE' (enforced below). */
+        property: z.string().optional(),
+        /** canonical value → Figma variant value, e.g. { "primary": "Primary" } */
+        values: z.record(z.string(), z.string()).optional(),
+      }),
+      code: z.strictObject({
+        prop: z.string(),
+      }),
+    }),
+  })
+  .refine((p) => p.bindings.figma.kind === 'NONE' || typeof p.bindings.figma.property === 'string', {
+    message: 'bindings.figma.property is required unless kind is "NONE"',
+    path: ['bindings', 'figma', 'property'],
+  })
+  .refine((p) => p.bindings.figma.kind !== 'NONE' || p.bindings.figma.property === undefined, {
+    message: 'kind "NONE" declares no canvas property — omit bindings.figma.property',
+    path: ['bindings', 'figma', 'property'],
+  });
 
 export const LayoutSchema = z.strictObject({
   display: z.enum(['flex', 'inline-flex']).optional(),

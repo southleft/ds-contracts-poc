@@ -154,6 +154,29 @@
                   "enum"
                 ],
                 "additionalProperties": false
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "arrayOf": {
+                    "type": "object",
+                    "propertyNames": {
+                      "type": "string"
+                    },
+                    "additionalProperties": {
+                      "type": "string",
+                      "enum": [
+                        "text",
+                        "number",
+                        "boolean"
+                      ]
+                    }
+                  }
+                },
+                "required": [
+                  "arrayOf"
+                ],
+                "additionalProperties": false
               }
             ]
           },
@@ -185,7 +208,8 @@
                       "VARIANT",
                       "BOOLEAN",
                       "TEXT",
-                      "INSTANCE_SWAP"
+                      "INSTANCE_SWAP",
+                      "NONE"
                     ]
                   },
                   "property": {
@@ -202,8 +226,7 @@
                   }
                 },
                 "required": [
-                  "kind",
-                  "property"
+                  "kind"
                 ],
                 "additionalProperties": false
               },

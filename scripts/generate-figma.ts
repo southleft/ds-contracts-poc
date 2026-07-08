@@ -588,6 +588,7 @@ function mapDepProps(
   for (const [propName, rawValue] of Object.entries(props)) {
     const depProp = dep.props.find((p) => p.name === propName);
     if (!depProp) continue;
+    if (depProp.bindings.figma.kind === 'NONE') continue; // code-only (v7 arrayOf)
     let value = rawValue;
     if (typeof value === 'string') {
       const parentRef = value.match(PARENT_PROP_REF);
@@ -598,12 +599,12 @@ function mapDepProps(
         value = resolved;
       }
     }
-    if (typeof value === 'boolean') out[depProp.bindings.figma.property] = value;
-    else out[depProp.bindings.figma.property] = depProp.bindings.figma.values?.[value] ?? value;
+    if (typeof value === 'boolean') out[depProp.bindings.figma.property!] = value;
+    else out[depProp.bindings.figma.property!] = depProp.bindings.figma.values?.[value] ?? value;
   }
   if (text !== undefined) {
     const textProp = dep.props.find((p) => p.type === 'text' && p.bindings.code.prop === 'children');
-    if (textProp) out[textProp.bindings.figma.property] = text;
+    if (textProp) out[textProp.bindings.figma.property!] = text;
   }
   return out;
 }
@@ -785,7 +786,7 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
   );
   const boolPropsData = contract.props
     .filter((p) => p.type === 'boolean')
-    .map((p) => ({ property: p.bindings.figma.property, default: p.default === true }));
+    .map((p) => ({ property: p.bindings.figma.property!, default: p.default === true }));
   const label = typeof textProp?.default === 'string' ? textProp.default : contract.name;
 
   const orderedValues = (p: { type: { enum: string[] }; default?: unknown }) => {
@@ -879,10 +880,10 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
     .filter(
       (p) =>
         (p.type === 'text' || p.type === 'number') &&
-        !boundTextProps.has(p.bindings.figma.property),
+        !boundTextProps.has(p.bindings.figma.property!),
     )
     .map((p) => ({
-      property: p.bindings.figma.property,
+      property: p.bindings.figma.property!,
       default:
         typeof p.default === 'string' ? p.default : typeof p.default === 'number' ? String(p.default) : '',
     }));

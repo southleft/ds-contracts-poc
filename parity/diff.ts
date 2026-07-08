@@ -299,7 +299,10 @@ for (const contract of contracts) {
   const expectedNames = new Set<string>();
 
   for (const p of contract.props) {
-    const propertyName = p.bindings.figma.property;
+    // kind NONE (v7 arrayOf): code-only by declared fidelity limit — the
+    // canvas is not expected to host the prop, so it is skipped, not BEHIND.
+    if (p.bindings.figma.kind === 'NONE') continue;
+    const propertyName = p.bindings.figma.property!;
     expectedNames.add(propertyName);
     const def = figmaProps.get(propertyName);
     if (!def) {

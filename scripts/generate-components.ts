@@ -131,6 +131,12 @@ const JUSTIFY_CSS: Record<string, string> = {
 const isEnum = (p: Prop): p is Prop & { type: { enum: string[] } } =>
   typeof p.type === 'object' && 'enum' in p.type;
 
+/** v7: structured/array prop — code-only (bindings.figma.kind 'NONE'). */
+const isArrayType = (
+  p: Prop,
+): p is Prop & { type: { arrayOf: Record<string, 'text' | 'number' | 'boolean'> } } =>
+  typeof p.type === 'object' && 'arrayOf' in p.type;
+
 function enumProps(contract: Contract) {
   return contract.props.filter(isEnum);
 }
@@ -139,6 +145,9 @@ function boolProps(contract: Contract) {
 }
 function numberProps(contract: Contract) {
   return contract.props.filter((p) => p.type === 'number');
+}
+function arrayProps(contract: Contract) {
+  return contract.props.filter(isArrayType);
 }
 function textProps(contract: Contract) {
   return contract.props.filter((p) => p.type === 'text');
@@ -192,6 +201,10 @@ function validateContract(contract: Contract, byId: Map<string, Contract>, error
       for (const [propName, value] of Object.entries(part.component.props ?? {})) {
         if (dep && !dep.props.some((dp) => dp.name === propName)) {
           errors.push(`${contract.id}: part "${name}" sets unknown ${dep.id} prop "${propName}"`);
+        }
+        const depProp = dep?.props.find((dp) => dp.name === propName);
+        if (depProp && isArrayType(depProp)) {
+          errors.push(`${contract.id}: part "${name}" sets ${dep!.id} arrayOf prop "${propName}" — structured values cannot be fixed in anatomy`);
         }
         const parentRef = typeof value === 'string' ? value.match(/^\{([a-z][\w-]*)\}$/) : null;
         if (parentRef && !enumNames.has(parentRef[1])) {
@@ -310,7 +323,7 @@ function validateContract(contract: Contract, byId: Map<string, Contract>, error
       const vwProp = contract.props.find((pr) => pr.name === part.visibleWhen!.prop);
       if (!vwProp) {
         errors.push(`${contract.id}: part "${name}" visibleWhen references unknown prop "${part.visibleWhen.prop}"`);
-      } else if (part.visibleWhen.equals !== undefined && !(typeof vwProp.type === 'object' && vwProp.type.enum.includes(part.visibleWhen.equals))) {
+      } else if (part.visibleWhen.equals !== undefined && !(typeof vwProp.type === 'object' && 'enum' in vwProp.type && vwProp.type.enum.includes(part.visibleWhen.equals))) {
         errors.push(`${contract.id}: part "${name}" visibleWhen.equals "${part.visibleWhen.equals}" is not a value of prop "${part.visibleWhen.prop}"`);
       }
     }
@@ -319,7 +332,7 @@ function validateContract(contract: Contract, byId: Map<string, Contract>, error
       const assets = ref
         ? (() => {
             const p = contract.props.find((pr) => pr.name === ref[1]);
-            return p && typeof p.type === 'object' ? p.type.enum : [];
+            return p && typeof p.type === 'object' && 'enum' in p.type ? p.type.enum : [];
           })()
         : [part.icon.asset];
       for (const asset of assets) {
@@ -367,10 +380,12 @@ function validateContract(contract: Contract, byId: Map<string, Contract>, error
       errors.push(`${contract.id}: prop "${p.name}" code binding "${p.bindings.code.prop}" is not a legal camelCase identifier`);
     }
     const figProp = p.bindings.figma.property;
-    if (seenFigmaProps.has(figProp)) {
-      errors.push(`${contract.id}: two props bind the same design property "${figProp}" — the canvas cannot host both`);
+    if (figProp !== undefined) {
+      if (seenFigmaProps.has(figProp)) {
+        errors.push(`${contract.id}: two props bind the same design property "${figProp}" — the canvas cannot host both`);
+      }
+      seenFigmaProps.add(figProp);
     }
-    seenFigmaProps.add(figProp);
     // type/default consistency
     if (p.default !== undefined) {
       if (isEnum(p) && (typeof p.default !== 'string' || !p.type.enum.includes(p.default))) {
@@ -385,6 +400,23 @@ function validateContract(contract: Contract, byId: Map<string, Contract>, error
       if (p.type === 'text' && typeof p.default !== 'string') {
         errors.push(`${contract.id}: text prop "${p.name}" default must be a string (got ${JSON.stringify(p.default)})`);
       }
+    }
+    // v7 arrayOf: structured props are code-only — the pairing with figma
+    // kind "NONE" is enforced BOTH ways so a scalar prop can never silently
+    // vanish from the canvas and a structured prop can never pretend to
+    // manifest there.
+    if (isArrayType(p)) {
+      if (p.bindings.figma.kind !== 'NONE') {
+        errors.push(`${contract.id}: arrayOf prop "${p.name}" must bind figma kind "NONE" — structured props are code-only by declared fidelity limit`);
+      }
+      if (p.default !== undefined) {
+        errors.push(`${contract.id}: arrayOf prop "${p.name}" cannot declare a default — it renders as an optional array in code`);
+      }
+      if (Object.keys(p.type.arrayOf).length === 0) {
+        errors.push(`${contract.id}: arrayOf prop "${p.name}" must declare at least one field`);
+      }
+    } else if (p.bindings.figma.kind === 'NONE') {
+      errors.push(`${contract.id}: prop "${p.name}" binds figma kind "NONE" but is not an arrayOf prop — every scalar prop has a canvas manifestation`);
     }
     // Required text props need a default: it is the canvas TEXT property's
     // default value AND the sample every generated story/matrix cell uses.
@@ -907,6 +939,11 @@ function generateTsx(contract: Contract, byId: Map<string, Contract>): string {
     if (isEnum(p)) {
       const union = p.type.enum.map((v) => `'${v}'`).join(' | ');
       propLines.push(`${doc}  ${p.bindings.code.prop}?: ${union};`);
+    } else if (isArrayType(p)) {
+      const fields = Object.entries(p.type.arrayOf)
+        .map(([f, t]) => `${f}: ${t === 'text' ? 'string' : t}`)
+        .join('; ');
+      propLines.push(`${doc}  ${p.bindings.code.prop}?: Array<{ ${fields} }>;`);
     } else if (p.type === 'boolean') {
       propLines.push(`${doc}  ${p.bindings.code.prop}?: boolean;`);
     } else if (p.type === 'number') {
@@ -945,6 +982,10 @@ function generateTsx(contract: Contract, byId: Map<string, Contract>): string {
         : `${p.bindings.code.prop} = '${p.default}'`,
     );
   }
+  // v7 arrayOf props: no default destructure — undefined means "not
+  // provided" (never a silent []). Pulled out so {...rest} cannot leak a
+  // structured prop onto the DOM element.
+  for (const p of arrayProps(contract)) destructured.push(p.bindings.code.prop);
   for (const { slot } of slots) destructured.push(slot.name);
   for (const ev of events) destructured.push(ev.bindings.code.prop);
   destructured.push('className', 'children', '...rest');
@@ -1213,6 +1254,8 @@ function generateStories(contract: Contract, byId: Map<string, Contract>): strin
       if (p.default !== undefined && !toggledPropNames.has(p.name)) {
         args.push(`    ${codeName}: '${p.default}',`);
       }
+    } else if (isArrayType(p)) {
+      argTypes.push(`    ${codeName}: { control: false${desc} },`);
     } else if (p.type === 'boolean') {
       argTypes.push(`    ${codeName}: { control: 'boolean'${desc} },`);
       args.push(`    ${codeName}: ${p.default === true},`);
