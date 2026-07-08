@@ -25,6 +25,8 @@
     "roundtrip:code": "tsx extract/roundtrip-code.ts",
     "extract:figma": "tsx extract/figma/propose.ts",
     "extract:figma:roundtrip": "tsx extract/figma/roundtrip.ts",
+    "extract:figma:rest": "tsx extract/figma/rest/cli.ts",
+    "extract:figma:rest:roundtrip": "tsx extract/figma/rest/roundtrip-rest.ts",
     "reconcile": "tsx extract/run.ts reconcile",
     "diagnose": "tsx parity/diagnose.ts",
     "figma:serve": "node scripts/figma-serve.mjs",
