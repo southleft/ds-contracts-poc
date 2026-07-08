@@ -405,9 +405,11 @@ label {
 }
 
 /* Up to seven source tabs (Workspace appears with the first import) share
- * the rail's 320px — tighter than the output tabs. */
+ * the rail's 360px — tighter than the output tabs, but with air between
+ * labels: all seven fit on one row (Tokens dot included), no wrap, no
+ * horizontal scroll. */
 .pg__rail > .tabs > .tabs__tab {
-  padding: 7px 3px;
+  padding: 7px 5px;
   font-size: 10.5px;
 }
 
@@ -609,7 +611,7 @@ label {
 .pg {
   flex: 1;
   display: grid;
-  grid-template-columns: 320px minmax(360px, 1fr) minmax(420px, 1.1fr);
+  grid-template-columns: 360px minmax(360px, 1fr) minmax(420px, 1.1fr);
   min-height: 0;
 }
 
