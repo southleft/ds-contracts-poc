@@ -1,6 +1,6 @@
 /**
  * GENERATED FILE — DO NOT EDIT.
- * Source of truth: contracts/button.contract.json (ds.button v1.4.0)
+ * Source of truth: contracts/button.contract.json (ds.button v1.5.0)
  * Regenerate with: npm run generate
  */
 import { forwardRef } from 'react';
