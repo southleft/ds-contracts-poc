@@ -95,7 +95,7 @@ Five features, each shipped with a consuming contract: `elementByProp`
 surfaces), `stylesWhen` (whitelisted conditional literals), `overlay`
 (out-of-flow anatomy for tooltips/popups), `arrayOf` structured props (code-only
 with `kind: NONE`, skipped by every design-side consumer). Plus
-pending-first-sync parity classification. **Eval suite: 52/52.**
+pending-first-sync parity classification. **Eval suite: 54/54.**
 
 ## 2026-07-08 — Code Editor Simulator (Hub)
 
@@ -106,7 +106,7 @@ client-side — API diff, an amendSet-mirrored canvas plan (ADDED/REBUILT/
 EXTRA-reported over the enum cartesian product, all-defaults combo first), and
 spec-policy version advice. Illegal edits are refused by the schema's own
 names and never reach either surface; both keep rendering the last governed
-version. Dashboard-only change; 52/52 evals unaffected.
+version. Dashboard-only change; 54/54 evals unaffected.
 
 ## 2026-07-08 — State previews + canvas text styles (schema v8)
 
@@ -119,7 +119,7 @@ hand-built State axis without the opt-in is the kit-rot detector (all four
 pilot systems carry rotting hand-built state axes). Plus named Figma
 TextStyles minted from semantic typography tokens, upserted by identity
 marker, ridden by matching text nodes. Button v1.5.0 ships previews.
-**Eval suite: 52/52.**
+**Eval suite: 54/54.**
 
 
 ## 2026-07-08 — Full-circle sync: drift acknowledged → resolved → ratchet retired
@@ -160,7 +160,7 @@ Switch, Card: **zero mismatches in both directions** (code: 28 matched /
 — a retokenized property, a deleted part, or an uncorrelated cross-variant
 binding each fail by name. Unbound/raw values are always reported with
 nearest-token candidates, never invented. Receipts: `extract/ROUNDTRIP-CODE.md`,
-`extract/figma/ROUNDTRIP.md`. **Eval suite: 52/52.**
+`extract/figma/ROUNDTRIP.md`. **Eval suite: 54/54.**
 
 
 ---

@@ -1,6 +1,6 @@
 {
-  "passed": 52,
-  "total": 52,
+  "passed": 54,
+  "total": 54,
   "results": [
     {
       "id": "refuse-unknown-token-reference",
@@ -259,6 +259,16 @@
     },
     {
       "id": "design-roundtrip-uncorrelated-binding-is-mismatch-not-guess",
+      "claim": "C5-extraction",
+      "pass": true
+    },
+    {
+      "id": "design-rest-roundtrip-zero-mismatch",
+      "claim": "C5-extraction",
+      "pass": true
+    },
+    {
+      "id": "design-rest-degraded-variables-never-fabricates",
       "claim": "C5-extraction",
       "pass": true
     }

@@ -1127,6 +1127,33 @@ const cases: Case[] = [
       if (!r.out.includes('part root background-color')) throw new Error('Mismatch not named');
     },
   },
+  {
+    // REST-mapped dump round-trips to the shipping contract (no plugin).
+    id: 'design-rest-roundtrip-zero-mismatch',
+    claim: 'C5-extraction',
+    run: () => {
+      const r = run(TSX, ['extract/figma/rest/roundtrip-rest.ts']);
+      if (r.status !== 0) throw new Error(`REST roundtrip failed:\n${r.out}`);
+      const receipt = readFileSync(path.join(SCRATCH, 'extract/figma/rest/ROUNDTRIP-REST.md'), 'utf8');
+      for (const c of ['Badge', 'Card'])
+        if (!new RegExp(`\\| ${c} \\| \\d+ \\| \\d+ \\| 0 \\| 0 \\| ✅`).test(receipt))
+          throw new Error(`${c} row is not zero-mismatch/zero-degradation`);
+    },
+  },
+  {
+    // Variables endpoint absent (Enterprise 403): named degradations, zero fabrication.
+    id: 'design-rest-degraded-variables-never-fabricates',
+    claim: 'C5-extraction',
+    run: () => {
+      const r = run(TSX, ['extract/figma/rest/roundtrip-rest.ts']);
+      if (r.status !== 0) throw new Error(r.out);
+      const receipt = readFileSync(path.join(SCRATCH, 'extract/figma/rest/ROUNDTRIP-REST.md'), 'utf8');
+      if (!receipt.includes('unresolvable — variables endpoint unavailable (Enterprise)'))
+        throw new Error('degradations not named');
+      if (!receipt.includes('zero fabrication: no color token ref anywhere in the degraded proposal'))
+        throw new Error('fabrication check missing/failed');
+    },
+  },
 ];
 
 // ---------------------------------------------------------------------------
