@@ -227,6 +227,29 @@ guard); first visits get a three-action guided strip. **The playground's
 planned scope (W1–W10) is complete.** 56/56.
 
 
+## 2026-07-08 — LAUNCHED: both credential-gated paths verified live
+
+The two receipts the launch gate demanded, both against real endpoints with
+real credentials (env-file, never in chat, never printed):
+
+- **Figma URL import, live**: the Eventz Alert fetched from api.figma.com
+  through the deployed import chain (`importFromUrl` → REST mapper →
+  proposer). The token's plan hit the Enterprise-gated variables endpoint
+  exactly as most visitors will — and the ladder held: every binding degraded
+  to a named `variable-unresolved` report, gradients hit `paint-unsupported`,
+  the proposal carried the full structure and API with 6 UNBOUND entries and
+  nearest-token suggestions, zero fabrication. Paired with the earlier
+  bridge-path run (which recovered Eventz's own token vocabulary), both
+  degradation tiers now have live receipts on the same component.
+- **Describe transport, live**: one real api.anthropic.com round trip with
+  the module's own tool schema — HTTP 200, forced `tool_choice` honored,
+  `thinking_tokens: 0` (the disabled-thinking pairing works), 4,545 prompt
+  tokens (matching the design estimate), and a genuine `ds.stat-block`
+  contract with the right props in the expected nested shape.
+
+The playground is **launched**: https://ds-contracts-playground.pages.dev
+
+
 ---
 
 **Standing scoreboard** (updated with each milestone):
