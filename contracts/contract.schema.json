@@ -355,6 +355,9 @@
         "native"
       ]
     },
+    "figmaStatePreviews": {
+      "type": "boolean"
+    },
     "anatomy": {
       "type": "object",
       "propertyNames": {

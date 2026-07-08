@@ -1,7 +1,7 @@
 {
   "summary": {
     "total": 0,
-    "acknowledged": 1,
+    "acknowledged": 2,
     "pending": 1,
     "bySurface": {}
   },
@@ -13,6 +13,13 @@
       "subject": "Badge.Variant",
       "detail": "Variant options differ — contract: [Info, Success, Warning, Danger, Error], figma: [Info, Success, Warning, Danger]",
       "remedy": "Adopt into contract (promotion) or re-sync the set"
+    },
+    {
+      "surface": "figma",
+      "classification": "behind",
+      "subject": "Button.State",
+      "detail": "Contract opts into state previews (figmaStatePreviews) but the Figma set has no State variant axis",
+      "remedy": "Re-run the component sync script (amend adds the State preview axis and renames base variants with State=Default)"
     }
   ],
   "pending": [
@@ -31,7 +38,7 @@
     "ds.blockquote@1.0.0",
     "ds.breadcrumb-item@1.0.0",
     "ds.breadcrumbs@1.0.0",
-    "ds.button@1.4.0",
+    "ds.button@1.5.0",
     "ds.card@1.1.0",
     "ds.chat-message-metadata@1.0.0",
     "ds.chat-message@1.1.0",

@@ -21,10 +21,13 @@ import { readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import {
   ContractSchema,
+  STATE_PREVIEW_DEFAULT,
+  STATE_PREVIEW_PROPERTY,
   componentRefsOf,
   slotFigmaProperty,
   slotVisibilityProperty,
   slotsOf,
+  statePreviewLabel,
   type Contract,
   type Prop,
 } from '../scripts/contract-schema.js';
@@ -387,6 +390,55 @@ for (const contract of contracts) {
     }
   }
 
+  // State previews (figmaStatePreviews): a DECLARED canvas-only surface.
+  // When the contract opts in, the set must carry the State variant axis
+  // with exactly Default + the declared states — the axis is contract API,
+  // not drift. (The converse — a State axis with NO opt-in — is handled in
+  // the ahead sweep below: that's the kit-rot detection story.)
+  if (contract.figmaStatePreviews && contract.states.length > 0) {
+    expectedNames.add(STATE_PREVIEW_PROPERTY);
+    const def = figmaProps.get(STATE_PREVIEW_PROPERTY);
+    const want = [STATE_PREVIEW_DEFAULT, ...contract.states.map(statePreviewLabel)];
+    if (!def) {
+      add({
+        surface: 'figma',
+        classification: 'behind',
+        subject: `${contract.name}.${STATE_PREVIEW_PROPERTY}`,
+        detail: `Contract opts into state previews (figmaStatePreviews) but the Figma set has no ${STATE_PREVIEW_PROPERTY} variant axis`,
+        remedy: 'Re-run the component sync script (amend adds the State preview axis and renames base variants with State=Default)',
+      });
+    } else {
+      if (def.type !== 'VARIANT') {
+        add({
+          surface: 'figma',
+          classification: 'mismatch',
+          subject: `${contract.name}.${STATE_PREVIEW_PROPERTY} (kind)`,
+          detail: `State preview axis must be a VARIANT property, figma has ${def.type}`,
+          remedy: 'Re-run the component sync script',
+        });
+      }
+      const got = def.variantOptions ?? [];
+      if ([...want].sort().join('|') !== [...got].sort().join('|')) {
+        add({
+          surface: 'figma',
+          classification: 'mismatch',
+          subject: `${contract.name}.${STATE_PREVIEW_PROPERTY}`,
+          detail: `State preview values differ — contract: [${want.join(', ')}], figma: [${got.join(', ')}]`,
+          remedy: 'Adopt into the contract states (promotion) or re-sync the set',
+        });
+      }
+      if (def.defaultValue !== undefined && def.defaultValue !== STATE_PREVIEW_DEFAULT) {
+        add({
+          surface: 'figma',
+          classification: 'mismatch',
+          subject: `${contract.name}.${STATE_PREVIEW_PROPERTY} (default)`,
+          detail: `Default state variant must be ${STATE_PREVIEW_DEFAULT}, figma: ${String(def.defaultValue)} (Figma's default = first variant in the set)`,
+          remedy: 'Reorder the set so the all-defaults State=Default variant is first',
+        });
+      }
+    }
+  }
+
   // Slots: INSTANCE_SWAP property per slot; optional slots additionally get a
   // "Show X" BOOLEAN. `accepts` must round-trip as preferredValues whose keys
   // are the accepted contracts' componentSetKey anchors.
@@ -468,6 +520,25 @@ for (const contract of contracts) {
 
   for (const [name, def] of figmaProps) {
     if (expectedNames.has(name)) continue;
+    // A hand-built State variant axis WITHOUT the contract opt-in is the
+    // kit-rot pattern state previews exist to replace: someone manually
+    // built "State=Hover" variants because Figma can't run pseudo-classes,
+    // and those rot. Propose adoption (the one-field opt-in regenerates
+    // them from the contract's state token overrides), never a bogus prop.
+    if (name === STATE_PREVIEW_PROPERTY && def.type === 'VARIANT' && !contract.figmaStatePreviews) {
+      add({
+        surface: 'figma',
+        classification: 'ahead',
+        subject: `${contract.name}.${STATE_PREVIEW_PROPERTY}`,
+        detail: `Figma set carries a hand-built ${STATE_PREVIEW_PROPERTY} variant axis [${(def.variantOptions ?? []).join(', ')}] the contract does not declare — hand-maintained state previews rot; the contract can own them`,
+        ...(contract.states.length > 0 ? { proposedPatch: { figmaStatePreviews: true } } : {}),
+        remedy:
+          contract.states.length > 0
+            ? `Adopt: set "figmaStatePreviews": true in contracts/${contract.id.replace(/^[^.]+\./, '')}.contract.json (bump minor), npm run figma:plan, re-sync — or retire the hand-built axis`
+            : 'Declare interaction states + root token overrides in the contract (then opt into figmaStatePreviews), or retire the hand-built axis',
+      });
+      continue;
+    }
     add({
       surface: 'figma',
       classification: 'ahead',
