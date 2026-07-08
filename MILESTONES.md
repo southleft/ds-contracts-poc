@@ -263,6 +263,20 @@ session workspace (capped at 30 with named eviction) that restores contract
 A plain help drawer covers every way in. 56/56, no core changes.
 
 
+## 2026-07-08 — Playground speaks designer
+
+The Preview grows per-prop controls (a single instance at any chosen state,
+rendered by the same html emitter via defaults-substitution — one renderer,
+zero drift; honest "no visible change — by design" notes; the all-variants
+grid one segment away). The Contract pane gains a JSON | Spec toggle
+rendering the same contract as a read-only spec sheet — props table,
+variants with combination count, slots resolved to names, events, grouped
+token chips, a11y — stale-on-invalid, refusals visible in both views. Every
+gallery card teaches with a fact-checked "What to notice" caption; the help
+drawer gains a seven-term glossary; first-session jargon explains itself in
+place. 56/56 throughout; verified both themes.
+
+
 ---
 
 **Standing scoreboard** (updated with each milestone):

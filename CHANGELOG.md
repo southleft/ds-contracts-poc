@@ -6,6 +6,31 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+## [0.2.0] - 2026-07-08
+
+### Added
+
+- **Refusal-line highlighting** — a refusal names its line, paints it, and clicking it scrolls there (dependency-free editor overlay; unresolvable refusals highlight nothing).
+- **Session workspace** — every import (Figma, code, prompt, JSON) collects in a source-tagged list that restores the contract with its receipts and states each entry's design↔code direction.
+- **Interactive preview controls** — per-prop knobs (enum selects, boolean toggles, text inputs) render a single instance at any chosen state through the same html emitter; "no visible change — by design" noted honestly; Single | All variants toggle.
+- **Spec-sheet view** — a JSON | Spec toggle renders the same contract as a read-only designer spec sheet: props table, variant combination count, slots, events, grouped token chips, a11y.
+- **Help drawer** — coming-from-design / from-code / examples / from-nothing guides plus a seven-term glossary.
+- **"What to notice" captions** on every gallery card, fact-checked against the contracts.
+- **Reset affordances** — one-click restore of any loaded source's pristine original; the onboarding loop gains its reset step.
+- Named refusal for anatomy references to contracts not in scope (was a crash).
+- Fixed instance props canonicalize through the child contract's bindings (Size/"Small" → size/"sm").
+
+### Changed
+
+- Describe and Tokens rail panels: consistent vertical rhythm; active token source reads as a status line.
+- Source rail widened with more tab spacing; contract and output pane headers share one aligned border.
+- Emitter output tabs carry designer-language tooltips; receipts panel explains itself.
+
+### Fixed
+
+- Playwright verification artifacts removed from the repository tree and ignored.
+
+
 ## [0.1.0] - 2026-07-08
 
 First public release: the contract-as-source-of-truth loop, proven end-to-end and running in a public browser playground. The dated evidence log for everything below is [MILESTONES.md](MILESTONES.md).
@@ -51,4 +76,5 @@ First public release: the contract-as-source-of-truth loop, proven end-to-end an
 - Extractor gaps found by self-audit: cva/`VariantProps` support; skipped components are always reported, never silent.
 
 [Unreleased]: https://github.com/southleft/ds-contracts-poc/compare/v0.1.0...HEAD
+[0.2.0]: https://github.com/southleft/ds-contracts-poc/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/southleft/ds-contracts-poc/releases/tag/v0.1.0
