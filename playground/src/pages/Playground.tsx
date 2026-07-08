@@ -37,13 +37,22 @@ import {
 } from '../engine/token-source';
 import { locateJsonParseError, resolveIssueLines } from '../engine/refusal-lines';
 import { validateContractText } from '../engine/validate';
+import {
+  clearWorkspace,
+  recordImport,
+  removeWorkspaceEntry,
+  useWorkspace,
+  WORKSPACE_CAP,
+  type WorkspaceEntry,
+  type WorkspaceSource,
+} from '../engine/workspace';
 import type { ReceiptGroup, Receipts } from '../receipts';
 import { ContractEditor, type ContractEditorHandle } from '../components/ContractEditor';
 import { CopyButton } from '../components/CopyButton';
 import { PreviewFrame } from '../components/PreviewFrame';
 import { ReceiptsPanel } from '../components/ReceiptsPanel';
 
-type SourceTab = 'examples' | 'describe' | 'figma' | 'code' | 'json' | 'tokens';
+type SourceTab = 'workspace' | 'examples' | 'describe' | 'figma' | 'code' | 'json' | 'tokens';
 const OUTPUT_LABELS: Record<string, string> = {
   react: 'React',
   html: 'HTML + CSS',
@@ -51,7 +60,42 @@ const OUTPUT_LABELS: Record<string, string> = {
   'figma-script': 'Figma script',
 };
 
+/** Workspace source tags — plain text, grouped display order. */
+const WS_TAGS: Record<WorkspaceSource, string> = {
+  figma: 'FIGMA',
+  code: 'CODE',
+  prompt: 'AI',
+  json: 'JSON',
+};
+const WS_ORDER: WorkspaceSource[] = ['figma', 'code', 'prompt', 'json'];
+const WS_GROUP_TITLES: Record<WorkspaceSource, string> = {
+  figma: 'From Figma',
+  code: 'From code',
+  prompt: 'Generated',
+  json: 'Pasted JSON',
+};
+
+/** The one-line design↔code switch story shown when a workspace entry is loaded. */
+const WS_SWITCH_LINES: Record<WorkspaceSource, string> = {
+  figma: 'Imported from design — the React / HTML tabs are its code side.',
+  code: 'Imported from code — the Figma script tab is its design side.',
+  prompt: 'Generated — both sides below.',
+  json: 'Imported from JSON — both sides below.',
+};
+
+const wsTime = (ms: number) =>
+  new Date(ms).toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit' });
+
+/** Session flag: the switch strip, once dismissed, stays gone for the session. */
+const SWITCH_STRIP_KEY = 'ds-playground.switch-strip-dismissed';
+
 const pretty = (value: unknown) => JSON.stringify(value, null, 2);
+
+/** The contract's id when the candidate carries one — workspace metadata only. */
+const contractIdOf = (contract: unknown): string => {
+  const id = (contract as { id?: unknown } | null)?.id;
+  return typeof id === 'string' ? id : '';
+};
 
 /** First-visit flag for the onboarding strip — set on dismissal, forever. */
 const ONBOARD_KEY = 'ds-playground.onboarded';
@@ -192,6 +236,37 @@ export function Playground() {
   const [sourceTab, setSourceTab] = useState<SourceTab>('examples');
   const [activeExample, setActiveExample] = useState<string | null>(null);
 
+  // ---------------------------------------------------- session workspace
+  const workspace = useWorkspace();
+  // The workspace entry currently in the editor (drives the switch strip);
+  // any other load clears it.
+  const [wsLoaded, setWsLoaded] = useState<WorkspaceEntry | null>(null);
+  const [switchStripDismissed, setSwitchStripDismissed] = useState(() => {
+    try {
+      return window.sessionStorage.getItem(SWITCH_STRIP_KEY) === '1';
+    } catch {
+      return false;
+    }
+  });
+  const dismissSwitchStrip = () => {
+    setSwitchStripDismissed(true);
+    try {
+      window.sessionStorage.setItem(SWITCH_STRIP_KEY, '1');
+    } catch {
+      /* storage unavailable — the strip just returns next load */
+    }
+  };
+
+  const loadWorkspaceEntry = (entry: WorkspaceEntry) => {
+    const origin = `workspace — ${entry.name} (${entry.source} import)`;
+    setText(entry.contractText);
+    setProvenance(origin);
+    setPristine({ text: entry.contractText, provenance: origin });
+    setReceipts(entry.receipts);
+    setActiveExample(null);
+    setWsLoaded(entry);
+  };
+
   const loadContract = (contractId: string, source: string, slug?: string) => {
     const raw = rawContractById.get(contractId);
     if (!raw) return;
@@ -200,6 +275,7 @@ export function Playground() {
     setProvenance(source);
     setPristine({ text: pretty(raw), provenance: source });
     setActiveExample(slug ?? contractId);
+    setWsLoaded(null);
   };
 
   // ------------------------------------------------------------- code state
@@ -239,17 +315,26 @@ export function Playground() {
           entries: result.skipped.map((s) => ({ label: `${s.name} (${s.source})`, message: s.reason })),
         });
       }
-      setReceipts({ source: origin, groups });
+      const codeReceipts: Receipts = { source: origin, groups };
       const first = result.proposals[0];
       if (first) {
-        setText(pretty(first.proposal.contract));
-        setProvenance(`proposed from code — ${first.name}`);
-        setPristine({
-          text: pretty(first.proposal.contract),
-          provenance: `proposed from code — ${first.name}`,
+        const contractText = pretty(first.proposal.contract);
+        // A successful code import lands in the session workspace.
+        const recorded = recordImport({
+          name: first.name,
+          contractId: contractIdOf(first.proposal.contract),
+          source: 'code',
+          contractText,
+          receipts: codeReceipts,
         });
-      } else if (result.skipped.length === 0) {
-        setCodeError('No component found in the pasted source.');
+        setReceipts(recorded.receipts);
+        setText(contractText);
+        setProvenance(`proposed from code — ${first.name}`);
+        setPristine({ text: contractText, provenance: `proposed from code — ${first.name}` });
+        setWsLoaded(null);
+      } else {
+        setReceipts(codeReceipts);
+        if (result.skipped.length === 0) setCodeError('No component found in the pasted source.');
       }
       setActiveExample(null);
     } catch (e) {
@@ -301,15 +386,24 @@ export function Playground() {
   const [figmaProposals, setFigmaProposals] = useState<FigmaProposal[] | null>(null);
   const importGroupsRef = useRef<ReceiptGroup[]>([]);
 
-  const applyProposal = (proposal: FigmaProposal, origin: string) => {
-    setText(pretty(proposal.contract));
-    setProvenance(`proposed from ${origin} — ${proposal.setName}`);
-    setPristine({
-      text: pretty(proposal.contract),
-      provenance: `proposed from ${origin} — ${proposal.setName}`,
+  const applyProposal = (proposal: FigmaProposal, origin: string, wsSource: WorkspaceSource) => {
+    const contractText = pretty(proposal.contract);
+    const provenanceLine = `proposed from ${origin} — ${proposal.setName}`;
+    // A successful design import lands in the session workspace, receipts
+    // and all — re-applying the same set refreshes its entry.
+    const recorded = recordImport({
+      name: proposal.setName,
+      contractId: contractIdOf(proposal.contract),
+      source: wsSource,
+      contractText,
+      receipts: { source: origin, groups: [...importGroupsRef.current, ...proposalGroups(proposal)] },
     });
-    setReceipts({ source: origin, groups: [...importGroupsRef.current, ...proposalGroups(proposal)] });
+    setText(contractText);
+    setProvenance(provenanceLine);
+    setPristine({ text: contractText, provenance: provenanceLine });
+    setReceipts(recorded.receipts);
     setActiveExample(null);
+    setWsLoaded(null);
   };
 
   const handleImportResult = (result: FigmaImportResult, origin: string) => {
@@ -320,7 +414,7 @@ export function Playground() {
     }
     importGroupsRef.current = importReportGroups(result.report);
     setFigmaProposals(proposals);
-    applyProposal(proposals[0], origin);
+    applyProposal(proposals[0], origin, 'figma');
   };
 
   const runFigmaImport = async () => {
@@ -380,17 +474,32 @@ export function Playground() {
           return;
         }
         setFigmaProposals(proposals);
-        applyProposal(proposals[0], 'pasted Figma dump');
+        applyProposal(proposals[0], 'pasted Figma dump', 'json');
       } catch (e) {
         setJsonError(e instanceof Error ? e.message : String(e));
       }
       return;
     }
-    setText(pretty(parsed));
-    setReceipts(null);
+    const contractText = pretty(parsed);
+    const record = parsed as { name?: unknown; id?: unknown };
+    const recorded = recordImport({
+      name:
+        typeof record.name === 'string'
+          ? record.name
+          : typeof record.id === 'string'
+            ? record.id
+            : 'Pasted contract',
+      contractId: contractIdOf(parsed),
+      source: 'json',
+      contractText,
+      receipts: null,
+    });
+    setText(contractText);
+    setReceipts(recorded.receipts);
     setProvenance('pasted contract JSON');
-    setPristine({ text: pretty(parsed), provenance: 'pasted contract JSON' });
+    setPristine({ text: contractText, provenance: 'pasted contract JSON' });
     setActiveExample(null);
+    setWsLoaded(null);
   };
 
   // ---------------------------------------------------------- describe state
@@ -426,7 +535,7 @@ export function Playground() {
           : null;
     setDescRefusals(issues);
     const { usage, rounds } = result.session;
-    setReceipts({
+    const promptReceipts: Receipts = {
       source: origin,
       groups: [
         {
@@ -453,7 +562,19 @@ export function Playground() {
           ],
         },
       ],
+    };
+    // A generation lands in the session workspace too — the fix round
+    // refreshes the same entry (one per source + name).
+    const candidate = result.contract as { name?: unknown } | null;
+    const recorded = recordImport({
+      name: typeof candidate?.name === 'string' ? candidate.name : 'Generated component',
+      contractId: contractIdOf(result.contract),
+      source: 'prompt',
+      contractText,
+      receipts: promptReceipts,
     });
+    setReceipts(recorded.receipts);
+    setWsLoaded(null);
   };
 
   const runDescribe = async (demo: boolean) => {
@@ -728,6 +849,49 @@ export function Playground() {
   const previewTarget = validation.status === 'valid' ? validation : null;
   const stale = !previewTarget && lastGood.current;
 
+  // ------------------------------------------- workspace entry rendering
+  const wsEntryRow = (entry: WorkspaceEntry) => (
+    <div key={entry.id} className="ws__row">
+      <button
+        type="button"
+        className={`rail__item ws__load${wsLoaded?.id === entry.id ? ' is-active' : ''}`}
+        onClick={() => loadWorkspaceEntry(entry)}
+        title={
+          entry.contractId
+            ? `${entry.contractId} — imported at ${wsTime(entry.importedAt)}`
+            : `imported at ${wsTime(entry.importedAt)}`
+        }
+      >
+        <span className="ws__tag" aria-hidden>
+          {WS_TAGS[entry.source]}
+        </span>
+        <span className="ws__name">{entry.name}</span>
+        <span className="ws__time">{wsTime(entry.importedAt)}</span>
+      </button>
+      <button
+        type="button"
+        className="ws__remove"
+        aria-label={`Remove ${entry.name} from the workspace`}
+        onClick={() => removeWorkspaceEntry(entry.id)}
+      >
+        ×
+      </button>
+    </div>
+  );
+
+  /** "Imported this session" — the same workspace entries, filtered, shown
+   *  under the form that produced them. */
+  const wsMiniList = (source: WorkspaceSource) => {
+    const items = workspace.filter((e) => e.source === source);
+    if (items.length === 0) return null;
+    return (
+      <div className="rail__group ws__mini">
+        <div className="rail__group-title">Imported this session</div>
+        {items.map(wsEntryRow)}
+      </div>
+    );
+  };
+
   // ------------------------------------------------------------------ render
   return (
     <>
@@ -761,13 +925,18 @@ export function Playground() {
         <div className="tabs" role="tablist" aria-label="Input source">
           {(
             [
+              // The Workspace tab appears with the first import (and stays
+              // while selected, so Clear all doesn't yank the floor away).
+              ...(workspace.length > 0 || sourceTab === 'workspace'
+                ? [['workspace', 'Workspace'] as const]
+                : []),
               ['examples', 'Examples'],
               ['describe', 'Describe'],
               ['figma', 'Figma'],
               ['code', 'Code'],
               ['json', 'JSON'],
               ['tokens', 'Tokens'],
-            ] as const
+            ] as ReadonlyArray<readonly [SourceTab, string]>
           ).map(([tab, label]) => (
             <button
               key={tab}
@@ -784,6 +953,33 @@ export function Playground() {
             </button>
           ))}
         </div>
+
+        {sourceTab === 'workspace' && (
+          <div className="rail__section">
+            {workspace.length === 0 ? (
+              <p className="hint">
+                Nothing imported yet — Figma, Code, and Describe imports collect here for the
+                session.
+              </p>
+            ) : (
+              <>
+                {WS_ORDER.filter((s) => workspace.some((e) => e.source === s)).map((s) => (
+                  <div key={s} className="rail__group">
+                    <div className="rail__group-title">{WS_GROUP_TITLES[s]}</div>
+                    {workspace.filter((e) => e.source === s).map(wsEntryRow)}
+                  </div>
+                ))}
+                <p className="hint">
+                  Session-only (this tab&rsquo;s sessionStorage, gone on close). Click an entry to
+                  restore its contract and receipts; the newest {WORKSPACE_CAP} are kept.
+                </p>
+                <button type="button" style={{ marginTop: 8 }} onClick={clearWorkspace}>
+                  Clear all
+                </button>
+              </>
+            )}
+          </div>
+        )}
 
         {sourceTab === 'examples' && (
           <div className="rail__section">
@@ -973,13 +1169,15 @@ export function Playground() {
                     key={p.setName}
                     type="button"
                     className="rail__item"
-                    onClick={() => applyProposal(p, 'Figma REST import')}
+                    onClick={() => applyProposal(p, 'Figma REST import', 'figma')}
                   >
                     {p.setName}
                   </button>
                 ))}
               </div>
             ) : null}
+
+            {wsMiniList('figma')}
           </div>
         )}
 
@@ -1073,6 +1271,8 @@ export function Playground() {
                 {codeError ? <div className="notice notice--error">{codeError}</div> : null}
               </>
             )}
+
+            {wsMiniList('code')}
           </div>
         )}
 
@@ -1238,6 +1438,19 @@ export function Playground() {
 
       {/* ---------------------------------------------------------- output */}
       <section className="pg__output">
+        {wsLoaded && !switchStripDismissed ? (
+          <div className="switch-strip" role="note">
+            <span>{WS_SWITCH_LINES[wsLoaded.source]}</span>
+            <button
+              type="button"
+              className="btn--ghost switch-strip__dismiss"
+              onClick={dismissSwitchStrip}
+              aria-label="Dismiss for this session"
+            >
+              Dismiss
+            </button>
+          </div>
+        ) : null}
         <div className="tabs" role="tablist" aria-label="Output target">
           <button
             type="button"
