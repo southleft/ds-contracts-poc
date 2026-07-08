@@ -110,9 +110,30 @@ browser. No backend, no analytics, no accounts.
 
 1. `/examples` — gallery cards rendered live by the html emitter (iframe +
    the repo's token stylesheets); the Callout card is the foreign-code tier.
+   Every card carries a one-line "What to notice" caption naming the
+   specific thing it teaches (Badge: one enum fans out on both surfaces;
+   ChatMessage: the layoutByProp row flip; Callout: raw values reported,
+   never invented).
 2. Pick **Badge** → `/playground?example=badge`: contract center-stage,
    emitter tabs from the registry (Preview · React · HTML+CSS · React inline
    · Figma script), copy per file, prettier behind a lazy "Format" toggle.
+   The Preview defaults to **Single** — a controls strip derived from the
+   active contract's props (enum → select, boolean → on/off, text/number →
+   debounced inputs, arrayOf → a code-only tag) drives one live instance.
+   Mechanism: the chosen values are written into a CLONE's prop defaults,
+   so emitHtml's own "default" showcase item IS the requested state —
+   core/ untouched, no second renderer to drift. A control whose toggle
+   leaves the instance markup byte-identical says "no visible change — by
+   design"; declared events list themselves with the same code-only tag.
+   **All variants** (one segment away) is the classic showcase grid.
+   The Contract pane header carries a **JSON | Spec** toggle: Spec renders
+   the same contract as a read-only designer spec sheet (props table,
+   variant axes + combination count + State-preview note, layoutByProp
+   notes, slots with accepts, code-only events, token refs grouped by
+   category, states, a11y). It tracks the last schema-valid parse — invalid
+   text shows the last sheet with a stale banner, refusals stay listed in
+   both views, and a refusal clicked from Spec flips to JSON and scrolls to
+   its line. Editor text survives the round-trip byte-identically.
 3. Break a token ref in the editor → the generator's refusal appears BY NAME
    under the editor AND the offending line gets a danger background (a
    dependency-free textarea-overlay backdrop; zod paths walked to their
@@ -185,7 +206,12 @@ browser. No backend, no analytics, no accounts.
     the React/HTML tabs are its code side; from code → the Figma script
     tab is its design side; generated → both sides below). "How do I use
     this?" in the topbar opens a plain help drawer — one short section per
-    way in.
+    way in, plus a seven-term glossary (contract, anatomy, token binding,
+    emitter, refusal, degradation, promotion — one plain sentence each).
+    First-session jargon explains itself in place: output-tab tooltips say
+    what each output IS ("Figma script" → the script that builds/updates
+    the component in Figma), the Receipts header carries a clarifying
+    sub-line, and "golden-guarded" expands on hover.
 
 Bundle tiers (vite build, gzip): initial ≈ 153 KB · prettier chunk ≈ 339 KB ·
 TypeScript chunk ≈ 985 KB · REST fixtures ≈ 3 KB — the lazy tiers load only
