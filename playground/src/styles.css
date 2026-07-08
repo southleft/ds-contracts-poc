@@ -379,10 +379,11 @@ label {
   font-size: 12px;
 }
 
-/* Six source tabs share the rail's width — tighter than the output tabs. */
+/* Up to seven source tabs (Workspace appears with the first import) share
+ * the rail's 320px — tighter than the output tabs. */
 .pg__rail > .tabs > .tabs__tab {
-  padding: 7px 5px;
-  font-size: 11.5px;
+  padding: 7px 3px;
+  font-size: 10.5px;
 }
 
 /* Marker on the Tokens tab while a pasted user tree is the active source. */
