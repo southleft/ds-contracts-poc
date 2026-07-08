@@ -250,6 +250,19 @@ real credentials (env-file, never in chat, never printed):
 The playground is **launched**: https://ds-contracts-playground.pages.dev
 
 
+## 2026-07-08 — Playground: refusals point at their line; imports collect in a workspace
+
+A refusal now lands three ways: named under the editor, as a danger
+background on the offending line (dependency-free textarea overlay — zod
+paths walked, generator quotes anchored, unresolvable refusals highlight
+nothing), and as a click that scrolls there. Every load remembers its
+pristine original (one-click Reset; the onboarding strip gains the reset
+step). Every successful import — Figma, code, prompt, JSON — lands in a
+session workspace (capped at 30 with named eviction) that restores contract
++ receipts and tells the design↔code switch story in one dismissible line.
+A plain help drawer covers every way in. 56/56, no core changes.
+
+
 ---
 
 **Standing scoreboard** (updated with each milestone):
