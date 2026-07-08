@@ -12,6 +12,7 @@ import { Governance } from './views/Governance';
 import { Parity } from './views/Parity';
 import { Context } from './views/Context';
 import { Docs } from './views/Docs';
+import { CodeEditorSim } from './views/CodeEditorSim';
 
 type Theme = 'light' | 'dark';
 type Brand = 'default' | 'aurora';
@@ -21,6 +22,7 @@ const NAV_ITEMS = [
   { href: '#/components', label: 'Components', section: 'components' },
   { href: '#/tokens', label: 'Tokens', section: 'tokens' },
   { href: '#/governance', label: 'Governance', section: 'governance' },
+  { href: '#/editor', label: 'Code Editor', section: 'editor' },
   { href: '#/context', label: 'Context', section: 'context' },
   { href: '#/parity', label: 'Parity', section: 'parity' },
   { href: '#/docs', label: 'Docs', section: 'docs' },
@@ -75,6 +77,8 @@ export function App() {
     view = <Tokens />;
   } else if (section === 'governance') {
     view = <Governance />;
+  } else if (section === 'editor') {
+    view = <CodeEditorSim />;
   } else if (section === 'context') {
     view = <Context />;
   } else if (section === 'parity') {
