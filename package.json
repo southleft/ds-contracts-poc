@@ -23,6 +23,8 @@
     "build:dashboard": "vite build --config dashboard/vite.config.ts",
     "extract:code": "tsx extract/run.ts code",
     "roundtrip:code": "tsx extract/roundtrip-code.ts",
+    "extract:figma": "tsx extract/figma/propose.ts",
+    "extract:figma:roundtrip": "tsx extract/figma/roundtrip.ts",
     "reconcile": "tsx extract/run.ts reconcile",
     "diagnose": "tsx parity/diagnose.ts",
     "figma:serve": "node scripts/figma-serve.mjs",
