@@ -262,15 +262,19 @@ label {
 
 .tabs {
   display: flex;
+  height: 37px;
+  flex-shrink: 0;
   border-bottom: 1px solid var(--pg-border);
   overflow-x: auto;
 }
 
 .tabs__tab {
+  display: inline-flex;
+  align-items: center;
   border: none;
   border-bottom: 2px solid transparent;
   background: none;
-  padding: 7px 12px;
+  padding: 0 12px;
   font-size: 13px;
   color: var(--pg-muted);
   white-space: nowrap;
@@ -481,7 +485,7 @@ label {
 .pg {
   flex: 1;
   display: grid;
-  grid-template-columns: 300px minmax(360px, 1fr) minmax(420px, 1.1fr);
+  grid-template-columns: 320px minmax(360px, 1fr) minmax(420px, 1.1fr);
   min-height: 0;
 }
 
@@ -524,9 +528,12 @@ label {
 
 .pane__head {
   display: flex;
-  align-items: baseline;
+  align-items: center;
   gap: 8px;
-  padding: 10px 14px 0;
+  height: 37px;
+  flex-shrink: 0;
+  padding: 0 14px;
+  border-bottom: 1px solid var(--pg-border);
 }
 
 .pane__title {
@@ -599,7 +606,6 @@ label {
 .editor__textarea {
   flex: 1;
   border: none;
-  border-top: 1px solid var(--pg-border);
   padding: 12px 14px;
   background: var(--pg-bg);
   min-height: 240px;
