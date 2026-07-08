@@ -14,6 +14,15 @@ import {
 } from '../engine/figma-import';
 import { importFromGithubUrl } from '../engine/github-import';
 import {
+  ANTHROPIC_MODEL,
+  generateFromPrompt,
+  MAX_FIX_ROUNDS,
+  requestFix,
+  type FetchLike,
+  type PromptResult,
+  type PromptSession,
+} from '../engine/prompt-import';
+import {
   applyUserTokens,
   resetToRepoTokens,
   STARTER_USER_TOKENS,
@@ -26,7 +35,7 @@ import { CopyButton } from '../components/CopyButton';
 import { PreviewFrame } from '../components/PreviewFrame';
 import { ReceiptsPanel } from '../components/ReceiptsPanel';
 
-type SourceTab = 'examples' | 'figma' | 'code' | 'json' | 'tokens';
+type SourceTab = 'examples' | 'describe' | 'figma' | 'code' | 'json' | 'tokens';
 const OUTPUT_LABELS: Record<string, string> = {
   react: 'React',
   html: 'HTML + CSS',
@@ -315,6 +324,127 @@ export function Playground() {
     setActiveExample(null);
   };
 
+  // ---------------------------------------------------------- describe state
+  const [descPrompt, setDescPrompt] = useState('');
+  const [descKey, setDescKey] = useState('');
+  const [descBusy, setDescBusy] = useState<string | null>(null);
+  const [descError, setDescError] = useState<string | null>(null);
+  // Refusals from the LAST generation — shown by the editor, echoed here to
+  // gate the one-click fix round. Never auto-retried.
+  const [descRefusals, setDescRefusals] = useState<string[] | null>(null);
+  const [descRounds, setDescRounds] = useState(0);
+  const descSession = useRef<PromptSession | null>(null);
+  // Demo mode swaps ONLY the transport (recorded-shape fixture responses);
+  // kept for the session so fix rounds ride the same transport.
+  const descTransport = useRef<FetchLike | null>(null);
+
+  const applyPromptResult = (result: PromptResult, origin: string) => {
+    descSession.current = result.session;
+    setDescRounds(result.session.rounds);
+    const contractText = pretty(result.contract);
+    setText(contractText);
+    setProvenance(origin);
+    setActiveExample(null);
+    // The SAME governed editor referees the model output — run it now so the
+    // fix affordance appears exactly when the refusals do.
+    const v = validateContractText(contractText);
+    const issues =
+      v.status === 'schema-error' || v.status === 'violations'
+        ? v.issues
+        : v.status === 'json-error'
+          ? [v.message]
+          : null;
+    setDescRefusals(issues);
+    const { usage, rounds } = result.session;
+    setReceipts({
+      source: origin,
+      groups: [
+        {
+          title: 'Prompt generation',
+          kind: 'note',
+          entries: [
+            { message: `model: ${ANTHROPIC_MODEL}` },
+            {
+              message:
+                usage.inputTokens !== null || usage.outputTokens !== null
+                  ? `tokens: ${usage.inputTokens ?? '?'} in / ${usage.outputTokens ?? '?'} out (cumulative)`
+                  : 'tokens: not reported by the response',
+            },
+            { message: `fix rounds used: ${rounds} of ${MAX_FIX_ROUNDS}` },
+            ...(issues
+              ? [
+                  {
+                    message: `the proposal is REFUSED by name (${issues.length} violation${
+                      issues.length === 1 ? '' : 's'
+                    }, shown under the editor) — nothing is auto-retried; the fix round is yours to trigger`,
+                  },
+                ]
+              : []),
+          ],
+        },
+      ],
+    });
+  };
+
+  const runDescribe = async (demo: boolean) => {
+    let prompt = descPrompt.trim();
+    setDescError(null);
+    setDescRefusals(null);
+    setDescBusy(
+      demo
+        ? 'Generating over the recorded fixture (identical code path, fixture transport)…'
+        : `Asking ${ANTHROPIC_MODEL} (browser-direct)…`,
+    );
+    try {
+      let fetchImpl: FetchLike | undefined;
+      if (demo) {
+        const { createDemoTransport, DEMO_PROMPT } = await import('../engine/fixtures/prompt-demo');
+        descTransport.current = createDemoTransport();
+        fetchImpl = descTransport.current;
+        if (!prompt) {
+          prompt = DEMO_PROMPT;
+          setDescPrompt(DEMO_PROMPT);
+        }
+      } else {
+        descTransport.current = null;
+      }
+      const result = await generateFromPrompt(prompt, demo ? 'demo-fixture-key' : descKey.trim(), {
+        fetchImpl,
+      });
+      applyPromptResult(
+        result,
+        demo ? 'prompt generation (demo fixture)' : `prompt generation — ${ANTHROPIC_MODEL}`,
+      );
+    } catch (e) {
+      setDescError(e instanceof Error ? e.message : String(e));
+    } finally {
+      setDescBusy(null);
+    }
+  };
+
+  const runDescribeFix = async () => {
+    const session = descSession.current;
+    if (!session || !descRefusals) return;
+    setDescError(null);
+    setDescBusy(`Sending the named refusals back (round ${session.rounds + 1} of ${MAX_FIX_ROUNDS})…`);
+    try {
+      const demo = descTransport.current !== null;
+      const result = await requestFix(session, descRefusals, demo ? 'demo-fixture-key' : descKey.trim(), {
+        fetchImpl: descTransport.current ?? undefined,
+      });
+      applyPromptResult(
+        result,
+        demo
+          ? `prompt generation (demo fixture) — fix round ${result.session.rounds}`
+          : `prompt generation — ${ANTHROPIC_MODEL}, fix round ${result.session.rounds}`,
+      );
+    } catch (e) {
+      setDescError(e instanceof Error ? e.message : String(e));
+    } finally {
+      setDescBusy(null);
+    }
+  };
+
   // ------------------------------------------------------------ tokens state
   const [tokensText, setTokensText] = useState(() => storedUserTokensText());
   const [tokensErrors, setTokensErrors] = useState<string[] | null>(null);
@@ -421,7 +551,16 @@ export function Playground() {
       {/* ------------------------------------------------------- left rail */}
       <aside className="pg__rail">
         <div className="tabs" role="tablist" aria-label="Input source">
-          {(['examples', 'figma', 'code', 'json', 'tokens'] as const).map((tab) => (
+          {(
+            [
+              ['examples', 'Examples'],
+              ['describe', 'Describe'],
+              ['figma', 'Figma'],
+              ['code', 'Code'],
+              ['json', 'JSON'],
+              ['tokens', 'Tokens'],
+            ] as const
+          ).map(([tab, label]) => (
             <button
               key={tab}
               type="button"
@@ -430,15 +569,7 @@ export function Playground() {
               className={`tabs__tab${sourceTab === tab ? ' is-active' : ''}`}
               onClick={() => setSourceTab(tab)}
             >
-              {tab === 'examples'
-                ? 'Examples'
-                : tab === 'figma'
-                  ? 'Figma'
-                  : tab === 'code'
-                    ? 'Code'
-                    : tab === 'json'
-                      ? 'JSON'
-                      : 'Tokens'}
+              {label}
               {tab === 'tokens' && tokenSource.kind === 'user' ? (
                 <span className="tabs__dot" aria-label="user tokens active" />
               ) : null}
@@ -486,6 +617,81 @@ export function Playground() {
                 ))}
               </select>
             </div>
+          </div>
+        )}
+
+        {sourceTab === 'describe' && (
+          <div className="rail__section">
+            <div className="field">
+              <label htmlFor="desc-prompt">Describe a component</label>
+              <textarea
+                id="desc-prompt"
+                rows={5}
+                value={descPrompt}
+                onChange={(e) => setDescPrompt(e.target.value)}
+                placeholder="A small pill-shaped tag that labels content with a feedback tone: info, success, warning, or danger."
+              />
+            </div>
+            <div className="field">
+              <label htmlFor="desc-key">Anthropic API key</label>
+              <input
+                id="desc-key"
+                type="password"
+                value={descKey}
+                onChange={(e) => setDescKey(e.target.value)}
+                autoComplete="off"
+                placeholder="sk-ant-…"
+              />
+              <p className="hint">
+                Session-only, like the Figma token. Sent browser-direct to api.anthropic.com and
+                nowhere else — never stored, never persisted, gone on reload.
+              </p>
+            </div>
+            <button
+              type="button"
+              className="btn--primary"
+              disabled={!!descBusy || !descPrompt.trim() || !descKey.trim()}
+              onClick={() => void runDescribe(false)}
+            >
+              {descBusy ? 'Working…' : 'Generate contract'}
+            </button>
+            <p className="hint">
+              Model: {ANTHROPIC_MODEL}. The output is constrained to the contract shape by a forced
+              tool call — never freeform code — and lands in the same governed editor as every other
+              source: ContractSchema plus the generator referee it, refusals by name.
+            </p>
+
+            <p className="hint" style={{ marginTop: 16 }}>
+              No key handy? Run the identical code path over a recorded-shape response — fixture
+              transport, same governance. The first round deliberately references a token that does
+              not exist, so you can watch the named refusal and the fix round.
+            </p>
+            <button type="button" disabled={!!descBusy} onClick={() => void runDescribe(true)}>
+              {descBusy ? 'Working…' : 'Demo generate (recorded fixture)'}
+            </button>
+
+            {descBusy ? <p className="hint">{descBusy}</p> : null}
+            {descError ? <div className="notice notice--error">{descError}</div> : null}
+
+            {descRefusals && descSession.current ? (
+              <div className="notice" style={{ marginTop: 12 }}>
+                The proposal was refused by name ({descRefusals.length} violation
+                {descRefusals.length === 1 ? '' : 's'} under the editor). Nothing retries silently —
+                send the refusal text back yourself:
+                <div style={{ marginTop: 8 }}>
+                  {descRounds < MAX_FIX_ROUNDS ? (
+                    <button type="button" disabled={!!descBusy} onClick={() => void runDescribeFix()}>
+                      Ask the model to fix (round {descRounds + 1} of {MAX_FIX_ROUNDS})
+                    </button>
+                  ) : (
+                    <span className="hint">
+                      Fix round limit reached ({MAX_FIX_ROUNDS}) — edit the contract by hand; the
+                      editor referees every keystroke.
+                    </span>
+                  )}
+                </div>
+              </div>
+            ) : null}
           </div>
         )}
 
