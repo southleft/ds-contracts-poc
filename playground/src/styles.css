@@ -297,6 +297,12 @@ label {
   font-size: 12px;
 }
 
+/* Five source tabs share the rail's width — tighter than the output tabs. */
+.pg__rail > .tabs > .tabs__tab {
+  padding: 7px 8px;
+  font-size: 12.5px;
+}
+
 /* Marker on the Tokens tab while a pasted user tree is the active source. */
 .tabs__dot {
   display: inline-block;

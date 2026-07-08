@@ -125,8 +125,24 @@ browser. No backend, no analytics, no accounts.
 5. **Code tab** — paste TSX+CSS (or load the Callout example): the
    TypeScript compiler arrives as a lazy chunk, raw values are reported
    with candidates in the Receipts panel, nothing invented.
+   **GitHub URL mode (W7)**: paste a public github.com file URL (blob, raw,
+   or directory form) — e.g. this repo's own
+   `src/components/Badge/Badge.tsx` — the TSX is fetched browser-direct,
+   the co-located `*.module.css` is auto-discovered (the component's own
+   import → same-name sibling → contents-API listing, each step receipted),
+   and the same lazy propose path runs. Errors are named: 404 (with the
+   private-repos-also-404 caveat), rate-limit with reset time, file too
+   large, not-a-TSX.
 6. **JSON tab** — paste a contract (straight to the editor, schema-refereed)
    or a dump v1 (runs the same proposer as the Figma import).
+7. **Tokens tab (W8)** — bring your own tokens: paste DTCG JSON (a single
+   tree or an array; session-only, sessionStorage) and every consumer
+   rebinds — validation inventory, preview stylesheet (regenerated from the
+   paste by token-css.ts, derived from scripts/build-tokens.mjs), code-import
+   var() matching, Figma nearest-token suggestions, inline-emitter literals.
+   The starter tree covers exactly ds.badge with values the repo never
+   shipped; load any other contract and the generator refuses by name.
+   A pasted tree is modeless — light and dark resolve identically.
 
 Bundle tiers (vite build, gzip): initial ≈ 153 KB · prettier chunk ≈ 339 KB ·
 TypeScript chunk ≈ 985 KB · REST fixtures ≈ 3 KB — the lazy tiers load only
