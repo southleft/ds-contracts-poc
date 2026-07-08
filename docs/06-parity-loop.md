@@ -64,3 +64,7 @@ Snapshots are committed as point-in-time evidence; in CI you'd refresh them head
 - Visual/pixel parity is out of scope by design — the loop guards **structure and bindings** (what drifts, and what breaks AI generation). Taste stays human.
 - Snapshot refresh is an agent step, not yet a headless script.
 - Conflict case (both surfaces changed the same thing between runs) reports as two findings; resolution order is a human call.
+
+## Pending first sync (v7)
+
+The differ's report has a `pending` section: a contract with null design anchors was never synced — that is workflow state, not drift between surfaces that were once in sync. Pending contracts are visible in the report but never fail the exit code; once anchors exist, a missing set is a hard BEHIND again.

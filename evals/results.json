@@ -1,6 +1,6 @@
 {
-  "passed": 37,
-  "total": 37,
+  "passed": 43,
+  "total": 43,
   "results": [
     {
       "id": "refuse-unknown-token-reference",
@@ -185,6 +185,36 @@
     {
       "id": "promotion-converges",
       "claim": "C4-convergence",
+      "pass": true
+    },
+    {
+      "id": "refuse-elementByProp-gaps",
+      "claim": "C2-refusal",
+      "pass": true
+    },
+    {
+      "id": "layoutByProp-flip-both-surfaces",
+      "claim": "C1-determinism",
+      "pass": true
+    },
+    {
+      "id": "refuse-stylesWhen-outside-whitelist",
+      "claim": "C2-refusal",
+      "pass": true
+    },
+    {
+      "id": "refuse-overlay-inflow-conflicts",
+      "claim": "C2-refusal",
+      "pass": true
+    },
+    {
+      "id": "array-prop-code-only-skipped-everywhere",
+      "claim": "C3-detection",
+      "pass": true
+    },
+    {
+      "id": "pending-first-sync-not-drift",
+      "claim": "C3-detection",
       "pass": true
     }
   ]

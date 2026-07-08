@@ -848,6 +848,101 @@ const cases: Case[] = [
       if (after.length !== 1) throw new Error(`Unexpected extra findings: ${JSON.stringify(after)}`);
     },
   },
+  {
+    // v7 elementByProp: partial maps and unknown elements must be refused by name.
+    id: 'refuse-elementByProp-gaps',
+    claim: 'C2-refusal',
+    run: () => {
+      editJson('contracts/heading.contract.json', (c) => { delete c.semantics.elementByProp.map['6']; });
+      let r = generate();
+      if (r.status === 0 || !r.out.includes('elementByProp map is missing enum value "6"')) throw new Error('Partial map not refused by name');
+      editJson('contracts/heading.contract.json', (c) => { c.semantics.elementByProp.map['6'] = 'marquee'; });
+      r = generate();
+      if (r.status === 0 || !r.out.includes('unknown element "marquee"')) throw new Error('Unknown element not refused by name');
+    },
+  },
+  {
+    // v7 layoutByProp: the ChatMessage sender flip must land on BOTH surfaces —
+    // reversed CSS in code, reversed compiled child order on the canvas.
+    id: 'layoutByProp-flip-both-surfaces',
+    claim: 'C1-determinism',
+    run: () => {
+      generate();
+      const css = readFileSync(path.join(SCRATCH, 'src/components/ChatMessage/ChatMessage.module.css'), 'utf8');
+      if (!/\.sender-user \{\n  flex-direction: row-reverse;/.test(css)) throw new Error('root flip rule missing');
+      if (!/\.sender-user \.body \{\n  align-items: flex-end;/.test(css)) throw new Error('body override rule missing');
+      run(TSX, ['scripts/generate-figma.ts']);
+      const f = readdirSync(path.join(SCRATCH, 'figma-sync')).find((n) => /-chatmessage\.js$/.test(n))!;
+      const variants = JSON.parse(readFileSync(path.join(SCRATCH, 'figma-sync', f), 'utf8').match(/const VARIANTS = (\[[\s\S]*?\n\])/)![1]);
+      const user = variants.find((v: any) => v.name.includes('Sender=User'));
+      if (user.spec.children.map((c: any) => c.name).join(',') !== 'body,avatarSlot') throw new Error('canvas child order not reversed per variant');
+    },
+  },
+  {
+    // v7 stylesWhen: non-whitelisted properties and token-shaped values refused by name.
+    id: 'refuse-stylesWhen-outside-whitelist',
+    claim: 'C2-refusal',
+    run: () => {
+      editJson('contracts/text-field.contract.json', (c) => { c.anatomy.root.stylesWhen[0].styles['background-color'] = 'red'; });
+      let r = generate();
+      if (r.status === 0 || !r.out.includes('not in the literal whitelist')) throw new Error('Non-whitelisted property not refused by name');
+      editJson('contracts/text-field.contract.json', (c) => {
+        delete c.anatomy.root.stylesWhen[0].styles['background-color'];
+        c.anatomy.root.stylesWhen[0].styles.opacity = '{opacity.disabled}';
+      });
+      r = generate();
+      if (r.status === 0 || !r.out.includes('looks like a token reference')) throw new Error('Token-shaped value not refused by name');
+    },
+  },
+  {
+    // v7 overlay: an out-of-flow part claiming in-flow growth is a contradiction.
+    id: 'refuse-overlay-inflow-conflicts',
+    claim: 'C2-refusal',
+    run: () => {
+      editJson('contracts/banner.contract.json', (c) => { c.anatomy.root.parts.endArea.overlay = { placement: 'bottom' }; c.anatomy.root.parts.endArea.layout = { grow: true }; });
+      const r = generate();
+      if (r.status === 0 || !r.out.includes('cannot also grow')) throw new Error('overlay+grow not refused by name');
+    },
+  },
+  {
+    // v7 arrayOf/kind NONE: code-only structured props must be skipped by every
+    // design-side consumer and never reported as drift; scalar NONE refused.
+    id: 'array-prop-code-only-skipped-everywhere',
+    claim: 'C3-detection',
+    run: () => {
+      cpSync(path.join(ROOT, 'evals', 'fixtures', 'array-prop.contract.json'), path.join(SCRATCH, 'contracts', 'array-prop.contract.json'));
+      editJson('contracts/array-prop.contract.json', (c) => { c.$schema = './contract.schema.json'; });
+      if (generate().status !== 0) throw new Error('arrayOf fixture failed to generate');
+      const tsx = readFileSync(path.join(SCRATCH, 'src/components/CrumbTrail/CrumbTrail.tsx'), 'utf8');
+      if (!tsx.includes('items?: Array<{ label: string; href: string; isCurrent: boolean }>')) throw new Error('array TS type not emitted');
+      if (/\bitems =/.test(tsx)) throw new Error('array prop must have no default destructure');
+      run(TSX, ['scripts/generate-figma.ts']);
+      const f = readdirSync(path.join(SCRATCH, 'figma-sync')).find((n) => n.includes('crumbtrail'))!;
+      const script = readFileSync(path.join(SCRATCH, 'figma-sync', f), 'utf8');
+      if (JSON.parse(script.match(/const TEXT_PROPS = (\[.*?\])/)![1]).length !== 0) throw new Error('NONE prop leaked onto the canvas');
+      parity();
+      const report = JSON.parse(readFileSync(path.join(SCRATCH, 'parity', 'report.json'), 'utf8'));
+      if (report.findings.some((x: any) => x.subject.startsWith('CrumbTrail.'))) throw new Error('NONE prop reported as drift');
+      editJson('contracts/array-prop.contract.json', (c) => { c.props[1].type = 'text'; });
+      const r = generate();
+      if (r.status === 0 || !r.out.includes('but is not an arrayOf prop')) throw new Error('scalar NONE not refused by name');
+      rmSync(path.join(SCRATCH, 'contracts', 'array-prop.contract.json'));
+    },
+  },
+  {
+    // Pending-first-sync: null anchors are workflow state, not drift; anchored
+    // but missing stays a hard BEHIND.
+    id: 'pending-first-sync-not-drift',
+    claim: 'C3-detection',
+    run: () => {
+      if (parity().status !== 0) throw new Error('never-synced contract failed parity');
+      const report = JSON.parse(readFileSync(path.join(SCRATCH, 'parity', 'report.json'), 'utf8'));
+      if (!report.pending?.some((p: any) => p.subject === 'Heading')) throw new Error('Heading not routed to pending');
+      editJson('contracts/heading.contract.json', (c) => { c.anchors.figma.componentSetKey = 'deadbeef'; });
+      if (parity().status === 0) throw new Error('ANCHORED missing set must stay a hard BEHIND');
+      expectFinding(readReport(), 'figma', 'behind', 'Heading');
+    },
+  },
 ];
 
 // ---------------------------------------------------------------------------

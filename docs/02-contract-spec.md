@@ -105,6 +105,20 @@ Guardrails, enforced at build time: a trigger part must be a `<button>` (keyboar
 
 **What events deliberately do NOT cover:** drag, typeahead, focus trapping, animation timing — behavior whose truth can't be verified on both surfaces. That stays a hand-written layer, and the contract refuses to pretend otherwise.
 
+## v7 additions — the expressiveness round
+
+Five features from the second schema gauntlet, each shipped with a consuming contract and eval coverage.
+
+**Element by prop.** `semantics.elementByProp: { prop, map }` lets the rendered HTML element follow an enum prop. Heading's `level` maps `"2" → h2`; code emits an `ELEMENT_MAP` lookup and renders a dynamic tag (`semantics.element` is the fallback). The canvas is unaffected — text nodes carry no element semantics, a declared fidelity boundary. The element vocabulary now includes `h1`–`h6`. Build-time guardrails: the prop must be a declared enum, the map must cover every value, and every mapped element must be in the vocabulary.
+
+**Layout by prop.** `Part.layoutByProp: { prop, map }` applies per-enum-value layout overrides merged over the base `layout`. Partial coverage is the point — only deviating values appear (ChatMessage: `sender=user` flips `direction: row-reverse` on the root and `align: end` on the body → right-aligned user messages). Code emits the override under the root's enum class; the canvas resolves it per variant at compile time — reversed directions, which have no auto-layout equivalent, render as the same children in reversed order. Overrides are limited to display/direction/align/justify — `grow` and `overlap` stay per-part invariants — and component-instance parts refuse overrides (the child contract owns its layout).
+
+**Conditional literal styles.** `Part.stylesWhen: [{ prop, equals?, styles }]` applies literal CSS — never tokens — when a prop matches. Boolean conditions ride the per-boolean data attribute the generator already emits (`.root[data-is-disabled] { … }`; native `disabled` uses `:disabled`); enum conditions ride the root's enum class. The whitelist is deliberately tight (position/insets/z-index/overflow/text-overflow/white-space/display/opacity/pointer-events/transform/transition/flex-direction/justify-content/align-items/cursor/text-decoration): anything with a token vocabulary belongs in `tokens`, and a brace-wrapped value here is refused by name. Fidelity: v1 applies nothing on the canvas — boolean properties can bind visibility, not style — a declared code-side surface, like events.
+
+**Overlay parts.** `Part.overlay: { placement: top | bottom | start | end }` renders the part out of flow, attached to one edge of the root — Tooltip bubbles, Combobox popups. Code: `position: absolute` with placement-derived insets and `position: relative` on the root. Canvas: `layoutPositioning: 'ABSOLUTE'` with placement-derived constraints, including through the amend path. Guardrails: the root cannot be an overlay, and an overlay part cannot also `grow` or `overlap`.
+
+**Structured props.** `type: { arrayOf: Record<field, 'text' | 'number' | 'boolean'> }` declares a list-of-records prop (Breadcrumbs items, Select options). Code-only by declared fidelity limit — the canvas has no list-of-records property type — so the design binding is `{ "kind": "NONE" }` with no `property`, and every design-side consumer (figma generator, differ, diagnose) skips the prop rather than reporting it behind. Code renders `items?: Array<{ … }>`: no default destructure (undefined means "not provided", never a silent `[]`) and excluded from `...rest`. Guardrails: `arrayOf` ⇔ `kind: "NONE"` in both directions, no defaults, at least one field.
+
 ## Anchors
 
 ```jsonc
