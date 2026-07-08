@@ -1,14 +1,12 @@
 {
   "summary": {
-    "total": 1,
-    "acknowledged": 0,
-    "bySurface": {
-      "figma": {
-        "mismatch": 1
-      }
-    }
+    "total": 0,
+    "acknowledged": 1,
+    "pending": 1,
+    "bySurface": {}
   },
-  "findings": [
+  "findings": [],
+  "acknowledged": [
     {
       "surface": "figma",
       "classification": "mismatch",
@@ -17,7 +15,13 @@
       "remedy": "Adopt into contract (promotion) or re-sync the set"
     }
   ],
-  "acknowledged": [],
+  "pending": [
+    {
+      "subject": "Heading",
+      "detail": "No design anchor yet — the contract has never been synced to Figma (pending first generation, not drift)",
+      "remedy": "Run its figma-sync script, write back anchors (npm run anchors:writeback), re-extract snapshots"
+    }
+  ],
   "checkedContracts": [
     "ds.accordion-item@1.1.0",
     "ds.avatar-group@1.0.0",
@@ -30,7 +34,7 @@
     "ds.button@1.4.0",
     "ds.card@1.1.0",
     "ds.chat-message-metadata@1.0.0",
-    "ds.chat-message@1.0.0",
+    "ds.chat-message@1.1.0",
     "ds.chat-system-message@1.0.0",
     "ds.checkbox@1.1.0",
     "ds.citation@1.0.0",
@@ -38,6 +42,7 @@
     "ds.divider@1.0.0",
     "ds.empty-state@1.0.0",
     "ds.field@1.0.0",
+    "ds.heading@1.0.0",
     "ds.icon-button@1.0.0",
     "ds.inline@1.0.0",
     "ds.kbd@1.0.0",
@@ -62,7 +67,7 @@
     "ds.table-row@1.1.0",
     "ds.table@1.1.0",
     "ds.text-area@1.0.0",
-    "ds.text-field@1.0.0",
+    "ds.text-field@1.1.0",
     "ds.toast@1.0.0",
     "ds.token@1.0.0",
     "ds.toolbar@1.0.0",

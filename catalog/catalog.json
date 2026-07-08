@@ -2,7 +2,7 @@
   "system": {
     "name": "DS Contracts POC",
     "catalogVersion": "0.1.0",
-    "gitCommit": "95bdcf8",
+    "gitCommit": "66fede6",
     "source": "Compiled from contracts/*.contract.json + tokens/ + context/rules.json — do not edit."
   },
   "package": {
@@ -937,9 +937,9 @@
     {
       "id": "ds.chat-message",
       "name": "ChatMessage",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "status": "draft",
-      "description": "Sender-context wrapper for a chat message: avatar, name, bubble content, and metadata. API mirrors industry convention (Astryx ChatMessage); sender-based alignment flipping needs layout-by-enum — a documented gap; the bubble color follows sender.",
+      "description": "Sender-context wrapper for a chat message: avatar, name, bubble content, and metadata. API mirrors industry convention (Astryx ChatMessage); the bubble color follows sender, and sender-based alignment flips via layoutByProp — user messages render right-aligned (row-reverse root, end-aligned body) on both surfaces.",
       "figma": {
         "representation": "component",
         "componentSetKey": "4af367f1f1c5044640cd31d2cbdd3e575b1bbb54"
@@ -1266,6 +1266,47 @@
         "accepts": [],
         "acceptsMode": "open",
         "description": "The wrapped form control."
+      },
+      "slots": []
+    },
+    {
+      "id": "ds.heading",
+      "name": "Heading",
+      "version": "1.0.0",
+      "status": "draft",
+      "description": "Sectioning heading whose rendered HTML element follows the level prop (h1–h6) via semantics.elementByProp, with a visual size ramp on the existing control type scale — document outline and visual weight are deliberately independent axes. Text nodes carry no element semantics, so only code renders the element itself.",
+      "figma": {
+        "representation": "component",
+        "componentSetKey": null
+      },
+      "props": [
+        {
+          "name": "level",
+          "type": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6"
+          ],
+          "default": "2",
+          "description": "Document outline level — drives the rendered element (h1–h6) and the size ramp."
+        },
+        {
+          "name": "size",
+          "type": [
+            "sm",
+            "md",
+            "lg"
+          ],
+          "default": "lg",
+          "description": "Visual size on the control type scale — independent of the document outline level."
+        }
+      ],
+      "children": {
+        "kind": "text",
+        "description": "Heading text."
       },
       "slots": []
     },
@@ -2139,9 +2180,9 @@
     {
       "id": "ds.text-field",
       "name": "TextField",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "status": "draft",
-      "description": "Single-line text input for short-form values — names, emails, search queries. API mirrors industry convention (Astryx TextInput): required label, description, size scale. The wrapping-label anatomy gives implicit label association.",
+      "description": "Single-line text input for short-form values — names, emails, search queries. API mirrors industry convention (Astryx TextInput): required label, description, size scale. The wrapping-label anatomy gives implicit label association. Disabled fields dim and drop pointer interaction via stylesWhen (code-side conditional styling; a declared canvas fidelity limit).",
       "figma": {
         "representation": "component",
         "componentSetKey": "83b5ead2b038477a13c0647de71ee55bf458e0b3"

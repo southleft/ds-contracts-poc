@@ -163,10 +163,11 @@ for (const contract of contracts) {
   const claimed = new Set<string>();
   for (const p of contract.props) {
     const fig = p.bindings.figma;
-    if (!fig?.property) continue;
+    if (!fig?.property) continue; // kind NONE (arrayOf): code-only by declared fidelity limit
+    const figProperty = fig.property;
     if (isEnum(p.type) && fig.kind === 'VARIANT') {
       const axis = Object.entries(d.variantProps).find(
-        ([an]) => normalizeName(an) === normalizeName(fig.property),
+        ([an]) => normalizeName(an) === normalizeName(figProperty),
       );
       if (!axis) {
         add({
@@ -193,7 +194,7 @@ for (const contract of contracts) {
       }
     } else if (fig.kind === 'BOOLEAN' || fig.kind === 'TEXT') {
       const pool = fig.kind === 'BOOLEAN' ? d.boolProps : d.textProps;
-      const hit = pool.find((n) => normalizeName(n) === normalizeName(fig.property));
+      const hit = pool.find((n) => normalizeName(n) === normalizeName(figProperty));
       if (hit) claimed.add(hit);
       else {
         add({

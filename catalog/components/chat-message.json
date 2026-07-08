@@ -1,9 +1,9 @@
 {
   "id": "ds.chat-message",
   "name": "ChatMessage",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "status": "draft",
-  "description": "Sender-context wrapper for a chat message: avatar, name, bubble content, and metadata. API mirrors industry convention (Astryx ChatMessage); sender-based alignment flipping needs layout-by-enum — a documented gap; the bubble color follows sender.",
+  "description": "Sender-context wrapper for a chat message: avatar, name, bubble content, and metadata. API mirrors industry convention (Astryx ChatMessage); the bubble color follows sender, and sender-based alignment flips via layoutByProp — user messages render right-aligned (row-reverse root, end-aligned body) on both surfaces.",
   "figma": {
     "representation": "component",
     "componentSetKey": "4af367f1f1c5044640cd31d2cbdd3e575b1bbb54"

@@ -1,6 +1,6 @@
 /**
  * GENERATED FILE — DO NOT EDIT.
- * Source of truth: contracts/chat-message.contract.json (ds.chat-message v1.0.0)
+ * Source of truth: contracts/chat-message.contract.json (ds.chat-message v1.1.0)
  * Regenerate with: npm run generate
  */
 import type { Meta, StoryObj } from '@storybook/react-vite';
@@ -16,7 +16,7 @@ const meta = {
     docs: {
       description: {
         component:
-          'Sender-context wrapper for a chat message: avatar, name, bubble content, and metadata. API mirrors industry convention (Astryx ChatMessage); sender-based alignment flipping needs layout-by-enum — a documented gap; the bubble color follows sender.',
+          'Sender-context wrapper for a chat message: avatar, name, bubble content, and metadata. API mirrors industry convention (Astryx ChatMessage); the bubble color follows sender, and sender-based alignment flips via layoutByProp — user messages render right-aligned (row-reverse root, end-aligned body) on both surfaces.',
       },
     },
   },

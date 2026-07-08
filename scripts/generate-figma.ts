@@ -30,6 +30,7 @@ import path from 'node:path';
 import {
   ContractSchema,
   pascal,
+  resolveLayout,
   slotFigmaProperty,
   slotVisibilityProperty,
   sortByDependencies,
@@ -346,6 +347,9 @@ interface NodeSpec {
   /** Meter fill: fraction of the parent track's width (the canvas renders
    *  the contract defaults' state). Runtime resizes after append. */
   pct?: number;
+  /** v7 overlay: runtime sets layoutPositioning ABSOLUTE after append, with
+   *  placement-derived constraints and position. */
+  overlay?: { placement: 'top' | 'bottom' | 'start' | 'end' };
   // svg (icon parts) — markup with currentColor resolved to the variant's
   // literal foreground color (SVG paint is not variable-bindable on import)
   svg?: string;
@@ -390,18 +394,26 @@ const JUSTIFY_FIGMA: Record<string, LayoutSpec['primary']> = {
   'space-between': 'SPACE_BETWEEN',
 };
 
-function layoutSpec(part: Part, isRoot: boolean): LayoutSpec {
-  const l = part.layout;
+function layoutSpec(part: Part, isRoot: boolean, subst: Record<string, string> = {}): LayoutSpec {
+  // v7 layoutByProp: each canvas variant is compiled with every enum axis's
+  // value (subst), so the per-variant layout override resolves right here.
+  const l = resolveLayout(part, subst);
   if (!l && isRoot) {
     return { mode: 'HORIZONTAL', primary: 'CENTER', counter: 'CENTER' };
   }
   return {
-    mode: l?.direction === 'column' ? 'VERTICAL' : 'HORIZONTAL',
+    mode: l?.direction?.startsWith('column') ? 'VERTICAL' : 'HORIZONTAL',
     primary: l?.justify ? JUSTIFY_FIGMA[l.justify] : 'MIN',
     counter: l?.align ? ALIGN_FIGMA[l.align] : 'MIN',
     stretchChildren: l?.align === 'stretch' || undefined,
   };
 }
+
+/** Reversed flex directions have no auto-layout equivalent — the honest
+ *  canvas rendering is the same children in reversed order, resolved per
+ *  variant at compile time. */
+const isReversed = (part: Part, subst: Record<string, string>): boolean =>
+  resolveLayout(part, subst)?.direction?.endsWith('-reverse') ?? false;
 
 /** Distribute a part's CSS token bindings into Figma spec fields. */
 function applyTokens(
@@ -576,6 +588,7 @@ function mapDepProps(
   for (const [propName, rawValue] of Object.entries(props)) {
     const depProp = dep.props.find((p) => p.name === propName);
     if (!depProp) continue;
+    if (depProp.bindings.figma.kind === 'NONE') continue; // code-only (v7 arrayOf)
     let value = rawValue;
     if (typeof value === 'string') {
       const parentRef = value.match(PARENT_PROP_REF);
@@ -586,12 +599,12 @@ function mapDepProps(
         value = resolved;
       }
     }
-    if (typeof value === 'boolean') out[depProp.bindings.figma.property] = value;
-    else out[depProp.bindings.figma.property] = depProp.bindings.figma.values?.[value] ?? value;
+    if (typeof value === 'boolean') out[depProp.bindings.figma.property!] = value;
+    else out[depProp.bindings.figma.property!] = depProp.bindings.figma.values?.[value] ?? value;
   }
   if (text !== undefined) {
     const textProp = dep.props.find((p) => p.type === 'text' && p.bindings.code.prop === 'children');
-    if (textProp) out[textProp.bindings.figma.property] = text;
+    if (textProp) out[textProp.bindings.figma.property!] = text;
   }
   return out;
 }
@@ -621,6 +634,22 @@ function variantParts(
 }
 
 function partToSpec(
+  name: string,
+  part: Part,
+  contract: Contract,
+  byId: Map<string, Contract>,
+  ctx: TextCtx,
+  subst: Record<string, string>,
+): NodeSpec {
+  const spec = partToSpecInner(name, part, contract, byId, ctx, subst);
+  // v7 overlay: stamped on whatever node kind the part compiled to; the
+  // runtime applies it after the node is appended (layoutPositioning
+  // requires an auto-layout parent).
+  if (part.overlay) spec.overlay = part.overlay;
+  return spec;
+}
+
+function partToSpecInner(
   name: string,
   part: Part,
   contract: Contract,
@@ -660,7 +689,7 @@ function partToSpec(
     const spec: NodeSpec = {
       type: 'slot',
       name,
-      layout: layoutSpec(part, false),
+      layout: layoutSpec(part, false, subst),
       slotProperty: slotFigmaProperty(part.slot),
       slotOptional: part.optional || undefined,
       slotAccepts: (part.slot.accepts ?? []).map((id) => byId.get(id)!.name),
@@ -713,13 +742,14 @@ function partToSpec(
   const spec: NodeSpec = {
     type: 'frame',
     name,
-    layout: layoutSpec(part, false),
+    layout: layoutSpec(part, false, subst),
     grow: part.layout?.grow || undefined,
   };
   const childCtx = applyTokens(spec, part.tokens ?? {}, subst, ctx);
   spec.children = variantParts(part.parts ?? {}, subst).map(([childName, child]) =>
     partToSpec(childName, child, contract, byId, childCtx, subst),
   );
+  if (isReversed(part, subst)) spec.children.reverse();
   applyVisibleWhen(spec, part, contract);
   return spec;
 }
@@ -757,7 +787,7 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
   );
   const boolPropsData = contract.props
     .filter((p) => p.type === 'boolean')
-    .map((p) => ({ property: p.bindings.figma.property, default: p.default === true }));
+    .map((p) => ({ property: p.bindings.figma.property!, default: p.default === true }));
   const label = typeof textProp?.default === 'string' ? textProp.default : contract.name;
 
   const orderedValues = (p: { type: { enum: string[] }; default?: unknown }) => {
@@ -811,13 +841,14 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
     const rootSpec: NodeSpec = {
       type: 'root',
       name: nameParts.join(', ') || contract.name,
-      layout: layoutSpec(root, true),
+      layout: layoutSpec(root, true, subst),
     };
     const ctx = applyTokens(rootSpec, root.tokens ?? {}, subst, {});
     if (root.parts) {
       rootSpec.children = variantParts(root.parts, subst).map(([childName, child]) =>
         partToSpec(childName, child, contract, byId, ctx, subst),
       );
+      if (isReversed(root, subst)) rootSpec.children.reverse();
     } else if (textProp) {
       rootSpec.children = [
         {
@@ -850,10 +881,10 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
     .filter(
       (p) =>
         (p.type === 'text' || p.type === 'number') &&
-        !boundTextProps.has(p.bindings.figma.property),
+        !boundTextProps.has(p.bindings.figma.property!),
     )
     .map((p) => ({
-      property: p.bindings.figma.property,
+      property: p.bindings.figma.property!,
       default:
         typeof p.default === 'string' ? p.default : typeof p.default === 'number' ? String(p.default) : '',
     }));
@@ -1051,6 +1082,24 @@ function applyFrameSpec(node, spec) {
   }
 }
 
+// v7 overlay: out-of-flow edge attachment. Must run AFTER appendChild —
+// layoutPositioning ABSOLUTE requires an auto-layout parent.
+function applyOverlay(parent, childNode, childSpec) {
+  if (!childSpec.overlay) return;
+  try {
+    childNode.layoutPositioning = 'ABSOLUTE';
+    const p = childSpec.overlay.placement;
+    childNode.constraints =
+      p === 'bottom' ? { horizontal: 'MIN', vertical: 'MAX' } :
+      p === 'end' ? { horizontal: 'MAX', vertical: 'MIN' } :
+      { horizontal: 'MIN', vertical: 'MIN' };
+    if (p === 'top') { childNode.x = 0; childNode.y = -childNode.height; }
+    else if (p === 'bottom') { childNode.x = 0; childNode.y = parent.height; }
+    else if (p === 'start') { childNode.x = -childNode.width; childNode.y = 0; }
+    else { childNode.x = parent.width; childNode.y = 0; }
+  } catch (e) { /* parent not auto-layout — leave in flow */ }
+}
+
 async function buildNode(spec, registry) {
   let node;
   if (spec.type === 'svg') {
@@ -1135,6 +1184,7 @@ async function buildNode(spec, registry) {
   for (const child of spec.children || []) {
     const childNode = await buildNode(child, registry);
     node.appendChild(childNode);
+    applyOverlay(node, childNode, child);
     if (child.pct != null) {
       try {
         childNode.resize(Math.max(1, Math.round(node.width * child.pct)), childNode.height);
@@ -1397,6 +1447,24 @@ function applyFrameSpec(node, spec) {
   }
 }
 
+// v7 overlay: out-of-flow edge attachment. Must run AFTER appendChild —
+// layoutPositioning ABSOLUTE requires an auto-layout parent.
+function applyOverlay(parent, childNode, childSpec) {
+  if (!childSpec.overlay) return;
+  try {
+    childNode.layoutPositioning = 'ABSOLUTE';
+    const p = childSpec.overlay.placement;
+    childNode.constraints =
+      p === 'bottom' ? { horizontal: 'MIN', vertical: 'MAX' } :
+      p === 'end' ? { horizontal: 'MAX', vertical: 'MIN' } :
+      { horizontal: 'MIN', vertical: 'MIN' };
+    if (p === 'top') { childNode.x = 0; childNode.y = -childNode.height; }
+    else if (p === 'bottom') { childNode.x = 0; childNode.y = parent.height; }
+    else if (p === 'start') { childNode.x = -childNode.width; childNode.y = 0; }
+    else { childNode.x = parent.width; childNode.y = 0; }
+  } catch (e) { /* parent not auto-layout — leave in flow */ }
+}
+
 async function buildNode(spec, registry) {
   let node;
   if (spec.type === 'svg') {
@@ -1478,6 +1546,7 @@ async function buildNode(spec, registry) {
   for (const child of spec.children || []) {
     const childNode = await buildNode(child, registry);
     node.appendChild(childNode);
+    applyOverlay(node, childNode, child);
     if (child.pct != null) {
       try {
         childNode.resize(Math.max(1, Math.round(node.width * child.pct)), childNode.height);
@@ -1556,6 +1625,7 @@ async function amendSet(set, C) {
       for (const childSpec of v.spec.children || []) {
         const childNode = await buildNode(childSpec, registry);
         comp.appendChild(childNode);
+        applyOverlay(comp, childNode, childSpec);
         if (childSpec.pct != null) {
           try { childNode.resize(Math.max(1, Math.round(comp.width * childSpec.pct)), childNode.height); childNode.primaryAxisSizingMode = 'FIXED'; } catch (e) {}
         }

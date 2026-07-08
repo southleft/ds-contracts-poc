@@ -1,6 +1,6 @@
 /**
  * GENERATED FILE — DO NOT EDIT.
- * Source of truth: contracts/text-field.contract.json (ds.text-field v1.0.0)
+ * Source of truth: contracts/text-field.contract.json (ds.text-field v1.1.0)
  * Regenerate with: npm run generate
  */
 import { forwardRef } from 'react';
@@ -27,7 +27,7 @@ export interface TextFieldProps extends LabelHTMLAttributes<HTMLLabelElement> {
   placeholder?: string;
 }
 
-/** Single-line text input for short-form values — names, emails, search queries. API mirrors industry convention (Astryx TextInput): required label, description, size scale. The wrapping-label anatomy gives implicit label association. */
+/** Single-line text input for short-form values — names, emails, search queries. API mirrors industry convention (Astryx TextInput): required label, description, size scale. The wrapping-label anatomy gives implicit label association. Disabled fields dim and drop pointer interaction via stylesWhen (code-side conditional styling; a declared canvas fidelity limit). */
 export const TextField = forwardRef<HTMLLabelElement, TextFieldProps>(function TextField(
   {
     size = 'md',

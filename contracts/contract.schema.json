@@ -54,13 +54,40 @@
             "fieldset",
             "blockquote",
             "code",
-            "kbd"
+            "kbd",
+            "h1",
+            "h2",
+            "h3",
+            "h4",
+            "h5",
+            "h6"
           ]
         },
         "role": {
           "type": "string"
         },
         "roleByProp": {
+          "type": "object",
+          "properties": {
+            "prop": {
+              "type": "string"
+            },
+            "map": {
+              "type": "object",
+              "propertyNames": {
+                "type": "string"
+              },
+              "additionalProperties": {
+                "type": "string"
+              }
+            }
+          },
+          "required": [
+            "prop",
+            "map"
+          ]
+        },
+        "elementByProp": {
           "type": "object",
           "properties": {
             "prop": {
@@ -127,6 +154,29 @@
                   "enum"
                 ],
                 "additionalProperties": false
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "arrayOf": {
+                    "type": "object",
+                    "propertyNames": {
+                      "type": "string"
+                    },
+                    "additionalProperties": {
+                      "type": "string",
+                      "enum": [
+                        "text",
+                        "number",
+                        "boolean"
+                      ]
+                    }
+                  }
+                },
+                "required": [
+                  "arrayOf"
+                ],
+                "additionalProperties": false
               }
             ]
           },
@@ -158,7 +208,8 @@
                       "VARIANT",
                       "BOOLEAN",
                       "TEXT",
-                      "INSTANCE_SWAP"
+                      "INSTANCE_SWAP",
+                      "NONE"
                     ]
                   },
                   "property": {
@@ -175,8 +226,7 @@
                   }
                 },
                 "required": [
-                  "kind",
-                  "property"
+                  "kind"
                 ],
                 "additionalProperties": false
               },
@@ -462,6 +512,111 @@
               "type": "boolean"
             }
           },
+          "additionalProperties": false
+        },
+        "layoutByProp": {
+          "type": "object",
+          "properties": {
+            "prop": {
+              "type": "string"
+            },
+            "map": {
+              "type": "object",
+              "propertyNames": {
+                "type": "string"
+              },
+              "additionalProperties": {
+                "type": "object",
+                "properties": {
+                  "display": {
+                    "type": "string",
+                    "enum": [
+                      "flex",
+                      "inline-flex"
+                    ]
+                  },
+                  "direction": {
+                    "type": "string",
+                    "enum": [
+                      "row",
+                      "column",
+                      "row-reverse",
+                      "column-reverse"
+                    ]
+                  },
+                  "align": {
+                    "type": "string",
+                    "enum": [
+                      "start",
+                      "center",
+                      "end",
+                      "stretch"
+                    ]
+                  },
+                  "justify": {
+                    "type": "string",
+                    "enum": [
+                      "start",
+                      "center",
+                      "end",
+                      "space-between"
+                    ]
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          },
+          "required": [
+            "prop",
+            "map"
+          ],
+          "additionalProperties": false
+        },
+        "stylesWhen": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "prop": {
+                "type": "string"
+              },
+              "equals": {
+                "type": "string"
+              },
+              "styles": {
+                "type": "object",
+                "propertyNames": {
+                  "type": "string"
+                },
+                "additionalProperties": {
+                  "type": "string"
+                }
+              }
+            },
+            "required": [
+              "prop",
+              "styles"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "overlay": {
+          "type": "object",
+          "properties": {
+            "placement": {
+              "type": "string",
+              "enum": [
+                "top",
+                "bottom",
+                "start",
+                "end"
+              ]
+            }
+          },
+          "required": [
+            "placement"
+          ],
           "additionalProperties": false
         },
         "tokens": {

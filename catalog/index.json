@@ -3,7 +3,7 @@
   "system": {
     "name": "DS Contracts POC",
     "catalogVersion": "0.1.0",
-    "gitCommit": "95bdcf8",
+    "gitCommit": "66fede6",
     "source": "Compiled from contracts/*.contract.json + tokens/ + context/rules.json — do not edit."
   },
   "package": {
@@ -189,7 +189,7 @@
     {
       "id": "ds.chat-message",
       "name": "ChatMessage",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "status": "draft",
       "propNames": [
         "sender",
@@ -275,6 +275,17 @@
         "description"
       ],
       "summary": "Form field wrapper providing a label, description, and required indicator around any control."
+    },
+    {
+      "id": "ds.heading",
+      "name": "Heading",
+      "version": "1.0.0",
+      "status": "draft",
+      "propNames": [
+        "level",
+        "size"
+      ],
+      "summary": "Sectioning heading whose rendered HTML element follows the level prop (h1–h6) via semantics.elementByProp, with a visual size ramp on the existing control type scale — document outline and visual weight are deliberately independent axes."
     },
     {
       "id": "ds.icon-button",
@@ -539,7 +550,7 @@
     {
       "id": "ds.text-field",
       "name": "TextField",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "status": "draft",
       "propNames": [
         "size",

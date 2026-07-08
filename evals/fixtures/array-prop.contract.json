@@ -1,0 +1,80 @@
+{
+  "$schema": "../../contracts/contract.schema.json",
+  "id": "eval.crumb-trail",
+  "name": "CrumbTrail",
+  "version": "1.0.0",
+  "status": "draft",
+  "description": "Eval fixture: a breadcrumbs-shaped component with a structured `items` prop (arrayOf) — code-only by declared fidelity limit (bindings.figma.kind NONE). The canvas has no list-of-records property type, so the prop must be skipped by the figma generator and the differ, never reported as figma BEHIND.",
+  "semantics": {
+    "element": "nav",
+    "role": "navigation"
+  },
+  "props": [
+    {
+      "name": "separator",
+      "description": "Separator glyph between crumbs.",
+      "type": {
+        "enum": ["slash", "chevron"]
+      },
+      "default": "slash",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Separator",
+          "values": {
+            "slash": "Slash",
+            "chevron": "Chevron"
+          }
+        },
+        "code": {
+          "prop": "separator"
+        }
+      }
+    },
+    {
+      "name": "items",
+      "description": "Crumb data — label, destination, and whether it is the current page. Code-only: structured props have no canvas manifestation (declared fidelity limit).",
+      "type": {
+        "arrayOf": {
+          "label": "text",
+          "href": "text",
+          "isCurrent": "boolean"
+        }
+      },
+      "bindings": {
+        "figma": {
+          "kind": "NONE"
+        },
+        "code": {
+          "prop": "items"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "flex",
+        "direction": "row",
+        "align": "center"
+      },
+      "tokens": {
+        "gap": "{space.gap.sm}",
+        "font-family": "{font.control.family}",
+        "font-size": "{font.control.size.sm}",
+        "color": "{color.text.secondary}"
+      }
+    }
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "src/components/CrumbTrail",
+      "export": "CrumbTrail"
+    }
+  }
+}

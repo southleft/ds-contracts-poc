@@ -41,28 +41,56 @@ const EnumTypeSchema = z.strictObject({
   enum: z.array(z.string()).min(1),
 });
 
-export const PropSchema = z.strictObject({
-  name: z.string(),
-  description: z.string().optional(),
-  /** "boolean" | "text" | "number" | { enum: [...] } */
-  type: z.union([z.literal('boolean'), z.literal('text'), z.literal('number'), EnumTypeSchema]),
-  default: z.union([z.string(), z.boolean(), z.number()]).optional(),
-  /** Text props may be required (no default in the code signature). */
-  required: z.boolean().optional(),
-  /** How this prop manifests on each side. Neither side is primary;
-   *  the contract owns the canonical name and value set. */
-  bindings: z.strictObject({
-    figma: z.strictObject({
-      kind: z.enum(['VARIANT', 'BOOLEAN', 'TEXT', 'INSTANCE_SWAP']),
-      property: z.string(),
-      /** canonical value → Figma variant value, e.g. { "primary": "Primary" } */
-      values: z.record(z.string(), z.string()).optional(),
-    }),
-    code: z.strictObject({
-      prop: z.string(),
-    }),
-  }),
+/** v7: a structured/array prop — a list of records with scalar fields
+ *  (Breadcrumbs items, Select options). CODE-ONLY by declared fidelity
+ *  limit: the canvas has no list-of-records property type, so the figma
+ *  binding kind is 'NONE' and every design-side consumer skips the prop.
+ *  Code renders `Array<{ field: type; … }>` with no default (an optional
+ *  array — undefined means "not provided", never a silent []). */
+const ArrayTypeSchema = z.strictObject({
+  arrayOf: z.record(z.string(), z.enum(['text', 'number', 'boolean'])),
 });
+
+export const PropSchema = z
+  .strictObject({
+    name: z.string(),
+    description: z.string().optional(),
+    /** "boolean" | "text" | "number" | { enum: [...] } | { arrayOf: {...} } */
+    type: z.union([
+      z.literal('boolean'),
+      z.literal('text'),
+      z.literal('number'),
+      EnumTypeSchema,
+      ArrayTypeSchema,
+    ]),
+    default: z.union([z.string(), z.boolean(), z.number()]).optional(),
+    /** Text props may be required (no default in the code signature). */
+    required: z.boolean().optional(),
+    /** How this prop manifests on each side. Neither side is primary;
+     *  the contract owns the canonical name and value set. */
+    bindings: z.strictObject({
+      figma: z.strictObject({
+        /** 'NONE' (v7): the prop has no canvas manifestation — a declared
+         *  fidelity limit; only legal (and required) for arrayOf props. */
+        kind: z.enum(['VARIANT', 'BOOLEAN', 'TEXT', 'INSTANCE_SWAP', 'NONE']),
+        /** Required unless kind is 'NONE' (enforced below). */
+        property: z.string().optional(),
+        /** canonical value → Figma variant value, e.g. { "primary": "Primary" } */
+        values: z.record(z.string(), z.string()).optional(),
+      }),
+      code: z.strictObject({
+        prop: z.string(),
+      }),
+    }),
+  })
+  .refine((p) => p.bindings.figma.kind === 'NONE' || typeof p.bindings.figma.property === 'string', {
+    message: 'bindings.figma.property is required unless kind is "NONE"',
+    path: ['bindings', 'figma', 'property'],
+  })
+  .refine((p) => p.bindings.figma.kind !== 'NONE' || p.bindings.figma.property === undefined, {
+    message: 'kind "NONE" declares no canvas property — omit bindings.figma.property',
+    path: ['bindings', 'figma', 'property'],
+  });
 
 export const LayoutSchema = z.strictObject({
   display: z.enum(['flex', 'inline-flex']).optional(),
@@ -74,6 +102,62 @@ export const LayoutSchema = z.strictObject({
   /** Children overlap (AvatarGroup): the gap token is applied as a NEGATIVE
    *  child margin in CSS and as negative itemSpacing on the canvas. */
   overlap: z.boolean().optional(),
+});
+
+/** v7: per-enum-value layout overrides (chat sender flip, toolbar density).
+ *  A subset of LayoutSchema — plus REVERSED directions, which only make
+ *  sense as variant overrides: code emits flex-direction rules under the
+ *  enum class; the canvas (which has no reverse) reverses the compiled
+ *  child order per variant instead. grow/overlap stay per-part invariants. */
+export const VariantLayoutSchema = z.strictObject({
+  display: z.enum(['flex', 'inline-flex']).optional(),
+  direction: z.enum(['row', 'column', 'row-reverse', 'column-reverse']).optional(),
+  align: z.enum(['start', 'center', 'end', 'stretch']).optional(),
+  justify: z.enum(['start', 'center', 'end', 'space-between']).optional(),
+});
+
+/** v7: layout driven by an enum prop. `map` values are OVERRIDES merged over
+ *  the part's base `layout` — partial coverage is the point (only the
+ *  values that deviate appear). Code: descendant rules under the root's
+ *  enum class (`.sender-user .body { … }`); canvas: resolved per variant at
+ *  compile time (the subst machinery already compiles each combo). */
+export const LayoutByPropSchema = z.strictObject({
+  prop: z.string(),
+  map: z.record(z.string(), VariantLayoutSchema),
+});
+
+/** v7 stylesWhen: the tight whitelist of literal CSS properties a
+ *  conditional style may set. Deliberately NOT tokens — these are
+ *  behavioral/positional properties with no token vocabulary (a color or a
+ *  dimension belongs in `tokens`, and the generator refuses it here). */
+export const STYLES_WHEN_ALLOWED = new Set([
+  'position', 'top', 'right', 'bottom', 'left', 'z-index',
+  'overflow', 'text-overflow', 'white-space', 'display', 'opacity',
+  'pointer-events', 'transform', 'transition', 'flex-direction',
+  'justify-content', 'align-items', 'cursor', 'text-decoration',
+]);
+
+/** v7: conditional literal styles — CSS applied only when the prop matches.
+ *  Code: boolean conditions ride the existing per-boolean data attribute
+ *  (`.root[data-x] .part`), enum conditions the root enum class
+ *  (`.prop-value .part`). Canvas v1: not represented — a documented
+ *  fidelity limit (boolean props cannot restyle canvas nodes; only
+ *  visibility is bindable). */
+export const StylesWhenSchema = z.strictObject({
+  prop: z.string(),
+  /** Required for enum props; omit for booleans (truthy). */
+  equals: z.string().optional(),
+  /** CSS property → literal value. Keys must be in STYLES_WHEN_ALLOWED. */
+  styles: z.record(z.string(), z.string()),
+});
+
+/** v7 overlay: the part renders OUT of flow, attached to one edge of the
+ *  root (Tooltip bubble, Combobox popup). Code: position:absolute with
+ *  placement-derived insets, root becomes position:relative. Canvas:
+ *  layoutPositioning ABSOLUTE with placement-derived constraints. Four
+ *  placements in v1; offset/alignment tuning is a later axis. */
+export const OverlaySchema = z.strictObject({
+  placement: z.enum(['top', 'bottom', 'start', 'end']),
 });
 
 /** Conditional part visibility (schema v4, gap G1): the part renders only
@@ -142,6 +226,12 @@ export interface Part {
    *  span (content). Root uses semantics.element. */
   element?: string;
   layout?: z.infer<typeof LayoutSchema>;
+  /** v7: per-enum-value layout overrides merged over `layout`. */
+  layoutByProp?: z.infer<typeof LayoutByPropSchema>;
+  /** v7: conditional literal styles (code-side; canvas fidelity limit). */
+  stylesWhen?: Array<z.infer<typeof StylesWhenSchema>>;
+  /** v7: out-of-flow edge attachment (tooltip/popup anatomy). */
+  overlay?: z.infer<typeof OverlaySchema>;
   /** CSS property → token reference. The CSS Module AND the Figma bindings
    *  are generated from these — there is no handwritten style layer. */
   tokens?: Record<string, string>;
@@ -176,6 +266,12 @@ export const PartSchema: z.ZodType<Part> = z.lazy(() =>
     description: z.string().optional(),
     element: z.string().optional(),
     layout: LayoutSchema.optional(),
+    /** v7. */
+    layoutByProp: LayoutByPropSchema.optional(),
+    /** v7. */
+    stylesWhen: z.array(StylesWhenSchema).optional(),
+    /** v7. */
+    overlay: OverlaySchema.optional(),
     tokens: z.record(z.string(), TokenRefSchema).optional(),
     states: z.record(z.string(), z.record(z.string(), TokenRefSchema)).optional(),
     content: z.strictObject({ prop: z.string() }).optional(),
@@ -245,12 +341,21 @@ export const ContractSchema = z.strictObject({
     element: z.enum([
       'button', 'span', 'div', 'a', 'input', 'article', 'section', 'header', 'footer',
       'label', 'nav', 'hr', 'ul', 'li', 'p', 'textarea', 'select', 'fieldset',
-      'blockquote', 'code', 'kbd',
+      'blockquote', 'code', 'kbd', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6',
     ]),
     role: z.string().optional(),
     /** v4, gap G7: ARIA role driven by an enum prop (e.g. Banner: error →
      *  alert, info → status). Code emits a lookup; overrides `role`. */
     roleByProp: z
+      .object({ prop: z.string(), map: z.record(z.string(), z.string()) })
+      .optional(),
+    /** v7: HTML element driven by an enum prop (Heading: level "2" → h2).
+     *  Mirrors roleByProp — code emits an ELEMENT_MAP lookup and renders a
+     *  dynamic tag; `element` is the fallback. The canvas is unaffected
+     *  (text nodes carry no element semantics). The map must cover every
+     *  enum value and every mapped element must be in the code generator's
+     *  element vocabulary — validated at generation time. */
+    elementByProp: z
       .object({ prop: z.string(), map: z.record(z.string(), z.string()) })
       .optional(),
   }),
@@ -292,6 +397,30 @@ export type ContractEvent = z.infer<typeof EventSchema>;
 export type Slot = z.infer<typeof SlotSchema>;
 export type ComponentRef = z.infer<typeof ComponentRefSchema>;
 export type Layout = z.infer<typeof LayoutSchema>;
+export type VariantLayout = z.infer<typeof VariantLayoutSchema>;
+
+/** The layout a part has under one concrete variant combo: layoutByProp
+ *  override (if the combo's value has one) merged over the base layout.
+ *  With an empty subst (code side / no enum context) the base layout wins. */
+export interface ResolvedLayout {
+  display?: 'flex' | 'inline-flex';
+  direction?: 'row' | 'column' | 'row-reverse' | 'column-reverse';
+  align?: 'start' | 'center' | 'end' | 'stretch';
+  justify?: 'start' | 'center' | 'end' | 'space-between';
+  grow?: boolean;
+  overlap?: boolean;
+}
+
+export function resolveLayout(
+  part: Part,
+  subst: Record<string, string>,
+): ResolvedLayout | undefined {
+  const base = part.layout as ResolvedLayout | undefined;
+  const byProp = part.layoutByProp;
+  const override = byProp ? byProp.map[subst[byProp.prop] ?? ''] : undefined;
+  if (!override) return base;
+  return { ...base, ...override };
+}
 
 // ---------------------------------------------------------------------------
 // Shared composition helpers (used by both generators and the differ)

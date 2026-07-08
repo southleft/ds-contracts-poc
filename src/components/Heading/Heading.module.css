@@ -1,0 +1,26 @@
+/* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/heading.contract.json (ds.heading v1.0.0)
+ * Regenerate with: npm run generate
+ */
+
+.root {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border: 0;
+  font-family: var(--font-control-family);
+  font-weight: var(--font-title-weight);
+  color: var(--color-surface-foreground);
+}
+
+.size-sm {
+  font-size: var(--font-control-size-sm);
+}
+
+.size-md {
+  font-size: var(--font-control-size-md);
+}
+
+.size-lg {
+  font-size: var(--font-control-size-lg);
+}
