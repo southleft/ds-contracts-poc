@@ -45,7 +45,21 @@ const VARIANTS = [
     }
   }
 ];
+// figmaStatePreviews (canvas-only): preview variants carrying the State axis.
+const STATE_VARIANTS = [];
 const COL_W = 380, ROW_H = 240, PAD = 40;
+
+// State previews: merge the enum-API cartesian with the preview overlay;
+// base variants gain an explicit State=Default segment so every variant in
+// the set carries the axis (Figma derives variant properties from names).
+function withStateAxis(variants, stateVariants) {
+  if (!stateVariants || stateVariants.length === 0) return variants;
+  return variants.map((v) => {
+    const name = v.name.indexOf('=') >= 0 ? v.name + ', State=Default' : 'State=Default';
+    return Object.assign({}, v, { name: name, spec: Object.assign({}, v.spec, { name: name }) });
+  }).concat(stateVariants);
+}
+const ALL_VARIANTS = withStateAxis(VARIANTS, STATE_VARIANTS);
 
 // File guard: multi-file bridge routing has been observed to hit the wrong
 // file — never write without verifying the target.
@@ -330,7 +344,7 @@ if (!compPage) { compPage = figma.createPage(); compPage.name = SET_NAME; }
 
 // Build every variant, then add properties BEFORE combining.
 const built = [];
-for (const v of VARIANTS) {
+for (const v of ALL_VARIANTS) {
   const registry = { texts: [], slots: [], visibles: [] };
   const comp = await buildNode(v.spec, registry);
   built.push({ v, comp, registry });
@@ -385,9 +399,9 @@ if (IS_SET) {
   for (const b of built) compPage.appendChild(b.comp);
   target = figma.combineAsVariants(built.map((b) => b.comp), compPage);
   // Tight grid: rows = first axis, columns = second; per-track max sizing.
-  const specByName = new Map(VARIANTS.map((s) => [s.name, s]));
-  const rowsN = Math.max(...VARIANTS.map((v) => v.row)) + 1;
-  const colsN = Math.max(...VARIANTS.map((v) => v.col)) + 1;
+  const specByName = new Map(ALL_VARIANTS.map((s) => [s.name, s]));
+  const rowsN = Math.max(...ALL_VARIANTS.map((v) => v.row)) + 1;
+  const colsN = Math.max(...ALL_VARIANTS.map((v) => v.col)) + 1;
   const colWs = new Array(colsN).fill(0);
   const rowHs = new Array(rowsN).fill(0);
   for (const child of target.children) {

@@ -40,6 +40,19 @@ for (const style of fontStyles) {
   await figma.loadFontAsync({ family: 'Inter', style });
 }
 
+// State previews (figmaStatePreviews): merge the enum-API cartesian with the
+// canvas-only preview overlay; base variants gain an explicit State=Default
+// segment so every variant in the set carries the axis (Figma derives
+// variant properties from names). Contracts without previews pass through
+// untouched — names, hashes, and amend reconciliation are unchanged.
+function withStateAxis(C) {
+  if (!C.stateVariants || C.stateVariants.length === 0) return C.variants;
+  return C.variants.map((v) => {
+    const name = v.name.indexOf('=') >= 0 ? v.name + ', State=Default' : 'State=Default';
+    return Object.assign({}, v, { name: name, spec: Object.assign({}, v.spec, { name: name }) });
+  }).concat(C.stateVariants);
+}
+
 function findComponentByName(name) {
   for (const page of figma.root.children) {
     const hit = page.findOne(
@@ -290,11 +303,17 @@ async function amendSet(set, C) {
     }
   }
 
-  const expected = new Map(C.variants.map((v) => [v.name, v]));
+  // Sets gaining/losing the State preview axis reconcile by NAME like any
+  // other variant change: opting in renames every base variant (adds the
+  // State=Default segment) and adds the preview variants — the old names
+  // surface as extraVariants (reported, retired by a human, never deleted);
+  // opting out reverses it.
+  const EV = withStateAxis(C);
+  const expected = new Map(EV.map((v) => [v.name, v]));
   for (const ch of set.children) if (!expected.has(ch.name)) report.extraVariants.push(ch.name);
   const existingByName = new Map(set.children.map((ch) => [ch.name, ch]));
 
-  for (const v of C.variants) {
+  for (const v of EV) {
     let comp = existingByName.get(v.name);
     const registry = { texts: [], slots: [], visibles: [] };
     if (!comp) {
@@ -358,13 +377,13 @@ async function amendSet(set, C) {
   }
 
   // Contract default combo must be the FIRST variant (Figma default = first).
-  const first = set.children.find((ch) => ch.name === C.variants[0].name);
+  const first = set.children.find((ch) => ch.name === EV[0].name);
   if (first && set.children[0] !== first) set.insertChild(0, first);
 
   // Grid re-layout with the create path's math.
-  const specByName = new Map(C.variants.map((sv) => [sv.name, sv]));
-  const rowsN = Math.max(...C.variants.map((vv) => vv.row)) + 1;
-  const colsN = Math.max(...C.variants.map((vv) => vv.col)) + 1;
+  const specByName = new Map(EV.map((sv) => [sv.name, sv]));
+  const rowsN = Math.max(...EV.map((vv) => vv.row)) + 1;
+  const colsN = Math.max(...EV.map((vv) => vv.col)) + 1;
   const colWs = new Array(colsN).fill(0);
   const rowHs = new Array(rowsN).fill(0);
   for (const child of set.children) {
@@ -426,8 +445,9 @@ async function syncOne(C) {
   let compPage = figma.root.children.find((p) => p.name === displayName);
   if (!compPage) { compPage = figma.createPage(); compPage.name = displayName; }
 
+  const EV = withStateAxis(C);
   const built = [];
-  for (const v of C.variants) {
+  for (const v of EV) {
     const registry = { texts: [], slots: [], visibles: [] };
     const comp = await buildNode(v.spec, registry);
     built.push({ v, comp, registry });
@@ -480,9 +500,9 @@ async function syncOne(C) {
     for (const b of built) compPage.appendChild(b.comp);
     target = figma.combineAsVariants(built.map((b) => b.comp), compPage);
     // Tight grid: rows = first axis, columns = second; per-track max sizing.
-    const specByName = new Map(C.variants.map((s) => [s.name, s]));
-    const rowsN = Math.max(...C.variants.map((v) => v.row)) + 1;
-    const colsN = Math.max(...C.variants.map((v) => v.col)) + 1;
+    const specByName = new Map(EV.map((s) => [s.name, s]));
+    const rowsN = Math.max(...EV.map((v) => v.row)) + 1;
+    const colsN = Math.max(...EV.map((v) => v.col)) + 1;
     const colWs = new Array(colsN).fill(0);
     const rowHs = new Array(rowsN).fill(0);
     for (const child of target.children) {

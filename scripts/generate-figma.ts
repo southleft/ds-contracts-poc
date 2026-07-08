@@ -29,11 +29,15 @@ import { mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import {
   ContractSchema,
+  STATE_PREVIEW_DEFAULT,
+  STATE_PREVIEW_PROPERTY,
   pascal,
   resolveLayout,
   slotFigmaProperty,
   slotVisibilityProperty,
   sortByDependencies,
+  statePreviewLabel,
+  statePreviewSubstProps,
   type Contract,
   type Part,
   type Prop,
@@ -483,11 +487,31 @@ function applyTokens(
       case 'height':
         spec.fixedHeight = { px: px(resolveLiteral(tokenPath)), varName };
         break;
+      case 'opacity':
+        // Only reachable via state-preview overrides today (no base token
+        // uses it) — but the mapping is general: opacity is bindable.
+        spec.bindings = { ...spec.bindings, opacity: varName };
+        break;
       default:
         break; // outline-* etc. are state/CSS concerns
     }
   }
   return next;
+}
+
+/** State-preview overrides pass through applyTokens with one honest
+ *  translation: the focus outline has no canvas equivalent (outline sits
+ *  outside the border box, with offset), so it renders as a bound stroke —
+ *  an approximation, documented as such. Everything else (background-color,
+ *  color, opacity) maps exactly like base tokens. */
+function translateStateOverrides(overrides: Record<string, string>): Record<string, string> {
+  const out: Record<string, string> = {};
+  for (const [cssProp, ref] of Object.entries(overrides)) {
+    if (cssProp === 'outline-color') out['border-color'] = ref;
+    else if (cssProp === 'outline-width') out['border-width'] = ref;
+    else out[cssProp] = ref;
+  }
+  return out;
 }
 
 const isEnum = (p: Prop): p is Prop & { type: { enum: string[] } } =>
@@ -777,6 +801,12 @@ interface ComponentData {
   textProps: Array<{ property: string; default: string }>;
   fontStyles: string[];
   variants: VariantSpec[];
+  /** figmaStatePreviews: canvas-only preview variants carrying the "State"
+   *  axis. Kept SEPARATE from `variants` (the pure enum-API cartesian) —
+   *  the runtimes merge them via withStateAxis, renaming base variants with
+   *  an explicit State=Default segment. Omitted entirely when the contract
+   *  does not opt in, so unchanged contracts keep a stable specHash. */
+  stateVariants?: VariantSpec[];
   colW: number;
 }
 
@@ -870,6 +900,80 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
     variants.push({ name: rootSpec.name, row, col, spec: rootSpec });
   }
 
+  // figmaStatePreviews: compile the canvas-only "State" preview variants.
+  // Bounded explosion: only the PRIMARY enum axis (the one whose tokens the
+  // state overrides substitute; the first axis when overrides are variant-
+  // independent) is multiplied — every other axis sits at its default.
+  // Button (4 variants × 3 sizes, 3 states): 12 base + 4×3 = 24, not 48.
+  const stateVariants: VariantSpec[] = [];
+  if (contract.figmaStatePreviews && contract.states.length > 0) {
+    const overrides = root.states ?? {};
+    const substProps = statePreviewSubstProps(contract); // validated: ≤1
+    const primaryIdx = Math.max(0, axes.findIndex((a) => substProps.includes(a.prop.name)));
+    const primary = axes[primaryIdx] as (typeof axes)[number] | undefined;
+    const primaryValues = primary ? primary.values : [null];
+    // Base grid columns = ordered cartesian of axes 1..n; preview variants
+    // occupy appended columns so the grid never collides.
+    const baseColsN = axes.slice(1).reduce((n, a) => n * a.values.length, 1);
+    for (let si = 0; si < contract.states.length; si++) {
+      const stateName = contract.states[si];
+      for (let pi = 0; pi < primaryValues.length; pi++) {
+        const subst: Record<string, string> = {};
+        const nameParts: string[] = [];
+        for (let a = 0; a < axes.length; a++) {
+          const { prop, values } = axes[a];
+          const value = a === primaryIdx ? values[pi]! : values[0];
+          subst[prop.name] = value;
+          nameParts.push(
+            `${prop.bindings.figma.property}=${prop.bindings.figma.values?.[value] ?? value}`,
+          );
+        }
+        nameParts.push(`${STATE_PREVIEW_PROPERTY}=${statePreviewLabel(stateName)}`);
+        const row = primaryIdx === 0 && primary ? pi : 0;
+        const col =
+          primaryIdx === 0 || !primary
+            ? baseColsN + si
+            : baseColsN + si * primaryValues.length + pi;
+        const rootSpec: NodeSpec = {
+          type: 'root',
+          name: nameParts.join(', '),
+          layout: layoutSpec(root, true, subst),
+        };
+        const baseCtx = applyTokens(rootSpec, root.tokens ?? {}, subst, {});
+        const ctx = applyTokens(
+          rootSpec,
+          translateStateOverrides(overrides[stateName] ?? {}),
+          subst,
+          baseCtx,
+        );
+        if (root.parts) {
+          rootSpec.children = variantParts(root.parts, subst).map(([childName, child]) =>
+            partToSpec(childName, child, contract, byId, ctx, subst),
+          );
+          if (isReversed(root, subst)) rootSpec.children.reverse();
+        } else if (textProp) {
+          rootSpec.children = [
+            {
+              type: 'text',
+              name: 'label',
+              characters: label,
+              fontSize: ctx.fontSize ?? 16,
+              fontStyle: ctx.fontStyle ?? 'Medium',
+              textFill: ctx.textFill,
+              contentProp: textProp.bindings.figma.property,
+            },
+          ];
+        }
+        const collectStyles = (s: NodeSpec) => {
+          if (s.fontStyle) fontStyles.add(s.fontStyle);
+          (s.children ?? []).forEach(collectStyles);
+        };
+        collectStyles(rootSpec);
+        stateVariants.push({ name: rootSpec.name, row, col, spec: rootSpec });
+      }
+    }
+  }
+
   // Text props bound to a text node somewhere in the compiled specs.
   const boundTextProps = new Set<string>();
   const collectBound = (s: NodeSpec) => {
@@ -903,12 +1007,16 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
           return `\nEvent (code): ${e.bindings.code.prop} — fires on ${e.trigger} activation.${t}`;
         })
         .join(''),
-    isSet: variants.length > 1,
+    isSet: variants.length + stateVariants.length > 1,
     boolProps: boolPropsData,
     textProps: textOnlyProps,
     fontStyles: [...fontStyles],
     variants,
-    colW: Math.max(380, ...variants.map((v) => (v.spec.fixedWidth?.px ?? 0) + 60)),
+    ...(stateVariants.length > 0 ? { stateVariants } : {}),
+    colW: Math.max(
+      380,
+      ...[...variants, ...stateVariants].map((v) => (v.spec.fixedWidth?.px ?? 0) + 60),
+    ),
   };
 }
 
@@ -925,7 +1033,21 @@ const BOOL_PROPS = ${JSON.stringify(data.boolProps)};
 const TEXT_PROPS = ${JSON.stringify(data.textProps)};
 const FONT_STYLES = ${JSON.stringify(data.fontStyles)};
 const VARIANTS = ${JSON.stringify(data.variants, null, 2)};
+// figmaStatePreviews (canvas-only): preview variants carrying the State axis.
+const STATE_VARIANTS = ${JSON.stringify(data.stateVariants ?? [], null, 2)};
 const COL_W = ${data.colW}, ROW_H = 240, PAD = 40;
+
+// State previews: merge the enum-API cartesian with the preview overlay;
+// base variants gain an explicit State=Default segment so every variant in
+// the set carries the axis (Figma derives variant properties from names).
+function withStateAxis(variants, stateVariants) {
+  if (!stateVariants || stateVariants.length === 0) return variants;
+  return variants.map((v) => {
+    const name = v.name.indexOf('=') >= 0 ? v.name + ', State=${STATE_PREVIEW_DEFAULT}' : 'State=${STATE_PREVIEW_DEFAULT}';
+    return Object.assign({}, v, { name: name, spec: Object.assign({}, v.spec, { name: name }) });
+  }).concat(stateVariants);
+}
+const ALL_VARIANTS = withStateAxis(VARIANTS, STATE_VARIANTS);
 
 // File guard: multi-file bridge routing has been observed to hit the wrong
 // file — never write without verifying the target.
@@ -1210,7 +1332,7 @@ if (!compPage) { compPage = figma.createPage(); compPage.name = SET_NAME; }
 
 // Build every variant, then add properties BEFORE combining.
 const built = [];
-for (const v of VARIANTS) {
+for (const v of ALL_VARIANTS) {
   const registry = { texts: [], slots: [], visibles: [] };
   const comp = await buildNode(v.spec, registry);
   built.push({ v, comp, registry });
@@ -1265,9 +1387,9 @@ if (IS_SET) {
   for (const b of built) compPage.appendChild(b.comp);
   target = figma.combineAsVariants(built.map((b) => b.comp), compPage);
   // Tight grid: rows = first axis, columns = second; per-track max sizing.
-  const specByName = new Map(VARIANTS.map((s) => [s.name, s]));
-  const rowsN = Math.max(...VARIANTS.map((v) => v.row)) + 1;
-  const colsN = Math.max(...VARIANTS.map((v) => v.col)) + 1;
+  const specByName = new Map(ALL_VARIANTS.map((s) => [s.name, s]));
+  const rowsN = Math.max(...ALL_VARIANTS.map((v) => v.row)) + 1;
+  const colsN = Math.max(...ALL_VARIANTS.map((v) => v.col)) + 1;
   const colWs = new Array(colsN).fill(0);
   const rowHs = new Array(rowsN).fill(0);
   for (const child of target.children) {
@@ -1356,6 +1478,19 @@ const fontStyles = new Set(['Medium']);
 for (const C of COMPONENTS) for (const s of C.fontStyles) fontStyles.add(s);
 for (const style of fontStyles) {
   await figma.loadFontAsync({ family: 'Inter', style });
+}
+
+// State previews (figmaStatePreviews): merge the enum-API cartesian with the
+// canvas-only preview overlay; base variants gain an explicit State=Default
+// segment so every variant in the set carries the axis (Figma derives
+// variant properties from names). Contracts without previews pass through
+// untouched — names, hashes, and amend reconciliation are unchanged.
+function withStateAxis(C) {
+  if (!C.stateVariants || C.stateVariants.length === 0) return C.variants;
+  return C.variants.map((v) => {
+    const name = v.name.indexOf('=') >= 0 ? v.name + ', State=${STATE_PREVIEW_DEFAULT}' : 'State=${STATE_PREVIEW_DEFAULT}';
+    return Object.assign({}, v, { name: name, spec: Object.assign({}, v.spec, { name: name }) });
+  }).concat(C.stateVariants);
 }
 
 function findComponentByName(name) {
@@ -1608,11 +1743,17 @@ async function amendSet(set, C) {
     }
   }
 
-  const expected = new Map(C.variants.map((v) => [v.name, v]));
+  // Sets gaining/losing the State preview axis reconcile by NAME like any
+  // other variant change: opting in renames every base variant (adds the
+  // State=Default segment) and adds the preview variants — the old names
+  // surface as extraVariants (reported, retired by a human, never deleted);
+  // opting out reverses it.
+  const EV = withStateAxis(C);
+  const expected = new Map(EV.map((v) => [v.name, v]));
   for (const ch of set.children) if (!expected.has(ch.name)) report.extraVariants.push(ch.name);
   const existingByName = new Map(set.children.map((ch) => [ch.name, ch]));
 
-  for (const v of C.variants) {
+  for (const v of EV) {
     let comp = existingByName.get(v.name);
     const registry = { texts: [], slots: [], visibles: [] };
     if (!comp) {
@@ -1676,13 +1817,13 @@ async function amendSet(set, C) {
   }
 
   // Contract default combo must be the FIRST variant (Figma default = first).
-  const first = set.children.find((ch) => ch.name === C.variants[0].name);
+  const first = set.children.find((ch) => ch.name === EV[0].name);
   if (first && set.children[0] !== first) set.insertChild(0, first);
 
   // Grid re-layout with the create path's math.
-  const specByName = new Map(C.variants.map((sv) => [sv.name, sv]));
-  const rowsN = Math.max(...C.variants.map((vv) => vv.row)) + 1;
-  const colsN = Math.max(...C.variants.map((vv) => vv.col)) + 1;
+  const specByName = new Map(EV.map((sv) => [sv.name, sv]));
+  const rowsN = Math.max(...EV.map((vv) => vv.row)) + 1;
+  const colsN = Math.max(...EV.map((vv) => vv.col)) + 1;
   const colWs = new Array(colsN).fill(0);
   const rowHs = new Array(rowsN).fill(0);
   for (const child of set.children) {
@@ -1744,8 +1885,9 @@ async function syncOne(C) {
   let compPage = figma.root.children.find((p) => p.name === displayName);
   if (!compPage) { compPage = figma.createPage(); compPage.name = displayName; }
 
+  const EV = withStateAxis(C);
   const built = [];
-  for (const v of C.variants) {
+  for (const v of EV) {
     const registry = { texts: [], slots: [], visibles: [] };
     const comp = await buildNode(v.spec, registry);
     built.push({ v, comp, registry });
@@ -1798,9 +1940,9 @@ async function syncOne(C) {
     for (const b of built) compPage.appendChild(b.comp);
     target = figma.combineAsVariants(built.map((b) => b.comp), compPage);
     // Tight grid: rows = first axis, columns = second; per-track max sizing.
-    const specByName = new Map(C.variants.map((s) => [s.name, s]));
-    const rowsN = Math.max(...C.variants.map((v) => v.row)) + 1;
-    const colsN = Math.max(...C.variants.map((v) => v.col)) + 1;
+    const specByName = new Map(EV.map((s) => [s.name, s]));
+    const rowsN = Math.max(...EV.map((v) => v.row)) + 1;
+    const colsN = Math.max(...EV.map((v) => v.col)) + 1;
     const colWs = new Array(colsN).fill(0);
     const rowHs = new Array(rowsN).fill(0);
     for (const child of target.children) {
