@@ -30,6 +30,7 @@ import path from 'node:path';
 import {
   ContractSchema,
   pascal,
+  resolveLayout,
   slotFigmaProperty,
   slotVisibilityProperty,
   sortByDependencies,
@@ -390,18 +391,26 @@ const JUSTIFY_FIGMA: Record<string, LayoutSpec['primary']> = {
   'space-between': 'SPACE_BETWEEN',
 };
 
-function layoutSpec(part: Part, isRoot: boolean): LayoutSpec {
-  const l = part.layout;
+function layoutSpec(part: Part, isRoot: boolean, subst: Record<string, string> = {}): LayoutSpec {
+  // v7 layoutByProp: each canvas variant is compiled with every enum axis's
+  // value (subst), so the per-variant layout override resolves right here.
+  const l = resolveLayout(part, subst);
   if (!l && isRoot) {
     return { mode: 'HORIZONTAL', primary: 'CENTER', counter: 'CENTER' };
   }
   return {
-    mode: l?.direction === 'column' ? 'VERTICAL' : 'HORIZONTAL',
+    mode: l?.direction?.startsWith('column') ? 'VERTICAL' : 'HORIZONTAL',
     primary: l?.justify ? JUSTIFY_FIGMA[l.justify] : 'MIN',
     counter: l?.align ? ALIGN_FIGMA[l.align] : 'MIN',
     stretchChildren: l?.align === 'stretch' || undefined,
   };
 }
+
+/** Reversed flex directions have no auto-layout equivalent — the honest
+ *  canvas rendering is the same children in reversed order, resolved per
+ *  variant at compile time. */
+const isReversed = (part: Part, subst: Record<string, string>): boolean =>
+  resolveLayout(part, subst)?.direction?.endsWith('-reverse') ?? false;
 
 /** Distribute a part's CSS token bindings into Figma spec fields. */
 function applyTokens(
@@ -660,7 +669,7 @@ function partToSpec(
     const spec: NodeSpec = {
       type: 'slot',
       name,
-      layout: layoutSpec(part, false),
+      layout: layoutSpec(part, false, subst),
       slotProperty: slotFigmaProperty(part.slot),
       slotOptional: part.optional || undefined,
       slotAccepts: (part.slot.accepts ?? []).map((id) => byId.get(id)!.name),
@@ -713,13 +722,14 @@ function partToSpec(
   const spec: NodeSpec = {
     type: 'frame',
     name,
-    layout: layoutSpec(part, false),
+    layout: layoutSpec(part, false, subst),
     grow: part.layout?.grow || undefined,
   };
   const childCtx = applyTokens(spec, part.tokens ?? {}, subst, ctx);
   spec.children = variantParts(part.parts ?? {}, subst).map(([childName, child]) =>
     partToSpec(childName, child, contract, byId, childCtx, subst),
   );
+  if (isReversed(part, subst)) spec.children.reverse();
   applyVisibleWhen(spec, part, contract);
   return spec;
 }
@@ -810,13 +820,14 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
     const rootSpec: NodeSpec = {
       type: 'root',
       name: nameParts.join(', ') || contract.name,
-      layout: layoutSpec(root, true),
+      layout: layoutSpec(root, true, subst),
     };
     const ctx = applyTokens(rootSpec, root.tokens ?? {}, subst, {});
     if (root.parts) {
       rootSpec.children = variantParts(root.parts, subst).map(([childName, child]) =>
         partToSpec(childName, child, contract, byId, ctx, subst),
       );
+      if (isReversed(root, subst)) rootSpec.children.reverse();
     } else if (textProp) {
       rootSpec.children = [
         {

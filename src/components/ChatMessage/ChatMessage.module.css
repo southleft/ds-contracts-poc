@@ -1,5 +1,5 @@
 /* GENERATED FILE — DO NOT EDIT.
- * Source of truth: contracts/chat-message.contract.json (ds.chat-message v1.0.0)
+ * Source of truth: contracts/chat-message.contract.json (ds.chat-message v1.1.0)
  * Regenerate with: npm run generate
  */
 
@@ -15,6 +15,10 @@
   font-family: var(--font-control-family);
 }
 
+.sender-user {
+  flex-direction: row-reverse;
+}
+
 .avatarSlot {
   display: flex;
   flex-direction: row;
@@ -28,6 +32,10 @@
   flex: 1 1 auto;
   min-width: 0;
   gap: var(--space-inset-y-sm);
+}
+
+.sender-user .body {
+  align-items: flex-end;
 }
 
 .nameText {

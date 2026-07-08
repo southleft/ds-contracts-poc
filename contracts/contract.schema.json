@@ -491,6 +491,65 @@
           },
           "additionalProperties": false
         },
+        "layoutByProp": {
+          "type": "object",
+          "properties": {
+            "prop": {
+              "type": "string"
+            },
+            "map": {
+              "type": "object",
+              "propertyNames": {
+                "type": "string"
+              },
+              "additionalProperties": {
+                "type": "object",
+                "properties": {
+                  "display": {
+                    "type": "string",
+                    "enum": [
+                      "flex",
+                      "inline-flex"
+                    ]
+                  },
+                  "direction": {
+                    "type": "string",
+                    "enum": [
+                      "row",
+                      "column",
+                      "row-reverse",
+                      "column-reverse"
+                    ]
+                  },
+                  "align": {
+                    "type": "string",
+                    "enum": [
+                      "start",
+                      "center",
+                      "end",
+                      "stretch"
+                    ]
+                  },
+                  "justify": {
+                    "type": "string",
+                    "enum": [
+                      "start",
+                      "center",
+                      "end",
+                      "space-between"
+                    ]
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          },
+          "required": [
+            "prop",
+            "map"
+          ],
+          "additionalProperties": false
+        },
         "tokens": {
           "type": "object",
           "propertyNames": {

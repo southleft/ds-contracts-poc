@@ -76,6 +76,28 @@ export const LayoutSchema = z.strictObject({
   overlap: z.boolean().optional(),
 });
 
+/** v7: per-enum-value layout overrides (chat sender flip, toolbar density).
+ *  A subset of LayoutSchema — plus REVERSED directions, which only make
+ *  sense as variant overrides: code emits flex-direction rules under the
+ *  enum class; the canvas (which has no reverse) reverses the compiled
+ *  child order per variant instead. grow/overlap stay per-part invariants. */
+export const VariantLayoutSchema = z.strictObject({
+  display: z.enum(['flex', 'inline-flex']).optional(),
+  direction: z.enum(['row', 'column', 'row-reverse', 'column-reverse']).optional(),
+  align: z.enum(['start', 'center', 'end', 'stretch']).optional(),
+  justify: z.enum(['start', 'center', 'end', 'space-between']).optional(),
+});
+
+/** v7: layout driven by an enum prop. `map` values are OVERRIDES merged over
+ *  the part's base `layout` — partial coverage is the point (only the
+ *  values that deviate appear). Code: descendant rules under the root's
+ *  enum class (`.sender-user .body { … }`); canvas: resolved per variant at
+ *  compile time (the subst machinery already compiles each combo). */
+export const LayoutByPropSchema = z.strictObject({
+  prop: z.string(),
+  map: z.record(z.string(), VariantLayoutSchema),
+});
+
 /** Conditional part visibility (schema v4, gap G1): the part renders only
  *  when the prop matches. Boolean props map to Figma visibility bindings;
  *  enum conditions resolve per variant. */
@@ -142,6 +164,8 @@ export interface Part {
    *  span (content). Root uses semantics.element. */
   element?: string;
   layout?: z.infer<typeof LayoutSchema>;
+  /** v7: per-enum-value layout overrides merged over `layout`. */
+  layoutByProp?: z.infer<typeof LayoutByPropSchema>;
   /** CSS property → token reference. The CSS Module AND the Figma bindings
    *  are generated from these — there is no handwritten style layer. */
   tokens?: Record<string, string>;
@@ -176,6 +200,8 @@ export const PartSchema: z.ZodType<Part> = z.lazy(() =>
     description: z.string().optional(),
     element: z.string().optional(),
     layout: LayoutSchema.optional(),
+    /** v7. */
+    layoutByProp: LayoutByPropSchema.optional(),
     tokens: z.record(z.string(), TokenRefSchema).optional(),
     states: z.record(z.string(), z.record(z.string(), TokenRefSchema)).optional(),
     content: z.strictObject({ prop: z.string() }).optional(),
@@ -301,6 +327,30 @@ export type ContractEvent = z.infer<typeof EventSchema>;
 export type Slot = z.infer<typeof SlotSchema>;
 export type ComponentRef = z.infer<typeof ComponentRefSchema>;
 export type Layout = z.infer<typeof LayoutSchema>;
+export type VariantLayout = z.infer<typeof VariantLayoutSchema>;
+
+/** The layout a part has under one concrete variant combo: layoutByProp
+ *  override (if the combo's value has one) merged over the base layout.
+ *  With an empty subst (code side / no enum context) the base layout wins. */
+export interface ResolvedLayout {
+  display?: 'flex' | 'inline-flex';
+  direction?: 'row' | 'column' | 'row-reverse' | 'column-reverse';
+  align?: 'start' | 'center' | 'end' | 'stretch';
+  justify?: 'start' | 'center' | 'end' | 'space-between';
+  grow?: boolean;
+  overlap?: boolean;
+}
+
+export function resolveLayout(
+  part: Part,
+  subst: Record<string, string>,
+): ResolvedLayout | undefined {
+  const base = part.layout as ResolvedLayout | undefined;
+  const byProp = part.layoutByProp;
+  const override = byProp ? byProp.map[subst[byProp.prop] ?? ''] : undefined;
+  if (!override) return base;
+  return { ...base, ...override };
+}
 
 // ---------------------------------------------------------------------------
 // Shared composition helpers (used by both generators and the differ)

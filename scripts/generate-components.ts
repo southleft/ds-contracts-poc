@@ -145,7 +145,25 @@ function textDefault(contract: Contract): string {
 }
 
 const isStructural = (part: Part) =>
-  Boolean(part.parts || part.slot || part.layout) && !part.content && !part.component;
+  Boolean(part.parts || part.slot || part.layout || part.layoutByProp) &&
+  !part.content &&
+  !part.component;
+
+/** CSS declarations for a layoutByProp override (v7). Reversed directions
+ *  are plain CSS here; the canvas resolves them by reversing child order. */
+function layoutOverrideDecls(o: {
+  display?: string;
+  direction?: string;
+  align?: string;
+  justify?: string;
+}): string[] {
+  const d: string[] = [];
+  if (o.display) d.push(`display: ${o.display}`);
+  if (o.direction) d.push(`flex-direction: ${o.direction}`);
+  if (o.align) d.push(`align-items: ${ALIGN_CSS[o.align]}`);
+  if (o.justify) d.push(`justify-content: ${JUSTIFY_CSS[o.justify]}`);
+  return d;
+}
 
 // ---------------------------------------------------------------------------
 // Contract-level validation (beyond the Zod schema)
@@ -209,6 +227,27 @@ function validateContract(contract: Contract, byId: Map<string, Contract>, error
         errors.push(
           `${contract.id}: part "${name}" binds content to unknown text prop "${part.content.prop}"`,
         );
+      }
+    }
+    // v7 layoutByProp: the driving prop must be a declared enum and every
+    // map key one of its values; component parts lay themselves out via
+    // their own contract, so an override there would be silently dead.
+    if (part.layoutByProp) {
+      const lbp = part.layoutByProp;
+      const lbpProp = contract.props.find((pr) => pr.name === lbp.prop);
+      if (!lbpProp) {
+        errors.push(`${contract.id}: part "${name}" layoutByProp references unknown prop "${lbp.prop}"`);
+      } else if (!isEnum(lbpProp)) {
+        errors.push(`${contract.id}: part "${name}" layoutByProp prop "${lbp.prop}" must be an enum prop`);
+      } else {
+        for (const k of Object.keys(lbp.map)) {
+          if (!lbpProp.type.enum.includes(k)) {
+            errors.push(`${contract.id}: part "${name}" layoutByProp map key "${k}" is not a value of prop "${lbp.prop}"`);
+          }
+        }
+      }
+      if (part.component) {
+        errors.push(`${contract.id}: part "${name}" is a component instance — layoutByProp cannot restyle it (the child contract owns its layout)`);
       }
     }
     if (part.visibleWhen) {
@@ -483,6 +522,19 @@ function generateCss(contract: Contract, tokenInventory: Set<string>, errors: st
     lines.push('}');
   }
 
+  // v7 layoutByProp on the root: the enum class sits on the root element
+  // itself, so the override rule targets it directly (emitted after .root
+  // so the override wins at equal specificity).
+  if (root.layoutByProp) {
+    for (const [value, override] of Object.entries(root.layoutByProp.map)) {
+      const decls = layoutOverrideDecls(override);
+      if (decls.length === 0) continue;
+      lines.push('', `.${root.layoutByProp.prop}-${value} {`);
+      for (const d of decls) lines.push(`  ${d};`);
+      lines.push('}');
+    }
+  }
+
   for (const [state, decls] of Object.entries(root.states ?? {})) {
     const sel = STATE_SELECTORS[state];
     if (!sel) {
@@ -588,6 +640,17 @@ function generateCss(contract: Contract, tokenInventory: Set<string>, errors: st
     }
     if ((part.tokens && ('border-width' in part.tokens || 'border-color' in part.tokens))) {
       decls.push('border-style: solid');
+    }
+    // v7 layoutByProp on a nested part: descendant rule under the root's
+    // enum class — exactly the nested-token-substitution rule shape.
+    if (part.layoutByProp) {
+      for (const [value, override] of Object.entries(part.layoutByProp.map)) {
+        const lDecls = layoutOverrideDecls(override);
+        if (lDecls.length === 0) continue;
+        nestedSubRules.push(
+          `\n.${part.layoutByProp.prop}-${value} .${name} {\n${lDecls.map((d) => `  ${d};`).join('\n')}\n}`,
+        );
+      }
     }
     if (decls.length === 0 && nestedSubRules.length === 0) continue;
     if (decls.length > 0) {
