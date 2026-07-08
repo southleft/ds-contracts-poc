@@ -11,7 +11,8 @@
  */
 import { importFromUrl } from '../../../extract/figma/rest/fetch.js';
 import { proposeFromFigmaDump } from '../../../core/index.js';
-import { contractIdByName, corpus } from './data.js';
+import { contractIdByName } from './data.js';
+import { activeTokens } from './token-source.js';
 
 export type FigmaImportResult = Awaited<ReturnType<typeof importFromUrl>>;
 type DumpSetArg = Parameters<typeof proposeFromFigmaDump>[0];
@@ -60,7 +61,9 @@ export function proposalsFromDump(dump: FigmaImportResult['dump']): FigmaProposa
     if (name === '_provenance' || !value || typeof value !== 'object' || !('variants' in value)) continue;
     out.push({
       setName: name,
-      ...proposeFromFigmaDump(value as DumpSetArg, { corpus, contractIdByName, fileKey }),
+      // The ACTIVE corpus — nearest-token suggestions and hex→token matching
+      // come from the user's pasted tree when one is applied.
+      ...proposeFromFigmaDump(value as DumpSetArg, { corpus: activeTokens().corpus, contractIdByName, fileKey }),
     });
   }
   return out;

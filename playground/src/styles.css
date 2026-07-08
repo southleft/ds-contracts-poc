@@ -297,6 +297,17 @@ label {
   font-size: 12px;
 }
 
+/* Marker on the Tokens tab while a pasted user tree is the active source. */
+.tabs__dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  margin-left: 5px;
+  border-radius: 50%;
+  background: var(--pg-accent);
+  vertical-align: 1px;
+}
+
 /* -------------------------------------------------------------- landing */
 
 .landing {

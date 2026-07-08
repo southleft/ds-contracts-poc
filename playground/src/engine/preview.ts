@@ -7,7 +7,8 @@
  * compilation; works for ANY schema-valid contract, including imported ones.
  */
 import { emitHtml, type Contract } from '../../../core/index.js';
-import { icons, tokenInventory, tokenStylesheets } from './data.js';
+import { icons } from './data.js';
+import { activeTokens } from './token-source.js';
 
 export type PreviewResult =
   | { ok: true; doc: string }
@@ -19,8 +20,8 @@ const FRAME_BODY_CSS = `
   body {
     margin: 0;
     padding: 20px;
-    background: var(--color-surface-background);
-    color: var(--color-surface-foreground);
+    background: var(--color-surface-background, Canvas);
+    color: var(--color-surface-foreground, CanvasText);
     font-family: var(--font-family-sans, system-ui, sans-serif);
   }
 `;
@@ -30,9 +31,12 @@ export function buildPreview(
   contracts: Map<string, Contract>,
   theme: 'light' | 'dark',
 ): PreviewResult {
+  // The ACTIVE token source: repo stylesheets by default; a pasted user tree
+  // swaps in a stylesheet regenerated from the paste (token-source.ts).
+  const { inventory, stylesheets } = activeTokens();
   let emitted: { html: string; css: string };
   try {
-    emitted = emitHtml(contract, { tokens: tokenInventory, icons, contracts });
+    emitted = emitHtml(contract, { tokens: inventory, icons, contracts });
   } catch (e) {
     return { ok: false, error: e instanceof Error ? e.message : String(e) };
   }
@@ -40,7 +44,7 @@ export function buildPreview(
     '<!doctype html>',
     `<html${theme === 'dark' ? ' data-theme="dark"' : ''}>`,
     '<head><meta charset="utf-8">',
-    `<style>${tokenStylesheets.base}\n${tokenStylesheets.dark}\n${tokenStylesheets.brands}</style>`,
+    `<style>${stylesheets.base}\n${stylesheets.dark}\n${stylesheets.brands}</style>`,
     `<style>${FRAME_BODY_CSS}</style>`,
     `<style>${emitted.css}</style>`,
     '</head><body>',
