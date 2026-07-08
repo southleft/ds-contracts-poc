@@ -1,6 +1,6 @@
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="docs/assets/logo-dark.svg">
-  <img alt="" src="docs/assets/logo-light.svg" width="72" height="72">
+  <img alt="" src="docs/assets/logo-light.svg" width="96" height="58">
 </picture>
 
 # Design System Contracts

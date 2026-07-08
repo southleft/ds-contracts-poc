@@ -102,6 +102,9 @@ textarea,
 }
 
 .topbar__brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
   color: var(--pg-fg);
   font-weight: 600;
   letter-spacing: 0.01em;
@@ -127,8 +130,10 @@ textarea,
 }
 
 .topbar__glyph {
-  font-family: var(--pg-mono);
-  color: var(--pg-accent);
+  width: 28px;
+  height: 17px;
+  display: block;
+  color: var(--pg-fg);
 }
 
 .topbar__nav {
