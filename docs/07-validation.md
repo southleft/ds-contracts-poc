@@ -1,6 +1,6 @@
 # 7 · Validation — Claims, Evals, Evidence
 
-This PoC makes five falsifiable claims. Each is backed by an automated eval (`npm run eval`, 37 cases, runs the real pipeline in a scratch copy — not mocks) or an executed live design-tool check. Current status: **54/54 deterministic evals pass** (`evals/results.json`), all live checks pass. This section is written to be lifted into a PRD.
+This PoC makes five falsifiable claims. Each is backed by an automated eval (`npm run eval`, 37 cases, runs the real pipeline in a scratch copy — not mocks) or an executed live design-tool check. Current status: **56/56 deterministic evals pass** (`evals/results.json`), all live checks pass. This section is written to be lifted into a PRD.
 
 **Round 6 addendum (governed generation):** two eval cases exercise the deterministic generation judge itself — `judge-passes-canonical-screen` and `judge-catches-all-violation-classes` — backing the measured 100-vs-69 governed-generation A/B result in [docs/10](10-honest-generation.md).
 

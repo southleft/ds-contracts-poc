@@ -1154,6 +1154,40 @@ const cases: Case[] = [
         throw new Error('fabrication check missing/failed');
     },
   },
+  {
+    // The engine-is-a-library claim: the new emitters' schema-driven invariants
+    // hold, and the receipt can go red — a broken literal resolution must fail.
+    id: 'emitter-invariants-hold-and-fail',
+    claim: 'C1-determinism',
+    run: () => {
+      let r = run(TSX, ['core/emitters-check.ts']);
+      if (r.status !== 0 || !r.out.includes('all emitter invariants hold'))
+        throw new Error(`Emitter invariants failed:\n${r.out}`);
+      replaceInFile('core/emit-react-inline.ts',
+        "return typeof v === 'number' ? v : String(v);",
+        "return `var(--${tokenPath.split('.').join('-')})`;");
+      r = run(TSX, ['core/emitters-check.ts']);
+      if (r.status === 0 || !r.out.includes('NO var(--'))
+        throw new Error('Inline emitter leaking custom properties passed the receipt');
+    },
+  },
+  {
+    // The public-playground claim: the core barrel bundles for platform=browser
+    // and emits with zero node globals — and a node:* import sneaking into the
+    // core module graph must fail the receipt by name.
+    id: 'core-browser-importable',
+    claim: 'C1-determinism',
+    run: () => {
+      let r = run(process.execPath, ['scripts/core-browser-check.mjs']);
+      if (r.status !== 0 || !r.out.includes('no node globals'))
+        throw new Error(`Browser check failed on a clean tree:\n${r.out}`);
+      replaceInFile('core/tokens.ts',
+        'export function collectTokenPaths',
+        "import { readFileSync } from 'node:fs';\nvoid readFileSync;\nexport function collectTokenPaths");
+      r = run(process.execPath, ['scripts/core-browser-check.mjs']);
+      if (r.status === 0) throw new Error('A node:fs import inside the core passed the browser bundle check');
+    },
+  },
 ];
 
 // ---------------------------------------------------------------------------

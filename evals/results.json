@@ -1,6 +1,6 @@
 {
-  "passed": 54,
-  "total": 54,
+  "passed": 56,
+  "total": 56,
   "results": [
     {
       "id": "refuse-unknown-token-reference",
@@ -270,6 +270,16 @@
     {
       "id": "design-rest-degraded-variables-never-fabricates",
       "claim": "C5-extraction",
+      "pass": true
+    },
+    {
+      "id": "emitter-invariants-hold-and-fail",
+      "claim": "C1-determinism",
+      "pass": true
+    },
+    {
+      "id": "core-browser-importable",
+      "claim": "C1-determinism",
       "pass": true
     }
   ]
