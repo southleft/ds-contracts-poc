@@ -10,3 +10,4 @@ dashboard/dist/
 private/
 .claude/
 .env.figma
+.env.local
