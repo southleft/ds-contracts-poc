@@ -7,9 +7,11 @@
 // INSTANCE_SWAP preferredValues, and the names of nested component instances
 // (for verifying contract `component` refs like Card ⊃ Avatar).
 //
-// GUARD: every script that touches the file verifies the file name first —
-// multi-file bridge routing has been observed to target the wrong file.
-if (figma.root.name !== 'DS Contracts POC') throw new Error('WRONG FILE: routed to ' + figma.root.name);
+// v3 (provenance): the output carries `fileKey` + `extractedAt` so
+// parity/diff.ts can verify the snapshot's identity (against the contracts'
+// anchors.figma.fileKey) and freshness. The old hard-coded file-NAME guard is
+// gone — names are user-editable and fileKey is authoritative; the caller
+// (diff.ts) verifies the key instead of this script guessing.
 await figma.loadAllPagesAsync();
 
 const rgbToHex = (c) => {
@@ -77,4 +79,10 @@ for (const col of await figma.variables.getLocalVariableCollectionsAsync()) {
   collections.push({ name: col.name, modes: col.modes.map((m) => m.name), variables: vars });
 }
 
-return { fileName: figma.root.name, sets, collections };
+return {
+  fileName: figma.root.name,
+  fileKey: figma.fileKey || null, // provenance: which file this snapshot describes
+  extractedAt: Date.now(), // provenance: when it was taken (staleness check)
+  sets,
+  collections,
+};
