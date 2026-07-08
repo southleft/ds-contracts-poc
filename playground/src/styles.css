@@ -603,17 +603,81 @@ label {
   margin-left: auto;
 }
 
+/* Refusal-line highlighting: a transparent-text <pre> backdrop under the
+ * textarea (wrap="off" on both layers — lines never re-wrap apart). The two
+ * layers share EXACTLY these font metrics and padding; change one, change
+ * both. */
+
+.editor__wrap {
+  position: relative;
+  flex: 1;
+  display: flex;
+  min-height: 240px;
+  background: var(--pg-bg);
+}
+
+.editor__backdrop {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.editor__backdrop-pre {
+  margin: 0;
+  padding: 12px 14px;
+  font-family: var(--pg-mono);
+  font-size: 12px;
+  line-height: 1.55;
+  white-space: pre;
+  width: max-content;
+  min-width: 100%;
+  color: transparent;
+}
+
+.editor__line--refused {
+  background: color-mix(in srgb, var(--pg-danger) 14%, transparent);
+}
+
 .editor__textarea {
+  position: relative;
   flex: 1;
   border: none;
   padding: 12px 14px;
-  background: var(--pg-bg);
+  font-size: 12px;
+  line-height: 1.55;
+  background: transparent;
   min-height: 240px;
   resize: none;
 }
 
 .editor__textarea:focus-visible {
   outline-offset: -2px;
+}
+
+/* Refusal entries that resolved to a line are clickable — scroll-to-line. */
+
+.validation__jump {
+  display: block;
+  width: 100%;
+  text-align: left;
+  border: none;
+  background: none;
+  padding: 0;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+.validation__jump:hover {
+  background: none;
+  text-decoration: underline;
+}
+
+.validation__jump-line {
+  color: var(--pg-faint);
+  text-decoration: none;
+  white-space: nowrap;
 }
 
 .validation {

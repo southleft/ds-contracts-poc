@@ -35,8 +35,10 @@ import {
   storedUserTokensText,
   useTokenSource,
 } from '../engine/token-source';
+import { locateJsonParseError, resolveIssueLines } from '../engine/refusal-lines';
 import { validateContractText } from '../engine/validate';
 import type { ReceiptGroup, Receipts } from '../receipts';
+import { ContractEditor, type ContractEditorHandle } from '../components/ContractEditor';
 import { CopyButton } from '../components/CopyButton';
 import { PreviewFrame } from '../components/PreviewFrame';
 import { ReceiptsPanel } from '../components/ReceiptsPanel';
@@ -134,6 +136,49 @@ export function Playground() {
   if (validation.status === 'valid') {
     lastGood.current = { contract: validation.contract, contracts: validation.contracts };
   }
+
+  // Refusal → editor line resolution. Lines are only trusted while the text
+  // on screen IS the text that was validated (the debounce window would
+  // otherwise highlight yesterday's lines on today's keystrokes).
+  const editorRef = useRef<ContractEditorHandle>(null);
+  const issueLines = useMemo<(number | null)[] | null>(() => {
+    if (text !== debouncedText) return null;
+    if (validation.status === 'json-error') return [locateJsonParseError(validation.message)];
+    if (validation.status === 'schema-error' || validation.status === 'violations') {
+      return resolveIssueLines(debouncedText, validation.details);
+    }
+    return null;
+  }, [validation, debouncedText, text]);
+  const highlightLines = useMemo(() => {
+    const set = new Set<number>();
+    for (const line of issueLines ?? []) if (line !== null) set.add(line);
+    return set;
+  }, [issueLines]);
+
+  /** The refusal list — each entry that resolved to a line scrolls there. */
+  const refusalList = (issues: string[]) => (
+    <ul className="validation__list">
+      {issues.map((issue, i) => {
+        const line = issueLines?.[i] ?? null;
+        return (
+          <li key={i}>
+            {line !== null ? (
+              <button
+                type="button"
+                className="validation__jump"
+                onClick={() => editorRef.current?.scrollToLine(line)}
+              >
+                {issue}
+                <span className="validation__jump-line"> → line {line + 1}</span>
+              </button>
+            ) : (
+              issue
+            )}
+          </li>
+        );
+      })}
+    </ul>
+  );
 
   // -------------------------------------------------------------- receipts
   const [receipts, setReceipts] = useState<Receipts | null>(null);
@@ -1104,12 +1149,11 @@ export function Playground() {
           </div>
         ) : null}
         <div className="editor">
-          <textarea
-            className="editor__textarea"
-            value={text}
-            onChange={(e) => setText(e.target.value)}
-            spellCheck={false}
-            aria-label="Contract JSON editor"
+          <ContractEditor
+            ref={editorRef}
+            text={text}
+            onChange={setText}
+            highlights={highlightLines}
             placeholder="The contract — pick an example, import from Figma, or paste code."
           />
           <div
@@ -1128,31 +1172,21 @@ export function Playground() {
             {validation.status === 'json-error' && (
               <>
                 Not JSON
-                <ul className="validation__list">
-                  <li>{validation.message}</li>
-                </ul>
+                {refusalList([validation.message])}
               </>
             )}
             {validation.status === 'schema-error' && (
               <>
                 Refused by ContractSchema — {validation.issues.length} issue
                 {validation.issues.length === 1 ? '' : 's'}
-                <ul className="validation__list">
-                  {validation.issues.map((issue, i) => (
-                    <li key={i}>{issue}</li>
-                  ))}
-                </ul>
+                {refusalList(validation.issues)}
               </>
             )}
             {validation.status === 'violations' && (
               <>
                 Schema-valid, but the generator refuses — {validation.issues.length} named violation
                 {validation.issues.length === 1 ? '' : 's'}
-                <ul className="validation__list">
-                  {validation.issues.map((issue, i) => (
-                    <li key={i}>{issue}</li>
-                  ))}
-                </ul>
+                {refusalList(validation.issues)}
               </>
             )}
           </div>
