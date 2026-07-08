@@ -739,12 +739,17 @@ const cases: Case[] = [
     claim: 'C3-detection',
     run: () => {
       editJson(FIGMA_COMPONENTS, (s2) => { s2.fileKey = 'WRONG_FILE_KEY'; });
+      // Merge with the repo baseline rather than replacing it — the claim under
+      // test is "a baselined finding stops failing the exit code", which must
+      // hold regardless of what in-flight drift the repo already acknowledges.
+      let existing = [];
+      try { existing = JSON.parse(readFileSync(path.join(SCRATCH, 'parity', 'baseline.json'), 'utf8')); } catch { /* none */ }
       writeFileSync(path.join(SCRATCH, 'parity', 'baseline.json'),
-        JSON.stringify(['figma|mismatch|snapshot-provenance']) + '\n');
+        JSON.stringify([...existing, 'figma|mismatch|snapshot-provenance']) + '\n');
       const r = parity();
       if (r.status !== 0) throw new Error('Baselined finding still failed the exit code');
       const report = JSON.parse(readFileSync(path.join(SCRATCH, 'parity', 'report.json'), 'utf8'));
-      if (report.acknowledged?.length !== 1 || report.findings.length !== 0)
+      if (!report.acknowledged?.some((f) => f.subject === 'snapshot-provenance') || report.findings.length !== 0)
         throw new Error('Baselined finding not routed to acknowledged');
     },
   },

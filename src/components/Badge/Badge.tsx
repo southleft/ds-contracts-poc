@@ -1,6 +1,6 @@
 /**
  * GENERATED FILE — DO NOT EDIT.
- * Source of truth: contracts/badge.contract.json (ds.badge v1.0.0)
+ * Source of truth: contracts/badge.contract.json (ds.badge v1.1.0)
  * Regenerate with: npm run generate
  */
 import { forwardRef } from 'react';
@@ -9,7 +9,7 @@ import styles from './Badge.module.css';
 
 export interface BadgeProps extends HTMLAttributes<HTMLSpanElement> {
   /** The feedback tone being communicated. */
-  variant?: 'info' | 'success' | 'warning' | 'danger';
+  variant?: 'info' | 'success' | 'warning' | 'danger' | 'error';
 }
 
 /** Communicates status or categorization at a glance. Non-interactive. */

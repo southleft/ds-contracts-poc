@@ -1,16 +1,28 @@
 {
   "summary": {
-    "total": 0,
+    "total": 1,
     "acknowledged": 0,
-    "bySurface": {}
+    "bySurface": {
+      "figma": {
+        "mismatch": 1
+      }
+    }
   },
-  "findings": [],
+  "findings": [
+    {
+      "surface": "figma",
+      "classification": "mismatch",
+      "subject": "Badge.Variant",
+      "detail": "Variant options differ — contract: [Info, Success, Warning, Danger, Error], figma: [Info, Success, Warning, Danger]",
+      "remedy": "Adopt into contract (promotion) or re-sync the set"
+    }
+  ],
   "acknowledged": [],
   "checkedContracts": [
     "ds.accordion-item@1.1.0",
     "ds.avatar-group@1.0.0",
     "ds.avatar@1.0.0",
-    "ds.badge@1.0.0",
+    "ds.badge@1.1.0",
     "ds.banner@1.0.0",
     "ds.blockquote@1.0.0",
     "ds.breadcrumb-item@1.0.0",

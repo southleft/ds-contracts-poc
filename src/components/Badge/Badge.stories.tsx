@@ -1,6 +1,6 @@
 /**
  * GENERATED FILE — DO NOT EDIT.
- * Source of truth: contracts/badge.contract.json (ds.badge v1.0.0)
+ * Source of truth: contracts/badge.contract.json (ds.badge v1.1.0)
  * Regenerate with: npm run generate
  */
 import type { Meta, StoryObj } from '@storybook/react-vite';
@@ -20,7 +20,7 @@ const meta = {
   argTypes: {
     variant: {
       control: 'select',
-      options: ['info', 'success', 'warning', 'danger'],
+      options: ['info', 'success', 'warning', 'danger', 'error'],
       description: 'The feedback tone being communicated.',
     },
     children: { control: 'text', description: 'Badge label.' },
@@ -51,6 +51,10 @@ export const Warning: Story = {
 export const Danger: Story = {
   args: { variant: 'danger' },
 };
+
+export const Error: Story = {
+  args: { variant: 'error' },
+};
 /** Every legal combination the contract defines. */
 export const Matrix: Story = {
   parameters: { controls: { disable: true } },
@@ -68,6 +72,7 @@ export const Matrix: Story = {
       <Badge variant="success">Badge</Badge>
       <Badge variant="warning">Badge</Badge>
       <Badge variant="danger">Badge</Badge>
+      <Badge variant="error">Badge</Badge>
     </div>
   ),
 };

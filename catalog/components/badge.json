@@ -1,7 +1,7 @@
 {
   "id": "ds.badge",
   "name": "Badge",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "status": "draft",
   "description": "Communicates status or categorization at a glance. Non-interactive.",
   "figma": {
@@ -15,7 +15,8 @@
         "info",
         "success",
         "warning",
-        "danger"
+        "danger",
+        "error"
       ],
       "default": "info",
       "description": "The feedback tone being communicated."
