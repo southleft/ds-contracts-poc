@@ -96,6 +96,7 @@
  *
  * Every proposal is validated against ContractSchema before it is written.
  */
+import type { MinimalChildContract } from '../../core/propose-figma.js';
 import { mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -121,22 +122,28 @@ export {
 // ---------------------------------------------------------------------------
 
 export function loadContractIdsByName(dir: string): Map<string, string> {
+  return loadContracts(dir).byName;
+}
+
+/** Name→id map plus the contracts themselves (for fixed-prop canonicalization). */
+export function loadContracts(dir: string): { byName: Map<string, string>; byId: Map<string, MinimalChildContract> } {
   const out = new Map<string, string>();
+  const contractsById = new Map<string, MinimalChildContract>();
   let files: string[] = [];
   try {
     files = readdirSync(dir).filter((f) => f.endsWith('.contract.json'));
   } catch {
-    return out;
+    return { byName: out, byId: contractsById };
   }
   for (const f of files) {
     try {
       const c = JSON.parse(readFileSync(path.join(dir, f), 'utf8')) as { id?: string; name?: string };
-      if (c.id && c.name) out.set(c.name, c.id);
+      if (c.id && c.name) { out.set(c.name, c.id); contractsById.set(c.id, c as unknown as MinimalChildContract); }
     } catch {
       /* not a contract — skip */
     }
   }
-  return out;
+  return { byName: out, byId: contractsById };
 }
 
 
@@ -160,14 +167,15 @@ function main() {
   const root = process.cwd();
   const dump = JSON.parse(readFileSync(path.resolve(root, dumpPathArg), 'utf8')) as DumpFile;
   const corpus = loadTokenCorpus(root);
-  const contractIdByName = loadContractIdsByName(path.resolve(root, contractsDir));
+  const loaded = loadContracts(path.resolve(root, contractsDir));
+  const contractIdByName = loaded.byName;
   const fileKey = dump._provenance?.fileKey ?? null;
 
   const results: Array<{ setName: string; proposal: FigmaProposalResult }> = [];
   mkdirSync(path.resolve(root, outDir), { recursive: true });
   for (const [name, value] of Object.entries(dump)) {
     if (name === '_provenance' || !isDumpSet(value)) continue;
-    const proposal = proposeFromDump(value, { corpus, contractIdByName, fileKey });
+    const proposal = proposeFromDump(value, { corpus, contractIdByName, contractsById: loaded.byId, fileKey });
     results.push({ setName: name, proposal });
     const file = path.resolve(root, outDir, `${kebab(name)}.contract.proposed.json`);
     writeFileSync(file, JSON.stringify(proposal.contract, null, 2) + '\n');

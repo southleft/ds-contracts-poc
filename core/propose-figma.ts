@@ -32,6 +32,13 @@ export const camel = (s: string): string =>
 const dotPath = (slashName: string) => slashName.split('/').join('.');
 const ref = (slashName: string) => `{${dotPath(slashName)}}`;
 
+/** The slice of a child contract canonicalization needs — kept minimal so the
+ * playground can pass its bundled contracts without importing the zod types. */
+export interface MinimalChildContract {
+  id: string;
+  props: Array<{ name: string; bindings: { figma: { property?: string; values?: Record<string, string> } } }>;
+}
+
 // ---------------------------------------------------------------------------
 // Variant axes
 // ---------------------------------------------------------------------------
@@ -217,6 +224,7 @@ interface Ctx {
   totalVariants: string[];
   corpus: TokenCorpus;
   contractIdByName: Map<string, string>;
+  contractsById?: Map<string, MinimalChildContract>;
   prefix: string;
   notes: string[];
   unbound: UnboundValue[];
@@ -668,11 +676,42 @@ function canonicalizeInstanceProps(
   where: string,
 ): Record<string, string | boolean> {
   const out: Record<string, string | boolean> = {};
+  const childId = ctx.contractIdByName.get(instanceOf);
+  const child = childId ? ctx.contractsById?.get(childId) : undefined;
+  let mapped = 0;
   for (const [property, value] of Object.entries(applied)) {
-    // Best effort without the child contract loaded: canonical spelling.
-    out[camel(property)] = typeof value === 'string' ? camel(value) : value;
+    // Preferred: canonicalize through the child contract's own bindings —
+    // the figma property name and value spelling map back to the canonical
+    // prop name and enum value (Size/"Small" → size/"sm"), never by guessing.
+    const childProp = child?.props.find((p) => p.bindings.figma.property === property.split('#')[0]);
+    if (childProp && typeof value === 'string') {
+      const values = (childProp.bindings.figma as { values?: Record<string, string> }).values;
+      const canonical = values ? Object.entries(values).find(([, spelled]) => spelled === value)?.[0] : undefined;
+      if (canonical !== undefined) {
+        out[childProp.name] = canonical;
+        mapped++;
+        continue;
+      }
+    }
+    if (childProp && typeof value === 'string' && !(childProp.bindings.figma as { values?: unknown }).values) {
+      // TEXT props have no values map — the string passes through verbatim.
+      out[childProp.name] = value;
+      mapped++;
+      continue;
+    }
+    if (childProp && typeof value === 'boolean') {
+      out[childProp.name] = value;
+      mapped++;
+      continue;
+    }
+    // Fallback without the child contract in scope: canonical spelling.
+    out[camel(property.split('#')[0])] = typeof value === 'string' ? camel(value) : value;
   }
-  ctx.notes.push(`${where}: fixed props of "${instanceOf}" canonicalized by spelling (dump v1.1) — verify against the child contract's bindings`);
+  if (child && mapped === Object.keys(applied).length) {
+    ctx.notes.push(`${where}: fixed props of "${instanceOf}" canonicalized through ${child.id}'s bindings`);
+  } else {
+    ctx.notes.push(`${where}: fixed props of "${instanceOf}" canonicalized by spelling (dump v1.1)${child ? ' — some values missing from ' + child.id + "'s bindings, verify" : " — verify against the child contract's bindings"}`);
+  }
   return out;
 }
 
@@ -685,6 +724,7 @@ export function proposeFromDump(
   opts: {
     corpus: TokenCorpus;
     contractIdByName: Map<string, string>;
+    contractsById?: Map<string, MinimalChildContract>;
     prefix?: string;
     fileKey?: string | null;
   },
@@ -698,6 +738,7 @@ export function proposeFromDump(
     totalVariants: variantNames,
     corpus: opts.corpus,
     contractIdByName: opts.contractIdByName,
+    contractsById: opts.contractsById,
     prefix,
     notes: [],
     unbound: [],
