@@ -23,6 +23,7 @@
   "include": [
     "src",
     "scripts",
+    "core",
     ".storybook",
     "extract",
     "parity",
