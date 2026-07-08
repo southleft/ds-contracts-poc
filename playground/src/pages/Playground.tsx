@@ -829,7 +829,7 @@ export function Playground() {
         )}
 
         {sourceTab === 'describe' && (
-          <div className="rail__section">
+          <div className="rail__section rail__form">
             <div className="field">
               <label htmlFor="desc-prompt">Describe a component</label>
               <textarea
@@ -851,8 +851,8 @@ export function Playground() {
                 placeholder="sk-ant-…"
               />
               <p className="hint">
-                Session-only, like the Figma token. Sent browser-direct to api.anthropic.com and
-                nowhere else — never stored, never persisted, gone on reload.
+                Session-only, like the Figma token — sent browser-direct to api.anthropic.com and
+                nowhere else, gone on reload.
               </p>
             </div>
             <button
@@ -864,25 +864,28 @@ export function Playground() {
               {descBusy ? 'Working…' : 'Generate contract'}
             </button>
             <p className="hint">
-              Model: {ANTHROPIC_MODEL}. The output is constrained to the contract shape by a forced
-              tool call — never freeform code — and lands in the same governed editor as every other
-              source: ContractSchema plus the generator referee it, refusals by name.
+              Model: {ANTHROPIC_MODEL}. A forced tool call constrains the output to the contract
+              shape — never freeform code — and the same governed editor referees it, refusals by
+              name.
             </p>
 
-            <p className="hint" style={{ marginTop: 16 }}>
-              No key handy? Run the identical code path over a recorded-shape response — fixture
-              transport, same governance. The first round deliberately references a token that does
-              not exist, so you can watch the named refusal and the fix round.
-            </p>
-            <button type="button" disabled={!!descBusy} onClick={() => void runDescribe(true)}>
-              {descBusy ? 'Working…' : 'Demo generate (recorded fixture)'}
-            </button>
+            <details className="rail__details">
+              <summary>No key handy? Demo generate instead</summary>
+              <p className="hint">
+                The identical code path over a recorded-shape response — fixture transport, same
+                governance. Round 1 deliberately references a token that does not exist, so the
+                named refusal and the fix round both demo.
+              </p>
+              <button type="button" disabled={!!descBusy} onClick={() => void runDescribe(true)}>
+                {descBusy ? 'Working…' : 'Demo generate (recorded fixture)'}
+              </button>
+            </details>
 
             {descBusy ? <p className="hint">{descBusy}</p> : null}
             {descError ? <div className="notice notice--error">{descError}</div> : null}
 
             {descRefusals && descSession.current ? (
-              <div className="notice" style={{ marginTop: 12 }}>
+              <div className="notice">
                 The proposal was refused by name ({descRefusals.length} violation
                 {descRefusals.length === 1 ? '' : 's'} under the editor). Nothing retries silently —
                 send the refusal text back yourself:
@@ -1098,14 +1101,12 @@ export function Playground() {
         )}
 
         {sourceTab === 'tokens' && (
-          <div className="rail__section">
-            <div className="rail__group">
-              <div className="rail__group-title">Active token source</div>
-              <p className="hint" style={{ margin: '0 0 8px' }}>
-                {tokenSource.label} — {tokenSource.inventory.size} token paths. Proposals bind
-                against this tree; suggestions, the inline emitter&rsquo;s literals, and the preview
-                stylesheet all come from it.
-              </p>
+          <div className="rail__section rail__form">
+            <div className="token-status">
+              <span className="token-status__k">active token source</span>
+              {tokenSource.label} — {tokenSource.inventory.size} token paths. Proposals,
+              suggestions, the inline emitter&rsquo;s literals, and the preview stylesheet all
+              bind against this tree.
               {tokenSource.kind === 'user' ? (
                 <button type="button" onClick={() => { resetToRepoTokens(); setTokensNote(null); setTokensErrors(null); }}>
                   Back to repo tokens
@@ -1124,24 +1125,26 @@ export function Playground() {
               />
               <p className="hint">
                 Session-only: kept in this tab&rsquo;s sessionStorage, sent nowhere, gone when the
-                tab closes. Multiple documents are merged into one combined tree; a pasted tree is
-                modeless, so light and dark resolve identically.
+                tab closes. Multiple documents merge into one modeless tree — light and dark
+                resolve identically.
               </p>
             </div>
-            <button type="button" className="btn--primary" disabled={!tokensText.trim()} onClick={applyTokens}>
-              Apply tokens
-            </button>
-            <button type="button" onClick={() => setTokensText(STARTER_USER_TOKENS)}>
-              Load starter tree
-            </button>
+            <div className="btn-row">
+              <button type="button" className="btn--primary" disabled={!tokensText.trim()} onClick={applyTokens}>
+                Apply tokens
+              </button>
+              <button type="button" onClick={() => setTokensText(STARTER_USER_TOKENS)}>
+                Load starter tree
+              </button>
+            </div>
             <p className="hint">
-              The starter tree covers exactly what ds.badge needs (with values the repo never
-              shipped). Load any other contract against it and the generator refuses by name —
+              The starter tree covers exactly what ds.badge needs, with values the repo never
+              shipped. Load any other contract against it and the generator refuses by name —
               honest degradation, nothing invented.
             </p>
-            {tokensNote ? <div className="notice" style={{ marginTop: 12 }}>{tokensNote}</div> : null}
+            {tokensNote ? <div className="notice">{tokensNote}</div> : null}
             {tokensErrors ? (
-              <div className="notice notice--error" style={{ marginTop: 12 }}>
+              <div className="notice notice--error">
                 Refused — {tokensErrors.length} issue{tokensErrors.length === 1 ? '' : 's'}
                 <ul className="validation__list">
                   {tokensErrors.map((err, i) => (
