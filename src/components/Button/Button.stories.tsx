@@ -1,6 +1,6 @@
 /**
  * GENERATED FILE — DO NOT EDIT.
- * Source of truth: contracts/button.contract.json (ds.button v1.3.0)
+ * Source of truth: contracts/button.contract.json (ds.button v1.4.0)
  * Regenerate with: npm run generate
  */
 import type { Meta, StoryObj } from '@storybook/react-vite';
@@ -20,7 +20,7 @@ const meta = {
   argTypes: {
     variant: {
       control: 'select',
-      options: ['primary', 'secondary', 'danger'],
+      options: ['primary', 'secondary', 'danger', 'ghost'],
       description: 'Visual prominence of the action.',
     },
     size: { control: 'select', options: ['sm', 'md', 'lg'], description: 'Control density.' },
@@ -59,6 +59,10 @@ export const Secondary: Story = {
 
 export const Danger: Story = {
   args: { variant: 'danger' },
+};
+
+export const Ghost: Story = {
+  args: { variant: 'ghost' },
 };
 export const Disabled: Story = {
   args: { disabled: true },
@@ -101,6 +105,15 @@ export const Matrix: Story = {
         Button
       </Button>
       <Button variant="danger" size="lg">
+        Button
+      </Button>
+      <Button variant="ghost" size="sm">
+        Button
+      </Button>
+      <Button variant="ghost" size="md">
+        Button
+      </Button>
+      <Button variant="ghost" size="lg">
         Button
       </Button>
     </div>

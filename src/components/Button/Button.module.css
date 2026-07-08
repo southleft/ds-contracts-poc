@@ -1,5 +1,5 @@
 /* GENERATED FILE — DO NOT EDIT.
- * Source of truth: contracts/button.contract.json (ds.button v1.3.0)
+ * Source of truth: contracts/button.contract.json (ds.button v1.4.0)
  * Regenerate with: npm run generate
  */
 
@@ -40,6 +40,11 @@
   color: var(--color-action-danger-foreground);
 }
 
+.variant-ghost {
+  background-color: var(--color-action-ghost-background);
+  color: var(--color-action-ghost-foreground);
+}
+
 .size-sm {
   padding-inline: var(--space-inset-x-sm);
   padding-block: var(--space-inset-y-sm);
@@ -68,6 +73,10 @@
 
 .variant-danger:hover:not(:disabled) {
   background-color: var(--color-action-danger-background-hover);
+}
+
+.variant-ghost:hover:not(:disabled) {
+  background-color: var(--color-action-ghost-background-hover);
 }
 
 .root:focus-visible {

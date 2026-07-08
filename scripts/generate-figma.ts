@@ -1451,6 +1451,138 @@ async function buildNode(spec, registry) {
   return node;
 }
 
+
+// djb2 over the compiled spec — stored on the set so unchanged components
+// skip cheaply and CHANGED ones amend in place.
+function specHash(C) {
+  let h = 5381; const s = JSON.stringify(C);
+  for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
+  return String(h);
+}
+
+// IN-PLACE AMEND (2026-07-08, closes the create-only gap): reconcile an
+// existing COMPONENT_SET against the compiled spec while preserving what
+// instances bind to — the set node + key, each variant COMPONENT node, and
+// existing componentProperty IDs. Variant interiors are contract-owned and
+// rebuilt from spec (manual interior edits are drift by definition);
+// instance-level property overrides survive because property IDs do.
+// Destructive changes (extra variants from removed enum values) are
+// REPORTED, never deleted — a human retires those.
+async function amendSet(set, C) {
+  const hash = specHash(C);
+  if (set.getSharedPluginData('ds_contracts', 'specHash') === hash) {
+    return { name: C.setName, skipped: true, reason: 'unchanged', nodeId: set.id, key: set.key };
+  }
+  const report = { name: C.setName, amended: true, nodeId: set.id, key: set.key,
+    addedVariants: [], rebuiltVariants: 0, extraVariants: [], addedProps: [], editedDefaults: [] };
+  const defs = set.componentPropertyDefinitions;
+  const newKeys = {};
+  const defKey = (name) => newKeys[name] ||
+    Object.keys(defs).find((k) => k.split('#')[0] === name) || null;
+
+  for (const w of [
+    ...C.boolProps.map((bp) => ({ name: bp.property, type: 'BOOLEAN', def: bp.default })),
+    ...(C.textProps || []).map((tp) => ({ name: tp.property, type: 'TEXT', def: tp.default })),
+  ]) {
+    const k = defKey(w.name);
+    if (!k) { newKeys[w.name] = set.addComponentProperty(w.name, w.type, w.def); report.addedProps.push(w.name); }
+    else if (defs[k].type === w.type && defs[k].defaultValue !== w.def) {
+      set.editComponentProperty(k, { defaultValue: w.def });
+      report.editedDefaults.push(w.name);
+    }
+  }
+
+  const expected = new Map(C.variants.map((v) => [v.name, v]));
+  for (const ch of set.children) if (!expected.has(ch.name)) report.extraVariants.push(ch.name);
+  const existingByName = new Map(set.children.map((ch) => [ch.name, ch]));
+
+  for (const v of C.variants) {
+    let comp = existingByName.get(v.name);
+    const registry = { texts: [], slots: [], visibles: [] };
+    if (!comp) {
+      comp = await buildNode(v.spec, registry);
+      set.appendChild(comp);
+      report.addedVariants.push(v.name);
+    } else {
+      for (const child of [...comp.children]) child.remove();
+      applyFrameSpec(comp, v.spec);
+      for (const childSpec of v.spec.children || []) {
+        const childNode = await buildNode(childSpec, registry);
+        comp.appendChild(childNode);
+        if (childSpec.pct != null) {
+          try { childNode.resize(Math.max(1, Math.round(comp.width * childSpec.pct)), childNode.height); childNode.primaryAxisSizingMode = 'FIXED'; } catch (e) {}
+        }
+        if (childSpec.grow && 'layoutSizingHorizontal' in childNode) {
+          try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) {}
+        } else if (v.spec.layout && v.spec.layout.stretchChildren && !childSpec.fixedWidth && childSpec.type !== 'instance' && 'layoutSizingHorizontal' in childNode) {
+          try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) {}
+        }
+      }
+      report.rebuiltVariants++;
+    }
+    for (const t of registry.texts) {
+      let k = defKey(t.prop);
+      if (!k) { k = set.addComponentProperty(t.prop, 'TEXT', t.default); newKeys[t.prop] = k; report.addedProps.push(t.prop); }
+      t.node.componentPropertyReferences = { characters: k };
+    }
+    for (const sl of registry.slots) {
+      const util = await ensureSlotUtility();
+      let k = defKey(sl.spec.slotProperty);
+      if (!k) {
+        const preferred = [];
+        for (const depName of sl.spec.slotAccepts || []) {
+          const target = findComponentByName(depName);
+          preferred.push({ type: target.type === 'COMPONENT_SET' ? 'COMPONENT_SET' : 'COMPONENT', key: target.key });
+        }
+        k = set.addComponentProperty(sl.spec.slotProperty, 'INSTANCE_SWAP', sl.defaultId || util.id,
+          preferred.length > 0 ? { preferredValues: preferred } : undefined);
+        newKeys[sl.spec.slotProperty] = k;
+        report.addedProps.push(sl.spec.slotProperty);
+      }
+      sl.instance.componentPropertyReferences = { mainComponent: k };
+      if (sl.spec.slotOptional) {
+        let vk = defKey('Show ' + sl.spec.slotProperty);
+        if (!vk) { vk = set.addComponentProperty('Show ' + sl.spec.slotProperty, 'BOOLEAN', true); newKeys['Show ' + sl.spec.slotProperty] = vk; }
+        sl.wrapper.componentPropertyReferences = { visible: vk };
+      }
+    }
+    for (const vis of registry.visibles) {
+      const k = defKey(vis.prop);
+      if (!k) continue;
+      vis.node.componentPropertyReferences = { visible: k };
+      vis.node.visible = vis.default;
+    }
+  }
+
+  // Contract default combo must be the FIRST variant (Figma default = first).
+  const first = set.children.find((ch) => ch.name === C.variants[0].name);
+  if (first && set.children[0] !== first) set.insertChild(0, first);
+
+  // Grid re-layout with the create path's math.
+  const specByName = new Map(C.variants.map((sv) => [sv.name, sv]));
+  const rowsN = Math.max(...C.variants.map((vv) => vv.row)) + 1;
+  const colsN = Math.max(...C.variants.map((vv) => vv.col)) + 1;
+  const colWs = new Array(colsN).fill(0);
+  const rowHs = new Array(rowsN).fill(0);
+  for (const child of set.children) {
+    const sp = specByName.get(child.name);
+    if (!sp) continue;
+    colWs[sp.col] = Math.max(colWs[sp.col], child.width);
+    rowHs[sp.row] = Math.max(rowHs[sp.row], child.height);
+  }
+  for (const child of set.children) {
+    const sp = specByName.get(child.name);
+    if (!sp) continue;
+    let x = PAD, y = PAD;
+    for (let i = 0; i < sp.col; i++) x += colWs[i] + PAD;
+    for (let i = 0; i < sp.row; i++) y += rowHs[i] + PAD;
+    child.x = x; child.y = y;
+  }
+  set.description = C.description;
+  set.setSharedPluginData('ds_contracts', 'specHash', hash);
+  return report;
+}
+
 async function syncOne(C) {
   let existing = null;
   for (const page of figma.root.children) {
@@ -1459,7 +1591,10 @@ async function syncOne(C) {
     );
     if (existing) break;
   }
-  if (existing) return { name: C.setName, skipped: true, nodeId: existing.id, key: existing.key };
+  if (existing && existing.type === 'COMPONENT_SET' && C.isSet) {
+    return await amendSet(existing, C);
+  }
+  if (existing) return { name: C.setName, skipped: true, reason: 'standalone component — amend supports variant sets in v1', nodeId: existing.id, key: existing.key };
 
   // One page per component (see figma-sync/arrange.js for the file layout).
   let compPage = figma.root.children.find((p) => p.name === C.setName);
@@ -1550,6 +1685,7 @@ async function syncOne(C) {
   target.description = C.description;
   target.x = 100;
   target.y = 100;
+  target.setSharedPluginData('ds_contracts', 'specHash', specHash(C));
 
   return {
     name: C.setName,

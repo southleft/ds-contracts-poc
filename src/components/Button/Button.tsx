@@ -1,6 +1,6 @@
 /**
  * GENERATED FILE — DO NOT EDIT.
- * Source of truth: contracts/button.contract.json (ds.button v1.3.0)
+ * Source of truth: contracts/button.contract.json (ds.button v1.4.0)
  * Regenerate with: npm run generate
  */
 import { forwardRef } from 'react';
@@ -14,7 +14,7 @@ const ICONS: Record<string, string> = {
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   /** Visual prominence of the action. */
-  variant?: 'primary' | 'secondary' | 'danger';
+  variant?: 'primary' | 'secondary' | 'danger' | 'ghost';
   /** Control density. */
   size?: 'sm' | 'md' | 'lg';
   /** Prevents interaction and communicates unavailability. */
