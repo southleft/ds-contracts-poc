@@ -550,6 +550,34 @@
           ],
           "additionalProperties": false
         },
+        "stylesWhen": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "prop": {
+                "type": "string"
+              },
+              "equals": {
+                "type": "string"
+              },
+              "styles": {
+                "type": "object",
+                "propertyNames": {
+                  "type": "string"
+                },
+                "additionalProperties": {
+                  "type": "string"
+                }
+              }
+            },
+            "required": [
+              "prop",
+              "styles"
+            ],
+            "additionalProperties": false
+          }
+        },
         "tokens": {
           "type": "object",
           "propertyNames": {

@@ -1,5 +1,5 @@
 /* GENERATED FILE — DO NOT EDIT.
- * Source of truth: contracts/text-field.contract.json (ds.text-field v1.0.0)
+ * Source of truth: contracts/text-field.contract.json (ds.text-field v1.1.0)
  * Regenerate with: npm run generate
  */
 
@@ -14,6 +14,12 @@
   gap: var(--space-inset-y-sm);
   font-family: var(--font-control-family);
   color: var(--color-surface-foreground);
+}
+
+.root[data-is-disabled] {
+  opacity: 0.55;
+  pointer-events: none;
+  cursor: not-allowed;
 }
 
 .labelRow {

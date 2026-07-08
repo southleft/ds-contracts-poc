@@ -27,6 +27,7 @@ import path from 'node:path';
 import prettier from 'prettier';
 import {
   ContractSchema,
+  STYLES_WHEN_ALLOWED,
   pascal,
   slotsOf,
   sortByDependencies,
@@ -250,6 +251,38 @@ function validateContract(contract: Contract, byId: Map<string, Contract>, error
         errors.push(`${contract.id}: part "${name}" is a component instance — layoutByProp cannot restyle it (the child contract owns its layout)`);
       }
     }
+    // v7 stylesWhen: conditions must be checkable (boolean or enum+equals),
+    // and the styles must stay inside the literal whitelist — colors and
+    // dimensions belong in `tokens`, and a token ref here is refused by name.
+    if (part.stylesWhen && part.component) {
+      errors.push(`${contract.id}: part "${name}" is a component instance — stylesWhen cannot restyle it (the child contract owns its styling)`);
+    }
+    for (const sw of part.stylesWhen ?? []) {
+      const swProp = contract.props.find((pr) => pr.name === sw.prop);
+      if (!swProp) {
+        errors.push(`${contract.id}: part "${name}" stylesWhen references unknown prop "${sw.prop}"`);
+      } else if (isEnum(swProp)) {
+        if (sw.equals === undefined) {
+          errors.push(`${contract.id}: part "${name}" stylesWhen on enum prop "${sw.prop}" requires "equals"`);
+        } else if (!swProp.type.enum.includes(sw.equals)) {
+          errors.push(`${contract.id}: part "${name}" stylesWhen.equals "${sw.equals}" is not a value of prop "${sw.prop}"`);
+        }
+      } else if (swProp.type === 'boolean') {
+        if (sw.equals !== undefined) {
+          errors.push(`${contract.id}: part "${name}" stylesWhen on boolean prop "${sw.prop}" must omit "equals"`);
+        }
+      } else {
+        errors.push(`${contract.id}: part "${name}" stylesWhen prop "${sw.prop}" must be a boolean or enum prop`);
+      }
+      for (const [cssProp, value] of Object.entries(sw.styles)) {
+        if (!STYLES_WHEN_ALLOWED.has(cssProp)) {
+          errors.push(`${contract.id}: part "${name}" stylesWhen sets "${cssProp}" which is not in the literal whitelist (${[...STYLES_WHEN_ALLOWED].join(', ')})`);
+        }
+        if (value.includes('{')) {
+          errors.push(`${contract.id}: part "${name}" stylesWhen "${cssProp}" value ${JSON.stringify(value)} looks like a token reference — stylesWhen is literal CSS; token-driven styling belongs in "tokens"`);
+        }
+      }
+    }
     if (part.visibleWhen) {
       const vwProp = contract.props.find((pr) => pr.name === part.visibleWhen!.prop);
       if (!vwProp) {
@@ -434,6 +467,32 @@ function validateContract(contract: Contract, byId: Map<string, Contract>, error
 // CSS generation
 // ---------------------------------------------------------------------------
 
+/** v7 stylesWhen rules for one part. Boolean conditions select on the
+ *  root's existing per-boolean data attribute (native disabled uses
+ *  :disabled); enum conditions select on the root's enum class. */
+function stylesWhenRules(contract: Contract, partName: string, part: Part, isRootPart: boolean): string[] {
+  const rules: string[] = [];
+  for (const sw of part.stylesWhen ?? []) {
+    const prop = contract.props.find((pr) => pr.name === sw.prop);
+    if (!prop) continue; // refused by validateContract
+    let base: string;
+    if (isEnum(prop)) {
+      base = `.${sw.prop}-${sw.equals}`;
+    } else {
+      const nativeDisabled =
+        prop.name === 'disabled' && ELEMENT_META[contract.semantics.element]?.supportsDisabled;
+      const dataName = prop.name.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase();
+      base = nativeDisabled ? '.root:disabled' : `.root[data-${dataName}]`;
+    }
+    const selector = isRootPart ? base : `${base} .${partName}`;
+    const decls = Object.entries(sw.styles)
+      .map(([k, v]) => `  ${k}: ${v};`)
+      .join('\n');
+    rules.push(`\n${selector} {\n${decls}\n}`);
+  }
+  return rules;
+}
+
 function generateCss(contract: Contract, tokenInventory: Set<string>, errors: string[]): string {
   const enums = new Map(enumProps(contract).map((p) => [p.name, p.type.enum]));
   const lines: string[] = [
@@ -559,6 +618,8 @@ function generateCss(contract: Contract, tokenInventory: Set<string>, errors: st
     }
   }
   lines.push(...stateRules);
+  // v7 stylesWhen on the root part (emitted last so the condition wins).
+  lines.push(...stylesWhenRules(contract, 'root', root, true));
 
   const usedAnimations = new Set<string>();
   // Nested parts (no substitutions; validated above).
@@ -652,6 +713,8 @@ function generateCss(contract: Contract, tokenInventory: Set<string>, errors: st
         );
       }
     }
+    // v7 stylesWhen on a nested part.
+    nestedSubRules.push(...stylesWhenRules(contract, name, part, false));
     if (decls.length === 0 && nestedSubRules.length === 0) continue;
     if (decls.length > 0) {
       lines.push('', `.${name} {`);

@@ -98,6 +98,31 @@ export const LayoutByPropSchema = z.strictObject({
   map: z.record(z.string(), VariantLayoutSchema),
 });
 
+/** v7 stylesWhen: the tight whitelist of literal CSS properties a
+ *  conditional style may set. Deliberately NOT tokens — these are
+ *  behavioral/positional properties with no token vocabulary (a color or a
+ *  dimension belongs in `tokens`, and the generator refuses it here). */
+export const STYLES_WHEN_ALLOWED = new Set([
+  'position', 'top', 'right', 'bottom', 'left', 'z-index',
+  'overflow', 'text-overflow', 'white-space', 'display', 'opacity',
+  'pointer-events', 'transform', 'transition', 'flex-direction',
+  'justify-content', 'align-items', 'cursor', 'text-decoration',
+]);
+
+/** v7: conditional literal styles — CSS applied only when the prop matches.
+ *  Code: boolean conditions ride the existing per-boolean data attribute
+ *  (`.root[data-x] .part`), enum conditions the root enum class
+ *  (`.prop-value .part`). Canvas v1: not represented — a documented
+ *  fidelity limit (boolean props cannot restyle canvas nodes; only
+ *  visibility is bindable). */
+export const StylesWhenSchema = z.strictObject({
+  prop: z.string(),
+  /** Required for enum props; omit for booleans (truthy). */
+  equals: z.string().optional(),
+  /** CSS property → literal value. Keys must be in STYLES_WHEN_ALLOWED. */
+  styles: z.record(z.string(), z.string()),
+});
+
 /** Conditional part visibility (schema v4, gap G1): the part renders only
  *  when the prop matches. Boolean props map to Figma visibility bindings;
  *  enum conditions resolve per variant. */
@@ -166,6 +191,8 @@ export interface Part {
   layout?: z.infer<typeof LayoutSchema>;
   /** v7: per-enum-value layout overrides merged over `layout`. */
   layoutByProp?: z.infer<typeof LayoutByPropSchema>;
+  /** v7: conditional literal styles (code-side; canvas fidelity limit). */
+  stylesWhen?: Array<z.infer<typeof StylesWhenSchema>>;
   /** CSS property → token reference. The CSS Module AND the Figma bindings
    *  are generated from these — there is no handwritten style layer. */
   tokens?: Record<string, string>;
@@ -202,6 +229,8 @@ export const PartSchema: z.ZodType<Part> = z.lazy(() =>
     layout: LayoutSchema.optional(),
     /** v7. */
     layoutByProp: LayoutByPropSchema.optional(),
+    /** v7. */
+    stylesWhen: z.array(StylesWhenSchema).optional(),
     tokens: z.record(z.string(), TokenRefSchema).optional(),
     states: z.record(z.string(), z.record(z.string(), TokenRefSchema)).optional(),
     content: z.strictObject({ prop: z.string() }).optional(),

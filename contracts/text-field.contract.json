@@ -2,9 +2,9 @@
   "$schema": "./contract.schema.json",
   "id": "ds.text-field",
   "name": "TextField",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "status": "draft",
-  "description": "Single-line text input for short-form values — names, emails, search queries. API mirrors industry convention (Astryx TextInput): required label, description, size scale. The wrapping-label anatomy gives implicit label association.",
+  "description": "Single-line text input for short-form values — names, emails, search queries. API mirrors industry convention (Astryx TextInput): required label, description, size scale. The wrapping-label anatomy gives implicit label association. Disabled fields dim and drop pointer interaction via stylesWhen (code-side conditional styling; a declared canvas fidelity limit).",
   "semantics": {
     "element": "label"
   },
@@ -126,6 +126,16 @@
         "font-family": "{font.control.family}",
         "color": "{color.surface.foreground}"
       },
+      "stylesWhen": [
+        {
+          "prop": "isDisabled",
+          "styles": {
+            "opacity": "0.55",
+            "pointer-events": "none",
+            "cursor": "not-allowed"
+          }
+        }
+      ],
       "parts": {
         "labelRow": {
           "layout": {
