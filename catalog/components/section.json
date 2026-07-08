@@ -1,0 +1,28 @@
+{
+  "id": "ds.section",
+  "name": "Section",
+  "version": "1.0.0",
+  "status": "draft",
+  "description": "The standard way to create page regions and group related content — settings groups, form sections, sidebar areas. API mirrors industry convention (Astryx Section) at the variant level; the transparent variant needs transparent color tokens — a documented gap.",
+  "figma": {
+    "representation": "component",
+    "componentSetKey": "f47b739d72cc4bfc159e1b656f78e5dbceaf0200"
+  },
+  "props": [
+    {
+      "name": "variant",
+      "type": [
+        "section",
+        "muted"
+      ],
+      "default": "section",
+      "description": "Background treatment. Muted only to call attention."
+    }
+  ],
+  "children": {
+    "kind": "slot",
+    "accepts": [],
+    "acceptsMode": "open"
+  },
+  "slots": []
+}

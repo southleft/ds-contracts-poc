@@ -1,0 +1,55 @@
+{
+  "id": "ds.side-nav-item",
+  "name": "SideNavItem",
+  "version": "1.0.0",
+  "status": "draft",
+  "description": "A sidebar navigation row: icon, label, and trailing content, with a selected state. API mirrors industry convention (Astryx SideNavItem); nesting and collapse are behavior-layer boundaries.",
+  "figma": {
+    "representation": "component",
+    "componentSetKey": "155b665997cadb6f418aa74bdd0ad9b00e348e97"
+  },
+  "props": [
+    {
+      "name": "state",
+      "type": [
+        "default",
+        "selected"
+      ],
+      "default": "default",
+      "description": "Whether this item is the current page."
+    },
+    {
+      "name": "label",
+      "type": "string",
+      "default": "Navigation item",
+      "required": true,
+      "description": "Item text."
+    },
+    {
+      "name": "href",
+      "type": "string",
+      "default": "#",
+      "description": "Navigation target URL."
+    }
+  ],
+  "children": {
+    "kind": "none"
+  },
+  "slots": [
+    {
+      "prop": "icon",
+      "accepts": [],
+      "acceptsMode": "open",
+      "optional": true
+    },
+    {
+      "prop": "endContent",
+      "accepts": [
+        "Badge"
+      ],
+      "acceptsMode": "prefer",
+      "optional": true,
+      "description": "Trailing badge or count."
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "id": "ds.metadata-list-item",
+  "name": "MetadataListItem",
+  "version": "1.0.0",
+  "status": "draft",
+  "description": "One key–value pair in a MetadataList: a label and a value area. API mirrors industry convention (Astryx MetadataListItem).",
+  "figma": {
+    "representation": "component",
+    "componentSetKey": "84ae8763e0d2378b67b49878f355b264327d6c8a"
+  },
+  "props": [
+    {
+      "name": "label",
+      "type": "string",
+      "default": "Label",
+      "required": true,
+      "description": "The key text."
+    },
+    {
+      "name": "value",
+      "type": "string",
+      "default": "Value",
+      "description": "The value text. Use the children slot instead for rich values."
+    }
+  ],
+  "children": {
+    "kind": "none"
+  },
+  "slots": [
+    {
+      "prop": "icon",
+      "accepts": [],
+      "acceptsMode": "open",
+      "optional": true,
+      "description": "Icon before the label."
+    }
+  ]
+}

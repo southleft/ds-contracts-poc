@@ -1,0 +1,56 @@
+{
+  "id": "ds.checkbox",
+  "name": "Checkbox",
+  "version": "1.1.0",
+  "status": "draft",
+  "description": "Toggles a single on/off value — settings, terms acceptance, opt-ins. API mirrors industry convention (Astryx CheckboxInput): checked, unchecked, and indeterminate are prop-driven appearance states.",
+  "figma": {
+    "representation": "component",
+    "componentSetKey": "9bc54e5a3f7c074b9ed016dfac8edff95ec45e23"
+  },
+  "props": [
+    {
+      "name": "value",
+      "type": [
+        "unchecked",
+        "checked",
+        "indeterminate"
+      ],
+      "default": "unchecked",
+      "description": "Checked, unchecked, or indeterminate (partial selection in a group)."
+    },
+    {
+      "name": "size",
+      "type": [
+        "sm",
+        "md"
+      ],
+      "default": "md",
+      "description": "Control size."
+    },
+    {
+      "name": "label",
+      "type": "string",
+      "default": "Checkbox label",
+      "required": true,
+      "description": "Always rendered — users must know what they are toggling."
+    },
+    {
+      "name": "description",
+      "type": "string",
+      "default": "Supporting detail for this option.",
+      "description": "Secondary text below the label."
+    }
+  ],
+  "events": [
+    {
+      "prop": "onToggle",
+      "type": "() => void",
+      "description": "Fires when the box is activated; uncontrolled instances flip unchecked/checked (indeterminate resolves to checked)."
+    }
+  ],
+  "children": {
+    "kind": "none"
+  },
+  "slots": []
+}

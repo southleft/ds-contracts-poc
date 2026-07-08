@@ -1,0 +1,39 @@
+{
+  "id": "ds.status-dot",
+  "name": "StatusDot",
+  "version": "1.0.0",
+  "status": "draft",
+  "description": "Small colored dot communicating status — presence, severity, activity. API mirrors industry convention (Astryx StatusDot): five semantic variants with a required accessible label.",
+  "figma": {
+    "representation": "component",
+    "componentSetKey": "f66c5a1c366d1d37292459b9b9a56d80bf2a5034"
+  },
+  "props": [
+    {
+      "name": "variant",
+      "type": [
+        "success",
+        "warning",
+        "error",
+        "accent",
+        "neutral"
+      ],
+      "default": "neutral",
+      "description": "Semantic color variant."
+    },
+    {
+      "name": "label",
+      "type": "string",
+      "default": "Status",
+      "required": true,
+      "description": "Accessible label announced by screen readers — status must never be conveyed by color alone."
+    }
+  ],
+  "children": {
+    "kind": "slot",
+    "accepts": [],
+    "acceptsMode": "open",
+    "description": "Any catalog content."
+  },
+  "slots": []
+}

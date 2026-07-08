@@ -1,0 +1,622 @@
+{
+  "_protocol": "Retrieval protocol: load index.json always; fetch catalog/components/<x>.json (x = component id without the namespace prefix, e.g. ds.button → button.json) for each component you intend to use; fetch tokens.json when styling. catalog/catalog.json is the equivalent monolithic form — do not load it when the sharded form is available.",
+  "system": {
+    "name": "DS Contracts POC",
+    "catalogVersion": "0.1.0",
+    "gitCommit": "b102f65",
+    "source": "Compiled from contracts/*.contract.json + tokens/ + context/rules.json — do not edit."
+  },
+  "package": {
+    "name": "ds-contracts-poc",
+    "usage": "import { Button, Card, Table } from 'ds-contracts-poc'; import 'ds-contracts-poc/styles.css';",
+    "stylesheet": "ds-contracts-poc/styles.css"
+  },
+  "rules": [
+    {
+      "id": "components-from-catalog",
+      "statement": "Every UI element comes from the catalog. Unknown components are gaps to report, never to invent.",
+      "enforcement": "judge"
+    },
+    {
+      "id": "tokens-only",
+      "statement": "No literal colors or pixel values anywhere. All styling flows through design tokens (var(--…)) — and in screens, styling flows only through components.",
+      "enforcement": "judge"
+    },
+    {
+      "id": "no-raw-equivalents",
+      "statement": "Never use raw HTML elements the system provides a component for.",
+      "forbiddenRawElements": [
+        "button",
+        "table",
+        "input",
+        "select"
+      ],
+      "enforcement": "judge"
+    },
+    {
+      "id": "no-style-overrides",
+      "statement": "No className or style props on system components. If a component can't express it, that's a gap in the contract — report it.",
+      "enforcement": "judge"
+    },
+    {
+      "id": "one-primary-action",
+      "statement": "At most one primary Button per screen.",
+      "enforcement": "judge"
+    },
+    {
+      "id": "layout-via-primitives",
+      "statement": "Compose layout with Stack and Inline, not hand-styled wrappers.",
+      "enforcement": "judge"
+    },
+    {
+      "id": "avatars-are-people",
+      "statement": "Avatars represent people or entities, never decoration.",
+      "enforcement": "agent"
+    }
+  ],
+  "tokenGroups": [
+    "border",
+    "border-width",
+    "color",
+    "container",
+    "control",
+    "font",
+    "opacity",
+    "radius",
+    "size",
+    "space"
+  ],
+  "components": [
+    {
+      "id": "ds.accordion-item",
+      "name": "AccordionItem",
+      "version": "1.1.0",
+      "status": "draft",
+      "propNames": [
+        "state",
+        "title"
+      ],
+      "summary": "A collapsible content row: trigger with a state chevron, content revealed when open."
+    },
+    {
+      "id": "ds.avatar",
+      "name": "Avatar",
+      "version": "1.0.0",
+      "status": "draft",
+      "propNames": [
+        "size"
+      ],
+      "summary": "Represents a person or entity with initials."
+    },
+    {
+      "id": "ds.avatar-group",
+      "name": "AvatarGroup",
+      "version": "1.0.0",
+      "status": "draft",
+      "propNames": [
+        "overflowLabel"
+      ],
+      "summary": "Stacked avatars with an overflow count."
+    },
+    {
+      "id": "ds.badge",
+      "name": "Badge",
+      "version": "1.0.0",
+      "status": "draft",
+      "propNames": [
+        "variant"
+      ],
+      "summary": "Communicates status or categorization at a glance."
+    },
+    {
+      "id": "ds.button",
+      "name": "Button",
+      "version": "1.4.0",
+      "status": "draft",
+      "propNames": [
+        "variant",
+        "size",
+        "disabled",
+        "loading"
+      ],
+      "summary": "Triggers an action or event."
+    },
+    {
+      "id": "ds.banner",
+      "name": "Banner",
+      "version": "1.0.0",
+      "status": "draft",
+      "propNames": [
+        "status",
+        "container",
+        "isDismissable",
+        "title",
+        "description"
+      ],
+      "summary": "Persistent inline notification for page- or section-level feedback."
+    },
+    {
+      "id": "ds.blockquote",
+      "name": "Blockquote",
+      "version": "1.0.0",
+      "status": "draft",
+      "propNames": [],
+      "summary": "Styled quotation block with an accent left border for quotes, testimonials, and excerpts."
+    },
+    {
+      "id": "ds.breadcrumb-item",
+      "name": "BreadcrumbItem",
+      "version": "1.0.0",
+      "status": "draft",
+      "propNames": [
+        "hasSeparator",
+        "label",
+        "href"
+      ],
+      "summary": "One link in a breadcrumb trail with its leading separator."
+    },
+    {
+      "id": "ds.breadcrumbs",
+      "name": "Breadcrumbs",
+      "version": "1.0.0",
+      "status": "draft",
+      "propNames": [
+        "label"
+      ],
+      "summary": "Navigation trail from root to the current page."
+    },
+    {
+      "id": "ds.card",
+      "name": "Card",
+      "version": "1.1.0",
+      "status": "draft",
+      "propNames": [
+        "title"
+      ],
+      "summary": "Groups related content behind one subject."
+    },
+    {
+      "id": "ds.chat-message-metadata",
+      "name": "ChatMessageMetadata",
+      "version": "1.0.0",
+      "status": "draft",
+      "propNames": [
+        "status",
+        "timestamp"
+      ],
+      "summary": "Metadata row for a chat message: delivery status, timestamp, and footer content."
+    },
+    {
+      "id": "ds.chat-message",
+      "name": "ChatMessage",
+      "version": "1.0.0",
+      "status": "draft",
+      "propNames": [
+        "sender",
+        "name"
+      ],
+      "summary": "Sender-context wrapper for a chat message: avatar, name, bubble content, and metadata."
+    },
+    {
+      "id": "ds.chat-system-message",
+      "name": "ChatSystemMessage",
+      "version": "1.0.0",
+      "status": "draft",
+      "propNames": [
+        "variant",
+        "message"
+      ],
+      "summary": "Centered system message for non-sender chat content — date separators, membership changes, status notices."
+    },
+    {
+      "id": "ds.checkbox",
+      "name": "Checkbox",
+      "version": "1.1.0",
+      "status": "draft",
+      "propNames": [
+        "value",
+        "size",
+        "label",
+        "description"
+      ],
+      "summary": "Toggles a single on/off value — settings, terms acceptance, opt-ins."
+    },
+    {
+      "id": "ds.citation",
+      "name": "Citation",
+      "version": "1.0.0",
+      "status": "draft",
+      "propNames": [
+        "variant",
+        "sourceTitle",
+        "number",
+        "href"
+      ],
+      "summary": "Inline reference to an external source — attribution in AI-generated responses, articles, anywhere provenance matters."
+    },
+    {
+      "id": "ds.code",
+      "name": "Code",
+      "version": "1.0.0",
+      "status": "draft",
+      "propNames": [],
+      "summary": "Inline code element with monospace font and muted background."
+    },
+    {
+      "id": "ds.divider",
+      "name": "Divider",
+      "version": "1.0.0",
+      "status": "draft",
+      "propNames": [
+        "variant"
+      ],
+      "summary": "Visual separator dividing content into distinct sections."
+    },
+    {
+      "id": "ds.empty-state",
+      "name": "EmptyState",
+      "version": "1.0.0",
+      "status": "draft",
+      "propNames": [
+        "title",
+        "description"
+      ],
+      "summary": "Placeholder for a content area with no data — empty lists, zero results, first-time setup."
+    },
+    {
+      "id": "ds.field",
+      "name": "Field",
+      "version": "1.0.0",
+      "status": "draft",
+      "propNames": [
+        "isRequired",
+        "label",
+        "inputID",
+        "description"
+      ],
+      "summary": "Form field wrapper providing a label, description, and required indicator around any control."
+    },
+    {
+      "id": "ds.icon-button",
+      "name": "IconButton",
+      "version": "1.0.0",
+      "status": "draft",
+      "propNames": [
+        "variant",
+        "size",
+        "isDisabled",
+        "label"
+      ],
+      "summary": "A button showing only an icon, for toolbars, table rows, and compact UI."
+    },
+    {
+      "id": "ds.inline",
+      "name": "Inline",
+      "version": "1.0.0",
+      "status": "draft",
+      "propNames": [
+        "gap"
+      ],
+      "summary": "Horizontal layout primitive — lays children out in a row with a token-governed gap, vertically centered."
+    },
+    {
+      "id": "ds.kbd",
+      "name": "Kbd",
+      "version": "1.0.0",
+      "status": "draft",
+      "propNames": [
+        "keys"
+      ],
+      "summary": "Renders a keyboard shortcut as a styled key badge for tooltips, menus, and help text."
+    },
+    {
+      "id": "ds.list-item",
+      "name": "ListItem",
+      "version": "1.0.0",
+      "status": "draft",
+      "propNames": [
+        "label",
+        "description"
+      ],
+      "summary": "A single row in a List: label with optional description, leading and trailing content."
+    },
+    {
+      "id": "ds.list",
+      "name": "List",
+      "version": "1.0.0",
+      "status": "draft",
+      "propNames": [
+        "density"
+      ],
+      "summary": "Vertical collection of items with consistent density."
+    },
+    {
+      "id": "ds.metadata-list-item",
+      "name": "MetadataListItem",
+      "version": "1.0.0",
+      "status": "draft",
+      "propNames": [
+        "label",
+        "value"
+      ],
+      "summary": "One key–value pair in a MetadataList: a label and a value area."
+    },
+    {
+      "id": "ds.metadata-list",
+      "name": "MetadataList",
+      "version": "1.0.0",
+      "status": "draft",
+      "propNames": [
+        "title"
+      ],
+      "summary": "Key–value pairs for object attributes — detail panels, settings summaries, record information."
+    },
+    {
+      "id": "ds.pagination",
+      "name": "Pagination",
+      "version": "1.0.0",
+      "status": "draft",
+      "propNames": [
+        "variant",
+        "pageLabel",
+        "label"
+      ],
+      "summary": "Steps through pages of content, below a table or list."
+    },
+    {
+      "id": "ds.progress-bar",
+      "name": "ProgressBar",
+      "version": "1.0.0",
+      "status": "draft",
+      "propNames": [
+        "variant",
+        "value",
+        "max",
+        "label"
+      ],
+      "summary": "Horizontal bar showing completion progress."
+    },
+    {
+      "id": "ds.section",
+      "name": "Section",
+      "version": "1.0.0",
+      "status": "draft",
+      "propNames": [
+        "variant"
+      ],
+      "summary": "The standard way to create page regions and group related content — settings groups, form sections, sidebar areas."
+    },
+    {
+      "id": "ds.side-nav-item",
+      "name": "SideNavItem",
+      "version": "1.0.0",
+      "status": "draft",
+      "propNames": [
+        "state",
+        "label",
+        "href"
+      ],
+      "summary": "A sidebar navigation row: icon, label, and trailing content, with a selected state."
+    },
+    {
+      "id": "ds.skeleton",
+      "name": "Skeleton",
+      "version": "1.0.0",
+      "status": "draft",
+      "propNames": [
+        "variant"
+      ],
+      "summary": "Pulsing placeholder previewing the shape of loading content."
+    },
+    {
+      "id": "ds.slider",
+      "name": "Slider",
+      "version": "1.0.0",
+      "status": "draft",
+      "propNames": [
+        "value",
+        "max",
+        "label"
+      ],
+      "summary": "Numeric selection within bounds — the static surface of a slider: label, filled track to the current value, and thumb."
+    },
+    {
+      "id": "ds.spinner",
+      "name": "Spinner",
+      "version": "1.0.0",
+      "status": "draft",
+      "propNames": [
+        "label"
+      ],
+      "summary": "Animated loading indicator for processes of unknown duration."
+    },
+    {
+      "id": "ds.stack",
+      "name": "Stack",
+      "version": "1.0.0",
+      "status": "draft",
+      "propNames": [
+        "gap"
+      ],
+      "summary": "Vertical layout primitive — stacks children with a token-governed gap."
+    },
+    {
+      "id": "ds.status-dot",
+      "name": "StatusDot",
+      "version": "1.0.0",
+      "status": "draft",
+      "propNames": [
+        "variant",
+        "label"
+      ],
+      "summary": "Small colored dot communicating status — presence, severity, activity."
+    },
+    {
+      "id": "ds.switch",
+      "name": "Switch",
+      "version": "1.1.0",
+      "status": "draft",
+      "propNames": [
+        "value",
+        "label",
+        "description"
+      ],
+      "summary": "Toggle for on/off settings that take effect immediately."
+    },
+    {
+      "id": "ds.tab",
+      "name": "Tab",
+      "version": "1.0.0",
+      "status": "draft",
+      "propNames": [
+        "state",
+        "label"
+      ],
+      "summary": "A single tab in a TabList."
+    },
+    {
+      "id": "ds.tab-list",
+      "name": "TabList",
+      "version": "1.0.0",
+      "status": "draft",
+      "propNames": [],
+      "summary": "Tab-style navigation container holding Tab items."
+    },
+    {
+      "id": "ds.table-cell",
+      "name": "TableCell",
+      "version": "1.1.0",
+      "status": "draft",
+      "propNames": [
+        "density"
+      ],
+      "summary": "A single data cell in a table row."
+    },
+    {
+      "id": "ds.table-header-cell",
+      "name": "TableHeaderCell",
+      "version": "1.1.0",
+      "status": "draft",
+      "propNames": [
+        "density"
+      ],
+      "summary": "A column header cell."
+    },
+    {
+      "id": "ds.table-row",
+      "name": "TableRow",
+      "version": "1.1.0",
+      "status": "draft",
+      "propNames": [
+        "state"
+      ],
+      "summary": "A selectable row of table cells."
+    },
+    {
+      "id": "ds.table",
+      "name": "Table",
+      "version": "1.1.0",
+      "status": "draft",
+      "propNames": [
+        "density"
+      ],
+      "summary": "Structured data in rows and columns."
+    },
+    {
+      "id": "ds.text-area",
+      "name": "TextArea",
+      "version": "1.0.0",
+      "status": "draft",
+      "propNames": [
+        "size",
+        "isRequired",
+        "label",
+        "description",
+        "placeholder"
+      ],
+      "summary": "Multi-line text input for longer-form content — comments, descriptions, messages."
+    },
+    {
+      "id": "ds.text-field",
+      "name": "TextField",
+      "version": "1.0.0",
+      "status": "draft",
+      "propNames": [
+        "size",
+        "isRequired",
+        "isDisabled",
+        "label",
+        "description",
+        "placeholder"
+      ],
+      "summary": "Single-line text input for short-form values — names, emails, search queries."
+    },
+    {
+      "id": "ds.toast",
+      "name": "Toast",
+      "version": "1.0.0",
+      "status": "draft",
+      "propNames": [
+        "type"
+      ],
+      "summary": "Brief non-blocking notification confirming an action."
+    },
+    {
+      "id": "ds.token",
+      "name": "Token",
+      "version": "1.0.0",
+      "status": "draft",
+      "propNames": [
+        "color",
+        "size",
+        "isDisabled",
+        "label"
+      ],
+      "summary": "Small inline element for discrete associated data — tags, categories, active filters."
+    },
+    {
+      "id": "ds.toolbar",
+      "name": "Toolbar",
+      "version": "1.0.0",
+      "status": "draft",
+      "propNames": [
+        "size",
+        "label"
+      ],
+      "summary": "General-purpose toolbar container with start, center, and end content areas for contextual actions."
+    },
+    {
+      "id": "ds.top-nav-item",
+      "name": "TopNavItem",
+      "version": "1.0.0",
+      "status": "draft",
+      "propNames": [
+        "state",
+        "label",
+        "href"
+      ],
+      "summary": "A navigation item in a TopNav or SideNav context."
+    },
+    {
+      "id": "ds.top-nav",
+      "name": "TopNav",
+      "version": "1.0.0",
+      "status": "draft",
+      "propNames": [
+        "label"
+      ],
+      "summary": "Horizontal main navigation bar with heading, start, center, and end areas."
+    },
+    {
+      "id": "ds.typeahead-item",
+      "name": "TypeaheadItem",
+      "version": "1.0.0",
+      "status": "draft",
+      "propNames": [
+        "label",
+        "description"
+      ],
+      "summary": "Default dropdown item for search results: label with optional icon and description."
+    }
+  ]
+}

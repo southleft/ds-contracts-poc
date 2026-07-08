@@ -1,0 +1,48 @@
+{
+  "id": "ds.progress-bar",
+  "name": "ProgressBar",
+  "version": "1.0.0",
+  "status": "draft",
+  "description": "Horizontal bar showing completion progress. API mirrors industry convention (Astryx ProgressBar): number-valued value/max drive the fill; the canvas renders the defaults' fraction as its honest static state. Indeterminate mode needs animation on the canvas — a documented boundary.",
+  "figma": {
+    "representation": "component",
+    "componentSetKey": "b18870547d3ca85fb933e46457fde0d02d782fb3"
+  },
+  "props": [
+    {
+      "name": "variant",
+      "type": [
+        "accent",
+        "success",
+        "warning",
+        "error",
+        "neutral"
+      ],
+      "default": "accent",
+      "description": "Semantic color of the fill."
+    },
+    {
+      "name": "value",
+      "type": "string",
+      "default": 60,
+      "description": "Current progress value."
+    },
+    {
+      "name": "max",
+      "type": "string",
+      "default": 100,
+      "description": "Maximum value."
+    },
+    {
+      "name": "label",
+      "type": "string",
+      "default": "Progress",
+      "required": true,
+      "description": "Accessible name — screen readers must know what is progressing."
+    }
+  ],
+  "children": {
+    "kind": "none"
+  },
+  "slots": []
+}

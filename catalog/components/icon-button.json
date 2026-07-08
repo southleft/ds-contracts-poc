@@ -1,0 +1,59 @@
+{
+  "id": "ds.icon-button",
+  "name": "IconButton",
+  "version": "1.0.0",
+  "status": "draft",
+  "description": "A button showing only an icon, for toolbars, table rows, and compact UI. API mirrors industry convention (Astryx IconButton): the required label is the accessible name and is never rendered visibly.",
+  "figma": {
+    "representation": "component",
+    "componentSetKey": "ba2cfd0b9f6f47a728081edaf340c37cdeb53123"
+  },
+  "props": [
+    {
+      "name": "variant",
+      "type": [
+        "primary",
+        "secondary",
+        "ghost",
+        "destructive"
+      ],
+      "default": "secondary",
+      "description": "Visual style. Ghost sits on the surface wash (transparent tokens are a documented gap)."
+    },
+    {
+      "name": "size",
+      "type": [
+        "sm",
+        "md",
+        "lg"
+      ],
+      "default": "md",
+      "description": "Square control size."
+    },
+    {
+      "name": "isDisabled",
+      "type": "boolean",
+      "default": false,
+      "description": "Disables the button."
+    },
+    {
+      "name": "label",
+      "type": "string",
+      "default": "Action",
+      "required": true,
+      "description": "Accessible name (aria-label). Be specific: \"Delete conversation\", not \"Delete\"."
+    }
+  ],
+  "children": {
+    "kind": "none"
+  },
+  "slots": [
+    {
+      "prop": "icon",
+      "accepts": [],
+      "acceptsMode": "open",
+      "optional": false,
+      "description": "The icon. Pass an Icon-sized element; it inherits the variant's foreground color."
+    }
+  ]
+}

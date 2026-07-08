@@ -1,0 +1,55 @@
+{
+  "id": "ds.chat-message",
+  "name": "ChatMessage",
+  "version": "1.0.0",
+  "status": "draft",
+  "description": "Sender-context wrapper for a chat message: avatar, name, bubble content, and metadata. API mirrors industry convention (Astryx ChatMessage); sender-based alignment flipping needs layout-by-enum — a documented gap; the bubble color follows sender.",
+  "figma": {
+    "representation": "component",
+    "componentSetKey": "4af367f1f1c5044640cd31d2cbdd3e575b1bbb54"
+  },
+  "props": [
+    {
+      "name": "sender",
+      "type": [
+        "user",
+        "assistant",
+        "system"
+      ],
+      "default": "assistant",
+      "description": "Who sent it — drives the bubble color scheme."
+    },
+    {
+      "name": "name",
+      "type": "string",
+      "default": "Assistant",
+      "description": "Sender name shown above the message body."
+    }
+  ],
+  "children": {
+    "kind": "slot",
+    "accepts": [],
+    "acceptsMode": "open",
+    "description": "The message bubble — free-form content."
+  },
+  "slots": [
+    {
+      "prop": "avatar",
+      "accepts": [
+        "Avatar"
+      ],
+      "acceptsMode": "prefer",
+      "optional": true,
+      "description": "Avatar beside the message."
+    },
+    {
+      "prop": "metadata",
+      "accepts": [
+        "ChatMessageMetadata"
+      ],
+      "acceptsMode": "prefer",
+      "optional": true,
+      "description": "Timestamp and delivery status below the bubble."
+    }
+  ]
+}

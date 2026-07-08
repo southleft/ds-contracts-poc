@@ -1,0 +1,32 @@
+{
+  "id": "ds.list",
+  "name": "List",
+  "version": "1.0.0",
+  "status": "draft",
+  "description": "Vertical collection of items with consistent density. API mirrors industry convention (Astryx List); dividers need sibling-selector styling and marker styles need list-style tokens — documented gaps.",
+  "figma": {
+    "representation": "component",
+    "componentSetKey": "e506f83390b9f1495394675f91c6aa03a9317162"
+  },
+  "props": [
+    {
+      "name": "density",
+      "type": [
+        "compact",
+        "balanced",
+        "spacious"
+      ],
+      "default": "balanced",
+      "description": "Item spacing density."
+    }
+  ],
+  "children": {
+    "kind": "slot",
+    "accepts": [
+      "ListItem"
+    ],
+    "acceptsMode": "prefer",
+    "description": "The list rows."
+  },
+  "slots": []
+}

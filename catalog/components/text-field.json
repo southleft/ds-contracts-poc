@@ -1,0 +1,58 @@
+{
+  "id": "ds.text-field",
+  "name": "TextField",
+  "version": "1.0.0",
+  "status": "draft",
+  "description": "Single-line text input for short-form values — names, emails, search queries. API mirrors industry convention (Astryx TextInput): required label, description, size scale. The wrapping-label anatomy gives implicit label association.",
+  "figma": {
+    "representation": "component",
+    "componentSetKey": "83b5ead2b038477a13c0647de71ee55bf458e0b3"
+  },
+  "props": [
+    {
+      "name": "size",
+      "type": [
+        "sm",
+        "md",
+        "lg"
+      ],
+      "default": "md",
+      "description": "Control size scale."
+    },
+    {
+      "name": "isRequired",
+      "type": "boolean",
+      "default": false,
+      "description": "Marks the field required — shows the indicator beside the label."
+    },
+    {
+      "name": "isDisabled",
+      "type": "boolean",
+      "default": false,
+      "description": "Disabled state."
+    },
+    {
+      "name": "label",
+      "type": "string",
+      "default": "Label",
+      "required": true,
+      "description": "Field label — always rendered; placeholders are not labels."
+    },
+    {
+      "name": "description",
+      "type": "string",
+      "default": "Helper text that explains the expected value.",
+      "description": "Helper text between the label and the input."
+    },
+    {
+      "name": "placeholder",
+      "type": "string",
+      "default": "Enter a value…",
+      "description": "Hint shown when the field is empty. Never a substitute for the label."
+    }
+  ],
+  "children": {
+    "kind": "none"
+  },
+  "slots": []
+}

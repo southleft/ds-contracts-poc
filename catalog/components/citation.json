@@ -1,0 +1,45 @@
+{
+  "id": "ds.citation",
+  "name": "Citation",
+  "version": "1.0.0",
+  "status": "draft",
+  "description": "Inline reference to an external source — attribution in AI-generated responses, articles, anywhere provenance matters. API mirrors industry convention (Astryx Citation): label chips or compact numbered badges.",
+  "figma": {
+    "representation": "component",
+    "componentSetKey": "84b0a3c9abb3122d60820f8047a8b6d200956067"
+  },
+  "props": [
+    {
+      "name": "variant",
+      "type": [
+        "label",
+        "number"
+      ],
+      "default": "label",
+      "description": "Label chip with the source title, or a compact numbered badge. Don't mix both in one paragraph."
+    },
+    {
+      "name": "sourceTitle",
+      "type": "string",
+      "default": "example.com",
+      "required": true,
+      "description": "The source's display title (label variant)."
+    },
+    {
+      "name": "number",
+      "type": "string",
+      "default": "1",
+      "description": "Display index (number variant)."
+    },
+    {
+      "name": "href",
+      "type": "string",
+      "default": "https://example.com",
+      "description": "Source URL."
+    }
+  ],
+  "children": {
+    "kind": "none"
+  },
+  "slots": []
+}

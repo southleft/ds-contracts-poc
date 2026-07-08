@@ -1,0 +1,27 @@
+{
+  "id": "ds.metadata-list",
+  "name": "MetadataList",
+  "version": "1.0.0",
+  "status": "draft",
+  "description": "Key–value pairs for object attributes — detail panels, settings summaries, record information. API mirrors industry convention (Astryx MetadataList); multi-column layout and collapse behavior are documented boundaries.",
+  "figma": {
+    "representation": "component",
+    "componentSetKey": "f4c106dcd1de208ef1018b6d8ee4e30cdc030f0d"
+  },
+  "props": [
+    {
+      "name": "title",
+      "type": "string",
+      "default": "Details",
+      "description": "Heading above the list."
+    }
+  ],
+  "children": {
+    "kind": "slot",
+    "accepts": [
+      "MetadataListItem"
+    ],
+    "acceptsMode": "prefer"
+  },
+  "slots": []
+}

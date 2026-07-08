@@ -1,0 +1,39 @@
+{
+  "id": "ds.toast",
+  "name": "Toast",
+  "version": "1.0.0",
+  "status": "draft",
+  "description": "Brief non-blocking notification confirming an action. API mirrors industry convention (Astryx Toast): the visual element — positioning, stacking, and auto-dismiss belong to the behavior layer and are a declared boundary.",
+  "figma": {
+    "representation": "component",
+    "componentSetKey": "0abc553b16f20807f50d984a41dc6cb936958a93"
+  },
+  "props": [
+    {
+      "name": "type",
+      "type": [
+        "info",
+        "error"
+      ],
+      "default": "info",
+      "description": "Info confirms; error persists until dismissed (behavior layer)."
+    }
+  ],
+  "children": {
+    "kind": "slot",
+    "accepts": [],
+    "acceptsMode": "open",
+    "description": "Primary message content."
+  },
+  "slots": [
+    {
+      "prop": "endContent",
+      "accepts": [
+        "Button"
+      ],
+      "acceptsMode": "prefer",
+      "optional": true,
+      "description": "Trailing content — an Undo button, a link."
+    }
+  ]
+}

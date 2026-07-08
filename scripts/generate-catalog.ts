@@ -1,15 +1,25 @@
 /**
  * Catalog emitter — `npm run catalog`.
  *
- * Compiles the contract set + tokens + org rules into ONE machine-readable
- * catalog (catalog/catalog.json): the artifact a generating surface reads
- * BEFORE it produces anything, and the artifact the adherence judge enforces
- * AGAINST. This is the A2UI/json-render move — catalog as generation
- * constraint — emitted from the same source of truth that generates both
- * component surfaces. Versioned by package version + git commit.
+ * Compiles the contract set + tokens + org rules into a machine-readable
+ * catalog: the artifact a generating surface reads BEFORE it produces
+ * anything, and the artifact the adherence judge enforces AGAINST. This is
+ * the A2UI/json-render move — catalog as generation constraint — emitted
+ * from the same source of truth that generates both component surfaces.
+ * Versioned by package version + git commit.
+ *
+ * Emits two equivalent forms:
+ *   catalog/catalog.json          — the monolithic catalog (existing consumers:
+ *                                   judge, dashboard). Unchanged shape.
+ *   catalog/index.json            — compact retrieval index (self-describing
+ *                                   via its `_protocol` field)
+ *   catalog/components/<id>.json  — one full catalog entry per component
+ *   catalog/tokens.json           — the token section alone
+ * The sharded form keeps the catalog inside an agent's context window at any
+ * component count: load the index, then fetch only the shards you use.
  */
 import { execSync } from 'node:child_process';
-import { mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
+import { mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import {
   ContractSchema,
@@ -38,6 +48,18 @@ const semanticVars = [
   ...collectTokens(read('tokens/semantic.tokens.json')),
   ...collectTokens(read('tokens/modes/semantic.light.tokens.json')),
 ].map((n) => `--${n}`);
+
+// Top-level token group names (e.g. color, space, font) — enough for the
+// routing index; full variable lists live in catalog/tokens.json.
+const tokenGroups = [
+  ...new Set(
+    [
+      'tokens/primitives.tokens.json',
+      'tokens/semantic.tokens.json',
+      'tokens/modes/semantic.light.tokens.json',
+    ].flatMap((f) => Object.keys(read(f)).filter((k) => !k.startsWith('$'))),
+  ),
+].sort();
 
 // --- contracts ---
 const contracts = sortByDependencies(
@@ -164,8 +186,59 @@ const catalog = {
   })),
 };
 
+// --- sharded (retrievable) form ---------------------------------------------
+// The monolith stops fitting in an agent's context window as the system
+// scales (~106K LLM tokens at 250 components). The sharded form keeps the
+// always-loaded surface small: a routing index plus per-component shards
+// fetched on demand.
+
+/** Shard filename for a component id: namespace stripped, kebab-case. */
+const shardName = (id: string) =>
+  id.replace(/^[^.]+\./, '').replace(/[^a-z0-9]+/gi, '-').toLowerCase();
+
+const firstSentence = (text: string) => {
+  const match = text.match(/^[\s\S]*?[.!?](?=\s|$)/);
+  return (match ? match[0] : text).trim();
+};
+
+const index = {
+  _protocol:
+    'Retrieval protocol: load index.json always; fetch catalog/components/<x>.json (x = component id without the namespace prefix, e.g. ds.button → button.json) for each component you intend to use; fetch tokens.json when styling. catalog/catalog.json is the equivalent monolithic form — do not load it when the sharded form is available.',
+  system: catalog.system,
+  package: catalog.package,
+  rules: catalog.rules,
+  tokenGroups,
+  components: catalog.components.map((c) => ({
+    id: c.id,
+    name: c.name,
+    version: c.version,
+    status: c.status,
+    propNames: c.props.map((p) => p.name),
+    summary: firstSentence(c.description),
+  })),
+};
+
+const shardNames = catalog.components.map((c) => shardName(c.id));
+if (new Set(shardNames).size !== shardNames.length) {
+  throw new Error('Shard filename collision: two component ids map to the same shard file.');
+}
+
+const write = (rel: string, data: unknown) =>
+  writeFileSync(path.join(ROOT, 'catalog', rel), JSON.stringify(data, null, 2) + '\n');
+
 mkdirSync(path.join(ROOT, 'catalog'), { recursive: true });
-writeFileSync(path.join(ROOT, 'catalog', 'catalog.json'), JSON.stringify(catalog, null, 2) + '\n');
+// Rebuild the shard directory from scratch so removed components leave no stale shards.
+rmSync(path.join(ROOT, 'catalog', 'components'), { recursive: true, force: true });
+mkdirSync(path.join(ROOT, 'catalog', 'components'), { recursive: true });
+
+write('catalog.json', catalog);
+write('index.json', index);
+write('tokens.json', catalog.tokens);
+for (const c of catalog.components) write(path.join('components', `${shardName(c.id)}.json`), c);
+
 console.log(
   `✔ Catalog emitted: ${catalog.components.length} components, ${catalog.tokens.allCssVariables.length} tokens, ${catalog.rules.length} rules (v${pkg.version} @ ${gitCommit})`,
+);
+console.log(
+  `✔ Shards emitted: catalog/index.json + ${catalog.components.length} component shards + catalog/tokens.json`,
 );

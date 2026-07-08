@@ -1,0 +1,43 @@
+{
+  "id": "ds.chat-message-metadata",
+  "name": "ChatMessageMetadata",
+  "version": "1.0.0",
+  "status": "draft",
+  "description": "Metadata row for a chat message: delivery status, timestamp, and footer content. API mirrors industry convention (Astryx ChatMessageMetadata): status drives the icon.",
+  "figma": {
+    "representation": "component",
+    "componentSetKey": "25f176c40364af596d09a7d897e371208934ff43"
+  },
+  "props": [
+    {
+      "name": "status",
+      "type": [
+        "sending",
+        "sent",
+        "delivered",
+        "read",
+        "error"
+      ],
+      "default": "sent",
+      "description": "Delivery status — drives the leading icon."
+    },
+    {
+      "name": "timestamp",
+      "type": "string",
+      "default": "2:14 PM",
+      "description": "Display timestamp text."
+    }
+  ],
+  "children": {
+    "kind": "none"
+  },
+  "slots": [
+    {
+      "prop": "footer",
+      "accepts": [],
+      "acceptsMode": "open",
+      "optional": true,
+      "description": "Footer content — model info, reactions, a copy affordance."
+    }
+  ]
+}

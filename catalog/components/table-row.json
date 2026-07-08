@@ -1,0 +1,32 @@
+{
+  "id": "ds.table-row",
+  "name": "TableRow",
+  "version": "1.1.0",
+  "status": "draft",
+  "description": "A selectable row of table cells.",
+  "figma": {
+    "representation": "component",
+    "componentSetKey": "2630a1f30455c0b4d906930e9b3815cc0437fe1f"
+  },
+  "props": [
+    {
+      "name": "state",
+      "type": [
+        "default",
+        "selected"
+      ],
+      "default": "default",
+      "description": "Data state of the row."
+    }
+  ],
+  "children": {
+    "kind": "slot",
+    "accepts": [
+      "TableCell",
+      "TableHeaderCell"
+    ],
+    "acceptsMode": "prefer",
+    "description": "The row's cells. Multi-child slot: renders its default content directly in Figma (INSTANCE_SWAP cannot hold multiple children — see docs/08)."
+  },
+  "slots": []
+}

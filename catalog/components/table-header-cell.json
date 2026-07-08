@@ -1,0 +1,27 @@
+{
+  "id": "ds.table-header-cell",
+  "name": "TableHeaderCell",
+  "version": "1.1.0",
+  "status": "draft",
+  "description": "A column header cell.",
+  "figma": {
+    "representation": "component",
+    "componentSetKey": "91bf99af47cb2e09190eed770012e9c99661294f"
+  },
+  "props": [
+    {
+      "name": "density",
+      "type": [
+        "comfortable",
+        "compact"
+      ],
+      "default": "comfortable",
+      "description": "Vertical rhythm, normally driven by the owning Table."
+    }
+  ],
+  "children": {
+    "kind": "text",
+    "description": "Column label."
+  },
+  "slots": []
+}

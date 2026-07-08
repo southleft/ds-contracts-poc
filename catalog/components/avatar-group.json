@@ -1,0 +1,27 @@
+{
+  "id": "ds.avatar-group",
+  "name": "AvatarGroup",
+  "version": "1.0.0",
+  "status": "draft",
+  "description": "Stacked avatars with an overflow count. API mirrors industry convention (Astryx AvatarGroup): overlapping layout — expressed as a negative-margin child rule in CSS and negative item spacing on the canvas.",
+  "figma": {
+    "representation": "component",
+    "componentSetKey": "41e084d38457f2aebd4611e3ebd922a56c2c392d"
+  },
+  "props": [
+    {
+      "name": "overflowLabel",
+      "type": "string",
+      "default": "+3",
+      "description": "The +N overflow indicator text."
+    }
+  ],
+  "children": {
+    "kind": "slot",
+    "accepts": [
+      "Avatar"
+    ],
+    "acceptsMode": "prefer"
+  },
+  "slots": []
+}

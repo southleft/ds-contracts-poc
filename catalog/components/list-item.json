@@ -1,0 +1,47 @@
+{
+  "id": "ds.list-item",
+  "name": "ListItem",
+  "version": "1.0.0",
+  "status": "draft",
+  "description": "A single row in a List: label with optional description, leading and trailing content. API mirrors industry convention (Astryx ListItem); click/link behavior is a declared boundary.",
+  "figma": {
+    "representation": "component",
+    "componentSetKey": "470b0337773739a1521b294855bed053c8e7eb33"
+  },
+  "props": [
+    {
+      "name": "label",
+      "type": "string",
+      "default": "List item",
+      "required": true,
+      "description": "Primary text."
+    },
+    {
+      "name": "description",
+      "type": "string",
+      "default": "Supporting detail for this item.",
+      "description": "Secondary content below the label."
+    }
+  ],
+  "children": {
+    "kind": "none"
+  },
+  "slots": [
+    {
+      "prop": "startContent",
+      "accepts": [],
+      "acceptsMode": "open",
+      "optional": true,
+      "description": "Leading content — icon or avatar."
+    },
+    {
+      "prop": "endContent",
+      "accepts": [
+        "Badge"
+      ],
+      "acceptsMode": "prefer",
+      "optional": true,
+      "description": "Trailing content — badge, count, chevron."
+    }
+  ]
+}

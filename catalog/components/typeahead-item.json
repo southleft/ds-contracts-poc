@@ -1,0 +1,38 @@
+{
+  "id": "ds.typeahead-item",
+  "name": "TypeaheadItem",
+  "version": "1.0.0",
+  "status": "draft",
+  "description": "Default dropdown item for search results: label with optional icon and description. API mirrors industry convention (Astryx TypeaheadItem) with the item object flattened to explicit props.",
+  "figma": {
+    "representation": "component",
+    "componentSetKey": "e71ef70ee99e707af6c5eaa57b6336ae906b5690"
+  },
+  "props": [
+    {
+      "name": "label",
+      "type": "string",
+      "default": "Search result",
+      "required": true,
+      "description": "Primary result text."
+    },
+    {
+      "name": "description",
+      "type": "string",
+      "default": "Supporting detail about this result.",
+      "description": "Secondary text below the label."
+    }
+  ],
+  "children": {
+    "kind": "none"
+  },
+  "slots": [
+    {
+      "prop": "icon",
+      "accepts": [],
+      "acceptsMode": "open",
+      "optional": true,
+      "description": "Icon or avatar before the label."
+    }
+  ]
+}

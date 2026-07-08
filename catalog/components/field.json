@@ -1,0 +1,46 @@
+{
+  "id": "ds.field",
+  "name": "Field",
+  "version": "1.0.0",
+  "status": "draft",
+  "description": "Form field wrapper providing a label, description, and required indicator around any control. API mirrors industry convention (Astryx Field): the label targets the control via inputID; validation status needs structured-object props — a documented gap.",
+  "figma": {
+    "representation": "component",
+    "componentSetKey": "e690d926c7f929fb354ba4aa0d3b355db929c444"
+  },
+  "props": [
+    {
+      "name": "isRequired",
+      "type": "boolean",
+      "default": false,
+      "description": "Shows the required indicator beside the label."
+    },
+    {
+      "name": "label",
+      "type": "string",
+      "default": "Field label",
+      "required": true,
+      "description": "Always rendered — even custom controls need names."
+    },
+    {
+      "name": "inputID",
+      "type": "string",
+      "default": "field-control",
+      "required": true,
+      "description": "The wrapped control's id, used for the label's htmlFor association."
+    },
+    {
+      "name": "description",
+      "type": "string",
+      "default": "Helper text for the wrapped control.",
+      "description": "Helper text between the label and the control."
+    }
+  ],
+  "children": {
+    "kind": "slot",
+    "accepts": [],
+    "acceptsMode": "open",
+    "description": "The wrapped form control."
+  },
+  "slots": []
+}

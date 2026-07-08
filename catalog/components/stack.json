@@ -1,0 +1,29 @@
+{
+  "id": "ds.stack",
+  "name": "Stack",
+  "version": "1.0.0",
+  "status": "draft",
+  "description": "Vertical layout primitive — stacks children with a token-governed gap. Screens compose from Stack/Inline instead of raw styled divs.",
+  "figma": {
+    "representation": "native"
+  },
+  "props": [
+    {
+      "name": "gap",
+      "type": [
+        "sm",
+        "md",
+        "lg"
+      ],
+      "default": "md",
+      "description": "Space between children."
+    }
+  ],
+  "children": {
+    "kind": "slot",
+    "accepts": [],
+    "acceptsMode": "open",
+    "description": "Any catalog content."
+  },
+  "slots": []
+}

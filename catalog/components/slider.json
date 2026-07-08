@@ -1,0 +1,36 @@
+{
+  "id": "ds.slider",
+  "name": "Slider",
+  "version": "1.0.0",
+  "status": "draft",
+  "description": "Numeric selection within bounds — the static surface of a slider: label, filled track to the current value, and thumb. API mirrors industry convention (Astryx Slider); drag behavior and range mode are declared boundaries.",
+  "figma": {
+    "representation": "component",
+    "componentSetKey": "8aac8c4b2be87b47b944650ec1a4c07bdfeb12f7"
+  },
+  "props": [
+    {
+      "name": "value",
+      "type": "string",
+      "default": 40,
+      "description": "Current value — positions the thumb."
+    },
+    {
+      "name": "max",
+      "type": "string",
+      "default": 100,
+      "description": "Maximum value."
+    },
+    {
+      "name": "label",
+      "type": "string",
+      "default": "Volume",
+      "required": true,
+      "description": "Always rendered."
+    }
+  ],
+  "children": {
+    "kind": "none"
+  },
+  "slots": []
+}

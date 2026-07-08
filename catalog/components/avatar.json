@@ -1,0 +1,27 @@
+{
+  "id": "ds.avatar",
+  "name": "Avatar",
+  "version": "1.0.0",
+  "status": "draft",
+  "description": "Represents a person or entity with initials. Non-interactive.",
+  "figma": {
+    "representation": "component",
+    "componentSetKey": "b39059e770141b713f28ae1816be3ed756cd79da"
+  },
+  "props": [
+    {
+      "name": "size",
+      "type": [
+        "sm",
+        "md"
+      ],
+      "default": "sm",
+      "description": "Avatar diameter."
+    }
+  ],
+  "children": {
+    "kind": "text",
+    "description": "Initials (1–2 characters)."
+  },
+  "slots": []
+}

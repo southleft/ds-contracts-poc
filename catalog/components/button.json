@@ -1,0 +1,51 @@
+{
+  "id": "ds.button",
+  "name": "Button",
+  "version": "1.4.0",
+  "status": "draft",
+  "description": "Triggers an action or event. Use one primary button per context.",
+  "figma": {
+    "representation": "component",
+    "componentSetKey": "1b5d2a573f3f39404af396bdbe944a30ca0eaec3"
+  },
+  "props": [
+    {
+      "name": "variant",
+      "type": [
+        "primary",
+        "secondary",
+        "danger",
+        "ghost"
+      ],
+      "default": "primary",
+      "description": "Visual prominence of the action."
+    },
+    {
+      "name": "size",
+      "type": [
+        "sm",
+        "md",
+        "lg"
+      ],
+      "default": "md",
+      "description": "Control density."
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "default": false,
+      "description": "Prevents interaction and communicates unavailability."
+    },
+    {
+      "name": "loading",
+      "type": "boolean",
+      "default": false,
+      "description": "Shows a spinning busy indicator beside the label while an async action resolves."
+    }
+  ],
+  "children": {
+    "kind": "text",
+    "description": "Button label."
+  },
+  "slots": []
+}

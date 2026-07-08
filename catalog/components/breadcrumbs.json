@@ -1,0 +1,28 @@
+{
+  "id": "ds.breadcrumbs",
+  "name": "Breadcrumbs",
+  "version": "1.0.0",
+  "status": "draft",
+  "description": "Navigation trail from root to the current page. API mirrors industry convention (Astryx Breadcrumbs): a nav landmark holding BreadcrumbItems; keep trails to five levels or fewer.",
+  "figma": {
+    "representation": "component",
+    "componentSetKey": "853821e9b58b03010cfeda157fd8ffcf2338bb15"
+  },
+  "props": [
+    {
+      "name": "label",
+      "type": "string",
+      "default": "Breadcrumb",
+      "required": true,
+      "description": "Accessible label for the navigation landmark."
+    }
+  ],
+  "children": {
+    "kind": "slot",
+    "accepts": [
+      "BreadcrumbItem"
+    ],
+    "acceptsMode": "prefer"
+  },
+  "slots": []
+}

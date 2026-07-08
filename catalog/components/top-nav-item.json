@@ -1,0 +1,46 @@
+{
+  "id": "ds.top-nav-item",
+  "name": "TopNavItem",
+  "version": "1.0.0",
+  "status": "draft",
+  "description": "A navigation item in a TopNav or SideNav context. API mirrors industry convention (Astryx TopNavItem) with selection flattened to a state enum; the selected state applies aria-current.",
+  "figma": {
+    "representation": "component",
+    "componentSetKey": "a4db1fe283d2bfb60891ec71398cf8472b2292dc"
+  },
+  "props": [
+    {
+      "name": "state",
+      "type": [
+        "default",
+        "selected"
+      ],
+      "default": "default",
+      "description": "Whether this item is the current page."
+    },
+    {
+      "name": "label",
+      "type": "string",
+      "default": "Nav item",
+      "required": true,
+      "description": "Visible item text."
+    },
+    {
+      "name": "href",
+      "type": "string",
+      "default": "#",
+      "description": "Navigation target URL."
+    }
+  ],
+  "children": {
+    "kind": "none"
+  },
+  "slots": [
+    {
+      "prop": "icon",
+      "accepts": [],
+      "acceptsMode": "open",
+      "optional": true
+    }
+  ]
+}

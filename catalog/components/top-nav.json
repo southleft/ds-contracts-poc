@@ -1,0 +1,48 @@
+{
+  "id": "ds.top-nav",
+  "name": "TopNav",
+  "version": "1.0.0",
+  "status": "draft",
+  "description": "Horizontal main navigation bar with heading, start, center, and end areas. API mirrors industry convention (Astryx TopNav); hover menus and mega-menus are behavior-layer boundaries.",
+  "figma": {
+    "representation": "component",
+    "componentSetKey": "c82dd683a88f085e804e8d315c8f75dc6f261807"
+  },
+  "props": [
+    {
+      "name": "label",
+      "type": "string",
+      "default": "Main",
+      "required": true,
+      "description": "Accessible label for the navigation landmark."
+    }
+  ],
+  "children": {
+    "kind": "none"
+  },
+  "slots": [
+    {
+      "prop": "heading",
+      "accepts": [],
+      "acceptsMode": "open",
+      "optional": true,
+      "description": "Logo or brand at the start edge."
+    },
+    {
+      "prop": "startContent",
+      "accepts": [
+        "TopNavItem"
+      ],
+      "acceptsMode": "prefer",
+      "optional": true,
+      "description": "Primary navigation items after the heading."
+    },
+    {
+      "prop": "endContent",
+      "accepts": [],
+      "acceptsMode": "open",
+      "optional": true,
+      "description": "Search, icons, user profile at the end edge."
+    }
+  ]
+}

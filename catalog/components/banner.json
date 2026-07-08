@@ -1,0 +1,66 @@
+{
+  "id": "ds.banner",
+  "name": "Banner",
+  "version": "1.0.0",
+  "status": "draft",
+  "description": "Persistent inline notification for page- or section-level feedback. API mirrors industry convention (Astryx Banner): status drives color, icon, and ARIA role; dismissable banners expose a close affordance; endContent carries actions.",
+  "figma": {
+    "representation": "component",
+    "componentSetKey": "6acb10544bd5dce1800d610744c0e346fc12bfb9"
+  },
+  "props": [
+    {
+      "name": "status",
+      "type": [
+        "info",
+        "success",
+        "warning",
+        "error"
+      ],
+      "default": "info",
+      "description": "Feedback tone — drives the color scheme, the leading icon, and the ARIA role (error/warning announce as alerts)."
+    },
+    {
+      "name": "container",
+      "type": [
+        "card",
+        "section"
+      ],
+      "default": "card",
+      "description": "card = standalone with radius; section = full-bleed, square."
+    },
+    {
+      "name": "isDismissable",
+      "type": "boolean",
+      "default": false,
+      "description": "Shows the close affordance. Keep error banners until resolved."
+    },
+    {
+      "name": "title",
+      "type": "string",
+      "default": "Banner title",
+      "required": true,
+      "description": "Prominent header text."
+    },
+    {
+      "name": "description",
+      "type": "string",
+      "default": "Supporting detail that explains what happened and what to do next.",
+      "description": "Secondary text below the title."
+    }
+  ],
+  "children": {
+    "kind": "none"
+  },
+  "slots": [
+    {
+      "prop": "endContent",
+      "accepts": [
+        "Button"
+      ],
+      "acceptsMode": "prefer",
+      "optional": true,
+      "description": "End-aligned action slot — typically a secondary Button."
+    }
+  ]
+}

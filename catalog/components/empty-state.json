@@ -1,0 +1,47 @@
+{
+  "id": "ds.empty-state",
+  "name": "EmptyState",
+  "version": "1.0.0",
+  "status": "draft",
+  "description": "Placeholder for a content area with no data — empty lists, zero results, first-time setup. API mirrors industry convention (Astryx EmptyState): always a title and a next step; the icon is decorative.",
+  "figma": {
+    "representation": "component",
+    "componentSetKey": "b0dd99f2822be1712c8984d1b59bd31bd8ab866d"
+  },
+  "props": [
+    {
+      "name": "title",
+      "type": "string",
+      "default": "Nothing here yet",
+      "required": true,
+      "description": "Primary message."
+    },
+    {
+      "name": "description",
+      "type": "string",
+      "default": "When items are added they will show up in this list.",
+      "description": "Secondary text explaining what will appear here and how."
+    }
+  ],
+  "children": {
+    "kind": "none"
+  },
+  "slots": [
+    {
+      "prop": "icon",
+      "accepts": [],
+      "acceptsMode": "open",
+      "optional": true,
+      "description": "Decorative icon or illustration above the title."
+    },
+    {
+      "prop": "actions",
+      "accepts": [
+        "Button"
+      ],
+      "acceptsMode": "prefer",
+      "optional": true,
+      "description": "Action buttons below the description."
+    }
+  ]
+}

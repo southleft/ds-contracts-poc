@@ -1,0 +1,38 @@
+{
+  "id": "ds.card",
+  "name": "Card",
+  "version": "1.1.0",
+  "status": "draft",
+  "description": "Groups related content behind one subject. Composes an Avatar, a bound title, a default body slot, and a constrained actions slot.",
+  "figma": {
+    "representation": "component",
+    "componentSetKey": "7cd7011e4f2374161cd212f02992c7fd0f899430"
+  },
+  "props": [
+    {
+      "name": "title",
+      "type": "string",
+      "default": "Card title",
+      "required": true,
+      "description": "Card heading, bound to the header title part on both surfaces."
+    }
+  ],
+  "children": {
+    "kind": "slot",
+    "accepts": [],
+    "acceptsMode": "open",
+    "description": "Default slot — the card's main content."
+  },
+  "slots": [
+    {
+      "prop": "actions",
+      "accepts": [
+        "Button",
+        "Badge"
+      ],
+      "acceptsMode": "prefer",
+      "optional": true,
+      "description": "Constrained actions slot — only actions-grade components."
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "id": "ds.inline",
+  "name": "Inline",
+  "version": "1.0.0",
+  "status": "draft",
+  "description": "Horizontal layout primitive — lays children out in a row with a token-governed gap, vertically centered.",
+  "figma": {
+    "representation": "native"
+  },
+  "props": [
+    {
+      "name": "gap",
+      "type": [
+        "sm",
+        "md",
+        "lg"
+      ],
+      "default": "md",
+      "description": "Space between children."
+    }
+  ],
+  "children": {
+    "kind": "slot",
+    "accepts": [],
+    "acceptsMode": "open",
+    "description": "Any catalog content."
+  },
+  "slots": []
+}

@@ -1,0 +1,29 @@
+{
+  "id": "ds.divider",
+  "name": "Divider",
+  "version": "1.0.0",
+  "status": "draft",
+  "description": "Visual separator dividing content into distinct sections. API mirrors industry convention (Astryx Divider) at the variant level; orientation requires per-enum-value property overrides — a documented schema gap.",
+  "figma": {
+    "representation": "component",
+    "componentSetKey": "1bd0e157dee768b650c50a752a164562fc606822"
+  },
+  "props": [
+    {
+      "name": "variant",
+      "type": [
+        "subtle",
+        "strong"
+      ],
+      "default": "subtle",
+      "description": "Visual weight of the line."
+    }
+  ],
+  "children": {
+    "kind": "slot",
+    "accepts": [],
+    "acceptsMode": "open",
+    "description": "Any catalog content."
+  },
+  "slots": []
+}

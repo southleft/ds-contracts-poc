@@ -1,0 +1,40 @@
+{
+  "id": "ds.pagination",
+  "name": "Pagination",
+  "version": "1.0.0",
+  "status": "draft",
+  "description": "Steps through pages of content, below a table or list. API mirrors industry convention (Astryx Pagination) with three display variants; page math and click behavior are declared boundaries — the pages variant shows a representative trail.",
+  "figma": {
+    "representation": "component",
+    "componentSetKey": "51d18c28f5ef424142d682db4ec7fd35b9091257"
+  },
+  "props": [
+    {
+      "name": "variant",
+      "type": [
+        "pages",
+        "compact",
+        "dots"
+      ],
+      "default": "pages",
+      "description": "Numbered trail, compact page label, or dot indicators."
+    },
+    {
+      "name": "pageLabel",
+      "type": "string",
+      "default": "Page 2 of 10",
+      "description": "The compact variant's label text."
+    },
+    {
+      "name": "label",
+      "type": "string",
+      "default": "Pagination",
+      "required": true,
+      "description": "Accessible label for the navigation landmark."
+    }
+  ],
+  "children": {
+    "kind": "none"
+  },
+  "slots": []
+}

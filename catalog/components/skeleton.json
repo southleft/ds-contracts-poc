@@ -1,0 +1,27 @@
+{
+  "id": "ds.skeleton",
+  "name": "Skeleton",
+  "version": "1.0.0",
+  "status": "draft",
+  "description": "Pulsing placeholder previewing the shape of loading content. API mirrors industry convention (Astryx Skeleton) with the free-form width/height flattened to a shape variant; the pulse is CSS-only — the canvas shows the static shape.",
+  "figma": {
+    "representation": "component",
+    "componentSetKey": "2da0d4e2438f9b37a9ce159eafb4477f622b10bb"
+  },
+  "props": [
+    {
+      "name": "variant",
+      "type": [
+        "text",
+        "rect",
+        "circle"
+      ],
+      "default": "text",
+      "description": "The shape being previewed."
+    }
+  ],
+  "children": {
+    "kind": "none"
+  },
+  "slots": []
+}

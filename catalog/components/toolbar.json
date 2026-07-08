@@ -1,0 +1,56 @@
+{
+  "id": "ds.toolbar",
+  "name": "Toolbar",
+  "version": "1.0.0",
+  "status": "draft",
+  "description": "General-purpose toolbar container with start, center, and end content areas for contextual actions. API mirrors industry convention (Astryx Toolbar); roving-tabindex keyboard behavior is a declared boundary.",
+  "figma": {
+    "representation": "component",
+    "componentSetKey": "e56c9f77a873e973aa6f567d0c275710cb039795"
+  },
+  "props": [
+    {
+      "name": "size",
+      "type": [
+        "sm",
+        "md",
+        "lg"
+      ],
+      "default": "md",
+      "description": "Minimum toolbar height; children keep their own sizes."
+    },
+    {
+      "name": "label",
+      "type": "string",
+      "default": "Toolbar",
+      "required": true,
+      "description": "Accessible label for the toolbar."
+    }
+  ],
+  "children": {
+    "kind": "none"
+  },
+  "slots": [
+    {
+      "prop": "startContent",
+      "accepts": [],
+      "acceptsMode": "open",
+      "optional": true,
+      "description": "Start-aligned actions — buttons, segmented controls, selectors."
+    },
+    {
+      "prop": "centerContent",
+      "accepts": [],
+      "acceptsMode": "open",
+      "optional": true,
+      "description": "Centered content."
+    },
+    {
+      "prop": "endContent",
+      "accepts": [],
+      "acceptsMode": "open",
+      "optional": true,
+      "description": "End-aligned primary actions, selectors, badges."
+    }
+  ]
+}

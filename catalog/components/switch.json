@@ -1,0 +1,46 @@
+{
+  "id": "ds.switch",
+  "name": "Switch",
+  "version": "1.1.0",
+  "status": "draft",
+  "description": "Toggle for on/off settings that take effect immediately. API mirrors industry convention (Astryx Switch) with the boolean value flattened to an off/on enum so both surfaces render both states truthfully; toggle behavior is a declared boundary.",
+  "figma": {
+    "representation": "component",
+    "componentSetKey": "7936496ebfb63f0f4908a29b7edd6dae340e4e23"
+  },
+  "props": [
+    {
+      "name": "value",
+      "type": [
+        "off",
+        "on"
+      ],
+      "default": "off",
+      "description": "On or off — drives the track color and thumb position."
+    },
+    {
+      "name": "label",
+      "type": "string",
+      "default": "Enable notifications",
+      "required": true,
+      "description": "Always rendered — users must know what they are toggling."
+    },
+    {
+      "name": "description",
+      "type": "string",
+      "default": "Takes effect immediately.",
+      "description": "Secondary text below the label."
+    }
+  ],
+  "events": [
+    {
+      "prop": "onToggle",
+      "type": "() => void",
+      "description": "Fires when the track is activated; uncontrolled instances flip value off/on themselves."
+    }
+  ],
+  "children": {
+    "kind": "none"
+  },
+  "slots": []
+}

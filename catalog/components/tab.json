@@ -1,0 +1,50 @@
+{
+  "id": "ds.tab",
+  "name": "Tab",
+  "version": "1.0.0",
+  "status": "draft",
+  "description": "A single tab in a TabList. API mirrors industry convention (Astryx Tab) with selection flattened to a state enum so both surfaces render it truthfully; selection behavior itself is a declared boundary.",
+  "figma": {
+    "representation": "component",
+    "componentSetKey": "5f7bce1453ff86d3147e96d9249f9313497f3d68"
+  },
+  "props": [
+    {
+      "name": "state",
+      "type": [
+        "default",
+        "selected"
+      ],
+      "default": "default",
+      "description": "Selection state — selected tabs render semibold in the accent color."
+    },
+    {
+      "name": "label",
+      "type": "string",
+      "default": "Tab",
+      "required": true,
+      "description": "Visible tab text."
+    }
+  ],
+  "children": {
+    "kind": "none"
+  },
+  "slots": [
+    {
+      "prop": "icon",
+      "accepts": [],
+      "acceptsMode": "open",
+      "optional": true
+    },
+    {
+      "prop": "endContent",
+      "accepts": [
+        "Badge",
+        "StatusDot"
+      ],
+      "acceptsMode": "prefer",
+      "optional": true,
+      "description": "Badge count or status dot after the label."
+    }
+  ]
+}

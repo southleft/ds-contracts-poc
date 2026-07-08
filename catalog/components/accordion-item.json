@@ -1,0 +1,43 @@
+{
+  "id": "ds.accordion-item",
+  "name": "AccordionItem",
+  "version": "1.1.0",
+  "status": "draft",
+  "description": "A collapsible content row: trigger with a state chevron, content revealed when open. API mirrors industry convention (Astryx Collapsible) with the open state flattened to a closed/open enum so both surfaces render both states; the toggle itself is contract-declared (onToggle + aria-expanded, generated); richer behavior stays a declared boundary.",
+  "figma": {
+    "representation": "component",
+    "componentSetKey": "ba5ec62aa3c19bf86b7bcff8eb61ef1e86daad35"
+  },
+  "props": [
+    {
+      "name": "state",
+      "type": [
+        "closed",
+        "open"
+      ],
+      "default": "closed",
+      "description": "Closed shows only the trigger; open reveals the content and rotates the chevron."
+    },
+    {
+      "name": "title",
+      "type": "string",
+      "default": "Section title",
+      "required": true,
+      "description": "The always-visible trigger text."
+    }
+  ],
+  "events": [
+    {
+      "prop": "onToggle",
+      "type": "() => void",
+      "description": "Fires when the trigger is activated; uncontrolled instances flip state closed/open themselves."
+    }
+  ],
+  "children": {
+    "kind": "slot",
+    "accepts": [],
+    "acceptsMode": "open",
+    "description": "Revealed content — open state only."
+  },
+  "slots": []
+}

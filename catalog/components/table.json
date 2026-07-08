@@ -1,0 +1,31 @@
+{
+  "id": "ds.table",
+  "name": "Table",
+  "version": "1.1.0",
+  "status": "draft",
+  "description": "Structured data in rows and columns. Composes header cells (with the Table's density mapped into them), and a body slot of rows.",
+  "figma": {
+    "representation": "component",
+    "componentSetKey": "d3e8c9c378ea2fd072c2eb08545a30565fa77614"
+  },
+  "props": [
+    {
+      "name": "density",
+      "type": [
+        "comfortable",
+        "compact"
+      ],
+      "default": "comfortable",
+      "description": "Vertical rhythm of the whole table; mapped into the fixed header cells."
+    }
+  ],
+  "children": {
+    "kind": "slot",
+    "accepts": [
+      "TableRow"
+    ],
+    "acceptsMode": "prefer",
+    "description": "Rows. Multi-child slot: renders its default content directly in Figma (see docs/08)."
+  },
+  "slots": []
+}

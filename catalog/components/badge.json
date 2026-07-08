@@ -1,0 +1,29 @@
+{
+  "id": "ds.badge",
+  "name": "Badge",
+  "version": "1.0.0",
+  "status": "draft",
+  "description": "Communicates status or categorization at a glance. Non-interactive.",
+  "figma": {
+    "representation": "component",
+    "componentSetKey": "89f1fb2d4580116cea4be5d4ca340de216a27819"
+  },
+  "props": [
+    {
+      "name": "variant",
+      "type": [
+        "info",
+        "success",
+        "warning",
+        "danger"
+      ],
+      "default": "info",
+      "description": "The feedback tone being communicated."
+    }
+  ],
+  "children": {
+    "kind": "text",
+    "description": "Badge label."
+  },
+  "slots": []
+}

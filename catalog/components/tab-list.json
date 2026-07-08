@@ -1,0 +1,20 @@
+{
+  "id": "ds.tab-list",
+  "name": "TabList",
+  "version": "1.0.0",
+  "status": "draft",
+  "description": "Tab-style navigation container holding Tab items. API mirrors industry convention (Astryx TabList); roving-tabindex keyboard behavior and controlled selection are declared boundaries.",
+  "figma": {
+    "representation": "component",
+    "componentSetKey": "21786b6e7ff33e3d9ede5edb8ca07a56f3dbb8af"
+  },
+  "props": [],
+  "children": {
+    "kind": "slot",
+    "accepts": [
+      "Tab"
+    ],
+    "acceptsMode": "prefer"
+  },
+  "slots": []
+}

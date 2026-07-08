@@ -1,0 +1,27 @@
+{
+  "id": "ds.blockquote",
+  "name": "Blockquote",
+  "version": "1.0.0",
+  "status": "draft",
+  "description": "Styled quotation block with an accent left border for quotes, testimonials, and excerpts. API mirrors industry convention (Astryx Blockquote): content plus an optional cite slot rendered in semantic footer/cite markup.",
+  "figma": {
+    "representation": "component",
+    "componentSetKey": "b6dd9d18639b0b053e55d307b2a8dbf1d4af3cef"
+  },
+  "props": [],
+  "children": {
+    "kind": "slot",
+    "accepts": [],
+    "acceptsMode": "open",
+    "description": "The quoted content."
+  },
+  "slots": [
+    {
+      "prop": "cite",
+      "accepts": [],
+      "acceptsMode": "open",
+      "optional": true,
+      "description": "Attribution, rendered in a semantic footer."
+    }
+  ]
+}

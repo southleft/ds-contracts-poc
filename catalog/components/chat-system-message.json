@@ -1,0 +1,40 @@
+{
+  "id": "ds.chat-system-message",
+  "name": "ChatSystemMessage",
+  "version": "1.0.0",
+  "status": "draft",
+  "description": "Centered system message for non-sender chat content — date separators, membership changes, status notices. API mirrors industry convention (Astryx ChatSystemMessage): the divider variant adds a line on each side.",
+  "figma": {
+    "representation": "component",
+    "componentSetKey": "2c5056fcf5f0b075ec7be6019f20eb8cdc9d5efb"
+  },
+  "props": [
+    {
+      "name": "variant",
+      "type": [
+        "default",
+        "divider"
+      ],
+      "default": "default",
+      "description": "Plain centered text, or text between divider lines."
+    },
+    {
+      "name": "message",
+      "type": "string",
+      "default": "Today",
+      "required": true,
+      "description": "Short factual string — a date, a join notice, a status change."
+    }
+  ],
+  "children": {
+    "kind": "none"
+  },
+  "slots": [
+    {
+      "prop": "icon",
+      "accepts": [],
+      "acceptsMode": "open",
+      "optional": true
+    }
+  ]
+}

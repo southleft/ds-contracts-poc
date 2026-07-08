@@ -1,0 +1,52 @@
+{
+  "id": "ds.text-area",
+  "name": "TextArea",
+  "version": "1.0.0",
+  "status": "draft",
+  "description": "Multi-line text input for longer-form content — comments, descriptions, messages. API mirrors industry convention (Astryx TextArea); wrapping-label anatomy gives implicit association.",
+  "figma": {
+    "representation": "component",
+    "componentSetKey": "2cb4581bfc1e7d9b0b5e32260d783accaea973ef"
+  },
+  "props": [
+    {
+      "name": "size",
+      "type": [
+        "sm",
+        "md",
+        "lg"
+      ],
+      "default": "md",
+      "description": "Control size scale (affects padding and text size)."
+    },
+    {
+      "name": "isRequired",
+      "type": "boolean",
+      "default": false,
+      "description": "Marks the field required."
+    },
+    {
+      "name": "label",
+      "type": "string",
+      "default": "Label",
+      "required": true,
+      "description": "Field label — always rendered."
+    },
+    {
+      "name": "description",
+      "type": "string",
+      "default": "Helper text that explains the expected content.",
+      "description": "Helper text between the label and the textarea."
+    },
+    {
+      "name": "placeholder",
+      "type": "string",
+      "default": "Write something…",
+      "description": "Hint shown when empty."
+    }
+  ],
+  "children": {
+    "kind": "none"
+  },
+  "slots": []
+}
