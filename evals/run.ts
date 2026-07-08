@@ -749,7 +749,7 @@ const cases: Case[] = [
       const r = parity();
       if (r.status !== 0) throw new Error('Baselined finding still failed the exit code');
       const report = JSON.parse(readFileSync(path.join(SCRATCH, 'parity', 'report.json'), 'utf8'));
-      if (!report.acknowledged?.some((f) => f.subject === 'snapshot-provenance') || report.findings.length !== 0)
+      if (!report.acknowledged?.some((f: { subject: string }) => f.subject === 'snapshot-provenance') || report.findings.length !== 0)
         throw new Error('Baselined finding not routed to acknowledged');
     },
   },
