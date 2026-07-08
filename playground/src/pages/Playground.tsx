@@ -1,0 +1,700 @@
+import { useEffect, useMemo, useRef, useState } from 'react';
+import { emitters, type Contract, type EmittedFile } from '../../../core/index.js';
+import { useRoute } from '../router';
+import { useTheme } from '../theme';
+import { contractsById, icons, rawContractById, tokenTree } from '../engine/data';
+import { exampleBySlug, examples, type CodeExample } from '../engine/examples';
+import {
+  DEMO_URL,
+  importFigmaDemo,
+  importFigmaUrl,
+  proposalsFromDump,
+  type FigmaImportResult,
+  type FigmaProposal,
+} from '../engine/figma-import';
+import { validateContractText } from '../engine/validate';
+import type { ReceiptGroup, Receipts } from '../receipts';
+import { CopyButton } from '../components/CopyButton';
+import { PreviewFrame } from '../components/PreviewFrame';
+import { ReceiptsPanel } from '../components/ReceiptsPanel';
+
+type SourceTab = 'examples' | 'figma' | 'code' | 'json';
+const OUTPUT_LABELS: Record<string, string> = {
+  react: 'React',
+  html: 'HTML + CSS',
+  'react-inline': 'React inline',
+  'figma-script': 'Figma script',
+};
+
+const pretty = (value: unknown) => JSON.stringify(value, null, 2);
+
+// ---------------------------------------------------------------------------
+// Receipt builders — verbatim engine output, grouped and named.
+// ---------------------------------------------------------------------------
+
+function importReportGroups(report: FigmaImportResult['report']): ReceiptGroup[] {
+  const groups: ReceiptGroup[] = [];
+  if (report.degradations.length > 0) {
+    groups.push({
+      title: 'Import report — degradations',
+      kind: 'degradation',
+      entries: report.degradations.map((d) => ({
+        code: d.code,
+        label: d.field ? `${d.nodePath} · ${d.field}` : d.nodePath,
+        message: d.message,
+      })),
+    });
+  }
+  if (report.notes.length > 0) {
+    groups.push({
+      title: 'Import report — notes',
+      kind: 'note',
+      entries: report.notes.map((message) => ({ message })),
+    });
+  }
+  return groups;
+}
+
+function proposalGroups(proposal: FigmaProposal): ReceiptGroup[] {
+  const groups: ReceiptGroup[] = [];
+  if (proposal.notes.length > 0) {
+    groups.push({
+      title: `Proposal notes — ${proposal.setName}`,
+      kind: 'note',
+      entries: proposal.notes.map((message) => ({ message })),
+    });
+  }
+  if (proposal.unbound.length > 0) {
+    groups.push({
+      title: `Unbound values — ${proposal.setName}`,
+      kind: 'unbound',
+      entries: proposal.unbound.map((u) => ({
+        label: `${u.nodePath} · ${u.property}`,
+        message: String(u.value),
+        suggestions: u.suggestions,
+      })),
+    });
+  }
+  return groups;
+}
+
+// ---------------------------------------------------------------------------
+// The page
+// ---------------------------------------------------------------------------
+
+export function Playground() {
+  const { params } = useRoute();
+  const { theme } = useTheme();
+
+  // -------------------------------------------------- contract editor state
+  const [text, setText] = useState('');
+  const [provenance, setProvenance] = useState('');
+  const [debouncedText, setDebouncedText] = useState('');
+  useEffect(() => {
+    const t = window.setTimeout(() => setDebouncedText(text), 250);
+    return () => window.clearTimeout(t);
+  }, [text]);
+  const validation = useMemo(() => validateContractText(debouncedText), [debouncedText]);
+
+  const lastGood = useRef<{ contract: Contract; contracts: Map<string, Contract> } | null>(null);
+  if (validation.status === 'valid') {
+    lastGood.current = { contract: validation.contract, contracts: validation.contracts };
+  }
+
+  // -------------------------------------------------------------- receipts
+  const [receipts, setReceipts] = useState<Receipts | null>(null);
+
+  // ------------------------------------------------------------- input rail
+  const [sourceTab, setSourceTab] = useState<SourceTab>('examples');
+  const [activeExample, setActiveExample] = useState<string | null>(null);
+
+  const loadContract = (contractId: string, source: string, slug?: string) => {
+    const raw = rawContractById.get(contractId);
+    if (!raw) return;
+    setText(pretty(raw));
+    setReceipts(null);
+    setProvenance(source);
+    setActiveExample(slug ?? contractId);
+  };
+
+  // ------------------------------------------------------------- code state
+  const [codeTsx, setCodeTsx] = useState('');
+  const [codeCss, setCodeCss] = useState('');
+  const [codeBusy, setCodeBusy] = useState<string | null>(null);
+  const [codeError, setCodeError] = useState<string | null>(null);
+
+  const runCodePropose = async (tsx: string, css: string, origin: string) => {
+    setCodeBusy('Loading the TypeScript compiler (lazy chunk, ~5 MB — first run only)…');
+    setCodeError(null);
+    try {
+      const { proposeFromCodeText } = await import('../engine/code-import');
+      setCodeBusy('Proposing…');
+      const result = proposeFromCodeText(tsx, css, 'playground/Pasted.tsx');
+      const groups: ReceiptGroup[] = [];
+      for (const { name, proposal } of result.proposals) {
+        if (proposal.notes.length > 0) {
+          groups.push({
+            title: `Proposal notes — ${name}`,
+            kind: 'note',
+            entries: proposal.notes.map((message) => ({ message })),
+          });
+        }
+      }
+      if (result.skipped.length > 0) {
+        groups.push({
+          title: 'Skipped components (visible but not readable)',
+          kind: 'skipped',
+          entries: result.skipped.map((s) => ({ label: `${s.name} (${s.source})`, message: s.reason })),
+        });
+      }
+      setReceipts({ source: origin, groups });
+      const first = result.proposals[0];
+      if (first) {
+        setText(pretty(first.proposal.contract));
+        setProvenance(`proposed from code — ${first.name}`);
+      } else if (result.skipped.length === 0) {
+        setCodeError('No component found in the pasted source.');
+      }
+      setActiveExample(null);
+    } catch (e) {
+      setCodeError(e instanceof Error ? e.message : String(e));
+    } finally {
+      setCodeBusy(null);
+    }
+  };
+
+  const loadCodeExample = (example: CodeExample, autoRun: boolean) => {
+    setSourceTab('code');
+    setCodeTsx(example.tsx);
+    setCodeCss(example.css);
+    setActiveExample(example.slug);
+    if (autoRun) void runCodePropose(example.tsx, example.css, `code proposal — ${example.sourcePath}`);
+  };
+
+  // ------------------------------------------------------------ figma state
+  const [figmaUrl, setFigmaUrl] = useState('');
+  const [figmaToken, setFigmaToken] = useState('');
+  const [figmaDegraded, setFigmaDegraded] = useState(false);
+  const [figmaBusy, setFigmaBusy] = useState(false);
+  const [figmaError, setFigmaError] = useState<string | null>(null);
+  const [figmaProposals, setFigmaProposals] = useState<FigmaProposal[] | null>(null);
+  const importGroupsRef = useRef<ReceiptGroup[]>([]);
+
+  const applyProposal = (proposal: FigmaProposal, origin: string) => {
+    setText(pretty(proposal.contract));
+    setProvenance(`proposed from ${origin} — ${proposal.setName}`);
+    setReceipts({ source: origin, groups: [...importGroupsRef.current, ...proposalGroups(proposal)] });
+    setActiveExample(null);
+  };
+
+  const handleImportResult = (result: FigmaImportResult, origin: string) => {
+    const proposals = proposalsFromDump(result.dump);
+    if (proposals.length === 0) {
+      setFigmaError('The import returned no component set to propose from.');
+      return;
+    }
+    importGroupsRef.current = importReportGroups(result.report);
+    setFigmaProposals(proposals);
+    applyProposal(proposals[0], origin);
+  };
+
+  const runFigmaImport = async () => {
+    setFigmaBusy(true);
+    setFigmaError(null);
+    try {
+      const result = await importFigmaUrl(figmaUrl.trim(), figmaToken.trim());
+      handleImportResult(result, 'Figma REST import');
+    } catch (e) {
+      setFigmaError(e instanceof Error ? e.message : String(e));
+    } finally {
+      setFigmaBusy(false);
+    }
+  };
+
+  const runFigmaDemo = async (degraded: boolean) => {
+    setFigmaBusy(true);
+    setFigmaError(null);
+    try {
+      const result = await importFigmaDemo({ degraded });
+      handleImportResult(
+        result,
+        degraded ? 'Figma REST import (demo fixture, variables 403)' : 'Figma REST import (demo fixture)',
+      );
+    } catch (e) {
+      setFigmaError(e instanceof Error ? e.message : String(e));
+    } finally {
+      setFigmaBusy(false);
+    }
+  };
+
+  // ------------------------------------------------------------- json state
+  const [jsonText, setJsonText] = useState('');
+  const [jsonError, setJsonError] = useState<string | null>(null);
+
+  const loadJson = () => {
+    setJsonError(null);
+    let parsed: unknown;
+    try {
+      parsed = JSON.parse(jsonText);
+    } catch (e) {
+      setJsonError(e instanceof Error ? e.message : String(e));
+      return;
+    }
+    const isDump =
+      parsed !== null &&
+      typeof parsed === 'object' &&
+      Object.entries(parsed).some(
+        ([k, v]) => k !== '_provenance' && v !== null && typeof v === 'object' && 'variants' in v,
+      );
+    if (isDump) {
+      try {
+        importGroupsRef.current = [];
+        const proposals = proposalsFromDump(parsed as FigmaImportResult['dump']);
+        if (proposals.length === 0) {
+          setJsonError('No component set found in the pasted dump.');
+          return;
+        }
+        setFigmaProposals(proposals);
+        applyProposal(proposals[0], 'pasted Figma dump');
+      } catch (e) {
+        setJsonError(e instanceof Error ? e.message : String(e));
+      }
+      return;
+    }
+    setText(pretty(parsed));
+    setReceipts(null);
+    setProvenance('pasted contract JSON');
+    setActiveExample(null);
+  };
+
+  // ----------------------------------------------- URL params (?example=…)
+  const appliedQuery = useRef<string | null>(null);
+  useEffect(() => {
+    const query = params.toString();
+    if (appliedQuery.current === query) return;
+    appliedQuery.current = query;
+    const slug = params.get('example');
+    const source = params.get('source');
+    if (slug) {
+      const example = exampleBySlug.get(slug);
+      if (example?.kind === 'contract') {
+        loadContract(example.contractId, `loaded from examples — ${example.contractId}`, example.slug);
+      } else if (example?.kind === 'code') {
+        loadCodeExample(example, true);
+      }
+      return;
+    }
+    if (source === 'figma' || source === 'code' || source === 'json') setSourceTab(source);
+    if (!text) loadContract('ds.badge', 'loaded from examples — ds.badge', 'badge');
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [params]);
+
+  // ------------------------------------------------------------ output pane
+  const [outputTab, setOutputTab] = useState('preview');
+  const [format, setFormat] = useState(false);
+  const [formatting, setFormatting] = useState(false);
+  const [formattedFiles, setFormattedFiles] = useState<EmittedFile[] | null>(null);
+
+  const emittable =
+    validation.status === 'valid' || validation.status === 'violations' ? validation : null;
+
+  const emitted = useMemo(() => {
+    if (outputTab === 'preview' || !emittable) return null;
+    const emitter = emitters.find((e) => e.name === outputTab);
+    if (!emitter) return null;
+    try {
+      return {
+        files: emitter.emit(emittable.contract, {
+          tokens: tokenTree,
+          icons,
+          contracts: emittable.contracts,
+          mode: theme,
+        }),
+        error: null as string | null,
+      };
+    } catch (e) {
+      return { files: null, error: e instanceof Error ? e.message : String(e) };
+    }
+  }, [outputTab, emittable, theme]);
+
+  useEffect(() => {
+    setFormattedFiles(null);
+    if (!format || !emitted?.files) return;
+    let cancelled = false;
+    setFormatting(true);
+    (async () => {
+      const { formatTsx, formatCss } = await import('../engine/format-lazy');
+      const files = await Promise.all(
+        emitted.files!.map(async (f) => {
+          try {
+            if (/\.(tsx|ts|jsx|js)$/.test(f.path)) return { ...f, contents: await formatTsx(f.contents) };
+            if (f.path.endsWith('.css')) return { ...f, contents: await formatCss(f.contents) };
+          } catch {
+            /* unformattable file (e.g. the figma script's runtime shape) — show as emitted */
+          }
+          return f;
+        }),
+      );
+      if (!cancelled) setFormattedFiles(files);
+    })().finally(() => {
+      if (!cancelled) setFormatting(false);
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [format, emitted]);
+
+  const previewTarget = validation.status === 'valid' ? validation : null;
+  const stale = !previewTarget && lastGood.current;
+
+  // ------------------------------------------------------------------ render
+  return (
+    <div className="pg">
+      {/* ------------------------------------------------------- left rail */}
+      <aside className="pg__rail">
+        <div className="tabs" role="tablist" aria-label="Input source">
+          {(['examples', 'figma', 'code', 'json'] as const).map((tab) => (
+            <button
+              key={tab}
+              type="button"
+              role="tab"
+              aria-selected={sourceTab === tab}
+              className={`tabs__tab${sourceTab === tab ? ' is-active' : ''}`}
+              onClick={() => setSourceTab(tab)}
+            >
+              {tab === 'examples' ? 'Examples' : tab === 'figma' ? 'Figma' : tab === 'code' ? 'Code' : 'JSON'}
+            </button>
+          ))}
+        </div>
+
+        {sourceTab === 'examples' && (
+          <div className="rail__section">
+            {(['Atom', 'Molecule', 'Composition', 'Foreign code'] as const).map((category) => (
+              <div key={category} className="rail__group">
+                <div className="rail__group-title">{category}</div>
+                {examples
+                  .filter((e) => e.category === category)
+                  .map((e) => (
+                    <button
+                      key={e.slug}
+                      type="button"
+                      className={`rail__item${activeExample === e.slug ? ' is-active' : ''}`}
+                      onClick={() =>
+                        e.kind === 'contract'
+                          ? loadContract(e.contractId, `loaded from examples — ${e.contractId}`, e.slug)
+                          : loadCodeExample(e, true)
+                      }
+                    >
+                      {e.name}
+                    </button>
+                  ))}
+              </div>
+            ))}
+            <div className="rail__group">
+              <div className="rail__group-title">All {contractsById.size} contracts</div>
+              <select
+                aria-label="Load any contract"
+                value={activeExample && contractsById.has(activeExample) ? activeExample : ''}
+                onChange={(e) => {
+                  if (e.target.value) loadContract(e.target.value, `loaded from contracts/ — ${e.target.value}`);
+                }}
+              >
+                <option value="">Pick a contract…</option>
+                {[...contractsById.keys()].sort().map((id) => (
+                  <option key={id} value={id}>
+                    {id}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </div>
+        )}
+
+        {sourceTab === 'figma' && (
+          <div className="rail__section">
+            <div className="field">
+              <label htmlFor="figma-url">figma.com component URL</label>
+              <input
+                id="figma-url"
+                type="text"
+                value={figmaUrl}
+                onChange={(e) => setFigmaUrl(e.target.value)}
+                placeholder="https://www.figma.com/design/…?node-id=1-23"
+                spellCheck={false}
+              />
+            </div>
+            <div className="field">
+              <label htmlFor="figma-token">Personal access token</label>
+              <input
+                id="figma-token"
+                type="password"
+                value={figmaToken}
+                onChange={(e) => setFigmaToken(e.target.value)}
+                autoComplete="off"
+                placeholder="figd_…"
+              />
+              <p className="hint">
+                Session-only. Sent to api.figma.com and nowhere else — never stored, never
+                persisted, gone on reload.
+              </p>
+            </div>
+            <button
+              type="button"
+              className="btn--primary"
+              disabled={figmaBusy || !figmaUrl.trim() || !figmaToken.trim()}
+              onClick={() => void runFigmaImport()}
+            >
+              {figmaBusy ? 'Importing…' : 'Import'}
+            </button>
+
+            <p className="hint" style={{ marginTop: 16 }}>
+              No token handy? Run the same import over the repo&rsquo;s committed REST fixture —
+              identical code path, fixture transport.
+            </p>
+            <div className="checkline">
+              <input
+                id="figma-degraded"
+                type="checkbox"
+                checked={figmaDegraded}
+                onChange={(e) => setFigmaDegraded(e.target.checked)}
+              />
+              <label htmlFor="figma-degraded" style={{ margin: 0 }}>
+                Simulate a non-Enterprise plan (variables endpoint 403s)
+              </label>
+            </div>
+            <button type="button" disabled={figmaBusy} onClick={() => void runFigmaDemo(figmaDegraded)}>
+              {figmaBusy ? 'Importing…' : 'Demo import (Badge fixture)'}
+            </button>
+            <p className="hint">Fixture URL: {DEMO_URL.replace('https://www.', '')}</p>
+
+            {figmaError ? <div className="notice notice--error">{figmaError}</div> : null}
+
+            {figmaProposals && figmaProposals.length > 1 ? (
+              <div className="rail__group" style={{ marginTop: 12 }}>
+                <div className="rail__group-title">Proposed sets</div>
+                {figmaProposals.map((p) => (
+                  <button
+                    key={p.setName}
+                    type="button"
+                    className="rail__item"
+                    onClick={() => applyProposal(p, 'Figma REST import')}
+                  >
+                    {p.setName}
+                  </button>
+                ))}
+              </div>
+            ) : null}
+          </div>
+        )}
+
+        {sourceTab === 'code' && (
+          <div className="rail__section">
+            <div className="field">
+              <label htmlFor="code-tsx">Component source (TSX)</label>
+              <textarea
+                id="code-tsx"
+                rows={10}
+                value={codeTsx}
+                onChange={(e) => setCodeTsx(e.target.value)}
+                placeholder="export function Badge({ variant = 'info' }: … ) { … }"
+                spellCheck={false}
+              />
+            </div>
+            <div className="field">
+              <label htmlFor="code-css">CSS Module (optional — unlocks anatomy)</label>
+              <textarea
+                id="code-css"
+                rows={7}
+                value={codeCss}
+                onChange={(e) => setCodeCss(e.target.value)}
+                placeholder=".root { … }"
+                spellCheck={false}
+              />
+            </div>
+            <button
+              type="button"
+              className="btn--primary"
+              disabled={!!codeBusy || !codeTsx.trim()}
+              onClick={() => void runCodePropose(codeTsx, codeCss, 'code proposal — pasted source')}
+            >
+              {codeBusy ? 'Working…' : 'Propose contract'}
+            </button>
+            {codeBusy ? <p className="hint">{codeBusy}</p> : null}
+            {codeError ? <div className="notice notice--error">{codeError}</div> : null}
+          </div>
+        )}
+
+        {sourceTab === 'json' && (
+          <div className="rail__section">
+            <div className="field">
+              <label htmlFor="json-paste">Contract JSON or Figma dump (v1)</label>
+              <textarea
+                id="json-paste"
+                rows={14}
+                value={jsonText}
+                onChange={(e) => setJsonText(e.target.value)}
+                placeholder='{ "id": "ds.badge", … }  — or a plugin/REST dump'
+                spellCheck={false}
+              />
+              <p className="hint">
+                The power-user path: a pasted contract goes straight to the editor; a pasted dump
+                runs the same proposer the Figma import runs.
+              </p>
+            </div>
+            <button type="button" className="btn--primary" disabled={!jsonText.trim()} onClick={loadJson}>
+              Load
+            </button>
+            {jsonError ? <div className="notice notice--error">{jsonError}</div> : null}
+          </div>
+        )}
+      </aside>
+
+      {/* ---------------------------------------------------------- center */}
+      <section className="pg__center">
+        <div className="pane__head">
+          <span className="pane__title">Contract</span>
+          <span className="editor__meta">{provenance}</span>
+        </div>
+        <div className="editor">
+          <textarea
+            className="editor__textarea"
+            value={text}
+            onChange={(e) => setText(e.target.value)}
+            spellCheck={false}
+            aria-label="Contract JSON editor"
+            placeholder="The contract — pick an example, import from Figma, or paste code."
+          />
+          <div
+            className={`validation ${
+              validation.status === 'valid'
+                ? 'validation--valid'
+                : validation.status === 'empty'
+                  ? ''
+                  : 'validation--invalid'
+            }`}
+            role="status"
+          >
+            {validation.status === 'empty' && 'No contract yet.'}
+            {validation.status === 'valid' &&
+              `Schema-valid: ${validation.contract.id} v${validation.contract.version}`}
+            {validation.status === 'json-error' && (
+              <>
+                Not JSON
+                <ul className="validation__list">
+                  <li>{validation.message}</li>
+                </ul>
+              </>
+            )}
+            {validation.status === 'schema-error' && (
+              <>
+                Refused by ContractSchema — {validation.issues.length} issue
+                {validation.issues.length === 1 ? '' : 's'}
+                <ul className="validation__list">
+                  {validation.issues.map((issue, i) => (
+                    <li key={i}>{issue}</li>
+                  ))}
+                </ul>
+              </>
+            )}
+            {validation.status === 'violations' && (
+              <>
+                Schema-valid, but the generator refuses — {validation.issues.length} named violation
+                {validation.issues.length === 1 ? '' : 's'}
+                <ul className="validation__list">
+                  {validation.issues.map((issue, i) => (
+                    <li key={i}>{issue}</li>
+                  ))}
+                </ul>
+              </>
+            )}
+          </div>
+          <ReceiptsPanel receipts={receipts} />
+        </div>
+      </section>
+
+      {/* ---------------------------------------------------------- output */}
+      <section className="pg__output">
+        <div className="tabs" role="tablist" aria-label="Output target">
+          <button
+            type="button"
+            role="tab"
+            aria-selected={outputTab === 'preview'}
+            className={`tabs__tab${outputTab === 'preview' ? ' is-active' : ''}`}
+            onClick={() => setOutputTab('preview')}
+          >
+            Preview
+          </button>
+          {emitters.map((e) => (
+            <button
+              key={e.name}
+              type="button"
+              role="tab"
+              aria-selected={outputTab === e.name}
+              title={e.label}
+              className={`tabs__tab${outputTab === e.name ? ' is-active' : ''}`}
+              onClick={() => setOutputTab(e.name)}
+            >
+              {OUTPUT_LABELS[e.name] ?? e.name}
+            </button>
+          ))}
+        </div>
+
+        {outputTab === 'preview' ? (
+          <div className="preview">
+            {stale ? (
+              <div className="preview__stale">
+                Contract invalid — showing the last valid render. Fix the named refusals to update.
+              </div>
+            ) : null}
+            {previewTarget ? (
+              <PreviewFrame
+                contract={previewTarget.contract}
+                contracts={previewTarget.contracts}
+                title="Contract preview"
+              />
+            ) : lastGood.current ? (
+              <PreviewFrame
+                contract={lastGood.current.contract}
+                contracts={lastGood.current.contracts}
+                title="Contract preview (last valid)"
+              />
+            ) : (
+              <div className="pane__body hint">Nothing to render yet.</div>
+            )}
+          </div>
+        ) : (
+          <>
+            <div className="output__toolbar">
+              <label>
+                <input type="checkbox" checked={format} onChange={(e) => setFormat(e.target.checked)} />
+                Format (prettier, lazy ~1.4 MB){formatting ? ' — formatting…' : ''}
+              </label>
+              {outputTab === 'react-inline' ? <span>tokens resolved for {theme} mode</span> : null}
+            </div>
+            <div className="output__files">
+              {!emittable ? (
+                <div className="pane__body hint">A schema-valid contract flows here.</div>
+              ) : emitted?.error ? (
+                <div className="output__error">{emitted.error}</div>
+              ) : (
+                (formattedFiles ?? emitted?.files ?? []).map((file) => (
+                  <div key={file.path} className="output__file">
+                    <div className="output__filehead">
+                      <span className="output__filename">{file.path}</span>
+                      <CopyButton text={file.contents} className="output__copy" />
+                    </div>
+                    <pre className="output__code">{file.contents}</pre>
+                  </div>
+                ))
+              )}
+            </div>
+          </>
+        )}
+        <div className="provenance">
+          Generated in your browser by the same core that ships the repo&rsquo;s{' '}
+          {contractsById.size} components — core/index.ts, golden-guarded.
+        </div>
+      </section>
+    </div>
+  );
+}
