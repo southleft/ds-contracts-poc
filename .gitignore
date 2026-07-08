@@ -7,3 +7,4 @@ evals/.scratch/
 dashboard/dist/
 .runner-result.json
 private/
+.claude/
