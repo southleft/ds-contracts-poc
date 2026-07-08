@@ -170,12 +170,21 @@ const need = (name) => {
   if (!v) throw new Error('Missing variable: ' + name);
   return v;
 };
-const boundPaint = (varName) =>
-  figma.variables.setBoundVariableForPaint(
-    { type: 'SOLID', color: { r: 0, g: 0, b: 0 } },
-    'color',
-    need(varName),
-  );
+const boundPaint = (varName, consumer) => {
+  // Seed the base with the resolved value when a consumer node is known:
+  // Figma keeps rendering a reassigned bound paint's BASE color on
+  // pre-existing nodes (fresh nodes normalize at assignment) — without the
+  // seed, amended variants render black. The binding itself is unchanged.
+  const v = need(varName);
+  let base = { r: 0, g: 0, b: 0 };
+  if (consumer) {
+    try {
+      const r = v.resolveForConsumer(consumer);
+      if (r && r.value && r.value.r !== undefined) base = { r: r.value.r, g: r.value.g, b: r.value.b };
+    } catch (e) { /* fall back to black base */ }
+  }
+  return figma.variables.setBoundVariableForPaint({ type: 'SOLID', color: base }, 'color', v);
+};
 
 for (const style of FONT_STYLES) {
   await figma.loadFontAsync({ family: 'Inter', style });
@@ -254,9 +263,9 @@ function applyFrameSpec(node, spec) {
   for (const [field, varName] of Object.entries(spec.bindings || {})) {
     node.setBoundVariable(field, need(varName));
   }
-  if (spec.fill) node.fills = [boundPaint(spec.fill)];
+  if (spec.fill) node.fills = [boundPaint(spec.fill, node)];
   if (spec.stroke) {
-    node.strokes = [boundPaint(spec.stroke)];
+    node.strokes = [boundPaint(spec.stroke, node)];
     node.strokeAlign = 'INSIDE';
   }
   if (spec.fixedWidth || spec.fixedHeight) {
@@ -288,7 +297,7 @@ async function buildNode(spec, registry) {
     node.fontName = { family: 'Inter', style: spec.fontStyle || 'Medium' };
     node.fontSize = spec.fontSize || 16;
     node.characters = spec.characters || '';
-    if (spec.textFill) node.fills = [boundPaint(spec.textFill)];
+    if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });
     }
@@ -305,8 +314,8 @@ async function buildNode(spec, registry) {
       for (const [field, varName] of Object.entries(spec.bindings || {})) {
         wrap.setBoundVariable(field, need(varName));
       }
-      if (spec.fill) wrap.fills = [boundPaint(spec.fill)];
-      if (spec.stroke) { wrap.strokes = [boundPaint(spec.stroke)]; wrap.strokeAlign = 'INSIDE'; }
+      if (spec.fill) wrap.fills = [boundPaint(spec.fill, wrap)];
+      if (spec.stroke) { wrap.strokes = [boundPaint(spec.stroke, wrap)]; wrap.strokeAlign = 'INSIDE'; }
       if (spec.characters) wrap.appendChild(node); else node.remove();
       if (spec.fixedWidth || spec.fixedHeight) {
         wrap.resize(spec.fixedWidth ? spec.fixedWidth.px : wrap.width, spec.fixedHeight ? spec.fixedHeight.px : wrap.height);
