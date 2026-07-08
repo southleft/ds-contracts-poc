@@ -347,6 +347,9 @@ interface NodeSpec {
   /** Meter fill: fraction of the parent track's width (the canvas renders
    *  the contract defaults' state). Runtime resizes after append. */
   pct?: number;
+  /** v7 overlay: runtime sets layoutPositioning ABSOLUTE after append, with
+   *  placement-derived constraints and position. */
+  overlay?: { placement: 'top' | 'bottom' | 'start' | 'end' };
   // svg (icon parts) — markup with currentColor resolved to the variant's
   // literal foreground color (SVG paint is not variable-bindable on import)
   svg?: string;
@@ -630,6 +633,22 @@ function variantParts(
 }
 
 function partToSpec(
+  name: string,
+  part: Part,
+  contract: Contract,
+  byId: Map<string, Contract>,
+  ctx: TextCtx,
+  subst: Record<string, string>,
+): NodeSpec {
+  const spec = partToSpecInner(name, part, contract, byId, ctx, subst);
+  // v7 overlay: stamped on whatever node kind the part compiled to; the
+  // runtime applies it after the node is appended (layoutPositioning
+  // requires an auto-layout parent).
+  if (part.overlay) spec.overlay = part.overlay;
+  return spec;
+}
+
+function partToSpecInner(
   name: string,
   part: Part,
   contract: Contract,
@@ -1038,6 +1057,24 @@ function applyFrameSpec(node, spec) {
   }
 }
 
+// v7 overlay: out-of-flow edge attachment. Must run AFTER appendChild —
+// layoutPositioning ABSOLUTE requires an auto-layout parent.
+function applyOverlay(parent, childNode, childSpec) {
+  if (!childSpec.overlay) return;
+  try {
+    childNode.layoutPositioning = 'ABSOLUTE';
+    const p = childSpec.overlay.placement;
+    childNode.constraints =
+      p === 'bottom' ? { horizontal: 'MIN', vertical: 'MAX' } :
+      p === 'end' ? { horizontal: 'MAX', vertical: 'MIN' } :
+      { horizontal: 'MIN', vertical: 'MIN' };
+    if (p === 'top') { childNode.x = 0; childNode.y = -childNode.height; }
+    else if (p === 'bottom') { childNode.x = 0; childNode.y = parent.height; }
+    else if (p === 'start') { childNode.x = -childNode.width; childNode.y = 0; }
+    else { childNode.x = parent.width; childNode.y = 0; }
+  } catch (e) { /* parent not auto-layout — leave in flow */ }
+}
+
 async function buildNode(spec, registry) {
   let node;
   if (spec.type === 'svg') {
@@ -1122,6 +1159,7 @@ async function buildNode(spec, registry) {
   for (const child of spec.children || []) {
     const childNode = await buildNode(child, registry);
     node.appendChild(childNode);
+    applyOverlay(node, childNode, child);
     if (child.pct != null) {
       try {
         childNode.resize(Math.max(1, Math.round(node.width * child.pct)), childNode.height);
@@ -1374,6 +1412,24 @@ function applyFrameSpec(node, spec) {
   }
 }
 
+// v7 overlay: out-of-flow edge attachment. Must run AFTER appendChild —
+// layoutPositioning ABSOLUTE requires an auto-layout parent.
+function applyOverlay(parent, childNode, childSpec) {
+  if (!childSpec.overlay) return;
+  try {
+    childNode.layoutPositioning = 'ABSOLUTE';
+    const p = childSpec.overlay.placement;
+    childNode.constraints =
+      p === 'bottom' ? { horizontal: 'MIN', vertical: 'MAX' } :
+      p === 'end' ? { horizontal: 'MAX', vertical: 'MIN' } :
+      { horizontal: 'MIN', vertical: 'MIN' };
+    if (p === 'top') { childNode.x = 0; childNode.y = -childNode.height; }
+    else if (p === 'bottom') { childNode.x = 0; childNode.y = parent.height; }
+    else if (p === 'start') { childNode.x = -childNode.width; childNode.y = 0; }
+    else { childNode.x = parent.width; childNode.y = 0; }
+  } catch (e) { /* parent not auto-layout — leave in flow */ }
+}
+
 async function buildNode(spec, registry) {
   let node;
   if (spec.type === 'svg') {
@@ -1455,6 +1511,7 @@ async function buildNode(spec, registry) {
   for (const child of spec.children || []) {
     const childNode = await buildNode(child, registry);
     node.appendChild(childNode);
+    applyOverlay(node, childNode, child);
     if (child.pct != null) {
       try {
         childNode.resize(Math.max(1, Math.round(node.width * child.pct)), childNode.height);
@@ -1532,6 +1589,7 @@ async function amendSet(set, C) {
       for (const childSpec of v.spec.children || []) {
         const childNode = await buildNode(childSpec, registry);
         comp.appendChild(childNode);
+        applyOverlay(comp, childNode, childSpec);
         if (childSpec.pct != null) {
           try { childNode.resize(Math.max(1, Math.round(comp.width * childSpec.pct)), childNode.height); childNode.primaryAxisSizingMode = 'FIXED'; } catch (e) {}
         }

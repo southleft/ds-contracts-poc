@@ -578,6 +578,24 @@
             "additionalProperties": false
           }
         },
+        "overlay": {
+          "type": "object",
+          "properties": {
+            "placement": {
+              "type": "string",
+              "enum": [
+                "top",
+                "bottom",
+                "start",
+                "end"
+              ]
+            }
+          },
+          "required": [
+            "placement"
+          ],
+          "additionalProperties": false
+        },
         "tokens": {
           "type": "object",
           "propertyNames": {

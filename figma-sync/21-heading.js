@@ -294,6 +294,24 @@ function applyFrameSpec(node, spec) {
   }
 }
 
+// v7 overlay: out-of-flow edge attachment. Must run AFTER appendChild —
+// layoutPositioning ABSOLUTE requires an auto-layout parent.
+function applyOverlay(parent, childNode, childSpec) {
+  if (!childSpec.overlay) return;
+  try {
+    childNode.layoutPositioning = 'ABSOLUTE';
+    const p = childSpec.overlay.placement;
+    childNode.constraints =
+      p === 'bottom' ? { horizontal: 'MIN', vertical: 'MAX' } :
+      p === 'end' ? { horizontal: 'MAX', vertical: 'MIN' } :
+      { horizontal: 'MIN', vertical: 'MIN' };
+    if (p === 'top') { childNode.x = 0; childNode.y = -childNode.height; }
+    else if (p === 'bottom') { childNode.x = 0; childNode.y = parent.height; }
+    else if (p === 'start') { childNode.x = -childNode.width; childNode.y = 0; }
+    else { childNode.x = parent.width; childNode.y = 0; }
+  } catch (e) { /* parent not auto-layout — leave in flow */ }
+}
+
 async function buildNode(spec, registry) {
   let node;
   if (spec.type === 'svg') {
@@ -378,6 +396,7 @@ async function buildNode(spec, registry) {
   for (const child of spec.children || []) {
     const childNode = await buildNode(child, registry);
     node.appendChild(childNode);
+    applyOverlay(node, childNode, child);
     if (child.pct != null) {
       try {
         childNode.resize(Math.max(1, Math.round(node.width * child.pct)), childNode.height);

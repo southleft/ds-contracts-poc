@@ -123,6 +123,15 @@ export const StylesWhenSchema = z.strictObject({
   styles: z.record(z.string(), z.string()),
 });
 
+/** v7 overlay: the part renders OUT of flow, attached to one edge of the
+ *  root (Tooltip bubble, Combobox popup). Code: position:absolute with
+ *  placement-derived insets, root becomes position:relative. Canvas:
+ *  layoutPositioning ABSOLUTE with placement-derived constraints. Four
+ *  placements in v1; offset/alignment tuning is a later axis. */
+export const OverlaySchema = z.strictObject({
+  placement: z.enum(['top', 'bottom', 'start', 'end']),
+});
+
 /** Conditional part visibility (schema v4, gap G1): the part renders only
  *  when the prop matches. Boolean props map to Figma visibility bindings;
  *  enum conditions resolve per variant. */
@@ -193,6 +202,8 @@ export interface Part {
   layoutByProp?: z.infer<typeof LayoutByPropSchema>;
   /** v7: conditional literal styles (code-side; canvas fidelity limit). */
   stylesWhen?: Array<z.infer<typeof StylesWhenSchema>>;
+  /** v7: out-of-flow edge attachment (tooltip/popup anatomy). */
+  overlay?: z.infer<typeof OverlaySchema>;
   /** CSS property → token reference. The CSS Module AND the Figma bindings
    *  are generated from these — there is no handwritten style layer. */
   tokens?: Record<string, string>;
@@ -231,6 +242,8 @@ export const PartSchema: z.ZodType<Part> = z.lazy(() =>
     layoutByProp: LayoutByPropSchema.optional(),
     /** v7. */
     stylesWhen: z.array(StylesWhenSchema).optional(),
+    /** v7. */
+    overlay: OverlaySchema.optional(),
     tokens: z.record(z.string(), TokenRefSchema).optional(),
     states: z.record(z.string(), z.record(z.string(), TokenRefSchema)).optional(),
     content: z.strictObject({ prop: z.string() }).optional(),

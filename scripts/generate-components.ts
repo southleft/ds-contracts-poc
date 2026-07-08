@@ -106,6 +106,15 @@ const STATE_SELECTORS: Record<string, string> = {
   disabled: ':disabled',
 };
 
+/** v7 overlay: placement → inset declarations. The overlay part is
+ *  position:absolute against the root (which becomes position:relative). */
+const OVERLAY_CSS: Record<string, string[]> = {
+  top: ['bottom: 100%', 'left: 0'],
+  bottom: ['top: 100%', 'left: 0'],
+  start: ['right: 100%', 'top: 0'],
+  end: ['left: 100%', 'top: 0'],
+};
+
 const ALIGN_CSS: Record<string, string> = {
   start: 'flex-start',
   center: 'center',
@@ -249,6 +258,20 @@ function validateContract(contract: Contract, byId: Map<string, Contract>, error
       }
       if (part.component) {
         errors.push(`${contract.id}: part "${name}" is a component instance — layoutByProp cannot restyle it (the child contract owns its layout)`);
+      }
+    }
+    // v7 overlay: out-of-flow parts must stay out of the flow arithmetic —
+    // grow/overlap are in-flow sizing semantics, and the root cannot attach
+    // to its own edge. Minimal, named refusals.
+    if (part.overlay) {
+      if (p[0] === 'root' && p.length === 1) {
+        errors.push(`${contract.id}: the root part cannot be an overlay — overlays attach to the root`);
+      }
+      if (part.layout?.grow) {
+        errors.push(`${contract.id}: part "${name}" is an overlay — it cannot also grow (grow is in-flow sizing)`);
+      }
+      if (part.layout?.overlap) {
+        errors.push(`${contract.id}: part "${name}" is an overlay — it cannot also overlap children (in-flow semantics)`);
       }
     }
     // v7 stylesWhen: conditions must be checkable (boolean or enum+equals),
@@ -535,6 +558,8 @@ function generateCss(contract: Contract, tokenInventory: Set<string>, errors: st
   // min-widths); containers narrower than that should scroll.
   if ('max-width' in rootTokens) rootDecls.push('width: 100%', 'min-width: fit-content');
   if (contract.semantics.element === 'button') rootDecls.push('cursor: pointer');
+  // v7 overlay: any overlay part positions against the root.
+  if (walkAnatomy(contract).some((w) => w.part.overlay)) rootDecls.push('position: relative');
 
   const enumRules = new Map<string, Map<string, string>>(); // class → decls
   const stateRules: string[] = [];
@@ -634,6 +659,8 @@ function generateCss(contract: Contract, tokenInventory: Set<string>, errors: st
       if (part.layout?.justify) decls.push(`justify-content: ${JUSTIFY_CSS[part.layout.justify]}`);
     }
     if (part.layout?.grow) decls.push('flex: 1 1 auto', 'min-width: 0');
+    // v7 overlay: out of flow, attached to the root's edge.
+    if (part.overlay) decls.push('position: absolute', ...OVERLAY_CSS[part.overlay.placement]);
     // Event-trigger buttons: neutralize UA button styles BEFORE token decls
     // so the contract's tokens (padding, background, font) win.
     if (part.element === 'button' && (contract.events ?? []).some((e) => e.trigger === name)) {
