@@ -72,3 +72,9 @@ Extraction should target **exactly the differ's current scope** — the contract
 3. At least one org-shaped pilot (item 6) produces a drift report a design system team confirms is *true* — every finding real, no finding missed within the declared scope.
 
 Same standard as the rest of this project: falsifiable claims, receipts attached.
+
+## Code-first anatomy: when the org arrives code-only
+
+The plan above assumed anatomy stays human-owned. Extraction v1 keeps it human-**reviewed** but no longer starts from a stub: when a React component has a co-located CSS Module, the extractor inverts the generator's emission model back out of the source — JSX `className={styles.x}` nesting becomes the part tree; `property: var(--a-b-c)` becomes a `{a.b.c}` binding (the hyphen-to-dot split is refereed against *your* token tree via `config.tokens`, and ambiguity is reported, never guessed); `.variant-primary` rule families become substituted refs like `{color.action.{variant}.background}`; flex declarations become `layout`; `:hover/:focus-visible/:disabled` rules become `states`; `{children}`/ReactNode props become slots; imported component instances become anatomy refs; and the uncontrolled-toggle pattern yields real event triggers. The result is a proposal that can generate a faithful canvas on day one.
+
+The honesty rules carry over unchanged: a literal color or px value **never** becomes an invented token — it lands in proposals.md as a named RAW VALUE with nearest-token candidates by value; everything the adapter can see but not read (tailwind class strings, shorthands, media queries, foreign variant hooks) is skipped *by name*. The executable receipt is `npm run roundtrip:code`: this repo's own generated Badge/Switch/Card, re-extracted and compared to their shipping contracts — zero MISMATCH, with every genuinely code-absent field (figma bindings, canvas defaults, slot constraints) listed rather than waved through (`extract/ROUNDTRIP-CODE.md`).
