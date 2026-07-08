@@ -213,6 +213,20 @@ testing was surfaced honestly and the proposal degraded to the props
 surface — the ladder held under real rate limiting. 56/56, no core changes.
 
 
+## 2026-07-08 — Playground Phase 3: the loop starts from nothing
+
+A sentence and a user-supplied Anthropic key now produce a governed
+contract: browser-direct claude-sonnet-5, generation constrained by a
+forced tool call against a pruned contract schema with the ACTIVE token
+inventory in the system prompt — the model can only propose what the
+system can govern. Invalid output is refused by name and sent back as
+user-triggered fix rounds (max 2, counted, receipted with model id and
+token usage). A keyless fixture demo rides the same transport. Any
+contract travels as a ~1 KB URL hash (deflate + base64url, 8 KB named
+guard); first visits get a three-action guided strip. **The playground's
+planned scope (W1–W10) is complete.** 56/56.
+
+
 ---
 
 **Standing scoreboard** (updated with each milestone):

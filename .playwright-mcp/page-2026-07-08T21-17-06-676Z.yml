@@ -1,0 +1,75 @@
+- generic [ref=f49e3]:
+  - banner [ref=f49e4]:
+    - link "Contract Playground" [ref=f49e5] [cursor=pointer]:
+      - /url: /
+      - img [ref=f49e6]
+      - generic [ref=f49e10]: Contract Playground
+    - navigation [ref=f49e11]:
+      - link "Playground" [ref=f49e12] [cursor=pointer]:
+        - /url: /playground
+      - link "Examples" [ref=f49e13] [cursor=pointer]:
+        - /url: /examples
+      - link "GitHub" [ref=f49e14] [cursor=pointer]:
+        - /url: https://github.com/southleft/ds-contracts-poc
+    - button "Switch to light theme" [ref=f49e15] [cursor=pointer]: Light
+  - main [ref=f49e16]:
+    - generic [ref=f49e17]:
+      - complementary [ref=f49e18]:
+        - tablist "Input source" [ref=f49e19]:
+          - tab "Examples" [ref=f49e20] [cursor=pointer]
+          - tab "Describe" [active] [selected] [ref=f49e21] [cursor=pointer]
+          - tab "Figma" [ref=f49e22] [cursor=pointer]
+          - tab "Code" [ref=f49e23] [cursor=pointer]
+          - tab "JSON" [ref=f49e24] [cursor=pointer]
+          - tab "Tokens" [ref=f49e25] [cursor=pointer]
+        - generic [ref=f49e70]:
+          - generic [ref=f49e71]:
+            - generic [ref=f49e72]: Describe a component
+            - textbox "Describe a component" [ref=f49e73]:
+              - /placeholder: "A small pill-shaped tag that labels content with a feedback tone: info, success, warning, or danger."
+          - generic [ref=f49e74]:
+            - generic [ref=f49e75]: Anthropic API key
+            - textbox "Anthropic API key" [ref=f49e76]:
+              - /placeholder: sk-ant-…
+            - paragraph [ref=f49e77]: Session-only, like the Figma token. Sent browser-direct to api.anthropic.com and nowhere else — never stored, never persisted, gone on reload.
+          - button "Generate contract" [disabled] [ref=f49e78]
+          - paragraph [ref=f49e79]: "Model: claude-sonnet-5. The output is constrained to the contract shape by a forced tool call — never freeform code — and lands in the same governed editor as every other source: ContractSchema plus the generator referee it, refusals by name."
+          - paragraph [ref=f49e80]: No key handy? Run the identical code path over a recorded-shape response — fixture transport, same governance. The first round deliberately references a token that does not exist, so you can watch the named refusal and the fix round.
+          - button "Demo generate (recorded fixture)" [ref=f49e81] [cursor=pointer]
+      - generic [ref=f49e48]:
+        - generic [ref=f49e49]:
+          - generic [ref=f49e50]: Contract
+          - generic [ref=f49e51]: loaded from examples — ds.badge
+        - generic [ref=f49e52]:
+          - textbox "Contract JSON editor" [ref=f49e53]:
+            - /placeholder: The contract — pick an example, import from Figma, or paste code.
+            - text: "{ \"$schema\": \"./contract.schema.json\", \"id\": \"ds.badge\", \"name\": \"Badge\", \"version\": \"1.1.0\", \"status\": \"draft\", \"description\": \"Communicates status or categorization at a glance. Non-interactive.\", \"semantics\": { \"element\": \"span\", \"role\": \"status\" }, \"props\": [ { \"name\": \"variant\", \"description\": \"The feedback tone being communicated.\", \"type\": { \"enum\": [ \"info\", \"success\", \"warning\", \"danger\", \"error\" ] }, \"default\": \"info\", \"bindings\": { \"figma\": { \"kind\": \"VARIANT\", \"property\": \"Variant\", \"values\": { \"info\": \"Info\", \"success\": \"Success\", \"warning\": \"Warning\", \"danger\": \"Danger\", \"error\": \"Error\" } }, \"code\": { \"prop\": \"variant\" } } }, { \"name\": \"children\", \"description\": \"Badge label.\", \"type\": \"text\", \"default\": \"Badge\", \"bindings\": { \"figma\": { \"kind\": \"TEXT\", \"property\": \"Label\" }, \"code\": { \"prop\": \"children\" } } } ], \"states\": [], \"anatomy\": { \"root\": { \"tokens\": { \"background-color\": \"{color.feedback.{variant}.background}\", \"color\": \"{color.feedback.{variant}.foreground}\", \"padding-inline\": \"{space.inset-x.sm}\", \"padding-block\": \"{space.inset-y.sm}\", \"border-radius\": \"{radius.badge}\", \"font-family\": \"{font.control.family}\", \"font-weight\": \"{font.control.weight}\", \"font-size\": \"{font.badge.size}\" } } }, \"a11y\": { \"contrast\": \"AA\" }, \"anchors\": { \"figma\": { \"fileKey\": \"8nim1d0IPnehMxA7B7SYxC\", \"componentSetKey\": \"89f1fb2d4580116cea4be5d4ca340de216a27819\", \"nodeId\": \"6:10\" }, \"code\": { \"importPath\": \"src/components/Badge\", \"export\": \"Badge\" } } }"
+          - status [ref=f49e54]: "Schema-valid: ds.badge v1.1.0"
+          - region "Receipts" [ref=f49e55]:
+            - generic [ref=f49e57]: Receipts
+            - paragraph [ref=f49e58]: Import from Figma or propose from code and every degradation, note, and unbound value lands here, named.
+      - generic [ref=f49e59]:
+        - tablist "Output target" [ref=f49e60]:
+          - tab "Preview" [selected] [ref=f49e61] [cursor=pointer]
+          - tab "React" [ref=f49e62] [cursor=pointer]
+          - tab "HTML + CSS" [ref=f49e63] [cursor=pointer]
+          - tab "React inline" [ref=f49e64] [cursor=pointer]
+          - tab "Figma script" [ref=f49e65] [cursor=pointer]
+        - iframe [ref=f49e69]:
+          - generic [ref=f50e2]:
+            - generic [ref=f50e3]:
+              - paragraph [ref=f50e4]: default
+              - status [ref=f50e5]: Badge
+            - generic [ref=f50e6]:
+              - paragraph [ref=f50e7]: variant=success
+              - status [ref=f50e8]: Badge
+            - generic [ref=f50e9]:
+              - paragraph [ref=f50e10]: variant=warning
+              - status [ref=f50e11]: Badge
+            - generic [ref=f50e12]:
+              - paragraph [ref=f50e13]: variant=danger
+              - status [ref=f50e14]: Badge
+            - generic [ref=f50e15]:
+              - paragraph [ref=f50e16]: variant=error
+              - status [ref=f50e17]: Badge
+        - generic [ref=f49e68]: Generated in your browser by the same core that ships the repo’s 51 components — core/index.ts, golden-guarded.
