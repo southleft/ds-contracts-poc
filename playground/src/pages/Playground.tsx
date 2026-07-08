@@ -46,11 +46,14 @@ import {
   type WorkspaceEntry,
   type WorkspaceSource,
 } from '../engine/workspace';
+import { buildPreviewAtState, type PreviewPropOverrides } from '../engine/preview';
 import type { ReceiptGroup, Receipts } from '../receipts';
 import { ContractEditor, type ContractEditorHandle } from '../components/ContractEditor';
 import { CopyButton } from '../components/CopyButton';
+import { PreviewControls, sanitizeOverrides } from '../components/PreviewControls';
 import { PreviewFrame } from '../components/PreviewFrame';
 import { ReceiptsPanel } from '../components/ReceiptsPanel';
+import { SpecSheet } from '../components/SpecSheet';
 
 type SourceTab = 'workspace' | 'examples' | 'describe' | 'figma' | 'code' | 'json' | 'tokens';
 const OUTPUT_LABELS: Record<string, string> = {
@@ -58,6 +61,15 @@ const OUTPUT_LABELS: Record<string, string> = {
   html: 'HTML + CSS',
   'react-inline': 'React inline',
   'figma-script': 'Figma script',
+};
+
+/** Tab tooltips in designer language — what each output IS, not its
+ *  implementation pedigree (the emitter registry's labels speak developer). */
+const OUTPUT_TITLES: Record<string, string> = {
+  react: 'The component code the shipping generator produces — TSX, scoped CSS, and stories.',
+  html: 'Plain HTML + CSS you can paste anywhere — no build step needed.',
+  'react-inline': 'React with the token values written in as plain numbers and colors — for codebases without a token pipeline.',
+  'figma-script': 'The script that builds or updates this component in Figma.',
 };
 
 /** Workspace source tags — plain text, grouped display order. */
@@ -186,6 +198,20 @@ export function Playground() {
     lastGood.current = { contract: validation.contract, contracts: validation.contracts };
   }
 
+  // ------------------------------------------------ JSON | Spec pane views
+  // The Spec view renders the SAME contract as a designer-facing sheet —
+  // read-only; the JSON view (with the refereeing editor) is one toggle
+  // away and its text is never touched by switching. The spec tracks the
+  // last SCHEMA-VALID parse (generator violations still have a shape to
+  // show); while the text on screen isn't schema-valid, the sheet goes
+  // stale and says so — the refusal list below stays visible in both views.
+  const [contractView, setContractView] = useState<'json' | 'spec'>('json');
+  const lastSpec = useRef<{ contract: Contract; contracts: Map<string, Contract> } | null>(null);
+  if (validation.status === 'valid' || validation.status === 'violations') {
+    lastSpec.current = { contract: validation.contract, contracts: validation.contracts };
+  }
+  const specLive = validation.status === 'valid' || validation.status === 'violations';
+
   // Refusal → editor line resolution. Lines are only trusted while the text
   // on screen IS the text that was validated (the debounce window would
   // otherwise highlight yesterday's lines on today's keystrokes).
@@ -204,6 +230,17 @@ export function Playground() {
     return set;
   }, [issueLines]);
 
+  /** Scroll the JSON editor to a refusal's line — from the Spec view this
+   *  flips back to JSON first (the line lives in the text, not the sheet). */
+  const jumpToLine = (line: number) => {
+    if (contractView !== 'json') {
+      setContractView('json');
+      window.setTimeout(() => editorRef.current?.scrollToLine(line), 0);
+    } else {
+      editorRef.current?.scrollToLine(line);
+    }
+  };
+
   /** The refusal list — each entry that resolved to a line scrolls there. */
   const refusalList = (issues: string[]) => (
     <ul className="validation__list">
@@ -215,7 +252,7 @@ export function Playground() {
               <button
                 type="button"
                 className="validation__jump"
-                onClick={() => editorRef.current?.scrollToLine(line)}
+                onClick={() => jumpToLine(line)}
               >
                 {issue}
                 <span className="validation__jump-line"> → line {line + 1}</span>
@@ -849,6 +886,63 @@ export function Playground() {
   const previewTarget = validation.status === 'valid' ? validation : null;
   const stale = !previewTarget && lastGood.current;
 
+  // ------------------------------------------ interactive preview controls
+  // Single (controls + one instance at the chosen props) is the default;
+  // All variants is the classic showcase grid, one row per axis value.
+  const [previewMode, setPreviewMode] = useState<'single' | 'all'>('single');
+  const [previewOverrides, setPreviewOverrides] = useState<PreviewPropOverrides>({});
+  // The prop whose last toggle changed nothing visible — honest inline note.
+  const [previewNoteProp, setPreviewNoteProp] = useState<string | null>(null);
+  const lastChangedProp = useRef<string | null>(null);
+  const prevInstance = useRef<{ stateKey: string; sig: string | null } | null>(null);
+
+  const previewData = previewTarget ?? lastGood.current;
+  const previewContractId = previewData?.contract.id ?? null;
+  // A different contract in the frame resets the chosen state.
+  useEffect(() => {
+    setPreviewOverrides({});
+    setPreviewNoteProp(null);
+    lastChangedProp.current = null;
+    prevInstance.current = null;
+  }, [previewContractId]);
+
+  const activeOverrides = useMemo(
+    () => (previewData ? sanitizeOverrides(previewData.contract, previewOverrides) : {}),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [previewData?.contract, previewOverrides],
+  );
+
+  const singlePreview = useMemo(() => {
+    if (!previewData || outputTab !== 'preview' || previewMode !== 'single') return null;
+    return buildPreviewAtState(previewData.contract, previewData.contracts, theme, activeOverrides);
+    // buildPreviewAtState reads the active token source.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [previewData?.contract, previewData?.contracts, theme, activeOverrides, tokenSource, outputTab, previewMode]);
+
+  // Honest-note bookkeeping: when a control change leaves the instance
+  // markup byte-identical, the change had no visible effect BY DESIGN (the
+  // emitted CSS is state-independent) — say so on that control.
+  useEffect(() => {
+    if (!singlePreview?.ok) return;
+    const stateKey = JSON.stringify(activeOverrides);
+    const prev = prevInstance.current;
+    if (
+      prev &&
+      prev.stateKey !== stateKey &&
+      lastChangedProp.current &&
+      prev.sig !== null &&
+      singlePreview.instanceHtml !== null
+    ) {
+      setPreviewNoteProp(prev.sig === singlePreview.instanceHtml ? lastChangedProp.current : null);
+    }
+    prevInstance.current = { stateKey, sig: singlePreview.instanceHtml };
+  }, [singlePreview, activeOverrides]);
+
+  const handlePreviewControl = (name: string, value: string | boolean | number) => {
+    lastChangedProp.current = name;
+    setPreviewOverrides((o) => ({ ...o, [name]: value }));
+  };
+
   // ------------------------------------------- workspace entry rendering
   const wsEntryRow = (entry: WorkspaceEntry) => (
     <div key={entry.id} className="ws__row">
@@ -1290,7 +1384,8 @@ export function Playground() {
               />
               <p className="hint">
                 The power-user path: a pasted contract goes straight to the editor; a pasted dump
-                runs the same proposer the Figma import runs.
+                (the JSON a Figma plugin or REST export produces) runs the same proposer the
+                Figma import runs.
               </p>
             </div>
             <button type="button" className="btn--primary" disabled={!jsonText.trim()} onClick={loadJson}>
@@ -1361,6 +1456,25 @@ export function Playground() {
       <section className="pg__center">
         <div className="pane__head">
           <span className="pane__title">Contract</span>
+          <div className="seg" role="group" aria-label="Contract view">
+            <button
+              type="button"
+              className={`seg__btn${contractView === 'json' ? ' is-active' : ''}`}
+              aria-pressed={contractView === 'json'}
+              onClick={() => setContractView('json')}
+            >
+              JSON
+            </button>
+            <button
+              type="button"
+              className={`seg__btn${contractView === 'spec' ? ' is-active' : ''}`}
+              aria-pressed={contractView === 'spec'}
+              onClick={() => setContractView('spec')}
+              title="The same contract as a readable spec sheet — props, variants, slots, tokens. Read-only; editing stays in JSON."
+            >
+              Spec
+            </button>
+          </div>
           <span className="editor__meta">{provenance}</span>
           {pristine !== null && text !== pristine.text ? (
             <button
@@ -1391,13 +1505,35 @@ export function Playground() {
           </div>
         ) : null}
         <div className="editor">
-          <ContractEditor
-            ref={editorRef}
-            text={text}
-            onChange={setText}
-            highlights={highlightLines}
-            placeholder="The contract — pick an example, import from Figma, or paste code."
-          />
+          {contractView === 'spec' ? (
+            lastSpec.current ? (
+              <>
+                {!specLive ? (
+                  <div className="preview__stale">
+                    Contract not schema-valid — showing the spec of the last valid parse. The
+                    refusals below name what to fix.
+                  </div>
+                ) : null}
+                <SpecSheet
+                  contract={lastSpec.current.contract}
+                  contracts={lastSpec.current.contracts}
+                  onEditJson={() => setContractView('json')}
+                />
+              </>
+            ) : (
+              <div className="pane__body hint">
+                No spec to show yet — load or paste a contract, then flip back here.
+              </div>
+            )
+          ) : (
+            <ContractEditor
+              ref={editorRef}
+              text={text}
+              onChange={setText}
+              highlights={highlightLines}
+              placeholder="The contract — pick an example, import from Figma, or paste code."
+            />
+          )}
           <div
             className={`validation ${
               validation.status === 'valid'
@@ -1467,7 +1603,7 @@ export function Playground() {
               type="button"
               role="tab"
               aria-selected={outputTab === e.name}
-              title={e.label}
+              title={OUTPUT_TITLES[e.name] ?? e.label}
               className={`tabs__tab${outputTab === e.name ? ' is-active' : ''}`}
               onClick={() => setOutputTab(e.name)}
             >
@@ -1483,18 +1619,59 @@ export function Playground() {
                 Contract invalid — showing the last valid render. Fix the named refusals to update.
               </div>
             ) : null}
-            {previewTarget ? (
-              <PreviewFrame
-                contract={previewTarget.contract}
-                contracts={previewTarget.contracts}
-                title="Contract preview"
-              />
-            ) : lastGood.current ? (
-              <PreviewFrame
-                contract={lastGood.current.contract}
-                contracts={lastGood.current.contracts}
-                title="Contract preview (last valid)"
-              />
+            {previewData ? (
+              <>
+                <div className="preview__bar">
+                  <div className="seg" role="group" aria-label="Preview mode">
+                    <button
+                      type="button"
+                      className={`seg__btn${previewMode === 'single' ? ' is-active' : ''}`}
+                      aria-pressed={previewMode === 'single'}
+                      onClick={() => setPreviewMode('single')}
+                    >
+                      Single
+                    </button>
+                    <button
+                      type="button"
+                      className={`seg__btn${previewMode === 'all' ? ' is-active' : ''}`}
+                      aria-pressed={previewMode === 'all'}
+                      onClick={() => setPreviewMode('all')}
+                    >
+                      All variants
+                    </button>
+                  </div>
+                  <span className="preview__bar-hint">
+                    {previewMode === 'single'
+                      ? 'One instance at the props you pick — rendered live by the same HTML emitter.'
+                      : 'Every variant value and boolean, one row each.'}
+                  </span>
+                </div>
+                {previewMode === 'single' ? (
+                  <>
+                    <PreviewControls
+                      contract={previewData.contract}
+                      overrides={activeOverrides}
+                      onChange={handlePreviewControl}
+                      notedProp={previewNoteProp}
+                    />
+                    {singlePreview?.ok ? (
+                      <iframe
+                        sandbox=""
+                        srcDoc={singlePreview.doc}
+                        title={previewTarget ? 'Contract preview — chosen state' : 'Contract preview — chosen state (last valid)'}
+                      />
+                    ) : singlePreview ? (
+                      <div className="output__error">{singlePreview.error}</div>
+                    ) : null}
+                  </>
+                ) : (
+                  <PreviewFrame
+                    contract={previewData.contract}
+                    contracts={previewData.contracts}
+                    title={previewTarget ? 'Contract preview' : 'Contract preview (last valid)'}
+                  />
+                )}
+              </>
             ) : (
               <div className="pane__body hint">Nothing to render yet.</div>
             )}
@@ -1534,7 +1711,14 @@ export function Playground() {
         )}
         <div className="provenance">
           Generated in your browser by the same core that ships the repo&rsquo;s{' '}
-          {contractsById.size} components — core/index.ts, golden-guarded.
+          {contractsById.size} components — core/index.ts,{' '}
+          <span
+            title="Golden-guarded: the CLI's output from this same core is byte-compared against committed reference files on every eval run — the playground cannot drift from the shipping generator."
+            style={{ textDecoration: 'underline dotted', cursor: 'help' }}
+          >
+            golden-guarded
+          </span>
+          .
         </div>
       </section>
       </div>

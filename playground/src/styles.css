@@ -243,6 +243,31 @@ textarea,
   font-weight: 600;
 }
 
+/* Glossary — term/definition pairs, one sentence each. */
+
+.drawer__glossary {
+  margin: 0;
+  font-size: 13px;
+}
+
+.drawer__glossary dt {
+  font-weight: 600;
+  margin-top: 10px;
+}
+
+.drawer__glossary dt:first-child {
+  margin-top: 0;
+}
+
+.drawer__glossary dd {
+  margin: 1px 0 0;
+  color: var(--pg-muted);
+}
+
+.drawer__glossary code {
+  font-size: 11.5px;
+}
+
 /* -------------------------------------------------------------- controls */
 
 button,
@@ -380,9 +405,11 @@ label {
 }
 
 /* Up to seven source tabs (Workspace appears with the first import) share
- * the rail's 320px — tighter than the output tabs. */
+ * the rail's 360px — tighter than the output tabs, but with air between
+ * labels: all seven fit on one row (Tokens dot included), no wrap, no
+ * horizontal scroll. */
 .pg__rail > .tabs > .tabs__tab {
-  padding: 7px 3px;
+  padding: 7px 5px;
   font-size: 10.5px;
 }
 
@@ -559,12 +586,32 @@ label {
   color: var(--pg-muted);
 }
 
+/* One line of "what to notice" — the specific thing this card teaches. */
+
+.excard__caption {
+  margin-top: 8px;
+  padding: 6px 0 0;
+  border-top: 1px solid var(--pg-border);
+  font-size: 12px;
+  color: var(--pg-muted);
+}
+
+.excard__caption-label {
+  display: block;
+  font-size: 10.5px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--pg-faint);
+  margin-bottom: 2px;
+}
+
 /* ----------------------------------------------------------- playground */
 
 .pg {
   flex: 1;
   display: grid;
-  grid-template-columns: 320px minmax(360px, 1fr) minmax(420px, 1.1fr);
+  grid-template-columns: 360px minmax(360px, 1fr) minmax(420px, 1.1fr);
   min-height: 0;
 }
 
@@ -875,6 +922,168 @@ label {
   outline-offset: -2px;
 }
 
+/* Spec view — the contract as a designer-facing sheet. Square chips only. */
+
+.spec {
+  flex: 1;
+  overflow-y: auto;
+  padding: 14px;
+  min-height: 240px;
+}
+
+.spec__title-row {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.spec__name {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.spec__meta {
+  font-size: 12px;
+  color: var(--pg-muted);
+  font-family: var(--pg-mono);
+}
+
+.spec__edit {
+  margin-left: auto;
+}
+
+.spec__desc {
+  margin: 4px 0 0;
+  font-size: 13px;
+  color: var(--pg-muted);
+  max-width: 60ch;
+}
+
+.spec__section {
+  margin-top: 20px;
+}
+
+.spec__section-title {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--pg-faint);
+  margin: 0 0 6px;
+}
+
+.spec__table-wrap {
+  overflow-x: auto;
+}
+
+.spec__table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12.5px;
+}
+
+.spec__table th {
+  text-align: left;
+  font-size: 10.5px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--pg-faint);
+  padding: 4px 12px 4px 0;
+  border-bottom: 1px solid var(--pg-border);
+  white-space: nowrap;
+}
+
+.spec__table td {
+  padding: 5px 12px 5px 0;
+  border-bottom: 1px solid var(--pg-border);
+  vertical-align: top;
+}
+
+.spec__mono {
+  font-family: var(--pg-mono);
+  font-size: 12px;
+}
+
+.spec__notes {
+  color: var(--pg-muted);
+  font-size: 12px;
+}
+
+.spec__chips {
+  display: inline;
+}
+
+.spec__chip {
+  display: inline-block;
+  border: 1px solid var(--pg-border);
+  background: var(--pg-surface);
+  padding: 0 6px;
+  margin: 1px 4px 1px 0;
+  font-size: 11.5px;
+}
+
+.spec__chip--mono {
+  font-family: var(--pg-mono);
+  font-size: 11px;
+}
+
+.spec__tag {
+  display: inline-block;
+  border: 1px solid var(--pg-border-strong);
+  padding: 0 6px;
+  margin-left: 6px;
+  font-size: 10.5px;
+  font-family: var(--pg-mono);
+  color: var(--pg-muted);
+  white-space: nowrap;
+}
+
+.spec__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 12.5px;
+}
+
+.spec__list li {
+  padding: 3px 0;
+}
+
+.spec__line {
+  margin: 6px 0 0;
+  font-size: 12.5px;
+  color: var(--pg-muted);
+}
+
+.spec__line--label {
+  color: var(--pg-fg);
+}
+
+.spec__none {
+  margin: 0;
+  font-size: 12.5px;
+  color: var(--pg-faint);
+}
+
+.spec__faint {
+  color: var(--pg-faint);
+}
+
+.spec__token-group {
+  margin-bottom: 6px;
+}
+
+.spec__token-cat {
+  display: inline-block;
+  min-width: 52px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--pg-faint);
+  margin-right: 6px;
+}
+
 /* Refusal entries that resolved to a line are clickable — scroll-to-line. */
 
 .validation__jump {
@@ -1031,6 +1240,13 @@ label {
   color: var(--pg-muted);
 }
 
+.receipts__sub {
+  margin: 0;
+  padding: 0 14px 6px;
+  font-size: 11.5px;
+  color: var(--pg-faint);
+}
+
 .receipts__group {
   padding: 4px 14px 10px;
 }
@@ -1167,6 +1383,125 @@ label {
   width: 100%;
   border: 0;
   background: transparent;
+}
+
+/* Two-way segmented control — square corners, Carbon-simple. Active segment
+ * gets the surface + a 2px inner accent baseline; never a pill. */
+
+.seg {
+  display: inline-flex;
+  border: 1px solid var(--pg-border-strong);
+}
+
+.seg__btn {
+  border: none;
+  border-radius: 0;
+  background: none;
+  padding: 3px 12px;
+  font-size: 12px;
+  color: var(--pg-muted);
+  cursor: pointer;
+}
+
+.seg__btn + .seg__btn {
+  border-left: 1px solid var(--pg-border-strong);
+}
+
+.seg__btn.is-active {
+  background: var(--pg-surface);
+  color: var(--pg-fg);
+  font-weight: 600;
+  box-shadow: inset 0 -2px 0 var(--pg-accent);
+}
+
+/* preview mode bar + per-prop controls strip */
+
+.preview__bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 14px;
+  border-bottom: 1px solid var(--pg-border);
+  flex-shrink: 0;
+}
+
+.preview__bar-hint {
+  font-size: 11.5px;
+  color: var(--pg-faint);
+}
+
+.pv-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 10px 16px;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--pg-border);
+  flex-shrink: 0;
+}
+
+.pv-control {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 110px;
+  max-width: 220px;
+}
+
+.pv-control--events {
+  max-width: none;
+}
+
+.pv-control__label {
+  font-size: 11px;
+  font-family: var(--pg-mono);
+  color: var(--pg-muted);
+}
+
+.pv-control select,
+.pv-control input[type='text'],
+.pv-control input[type='number'] {
+  font-size: 12px;
+  padding: 3px 6px;
+}
+
+.pv-control__check {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--pg-fg);
+  margin: 0;
+  padding: 4px 0;
+  cursor: pointer;
+}
+
+.pv-control__check input {
+  width: auto;
+}
+
+.pv-tag {
+  display: inline-block;
+  align-self: flex-start;
+  border: 1px solid var(--pg-border-strong);
+  padding: 1px 6px;
+  font-size: 10.5px;
+  font-family: var(--pg-mono);
+  color: var(--pg-muted);
+}
+
+.pv-events {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-family: var(--pg-mono);
+  color: var(--pg-muted);
+}
+
+.pv-note {
+  font-size: 11px;
+  color: var(--pg-warn);
 }
 
 .preview__stale {
