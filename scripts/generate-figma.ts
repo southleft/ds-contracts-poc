@@ -152,6 +152,48 @@ function scopesFor(dotPath: string, entry: TokenEntry): string[] {
 }
 
 // ---------------------------------------------------------------------------
+// Text styles derived from semantic typography tokens.
+//
+// Real design systems ship NAMED text styles, not per-node font soup. Every
+// semantic `font.<group>.size` leaf mints one style whose name mirrors the
+// token path ("control/md" ← font.control.size.md, "badge" ← font.badge.size).
+// The style's weight comes from the group's `font.<group>.weight` token when
+// declared, else the runtimes' text default ('Medium') — the same fallback a
+// bound text node gets, so definitions and consumers can match EXACTLY.
+// Family is Inter: font stacks are not canvas-representable (documented
+// fidelity scope, same as raw text nodes today). Primitive font.size.* stays
+// style-less — text styles are semantic roles, not a size ramp.
+// ---------------------------------------------------------------------------
+
+interface DerivedTextStyle {
+  name: string;
+  /** The semantic size-token dot-path — the style's IDENTITY marker on the
+   *  canvas (sharedPluginData ds_contracts/textStyleToken; rename-safe). */
+  tokenPath: string;
+  fontSize: number;
+  fontStyle: string;
+}
+
+function deriveTextStyles(): DerivedTextStyle[] {
+  const out: DerivedTextStyle[] = [];
+  for (const [p] of semantic) {
+    const m = p.match(/^font\.(.+?)\.size(?:\.([^.]+))?$/);
+    if (!m) continue;
+    const group = m[1];
+    const name = [group, ...(m[2] ? [m[2]] : [])].join('/').split('.').join('/');
+    const weightPath = `font.${group}.weight`;
+    const fontStyle = semantic.has(weightPath)
+      ? (FONT_STYLE_BY_WEIGHT[px(resolveLiteral(weightPath))] ?? 'Medium')
+      : 'Medium';
+    out.push({ name, tokenPath: p, fontSize: px(resolveLiteral(p)), fontStyle });
+  }
+  return out.sort((a, b) => a.name.localeCompare(b.name));
+}
+
+const derivedTextStyles = deriveTextStyles();
+const textStyleByTokenPath = new Map(derivedTextStyles.map((t) => [t.tokenPath, t]));
+
+// ---------------------------------------------------------------------------
 // 01-tokens.js (unchanged mechanism from v1)
 // ---------------------------------------------------------------------------
 
@@ -220,6 +262,8 @@ const PRIMITIVES = ${JSON.stringify(prim)};
 const BRAND = ${JSON.stringify(brand)};
 const BRAND_MODES = ${JSON.stringify(brandNames.map((n) => pascal(n)))};
 const SEMANTIC = ${JSON.stringify(sem)};
+// Named text styles derived from semantic font.<group>.size tokens.
+const TEXT_STYLES = ${JSON.stringify(derivedTextStyles)};
 
 // File guard: multi-file bridge routing has been observed to hit the wrong
 // file — never write without verifying the target.
@@ -313,10 +357,38 @@ for (const t of SEMANTIC) {
   v.setVariableCodeSyntax('WEB', t.codeSyntax);
 }
 
+// Text styles: upsert by IDENTITY MARKER (ds_contracts/textStyleToken =
+// the semantic size-token path), never by name — a rename on either side
+// must not fork identity, and a foreign style that happens to share a name
+// is never touched (same rule as component sets). Idempotent: re-runs
+// update the marked style in place.
+const localTextStyles = await figma.getLocalTextStylesAsync();
+const styleByToken = {};
+for (const s of localTextStyles) {
+  const tp = s.getSharedPluginData('ds_contracts', 'textStyleToken');
+  if (tp) styleByToken[tp] = s;
+}
+let createdStyles = 0;
+for (const t of TEXT_STYLES) {
+  let s = styleByToken[t.tokenPath];
+  if (!s) {
+    s = figma.createTextStyle();
+    s.setSharedPluginData('ds_contracts', 'textStyleToken', t.tokenPath);
+    styleByToken[t.tokenPath] = s;
+    createdStyles++;
+  }
+  await figma.loadFontAsync({ family: 'Inter', style: t.fontStyle });
+  s.name = t.name;
+  s.fontName = { family: 'Inter', style: t.fontStyle };
+  s.fontSize = t.fontSize;
+  s.description = 'ds_contracts: derived from tokens/' + t.tokenPath;
+}
+
 return {
   primitives: { collectionId: prim.id, total: PRIMITIVES.length, created: createdPrim },
   brand: { collectionId: brandCol.id, modes: BRAND_MODES, total: BRAND.length, created: createdBrand },
   semantic: { collectionId: sem.id, total: SEMANTIC.length, created: createdSem },
+  textStyles: { total: TEXT_STYLES.length, created: createdStyles },
 };
 `;
 }
