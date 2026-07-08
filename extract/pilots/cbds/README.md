@@ -45,3 +45,31 @@ componentSetKey) before treating an existing set as "ours"; a name match
 without the marker is a foreign component and the script should create under a
 disambiguated name instead. Filed as generator work; the bound set above was
 built directly via the plugin API pending that fix.
+
+## AMEND finale (2026-07-08): in-place upgrade in a foreign file — and two more bugs it caught
+
+Badge v1.1.0 (added `error` variant, riding existing `color.feedback.error`
+tokens) was amended into the kit via the Sync Runner (`FIGMA_BATCH_LIMIT=1`
+badge-only batch, `FIGMA_SERVE_ONLY=batch-04.js`). Result, screenshot-verified:
+
+- **Found by marker, not name** — the new `contractId` identity gate located
+  `Badge (ds.badge) — token-bound` while CBDS's native 72-variant `Badge`
+  stayed invisible to it. Amend report: `addedVariants: [Variant=Error]`,
+  `rebuiltVariants: 4`, same node id, same set key `cdd03db0…`.
+- **Two generator defects surfaced and fixed** (this is the point of hostile
+  pilots):
+  1. *Renderer base-color quirk*: Figma renders a reassigned bound paint's
+     BASE color on pre-existing nodes (fresh nodes normalize the base to the
+     resolved value at assignment) — the four rebuilt variant roots rendered
+     black despite fully valid bindings, variables, aliases, and modes.
+     Fix: `boundPaint` seeds the base via `variable.resolveForConsumer(node)`;
+     the binding itself is unchanged.
+  2. *Children-text default not reconciled*: the `Label` default stayed at
+     the old value because a children-bound TEXT prop lives in the compiled
+     spec's `contentProp`, not in `C.textProps`, so the prop-default
+     reconcile loop never saw it. Fix: reconcile defaults in the
+     `registry.texts` reattachment path.
+
+Score for this file: four sync passes, three real generator bugs caught
+(name-collision identity, renderer base quirk, text-default reconcile), zero
+damage to the host system's components.
