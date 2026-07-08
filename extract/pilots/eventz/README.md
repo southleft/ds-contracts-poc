@@ -1,0 +1,26 @@
+# Pilot: Eventz — a COMPLETE brownfield pair (real code + real Figma library)
+
+Third real-world receipt, and the strongest-shaped one: the [Eventz design system](https://github.com/southleft/eventz-design-system) is a working React library (`packages/core/src/components`) with its own hand-built Figma library ("DEMO Eventz Design System") — both authored independently of this project, by humans, with a docs pipeline of their own. Unlike Shoelace (code + community kit by different authors), this pair is one team's *intentionally matched* system — exactly the brownfield case enterprises live in.
+
+## Result
+
+| | |
+|---|---|
+| Code components extracted | **53** (react-tsx adapter; 3 seen-but-unreadable, reported) |
+| Design library dumped | **68** library components (read-only; icon/template pages omitted by scope) |
+| Matched pairs | **31/53** |
+| Properties agreeing | **27** · **220** itemized human decisions |
+
+Reproduce: `npm run extract:code -- extract/pilots/eventz/extract.config.json && npm run reconcile -- extract/pilots/eventz/extract.config.json` (clone the code repo and point `code.root` at `packages/core/src/components`).
+
+## What the report actually shows (`out/reconciliation.md`)
+
+- **The state-axes convention, quantified on a system its own team matched deliberately**: 13 design sets carry `state: default/hover/focus[/active/open]` axes with no code counterpart — interaction states drawn as variants, the same class the Shoelace pilot surfaced. Any contract adoption here starts with the state-preview-variants conversation.
+- **`breakpoint: sm/lg` axes** on 6+ sets — responsive behavior as variant axes, the canvas-side convention for a concept the code expresses in CSS. A drift class that is really a *representation* divergence; contracts would need the responsive vocabulary (roadmap) to arbitrate it.
+- **Real naming divergence inside one team**: code `withIcon` vs design `hasIcon` on Alert — the with-/has- prefix class (a new alias-rule candidate for the reconciler, flagged not auto-matched today).
+- **Honest extractor limits, visibly labeled**: Button's code `variant` prop types via an imported union, so single-file extraction reports it missing on the code side — the finding is real ("the reconciler can't see it"), the *cause* is the documented cross-file gap, not Eventz drift. 3 components (compound/context-based) were seen-but-unreadable and reported.
+- **Design-side kit rot found mechanically**, same as Shoelace: a `Text link` swap property spelled `endicon` (casing), `.dotIndicator`'s `Active` axis containing `False/true/false`, `.tabTrigger`'s `isDisabled` axis with options `[false, true, upcoming, active]` — states leaking into a boolean axis.
+
+## Attribution
+
+The Eventz design system is © Southleft (github.com/southleft/eventz-design-system); the Figma library was dumped read-only. This pilot reads only the component API surface — no visuals, content, or source code are reproduced here beyond property names.

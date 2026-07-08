@@ -1,0 +1,2555 @@
+[
+  {
+    "name": "Accordion",
+    "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/Accordion/Accordion.tsx",
+    "adapter": "react-tsx",
+    "props": [
+      {
+        "name": "title",
+        "optional": false,
+        "kind": "string",
+        "confidence": "declared"
+      },
+      {
+        "name": "image",
+        "optional": true,
+        "kind": "node",
+        "confidence": "declared"
+      },
+      {
+        "name": "emphasis",
+        "optional": true,
+        "kind": "enum",
+        "values": [
+          "strong",
+          "weak"
+        ],
+        "confidence": "declared",
+        "default": "strong"
+      },
+      {
+        "name": "intro",
+        "optional": true,
+        "kind": "string",
+        "confidence": "declared"
+      },
+      {
+        "name": "value",
+        "optional": true,
+        "kind": "string",
+        "confidence": "declared"
+      },
+      {
+        "name": "defaultValue",
+        "optional": true,
+        "kind": "string",
+        "confidence": "declared"
+      },
+      {
+        "name": "onValueChange",
+        "optional": true,
+        "kind": "event",
+        "confidence": "declared"
+      }
+    ]
+  },
+  {
+    "name": "ActionCard",
+    "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/server/ActionCard/ActionCard.tsx",
+    "adapter": "react-tsx",
+    "props": []
+  },
+  {
+    "name": "Alert",
+    "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/Alert/Alert.tsx",
+    "adapter": "react-tsx",
+    "props": [
+      {
+        "name": "variant",
+        "optional": true,
+        "kind": "enum",
+        "values": [
+          "success",
+          "info",
+          "warning",
+          "danger"
+        ],
+        "confidence": "inferred",
+        "default": "info"
+      },
+      {
+        "name": "title",
+        "optional": true,
+        "kind": "string",
+        "confidence": "declared"
+      },
+      {
+        "name": "textLink",
+        "optional": true,
+        "kind": "other",
+        "confidence": "declared"
+      },
+      {
+        "name": "isDismissible",
+        "optional": true,
+        "kind": "boolean",
+        "confidence": "declared",
+        "default": true
+      },
+      {
+        "name": "withIcon",
+        "optional": true,
+        "kind": "boolean",
+        "confidence": "declared",
+        "default": true
+      },
+      {
+        "name": "closeIcon",
+        "optional": true,
+        "kind": "node",
+        "confidence": "declared"
+      },
+      {
+        "name": "onCloseClick",
+        "optional": true,
+        "kind": "event",
+        "confidence": "declared"
+      }
+    ]
+  },
+  {
+    "name": "AvatarGroup",
+    "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/AvatarGroup/AvatarGroup.tsx",
+    "adapter": "react-tsx",
+    "props": [
+      {
+        "name": "indicator",
+        "optional": true,
+        "kind": "string",
+        "confidence": "declared",
+        "default": "+"
+      },
+      {
+        "name": "count",
+        "optional": true,
+        "kind": "number",
+        "confidence": "declared"
+      },
+      {
+        "name": "message",
+        "optional": true,
+        "kind": "string",
+        "confidence": "declared"
+      },
+      {
+        "name": "showMessage",
+        "optional": true,
+        "kind": "boolean",
+        "confidence": "declared",
+        "default": true
+      },
+      {
+        "name": "avatarsToDisplay",
+        "optional": true,
+        "kind": "number",
+        "confidence": "declared",
+        "default": 4
+      },
+      {
+        "name": "users",
+        "optional": false,
+        "kind": "other",
+        "confidence": "declared"
+      }
+    ]
+  },
+  {
+    "name": "Badge",
+    "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/server/Badge/Badge.tsx",
+    "adapter": "react-tsx",
+    "props": [
+      {
+        "name": "variant",
+        "optional": true,
+        "kind": "enum",
+        "values": [
+          "purple",
+          "blue",
+          "pink",
+          "brand",
+          "orange"
+        ],
+        "confidence": "declared",
+        "default": "purple"
+      },
+      {
+        "name": "icon",
+        "optional": true,
+        "kind": "node",
+        "confidence": "declared"
+      },
+      {
+        "name": "label",
+        "optional": true,
+        "kind": "string",
+        "confidence": "declared"
+      }
+    ]
+  },
+  {
+    "name": "Breadcrumbs",
+    "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/server/Breadcrumbs/Breadcrumbs.tsx",
+    "adapter": "react-tsx",
+    "props": [
+      {
+        "name": "items",
+        "optional": false,
+        "kind": "other",
+        "confidence": "declared"
+      },
+      {
+        "name": "current",
+        "optional": false,
+        "kind": "string",
+        "confidence": "declared"
+      },
+      {
+        "name": "ariaLabel",
+        "optional": true,
+        "kind": "string",
+        "confidence": "declared"
+      }
+    ]
+  },
+  {
+    "name": "Button",
+    "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/Button/Button.tsx",
+    "adapter": "react-tsx",
+    "props": []
+  },
+  {
+    "name": "Carousel",
+    "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/Carousel/Carousel.tsx",
+    "adapter": "react-tsx",
+    "props": [
+      {
+        "name": "ariaLabel",
+        "optional": true,
+        "kind": "string",
+        "confidence": "declared"
+      },
+      {
+        "name": "ariaLabelledBy",
+        "optional": true,
+        "kind": "string",
+        "confidence": "declared"
+      },
+      {
+        "name": "defaultIndex",
+        "optional": true,
+        "kind": "number",
+        "confidence": "declared",
+        "default": 0
+      },
+      {
+        "name": "currentIndex",
+        "optional": true,
+        "kind": "number",
+        "confidence": "declared"
+      },
+      {
+        "name": "onChange",
+        "optional": true,
+        "kind": "event",
+        "confidence": "declared"
+      },
+      {
+        "name": "loop",
+        "optional": true,
+        "kind": "boolean",
+        "confidence": "declared",
+        "default": false
+      },
+      {
+        "name": "align",
+        "optional": true,
+        "kind": "enum",
+        "values": [
+          "start",
+          "center",
+          "end"
+        ],
+        "confidence": "inferred",
+        "default": "center"
+      },
+      {
+        "name": "peek",
+        "optional": true,
+        "kind": "boolean",
+        "confidence": "declared",
+        "default": false
+      },
+      {
+        "name": "onInViewChange",
+        "optional": true,
+        "kind": "event",
+        "confidence": "declared"
+      },
+      {
+        "name": "showIndicators",
+        "optional": true,
+        "kind": "boolean",
+        "confidence": "declared",
+        "default": true
+      },
+      {
+        "name": "autoPlay",
+        "optional": true,
+        "kind": "boolean",
+        "confidence": "declared",
+        "default": false
+      },
+      {
+        "name": "autoPlayDelay",
+        "optional": true,
+        "kind": "number",
+        "confidence": "declared",
+        "default": 4000
+      },
+      {
+        "name": "autoPlayPauseOnInteraction",
+        "optional": true,
+        "kind": "boolean",
+        "confidence": "declared",
+        "default": true
+      },
+      {
+        "name": "autoPlayPauseOnHover",
+        "optional": true,
+        "kind": "boolean",
+        "confidence": "declared",
+        "default": true
+      },
+      {
+        "name": "autoPlayPauseOnFocus",
+        "optional": true,
+        "kind": "boolean",
+        "confidence": "declared",
+        "default": true
+      },
+      {
+        "name": "autoPlayStopOnLast",
+        "optional": true,
+        "kind": "boolean",
+        "confidence": "declared",
+        "default": false
+      },
+      {
+        "name": "respectReducedMotion",
+        "optional": true,
+        "kind": "boolean",
+        "confidence": "declared",
+        "default": true
+      },
+      {
+        "name": "onAutoPlayChange",
+        "optional": true,
+        "kind": "event",
+        "confidence": "declared"
+      },
+      {
+        "name": "children",
+        "optional": false,
+        "kind": "node",
+        "confidence": "declared"
+      }
+    ]
+  },
+  {
+    "name": "Checkbox",
+    "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/Checkbox/Checkbox.tsx",
+    "adapter": "react-tsx",
+    "props": [
+      {
+        "name": "checked",
+        "optional": true,
+        "kind": "boolean",
+        "confidence": "declared"
+      },
+      {
+        "name": "label",
+        "optional": false,
+        "kind": "string",
+        "confidence": "declared"
+      },
+      {
+        "name": "hint",
+        "optional": true,
+        "kind": "string",
+        "confidence": "declared"
+      },
+      {
+        "name": "disabled",
+        "optional": true,
+        "kind": "boolean",
+        "confidence": "declared",
+        "default": false
+      },
+      {
+        "name": "required",
+        "optional": true,
+        "kind": "boolean",
+        "confidence": "declared",
+        "default": false
+      },
+      {
+        "name": "name",
+        "optional": true,
+        "kind": "string",
+        "confidence": "declared"
+      },
+      {
+        "name": "value",
+        "optional": true,
+        "kind": "string",
+        "confidence": "declared"
+      },
+      {
+        "name": "className",
+        "optional": true,
+        "kind": "string",
+        "confidence": "declared"
+      }
+    ]
+  },
+  {
+    "name": "CheckboxGroup",
+    "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/CheckboxGroup/CheckboxGroup.tsx",
+    "adapter": "react-tsx",
+    "props": [
+      {
+        "name": "label",
+        "optional": true,
+        "kind": "string",
+        "confidence": "declared"
+      },
+      {
+        "name": "ariaLabel",
+        "optional": true,
+        "kind": "string",
+        "confidence": "declared"
+      },
+      {
+        "name": "hint",
+        "optional": true,
+        "kind": "string",
+        "confidence": "declared"
+      },
+      {
+        "name": "info",
+        "optional": true,
+        "kind": "string",
+        "confidence": "declared"
+      },
+      {
+        "name": "error",
+        "optional": true,
+        "kind": "string",
+        "confidence": "declared"
+      },
+      {
+        "name": "name",
+        "optional": true,
+        "kind": "string",
+        "confidence": "declared"
+      },
+      {
+        "name": "choices",
+        "optional": false,
+        "kind": "other",
+        "confidence": "declared"
+      },
+      {
+        "name": "onCheckedChange",
+        "optional": true,
+        "kind": "event",
+        "confidence": "declared"
+      }
+    ]
+  },
+  {
+    "name": "Chip",
+    "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/server/Chip/Chip.tsx",
+    "adapter": "react-tsx",
+    "props": [
+      {
+        "name": "label",
+        "optional": false,
+        "kind": "string",
+        "confidence": "declared"
+      },
+      {
+        "name": "ariaLabel",
+        "optional": true,
+        "kind": "string",
+        "confidence": "declared"
+      },
+      {
+        "name": "icon",
+        "optional": true,
+        "kind": "node",
+        "confidence": "declared"
+      },
+      {
+        "name": "className",
+        "optional": true,
+        "kind": "string",
+        "confidence": "declared"
+      }
+    ]
+  },
+  {
+    "name": "Combobox",
+    "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/Combobox/Combobox.tsx",
+    "adapter": "react-tsx",
+    "props": [
+      {
+        "name": "menuItemType",
+        "optional": true,
+        "kind": "enum",
+        "values": [
+          "simple",
+          "complex"
+        ],
+        "confidence": "inferred",
+        "default": "simple"
+      },
+      {
+        "name": "startIcon",
+        "optional": true,
+        "kind": "node",
+        "confidence": "declared"
+      },
+      {
+        "name": "showEndIcon",
+        "optional": true,
+        "kind": "boolean",
+        "confidence": "declared",
+        "default": false
+      },
+      {
+        "name": "endIcon",
+        "optional": true,
+        "kind": "node",
+        "confidence": "declared"
+      },
+      {
+        "name": "placeholder",
+        "optional": true,
+        "kind": "string",
+        "confidence": "declared"
+      },
+      {
+        "name": "items",
+        "optional": true,
+        "kind": "other",
+        "confidence": "declared"
+      },
+      {
+        "name": "menuItemBorderBottom",
+        "optional": true,
+        "kind": "boolean",
+        "confidence": "declared"
+      },
+      {
+        "name": "selectedIds",
+        "optional": true,
+        "kind": "other",
+        "confidence": "declared"
+      },
+      {
+        "name": "defaultSelectedIds",
+        "optional": true,
+        "kind": "other",
+        "confidence": "declared"
+      },
+      {
+        "name": "onSelectionChange",
+        "optional": true,
+        "kind": "event",
+        "confidence": "declared"
+      },
+      {
+        "name": "open",
+        "optional": true,
+        "kind": "boolean",
+        "confidence": "declared"
+      },
+      {
+        "name": "defaultOpen",
+        "optional": true,
+        "kind": "boolean",
+        "confidence": "declared",
+        "default": false
+      },
+      {
+        "name": "onOpenChange",
+        "optional": true,
+        "kind": "event",
+        "confidence": "declared"
+      },
+      {
+        "name": "disabled",
+        "optional": true,
+        "kind": "boolean",
+        "confidence": "declared",
+        "default": false
+      },
+      {
+        "name": "FormElementProps",
+        "optional": true,
+        "kind": "other",
+        "confidence": "declared"
+      }
+    ]
+  },
+  {
+    "name": "ComboboxField",
+    "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/Combobox/Combobox.tsx",
+    "adapter": "react-tsx",
+    "props": [
+      {
+        "name": "disabled",
+        "optional": true,
+        "kind": "boolean",
+        "confidence": "declared",
+        "default": false
+      },
+      {
+        "name": "startIcon",
+        "optional": true,
+        "kind": "node",
+        "confidence": "declared"
+      },
+      {
+        "name": "endIcon",
+        "optional": true,
+        "kind": "node",
+        "confidence": "declared"
+      },
+      {
+        "name": "chips",
+        "optional": false,
+        "kind": "node",
+        "confidence": "declared"
+      },
+      {
+        "name": "clearAll",
+        "optional": true,
+        "kind": "node",
+        "confidence": "declared"
+      },
+      {
+        "name": "chipsClassName",
+        "optional": false,
+        "kind": "string",
+        "confidence": "declared"
+      },
+      {
+        "name": "startIconClassName",
+        "optional": false,
+        "kind": "string",
+        "confidence": "declared"
+      },
+      {
+        "name": "endIconClassName",
+        "optional": false,
+        "kind": "string",
+        "confidence": "declared"
+      },
+      {
+        "name": "inputClassName",
+        "optional": false,
+        "kind": "string",
+        "confidence": "declared"
+      },
+      {
+        "name": "inputProps",
+        "optional": false,
+        "kind": "other",
+        "confidence": "declared"
+      },
+      {
+        "name": "inputRef",
+        "optional": false,
+        "kind": "event",
+        "confidence": "declared"
+      }
+    ]
+  },
+  {
+    "name": "ContentCard",
+    "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/server/ContentCard/ContentCard.tsx",
+    "adapter": "react-tsx",
+    "props": []
+  },
+  {
+    "name": "Control",
+    "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/Control/Control.tsx",
+    "adapter": "react-tsx",
+    "props": []
+  },
+  {
+    "name": "Countdown",
+    "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/Countdown/Countdown.tsx",
+    "adapter": "react-tsx",
+    "props": []
+  },
+  {
+    "name": "DatePicker",
+    "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/DatePicker/DatePicker.tsx",
+    "adapter": "react-tsx",
+    "props": []
+  },
+  {
+    "name": "Dialog",
+    "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/Dialog/Dialog.tsx",
+    "adapter": "react-tsx",
+    "props": [
+      {
+        "name": "trigger",
+        "optional": false,
+        "kind": "node",
+        "confidence": "declared"
+      },
+      {
+        "name": "size",
+        "optional": true,
+        "kind": "enum",
+        "values": [
+          "sm",
+          "md",
+          "lg"
+        ],
+        "confidence": "declared",
+        "default": "md"
+      },
+      {
+        "name": "hasNavigation",
+        "optional": true,
+        "kind": "boolean",
+        "confidence": "declared",
+        "default": false
+      },
+      {
+        "name": "closeIcon",
+        "optional": true,
+        "kind": "node",
+        "confidence": "declared"
+      },
+      {
+        "name": "controlLeftIcon",
+        "optional": true,
+        "kind": "node",
+        "confidence": "declared"
+      },
+      {
+        "name": "controlRightIcon",
+        "optional": true,
+        "kind": "node",
+        "confidence": "declared"
+      },
+      {
+        "name": "onControlLeftClick",
+        "optional": true,
+        "kind": "event",
+        "confidence": "declared"
+      },
+      {
+        "name": "onControlRightClick",
+        "optional": true,
+        "kind": "event",
+        "confidence": "declared"
+      },
+      {
+        "name": "children",
+        "optional": true,
+        "kind": "node",
+        "confidence": "declared"
+      }
+    ]
+  },
+  {
+    "name": "Dropdown",
+    "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/Dropdown/Dropdown.tsx",
+    "adapter": "react-tsx",
+    "props": [
+      {
+        "name": "label",
+        "optional": false,
+        "kind": "string",
+        "confidence": "declared"
+      },
+      {
+        "name": "startIcon",
+        "optional": true,
+        "kind": "node",
+        "confidence": "declared"
+      },
+      {
+        "name": "endIcon",
+        "optional": true,
+        "kind": "node",
+        "confidence": "declared"
+      },
+      {
+        "name": "open",
+        "optional": true,
+        "kind": "boolean",
+        "confidence": "declared"
+      },
+      {
+        "name": "defaultOpen",
+        "optional": true,
+        "kind": "boolean",
+        "confidence": "declared",
+        "default": false
+      },
+      {
+        "name": "onOpenChange",
+        "optional": true,
+        "kind": "event",
+        "confidence": "declared"
+      },
+      {
+        "name": "disabled",
+        "optional": true,
+        "kind": "boolean",
+        "confidence": "declared",
+        "default": false
+      },
+      {
+        "name": "align",
+        "optional": true,
+        "kind": "enum",
+        "values": [
+          "start",
+          "center",
+          "end"
+        ],
+        "confidence": "inferred",
+        "default": "start"
+      },
+      {
+        "name": "side",
+        "optional": true,
+        "kind": "enum",
+        "values": [
+          "top",
+          "right",
+          "bottom",
+          "left"
+        ],
+        "confidence": "inferred",
+        "default": "bottom"
+      },
+      {
+        "name": "sideOffset",
+        "optional": true,
+        "kind": "number",
+        "confidence": "declared",
+        "default": 8
+      },
+      {
+        "name": "collisionPadding",
+        "optional": true,
+        "kind": "number",
+        "confidence": "declared",
+        "default": 8
+      },
+      {
+        "name": "trapFocus",
+        "optional": true,
+        "kind": "boolean",
+        "confidence": "declared",
+        "default": false
+      },
+      {
+        "name": "ariaHaspopup",
+        "optional": true,
+        "kind": "enum",
+        "values": [
+          "menu",
+          "listbox",
+          "dialog"
+        ],
+        "confidence": "inferred",
+        "default": "menu"
+      },
+      {
+        "name": "children",
+        "optional": false,
+        "kind": "node",
+        "confidence": "declared"
+      }
+    ]
+  },
+  {
+    "name": "EventPanel",
+    "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/server/EventPanel/EventPanel.tsx",
+    "adapter": "react-tsx",
+    "props": [
+      {
+        "name": "imgSrc",
+        "optional": false,
+        "kind": "string",
+        "confidence": "declared"
+      },
+      {
+        "name": "imgAlt",
+        "optional": false,
+        "kind": "string",
+        "confidence": "declared"
+      },
+      {
+        "name": "loading",
+        "optional": true,
+        "kind": "enum",
+        "values": [
+          "lazy",
+          "eager"
+        ],
+        "confidence": "declared",
+        "default": "lazy"
+      },
+      {
+        "name": "leftAction",
+        "optional": true,
+        "kind": "node",
+        "confidence": "declared"
+      },
+      {
+        "name": "rightAction",
+        "optional": true,
+        "kind": "node",
+        "confidence": "declared"
+      },
+      {
+        "name": "subtitle",
+        "optional": true,
+        "kind": "string",
+        "confidence": "declared"
+      },
+      {
+        "name": "title",
+        "optional": true,
+        "kind": "string",
+        "confidence": "declared"
+      },
+      {
+        "name": "description",
+        "optional": true,
+        "kind": "string",
+        "confidence": "declared"
+      },
+      {
+        "name": "chips",
+        "optional": true,
+        "kind": "other",
+        "confidence": "declared"
+      },
+      {
+        "name": "avatars",
+        "optional": true,
+        "kind": "node",
+        "confidence": "declared"
+      },
+      {
+        "name": "buttons",
+        "optional": true,
+        "kind": "node",
+        "confidence": "declared"
+      }
+    ]
+  },
+  {
+    "name": "ExpandableContent",
+    "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/ExpandableContent/ExpandableContent.tsx",
+    "adapter": "react-tsx",
+    "props": [
+      {
+        "name": "defaultExpanded",
+        "optional": true,
+        "kind": "boolean",
+        "confidence": "declared",
+        "default": false
+      },
+      {
+        "name": "expanded",
+        "optional": true,
+        "kind": "boolean",
+        "confidence": "declared"
+      },
+      {
+        "name": "onExpandedChange",
+        "optional": true,
+        "kind": "event",
+        "confidence": "declared"
+      }
+    ]
+  },
+  {
+    "name": "FileUpload",
+    "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/FileUpload/FileUpload.tsx",
+    "adapter": "react-tsx",
+    "props": [
+      {
+        "name": "imageFormat",
+        "optional": true,
+        "kind": "enum",
+        "values": [
+          "photo",
+          "poster"
+        ],
+        "confidence": "inferred",
+        "default": "photo"
+      },
+      {
+        "name": "accept",
+        "optional": true,
+        "kind": "string",
+        "confidence": "declared",
+        "default": "image/png,image/jpeg"
+      },
+      {
+        "name": "showThumbnail",
+        "optional": true,
+        "kind": "boolean",
+        "confidence": "declared",
+        "default": true
+      },
+      {
+        "name": "label",
+        "optional": true,
+        "kind": "string",
+        "confidence": "declared"
+      },
+      {
+        "name": "ariaLabel",
+        "optional": true,
+        "kind": "string",
+        "confidence": "declared"
+      },
+      {
+        "name": "hint",
+        "optional": true,
+        "kind": "string",
+        "confidence": "declared"
+      },
+      {
+        "name": "info",
+        "optional": true,
+        "kind": "string",
+        "confidence": "declared"
+      },
+      {
+        "name": "error",
+        "optional": true,
+        "kind": "string",
+        "confidence": "declared"
+      },
+      {
+        "name": "imageProperties",
+        "optional": true,
+        "kind": "other",
+        "confidence": "declared"
+      },
+      {
+        "name": "initialValue",
+        "optional": true,
+        "kind": "string",
+        "confidence": "declared"
+      },
+      {
+        "name": "resetOnFail",
+        "optional": true,
+        "kind": "boolean",
+        "confidence": "declared",
+        "default": false
+      },
+      {
+        "name": "fileNoun",
+        "optional": true,
+        "kind": "string",
+        "confidence": "declared"
+      },
+      {
+        "name": "name",
+        "optional": true,
+        "kind": "string",
+        "confidence": "declared"
+      },
+      {
+        "name": "required",
+        "optional": true,
+        "kind": "boolean",
+        "confidence": "declared"
+      },
+      {
+        "name": "form",
+        "optional": true,
+        "kind": "string",
+        "confidence": "declared"
+      },
+      {
+        "name": "onFileSelected",
+        "optional": true,
+        "kind": "other",
+        "confidence": "declared"
+      },
+      {
+        "name": "onFileCanceled",
+        "optional": true,
+        "kind": "other",
+        "confidence": "declared"
+      },
+      {
+        "name": "onFileAccepted",
+        "optional": true,
+        "kind": "other",
+        "confidence": "declared"
+      },
+      {
+        "name": "onFileChanging",
+        "optional": true,
+        "kind": "other",
+        "confidence": "declared"
+      },
+      {
+        "name": "onFileError",
+        "optional": true,
+        "kind": "other",
+        "confidence": "declared"
+      },
+      {
+        "name": "onFileRemoved",
+        "optional": true,
+        "kind": "other",
+        "confidence": "declared"
+      }
+    ]
+  },
+  {
+    "name": "FloatingBar",
+    "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/FloatingBar/FloatingBar.tsx",
+    "adapter": "react-tsx",
+    "props": [
+      {
+        "name": "ariaLabel",
+        "optional": true,
+        "kind": "string",
+        "confidence": "declared"
+      },
+      {
+        "name": "labelledBy",
+        "optional": true,
+        "kind": "string",
+        "confidence": "declared"
+      },
+      {
+        "name": "isScrollable",
+        "optional": true,
+        "kind": "boolean",
+        "confidence": "declared",
+        "default": false
+      },
+      {
+        "name": "onLeftScroll",
+        "optional": true,
+        "kind": "event",
+        "confidence": "declared"
+      },
+      {
+        "name": "onRightScroll",
+        "optional": true,
+        "kind": "event",
+        "confidence": "declared"
+      },
+      {
+        "name": "content",
+        "optional": true,
+        "kind": "node",
+        "confidence": "declared"
+      },
+      {
+        "name": "actions",
+        "optional": true,
+        "kind": "node",
+        "confidence": "declared"
+      }
+    ]
+  },
+  {
+    "name": "Footer",
+    "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/server/Footer/Footer.tsx",
+    "adapter": "react-tsx",
+    "props": [
+      {
+        "name": "className",
+        "optional": true,
+        "kind": "string",
+        "confidence": "declared"
+      }
+    ]
+  },
+  {
+    "name": "FormElement",
+    "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/FormElement/FormElement.tsx",
+    "adapter": "react-tsx",
+    "props": [
+      {
+        "name": "label",
+        "optional": true,
+        "kind": "string",
+        "confidence": "declared"
+      },
+      {
+        "name": "ariaLabel",
+        "optional": true,
+        "kind": "string",
+        "confidence": "declared"
+      },
+      {
+        "name": "hint",
+        "optional": true,
+        "kind": "string",
+        "confidence": "declared"
+      },
+      {
+        "name": "error",
+        "optional": true,
+        "kind": "string",
+        "confidence": "declared"
+      },
+      {
+        "name": "info",
+        "optional": true,
+        "kind": "string",
+        "confidence": "declared"
+      },
+      {
+        "name": "className",
+        "optional": true,
+        "kind": "string",
+        "confidence": "declared"
+      },
+      {
+        "name": "disabled",
+        "optional": true,
+        "kind": "boolean",
+        "confidence": "declared",
+        "default": false
+      },
+      {
+        "name": "asChild",
+        "optional": true,
+        "kind": "boolean",
+        "confidence": "declared",
+        "default": false
+      },
+      {
+        "name": "children",
+        "optional": false,
+        "kind": "node",
+        "confidence": "declared"
+      }
+    ]
+  },
+  {
+    "name": "Heading",
+    "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/server/Heading/Heading.tsx",
+    "adapter": "react-tsx",
+    "props": [
+      {
+        "name": "as",
+        "optional": true,
+        "kind": "enum",
+        "values": [
+          "h1",
+          "h2",
+          "h3",
+          "h4",
+          "h5",
+          "h6"
+        ],
+        "confidence": "inferred",
+        "default": "h2"
+      },
+      {
+        "name": "size",
+        "optional": true,
+        "kind": "enum",
+        "values": [
+          "xs",
+          "sm",
+          "base",
+          "lg",
+          "xl",
+          "2xl",
+          "3xl",
+          "4xl",
+          "5xl",
+          "6xl",
+          "7xl",
+          "8xl",
+          "auto",
+          "inherit"
+        ],
+        "confidence": "inferred",
+        "default": "auto"
+      },
+      {
+        "name": "weight",
+        "optional": true,
+        "kind": "enum",
+        "values": [
+          "thin",
+          "extra-light",
+          "light",
+          "normal",
+          "medium",
+          "semi-bold",
+          "bold",
+          "extra-bold",
+          "black",
+          "auto",
+          "inherit"
+        ],
+        "confidence": "inferred",
+        "default": "auto"
+      },
+      {
+        "name": "align",
+        "optional": true,
+        "kind": "enum",
+        "values": [
+          "left",
+          "center",
+          "right",
+          "justify",
+          "inherit"
+        ],
+        "confidence": "inferred",
+        "default": "inherit"
+      },
+      {
+        "name": "color",
+        "optional": true,
+        "kind": "enum",
+        "values": [
+          "default",
+          "brand",
+          "weak",
+          "inverse",
+          "subtle",
+          "danger-strong",
+          "danger-subtle",
+          "warning-strong",
+          "warning-subtle",
+          "success-strong",
+          "success-subtle",
+          "info-strong",
+          "info-subtle",
+          "inherit"
+        ],
+        "confidence": "inferred",
+        "default": "default"
+      },
+      {
+        "name": "transform",
+        "optional": true,
+        "kind": "enum",
+        "values": [
+          "normal",
+          "uppercase",
+          "lowercase",
+          "capitalize",
+          "inherit"
+        ],
+        "confidence": "inferred",
+        "default": "inherit"
+      },
+      {
+        "name": "italic",
+        "optional": true,
+        "kind": "boolean",
+        "confidence": "declared",
+        "default": false
+      },
+      {
+        "name": "truncate",
+        "optional": true,
+        "kind": "boolean",
+        "confidence": "declared",
+        "default": false
+      },
+      {
+        "name": "noMargin",
+        "optional": true,
+        "kind": "boolean",
+        "confidence": "declared",
+        "default": true
+      }
+    ]
+  },
+  {
+    "name": "IconButton",
+    "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/IconButton/IconButton.tsx",
+    "adapter": "react-tsx",
+    "props": []
+  },
+  {
+    "name": "ImagePanel",
+    "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/server/ImagePanel/ImagePanel.tsx",
+    "adapter": "react-tsx",
+    "props": [
+      {
+        "name": "imgSrc",
+        "optional": false,
+        "kind": "string",
+        "confidence": "declared"
+      },
+      {
+        "name": "imgAlt",
+        "optional": false,
+        "kind": "string",
+        "confidence": "declared"
+      },
+      {
+        "name": "loading",
+        "optional": true,
+        "kind": "enum",
+        "values": [
+          "lazy",
+          "eager"
+        ],
+        "confidence": "declared",
+        "default": "lazy"
+      },
+      {
+        "name": "fetchPriority",
+        "optional": true,
+        "kind": "enum",
+        "values": [
+          "high",
+          "low"
+        ],
+        "confidence": "declared"
+      },
+      {
+        "name": "title",
+        "optional": true,
+        "kind": "string",
+        "confidence": "declared"
+      },
+      {
+        "name": "description",
+        "optional": true,
+        "kind": "string",
+        "confidence": "declared"
+      },
+      {
+        "name": "labels",
+        "optional": true,
+        "kind": "other",
+        "confidence": "declared"
+      },
+      {
+        "name": "actions",
+        "optional": true,
+        "kind": "other",
+        "confidence": "declared"
+      }
+    ]
+  },
+  {
+    "name": "InfoPopover",
+    "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/InfoPopover/InfoPopover.tsx",
+    "adapter": "react-tsx",
+    "props": [
+      {
+        "name": "ariaLabel",
+        "optional": false,
+        "kind": "string",
+        "confidence": "declared"
+      },
+      {
+        "name": "side",
+        "optional": true,
+        "kind": "enum",
+        "values": [
+          "top",
+          "right",
+          "bottom",
+          "left"
+        ],
+        "confidence": "inferred",
+        "default": "top"
+      },
+      {
+        "name": "sideOffset",
+        "optional": true,
+        "kind": "number",
+        "confidence": "declared",
+        "default": 8
+      },
+      {
+        "name": "onOpenChange",
+        "optional": true,
+        "kind": "event",
+        "confidence": "declared"
+      },
+      {
+        "name": "contentId",
+        "optional": true,
+        "kind": "string",
+        "confidence": "declared"
+      },
+      {
+        "name": "children",
+        "optional": false,
+        "kind": "node",
+        "confidence": "declared"
+      }
+    ]
+  },
+  {
+    "name": "Input",
+    "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/Input/Input.tsx",
+    "adapter": "react-tsx",
+    "props": [
+      {
+        "name": "startIcon",
+        "optional": true,
+        "kind": "node",
+        "confidence": "declared"
+      },
+      {
+        "name": "endIcon",
+        "optional": true,
+        "kind": "node",
+        "confidence": "declared"
+      },
+      {
+        "name": "className",
+        "optional": true,
+        "kind": "string",
+        "confidence": "declared"
+      }
+    ]
+  },
+  {
+    "name": "InputField",
+    "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/Input/Input.tsx",
+    "adapter": "react-tsx",
+    "props": [
+      {
+        "name": "disabled",
+        "optional": true,
+        "kind": "boolean",
+        "confidence": "declared"
+      },
+      {
+        "name": "startIcon",
+        "optional": true,
+        "kind": "node",
+        "confidence": "declared"
+      },
+      {
+        "name": "endIcon",
+        "optional": true,
+        "kind": "node",
+        "confidence": "declared"
+      },
+      {
+        "name": "startIconClassName",
+        "optional": false,
+        "kind": "string",
+        "confidence": "declared"
+      },
+      {
+        "name": "inputClassName",
+        "optional": false,
+        "kind": "string",
+        "confidence": "declared"
+      },
+      {
+        "name": "endIconClassName",
+        "optional": false,
+        "kind": "string",
+        "confidence": "declared"
+      },
+      {
+        "name": "inputProps",
+        "optional": false,
+        "kind": "other",
+        "confidence": "declared"
+      }
+    ]
+  },
+  {
+    "name": "Map",
+    "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/server/Map/Map.tsx",
+    "adapter": "react-tsx",
+    "props": [
+      {
+        "name": "ariaLabel",
+        "optional": false,
+        "kind": "string",
+        "confidence": "declared"
+      },
+      {
+        "name": "showControls",
+        "optional": true,
+        "kind": "boolean",
+        "confidence": "declared",
+        "default": true
+      },
+      {
+        "name": "showOverlay",
+        "optional": true,
+        "kind": "boolean",
+        "confidence": "declared",
+        "default": true
+      },
+      {
+        "name": "isNested",
+        "optional": true,
+        "kind": "boolean",
+        "confidence": "declared",
+        "default": false
+      }
+    ]
+  },
+  {
+    "name": "MediaCard",
+    "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/server/MediaCard/MediaCard.tsx",
+    "adapter": "react-tsx",
+    "props": [
+      {
+        "name": "subtitle",
+        "optional": true,
+        "kind": "string",
+        "confidence": "declared"
+      },
+      {
+        "name": "title",
+        "optional": false,
+        "kind": "string",
+        "confidence": "declared"
+      },
+      {
+        "name": "labels",
+        "optional": true,
+        "kind": "other",
+        "confidence": "declared"
+      },
+      {
+        "name": "imgSrc",
+        "optional": true,
+        "kind": "string",
+        "confidence": "declared"
+      },
+      {
+        "name": "imgAlt",
+        "optional": true,
+        "kind": "string",
+        "confidence": "declared"
+      },
+      {
+        "name": "control",
+        "optional": false,
+        "kind": "node",
+        "confidence": "declared"
+      }
+    ]
+  },
+  {
+    "name": "MediaControl",
+    "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/MediaControl/MediaControl.tsx",
+    "adapter": "react-tsx",
+    "props": [
+      {
+        "name": "state",
+        "optional": true,
+        "kind": "enum",
+        "values": [
+          "playing",
+          "paused"
+        ],
+        "confidence": "inferred"
+      },
+      {
+        "name": "defaultState",
+        "optional": true,
+        "kind": "enum",
+        "values": [
+          "playing",
+          "paused"
+        ],
+        "confidence": "inferred",
+        "default": "paused"
+      },
+      {
+        "name": "onStateChange",
+        "optional": true,
+        "kind": "event",
+        "confidence": "declared"
+      },
+      {
+        "name": "onPlay",
+        "optional": true,
+        "kind": "event",
+        "confidence": "declared"
+      },
+      {
+        "name": "onPause",
+        "optional": true,
+        "kind": "event",
+        "confidence": "declared"
+      },
+      {
+        "name": "ariaLabelPlay",
+        "optional": true,
+        "kind": "string",
+        "confidence": "declared",
+        "default": "Play media"
+      },
+      {
+        "name": "ariaLabelPause",
+        "optional": true,
+        "kind": "string",
+        "confidence": "declared",
+        "default": "Pause media"
+      },
+      {
+        "name": "variant",
+        "optional": true,
+        "kind": "other",
+        "confidence": "declared",
+        "default": "light"
+      },
+      {
+        "name": "size",
+        "optional": true,
+        "kind": "other",
+        "confidence": "declared",
+        "default": "lg"
+      }
+    ]
+  },
+  {
+    "name": "MediaPlayer",
+    "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/MediaPlayer/MediaPlayer.tsx",
+    "adapter": "react-tsx",
+    "props": [
+      {
+        "name": "audioSrc",
+        "optional": false,
+        "kind": "string",
+        "confidence": "declared"
+      },
+      {
+        "name": "title",
+        "optional": false,
+        "kind": "string",
+        "confidence": "declared"
+      },
+      {
+        "name": "subtitle",
+        "optional": true,
+        "kind": "string",
+        "confidence": "declared"
+      },
+      {
+        "name": "imgSrc",
+        "optional": true,
+        "kind": "string",
+        "confidence": "declared"
+      },
+      {
+        "name": "imgAlt",
+        "optional": true,
+        "kind": "string",
+        "confidence": "declared"
+      },
+      {
+        "name": "variant",
+        "optional": true,
+        "kind": "enum",
+        "values": [
+          "default",
+          "compact",
+          "mini"
+        ],
+        "confidence": "inferred",
+        "default": "default"
+      },
+      {
+        "name": "autoPlay",
+        "optional": true,
+        "kind": "boolean",
+        "confidence": "declared",
+        "default": false
+      },
+      {
+        "name": "preload",
+        "optional": true,
+        "kind": "enum",
+        "values": [
+          "metadata",
+          "auto",
+          "none"
+        ],
+        "confidence": "declared",
+        "default": "metadata"
+      },
+      {
+        "name": "loop",
+        "optional": true,
+        "kind": "boolean",
+        "confidence": "declared",
+        "default": false
+      },
+      {
+        "name": "startTime",
+        "optional": true,
+        "kind": "number",
+        "confidence": "declared",
+        "default": 0
+      },
+      {
+        "name": "showVolume",
+        "optional": true,
+        "kind": "boolean",
+        "confidence": "declared",
+        "default": true
+      },
+      {
+        "name": "onCloseClick",
+        "optional": true,
+        "kind": "event",
+        "confidence": "declared"
+      }
+    ]
+  },
+  {
+    "name": "NavigationBar",
+    "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/server/NavigationBar/NavigationBar.tsx",
+    "adapter": "react-tsx",
+    "props": [
+      {
+        "name": "ariaLabel",
+        "optional": false,
+        "kind": "string",
+        "confidence": "declared"
+      },
+      {
+        "name": "items",
+        "optional": true,
+        "kind": "other",
+        "confidence": "declared"
+      },
+      {
+        "name": "fixed",
+        "optional": true,
+        "kind": "boolean",
+        "confidence": "declared",
+        "default": false
+      },
+      {
+        "name": "wrap",
+        "optional": true,
+        "kind": "boolean",
+        "confidence": "declared",
+        "default": false
+      },
+      {
+        "name": "logo",
+        "optional": true,
+        "kind": "node",
+        "confidence": "declared"
+      },
+      {
+        "name": "tagline",
+        "optional": true,
+        "kind": "node",
+        "confidence": "declared"
+      },
+      {
+        "name": "mobileNavigation",
+        "optional": true,
+        "kind": "node",
+        "confidence": "declared"
+      },
+      {
+        "name": "secondaryNavigation",
+        "optional": true,
+        "kind": "node",
+        "confidence": "declared"
+      }
+    ]
+  },
+  {
+    "name": "NavigationContainer",
+    "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/server/NavigationContainer/NavigationContainer.tsx",
+    "adapter": "react-tsx",
+    "props": [
+      {
+        "name": "className",
+        "optional": true,
+        "kind": "string",
+        "confidence": "declared"
+      }
+    ]
+  },
+  {
+    "name": "NavigationDropdown",
+    "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/NavigationDropdown/NavigationDropdown.tsx",
+    "adapter": "react-tsx",
+    "props": [
+      {
+        "name": "ariaLabel",
+        "optional": true,
+        "kind": "string",
+        "confidence": "declared"
+      },
+      {
+        "name": "triggerAriaLabel",
+        "optional": true,
+        "kind": "string",
+        "confidence": "declared"
+      },
+      {
+        "name": "openIcon",
+        "optional": true,
+        "kind": "node",
+        "confidence": "declared"
+      },
+      {
+        "name": "closeIcon",
+        "optional": true,
+        "kind": "node",
+        "confidence": "declared"
+      },
+      {
+        "name": "items",
+        "optional": false,
+        "kind": "other",
+        "confidence": "declared"
+      }
+    ]
+  },
+  {
+    "name": "RadioButtonGroup",
+    "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/RadioButtonGroup/RadioButtonGroup.tsx",
+    "adapter": "react-tsx",
+    "props": [
+      {
+        "name": "choices",
+        "optional": false,
+        "kind": "other",
+        "confidence": "declared"
+      },
+      {
+        "name": "label",
+        "optional": true,
+        "kind": "string",
+        "confidence": "declared"
+      },
+      {
+        "name": "ariaLabel",
+        "optional": true,
+        "kind": "string",
+        "confidence": "declared"
+      },
+      {
+        "name": "hint",
+        "optional": true,
+        "kind": "string",
+        "confidence": "declared"
+      },
+      {
+        "name": "info",
+        "optional": true,
+        "kind": "string",
+        "confidence": "declared"
+      },
+      {
+        "name": "error",
+        "optional": true,
+        "kind": "string",
+        "confidence": "declared"
+      }
+    ]
+  },
+  {
+    "name": "Scroller",
+    "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/Scroller/Scroller.tsx",
+    "adapter": "react-tsx",
+    "props": [
+      {
+        "name": "showControls",
+        "optional": true,
+        "kind": "boolean",
+        "confidence": "declared",
+        "default": true
+      },
+      {
+        "name": "stackRows",
+        "optional": true,
+        "kind": "boolean",
+        "confidence": "declared",
+        "default": false
+      },
+      {
+        "name": "pageBy",
+        "optional": true,
+        "kind": "enum",
+        "values": [
+          "viewport",
+          "fixed"
+        ],
+        "confidence": "inferred",
+        "default": "viewport"
+      },
+      {
+        "name": "pageSize",
+        "optional": true,
+        "kind": "number",
+        "confidence": "declared",
+        "default": 320
+      },
+      {
+        "name": "onScrollChange",
+        "optional": true,
+        "kind": "event",
+        "confidence": "declared"
+      },
+      {
+        "name": "children",
+        "optional": false,
+        "kind": "node",
+        "confidence": "declared"
+      }
+    ]
+  },
+  {
+    "name": "ScrollerRow",
+    "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/server/ScrollerRow/ScrollerRow.tsx",
+    "adapter": "react-tsx",
+    "props": [
+      {
+        "name": "className",
+        "optional": true,
+        "kind": "string",
+        "confidence": "declared"
+      }
+    ]
+  },
+  {
+    "name": "Search",
+    "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/Search/Search.tsx",
+    "adapter": "react-tsx",
+    "props": [
+      {
+        "name": "value",
+        "optional": true,
+        "kind": "string",
+        "confidence": "declared"
+      },
+      {
+        "name": "defaultValue",
+        "optional": true,
+        "kind": "string",
+        "confidence": "declared"
+      },
+      {
+        "name": "onSearchTermChange",
+        "optional": false,
+        "kind": "event",
+        "confidence": "declared"
+      },
+      {
+        "name": "results",
+        "optional": false,
+        "kind": "other",
+        "confidence": "declared"
+      },
+      {
+        "name": "onResultSelect",
+        "optional": false,
+        "kind": "event",
+        "confidence": "declared"
+      },
+      {
+        "name": "onViewAllClick",
+        "optional": true,
+        "kind": "event",
+        "confidence": "declared"
+      },
+      {
+        "name": "placeholder",
+        "optional": true,
+        "kind": "string",
+        "confidence": "declared",
+        "default": "Search…"
+      },
+      {
+        "name": "loading",
+        "optional": true,
+        "kind": "boolean",
+        "confidence": "declared",
+        "default": false
+      },
+      {
+        "name": "noResultsMessage",
+        "optional": true,
+        "kind": "string",
+        "confidence": "declared"
+      },
+      {
+        "name": "InputProps",
+        "optional": true,
+        "kind": "other",
+        "confidence": "declared"
+      },
+      {
+        "name": "closeIcon",
+        "optional": true,
+        "kind": "node",
+        "confidence": "declared"
+      },
+      {
+        "name": "viewAllLabel",
+        "optional": true,
+        "kind": "string",
+        "confidence": "declared"
+      }
+    ]
+  },
+  {
+    "name": "Select",
+    "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/Select/Select.tsx",
+    "adapter": "react-tsx",
+    "props": [
+      {
+        "name": "disabled",
+        "optional": true,
+        "kind": "boolean",
+        "confidence": "declared",
+        "default": false
+      },
+      {
+        "name": "InputProps",
+        "optional": true,
+        "kind": "other",
+        "confidence": "declared"
+      },
+      {
+        "name": "options",
+        "optional": true,
+        "kind": "other",
+        "confidence": "declared"
+      }
+    ]
+  },
+  {
+    "name": "SelectionCard",
+    "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/server/SelectionCard/SelectionCard.tsx",
+    "adapter": "react-tsx",
+    "props": [
+      {
+        "name": "label",
+        "optional": false,
+        "kind": "string",
+        "confidence": "declared"
+      },
+      {
+        "name": "icon",
+        "optional": false,
+        "kind": "node",
+        "confidence": "declared"
+      },
+      {
+        "name": "isSelected",
+        "optional": true,
+        "kind": "boolean",
+        "confidence": "declared",
+        "default": false
+      },
+      {
+        "name": "ariaLabel",
+        "optional": true,
+        "kind": "string",
+        "confidence": "declared"
+      }
+    ]
+  },
+  {
+    "name": "Slider",
+    "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/Slider/Slider.tsx",
+    "adapter": "react-tsx",
+    "props": [
+      {
+        "name": "value",
+        "optional": false,
+        "kind": "number",
+        "confidence": "declared"
+      },
+      {
+        "name": "onChange",
+        "optional": false,
+        "kind": "event",
+        "confidence": "declared"
+      },
+      {
+        "name": "onCommit",
+        "optional": true,
+        "kind": "event",
+        "confidence": "declared"
+      },
+      {
+        "name": "min",
+        "optional": true,
+        "kind": "number",
+        "confidence": "declared",
+        "default": 0
+      },
+      {
+        "name": "max",
+        "optional": true,
+        "kind": "number",
+        "confidence": "declared",
+        "default": 100
+      },
+      {
+        "name": "step",
+        "optional": true,
+        "kind": "number",
+        "confidence": "declared",
+        "default": 1
+      },
+      {
+        "name": "ariaLabel",
+        "optional": false,
+        "kind": "string",
+        "confidence": "declared"
+      },
+      {
+        "name": "ariaLabelledBy",
+        "optional": true,
+        "kind": "string",
+        "confidence": "declared"
+      }
+    ]
+  },
+  {
+    "name": "Stepper",
+    "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/Stepper/Stepper.tsx",
+    "adapter": "react-tsx",
+    "props": [
+      {
+        "name": "steps",
+        "optional": false,
+        "kind": "number",
+        "confidence": "declared"
+      },
+      {
+        "name": "activeStep",
+        "optional": false,
+        "kind": "number",
+        "confidence": "declared"
+      },
+      {
+        "name": "activeLabel",
+        "optional": false,
+        "kind": "string",
+        "confidence": "declared"
+      },
+      {
+        "name": "onStepChange",
+        "optional": true,
+        "kind": "event",
+        "confidence": "declared"
+      }
+    ]
+  },
+  {
+    "name": "SubscriptionCard",
+    "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/server/SubscriptionCard/SubscriptionCard.tsx",
+    "adapter": "react-tsx",
+    "props": [
+      {
+        "name": "terms",
+        "optional": false,
+        "kind": "string",
+        "confidence": "declared"
+      },
+      {
+        "name": "cancelText",
+        "optional": true,
+        "kind": "string",
+        "confidence": "declared",
+        "default": "Cancel"
+      },
+      {
+        "name": "cancelHref",
+        "optional": true,
+        "kind": "string",
+        "confidence": "declared"
+      },
+      {
+        "name": "isActive",
+        "optional": true,
+        "kind": "boolean",
+        "confidence": "declared",
+        "default": false
+      },
+      {
+        "name": "nextBillingDate",
+        "optional": true,
+        "kind": "string",
+        "confidence": "declared"
+      },
+      {
+        "name": "memberSince",
+        "optional": true,
+        "kind": "string",
+        "confidence": "declared"
+      },
+      {
+        "name": "inactiveSubtitle",
+        "optional": true,
+        "kind": "string",
+        "confidence": "declared",
+        "default": "Cancel anytime."
+      },
+      {
+        "name": "cancel",
+        "optional": true,
+        "kind": "node",
+        "confidence": "declared"
+      }
+    ]
+  },
+  {
+    "name": "Tabs",
+    "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/Tabs/Tabs.tsx",
+    "adapter": "react-tsx",
+    "props": [
+      {
+        "name": "type",
+        "optional": true,
+        "kind": "enum",
+        "values": [
+          "section",
+          "button"
+        ],
+        "confidence": "declared",
+        "default": "section"
+      },
+      {
+        "name": "tabsList",
+        "optional": false,
+        "kind": "other",
+        "confidence": "declared"
+      },
+      {
+        "name": "value",
+        "optional": true,
+        "kind": "string",
+        "confidence": "declared"
+      },
+      {
+        "name": "defaultValue",
+        "optional": true,
+        "kind": "string",
+        "confidence": "declared"
+      },
+      {
+        "name": "onValueChange",
+        "optional": true,
+        "kind": "event",
+        "confidence": "declared"
+      },
+      {
+        "name": "activationMode",
+        "optional": true,
+        "kind": "enum",
+        "values": [
+          "automatic",
+          "manual"
+        ],
+        "confidence": "declared"
+      },
+      {
+        "name": "loop",
+        "optional": true,
+        "kind": "boolean",
+        "confidence": "declared"
+      },
+      {
+        "name": "ariaLabel",
+        "optional": false,
+        "kind": "string",
+        "confidence": "declared"
+      },
+      {
+        "name": "disabled",
+        "optional": true,
+        "kind": "boolean",
+        "confidence": "declared",
+        "default": false
+      },
+      {
+        "name": "className",
+        "optional": true,
+        "kind": "string",
+        "confidence": "declared"
+      }
+    ]
+  },
+  {
+    "name": "Textarea",
+    "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/Textarea/Textarea.tsx",
+    "adapter": "react-tsx",
+    "props": [
+      {
+        "name": "label",
+        "optional": true,
+        "kind": "string",
+        "confidence": "declared"
+      },
+      {
+        "name": "ariaLabel",
+        "optional": true,
+        "kind": "string",
+        "confidence": "declared"
+      },
+      {
+        "name": "hint",
+        "optional": true,
+        "kind": "string",
+        "confidence": "declared"
+      },
+      {
+        "name": "error",
+        "optional": true,
+        "kind": "string",
+        "confidence": "declared"
+      },
+      {
+        "name": "info",
+        "optional": true,
+        "kind": "string",
+        "confidence": "declared"
+      },
+      {
+        "name": "startIcon",
+        "optional": true,
+        "kind": "node",
+        "confidence": "declared"
+      },
+      {
+        "name": "endIcon",
+        "optional": true,
+        "kind": "node",
+        "confidence": "declared"
+      },
+      {
+        "name": "value",
+        "optional": true,
+        "kind": "string",
+        "confidence": "declared"
+      },
+      {
+        "name": "defaultValue",
+        "optional": true,
+        "kind": "string",
+        "confidence": "declared"
+      },
+      {
+        "name": "disabled",
+        "optional": true,
+        "kind": "boolean",
+        "confidence": "declared",
+        "default": false
+      }
+    ]
+  },
+  {
+    "name": "TextLink",
+    "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/TextLink/TextLink.tsx",
+    "adapter": "react-tsx",
+    "props": []
+  },
+  {
+    "name": "TextWithRef",
+    "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/server/Text/Text.tsx",
+    "adapter": "react-tsx",
+    "props": []
+  },
+  {
+    "name": "ToggleGroup",
+    "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/ToggleGroup/ToggleGroup.tsx",
+    "adapter": "react-tsx",
+    "props": [
+      {
+        "name": "ariaLabel",
+        "optional": false,
+        "kind": "string",
+        "confidence": "declared"
+      },
+      {
+        "name": "items",
+        "optional": false,
+        "kind": "other",
+        "confidence": "declared"
+      }
+    ]
+  },
+  {
+    "name": "Visibility",
+    "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/server/Visibility/Visibility.tsx",
+    "adapter": "react-tsx",
+    "props": [
+      {
+        "name": "from",
+        "optional": true,
+        "kind": "enum",
+        "values": [
+          "sm",
+          "md",
+          "lg",
+          "xl",
+          "2xl"
+        ],
+        "confidence": "inferred"
+      },
+      {
+        "name": "to",
+        "optional": true,
+        "kind": "enum",
+        "values": [
+          "sm",
+          "md",
+          "lg",
+          "xl",
+          "2xl"
+        ],
+        "confidence": "inferred"
+      }
+    ]
+  }
+]

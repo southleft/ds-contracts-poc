@@ -1,0 +1,1604 @@
+{
+  "matched": [
+    {
+      "component": "Accordion",
+      "codeSource": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/Accordion/Accordion.tsx",
+      "designName": "Accordion",
+      "findings": [
+        {
+          "status": "agree",
+          "codeProp": "title",
+          "designProp": "title"
+        },
+        {
+          "status": "agree",
+          "codeProp": "emphasis",
+          "designProp": "emphasis"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "intro",
+          "detail": "string — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "value",
+          "detail": "string — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "defaultValue",
+          "detail": "string — no matching design property"
+        },
+        {
+          "status": "design-only",
+          "designProp": "breakpoint",
+          "detail": "variant [sm, lg] — no matching code prop"
+        },
+        {
+          "status": "design-only",
+          "designProp": "state",
+          "detail": "variant [default, hover, focused] — no matching code prop"
+        },
+        {
+          "status": "design-only",
+          "designProp": "isExpanded",
+          "detail": "variant [false, true] — no matching code prop"
+        },
+        {
+          "status": "design-only",
+          "designProp": "hasImage",
+          "detail": "no matching code prop"
+        },
+        {
+          "status": "design-only",
+          "designProp": "hasIntro",
+          "detail": "no matching code prop"
+        },
+        {
+          "status": "design-only",
+          "designProp": "hasSlot",
+          "detail": "no matching code prop"
+        }
+      ]
+    },
+    {
+      "component": "Alert",
+      "codeSource": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/Alert/Alert.tsx",
+      "designName": "Alert",
+      "findings": [
+        {
+          "status": "agree",
+          "codeProp": "variant",
+          "designProp": "variant"
+        },
+        {
+          "status": "agree",
+          "codeProp": "title",
+          "designProp": "titleText",
+          "detail": "matched via alias rule (title ⇄ titleText)"
+        },
+        {
+          "status": "agree",
+          "codeProp": "isDismissible",
+          "designProp": "isDismissible"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "withIcon",
+          "detail": "boolean — no matching design property"
+        },
+        {
+          "status": "design-only",
+          "designProp": "hasIcon",
+          "detail": "no matching code prop"
+        },
+        {
+          "status": "design-only",
+          "designProp": "hasLink",
+          "detail": "no matching code prop"
+        },
+        {
+          "status": "design-only",
+          "designProp": "hasTitle",
+          "detail": "no matching code prop"
+        },
+        {
+          "status": "design-only",
+          "designProp": "hasClose",
+          "detail": "no matching code prop"
+        },
+        {
+          "status": "design-only",
+          "designProp": "descriptionText",
+          "detail": "no matching code prop — a design TEXT property with no code counterpart is often bound to React `children` (invisible in a props interface); confirm before treating as drift"
+        }
+      ]
+    },
+    {
+      "component": "AvatarGroup",
+      "codeSource": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/AvatarGroup/AvatarGroup.tsx",
+      "designName": "Avatar group",
+      "findings": [
+        {
+          "status": "code-only",
+          "codeProp": "indicator",
+          "detail": "string — no matching design property"
+        },
+        {
+          "status": "agree",
+          "codeProp": "count",
+          "designProp": "count"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "message",
+          "detail": "string — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "showMessage",
+          "detail": "boolean — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "avatarsToDisplay",
+          "detail": "number — no matching design property"
+        },
+        {
+          "status": "design-only",
+          "designProp": "breakpoint",
+          "detail": "variant [sm, lg] — no matching code prop"
+        }
+      ]
+    },
+    {
+      "component": "Badge",
+      "codeSource": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/server/Badge/Badge.tsx",
+      "designName": "Badge",
+      "findings": [
+        {
+          "status": "agree",
+          "codeProp": "variant",
+          "designProp": "variant"
+        },
+        {
+          "status": "agree",
+          "codeProp": "label",
+          "designProp": "label"
+        },
+        {
+          "status": "design-only",
+          "designProp": "hasIcon",
+          "detail": "variant [true, false] — no matching code prop"
+        },
+        {
+          "status": "design-only",
+          "designProp": "hasLabel",
+          "detail": "variant [false, true] — no matching code prop"
+        }
+      ]
+    },
+    {
+      "component": "Breadcrumbs",
+      "codeSource": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/server/Breadcrumbs/Breadcrumbs.tsx",
+      "designName": "Breadcrumbs",
+      "findings": [
+        {
+          "status": "code-only",
+          "codeProp": "current",
+          "detail": "string — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "ariaLabel",
+          "detail": "string — no matching design property"
+        },
+        {
+          "status": "design-only",
+          "designProp": "itemCount",
+          "detail": "variant [2, 3, 4, 5+] — no matching code prop"
+        }
+      ]
+    },
+    {
+      "component": "Button",
+      "codeSource": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/Button/Button.tsx",
+      "designName": "Button",
+      "findings": [
+        {
+          "status": "design-only",
+          "designProp": "variant",
+          "detail": "variant [primary, secondary, bare, knockout] — no matching code prop"
+        },
+        {
+          "status": "design-only",
+          "designProp": "state",
+          "detail": "variant [default, hover, active, focus] — no matching code prop"
+        },
+        {
+          "status": "design-only",
+          "designProp": "isDisabled",
+          "detail": "variant [false, true] — no matching code prop"
+        },
+        {
+          "status": "design-only",
+          "designProp": "hasStartIcon",
+          "detail": "no matching code prop"
+        },
+        {
+          "status": "design-only",
+          "designProp": "hasEndIcon",
+          "detail": "no matching code prop"
+        },
+        {
+          "status": "design-only",
+          "designProp": "text",
+          "detail": "no matching code prop — a design TEXT property with no code counterpart is often bound to React `children` (invisible in a props interface); confirm before treating as drift"
+        }
+      ]
+    },
+    {
+      "component": "Carousel",
+      "codeSource": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/Carousel/Carousel.tsx",
+      "designName": "Carousel",
+      "findings": [
+        {
+          "status": "code-only",
+          "codeProp": "ariaLabel",
+          "detail": "string — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "ariaLabelledBy",
+          "detail": "string — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "defaultIndex",
+          "detail": "number — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "currentIndex",
+          "detail": "number — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "loop",
+          "detail": "boolean — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "align",
+          "detail": "enum [start, center, end] — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "peek",
+          "detail": "boolean — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "showIndicators",
+          "detail": "boolean — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "autoPlay",
+          "detail": "boolean — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "autoPlayDelay",
+          "detail": "number — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "autoPlayPauseOnInteraction",
+          "detail": "boolean — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "autoPlayPauseOnHover",
+          "detail": "boolean — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "autoPlayPauseOnFocus",
+          "detail": "boolean — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "autoPlayStopOnLast",
+          "detail": "boolean — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "respectReducedMotion",
+          "detail": "boolean — no matching design property"
+        },
+        {
+          "status": "design-only",
+          "designProp": "breakpoint",
+          "detail": "variant [lg, sm] — no matching code prop"
+        },
+        {
+          "status": "design-only",
+          "designProp": "variant",
+          "detail": "variant [event, hero, ad, clickable listing, artist, followable, vertical] — no matching code prop"
+        }
+      ]
+    },
+    {
+      "component": "Checkbox",
+      "codeSource": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/Checkbox/Checkbox.tsx",
+      "designName": "Checkbox",
+      "findings": [
+        {
+          "status": "agree",
+          "codeProp": "checked",
+          "designProp": "isChecked",
+          "detail": "boolean modeled as a true/false variant axis in design (checked ⇄ isChecked)"
+        },
+        {
+          "status": "agree",
+          "codeProp": "label",
+          "designProp": "label"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "hint",
+          "detail": "string — no matching design property"
+        },
+        {
+          "status": "agree",
+          "codeProp": "disabled",
+          "designProp": "isDisabled",
+          "detail": "boolean modeled as a true/false variant axis in design (disabled ⇄ isDisabled)"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "required",
+          "detail": "boolean — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "name",
+          "detail": "string — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "value",
+          "detail": "string — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "className",
+          "detail": "string — no matching design property"
+        },
+        {
+          "status": "design-only",
+          "designProp": "state",
+          "detail": "variant [default, focus, hover] — no matching code prop"
+        },
+        {
+          "status": "design-only",
+          "designProp": "hasHint",
+          "detail": "no matching code prop"
+        }
+      ]
+    },
+    {
+      "component": "CheckboxGroup",
+      "codeSource": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/CheckboxGroup/CheckboxGroup.tsx",
+      "designName": "Checkbox group",
+      "findings": [
+        {
+          "status": "code-only",
+          "codeProp": "label",
+          "detail": "string — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "ariaLabel",
+          "detail": "string — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "hint",
+          "detail": "string — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "info",
+          "detail": "string — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "error",
+          "detail": "string — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "name",
+          "detail": "string — no matching design property"
+        },
+        {
+          "status": "design-only",
+          "designProp": "hasError",
+          "detail": "no matching code prop"
+        },
+        {
+          "status": "design-only",
+          "designProp": "hasDescription",
+          "detail": "no matching code prop"
+        },
+        {
+          "status": "design-only",
+          "designProp": "hasLabel",
+          "detail": "no matching code prop"
+        }
+      ]
+    },
+    {
+      "component": "Combobox",
+      "codeSource": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/Combobox/Combobox.tsx",
+      "designName": "Combobox",
+      "findings": [
+        {
+          "status": "code-only",
+          "codeProp": "menuItemType",
+          "detail": "enum [simple, complex] — no matching design property"
+        },
+        {
+          "status": "agree",
+          "codeProp": "showEndIcon",
+          "designProp": "hasEndIcon",
+          "detail": "matched via alias rule (showEndIcon ⇄ hasEndIcon)"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "placeholder",
+          "detail": "string — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "menuItemBorderBottom",
+          "detail": "boolean — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "open",
+          "detail": "boolean — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "defaultOpen",
+          "detail": "boolean — no matching design property"
+        },
+        {
+          "status": "agree",
+          "codeProp": "disabled",
+          "designProp": "isDisabled",
+          "detail": "boolean modeled as a true/false variant axis in design (disabled ⇄ isDisabled)"
+        },
+        {
+          "status": "design-only",
+          "designProp": "state",
+          "detail": "variant [default, hover, focus, open] — no matching code prop"
+        },
+        {
+          "status": "design-only",
+          "designProp": "filled",
+          "detail": "variant [false, true] — no matching code prop"
+        },
+        {
+          "status": "design-only",
+          "designProp": "hasStartIcon",
+          "detail": "no matching code prop"
+        },
+        {
+          "status": "design-only",
+          "designProp": "hasHint",
+          "detail": "no matching code prop"
+        },
+        {
+          "status": "design-only",
+          "designProp": "hasLabel",
+          "detail": "no matching code prop"
+        },
+        {
+          "status": "design-only",
+          "designProp": "content",
+          "detail": "no matching code prop — a design TEXT property with no code counterpart is often bound to React `children` (invisible in a props interface); confirm before treating as drift"
+        }
+      ]
+    },
+    {
+      "component": "Countdown",
+      "codeSource": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/Countdown/Countdown.tsx",
+      "designName": "Countdown",
+      "findings": [
+        {
+          "status": "design-only",
+          "designProp": "variant",
+          "detail": "variant [default, expiring] — no matching code prop"
+        },
+        {
+          "status": "design-only",
+          "designProp": "timeRemaining",
+          "detail": "no matching code prop — a design TEXT property with no code counterpart is often bound to React `children` (invisible in a props interface); confirm before treating as drift"
+        }
+      ]
+    },
+    {
+      "component": "Dialog",
+      "codeSource": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/Dialog/Dialog.tsx",
+      "designName": "Dialog",
+      "findings": [
+        {
+          "status": "agree",
+          "codeProp": "size",
+          "designProp": "size"
+        },
+        {
+          "status": "agree",
+          "codeProp": "hasNavigation",
+          "designProp": "hasNavigation"
+        }
+      ]
+    },
+    {
+      "component": "Dropdown",
+      "codeSource": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/Dropdown/Dropdown.tsx",
+      "designName": "Dropdown",
+      "findings": [
+        {
+          "status": "code-only",
+          "codeProp": "label",
+          "detail": "string — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "open",
+          "detail": "boolean — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "defaultOpen",
+          "detail": "boolean — no matching design property"
+        },
+        {
+          "status": "agree",
+          "codeProp": "disabled",
+          "designProp": "isDisabled",
+          "detail": "boolean modeled as a true/false variant axis in design (disabled ⇄ isDisabled)"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "align",
+          "detail": "enum [start, center, end] — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "side",
+          "detail": "enum [top, right, bottom, left] — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "sideOffset",
+          "detail": "number — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "collisionPadding",
+          "detail": "number — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "trapFocus",
+          "detail": "boolean — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "ariaHaspopup",
+          "detail": "enum [menu, listbox, dialog] — no matching design property"
+        },
+        {
+          "status": "design-only",
+          "designProp": "state",
+          "detail": "variant [default, hover, focus, open] — no matching code prop"
+        },
+        {
+          "status": "design-only",
+          "designProp": "isFilled",
+          "detail": "variant [false, true] — no matching code prop"
+        },
+        {
+          "status": "design-only",
+          "designProp": "hasStartIcon",
+          "detail": "no matching code prop"
+        },
+        {
+          "status": "design-only",
+          "designProp": "content",
+          "detail": "no matching code prop — a design TEXT property with no code counterpart is often bound to React `children` (invisible in a props interface); confirm before treating as drift"
+        }
+      ]
+    },
+    {
+      "component": "ExpandableContent",
+      "codeSource": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/ExpandableContent/ExpandableContent.tsx",
+      "designName": "Expandable content",
+      "findings": [
+        {
+          "status": "code-only",
+          "codeProp": "defaultExpanded",
+          "detail": "boolean — no matching design property"
+        },
+        {
+          "status": "agree",
+          "codeProp": "expanded",
+          "designProp": "isExpanded",
+          "detail": "boolean modeled as a true/false variant axis in design (expanded ⇄ isExpanded)"
+        },
+        {
+          "status": "design-only",
+          "designProp": "text",
+          "detail": "no matching code prop — a design TEXT property with no code counterpart is often bound to React `children` (invisible in a props interface); confirm before treating as drift"
+        }
+      ]
+    },
+    {
+      "component": "FileUpload",
+      "codeSource": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/FileUpload/FileUpload.tsx",
+      "designName": "File upload",
+      "findings": [
+        {
+          "status": "agree",
+          "codeProp": "imageFormat",
+          "designProp": "imageFormat"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "accept",
+          "detail": "string — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "showThumbnail",
+          "detail": "boolean — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "label",
+          "detail": "string — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "ariaLabel",
+          "detail": "string — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "hint",
+          "detail": "string — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "info",
+          "detail": "string — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "error",
+          "detail": "string — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "initialValue",
+          "detail": "string — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "resetOnFail",
+          "detail": "boolean — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "fileNoun",
+          "detail": "string — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "name",
+          "detail": "string — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "required",
+          "detail": "boolean — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "form",
+          "detail": "string — no matching design property"
+        },
+        {
+          "status": "design-only",
+          "designProp": "state",
+          "detail": "variant [default, focus, hover] — no matching code prop"
+        },
+        {
+          "status": "design-only",
+          "designProp": "imageState",
+          "detail": "variant [empty, loading, filled] — no matching code prop"
+        },
+        {
+          "status": "design-only",
+          "designProp": "hasError",
+          "detail": "variant [false, true] — no matching code prop"
+        },
+        {
+          "status": "design-only",
+          "designProp": "hasLabel",
+          "detail": "no matching code prop"
+        },
+        {
+          "status": "design-only",
+          "designProp": "hasHint",
+          "detail": "no matching code prop"
+        }
+      ]
+    },
+    {
+      "component": "FloatingBar",
+      "codeSource": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/FloatingBar/FloatingBar.tsx",
+      "designName": "Floating bar",
+      "findings": [
+        {
+          "status": "code-only",
+          "codeProp": "ariaLabel",
+          "detail": "string — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "labelledBy",
+          "detail": "string — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "isScrollable",
+          "detail": "boolean — no matching design property"
+        }
+      ]
+    },
+    {
+      "component": "Footer",
+      "codeSource": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/server/Footer/Footer.tsx",
+      "designName": "Footer",
+      "findings": [
+        {
+          "status": "code-only",
+          "codeProp": "className",
+          "detail": "string — no matching design property"
+        },
+        {
+          "status": "design-only",
+          "designProp": "breakpoint",
+          "detail": "variant [sm, lg] — no matching code prop"
+        }
+      ]
+    },
+    {
+      "component": "IconButton",
+      "codeSource": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/IconButton/IconButton.tsx",
+      "designName": "Icon button",
+      "findings": [
+        {
+          "status": "design-only",
+          "designProp": "variant",
+          "detail": "variant [primary, secondary, bare, knockout, bare knockout] — no matching code prop"
+        },
+        {
+          "status": "design-only",
+          "designProp": "state",
+          "detail": "variant [default, hover, active, focus] — no matching code prop"
+        },
+        {
+          "status": "design-only",
+          "designProp": "isDisabled",
+          "detail": "variant [false, true] — no matching code prop"
+        }
+      ]
+    },
+    {
+      "component": "Input",
+      "codeSource": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/Input/Input.tsx",
+      "designName": "Input",
+      "findings": [
+        {
+          "status": "code-only",
+          "codeProp": "className",
+          "detail": "string — no matching design property"
+        },
+        {
+          "status": "design-only",
+          "designProp": "state",
+          "detail": "variant [default, hover, focus] — no matching code prop"
+        },
+        {
+          "status": "design-only",
+          "designProp": "isFilled",
+          "detail": "variant [false, true] — no matching code prop"
+        },
+        {
+          "status": "design-only",
+          "designProp": "hasError",
+          "detail": "variant [false, true] — no matching code prop"
+        },
+        {
+          "status": "design-only",
+          "designProp": "isDisabled",
+          "detail": "variant [false, true] — no matching code prop"
+        },
+        {
+          "status": "design-only",
+          "designProp": "hasStartIcon",
+          "detail": "no matching code prop"
+        },
+        {
+          "status": "design-only",
+          "designProp": "hasEndIcon",
+          "detail": "no matching code prop"
+        },
+        {
+          "status": "design-only",
+          "designProp": "hasHint",
+          "detail": "no matching code prop"
+        },
+        {
+          "status": "design-only",
+          "designProp": "hasLabel",
+          "detail": "no matching code prop"
+        },
+        {
+          "status": "design-only",
+          "designProp": "content",
+          "detail": "no matching code prop — a design TEXT property with no code counterpart is often bound to React `children` (invisible in a props interface); confirm before treating as drift"
+        }
+      ]
+    },
+    {
+      "component": "Map",
+      "codeSource": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/server/Map/Map.tsx",
+      "designName": "Map",
+      "findings": [
+        {
+          "status": "code-only",
+          "codeProp": "ariaLabel",
+          "detail": "string — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "showControls",
+          "detail": "boolean — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "showOverlay",
+          "detail": "boolean — no matching design property"
+        },
+        {
+          "status": "agree",
+          "codeProp": "isNested",
+          "designProp": "nested",
+          "detail": "boolean modeled as a true/false variant axis in design (isNested ⇄ nested)"
+        },
+        {
+          "status": "design-only",
+          "designProp": "breakpoint",
+          "detail": "variant [sm, lg] — no matching code prop"
+        }
+      ]
+    },
+    {
+      "component": "MediaPlayer",
+      "codeSource": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/MediaPlayer/MediaPlayer.tsx",
+      "designName": "Media player",
+      "findings": [
+        {
+          "status": "code-only",
+          "codeProp": "audioSrc",
+          "detail": "string — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "title",
+          "detail": "string — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "subtitle",
+          "detail": "string — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "imgSrc",
+          "detail": "string — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "imgAlt",
+          "detail": "string — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "variant",
+          "detail": "enum [default, compact, mini] — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "autoPlay",
+          "detail": "boolean — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "preload",
+          "detail": "enum [metadata, auto, none] — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "loop",
+          "detail": "boolean — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "startTime",
+          "detail": "number — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "showVolume",
+          "detail": "boolean — no matching design property"
+        },
+        {
+          "status": "design-only",
+          "designProp": "playing",
+          "detail": "variant [true, false] — no matching code prop"
+        },
+        {
+          "status": "design-only",
+          "designProp": "size",
+          "detail": "variant [sm, lg] — no matching code prop"
+        },
+        {
+          "status": "design-only",
+          "designProp": "hasVolumeControl",
+          "detail": "no matching code prop"
+        },
+        {
+          "status": "design-only",
+          "designProp": "secondaryText",
+          "detail": "no matching code prop — a design TEXT property with no code counterpart is often bound to React `children` (invisible in a props interface); confirm before treating as drift"
+        },
+        {
+          "status": "design-only",
+          "designProp": "text",
+          "detail": "no matching code prop — a design TEXT property with no code counterpart is often bound to React `children` (invisible in a props interface); confirm before treating as drift"
+        }
+      ]
+    },
+    {
+      "component": "RadioButtonGroup",
+      "codeSource": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/RadioButtonGroup/RadioButtonGroup.tsx",
+      "designName": "Radio button group",
+      "findings": [
+        {
+          "status": "code-only",
+          "codeProp": "label",
+          "detail": "string — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "ariaLabel",
+          "detail": "string — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "hint",
+          "detail": "string — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "info",
+          "detail": "string — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "error",
+          "detail": "string — no matching design property"
+        },
+        {
+          "status": "design-only",
+          "designProp": "hasLabel",
+          "detail": "no matching code prop"
+        },
+        {
+          "status": "design-only",
+          "designProp": "hasError",
+          "detail": "no matching code prop"
+        },
+        {
+          "status": "design-only",
+          "designProp": "hasDescription",
+          "detail": "no matching code prop"
+        }
+      ]
+    },
+    {
+      "component": "Search",
+      "codeSource": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/Search/Search.tsx",
+      "designName": "Search",
+      "findings": [
+        {
+          "status": "code-only",
+          "codeProp": "value",
+          "detail": "string — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "defaultValue",
+          "detail": "string — no matching design property"
+        },
+        {
+          "status": "agree",
+          "codeProp": "placeholder",
+          "designProp": "placeholderText",
+          "detail": "matched via alias rule (placeholder ⇄ placeholderText)"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "loading",
+          "detail": "boolean — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "noResultsMessage",
+          "detail": "string — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "viewAllLabel",
+          "detail": "string — no matching design property"
+        },
+        {
+          "status": "design-only",
+          "designProp": "state",
+          "detail": "variant [default, hover, focus, open] — no matching code prop"
+        },
+        {
+          "status": "design-only",
+          "designProp": "isFilled",
+          "detail": "variant [false, true] — no matching code prop"
+        },
+        {
+          "status": "design-only",
+          "designProp": "searchTerm",
+          "detail": "no matching code prop — a design TEXT property with no code counterpart is often bound to React `children` (invisible in a props interface); confirm before treating as drift"
+        }
+      ]
+    },
+    {
+      "component": "Select",
+      "codeSource": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/Select/Select.tsx",
+      "designName": "Select",
+      "findings": [
+        {
+          "status": "agree",
+          "codeProp": "disabled",
+          "designProp": "isDisabled",
+          "detail": "boolean modeled as a true/false variant axis in design (disabled ⇄ isDisabled)"
+        },
+        {
+          "status": "design-only",
+          "designProp": "state",
+          "detail": "variant [default, hover, focus, open] — no matching code prop"
+        },
+        {
+          "status": "design-only",
+          "designProp": "isFilled",
+          "detail": "variant [false, true] — no matching code prop"
+        },
+        {
+          "status": "design-only",
+          "designProp": "hasError",
+          "detail": "variant [true, false] — no matching code prop"
+        },
+        {
+          "status": "design-only",
+          "designProp": "hasStartIcon",
+          "detail": "no matching code prop"
+        },
+        {
+          "status": "design-only",
+          "designProp": "hasLabel",
+          "detail": "no matching code prop"
+        },
+        {
+          "status": "design-only",
+          "designProp": "hasHint",
+          "detail": "no matching code prop"
+        },
+        {
+          "status": "design-only",
+          "designProp": "content",
+          "detail": "no matching code prop — a design TEXT property with no code counterpart is often bound to React `children` (invisible in a props interface); confirm before treating as drift"
+        }
+      ]
+    },
+    {
+      "component": "SelectionCard",
+      "codeSource": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/server/SelectionCard/SelectionCard.tsx",
+      "designName": "Selection card",
+      "findings": [
+        {
+          "status": "agree",
+          "codeProp": "label",
+          "designProp": "label"
+        },
+        {
+          "status": "agree",
+          "codeProp": "isSelected",
+          "designProp": "isSelected",
+          "detail": "boolean modeled as a true/false variant axis in design (isSelected ⇄ isSelected)"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "ariaLabel",
+          "detail": "string — no matching design property"
+        },
+        {
+          "status": "design-only",
+          "designProp": "state",
+          "detail": "variant [default, hover, focus] — no matching code prop"
+        }
+      ]
+    },
+    {
+      "component": "Stepper",
+      "codeSource": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/Stepper/Stepper.tsx",
+      "designName": "Stepper",
+      "findings": [
+        {
+          "status": "code-only",
+          "codeProp": "steps",
+          "detail": "number — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "activeStep",
+          "detail": "number — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "activeLabel",
+          "detail": "string — no matching design property"
+        },
+        {
+          "status": "design-only",
+          "designProp": "variant",
+          "detail": "variant [numeric, text] — no matching code prop"
+        },
+        {
+          "status": "design-only",
+          "designProp": "show step 3",
+          "detail": "no matching code prop"
+        },
+        {
+          "status": "design-only",
+          "designProp": "show step 4",
+          "detail": "no matching code prop"
+        }
+      ]
+    },
+    {
+      "component": "SubscriptionCard",
+      "codeSource": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/server/SubscriptionCard/SubscriptionCard.tsx",
+      "designName": "Subscription card",
+      "findings": [
+        {
+          "status": "code-only",
+          "codeProp": "terms",
+          "detail": "string — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "cancelText",
+          "detail": "string — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "cancelHref",
+          "detail": "string — no matching design property"
+        },
+        {
+          "status": "agree",
+          "codeProp": "isActive",
+          "designProp": "isActive",
+          "detail": "boolean modeled as a true/false variant axis in design (isActive ⇄ isActive)"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "nextBillingDate",
+          "detail": "string — no matching design property"
+        },
+        {
+          "status": "agree",
+          "codeProp": "memberSince",
+          "designProp": "memberSince"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "inactiveSubtitle",
+          "detail": "string — no matching design property"
+        },
+        {
+          "status": "design-only",
+          "designProp": "text",
+          "detail": "no matching code prop — a design TEXT property with no code counterpart is often bound to React `children` (invisible in a props interface); confirm before treating as drift"
+        },
+        {
+          "status": "design-only",
+          "designProp": "billingDate",
+          "detail": "no matching code prop — a design TEXT property with no code counterpart is often bound to React `children` (invisible in a props interface); confirm before treating as drift"
+        }
+      ]
+    },
+    {
+      "component": "Tabs",
+      "codeSource": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/Tabs/Tabs.tsx",
+      "designName": "Tabs",
+      "findings": [
+        {
+          "status": "agree",
+          "codeProp": "type",
+          "designProp": "type"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "value",
+          "detail": "string — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "defaultValue",
+          "detail": "string — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "activationMode",
+          "detail": "enum [automatic, manual] — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "loop",
+          "detail": "boolean — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "ariaLabel",
+          "detail": "string — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "disabled",
+          "detail": "boolean — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "className",
+          "detail": "string — no matching design property"
+        },
+        {
+          "status": "design-only",
+          "designProp": "show tab 3",
+          "detail": "no matching code prop"
+        },
+        {
+          "status": "design-only",
+          "designProp": "show tab 4",
+          "detail": "no matching code prop"
+        },
+        {
+          "status": "design-only",
+          "designProp": "show tab 5",
+          "detail": "no matching code prop"
+        }
+      ]
+    },
+    {
+      "component": "Textarea",
+      "codeSource": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/Textarea/Textarea.tsx",
+      "designName": "Textarea",
+      "findings": [
+        {
+          "status": "code-only",
+          "codeProp": "label",
+          "detail": "string — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "ariaLabel",
+          "detail": "string — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "hint",
+          "detail": "string — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "error",
+          "detail": "string — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "info",
+          "detail": "string — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "value",
+          "detail": "string — no matching design property"
+        },
+        {
+          "status": "code-only",
+          "codeProp": "defaultValue",
+          "detail": "string — no matching design property"
+        },
+        {
+          "status": "agree",
+          "codeProp": "disabled",
+          "designProp": "isDisabled",
+          "detail": "boolean modeled as a true/false variant axis in design (disabled ⇄ isDisabled)"
+        },
+        {
+          "status": "design-only",
+          "designProp": "state",
+          "detail": "variant [default, hover, focus] — no matching code prop"
+        },
+        {
+          "status": "design-only",
+          "designProp": "isFilled",
+          "detail": "variant [false, true] — no matching code prop"
+        },
+        {
+          "status": "design-only",
+          "designProp": "hasError",
+          "detail": "variant [true, false] — no matching code prop"
+        },
+        {
+          "status": "design-only",
+          "designProp": "hasStartIcon",
+          "detail": "no matching code prop"
+        },
+        {
+          "status": "design-only",
+          "designProp": "hasEndIcon",
+          "detail": "no matching code prop"
+        },
+        {
+          "status": "design-only",
+          "designProp": "hasLabel",
+          "detail": "no matching code prop"
+        },
+        {
+          "status": "design-only",
+          "designProp": "hasHint",
+          "detail": "no matching code prop"
+        },
+        {
+          "status": "design-only",
+          "designProp": "content",
+          "detail": "no matching code prop — a design TEXT property with no code counterpart is often bound to React `children` (invisible in a props interface); confirm before treating as drift"
+        }
+      ]
+    },
+    {
+      "component": "TextLink",
+      "codeSource": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/TextLink/TextLink.tsx",
+      "designName": "Text link",
+      "findings": [
+        {
+          "status": "design-only",
+          "designProp": "emphasis",
+          "detail": "variant [strong, subtle, inverted, brand] — no matching code prop"
+        },
+        {
+          "status": "design-only",
+          "designProp": "state",
+          "detail": "variant [default, hover, active, focus, disabled] — no matching code prop"
+        },
+        {
+          "status": "design-only",
+          "designProp": "hasStartIcon",
+          "detail": "no matching code prop"
+        },
+        {
+          "status": "design-only",
+          "designProp": "hasEndIcon",
+          "detail": "no matching code prop"
+        },
+        {
+          "status": "design-only",
+          "designProp": "text",
+          "detail": "no matching code prop — a design TEXT property with no code counterpart is often bound to React `children` (invisible in a props interface); confirm before treating as drift"
+        }
+      ]
+    },
+    {
+      "component": "ToggleGroup",
+      "codeSource": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/ToggleGroup/ToggleGroup.tsx",
+      "designName": "Toggle group",
+      "findings": [
+        {
+          "status": "code-only",
+          "codeProp": "ariaLabel",
+          "detail": "string — no matching design property"
+        },
+        {
+          "status": "design-only",
+          "designProp": "showItem3",
+          "detail": "no matching code prop"
+        },
+        {
+          "status": "design-only",
+          "designProp": "showItem4",
+          "detail": "no matching code prop"
+        },
+        {
+          "status": "design-only",
+          "designProp": "showItem5",
+          "detail": "no matching code prop"
+        }
+      ]
+    }
+  ],
+  "codeOnly": [
+    {
+      "name": "ActionCard",
+      "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/server/ActionCard/ActionCard.tsx"
+    },
+    {
+      "name": "Chip",
+      "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/server/Chip/Chip.tsx"
+    },
+    {
+      "name": "ComboboxField",
+      "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/Combobox/Combobox.tsx"
+    },
+    {
+      "name": "ContentCard",
+      "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/server/ContentCard/ContentCard.tsx"
+    },
+    {
+      "name": "Control",
+      "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/Control/Control.tsx"
+    },
+    {
+      "name": "DatePicker",
+      "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/DatePicker/DatePicker.tsx"
+    },
+    {
+      "name": "EventPanel",
+      "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/server/EventPanel/EventPanel.tsx"
+    },
+    {
+      "name": "FormElement",
+      "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/FormElement/FormElement.tsx"
+    },
+    {
+      "name": "Heading",
+      "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/server/Heading/Heading.tsx"
+    },
+    {
+      "name": "ImagePanel",
+      "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/server/ImagePanel/ImagePanel.tsx"
+    },
+    {
+      "name": "InfoPopover",
+      "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/InfoPopover/InfoPopover.tsx"
+    },
+    {
+      "name": "InputField",
+      "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/Input/Input.tsx"
+    },
+    {
+      "name": "MediaCard",
+      "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/server/MediaCard/MediaCard.tsx"
+    },
+    {
+      "name": "MediaControl",
+      "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/MediaControl/MediaControl.tsx"
+    },
+    {
+      "name": "NavigationBar",
+      "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/server/NavigationBar/NavigationBar.tsx"
+    },
+    {
+      "name": "NavigationContainer",
+      "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/server/NavigationContainer/NavigationContainer.tsx"
+    },
+    {
+      "name": "NavigationDropdown",
+      "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/NavigationDropdown/NavigationDropdown.tsx"
+    },
+    {
+      "name": "Scroller",
+      "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/Scroller/Scroller.tsx"
+    },
+    {
+      "name": "ScrollerRow",
+      "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/server/ScrollerRow/ScrollerRow.tsx"
+    },
+    {
+      "name": "Slider",
+      "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/Slider/Slider.tsx"
+    },
+    {
+      "name": "TextWithRef",
+      "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/server/Text/Text.tsx"
+    },
+    {
+      "name": "Visibility",
+      "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/server/Visibility/Visibility.tsx"
+    }
+  ],
+  "designOnly": [
+    "Controls",
+    ".Day",
+    ".Month",
+    ".Calendar",
+    "Radio button",
+    "Tag",
+    ".avatar",
+    ".comboboxDropdown",
+    ".comboChip",
+    ".Dropdown-insert",
+    ".fileThumbnail",
+    "Interactive list item",
+    ".Menu item",
+    ".Search terms",
+    ".Search dropdown",
+    ".tabTrigger",
+    ".toggleGroupItem",
+    "ad",
+    "Card",
+    ".dotIndicator",
+    ".hero-carousel",
+    ".carousel-rail",
+    ".Map controls",
+    ".Segmented map controls",
+    ".Map marker",
+    ".Progress bar",
+    "Navigation",
+    ".Stepper text item",
+    ".Stepper number rail",
+    ".Stepper number item",
+    "Sticky nav",
+    ".Popover",
+    ".scrollableControls",
+    "Slot",
+    ".Inline danger",
+    ".Inline hint",
+    ".Field label"
+  ],
+  "stats": {
+    "components": 53,
+    "matched": 31,
+    "propsAgree": 27,
+    "propsDiffer": 220
+  }
+}

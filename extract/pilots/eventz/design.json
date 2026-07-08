@@ -1,0 +1,1429 @@
+{
+  "fileName": "DEMO Eventz Design System",
+  "fileKey": "E7oXr98i91HYQGZxA2USOQ",
+  "extractedAt": "design-dump-v1 (library pages; icon/template pages omitted)",
+  "components": [
+    {
+      "name": "Badge",
+      "page": "\u2705 Badge",
+      "variantProps": {
+        "variant": [
+          "purple",
+          "blue",
+          "pink",
+          "brand",
+          "orange"
+        ],
+        "hasIcon": [
+          "true",
+          "false"
+        ],
+        "hasLabel": [
+          "false",
+          "true"
+        ]
+      },
+      "boolProps": [],
+      "textProps": [
+        "label"
+      ],
+      "swapProps": []
+    },
+    {
+      "name": "Button",
+      "page": "\u2705 Button",
+      "variantProps": {
+        "variant": [
+          "primary",
+          "secondary",
+          "bare",
+          "knockout"
+        ],
+        "state": [
+          "default",
+          "hover",
+          "active",
+          "focus"
+        ],
+        "isDisabled": [
+          "false",
+          "true"
+        ]
+      },
+      "boolProps": [
+        "hasStartIcon",
+        "hasEndIcon"
+      ],
+      "textProps": [
+        "text"
+      ],
+      "swapProps": [
+        "startIcon",
+        "endIcon"
+      ]
+    },
+    {
+      "name": "Icon button",
+      "page": "\u2705 Button",
+      "variantProps": {
+        "variant": [
+          "primary",
+          "secondary",
+          "bare",
+          "knockout",
+          "bare knockout"
+        ],
+        "state": [
+          "default",
+          "hover",
+          "active",
+          "focus"
+        ],
+        "isDisabled": [
+          "false",
+          "true"
+        ]
+      },
+      "boolProps": [],
+      "textProps": [],
+      "swapProps": [
+        "icon"
+      ]
+    },
+    {
+      "name": "Text link",
+      "page": "\u2705 Button",
+      "variantProps": {
+        "emphasis": [
+          "strong",
+          "subtle",
+          "inverted",
+          "brand"
+        ],
+        "state": [
+          "default",
+          "hover",
+          "active",
+          "focus",
+          "disabled"
+        ]
+      },
+      "boolProps": [
+        "hasStartIcon",
+        "hasEndIcon"
+      ],
+      "textProps": [
+        "text"
+      ],
+      "swapProps": [
+        "startIcon",
+        "endicon"
+      ]
+    },
+    {
+      "name": "Controls",
+      "page": "\u2705 Button",
+      "variantProps": {
+        "style": [
+          "brand",
+          "dark",
+          "light"
+        ],
+        "state": [
+          "default",
+          "hover",
+          "active"
+        ],
+        "isFocused": [
+          "false",
+          "true"
+        ],
+        "size": [
+          "lg",
+          "sm"
+        ]
+      },
+      "boolProps": [],
+      "textProps": [],
+      "swapProps": []
+    },
+    {
+      "name": "Checkbox",
+      "page": "\u2705 Checkbox",
+      "variantProps": {
+        "state": [
+          "default",
+          "focus",
+          "hover"
+        ],
+        "isChecked": [
+          "true",
+          "false"
+        ],
+        "isDisabled": [
+          "false",
+          "true"
+        ]
+      },
+      "boolProps": [
+        "hasHint"
+      ],
+      "textProps": [
+        "label"
+      ],
+      "swapProps": []
+    },
+    {
+      "name": "Checkbox group",
+      "page": "\u2705 Checkbox",
+      "variantProps": {},
+      "boolProps": [
+        "hasError",
+        "hasDescription",
+        "hasLabel"
+      ],
+      "textProps": [],
+      "swapProps": []
+    },
+    {
+      "name": ".Day",
+      "page": "\u2705 Date picker",
+      "variantProps": {
+        "state": [
+          "default",
+          "hover",
+          "focus",
+          "disabled"
+        ],
+        "isSelected": [
+          "true",
+          "false"
+        ],
+        "isInRange": [
+          "true",
+          "false"
+        ],
+        "position": [
+          "default",
+          "left",
+          "right",
+          "middle"
+        ]
+      },
+      "boolProps": [
+        "isToday"
+      ],
+      "textProps": [],
+      "swapProps": []
+    },
+    {
+      "name": ".Month",
+      "page": "\u2705 Date picker",
+      "variantProps": {},
+      "boolProps": [],
+      "textProps": [],
+      "swapProps": []
+    },
+    {
+      "name": ".Calendar",
+      "page": "\u2705 Date picker",
+      "variantProps": {
+        "breakpoint": [
+          "sm",
+          "lg"
+        ]
+      },
+      "boolProps": [],
+      "textProps": [],
+      "swapProps": []
+    },
+    {
+      "name": "Input",
+      "page": "\u2705 Input",
+      "variantProps": {
+        "state": [
+          "default",
+          "hover",
+          "focus"
+        ],
+        "isFilled": [
+          "false",
+          "true"
+        ],
+        "hasError": [
+          "false",
+          "true"
+        ],
+        "isDisabled": [
+          "false",
+          "true"
+        ]
+      },
+      "boolProps": [
+        "hasStartIcon",
+        "hasEndIcon",
+        "hasHint",
+        "hasLabel"
+      ],
+      "textProps": [
+        "content"
+      ],
+      "swapProps": [
+        "startIcon",
+        "endIcon"
+      ]
+    },
+    {
+      "name": "Radio button",
+      "page": "\u2705 Radio button",
+      "variantProps": {
+        "state": [
+          "default",
+          "focus",
+          "hover"
+        ],
+        "isChecked": [
+          "true",
+          "false"
+        ],
+        "isDisabled": [
+          "false",
+          "true"
+        ]
+      },
+      "boolProps": [
+        "hasHint"
+      ],
+      "textProps": [
+        "label"
+      ],
+      "swapProps": []
+    },
+    {
+      "name": "Radio button group",
+      "page": "\u2705 Radio button",
+      "variantProps": {},
+      "boolProps": [
+        "hasLabel",
+        "hasError",
+        "hasDescription"
+      ],
+      "textProps": [],
+      "swapProps": []
+    },
+    {
+      "name": "Tag",
+      "page": "\u2705 Tag ",
+      "variantProps": {
+        "state": [
+          "default",
+          "hover",
+          "focus"
+        ],
+        "isInteractive": [
+          "true",
+          "false"
+        ],
+        "variant": [
+          "parent",
+          "child"
+        ],
+        "isActive": [
+          "false",
+          "true"
+        ]
+      },
+      "boolProps": [],
+      "textProps": [
+        "label"
+      ],
+      "swapProps": []
+    },
+    {
+      "name": "Textarea",
+      "page": "\u2705 Textarea",
+      "variantProps": {
+        "state": [
+          "default",
+          "hover",
+          "focus"
+        ],
+        "isFilled": [
+          "false",
+          "true"
+        ],
+        "hasError": [
+          "true",
+          "false"
+        ],
+        "isDisabled": [
+          "false",
+          "true"
+        ]
+      },
+      "boolProps": [
+        "hasStartIcon",
+        "hasEndIcon",
+        "hasLabel",
+        "hasHint"
+      ],
+      "textProps": [
+        "content"
+      ],
+      "swapProps": [
+        "startIcon",
+        "endIcon"
+      ]
+    },
+    {
+      "name": "Accordion",
+      "page": "\u2705 Accordion",
+      "variantProps": {
+        "breakpoint": [
+          "sm",
+          "lg"
+        ],
+        "state": [
+          "default",
+          "hover",
+          "focused"
+        ],
+        "isExpanded": [
+          "false",
+          "true"
+        ],
+        "emphasis": [
+          "strong",
+          "weak"
+        ]
+      },
+      "boolProps": [
+        "hasImage",
+        "hasIntro",
+        "hasSlot"
+      ],
+      "textProps": [
+        "title"
+      ],
+      "swapProps": []
+    },
+    {
+      "name": "Expandable content",
+      "page": "\u2705 Accordion",
+      "variantProps": {
+        "isExpanded": [
+          "false",
+          "true"
+        ]
+      },
+      "boolProps": [],
+      "textProps": [
+        "text"
+      ],
+      "swapProps": []
+    },
+    {
+      "name": "Alert",
+      "page": "\u2705 Alert",
+      "variantProps": {
+        "variant": [
+          "success",
+          "info",
+          "warning",
+          "danger"
+        ]
+      },
+      "boolProps": [
+        "hasIcon",
+        "isDismissible",
+        "hasLink",
+        "hasTitle",
+        "hasClose"
+      ],
+      "textProps": [
+        "descriptionText",
+        "titleText"
+      ],
+      "swapProps": []
+    },
+    {
+      "name": "Avatar group",
+      "page": "\u2705 Avatar group",
+      "variantProps": {
+        "breakpoint": [
+          "sm",
+          "lg"
+        ]
+      },
+      "boolProps": [],
+      "textProps": [
+        "count"
+      ],
+      "swapProps": []
+    },
+    {
+      "name": ".avatar",
+      "page": "\u2705 Avatar group",
+      "variantProps": {
+        "breakpoint": [
+          "sm",
+          "lg"
+        ],
+        "state": [
+          "default",
+          "hover",
+          "focus"
+        ]
+      },
+      "boolProps": [],
+      "textProps": [],
+      "swapProps": []
+    },
+    {
+      "name": "Breadcrumbs",
+      "page": "\u2705 Breadcrumbs",
+      "variantProps": {
+        "itemCount": [
+          "2",
+          "3",
+          "4",
+          "5+"
+        ]
+      },
+      "boolProps": [],
+      "textProps": [],
+      "swapProps": []
+    },
+    {
+      "name": "Combobox",
+      "page": "\u2705 Combobox",
+      "variantProps": {
+        "state": [
+          "default",
+          "hover",
+          "focus",
+          "open"
+        ],
+        "filled": [
+          "false",
+          "true"
+        ],
+        "isDisabled": [
+          "false",
+          "true"
+        ]
+      },
+      "boolProps": [
+        "hasStartIcon",
+        "hasHint",
+        "hasLabel",
+        "hasEndIcon"
+      ],
+      "textProps": [
+        "content"
+      ],
+      "swapProps": [
+        "startIcon",
+        "endIcon"
+      ]
+    },
+    {
+      "name": ".comboboxDropdown",
+      "page": "\u2705 Combobox",
+      "variantProps": {
+        "style": [
+          "simple",
+          "complex"
+        ]
+      },
+      "boolProps": [],
+      "textProps": [],
+      "swapProps": []
+    },
+    {
+      "name": ".comboChip",
+      "page": "\u2705 Combobox",
+      "variantProps": {
+        "state": [
+          "default",
+          "hover",
+          "focus"
+        ]
+      },
+      "boolProps": [],
+      "textProps": [
+        "text"
+      ],
+      "swapProps": []
+    },
+    {
+      "name": "Dialog",
+      "page": "\u2705 Dialog",
+      "variantProps": {
+        "size": [
+          "md",
+          "sm",
+          "lg"
+        ]
+      },
+      "boolProps": [
+        "hasNavigation"
+      ],
+      "textProps": [],
+      "swapProps": []
+    },
+    {
+      "name": ".Dropdown-insert",
+      "page": "\u2705 Dropdown",
+      "variantProps": {
+        "style": [
+          "date range",
+          "date single",
+          "location",
+          "slot"
+        ]
+      },
+      "boolProps": [],
+      "textProps": [],
+      "swapProps": []
+    },
+    {
+      "name": "Dropdown",
+      "page": "\u2705 Dropdown",
+      "variantProps": {
+        "state": [
+          "default",
+          "hover",
+          "focus",
+          "open"
+        ],
+        "isFilled": [
+          "false",
+          "true"
+        ],
+        "isDisabled": [
+          "false",
+          "true"
+        ]
+      },
+      "boolProps": [
+        "hasStartIcon"
+      ],
+      "textProps": [
+        "content"
+      ],
+      "swapProps": [
+        "startIcon"
+      ]
+    },
+    {
+      "name": "File upload",
+      "page": "\u2705 File uploader",
+      "variantProps": {
+        "state": [
+          "default",
+          "focus",
+          "hover"
+        ],
+        "imageState": [
+          "empty",
+          "loading",
+          "filled"
+        ],
+        "imageFormat": [
+          "photo",
+          "poster"
+        ],
+        "hasError": [
+          "false",
+          "true"
+        ]
+      },
+      "boolProps": [
+        "hasLabel",
+        "hasHint"
+      ],
+      "textProps": [],
+      "swapProps": []
+    },
+    {
+      "name": ".fileThumbnail",
+      "page": "\u2705 File uploader",
+      "variantProps": {
+        "aspectRatio": [
+          "1:1",
+          "3:4"
+        ],
+        "loading": [
+          "false",
+          "true"
+        ]
+      },
+      "boolProps": [],
+      "textProps": [],
+      "swapProps": []
+    },
+    {
+      "name": "Interactive list item",
+      "page": "\u2705 Interactive list item ",
+      "variantProps": {
+        "state": [
+          "default",
+          "focus",
+          "hover"
+        ],
+        "isRemovable": [
+          "false",
+          "true"
+        ],
+        "breakpoint": [
+          "lg",
+          "sm"
+        ]
+      },
+      "boolProps": [
+        "hasBottomBorder",
+        "hasSupportingText",
+        "hasHighlightText"
+      ],
+      "textProps": [
+        "title",
+        "supportingText",
+        "highlightText"
+      ],
+      "swapProps": []
+    },
+    {
+      "name": ".Menu item",
+      "page": "\u2705 Menu item",
+      "variantProps": {
+        "state": [
+          "default",
+          "hover",
+          "focus"
+        ],
+        "type": [
+          "simple",
+          "complex"
+        ],
+        "isSelected": [
+          "false",
+          "true"
+        ]
+      },
+      "boolProps": [
+        "startIcon",
+        "bottomBorder"
+      ],
+      "textProps": [
+        "text",
+        "titleText",
+        "supportingText"
+      ],
+      "swapProps": [
+        "\u21aa startIcon"
+      ]
+    },
+    {
+      "name": "Search",
+      "page": "\u2705 Search",
+      "variantProps": {
+        "state": [
+          "default",
+          "hover",
+          "focus",
+          "open"
+        ],
+        "isFilled": [
+          "false",
+          "true"
+        ]
+      },
+      "boolProps": [],
+      "textProps": [
+        "placeholderText",
+        "searchTerm"
+      ],
+      "swapProps": []
+    },
+    {
+      "name": ".Search terms",
+      "page": "\u2705 Search",
+      "variantProps": {
+        "breakpoint": [
+          "sm",
+          "lg"
+        ],
+        "size": [
+          "default",
+          "hover",
+          "focus"
+        ]
+      },
+      "boolProps": [],
+      "textProps": [],
+      "swapProps": []
+    },
+    {
+      "name": ".Search dropdown",
+      "page": "\u2705 Search",
+      "variantProps": {},
+      "boolProps": [],
+      "textProps": [],
+      "swapProps": []
+    },
+    {
+      "name": "Select",
+      "page": "\u2705 Select",
+      "variantProps": {
+        "state": [
+          "default",
+          "hover",
+          "focus",
+          "open"
+        ],
+        "isFilled": [
+          "false",
+          "true"
+        ],
+        "hasError": [
+          "true",
+          "false"
+        ],
+        "isDisabled": [
+          "false",
+          "true"
+        ]
+      },
+      "boolProps": [
+        "hasStartIcon",
+        "hasLabel",
+        "hasHint"
+      ],
+      "textProps": [
+        "content"
+      ],
+      "swapProps": [
+        "startIcon"
+      ]
+    },
+    {
+      "name": "Tabs",
+      "page": "\u2705 Tabs",
+      "variantProps": {
+        "type": [
+          "button",
+          "section"
+        ]
+      },
+      "boolProps": [
+        "show tab 3",
+        "show tab 4",
+        "show tab 5"
+      ],
+      "textProps": [],
+      "swapProps": []
+    },
+    {
+      "name": ".tabTrigger",
+      "page": "\u2705 Tabs",
+      "variantProps": {
+        "type": [
+          "section",
+          "button"
+        ],
+        "state": [
+          "default",
+          "hover",
+          "focus"
+        ],
+        "isActive": [
+          "true",
+          "false"
+        ],
+        "isDisabled": [
+          "false",
+          "true",
+          "upcoming",
+          "active"
+        ]
+      },
+      "boolProps": [
+        "hasBadge",
+        "showIcon"
+      ],
+      "textProps": [
+        "badgeText",
+        "badgeCount",
+        "text"
+      ],
+      "swapProps": [
+        "icon"
+      ]
+    },
+    {
+      "name": "Toggle group",
+      "page": "\u2705 Toggle group",
+      "variantProps": {},
+      "boolProps": [
+        "showItem3",
+        "showItem4",
+        "showItem5"
+      ],
+      "textProps": [],
+      "swapProps": []
+    },
+    {
+      "name": ".toggleGroupItem",
+      "page": "\u2705 Toggle group",
+      "variantProps": {
+        "state": [
+          "default",
+          "hover",
+          "active",
+          "focus"
+        ],
+        "position": [
+          "left",
+          "middle",
+          "right"
+        ],
+        "isSelected": [
+          "false",
+          "true"
+        ]
+      },
+      "boolProps": [],
+      "textProps": [],
+      "swapProps": []
+    },
+    {
+      "name": "ad",
+      "page": "\u2705 Ad Placeholder",
+      "variantProps": {
+        "device": [
+          "desktop",
+          "mobile"
+        ],
+        "view": [
+          "list",
+          "main",
+          "no matter",
+          "page (external)",
+          "modal (internal)"
+        ],
+        "type": [
+          "Featured venue 850x250",
+          "Featured event 580x640",
+          "Middle cards 850x250",
+          "Only desktop 1920x120"
+        ]
+      },
+      "boolProps": [],
+      "textProps": [],
+      "swapProps": []
+    },
+    {
+      "name": "Card",
+      "page": "\u2705 Card",
+      "variantProps": {
+        "variant": [
+          "horizontal media",
+          "vertical post",
+          "horizontal detail",
+          "vertical detail",
+          "vertical buttons"
+        ],
+        "breakpoint": [
+          "sm",
+          "lg"
+        ],
+        "state": [
+          "default",
+          "hover",
+          "focus"
+        ]
+      },
+      "boolProps": [
+        "hasMetadata",
+        "metadataField2",
+        "metadataField3",
+        "metadataField4",
+        "hasDescription",
+        "hasSubtitle",
+        "hasBadge",
+        "hasImage"
+      ],
+      "textProps": [
+        "subtitle",
+        "title",
+        "description"
+      ],
+      "swapProps": [
+        "metadataIcon1",
+        "metadataIcon2",
+        "metadataIcon4",
+        "metadataIcon3"
+      ]
+    },
+    {
+      "name": "Carousel",
+      "page": "\u2705 Carousel",
+      "variantProps": {
+        "breakpoint": [
+          "lg",
+          "sm"
+        ],
+        "variant": [
+          "event",
+          "hero",
+          "ad",
+          "clickable listing",
+          "artist",
+          "followable",
+          "vertical"
+        ]
+      },
+      "boolProps": [],
+      "textProps": [],
+      "swapProps": []
+    },
+    {
+      "name": ".dotIndicator",
+      "page": "\u2705 Carousel",
+      "variantProps": {
+        "Active": [
+          "False",
+          "true",
+          "false"
+        ],
+        "state": [
+          "default",
+          "hover",
+          "focus"
+        ]
+      },
+      "boolProps": [],
+      "textProps": [],
+      "swapProps": []
+    },
+    {
+      "name": ".hero-carousel",
+      "page": "\u2705 Carousel",
+      "variantProps": {
+        "breakpoint": [
+          "sm",
+          "lg"
+        ]
+      },
+      "boolProps": [
+        "hasContent",
+        "hasDescription",
+        "hasMetadata",
+        "hasControls"
+      ],
+      "textProps": [
+        "title",
+        "description",
+        "metadata2",
+        "metadata4"
+      ],
+      "swapProps": [
+        "metadata1",
+        "metadata3"
+      ]
+    },
+    {
+      "name": ".carousel-rail",
+      "page": "\u2705 Carousel",
+      "variantProps": {
+        "variant": [
+          "dots",
+          "arrows"
+        ]
+      },
+      "boolProps": [],
+      "textProps": [],
+      "swapProps": []
+    },
+    {
+      "name": "Countdown",
+      "page": "\u2705 Countdown",
+      "variantProps": {
+        "variant": [
+          "default",
+          "expiring"
+        ]
+      },
+      "boolProps": [],
+      "textProps": [
+        "timeRemaining"
+      ],
+      "swapProps": []
+    },
+    {
+      "name": "Footer",
+      "page": "\u2705 Footer",
+      "variantProps": {
+        "breakpoint": [
+          "sm",
+          "lg"
+        ]
+      },
+      "boolProps": [],
+      "textProps": [],
+      "swapProps": []
+    },
+    {
+      "name": "Map",
+      "page": "\u2705 Map",
+      "variantProps": {
+        "breakpoint": [
+          "sm",
+          "lg"
+        ],
+        "nested": [
+          "false",
+          "true"
+        ]
+      },
+      "boolProps": [],
+      "textProps": [],
+      "swapProps": []
+    },
+    {
+      "name": ".Map controls",
+      "page": "\u2705 Map",
+      "variantProps": {
+        "type": [
+          "zoom",
+          "location"
+        ],
+        "state": [
+          "default",
+          "hover"
+        ],
+        "isActive": [
+          "false"
+        ],
+        "isFocused": [
+          "false",
+          "true"
+        ]
+      },
+      "boolProps": [],
+      "textProps": [
+        "count"
+      ],
+      "swapProps": []
+    },
+    {
+      "name": ".Segmented map controls",
+      "page": "\u2705 Map",
+      "variantProps": {
+        "position": [
+          "bottom",
+          "top"
+        ],
+        "state": [
+          "default",
+          "focus",
+          "hover"
+        ]
+      },
+      "boolProps": [],
+      "textProps": [
+        "count"
+      ],
+      "swapProps": []
+    },
+    {
+      "name": ".Map marker",
+      "page": "\u2705 Map",
+      "variantProps": {
+        "state": [
+          "default",
+          "hover",
+          "focus",
+          "location"
+        ],
+        "isActive": [
+          "false",
+          "true"
+        ]
+      },
+      "boolProps": [],
+      "textProps": [
+        "count"
+      ],
+      "swapProps": []
+    },
+    {
+      "name": "Media player",
+      "page": "\u2705 Media player",
+      "variantProps": {
+        "playing": [
+          "true",
+          "false"
+        ],
+        "size": [
+          "sm",
+          "lg"
+        ]
+      },
+      "boolProps": [
+        "hasVolumeControl"
+      ],
+      "textProps": [
+        "secondaryText",
+        "text"
+      ],
+      "swapProps": []
+    },
+    {
+      "name": ".Progress bar",
+      "page": "\u2705 Media player",
+      "variantProps": {},
+      "boolProps": [],
+      "textProps": [],
+      "swapProps": []
+    },
+    {
+      "name": "Navigation",
+      "page": "\u2705 Navigation",
+      "variantProps": {
+        "breakpoint": [
+          "lg",
+          "sm"
+        ],
+        "positioning": [
+          "default",
+          "home"
+        ],
+        "isLoggedIn": [
+          "false",
+          "true"
+        ],
+        "isExpanded": [
+          "false",
+          "true"
+        ]
+      },
+      "boolProps": [
+        "hasNotifications"
+      ],
+      "textProps": [],
+      "swapProps": []
+    },
+    {
+      "name": "Selection card",
+      "page": "\u2705 Selection card",
+      "variantProps": {
+        "state": [
+          "default",
+          "hover",
+          "focus"
+        ],
+        "isSelected": [
+          "false",
+          "true"
+        ]
+      },
+      "boolProps": [],
+      "textProps": [
+        "label"
+      ],
+      "swapProps": []
+    },
+    {
+      "name": "Stepper",
+      "page": "\u2705 Stepper",
+      "variantProps": {
+        "variant": [
+          "numeric",
+          "text"
+        ]
+      },
+      "boolProps": [
+        "show step 3",
+        "show step 4"
+      ],
+      "textProps": [],
+      "swapProps": []
+    },
+    {
+      "name": ".Stepper text item",
+      "page": "\u2705 Stepper",
+      "variantProps": {
+        "state": [
+          "default",
+          "hover",
+          "focus"
+        ],
+        "stepStatus": [
+          "upcoming",
+          "active",
+          "completed"
+        ],
+        "isDisabled": [
+          "true",
+          "false"
+        ]
+      },
+      "boolProps": [
+        "showIcon"
+      ],
+      "textProps": [
+        "text"
+      ],
+      "swapProps": [
+        "icon"
+      ]
+    },
+    {
+      "name": ".Stepper number rail",
+      "page": "\u2705 Stepper",
+      "variantProps": {
+        "length": [
+          "partial",
+          "full"
+        ],
+        "stepStatus": [
+          "upcoming",
+          "complete"
+        ]
+      },
+      "boolProps": [],
+      "textProps": [],
+      "swapProps": []
+    },
+    {
+      "name": ".Stepper number item",
+      "page": "\u2705 Stepper",
+      "variantProps": {
+        "stepStatus": [
+          "completed",
+          "upcoming",
+          "active"
+        ]
+      },
+      "boolProps": [],
+      "textProps": [
+        "stepNumber",
+        "activeStepLabel"
+      ],
+      "swapProps": []
+    },
+    {
+      "name": "Sticky nav",
+      "page": "\u2705 Sticky nav",
+      "variantProps": {
+        "breakpoint": [
+          "sm",
+          "lg"
+        ],
+        "isScrollable": [
+          "false",
+          "true"
+        ],
+        "hasActions": [
+          "true",
+          "false"
+        ]
+      },
+      "boolProps": [],
+      "textProps": [],
+      "swapProps": []
+    },
+    {
+      "name": "Floating bar",
+      "page": "\u2705 Sticky nav",
+      "variantProps": {},
+      "boolProps": [],
+      "textProps": [],
+      "swapProps": []
+    },
+    {
+      "name": "Subscription card",
+      "page": "\u2705 Subscription card",
+      "variantProps": {
+        "isActive": [
+          "true",
+          "false"
+        ]
+      },
+      "boolProps": [],
+      "textProps": [
+        "text",
+        "billingDate",
+        "memberSince"
+      ],
+      "swapProps": []
+    },
+    {
+      "name": ".Popover",
+      "page": "\u2705 Utilities",
+      "variantProps": {},
+      "boolProps": [],
+      "textProps": [],
+      "swapProps": []
+    },
+    {
+      "name": ".scrollableControls",
+      "page": "\u2705 Utilities",
+      "variantProps": {
+        "direction": [
+          "right",
+          "left"
+        ],
+        "version": [
+          "dark",
+          "mid"
+        ]
+      },
+      "boolProps": [],
+      "textProps": [],
+      "swapProps": []
+    },
+    {
+      "name": "Slot",
+      "page": "\u2705 Utilities",
+      "variantProps": {},
+      "boolProps": [],
+      "textProps": [],
+      "swapProps": []
+    },
+    {
+      "name": ".Inline danger",
+      "page": "\u2705 Utilities",
+      "variantProps": {},
+      "boolProps": [],
+      "textProps": [
+        "supportingText"
+      ],
+      "swapProps": []
+    },
+    {
+      "name": ".Inline hint",
+      "page": "\u2705 Utilities",
+      "variantProps": {},
+      "boolProps": [],
+      "textProps": [
+        "supportingText"
+      ],
+      "swapProps": []
+    },
+    {
+      "name": ".Field label",
+      "page": "\u2705 Utilities",
+      "variantProps": {},
+      "boolProps": [
+        "hasTooltip"
+      ],
+      "textProps": [
+        "labelText"
+      ],
+      "swapProps": []
+    }
+  ]
+}

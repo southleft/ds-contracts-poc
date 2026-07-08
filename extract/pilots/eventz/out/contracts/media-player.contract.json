@@ -1,0 +1,211 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "evz.media-player",
+  "name": "MediaPlayer",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "PROPOSED contract extracted from ../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/MediaPlayer/MediaPlayer.tsx (react-tsx adapter) — API surface only; anatomy, tokens, and design bindings await reconciliation and human review.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "audioSrc",
+      "type": "text",
+      "required": true,
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Audio Src"
+        },
+        "code": {
+          "prop": "audioSrc"
+        }
+      }
+    },
+    {
+      "name": "title",
+      "type": "text",
+      "required": true,
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Title"
+        },
+        "code": {
+          "prop": "title"
+        }
+      }
+    },
+    {
+      "name": "subtitle",
+      "type": "text",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Subtitle"
+        },
+        "code": {
+          "prop": "subtitle"
+        }
+      }
+    },
+    {
+      "name": "imgSrc",
+      "type": "text",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Img Src"
+        },
+        "code": {
+          "prop": "imgSrc"
+        }
+      }
+    },
+    {
+      "name": "imgAlt",
+      "type": "text",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Img Alt"
+        },
+        "code": {
+          "prop": "imgAlt"
+        }
+      }
+    },
+    {
+      "name": "variant",
+      "type": {
+        "enum": [
+          "default",
+          "compact",
+          "mini"
+        ]
+      },
+      "default": "default",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Variant",
+          "values": {
+            "default": "Default",
+            "compact": "Compact",
+            "mini": "Mini"
+          }
+        },
+        "code": {
+          "prop": "variant"
+        }
+      }
+    },
+    {
+      "name": "autoPlay",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Auto Play"
+        },
+        "code": {
+          "prop": "autoPlay"
+        }
+      }
+    },
+    {
+      "name": "preload",
+      "type": {
+        "enum": [
+          "metadata",
+          "auto",
+          "none"
+        ]
+      },
+      "default": "metadata",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Preload",
+          "values": {
+            "metadata": "Metadata",
+            "auto": "Auto",
+            "none": "None"
+          }
+        },
+        "code": {
+          "prop": "preload"
+        }
+      }
+    },
+    {
+      "name": "loop",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Loop"
+        },
+        "code": {
+          "prop": "loop"
+        }
+      }
+    },
+    {
+      "name": "startTime",
+      "type": "number",
+      "default": 0,
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Start Time"
+        },
+        "code": {
+          "prop": "startTime"
+        }
+      }
+    },
+    {
+      "name": "showVolume",
+      "type": "boolean",
+      "default": true,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Show Volume"
+        },
+        "code": {
+          "prop": "showVolume"
+        }
+      }
+    }
+  ],
+  "events": [
+    {
+      "name": "closeClick",
+      "bindings": {
+        "code": {
+          "prop": "onCloseClick"
+        }
+      },
+      "trigger": "root"
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {}
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/MediaPlayer/MediaPlayer",
+      "export": "MediaPlayer"
+    }
+  }
+}

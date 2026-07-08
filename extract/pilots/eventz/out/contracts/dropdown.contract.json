@@ -1,0 +1,212 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "evz.dropdown",
+  "name": "Dropdown",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "PROPOSED contract extracted from ../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/Dropdown/Dropdown.tsx (react-tsx adapter) — API surface only; anatomy, tokens, and design bindings await reconciliation and human review.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "label",
+      "type": "text",
+      "required": true,
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Label"
+        },
+        "code": {
+          "prop": "label"
+        }
+      }
+    },
+    {
+      "name": "open",
+      "type": "boolean",
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Open"
+        },
+        "code": {
+          "prop": "open"
+        }
+      }
+    },
+    {
+      "name": "defaultOpen",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Default Open"
+        },
+        "code": {
+          "prop": "defaultOpen"
+        }
+      }
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Disabled"
+        },
+        "code": {
+          "prop": "disabled"
+        }
+      }
+    },
+    {
+      "name": "align",
+      "type": {
+        "enum": [
+          "start",
+          "center",
+          "end"
+        ]
+      },
+      "default": "start",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Align",
+          "values": {
+            "start": "Start",
+            "center": "Center",
+            "end": "End"
+          }
+        },
+        "code": {
+          "prop": "align"
+        }
+      }
+    },
+    {
+      "name": "side",
+      "type": {
+        "enum": [
+          "top",
+          "right",
+          "bottom",
+          "left"
+        ]
+      },
+      "default": "bottom",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Side",
+          "values": {
+            "top": "Top",
+            "right": "Right",
+            "bottom": "Bottom",
+            "left": "Left"
+          }
+        },
+        "code": {
+          "prop": "side"
+        }
+      }
+    },
+    {
+      "name": "sideOffset",
+      "type": "number",
+      "default": 8,
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Side Offset"
+        },
+        "code": {
+          "prop": "sideOffset"
+        }
+      }
+    },
+    {
+      "name": "collisionPadding",
+      "type": "number",
+      "default": 8,
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Collision Padding"
+        },
+        "code": {
+          "prop": "collisionPadding"
+        }
+      }
+    },
+    {
+      "name": "trapFocus",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Trap Focus"
+        },
+        "code": {
+          "prop": "trapFocus"
+        }
+      }
+    },
+    {
+      "name": "ariaHaspopup",
+      "type": {
+        "enum": [
+          "menu",
+          "listbox",
+          "dialog"
+        ]
+      },
+      "default": "menu",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Aria Haspopup",
+          "values": {
+            "menu": "Menu",
+            "listbox": "Listbox",
+            "dialog": "Dialog"
+          }
+        },
+        "code": {
+          "prop": "ariaHaspopup"
+        }
+      }
+    }
+  ],
+  "events": [
+    {
+      "name": "openChange",
+      "bindings": {
+        "code": {
+          "prop": "onOpenChange"
+        }
+      },
+      "trigger": "root"
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {}
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/Dropdown/Dropdown",
+      "export": "Dropdown"
+    }
+  }
+}
