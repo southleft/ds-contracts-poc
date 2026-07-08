@@ -27,10 +27,12 @@ import path from 'node:path';
 import prettier from 'prettier';
 import {
   ContractSchema,
+  STATE_PREVIEW_PROPERTY,
   STYLES_WHEN_ALLOWED,
   pascal,
   slotsOf,
   sortByDependencies,
+  statePreviewSubstProps,
   walkAnatomy,
   type Contract,
   type Part,
@@ -486,6 +488,42 @@ function validateContract(contract: Contract, byId: Map<string, Contract>, error
           }
         }
       }
+    }
+  }
+
+  // figmaStatePreviews (v8): canvas-only state previews must be honest —
+  // a preview variant that renders identically to Default is kit noise, so
+  // the opt-in is refused by name unless every declared state carries root
+  // token overrides; and the multiplied axis must be unambiguous.
+  if (contract.figmaStatePreviews) {
+    if (contract.figmaRepresentation === 'native') {
+      errors.push(
+        `${contract.id}: figmaStatePreviews requires a generated Figma component — figmaRepresentation "native" declares there is none`,
+      );
+    }
+    if (contract.states.length === 0) {
+      errors.push(
+        `${contract.id}: figmaStatePreviews is set but the contract declares no interaction states — nothing to preview`,
+      );
+    }
+    const rootStates = contract.anatomy.root?.states ?? {};
+    for (const state of contract.states) {
+      if (Object.keys(rootStates[state] ?? {}).length === 0) {
+        errors.push(
+          `${contract.id}: figmaStatePreviews — state "${state}" declares no token overrides on anatomy.root.states, so its preview variant would render identically to Default`,
+        );
+      }
+    }
+    const substProps = statePreviewSubstProps(contract);
+    if (substProps.length > 1) {
+      errors.push(
+        `${contract.id}: figmaStatePreviews — state overrides substitute ${substProps.length} enum props (${substProps.join(', ')}); previews multiply exactly ONE primary axis`,
+      );
+    }
+    if (contract.props.some((p) => p.bindings.figma.property === STATE_PREVIEW_PROPERTY)) {
+      errors.push(
+        `${contract.id}: figmaStatePreviews reserves the design property "${STATE_PREVIEW_PROPERTY}" for the preview axis, but a prop already binds it`,
+      );
     }
   }
 

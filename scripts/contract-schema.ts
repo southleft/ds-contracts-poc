@@ -368,6 +368,17 @@ export const ContractSchema = z.strictObject({
    *  is generated and parity does not expect one; the code surface is still
    *  fully generated and checked. */
   figmaRepresentation: z.enum(['component', 'native']).optional(),
+  /** OPT-IN canvas-only interaction previews — the mirror image of code-only
+   *  events. When true, the FIGMA generator emits an additional "State"
+   *  variant axis (State=Default, State=Hover, …) where each non-default
+   *  state applies the contract's root state token overrides on top of the
+   *  variant's base bindings. The code surface is COMPLETELY unaffected (CSS
+   *  pseudo-classes already render these states live). Bounded explosion:
+   *  state previews multiply only the PRIMARY enum axis — the one whose
+   *  tokens the state overrides substitute — never the full cartesian; all
+   *  other axes sit at their defaults in preview variants. Requires declared
+   *  `states`, each with root token overrides (refused by name otherwise). */
+  figmaStatePreviews: z.boolean().optional(),
   anatomy: z.record(z.string(), PartSchema),
   a11y: z
     .object({
@@ -454,6 +465,44 @@ export const componentRefsOf = (contract: Contract) =>
     .map((w) => ({ ...w, ref: w.part.component! }));
 
 export const pascal = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
+
+// ---------------------------------------------------------------------------
+// State previews (figmaStatePreviews) — shared vocabulary for the Figma
+// generator (which emits the axis) and the differ (which expects it when the
+// contract opts in, and flags a hand-built one as kit-rot drift when it
+// doesn't).
+// ---------------------------------------------------------------------------
+
+/** The reserved variant-axis property name for canvas state previews. */
+export const STATE_PREVIEW_PROPERTY = 'State';
+/** The axis value carried by every base (non-preview) variant. */
+export const STATE_PREVIEW_DEFAULT = 'Default';
+/** Canonical state → axis value: "hover" → "Hover", "focus-visible" →
+ *  "Focus Visible". Deterministic — the differ recomputes the same labels. */
+export const statePreviewLabel = (state: string) => state.split('-').map(pascal).join(' ');
+
+/** The prop names an opted-in contract's root state overrides substitute
+ *  (e.g. "{color.action.{variant}.background-hover}" → "variant"). The
+ *  single member (validation refuses more) names the PRIMARY enum axis that
+ *  state previews multiply; empty means the overrides are variant-independent
+ *  and previews attach to the first enum axis. */
+export function statePreviewSubstProps(contract: Contract): string[] {
+  const enumNames = new Set(
+    contract.props
+      .filter((p) => typeof p.type === 'object' && 'enum' in p.type)
+      .map((p) => p.name),
+  );
+  const out = new Set<string>();
+  const overrides = contract.anatomy.root?.states ?? {};
+  for (const state of contract.states) {
+    for (const ref of Object.values(overrides[state] ?? {})) {
+      for (const m of ref.matchAll(/\{([a-z][\w-]*)\}/g)) {
+        if (enumNames.has(m[1])) out.add(m[1]);
+      }
+    }
+  }
+  return [...out];
+}
 
 export const slotFigmaProperty = (slot: Slot) => slot.figmaProperty ?? pascal(slot.name);
 export const slotVisibilityProperty = (slot: Slot) => `Show ${slotFigmaProperty(slot)}`;
