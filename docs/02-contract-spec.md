@@ -119,6 +119,12 @@ Five features from the second schema gauntlet, each shipped with a consuming con
 
 **Structured props.** `type: { arrayOf: Record<field, 'text' | 'number' | 'boolean'> }` declares a list-of-records prop (Breadcrumbs items, Select options). Code-only by declared fidelity limit — the canvas has no list-of-records property type — so the design binding is `{ "kind": "NONE" }` with no `property`, and every design-side consumer (figma generator, differ, diagnose) skips the prop rather than reporting it behind. Code renders `items?: Array<{ … }>`: no default destructure (undefined means "not provided", never a silent `[]`) and excluded from `...rest`. Guardrails: `arrayOf` ⇔ `kind: "NONE"` in both directions, no defaults, at least one field.
 
+## State previews (`figmaStatePreviews`, v8)
+
+Interaction states are declared once (`states` + per-state token overrides on `anatomy.root.states`) and rendered per surface at that surface's fidelity: code gets real `:hover`/`:focus-visible`/`:disabled` CSS; the canvas — which cannot run pseudo-classes — gets nothing by default. Real systems hand-build "State=Hover" variant axes to fill that gap, and those rot (all four drift-research pilots carry them). `figmaStatePreviews: true` makes the design generator own that axis instead: a `State` variant axis (`Default`, `Hover`, `Focus Visible`, …) where each non-default state applies the state's token overrides on top of the variant's base bindings. This is the mirror image of code-only events: events are code-only, state previews are canvas-only, and the code surface is completely unaffected.
+
+Bounds and refusals: previews multiply only the *primary* enum axis (the one the overrides substitute — `{color.action.{variant}.background-hover}` names `variant`); every other axis sits at its default. The opt-in is refused by name when the contract declares no states, when any declared state has no root token overrides (its preview would render identically to Default), when overrides substitute more than one enum prop, or when a prop already binds the design property `State`. Fidelity notes: `opacity` binds directly; the focus outline renders as a bound stroke (outline-offset has no canvas equivalent).
+
 ## Anchors
 
 ```jsonc

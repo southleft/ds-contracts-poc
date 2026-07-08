@@ -95,7 +95,7 @@ Five features, each shipped with a consuming contract: `elementByProp`
 surfaces), `stylesWhen` (whitelisted conditional literals), `overlay`
 (out-of-flow anatomy for tooltips/popups), `arrayOf` structured props (code-only
 with `kind: NONE`, skipped by every design-side consumer). Plus
-pending-first-sync parity classification. **Eval suite: 43/43.**
+pending-first-sync parity classification. **Eval suite: 47/47.**
 
 ## 2026-07-08 — Code Editor Simulator (Hub)
 
@@ -106,7 +106,21 @@ client-side — API diff, an amendSet-mirrored canvas plan (ADDED/REBUILT/
 EXTRA-reported over the enum cartesian product, all-defaults combo first), and
 spec-policy version advice. Illegal edits are refused by the schema's own
 names and never reach either surface; both keep rendering the last governed
-version. Dashboard-only change; 43/43 evals unaffected.
+version. Dashboard-only change; 47/47 evals unaffected.
+
+## 2026-07-08 — State previews + canvas text styles (schema v8)
+
+The canvas stops lying about interaction. `figmaStatePreviews` generates a
+State variant axis (Hover / Focus Visible / Disabled previews) from the same
+declared state tokens that emit the CSS pseudo-classes — the mirror image of
+code-only events, bounded to the primary enum axis, refused by name when
+hollow. The differ works both directions: a missing axis is BEHIND; a
+hand-built State axis without the opt-in is the kit-rot detector (all four
+pilot systems carry rotting hand-built state axes). Plus named Figma
+TextStyles minted from semantic typography tokens, upserted by identity
+marker, ridden by matching text nodes. Button v1.5.0 ships previews.
+**Eval suite: 47/47.**
+
 
 ---
 

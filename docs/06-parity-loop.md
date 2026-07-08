@@ -68,3 +68,9 @@ Snapshots are committed as point-in-time evidence; in CI you'd refresh them head
 ## Pending first sync (v7)
 
 The differ's report has a `pending` section: a contract with null design anchors was never synced — that is workflow state, not drift between surfaces that were once in sync. Pending contracts are visible in the report but never fail the exit code; once anchors exist, a missing set is a hard BEHIND again.
+
+## The State axis, both directions (v8)
+
+The differ treats the `State` variant axis as contract API, not noise. When a contract opts into `figmaStatePreviews`, the set must carry the axis with exactly `Default` + the declared states — a missing axis is `figma BEHIND` (re-run the sync script; amend adds the axis and renames base variants with `State=Default`), wrong values or a non-Default first variant are `MISMATCH`. The reverse direction is the kit-rot detector: a `State` axis on the canvas *without* the opt-in is `figma AHEAD`, and the proposed patch is the honest one — `{ "figmaStatePreviews": true }` when the contract already declares states (regenerating the axis from token overrides), never a bogus `state` prop.
+
+Typography parity note: `01-tokens.js` also upserts named TextStyles derived from semantic `font.<group>.size` tokens (identity: `ds_contracts/textStyleToken` marker, rename-safe, foreign same-named styles untouched); component text nodes whose bindings exactly match a style's definition ride it via `textStyleId`, with raw font props as the fallback until the token script has run.

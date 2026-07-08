@@ -1,6 +1,6 @@
 {
-  "passed": 43,
-  "total": 43,
+  "passed": 47,
+  "total": 47,
   "results": [
     {
       "id": "refuse-unknown-token-reference",
@@ -215,6 +215,26 @@
     {
       "id": "pending-first-sync-not-drift",
       "claim": "C3-detection",
+      "pass": true
+    },
+    {
+      "id": "refuse-hollow-state-previews",
+      "claim": "C2-refusal",
+      "pass": true
+    },
+    {
+      "id": "state-previews-bounded-canvas-only",
+      "claim": "C1-determinism",
+      "pass": true
+    },
+    {
+      "id": "state-axis-drift-both-directions",
+      "claim": "C3-detection",
+      "pass": true
+    },
+    {
+      "id": "text-styles-from-typography-tokens",
+      "claim": "C1-determinism",
       "pass": true
     }
   ]

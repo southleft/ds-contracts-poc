@@ -943,6 +943,96 @@ const cases: Case[] = [
       expectFinding(readReport(), 'figma', 'behind', 'Heading');
     },
   },
+  {
+    // figmaStatePreviews (v8): the opt-in must be refused by name when hollow.
+    id: 'refuse-hollow-state-previews',
+    claim: 'C2-refusal',
+    run: () => {
+      const pristine = readFileSync(path.join(SCRATCH, CONTRACT), 'utf8');
+      editJson(CONTRACT, (c) => { c.states = []; delete c.anatomy.root.states; });
+      let r = generate();
+      writeFileSync(path.join(SCRATCH, CONTRACT), pristine);
+      if (r.status === 0 || !r.out.includes('declares no interaction states'))
+        throw new Error('previews without states not refused by name');
+      editJson(CONTRACT, (c) => { c.anatomy.root.states = { hover: c.anatomy.root.states.hover }; });
+      r = generate();
+      writeFileSync(path.join(SCRATCH, CONTRACT), pristine);
+      if (r.status === 0 || !r.out.includes('state "focus-visible" declares no token overrides'))
+        throw new Error('override-less state not refused by name');
+    },
+  },
+  {
+    // State previews multiply ONLY the primary enum axis; overrides land on
+    // the compiled specs; the base cartesian stays the pure enum API.
+    id: 'state-previews-bounded-canvas-only',
+    claim: 'C1-determinism',
+    run: () => {
+      if (buildTokens().status !== 0 || generate().status !== 0) throw new Error('Build failed');
+      if (run(TSX, ['scripts/generate-figma.ts']).status !== 0) throw new Error('figma:plan failed');
+      const f = readdirSync(path.join(SCRATCH, 'figma-sync')).find((n) => /^\d+-button\.js$/.test(n))!;
+      const script = readFileSync(path.join(SCRATCH, 'figma-sync', f), 'utf8');
+      const base = JSON.parse(script.match(/const VARIANTS = (\[[\s\S]*?\n\]);/)![1]);
+      if (base.length !== 12 || base[0].name !== 'Variant=Primary, Size=Medium')
+        throw new Error('Base cartesian must stay the pure enum API (previews ride a separate overlay)');
+      const sv = JSON.parse(script.match(/const STATE_VARIANTS = (\[[\s\S]*?\n\]);/)![1]);
+      if (sv.length !== 12) throw new Error(`Expected 12 previews (4 variants × 3 states, Size at default), got ${sv.length}`);
+      const hover = sv.find((v: any) => v.name === 'Variant=Danger, Size=Medium, State=Hover');
+      if (hover?.spec.fill !== 'color/action/danger/background-hover')
+        throw new Error(`Hover preview must bind the state override token, got ${hover?.spec.fill}`);
+      const disabled = sv.find((v: any) => v.name === 'Variant=Primary, Size=Medium, State=Disabled');
+      if (disabled?.spec.bindings?.opacity !== 'opacity/disabled')
+        throw new Error('Disabled preview must bind opacity/disabled');
+      if (sv.some((v: any) => v.name.includes('Size=Small') || v.name.includes('Size=Large')))
+        throw new Error('Explosion not bounded — a preview multiplied a non-primary axis');
+      if (!script.includes('withStateAxis')) throw new Error('runtime merge helper missing');
+    },
+  },
+  {
+    // The State axis is declared surface when opted in, kit-rot drift when not.
+    id: 'state-axis-drift-both-directions',
+    claim: 'C3-detection',
+    run: () => {
+      if (parity().status !== 0) throw new Error('Acknowledged Button.State failed the exit code');
+      const report = JSON.parse(readFileSync(path.join(SCRATCH, 'parity', 'report.json'), 'utf8'));
+      if (!report.acknowledged.some((x: any) => x.surface === 'figma' && x.classification === 'behind' && x.subject === 'Button.State'))
+        throw new Error('Opted-in contract without a canvas State axis must be figma BEHIND (acknowledged)');
+      editJson(CONTRACT, (c) => { delete c.figmaStatePreviews; });
+      editJson(FIGMA_COMPONENTS, (s) => {
+        s.sets.find((x: any) => x.name === 'Button').properties.State = {
+          type: 'VARIANT', defaultValue: 'Default', variantOptions: ['Default', 'Hover'], preferredValues: null,
+        };
+      });
+      if (parity().status === 0) throw new Error('Hand-built State axis passed parity');
+      const fnd = expectFinding(readReport(), 'figma', 'ahead', 'Button.State');
+      if ((fnd.proposedPatch as any)?.figmaStatePreviews !== true)
+        throw new Error('Kit-rot State axis must propose adoption via figmaStatePreviews');
+    },
+  },
+  {
+    // Text styles: minted from semantic typography tokens, upserted by marker,
+    // and ridden by exactly-matching text nodes.
+    id: 'text-styles-from-typography-tokens',
+    claim: 'C1-determinism',
+    run: () => {
+      if (run(TSX, ['scripts/generate-figma.ts']).status !== 0) throw new Error('figma:plan failed');
+      const tok = readFileSync(path.join(SCRATCH, 'figma-sync', '01-tokens.js'), 'utf8');
+      const styles = JSON.parse(tok.match(/const TEXT_STYLES = (\[.*?\]);/)![1]);
+      const ctrl = styles.find((s: any) => s.name === 'control/md');
+      if (!ctrl || ctrl.fontSize !== 16 || ctrl.fontStyle !== 'Medium' || ctrl.tokenPath !== 'font.control.size.md')
+        throw new Error(`control/md style wrong: ${JSON.stringify(ctrl)}`);
+      if (!styles.some((s: any) => s.name === 'title' && s.fontStyle === 'Semi Bold'))
+        throw new Error('Group weight token must drive the style weight (title → Semi Bold)');
+      if (!tok.includes("getSharedPluginData('ds_contracts', 'textStyleToken')"))
+        throw new Error('Text style upsert must reconcile by identity marker, never name');
+      const f = readdirSync(path.join(SCRATCH, 'figma-sync')).find((n) => /^\d+-button\.js$/.test(n))!;
+      const script = readFileSync(path.join(SCRATCH, 'figma-sync', f), 'utf8');
+      const variants = JSON.parse(script.match(/const VARIANTS = (\[[\s\S]*?\n\]);/)![1]);
+      const lg = variants.find((v: any) => v.name === 'Variant=Primary, Size=Large');
+      if (lg.spec.children[1].textStyle !== 'control/lg')
+        throw new Error('Large Button label must ride the control/lg text style');
+      if (!script.includes('setTextStyleIdAsync')) throw new Error('runtime style application missing');
+    },
+  },
 ];
 
 // ---------------------------------------------------------------------------
