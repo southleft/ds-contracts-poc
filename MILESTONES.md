@@ -110,3 +110,14 @@ pending-first-sync parity classification. **Eval suite: 43/43.**
 | Brownfield | 4 external systems extracted/diagnosed | `extract/pilots/` |
 | Non-destructive sync | in-place amend, IDs preserved | CBDS + Instance Lab forensics |
 | Theming | brand = token layer only | `brand-added-token-layer-only` eval |
+
+## 2026-07-08 — Code Editor Simulator (Hub)
+
+New `#/editor` page demos what a contract-governed in-tool code editor
+experiences: a live contract JSON editor validated on every keystroke against
+the actual `ContractSchema`, with consequences computed deterministically
+client-side — API diff, an amendSet-mirrored canvas plan (ADDED/REBUILT/
+EXTRA-reported over the enum cartesian product, all-defaults combo first), and
+spec-policy version advice. Illegal edits are refused by the schema's own
+names and never reach either surface; both keep rendering the last governed
+version. Dashboard-only change; 43/43 evals unaffected.

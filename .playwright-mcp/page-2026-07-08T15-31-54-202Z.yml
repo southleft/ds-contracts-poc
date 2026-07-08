@@ -1,0 +1,312 @@
+- generic [ref=f1e3]:
+  - complementary [ref=f1e4]:
+    - generic [ref=f1e5]:
+      - link "Contract Hub" [ref=f1e6] [cursor=pointer]:
+        - /url: "#/"
+        - img [ref=f1e7]
+        - text: Contract Hub
+      - paragraph [ref=f1e11]: The governed source, visualized
+    - navigation "Main" [ref=f1e12]:
+      - link "Overview" [ref=f1e13] [cursor=pointer]:
+        - /url: "#/"
+      - generic [ref=f1e15]:
+        - link "Components51" [ref=f1e16] [cursor=pointer]:
+          - /url: "#/components"
+        - button "Expand component list" [ref=f1e17]:
+          - img [ref=f1e18]
+      - link "Tokens" [ref=f1e20] [cursor=pointer]:
+        - /url: "#/tokens"
+      - link "Governance" [ref=f1e21] [cursor=pointer]:
+        - /url: "#/governance"
+      - link "Code Editor" [ref=f1e22] [cursor=pointer]:
+        - /url: "#/editor"
+      - link "Context" [ref=f1e23] [cursor=pointer]:
+        - /url: "#/context"
+      - link "Parity" [ref=f1e24] [cursor=pointer]:
+        - /url: "#/parity"
+      - link "Docs" [ref=f1e25] [cursor=pointer]:
+        - /url: "#/docs"
+    - generic [ref=f1e26]:
+      - text: ds-contracts-poc
+      - text: catalog v0.1.0
+  - generic [ref=f1e27]:
+    - banner [ref=f1e28]:
+      - generic [ref=f1e29]: editor
+      - generic [ref=f1e30]:
+        - generic [ref=f1e31]: catalog v0.1.0 · 66fede6
+        - 'button "Switch brand mode (current: default)" [ref=f1e32]':
+          - generic [ref=f1e34]: default
+        - button "Switch to dark mode" [ref=f1e35]:
+          - img
+          - generic [ref=f1e36]: Dark
+    - main [ref=f1e37]:
+      - generic [ref=f1e38]:
+        - heading "Code Editor Simulator" [level=1] [ref=f1e39]
+        - paragraph [ref=f1e40]: "What a contract-governed in-tool code editor experiences. The contract sits between the editor and both surfaces: an edit either validates against the schema and ripples deterministically — API diff, canvas amend plan, version advice — or is refused by name. Nothing silently drifts."
+      - generic [ref=f1e41]:
+        - generic [ref=f1e42]:
+          - generic [ref=f1e43]:
+            - generic [ref=f1e44]:
+              - heading "Component" [level=2] [ref=f1e45]
+              - paragraph [ref=f1e46]: Every contract in the governed set is editable.
+            - list [ref=f1e48]:
+              - listitem [ref=f1e49]:
+                - button "AccordionItem v1.1.0" [ref=f1e50]:
+                  - generic [ref=f1e51]: AccordionItem
+                  - generic [ref=f1e52]: v1.1.0
+              - listitem [ref=f1e53]:
+                - button "Avatar v1.0.0" [ref=f1e54]:
+                  - generic [ref=f1e55]: Avatar
+                  - generic [ref=f1e56]: v1.0.0
+              - listitem [ref=f1e57]:
+                - button "AvatarGroup v1.0.0" [ref=f1e58]:
+                  - generic [ref=f1e59]: AvatarGroup
+                  - generic [ref=f1e60]: v1.0.0
+              - listitem [ref=f1e61]:
+                - button "Badge v1.1.0" [active] [ref=f1e62]:
+                  - generic [ref=f1e63]: Badge
+                  - generic [ref=f1e64]: v1.1.0
+              - listitem [ref=f1e65]:
+                - button "Button v1.4.0" [ref=f1e66]:
+                  - generic [ref=f1e67]: Button
+                  - generic [ref=f1e68]: v1.4.0
+              - listitem [ref=f1e69]:
+                - button "Banner v1.0.0" [ref=f1e70]:
+                  - generic [ref=f1e71]: Banner
+                  - generic [ref=f1e72]: v1.0.0
+              - listitem [ref=f1e73]:
+                - button "Blockquote v1.0.0" [ref=f1e74]:
+                  - generic [ref=f1e75]: Blockquote
+                  - generic [ref=f1e76]: v1.0.0
+              - listitem [ref=f1e77]:
+                - button "BreadcrumbItem v1.0.0" [ref=f1e78]:
+                  - generic [ref=f1e79]: BreadcrumbItem
+                  - generic [ref=f1e80]: v1.0.0
+              - listitem [ref=f1e81]:
+                - button "Breadcrumbs v1.0.0" [ref=f1e82]:
+                  - generic [ref=f1e83]: Breadcrumbs
+                  - generic [ref=f1e84]: v1.0.0
+              - listitem [ref=f1e85]:
+                - button "Card v1.1.0" [ref=f1e86]:
+                  - generic [ref=f1e87]: Card
+                  - generic [ref=f1e88]: v1.1.0
+              - listitem [ref=f1e89]:
+                - button "ChatMessageMetadata v1.0.0" [ref=f1e90]:
+                  - generic [ref=f1e91]: ChatMessageMetadata
+                  - generic [ref=f1e92]: v1.0.0
+              - listitem [ref=f1e93]:
+                - button "ChatMessage v1.1.0" [ref=f1e94]:
+                  - generic [ref=f1e95]: ChatMessage
+                  - generic [ref=f1e96]: v1.1.0
+              - listitem [ref=f1e97]:
+                - button "ChatSystemMessage v1.0.0" [ref=f1e98]:
+                  - generic [ref=f1e99]: ChatSystemMessage
+                  - generic [ref=f1e100]: v1.0.0
+              - listitem [ref=f1e101]:
+                - button "Checkbox v1.1.0" [ref=f1e102]:
+                  - generic [ref=f1e103]: Checkbox
+                  - generic [ref=f1e104]: v1.1.0
+              - listitem [ref=f1e105]:
+                - button "Citation v1.0.0" [ref=f1e106]:
+                  - generic [ref=f1e107]: Citation
+                  - generic [ref=f1e108]: v1.0.0
+              - listitem [ref=f1e109]:
+                - button "Code v1.0.0" [ref=f1e110]:
+                  - generic [ref=f1e111]: Code
+                  - generic [ref=f1e112]: v1.0.0
+              - listitem [ref=f1e113]:
+                - button "Divider v1.0.0" [ref=f1e114]:
+                  - generic [ref=f1e115]: Divider
+                  - generic [ref=f1e116]: v1.0.0
+              - listitem [ref=f1e117]:
+                - button "EmptyState v1.0.0" [ref=f1e118]:
+                  - generic [ref=f1e119]: EmptyState
+                  - generic [ref=f1e120]: v1.0.0
+              - listitem [ref=f1e121]:
+                - button "Field v1.0.0" [ref=f1e122]:
+                  - generic [ref=f1e123]: Field
+                  - generic [ref=f1e124]: v1.0.0
+              - listitem [ref=f1e125]:
+                - button "Heading v1.0.0" [ref=f1e126]:
+                  - generic [ref=f1e127]: Heading
+                  - generic [ref=f1e128]: v1.0.0
+              - listitem [ref=f1e129]:
+                - button "IconButton v1.0.0" [ref=f1e130]:
+                  - generic [ref=f1e131]: IconButton
+                  - generic [ref=f1e132]: v1.0.0
+              - listitem [ref=f1e133]:
+                - button "Inline v1.0.0" [ref=f1e134]:
+                  - generic [ref=f1e135]: Inline
+                  - generic [ref=f1e136]: v1.0.0
+              - listitem [ref=f1e137]:
+                - button "Kbd v1.0.0" [ref=f1e138]:
+                  - generic [ref=f1e139]: Kbd
+                  - generic [ref=f1e140]: v1.0.0
+              - listitem [ref=f1e141]:
+                - button "ListItem v1.0.0" [ref=f1e142]:
+                  - generic [ref=f1e143]: ListItem
+                  - generic [ref=f1e144]: v1.0.0
+              - listitem [ref=f1e145]:
+                - button "List v1.0.0" [ref=f1e146]:
+                  - generic [ref=f1e147]: List
+                  - generic [ref=f1e148]: v1.0.0
+              - listitem [ref=f1e149]:
+                - button "MetadataListItem v1.0.0" [ref=f1e150]:
+                  - generic [ref=f1e151]: MetadataListItem
+                  - generic [ref=f1e152]: v1.0.0
+              - listitem [ref=f1e153]:
+                - button "MetadataList v1.0.0" [ref=f1e154]:
+                  - generic [ref=f1e155]: MetadataList
+                  - generic [ref=f1e156]: v1.0.0
+              - listitem [ref=f1e157]:
+                - button "Pagination v1.0.0" [ref=f1e158]:
+                  - generic [ref=f1e159]: Pagination
+                  - generic [ref=f1e160]: v1.0.0
+              - listitem [ref=f1e161]:
+                - button "ProgressBar v1.0.0" [ref=f1e162]:
+                  - generic [ref=f1e163]: ProgressBar
+                  - generic [ref=f1e164]: v1.0.0
+              - listitem [ref=f1e165]:
+                - button "Section v1.0.0" [ref=f1e166]:
+                  - generic [ref=f1e167]: Section
+                  - generic [ref=f1e168]: v1.0.0
+              - listitem [ref=f1e169]:
+                - button "SideNavItem v1.0.0" [ref=f1e170]:
+                  - generic [ref=f1e171]: SideNavItem
+                  - generic [ref=f1e172]: v1.0.0
+              - listitem [ref=f1e173]:
+                - button "Skeleton v1.0.0" [ref=f1e174]:
+                  - generic [ref=f1e175]: Skeleton
+                  - generic [ref=f1e176]: v1.0.0
+              - listitem [ref=f1e177]:
+                - button "Slider v1.0.0" [ref=f1e178]:
+                  - generic [ref=f1e179]: Slider
+                  - generic [ref=f1e180]: v1.0.0
+              - listitem [ref=f1e181]:
+                - button "Spinner v1.0.0" [ref=f1e182]:
+                  - generic [ref=f1e183]: Spinner
+                  - generic [ref=f1e184]: v1.0.0
+              - listitem [ref=f1e185]:
+                - button "Stack v1.0.0" [ref=f1e186]:
+                  - generic [ref=f1e187]: Stack
+                  - generic [ref=f1e188]: v1.0.0
+              - listitem [ref=f1e189]:
+                - button "StatusDot v1.0.0" [ref=f1e190]:
+                  - generic [ref=f1e191]: StatusDot
+                  - generic [ref=f1e192]: v1.0.0
+              - listitem [ref=f1e193]:
+                - button "Switch v1.1.0" [ref=f1e194]:
+                  - generic [ref=f1e195]: Switch
+                  - generic [ref=f1e196]: v1.1.0
+              - listitem [ref=f1e197]:
+                - button "Tab v1.0.0" [ref=f1e198]:
+                  - generic [ref=f1e199]: Tab
+                  - generic [ref=f1e200]: v1.0.0
+              - listitem [ref=f1e201]:
+                - button "TabList v1.0.0" [ref=f1e202]:
+                  - generic [ref=f1e203]: TabList
+                  - generic [ref=f1e204]: v1.0.0
+              - listitem [ref=f1e205]:
+                - button "TableCell v1.1.0" [ref=f1e206]:
+                  - generic [ref=f1e207]: TableCell
+                  - generic [ref=f1e208]: v1.1.0
+              - listitem [ref=f1e209]:
+                - button "TableHeaderCell v1.1.0" [ref=f1e210]:
+                  - generic [ref=f1e211]: TableHeaderCell
+                  - generic [ref=f1e212]: v1.1.0
+              - listitem [ref=f1e213]:
+                - button "TableRow v1.1.0" [ref=f1e214]:
+                  - generic [ref=f1e215]: TableRow
+                  - generic [ref=f1e216]: v1.1.0
+              - listitem [ref=f1e217]:
+                - button "Table v1.1.0" [ref=f1e218]:
+                  - generic [ref=f1e219]: Table
+                  - generic [ref=f1e220]: v1.1.0
+              - listitem [ref=f1e221]:
+                - button "TextArea v1.0.0" [ref=f1e222]:
+                  - generic [ref=f1e223]: TextArea
+                  - generic [ref=f1e224]: v1.0.0
+              - listitem [ref=f1e225]:
+                - button "TextField v1.1.0" [ref=f1e226]:
+                  - generic [ref=f1e227]: TextField
+                  - generic [ref=f1e228]: v1.1.0
+              - listitem [ref=f1e229]:
+                - button "Toast v1.0.0" [ref=f1e230]:
+                  - generic [ref=f1e231]: Toast
+                  - generic [ref=f1e232]: v1.0.0
+              - listitem [ref=f1e233]:
+                - button "Token v1.0.0" [ref=f1e234]:
+                  - generic [ref=f1e235]: Token
+                  - generic [ref=f1e236]: v1.0.0
+              - listitem [ref=f1e237]:
+                - button "Toolbar v1.0.0" [ref=f1e238]:
+                  - generic [ref=f1e239]: Toolbar
+                  - generic [ref=f1e240]: v1.0.0
+              - listitem [ref=f1e241]:
+                - button "TopNavItem v1.0.0" [ref=f1e242]:
+                  - generic [ref=f1e243]: TopNavItem
+                  - generic [ref=f1e244]: v1.0.0
+              - listitem [ref=f1e245]:
+                - button "TopNav v1.0.0" [ref=f1e246]:
+                  - generic [ref=f1e247]: TopNav
+                  - generic [ref=f1e248]: v1.0.0
+              - listitem [ref=f1e249]:
+                - button "TypeaheadItem v1.0.0" [ref=f1e250]:
+                  - generic [ref=f1e251]: TypeaheadItem
+                  - generic [ref=f1e252]: v1.0.0
+          - generic [ref=f1e253]:
+            - generic [ref=f1e254]:
+              - heading "Live render" [level=2] [ref=f1e255]
+              - paragraph [ref=f1e256]: The real generated component, driven by the edited contract's defaults.
+            - generic [ref=f1e257]:
+              - generic [ref=f1e354]:
+                - code [ref=f1e355]: info
+                - status [ref=f1e357]: Badge
+              - generic [ref=f1e358]:
+                - code [ref=f1e359]: success
+                - status [ref=f1e361]: Badge
+              - generic [ref=f1e362]:
+                - code [ref=f1e363]: warning
+                - status [ref=f1e365]: Badge
+              - generic [ref=f1e268]:
+                - code [ref=f1e269]: danger
+                - status [ref=f1e366]: Badge
+              - generic [ref=f1e367]:
+                - code [ref=f1e368]: error
+                - status [ref=f1e370]: Badge
+              - paragraph [ref=f1e278]:
+                - text: one row per
+                - code [ref=f1e279]: variant
+                - text: value, rendered by the real generated
+                - code [ref=f1e280]: src/components/Badge
+        - generic [ref=f1e281]:
+          - generic [ref=f1e282]:
+            - generic [ref=f1e283]: Contract sourcecontracts/badge.contract.json
+            - button "Revert to governed" [disabled]
+          - textbox "Contract JSON for Badge" [ref=f1e371]: "{ \"$schema\": \"./contract.schema.json\", \"id\": \"ds.badge\", \"name\": \"Badge\", \"version\": \"1.1.0\", \"status\": \"draft\", \"description\": \"Communicates status or categorization at a glance. Non-interactive.\", \"semantics\": { \"element\": \"span\", \"role\": \"status\" }, \"props\": [ { \"name\": \"variant\", \"description\": \"The feedback tone being communicated.\", \"type\": { \"enum\": [ \"info\", \"success\", \"warning\", \"danger\", \"error\" ] }, \"default\": \"info\", \"bindings\": { \"figma\": { \"kind\": \"VARIANT\", \"property\": \"Variant\", \"values\": { \"info\": \"Info\", \"success\": \"Success\", \"warning\": \"Warning\", \"danger\": \"Danger\", \"error\": \"Error\" } }, \"code\": { \"prop\": \"variant\" } } }, { \"name\": \"children\", \"description\": \"Badge label.\", \"type\": \"text\", \"default\": \"Badge\", \"bindings\": { \"figma\": { \"kind\": \"TEXT\", \"property\": \"Label\" }, \"code\": { \"prop\": \"children\" } } } ], \"states\": [], \"anatomy\": { \"root\": { \"tokens\": { \"background-color\": \"{color.feedback.{variant}.background}\", \"color\": \"{color.feedback.{variant}.foreground}\", \"padding-inline\": \"{space.inset-x.sm}\", \"padding-block\": \"{space.inset-y.sm}\", \"border-radius\": \"{radius.badge}\", \"font-family\": \"{font.control.family}\", \"font-weight\": \"{font.control.weight}\", \"font-size\": \"{font.badge.size}\" } } }, \"a11y\": { \"contrast\": \"AA\" }, \"anchors\": { \"figma\": { \"fileKey\": \"8nim1d0IPnehMxA7B7SYxC\", \"componentSetKey\": \"89f1fb2d4580116cea4be5d4ca340de216a27819\", \"nodeId\": \"6:10\" }, \"code\": { \"importPath\": \"src/components/Badge\", \"export\": \"Badge\" } } }"
+          - paragraph [ref=f1e285]:
+            - text: Validated on every edit against
+            - code [ref=f1e286]: scripts/contract-schema.ts
+            - text: — the identical Zod schema the generators run. Try removing an enum value, retyping a prop, or adding an unknown key.
+        - generic [ref=f1e287]:
+          - generic [ref=f1e372]:
+            - generic [ref=f1e373]:
+              - heading "API changes" [level=2] [ref=f1e374]
+              - paragraph [ref=f1e375]: What the code surface's public interface does — computed by diffing the edited contract against the governed original.
+            - paragraph [ref=f1e376]: No changes — the document matches the governed original.
+          - generic [ref=f1e377]:
+            - generic [ref=f1e378]:
+              - heading "Canvas plan" [level=2] [ref=f1e379]
+              - paragraph [ref=f1e380]: "How the in-place amend reconciles the published variant set: combos matched by name over the enum cartesian product, all-defaults first."
+            - paragraph [ref=f1e381]: spec hash unchanged — the sync skips this set entirely.
+          - generic [ref=f1e382]:
+            - generic [ref=f1e383]:
+              - heading "Version advice" [level=2] [ref=f1e384]
+              - paragraph [ref=f1e385]: Per the contract spec's change policy.
+            - paragraph [ref=f1e386]:
+              - text: No governed change —
+              - code [ref=f1e387]: v1.1.0
+              - text: stands.
+          - paragraph [ref=f1e288]:
+            - text: "source:"
+            - code [ref=f1e289]: contracts/badge.contract.json · scripts/contract-schema.ts (live import) · docs/02-contract-spec.md
