@@ -120,6 +120,11 @@ export function Playground() {
   // -------------------------------------------------- contract editor state
   const [text, setText] = useState('');
   const [provenance, setProvenance] = useState('');
+  // The pristine original of whatever was last LOADED (example, import,
+  // generation, share link). While the editor text diverges from it, a small
+  // Reset in the pane header puts it back — one click, nothing lost but the
+  // divergence.
+  const [pristine, setPristine] = useState<{ text: string; provenance: string } | null>(null);
   const [debouncedText, setDebouncedText] = useState('');
   useEffect(() => {
     const t = window.setTimeout(() => setDebouncedText(text), 250);
@@ -193,6 +198,7 @@ export function Playground() {
     setText(pretty(raw));
     setReceipts(null);
     setProvenance(source);
+    setPristine({ text: pretty(raw), provenance: source });
     setActiveExample(slug ?? contractId);
   };
 
@@ -238,6 +244,10 @@ export function Playground() {
       if (first) {
         setText(pretty(first.proposal.contract));
         setProvenance(`proposed from code — ${first.name}`);
+        setPristine({
+          text: pretty(first.proposal.contract),
+          provenance: `proposed from code — ${first.name}`,
+        });
       } else if (result.skipped.length === 0) {
         setCodeError('No component found in the pasted source.');
       }
@@ -294,6 +304,10 @@ export function Playground() {
   const applyProposal = (proposal: FigmaProposal, origin: string) => {
     setText(pretty(proposal.contract));
     setProvenance(`proposed from ${origin} — ${proposal.setName}`);
+    setPristine({
+      text: pretty(proposal.contract),
+      provenance: `proposed from ${origin} — ${proposal.setName}`,
+    });
     setReceipts({ source: origin, groups: [...importGroupsRef.current, ...proposalGroups(proposal)] });
     setActiveExample(null);
   };
@@ -375,6 +389,7 @@ export function Playground() {
     setText(pretty(parsed));
     setReceipts(null);
     setProvenance('pasted contract JSON');
+    setPristine({ text: pretty(parsed), provenance: 'pasted contract JSON' });
     setActiveExample(null);
   };
 
@@ -398,6 +413,7 @@ export function Playground() {
     const contractText = pretty(result.contract);
     setText(contractText);
     setProvenance(origin);
+    setPristine({ text: contractText, provenance: origin });
     setActiveExample(null);
     // The SAME governed editor referees the model output — run it now so the
     // fix affordance appears exactly when the refusals do.
@@ -562,6 +578,7 @@ export function Playground() {
         if (cancelled) return;
         setText(state.contract);
         setProvenance('loaded from share link');
+        setPristine({ text: state.contract, provenance: 'loaded from share link' });
         setActiveExample(null);
         setOutputTab(
           state.output === 'preview' || emitters.some((e) => e.name === state.output)
@@ -587,7 +604,7 @@ export function Playground() {
       return true;
     }
   });
-  const [onboardDone, setOnboardDone] = useState<boolean[]>([false, false, false]);
+  const [onboardDone, setOnboardDone] = useState<boolean[]>([false, false, false, false]);
 
   const markOnboardStep = (i: number) =>
     setOnboardDone((d) => d.map((v, j) => (j === i ? true : v)));
@@ -623,6 +640,15 @@ export function Playground() {
     {
       label: 'Check the React output',
       run: () => setOutputTab('react'),
+    },
+    {
+      label: 'Reset the example',
+      run: () => {
+        // Step 2 broke the contract on purpose — this puts the pristine
+        // Badge back (same as the pane-header Reset while text diverges).
+        setOutputTab('preview');
+        loadContract('ds.badge', 'loaded from examples — ds.badge', 'badge');
+      },
     },
   ];
 
@@ -707,7 +733,7 @@ export function Playground() {
     <>
       {!onboardDismissed && (
         <div className="onboard" role="note" aria-label="Getting started">
-          <span className="onboard__title">New here? The whole loop in three clicks:</span>
+          <span className="onboard__title">New here? The whole loop in three clicks, plus a reset:</span>
           {onboardSteps.map((step, i) => (
             <button
               key={step.label}
@@ -1133,6 +1159,19 @@ export function Playground() {
         <div className="pane__head">
           <span className="pane__title">Contract</span>
           <span className="editor__meta">{provenance}</span>
+          {pristine !== null && text !== pristine.text ? (
+            <button
+              type="button"
+              className="btn--small share__btn"
+              onClick={() => {
+                setText(pristine.text);
+                setProvenance(pristine.provenance);
+              }}
+              title="Restore the pristine original of what was loaded — your edits are discarded."
+            >
+              Reset
+            </button>
+          ) : null}
           <button
             type="button"
             className="btn--small share__btn"
