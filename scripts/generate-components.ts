@@ -361,6 +361,34 @@ function validateContract(contract: Contract, byId: Map<string, Contract>, error
       }
     }
   }
+
+  // v7 elementByProp: the dynamic-tag lookup must be total and honest —
+  // the prop must be a declared enum, the map must cover every value, and
+  // every mapped element must be in the generator's element vocabulary
+  // (an unknown element would emit JSX that silently isn't HTML).
+  const ebp = contract.semantics.elementByProp;
+  if (ebp) {
+    const prop = contract.props.find((p) => p.name === ebp.prop);
+    if (!prop) {
+      errors.push(`${contract.id}: semantics.elementByProp references unknown prop "${ebp.prop}"`);
+    } else if (!isEnum(prop)) {
+      errors.push(`${contract.id}: semantics.elementByProp prop "${ebp.prop}" must be an enum prop`);
+    } else {
+      for (const v of prop.type.enum) {
+        if (!(v in ebp.map)) {
+          errors.push(`${contract.id}: semantics.elementByProp map is missing enum value "${v}"`);
+        }
+      }
+      for (const [k, el] of Object.entries(ebp.map)) {
+        if (!prop.type.enum.includes(k)) {
+          errors.push(`${contract.id}: semantics.elementByProp map key "${k}" is not a value of prop "${ebp.prop}"`);
+        }
+        if (!(el in ELEMENT_META)) {
+          errors.push(`${contract.id}: semantics.elementByProp maps "${k}" to unknown element "${el}" — must be one of the element vocabulary`);
+        }
+      }
+    }
+  }
 }
 
 // ---------------------------------------------------------------------------
@@ -611,6 +639,12 @@ const ELEMENT_META: Record<string, { attrs: string; el: string; supportsDisabled
   blockquote: { attrs: 'HTMLAttributes', el: 'HTMLQuoteElement', supportsDisabled: false },
   code: { attrs: 'HTMLAttributes', el: 'HTMLElement', supportsDisabled: false },
   kbd: { attrs: 'HTMLAttributes', el: 'HTMLElement', supportsDisabled: false },
+  h1: { attrs: 'HTMLAttributes', el: 'HTMLHeadingElement', supportsDisabled: false },
+  h2: { attrs: 'HTMLAttributes', el: 'HTMLHeadingElement', supportsDisabled: false },
+  h3: { attrs: 'HTMLAttributes', el: 'HTMLHeadingElement', supportsDisabled: false },
+  h4: { attrs: 'HTMLAttributes', el: 'HTMLHeadingElement', supportsDisabled: false },
+  h5: { attrs: 'HTMLAttributes', el: 'HTMLHeadingElement', supportsDisabled: false },
+  h6: { attrs: 'HTMLAttributes', el: 'HTMLHeadingElement', supportsDisabled: false },
 };
 
 const PARENT_PROP_REF = /^\{([a-z][\w-]*)\}$/;
@@ -688,7 +722,12 @@ function sampleDeps(
 }
 
 function generateTsx(contract: Contract, byId: Map<string, Contract>): string {
-  const meta = ELEMENT_META[contract.semantics.element];
+  // elementByProp renders a dynamic tag — the ref/attrs generalize to the
+  // shared HTMLElement surface (the concrete element varies per prop value).
+  const elementByProp = contract.semantics.elementByProp;
+  const meta = elementByProp
+    ? { attrs: 'HTMLAttributes', el: 'HTMLElement', supportsDisabled: false }
+    : ELEMENT_META[contract.semantics.element];
   const name = contract.name;
   const enums = enumProps(contract);
   const bools = boolProps(contract);
@@ -823,6 +862,13 @@ function generateTsx(contract: Contract, byId: Map<string, Contract>): string {
   } else if (contract.semantics.role && contract.semantics.role !== contract.semantics.element) {
     elementAttrs.push(`role="${contract.semantics.role}"`);
   }
+  // v7 elementByProp: mirror of ROLE_MAP — the rendered element follows the
+  // enum prop, falling back to semantics.element (validated: the map covers
+  // every enum value, so the fallback only guards unexpected runtime input).
+  let elementMapConst = '';
+  if (elementByProp) {
+    elementMapConst = `const ELEMENT_MAP: Record<string, ElementType> = ${JSON.stringify(elementByProp.map)};\n\n`;
+  }
   const rootEvent = events.find((e) => e.trigger === 'root');
   if (rootEvent) {
     elementAttrs.push(`onClick={handle${pascal(rootEvent.name)}}`);
@@ -941,8 +987,17 @@ function generateTsx(contract: Contract, byId: Map<string, Contract>): string {
         .join('\n')
     : '{children}';
 
-  const el = contract.semantics.element;
-  const typeImports = [meta.attrs, ...(slots.length > 0 ? ['ReactNode'] : [])].join(', ');
+  const el = elementByProp ? 'Tag' : contract.semantics.element;
+  if (elementByProp) {
+    prelude.push(
+      `  const Tag = ELEMENT_MAP[${codePropOf(elementByProp.prop)}] ?? '${contract.semantics.element}';`,
+    );
+  }
+  const typeImports = [
+    meta.attrs,
+    ...(slots.length > 0 ? ['ReactNode'] : []),
+    ...(elementByProp ? ['ElementType'] : []),
+  ].join(', ');
   const depImports = deps
     .map((depName) => `import { ${depName} } from '../${depName}';`)
     .join('\n');
@@ -956,7 +1011,7 @@ import { forwardRef${events.some((e) => e.toggles) ? ', useState' : ''} } from '
 import type { ${typeImports} } from 'react';
 ${depImports}${depImports ? '\n' : ''}import styles from './${name}.module.css';
 
-${iconsConst}${roleMapConst}export interface ${name}Props extends ${meta.attrs}<${meta.el}> {
+${iconsConst}${roleMapConst}${elementMapConst}export interface ${name}Props extends ${meta.attrs}<${meta.el}> {
 ${propLines.join('\n')}
 }
 
@@ -1042,7 +1097,10 @@ function generateStories(contract: Contract, byId: Map<string, Contract>): strin
           .map((v) => {
             // A story named after the component itself collides with its import.
             const safe = v.replace(/[^a-zA-Z0-9]+([a-zA-Z0-9])/g, (_, c: string) => c.toUpperCase()).replace(/[^a-zA-Z0-9]/g, '');
-            const storyName = pascal(safe) === name ? `${pascal(safe)}Variant` : pascal(safe);
+            let storyName = pascal(safe) === name ? `${pascal(safe)}Variant` : pascal(safe);
+            // Values that don't start with a letter (Heading level "1") are
+            // not legal identifiers — prefix the axis name (Level1).
+            if (!/^[A-Za-z_]/.test(storyName)) storyName = `${pascal(enums[0].name)}${storyName}`;
             return `
 export const ${storyName}: Story = {
   args: { ${enums[0].bindings.code.prop}: '${v}' },
@@ -1111,9 +1169,11 @@ export const With${pascal(slot.name)}: Story = {
       }
       colCombos = next;
     }
-    // Required text props must appear in every cell or the story won't typecheck.
+    // Required text props must appear in every cell or the story won't
+    // typecheck. Children-bound text props are excluded — they arrive as JSX
+    // children below (a `children` attribute would duplicate them).
     const requiredTextAttrs = contract.props
-      .filter((p) => p.type === 'text' && p.required && typeof p.default === 'string')
+      .filter((p) => p.type === 'text' && p.required && typeof p.default === 'string' && p.bindings.code.prop !== 'children')
       .map((p) => `${p.bindings.code.prop}="${p.default}"`);
     const cells: string[] = [];
     for (const row of rowProp.type.enum) {

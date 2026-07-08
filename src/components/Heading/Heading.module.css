@@ -1,0 +1,38 @@
+/* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/heading.contract.json (ds.heading v1.0.0)
+ * Regenerate with: npm run generate
+ */
+
+.root {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border: 0;
+  font-family: var(--font-control-family);
+  font-weight: var(--font-title-weight);
+  color: var(--color-surface-foreground);
+}
+
+.level-1 {
+  font-size: var(--font-heading-size-1);
+}
+
+.level-2 {
+  font-size: var(--font-heading-size-2);
+}
+
+.level-3 {
+  font-size: var(--font-heading-size-3);
+}
+
+.level-4 {
+  font-size: var(--font-heading-size-4);
+}
+
+.level-5 {
+  font-size: var(--font-heading-size-5);
+}
+
+.level-6 {
+  font-size: var(--font-heading-size-6);
+}

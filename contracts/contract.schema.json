@@ -54,13 +54,40 @@
             "fieldset",
             "blockquote",
             "code",
-            "kbd"
+            "kbd",
+            "h1",
+            "h2",
+            "h3",
+            "h4",
+            "h5",
+            "h6"
           ]
         },
         "role": {
           "type": "string"
         },
         "roleByProp": {
+          "type": "object",
+          "properties": {
+            "prop": {
+              "type": "string"
+            },
+            "map": {
+              "type": "object",
+              "propertyNames": {
+                "type": "string"
+              },
+              "additionalProperties": {
+                "type": "string"
+              }
+            }
+          },
+          "required": [
+            "prop",
+            "map"
+          ]
+        },
+        "elementByProp": {
           "type": "object",
           "properties": {
             "prop": {

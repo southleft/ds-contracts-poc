@@ -245,12 +245,21 @@ export const ContractSchema = z.strictObject({
     element: z.enum([
       'button', 'span', 'div', 'a', 'input', 'article', 'section', 'header', 'footer',
       'label', 'nav', 'hr', 'ul', 'li', 'p', 'textarea', 'select', 'fieldset',
-      'blockquote', 'code', 'kbd',
+      'blockquote', 'code', 'kbd', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6',
     ]),
     role: z.string().optional(),
     /** v4, gap G7: ARIA role driven by an enum prop (e.g. Banner: error →
      *  alert, info → status). Code emits a lookup; overrides `role`. */
     roleByProp: z
+      .object({ prop: z.string(), map: z.record(z.string(), z.string()) })
+      .optional(),
+    /** v7: HTML element driven by an enum prop (Heading: level "2" → h2).
+     *  Mirrors roleByProp — code emits an ELEMENT_MAP lookup and renders a
+     *  dynamic tag; `element` is the fallback. The canvas is unaffected
+     *  (text nodes carry no element semantics). The map must cover every
+     *  enum value and every mapped element must be in the code generator's
+     *  element vocabulary — validated at generation time. */
+    elementByProp: z
       .object({ prop: z.string(), map: z.record(z.string(), z.string()) })
       .optional(),
   }),

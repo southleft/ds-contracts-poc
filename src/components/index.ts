@@ -17,6 +17,7 @@ export * from './Code';
 export * from './Divider';
 export * from './EmptyState';
 export * from './Field';
+export * from './Heading';
 export * from './IconButton';
 export * from './Inline';
 export * from './Kbd';
