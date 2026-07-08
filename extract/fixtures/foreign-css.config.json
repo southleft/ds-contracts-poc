@@ -1,0 +1,8 @@
+{
+  "code": {
+    "adapter": "react-tsx",
+    "root": "extract/fixtures/foreign-css"
+  },
+  "idPrefix": "acme",
+  "out": "extract/fixtures/.out-css"
+}

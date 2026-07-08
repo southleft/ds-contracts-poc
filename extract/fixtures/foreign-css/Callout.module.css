@@ -1,0 +1,31 @@
+/* FIXTURE: hand-written styles — nothing here came from a generator. */
+
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: 8px; /* raw — the token tree HAS 8px tokens; candidates, not decisions */
+  background-color: #f9fafb; /* raw — equals color.gray.50's value */
+  border: 1px solid #f59e0b; /* shorthand — not invertible to one binding */
+  border-radius: 6px; /* raw — NO token has this value */
+  padding: 12px; /* raw — equals space.150's value */
+}
+
+.root[data-tone='warning'] {
+  background-color: #fef3c7; /* variant via data attribute — not an enum class */
+}
+
+.heading {
+  margin: 0;
+  font-size: 14px; /* raw */
+  color: var(--text-muted); /* var that resolves to NO token in the tree */
+}
+
+.body {
+  color: #374151; /* raw — equals color.gray.700's value */
+}
+
+@media (max-width: 600px) {
+  .root {
+    padding: 8px;
+  }
+}

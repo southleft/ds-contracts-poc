@@ -18,10 +18,16 @@
  * Deliberately single-file syntactic (no ts.Program / type checker): fast,
  * zero-config, and every place a heuristic fills a gap is marked 'inferred'
  * so humans review it — extraction proposes, never decides (docs/11).
+ *
+ * When a component has a co-located *.module.css, the css-module adapter
+ * additionally proposes ANATOMY (part tree, token bindings, layout, states)
+ * — see adapters/css-module.ts. Components without one keep the exact
+ * behavior above: API surface only, anatomy stays a stub.
  */
 import { readFileSync, readdirSync, existsSync, statSync } from 'node:fs';
 import path from 'node:path';
 import ts from 'typescript';
+import { extractAnatomy, loadTokenIndex, type TokenIndex } from './css-module.js';
 import type { ExtractedComponent, ExtractedProp } from '../types.js';
 
 const SKIP_FILE = /\.(stories|story|test|spec|demos?|d)\.tsx?$/;
@@ -330,13 +336,22 @@ export interface SkippedComponent {
   reason: string;
 }
 
+export interface ReactTsxOptions {
+  /** DTCG token files that referee var(--x) → {a.b.c} bindings during
+   *  anatomy extraction. Default: this repo's tokens/ layout, where present. */
+  tokenFiles?: string[];
+}
+
 export function extractReactTsx(
   root: string,
   skipped?: SkippedComponent[],
+  options?: ReactTsxOptions,
 ): ExtractedComponent[] {
   if (!existsSync(root) || !statSync(root).isDirectory()) {
     throw new Error(`react-tsx adapter: root directory not found: ${root}`);
   }
+  let tokenIndex: TokenIndex | null = null;
+  const tokens = () => (tokenIndex ??= loadTokenIndex(options?.tokenFiles));
   const out: ExtractedComponent[] = [];
   const seen = new Set<string>();
   for (const file of walkFiles(root)) {
@@ -385,10 +400,15 @@ export function extractReactTsx(
         });
       }
       let cssVars: string[] | undefined;
+      let anatomy: ExtractedComponent['anatomy'];
       const cssPath = file.replace(/\.tsx?$/, '.module.css');
       if (existsSync(cssPath)) {
         const css = readFileSync(cssPath, 'utf8');
         cssVars = [...new Set([...css.matchAll(/var\(--([a-z0-9-]+)\)/g)].map((mm) => mm[1]))];
+        // A co-located CSS Module makes the component's structure legible —
+        // propose anatomy from the JSX tree + the stylesheet (css-module
+        // adapter). Extraction failures degrade to notes, never to a crash.
+        anatomy = extractAnatomy({ sf, src, componentName, props, css, tokens: tokens() }) ?? undefined;
       }
       out.push({
         name: componentName,
@@ -396,6 +416,7 @@ export function extractReactTsx(
         adapter: 'react-tsx',
         props,
         ...(cssVars ? { cssVars } : {}),
+        ...(anatomy ? { anatomy } : {}),
       });
     }
   }
