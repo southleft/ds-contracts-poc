@@ -9,3 +9,4 @@ dashboard/dist/
 .runner-result.json
 private/
 .claude/
+.env.figma
