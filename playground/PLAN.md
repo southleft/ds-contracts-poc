@@ -40,6 +40,12 @@ browser. No backend, no analytics, no accounts.
   receipt on REST-shaped Badge.
 
 ### Phase 1 — MVP playground on a live URL
+
+> **Launch gate (per TJ, 2026-07-08): the playground does not launch
+> publicly until Figma URL import (W6) works end-to-end.** Paste-dump
+> import is a power-user affordance, not the import story — visitors
+> won't know where a dump comes from. W5 deploys are previews until W6
+> lands. Domain: default *.pages.dev for now.
 - **W3 — App shell + examples gallery**: `playground/` Vite app; routes
   `/playground` and `/examples`; gallery preloaded from repo contracts
   (atoms → Switch/Card molecules → Banner/ChatMessage compositions, plus the
@@ -88,10 +94,11 @@ browser. No backend, no analytics, no accounts.
   one `core/`, golden-guarded.
 
 ## Success criteria
-- **Phase 1**: a stranger with a URL can, in under a minute, pick Card from
-  the gallery, change an enum value in the contract, watch the refusal/
-  validation behavior, and copy working React + HTML output. Deployed on a
-  public URL.
+- **Phase 1 (preview)**: a stranger with a URL can, in under a minute, pick
+  Card from the gallery, change an enum value in the contract, watch the
+  refusal/validation behavior, and copy working React + HTML output.
+- **Launch**: Phase 1 + W6 — paste a figma.com component URL + token and get
+  a proposed contract with real bindings or named degradations.
 - **Phase 2**: paste a Figma component URL + token → proposed contract with
   real bindings (or named degradations) → working code.
 - **Phase 3**: a prompt produces a schema-valid contract that renders in all
