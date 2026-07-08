@@ -29,7 +29,9 @@
     "diagnose": "tsx parity/diagnose.ts",
     "figma:serve": "node scripts/figma-serve.mjs",
     "anchors:writeback": "node scripts/anchors-writeback.mjs",
-    "golden:update": "node scripts/update-golden.mjs"
+    "golden:update": "node scripts/update-golden.mjs",
+    "emitters:check": "tsx core/emitters-check.ts",
+    "core:browser-check": "node scripts/core-browser-check.mjs"
   },
   "engines": {
     "node": ">=20"
