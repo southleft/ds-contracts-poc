@@ -1,5 +1,5 @@
 {
-  "passed": 45,
+  "passed": 47,
   "total": 47,
   "results": [
     {
@@ -215,8 +215,7 @@
     {
       "id": "pending-first-sync-not-drift",
       "claim": "C3-detection",
-      "pass": false,
-      "error": "Error: Heading not routed to pending"
+      "pass": true
     },
     {
       "id": "refuse-hollow-state-previews",
@@ -231,8 +230,7 @@
     {
       "id": "state-axis-drift-both-directions",
       "claim": "C3-detection",
-      "pass": false,
-      "error": "Error: Opted-in contract without a canvas State axis must be figma BEHIND (acknowledged)"
+      "pass": true
     },
     {
       "id": "text-styles-from-typography-tokens",

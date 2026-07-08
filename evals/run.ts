@@ -935,6 +935,9 @@ const cases: Case[] = [
     id: 'pending-first-sync-not-drift',
     claim: 'C3-detection',
     run: () => {
+      // Induce the never-synced state: null anchors + no set in the snapshot.
+      editJson('contracts/heading.contract.json', (c) => { c.anchors.figma.componentSetKey = null; c.anchors.figma.nodeId = null; });
+      editJson(FIGMA_COMPONENTS, (s2) => { s2.sets = s2.sets.filter((x: any) => x.name !== 'Heading'); });
       if (parity().status !== 0) throw new Error('never-synced contract failed parity');
       const report = JSON.parse(readFileSync(path.join(SCRATCH, 'parity', 'report.json'), 'utf8'));
       if (!report.pending?.some((p: any) => p.subject === 'Heading')) throw new Error('Heading not routed to pending');
@@ -992,10 +995,19 @@ const cases: Case[] = [
     id: 'state-axis-drift-both-directions',
     claim: 'C3-detection',
     run: () => {
-      if (parity().status !== 0) throw new Error('Acknowledged Button.State failed the exit code');
-      const report = JSON.parse(readFileSync(path.join(SCRATCH, 'parity', 'report.json'), 'utf8'));
-      if (!report.acknowledged.some((x: any) => x.surface === 'figma' && x.classification === 'behind' && x.subject === 'Button.State'))
-        throw new Error('Opted-in contract without a canvas State axis must be figma BEHIND (acknowledged)');
+      // Induce the missing axis: strip State from the snapshot's Button set.
+      editJson(FIGMA_COMPONENTS, (s2) => {
+        const b = s2.sets.find((x: any) => x.name === 'Button');
+        delete b.properties.State;
+        b.variantCount = 12;
+      });
+      if (parity().status === 0) throw new Error('Opted-in contract without a canvas State axis passed parity');
+      expectFinding(readReport(), 'figma', 'behind', 'Button.State');
+      editJson(FIGMA_COMPONENTS, (s2) => {
+        const b = s2.sets.find((x: any) => x.name === 'Button');
+        b.properties.State = { type: 'VARIANT', defaultValue: 'Default', variantOptions: ['Default', 'Hover', 'Focus Visible', 'Disabled'], preferredValues: null };
+        b.variantCount = 24;
+      });
       editJson(CONTRACT, (c) => { delete c.figmaStatePreviews; });
       editJson(FIGMA_COMPONENTS, (s) => {
         s.sets.find((x: any) => x.name === 'Button').properties.State = {
