@@ -53,6 +53,7 @@ import { CopyButton } from '../components/CopyButton';
 import { PreviewControls, sanitizeOverrides } from '../components/PreviewControls';
 import { PreviewFrame } from '../components/PreviewFrame';
 import { ReceiptsPanel } from '../components/ReceiptsPanel';
+import { SpecSheet } from '../components/SpecSheet';
 
 type SourceTab = 'workspace' | 'examples' | 'describe' | 'figma' | 'code' | 'json' | 'tokens';
 const OUTPUT_LABELS: Record<string, string> = {
@@ -188,6 +189,20 @@ export function Playground() {
     lastGood.current = { contract: validation.contract, contracts: validation.contracts };
   }
 
+  // ------------------------------------------------ JSON | Spec pane views
+  // The Spec view renders the SAME contract as a designer-facing sheet —
+  // read-only; the JSON view (with the refereeing editor) is one toggle
+  // away and its text is never touched by switching. The spec tracks the
+  // last SCHEMA-VALID parse (generator violations still have a shape to
+  // show); while the text on screen isn't schema-valid, the sheet goes
+  // stale and says so — the refusal list below stays visible in both views.
+  const [contractView, setContractView] = useState<'json' | 'spec'>('json');
+  const lastSpec = useRef<{ contract: Contract; contracts: Map<string, Contract> } | null>(null);
+  if (validation.status === 'valid' || validation.status === 'violations') {
+    lastSpec.current = { contract: validation.contract, contracts: validation.contracts };
+  }
+  const specLive = validation.status === 'valid' || validation.status === 'violations';
+
   // Refusal → editor line resolution. Lines are only trusted while the text
   // on screen IS the text that was validated (the debounce window would
   // otherwise highlight yesterday's lines on today's keystrokes).
@@ -206,6 +221,17 @@ export function Playground() {
     return set;
   }, [issueLines]);
 
+  /** Scroll the JSON editor to a refusal's line — from the Spec view this
+   *  flips back to JSON first (the line lives in the text, not the sheet). */
+  const jumpToLine = (line: number) => {
+    if (contractView !== 'json') {
+      setContractView('json');
+      window.setTimeout(() => editorRef.current?.scrollToLine(line), 0);
+    } else {
+      editorRef.current?.scrollToLine(line);
+    }
+  };
+
   /** The refusal list — each entry that resolved to a line scrolls there. */
   const refusalList = (issues: string[]) => (
     <ul className="validation__list">
@@ -217,7 +243,7 @@ export function Playground() {
               <button
                 type="button"
                 className="validation__jump"
-                onClick={() => editorRef.current?.scrollToLine(line)}
+                onClick={() => jumpToLine(line)}
               >
                 {issue}
                 <span className="validation__jump-line"> → line {line + 1}</span>
@@ -1420,6 +1446,25 @@ export function Playground() {
       <section className="pg__center">
         <div className="pane__head">
           <span className="pane__title">Contract</span>
+          <div className="seg" role="group" aria-label="Contract view">
+            <button
+              type="button"
+              className={`seg__btn${contractView === 'json' ? ' is-active' : ''}`}
+              aria-pressed={contractView === 'json'}
+              onClick={() => setContractView('json')}
+            >
+              JSON
+            </button>
+            <button
+              type="button"
+              className={`seg__btn${contractView === 'spec' ? ' is-active' : ''}`}
+              aria-pressed={contractView === 'spec'}
+              onClick={() => setContractView('spec')}
+              title="The same contract as a readable spec sheet — props, variants, slots, tokens. Read-only; editing stays in JSON."
+            >
+              Spec
+            </button>
+          </div>
           <span className="editor__meta">{provenance}</span>
           {pristine !== null && text !== pristine.text ? (
             <button
@@ -1450,13 +1495,35 @@ export function Playground() {
           </div>
         ) : null}
         <div className="editor">
-          <ContractEditor
-            ref={editorRef}
-            text={text}
-            onChange={setText}
-            highlights={highlightLines}
-            placeholder="The contract — pick an example, import from Figma, or paste code."
-          />
+          {contractView === 'spec' ? (
+            lastSpec.current ? (
+              <>
+                {!specLive ? (
+                  <div className="preview__stale">
+                    Contract not schema-valid — showing the spec of the last valid parse. The
+                    refusals below name what to fix.
+                  </div>
+                ) : null}
+                <SpecSheet
+                  contract={lastSpec.current.contract}
+                  contracts={lastSpec.current.contracts}
+                  onEditJson={() => setContractView('json')}
+                />
+              </>
+            ) : (
+              <div className="pane__body hint">
+                No spec to show yet — load or paste a contract, then flip back here.
+              </div>
+            )
+          ) : (
+            <ContractEditor
+              ref={editorRef}
+              text={text}
+              onChange={setText}
+              highlights={highlightLines}
+              placeholder="The contract — pick an example, import from Figma, or paste code."
+            />
+          )}
           <div
             className={`validation ${
               validation.status === 'valid'
