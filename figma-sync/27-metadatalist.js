@@ -153,6 +153,22 @@ const boundPaint = (varName, consumer) => {
   return figma.variables.setBoundVariableForPaint({ type: 'SOLID', color: base }, 'color', v);
 };
 
+// Named text styles (synced by 01-tokens.js): consumers look up OUR styles
+// only — the ds_contracts/textStyleToken marker is identity, a foreign style
+// sharing a name is never used. Missing style (tokens script not run yet)
+// degrades gracefully: the raw fontName/fontSize already set on the node
+// stand until the next amend after the styles exist.
+let _textStyleMap = null;
+async function ourTextStyle(name) {
+  if (!_textStyleMap) {
+    _textStyleMap = {};
+    for (const s of await figma.getLocalTextStylesAsync()) {
+      if (s.getSharedPluginData('ds_contracts', 'textStyleToken')) _textStyleMap[s.name] = s;
+    }
+  }
+  return _textStyleMap[name] || null;
+}
+
 for (const style of FONT_STYLES) {
   await figma.loadFontAsync({ family: 'Inter', style });
 }
@@ -282,6 +298,12 @@ async function buildNode(spec, registry) {
     node.fontName = { family: 'Inter', style: spec.fontStyle || 'Medium' };
     node.fontSize = spec.fontSize || 16;
     node.characters = spec.characters || '';
+    if (spec.textStyle) {
+      // Exact-definition match compiled in: ride the named style. Text
+      // styles own typography only — the bound fill paint below coexists.
+      const st = await ourTextStyle(spec.textStyle);
+      if (st) { try { await node.setTextStyleIdAsync(st.id); } catch (e) { /* raw props stand */ } }
+    }
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });
