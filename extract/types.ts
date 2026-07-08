@@ -10,8 +10,13 @@
  * is adopted.
  *
  * Scope discipline (docs/11): extraction targets the differ's scope — the
- * API surface (props, variants, defaults, booleans, text, events). Anatomy
- * is never inferred from foreign code; it stays human-owned.
+ * API surface (props, variants, defaults, booleans, text, events) — PLUS,
+ * where the source is legible (co-located CSS Module + a JSX tree the
+ * adapter can read), a proposed ANATOMY: part tree, token bindings, layout,
+ * states. Anatomy stays human-REVIEWED — the proposal carries it so a
+ * code-only org gets a contract that can generate a faithful canvas, and
+ * every place extraction could not read is reported by name, never guessed
+ * (raw CSS values never become invented tokens).
  */
 
 export type PropKind = 'enum' | 'boolean' | 'string' | 'number' | 'node' | 'event' | 'other';
@@ -39,6 +44,77 @@ export interface ExtractedComponent {
   props: ExtractedProp[];
   /** CSS custom properties consumed, when the adapter can see a stylesheet */
   cssVars?: string[];
+  /** Proposed anatomy, when the adapter could read structure + styling
+   *  (react-tsx with a co-located *.module.css). Absent = stub as before. */
+  anatomy?: ExtractedAnatomy;
+}
+
+// ---------------------------------------------------------------------------
+// Anatomy extraction IR (css-module adapter → propose.ts)
+// ---------------------------------------------------------------------------
+
+/** A part in the extracted anatomy tree — the contract Part shape, except
+ *  component refs carry the CODE component name (propose.ts maps it to a
+ *  contract id under the configured prefix). Token refs are already in
+ *  canonical dot form ("{space.inset-x.sm}", "{color.feedback.{variant}.background}"),
+ *  resolved against the REAL token tree — never a guessed tokenization. */
+export interface ExtractedPart {
+  element?: string;
+  layout?: {
+    display?: 'flex' | 'inline-flex';
+    direction?: 'row' | 'column';
+    align?: 'start' | 'center' | 'end' | 'stretch';
+    justify?: 'start' | 'center' | 'end' | 'space-between';
+    grow?: boolean;
+    overlap?: boolean;
+  };
+  overlay?: { placement: 'top' | 'bottom' | 'start' | 'end' };
+  tokens?: Record<string, string>;
+  /** Root-level interaction states: state → (css prop → token ref). */
+  states?: Record<string, Record<string, string>>;
+  content?: { prop: string };
+  text?: string;
+  animation?: 'spin' | 'pulse';
+  slot?: { name: string };
+  /** Code component name (e.g. "Avatar") — id-mapped by propose.ts. */
+  component?: { name: string; props?: Record<string, string | boolean>; text?: string };
+  attrs?: Record<string, string>;
+  visibleWhen?: { prop: string; equals?: string };
+  optional?: boolean;
+  parts?: Record<string, ExtractedPart>;
+}
+
+/** A literal CSS value extraction refuses to tokenize — reported by name
+ *  with nearest-token candidates from the real token tree (by value). */
+export interface RawValueFinding {
+  selector: string;
+  property: string;
+  value: string;
+  /** Token paths whose resolved $value equals this literal. NEVER applied —
+   *  a candidate list for the human, not a decision. */
+  candidates: string[];
+}
+
+/** Behavior surface read from the code (onClick wiring + toggle pattern),
+ *  keyed by event name ("toggle" for onToggle). */
+export interface ExtractedEventWiring {
+  trigger: string;
+  toggles?: { prop: string; between: [string, string]; aria?: string };
+  /** Uncontrolled useState default for the toggled prop, when present. */
+  uncontrolledDefault?: string;
+}
+
+export interface ExtractedAnatomy {
+  root: ExtractedPart;
+  /** Root host element (→ semantics.element) and ARIA role, when literal. */
+  element: string;
+  role?: string;
+  /** Contract-level states list, from CSS state selectors on the root. */
+  states: string[];
+  events?: Record<string, ExtractedEventWiring>;
+  rawValues: RawValueFinding[];
+  /** Named degradation notes — everything seen but not extracted. */
+  notes: string[];
 }
 
 /** A design-side component set, from extract/figma-dump.js or the parity
@@ -64,6 +140,11 @@ export interface ExtractConfig {
      *  "parity-snapshot" to reconcile against parity/snapshots/figma-components.json */
     source: string;
   };
+  /** DTCG token files used to referee css var(--x) → token-path bindings
+   *  during anatomy extraction (default: this repo's tokens/ layout).
+   *  Brownfield orgs point this at THEIR token set — bindings must resolve
+   *  against the real tree, never a guessed hyphen→dot split. */
+  tokens?: string[];
   /** Contract id prefix for proposals (default "ds") */
   idPrefix?: string;
   /** Output directory (default "extract/out") */

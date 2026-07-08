@@ -30,7 +30,7 @@ const skipped: SkippedComponent[] = [];
 function runExtract(): ExtractedComponent[] {
   if (config.code.adapter === 'react-tsx') {
     if (!config.code.root) throw new Error('react-tsx adapter needs code.root');
-    return extractReactTsx(config.code.root, skipped);
+    return extractReactTsx(config.code.root, skipped, { tokenFiles: config.tokens });
   }
   if (!config.code.manifest) throw new Error('cem adapter needs code.manifest');
   return extractCem(config.code.manifest);
@@ -63,9 +63,17 @@ if (command === 'code') {
       '\n';
   }
   writeFileSync(path.join(out, 'proposals.md'), report + '\n');
+  const withAnatomy = extracted.filter((c) => c.anatomy).length;
+  const rawValueCount = extracted.reduce((n, c) => n + (c.anatomy?.rawValues.length ?? 0), 0);
   console.log(
     `✔ Extracted ${extracted.length} component(s) → ${out}/code-extraction.json\n` +
       `✔ ${results.length} proposed contract(s) → ${out}/contracts/ (all schema-valid)\n` +
+      (withAnatomy > 0
+        ? `✔ ${withAnatomy} proposal(s) carry EXTRACTED anatomy (structure + token bindings)` +
+          (rawValueCount > 0
+            ? ` — ${rawValueCount} raw CSS value(s) reported with candidates, none invented\n`
+            : '\n')
+        : '') +
       (skipped.length > 0
         ? `⚠ ${skipped.length} component(s) seen but not extractable — listed in ${out}/proposals.md\n`
         : '') +
