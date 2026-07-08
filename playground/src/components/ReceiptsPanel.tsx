@@ -17,6 +17,12 @@ export function ReceiptsPanel({ receipts }: { receipts: Receipts | null }) {
           </span>
         ) : null}
       </div>
+      {receipts ? (
+        <p className="receipts__sub">
+          What the engine reported instead of guessing — every gap, note, and raw value from this
+          import, verbatim.
+        </p>
+      ) : null}
       {!receipts ? (
         <p className="receipts__empty">
           Import from Figma or propose from code and every degradation, note, and unbound value

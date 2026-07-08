@@ -63,6 +63,15 @@ const OUTPUT_LABELS: Record<string, string> = {
   'figma-script': 'Figma script',
 };
 
+/** Tab tooltips in designer language — what each output IS, not its
+ *  implementation pedigree (the emitter registry's labels speak developer). */
+const OUTPUT_TITLES: Record<string, string> = {
+  react: 'The component code the shipping generator produces — TSX, scoped CSS, and stories.',
+  html: 'Plain HTML + CSS you can paste anywhere — no build step needed.',
+  'react-inline': 'React with the token values written in as plain numbers and colors — for codebases without a token pipeline.',
+  'figma-script': 'The script that builds or updates this component in Figma.',
+};
+
 /** Workspace source tags — plain text, grouped display order. */
 const WS_TAGS: Record<WorkspaceSource, string> = {
   figma: 'FIGMA',
@@ -1375,7 +1384,8 @@ export function Playground() {
               />
               <p className="hint">
                 The power-user path: a pasted contract goes straight to the editor; a pasted dump
-                runs the same proposer the Figma import runs.
+                (the JSON a Figma plugin or REST export produces) runs the same proposer the
+                Figma import runs.
               </p>
             </div>
             <button type="button" className="btn--primary" disabled={!jsonText.trim()} onClick={loadJson}>
@@ -1593,7 +1603,7 @@ export function Playground() {
               type="button"
               role="tab"
               aria-selected={outputTab === e.name}
-              title={e.label}
+              title={OUTPUT_TITLES[e.name] ?? e.label}
               className={`tabs__tab${outputTab === e.name ? ' is-active' : ''}`}
               onClick={() => setOutputTab(e.name)}
             >
@@ -1701,7 +1711,14 @@ export function Playground() {
         )}
         <div className="provenance">
           Generated in your browser by the same core that ships the repo&rsquo;s{' '}
-          {contractsById.size} components — core/index.ts, golden-guarded.
+          {contractsById.size} components — core/index.ts,{' '}
+          <span
+            title="Golden-guarded: the CLI's output from this same core is byte-compared against committed reference files on every eval run — the playground cannot drift from the shipping generator."
+            style={{ textDecoration: 'underline dotted', cursor: 'help' }}
+          >
+            golden-guarded
+          </span>
+          .
         </div>
       </section>
       </div>

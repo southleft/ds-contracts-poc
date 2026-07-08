@@ -38,6 +38,10 @@ export function Examples() {
               <div className="excard__meta">{e.category}</div>
               <div className="excard__name">{e.name}</div>
               <div className="excard__blurb">{e.blurb}</div>
+              <div className="excard__caption">
+                <span className="excard__caption-label">What to notice</span>
+                {e.caption}
+              </div>
             </div>
           </Link>
         ))}

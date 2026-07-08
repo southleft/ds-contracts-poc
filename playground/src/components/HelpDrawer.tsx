@@ -78,6 +78,46 @@ export function HelpDrawer({ open, onClose }: { open: boolean; onClose: () => vo
               tokens or keys.
             </p>
           </section>
+          <section>
+            <h3 className="drawer__section-title">Glossary</h3>
+            <dl className="drawer__glossary">
+              <dt>Contract</dt>
+              <dd>
+                The one JSON document that describes a component — its props, structure, and
+                token references — from which every output is generated.
+              </dd>
+              <dt>Anatomy</dt>
+              <dd>
+                The contract&rsquo;s named tree of parts (root, label, icon…) that both the CSS
+                and the Figma layers are built from.
+              </dd>
+              <dt>Token binding</dt>
+              <dd>
+                A style tied to a design-token name, like{' '}
+                <code>{'{color.action.primary.background}'}</code>, instead of a hard-coded value.
+              </dd>
+              <dt>Emitter</dt>
+              <dd>
+                A function that turns a contract into one kind of output — React code, plain
+                HTML, or a script that builds the Figma component.
+              </dd>
+              <dt>Refusal</dt>
+              <dd>
+                The engine declining to generate because something in the contract is wrong, with
+                the exact reason named — never a silent guess or fix.
+              </dd>
+              <dt>Degradation</dt>
+              <dd>
+                When an import can&rsquo;t get full information (say, no variable names), the
+                result steps down a tier and reports what was missing instead of inventing it.
+              </dd>
+              <dt>Promotion</dt>
+              <dd>
+                A change made on one surface (design or code) becoming a reviewed update to the
+                contract, which then regenerates the other surface to match.
+              </dd>
+            </dl>
+          </section>
         </div>
       </aside>
     </>
