@@ -11,3 +11,4 @@ private/
 .claude/
 .env.figma
 .env.local
+.playwright-mcp/
