@@ -10,7 +10,7 @@ Where this project intends to go, in public. Each phase has a **falsifiable exit
 
 The contract-as-source-of-truth loop, demonstrated end to end.
 
-- [x] 50 component contracts generating a typed React library and a native design-tool library from the same JSON
+- [x] 51 component contracts generating a typed React library and a native design-tool library from the same JSON
 - [x] 282 DTCG tokens compiled to CSS custom properties and design-tool variables (light + dark × Default/Aurora brand modes)
 - [x] Three-way parity differ: every drift classified *ahead / behind / mismatched* with a proposed remedy
 - [x] Promotion loop executed in both directions on live surfaces, with receipts ([docs/06](06-parity-loop.md))
