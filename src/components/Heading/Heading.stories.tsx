@@ -14,7 +14,7 @@ const meta = {
     docs: {
       description: {
         component:
-          'Sectioning heading whose rendered HTML element follows the level prop (h1–h6) via semantics.elementByProp, with a token-governed size ramp. The canvas renders the same ramp as a Level variant set — text nodes carry no element semantics, so only code renders the element itself.',
+          'Sectioning heading whose rendered HTML element follows the level prop (h1–h6) via semantics.elementByProp, with a visual size ramp on the existing control type scale — document outline and visual weight are deliberately independent axes. Text nodes carry no element semantics, so only code renders the element itself.',
       },
     },
   },
@@ -25,10 +25,17 @@ const meta = {
       description:
         'Document outline level — drives the rendered element (h1–h6) and the size ramp.',
     },
+    size: {
+      control: 'select',
+      options: ['sm', 'md', 'lg'],
+      description:
+        'Visual size on the control type scale — independent of the document outline level.',
+    },
     children: { control: 'text', description: 'Heading text.' },
   },
   args: {
     level: '2',
+    size: 'lg',
     children: 'Heading',
   },
 } satisfies Meta<typeof Heading>;
@@ -61,7 +68,7 @@ export const Level5: Story = {
 export const Level6: Story = {
   args: { level: '6' },
 };
-/** Every legal combination the contract defines. */
+/** Every legal combination the contract defines (level × size). */
 export const Matrix: Story = {
   parameters: { controls: { disable: true } },
   render: () => (
@@ -69,17 +76,65 @@ export const Matrix: Story = {
       style={{
         display: 'grid',
         gap: 16,
-        gridTemplateColumns: 'repeat(1, max-content)',
+        gridTemplateColumns: 'repeat(3, max-content)',
         alignItems: 'center',
         justifyItems: 'start',
       }}
     >
-      <Heading level="1">Heading</Heading>
-      <Heading level="2">Heading</Heading>
-      <Heading level="3">Heading</Heading>
-      <Heading level="4">Heading</Heading>
-      <Heading level="5">Heading</Heading>
-      <Heading level="6">Heading</Heading>
+      <Heading level="1" size="sm">
+        Heading
+      </Heading>
+      <Heading level="1" size="md">
+        Heading
+      </Heading>
+      <Heading level="1" size="lg">
+        Heading
+      </Heading>
+      <Heading level="2" size="sm">
+        Heading
+      </Heading>
+      <Heading level="2" size="md">
+        Heading
+      </Heading>
+      <Heading level="2" size="lg">
+        Heading
+      </Heading>
+      <Heading level="3" size="sm">
+        Heading
+      </Heading>
+      <Heading level="3" size="md">
+        Heading
+      </Heading>
+      <Heading level="3" size="lg">
+        Heading
+      </Heading>
+      <Heading level="4" size="sm">
+        Heading
+      </Heading>
+      <Heading level="4" size="md">
+        Heading
+      </Heading>
+      <Heading level="4" size="lg">
+        Heading
+      </Heading>
+      <Heading level="5" size="sm">
+        Heading
+      </Heading>
+      <Heading level="5" size="md">
+        Heading
+      </Heading>
+      <Heading level="5" size="lg">
+        Heading
+      </Heading>
+      <Heading level="6" size="sm">
+        Heading
+      </Heading>
+      <Heading level="6" size="md">
+        Heading
+      </Heading>
+      <Heading level="6" size="lg">
+        Heading
+      </Heading>
     </div>
   ),
 };

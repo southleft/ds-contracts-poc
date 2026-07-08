@@ -13,26 +13,14 @@
   color: var(--color-surface-foreground);
 }
 
-.level-1 {
-  font-size: var(--font-heading-size-1);
+.size-sm {
+  font-size: var(--font-control-size-sm);
 }
 
-.level-2 {
-  font-size: var(--font-heading-size-2);
+.size-md {
+  font-size: var(--font-control-size-md);
 }
 
-.level-3 {
-  font-size: var(--font-heading-size-3);
-}
-
-.level-4 {
-  font-size: var(--font-heading-size-4);
-}
-
-.level-5 {
-  font-size: var(--font-heading-size-5);
-}
-
-.level-6 {
-  font-size: var(--font-heading-size-6);
+.size-lg {
+  font-size: var(--font-control-size-lg);
 }

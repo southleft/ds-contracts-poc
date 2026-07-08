@@ -1,87 +1,17 @@
 {
   "summary": {
     "total": 0,
-    "acknowledged": 11,
+    "acknowledged": 0,
+    "pending": 1,
     "bySurface": {}
   },
   "findings": [],
-  "acknowledged": [
+  "acknowledged": [],
+  "pending": [
     {
-      "surface": "figma",
-      "classification": "behind",
       "subject": "Heading",
-      "detail": "Component set missing from Figma file",
-      "remedy": "Run figma-sync scripts (npm run figma:plan, execute in Figma)"
-    },
-    {
-      "surface": "figma-tokens",
-      "classification": "behind",
-      "subject": "Primitives/font/size/500",
-      "detail": "Token exists in tokens/ but has no Figma variable",
-      "remedy": "Re-run figma-sync token script (or figma_import_tokens ≥1.34 with creation support)"
-    },
-    {
-      "surface": "figma-tokens",
-      "classification": "behind",
-      "subject": "Primitives/font/size/600",
-      "detail": "Token exists in tokens/ but has no Figma variable",
-      "remedy": "Re-run figma-sync token script (or figma_import_tokens ≥1.34 with creation support)"
-    },
-    {
-      "surface": "figma-tokens",
-      "classification": "behind",
-      "subject": "Primitives/font/size/700",
-      "detail": "Token exists in tokens/ but has no Figma variable",
-      "remedy": "Re-run figma-sync token script (or figma_import_tokens ≥1.34 with creation support)"
-    },
-    {
-      "surface": "figma-tokens",
-      "classification": "behind",
-      "subject": "Primitives/font/size/800",
-      "detail": "Token exists in tokens/ but has no Figma variable",
-      "remedy": "Re-run figma-sync token script (or figma_import_tokens ≥1.34 with creation support)"
-    },
-    {
-      "surface": "figma-tokens",
-      "classification": "behind",
-      "subject": "Semantic/font/heading/size/1",
-      "detail": "Token exists in tokens/ but has no Figma variable",
-      "remedy": "Re-run figma-sync token script (or figma_import_tokens ≥1.34 with creation support)"
-    },
-    {
-      "surface": "figma-tokens",
-      "classification": "behind",
-      "subject": "Semantic/font/heading/size/2",
-      "detail": "Token exists in tokens/ but has no Figma variable",
-      "remedy": "Re-run figma-sync token script (or figma_import_tokens ≥1.34 with creation support)"
-    },
-    {
-      "surface": "figma-tokens",
-      "classification": "behind",
-      "subject": "Semantic/font/heading/size/3",
-      "detail": "Token exists in tokens/ but has no Figma variable",
-      "remedy": "Re-run figma-sync token script (or figma_import_tokens ≥1.34 with creation support)"
-    },
-    {
-      "surface": "figma-tokens",
-      "classification": "behind",
-      "subject": "Semantic/font/heading/size/4",
-      "detail": "Token exists in tokens/ but has no Figma variable",
-      "remedy": "Re-run figma-sync token script (or figma_import_tokens ≥1.34 with creation support)"
-    },
-    {
-      "surface": "figma-tokens",
-      "classification": "behind",
-      "subject": "Semantic/font/heading/size/5",
-      "detail": "Token exists in tokens/ but has no Figma variable",
-      "remedy": "Re-run figma-sync token script (or figma_import_tokens ≥1.34 with creation support)"
-    },
-    {
-      "surface": "figma-tokens",
-      "classification": "behind",
-      "subject": "Semantic/font/heading/size/6",
-      "detail": "Token exists in tokens/ but has no Figma variable",
-      "remedy": "Re-run figma-sync token script (or figma_import_tokens ≥1.34 with creation support)"
+      "detail": "No design anchor yet — the contract has never been synced to Figma (pending first generation, not drift)",
+      "remedy": "Run its figma-sync script, write back anchors (npm run anchors:writeback), re-extract snapshots"
     }
   ],
   "checkedContracts": [

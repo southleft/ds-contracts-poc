@@ -44,6 +44,14 @@ interface Finding {
 const findings: Finding[] = [];
 const add = (f: Finding) => findings.push(f);
 
+/** Pending first sync (v7): a contract whose design anchors are still null
+ *  has never been generated on the canvas — the missing set is EXPECTED
+ *  mid-workflow state (add contract → run figma-sync → anchors written back
+ *  → re-extract snapshots), not drift between surfaces that were once in
+ *  sync. Reported in its own section, excluded from the exit code — the
+ *  moment anchors exist, a missing set is a hard BEHIND again. */
+const pending: Array<{ subject: string; detail: string; remedy: string }> = [];
+
 const isEnum = (p: Prop): p is Prop & { type: { enum: string[] } } =>
   typeof p.type === 'object' && 'enum' in p.type;
 const pascal = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
@@ -285,6 +293,14 @@ for (const contract of contracts) {
     figmaComponents.sets.find((s) => anchorKey && s.key === anchorKey) ??
     figmaComponents.sets.find((s) => s.name === contract.name);
   if (!set) {
+    if (!anchorKey && !contract.anchors.figma.nodeId) {
+      pending.push({
+        subject: contract.name,
+        detail: 'No design anchor yet — the contract has never been synced to Figma (pending first generation, not drift)',
+        remedy: 'Run its figma-sync script, write back anchors (npm run anchors:writeback), re-extract snapshots',
+      });
+      continue;
+    }
     add({
       surface: 'figma',
       classification: 'behind',
@@ -614,12 +630,12 @@ for (const f of active) {
   bySurface[f.surface] ??= {};
   bySurface[f.surface][f.classification] = (bySurface[f.surface][f.classification] ?? 0) + 1;
 }
-const summary = { total: active.length, acknowledged: acknowledged.length, bySurface };
+const summary = { total: active.length, acknowledged: acknowledged.length, pending: pending.length, bySurface };
 
 writeFileSync(
   path.join(ROOT, 'parity', 'report.json'),
   JSON.stringify(
-    { summary, findings: active, acknowledged, checkedContracts: contracts.map((c) => `${c.id}@${c.version}`) },
+    { summary, findings: active, acknowledged, pending, checkedContracts: contracts.map((c) => `${c.id}@${c.version}`) },
     null,
     2,
   ) + '\n',
@@ -632,8 +648,19 @@ const printFinding = (f: Finding) => {
   console.log(`    → ${f.remedy}\n`);
 };
 
+const printPending = () => {
+  if (pending.length === 0) return;
+  console.log(`  — pending first sync (no design anchor yet; does not fail the check) —\n`);
+  for (const p of pending) {
+    console.log(`  [figma PENDING] ${p.subject}`);
+    console.log(`    ${p.detail}`);
+    console.log(`    → ${p.remedy}\n`);
+  }
+};
+
 if (active.length === 0 && acknowledged.length === 0) {
-  console.log('✔ Parity clean — code, Figma, and tokens all match the contract.');
+  console.log(`✔ Parity clean — code, Figma, and tokens all match the contract.${pending.length > 0 ? ` (${pending.length} contract(s) pending first sync.)` : ''}`);
+  printPending();
   process.exit(0);
 }
 
@@ -662,5 +689,6 @@ if (acknowledged.length > 0) {
     console.log(`  …and ${acknowledged.length - MAX_CONSOLE_FINDINGS} more acknowledged (see parity/report.json)\n`);
   }
 }
+printPending();
 
 process.exit(active.length > 0 ? 1 : 0);

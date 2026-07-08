@@ -368,29 +368,6 @@
           "$value": "{font.weight.semibold}"
         }
       }
-    },
-    "heading": {
-      "size": {
-        "$type": "dimension",
-        "1": {
-          "$value": "{font.size.800}"
-        },
-        "2": {
-          "$value": "{font.size.700}"
-        },
-        "3": {
-          "$value": "{font.size.600}"
-        },
-        "4": {
-          "$value": "{font.size.500}"
-        },
-        "5": {
-          "$value": "{font.size.400}"
-        },
-        "6": {
-          "$value": "{font.size.300}"
-        }
-      }
     }
   }
 }

@@ -4,7 +4,7 @@
   "name": "Heading",
   "version": "1.0.0",
   "status": "draft",
-  "description": "Sectioning heading whose rendered HTML element follows the level prop (h1–h6) via semantics.elementByProp, with a token-governed size ramp. The canvas renders the same ramp as a Level variant set — text nodes carry no element semantics, so only code renders the element itself.",
+  "description": "Sectioning heading whose rendered HTML element follows the level prop (h1–h6) via semantics.elementByProp, with a visual size ramp on the existing control type scale — document outline and visual weight are deliberately independent axes. Text nodes carry no element semantics, so only code renders the element itself.",
   "semantics": {
     "element": "p",
     "elementByProp": {
@@ -46,6 +46,28 @@
       }
     },
     {
+      "name": "size",
+      "description": "Visual size on the control type scale — independent of the document outline level.",
+      "type": {
+        "enum": ["sm", "md", "lg"]
+      },
+      "default": "lg",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Size",
+          "values": {
+            "sm": "Small",
+            "md": "Medium",
+            "lg": "Large"
+          }
+        },
+        "code": {
+          "prop": "size"
+        }
+      }
+    },
+    {
       "name": "children",
       "description": "Heading text.",
       "type": "text",
@@ -72,7 +94,7 @@
       },
       "tokens": {
         "font-family": "{font.control.family}",
-        "font-size": "{font.heading.size.{level}}",
+        "font-size": "{font.control.size.{size}}",
         "font-weight": "{font.title.weight}",
         "color": "{color.surface.foreground}"
       }
