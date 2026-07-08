@@ -30,7 +30,7 @@ The architecture is adapter-shaped at both ends. Code side: adapters normalize a
 
 ### "What stops the contract itself from being wrong or rotting?"
 
-Three mechanisms. **Refusal**: invalid contracts fail the build by name — unknown tokens, defaults outside enums, duplicate identities, malformed references, incomplete mode sets (claims C2 in [docs/07](07-validation.md), adversarially swept). **Verification**: the differ continuously classifies every divergence between contract and both surfaces as ahead/behind/mismatched with a remedy; 33 deterministic evals prove each detection class. **Convergence**: applying the differ's own proposed patch returns the system to parity (eval: `promotion-converges`) — the loop never oscillates and never lies about the next step.
+Three mechanisms. **Refusal**: invalid contracts fail the build by name — unknown tokens, defaults outside enums, duplicate identities, malformed references, incomplete mode sets (claims C2 in [docs/07](07-validation.md), adversarially swept). **Verification**: the differ continuously classifies every divergence between contract and both surfaces as ahead/behind/mismatched with a remedy; 37 deterministic evals prove each detection class. **Convergence**: applying the differ's own proposed patch returns the system to parity (eval: `promotion-converges`) — the loop never oscillates and never lies about the next step.
 
 ### "Why should I believe the AI-adherence number? Everyone's benchmarks flatter themselves."
 

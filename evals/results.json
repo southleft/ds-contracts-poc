@@ -1,6 +1,6 @@
 {
-  "passed": 32,
-  "total": 33,
+  "passed": 37,
+  "total": 37,
   "results": [
     {
       "id": "refuse-unknown-token-reference",
@@ -115,8 +115,7 @@
     {
       "id": "refuse-contract-edge-cases",
       "claim": "C2-refusal",
-      "pass": false,
-      "error": "Error: three-enum-axes (canvas maps two): ACCEPTED (must refuse)"
+      "pass": true
     },
     {
       "id": "extract-foreign-library",
@@ -136,6 +135,26 @@
     {
       "id": "golden-generated-output",
       "claim": "C1-determinism",
+      "pass": true
+    },
+    {
+      "id": "naxis-full-cartesian-product",
+      "claim": "C1-determinism",
+      "pass": true
+    },
+    {
+      "id": "detect-snapshot-provenance-mismatch",
+      "claim": "C3-detection",
+      "pass": true
+    },
+    {
+      "id": "detect-stale-snapshot",
+      "claim": "C3-detection",
+      "pass": true
+    },
+    {
+      "id": "baseline-acknowledges-without-failing",
+      "claim": "C3-detection",
       "pass": true
     },
     {

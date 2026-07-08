@@ -498,12 +498,6 @@ const cases: Case[] = [
         clone.bindings.figma.property = 'Variant Two';
         c.props.push(clone); // same bindings.code.prop as the original
       });
-      expectRefusal('three-enum-axes (canvas maps two)', 'at most TWO variant axes', (c) => {
-        for (const extra of ['zshape', 'zdensity']) {
-          c.props.push({ name: extra, type: { enum: ['aa', 'bb'] }, default: 'aa',
-            bindings: { figma: { kind: 'VARIANT', property: extra.toUpperCase(), values: { aa: 'Aa', bb: 'Bb' } }, code: { prop: extra } } });
-        }
-      });
       expectRefusal('non-semver version', 'semver', (c) => { c.version = 'v2-final'; });
       expectRefusal('unknown field silently stripped (strict schema)', 'Unrecognized key', (c) => {
         c.behavior = { on: 'hover' };
@@ -683,6 +677,75 @@ const cases: Case[] = [
       if (bad.length > 0) {
         throw new Error(`Generated output diverges from golden manifest (${bad.length} file[s]): ${bad.slice(0, 5).join(', ')} — if intentional, npm run golden:update in a reviewed change`);
       }
+    },
+  },
+  {
+    // N-axis variant support (2026-07-08): every enum prop is a variant axis.
+    id: 'naxis-full-cartesian-product',
+    claim: 'C1-determinism',
+    run: () => {
+      cpSync(path.join(ROOT, 'evals', 'fixtures', 'four-axis.contract.json'),
+        path.join(SCRATCH, 'contracts', 'four-axis.contract.json'));
+      let r = generate();
+      if (r.status !== 0) throw new Error(`4-axis contract refused:\n${r.out.slice(0, 600)}`);
+      r = run(TSX, ['scripts/generate-figma.ts']);
+      if (r.status !== 0) throw new Error(`figma:plan failed with 4-axis contract:\n${r.out.slice(0, 600)}`);
+      const syncDir = path.join(SCRATCH, 'figma-sync');
+      const parseVariants = (file: string) => JSON.parse(
+        readFileSync(path.join(syncDir, file), 'utf8').match(/const VARIANTS = (\[[\s\S]*?\n\]);/)![1]);
+      const v = parseVariants(readdirSync(syncDir).find((f) => /^\d+-fouraxis\.js$/.test(f))!);
+      if (v.length !== 36) throw new Error(`Expected 36 variants (3×3×2×2), got ${v.length}`);
+      if (v[0].name !== 'Variant=Primary, Size=Medium, Emphasis=Medium, Icon Position=Start')
+        throw new Error(`All-defaults combo must be FIRST: "${v[0].name}"`);
+      if (v.some((x: any) => x.name.split(', ').length !== 4))
+        throw new Error('A variant name is missing an axis segment');
+      const rowsN = Math.max(...v.map((x: any) => x.row)) + 1;
+      const colsN = Math.max(...v.map((x: any) => x.col)) + 1;
+      if (rowsN !== 3 || colsN !== 12) throw new Error(`Grid must be 3×12; got ${rowsN}×${colsN}`);
+      const nd = v.find((x: any) => x.name === 'Variant=Danger, Size=Large, Emphasis=Semibold, Icon Position=End');
+      if (nd.spec.fill !== 'color/action/danger/background' || nd.spec.bindings.paddingLeft !== 'space/inset-x/lg')
+        throw new Error('Per-axis {prop} token substitution did not resolve');
+      const bv = parseVariants(readdirSync(syncDir).find((f) => /^\d+-button\.js$/.test(f))!);
+      if (bv[0].name !== 'Variant=Primary, Size=Medium' || bv.length !== 12)
+        throw new Error(`2-axis names changed ("${bv[0].name}") — amend reconciles BY NAME`);
+      rmSync(path.join(SCRATCH, 'contracts', 'four-axis.contract.json'));
+    },
+  },
+  {
+    id: 'detect-snapshot-provenance-mismatch',
+    claim: 'C3-detection',
+    run: () => {
+      editJson(FIGMA_COMPONENTS, (s2) => { s2.fileKey = 'WRONG_FILE_KEY'; });
+      const r = parity();
+      if (r.status !== 1) throw new Error('Foreign-file snapshot passed parity');
+      const f = readReport().find((x) => x.subject === 'snapshot-provenance');
+      if (!f || f.surface !== 'figma' || f.classification !== 'mismatch')
+        throw new Error(`Expected [figma mismatch] snapshot-provenance; got: ${JSON.stringify(f)}`);
+    },
+  },
+  {
+    id: 'detect-stale-snapshot',
+    claim: 'C3-detection',
+    run: () => {
+      editJson(FIGMA_COMPONENTS, (s2) => { s2.extractedAt = Date.now() - 15 * 86_400_000; });
+      const r = parity();
+      if (r.status !== 1) throw new Error('15-day-old snapshot passed the 14-day staleness gate');
+      if (!readReport().some((x) => x.subject === 'snapshot-stale'))
+        throw new Error('Expected snapshot-stale finding');
+    },
+  },
+  {
+    id: 'baseline-acknowledges-without-failing',
+    claim: 'C3-detection',
+    run: () => {
+      editJson(FIGMA_COMPONENTS, (s2) => { s2.fileKey = 'WRONG_FILE_KEY'; });
+      writeFileSync(path.join(SCRATCH, 'parity', 'baseline.json'),
+        JSON.stringify(['figma|mismatch|snapshot-provenance']) + '\n');
+      const r = parity();
+      if (r.status !== 0) throw new Error('Baselined finding still failed the exit code');
+      const report = JSON.parse(readFileSync(path.join(SCRATCH, 'parity', 'report.json'), 'utf8'));
+      if (report.acknowledged?.length !== 1 || report.findings.length !== 0)
+        throw new Error('Baselined finding not routed to acknowledged');
     },
   },
   {
