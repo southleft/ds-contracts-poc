@@ -9,7 +9,8 @@ import {
   validateContract,
   type Contract,
 } from '../../../core/index.js';
-import { contractsById, icons, tokenInventory } from './data.js';
+import { contractsById, icons } from './data.js';
+import { activeTokens } from './token-source.js';
 
 export type ValidationResult =
   | { status: 'empty' }
@@ -42,7 +43,9 @@ export function validateContractText(text: string): ValidationResult {
   contracts.set(contract.id, contract);
   const errors: string[] = [];
   validateContract(contract, contracts, errors, icons);
-  generateCss(contract, tokenInventory, errors);
+  // The ACTIVE token inventory referees {token.ref}s — with a pasted user
+  // tree, refs into repo-only tokens refuse by name (see token-source.ts).
+  generateCss(contract, activeTokens().inventory, errors);
   if (errors.length > 0) return { status: 'violations', contract, contracts, issues: errors };
   return { status: 'valid', contract, contracts };
 }

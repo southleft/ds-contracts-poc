@@ -287,6 +287,33 @@ label {
   font-weight: 600;
 }
 
+/* Sub-mode tabs inside a rail section (e.g. Code: Paste | GitHub URL). */
+.tabs--sub {
+  margin-bottom: 12px;
+}
+
+.tabs--sub .tabs__tab {
+  padding: 5px 10px;
+  font-size: 12px;
+}
+
+/* Five source tabs share the rail's width — tighter than the output tabs. */
+.pg__rail > .tabs > .tabs__tab {
+  padding: 7px 8px;
+  font-size: 12.5px;
+}
+
+/* Marker on the Tokens tab while a pasted user tree is the active source. */
+.tabs__dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  margin-left: 5px;
+  border-radius: 50%;
+  background: var(--pg-accent);
+  vertical-align: 1px;
+}
+
 /* -------------------------------------------------------------- landing */
 
 .landing {

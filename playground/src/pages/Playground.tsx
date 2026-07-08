@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { emitters, type Contract, type EmittedFile } from '../../../core/index.js';
 import { useRoute } from '../router';
 import { useTheme } from '../theme';
-import { contractsById, icons, rawContractById, tokenTree } from '../engine/data';
+import { contractsById, icons, rawContractById } from '../engine/data';
 import { exampleBySlug, examples, type CodeExample } from '../engine/examples';
 import {
   DEMO_URL,
@@ -12,13 +12,21 @@ import {
   type FigmaImportResult,
   type FigmaProposal,
 } from '../engine/figma-import';
+import { importFromGithubUrl } from '../engine/github-import';
+import {
+  applyUserTokens,
+  resetToRepoTokens,
+  STARTER_USER_TOKENS,
+  storedUserTokensText,
+  useTokenSource,
+} from '../engine/token-source';
 import { validateContractText } from '../engine/validate';
 import type { ReceiptGroup, Receipts } from '../receipts';
 import { CopyButton } from '../components/CopyButton';
 import { PreviewFrame } from '../components/PreviewFrame';
 import { ReceiptsPanel } from '../components/ReceiptsPanel';
 
-type SourceTab = 'examples' | 'figma' | 'code' | 'json';
+type SourceTab = 'examples' | 'figma' | 'code' | 'json' | 'tokens';
 const OUTPUT_LABELS: Record<string, string> = {
   react: 'React',
   html: 'HTML + CSS',
@@ -85,6 +93,9 @@ function proposalGroups(proposal: FigmaProposal): ReceiptGroup[] {
 export function Playground() {
   const { params } = useRoute();
   const { theme } = useTheme();
+  // The active token source (repo bundled ↔ user pasted) — validation,
+  // preview, proposals, and emitters all rebind when it changes.
+  const tokenSource = useTokenSource();
 
   // -------------------------------------------------- contract editor state
   const [text, setText] = useState('');
@@ -94,7 +105,12 @@ export function Playground() {
     const t = window.setTimeout(() => setDebouncedText(text), 250);
     return () => window.clearTimeout(t);
   }, [text]);
-  const validation = useMemo(() => validateContractText(debouncedText), [debouncedText]);
+  const validation = useMemo(
+    () => validateContractText(debouncedText),
+    // validateContractText reads the active token inventory.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [debouncedText, tokenSource],
+  );
 
   const lastGood = useRef<{ contract: Contract; contracts: Map<string, Contract> } | null>(null);
   if (validation.status === 'valid') {
@@ -118,19 +134,26 @@ export function Playground() {
   };
 
   // ------------------------------------------------------------- code state
+  const [codeMode, setCodeMode] = useState<'paste' | 'url'>('paste');
+  const [codeUrl, setCodeUrl] = useState('');
   const [codeTsx, setCodeTsx] = useState('');
   const [codeCss, setCodeCss] = useState('');
   const [codeBusy, setCodeBusy] = useState<string | null>(null);
   const [codeError, setCodeError] = useState<string | null>(null);
 
-  const runCodePropose = async (tsx: string, css: string, origin: string) => {
+  const runCodePropose = async (
+    tsx: string,
+    css: string,
+    origin: string,
+    opts: { sourcePath?: string; preGroups?: ReceiptGroup[] } = {},
+  ) => {
     setCodeBusy('Loading the TypeScript compiler (lazy chunk, ~5 MB — first run only)…');
     setCodeError(null);
     try {
       const { proposeFromCodeText } = await import('../engine/code-import');
       setCodeBusy('Proposing…');
-      const result = proposeFromCodeText(tsx, css, 'playground/Pasted.tsx');
-      const groups: ReceiptGroup[] = [];
+      const result = proposeFromCodeText(tsx, css, opts.sourcePath ?? 'playground/Pasted.tsx');
+      const groups: ReceiptGroup[] = [...(opts.preGroups ?? [])];
       for (const { name, proposal } of result.proposals) {
         if (proposal.notes.length > 0) {
           groups.push({
@@ -165,10 +188,35 @@ export function Playground() {
 
   const loadCodeExample = (example: CodeExample, autoRun: boolean) => {
     setSourceTab('code');
+    setCodeMode('paste');
     setCodeTsx(example.tsx);
     setCodeCss(example.css);
     setActiveExample(example.slug);
     if (autoRun) void runCodePropose(example.tsx, example.css, `code proposal — ${example.sourcePath}`);
+  };
+
+  const runGithubImport = async () => {
+    setCodeBusy('Fetching from GitHub (browser-direct, unauthenticated)…');
+    setCodeError(null);
+    try {
+      const imported = await importFromGithubUrl(codeUrl);
+      setCodeTsx(imported.tsx);
+      setCodeCss(imported.css);
+      setActiveExample(null);
+      await runCodePropose(imported.tsx, imported.css, `code proposal — ${imported.sourcePath}`, {
+        sourcePath: imported.sourcePath,
+        preGroups: [
+          {
+            title: 'GitHub import',
+            kind: 'note',
+            entries: imported.notes.map((message) => ({ message })),
+          },
+        ],
+      });
+    } catch (e) {
+      setCodeError(e instanceof Error ? e.message : String(e));
+      setCodeBusy(null);
+    }
   };
 
   // ------------------------------------------------------------ figma state
@@ -267,6 +315,26 @@ export function Playground() {
     setActiveExample(null);
   };
 
+  // ------------------------------------------------------------ tokens state
+  const [tokensText, setTokensText] = useState(() => storedUserTokensText());
+  const [tokensErrors, setTokensErrors] = useState<string[] | null>(null);
+  const [tokensNote, setTokensNote] = useState<string | null>(null);
+
+  const applyTokens = () => {
+    const result = applyUserTokens(tokensText);
+    if (result.ok) {
+      setTokensErrors(null);
+      setTokensNote(
+        `Applied — ${result.source.inventory.size} token paths from ${result.source.docCount} document${
+          result.source.docCount === 1 ? '' : 's'
+        }. Everything now binds against your tree.`,
+      );
+    } else {
+      setTokensNote(null);
+      setTokensErrors(result.errors);
+    }
+  };
+
   // ----------------------------------------------- URL params (?example=…)
   const appliedQuery = useRef<string | null>(null);
   useEffect(() => {
@@ -305,7 +373,7 @@ export function Playground() {
     try {
       return {
         files: emitter.emit(emittable.contract, {
-          tokens: tokenTree,
+          tokens: tokenSource.tree,
           icons,
           contracts: emittable.contracts,
           mode: theme,
@@ -315,7 +383,7 @@ export function Playground() {
     } catch (e) {
       return { files: null, error: e instanceof Error ? e.message : String(e) };
     }
-  }, [outputTab, emittable, theme]);
+  }, [outputTab, emittable, theme, tokenSource]);
 
   useEffect(() => {
     setFormattedFiles(null);
@@ -353,7 +421,7 @@ export function Playground() {
       {/* ------------------------------------------------------- left rail */}
       <aside className="pg__rail">
         <div className="tabs" role="tablist" aria-label="Input source">
-          {(['examples', 'figma', 'code', 'json'] as const).map((tab) => (
+          {(['examples', 'figma', 'code', 'json', 'tokens'] as const).map((tab) => (
             <button
               key={tab}
               type="button"
@@ -362,7 +430,18 @@ export function Playground() {
               className={`tabs__tab${sourceTab === tab ? ' is-active' : ''}`}
               onClick={() => setSourceTab(tab)}
             >
-              {tab === 'examples' ? 'Examples' : tab === 'figma' ? 'Figma' : tab === 'code' ? 'Code' : 'JSON'}
+              {tab === 'examples'
+                ? 'Examples'
+                : tab === 'figma'
+                  ? 'Figma'
+                  : tab === 'code'
+                    ? 'Code'
+                    : tab === 'json'
+                      ? 'JSON'
+                      : 'Tokens'}
+              {tab === 'tokens' && tokenSource.kind === 'user' ? (
+                <span className="tabs__dot" aria-label="user tokens active" />
+              ) : null}
             </button>
           ))}
         </div>
@@ -489,38 +568,94 @@ export function Playground() {
 
         {sourceTab === 'code' && (
           <div className="rail__section">
-            <div className="field">
-              <label htmlFor="code-tsx">Component source (TSX)</label>
-              <textarea
-                id="code-tsx"
-                rows={10}
-                value={codeTsx}
-                onChange={(e) => setCodeTsx(e.target.value)}
-                placeholder="export function Badge({ variant = 'info' }: … ) { … }"
-                spellCheck={false}
-              />
+            <div className="tabs tabs--sub" role="tablist" aria-label="Code input mode">
+              {(['paste', 'url'] as const).map((mode) => (
+                <button
+                  key={mode}
+                  type="button"
+                  role="tab"
+                  aria-selected={codeMode === mode}
+                  className={`tabs__tab${codeMode === mode ? ' is-active' : ''}`}
+                  onClick={() => setCodeMode(mode)}
+                >
+                  {mode === 'paste' ? 'Paste' : 'GitHub URL'}
+                </button>
+              ))}
             </div>
-            <div className="field">
-              <label htmlFor="code-css">CSS Module (optional — unlocks anatomy)</label>
-              <textarea
-                id="code-css"
-                rows={7}
-                value={codeCss}
-                onChange={(e) => setCodeCss(e.target.value)}
-                placeholder=".root { … }"
-                spellCheck={false}
-              />
-            </div>
-            <button
-              type="button"
-              className="btn--primary"
-              disabled={!!codeBusy || !codeTsx.trim()}
-              onClick={() => void runCodePropose(codeTsx, codeCss, 'code proposal — pasted source')}
-            >
-              {codeBusy ? 'Working…' : 'Propose contract'}
-            </button>
-            {codeBusy ? <p className="hint">{codeBusy}</p> : null}
-            {codeError ? <div className="notice notice--error">{codeError}</div> : null}
+
+            {codeMode === 'url' && (
+              <>
+                <div className="field">
+                  <label htmlFor="code-url">Public GitHub file URL</label>
+                  <input
+                    id="code-url"
+                    type="text"
+                    value={codeUrl}
+                    onChange={(e) => setCodeUrl(e.target.value)}
+                    placeholder="https://github.com/owner/repo/blob/main/src/Button.tsx"
+                    spellCheck={false}
+                  />
+                  <p className="hint">
+                    blob, raw, or directory URLs — public repos only, fetched browser-direct with no
+                    token. The co-located *.module.css is auto-discovered (the component&rsquo;s own
+                    import, the same-name sibling, then the directory listing).
+                  </p>
+                </div>
+                <button
+                  type="button"
+                  className="btn--primary"
+                  disabled={!!codeBusy || !codeUrl.trim()}
+                  onClick={() => void runGithubImport()}
+                >
+                  {codeBusy ? 'Working…' : 'Fetch & propose'}
+                </button>
+                {codeBusy ? <p className="hint">{codeBusy}</p> : null}
+                {codeError ? <div className="notice notice--error">{codeError}</div> : null}
+                {!codeBusy && !codeError && codeTsx ? (
+                  <p className="hint">
+                    Fetched source is loaded into the Paste fields — switch modes to inspect or edit
+                    it.
+                  </p>
+                ) : null}
+              </>
+            )}
+
+            {codeMode === 'paste' && (
+              <>
+                <div className="field">
+                  <label htmlFor="code-tsx">Component source (TSX)</label>
+                  <textarea
+                    id="code-tsx"
+                    rows={10}
+                    value={codeTsx}
+                    onChange={(e) => setCodeTsx(e.target.value)}
+                    placeholder="export function Badge({ variant = 'info' }: … ) { … }"
+                    spellCheck={false}
+                  />
+                </div>
+                <div className="field">
+                  <label htmlFor="code-css">CSS Module (optional — unlocks anatomy)</label>
+                  <textarea
+                    id="code-css"
+                    rows={7}
+                    value={codeCss}
+                    onChange={(e) => setCodeCss(e.target.value)}
+                    placeholder=".root { … }"
+                    spellCheck={false}
+                  />
+                </div>
+                <button
+                  type="button"
+                  className="btn--primary"
+                  disabled={!!codeBusy || !codeTsx.trim()}
+                  onClick={() => void runCodePropose(codeTsx, codeCss, 'code proposal — pasted source')}
+                >
+                  {codeBusy ? 'Working…' : 'Propose contract'}
+                </button>
+                {codeBusy ? <p className="hint">{codeBusy}</p> : null}
+                {codeError ? <div className="notice notice--error">{codeError}</div> : null}
+              </>
+            )}
           </div>
         )}
 
@@ -545,6 +680,62 @@ export function Playground() {
               Load
             </button>
             {jsonError ? <div className="notice notice--error">{jsonError}</div> : null}
+          </div>
+        )}
+
+        {sourceTab === 'tokens' && (
+          <div className="rail__section">
+            <div className="rail__group">
+              <div className="rail__group-title">Active token source</div>
+              <p className="hint" style={{ margin: '0 0 8px' }}>
+                {tokenSource.label} — {tokenSource.inventory.size} token paths. Proposals bind
+                against this tree; suggestions, the inline emitter&rsquo;s literals, and the preview
+                stylesheet all come from it.
+              </p>
+              {tokenSource.kind === 'user' ? (
+                <button type="button" onClick={() => { resetToRepoTokens(); setTokensNote(null); setTokensErrors(null); }}>
+                  Back to repo tokens
+                </button>
+              ) : null}
+            </div>
+            <div className="field">
+              <label htmlFor="tokens-paste">Your DTCG token JSON (a single tree or an array of trees)</label>
+              <textarea
+                id="tokens-paste"
+                rows={14}
+                value={tokensText}
+                onChange={(e) => setTokensText(e.target.value)}
+                placeholder='{ "color": { "feedback": { "info": { "background": { "$value": "#dbeafe", "$type": "color" } } } } }'
+                spellCheck={false}
+              />
+              <p className="hint">
+                Session-only: kept in this tab&rsquo;s sessionStorage, sent nowhere, gone when the
+                tab closes. Multiple documents are merged into one combined tree; a pasted tree is
+                modeless, so light and dark resolve identically.
+              </p>
+            </div>
+            <button type="button" className="btn--primary" disabled={!tokensText.trim()} onClick={applyTokens}>
+              Apply tokens
+            </button>
+            <button type="button" onClick={() => setTokensText(STARTER_USER_TOKENS)}>
+              Load starter tree
+            </button>
+            <p className="hint">
+              The starter tree covers exactly what ds.badge needs (with values the repo never
+              shipped). Load any other contract against it and the generator refuses by name —
+              honest degradation, nothing invented.
+            </p>
+            {tokensNote ? <div className="notice" style={{ marginTop: 12 }}>{tokensNote}</div> : null}
+            {tokensErrors ? (
+              <div className="notice notice--error" style={{ marginTop: 12 }}>
+                Refused — {tokensErrors.length} issue{tokensErrors.length === 1 ? '' : 's'}
+                <ul className="validation__list">
+                  {tokensErrors.map((err, i) => (
+                    <li key={i}>{err}</li>
+                  ))}
+                </ul>
+              </div>
+            ) : null}
           </div>
         )}
       </aside>
@@ -669,7 +860,12 @@ export function Playground() {
                 <input type="checkbox" checked={format} onChange={(e) => setFormat(e.target.checked)} />
                 Format (prettier, lazy ~1.4 MB){formatting ? ' — formatting…' : ''}
               </label>
-              {outputTab === 'react-inline' ? <span>tokens resolved for {theme} mode</span> : null}
+              {outputTab === 'react-inline' ? (
+                <span>
+                  tokens resolved for {theme} mode
+                  {tokenSource.kind === 'user' ? ' — from your pasted tree' : ''}
+                </span>
+              ) : null}
             </div>
             <div className="output__files">
               {!emittable ? (
