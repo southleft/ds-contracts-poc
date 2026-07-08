@@ -287,6 +287,16 @@ label {
   font-weight: 600;
 }
 
+/* Sub-mode tabs inside a rail section (e.g. Code: Paste | GitHub URL). */
+.tabs--sub {
+  margin-bottom: 12px;
+}
+
+.tabs--sub .tabs__tab {
+  padding: 5px 10px;
+  font-size: 12px;
+}
+
 /* -------------------------------------------------------------- landing */
 
 .landing {
