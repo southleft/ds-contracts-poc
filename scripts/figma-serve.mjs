@@ -37,7 +37,12 @@ function manifestScriptNames() {
   const batches = readdirSync(DIR).filter((f) => /^batch-\d+\.js$/.test(f)).sort();
   const scripts = ['01-tokens.js', ...batches];
   if (existsSync(path.join(DIR, 'arrange.js'))) scripts.push('arrange.js');
-  return scripts;
+  // FIGMA_SERVE_ONLY=a.js,b.js — filtered manifest (e.g. tokens-only sync
+  // into a foreign file, without building the whole library there).
+  const only = process.env.FIGMA_SERVE_ONLY
+    ? process.env.FIGMA_SERVE_ONLY.split(',').map((x) => x.trim())
+    : null;
+  return only ? only.filter((x) => existsSync(path.join(DIR, x))) : scripts;
 }
 
 function buildManifest() {

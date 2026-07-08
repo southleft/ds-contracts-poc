@@ -13,3 +13,35 @@ Read-only API-surface dump of the CBDS UI Kit Demo (Figma `WofZT8xaxXuc2Q6Je9S4X
 ## Verdict for the pitch
 
 Four systems dumped (Shoelace, Mantine-code, Eventz pair, CBDS), one consistent story: every real library carries the same 5-6 mechanical divergence classes, none of which any existing tool detects — and each class maps to a specific contract feature (state previews, slot arity, alias rules, value maps). The taxonomy is now evidence, not conjecture.
+
+## Coexistence upgrade: full token sync + variable-bound Badge (2026-07-08)
+
+The literal-values stub got its promised upgrade. Via the Sync Runner with a
+filtered manifest (`FIGMA_SERVE_ONLY=01-tokens.js,05-badge.js`, scripts
+regenerated with `FIGMA_FILE_KEY` pointing at the kit):
+
+- **All three contract token collections now live in the CBDS kit** —
+  Primitives (94, mode `Value`), Brand (10, modes `Default`/`Aurora`),
+  Semantic (178, modes `Light`/`Dark`) — 282 variables created, zero
+  collisions with the kit's five native collections (`colour primitive`,
+  `colour semantic`, `number primitive`, `text primitive`, `text semantic`).
+  Two token architectures from two organizations coexist in one file.
+- **`Badge (ds.badge) — token-bound`** (set key `cdd03db0…`) sits on the test
+  page below the resolved-values stub: same four variants, same `Label` TEXT
+  property, but every fill is `setBoundVariableForPaint`-bound to
+  `color/feedback/<variant>/background|foreground` in the contract's Semantic
+  collection. Switching the Semantic mode to Dark (or Brand to Aurora)
+  restyles it live, while every native CBDS component is untouched.
+
+### Finding: name-collision skip needs identity, not just a name
+
+`05-badge.js` did NOT build the component: its existence check found a
+`COMPONENT_SET` named `Badge` — CBDS's own 72-variant native Badge — and
+returned `{skipped: true}` with the foreign set's node id and key. Correct
+refusal instinct (it mutated nothing), wrong evidence: **set name alone is not
+identity in a brownfield file.** The skip/amend gate should require the
+`ds_contracts`/`specHash` shared-plugin-data marker (or the anchored
+componentSetKey) before treating an existing set as "ours"; a name match
+without the marker is a foreign component and the script should create under a
+disambiguated name instead. Filed as generator work; the bound set above was
+built directly via the plugin API pending that fix.
