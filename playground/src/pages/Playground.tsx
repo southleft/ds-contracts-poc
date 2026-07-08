@@ -23,6 +23,12 @@ import {
   type PromptSession,
 } from '../engine/prompt-import';
 import {
+  decodeShareState,
+  encodeShareState,
+  SHARE_LIMIT_BYTES,
+  sharePayloadFromLocation,
+} from '../engine/permalink';
+import {
   applyUserTokens,
   resetToRepoTokens,
   STARTER_USER_TOKENS,
@@ -101,7 +107,7 @@ function proposalGroups(proposal: FigmaProposal): ReceiptGroup[] {
 
 export function Playground() {
   const { params } = useRoute();
-  const { theme } = useTheme();
+  const { theme, set: setTheme } = useTheme();
   // The active token source (repo bundled ↔ user pasted) — validation,
   // preview, proposals, and emitters all rebind when it changes.
   const tokenSource = useTokenSource();
@@ -483,12 +489,68 @@ export function Playground() {
       return;
     }
     if (source === 'figma' || source === 'code' || source === 'json') setSourceTab(source);
-    if (!text) loadContract('ds.badge', 'loaded from examples — ds.badge', 'badge');
+    // A share hash owns the boot state — don't race it with the default example.
+    if (!text && !sharePayloadFromLocation()) {
+      loadContract('ds.badge', 'loaded from examples — ds.badge', 'badge');
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [params]);
 
   // ------------------------------------------------------------ output pane
   const [outputTab, setOutputTab] = useState('preview');
+
+  // ------------------------------------------------- share links (#s=…)
+  const [shareNote, setShareNote] = useState<string | null>(null);
+  useEffect(() => {
+    // Decode a share link on boot: contract + output tab + theme. User
+    // tokens and secrets never travel in links, so none are read here.
+    // (The cancelled flag keeps StrictMode's double-mount harmless.)
+    const payload = sharePayloadFromLocation();
+    if (!payload) return;
+    let cancelled = false;
+    void (async () => {
+      try {
+        const state = await decodeShareState(payload);
+        if (cancelled) return;
+        setText(state.contract);
+        setProvenance('loaded from share link');
+        setActiveExample(null);
+        setOutputTab(
+          state.output === 'preview' || emitters.some((e) => e.name === state.output)
+            ? state.output
+            : 'preview',
+        );
+        setTheme(state.theme);
+      } catch (e) {
+        if (!cancelled) setShareNote(e instanceof Error ? e.message : String(e));
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const runShare = async () => {
+    try {
+      const payload = await encodeShareState({ contract: text, output: outputTab, theme });
+      if (payload.length > SHARE_LIMIT_BYTES) {
+        setShareNote(
+          `share-link-too-long: ${(payload.length / 1024).toFixed(1)} KB exceeds the ${
+            SHARE_LIMIT_BYTES / 1024
+          } KB URL guard — share the contract JSON itself instead.`,
+        );
+        return;
+      }
+      const url = `${window.location.origin}/playground#s=${payload}`;
+      window.history.replaceState(null, '', `/playground#s=${payload}`);
+      await navigator.clipboard.writeText(url);
+      setShareNote(`copied — ${(payload.length / 1024).toFixed(1)} KB link`);
+      window.setTimeout(() => setShareNote(null), 4000);
+    } catch (e) {
+      setShareNote(`share-link-failed: ${e instanceof Error ? e.message : String(e)}`);
+    }
+  };
   const [format, setFormat] = useState(false);
   const [formatting, setFormatting] = useState(false);
   const [formattedFiles, setFormattedFiles] = useState<EmittedFile[] | null>(null);
@@ -951,7 +1013,21 @@ export function Playground() {
         <div className="pane__head">
           <span className="pane__title">Contract</span>
           <span className="editor__meta">{provenance}</span>
+          <button
+            type="button"
+            className="btn--small share__btn"
+            disabled={!text.trim()}
+            onClick={() => void runShare()}
+            title="Copy a link carrying this contract, the active output tab, and the theme — never your tokens or keys."
+          >
+            Share
+          </button>
         </div>
+        {shareNote ? (
+          <div className={`share__note${shareNote.startsWith('copied') ? '' : ' share__note--warn'}`}>
+            {shareNote}
+          </div>
+        ) : null}
         <div className="editor">
           <textarea
             className="editor__textarea"
