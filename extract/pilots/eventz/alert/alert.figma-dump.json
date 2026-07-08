@@ -1,0 +1,793 @@
+{
+  "_provenance": {
+    "fileKey": "E7oXr98i91HYQGZxA2USOQ",
+    "extractedAt": "2026-07-08",
+    "note": "Eventz DS Alert (node 2629:56948) \u2014 live bridge dump. Root fills are UNBOUND GRADIENT_LINEAR paints (paint-unsupported class, found in the wild) \u2014 omitted from dump v1 by rule; every other styled property is variable-bound with Eventz's own token names."
+  },
+  "Alert": {
+    "setName": "Alert",
+    "type": "COMPONENT_SET",
+    "variants": [
+      {
+        "name": "variant=success",
+        "type": "COMPONENT",
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "MIN",
+          "counter": "MIN",
+          "spacing": 8,
+          "padding": [
+            12,
+            16,
+            12,
+            16
+          ],
+          "primarySizing": "FIXED",
+          "counterSizing": "AUTO"
+        },
+        "cornerRadius": 6,
+        "bound": {
+          "itemSpacing": "spacing/2",
+          "paddingLeft": "spacing/4",
+          "paddingTop": "spacing/3",
+          "paddingRight": "spacing/4",
+          "paddingBottom": "spacing/3",
+          "topLeftRadius": "component/border/radius/rounded-md",
+          "topRightRadius": "component/border/radius/rounded-md",
+          "bottomLeftRadius": "component/border/radius/rounded-md",
+          "bottomRightRadius": "component/border/radius/rounded-md"
+        },
+        "children": [
+          {
+            "name": "container",
+            "type": "FRAME",
+            "layout": {
+              "mode": "HORIZONTAL",
+              "primary": "CENTER",
+              "counter": "CENTER",
+              "spacing": 8,
+              "padding": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "primarySizing": "FIXED",
+              "counterSizing": "FIXED"
+            },
+            "propRefs": {
+              "visible": "hasIcon"
+            },
+            "children": [
+              {
+                "name": "Icon",
+                "type": "INSTANCE",
+                "instanceOf": "check circle"
+              }
+            ]
+          },
+          {
+            "name": "horizontal stack",
+            "type": "FRAME",
+            "layout": {
+              "mode": "VERTICAL",
+              "primary": "MIN",
+              "counter": "MIN",
+              "spacing": 2,
+              "padding": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "primarySizing": "AUTO",
+              "counterSizing": "FIXED"
+            },
+            "bound": {
+              "itemSpacing": "spacing/0\u20245"
+            },
+            "fillWidth": true,
+            "children": [
+              {
+                "name": "horizontal stack",
+                "type": "FRAME",
+                "layout": {
+                  "mode": "VERTICAL",
+                  "primary": "MIN",
+                  "counter": "MIN",
+                  "spacing": 0,
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "primarySizing": "AUTO",
+                  "counterSizing": "FIXED"
+                },
+                "fillWidth": true,
+                "children": [
+                  {
+                    "name": "Title",
+                    "type": "TEXT",
+                    "fill": {
+                      "var": "color/content/inverse"
+                    },
+                    "text": {
+                      "characters": "Title",
+                      "fontSize": 16,
+                      "fontStyle": "Bold",
+                      "style": "body/md-bold",
+                      "fillVar": "color/content/inverse"
+                    },
+                    "propRefs": {
+                      "visible": "hasTitle",
+                      "characters": "titleText"
+                    },
+                    "fillWidth": true
+                  },
+                  {
+                    "name": "Description",
+                    "type": "TEXT",
+                    "fill": {
+                      "var": "color/content/inverse"
+                    },
+                    "text": {
+                      "characters": "Description",
+                      "fontSize": 14,
+                      "fontStyle": "Medium",
+                      "style": "body/sm",
+                      "fillVar": "color/content/inverse"
+                    },
+                    "propRefs": {
+                      "characters": "descriptionText"
+                    },
+                    "fillWidth": true
+                  }
+                ]
+              },
+              {
+                "name": "Text link",
+                "type": "INSTANCE",
+                "layout": {
+                  "mode": "HORIZONTAL",
+                  "primary": "MIN",
+                  "counter": "CENTER",
+                  "spacing": 4,
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "primarySizing": "AUTO",
+                  "counterSizing": "AUTO"
+                },
+                "bound": {
+                  "itemSpacing": "spacing/1"
+                },
+                "instanceOf": "Text link",
+                "propRefs": {
+                  "visible": "hasLink"
+                }
+              }
+            ]
+          },
+          {
+            "name": "container",
+            "type": "FRAME",
+            "layout": {
+              "mode": "HORIZONTAL",
+              "primary": "CENTER",
+              "counter": "CENTER",
+              "spacing": 8,
+              "padding": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "primarySizing": "FIXED",
+              "counterSizing": "FIXED"
+            },
+            "propRefs": {
+              "visible": "isDismissible"
+            },
+            "children": [
+              {
+                "name": "Icon",
+                "type": "INSTANCE",
+                "instanceOf": "close"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "variant=info",
+        "type": "COMPONENT",
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "MIN",
+          "counter": "MIN",
+          "spacing": 8,
+          "padding": [
+            12,
+            16,
+            12,
+            16
+          ],
+          "primarySizing": "FIXED",
+          "counterSizing": "AUTO"
+        },
+        "cornerRadius": 6,
+        "bound": {
+          "itemSpacing": "spacing/2",
+          "paddingLeft": "spacing/4",
+          "paddingTop": "spacing/3",
+          "paddingRight": "spacing/4",
+          "paddingBottom": "spacing/3",
+          "topLeftRadius": "component/border/radius/rounded-md",
+          "topRightRadius": "component/border/radius/rounded-md",
+          "bottomLeftRadius": "component/border/radius/rounded-md",
+          "bottomRightRadius": "component/border/radius/rounded-md"
+        },
+        "children": [
+          {
+            "name": "container",
+            "type": "FRAME",
+            "layout": {
+              "mode": "HORIZONTAL",
+              "primary": "CENTER",
+              "counter": "CENTER",
+              "spacing": 8,
+              "padding": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "primarySizing": "FIXED",
+              "counterSizing": "FIXED"
+            },
+            "propRefs": {
+              "visible": "hasIcon"
+            },
+            "children": [
+              {
+                "name": "Icon",
+                "type": "INSTANCE",
+                "instanceOf": "check circle"
+              }
+            ]
+          },
+          {
+            "name": "horizontal stack",
+            "type": "FRAME",
+            "layout": {
+              "mode": "VERTICAL",
+              "primary": "MIN",
+              "counter": "MIN",
+              "spacing": 2,
+              "padding": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "primarySizing": "AUTO",
+              "counterSizing": "FIXED"
+            },
+            "bound": {
+              "itemSpacing": "spacing/0\u20245"
+            },
+            "fillWidth": true,
+            "children": [
+              {
+                "name": "horizontal stack",
+                "type": "FRAME",
+                "layout": {
+                  "mode": "VERTICAL",
+                  "primary": "MIN",
+                  "counter": "MIN",
+                  "spacing": 0,
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "primarySizing": "AUTO",
+                  "counterSizing": "FIXED"
+                },
+                "fillWidth": true,
+                "children": [
+                  {
+                    "name": "Title",
+                    "type": "TEXT",
+                    "fill": {
+                      "var": "color/content/inverse"
+                    },
+                    "text": {
+                      "characters": "Title",
+                      "fontSize": 16,
+                      "fontStyle": "Bold",
+                      "style": "body/md-bold",
+                      "fillVar": "color/content/inverse"
+                    },
+                    "propRefs": {
+                      "visible": "hasTitle",
+                      "characters": "titleText"
+                    },
+                    "fillWidth": true
+                  },
+                  {
+                    "name": "Description",
+                    "type": "TEXT",
+                    "fill": {
+                      "var": "color/content/inverse"
+                    },
+                    "text": {
+                      "characters": "Description",
+                      "fontSize": 14,
+                      "fontStyle": "Medium",
+                      "style": "body/sm",
+                      "fillVar": "color/content/inverse"
+                    },
+                    "propRefs": {
+                      "characters": "descriptionText"
+                    },
+                    "fillWidth": true
+                  }
+                ]
+              },
+              {
+                "name": "Text link",
+                "type": "INSTANCE",
+                "layout": {
+                  "mode": "HORIZONTAL",
+                  "primary": "MIN",
+                  "counter": "CENTER",
+                  "spacing": 4,
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "primarySizing": "AUTO",
+                  "counterSizing": "AUTO"
+                },
+                "bound": {
+                  "itemSpacing": "spacing/1"
+                },
+                "instanceOf": "Text link",
+                "propRefs": {
+                  "visible": "hasLink"
+                }
+              }
+            ]
+          },
+          {
+            "name": "container",
+            "type": "FRAME",
+            "layout": {
+              "mode": "HORIZONTAL",
+              "primary": "CENTER",
+              "counter": "CENTER",
+              "spacing": 8,
+              "padding": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "primarySizing": "FIXED",
+              "counterSizing": "FIXED"
+            },
+            "propRefs": {
+              "visible": "isDismissible"
+            },
+            "children": [
+              {
+                "name": "Icon",
+                "type": "INSTANCE",
+                "instanceOf": "close"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "variant=warning",
+        "type": "COMPONENT",
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "MIN",
+          "counter": "MIN",
+          "spacing": 8,
+          "padding": [
+            12,
+            16,
+            12,
+            16
+          ],
+          "primarySizing": "FIXED",
+          "counterSizing": "AUTO"
+        },
+        "cornerRadius": 6,
+        "bound": {
+          "itemSpacing": "spacing/2",
+          "paddingLeft": "spacing/4",
+          "paddingTop": "spacing/3",
+          "paddingRight": "spacing/4",
+          "paddingBottom": "spacing/3",
+          "topLeftRadius": "component/border/radius/rounded-md",
+          "topRightRadius": "component/border/radius/rounded-md",
+          "bottomLeftRadius": "component/border/radius/rounded-md",
+          "bottomRightRadius": "component/border/radius/rounded-md"
+        },
+        "children": [
+          {
+            "name": "container",
+            "type": "FRAME",
+            "layout": {
+              "mode": "HORIZONTAL",
+              "primary": "CENTER",
+              "counter": "CENTER",
+              "spacing": 8,
+              "padding": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "primarySizing": "FIXED",
+              "counterSizing": "FIXED"
+            },
+            "propRefs": {
+              "visible": "hasIcon"
+            },
+            "children": [
+              {
+                "name": "Icon",
+                "type": "INSTANCE",
+                "instanceOf": "check circle"
+              }
+            ]
+          },
+          {
+            "name": "horizontal stack",
+            "type": "FRAME",
+            "layout": {
+              "mode": "VERTICAL",
+              "primary": "MIN",
+              "counter": "MIN",
+              "spacing": 2,
+              "padding": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "primarySizing": "AUTO",
+              "counterSizing": "FIXED"
+            },
+            "bound": {
+              "itemSpacing": "spacing/0\u20245"
+            },
+            "fillWidth": true,
+            "children": [
+              {
+                "name": "horizontal stack",
+                "type": "FRAME",
+                "layout": {
+                  "mode": "VERTICAL",
+                  "primary": "MIN",
+                  "counter": "MIN",
+                  "spacing": 0,
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "primarySizing": "AUTO",
+                  "counterSizing": "FIXED"
+                },
+                "fillWidth": true,
+                "children": [
+                  {
+                    "name": "Title",
+                    "type": "TEXT",
+                    "fill": {
+                      "var": "color/content/inverse"
+                    },
+                    "text": {
+                      "characters": "Title",
+                      "fontSize": 16,
+                      "fontStyle": "Bold",
+                      "style": "body/md-bold",
+                      "fillVar": "color/content/inverse"
+                    },
+                    "propRefs": {
+                      "visible": "hasTitle",
+                      "characters": "titleText"
+                    },
+                    "fillWidth": true
+                  },
+                  {
+                    "name": "Description",
+                    "type": "TEXT",
+                    "fill": {
+                      "var": "color/content/inverse"
+                    },
+                    "text": {
+                      "characters": "Description",
+                      "fontSize": 14,
+                      "fontStyle": "Medium",
+                      "style": "body/sm",
+                      "fillVar": "color/content/inverse"
+                    },
+                    "propRefs": {
+                      "characters": "descriptionText"
+                    },
+                    "fillWidth": true
+                  }
+                ]
+              },
+              {
+                "name": "Text link",
+                "type": "INSTANCE",
+                "layout": {
+                  "mode": "HORIZONTAL",
+                  "primary": "MIN",
+                  "counter": "CENTER",
+                  "spacing": 4,
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "primarySizing": "AUTO",
+                  "counterSizing": "AUTO"
+                },
+                "bound": {
+                  "itemSpacing": "spacing/1"
+                },
+                "instanceOf": "Text link",
+                "propRefs": {
+                  "visible": "hasLink"
+                }
+              }
+            ]
+          },
+          {
+            "name": "container",
+            "type": "FRAME",
+            "layout": {
+              "mode": "HORIZONTAL",
+              "primary": "CENTER",
+              "counter": "CENTER",
+              "spacing": 8,
+              "padding": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "primarySizing": "FIXED",
+              "counterSizing": "FIXED"
+            },
+            "propRefs": {
+              "visible": "isDismissible"
+            },
+            "children": [
+              {
+                "name": "Icon",
+                "type": "INSTANCE",
+                "instanceOf": "close"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "variant=danger",
+        "type": "COMPONENT",
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "MIN",
+          "counter": "MIN",
+          "spacing": 8,
+          "padding": [
+            12,
+            16,
+            12,
+            16
+          ],
+          "primarySizing": "FIXED",
+          "counterSizing": "AUTO"
+        },
+        "cornerRadius": 6,
+        "bound": {
+          "itemSpacing": "spacing/2",
+          "paddingLeft": "spacing/4",
+          "paddingTop": "spacing/3",
+          "paddingRight": "spacing/4",
+          "paddingBottom": "spacing/3",
+          "topLeftRadius": "component/border/radius/rounded-md",
+          "topRightRadius": "component/border/radius/rounded-md",
+          "bottomLeftRadius": "component/border/radius/rounded-md",
+          "bottomRightRadius": "component/border/radius/rounded-md"
+        },
+        "children": [
+          {
+            "name": "container",
+            "type": "FRAME",
+            "layout": {
+              "mode": "HORIZONTAL",
+              "primary": "CENTER",
+              "counter": "CENTER",
+              "spacing": 8,
+              "padding": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "primarySizing": "FIXED",
+              "counterSizing": "FIXED"
+            },
+            "propRefs": {
+              "visible": "hasIcon"
+            },
+            "children": [
+              {
+                "name": "Icon",
+                "type": "INSTANCE",
+                "instanceOf": "check circle"
+              }
+            ]
+          },
+          {
+            "name": "horizontal stack",
+            "type": "FRAME",
+            "layout": {
+              "mode": "VERTICAL",
+              "primary": "MIN",
+              "counter": "MIN",
+              "spacing": 2,
+              "padding": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "primarySizing": "AUTO",
+              "counterSizing": "FIXED"
+            },
+            "bound": {
+              "itemSpacing": "spacing/0\u20245"
+            },
+            "fillWidth": true,
+            "children": [
+              {
+                "name": "horizontal stack",
+                "type": "FRAME",
+                "layout": {
+                  "mode": "VERTICAL",
+                  "primary": "MIN",
+                  "counter": "MIN",
+                  "spacing": 0,
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "primarySizing": "AUTO",
+                  "counterSizing": "FIXED"
+                },
+                "fillWidth": true,
+                "children": [
+                  {
+                    "name": "Title",
+                    "type": "TEXT",
+                    "fill": {
+                      "var": "color/content/inverse"
+                    },
+                    "text": {
+                      "characters": "Title",
+                      "fontSize": 16,
+                      "fontStyle": "Bold",
+                      "style": "body/md-bold",
+                      "fillVar": "color/content/inverse"
+                    },
+                    "propRefs": {
+                      "visible": "hasTitle",
+                      "characters": "titleText"
+                    },
+                    "fillWidth": true
+                  },
+                  {
+                    "name": "Description",
+                    "type": "TEXT",
+                    "fill": {
+                      "var": "color/content/inverse"
+                    },
+                    "text": {
+                      "characters": "Description",
+                      "fontSize": 14,
+                      "fontStyle": "Medium",
+                      "style": "body/sm",
+                      "fillVar": "color/content/inverse"
+                    },
+                    "propRefs": {
+                      "characters": "descriptionText"
+                    },
+                    "fillWidth": true
+                  }
+                ]
+              },
+              {
+                "name": "Text link",
+                "type": "INSTANCE",
+                "layout": {
+                  "mode": "HORIZONTAL",
+                  "primary": "MIN",
+                  "counter": "CENTER",
+                  "spacing": 4,
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "primarySizing": "AUTO",
+                  "counterSizing": "AUTO"
+                },
+                "bound": {
+                  "itemSpacing": "spacing/1"
+                },
+                "instanceOf": "Text link",
+                "propRefs": {
+                  "visible": "hasLink"
+                }
+              }
+            ]
+          },
+          {
+            "name": "container",
+            "type": "FRAME",
+            "layout": {
+              "mode": "HORIZONTAL",
+              "primary": "CENTER",
+              "counter": "CENTER",
+              "spacing": 8,
+              "padding": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "primarySizing": "FIXED",
+              "counterSizing": "FIXED"
+            },
+            "propRefs": {
+              "visible": "isDismissible"
+            },
+            "children": [
+              {
+                "name": "Icon",
+                "type": "INSTANCE",
+                "instanceOf": "close"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

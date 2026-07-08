@@ -1,0 +1,43 @@
+/* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/alert.contract.json (ds.alert v0.1.0)
+ * Regenerate with: npm run generate
+ */
+
+.root {
+  display: flex;
+  flex-direction: row;
+  border: 0;
+  padding-inline: var(--spacing-4);
+  padding-block: var(--spacing-3);
+  border-radius: var(--component-border-radius-rounded-md);
+  gap: var(--spacing-2);
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.contentStack {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.textStack {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.Title {
+  color: var(--color-content-inverse);
+}
+
+.Description {
+  color: var(--color-content-inverse);
+}

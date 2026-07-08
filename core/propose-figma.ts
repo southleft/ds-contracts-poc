@@ -145,6 +145,17 @@ function unifyRefs(
 ): Unified {
   const defined = obs.filter((o): o is { variant: string; path: string } => o.path !== undefined);
   if (defined.length === 0) return { kind: 'none' };
+  // A variable name must survive as a legal token ref. Foreign vocabularies
+  // hold surprises — Eventz ships a variable named "spacing/0․5" whose middle
+  // character is U+2024 ONE DOT LEADER, not a dot — and an illegal ref must be
+  // refused by name here, not crash schema validation downstream.
+  const illegal = defined.find((o) => !/^[a-z0-9.-]+$/i.test(o.path));
+  if (illegal) {
+    return {
+      kind: 'drift',
+      detail: `variable name "${illegal.path.split('.').join('/')}" contains characters outside the token-ref grammar ([a-z0-9.-]) — binding not proposed; rename the variable or map it manually`,
+    };
+  }
   if (defined.length !== obs.length) {
     return {
       kind: 'drift',

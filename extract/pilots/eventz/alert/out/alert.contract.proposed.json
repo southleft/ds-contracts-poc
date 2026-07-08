@@ -1,0 +1,154 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "ds.alert",
+  "name": "Alert",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "PROPOSED contract extracted from the design canvas (extract/figma dump v1) \u2014 API, anatomy, and token bindings inverted from the drawn structure. Semantics, a11y, events, and slot accepts are not canvas-recoverable; review before adoption.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "variant",
+      "type": {
+        "enum": [
+          "success",
+          "info",
+          "warning",
+          "danger"
+        ]
+      },
+      "default": "success",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "variant",
+          "values": {
+            "success": "success",
+            "info": "info",
+            "warning": "warning",
+            "danger": "danger"
+          }
+        },
+        "code": {
+          "prop": "variant"
+        }
+      }
+    },
+    {
+      "name": "titletext",
+      "type": "text",
+      "default": "Title",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "titleText"
+        },
+        "code": {
+          "prop": "titletext"
+        }
+      }
+    },
+    {
+      "name": "descriptiontext",
+      "type": "text",
+      "default": "Description",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "descriptionText"
+        },
+        "code": {
+          "prop": "descriptiontext"
+        }
+      }
+    },
+    {
+      "name": "hasicon",
+      "type": "boolean",
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "hasIcon"
+        },
+        "code": {
+          "prop": "hasicon"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "flex",
+        "direction": "row"
+      },
+      "parts": {
+        "container": {
+          "layout": {
+            "direction": "row",
+            "justify": "center",
+            "align": "center"
+          },
+          "visibleWhen": {
+            "prop": "hasicon"
+          },
+          "parts": {
+            "Icon": {}
+          }
+        },
+        "contentStack": {
+          "layout": {
+            "direction": "column",
+            "align": "stretch",
+            "grow": true
+          },
+          "parts": {
+            "textStack": {
+              "layout": {
+                "direction": "column",
+                "align": "stretch"
+              },
+              "parts": {
+                "Title": {
+                  "content": {
+                    "prop": "titletext"
+                  },
+                  "tokens": {
+                    "color": "{color.content.inverse}"
+                  }
+                },
+                "Description": {
+                  "content": {
+                    "prop": "descriptiontext"
+                  },
+                  "tokens": {
+                    "color": "{color.content.inverse}"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "tokens": {
+        "padding-inline": "{spacing.4}",
+        "padding-block": "{spacing.3}",
+        "border-radius": "{component.border.radius.rounded-md}",
+        "gap": "{spacing.2}"
+      }
+    }
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": "E7oXr98i91HYQGZxA2USOQ",
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "src/components/Alert",
+      "export": "Alert"
+    }
+  }
+}
