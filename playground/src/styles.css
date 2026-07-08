@@ -105,6 +105,21 @@ textarea,
   color: var(--pg-fg);
   font-weight: 600;
   letter-spacing: 0.01em;
+  white-space: nowrap;
+}
+
+@media (max-width: 560px) {
+  .topbar {
+    gap: 8px;
+  }
+
+  .topbar__brand-name {
+    display: none;
+  }
+
+  .topbar__link {
+    padding: 0 8px;
+  }
 }
 
 .topbar__brand:hover {

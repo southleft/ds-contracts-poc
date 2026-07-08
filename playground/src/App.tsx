@@ -13,7 +13,8 @@ function TopBar() {
   return (
     <header className="topbar">
       <Link to="/" className="topbar__brand">
-        <span className="topbar__glyph">{'{}'}</span> Contract Playground
+        <span className="topbar__glyph">{'{}'}</span>
+        <span className="topbar__brand-name"> Contract Playground</span>
       </Link>
       <nav className="topbar__nav">
         <Link to="/playground" className={navClass('/playground')}>

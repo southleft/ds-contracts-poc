@@ -104,6 +104,36 @@ browser. No backend, no analytics, no accounts.
 - **Phase 3**: a prompt produces a schema-valid contract that renders in all
   emitters, with governance visible.
 
+## Demo path (W3 + W4 + W6 UI — landed)
+
+`npx vite --config playground/vite.config.ts` → http://localhost:5181
+
+1. `/examples` — gallery cards rendered live by the html emitter (iframe +
+   the repo's token stylesheets); the Callout card is the foreign-code tier.
+2. Pick **Badge** → `/playground?example=badge`: contract center-stage,
+   emitter tabs from the registry (Preview · React · HTML+CSS · React inline
+   · Figma script), copy per file, prettier behind a lazy "Format" toggle.
+3. Break a token ref in the editor → the generator's refusal appears BY NAME
+   under the editor; preview holds the last valid render and says so.
+4. **Figma tab** — the W6 UI: URL + session-only token → `importFromUrl`
+   (the same function the CLI runs) → proposal + Import-report receipts.
+   No token? "Demo import" runs the identical code path over the committed
+   REST fixture via the client's injectable fetch; the "non-Enterprise plan"
+   checkbox answers variables with the 403 and shows the full degradation
+   ladder (50 named `variable-unresolved` entries + unbound values with
+   nearest-token candidates on the Badge fixture).
+5. **Code tab** — paste TSX+CSS (or load the Callout example): the
+   TypeScript compiler arrives as a lazy chunk, raw values are reported
+   with candidates in the Receipts panel, nothing invented.
+6. **JSON tab** — paste a contract (straight to the editor, schema-refereed)
+   or a dump v1 (runs the same proposer as the Figma import).
+
+Bundle tiers (vite build, gzip): initial ≈ 153 KB · prettier chunk ≈ 339 KB ·
+TypeScript chunk ≈ 985 KB · REST fixtures ≈ 3 KB — the lazy tiers load only
+behind their actions. Live-path receipt: a browser-direct api.figma.com call
+answers (403 with a bogus token — no CORS block), so URL import needs only a
+real token; the Pages-Function proxy fallback remains unbuilt until needed.
+
 ## Receipts discipline
 Every phase lands with: gates green (52/52+), new eval cases where the
 engine grew, MILESTONES.md entry, and a demo path documented in this file.
