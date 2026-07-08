@@ -35,13 +35,24 @@ import {
   storedUserTokensText,
   useTokenSource,
 } from '../engine/token-source';
+import { locateJsonParseError, resolveIssueLines } from '../engine/refusal-lines';
 import { validateContractText } from '../engine/validate';
+import {
+  clearWorkspace,
+  recordImport,
+  removeWorkspaceEntry,
+  useWorkspace,
+  WORKSPACE_CAP,
+  type WorkspaceEntry,
+  type WorkspaceSource,
+} from '../engine/workspace';
 import type { ReceiptGroup, Receipts } from '../receipts';
+import { ContractEditor, type ContractEditorHandle } from '../components/ContractEditor';
 import { CopyButton } from '../components/CopyButton';
 import { PreviewFrame } from '../components/PreviewFrame';
 import { ReceiptsPanel } from '../components/ReceiptsPanel';
 
-type SourceTab = 'examples' | 'describe' | 'figma' | 'code' | 'json' | 'tokens';
+type SourceTab = 'workspace' | 'examples' | 'describe' | 'figma' | 'code' | 'json' | 'tokens';
 const OUTPUT_LABELS: Record<string, string> = {
   react: 'React',
   html: 'HTML + CSS',
@@ -49,7 +60,42 @@ const OUTPUT_LABELS: Record<string, string> = {
   'figma-script': 'Figma script',
 };
 
+/** Workspace source tags — plain text, grouped display order. */
+const WS_TAGS: Record<WorkspaceSource, string> = {
+  figma: 'FIGMA',
+  code: 'CODE',
+  prompt: 'AI',
+  json: 'JSON',
+};
+const WS_ORDER: WorkspaceSource[] = ['figma', 'code', 'prompt', 'json'];
+const WS_GROUP_TITLES: Record<WorkspaceSource, string> = {
+  figma: 'From Figma',
+  code: 'From code',
+  prompt: 'Generated',
+  json: 'Pasted JSON',
+};
+
+/** The one-line design↔code switch story shown when a workspace entry is loaded. */
+const WS_SWITCH_LINES: Record<WorkspaceSource, string> = {
+  figma: 'Imported from design — the React / HTML tabs are its code side.',
+  code: 'Imported from code — the Figma script tab is its design side.',
+  prompt: 'Generated — both sides below.',
+  json: 'Imported from JSON — both sides below.',
+};
+
+const wsTime = (ms: number) =>
+  new Date(ms).toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit' });
+
+/** Session flag: the switch strip, once dismissed, stays gone for the session. */
+const SWITCH_STRIP_KEY = 'ds-playground.switch-strip-dismissed';
+
 const pretty = (value: unknown) => JSON.stringify(value, null, 2);
+
+/** The contract's id when the candidate carries one — workspace metadata only. */
+const contractIdOf = (contract: unknown): string => {
+  const id = (contract as { id?: unknown } | null)?.id;
+  return typeof id === 'string' ? id : '';
+};
 
 /** First-visit flag for the onboarding strip — set on dismissal, forever. */
 const ONBOARD_KEY = 'ds-playground.onboarded';
@@ -118,6 +164,11 @@ export function Playground() {
   // -------------------------------------------------- contract editor state
   const [text, setText] = useState('');
   const [provenance, setProvenance] = useState('');
+  // The pristine original of whatever was last LOADED (example, import,
+  // generation, share link). While the editor text diverges from it, a small
+  // Reset in the pane header puts it back — one click, nothing lost but the
+  // divergence.
+  const [pristine, setPristine] = useState<{ text: string; provenance: string } | null>(null);
   const [debouncedText, setDebouncedText] = useState('');
   useEffect(() => {
     const t = window.setTimeout(() => setDebouncedText(text), 250);
@@ -135,6 +186,49 @@ export function Playground() {
     lastGood.current = { contract: validation.contract, contracts: validation.contracts };
   }
 
+  // Refusal → editor line resolution. Lines are only trusted while the text
+  // on screen IS the text that was validated (the debounce window would
+  // otherwise highlight yesterday's lines on today's keystrokes).
+  const editorRef = useRef<ContractEditorHandle>(null);
+  const issueLines = useMemo<(number | null)[] | null>(() => {
+    if (text !== debouncedText) return null;
+    if (validation.status === 'json-error') return [locateJsonParseError(validation.message)];
+    if (validation.status === 'schema-error' || validation.status === 'violations') {
+      return resolveIssueLines(debouncedText, validation.details);
+    }
+    return null;
+  }, [validation, debouncedText, text]);
+  const highlightLines = useMemo(() => {
+    const set = new Set<number>();
+    for (const line of issueLines ?? []) if (line !== null) set.add(line);
+    return set;
+  }, [issueLines]);
+
+  /** The refusal list — each entry that resolved to a line scrolls there. */
+  const refusalList = (issues: string[]) => (
+    <ul className="validation__list">
+      {issues.map((issue, i) => {
+        const line = issueLines?.[i] ?? null;
+        return (
+          <li key={i}>
+            {line !== null ? (
+              <button
+                type="button"
+                className="validation__jump"
+                onClick={() => editorRef.current?.scrollToLine(line)}
+              >
+                {issue}
+                <span className="validation__jump-line"> → line {line + 1}</span>
+              </button>
+            ) : (
+              issue
+            )}
+          </li>
+        );
+      })}
+    </ul>
+  );
+
   // -------------------------------------------------------------- receipts
   const [receipts, setReceipts] = useState<Receipts | null>(null);
 
@@ -142,13 +236,46 @@ export function Playground() {
   const [sourceTab, setSourceTab] = useState<SourceTab>('examples');
   const [activeExample, setActiveExample] = useState<string | null>(null);
 
+  // ---------------------------------------------------- session workspace
+  const workspace = useWorkspace();
+  // The workspace entry currently in the editor (drives the switch strip);
+  // any other load clears it.
+  const [wsLoaded, setWsLoaded] = useState<WorkspaceEntry | null>(null);
+  const [switchStripDismissed, setSwitchStripDismissed] = useState(() => {
+    try {
+      return window.sessionStorage.getItem(SWITCH_STRIP_KEY) === '1';
+    } catch {
+      return false;
+    }
+  });
+  const dismissSwitchStrip = () => {
+    setSwitchStripDismissed(true);
+    try {
+      window.sessionStorage.setItem(SWITCH_STRIP_KEY, '1');
+    } catch {
+      /* storage unavailable — the strip just returns next load */
+    }
+  };
+
+  const loadWorkspaceEntry = (entry: WorkspaceEntry) => {
+    const origin = `workspace — ${entry.name} (${entry.source} import)`;
+    setText(entry.contractText);
+    setProvenance(origin);
+    setPristine({ text: entry.contractText, provenance: origin });
+    setReceipts(entry.receipts);
+    setActiveExample(null);
+    setWsLoaded(entry);
+  };
+
   const loadContract = (contractId: string, source: string, slug?: string) => {
     const raw = rawContractById.get(contractId);
     if (!raw) return;
     setText(pretty(raw));
     setReceipts(null);
     setProvenance(source);
+    setPristine({ text: pretty(raw), provenance: source });
     setActiveExample(slug ?? contractId);
+    setWsLoaded(null);
   };
 
   // ------------------------------------------------------------- code state
@@ -188,13 +315,26 @@ export function Playground() {
           entries: result.skipped.map((s) => ({ label: `${s.name} (${s.source})`, message: s.reason })),
         });
       }
-      setReceipts({ source: origin, groups });
+      const codeReceipts: Receipts = { source: origin, groups };
       const first = result.proposals[0];
       if (first) {
-        setText(pretty(first.proposal.contract));
+        const contractText = pretty(first.proposal.contract);
+        // A successful code import lands in the session workspace.
+        const recorded = recordImport({
+          name: first.name,
+          contractId: contractIdOf(first.proposal.contract),
+          source: 'code',
+          contractText,
+          receipts: codeReceipts,
+        });
+        setReceipts(recorded.receipts);
+        setText(contractText);
         setProvenance(`proposed from code — ${first.name}`);
-      } else if (result.skipped.length === 0) {
-        setCodeError('No component found in the pasted source.');
+        setPristine({ text: contractText, provenance: `proposed from code — ${first.name}` });
+        setWsLoaded(null);
+      } else {
+        setReceipts(codeReceipts);
+        if (result.skipped.length === 0) setCodeError('No component found in the pasted source.');
       }
       setActiveExample(null);
     } catch (e) {
@@ -246,11 +386,24 @@ export function Playground() {
   const [figmaProposals, setFigmaProposals] = useState<FigmaProposal[] | null>(null);
   const importGroupsRef = useRef<ReceiptGroup[]>([]);
 
-  const applyProposal = (proposal: FigmaProposal, origin: string) => {
-    setText(pretty(proposal.contract));
-    setProvenance(`proposed from ${origin} — ${proposal.setName}`);
-    setReceipts({ source: origin, groups: [...importGroupsRef.current, ...proposalGroups(proposal)] });
+  const applyProposal = (proposal: FigmaProposal, origin: string, wsSource: WorkspaceSource) => {
+    const contractText = pretty(proposal.contract);
+    const provenanceLine = `proposed from ${origin} — ${proposal.setName}`;
+    // A successful design import lands in the session workspace, receipts
+    // and all — re-applying the same set refreshes its entry.
+    const recorded = recordImport({
+      name: proposal.setName,
+      contractId: contractIdOf(proposal.contract),
+      source: wsSource,
+      contractText,
+      receipts: { source: origin, groups: [...importGroupsRef.current, ...proposalGroups(proposal)] },
+    });
+    setText(contractText);
+    setProvenance(provenanceLine);
+    setPristine({ text: contractText, provenance: provenanceLine });
+    setReceipts(recorded.receipts);
     setActiveExample(null);
+    setWsLoaded(null);
   };
 
   const handleImportResult = (result: FigmaImportResult, origin: string) => {
@@ -261,7 +414,7 @@ export function Playground() {
     }
     importGroupsRef.current = importReportGroups(result.report);
     setFigmaProposals(proposals);
-    applyProposal(proposals[0], origin);
+    applyProposal(proposals[0], origin, 'figma');
   };
 
   const runFigmaImport = async () => {
@@ -321,16 +474,32 @@ export function Playground() {
           return;
         }
         setFigmaProposals(proposals);
-        applyProposal(proposals[0], 'pasted Figma dump');
+        applyProposal(proposals[0], 'pasted Figma dump', 'json');
       } catch (e) {
         setJsonError(e instanceof Error ? e.message : String(e));
       }
       return;
     }
-    setText(pretty(parsed));
-    setReceipts(null);
+    const contractText = pretty(parsed);
+    const record = parsed as { name?: unknown; id?: unknown };
+    const recorded = recordImport({
+      name:
+        typeof record.name === 'string'
+          ? record.name
+          : typeof record.id === 'string'
+            ? record.id
+            : 'Pasted contract',
+      contractId: contractIdOf(parsed),
+      source: 'json',
+      contractText,
+      receipts: null,
+    });
+    setText(contractText);
+    setReceipts(recorded.receipts);
     setProvenance('pasted contract JSON');
+    setPristine({ text: contractText, provenance: 'pasted contract JSON' });
     setActiveExample(null);
+    setWsLoaded(null);
   };
 
   // ---------------------------------------------------------- describe state
@@ -353,6 +522,7 @@ export function Playground() {
     const contractText = pretty(result.contract);
     setText(contractText);
     setProvenance(origin);
+    setPristine({ text: contractText, provenance: origin });
     setActiveExample(null);
     // The SAME governed editor referees the model output — run it now so the
     // fix affordance appears exactly when the refusals do.
@@ -365,7 +535,7 @@ export function Playground() {
           : null;
     setDescRefusals(issues);
     const { usage, rounds } = result.session;
-    setReceipts({
+    const promptReceipts: Receipts = {
       source: origin,
       groups: [
         {
@@ -392,7 +562,19 @@ export function Playground() {
           ],
         },
       ],
+    };
+    // A generation lands in the session workspace too — the fix round
+    // refreshes the same entry (one per source + name).
+    const candidate = result.contract as { name?: unknown } | null;
+    const recorded = recordImport({
+      name: typeof candidate?.name === 'string' ? candidate.name : 'Generated component',
+      contractId: contractIdOf(result.contract),
+      source: 'prompt',
+      contractText,
+      receipts: promptReceipts,
     });
+    setReceipts(recorded.receipts);
+    setWsLoaded(null);
   };
 
   const runDescribe = async (demo: boolean) => {
@@ -517,6 +699,7 @@ export function Playground() {
         if (cancelled) return;
         setText(state.contract);
         setProvenance('loaded from share link');
+        setPristine({ text: state.contract, provenance: 'loaded from share link' });
         setActiveExample(null);
         setOutputTab(
           state.output === 'preview' || emitters.some((e) => e.name === state.output)
@@ -542,7 +725,7 @@ export function Playground() {
       return true;
     }
   });
-  const [onboardDone, setOnboardDone] = useState<boolean[]>([false, false, false]);
+  const [onboardDone, setOnboardDone] = useState<boolean[]>([false, false, false, false]);
 
   const markOnboardStep = (i: number) =>
     setOnboardDone((d) => d.map((v, j) => (j === i ? true : v)));
@@ -578,6 +761,15 @@ export function Playground() {
     {
       label: 'Check the React output',
       run: () => setOutputTab('react'),
+    },
+    {
+      label: 'Reset the example',
+      run: () => {
+        // Step 2 broke the contract on purpose — this puts the pristine
+        // Badge back (same as the pane-header Reset while text diverges).
+        setOutputTab('preview');
+        loadContract('ds.badge', 'loaded from examples — ds.badge', 'badge');
+      },
     },
   ];
 
@@ -657,12 +849,55 @@ export function Playground() {
   const previewTarget = validation.status === 'valid' ? validation : null;
   const stale = !previewTarget && lastGood.current;
 
+  // ------------------------------------------- workspace entry rendering
+  const wsEntryRow = (entry: WorkspaceEntry) => (
+    <div key={entry.id} className="ws__row">
+      <button
+        type="button"
+        className={`rail__item ws__load${wsLoaded?.id === entry.id ? ' is-active' : ''}`}
+        onClick={() => loadWorkspaceEntry(entry)}
+        title={
+          entry.contractId
+            ? `${entry.contractId} — imported at ${wsTime(entry.importedAt)}`
+            : `imported at ${wsTime(entry.importedAt)}`
+        }
+      >
+        <span className="ws__tag" aria-hidden>
+          {WS_TAGS[entry.source]}
+        </span>
+        <span className="ws__name">{entry.name}</span>
+        <span className="ws__time">{wsTime(entry.importedAt)}</span>
+      </button>
+      <button
+        type="button"
+        className="ws__remove"
+        aria-label={`Remove ${entry.name} from the workspace`}
+        onClick={() => removeWorkspaceEntry(entry.id)}
+      >
+        ×
+      </button>
+    </div>
+  );
+
+  /** "Imported this session" — the same workspace entries, filtered, shown
+   *  under the form that produced them. */
+  const wsMiniList = (source: WorkspaceSource) => {
+    const items = workspace.filter((e) => e.source === source);
+    if (items.length === 0) return null;
+    return (
+      <div className="rail__group ws__mini">
+        <div className="rail__group-title">Imported this session</div>
+        {items.map(wsEntryRow)}
+      </div>
+    );
+  };
+
   // ------------------------------------------------------------------ render
   return (
     <>
       {!onboardDismissed && (
         <div className="onboard" role="note" aria-label="Getting started">
-          <span className="onboard__title">New here? The whole loop in three clicks:</span>
+          <span className="onboard__title">New here? The whole loop in three clicks, plus a reset:</span>
           {onboardSteps.map((step, i) => (
             <button
               key={step.label}
@@ -690,13 +925,18 @@ export function Playground() {
         <div className="tabs" role="tablist" aria-label="Input source">
           {(
             [
+              // The Workspace tab appears with the first import (and stays
+              // while selected, so Clear all doesn't yank the floor away).
+              ...(workspace.length > 0 || sourceTab === 'workspace'
+                ? [['workspace', 'Workspace'] as const]
+                : []),
               ['examples', 'Examples'],
               ['describe', 'Describe'],
               ['figma', 'Figma'],
               ['code', 'Code'],
               ['json', 'JSON'],
               ['tokens', 'Tokens'],
-            ] as const
+            ] as ReadonlyArray<readonly [SourceTab, string]>
           ).map(([tab, label]) => (
             <button
               key={tab}
@@ -713,6 +953,33 @@ export function Playground() {
             </button>
           ))}
         </div>
+
+        {sourceTab === 'workspace' && (
+          <div className="rail__section">
+            {workspace.length === 0 ? (
+              <p className="hint">
+                Nothing imported yet — Figma, Code, and Describe imports collect here for the
+                session.
+              </p>
+            ) : (
+              <>
+                {WS_ORDER.filter((s) => workspace.some((e) => e.source === s)).map((s) => (
+                  <div key={s} className="rail__group">
+                    <div className="rail__group-title">{WS_GROUP_TITLES[s]}</div>
+                    {workspace.filter((e) => e.source === s).map(wsEntryRow)}
+                  </div>
+                ))}
+                <p className="hint">
+                  Session-only (this tab&rsquo;s sessionStorage, gone on close). Click an entry to
+                  restore its contract and receipts; the newest {WORKSPACE_CAP} are kept.
+                </p>
+                <button type="button" style={{ marginTop: 8 }} onClick={clearWorkspace}>
+                  Clear all
+                </button>
+              </>
+            )}
+          </div>
+        )}
 
         {sourceTab === 'examples' && (
           <div className="rail__section">
@@ -758,7 +1025,7 @@ export function Playground() {
         )}
 
         {sourceTab === 'describe' && (
-          <div className="rail__section">
+          <div className="rail__section rail__form">
             <div className="field">
               <label htmlFor="desc-prompt">Describe a component</label>
               <textarea
@@ -780,8 +1047,8 @@ export function Playground() {
                 placeholder="sk-ant-…"
               />
               <p className="hint">
-                Session-only, like the Figma token. Sent browser-direct to api.anthropic.com and
-                nowhere else — never stored, never persisted, gone on reload.
+                Session-only, like the Figma token — sent browser-direct to api.anthropic.com and
+                nowhere else, gone on reload.
               </p>
             </div>
             <button
@@ -793,25 +1060,28 @@ export function Playground() {
               {descBusy ? 'Working…' : 'Generate contract'}
             </button>
             <p className="hint">
-              Model: {ANTHROPIC_MODEL}. The output is constrained to the contract shape by a forced
-              tool call — never freeform code — and lands in the same governed editor as every other
-              source: ContractSchema plus the generator referee it, refusals by name.
+              Model: {ANTHROPIC_MODEL}. A forced tool call constrains the output to the contract
+              shape — never freeform code — and the same governed editor referees it, refusals by
+              name.
             </p>
 
-            <p className="hint" style={{ marginTop: 16 }}>
-              No key handy? Run the identical code path over a recorded-shape response — fixture
-              transport, same governance. The first round deliberately references a token that does
-              not exist, so you can watch the named refusal and the fix round.
-            </p>
-            <button type="button" disabled={!!descBusy} onClick={() => void runDescribe(true)}>
-              {descBusy ? 'Working…' : 'Demo generate (recorded fixture)'}
-            </button>
+            <details className="rail__details">
+              <summary>No key handy? Demo generate instead</summary>
+              <p className="hint">
+                The identical code path over a recorded-shape response — fixture transport, same
+                governance. Round 1 deliberately references a token that does not exist, so the
+                named refusal and the fix round both demo.
+              </p>
+              <button type="button" disabled={!!descBusy} onClick={() => void runDescribe(true)}>
+                {descBusy ? 'Working…' : 'Demo generate (recorded fixture)'}
+              </button>
+            </details>
 
             {descBusy ? <p className="hint">{descBusy}</p> : null}
             {descError ? <div className="notice notice--error">{descError}</div> : null}
 
             {descRefusals && descSession.current ? (
-              <div className="notice" style={{ marginTop: 12 }}>
+              <div className="notice">
                 The proposal was refused by name ({descRefusals.length} violation
                 {descRefusals.length === 1 ? '' : 's'} under the editor). Nothing retries silently —
                 send the refusal text back yourself:
@@ -899,13 +1169,15 @@ export function Playground() {
                     key={p.setName}
                     type="button"
                     className="rail__item"
-                    onClick={() => applyProposal(p, 'Figma REST import')}
+                    onClick={() => applyProposal(p, 'Figma REST import', 'figma')}
                   >
                     {p.setName}
                   </button>
                 ))}
               </div>
             ) : null}
+
+            {wsMiniList('figma')}
           </div>
         )}
 
@@ -999,6 +1271,8 @@ export function Playground() {
                 {codeError ? <div className="notice notice--error">{codeError}</div> : null}
               </>
             )}
+
+            {wsMiniList('code')}
           </div>
         )}
 
@@ -1027,14 +1301,12 @@ export function Playground() {
         )}
 
         {sourceTab === 'tokens' && (
-          <div className="rail__section">
-            <div className="rail__group">
-              <div className="rail__group-title">Active token source</div>
-              <p className="hint" style={{ margin: '0 0 8px' }}>
-                {tokenSource.label} — {tokenSource.inventory.size} token paths. Proposals bind
-                against this tree; suggestions, the inline emitter&rsquo;s literals, and the preview
-                stylesheet all come from it.
-              </p>
+          <div className="rail__section rail__form">
+            <div className="token-status">
+              <span className="token-status__k">active token source</span>
+              {tokenSource.label} — {tokenSource.inventory.size} token paths. Proposals,
+              suggestions, the inline emitter&rsquo;s literals, and the preview stylesheet all
+              bind against this tree.
               {tokenSource.kind === 'user' ? (
                 <button type="button" onClick={() => { resetToRepoTokens(); setTokensNote(null); setTokensErrors(null); }}>
                   Back to repo tokens
@@ -1053,24 +1325,26 @@ export function Playground() {
               />
               <p className="hint">
                 Session-only: kept in this tab&rsquo;s sessionStorage, sent nowhere, gone when the
-                tab closes. Multiple documents are merged into one combined tree; a pasted tree is
-                modeless, so light and dark resolve identically.
+                tab closes. Multiple documents merge into one modeless tree — light and dark
+                resolve identically.
               </p>
             </div>
-            <button type="button" className="btn--primary" disabled={!tokensText.trim()} onClick={applyTokens}>
-              Apply tokens
-            </button>
-            <button type="button" onClick={() => setTokensText(STARTER_USER_TOKENS)}>
-              Load starter tree
-            </button>
+            <div className="btn-row">
+              <button type="button" className="btn--primary" disabled={!tokensText.trim()} onClick={applyTokens}>
+                Apply tokens
+              </button>
+              <button type="button" onClick={() => setTokensText(STARTER_USER_TOKENS)}>
+                Load starter tree
+              </button>
+            </div>
             <p className="hint">
-              The starter tree covers exactly what ds.badge needs (with values the repo never
-              shipped). Load any other contract against it and the generator refuses by name —
+              The starter tree covers exactly what ds.badge needs, with values the repo never
+              shipped. Load any other contract against it and the generator refuses by name —
               honest degradation, nothing invented.
             </p>
-            {tokensNote ? <div className="notice" style={{ marginTop: 12 }}>{tokensNote}</div> : null}
+            {tokensNote ? <div className="notice">{tokensNote}</div> : null}
             {tokensErrors ? (
-              <div className="notice notice--error" style={{ marginTop: 12 }}>
+              <div className="notice notice--error">
                 Refused — {tokensErrors.length} issue{tokensErrors.length === 1 ? '' : 's'}
                 <ul className="validation__list">
                   {tokensErrors.map((err, i) => (
@@ -1088,6 +1362,19 @@ export function Playground() {
         <div className="pane__head">
           <span className="pane__title">Contract</span>
           <span className="editor__meta">{provenance}</span>
+          {pristine !== null && text !== pristine.text ? (
+            <button
+              type="button"
+              className="btn--small share__btn"
+              onClick={() => {
+                setText(pristine.text);
+                setProvenance(pristine.provenance);
+              }}
+              title="Restore the pristine original of what was loaded — your edits are discarded."
+            >
+              Reset
+            </button>
+          ) : null}
           <button
             type="button"
             className="btn--small share__btn"
@@ -1104,12 +1391,11 @@ export function Playground() {
           </div>
         ) : null}
         <div className="editor">
-          <textarea
-            className="editor__textarea"
-            value={text}
-            onChange={(e) => setText(e.target.value)}
-            spellCheck={false}
-            aria-label="Contract JSON editor"
+          <ContractEditor
+            ref={editorRef}
+            text={text}
+            onChange={setText}
+            highlights={highlightLines}
             placeholder="The contract — pick an example, import from Figma, or paste code."
           />
           <div
@@ -1128,31 +1414,21 @@ export function Playground() {
             {validation.status === 'json-error' && (
               <>
                 Not JSON
-                <ul className="validation__list">
-                  <li>{validation.message}</li>
-                </ul>
+                {refusalList([validation.message])}
               </>
             )}
             {validation.status === 'schema-error' && (
               <>
                 Refused by ContractSchema — {validation.issues.length} issue
                 {validation.issues.length === 1 ? '' : 's'}
-                <ul className="validation__list">
-                  {validation.issues.map((issue, i) => (
-                    <li key={i}>{issue}</li>
-                  ))}
-                </ul>
+                {refusalList(validation.issues)}
               </>
             )}
             {validation.status === 'violations' && (
               <>
                 Schema-valid, but the generator refuses — {validation.issues.length} named violation
                 {validation.issues.length === 1 ? '' : 's'}
-                <ul className="validation__list">
-                  {validation.issues.map((issue, i) => (
-                    <li key={i}>{issue}</li>
-                  ))}
-                </ul>
+                {refusalList(validation.issues)}
               </>
             )}
           </div>
@@ -1162,6 +1438,19 @@ export function Playground() {
 
       {/* ---------------------------------------------------------- output */}
       <section className="pg__output">
+        {wsLoaded && !switchStripDismissed ? (
+          <div className="switch-strip" role="note">
+            <span>{WS_SWITCH_LINES[wsLoaded.source]}</span>
+            <button
+              type="button"
+              className="btn--ghost switch-strip__dismiss"
+              onClick={dismissSwitchStrip}
+              aria-label="Dismiss for this session"
+            >
+              Dismiss
+            </button>
+          </div>
+        ) : null}
         <div className="tabs" role="tablist" aria-label="Output target">
           <button
             type="button"

@@ -114,7 +114,13 @@ browser. No backend, no analytics, no accounts.
    emitter tabs from the registry (Preview · React · HTML+CSS · React inline
    · Figma script), copy per file, prettier behind a lazy "Format" toggle.
 3. Break a token ref in the editor → the generator's refusal appears BY NAME
-   under the editor; preview holds the last valid render and says so.
+   under the editor AND the offending line gets a danger background (a
+   dependency-free textarea-overlay backdrop; zod paths walked to their
+   line, generator messages anchored on the value they quote, unresolvable
+   refusals highlight nothing — never a guess); each resolved refusal is a
+   click that scrolls to its line. Preview holds the last valid render and
+   says so. A Reset in the pane header restores the pristine original
+   whenever the text has diverged from what was loaded.
 4. **Figma tab** — the W6 UI: URL + session-only token → `importFromUrl`
    (the same function the CLI runs) → proposal + Import-report receipts.
    No token? "Demo import" runs the identical code path over the committed
@@ -162,9 +168,24 @@ browser. No backend, no analytics, no accounts.
    the contract text + active output tab + theme in the hash
    (`#s=1.<base64url deflate-raw>`, plain-JSON `0.` fallback; a typical
    contract is ~1–1.5 KB; >8 KB refuses with a named warning). Secrets and
-   user tokens never travel. First visit, a dismissible three-step strip
-   performs the loop for you: load Badge → break a token ref (named
-   refusal, in the editor and the React tab) → open the React output.
+   user tokens never travel. First visit, a dismissible strip performs the
+   loop for you: load Badge → break a token ref (named refusal, in the
+   editor and the React tab) → open the React output → reset the example
+   (pristine Badge back in one click).
+10. **Workspace** — every successful import (Figma URL/demo, code paste or
+    GitHub URL, Describe generation, JSON paste) lands in a session
+    workspace (engine/workspace.ts: sessionStorage, this tab only). A
+    Workspace tab appears FIRST in the rail with the first import: entries
+    grouped by source with text tags (FIGMA/CODE/AI/JSON), name, time —
+    click restores the contract AND its receipts; per-entry remove, Clear
+    all; capped at 30 with the evicted entry named in a receipts line. The
+    Figma and Code tabs list their own imports under their forms. Loading
+    an entry sets workspace provenance and a dismissible one-line strip
+    above the output tabs tells the switch story (imported from design →
+    the React/HTML tabs are its code side; from code → the Figma script
+    tab is its design side; generated → both sides below). "How do I use
+    this?" in the topbar opens a plain help drawer — one short section per
+    way in.
 
 Bundle tiers (vite build, gzip): initial ≈ 153 KB · prettier chunk ≈ 339 KB ·
 TypeScript chunk ≈ 985 KB · REST fixtures ≈ 3 KB — the lazy tiers load only

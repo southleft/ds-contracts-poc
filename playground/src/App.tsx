@@ -1,5 +1,7 @@
+import { useState } from 'react';
 import { Link, useRoute } from './router';
 import { ThemeProvider, useTheme } from './theme';
+import { HelpDrawer } from './components/HelpDrawer';
 import { Landing } from './pages/Landing';
 import { Examples } from './pages/Examples';
 import { Playground } from './pages/Playground';
@@ -9,6 +11,7 @@ export const REPO_URL = 'https://github.com/southleft/ds-contracts-poc';
 function TopBar() {
   const { pathname } = useRoute();
   const { theme, toggle } = useTheme();
+  const [helpOpen, setHelpOpen] = useState(false);
   const navClass = (path: string) => `topbar__link${pathname === path ? ' is-active' : ''}`;
   return (
     <header className="topbar">
@@ -30,7 +33,11 @@ function TopBar() {
         <a href={REPO_URL} className="topbar__link" target="_blank" rel="noreferrer">
           GitHub
         </a>
+        <button type="button" className="topbar__link topbar__help" onClick={() => setHelpOpen(true)}>
+          How do I use this?
+        </button>
       </nav>
+      <HelpDrawer open={helpOpen} onClose={() => setHelpOpen(false)} />
       <button
         type="button"
         className="topbar__theme"
