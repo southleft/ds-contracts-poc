@@ -1045,6 +1045,42 @@ const cases: Case[] = [
       if (!script.includes('setTextStyleIdAsync')) throw new Error('runtime style application missing');
     },
   },
+  {
+    // CODE→CONTRACT round-trip identity: generated components are ground truth
+    // for the css-module anatomy adapter — re-extracting Badge/Switch/Card must
+    // referee ZERO MISMATCH, and the receipt must be able to go red.
+    id: 'extract-code-roundtrip-identity',
+    claim: 'C5-extraction',
+    run: () => {
+      let r = run(TSX, ['extract/roundtrip-code.ts']);
+      if (r.status !== 0 || !r.out.includes('0 mismatched')) throw new Error(`Round trip not clean:\n${r.out}`);
+      replaceInFile('src/components/Badge/Badge.module.css', 'var(--radius-badge)', 'var(--radius-control)');
+      r = run(TSX, ['extract/roundtrip-code.ts']);
+      if (r.status === 0 || !r.out.includes('[Badge MISMATCH] anatomy.root')) {
+        throw new Error(`Token drift not caught by the round-trip receipt:\n${r.out}`);
+      }
+      replaceInFile('src/components/Badge/Badge.module.css', 'var(--radius-control)', 'var(--radius-badge)');
+      if (run(TSX, ['extract/roundtrip-code.ts']).status !== 0) throw new Error('Did not return to zero-mismatch after revert');
+    },
+  },
+  {
+    // Raw CSS values are REPORTED with nearest-token candidates, never invented.
+    id: 'extract-raw-values-never-invented',
+    claim: 'C5-extraction',
+    run: () => {
+      const r = run(TSX, ['extract/run.ts', 'code', 'extract/fixtures/foreign-css.config.json']);
+      if (r.status !== 0) throw new Error(`Extraction failed:\n${r.out}`);
+      const raw = readFileSync(path.join(SCRATCH, 'extract/fixtures/.out-css/contracts/callout.contract.json'), 'utf8');
+      if (/#f9fafb|#374151|\b(6|8|12|14)px\b/i.test(raw)) throw new Error('A raw CSS value leaked into the proposed contract');
+      const c = JSON.parse(raw);
+      if (c.anatomy.root.parts?.heading?.content?.prop !== 'heading' || c.anatomy.root.parts?.body?.slot?.name !== 'children') {
+        throw new Error('Foreign structure (content binding + slot) not extracted');
+      }
+      const notes = readFileSync(path.join(SCRATCH, 'extract/fixtures/.out-css/proposals.md'), 'utf8');
+      if (!notes.includes('{ background-color: #f9fafb }') || !notes.includes('{color.gray.50}')) throw new Error('Raw value not reported with nearest-token candidates');
+      if (!notes.includes('var(--text-muted) which resolves to NO token')) throw new Error('Unresolvable css var not refused by name');
+    },
+  },
 ];
 
 // ---------------------------------------------------------------------------

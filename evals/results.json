@@ -1,6 +1,6 @@
 {
-  "passed": 47,
-  "total": 47,
+  "passed": 49,
+  "total": 49,
   "results": [
     {
       "id": "refuse-unknown-token-reference",
@@ -235,6 +235,16 @@
     {
       "id": "text-styles-from-typography-tokens",
       "claim": "C1-determinism",
+      "pass": true
+    },
+    {
+      "id": "extract-code-roundtrip-identity",
+      "claim": "C5-extraction",
+      "pass": true
+    },
+    {
+      "id": "extract-raw-values-never-invented",
+      "claim": "C5-extraction",
       "pass": true
     }
   ]
