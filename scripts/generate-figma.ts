@@ -888,6 +888,7 @@ interface VariantSpec {
 interface ComponentData {
   setName: string;
   contractId: string;
+  anchorKey: string | null;
   description: string;
   isSet: boolean;
   boolProps: Array<{ property: string; default: boolean }>;
@@ -1094,6 +1095,7 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
   return {
     setName: contract.name,
     contractId: contract.id,
+    anchorKey: contract.anchors.figma.componentSetKey ?? null,
     // Events are code-only by declared fidelity limit (the canvas cannot run
     // behavior) — surfaced here as description text so designers see the
     // interaction surface in the properties panel.
@@ -1885,14 +1887,30 @@ async function amendSet(set, C) {
     }
   }
 
-  // Sets gaining/losing the State preview axis reconcile by NAME like any
-  // other variant change: opting in renames every base variant (adds the
-  // State=Default segment) and adds the preview variants — the old names
-  // surface as extraVariants (reported, retired by a human, never deleted);
-  // opting out reverses it.
+  // Sets gaining/losing the State preview axis reconcile by RENAME, not
+  // duplication: an existing variant whose name matches an expected name
+  // minus the ', State=Default' segment IS that variant (instances point at
+  // it), so it is renamed in place — every variant node ID is preserved.
+  // Main-file finding, 2026-07-08: name-only matching built 12 duplicates
+  // and stranded the 12 originals as off-axis extras.
   const EV = withStateAxis(C);
   const expected = new Map(EV.map((v) => [v.name, v]));
-  for (const ch of set.children) if (!expected.has(ch.name)) report.extraVariants.push(ch.name);
+  for (const ch of set.children) {
+    if (expected.has(ch.name)) continue;
+    const gained = ch.name + ', State=Default';
+    const lost = ch.name.replace(', State=Default', '');
+    if (expected.has(gained) && !set.children.some((o) => o.name === gained)) {
+      ch.name = gained;
+      report.renamedVariants = report.renamedVariants || [];
+      report.renamedVariants.push(gained);
+    } else if (lost !== ch.name && expected.has(lost) && !set.children.some((o) => o.name === lost)) {
+      ch.name = lost;
+      report.renamedVariants = report.renamedVariants || [];
+      report.renamedVariants.push(lost);
+    } else {
+      report.extraVariants.push(ch.name);
+    }
+  }
   const existingByName = new Map(set.children.map((ch) => [ch.name, ch]));
 
   for (const v of EV) {
@@ -2009,10 +2027,25 @@ async function syncOne(C) {
       if (existing) break;
     }
   }
+  // An anchored key is ours by definition — the contract records the key the
+  // canvas minted. Covers legacy nodes that predate both plugin-data markers
+  // (main-file finding, 2026-07-08: 17 standalone components duplicated).
+  if (!existing && C.anchorKey) {
+    for (const page of figma.root.children) {
+      existing = page.findOne(
+        (n) => (n.type === 'COMPONENT_SET' || n.type === 'COMPONENT') && n.key === C.anchorKey,
+      );
+      if (existing) break;
+    }
+    if (existing) existing.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  }
   if (existing && existing.type === 'COMPONENT_SET' && C.isSet) {
     return await amendSet(existing, C);
   }
-  if (existing) return { name: C.setName, skipped: true, reason: 'standalone component — amend supports variant sets in v1', nodeId: existing.id, key: existing.key };
+  if (existing) {
+    existing.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+    return { name: C.setName, skipped: true, reason: 'standalone component — amend supports variant sets in v1', nodeId: existing.id, key: existing.key };
+  }
 
   // A same-named unmarked set is foreign: leave it alone, disambiguate ours.
   let displayName = C.setName;
