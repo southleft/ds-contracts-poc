@@ -297,10 +297,10 @@ label {
   font-size: 12px;
 }
 
-/* Five source tabs share the rail's width — tighter than the output tabs. */
+/* Six source tabs share the rail's width — tighter than the output tabs. */
 .pg__rail > .tabs > .tabs__tab {
-  padding: 7px 8px;
-  font-size: 12.5px;
+  padding: 7px 5px;
+  font-size: 11.5px;
 }
 
 /* Marker on the Tokens tab while a pasted user tree is the active source. */
@@ -642,6 +642,79 @@ label {
   margin-bottom: 2px;
   white-space: pre-wrap;
   word-break: break-word;
+}
+
+/* first-visit onboarding strip — three clickable steps, no modal, no tour */
+
+.onboard {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 7px 16px;
+  border-bottom: 1px solid var(--pg-border);
+  background: var(--pg-surface);
+  font-size: 12.5px;
+  flex-shrink: 0;
+}
+
+.onboard__title {
+  color: var(--pg-muted);
+  margin-right: 4px;
+}
+
+.onboard__step {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12.5px;
+  padding: 3px 10px 3px 4px;
+  border-color: var(--pg-border-strong);
+  background: var(--pg-bg);
+}
+
+.onboard__step.is-done {
+  color: var(--pg-ok);
+  border-color: var(--pg-ok);
+}
+
+.onboard__num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  font-size: 11px;
+  font-weight: 600;
+  background: var(--pg-surface);
+  border: 1px solid var(--pg-border);
+}
+
+.onboard__step.is-done .onboard__num {
+  border-color: var(--pg-ok);
+}
+
+.onboard__dismiss {
+  margin-left: auto;
+  font-size: 12px;
+}
+
+/* share links */
+
+.share__btn {
+  margin-left: 8px;
+  flex-shrink: 0;
+}
+
+.share__note {
+  padding: 4px 14px 0;
+  font-size: 11.5px;
+  font-family: var(--pg-mono);
+  color: var(--pg-ok);
+}
+
+.share__note--warn {
+  color: var(--pg-warn);
 }
 
 /* receipts */
