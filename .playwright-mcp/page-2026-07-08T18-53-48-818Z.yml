@@ -1,0 +1,136 @@
+- generic [ref=f15e3]:
+  - banner [ref=f15e4]:
+    - 'link "{} Contract Playground" [ref=f15e5] [cursor=pointer]':
+      - /url: /
+    - navigation [ref=f15e6]:
+      - link "Playground" [ref=f15e7] [cursor=pointer]:
+        - /url: /playground
+      - link "Examples" [ref=f15e8] [cursor=pointer]:
+        - /url: /examples
+      - link "GitHub" [ref=f15e9] [cursor=pointer]:
+        - /url: https://github.com/southleft/ds-contracts-poc
+    - button "Switch to dark theme" [ref=f15e10] [cursor=pointer]: Dark
+  - main [ref=f15e11]:
+    - generic [ref=f15e85]:
+      - complementary [ref=f15e86]:
+        - tablist "Input source" [ref=f15e87]:
+          - tab "Examples" [selected] [ref=f15e88] [cursor=pointer]
+          - tab "Figma" [ref=f15e89] [cursor=pointer]
+          - tab "Code" [ref=f15e90] [cursor=pointer]
+          - tab "JSON" [ref=f15e91] [cursor=pointer]
+        - generic [ref=f15e92]:
+          - generic [ref=f15e93]:
+            - generic [ref=f15e94]: Atom
+            - button "Badge" [ref=f15e95] [cursor=pointer]
+            - button "Button" [ref=f15e96] [cursor=pointer]
+            - button "Switch" [ref=f15e97] [cursor=pointer]
+            - button "Checkbox" [ref=f15e98] [cursor=pointer]
+            - button "Heading" [ref=f15e99] [cursor=pointer]
+          - generic [ref=f15e100]:
+            - generic [ref=f15e101]: Molecule
+            - button "Card" [ref=f15e102] [cursor=pointer]
+            - button "Banner" [ref=f15e103] [cursor=pointer]
+          - generic [ref=f15e104]:
+            - generic [ref=f15e105]: Composition
+            - button "ChatMessage" [ref=f15e106] [cursor=pointer]
+            - button "ChatMessageMetadata" [ref=f15e107] [cursor=pointer]
+          - generic [ref=f15e108]:
+            - generic [ref=f15e109]: Foreign code
+            - button "Callout (foreign code)" [ref=f15e110] [cursor=pointer]
+          - generic [ref=f15e111]:
+            - generic [ref=f15e112]: All 51 contracts
+            - combobox "Load any contract" [ref=f15e113]:
+              - option "Pick a contract…" [selected]
+              - option "ds.accordion-item"
+              - option "ds.avatar"
+              - option "ds.avatar-group"
+              - option "ds.badge"
+              - option "ds.banner"
+              - option "ds.blockquote"
+              - option "ds.breadcrumb-item"
+              - option "ds.breadcrumbs"
+              - option "ds.button"
+              - option "ds.card"
+              - option "ds.chat-message"
+              - option "ds.chat-message-metadata"
+              - option "ds.chat-system-message"
+              - option "ds.checkbox"
+              - option "ds.citation"
+              - option "ds.code"
+              - option "ds.divider"
+              - option "ds.empty-state"
+              - option "ds.field"
+              - option "ds.heading"
+              - option "ds.icon-button"
+              - option "ds.inline"
+              - option "ds.kbd"
+              - option "ds.list"
+              - option "ds.list-item"
+              - option "ds.metadata-list"
+              - option "ds.metadata-list-item"
+              - option "ds.pagination"
+              - option "ds.progress-bar"
+              - option "ds.section"
+              - option "ds.side-nav-item"
+              - option "ds.skeleton"
+              - option "ds.slider"
+              - option "ds.spinner"
+              - option "ds.stack"
+              - option "ds.status-dot"
+              - option "ds.switch"
+              - option "ds.tab"
+              - option "ds.tab-list"
+              - option "ds.table"
+              - option "ds.table-cell"
+              - option "ds.table-header-cell"
+              - option "ds.table-row"
+              - option "ds.text-area"
+              - option "ds.text-field"
+              - option "ds.toast"
+              - option "ds.token"
+              - option "ds.toolbar"
+              - option "ds.top-nav"
+              - option "ds.top-nav-item"
+              - option "ds.typeahead-item"
+      - generic [ref=f15e114]:
+        - generic [ref=f15e115]:
+          - generic [ref=f15e116]: Contract
+          - generic [ref=f15e117]: loaded from examples — ds.badge
+        - generic [ref=f15e118]:
+          - textbox "Contract JSON editor" [ref=f15e119]:
+            - /placeholder: The contract — pick an example, import from Figma, or paste code.
+            - text: "{ \"$schema\": \"./contract.schema.json\", \"id\": \"ds.badge\", \"name\": \"Badge\", \"version\": \"1.1.0\", \"status\": \"draft\", \"description\": \"Communicates status or categorization at a glance. Non-interactive.\", \"semantics\": { \"element\": \"span\", \"role\": \"status\" }, \"props\": [ { \"name\": \"variant\", \"description\": \"The feedback tone being communicated.\", \"type\": { \"enum\": [ \"info\", \"success\", \"warning\", \"danger\", \"error\" ] }, \"default\": \"info\", \"bindings\": { \"figma\": { \"kind\": \"VARIANT\", \"property\": \"Variant\", \"values\": { \"info\": \"Info\", \"success\": \"Success\", \"warning\": \"Warning\", \"danger\": \"Danger\", \"error\": \"Error\" } }, \"code\": { \"prop\": \"variant\" } } }, { \"name\": \"children\", \"description\": \"Badge label.\", \"type\": \"text\", \"default\": \"Badge\", \"bindings\": { \"figma\": { \"kind\": \"TEXT\", \"property\": \"Label\" }, \"code\": { \"prop\": \"children\" } } } ], \"states\": [], \"anatomy\": { \"root\": { \"tokens\": { \"background-color\": \"{color.feedback.{variant}.background}\", \"color\": \"{color.feedback.{variant}.foreground}\", \"padding-inline\": \"{space.inset-x.smoll}\", \"padding-block\": \"{space.inset-y.sm}\", \"border-radius\": \"{radius.badge}\", \"font-family\": \"{font.control.family}\", \"font-weight\": \"{font.control.weight}\", \"font-size\": \"{font.badge.size}\" } } }, \"a11y\": { \"contrast\": \"AA\" }, \"anchors\": { \"figma\": { \"fileKey\": \"8nim1d0IPnehMxA7B7SYxC\", \"componentSetKey\": \"89f1fb2d4580116cea4be5d4ca340de216a27819\", \"nodeId\": \"6:10\" }, \"code\": { \"importPath\": \"src/components/Badge\", \"export\": \"Badge\" } } }"
+          - status [ref=f15e120]:
+            - text: Schema-valid, but the generator refuses — 1 named violation
+            - list [ref=f15e135]:
+              - listitem [ref=f15e136]: "ds.badge: anatomy.root.tokens.padding-inline references token \"{space.inset-x.smoll}\" which does not exist in tokens/"
+          - region "Receipts" [ref=f15e121]:
+            - generic [ref=f15e123]: Receipts
+            - paragraph [ref=f15e124]: Import from Figma or propose from code and every degradation, note, and unbound value lands here, named.
+      - generic [ref=f15e125]:
+        - tablist "Output target" [ref=f15e126]:
+          - tab "Preview" [selected] [ref=f15e127] [cursor=pointer]
+          - tab "React" [ref=f15e128] [cursor=pointer]
+          - tab "HTML + CSS" [ref=f15e129] [cursor=pointer]
+          - tab "React inline" [ref=f15e130] [cursor=pointer]
+          - tab "Figma script" [ref=f15e131] [cursor=pointer]
+        - generic [ref=f15e132]:
+          - generic [ref=f15e137]: Contract invalid — showing the last valid render. Fix the named refusals to update.
+          - iframe [ref=f15e133]:
+            - generic [ref=f25e2]:
+              - generic [ref=f25e3]:
+                - paragraph [ref=f25e4]: default
+                - status [ref=f25e5]: Badge
+              - generic [ref=f25e6]:
+                - paragraph [ref=f25e7]: variant=success
+                - status [ref=f25e8]: Badge
+              - generic [ref=f25e9]:
+                - paragraph [ref=f25e10]: variant=warning
+                - status [ref=f25e11]: Badge
+              - generic [ref=f25e12]:
+                - paragraph [ref=f25e13]: variant=danger
+                - status [ref=f25e14]: Badge
+              - generic [ref=f25e15]:
+                - paragraph [ref=f25e16]: variant=error
+                - status [ref=f25e17]: Badge
+        - generic [ref=f15e134]: Generated in your browser by the same core that ships the repo’s 51 components — core/index.ts, golden-guarded.

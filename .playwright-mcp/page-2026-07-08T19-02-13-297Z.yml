@@ -1,0 +1,51 @@
+- generic [ref=f42e3]:
+  - banner [ref=f42e4]:
+    - 'link "{} Contract Playground" [ref=f42e5] [cursor=pointer]':
+      - /url: /
+    - navigation [ref=f42e6]:
+      - link "Playground" [ref=f42e7] [cursor=pointer]:
+        - /url: /playground
+      - link "Examples" [ref=f42e8] [cursor=pointer]:
+        - /url: /examples
+      - link "GitHub" [ref=f42e9] [cursor=pointer]:
+        - /url: https://github.com/southleft/ds-contracts-poc
+    - button "Switch to dark theme" [ref=f42e10] [cursor=pointer]: Dark
+  - main [ref=f42e11]:
+    - generic [ref=f42e12]:
+      - complementary [ref=f42e13]:
+        - tablist "Input source" [ref=f42e14]:
+          - tab "Examples" [ref=f42e15] [cursor=pointer]
+          - tab "Figma" [ref=f42e16] [cursor=pointer]
+          - tab "Code" [selected] [ref=f42e17] [cursor=pointer]
+          - tab "JSON" [ref=f42e18] [cursor=pointer]
+        - generic [ref=f42e19]:
+          - generic [ref=f42e20]:
+            - generic [ref=f42e21]: Component source (TSX)
+            - textbox "Component source (TSX)" [ref=f42e22]:
+              - /placeholder: "export function Badge({ variant = 'info' }: … ) { … }"
+              - text: "// FIXTURE: a \"foreign\" component styled with plain CSS — literal colors and // px values, an unresolvable css var, a data-attribute variant hook, and a // tailwind-ish string className — to prove anatomy extraction DEGRADES BY // NAME on code this repo's generator never emitted: extract what is legible // (structure, slots, content bindings), report the rest per declaration, // and NEVER turn a raw value into an invented token. import styles from './Callout.module.css'; interface CalloutProps { /** Callout heading text. */ heading: string; tone?: 'info' | 'warning'; children?: React.ReactNode; } export function Callout({ heading, tone = 'info', children }: CalloutProps) { return ( <section className={styles.root} data-tone={tone}> <h3 className={styles.heading}>{heading}</h3> <span className=\"badge badge--soft\">beta</span> <div className={styles.body}>{children}</div> </section> ); }"
+          - generic [ref=f42e23]:
+            - generic [ref=f42e24]: CSS Module (optional — unlocks anatomy)
+            - textbox "CSS Module (optional — unlocks anatomy)" [ref=f42e25]:
+              - /placeholder: ".root { … }"
+              - text: "/* FIXTURE: hand-written styles — nothing here came from a generator. */ .root { display: flex; flex-direction: column; gap: 8px; /* raw — the token tree HAS 8px tokens; candidates, not decisions */ background-color: #f9fafb; /* raw — equals color.gray.50's value */ border: 1px solid #f59e0b; /* shorthand — not invertible to one binding */ border-radius: 6px; /* raw — NO token has this value */ padding: 12px; /* raw — equals space.150's value */ } .root[data-tone='warning'] { background-color: #fef3c7; /* variant via data attribute — not an enum class */ } .heading { margin: 0; font-size: 14px; /* raw */ color: var(--text-muted); /* var that resolves to NO token in the tree */ } .body { color: #374151; /* raw — equals color.gray.700's value */ } @media (max-width: 600px) { .root { padding: 8px; } }"
+          - button "Working…" [disabled] [ref=f42e26]
+          - paragraph [ref=f42e27]: Loading the TypeScript compiler (lazy chunk, ~5 MB — first run only)…
+      - generic [ref=f42e28]:
+        - generic [ref=f42e30]: Contract
+        - generic [ref=f42e31]:
+          - textbox "Contract JSON editor" [ref=f42e32]:
+            - /placeholder: The contract — pick an example, import from Figma, or paste code.
+          - status [ref=f42e33]: No contract yet.
+          - region "Receipts" [ref=f42e34]:
+            - generic [ref=f42e36]: Receipts
+            - paragraph [ref=f42e37]: Import from Figma or propose from code and every degradation, note, and unbound value lands here, named.
+      - generic [ref=f42e38]:
+        - tablist "Output target" [ref=f42e39]:
+          - tab "Preview" [selected] [ref=f42e40] [cursor=pointer]
+          - tab "React" [ref=f42e41] [cursor=pointer]
+          - tab "HTML + CSS" [ref=f42e42] [cursor=pointer]
+          - tab "React inline" [ref=f42e43] [cursor=pointer]
+          - tab "Figma script" [ref=f42e44] [cursor=pointer]
+        - generic [ref=f42e46]: Nothing to render yet.
+        - generic [ref=f42e47]: Generated in your browser by the same core that ships the repo’s 51 components — core/index.ts, golden-guarded.

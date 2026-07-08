@@ -1,0 +1,133 @@
+- generic [ref=f15e3]:
+  - banner [ref=f15e4]:
+    - 'link "{} Contract Playground" [ref=f15e5] [cursor=pointer]':
+      - /url: /
+    - navigation [ref=f15e6]:
+      - link "Playground" [ref=f15e7] [cursor=pointer]:
+        - /url: /playground
+      - link "Examples" [ref=f15e8] [cursor=pointer]:
+        - /url: /examples
+      - link "GitHub" [ref=f15e9] [cursor=pointer]:
+        - /url: https://github.com/southleft/ds-contracts-poc
+    - button "Switch to dark theme" [ref=f15e10] [cursor=pointer]: Dark
+  - main [ref=f15e11]:
+    - generic [ref=f15e85]:
+      - complementary [ref=f15e86]:
+        - tablist "Input source" [ref=f15e87]:
+          - tab "Examples" [selected] [ref=f15e88] [cursor=pointer]
+          - tab "Figma" [ref=f15e89] [cursor=pointer]
+          - tab "Code" [ref=f15e90] [cursor=pointer]
+          - tab "JSON" [ref=f15e91] [cursor=pointer]
+        - generic [ref=f15e92]:
+          - generic [ref=f15e93]:
+            - generic [ref=f15e94]: Atom
+            - button "Badge" [ref=f15e95] [cursor=pointer]
+            - button "Button" [ref=f15e96] [cursor=pointer]
+            - button "Switch" [ref=f15e97] [cursor=pointer]
+            - button "Checkbox" [ref=f15e98] [cursor=pointer]
+            - button "Heading" [ref=f15e99] [cursor=pointer]
+          - generic [ref=f15e100]:
+            - generic [ref=f15e101]: Molecule
+            - button "Card" [ref=f15e102] [cursor=pointer]
+            - button "Banner" [ref=f15e103] [cursor=pointer]
+          - generic [ref=f15e104]:
+            - generic [ref=f15e105]: Composition
+            - button "ChatMessage" [ref=f15e106] [cursor=pointer]
+            - button "ChatMessageMetadata" [ref=f15e107] [cursor=pointer]
+          - generic [ref=f15e108]:
+            - generic [ref=f15e109]: Foreign code
+            - button "Callout (foreign code)" [ref=f15e110] [cursor=pointer]
+          - generic [ref=f15e111]:
+            - generic [ref=f15e112]: All 51 contracts
+            - combobox "Load any contract" [ref=f15e113]:
+              - option "Pick a contract…" [selected]
+              - option "ds.accordion-item"
+              - option "ds.avatar"
+              - option "ds.avatar-group"
+              - option "ds.badge"
+              - option "ds.banner"
+              - option "ds.blockquote"
+              - option "ds.breadcrumb-item"
+              - option "ds.breadcrumbs"
+              - option "ds.button"
+              - option "ds.card"
+              - option "ds.chat-message"
+              - option "ds.chat-message-metadata"
+              - option "ds.chat-system-message"
+              - option "ds.checkbox"
+              - option "ds.citation"
+              - option "ds.code"
+              - option "ds.divider"
+              - option "ds.empty-state"
+              - option "ds.field"
+              - option "ds.heading"
+              - option "ds.icon-button"
+              - option "ds.inline"
+              - option "ds.kbd"
+              - option "ds.list"
+              - option "ds.list-item"
+              - option "ds.metadata-list"
+              - option "ds.metadata-list-item"
+              - option "ds.pagination"
+              - option "ds.progress-bar"
+              - option "ds.section"
+              - option "ds.side-nav-item"
+              - option "ds.skeleton"
+              - option "ds.slider"
+              - option "ds.spinner"
+              - option "ds.stack"
+              - option "ds.status-dot"
+              - option "ds.switch"
+              - option "ds.tab"
+              - option "ds.tab-list"
+              - option "ds.table"
+              - option "ds.table-cell"
+              - option "ds.table-header-cell"
+              - option "ds.table-row"
+              - option "ds.text-area"
+              - option "ds.text-field"
+              - option "ds.toast"
+              - option "ds.token"
+              - option "ds.toolbar"
+              - option "ds.top-nav"
+              - option "ds.top-nav-item"
+              - option "ds.typeahead-item"
+      - generic [ref=f15e114]:
+        - generic [ref=f15e115]:
+          - generic [ref=f15e116]: Contract
+          - generic [ref=f15e117]: loaded from examples — ds.badge
+        - generic [ref=f15e118]:
+          - textbox "Contract JSON editor" [ref=f15e119]:
+            - /placeholder: The contract — pick an example, import from Figma, or paste code.
+            - text: "{ \"$schema\": \"./contract.schema.json\", \"id\": \"ds.badge\", \"name\": \"Badge\", \"version\": \"1.1.0\", \"status\": \"draft\", \"description\": \"Communicates status or categorization at a glance. Non-interactive.\", \"semantics\": { \"element\": \"span\", \"role\": \"status\" }, \"props\": [ { \"name\": \"variant\", \"description\": \"The feedback tone being communicated.\", \"type\": { \"enum\": [ \"info\", \"success\", \"warning\", \"danger\", \"error\" ] }, \"default\": \"info\", \"bindings\": { \"figma\": { \"kind\": \"VARIANT\", \"property\": \"Variant\", \"values\": { \"info\": \"Info\", \"success\": \"Success\", \"warning\": \"Warning\", \"danger\": \"Danger\", \"error\": \"Error\" } }, \"code\": { \"prop\": \"variant\" } } }, { \"name\": \"children\", \"description\": \"Badge label.\", \"type\": \"text\", \"default\": \"Badge\", \"bindings\": { \"figma\": { \"kind\": \"TEXT\", \"property\": \"Label\" }, \"code\": { \"prop\": \"children\" } } } ], \"states\": [], \"anatomy\": { \"root\": { \"tokens\": { \"background-color\": \"{color.feedback.{variant}.background}\", \"color\": \"{color.feedback.{variant}.foreground}\", \"padding-inline\": \"{space.inset-x.sm}\", \"padding-block\": \"{space.inset-y.sm}\", \"border-radius\": \"{radius.badge}\", \"font-family\": \"{font.control.family}\", \"font-weight\": \"{font.control.weight}\", \"font-size\": \"{font.badge.size}\" } } }, \"a11y\": { \"contrast\": \"AA\" }, \"anchors\": { \"figma\": { \"fileKey\": \"8nim1d0IPnehMxA7B7SYxC\", \"componentSetKey\": \"89f1fb2d4580116cea4be5d4ca340de216a27819\", \"nodeId\": \"6:10\" }, \"code\": { \"importPath\": \"src/components/Badge\", \"export\": \"Badge\" } } }"
+          - status [ref=f15e120]: "Schema-valid: ds.badge v1.1.0"
+          - region "Receipts" [ref=f15e121]:
+            - generic [ref=f15e123]: Receipts
+            - paragraph [ref=f15e124]: Import from Figma or propose from code and every degradation, note, and unbound value lands here, named.
+      - generic [ref=f15e125]:
+        - tablist "Output target" [ref=f15e126]:
+          - tab "Preview" [ref=f15e127] [cursor=pointer]
+          - tab "React" [active] [selected] [ref=f15e128] [cursor=pointer]
+          - tab "HTML + CSS" [ref=f15e129] [cursor=pointer]
+          - tab "React inline" [ref=f15e130] [cursor=pointer]
+          - tab "Figma script" [ref=f15e131] [cursor=pointer]
+        - generic [ref=f15e141] [cursor=pointer]:
+          - checkbox "Format (prettier, lazy ~1.4 MB)" [ref=f15e142]
+          - text: Format (prettier, lazy ~1.4 MB)
+        - generic [ref=f15e143]:
+          - generic [ref=f15e144]:
+            - generic [ref=f15e145]:
+              - generic [ref=f15e146]: Badge.tsx
+              - button "Copy" [ref=f15e147] [cursor=pointer]
+            - generic [ref=f15e148]: "/** * GENERATED FILE — DO NOT EDIT. * Source of truth: contracts/badge.contract.json (ds.badge v1.1.0) * Regenerate with: npm run generate */ import { forwardRef } from 'react'; import type { HTMLAttributes } from 'react'; import styles from './Badge.module.css'; export interface BadgeProps extends HTMLAttributes<HTMLSpanElement> { /** The feedback tone being communicated. */ variant?: 'info' | 'success' | 'warning' | 'danger' | 'error'; } /** Communicates status or categorization at a glance. Non-interactive. */ export const Badge = forwardRef<HTMLSpanElement, BadgeProps>(function Badge( { variant = 'info', className, children, ...rest }, ref, ) { const classes = [styles.root, styles[`variant-${variant}`], className].filter(Boolean).join(' '); return ( <span ref={ref} className={classes} role=\"status\" {...rest}> {children} </span> ); });"
+          - generic [ref=f15e149]:
+            - generic [ref=f15e150]:
+              - generic [ref=f15e151]: Badge.module.css
+              - button "Copy" [ref=f15e152] [cursor=pointer]
+            - generic [ref=f15e153]: "/* GENERATED FILE — DO NOT EDIT. * Source of truth: contracts/badge.contract.json (ds.badge v1.1.0) * Regenerate with: npm run generate */ .root { display: inline-flex; align-items: center; justify-content: center; border: 0; padding-inline: var(--space-inset-x-sm); padding-block: var(--space-inset-y-sm); border-radius: var(--radius-badge); font-family: var(--font-control-family); font-weight: var(--font-control-weight); font-size: var(--font-badge-size); } .variant-info { background-color: var(--color-feedback-info-background); color: var(--color-feedback-info-foreground); } .variant-success { background-color: var(--color-feedback-success-background); color: var(--color-feedback-success-foreground); } .variant-warning { background-color: var(--color-feedback-warning-background); color: var(--color-feedback-warning-foreground); } .variant-danger { background-color: var(--color-feedback-danger-background); color: var(--color-feedback-danger-foreground); } .variant-error { background-color: var(--color-feedback-error-background); color: var(--color-feedback-error-foreground); }"
+          - generic [ref=f15e154]:
+            - generic [ref=f15e155]:
+              - generic [ref=f15e156]: Badge.stories.tsx
+              - button "Copy" [ref=f15e157] [cursor=pointer]
+            - generic [ref=f15e158]: "/** * GENERATED FILE — DO NOT EDIT. * Source of truth: contracts/badge.contract.json (ds.badge v1.1.0) * Regenerate with: npm run generate */ import type { Meta, StoryObj } from '@storybook/react-vite'; import { Badge } from './Badge'; const meta = { title: 'Components/Badge', component: Badge, tags: ['autodocs'], parameters: { docs: { description: { component: \"Communicates status or categorization at a glance. Non-interactive.\" } }, }, argTypes: { variant: { control: 'select', options: ['info', 'success', 'warning', 'danger', 'error'], description: 'The feedback tone being communicated.' }, children: { control: 'text', description: 'Badge label.' }, }, args: { variant: 'info', children: 'Badge', }, } satisfies Meta<typeof Badge>; export default meta; type Story = StoryObj<typeof meta>; export const Playground: Story = {}; export const Info: Story = { args: { variant: 'info' }, }; export const Success: Story = { args: { variant: 'success' }, }; export const Warning: Story = { args: { variant: 'warning' }, }; export const Danger: Story = { args: { variant: 'danger' }, }; export const Error: Story = { args: { variant: 'error' }, }; /** Every legal combination the contract defines. */ export const Matrix: Story = { parameters: { controls: { disable: true } }, render: () => ( <div style={{ display: 'grid', gap: 16, gridTemplateColumns: 'repeat(1, max-content)', alignItems: 'center', justifyItems: 'start', }} > <Badge variant=\"info\">Badge</Badge> <Badge variant=\"success\">Badge</Badge> <Badge variant=\"warning\">Badge</Badge> <Badge variant=\"danger\">Badge</Badge> <Badge variant=\"error\">Badge</Badge> </div> ), };"
+        - generic [ref=f15e134]: Generated in your browser by the same core that ships the repo’s 51 components — core/index.ts, golden-guarded.

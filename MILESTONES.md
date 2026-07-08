@@ -183,6 +183,22 @@ golden-guarded — CLI output did not change by a byte:
 Figma-URL import works end-to-end in the browser UI.
 
 
+## 2026-07-08 — The loop runs in a stranger's browser (preview)
+
+`playground/` deployed to https://ds-contracts-playground.pages.dev — a public
+Vite app importing `core/index.ts` unmodified: a gallery of 10 live-emitted
+examples, a governed contract editor with both refusal layers named on screen
+(zod shape errors AND generator refusals like a nonexistent token ref), all
+four registry emitters as output tabs with the html emitter doubling as the
+live preview, code→contract behind a lazy TypeScript chunk, and the Figma-URL
+import UI (session-only token; the degradation ladder rendered as first-class
+receipts) verified end-to-end against committed REST fixtures through the same
+`importFromUrl` the CLI runs. Browser-direct api.figma.com confirmed
+CORS-viable. Initial bundle 152 KB gzip. Screenshot-verified live.
+**Preview status: launch is gated on one real Figma-URL import with a live
+token (per plan).**
+
+
 ---
 
 **Standing scoreboard** (updated with each milestone):

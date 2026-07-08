@@ -1,0 +1,324 @@
+- generic [ref=f15e3]:
+  - banner [ref=f15e4]:
+    - 'link "{} Contract Playground" [ref=f15e5] [cursor=pointer]':
+      - /url: /
+    - navigation [ref=f15e6]:
+      - link "Playground" [ref=f15e7] [cursor=pointer]:
+        - /url: /playground
+      - link "Examples" [ref=f15e8] [cursor=pointer]:
+        - /url: /examples
+      - link "GitHub" [ref=f15e9] [cursor=pointer]:
+        - /url: https://github.com/southleft/ds-contracts-poc
+    - button "Switch to dark theme" [ref=f15e10] [cursor=pointer]: Dark
+  - main [ref=f15e11]:
+    - generic [ref=f15e12]:
+      - heading "Examples" [level=1] [ref=f15e13]
+      - paragraph [ref=f15e14]: Every card is rendered live by the same emitter you get in the playground — pick one to open it there, contract and all.
+      - generic [ref=f15e15]:
+        - link "Badge preview Atom Badge Status at a glance. Enum variants bound to feedback tokens — the smallest complete contract." [ref=f15e16] [cursor=pointer]:
+          - /url: /playground?example=badge
+          - iframe [ref=f15e18]:
+            - generic [ref=f16e2]:
+              - generic [ref=f16e3]:
+                - paragraph [ref=f16e4]: default
+                - status [ref=f16e5]: Badge
+              - generic [ref=f16e6]:
+                - paragraph [ref=f16e7]: variant=success
+                - status [ref=f16e8]: Badge
+              - generic [ref=f16e9]:
+                - paragraph [ref=f16e10]: variant=warning
+                - status [ref=f16e11]: Badge
+              - generic [ref=f16e12]:
+                - paragraph [ref=f16e13]: variant=danger
+                - status [ref=f16e14]: Badge
+              - generic [ref=f16e15]:
+                - paragraph [ref=f16e16]: variant=error
+                - status [ref=f16e17]: Badge
+          - generic [ref=f15e19]:
+            - generic [ref=f15e20]: Atom
+            - generic [ref=f15e21]: Badge
+            - generic [ref=f15e22]: Status at a glance. Enum variants bound to feedback tokens — the smallest complete contract.
+        - link "Button preview Atom Button Variants, sizes, icon slots, and figmaStatePreviews — the React output ships a state-preview story." [ref=f15e23] [cursor=pointer]:
+          - /url: /playground?example=button
+          - iframe [ref=f15e25]:
+            - generic [ref=f17e2]:
+              - generic [ref=f17e3]:
+                - paragraph [ref=f17e4]: default
+                - button "Button" [ref=f17e5] [cursor=pointer]:
+                  - generic [ref=f17e6]: Button
+              - generic [ref=f17e7]:
+                - paragraph [ref=f17e8]: variant=secondary
+                - button "Button" [ref=f17e9] [cursor=pointer]:
+                  - generic [ref=f17e10]: Button
+              - generic [ref=f17e11]:
+                - paragraph [ref=f17e12]: variant=danger
+                - button "Button" [ref=f17e13] [cursor=pointer]:
+                  - generic [ref=f17e14]: Button
+              - generic [ref=f17e15]:
+                - paragraph [ref=f17e16]: variant=ghost
+                - button "Button" [ref=f17e17] [cursor=pointer]:
+                  - generic [ref=f17e18]: Button
+              - generic [ref=f17e19]:
+                - paragraph [ref=f17e20]: size=sm
+                - button "Button" [ref=f17e21] [cursor=pointer]:
+                  - generic [ref=f17e22]: Button
+              - generic [ref=f17e23]:
+                - paragraph [ref=f17e24]: size=lg
+                - button "Button" [ref=f17e25] [cursor=pointer]:
+                  - generic [ref=f17e26]: Button
+              - generic [ref=f17e27]:
+                - paragraph [ref=f17e28]: disabled=true
+                - button "Button" [disabled] [ref=f17e29]:
+                  - generic [ref=f17e30]: Button
+              - generic [ref=f17e31]:
+                - paragraph [ref=f17e32]: loading=true
+                - button "Button" [ref=f17e33] [cursor=pointer]:
+                  - img [ref=f17e35]
+                  - generic [ref=f17e37]: Button
+          - generic [ref=f15e26]:
+            - generic [ref=f15e27]: Atom
+            - generic [ref=f15e28]: Button
+            - generic [ref=f15e29]: Variants, sizes, icon slots, and figmaStatePreviews — the React output ships a state-preview story.
+        - link "Switch preview Atom Switch A controlled boolean with events. CSS renders its states; the React output wires the handlers." [ref=f15e30] [cursor=pointer]:
+          - /url: /playground?example=switch
+          - iframe [ref=f15e32]:
+            - generic [ref=f18e2]:
+              - generic [ref=f18e3]:
+                - paragraph [ref=f18e4]: default
+                - generic [ref=f18e5]:
+                  - switch "Enable notifications Takes effect immediately." [ref=f18e6] [cursor=pointer]
+                  - generic [ref=f18e8]:
+                    - generic [ref=f18e9]: Enable notifications
+                    - generic [ref=f18e10]: Takes effect immediately.
+              - generic [ref=f18e11]:
+                - paragraph [ref=f18e12]: value=on
+                - generic [ref=f18e13]:
+                  - switch "Enable notifications Takes effect immediately." [ref=f18e14] [cursor=pointer]
+                  - generic [ref=f18e16]:
+                    - generic [ref=f18e17]: Enable notifications
+                    - generic [ref=f18e18]: Takes effect immediately.
+          - generic [ref=f15e33]:
+            - generic [ref=f15e34]: Atom
+            - generic [ref=f15e35]: Switch
+            - generic [ref=f15e36]: A controlled boolean with events. CSS renders its states; the React output wires the handlers.
+        - link "Checkbox preview Atom Checkbox Checked, indeterminate, disabled — icon assets inlined from the same SVGs the generator uses." [ref=f15e37] [cursor=pointer]:
+          - /url: /playground?example=checkbox
+          - iframe [ref=f15e39]:
+            - generic [ref=f19e2]:
+              - generic [ref=f19e3]:
+                - paragraph [ref=f19e4]: default
+                - generic [ref=f19e5]:
+                  - checkbox "Checkbox label Supporting detail for this option." [ref=f19e6] [cursor=pointer]
+                  - generic [ref=f19e7]:
+                    - generic [ref=f19e8]: Checkbox label
+                    - generic [ref=f19e9]: Supporting detail for this option.
+              - generic [ref=f19e10]:
+                - paragraph [ref=f19e11]: value=checked
+                - generic [ref=f19e12]:
+                  - checkbox "Checkbox label Supporting detail for this option." [ref=f19e13] [cursor=pointer]:
+                    - img [ref=f19e15]
+                  - generic [ref=f19e17]:
+                    - generic [ref=f19e18]: Checkbox label
+                    - generic [ref=f19e19]: Supporting detail for this option.
+              - generic [ref=f19e20]:
+                - paragraph [ref=f19e21]: value=indeterminate
+                - generic [ref=f19e22]:
+                  - checkbox "Checkbox label Supporting detail for this option." [ref=f19e23] [cursor=pointer]:
+                    - img [ref=f19e25]
+                  - generic [ref=f19e26]:
+                    - generic [ref=f19e27]: Checkbox label
+                    - generic [ref=f19e28]: Supporting detail for this option.
+              - generic [ref=f19e29]:
+                - paragraph [ref=f19e30]: size=sm
+                - generic [ref=f19e31]:
+                  - checkbox "Checkbox label Supporting detail for this option." [ref=f19e32] [cursor=pointer]
+                  - generic [ref=f19e33]:
+                    - generic [ref=f19e34]: Checkbox label
+                    - generic [ref=f19e35]: Supporting detail for this option.
+          - generic [ref=f15e40]:
+            - generic [ref=f15e41]: Atom
+            - generic [ref=f15e42]: Checkbox
+            - generic [ref=f15e43]: Checked, indeterminate, disabled — icon assets inlined from the same SVGs the generator uses.
+        - link "Heading preview Atom Heading Semantic levels with token-bound type styles — element choice driven by the contract." [ref=f15e44] [cursor=pointer]:
+          - /url: /playground?example=heading
+          - iframe [ref=f15e46]:
+            - generic [ref=f20e2]:
+              - generic [ref=f20e3]:
+                - paragraph [ref=f20e4]: default
+                - heading "Heading" [level=2] [ref=f20e5]
+              - generic [ref=f20e6]:
+                - paragraph [ref=f20e7]: level=1
+                - heading "Heading" [level=1] [ref=f20e8]
+              - generic [ref=f20e9]:
+                - paragraph [ref=f20e10]: level=3
+                - heading "Heading" [level=3] [ref=f20e11]
+              - generic [ref=f20e12]:
+                - paragraph [ref=f20e13]: level=4
+                - heading "Heading" [level=4] [ref=f20e14]
+              - generic [ref=f20e15]:
+                - paragraph [ref=f20e16]: level=5
+                - heading "Heading" [level=5] [ref=f20e17]
+              - generic [ref=f20e18]:
+                - paragraph [ref=f20e19]: level=6
+                - heading "Heading" [level=6] [ref=f20e20]
+              - generic [ref=f20e21]:
+                - paragraph [ref=f20e22]: size=sm
+                - heading "Heading" [level=2] [ref=f20e23]
+              - generic [ref=f20e24]:
+                - paragraph [ref=f20e25]: size=md
+                - heading "Heading" [level=2] [ref=f20e26]
+          - generic [ref=f15e47]:
+            - generic [ref=f15e48]: Atom
+            - generic [ref=f15e49]: Heading
+            - generic [ref=f15e50]: Semantic levels with token-bound type styles — element choice driven by the contract.
+        - link "Card preview Molecule Card Slots and elevation. Composition refs resolve through the bundled contract set." [ref=f15e51] [cursor=pointer]:
+          - /url: /playground?example=card
+          - iframe [ref=f15e53]:
+            - generic [ref=f21e3]:
+              - paragraph [ref=f21e4]: default
+              - article [ref=f21e5]:
+                - generic [ref=f21e6]:
+                  - img [ref=f21e7]: AB
+                  - generic [ref=f21e8]: Card title
+                - generic [ref=f21e10]: "[children slot]"
+                - generic [ref=f21e12]: "[actions slot]"
+          - generic [ref=f15e54]:
+            - generic [ref=f15e55]: Molecule
+            - generic [ref=f15e56]: Card
+            - generic [ref=f15e57]: Slots and elevation. Composition refs resolve through the bundled contract set.
+        - link "Banner preview Molecule Banner Feedback surface composing icon + text parts, tone driven by one enum." [ref=f15e58] [cursor=pointer]:
+          - /url: /playground?example=banner
+          - iframe [ref=f15e60]:
+            - generic [ref=f22e2]:
+              - generic [ref=f22e3]:
+                - paragraph [ref=f22e4]: default
+                - status [ref=f22e5]:
+                  - img [ref=f22e7]
+                  - generic [ref=f22e10]:
+                    - generic [ref=f22e11]: Banner title
+                    - generic [ref=f22e12]: Supporting detail that explains what happened and what to do next.
+                  - generic [ref=f22e15]: "[endContent slot]"
+              - generic [ref=f22e16]:
+                - paragraph [ref=f22e17]: status=success
+                - status [ref=f22e18]:
+                  - img [ref=f22e20]
+                  - generic [ref=f22e23]:
+                    - generic [ref=f22e24]: Banner title
+                    - generic [ref=f22e25]: Supporting detail that explains what happened and what to do next.
+                  - generic [ref=f22e28]: "[endContent slot]"
+              - generic [ref=f22e29]:
+                - paragraph [ref=f22e30]: status=warning
+                - alert [ref=f22e31]:
+                  - img [ref=f22e33]
+                  - generic [ref=f22e36]:
+                    - generic [ref=f22e37]: Banner title
+                    - generic [ref=f22e38]: Supporting detail that explains what happened and what to do next.
+                  - generic [ref=f22e41]: "[endContent slot]"
+              - generic [ref=f22e42]:
+                - paragraph [ref=f22e43]: status=error
+                - alert [ref=f22e44]:
+                  - img [ref=f22e46]
+                  - generic [ref=f22e50]:
+                    - generic [ref=f22e51]: Banner title
+                    - generic [ref=f22e52]: Supporting detail that explains what happened and what to do next.
+                  - generic [ref=f22e55]: "[endContent slot]"
+              - generic [ref=f22e56]:
+                - paragraph [ref=f22e57]: container=section
+                - status [ref=f22e58]:
+                  - img [ref=f22e60]
+                  - generic [ref=f22e63]:
+                    - generic [ref=f22e64]: Banner title
+                    - generic [ref=f22e65]: Supporting detail that explains what happened and what to do next.
+                  - generic [ref=f22e68]: "[endContent slot]"
+              - generic [ref=f22e69]:
+                - paragraph [ref=f22e70]: isDismissable=true
+                - status [ref=f22e71]:
+                  - img [ref=f22e73]
+                  - generic [ref=f22e76]:
+                    - generic [ref=f22e77]: Banner title
+                    - generic [ref=f22e78]: Supporting detail that explains what happened and what to do next.
+                  - generic [ref=f22e79]:
+                    - generic [ref=f22e81]: "[endContent slot]"
+                    - button "Dismiss" [ref=f22e82] [cursor=pointer]:
+                      - img [ref=f22e84]
+          - generic [ref=f15e61]:
+            - generic [ref=f15e62]: Molecule
+            - generic [ref=f15e63]: Banner
+            - generic [ref=f15e64]: Feedback surface composing icon + text parts, tone driven by one enum.
+        - link "ChatMessage preview Composition ChatMessage Composes Avatar and ChatMessageMetadata by contract id — the dependency CSS rides along." [ref=f15e65] [cursor=pointer]:
+          - /url: /playground?example=chat-message
+          - iframe [ref=f15e67]:
+            - generic [ref=f23e2]:
+              - generic [ref=f23e3]:
+                - paragraph [ref=f23e4]: default
+                - generic [ref=f23e5]:
+                  - generic [ref=f23e7]: "[avatar slot]"
+                  - generic [ref=f23e8]:
+                    - generic [ref=f23e9]: Assistant
+                    - generic [ref=f23e11]: "[children slot]"
+                    - generic [ref=f23e13]: "[metadata slot]"
+              - generic [ref=f23e14]:
+                - paragraph [ref=f23e15]: sender=user
+                - generic [ref=f23e16]:
+                  - generic [ref=f23e18]: "[avatar slot]"
+                  - generic [ref=f23e19]:
+                    - generic [ref=f23e20]: Assistant
+                    - generic [ref=f23e22]: "[children slot]"
+                    - generic [ref=f23e24]: "[metadata slot]"
+              - generic [ref=f23e25]:
+                - paragraph [ref=f23e26]: sender=system
+                - generic [ref=f23e27]:
+                  - generic [ref=f23e29]: "[avatar slot]"
+                  - generic [ref=f23e30]:
+                    - generic [ref=f23e31]: Assistant
+                    - generic [ref=f23e33]: "[children slot]"
+                    - generic [ref=f23e35]: "[metadata slot]"
+          - generic [ref=f15e68]:
+            - generic [ref=f15e69]: Composition
+            - generic [ref=f15e70]: ChatMessage
+            - generic [ref=f15e71]: Composes Avatar and ChatMessageMetadata by contract id — the dependency CSS rides along.
+        - link "ChatMessageMetadata preview Composition ChatMessageMetadata The composed child on its own — small contracts stay independently emittable." [ref=f15e72] [cursor=pointer]:
+          - /url: /playground?example=chat-message-metadata
+          - iframe [ref=f15e74]:
+            - generic [ref=f24e2]:
+              - generic [ref=f24e3]:
+                - paragraph [ref=f24e4]: default
+                - generic [ref=f24e5]:
+                  - img [ref=f24e7]
+                  - generic [ref=f24e9]: 2:14 PM
+                  - generic [ref=f24e11]: "[footer slot]"
+              - generic [ref=f24e12]:
+                - paragraph [ref=f24e13]: status=sending
+                - generic [ref=f24e14]:
+                  - img [ref=f24e16]
+                  - generic [ref=f24e19]: 2:14 PM
+                  - generic [ref=f24e21]: "[footer slot]"
+              - generic [ref=f24e22]:
+                - paragraph [ref=f24e23]: status=delivered
+                - generic [ref=f24e24]:
+                  - img [ref=f24e26]
+                  - generic [ref=f24e29]: 2:14 PM
+                  - generic [ref=f24e31]: "[footer slot]"
+              - generic [ref=f24e32]:
+                - paragraph [ref=f24e33]: status=read
+                - generic [ref=f24e34]:
+                  - img [ref=f24e36]
+                  - generic [ref=f24e39]: 2:14 PM
+                  - generic [ref=f24e41]: "[footer slot]"
+              - generic [ref=f24e42]:
+                - paragraph [ref=f24e43]: status=error
+                - generic [ref=f24e44]:
+                  - img [ref=f24e46]
+                  - generic [ref=f24e50]: 2:14 PM
+                  - generic [ref=f24e52]: "[footer slot]"
+          - generic [ref=f15e75]:
+            - generic [ref=f15e76]: Composition
+            - generic [ref=f15e77]: ChatMessageMetadata
+            - generic [ref=f15e78]: The composed child on its own — small contracts stay independently emittable.
+        - link "Foreign code Callout (foreign code) Hand-written CSS this engine never generated. Structure is extracted; every raw value is reported with nearest-token candidates — named degradation, nothing invented." [ref=f15e79] [cursor=pointer]:
+          - /url: /playground?example=callout-foreign
+          - generic [ref=f15e80]: "import styles from './Callout.module.css'; interface CalloutProps { /** Callout heading text. */ heading: string; tone?: 'info' | 'warning'; children?: React.ReactNode; } export function Callout({ heading, tone = 'info', children }: CalloutProps) { return ( <section className={styles.root} data-tone={tone}> <h3 className={styles.heading}>{heading}</h3> <span className=\"badge badge--soft\">beta</span>"
+          - generic [ref=f15e81]:
+            - generic [ref=f15e82]: Foreign code
+            - generic [ref=f15e83]: Callout (foreign code)
+            - generic [ref=f15e84]: Hand-written CSS this engine never generated. Structure is extracted; every raw value is reported with nearest-token candidates — named degradation, nothing invented.

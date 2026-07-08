@@ -1,0 +1,37 @@
+- generic [ref=f37e3]:
+  - banner [ref=f37e4]:
+    - 'link "{} Contract Playground" [ref=f37e5] [cursor=pointer]':
+      - /url: /
+    - navigation [ref=f37e6]:
+      - link "Playground" [ref=f37e7] [cursor=pointer]:
+        - /url: /playground
+      - link "Examples" [ref=f37e8] [cursor=pointer]:
+        - /url: /examples
+      - link "GitHub" [ref=f37e9] [cursor=pointer]:
+        - /url: https://github.com/southleft/ds-contracts-poc
+    - button "Switch to light theme" [ref=f37e10] [cursor=pointer]: Light
+  - main [ref=f37e11]:
+    - generic [ref=f37e12]:
+      - heading "The contract loop, in your browser." [level=1] [ref=f37e13]
+      - paragraph [ref=f37e14]: "A component contract is a machine-readable agreement about a component’s API, anatomy, and token bindings — one source of truth that both design tools and code generate from. This playground runs the actual engine behind a 51-component library: import a design or paste code, watch a contract be proposed, edit it under schema governance, and generate React, static HTML, and a Figma sync script from the same document. Everything runs client-side; nothing you paste leaves your browser."
+      - generic "The contract loop" [ref=f37e15]: design / code → proposed contract → schema governance (named refusals) → React · HTML · inline · Figma
+      - generic [ref=f37e16]:
+        - link "Try an example Pick from the gallery — atoms to compositions, plus foreign code degrading honestly." [ref=f37e17] [cursor=pointer]:
+          - /url: /examples
+          - generic [ref=f37e18]: Try an example
+          - generic [ref=f37e19]: Pick from the gallery — atoms to compositions, plus foreign code degrading honestly.
+        - link "Import from Figma Paste a figma.com component URL + token; get a proposed contract with real bindings or named degradations." [ref=f37e20] [cursor=pointer]:
+          - /url: /playground?source=figma
+          - generic [ref=f37e21]: Import from Figma
+          - generic [ref=f37e22]: Paste a figma.com component URL + token; get a proposed contract with real bindings or named degradations.
+        - link "Paste code TSX + CSS in, a proposed contract out — raw values reported with nearest-token candidates, never invented." [ref=f37e23] [cursor=pointer]:
+          - /url: /playground?source=code
+          - generic [ref=f37e24]: Paste code
+          - generic [ref=f37e25]: TSX + CSS in, a proposed contract out — raw values reported with nearest-token candidates, never invented.
+      - paragraph [ref=f37e26]:
+        - text: "Same engine, no demo copy: the code emitting here generates the repo’s 51 shipping components, byte-guarded by its evals."
+        - link "Source on GitHub" [ref=f37e27] [cursor=pointer]:
+          - /url: https://github.com/southleft/ds-contracts-poc
+        - text: ·
+        - link "Milestones" [ref=f37e28] [cursor=pointer]:
+          - /url: https://github.com/southleft/ds-contracts-poc/blob/main/MILESTONES.md

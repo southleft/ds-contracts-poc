@@ -1,0 +1,79 @@
+- generic [ref=f42e3]:
+  - banner [ref=f42e4]:
+    - 'link "{} Contract Playground" [ref=f42e5] [cursor=pointer]':
+      - /url: /
+    - navigation [ref=f42e6]:
+      - link "Playground" [ref=f42e7] [cursor=pointer]:
+        - /url: /playground
+      - link "Examples" [ref=f42e8] [cursor=pointer]:
+        - /url: /examples
+      - link "GitHub" [ref=f42e9] [cursor=pointer]:
+        - /url: https://github.com/southleft/ds-contracts-poc
+    - button "Switch to dark theme" [ref=f42e10] [cursor=pointer]: Dark
+  - main [ref=f42e11]:
+    - generic [ref=f42e12]:
+      - complementary [ref=f42e13]:
+        - tablist "Input source" [ref=f42e14]:
+          - tab "Examples" [ref=f42e15] [cursor=pointer]
+          - tab "Figma" [selected] [ref=f42e16] [cursor=pointer]
+          - tab "Code" [ref=f42e17] [cursor=pointer]
+          - tab "JSON" [ref=f42e18] [cursor=pointer]
+        - generic [ref=f42e69]:
+          - generic [ref=f42e70]:
+            - generic [ref=f42e71]: figma.com component URL
+            - textbox "figma.com component URL" [ref=f42e72]:
+              - /placeholder: https://www.figma.com/design/…?node-id=1-23
+          - generic [ref=f42e73]:
+            - generic [ref=f42e74]: Personal access token
+            - textbox "Personal access token" [ref=f42e75]:
+              - /placeholder: figd_…
+            - paragraph [ref=f42e76]: Session-only. Sent to api.figma.com and nowhere else — never stored, never persisted, gone on reload.
+          - button "Import" [disabled] [ref=f42e77]
+          - paragraph [ref=f42e78]: No token handy? Run the same import over the repo’s committed REST fixture — identical code path, fixture transport.
+          - generic [ref=f42e79]:
+            - checkbox "Simulate a non-Enterprise plan (variables endpoint 403s)" [ref=f42e80]
+            - generic [ref=f42e81]: Simulate a non-Enterprise plan (variables endpoint 403s)
+          - button "Demo import (Badge fixture)" [ref=f42e82] [cursor=pointer]
+          - paragraph [ref=f42e83]: "Fixture URL: figma.com/design/8nim1d0IPnehMxA7B7SYxC/DS-Contracts-POC?node-id=101-1"
+      - generic [ref=f42e28]:
+        - generic [ref=f42e29]:
+          - generic [ref=f42e30]: Contract
+          - generic [ref=f42e49]: proposed from Figma REST import (demo fixture) — Badge
+        - generic [ref=f42e31]:
+          - textbox "Contract JSON editor" [ref=f42e32]:
+            - /placeholder: The contract — pick an example, import from Figma, or paste code.
+            - text: "{ \"$schema\": \"./contract.schema.json\", \"id\": \"ds.badge\", \"name\": \"Badge\", \"version\": \"0.1.0\", \"status\": \"draft\", \"description\": \"PROPOSED contract extracted from the design canvas (extract/figma dump v1) — API, anatomy, and token bindings inverted from the drawn structure. Semantics, a11y, events, and slot accepts are not canvas-recoverable; review before adoption.\", \"semantics\": { \"element\": \"div\" }, \"props\": [ { \"name\": \"variant\", \"type\": { \"enum\": [ \"info\", \"success\", \"warning\", \"danger\", \"error\" ] }, \"default\": \"info\", \"bindings\": { \"figma\": { \"kind\": \"VARIANT\", \"property\": \"Variant\", \"values\": { \"info\": \"Info\", \"success\": \"Success\", \"warning\": \"Warning\", \"danger\": \"Danger\", \"error\": \"Error\" } }, \"code\": { \"prop\": \"variant\" } } }, { \"name\": \"children\", \"type\": \"text\", \"default\": \"Badge\", \"bindings\": { \"figma\": { \"kind\": \"TEXT\", \"property\": \"Label\" }, \"code\": { \"prop\": \"children\" } } } ], \"states\": [], \"anatomy\": { \"root\": { \"tokens\": { \"background-color\": \"{color.feedback.{variant}.background}\", \"padding-inline\": \"{space.inset-x.sm}\", \"padding-block\": \"{space.inset-y.sm}\", \"border-radius\": \"{radius.badge}\", \"color\": \"{color.feedback.{variant}.foreground}\", \"font-size\": \"{font.badge.size}\" } } }, \"anchors\": { \"figma\": { \"fileKey\": \"8nim1d0IPnehMxA7B7SYxC\", \"componentSetKey\": \"89f1fb2d4580116cea4be5d4ca340de216a27819\", \"nodeId\": \"101:1\" }, \"code\": { \"importPath\": \"src/components/Badge\", \"export\": \"Badge\" } } }"
+          - status [ref=f42e33]: "Schema-valid: ds.badge v0.1.0"
+          - region "Receipts" [ref=f42e34]:
+            - generic [ref=f42e35]:
+              - generic [ref=f42e36]: Receipts
+              - generic [ref=f42e52]: Figma REST import (demo fixture) — 2 entries
+            - generic [ref=f42e84]:
+              - generic [ref=f42e85]: Proposal notes — Badge (2)
+              - generic [ref=f42e86]: semantics.element defaulted to "div" — element/role/ARIA are not drawn on the canvas; set the real host element
+              - generic [ref=f42e87]: "Badge:root/label: sole root text node named \"label\" is the generator's auto-injected children label — hoisted to root tokens, bound prop proposed as `children`"
+      - generic [ref=f42e38]:
+        - tablist "Output target" [ref=f42e39]:
+          - tab "Preview" [selected] [ref=f42e40] [cursor=pointer]
+          - tab "React" [ref=f42e41] [cursor=pointer]
+          - tab "HTML + CSS" [ref=f42e42] [cursor=pointer]
+          - tab "React inline" [ref=f42e43] [cursor=pointer]
+          - tab "Figma script" [ref=f42e44] [cursor=pointer]
+        - iframe [ref=f42e88]:
+          - generic [ref=f43e2]:
+            - generic [ref=f43e3]:
+              - paragraph [ref=f43e4]: default
+              - generic [ref=f43e5]: Badge
+            - generic [ref=f43e6]:
+              - paragraph [ref=f43e7]: variant=success
+              - generic [ref=f43e8]: Badge
+            - generic [ref=f43e9]:
+              - paragraph [ref=f43e10]: variant=warning
+              - generic [ref=f43e11]: Badge
+            - generic [ref=f43e12]:
+              - paragraph [ref=f43e13]: variant=danger
+              - generic [ref=f43e14]: Badge
+            - generic [ref=f43e15]:
+              - paragraph [ref=f43e16]: variant=error
+              - generic [ref=f43e17]: Badge
+        - generic [ref=f42e47]: Generated in your browser by the same core that ships the repo’s 51 components — core/index.ts, golden-guarded.
