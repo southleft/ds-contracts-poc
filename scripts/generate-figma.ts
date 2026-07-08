@@ -751,8 +751,6 @@ interface ComponentData {
 
 function compileComponentData(contract: Contract, byId: Map<string, Contract>): ComponentData {
   const enums = contract.props.filter(isEnum);
-  const rowProp = enums[0];
-  const colProp = enums[1] ?? null;
   const textProp = contract.props.find(
     (p) => p.type === 'text' && p.bindings.code.prop === 'children',
   );
@@ -773,57 +771,71 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
 
   const root = contract.anatomy.root;
   const variants: VariantSpec[] = [];
-  const rowValues = rowProp ? orderedValues(rowProp) : [''];
-  const colValues = colProp ? orderedValues(colProp) : [''];
+  // N-axis variant support: EVERY enum prop becomes a variant axis, in prop
+  // declaration order, with each axis's DEFAULT value first (orderedValues).
+  // The cartesian product is enumerated with axis 0 slowest and the last
+  // axis fastest, so the FIRST emitted variant is the all-defaults combo —
+  // Figma's default variant is positional (first child), and the create +
+  // amend paths both rely on that ordering invariant.
+  // Grid mapping: rows = axis 0's values; columns = the ordered cartesian
+  // product of axes 1..n (a 5×3×2 component renders 5 rows × 6 columns).
+  const axes = enums.map((p) => ({ prop: p, values: orderedValues(p) }));
+  let combos: number[][] = [[]];
+  for (const axis of axes) {
+    const next: number[][] = [];
+    for (const combo of combos) {
+      for (let i = 0; i < axis.values.length; i++) next.push([...combo, i]);
+    }
+    combos = next;
+  }
   const fontStyles = new Set<string>(['Medium']);
 
-  for (let r = 0; r < rowValues.length; r++) {
-    for (let c = 0; c < colValues.length; c++) {
-      const subst: Record<string, string> = {};
-      const nameParts: string[] = [];
-      if (rowProp) {
-        subst[rowProp.name] = rowValues[r];
-        nameParts.push(
-          `${rowProp.bindings.figma.property}=${rowProp.bindings.figma.values?.[rowValues[r]] ?? rowValues[r]}`,
-        );
-      }
-      if (colProp) {
-        subst[colProp.name] = colValues[c];
-        nameParts.push(
-          `${colProp.bindings.figma.property}=${colProp.bindings.figma.values?.[colValues[c]] ?? colValues[c]}`,
-        );
-      }
-
-      const rootSpec: NodeSpec = {
-        type: 'root',
-        name: nameParts.join(', ') || contract.name,
-        layout: layoutSpec(root, true),
-      };
-      const ctx = applyTokens(rootSpec, root.tokens ?? {}, subst, {});
-      if (root.parts) {
-        rootSpec.children = variantParts(root.parts, subst).map(([childName, child]) =>
-          partToSpec(childName, child, contract, byId, ctx, subst),
-        );
-      } else if (textProp) {
-        rootSpec.children = [
-          {
-            type: 'text',
-            name: 'label',
-            characters: label,
-            fontSize: ctx.fontSize ?? 16,
-            fontStyle: ctx.fontStyle ?? 'Medium',
-            textFill: ctx.textFill,
-            contentProp: textProp.bindings.figma.property,
-          },
-        ];
-      }
-      const collectStyles = (s: NodeSpec) => {
-        if (s.fontStyle) fontStyles.add(s.fontStyle);
-        (s.children ?? []).forEach(collectStyles);
-      };
-      collectStyles(rootSpec);
-      variants.push({ name: rootSpec.name, row: r, col: c, spec: rootSpec });
+  for (const combo of combos) {
+    // Every axis's value for this combo feeds BOTH the `{prop}` token
+    // substitutions and the visibleWhen part filtering (variantParts).
+    const subst: Record<string, string> = {};
+    const nameParts: string[] = [];
+    let col = 0;
+    for (let a = 0; a < axes.length; a++) {
+      const { prop, values } = axes[a];
+      const value = values[combo[a]];
+      subst[prop.name] = value;
+      nameParts.push(
+        `${prop.bindings.figma.property}=${prop.bindings.figma.values?.[value] ?? value}`,
+      );
+      if (a >= 1) col = col * values.length + combo[a];
     }
+    const row = combo[0] ?? 0;
+
+    const rootSpec: NodeSpec = {
+      type: 'root',
+      name: nameParts.join(', ') || contract.name,
+      layout: layoutSpec(root, true),
+    };
+    const ctx = applyTokens(rootSpec, root.tokens ?? {}, subst, {});
+    if (root.parts) {
+      rootSpec.children = variantParts(root.parts, subst).map(([childName, child]) =>
+        partToSpec(childName, child, contract, byId, ctx, subst),
+      );
+    } else if (textProp) {
+      rootSpec.children = [
+        {
+          type: 'text',
+          name: 'label',
+          characters: label,
+          fontSize: ctx.fontSize ?? 16,
+          fontStyle: ctx.fontStyle ?? 'Medium',
+          textFill: ctx.textFill,
+          contentProp: textProp.bindings.figma.property,
+        },
+      ];
+    }
+    const collectStyles = (s: NodeSpec) => {
+      if (s.fontStyle) fontStyles.add(s.fontStyle);
+      (s.children ?? []).forEach(collectStyles);
+    };
+    collectStyles(rootSpec);
+    variants.push({ name: rootSpec.name, row, col, spec: rootSpec });
   }
 
   // Text props bound to a text node somewhere in the compiled specs.

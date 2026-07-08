@@ -1,0 +1,210 @@
+{
+  "$schema": "../../contracts/contract.schema.json",
+  "id": "eval.four-axis",
+  "name": "FourAxis",
+  "version": "1.0.0",
+  "status": "draft",
+  "description": "Eval fixture: a 4-axis action component (variant × size × emphasis × iconPosition = 36 combos) exercising true N-axis variant support end to end.",
+  "semantics": {
+    "element": "button",
+    "role": "button"
+  },
+  "props": [
+    {
+      "name": "variant",
+      "description": "Visual prominence of the action.",
+      "type": {
+        "enum": ["primary", "secondary", "danger"]
+      },
+      "default": "primary",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Variant",
+          "values": {
+            "primary": "Primary",
+            "secondary": "Secondary",
+            "danger": "Danger"
+          }
+        },
+        "code": {
+          "prop": "variant"
+        }
+      }
+    },
+    {
+      "name": "size",
+      "description": "Control density.",
+      "type": {
+        "enum": ["sm", "md", "lg"]
+      },
+      "default": "md",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Size",
+          "values": {
+            "sm": "Small",
+            "md": "Medium",
+            "lg": "Large"
+          }
+        },
+        "code": {
+          "prop": "size"
+        }
+      }
+    },
+    {
+      "name": "emphasis",
+      "description": "Label weight emphasis.",
+      "type": {
+        "enum": ["medium", "semibold"]
+      },
+      "default": "medium",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Emphasis",
+          "values": {
+            "medium": "Medium",
+            "semibold": "Semibold"
+          }
+        },
+        "code": {
+          "prop": "emphasis"
+        }
+      }
+    },
+    {
+      "name": "iconPosition",
+      "description": "Which side of the label the glyph renders on.",
+      "type": {
+        "enum": ["start", "end"]
+      },
+      "default": "start",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Icon Position",
+          "values": {
+            "start": "Start",
+            "end": "End"
+          }
+        },
+        "code": {
+          "prop": "iconPosition"
+        }
+      }
+    },
+    {
+      "name": "disabled",
+      "description": "Prevents interaction and communicates unavailability.",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Disabled"
+        },
+        "code": {
+          "prop": "disabled"
+        }
+      }
+    },
+    {
+      "name": "children",
+      "description": "Action label.",
+      "type": "text",
+      "default": "Four Axis",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Label"
+        },
+        "code": {
+          "prop": "children"
+        }
+      }
+    }
+  ],
+  "states": ["hover", "focus-visible", "disabled"],
+  "anatomy": {
+    "root": {
+      "tokens": {
+        "background-color": "{color.action.{variant}.background}",
+        "color": "{color.action.{variant}.foreground}",
+        "padding-inline": "{space.inset-x.{size}}",
+        "padding-block": "{space.inset-y.{size}}",
+        "border-radius": "{radius.control}",
+        "gap": "{space.gap.control}",
+        "font-family": "{font.control.family}",
+        "font-weight": "{font.weight.{emphasis}}",
+        "font-size": "{font.control.size.{size}}"
+      },
+      "states": {
+        "hover": {
+          "background-color": "{color.action.{variant}.background-hover}"
+        },
+        "focus-visible": {
+          "outline-color": "{color.border.focus}",
+          "outline-width": "{border.width.focus}"
+        },
+        "disabled": {
+          "opacity": "{opacity.disabled}"
+        }
+      },
+      "layout": {
+        "display": "inline-flex",
+        "direction": "row",
+        "align": "center",
+        "justify": "center"
+      },
+      "parts": {
+        "iconStart": {
+          "description": "Leading glyph, shown when iconPosition=start.",
+          "icon": {
+            "asset": "check",
+            "size": 14
+          },
+          "visibleWhen": {
+            "prop": "iconPosition",
+            "equals": "start"
+          }
+        },
+        "label": {
+          "element": "span",
+          "content": {
+            "prop": "children"
+          }
+        },
+        "iconEnd": {
+          "description": "Trailing glyph, shown when iconPosition=end.",
+          "icon": {
+            "asset": "chevron-right",
+            "size": 14
+          },
+          "visibleWhen": {
+            "prop": "iconPosition",
+            "equals": "end"
+          }
+        }
+      }
+    }
+  },
+  "a11y": {
+    "focusVisible": true,
+    "minHitArea": 44,
+    "contrast": "AA"
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null,
+      "nodeId": null
+    },
+    "code": {
+      "importPath": "src/components/FourAxis",
+      "export": "FourAxis"
+    }
+  }
+}
