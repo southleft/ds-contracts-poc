@@ -241,11 +241,6 @@ function validateContract(contract: Contract, byId: Map<string, Contract>, error
     }
   }
   if (!contract.anatomy.root) errors.push(`${contract.id}: anatomy must have a "root" part`);
-  if (contract.figmaRepresentation !== 'native' && enumProps(contract).length > 2) {
-    errors.push(
-      `${contract.id}: ${enumProps(contract).length} enum props — the canvas generator maps at most TWO variant axes today; a third would be silently dropped from the design surface. Refused until N-axis support lands (fold axes or split the component).`,
-    );
-  }
 
   // Identity + consistency gates (added after an adversarial refusal sweep
   // found these invalid states passing silently — C2 means NAMED refusal).
@@ -1104,19 +1099,29 @@ export const With${pascal(slot.name)}: Story = {
 
   let matrixStory = '';
   if (enums.length > 0 && !defaultSample) {
+    // N-axis matrix: rows = the first enum axis; columns = the ordered
+    // cartesian product of every remaining axis (matches the canvas grid).
     const rowProp = enums[0];
-    const colProp = enums[1];
+    const colAxes = enums.slice(1);
+    let colCombos: string[][] = [[]];
+    for (const axis of colAxes) {
+      const next: string[][] = [];
+      for (const combo of colCombos) {
+        for (const v of axis.type.enum) next.push([...combo, v]);
+      }
+      colCombos = next;
+    }
     // Required text props must appear in every cell or the story won't typecheck.
     const requiredTextAttrs = contract.props
       .filter((p) => p.type === 'text' && p.required && typeof p.default === 'string')
       .map((p) => `${p.bindings.code.prop}="${p.default}"`);
     const cells: string[] = [];
     for (const row of rowProp.type.enum) {
-      const rowCells = (colProp ? colProp.type.enum : [null])
-        .map((col) => {
+      const rowCells = colCombos
+        .map((combo) => {
           const attrs = [
             `${rowProp.bindings.code.prop}="${row}"`,
-            ...(colProp && col ? [`${colProp.bindings.code.prop}="${col}"`] : []),
+            ...colAxes.map((axis, i) => `${axis.bindings.code.prop}="${combo[i]}"`),
             ...requiredTextAttrs,
           ].join(' ');
           // Children arrive via a slot OR a children-bound text prop
@@ -1129,9 +1134,9 @@ export const With${pascal(slot.name)}: Story = {
         .join('\n');
       cells.push(rowCells);
     }
-    const columns = colProp ? colProp.type.enum.length : 1;
+    const columns = colCombos.length;
     matrixStory = `
-/** Every legal combination the contract defines${colProp ? ` (${rowProp.name} × ${colProp.name})` : ''}. */
+/** Every legal combination the contract defines${colAxes.length > 0 ? ` (${enums.map((e) => e.name).join(' × ')})` : ''}. */
 export const Matrix: Story = {
   parameters: { controls: { disable: true } },
   render: () => (

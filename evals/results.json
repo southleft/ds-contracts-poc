@@ -1,5 +1,5 @@
 {
-  "passed": 33,
+  "passed": 32,
   "total": 33,
   "results": [
     {
@@ -115,7 +115,8 @@
     {
       "id": "refuse-contract-edge-cases",
       "claim": "C2-refusal",
-      "pass": true
+      "pass": false,
+      "error": "Error: three-enum-axes (canvas maps two): ACCEPTED (must refuse)"
     },
     {
       "id": "extract-foreign-library",
