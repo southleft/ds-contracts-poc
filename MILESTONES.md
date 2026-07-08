@@ -199,6 +199,20 @@ CORS-viable. Initial bundle 152 KB gzip. Screenshot-verified live.
 token (per plan).**
 
 
+## 2026-07-08 — Playground Phase 2: live-network imports, bring-your-own tokens
+
+Paste a public GitHub file URL and the co-located stylesheet is
+auto-discovered; every failure named — 404, rate-limit with reset time,
+too-large, not-TSX. Paste your own DTCG trees and the whole loop rebinds:
+proposals, nearest-token suggestions, inline literals, and a preview
+stylesheet regenerated in the browser from the paste — while contracts
+referencing repo-only tokens refuse by name. Verified against this repo's
+own Badge **over the real network**: the proposed anatomy byte-matches the
+shipping contract, in a stranger's browser. A genuine transient 429 during
+testing was surfaced honestly and the proposal degraded to the props
+surface — the ladder held under real rate limiting. 56/56, no core changes.
+
+
 ---
 
 **Standing scoreboard** (updated with each milestone):
