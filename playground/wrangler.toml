@@ -1,0 +1,6 @@
+# Cloudflare Pages config — deploy with:
+#   npx vite build --config playground/vite.config.ts
+#   npx wrangler pages deploy playground/dist --project-name ds-contracts-playground
+name = "ds-contracts-playground"
+compatibility_date = "2026-07-08"
+pages_build_output_dir = "dist"
