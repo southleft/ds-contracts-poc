@@ -441,6 +441,287 @@
           }
         },
         {
+          "name": "space/50",
+          "type": "FLOAT",
+          "scopes": [
+            "WIDTH_HEIGHT",
+            "GAP"
+          ],
+          "codeSyntax": "var(--space-50)",
+          "values": {
+            "Value": 4
+          }
+        },
+        {
+          "name": "space/100",
+          "type": "FLOAT",
+          "scopes": [
+            "WIDTH_HEIGHT",
+            "GAP"
+          ],
+          "codeSyntax": "var(--space-100)",
+          "values": {
+            "Value": 8
+          }
+        },
+        {
+          "name": "space/150",
+          "type": "FLOAT",
+          "scopes": [
+            "WIDTH_HEIGHT",
+            "GAP"
+          ],
+          "codeSyntax": "var(--space-150)",
+          "values": {
+            "Value": 12
+          }
+        },
+        {
+          "name": "space/200",
+          "type": "FLOAT",
+          "scopes": [
+            "WIDTH_HEIGHT",
+            "GAP"
+          ],
+          "codeSyntax": "var(--space-200)",
+          "values": {
+            "Value": 16
+          }
+        },
+        {
+          "name": "space/300",
+          "type": "FLOAT",
+          "scopes": [
+            "WIDTH_HEIGHT",
+            "GAP"
+          ],
+          "codeSyntax": "var(--space-300)",
+          "values": {
+            "Value": 24
+          }
+        },
+        {
+          "name": "space/400",
+          "type": "FLOAT",
+          "scopes": [
+            "WIDTH_HEIGHT",
+            "GAP"
+          ],
+          "codeSyntax": "var(--space-400)",
+          "values": {
+            "Value": 32
+          }
+        },
+        {
+          "name": "radius/100",
+          "type": "FLOAT",
+          "scopes": [
+            "CORNER_RADIUS"
+          ],
+          "codeSyntax": "var(--radius-100)",
+          "values": {
+            "Value": 4
+          }
+        },
+        {
+          "name": "radius/200",
+          "type": "FLOAT",
+          "scopes": [
+            "CORNER_RADIUS"
+          ],
+          "codeSyntax": "var(--radius-200)",
+          "values": {
+            "Value": 8
+          }
+        },
+        {
+          "name": "radius/pill",
+          "type": "FLOAT",
+          "scopes": [
+            "CORNER_RADIUS"
+          ],
+          "codeSyntax": "var(--radius-pill)",
+          "values": {
+            "Value": 999
+          }
+        },
+        {
+          "name": "border-width/100",
+          "type": "FLOAT",
+          "scopes": [
+            "STROKE_FLOAT"
+          ],
+          "codeSyntax": "var(--border-width-100)",
+          "values": {
+            "Value": 1
+          }
+        },
+        {
+          "name": "border-width/200",
+          "type": "FLOAT",
+          "scopes": [
+            "STROKE_FLOAT"
+          ],
+          "codeSyntax": "var(--border-width-200)",
+          "values": {
+            "Value": 2
+          }
+        },
+        {
+          "name": "font/family/sans",
+          "type": "STRING",
+          "scopes": [
+            "FONT_FAMILY"
+          ],
+          "codeSyntax": "var(--font-family-sans)",
+          "values": {
+            "Value": "Inter, system-ui, -apple-system, sans-serif"
+          }
+        },
+        {
+          "name": "font/size/100",
+          "type": "FLOAT",
+          "scopes": [
+            "FONT_SIZE"
+          ],
+          "codeSyntax": "var(--font-size-100)",
+          "values": {
+            "Value": 12
+          }
+        },
+        {
+          "name": "font/size/200",
+          "type": "FLOAT",
+          "scopes": [
+            "FONT_SIZE"
+          ],
+          "codeSyntax": "var(--font-size-200)",
+          "values": {
+            "Value": 14
+          }
+        },
+        {
+          "name": "font/size/300",
+          "type": "FLOAT",
+          "scopes": [
+            "FONT_SIZE"
+          ],
+          "codeSyntax": "var(--font-size-300)",
+          "values": {
+            "Value": 16
+          }
+        },
+        {
+          "name": "font/size/400",
+          "type": "FLOAT",
+          "scopes": [
+            "FONT_SIZE"
+          ],
+          "codeSyntax": "var(--font-size-400)",
+          "values": {
+            "Value": 18
+          }
+        },
+        {
+          "name": "font/weight/regular",
+          "type": "FLOAT",
+          "scopes": [
+            "FONT_WEIGHT"
+          ],
+          "codeSyntax": "var(--font-weight-regular)",
+          "values": {
+            "Value": 400
+          }
+        },
+        {
+          "name": "font/weight/medium",
+          "type": "FLOAT",
+          "scopes": [
+            "FONT_WEIGHT"
+          ],
+          "codeSyntax": "var(--font-weight-medium)",
+          "values": {
+            "Value": 500
+          }
+        },
+        {
+          "name": "font/weight/semibold",
+          "type": "FLOAT",
+          "scopes": [
+            "FONT_WEIGHT"
+          ],
+          "codeSyntax": "var(--font-weight-semibold)",
+          "values": {
+            "Value": 600
+          }
+        },
+        {
+          "name": "opacity/disabled",
+          "type": "FLOAT",
+          "scopes": [
+            "OPACITY"
+          ],
+          "codeSyntax": "var(--opacity-disabled)",
+          "values": {
+            "Value": 0.5
+          }
+        },
+        {
+          "name": "container/sm",
+          "type": "FLOAT",
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": "var(--container-sm)",
+          "values": {
+            "Value": 320
+          }
+        },
+        {
+          "name": "container/xs",
+          "type": "FLOAT",
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": "var(--container-xs)",
+          "values": {
+            "Value": 120
+          }
+        },
+        {
+          "name": "container/md",
+          "type": "FLOAT",
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": "var(--container-md)",
+          "values": {
+            "Value": 480
+          }
+        },
+        {
+          "name": "radius/none",
+          "type": "FLOAT",
+          "scopes": [
+            "CORNER_RADIUS"
+          ],
+          "codeSyntax": "var(--radius-none)",
+          "values": {
+            "Value": 0
+          }
+        },
+        {
+          "name": "container/lg",
+          "type": "FLOAT",
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": "var(--container-lg)",
+          "values": {
+            "Value": 640
+          }
+        },
+        {
           "name": "color/orange/100",
           "type": "COLOR",
           "scopes": [
@@ -669,54 +950,6 @@
           }
         },
         {
-          "name": "space/50",
-          "type": "FLOAT",
-          "scopes": [
-            "WIDTH_HEIGHT",
-            "GAP"
-          ],
-          "codeSyntax": "var(--space-50)",
-          "values": {
-            "Value": 4
-          }
-        },
-        {
-          "name": "space/100",
-          "type": "FLOAT",
-          "scopes": [
-            "WIDTH_HEIGHT",
-            "GAP"
-          ],
-          "codeSyntax": "var(--space-100)",
-          "values": {
-            "Value": 8
-          }
-        },
-        {
-          "name": "space/150",
-          "type": "FLOAT",
-          "scopes": [
-            "WIDTH_HEIGHT",
-            "GAP"
-          ],
-          "codeSyntax": "var(--space-150)",
-          "values": {
-            "Value": 12
-          }
-        },
-        {
-          "name": "space/200",
-          "type": "FLOAT",
-          "scopes": [
-            "WIDTH_HEIGHT",
-            "GAP"
-          ],
-          "codeSyntax": "var(--space-200)",
-          "values": {
-            "Value": 16
-          }
-        },
-        {
           "name": "space/250",
           "type": "FLOAT",
           "scopes": [
@@ -729,163 +962,6 @@
           }
         },
         {
-          "name": "space/300",
-          "type": "FLOAT",
-          "scopes": [
-            "WIDTH_HEIGHT",
-            "GAP"
-          ],
-          "codeSyntax": "var(--space-300)",
-          "values": {
-            "Value": 24
-          }
-        },
-        {
-          "name": "space/400",
-          "type": "FLOAT",
-          "scopes": [
-            "WIDTH_HEIGHT",
-            "GAP"
-          ],
-          "codeSyntax": "var(--space-400)",
-          "values": {
-            "Value": 32
-          }
-        },
-        {
-          "name": "space/overlap",
-          "type": "FLOAT",
-          "scopes": [
-            "WIDTH_HEIGHT",
-            "GAP"
-          ],
-          "codeSyntax": "var(--space-overlap)",
-          "values": {
-            "Value": -8
-          }
-        },
-        {
-          "name": "radius/100",
-          "type": "FLOAT",
-          "scopes": [
-            "CORNER_RADIUS"
-          ],
-          "codeSyntax": "var(--radius-100)",
-          "values": {
-            "Value": 4
-          }
-        },
-        {
-          "name": "radius/200",
-          "type": "FLOAT",
-          "scopes": [
-            "CORNER_RADIUS"
-          ],
-          "codeSyntax": "var(--radius-200)",
-          "values": {
-            "Value": 8
-          }
-        },
-        {
-          "name": "radius/pill",
-          "type": "FLOAT",
-          "scopes": [
-            "CORNER_RADIUS"
-          ],
-          "codeSyntax": "var(--radius-pill)",
-          "values": {
-            "Value": 999
-          }
-        },
-        {
-          "name": "radius/none",
-          "type": "FLOAT",
-          "scopes": [
-            "CORNER_RADIUS"
-          ],
-          "codeSyntax": "var(--radius-none)",
-          "values": {
-            "Value": 0
-          }
-        },
-        {
-          "name": "border-width/100",
-          "type": "FLOAT",
-          "scopes": [
-            "STROKE_FLOAT"
-          ],
-          "codeSyntax": "var(--border-width-100)",
-          "values": {
-            "Value": 1
-          }
-        },
-        {
-          "name": "border-width/200",
-          "type": "FLOAT",
-          "scopes": [
-            "STROKE_FLOAT"
-          ],
-          "codeSyntax": "var(--border-width-200)",
-          "values": {
-            "Value": 2
-          }
-        },
-        {
-          "name": "container/sm",
-          "type": "FLOAT",
-          "scopes": [
-            "WIDTH_HEIGHT"
-          ],
-          "codeSyntax": "var(--container-sm)",
-          "values": {
-            "Value": 320
-          }
-        },
-        {
-          "name": "container/xs",
-          "type": "FLOAT",
-          "scopes": [
-            "WIDTH_HEIGHT"
-          ],
-          "codeSyntax": "var(--container-xs)",
-          "values": {
-            "Value": 120
-          }
-        },
-        {
-          "name": "container/md",
-          "type": "FLOAT",
-          "scopes": [
-            "WIDTH_HEIGHT"
-          ],
-          "codeSyntax": "var(--container-md)",
-          "values": {
-            "Value": 480
-          }
-        },
-        {
-          "name": "container/lg",
-          "type": "FLOAT",
-          "scopes": [
-            "WIDTH_HEIGHT"
-          ],
-          "codeSyntax": "var(--container-lg)",
-          "values": {
-            "Value": 640
-          }
-        },
-        {
-          "name": "font/family/sans",
-          "type": "STRING",
-          "scopes": [
-            "FONT_FAMILY"
-          ],
-          "codeSyntax": "var(--font-family-sans)",
-          "values": {
-            "Value": "Inter, system-ui, -apple-system, sans-serif"
-          }
-        },
-        {
           "name": "font/family/mono",
           "type": "STRING",
           "scopes": [
@@ -894,94 +970,6 @@
           "codeSyntax": "var(--font-family-mono)",
           "values": {
             "Value": "ui-monospace, SFMono-Regular, Menlo, Consolas, monospace"
-          }
-        },
-        {
-          "name": "font/size/100",
-          "type": "FLOAT",
-          "scopes": [
-            "FONT_SIZE"
-          ],
-          "codeSyntax": "var(--font-size-100)",
-          "values": {
-            "Value": 12
-          }
-        },
-        {
-          "name": "font/size/200",
-          "type": "FLOAT",
-          "scopes": [
-            "FONT_SIZE"
-          ],
-          "codeSyntax": "var(--font-size-200)",
-          "values": {
-            "Value": 14
-          }
-        },
-        {
-          "name": "font/size/300",
-          "type": "FLOAT",
-          "scopes": [
-            "FONT_SIZE"
-          ],
-          "codeSyntax": "var(--font-size-300)",
-          "values": {
-            "Value": 16
-          }
-        },
-        {
-          "name": "font/size/400",
-          "type": "FLOAT",
-          "scopes": [
-            "FONT_SIZE"
-          ],
-          "codeSyntax": "var(--font-size-400)",
-          "values": {
-            "Value": 18
-          }
-        },
-        {
-          "name": "font/weight/regular",
-          "type": "FLOAT",
-          "scopes": [
-            "FONT_WEIGHT"
-          ],
-          "codeSyntax": "var(--font-weight-regular)",
-          "values": {
-            "Value": 400
-          }
-        },
-        {
-          "name": "font/weight/medium",
-          "type": "FLOAT",
-          "scopes": [
-            "FONT_WEIGHT"
-          ],
-          "codeSyntax": "var(--font-weight-medium)",
-          "values": {
-            "Value": 500
-          }
-        },
-        {
-          "name": "font/weight/semibold",
-          "type": "FLOAT",
-          "scopes": [
-            "FONT_WEIGHT"
-          ],
-          "codeSyntax": "var(--font-weight-semibold)",
-          "values": {
-            "Value": 600
-          }
-        },
-        {
-          "name": "opacity/disabled",
-          "type": "FLOAT",
-          "scopes": [
-            "OPACITY"
-          ],
-          "codeSyntax": "var(--opacity-disabled)",
-          "values": {
-            "Value": 0.5
           }
         },
         {
@@ -1015,6 +1003,18 @@
           "codeSyntax": "var(--control-lg)",
           "values": {
             "Value": 44
+          }
+        },
+        {
+          "name": "space/overlap",
+          "type": "FLOAT",
+          "scopes": [
+            "WIDTH_HEIGHT",
+            "GAP"
+          ],
+          "codeSyntax": "var(--space-overlap)",
+          "values": {
+            "Value": -8
           }
         },
         {
@@ -1116,142 +1116,6 @@
       ]
     },
     {
-      "name": "Brand",
-      "modes": [
-        "Default",
-        "Aurora"
-      ],
-      "variables": [
-        {
-          "name": "brand/accent/100",
-          "type": "COLOR",
-          "scopes": [
-            "ALL_FILLS",
-            "STROKE_COLOR"
-          ],
-          "codeSyntax": "var(--brand-accent-100)",
-          "values": {
-            "Default": "{color/blue/100}",
-            "Aurora": "{color/teal/100}"
-          }
-        },
-        {
-          "name": "brand/accent/300",
-          "type": "COLOR",
-          "scopes": [
-            "ALL_FILLS",
-            "STROKE_COLOR"
-          ],
-          "codeSyntax": "var(--brand-accent-300)",
-          "values": {
-            "Default": "{color/blue/300}",
-            "Aurora": "{color/teal/300}"
-          }
-        },
-        {
-          "name": "brand/accent/400",
-          "type": "COLOR",
-          "scopes": [
-            "ALL_FILLS",
-            "STROKE_COLOR"
-          ],
-          "codeSyntax": "var(--brand-accent-400)",
-          "values": {
-            "Default": "{color/blue/400}",
-            "Aurora": "{color/teal/400}"
-          }
-        },
-        {
-          "name": "brand/accent/500",
-          "type": "COLOR",
-          "scopes": [
-            "ALL_FILLS",
-            "STROKE_COLOR"
-          ],
-          "codeSyntax": "var(--brand-accent-500)",
-          "values": {
-            "Default": "{color/blue/500}",
-            "Aurora": "{color/teal/500}"
-          }
-        },
-        {
-          "name": "brand/accent/600",
-          "type": "COLOR",
-          "scopes": [
-            "ALL_FILLS",
-            "STROKE_COLOR"
-          ],
-          "codeSyntax": "var(--brand-accent-600)",
-          "values": {
-            "Default": "{color/blue/600}",
-            "Aurora": "{color/teal/600}"
-          }
-        },
-        {
-          "name": "brand/accent/700",
-          "type": "COLOR",
-          "scopes": [
-            "ALL_FILLS",
-            "STROKE_COLOR"
-          ],
-          "codeSyntax": "var(--brand-accent-700)",
-          "values": {
-            "Default": "{color/blue/700}",
-            "Aurora": "{color/teal/700}"
-          }
-        },
-        {
-          "name": "brand/accent/900",
-          "type": "COLOR",
-          "scopes": [
-            "ALL_FILLS",
-            "STROKE_COLOR"
-          ],
-          "codeSyntax": "var(--brand-accent-900)",
-          "values": {
-            "Default": "{color/blue/900}",
-            "Aurora": "{color/teal/900}"
-          }
-        },
-        {
-          "name": "brand/radius/control",
-          "type": "FLOAT",
-          "scopes": [
-            "CORNER_RADIUS"
-          ],
-          "codeSyntax": "var(--brand-radius-control)",
-          "values": {
-            "Default": "{radius/200}",
-            "Aurora": "{radius/none}"
-          }
-        },
-        {
-          "name": "brand/font/control-family",
-          "type": "STRING",
-          "scopes": [
-            "FONT_FAMILY"
-          ],
-          "codeSyntax": "var(--brand-font-control-family)",
-          "values": {
-            "Default": "{font/family/sans}",
-            "Aurora": "{font/family/mono}"
-          }
-        },
-        {
-          "name": "brand/font/control-weight",
-          "type": "FLOAT",
-          "scopes": [
-            "FONT_WEIGHT"
-          ],
-          "codeSyntax": "var(--brand-font-control-weight)",
-          "values": {
-            "Default": "{font/weight/medium}",
-            "Aurora": "{font/weight/semibold}"
-          }
-        }
-      ]
-    },
-    {
       "name": "Semantic",
       "modes": [
         "Light",
@@ -1298,19 +1162,6 @@
           }
         },
         {
-          "name": "space/inset-x/xs",
-          "type": "FLOAT",
-          "scopes": [
-            "WIDTH_HEIGHT",
-            "GAP"
-          ],
-          "codeSyntax": "var(--space-inset-x-xs)",
-          "values": {
-            "Light": "{space/100}",
-            "Dark": "{space/100}"
-          }
-        },
-        {
           "name": "space/inset-y/sm",
           "type": "FLOAT",
           "scopes": [
@@ -1350,19 +1201,6 @@
           }
         },
         {
-          "name": "space/inset-y/xs",
-          "type": "FLOAT",
-          "scopes": [
-            "WIDTH_HEIGHT",
-            "GAP"
-          ],
-          "codeSyntax": "var(--space-inset-y-xs)",
-          "values": {
-            "Light": "{space/25}",
-            "Dark": "{space/25}"
-          }
-        },
-        {
           "name": "space/gap/control",
           "type": "FLOAT",
           "scopes": [
@@ -1373,123 +1211,6 @@
           "values": {
             "Light": "{space/100}",
             "Dark": "{space/100}"
-          }
-        },
-        {
-          "name": "space/gap/sm",
-          "type": "FLOAT",
-          "scopes": [
-            "WIDTH_HEIGHT",
-            "GAP"
-          ],
-          "codeSyntax": "var(--space-gap-sm)",
-          "values": {
-            "Light": "{space/100}",
-            "Dark": "{space/100}"
-          }
-        },
-        {
-          "name": "space/gap/md",
-          "type": "FLOAT",
-          "scopes": [
-            "WIDTH_HEIGHT",
-            "GAP"
-          ],
-          "codeSyntax": "var(--space-gap-md)",
-          "values": {
-            "Light": "{space/200}",
-            "Dark": "{space/200}"
-          }
-        },
-        {
-          "name": "space/gap/lg",
-          "type": "FLOAT",
-          "scopes": [
-            "WIDTH_HEIGHT",
-            "GAP"
-          ],
-          "codeSyntax": "var(--space-gap-lg)",
-          "values": {
-            "Light": "{space/300}",
-            "Dark": "{space/300}"
-          }
-        },
-        {
-          "name": "space/table/cell-y/comfortable",
-          "type": "FLOAT",
-          "scopes": [
-            "WIDTH_HEIGHT",
-            "GAP"
-          ],
-          "codeSyntax": "var(--space-table-cell-y-comfortable)",
-          "values": {
-            "Light": "{space/150}",
-            "Dark": "{space/150}"
-          }
-        },
-        {
-          "name": "space/table/cell-y/compact",
-          "type": "FLOAT",
-          "scopes": [
-            "WIDTH_HEIGHT",
-            "GAP"
-          ],
-          "codeSyntax": "var(--space-table-cell-y-compact)",
-          "values": {
-            "Light": "{space/50}",
-            "Dark": "{space/50}"
-          }
-        },
-        {
-          "name": "space/list/compact",
-          "type": "FLOAT",
-          "scopes": [
-            "WIDTH_HEIGHT",
-            "GAP"
-          ],
-          "codeSyntax": "var(--space-list-compact)",
-          "values": {
-            "Light": "{space/50}",
-            "Dark": "{space/50}"
-          }
-        },
-        {
-          "name": "space/list/balanced",
-          "type": "FLOAT",
-          "scopes": [
-            "WIDTH_HEIGHT",
-            "GAP"
-          ],
-          "codeSyntax": "var(--space-list-balanced)",
-          "values": {
-            "Light": "{space/100}",
-            "Dark": "{space/100}"
-          }
-        },
-        {
-          "name": "space/list/spacious",
-          "type": "FLOAT",
-          "scopes": [
-            "WIDTH_HEIGHT",
-            "GAP"
-          ],
-          "codeSyntax": "var(--space-list-spacious)",
-          "values": {
-            "Light": "{space/150}",
-            "Dark": "{space/150}"
-          }
-        },
-        {
-          "name": "space/avatarGroup/overlap",
-          "type": "FLOAT",
-          "scopes": [
-            "WIDTH_HEIGHT",
-            "GAP"
-          ],
-          "codeSyntax": "var(--space-avatarGroup-overlap)",
-          "values": {
-            "Light": "{space/overlap}",
-            "Dark": "{space/overlap}"
           }
         },
         {
@@ -1517,516 +1238,12 @@
           }
         },
         {
-          "name": "radius/card",
-          "type": "FLOAT",
-          "scopes": [
-            "CORNER_RADIUS"
-          ],
-          "codeSyntax": "var(--radius-card)",
-          "values": {
-            "Light": "{radius/200}",
-            "Dark": "{radius/200}"
-          }
-        },
-        {
-          "name": "radius/avatar",
-          "type": "FLOAT",
-          "scopes": [
-            "CORNER_RADIUS"
-          ],
-          "codeSyntax": "var(--radius-avatar)",
-          "values": {
-            "Light": "{radius/pill}",
-            "Dark": "{radius/pill}"
-          }
-        },
-        {
-          "name": "radius/banner/card",
-          "type": "FLOAT",
-          "scopes": [
-            "CORNER_RADIUS"
-          ],
-          "codeSyntax": "var(--radius-banner-card)",
-          "values": {
-            "Light": "{radius/200}",
-            "Dark": "{radius/200}"
-          }
-        },
-        {
-          "name": "radius/banner/section",
-          "type": "FLOAT",
-          "scopes": [
-            "CORNER_RADIUS"
-          ],
-          "codeSyntax": "var(--radius-banner-section)",
-          "values": {
-            "Light": "{radius/none}",
-            "Dark": "{radius/none}"
-          }
-        },
-        {
-          "name": "radius/skeleton/text",
-          "type": "FLOAT",
-          "scopes": [
-            "CORNER_RADIUS"
-          ],
-          "codeSyntax": "var(--radius-skeleton-text)",
-          "values": {
-            "Light": "{radius/100}",
-            "Dark": "{radius/100}"
-          }
-        },
-        {
-          "name": "radius/skeleton/rect",
-          "type": "FLOAT",
-          "scopes": [
-            "CORNER_RADIUS"
-          ],
-          "codeSyntax": "var(--radius-skeleton-rect)",
-          "values": {
-            "Light": "{radius/200}",
-            "Dark": "{radius/200}"
-          }
-        },
-        {
-          "name": "radius/skeleton/circle",
-          "type": "FLOAT",
-          "scopes": [
-            "CORNER_RADIUS"
-          ],
-          "codeSyntax": "var(--radius-skeleton-circle)",
-          "values": {
-            "Light": "{radius/pill}",
-            "Dark": "{radius/pill}"
-          }
-        },
-        {
-          "name": "size/avatar/sm",
-          "type": "FLOAT",
-          "scopes": [
-            "WIDTH_HEIGHT"
-          ],
-          "codeSyntax": "var(--size-avatar-sm)",
-          "values": {
-            "Light": "{space/300}",
-            "Dark": "{space/300}"
-          }
-        },
-        {
-          "name": "size/avatar/md",
-          "type": "FLOAT",
-          "scopes": [
-            "WIDTH_HEIGHT"
-          ],
-          "codeSyntax": "var(--size-avatar-md)",
-          "values": {
-            "Light": "{space/400}",
-            "Dark": "{space/400}"
-          }
-        },
-        {
-          "name": "size/card/width",
-          "type": "FLOAT",
-          "scopes": [
-            "WIDTH_HEIGHT"
-          ],
-          "codeSyntax": "var(--size-card-width)",
-          "values": {
-            "Light": "{container/sm}",
-            "Dark": "{container/sm}"
-          }
-        },
-        {
-          "name": "size/table/width",
-          "type": "FLOAT",
-          "scopes": [
-            "WIDTH_HEIGHT"
-          ],
-          "codeSyntax": "var(--size-table-width)",
-          "values": {
-            "Light": "{container/md}",
-            "Dark": "{container/md}"
-          }
-        },
-        {
-          "name": "size/table/cell-width",
-          "type": "FLOAT",
-          "scopes": [
-            "WIDTH_HEIGHT"
-          ],
-          "codeSyntax": "var(--size-table-cell-width)",
-          "values": {
-            "Light": "{container/xs}",
-            "Dark": "{container/xs}"
-          }
-        },
-        {
-          "name": "size/banner/width",
-          "type": "FLOAT",
-          "scopes": [
-            "WIDTH_HEIGHT"
-          ],
-          "codeSyntax": "var(--size-banner-width)",
-          "values": {
-            "Light": "{container/lg}",
-            "Dark": "{container/lg}"
-          }
-        },
-        {
-          "name": "size/icon-button/sm",
-          "type": "FLOAT",
-          "scopes": [
-            "WIDTH_HEIGHT"
-          ],
-          "codeSyntax": "var(--size-icon-button-sm)",
-          "values": {
-            "Light": "{control/sm}",
-            "Dark": "{control/sm}"
-          }
-        },
-        {
-          "name": "size/icon-button/md",
-          "type": "FLOAT",
-          "scopes": [
-            "WIDTH_HEIGHT"
-          ],
-          "codeSyntax": "var(--size-icon-button-md)",
-          "values": {
-            "Light": "{control/md}",
-            "Dark": "{control/md}"
-          }
-        },
-        {
-          "name": "size/icon-button/lg",
-          "type": "FLOAT",
-          "scopes": [
-            "WIDTH_HEIGHT"
-          ],
-          "codeSyntax": "var(--size-icon-button-lg)",
-          "values": {
-            "Light": "{control/lg}",
-            "Dark": "{control/lg}"
-          }
-        },
-        {
-          "name": "size/checkbox/sm",
-          "type": "FLOAT",
-          "scopes": [
-            "WIDTH_HEIGHT"
-          ],
-          "codeSyntax": "var(--size-checkbox-sm)",
-          "values": {
-            "Light": "{space/200}",
-            "Dark": "{space/200}"
-          }
-        },
-        {
-          "name": "size/checkbox/md",
-          "type": "FLOAT",
-          "scopes": [
-            "WIDTH_HEIGHT"
-          ],
-          "codeSyntax": "var(--size-checkbox-md)",
-          "values": {
-            "Light": "{space/250}",
-            "Dark": "{space/250}"
-          }
-        },
-        {
-          "name": "size/dot",
-          "type": "FLOAT",
-          "scopes": [
-            "WIDTH_HEIGHT"
-          ],
-          "codeSyntax": "var(--size-dot)",
-          "values": {
-            "Light": "{space/100}",
-            "Dark": "{space/100}"
-          }
-        },
-        {
-          "name": "size/divider/length",
-          "type": "FLOAT",
-          "scopes": [
-            "WIDTH_HEIGHT"
-          ],
-          "codeSyntax": "var(--size-divider-length)",
-          "values": {
-            "Light": "{container/sm}",
-            "Dark": "{container/sm}"
-          }
-        },
-        {
-          "name": "size/toolbar/sm",
-          "type": "FLOAT",
-          "scopes": [
-            "WIDTH_HEIGHT"
-          ],
-          "codeSyntax": "var(--size-toolbar-sm)",
-          "values": {
-            "Light": "{control/sm}",
-            "Dark": "{control/sm}"
-          }
-        },
-        {
-          "name": "size/toolbar/md",
-          "type": "FLOAT",
-          "scopes": [
-            "WIDTH_HEIGHT"
-          ],
-          "codeSyntax": "var(--size-toolbar-md)",
-          "values": {
-            "Light": "{control/md}",
-            "Dark": "{control/md}"
-          }
-        },
-        {
-          "name": "size/toolbar/lg",
-          "type": "FLOAT",
-          "scopes": [
-            "WIDTH_HEIGHT"
-          ],
-          "codeSyntax": "var(--size-toolbar-lg)",
-          "values": {
-            "Light": "{control/lg}",
-            "Dark": "{control/lg}"
-          }
-        },
-        {
-          "name": "size/progress/width",
-          "type": "FLOAT",
-          "scopes": [
-            "WIDTH_HEIGHT"
-          ],
-          "codeSyntax": "var(--size-progress-width)",
-          "values": {
-            "Light": "{container/sm}",
-            "Dark": "{container/sm}"
-          }
-        },
-        {
-          "name": "size/progress/height",
-          "type": "FLOAT",
-          "scopes": [
-            "WIDTH_HEIGHT"
-          ],
-          "codeSyntax": "var(--size-progress-height)",
-          "values": {
-            "Light": "{space/100}",
-            "Dark": "{space/100}"
-          }
-        },
-        {
-          "name": "size/slider/width",
-          "type": "FLOAT",
-          "scopes": [
-            "WIDTH_HEIGHT"
-          ],
-          "codeSyntax": "var(--size-slider-width)",
-          "values": {
-            "Light": "{container/sm}",
-            "Dark": "{container/sm}"
-          }
-        },
-        {
-          "name": "size/slider/track",
-          "type": "FLOAT",
-          "scopes": [
-            "WIDTH_HEIGHT"
-          ],
-          "codeSyntax": "var(--size-slider-track)",
-          "values": {
-            "Light": "{space/50}",
-            "Dark": "{space/50}"
-          }
-        },
-        {
-          "name": "size/slider/thumb",
-          "type": "FLOAT",
-          "scopes": [
-            "WIDTH_HEIGHT"
-          ],
-          "codeSyntax": "var(--size-slider-thumb)",
-          "values": {
-            "Light": "{space/200}",
-            "Dark": "{space/200}"
-          }
-        },
-        {
-          "name": "size/switch/width",
-          "type": "FLOAT",
-          "scopes": [
-            "WIDTH_HEIGHT"
-          ],
-          "codeSyntax": "var(--size-switch-width)",
-          "values": {
-            "Light": "{space/400}",
-            "Dark": "{space/400}"
-          }
-        },
-        {
-          "name": "size/switch/height",
-          "type": "FLOAT",
-          "scopes": [
-            "WIDTH_HEIGHT"
-          ],
-          "codeSyntax": "var(--size-switch-height)",
-          "values": {
-            "Light": "{space/250}",
-            "Dark": "{space/250}"
-          }
-        },
-        {
-          "name": "size/switch/thumb",
-          "type": "FLOAT",
-          "scopes": [
-            "WIDTH_HEIGHT"
-          ],
-          "codeSyntax": "var(--size-switch-thumb)",
-          "values": {
-            "Light": "{space/200}",
-            "Dark": "{space/200}"
-          }
-        },
-        {
-          "name": "size/spinner/sm",
-          "type": "FLOAT",
-          "scopes": [
-            "WIDTH_HEIGHT"
-          ],
-          "codeSyntax": "var(--size-spinner-sm)",
-          "values": {
-            "Light": "{space/150}",
-            "Dark": "{space/150}"
-          }
-        },
-        {
-          "name": "size/spinner/md",
-          "type": "FLOAT",
-          "scopes": [
-            "WIDTH_HEIGHT"
-          ],
-          "codeSyntax": "var(--size-spinner-md)",
-          "values": {
-            "Light": "{space/200}",
-            "Dark": "{space/200}"
-          }
-        },
-        {
-          "name": "size/spinner/lg",
-          "type": "FLOAT",
-          "scopes": [
-            "WIDTH_HEIGHT"
-          ],
-          "codeSyntax": "var(--size-spinner-lg)",
-          "values": {
-            "Light": "{space/300}",
-            "Dark": "{space/300}"
-          }
-        },
-        {
-          "name": "size/skeleton/text/width",
-          "type": "FLOAT",
-          "scopes": [
-            "WIDTH_HEIGHT"
-          ],
-          "codeSyntax": "var(--size-skeleton-text-width)",
-          "values": {
-            "Light": "{container/xs}",
-            "Dark": "{container/xs}"
-          }
-        },
-        {
-          "name": "size/skeleton/text/height",
-          "type": "FLOAT",
-          "scopes": [
-            "WIDTH_HEIGHT"
-          ],
-          "codeSyntax": "var(--size-skeleton-text-height)",
-          "values": {
-            "Light": "{space/150}",
-            "Dark": "{space/150}"
-          }
-        },
-        {
-          "name": "size/skeleton/rect/width",
-          "type": "FLOAT",
-          "scopes": [
-            "WIDTH_HEIGHT"
-          ],
-          "codeSyntax": "var(--size-skeleton-rect-width)",
-          "values": {
-            "Light": "{container/sm}",
-            "Dark": "{container/sm}"
-          }
-        },
-        {
-          "name": "size/skeleton/rect/height",
-          "type": "FLOAT",
-          "scopes": [
-            "WIDTH_HEIGHT"
-          ],
-          "codeSyntax": "var(--size-skeleton-rect-height)",
-          "values": {
-            "Light": "{space/400}",
-            "Dark": "{space/400}"
-          }
-        },
-        {
-          "name": "size/skeleton/circle/width",
-          "type": "FLOAT",
-          "scopes": [
-            "WIDTH_HEIGHT"
-          ],
-          "codeSyntax": "var(--size-skeleton-circle-width)",
-          "values": {
-            "Light": "{space/400}",
-            "Dark": "{space/400}"
-          }
-        },
-        {
-          "name": "size/skeleton/circle/height",
-          "type": "FLOAT",
-          "scopes": [
-            "WIDTH_HEIGHT"
-          ],
-          "codeSyntax": "var(--size-skeleton-circle-height)",
-          "values": {
-            "Light": "{space/400}",
-            "Dark": "{space/400}"
-          }
-        },
-        {
           "name": "border/width/focus",
           "type": "FLOAT",
           "scopes": [
             "STROKE_FLOAT"
           ],
           "codeSyntax": "var(--border-width-focus)",
-          "values": {
-            "Light": "{border-width/200}",
-            "Dark": "{border-width/200}"
-          }
-        },
-        {
-          "name": "border/width/divider/subtle",
-          "type": "FLOAT",
-          "scopes": [
-            "STROKE_FLOAT"
-          ],
-          "codeSyntax": "var(--border-width-divider-subtle)",
-          "values": {
-            "Light": "{border-width/100}",
-            "Dark": "{border-width/100}"
-          }
-        },
-        {
-          "name": "border/width/divider/strong",
-          "type": "FLOAT",
-          "scopes": [
-            "STROKE_FLOAT"
-          ],
-          "codeSyntax": "var(--border-width-divider-strong)",
           "values": {
             "Light": "{border-width/200}",
             "Dark": "{border-width/200}"
@@ -2105,90 +1322,6 @@
           }
         },
         {
-          "name": "font/title/size",
-          "type": "FLOAT",
-          "scopes": [
-            "FONT_SIZE"
-          ],
-          "codeSyntax": "var(--font-title-size)",
-          "values": {
-            "Light": "{font/size/300}",
-            "Dark": "{font/size/300}"
-          }
-        },
-        {
-          "name": "font/title/weight",
-          "type": "FLOAT",
-          "scopes": [
-            "FONT_WEIGHT"
-          ],
-          "codeSyntax": "var(--font-title-weight)",
-          "values": {
-            "Light": "{font/weight/semibold}",
-            "Dark": "{font/weight/semibold}"
-          }
-        },
-        {
-          "name": "font/avatar/size/sm",
-          "type": "FLOAT",
-          "scopes": [
-            "FONT_SIZE"
-          ],
-          "codeSyntax": "var(--font-avatar-size-sm)",
-          "values": {
-            "Light": "{font/size/100}",
-            "Dark": "{font/size/100}"
-          }
-        },
-        {
-          "name": "font/avatar/size/md",
-          "type": "FLOAT",
-          "scopes": [
-            "FONT_SIZE"
-          ],
-          "codeSyntax": "var(--font-avatar-size-md)",
-          "values": {
-            "Light": "{font/size/200}",
-            "Dark": "{font/size/200}"
-          }
-        },
-        {
-          "name": "font/code/family",
-          "type": "STRING",
-          "scopes": [
-            "FONT_FAMILY"
-          ],
-          "codeSyntax": "var(--font-code-family)",
-          "values": {
-            "Light": "{font/family/mono}",
-            "Dark": "{font/family/mono}"
-          }
-        },
-        {
-          "name": "font/tab/default/weight",
-          "type": "FLOAT",
-          "scopes": [
-            "FONT_WEIGHT"
-          ],
-          "codeSyntax": "var(--font-tab-default-weight)",
-          "values": {
-            "Light": "{font/weight/medium}",
-            "Dark": "{font/weight/medium}"
-          }
-        },
-        {
-          "name": "font/tab/selected/weight",
-          "type": "FLOAT",
-          "scopes": [
-            "FONT_WEIGHT"
-          ],
-          "codeSyntax": "var(--font-tab-selected-weight)",
-          "values": {
-            "Light": "{font/weight/semibold}",
-            "Dark": "{font/weight/semibold}"
-          }
-        },
-        {
           "name": "color/surface/background",
           "type": "COLOR",
           "scopes": [
@@ -2212,32 +1345,6 @@
           "values": {
             "Light": "{color/gray/900}",
             "Dark": "{color/gray/100}"
-          }
-        },
-        {
-          "name": "color/surface/raised",
-          "type": "COLOR",
-          "scopes": [
-            "ALL_FILLS",
-            "STROKE_COLOR"
-          ],
-          "codeSyntax": "var(--color-surface-raised)",
-          "values": {
-            "Light": "{color/white}",
-            "Dark": "{color/gray/700}"
-          }
-        },
-        {
-          "name": "color/surface/sunken",
-          "type": "COLOR",
-          "scopes": [
-            "ALL_FILLS",
-            "STROKE_COLOR"
-          ],
-          "codeSyntax": "var(--color-surface-sunken)",
-          "values": {
-            "Light": "{color/gray/100}",
-            "Dark": "{color/gray/800}"
           }
         },
         {
@@ -2358,84 +1465,6 @@
           }
         },
         {
-          "name": "color/action/destructive/background",
-          "type": "COLOR",
-          "scopes": [
-            "ALL_FILLS",
-            "STROKE_COLOR"
-          ],
-          "codeSyntax": "var(--color-action-destructive-background)",
-          "values": {
-            "Light": "{color/red/600}",
-            "Dark": "{color/red/500}"
-          }
-        },
-        {
-          "name": "color/action/destructive/background-hover",
-          "type": "COLOR",
-          "scopes": [
-            "ALL_FILLS",
-            "STROKE_COLOR"
-          ],
-          "codeSyntax": "var(--color-action-destructive-background-hover)",
-          "values": {
-            "Light": "{color/red/700}",
-            "Dark": "{color/red/400}"
-          }
-        },
-        {
-          "name": "color/action/destructive/foreground",
-          "type": "COLOR",
-          "scopes": [
-            "ALL_FILLS",
-            "STROKE_COLOR"
-          ],
-          "codeSyntax": "var(--color-action-destructive-foreground)",
-          "values": {
-            "Light": "{color/white}",
-            "Dark": "{color/white}"
-          }
-        },
-        {
-          "name": "color/action/ghost/background",
-          "type": "COLOR",
-          "scopes": [
-            "ALL_FILLS",
-            "STROKE_COLOR"
-          ],
-          "codeSyntax": "var(--color-action-ghost-background)",
-          "values": {
-            "Light": "{color/gray/50}",
-            "Dark": "{color/gray/800}"
-          }
-        },
-        {
-          "name": "color/action/ghost/foreground",
-          "type": "COLOR",
-          "scopes": [
-            "ALL_FILLS",
-            "STROKE_COLOR"
-          ],
-          "codeSyntax": "var(--color-action-ghost-foreground)",
-          "values": {
-            "Light": "{color/gray/700}",
-            "Dark": "{color/gray/200}"
-          }
-        },
-        {
-          "name": "color/action/ghost/background-hover",
-          "type": "COLOR",
-          "scopes": [
-            "ALL_FILLS",
-            "STROKE_COLOR"
-          ],
-          "codeSyntax": "var(--color-action-ghost-background-hover)",
-          "values": {
-            "Light": "{color/gray/200}",
-            "Dark": "{color/gray/700}"
-          }
-        },
-        {
           "name": "color/border/focus",
           "type": "COLOR",
           "scopes": [
@@ -2446,19 +1475,6 @@
           "values": {
             "Light": "{brand/accent/500}",
             "Dark": "{brand/accent/300}"
-          }
-        },
-        {
-          "name": "color/border/subtle",
-          "type": "COLOR",
-          "scopes": [
-            "ALL_FILLS",
-            "STROKE_COLOR"
-          ],
-          "codeSyntax": "var(--color-border-subtle)",
-          "values": {
-            "Light": "{color/gray/200}",
-            "Dark": "{color/gray/600}"
           }
         },
         {
@@ -2566,29 +1582,137 @@
           }
         },
         {
-          "name": "color/feedback/error/background",
-          "type": "COLOR",
+          "name": "radius/card",
+          "type": "FLOAT",
           "scopes": [
-            "ALL_FILLS",
-            "STROKE_COLOR"
+            "CORNER_RADIUS"
           ],
-          "codeSyntax": "var(--color-feedback-error-background)",
+          "codeSyntax": "var(--radius-card)",
           "values": {
-            "Light": "{color/red/100}",
-            "Dark": "{color/red/900}"
+            "Light": "{radius/200}",
+            "Dark": "{radius/200}"
           }
         },
         {
-          "name": "color/feedback/error/foreground",
+          "name": "radius/avatar",
+          "type": "FLOAT",
+          "scopes": [
+            "CORNER_RADIUS"
+          ],
+          "codeSyntax": "var(--radius-avatar)",
+          "values": {
+            "Light": "{radius/pill}",
+            "Dark": "{radius/pill}"
+          }
+        },
+        {
+          "name": "size/avatar/sm",
+          "type": "FLOAT",
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": "var(--size-avatar-sm)",
+          "values": {
+            "Light": "{space/300}",
+            "Dark": "{space/300}"
+          }
+        },
+        {
+          "name": "size/avatar/md",
+          "type": "FLOAT",
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": "var(--size-avatar-md)",
+          "values": {
+            "Light": "{space/400}",
+            "Dark": "{space/400}"
+          }
+        },
+        {
+          "name": "size/card/width",
+          "type": "FLOAT",
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": "var(--size-card-width)",
+          "values": {
+            "Light": "{container/sm}",
+            "Dark": "{container/sm}"
+          }
+        },
+        {
+          "name": "font/title/size",
+          "type": "FLOAT",
+          "scopes": [
+            "FONT_SIZE"
+          ],
+          "codeSyntax": "var(--font-title-size)",
+          "values": {
+            "Light": "{font/size/300}",
+            "Dark": "{font/size/300}"
+          }
+        },
+        {
+          "name": "font/title/weight",
+          "type": "FLOAT",
+          "scopes": [
+            "FONT_WEIGHT"
+          ],
+          "codeSyntax": "var(--font-title-weight)",
+          "values": {
+            "Light": "{font/weight/semibold}",
+            "Dark": "{font/weight/semibold}"
+          }
+        },
+        {
+          "name": "font/avatar/size/sm",
+          "type": "FLOAT",
+          "scopes": [
+            "FONT_SIZE"
+          ],
+          "codeSyntax": "var(--font-avatar-size-sm)",
+          "values": {
+            "Light": "{font/size/100}",
+            "Dark": "{font/size/100}"
+          }
+        },
+        {
+          "name": "font/avatar/size/md",
+          "type": "FLOAT",
+          "scopes": [
+            "FONT_SIZE"
+          ],
+          "codeSyntax": "var(--font-avatar-size-md)",
+          "values": {
+            "Light": "{font/size/200}",
+            "Dark": "{font/size/200}"
+          }
+        },
+        {
+          "name": "color/surface/raised",
           "type": "COLOR",
           "scopes": [
             "ALL_FILLS",
             "STROKE_COLOR"
           ],
-          "codeSyntax": "var(--color-feedback-error-foreground)",
+          "codeSyntax": "var(--color-surface-raised)",
           "values": {
-            "Light": "{color/red/700}",
-            "Dark": "{color/red/100}"
+            "Light": "{color/white}",
+            "Dark": "{color/gray/700}"
+          }
+        },
+        {
+          "name": "color/border/subtle",
+          "type": "COLOR",
+          "scopes": [
+            "ALL_FILLS",
+            "STROKE_COLOR"
+          ],
+          "codeSyntax": "var(--color-border-subtle)",
+          "values": {
+            "Light": "{color/gray/200}",
+            "Dark": "{color/gray/600}"
           }
         },
         {
@@ -2618,6 +1742,69 @@
           }
         },
         {
+          "name": "size/table/width",
+          "type": "FLOAT",
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": "var(--size-table-width)",
+          "values": {
+            "Light": "{container/md}",
+            "Dark": "{container/md}"
+          }
+        },
+        {
+          "name": "size/table/cell-width",
+          "type": "FLOAT",
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": "var(--size-table-cell-width)",
+          "values": {
+            "Light": "{container/xs}",
+            "Dark": "{container/xs}"
+          }
+        },
+        {
+          "name": "space/table/cell-y/comfortable",
+          "type": "FLOAT",
+          "scopes": [
+            "WIDTH_HEIGHT",
+            "GAP"
+          ],
+          "codeSyntax": "var(--space-table-cell-y-comfortable)",
+          "values": {
+            "Light": "{space/150}",
+            "Dark": "{space/150}"
+          }
+        },
+        {
+          "name": "space/table/cell-y/compact",
+          "type": "FLOAT",
+          "scopes": [
+            "WIDTH_HEIGHT",
+            "GAP"
+          ],
+          "codeSyntax": "var(--space-table-cell-y-compact)",
+          "values": {
+            "Light": "{space/50}",
+            "Dark": "{space/50}"
+          }
+        },
+        {
+          "name": "color/surface/sunken",
+          "type": "COLOR",
+          "scopes": [
+            "ALL_FILLS",
+            "STROKE_COLOR"
+          ],
+          "codeSyntax": "var(--color-surface-sunken)",
+          "values": {
+            "Light": "{color/gray/100}",
+            "Dark": "{color/gray/800}"
+          }
+        },
+        {
           "name": "color/table/row/default",
           "type": "COLOR",
           "scopes": [
@@ -2641,6 +1828,331 @@
           "values": {
             "Light": "{brand/accent/100}",
             "Dark": "{brand/accent/900}"
+          }
+        },
+        {
+          "name": "space/gap/sm",
+          "type": "FLOAT",
+          "scopes": [
+            "WIDTH_HEIGHT",
+            "GAP"
+          ],
+          "codeSyntax": "var(--space-gap-sm)",
+          "values": {
+            "Light": "{space/100}",
+            "Dark": "{space/100}"
+          }
+        },
+        {
+          "name": "space/gap/md",
+          "type": "FLOAT",
+          "scopes": [
+            "WIDTH_HEIGHT",
+            "GAP"
+          ],
+          "codeSyntax": "var(--space-gap-md)",
+          "values": {
+            "Light": "{space/200}",
+            "Dark": "{space/200}"
+          }
+        },
+        {
+          "name": "space/gap/lg",
+          "type": "FLOAT",
+          "scopes": [
+            "WIDTH_HEIGHT",
+            "GAP"
+          ],
+          "codeSyntax": "var(--space-gap-lg)",
+          "values": {
+            "Light": "{space/300}",
+            "Dark": "{space/300}"
+          }
+        },
+        {
+          "name": "radius/banner/card",
+          "type": "FLOAT",
+          "scopes": [
+            "CORNER_RADIUS"
+          ],
+          "codeSyntax": "var(--radius-banner-card)",
+          "values": {
+            "Light": "{radius/200}",
+            "Dark": "{radius/200}"
+          }
+        },
+        {
+          "name": "radius/banner/section",
+          "type": "FLOAT",
+          "scopes": [
+            "CORNER_RADIUS"
+          ],
+          "codeSyntax": "var(--radius-banner-section)",
+          "values": {
+            "Light": "{radius/none}",
+            "Dark": "{radius/none}"
+          }
+        },
+        {
+          "name": "size/banner/width",
+          "type": "FLOAT",
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": "var(--size-banner-width)",
+          "values": {
+            "Light": "{container/lg}",
+            "Dark": "{container/lg}"
+          }
+        },
+        {
+          "name": "color/feedback/error/background",
+          "type": "COLOR",
+          "scopes": [
+            "ALL_FILLS",
+            "STROKE_COLOR"
+          ],
+          "codeSyntax": "var(--color-feedback-error-background)",
+          "values": {
+            "Light": "{color/red/100}",
+            "Dark": "{color/red/900}"
+          }
+        },
+        {
+          "name": "color/feedback/error/foreground",
+          "type": "COLOR",
+          "scopes": [
+            "ALL_FILLS",
+            "STROKE_COLOR"
+          ],
+          "codeSyntax": "var(--color-feedback-error-foreground)",
+          "values": {
+            "Light": "{color/red/700}",
+            "Dark": "{color/red/100}"
+          }
+        },
+        {
+          "name": "space/inset-x/xs",
+          "type": "FLOAT",
+          "scopes": [
+            "WIDTH_HEIGHT",
+            "GAP"
+          ],
+          "codeSyntax": "var(--space-inset-x-xs)",
+          "values": {
+            "Light": "{space/100}",
+            "Dark": "{space/100}"
+          }
+        },
+        {
+          "name": "space/inset-y/xs",
+          "type": "FLOAT",
+          "scopes": [
+            "WIDTH_HEIGHT",
+            "GAP"
+          ],
+          "codeSyntax": "var(--space-inset-y-xs)",
+          "values": {
+            "Light": "{space/25}",
+            "Dark": "{space/25}"
+          }
+        },
+        {
+          "name": "size/icon-button/sm",
+          "type": "FLOAT",
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": "var(--size-icon-button-sm)",
+          "values": {
+            "Light": "{control/sm}",
+            "Dark": "{control/sm}"
+          }
+        },
+        {
+          "name": "size/icon-button/md",
+          "type": "FLOAT",
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": "var(--size-icon-button-md)",
+          "values": {
+            "Light": "{control/md}",
+            "Dark": "{control/md}"
+          }
+        },
+        {
+          "name": "size/icon-button/lg",
+          "type": "FLOAT",
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": "var(--size-icon-button-lg)",
+          "values": {
+            "Light": "{control/lg}",
+            "Dark": "{control/lg}"
+          }
+        },
+        {
+          "name": "size/checkbox/sm",
+          "type": "FLOAT",
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": "var(--size-checkbox-sm)",
+          "values": {
+            "Light": "{space/200}",
+            "Dark": "{space/200}"
+          }
+        },
+        {
+          "name": "size/checkbox/md",
+          "type": "FLOAT",
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": "var(--size-checkbox-md)",
+          "values": {
+            "Light": "{space/250}",
+            "Dark": "{space/250}"
+          }
+        },
+        {
+          "name": "size/dot",
+          "type": "FLOAT",
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": "var(--size-dot)",
+          "values": {
+            "Light": "{space/100}",
+            "Dark": "{space/100}"
+          }
+        },
+        {
+          "name": "size/divider/length",
+          "type": "FLOAT",
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": "var(--size-divider-length)",
+          "values": {
+            "Light": "{container/sm}",
+            "Dark": "{container/sm}"
+          }
+        },
+        {
+          "name": "border/width/divider/subtle",
+          "type": "FLOAT",
+          "scopes": [
+            "STROKE_FLOAT"
+          ],
+          "codeSyntax": "var(--border-width-divider-subtle)",
+          "values": {
+            "Light": "{border-width/100}",
+            "Dark": "{border-width/100}"
+          }
+        },
+        {
+          "name": "border/width/divider/strong",
+          "type": "FLOAT",
+          "scopes": [
+            "STROKE_FLOAT"
+          ],
+          "codeSyntax": "var(--border-width-divider-strong)",
+          "values": {
+            "Light": "{border-width/200}",
+            "Dark": "{border-width/200}"
+          }
+        },
+        {
+          "name": "font/code/family",
+          "type": "STRING",
+          "scopes": [
+            "FONT_FAMILY"
+          ],
+          "codeSyntax": "var(--font-code-family)",
+          "values": {
+            "Light": "{font/family/mono}",
+            "Dark": "{font/family/mono}"
+          }
+        },
+        {
+          "name": "color/action/destructive/background",
+          "type": "COLOR",
+          "scopes": [
+            "ALL_FILLS",
+            "STROKE_COLOR"
+          ],
+          "codeSyntax": "var(--color-action-destructive-background)",
+          "values": {
+            "Light": "{color/red/600}",
+            "Dark": "{color/red/500}"
+          }
+        },
+        {
+          "name": "color/action/destructive/background-hover",
+          "type": "COLOR",
+          "scopes": [
+            "ALL_FILLS",
+            "STROKE_COLOR"
+          ],
+          "codeSyntax": "var(--color-action-destructive-background-hover)",
+          "values": {
+            "Light": "{color/red/700}",
+            "Dark": "{color/red/400}"
+          }
+        },
+        {
+          "name": "color/action/destructive/foreground",
+          "type": "COLOR",
+          "scopes": [
+            "ALL_FILLS",
+            "STROKE_COLOR"
+          ],
+          "codeSyntax": "var(--color-action-destructive-foreground)",
+          "values": {
+            "Light": "{color/white}",
+            "Dark": "{color/white}"
+          }
+        },
+        {
+          "name": "color/action/ghost/background",
+          "type": "COLOR",
+          "scopes": [
+            "ALL_FILLS",
+            "STROKE_COLOR"
+          ],
+          "codeSyntax": "var(--color-action-ghost-background)",
+          "values": {
+            "Light": "{color/gray/50}",
+            "Dark": "{color/gray/800}"
+          }
+        },
+        {
+          "name": "color/action/ghost/foreground",
+          "type": "COLOR",
+          "scopes": [
+            "ALL_FILLS",
+            "STROKE_COLOR"
+          ],
+          "codeSyntax": "var(--color-action-ghost-foreground)",
+          "values": {
+            "Light": "{color/gray/700}",
+            "Dark": "{color/gray/200}"
+          }
+        },
+        {
+          "name": "color/action/ghost/background-hover",
+          "type": "COLOR",
+          "scopes": [
+            "ALL_FILLS",
+            "STROKE_COLOR"
+          ],
+          "codeSyntax": "var(--color-action-ghost-background-hover)",
+          "values": {
+            "Light": "{color/gray/200}",
+            "Dark": "{color/gray/700}"
           }
         },
         {
@@ -3203,6 +2715,105 @@
           }
         },
         {
+          "name": "size/toolbar/sm",
+          "type": "FLOAT",
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": "var(--size-toolbar-sm)",
+          "values": {
+            "Light": "{control/sm}",
+            "Dark": "{control/sm}"
+          }
+        },
+        {
+          "name": "size/toolbar/md",
+          "type": "FLOAT",
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": "var(--size-toolbar-md)",
+          "values": {
+            "Light": "{control/md}",
+            "Dark": "{control/md}"
+          }
+        },
+        {
+          "name": "size/toolbar/lg",
+          "type": "FLOAT",
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": "var(--size-toolbar-lg)",
+          "values": {
+            "Light": "{control/lg}",
+            "Dark": "{control/lg}"
+          }
+        },
+        {
+          "name": "space/list/compact",
+          "type": "FLOAT",
+          "scopes": [
+            "WIDTH_HEIGHT",
+            "GAP"
+          ],
+          "codeSyntax": "var(--space-list-compact)",
+          "values": {
+            "Light": "{space/50}",
+            "Dark": "{space/50}"
+          }
+        },
+        {
+          "name": "space/list/balanced",
+          "type": "FLOAT",
+          "scopes": [
+            "WIDTH_HEIGHT",
+            "GAP"
+          ],
+          "codeSyntax": "var(--space-list-balanced)",
+          "values": {
+            "Light": "{space/100}",
+            "Dark": "{space/100}"
+          }
+        },
+        {
+          "name": "space/list/spacious",
+          "type": "FLOAT",
+          "scopes": [
+            "WIDTH_HEIGHT",
+            "GAP"
+          ],
+          "codeSyntax": "var(--space-list-spacious)",
+          "values": {
+            "Light": "{space/150}",
+            "Dark": "{space/150}"
+          }
+        },
+        {
+          "name": "font/tab/default/weight",
+          "type": "FLOAT",
+          "scopes": [
+            "FONT_WEIGHT"
+          ],
+          "codeSyntax": "var(--font-tab-default-weight)",
+          "values": {
+            "Light": "{font/weight/medium}",
+            "Dark": "{font/weight/medium}"
+          }
+        },
+        {
+          "name": "font/tab/selected/weight",
+          "type": "FLOAT",
+          "scopes": [
+            "FONT_WEIGHT"
+          ],
+          "codeSyntax": "var(--font-tab-selected-weight)",
+          "values": {
+            "Light": "{font/weight/semibold}",
+            "Dark": "{font/weight/semibold}"
+          }
+        },
+        {
           "name": "color/section/section",
           "type": "COLOR",
           "scopes": [
@@ -3333,6 +2944,32 @@
           }
         },
         {
+          "name": "color/nav/default/background",
+          "type": "COLOR",
+          "scopes": [
+            "ALL_FILLS",
+            "STROKE_COLOR"
+          ],
+          "codeSyntax": "var(--color-nav-default-background)",
+          "values": {
+            "Light": "{color/white}",
+            "Dark": "{color/gray/700}"
+          }
+        },
+        {
+          "name": "color/nav/default/foreground",
+          "type": "COLOR",
+          "scopes": [
+            "ALL_FILLS",
+            "STROKE_COLOR"
+          ],
+          "codeSyntax": "var(--color-nav-default-foreground)",
+          "values": {
+            "Light": "{color/gray/700}",
+            "Dark": "{color/gray/200}"
+          }
+        },
+        {
           "name": "color/nav/selected/background",
           "type": "COLOR",
           "scopes": [
@@ -3359,29 +2996,256 @@
           }
         },
         {
-          "name": "color/nav/default/background",
-          "type": "COLOR",
+          "name": "size/progress/width",
+          "type": "FLOAT",
           "scopes": [
-            "ALL_FILLS",
-            "STROKE_COLOR"
+            "WIDTH_HEIGHT"
           ],
-          "codeSyntax": "var(--color-nav-default-background)",
+          "codeSyntax": "var(--size-progress-width)",
           "values": {
-            "Light": "{color/white}",
-            "Dark": "{color/gray/700}"
+            "Light": "{container/sm}",
+            "Dark": "{container/sm}"
           }
         },
         {
-          "name": "color/nav/default/foreground",
-          "type": "COLOR",
+          "name": "size/progress/height",
+          "type": "FLOAT",
           "scopes": [
-            "ALL_FILLS",
-            "STROKE_COLOR"
+            "WIDTH_HEIGHT"
           ],
-          "codeSyntax": "var(--color-nav-default-foreground)",
+          "codeSyntax": "var(--size-progress-height)",
           "values": {
-            "Light": "{color/gray/700}",
-            "Dark": "{color/gray/200}"
+            "Light": "{space/100}",
+            "Dark": "{space/100}"
+          }
+        },
+        {
+          "name": "size/slider/width",
+          "type": "FLOAT",
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": "var(--size-slider-width)",
+          "values": {
+            "Light": "{container/sm}",
+            "Dark": "{container/sm}"
+          }
+        },
+        {
+          "name": "size/slider/track",
+          "type": "FLOAT",
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": "var(--size-slider-track)",
+          "values": {
+            "Light": "{space/50}",
+            "Dark": "{space/50}"
+          }
+        },
+        {
+          "name": "size/slider/thumb",
+          "type": "FLOAT",
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": "var(--size-slider-thumb)",
+          "values": {
+            "Light": "{space/200}",
+            "Dark": "{space/200}"
+          }
+        },
+        {
+          "name": "size/switch/width",
+          "type": "FLOAT",
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": "var(--size-switch-width)",
+          "values": {
+            "Light": "{space/400}",
+            "Dark": "{space/400}"
+          }
+        },
+        {
+          "name": "size/switch/height",
+          "type": "FLOAT",
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": "var(--size-switch-height)",
+          "values": {
+            "Light": "{space/250}",
+            "Dark": "{space/250}"
+          }
+        },
+        {
+          "name": "size/switch/thumb",
+          "type": "FLOAT",
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": "var(--size-switch-thumb)",
+          "values": {
+            "Light": "{space/200}",
+            "Dark": "{space/200}"
+          }
+        },
+        {
+          "name": "size/spinner/sm",
+          "type": "FLOAT",
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": "var(--size-spinner-sm)",
+          "values": {
+            "Light": "{space/150}",
+            "Dark": "{space/150}"
+          }
+        },
+        {
+          "name": "size/spinner/md",
+          "type": "FLOAT",
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": "var(--size-spinner-md)",
+          "values": {
+            "Light": "{space/200}",
+            "Dark": "{space/200}"
+          }
+        },
+        {
+          "name": "size/spinner/lg",
+          "type": "FLOAT",
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": "var(--size-spinner-lg)",
+          "values": {
+            "Light": "{space/300}",
+            "Dark": "{space/300}"
+          }
+        },
+        {
+          "name": "size/skeleton/text/width",
+          "type": "FLOAT",
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": "var(--size-skeleton-text-width)",
+          "values": {
+            "Light": "{container/xs}",
+            "Dark": "{container/xs}"
+          }
+        },
+        {
+          "name": "size/skeleton/text/height",
+          "type": "FLOAT",
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": "var(--size-skeleton-text-height)",
+          "values": {
+            "Light": "{space/150}",
+            "Dark": "{space/150}"
+          }
+        },
+        {
+          "name": "size/skeleton/rect/width",
+          "type": "FLOAT",
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": "var(--size-skeleton-rect-width)",
+          "values": {
+            "Light": "{container/sm}",
+            "Dark": "{container/sm}"
+          }
+        },
+        {
+          "name": "size/skeleton/rect/height",
+          "type": "FLOAT",
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": "var(--size-skeleton-rect-height)",
+          "values": {
+            "Light": "{space/400}",
+            "Dark": "{space/400}"
+          }
+        },
+        {
+          "name": "size/skeleton/circle/width",
+          "type": "FLOAT",
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": "var(--size-skeleton-circle-width)",
+          "values": {
+            "Light": "{space/400}",
+            "Dark": "{space/400}"
+          }
+        },
+        {
+          "name": "size/skeleton/circle/height",
+          "type": "FLOAT",
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": "var(--size-skeleton-circle-height)",
+          "values": {
+            "Light": "{space/400}",
+            "Dark": "{space/400}"
+          }
+        },
+        {
+          "name": "radius/skeleton/text",
+          "type": "FLOAT",
+          "scopes": [
+            "CORNER_RADIUS"
+          ],
+          "codeSyntax": "var(--radius-skeleton-text)",
+          "values": {
+            "Light": "{radius/100}",
+            "Dark": "{radius/100}"
+          }
+        },
+        {
+          "name": "radius/skeleton/rect",
+          "type": "FLOAT",
+          "scopes": [
+            "CORNER_RADIUS"
+          ],
+          "codeSyntax": "var(--radius-skeleton-rect)",
+          "values": {
+            "Light": "{radius/200}",
+            "Dark": "{radius/200}"
+          }
+        },
+        {
+          "name": "radius/skeleton/circle",
+          "type": "FLOAT",
+          "scopes": [
+            "CORNER_RADIUS"
+          ],
+          "codeSyntax": "var(--radius-skeleton-circle)",
+          "values": {
+            "Light": "{radius/pill}",
+            "Dark": "{radius/pill}"
+          }
+        },
+        {
+          "name": "space/avatarGroup/overlap",
+          "type": "FLOAT",
+          "scopes": [
+            "WIDTH_HEIGHT",
+            "GAP"
+          ],
+          "codeSyntax": "var(--space-avatarGroup-overlap)",
+          "values": {
+            "Light": "{space/overlap}",
+            "Dark": "{space/overlap}"
           }
         },
         {
@@ -3515,7 +3379,143 @@
           }
         }
       ]
+    },
+    {
+      "name": "Brand",
+      "modes": [
+        "Default",
+        "Aurora"
+      ],
+      "variables": [
+        {
+          "name": "brand/accent/100",
+          "type": "COLOR",
+          "scopes": [
+            "ALL_FILLS",
+            "STROKE_COLOR"
+          ],
+          "codeSyntax": "var(--brand-accent-100)",
+          "values": {
+            "Default": "{color/blue/100}",
+            "Aurora": "{color/teal/100}"
+          }
+        },
+        {
+          "name": "brand/accent/300",
+          "type": "COLOR",
+          "scopes": [
+            "ALL_FILLS",
+            "STROKE_COLOR"
+          ],
+          "codeSyntax": "var(--brand-accent-300)",
+          "values": {
+            "Default": "{color/blue/300}",
+            "Aurora": "{color/teal/300}"
+          }
+        },
+        {
+          "name": "brand/accent/400",
+          "type": "COLOR",
+          "scopes": [
+            "ALL_FILLS",
+            "STROKE_COLOR"
+          ],
+          "codeSyntax": "var(--brand-accent-400)",
+          "values": {
+            "Default": "{color/blue/400}",
+            "Aurora": "{color/teal/400}"
+          }
+        },
+        {
+          "name": "brand/accent/500",
+          "type": "COLOR",
+          "scopes": [
+            "ALL_FILLS",
+            "STROKE_COLOR"
+          ],
+          "codeSyntax": "var(--brand-accent-500)",
+          "values": {
+            "Default": "{color/blue/500}",
+            "Aurora": "{color/teal/500}"
+          }
+        },
+        {
+          "name": "brand/accent/600",
+          "type": "COLOR",
+          "scopes": [
+            "ALL_FILLS",
+            "STROKE_COLOR"
+          ],
+          "codeSyntax": "var(--brand-accent-600)",
+          "values": {
+            "Default": "{color/blue/600}",
+            "Aurora": "{color/teal/600}"
+          }
+        },
+        {
+          "name": "brand/accent/700",
+          "type": "COLOR",
+          "scopes": [
+            "ALL_FILLS",
+            "STROKE_COLOR"
+          ],
+          "codeSyntax": "var(--brand-accent-700)",
+          "values": {
+            "Default": "{color/blue/700}",
+            "Aurora": "{color/teal/700}"
+          }
+        },
+        {
+          "name": "brand/accent/900",
+          "type": "COLOR",
+          "scopes": [
+            "ALL_FILLS",
+            "STROKE_COLOR"
+          ],
+          "codeSyntax": "var(--brand-accent-900)",
+          "values": {
+            "Default": "{color/blue/900}",
+            "Aurora": "{color/teal/900}"
+          }
+        },
+        {
+          "name": "brand/radius/control",
+          "type": "FLOAT",
+          "scopes": [
+            "CORNER_RADIUS"
+          ],
+          "codeSyntax": "var(--brand-radius-control)",
+          "values": {
+            "Default": "{radius/200}",
+            "Aurora": "{radius/none}"
+          }
+        },
+        {
+          "name": "brand/font/control-family",
+          "type": "STRING",
+          "scopes": [
+            "FONT_FAMILY"
+          ],
+          "codeSyntax": "var(--brand-font-control-family)",
+          "values": {
+            "Default": "{font/family/sans}",
+            "Aurora": "{font/family/mono}"
+          }
+        },
+        {
+          "name": "brand/font/control-weight",
+          "type": "FLOAT",
+          "scopes": [
+            "FONT_WEIGHT"
+          ],
+          "codeSyntax": "var(--brand-font-control-weight)",
+          "values": {
+            "Default": "{font/weight/medium}",
+            "Aurora": "{font/weight/semibold}"
+          }
+        }
+      ]
     }
   ],
-  "extractedAt": 1783339916111
+  "extractedAt": 1783527446758
 }

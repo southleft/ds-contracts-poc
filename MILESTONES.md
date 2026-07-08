@@ -122,6 +122,23 @@ marker, ridden by matching text nodes. Button v1.5.0 ships previews.
 **Eval suite: 47/47.**
 
 
+## 2026-07-08 — Full-circle sync: drift acknowledged → resolved → ratchet retired
+
+The main file caught up with three contract versions in one governed pass
+(Badge v1.1.0, Button v1.5.0 with the State axis, Heading v1.0.0 first sync),
+plus 7 minted text styles and text-style adoption across all 31 variant sets.
+The first pass exposed two amend gaps at live-file scale — 17 legacy standalone
+components duplicated by the marker-only identity check, and the State axis
+gained by duplication instead of rename — both repaired on canvas with every
+original node ID preserved, and both fixed at the source (anchor-key identity
+fallback; rename-matching for axis changes). The verification pass ran with
+zero creates, zero duplicates, zero extras; the snapshot was re-extracted and
+**the parity baseline is empty again**: no acknowledged drift anywhere in the
+system. Also surfaced for the queue: `figma.fileKey` is null in the dev-plugin
+runtime, so WRONG-FILE guards only bind over the bridge transport — a
+file-identity marker check is the fix.
+
+
 ---
 
 **Standing scoreboard** (updated with each milestone):

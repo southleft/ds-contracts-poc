@@ -3,73 +3,30 @@
   "fileKey": "8nim1d0IPnehMxA7B7SYxC",
   "sets": [
     {
-      "name": "Button",
-      "nodeId": "5:21",
-      "key": "1b5d2a573f3f39404af396bdbe944a30ca0eaec3",
-      "variantCount": 12,
+      "name": "AccordionItem",
+      "nodeId": "11:1171",
+      "key": "ba5ec62aa3c19bf86b7bcff8eb61ef1e86daad35",
+      "description": "A collapsible content row: trigger with a state chevron, content revealed when open. API mirrors industry convention (Astryx Collapsible) with the open state flattened to a closed/open enum so both surfaces render both states; the toggle itself is contract-declared (onToggle + aria-expanded, generated); richer behavior stays a declared boundary. \u2014 governed by contract ds.accordion-item v1.1.0\nEvent (code): onToggle \u2014 fires on trigger activation. Toggles state: closed \u21c4 open.",
+      "variantCount": 2,
       "properties": {
-        "Loading#2:0": {
-          "type": "BOOLEAN",
-          "defaultValue": false,
-          "variantOptions": null,
-          "preferredValues": null
-        },
-        "Label#5:18": {
+        "Title#11:530": {
           "type": "TEXT",
-          "defaultValue": "Button",
+          "defaultValue": "Section title",
           "variantOptions": null,
           "preferredValues": null
         },
-        "Disabled#5:19": {
-          "type": "BOOLEAN",
-          "defaultValue": false,
+        "Children#11:531": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "2:26",
           "variantOptions": null,
-          "preferredValues": null
+          "preferredValues": []
         },
-        "Variant": {
+        "State": {
           "type": "VARIANT",
-          "defaultValue": "Primary",
+          "defaultValue": "Closed",
           "variantOptions": [
-            "Primary",
-            "Secondary",
-            "Danger",
-            "Ghost"
-          ],
-          "preferredValues": null
-        },
-        "Size": {
-          "type": "VARIANT",
-          "defaultValue": "Medium",
-          "variantOptions": [
-            "Small",
-            "Medium",
-            "Large"
-          ],
-          "preferredValues": null
-        }
-      },
-      "nestedInstances": []
-    },
-    {
-      "name": "Badge",
-      "nodeId": "6:10",
-      "key": "89f1fb2d4580116cea4be5d4ca340de216a27819",
-      "variantCount": 4,
-      "properties": {
-        "Label#6:4": {
-          "type": "TEXT",
-          "defaultValue": "Badge",
-          "variantOptions": null,
-          "preferredValues": null
-        },
-        "Variant": {
-          "type": "VARIANT",
-          "defaultValue": "Info",
-          "variantOptions": [
-            "Info",
-            "Success",
-            "Warning",
-            "Danger"
+            "Closed",
+            "Open"
           ],
           "preferredValues": null
         }
@@ -80,6 +37,7 @@
       "name": "Avatar",
       "nodeId": "2:20",
       "key": "b39059e770141b713f28ae1816be3ed756cd79da",
+      "description": "Represents a person or entity with initials. Non-interactive. \u2014 governed by contract ds.avatar v1.0.0",
       "variantCount": 2,
       "properties": {
         "Initials#2:12": {
@@ -101,139 +59,50 @@
       "nestedInstances": []
     },
     {
-      "name": "Card",
-      "nodeId": "2:21",
-      "key": "7cd7011e4f2374161cd212f02992c7fd0f899430",
+      "name": "AvatarGroup",
+      "nodeId": "11:1172",
+      "key": "41e084d38457f2aebd4611e3ebd922a56c2c392d",
+      "description": "Stacked avatars with an overflow count. API mirrors industry convention (Astryx AvatarGroup): overlapping layout \u2014 expressed as a negative-margin child rule in CSS and negative item spacing on the canvas. \u2014 governed by contract ds.avatar-group v1.0.0",
       "variantCount": 1,
       "properties": {
-        "Title#2:13": {
+        "Overflow#11:533": {
           "type": "TEXT",
-          "defaultValue": "Card title",
-          "variantOptions": null,
-          "preferredValues": null
-        },
-        "Body#2:14": {
-          "type": "INSTANCE_SWAP",
-          "defaultValue": "2:26",
-          "variantOptions": null,
-          "preferredValues": []
-        },
-        "Actions#2:15": {
-          "type": "INSTANCE_SWAP",
-          "defaultValue": "2:26",
-          "variantOptions": null,
-          "preferredValues": [
-            {
-              "type": "COMPONENT_SET",
-              "key": "1b5d2a573f3f39404af396bdbe944a30ca0eaec3"
-            },
-            {
-              "type": "COMPONENT_SET",
-              "key": "89f1fb2d4580116cea4be5d4ca340de216a27819"
-            }
-          ]
-        },
-        "Show Actions#2:16": {
-          "type": "BOOLEAN",
-          "defaultValue": true,
+          "defaultValue": "+3",
           "variantOptions": null,
           "preferredValues": null
         }
       },
       "nestedInstances": [
-        "Avatar",
-        "Slot"
+        "Avatar"
       ]
     },
     {
-      "name": "TableCell",
-      "nodeId": "2:48",
-      "key": "b440cb0ab4bd83de2491b2302ab1ccb9c3e0f2d1",
-      "variantCount": 2,
+      "name": "Badge",
+      "nodeId": "6:10",
+      "key": "89f1fb2d4580116cea4be5d4ca340de216a27819",
+      "description": "Communicates status or categorization at a glance. Non-interactive. \u2014 governed by contract ds.badge v1.1.0",
+      "variantCount": 5,
       "properties": {
-        "Content#2:19": {
+        "Label#6:4": {
           "type": "TEXT",
-          "defaultValue": "Cell",
+          "defaultValue": "Badge",
           "variantOptions": null,
           "preferredValues": null
         },
-        "Density": {
+        "Variant": {
           "type": "VARIANT",
-          "defaultValue": "Comfortable",
+          "defaultValue": "Info",
           "variantOptions": [
-            "Comfortable",
-            "Compact"
+            "Info",
+            "Success",
+            "Warning",
+            "Danger",
+            "Error"
           ],
           "preferredValues": null
         }
       },
       "nestedInstances": []
-    },
-    {
-      "name": "TableHeaderCell",
-      "nodeId": "2:53",
-      "key": "91bf99af47cb2e09190eed770012e9c99661294f",
-      "variantCount": 2,
-      "properties": {
-        "Label#2:22": {
-          "type": "TEXT",
-          "defaultValue": "Header",
-          "variantOptions": null,
-          "preferredValues": null
-        },
-        "Density": {
-          "type": "VARIANT",
-          "defaultValue": "Comfortable",
-          "variantOptions": [
-            "Comfortable",
-            "Compact"
-          ],
-          "preferredValues": null
-        }
-      },
-      "nestedInstances": []
-    },
-    {
-      "name": "TableRow",
-      "nodeId": "2:70",
-      "key": "2630a1f30455c0b4d906930e9b3815cc0437fe1f",
-      "variantCount": 2,
-      "properties": {
-        "State": {
-          "type": "VARIANT",
-          "defaultValue": "Default",
-          "variantOptions": [
-            "Default",
-            "Selected"
-          ],
-          "preferredValues": null
-        }
-      },
-      "nestedInstances": [
-        "TableCell"
-      ]
-    },
-    {
-      "name": "Table",
-      "nodeId": "2:154",
-      "key": "d3e8c9c378ea2fd072c2eb08545a30565fa77614",
-      "variantCount": 2,
-      "properties": {
-        "Density": {
-          "type": "VARIANT",
-          "defaultValue": "Comfortable",
-          "variantOptions": [
-            "Comfortable",
-            "Compact"
-          ],
-          "preferredValues": null
-        }
-      },
-      "nestedInstances": [
-        "TableHeaderCell",
-        "TableRow",
-        "TableCell"
-      ]
     },
     {
       "name": "Banner",
@@ -333,10 +202,311 @@
       ]
     },
     {
+      "name": "BreadcrumbItem",
+      "nodeId": "11:1182",
+      "key": "7b9283aad1ddc94a1a597804a79a330316b3aaa1",
+      "description": "One link in a breadcrumb trail with its leading separator. API mirrors industry convention (Astryx BreadcrumbItem); the first item is authored with hasSeparator off (positional part logic is a documented gap), and aria-current needs conditional attributes \u2014 also documented. \u2014 governed by contract ds.breadcrumb-item v1.0.0",
+      "variantCount": 1,
+      "properties": {
+        "Label#11:534": {
+          "type": "TEXT",
+          "defaultValue": "Page",
+          "variantOptions": null,
+          "preferredValues": null
+        },
+        "Separator#11:535": {
+          "type": "BOOLEAN",
+          "defaultValue": true,
+          "variantOptions": null,
+          "preferredValues": null
+        },
+        "Href#11:536": {
+          "type": "TEXT",
+          "defaultValue": "#",
+          "variantOptions": null,
+          "preferredValues": null
+        }
+      },
+      "nestedInstances": []
+    },
+    {
+      "name": "Breadcrumbs",
+      "nodeId": "11:1186",
+      "key": "853821e9b58b03010cfeda157fd8ffcf2338bb15",
+      "description": "Navigation trail from root to the current page. API mirrors industry convention (Astryx Breadcrumbs): a nav landmark holding BreadcrumbItems; keep trails to five levels or fewer. \u2014 governed by contract ds.breadcrumbs v1.0.0",
+      "variantCount": 1,
+      "properties": {
+        "Label#11:537": {
+          "type": "TEXT",
+          "defaultValue": "Breadcrumb",
+          "variantOptions": null,
+          "preferredValues": null
+        }
+      },
+      "nestedInstances": [
+        "BreadcrumbItem"
+      ]
+    },
+    {
+      "name": "Button",
+      "nodeId": "5:21",
+      "key": "1b5d2a573f3f39404af396bdbe944a30ca0eaec3",
+      "description": "Triggers an action or event. Use one primary button per context. \u2014 governed by contract ds.button v1.5.0",
+      "variantCount": 24,
+      "properties": {
+        "Loading#2:0": {
+          "type": "BOOLEAN",
+          "defaultValue": false,
+          "variantOptions": null,
+          "preferredValues": null
+        },
+        "Label#5:18": {
+          "type": "TEXT",
+          "defaultValue": "Button",
+          "variantOptions": null,
+          "preferredValues": null
+        },
+        "Disabled#5:19": {
+          "type": "BOOLEAN",
+          "defaultValue": false,
+          "variantOptions": null,
+          "preferredValues": null
+        },
+        "Variant": {
+          "type": "VARIANT",
+          "defaultValue": "Primary",
+          "variantOptions": [
+            "Primary",
+            "Secondary",
+            "Danger",
+            "Ghost"
+          ],
+          "preferredValues": null
+        },
+        "Size": {
+          "type": "VARIANT",
+          "defaultValue": "Medium",
+          "variantOptions": [
+            "Small",
+            "Medium",
+            "Large"
+          ],
+          "preferredValues": null
+        },
+        "State": {
+          "type": "VARIANT",
+          "defaultValue": "Default",
+          "variantOptions": [
+            "Default",
+            "Hover",
+            "Focus Visible",
+            "Disabled"
+          ],
+          "preferredValues": null
+        }
+      },
+      "nestedInstances": []
+    },
+    {
+      "name": "Card",
+      "nodeId": "2:21",
+      "key": "7cd7011e4f2374161cd212f02992c7fd0f899430",
+      "description": "Groups related content behind one subject. Composes an Avatar, a bound title, a default body slot, and a constrained actions slot. \u2014 governed by contract ds.card v1.0.0",
+      "variantCount": 1,
+      "properties": {
+        "Title#2:13": {
+          "type": "TEXT",
+          "defaultValue": "Card title",
+          "variantOptions": null,
+          "preferredValues": null
+        },
+        "Body#2:14": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "2:26",
+          "variantOptions": null,
+          "preferredValues": []
+        },
+        "Actions#2:15": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "2:26",
+          "variantOptions": null,
+          "preferredValues": [
+            {
+              "type": "COMPONENT_SET",
+              "key": "1b5d2a573f3f39404af396bdbe944a30ca0eaec3"
+            },
+            {
+              "type": "COMPONENT_SET",
+              "key": "89f1fb2d4580116cea4be5d4ca340de216a27819"
+            }
+          ]
+        },
+        "Show Actions#2:16": {
+          "type": "BOOLEAN",
+          "defaultValue": true,
+          "variantOptions": null,
+          "preferredValues": null
+        }
+      },
+      "nestedInstances": [
+        "Avatar",
+        "Slot"
+      ]
+    },
+    {
+      "name": "ChatMessage",
+      "nodeId": "11:826",
+      "key": "4af367f1f1c5044640cd31d2cbdd3e575b1bbb54",
+      "description": "Sender-context wrapper for a chat message: avatar, name, bubble content, and metadata. API mirrors industry convention (Astryx ChatMessage); the bubble color follows sender, and sender-based alignment flips via layoutByProp \u2014 user messages render right-aligned (row-reverse root, end-aligned body) on both surfaces. \u2014 governed by contract ds.chat-message v1.1.0",
+      "variantCount": 3,
+      "properties": {
+        "Name#11:399": {
+          "type": "TEXT",
+          "defaultValue": "Assistant",
+          "variantOptions": null,
+          "preferredValues": null
+        },
+        "Avatar#11:400": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "2:26",
+          "variantOptions": null,
+          "preferredValues": [
+            {
+              "type": "COMPONENT_SET",
+              "key": "b39059e770141b713f28ae1816be3ed756cd79da"
+            }
+          ]
+        },
+        "Show Avatar#11:401": {
+          "type": "BOOLEAN",
+          "defaultValue": true,
+          "variantOptions": null,
+          "preferredValues": null
+        },
+        "Children#11:402": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "2:26",
+          "variantOptions": null,
+          "preferredValues": []
+        },
+        "Metadata#11:403": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "2:26",
+          "variantOptions": null,
+          "preferredValues": [
+            {
+              "type": "COMPONENT_SET",
+              "key": "25f176c40364af596d09a7d897e371208934ff43"
+            }
+          ]
+        },
+        "Show Metadata#11:404": {
+          "type": "BOOLEAN",
+          "defaultValue": true,
+          "variantOptions": null,
+          "preferredValues": null
+        },
+        "Sender": {
+          "type": "VARIANT",
+          "defaultValue": "Assistant",
+          "variantOptions": [
+            "Assistant",
+            "User",
+            "System"
+          ],
+          "preferredValues": null
+        }
+      },
+      "nestedInstances": [
+        "Slot"
+      ]
+    },
+    {
+      "name": "ChatMessageMetadata",
+      "nodeId": "11:789",
+      "key": "25f176c40364af596d09a7d897e371208934ff43",
+      "description": "Metadata row for a chat message: delivery status, timestamp, and footer content. API mirrors industry convention (Astryx ChatMessageMetadata): status drives the icon. \u2014 governed by contract ds.chat-message-metadata v1.0.0",
+      "variantCount": 5,
+      "properties": {
+        "Timestamp#11:378": {
+          "type": "TEXT",
+          "defaultValue": "2:14 PM",
+          "variantOptions": null,
+          "preferredValues": null
+        },
+        "Footer#11:379": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "2:26",
+          "variantOptions": null,
+          "preferredValues": []
+        },
+        "Show Footer#11:380": {
+          "type": "BOOLEAN",
+          "defaultValue": true,
+          "variantOptions": null,
+          "preferredValues": null
+        },
+        "Status": {
+          "type": "VARIANT",
+          "defaultValue": "Sent",
+          "variantOptions": [
+            "Sent",
+            "Sending",
+            "Delivered",
+            "Read",
+            "Error"
+          ],
+          "preferredValues": null
+        }
+      },
+      "nestedInstances": [
+        "Slot"
+      ]
+    },
+    {
+      "name": "ChatSystemMessage",
+      "nodeId": "11:839",
+      "key": "2c5056fcf5f0b075ec7be6019f20eb8cdc9d5efb",
+      "description": "Centered system message for non-sender chat content \u2014 date separators, membership changes, status notices. API mirrors industry convention (Astryx ChatSystemMessage): the divider variant adds a line on each side. \u2014 governed by contract ds.chat-system-message v1.0.0",
+      "variantCount": 2,
+      "properties": {
+        "Message#11:411": {
+          "type": "TEXT",
+          "defaultValue": "Today",
+          "variantOptions": null,
+          "preferredValues": null
+        },
+        "Icon#11:412": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "2:26",
+          "variantOptions": null,
+          "preferredValues": []
+        },
+        "Show Icon#11:413": {
+          "type": "BOOLEAN",
+          "defaultValue": true,
+          "variantOptions": null,
+          "preferredValues": null
+        },
+        "Variant": {
+          "type": "VARIANT",
+          "defaultValue": "Default",
+          "variantOptions": [
+            "Default",
+            "Divider"
+          ],
+          "preferredValues": null
+        }
+      },
+      "nestedInstances": [
+        "Slot"
+      ]
+    },
+    {
       "name": "Checkbox",
       "nodeId": "11:315",
       "key": "9bc54e5a3f7c074b9ed016dfac8edff95ec45e23",
-      "description": "Toggles a single on/off value \u2014 settings, terms acceptance, opt-ins. API mirrors industry convention (Astryx CheckboxInput): checked, unchecked, and indeterminate are prop-driven appearance states. \u2014 governed by contract ds.checkbox v1.0.0",
+      "description": "Toggles a single on/off value \u2014 settings, terms acceptance, opt-ins. API mirrors industry convention (Astryx CheckboxInput): checked, unchecked, and indeterminate are prop-driven appearance states. \u2014 governed by contract ds.checkbox v1.1.0\nEvent (code): onToggle \u2014 fires on box activation. Toggles value: unchecked \u21c4 checked.",
       "variantCount": 6,
       "properties": {
         "Label#11:60": {
@@ -367,6 +537,43 @@
           "variantOptions": [
             "Medium",
             "Small"
+          ],
+          "preferredValues": null
+        }
+      },
+      "nestedInstances": []
+    },
+    {
+      "name": "Citation",
+      "nodeId": "11:844",
+      "key": "84b0a3c9abb3122d60820f8047a8b6d200956067",
+      "description": "Inline reference to an external source \u2014 attribution in AI-generated responses, articles, anywhere provenance matters. API mirrors industry convention (Astryx Citation): label chips or compact numbered badges. \u2014 governed by contract ds.citation v1.0.0",
+      "variantCount": 2,
+      "properties": {
+        "Source#11:418": {
+          "type": "TEXT",
+          "defaultValue": "example.com",
+          "variantOptions": null,
+          "preferredValues": null
+        },
+        "Href#11:419": {
+          "type": "TEXT",
+          "defaultValue": "https://example.com",
+          "variantOptions": null,
+          "preferredValues": null
+        },
+        "Number#11:420": {
+          "type": "TEXT",
+          "defaultValue": "1",
+          "variantOptions": null,
+          "preferredValues": null
+        },
+        "Variant": {
+          "type": "VARIANT",
+          "defaultValue": "Label",
+          "variantOptions": [
+            "Label",
+            "Number"
           ],
           "preferredValues": null
         }
@@ -462,6 +669,87 @@
       ]
     },
     {
+      "name": "Field",
+      "nodeId": "11:845",
+      "key": "e690d926c7f929fb354ba4aa0d3b355db929c444",
+      "description": "Form field wrapper providing a label, description, and required indicator around any control. API mirrors industry convention (Astryx Field): the label targets the control via inputID; validation status needs structured-object props \u2014 a documented gap. \u2014 governed by contract ds.field v1.0.0",
+      "variantCount": 1,
+      "properties": {
+        "Label#11:423": {
+          "type": "TEXT",
+          "defaultValue": "Field label",
+          "variantOptions": null,
+          "preferredValues": null
+        },
+        "Description#11:424": {
+          "type": "TEXT",
+          "defaultValue": "Helper text for the wrapped control.",
+          "variantOptions": null,
+          "preferredValues": null
+        },
+        "Children#11:425": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "2:26",
+          "variantOptions": null,
+          "preferredValues": []
+        },
+        "Required#11:426": {
+          "type": "BOOLEAN",
+          "defaultValue": false,
+          "variantOptions": null,
+          "preferredValues": null
+        },
+        "InputID#11:427": {
+          "type": "TEXT",
+          "defaultValue": "field-control",
+          "variantOptions": null,
+          "preferredValues": null
+        }
+      },
+      "nestedInstances": [
+        "Slot"
+      ]
+    },
+    {
+      "name": "Heading",
+      "nodeId": "32:1862",
+      "key": "72c05e001310fd06ca059cede948454f54edc4f8",
+      "description": "Sectioning heading whose rendered HTML element follows the level prop (h1\u2013h6) via semantics.elementByProp, with a visual size ramp on the existing control type scale \u2014 document outline and visual weight are deliberately independent axes. Text nodes carry no element semantics, so only code renders the element itself. \u2014 governed by contract ds.heading v1.0.0",
+      "variantCount": 18,
+      "properties": {
+        "Text#32:124": {
+          "type": "TEXT",
+          "defaultValue": "Heading",
+          "variantOptions": null,
+          "preferredValues": null
+        },
+        "Level": {
+          "type": "VARIANT",
+          "defaultValue": "H2",
+          "variantOptions": [
+            "H2",
+            "H1",
+            "H3",
+            "H4",
+            "H5",
+            "H6"
+          ],
+          "preferredValues": null
+        },
+        "Size": {
+          "type": "VARIANT",
+          "defaultValue": "Large",
+          "variantOptions": [
+            "Large",
+            "Small",
+            "Medium"
+          ],
+          "preferredValues": null
+        }
+      },
+      "nestedInstances": []
+    },
+    {
       "name": "IconButton",
       "nodeId": "11:378",
       "key": "ba2cfd0b9f6f47a728081edaf340c37cdeb53123",
@@ -513,6 +801,378 @@
       ]
     },
     {
+      "name": "Kbd",
+      "nodeId": "11:856",
+      "key": "798616e092adf3047e8e3586844c2bcb0530fe0a",
+      "description": "Renders a keyboard shortcut as a styled key badge for tooltips, menus, and help text. API mirrors industry convention (Astryx Kbd); multi-key parsing (\"mod+K\" into separate badges) is display logic \u2014 a documented gap, one badge per component for now. \u2014 governed by contract ds.kbd v1.0.0",
+      "variantCount": 1,
+      "properties": {
+        "Keys#11:428": {
+          "type": "TEXT",
+          "defaultValue": "\u2318K",
+          "variantOptions": null,
+          "preferredValues": null
+        }
+      },
+      "nestedInstances": []
+    },
+    {
+      "name": "List",
+      "nodeId": "11:963",
+      "key": "e506f83390b9f1495394675f91c6aa03a9317162",
+      "description": "Vertical collection of items with consistent density. API mirrors industry convention (Astryx List); dividers need sibling-selector styling and marker styles need list-style tokens \u2014 documented gaps. \u2014 governed by contract ds.list v1.0.0",
+      "variantCount": 3,
+      "properties": {
+        "Density": {
+          "type": "VARIANT",
+          "defaultValue": "Balanced",
+          "variantOptions": [
+            "Balanced",
+            "Compact",
+            "Spacious"
+          ],
+          "preferredValues": null
+        }
+      },
+      "nestedInstances": [
+        "ListItem",
+        "Slot"
+      ]
+    },
+    {
+      "name": "ListItem",
+      "nodeId": "11:857",
+      "key": "470b0337773739a1521b294855bed053c8e7eb33",
+      "description": "A single row in a List: label with optional description, leading and trailing content. API mirrors industry convention (Astryx ListItem); click/link behavior is a declared boundary. \u2014 governed by contract ds.list-item v1.0.0",
+      "variantCount": 1,
+      "properties": {
+        "Label#11:429": {
+          "type": "TEXT",
+          "defaultValue": "List item",
+          "variantOptions": null,
+          "preferredValues": null
+        },
+        "Description#11:430": {
+          "type": "TEXT",
+          "defaultValue": "Supporting detail for this item.",
+          "variantOptions": null,
+          "preferredValues": null
+        },
+        "StartContent#11:431": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "2:26",
+          "variantOptions": null,
+          "preferredValues": []
+        },
+        "Show StartContent#11:432": {
+          "type": "BOOLEAN",
+          "defaultValue": true,
+          "variantOptions": null,
+          "preferredValues": null
+        },
+        "EndContent#11:433": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "2:26",
+          "variantOptions": null,
+          "preferredValues": [
+            {
+              "type": "COMPONENT_SET",
+              "key": "89f1fb2d4580116cea4be5d4ca340de216a27819"
+            }
+          ]
+        },
+        "Show EndContent#11:434": {
+          "type": "BOOLEAN",
+          "defaultValue": true,
+          "variantOptions": null,
+          "preferredValues": null
+        }
+      },
+      "nestedInstances": [
+        "Slot"
+      ]
+    },
+    {
+      "name": "MetadataList",
+      "nodeId": "11:970",
+      "key": "f4c106dcd1de208ef1018b6d8ee4e30cdc030f0d",
+      "description": "Key\u2013value pairs for object attributes \u2014 detail panels, settings summaries, record information. API mirrors industry convention (Astryx MetadataList); multi-column layout and collapse behavior are documented boundaries. \u2014 governed by contract ds.metadata-list v1.0.0",
+      "variantCount": 1,
+      "properties": {
+        "Title#11:439": {
+          "type": "TEXT",
+          "defaultValue": "Details",
+          "variantOptions": null,
+          "preferredValues": null
+        }
+      },
+      "nestedInstances": [
+        "MetadataListItem",
+        "Slot"
+      ]
+    },
+    {
+      "name": "MetadataListItem",
+      "nodeId": "11:964",
+      "key": "84ae8763e0d2378b67b49878f355b264327d6c8a",
+      "description": "One key\u2013value pair in a MetadataList: a label and a value area. API mirrors industry convention (Astryx MetadataListItem). \u2014 governed by contract ds.metadata-list-item v1.0.0",
+      "variantCount": 1,
+      "properties": {
+        "Label#11:435": {
+          "type": "TEXT",
+          "defaultValue": "Label",
+          "variantOptions": null,
+          "preferredValues": null
+        },
+        "Value#11:436": {
+          "type": "TEXT",
+          "defaultValue": "Value",
+          "variantOptions": null,
+          "preferredValues": null
+        },
+        "Icon#11:437": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "2:26",
+          "variantOptions": null,
+          "preferredValues": []
+        },
+        "Show Icon#11:438": {
+          "type": "BOOLEAN",
+          "defaultValue": true,
+          "variantOptions": null,
+          "preferredValues": null
+        }
+      },
+      "nestedInstances": [
+        "Slot"
+      ]
+    },
+    {
+      "name": "Pagination",
+      "nodeId": "11:1233",
+      "key": "51d18c28f5ef424142d682db4ec7fd35b9091257",
+      "description": "Steps through pages of content, below a table or list. API mirrors industry convention (Astryx Pagination) with three display variants; page math and click behavior are declared boundaries \u2014 the pages variant shows a representative trail. \u2014 governed by contract ds.pagination v1.0.0",
+      "variantCount": 3,
+      "properties": {
+        "Label#11:542": {
+          "type": "TEXT",
+          "defaultValue": "Pagination",
+          "variantOptions": null,
+          "preferredValues": null
+        },
+        "PageLabel#11:543": {
+          "type": "TEXT",
+          "defaultValue": "Page 2 of 10",
+          "variantOptions": null,
+          "preferredValues": null
+        },
+        "Variant": {
+          "type": "VARIANT",
+          "defaultValue": "Pages",
+          "variantOptions": [
+            "Pages",
+            "Compact",
+            "Dots"
+          ],
+          "preferredValues": null
+        }
+      },
+      "nestedInstances": []
+    },
+    {
+      "name": "ProgressBar",
+      "nodeId": "11:1249",
+      "key": "b18870547d3ca85fb933e46457fde0d02d782fb3",
+      "description": "Horizontal bar showing completion progress. API mirrors industry convention (Astryx ProgressBar): number-valued value/max drive the fill; the canvas renders the defaults' fraction as its honest static state. Indeterminate mode needs animation on the canvas \u2014 a documented boundary. \u2014 governed by contract ds.progress-bar v1.0.0",
+      "variantCount": 5,
+      "properties": {
+        "Value#11:561": {
+          "type": "TEXT",
+          "defaultValue": "60",
+          "variantOptions": null,
+          "preferredValues": null
+        },
+        "Max#11:562": {
+          "type": "TEXT",
+          "defaultValue": "100",
+          "variantOptions": null,
+          "preferredValues": null
+        },
+        "Label#11:563": {
+          "type": "TEXT",
+          "defaultValue": "Progress",
+          "variantOptions": null,
+          "preferredValues": null
+        },
+        "Variant": {
+          "type": "VARIANT",
+          "defaultValue": "Accent",
+          "variantOptions": [
+            "Accent",
+            "Success",
+            "Warning",
+            "Error",
+            "Neutral"
+          ],
+          "preferredValues": null
+        }
+      },
+      "nestedInstances": []
+    },
+    {
+      "name": "Section",
+      "nodeId": "11:999",
+      "key": "f47b739d72cc4bfc159e1b656f78e5dbceaf0200",
+      "description": "The standard way to create page regions and group related content \u2014 settings groups, form sections, sidebar areas. API mirrors industry convention (Astryx Section) at the variant level; the transparent variant needs transparent color tokens \u2014 a documented gap. \u2014 governed by contract ds.section v1.0.0",
+      "variantCount": 2,
+      "properties": {
+        "Children#11:442": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "2:26",
+          "variantOptions": null,
+          "preferredValues": []
+        },
+        "Variant": {
+          "type": "VARIANT",
+          "defaultValue": "Section",
+          "variantOptions": [
+            "Section",
+            "Muted"
+          ],
+          "preferredValues": null
+        }
+      },
+      "nestedInstances": [
+        "Slot"
+      ]
+    },
+    {
+      "name": "SideNavItem",
+      "nodeId": "11:1016",
+      "key": "155b665997cadb6f418aa74bdd0ad9b00e348e97",
+      "description": "A sidebar navigation row: icon, label, and trailing content, with a selected state. API mirrors industry convention (Astryx SideNavItem); nesting and collapse are behavior-layer boundaries. \u2014 governed by contract ds.side-nav-item v1.0.0",
+      "variantCount": 2,
+      "properties": {
+        "Label#11:455": {
+          "type": "TEXT",
+          "defaultValue": "Navigation item",
+          "variantOptions": null,
+          "preferredValues": null
+        },
+        "Icon#11:456": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "2:26",
+          "variantOptions": null,
+          "preferredValues": []
+        },
+        "Show Icon#11:457": {
+          "type": "BOOLEAN",
+          "defaultValue": true,
+          "variantOptions": null,
+          "preferredValues": null
+        },
+        "EndContent#11:458": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "2:26",
+          "variantOptions": null,
+          "preferredValues": [
+            {
+              "type": "COMPONENT_SET",
+              "key": "89f1fb2d4580116cea4be5d4ca340de216a27819"
+            }
+          ]
+        },
+        "Show EndContent#11:459": {
+          "type": "BOOLEAN",
+          "defaultValue": true,
+          "variantOptions": null,
+          "preferredValues": null
+        },
+        "Href#11:460": {
+          "type": "TEXT",
+          "defaultValue": "#",
+          "variantOptions": null,
+          "preferredValues": null
+        },
+        "State": {
+          "type": "VARIANT",
+          "defaultValue": "Default",
+          "variantOptions": [
+            "Default",
+            "Selected"
+          ],
+          "preferredValues": null
+        }
+      },
+      "nestedInstances": [
+        "Slot"
+      ]
+    },
+    {
+      "name": "Skeleton",
+      "nodeId": "11:1259",
+      "key": "2da0d4e2438f9b37a9ce159eafb4477f622b10bb",
+      "description": "Pulsing placeholder previewing the shape of loading content. API mirrors industry convention (Astryx Skeleton) with the free-form width/height flattened to a shape variant; the pulse is CSS-only \u2014 the canvas shows the static shape. \u2014 governed by contract ds.skeleton v1.0.0",
+      "variantCount": 3,
+      "properties": {
+        "Variant": {
+          "type": "VARIANT",
+          "defaultValue": "Text",
+          "variantOptions": [
+            "Text",
+            "Rect",
+            "Circle"
+          ],
+          "preferredValues": null
+        }
+      },
+      "nestedInstances": []
+    },
+    {
+      "name": "Slider",
+      "nodeId": "11:1260",
+      "key": "8aac8c4b2be87b47b944650ec1a4c07bdfeb12f7",
+      "description": "Numeric selection within bounds \u2014 the static surface of a slider: label, filled track to the current value, and thumb. API mirrors industry convention (Astryx Slider); drag behavior and range mode are declared boundaries. \u2014 governed by contract ds.slider v1.0.0",
+      "variantCount": 1,
+      "properties": {
+        "Label#11:564": {
+          "type": "TEXT",
+          "defaultValue": "Volume",
+          "variantOptions": null,
+          "preferredValues": null
+        },
+        "Value#11:565": {
+          "type": "TEXT",
+          "defaultValue": "40",
+          "variantOptions": null,
+          "preferredValues": null
+        },
+        "Max#11:566": {
+          "type": "TEXT",
+          "defaultValue": "100",
+          "variantOptions": null,
+          "preferredValues": null
+        }
+      },
+      "nestedInstances": []
+    },
+    {
+      "name": "Spinner",
+      "nodeId": "11:1267",
+      "key": "3cb0569208b199ceccb18b4c4439add4f5fea661",
+      "description": "Animated loading indicator for processes of unknown duration. API mirrors industry convention (Astryx Spinner); the size scale needs per-variant icon sizing and the rotation itself is CSS-only \u2014 the canvas shows the static arc. \u2014 governed by contract ds.spinner v1.0.0",
+      "variantCount": 1,
+      "properties": {
+        "Label#11:567": {
+          "type": "TEXT",
+          "defaultValue": "Loading",
+          "variantOptions": null,
+          "preferredValues": null
+        }
+      },
+      "nestedInstances": []
+    },
+    {
       "name": "StatusDot",
       "nodeId": "11:384",
       "key": "f66c5a1c366d1d37292459b9b9a56d80bf2a5034",
@@ -539,6 +1199,203 @@
         }
       },
       "nestedInstances": []
+    },
+    {
+      "name": "Switch",
+      "nodeId": "11:1286",
+      "key": "7936496ebfb63f0f4908a29b7edd6dae340e4e23",
+      "description": "Toggle for on/off settings that take effect immediately. API mirrors industry convention (Astryx Switch) with the boolean value flattened to an off/on enum so both surfaces render both states truthfully; toggle behavior is a declared boundary. \u2014 governed by contract ds.switch v1.1.0\nEvent (code): onToggle \u2014 fires on track activation. Toggles value: off \u21c4 on.",
+      "variantCount": 2,
+      "properties": {
+        "Label#11:572": {
+          "type": "TEXT",
+          "defaultValue": "Enable notifications",
+          "variantOptions": null,
+          "preferredValues": null
+        },
+        "Description#11:573": {
+          "type": "TEXT",
+          "defaultValue": "Takes effect immediately.",
+          "variantOptions": null,
+          "preferredValues": null
+        },
+        "Value": {
+          "type": "VARIANT",
+          "defaultValue": "Off",
+          "variantOptions": [
+            "Off",
+            "On"
+          ],
+          "preferredValues": null
+        }
+      },
+      "nestedInstances": []
+    },
+    {
+      "name": "Tab",
+      "nodeId": "11:1033",
+      "key": "5f7bce1453ff86d3147e96d9249f9313497f3d68",
+      "description": "A single tab in a TabList. API mirrors industry convention (Astryx Tab) with selection flattened to a state enum so both surfaces render it truthfully; selection behavior itself is a declared boundary. \u2014 governed by contract ds.tab v1.0.0",
+      "variantCount": 2,
+      "properties": {
+        "Label#11:471": {
+          "type": "TEXT",
+          "defaultValue": "Tab",
+          "variantOptions": null,
+          "preferredValues": null
+        },
+        "Icon#11:472": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "2:26",
+          "variantOptions": null,
+          "preferredValues": []
+        },
+        "Show Icon#11:473": {
+          "type": "BOOLEAN",
+          "defaultValue": true,
+          "variantOptions": null,
+          "preferredValues": null
+        },
+        "EndContent#11:474": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "2:26",
+          "variantOptions": null,
+          "preferredValues": [
+            {
+              "type": "COMPONENT_SET",
+              "key": "89f1fb2d4580116cea4be5d4ca340de216a27819"
+            },
+            {
+              "type": "COMPONENT_SET",
+              "key": "f66c5a1c366d1d37292459b9b9a56d80bf2a5034"
+            }
+          ]
+        },
+        "Show EndContent#11:475": {
+          "type": "BOOLEAN",
+          "defaultValue": true,
+          "variantOptions": null,
+          "preferredValues": null
+        },
+        "State": {
+          "type": "VARIANT",
+          "defaultValue": "Default",
+          "variantOptions": [
+            "Default",
+            "Selected"
+          ],
+          "preferredValues": null
+        }
+      },
+      "nestedInstances": [
+        "Slot"
+      ]
+    },
+    {
+      "name": "Table",
+      "nodeId": "2:154",
+      "key": "d3e8c9c378ea2fd072c2eb08545a30565fa77614",
+      "description": "Structured data in rows and columns. Composes header cells (with the Table's density mapped into them), and a body slot of rows. \u2014 governed by contract ds.table v1.1.0",
+      "variantCount": 2,
+      "properties": {
+        "Density": {
+          "type": "VARIANT",
+          "defaultValue": "Comfortable",
+          "variantOptions": [
+            "Comfortable",
+            "Compact"
+          ],
+          "preferredValues": null
+        }
+      },
+      "nestedInstances": [
+        "TableHeaderCell",
+        "TableRow",
+        "TableCell"
+      ]
+    },
+    {
+      "name": "TableCell",
+      "nodeId": "2:48",
+      "key": "b440cb0ab4bd83de2491b2302ab1ccb9c3e0f2d1",
+      "description": "A single data cell in a table row. \u2014 governed by contract ds.table-cell v1.1.0",
+      "variantCount": 2,
+      "properties": {
+        "Content#2:19": {
+          "type": "TEXT",
+          "defaultValue": "Cell",
+          "variantOptions": null,
+          "preferredValues": null
+        },
+        "Density": {
+          "type": "VARIANT",
+          "defaultValue": "Comfortable",
+          "variantOptions": [
+            "Comfortable",
+            "Compact"
+          ],
+          "preferredValues": null
+        }
+      },
+      "nestedInstances": []
+    },
+    {
+      "name": "TableHeaderCell",
+      "nodeId": "2:53",
+      "key": "91bf99af47cb2e09190eed770012e9c99661294f",
+      "description": "A column header cell. \u2014 governed by contract ds.table-header-cell v1.1.0",
+      "variantCount": 2,
+      "properties": {
+        "Label#2:22": {
+          "type": "TEXT",
+          "defaultValue": "Header",
+          "variantOptions": null,
+          "preferredValues": null
+        },
+        "Density": {
+          "type": "VARIANT",
+          "defaultValue": "Comfortable",
+          "variantOptions": [
+            "Comfortable",
+            "Compact"
+          ],
+          "preferredValues": null
+        }
+      },
+      "nestedInstances": []
+    },
+    {
+      "name": "TableRow",
+      "nodeId": "2:70",
+      "key": "2630a1f30455c0b4d906930e9b3815cc0437fe1f",
+      "description": "A selectable row of table cells. \u2014 governed by contract ds.table-row v1.1.0",
+      "variantCount": 2,
+      "properties": {
+        "State": {
+          "type": "VARIANT",
+          "defaultValue": "Default",
+          "variantOptions": [
+            "Default",
+            "Selected"
+          ],
+          "preferredValues": null
+        }
+      },
+      "nestedInstances": [
+        "TableCell"
+      ]
+    },
+    {
+      "name": "TabList",
+      "nodeId": "11:1034",
+      "key": "21786b6e7ff33e3d9ede5edb8ca07a56f3dbb8af",
+      "description": "Tab-style navigation container holding Tab items. API mirrors industry convention (Astryx TabList); roving-tabindex keyboard behavior and controlled selection are declared boundaries. \u2014 governed by contract ds.tab-list v1.0.0",
+      "variantCount": 1,
+      "properties": {},
+      "nestedInstances": [
+        "Tab",
+        "Slot"
+      ]
     },
     {
       "name": "TextArea",
@@ -588,7 +1445,7 @@
       "name": "TextField",
       "nodeId": "11:446",
       "key": "83b5ead2b038477a13c0647de71ee55bf458e0b3",
-      "description": "Single-line text input for short-form values \u2014 names, emails, search queries. API mirrors industry convention (Astryx TextInput): required label, description, size scale. The wrapping-label anatomy gives implicit label association. \u2014 governed by contract ds.text-field v1.0.0",
+      "description": "Single-line text input for short-form values \u2014 names, emails, search queries. API mirrors industry convention (Astryx TextInput): required label, description, size scale. The wrapping-label anatomy gives implicit label association. Disabled fields dim and drop pointer interaction via stylesWhen (code-side conditional styling; a declared canvas fidelity limit). \u2014 governed by contract ds.text-field v1.1.0",
       "variantCount": 3,
       "properties": {
         "Label#11:126": {
@@ -760,542 +1617,6 @@
       ]
     },
     {
-      "name": "ChatMessageMetadata",
-      "nodeId": "11:789",
-      "key": "25f176c40364af596d09a7d897e371208934ff43",
-      "description": "Metadata row for a chat message: delivery status, timestamp, and footer content. API mirrors industry convention (Astryx ChatMessageMetadata): status drives the icon. \u2014 governed by contract ds.chat-message-metadata v1.0.0",
-      "variantCount": 5,
-      "properties": {
-        "Timestamp#11:378": {
-          "type": "TEXT",
-          "defaultValue": "2:14 PM",
-          "variantOptions": null,
-          "preferredValues": null
-        },
-        "Footer#11:379": {
-          "type": "INSTANCE_SWAP",
-          "defaultValue": "2:26",
-          "variantOptions": null,
-          "preferredValues": []
-        },
-        "Show Footer#11:380": {
-          "type": "BOOLEAN",
-          "defaultValue": true,
-          "variantOptions": null,
-          "preferredValues": null
-        },
-        "Status": {
-          "type": "VARIANT",
-          "defaultValue": "Sent",
-          "variantOptions": [
-            "Sent",
-            "Sending",
-            "Delivered",
-            "Read",
-            "Error"
-          ],
-          "preferredValues": null
-        }
-      },
-      "nestedInstances": [
-        "Slot"
-      ]
-    },
-    {
-      "name": "ChatMessage",
-      "nodeId": "11:826",
-      "key": "4af367f1f1c5044640cd31d2cbdd3e575b1bbb54",
-      "description": "Sender-context wrapper for a chat message: avatar, name, bubble content, and metadata. API mirrors industry convention (Astryx ChatMessage); sender-based alignment flipping needs layout-by-enum \u2014 a documented gap; the bubble color follows sender. \u2014 governed by contract ds.chat-message v1.0.0",
-      "variantCount": 3,
-      "properties": {
-        "Name#11:399": {
-          "type": "TEXT",
-          "defaultValue": "Assistant",
-          "variantOptions": null,
-          "preferredValues": null
-        },
-        "Avatar#11:400": {
-          "type": "INSTANCE_SWAP",
-          "defaultValue": "2:26",
-          "variantOptions": null,
-          "preferredValues": [
-            {
-              "type": "COMPONENT_SET",
-              "key": "b39059e770141b713f28ae1816be3ed756cd79da"
-            }
-          ]
-        },
-        "Show Avatar#11:401": {
-          "type": "BOOLEAN",
-          "defaultValue": true,
-          "variantOptions": null,
-          "preferredValues": null
-        },
-        "Children#11:402": {
-          "type": "INSTANCE_SWAP",
-          "defaultValue": "2:26",
-          "variantOptions": null,
-          "preferredValues": []
-        },
-        "Metadata#11:403": {
-          "type": "INSTANCE_SWAP",
-          "defaultValue": "2:26",
-          "variantOptions": null,
-          "preferredValues": [
-            {
-              "type": "COMPONENT_SET",
-              "key": "25f176c40364af596d09a7d897e371208934ff43"
-            }
-          ]
-        },
-        "Show Metadata#11:404": {
-          "type": "BOOLEAN",
-          "defaultValue": true,
-          "variantOptions": null,
-          "preferredValues": null
-        },
-        "Sender": {
-          "type": "VARIANT",
-          "defaultValue": "Assistant",
-          "variantOptions": [
-            "Assistant",
-            "User",
-            "System"
-          ],
-          "preferredValues": null
-        }
-      },
-      "nestedInstances": [
-        "Slot"
-      ]
-    },
-    {
-      "name": "ChatSystemMessage",
-      "nodeId": "11:839",
-      "key": "2c5056fcf5f0b075ec7be6019f20eb8cdc9d5efb",
-      "description": "Centered system message for non-sender chat content \u2014 date separators, membership changes, status notices. API mirrors industry convention (Astryx ChatSystemMessage): the divider variant adds a line on each side. \u2014 governed by contract ds.chat-system-message v1.0.0",
-      "variantCount": 2,
-      "properties": {
-        "Message#11:411": {
-          "type": "TEXT",
-          "defaultValue": "Today",
-          "variantOptions": null,
-          "preferredValues": null
-        },
-        "Icon#11:412": {
-          "type": "INSTANCE_SWAP",
-          "defaultValue": "2:26",
-          "variantOptions": null,
-          "preferredValues": []
-        },
-        "Show Icon#11:413": {
-          "type": "BOOLEAN",
-          "defaultValue": true,
-          "variantOptions": null,
-          "preferredValues": null
-        },
-        "Variant": {
-          "type": "VARIANT",
-          "defaultValue": "Default",
-          "variantOptions": [
-            "Default",
-            "Divider"
-          ],
-          "preferredValues": null
-        }
-      },
-      "nestedInstances": [
-        "Slot"
-      ]
-    },
-    {
-      "name": "Citation",
-      "nodeId": "11:844",
-      "key": "84b0a3c9abb3122d60820f8047a8b6d200956067",
-      "description": "Inline reference to an external source \u2014 attribution in AI-generated responses, articles, anywhere provenance matters. API mirrors industry convention (Astryx Citation): label chips or compact numbered badges. \u2014 governed by contract ds.citation v1.0.0",
-      "variantCount": 2,
-      "properties": {
-        "Source#11:418": {
-          "type": "TEXT",
-          "defaultValue": "example.com",
-          "variantOptions": null,
-          "preferredValues": null
-        },
-        "Href#11:419": {
-          "type": "TEXT",
-          "defaultValue": "https://example.com",
-          "variantOptions": null,
-          "preferredValues": null
-        },
-        "Number#11:420": {
-          "type": "TEXT",
-          "defaultValue": "1",
-          "variantOptions": null,
-          "preferredValues": null
-        },
-        "Variant": {
-          "type": "VARIANT",
-          "defaultValue": "Label",
-          "variantOptions": [
-            "Label",
-            "Number"
-          ],
-          "preferredValues": null
-        }
-      },
-      "nestedInstances": []
-    },
-    {
-      "name": "Field",
-      "nodeId": "11:845",
-      "key": "e690d926c7f929fb354ba4aa0d3b355db929c444",
-      "description": "Form field wrapper providing a label, description, and required indicator around any control. API mirrors industry convention (Astryx Field): the label targets the control via inputID; validation status needs structured-object props \u2014 a documented gap. \u2014 governed by contract ds.field v1.0.0",
-      "variantCount": 1,
-      "properties": {
-        "Label#11:423": {
-          "type": "TEXT",
-          "defaultValue": "Field label",
-          "variantOptions": null,
-          "preferredValues": null
-        },
-        "Description#11:424": {
-          "type": "TEXT",
-          "defaultValue": "Helper text for the wrapped control.",
-          "variantOptions": null,
-          "preferredValues": null
-        },
-        "Children#11:425": {
-          "type": "INSTANCE_SWAP",
-          "defaultValue": "2:26",
-          "variantOptions": null,
-          "preferredValues": []
-        },
-        "Required#11:426": {
-          "type": "BOOLEAN",
-          "defaultValue": false,
-          "variantOptions": null,
-          "preferredValues": null
-        },
-        "InputID#11:427": {
-          "type": "TEXT",
-          "defaultValue": "field-control",
-          "variantOptions": null,
-          "preferredValues": null
-        }
-      },
-      "nestedInstances": [
-        "Slot"
-      ]
-    },
-    {
-      "name": "Kbd",
-      "nodeId": "11:856",
-      "key": "798616e092adf3047e8e3586844c2bcb0530fe0a",
-      "description": "Renders a keyboard shortcut as a styled key badge for tooltips, menus, and help text. API mirrors industry convention (Astryx Kbd); multi-key parsing (\"mod+K\" into separate badges) is display logic \u2014 a documented gap, one badge per component for now. \u2014 governed by contract ds.kbd v1.0.0",
-      "variantCount": 1,
-      "properties": {
-        "Keys#11:428": {
-          "type": "TEXT",
-          "defaultValue": "\u2318K",
-          "variantOptions": null,
-          "preferredValues": null
-        }
-      },
-      "nestedInstances": []
-    },
-    {
-      "name": "ListItem",
-      "nodeId": "11:857",
-      "key": "470b0337773739a1521b294855bed053c8e7eb33",
-      "description": "A single row in a List: label with optional description, leading and trailing content. API mirrors industry convention (Astryx ListItem); click/link behavior is a declared boundary. \u2014 governed by contract ds.list-item v1.0.0",
-      "variantCount": 1,
-      "properties": {
-        "Label#11:429": {
-          "type": "TEXT",
-          "defaultValue": "List item",
-          "variantOptions": null,
-          "preferredValues": null
-        },
-        "Description#11:430": {
-          "type": "TEXT",
-          "defaultValue": "Supporting detail for this item.",
-          "variantOptions": null,
-          "preferredValues": null
-        },
-        "StartContent#11:431": {
-          "type": "INSTANCE_SWAP",
-          "defaultValue": "2:26",
-          "variantOptions": null,
-          "preferredValues": []
-        },
-        "Show StartContent#11:432": {
-          "type": "BOOLEAN",
-          "defaultValue": true,
-          "variantOptions": null,
-          "preferredValues": null
-        },
-        "EndContent#11:433": {
-          "type": "INSTANCE_SWAP",
-          "defaultValue": "2:26",
-          "variantOptions": null,
-          "preferredValues": [
-            {
-              "type": "COMPONENT_SET",
-              "key": "89f1fb2d4580116cea4be5d4ca340de216a27819"
-            }
-          ]
-        },
-        "Show EndContent#11:434": {
-          "type": "BOOLEAN",
-          "defaultValue": true,
-          "variantOptions": null,
-          "preferredValues": null
-        }
-      },
-      "nestedInstances": [
-        "Slot"
-      ]
-    },
-    {
-      "name": "List",
-      "nodeId": "11:963",
-      "key": "e506f83390b9f1495394675f91c6aa03a9317162",
-      "description": "Vertical collection of items with consistent density. API mirrors industry convention (Astryx List); dividers need sibling-selector styling and marker styles need list-style tokens \u2014 documented gaps. \u2014 governed by contract ds.list v1.0.0",
-      "variantCount": 3,
-      "properties": {
-        "Density": {
-          "type": "VARIANT",
-          "defaultValue": "Balanced",
-          "variantOptions": [
-            "Balanced",
-            "Compact",
-            "Spacious"
-          ],
-          "preferredValues": null
-        }
-      },
-      "nestedInstances": [
-        "ListItem",
-        "Slot"
-      ]
-    },
-    {
-      "name": "MetadataListItem",
-      "nodeId": "11:964",
-      "key": "84ae8763e0d2378b67b49878f355b264327d6c8a",
-      "description": "One key\u2013value pair in a MetadataList: a label and a value area. API mirrors industry convention (Astryx MetadataListItem). \u2014 governed by contract ds.metadata-list-item v1.0.0",
-      "variantCount": 1,
-      "properties": {
-        "Label#11:435": {
-          "type": "TEXT",
-          "defaultValue": "Label",
-          "variantOptions": null,
-          "preferredValues": null
-        },
-        "Value#11:436": {
-          "type": "TEXT",
-          "defaultValue": "Value",
-          "variantOptions": null,
-          "preferredValues": null
-        },
-        "Icon#11:437": {
-          "type": "INSTANCE_SWAP",
-          "defaultValue": "2:26",
-          "variantOptions": null,
-          "preferredValues": []
-        },
-        "Show Icon#11:438": {
-          "type": "BOOLEAN",
-          "defaultValue": true,
-          "variantOptions": null,
-          "preferredValues": null
-        }
-      },
-      "nestedInstances": [
-        "Slot"
-      ]
-    },
-    {
-      "name": "MetadataList",
-      "nodeId": "11:970",
-      "key": "f4c106dcd1de208ef1018b6d8ee4e30cdc030f0d",
-      "description": "Key\u2013value pairs for object attributes \u2014 detail panels, settings summaries, record information. API mirrors industry convention (Astryx MetadataList); multi-column layout and collapse behavior are documented boundaries. \u2014 governed by contract ds.metadata-list v1.0.0",
-      "variantCount": 1,
-      "properties": {
-        "Title#11:439": {
-          "type": "TEXT",
-          "defaultValue": "Details",
-          "variantOptions": null,
-          "preferredValues": null
-        }
-      },
-      "nestedInstances": [
-        "MetadataListItem",
-        "Slot"
-      ]
-    },
-    {
-      "name": "Section",
-      "nodeId": "11:999",
-      "key": "f47b739d72cc4bfc159e1b656f78e5dbceaf0200",
-      "description": "The standard way to create page regions and group related content \u2014 settings groups, form sections, sidebar areas. API mirrors industry convention (Astryx Section) at the variant level; the transparent variant needs transparent color tokens \u2014 a documented gap. \u2014 governed by contract ds.section v1.0.0",
-      "variantCount": 2,
-      "properties": {
-        "Children#11:442": {
-          "type": "INSTANCE_SWAP",
-          "defaultValue": "2:26",
-          "variantOptions": null,
-          "preferredValues": []
-        },
-        "Variant": {
-          "type": "VARIANT",
-          "defaultValue": "Section",
-          "variantOptions": [
-            "Section",
-            "Muted"
-          ],
-          "preferredValues": null
-        }
-      },
-      "nestedInstances": [
-        "Slot"
-      ]
-    },
-    {
-      "name": "SideNavItem",
-      "nodeId": "11:1016",
-      "key": "155b665997cadb6f418aa74bdd0ad9b00e348e97",
-      "description": "A sidebar navigation row: icon, label, and trailing content, with a selected state. API mirrors industry convention (Astryx SideNavItem); nesting and collapse are behavior-layer boundaries. \u2014 governed by contract ds.side-nav-item v1.0.0",
-      "variantCount": 2,
-      "properties": {
-        "Label#11:455": {
-          "type": "TEXT",
-          "defaultValue": "Navigation item",
-          "variantOptions": null,
-          "preferredValues": null
-        },
-        "Icon#11:456": {
-          "type": "INSTANCE_SWAP",
-          "defaultValue": "2:26",
-          "variantOptions": null,
-          "preferredValues": []
-        },
-        "Show Icon#11:457": {
-          "type": "BOOLEAN",
-          "defaultValue": true,
-          "variantOptions": null,
-          "preferredValues": null
-        },
-        "EndContent#11:458": {
-          "type": "INSTANCE_SWAP",
-          "defaultValue": "2:26",
-          "variantOptions": null,
-          "preferredValues": [
-            {
-              "type": "COMPONENT_SET",
-              "key": "89f1fb2d4580116cea4be5d4ca340de216a27819"
-            }
-          ]
-        },
-        "Show EndContent#11:459": {
-          "type": "BOOLEAN",
-          "defaultValue": true,
-          "variantOptions": null,
-          "preferredValues": null
-        },
-        "Href#11:460": {
-          "type": "TEXT",
-          "defaultValue": "#",
-          "variantOptions": null,
-          "preferredValues": null
-        },
-        "State": {
-          "type": "VARIANT",
-          "defaultValue": "Default",
-          "variantOptions": [
-            "Default",
-            "Selected"
-          ],
-          "preferredValues": null
-        }
-      },
-      "nestedInstances": [
-        "Slot"
-      ]
-    },
-    {
-      "name": "Tab",
-      "nodeId": "11:1033",
-      "key": "5f7bce1453ff86d3147e96d9249f9313497f3d68",
-      "description": "A single tab in a TabList. API mirrors industry convention (Astryx Tab) with selection flattened to a state enum so both surfaces render it truthfully; selection behavior itself is a declared boundary. \u2014 governed by contract ds.tab v1.0.0",
-      "variantCount": 2,
-      "properties": {
-        "Label#11:471": {
-          "type": "TEXT",
-          "defaultValue": "Tab",
-          "variantOptions": null,
-          "preferredValues": null
-        },
-        "Icon#11:472": {
-          "type": "INSTANCE_SWAP",
-          "defaultValue": "2:26",
-          "variantOptions": null,
-          "preferredValues": []
-        },
-        "Show Icon#11:473": {
-          "type": "BOOLEAN",
-          "defaultValue": true,
-          "variantOptions": null,
-          "preferredValues": null
-        },
-        "EndContent#11:474": {
-          "type": "INSTANCE_SWAP",
-          "defaultValue": "2:26",
-          "variantOptions": null,
-          "preferredValues": [
-            {
-              "type": "COMPONENT_SET",
-              "key": "89f1fb2d4580116cea4be5d4ca340de216a27819"
-            },
-            {
-              "type": "COMPONENT_SET",
-              "key": "f66c5a1c366d1d37292459b9b9a56d80bf2a5034"
-            }
-          ]
-        },
-        "Show EndContent#11:475": {
-          "type": "BOOLEAN",
-          "defaultValue": true,
-          "variantOptions": null,
-          "preferredValues": null
-        },
-        "State": {
-          "type": "VARIANT",
-          "defaultValue": "Default",
-          "variantOptions": [
-            "Default",
-            "Selected"
-          ],
-          "preferredValues": null
-        }
-      },
-      "nestedInstances": [
-        "Slot"
-      ]
-    },
-    {
-      "name": "TabList",
-      "nodeId": "11:1034",
-      "key": "21786b6e7ff33e3d9ede5edb8ca07a56f3dbb8af",
-      "description": "Tab-style navigation container holding Tab items. API mirrors industry convention (Astryx TabList); roving-tabindex keyboard behavior and controlled selection are declared boundaries. \u2014 governed by contract ds.tab-list v1.0.0",
-      "variantCount": 1,
-      "properties": {},
-      "nestedInstances": [
-        "Tab",
-        "Slot"
-      ]
-    },
-    {
       "name": "Toolbar",
       "nodeId": "11:1097",
       "key": "e56c9f77a873e973aa6f567d0c275710cb039795",
@@ -1351,51 +1672,6 @@
             "Medium",
             "Small",
             "Large"
-          ],
-          "preferredValues": null
-        }
-      },
-      "nestedInstances": [
-        "Slot"
-      ]
-    },
-    {
-      "name": "TopNavItem",
-      "nodeId": "11:1108",
-      "key": "a4db1fe283d2bfb60891ec71398cf8472b2292dc",
-      "description": "A navigation item in a TopNav or SideNav context. API mirrors industry convention (Astryx TopNavItem) with selection flattened to a state enum; the selected state applies aria-current. \u2014 governed by contract ds.top-nav-item v1.0.0",
-      "variantCount": 2,
-      "properties": {
-        "Label#11:512": {
-          "type": "TEXT",
-          "defaultValue": "Nav item",
-          "variantOptions": null,
-          "preferredValues": null
-        },
-        "Icon#11:513": {
-          "type": "INSTANCE_SWAP",
-          "defaultValue": "2:26",
-          "variantOptions": null,
-          "preferredValues": []
-        },
-        "Show Icon#11:514": {
-          "type": "BOOLEAN",
-          "defaultValue": true,
-          "variantOptions": null,
-          "preferredValues": null
-        },
-        "Href#11:515": {
-          "type": "TEXT",
-          "defaultValue": "#",
-          "variantOptions": null,
-          "preferredValues": null
-        },
-        "State": {
-          "type": "VARIANT",
-          "defaultValue": "Default",
-          "variantOptions": [
-            "Default",
-            "Selected"
           ],
           "preferredValues": null
         }
@@ -1464,6 +1740,51 @@
       ]
     },
     {
+      "name": "TopNavItem",
+      "nodeId": "11:1108",
+      "key": "a4db1fe283d2bfb60891ec71398cf8472b2292dc",
+      "description": "A navigation item in a TopNav or SideNav context. API mirrors industry convention (Astryx TopNavItem) with selection flattened to a state enum; the selected state applies aria-current. \u2014 governed by contract ds.top-nav-item v1.0.0",
+      "variantCount": 2,
+      "properties": {
+        "Label#11:512": {
+          "type": "TEXT",
+          "defaultValue": "Nav item",
+          "variantOptions": null,
+          "preferredValues": null
+        },
+        "Icon#11:513": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "2:26",
+          "variantOptions": null,
+          "preferredValues": []
+        },
+        "Show Icon#11:514": {
+          "type": "BOOLEAN",
+          "defaultValue": true,
+          "variantOptions": null,
+          "preferredValues": null
+        },
+        "Href#11:515": {
+          "type": "TEXT",
+          "defaultValue": "#",
+          "variantOptions": null,
+          "preferredValues": null
+        },
+        "State": {
+          "type": "VARIANT",
+          "defaultValue": "Default",
+          "variantOptions": [
+            "Default",
+            "Selected"
+          ],
+          "preferredValues": null
+        }
+      },
+      "nestedInstances": [
+        "Slot"
+      ]
+    },
+    {
       "name": "TypeaheadItem",
       "nodeId": "11:1119",
       "key": "e71ef70ee99e707af6c5eaa57b6336ae906b5690",
@@ -1498,269 +1819,7 @@
       "nestedInstances": [
         "Slot"
       ]
-    },
-    {
-      "name": "AccordionItem",
-      "nodeId": "11:1171",
-      "key": "ba5ec62aa3c19bf86b7bcff8eb61ef1e86daad35",
-      "description": "A collapsible content row: trigger with a state chevron, content revealed when open. API mirrors industry convention (Astryx Collapsible) with the open state flattened to a closed/open enum so both surfaces render both states; expand/collapse behavior is a declared boundary. \u2014 governed by contract ds.accordion-item v1.0.0",
-      "variantCount": 2,
-      "properties": {
-        "Title#11:530": {
-          "type": "TEXT",
-          "defaultValue": "Section title",
-          "variantOptions": null,
-          "preferredValues": null
-        },
-        "Children#11:531": {
-          "type": "INSTANCE_SWAP",
-          "defaultValue": "2:26",
-          "variantOptions": null,
-          "preferredValues": []
-        },
-        "State": {
-          "type": "VARIANT",
-          "defaultValue": "Closed",
-          "variantOptions": [
-            "Closed",
-            "Open"
-          ],
-          "preferredValues": null
-        }
-      },
-      "nestedInstances": []
-    },
-    {
-      "name": "AvatarGroup",
-      "nodeId": "11:1172",
-      "key": "41e084d38457f2aebd4611e3ebd922a56c2c392d",
-      "description": "Stacked avatars with an overflow count. API mirrors industry convention (Astryx AvatarGroup): overlapping layout \u2014 expressed as a negative-margin child rule in CSS and negative item spacing on the canvas. \u2014 governed by contract ds.avatar-group v1.0.0",
-      "variantCount": 1,
-      "properties": {
-        "Overflow#11:533": {
-          "type": "TEXT",
-          "defaultValue": "+3",
-          "variantOptions": null,
-          "preferredValues": null
-        }
-      },
-      "nestedInstances": [
-        "Avatar"
-      ]
-    },
-    {
-      "name": "BreadcrumbItem",
-      "nodeId": "11:1182",
-      "key": "7b9283aad1ddc94a1a597804a79a330316b3aaa1",
-      "description": "One link in a breadcrumb trail with its leading separator. API mirrors industry convention (Astryx BreadcrumbItem); the first item is authored with hasSeparator off (positional part logic is a documented gap), and aria-current needs conditional attributes \u2014 also documented. \u2014 governed by contract ds.breadcrumb-item v1.0.0",
-      "variantCount": 1,
-      "properties": {
-        "Label#11:534": {
-          "type": "TEXT",
-          "defaultValue": "Page",
-          "variantOptions": null,
-          "preferredValues": null
-        },
-        "Separator#11:535": {
-          "type": "BOOLEAN",
-          "defaultValue": true,
-          "variantOptions": null,
-          "preferredValues": null
-        },
-        "Href#11:536": {
-          "type": "TEXT",
-          "defaultValue": "#",
-          "variantOptions": null,
-          "preferredValues": null
-        }
-      },
-      "nestedInstances": []
-    },
-    {
-      "name": "Breadcrumbs",
-      "nodeId": "11:1186",
-      "key": "853821e9b58b03010cfeda157fd8ffcf2338bb15",
-      "description": "Navigation trail from root to the current page. API mirrors industry convention (Astryx Breadcrumbs): a nav landmark holding BreadcrumbItems; keep trails to five levels or fewer. \u2014 governed by contract ds.breadcrumbs v1.0.0",
-      "variantCount": 1,
-      "properties": {
-        "Label#11:537": {
-          "type": "TEXT",
-          "defaultValue": "Breadcrumb",
-          "variantOptions": null,
-          "preferredValues": null
-        }
-      },
-      "nestedInstances": [
-        "BreadcrumbItem"
-      ]
-    },
-    {
-      "name": "Pagination",
-      "nodeId": "11:1233",
-      "key": "51d18c28f5ef424142d682db4ec7fd35b9091257",
-      "description": "Steps through pages of content, below a table or list. API mirrors industry convention (Astryx Pagination) with three display variants; page math and click behavior are declared boundaries \u2014 the pages variant shows a representative trail. \u2014 governed by contract ds.pagination v1.0.0",
-      "variantCount": 3,
-      "properties": {
-        "Label#11:542": {
-          "type": "TEXT",
-          "defaultValue": "Pagination",
-          "variantOptions": null,
-          "preferredValues": null
-        },
-        "PageLabel#11:543": {
-          "type": "TEXT",
-          "defaultValue": "Page 2 of 10",
-          "variantOptions": null,
-          "preferredValues": null
-        },
-        "Variant": {
-          "type": "VARIANT",
-          "defaultValue": "Pages",
-          "variantOptions": [
-            "Pages",
-            "Compact",
-            "Dots"
-          ],
-          "preferredValues": null
-        }
-      },
-      "nestedInstances": []
-    },
-    {
-      "name": "ProgressBar",
-      "nodeId": "11:1249",
-      "key": "b18870547d3ca85fb933e46457fde0d02d782fb3",
-      "description": "Horizontal bar showing completion progress. API mirrors industry convention (Astryx ProgressBar): number-valued value/max drive the fill; the canvas renders the defaults' fraction as its honest static state. Indeterminate mode needs animation on the canvas \u2014 a documented boundary. \u2014 governed by contract ds.progress-bar v1.0.0",
-      "variantCount": 5,
-      "properties": {
-        "Value#11:561": {
-          "type": "TEXT",
-          "defaultValue": "60",
-          "variantOptions": null,
-          "preferredValues": null
-        },
-        "Max#11:562": {
-          "type": "TEXT",
-          "defaultValue": "100",
-          "variantOptions": null,
-          "preferredValues": null
-        },
-        "Label#11:563": {
-          "type": "TEXT",
-          "defaultValue": "Progress",
-          "variantOptions": null,
-          "preferredValues": null
-        },
-        "Variant": {
-          "type": "VARIANT",
-          "defaultValue": "Accent",
-          "variantOptions": [
-            "Accent",
-            "Success",
-            "Warning",
-            "Error",
-            "Neutral"
-          ],
-          "preferredValues": null
-        }
-      },
-      "nestedInstances": []
-    },
-    {
-      "name": "Skeleton",
-      "nodeId": "11:1259",
-      "key": "2da0d4e2438f9b37a9ce159eafb4477f622b10bb",
-      "description": "Pulsing placeholder previewing the shape of loading content. API mirrors industry convention (Astryx Skeleton) with the free-form width/height flattened to a shape variant; the pulse is CSS-only \u2014 the canvas shows the static shape. \u2014 governed by contract ds.skeleton v1.0.0",
-      "variantCount": 3,
-      "properties": {
-        "Variant": {
-          "type": "VARIANT",
-          "defaultValue": "Text",
-          "variantOptions": [
-            "Text",
-            "Rect",
-            "Circle"
-          ],
-          "preferredValues": null
-        }
-      },
-      "nestedInstances": []
-    },
-    {
-      "name": "Slider",
-      "nodeId": "11:1260",
-      "key": "8aac8c4b2be87b47b944650ec1a4c07bdfeb12f7",
-      "description": "Numeric selection within bounds \u2014 the static surface of a slider: label, filled track to the current value, and thumb. API mirrors industry convention (Astryx Slider); drag behavior and range mode are declared boundaries. \u2014 governed by contract ds.slider v1.0.0",
-      "variantCount": 1,
-      "properties": {
-        "Label#11:564": {
-          "type": "TEXT",
-          "defaultValue": "Volume",
-          "variantOptions": null,
-          "preferredValues": null
-        },
-        "Value#11:565": {
-          "type": "TEXT",
-          "defaultValue": "40",
-          "variantOptions": null,
-          "preferredValues": null
-        },
-        "Max#11:566": {
-          "type": "TEXT",
-          "defaultValue": "100",
-          "variantOptions": null,
-          "preferredValues": null
-        }
-      },
-      "nestedInstances": []
-    },
-    {
-      "name": "Spinner",
-      "nodeId": "11:1267",
-      "key": "3cb0569208b199ceccb18b4c4439add4f5fea661",
-      "description": "Animated loading indicator for processes of unknown duration. API mirrors industry convention (Astryx Spinner); the size scale needs per-variant icon sizing and the rotation itself is CSS-only \u2014 the canvas shows the static arc. \u2014 governed by contract ds.spinner v1.0.0",
-      "variantCount": 1,
-      "properties": {
-        "Label#11:567": {
-          "type": "TEXT",
-          "defaultValue": "Loading",
-          "variantOptions": null,
-          "preferredValues": null
-        }
-      },
-      "nestedInstances": []
-    },
-    {
-      "name": "Switch",
-      "nodeId": "11:1286",
-      "key": "7936496ebfb63f0f4908a29b7edd6dae340e4e23",
-      "description": "Toggle for on/off settings that take effect immediately. API mirrors industry convention (Astryx Switch) with the boolean value flattened to an off/on enum so both surfaces render both states truthfully; toggle behavior is a declared boundary. \u2014 governed by contract ds.switch v1.0.0",
-      "variantCount": 2,
-      "properties": {
-        "Label#11:572": {
-          "type": "TEXT",
-          "defaultValue": "Enable notifications",
-          "variantOptions": null,
-          "preferredValues": null
-        },
-        "Description#11:573": {
-          "type": "TEXT",
-          "defaultValue": "Takes effect immediately.",
-          "variantOptions": null,
-          "preferredValues": null
-        },
-        "Value": {
-          "type": "VARIANT",
-          "defaultValue": "Off",
-          "variantOptions": [
-            "Off",
-            "On"
-          ],
-          "preferredValues": null
-        }
-      },
-      "nestedInstances": []
     }
   ],
-  "extractedAt": 1783512716111
+  "extractedAt": 1783527446758
 }

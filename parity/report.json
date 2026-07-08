@@ -1,34 +1,13 @@
 {
   "summary": {
     "total": 0,
-    "acknowledged": 2,
-    "pending": 1,
+    "acknowledged": 0,
+    "pending": 0,
     "bySurface": {}
   },
   "findings": [],
-  "acknowledged": [
-    {
-      "surface": "figma",
-      "classification": "mismatch",
-      "subject": "Badge.Variant",
-      "detail": "Variant options differ — contract: [Info, Success, Warning, Danger, Error], figma: [Info, Success, Warning, Danger]",
-      "remedy": "Adopt into contract (promotion) or re-sync the set"
-    },
-    {
-      "surface": "figma",
-      "classification": "behind",
-      "subject": "Button.State",
-      "detail": "Contract opts into state previews (figmaStatePreviews) but the Figma set has no State variant axis",
-      "remedy": "Re-run the component sync script (amend adds the State preview axis and renames base variants with State=Default)"
-    }
-  ],
-  "pending": [
-    {
-      "subject": "Heading",
-      "detail": "No design anchor yet — the contract has never been synced to Figma (pending first generation, not drift)",
-      "remedy": "Run its figma-sync script, write back anchors (npm run anchors:writeback), re-extract snapshots"
-    }
-  ],
+  "acknowledged": [],
+  "pending": [],
   "checkedContracts": [
     "ds.accordion-item@1.1.0",
     "ds.avatar-group@1.0.0",
