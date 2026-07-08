@@ -1,0 +1,43 @@
+/* Badge — from ds.badge v1.1.0 (core/emit-html.ts) */
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  padding-inline: var(--space-inset-x-sm);
+  padding-block: var(--space-inset-y-sm);
+  border-radius: var(--radius-badge);
+  font-family: var(--font-control-family);
+  font-weight: var(--font-control-weight);
+  font-size: var(--font-badge-size);
+}
+
+.badge--variant-info {
+  background-color: var(--color-feedback-info-background);
+  color: var(--color-feedback-info-foreground);
+}
+
+.badge--variant-success {
+  background-color: var(--color-feedback-success-background);
+  color: var(--color-feedback-success-foreground);
+}
+
+.badge--variant-warning {
+  background-color: var(--color-feedback-warning-background);
+  color: var(--color-feedback-warning-foreground);
+}
+
+.badge--variant-danger {
+  background-color: var(--color-feedback-danger-background);
+  color: var(--color-feedback-danger-foreground);
+}
+
+.badge--variant-error {
+  background-color: var(--color-feedback-error-background);
+  color: var(--color-feedback-error-foreground);
+}
+
+/* showcase chrome */
+.showcase { display: flex; flex-direction: column; gap: 24px; align-items: flex-start; font-family: sans-serif; }
+.showcase__label { margin: 0 0 8px; font: 12px/1 monospace; opacity: 0.6; }

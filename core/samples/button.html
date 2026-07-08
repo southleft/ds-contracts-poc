@@ -1,0 +1,58 @@
+<!--
+  Button — static HTML+CSS emitted from contract ds.button v1.5.0 by core/emit-html.ts.
+  Token values arrive via CSS custom properties (the same custom-property names the CSS Modules
+  bind) — include the token stylesheet (src/styles/tokens.css) on the page or nothing resolves.
+  Fidelity: no events, no interactivity beyond CSS states (:hover/:focus-visible/:disabled).
+  Slots render their declared defaultContent, else a named placeholder. Booleans render per showcase item.
+-->
+<section class="showcase showcase--button">
+  <div class="showcase__item">
+    <p class="showcase__label">default</p>
+    <button class="button button--variant-primary button--size-md">
+      <span class="button__label">Button</span>
+    </button>
+  </div>
+  <div class="showcase__item">
+    <p class="showcase__label">variant=secondary</p>
+    <button class="button button--variant-secondary button--size-md">
+      <span class="button__label">Button</span>
+    </button>
+  </div>
+  <div class="showcase__item">
+    <p class="showcase__label">variant=danger</p>
+    <button class="button button--variant-danger button--size-md">
+      <span class="button__label">Button</span>
+    </button>
+  </div>
+  <div class="showcase__item">
+    <p class="showcase__label">variant=ghost</p>
+    <button class="button button--variant-ghost button--size-md">
+      <span class="button__label">Button</span>
+    </button>
+  </div>
+  <div class="showcase__item">
+    <p class="showcase__label">size=sm</p>
+    <button class="button button--variant-primary button--size-sm">
+      <span class="button__label">Button</span>
+    </button>
+  </div>
+  <div class="showcase__item">
+    <p class="showcase__label">size=lg</p>
+    <button class="button button--variant-primary button--size-lg">
+      <span class="button__label">Button</span>
+    </button>
+  </div>
+  <div class="showcase__item">
+    <p class="showcase__label">disabled=true</p>
+    <button class="button button--variant-primary button--size-md" disabled>
+      <span class="button__label">Button</span>
+    </button>
+  </div>
+  <div class="showcase__item">
+    <p class="showcase__label">loading=true</p>
+    <button class="button button--variant-primary button--size-md" data-loading="true">
+      <span class="button__loadingSpinner" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M 10 2.5 A 7.5 7.5 0 0 1 17.5 10" stroke-linecap="round"/></svg></span>
+      <span class="button__label">Button</span>
+    </button>
+  </div>
+</section>

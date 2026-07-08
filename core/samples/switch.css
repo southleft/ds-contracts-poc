@@ -1,0 +1,80 @@
+/* Switch — from ds.switch v1.1.0 (core/emit-html.ts) */
+
+.switch {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  border: 0;
+  gap: var(--space-gap-sm);
+  font-family: var(--font-control-family);
+  color: var(--color-surface-foreground);
+}
+
+.switch__track {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  appearance: none;
+  background: none;
+  border: none;
+  margin: 0;
+  padding: 0;
+  font: inherit;
+  color: inherit;
+  text-align: inherit;
+  cursor: pointer;
+  width: var(--size-switch-width);
+  height: var(--size-switch-height);
+  border-radius: var(--radius-pill);
+  padding-inline: var(--space-inset-y-xs);
+  padding-block: var(--space-inset-y-xs);
+}
+
+.switch--value-off .switch__track {
+  background-color: var(--color-switch-off-track);
+}
+
+.switch--value-on .switch__track {
+  background-color: var(--color-switch-on-track);
+}
+
+.switch__spacerStart {
+  display: flex;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.switch__thumb {
+  width: var(--size-switch-thumb);
+  height: var(--size-switch-thumb);
+  background-color: var(--color-switch-thumb);
+  border-radius: var(--radius-pill);
+}
+
+.switch__spacerEnd {
+  display: flex;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.switch__textCol {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  min-width: 0;
+  gap: var(--space-inset-y-xs);
+}
+
+.switch__labelText {
+  font-size: var(--font-control-size-sm);
+  font-weight: var(--font-control-weight);
+}
+
+.switch__descriptionText {
+  font-size: var(--font-control-size-sm);
+  color: var(--color-text-secondary);
+}
+
+/* showcase chrome */
+.showcase { display: flex; flex-direction: column; gap: 24px; align-items: flex-start; font-family: sans-serif; }
+.showcase__label { margin: 0 0 8px; font: 12px/1 monospace; opacity: 0.6; }

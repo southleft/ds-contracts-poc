@@ -33,6 +33,7 @@
     "extract/fixtures",
     "evals/.scratch",
     "evals/adherence",
-    "evals/fixtures"
+    "evals/fixtures",
+    "core/samples"
   ]
 }

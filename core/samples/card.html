@@ -1,0 +1,26 @@
+<!--
+  Card — static HTML+CSS emitted from contract ds.card v1.1.0 by core/emit-html.ts.
+  Token values arrive via CSS custom properties (the same custom-property names the CSS Modules
+  bind) — include the token stylesheet (src/styles/tokens.css) on the page or nothing resolves.
+  Fidelity: no events, no interactivity beyond CSS states (:hover/:focus-visible/:disabled).
+  Slots render their declared defaultContent, else a named placeholder. Booleans render per showcase item.
+-->
+<section class="showcase showcase--card">
+  <div class="showcase__item">
+    <p class="showcase__label">default</p>
+    <article class="card">
+      <header class="card__header">
+        <span class="avatar avatar--size-sm" role="img">
+          AB
+        </span>
+        <span class="card__title">Card title</span>
+      </header>
+      <div class="card__body">
+        <span class="card__slot-placeholder">[children slot]</span>
+      </div>
+      <footer class="card__footer">
+        <span class="card__slot-placeholder">[actions slot]</span>
+      </footer>
+    </article>
+  </div>
+</section>
