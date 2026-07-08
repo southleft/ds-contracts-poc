@@ -68,7 +68,7 @@ browser. No backend, no analytics, no accounts.
   when the plan allows) → proposals bind against *the user's* token tree;
   tier-2/tier-3 references preferred exactly as the extractor already does.
 
-### Phase 3 — Start from nothing (generative)
+### Phase 3 — Start from nothing (generative) (LANDED)
 - **W9 — Prompt-to-component**: user-supplied Anthropic key, browser-direct
   Claude call, schema-constrained generation (tool use against
   ContractSchema) → a valid contract, never freeform code — the governed-
@@ -104,7 +104,7 @@ browser. No backend, no analytics, no accounts.
 - **Phase 3**: a prompt produces a schema-valid contract that renders in all
   emitters, with governance visible.
 
-## Demo path (W3 + W4 + W6 UI — landed)
+## Demo path (W3 + W4 + W6–W10 — landed)
 
 `npx vite --config playground/vite.config.ts` → http://localhost:5181
 
@@ -143,6 +143,28 @@ browser. No backend, no analytics, no accounts.
    The starter tree covers exactly ds.badge with values the repo never
    shipped; load any other contract and the generator refuses by name.
    A pasted tree is modeless — light and dark resolve identically.
+8. **Describe tab (W9)** — prompt → contract, governed. One sentence + a
+   user Anthropic key → a browser-direct claude-sonnet-5 call (the
+   documented `anthropic-dangerous-direct-browser-access` CORS opt-in;
+   the key is session-only, sent to api.anthropic.com and nowhere else)
+   with a FORCED tool whose input_schema is a pruned hand-authored contract
+   shape; the system prompt carries the authoring rules, the ACTIVE token
+   inventory (user tokens when pasted), and the Badge exemplar. The output
+   lands in the same governed editor as every source — a refused proposal
+   shows its violations by name and offers "Ask the model to fix" (the
+   refusal text goes back as an is_error tool_result; max 2 rounds, count
+   shown; never a silent retry). No key? **Demo generate** replays
+   recorded-shape responses through the injectable transport — identical
+   code path; round 1 deliberately invents `{radius.tag}` so the refusal
+   and the fix round demo in one click each. Receipts: model id, tokens
+   in/out, rounds used.
+9. **Share (W10)** — the button on the Contract pane copies a URL carrying
+   the contract text + active output tab + theme in the hash
+   (`#s=1.<base64url deflate-raw>`, plain-JSON `0.` fallback; a typical
+   contract is ~1–1.5 KB; >8 KB refuses with a named warning). Secrets and
+   user tokens never travel. First visit, a dismissible three-step strip
+   performs the loop for you: load Badge → break a token ref (named
+   refusal, in the editor and the React tab) → open the React output.
 
 Bundle tiers (vite build, gzip): initial ≈ 153 KB · prettier chunk ≈ 339 KB ·
 TypeScript chunk ≈ 985 KB · REST fixtures ≈ 3 KB — the lazy tiers load only
