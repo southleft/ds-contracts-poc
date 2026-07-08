@@ -51,6 +51,9 @@ const OUTPUT_LABELS: Record<string, string> = {
 
 const pretty = (value: unknown) => JSON.stringify(value, null, 2);
 
+/** First-visit flag for the onboarding strip — set on dismissal, forever. */
+const ONBOARD_KEY = 'ds-playground.onboarded';
+
 // ---------------------------------------------------------------------------
 // Receipt builders — verbatim engine output, grouped and named.
 // ---------------------------------------------------------------------------
@@ -531,6 +534,53 @@ export function Playground() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  // -------------------------------------------- first-visit onboarding strip
+  const [onboardDismissed, setOnboardDismissed] = useState(() => {
+    try {
+      return window.localStorage.getItem(ONBOARD_KEY) === '1';
+    } catch {
+      return true;
+    }
+  });
+  const [onboardDone, setOnboardDone] = useState<boolean[]>([false, false, false]);
+
+  const markOnboardStep = (i: number) =>
+    setOnboardDone((d) => d.map((v, j) => (j === i ? true : v)));
+
+  const dismissOnboarding = () => {
+    setOnboardDismissed(true);
+    try {
+      window.localStorage.setItem(ONBOARD_KEY, '1');
+    } catch {
+      /* storage unavailable — the strip just returns next visit */
+    }
+  };
+
+  const onboardSteps: Array<{ label: string; run: () => void }> = [
+    {
+      label: 'Pick an example',
+      run: () => {
+        setSourceTab('examples');
+        setOutputTab('preview');
+        loadContract('ds.badge', 'loaded from examples — ds.badge', 'badge');
+      },
+    },
+    {
+      label: 'Break the contract — watch a named refusal',
+      run: () => {
+        const raw = rawContractById.get('ds.badge');
+        if (!raw) return;
+        setText(pretty(raw).replace('{radius.badge}', '{radius.bogus}'));
+        setProvenance('onboarding — one token ref broken on purpose');
+        setActiveExample(null);
+      },
+    },
+    {
+      label: 'Check the React output',
+      run: () => setOutputTab('react'),
+    },
+  ];
+
   const runShare = async () => {
     try {
       const payload = await encodeShareState({ contract: text, output: outputTab, theme });
@@ -609,7 +659,32 @@ export function Playground() {
 
   // ------------------------------------------------------------------ render
   return (
-    <div className="pg">
+    <>
+      {!onboardDismissed && (
+        <div className="onboard" role="note" aria-label="Getting started">
+          <span className="onboard__title">New here? The whole loop in three clicks:</span>
+          {onboardSteps.map((step, i) => (
+            <button
+              key={step.label}
+              type="button"
+              className={`onboard__step${onboardDone[i] ? ' is-done' : ''}`}
+              onClick={() => {
+                step.run();
+                markOnboardStep(i);
+              }}
+            >
+              <span className="onboard__num" aria-hidden>
+                {onboardDone[i] ? '✓' : i + 1}
+              </span>
+              {step.label}
+            </button>
+          ))}
+          <button type="button" className="btn--ghost onboard__dismiss" onClick={dismissOnboarding}>
+            Dismiss
+          </button>
+        </div>
+      )}
+      <div className="pg">
       {/* ------------------------------------------------------- left rail */}
       <aside className="pg__rail">
         <div className="tabs" role="tablist" aria-label="Input source">
@@ -1173,6 +1248,7 @@ export function Playground() {
           {contractsById.size} components — core/index.ts, golden-guarded.
         </div>
       </section>
-    </div>
+      </div>
+    </>
   );
 }
