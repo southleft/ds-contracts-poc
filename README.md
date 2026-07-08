@@ -34,7 +34,7 @@ There's a second reason, and it's becoming the bigger one: **AI generation.** In
 | `figma-sync/` | Generated, transport-agnostic scripts that build the canvas library — plus the **Sync Runner** dev plugin (`plugin/`) that executes them from disk for full-library operations. A from-blank rebuild of the entire library ran this way and verified clean. | ❌ Generated (`plugin/`, `arrange.js` hand-maintained) |
 | `parity/` | The three-way differ: classifies every difference between contract, code, and canvas as *ahead*, *behind*, or *mismatched* — with a proposed remedy. | ✅ |
 | `catalog/` + `context/` | The compiled generation constraint (every API + every token + the governance rules) that an AI agent — or a human — can be held to, plus the org rules and memory that feed it. | catalog ❌ · rules ✅ |
-| `evals/` | 31 deterministic checks on the machinery itself: byte-identical regeneration, refusal of illegal contracts, detection of every claimed drift class, convergence after promotion. | ✅ |
+| `evals/` | 33 deterministic checks on the machinery itself: byte-identical regeneration, refusal of illegal contracts, detection of every claimed drift class, convergence after promotion. | ✅ |
 | `dashboard/` | The **Contract Hub** — a local app visualizing the whole system: live component previews, per-prop binding maps across all three surfaces, token provenance, one-click parity runs, contract editing with regeneration, and the full docs. | ✅ |
 | `docs/` | The working documents — start at [Getting Started](docs/00-getting-started.md). | ✅ |
 
@@ -56,7 +56,7 @@ npm run parity   # ① clean — code, canvas, and tokens all match the contract
 # ② edit any contract in contracts/ — add an enum value, change a token binding
 npm run build && npm run parity
 #    ③ the differ reports exactly what is now behind, and how to fix it
-npm run eval     # ④ 31 checks that detection, refusal, and convergence still hold
+npm run eval     # ④ 33 checks that detection, refusal, and convergence still hold
 ```
 
 That honest red state in step ③ is the product. Most design-system tooling shows you the happy path; this one is built to tell you precisely when and where the surfaces have stopped agreeing. (Point a token binding at a token that doesn't exist and the *build itself* fails — the contract↔token integrity gate.)
@@ -126,7 +126,7 @@ Not everything is expressible yet, and nothing here pretends otherwise:
 
 ## Status
 
-A **completed** proof of concept, validated end-to-end: generation into both surfaces, the parity loop run in both directions with receipts, 31/31 evals, a measured 100-vs-69 governed-generation result, a finished public pilot (Shoelace code reconciled against its community design kit — real drift, mechanically found), and the whole canvas library rebuilt from a blank file and verified against the contracts with zero findings. The reference design-tool integration lives behind a transport-agnostic script boundary (`docs/internal/`) — the contract format itself is tool-agnostic.
+A **completed** proof of concept, validated end-to-end: generation into both surfaces, the parity loop run in both directions with receipts, 33/33 evals, a measured 100-vs-69 governed-generation result, a finished public pilot (Shoelace code reconciled against its community design kit — real drift, mechanically found), and the whole canvas library rebuilt from a blank file and verified against the contracts with zero findings. The reference design-tool integration lives behind a transport-agnostic script boundary (`docs/internal/`) — the contract format itself is tool-agnostic.
 
 MIT-licensed, and contributions follow one norm above all: [no capability claim without an eval behind it](CONTRIBUTING.md). Skeptical? Good — start with [Questions & Objections](docs/14-questions-and-objections.md).
 

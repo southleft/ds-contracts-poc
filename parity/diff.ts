@@ -151,7 +151,24 @@ for (const contract of contracts) {
         });
       }
     }
-    if (p.default !== undefined && found.default !== undefined && p.default !== found.default) {
+    // Kind drift: a prop whose TYPE changed in code (enum→string,
+    // boolean→enum) previously passed as long as the name existed.
+    const expectedKind = isEnum(p) ? 'enum' : p.type === 'boolean' ? 'boolean' : null;
+    if (expectedKind && found.kind !== expectedKind && found.kind !== 'other') {
+      add({
+        surface: 'code',
+        classification: 'mismatch',
+        subject: `${contract.name}.${codeName} (type)`,
+        detail: `Prop type differs — contract: ${expectedKind}, code: ${found.kind}`,
+        remedy: 'Adopt into contract (promotion) or npm run generate to enforce',
+      });
+    }
+    // Default drift including ONE-SIDED deletion: a default removed from
+    // code is drift (the generated classname silently loses its styling),
+    // not a pass. Event-toggled props are exempt — their default lives in
+    // the uncontrolled useState, which extraction cannot see.
+    const isToggled = (contract.events ?? []).some((e) => e.toggles?.prop === p.name);
+    if (!isToggled && String(p.default ?? '') !== String(found.default ?? '')) {
       add({
         surface: 'code',
         classification: 'mismatch',
@@ -192,7 +209,7 @@ for (const contract of contracts) {
       subject: `${contract.name}.${cp.name}`,
       detail: `Code declares prop "${cp.name}" (${cp.kind}) that the contract does not define`,
       proposedPatch: patch,
-      remedy: `Review + append to contracts/${contract.id.replace('ds.', '')}.contract.json props[], bump version, then npm run build && npm run figma:plan`,
+      remedy: `Review + append to contracts/${contract.id.replace(/^[^.]+\./, '')}.contract.json props[], bump version, then npm run build && npm run figma:plan`,
     });
   }
 }
@@ -239,9 +256,35 @@ for (const contract of contracts) {
         classification: 'behind',
         subject: `${contract.name}.${propertyName}`,
         detail: `Contract prop "${p.name}" has no ${p.bindings.figma.kind} property on the Figma set`,
-        remedy: 'Add the property to the component set (figma-sync)',
+        remedy: 'Add the property to the existing set via a scripted edit — sync scripts are currently CREATE-only and skip existing components (see docs/internal/figma-sync.md)',
       });
       continue;
+    }
+    // Property KIND must match the binding (a designer converting a
+    // boolean to a variant axis previously passed as "present").
+    if (def.type !== p.bindings.figma.kind) {
+      add({
+        surface: 'figma',
+        classification: 'mismatch',
+        subject: `${contract.name}.${propertyName} (kind)`,
+        detail: `Property kind differs — contract: ${p.bindings.figma.kind}, figma: ${def.type}`,
+        remedy: 'Adopt into contract (promotion) or rebuild the property',
+      });
+    }
+    // BOOLEAN/TEXT defaults were presence-only (red-team finding): flipping
+    // every boolean default on the canvas passed "parity clean".
+    if (!isEnum(p) && p.default !== undefined && def.defaultValue !== undefined) {
+      const want = p.type === 'boolean' ? Boolean(p.default) : String(p.default);
+      const got = p.type === 'boolean' ? Boolean(def.defaultValue) : String(def.defaultValue);
+      if (want !== got) {
+        add({
+          surface: 'figma',
+          classification: 'mismatch',
+          subject: `${contract.name}.${propertyName} (default)`,
+          detail: `Default differs — contract: ${JSON.stringify(want)}, figma: ${JSON.stringify(got)}`,
+          remedy: 'Adopt into contract (promotion) or reset the property default',
+        });
+      }
     }
     if (isEnum(p)) {
       const want = p.type.enum.map((v) => p.bindings.figma.values?.[v] ?? v);

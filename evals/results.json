@@ -1,6 +1,6 @@
 {
-  "passed": 31,
-  "total": 31,
+  "passed": 33,
+  "total": 33,
   "results": [
     {
       "id": "refuse-unknown-token-reference",
@@ -125,6 +125,16 @@
     {
       "id": "diagnose-foreign-green-red-green",
       "claim": "C5-extraction",
+      "pass": true
+    },
+    {
+      "id": "detect-default-and-kind-drift",
+      "claim": "C3-detection",
+      "pass": true
+    },
+    {
+      "id": "golden-generated-output",
+      "claim": "C1-determinism",
       "pass": true
     },
     {

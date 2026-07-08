@@ -24,7 +24,8 @@
     "extract:code": "tsx extract/run.ts code",
     "reconcile": "tsx extract/run.ts reconcile",
     "diagnose": "tsx parity/diagnose.ts",
-    "figma:serve": "node scripts/figma-serve.mjs"
+    "figma:serve": "node scripts/figma-serve.mjs",
+    "golden:update": "node scripts/update-golden.mjs"
   },
   "engines": {
     "node": ">=20"

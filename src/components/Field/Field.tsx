@@ -39,7 +39,7 @@ export const Field = forwardRef<HTMLDivElement, FieldProps>(function Field(
   const classes = [styles.root, className].filter(Boolean).join(' ');
   return (
     <div ref={ref} className={classes} data-is-required={isRequired || undefined} {...rest}>
-      <label className={styles.labelRow} htmlFor={inputID}>
+      <label className={styles.labelRow} htmlFor={String(inputID)}>
         <span className={styles.labelText}>{label}</span>
         {isRequired ? (
           <span

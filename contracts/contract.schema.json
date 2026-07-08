@@ -13,7 +13,8 @@
       "type": "string"
     },
     "version": {
-      "type": "string"
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
     },
     "status": {
       "default": "draft",
@@ -83,7 +84,8 @@
       },
       "required": [
         "element"
-      ]
+      ],
+      "additionalProperties": false
     },
     "props": {
       "type": "array",
@@ -123,7 +125,8 @@
                 },
                 "required": [
                   "enum"
-                ]
+                ],
+                "additionalProperties": false
               }
             ]
           },
@@ -174,7 +177,8 @@
                 "required": [
                   "kind",
                   "property"
-                ]
+                ],
+                "additionalProperties": false
               },
               "code": {
                 "type": "object",
@@ -185,20 +189,23 @@
                 },
                 "required": [
                   "prop"
-                ]
+                ],
+                "additionalProperties": false
               }
             },
             "required": [
               "figma",
               "code"
-            ]
+            ],
+            "additionalProperties": false
           }
         },
         "required": [
           "name",
           "type",
           "bindings"
-        ]
+        ],
+        "additionalProperties": false
       }
     },
     "events": {
@@ -226,12 +233,14 @@
                 },
                 "required": [
                   "prop"
-                ]
+                ],
+                "additionalProperties": false
               }
             },
             "required": [
               "code"
-            ]
+            ],
+            "additionalProperties": false
           },
           "trigger": {
             "type": "string"
@@ -273,7 +282,8 @@
           "name",
           "bindings",
           "trigger"
-        ]
+        ],
+        "additionalProperties": false
       }
     },
     "states": {
@@ -362,7 +372,8 @@
           "required": [
             "fileKey",
             "componentSetKey"
-          ]
+          ],
+          "additionalProperties": false
         },
         "code": {
           "type": "object",
@@ -377,13 +388,15 @@
           "required": [
             "importPath",
             "export"
-          ]
+          ],
+          "additionalProperties": false
         }
       },
       "required": [
         "figma",
         "code"
-      ]
+      ],
+      "additionalProperties": false
     }
   },
   "required": [
@@ -396,6 +409,7 @@
     "anatomy",
     "anchors"
   ],
+  "additionalProperties": false,
   "definitions": {
     "__schema0": {
       "type": "object",
@@ -447,7 +461,8 @@
             "overlap": {
               "type": "boolean"
             }
-          }
+          },
+          "additionalProperties": false
         },
         "tokens": {
           "type": "object",
@@ -484,7 +499,8 @@
           },
           "required": [
             "prop"
-          ]
+          ],
+          "additionalProperties": false
         },
         "text": {
           "type": "string"
@@ -502,7 +518,8 @@
           "required": [
             "valueProp",
             "maxProp"
-          ]
+          ],
+          "additionalProperties": false
         },
         "animation": {
           "type": "string",
@@ -577,13 +594,15 @@
                 },
                 "required": [
                   "id"
-                ]
+                ],
+                "additionalProperties": false
               }
             }
           },
           "required": [
             "name"
-          ]
+          ],
+          "additionalProperties": false
         },
         "component": {
           "type": "object",
@@ -613,7 +632,8 @@
           },
           "required": [
             "id"
-          ]
+          ],
+          "additionalProperties": false
         },
         "icon": {
           "type": "object",
@@ -627,7 +647,8 @@
           },
           "required": [
             "asset"
-          ]
+          ],
+          "additionalProperties": false
         },
         "attrs": {
           "type": "object",
@@ -650,7 +671,8 @@
           },
           "required": [
             "prop"
-          ]
+          ],
+          "additionalProperties": false
         },
         "optional": {
           "type": "boolean"
@@ -664,7 +686,8 @@
             "$ref": "#/definitions/__schema0"
           }
         }
-      }
+      },
+      "additionalProperties": false
     }
   }
 }

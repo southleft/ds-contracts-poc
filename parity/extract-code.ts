@@ -14,7 +14,7 @@ export interface CodeProp {
   kind: 'enum' | 'boolean' | 'other';
   values?: string[];
   optional: boolean;
-  default?: string | boolean;
+  default?: string | boolean | number;
 }
 
 export interface CodeExtract {
@@ -39,7 +39,7 @@ export function extractCode(root = process.cwd()): CodeExtract[] {
 
     const sf = ts.createSourceFile(`${name}.tsx`, src, ts.ScriptTarget.Latest, true);
     const props: CodeProp[] = [];
-    const defaults = new Map<string, string | boolean>();
+    const defaults = new Map<string, string | boolean | number>();
 
     const visit = (node: ts.Node): void => {
       if (ts.isInterfaceDeclaration(node) && node.name.text === `${name}Props`) {
@@ -67,10 +67,15 @@ export function extractCode(root = process.cwd()): CodeExtract[] {
           props.push({ name: propName, kind, values, optional: !!member.questionToken });
         }
       }
-      if (ts.isObjectBindingPattern(node)) {
+      // Defaults come ONLY from a function PARAMETER's destructuring —
+      // a helper's `const { size = 'lg' } = opts` must not be attributed
+      // to the component (red-team finding: file-global visitor).
+      if (ts.isObjectBindingPattern(node) && node.parent && ts.isParameter(node.parent)) {
         for (const el of node.elements) {
           if (el.initializer && ts.isIdentifier(el.name)) {
             if (ts.isStringLiteral(el.initializer)) defaults.set(el.name.text, el.initializer.text);
+            else if (ts.isNumericLiteral(el.initializer))
+              defaults.set(el.name.text, Number(el.initializer.text));
             else if (el.initializer.kind === ts.SyntaxKind.TrueKeyword)
               defaults.set(el.name.text, true);
             else if (el.initializer.kind === ts.SyntaxKind.FalseKeyword)

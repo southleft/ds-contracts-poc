@@ -37,7 +37,7 @@ export const BreadcrumbItem = forwardRef<HTMLSpanElement, BreadcrumbItemProps>(
             dangerouslySetInnerHTML={{ __html: ICONS['chevron-right'] }}
           />
         ) : null}
-        <a className={styles.link} href={href}>
+        <a className={styles.link} href={String(href)}>
           {label}
         </a>
       </span>

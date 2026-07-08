@@ -62,7 +62,7 @@ export const TextField = forwardRef<HTMLLabelElement, TextFieldProps>(function T
         ) : null}
       </div>
       <span className={styles.descriptionText}>{description}</span>
-      <input className={styles.input} type="text" placeholder={placeholder}></input>
+      <input className={styles.input} type="text" placeholder={String(placeholder)}></input>
     </label>
   );
 });

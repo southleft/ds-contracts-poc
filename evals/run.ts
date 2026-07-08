@@ -42,6 +42,7 @@ function resetScratch() {
   for (const file of ['package.json', 'tsconfig.json']) {
     cpSync(path.join(ROOT, file), path.join(SCRATCH, file));
   }
+  cpSync(path.join(ROOT, 'evals', 'golden.json'), path.join(SCRATCH, 'evals', 'golden.json'));
   symlinkSync(path.join(ROOT, 'node_modules'), path.join(SCRATCH, 'node_modules'), 'dir');
 }
 
@@ -489,6 +490,24 @@ const cases: Case[] = [
       if (r.status === 0 || !r.out.includes('duplicate contract name')) {
         throw new Error(`duplicate-contract-name: not refused by name:\n${r.out.slice(0, 400)}`);
       }
+      // Red-team additions (2026-07-08):
+      expectRefusal('duplicate-code-binding (git-merge artifact)', 'duplicate code binding', (c) => {
+        const first = c.props.find((p: any) => typeof p.type === 'object');
+        const clone = JSON.parse(JSON.stringify(first));
+        clone.name = 'variantTwo';
+        clone.bindings.figma.property = 'Variant Two';
+        c.props.push(clone); // same bindings.code.prop as the original
+      });
+      expectRefusal('three-enum-axes (canvas maps two)', 'at most TWO variant axes', (c) => {
+        for (const extra of ['zshape', 'zdensity']) {
+          c.props.push({ name: extra, type: { enum: ['aa', 'bb'] }, default: 'aa',
+            bindings: { figma: { kind: 'VARIANT', property: extra.toUpperCase(), values: { aa: 'Aa', bb: 'Bb' } }, code: { prop: extra } } });
+        }
+      });
+      expectRefusal('non-semver version', 'semver', (c) => { c.version = 'v2-final'; });
+      expectRefusal('unknown field silently stripped (strict schema)', 'Unrecognized key', (c) => {
+        c.behavior = { on: 'hover' };
+      });
       // and a refused contract must FAIL FAST by name — never crash a
       // dependent contract with an unnamed TypeError (the bug this found)
       editJson(BADGE, (c) => { c.props.find((p: any) => typeof p.type === 'object').type.enum = []; });
@@ -590,6 +609,80 @@ const cases: Case[] = [
         "size?: 'compact' | 'regular';",
       );
       if (diagnose().status !== 0) throw new Error('Did not return to green after revert');
+    },
+  },
+  {
+    // Red-team (2026-07-08): these five drift classes previously passed
+    // "parity clean" — boolean/text defaults on the canvas were
+    // presence-only, numeric code defaults were invisible to extraction,
+    // a DELETED code default was accepted, and property KIND changes on
+    // either surface were never compared.
+    id: 'detect-default-and-kind-drift',
+    claim: 'C3-detection',
+    run: () => {
+      const check = (label: string, surface: string, cls: string, subject: string, mutate: () => void, restore: () => void) => {
+        mutate();
+        const r = parity();
+        try {
+          if (r.status === 0) throw new Error(`${label}: NOT detected`);
+          expectFinding(readReport(), surface, cls, subject);
+        } finally { restore(); }
+      };
+      const figmaSnap = readFileSync(path.join(SCRATCH, FIGMA_COMPONENTS), 'utf8');
+      check('figma boolean default flip', 'figma', 'mismatch', 'Button.Loading (default)',
+        () => editJson(FIGMA_COMPONENTS, (snap) => {
+          const btn = snap.sets.find((x: any) => x.name === 'Button');
+          const key = Object.keys(btn.properties).find((k: string) => k.startsWith('Loading'))!;
+          btn.properties[key].defaultValue = true;
+        }),
+        () => writeFileSync(path.join(SCRATCH, FIGMA_COMPONENTS), figmaSnap));
+      check('figma text default change', 'figma', 'mismatch', 'Button.Label (default)',
+        () => editJson(FIGMA_COMPONENTS, (snap) => {
+          const btn = snap.sets.find((x: any) => x.name === 'Button');
+          const key = Object.keys(btn.properties).find((k: string) => k.startsWith('Label'))!;
+          btn.properties[key].defaultValue = 'TOTALLY DIFFERENT';
+        }),
+        () => writeFileSync(path.join(SCRATCH, FIGMA_COMPONENTS), figmaSnap));
+      check('figma property kind change', 'figma', 'mismatch', 'Button.Loading (kind)',
+        () => editJson(FIGMA_COMPONENTS, (snap) => {
+          const btn = snap.sets.find((x: any) => x.name === 'Button');
+          const key = Object.keys(btn.properties).find((k: string) => k.startsWith('Loading'))!;
+          btn.properties[key].type = 'TEXT';
+        }),
+        () => writeFileSync(path.join(SCRATCH, FIGMA_COMPONENTS), figmaSnap));
+      const sliderSrc = readFileSync(path.join(SCRATCH, 'src/components/Slider/Slider.tsx'), 'utf8');
+      check('numeric code default drift', 'code', 'mismatch', 'Slider.value (default)',
+        () => replaceInFile('src/components/Slider/Slider.tsx', 'value = 40,', 'value = 99,'),
+        () => writeFileSync(path.join(SCRATCH, 'src/components/Slider/Slider.tsx'), sliderSrc));
+      const btnSrc = readFileSync(path.join(SCRATCH, BTN_TSX), 'utf8');
+      check('deleted code default', 'code', 'mismatch', 'Button.size (default)',
+        () => replaceInFile(BTN_TSX, "size = 'md',", 'size,'),
+        () => writeFileSync(path.join(SCRATCH, BTN_TSX), btnSrc));
+    },
+  },
+  {
+    // Red-team (2026-07-08): run-2-vs-run-1 determinism is true of broken
+    // generators too. The golden manifest pins generator OUTPUT — mutants
+    // that mirror alignment or drop the focus ring now fail here.
+    id: 'golden-generated-output',
+    claim: 'C1-determinism',
+    run: () => {
+      if (buildTokens().status !== 0 || generate().status !== 0) throw new Error('Build failed');
+      if (run(TSX, ['scripts/generate-figma.ts']).status !== 0) throw new Error('figma:plan failed');
+      const golden: Record<string, string> = JSON.parse(
+        readFileSync(path.join(SCRATCH, 'evals', 'golden.json'), 'utf8'),
+      );
+      const bad: string[] = [];
+      for (const [rel, hash] of Object.entries(golden)) {
+        let actual = '';
+        try {
+          actual = createHash('sha256').update(readFileSync(path.join(SCRATCH, rel))).digest('hex');
+        } catch { bad.push(`${rel}: MISSING`); continue; }
+        if (actual !== hash) bad.push(rel);
+      }
+      if (bad.length > 0) {
+        throw new Error(`Generated output diverges from golden manifest (${bad.length} file[s]): ${bad.slice(0, 5).join(', ')} — if intentional, npm run golden:update in a reviewed change`);
+      }
     },
   },
   {

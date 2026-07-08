@@ -241,6 +241,11 @@ function validateContract(contract: Contract, byId: Map<string, Contract>, error
     }
   }
   if (!contract.anatomy.root) errors.push(`${contract.id}: anatomy must have a "root" part`);
+  if (contract.figmaRepresentation !== 'native' && enumProps(contract).length > 2) {
+    errors.push(
+      `${contract.id}: ${enumProps(contract).length} enum props — the canvas generator maps at most TWO variant axes today; a third would be silently dropped from the design surface. Refused until N-axis support lands (fold axes or split the component).`,
+    );
+  }
 
   // Identity + consistency gates (added after an adversarial refusal sweep
   // found these invalid states passing silently — C2 means NAMED refusal).
@@ -249,11 +254,25 @@ function validateContract(contract: Contract, byId: Map<string, Contract>, error
   }
   const seenPropNames = new Set<string>();
   const seenFigmaProps = new Set<string>();
+  // Duplicate CODE bindings are the classic git-auto-merge artifact: two
+  // branches each add a prop, the JSON merges cleanly, Zod accepts it, and
+  // the generator would emit a duplicate interface member + duplicate
+  // destructuring binding — syntactically broken output with exit 0
+  // (red-team finding). Slot names and event props share the same code
+  // namespace, so the uniqueness gate covers all three.
+  const seenCodeNames = new Set<string>(
+    walkAnatomy(contract).filter((w) => w.part.slot).map((w) => w.part.slot!.name),
+  );
   for (const p of contract.props) {
     if (seenPropNames.has(p.name)) {
       errors.push(`${contract.id}: duplicate prop name "${p.name}"`);
     }
     seenPropNames.add(p.name);
+    const codeName = p.bindings.code.prop;
+    if (codeName !== 'children' && seenCodeNames.has(codeName)) {
+      errors.push(`${contract.id}: duplicate code binding "${codeName}" — two props/slots/events share one code name (check for a bad merge)`);
+    }
+    seenCodeNames.add(codeName);
     if (!/^[a-z][A-Za-z0-9]*$/.test(p.bindings.code.prop)) {
       errors.push(`${contract.id}: prop "${p.name}" code binding "${p.bindings.code.prop}" is not a legal camelCase identifier`);
     }
@@ -317,8 +336,8 @@ function validateContract(contract: Contract, byId: Map<string, Contract>, error
       errors.push(`${contract.id}: duplicate event code prop "${codeProp}"`);
     }
     seenEventProps.add(codeProp);
-    if (contract.props.some((p) => p.bindings.code.prop === codeProp)) {
-      errors.push(`${contract.id}: event "${ev.name}" code prop "${codeProp}" collides with a data prop`);
+    if (contract.props.some((p) => p.bindings.code.prop === codeProp) || walkAnatomy(contract).some((w) => w.part.slot?.name === codeProp)) {
+      errors.push(`${contract.id}: event "${ev.name}" code prop "${codeProp}" collides with a data prop or slot`);
     }
     const trigger = partByName.get(ev.trigger);
     if (!trigger) {
@@ -357,7 +376,7 @@ function generateCss(contract: Contract, tokenInventory: Set<string>, errors: st
   const enums = new Map(enumProps(contract).map((p) => [p.name, p.type.enum]));
   const lines: string[] = [
     `/* GENERATED FILE — DO NOT EDIT.`,
-    ` * Source of truth: contracts/${contract.id.replace('ds.', '')}.contract.json (${contract.id} v${contract.version})`,
+    ` * Source of truth: contracts/${contract.id.replace(/^[^.]+\./, '')}.contract.json (${contract.id} v${contract.version})`,
     ` * Regenerate with: npm run generate`,
     ` */`,
   ];
@@ -841,7 +860,7 @@ function generateTsx(contract: Contract, byId: Map<string, Contract>): string {
     Object.entries(part.attrs ?? {})
       .map(([attr, value]) => {
         const ref = value.match(/^\{([a-z][\w-]*)\}$/);
-        if (ref) return ` ${attr}={${codePropOf(ref[1])}}`;
+        if (ref) return ` ${attr}={String(${codePropOf(ref[1])})}`;
         if (NUMERIC_ATTRS.has(attr) && /^\d+$/.test(value)) return ` ${attr}={${value}}`;
         return ` ${attr}=${JSON.stringify(value)}`;
       })
@@ -935,7 +954,7 @@ function generateTsx(contract: Contract, byId: Map<string, Contract>): string {
 
   return `/**
  * GENERATED FILE — DO NOT EDIT.
- * Source of truth: contracts/${contract.id.replace('ds.', '')}.contract.json (${contract.id} v${contract.version})
+ * Source of truth: contracts/${contract.id.replace(/^[^.]+\./, '')}.contract.json (${contract.id} v${contract.version})
  * Regenerate with: npm run generate
  */
 import { forwardRef${events.some((e) => e.toggles) ? ', useState' : ''} } from 'react';
@@ -1027,7 +1046,8 @@ function generateStories(contract: Contract, byId: Map<string, Contract>): strin
       ? enums[0].type.enum
           .map((v) => {
             // A story named after the component itself collides with its import.
-            const storyName = pascal(v) === name ? `${pascal(v)}Variant` : pascal(v);
+            const safe = v.replace(/[^a-zA-Z0-9]+([a-zA-Z0-9])/g, (_, c: string) => c.toUpperCase()).replace(/[^a-zA-Z0-9]/g, '');
+            const storyName = pascal(safe) === name ? `${pascal(safe)}Variant` : pascal(safe);
             return `
 export const ${storyName}: Story = {
   args: { ${enums[0].bindings.code.prop}: '${v}' },
@@ -1143,7 +1163,7 @@ export const Disabled: Story = {
 
   return `/**
  * GENERATED FILE — DO NOT EDIT.
- * Source of truth: contracts/${contract.id.replace('ds.', '')}.contract.json (${contract.id} v${contract.version})
+ * Source of truth: contracts/${contract.id.replace(/^[^.]+\./, '')}.contract.json (${contract.id} v${contract.version})
  * Regenerate with: npm run generate
  */
 import type { Meta, StoryObj } from '@storybook/react-vite';

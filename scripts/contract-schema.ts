@@ -37,11 +37,11 @@ export const TokenRefSchema = z
     'Token reference must be brace-wrapped, e.g. "{color.action.primary.background}"',
   );
 
-const EnumTypeSchema = z.object({
+const EnumTypeSchema = z.strictObject({
   enum: z.array(z.string()).min(1),
 });
 
-export const PropSchema = z.object({
+export const PropSchema = z.strictObject({
   name: z.string(),
   description: z.string().optional(),
   /** "boolean" | "text" | "number" | { enum: [...] } */
@@ -51,20 +51,20 @@ export const PropSchema = z.object({
   required: z.boolean().optional(),
   /** How this prop manifests on each side. Neither side is primary;
    *  the contract owns the canonical name and value set. */
-  bindings: z.object({
-    figma: z.object({
+  bindings: z.strictObject({
+    figma: z.strictObject({
       kind: z.enum(['VARIANT', 'BOOLEAN', 'TEXT', 'INSTANCE_SWAP']),
       property: z.string(),
       /** canonical value → Figma variant value, e.g. { "primary": "Primary" } */
       values: z.record(z.string(), z.string()).optional(),
     }),
-    code: z.object({
+    code: z.strictObject({
       prop: z.string(),
     }),
   }),
 });
 
-export const LayoutSchema = z.object({
+export const LayoutSchema = z.strictObject({
   display: z.enum(['flex', 'inline-flex']).optional(),
   direction: z.enum(['row', 'column']).optional(),
   align: z.enum(['start', 'center', 'end', 'stretch']).optional(),
@@ -79,7 +79,7 @@ export const LayoutSchema = z.object({
 /** Conditional part visibility (schema v4, gap G1): the part renders only
  *  when the prop matches. Boolean props map to Figma visibility bindings;
  *  enum conditions resolve per variant. */
-export const VisibleWhenSchema = z.object({
+export const VisibleWhenSchema = z.strictObject({
   prop: z.string(),
   /** Omit for boolean props (truthy). */
   equals: z.string().optional(),
@@ -88,7 +88,7 @@ export const VisibleWhenSchema = z.object({
 /** Design-time default content for a slot (Curtis's fifth slot property).
  *  Renders as instances inside the slot in Figma and as the sample in code
  *  stories — never baked into the generated component itself. */
-export const SlotContentItemSchema = z.object({
+export const SlotContentItemSchema = z.strictObject({
   id: z.string(),
   props: z.record(z.string(), z.union([z.string(), z.boolean()])).optional(),
   text: z.string().optional(),
@@ -97,7 +97,7 @@ export const SlotContentItemSchema = z.object({
 /** A constrained insertion point — Nathan Curtis's slot model, aligned with
  *  Figma's two-tier constraint design (preferredValues = prefer;
  *  allowPreferredValuesOnly = restrict). */
-export const SlotSchema = z.object({
+export const SlotSchema = z.strictObject({
   /** "children" = the default slot (React children). Any other name becomes
    *  a ReactNode prop of that name. */
   name: z.string(),
@@ -123,7 +123,7 @@ export const SlotSchema = z.object({
 });
 
 /** A fixed instance of another contract, embedded in this component. */
-export const ComponentRefSchema = z.object({
+export const ComponentRefSchema = z.strictObject({
   /** The child contract's id, e.g. "ds.avatar". */
   id: z.string(),
   /** Fixed prop values, spelled canonically; mapped through the CHILD
@@ -172,22 +172,22 @@ export interface Part {
 }
 
 export const PartSchema: z.ZodType<Part> = z.lazy(() =>
-  z.object({
+  z.strictObject({
     description: z.string().optional(),
     element: z.string().optional(),
     layout: LayoutSchema.optional(),
     tokens: z.record(z.string(), TokenRefSchema).optional(),
     states: z.record(z.string(), z.record(z.string(), TokenRefSchema)).optional(),
-    content: z.object({ prop: z.string() }).optional(),
+    content: z.strictObject({ prop: z.string() }).optional(),
     text: z.string().optional(),
-    meter: z.object({ valueProp: z.string(), maxProp: z.string() }).optional(),
+    meter: z.strictObject({ valueProp: z.string(), maxProp: z.string() }).optional(),
     animation: z.enum(['spin', 'pulse']).optional(),
     slot: SlotSchema.optional(),
     component: ComponentRefSchema.optional(),
     /** Icon part (v4, gap G6): renders assets/icons/<asset>.svg inline on the
      *  code side and as a vector in Figma. '{prop}' substitutes an enum prop
      *  (icon-by-status). Icons are always decorative (aria-hidden). */
-    icon: z.object({ asset: z.string(), size: z.number().optional() }).optional(),
+    icon: z.strictObject({ asset: z.string(), size: z.number().optional() }).optional(),
     /** v4, gap G2: HTML/ARIA attributes on this part's element — literal
      *  strings or '{prop}' references. Code-side surface; Figma ignores. */
     attrs: z.record(z.string(), z.string()).optional(),
@@ -210,11 +210,11 @@ export const PartSchema: z.ZodType<Part> = z.lazy(() =>
  *  component-description text only — a declared fidelity limit, like
  *  animation. Complex behavior (drag, typeahead, focus trapping) stays a
  *  hand-written layer; contracts refuse to pretend otherwise. */
-export const EventSchema = z.object({
+export const EventSchema = z.strictObject({
   name: z.string().regex(/^[a-z][a-zA-Z0-9]*$/),
   description: z.string().optional(),
-  bindings: z.object({
-    code: z.object({ prop: z.string().regex(/^on[A-Z][a-zA-Z0-9]*$/) }),
+  bindings: z.strictObject({
+    code: z.strictObject({ prop: z.string().regex(/^on[A-Z][a-zA-Z0-9]*$/) }),
   }),
   /** Anatomy part (by name) whose activation fires the event; 'root' allowed. */
   trigger: z.string(),
@@ -229,7 +229,7 @@ export const EventSchema = z.object({
     .optional(),
 });
 
-export const ContractSchema = z.object({
+export const ContractSchema = z.strictObject({
   $schema: z.string().optional(),
   /** Stable canonical id, never renamed. e.g. "ds.button". The namespace
    *  before the dot is the owning system's — brownfield extractions use
@@ -238,10 +238,10 @@ export const ContractSchema = z.object({
   id: z.string().regex(/^[a-z][a-z0-9-]*\.[a-z][a-z0-9-]*$/),
   /** Display / export name. e.g. "Button" */
   name: z.string(),
-  version: z.string(),
+  version: z.string().regex(/^\d+\.\d+\.\d+$/, 'version must be semver (MAJOR.MINOR.PATCH)'),
   status: z.enum(['draft', 'stable', 'deprecated']).default('draft'),
   description: z.string(),
-  semantics: z.object({
+  semantics: z.strictObject({
     element: z.enum([
       'button', 'span', 'div', 'a', 'input', 'article', 'section', 'header', 'footer',
       'label', 'nav', 'hr', 'ul', 'li', 'p', 'textarea', 'select', 'fieldset',
@@ -273,13 +273,13 @@ export const ContractSchema = z.object({
     .optional(),
   /** Per-side identity anchors. Written back after first generation on each
    *  side so renames on either side never fork identity. */
-  anchors: z.object({
-    figma: z.object({
+  anchors: z.strictObject({
+    figma: z.strictObject({
       fileKey: z.string().nullable(),
       componentSetKey: z.string().nullable(),
       nodeId: z.string().nullable().optional(),
     }),
-    code: z.object({
+    code: z.strictObject({
       importPath: z.string(),
       export: z.string(),
     }),

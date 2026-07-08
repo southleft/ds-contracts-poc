@@ -53,7 +53,7 @@ export const TextArea = forwardRef<HTMLLabelElement, TextAreaProps>(function Tex
         ) : null}
       </div>
       <span className={styles.descriptionText}>{description}</span>
-      <textarea className={styles.input} rows={3} placeholder={placeholder}></textarea>
+      <textarea className={styles.input} rows={3} placeholder={String(placeholder)}></textarea>
     </label>
   );
 });
