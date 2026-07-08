@@ -72,7 +72,7 @@ interface FigmaSet {
   properties: Record<string, FigmaPropertyDef>;
   nestedInstances?: string[];
 }
-const figmaComponents: { sets: FigmaSet[] } = JSON.parse(
+const figmaComponents: { sets: FigmaSet[]; fileKey?: string; extractedAt?: number } = JSON.parse(
   readFileSync(path.join(ROOT, 'parity', 'snapshots', 'figma-components.json'), 'utf8'),
 );
 interface FigmaVariable {
@@ -80,8 +80,60 @@ interface FigmaVariable {
   type: string;
   values: Record<string, unknown>;
 }
-const figmaTokens: { collections: Array<{ name: string; variables: FigmaVariable[] }> } =
-  JSON.parse(readFileSync(path.join(ROOT, 'parity', 'snapshots', 'figma-tokens.json'), 'utf8'));
+const figmaTokens: {
+  collections: Array<{ name: string; variables: FigmaVariable[] }>;
+  fileKey?: string;
+  extractedAt?: number;
+} = JSON.parse(readFileSync(path.join(ROOT, 'parity', 'snapshots', 'figma-tokens.json'), 'utf8'));
+
+// ---------------------------------------------------------------------------
+// 0 · snapshot provenance — are these snapshots from the right file, recently?
+// ---------------------------------------------------------------------------
+// Snapshots that carry `fileKey` are verified against the contracts' anchor
+// file key; snapshots that carry `extractedAt` (epoch ms, stamped by
+// parity/extract-figma.plugin.js) are checked for staleness. Snapshots
+// WITHOUT these fields get a console warning, not a finding — older
+// snapshots stay usable (backward compatible).
+
+const MAX_SNAPSHOT_AGE_DAYS = Number(process.env.MAX_SNAPSHOT_AGE_DAYS ?? 14);
+const anchorFileKey = contracts[0]?.anchors.figma.fileKey ?? null;
+const provenanceWarnings: string[] = [];
+
+for (const [label, snap] of [
+  ['figma-components.json', figmaComponents],
+  ['figma-tokens.json', figmaTokens],
+] as const) {
+  if (typeof snap.fileKey === 'string' && snap.fileKey) {
+    if (anchorFileKey && snap.fileKey !== anchorFileKey) {
+      add({
+        surface: 'figma',
+        classification: 'mismatch',
+        subject: 'snapshot-provenance',
+        detail: `${label} was extracted from file ${snap.fileKey} but the contracts anchor file ${anchorFileKey} — the snapshot describes a different Figma file`,
+        remedy: 'Re-run parity/extract-figma.plugin.js in the anchored file and save fresh snapshots',
+      });
+    }
+  } else {
+    provenanceWarnings.push(`${label} lacks fileKey`);
+  }
+  if (typeof snap.extractedAt === 'number' && Number.isFinite(snap.extractedAt)) {
+    const ageDays = (Date.now() - snap.extractedAt) / 86_400_000;
+    if (ageDays > MAX_SNAPSHOT_AGE_DAYS) {
+      add({
+        surface: 'figma',
+        classification: 'mismatch',
+        subject: 'snapshot-stale',
+        detail: `${label} is ${ageDays.toFixed(1)} days old (max ${MAX_SNAPSHOT_AGE_DAYS}, override via MAX_SNAPSHOT_AGE_DAYS) — the Figma file has likely moved on`,
+        remedy: 'Re-run parity/extract-figma.plugin.js and save fresh snapshots',
+      });
+    }
+  } else {
+    provenanceWarnings.push(`${label} lacks extractedAt`);
+  }
+}
+if (provenanceWarnings.length > 0) {
+  console.warn(`⚠ snapshot provenance unverifiable: ${provenanceWarnings.join('; ')} — re-extract with the current parity/extract-figma.plugin.js to enable identity + staleness checks.`);
+}
 
 // ---------------------------------------------------------------------------
 // 1 · code ⟷ contract
@@ -526,24 +578,86 @@ checkTokens('Semantic', [
 ]);
 
 // ---------------------------------------------------------------------------
-// Report
+// Report — triage before firehose.
+//
+// Baseline: parity/baseline.json (optional) is an array of finding keys
+// ("surface|classification|subject"). Baselined findings are ACKNOWLEDGED —
+// reported in their own section, excluded from the exit code — so a team can
+// ratchet down known drift without the check going permanently red.
 // ---------------------------------------------------------------------------
+
+const findingKey = (f: Finding) => `${f.surface}|${f.classification}|${f.subject}`;
+
+let baseline = new Set<string>();
+const baselinePath = path.join(ROOT, 'parity', 'baseline.json');
+try {
+  const parsed = JSON.parse(readFileSync(baselinePath, 'utf8'));
+  if (Array.isArray(parsed) && parsed.every((k) => typeof k === 'string')) {
+    baseline = new Set(parsed);
+  } else {
+    console.warn('⚠ parity/baseline.json exists but is not an array of "surface|classification|subject" strings — ignored.');
+  }
+} catch {
+  /* no baseline — every finding counts */
+}
+
+const acknowledged = findings.filter((f) => baseline.has(findingKey(f)));
+const active = findings.filter((f) => !baseline.has(findingKey(f)));
+
+// Summary: counts by surface × classification (active findings only —
+// acknowledged drift is counted separately).
+const bySurface: Record<string, Record<string, number>> = {};
+for (const f of active) {
+  bySurface[f.surface] ??= {};
+  bySurface[f.surface][f.classification] = (bySurface[f.surface][f.classification] ?? 0) + 1;
+}
+const summary = { total: active.length, acknowledged: acknowledged.length, bySurface };
 
 writeFileSync(
   path.join(ROOT, 'parity', 'report.json'),
-  JSON.stringify({ findings, checkedContracts: contracts.map((c) => `${c.id}@${c.version}`) }, null, 2) + '\n',
+  JSON.stringify(
+    { summary, findings: active, acknowledged, checkedContracts: contracts.map((c) => `${c.id}@${c.version}`) },
+    null,
+    2,
+  ) + '\n',
 );
 
-if (findings.length === 0) {
-  console.log('✔ Parity clean — code, Figma, and tokens all match the contract.');
-  process.exit(0);
-}
-
-console.log(`✖ ${findings.length} drift finding(s):\n`);
-for (const f of findings) {
+const printFinding = (f: Finding) => {
   console.log(`  [${f.surface} ${f.classification.toUpperCase()}] ${f.subject}`);
   console.log(`    ${f.detail}`);
   if (f.proposedPatch) console.log(`    proposed patch: ${JSON.stringify(f.proposedPatch)}`);
   console.log(`    → ${f.remedy}\n`);
+};
+
+if (active.length === 0 && acknowledged.length === 0) {
+  console.log('✔ Parity clean — code, Figma, and tokens all match the contract.');
+  process.exit(0);
 }
-process.exit(1);
+
+// Summary header first: surface × classification counts.
+if (active.length > 0) {
+  console.log(`✖ ${active.length} drift finding(s)${acknowledged.length > 0 ? ` (+${acknowledged.length} acknowledged in parity/baseline.json)` : ''}:`);
+} else {
+  console.log(`✔ No new drift — ${acknowledged.length} acknowledged finding(s) remain in parity/baseline.json.`);
+}
+for (const [surface, byClass] of Object.entries(bySurface)) {
+  const parts = Object.entries(byClass).map(([c, n]) => `${c}: ${n}`);
+  console.log(`    ${surface} — ${parts.join(', ')}`);
+}
+console.log('');
+
+const MAX_CONSOLE_FINDINGS = 50;
+for (const f of active.slice(0, MAX_CONSOLE_FINDINGS)) printFinding(f);
+if (active.length > MAX_CONSOLE_FINDINGS) {
+  console.log(`  …and ${active.length - MAX_CONSOLE_FINDINGS} more (see parity/report.json)\n`);
+}
+
+if (acknowledged.length > 0) {
+  console.log(`  — acknowledged (baselined, does not fail the check) —\n`);
+  for (const f of acknowledged.slice(0, MAX_CONSOLE_FINDINGS)) printFinding(f);
+  if (acknowledged.length > MAX_CONSOLE_FINDINGS) {
+    console.log(`  …and ${acknowledged.length - MAX_CONSOLE_FINDINGS} more acknowledged (see parity/report.json)\n`);
+  }
+}
+
+process.exit(active.length > 0 ? 1 : 0);

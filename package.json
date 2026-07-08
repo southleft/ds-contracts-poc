@@ -25,6 +25,7 @@
     "reconcile": "tsx extract/run.ts reconcile",
     "diagnose": "tsx parity/diagnose.ts",
     "figma:serve": "node scripts/figma-serve.mjs",
+    "anchors:writeback": "node scripts/anchors-writeback.mjs",
     "golden:update": "node scripts/update-golden.mjs"
   },
   "engines": {

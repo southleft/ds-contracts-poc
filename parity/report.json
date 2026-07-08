@@ -1,5 +1,11 @@
 {
+  "summary": {
+    "total": 0,
+    "acknowledged": 0,
+    "bySurface": {}
+  },
   "findings": [],
+  "acknowledged": [],
   "checkedContracts": [
     "ds.accordion-item@1.1.0",
     "ds.avatar-group@1.0.0",
