@@ -84,7 +84,7 @@ export const examples: Example[] = [
     name: 'Card',
     category: 'Molecule',
     blurb: 'Slots and elevation. Composition refs resolve through the bundled contract set.',
-    caption: 'Composition: a nested Avatar instance plus body and footer slots — children resolve through their own contracts, never copied in.',
+    caption: 'Composition: a nested Avatar instance plus children and actions slots — slot content resolves through its own contract, never copied in.',
   },
   {
     kind: 'contract',
@@ -93,7 +93,7 @@ export const examples: Example[] = [
     name: 'Banner',
     category: 'Molecule',
     blurb: 'Feedback surface composing icon + text parts, tone driven by one enum.',
-    caption: 'Slots with accepts: the action slot names ds.button as what may fill it — a constrained insertion point, not a free-for-all.',
+    caption: 'Slots with accepts: the endContent slot names ds.button as what may fill it — a constrained insertion point, not a free-for-all.',
   },
   {
     kind: 'contract',
