@@ -141,6 +141,9 @@ export function validateContract(
     seen.add(name);
     if (part.component) {
       const dep = byId.get(part.component.id);
+      if (!dep) {
+        errors.push(`${contract.id}: part "${name}" references component "${part.component.id}" which has no contract in scope`);
+      }
       for (const [propName, value] of Object.entries(part.component.props ?? {})) {
         if (dep && !dep.props.some((dp) => dp.name === propName)) {
           errors.push(`${contract.id}: part "${name}" sets unknown ${dep.id} prop "${propName}"`);
@@ -162,6 +165,9 @@ export function validateContract(
     }
     for (const item of part.slot?.defaultContent ?? []) {
       const dep = byId.get(item.id);
+      if (!dep) {
+        errors.push(`${contract.id}: slot "${part.slot!.name}" defaultContent references "${item.id}" which has no contract in scope`);
+      }
       if (item.text !== undefined && dep && !hasChildrenText(dep)) {
         errors.push(
           `${contract.id}: slot "${part.slot!.name}" defaultContent sets text but ${dep.id} has no children text prop`,
