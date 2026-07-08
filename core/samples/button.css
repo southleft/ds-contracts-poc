@@ -1,0 +1,108 @@
+/* Button — from ds.button v1.5.0 (core/emit-html.ts) */
+
+.button {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  cursor: pointer;
+  border-radius: var(--radius-control);
+  gap: var(--space-gap-control);
+  font-family: var(--font-control-family);
+  font-weight: var(--font-control-weight);
+}
+
+.button:focus-visible {
+  outline-style: solid;
+  outline-offset: 2px;
+}
+
+.button:disabled {
+  cursor: not-allowed;
+}
+
+.button--variant-primary {
+  background-color: var(--color-action-primary-background);
+  color: var(--color-action-primary-foreground);
+}
+
+.button--variant-secondary {
+  background-color: var(--color-action-secondary-background);
+  color: var(--color-action-secondary-foreground);
+}
+
+.button--variant-danger {
+  background-color: var(--color-action-danger-background);
+  color: var(--color-action-danger-foreground);
+}
+
+.button--variant-ghost {
+  background-color: var(--color-action-ghost-background);
+  color: var(--color-action-ghost-foreground);
+}
+
+.button--size-sm {
+  padding-inline: var(--space-inset-x-sm);
+  padding-block: var(--space-inset-y-sm);
+  font-size: var(--font-control-size-sm);
+}
+
+.button--size-md {
+  padding-inline: var(--space-inset-x-md);
+  padding-block: var(--space-inset-y-md);
+  font-size: var(--font-control-size-md);
+}
+
+.button--size-lg {
+  padding-inline: var(--space-inset-x-lg);
+  padding-block: var(--space-inset-y-lg);
+  font-size: var(--font-control-size-lg);
+}
+
+.button--variant-primary:hover:not(:disabled) {
+  background-color: var(--color-action-primary-background-hover);
+}
+
+.button--variant-secondary:hover:not(:disabled) {
+  background-color: var(--color-action-secondary-background-hover);
+}
+
+.button--variant-danger:hover:not(:disabled) {
+  background-color: var(--color-action-danger-background-hover);
+}
+
+.button--variant-ghost:hover:not(:disabled) {
+  background-color: var(--color-action-ghost-background-hover);
+}
+
+.button:focus-visible {
+  outline-color: var(--color-border-focus);
+}
+
+.button:focus-visible {
+  outline-width: var(--border-width-focus);
+}
+
+.button:disabled {
+  opacity: var(--opacity-disabled);
+}
+
+.button__loadingSpinner svg {
+  width: 14px;
+  height: 14px;
+}
+
+.button__loadingSpinner {
+  display: inline-flex;
+  flex-shrink: 0;
+  animation: button-spin 0.8s linear infinite;
+}
+
+@keyframes button-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* showcase chrome */
+.showcase { display: flex; flex-direction: column; gap: 24px; align-items: flex-start; font-family: sans-serif; }
+.showcase__label { margin: 0 0 8px; font: 12px/1 monospace; opacity: 0.6; }

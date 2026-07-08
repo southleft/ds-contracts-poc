@@ -1,0 +1,39 @@
+<!--
+  Badge — static HTML+CSS emitted from contract ds.badge v1.1.0 by core/emit-html.ts.
+  Token values arrive via CSS custom properties (the same custom-property names the CSS Modules
+  bind) — include the token stylesheet (src/styles/tokens.css) on the page or nothing resolves.
+  Fidelity: no events, no interactivity beyond CSS states (:hover/:focus-visible/:disabled).
+  Slots render their declared defaultContent, else a named placeholder. Booleans render per showcase item.
+-->
+<section class="showcase showcase--badge">
+  <div class="showcase__item">
+    <p class="showcase__label">default</p>
+    <span class="badge badge--variant-info" role="status">
+      Badge
+    </span>
+  </div>
+  <div class="showcase__item">
+    <p class="showcase__label">variant=success</p>
+    <span class="badge badge--variant-success" role="status">
+      Badge
+    </span>
+  </div>
+  <div class="showcase__item">
+    <p class="showcase__label">variant=warning</p>
+    <span class="badge badge--variant-warning" role="status">
+      Badge
+    </span>
+  </div>
+  <div class="showcase__item">
+    <p class="showcase__label">variant=danger</p>
+    <span class="badge badge--variant-danger" role="status">
+      Badge
+    </span>
+  </div>
+  <div class="showcase__item">
+    <p class="showcase__label">variant=error</p>
+    <span class="badge badge--variant-error" role="status">
+      Badge
+    </span>
+  </div>
+</section>
