@@ -6,6 +6,29 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+## [0.3.0] - 2026-07-09
+
+### Added
+
+- **Minted provisional token layer** — degraded Figma imports render at literal fidelity; `imported.*` names never guess semantics; the workspace restores the layer; a receipts group lists every minted token with rename guidance.
+- **Assist layer (server-side AI, under governance)** — Opus 4.8 behind forced tool schemas, CORS-locked, per-visitor daily limits and a global daily budget with named 429s: semantic rename suggestions for minted tokens (per-row/group/all Apply, refereed by the editor) and fetch-planning for code imports with repo profiles cached per repo@ref.
+- **Directory-first GitHub import** — file or directory URLs; relative imports traced and fetched (capped, each receipted); gaps named; "Plan fetches with AI" as the explicit next rung.
+- **Desktop Figma MCP import path** (CLI) — full variable names on any plan via the user's own Figma desktop app; recorded-fixture receipts at plugin-dump fidelity.
+- **Describe model picker** — Claude Sonnet 5 or Claude Opus 4.8, choice receipted.
+- Prism syntax highlighting across output tabs and the editable contract editor; resizable panes; chunk-failure recovery banner; Figma-tab fidelity ladder.
+
+### Changed
+
+- Figma REST imports and pasted dumps propose with minting enabled; code type steps up to 14px/13.5px; rail nav scrolls on one bordered row.
+
+### Fixed
+
+- Live Describe generations validate correctly (the API's tool-input envelope is unwrapped — refusals now name real issues).
+- The preview no longer shows the previous component's render for a different contract id; demo refusals label themselves.
+- The playground locks to the viewport; long outputs scroll inside their panes.
+- Dependabot: 3 high / 2 moderate development-scope advisories cleared.
+
+
 ## [0.2.0] - 2026-07-08
 
 ### Added
@@ -76,5 +99,6 @@ First public release: the contract-as-source-of-truth loop, proven end-to-end an
 - Extractor gaps found by self-audit: cva/`VariantProps` support; skipped components are always reported, never silent.
 
 [Unreleased]: https://github.com/southleft/ds-contracts-poc/compare/v0.1.0...HEAD
+[0.3.0]: https://github.com/southleft/ds-contracts-poc/compare/v0.2.0...v0.3.0
 [0.2.0]: https://github.com/southleft/ds-contracts-poc/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/southleft/ds-contracts-poc/releases/tag/v0.1.0

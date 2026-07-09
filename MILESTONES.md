@@ -334,6 +334,19 @@ The fidelity ladder is now: desktop MCP / plugin dump / REST+minting —
 every rung named in the receipts. **58/58.**
 
 
+## 2026-07-09 — The degraded import stands up straight (v0.3.0)
+
+A non-Enterprise Figma import now renders styled — minted `imported.*`
+tokens are a live layer over the active source, listed in receipts,
+renameable via the assist Worker with every apply refereed by the same
+editor. The code side goes directory-first: imports traced and receipted,
+gaps named, AI as the explicit next rung with repo profiles cached per
+repo@ref. Stale previews, stale chunks, and the fidelity ladder each got
+their honest UI. The owner's two field failures became the acceptance
+receipts: the Shoelace-Tooltip class of import renders colored, and the
+CBDS Button imports clean over live network in both URL forms. **58/58.**
+
+
 ---
 
 **Standing scoreboard** (updated with each milestone):
