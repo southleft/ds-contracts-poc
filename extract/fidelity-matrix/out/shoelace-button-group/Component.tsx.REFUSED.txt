@@ -1,4 +1,4 @@
-Refused — 9 contract violation(s):
+Refused — 8 contract violation(s):
   - ds.button-group: part "Button" sets unknown ds.button prop "showLabel"
   - ds.button-group: part "Button" sets unknown ds.button prop "label"
   - ds.button-group: part "Button" sets unknown ds.button prop "showSuffix"
@@ -7,4 +7,3 @@ Refused — 9 contract violation(s):
   - ds.button-group: part "Button" sets unknown ds.button prop "isOutline"
   - ds.button-group: part "Button" sets unknown ds.button prop "isPill"
   - ds.button-group: part "Button" sets unknown ds.button prop "isCircle"
-  - ds.button-group: contract name "Button group" must be PascalCase — it becomes the exported component and its file names

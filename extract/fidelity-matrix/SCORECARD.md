@@ -216,3 +216,81 @@ Fixtures are already committed and deterministic; the pin turns this
 scorecard from a snapshot into a ratchet. Estimated shape: one file
 (`evals/fidelity-pin.ts`) reading `extract/fidelity-matrix/fixtures/**` and
 the committed score JSONs as goldens, wired into `evals/run.ts` count.
+
+---
+
+## Punch-list addendum — items 1, 2, 3, 5 landed (2026-07-09)
+
+Everything above is the original scored acceptance pass, kept verbatim. This
+section records the re-run after punch items 1 (paint alpha), 2 (canvas
+crash → named refusal), 3 (visible propRefs on component-ref parts), and
+5 (identifier sanitization at proposal). Same scripts, same committed
+fixtures (eventz remapped offline from its own committed `rest-nodes.json`
+via `scripts/remap-fixtures.ts` — dump v1.1 now carries `{hex, alpha}`
+paints and `hidden`).
+
+### Updated matrix rows
+
+| Subject | Props (vs truth defs) | Style facts (vs dump values) | HTML | React | Canvas script | Image pair |
+|---|---|---|---|---|---|---|
+| B. Shoelace Button Group | unchanged (4 MATCH · 1 MISS) | unchanged (0 own facts) | REFUSED — now **8** violations (the name violation is gone: set proposes as `ButtonGroup`; the 8 foreign `ds.button` props remain the honest refusal) | REFUSED (same) | constructs, 24 variants | figma.png only |
+| C. Eventz Button | unchanged (6 MATCH · 2 PARTIAL) | 143 MINTED · 12 MISSING · **0 value misses — now scored on the FULL rgba** (truth carries alpha; scorer no longer truncates to 6-digit hex) | ok | ok | constructs, 16 variants | **secondary/bare render the near-white truth** — Punch-1 verified: 5%/0%-black fills mint as `#0000020d`/`#00000200` (8-digit hex; DTCG color + CSS-var + Figma-RGBA friendly) |
+| D. CBDS Button (design) | **5 MATCH (of 5)** — `↪️icon-left`/`↪️icon-right` now booleans `iconLeft`/`iconRight` (defaults false from dump v1.1 `hidden` evidence), `✏️text` → `text` | 84 MINTED · 0 MISSING · 0 value misses (unchanged) | **ok** | **ok** | **constructs, 15 variants** (crash → named refusal → resolved by the ds.icon stub) | render.png now EXISTS; brand surface faithful, icon toggles render, disabled tooltip helper renders |
+
+### What closed, receipt by receipt
+
+1. **Punch-1 verified (gap 1, paint alpha)** — dump v1.1 paints are
+   `{hex, alpha?}` (alpha omitted at 1) in BOTH the REST mapper and the
+   plugin dump script; `paint-alpha-dropped` is retired (eventz map-report:
+   386 → 358 degradations, all `variable-unresolved`). Minting spells
+   alpha<1 paints as **8-digit hex** — chosen over `rgba()` because one
+   string is simultaneously a legal DTCG color `$value`, a CSS color
+   everywhere the pipeline speaks CSS (custom properties, inline styles,
+   canvas preview), and mechanically invertible to Figma RGBA in the minted
+   preamble. `out/eventz-button/render.png` now shows secondary near-white
+   with its light border and bare fully transparent — the Figma truth.
+2. **Punch-2 verified (gap 2, canvas crash)** — `emitFigmaScript` /
+   `compileComponentData` now REFUSES by name (emit-react wording:
+   `part "Icon" references component "ds.icon" which has no contract in
+   scope`) instead of crashing `undefined.name`. The canvas stays MORE
+   tolerant than emit-react on child props (B still constructs its 24
+   variants). With the ds.icon stub in scope the refusal no longer fires
+   for D-design — the script constructs 15 variants.
+3. **Punch-3 verified (gap 3, dropped toggles)** — the component-ref branch
+   of `core/propose-figma.ts` wires `visible` propRefs into boolean props +
+   `visibleWhen` exactly like slot/swap/frame parts; the canvas engine binds
+   instance visibility to the BOOLEAN property. Defaults come from POSITIVE
+   dump v1.1 evidence only (node `hidden` in the default variant → false).
+   D-design props-score: 3 MATCH · 2 MISS → **5 MATCH**.
+4. **Punch-5 verified (gap 8, sanitization refusals)** — identifiers
+   sanitize AT PROPOSAL: `Button-Brand Primary` → `ButtonBrandPrimary`,
+   `✏️text` → `text`, `↪️icon-left` → `iconLeft`; the original spellings
+   stay the design bindings (`bindings.figma.property` / `slot.figmaProperty`)
+   and every sanitization is a named note. Emit no longer refuses on
+   spelling for otherwise-fine contracts.
+5. **New since the pass: auto-proposed child STUBS** (the punch-2 follow-up
+   this scorecard suggested) — a nested instance whose child contract is not
+   in scope now ships a STUB contract alongside the proposal
+   (`childStubs` on the result; `out/cbds-button-design/stub.ds.icon.contract.json`):
+   props are the OBSERVED applied values only, anatomy is an empty root,
+   the description names its own provisionality. That is what turns
+   D-design green on all four surfaces without guessing the child's API.
+
+### Still open, now more precisely named
+
+- **Disabled wash-out (Eventz) is NOT paint alpha** — re-proven during
+  punch-1: the disabled variants' paints are byte-identical to enabled even
+  with alpha captured; the wash rides **node opacity 0.4 on the variant
+  root**, a channel dump v1.1 still does not carry. Gap re-filed as "node
+  opacity capture" (the contract vocabulary already has an `opacity` token
+  key; minting would need a unitless `number` kind).
+- Eventz `border-color` stays 12× MISSING by design (stroke exists on only
+  2 of 4 variants — a partial paint is a report entry, not a mint); its
+  truth now reads `#0000021a` (10% black) instead of pretending opacity.
+- D-convergence tallies are unchanged (12 AGREE · 2 DIVERGE · 5 one-sided;
+  axes 4 PARTIAL · 1 DESIGN-ONLY · 2 CODE-ONLY) — but the icons axis is now
+  a near-miss: BOTH sides keep two optional icon positions (design as
+  boolean-toggled component refs, code as ReactNode slots); a bool⇄slot
+  reconcile rule away from AGREE. Punch items 4 (code `:active` /
+  `:focus-visible` extraction), 6 (per-variant layout), 7 (#42 vectors) and
+  8 (reconcile pass) remain the ordered worklist.

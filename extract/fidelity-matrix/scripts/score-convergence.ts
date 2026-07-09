@@ -162,17 +162,17 @@ const axes: Axis[] = [
   },
   {
     axis: 'label content',
-    design: 'TEXT prop `✏️text` (default "Button")',
+    design: 'TEXT prop `text` (Figma property "✏️text" — emoji sanitized at proposal, default "Button")',
     code: 'anatomy slot `children`',
     verdict: 'PARTIAL',
     note: 'same job, different shape — a text prop vs a ReactNode slot; reconcile would need a text⇄slot rule',
   },
   {
     axis: 'icons',
-    design: 'unconditional `Icon`/`icon2` component-ref parts (the ↪️icon-left/right BOOLEAN toggles were DROPPED — see props-score)',
+    design: 'boolean props `iconLeft`/`iconRight` (Figma "↪️icon-left"/"↪️icon-right", defaults false) toggling `Icon`/`icon2` component-ref parts via visibleWhen (child = auto-proposed ds.icon stub)',
     code: 'optional `iconLeft`/`iconRight` slots (from ReactNode props)',
     verdict: 'PARTIAL',
-    note: 'both sides have two icon positions around the label; design lost the toggles, code kept optionality',
+    note: 'both sides keep two OPTIONAL icon positions around the label (punch-3 recovered the design toggles); shapes still differ — boolean-toggled component refs vs ReactNode slots — a bool⇄slot reconcile rule away from AGREE',
   },
   {
     axis: 'variant (primary/surface/danger/ghost)',

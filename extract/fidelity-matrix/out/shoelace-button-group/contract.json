@@ -1,7 +1,7 @@
 {
   "$schema": "./contract.schema.json",
   "id": "ds.button-group",
-  "name": "Button group",
+  "name": "ButtonGroup",
   "version": "0.1.0",
   "status": "draft",
   "description": "PROPOSED contract extracted from the design canvas (extract/figma dump v1) — API, anatomy, and token bindings inverted from the drawn structure. Semantics, a11y, events, and slot accepts are not canvas-recoverable; review before adoption.",
@@ -138,8 +138,8 @@
       "nodeId": "376:3540"
     },
     "code": {
-      "importPath": "src/components/Button group",
-      "export": "Button group"
+      "importPath": "src/components/ButtonGroup",
+      "export": "ButtonGroup"
     }
   }
 }

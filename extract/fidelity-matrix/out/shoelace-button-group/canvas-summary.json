@@ -1,12 +1,12 @@
 {
   "htmlOk": false,
   "script": {
-    "bytes": 30843,
+    "bytes": 30842,
     "mintedPreamble": false,
     "syntaxOk": true
   },
   "compiled": {
-    "setName": "Button group",
+    "setName": "ButtonGroup",
     "variants": [
       {
         "name": "position=left, size=large, type=default",

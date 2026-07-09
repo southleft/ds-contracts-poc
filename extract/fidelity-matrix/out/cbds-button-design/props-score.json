@@ -2,33 +2,31 @@
   "subject": "D. CBDS Button (design side)",
   "truthSource": "rest-defs.json componentPropertyDefinitions",
   "tally": {
-    "MATCH": 3,
+    "MATCH": 5,
     "PARTIAL": 0,
-    "MISS": 2
+    "MISS": 0
   },
   "rows": [
     {
       "prop": "↪️icon-right#258:2",
       "truthType": "BOOLEAN",
-      "verdict": "MISS",
-      "reasons": [
-        "dump DOES capture the toggle (visible on //size=large, state=default/Icon (hidden) +14 more) — propose keeps the hidden node as an unconditional part and drops the visibility prop (visibleWhen is only wired for slot/swap parts, not nested component-ref parts)"
-      ]
+      "verdict": "MATCH",
+      "reasons": [],
+      "proposedAs": "iconRight: boolean"
     },
     {
       "prop": "↪️icon-left#258:3",
       "truthType": "BOOLEAN",
-      "verdict": "MISS",
-      "reasons": [
-        "dump DOES capture the toggle (visible on //size=large, state=default/Icon (hidden) +14 more) — propose keeps the hidden node as an unconditional part and drops the visibility prop (visibleWhen is only wired for slot/swap parts, not nested component-ref parts)"
-      ]
+      "verdict": "MATCH",
+      "reasons": [],
+      "proposedAs": "iconLeft: boolean"
     },
     {
       "prop": "✏️text#348:82",
       "truthType": "TEXT",
       "verdict": "MATCH",
       "reasons": [],
-      "proposedAs": "✏️text: text"
+      "proposedAs": "text: text"
     },
     {
       "prop": "size",

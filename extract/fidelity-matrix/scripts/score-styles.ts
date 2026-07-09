@@ -31,14 +31,20 @@ const data = loadRepoData();
 // ---------------------------------------------------------------------------
 // shapes
 
+interface DumpPaint {
+  hex?: string;
+  /** dump v1.1: effective paint opacity, omitted when 1. */
+  alpha?: number;
+}
+
 interface DumpNode {
   name: string;
   type: string;
   hidden?: boolean;
   layout?: { padding?: number[]; [k: string]: unknown };
   cornerRadius?: number;
-  fill?: { hex?: string };
-  stroke?: { hex?: string };
+  fill?: DumpPaint;
+  stroke?: DumpPaint;
   strokeWeight?: number;
   text?: Record<string, unknown>;
   children?: DumpNode[];
@@ -61,10 +67,15 @@ interface Cell extends Fact {
 // ---------------------------------------------------------------------------
 // value normalization
 
+/** Colors compare on the FULL rgba: 6-digit hex is opaque (append ff) so a
+ *  5%-black truth (#0000020d, dump v1.1 alpha) can never "agree" with an
+ *  opaque binding — the exact bug class punch-1 fixes must be scoreable. */
 const normColor = (v: string): string => {
   const s = v.trim().toLowerCase().replace(/^#/, '');
   if (s === 'transparent') return 'transparent';
-  return /^[0-9a-f]{6,8}$/.test(s) ? s.slice(0, 6) : v.trim().toLowerCase();
+  if (/^[0-9a-f]{6}$/.test(s)) return `${s}ff`;
+  if (/^[0-9a-f]{8}$/.test(s)) return s;
+  return v.trim().toLowerCase();
 };
 
 /** lengths to px numbers; "0.5rem" → 8, "8px 16px" → [8,16]. */
@@ -85,13 +96,20 @@ const valuesAgree = (fact: string, a: string, b: string): boolean =>
 // ---------------------------------------------------------------------------
 // truth extraction (figma)
 
+/** Paint → the truth's CSS spelling: 8-digit hex when alpha < 1 (dump v1.1),
+ *  the same spelling core/propose-figma.ts paintCssHex mints. */
+const paintTruth = (p: DumpPaint): string => {
+  if (p.alpha === undefined || p.alpha >= 1) return `#${p.hex}`;
+  return `#${p.hex}${Math.round(Math.max(0, Math.min(1, p.alpha)) * 255).toString(16).padStart(2, '0')}`;
+};
+
 /** facts on one captured node — resolved values, straight from the dump. */
 function nodeFacts(n: DumpNode): [string, string][] {
   const out: [string, string][] = [];
-  if (n.fill?.hex) out.push([n.type === 'TEXT' ? 'color' : 'background-color', `#${n.fill.hex}`]);
+  if (n.fill?.hex) out.push([n.type === 'TEXT' ? 'color' : 'background-color', paintTruth(n.fill)]);
   if (typeof n.cornerRadius === 'number' && n.cornerRadius > 0) out.push(['border-radius', `${n.cornerRadius}px`]);
   if (n.stroke?.hex) {
-    out.push(['border-color', `#${n.stroke.hex}`]);
+    out.push(['border-color', paintTruth(n.stroke)]);
     if (typeof n.strokeWeight === 'number') out.push(['border-width', `${n.strokeWeight}px`]);
   }
   const p = n.layout?.padding;

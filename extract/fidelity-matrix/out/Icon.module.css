@@ -1,0 +1,11 @@
+/* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/icon.contract.json (ds.icon v0.1.0)
+ * Regenerate with: npm run generate
+ */
+
+.root {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+}

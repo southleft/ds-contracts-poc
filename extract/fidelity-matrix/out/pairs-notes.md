@@ -83,3 +83,28 @@ hex on both sides' minted tokens; radius 8px both; padding-inline 16px
   Enterprise-only) — the REST fills DO carry `boundVariables` ids, so the
   kit's own token names were one API tier away from being bindable instead
   of minted.
+
+---
+
+## Punch-list re-run (2026-07-09) — notes above kept verbatim
+
+- **C. Eventz Button — Punch-1 verified.** `render.png` recaptured after the
+  dump v1.1 remap: **secondary renders near-white with its light 10%-black
+  border, bare renders fully transparent** — the Figma truth, where the
+  original pass showed opaque black. The minted values are 8-digit hex
+  (`#0000020d` at 5%, `#00000233` at 20% hover, `#00000200` bare). Still
+  diverging, now precisely named: icons are slot placeholders (swap content
+  not captured), focus ring collapses (RECTANGLE geometry, #42 class), and
+  the **disabled wash-out is NODE opacity 0.4 on the variant root** — proven
+  NOT to be paint alpha (disabled paints are byte-identical to enabled even
+  with alpha captured); a separate capture channel, still open.
+- **D. CBDS Button (design) — a design-side render.png now EXISTS.** After
+  punches 2+3+5 (named refusal → ds.icon stub, icon toggles wired, emoji
+  names sanitized) `preview.html` emits and screenshots: brand `#0e61ba`
+  surface, per-size padding, state colors incl. pressed `#002854`, the
+  disabled tooltip helper, and `iconLeft`/`iconRight` showcase rows with the
+  stub's "Icon" placeholder. The design pair no longer has to borrow the
+  code-side render.
+- **B. Shoelace Button Group** — still figma.png only, refusal now 8
+  violations (the non-PascalCase name violation is gone; the 8 foreign
+  `ds.button` props remain the honest blocker).

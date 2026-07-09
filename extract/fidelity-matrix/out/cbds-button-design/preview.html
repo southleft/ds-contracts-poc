@@ -293,166 +293,115 @@
 </style>
 <style>/* Minted provisional tokens (imported.*) — literal fidelity. */
 :root {
-  --imported-button-root-background-color-primary-default: #3d7a95;
-  --imported-button-root-background-color-primary-hover: #2d6079;
-  --imported-button-root-background-color-primary-active: #2d6079;
-  --imported-button-root-background-color-primary-focus: #3d7a95;
-  --imported-button-root-background-color-knockout-default: #f7f8f7;
-  --imported-button-root-background-color-knockout-hover: #c6c7c6;
-  --imported-button-root-background-color-knockout-active: #f7f8f7;
-  --imported-button-root-background-color-knockout-focus: #f7f8f7;
-  --imported-button-root-background-color-secondary-default: #0000020d;
-  --imported-button-root-background-color-secondary-hover: #00000233;
-  --imported-button-root-background-color-secondary-active: #0000020d;
-  --imported-button-root-background-color-secondary-focus: #0000020d;
-  --imported-button-root-background-color-bare-default: #00000200;
-  --imported-button-root-background-color-bare-hover: #00000233;
-  --imported-button-root-background-color-bare-active: #00000200;
-  --imported-button-root-background-color-bare-focus: #00000200;
-  --imported-button-root-gap: 4px;
-  --imported-button-root-padding-inline: 12px;
-  --imported-button-root-padding-block: 6px;
-  --imported-button-root-border-radius: 8px;
-  --imported-button-root-border-width-primary: 1px;
-  --imported-button-root-border-width-knockout: 0px;
-  --imported-button-root-border-width-secondary: 1px;
-  --imported-button-root-border-width-bare: 0px;
-  --imported-button-focus-ring-border-color: #2d6079;
-  --imported-button-focus-ring-border-radius: 11px;
-  --imported-button-focus-ring-border-width: 2px;
-  --imported-button-label-color-primary: #ffffff;
-  --imported-button-label-color-knockout: #252729;
-  --imported-button-label-color-secondary: #252729;
-  --imported-button-label-color-bare: #252729;
-  --imported-button-label-font-size: 14px;
+  --imported-button-brand-primary-root-background-color-default: #0e61ba;
+  --imported-button-brand-primary-root-background-color-hover: #003e81;
+  --imported-button-brand-primary-root-background-color-focus: #0e61ba;
+  --imported-button-brand-primary-root-background-color-pressed: #002854;
+  --imported-button-brand-primary-root-background-color-disabled: #dfe3eb;
+  --imported-button-brand-primary-root-padding-inline-large: 16px;
+  --imported-button-brand-primary-root-padding-inline-medium: 16px;
+  --imported-button-brand-primary-root-padding-inline-small: 12px;
+  --imported-button-brand-primary-button-color-default: #fcfeff;
+  --imported-button-brand-primary-button-color-hover: #fcfeff;
+  --imported-button-brand-primary-button-color-focus: #fcfeff;
+  --imported-button-brand-primary-button-color-pressed: #fcfeff;
+  --imported-button-brand-primary-button-color-disabled: #556275;
+  --imported-button-brand-primary-tooltip-color: #000000;
+  --imported-button-brand-primary-tooltip-font-size: 12px;
+  --imported-button-brand-primary-focus-ring-border-color: #0e61ba;
+  --imported-button-brand-primary-focus-ring-border-radius: 12px;
+  --imported-button-brand-primary-focus-ring-border-width: 2px;
+  --imported-shared-size-8: 8px;
 }</style>
 <style>body { margin: 0; padding: 20px; background: #f5f5f5; color: #1a1a1a; font-family: var(--font-family-sans, system-ui, sans-serif); }</style>
-<style>/* Button — from ds.button v0.1.0 (core/emit-html.ts) */
+<style>/* Icon — from ds.icon v0.1.0 (core/emit-html.ts) */
 
-.button {
+.icon {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  border: 0;
+}
+
+/* ButtonBrandPrimary — from ds.button-brand-primary v0.1.0 (core/emit-html.ts) */
+
+.button-brand-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  gap: var(--imported-shared-size-8);
+  padding-block: var(--imported-shared-size-8);
+  border-radius: var(--imported-shared-size-8);
+}
+
+.button-brand-primary--state-default {
+  background-color: var(--imported-button-brand-primary-root-background-color-default);
+}
+
+.button-brand-primary--state-hover {
+  background-color: var(--imported-button-brand-primary-root-background-color-hover);
+}
+
+.button-brand-primary--state-focus {
+  background-color: var(--imported-button-brand-primary-root-background-color-focus);
+}
+
+.button-brand-primary--state-pressed {
+  background-color: var(--imported-button-brand-primary-root-background-color-pressed);
+}
+
+.button-brand-primary--state-disabled {
+  background-color: var(--imported-button-brand-primary-root-background-color-disabled);
+}
+
+.button-brand-primary--size-large {
+  padding-inline: var(--imported-button-brand-primary-root-padding-inline-large);
+}
+
+.button-brand-primary--size-medium {
+  padding-inline: var(--imported-button-brand-primary-root-padding-inline-medium);
+}
+
+.button-brand-primary--size-small {
+  padding-inline: var(--imported-button-brand-primary-root-padding-inline-small);
+}
+
+.button-brand-primary__Button {
+  font-size: var(--font-title-size);
+  font-weight: var(--font-title-weight);
+}
+
+.button-brand-primary--state-default .button-brand-primary__Button {
+  color: var(--imported-button-brand-primary-button-color-default);
+}
+
+.button-brand-primary--state-hover .button-brand-primary__Button {
+  color: var(--imported-button-brand-primary-button-color-hover);
+}
+
+.button-brand-primary--state-focus .button-brand-primary__Button {
+  color: var(--imported-button-brand-primary-button-color-focus);
+}
+
+.button-brand-primary--state-pressed .button-brand-primary__Button {
+  color: var(--imported-button-brand-primary-button-color-pressed);
+}
+
+.button-brand-primary--state-disabled .button-brand-primary__Button {
+  color: var(--imported-button-brand-primary-button-color-disabled);
+}
+
+.button-brand-primary__Tooltip {
+  color: var(--imported-button-brand-primary-tooltip-color);
+  font-size: var(--imported-button-brand-primary-tooltip-font-size);
+}
+
+.button-brand-primary__focusRing {
+  border-color: var(--imported-button-brand-primary-focus-ring-border-color);
+  border-radius: var(--imported-button-brand-primary-focus-ring-border-radius);
+  border-width: var(--imported-button-brand-primary-focus-ring-border-width);
   border-style: solid;
-  gap: var(--imported-button-root-gap);
-  padding-inline: var(--imported-button-root-padding-inline);
-  padding-block: var(--imported-button-root-padding-block);
-  border-radius: var(--imported-button-root-border-radius);
-}
-
-.button--variant-primary {
-  border-width: var(--imported-button-root-border-width-primary);
-}
-
-.button--variant-knockout {
-  border-width: var(--imported-button-root-border-width-knockout);
-}
-
-.button--variant-secondary {
-  border-width: var(--imported-button-root-border-width-secondary);
-}
-
-.button--variant-bare {
-  border-width: var(--imported-button-root-border-width-bare);
-}
-
-.button--variant-primary.button--state-default {
-  background-color: var(--imported-button-root-background-color-primary-default);
-}
-
-.button--variant-primary.button--state-hover {
-  background-color: var(--imported-button-root-background-color-primary-hover);
-}
-
-.button--variant-primary.button--state-active {
-  background-color: var(--imported-button-root-background-color-primary-active);
-}
-
-.button--variant-primary.button--state-focus {
-  background-color: var(--imported-button-root-background-color-primary-focus);
-}
-
-.button--variant-knockout.button--state-default {
-  background-color: var(--imported-button-root-background-color-knockout-default);
-}
-
-.button--variant-knockout.button--state-hover {
-  background-color: var(--imported-button-root-background-color-knockout-hover);
-}
-
-.button--variant-knockout.button--state-active {
-  background-color: var(--imported-button-root-background-color-knockout-active);
-}
-
-.button--variant-knockout.button--state-focus {
-  background-color: var(--imported-button-root-background-color-knockout-focus);
-}
-
-.button--variant-secondary.button--state-default {
-  background-color: var(--imported-button-root-background-color-secondary-default);
-}
-
-.button--variant-secondary.button--state-hover {
-  background-color: var(--imported-button-root-background-color-secondary-hover);
-}
-
-.button--variant-secondary.button--state-active {
-  background-color: var(--imported-button-root-background-color-secondary-active);
-}
-
-.button--variant-secondary.button--state-focus {
-  background-color: var(--imported-button-root-background-color-secondary-focus);
-}
-
-.button--variant-bare.button--state-default {
-  background-color: var(--imported-button-root-background-color-bare-default);
-}
-
-.button--variant-bare.button--state-hover {
-  background-color: var(--imported-button-root-background-color-bare-hover);
-}
-
-.button--variant-bare.button--state-active {
-  background-color: var(--imported-button-root-background-color-bare-active);
-}
-
-.button--variant-bare.button--state-focus {
-  background-color: var(--imported-button-root-background-color-bare-focus);
-}
-
-.button__focusRing {
-  border-color: var(--imported-button-focus-ring-border-color);
-  border-radius: var(--imported-button-focus-ring-border-radius);
-  border-width: var(--imported-button-focus-ring-border-width);
-  border-style: solid;
-}
-
-.button__startIcon {
-  display: flex;
-}
-
-.button__Label {
-  font-size: var(--imported-button-label-font-size);
-}
-
-.button--variant-primary .button__Label {
-  color: var(--imported-button-label-color-primary);
-}
-
-.button--variant-knockout .button__Label {
-  color: var(--imported-button-label-color-knockout);
-}
-
-.button--variant-secondary .button__Label {
-  color: var(--imported-button-label-color-secondary);
-}
-
-.button--variant-bare .button__Label {
-  color: var(--imported-button-label-color-bare);
-}
-
-.button__endIcon {
-  display: flex;
 }
 
 /* showcase chrome */
@@ -461,108 +410,73 @@
 </style>
 </head><body>
 <!--
-  Button — static HTML+CSS emitted from contract ds.button v0.1.0 by core/emit-html.ts.
+  ButtonBrandPrimary — static HTML+CSS emitted from contract ds.button-brand-primary v0.1.0 by core/emit-html.ts.
   Token values arrive via CSS custom properties (the same custom-property names the CSS Modules
   bind) — include the token stylesheet (src/styles/tokens.css) on the page or nothing resolves.
   Fidelity: no events, no interactivity beyond CSS states (:hover/:focus-visible/:disabled).
   Slots render their declared defaultContent, else a named placeholder. Booleans render per showcase item.
 -->
-<section class="showcase showcase--button">
+<section class="showcase showcase--button-brand-primary">
   <div class="showcase__item">
     <p class="showcase__label">default</p>
-    <div class="button button--variant-primary button--state-default" data-has-start-icon="true" data-has-end-icon="true">
-      <div class="button__startIcon">
-        <span class="button__slot-placeholder">[startIcon slot]</span>
-      </div>
-      <span class="button__Label">Label</span>
-      <div class="button__endIcon">
-        <span class="button__slot-placeholder">[endIcon slot]</span>
-      </div>
+    <div class="button-brand-primary button-brand-primary--size-large button-brand-primary--state-default">
+      <span class="button-brand-primary__Button">Button</span>
     </div>
   </div>
   <div class="showcase__item">
-    <p class="showcase__label">variant=knockout</p>
-    <div class="button button--variant-knockout button--state-default" data-has-start-icon="true" data-has-end-icon="true">
-      <div class="button__startIcon">
-        <span class="button__slot-placeholder">[startIcon slot]</span>
-      </div>
-      <span class="button__Label">Label</span>
-      <div class="button__endIcon">
-        <span class="button__slot-placeholder">[endIcon slot]</span>
-      </div>
+    <p class="showcase__label">size=medium</p>
+    <div class="button-brand-primary button-brand-primary--size-medium button-brand-primary--state-default">
+      <span class="button-brand-primary__Button">Button</span>
     </div>
   </div>
   <div class="showcase__item">
-    <p class="showcase__label">variant=secondary</p>
-    <div class="button button--variant-secondary button--state-default" data-has-start-icon="true" data-has-end-icon="true">
-      <div class="button__startIcon">
-        <span class="button__slot-placeholder">[startIcon slot]</span>
-      </div>
-      <span class="button__Label">Label</span>
-      <div class="button__endIcon">
-        <span class="button__slot-placeholder">[endIcon slot]</span>
-      </div>
-    </div>
-  </div>
-  <div class="showcase__item">
-    <p class="showcase__label">variant=bare</p>
-    <div class="button button--variant-bare button--state-default" data-has-start-icon="true" data-has-end-icon="true">
-      <div class="button__startIcon">
-        <span class="button__slot-placeholder">[startIcon slot]</span>
-      </div>
-      <span class="button__Label">Label</span>
-      <div class="button__endIcon">
-        <span class="button__slot-placeholder">[endIcon slot]</span>
-      </div>
+    <p class="showcase__label">size=small</p>
+    <div class="button-brand-primary button-brand-primary--size-small button-brand-primary--state-default">
+      <span class="button-brand-primary__Button">Button</span>
     </div>
   </div>
   <div class="showcase__item">
     <p class="showcase__label">state=hover</p>
-    <div class="button button--variant-primary button--state-hover" data-has-start-icon="true" data-has-end-icon="true">
-      <div class="button__startIcon">
-        <span class="button__slot-placeholder">[startIcon slot]</span>
-      </div>
-      <span class="button__Label">Label</span>
-      <div class="button__endIcon">
-        <span class="button__slot-placeholder">[endIcon slot]</span>
-      </div>
-    </div>
-  </div>
-  <div class="showcase__item">
-    <p class="showcase__label">state=active</p>
-    <div class="button button--variant-primary button--state-active" data-has-start-icon="true" data-has-end-icon="true">
-      <div class="button__startIcon">
-        <span class="button__slot-placeholder">[startIcon slot]</span>
-      </div>
-      <span class="button__Label">Label</span>
-      <div class="button__endIcon">
-        <span class="button__slot-placeholder">[endIcon slot]</span>
-      </div>
+    <div class="button-brand-primary button-brand-primary--size-large button-brand-primary--state-hover">
+      <span class="button-brand-primary__Button">Button</span>
     </div>
   </div>
   <div class="showcase__item">
     <p class="showcase__label">state=focus</p>
-    <div class="button button--variant-primary button--state-focus" data-has-start-icon="true" data-has-end-icon="true">
-      <div class="button__focusRing"></div>
-      <div class="button__startIcon">
-        <span class="button__slot-placeholder">[startIcon slot]</span>
-      </div>
-      <span class="button__Label">Label</span>
-      <div class="button__endIcon">
-        <span class="button__slot-placeholder">[endIcon slot]</span>
-      </div>
+    <div class="button-brand-primary button-brand-primary--size-large button-brand-primary--state-focus">
+      <span class="button-brand-primary__Button">Button</span>
+      <div class="button-brand-primary__focusRing"></div>
     </div>
   </div>
   <div class="showcase__item">
-    <p class="showcase__label">isDisabled=true</p>
-    <div class="button button--variant-primary button--state-default" data-is-disabled="true" data-has-start-icon="true" data-has-end-icon="true">
-      <div class="button__startIcon">
-        <span class="button__slot-placeholder">[startIcon slot]</span>
-      </div>
-      <span class="button__Label">Label</span>
-      <div class="button__endIcon">
-        <span class="button__slot-placeholder">[endIcon slot]</span>
-      </div>
+    <p class="showcase__label">state=pressed</p>
+    <div class="button-brand-primary button-brand-primary--size-large button-brand-primary--state-pressed">
+      <span class="button-brand-primary__Button">Button</span>
+    </div>
+  </div>
+  <div class="showcase__item">
+    <p class="showcase__label">state=disabled</p>
+    <div class="button-brand-primary button-brand-primary--size-large button-brand-primary--state-disabled">
+      <span class="button-brand-primary__Button">Button</span>
+      <span class="button-brand-primary__Tooltip">This action is currently unavailable</span>
+    </div>
+  </div>
+  <div class="showcase__item">
+    <p class="showcase__label">iconLeft=true</p>
+    <div class="button-brand-primary button-brand-primary--size-large button-brand-primary--state-default" data-icon-left="true">
+      <span class="icon icon--size-large">
+        Icon
+      </span>
+      <span class="button-brand-primary__Button">Button</span>
+    </div>
+  </div>
+  <div class="showcase__item">
+    <p class="showcase__label">iconRight=true</p>
+    <div class="button-brand-primary button-brand-primary--size-large button-brand-primary--state-default" data-icon-right="true">
+      <span class="button-brand-primary__Button">Button</span>
+      <span class="icon icon--size-large">
+        Icon
+      </span>
     </div>
   </div>
 </section>
