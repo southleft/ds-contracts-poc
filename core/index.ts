@@ -57,6 +57,20 @@ export {
 } from './tokens.js';
 export { tokenCorpusFromJson, type TokenCorpus, type TokenCorpusInput, type DerivedTextStyle } from './token-corpus.js';
 
+// Provisional token minting (unresolvable variable names → imported.* tree).
+export {
+  MINT_NAMESPACE,
+  MINT_SHARE_THRESHOLD,
+  mintTokens,
+  mintedTokenCss,
+  type MintAxis,
+  type MintObservation,
+  type MintOccurrence,
+  type MintResult,
+  type MintedBinding,
+  type MintedEntry,
+} from './mint-tokens.js';
+
 // Contract → code (the shipping generator's core).
 export {
   emitReact,

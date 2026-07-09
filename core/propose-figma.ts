@@ -11,11 +11,20 @@
  * See the original module doc in extract/figma/propose.ts for the complete
  * inversion-rule catalogue (LAYOUT / TOKENS / ENUM SUBST / TEXT / PROPS /
  * SLOTS / INSTANCES / STATES).
+ *
+ * MINTING (opt-in, `mintUnbound: true`): when an import cannot resolve
+ * variable names (the variables endpoint is Enterprise-only) every bound
+ * fact degrades to a resolved literal and the classic pass only REPORTS it.
+ * With minting on, those same observations become bindings to provisional
+ * `imported.*` tokens (core/mint-tokens.ts) returned on the result as
+ * `mintedTokens` — styles survive at literal fidelity, names stay mechanical
+ * and reviewable, semantics are never guessed.
  */
 import { ContractSchema, pascal } from '../scripts/contract-schema.js';
 import { kebab } from '../extract/types.js';
 import type { DumpNode, DumpSet } from '../extract/figma/types.js';
 import type { TokenCorpus } from './token-corpus.js';
+import { mintTokens, type MintAxis, type MintObservation, type MintedEntry } from './mint-tokens.js';
 
 // ---------------------------------------------------------------------------
 // Shared spellings
@@ -216,6 +225,30 @@ export interface FigmaProposalResult {
   contract: Record<string, unknown>;
   notes: string[];
   unbound: UnboundValue[];
+  /** Present only when proposeFromDump ran with `mintUnbound: true` and at
+   *  least one leaf was minted: the provisional DTCG tree the proposal's
+   *  minted refs resolve through (register it as an ADDITIONAL token source —
+   *  tokenInventoryFromJson accepts multiple trees), plus one entry per leaf.
+   *  Every name is machine-derived and provisional — see core/mint-tokens.ts. */
+  mintedTokens?: { tree: Record<string, unknown>; count: number; entries: MintedEntry[] };
+}
+
+/** Minting capture (mintUnbound: true) — the observations the classic
+ *  unbound pass would otherwise only REPORT, kept with per-variant values and
+ *  a live reference to the tokens record they would have bound, so the
+ *  post-build mint pass can turn them into bindings. */
+interface MintCapture {
+  /** Non-boolean enum axes, canonical spellings (substitution is enum-only). */
+  axes: MintAxis[];
+  axisValuesByVariant: Map<string, Record<string, string>>;
+  observations: Array<MintObservation & { target: Record<string, string>; source?: string }>;
+  /** Classic-unbound source keys (`nodePath|property`) NOT fully covered by
+   *  observations (asymmetric padding, mixed var/raw paints) — their unbound
+   *  entries survive minting. */
+  partialSources: Set<string>;
+  /** tokens records and their holders, so a record whose FIRST key arrives
+   *  via minting still lands on the part. */
+  attach: Array<{ holder: Record<string, unknown>; tokens: Record<string, string> }>;
 }
 
 interface Ctx {
@@ -232,6 +265,7 @@ interface Ctx {
   boolProps: Array<{ name: string; property: string }>;
   /** Slot parts in tree order, for the default-slot ("children") judgment. */
   slots: Array<{ part: Record<string, unknown>; property: string; optional: boolean }>;
+  mint?: MintCapture;
 }
 
 const first = <T>(occ: Occ[], pick: (n: DumpNode) => T | undefined): T | undefined => {
@@ -250,6 +284,44 @@ function reportUnbound(ctx: Ctx, nodePath: string, property: string, value: stri
     suggestions: ctx.corpus.suggestFor(value).slice(0, 5),
   });
 }
+
+// ---------------------------------------------------------------------------
+// Mint capture (mintUnbound) — record what the unbound pass observed
+// ---------------------------------------------------------------------------
+
+/** "Tooltip:root/body/label" → "body/label"; the root itself → "". */
+const partPathOf = (where: string): string => {
+  const i = where.indexOf(':root');
+  return i >= 0 ? where.slice(i + ':root'.length).replace(/^\//, '') : '';
+};
+
+function mintObservation(
+  ctx: Ctx,
+  target: Record<string, string>,
+  where: string,
+  cssProperty: string,
+  kind: 'color' | 'px',
+  occ: Array<{ variant: string; value: string | number }>,
+  source?: string,
+) {
+  if (!ctx.mint) return;
+  ctx.mint.observations.push({
+    nodePath: where,
+    part: partPathOf(where),
+    cssProperty,
+    kind,
+    occurrences: occ.map((o) => ({
+      variant: o.variant,
+      axisValues: ctx.mint!.axisValuesByVariant.get(o.variant) ?? {},
+      value: o.value,
+    })),
+    target,
+    source,
+  });
+}
+
+const numOccurrences = (m: Merged, valueOf: (n: DumpNode) => number | undefined) =>
+  m.occ.map((o) => ({ variant: o.variant, value: valueOf(o.node) ?? 0 }));
 
 // ---------------------------------------------------------------------------
 // Bindings → tokens
@@ -271,12 +343,26 @@ function unifyPaint(
   ctx: Ctx,
   where: string,
   paintName: string,
+  mint?: { cssProperty: string; target: Record<string, string> },
 ): string | undefined {
   const paints = m.occ.map((o) => ({ variant: o.variant, paint: pick(o.node) }));
   if (paints.every((p) => p.paint === undefined)) return undefined;
   const raw = paints.find((p) => p.paint?.hex !== undefined);
   if (raw) {
     reportUnbound(ctx, where, paintName, `#${raw.paint!.hex}`);
+    if (ctx.mint && mint) {
+      // Mintable only when EVERY variant resolved to a raw hex — a paint
+      // missing in some variants, or half-bound, stays a report entry.
+      if (paints.every((p) => p.paint?.hex !== undefined)) {
+        mintObservation(
+          ctx, mint.target, where, mint.cssProperty, 'color',
+          paints.map((p) => ({ variant: p.variant, value: `#${p.paint!.hex}` })),
+          `${where}|${paintName}`,
+        );
+      } else {
+        ctx.mint.partialSources.add(`${where}|${paintName}`);
+      }
+    }
     return undefined;
   }
   const u = unifyRefs(
@@ -295,9 +381,15 @@ function invertNodeTokens(m: Merged, isRoot: boolean, ctx: Ctx, where: string): 
   for (const o of m.occ) for (const f of Object.keys(o.node.bound ?? {})) fields.add(f);
   const f = (name: string) => (fields.has(name) ? unifyField(m, name, ctx, where) : undefined);
 
-  const bg = unifyPaint(m, (n) => (n.type === 'TEXT' ? undefined : n.fill), ctx, where, 'fill');
+  const bg = unifyPaint(m, (n) => (n.type === 'TEXT' ? undefined : n.fill), ctx, where, 'fill', {
+    cssProperty: 'background-color',
+    target: tokens,
+  });
   if (bg) tokens['background-color'] = bg;
-  const strokeRef = unifyPaint(m, (n) => n.stroke, ctx, where, 'stroke');
+  const strokeRef = unifyPaint(m, (n) => n.stroke, ctx, where, 'stroke', {
+    cssProperty: 'border-color',
+    target: tokens,
+  });
   if (strokeRef) tokens['border-color'] = strokeRef;
 
   // Paired fields → the contract's coarser vocabulary.
@@ -341,21 +433,50 @@ function invertNodeTokens(m: Merged, isRoot: boolean, ctx: Ctx, where: string): 
   if (opacity) tokens.opacity = opacity;
 
   // Unbound literals on a non-utility node: named, suggested, never invented.
+  // With minting on, each report is ALSO captured with its per-variant values
+  // (the classic report reads the default variant only).
   const n0 = m.occ[0].node;
   const l = n0.layout;
   if (l && l.spacing !== 0 && !fields.has('itemSpacing') && (n0.children?.length ?? 0) > 1) {
     reportUnbound(ctx, where, 'itemSpacing', l.spacing);
+    mintObservation(ctx, tokens, where, 'gap', 'px', numOccurrences(m, (n) => n.layout?.spacing), `${where}|itemSpacing`);
   }
   if (l && l.padding.some((p) => p !== 0) && !fields.has('paddingLeft') && !fields.has('paddingTop')) {
     reportUnbound(ctx, where, 'padding', l.padding.join(' '));
+    mintPadding(ctx, tokens, m, where);
   }
   if (n0.cornerRadius !== undefined && !radii.some((r) => fields.has(r))) {
     reportUnbound(ctx, where, 'cornerRadius', n0.cornerRadius);
+    mintObservation(ctx, tokens, where, 'border-radius', 'px', numOccurrences(m, (n) => n.cornerRadius), `${where}|cornerRadius`);
   }
   if (n0.strokeWeight !== undefined && n0.stroke && !weights.some((w) => fields.has(w)) && !fields.has('strokeWeight')) {
     reportUnbound(ctx, where, 'strokeWeight', n0.strokeWeight);
+    mintObservation(ctx, tokens, where, 'border-width', 'px', numOccurrences(m, (n) => n.strokeWeight), `${where}|strokeWeight`);
   }
   return tokens;
+}
+
+/** The contract's padding vocabulary is symmetric (padding-inline/-block):
+ *  each symmetric pair mints its own observation; an asymmetric pair mints
+ *  nothing (named, the classic unbound entry survives), and an all-zero pair
+ *  needs no token at all. */
+function mintPadding(ctx: Ctx, target: Record<string, string>, m: Merged, where: string) {
+  if (!ctx.mint) return;
+  const source = `${where}|padding`;
+  const pairs = [
+    { cssProperty: 'padding-inline', a: 3, b: 1, label: 'left/right' }, // padding: [top, right, bottom, left]
+    { cssProperty: 'padding-block', a: 0, b: 2, label: 'top/bottom' },
+  ] as const;
+  for (const { cssProperty, a, b, label } of pairs) {
+    const pad = (n: DumpNode): readonly number[] => n.layout?.padding ?? [0, 0, 0, 0];
+    if (!m.occ.every((o) => pad(o.node)[a] === pad(o.node)[b])) {
+      ctx.mint.partialSources.add(source);
+      ctx.notes.push(`${where}: ${label} padding literals differ — ${cssProperty} is not representable, not minted; review`);
+      continue;
+    }
+    if (m.occ.every((o) => pad(o.node)[a] === 0)) continue; // zero padding needs no token
+    mintObservation(ctx, target, where, cssProperty, 'px', numOccurrences(m, (n) => pad(n)[a]), source);
+  }
 }
 
 // ---------------------------------------------------------------------------
@@ -370,6 +491,7 @@ function invertTextTokens(m: Merged, ctx: Ctx, where: string): Record<string, st
     ctx,
     where,
     'text fill',
+    { cssProperty: 'color', target: tokens },
   );
   if (color) tokens.color = color;
 
@@ -406,6 +528,10 @@ function invertTextTokens(m: Merged, ctx: Ctx, where: string): Record<string, st
     if ((t.fontStyle ?? 'Medium') !== style.fontStyle) {
       ctx.notes.push(`${where}: node weight "${t.fontStyle}" overrides style "${style.name}" — override not token-recoverable, review`);
     }
+  } else if (ctx.mint && t.fontSize > 0) {
+    // No token-derived style identity — mint the literal size (font-family
+    // and weight stay unproposed; weight inversion is style-identity work).
+    mintObservation(ctx, tokens, where, 'font-size', 'px', numOccurrences(m, (n) => n.text?.fontSize));
   }
   return tokens;
 }
@@ -525,6 +651,13 @@ const isWrapArtifact = (m: Merged): boolean => {
   );
 };
 
+/** Attach a part's tokens record — and remember it when minting, so a record
+ *  whose FIRST binding arrives from the mint pass still lands on the part. */
+function attachTokens(ctx: Ctx, holder: Record<string, unknown>, tokens: Record<string, string>) {
+  ctx.mint?.attach.push({ holder, tokens });
+  if (Object.keys(tokens).length > 0) holder.tokens = tokens;
+}
+
 function registerTextProp(ctx: Ctx, property: string, characters: string, name = camel(property)) {
   if (ctx.textProps.some((p) => p.property === property)) return;
   ctx.textProps.push({ name, property, default: characters });
@@ -557,7 +690,7 @@ function buildPart(
     } else {
       part.text = characters;
     }
-    if (Object.keys(tokens).length > 0) part.tokens = tokens;
+    attachTokens(ctx, part, tokens);
     if (visibleWhen) part.visibleWhen = visibleWhen;
     return part;
   }
@@ -611,7 +744,7 @@ function buildPart(
   if (soleChild && soleSwap) {
     const layout = invertLayout(m, false, parentMode, ctx, where);
     if (layout) part.layout = layout;
-    if (Object.keys(tokens).length > 0) part.tokens = tokens;
+    attachTokens(ctx, part, tokens);
     const slot: Record<string, unknown> = { name: camel(soleSwap) };
     const instanceOf = first(soleChild.occ, (n) => n.instanceOf);
     if (instanceOf && instanceOf !== 'Slot') {
@@ -635,14 +768,14 @@ function buildPart(
   }
 
   if (isWrapArtifact(m)) {
-    if (Object.keys(tokens).length > 0) part.tokens = tokens;
+    attachTokens(ctx, part, tokens);
     if (visibleWhen) part.visibleWhen = visibleWhen;
     return part;
   }
 
   const layout = invertLayout(m, false, parentMode, ctx, where);
   if (layout) part.layout = layout;
-  if (Object.keys(tokens).length > 0) part.tokens = tokens;
+  attachTokens(ctx, part, tokens);
   const visibleRef = unifiedPropRef(m, 'visible', ctx, where);
   if (visibleRef) applyVisibleBinding(part, visibleRef, ctx, where);
   const mode = m.occ[0].node.layout?.mode ?? null;
@@ -727,11 +860,16 @@ export function proposeFromDump(
     contractsById?: Map<string, MinimalChildContract>;
     prefix?: string;
     fileKey?: string | null;
+    /** Mint provisional tokens (core/mint-tokens.ts) from the unbound-value
+     *  observations and BIND the proposal to them, instead of dropping every
+     *  degraded style. Default false — the classic report-only behavior. */
+    mintUnbound?: boolean;
   },
 ): FigmaProposalResult {
   const prefix = opts.prefix ?? 'ds';
   const variantNames = set.variants.map((v) => v.name);
   const axes = parseAxes(variantNames);
+  const enumAxes = axes.filter((a) => !isBoolAxis(a.values));
   const ctx: Ctx = {
     setName: set.setName,
     axes,
@@ -745,6 +883,24 @@ export function proposeFromDump(
     textProps: [],
     boolProps: [],
     slots: [],
+    mint: opts.mintUnbound
+      ? {
+          axes: enumAxes.map((a) => ({ propName: a.propName, values: a.values.map(camel) })),
+          axisValuesByVariant: new Map(
+            variantNames.map((v) => {
+              const record: Record<string, string> = {};
+              for (const [property, value] of Object.entries(axisValuesOf(v))) {
+                const axis = enumAxes.find((a) => a.property === property);
+                if (axis) record[axis.propName] = camel(value);
+              }
+              return [v, record];
+            }),
+          ),
+          observations: [],
+          partialSources: new Set(),
+          attach: [],
+        }
+      : undefined,
   };
 
   const merged = mergeOcc(
@@ -769,6 +925,11 @@ export function proposeFromDump(
   if (only && autoLabel) {
     const textTokens = invertTextTokens(only, ctx, `${where}/label`);
     Object.assign(rootTokens, textTokens);
+    // The label's tokens hoisted — retarget its captured mint observations
+    // to the record that actually ships (rootTokens).
+    if (ctx.mint) {
+      for (const o of ctx.mint.observations) if (o.target === textTokens) o.target = rootTokens;
+    }
     registerTextProp(ctx, autoLabel, first(only.occ, (n) => n.text?.characters) ?? '', 'children');
     ctx.notes.push(
       `${where}/label: sole root text node named "label" is the generator's auto-injected children label — hoisted to root tokens, bound prop proposed as \`children\``,
@@ -782,7 +943,7 @@ export function proposeFromDump(
     }
     if (Object.keys(parts).length > 0) root.parts = parts;
   }
-  if (Object.keys(rootTokens).length > 0) root.tokens = rootTokens;
+  attachTokens(ctx, root, rootTokens);
 
   // Default-slot judgment: the first non-optional slot in tree order is the
   // component's main content — name `children` (the code-side default slot).
@@ -885,6 +1046,44 @@ export function proposeFromDump(
     },
   };
 
+  // Mint pass (mintUnbound): every captured observation becomes a binding to
+  // a provisional `imported.*` leaf where the values allow it — the proposal
+  // keeps its styling at literal fidelity instead of shipping naked. Runs
+  // BEFORE schema validation so a bad minted ref is refused, not returned.
+  let mintedTokens: FigmaProposalResult['mintedTokens'];
+  if (ctx.mint && ctx.mint.observations.length > 0) {
+    const observations = ctx.mint.observations;
+    const minted = mintTokens(kebab(set.setName), observations, ctx.mint.axes);
+    const bySource = new Map<string, { total: number; bound: number }>();
+    minted.bindings.forEach((binding, i) => {
+      const obs = observations[i];
+      if (binding.ref) obs.target[obs.cssProperty] = binding.ref;
+      else if (binding.reason) ctx.notes.push(`${obs.nodePath} ${obs.cssProperty}: ${binding.reason}`);
+      if (obs.source) {
+        const s = bySource.get(obs.source) ?? { total: 0, bound: 0 };
+        s.total++;
+        if (binding.ref) s.bound++;
+        bySource.set(obs.source, s);
+      }
+    });
+    // Token records whose first binding arrived from the mint pass.
+    for (const { holder, tokens } of ctx.mint.attach) {
+      if (Object.keys(tokens).length > 0 && holder.tokens === undefined) holder.tokens = tokens;
+    }
+    // A fully minted usage site is bound now — no longer an UNBOUND entry.
+    const partial = ctx.mint.partialSources;
+    ctx.unbound = ctx.unbound.filter((u) => {
+      const s = bySource.get(`${u.nodePath}|${u.property}`);
+      return !(s && s.bound === s.total && !partial.has(`${u.nodePath}|${u.property}`));
+    });
+    for (const e of minted.entries) {
+      ctx.notes.push(
+        `MINTED ${e.ref} = ${e.value} — machine-named from a resolved value — rename against your real tokens (provisional); bound at: ${e.usageSites.join(', ')}`,
+      );
+    }
+    mintedTokens = { tree: minted.tree, count: minted.count, entries: minted.entries };
+  }
+
   // Refuse to emit an unusable proposal.
   ContractSchema.parse(contract);
   ctx.notes.unshift(`semantics.element defaulted to "div" — element/role/ARIA are not drawn on the canvas; set the real host element`);
@@ -895,7 +1094,7 @@ export function proposeFromDump(
       }`,
     );
   }
-  return { contract, notes: ctx.notes, unbound: ctx.unbound };
+  return { contract, notes: ctx.notes, unbound: ctx.unbound, ...(mintedTokens ? { mintedTokens } : {}) };
 }
 
 // ---------------------------------------------------------------------------
