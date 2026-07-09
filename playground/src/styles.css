@@ -701,7 +701,8 @@ label {
   flex-direction: column;
   min-width: 0;
   min-height: 0;
-  overflow-y: auto;
+  /* bar (fixed) + body (scrolls) + drawer (fixed) — the pane itself never scrolls. */
+  overflow: hidden;
 }
 
 @media (max-width: 1100px) {
@@ -1606,23 +1607,57 @@ label {
   white-space: pre-wrap;
 }
 
-.output__toolbar {
+/* THE toolbar: one row — output tabs left, compact view controls right.
+ * Content-based wrap: when the pane is too narrow for both (laptop widths,
+ * dragged-narrow panes), the right cluster drops to a second row as a unit —
+ * the tabs never scroll out of reach and nothing triple-stacks. */
+.output__bar {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 8px 14px;
-  border-bottom: 1px solid var(--pg-border);
-  font-size: 12px;
-  color: var(--pg-muted);
   flex-wrap: wrap;
+  column-gap: 12px;
+  flex-shrink: 0;
+  border-bottom: 1px solid var(--pg-border);
+  padding-right: 10px;
 }
 
-.output__toolbar label {
+.output__bar .output__tabs {
+  /* grow to fill, REFUSE to shrink (that's what triggers the wrap); a pane
+   * narrower than the tabs themselves falls back to the thin scrollbar. */
+  flex: 1 0 auto;
+  max-width: 100%;
+  min-width: 0;
+  border-bottom: none; /* the bar draws the shared border */
+}
+
+.output__bar-right {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap; /* very narrow panes: the cluster folds rather than clips */
+  justify-content: flex-end;
+  gap: 6px 8px;
+  margin-left: auto;
+  min-width: 0;
+  padding: 5px 0;
+}
+
+.output__format {
   display: inline-flex;
   align-items: center;
   gap: 6px;
   margin: 0;
   cursor: pointer;
+  font-size: 12px;
+  color: var(--pg-muted);
+  white-space: nowrap;
+}
+
+.output__body {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
 }
 
 .preview {
@@ -1669,34 +1704,25 @@ label {
   box-shadow: inset 0 -2px 0 var(--pg-accent);
 }
 
-/* preview mode bar + per-prop controls strip */
-
-.preview__bar {
-  display: flex;
+/* icon-only segment buttons (the compact surface toggle) */
+.seg__btn--icon {
+  display: inline-flex;
   align-items: center;
-  gap: 12px;
-  padding: 8px 14px;
-  border-bottom: 1px solid var(--pg-border);
-  flex-shrink: 0;
+  padding: 4px 8px;
 }
 
-.preview__bar-hint {
-  font-size: 11.5px;
-  color: var(--pg-faint);
-}
-
-/* surface toggle sits at the bar's far end */
-.preview__surface {
-  margin-left: auto;
-}
-
-/* Split view — code left, canvas right, one divider. The money view. */
+/* Split view — code left, canvas right, one divider. The money view.
+ * With ground truth on, a third column: Figma's own render. */
 
 .preview__split {
   flex: 1;
   display: grid;
   grid-template-columns: 1fr 1fr;
   min-height: 0;
+}
+
+.preview__split--3 {
+  grid-template-columns: 1fr 1fr 1fr;
 }
 
 .preview__split-col {
@@ -1717,14 +1743,64 @@ label {
   background: transparent;
 }
 
-.preview__split-cap {
+/* Caption strip over a preview column (Canvas / Code / Figma's own render).
+ * Hosts the ⓘ fidelity popover, so it must not clip. */
+.preview__cap {
   flex-shrink: 0;
-  padding: 4px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 3px 10px 3px 14px;
   font-size: 10.5px;
   letter-spacing: 0.05em;
   text-transform: uppercase;
   color: var(--pg-faint);
   border-bottom: 1px solid var(--pg-border);
+}
+
+/* GROUND TRUTH panel — Figma's own render. White like the canvas, always. */
+
+.gt__body {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  background: #ffffff;
+  color: #1e1e1e;
+}
+
+.gt__body .gt__msg {
+  margin: 0;
+  padding: 14px;
+  font-size: 12px;
+  line-height: 1.5;
+  color: #555;
+  max-width: 460px;
+}
+
+.gt__body .gt__msg--error {
+  font-family: var(--pg-mono);
+  font-size: 11.5px;
+  color: #b42318;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.gt__figure {
+  margin: 0;
+  padding: 20px;
+}
+
+.gt__figure img {
+  display: block;
+  max-width: 100%;
+}
+
+.gt__note {
+  margin-top: 10px;
+  font-size: 11px;
+  color: #7b7b7b;
+  max-width: 460px;
 }
 
 .pv-controls {
@@ -1809,12 +1885,190 @@ label {
   border-bottom: 1px solid var(--pg-border);
 }
 
-.provenance {
+/* ------------------------------------------------ bottom drawer (output) */
+/* Storybook-style: Controls | Receipts (N) tabs in one collapsible panel. */
+
+.dock {
+  flex-shrink: 0;
   border-top: 1px solid var(--pg-border);
-  padding: 8px 14px;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.dock__bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 33px;
+  flex-shrink: 0;
+  padding: 0 10px 0 14px;
+}
+
+.dock__tabs {
+  display: flex;
+  align-self: stretch;
+  gap: 2px;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.dock__tab {
+  display: inline-flex;
+  align-items: center;
+  border: none;
+  border-top: 2px solid transparent; /* the drawer opens upward — accent on top */
+  background: none;
+  padding: 0 10px;
+  font-size: 12px;
+  color: var(--pg-muted);
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.dock__tab:hover {
+  color: var(--pg-fg);
+  background: var(--pg-surface);
+}
+
+.dock__tab.is-active {
+  color: var(--pg-fg);
+  border-top-color: var(--pg-accent);
+  font-weight: 600;
+}
+
+.dock__badge {
+  margin-left: 6px;
+  border: 1px solid var(--pg-border-strong);
+  padding: 0 5px;
+  font-size: 10px;
+  font-family: var(--pg-mono);
+  font-weight: 400;
+  color: var(--pg-muted);
+}
+
+.dock__toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border: 1px solid var(--pg-border-strong);
+  border-radius: 0;
+  background: none;
+  color: var(--pg-muted);
+  cursor: pointer;
+  padding: 0;
+}
+
+.dock__toggle:hover {
+  color: var(--pg-fg);
+  background: var(--pg-surface);
+}
+
+.dock__body {
+  border-top: 1px solid var(--pg-border);
+  max-height: 34vh;
+  overflow-y: auto;
+}
+
+.dock__hint {
+  margin: 0;
+  padding: 8px 14px 0;
   font-size: 11.5px;
   color: var(--pg-faint);
-  flex-shrink: 0;
+}
+
+/* Inside the drawer the panels lose their standalone chrome. */
+.dock__body .pv-controls {
+  border-bottom: none;
+}
+
+.dock__body .receipts {
+  border-top: none;
+  max-height: none;
+  overflow-y: visible;
+}
+
+/* ------------------------------------------------------- ⓘ info popover */
+
+.ipop {
+  position: relative;
+  display: inline-flex;
+}
+
+.ipop__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border: 1px solid var(--pg-border-strong);
+  color: var(--pg-muted);
+  cursor: pointer;
+  list-style: none;
+}
+
+.ipop__btn::-webkit-details-marker {
+  display: none;
+}
+
+.ipop__btn:hover,
+.ipop[open] > .ipop__btn {
+  color: var(--pg-fg);
+  background: var(--pg-surface);
+}
+
+.ipop__panel {
+  position: absolute;
+  z-index: 40;
+  top: calc(100% + 6px);
+  width: 340px;
+  max-width: 78vw;
+  padding: 10px 12px;
+  border: 1px solid var(--pg-border-strong);
+  background: var(--pg-bg);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--pg-muted);
+  text-transform: none;
+  letter-spacing: normal;
+}
+
+/* Inside the bottom drawer the panel opens upward. */
+.dock .ipop__panel {
+  top: auto;
+  bottom: calc(100% + 6px);
+}
+
+.ipop--end .ipop__panel {
+  right: 0;
+}
+
+.ipop--start .ipop__panel {
+  left: 0;
+}
+
+.ipop__panel p {
+  margin: 0 0 8px;
+}
+
+.ipop__panel p:last-child {
+  margin-bottom: 0;
+}
+
+.ipop__panel ul {
+  margin: 0;
+  padding-left: 16px;
+}
+
+.ipop__panel li {
+  margin-top: 3px;
+}
+
+.ipop__panel strong {
+  color: var(--pg-fg);
 }
 
 .notice {
