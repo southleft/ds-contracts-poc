@@ -651,8 +651,38 @@ export function generateCss(contract: Contract, tokenInventory: Set<string>, err
         if (!enumRules.has(cls)) enumRules.set(cls, new Map());
         enumRules.get(cls)!.set(cssProp, cssVar(resolved));
       }
+    } else if (phs.length === 2) {
+      // Two-axis root token (e.g. a minted background = f(variant, state)):
+      // one compound-class rule per value combination. The compound selector
+      // (.variant-primary.state-hover) outranks the single enum classes, so
+      // a pair binding wins over any single-axis binding of the same
+      // property — deterministic, and both classes always ride the root.
+      const [pa, pb] = phs;
+      const va = enums.get(pa);
+      const vb = enums.get(pb);
+      if (!va || !vb) {
+        errors.push(
+          `${contract.id}: root token "${cssProp}" substitutes unknown enum prop "${!va ? pa : pb}"`,
+        );
+        continue;
+      }
+      for (const a of va) {
+        for (const b of vb) {
+          const resolved = refPath.replaceAll(`{${pa}}`, a).replaceAll(`{${pb}}`, b);
+          if (!checkToken(resolved, `anatomy.root.tokens.${cssProp}`)) continue;
+          // Both single classes must EXIST in the module (the TSX composes
+          // styles[`prop-value`]; an unemitted class is undefined and the
+          // compound selector would never match) — claim them, empty is fine.
+          for (const single of [`${pa}-${a}`, `${pb}-${b}`]) {
+            if (!enumRules.has(single)) enumRules.set(single, new Map());
+          }
+          const cls = `${pa}-${a}.${pb}-${b}`;
+          if (!enumRules.has(cls)) enumRules.set(cls, new Map());
+          enumRules.get(cls)!.set(cssProp, cssVar(resolved));
+        }
+      }
     } else {
-      errors.push(`${contract.id}: root token "${cssProp}" uses multiple substitutions (max 1)`);
+      errors.push(`${contract.id}: root token "${cssProp}" uses ${phs.length} substitutions (max 2)`);
     }
   }
 

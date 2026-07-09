@@ -59,9 +59,11 @@ export function FigmaGroundTruth({ contract }: { contract: Contract }) {
             (anchors.figma.fileKey · nodeId) and the session token the import used.
           </p>
           <p>
-            The token is session-only — sent to api.figma.com and nowhere else, never stored, gone
-            on reload. The API answers with a short-lived S3 URL; the image loads as a plain
-            &lt;img&gt;. Rate limits are named (HTTP 429 — wait a minute and retry).
+            The token is session-only by default — sent to api.figma.com and nowhere else, gone on
+            reload — unless you opted into &ldquo;Remember on this device&rdquo; in the Figma tab
+            (this browser&rsquo;s localStorage only, cleared from the same field). The API answers
+            with a short-lived S3 URL; the image loads as a plain &lt;img&gt;. Rate limits are
+            named (HTTP 429 — wait a minute and retry).
           </p>
         </InfoPopover>
       </div>
@@ -75,8 +77,9 @@ export function FigmaGroundTruth({ contract }: { contract: Contract }) {
           </p>
         ) : !token ? (
           <p className="gt__msg">
-            This contract knows its Figma source ({fileKey} · {nodeId}), but the session token is
-            gone — tokens are session-only, never stored. Re-import to fetch ground truth.
+            This contract knows its Figma source ({fileKey} · {nodeId}), but no token is at hand —
+            tokens are session-only unless remembered on this device (Figma tab). Re-import to
+            fetch ground truth.
           </p>
         ) : state.kind === 'busy' ? (
           <p className="gt__msg">Asking Figma for the node render (images API, PNG @2x)…</p>

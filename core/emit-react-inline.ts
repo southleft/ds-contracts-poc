@@ -120,6 +120,20 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
     if (!partVariantProps.has(partName)) partVariantProps.set(partName, new Set());
     partVariantProps.get(partName)!.add(prop);
   };
+  /** Two-axis root tokens: overrides keyed by BOTH enum values (the runtime
+   *  lookup consults `pa-va+pb-vb:part` after the single-axis keys, so the
+   *  pair binding wins). */
+  const variantPairStyles: Record<string, Record<string, StyleRecord>> = {};
+  const partVariantPairProps = new Map<string, Set<string>>();
+  const addVariantPair = (
+    pa: string, va: string, pb: string, vb: string, partName: string, decls: StyleRecord,
+  ) => {
+    const key = `${pa}-${va}+${pb}-${vb}`;
+    variantPairStyles[key] ??= {};
+    variantPairStyles[key][partName] = { ...(variantPairStyles[key][partName] ?? {}), ...decls };
+    if (!partVariantPairProps.has(partName)) partVariantPairProps.set(partName, new Set());
+    partVariantPairProps.get(partName)!.add(`${pa}+${pb}`);
+  };
   const enumsByName = new Map(enums.map((p) => [p.name, p.type.enum]));
   const usedAnimations = new Set<string>();
 
@@ -187,6 +201,14 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
         for (const value of enumsByName.get(phs[0]) ?? []) {
           const resolved = refPath.replaceAll(`{${phs[0]}}`, value);
           addVariant(phs[0], value, partName, { [camel(cssProp)]: resolveValue(resolved) });
+        }
+      } else if (phs.length === 2) {
+        const [pa, pb] = phs;
+        for (const a of enumsByName.get(pa) ?? []) {
+          for (const b of enumsByName.get(pb) ?? []) {
+            const resolved = refPath.replaceAll(`{${pa}}`, a).replaceAll(`{${pb}}`, b);
+            addVariantPair(pa, a, pb, b, partName, { [camel(cssProp)]: resolveValue(resolved) });
+          }
         }
       }
     }
@@ -336,6 +358,12 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
     const pieces = [`...S.${partName}`];
     for (const propName of variantPropsFor(partName)) {
       pieces.push(`...(V[\`${propName}-\${${codePropOf(propName)}}:${partName}\`] ?? {})`);
+    }
+    for (const pair of partVariantPairProps.get(partName) ?? []) {
+      const [pa, pb] = pair.split('+');
+      pieces.push(
+        `...(V[\`${pa}-\${${codePropOf(pa)}}+${pb}-\${${codePropOf(pb)}}:${partName}\`] ?? {})`,
+      );
     }
     pieces.push(...extra);
     if (isRoot && Object.keys(disabledStyle).length > 0) {
@@ -521,7 +549,7 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
 
   // Flatten variant styles into a single lookup: `${prop}-${value}:${part}`.
   const variantFlat: Record<string, StyleRecord> = {};
-  for (const [key, parts] of Object.entries(variantStyles)) {
+  for (const [key, parts] of Object.entries({ ...variantStyles, ...variantPairStyles })) {
     for (const [partName, decls] of Object.entries(parts)) {
       variantFlat[`${key}:${partName}`] = decls;
     }

@@ -63,6 +63,13 @@ import { reportIfChunkError } from '../engine/chunk-guard';
 import { buildPreviewAtState, type PreviewPropOverrides, type PreviewSurface } from '../engine/preview';
 import type { ReceiptGroup, Receipts } from '../receipts';
 import { DEMO_SESSION_TOKEN, rememberFigmaSession } from '../engine/figma-render';
+import {
+  ANTHROPIC_KEY_STORAGE_KEY,
+  FIGMA_TOKEN_STORAGE_KEY,
+  clearRememberedToken,
+  readRememberedToken,
+  rememberToken,
+} from '../engine/remembered-tokens';
 import { CanvasFrame } from '../components/CanvasFrame';
 import { ContractEditor, type ContractEditorHandle } from '../components/ContractEditor';
 import { CopyButton } from '../components/CopyButton';
@@ -703,7 +710,22 @@ export function Playground() {
 
   // ------------------------------------------------------------ figma state
   const [figmaUrl, setFigmaUrl] = useState('');
-  const [figmaToken, setFigmaToken] = useState('');
+  // Session-only by default; prefilled from localStorage only when the
+  // visitor previously opted into "Remember on this device".
+  const [figmaToken, setFigmaToken] = useState(() => readRememberedToken(FIGMA_TOKEN_STORAGE_KEY) ?? '');
+  const [figmaRemember, setFigmaRemember] = useState(() => readRememberedToken(FIGMA_TOKEN_STORAGE_KEY) !== null);
+  const figmaTokenRemembered = figmaRemember && figmaToken.trim() !== '' && readRememberedToken(FIGMA_TOKEN_STORAGE_KEY) === figmaToken;
+  useEffect(() => {
+    // Opt-in persistence: checked → the current token lives in localStorage;
+    // unchecked → it is wiped (back to session-only). Never logged.
+    if (figmaRemember) rememberToken(FIGMA_TOKEN_STORAGE_KEY, figmaToken);
+    else clearRememberedToken(FIGMA_TOKEN_STORAGE_KEY);
+  }, [figmaRemember, figmaToken]);
+  const clearFigmaRemembered = () => {
+    clearRememberedToken(FIGMA_TOKEN_STORAGE_KEY);
+    setFigmaRemember(false);
+    setFigmaToken('');
+  };
   const [figmaDegraded, setFigmaDegraded] = useState(false);
   const [figmaBusy, setFigmaBusy] = useState(false);
   const [figmaError, setFigmaError] = useState<string | null>(null);
@@ -841,7 +863,20 @@ export function Playground() {
 
   // ---------------------------------------------------------- describe state
   const [descPrompt, setDescPrompt] = useState('');
-  const [descKey, setDescKey] = useState('');
+  // Session-only by default; prefilled from localStorage only when the
+  // visitor previously opted into "Remember on this device".
+  const [descKey, setDescKey] = useState(() => readRememberedToken(ANTHROPIC_KEY_STORAGE_KEY) ?? '');
+  const [descRemember, setDescRemember] = useState(() => readRememberedToken(ANTHROPIC_KEY_STORAGE_KEY) !== null);
+  const descKeyRemembered = descRemember && descKey.trim() !== '' && readRememberedToken(ANTHROPIC_KEY_STORAGE_KEY) === descKey;
+  useEffect(() => {
+    if (descRemember) rememberToken(ANTHROPIC_KEY_STORAGE_KEY, descKey);
+    else clearRememberedToken(ANTHROPIC_KEY_STORAGE_KEY);
+  }, [descRemember, descKey]);
+  const clearDescRemembered = () => {
+    clearRememberedToken(ANTHROPIC_KEY_STORAGE_KEY);
+    setDescRemember(false);
+    setDescKey('');
+  };
   const [descModel, setDescModel] = useState<string>(ANTHROPIC_MODEL);
   const [descBusy, setDescBusy] = useState<string | null>(null);
   const [descError, setDescError] = useState<string | null>(null);
@@ -1524,9 +1559,29 @@ export function Playground() {
                 autoComplete="off"
                 placeholder="sk-ant-…"
               />
+              {descKeyRemembered ? (
+                <p className="hint">
+                  using remembered key —{' '}
+                  <button type="button" className="btn--link" onClick={clearDescRemembered}>
+                    Clear
+                  </button>
+                </p>
+              ) : null}
+              <div className="checkline">
+                <input
+                  id="desc-remember"
+                  type="checkbox"
+                  checked={descRemember}
+                  onChange={(e) => setDescRemember(e.target.checked)}
+                />
+                <label htmlFor="desc-remember" style={{ margin: 0 }}>
+                  Remember on this device (localStorage, until you clear it)
+                </label>
+              </div>
               <p className="hint">
-                Session-only, like the Figma token — sent browser-direct to api.anthropic.com and
-                nowhere else, gone on reload.
+                Session-only by default, like the Figma token — sent browser-direct to
+                api.anthropic.com and nowhere else, gone on reload. Opting into “Remember on this
+                device” keeps it in this browser&rsquo;s localStorage only.
               </p>
             </div>
             <div className="field">
@@ -1617,9 +1672,29 @@ export function Playground() {
                 autoComplete="off"
                 placeholder="figd_…"
               />
+              {figmaTokenRemembered ? (
+                <p className="hint">
+                  using remembered token —{' '}
+                  <button type="button" className="btn--link" onClick={clearFigmaRemembered}>
+                    Clear
+                  </button>
+                </p>
+              ) : null}
+              <div className="checkline">
+                <input
+                  id="figma-remember"
+                  type="checkbox"
+                  checked={figmaRemember}
+                  onChange={(e) => setFigmaRemember(e.target.checked)}
+                />
+                <label htmlFor="figma-remember" style={{ margin: 0 }}>
+                  Remember on this device (localStorage, until you clear it)
+                </label>
+              </div>
               <p className="hint">
-                Session-only. Sent to api.figma.com and nowhere else — never stored, never
-                persisted, gone on reload.
+                Session-only by default — sent to api.figma.com and nowhere else, gone on reload.
+                Opting into “Remember on this device” keeps it in this browser&rsquo;s
+                localStorage only, never anywhere else.
               </p>
             </div>
             <button
