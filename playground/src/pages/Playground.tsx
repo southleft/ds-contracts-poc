@@ -32,9 +32,11 @@ import {
 import {
   applyUserTokens,
   resetToRepoTokens,
+  setMintedTokens,
   STARTER_USER_TOKENS,
   storedUserTokensText,
   useTokenSource,
+  type MintedTokenLayer,
 } from '../engine/token-source';
 import { locateJsonParseError, resolveIssueLines } from '../engine/refusal-lines';
 import { validateContractText } from '../engine/validate';
@@ -144,11 +146,27 @@ function importReportGroups(report: FigmaImportResult['report']): ReceiptGroup[]
 
 function proposalGroups(proposal: FigmaProposal): ReceiptGroup[] {
   const groups: ReceiptGroup[] = [];
-  if (proposal.notes.length > 0) {
+  // The engine's MINTED lines move into their own group (verbatim) — the
+  // provisional-token story reads as one block, not scattered notes.
+  const notes = proposal.notes.filter((n) => !n.startsWith('MINTED '));
+  if (notes.length > 0) {
     groups.push({
       title: `Proposal notes — ${proposal.setName}`,
       kind: 'note',
-      entries: proposal.notes.map((message) => ({ message })),
+      entries: notes.map((message) => ({ message })),
+    });
+  }
+  const minted = proposal.mintedTokens;
+  if (minted && minted.count > 0) {
+    // The panel appends the entry count — this renders as
+    // "Minted provisional tokens (N)". Each line carries the engine's own
+    // rename guidance, verbatim from the MINTED note wording.
+    groups.push({
+      title: 'Minted provisional tokens',
+      kind: 'minted',
+      entries: minted.entries.map((e) => ({
+        message: `${e.ref} = ${e.value} — machine-named from a resolved value — rename against your real tokens (provisional); bound at: ${e.usageSites.join(', ')}`,
+      })),
     });
   }
   if (proposal.unbound.length > 0) {
@@ -317,6 +335,8 @@ export function Playground() {
     setProvenance(origin);
     setPristine({ text: entry.contractText, provenance: origin });
     setReceipts(entry.receipts);
+    // The entry's minted provisional layer comes back with it (or clears).
+    setMintedTokens(entry.mintedTokens ?? null);
     setActiveExample(null);
     setWsLoaded(entry);
   };
@@ -326,6 +346,7 @@ export function Playground() {
     if (!raw) return;
     setText(pretty(raw));
     setReceipts(null);
+    setMintedTokens(null);
     setProvenance(source);
     setPristine({ text: pretty(raw), provenance: source });
     setActiveExample(slug ?? contractId);
@@ -382,6 +403,7 @@ export function Playground() {
           receipts: codeReceipts,
         });
         setReceipts(recorded.receipts);
+        setMintedTokens(null);
         setText(contractText);
         setProvenance(`proposed from code — ${first.name}`);
         setPristine({ text: contractText, provenance: `proposed from code — ${first.name}` });
@@ -443,6 +465,11 @@ export function Playground() {
   const applyProposal = (proposal: FigmaProposal, origin: string, wsSource: WorkspaceSource) => {
     const contractText = pretty(proposal.contract);
     const provenanceLine = `proposed from ${origin} — ${proposal.setName}`;
+    const minted: MintedTokenLayer | null =
+      proposal.mintedTokens && proposal.mintedTokens.count > 0 ? proposal.mintedTokens : null;
+    // Register the minted provisional layer BEFORE the text lands, so the
+    // editor's very first validation pass already resolves imported.* refs.
+    setMintedTokens(minted);
     // A successful design import lands in the session workspace, receipts
     // and all — re-applying the same set refreshes its entry.
     const recorded = recordImport({
@@ -451,6 +478,7 @@ export function Playground() {
       source: wsSource,
       contractText,
       receipts: { source: origin, groups: [...importGroupsRef.current, ...proposalGroups(proposal)] },
+      ...(minted ? { mintedTokens: minted } : {}),
     });
     setText(contractText);
     setProvenance(provenanceLine);
@@ -550,6 +578,7 @@ export function Playground() {
     });
     setText(contractText);
     setReceipts(recorded.receipts);
+    setMintedTokens(null);
     setProvenance('pasted contract JSON');
     setPristine({ text: contractText, provenance: 'pasted contract JSON' });
     setActiveExample(null);
@@ -576,6 +605,7 @@ export function Playground() {
     setDescRounds(result.session.rounds);
     const contractText = pretty(result.contract);
     setText(contractText);
+    setMintedTokens(null);
     setProvenance(origin);
     setPristine({ text: contractText, provenance: origin });
     setActiveExample(null);
@@ -755,6 +785,7 @@ export function Playground() {
         const state = await decodeShareState(payload);
         if (cancelled) return;
         setText(state.contract);
+        setMintedTokens(null);
         setProvenance('loaded from share link');
         setPristine({ text: state.contract, provenance: 'loaded from share link' });
         setActiveExample(null);

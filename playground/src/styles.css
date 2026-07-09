@@ -1374,6 +1374,10 @@ label {
   border-left: 2px solid var(--pg-danger);
 }
 
+.receipts__entry--minted {
+  border-left: 2px solid var(--pg-ok);
+}
+
 .receipts__code {
   color: var(--pg-warn);
   font-weight: 600;

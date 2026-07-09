@@ -62,8 +62,16 @@ export function proposalsFromDump(dump: FigmaImportResult['dump']): FigmaProposa
     out.push({
       setName: name,
       // The ACTIVE corpus — nearest-token suggestions and hex→token matching
-      // come from the user's pasted tree when one is applied.
-      ...proposeFromFigmaDump(value as DumpSetArg, { corpus: activeTokens().corpus, contractIdByName, fileKey }),
+      // come from the user's pasted tree when one is applied. mintUnbound:
+      // values whose variable names are unrecoverable (the non-Enterprise
+      // 403) become provisional `imported.*` tokens the proposal binds — the
+      // degraded import stays styled at literal fidelity (core/mint-tokens.ts).
+      ...proposeFromFigmaDump(value as DumpSetArg, {
+        corpus: activeTokens().corpus,
+        contractIdByName,
+        fileKey,
+        mintUnbound: true,
+      }),
     });
   }
   return out;
