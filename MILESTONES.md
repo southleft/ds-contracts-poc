@@ -304,6 +304,21 @@ workflow. Degraded-Badge receipt: 13 leaves, zero unbound, emitters green.
 **57/57.**
 
 
+## 2026-07-09 — The assist layer goes live (AI under governance, on a budget)
+
+workers/assist deployed: three Opus 4.8 endpoints — repo fetch-planning,
+minted-token semantic naming, and a cached repo-profile memory (7-day KV,
+shared across visitors, zero-token hits) — behind forced tool schemas,
+thinking disabled, CORS locked to the playground, 5 requests/day per
+visitor, and a ~$10/day global budget with named 429s. The owner's key
+lives only as a Worker secret. First live call: asked to rename two minted
+tooltip tokens, Opus proposed color.surface.inverse and
+color.content.inverse with pairing rationale — design-system judgment,
+refereed by the same schema as everything else. 21/21 handler tests;
+one workerd gotcha (unbound fetch = Illegal invocation masked as 502)
+found by the live smoke and fixed.
+
+
 ---
 
 **Standing scoreboard** (updated with each milestone):
