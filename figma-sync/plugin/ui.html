@@ -1,0 +1,254 @@
+<!-- DS Contracts Sync Runner — plugin UI. Dependency-free vanilla HTML/CSS/JS;
+     talks to code.js via postMessage. Carbon-simple chrome: squared corners,
+     1px borders, underline tabs. Colors ride Figma's themeColors variables
+     (--figma-color-*) with neutral fallbacks, so one scheme covers light and
+     dark. -->
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; }
+  body {
+    font: 11px/1.5 Inter, -apple-system, "Helvetica Neue", sans-serif;
+    color: var(--figma-color-text, #333);
+    background: var(--figma-color-bg, #fff);
+    display: flex; flex-direction: column;
+  }
+  .tabs {
+    display: flex;
+    border-bottom: 1px solid var(--figma-color-border, #d9d9d9);
+    flex: none;
+  }
+  .tab {
+    appearance: none; background: none; border: none;
+    border-bottom: 2px solid transparent;
+    font: inherit; font-weight: 600; color: var(--figma-color-text-secondary, #6b6b6b);
+    padding: 10px 14px 8px; cursor: pointer; border-radius: 0;
+  }
+  .tab[aria-selected="true"] {
+    color: var(--figma-color-text, #333);
+    border-bottom-color: var(--figma-color-bg-brand, #0d99ff);
+  }
+  .panel { display: none; flex: 1; flex-direction: column; min-height: 0; padding: 12px; gap: 10px; }
+  .panel.active { display: flex; }
+  .note {
+    border: 1px solid var(--figma-color-border, #d9d9d9);
+    border-left: 3px solid var(--figma-color-icon-warning, #f3c11b);
+    padding: 6px 8px;
+    color: var(--figma-color-text-secondary, #6b6b6b);
+    flex: none;
+  }
+  .hint { color: var(--figma-color-text-secondary, #6b6b6b); flex: none; }
+  code, .mono {
+    font-family: "SF Mono", Menlo, Consolas, monospace;
+    font-size: 10px;
+  }
+  textarea {
+    flex: 1; min-height: 120px; width: 100%; resize: none;
+    font-family: "SF Mono", Menlo, Consolas, monospace; font-size: 10px; line-height: 1.5;
+    color: var(--figma-color-text, #333);
+    background: var(--figma-color-bg-secondary, #f5f5f5);
+    border: 1px solid var(--figma-color-border, #d9d9d9);
+    border-radius: 0; padding: 8px; outline: none;
+  }
+  textarea:focus { border-color: var(--figma-color-border-selected, #0d99ff); }
+  .row { display: flex; align-items: center; gap: 8px; flex: none; }
+  button.primary {
+    appearance: none; font: inherit; font-weight: 600;
+    color: var(--figma-color-text-onbrand, #fff);
+    background: var(--figma-color-bg-brand, #0d99ff);
+    border: 1px solid transparent; border-radius: 0;
+    padding: 6px 16px; cursor: pointer;
+  }
+  button.primary:disabled { opacity: 0.5; cursor: default; }
+  .status { color: var(--figma-color-text-secondary, #6b6b6b); }
+  .result {
+    flex: 1; min-height: 90px; overflow: auto;
+    border: 1px solid var(--figma-color-border, #d9d9d9);
+    padding: 8px; background: var(--figma-color-bg-secondary, #f5f5f5);
+  }
+  .result .headline { font-weight: 600; margin-bottom: 6px; }
+  .result.ok .headline { color: var(--figma-color-text-success, #198f51); }
+  .result.err .headline { color: var(--figma-color-text-danger, #dc3412); }
+  .chips { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 8px; }
+  .chip {
+    border: 1px solid var(--figma-color-border, #d9d9d9);
+    padding: 1px 6px; border-radius: 0;
+    font-family: "SF Mono", Menlo, Consolas, monospace; font-size: 10px;
+  }
+  pre {
+    font-family: "SF Mono", Menlo, Consolas, monospace; font-size: 10px; line-height: 1.5;
+    white-space: pre-wrap; word-break: break-word;
+  }
+  .log-line.ok { color: var(--figma-color-text-success, #198f51); }
+  .log-line.warn { color: var(--figma-color-text-warning, #a86a00); }
+  .log-line.error { color: var(--figma-color-text-danger, #dc3412); }
+</style>
+
+<div class="tabs" role="tablist">
+  <button class="tab" id="tab-paste" role="tab" aria-selected="true" aria-controls="panel-paste">Paste a script</button>
+  <button class="tab" id="tab-runner" role="tab" aria-selected="false" aria-controls="panel-runner">Local runner</button>
+</div>
+
+<div class="panel active" id="panel-paste" role="tabpanel">
+  <div class="note">
+    Runs the pasted script with full plugin permissions in THIS file —
+    paste only scripts you generated yourself.
+  </div>
+  <div class="hint">
+    Copy the playground&rsquo;s <strong>Figma script</strong> output (or any
+    <span class="mono">figma-sync/*.js</span> script) and paste it below.
+  </div>
+  <textarea id="paste-input" spellcheck="false"
+    placeholder="// Paste a generated Figma script here — a plain async plugin body ending in `return <report>`."></textarea>
+  <div class="row">
+    <button class="primary" id="paste-run">Run script</button>
+    <span class="status" id="paste-status"></span>
+  </div>
+  <div class="result" id="paste-result" hidden></div>
+</div>
+
+<div class="panel" id="panel-runner" role="tabpanel">
+  <div class="hint">
+    Fetches every generated script from <span class="mono">http://localhost:8765</span>
+    (<span class="mono">npm run figma:serve</span>) and runs them in dependency
+    order — SHA-256-verified against the server manifest, stopping on first
+    failure. The from-disk transport for full-library rebuilds.
+  </div>
+  <div class="row">
+    <button class="primary" id="runner-run">Run all scripts</button>
+    <span class="status" id="runner-status"></span>
+  </div>
+  <div class="result" id="runner-result" hidden>
+    <div class="headline" id="runner-headline"></div>
+    <pre id="runner-log"></pre>
+  </div>
+</div>
+
+<script>
+  var $ = function (id) { return document.getElementById(id); };
+
+  // --- tabs -----------------------------------------------------------------
+  function select(which) {
+    ['paste', 'runner'].forEach(function (name) {
+      var on = name === which;
+      $('tab-' + name).setAttribute('aria-selected', String(on));
+      $('panel-' + name).classList.toggle('active', on);
+    });
+  }
+  $('tab-paste').onclick = function () { select('paste'); };
+  $('tab-runner').onclick = function () { select('runner'); };
+
+  // --- paste mode -----------------------------------------------------------
+  var pasteRun = $('paste-run');
+  var runnerRun = $('runner-run');
+
+  pasteRun.onclick = function () {
+    var code = $('paste-input').value;
+    if (!code.trim()) { $('paste-status').textContent = 'Nothing to run — paste a script first.'; return; }
+    pasteRun.disabled = true;
+    runnerRun.disabled = true;
+    $('paste-status').textContent = 'Running…';
+    $('paste-result').hidden = true;
+    parent.postMessage({ pluginMessage: { type: 'run-paste', code: code } }, '*');
+  };
+
+  // Summary chips from the well-known report keys the generated scripts
+  // return (created/amended/skipped, variants, node ids, props). Anything
+  // else still shows in the full JSON below — nothing is hidden.
+  function chipsFor(report) {
+    var chips = [];
+    if (!report || typeof report !== 'object' || Array.isArray(report)) return chips;
+    if (report.skipped) chips.push('skipped' + (report.reason ? ': ' + report.reason : ''));
+    else if (report.amended) chips.push('amended');
+    else if (report.createdNodeIds || report.created) chips.push('created');
+    if (report.name) chips.push(String(report.name));
+    if (typeof report.variants === 'number') chips.push(report.variants + ' variant' + (report.variants === 1 ? '' : 's'));
+    if (report.nodeId) chips.push('node ' + report.nodeId);
+    if (report.key) chips.push('key ' + String(report.key).slice(0, 12) + '…');
+    if (Array.isArray(report.properties) && report.properties.length) chips.push('props: ' + report.properties.join(', '));
+    ['addedVariants', 'rebuiltVariants', 'renamedVariants', 'extraVariants', 'addedProps', 'editedDefaults']
+      .forEach(function (k) {
+        var v = report[k];
+        var n = Array.isArray(v) ? v.length : (typeof v === 'number' ? v : 0);
+        if (n) chips.push(k + ': ' + n);
+      });
+    return chips;
+  }
+
+  function showPasteResult(msg) {
+    var box = $('paste-result');
+    box.hidden = false;
+    box.className = 'result ' + (msg.ok ? 'ok' : 'err');
+    box.textContent = '';
+    var headline = document.createElement('div');
+    headline.className = 'headline';
+    box.appendChild(headline);
+    if (msg.ok) {
+      headline.textContent = 'Script finished — report:';
+      var chips = chipsFor(msg.result);
+      if (chips.length) {
+        var strip = document.createElement('div');
+        strip.className = 'chips';
+        chips.forEach(function (c) {
+          var el = document.createElement('span');
+          el.className = 'chip';
+          el.textContent = c;
+          strip.appendChild(el);
+        });
+        box.appendChild(strip);
+      }
+      var pre = document.createElement('pre');
+      pre.textContent = JSON.stringify(msg.result, null, 2);
+      box.appendChild(pre);
+    } else {
+      headline.textContent = 'Script threw — nothing was committed.';
+      var err = document.createElement('pre');
+      err.textContent = msg.error + (msg.stack ? '\n\n' + msg.stack : '');
+      box.appendChild(err);
+      var note = document.createElement('div');
+      note.className = 'hint';
+      note.style.marginTop = '6px';
+      note.textContent = 'Scripts are atomic on throw by Figma’s design — a failed run does not leave a half-synced file. Fix or regenerate the script and paste it again.';
+      box.appendChild(note);
+    }
+  }
+
+  // --- local runner ---------------------------------------------------------
+  runnerRun.onclick = function () {
+    runnerRun.disabled = true;
+    pasteRun.disabled = true;
+    $('runner-status').textContent = 'Running…';
+    $('runner-result').hidden = false;
+    $('runner-result').className = 'result';
+    $('runner-headline').textContent = '';
+    $('runner-log').textContent = '';
+    parent.postMessage({ pluginMessage: { type: 'run-runner' } }, '*');
+  };
+
+  function appendLog(line, level) {
+    var el = document.createElement('div');
+    el.className = 'log-line ' + (level || 'info');
+    el.textContent = line;
+    $('runner-log').appendChild(el);
+    $('runner-result').scrollTop = $('runner-result').scrollHeight;
+  }
+
+  // --- messages from code.js --------------------------------------------------
+  window.onmessage = function (event) {
+    var msg = event.data && event.data.pluginMessage;
+    if (!msg) return;
+    if (msg.type === 'paste-result') {
+      pasteRun.disabled = false;
+      runnerRun.disabled = false;
+      $('paste-status').textContent = '';
+      showPasteResult(msg);
+    } else if (msg.type === 'runner-log') {
+      appendLog(msg.line, msg.level);
+    } else if (msg.type === 'runner-done') {
+      runnerRun.disabled = false;
+      pasteRun.disabled = false;
+      $('runner-status').textContent = '';
+      $('runner-result').className = 'result ' + (msg.ok ? 'ok' : 'err');
+      $('runner-headline').textContent = msg.summary;
+    }
+  };
+</script>

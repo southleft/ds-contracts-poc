@@ -1,13 +1,21 @@
-// DS Contracts Sync Runner — runs the generated figma-sync scripts from the
-// local server (npm run figma:serve), in order, in the CURRENT file.
-// This is the from-disk transport for full-library operations (fresh-file
-// rebuild, big re-syncs) — no copy/paste, no per-script size caps.
+// DS Contracts Sync Runner — two transports for the generated figma-sync
+// scripts, both executing in the CURRENT file (see ui.html for the chrome):
 //
-// INTEGRITY: the manifest (/runner-manifest.json) carries a SHA-256 per
-// script. Each fetched script is hashed here (pure-JS SHA-256 below — the
-// plugin sandbox has no WebCrypto) and the runner REFUSES to execute on any
-// mismatch. This catches script bytes changing between manifest fetch and
-// script fetch (e.g. a different process answering on 8765 mid-run).
+//   1. Paste a script — paste one generated script (e.g. the playground's
+//      "Figma script" output tab) and run it. This is the designer trust
+//      round-trip: copy → paste → run → read the report.
+//   2. Local runner — fetch every script from the local server
+//      (npm run figma:serve), in order. The from-disk transport for
+//      full-library operations (fresh-file rebuild, big re-syncs) —
+//      no copy/paste, no per-script size caps.
+//
+// INTEGRITY (local runner): the manifest (/runner-manifest.json) carries a
+// SHA-256 per script. Each fetched script is hashed here (pure-JS SHA-256
+// below — the plugin sandbox has no WebCrypto) and the runner REFUSES to
+// execute on any mismatch. This catches script bytes changing between
+// manifest fetch and script fetch (e.g. a different process answering on
+// 8765 mid-run). Pasted scripts have no manifest to verify against — the
+// trust model there is "you generated it yourself", stated in the UI.
 //
 // TOKEN (opt-in, pairs with `TOKEN=1 npm run figma:serve`): the server prints
 // a random token at startup and 403s every request without ?token=. Store it
@@ -80,7 +88,72 @@ function sha256Hex(str) {
   return H.map((x) => (x >>> 0).toString(16).padStart(8, '0')).join('');
 }
 
-async function main() {
+// ---------------------------------------------------------------------------
+// UI plumbing. Results cross the sandbox → iframe boundary via postMessage,
+// so reports are flattened to plain JSON (the generated scripts return plain
+// object reports; anything non-serializable falls back to String()).
+// ---------------------------------------------------------------------------
+figma.showUI(__html__, { width: 460, height: 620, themeColors: true });
+
+const post = (msg) => figma.ui.postMessage(msg);
+
+function toPlain(value) {
+  if (value === undefined) return null;
+  try {
+    return JSON.parse(JSON.stringify(value));
+  } catch (e) {
+    return String(value);
+  }
+}
+
+// Same execution shape both transports use: the generated scripts are plain
+// async plugin bodies ending in `return <report>`.
+function runScript(code) {
+  return new Function('return (async () => {\n' + code + '\n})()')();
+}
+
+let busy = false; // one run at a time, across both modes
+
+figma.ui.onmessage = async (msg) => {
+  if (!msg || !msg.type) return;
+  if (busy) {
+    figma.notify('A run is already in progress.', { error: true });
+    return;
+  }
+  if (msg.type === 'run-paste') {
+    busy = true;
+    try {
+      const result = await runScript(String(msg.code || ''));
+      post({ type: 'paste-result', ok: true, result: toPlain(result) });
+      figma.notify('Pasted script finished.');
+    } catch (e) {
+      post({
+        type: 'paste-result',
+        ok: false,
+        error: String(e && e.message ? e.message : e),
+        stack: e && e.stack ? String(e.stack) : null,
+      });
+      figma.notify('Pasted script threw — see the plugin window.', { error: true });
+    }
+    busy = false;
+  } else if (msg.type === 'run-runner') {
+    busy = true;
+    await runLocalRunner();
+    busy = false;
+  }
+};
+
+// ---------------------------------------------------------------------------
+// Local runner — the original from-disk flow, now button-triggered from the
+// UI instead of auto-running on plugin start. Behavior is unchanged:
+// dependency order, integrity refusal, stop on first failure, results POSTed
+// back to the server's /runner-result sink. Instead of closePlugin() the
+// outcome now lands in the UI so the window stays open for another run.
+// ---------------------------------------------------------------------------
+async function runLocalRunner() {
+  const done = (ok, summary) => post({ type: 'runner-done', ok, summary });
+  const log = (line, level) => post({ type: 'runner-log', line, level: level || 'info' });
+
   const token = await figma.clientStorage.getAsync(TOKEN_STORAGE_KEY).catch(() => null);
   const withToken = (url) => (token ? url + (url.includes('?') ? '&' : '?') + 'token=' + encodeURIComponent(token) : url);
   const get = async (pathname) => {
@@ -96,11 +169,12 @@ async function main() {
   };
 
   figma.notify('Sync Runner: fetching script list…');
+  log('Fetching ' + BASE + '/runner-manifest.json …');
   let list;
   try {
     list = await (await get('/runner-manifest.json')).json();
   } catch (e) {
-    return figma.closePlugin('Sync Runner: ' + String(e && e.message ? e.message : e));
+    return done(false, 'Sync Runner: ' + String(e && e.message ? e.message : e) + ' — is `npm run figma:serve` running?');
   }
   // Integrity map from the manifest ({ integrity: [{ name, sha256 }] }).
   // Older servers only send `scripts: [names]` — then there is nothing to
@@ -109,6 +183,7 @@ async function main() {
   if (Array.isArray(list.integrity)) {
     for (const entry of list.integrity) expectedHash[entry.name] = entry.sha256;
   } else {
+    log('Manifest has no integrity hashes — running UNVERIFIED (update figma-serve.mjs)', 'warn');
     figma.notify('Sync Runner: manifest has no integrity hashes — running UNVERIFIED (update figma-serve.mjs)', { timeout: 4000 });
   }
 
@@ -121,12 +196,13 @@ async function main() {
     }).catch(() => {});
   for (const name of list.scripts) {
     figma.notify('Running ' + name + '…', { timeout: 1500 });
+    log('Running ' + name + ' …');
     await progress({ phase: 'starting', script: name, when: Date.now(), soFar: results });
     let code;
     try {
       code = await (await get('/' + name)).text();
     } catch (e) {
-      return figma.closePlugin('Sync Runner: fetch failed for ' + name + ': ' + String(e && e.message ? e.message : e));
+      return done(false, 'Fetch failed for ' + name + ': ' + String(e && e.message ? e.message : e));
     }
     // Refuse to execute bytes that do not match the manifest hash.
     if (expectedHash[name]) {
@@ -134,18 +210,20 @@ async function main() {
       if (actual !== expectedHash[name]) {
         results.push({ script: name, ok: false, error: 'integrity mismatch' });
         await progress({ phase: 'integrity-failure', script: name, when: Date.now(), soFar: results });
-        return figma.closePlugin(
+        return done(false,
           'INTEGRITY FAILURE: ' + name + ' hash ' + actual.slice(0, 12) + '… does not match manifest ' +
             expectedHash[name].slice(0, 12) + '… — refusing to execute. Is something else answering on port 8765?',
         );
       }
     }
     try {
-      const result = await new Function('return (async () => {\n' + code + '\n})()')();
+      const result = await runScript(code);
       results.push({ script: name, ok: true, result });
+      log(name + ' — ok', 'ok');
       await progress({ phase: 'finished', script: name, when: Date.now(), soFar: results });
     } catch (e) {
       results.push({ script: name, ok: false, error: String(e && e.message ? e.message : e) });
+      log(name + ' — FAILED: ' + String(e && e.message ? e.message : e), 'error');
       break; // dependency order matters — stop on first failure
     }
   }
@@ -158,8 +236,7 @@ async function main() {
     });
   } catch (e) { /* server may not accept POST; the summary below still shows */ }
   const failed = results.filter((r) => !r.ok);
-  figma.closePlugin(failed.length === 0
+  done(failed.length === 0, failed.length === 0
     ? 'Sync complete: ' + results.length + ' script(s) ran clean.'
     : 'FAILED at ' + failed[0].script + ': ' + failed[0].error);
 }
-main();

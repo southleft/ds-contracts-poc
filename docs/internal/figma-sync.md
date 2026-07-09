@@ -89,12 +89,21 @@ The MCP's `figma_check_design_parity` tool is a useful accelerant here — note 
 - [ ] Decide where extraction artifacts live (`parity/` directory, gitignored snapshots vs committed baselines).
 - [ ] Wire `figma_check_design_parity` scoring into CI once extraction is scripted.
 
-## Full-library runs: the Sync Runner plugin
+## The Sync Runner plugin: paste mode + local runner
 
-For whole-library operations (fresh-file rebuild, mass re-sync), pasting scripts through a bridge is slow and size-capped. The from-disk transport is a development plugin:
+The dev plugin (`figma-sync/plugin/`, load once via **Plugins → Development → Import plugin from manifest…**; setup details in [its README](../../figma-sync/plugin/README.md)) opens a two-tab window. Nothing executes until a Run button is pressed.
+
+### Paste a script — the designer trust round-trip
+
+A playground user copies the **Figma script** output tab, pastes it into the plugin's *Paste a script* tab, and presses **Run script** — the contract builds (or amends) the component set in the file they have open, and the script's report renders in the window: created/amended/skipped status, variant count, node id, component key, added/extra variants. Errors show verbatim; scripts are atomic on throw by Figma's design, so a failed run never leaves a half-synced file.
+
+Trust model, stated in the UI: pasted scripts run with **full plugin permissions in the open file** — paste only scripts you generated yourself. There is no manifest to verify a paste against; the SHA-256 integrity check below applies to the local-runner transport only.
+
+### Local runner — full-library runs
+
+For whole-library operations (fresh-file rebuild, mass re-sync), pasting scripts one-by-one is slow and size-capped. The *Local runner* tab is the from-disk transport:
 
 1. `npm run figma:serve` — serves `figma-sync/` locally with the runner manifest (tokens → batches → arrange) and a result sink.
-2. In Figma desktop: **Plugins → Development → Import plugin from manifest…** → `figma-sync/plugin/manifest.json` (one-time).
-3. Run **DS Contracts Sync Runner** in the target file. It executes every script in dependency order, stops on first failure, and POSTs per-script results to `figma-sync/.runner-result.json`.
+2. Press **Run all scripts** in the target file. The runner executes every script in dependency order (each SHA-256-verified against the manifest, refusing on mismatch), stops on first failure, streams per-script progress into the window, and POSTs per-script results to `figma-sync/.runner-result.json`.
 
 To target a fresh file, regenerate scripts with the guard retargeted: `FIGMA_FILE_KEY=<newFileKey> npm run figma:plan`. The 2026-07-06 fresh-file rebuild ran this way end to end (see docs/07 live checks).
