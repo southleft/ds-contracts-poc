@@ -1,0 +1,882 @@
+{
+  "_provenance": {
+    "fileKey": "nl9P0h3brratHTdncjzKIr",
+    "extractedAt": "2026-07-09",
+    "note": "Node-tree dump mapped from the Figma REST API (extract/figma/rest/map.ts, dump v1.1) for design→contract proposal."
+  },
+  "Tooltip": {
+    "setName": "Tooltip",
+    "type": "COMPONENT_SET",
+    "nodeId": "37:142",
+    "key": "ec60770103b254646e26257d2b3e82d88d6cdac5",
+    "variants": [
+      {
+        "name": "placement=left",
+        "type": "COMPONENT",
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "MIN",
+          "counter": "CENTER",
+          "spacing": 0,
+          "padding": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "AUTO"
+        },
+        "children": [
+          {
+            "name": "Body",
+            "type": "FRAME",
+            "layout": {
+              "mode": "VERTICAL",
+              "primary": "MIN",
+              "counter": "MIN",
+              "spacing": 0,
+              "padding": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "primarySizing": "AUTO",
+              "counterSizing": "AUTO"
+            },
+            "cornerRadius": 3,
+            "fill": {
+              "hex": "27272a"
+            },
+            "children": [
+              {
+                "name": "Content",
+                "type": "FRAME",
+                "layout": {
+                  "mode": "HORIZONTAL",
+                  "primary": "MIN",
+                  "counter": "MIN",
+                  "spacing": 8,
+                  "padding": [
+                    8,
+                    8,
+                    8,
+                    8
+                  ],
+                  "primarySizing": "AUTO",
+                  "counterSizing": "AUTO"
+                },
+                "cornerRadius": 4,
+                "fill": {
+                  "hex": "27272a"
+                },
+                "children": [
+                  {
+                    "name": "Tooltip text",
+                    "type": "TEXT",
+                    "text": {
+                      "characters": "Tooltip text",
+                      "fontSize": 14,
+                      "fontStyle": "Regular",
+                      "style": "Sans/Regular - Small"
+                    },
+                    "fill": {
+                      "hex": "ffffff"
+                    },
+                    "propRefs": {
+                      "characters": "text"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Arrow Wrapper",
+            "type": "FRAME",
+            "layout": {
+              "mode": "VERTICAL",
+              "primary": "CENTER",
+              "counter": "CENTER",
+              "spacing": 10,
+              "padding": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "primarySizing": "AUTO",
+              "counterSizing": "AUTO"
+            },
+            "children": [
+              {
+                "name": "Arrow",
+                "type": "VECTOR",
+                "fill": {
+                  "hex": "27272a"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "placement=topLeft",
+        "type": "COMPONENT",
+        "layout": {
+          "mode": "VERTICAL",
+          "primary": "MIN",
+          "counter": "MIN",
+          "spacing": 0,
+          "padding": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "AUTO"
+        },
+        "children": [
+          {
+            "name": "Body",
+            "type": "FRAME",
+            "layout": {
+              "mode": "VERTICAL",
+              "primary": "MIN",
+              "counter": "MIN",
+              "spacing": 0,
+              "padding": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "primarySizing": "AUTO",
+              "counterSizing": "AUTO"
+            },
+            "cornerRadius": 3,
+            "children": [
+              {
+                "name": "Content",
+                "type": "FRAME",
+                "layout": {
+                  "mode": "HORIZONTAL",
+                  "primary": "MIN",
+                  "counter": "MIN",
+                  "spacing": 8,
+                  "padding": [
+                    8,
+                    8,
+                    8,
+                    8
+                  ],
+                  "primarySizing": "AUTO",
+                  "counterSizing": "AUTO"
+                },
+                "cornerRadius": 4,
+                "fill": {
+                  "hex": "27272a"
+                },
+                "children": [
+                  {
+                    "name": "Tooltip text",
+                    "type": "TEXT",
+                    "text": {
+                      "characters": "Tooltip text",
+                      "fontSize": 14,
+                      "fontStyle": "Regular",
+                      "style": "Sans/Regular - Small"
+                    },
+                    "fill": {
+                      "hex": "ffffff"
+                    },
+                    "propRefs": {
+                      "characters": "text"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Arrow Wrapper",
+            "type": "FRAME",
+            "layout": {
+              "mode": "VERTICAL",
+              "primary": "CENTER",
+              "counter": "CENTER",
+              "spacing": 10,
+              "padding": [
+                0,
+                16,
+                0,
+                16
+              ],
+              "primarySizing": "AUTO",
+              "counterSizing": "AUTO"
+            },
+            "children": [
+              {
+                "name": "Arrow",
+                "type": "VECTOR",
+                "fill": {
+                  "hex": "27272a"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "placement=bottomLeft",
+        "type": "COMPONENT",
+        "layout": {
+          "mode": "VERTICAL",
+          "primary": "MIN",
+          "counter": "MIN",
+          "spacing": 0,
+          "padding": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "AUTO"
+        },
+        "children": [
+          {
+            "name": "Arrow Wrapper",
+            "type": "FRAME",
+            "layout": {
+              "mode": "VERTICAL",
+              "primary": "CENTER",
+              "counter": "CENTER",
+              "spacing": 10,
+              "padding": [
+                0,
+                16,
+                0,
+                16
+              ],
+              "primarySizing": "AUTO",
+              "counterSizing": "AUTO"
+            },
+            "children": [
+              {
+                "name": "Arrow",
+                "type": "VECTOR",
+                "fill": {
+                  "hex": "27272a"
+                }
+              }
+            ]
+          },
+          {
+            "name": "Body",
+            "type": "FRAME",
+            "layout": {
+              "mode": "VERTICAL",
+              "primary": "MIN",
+              "counter": "MIN",
+              "spacing": 0,
+              "padding": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "primarySizing": "AUTO",
+              "counterSizing": "AUTO"
+            },
+            "cornerRadius": 3,
+            "children": [
+              {
+                "name": "Content",
+                "type": "FRAME",
+                "layout": {
+                  "mode": "HORIZONTAL",
+                  "primary": "MIN",
+                  "counter": "MIN",
+                  "spacing": 8,
+                  "padding": [
+                    8,
+                    8,
+                    8,
+                    8
+                  ],
+                  "primarySizing": "AUTO",
+                  "counterSizing": "AUTO"
+                },
+                "cornerRadius": 4,
+                "fill": {
+                  "hex": "27272a"
+                },
+                "children": [
+                  {
+                    "name": "Tooltip text",
+                    "type": "TEXT",
+                    "text": {
+                      "characters": "Tooltip text",
+                      "fontSize": 14,
+                      "fontStyle": "Regular",
+                      "style": "Sans/Regular - Small"
+                    },
+                    "fill": {
+                      "hex": "ffffff"
+                    },
+                    "propRefs": {
+                      "characters": "text"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "placement=bottom",
+        "type": "COMPONENT",
+        "layout": {
+          "mode": "VERTICAL",
+          "primary": "MIN",
+          "counter": "CENTER",
+          "spacing": 0,
+          "padding": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "AUTO"
+        },
+        "children": [
+          {
+            "name": "Arrow Wrapper",
+            "type": "FRAME",
+            "layout": {
+              "mode": "VERTICAL",
+              "primary": "CENTER",
+              "counter": "CENTER",
+              "spacing": 10,
+              "padding": [
+                0,
+                16,
+                0,
+                16
+              ],
+              "primarySizing": "AUTO",
+              "counterSizing": "AUTO"
+            },
+            "children": [
+              {
+                "name": "Arrow",
+                "type": "VECTOR",
+                "fill": {
+                  "hex": "27272a"
+                }
+              }
+            ]
+          },
+          {
+            "name": "Body",
+            "type": "FRAME",
+            "layout": {
+              "mode": "VERTICAL",
+              "primary": "MIN",
+              "counter": "MIN",
+              "spacing": 0,
+              "padding": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "primarySizing": "AUTO",
+              "counterSizing": "AUTO"
+            },
+            "cornerRadius": 3,
+            "children": [
+              {
+                "name": "Content",
+                "type": "FRAME",
+                "layout": {
+                  "mode": "HORIZONTAL",
+                  "primary": "MIN",
+                  "counter": "MIN",
+                  "spacing": 8,
+                  "padding": [
+                    8,
+                    8,
+                    8,
+                    8
+                  ],
+                  "primarySizing": "AUTO",
+                  "counterSizing": "AUTO"
+                },
+                "cornerRadius": 4,
+                "fill": {
+                  "hex": "27272a"
+                },
+                "children": [
+                  {
+                    "name": "Tooltip text",
+                    "type": "TEXT",
+                    "text": {
+                      "characters": "Tooltip text",
+                      "fontSize": 14,
+                      "fontStyle": "Regular",
+                      "style": "Sans/Regular - Small"
+                    },
+                    "fill": {
+                      "hex": "ffffff"
+                    },
+                    "propRefs": {
+                      "characters": "text"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "placement=top",
+        "type": "COMPONENT",
+        "layout": {
+          "mode": "VERTICAL",
+          "primary": "MIN",
+          "counter": "CENTER",
+          "spacing": 0,
+          "padding": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "AUTO"
+        },
+        "children": [
+          {
+            "name": "Body",
+            "type": "FRAME",
+            "layout": {
+              "mode": "VERTICAL",
+              "primary": "MIN",
+              "counter": "MIN",
+              "spacing": 0,
+              "padding": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "primarySizing": "AUTO",
+              "counterSizing": "AUTO"
+            },
+            "cornerRadius": 3,
+            "children": [
+              {
+                "name": "Content",
+                "type": "FRAME",
+                "layout": {
+                  "mode": "HORIZONTAL",
+                  "primary": "MIN",
+                  "counter": "MIN",
+                  "spacing": 8,
+                  "padding": [
+                    8,
+                    8,
+                    8,
+                    8
+                  ],
+                  "primarySizing": "AUTO",
+                  "counterSizing": "AUTO"
+                },
+                "cornerRadius": 4,
+                "fill": {
+                  "hex": "27272a"
+                },
+                "children": [
+                  {
+                    "name": "Tooltip text",
+                    "type": "TEXT",
+                    "text": {
+                      "characters": "Tooltip text",
+                      "fontSize": 14,
+                      "fontStyle": "Regular",
+                      "style": "Sans/Regular - Small"
+                    },
+                    "fill": {
+                      "hex": "ffffff"
+                    },
+                    "propRefs": {
+                      "characters": "text"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Arrow Wrapper",
+            "type": "FRAME",
+            "layout": {
+              "mode": "VERTICAL",
+              "primary": "CENTER",
+              "counter": "CENTER",
+              "spacing": 10,
+              "padding": [
+                0,
+                16,
+                0,
+                16
+              ],
+              "primarySizing": "AUTO",
+              "counterSizing": "AUTO"
+            },
+            "children": [
+              {
+                "name": "Arrow",
+                "type": "VECTOR",
+                "fill": {
+                  "hex": "27272a"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "placement=topRight",
+        "type": "COMPONENT",
+        "layout": {
+          "mode": "VERTICAL",
+          "primary": "MIN",
+          "counter": "MAX",
+          "spacing": 0,
+          "padding": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "AUTO"
+        },
+        "children": [
+          {
+            "name": "Body",
+            "type": "FRAME",
+            "layout": {
+              "mode": "VERTICAL",
+              "primary": "MIN",
+              "counter": "MIN",
+              "spacing": 0,
+              "padding": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "primarySizing": "AUTO",
+              "counterSizing": "AUTO"
+            },
+            "cornerRadius": 3,
+            "children": [
+              {
+                "name": "Content",
+                "type": "FRAME",
+                "layout": {
+                  "mode": "HORIZONTAL",
+                  "primary": "MIN",
+                  "counter": "MIN",
+                  "spacing": 8,
+                  "padding": [
+                    8,
+                    8,
+                    8,
+                    8
+                  ],
+                  "primarySizing": "AUTO",
+                  "counterSizing": "AUTO"
+                },
+                "cornerRadius": 4,
+                "fill": {
+                  "hex": "27272a"
+                },
+                "children": [
+                  {
+                    "name": "Tooltip text",
+                    "type": "TEXT",
+                    "text": {
+                      "characters": "Tooltip text",
+                      "fontSize": 14,
+                      "fontStyle": "Regular",
+                      "style": "Sans/Regular - Small"
+                    },
+                    "fill": {
+                      "hex": "ffffff"
+                    },
+                    "propRefs": {
+                      "characters": "text"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Arrow Wrapper",
+            "type": "FRAME",
+            "layout": {
+              "mode": "VERTICAL",
+              "primary": "CENTER",
+              "counter": "CENTER",
+              "spacing": 10,
+              "padding": [
+                0,
+                16,
+                0,
+                16
+              ],
+              "primarySizing": "AUTO",
+              "counterSizing": "AUTO"
+            },
+            "children": [
+              {
+                "name": "Arrow",
+                "type": "VECTOR",
+                "fill": {
+                  "hex": "27272a"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "placement=bottomRight",
+        "type": "COMPONENT",
+        "layout": {
+          "mode": "VERTICAL",
+          "primary": "MIN",
+          "counter": "MAX",
+          "spacing": 0,
+          "padding": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "AUTO"
+        },
+        "children": [
+          {
+            "name": "Arrow Wrapper",
+            "type": "FRAME",
+            "layout": {
+              "mode": "VERTICAL",
+              "primary": "CENTER",
+              "counter": "CENTER",
+              "spacing": 10,
+              "padding": [
+                0,
+                16,
+                0,
+                16
+              ],
+              "primarySizing": "AUTO",
+              "counterSizing": "AUTO"
+            },
+            "children": [
+              {
+                "name": "Arrow",
+                "type": "VECTOR",
+                "fill": {
+                  "hex": "27272a"
+                }
+              }
+            ]
+          },
+          {
+            "name": "Body",
+            "type": "FRAME",
+            "layout": {
+              "mode": "VERTICAL",
+              "primary": "MIN",
+              "counter": "MIN",
+              "spacing": 0,
+              "padding": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "primarySizing": "AUTO",
+              "counterSizing": "AUTO"
+            },
+            "cornerRadius": 3,
+            "children": [
+              {
+                "name": "Content",
+                "type": "FRAME",
+                "layout": {
+                  "mode": "HORIZONTAL",
+                  "primary": "MIN",
+                  "counter": "MIN",
+                  "spacing": 8,
+                  "padding": [
+                    8,
+                    8,
+                    8,
+                    8
+                  ],
+                  "primarySizing": "AUTO",
+                  "counterSizing": "AUTO"
+                },
+                "cornerRadius": 4,
+                "fill": {
+                  "hex": "27272a"
+                },
+                "children": [
+                  {
+                    "name": "Tooltip text",
+                    "type": "TEXT",
+                    "text": {
+                      "characters": "Tooltip text",
+                      "fontSize": 14,
+                      "fontStyle": "Regular",
+                      "style": "Sans/Regular - Small"
+                    },
+                    "fill": {
+                      "hex": "ffffff"
+                    },
+                    "propRefs": {
+                      "characters": "text"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "placement=right",
+        "type": "COMPONENT",
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "MIN",
+          "counter": "CENTER",
+          "spacing": 0,
+          "padding": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "AUTO"
+        },
+        "children": [
+          {
+            "name": "Arrow Wrapper",
+            "type": "FRAME",
+            "layout": {
+              "mode": "VERTICAL",
+              "primary": "CENTER",
+              "counter": "CENTER",
+              "spacing": 10,
+              "padding": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "primarySizing": "AUTO",
+              "counterSizing": "AUTO"
+            },
+            "children": [
+              {
+                "name": "Arrow",
+                "type": "VECTOR",
+                "fill": {
+                  "hex": "27272a"
+                }
+              }
+            ]
+          },
+          {
+            "name": "Body",
+            "type": "FRAME",
+            "layout": {
+              "mode": "VERTICAL",
+              "primary": "MIN",
+              "counter": "MIN",
+              "spacing": 0,
+              "padding": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "primarySizing": "AUTO",
+              "counterSizing": "AUTO"
+            },
+            "cornerRadius": 3,
+            "children": [
+              {
+                "name": "Content",
+                "type": "FRAME",
+                "layout": {
+                  "mode": "HORIZONTAL",
+                  "primary": "MIN",
+                  "counter": "MIN",
+                  "spacing": 8,
+                  "padding": [
+                    8,
+                    8,
+                    8,
+                    8
+                  ],
+                  "primarySizing": "AUTO",
+                  "counterSizing": "AUTO"
+                },
+                "cornerRadius": 4,
+                "fill": {
+                  "hex": "27272a"
+                },
+                "children": [
+                  {
+                    "name": "Tooltip text",
+                    "type": "TEXT",
+                    "text": {
+                      "characters": "Tooltip text",
+                      "fontSize": 14,
+                      "fontStyle": "Regular",
+                      "style": "Sans/Regular - Small"
+                    },
+                    "fill": {
+                      "hex": "ffffff"
+                    },
+                    "propRefs": {
+                      "characters": "text"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

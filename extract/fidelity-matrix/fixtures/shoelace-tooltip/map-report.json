@@ -1,0 +1,785 @@
+{
+  "fileName": "Shoelace interactive UI library (Community)",
+  "sets": [
+    "Tooltip"
+  ],
+  "degradations": [
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tooltip:placement=left/Body",
+      "field": "topLeftRadius",
+      "message": "variable id VariableID:4:26 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tooltip:placement=left/Body",
+      "field": "topRightRadius",
+      "message": "variable id VariableID:4:26 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tooltip:placement=left/Body",
+      "field": "bottomLeftRadius",
+      "message": "variable id VariableID:4:26 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tooltip:placement=left/Body",
+      "field": "bottomRightRadius",
+      "message": "variable id VariableID:4:26 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tooltip:placement=left/Body",
+      "field": "fill",
+      "message": "variable id VariableID:102:2307 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tooltip:placement=left/Body/Content",
+      "field": "itemSpacing",
+      "message": "variable id VariableID:5cb382d312406ede682c6cd66c60b696b92d4f5a/3784:190 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tooltip:placement=left/Body/Content",
+      "field": "paddingLeft",
+      "message": "variable id VariableID:5cb382d312406ede682c6cd66c60b696b92d4f5a/3784:190 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tooltip:placement=left/Body/Content",
+      "field": "paddingTop",
+      "message": "variable id VariableID:5cb382d312406ede682c6cd66c60b696b92d4f5a/3784:190 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tooltip:placement=left/Body/Content",
+      "field": "paddingRight",
+      "message": "variable id VariableID:5cb382d312406ede682c6cd66c60b696b92d4f5a/3784:190 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tooltip:placement=left/Body/Content",
+      "field": "paddingBottom",
+      "message": "variable id VariableID:5cb382d312406ede682c6cd66c60b696b92d4f5a/3784:190 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tooltip:placement=left/Body/Content",
+      "field": "topLeftRadius",
+      "message": "variable id VariableID:5c7442cc04dd1e148c203b3b9eb1c0dea377558c/3841:318 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tooltip:placement=left/Body/Content",
+      "field": "topRightRadius",
+      "message": "variable id VariableID:5c7442cc04dd1e148c203b3b9eb1c0dea377558c/3841:318 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tooltip:placement=left/Body/Content",
+      "field": "bottomLeftRadius",
+      "message": "variable id VariableID:5c7442cc04dd1e148c203b3b9eb1c0dea377558c/3841:318 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tooltip:placement=left/Body/Content",
+      "field": "bottomRightRadius",
+      "message": "variable id VariableID:5c7442cc04dd1e148c203b3b9eb1c0dea377558c/3841:318 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tooltip:placement=left/Body/Content",
+      "field": "fill",
+      "message": "variable id VariableID:102:2307 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tooltip:placement=left/Body/Content/Tooltip text",
+      "field": "fill",
+      "message": "variable id VariableID:102:2305 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tooltip:placement=left/Arrow Wrapper/Arrow",
+      "field": "fill",
+      "message": "variable id VariableID:102:2307 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tooltip:placement=topLeft/Body",
+      "field": "topLeftRadius",
+      "message": "variable id VariableID:4:26 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tooltip:placement=topLeft/Body",
+      "field": "topRightRadius",
+      "message": "variable id VariableID:4:26 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tooltip:placement=topLeft/Body",
+      "field": "bottomLeftRadius",
+      "message": "variable id VariableID:4:26 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tooltip:placement=topLeft/Body",
+      "field": "bottomRightRadius",
+      "message": "variable id VariableID:4:26 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tooltip:placement=topLeft/Body/Content",
+      "field": "itemSpacing",
+      "message": "variable id VariableID:5cb382d312406ede682c6cd66c60b696b92d4f5a/3784:190 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tooltip:placement=topLeft/Body/Content",
+      "field": "paddingLeft",
+      "message": "variable id VariableID:5cb382d312406ede682c6cd66c60b696b92d4f5a/3784:190 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tooltip:placement=topLeft/Body/Content",
+      "field": "paddingTop",
+      "message": "variable id VariableID:5cb382d312406ede682c6cd66c60b696b92d4f5a/3784:190 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tooltip:placement=topLeft/Body/Content",
+      "field": "paddingRight",
+      "message": "variable id VariableID:5cb382d312406ede682c6cd66c60b696b92d4f5a/3784:190 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tooltip:placement=topLeft/Body/Content",
+      "field": "paddingBottom",
+      "message": "variable id VariableID:5cb382d312406ede682c6cd66c60b696b92d4f5a/3784:190 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tooltip:placement=topLeft/Body/Content",
+      "field": "topLeftRadius",
+      "message": "variable id VariableID:5c7442cc04dd1e148c203b3b9eb1c0dea377558c/3841:318 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tooltip:placement=topLeft/Body/Content",
+      "field": "topRightRadius",
+      "message": "variable id VariableID:5c7442cc04dd1e148c203b3b9eb1c0dea377558c/3841:318 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tooltip:placement=topLeft/Body/Content",
+      "field": "bottomLeftRadius",
+      "message": "variable id VariableID:5c7442cc04dd1e148c203b3b9eb1c0dea377558c/3841:318 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tooltip:placement=topLeft/Body/Content",
+      "field": "bottomRightRadius",
+      "message": "variable id VariableID:5c7442cc04dd1e148c203b3b9eb1c0dea377558c/3841:318 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tooltip:placement=topLeft/Body/Content",
+      "field": "fill",
+      "message": "variable id VariableID:102:2307 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tooltip:placement=topLeft/Body/Content/Tooltip text",
+      "field": "fill",
+      "message": "variable id VariableID:102:2305 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tooltip:placement=topLeft/Arrow Wrapper/Arrow",
+      "field": "fill",
+      "message": "variable id VariableID:102:2307 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tooltip:placement=bottomLeft/Arrow Wrapper/Arrow",
+      "field": "fill",
+      "message": "variable id VariableID:102:2307 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tooltip:placement=bottomLeft/Body",
+      "field": "topLeftRadius",
+      "message": "variable id VariableID:4:26 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tooltip:placement=bottomLeft/Body",
+      "field": "topRightRadius",
+      "message": "variable id VariableID:4:26 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tooltip:placement=bottomLeft/Body",
+      "field": "bottomLeftRadius",
+      "message": "variable id VariableID:4:26 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tooltip:placement=bottomLeft/Body",
+      "field": "bottomRightRadius",
+      "message": "variable id VariableID:4:26 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tooltip:placement=bottomLeft/Body/Content",
+      "field": "itemSpacing",
+      "message": "variable id VariableID:5cb382d312406ede682c6cd66c60b696b92d4f5a/3784:190 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tooltip:placement=bottomLeft/Body/Content",
+      "field": "paddingLeft",
+      "message": "variable id VariableID:5cb382d312406ede682c6cd66c60b696b92d4f5a/3784:190 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tooltip:placement=bottomLeft/Body/Content",
+      "field": "paddingTop",
+      "message": "variable id VariableID:5cb382d312406ede682c6cd66c60b696b92d4f5a/3784:190 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tooltip:placement=bottomLeft/Body/Content",
+      "field": "paddingRight",
+      "message": "variable id VariableID:5cb382d312406ede682c6cd66c60b696b92d4f5a/3784:190 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tooltip:placement=bottomLeft/Body/Content",
+      "field": "paddingBottom",
+      "message": "variable id VariableID:5cb382d312406ede682c6cd66c60b696b92d4f5a/3784:190 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tooltip:placement=bottomLeft/Body/Content",
+      "field": "topLeftRadius",
+      "message": "variable id VariableID:5c7442cc04dd1e148c203b3b9eb1c0dea377558c/3841:318 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tooltip:placement=bottomLeft/Body/Content",
+      "field": "topRightRadius",
+      "message": "variable id VariableID:5c7442cc04dd1e148c203b3b9eb1c0dea377558c/3841:318 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tooltip:placement=bottomLeft/Body/Content",
+      "field": "bottomLeftRadius",
+      "message": "variable id VariableID:5c7442cc04dd1e148c203b3b9eb1c0dea377558c/3841:318 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tooltip:placement=bottomLeft/Body/Content",
+      "field": "bottomRightRadius",
+      "message": "variable id VariableID:5c7442cc04dd1e148c203b3b9eb1c0dea377558c/3841:318 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tooltip:placement=bottomLeft/Body/Content",
+      "field": "fill",
+      "message": "variable id VariableID:102:2307 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tooltip:placement=bottomLeft/Body/Content/Tooltip text",
+      "field": "fill",
+      "message": "variable id VariableID:102:2305 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tooltip:placement=bottom/Arrow Wrapper/Arrow",
+      "field": "fill",
+      "message": "variable id VariableID:102:2307 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tooltip:placement=bottom/Body",
+      "field": "topLeftRadius",
+      "message": "variable id VariableID:4:26 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tooltip:placement=bottom/Body",
+      "field": "topRightRadius",
+      "message": "variable id VariableID:4:26 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tooltip:placement=bottom/Body",
+      "field": "bottomLeftRadius",
+      "message": "variable id VariableID:4:26 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tooltip:placement=bottom/Body",
+      "field": "bottomRightRadius",
+      "message": "variable id VariableID:4:26 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tooltip:placement=bottom/Body/Content",
+      "field": "itemSpacing",
+      "message": "variable id VariableID:5cb382d312406ede682c6cd66c60b696b92d4f5a/3784:190 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tooltip:placement=bottom/Body/Content",
+      "field": "paddingLeft",
+      "message": "variable id VariableID:5cb382d312406ede682c6cd66c60b696b92d4f5a/3784:190 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tooltip:placement=bottom/Body/Content",
+      "field": "paddingTop",
+      "message": "variable id VariableID:5cb382d312406ede682c6cd66c60b696b92d4f5a/3784:190 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tooltip:placement=bottom/Body/Content",
+      "field": "paddingRight",
+      "message": "variable id VariableID:5cb382d312406ede682c6cd66c60b696b92d4f5a/3784:190 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tooltip:placement=bottom/Body/Content",
+      "field": "paddingBottom",
+      "message": "variable id VariableID:5cb382d312406ede682c6cd66c60b696b92d4f5a/3784:190 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tooltip:placement=bottom/Body/Content",
+      "field": "topLeftRadius",
+      "message": "variable id VariableID:5c7442cc04dd1e148c203b3b9eb1c0dea377558c/3841:318 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tooltip:placement=bottom/Body/Content",
+      "field": "topRightRadius",
+      "message": "variable id VariableID:5c7442cc04dd1e148c203b3b9eb1c0dea377558c/3841:318 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tooltip:placement=bottom/Body/Content",
+      "field": "bottomLeftRadius",
+      "message": "variable id VariableID:5c7442cc04dd1e148c203b3b9eb1c0dea377558c/3841:318 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tooltip:placement=bottom/Body/Content",
+      "field": "bottomRightRadius",
+      "message": "variable id VariableID:5c7442cc04dd1e148c203b3b9eb1c0dea377558c/3841:318 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tooltip:placement=bottom/Body/Content",
+      "field": "fill",
+      "message": "variable id VariableID:102:2307 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tooltip:placement=bottom/Body/Content/Tooltip text",
+      "field": "fill",
+      "message": "variable id VariableID:102:2305 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tooltip:placement=top/Body",
+      "field": "topLeftRadius",
+      "message": "variable id VariableID:4:26 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tooltip:placement=top/Body",
+      "field": "topRightRadius",
+      "message": "variable id VariableID:4:26 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tooltip:placement=top/Body",
+      "field": "bottomLeftRadius",
+      "message": "variable id VariableID:4:26 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tooltip:placement=top/Body",
+      "field": "bottomRightRadius",
+      "message": "variable id VariableID:4:26 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tooltip:placement=top/Body/Content",
+      "field": "itemSpacing",
+      "message": "variable id VariableID:5cb382d312406ede682c6cd66c60b696b92d4f5a/3784:190 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tooltip:placement=top/Body/Content",
+      "field": "paddingLeft",
+      "message": "variable id VariableID:5cb382d312406ede682c6cd66c60b696b92d4f5a/3784:190 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tooltip:placement=top/Body/Content",
+      "field": "paddingTop",
+      "message": "variable id VariableID:5cb382d312406ede682c6cd66c60b696b92d4f5a/3784:190 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tooltip:placement=top/Body/Content",
+      "field": "paddingRight",
+      "message": "variable id VariableID:5cb382d312406ede682c6cd66c60b696b92d4f5a/3784:190 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tooltip:placement=top/Body/Content",
+      "field": "paddingBottom",
+      "message": "variable id VariableID:5cb382d312406ede682c6cd66c60b696b92d4f5a/3784:190 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tooltip:placement=top/Body/Content",
+      "field": "topLeftRadius",
+      "message": "variable id VariableID:5c7442cc04dd1e148c203b3b9eb1c0dea377558c/3841:318 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tooltip:placement=top/Body/Content",
+      "field": "topRightRadius",
+      "message": "variable id VariableID:5c7442cc04dd1e148c203b3b9eb1c0dea377558c/3841:318 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tooltip:placement=top/Body/Content",
+      "field": "bottomLeftRadius",
+      "message": "variable id VariableID:5c7442cc04dd1e148c203b3b9eb1c0dea377558c/3841:318 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tooltip:placement=top/Body/Content",
+      "field": "bottomRightRadius",
+      "message": "variable id VariableID:5c7442cc04dd1e148c203b3b9eb1c0dea377558c/3841:318 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tooltip:placement=top/Body/Content",
+      "field": "fill",
+      "message": "variable id VariableID:102:2307 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tooltip:placement=top/Body/Content/Tooltip text",
+      "field": "fill",
+      "message": "variable id VariableID:102:2305 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tooltip:placement=top/Arrow Wrapper/Arrow",
+      "field": "fill",
+      "message": "variable id VariableID:102:2307 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tooltip:placement=topRight/Body",
+      "field": "topLeftRadius",
+      "message": "variable id VariableID:4:26 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tooltip:placement=topRight/Body",
+      "field": "topRightRadius",
+      "message": "variable id VariableID:4:26 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tooltip:placement=topRight/Body",
+      "field": "bottomLeftRadius",
+      "message": "variable id VariableID:4:26 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tooltip:placement=topRight/Body",
+      "field": "bottomRightRadius",
+      "message": "variable id VariableID:4:26 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tooltip:placement=topRight/Body/Content",
+      "field": "itemSpacing",
+      "message": "variable id VariableID:5cb382d312406ede682c6cd66c60b696b92d4f5a/3784:190 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tooltip:placement=topRight/Body/Content",
+      "field": "paddingLeft",
+      "message": "variable id VariableID:5cb382d312406ede682c6cd66c60b696b92d4f5a/3784:190 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tooltip:placement=topRight/Body/Content",
+      "field": "paddingTop",
+      "message": "variable id VariableID:5cb382d312406ede682c6cd66c60b696b92d4f5a/3784:190 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tooltip:placement=topRight/Body/Content",
+      "field": "paddingRight",
+      "message": "variable id VariableID:5cb382d312406ede682c6cd66c60b696b92d4f5a/3784:190 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tooltip:placement=topRight/Body/Content",
+      "field": "paddingBottom",
+      "message": "variable id VariableID:5cb382d312406ede682c6cd66c60b696b92d4f5a/3784:190 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tooltip:placement=topRight/Body/Content",
+      "field": "topLeftRadius",
+      "message": "variable id VariableID:5c7442cc04dd1e148c203b3b9eb1c0dea377558c/3841:318 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tooltip:placement=topRight/Body/Content",
+      "field": "topRightRadius",
+      "message": "variable id VariableID:5c7442cc04dd1e148c203b3b9eb1c0dea377558c/3841:318 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tooltip:placement=topRight/Body/Content",
+      "field": "bottomLeftRadius",
+      "message": "variable id VariableID:5c7442cc04dd1e148c203b3b9eb1c0dea377558c/3841:318 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tooltip:placement=topRight/Body/Content",
+      "field": "bottomRightRadius",
+      "message": "variable id VariableID:5c7442cc04dd1e148c203b3b9eb1c0dea377558c/3841:318 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tooltip:placement=topRight/Body/Content",
+      "field": "fill",
+      "message": "variable id VariableID:102:2307 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tooltip:placement=topRight/Body/Content/Tooltip text",
+      "field": "fill",
+      "message": "variable id VariableID:102:2305 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tooltip:placement=topRight/Arrow Wrapper/Arrow",
+      "field": "fill",
+      "message": "variable id VariableID:102:2307 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tooltip:placement=bottomRight/Arrow Wrapper/Arrow",
+      "field": "fill",
+      "message": "variable id VariableID:102:2307 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tooltip:placement=bottomRight/Body",
+      "field": "topLeftRadius",
+      "message": "variable id VariableID:4:26 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tooltip:placement=bottomRight/Body",
+      "field": "topRightRadius",
+      "message": "variable id VariableID:4:26 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tooltip:placement=bottomRight/Body",
+      "field": "bottomLeftRadius",
+      "message": "variable id VariableID:4:26 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tooltip:placement=bottomRight/Body",
+      "field": "bottomRightRadius",
+      "message": "variable id VariableID:4:26 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tooltip:placement=bottomRight/Body/Content",
+      "field": "itemSpacing",
+      "message": "variable id VariableID:5cb382d312406ede682c6cd66c60b696b92d4f5a/3784:190 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tooltip:placement=bottomRight/Body/Content",
+      "field": "paddingLeft",
+      "message": "variable id VariableID:5cb382d312406ede682c6cd66c60b696b92d4f5a/3784:190 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tooltip:placement=bottomRight/Body/Content",
+      "field": "paddingTop",
+      "message": "variable id VariableID:5cb382d312406ede682c6cd66c60b696b92d4f5a/3784:190 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tooltip:placement=bottomRight/Body/Content",
+      "field": "paddingRight",
+      "message": "variable id VariableID:5cb382d312406ede682c6cd66c60b696b92d4f5a/3784:190 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tooltip:placement=bottomRight/Body/Content",
+      "field": "paddingBottom",
+      "message": "variable id VariableID:5cb382d312406ede682c6cd66c60b696b92d4f5a/3784:190 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tooltip:placement=bottomRight/Body/Content",
+      "field": "topLeftRadius",
+      "message": "variable id VariableID:5c7442cc04dd1e148c203b3b9eb1c0dea377558c/3841:318 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tooltip:placement=bottomRight/Body/Content",
+      "field": "topRightRadius",
+      "message": "variable id VariableID:5c7442cc04dd1e148c203b3b9eb1c0dea377558c/3841:318 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tooltip:placement=bottomRight/Body/Content",
+      "field": "bottomLeftRadius",
+      "message": "variable id VariableID:5c7442cc04dd1e148c203b3b9eb1c0dea377558c/3841:318 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tooltip:placement=bottomRight/Body/Content",
+      "field": "bottomRightRadius",
+      "message": "variable id VariableID:5c7442cc04dd1e148c203b3b9eb1c0dea377558c/3841:318 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tooltip:placement=bottomRight/Body/Content",
+      "field": "fill",
+      "message": "variable id VariableID:102:2307 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tooltip:placement=bottomRight/Body/Content/Tooltip text",
+      "field": "fill",
+      "message": "variable id VariableID:102:2305 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tooltip:placement=right/Arrow Wrapper/Arrow",
+      "field": "fill",
+      "message": "variable id VariableID:102:2307 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tooltip:placement=right/Body",
+      "field": "topLeftRadius",
+      "message": "variable id VariableID:4:26 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tooltip:placement=right/Body",
+      "field": "topRightRadius",
+      "message": "variable id VariableID:4:26 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tooltip:placement=right/Body",
+      "field": "bottomLeftRadius",
+      "message": "variable id VariableID:4:26 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tooltip:placement=right/Body",
+      "field": "bottomRightRadius",
+      "message": "variable id VariableID:4:26 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tooltip:placement=right/Body/Content",
+      "field": "itemSpacing",
+      "message": "variable id VariableID:5cb382d312406ede682c6cd66c60b696b92d4f5a/3784:190 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tooltip:placement=right/Body/Content",
+      "field": "paddingLeft",
+      "message": "variable id VariableID:5cb382d312406ede682c6cd66c60b696b92d4f5a/3784:190 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tooltip:placement=right/Body/Content",
+      "field": "paddingTop",
+      "message": "variable id VariableID:5cb382d312406ede682c6cd66c60b696b92d4f5a/3784:190 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tooltip:placement=right/Body/Content",
+      "field": "paddingRight",
+      "message": "variable id VariableID:5cb382d312406ede682c6cd66c60b696b92d4f5a/3784:190 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tooltip:placement=right/Body/Content",
+      "field": "paddingBottom",
+      "message": "variable id VariableID:5cb382d312406ede682c6cd66c60b696b92d4f5a/3784:190 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tooltip:placement=right/Body/Content",
+      "field": "topLeftRadius",
+      "message": "variable id VariableID:5c7442cc04dd1e148c203b3b9eb1c0dea377558c/3841:318 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tooltip:placement=right/Body/Content",
+      "field": "topRightRadius",
+      "message": "variable id VariableID:5c7442cc04dd1e148c203b3b9eb1c0dea377558c/3841:318 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tooltip:placement=right/Body/Content",
+      "field": "bottomLeftRadius",
+      "message": "variable id VariableID:5c7442cc04dd1e148c203b3b9eb1c0dea377558c/3841:318 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tooltip:placement=right/Body/Content",
+      "field": "bottomRightRadius",
+      "message": "variable id VariableID:5c7442cc04dd1e148c203b3b9eb1c0dea377558c/3841:318 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tooltip:placement=right/Body/Content",
+      "field": "fill",
+      "message": "variable id VariableID:102:2307 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tooltip:placement=right/Body/Content/Tooltip text",
+      "field": "fill",
+      "message": "variable id VariableID:102:2305 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    }
+  ],
+  "notes": [
+    "variables response not provided — every bound fact degrades to its resolved literal; see variable-unresolved entries"
+  ]
+}

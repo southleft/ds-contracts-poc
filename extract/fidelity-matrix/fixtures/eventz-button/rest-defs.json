@@ -1,0 +1,98 @@
+{
+  "name": "DEMO Eventz Design System",
+  "nodes": {
+    "2313:42": {
+      "id": "2313:42",
+      "name": "Button",
+      "type": "COMPONENT_SET",
+      "componentPropertyDefinitions": {
+        "hasStartIcon#2314:0": {
+          "type": "BOOLEAN",
+          "defaultValue": true
+        },
+        "hasEndIcon#2314:4": {
+          "type": "BOOLEAN",
+          "defaultValue": true
+        },
+        "startIcon#2314:6": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "2388:322",
+          "preferredValues": [
+            {
+              "type": "COMPONENT",
+              "key": "b26c053080bd5f845829beb8a434724e954a0008"
+            }
+          ]
+        },
+        "endIcon#2314:8": {
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "2410:195",
+          "preferredValues": [
+            {
+              "type": "COMPONENT",
+              "key": "b26c053080bd5f845829beb8a434724e954a0008"
+            }
+          ]
+        },
+        "text#2316:12": {
+          "type": "TEXT",
+          "defaultValue": "Label"
+        },
+        "variant": {
+          "type": "VARIANT",
+          "defaultValue": "primary",
+          "variantOptions": [
+            "primary",
+            "secondary",
+            "bare",
+            "knockout"
+          ]
+        },
+        "state": {
+          "type": "VARIANT",
+          "defaultValue": "default",
+          "variantOptions": [
+            "default",
+            "hover",
+            "active",
+            "focus"
+          ]
+        },
+        "isDisabled": {
+          "type": "VARIANT",
+          "defaultValue": "false",
+          "variantOptions": [
+            "false",
+            "true"
+          ]
+        }
+      },
+      "variantNames": [
+        "variant=primary, state=default, isDisabled=false",
+        "variant=knockout, state=default, isDisabled=false",
+        "variant=primary, state=default, isDisabled=true",
+        "variant=knockout, state=default, isDisabled=true",
+        "variant=secondary, state=default, isDisabled=false",
+        "variant=bare, state=default, isDisabled=false",
+        "variant=bare, state=default, isDisabled=true",
+        "variant=secondary, state=default, isDisabled=true",
+        "variant=primary, state=hover, isDisabled=false",
+        "variant=knockout, state=hover, isDisabled=false",
+        "variant=secondary, state=hover, isDisabled=false",
+        "variant=bare, state=hover, isDisabled=false",
+        "variant=primary, state=active, isDisabled=false",
+        "variant=knockout, state=active, isDisabled=false",
+        "variant=secondary, state=active, isDisabled=false",
+        "variant=bare, state=active, isDisabled=false",
+        "variant=primary, state=focus, isDisabled=false",
+        "variant=knockout, state=focus, isDisabled=false",
+        "variant=secondary, state=focus, isDisabled=false",
+        "variant=bare, state=focus, isDisabled=false",
+        "variant=primary, state=focus, isDisabled=true",
+        "variant=knockout, state=focus, isDisabled=true",
+        "variant=secondary, state=focus, isDisabled=true",
+        "variant=bare, state=focus, isDisabled=true"
+      ]
+    }
+  }
+}

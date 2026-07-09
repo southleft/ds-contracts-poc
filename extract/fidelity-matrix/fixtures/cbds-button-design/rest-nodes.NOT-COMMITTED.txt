@@ -1,0 +1,5 @@
+The full GET /v1/files/:key/nodes capture for this subject is 15 MB (the set
+rides a page-level node with deep neighbors) — not committed. Reproduce it with:
+  npx tsx extract/fidelity-matrix/scripts/import-figma.ts cbds-button-design
+Source truth for prop scoring is committed in rest-defs.json; the replayable
+fixture the regression pin uses is dump.json (both from the same capture).

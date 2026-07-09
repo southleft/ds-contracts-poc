@@ -1,0 +1,89 @@
+{
+  "name": "Shoelace interactive UI library (Community)",
+  "nodes": {
+    "376:3540": {
+      "id": "376:3540",
+      "name": "Button group",
+      "type": "COMPONENT_SET",
+      "componentPropertyDefinitions": {
+        "isPill#381:0": {
+          "type": "BOOLEAN",
+          "defaultValue": false
+        },
+        "position": {
+          "type": "VARIANT",
+          "defaultValue": "left",
+          "variantOptions": [
+            "left",
+            "center",
+            "right",
+            "position4"
+          ]
+        },
+        "size": {
+          "type": "VARIANT",
+          "defaultValue": "large",
+          "variantOptions": [
+            "large",
+            "small",
+            "medium"
+          ]
+        },
+        "type": {
+          "type": "VARIANT",
+          "defaultValue": "default",
+          "variantOptions": [
+            "default",
+            "primary"
+          ]
+        },
+        "isPill": {
+          "type": "VARIANT",
+          "defaultValue": "false",
+          "variantOptions": [
+            "false",
+            "true"
+          ]
+        }
+      },
+      "variantNames": [
+        "position=left, size=large, type=default, isPill=false",
+        "position=left, size=large, type=default, isPill=true",
+        "position=left, size=large, type=primary, isPill=false",
+        "position=left, size=large, type=primary, isPill=true",
+        "position=left, size=small, type=default, isPill=false",
+        "position=left, size=small, type=default, isPill=true",
+        "position=left, size=small, type=primary, isPill=false",
+        "position=left, size=small, type=primary, isPill=true",
+        "position=left, size=medium, type=default, isPill=false",
+        "position=left, size=medium, type=default, isPill=true",
+        "position=left, size=medium, type=primary, isPill=false",
+        "position=left, size=medium, type=primary, isPill=true",
+        "position=center, size=large, type=default, isPill=false",
+        "position=center, size=large, type=default, isPill=true",
+        "position=center, size=large, type=primary, isPill=false",
+        "position=center, size=large, type=primary, isPill=true",
+        "position=center, size=small, type=default, isPill=false",
+        "position=center, size=small, type=default, isPill=true",
+        "position=center, size=small, type=primary, isPill=false",
+        "position=center, size=small, type=primary, isPill=true",
+        "position=center, size=medium, type=default, isPill=false",
+        "position=center, size=medium, type=default, isPill=true",
+        "position=center, size=medium, type=primary, isPill=false",
+        "position=center, size=medium, type=primary, isPill=true",
+        "position=right, size=large, type=default, isPill=false",
+        "position=right, size=large, type=default, isPill=true",
+        "position=right, size=large, type=primary, isPill=false",
+        "position=right, size=large, type=primary, isPill=true",
+        "position=position4, size=small, type=default, isPill=false",
+        "position=position4, size=small, type=default, isPill=true",
+        "position=position4, size=small, type=primary, isPill=false",
+        "position=position4, size=small, type=primary, isPill=true",
+        "position=right, size=medium, type=default, isPill=false",
+        "position=right, size=medium, type=default, isPill=true",
+        "position=right, size=medium, type=primary, isPill=false",
+        "position=right, size=medium, type=primary, isPill=true"
+      ]
+    }
+  }
+}

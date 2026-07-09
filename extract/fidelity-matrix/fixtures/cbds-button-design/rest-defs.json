@@ -1,0 +1,61 @@
+{
+  "name": "CBDS UI Kit Demo",
+  "nodes": {
+    "258:1838": {
+      "id": "258:1838",
+      "name": "Button-Brand Primary",
+      "type": "COMPONENT_SET",
+      "componentPropertyDefinitions": {
+        "\u21aa\ufe0ficon-right#258:2": {
+          "type": "BOOLEAN",
+          "defaultValue": false
+        },
+        "\u21aa\ufe0ficon-left#258:3": {
+          "type": "BOOLEAN",
+          "defaultValue": false
+        },
+        "\u270f\ufe0ftext#348:82": {
+          "type": "TEXT",
+          "defaultValue": "Button"
+        },
+        "size": {
+          "type": "VARIANT",
+          "defaultValue": "large",
+          "variantOptions": [
+            "large",
+            "medium",
+            "small"
+          ]
+        },
+        "state": {
+          "type": "VARIANT",
+          "defaultValue": "default",
+          "variantOptions": [
+            "default",
+            "hover",
+            "focus",
+            "pressed",
+            "disabled"
+          ]
+        }
+      },
+      "variantNames": [
+        "size=large, state=default",
+        "size=medium, state=default",
+        "size=small, state=default",
+        "size=large, state=hover",
+        "size=medium, state=hover",
+        "size=small, state=hover",
+        "size=large, state=focus",
+        "size=medium, state=focus",
+        "size=small, state=focus",
+        "size=large, state=pressed",
+        "size=medium, state=pressed",
+        "size=small, state=pressed",
+        "size=large, state=disabled",
+        "size=medium, state=disabled",
+        "size=small, state=disabled"
+      ]
+    }
+  }
+}

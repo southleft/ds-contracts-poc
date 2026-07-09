@@ -1,0 +1,2079 @@
+{
+  "_provenance": {
+    "fileKey": "nl9P0h3brratHTdncjzKIr",
+    "extractedAt": "2026-07-09",
+    "note": "Node-tree dump mapped from the Figma REST API (extract/figma/rest/map.ts, dump v1.1) for design→contract proposal."
+  },
+  "Button group": {
+    "setName": "Button group",
+    "type": "COMPONENT_SET",
+    "nodeId": "376:3540",
+    "key": "8ea76f7b0299bf1a13c947556dbdf36986a879c1",
+    "variants": [
+      {
+        "name": "position=left, size=large, type=default, isPill=false",
+        "type": "COMPONENT",
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "MIN",
+          "counter": "MIN",
+          "spacing": 0,
+          "padding": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "AUTO"
+        },
+        "children": [
+          {
+            "name": "Button",
+            "type": "INSTANCE",
+            "layout": {
+              "mode": "HORIZONTAL",
+              "primary": "MIN",
+              "counter": "CENTER",
+              "spacing": 8,
+              "padding": [
+                0,
+                12,
+                0,
+                12
+              ],
+              "primarySizing": "AUTO",
+              "counterSizing": "FIXED"
+            },
+            "fill": {
+              "hex": "ffffff"
+            },
+            "stroke": {
+              "hex": "d4d4d8"
+            },
+            "strokeWeight": 1,
+            "instanceOf": "Button",
+            "componentProperties": {
+              "showLabel": true,
+              "label": "Label",
+              "showSuffix": false,
+              "showPrefix": false,
+              "variant": "default",
+              "size": "large",
+              "state": "default",
+              "isOutline": "false",
+              "isPill": "false",
+              "isCircle": "false"
+            }
+          }
+        ]
+      },
+      {
+        "name": "position=left, size=large, type=default, isPill=true",
+        "type": "COMPONENT",
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "MIN",
+          "counter": "MIN",
+          "spacing": 0,
+          "padding": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "AUTO"
+        },
+        "children": [
+          {
+            "name": "Button",
+            "type": "INSTANCE",
+            "layout": {
+              "mode": "HORIZONTAL",
+              "primary": "MIN",
+              "counter": "CENTER",
+              "spacing": 8,
+              "padding": [
+                0,
+                12,
+                0,
+                12
+              ],
+              "primarySizing": "AUTO",
+              "counterSizing": "FIXED"
+            },
+            "fill": {
+              "hex": "ffffff"
+            },
+            "stroke": {
+              "hex": "d4d4d8"
+            },
+            "strokeWeight": 1,
+            "instanceOf": "Button",
+            "componentProperties": {
+              "showLabel": true,
+              "label": "Label",
+              "showSuffix": false,
+              "showPrefix": false,
+              "variant": "default",
+              "size": "large",
+              "state": "default",
+              "isOutline": "false",
+              "isPill": "true",
+              "isCircle": "false"
+            }
+          }
+        ]
+      },
+      {
+        "name": "position=left, size=large, type=primary, isPill=false",
+        "type": "COMPONENT",
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "MIN",
+          "counter": "MIN",
+          "spacing": 0,
+          "padding": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "AUTO"
+        },
+        "children": [
+          {
+            "name": "Button",
+            "type": "INSTANCE",
+            "layout": {
+              "mode": "HORIZONTAL",
+              "primary": "MIN",
+              "counter": "CENTER",
+              "spacing": 8,
+              "padding": [
+                0,
+                12,
+                0,
+                12
+              ],
+              "primarySizing": "AUTO",
+              "counterSizing": "FIXED"
+            },
+            "fill": {
+              "hex": "0284c7"
+            },
+            "instanceOf": "Button",
+            "componentProperties": {
+              "showLabel": true,
+              "label": "Label",
+              "showSuffix": false,
+              "showPrefix": false,
+              "variant": "primary",
+              "size": "large",
+              "state": "default",
+              "isOutline": "false",
+              "isPill": "false",
+              "isCircle": "false"
+            }
+          }
+        ]
+      },
+      {
+        "name": "position=left, size=large, type=primary, isPill=true",
+        "type": "COMPONENT",
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "MIN",
+          "counter": "MIN",
+          "spacing": 0,
+          "padding": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "AUTO"
+        },
+        "children": [
+          {
+            "name": "Button",
+            "type": "INSTANCE",
+            "layout": {
+              "mode": "HORIZONTAL",
+              "primary": "MIN",
+              "counter": "CENTER",
+              "spacing": 8,
+              "padding": [
+                0,
+                12,
+                0,
+                12
+              ],
+              "primarySizing": "AUTO",
+              "counterSizing": "FIXED"
+            },
+            "fill": {
+              "hex": "0284c7"
+            },
+            "instanceOf": "Button",
+            "componentProperties": {
+              "showLabel": true,
+              "label": "Label",
+              "showSuffix": false,
+              "showPrefix": false,
+              "variant": "primary",
+              "size": "large",
+              "state": "default",
+              "isOutline": "false",
+              "isPill": "true",
+              "isCircle": "false"
+            }
+          }
+        ]
+      },
+      {
+        "name": "position=left, size=small, type=default, isPill=false",
+        "type": "COMPONENT",
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "MIN",
+          "counter": "MIN",
+          "spacing": 0,
+          "padding": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "AUTO"
+        },
+        "children": [
+          {
+            "name": "Button",
+            "type": "INSTANCE",
+            "layout": {
+              "mode": "HORIZONTAL",
+              "primary": "MIN",
+              "counter": "CENTER",
+              "spacing": 2,
+              "padding": [
+                0,
+                4,
+                0,
+                4
+              ],
+              "primarySizing": "AUTO",
+              "counterSizing": "FIXED"
+            },
+            "fill": {
+              "hex": "ffffff"
+            },
+            "stroke": {
+              "hex": "d4d4d8"
+            },
+            "strokeWeight": 1,
+            "instanceOf": "Button",
+            "componentProperties": {
+              "showLabel": true,
+              "label": "Label",
+              "showSuffix": false,
+              "showPrefix": false,
+              "variant": "default",
+              "size": "small",
+              "state": "default",
+              "isOutline": "false",
+              "isPill": "false",
+              "isCircle": "false"
+            }
+          }
+        ]
+      },
+      {
+        "name": "position=left, size=small, type=default, isPill=true",
+        "type": "COMPONENT",
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "MIN",
+          "counter": "MIN",
+          "spacing": 0,
+          "padding": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "AUTO"
+        },
+        "children": [
+          {
+            "name": "Button",
+            "type": "INSTANCE",
+            "layout": {
+              "mode": "HORIZONTAL",
+              "primary": "MIN",
+              "counter": "CENTER",
+              "spacing": 2,
+              "padding": [
+                0,
+                4,
+                0,
+                4
+              ],
+              "primarySizing": "AUTO",
+              "counterSizing": "FIXED"
+            },
+            "fill": {
+              "hex": "ffffff"
+            },
+            "stroke": {
+              "hex": "d4d4d8"
+            },
+            "strokeWeight": 1,
+            "instanceOf": "Button",
+            "componentProperties": {
+              "showLabel": true,
+              "label": "Label",
+              "showSuffix": false,
+              "showPrefix": false,
+              "variant": "default",
+              "size": "small",
+              "state": "default",
+              "isOutline": "false",
+              "isPill": "true",
+              "isCircle": "false"
+            }
+          }
+        ]
+      },
+      {
+        "name": "position=left, size=small, type=primary, isPill=false",
+        "type": "COMPONENT",
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "MIN",
+          "counter": "MIN",
+          "spacing": 0,
+          "padding": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "AUTO"
+        },
+        "children": [
+          {
+            "name": "Button",
+            "type": "INSTANCE",
+            "layout": {
+              "mode": "HORIZONTAL",
+              "primary": "MIN",
+              "counter": "CENTER",
+              "spacing": 2,
+              "padding": [
+                0,
+                4,
+                0,
+                4
+              ],
+              "primarySizing": "AUTO",
+              "counterSizing": "FIXED"
+            },
+            "fill": {
+              "hex": "0284c7"
+            },
+            "instanceOf": "Button",
+            "componentProperties": {
+              "showLabel": true,
+              "label": "Label",
+              "showSuffix": false,
+              "showPrefix": false,
+              "variant": "primary",
+              "size": "small",
+              "state": "default",
+              "isOutline": "false",
+              "isPill": "false",
+              "isCircle": "false"
+            }
+          }
+        ]
+      },
+      {
+        "name": "position=left, size=small, type=primary, isPill=true",
+        "type": "COMPONENT",
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "MIN",
+          "counter": "MIN",
+          "spacing": 0,
+          "padding": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "AUTO"
+        },
+        "children": [
+          {
+            "name": "Button",
+            "type": "INSTANCE",
+            "layout": {
+              "mode": "HORIZONTAL",
+              "primary": "MIN",
+              "counter": "CENTER",
+              "spacing": 2,
+              "padding": [
+                0,
+                4,
+                0,
+                4
+              ],
+              "primarySizing": "AUTO",
+              "counterSizing": "FIXED"
+            },
+            "fill": {
+              "hex": "0284c7"
+            },
+            "instanceOf": "Button",
+            "componentProperties": {
+              "showLabel": true,
+              "label": "Label",
+              "showSuffix": false,
+              "showPrefix": false,
+              "variant": "primary",
+              "size": "small",
+              "state": "default",
+              "isOutline": "false",
+              "isPill": "true",
+              "isCircle": "false"
+            }
+          }
+        ]
+      },
+      {
+        "name": "position=left, size=medium, type=default, isPill=false",
+        "type": "COMPONENT",
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "MIN",
+          "counter": "MIN",
+          "spacing": 0,
+          "padding": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "AUTO"
+        },
+        "children": [
+          {
+            "name": "Button",
+            "type": "INSTANCE",
+            "layout": {
+              "mode": "HORIZONTAL",
+              "primary": "MIN",
+              "counter": "CENTER",
+              "spacing": 4,
+              "padding": [
+                0,
+                8,
+                0,
+                8
+              ],
+              "primarySizing": "AUTO",
+              "counterSizing": "FIXED"
+            },
+            "fill": {
+              "hex": "ffffff"
+            },
+            "stroke": {
+              "hex": "d4d4d8"
+            },
+            "strokeWeight": 1,
+            "instanceOf": "Button",
+            "componentProperties": {
+              "showLabel": true,
+              "label": "Label",
+              "showSuffix": false,
+              "showPrefix": false,
+              "variant": "default",
+              "size": "medium",
+              "state": "default",
+              "isOutline": "false",
+              "isPill": "false",
+              "isCircle": "false"
+            }
+          }
+        ]
+      },
+      {
+        "name": "position=left, size=medium, type=default, isPill=true",
+        "type": "COMPONENT",
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "MIN",
+          "counter": "MIN",
+          "spacing": 0,
+          "padding": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "AUTO"
+        },
+        "children": [
+          {
+            "name": "Button",
+            "type": "INSTANCE",
+            "layout": {
+              "mode": "HORIZONTAL",
+              "primary": "MIN",
+              "counter": "CENTER",
+              "spacing": 4,
+              "padding": [
+                0,
+                8,
+                0,
+                8
+              ],
+              "primarySizing": "AUTO",
+              "counterSizing": "FIXED"
+            },
+            "fill": {
+              "hex": "ffffff"
+            },
+            "stroke": {
+              "hex": "d4d4d8"
+            },
+            "strokeWeight": 1,
+            "instanceOf": "Button",
+            "componentProperties": {
+              "showLabel": true,
+              "label": "Label",
+              "showSuffix": false,
+              "showPrefix": false,
+              "variant": "default",
+              "size": "medium",
+              "state": "default",
+              "isOutline": "false",
+              "isPill": "true",
+              "isCircle": "false"
+            }
+          }
+        ]
+      },
+      {
+        "name": "position=left, size=medium, type=primary, isPill=false",
+        "type": "COMPONENT",
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "MIN",
+          "counter": "MIN",
+          "spacing": 0,
+          "padding": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "AUTO"
+        },
+        "children": [
+          {
+            "name": "Button",
+            "type": "INSTANCE",
+            "layout": {
+              "mode": "HORIZONTAL",
+              "primary": "MIN",
+              "counter": "CENTER",
+              "spacing": 4,
+              "padding": [
+                0,
+                8,
+                0,
+                8
+              ],
+              "primarySizing": "AUTO",
+              "counterSizing": "FIXED"
+            },
+            "fill": {
+              "hex": "0284c7"
+            },
+            "instanceOf": "Button",
+            "componentProperties": {
+              "showLabel": true,
+              "label": "Label",
+              "showSuffix": false,
+              "showPrefix": false,
+              "variant": "primary",
+              "size": "medium",
+              "state": "default",
+              "isOutline": "false",
+              "isPill": "false",
+              "isCircle": "false"
+            }
+          }
+        ]
+      },
+      {
+        "name": "position=left, size=medium, type=primary, isPill=true",
+        "type": "COMPONENT",
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "MIN",
+          "counter": "MIN",
+          "spacing": 0,
+          "padding": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "AUTO"
+        },
+        "children": [
+          {
+            "name": "Button",
+            "type": "INSTANCE",
+            "layout": {
+              "mode": "HORIZONTAL",
+              "primary": "MIN",
+              "counter": "CENTER",
+              "spacing": 4,
+              "padding": [
+                0,
+                8,
+                0,
+                8
+              ],
+              "primarySizing": "AUTO",
+              "counterSizing": "FIXED"
+            },
+            "fill": {
+              "hex": "0284c7"
+            },
+            "instanceOf": "Button",
+            "componentProperties": {
+              "showLabel": true,
+              "label": "Label",
+              "showSuffix": false,
+              "showPrefix": false,
+              "variant": "primary",
+              "size": "medium",
+              "state": "default",
+              "isOutline": "false",
+              "isPill": "true",
+              "isCircle": "false"
+            }
+          }
+        ]
+      },
+      {
+        "name": "position=center, size=large, type=default, isPill=false",
+        "type": "COMPONENT",
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "MIN",
+          "counter": "MIN",
+          "spacing": 0,
+          "padding": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "AUTO"
+        },
+        "children": [
+          {
+            "name": "Button",
+            "type": "INSTANCE",
+            "layout": {
+              "mode": "HORIZONTAL",
+              "primary": "MIN",
+              "counter": "CENTER",
+              "spacing": 8,
+              "padding": [
+                0,
+                12,
+                0,
+                12
+              ],
+              "primarySizing": "AUTO",
+              "counterSizing": "FIXED"
+            },
+            "fill": {
+              "hex": "ffffff"
+            },
+            "stroke": {
+              "hex": "d4d4d8"
+            },
+            "strokeWeight": 1,
+            "instanceOf": "Button",
+            "componentProperties": {
+              "showLabel": true,
+              "label": "Label",
+              "showSuffix": false,
+              "showPrefix": false,
+              "variant": "default",
+              "size": "large",
+              "state": "default",
+              "isOutline": "false",
+              "isPill": "false",
+              "isCircle": "false"
+            }
+          }
+        ]
+      },
+      {
+        "name": "position=center, size=large, type=default, isPill=true",
+        "type": "COMPONENT",
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "MIN",
+          "counter": "MIN",
+          "spacing": 0,
+          "padding": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "AUTO"
+        },
+        "children": [
+          {
+            "name": "Button",
+            "type": "INSTANCE",
+            "layout": {
+              "mode": "HORIZONTAL",
+              "primary": "MIN",
+              "counter": "CENTER",
+              "spacing": 8,
+              "padding": [
+                0,
+                12,
+                0,
+                12
+              ],
+              "primarySizing": "AUTO",
+              "counterSizing": "FIXED"
+            },
+            "fill": {
+              "hex": "ffffff"
+            },
+            "stroke": {
+              "hex": "d4d4d8"
+            },
+            "strokeWeight": 1,
+            "instanceOf": "Button",
+            "componentProperties": {
+              "showLabel": true,
+              "label": "Label",
+              "showSuffix": false,
+              "showPrefix": false,
+              "variant": "default",
+              "size": "large",
+              "state": "default",
+              "isOutline": "false",
+              "isPill": "true",
+              "isCircle": "false"
+            }
+          }
+        ]
+      },
+      {
+        "name": "position=center, size=large, type=primary, isPill=false",
+        "type": "COMPONENT",
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "MIN",
+          "counter": "MIN",
+          "spacing": 0,
+          "padding": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "AUTO"
+        },
+        "children": [
+          {
+            "name": "Button",
+            "type": "INSTANCE",
+            "layout": {
+              "mode": "HORIZONTAL",
+              "primary": "MIN",
+              "counter": "CENTER",
+              "spacing": 8,
+              "padding": [
+                0,
+                12,
+                0,
+                12
+              ],
+              "primarySizing": "AUTO",
+              "counterSizing": "FIXED"
+            },
+            "fill": {
+              "hex": "0284c7"
+            },
+            "stroke": {
+              "hex": "ffffff"
+            },
+            "strokeWeight": 1,
+            "instanceOf": "Button",
+            "componentProperties": {
+              "showLabel": true,
+              "label": "Label",
+              "showSuffix": false,
+              "showPrefix": false,
+              "variant": "primary",
+              "size": "large",
+              "state": "default",
+              "isOutline": "false",
+              "isPill": "false",
+              "isCircle": "false"
+            }
+          }
+        ]
+      },
+      {
+        "name": "position=center, size=large, type=primary, isPill=true",
+        "type": "COMPONENT",
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "MIN",
+          "counter": "MIN",
+          "spacing": 0,
+          "padding": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "AUTO"
+        },
+        "children": [
+          {
+            "name": "Button",
+            "type": "INSTANCE",
+            "layout": {
+              "mode": "HORIZONTAL",
+              "primary": "MIN",
+              "counter": "CENTER",
+              "spacing": 8,
+              "padding": [
+                0,
+                12,
+                0,
+                12
+              ],
+              "primarySizing": "AUTO",
+              "counterSizing": "FIXED"
+            },
+            "fill": {
+              "hex": "0284c7"
+            },
+            "stroke": {
+              "hex": "ffffff"
+            },
+            "strokeWeight": 1,
+            "instanceOf": "Button",
+            "componentProperties": {
+              "showLabel": true,
+              "label": "Label",
+              "showSuffix": false,
+              "showPrefix": false,
+              "variant": "primary",
+              "size": "large",
+              "state": "default",
+              "isOutline": "false",
+              "isPill": "true",
+              "isCircle": "false"
+            }
+          }
+        ]
+      },
+      {
+        "name": "position=center, size=small, type=default, isPill=false",
+        "type": "COMPONENT",
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "MIN",
+          "counter": "MIN",
+          "spacing": 0,
+          "padding": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "AUTO"
+        },
+        "children": [
+          {
+            "name": "Button",
+            "type": "INSTANCE",
+            "layout": {
+              "mode": "HORIZONTAL",
+              "primary": "MIN",
+              "counter": "CENTER",
+              "spacing": 2,
+              "padding": [
+                0,
+                4,
+                0,
+                4
+              ],
+              "primarySizing": "AUTO",
+              "counterSizing": "FIXED"
+            },
+            "fill": {
+              "hex": "ffffff"
+            },
+            "stroke": {
+              "hex": "d4d4d8"
+            },
+            "strokeWeight": 1,
+            "instanceOf": "Button",
+            "componentProperties": {
+              "showLabel": true,
+              "label": "Label",
+              "showSuffix": false,
+              "showPrefix": false,
+              "variant": "default",
+              "size": "small",
+              "state": "default",
+              "isOutline": "false",
+              "isPill": "false",
+              "isCircle": "false"
+            }
+          }
+        ]
+      },
+      {
+        "name": "position=center, size=small, type=default, isPill=true",
+        "type": "COMPONENT",
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "MIN",
+          "counter": "MIN",
+          "spacing": 0,
+          "padding": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "AUTO"
+        },
+        "children": [
+          {
+            "name": "Button",
+            "type": "INSTANCE",
+            "layout": {
+              "mode": "HORIZONTAL",
+              "primary": "MIN",
+              "counter": "CENTER",
+              "spacing": 2,
+              "padding": [
+                0,
+                4,
+                0,
+                4
+              ],
+              "primarySizing": "AUTO",
+              "counterSizing": "FIXED"
+            },
+            "fill": {
+              "hex": "ffffff"
+            },
+            "stroke": {
+              "hex": "d4d4d8"
+            },
+            "strokeWeight": 1,
+            "instanceOf": "Button",
+            "componentProperties": {
+              "showLabel": true,
+              "label": "Label",
+              "showSuffix": false,
+              "showPrefix": false,
+              "variant": "default",
+              "size": "small",
+              "state": "default",
+              "isOutline": "false",
+              "isPill": "true",
+              "isCircle": "false"
+            }
+          }
+        ]
+      },
+      {
+        "name": "position=center, size=small, type=primary, isPill=false",
+        "type": "COMPONENT",
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "MIN",
+          "counter": "MIN",
+          "spacing": 0,
+          "padding": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "AUTO"
+        },
+        "children": [
+          {
+            "name": "Button",
+            "type": "INSTANCE",
+            "layout": {
+              "mode": "HORIZONTAL",
+              "primary": "MIN",
+              "counter": "CENTER",
+              "spacing": 2,
+              "padding": [
+                0,
+                4,
+                0,
+                4
+              ],
+              "primarySizing": "AUTO",
+              "counterSizing": "FIXED"
+            },
+            "fill": {
+              "hex": "0284c7"
+            },
+            "stroke": {
+              "hex": "ffffff"
+            },
+            "strokeWeight": 1,
+            "instanceOf": "Button",
+            "componentProperties": {
+              "showLabel": true,
+              "label": "Label",
+              "showSuffix": false,
+              "showPrefix": false,
+              "variant": "primary",
+              "size": "small",
+              "state": "default",
+              "isOutline": "false",
+              "isPill": "false",
+              "isCircle": "false"
+            }
+          }
+        ]
+      },
+      {
+        "name": "position=center, size=small, type=primary, isPill=true",
+        "type": "COMPONENT",
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "MIN",
+          "counter": "MIN",
+          "spacing": 0,
+          "padding": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "AUTO"
+        },
+        "children": [
+          {
+            "name": "Button",
+            "type": "INSTANCE",
+            "layout": {
+              "mode": "HORIZONTAL",
+              "primary": "MIN",
+              "counter": "CENTER",
+              "spacing": 2,
+              "padding": [
+                0,
+                4,
+                0,
+                4
+              ],
+              "primarySizing": "AUTO",
+              "counterSizing": "FIXED"
+            },
+            "fill": {
+              "hex": "0284c7"
+            },
+            "stroke": {
+              "hex": "ffffff"
+            },
+            "strokeWeight": 1,
+            "instanceOf": "Button",
+            "componentProperties": {
+              "showLabel": true,
+              "label": "Label",
+              "showSuffix": false,
+              "showPrefix": false,
+              "variant": "primary",
+              "size": "small",
+              "state": "default",
+              "isOutline": "false",
+              "isPill": "true",
+              "isCircle": "false"
+            }
+          }
+        ]
+      },
+      {
+        "name": "position=center, size=medium, type=default, isPill=false",
+        "type": "COMPONENT",
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "MIN",
+          "counter": "MIN",
+          "spacing": 0,
+          "padding": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "AUTO"
+        },
+        "children": [
+          {
+            "name": "Button",
+            "type": "INSTANCE",
+            "layout": {
+              "mode": "HORIZONTAL",
+              "primary": "MIN",
+              "counter": "CENTER",
+              "spacing": 4,
+              "padding": [
+                0,
+                8,
+                0,
+                8
+              ],
+              "primarySizing": "AUTO",
+              "counterSizing": "FIXED"
+            },
+            "fill": {
+              "hex": "ffffff"
+            },
+            "stroke": {
+              "hex": "d4d4d8"
+            },
+            "strokeWeight": 1,
+            "instanceOf": "Button",
+            "componentProperties": {
+              "showLabel": true,
+              "label": "Label",
+              "showSuffix": false,
+              "showPrefix": false,
+              "variant": "default",
+              "size": "medium",
+              "state": "default",
+              "isOutline": "false",
+              "isPill": "false",
+              "isCircle": "false"
+            }
+          }
+        ]
+      },
+      {
+        "name": "position=center, size=medium, type=default, isPill=true",
+        "type": "COMPONENT",
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "MIN",
+          "counter": "MIN",
+          "spacing": 0,
+          "padding": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "AUTO"
+        },
+        "children": [
+          {
+            "name": "Button",
+            "type": "INSTANCE",
+            "layout": {
+              "mode": "HORIZONTAL",
+              "primary": "MIN",
+              "counter": "CENTER",
+              "spacing": 4,
+              "padding": [
+                0,
+                8,
+                0,
+                8
+              ],
+              "primarySizing": "AUTO",
+              "counterSizing": "FIXED"
+            },
+            "fill": {
+              "hex": "ffffff"
+            },
+            "stroke": {
+              "hex": "d4d4d8"
+            },
+            "strokeWeight": 1,
+            "instanceOf": "Button",
+            "componentProperties": {
+              "showLabel": true,
+              "label": "Label",
+              "showSuffix": false,
+              "showPrefix": false,
+              "variant": "default",
+              "size": "medium",
+              "state": "default",
+              "isOutline": "false",
+              "isPill": "true",
+              "isCircle": "false"
+            }
+          }
+        ]
+      },
+      {
+        "name": "position=center, size=medium, type=primary, isPill=false",
+        "type": "COMPONENT",
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "MIN",
+          "counter": "MIN",
+          "spacing": 0,
+          "padding": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "AUTO"
+        },
+        "children": [
+          {
+            "name": "Button",
+            "type": "INSTANCE",
+            "layout": {
+              "mode": "HORIZONTAL",
+              "primary": "MIN",
+              "counter": "CENTER",
+              "spacing": 4,
+              "padding": [
+                0,
+                8,
+                0,
+                8
+              ],
+              "primarySizing": "AUTO",
+              "counterSizing": "FIXED"
+            },
+            "fill": {
+              "hex": "0284c7"
+            },
+            "stroke": {
+              "hex": "ffffff"
+            },
+            "strokeWeight": 1,
+            "instanceOf": "Button",
+            "componentProperties": {
+              "showLabel": true,
+              "label": "Label",
+              "showSuffix": false,
+              "showPrefix": false,
+              "variant": "primary",
+              "size": "medium",
+              "state": "default",
+              "isOutline": "false",
+              "isPill": "false",
+              "isCircle": "false"
+            }
+          }
+        ]
+      },
+      {
+        "name": "position=center, size=medium, type=primary, isPill=true",
+        "type": "COMPONENT",
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "MIN",
+          "counter": "MIN",
+          "spacing": 0,
+          "padding": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "AUTO"
+        },
+        "children": [
+          {
+            "name": "Button",
+            "type": "INSTANCE",
+            "layout": {
+              "mode": "HORIZONTAL",
+              "primary": "MIN",
+              "counter": "CENTER",
+              "spacing": 4,
+              "padding": [
+                0,
+                8,
+                0,
+                8
+              ],
+              "primarySizing": "AUTO",
+              "counterSizing": "FIXED"
+            },
+            "fill": {
+              "hex": "0284c7"
+            },
+            "stroke": {
+              "hex": "ffffff"
+            },
+            "strokeWeight": 1,
+            "instanceOf": "Button",
+            "componentProperties": {
+              "showLabel": true,
+              "label": "Label",
+              "showSuffix": false,
+              "showPrefix": false,
+              "variant": "primary",
+              "size": "medium",
+              "state": "default",
+              "isOutline": "false",
+              "isPill": "true",
+              "isCircle": "false"
+            }
+          }
+        ]
+      },
+      {
+        "name": "position=right, size=large, type=default, isPill=false",
+        "type": "COMPONENT",
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "MIN",
+          "counter": "MIN",
+          "spacing": 0,
+          "padding": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "AUTO"
+        },
+        "children": [
+          {
+            "name": "Button",
+            "type": "INSTANCE",
+            "layout": {
+              "mode": "HORIZONTAL",
+              "primary": "MIN",
+              "counter": "CENTER",
+              "spacing": 8,
+              "padding": [
+                0,
+                12,
+                0,
+                12
+              ],
+              "primarySizing": "AUTO",
+              "counterSizing": "FIXED"
+            },
+            "fill": {
+              "hex": "ffffff"
+            },
+            "stroke": {
+              "hex": "d4d4d8"
+            },
+            "strokeWeight": 1,
+            "instanceOf": "Button",
+            "componentProperties": {
+              "showLabel": true,
+              "label": "Label",
+              "showSuffix": false,
+              "showPrefix": false,
+              "variant": "default",
+              "size": "large",
+              "state": "default",
+              "isOutline": "false",
+              "isPill": "false",
+              "isCircle": "false"
+            }
+          }
+        ]
+      },
+      {
+        "name": "position=right, size=large, type=default, isPill=true",
+        "type": "COMPONENT",
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "MIN",
+          "counter": "MIN",
+          "spacing": 0,
+          "padding": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "AUTO"
+        },
+        "children": [
+          {
+            "name": "Button",
+            "type": "INSTANCE",
+            "layout": {
+              "mode": "HORIZONTAL",
+              "primary": "MIN",
+              "counter": "CENTER",
+              "spacing": 8,
+              "padding": [
+                0,
+                12,
+                0,
+                12
+              ],
+              "primarySizing": "AUTO",
+              "counterSizing": "FIXED"
+            },
+            "fill": {
+              "hex": "ffffff"
+            },
+            "stroke": {
+              "hex": "d4d4d8"
+            },
+            "strokeWeight": 1,
+            "instanceOf": "Button",
+            "componentProperties": {
+              "showLabel": true,
+              "label": "Label",
+              "showSuffix": false,
+              "showPrefix": false,
+              "variant": "default",
+              "size": "large",
+              "state": "default",
+              "isOutline": "false",
+              "isPill": "true",
+              "isCircle": "false"
+            }
+          }
+        ]
+      },
+      {
+        "name": "position=right, size=large, type=primary, isPill=false",
+        "type": "COMPONENT",
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "MIN",
+          "counter": "MIN",
+          "spacing": 0,
+          "padding": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "AUTO"
+        },
+        "children": [
+          {
+            "name": "Button",
+            "type": "INSTANCE",
+            "layout": {
+              "mode": "HORIZONTAL",
+              "primary": "MIN",
+              "counter": "CENTER",
+              "spacing": 8,
+              "padding": [
+                0,
+                12,
+                0,
+                12
+              ],
+              "primarySizing": "AUTO",
+              "counterSizing": "FIXED"
+            },
+            "fill": {
+              "hex": "0284c7"
+            },
+            "stroke": {
+              "hex": "ffffff"
+            },
+            "strokeWeight": 1,
+            "instanceOf": "Button",
+            "componentProperties": {
+              "showLabel": true,
+              "label": "Label",
+              "showSuffix": false,
+              "showPrefix": false,
+              "variant": "primary",
+              "size": "large",
+              "state": "default",
+              "isOutline": "false",
+              "isPill": "false",
+              "isCircle": "false"
+            }
+          }
+        ]
+      },
+      {
+        "name": "position=right, size=large, type=primary, isPill=true",
+        "type": "COMPONENT",
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "MIN",
+          "counter": "MIN",
+          "spacing": 0,
+          "padding": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "AUTO"
+        },
+        "children": [
+          {
+            "name": "Button",
+            "type": "INSTANCE",
+            "layout": {
+              "mode": "HORIZONTAL",
+              "primary": "MIN",
+              "counter": "CENTER",
+              "spacing": 8,
+              "padding": [
+                0,
+                12,
+                0,
+                12
+              ],
+              "primarySizing": "AUTO",
+              "counterSizing": "FIXED"
+            },
+            "fill": {
+              "hex": "0284c7"
+            },
+            "stroke": {
+              "hex": "ffffff"
+            },
+            "strokeWeight": 1,
+            "instanceOf": "Button",
+            "componentProperties": {
+              "showLabel": true,
+              "label": "Label",
+              "showSuffix": false,
+              "showPrefix": false,
+              "variant": "primary",
+              "size": "large",
+              "state": "default",
+              "isOutline": "false",
+              "isPill": "true",
+              "isCircle": "false"
+            }
+          }
+        ]
+      },
+      {
+        "name": "position=position4, size=small, type=default, isPill=false",
+        "type": "COMPONENT",
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "MIN",
+          "counter": "MIN",
+          "spacing": 0,
+          "padding": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "AUTO"
+        },
+        "children": [
+          {
+            "name": "Button",
+            "type": "INSTANCE",
+            "layout": {
+              "mode": "HORIZONTAL",
+              "primary": "MIN",
+              "counter": "CENTER",
+              "spacing": 2,
+              "padding": [
+                0,
+                4,
+                0,
+                4
+              ],
+              "primarySizing": "AUTO",
+              "counterSizing": "FIXED"
+            },
+            "fill": {
+              "hex": "ffffff"
+            },
+            "stroke": {
+              "hex": "d4d4d8"
+            },
+            "strokeWeight": 1,
+            "instanceOf": "Button",
+            "componentProperties": {
+              "showLabel": true,
+              "label": "Label",
+              "showSuffix": false,
+              "showPrefix": false,
+              "variant": "default",
+              "size": "small",
+              "state": "default",
+              "isOutline": "false",
+              "isPill": "false",
+              "isCircle": "false"
+            }
+          }
+        ]
+      },
+      {
+        "name": "position=position4, size=small, type=default, isPill=true",
+        "type": "COMPONENT",
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "MIN",
+          "counter": "MIN",
+          "spacing": 0,
+          "padding": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "AUTO"
+        },
+        "children": [
+          {
+            "name": "Button",
+            "type": "INSTANCE",
+            "layout": {
+              "mode": "HORIZONTAL",
+              "primary": "MIN",
+              "counter": "CENTER",
+              "spacing": 2,
+              "padding": [
+                0,
+                4,
+                0,
+                4
+              ],
+              "primarySizing": "AUTO",
+              "counterSizing": "FIXED"
+            },
+            "fill": {
+              "hex": "ffffff"
+            },
+            "stroke": {
+              "hex": "d4d4d8"
+            },
+            "strokeWeight": 1,
+            "instanceOf": "Button",
+            "componentProperties": {
+              "showLabel": true,
+              "label": "Label",
+              "showSuffix": false,
+              "showPrefix": false,
+              "variant": "default",
+              "size": "small",
+              "state": "default",
+              "isOutline": "false",
+              "isPill": "true",
+              "isCircle": "false"
+            }
+          }
+        ]
+      },
+      {
+        "name": "position=position4, size=small, type=primary, isPill=false",
+        "type": "COMPONENT",
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "MIN",
+          "counter": "MIN",
+          "spacing": 0,
+          "padding": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "AUTO"
+        },
+        "children": [
+          {
+            "name": "Button",
+            "type": "INSTANCE",
+            "layout": {
+              "mode": "HORIZONTAL",
+              "primary": "MIN",
+              "counter": "CENTER",
+              "spacing": 2,
+              "padding": [
+                0,
+                4,
+                0,
+                4
+              ],
+              "primarySizing": "AUTO",
+              "counterSizing": "FIXED"
+            },
+            "fill": {
+              "hex": "0284c7"
+            },
+            "stroke": {
+              "hex": "ffffff"
+            },
+            "strokeWeight": 1,
+            "instanceOf": "Button",
+            "componentProperties": {
+              "showLabel": true,
+              "label": "Label",
+              "showSuffix": false,
+              "showPrefix": false,
+              "variant": "primary",
+              "size": "small",
+              "state": "default",
+              "isOutline": "false",
+              "isPill": "false",
+              "isCircle": "false"
+            }
+          }
+        ]
+      },
+      {
+        "name": "position=position4, size=small, type=primary, isPill=true",
+        "type": "COMPONENT",
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "MIN",
+          "counter": "MIN",
+          "spacing": 0,
+          "padding": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "AUTO"
+        },
+        "children": [
+          {
+            "name": "Button",
+            "type": "INSTANCE",
+            "layout": {
+              "mode": "HORIZONTAL",
+              "primary": "MIN",
+              "counter": "CENTER",
+              "spacing": 2,
+              "padding": [
+                0,
+                4,
+                0,
+                4
+              ],
+              "primarySizing": "AUTO",
+              "counterSizing": "FIXED"
+            },
+            "fill": {
+              "hex": "0284c7"
+            },
+            "stroke": {
+              "hex": "ffffff"
+            },
+            "strokeWeight": 1,
+            "instanceOf": "Button",
+            "componentProperties": {
+              "showLabel": true,
+              "label": "Label",
+              "showSuffix": false,
+              "showPrefix": false,
+              "variant": "primary",
+              "size": "small",
+              "state": "default",
+              "isOutline": "false",
+              "isPill": "true",
+              "isCircle": "false"
+            }
+          }
+        ]
+      },
+      {
+        "name": "position=right, size=medium, type=default, isPill=false",
+        "type": "COMPONENT",
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "MIN",
+          "counter": "MIN",
+          "spacing": 0,
+          "padding": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "AUTO"
+        },
+        "children": [
+          {
+            "name": "Button",
+            "type": "INSTANCE",
+            "layout": {
+              "mode": "HORIZONTAL",
+              "primary": "MIN",
+              "counter": "CENTER",
+              "spacing": 4,
+              "padding": [
+                0,
+                8,
+                0,
+                8
+              ],
+              "primarySizing": "AUTO",
+              "counterSizing": "FIXED"
+            },
+            "fill": {
+              "hex": "ffffff"
+            },
+            "stroke": {
+              "hex": "d4d4d8"
+            },
+            "strokeWeight": 1,
+            "instanceOf": "Button",
+            "componentProperties": {
+              "showLabel": true,
+              "label": "Label",
+              "showSuffix": false,
+              "showPrefix": false,
+              "variant": "default",
+              "size": "medium",
+              "state": "default",
+              "isOutline": "false",
+              "isPill": "false",
+              "isCircle": "false"
+            }
+          }
+        ]
+      },
+      {
+        "name": "position=right, size=medium, type=default, isPill=true",
+        "type": "COMPONENT",
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "MIN",
+          "counter": "MIN",
+          "spacing": 0,
+          "padding": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "AUTO"
+        },
+        "children": [
+          {
+            "name": "Button",
+            "type": "INSTANCE",
+            "layout": {
+              "mode": "HORIZONTAL",
+              "primary": "MIN",
+              "counter": "CENTER",
+              "spacing": 4,
+              "padding": [
+                0,
+                8,
+                0,
+                8
+              ],
+              "primarySizing": "AUTO",
+              "counterSizing": "FIXED"
+            },
+            "fill": {
+              "hex": "ffffff"
+            },
+            "stroke": {
+              "hex": "d4d4d8"
+            },
+            "strokeWeight": 1,
+            "instanceOf": "Button",
+            "componentProperties": {
+              "showLabel": true,
+              "label": "Label",
+              "showSuffix": false,
+              "showPrefix": false,
+              "variant": "default",
+              "size": "medium",
+              "state": "default",
+              "isOutline": "false",
+              "isPill": "true",
+              "isCircle": "false"
+            }
+          }
+        ]
+      },
+      {
+        "name": "position=right, size=medium, type=primary, isPill=false",
+        "type": "COMPONENT",
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "MIN",
+          "counter": "MIN",
+          "spacing": 0,
+          "padding": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "AUTO"
+        },
+        "children": [
+          {
+            "name": "Button",
+            "type": "INSTANCE",
+            "layout": {
+              "mode": "HORIZONTAL",
+              "primary": "MIN",
+              "counter": "CENTER",
+              "spacing": 4,
+              "padding": [
+                0,
+                8,
+                0,
+                8
+              ],
+              "primarySizing": "AUTO",
+              "counterSizing": "FIXED"
+            },
+            "fill": {
+              "hex": "0284c7"
+            },
+            "stroke": {
+              "hex": "ffffff"
+            },
+            "strokeWeight": 1,
+            "instanceOf": "Button",
+            "componentProperties": {
+              "showLabel": true,
+              "label": "Label",
+              "showSuffix": false,
+              "showPrefix": false,
+              "variant": "primary",
+              "size": "medium",
+              "state": "default",
+              "isOutline": "false",
+              "isPill": "false",
+              "isCircle": "false"
+            }
+          }
+        ]
+      },
+      {
+        "name": "position=right, size=medium, type=primary, isPill=true",
+        "type": "COMPONENT",
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "MIN",
+          "counter": "MIN",
+          "spacing": 0,
+          "padding": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "AUTO"
+        },
+        "children": [
+          {
+            "name": "Button",
+            "type": "INSTANCE",
+            "layout": {
+              "mode": "HORIZONTAL",
+              "primary": "MIN",
+              "counter": "CENTER",
+              "spacing": 4,
+              "padding": [
+                0,
+                8,
+                0,
+                8
+              ],
+              "primarySizing": "AUTO",
+              "counterSizing": "FIXED"
+            },
+            "fill": {
+              "hex": "0284c7"
+            },
+            "stroke": {
+              "hex": "ffffff"
+            },
+            "strokeWeight": 1,
+            "instanceOf": "Button",
+            "componentProperties": {
+              "showLabel": true,
+              "label": "Label",
+              "showSuffix": false,
+              "showPrefix": false,
+              "variant": "primary",
+              "size": "medium",
+              "state": "default",
+              "isOutline": "false",
+              "isPill": "true",
+              "isCircle": "false"
+            }
+          }
+        ]
+      }
+    ]
+  }
+}
