@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState, type CSSProperties } from 'react';
-import { emitters, type Contract, type EmittedFile } from '../../../core/index.js';
+import { emitters, type Contract, type EmittedFile, type SourceFileInput } from '../../../core/index.js';
 import { useRoute } from '../router';
 import { useTheme } from '../theme';
 import { contractsById, icons, rawContractById } from '../engine/data';
@@ -12,7 +12,15 @@ import {
   type FigmaImportResult,
   type FigmaProposal,
 } from '../engine/figma-import';
-import { importFromGithubUrl } from '../engine/github-import';
+import {
+  fetchRepoFile,
+  fetchRepoTree,
+  MAX_TRACE_FILES,
+  traceFromGithubUrl,
+  type GithubTrace,
+} from '../engine/github-import';
+import { assistFetchPlan, assistRepoProfile } from '../engine/assist';
+import type { ProposeCodeResult } from '../engine/code-import';
 import {
   ANTHROPIC_MODEL,
   ANTHROPIC_MODELS,
@@ -365,59 +373,71 @@ export function Playground() {
   const [codeCss, setCodeCss] = useState('');
   const [codeBusy, setCodeBusy] = useState<string | null>(null);
   const [codeError, setCodeError] = useState<string | null>(null);
+  // The last GitHub trace — files, receipts, and NAMED gaps. Gaps are the
+  // input for the assist fetch-plan rung (deterministic first, AI next).
+  const [codeTrace, setCodeTrace] = useState<GithubTrace | null>(null);
+  const [codeGaps, setCodeGaps] = useState<string[]>([]);
 
-  const runCodePropose = async (
-    tsx: string,
-    css: string,
+  /** Shared landing for every code proposal (paste, trace, assist re-run):
+   *  receipts assembled, workspace recorded, editor loaded. Returns the
+   *  skipped-component reasons (they join the trace gaps for assist). */
+  const applyCodeResult = (
+    result: ProposeCodeResult,
     origin: string,
-    opts: { sourcePath?: string; preGroups?: ReceiptGroup[] } = {},
-  ) => {
+    preGroups: ReceiptGroup[],
+  ): string[] => {
+    const groups: ReceiptGroup[] = [...preGroups];
+    for (const { name, proposal } of result.proposals) {
+      if (proposal.notes.length > 0) {
+        groups.push({
+          title: `Proposal notes — ${name}`,
+          kind: 'note',
+          entries: proposal.notes.map((message) => ({ message })),
+        });
+      }
+    }
+    if (result.skipped.length > 0) {
+      groups.push({
+        title: 'Skipped components (visible but not readable)',
+        kind: 'skipped',
+        entries: result.skipped.map((s) => ({ label: `${s.name} (${s.source})`, message: s.reason })),
+      });
+    }
+    const codeReceipts: Receipts = { source: origin, groups };
+    const first = result.proposals[0];
+    if (first) {
+      const contractText = pretty(first.proposal.contract);
+      // A successful code import lands in the session workspace.
+      const recorded = recordImport({
+        name: first.name,
+        contractId: contractIdOf(first.proposal.contract),
+        source: 'code',
+        contractText,
+        receipts: codeReceipts,
+      });
+      setReceipts(recorded.receipts);
+      setMintedTokens(null);
+      setText(contractText);
+      setProvenance(`proposed from code — ${first.name}`);
+      setPristine({ text: contractText, provenance: `proposed from code — ${first.name}` });
+      setWsLoaded(null);
+    } else {
+      setReceipts(codeReceipts);
+      if (result.skipped.length === 0) setCodeError('No component found in the source.');
+    }
+    setActiveExample(null);
+    return result.skipped.map((s) => `component ${s.name} skipped: ${s.reason}`);
+  };
+
+  const runCodePropose = async (tsx: string, css: string, origin: string) => {
     setCodeBusy('Loading the TypeScript compiler (lazy chunk, ~5 MB — first run only)…');
     setCodeError(null);
+    setCodeTrace(null);
+    setCodeGaps([]);
     try {
       const { proposeFromCodeText } = await import('../engine/code-import');
       setCodeBusy('Proposing…');
-      const result = proposeFromCodeText(tsx, css, opts.sourcePath ?? 'playground/Pasted.tsx');
-      const groups: ReceiptGroup[] = [...(opts.preGroups ?? [])];
-      for (const { name, proposal } of result.proposals) {
-        if (proposal.notes.length > 0) {
-          groups.push({
-            title: `Proposal notes — ${name}`,
-            kind: 'note',
-            entries: proposal.notes.map((message) => ({ message })),
-          });
-        }
-      }
-      if (result.skipped.length > 0) {
-        groups.push({
-          title: 'Skipped components (visible but not readable)',
-          kind: 'skipped',
-          entries: result.skipped.map((s) => ({ label: `${s.name} (${s.source})`, message: s.reason })),
-        });
-      }
-      const codeReceipts: Receipts = { source: origin, groups };
-      const first = result.proposals[0];
-      if (first) {
-        const contractText = pretty(first.proposal.contract);
-        // A successful code import lands in the session workspace.
-        const recorded = recordImport({
-          name: first.name,
-          contractId: contractIdOf(first.proposal.contract),
-          source: 'code',
-          contractText,
-          receipts: codeReceipts,
-        });
-        setReceipts(recorded.receipts);
-        setMintedTokens(null);
-        setText(contractText);
-        setProvenance(`proposed from code — ${first.name}`);
-        setPristine({ text: contractText, provenance: `proposed from code — ${first.name}` });
-        setWsLoaded(null);
-      } else {
-        setReceipts(codeReceipts);
-        if (result.skipped.length === 0) setCodeError('No component found in the pasted source.');
-      }
-      setActiveExample(null);
+      applyCodeResult(proposeFromCodeText(tsx, css, 'playground/Pasted.tsx'), origin, []);
     } catch (e) {
       setCodeError(e instanceof Error ? e.message : String(e));
     } finally {
@@ -434,26 +454,151 @@ export function Playground() {
     if (autoRun) void runCodePropose(example.tsx, example.css, `code proposal — ${example.sourcePath}`);
   };
 
-  const runGithubImport = async () => {
-    setCodeBusy('Fetching from GitHub (browser-direct, unauthenticated)…');
-    setCodeError(null);
-    try {
-      const imported = await importFromGithubUrl(codeUrl);
-      setCodeTsx(imported.tsx);
-      setCodeCss(imported.css);
-      setActiveExample(null);
-      await runCodePropose(imported.tsx, imported.css, `code proposal — ${imported.sourcePath}`, {
-        sourcePath: imported.sourcePath,
-        preGroups: [
+  /** The trace's receipts, rebuilt fresh for every (re-)proposal. */
+  const traceGroups = (trace: GithubTrace, extra: ReceiptGroup[] = []): ReceiptGroup[] => [
+    {
+      title: 'GitHub import — trace',
+      kind: 'note',
+      entries: trace.notes.map((message) => ({ message })),
+    },
+    ...(trace.gaps.length > 0
+      ? [
           {
-            title: 'GitHub import',
-            kind: 'note',
-            entries: imported.notes.map((message) => ({ message })),
+            title: 'Trace gaps (what import-following could not close)',
+            kind: 'degradation' as const,
+            entries: trace.gaps.map((message) => ({ message })),
           },
-        ],
-      });
+        ]
+      : []),
+    ...extra,
+  ];
+
+  const runGithubImport = async () => {
+    setCodeBusy('Tracing from GitHub (browser-direct, unauthenticated)…');
+    setCodeError(null);
+    setCodeTrace(null);
+    setCodeGaps([]);
+    try {
+      const trace = await traceFromGithubUrl(codeUrl);
+      setCodeTsx(trace.files[0].source);
+      setCodeCss(trace.files[0].css ?? '');
+      setCodeBusy('Loading the TypeScript compiler (lazy chunk, ~5 MB — first run only)…');
+      const { proposeFromCodeFiles } = await import('../engine/code-import');
+      setCodeBusy(`Proposing over ${trace.files.length} traced file${trace.files.length === 1 ? '' : 's'}…`);
+      const skippedGaps = applyCodeResult(
+        proposeFromCodeFiles(trace.files),
+        `code proposal — ${trace.sourcePath} (+ ${trace.files.length - 1} traced files)`,
+        traceGroups(trace),
+      );
+      setCodeTrace(trace);
+      setCodeGaps([...trace.gaps, ...skippedGaps]);
     } catch (e) {
       setCodeError(e instanceof Error ? e.message : String(e));
+    } finally {
+      setCodeBusy(null);
+    }
+  };
+
+  /** The assist rung: repo profile (once per repo@ref per session) → fetch
+   *  plan over the full tree listing + the named gaps → receipted fetches →
+   *  re-propose. Deterministic tracing already ran; this only closes gaps. */
+  const runAssistFetchPlan = async () => {
+    const trace = codeTrace;
+    if (!trace) return;
+    setCodeError(null);
+    try {
+      setCodeBusy('Listing the repo tree (git trees API)…');
+      const { listing, truncated } = await fetchRepoTree(trace.parsed, trace.entryPath);
+      const repoUrl = `https://github.com/${trace.parsed.owner}/${trace.parsed.repo}`;
+
+      setCodeBusy('Profiling the repo (assist — cached per repo@ref)…');
+      const samples: Array<{ path: string; content: string }> = [];
+      try {
+        samples.push({ path: 'package.json', content: await fetchRepoFile(trace.parsed, 'package.json') });
+      } catch {
+        /* a repo without a root package.json still profiles from the entry */
+      }
+      samples.push({ path: trace.entryPath, content: trace.files[0].source.slice(0, 40_000) });
+      const profileResult = await assistRepoProfile({
+        repoUrl,
+        ref: trace.parsed.ref,
+        tree: listing,
+        samples,
+      });
+      if (!profileResult.ok) {
+        setCodeError(profileResult.message);
+        return;
+      }
+
+      setCodeBusy('Planning fetches (assist)…');
+      const plan = await assistFetchPlan({
+        entryUrl: codeUrl,
+        listing,
+        alreadyFetched: trace.alreadyFetched,
+        gaps: codeGaps,
+        profile: profileResult.data.profile,
+      });
+      if (!plan.ok) {
+        setCodeError(plan.message);
+        return;
+      }
+
+      const aiEntries: ReceiptGroup['entries'] = [
+        {
+          message: `assist plan: styleSystem = ${plan.data.styleSystem}; repo profile ${
+            profileResult.data.cached ? 'cache hit' : 'fresh'
+          }${truncated ? '; tree listing truncated at 2000 entries' : ''}`,
+        },
+        ...plan.data.notes.map((n) => ({ message: `assist note: ${n}` })),
+      ];
+      const files: SourceFileInput[] = trace.files.map((f) => ({ ...f }));
+      const alreadyFetched = [...trace.alreadyFetched];
+      setCodeBusy(`Fetching the ${plan.data.fetch.length} assist-proposed file${plan.data.fetch.length === 1 ? '' : 's'}…`);
+      for (const f of plan.data.fetch) {
+        if (alreadyFetched.includes(f.path)) {
+          aiEntries.push({ message: `ai-proposed fetch: ${f.path} — ${f.reason} (already fetched, skipped)` });
+          continue;
+        }
+        try {
+          const text = await fetchRepoFile(trace.parsed, f.path);
+          alreadyFetched.push(f.path);
+          aiEntries.push({ message: `ai-proposed fetch: ${f.path} — ${f.reason}` });
+          if (/\.(css|scss)$/.test(f.path)) {
+            // Style sources attach to the ENTRY file — the component the
+            // import is about; the proposer reads css per source file.
+            const entry = files[0];
+            const block = `/* --- ${f.path} (ai-proposed fetch) --- */\n${text}`;
+            entry.css = entry.css ? `${entry.css}\n\n${block}` : block;
+          } else if (/\.(tsx|ts|jsx|js)$/.test(f.path)) {
+            files.push({ sourcePath: `${trace.parsed.owner}/${trace.parsed.repo}/${f.path}`, source: text });
+          } else {
+            aiEntries.push({
+              message: `${f.path} fetched but not a TSX/CSS source — the proposer reads component code and stylesheets only; inspect it manually`,
+            });
+          }
+        } catch (e) {
+          aiEntries.push({
+            message: `ai-proposed fetch: ${f.path} — ${f.reason} — FAILED: ${e instanceof Error ? e.message : String(e)}`,
+          });
+        }
+      }
+
+      setCodeBusy(`Re-proposing over ${files.length} files…`);
+      const { proposeFromCodeFiles } = await import('../engine/code-import');
+      const skippedGaps = applyCodeResult(
+        proposeFromCodeFiles(files),
+        `code proposal — ${trace.sourcePath} (+ ${files.length - 1} files, assist-planned)`,
+        traceGroups(trace, [
+          { title: 'Assist fetch plan (ai-proposed)', kind: 'note', entries: aiEntries },
+        ]),
+      );
+      setCodeTrace({ ...trace, files, alreadyFetched });
+      setCodeGaps([...trace.gaps, ...skippedGaps]);
+      setCodeTsx(files[0].source);
+      setCodeCss(files[0].css ?? '');
+    } catch (e) {
+      setCodeError(e instanceof Error ? e.message : String(e));
+    } finally {
       setCodeBusy(null);
     }
   };
@@ -1365,7 +1510,7 @@ export function Playground() {
             {codeMode === 'url' && (
               <>
                 <div className="field">
-                  <label htmlFor="code-url">Public GitHub file URL</label>
+                  <label htmlFor="code-url">Public GitHub file or directory URL</label>
                   <input
                     id="code-url"
                     type="text"
@@ -1375,9 +1520,10 @@ export function Playground() {
                     spellCheck={false}
                   />
                   <p className="hint">
-                    blob, raw, or directory URLs — public repos only, fetched browser-direct with no
-                    token. The co-located *.module.css is auto-discovered (the component&rsquo;s own
-                    import, the same-name sibling, then the directory listing).
+                    blob, raw, or directory (tree) URLs — public repos only, fetched browser-direct
+                    with no token. The tracer follows the entry&rsquo;s relative imports (up to{' '}
+                    {MAX_TRACE_FILES} files: .tsx/.ts/.css/.scss), every fetch receipted; what it
+                    can&rsquo;t close is a named gap.
                   </p>
                 </div>
                 <button
@@ -1390,6 +1536,19 @@ export function Playground() {
                 </button>
                 {codeBusy ? <p className="hint">{codeBusy}</p> : null}
                 {codeError ? <div className="notice notice--error">{codeError}</div> : null}
+                {!codeBusy && codeTrace && codeGaps.length > 0 ? (
+                  <div className="notice">
+                    The deterministic trace left {codeGaps.length} named gap
+                    {codeGaps.length === 1 ? '' : 's'} (listed in the receipts). The next rung is
+                    AI: an assist plan proposes which repo files close them — every fetch labeled
+                    ai-proposed, then the same proposer re-runs.
+                    <div style={{ marginTop: 8 }}>
+                      <button type="button" disabled={!!codeBusy} onClick={() => void runAssistFetchPlan()}>
+                        Plan fetches with AI
+                      </button>
+                    </div>
+                  </div>
+                ) : null}
                 {!codeBusy && !codeError && codeTsx ? (
                   <p className="hint">
                     Fetched source is loaded into the Paste fields — switch modes to inspect or edit

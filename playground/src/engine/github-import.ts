@@ -1,30 +1,30 @@
 /**
- * Code import over the network — a public GitHub file URL → the TSX (+ the
- * co-located stylesheet, auto-discovered) that feeds the SAME lazy
- * proposeFromCode path the paste mode runs. Browser-direct fetches only:
+ * Code import over the network — a public GitHub file OR directory URL →
+ * the entry TSX plus its TRACED neighborhood (relative imports followed,
+ * stylesheets attached), feeding the SAME lazy proposeFromCode path the
+ * paste mode runs, as SourceFileInput[]. Browser-direct fetches only:
  * raw.githubusercontent.com for file bodies, api.github.com/repos/:o/:r/
- * contents/:path (unauthenticated, CORS-open for public repos) for directory
- * listings. No token, no proxy, session-only like everything else here.
+ * contents/:path and /git/trees/:ref?recursive=1 (unauthenticated,
+ * CORS-open for public repos) for listings. No token, no proxy.
+ *
+ * Deterministic first: the tracer parses the entry's relative import
+ * statements (./ and ../ specifiers; .tsx/.ts/.css/.scss, extensionless
+ * resolved through the .tsx → .ts → /index ladder) and fetches up to
+ * MAX_TRACE_FILES referenced files, each fetch receipted. What it could NOT
+ * close is a named GAP — the input for the assist fetch-plan rung, never a
+ * silent fallback.
  *
  * Every failure is NAMED: 404 (with the private-repos-also-404 caveat),
  * rate limit (403/429 + x-ratelimit headers → reset time), file too large,
  * not-a-TSX. Discovery steps land in `notes` so the Receipts panel can show
- * how the stylesheet was (or wasn't) found — nothing silent.
+ * exactly how each file was found — nothing silent.
  */
+import type { SourceFileInput } from '../../../core/index.js';
 
 const MAX_FILE_BYTES = 500 * 1024; // pasted-code parity; the compiler chunk is the heavy part, not the source
 
-export interface GithubImport {
-  /** owner/repo/path — provenance for the proposal. */
-  sourcePath: string;
-  tsx: string;
-  tsxName: string;
-  /** Co-located stylesheet text ('' when none was found). */
-  css: string;
-  cssName: string | null;
-  /** Discovery receipts: which URLs answered, how the stylesheet was found. */
-  notes: string[];
-}
+/** Referenced files fetched per trace (the entry itself is not counted). */
+export const MAX_TRACE_FILES = 8;
 
 interface ParsedGithubUrl {
   owner: string;
@@ -169,10 +169,15 @@ async function listDirectory(p: ParsedGithubUrl, dirPath: string, fetchImpl: Fet
 const dirnameOf = (path: string) => path.split('/').slice(0, -1).join('/');
 const basenameOf = (path: string) => path.split('/').pop() ?? path;
 
-/** Relative CSS specifiers imported by the TSX ('./Badge.module.css', '../x.css'). */
-export function cssImportsOf(tsx: string): string[] {
+/** Every relative specifier in the file's import/export statements —
+ *  './Badge.module.css', '../hooks/useThing', "import './global.css'". */
+export function relativeImportsOf(source: string): string[] {
   const out: string[] = [];
-  for (const m of tsx.matchAll(/import\s+(?:[\w$]+\s+from\s+)?['"](\.{1,2}\/[^'"]+\.css)['"]/g)) {
+  for (const m of source.matchAll(/(?:import|export)\s[^'"]*?['"](\.{1,2}\/[^'"]+)['"]/g)) {
+    if (!out.includes(m[1])) out.push(m[1]);
+  }
+  // Side-effect imports: `import './x.css'`.
+  for (const m of source.matchAll(/import\s+['"](\.{1,2}\/[^'"]+)['"]/g)) {
     if (!out.includes(m[1])) out.push(m[1]);
   }
   return out;
@@ -189,23 +194,51 @@ function resolveRelative(dir: string, specifier: string): string {
   return parts.join('/');
 }
 
+// ---------------------------------------------------------------------------
+// The trace — entry + followed relative imports, as SourceFileInput[]
+// ---------------------------------------------------------------------------
+
+export interface GithubTrace {
+  /** owner/repo/entryPath — provenance for the proposal. */
+  sourcePath: string;
+  parsed: ParsedGithubUrl;
+  /** Repo-relative path of the entry TSX. */
+  entryPath: string;
+  /** Entry first; each file carries its own attached stylesheet text. */
+  files: SourceFileInput[];
+  /** Fetch/discovery receipts, one line per step — nothing silent. */
+  notes: string[];
+  /** What the deterministic tracer could NOT close, named — the input for
+   *  the assist fetch-plan rung. */
+  gaps: string[];
+  /** Repo-relative paths fetched (entry included) — assist context. */
+  alreadyFetched: string[];
+}
+
+const kb = (text: string) => `${Math.round(text.length / 102.4) / 10} KB`;
+
+const STYLE_EXT = /\.(css|scss)$/;
+const CODE_EXT = /\.(tsx|ts|jsx|js)$/;
+
 /**
- * The whole import: URL → TSX text + auto-discovered co-located stylesheet.
- * Discovery ladder (each step reported in notes):
- *   1. the stylesheet the TSX itself imports (module or plain CSS — plain CSS
- *      degrades downstream exactly like the foreign-css fixture),
- *   2. the same-name sibling <Component>.module.css,
- *   3. any *.module.css in the directory listing (API call — only when needed).
+ * URL (file or directory) → the traced neighborhood.
+ *
+ * Directory URLs pick the entry from the contents listing: the file matching
+ * the directory's name, else index.tsx's sole re-export target, else the
+ * single candidate — multiple candidates without a name match stay a NAMED
+ * error listing them.
  */
-export async function importFromGithubUrl(url: string, fetchImpl: FetchLike = fetch): Promise<GithubImport> {
+export async function traceFromGithubUrl(url: string, fetchImpl: FetchLike = fetch): Promise<GithubTrace> {
   const parsed = parseGithubUrl(url);
   const notes: string[] = [];
+  const gaps: string[] = [];
 
-  let tsxPath = parsed.path;
+  let entryPath = parsed.path;
   if (parsed.kind === 'dir') {
     const entries = await listDirectory(parsed, parsed.path, fetchImpl);
     const candidates = entries
       .filter((e) => e.type === 'file' && /\.(tsx|jsx)$/.test(e.name) && !/^index\.(tsx|jsx)$/.test(e.name))
+      .filter((e) => !/\.(stories|test|spec)\.(tsx|jsx)$/.test(e.name))
       .map((e) => e.name);
     if (candidates.length === 0) {
       throw new Error(`No .tsx/.jsx file in ${parsed.owner}/${parsed.repo}/${parsed.path || '(root)'}@${parsed.ref}`);
@@ -217,77 +250,212 @@ export async function importFromGithubUrl(url: string, fetchImpl: FetchLike = fe
         `Multiple components in ${parsed.path || '(root)'} — pick one file URL: ${candidates.join(', ')}`,
       );
     }
-    tsxPath = [parsed.path, preferred ?? candidates[0]].filter(Boolean).join('/');
-    notes.push(`Directory URL — picked ${basenameOf(tsxPath)} from the GitHub contents listing.`);
+    entryPath = [parsed.path, preferred ?? candidates[0]].filter(Boolean).join('/');
+    notes.push(`Directory URL — picked ${basenameOf(entryPath)} from the GitHub contents listing.`);
   }
 
-  const tsxName = basenameOf(tsxPath);
-  if (!/\.(tsx|jsx)$/.test(tsxName)) {
-    throw new Error(`Not a TSX file: ${tsxName} — the code importer reads React component source (.tsx/.jsx)`);
+  const entryName = basenameOf(entryPath);
+  if (!/\.(tsx|jsx)$/.test(entryName)) {
+    throw new Error(`Not a TSX file: ${entryName} — the code importer reads React component source (.tsx/.jsx)`);
   }
 
-  const tsxRawUrl = rawUrl(parsed, tsxPath);
-  const tsx = await fetchRaw(tsxRawUrl, fetchImpl);
-  notes.push(`Fetched ${tsxName} (${Math.round(tsx.length / 102.4) / 10} KB) from ${tsxRawUrl}`);
+  const entrySource = await fetchRaw(rawUrl(parsed, entryPath), fetchImpl);
+  notes.push(`Fetched ${entryName} (${kb(entrySource)}) from ${rawUrl(parsed, entryPath)}`);
 
-  const dir = dirnameOf(tsxPath);
-  let css = '';
-  let cssName: string | null = null;
+  const repoPrefix = `${parsed.owner}/${parsed.repo}/`;
+  const files: SourceFileInput[] = [{ sourcePath: `${repoPrefix}${entryPath}`, source: entrySource }];
+  const fetched = new Map<string, number>([[entryPath, 0]]); // path → files[] index
+  const textByPath = new Map<string, string>([[entryPath, entrySource]]);
+  const alreadyFetched = [entryPath];
+  let budget = MAX_TRACE_FILES;
 
-  // 1 — the stylesheet the component itself imports.
-  const imported = cssImportsOf(tsx);
-  if (imported.length > 0) {
-    const cssPath = resolveRelative(dir, imported[0]);
+  /** Fetch one repo path within the budget; returns text or null. A quiet
+   *  miss (extension-ladder probe, optional sibling) names nothing here —
+   *  the caller names the whole unresolved import once. */
+  const fetchTraced = async (path: string, why: string, quiet = false): Promise<string | null> => {
+    if (budget <= 0) {
+      gaps.push(`trace cap reached (${MAX_TRACE_FILES} referenced files) — ${path} not fetched (${why})`);
+      return null;
+    }
     try {
-      css = await fetchRaw(rawUrl(parsed, cssPath), fetchImpl);
-      cssName = basenameOf(cssPath);
-      notes.push(`Stylesheet auto-discovered from the component's own import: ${imported[0]} → ${cssName}`);
-      if (!/\.module\.css$/.test(cssName)) {
-        notes.push(`${cssName} is plain CSS, not a CSS Module — anatomy extraction degrades by name, exactly like the foreign-css fixture.`);
-      }
+      const text = await fetchRaw(rawUrl(parsed, path), fetchImpl);
+      budget--;
+      alreadyFetched.push(path);
+      textByPath.set(path, text);
+      notes.push(`Traced ${why} → fetched ${path} (${kb(text)})`);
+      return text;
     } catch (e) {
-      notes.push(`The component imports ${imported[0]} but the sibling fetch failed: ${e instanceof Error ? e.message : String(e)}`);
+      if (!quiet) gaps.push(`${why}: fetch failed — ${e instanceof Error ? e.message : String(e)}`);
+      return null;
+    }
+  };
+
+  /** Attach stylesheet text to a traced file (concatenated when several). */
+  const attachCss = (index: number, path: string, text: string) => {
+    const file = files[index];
+    const block = `/* --- ${path} --- */\n${text}`;
+    file.css = file.css ? `${file.css}\n\n${block}` : block;
+    if (path.endsWith('.scss')) {
+      gaps.push(
+        `${path} is SCSS — the CSS-Module anatomy reader parses what it can; SCSS-only syntax (nesting, variables, mixins) degrades by name in the proposal notes`,
+      );
+    } else if (!path.endsWith('.module.css')) {
+      notes.push(
+        `${path} is plain CSS, not a CSS Module — anatomy extraction degrades by name, exactly like the foreign-css fixture.`,
+      );
+    }
+  };
+
+  // One hop from the entry: follow its relative imports; every traced TSX/TS
+  // file additionally gets its OWN stylesheet imports attached.
+  const codeQueue: number[] = [0];
+  const seenSpecifiers = new Set<string>();
+  while (codeQueue.length > 0) {
+    const index = codeQueue.shift()!;
+    const fromEntry = index === 0;
+    const fileDir = dirnameOf(files[index].sourcePath.slice(repoPrefix.length));
+    for (const spec of relativeImportsOf(files[index].source)) {
+      const key = `${fileDir}|${spec}`;
+      if (seenSpecifiers.has(key)) continue;
+      seenSpecifiers.add(key);
+      const resolved = resolveRelative(fileDir, spec);
+      if (STYLE_EXT.test(spec)) {
+        if (fetched.has(resolved)) continue;
+        const text = await fetchTraced(resolved, `import '${spec}'`);
+        if (text !== null) {
+          fetched.set(resolved, index);
+          attachCss(index, resolved, text);
+        }
+        continue;
+      }
+      // Code imports are followed from the ENTRY only (one hop, by design);
+      // deeper levels would trade receipts for guesswork.
+      if (!fromEntry) continue;
+      if (CODE_EXT.test(spec)) {
+        if (fetched.has(resolved)) continue;
+        const text = await fetchTraced(resolved, `import '${spec}'`);
+        if (text !== null) {
+          fetched.set(resolved, files.length);
+          files.push({ sourcePath: `${repoPrefix}${resolved}`, source: text });
+          codeQueue.push(files.length - 1);
+        }
+        continue;
+      }
+      if (/\.[a-z0-9]+$/i.test(spec)) {
+        notes.push(`import '${spec}' skipped — not a .tsx/.ts/.css/.scss source (assets stay where they are)`);
+        continue;
+      }
+      // Extensionless: the .tsx → .ts → /index.tsx → /index.ts ladder.
+      const candidates = [`${resolved}.tsx`, `${resolved}.ts`, `${resolved}/index.tsx`, `${resolved}/index.ts`];
+      let hit = false;
+      for (const candidate of candidates) {
+        if (fetched.has(candidate)) { hit = true; break; }
+        const text = await fetchTraced(candidate, `import '${spec}'`, true);
+        if (text !== null) {
+          fetched.set(candidate, files.length);
+          files.push({ sourcePath: `${repoPrefix}${candidate}`, source: text });
+          codeQueue.push(files.length - 1);
+          hit = true;
+          break;
+        }
+        if (budget <= 0) break;
+      }
+      if (!hit && budget > 0) {
+        gaps.push(`import '${spec}' unresolved — tried ${candidates.map(basenameOf).join(', ')}`);
+      }
     }
   }
 
-  // 2 — same-name sibling <Component>.module.css.
-  if (!cssName) {
-    const sibling = tsxName.replace(/\.(tsx|jsx)$/, '.module.css');
+  // Entry still styleless? The classic discovery ladder, receipted.
+  if (!files[0].css) {
+    const dir = dirnameOf(entryPath);
+    const sibling = entryName.replace(/\.(tsx|jsx)$/, '.module.css');
     const siblingPath = [dir, sibling].filter(Boolean).join('/');
-    try {
-      css = await fetchRaw(rawUrl(parsed, siblingPath), fetchImpl);
-      cssName = sibling;
-      notes.push(`Stylesheet auto-discovered as the same-name sibling: ${sibling}`);
-    } catch {
-      /* fall through to the directory listing */
-    }
-  }
-
-  // 3 — any *.module.css in the directory (one API call, only when needed).
-  if (!cssName) {
-    try {
-      const entries = await listDirectory(parsed, dir, fetchImpl);
-      const moduleCss = entries.find((e) => e.type === 'file' && e.name.endsWith('.module.css'));
-      if (moduleCss) {
-        css = await fetchRaw(rawUrl(parsed, [dir, moduleCss.name].filter(Boolean).join('/')), fetchImpl);
-        cssName = moduleCss.name;
-        notes.push(`Stylesheet auto-discovered from the directory listing: ${moduleCss.name}`);
+    const siblingText = await fetchTraced(siblingPath, `same-name sibling ${sibling}`, true);
+    if (siblingText !== null) {
+      attachCss(0, siblingPath, siblingText);
+    } else {
+      try {
+        const entries = await listDirectory(parsed, dir, fetchImpl);
+        const moduleCss = entries.find((e) => e.type === 'file' && e.name.endsWith('.module.css'));
+        if (moduleCss) {
+          const p = [dir, moduleCss.name].filter(Boolean).join('/');
+          const known = textByPath.get(p);
+          if (known !== undefined) {
+            notes.push(`Directory listing → ${moduleCss.name} — already traced, attached to the entry too`);
+            attachCss(0, p, known);
+          } else {
+            const text = await fetchTraced(p, `directory listing → ${moduleCss.name}`);
+            if (text !== null) attachCss(0, p, text);
+          }
+        }
+      } catch (e) {
+        notes.push(`Directory listing for stylesheet discovery failed: ${e instanceof Error ? e.message : String(e)}`);
       }
-    } catch (e) {
-      notes.push(`Directory listing for stylesheet discovery failed: ${e instanceof Error ? e.message : String(e)}`);
     }
   }
-
-  if (!cssName) {
-    notes.push('No co-located stylesheet found — the proposal reads the props surface only (no anatomy).');
+  if (!files[0].css) {
+    gaps.push(
+      `no stylesheet reached ${entryName} — the proposal reads the props surface only (no anatomy); the styling source may live outside import-following (theme file, tailwind config, global stylesheet)`,
+    );
   }
 
   return {
-    sourcePath: `${parsed.owner}/${parsed.repo}/${tsxPath}`,
-    tsx,
-    tsxName,
-    css,
-    cssName,
+    sourcePath: `${repoPrefix}${entryPath}`,
+    parsed,
+    entryPath,
+    files,
     notes,
+    gaps,
+    alreadyFetched,
   };
+}
+
+// ---------------------------------------------------------------------------
+// Repo-level context for the assist rungs
+// ---------------------------------------------------------------------------
+
+export interface RepoTreeEntry {
+  path: string;
+  size?: number;
+}
+
+/** The repo's full file listing via the git trees API (one CORS-open call).
+ *  Capped at 2000 entries for the assist payload — entries nearest the entry
+ *  file sort first so the cap cuts the far side. */
+export async function fetchRepoTree(
+  parsed: ParsedGithubUrl,
+  nearPath: string,
+  fetchImpl: FetchLike = fetch,
+): Promise<{ listing: RepoTreeEntry[]; truncated: boolean }> {
+  const url = `https://api.github.com/repos/${parsed.owner}/${parsed.repo}/git/trees/${encodeURIComponent(parsed.ref)}?recursive=1`;
+  let res: Response;
+  try {
+    res = await fetchImpl(url, { headers: { Accept: 'application/vnd.github+json' } });
+  } catch (e) {
+    throw new Error(`Network error fetching ${url} — ${e instanceof Error ? e.message : String(e)}`);
+  }
+  const rateLimited = rateLimitError(res, url);
+  if (rateLimited) throw rateLimited;
+  if (!res.ok) throw new Error(`GitHub trees API answered ${res.status} for ${url}`);
+  const body = (await res.json()) as { tree?: Array<{ path?: string; type?: string; size?: number }>; truncated?: boolean };
+  const blobs = (body.tree ?? []).filter((e) => e.type === 'blob' && typeof e.path === 'string');
+  const nearDir = dirnameOf(nearPath);
+  const rank = (p: string) => (nearDir && p.startsWith(`${nearDir}/`) ? 0 : p.startsWith('src/') ? 1 : 2);
+  const sorted = blobs
+    .map((e) => ({ path: e.path!, ...(typeof e.size === 'number' ? { size: e.size } : {}) }))
+    .sort((a, b) => rank(a.path) - rank(b.path) || a.path.localeCompare(b.path));
+  return {
+    listing: sorted.slice(0, 2000),
+    truncated: Boolean(body.truncated) || sorted.length > 2000,
+  };
+}
+
+/** One raw file body (assist repo-profile samples); errors stay named. */
+export function fetchRepoFile(
+  parsed: ParsedGithubUrl,
+  path: string,
+  fetchImpl: FetchLike = fetch,
+): Promise<string> {
+  return fetchRaw(rawUrl(parsed, path), fetchImpl);
 }
