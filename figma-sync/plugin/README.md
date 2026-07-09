@@ -5,9 +5,11 @@ Runs the generated figma-sync scripts in the **current Figma file**, two ways:
 - **Paste a script** — paste one generated script and run it. This is the
   designer trust round-trip for the [playground](../../playground/PLAN.md):
   copy the **Figma script** output tab, paste it here, press Run, and read
-  the report (created/amended/skipped, variant count, node ids). Errors show
-  verbatim; a thrown script is atomic by Figma's design, so a failed run
-  never leaves a half-synced file.
+  the report (created/amended/skipped, variant count, node ids). On success
+  the plugin selects the built component and zooms to it; when the component
+  already exists in the file it says so in plain words and offers **Select
+  it**. Errors show verbatim; a thrown script is atomic by Figma's design,
+  so a failed run never leaves a half-synced file.
 - **Local runner** — fetch every script in `figma-sync/` from the local
   server (`npm run figma:serve`, port 8765) and run them in dependency
   order, SHA-256-verified against the server manifest, stopping on first
