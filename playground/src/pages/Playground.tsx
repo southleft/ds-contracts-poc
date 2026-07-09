@@ -61,6 +61,7 @@ import {
 import { reportIfChunkError } from '../engine/chunk-guard';
 import { buildPreviewAtState, type PreviewPropOverrides, type PreviewSurface } from '../engine/preview';
 import type { ReceiptGroup, Receipts } from '../receipts';
+import { CanvasFrame } from '../components/CanvasFrame';
 import { ContractEditor, type ContractEditorHandle } from '../components/ContractEditor';
 import { CopyButton } from '../components/CopyButton';
 import { MintAssist } from '../components/MintAssist';
@@ -123,6 +124,15 @@ const PREVIEW_SURFACES: ReadonlyArray<readonly [PreviewSurface, string]> = [
   ['light', 'Light'],
   ['dark', 'Dark'],
   ['checker', 'Checker'],
+];
+
+/** Persisted preview VIEW: the code side, the design side, or both. */
+type PreviewView = 'code' | 'canvas' | 'split';
+const PREVIEW_VIEW_KEY = 'ds-playground.preview-view';
+const PREVIEW_VIEWS: ReadonlyArray<readonly [PreviewView, string, string]> = [
+  ['code', 'Code', 'The code side — the HTML emitter rendered live.'],
+  ['canvas', 'Canvas', 'The design side — the figma engine’s compiled variant grid, Figma-canvas-styled.'],
+  ['split', 'Split', 'Both sides of the same contract, side by side.'],
 ];
 
 const pretty = (value: unknown) => JSON.stringify(value, null, 2);
@@ -1149,6 +1159,25 @@ export function Playground() {
       /* storage unavailable — the choice just doesn't persist */
     }
   };
+  // Code | Canvas | Split — which SIDE of the contract the preview shows.
+  // Split (the two surfaces side by side) is the design↔code story in one
+  // glance; the choice persists per browser.
+  const [previewView, setPreviewView] = useState<PreviewView>(() => {
+    try {
+      const stored = window.localStorage.getItem(PREVIEW_VIEW_KEY);
+      return stored === 'canvas' || stored === 'split' ? stored : 'code';
+    } catch {
+      return 'code';
+    }
+  });
+  const changePreviewView = (v: PreviewView) => {
+    setPreviewView(v);
+    try {
+      window.localStorage.setItem(PREVIEW_VIEW_KEY, v);
+    } catch {
+      /* storage unavailable — the choice just doesn't persist */
+    }
+  };
   const [previewOverrides, setPreviewOverrides] = useState<PreviewPropOverrides>({});
   // The prop whose last toggle changed nothing visible — honest inline note.
   const [previewNoteProp, setPreviewNoteProp] = useState<string | null>(null);
@@ -1172,11 +1201,12 @@ export function Playground() {
   );
 
   const singlePreview = useMemo(() => {
-    if (!previewData || outputTab !== 'preview' || previewMode !== 'single') return null;
+    if (!previewData || outputTab !== 'preview' || previewView === 'canvas' || previewMode !== 'single')
+      return null;
     return buildPreviewAtState(previewData.contract, previewData.contracts, previewSurface, activeOverrides);
     // buildPreviewAtState reads the active token source.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [previewData?.contract, previewData?.contracts, previewSurface, activeOverrides, tokenSource, outputTab, previewMode]);
+  }, [previewData?.contract, previewData?.contracts, previewSurface, activeOverrides, tokenSource, outputTab, previewMode, previewView]);
 
   // Honest-note bookkeeping: when a control change leaves the instance
   // markup byte-identical, the change had no visible effect BY DESIGN (the
@@ -1942,77 +1972,127 @@ export function Playground() {
               </div>
             ) : null}
             {previewData ? (
-              <>
-                <div className="preview__bar">
-                  <div className="seg" role="group" aria-label="Preview mode">
-                    <button
-                      type="button"
-                      className={`seg__btn${previewMode === 'single' ? ' is-active' : ''}`}
-                      aria-pressed={previewMode === 'single'}
-                      onClick={() => setPreviewMode('single')}
-                    >
-                      Single
-                    </button>
-                    <button
-                      type="button"
-                      className={`seg__btn${previewMode === 'all' ? ' is-active' : ''}`}
-                      aria-pressed={previewMode === 'all'}
-                      onClick={() => setPreviewMode('all')}
-                    >
-                      All variants
-                    </button>
-                  </div>
-                  <span className="preview__bar-hint">
-                    {previewMode === 'single'
-                      ? 'One instance at the props you pick — rendered live by the same HTML emitter.'
-                      : 'Every variant value and boolean, one row each.'}
-                  </span>
-                  <div
-                    className="seg preview__surface"
-                    role="group"
-                    aria-label="Preview canvas surface"
-                    title="The backdrop behind the component — independent of the app theme, like Figma's canvas. Dark also switches the token mode."
-                  >
-                    {PREVIEW_SURFACES.map(([s, label]) => (
-                      <button
-                        key={s}
-                        type="button"
-                        className={`seg__btn${previewSurface === s ? ' is-active' : ''}`}
-                        aria-pressed={previewSurface === s}
-                        onClick={() => changePreviewSurface(s)}
-                      >
-                        {label}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-                {previewMode === 'single' ? (
-                  <>
-                    <PreviewControls
-                      contract={previewData.contract}
-                      overrides={activeOverrides}
-                      onChange={handlePreviewControl}
-                      notedProp={previewNoteProp}
-                    />
-                    {singlePreview?.ok ? (
-                      <iframe
-                        sandbox=""
-                        srcDoc={singlePreview.doc}
-                        title={previewTarget ? 'Contract preview — chosen state' : 'Contract preview — chosen state (last valid)'}
+              (() => {
+                const codeBody =
+                  previewMode === 'single' ? (
+                    <>
+                      <PreviewControls
+                        contract={previewData.contract}
+                        overrides={activeOverrides}
+                        onChange={handlePreviewControl}
+                        notedProp={previewNoteProp}
                       />
-                    ) : singlePreview ? (
-                      <div className="output__error">{singlePreview.error}</div>
-                    ) : null}
-                  </>
-                ) : (
-                  <PreviewFrame
+                      {singlePreview?.ok ? (
+                        <iframe
+                          sandbox=""
+                          srcDoc={singlePreview.doc}
+                          title={previewTarget ? 'Contract preview — chosen state' : 'Contract preview — chosen state (last valid)'}
+                        />
+                      ) : singlePreview ? (
+                        <div className="output__error">{singlePreview.error}</div>
+                      ) : null}
+                    </>
+                  ) : (
+                    <PreviewFrame
+                      contract={previewData.contract}
+                      contracts={previewData.contracts}
+                      surface={previewSurface}
+                      title={previewTarget ? 'Contract preview' : 'Contract preview (last valid)'}
+                    />
+                  );
+                const canvasBody = (
+                  <CanvasFrame
                     contract={previewData.contract}
                     contracts={previewData.contracts}
-                    surface={previewSurface}
-                    title={previewTarget ? 'Contract preview' : 'Contract preview (last valid)'}
+                    title={previewTarget ? 'Canvas preview' : 'Canvas preview (last valid)'}
                   />
-                )}
-              </>
+                );
+                return (
+                  <>
+                    <div className="preview__bar">
+                      <div className="seg" role="group" aria-label="Preview side">
+                        {PREVIEW_VIEWS.map(([v, label, hint]) => (
+                          <button
+                            key={v}
+                            type="button"
+                            className={`seg__btn${previewView === v ? ' is-active' : ''}`}
+                            aria-pressed={previewView === v}
+                            title={hint}
+                            onClick={() => changePreviewView(v)}
+                          >
+                            {label}
+                          </button>
+                        ))}
+                      </div>
+                      {previewView !== 'canvas' ? (
+                        <div className="seg" role="group" aria-label="Preview mode">
+                          <button
+                            type="button"
+                            className={`seg__btn${previewMode === 'single' ? ' is-active' : ''}`}
+                            aria-pressed={previewMode === 'single'}
+                            onClick={() => setPreviewMode('single')}
+                          >
+                            Single
+                          </button>
+                          <button
+                            type="button"
+                            className={`seg__btn${previewMode === 'all' ? ' is-active' : ''}`}
+                            aria-pressed={previewMode === 'all'}
+                            onClick={() => setPreviewMode('all')}
+                          >
+                            All variants
+                          </button>
+                        </div>
+                      ) : null}
+                      <span className="preview__bar-hint">
+                        {previewView === 'canvas'
+                          ? PREVIEW_VIEWS[1][2]
+                          : previewView === 'split'
+                            ? 'Both sides compiled from the same contract — code left, canvas right.'
+                            : previewMode === 'single'
+                              ? 'One instance at the props you pick — rendered live by the same HTML emitter.'
+                              : 'Every variant value and boolean, one row each.'}
+                      </span>
+                      {previewView !== 'canvas' ? (
+                        <div
+                          className="seg preview__surface"
+                          role="group"
+                          aria-label="Preview canvas surface"
+                          title="The backdrop behind the component — independent of the app theme, like Figma's canvas. Dark also switches the token mode. (The Canvas side is always light, like Figma.)"
+                        >
+                          {PREVIEW_SURFACES.map(([s, label]) => (
+                            <button
+                              key={s}
+                              type="button"
+                              className={`seg__btn${previewSurface === s ? ' is-active' : ''}`}
+                              aria-pressed={previewSurface === s}
+                              onClick={() => changePreviewSurface(s)}
+                            >
+                              {label}
+                            </button>
+                          ))}
+                        </div>
+                      ) : null}
+                    </div>
+                    {previewView === 'code' ? (
+                      codeBody
+                    ) : previewView === 'canvas' ? (
+                      canvasBody
+                    ) : (
+                      <div className="preview__split">
+                        <div className="preview__split-col">
+                          <div className="preview__split-cap">Code — HTML emitter</div>
+                          {codeBody}
+                        </div>
+                        <div className="preview__split-col">
+                          <div className="preview__split-cap">Canvas — figma engine</div>
+                          {canvasBody}
+                        </div>
+                      </div>
+                    )}
+                  </>
+                );
+              })()
             ) : neutralPreview ? (
               <div className="pane__body hint preview__neutral">
                 No valid render yet{currentContractId ? ` for ${currentContractId}` : ''} — fix the

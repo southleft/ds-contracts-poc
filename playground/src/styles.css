@@ -1690,6 +1690,43 @@ label {
   margin-left: auto;
 }
 
+/* Split view — code left, canvas right, one divider. The money view. */
+
+.preview__split {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 0;
+}
+
+.preview__split-col {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 0;
+}
+
+.preview__split-col + .preview__split-col {
+  border-left: 1px solid var(--pg-border);
+}
+
+.preview__split-col iframe {
+  flex: 1;
+  width: 100%;
+  border: 0;
+  background: transparent;
+}
+
+.preview__split-cap {
+  flex-shrink: 0;
+  padding: 4px 14px;
+  font-size: 10.5px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--pg-faint);
+  border-bottom: 1px solid var(--pg-border);
+}
+
 .pv-controls {
   display: flex;
   flex-wrap: wrap;
