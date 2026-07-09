@@ -84,12 +84,12 @@ const message = (id: string, toolUseId: string, input: unknown, usage: { input_t
 
 const ROUNDS = [
   // Round 1: the model invents "{radius.tag}" — not in any inventory.
-  message('msg_demo_round1', 'toolu_demo_round1', tagContract('{radius.tag}'), {
+  message('msg_demo_round1', 'toolu_demo_round1', { contract: tagContract('{radius.tag}') }, {
     input_tokens: 3187,
     output_tokens: 486,
   }),
   // Round 2: corrected to the real pill radius after the refusal came back.
-  message('msg_demo_round2', 'toolu_demo_round2', tagContract('{radius.pill}'), {
+  message('msg_demo_round2', 'toolu_demo_round2', { contract: tagContract('{radius.pill}') }, {
     input_tokens: 3811,
     output_tokens: 489,
   }),

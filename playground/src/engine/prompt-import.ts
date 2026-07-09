@@ -22,7 +22,11 @@ import badgeContract from '../../../contracts/badge.contract.json';
 import { activeTokens } from './token-source.js';
 
 /** Fixed model — cheap + capable default for schema-constrained generation. */
-export const ANTHROPIC_MODEL = 'claude-sonnet-5';
+export const ANTHROPIC_MODELS = [
+  { id: 'claude-sonnet-5', label: 'Claude Sonnet 5 — fast, ~$0.02/generation' },
+  { id: 'claude-opus-4-8', label: 'Claude Opus 4.8 — strongest reasoning, slower' },
+] as const;
+export const ANTHROPIC_MODEL = ANTHROPIC_MODELS[0].id;
 export const MAX_FIX_ROUNDS = 2;
 
 const ANTHROPIC_URL = 'https://api.anthropic.com/v1/messages';
@@ -373,6 +377,7 @@ async function callClaude(
   messages: unknown[],
   apiKey: string,
   fetchImpl: FetchLike,
+  model: string = ANTHROPIC_MODEL,
 ): Promise<{ toolUse: ToolUseBlock; usage: AnthropicResponse['usage']; assistantContent: unknown }> {
   let res: Response;
   try {
@@ -386,7 +391,7 @@ async function callClaude(
         'anthropic-dangerous-direct-browser-access': 'true',
       },
       body: JSON.stringify({
-        model: ANTHROPIC_MODEL,
+        model,
         max_tokens: MAX_OUTPUT_TOKENS,
         // Forced tool_choice pairs with thinking off; the schema does the aiming.
         thinking: { type: 'disabled' },
@@ -434,15 +439,28 @@ const addUsage = (
 });
 
 /** First generation: prompt → contract candidate + a session for fix rounds. */
+/** The live API returns the tool input wrapped as { contract: {…} } (the tool
+ *  schema's single top-level property); unwrap it so validation sees the
+ *  contract itself. Tolerates an already-unwrapped shape (older fixtures). */
+function unwrapToolInput(input: unknown): unknown {
+  if (
+    input !== null && typeof input === 'object' && !Array.isArray(input) &&
+    'contract' in input && !('id' in input)
+  ) {
+    return (input as { contract: unknown }).contract;
+  }
+  return input;
+}
+
 export async function generateFromPrompt(
   prompt: string,
   apiKey: string,
-  opts: { fetchImpl?: FetchLike } = {},
+  opts: { fetchImpl?: FetchLike; model?: string } = {},
 ): Promise<PromptResult> {
   const messages: unknown[] = [{ role: 'user', content: prompt }];
-  const { toolUse, usage, assistantContent } = await callClaude(messages, apiKey, opts.fetchImpl ?? fetch);
+  const { toolUse, usage, assistantContent } = await callClaude(messages, apiKey, opts.fetchImpl ?? fetch, opts.model);
   return {
-    contract: toolUse.input,
+    contract: unwrapToolInput(toolUse.input),
     session: {
       messages: [...messages, { role: 'assistant', content: assistantContent }],
       lastToolUseId: toolUse.id,
@@ -458,7 +476,7 @@ export async function requestFix(
   session: PromptSession,
   refusals: string[],
   apiKey: string,
-  opts: { fetchImpl?: FetchLike } = {},
+  opts: { fetchImpl?: FetchLike; model?: string } = {},
 ): Promise<PromptResult> {
   if (session.rounds >= MAX_FIX_ROUNDS) {
     throw new Error(`Fix round limit reached (${MAX_FIX_ROUNDS}) — edit the contract by hand instead.`);
@@ -480,9 +498,9 @@ export async function requestFix(
       ],
     },
   ];
-  const { toolUse, usage, assistantContent } = await callClaude(messages, apiKey, opts.fetchImpl ?? fetch);
+  const { toolUse, usage, assistantContent } = await callClaude(messages, apiKey, opts.fetchImpl ?? fetch, opts.model);
   return {
-    contract: toolUse.input,
+    contract: unwrapToolInput(toolUse.input),
     session: {
       messages: [...messages, { role: 'assistant', content: assistantContent }],
       lastToolUseId: toolUse.id,

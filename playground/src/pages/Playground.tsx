@@ -15,6 +15,7 @@ import {
 import { importFromGithubUrl } from '../engine/github-import';
 import {
   ANTHROPIC_MODEL,
+  ANTHROPIC_MODELS,
   generateFromPrompt,
   MAX_FIX_ROUNDS,
   requestFix,
@@ -542,6 +543,7 @@ export function Playground() {
   // ---------------------------------------------------------- describe state
   const [descPrompt, setDescPrompt] = useState('');
   const [descKey, setDescKey] = useState('');
+  const [descModel, setDescModel] = useState<string>(ANTHROPIC_MODEL);
   const [descBusy, setDescBusy] = useState<string | null>(null);
   const [descError, setDescError] = useState<string | null>(null);
   // Refusals from the LAST generation — shown by the editor, echoed here to
@@ -579,7 +581,7 @@ export function Playground() {
           title: 'Prompt generation',
           kind: 'note',
           entries: [
-            { message: `model: ${ANTHROPIC_MODEL}` },
+            { message: `model: ${descTransport.current ? 'demo fixture' : descModel}` },
             {
               message:
                 usage.inputTokens !== null || usage.outputTokens !== null
@@ -621,7 +623,7 @@ export function Playground() {
     setDescBusy(
       demo
         ? 'Generating over the recorded fixture (identical code path, fixture transport)…'
-        : `Asking ${ANTHROPIC_MODEL} (browser-direct)…`,
+        : `Asking ${descModel} (browser-direct)…`,
     );
     try {
       let fetchImpl: FetchLike | undefined;
@@ -638,10 +640,11 @@ export function Playground() {
       }
       const result = await generateFromPrompt(prompt, demo ? 'demo-fixture-key' : descKey.trim(), {
         fetchImpl,
+        model: descModel,
       });
       applyPromptResult(
         result,
-        demo ? 'prompt generation (demo fixture)' : `prompt generation — ${ANTHROPIC_MODEL}`,
+        demo ? 'prompt generation (demo fixture)' : `prompt generation — ${descModel}`,
       );
     } catch (e) {
       setDescError(e instanceof Error ? e.message : String(e));
@@ -659,12 +662,13 @@ export function Playground() {
       const demo = descTransport.current !== null;
       const result = await requestFix(session, descRefusals, demo ? 'demo-fixture-key' : descKey.trim(), {
         fetchImpl: descTransport.current ?? undefined,
+        model: descModel,
       });
       applyPromptResult(
         result,
         demo
           ? `prompt generation (demo fixture) — fix round ${result.session.rounds}`
-          : `prompt generation — ${ANTHROPIC_MODEL}, fix round ${result.session.rounds}`,
+          : `prompt generation — ${descModel}, fix round ${result.session.rounds}`,
       );
     } catch (e) {
       setDescError(e instanceof Error ? e.message : String(e));
@@ -1144,6 +1148,16 @@ export function Playground() {
                 Session-only, like the Figma token — sent browser-direct to api.anthropic.com and
                 nowhere else, gone on reload.
               </p>
+            </div>
+            <div className="field">
+              <label htmlFor="desc-model">Model</label>
+              <select id="desc-model" value={descModel} onChange={(e) => setDescModel(e.target.value)}>
+                {ANTHROPIC_MODELS.map((m) => (
+                  <option key={m.id} value={m.id}>
+                    {m.label}
+                  </option>
+                ))}
+              </select>
             </div>
             <button
               type="button"
