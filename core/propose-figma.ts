@@ -379,9 +379,23 @@ function unifyField(m: Merged, field: string, ctx: Ctx, where: string): string |
   return undefined;
 }
 
+/** Canvas paint → CSS color literal: '#rrggbb', or 8-digit '#rrggbbaa' when
+ *  the paint carries alpha (dump v1.1). 8-digit hex is the ONE spelling that
+ *  is simultaneously a legal DTCG color $value, a CSS color everywhere the
+ *  pipeline speaks CSS (custom properties, inline styles, canvas fillStyle),
+ *  and mechanically invertible to Figma's RGBA — rgba() would satisfy only
+ *  the CSS surfaces and break the minted tree's DTCG typing. */
+export const paintCssHex = (p: { hex?: string; alpha?: number }): string => {
+  if (p.alpha === undefined || p.alpha >= 1) return `#${p.hex}`;
+  const byte = Math.round(Math.max(0, Math.min(1, p.alpha)) * 255)
+    .toString(16)
+    .padStart(2, '0');
+  return `#${p.hex}${byte}`;
+};
+
 function unifyPaint(
   m: Merged,
-  pick: (n: DumpNode) => { var?: string; hex?: string } | undefined,
+  pick: (n: DumpNode) => { var?: string; hex?: string; alpha?: number } | undefined,
   ctx: Ctx,
   where: string,
   paintName: string,
@@ -391,14 +405,14 @@ function unifyPaint(
   if (paints.every((p) => p.paint === undefined)) return undefined;
   const raw = paints.find((p) => p.paint?.hex !== undefined);
   if (raw) {
-    reportUnbound(ctx, where, paintName, `#${raw.paint!.hex}`);
+    reportUnbound(ctx, where, paintName, paintCssHex(raw.paint!));
     if (ctx.mint && mint) {
       // Mintable only when EVERY variant resolved to a raw hex — a paint
       // missing in some variants, or half-bound, stays a report entry.
       if (paints.every((p) => p.paint?.hex !== undefined)) {
         mintObservation(
           ctx, mint.target, where, mint.cssProperty, 'color',
-          paints.map((p) => ({ variant: p.variant, value: `#${p.paint!.hex}` })),
+          paints.map((p) => ({ variant: p.variant, value: paintCssHex(p.paint!) })),
           `${where}|${paintName}`,
         );
       } else {
@@ -411,7 +425,18 @@ function unifyPaint(
     paints.map((p) => ({ variant: p.variant, path: p.paint?.var ? dotPath(p.paint.var) : undefined })),
     ctx.axes,
   );
-  if (u.kind === 'ref') return u.ref;
+  if (u.kind === 'ref') {
+    // A BOUND paint whose alpha < 1: the token ref carries the color, not
+    // the paint's opacity — no place in the contract vocabulary for it, so
+    // the loss is NAMED (dump v1.1 captures it; the ref stays proposed).
+    const alphaBound = paints.find((p) => p.paint?.var !== undefined && (p.paint.alpha ?? 1) < 1);
+    if (alphaBound) {
+      ctx.notes.push(
+        `${where} ${paintName}: paint opacity ${alphaBound.paint!.alpha} rides the bound variable "${alphaBound.paint!.var}" — alpha is not representable on a token ref; binding proposed at full opacity, review`,
+      );
+    }
+    return u.ref;
+  }
   if (u.kind === 'drift') ctx.notes.push(`${where} ${paintName}: ${u.detail}`);
   return undefined;
 }

@@ -21,7 +21,8 @@
  *   paddingTop/Right/Bottom/Left (omitted at 0)     layout.padding [top,right,bottom,left]
  *   primary/counterAxisSizingMode (omitted)         layout.primarySizing/counterSizing, default AUTO
  *   cornerRadius | rectangleCornerRadii[TL,TR,BR,BL] cornerRadius (uniform, nonzero only — dump v1 scope)
- *   fills[].boundVariables.color (VARIABLE_ALIAS)   fill { var: name } via the variables response, else { hex } + degradation
+ *   fills[].boundVariables.color (VARIABLE_ALIAS)   fill { var: name } via the variables response, else { hex } + degradation;
+ *                                                   effective opacity (color.a × paint opacity) rides { alpha } when < 1 (dump v1.1)
  *   strokes[…] (same shape)                         stroke, strokeWeight (literal, only when a stroke is emitted)
  *   boundVariables.size.x / .y                      bound.width / bound.height
  *   boundVariables.individualStrokeWeights.top…     bound.strokeTopWeight / …Right / …Bottom / …Left
@@ -29,7 +30,7 @@
  *     .RECTANGLE_TOP_LEFT_CORNER_RADIUS…            bound.topLeftRadius / … (spec lists both spellings; both accepted)
  *   boundVariables.paddingLeft/itemSpacing/…        bound.<same name> (plugin spelling ≡ REST spelling here)
  *   layoutSizingHorizontal === 'FILL'               fillWidth: true
- *   visible === false                               hidden: true (additive over dump v1; propose.ts ignores it)
+ *   visible === false                               hidden: true (dump v1.1 — visibility-bound parts recover boolean defaults from it)
  *   characters + style{fontSize,fontWeight}         text.characters / .fontSize / .fontStyle
  *     (fontWeight → Inter style name via the generator's FONT_STYLE_BY_WEIGHT)
  *   node.styles.text → styles metadata map          text.style (name), else omitted + degradation
@@ -169,7 +170,8 @@ export type MapDegradationCode =
   | 'variable-unresolved'
   | 'text-style-unresolved'
   | 'instance-main-unresolved'
-  | 'paint-alpha-dropped'
+  // 'paint-alpha-dropped' retired in dump v1.1: solid-paint opacity is
+  // CAPTURED ({ hex, alpha }) instead of degraded away.
   | 'paint-unsupported'
   | 'layout-grid-unsupported'
   | 'radii-nonuniform';
@@ -202,9 +204,9 @@ export interface MapOptions {
   fileKey?: string | null;
 }
 
-/** dump v1 + the additive `hidden` flag (visible === false in REST). */
+/** dump v1.1 node as the REST mapper emits it (`hidden` lives on DumpNode
+ *  itself since dump v1.1 — the alias survives for existing importers). */
 export interface RestDumpNode extends DumpNode {
-  hidden?: boolean;
   children?: RestDumpNode[];
 }
 
@@ -265,7 +267,10 @@ function resolveVarName(ctx: Ctx, alias: RestVariableAlias, nodePath: string, fi
 
 /** First visible solid paint → { var } | { hex } | undefined — the exact
  *  selection rule of dump.plugin.js dumpPaint. A bound paint whose variable
- *  cannot be named degrades to its resolved hex (named in the report). */
+ *  cannot be named degrades to its resolved hex (named in the report). The
+ *  paint's effective opacity (color alpha × paint opacity) rides `alpha`
+ *  when < 1 (dump v1.1 — the Eventz 5%-black fills that dump v1 rendered
+ *  opaque; no degradation entry, the fact is CAPTURED now). */
 function mapPaint(
   paints: RestPaint[] | undefined,
   ctx: Ctx,
@@ -286,23 +291,17 @@ function mapPaint(
     }
     return undefined;
   }
+  const effectiveAlpha = (p.color?.a ?? 1) * (p.opacity ?? 1);
+  const withAlpha = (paint: DumpPaint): DumpPaint =>
+    effectiveAlpha < 1 ? { ...paint, alpha: Math.round(effectiveAlpha * 10000) / 10000 } : paint;
   const alias = p.boundVariables?.color;
   if (alias && isAlias(alias)) {
     const name = resolveVarName(ctx, alias, nodePath, paintField);
-    if (name) return { var: name };
+    if (name) return withAlpha({ var: name });
     // fall through: resolved value, already named as a degradation
   }
   if (!p.color) return undefined;
-  const effectiveAlpha = (p.color.a ?? 1) * (p.opacity ?? 1);
-  if (effectiveAlpha < 1) {
-    ctx.report.degradations.push({
-      code: 'paint-alpha-dropped',
-      nodePath,
-      field: paintField,
-      message: `paint alpha ${effectiveAlpha.toFixed(2)} dropped — dump v1 paints are opaque rrggbb hex`,
-    });
-  }
-  return { hex: rgbToHex(p.color) };
+  return withAlpha({ hex: rgbToHex(p.color) });
 }
 
 // ---------------------------------------------------------------------------

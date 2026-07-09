@@ -77,12 +77,6 @@
       "message": "variable id VariableID:2759:71589 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
     },
     {
-      "code": "paint-alpha-dropped",
-      "nodePath": "Button:variant=primary, state=default, isDisabled=false",
-      "field": "stroke",
-      "message": "paint alpha 0.10 dropped — dump v1 paints are opaque rrggbb hex"
-    },
-    {
       "code": "variable-unresolved",
       "nodePath": "Button:variant=primary, state=default, isDisabled=false/Label",
       "field": "fill",
@@ -233,12 +227,6 @@
       "message": "variable id VariableID:2759:71589 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
     },
     {
-      "code": "paint-alpha-dropped",
-      "nodePath": "Button:variant=primary, state=default, isDisabled=true",
-      "field": "stroke",
-      "message": "paint alpha 0.10 dropped — dump v1 paints are opaque rrggbb hex"
-    },
-    {
       "code": "variable-unresolved",
       "nodePath": "Button:variant=primary, state=default, isDisabled=true/Label",
       "field": "fill",
@@ -383,22 +371,10 @@
       "message": "variable id VariableID:2759:71597 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
     },
     {
-      "code": "paint-alpha-dropped",
-      "nodePath": "Button:variant=secondary, state=default, isDisabled=false",
-      "field": "fill",
-      "message": "paint alpha 0.05 dropped — dump v1 paints are opaque rrggbb hex"
-    },
-    {
       "code": "variable-unresolved",
       "nodePath": "Button:variant=secondary, state=default, isDisabled=false",
       "field": "stroke",
       "message": "variable id VariableID:2759:71608 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
-    },
-    {
-      "code": "paint-alpha-dropped",
-      "nodePath": "Button:variant=secondary, state=default, isDisabled=false",
-      "field": "stroke",
-      "message": "paint alpha 0.10 dropped — dump v1 paints are opaque rrggbb hex"
     },
     {
       "code": "variable-unresolved",
@@ -473,12 +449,6 @@
       "message": "variable id VariableID:2323:192 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
     },
     {
-      "code": "paint-alpha-dropped",
-      "nodePath": "Button:variant=bare, state=default, isDisabled=false",
-      "field": "fill",
-      "message": "paint alpha 0.00 dropped — dump v1 paints are opaque rrggbb hex"
-    },
-    {
       "code": "variable-unresolved",
       "nodePath": "Button:variant=bare, state=default, isDisabled=false/Label",
       "field": "fill",
@@ -549,12 +519,6 @@
       "nodePath": "Button:variant=bare, state=default, isDisabled=true",
       "field": "fill",
       "message": "variable id VariableID:2323:192 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
-    },
-    {
-      "code": "paint-alpha-dropped",
-      "nodePath": "Button:variant=bare, state=default, isDisabled=true",
-      "field": "fill",
-      "message": "paint alpha 0.00 dropped — dump v1 paints are opaque rrggbb hex"
     },
     {
       "code": "variable-unresolved",
@@ -629,22 +593,10 @@
       "message": "variable id VariableID:2759:71597 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
     },
     {
-      "code": "paint-alpha-dropped",
-      "nodePath": "Button:variant=secondary, state=default, isDisabled=true",
-      "field": "fill",
-      "message": "paint alpha 0.05 dropped — dump v1 paints are opaque rrggbb hex"
-    },
-    {
       "code": "variable-unresolved",
       "nodePath": "Button:variant=secondary, state=default, isDisabled=true",
       "field": "stroke",
       "message": "variable id VariableID:2759:71608 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
-    },
-    {
-      "code": "paint-alpha-dropped",
-      "nodePath": "Button:variant=secondary, state=default, isDisabled=true",
-      "field": "stroke",
-      "message": "paint alpha 0.10 dropped — dump v1 paints are opaque rrggbb hex"
     },
     {
       "code": "variable-unresolved",
@@ -723,12 +675,6 @@
       "nodePath": "Button:variant=primary, state=hover, isDisabled=false",
       "field": "stroke",
       "message": "variable id VariableID:2759:71589 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
-    },
-    {
-      "code": "paint-alpha-dropped",
-      "nodePath": "Button:variant=primary, state=hover, isDisabled=false",
-      "field": "stroke",
-      "message": "paint alpha 0.10 dropped — dump v1 paints are opaque rrggbb hex"
     },
     {
       "code": "variable-unresolved",
@@ -875,22 +821,10 @@
       "message": "variable id VariableID:2759:71620 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
     },
     {
-      "code": "paint-alpha-dropped",
-      "nodePath": "Button:variant=secondary, state=hover, isDisabled=false",
-      "field": "fill",
-      "message": "paint alpha 0.20 dropped — dump v1 paints are opaque rrggbb hex"
-    },
-    {
       "code": "variable-unresolved",
       "nodePath": "Button:variant=secondary, state=hover, isDisabled=false",
       "field": "stroke",
       "message": "variable id VariableID:2759:71601 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
-    },
-    {
-      "code": "paint-alpha-dropped",
-      "nodePath": "Button:variant=secondary, state=hover, isDisabled=false",
-      "field": "stroke",
-      "message": "paint alpha 0.10 dropped — dump v1 paints are opaque rrggbb hex"
     },
     {
       "code": "variable-unresolved",
@@ -963,12 +897,6 @@
       "nodePath": "Button:variant=bare, state=hover, isDisabled=false",
       "field": "fill",
       "message": "variable id VariableID:2759:71620 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
-    },
-    {
-      "code": "paint-alpha-dropped",
-      "nodePath": "Button:variant=bare, state=hover, isDisabled=false",
-      "field": "fill",
-      "message": "paint alpha 0.20 dropped — dump v1 paints are opaque rrggbb hex"
     },
     {
       "code": "variable-unresolved",
@@ -1047,12 +975,6 @@
       "nodePath": "Button:variant=primary, state=active, isDisabled=false",
       "field": "stroke",
       "message": "variable id VariableID:2759:71589 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
-    },
-    {
-      "code": "paint-alpha-dropped",
-      "nodePath": "Button:variant=primary, state=active, isDisabled=false",
-      "field": "stroke",
-      "message": "paint alpha 0.10 dropped — dump v1 paints are opaque rrggbb hex"
     },
     {
       "code": "variable-unresolved",
@@ -1199,22 +1121,10 @@
       "message": "variable id VariableID:2759:71597 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
     },
     {
-      "code": "paint-alpha-dropped",
-      "nodePath": "Button:variant=secondary, state=active, isDisabled=false",
-      "field": "fill",
-      "message": "paint alpha 0.05 dropped — dump v1 paints are opaque rrggbb hex"
-    },
-    {
       "code": "variable-unresolved",
       "nodePath": "Button:variant=secondary, state=active, isDisabled=false",
       "field": "stroke",
       "message": "variable id VariableID:2759:71595 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
-    },
-    {
-      "code": "paint-alpha-dropped",
-      "nodePath": "Button:variant=secondary, state=active, isDisabled=false",
-      "field": "stroke",
-      "message": "paint alpha 0.10 dropped — dump v1 paints are opaque rrggbb hex"
     },
     {
       "code": "variable-unresolved",
@@ -1287,12 +1197,6 @@
       "nodePath": "Button:variant=bare, state=active, isDisabled=false",
       "field": "fill",
       "message": "variable id VariableID:2323:192 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
-    },
-    {
-      "code": "paint-alpha-dropped",
-      "nodePath": "Button:variant=bare, state=active, isDisabled=false",
-      "field": "fill",
-      "message": "paint alpha 0.00 dropped — dump v1 paints are opaque rrggbb hex"
     },
     {
       "code": "variable-unresolved",
@@ -1371,12 +1275,6 @@
       "nodePath": "Button:variant=primary, state=focus, isDisabled=false",
       "field": "stroke",
       "message": "variable id VariableID:2759:71589 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
-    },
-    {
-      "code": "paint-alpha-dropped",
-      "nodePath": "Button:variant=primary, state=focus, isDisabled=false",
-      "field": "stroke",
-      "message": "paint alpha 0.10 dropped — dump v1 paints are opaque rrggbb hex"
     },
     {
       "code": "variable-unresolved",
@@ -1583,22 +1481,10 @@
       "message": "variable id VariableID:2759:71597 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
     },
     {
-      "code": "paint-alpha-dropped",
-      "nodePath": "Button:variant=secondary, state=focus, isDisabled=false",
-      "field": "fill",
-      "message": "paint alpha 0.05 dropped — dump v1 paints are opaque rrggbb hex"
-    },
-    {
       "code": "variable-unresolved",
       "nodePath": "Button:variant=secondary, state=focus, isDisabled=false",
       "field": "stroke",
       "message": "variable id VariableID:2759:71608 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
-    },
-    {
-      "code": "paint-alpha-dropped",
-      "nodePath": "Button:variant=secondary, state=focus, isDisabled=false",
-      "field": "stroke",
-      "message": "paint alpha 0.10 dropped — dump v1 paints are opaque rrggbb hex"
     },
     {
       "code": "variable-unresolved",
@@ -1703,12 +1589,6 @@
       "message": "variable id VariableID:2323:192 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
     },
     {
-      "code": "paint-alpha-dropped",
-      "nodePath": "Button:variant=bare, state=focus, isDisabled=false",
-      "field": "fill",
-      "message": "paint alpha 0.00 dropped — dump v1 paints are opaque rrggbb hex"
-    },
-    {
       "code": "variable-unresolved",
       "nodePath": "Button:variant=bare, state=focus, isDisabled=false/Focus ring",
       "field": "topLeftRadius",
@@ -1787,12 +1667,6 @@
       "message": "variable id VariableID:2759:71589 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
     },
     {
-      "code": "paint-alpha-dropped",
-      "nodePath": "Button:variant=primary, state=focus, isDisabled=true",
-      "field": "stroke",
-      "message": "paint alpha 0.10 dropped — dump v1 paints are opaque rrggbb hex"
-    },
-    {
       "code": "variable-unresolved",
       "nodePath": "Button:variant=primary, state=focus, isDisabled=true/Button",
       "field": "itemSpacing",
@@ -1865,12 +1739,6 @@
       "message": "variable id VariableID:2759:71589 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
     },
     {
-      "code": "paint-alpha-dropped",
-      "nodePath": "Button:variant=primary, state=focus, isDisabled=true/Button",
-      "field": "stroke",
-      "message": "paint alpha 0.10 dropped — dump v1 paints are opaque rrggbb hex"
-    },
-    {
       "code": "variable-unresolved",
       "nodePath": "Button:variant=primary, state=focus, isDisabled=true/Focus ring",
       "field": "topLeftRadius",
@@ -2045,22 +1913,10 @@
       "message": "variable id VariableID:2759:71597 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
     },
     {
-      "code": "paint-alpha-dropped",
-      "nodePath": "Button:variant=secondary, state=focus, isDisabled=true",
-      "field": "fill",
-      "message": "paint alpha 0.05 dropped — dump v1 paints are opaque rrggbb hex"
-    },
-    {
       "code": "variable-unresolved",
       "nodePath": "Button:variant=secondary, state=focus, isDisabled=true",
       "field": "stroke",
       "message": "variable id VariableID:2759:71608 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
-    },
-    {
-      "code": "paint-alpha-dropped",
-      "nodePath": "Button:variant=secondary, state=focus, isDisabled=true",
-      "field": "stroke",
-      "message": "paint alpha 0.10 dropped — dump v1 paints are opaque rrggbb hex"
     },
     {
       "code": "variable-unresolved",
@@ -2129,22 +1985,10 @@
       "message": "variable id VariableID:2759:71597 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
     },
     {
-      "code": "paint-alpha-dropped",
-      "nodePath": "Button:variant=secondary, state=focus, isDisabled=true/Button",
-      "field": "fill",
-      "message": "paint alpha 0.05 dropped — dump v1 paints are opaque rrggbb hex"
-    },
-    {
       "code": "variable-unresolved",
       "nodePath": "Button:variant=secondary, state=focus, isDisabled=true/Button",
       "field": "stroke",
       "message": "variable id VariableID:2759:71608 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
-    },
-    {
-      "code": "paint-alpha-dropped",
-      "nodePath": "Button:variant=secondary, state=focus, isDisabled=true/Button",
-      "field": "stroke",
-      "message": "paint alpha 0.10 dropped — dump v1 paints are opaque rrggbb hex"
     },
     {
       "code": "variable-unresolved",
@@ -2213,12 +2057,6 @@
       "message": "variable id VariableID:2323:192 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
     },
     {
-      "code": "paint-alpha-dropped",
-      "nodePath": "Button:variant=bare, state=focus, isDisabled=true",
-      "field": "fill",
-      "message": "paint alpha 0.00 dropped — dump v1 paints are opaque rrggbb hex"
-    },
-    {
       "code": "variable-unresolved",
       "nodePath": "Button:variant=bare, state=focus, isDisabled=true/Button",
       "field": "itemSpacing",
@@ -2283,12 +2121,6 @@
       "nodePath": "Button:variant=bare, state=focus, isDisabled=true/Button",
       "field": "fill",
       "message": "variable id VariableID:2323:192 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
-    },
-    {
-      "code": "paint-alpha-dropped",
-      "nodePath": "Button:variant=bare, state=focus, isDisabled=true/Button",
-      "field": "fill",
-      "message": "paint alpha 0.00 dropped — dump v1 paints are opaque rrggbb hex"
     },
     {
       "code": "variable-unresolved",

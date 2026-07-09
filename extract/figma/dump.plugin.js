@@ -15,8 +15,9 @@
 //                      (slash-form, e.g. paddingLeft: "space/inset-x/sm")
 //   cornerRadius       literal uniform radius (bound radii appear in `bound`)
 //   fill / stroke      first visible solid paint: { var: name } when bound,
-//                      { hex: "rrggbb" } when raw — raw paints are REPORTED by
-//                      propose.ts, never silently tokenized
+//                      { hex: "rrggbb" } when raw, plus { alpha } when the
+//                      paint's effective opacity < 1 (dump v1.1) — raw paints
+//                      are REPORTED by propose.ts, never silently tokenized
 //   strokeWeight       literal stroke weight (bound weights appear in `bound`)
 //   fillWidth          layoutSizingHorizontal === 'FILL' — canvas projection of
 //                      grow (row parents) / align:stretch (column parents)
@@ -49,17 +50,21 @@ const varNameById = async (id) => {
   return v ? v.name : null;
 };
 
-// First visible solid paint → { var } | { hex } | null.
+// First visible solid paint → { var } | { hex } | null, with the paint's
+// effective opacity as `alpha` when < 1 (dump v1.1 — 5%-black fills are a
+// real kit idiom; without alpha they mint opaque black).
 const dumpPaint = async (paints) => {
   if (!Array.isArray(paints)) return null; // figma.mixed
   const p = paints.find((x) => x.visible !== false && x.type === 'SOLID');
   if (!p) return null;
+  const alpha = typeof p.opacity === 'number' ? p.opacity : 1;
+  const withAlpha = (paint) => (alpha < 1 ? Object.assign(paint, { alpha }) : paint);
   const alias = p.boundVariables && p.boundVariables.color;
   if (alias) {
     const name = await varNameById(alias.id);
-    if (name) return { var: name };
+    if (name) return withAlpha({ var: name });
   }
-  return { hex: rgbToHex(p.color) };
+  return withAlpha({ hex: rgbToHex(p.color) });
 };
 
 async function dumpNode(node) {
@@ -101,6 +106,9 @@ async function dumpNode(node) {
   if ('layoutSizingHorizontal' in node && node.layoutSizingHorizontal === 'FILL') {
     out.fillWidth = true;
   }
+  // dump v1.1: hidden nodes are captured, not skipped — visibility-bound
+  // parts recover their boolean default from this (REST mapper parity).
+  if (node.visible === false) out.hidden = true;
 
   if (node.type === 'TEXT') {
     const text = {

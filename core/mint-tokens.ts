@@ -40,9 +40,11 @@
  *              NOT correlate with an axis or axis pair mints nothing: the
  *              binding stays null with a named reason.
  *
- *   UNITS      colors are '#rrggbb' ($type color); numbers from px-like
- *              canvas fields (padding / radius / spacing / size / fontSize)
- *              are '<n>px' ($type dimension).
+ *   UNITS      colors are '#rrggbb' — or 8-digit '#rrggbbaa' when the paint
+ *              carried alpha (dump v1.1; a legal DTCG color $value AND a CSS
+ *              color, see core/propose-figma.ts paintCssHex) — ($type color);
+ *              numbers from px-like canvas fields (padding / radius /
+ *              spacing / size / fontSize) are '<n>px' ($type dimension).
  *
  * Pure module (no node:* imports) — part of the browser-importable core.
  */
