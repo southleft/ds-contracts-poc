@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState, type CSSProperties } from 'react';
-import { emitters, type Contract, type EmittedFile } from '../../../core/index.js';
+import { emitters, type Contract, type EmittedFile, type SourceFileInput } from '../../../core/index.js';
 import { useRoute } from '../router';
 import { useTheme } from '../theme';
 import { contractsById, icons, rawContractById } from '../engine/data';
@@ -12,7 +12,15 @@ import {
   type FigmaImportResult,
   type FigmaProposal,
 } from '../engine/figma-import';
-import { importFromGithubUrl } from '../engine/github-import';
+import {
+  fetchRepoFile,
+  fetchRepoTree,
+  MAX_TRACE_FILES,
+  traceFromGithubUrl,
+  type GithubTrace,
+} from '../engine/github-import';
+import { assistFetchPlan, assistRepoProfile } from '../engine/assist';
+import type { ProposeCodeResult } from '../engine/code-import';
 import {
   ANTHROPIC_MODEL,
   ANTHROPIC_MODELS,
@@ -30,11 +38,14 @@ import {
   sharePayloadFromLocation,
 } from '../engine/permalink';
 import {
+  activeMintedTokens,
   applyUserTokens,
   resetToRepoTokens,
+  setMintedTokens,
   STARTER_USER_TOKENS,
   storedUserTokensText,
   useTokenSource,
+  type MintedTokenLayer,
 } from '../engine/token-source';
 import { locateJsonParseError, resolveIssueLines } from '../engine/refusal-lines';
 import { validateContractText } from '../engine/validate';
@@ -47,10 +58,12 @@ import {
   type WorkspaceEntry,
   type WorkspaceSource,
 } from '../engine/workspace';
+import { reportIfChunkError } from '../engine/chunk-guard';
 import { buildPreviewAtState, type PreviewPropOverrides } from '../engine/preview';
 import type { ReceiptGroup, Receipts } from '../receipts';
 import { ContractEditor, type ContractEditorHandle } from '../components/ContractEditor';
 import { CopyButton } from '../components/CopyButton';
+import { MintAssist } from '../components/MintAssist';
 import { HighlightedCode } from '../components/HighlightedCode';
 import { usePaneResize } from '../components/PaneResize';
 import { PreviewControls, sanitizeOverrides } from '../components/PreviewControls';
@@ -144,11 +157,27 @@ function importReportGroups(report: FigmaImportResult['report']): ReceiptGroup[]
 
 function proposalGroups(proposal: FigmaProposal): ReceiptGroup[] {
   const groups: ReceiptGroup[] = [];
-  if (proposal.notes.length > 0) {
+  // The engine's MINTED lines move into their own group (verbatim) — the
+  // provisional-token story reads as one block, not scattered notes.
+  const notes = proposal.notes.filter((n) => !n.startsWith('MINTED '));
+  if (notes.length > 0) {
     groups.push({
       title: `Proposal notes — ${proposal.setName}`,
       kind: 'note',
-      entries: proposal.notes.map((message) => ({ message })),
+      entries: notes.map((message) => ({ message })),
+    });
+  }
+  const minted = proposal.mintedTokens;
+  if (minted && minted.count > 0) {
+    // The panel appends the entry count — this renders as
+    // "Minted provisional tokens (N)". Each line carries the engine's own
+    // rename guidance, verbatim from the MINTED note wording.
+    groups.push({
+      title: 'Minted provisional tokens',
+      kind: 'minted',
+      entries: minted.entries.map((e) => ({
+        message: `${e.ref} = ${e.value} — machine-named from a resolved value — rename against your real tokens (provisional); bound at: ${e.usageSites.join(', ')}`,
+      })),
     });
   }
   if (proposal.unbound.length > 0) {
@@ -271,6 +300,9 @@ export function Playground() {
 
   // -------------------------------------------------------------- receipts
   const [receipts, setReceipts] = useState<Receipts | null>(null);
+  // The live minted layer (tokenSource re-renders this component whenever it
+  // changes) — drives the assist rename block under the minted receipts group.
+  const mintedLayer = activeMintedTokens();
 
   // -------------------------------------------------------- resizable panes
   const pgRef = useRef<HTMLDivElement>(null);
@@ -317,6 +349,8 @@ export function Playground() {
     setProvenance(origin);
     setPristine({ text: entry.contractText, provenance: origin });
     setReceipts(entry.receipts);
+    // The entry's minted provisional layer comes back with it (or clears).
+    setMintedTokens(entry.mintedTokens ?? null);
     setActiveExample(null);
     setWsLoaded(entry);
   };
@@ -326,6 +360,7 @@ export function Playground() {
     if (!raw) return;
     setText(pretty(raw));
     setReceipts(null);
+    setMintedTokens(null);
     setProvenance(source);
     setPristine({ text: pretty(raw), provenance: source });
     setActiveExample(slug ?? contractId);
@@ -339,60 +374,75 @@ export function Playground() {
   const [codeCss, setCodeCss] = useState('');
   const [codeBusy, setCodeBusy] = useState<string | null>(null);
   const [codeError, setCodeError] = useState<string | null>(null);
+  // The last GitHub trace — files, receipts, and NAMED gaps. Gaps are the
+  // input for the assist fetch-plan rung (deterministic first, AI next).
+  const [codeTrace, setCodeTrace] = useState<GithubTrace | null>(null);
+  const [codeGaps, setCodeGaps] = useState<string[]>([]);
 
-  const runCodePropose = async (
-    tsx: string,
-    css: string,
+  /** Shared landing for every code proposal (paste, trace, assist re-run):
+   *  receipts assembled, workspace recorded, editor loaded. Returns the
+   *  skipped-component reasons (they join the trace gaps for assist). */
+  const applyCodeResult = (
+    result: ProposeCodeResult,
     origin: string,
-    opts: { sourcePath?: string; preGroups?: ReceiptGroup[] } = {},
-  ) => {
+    preGroups: ReceiptGroup[],
+  ): string[] => {
+    const groups: ReceiptGroup[] = [...preGroups];
+    for (const { name, proposal } of result.proposals) {
+      if (proposal.notes.length > 0) {
+        groups.push({
+          title: `Proposal notes — ${name}`,
+          kind: 'note',
+          entries: proposal.notes.map((message) => ({ message })),
+        });
+      }
+    }
+    if (result.skipped.length > 0) {
+      groups.push({
+        title: 'Skipped components (visible but not readable)',
+        kind: 'skipped',
+        entries: result.skipped.map((s) => ({ label: `${s.name} (${s.source})`, message: s.reason })),
+      });
+    }
+    const codeReceipts: Receipts = { source: origin, groups };
+    const first = result.proposals[0];
+    if (first) {
+      const contractText = pretty(first.proposal.contract);
+      // A successful code import lands in the session workspace.
+      const recorded = recordImport({
+        name: first.name,
+        contractId: contractIdOf(first.proposal.contract),
+        source: 'code',
+        contractText,
+        receipts: codeReceipts,
+      });
+      setReceipts(recorded.receipts);
+      setMintedTokens(null);
+      setText(contractText);
+      setProvenance(`proposed from code — ${first.name}`);
+      setPristine({ text: contractText, provenance: `proposed from code — ${first.name}` });
+      setWsLoaded(null);
+    } else {
+      setReceipts(codeReceipts);
+      if (result.skipped.length === 0) setCodeError('No component found in the source.');
+    }
+    setActiveExample(null);
+    return result.skipped.map((s) => `component ${s.name} skipped: ${s.reason}`);
+  };
+
+  const runCodePropose = async (tsx: string, css: string, origin: string) => {
     setCodeBusy('Loading the TypeScript compiler (lazy chunk, ~5 MB — first run only)…');
     setCodeError(null);
+    setCodeTrace(null);
+    setCodeGaps([]);
     try {
       const { proposeFromCodeText } = await import('../engine/code-import');
       setCodeBusy('Proposing…');
-      const result = proposeFromCodeText(tsx, css, opts.sourcePath ?? 'playground/Pasted.tsx');
-      const groups: ReceiptGroup[] = [...(opts.preGroups ?? [])];
-      for (const { name, proposal } of result.proposals) {
-        if (proposal.notes.length > 0) {
-          groups.push({
-            title: `Proposal notes — ${name}`,
-            kind: 'note',
-            entries: proposal.notes.map((message) => ({ message })),
-          });
-        }
-      }
-      if (result.skipped.length > 0) {
-        groups.push({
-          title: 'Skipped components (visible but not readable)',
-          kind: 'skipped',
-          entries: result.skipped.map((s) => ({ label: `${s.name} (${s.source})`, message: s.reason })),
-        });
-      }
-      const codeReceipts: Receipts = { source: origin, groups };
-      const first = result.proposals[0];
-      if (first) {
-        const contractText = pretty(first.proposal.contract);
-        // A successful code import lands in the session workspace.
-        const recorded = recordImport({
-          name: first.name,
-          contractId: contractIdOf(first.proposal.contract),
-          source: 'code',
-          contractText,
-          receipts: codeReceipts,
-        });
-        setReceipts(recorded.receipts);
-        setText(contractText);
-        setProvenance(`proposed from code — ${first.name}`);
-        setPristine({ text: contractText, provenance: `proposed from code — ${first.name}` });
-        setWsLoaded(null);
-      } else {
-        setReceipts(codeReceipts);
-        if (result.skipped.length === 0) setCodeError('No component found in the pasted source.');
-      }
-      setActiveExample(null);
+      applyCodeResult(proposeFromCodeText(tsx, css, 'playground/Pasted.tsx'), origin, []);
     } catch (e) {
-      setCodeError(e instanceof Error ? e.message : String(e));
+      // A chunk-load failure is the redeploy condition — the banner is the
+      // message; anything else stays a named inline error.
+      if (!reportIfChunkError(e)) setCodeError(e instanceof Error ? e.message : String(e));
     } finally {
       setCodeBusy(null);
     }
@@ -407,26 +457,151 @@ export function Playground() {
     if (autoRun) void runCodePropose(example.tsx, example.css, `code proposal — ${example.sourcePath}`);
   };
 
+  /** The trace's receipts, rebuilt fresh for every (re-)proposal. */
+  const traceGroups = (trace: GithubTrace, extra: ReceiptGroup[] = []): ReceiptGroup[] => [
+    {
+      title: 'GitHub import — trace',
+      kind: 'note',
+      entries: trace.notes.map((message) => ({ message })),
+    },
+    ...(trace.gaps.length > 0
+      ? [
+          {
+            title: 'Trace gaps (what import-following could not close)',
+            kind: 'degradation' as const,
+            entries: trace.gaps.map((message) => ({ message })),
+          },
+        ]
+      : []),
+    ...extra,
+  ];
+
   const runGithubImport = async () => {
-    setCodeBusy('Fetching from GitHub (browser-direct, unauthenticated)…');
+    setCodeBusy('Tracing from GitHub (browser-direct, unauthenticated)…');
+    setCodeError(null);
+    setCodeTrace(null);
+    setCodeGaps([]);
+    try {
+      const trace = await traceFromGithubUrl(codeUrl);
+      setCodeTsx(trace.files[0].source);
+      setCodeCss(trace.files[0].css ?? '');
+      setCodeBusy('Loading the TypeScript compiler (lazy chunk, ~5 MB — first run only)…');
+      const { proposeFromCodeFiles } = await import('../engine/code-import');
+      setCodeBusy(`Proposing over ${trace.files.length} traced file${trace.files.length === 1 ? '' : 's'}…`);
+      const skippedGaps = applyCodeResult(
+        proposeFromCodeFiles(trace.files),
+        `code proposal — ${trace.sourcePath} (+ ${trace.files.length - 1} traced files)`,
+        traceGroups(trace),
+      );
+      setCodeTrace(trace);
+      setCodeGaps([...trace.gaps, ...skippedGaps]);
+    } catch (e) {
+      if (!reportIfChunkError(e)) setCodeError(e instanceof Error ? e.message : String(e));
+    } finally {
+      setCodeBusy(null);
+    }
+  };
+
+  /** The assist rung: repo profile (once per repo@ref per session) → fetch
+   *  plan over the full tree listing + the named gaps → receipted fetches →
+   *  re-propose. Deterministic tracing already ran; this only closes gaps. */
+  const runAssistFetchPlan = async () => {
+    const trace = codeTrace;
+    if (!trace) return;
     setCodeError(null);
     try {
-      const imported = await importFromGithubUrl(codeUrl);
-      setCodeTsx(imported.tsx);
-      setCodeCss(imported.css);
-      setActiveExample(null);
-      await runCodePropose(imported.tsx, imported.css, `code proposal — ${imported.sourcePath}`, {
-        sourcePath: imported.sourcePath,
-        preGroups: [
-          {
-            title: 'GitHub import',
-            kind: 'note',
-            entries: imported.notes.map((message) => ({ message })),
-          },
-        ],
+      setCodeBusy('Listing the repo tree (git trees API)…');
+      const { listing, truncated } = await fetchRepoTree(trace.parsed, trace.entryPath);
+      const repoUrl = `https://github.com/${trace.parsed.owner}/${trace.parsed.repo}`;
+
+      setCodeBusy('Profiling the repo (assist — cached per repo@ref)…');
+      const samples: Array<{ path: string; content: string }> = [];
+      try {
+        samples.push({ path: 'package.json', content: await fetchRepoFile(trace.parsed, 'package.json') });
+      } catch {
+        /* a repo without a root package.json still profiles from the entry */
+      }
+      samples.push({ path: trace.entryPath, content: trace.files[0].source.slice(0, 40_000) });
+      const profileResult = await assistRepoProfile({
+        repoUrl,
+        ref: trace.parsed.ref,
+        tree: listing,
+        samples,
       });
+      if (!profileResult.ok) {
+        setCodeError(profileResult.message);
+        return;
+      }
+
+      setCodeBusy('Planning fetches (assist)…');
+      const plan = await assistFetchPlan({
+        entryUrl: codeUrl,
+        listing,
+        alreadyFetched: trace.alreadyFetched,
+        gaps: codeGaps,
+        profile: profileResult.data.profile,
+      });
+      if (!plan.ok) {
+        setCodeError(plan.message);
+        return;
+      }
+
+      const aiEntries: ReceiptGroup['entries'] = [
+        {
+          message: `assist plan: styleSystem = ${plan.data.styleSystem}; repo profile ${
+            profileResult.data.cached ? 'cache hit' : 'fresh'
+          }${truncated ? '; tree listing truncated at 2000 entries' : ''}`,
+        },
+        ...plan.data.notes.map((n) => ({ message: `assist note: ${n}` })),
+      ];
+      const files: SourceFileInput[] = trace.files.map((f) => ({ ...f }));
+      const alreadyFetched = [...trace.alreadyFetched];
+      setCodeBusy(`Fetching the ${plan.data.fetch.length} assist-proposed file${plan.data.fetch.length === 1 ? '' : 's'}…`);
+      for (const f of plan.data.fetch) {
+        if (alreadyFetched.includes(f.path)) {
+          aiEntries.push({ message: `ai-proposed fetch: ${f.path} — ${f.reason} (already fetched, skipped)` });
+          continue;
+        }
+        try {
+          const text = await fetchRepoFile(trace.parsed, f.path);
+          alreadyFetched.push(f.path);
+          aiEntries.push({ message: `ai-proposed fetch: ${f.path} — ${f.reason}` });
+          if (/\.(css|scss)$/.test(f.path)) {
+            // Style sources attach to the ENTRY file — the component the
+            // import is about; the proposer reads css per source file.
+            const entry = files[0];
+            const block = `/* --- ${f.path} (ai-proposed fetch) --- */\n${text}`;
+            entry.css = entry.css ? `${entry.css}\n\n${block}` : block;
+          } else if (/\.(tsx|ts|jsx|js)$/.test(f.path)) {
+            files.push({ sourcePath: `${trace.parsed.owner}/${trace.parsed.repo}/${f.path}`, source: text });
+          } else {
+            aiEntries.push({
+              message: `${f.path} fetched but not a TSX/CSS source — the proposer reads component code and stylesheets only; inspect it manually`,
+            });
+          }
+        } catch (e) {
+          aiEntries.push({
+            message: `ai-proposed fetch: ${f.path} — ${f.reason} — FAILED: ${e instanceof Error ? e.message : String(e)}`,
+          });
+        }
+      }
+
+      setCodeBusy(`Re-proposing over ${files.length} files…`);
+      const { proposeFromCodeFiles } = await import('../engine/code-import');
+      const skippedGaps = applyCodeResult(
+        proposeFromCodeFiles(files),
+        `code proposal — ${trace.sourcePath} (+ ${files.length - 1} files, assist-planned)`,
+        traceGroups(trace, [
+          { title: 'Assist fetch plan (ai-proposed)', kind: 'note', entries: aiEntries },
+        ]),
+      );
+      setCodeTrace({ ...trace, files, alreadyFetched });
+      setCodeGaps([...trace.gaps, ...skippedGaps]);
+      setCodeTsx(files[0].source);
+      setCodeCss(files[0].css ?? '');
     } catch (e) {
-      setCodeError(e instanceof Error ? e.message : String(e));
+      if (!reportIfChunkError(e)) setCodeError(e instanceof Error ? e.message : String(e));
+    } finally {
       setCodeBusy(null);
     }
   };
@@ -443,6 +618,11 @@ export function Playground() {
   const applyProposal = (proposal: FigmaProposal, origin: string, wsSource: WorkspaceSource) => {
     const contractText = pretty(proposal.contract);
     const provenanceLine = `proposed from ${origin} — ${proposal.setName}`;
+    const minted: MintedTokenLayer | null =
+      proposal.mintedTokens && proposal.mintedTokens.count > 0 ? proposal.mintedTokens : null;
+    // Register the minted provisional layer BEFORE the text lands, so the
+    // editor's very first validation pass already resolves imported.* refs.
+    setMintedTokens(minted);
     // A successful design import lands in the session workspace, receipts
     // and all — re-applying the same set refreshes its entry.
     const recorded = recordImport({
@@ -451,6 +631,7 @@ export function Playground() {
       source: wsSource,
       contractText,
       receipts: { source: origin, groups: [...importGroupsRef.current, ...proposalGroups(proposal)] },
+      ...(minted ? { mintedTokens: minted } : {}),
     });
     setText(contractText);
     setProvenance(provenanceLine);
@@ -550,6 +731,7 @@ export function Playground() {
     });
     setText(contractText);
     setReceipts(recorded.receipts);
+    setMintedTokens(null);
     setProvenance('pasted contract JSON');
     setPristine({ text: contractText, provenance: 'pasted contract JSON' });
     setActiveExample(null);
@@ -576,6 +758,7 @@ export function Playground() {
     setDescRounds(result.session.rounds);
     const contractText = pretty(result.contract);
     setText(contractText);
+    setMintedTokens(null);
     setProvenance(origin);
     setPristine({ text: contractText, provenance: origin });
     setActiveExample(null);
@@ -663,7 +846,7 @@ export function Playground() {
         demo ? 'prompt generation (demo fixture)' : `prompt generation — ${descModel}`,
       );
     } catch (e) {
-      setDescError(e instanceof Error ? e.message : String(e));
+      if (!reportIfChunkError(e)) setDescError(e instanceof Error ? e.message : String(e));
     } finally {
       setDescBusy(null);
     }
@@ -755,6 +938,7 @@ export function Playground() {
         const state = await decodeShareState(payload);
         if (cancelled) return;
         setText(state.contract);
+        setMintedTokens(null);
         setProvenance('loaded from share link');
         setPristine({ text: state.contract, provenance: 'loaded from share link' });
         setActiveExample(null);
@@ -881,7 +1065,7 @@ export function Playground() {
     if (!format || !emitted?.files) return;
     let cancelled = false;
     setFormatting(true);
-    (async () => {
+    void (async () => {
       const { formatTsx, formatCss } = await import('../engine/format-lazy');
       const files = await Promise.all(
         emitted.files!.map(async (f) => {
@@ -895,16 +1079,44 @@ export function Playground() {
         }),
       );
       if (!cancelled) setFormattedFiles(files);
-    })().finally(() => {
-      if (!cancelled) setFormatting(false);
-    });
+    })()
+      .catch((e) => {
+        // The prettier chunk failing to load is the redeploy condition —
+        // the banner handles it; output simply stays unformatted.
+        reportIfChunkError(e);
+      })
+      .finally(() => {
+        if (!cancelled) setFormatting(false);
+      });
     return () => {
       cancelled = true;
     };
   }, [format, emitted]);
 
   const previewTarget = validation.status === 'valid' ? validation : null;
-  const stale = !previewTarget && lastGood.current;
+
+  // Hold-last-render is only honest while the text on screen is still the
+  // SAME contract: a different id means the previous component's render would
+  // masquerade as this one's. The id comes from the parse when there is one,
+  // else a cheap scan of the text (a mid-edit JSON error still names itself).
+  const currentContractId =
+    validation.status === 'valid' || validation.status === 'violations'
+      ? validation.contract.id
+      : validation.status === 'empty'
+        ? null
+        : (debouncedText.match(/"id"\s*:\s*"([^"]+)"/)?.[1] ?? null);
+  const sameContractAsLastGood =
+    currentContractId !== null && currentContractId === (lastGood.current?.contract.id ?? null);
+  const holdLastRender = !previewTarget && sameContractAsLastGood ? lastGood.current : null;
+  const stale = !previewTarget && holdLastRender;
+  // Neutral empty state: an invalid contract that is NOT the one last
+  // rendered — show nothing rather than someone else's pills.
+  const neutralPreview = !previewTarget && !holdLastRender && validation.status !== 'empty';
+  // The demo generation deliberately refuses round 1 — say so on the banner.
+  const demoRefusalSuffix =
+    provenance.startsWith('prompt generation (demo fixture)') && descRefusals && descRefusals.length > 0
+      ? ' (deliberate demo refusal — trigger the fix round)'
+      : '';
 
   // ------------------------------------------ interactive preview controls
   // Single (controls + one instance at the chosen props) is the default;
@@ -916,7 +1128,7 @@ export function Playground() {
   const lastChangedProp = useRef<string | null>(null);
   const prevInstance = useRef<{ stateKey: string; sig: string | null } | null>(null);
 
-  const previewData = previewTarget ?? lastGood.current;
+  const previewData = previewTarget ?? holdLastRender;
   const previewContractId = previewData?.contract.id ?? null;
   // A different contract in the frame resets the chosen state.
   useEffect(() => {
@@ -1232,6 +1444,29 @@ export function Playground() {
 
         {sourceTab === 'figma' && (
           <div className="rail__section">
+            {/* The three-rung fidelity ladder (extract/figma/mcp/README.md) —
+                same dump, same proposer, same refusals; only how much of the
+                variable NAMES survives differs. The desktop rung is CLI-only:
+                the desktop app's MCP server has no CORS, browsers need not
+                apply — documented, not wired. */}
+            <div className="ladder" role="note" aria-label="Import fidelity ladder">
+              <div className="ladder__title">Three ways in, by name fidelity</div>
+              <ol className="ladder__list">
+                <li>
+                  <b>Plugin dump</b> — paste <code>extract/figma/dump.plugin.js</code> output in
+                  the JSON tab. Native variable names, zero ambiguity.
+                </li>
+                <li>
+                  <b>Desktop MCP</b> — <code>npm run extract:figma:mcp</code> in the repo: full
+                  names on any plan via the desktop app. CLI-only (the desktop server allows no
+                  browser origins).
+                </li>
+                <li>
+                  <b>URL + token, here</b> — resolved values; names the plan withholds are minted
+                  as provisional <code>imported.*</code> tokens, styled and renameable.
+                </li>
+              </ol>
+            </div>
             <div className="field">
               <label htmlFor="figma-url">figma.com component URL</label>
               <input
@@ -1329,7 +1564,7 @@ export function Playground() {
             {codeMode === 'url' && (
               <>
                 <div className="field">
-                  <label htmlFor="code-url">Public GitHub file URL</label>
+                  <label htmlFor="code-url">Public GitHub file or directory URL</label>
                   <input
                     id="code-url"
                     type="text"
@@ -1339,9 +1574,10 @@ export function Playground() {
                     spellCheck={false}
                   />
                   <p className="hint">
-                    blob, raw, or directory URLs — public repos only, fetched browser-direct with no
-                    token. The co-located *.module.css is auto-discovered (the component&rsquo;s own
-                    import, the same-name sibling, then the directory listing).
+                    blob, raw, or directory (tree) URLs — public repos only, fetched browser-direct
+                    with no token. The tracer follows the entry&rsquo;s relative imports (up to{' '}
+                    {MAX_TRACE_FILES} files: .tsx/.ts/.css/.scss), every fetch receipted; what it
+                    can&rsquo;t close is a named gap.
                   </p>
                 </div>
                 <button
@@ -1354,6 +1590,19 @@ export function Playground() {
                 </button>
                 {codeBusy ? <p className="hint">{codeBusy}</p> : null}
                 {codeError ? <div className="notice notice--error">{codeError}</div> : null}
+                {!codeBusy && codeTrace && codeGaps.length > 0 ? (
+                  <div className="notice">
+                    The deterministic trace left {codeGaps.length} named gap
+                    {codeGaps.length === 1 ? '' : 's'} (listed in the receipts). The next rung is
+                    AI: an assist plan proposes which repo files close them — every fetch labeled
+                    ai-proposed, then the same proposer re-runs.
+                    <div style={{ marginTop: 8 }}>
+                      <button type="button" disabled={!!codeBusy} onClick={() => void runAssistFetchPlan()}>
+                        Plan fetches with AI
+                      </button>
+                    </div>
+                  </div>
+                ) : null}
                 {!codeBusy && !codeError && codeTsx ? (
                   <p className="hint">
                     Fetched source is loaded into the Paste fields — switch modes to inspect or edit
@@ -1611,7 +1860,20 @@ export function Playground() {
               </>
             )}
           </div>
-          <ReceiptsPanel receipts={receipts} />
+          <ReceiptsPanel
+            receipts={receipts}
+            mintedExtras={
+              mintedLayer ? (
+                <MintAssist
+                  key={provenance}
+                  minted={mintedLayer}
+                  component={lastSpec.current?.contract.name ?? 'Component'}
+                  text={text}
+                  onApplyText={setText}
+                />
+              ) : undefined
+            }
+          />
         </div>
       </section>
 
@@ -1724,6 +1986,11 @@ export function Playground() {
                   />
                 )}
               </>
+            ) : neutralPreview ? (
+              <div className="pane__body hint preview__neutral">
+                No valid render yet{currentContractId ? ` for ${currentContractId}` : ''} — fix the
+                refusals to see it{demoRefusalSuffix}
+              </div>
             ) : (
               <div className="pane__body hint">Nothing to render yet.</div>
             )}

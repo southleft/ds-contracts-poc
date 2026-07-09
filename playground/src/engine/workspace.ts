@@ -13,6 +13,7 @@
  */
 import { useSyncExternalStore } from 'react';
 import type { ReceiptGroup, Receipts } from '../receipts.js';
+import type { MintedTokenLayer } from './token-source.js';
 
 export type WorkspaceSource = 'figma' | 'code' | 'prompt' | 'json';
 
@@ -27,6 +28,9 @@ export interface WorkspaceEntry {
   contractText: string;
   /** The receipts that came WITH the import (notes/unbound/degradations), restored on load. */
   receipts: Receipts | null;
+  /** Minted provisional token layer (degraded Figma imports) — re-registered
+   *  on load so the entry's contract renders styled again. */
+  mintedTokens?: MintedTokenLayer;
   /** Epoch ms. */
   importedAt: number;
 }
@@ -97,6 +101,7 @@ export interface RecordImportInput {
   source: WorkspaceSource;
   contractText: string;
   receipts: Receipts | null;
+  mintedTokens?: MintedTokenLayer;
 }
 
 export interface RecordImportResult {
@@ -115,6 +120,7 @@ export function recordImport(input: RecordImportInput): RecordImportResult {
     source: input.source,
     contractText: input.contractText,
     receipts: input.receipts,
+    ...(input.mintedTokens && input.mintedTokens.count > 0 ? { mintedTokens: input.mintedTokens } : {}),
     importedAt: Date.now(),
   };
   const notes: string[] = [];

@@ -17,7 +17,7 @@ export interface ReceiptEntry {
 
 export interface ReceiptGroup {
   title: string;
-  kind: 'degradation' | 'note' | 'unbound' | 'skipped';
+  kind: 'degradation' | 'note' | 'unbound' | 'skipped' | 'minted';
   entries: ReceiptEntry[];
 }
 

@@ -1,3 +1,4 @@
+import type { ReactNode } from 'react';
 import type { Receipts } from '../receipts';
 import { receiptCount } from '../receipts';
 
@@ -5,8 +6,17 @@ import { receiptCount } from '../receipts';
  * The receipts panel — degradations, notes, unbound values, and skips,
  * VERBATIM from the engine. Styled as first-class output, not warnings:
  * this is the record of everything the engine refused to invent.
+ *
+ * `mintedExtras` renders directly under the minted-provisional-tokens group
+ * (the assist rename flow lives there — next to the names it proposes for).
  */
-export function ReceiptsPanel({ receipts }: { receipts: Receipts | null }) {
+export function ReceiptsPanel({
+  receipts,
+  mintedExtras,
+}: {
+  receipts: Receipts | null;
+  mintedExtras?: ReactNode;
+}) {
   return (
     <section className="receipts" aria-label="Receipts">
       <div className="receipts__head">
@@ -48,6 +58,7 @@ export function ReceiptsPanel({ receipts }: { receipts: Receipts | null }) {
                 ) : null}
               </div>
             ))}
+            {group.kind === 'minted' ? mintedExtras : null}
           </div>
         ))
       )}

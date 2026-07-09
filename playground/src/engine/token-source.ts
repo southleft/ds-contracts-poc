@@ -21,8 +21,11 @@
  */
 import { useSyncExternalStore } from 'react';
 import {
+  flattenTokens,
+  mintedTokenCss,
   tokenCorpusFromJson,
   tokenInventoryFromJson,
+  type MintedEntry,
   type TokenCorpus,
   type TokenTreeInput,
 } from '../../../core/index.js';
@@ -131,16 +134,119 @@ export function buildUserTokenSource(text: string): ApplyTokensResult {
 }
 
 // ---------------------------------------------------------------------------
+// Minted provisional tokens — an ADDITIONAL layer over the base source.
+//
+// A degraded Figma import (variables endpoint 403) mints `imported.*` leaves
+// (core/mint-tokens.ts) and the proposal binds to them. Registering that tree
+// here rebinds EVERY consumer — validation inventory, preview stylesheet,
+// emitter trees, the code-import token index — so the degraded import renders
+// styled at literal fidelity instead of naked. The layer is per-loaded-
+// contract: loading anything else clears or replaces it (Playground calls
+// setMintedTokens on every load path), and a workspace entry restores its own.
+// ---------------------------------------------------------------------------
+
+export interface MintedTokenLayer {
+  tree: Record<string, unknown>;
+  count: number;
+  entries: MintedEntry[];
+}
+
+/** Compose base + minted into the TokenSource every consumer reads. The
+ *  minted tree deep-merges into the semantic slot (its root is `imported` —
+ *  no semantic group ever collides by the MINT_NAMESPACE invariant). */
+function composeSource(base: TokenSource, minted: MintedTokenLayer | null): TokenSource {
+  if (!minted || minted.count === 0) return base;
+  const semantic = mergeTrees([base.tree.semantic as Record<string, unknown>, minted.tree]);
+  return {
+    ...base,
+    label: `${base.label} + ${minted.count} minted provisional token${minted.count === 1 ? '' : 's'} (imported.*)`,
+    tree: { ...base.tree, semantic },
+    inventory: new Set([...base.inventory, ...tokenInventoryFromJson([minted.tree])]),
+    treesForCode: [...base.treesForCode, minted.tree],
+    stylesheets: {
+      ...base.stylesheets,
+      base: `${base.stylesheets.base}\n/* Minted provisional tokens (imported.*) — literal fidelity, rename against your real tokens. */\n${mintedTokenCss(minted.tree)}`,
+    },
+  };
+}
+
+// ---------------------------------------------------------------------------
 // The store — module-level, subscribable (useSyncExternalStore-friendly).
 // ---------------------------------------------------------------------------
 
 const STORAGE_KEY = 'ds-playground.user-tokens';
 
+let baseSource: TokenSource = repoTokenSource;
+let mintedLayer: MintedTokenLayer | null = null;
 let active: TokenSource = repoTokenSource;
 const listeners = new Set<() => void>();
+const recompose = () => {
+  active = composeSource(baseSource, mintedLayer);
+};
 const notify = () => listeners.forEach((fn) => fn());
 
 export const activeTokens = (): TokenSource => active;
+
+/** The base (repo or user-pasted) source, minted layer excluded — the path
+ *  list assist rename suggestions should follow. */
+export const baseTokens = (): TokenSource => baseSource;
+
+/** The registered minted layer, if any. */
+export const activeMintedTokens = (): MintedTokenLayer | null => mintedLayer;
+
+/** Register (or clear) the minted provisional layer. Playground calls this on
+ *  every load path so the layer always belongs to the contract on screen. */
+export function setMintedTokens(layer: MintedTokenLayer | null): void {
+  const next = layer && layer.count > 0 ? layer : null;
+  if (next === mintedLayer) return;
+  mintedLayer = next;
+  recompose();
+  notify();
+}
+
+/**
+ * Move one minted leaf to a semantic path (the per-row Apply of an assist
+ * rename). The value travels: the leaf leaves the minted tree and — unless
+ * the base source already defines `toPath` (deduplication) — lands in the
+ * layer's tree at the new path, so the composed inventory/stylesheet resolve
+ * the renamed ref immediately. Returns a NAMED error instead of guessing.
+ */
+export function applyMintedRename(
+  fromPath: string,
+  toPath: string,
+): { ok: true; deduped: boolean } | { ok: false; error: string } {
+  if (!mintedLayer) return { ok: false, error: 'no minted token layer is active' };
+  const flat = flattenTokens(mintedLayer.tree);
+  const entry = flat.get(fromPath);
+  if (!entry) return { ok: false, error: `"${fromPath}" is not a minted leaf in the active layer` };
+  if (!/^[a-zA-Z0-9][a-zA-Z0-9.-]*$/.test(toPath) || toPath.endsWith('.')) {
+    return { ok: false, error: `"${toPath}" is not a valid dot-separated token path` };
+  }
+  flat.delete(fromPath);
+  const deduped = baseSource.inventory.has(toPath);
+  if (!deduped) {
+    if (flat.has(toPath)) return { ok: false, error: `"${toPath}" already exists in the minted layer with a different origin` };
+    flat.set(toPath, entry);
+  }
+  // Rebuild the layer's tree from the flat map.
+  const tree: Record<string, unknown> = {};
+  for (const [path, e] of flat) {
+    const segs = path.split('.');
+    let node = tree;
+    for (const seg of segs.slice(0, -1)) node = (node[seg] ??= {}) as Record<string, unknown>;
+    node[segs[segs.length - 1]] = { $value: e.value, $type: e.type };
+  }
+  mintedLayer = {
+    tree,
+    count: flat.size,
+    entries: mintedLayer.entries.map((e) =>
+      e.ref === `{${fromPath}}` ? { ...e, ref: `{${toPath}}` } : e,
+    ),
+  };
+  recompose();
+  notify();
+  return { ok: true, deduped };
+}
 
 export function subscribeTokens(fn: () => void): () => void {
   listeners.add(fn);
@@ -155,7 +261,8 @@ export function useTokenSource(): TokenSource {
 export function applyUserTokens(text: string): ApplyTokensResult {
   const result = buildUserTokenSource(text);
   if (result.ok) {
-    active = result.source;
+    baseSource = result.source;
+    recompose();
     try {
       sessionStorage.setItem(STORAGE_KEY, text);
     } catch {
@@ -167,7 +274,8 @@ export function applyUserTokens(text: string): ApplyTokensResult {
 }
 
 export function resetToRepoTokens(): void {
-  active = repoTokenSource;
+  baseSource = repoTokenSource;
+  recompose();
   try {
     sessionStorage.removeItem(STORAGE_KEY);
   } catch {
@@ -226,5 +334,8 @@ export const STARTER_USER_TOKENS = `{
 const stored = storedUserTokensText();
 if (stored) {
   const result = buildUserTokenSource(stored);
-  if (result.ok) active = result.source;
+  if (result.ok) {
+    baseSource = result.source;
+    recompose();
+  }
 }
