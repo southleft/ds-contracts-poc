@@ -112,10 +112,50 @@ function runScript(code) {
   return new Function('return (async () => {\n' + code + '\n})()')();
 }
 
+// Put the node on screen: switch to its page, select it, zoom to it. The
+// paste round-trip ends HERE, not in a JSON report — the designer should be
+// looking at the thing the script built (or found).
+async function selectAndZoom(node) {
+  let page = node;
+  while (page && page.type !== 'PAGE') page = page.parent;
+  if (!page) return false;
+  await figma.setCurrentPageAsync(page);
+  page.selection = [node];
+  figma.viewport.scrollAndZoomIntoView([node]);
+  return true;
+}
+
+// The paste report's subject node, if the well-known shapes name one:
+// single-component scripts return { nodeId, ... } (or { skipped, nodeId }),
+// batch scripts return { results: [{ nodeId, ... }] }.
+function reportSubject(report) {
+  if (!report || typeof report !== 'object') return null;
+  if (report.nodeId) return { nodeId: String(report.nodeId), skipped: !!report.skipped, name: report.name };
+  if (Array.isArray(report.results) && report.results.length === 1 && report.results[0] && report.results[0].nodeId) {
+    const r = report.results[0];
+    return { nodeId: String(r.nodeId), skipped: !!r.skipped, name: r.name };
+  }
+  return null;
+}
+
 let busy = false; // one run at a time, across both modes
 
 figma.ui.onmessage = async (msg) => {
   if (!msg || !msg.type) return;
+  if (msg.type === 'select-node') {
+    // Canvas focus only — allowed anytime, never blocked by a run.
+    try {
+      const node = await figma.getNodeByIdAsync(String(msg.nodeId || ''));
+      if (!node || !(await selectAndZoom(node))) {
+        figma.notify('Node ' + String(msg.nodeId) + ' was not found in this file.', { error: true });
+        return;
+      }
+      figma.notify('Selected ' + node.name + '.');
+    } catch (e) {
+      figma.notify('Could not select the node: ' + String(e && e.message ? e.message : e), { error: true });
+    }
+    return;
+  }
   if (busy) {
     figma.notify('A run is already in progress.', { error: true });
     return;
@@ -124,7 +164,25 @@ figma.ui.onmessage = async (msg) => {
     busy = true;
     try {
       const result = await runScript(String(msg.code || ''));
-      post({ type: 'paste-result', ok: true, result: toPlain(result) });
+      const plain = toPlain(result);
+      // After the run, take the designer TO the result: created/amended →
+      // select + zoom it; skipped (already exists) → hand the UI enough to
+      // say so in plain words and offer a Select-it button.
+      let focus = null;
+      try {
+        const subject = reportSubject(plain);
+        if (subject) {
+          const node = await figma.getNodeByIdAsync(subject.nodeId);
+          if (node) {
+            if (subject.skipped) {
+              focus = { kind: 'skipped', nodeId: subject.nodeId, name: subject.name || node.name };
+            } else if (await selectAndZoom(node)) {
+              focus = { kind: 'selected', nodeId: subject.nodeId, name: subject.name || node.name };
+            }
+          }
+        }
+      } catch (e) { /* focus is a courtesy — the report below still stands */ }
+      post({ type: 'paste-result', ok: true, result: plain, focus: focus });
       figma.notify('Pasted script finished.');
     } catch (e) {
       post({

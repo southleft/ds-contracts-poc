@@ -20,9 +20,13 @@
 import { mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { ContractSchema, type Contract } from '../scripts/contract-schema.js';
+import { importFromUrl } from '../extract/figma/rest/fetch.js';
+import { emitFigmaScript } from './emit-figma-script.js';
 import { emitHtml } from './emit-html.js';
 import { emitReactInline } from './emit-react-inline.js';
 import { emitters, type EmitterCtx } from './emitter.js';
+import { proposeFromDump } from './propose-figma.js';
+import { tokenCorpusFromJson } from './token-corpus.js';
 import { tokenInventoryFromJson } from './tokens.js';
 import { kebab } from '../extract/types.js';
 
@@ -122,6 +126,90 @@ for (const e of emitters) {
   const files = e.emit(badge, ctx);
   check(`registry: ${e.name} emits ${files.length} file(s) for Badge, all non-empty`,
     files.length > 0 && files.every((f) => f.contents.length > 0));
+}
+
+// ---- figma-script minted-variable preamble (the designer validation loop) --
+// The degraded Badge demo import (committed REST fixture, variables endpoint
+// answered with the non-Enterprise 403 — the exact path the playground's
+// "Demo import (degraded)" runs) mints provisional imported.* tokens the
+// proposal binds. The emitted Figma script must carry the preamble that
+// upserts those tokens as variables in an 'Imported (provisional)'
+// collection — otherwise pasting the script back into the ORIGIN file (which
+// never synced them) throws 'Missing variable'. Repo contracts mint nothing
+// and must emit WITHOUT the preamble: the golden guard's byte-invariant.
+console.log('\nFigma script — minted-variable preamble (degraded Badge demo import)');
+{
+  const badgeRest = read('extract/figma/rest/fixtures/badge.rest.json');
+  const respond = (status: number, body: unknown) =>
+    Promise.resolve({
+      ok: status >= 200 && status < 300,
+      status,
+      json: () => Promise.resolve(body),
+      text: () => Promise.resolve(JSON.stringify(body)),
+    });
+  const fetchImpl = (url: string) => {
+    if (url.includes('/variables/local'))
+      return respond(403, { status: 403, err: 'Incompatible plan for this endpoint' });
+    if (url.includes('/nodes?ids=')) return respond(200, badgeRest);
+    return respond(404, { err: 'not served by the fixture' });
+  };
+  const { dump } = await importFromUrl(
+    'https://www.figma.com/design/8nim1d0IPnehMxA7B7SYxC/DS-Contracts-POC?node-id=101-1',
+    'demo-fixture-token',
+    { fetchImpl },
+  );
+  const set = Object.entries(dump).find(
+    ([name, value]) => name !== '_provenance' && value && typeof value === 'object' && 'variants' in value,
+  );
+  check('degraded import: fixture yields a component set', !!set);
+  const proposal = proposeFromDump(set![1] as Parameters<typeof proposeFromDump>[0], {
+    corpus: tokenCorpusFromJson({
+      primitives: ctx.tokens.primitives as Record<string, unknown>,
+      semantic: ctx.tokens.semantic as Record<string, unknown>,
+      light: ctx.tokens.light as Record<string, unknown>,
+      brandDefault: brands.default as Record<string, unknown>,
+    }),
+    contractIdByName: new Map([...contracts.values()].map((c) => [c.name, c.id])),
+    fileKey: '8nim1d0IPnehMxA7B7SYxC',
+    mintUnbound: true,
+  });
+  const minted = proposal.mintedTokens;
+  check('degraded import: mints provisional imported.* tokens', !!minted && minted.count > 0);
+  const contract = ContractSchema.parse(proposal.contract);
+  const scriptCtx = {
+    // Mirror the playground's composed token source: the minted tree rides
+    // the semantic slot (its root is `imported` — no collision by invariant).
+    tokens: { ...ctx.tokens, semantic: { ...(ctx.tokens.semantic as Record<string, unknown>), ...minted!.tree } },
+    icons,
+    contracts: new Map([[contract.id, contract]]),
+  };
+  const withMint = emitFigmaScript(contract, { ...scriptCtx, mintedTokens: minted!.tree });
+  check('minted script: carries the Imported (provisional) preamble',
+    withMint.includes("'Imported (provisional)'") && withMint.includes('MINTED_VARIABLES'));
+  const varsJson = withMint.match(/^const MINTED_VARIABLES = (\[.*\]);$/m);
+  const mintedVars: Array<{ name: string; type: string; value: unknown }> = varsJson
+    ? JSON.parse(varsJson[1])
+    : [];
+  check(`minted script: one variable per minted leaf (${minted!.count})`, mintedVars.length === minted!.count);
+  check('minted script: names are slash-form imported/* paths, typed COLOR/FLOAT',
+    mintedVars.length > 0 && mintedVars.every((v) =>
+      v.name.startsWith('imported/') && (v.type === 'COLOR' || v.type === 'FLOAT')));
+  check('minted script: parses in the plugin runner\'s exact execution shape', (() => {
+    try {
+      new Function('return (async () => {\n' + withMint + '\n})()');
+      return true;
+    } catch {
+      return false;
+    }
+  })());
+  const withoutMint = emitFigmaScript(contract, scriptCtx);
+  check('same contract, no minted layer: NO preamble', !withoutMint.includes('Imported (provisional)'));
+  const repoBadge = emitFigmaScript(contracts.get('ds.badge')!, {
+    tokens: ctx.tokens,
+    icons,
+    contracts,
+  });
+  check('repo Badge (mints nothing): NO preamble — golden byte-invariant', !repoBadge.includes('Imported (provisional)'));
 }
 
 console.log(`\nsamples → core/samples/`);

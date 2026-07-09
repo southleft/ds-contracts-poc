@@ -184,6 +184,31 @@
     box.appendChild(headline);
     if (msg.ok) {
       headline.textContent = 'Script finished — report:';
+      // Plain words about WHERE the component is now — the report JSON below
+      // is the receipt, this line is the story.
+      if (msg.focus && msg.focus.kind === 'skipped') {
+        var skipLine = document.createElement('div');
+        skipLine.style.marginBottom = '8px';
+        skipLine.textContent =
+          'Already exists in this file: ' + (msg.focus.name || 'this component') +
+          ' (node ' + msg.focus.nodeId + '). Run in a fresh file — tokens first — to watch it build.';
+        var selectBtn = document.createElement('button');
+        selectBtn.className = 'primary';
+        selectBtn.style.display = 'block';
+        selectBtn.style.marginTop = '6px';
+        selectBtn.textContent = 'Select it';
+        selectBtn.onclick = function () {
+          parent.postMessage({ pluginMessage: { type: 'select-node', nodeId: msg.focus.nodeId } }, '*');
+        };
+        skipLine.appendChild(selectBtn);
+        box.appendChild(skipLine);
+      } else if (msg.focus && msg.focus.kind === 'selected') {
+        var doneLine = document.createElement('div');
+        doneLine.style.marginBottom = '8px';
+        doneLine.textContent =
+          'Selected ' + (msg.focus.name || 'the result') + ' on the canvas and zoomed to it — it is what this contract builds.';
+        box.appendChild(doneLine);
+      }
       var chips = chipsFor(msg.result);
       if (chips.length) {
         var strip = document.createElement('div');

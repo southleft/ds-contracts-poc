@@ -40,7 +40,9 @@ export function HelpDrawer({ open, onClose }: { open: boolean; onClose: () => vo
               <code>imported.*</code> tokens — the preview stays styled, the receipts list every
               mint, and &lsquo;Suggest semantic names (AI)&rsquo; proposes renames you apply one
               by one, refereed. No token? Demo import runs the identical path over a committed
-              fixture.
+              fixture. To close the loop, copy the <b>Figma script</b> output and paste it back
+              into the source file (Sync Runner plugin): it builds the contract&rsquo;s version
+              beside your original for A/B — provisional variables included.
             </p>
             <p className="drawer__subnote">
               <b>Working locally?</b> Two more rungs, by variable-name fidelity: paste a plugin
