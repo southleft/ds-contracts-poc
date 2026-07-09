@@ -40,7 +40,7 @@ const json = (
 export async function handleRequest(
   request: Request,
   env: Env,
-  deps: Deps = { fetchImpl: fetch, now: () => new Date() },
+  deps: Deps = { fetchImpl: (...args: Parameters<typeof fetch>) => fetch(...args), now: () => new Date() },
 ): Promise<Response> {
   // CORS first: an origin we do not serve learns nothing else about us.
   const origin = resolveOrigin(request, env);

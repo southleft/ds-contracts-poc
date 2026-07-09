@@ -14,12 +14,12 @@ compatibility_date = "2026-06-01"
 kv_namespaces = [
   # Placeholder — replace with the id printed by:
   #   npx wrangler kv namespace create ASSIST_KV
-  { binding = "ASSIST_KV", id = "REPLACE_WITH_KV_NAMESPACE_ID" },
+  { binding = "ASSIST_KV", id = "25f6a5bff555477db14c8e14730e3577" },
 ]
 
 [vars]
 # Kill switch. The Worker answers 503 to everything until this is "true".
-ASSIST_ENABLED = "false"
+ASSIST_ENABLED = "true"
 
 # Per-IP daily request cap, per endpoint class (fetch-plan / name-tokens /
 # repo-profile each count separately). Cache hits do not count.
