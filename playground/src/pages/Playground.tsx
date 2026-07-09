@@ -1094,7 +1094,29 @@ export function Playground() {
   }, [format, emitted]);
 
   const previewTarget = validation.status === 'valid' ? validation : null;
-  const stale = !previewTarget && lastGood.current;
+
+  // Hold-last-render is only honest while the text on screen is still the
+  // SAME contract: a different id means the previous component's render would
+  // masquerade as this one's. The id comes from the parse when there is one,
+  // else a cheap scan of the text (a mid-edit JSON error still names itself).
+  const currentContractId =
+    validation.status === 'valid' || validation.status === 'violations'
+      ? validation.contract.id
+      : validation.status === 'empty'
+        ? null
+        : (debouncedText.match(/"id"\s*:\s*"([^"]+)"/)?.[1] ?? null);
+  const sameContractAsLastGood =
+    currentContractId !== null && currentContractId === (lastGood.current?.contract.id ?? null);
+  const holdLastRender = !previewTarget && sameContractAsLastGood ? lastGood.current : null;
+  const stale = !previewTarget && holdLastRender;
+  // Neutral empty state: an invalid contract that is NOT the one last
+  // rendered — show nothing rather than someone else's pills.
+  const neutralPreview = !previewTarget && !holdLastRender && validation.status !== 'empty';
+  // The demo generation deliberately refuses round 1 — say so on the banner.
+  const demoRefusalSuffix =
+    provenance.startsWith('prompt generation (demo fixture)') && descRefusals && descRefusals.length > 0
+      ? ' (deliberate demo refusal — trigger the fix round)'
+      : '';
 
   // ------------------------------------------ interactive preview controls
   // Single (controls + one instance at the chosen props) is the default;
@@ -1106,7 +1128,7 @@ export function Playground() {
   const lastChangedProp = useRef<string | null>(null);
   const prevInstance = useRef<{ stateKey: string; sig: string | null } | null>(null);
 
-  const previewData = previewTarget ?? lastGood.current;
+  const previewData = previewTarget ?? holdLastRender;
   const previewContractId = previewData?.contract.id ?? null;
   // A different contract in the frame resets the chosen state.
   useEffect(() => {
@@ -1941,6 +1963,11 @@ export function Playground() {
                   />
                 )}
               </>
+            ) : neutralPreview ? (
+              <div className="pane__body hint preview__neutral">
+                No valid render yet{currentContractId ? ` for ${currentContractId}` : ''} — fix the
+                refusals to see it{demoRefusalSuffix}
+              </div>
             ) : (
               <div className="pane__body hint">Nothing to render yet.</div>
             )}
