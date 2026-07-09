@@ -606,6 +606,8 @@ function applyTokens(
         // uses it) — but the mapping is general: opacity is bindable.
         spec.bindings = { ...spec.bindings, opacity: varName };
         break;
+      case 'box-shadow':
+        break; // no canvas projection in v1 — NAMED at proposal (dump v1.2 effects note)
       default:
         break; // outline-* etc. are state/CSS concerns
     }
@@ -1194,11 +1196,16 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
 function mintedPreamble(mintedTokens?: Record<string, unknown>): string {
   const minted = mintedTokens ? flatten(mintedTokens) : null;
   if (!minted || minted.size === 0) return '';
-  const vars = [...minted].map(([p, entry]) => ({
-    name: figmaName(p),
-    type: figmaType(entry),
-    value: figmaValue(entry),
-  }));
+  // Shadow-typed leaves (box-shadow values, dump v1.2) have no Figma
+  // variable projection — skipped here; the limit is NAMED at proposal.
+  const vars = [...minted]
+    .filter(([, entry]) => entry.type !== 'shadow')
+    .map(([p, entry]) => ({
+      name: figmaName(p),
+      type: figmaType(entry),
+      value: figmaValue(entry),
+    }));
+  if (vars.length === 0) return '';
   return `// ---------------------------------------------------------------------------
 // PROVISIONAL VARIABLES — minted from resolved values by a degraded import.
 // This contract binds ${vars.length} provisional token(s) whose real variable names were

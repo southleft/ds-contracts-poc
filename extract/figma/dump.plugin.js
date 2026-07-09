@@ -114,6 +114,24 @@ async function dumpNode(node) {
   if ('opacity' in node && typeof node.opacity === 'number' && node.opacity < 1) {
     out.opacity = Math.round(node.opacity * 10000) / 10000;
   }
+  // dump v1.2: VISIBLE effects. Shadows carry geometry + color; blur types
+  // carry the type — propose.ts NAMES what it cannot invert.
+  if ('effects' in node && Array.isArray(node.effects) && node.effects.length > 0) {
+    const effects = [];
+    for (const e of node.effects) {
+      if (e.visible === false) continue;
+      if (e.type === 'DROP_SHADOW' || e.type === 'INNER_SHADOW') {
+        const alpha = typeof e.color.a === 'number' ? e.color.a : 1;
+        const color = alpha < 1 ? { hex: rgbToHex(e.color), alpha: Math.round(alpha * 10000) / 10000 } : { hex: rgbToHex(e.color) };
+        const eff = { type: e.type, color, offset: { x: e.offset.x, y: e.offset.y }, radius: e.radius };
+        if (typeof e.spread === 'number' && e.spread !== 0) eff.spread = e.spread;
+        effects.push(eff);
+      } else {
+        effects.push(typeof e.radius === 'number' ? { type: e.type, radius: e.radius } : { type: e.type });
+      }
+    }
+    if (effects.length > 0) out.effects = effects;
+  }
 
   if (node.type === 'TEXT') {
     const text = {

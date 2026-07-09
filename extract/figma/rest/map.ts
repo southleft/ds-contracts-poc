@@ -31,6 +31,8 @@
  *   boundVariables.paddingLeft/itemSpacing/…        bound.<same name> (plugin spelling ≡ REST spelling here)
  *   layoutSizingHorizontal === 'FILL'               fillWidth: true
  *   visible === false                               hidden: true (dump v1.1 — visibility-bound parts recover boolean defaults from it)
+ *   opacity (omitted at 1)                          opacity (dump v1.2 — NODE opacity, distinct from paint alpha)
+ *   effects[] (visible)                             effects (dump v1.2 — shadows with geometry+color; blur types by name)
  *   characters + style{fontSize,fontWeight}         text.characters / .fontSize / .fontStyle
  *     (fontWeight → Inter style name via the generator's FONT_STYLE_BY_WEIGHT)
  *   node.styles.text → styles metadata map          text.style (name), else omitted + degradation
@@ -44,7 +46,7 @@
  * the exact reason (e.g. a variable id that cannot be resolved because the
  * variables endpoint is Enterprise-only). Nothing is invented.
  */
-import type { DumpFile, DumpLayout, DumpNode, DumpPaint, DumpSet, DumpText } from '../types.js';
+import type { DumpEffect, DumpFile, DumpLayout, DumpNode, DumpPaint, DumpSet, DumpText } from '../types.js';
 
 // ---------------------------------------------------------------------------
 // REST shapes (trimmed to the consumed fields; figma/rest-api-spec names)
@@ -97,6 +99,16 @@ export interface RestBoundVariables {
     | undefined;
 }
 
+/** Effect (api_types.ts), trimmed to the consumed fields. */
+export interface RestEffect {
+  type: string;
+  visible?: boolean;
+  color?: { r: number; g: number; b: number; a: number };
+  offset?: { x: number; y: number };
+  radius?: number;
+  spread?: number;
+}
+
 /** ComponentProperty (api_types.ts) — applied values on an INSTANCE. */
 export interface RestComponentProperty {
   type: 'BOOLEAN' | 'INSTANCE_SWAP' | 'TEXT' | 'VARIANT';
@@ -132,6 +144,8 @@ export interface RestNode {
   strokeWeight?: number;
   /** StyleType → style id; names live in the response's styles metadata map. */
   styles?: Record<string, string>;
+  // HasEffectsTrait
+  effects?: RestEffect[];
   // HasLayoutTrait
   layoutSizingHorizontal?: 'FIXED' | 'HUG' | 'FILL';
   // TypePropertiesTrait
@@ -462,6 +476,26 @@ function mapNode(node: RestNode, ctx: Ctx, nodePath: string): RestDumpNode {
   if (typeof node.opacity === 'number' && node.opacity < 1) {
     out.opacity = Math.round(node.opacity * 10000) / 10000;
   }
+  // dump v1.2: VISIBLE effects — shadows with geometry + color; blur types
+  // by name only (propose.ts names the gap; nothing is lost silently).
+  const effects: DumpEffect[] = [];
+  for (const e of node.effects ?? []) {
+    if (e.visible === false) continue;
+    if ((e.type === 'DROP_SHADOW' || e.type === 'INNER_SHADOW') && e.color && e.offset) {
+      const alpha = e.color.a ?? 1;
+      const eff: DumpEffect = {
+        type: e.type,
+        color: alpha < 1 ? { hex: rgbToHex(e.color), alpha: Math.round(alpha * 10000) / 10000 } : { hex: rgbToHex(e.color) },
+        offset: { x: e.offset.x, y: e.offset.y },
+        radius: e.radius ?? 0,
+      };
+      if (typeof e.spread === 'number' && e.spread !== 0) eff.spread = e.spread;
+      effects.push(eff);
+    } else {
+      effects.push(typeof e.radius === 'number' ? { type: e.type, radius: e.radius } : { type: e.type });
+    }
+  }
+  if (effects.length > 0) out.effects = effects;
 
   if (node.type === 'TEXT') {
     out.text = mapText(node, ctx, nodePath);

@@ -22,7 +22,7 @@
  */
 import { ContractSchema, pascal } from '../scripts/contract-schema.js';
 import { kebab } from '../extract/types.js';
-import type { DumpNode, DumpSet } from '../extract/figma/types.js';
+import type { DumpEffect, DumpNode, DumpSet } from '../extract/figma/types.js';
 import type { TokenCorpus } from './token-corpus.js';
 import { mintTokens, type MintAxis, type MintObservation, type MintedEntry } from './mint-tokens.js';
 
@@ -384,7 +384,7 @@ function mintObservation(
   target: Record<string, string>,
   where: string,
   cssProperty: string,
-  kind: 'color' | 'px' | 'number',
+  kind: 'color' | 'px' | 'number' | 'shadow',
   occ: Array<{ variant: string; value: string | number }>,
   source?: string,
 ) {
@@ -650,6 +650,42 @@ function invertNodeOpacity(
       `${where}: node opacity differs across variants (${distinct.join(', ')}) without a boolean-axis correlation — not representable without minting; review`,
     );
   }
+}
+
+/** One DROP_SHADOW as a CSS box-shadow value: "0px 4px 8px [2px] #0000001a"
+ *  — the same literal-fidelity single-string discipline as 8-digit hex. */
+const shadowCss = (e: DumpEffect): string => {
+  const px = (n: number) => `${Math.round(n * 100) / 100}px`;
+  const spread = e.spread !== undefined && e.spread !== 0 ? ` ${px(e.spread)}` : '';
+  return `${px(e.offset?.x ?? 0)} ${px(e.offset?.y ?? 0)} ${px(e.radius ?? 0)}${spread} ${paintCssHex(e.color ?? { hex: '000000' })}`;
+};
+
+/** VISIBLE effects (dump v1.2). Exactly ONE DROP_SHADOW in EVERY variant →
+ *  an unbound report + (with minting) a `box-shadow` shadow-kind mint (enum
+ *  correlation handled by the classifier). Anything else — inner shadows,
+ *  blurs, effect stacks, partial presence across variants — is a NAMED note
+ *  carrying the effect types: the channel never drops silently. The canvas
+ *  preview has no box-shadow projection in v1; that limit is named here at
+ *  proposal (the minted preamble also skips shadow-typed leaves). */
+function invertNodeEffects(m: Merged, tokens: Record<string, string>, ctx: Ctx, where: string) {
+  if (m.occ.every((o) => (o.node.effects?.length ?? 0) === 0)) return;
+  const kinds = [...new Set(m.occ.flatMap((o) => (o.node.effects ?? []).map((e) => e.type)))];
+  const singleDropShadowEverywhere = m.occ.every((o) => {
+    const eff = o.node.effects ?? [];
+    return eff.length === 1 && eff[0].type === 'DROP_SHADOW';
+  });
+  if (!singleDropShadowEverywhere) {
+    ctx.notes.push(
+      `${where}: visible effect(s) [${kinds.join(', ')}] — only a single DROP_SHADOW present in every variant maps to box-shadow (dump v1.2); channel NAMED, not proposed`,
+    );
+    return;
+  }
+  const occ = m.occ.map((o) => ({ variant: o.variant, value: shadowCss(o.node.effects![0]) }));
+  reportUnbound(ctx, where, 'effects', occ[0].value);
+  mintObservation(ctx, tokens, where, 'box-shadow', 'shadow', occ, `${where}|effects`);
+  ctx.notes.push(
+    `${where}: DROP_SHADOW proposed as a box-shadow value (dump v1.2) — CSS surfaces render it; the canvas preview has no box-shadow projection in v1 (named fidelity limit)`,
+  );
 }
 
 /** The contract's padding vocabulary is symmetric (padding-inline/-block):
@@ -998,6 +1034,11 @@ function buildPart(
   if (m.type === 'TEXT') {
     const tokens = invertTextTokens(m, ctx, where);
     invertNodeOpacity(m, part, tokens, ctx, where);
+    if (m.occ.some((o) => (o.node.effects?.length ?? 0) > 0)) {
+      ctx.notes.push(
+        `${where}: visible effect(s) on a TEXT node — a text shadow has no contract vocabulary (box-shadow is a box channel); channel NAMED, not proposed (dump v1.2)`,
+      );
+    }
     const property = unifiedPropRef(m, 'characters', ctx, where);
     const characters = first(m.occ, (n) => n.text?.characters) ?? '';
     if (property) {
@@ -1015,13 +1056,19 @@ function buildPart(
   }
 
   if (m.type === 'INSTANCE') {
-    // Node opacity on an instance is a PARENT-context visual fact, but the
-    // part elides styling (the child contract owns it) and stylesWhen/tokens
-    // are refused on component refs — named, never silently dropped.
+    // Node opacity/effects on an instance are PARENT-context visual facts,
+    // but the part elides styling (the child contract owns it) and
+    // stylesWhen/tokens are refused on component refs — named, never
+    // silently dropped.
     const instOpacity = m.occ.find((o) => (o.node.opacity ?? 1) < 1);
     if (instOpacity) {
       ctx.notes.push(
         `${where}: node opacity ${instOpacity.node.opacity} on a nested instance — parent-context opacity is not representable on a component ref (dump v1.2); review`,
+      );
+    }
+    if (m.occ.some((o) => (o.node.effects?.length ?? 0) > 0)) {
+      ctx.notes.push(
+        `${where}: visible effect(s) on a nested instance — not representable on a component ref (dump v1.2); review`,
       );
     }
     const swapProperty = unifiedPropRef(m, 'mainComponent', ctx, where);
@@ -1133,6 +1180,7 @@ function buildPart(
     const byProp = invertLayoutByProp(m, ctx, where);
     if (byProp) part.layoutByProp = byProp;
     invertNodeOpacity(m, part, tokens, ctx, where);
+    invertNodeEffects(m, tokens, ctx, where);
     attachTokens(ctx, part, tokens);
     const slot: Record<string, unknown> = { name: canonicalPropName(soleSwap) };
     const instanceOf = first(soleChild.occ, (n) => n.instanceOf);
@@ -1158,6 +1206,7 @@ function buildPart(
 
   if (isWrapArtifact(m)) {
     invertNodeOpacity(m, part, tokens, ctx, where);
+    invertNodeEffects(m, tokens, ctx, where);
     attachTokens(ctx, part, tokens);
     if (visibleWhen) part.visibleWhen = visibleWhen;
     return part;
@@ -1168,6 +1217,7 @@ function buildPart(
   const byProp = invertLayoutByProp(m, ctx, where);
   if (byProp) part.layoutByProp = byProp;
   invertNodeOpacity(m, part, tokens, ctx, where);
+  invertNodeEffects(m, tokens, ctx, where);
   attachTokens(ctx, part, tokens);
   const visibleRef = unifiedPropRef(m, 'visible', ctx, where);
   if (visibleRef) applyVisibleBinding(part, visibleRef, ctx, where, m);
@@ -1575,6 +1625,7 @@ export function proposeFromDump(
     if (Object.keys(parts).length > 0) root.parts = parts;
   }
   invertNodeOpacity(merged, root, rootTokens, ctx, where);
+  invertNodeEffects(merged, rootTokens, ctx, where);
   attachTokens(ctx, root, rootTokens);
 
   // Promotion from the flattened base instance(s) — after the anatomy, so
