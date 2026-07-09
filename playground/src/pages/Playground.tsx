@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState, type CSSProperties } from 'react';
 import { emitters, type Contract, type EmittedFile } from '../../../core/index.js';
 import { useRoute } from '../router';
 import { useTheme } from '../theme';
@@ -51,6 +51,8 @@ import { buildPreviewAtState, type PreviewPropOverrides } from '../engine/previe
 import type { ReceiptGroup, Receipts } from '../receipts';
 import { ContractEditor, type ContractEditorHandle } from '../components/ContractEditor';
 import { CopyButton } from '../components/CopyButton';
+import { HighlightedCode } from '../components/HighlightedCode';
+import { usePaneResize } from '../components/PaneResize';
 import { PreviewControls, sanitizeOverrides } from '../components/PreviewControls';
 import { PreviewFrame } from '../components/PreviewFrame';
 import { ReceiptsPanel } from '../components/ReceiptsPanel';
@@ -270,9 +272,23 @@ export function Playground() {
   // -------------------------------------------------------------- receipts
   const [receipts, setReceipts] = useState<Receipts | null>(null);
 
+  // -------------------------------------------------------- resizable panes
+  const pgRef = useRef<HTMLDivElement>(null);
+  const railRef = useRef<HTMLElement>(null);
+  const outputRef = useRef<HTMLElement>(null);
+  const { cols: paneCols, gutterProps } = usePaneResize(pgRef, railRef, outputRef);
+
   // ------------------------------------------------------------- input rail
   const [sourceTab, setSourceTab] = useState<SourceTab>('examples');
   const [activeExample, setActiveExample] = useState<string | null>(null);
+  // The rail tabs scroll horizontally (one row, never wrapping) — keep the
+  // active tab visible when the selection lands off-screen.
+  const railTabsRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    railTabsRef.current
+      ?.querySelector<HTMLElement>('.tabs__tab.is-active')
+      ?.scrollIntoView({ inline: 'nearest', block: 'nearest' });
+  }, [sourceTab]);
 
   // ---------------------------------------------------- session workspace
   const workspace = useWorkspace();
@@ -1017,10 +1033,14 @@ export function Playground() {
           </button>
         </div>
       )}
-      <div className="pg">
+      <div
+        className="pg"
+        ref={pgRef}
+        style={paneCols ? ({ '--pg-cols': paneCols } as CSSProperties) : undefined}
+      >
       {/* ------------------------------------------------------- left rail */}
-      <aside className="pg__rail">
-        <div className="tabs" role="tablist" aria-label="Input source">
+      <aside className="pg__rail" ref={railRef}>
+        <div className="tabs" role="tablist" aria-label="Input source" ref={railTabsRef}>
           {(
             [
               // The Workspace tab appears with the first import (and stays
@@ -1466,6 +1486,15 @@ export function Playground() {
         )}
       </aside>
 
+      <div
+        className="pg__gutter"
+        role="separator"
+        aria-orientation="vertical"
+        aria-label="Resize the input rail — drag, or nudge with the arrow keys; double-click resets"
+        tabIndex={0}
+        {...gutterProps('rail')}
+      />
+
       {/* ---------------------------------------------------------- center */}
       <section className="pg__center">
         <div className="pane__head">
@@ -1586,8 +1615,17 @@ export function Playground() {
         </div>
       </section>
 
+      <div
+        className="pg__gutter"
+        role="separator"
+        aria-orientation="vertical"
+        aria-label="Resize the output pane — drag, or nudge with the arrow keys; double-click resets"
+        tabIndex={0}
+        {...gutterProps('output')}
+      />
+
       {/* ---------------------------------------------------------- output */}
-      <section className="pg__output">
+      <section className="pg__output" ref={outputRef}>
         {wsLoaded && !switchStripDismissed ? (
           <div className="switch-strip" role="note">
             <span>{WS_SWITCH_LINES[wsLoaded.source]}</span>
@@ -1716,7 +1754,7 @@ export function Playground() {
                       <span className="output__filename">{file.path}</span>
                       <CopyButton text={file.contents} className="output__copy" />
                     </div>
-                    <pre className="output__code">{file.contents}</pre>
+                    <HighlightedCode path={file.path} code={file.contents} />
                   </div>
                 ))
               )}

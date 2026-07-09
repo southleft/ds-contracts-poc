@@ -20,6 +20,11 @@
   --pg-warn: #8a6a00;
   --pg-font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
   --pg-mono: ui-monospace, 'SF Mono', SFMono-Regular, Menlo, Consolas, monospace;
+  /* Syntax colors (see the .code-hl token rules) — muted, Carbon-ish. */
+  --pg-code-key: #0043ce;
+  --pg-code-string: #0e6027;
+  --pg-code-keyword: #6929c4;
+  --pg-code-number: #005d5d;
 }
 
 [data-theme='dark'] {
@@ -36,6 +41,10 @@
   --pg-danger: #fa4d56;
   --pg-ok: #42be65;
   --pg-warn: #d2a106;
+  --pg-code-key: #78a9ff;
+  --pg-code-string: #6fdc8c;
+  --pg-code-keyword: #be95ff;
+  --pg-code-number: #3ddbd9;
 }
 
 * {
@@ -381,6 +390,8 @@ label {
   flex-shrink: 0;
   border-bottom: 1px solid var(--pg-border);
   overflow-x: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--pg-border) transparent;
 }
 
 .tabs__tab {
@@ -417,19 +428,12 @@ label {
 }
 
 /* Up to seven source tabs (Workspace appears with the first import) share
- * the rail's 360px — tighter than the output tabs, but with air between
- * labels: all seven fit on one row (Tokens dot included), no wrap, no
- * horizontal scroll. */
-.pg__rail > .tabs {
-  flex-wrap: wrap;
-  height: auto;
-  min-height: 37px;
-}
-
+ * the rail — always ONE 37px row: overflow scrolls horizontally behind the
+ * thin scrollbar (never wraps, so the 1px bottom border stays on the same
+ * line the other pane headers draw). The active tab is scrolled into view
+ * on selection. */
 .pg__rail > .tabs > .tabs__tab {
-  height: 37px;
   padding: 0 11px;
-  font-size: 13px;
 }
 
 /* Marker on the Tokens tab while a pasted user tree is the active source. */
@@ -631,12 +635,44 @@ label {
   flex: 1;
   min-height: 0;
   display: grid;
-  grid-template-columns: 420px minmax(360px, 1fr) minmax(420px, 1.1fr);
+  /* rail | gutter | center | gutter | output. The gutters are 5px drag
+   * handles that draw the 1px pane border down their middle (the panes no
+   * longer own border-right). A drag pins px widths via --pg-cols set
+   * inline; the stacked media query below outranks it by not reading the
+   * variable at all. */
+  grid-template-columns: var(--pg-cols, 420px 5px minmax(360px, 1fr) 5px minmax(420px, 1.1fr));
   min-height: 0;
 }
 
+.pg__gutter {
+  cursor: col-resize;
+  touch-action: none;
+  background: linear-gradient(
+    to right,
+    transparent 2px,
+    var(--pg-border) 2px,
+    var(--pg-border) 3px,
+    transparent 3px
+  );
+}
+
+.pg__gutter:hover,
+.pg__gutter:focus-visible {
+  background: linear-gradient(
+    to right,
+    transparent 2px,
+    var(--pg-border-strong) 2px,
+    var(--pg-border-strong) 3px,
+    transparent 3px
+  );
+}
+
+.pg__gutter:focus-visible {
+  outline: 2px solid var(--pg-accent);
+  outline-offset: -2px;
+}
+
 .pg__rail {
-  border-right: 1px solid var(--pg-border);
   display: flex;
   flex-direction: column;
   min-width: 0;
@@ -644,7 +680,6 @@ label {
 }
 
 .pg__center {
-  border-right: 1px solid var(--pg-border);
   display: flex;
   flex-direction: column;
   min-width: 0;
@@ -670,9 +705,13 @@ label {
     grid-template-columns: 1fr;
   }
 
+  /* Stacked panes don't resize — the gutters leave with the columns. */
+  .pg__gutter {
+    display: none;
+  }
+
   .pg__rail,
   .pg__center {
-    border-right: none;
     border-bottom: 1px solid var(--pg-border);
   }
 
@@ -923,7 +962,7 @@ label {
   margin: 0;
   padding: 12px 14px;
   font-family: var(--pg-mono);
-  font-size: 13px;
+  font-size: 13.5px;
   line-height: 1.55;
   white-space: pre;
   width: max-content;
@@ -935,12 +974,36 @@ label {
   background: color-mix(in srgb, var(--pg-danger) 14%, transparent);
 }
 
+/* When Prism paints the backdrop, the backdrop IS the text layer: the
+ * textarea's glyphs go transparent (caret and selection stay visible) and
+ * the backdrop-pre's color flips on. Metrics never change — same font,
+ * size, line-height, padding — so the caret sits exactly on the colored
+ * glyphs, and refusal-line backgrounds layer under them. */
+
+.editor__wrap--hl .editor__backdrop-pre {
+  color: var(--pg-fg);
+}
+
+.editor__wrap--hl .editor__textarea {
+  color: transparent;
+  caret-color: var(--pg-fg);
+}
+
+.editor__wrap--hl .editor__textarea::selection {
+  color: transparent;
+  background: color-mix(in srgb, var(--pg-accent) 30%, transparent);
+}
+
+.editor__textarea::placeholder {
+  color: var(--pg-faint);
+}
+
 .editor__textarea {
   position: relative;
   flex: 1;
   border: none;
   padding: 12px 14px;
-  font-size: 13px;
+  font-size: 13.5px;
   line-height: 1.55;
   background: transparent;
   min-height: 240px;
@@ -1367,9 +1430,72 @@ label {
 .output__code {
   margin: 0;
   padding: 12px 14px;
-  font-size: 13px;
+  font-size: 14px;
   line-height: 1.6;
   overflow-x: auto;
+}
+
+.output__hlnote {
+  padding: 6px 14px;
+  font-size: 11.5px;
+  color: var(--pg-faint);
+  border-bottom: 1px solid var(--pg-border);
+}
+
+/* Prism token colors — our own rules on Prism's class names, riding the
+ * playground's variables so both themes work; no stock theme CSS ever
+ * loads. Colors ONLY: never font-weight or font-style, because these same
+ * rules paint the editor backdrop, whose glyph metrics must stay byte-
+ * identical with the textarea over it. */
+
+.code-hl .token.comment,
+.code-hl .token.prolog,
+.code-hl .token.doctype,
+.code-hl .token.cdata {
+  color: var(--pg-faint);
+}
+
+.code-hl .token.punctuation,
+.code-hl .token.operator,
+.code-hl .token.combinator {
+  color: var(--pg-muted);
+}
+
+.code-hl .token.property,
+.code-hl .token.tag,
+.code-hl .token.attr-name,
+.code-hl .token.selector,
+.code-hl .token.class-name,
+.code-hl .token.maybe-class-name {
+  color: var(--pg-code-key);
+}
+
+.code-hl .token.string,
+.code-hl .token.attr-value,
+.code-hl .token.char,
+.code-hl .token.url,
+.code-hl .token.regex {
+  color: var(--pg-code-string);
+}
+
+.code-hl .token.keyword,
+.code-hl .token.boolean,
+.code-hl .token.null,
+.code-hl .token.atrule,
+.code-hl .token.rule,
+.code-hl .token.important {
+  color: var(--pg-code-keyword);
+}
+
+.code-hl .token.number,
+.code-hl .token.unit,
+.code-hl .token.constant,
+.code-hl .token.symbol {
+  color: var(--pg-code-number);
+}
+
+.code-hl .token.function {
+  color: var(--pg-fg);
 }
 
 .output__error {
