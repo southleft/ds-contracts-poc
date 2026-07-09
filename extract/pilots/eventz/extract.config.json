@@ -1,4 +1,4 @@
-{ "code": { "adapter": "react-tsx", "root": "/private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components" },
+{ "code": { "adapter": "react-tsx", "root": "extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components" },
   "design": { "source": "extract/pilots/eventz/design.json" },
   "idPrefix": "evz",
   "out": "extract/pilots/eventz/out" }

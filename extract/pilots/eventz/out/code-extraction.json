@@ -1,7 +1,7 @@
 [
   {
     "name": "Accordion",
-    "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/Accordion/Accordion.tsx",
+    "source": "extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/client/Accordion/Accordion.tsx",
     "adapter": "react-tsx",
     "props": [
       {
@@ -55,13 +55,13 @@
   },
   {
     "name": "ActionCard",
-    "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/server/ActionCard/ActionCard.tsx",
+    "source": "extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/server/ActionCard/ActionCard.tsx",
     "adapter": "react-tsx",
     "props": []
   },
   {
     "name": "Alert",
-    "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/Alert/Alert.tsx",
+    "source": "extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/client/Alert/Alert.tsx",
     "adapter": "react-tsx",
     "props": [
       {
@@ -119,7 +119,7 @@
   },
   {
     "name": "AvatarGroup",
-    "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/AvatarGroup/AvatarGroup.tsx",
+    "source": "extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/client/AvatarGroup/AvatarGroup.tsx",
     "adapter": "react-tsx",
     "props": [
       {
@@ -165,7 +165,7 @@
   },
   {
     "name": "Badge",
-    "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/server/Badge/Badge.tsx",
+    "source": "extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/server/Badge/Badge.tsx",
     "adapter": "react-tsx",
     "props": [
       {
@@ -198,7 +198,7 @@
   },
   {
     "name": "Breadcrumbs",
-    "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/server/Breadcrumbs/Breadcrumbs.tsx",
+    "source": "extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/server/Breadcrumbs/Breadcrumbs.tsx",
     "adapter": "react-tsx",
     "props": [
       {
@@ -223,13 +223,13 @@
   },
   {
     "name": "Button",
-    "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/Button/Button.tsx",
+    "source": "extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/client/Button/Button.tsx",
     "adapter": "react-tsx",
     "props": []
   },
   {
     "name": "Carousel",
-    "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/Carousel/Carousel.tsx",
+    "source": "extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/client/Carousel/Carousel.tsx",
     "adapter": "react-tsx",
     "props": [
       {
@@ -367,7 +367,7 @@
   },
   {
     "name": "Checkbox",
-    "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/Checkbox/Checkbox.tsx",
+    "source": "extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/client/Checkbox/Checkbox.tsx",
     "adapter": "react-tsx",
     "props": [
       {
@@ -424,7 +424,7 @@
   },
   {
     "name": "CheckboxGroup",
-    "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/CheckboxGroup/CheckboxGroup.tsx",
+    "source": "extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/client/CheckboxGroup/CheckboxGroup.tsx",
     "adapter": "react-tsx",
     "props": [
       {
@@ -479,7 +479,7 @@
   },
   {
     "name": "Chip",
-    "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/server/Chip/Chip.tsx",
+    "source": "extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/server/Chip/Chip.tsx",
     "adapter": "react-tsx",
     "props": [
       {
@@ -510,7 +510,7 @@
   },
   {
     "name": "Combobox",
-    "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/Combobox/Combobox.tsx",
+    "source": "extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/client/Combobox/Combobox.tsx",
     "adapter": "react-tsx",
     "props": [
       {
@@ -615,7 +615,7 @@
   },
   {
     "name": "ComboboxField",
-    "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/Combobox/Combobox.tsx",
+    "source": "extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/client/Combobox/Combobox.tsx",
     "adapter": "react-tsx",
     "props": [
       {
@@ -689,31 +689,31 @@
   },
   {
     "name": "ContentCard",
-    "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/server/ContentCard/ContentCard.tsx",
+    "source": "extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/server/ContentCard/ContentCard.tsx",
     "adapter": "react-tsx",
     "props": []
   },
   {
     "name": "Control",
-    "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/Control/Control.tsx",
+    "source": "extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/client/Control/Control.tsx",
     "adapter": "react-tsx",
     "props": []
   },
   {
     "name": "Countdown",
-    "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/Countdown/Countdown.tsx",
+    "source": "extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/client/Countdown/Countdown.tsx",
     "adapter": "react-tsx",
     "props": []
   },
   {
     "name": "DatePicker",
-    "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/DatePicker/DatePicker.tsx",
+    "source": "extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/client/DatePicker/DatePicker.tsx",
     "adapter": "react-tsx",
     "props": []
   },
   {
     "name": "Dialog",
-    "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/Dialog/Dialog.tsx",
+    "source": "extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/client/Dialog/Dialog.tsx",
     "adapter": "react-tsx",
     "props": [
       {
@@ -781,7 +781,7 @@
   },
   {
     "name": "Dropdown",
-    "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/Dropdown/Dropdown.tsx",
+    "source": "extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/client/Dropdown/Dropdown.tsx",
     "adapter": "react-tsx",
     "props": [
       {
@@ -896,7 +896,7 @@
   },
   {
     "name": "EventPanel",
-    "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/server/EventPanel/EventPanel.tsx",
+    "source": "extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/server/EventPanel/EventPanel.tsx",
     "adapter": "react-tsx",
     "props": [
       {
@@ -974,7 +974,7 @@
   },
   {
     "name": "ExpandableContent",
-    "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/ExpandableContent/ExpandableContent.tsx",
+    "source": "extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/client/ExpandableContent/ExpandableContent.tsx",
     "adapter": "react-tsx",
     "props": [
       {
@@ -1000,7 +1000,7 @@
   },
   {
     "name": "FileUpload",
-    "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/FileUpload/FileUpload.tsx",
+    "source": "extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/client/FileUpload/FileUpload.tsx",
     "adapter": "react-tsx",
     "props": [
       {
@@ -1141,7 +1141,7 @@
   },
   {
     "name": "FloatingBar",
-    "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/FloatingBar/FloatingBar.tsx",
+    "source": "extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/client/FloatingBar/FloatingBar.tsx",
     "adapter": "react-tsx",
     "props": [
       {
@@ -1191,7 +1191,7 @@
   },
   {
     "name": "Footer",
-    "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/server/Footer/Footer.tsx",
+    "source": "extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/server/Footer/Footer.tsx",
     "adapter": "react-tsx",
     "props": [
       {
@@ -1204,7 +1204,7 @@
   },
   {
     "name": "FormElement",
-    "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/FormElement/FormElement.tsx",
+    "source": "extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/client/FormElement/FormElement.tsx",
     "adapter": "react-tsx",
     "props": [
       {
@@ -1267,7 +1267,7 @@
   },
   {
     "name": "Heading",
-    "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/server/Heading/Heading.tsx",
+    "source": "extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/server/Heading/Heading.tsx",
     "adapter": "react-tsx",
     "props": [
       {
@@ -1404,13 +1404,13 @@
   },
   {
     "name": "IconButton",
-    "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/IconButton/IconButton.tsx",
+    "source": "extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/client/IconButton/IconButton.tsx",
     "adapter": "react-tsx",
     "props": []
   },
   {
     "name": "ImagePanel",
-    "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/server/ImagePanel/ImagePanel.tsx",
+    "source": "extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/server/ImagePanel/ImagePanel.tsx",
     "adapter": "react-tsx",
     "props": [
       {
@@ -1474,7 +1474,7 @@
   },
   {
     "name": "InfoPopover",
-    "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/InfoPopover/InfoPopover.tsx",
+    "source": "extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/client/InfoPopover/InfoPopover.tsx",
     "adapter": "react-tsx",
     "props": [
       {
@@ -1525,7 +1525,7 @@
   },
   {
     "name": "Input",
-    "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/Input/Input.tsx",
+    "source": "extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/client/Input/Input.tsx",
     "adapter": "react-tsx",
     "props": [
       {
@@ -1550,7 +1550,7 @@
   },
   {
     "name": "InputField",
-    "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/Input/Input.tsx",
+    "source": "extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/client/Input/Input.tsx",
     "adapter": "react-tsx",
     "props": [
       {
@@ -1599,7 +1599,7 @@
   },
   {
     "name": "Map",
-    "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/server/Map/Map.tsx",
+    "source": "extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/server/Map/Map.tsx",
     "adapter": "react-tsx",
     "props": [
       {
@@ -1633,7 +1633,7 @@
   },
   {
     "name": "MediaCard",
-    "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/server/MediaCard/MediaCard.tsx",
+    "source": "extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/server/MediaCard/MediaCard.tsx",
     "adapter": "react-tsx",
     "props": [
       {
@@ -1676,7 +1676,7 @@
   },
   {
     "name": "MediaControl",
-    "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/MediaControl/MediaControl.tsx",
+    "source": "extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/client/MediaControl/MediaControl.tsx",
     "adapter": "react-tsx",
     "props": [
       {
@@ -1750,7 +1750,7 @@
   },
   {
     "name": "MediaPlayer",
-    "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/MediaPlayer/MediaPlayer.tsx",
+    "source": "extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/client/MediaPlayer/MediaPlayer.tsx",
     "adapter": "react-tsx",
     "props": [
       {
@@ -1845,7 +1845,7 @@
   },
   {
     "name": "NavigationBar",
-    "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/server/NavigationBar/NavigationBar.tsx",
+    "source": "extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/server/NavigationBar/NavigationBar.tsx",
     "adapter": "react-tsx",
     "props": [
       {
@@ -1902,7 +1902,7 @@
   },
   {
     "name": "NavigationContainer",
-    "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/server/NavigationContainer/NavigationContainer.tsx",
+    "source": "extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/server/NavigationContainer/NavigationContainer.tsx",
     "adapter": "react-tsx",
     "props": [
       {
@@ -1915,7 +1915,7 @@
   },
   {
     "name": "NavigationDropdown",
-    "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/NavigationDropdown/NavigationDropdown.tsx",
+    "source": "extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/client/NavigationDropdown/NavigationDropdown.tsx",
     "adapter": "react-tsx",
     "props": [
       {
@@ -1952,7 +1952,7 @@
   },
   {
     "name": "RadioButtonGroup",
-    "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/RadioButtonGroup/RadioButtonGroup.tsx",
+    "source": "extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/client/RadioButtonGroup/RadioButtonGroup.tsx",
     "adapter": "react-tsx",
     "props": [
       {
@@ -1995,7 +1995,7 @@
   },
   {
     "name": "Scroller",
-    "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/Scroller/Scroller.tsx",
+    "source": "extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/client/Scroller/Scroller.tsx",
     "adapter": "react-tsx",
     "props": [
       {
@@ -2046,7 +2046,7 @@
   },
   {
     "name": "ScrollerRow",
-    "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/server/ScrollerRow/ScrollerRow.tsx",
+    "source": "extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/server/ScrollerRow/ScrollerRow.tsx",
     "adapter": "react-tsx",
     "props": [
       {
@@ -2059,7 +2059,7 @@
   },
   {
     "name": "Search",
-    "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/Search/Search.tsx",
+    "source": "extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/client/Search/Search.tsx",
     "adapter": "react-tsx",
     "props": [
       {
@@ -2140,7 +2140,7 @@
   },
   {
     "name": "Select",
-    "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/Select/Select.tsx",
+    "source": "extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/client/Select/Select.tsx",
     "adapter": "react-tsx",
     "props": [
       {
@@ -2166,7 +2166,7 @@
   },
   {
     "name": "SelectionCard",
-    "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/server/SelectionCard/SelectionCard.tsx",
+    "source": "extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/server/SelectionCard/SelectionCard.tsx",
     "adapter": "react-tsx",
     "props": [
       {
@@ -2198,7 +2198,7 @@
   },
   {
     "name": "Slider",
-    "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/Slider/Slider.tsx",
+    "source": "extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/client/Slider/Slider.tsx",
     "adapter": "react-tsx",
     "props": [
       {
@@ -2256,7 +2256,7 @@
   },
   {
     "name": "Stepper",
-    "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/Stepper/Stepper.tsx",
+    "source": "extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/client/Stepper/Stepper.tsx",
     "adapter": "react-tsx",
     "props": [
       {
@@ -2287,7 +2287,7 @@
   },
   {
     "name": "SubscriptionCard",
-    "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/server/SubscriptionCard/SubscriptionCard.tsx",
+    "source": "extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/server/SubscriptionCard/SubscriptionCard.tsx",
     "adapter": "react-tsx",
     "props": [
       {
@@ -2345,7 +2345,7 @@
   },
   {
     "name": "Tabs",
-    "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/Tabs/Tabs.tsx",
+    "source": "extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/client/Tabs/Tabs.tsx",
     "adapter": "react-tsx",
     "props": [
       {
@@ -2422,7 +2422,7 @@
   },
   {
     "name": "Textarea",
-    "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/Textarea/Textarea.tsx",
+    "source": "extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/client/Textarea/Textarea.tsx",
     "adapter": "react-tsx",
     "props": [
       {
@@ -2490,19 +2490,19 @@
   },
   {
     "name": "TextLink",
-    "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/TextLink/TextLink.tsx",
+    "source": "extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/client/TextLink/TextLink.tsx",
     "adapter": "react-tsx",
     "props": []
   },
   {
     "name": "TextWithRef",
-    "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/server/Text/Text.tsx",
+    "source": "extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/server/Text/Text.tsx",
     "adapter": "react-tsx",
     "props": []
   },
   {
     "name": "ToggleGroup",
-    "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/ToggleGroup/ToggleGroup.tsx",
+    "source": "extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/client/ToggleGroup/ToggleGroup.tsx",
     "adapter": "react-tsx",
     "props": [
       {
@@ -2521,7 +2521,7 @@
   },
   {
     "name": "Visibility",
-    "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/server/Visibility/Visibility.tsx",
+    "source": "extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/server/Visibility/Visibility.tsx",
     "adapter": "react-tsx",
     "props": [
       {
