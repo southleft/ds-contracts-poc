@@ -1246,6 +1246,40 @@ label {
   word-break: break-word;
 }
 
+/* "Fix with AI" — the generator-refusal backfill row inside the banner. */
+.validation__fix {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+
+.validation__fix-hint {
+  font-size: 11px;
+  color: var(--pg-faint);
+}
+
+.validation__fix-error {
+  margin: 8px 0 0;
+}
+
+/* The applied-fix strip under the editor: ai-proposed label + Undo. */
+.ai-fix-strip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-top: 1px solid var(--pg-border);
+  font-size: 12px;
+  color: var(--pg-muted);
+  flex-shrink: 0;
+}
+
+.ai-fix-strip__text {
+  flex: 1;
+}
+
 /* first-visit onboarding strip — three clickable steps, no modal, no tour */
 
 /* chunk-failure banner — one calm strip, never a raw red error */

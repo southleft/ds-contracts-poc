@@ -20,7 +20,15 @@ import {
   traceFromGithubUrl,
   type GithubTrace,
 } from '../engine/github-import';
-import { assistFetchPlan, assistRepoProfile } from '../engine/assist';
+import {
+  assistFetchPlan,
+  assistFixContract,
+  assistRepoProfile,
+  FIX_CONTRACT_MAX_BYTES,
+  FIX_CONTRACT_MAX_REFUSALS,
+  FIX_CONTRACT_MAX_TOKEN_PATHS,
+  MAX_AI_FIX_ROUNDS,
+} from '../engine/assist';
 import type { ProposeCodeResult } from '../engine/code-import';
 import {
   ANTHROPIC_MODEL,
@@ -61,7 +69,7 @@ import {
 } from '../engine/workspace';
 import { reportIfChunkError } from '../engine/chunk-guard';
 import { buildPreviewAtState, type PreviewPropOverrides, type PreviewSurface } from '../engine/preview';
-import type { ReceiptGroup, Receipts } from '../receipts';
+import type { ReceiptEntry, ReceiptGroup, Receipts } from '../receipts';
 import { DEMO_SESSION_TOKEN, rememberFigmaSession } from '../engine/figma-render';
 import {
   ANTHROPIC_KEY_STORAGE_KEY,
@@ -362,6 +370,130 @@ export function Playground() {
   // The live minted layer (tokenSource re-renders this component whenever it
   // changes) — drives the assist rename block under the minted receipts group.
   const mintedLayer = activeMintedTokens();
+
+  // ---------------------------------------------- AI fix (generator refusals)
+  // When the editor shows GENERATOR refusals (schema-valid but refused), the
+  // refusal banner offers one button: send the candidate + the named refusals
+  // + the ACTIVE token inventory (imported.* included) to the assist Worker.
+  // What comes back LOADS as an ai-proposed round and is immediately
+  // re-refereed — remaining refusals show under the editor; nothing applies
+  // silently. Same round discipline as Describe: MAX_AI_FIX_ROUNDS, then
+  // hand-editing. Undo (single-level) restores the pre-fix text.
+  const [aiFixBusy, setAiFixBusy] = useState(false);
+  const [aiFixError, setAiFixError] = useState<string | null>(null);
+  const [aiFixRounds, setAiFixRounds] = useState(0);
+  const [aiFixUndo, setAiFixUndo] = useState<{ text: string; provenance: string } | null>(null);
+  // A fresh load (example, import, generation, share link) starts a fresh
+  // fix session — `pristine` changes exactly then, never on a fix round.
+  useEffect(() => {
+    setAiFixRounds(0);
+    setAiFixUndo(null);
+    setAiFixError(null);
+  }, [pristine]);
+
+  /** Append one ai-fix group to whatever receipts are showing — the record
+   *  survives Undo on purpose (usage was spent; the receipt says so). A
+   *  repeat title (e.g. successive worker refusals) folds into the existing
+   *  group — the panel keys groups by title. */
+  const appendAiFixGroup = (title: string, entries: ReceiptEntry[]) => {
+    setReceipts((prev) => {
+      if (!prev) return { source: 'assist Worker — fix-contract (ai-proposed)', groups: [{ title, kind: 'note' as const, entries }] };
+      const existing = prev.groups.findIndex((g) => g.title === title);
+      if (existing >= 0) {
+        const groups = prev.groups.map((g, i) =>
+          i === existing ? { ...g, entries: [...g.entries, ...entries] } : g,
+        );
+        return { ...prev, groups };
+      }
+      return { ...prev, groups: [...prev.groups, { title, kind: 'note' as const, entries }] };
+    });
+  };
+
+  const runAssistFix = async () => {
+    // Refusals belong to the DEBOUNCED text — the button disables while they
+    // diverge, and this guard holds the same line.
+    if (validation.status !== 'violations' || text !== debouncedText) return;
+    const sentText = debouncedText;
+    if (new TextEncoder().encode(sentText).length > FIX_CONTRACT_MAX_BYTES) {
+      setAiFixError(
+        `fix-contract-too-large: the candidate exceeds the Worker's ${
+          FIX_CONTRACT_MAX_BYTES / 1024
+        } KB contract limit — trim it or edit by hand.`,
+      );
+      return;
+    }
+    const refusals = validation.issues.slice(0, FIX_CONTRACT_MAX_REFUSALS);
+    setAiFixBusy(true);
+    setAiFixError(null);
+    try {
+      const result = await assistFixContract({
+        contract: JSON.parse(sentText) as object,
+        refusals,
+        tokenPaths: [...tokenSource.inventory].sort().slice(0, FIX_CONTRACT_MAX_TOKEN_PATHS),
+      });
+      if (!result.ok) {
+        // The Worker's own messages (429 budget/limit, 502 model failure,
+        // 503 kill switch, 400 named validation) render VERBATIM — inline
+        // and as a receipt; status 0/403 is the named origin note.
+        setAiFixError(result.message);
+        appendAiFixGroup('AI fix — refused by the assist Worker', [
+          {
+            message:
+              result.status > 0 ? `assist answered ${result.status}: ${result.message}` : result.message,
+          },
+        ]);
+        return;
+      }
+      const model = result.data.model ?? 'unknown model';
+      const usage = result.data.usage ?? {};
+      const fixedText = pretty(result.data.contract);
+      const round = aiFixRounds + 1;
+      // Re-referee NOW (the same validateContractText the editor runs) so the
+      // receipt names which sent refusals were addressed and what remains.
+      const v = validateContractText(fixedText);
+      const remaining =
+        v.status === 'violations' || v.status === 'schema-error'
+          ? v.issues
+          : v.status === 'json-error'
+            ? [v.message]
+            : [];
+      const addressed = refusals.filter((r) => !remaining.includes(r));
+      setAiFixUndo({ text: sentText, provenance });
+      setAiFixRounds(round);
+      setText(fixedText);
+      setProvenance(`ai fix — ${model} (ai-proposed, round ${round} of ${MAX_AI_FIX_ROUNDS})`);
+      setActiveExample(null);
+      appendAiFixGroup(`AI fix — ${model} (ai-proposed)`, [
+        {
+          message: `round ${round} of ${MAX_AI_FIX_ROUNDS} — the returned contract loaded as a proposal and was immediately re-refereed`,
+        },
+        {
+          message:
+            usage.input_tokens != null || usage.output_tokens != null
+              ? `tokens: ${usage.input_tokens ?? '?'} in / ${usage.output_tokens ?? '?'} out`
+              : 'tokens: not reported by the response',
+        },
+        ...(addressed.length > 0
+          ? addressed.map((r) => ({ message: `addressed: ${r}` }))
+          : [{ message: 'addressed: none of the sent refusals cleared' }]),
+        {
+          message:
+            remaining.length > 0
+              ? `still refused (${remaining.length}) — shown under the editor; nothing applied silently`
+              : 'clean — the re-referee found no remaining refusals',
+        },
+      ]);
+    } finally {
+      setAiFixBusy(false);
+    }
+  };
+
+  const undoAiFix = () => {
+    if (!aiFixUndo) return;
+    setText(aiFixUndo.text);
+    setProvenance(aiFixUndo.provenance);
+    setAiFixUndo(null);
+  };
 
   // -------------------------------------------------------- resizable panes
   const pgRef = useRef<HTMLDivElement>(null);
@@ -2061,9 +2193,50 @@ export function Playground() {
                 Schema-valid, but the generator refuses — {validation.issues.length} named violation
                 {validation.issues.length === 1 ? '' : 's'}
                 {refusalList(validation.issues)}
+                <div className="validation__fix">
+                  {aiFixRounds < MAX_AI_FIX_ROUNDS ? (
+                    <button
+                      type="button"
+                      className="btn--small"
+                      disabled={aiFixBusy || text !== debouncedText}
+                      onClick={() => void runAssistFix()}
+                    >
+                      {aiFixBusy
+                        ? 'Asking the assist Worker…'
+                        : `Fix with AI (round ${aiFixRounds + 1} of ${MAX_AI_FIX_ROUNDS})`}
+                    </button>
+                  ) : (
+                    <span className="hint">
+                      AI fix round limit reached ({MAX_AI_FIX_ROUNDS}) — edit the contract by hand;
+                      the editor referees every keystroke.
+                    </span>
+                  )}
+                  <span className="validation__fix-hint">
+                    Shared assist Worker (server-held key, daily caps) — the returned contract
+                    loads as an ai-proposed round and is re-refereed here; nothing applies
+                    silently.
+                  </span>
+                </div>
+                {aiFixError ? (
+                  <div className="notice notice--error validation__fix-error">{aiFixError}</div>
+                ) : null}
               </>
             )}
           </div>
+          {aiFixUndo ? (
+            <div className="ai-fix-strip" role="note">
+              <span className="mint-assist__tag" aria-label="AI-proposed fix">
+                ai-proposed
+              </span>
+              <span className="ai-fix-strip__text">
+                fix round {aiFixRounds} of {MAX_AI_FIX_ROUNDS} loaded and re-refereed above —
+                nothing applied silently.
+              </span>
+              <button type="button" className="btn--small" onClick={undoAiFix}>
+                Undo
+              </button>
+            </div>
+          ) : null}
         </div>
       </section>
 

@@ -118,6 +118,42 @@ export function assistNameTokens(
 }
 
 // ---------------------------------------------------------------------------
+// /v1/assist/fix-contract — the generator-refusal backfill. The refused
+// candidate goes up WITH its named refusals and the active token inventory
+// (imported.* included); what comes back is a whole contract that is only
+// ever a PROPOSAL — the editor re-referees it, and remaining refusals show.
+// ---------------------------------------------------------------------------
+
+/** Mirror of the Describe tab's fix discipline: two user-triggered rounds,
+ *  then hand-editing — nothing retries silently. */
+export const MAX_AI_FIX_ROUNDS = 2;
+
+/** Worker-enforced request limits (client-checked to refuse by name early). */
+export const FIX_CONTRACT_MAX_BYTES = 64 * 1024;
+export const FIX_CONTRACT_MAX_REFUSALS = 50;
+export const FIX_CONTRACT_MAX_TOKEN_PATHS = 3000;
+
+export interface FixContractResponse {
+  contract: unknown;
+  model?: string;
+  usage?: { input_tokens?: number; output_tokens?: number };
+}
+
+export function assistFixContract(
+  input: {
+    /** The refused candidate (schema-valid but generator-refused), ≤64 KB. */
+    contract: object;
+    /** The named violations, verbatim from the referee (≤50). */
+    refusals: string[];
+    /** ACTIVE token inventory incl. imported.* (≤3000 paths). */
+    tokenPaths: string[];
+  },
+  fetchImpl?: FetchLike,
+): Promise<AssistResult<FixContractResponse>> {
+  return postAssist<FixContractResponse>('/v1/assist/fix-contract', input, fetchImpl);
+}
+
+// ---------------------------------------------------------------------------
 // /v1/assist/fetch-plan
 // ---------------------------------------------------------------------------
 
