@@ -51,6 +51,7 @@ import { buildPreviewAtState, type PreviewPropOverrides } from '../engine/previe
 import type { ReceiptGroup, Receipts } from '../receipts';
 import { ContractEditor, type ContractEditorHandle } from '../components/ContractEditor';
 import { CopyButton } from '../components/CopyButton';
+import { HighlightedCode } from '../components/HighlightedCode';
 import { usePaneResize } from '../components/PaneResize';
 import { PreviewControls, sanitizeOverrides } from '../components/PreviewControls';
 import { PreviewFrame } from '../components/PreviewFrame';
@@ -1753,7 +1754,7 @@ export function Playground() {
                       <span className="output__filename">{file.path}</span>
                       <CopyButton text={file.contents} className="output__copy" />
                     </div>
-                    <pre className="output__code">{file.contents}</pre>
+                    <HighlightedCode path={file.path} code={file.contents} />
                   </div>
                 ))
               )}
