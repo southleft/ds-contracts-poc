@@ -46,11 +46,35 @@ const ref = (slashName: string) => `{${dotPath(slashName)}}`;
  *  "hasEndIcon" / "isDisabled", and camel() (which lowercases whole words)
  *  would mangle them into spellings nobody owns ("hasendicon"). Everything
  *  else ("Show Actions", "Variant", "Label") goes through camel() as before.
- *  The "#id" suffix non-variant properties carry is never part of the name. */
+ *  Characters outside a legal identifier are STRIPPED first — foreign kits
+ *  ship emoji-prefixed properties ("✏️text", "↪️icon-left"; field case:
+ *  CBDS Button) and the honest move is to sanitize AT PROPOSAL, keeping the
+ *  original spelling as the design binding (bindings.figma.property), not to
+ *  refuse at emit. The "#id" suffix non-variant properties carry is never
+ *  part of the name. */
 export const canonicalPropName = (property: string): string => {
   const bare = property.split('#')[0].trim();
-  return /^[a-z][A-Za-z0-9]*$/.test(bare) ? bare : camel(bare);
+  if (/^[a-z][A-Za-z0-9]*$/.test(bare)) return bare;
+  return camel(bare.replace(/[^A-Za-z0-9 _-]+/g, ' ').trim());
 };
+
+/** True when canonicalPropName had to strip characters — the note trigger. */
+export const propNameSanitized = (property: string): boolean =>
+  /[^A-Za-z0-9 _-]/.test(property.split('#')[0].trim());
+
+/** Contract name for a drawn set: PascalCase over the alphanumeric words.
+ *  "Button-Brand Primary" → "ButtonBrandPrimary", "Button group" →
+ *  "ButtonGroup" — the emitters make the name an exported component and its
+ *  file names, so an unsanitized set name is a guaranteed emit refusal. The
+ *  canvas set keeps its own name; identity anchors are componentSetKey/nodeId. */
+export const pascalComponentName = (setName: string): string =>
+  setName
+    .replace(/[^A-Za-z0-9]+/g, ' ')
+    .trim()
+    .split(/\s+/)
+    .filter((w) => w.length > 0)
+    .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+    .join('');
 
 /** The slice of a child contract canonicalization needs — kept minimal so the
  * playground can pass its bundled contracts without importing the zod types. */
@@ -270,6 +294,13 @@ export interface FigmaProposalResult {
    *  tokenInventoryFromJson accepts multiple trees), plus one entry per leaf.
    *  Every name is machine-derived and provisional — see core/mint-tokens.ts. */
   mintedTokens?: { tree: Record<string, unknown>; count: number; entries: MintedEntry[] };
+  /** Auto-proposed STUB contracts for nested instances whose child contract
+   *  is not in scope (field case: CBDS Button's ds.icon). Each parses against
+   *  the contract schema; its API is the observed applied values ONLY and its
+   *  anatomy is empty (dump v1 stops at instance boundaries — nothing about
+   *  the child is guessed). Register them alongside the proposal so the
+   *  emitters resolve the refs; replace each by importing the real child set. */
+  childStubs?: Array<Record<string, unknown>>;
 }
 
 /** Minting capture (mintUnbound: true) — the observations the classic
@@ -307,7 +338,18 @@ interface Ctx {
   /** Variant names whose base instance was flattened into the variant root —
    *  a child absent ONLY there is a fidelity limit, not drift. */
   flattenedVariants: Set<string>;
+  /** Nested instances whose child contract is not in scope, keyed by the
+   *  stub contract id they will claim — turned into childStubs post-build. */
+  stubs: Map<string, StubCapture>;
   mint?: MintCapture;
+}
+
+/** Captured evidence for one auto-proposed child contract stub. */
+interface StubCapture {
+  id: string;
+  instanceOf: string;
+  /** Every occurrence's applied componentProperties, across variants. */
+  applied: Array<Record<string, string | boolean>>;
 }
 
 const first = <T>(occ: Occ[], pick: (n: DumpNode) => T | undefined): T | undefined => {
@@ -785,7 +827,10 @@ function buildPart(
     const characters = first(m.occ, (n) => n.text?.characters) ?? '';
     if (property) {
       registerTextProp(ctx, property, characters);
-      part.content = { prop: camel(property) };
+      // The SAME canonical spelling registerTextProp names the prop with —
+      // camel() alone would leak illegal characters ("✏️text") into the
+      // content binding and break the prop↔content pairing.
+      part.content = { prop: canonicalPropName(property) };
     } else {
       part.text = characters;
     }
@@ -816,7 +861,7 @@ function buildPart(
       const visibleRef = unifiedPropRef(m, 'visible', ctx, where);
       const optional = visibleRef === `Show ${swapProperty}`;
       if (optional) part.optional = true;
-      else if (visibleRef) applyVisibleBinding(part, visibleRef, ctx, where);
+      else if (visibleRef) applyVisibleBinding(part, visibleRef, ctx, where, m);
       ctx.slots.push({ part, property: swapProperty, optional: optional || visibleRef !== undefined });
       if (visibleWhen && !part.visibleWhen) part.visibleWhen = visibleWhen;
       return part;
@@ -846,8 +891,20 @@ function buildPart(
     }
     const id = ctx.contractIdByName.get(instanceOf);
     if (!id) {
+      // AUTO-PROPOSED CHILD STUB (field case: CBDS Button → ds.icon). A
+      // component ref to a contract nobody has is a guaranteed emit refusal
+      // ("no contract in scope") — so the proposal ships a STUB child
+      // contract alongside itself (childStubs), built from the observed
+      // applied values ONLY. Nothing about the child's real API or anatomy
+      // is guessed; the stub names its own provisionality.
+      const stubId = `${ctx.prefix}.${kebab(instanceOf)}`;
+      const capture = ctx.stubs.get(stubId) ?? { id: stubId, instanceOf, applied: [] };
+      for (const o of m.occ) {
+        if (o.node.componentProperties) capture.applied.push(o.node.componentProperties);
+      }
+      ctx.stubs.set(stubId, capture);
       ctx.notes.push(
-        `${where}: nested instance of "${instanceOf}" has no known contract — component ref proposed as "${ctx.prefix}.${kebab(instanceOf)}", review`,
+        `${where}: nested instance of "${instanceOf}" has no known contract — component ref proposed as "${stubId}" with a STUB child contract auto-proposed alongside (childStubs; API from observed applied values only, anatomy not captured — import the real child set to replace it)`,
       );
     }
     const component: Record<string, unknown> = { id: id ?? `${ctx.prefix}.${kebab(instanceOf)}` };
@@ -861,7 +918,13 @@ function buildPart(
     }
     // The instance's own geometry/paints belong to the child contract — elided.
     part.component = component;
-    if (visibleWhen) part.visibleWhen = visibleWhen;
+    // A visibility binding on a component-ref part is a boolean prop +
+    // visibleWhen, exactly like slot/swap/frame parts (field case: CBDS icon
+    // toggles ↪️icon-left / ↪️icon-right — captured by the dump, previously
+    // dropped here).
+    const visibleRef = unifiedPropRef(m, 'visible', ctx, where);
+    if (visibleRef) applyVisibleBinding(part, visibleRef, ctx, where, m);
+    if (visibleWhen && !part.visibleWhen) part.visibleWhen = visibleWhen;
     return part;
   }
 
@@ -897,7 +960,7 @@ function buildPart(
     const visibleRef = unifiedPropRef(m, 'visible', ctx, where);
     const optional = visibleRef === `Show ${soleSwap}`;
     if (optional) part.optional = true;
-    else if (visibleRef) applyVisibleBinding(part, visibleRef, ctx, where);
+    else if (visibleRef) applyVisibleBinding(part, visibleRef, ctx, where, m);
     part.slot = slot;
     ctx.slots.push({ part, property: soleSwap, optional });
     if (visibleWhen) part.visibleWhen = visibleWhen;
@@ -914,7 +977,7 @@ function buildPart(
   if (layout) part.layout = layout;
   attachTokens(ctx, part, tokens);
   const visibleRef = unifiedPropRef(m, 'visible', ctx, where);
-  if (visibleRef) applyVisibleBinding(part, visibleRef, ctx, where);
+  if (visibleRef) applyVisibleBinding(part, visibleRef, ctx, where, m);
   const mode = m.occ[0].node.layout?.mode ?? null;
   const parts: Record<string, unknown> = {};
   const taken = new Set<string>();
@@ -928,13 +991,21 @@ function buildPart(
 }
 
 /** A visibility binding that is not a slot's "Show <Property>" convention:
- *  a real BOOLEAN prop drives the part. */
-function applyVisibleBinding(part: Record<string, unknown>, property: string, ctx: Ctx, where: string) {
+ *  a real BOOLEAN prop drives the part. Default recovery (dump v1.1) uses
+ *  POSITIVE evidence only: the node hidden in the DEFAULT (first) variant
+ *  recovers `false`; absence of the `hidden` field is ambiguous (visible, or
+ *  a pre-v1.1 dump) and recovers nothing — the base-instance promotion pass
+ *  may still hand a default over later. */
+function applyVisibleBinding(part: Record<string, unknown>, property: string, ctx: Ctx, where: string, m?: Merged) {
   const name = canonicalPropName(property);
   if (!ctx.boolProps.some((b) => b.property === property)) {
-    ctx.boolProps.push({ name, property });
+    const hiddenInDefault =
+      m?.occ.find((o) => o.variant === ctx.totalVariants[0])?.node.hidden === true;
+    ctx.boolProps.push({ name, property, ...(hiddenInDefault ? { default: false } : {}) });
     ctx.notes.push(
-      `${where}: visibility bound to BOOLEAN "${property}" — proposed as prop \`${name}\` (default not recoverable from dump v1, review)`,
+      hiddenInDefault
+        ? `${where}: visibility bound to BOOLEAN "${property}" — proposed as prop \`${name}\` (default false: the node is hidden in the default variant, dump v1.1)`
+        : `${where}: visibility bound to BOOLEAN "${property}" — proposed as prop \`${name}\` (default not recoverable from dump v1, review)`,
     );
   }
   part.visibleWhen = { prop: name };
@@ -1124,6 +1195,84 @@ function promoteBaseInstanceCaptures(captures: BaseInstanceCapture[], ctx: Ctx) 
 }
 
 // ---------------------------------------------------------------------------
+// Child contract stubs (field case: CBDS Button → ds.icon)
+// ---------------------------------------------------------------------------
+
+/** One auto-proposed STUB contract for a nested instance whose child contract
+ *  is not in scope. Mechanical and provisional by construction: props are the
+ *  OBSERVED applied values only (a "#id"-suffixed key is a TEXT property with
+ *  certainty — promoteBaseInstanceCaptures' rule; a bare string key is
+ *  VARIANT/TEXT-ambiguous at an instance boundary and is modeled as an enum
+ *  over the distinct observed spellings), the anatomy is an empty root (dump
+ *  v1 stops at instances — the child's structure is simply not captured), and
+ *  the description says so. The stub exists so the parent's component ref can
+ *  EMIT instead of refusing; importing the real child set replaces it. */
+function buildChildStub(capture: StubCapture, ctx: Ctx, fileKey: string | null): Record<string, unknown> {
+  const observed = new Map<string, { suffixed: boolean; values: Array<string | boolean> }>();
+  for (const applied of capture.applied) {
+    for (const [key, value] of Object.entries(applied)) {
+      const property = key.split('#')[0];
+      const entry = observed.get(property) ?? { suffixed: key.includes('#'), values: [] };
+      entry.values.push(value);
+      observed.set(property, entry);
+    }
+  }
+  const props: Array<Record<string, unknown>> = [];
+  for (const [property, { suffixed, values }] of observed) {
+    const name = canonicalPropName(property);
+    const v0 = values[0];
+    if (typeof v0 === 'boolean') {
+      props.push({
+        name,
+        type: 'boolean',
+        default: v0,
+        bindings: { figma: { kind: 'BOOLEAN', property }, code: { prop: name } },
+      });
+    } else if (suffixed) {
+      props.push({
+        name,
+        type: 'text',
+        default: v0,
+        bindings: { figma: { kind: 'TEXT', property }, code: { prop: name } },
+      });
+    } else {
+      // Distinct observed spellings, deduped by canonical value — the same
+      // canonicalization the parent's component.props go through.
+      const byCanonical = new Map<string, string>();
+      for (const v of values) {
+        if (typeof v === 'string' && !byCanonical.has(camel(v))) byCanonical.set(camel(v), v);
+      }
+      props.push({
+        name,
+        type: { enum: [...byCanonical.keys()] },
+        default: camel(String(v0)),
+        bindings: {
+          figma: { kind: 'VARIANT', property, values: Object.fromEntries(byCanonical) },
+          code: { prop: name },
+        },
+      });
+    }
+  }
+  const name = pascalComponentName(capture.instanceOf);
+  return {
+    $schema: './contract.schema.json',
+    id: capture.id,
+    name,
+    version: '0.1.0',
+    status: 'draft',
+    description: `STUB contract auto-proposed for the nested "${capture.instanceOf}" instances of ${ctx.setName} — the child set was not imported. Props are the observed applied values ONLY; anatomy and styling are NOT captured (dump v1 stops at instance boundaries). Import the child set to replace this stub.`,
+    semantics: { element: 'span' },
+    props,
+    states: [],
+    anatomy: { root: {} },
+    anchors: {
+      figma: { fileKey, componentSetKey: null },
+      code: { importPath: `src/components/${name}`, export: name },
+    },
+  };
+}
+
+// ---------------------------------------------------------------------------
 // Whole-set proposal
 // ---------------------------------------------------------------------------
 
@@ -1159,6 +1308,7 @@ export function proposeFromDump(
     boolProps: [],
     slots: [],
     flattenedVariants: new Set(),
+    stubs: new Map(),
     mint: opts.mintUnbound
       ? {
           axes: enumAxes.map((a) => ({ propName: a.propName, values: a.values.map(camel) })),
@@ -1242,6 +1392,11 @@ export function proposeFromDump(
     const slot = s.part.slot as Record<string, unknown>;
     slot.name = name;
     if (pascal(name) !== s.property) slot.figmaProperty = s.property;
+    if (propNameSanitized(s.property)) {
+      ctx.notes.push(
+        `slot \`${name}\`: Figma property "${s.property}" contains characters outside a legal identifier — name sanitized at proposal; the original spelling stays the design binding (slot.figmaProperty)`,
+      );
+    }
     if (s === defaultSlot) {
       ctx.notes.push(
         `slot "${s.property}": first non-optional slot in tree order — judged the DEFAULT slot (name \`children\`); rename if it is not the main content`,
@@ -1317,10 +1472,29 @@ export function proposeFromDump(
     });
   }
 
+  // Identifier sanitization at PROPOSAL, not refusal at emit: the component
+  // name must be PascalCase (it becomes the export and its file names) and
+  // every prop/slot name a legal identifier. Original spellings survive in
+  // the figma bindings; every sanitization is a named note.
+  const componentName = pascalComponentName(set.setName);
+  if (componentName !== set.setName) {
+    ctx.notes.push(
+      `contract name: drawn set name "${set.setName}" is not a PascalCase component name — proposed as "${componentName}" (the canvas set keeps its own name; the componentSetKey/nodeId anchors carry identity)`,
+    );
+  }
+  for (const p of props) {
+    const property = (p.bindings as { figma?: { property?: string } }).figma?.property;
+    if (property && propNameSanitized(property)) {
+      ctx.notes.push(
+        `prop \`${String(p.name)}\`: Figma property "${property}" contains characters outside a legal identifier — name sanitized at proposal; the original spelling stays the design binding (bindings.figma.property)`,
+      );
+    }
+  }
+
   const contract: Record<string, unknown> = {
     $schema: './contract.schema.json',
     id: `${prefix}.${kebab(set.setName)}`,
-    name: set.setName,
+    name: componentName,
     version: '0.1.0',
     status: 'draft',
     description: `PROPOSED contract extracted from the design canvas (extract/figma dump v1) — API, anatomy, and token bindings inverted from the drawn structure. Semantics, a11y, events, and slot accepts are not canvas-recoverable; review before adoption.`,
@@ -1334,7 +1508,7 @@ export function proposeFromDump(
         componentSetKey: set.key ?? null,
         ...(set.nodeId ? { nodeId: set.nodeId } : {}),
       },
-      code: { importPath: `src/components/${set.setName}`, export: set.setName },
+      code: { importPath: `src/components/${componentName}`, export: componentName },
     },
   };
 
@@ -1376,8 +1550,14 @@ export function proposeFromDump(
     mintedTokens = { tree: minted.tree, count: minted.count, entries: minted.entries };
   }
 
+  // Auto-proposed child stubs (see buildChildStub) — each must parse too.
+  const childStubs = [...ctx.stubs.values()].map((capture) =>
+    buildChildStub(capture, ctx, opts.fileKey ?? null),
+  );
+
   // Refuse to emit an unusable proposal.
   ContractSchema.parse(contract);
+  for (const stub of childStubs) ContractSchema.parse(stub);
   ctx.notes.unshift(`semantics.element defaulted to "div" — element/role/ARIA are not drawn on the canvas; set the real host element`);
   for (const u of ctx.unbound) {
     ctx.notes.push(
@@ -1386,7 +1566,13 @@ export function proposeFromDump(
       }`,
     );
   }
-  return { contract, notes: ctx.notes, unbound: ctx.unbound, ...(mintedTokens ? { mintedTokens } : {}) };
+  return {
+    contract,
+    notes: ctx.notes,
+    unbound: ctx.unbound,
+    ...(mintedTokens ? { mintedTokens } : {}),
+    ...(childStubs.length > 0 ? { childStubs } : {}),
+  };
 }
 
 // ---------------------------------------------------------------------------
