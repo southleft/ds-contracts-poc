@@ -2,7 +2,7 @@
 
 *July 3, 2026. Source: full sweep of the Astryx component index (astryx.atmeta.com/components, 93 components, `@astryxdesign/core` v0.1.2 — prop tables recovered from the docs site's own component registry). Astryx is mirrored at the **API level**: prop names, types, enum vocabularies, and slot shapes. Every component below is either generated from a contract, or its absence is attributed to a specific named gap — never silently skipped.*
 
-**The scoreboard (updated after round three):** **50 components in the catalog**, 48 of them mirroring Astryx APIs directly — the original set plus Blockquote, Checkbox, Code, Divider, EmptyState, IconButton, StatusDot, TextArea, TextField, Toast, Token, and the second wave: **ChatMessage, ChatMessageMetadata, ChatSystemMessage, Citation, Field, Kbd, List, ListItem, MetadataList, MetadataListItem, Section, SideNavItem, Tab, TabList, Toolbar, TopNav, TopNavItem, TypeaheadItem**. Stack and Inline are system layout primitives. The remaining Astryx components fall into **two honest categories**: static components blocked by a *named schema gap*, and behavior-heavy components outside the contract's declared boundary (contracts own API/anatomy/tokens; interactive behavior is a hand-written layer beside the generated shells).
+**The scoreboard (updated after the schema-v7 expressiveness round):** **51 components in the catalog**, 49 of them mirroring Astryx APIs directly — the original set plus Blockquote, Checkbox, Code, Divider, EmptyState, IconButton, StatusDot, TextArea, TextField, Toast, Token, the second wave: **ChatMessage, ChatMessageMetadata, ChatSystemMessage, Citation, Field, Kbd, List, ListItem, MetadataList, MetadataListItem, Section, SideNavItem, Tab, TabList, Toolbar, TopNav, TopNavItem, TypeaheadItem** — and **Heading**, unblocked when `elementByProp` and N-axis variants landed (schema v7). Stack and Inline are system layout primitives. The remaining Astryx components fall into **two honest categories**: static components blocked by a *named schema gap*, and behavior-heavy components outside the contract's declared boundary (contracts own API/anatomy/tokens; interactive behavior is a hand-written layer beside the generated shells).
 
 ## Mirrored in round three (10 advanced contracts)
 
@@ -34,7 +34,7 @@ Props deliberately omitted from otherwise-mirrored APIs (all function-valued or 
 
 | Component | Blocking gap |
 |---|---|
-| Text, Heading | **>2 variant axes** (type × color × weight × size) and **element-by-prop** (`as`, `level` change the rendered tag) |
+| Text | **>2 variant axes** (type × color × weight × size). *(Heading left this row when `elementByProp` + N-axis variants landed — `contracts/heading.contract.json` ships; Text's four-axis typography surface is still queued.)* |
 | AspectRatio, NumberInput | **Number-driven dimensions/native numeric inputs** — number props exist now; these need them wired to size and to form controls |
 | Divider (orientation) | **Per-enum-value property overrides** (horizontal thickness=height, vertical thickness=width) |
 | isLoading states, Skeleton gradient shimmer | **Animation exists (spin/pulse)**; per-enum icon sizing and gradient keyframes are the remaining motion gaps |

@@ -6,6 +6,20 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+### Added
+
+- **Fidelity matrix** (`extract/fidelity-matrix/`) — four real components (Shoelace Tooltip and Button Group, Eventz Button, CBDS Button design + code) imported live, proposed, emitted, and scored against their own captures; committed fixtures replay every number offline. SCORECARD with 12 named gaps, causes, and an ordered punch list.
+- **Dump v1.1** — solid paints capture `{hex, alpha}` and node visibility (`hidden`) in both the REST mapper and the plugin dump; alpha<1 paints mint as 8-digit hex (one string that is a legal DTCG color `$value`, a CSS color, and invertible to Figma RGBA); the `paint-alpha-dropped` degradation is retired.
+- **Auto-proposed child contract stubs** — a nested instance whose child contract is not in scope ships a STUB contract alongside the proposal (observed applied values only, provisionality named) so component refs emit instead of refusing.
+- **Base-instance flattening + self-reference guard** — variants that solely wrap an instance of a shared base component flatten (captured properties promote to real props, Figma spellings preserved); a set never emits a component ref to itself; component-ref cycles refuse by name at the generator instead of overflowing the stack.
+- **Identifier sanitization at proposal** — non-PascalCase set names and emoji-prefixed prop/slot names sanitize when the contract is proposed (original spellings stay the figma bindings, every sanitization noted); emit no longer refuses on spelling.
+- **Visible propRefs on component-ref parts** — icon-toggle booleans captured on nested instances become contract props with `visibleWhen`, defaults recovered from dump v1.1 `hidden` evidence.
+
+### Fixed
+
+- Canvas engine crash (`undefined.name`) on contracts referencing a contract-less component — now a named refusal.
+- Styles scorer compares full RGBA instead of truncating to 6-digit hex.
+
 ## [0.5.0] - 2026-07-09
 
 ### Added
@@ -124,7 +138,7 @@ First public release: the contract-as-source-of-truth loop, proven end-to-end an
 - Three contract defects found by the visual canvas audit.
 - Extractor gaps found by self-audit: cva/`VariantProps` support; skipped components are always reported, never silent.
 
-[Unreleased]: https://github.com/southleft/ds-contracts-poc/compare/v0.1.0...HEAD
+[Unreleased]: https://github.com/southleft/ds-contracts-poc/compare/v0.5.0...HEAD
 [0.5.0]: https://github.com/southleft/ds-contracts-poc/compare/v0.4.0...v0.5.0
 [0.4.0]: https://github.com/southleft/ds-contracts-poc/compare/v0.3.0...v0.4.0
 [0.3.0]: https://github.com/southleft/ds-contracts-poc/compare/v0.2.0...v0.3.0

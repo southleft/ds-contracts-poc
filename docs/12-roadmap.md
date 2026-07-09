@@ -41,7 +41,7 @@ Connect **pre-existing** design and code libraries — no rewrite, no regenerati
 - [ ] **Binding inference** — propose `figma`↔`code` name/value mappings with per-field confidence *(started: transparent alias rules + abbreviation mapping in `npm run reconcile`; confidence scoring and value-mapping inference still open)*
 - [ ] **Reconciliation UI** — side-by-side proposal merge in the Contract Hub; extraction → contract v1 in minutes per component
 - [ ] **Foreign token import** — contracts reference an org's *existing* DTCG / Style Dictionary tokens, not this repo's
-- [x] **Public pilot** — Shoelace v2.20.1 (CEM extraction, 60/60) reconciled against the community Shoelace Figma kit (28 sets, dumped read-only): 42 property agreements, 236 human decisions itemized — the drift report is real, committed, and reproducible (`extract/pilots/shoelace/`)
+- [x] **Public pilot** — Shoelace v2.20.1 (CEM extraction, 58/58) reconciled against the community Shoelace Figma kit (28 sets, dumped read-only): 42 property agreements, 236 human decisions itemized — the drift report is real, committed, and reproducible (`extract/pilots/shoelace/`)
 
 **Exit criterion:** the diagnostic loop runs green→red→green on two surfaces this repo did not generate *(✅ eval-proven: `diagnose-foreign-green-red-green` — `npm run diagnose` referees foreign code + a design dump)*, and a design system team confirms the pilot drift report is true — every finding real, none missed within declared scope.
 
