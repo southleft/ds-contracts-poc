@@ -1,6 +1,6 @@
 {
-  "passed": 58,
-  "total": 58,
+  "passed": 59,
+  "total": 59,
   "results": [
     {
       "id": "refuse-unknown-token-reference",
@@ -289,6 +289,11 @@
     },
     {
       "id": "design-mcp-roundtrip-fixture-replay",
+      "claim": "C5-extraction",
+      "pass": true
+    },
+    {
+      "id": "design-base-instance-flattening-no-self-reference",
       "claim": "C5-extraction",
       "pass": true
     }

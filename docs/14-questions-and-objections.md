@@ -22,7 +22,7 @@ Correct as stated — which is why nobody is asked to start there. Adoption is d
 
 ### "Does this work with my existing design system, or only with components born from contracts?"
 
-Both directions ship today. Greenfield: contracts generate both surfaces. Brownfield: `npm run extract:code` reads a real component library into schema-valid proposed contracts, `npm run reconcile` produces the disagreement report between your own two surfaces, and `npm run diagnose` referees them continuously — none of which assumes generation ([docs/13](13-try-it-with-your-system.md)). Receipts: extraction ran against **Shoelace** (58/58 components via its Custom Elements Manifest) and **Mantine** (245 components, 1,691 props, <1s, 100% of unreadable components reported rather than silently dropped) — two shipping libraries this project doesn't own (`extract/pilots/`).
+Both directions ship today. Greenfield: contracts generate both surfaces. Brownfield: `npm run extract:code` reads a real component library into schema-valid proposed contracts, `npm run reconcile` produces the disagreement report between your own two surfaces, and `npm run diagnose` referees them continuously — none of which assumes generation ([docs/13](13-try-it-with-your-system.md)). Receipts: extraction ran against **Shoelace** (59/59 components via its Custom Elements Manifest) and **Mantine** (245 components, 1,691 props, <1s, 100% of unreadable components reported rather than silently dropped) — two shipping libraries this project doesn't own (`extract/pilots/`).
 
 ### "Is it React-only? Figma-only?"
 

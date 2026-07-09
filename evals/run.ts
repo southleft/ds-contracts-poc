@@ -1221,6 +1221,20 @@ const cases: Case[] = [
       if (!receipt.includes('REFUSED by the token-ref grammar')) throw new Error('U+2024 refusal receipt missing');
     },
   },
+  {
+    // Field case (Eventz DS Button): variants solely wrapping an INSTANCE of a
+    // shared base component name-matching the set must flatten — no self
+    // component ref, captured componentProperties promoted with exact Figma
+    // spellings — and pass the generator on flattened AND named-skip paths.
+    id: 'design-base-instance-flattening-no-self-reference',
+    claim: 'C5-extraction',
+    run: () => {
+      const r = run(TSX, ['extract/figma/base-instance-check.ts']);
+      if (r.status !== 0) throw new Error(`base-instance receipt failed:\n${r.out}`);
+      if (!r.out.includes('all base-instance invariants hold'))
+        throw new Error('base-instance receipt did not report green');
+    },
+  },
 ];
 
 // ---------------------------------------------------------------------------

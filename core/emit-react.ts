@@ -144,6 +144,34 @@ export function validateContract(
       if (!dep) {
         errors.push(`${contract.id}: part "${name}" references component "${part.component.id}" which has no contract in scope`);
       }
+      // A component ref cycle renders forever — refuse by name, never crash.
+      // Live repro (Eventz Button, 2026-07-09): a surviving self-reference
+      // blew the stack in both emitters.
+      if (part.component.id === contract.id) {
+        errors.push(`${contract.id}: part "${name}" component ref creates a cycle (${contract.id} → ${contract.id}) — a contract cannot compose itself`);
+      } else if (dep) {
+        const seen = new Set([contract.id]);
+        const stack = [dep];
+        const path = [contract.id, dep.id];
+        while (stack.length) {
+          const cur = stack.pop()!;
+          if (seen.has(cur.id)) {
+            errors.push(`${contract.id}: part "${name}" component ref creates a cycle (${path.join(' → ')}) — a contract cannot compose itself`);
+            break;
+          }
+          seen.add(cur.id);
+          for (const entry of walkAnatomy(cur)) {
+            if (entry.part.component) {
+              const next = byId.get(entry.part.component.id);
+              if (next) { stack.push(next); path.push(next.id); }
+              else if (entry.part.component.id === contract.id) {
+                stack.push(contract);
+                path.push(contract.id);
+              }
+            }
+          }
+        }
+      }
       for (const [propName, value] of Object.entries(part.component.props ?? {})) {
         if (dep && !dep.props.some((dp) => dp.name === propName)) {
           errors.push(`${contract.id}: part "${name}" sets unknown ${dep.id} prop "${propName}"`);
