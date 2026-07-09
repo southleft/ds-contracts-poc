@@ -95,7 +95,7 @@ Five features, each shipped with a consuming contract: `elementByProp`
 surfaces), `stylesWhen` (whitelisted conditional literals), `overlay`
 (out-of-flow anatomy for tooltips/popups), `arrayOf` structured props (code-only
 with `kind: NONE`, skipped by every design-side consumer). Plus
-pending-first-sync parity classification. **Eval suite: 57/57.**
+pending-first-sync parity classification. **Eval suite: 58/58.**
 
 ## 2026-07-08 — Code Editor Simulator (Hub)
 
@@ -106,7 +106,7 @@ client-side — API diff, an amendSet-mirrored canvas plan (ADDED/REBUILT/
 EXTRA-reported over the enum cartesian product, all-defaults combo first), and
 spec-policy version advice. Illegal edits are refused by the schema's own
 names and never reach either surface; both keep rendering the last governed
-version. Dashboard-only change; 57/57 evals unaffected.
+version. Dashboard-only change; 58/58 evals unaffected.
 
 ## 2026-07-08 — State previews + canvas text styles (schema v8)
 
@@ -119,7 +119,7 @@ hand-built State axis without the opt-in is the kit-rot detector (all four
 pilot systems carry rotting hand-built state axes). Plus named Figma
 TextStyles minted from semantic typography tokens, upserted by identity
 marker, ridden by matching text nodes. Button v1.5.0 ships previews.
-**Eval suite: 57/57.**
+**Eval suite: 58/58.**
 
 
 ## 2026-07-08 — Full-circle sync: drift acknowledged → resolved → ratchet retired
@@ -160,7 +160,7 @@ Switch, Card: **zero mismatches in both directions** (code: 28 matched /
 — a retokenized property, a deleted part, or an uncorrelated cross-variant
 binding each fail by name. Unbound/raw values are always reported with
 nearest-token candidates, never invented. Receipts: `extract/ROUNDTRIP-CODE.md`,
-`extract/figma/ROUNDTRIP.md`. **Eval suite: 57/57.**
+`extract/figma/ROUNDTRIP.md`. **Eval suite: 58/58.**
 
 
 ## 2026-07-08 — Playground Phase 0: the engine becomes a library
@@ -179,7 +179,7 @@ golden-guarded — CLI output did not change by a byte:
   live plugin dump, and the Enterprise-gated variables endpoint degrades to
   resolved literals with a named taxonomy and zero fabrication.
 
-**Eval suite: 57/57.** Launch gate (per TJ): no public launch until the
+**Eval suite: 58/58.** Launch gate (per TJ): no public launch until the
 Figma-URL import works end-to-end in the browser UI.
 
 
@@ -210,7 +210,7 @@ referencing repo-only tokens refuse by name. Verified against this repo's
 own Badge **over the real network**: the proposed anatomy byte-matches the
 shipping contract, in a stranger's browser. A genuine transient 429 during
 testing was surfaced honestly and the proposal degraded to the props
-surface — the ladder held under real rate limiting. 57/57, no core changes.
+surface — the ladder held under real rate limiting. 58/58, no core changes.
 
 
 ## 2026-07-08 — Playground Phase 3: the loop starts from nothing
@@ -224,7 +224,7 @@ user-triggered fix rounds (max 2, counted, receipted with model id and
 token usage). A keyless fixture demo rides the same transport. Any
 contract travels as a ~1 KB URL hash (deflate + base64url, 8 KB named
 guard); first visits get a three-action guided strip. **The playground's
-planned scope (W1–W10) is complete.** 57/57.
+planned scope (W1–W10) is complete.** 58/58.
 
 
 ## 2026-07-08 — LAUNCHED: both credential-gated paths verified live
@@ -260,7 +260,7 @@ pristine original (one-click Reset; the onboarding strip gains the reset
 step). Every successful import — Figma, code, prompt, JSON — lands in a
 session workspace (capped at 30 with named eviction) that restores contract
 + receipts and tells the design↔code switch story in one dismissible line.
-A plain help drawer covers every way in. 57/57, no core changes.
+A plain help drawer covers every way in. 58/58, no core changes.
 
 
 ## 2026-07-08 — Playground speaks designer
@@ -274,7 +274,7 @@ variants with combination count, slots resolved to names, events, grouped
 token chips, a11y — stale-on-invalid, refusals visible in both views. Every
 gallery card teaches with a fact-checked "What to notice" caption; the help
 drawer gains a seven-term glossary; first-session jargon explains itself in
-place. 57/57 throughout; verified both themes.
+place. 58/58 throughout; verified both themes.
 
 
 ## 2026-07-08 — Playground grows a workbench feel
@@ -287,7 +287,7 @@ our own Carbon-muted token palette on playground variables — no stock theme)
 and the contract editor itself, where the metric-locked refusal backdrop
 becomes the visible highlighted text under a transparent-glyph textarea —
 caret, selection, and refusal-line highlighting all intact, verified
-numerically in both themes. 57/57.
+numerically in both themes. 58/58.
 
 
 ## 2026-07-08 — The ladder keeps your styles (minted provisional tokens)
@@ -301,7 +301,7 @@ track an axis — and the proposal binds to it. Nothing semantic is ever
 guessed: names never leave the `imported.` namespace, every minted ref is
 flagged for rename, and renaming against your real tokens IS the adoption
 workflow. Degraded-Badge receipt: 13 leaves, zero unbound, emitters green.
-**57/57.**
+**58/58.**
 
 
 ## 2026-07-09 — The assist layer goes live (AI under governance, on a budget)
@@ -317,6 +317,21 @@ color.content.inverse with pairing rationale — design-system judgment,
 refereed by the same schema as everything else. 21/21 handler tests;
 one workerd gotcha (unbound fetch = Illegal invocation masked as 502)
 found by the live smoke and fixed.
+
+
+## 2026-07-09 — The Enterprise gap closes on any plan (desktop MCP path)
+
+Figma desktop ships a local Dev Mode MCP server whose variable access is not
+plan-gated. The new import path joins its flat name→value defs against REST
+structure — set scope first, per-node subtree refinement, a name resolves
+only when exactly one candidate survives every occurrence, ambiguity
+receipted and minted rather than guessed. Live receipts: Badge resolves all
+13 variable ids and lands IDENTICAL to the plugin-dump comparator verdict;
+the Eventz Alert recovers foreign vocabulary ({spacing.4}) and its U+2024
+variable fires the grammar refusal through the new path. CI-safe via
+recorded fixtures; the future remote transport reuses the join unchanged.
+The fidelity ladder is now: desktop MCP / plugin dump / REST+minting —
+every rung named in the receipts. **58/58.**
 
 
 ---

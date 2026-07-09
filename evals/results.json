@@ -1,6 +1,6 @@
 {
-  "passed": 57,
-  "total": 57,
+  "passed": 58,
+  "total": 58,
   "results": [
     {
       "id": "refuse-unknown-token-reference",
@@ -284,6 +284,11 @@
     },
     {
       "id": "design-rest-degraded-minting-binds-styles",
+      "claim": "C5-extraction",
+      "pass": true
+    },
+    {
+      "id": "design-mcp-roundtrip-fixture-replay",
       "claim": "C5-extraction",
       "pass": true
     }

@@ -1208,6 +1208,19 @@ const cases: Case[] = [
       if (mint.status !== 0) throw new Error(`mint invariants failed:\n${mint.out}`);
     },
   },
+  {
+    // Desktop-MCP import: recorded live fixtures replay to plugin-dump name
+    // fidelity — Badge zero-mismatch, Eventz foreign names + the U+2024 refusal.
+    id: 'design-mcp-roundtrip-fixture-replay',
+    claim: 'C5-extraction',
+    run: () => {
+      const r = run(TSX, ['extract/figma/mcp/receipt.ts']);
+      if (r.status !== 0) throw new Error(`desktop-MCP receipt failed:\n${r.out}`);
+      const receipt = readFileSync(path.join(SCRATCH, 'extract/figma/mcp/RECEIPT.md'), 'utf8');
+      if (!/\| Badge \| \d+ \| \d+ \| 0 \| ✅/.test(receipt)) throw new Error('Badge row is not zero-mismatch');
+      if (!receipt.includes('REFUSED by the token-ref grammar')) throw new Error('U+2024 refusal receipt missing');
+    },
+  },
 ];
 
 // ---------------------------------------------------------------------------

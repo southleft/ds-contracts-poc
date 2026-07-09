@@ -165,6 +165,6 @@ Then prove the loop to yourself in about two minutes:
 2. Open a contract in `contracts/` and change something small — add an enum value, tweak a token binding.
 3. `npm run build && npm run parity` — the differ now reports the canvas **behind**, naming exactly what's missing and how to fix it. That honest red state *is* the product: nothing pretends to be in sync when it isn't.
 4. Revert, or carry the change through — regenerate, sync the canvas, and watch it go green again.
-5. `npm run eval` — 57 deterministic checks that the machinery itself (detection, refusal, convergence, byte-identical regeneration) still holds.
+5. `npm run eval` — 58 deterministic checks that the machinery itself (detection, refusal, convergence, byte-identical regeneration) still holds.
 
 From there: [The Bridge](./00-the-bridge.md) for the narrative, [Architecture](./01-architecture.md) for the model, [Contract Specification](./02-contract-spec.md) when you're ready to write one.
