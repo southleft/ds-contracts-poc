@@ -277,6 +277,19 @@ drawer gains a seven-term glossary; first-session jargon explains itself in
 place. 56/56 throughout; verified both themes.
 
 
+## 2026-07-08 — Playground grows a workbench feel
+
+The rail nav scrolls instead of wrapping (bottom border back on the shared
+37px line), the three panes resize by draggable gutters (persisted,
+keyboard-nudgeable, min-width honest), code surfaces step up to 14px/13.5px,
+and Prism paints everything: the output panes (one 8.4 kB gzip lazy chunk,
+our own Carbon-muted token palette on playground variables — no stock theme)
+and the contract editor itself, where the metric-locked refusal backdrop
+becomes the visible highlighted text under a transparent-glyph textarea —
+caret, selection, and refusal-line highlighting all intact, verified
+numerically in both themes. 56/56.
+
+
 ---
 
 **Standing scoreboard** (updated with each milestone):
