@@ -417,6 +417,171 @@ test('repo-profile: oversized samples are refused with a named 400', async () =>
 });
 
 // ---------------------------------------------------------------------------
+// fix-contract: request shape, salvage paths, named 400s, caps, upstream
+// ---------------------------------------------------------------------------
+
+const FIX_CONTRACT = {
+  id: 'ds.badge',
+  name: 'Badge',
+  version: '0.1.0',
+  status: 'draft',
+  description: 'A small status badge.',
+  semantics: { element: 'span' },
+  props: [],
+  states: [],
+  anatomy: { root: { tokens: { background: '{color.feedback.info.background}' } } },
+  anchors: {
+    figma: { fileKey: null, componentSetKey: null, nodeId: null },
+    code: { importPath: '@ds/components', export: 'Badge' },
+  },
+};
+
+const FIX_CONTRACT_BODY = {
+  contract: FIX_CONTRACT,
+  refusals: ['anatomy root/background: token path color.feedback.info.background is not in the inventory'],
+  tokenPaths: ['imported.badge.background', 'color.action.primary.background', 'radius.badge'],
+};
+
+const FIXED_CONTRACT = {
+  ...FIX_CONTRACT,
+  anatomy: { root: { tokens: { background: '{imported.badge.background}' } } },
+};
+
+test('fix-contract: forced tool at 8192, non-strict schema, key in header only; refusals + inventory + contract ride the user message', async () => {
+  const { fetchImpl, calls } = mockAnthropic({ propose_contract_fix: { contract: FIXED_CONTRACT } });
+  const env = makeEnv();
+  const res = await handleRequest(req('/v1/assist/fix-contract', FIX_CONTRACT_BODY), env, deps(fetchImpl));
+  assert.equal(res.status, 200);
+
+  // Anthropic request shape
+  assert.equal(calls.length, 1);
+  assert.equal(calls[0].url, ANTHROPIC_URL);
+  assert.equal(calls[0].body.model, MODEL);
+  assert.equal(calls[0].body.max_tokens, 8192);
+  assert.deepEqual(calls[0].body.thinking, { type: 'disabled' });
+  assert.deepEqual(calls[0].body.tool_choice, { type: 'tool', name: 'propose_contract_fix' });
+  const tool = (calls[0].body.tools as Array<Record<string, unknown>>)[0];
+  assert.equal(tool.name, 'propose_contract_fix');
+  // Deliberately NON-strict: the mirrored contract shape needs oneOf/const/pattern.
+  assert.equal(tool.strict, undefined);
+  assert.equal((calls[0].headers as Record<string, string>)['x-api-key'], env.ANTHROPIC_API_KEY);
+
+  // User message carries refusals, the token inventory, and the contract — as data.
+  const messages = calls[0].body.messages as Array<{ content: string }>;
+  assert.match(messages[0].content, /"refusals"/);
+  assert.match(messages[0].content, /is not in the inventory/);
+  assert.match(messages[0].content, /"tokenInventory"/);
+  assert.match(messages[0].content, /imported\.badge\.background/);
+  assert.match(messages[0].content, /"ds\.badge"/);
+
+  // Response: the proposal plus usage; never the key.
+  const body = (await res.json()) as Record<string, unknown>;
+  assert.deepEqual(body.contract, FIXED_CONTRACT);
+  assert.equal(body.model, MODEL);
+  assert.deepEqual(body.usage, { input_tokens: 1000, output_tokens: 200 });
+  assert.ok(!JSON.stringify(body).includes(env.ANTHROPIC_API_KEY));
+});
+
+test('fix-contract: a double-wrapped { contract: { contract } } tool input is unwrapped', async () => {
+  const { fetchImpl } = mockAnthropic({ propose_contract_fix: { contract: { contract: FIXED_CONTRACT } } });
+  const res = await handleRequest(req('/v1/assist/fix-contract', FIX_CONTRACT_BODY), makeEnv(), deps(fetchImpl));
+  assert.equal(res.status, 200);
+  assert.deepEqual(((await res.json()) as { contract: unknown }).contract, FIXED_CONTRACT);
+});
+
+test('fix-contract: a flat contract (model omits the wrapper) is salvaged', async () => {
+  const { fetchImpl } = mockAnthropic({ propose_contract_fix: FIXED_CONTRACT });
+  const res = await handleRequest(req('/v1/assist/fix-contract', FIX_CONTRACT_BODY), makeEnv(), deps(fetchImpl));
+  assert.equal(res.status, 200);
+  assert.deepEqual(((await res.json()) as { contract: unknown }).contract, FIXED_CONTRACT);
+});
+
+test('fix-contract: every input violation is refused by name; the oversized body is a 413', async () => {
+  const { fetchImpl, calls } = mockAnthropic({ propose_contract_fix: { contract: FIXED_CONTRACT } });
+  const env = makeEnv();
+  const d = deps(fetchImpl);
+  const cases: Array<{ body: unknown; status: number; message: RegExp }> = [
+    { body: { ...FIX_CONTRACT_BODY, contract: undefined }, status: 400, message: /contract \(object\) is required/ },
+    { body: { ...FIX_CONTRACT_BODY, contract: 'not an object' }, status: 400, message: /contract \(object\) is required/ },
+    { body: { ...FIX_CONTRACT_BODY, contract: { pad: 'x'.repeat(65_000) } }, status: 400, message: /under 64KB/ },
+    { body: { ...FIX_CONTRACT_BODY, refusals: undefined }, status: 400, message: /refusals \(non-empty array of strings\)/ },
+    { body: { ...FIX_CONTRACT_BODY, refusals: [] }, status: 400, message: /refusals \(non-empty array of strings\)/ },
+    { body: { ...FIX_CONTRACT_BODY, refusals: [42] }, status: 400, message: /refusals \(non-empty array of strings\)/ },
+    { body: { ...FIX_CONTRACT_BODY, refusals: Array.from({ length: 51 }, () => 'r') }, status: 400, message: /at most 50/ },
+    { body: { ...FIX_CONTRACT_BODY, tokenPaths: undefined }, status: 400, message: /tokenPaths \(non-empty array of strings\)/ },
+    { body: { ...FIX_CONTRACT_BODY, tokenPaths: [] }, status: 400, message: /tokenPaths \(non-empty array of strings\)/ },
+    { body: { ...FIX_CONTRACT_BODY, tokenPaths: Array.from({ length: 3001 }, (_, i) => `p${i}`) }, status: 400, message: /at most 3000 paths/ },
+    // 320KB body cap trips before JSON parsing or any named check.
+    { body: { ...FIX_CONTRACT_BODY, refusals: ['x'.repeat(330_000)] }, status: 413, message: /too large/ },
+  ];
+  for (const c of cases) {
+    const res = await handleRequest(req('/v1/assist/fix-contract', c.body), env, d);
+    assert.equal(res.status, c.status, `expected ${c.status} for ${c.message}`);
+    assert.match(((await res.json()) as { error: string }).error, c.message);
+  }
+  assert.equal(calls.length, 0); // refusals are free — no model call, no quota
+});
+
+test('fix-contract: per-IP cap refuses with 429 and is its own endpoint class', async () => {
+  const { fetchImpl } = mockAnthropic({
+    propose_contract_fix: { contract: FIXED_CONTRACT },
+    propose_fetch_plan: FETCH_PLAN_OUTPUT,
+  });
+  const env = makeEnv({ ASSIST_IP_DAILY_LIMIT: '1' });
+  const d = deps(fetchImpl);
+  assert.equal((await handleRequest(req('/v1/assist/fix-contract', FIX_CONTRACT_BODY), env, d)).status, 200);
+  const second = await handleRequest(req('/v1/assist/fix-contract', FIX_CONTRACT_BODY), env, d);
+  assert.equal(second.status, 429);
+  assert.equal(((await second.json()) as { error: string }).error, MESSAGES.ipLimit);
+  // The fix-contract cap does not burn the fetch-plan class for the same IP.
+  assert.equal((await handleRequest(req('/v1/assist/fetch-plan', FETCH_PLAN_BODY), env, d)).status, 200);
+});
+
+test('fix-contract: a spent budget answers 429 before any model call', async () => {
+  const { fetchImpl, calls } = mockAnthropic({ propose_contract_fix: { contract: FIXED_CONTRACT } });
+  const env = makeEnv({ ASSIST_DAILY_TOKEN_BUDGET: '500' });
+  env.ASSIST_KV.store.set('budget:2026-07-08', '500'); // pre-spent
+  const res = await handleRequest(req('/v1/assist/fix-contract', FIX_CONTRACT_BODY), env, deps(fetchImpl));
+  assert.equal(res.status, 429);
+  assert.equal(((await res.json()) as { error: string }).error, MESSAGES.budget);
+  assert.equal(calls.length, 0);
+});
+
+test('fix-contract: a non-object contract in the tool output answers 502 — with usage still charged', async () => {
+  const { fetchImpl, calls } = mockAnthropic({ propose_contract_fix: { contract: 'not an object' } });
+  const env = makeEnv();
+  const res = await handleRequest(req('/v1/assist/fix-contract', FIX_CONTRACT_BODY), env, deps(fetchImpl));
+  assert.equal(res.status, 502);
+  assert.match(((await res.json()) as { error: string }).error, /no contract object/);
+  assert.equal(calls.length, 1);
+  // The model was called and answered, so the tokens are real: budget charged.
+  assert.equal(env.ASSIST_KV.store.get('budget:2026-07-08'), '1200');
+});
+
+test('fix-contract: upstream mapping — no tool_use 502, 429/529 retryable 429, other errors 502', async () => {
+  const noTool = await handleRequest(
+    req('/v1/assist/fix-contract', FIX_CONTRACT_BODY),
+    makeEnv(),
+    deps(mockAnthropic({}).fetchImpl), // scripted to answer text-only
+  );
+  assert.equal(noTool.status, 502);
+  assert.match(((await noTool.json()) as { error: string }).error, /nothing to propose/);
+  const rl = await handleRequest(
+    req('/v1/assist/fix-contract', FIX_CONTRACT_BODY),
+    makeEnv(),
+    deps(mockAnthropic({}, { status: 529 }).fetchImpl),
+  );
+  assert.equal(rl.status, 429);
+  const err = await handleRequest(
+    req('/v1/assist/fix-contract', FIX_CONTRACT_BODY),
+    makeEnv(),
+    deps(mockAnthropic({}, { status: 500 }).fetchImpl),
+  );
+  assert.equal(err.status, 502);
+  assert.ok(!(((await err.json()) as { error: string }).error).includes('upstream detail'));
+});
+
+// ---------------------------------------------------------------------------
 // Upstream failure shapes
 // ---------------------------------------------------------------------------
 
