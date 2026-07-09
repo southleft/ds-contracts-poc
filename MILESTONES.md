@@ -363,6 +363,18 @@ zoomed to what it built, or plain words plus Select-it when it already
 exists. **58/58.**
 
 
+## 2026-07-09 — Ground truth on screen, chrome out of the way (v0.5.0)
+
+The canvas got its referee: for Figma-imported contracts, a "Figma render"
+toggle fetches the node's OWN render (images API, PNG @2x) beside the
+compiled canvas — "Figma's own render" vs "compiled from the contract" —
+the anchor riding the contract, the token session-only, and every
+non-fetch state named (no source, token gone, rate limit, node deleted
+since import — that last one observed live). And the output pane went
+Storybook: one toolbar row, Controls | Receipts (N) in a collapsible
+bottom dock, fidelity notes behind an info popover. **58/58.**
+
+
 ---
 
 **Standing scoreboard** (updated with each milestone):

@@ -6,6 +6,17 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+## [0.5.0] - 2026-07-09
+
+### Added
+
+- **Figma ground truth** — a "Figma render" toggle on the Canvas/Split views fetches the imported node's own render via the images API (any plan) beside the compiled canvas; anchors ride the contract, tokens stay session-only; every non-fetch state is named (no source, token gone, rate limit, node deleted since import).
+
+### Changed
+
+- **Playground declutter** — one output toolbar row with compact view controls; Controls | Receipts (N) become a Storybook-style collapsible bottom dock (count badge, auto-select on import, persisted collapse, keyboard accessible); canvas fidelity notes and provenance move into info popovers; nothing triple-stacks at laptop widths.
+
+
 ## [0.4.0] - 2026-07-09
 
 ### Added
@@ -114,6 +125,7 @@ First public release: the contract-as-source-of-truth loop, proven end-to-end an
 - Extractor gaps found by self-audit: cva/`VariantProps` support; skipped components are always reported, never silent.
 
 [Unreleased]: https://github.com/southleft/ds-contracts-poc/compare/v0.1.0...HEAD
+[0.5.0]: https://github.com/southleft/ds-contracts-poc/compare/v0.4.0...v0.5.0
 [0.4.0]: https://github.com/southleft/ds-contracts-poc/compare/v0.3.0...v0.4.0
 [0.3.0]: https://github.com/southleft/ds-contracts-poc/compare/v0.2.0...v0.3.0
 [0.2.0]: https://github.com/southleft/ds-contracts-poc/compare/v0.1.0...v0.2.0
