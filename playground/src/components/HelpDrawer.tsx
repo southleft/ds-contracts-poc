@@ -72,7 +72,11 @@ export function HelpDrawer({ open, onClose }: { open: boolean; onClose: () => vo
             <p>
               Pick a contract from the <b>Examples</b> gallery. Edit it in the center pane — the
               schema and generator referee every keystroke, refusals by name, offending lines
-              highlighted. The output tabs regenerate live.
+              highlighted. The output tabs regenerate live. When the generator refuses a
+              schema-valid contract, <b>Fix with AI</b> in the refusal banner sends the named
+              refusals to the shared assist Worker — the corrected contract loads as an
+              ai-proposed round (2 max, Undo included) and is re-refereed; nothing applies
+              silently.
             </p>
           </section>
           <section>
