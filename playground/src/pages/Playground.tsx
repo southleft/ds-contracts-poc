@@ -13,6 +13,7 @@ import {
   type FigmaProposal,
 } from '../engine/figma-import';
 import {
+  discoverTokenStylesheets,
   fetchRepoFile,
   fetchRepoTree,
   MAX_TRACE_FILES,
@@ -396,6 +397,9 @@ export function Playground() {
   // input for the assist fetch-plan rung (deterministic first, AI next).
   const [codeTrace, setCodeTrace] = useState<GithubTrace | null>(null);
   const [codeGaps, setCodeGaps] = useState<string[]>([]);
+  // Discovered token stylesheets (a tokens.css no component imports) — the
+  // :root vocabulary foreign var()s mint against; reused by the assist re-run.
+  const [codeExtraCss, setCodeExtraCss] = useState<string[]>([]);
 
   /** Shared landing for every code proposal (paste, trace, assist re-run):
    *  receipts assembled, workspace recorded, editor loaded. Returns the
@@ -406,15 +410,30 @@ export function Playground() {
     preGroups: ReceiptGroup[],
   ): string[] => {
     const groups: ReceiptGroup[] = [...preGroups];
-    for (const { name, proposal } of result.proposals) {
-      if (proposal.notes.length > 0) {
+    result.proposals.forEach(({ name, proposal }, index) => {
+      // The LOADED proposal's MINTED lines move into the dedicated group
+      // below (kind 'minted' — where the assist rename block attaches, the
+      // Figma path's spelling); other proposals keep them inline since only
+      // the loaded contract's layer is registered.
+      const isLoaded = index === 0;
+      const notes = isLoaded ? proposal.notes.filter((n) => !n.startsWith('MINTED ')) : proposal.notes;
+      if (notes.length > 0) {
         groups.push({
           title: `Proposal notes — ${name}`,
           kind: 'note',
-          entries: proposal.notes.map((message) => ({ message })),
+          entries: notes.map((message) => ({ message })),
         });
       }
-    }
+      if (isLoaded && proposal.mintedTokens && proposal.mintedTokens.count > 0) {
+        groups.push({
+          title: 'Minted provisional tokens',
+          kind: 'minted',
+          entries: proposal.mintedTokens.entries.map((e) => ({
+            message: `${e.ref} = ${e.value} — machine-named from a resolved value — rename against your real tokens (provisional); bound at: ${e.usageSites.join(', ')}`,
+          })),
+        });
+      }
+    });
     if (result.skipped.length > 0) {
       groups.push({
         title: 'Skipped components (visible but not readable)',
@@ -426,6 +445,12 @@ export function Playground() {
     const first = result.proposals[0];
     if (first) {
       const contractText = pretty(first.proposal.contract);
+      // Minted provisional layer (imported.*) — registered BEFORE the text
+      // lands so the editor's first validation pass already resolves the
+      // refs; the workspace entry carries it for restore (same as Figma).
+      const minted: MintedTokenLayer | null =
+        first.proposal.mintedTokens && first.proposal.mintedTokens.count > 0 ? first.proposal.mintedTokens : null;
+      setMintedTokens(minted);
       // A successful code import lands in the session workspace.
       const recorded = recordImport({
         name: first.name,
@@ -433,9 +458,9 @@ export function Playground() {
         source: 'code',
         contractText,
         receipts: codeReceipts,
+        ...(minted ? { mintedTokens: minted } : {}),
       });
       setReceipts(recorded.receipts);
-      setMintedTokens(null);
       setText(contractText);
       setProvenance(`proposed from code — ${first.name}`);
       setPristine({ text: contractText, provenance: `proposed from code — ${first.name}` });
@@ -453,6 +478,7 @@ export function Playground() {
     setCodeError(null);
     setCodeTrace(null);
     setCodeGaps([]);
+    setCodeExtraCss([]);
     try {
       const { proposeFromCodeText } = await import('../engine/code-import');
       setCodeBusy('Proposing…');
@@ -503,16 +529,34 @@ export function Playground() {
       const trace = await traceFromGithubUrl(codeUrl);
       setCodeTsx(trace.files[0].source);
       setCodeCss(trace.files[0].css ?? '');
+      // Foreign var()s with no declaration in reach? Find the tokens.css —
+      // deterministic, receipted; what stays missing is a named gap.
+      setCodeBusy('Searching the repo for token stylesheets (undeclared custom properties)…');
+      const discovery = await discoverTokenStylesheets(trace);
+      const discoveryGroups: ReceiptGroup[] =
+        discovery.notes.length > 0 || discovery.gaps.length > 0
+          ? [
+              {
+                title: 'Token-stylesheet discovery (:root custom properties)',
+                kind: 'note',
+                entries: [
+                  ...discovery.notes.map((message) => ({ message })),
+                  ...discovery.gaps.map((message) => ({ message: `gap: ${message}` })),
+                ],
+              },
+            ]
+          : [];
       setCodeBusy('Loading the TypeScript compiler (lazy chunk, ~5 MB — first run only)…');
       const { proposeFromCodeFiles } = await import('../engine/code-import');
       setCodeBusy(`Proposing over ${trace.files.length} traced file${trace.files.length === 1 ? '' : 's'}…`);
       const skippedGaps = applyCodeResult(
-        proposeFromCodeFiles(trace.files),
+        proposeFromCodeFiles(trace.files, discovery.extraCss),
         `code proposal — ${trace.sourcePath} (+ ${trace.files.length - 1} traced files)`,
-        traceGroups(trace),
+        traceGroups(trace, discoveryGroups),
       );
       setCodeTrace(trace);
-      setCodeGaps([...trace.gaps, ...skippedGaps]);
+      setCodeExtraCss(discovery.extraCss);
+      setCodeGaps([...trace.gaps, ...discovery.gaps, ...skippedGaps]);
     } catch (e) {
       if (!reportIfChunkError(e)) setCodeError(e instanceof Error ? e.message : String(e));
     } finally {
@@ -607,7 +651,7 @@ export function Playground() {
       setCodeBusy(`Re-proposing over ${files.length} files…`);
       const { proposeFromCodeFiles } = await import('../engine/code-import');
       const skippedGaps = applyCodeResult(
-        proposeFromCodeFiles(files),
+        proposeFromCodeFiles(files, codeExtraCss),
         `code proposal — ${trace.sourcePath} (+ ${files.length - 1} files, assist-planned)`,
         traceGroups(trace, [
           { title: 'Assist fetch plan (ai-proposed)', kind: 'note', entries: aiEntries },

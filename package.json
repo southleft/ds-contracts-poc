@@ -36,6 +36,7 @@
     "golden:update": "node scripts/update-golden.mjs",
     "emitters:check": "tsx core/emitters-check.ts",
     "mint:check": "tsx core/mint-check.ts",
+    "mint:code:check": "tsx core/mint-code-check.ts",
     "core:browser-check": "node scripts/core-browser-check.mjs"
   },
   "engines": {

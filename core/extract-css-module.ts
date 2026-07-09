@@ -39,6 +39,13 @@ import type {
   ExtractedProp,
   RawValueFinding,
 } from '../extract/types.js';
+import type { CodeMintFinding } from './mint-code.js';
+
+/** Capture sink for unbindable styled declarations (raw literals + foreign
+ *  var()s) — already bound to the selector/part/state/axis context of the
+ *  rule being read. Feeds opt-in provisional minting (core/mint-code.ts);
+ *  the report channels (rawValues, notes) are unchanged. */
+type MintSink = (cssProperty: string, raw: string) => void;
 
 // ---------------------------------------------------------------------------
 // Token index — the referee for every hyphen→dot decision
@@ -253,6 +260,65 @@ const TOKEN_TYPICAL = new Set([
 
 const VAR_RE = /^var\(--([A-Za-z0-9-]+)\)$/;
 
+/** Is this literal the kind of value the token vocabulary usually owns? */
+const isTokenizableLiteral = (prop: string, value: string): boolean =>
+  /^#[0-9a-fA-F]{3,8}$/.test(value) ||
+  /^(rgb|rgba|hsl|hsla)\(/.test(value) ||
+  /^-?\d*\.?\d+(px|rem|em|%)$/.test(value) ||
+  TOKEN_TYPICAL.has(prop);
+
+/** Split a CSS value on top-level whitespace (function args stay together). */
+function splitTopLevel(value: string): string[] {
+  const out: string[] = [];
+  let depth = 0;
+  let cur = '';
+  for (const ch of value) {
+    if (ch === '(') depth++;
+    else if (ch === ')') depth--;
+    if (/\s/.test(ch) && depth === 0) {
+      if (cur) out.push(cur);
+      cur = '';
+    } else {
+      cur += ch;
+    }
+  }
+  if (cur) out.push(cur);
+  return out;
+}
+
+/** Expand the invertible shorthands into the generator's longhand vocabulary:
+ *  `padding: A` / `padding: A B` → padding-block/padding-inline, and
+ *  `border: W solid C` → border-width + border-color (border-style: solid is
+ *  implied by the emitters whenever border tokens bind). Anything else passes
+ *  through untouched — 3/4-value padding and non-solid borders keep their
+ *  existing named degradation. `padding: 0` stays whole so the generator-
+ *  artifact filter still recognizes it. */
+function expandShorthands(decls: CssDecl[]): CssDecl[] {
+  const out: CssDecl[] = [];
+  for (const d of decls) {
+    if (d.prop === 'padding' && d.value !== '0') {
+      const parts = splitTopLevel(d.value);
+      if (parts.length === 1) {
+        out.push({ prop: 'padding-block', value: parts[0] }, { prop: 'padding-inline', value: parts[0] });
+        continue;
+      }
+      if (parts.length === 2) {
+        out.push({ prop: 'padding-block', value: parts[0] }, { prop: 'padding-inline', value: parts[1] });
+        continue;
+      }
+    }
+    if (d.prop === 'border') {
+      const parts = splitTopLevel(d.value);
+      if (parts.length === 3 && parts[1] === 'solid') {
+        out.push({ prop: 'border-width', value: parts[0] }, { prop: 'border-color', value: parts[2] });
+        continue;
+      }
+    }
+    out.push(d);
+  }
+  return out;
+}
+
 interface PartStyle {
   layout?: NonNullable<ExtractedPart['layout']>;
   overlay?: ExtractedPart['overlay'];
@@ -261,17 +327,22 @@ interface PartStyle {
 }
 
 /** Resolve one var(--x) against the token tree. Returns the dot path, or
- *  null after pushing the named refusal. */
+ *  null after pushing the named refusal. A FOREIGN var (zero tokenizations —
+ *  another system's custom property) additionally fires `onForeign` so the
+ *  mint capture can keep it; an AMBIGUOUS var (the name exists in the tree
+ *  more than once) is a tree problem, never a mint candidate. */
 function resolveVar(
   varName: string,
   context: string,
   index: TokenIndex,
   notes: string[],
+  onForeign?: () => void,
 ): string | null {
   const paths = index.byVar.get(varName) ?? [];
   if (paths.length === 1) return paths[0];
   if (paths.length === 0) {
     notes.push(`css: ${context} uses var(--${varName}) which resolves to NO token in the token tree — binding not proposed`);
+    onForeign?.();
   } else {
     notes.push(
       `css: ${context} var(--${varName}) has ${paths.length} tokenizations in the token tree (${paths.join(', ')}) — ambiguous, not proposed (report, don't guess)`,
@@ -282,13 +353,15 @@ function resolveVar(
 
 function invertDecls(
   selector: string,
-  decls: CssDecl[],
+  rawDecls: CssDecl[],
   index: TokenIndex,
   notes: string[],
   rawValues: RawValueFinding[],
+  mint: MintSink,
 ): PartStyle {
   const out: PartStyle = { tokens: {} };
   const layout: NonNullable<ExtractedPart['layout']> = {};
+  const decls = expandShorthands(rawDecls);
   const hasMaxWidthVar = decls.some((d) => d.prop === 'max-width' && VAR_RE.test(d.value));
   const insets = new Map<string, string>();
   let absolute = false;
@@ -336,21 +409,20 @@ function invertDecls(
     }
     const varMatch = value.match(VAR_RE);
     if (varMatch) {
-      const path = resolveVar(varMatch[1], `${selector} { ${prop} }`, index, notes);
+      const path = resolveVar(varMatch[1], `${selector} { ${prop} }`, index, notes, () => mint(prop, value));
       if (path) out.tokens[prop] = `{${path}}`;
       continue;
     }
     if (value.includes('var(')) {
+      // A single var() WITH a fallback is still one bindable site — the token
+      // index cannot spell it, but the mint pass can value it.
+      if (splitTopLevel(value).length === 1 && value.startsWith('var(')) mint(prop, value);
       notes.push(`css: ${selector} { ${prop}: ${value} } — var() inside a shorthand is not invertible to a single binding, not extracted`);
       continue;
     }
-    const looksTokenizable =
-      /^#[0-9a-fA-F]{3,8}$/.test(value) ||
-      /^(rgb|rgba|hsl|hsla)\(/.test(value) ||
-      /^-?\d*\.?\d+(px|rem|em|%)$/.test(value) ||
-      TOKEN_TYPICAL.has(prop);
-    if (looksTokenizable) {
+    if (isTokenizableLiteral(prop, value)) {
       rawValues.push({ selector, property: prop, value, candidates: candidatesByValue(index, value) });
+      mint(prop, value);
     } else {
       notes.push(`css: ${selector} { ${prop}: ${value} } — no inversion rule, not extracted`);
     }
@@ -467,6 +539,7 @@ function analyzeCss(
   notes: string[],
   rawValues: RawValueFinding[],
   classes: ClassMap,
+  mintables: CodeMintFinding[],
 ): CssModel {
   const rules = parseCss(css, notes);
   const partStyles = new Map<string, PartStyle>();
@@ -507,18 +580,36 @@ function analyzeCss(
     return partStyles.get(name)!;
   };
 
+  /** Mint-capture sink bound to one rule's part/state/axis context. */
+  const mintSink = (
+    selector: string,
+    part: string,
+    state?: string,
+    axis?: { prop: string; value: string },
+  ): MintSink => (cssProperty, raw) =>
+    mintables.push({
+      selector,
+      part,
+      cssProperty,
+      ...(state ? { state } : {}),
+      ...(axis ? { axis } : {}),
+      raw,
+    });
+
   const LAYOUT_PROPS = new Set(['display', 'flex-direction', 'align-items', 'justify-content']);
   const collectVarDecls = (
     rule: CssRule,
     onPath: (cssProp: string, path: string) => void,
+    mint: MintSink,
   ) => {
-    for (const { prop, value } of rule.decls) {
+    for (const { prop, value } of expandShorthands(rule.decls)) {
       if (GENERATOR_ARTIFACTS.has(`${prop}:${value}`)) continue;
       const m = value.match(VAR_RE);
       if (m) {
-        const path = resolveVar(m[1], `${rule.selector} { ${prop} }`, index, notes);
+        const path = resolveVar(m[1], `${rule.selector} { ${prop} }`, index, notes, () => mint(prop, value));
         if (path) onPath(prop, path);
       } else if (value.includes('var(')) {
+        if (splitTopLevel(value).length === 1 && value.startsWith('var(')) mint(prop, value);
         notes.push(`css: ${rule.selector} { ${prop}: ${value} } — var() inside a shorthand is not invertible to a single binding, not extracted`);
       } else if (LAYOUT_PROPS.has(prop)) {
         notes.push(
@@ -526,6 +617,7 @@ function analyzeCss(
         );
       } else {
         rawValues.push({ selector: rule.selector, property: prop, value, candidates: candidatesByValue(index, value) });
+        if (isTokenizableLiteral(prop, value)) mint(prop, value);
       }
     }
   };
@@ -570,11 +662,11 @@ function analyzeCss(
         if (av) {
           collectVarDecls(rule, (cssProp, path) => {
             bucket('root', '', av.axis, cssProp, sel).set(av.value, path);
-          });
+          }, mintSink(sel, 'root', undefined, { prop: av.axis, value: av.value }));
         } else {
           const partName = partNameOf(cls);
           cssPartNames.add(partName);
-          const style = invertDecls(sel, rule.decls, index, notes, rawValues);
+          const style = invertDecls(sel, rule.decls, index, notes, rawValues, mintSink(sel, partName));
           const existing = ensure(partName);
           Object.assign(existing.tokens, style.tokens);
           if (style.layout) existing.layout = { ...existing.layout, ...style.layout };
@@ -592,11 +684,11 @@ function analyzeCss(
       if (partNameOf(cls) === 'root' && !av) {
         collectVarDecls(rule, (cssProp, path) => {
           (rootStates[state] ??= {})[cssProp] = `{${path}}`;
-        });
+        }, mintSink(sel, 'root', state));
       } else if (av) {
         collectVarDecls(rule, (cssProp, path) => {
           bucket('root', state, av.axis, cssProp, sel).set(av.value, path);
-        });
+        }, mintSink(sel, 'root', state, { prop: av.axis, value: av.value }));
       } else {
         notes.push(`css: selector \`${sel}\` — state rules on nested parts are outside the contract's root-level states, not extracted`);
       }
@@ -611,7 +703,7 @@ function analyzeCss(
         cssPartNames.add(partName);
         collectVarDecls(rule, (cssProp, path) => {
           bucket(partName, '', av.axis, cssProp, sel).set(av.value, path);
-        });
+        }, mintSink(sel, partName, undefined, { prop: av.axis, value: av.value }));
       } else {
         notes.push(`css: selector \`${sel}\` — descendant rule not under an enum class, not extracted`);
       }
@@ -1248,6 +1340,7 @@ export interface AnatomyInput {
 export function extractAnatomy(input: AnatomyInput): ExtractedAnatomy | null {
   const notes: string[] = [];
   const rawValues: RawValueFinding[] = [];
+  const mintables: CodeMintFinding[] = [];
   const enumProps = new Map<string, string[]>(
     input.props.filter((p) => p.kind === 'enum' && p.values).map((p) => [p.name, p.values!]),
   );
@@ -1309,7 +1402,7 @@ export function extractAnatomy(input: AnatomyInput): ExtractedAnatomy | null {
   }
 
   // CSS side
-  const model = analyzeCss(input.css, enumProps, input.tokens, notes, rawValues, ctx.bem);
+  const model = analyzeCss(input.css, enumProps, input.tokens, notes, rawValues, ctx.bem, mintables);
 
   // Attach styles per part name across the JSX tree.
   const jsxPartNames = new Set<string>(['root']);
@@ -1348,5 +1441,6 @@ export function extractAnatomy(input: AnatomyInput): ExtractedAnatomy | null {
     ...(Object.keys(events).length > 0 ? { events } : {}),
     rawValues,
     notes,
+    ...(mintables.length > 0 ? { mintables } : {}),
   };
 }

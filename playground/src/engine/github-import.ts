@@ -20,6 +20,7 @@
  * exactly how each file was found — nothing silent.
  */
 import type { SourceFileInput } from '../../../core/index.js';
+import { collectRootCustomProps } from '../../../core/mint-code.js';
 
 const MAX_FILE_BYTES = 500 * 1024; // pasted-code parity; the compiler chunk is the heavy part, not the source
 
@@ -409,6 +410,110 @@ export async function traceFromGithubUrl(url: string, fetchImpl: FetchLike = fet
     gaps,
     alreadyFetched,
   };
+}
+
+// ---------------------------------------------------------------------------
+// Token-stylesheet discovery — the :root vocabulary foreign var()s mint against
+// ---------------------------------------------------------------------------
+
+export interface TokenStylesheetDiscovery {
+  /** Fetched stylesheet texts that declare at least one missing custom
+   *  property — proposeFromCode's extraCss. */
+  extraCss: string[];
+  /** Repo-relative paths of the sheets in extraCss. */
+  paths: string[];
+  /** Discovery receipts, one line per step — nothing silent. */
+  notes: string[];
+  /** What discovery could NOT close, named. */
+  gaps: string[];
+}
+
+/** Filenames that conventionally carry a design system's custom-property
+ *  vocabulary. Plain CSS only — a SCSS variables file has no :root output. */
+const TOKEN_SHEET_RE = /(^|\/)[\w.-]*(token|variable|theme|global|foundation|custom-propert)[\w.-]*\.css$/i;
+
+/** How many candidate sheets discovery will fetch. */
+const MAX_TOKEN_SHEETS = 4;
+
+/**
+ * When the traced stylesheets USE custom properties they never DECLARE
+ * (`var(--cbds-bg-brand)` with no `:root { --cbds-bg-brand: … }` in reach),
+ * the values live in a stylesheet no component imports — a tokens.css.
+ * This step names that gap and closes it deterministically: list the repo
+ * tree once, fetch the token-ish CSS candidates, keep the sheets that
+ * declare at least one missing property. Every step is receipted; what
+ * stays missing is a named gap (those var()s will be CARRIED VERBATIM).
+ */
+export async function discoverTokenStylesheets(
+  trace: GithubTrace,
+  fetchImpl: FetchLike = fetch,
+): Promise<TokenStylesheetDiscovery> {
+  const notes: string[] = [];
+  const gaps: string[] = [];
+  const none = (): TokenStylesheetDiscovery => ({ extraCss: [], paths: [], notes, gaps });
+
+  const cssTexts = trace.files.map((f) => f.css ?? '').filter((t) => t.length > 0);
+  if (cssTexts.length === 0) return none();
+  const used = new Set<string>();
+  for (const text of cssTexts) {
+    for (const m of text.matchAll(/var\(\s*--([A-Za-z0-9_-]+)/g)) used.add(m[1]);
+  }
+  const declared = collectRootCustomProps(cssTexts);
+  const missing = [...used].filter((v) => !declared.has(v));
+  if (missing.length === 0) return none();
+  notes.push(
+    `${missing.length} custom propert${missing.length === 1 ? 'y is' : 'ies are'} referenced but never declared in the traced CSS (--${missing[0]}${missing.length > 1 ? ', …' : ''}) — searching the repo tree for token stylesheets.`,
+  );
+
+  let listing: RepoTreeEntry[];
+  try {
+    ({ listing } = await fetchRepoTree(trace.parsed, trace.entryPath, fetchImpl));
+  } catch (e) {
+    gaps.push(
+      `token-stylesheet discovery: repo tree listing failed — ${e instanceof Error ? e.message : String(e)}; the undeclared var()s stay carried verbatim`,
+    );
+    return none();
+  }
+  const fetchedAlready = new Set(trace.alreadyFetched);
+  const candidates = listing
+    .map((e) => e.path)
+    .filter((p) => TOKEN_SHEET_RE.test(p) && !fetchedAlready.has(p))
+    .slice(0, MAX_TOKEN_SHEETS);
+  if (candidates.length === 0) {
+    gaps.push(
+      `no token-stylesheet candidate in the repo tree (looked for *token*/*variable*/*theme*/*global* .css) — ${missing.length} undeclared custom propert${missing.length === 1 ? 'y stays' : 'ies stay'} carried verbatim`,
+    );
+    return none();
+  }
+
+  const extraCss: string[] = [];
+  const paths: string[] = [];
+  const stillMissing = new Set(missing);
+  for (const candidate of candidates) {
+    try {
+      const text = await fetchRaw(rawUrl(trace.parsed, candidate), fetchImpl);
+      const props = collectRootCustomProps([text]);
+      const hits = missing.filter((v) => props.has(v));
+      if (hits.length > 0) {
+        extraCss.push(text);
+        paths.push(candidate);
+        for (const v of hits) stillMissing.delete(v);
+        notes.push(
+          `Fetched ${candidate} (${kb(text)}) — declares ${hits.length} of the ${missing.length} missing custom propert${missing.length === 1 ? 'y' : 'ies'}; kept for minting.`,
+        );
+      } else {
+        notes.push(`Fetched ${candidate} (${kb(text)}) — declares none of the missing custom properties; not used.`);
+      }
+    } catch (e) {
+      gaps.push(`token-stylesheet candidate ${candidate}: fetch failed — ${e instanceof Error ? e.message : String(e)}`);
+    }
+  }
+  if (stillMissing.size > 0) {
+    gaps.push(
+      `${stillMissing.size} custom propert${stillMissing.size === 1 ? 'y' : 'ies'} still undeclared after discovery (--${[...stillMissing][0]}${stillMissing.size > 1 ? ', …' : ''}) — carried verbatim in the proposal`,
+    );
+  }
+  return { extraCss, paths, notes, gaps };
 }
 
 // ---------------------------------------------------------------------------
