@@ -41,6 +41,17 @@ export const camel = (s: string): string =>
 const dotPath = (slashName: string) => slashName.split('/').join('.');
 const ref = (slashName: string) => `{${dotPath(slashName)}}`;
 
+/** Canonical prop-name spelling for a Figma property name. A property that is
+ *  ALREADY a legal camelCase identifier is kept verbatim — foreign kits ship
+ *  "hasEndIcon" / "isDisabled", and camel() (which lowercases whole words)
+ *  would mangle them into spellings nobody owns ("hasendicon"). Everything
+ *  else ("Show Actions", "Variant", "Label") goes through camel() as before.
+ *  The "#id" suffix non-variant properties carry is never part of the name. */
+export const canonicalPropName = (property: string): string => {
+  const bare = property.split('#')[0].trim();
+  return /^[a-z][A-Za-z0-9]*$/.test(bare) ? bare : camel(bare);
+};
+
 /** The slice of a child contract canonicalization needs — kept minimal so the
  * playground can pass its bundled contracts without importing the zod types. */
 export interface MinimalChildContract {
@@ -76,7 +87,7 @@ function parseAxes(variantNames: string[]): Axis[] {
     for (const [property, value] of Object.entries(axisValuesOf(name))) {
       let axis = axes.find((a) => a.property === property);
       if (!axis) {
-        axis = { property, propName: camel(property), values: [] };
+        axis = { property, propName: canonicalPropName(property), values: [] };
         axes.push(axis);
       }
       if (!axis.values.includes(value)) axis.values.push(value);
@@ -262,7 +273,7 @@ interface Ctx {
   notes: string[];
   unbound: UnboundValue[];
   textProps: Array<{ name: string; property: string; default: string }>;
-  boolProps: Array<{ name: string; property: string }>;
+  boolProps: Array<{ name: string; property: string; default?: boolean }>;
   /** Slot parts in tree order, for the default-slot ("children") judgment. */
   slots: Array<{ part: Record<string, unknown>; property: string; optional: boolean }>;
   mint?: MintCapture;
@@ -627,6 +638,17 @@ function visibilityFromPresence(m: Merged, ctx: Ctx, where: string): Record<stri
 // Part construction
 // ---------------------------------------------------------------------------
 
+/** The contract id this proposal will claim for itself. */
+const selfContractId = (ctx: Ctx): string => `${ctx.prefix}.${kebab(ctx.setName)}`;
+
+/** True when a nested instance resolves to the set's own contract — either
+ *  through the contract index (name → id lands on the proposal's own id) or
+ *  by the name-match fallback the id would be derived from. */
+function isSelfInstance(instanceOf: string, ctx: Ctx): boolean {
+  const resolved = ctx.contractIdByName.get(instanceOf) ?? `${ctx.prefix}.${kebab(instanceOf)}`;
+  return resolved === selfContractId(ctx) || kebab(instanceOf) === kebab(ctx.setName);
+}
+
 const isSpacer = (m: Merged): boolean =>
   m.type === 'FRAME' &&
   m.children.length === 0 &&
@@ -658,7 +680,7 @@ function attachTokens(ctx: Ctx, holder: Record<string, unknown>, tokens: Record<
   if (Object.keys(tokens).length > 0) holder.tokens = tokens;
 }
 
-function registerTextProp(ctx: Ctx, property: string, characters: string, name = camel(property)) {
+function registerTextProp(ctx: Ctx, property: string, characters: string, name = canonicalPropName(property)) {
   if (ctx.textProps.some((p) => p.property === property)) return;
   ctx.textProps.push({ name, property, default: characters });
 }
@@ -707,6 +729,27 @@ function buildPart(
       return part;
     }
     const instanceOf = first(m.occ, (n) => n.instanceOf) ?? m.name;
+    if (isSelfInstance(instanceOf, ctx)) {
+      // SELF-REFERENCE GUARD (field case: Eventz DS Button, node 2313-42).
+      // A nested instance that resolves to the set's own contract id must
+      // NEVER become a component ref — the generator refuses a contract that
+      // sets its own (unknown) props, and a contract cannot contain itself.
+      // Reaching here means the base-instance flattening heuristic did not
+      // promote it (proposeFromDump handles the sole-wrapped-child shape), so
+      // the part ships without a component ref and the skip is NAMED.
+      const applied = first(m.occ, (n) => n.componentProperties);
+      const propNames = applied ? Object.keys(applied).map((k) => k.split('#')[0]) : [];
+      const reason = applied
+        ? 'flattening heuristic not met — the instance is not the sole wrapped child of every variant'
+        : 'componentProperties not captured — dump v1 stops at instances';
+      ctx.notes.push(
+        `${where}: nested instance of the set's own base component "${instanceOf}" — no component ref proposed (a contract cannot reference itself); props ${
+          propNames.length > 0 ? propNames.join(', ') : '(unknown)'
+        } not extracted (${reason})`,
+      );
+      if (visibleWhen) part.visibleWhen = visibleWhen;
+      return part;
+    }
     const id = ctx.contractIdByName.get(instanceOf);
     if (!id) {
       ctx.notes.push(
@@ -792,7 +835,7 @@ function buildPart(
 /** A visibility binding that is not a slot's "Show <Property>" convention:
  *  a real BOOLEAN prop drives the part. */
 function applyVisibleBinding(part: Record<string, unknown>, property: string, ctx: Ctx, where: string) {
-  const name = camel(property);
+  const name = canonicalPropName(property);
   if (!ctx.boolProps.some((b) => b.property === property)) {
     ctx.boolProps.push({ name, property });
     ctx.notes.push(
@@ -838,7 +881,7 @@ function canonicalizeInstanceProps(
       continue;
     }
     // Fallback without the child contract in scope: canonical spelling.
-    out[camel(property.split('#')[0])] = typeof value === 'string' ? camel(value) : value;
+    out[canonicalPropName(property)] = typeof value === 'string' ? camel(value) : value;
   }
   if (child && mapped === Object.keys(applied).length) {
     ctx.notes.push(`${where}: fixed props of "${instanceOf}" canonicalized through ${child.id}'s bindings`);
@@ -846,6 +889,77 @@ function canonicalizeInstanceProps(
     ctx.notes.push(`${where}: fixed props of "${instanceOf}" canonicalized by spelling (dump v1.1)${child ? ' — some values missing from ' + child.id + "'s bindings, verify" : " — verify against the child contract's bindings"}`);
   }
   return out;
+}
+
+// ---------------------------------------------------------------------------
+// Base-instance flattening (field case: Eventz DS Button, node 2313-42)
+// ---------------------------------------------------------------------------
+
+/** Detects the wrapper-set pattern: every variant of the set is a thin
+ *  wrapper whose SOLE child is an instance of one shared base component
+ *  name-matching the set itself ("Button" variants each wrapping a "Button"
+ *  instance). Called on the root's only merged child; the sole-child
+ *  requirement is enforced at the call site. Confidence requires:
+ *    · the instance appears in EVERY variant (same shared base throughout)
+ *    · it is not swap-bound (a swap-bound instance is a slot, not a base)
+ *    · componentProperties were captured on every occurrence (dump v1.1) —
+ *      promotion must be grounded in observed values, never guessed.
+ *  Anything less falls back to the NAMED self-reference skip in buildPart. */
+function isBaseInstance(m: Merged, ctx: Ctx): boolean {
+  if (m.type !== 'INSTANCE') return false;
+  if (m.occ.length !== ctx.totalVariants.length) return false;
+  if (m.occ.some((o) => o.node.propRefs?.mainComponent)) return false;
+  const instanceOf = first(m.occ, (n) => n.instanceOf) ?? m.name;
+  if (!isSelfInstance(instanceOf, ctx)) return false;
+  return m.occ.every((o) => o.node.componentProperties !== undefined);
+}
+
+/** PROMOTE the base instance's captured componentProperties to the
+ *  CONTRACT'S props: booleans become boolean props bound to the base's
+ *  property names, TEXT properties (the "#id"-suffixed string keys) become
+ *  text props. The instance part itself is elided — its internals belong to
+ *  the base component, which dump v1 does not recurse into. */
+function promoteBaseInstanceProps(m: Merged, ctx: Ctx, where: string) {
+  const instanceOf = first(m.occ, (n) => n.instanceOf) ?? m.name;
+  const at = `${where}/${m.name}`;
+  const defaults = m.occ[0].node.componentProperties ?? {};
+  for (const [key, value] of Object.entries(defaults)) {
+    const property = key.split('#')[0];
+    const name = canonicalPropName(property);
+    if (ctx.axes.some((a) => a.property === property || a.propName === name)) {
+      ctx.notes.push(
+        `${at}: base-instance property "${property}" not promoted — it is already one of the set's own variant axes`,
+      );
+      continue;
+    }
+    const captured = [...new Set(m.occ.map((o) => (o.node.componentProperties ?? {})[key]).filter((v) => v !== undefined))];
+    if (captured.length > 1) {
+      ctx.notes.push(
+        `${at}: base-instance property "${property}" varies across variants (${captured.join(', ')}) — default taken from the default variant`,
+      );
+    }
+    if (typeof value === 'boolean') {
+      if (ctx.boolProps.some((b) => b.property === property)) continue;
+      ctx.boolProps.push({ name, property, default: value });
+      ctx.notes.push(
+        `prop \`${name}\`: promoted from the base instance "${instanceOf}" (BOOLEAN property "${property}", default ${value})`,
+      );
+    } else if (key.includes('#')) {
+      // Non-variant properties carry "#id" suffixes — a suffixed string key
+      // is a TEXT property with certainty.
+      registerTextProp(ctx, property, value, name);
+      ctx.notes.push(
+        `prop \`${name}\`: promoted from the base instance "${instanceOf}" (TEXT property "${property}", default "${value}")`,
+      );
+    } else {
+      ctx.notes.push(
+        `${at}: base-instance string property "${property}" = "${value}" not promoted — without a "#id" suffix it is indistinguishable from the base component's own VARIANT property; model it as an axis on the set if it belongs in the API`,
+      );
+    }
+  }
+  ctx.notes.push(
+    `${at}: base component internals not captured — dump v1 stops at instances; anatomy reflects the wrapper`,
+  );
 }
 
 // ---------------------------------------------------------------------------
@@ -922,7 +1036,14 @@ export function proposeFromDump(
   const only = merged.children.length === 1 ? merged.children[0] : undefined;
   const autoLabel =
     only && only.type === 'TEXT' && only.name === 'label' && unifiedPropRef(only, 'characters', ctx, `${where}/label`);
-  if (only && autoLabel) {
+  if (only && isBaseInstance(only, ctx)) {
+    // Base-instance flattening: every variant solely wraps an instance of
+    // the set's own shared base component. The instance's captured
+    // componentProperties become the CONTRACT'S props; the instance part is
+    // elided (no self-referencing component ref — the generator refuses one),
+    // and the anatomy keeps the wrapper's observable structure.
+    promoteBaseInstanceProps(only, ctx, where);
+  } else if (only && autoLabel) {
     const textTokens = invertTextTokens(only, ctx, `${where}/label`);
     Object.assign(rootTokens, textTokens);
     // The label's tokens hoisted — retarget its captured mint observations
@@ -1018,6 +1139,9 @@ export function proposeFromDump(
     props.push({
       name: b.name,
       type: 'boolean',
+      // Promoted base-instance booleans carry the observed default; visibility
+      // booleans have none (not recoverable from dump v1 — noted at discovery).
+      ...(b.default !== undefined ? { default: b.default } : {}),
       bindings: {
         figma: { kind: 'BOOLEAN', property: b.property },
         code: { prop: b.name },
