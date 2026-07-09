@@ -77,6 +77,10 @@ const VARIANTS = [
             "primary": "CENTER",
             "counter": "CENTER"
           },
+          "bindings": {
+            "paddingLeft": "imported/tooltip/arrow-wrapper/padding-inline/left",
+            "paddingRight": "imported/tooltip/arrow-wrapper/padding-inline/left"
+          },
           "children": [
             {
               "type": "frame",
@@ -102,9 +106,9 @@ const VARIANTS = [
       "type": "root",
       "name": "placement=topLeft",
       "layout": {
-        "mode": "HORIZONTAL",
+        "mode": "VERTICAL",
         "primary": "MIN",
-        "counter": "CENTER"
+        "counter": "MIN"
       },
       "children": [
         {
@@ -162,6 +166,10 @@ const VARIANTS = [
             "mode": "VERTICAL",
             "primary": "CENTER",
             "counter": "CENTER"
+          },
+          "bindings": {
+            "paddingLeft": "imported/tooltip/arrow-wrapper/padding-inline/topleft",
+            "paddingRight": "imported/tooltip/arrow-wrapper/padding-inline/topleft"
           },
           "children": [
             {
@@ -188,11 +196,37 @@ const VARIANTS = [
       "type": "root",
       "name": "placement=bottomLeft",
       "layout": {
-        "mode": "HORIZONTAL",
+        "mode": "VERTICAL",
         "primary": "MIN",
-        "counter": "CENTER"
+        "counter": "MIN"
       },
       "children": [
+        {
+          "type": "frame",
+          "name": "arrowWrapper",
+          "layout": {
+            "mode": "VERTICAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "paddingLeft": "imported/tooltip/arrow-wrapper/padding-inline/bottomleft",
+            "paddingRight": "imported/tooltip/arrow-wrapper/padding-inline/bottomleft"
+          },
+          "children": [
+            {
+              "type": "frame",
+              "name": "Arrow",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "fill": "imported/tooltip/arrow-wrapper-arrow/background-color",
+              "children": []
+            }
+          ]
+        },
         {
           "type": "frame",
           "name": "Body",
@@ -238,28 +272,6 @@ const VARIANTS = [
                   "contentProp": "text"
                 }
               ]
-            }
-          ]
-        },
-        {
-          "type": "frame",
-          "name": "arrowWrapper",
-          "layout": {
-            "mode": "VERTICAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
-          },
-          "children": [
-            {
-              "type": "frame",
-              "name": "Arrow",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
-              },
-              "fill": "imported/tooltip/arrow-wrapper-arrow/background-color",
-              "children": []
             }
           ]
         }
@@ -274,59 +286,11 @@ const VARIANTS = [
       "type": "root",
       "name": "placement=bottom",
       "layout": {
-        "mode": "HORIZONTAL",
+        "mode": "VERTICAL",
         "primary": "MIN",
         "counter": "CENTER"
       },
       "children": [
-        {
-          "type": "frame",
-          "name": "Body",
-          "layout": {
-            "mode": "VERTICAL",
-            "primary": "MIN",
-            "counter": "MIN"
-          },
-          "bindings": {
-            "topLeftRadius": "imported/tooltip/body/border-radius",
-            "topRightRadius": "imported/tooltip/body/border-radius",
-            "bottomLeftRadius": "imported/tooltip/body/border-radius",
-            "bottomRightRadius": "imported/tooltip/body/border-radius"
-          },
-          "children": [
-            {
-              "type": "frame",
-              "name": "Content",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
-              },
-              "fill": "imported/tooltip/body-content/background-color",
-              "bindings": {
-                "paddingLeft": "imported/tooltip/body-content/padding-inline",
-                "paddingRight": "imported/tooltip/body-content/padding-inline",
-                "paddingTop": "imported/tooltip/body-content/padding-block",
-                "paddingBottom": "imported/tooltip/body-content/padding-block",
-                "topLeftRadius": "imported/tooltip/body-content/border-radius",
-                "topRightRadius": "imported/tooltip/body-content/border-radius",
-                "bottomLeftRadius": "imported/tooltip/body-content/border-radius",
-                "bottomRightRadius": "imported/tooltip/body-content/border-radius"
-              },
-              "children": [
-                {
-                  "type": "text",
-                  "name": "tooltipText",
-                  "characters": "Tooltip text",
-                  "fontSize": 14,
-                  "fontStyle": "Medium",
-                  "textFill": "imported/tooltip/body-content-tooltip-text/color",
-                  "contentProp": "text"
-                }
-              ]
-            }
-          ]
-        },
         {
           "type": "frame",
           "name": "arrowWrapper",
@@ -334,6 +298,10 @@ const VARIANTS = [
             "mode": "VERTICAL",
             "primary": "CENTER",
             "counter": "CENTER"
+          },
+          "bindings": {
+            "paddingLeft": "imported/tooltip/arrow-wrapper/padding-inline/bottom",
+            "paddingRight": "imported/tooltip/arrow-wrapper/padding-inline/bottom"
           },
           "children": [
             {
@@ -348,6 +316,54 @@ const VARIANTS = [
               "children": []
             }
           ]
+        },
+        {
+          "type": "frame",
+          "name": "Body",
+          "layout": {
+            "mode": "VERTICAL",
+            "primary": "MIN",
+            "counter": "MIN"
+          },
+          "bindings": {
+            "topLeftRadius": "imported/tooltip/body/border-radius",
+            "topRightRadius": "imported/tooltip/body/border-radius",
+            "bottomLeftRadius": "imported/tooltip/body/border-radius",
+            "bottomRightRadius": "imported/tooltip/body/border-radius"
+          },
+          "children": [
+            {
+              "type": "frame",
+              "name": "Content",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "fill": "imported/tooltip/body-content/background-color",
+              "bindings": {
+                "paddingLeft": "imported/tooltip/body-content/padding-inline",
+                "paddingRight": "imported/tooltip/body-content/padding-inline",
+                "paddingTop": "imported/tooltip/body-content/padding-block",
+                "paddingBottom": "imported/tooltip/body-content/padding-block",
+                "topLeftRadius": "imported/tooltip/body-content/border-radius",
+                "topRightRadius": "imported/tooltip/body-content/border-radius",
+                "bottomLeftRadius": "imported/tooltip/body-content/border-radius",
+                "bottomRightRadius": "imported/tooltip/body-content/border-radius"
+              },
+              "children": [
+                {
+                  "type": "text",
+                  "name": "tooltipText",
+                  "characters": "Tooltip text",
+                  "fontSize": 14,
+                  "fontStyle": "Medium",
+                  "textFill": "imported/tooltip/body-content-tooltip-text/color",
+                  "contentProp": "text"
+                }
+              ]
+            }
+          ]
         }
       ]
     }
@@ -360,7 +376,7 @@ const VARIANTS = [
       "type": "root",
       "name": "placement=top",
       "layout": {
-        "mode": "HORIZONTAL",
+        "mode": "VERTICAL",
         "primary": "MIN",
         "counter": "CENTER"
       },
@@ -420,6 +436,10 @@ const VARIANTS = [
             "mode": "VERTICAL",
             "primary": "CENTER",
             "counter": "CENTER"
+          },
+          "bindings": {
+            "paddingLeft": "imported/tooltip/arrow-wrapper/padding-inline/top",
+            "paddingRight": "imported/tooltip/arrow-wrapper/padding-inline/top"
           },
           "children": [
             {
@@ -446,9 +466,9 @@ const VARIANTS = [
       "type": "root",
       "name": "placement=topRight",
       "layout": {
-        "mode": "HORIZONTAL",
+        "mode": "VERTICAL",
         "primary": "MIN",
-        "counter": "CENTER"
+        "counter": "MAX"
       },
       "children": [
         {
@@ -506,6 +526,10 @@ const VARIANTS = [
             "mode": "VERTICAL",
             "primary": "CENTER",
             "counter": "CENTER"
+          },
+          "bindings": {
+            "paddingLeft": "imported/tooltip/arrow-wrapper/padding-inline/topright",
+            "paddingRight": "imported/tooltip/arrow-wrapper/padding-inline/topright"
           },
           "children": [
             {
@@ -532,11 +556,37 @@ const VARIANTS = [
       "type": "root",
       "name": "placement=bottomRight",
       "layout": {
-        "mode": "HORIZONTAL",
+        "mode": "VERTICAL",
         "primary": "MIN",
-        "counter": "CENTER"
+        "counter": "MAX"
       },
       "children": [
+        {
+          "type": "frame",
+          "name": "arrowWrapper",
+          "layout": {
+            "mode": "VERTICAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "paddingLeft": "imported/tooltip/arrow-wrapper/padding-inline/bottomright",
+            "paddingRight": "imported/tooltip/arrow-wrapper/padding-inline/bottomright"
+          },
+          "children": [
+            {
+              "type": "frame",
+              "name": "Arrow",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "fill": "imported/tooltip/arrow-wrapper-arrow/background-color",
+              "children": []
+            }
+          ]
+        },
         {
           "type": "frame",
           "name": "Body",
@@ -582,28 +632,6 @@ const VARIANTS = [
                   "contentProp": "text"
                 }
               ]
-            }
-          ]
-        },
-        {
-          "type": "frame",
-          "name": "arrowWrapper",
-          "layout": {
-            "mode": "VERTICAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
-          },
-          "children": [
-            {
-              "type": "frame",
-              "name": "Arrow",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
-              },
-              "fill": "imported/tooltip/arrow-wrapper-arrow/background-color",
-              "children": []
             }
           ]
         }
@@ -625,6 +653,32 @@ const VARIANTS = [
       "children": [
         {
           "type": "frame",
+          "name": "arrowWrapper",
+          "layout": {
+            "mode": "VERTICAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "paddingLeft": "imported/tooltip/arrow-wrapper/padding-inline/right",
+            "paddingRight": "imported/tooltip/arrow-wrapper/padding-inline/right"
+          },
+          "children": [
+            {
+              "type": "frame",
+              "name": "Arrow",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "fill": "imported/tooltip/arrow-wrapper-arrow/background-color",
+              "children": []
+            }
+          ]
+        },
+        {
+          "type": "frame",
           "name": "Body",
           "layout": {
             "mode": "VERTICAL",
@@ -668,28 +722,6 @@ const VARIANTS = [
                   "contentProp": "text"
                 }
               ]
-            }
-          ]
-        },
-        {
-          "type": "frame",
-          "name": "arrowWrapper",
-          "layout": {
-            "mode": "VERTICAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
-          },
-          "children": [
-            {
-              "type": "frame",
-              "name": "Arrow",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
-              },
-              "fill": "imported/tooltip/arrow-wrapper-arrow/background-color",
-              "children": []
             }
           ]
         }
@@ -746,14 +778,14 @@ for (const page of figma.root.children) {
 
 // ---------------------------------------------------------------------------
 // PROVISIONAL VARIABLES — minted from resolved values by a degraded import.
-// This contract binds 8 provisional token(s) whose real variable names were
+// This contract binds 16 provisional token(s) whose real variable names were
 // unrecoverable, so this section upserts each one as a Figma variable in a
 // collection named 'Imported (provisional)' — idempotent by name, within that
 // collection only — before the bindings below look anything up. The values
 // are literal-fidelity stand-ins, not your design vocabulary: rename them
 // against your real tokens when you adopt the contract.
 // ---------------------------------------------------------------------------
-const MINTED_VARIABLES = [{"name":"imported/tooltip/body/border-radius","type":"FLOAT","value":3},{"name":"imported/tooltip/body-content/background-color","type":"COLOR","value":"#27272a"},{"name":"imported/tooltip/body-content/padding-inline","type":"FLOAT","value":8},{"name":"imported/tooltip/body-content/padding-block","type":"FLOAT","value":8},{"name":"imported/tooltip/body-content/border-radius","type":"FLOAT","value":4},{"name":"imported/tooltip/body-content-tooltip-text/color","type":"COLOR","value":"#ffffff"},{"name":"imported/tooltip/body-content-tooltip-text/font-size","type":"FLOAT","value":14},{"name":"imported/tooltip/arrow-wrapper-arrow/background-color","type":"COLOR","value":"#27272a"}];
+const MINTED_VARIABLES = [{"name":"imported/tooltip/body/border-radius","type":"FLOAT","value":3},{"name":"imported/tooltip/body-content/background-color","type":"COLOR","value":"#27272a"},{"name":"imported/tooltip/body-content/padding-inline","type":"FLOAT","value":8},{"name":"imported/tooltip/body-content/padding-block","type":"FLOAT","value":8},{"name":"imported/tooltip/body-content/border-radius","type":"FLOAT","value":4},{"name":"imported/tooltip/body-content-tooltip-text/color","type":"COLOR","value":"#ffffff"},{"name":"imported/tooltip/body-content-tooltip-text/font-size","type":"FLOAT","value":14},{"name":"imported/tooltip/arrow-wrapper/padding-inline/left","type":"FLOAT","value":0},{"name":"imported/tooltip/arrow-wrapper/padding-inline/topleft","type":"FLOAT","value":16},{"name":"imported/tooltip/arrow-wrapper/padding-inline/bottomleft","type":"FLOAT","value":16},{"name":"imported/tooltip/arrow-wrapper/padding-inline/bottom","type":"FLOAT","value":16},{"name":"imported/tooltip/arrow-wrapper/padding-inline/top","type":"FLOAT","value":16},{"name":"imported/tooltip/arrow-wrapper/padding-inline/topright","type":"FLOAT","value":16},{"name":"imported/tooltip/arrow-wrapper/padding-inline/bottomright","type":"FLOAT","value":16},{"name":"imported/tooltip/arrow-wrapper/padding-inline/right","type":"FLOAT","value":0},{"name":"imported/tooltip/arrow-wrapper-arrow/background-color","type":"COLOR","value":"#27272a"}];
 {
   // Minted colors may be 8-digit hex (paint opacity captured by dump v1.1) —
   // Figma COLOR variables accept RGBA, so the alpha channel survives.

@@ -4,22 +4,80 @@
   "factCells": 63,
   "tally": {
     "BOUND": 0,
-    "MINTED": 56,
-    "MISSING": 7,
+    "MINTED": 62,
+    "MISSING": 1,
     "mismatched": 0
   },
   "rows": [
     {
       "part": "Arrow Wrapper",
       "fact": "padding-inline",
-      "verdict": "MISSING",
+      "verdict": "MINTED",
+      "token": "{imported.tooltip.arrow-wrapper.padding-inline.topleft}",
       "truth": "16px",
+      "resolved": "16px",
+      "valueOk": true,
       "variants": [
-        "placement=topLeft",
-        "placement=bottomLeft",
-        "placement=bottom",
-        "placement=top",
-        "placement=topRight",
+        "placement=topLeft"
+      ]
+    },
+    {
+      "part": "Arrow Wrapper",
+      "fact": "padding-inline",
+      "verdict": "MINTED",
+      "token": "{imported.tooltip.arrow-wrapper.padding-inline.bottomleft}",
+      "truth": "16px",
+      "resolved": "16px",
+      "valueOk": true,
+      "variants": [
+        "placement=bottomLeft"
+      ]
+    },
+    {
+      "part": "Arrow Wrapper",
+      "fact": "padding-inline",
+      "verdict": "MINTED",
+      "token": "{imported.tooltip.arrow-wrapper.padding-inline.bottom}",
+      "truth": "16px",
+      "resolved": "16px",
+      "valueOk": true,
+      "variants": [
+        "placement=bottom"
+      ]
+    },
+    {
+      "part": "Arrow Wrapper",
+      "fact": "padding-inline",
+      "verdict": "MINTED",
+      "token": "{imported.tooltip.arrow-wrapper.padding-inline.top}",
+      "truth": "16px",
+      "resolved": "16px",
+      "valueOk": true,
+      "variants": [
+        "placement=top"
+      ]
+    },
+    {
+      "part": "Arrow Wrapper",
+      "fact": "padding-inline",
+      "verdict": "MINTED",
+      "token": "{imported.tooltip.arrow-wrapper.padding-inline.topright}",
+      "truth": "16px",
+      "resolved": "16px",
+      "valueOk": true,
+      "variants": [
+        "placement=topRight"
+      ]
+    },
+    {
+      "part": "Arrow Wrapper",
+      "fact": "padding-inline",
+      "verdict": "MINTED",
+      "token": "{imported.tooltip.arrow-wrapper.padding-inline.bottomright}",
+      "truth": "16px",
+      "resolved": "16px",
+      "valueOk": true,
+      "variants": [
         "placement=bottomRight"
       ]
     },

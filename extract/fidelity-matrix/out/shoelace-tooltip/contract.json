@@ -67,6 +67,36 @@
         "direction": "row",
         "align": "center"
       },
+      "layoutByProp": {
+        "prop": "placement",
+        "map": {
+          "topleft": {
+            "direction": "column",
+            "align": "start"
+          },
+          "bottomleft": {
+            "direction": "column-reverse",
+            "align": "start"
+          },
+          "bottom": {
+            "direction": "column-reverse"
+          },
+          "top": {
+            "direction": "column"
+          },
+          "topright": {
+            "direction": "column",
+            "align": "end"
+          },
+          "bottomright": {
+            "direction": "column-reverse",
+            "align": "end"
+          },
+          "right": {
+            "direction": "row-reverse"
+          }
+        }
+      },
       "parts": {
         "Body": {
           "layout": {
@@ -105,6 +135,9 @@
             "direction": "column",
             "align": "center",
             "justify": "center"
+          },
+          "tokens": {
+            "padding-inline": "{imported.tooltip.arrow-wrapper.padding-inline.{placement}}"
           },
           "parts": {
             "Arrow": {

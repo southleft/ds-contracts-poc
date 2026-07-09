@@ -106,6 +106,10 @@
   background-color: var(--imported-button-root-background-color-bare-focus);
 }
 
+.root[data-is-disabled] {
+  opacity: 0.4;
+}
+
 .focusRing {
   border-color: var(--imported-button-focus-ring-border-color);
   border-radius: var(--imported-button-focus-ring-border-radius);

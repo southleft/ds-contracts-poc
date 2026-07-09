@@ -78,6 +78,30 @@
   background-color: var(--imported-button-root-hover-background-color-ghost);
 }
 
+.button--variant-primary:active:not(:disabled) {
+  background-color: var(--imported-button-root-active-background-color-primary);
+}
+
+.button--variant-surface:active:not(:disabled) {
+  background-color: var(--imported-button-root-active-background-color-surface);
+}
+
+.button--variant-danger:active:not(:disabled) {
+  background-color: var(--imported-button-root-active-background-color-danger);
+}
+
+.button--variant-ghost:active:not(:disabled) {
+  background-color: var(--imported-button-root-active-background-color-ghost);
+}
+
+.button:focus-visible {
+  outline-width: var(--imported-button-root-focus-visible-outline-width);
+}
+
+.button:focus-visible {
+  outline-color: var(--imported-button-root-focus-visible-outline-color);
+}
+
 .button--variant-primary:disabled {
   background-color: var(--imported-button-root-disabled-background-color-primary);
 }
