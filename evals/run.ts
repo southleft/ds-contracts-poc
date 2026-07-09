@@ -1233,6 +1233,23 @@ const cases: Case[] = [
       if (r.status !== 0) throw new Error(`base-instance receipt failed:\n${r.out}`);
       if (!r.out.includes('all base-instance invariants hold'))
         throw new Error('base-instance receipt did not report green');
+      if (!r.out.includes('✔ no component ref anywhere in the anatomy'))
+        throw new Error('self-reference check missing from the receipt output');
+    },
+  },
+  {
+    // Hand-edited contracts can still contain a self-composition the proposer
+    // never emits — the generator must refuse the cycle BY NAME (direct and
+    // transitive), never crash with 'Maximum call stack size exceeded'.
+    id: 'generator-refuses-component-ref-cycles',
+    claim: 'C2-refusal',
+    run: () => {
+      const r = run(TSX, ['extract/figma/base-instance-check.ts']);
+      if (r.status !== 0) throw new Error(`base-instance receipt failed:\n${r.out}`);
+      if (!r.out.includes('✔ emitReact REFUSES the direct self-ref by name'))
+        throw new Error('direct-cycle refusal check missing/failed');
+      if (!r.out.includes('✔ transitive cycle refused with the chain spelled out'))
+        throw new Error('transitive-cycle refusal check missing/failed');
     },
   },
 ];

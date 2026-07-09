@@ -1,6 +1,6 @@
 {
-  "passed": 59,
-  "total": 59,
+  "passed": 60,
+  "total": 60,
   "results": [
     {
       "id": "refuse-unknown-token-reference",
@@ -295,6 +295,11 @@
     {
       "id": "design-base-instance-flattening-no-self-reference",
       "claim": "C5-extraction",
+      "pass": true
+    },
+    {
+      "id": "generator-refuses-component-ref-cycles",
+      "claim": "C2-refusal",
       "pass": true
     }
   ]
