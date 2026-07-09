@@ -40,6 +40,7 @@ function placeholdersIn(refPath: string): string[] {
 
 const STATE_SELECTORS: Record<string, string> = {
   hover: ':hover:not(:disabled)',
+  active: ':active:not(:disabled)',
   'focus-visible': ':focus-visible',
   disabled: ':disabled',
 };

@@ -24,7 +24,7 @@
  *
  *   NAMING     `imported.<component>.<part>.<css-property>` for base rules;
  *              `imported.<component>.<part>.<state>.<css-property>` for
- *              state rules (hover / focus-visible / disabled).
+ *              state rules (hover / active / focus-visible / disabled).
  *
  *   DEDUPE     an identical literal at ≥ MINT_SHARE_THRESHOLD uniform usage
  *              sites collapses into ONE `imported.shared.*` leaf.
@@ -60,7 +60,7 @@ export interface CodeMintFinding {
   part: string;
   /** Contract token key ('background-color', 'padding-inline', …). */
   cssProperty: string;
-  /** Contract state ('hover' | 'focus-visible' | 'disabled'); absent = base. */
+  /** Contract state ('hover' | 'active' | 'focus-visible' | 'disabled'); absent = base. */
   state?: string;
   /** The enum-modifier class guarding the rule; absent = base rule. */
   axis?: { prop: string; value: string };

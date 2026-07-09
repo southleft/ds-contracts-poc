@@ -13,7 +13,8 @@
  *   · `.variant-primary { … var(--…-primary-…) }`    → substituted refs
  *                                                      {color.action.{variant}.background}
  *   · flex declarations                              → layout blocks
- *   · :hover / :focus-visible / :disabled rules      → states
+ *   · :hover / :active / :focus-visible / :disabled
+ *     rules                                          → states
  *   · {children} / ReactNode props in named parts    → slots
  *   · <Avatar …/> instances                          → component refs
  *   · onClick={handleX} + the uncontrolled-toggle
@@ -314,6 +315,18 @@ function expandShorthands(decls: CssDecl[]): CssDecl[] {
         continue;
       }
     }
+    if (d.prop === 'outline') {
+      // The generator's focus ring is `outline-style: solid; outline-offset:
+      // 2px` boilerplate + an `outline-color` state token — so `outline: W
+      // solid C` (the focus-visible idiom; field case: CBDS Button) inverts
+      // to outline-width + outline-color the same way `border` does.
+      // `outline: none` and other shapes keep their named degradation.
+      const parts = splitTopLevel(d.value);
+      if (parts.length === 3 && parts[1] === 'solid') {
+        out.push({ prop: 'outline-width', value: parts[0] }, { prop: 'outline-color', value: parts[2] });
+        continue;
+      }
+    }
     out.push(d);
   }
   return out;
@@ -484,6 +497,7 @@ function inferTemplate(
 const STATE_SELECTOR_INV: Record<string, string> = {
   ':hover:not(:disabled)': 'hover',
   ':hover': 'hover',
+  ':active': 'active',
   ':focus-visible': 'focus-visible',
   ':disabled': 'disabled',
 };
@@ -496,7 +510,7 @@ const stateOfPseudo = (pseudo: string): string | undefined =>
 /** A pseudo suffix is "simple" when it is only chained pseudo-classes (with
  *  optional parenthesized arguments) — no descendants, no extra classes. */
 const SIMPLE_PSEUDO_RE = /^(?::[\w-]+(?:\([^)]*\))?)*$/;
-const STATE_ORDER = ['hover', 'focus-visible', 'disabled'];
+const STATE_ORDER = ['hover', 'active', 'focus-visible', 'disabled'];
 
 /** How the JSX spells its CSS classes — the referee for BEM-style modules
  *  where class names do NOT equal part/axis names (block__element,

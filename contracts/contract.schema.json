@@ -343,6 +343,7 @@
         "type": "string",
         "enum": [
           "hover",
+          "active",
           "focus-visible",
           "disabled"
         ]
