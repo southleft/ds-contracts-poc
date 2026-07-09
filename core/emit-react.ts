@@ -126,6 +126,44 @@ function layoutOverrideDecls(o: {
 // Contract-level validation (beyond the Zod schema)
 // ---------------------------------------------------------------------------
 
+/** Component refs must form a DAG — the emitters render composition by
+ *  recursion, so a contract that composes itself (directly or through a
+ *  chain of dependencies) is infinite anatomy. The field failure mode is a
+ *  'Maximum call stack size exceeded' crash instead of a named refusal
+ *  (live repro: a hand-edited ds.button whose anatomy kept a ds.button
+ *  instance). Walks the ref graph (component refs + slot defaultContent)
+ *  from `startId`, treating `fromId` as already on the path; returns the
+ *  cycle spelled out (e.g. [ds.button, ds.button]) or null. Contracts
+ *  missing from `byId` end the walk — their absence is its own refusal. */
+function findComponentCycle(
+  fromId: string,
+  startId: string,
+  byId: Map<string, Contract>,
+): string[] | null {
+  const acyclic = new Set<string>(); // fully explored, no cycle reachable
+  const visit = (id: string, path: string[]): string[] | null => {
+    const at = path.indexOf(id);
+    if (at >= 0) return [...path.slice(at), id];
+    if (acyclic.has(id)) return null;
+    const dep = byId.get(id);
+    if (!dep) return null;
+    const next = [...path, id];
+    for (const w of walkAnatomy(dep)) {
+      const targets = [
+        ...(w.part.component ? [w.part.component.id] : []),
+        ...(w.part.slot?.defaultContent ?? []).map((item) => item.id),
+      ];
+      for (const t of targets) {
+        const cycle = visit(t, next);
+        if (cycle) return cycle;
+      }
+    }
+    acyclic.add(id);
+    return null;
+  };
+  return visit(startId, [fromId]);
+}
+
 export function validateContract(
   contract: Contract,
   byId: Map<string, Contract>,
@@ -143,6 +181,12 @@ export function validateContract(
       const dep = byId.get(part.component.id);
       if (!dep) {
         errors.push(`${contract.id}: part "${name}" references component "${part.component.id}" which has no contract in scope`);
+      }
+      const cycle = findComponentCycle(contract.id, part.component.id, byId);
+      if (cycle) {
+        errors.push(
+          `${contract.id}: part "${name}" component ref creates a cycle (${cycle.join(' → ')}) — a contract cannot compose itself`,
+        );
       }
       for (const [propName, value] of Object.entries(part.component.props ?? {})) {
         if (dep && !dep.props.some((dp) => dp.name === propName)) {
@@ -167,6 +211,12 @@ export function validateContract(
       const dep = byId.get(item.id);
       if (!dep) {
         errors.push(`${contract.id}: slot "${part.slot!.name}" defaultContent references "${item.id}" which has no contract in scope`);
+      }
+      const cycle = findComponentCycle(contract.id, item.id, byId);
+      if (cycle) {
+        errors.push(
+          `${contract.id}: slot "${part.slot!.name}" defaultContent "${item.id}" creates a cycle (${cycle.join(' → ')}) — a contract cannot compose itself`,
+        );
       }
       if (item.text !== undefined && dep && !hasChildrenText(dep)) {
         errors.push(
