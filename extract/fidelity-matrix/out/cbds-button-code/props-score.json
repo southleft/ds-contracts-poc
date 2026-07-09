@@ -1,0 +1,60 @@
+{
+  "subject": "D. CBDS Button (code side)",
+  "truthSource": "trace.json Button.tsx types",
+  "tally": {
+    "MATCH": 6,
+    "PARTIAL": 0,
+    "MISS": 0
+  },
+  "rows": [
+    {
+      "prop": "variant",
+      "truthType": "ENUM",
+      "verdict": "MATCH",
+      "reasons": [],
+      "proposedAs": "variant: enum"
+    },
+    {
+      "prop": "size",
+      "truthType": "ENUM",
+      "verdict": "MATCH",
+      "reasons": [],
+      "proposedAs": "size: enum"
+    },
+    {
+      "prop": "fullWidth",
+      "truthType": "BOOLEAN",
+      "verdict": "MATCH",
+      "reasons": [],
+      "proposedAs": "fullWidth: boolean"
+    },
+    {
+      "prop": "iconLeft",
+      "truthType": "SLOT",
+      "verdict": "MATCH",
+      "reasons": [
+        "ReactNode prop modeled as anatomy slot — the faithful contract shape for node children"
+      ],
+      "proposedAs": "slot iconLeft"
+    },
+    {
+      "prop": "iconRight",
+      "truthType": "SLOT",
+      "verdict": "MATCH",
+      "reasons": [
+        "ReactNode prop modeled as anatomy slot — the faithful contract shape for node children"
+      ],
+      "proposedAs": "slot iconRight"
+    },
+    {
+      "prop": "children",
+      "truthType": "SLOT",
+      "verdict": "MATCH",
+      "reasons": [
+        "ReactNode prop modeled as anatomy slot — the faithful contract shape for node children"
+      ],
+      "proposedAs": "slot children"
+    }
+  ],
+  "extras": []
+}

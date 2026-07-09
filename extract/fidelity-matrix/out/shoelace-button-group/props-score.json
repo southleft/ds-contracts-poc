@@ -1,0 +1,48 @@
+{
+  "subject": "B. Shoelace Button Group",
+  "truthSource": "rest-defs.json componentPropertyDefinitions",
+  "tally": {
+    "MATCH": 4,
+    "PARTIAL": 0,
+    "MISS": 1
+  },
+  "rows": [
+    {
+      "prop": "isPill#381:0",
+      "truthType": "BOOLEAN",
+      "verdict": "MISS",
+      "reasons": [
+        "duplicate-named Figma property — proposed \"isPill\" is claimed by the VARIANT axis; this BOOLEAN definition has no counterpart in the contract"
+      ]
+    },
+    {
+      "prop": "position",
+      "truthType": "VARIANT",
+      "verdict": "MATCH",
+      "reasons": [],
+      "proposedAs": "position: enum"
+    },
+    {
+      "prop": "size",
+      "truthType": "VARIANT",
+      "verdict": "MATCH",
+      "reasons": [],
+      "proposedAs": "size: enum"
+    },
+    {
+      "prop": "type",
+      "truthType": "VARIANT",
+      "verdict": "MATCH",
+      "reasons": [],
+      "proposedAs": "type: enum"
+    },
+    {
+      "prop": "isPill",
+      "truthType": "VARIANT",
+      "verdict": "MATCH",
+      "reasons": [],
+      "proposedAs": "isPill: boolean"
+    }
+  ],
+  "extras": []
+}

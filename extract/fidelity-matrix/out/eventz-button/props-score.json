@@ -1,0 +1,72 @@
+{
+  "subject": "C. Eventz Button",
+  "truthSource": "rest-defs.json componentPropertyDefinitions",
+  "tally": {
+    "MATCH": 6,
+    "PARTIAL": 2,
+    "MISS": 0
+  },
+  "rows": [
+    {
+      "prop": "hasStartIcon#2314:0",
+      "truthType": "BOOLEAN",
+      "verdict": "MATCH",
+      "reasons": [],
+      "proposedAs": "hasStartIcon: boolean"
+    },
+    {
+      "prop": "hasEndIcon#2314:4",
+      "truthType": "BOOLEAN",
+      "verdict": "MATCH",
+      "reasons": [],
+      "proposedAs": "hasEndIcon: boolean"
+    },
+    {
+      "prop": "startIcon#2314:6",
+      "truthType": "INSTANCE_SWAP",
+      "verdict": "PARTIAL",
+      "reasons": [
+        "INSTANCE_SWAP kept as anatomy slot \"startIcon\" — swap default/preferredValues not modeled as a prop enum"
+      ],
+      "proposedAs": "slot startIcon"
+    },
+    {
+      "prop": "endIcon#2314:8",
+      "truthType": "INSTANCE_SWAP",
+      "verdict": "PARTIAL",
+      "reasons": [
+        "INSTANCE_SWAP kept as anatomy slot \"endIcon\" — swap default/preferredValues not modeled as a prop enum"
+      ],
+      "proposedAs": "slot endIcon"
+    },
+    {
+      "prop": "text#2316:12",
+      "truthType": "TEXT",
+      "verdict": "MATCH",
+      "reasons": [],
+      "proposedAs": "text: text"
+    },
+    {
+      "prop": "variant",
+      "truthType": "VARIANT",
+      "verdict": "MATCH",
+      "reasons": [],
+      "proposedAs": "variant: enum"
+    },
+    {
+      "prop": "state",
+      "truthType": "VARIANT",
+      "verdict": "MATCH",
+      "reasons": [],
+      "proposedAs": "state: enum"
+    },
+    {
+      "prop": "isDisabled",
+      "truthType": "VARIANT",
+      "verdict": "MATCH",
+      "reasons": [],
+      "proposedAs": "isDisabled: boolean"
+    }
+  ],
+  "extras": []
+}
