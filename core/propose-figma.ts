@@ -541,6 +541,23 @@ function invertNodeTokens(m: Merged, isRoot: boolean, ctx: Ctx, where: string): 
   const opacity = f('opacity');
   if (opacity) tokens.opacity = opacity;
 
+  // Bound variables on fields OUTSIDE the contract vocabulary (maxWidth,
+  // minHeight, counterAxisSpacing, …) are NAMED per field — a captured
+  // binding must never vanish without a receipt (STYLE-FIDELITY audit A19).
+  const CONSUMED_BOUND_FIELDS = new Set([
+    'paddingLeft', 'paddingRight', 'paddingTop', 'paddingBottom',
+    'topLeftRadius', 'topRightRadius', 'bottomLeftRadius', 'bottomRightRadius',
+    'strokeTopWeight', 'strokeRightWeight', 'strokeBottomWeight', 'strokeLeftWeight',
+    'strokeWeight', 'itemSpacing', 'width', 'height', 'minWidth', 'opacity',
+  ]);
+  for (const field of fields) {
+    if (!CONSUMED_BOUND_FIELDS.has(field)) {
+      ctx.notes.push(
+        `${where}: bound variable on "${field}" has no contract vocabulary — binding NAMED, not proposed (review)`,
+      );
+    }
+  }
+
   // Unbound literals on a non-utility node: named, suggested, never invented.
   // With minting on, each report is ALSO captured with its per-variant values.
   // Triggers scan EVERY variant — a value that is zero/absent in the DEFAULT

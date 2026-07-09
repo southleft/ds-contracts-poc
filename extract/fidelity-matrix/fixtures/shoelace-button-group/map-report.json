@@ -593,6 +593,11 @@
       "message": "variable id VariableID:4:22 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
     },
     {
+      "code": "stroke-weights-nonuniform",
+      "nodePath": "Button group:position=center, size=large, type=primary, isPill=false",
+      "message": "per-side stroke weights [0, 0, 0, 7] — dump v1 carries a uniform strokeWeight only; per-side weights dropped"
+    },
+    {
       "code": "variable-unresolved",
       "nodePath": "Button group:position=center, size=large, type=primary, isPill=false/Button",
       "field": "itemSpacing",

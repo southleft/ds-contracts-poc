@@ -45,6 +45,13 @@ const rgbToHex = (c) => {
   return h(c.r) + h(c.g) + h(c.b);
 };
 
+// dump v1.2: capture-side degradation receipts — the plugin mirror of the
+// REST mapper's MapReport.degradations. Every channel this script reads but
+// cannot carry lands here by name (STYLE-FIDELITY audit: zero silent loss).
+const degradations = [];
+const degrade = (code, nodePath, message) => degradations.push({ code, nodePath, message });
+const VECTOR_TYPES = ['VECTOR', 'STAR', 'POLYGON', 'REGULAR_POLYGON', 'LINE', 'BOOLEAN_OPERATION', 'ELLIPSE'];
+
 const varNameById = async (id) => {
   const v = await figma.variables.getVariableByIdAsync(id);
   return v ? v.name : null;
@@ -53,10 +60,19 @@ const varNameById = async (id) => {
 // First visible solid paint → { var } | { hex } | null, with the paint's
 // effective opacity as `alpha` when < 1 (dump v1.1 — 5%-black fills are a
 // real kit idiom; without alpha they mint opaque black).
-const dumpPaint = async (paints) => {
+const dumpPaint = async (paints, nodePath, field) => {
   if (!Array.isArray(paints)) return null; // figma.mixed
-  const p = paints.find((x) => x.visible !== false && x.type === 'SOLID');
-  if (!p) return null;
+  const visibles = paints.filter((x) => x.visible !== false);
+  const p = visibles.find((x) => x.type === 'SOLID');
+  if (!p) {
+    if (visibles.length > 0 && nodePath) {
+      degrade('paint-unsupported', nodePath, 'first visible ' + field + ' paint is ' + visibles[0].type + ', not SOLID — dump v1 carries solid paints only; paint omitted');
+    }
+    return null;
+  }
+  if (visibles.length > 1 && nodePath) {
+    degrade('paint-stack-truncated', nodePath, visibles.length + ' visible ' + field + ' paints (' + visibles.map((x) => x.type).join(', ') + ') — dump v1 carries the first SOLID only');
+  }
   const alpha = typeof p.opacity === 'number' ? p.opacity : 1;
   const withAlpha = (paint) => (alpha < 1 ? Object.assign(paint, { alpha }) : paint);
   const alias = p.boundVariables && p.boundVariables.color;
@@ -67,8 +83,19 @@ const dumpPaint = async (paints) => {
   return withAlpha({ hex: rgbToHex(p.color) });
 };
 
-async function dumpNode(node) {
+async function dumpNode(node, nodePath) {
   const out = { name: node.name, type: node.type };
+
+  // dump v1.2: channels with NO dump projection are named receipts.
+  if ('blendMode' in node && node.blendMode !== 'NORMAL' && node.blendMode !== 'PASS_THROUGH') {
+    degrade('blend-mode-unsupported', nodePath, 'blendMode ' + node.blendMode + ' has no dump v1 projection — node renders as NORMAL');
+  }
+  if ('rotation' in node && typeof node.rotation === 'number' && Math.abs(node.rotation) > 1e-6) {
+    degrade('rotation-unsupported', nodePath, 'rotation ' + node.rotation + ' has no dump v1 projection — node renders unrotated (#42 class)');
+  }
+  if (VECTOR_TYPES.indexOf(node.type) >= 0) {
+    degrade('vector-geometry-unsupported', nodePath, node.type + ' geometry is not captured (#42) — the node carries paints only and renders as a box');
+  }
 
   if ('layoutMode' in node && node.layoutMode !== 'NONE') {
     out.layout = {
@@ -83,6 +110,9 @@ async function dumpNode(node) {
   }
   if ('cornerRadius' in node && typeof node.cornerRadius === 'number' && node.cornerRadius !== 0) {
     out.cornerRadius = node.cornerRadius;
+  } else if ('cornerRadius' in node && typeof node.cornerRadius !== 'number') {
+    // figma.mixed — per-corner radii (dump v1.2: named, no longer silent)
+    degrade('radii-nonuniform', nodePath, 'per-corner radii [' + [node.topLeftRadius, node.topRightRadius, node.bottomRightRadius, node.bottomLeftRadius].join(', ') + '] are not uniform — dump v1 carries a uniform radius only; omitted');
   }
 
   // Direct variable bindings (paint bindings ride fill/stroke/text instead).
@@ -95,13 +125,35 @@ async function dumpNode(node) {
   if (Object.keys(bound).length > 0) out.bound = bound;
 
   if (node.type !== 'TEXT') {
-    const fill = 'fills' in node ? await dumpPaint(node.fills) : null;
+    const fill = 'fills' in node ? await dumpPaint(node.fills, nodePath, 'fill') : null;
     if (fill) out.fill = fill;
   }
-  const stroke = 'strokes' in node ? await dumpPaint(node.strokes) : null;
+  const stroke = 'strokes' in node ? await dumpPaint(node.strokes, nodePath, 'stroke') : null;
   if (stroke) {
     out.stroke = stroke;
     if (typeof node.strokeWeight === 'number') out.strokeWeight = node.strokeWeight;
+    // Stroke DETAIL on an INSTANCE is elided by design downstream (instance
+    // styling belongs to the child contract; the Slot utility's dashed
+    // border is the utility's own) — no receipt for an unconsumed channel.
+    if (node.type !== 'INSTANCE') {
+      if (typeof node.strokeWeight !== 'number') {
+        degrade('stroke-weights-nonuniform', nodePath, 'per-side stroke weights [' + [node.strokeTopWeight, node.strokeRightWeight, node.strokeBottomWeight, node.strokeLeftWeight].join(', ') + '] — dump v1 carries a uniform strokeWeight only');
+      }
+      if (Array.isArray(node.dashPattern) && node.dashPattern.length > 0) {
+        degrade('stroke-style-unsupported', nodePath, 'dashPattern [' + node.dashPattern.join(', ') + '] — dashed strokes have no dump v1 projection; stroke renders solid');
+      }
+      if ('strokeAlign' in node && node.strokeAlign !== 'INSIDE') {
+        degrade('stroke-style-unsupported', nodePath, 'strokeAlign ' + node.strokeAlign + ' — dump consumers render INSIDE strokes (CSS borders); alignment dropped');
+      }
+    }
+  }
+  const sizes = [];
+  if ('minWidth' in node && node.minWidth != null) sizes.push('minWidth ' + node.minWidth);
+  if ('maxWidth' in node && node.maxWidth != null) sizes.push('maxWidth ' + node.maxWidth);
+  if ('minHeight' in node && node.minHeight != null) sizes.push('minHeight ' + node.minHeight);
+  if ('maxHeight' in node && node.maxHeight != null) sizes.push('maxHeight ' + node.maxHeight);
+  if (sizes.length > 0) {
+    degrade('min-max-size-unsupported', nodePath, 'literal min/max sizing (' + sizes.join(', ') + ') has no dump v1 projection — dropped (bound min-width variables DO ride `bound`)');
   }
   if ('layoutSizingHorizontal' in node && node.layoutSizingHorizontal === 'FILL') {
     out.fillWidth = true;
@@ -134,6 +186,18 @@ async function dumpNode(node) {
   }
 
   if (node.type === 'TEXT') {
+    const channels = [];
+    if (node.letterSpacing !== figma.mixed && node.letterSpacing && node.letterSpacing.value !== 0) {
+      channels.push('letterSpacing ' + node.letterSpacing.value + node.letterSpacing.unit);
+    }
+    if (node.textCase !== figma.mixed && node.textCase && node.textCase !== 'ORIGINAL') channels.push('textCase ' + node.textCase);
+    if (node.textDecoration !== figma.mixed && node.textDecoration && node.textDecoration !== 'NONE') channels.push('textDecoration ' + node.textDecoration);
+    if (node.lineHeight !== figma.mixed && node.lineHeight && node.lineHeight.unit !== 'AUTO') {
+      channels.push('lineHeight ' + node.lineHeight.value + node.lineHeight.unit);
+    }
+    if (channels.length > 0) {
+      degrade('text-channel-unsupported', nodePath, 'text channel(s) with no dump v1 projection: ' + channels.join('; ') + ' — typography carries (fontSize, fontStyle, style identity) only');
+    }
     const text = {
       characters: node.characters,
       fontSize: typeof node.fontSize === 'number' ? node.fontSize : null,
@@ -143,7 +207,7 @@ async function dumpNode(node) {
       const style = await figma.getStyleByIdAsync(node.textStyleId);
       if (style) text.style = style.name;
     }
-    const fill = await dumpPaint(node.fills);
+    const fill = await dumpPaint(node.fills, nodePath, 'fill');
     if (fill && fill.var) text.fillVar = fill.var;
     out.text = text;
     if (fill) out.fill = fill;
@@ -177,7 +241,7 @@ async function dumpNode(node) {
 
   if ('children' in node && node.type !== 'INSTANCE') {
     out.children = [];
-    for (const child of node.children) out.children.push(await dumpNode(child));
+    for (const child of node.children) out.children.push(await dumpNode(child, nodePath + '/' + child.name));
   }
   return out;
 }
@@ -189,6 +253,7 @@ const dumps = {
     note: 'Node-tree dump (extract/figma/dump.plugin.js, dump v1.2) for design→contract proposal.',
   },
 };
+dumps._degradations = degradations;
 for (const page of figma.root.children) {
   for (const node of page.findAllWithCriteria({ types: ['COMPONENT_SET', 'COMPONENT'] })) {
     if (node.type === 'COMPONENT' && node.parent && node.parent.type === 'COMPONENT_SET') continue;
@@ -196,9 +261,9 @@ for (const page of figma.root.children) {
     if (TARGET_SETS.length > 0 && !TARGET_SETS.includes(node.name)) continue;
     const variants = [];
     if (node.type === 'COMPONENT_SET') {
-      for (const variant of node.children) variants.push(await dumpNode(variant));
+      for (const variant of node.children) variants.push(await dumpNode(variant, node.name + ':' + variant.name));
     } else {
-      variants.push(await dumpNode(node));
+      variants.push(await dumpNode(node, node.name + ':' + node.name));
     }
     dumps[node.name] = {
       setName: node.name,

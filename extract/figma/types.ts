@@ -122,9 +122,22 @@ export interface DumpSet {
   variants: DumpNode[];
 }
 
+/** One capture-side degradation receipt (dump v1.2) — the plugin dump's
+ *  mirror of extract/figma/rest/map.ts MapDegradation: every channel the
+ *  capture reads but cannot carry is NAMED, never dropped silently. */
+export interface DumpDegradation {
+  code: string;
+  /** setName:variant/child/… — same spelling as propose.ts note paths. */
+  nodePath: string;
+  message: string;
+}
+
 export interface DumpFile {
   _provenance?: { fileKey?: string | null; extractedAt?: string | number; note?: string };
-  [setName: string]: DumpSet | DumpFile['_provenance'];
+  /** dump v1.2, additive — absent in older dumps (their captures were run
+   *  before the channel existed; absence means "not receipted", not clean). */
+  _degradations?: DumpDegradation[];
+  [setName: string]: DumpSet | DumpFile['_provenance'] | DumpDegradation[] | undefined;
 }
 
 export const isDumpSet = (v: unknown): v is DumpSet =>

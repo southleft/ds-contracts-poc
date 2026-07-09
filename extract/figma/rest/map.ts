@@ -74,6 +74,12 @@ export interface RestTypeStyle {
   fontSize?: number;
   fontStyle?: string;
   italic?: boolean;
+  // Read ONLY to name their loss (dump v1 has no projection for them):
+  letterSpacing?: number;
+  textCase?: string;
+  textDecoration?: string;
+  lineHeightUnit?: string;
+  lineHeightPx?: number;
 }
 
 /** HasBoundVariablesTrait (api_types.ts) — the spellings that differ from the
@@ -154,6 +160,16 @@ export interface RestNode {
   // IsLayerTrait
   componentPropertyReferences?: Record<string, string>;
   boundVariables?: RestBoundVariables;
+  // Channels read ONLY to name their loss (STYLE-FIDELITY audit, dump v1.2):
+  blendMode?: string;
+  rotation?: number;
+  strokeAlign?: string;
+  strokeDashes?: number[];
+  individualStrokeWeights?: { top?: number; right?: number; bottom?: number; left?: number };
+  minWidth?: number | null;
+  maxWidth?: number | null;
+  minHeight?: number | null;
+  maxHeight?: number | null;
   // InstanceNode
   componentId?: string;
   componentProperties?: Record<string, RestComponentProperty>;
@@ -190,7 +206,17 @@ export type MapDegradationCode =
   // CAPTURED ({ hex, alpha }) instead of degraded away.
   | 'paint-unsupported'
   | 'layout-grid-unsupported'
-  | 'radii-nonuniform';
+  | 'radii-nonuniform'
+  // dump v1.2 (STYLE-FIDELITY audit): every channel the capture reads but
+  // cannot carry is a RECEIPT now — the silent-loss census hit zero.
+  | 'paint-stack-truncated'
+  | 'stroke-weights-nonuniform'
+  | 'stroke-style-unsupported'
+  | 'blend-mode-unsupported'
+  | 'rotation-unsupported'
+  | 'vector-geometry-unsupported'
+  | 'min-max-size-unsupported'
+  | 'text-channel-unsupported';
 
 export interface MapDegradation {
   code: MapDegradationCode;
@@ -294,9 +320,10 @@ function mapPaint(
   paintField: 'fill' | 'stroke',
 ): DumpPaint | undefined {
   if (!Array.isArray(paints)) return undefined;
-  const p = paints.find((x) => x.visible !== false && x.type === 'SOLID');
+  const visibles = paints.filter((x) => x.visible !== false);
+  const p = visibles.find((x) => x.type === 'SOLID');
   if (!p) {
-    const visible = paints.find((x) => x.visible !== false);
+    const visible = visibles[0];
     if (visible) {
       ctx.report.degradations.push({
         code: 'paint-unsupported',
@@ -306,6 +333,17 @@ function mapPaint(
       });
     }
     return undefined;
+  }
+  // dump v1.2: a paint STACK (or a non-solid layer alongside the captured
+  // solid) is truncated to the first solid — named, never silent.
+  const extra = visibles.filter((x) => x !== p);
+  if (extra.length > 0) {
+    ctx.report.degradations.push({
+      code: 'paint-stack-truncated',
+      nodePath,
+      field: paintField,
+      message: `${visibles.length} visible ${paintField} paints (${visibles.map((x) => x.type).join(', ')}) — dump v1 carries the first SOLID only; ${extra.length} paint(s) dropped`,
+    });
   }
   const effectiveAlpha = (p.color?.a ?? 1) * (p.opacity ?? 1);
   const withAlpha = (paint: DumpPaint): DumpPaint =>
@@ -428,6 +466,22 @@ function mapText(node: RestNode, ctx: Ctx, nodePath: string): DumpText {
     fontSize: s.fontSize ?? 0,
     fontStyle,
   };
+  // dump v1.2: text channels with no dump projection are NAMED per node.
+  const channels: string[] = [];
+  if (typeof s.letterSpacing === 'number' && s.letterSpacing !== 0) channels.push(`letterSpacing ${s.letterSpacing}`);
+  if (s.textCase !== undefined && s.textCase !== 'ORIGINAL') channels.push(`textCase ${s.textCase}`);
+  if (s.textDecoration !== undefined && s.textDecoration !== 'NONE') channels.push(`textDecoration ${s.textDecoration}`);
+  if (s.lineHeightUnit !== undefined && s.lineHeightUnit !== 'INTRINSIC_%') {
+    channels.push(`lineHeight ${s.lineHeightPx ?? '?'}px (${s.lineHeightUnit})`);
+  }
+  if (channels.length > 0) {
+    ctx.report.degradations.push({
+      code: 'text-channel-unsupported',
+      nodePath,
+      field: 'text',
+      message: `text channel(s) with no dump v1 projection: ${channels.join('; ')} — typography carries (fontSize, fontStyle, style identity) only`,
+    });
+  }
   const styleId = node.styles?.text ?? node.styles?.TEXT;
   if (styleId) {
     const name = ctx.styleNameById.get(styleId);
@@ -452,6 +506,76 @@ function mapPropRefs(node: RestNode): Record<string, string> | undefined {
   return Object.keys(propRefs).length > 0 ? propRefs : undefined;
 }
 
+const VECTOR_TYPES = new Set(['VECTOR', 'STAR', 'POLYGON', 'REGULAR_POLYGON', 'LINE', 'BOOLEAN_OPERATION', 'ELLIPSE']);
+
+/** Channels a node can carry that dump v1.2 still has NO projection for —
+ *  each becomes a degradation receipt (STYLE-FIDELITY audit: zero silence). */
+function nameUnsupportedChannels(node: RestNode, ctx: Ctx, nodePath: string, strokeEmitted: boolean) {
+  if (node.blendMode !== undefined && node.blendMode !== 'NORMAL' && node.blendMode !== 'PASS_THROUGH') {
+    ctx.report.degradations.push({
+      code: 'blend-mode-unsupported',
+      nodePath,
+      message: `blendMode ${node.blendMode} has no dump v1 projection — node renders as NORMAL`,
+    });
+  }
+  if (typeof node.rotation === 'number' && Math.abs(node.rotation) > 1e-6) {
+    ctx.report.degradations.push({
+      code: 'rotation-unsupported',
+      nodePath,
+      message: `rotation ${node.rotation} has no dump v1 projection — node renders unrotated (#42 class)`,
+    });
+  }
+  if (VECTOR_TYPES.has(node.type)) {
+    ctx.report.degradations.push({
+      code: 'vector-geometry-unsupported',
+      nodePath,
+      message: `${node.type} geometry is not captured (#42) — the node carries paints only and renders as a box`,
+    });
+  }
+  // Stroke DETAIL on an INSTANCE is elided by design downstream (instance
+  // styling belongs to the child contract; the Slot utility's dashed border
+  // is the utility's own) — no receipt needed for a channel that is
+  // deliberately not consumed.
+  const strokeDetail = strokeEmitted && node.type !== 'INSTANCE';
+  const w = node.individualStrokeWeights;
+  if (w && node.type !== 'INSTANCE') {
+    const values = [w.top ?? 0, w.right ?? 0, w.bottom ?? 0, w.left ?? 0];
+    if (new Set(values).size > 1) {
+      ctx.report.degradations.push({
+        code: 'stroke-weights-nonuniform',
+        nodePath,
+        message: `per-side stroke weights [${values.join(', ')}] — dump v1 carries a uniform strokeWeight only; per-side weights dropped`,
+      });
+    }
+  }
+  if (strokeDetail && Array.isArray(node.strokeDashes) && node.strokeDashes.length > 0) {
+    ctx.report.degradations.push({
+      code: 'stroke-style-unsupported',
+      nodePath,
+      message: `strokeDashes [${node.strokeDashes.join(', ')}] — dashed strokes have no dump v1 projection; stroke renders solid`,
+    });
+  }
+  if (strokeDetail && node.strokeAlign !== undefined && node.strokeAlign !== 'INSIDE') {
+    ctx.report.degradations.push({
+      code: 'stroke-style-unsupported',
+      nodePath,
+      message: `strokeAlign ${node.strokeAlign} — dump consumers render INSIDE strokes (CSS borders); alignment dropped`,
+    });
+  }
+  const sizes: string[] = [];
+  if (node.minWidth != null) sizes.push(`minWidth ${node.minWidth}`);
+  if (node.maxWidth != null) sizes.push(`maxWidth ${node.maxWidth}`);
+  if (node.minHeight != null) sizes.push(`minHeight ${node.minHeight}`);
+  if (node.maxHeight != null) sizes.push(`maxHeight ${node.maxHeight}`);
+  if (sizes.length > 0) {
+    ctx.report.degradations.push({
+      code: 'min-max-size-unsupported',
+      nodePath,
+      message: `literal min/max sizing (${sizes.join(', ')}) has no dump v1 projection — dropped (bound min-width variables DO ride \`bound\`)`,
+    });
+  }
+}
+
 function mapNode(node: RestNode, ctx: Ctx, nodePath: string): RestDumpNode {
   const out: RestDumpNode = { name: node.name, type: node.type };
 
@@ -469,6 +593,7 @@ function mapNode(node: RestNode, ctx: Ctx, nodePath: string): RestDumpNode {
     out.stroke = stroke;
     if (typeof node.strokeWeight === 'number') out.strokeWeight = node.strokeWeight;
   }
+  nameUnsupportedChannels(node, ctx, nodePath, stroke !== undefined);
   if (node.layoutSizingHorizontal === 'FILL') out.fillWidth = true;
   if (node.visible === false) out.hidden = true;
   // dump v1.2: NODE opacity (distinct from paint alpha) — the disabled-variant
