@@ -4,7 +4,7 @@
 
 ## Accordion
 
-- source: `../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/Accordion/Accordion.tsx` (react-tsx)
+- source: `extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/client/Accordion/Accordion.tsx` (react-tsx)
 - proposed: 5 props, 1 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
@@ -14,14 +14,14 @@
 
 ## ActionCard
 
-- source: `../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/server/ActionCard/ActionCard.tsx` (react-tsx)
+- source: `extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/server/ActionCard/ActionCard.tsx` (react-tsx)
 - proposed: 0 props, 0 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
 
 ## Alert
 
-- source: `../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/Alert/Alert.tsx` (react-tsx)
+- source: `extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/client/Alert/Alert.tsx` (react-tsx)
 - proposed: 4 props, 1 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
@@ -33,7 +33,7 @@
 
 ## AvatarGroup
 
-- source: `../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/AvatarGroup/AvatarGroup.tsx` (react-tsx)
+- source: `extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/client/AvatarGroup/AvatarGroup.tsx` (react-tsx)
 - proposed: 5 props, 0 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
@@ -41,7 +41,7 @@
 
 ## Badge
 
-- source: `../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/server/Badge/Badge.tsx` (react-tsx)
+- source: `extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/server/Badge/Badge.tsx` (react-tsx)
 - proposed: 2 props, 0 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
@@ -50,7 +50,7 @@
 
 ## Breadcrumbs
 
-- source: `../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/server/Breadcrumbs/Breadcrumbs.tsx` (react-tsx)
+- source: `extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/server/Breadcrumbs/Breadcrumbs.tsx` (react-tsx)
 - proposed: 2 props, 0 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
@@ -58,14 +58,14 @@
 
 ## Button
 
-- source: `../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/Button/Button.tsx` (react-tsx)
+- source: `extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/client/Button/Button.tsx` (react-tsx)
 - proposed: 0 props, 0 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
 
 ## Carousel
 
-- source: `../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/Carousel/Carousel.tsx` (react-tsx)
+- source: `extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/client/Carousel/Carousel.tsx` (react-tsx)
 - proposed: 15 props, 3 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
@@ -78,7 +78,7 @@
 
 ## Checkbox
 
-- source: `../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/Checkbox/Checkbox.tsx` (react-tsx)
+- source: `extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/client/Checkbox/Checkbox.tsx` (react-tsx)
 - proposed: 7 props, 0 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
@@ -86,7 +86,7 @@
 
 ## CheckboxGroup
 
-- source: `../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/CheckboxGroup/CheckboxGroup.tsx` (react-tsx)
+- source: `extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/client/CheckboxGroup/CheckboxGroup.tsx` (react-tsx)
 - proposed: 6 props, 1 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
@@ -95,7 +95,7 @@
 
 ## Chip
 
-- source: `../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/server/Chip/Chip.tsx` (react-tsx)
+- source: `extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/server/Chip/Chip.tsx` (react-tsx)
 - proposed: 2 props, 0 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
@@ -104,7 +104,7 @@
 
 ## Combobox
 
-- source: `../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/Combobox/Combobox.tsx` (react-tsx)
+- source: `extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/client/Combobox/Combobox.tsx` (react-tsx)
 - proposed: 7 props, 2 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
@@ -121,7 +121,7 @@
 
 ## ComboboxField
 
-- source: `../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/Combobox/Combobox.tsx` (react-tsx)
+- source: `extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/client/Combobox/Combobox.tsx` (react-tsx)
 - proposed: 5 props, 0 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
@@ -134,35 +134,35 @@
 
 ## ContentCard
 
-- source: `../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/server/ContentCard/ContentCard.tsx` (react-tsx)
+- source: `extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/server/ContentCard/ContentCard.tsx` (react-tsx)
 - proposed: 0 props, 0 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
 
 ## Control
 
-- source: `../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/Control/Control.tsx` (react-tsx)
+- source: `extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/client/Control/Control.tsx` (react-tsx)
 - proposed: 0 props, 0 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
 
 ## Countdown
 
-- source: `../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/Countdown/Countdown.tsx` (react-tsx)
+- source: `extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/client/Countdown/Countdown.tsx` (react-tsx)
 - proposed: 0 props, 0 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
 
 ## DatePicker
 
-- source: `../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/DatePicker/DatePicker.tsx` (react-tsx)
+- source: `extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/client/DatePicker/DatePicker.tsx` (react-tsx)
 - proposed: 0 props, 0 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
 
 ## Dialog
 
-- source: `../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/Dialog/Dialog.tsx` (react-tsx)
+- source: `extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/client/Dialog/Dialog.tsx` (react-tsx)
 - proposed: 2 props, 2 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
@@ -177,7 +177,7 @@
 
 ## Dropdown
 
-- source: `../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/Dropdown/Dropdown.tsx` (react-tsx)
+- source: `extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/client/Dropdown/Dropdown.tsx` (react-tsx)
 - proposed: 10 props, 1 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
@@ -194,7 +194,7 @@
 
 ## EventPanel
 
-- source: `../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/server/EventPanel/EventPanel.tsx` (react-tsx)
+- source: `extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/server/EventPanel/EventPanel.tsx` (react-tsx)
 - proposed: 6 props, 0 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
@@ -207,7 +207,7 @@
 
 ## ExpandableContent
 
-- source: `../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/ExpandableContent/ExpandableContent.tsx` (react-tsx)
+- source: `extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/client/ExpandableContent/ExpandableContent.tsx` (react-tsx)
 - proposed: 2 props, 1 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
@@ -215,7 +215,7 @@
 
 ## FileUpload
 
-- source: `../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/FileUpload/FileUpload.tsx` (react-tsx)
+- source: `extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/client/FileUpload/FileUpload.tsx` (react-tsx)
 - proposed: 14 props, 0 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
@@ -231,7 +231,7 @@
 
 ## FloatingBar
 
-- source: `../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/FloatingBar/FloatingBar.tsx` (react-tsx)
+- source: `extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/client/FloatingBar/FloatingBar.tsx` (react-tsx)
 - proposed: 3 props, 2 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
@@ -242,7 +242,7 @@
 
 ## Footer
 
-- source: `../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/server/Footer/Footer.tsx` (react-tsx)
+- source: `extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/server/Footer/Footer.tsx` (react-tsx)
 - proposed: 0 props, 0 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
@@ -250,7 +250,7 @@
 
 ## FormElement
 
-- source: `../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/FormElement/FormElement.tsx` (react-tsx)
+- source: `extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/client/FormElement/FormElement.tsx` (react-tsx)
 - proposed: 7 props, 0 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
@@ -259,7 +259,7 @@
 
 ## Heading
 
-- source: `../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/server/Heading/Heading.tsx` (react-tsx)
+- source: `extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/server/Heading/Heading.tsx` (react-tsx)
 - proposed: 9 props, 0 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
@@ -278,14 +278,14 @@
 
 ## IconButton
 
-- source: `../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/IconButton/IconButton.tsx` (react-tsx)
+- source: `extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/client/IconButton/IconButton.tsx` (react-tsx)
 - proposed: 0 props, 0 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
 
 ## ImagePanel
 
-- source: `../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/server/ImagePanel/ImagePanel.tsx` (react-tsx)
+- source: `extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/server/ImagePanel/ImagePanel.tsx` (react-tsx)
 - proposed: 6 props, 0 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
@@ -296,7 +296,7 @@
 
 ## InfoPopover
 
-- source: `../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/InfoPopover/InfoPopover.tsx` (react-tsx)
+- source: `extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/client/InfoPopover/InfoPopover.tsx` (react-tsx)
 - proposed: 4 props, 1 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
@@ -307,7 +307,7 @@
 
 ## Input
 
-- source: `../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/Input/Input.tsx` (react-tsx)
+- source: `extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/client/Input/Input.tsx` (react-tsx)
 - proposed: 0 props, 0 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
@@ -317,7 +317,7 @@
 
 ## InputField
 
-- source: `../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/Input/Input.tsx` (react-tsx)
+- source: `extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/client/Input/Input.tsx` (react-tsx)
 - proposed: 4 props, 0 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
@@ -327,14 +327,14 @@
 
 ## Map
 
-- source: `../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/server/Map/Map.tsx` (react-tsx)
+- source: `extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/server/Map/Map.tsx` (react-tsx)
 - proposed: 4 props, 0 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
 
 ## MediaCard
 
-- source: `../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/server/MediaCard/MediaCard.tsx` (react-tsx)
+- source: `extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/server/MediaCard/MediaCard.tsx` (react-tsx)
 - proposed: 4 props, 0 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
@@ -343,7 +343,7 @@
 
 ## MediaControl
 
-- source: `../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/MediaControl/MediaControl.tsx` (react-tsx)
+- source: `extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/client/MediaControl/MediaControl.tsx` (react-tsx)
 - proposed: 4 props, 3 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
@@ -359,7 +359,7 @@
 
 ## MediaPlayer
 
-- source: `../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/MediaPlayer/MediaPlayer.tsx` (react-tsx)
+- source: `extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/client/MediaPlayer/MediaPlayer.tsx` (react-tsx)
 - proposed: 11 props, 1 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
@@ -370,7 +370,7 @@
 
 ## NavigationBar
 
-- source: `../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/server/NavigationBar/NavigationBar.tsx` (react-tsx)
+- source: `extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/server/NavigationBar/NavigationBar.tsx` (react-tsx)
 - proposed: 3 props, 0 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
@@ -382,7 +382,7 @@
 
 ## NavigationContainer
 
-- source: `../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/server/NavigationContainer/NavigationContainer.tsx` (react-tsx)
+- source: `extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/server/NavigationContainer/NavigationContainer.tsx` (react-tsx)
 - proposed: 0 props, 0 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
@@ -390,7 +390,7 @@
 
 ## NavigationDropdown
 
-- source: `../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/NavigationDropdown/NavigationDropdown.tsx` (react-tsx)
+- source: `extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/client/NavigationDropdown/NavigationDropdown.tsx` (react-tsx)
 - proposed: 2 props, 0 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
@@ -400,7 +400,7 @@
 
 ## RadioButtonGroup
 
-- source: `../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/RadioButtonGroup/RadioButtonGroup.tsx` (react-tsx)
+- source: `extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/client/RadioButtonGroup/RadioButtonGroup.tsx` (react-tsx)
 - proposed: 5 props, 0 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
@@ -408,7 +408,7 @@
 
 ## Scroller
 
-- source: `../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/Scroller/Scroller.tsx` (react-tsx)
+- source: `extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/client/Scroller/Scroller.tsx` (react-tsx)
 - proposed: 4 props, 1 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
@@ -419,7 +419,7 @@
 
 ## ScrollerRow
 
-- source: `../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/server/ScrollerRow/ScrollerRow.tsx` (react-tsx)
+- source: `extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/server/ScrollerRow/ScrollerRow.tsx` (react-tsx)
 - proposed: 0 props, 0 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
@@ -427,7 +427,7 @@
 
 ## Search
 
-- source: `../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/Search/Search.tsx` (react-tsx)
+- source: `extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/client/Search/Search.tsx` (react-tsx)
 - proposed: 6 props, 3 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
@@ -440,7 +440,7 @@
 
 ## Select
 
-- source: `../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/Select/Select.tsx` (react-tsx)
+- source: `extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/client/Select/Select.tsx` (react-tsx)
 - proposed: 1 props, 0 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
@@ -449,7 +449,7 @@
 
 ## SelectionCard
 
-- source: `../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/server/SelectionCard/SelectionCard.tsx` (react-tsx)
+- source: `extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/server/SelectionCard/SelectionCard.tsx` (react-tsx)
 - proposed: 3 props, 0 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
@@ -457,7 +457,7 @@
 
 ## Slider
 
-- source: `../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/Slider/Slider.tsx` (react-tsx)
+- source: `extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/client/Slider/Slider.tsx` (react-tsx)
 - proposed: 6 props, 2 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
@@ -466,7 +466,7 @@
 
 ## Stepper
 
-- source: `../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/Stepper/Stepper.tsx` (react-tsx)
+- source: `extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/client/Stepper/Stepper.tsx` (react-tsx)
 - proposed: 3 props, 1 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
@@ -474,7 +474,7 @@
 
 ## SubscriptionCard
 
-- source: `../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/server/SubscriptionCard/SubscriptionCard.tsx` (react-tsx)
+- source: `extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/server/SubscriptionCard/SubscriptionCard.tsx` (react-tsx)
 - proposed: 7 props, 0 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
@@ -482,7 +482,7 @@
 
 ## Tabs
 
-- source: `../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/Tabs/Tabs.tsx` (react-tsx)
+- source: `extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/client/Tabs/Tabs.tsx` (react-tsx)
 - proposed: 7 props, 1 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
@@ -494,7 +494,7 @@
 
 ## Textarea
 
-- source: `../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/Textarea/Textarea.tsx` (react-tsx)
+- source: `extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/client/Textarea/Textarea.tsx` (react-tsx)
 - proposed: 8 props, 0 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
@@ -503,21 +503,21 @@
 
 ## TextLink
 
-- source: `../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/TextLink/TextLink.tsx` (react-tsx)
+- source: `extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/client/TextLink/TextLink.tsx` (react-tsx)
 - proposed: 0 props, 0 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
 
 ## TextWithRef
 
-- source: `../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/server/Text/Text.tsx` (react-tsx)
+- source: `extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/server/Text/Text.tsx` (react-tsx)
 - proposed: 0 props, 0 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
 
 ## ToggleGroup
 
-- source: `../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/ToggleGroup/ToggleGroup.tsx` (react-tsx)
+- source: `extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/client/ToggleGroup/ToggleGroup.tsx` (react-tsx)
 - proposed: 1 props, 0 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
@@ -525,7 +525,7 @@
 
 ## Visibility
 
-- source: `../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/server/Visibility/Visibility.tsx` (react-tsx)
+- source: `extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/server/Visibility/Visibility.tsx` (react-tsx)
 - proposed: 2 props, 0 events
 - anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)
 - semantics.element defaulted to "div" — set the real host element
@@ -538,7 +538,7 @@
 
 These components were found but their props could not be read — reported, never silently dropped:
 
-- **MenuItem** (`../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/MenuItem/MenuItem.tsx`) — props type "MenuItemComponentProps" not found in this file (imported/composed types are outside single-file extraction)
-- **InteractiveListItem** (`../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/server/InteractiveListItem/InteractiveListItem.tsx`) — props type "InteractiveListItemComponentProps" not found in this file (imported/composed types are outside single-file extraction)
-- **Tag** (`../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/server/Tag/Tag.tsx`) — props type "TagProps" not found in this file (imported/composed types are outside single-file extraction)
+- **MenuItem** (`extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/client/MenuItem/MenuItem.tsx`) — props type "MenuItemComponentProps" not found in this file (imported/composed types are outside single-file extraction)
+- **InteractiveListItem** (`extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/server/InteractiveListItem/InteractiveListItem.tsx`) — props type "InteractiveListItemComponentProps" not found in this file (imported/composed types are outside single-file extraction)
+- **Tag** (`extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/server/Tag/Tag.tsx`) — props type "TagProps" not found in this file (imported/composed types are outside single-file extraction)
 

@@ -2,7 +2,7 @@
   "matched": [
     {
       "component": "Accordion",
-      "codeSource": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/Accordion/Accordion.tsx",
+      "codeSource": "extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/client/Accordion/Accordion.tsx",
       "designName": "Accordion",
       "findings": [
         {
@@ -64,7 +64,7 @@
     },
     {
       "component": "Alert",
-      "codeSource": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/Alert/Alert.tsx",
+      "codeSource": "extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/client/Alert/Alert.tsx",
       "designName": "Alert",
       "findings": [
         {
@@ -117,7 +117,7 @@
     },
     {
       "component": "AvatarGroup",
-      "codeSource": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/AvatarGroup/AvatarGroup.tsx",
+      "codeSource": "extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/client/AvatarGroup/AvatarGroup.tsx",
       "designName": "Avatar group",
       "findings": [
         {
@@ -154,7 +154,7 @@
     },
     {
       "component": "Badge",
-      "codeSource": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/server/Badge/Badge.tsx",
+      "codeSource": "extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/server/Badge/Badge.tsx",
       "designName": "Badge",
       "findings": [
         {
@@ -181,7 +181,7 @@
     },
     {
       "component": "Breadcrumbs",
-      "codeSource": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/server/Breadcrumbs/Breadcrumbs.tsx",
+      "codeSource": "extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/server/Breadcrumbs/Breadcrumbs.tsx",
       "designName": "Breadcrumbs",
       "findings": [
         {
@@ -203,7 +203,7 @@
     },
     {
       "component": "Button",
-      "codeSource": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/Button/Button.tsx",
+      "codeSource": "extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/client/Button/Button.tsx",
       "designName": "Button",
       "findings": [
         {
@@ -240,7 +240,7 @@
     },
     {
       "component": "Carousel",
-      "codeSource": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/Carousel/Carousel.tsx",
+      "codeSource": "extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/client/Carousel/Carousel.tsx",
       "designName": "Carousel",
       "findings": [
         {
@@ -332,7 +332,7 @@
     },
     {
       "component": "Checkbox",
-      "codeSource": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/Checkbox/Checkbox.tsx",
+      "codeSource": "extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/client/Checkbox/Checkbox.tsx",
       "designName": "Checkbox",
       "findings": [
         {
@@ -391,7 +391,7 @@
     },
     {
       "component": "CheckboxGroup",
-      "codeSource": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/CheckboxGroup/CheckboxGroup.tsx",
+      "codeSource": "extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/client/CheckboxGroup/CheckboxGroup.tsx",
       "designName": "Checkbox group",
       "findings": [
         {
@@ -443,7 +443,7 @@
     },
     {
       "component": "Combobox",
-      "codeSource": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/Combobox/Combobox.tsx",
+      "codeSource": "extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/client/Combobox/Combobox.tsx",
       "designName": "Combobox",
       "findings": [
         {
@@ -517,7 +517,7 @@
     },
     {
       "component": "Countdown",
-      "codeSource": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/Countdown/Countdown.tsx",
+      "codeSource": "extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/client/Countdown/Countdown.tsx",
       "designName": "Countdown",
       "findings": [
         {
@@ -534,7 +534,7 @@
     },
     {
       "component": "Dialog",
-      "codeSource": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/Dialog/Dialog.tsx",
+      "codeSource": "extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/client/Dialog/Dialog.tsx",
       "designName": "Dialog",
       "findings": [
         {
@@ -551,7 +551,7 @@
     },
     {
       "component": "Dropdown",
-      "codeSource": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/Dropdown/Dropdown.tsx",
+      "codeSource": "extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/client/Dropdown/Dropdown.tsx",
       "designName": "Dropdown",
       "findings": [
         {
@@ -629,7 +629,7 @@
     },
     {
       "component": "ExpandableContent",
-      "codeSource": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/ExpandableContent/ExpandableContent.tsx",
+      "codeSource": "extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/client/ExpandableContent/ExpandableContent.tsx",
       "designName": "Expandable content",
       "findings": [
         {
@@ -652,7 +652,7 @@
     },
     {
       "component": "FileUpload",
-      "codeSource": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/FileUpload/FileUpload.tsx",
+      "codeSource": "extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/client/FileUpload/FileUpload.tsx",
       "designName": "File upload",
       "findings": [
         {
@@ -754,7 +754,7 @@
     },
     {
       "component": "FloatingBar",
-      "codeSource": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/FloatingBar/FloatingBar.tsx",
+      "codeSource": "extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/client/FloatingBar/FloatingBar.tsx",
       "designName": "Floating bar",
       "findings": [
         {
@@ -776,7 +776,7 @@
     },
     {
       "component": "Footer",
-      "codeSource": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/server/Footer/Footer.tsx",
+      "codeSource": "extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/server/Footer/Footer.tsx",
       "designName": "Footer",
       "findings": [
         {
@@ -793,7 +793,7 @@
     },
     {
       "component": "IconButton",
-      "codeSource": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/IconButton/IconButton.tsx",
+      "codeSource": "extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/client/IconButton/IconButton.tsx",
       "designName": "Icon button",
       "findings": [
         {
@@ -815,7 +815,7 @@
     },
     {
       "component": "Input",
-      "codeSource": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/Input/Input.tsx",
+      "codeSource": "extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/client/Input/Input.tsx",
       "designName": "Input",
       "findings": [
         {
@@ -872,7 +872,7 @@
     },
     {
       "component": "Map",
-      "codeSource": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/server/Map/Map.tsx",
+      "codeSource": "extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/server/Map/Map.tsx",
       "designName": "Map",
       "findings": [
         {
@@ -905,7 +905,7 @@
     },
     {
       "component": "MediaPlayer",
-      "codeSource": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/MediaPlayer/MediaPlayer.tsx",
+      "codeSource": "extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/client/MediaPlayer/MediaPlayer.tsx",
       "designName": "Media player",
       "findings": [
         {
@@ -992,7 +992,7 @@
     },
     {
       "component": "RadioButtonGroup",
-      "codeSource": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/RadioButtonGroup/RadioButtonGroup.tsx",
+      "codeSource": "extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/client/RadioButtonGroup/RadioButtonGroup.tsx",
       "designName": "Radio button group",
       "findings": [
         {
@@ -1039,7 +1039,7 @@
     },
     {
       "component": "Search",
-      "codeSource": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/Search/Search.tsx",
+      "codeSource": "extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/client/Search/Search.tsx",
       "designName": "Search",
       "findings": [
         {
@@ -1092,7 +1092,7 @@
     },
     {
       "component": "Select",
-      "codeSource": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/Select/Select.tsx",
+      "codeSource": "extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/client/Select/Select.tsx",
       "designName": "Select",
       "findings": [
         {
@@ -1140,7 +1140,7 @@
     },
     {
       "component": "SelectionCard",
-      "codeSource": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/server/SelectionCard/SelectionCard.tsx",
+      "codeSource": "extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/server/SelectionCard/SelectionCard.tsx",
       "designName": "Selection card",
       "findings": [
         {
@@ -1168,7 +1168,7 @@
     },
     {
       "component": "Stepper",
-      "codeSource": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/Stepper/Stepper.tsx",
+      "codeSource": "extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/client/Stepper/Stepper.tsx",
       "designName": "Stepper",
       "findings": [
         {
@@ -1205,7 +1205,7 @@
     },
     {
       "component": "SubscriptionCard",
-      "codeSource": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/server/SubscriptionCard/SubscriptionCard.tsx",
+      "codeSource": "extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/server/SubscriptionCard/SubscriptionCard.tsx",
       "designName": "Subscription card",
       "findings": [
         {
@@ -1258,7 +1258,7 @@
     },
     {
       "component": "Tabs",
-      "codeSource": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/Tabs/Tabs.tsx",
+      "codeSource": "extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/client/Tabs/Tabs.tsx",
       "designName": "Tabs",
       "findings": [
         {
@@ -1320,7 +1320,7 @@
     },
     {
       "component": "Textarea",
-      "codeSource": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/Textarea/Textarea.tsx",
+      "codeSource": "extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/client/Textarea/Textarea.tsx",
       "designName": "Textarea",
       "findings": [
         {
@@ -1408,7 +1408,7 @@
     },
     {
       "component": "TextLink",
-      "codeSource": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/TextLink/TextLink.tsx",
+      "codeSource": "extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/client/TextLink/TextLink.tsx",
       "designName": "Text link",
       "findings": [
         {
@@ -1440,7 +1440,7 @@
     },
     {
       "component": "ToggleGroup",
-      "codeSource": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/ToggleGroup/ToggleGroup.tsx",
+      "codeSource": "extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/client/ToggleGroup/ToggleGroup.tsx",
       "designName": "Toggle group",
       "findings": [
         {
@@ -1469,91 +1469,91 @@
   "codeOnly": [
     {
       "name": "ActionCard",
-      "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/server/ActionCard/ActionCard.tsx"
+      "source": "extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/server/ActionCard/ActionCard.tsx"
     },
     {
       "name": "Chip",
-      "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/server/Chip/Chip.tsx"
+      "source": "extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/server/Chip/Chip.tsx"
     },
     {
       "name": "ComboboxField",
-      "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/Combobox/Combobox.tsx"
+      "source": "extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/client/Combobox/Combobox.tsx"
     },
     {
       "name": "ContentCard",
-      "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/server/ContentCard/ContentCard.tsx"
+      "source": "extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/server/ContentCard/ContentCard.tsx"
     },
     {
       "name": "Control",
-      "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/Control/Control.tsx"
+      "source": "extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/client/Control/Control.tsx"
     },
     {
       "name": "DatePicker",
-      "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/DatePicker/DatePicker.tsx"
+      "source": "extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/client/DatePicker/DatePicker.tsx"
     },
     {
       "name": "EventPanel",
-      "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/server/EventPanel/EventPanel.tsx"
+      "source": "extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/server/EventPanel/EventPanel.tsx"
     },
     {
       "name": "FormElement",
-      "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/FormElement/FormElement.tsx"
+      "source": "extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/client/FormElement/FormElement.tsx"
     },
     {
       "name": "Heading",
-      "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/server/Heading/Heading.tsx"
+      "source": "extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/server/Heading/Heading.tsx"
     },
     {
       "name": "ImagePanel",
-      "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/server/ImagePanel/ImagePanel.tsx"
+      "source": "extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/server/ImagePanel/ImagePanel.tsx"
     },
     {
       "name": "InfoPopover",
-      "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/InfoPopover/InfoPopover.tsx"
+      "source": "extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/client/InfoPopover/InfoPopover.tsx"
     },
     {
       "name": "InputField",
-      "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/Input/Input.tsx"
+      "source": "extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/client/Input/Input.tsx"
     },
     {
       "name": "MediaCard",
-      "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/server/MediaCard/MediaCard.tsx"
+      "source": "extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/server/MediaCard/MediaCard.tsx"
     },
     {
       "name": "MediaControl",
-      "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/MediaControl/MediaControl.tsx"
+      "source": "extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/client/MediaControl/MediaControl.tsx"
     },
     {
       "name": "NavigationBar",
-      "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/server/NavigationBar/NavigationBar.tsx"
+      "source": "extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/server/NavigationBar/NavigationBar.tsx"
     },
     {
       "name": "NavigationContainer",
-      "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/server/NavigationContainer/NavigationContainer.tsx"
+      "source": "extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/server/NavigationContainer/NavigationContainer.tsx"
     },
     {
       "name": "NavigationDropdown",
-      "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/NavigationDropdown/NavigationDropdown.tsx"
+      "source": "extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/client/NavigationDropdown/NavigationDropdown.tsx"
     },
     {
       "name": "Scroller",
-      "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/Scroller/Scroller.tsx"
+      "source": "extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/client/Scroller/Scroller.tsx"
     },
     {
       "name": "ScrollerRow",
-      "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/server/ScrollerRow/ScrollerRow.tsx"
+      "source": "extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/server/ScrollerRow/ScrollerRow.tsx"
     },
     {
       "name": "Slider",
-      "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/client/Slider/Slider.tsx"
+      "source": "extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/client/Slider/Slider.tsx"
     },
     {
       "name": "TextWithRef",
-      "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/server/Text/Text.tsx"
+      "source": "extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/server/Text/Text.tsx"
     },
     {
       "name": "Visibility",
-      "source": "../../../../private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/601388a4-bfff-4bbd-aaf1-50a4605c39ae/scratchpad/eventz/packages/core/src/components/server/Visibility/Visibility.tsx"
+      "source": "extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/server/Visibility/Visibility.tsx"
     }
   ],
   "designOnly": [
