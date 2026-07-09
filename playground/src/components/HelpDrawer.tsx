@@ -34,17 +34,25 @@ export function HelpDrawer({ open, onClose }: { open: boolean; onClose: () => vo
           <section>
             <h3 className="drawer__section-title">Coming from design</h3>
             <p>
-              Open the <b>Figma</b> tab. Paste a figma.com component URL and a personal access
-              token — the token stays in your browser, sent only to api.figma.com. A contract is
-              proposed with its receipts; check the React and HTML tabs for its code side. No
-              token? Demo import runs the identical path over a committed fixture.
+              Open the <b>Figma</b> tab. Three rungs, by variable-name fidelity: paste a plugin
+              dump in the JSON tab (native names, zero ambiguity); run{' '}
+              <code>npm run extract:figma:mcp</code> in the repo against the desktop app (full
+              names on any plan — CLI-only, the desktop server allows no browser origins); or
+              paste a figma.com URL + token here. The token stays in your browser, sent only to
+              api.figma.com. When the plan withholds variable names, resolved values are minted
+              as provisional <code>imported.*</code> tokens — the preview stays styled, the
+              receipts list every mint, and &lsquo;Suggest semantic names (AI)&rsquo; proposes
+              renames you apply one by one, refereed. No token? Demo import runs the identical
+              path over a committed fixture.
             </p>
           </section>
           <section>
             <h3 className="drawer__section-title">Coming from code</h3>
             <p>
-              Open the <b>Code</b> tab. Paste TSX + CSS, or a public GitHub file URL. A contract
-              is proposed; every raw value is reported with nearest-token candidates, nothing
+              Open the <b>Code</b> tab. Paste TSX + CSS, or a public GitHub file or directory
+              URL — the tracer follows the entry&rsquo;s relative imports (every fetch
+              receipted), and anything it cannot close is a named gap with an AI fetch-plan as
+              the next rung. Every raw value is reported with nearest-token candidates, nothing
               invented. Check the Figma script tab for its design side.
             </p>
           </section>

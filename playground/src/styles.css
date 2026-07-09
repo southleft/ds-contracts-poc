@@ -1237,6 +1237,36 @@ label {
 
 /* first-visit onboarding strip — three clickable steps, no modal, no tour */
 
+/* fidelity ladder (Figma tab) — compact, above the form */
+
+.ladder {
+  margin-bottom: 14px;
+  padding: 8px 10px;
+  border: 1px solid var(--pg-border);
+  background: var(--pg-surface);
+  font-size: 12px;
+}
+
+.ladder__title {
+  font-size: 10.5px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--pg-muted);
+  margin-bottom: 6px;
+}
+
+.ladder__list {
+  margin: 0;
+  padding-left: 18px;
+  display: grid;
+  gap: 5px;
+}
+
+.ladder__list code {
+  font-family: var(--pg-mono);
+  font-size: 11px;
+}
+
 /* chunk-failure banner — one calm strip, never a raw red error */
 
 .chunk-banner {
