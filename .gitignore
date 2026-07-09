@@ -4,7 +4,7 @@ dist/
 *.log
 .DS_Store
 evals/.scratch/
-evals/.scratch-naxis/
+extract/pilots/eventz/.src/
 dashboard/dist/
 .runner-result.json
 private/
