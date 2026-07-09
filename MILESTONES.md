@@ -26,7 +26,7 @@ code-only surface since.
 - **Extraction v0**: `extract/` reads *your* library (React/TSX and custom
   elements manifests) into proposed contracts; skipped components are always
   reported, never silent.
-- **Shoelace pilot**: 60/60 components extracted; code reconciled against its
+- **Shoelace pilot**: 58/58 components extracted; code reconciled against its
   community Figma kit — 28/58 matched, 236 recorded decisions, real kit rot
   found mechanically (`deafult`, `isCheched`, `endicon`).
 - **Mantine field test**: 245 components extracted in under a second.
@@ -387,6 +387,29 @@ itself") instead of blowing the stack — the crash observed live during
 the owner's hand-fix. Unconfirmed patterns degrade to named skips that
 still generate. **60/60.**
 
+
+## 2026-07-09 — The fidelity matrix: URL in, styled truth out, scored
+
+The charter's scored acceptance pass (`extract/fidelity-matrix/SCORECARD.md`):
+four real components — Shoelace Tooltip and Button Group, the Eventz Button,
+and the CBDS Button on both sides — imported live, proposed, emitted on every
+surface, and scored against **their own captures** (props vs the dump's
+property definitions, style facts vs resolved node values, D-convergence
+design-proposed vs code-proposed, Figma-API PNGs vs emitted-preview renders).
+Committed fixtures replay every number offline. Result honestly read: **0
+style-value mismatches across 334 fact-cells**; the losses live in what the
+capture drops — named as 12 gaps with causes and an ordered punch list.
+
+Punch items 1, 2, 3, and 5 then landed, receipt by receipt: dump v1.1
+captures paint alpha and node visibility (Eventz secondary/bare render the
+near-white truth via 8-digit-hex minting; `paint-alpha-dropped` retired); the
+one engine crash in the matrix became a named refusal; icon-toggle booleans
+on component-ref parts survive into contracts; identifiers sanitize at
+proposal instead of refusing at emit; and contract-less child instances ship
+auto-proposed STUBS — turning the CBDS design proposal green on all four
+surfaces without guessing a child's API. D-convergence stands at 12/19 style
+facts in byte-agreement, each divergence attributed to the side that owns it.
+**60/60.**
 
 ---
 

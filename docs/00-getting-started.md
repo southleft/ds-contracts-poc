@@ -1,6 +1,6 @@
 # Getting Started — What, Why, and How
 
-New here? This page is the five-minute orientation. Everything else in the docs assumes you've read it.
+New here? This page is the five-minute orientation. Everything else in the docs assumes you've read it. (Prefer to see it before reading about it? The [public playground](https://ds-contracts-playground.pages.dev) runs the same engine in your browser — no clone, no setup.)
 
 ## What is this?
 

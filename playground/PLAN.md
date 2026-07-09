@@ -28,21 +28,23 @@ browser. No backend, no analytics, no accounts.
 
 ## Phases & workstreams
 
-### Phase 0 — Foundations (IN FLIGHT)
-- **W1 — Pure-core engine refactor + emitters** *(agent running)*:
+### Phase 0 — Foundations (LANDED)
+- **W1 — Pure-core engine refactor + emitters**:
   `core/` barrel importable in the browser (schema, both proposers, React
   emitter, Figma-script builder), byte-identical CLI output (golden-guarded),
   plus new emitters: plain HTML+CSS and React inline-style (token values
   resolved), behind a pluggable `Emitter` interface.
-- **W2 — Figma REST → dump mapper** *(agent running)*: figma.com URL + user
+- **W2 — Figma REST → dump mapper**: figma.com URL + user
   token → the dump format the proposer consumes; Enterprise-only variables
   endpoint degrades to resolved literals with named reports. Round-trip
   receipt on REST-shaped Badge.
 
-### Phase 1 — MVP playground on a live URL
+### Phase 1 — MVP playground on a live URL (LANDED)
 
 > **Launch gate (per TJ, 2026-07-08): the playground does not launch
-> publicly until Figma URL import (W6) works end-to-end.** Paste-dump
+> publicly until Figma URL import (W6) works end-to-end.** *(Met —
+> launched 2026-07-08 with both credential-gated paths live-verified;
+> see MILESTONES.md.)* Paste-dump
 > import is a power-user affordance, not the import story — visitors
 > won't know where a dump comes from. W5 deploys are previews until W6
 > lands. Domain: default *.pages.dev for now.
@@ -57,7 +59,7 @@ browser. No backend, no analytics, no accounts.
 - **W5 — Deploy**: `wrangler pages deploy`; project name, headers, SPA
   routing; deploy script committed. (Custom domain: TJ decision.)
 
-### Phase 2 — Live imports & bring-your-own design system
+### Phase 2 — Live imports & bring-your-own design system (LANDED)
 - **W6 — Figma URL import UI**: token field (session-only), REST fetch in
   the browser, degradation ladder surfaced in the UI; CORS fallback via a
   Pages Function proxy ONLY if the browser-direct call fails (still no
@@ -213,8 +215,8 @@ browser. No backend, no analytics, no accounts.
     the component in Figma), the Receipts header carries a clarifying
     sub-line, and "golden-guarded" expands on hover.
 
-Bundle tiers (vite build, gzip): initial ≈ 153 KB · prettier chunk ≈ 339 KB ·
-TypeScript chunk ≈ 985 KB · REST fixtures ≈ 3 KB — the lazy tiers load only
+Bundle tiers (vite build, gzip): initial ≈ 199 KB · prettier chunk ≈ 339 KB ·
+TypeScript chunk ≈ 988 KB · REST fixtures ≈ 3 KB — the lazy tiers load only
 behind their actions. Live-path receipt: a browser-direct api.figma.com call
 answers (403 with a bogus token — no CORS block), so URL import needs only a
 real token; the Pages-Function proxy fallback remains unbuilt until needed.
@@ -233,5 +235,5 @@ against your real tokens when you adopt the contract. On success the plugin
 selects and zooms to the result automatically.
 
 ## Receipts discipline
-Every phase lands with: gates green (52/52+), new eval cases where the
+Every phase lands with: gates green (60/60 at last count), new eval cases where the
 engine grew, MILESTONES.md entry, and a demo path documented in this file.
