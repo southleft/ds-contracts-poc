@@ -38,6 +38,7 @@ import {
   slotVisibilityProperty,
   statePreviewLabel,
   statePreviewSubstProps,
+  walkAnatomy,
   type Contract,
   type Part,
   type Prop,
@@ -812,13 +813,17 @@ function partToSpecInner(
     }
   }
   if (part.component) {
-    const dep = byId.get(part.component.id)!;
-    return {
+    const dep = byId.get(part.component.id)!; // resolvability guaranteed by refuseUnresolvableRefs
+    const spec: NodeSpec = {
       type: 'instance',
       name,
       dep: dep.name,
       depProps: mapDepProps(dep, part.component.props ?? {}, subst, part.component.text),
     };
+    // Boolean-toggled component-ref parts (CBDS icon toggles): the instance's
+    // visibility binds to the BOOLEAN property like every other part kind.
+    applyVisibleWhen(spec, part, contract);
+    return spec;
   }
   if (part.slot) {
     const spec: NodeSpec = {
@@ -897,7 +902,47 @@ function partToSpecInner(
 
 
 
+/** NAMED REFUSAL for unresolvable contract references — the same discipline
+ *  (and the same wording) as emit-react's validateContract. Field failure:
+ *  the design-proposed CBDS Button carried a `ds.icon` component ref with no
+ *  contract in scope and the compile crashed `undefined.name` inside
+ *  partToSpecInner — the one place the "named refusal, never a crash" rule
+ *  broke. The canvas stays deliberately MORE tolerant than emit-react (a
+ *  child's unknown props are skipped by the runtime's setInstanceProps, so a
+ *  foreign-kit composite still constructs) — only references that cannot
+ *  resolve at all are refused here. */
+function refuseUnresolvableRefs(contract: Contract, byId: Map<string, Contract>): void {
+  const errors: string[] = [];
+  for (const { name, part } of walkAnatomy(contract)) {
+    if (part.component && !byId.has(part.component.id)) {
+      errors.push(
+        `${contract.id}: part "${name}" references component "${part.component.id}" which has no contract in scope`,
+      );
+    }
+    for (const item of part.slot?.defaultContent ?? []) {
+      if (!byId.has(item.id)) {
+        errors.push(
+          `${contract.id}: slot "${part.slot!.name}" defaultContent references "${item.id}" which has no contract in scope`,
+        );
+      }
+    }
+    for (const id of part.slot?.accepts ?? []) {
+      if (!byId.has(id)) {
+        errors.push(
+          `${contract.id}: slot "${part.slot!.name}" accepts "${id}" which has no contract in scope`,
+        );
+      }
+    }
+  }
+  if (errors.length > 0) {
+    throw new Error(
+      `Refused — ${errors.length} contract violation(s):\n${errors.map((e) => `  - ${e}`).join('\n')}`,
+    );
+  }
+}
+
 function compileComponentData(contract: Contract, byId: Map<string, Contract>): ComponentData {
+  refuseUnresolvableRefs(contract, byId);
   const enums = contract.props.filter(isEnum);
   const textProp = contract.props.find(
     (p) => p.type === 'text' && p.bindings.code.prop === 'children',
@@ -1132,13 +1177,17 @@ function mintedPreamble(mintedTokens?: Record<string, unknown>): string {
 // ---------------------------------------------------------------------------
 const MINTED_VARIABLES = ${JSON.stringify(vars)};
 {
+  // Minted colors may be 8-digit hex (paint opacity captured by dump v1.1) —
+  // Figma COLOR variables accept RGBA, so the alpha channel survives.
   const hexToRgb = (hex) => {
     const h = hex.replace('#', '');
-    return {
+    const c = {
       r: parseInt(h.slice(0, 2), 16) / 255,
       g: parseInt(h.slice(2, 4), 16) / 255,
       b: parseInt(h.slice(4, 6), 16) / 255,
     };
+    if (h.length === 8) c.a = parseInt(h.slice(6, 8), 16) / 255;
+    return c;
   };
   const cols = await figma.variables.getLocalVariableCollectionsAsync();
   let col = cols.find((c) => c.name === 'Imported (provisional)');
