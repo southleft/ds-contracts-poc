@@ -14,15 +14,25 @@ export function proposeFromCodeText(tsx: string, css: string, sourcePath: string
   return proposeFromCode(
     { sourcePath, source: tsx, ...(css.trim() ? { css } : {}) },
     // The ACTIVE trees — var(--…) → {token.ref} bindings referee against the
-    // user's pasted tree when one is applied (token-source.ts).
-    { tokens: activeTokens().treesForCode, prefix: 'ds' },
+    // user's pasted tree when one is applied (token-source.ts). mintUnbound:
+    // raw literals and foreign var()s the tree cannot bind become provisional
+    // `imported.*` tokens the proposal binds — a wild stylesheet stays styled
+    // at literal fidelity (core/mint-code.ts), matching the Figma path.
+    { tokens: activeTokens().treesForCode, prefix: 'ds', mintUnbound: true },
   );
 }
 
 /** Multi-file variant — the GitHub tracer's SourceFileInput[] (entry first,
  *  followed imports after, stylesheets attached per file) through the same
  *  proposer. First definition wins on duplicate component names, matching
- *  the CLI's directory walk. */
-export function proposeFromCodeFiles(files: SourceFileInput[]): ProposeCodeResult {
-  return proposeFromCode(files, { tokens: activeTokens().treesForCode, prefix: 'ds' });
+ *  the CLI's directory walk. `extraCss` carries discovered token stylesheets
+ *  (a tokens.css no component imports) — the :root vocabulary foreign var()s
+ *  mint against. */
+export function proposeFromCodeFiles(files: SourceFileInput[], extraCss: string[] = []): ProposeCodeResult {
+  return proposeFromCode(files, {
+    tokens: activeTokens().treesForCode,
+    prefix: 'ds',
+    mintUnbound: true,
+    extraCss,
+  });
 }
