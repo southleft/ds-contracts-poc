@@ -1,0 +1,43 @@
+/* Tooltip — from ds.tooltip v0.1.0 (core/emit-html.ts) */
+
+.tooltip {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border: 0;
+}
+
+.tooltip__Body {
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--imported-tooltip-body-border-radius);
+}
+
+.tooltip__Content {
+  display: flex;
+  flex-direction: row;
+  background-color: var(--imported-tooltip-body-content-background-color);
+  padding-inline: var(--imported-tooltip-body-content-padding-inline);
+  padding-block: var(--imported-tooltip-body-content-padding-block);
+  border-radius: var(--imported-tooltip-body-content-border-radius);
+}
+
+.tooltip__tooltipText {
+  color: var(--imported-tooltip-body-content-tooltip-text-color);
+  font-size: var(--imported-tooltip-body-content-tooltip-text-font-size);
+}
+
+.tooltip__arrowWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.tooltip__Arrow {
+  background-color: var(--imported-tooltip-arrow-wrapper-arrow-background-color);
+}
+
+/* showcase chrome */
+.showcase { display: flex; flex-direction: column; gap: 24px; align-items: flex-start; font-family: sans-serif; }
+.showcase__label { margin: 0 0 8px; font: 12px/1 monospace; opacity: 0.6; }

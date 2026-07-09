@@ -1,0 +1,145 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "ds.button-group",
+  "name": "Button group",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "PROPOSED contract extracted from the design canvas (extract/figma dump v1) — API, anatomy, and token bindings inverted from the drawn structure. Semantics, a11y, events, and slot accepts are not canvas-recoverable; review before adoption.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "position",
+      "type": {
+        "enum": [
+          "left",
+          "center",
+          "right",
+          "position4"
+        ]
+      },
+      "default": "left",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "position",
+          "values": {
+            "left": "left",
+            "center": "center",
+            "right": "right",
+            "position4": "position4"
+          }
+        },
+        "code": {
+          "prop": "position"
+        }
+      }
+    },
+    {
+      "name": "size",
+      "type": {
+        "enum": [
+          "large",
+          "small",
+          "medium"
+        ]
+      },
+      "default": "large",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "size",
+          "values": {
+            "large": "large",
+            "small": "small",
+            "medium": "medium"
+          }
+        },
+        "code": {
+          "prop": "size"
+        }
+      }
+    },
+    {
+      "name": "type",
+      "type": {
+        "enum": [
+          "default",
+          "primary"
+        ]
+      },
+      "default": "default",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "type",
+          "values": {
+            "default": "default",
+            "primary": "primary"
+          }
+        },
+        "code": {
+          "prop": "type"
+        }
+      }
+    },
+    {
+      "name": "isPill",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "isPill",
+          "values": {
+            "false": "false",
+            "true": "true"
+          }
+        },
+        "code": {
+          "prop": "isPill"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "flex",
+        "direction": "row"
+      },
+      "parts": {
+        "Button": {
+          "component": {
+            "id": "ds.button",
+            "props": {
+              "showLabel": true,
+              "label": "label",
+              "showSuffix": false,
+              "showPrefix": false,
+              "variant": "default",
+              "size": "large",
+              "state": "default",
+              "isOutline": "false",
+              "isPill": "false",
+              "isCircle": "false"
+            }
+          }
+        }
+      }
+    }
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": "nl9P0h3brratHTdncjzKIr",
+      "componentSetKey": "8ea76f7b0299bf1a13c947556dbdf36986a879c1",
+      "nodeId": "376:3540"
+    },
+    "code": {
+      "importPath": "src/components/Button group",
+      "export": "Button group"
+    }
+  }
+}

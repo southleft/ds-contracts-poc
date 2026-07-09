@@ -1,0 +1,205 @@
+{
+  "htmlOk": true,
+  "script": {
+    "bytes": 44494,
+    "mintedPreamble": true,
+    "syntaxOk": true
+  },
+  "compiled": {
+    "setName": "Button",
+    "variants": [
+      {
+        "name": "Variant=Primary, Size=Medium",
+        "rootFill": "imported/button/root/background-color/primary",
+        "rootStroke": null,
+        "bindings": {
+          "itemSpacing": "imported/button/root/gap",
+          "paddingTop": "imported/button/root/padding-block",
+          "paddingBottom": "imported/button/root/padding-block",
+          "paddingLeft": "imported/button/root/padding-inline/medium",
+          "paddingRight": "imported/button/root/padding-inline/medium",
+          "topLeftRadius": "imported/button/root/border-radius",
+          "topRightRadius": "imported/button/root/border-radius",
+          "bottomLeftRadius": "imported/button/root/border-radius",
+          "bottomRightRadius": "imported/button/root/border-radius"
+        }
+      },
+      {
+        "name": "Variant=Primary, Size=Small",
+        "rootFill": "imported/button/root/background-color/primary",
+        "rootStroke": null,
+        "bindings": {
+          "itemSpacing": "imported/button/root/gap",
+          "paddingTop": "imported/button/root/padding-block",
+          "paddingBottom": "imported/button/root/padding-block",
+          "paddingLeft": "imported/button/root/padding-inline/small",
+          "paddingRight": "imported/button/root/padding-inline/small",
+          "topLeftRadius": "imported/button/root/border-radius",
+          "topRightRadius": "imported/button/root/border-radius",
+          "bottomLeftRadius": "imported/button/root/border-radius",
+          "bottomRightRadius": "imported/button/root/border-radius"
+        }
+      },
+      {
+        "name": "Variant=Primary, Size=Large",
+        "rootFill": "imported/button/root/background-color/primary",
+        "rootStroke": null,
+        "bindings": {
+          "itemSpacing": "imported/button/root/gap",
+          "paddingTop": "imported/button/root/padding-block",
+          "paddingBottom": "imported/button/root/padding-block",
+          "paddingLeft": "imported/button/root/padding-inline/large",
+          "paddingRight": "imported/button/root/padding-inline/large",
+          "topLeftRadius": "imported/button/root/border-radius",
+          "topRightRadius": "imported/button/root/border-radius",
+          "bottomLeftRadius": "imported/button/root/border-radius",
+          "bottomRightRadius": "imported/button/root/border-radius"
+        }
+      },
+      {
+        "name": "Variant=Surface, Size=Medium",
+        "rootFill": "imported/button/root/background-color/surface",
+        "rootStroke": null,
+        "bindings": {
+          "itemSpacing": "imported/button/root/gap",
+          "paddingTop": "imported/button/root/padding-block",
+          "paddingBottom": "imported/button/root/padding-block",
+          "paddingLeft": "imported/button/root/padding-inline/medium",
+          "paddingRight": "imported/button/root/padding-inline/medium",
+          "topLeftRadius": "imported/button/root/border-radius",
+          "topRightRadius": "imported/button/root/border-radius",
+          "bottomLeftRadius": "imported/button/root/border-radius",
+          "bottomRightRadius": "imported/button/root/border-radius"
+        }
+      },
+      {
+        "name": "Variant=Surface, Size=Small",
+        "rootFill": "imported/button/root/background-color/surface",
+        "rootStroke": null,
+        "bindings": {
+          "itemSpacing": "imported/button/root/gap",
+          "paddingTop": "imported/button/root/padding-block",
+          "paddingBottom": "imported/button/root/padding-block",
+          "paddingLeft": "imported/button/root/padding-inline/small",
+          "paddingRight": "imported/button/root/padding-inline/small",
+          "topLeftRadius": "imported/button/root/border-radius",
+          "topRightRadius": "imported/button/root/border-radius",
+          "bottomLeftRadius": "imported/button/root/border-radius",
+          "bottomRightRadius": "imported/button/root/border-radius"
+        }
+      },
+      {
+        "name": "Variant=Surface, Size=Large",
+        "rootFill": "imported/button/root/background-color/surface",
+        "rootStroke": null,
+        "bindings": {
+          "itemSpacing": "imported/button/root/gap",
+          "paddingTop": "imported/button/root/padding-block",
+          "paddingBottom": "imported/button/root/padding-block",
+          "paddingLeft": "imported/button/root/padding-inline/large",
+          "paddingRight": "imported/button/root/padding-inline/large",
+          "topLeftRadius": "imported/button/root/border-radius",
+          "topRightRadius": "imported/button/root/border-radius",
+          "bottomLeftRadius": "imported/button/root/border-radius",
+          "bottomRightRadius": "imported/button/root/border-radius"
+        }
+      },
+      {
+        "name": "Variant=Danger, Size=Medium",
+        "rootFill": "imported/button/root/background-color/danger",
+        "rootStroke": null,
+        "bindings": {
+          "itemSpacing": "imported/button/root/gap",
+          "paddingTop": "imported/button/root/padding-block",
+          "paddingBottom": "imported/button/root/padding-block",
+          "paddingLeft": "imported/button/root/padding-inline/medium",
+          "paddingRight": "imported/button/root/padding-inline/medium",
+          "topLeftRadius": "imported/button/root/border-radius",
+          "topRightRadius": "imported/button/root/border-radius",
+          "bottomLeftRadius": "imported/button/root/border-radius",
+          "bottomRightRadius": "imported/button/root/border-radius"
+        }
+      },
+      {
+        "name": "Variant=Danger, Size=Small",
+        "rootFill": "imported/button/root/background-color/danger",
+        "rootStroke": null,
+        "bindings": {
+          "itemSpacing": "imported/button/root/gap",
+          "paddingTop": "imported/button/root/padding-block",
+          "paddingBottom": "imported/button/root/padding-block",
+          "paddingLeft": "imported/button/root/padding-inline/small",
+          "paddingRight": "imported/button/root/padding-inline/small",
+          "topLeftRadius": "imported/button/root/border-radius",
+          "topRightRadius": "imported/button/root/border-radius",
+          "bottomLeftRadius": "imported/button/root/border-radius",
+          "bottomRightRadius": "imported/button/root/border-radius"
+        }
+      },
+      {
+        "name": "Variant=Danger, Size=Large",
+        "rootFill": "imported/button/root/background-color/danger",
+        "rootStroke": null,
+        "bindings": {
+          "itemSpacing": "imported/button/root/gap",
+          "paddingTop": "imported/button/root/padding-block",
+          "paddingBottom": "imported/button/root/padding-block",
+          "paddingLeft": "imported/button/root/padding-inline/large",
+          "paddingRight": "imported/button/root/padding-inline/large",
+          "topLeftRadius": "imported/button/root/border-radius",
+          "topRightRadius": "imported/button/root/border-radius",
+          "bottomLeftRadius": "imported/button/root/border-radius",
+          "bottomRightRadius": "imported/button/root/border-radius"
+        }
+      },
+      {
+        "name": "Variant=Ghost, Size=Medium",
+        "rootFill": "imported/button/root/background-color/ghost",
+        "rootStroke": null,
+        "bindings": {
+          "itemSpacing": "imported/button/root/gap",
+          "paddingTop": "imported/button/root/padding-block",
+          "paddingBottom": "imported/button/root/padding-block",
+          "paddingLeft": "imported/button/root/padding-inline/medium",
+          "paddingRight": "imported/button/root/padding-inline/medium",
+          "topLeftRadius": "imported/button/root/border-radius",
+          "topRightRadius": "imported/button/root/border-radius",
+          "bottomLeftRadius": "imported/button/root/border-radius",
+          "bottomRightRadius": "imported/button/root/border-radius"
+        }
+      },
+      {
+        "name": "Variant=Ghost, Size=Small",
+        "rootFill": "imported/button/root/background-color/ghost",
+        "rootStroke": null,
+        "bindings": {
+          "itemSpacing": "imported/button/root/gap",
+          "paddingTop": "imported/button/root/padding-block",
+          "paddingBottom": "imported/button/root/padding-block",
+          "paddingLeft": "imported/button/root/padding-inline/small",
+          "paddingRight": "imported/button/root/padding-inline/small",
+          "topLeftRadius": "imported/button/root/border-radius",
+          "topRightRadius": "imported/button/root/border-radius",
+          "bottomLeftRadius": "imported/button/root/border-radius",
+          "bottomRightRadius": "imported/button/root/border-radius"
+        }
+      },
+      {
+        "name": "Variant=Ghost, Size=Large",
+        "rootFill": "imported/button/root/background-color/ghost",
+        "rootStroke": null,
+        "bindings": {
+          "itemSpacing": "imported/button/root/gap",
+          "paddingTop": "imported/button/root/padding-block",
+          "paddingBottom": "imported/button/root/padding-block",
+          "paddingLeft": "imported/button/root/padding-inline/large",
+          "paddingRight": "imported/button/root/padding-inline/large",
+          "topLeftRadius": "imported/button/root/border-radius",
+          "topRightRadius": "imported/button/root/border-radius",
+          "bottomLeftRadius": "imported/button/root/border-radius",
+          "bottomRightRadius": "imported/button/root/border-radius"
+        }
+      }
+    ]
+  }
+}

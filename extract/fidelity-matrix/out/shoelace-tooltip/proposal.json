@@ -1,0 +1,85 @@
+{
+  "notes": [
+    "semantics.element defaulted to \"div\" — element/role/ARIA are not drawn on the canvas; set the real host element",
+    "Tooltip:root: auto-layout differs across variants — using the default variant's",
+    "Tooltip:root/Body/Content/Tooltip text: rides text style \"Sans/Regular - Small\" which is not a token-derived style — typography not proposed",
+    "MINTED {imported.tooltip.body.border-radius} = 3px — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Tooltip:root/Body border-radius",
+    "MINTED {imported.tooltip.body-content.background-color} = #27272a — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Tooltip:root/Body/Content background-color",
+    "MINTED {imported.tooltip.body-content.padding-inline} = 8px — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Tooltip:root/Body/Content padding-inline",
+    "MINTED {imported.tooltip.body-content.padding-block} = 8px — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Tooltip:root/Body/Content padding-block",
+    "MINTED {imported.tooltip.body-content.border-radius} = 4px — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Tooltip:root/Body/Content border-radius",
+    "MINTED {imported.tooltip.body-content-tooltip-text.color} = #ffffff — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Tooltip:root/Body/Content/Tooltip text color",
+    "MINTED {imported.tooltip.body-content-tooltip-text.font-size} = 14px — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Tooltip:root/Body/Content/Tooltip text font-size",
+    "MINTED {imported.tooltip.arrow-wrapper-arrow.background-color} = #27272a — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Tooltip:root/Arrow Wrapper/Arrow background-color",
+    "UNBOUND Tooltip:root/Body fill = #27272a — no token invented; nearest tokens by value: (none found)"
+  ],
+  "unbound": [
+    {
+      "nodePath": "Tooltip:root/Body",
+      "property": "fill",
+      "value": "#27272a",
+      "suggestions": []
+    }
+  ],
+  "minted": {
+    "count": 8,
+    "entries": [
+      {
+        "ref": "{imported.tooltip.body.border-radius}",
+        "value": "3px",
+        "usageSites": [
+          "Tooltip:root/Body border-radius"
+        ]
+      },
+      {
+        "ref": "{imported.tooltip.body-content.background-color}",
+        "value": "#27272a",
+        "usageSites": [
+          "Tooltip:root/Body/Content background-color"
+        ]
+      },
+      {
+        "ref": "{imported.tooltip.body-content.padding-inline}",
+        "value": "8px",
+        "usageSites": [
+          "Tooltip:root/Body/Content padding-inline"
+        ]
+      },
+      {
+        "ref": "{imported.tooltip.body-content.padding-block}",
+        "value": "8px",
+        "usageSites": [
+          "Tooltip:root/Body/Content padding-block"
+        ]
+      },
+      {
+        "ref": "{imported.tooltip.body-content.border-radius}",
+        "value": "4px",
+        "usageSites": [
+          "Tooltip:root/Body/Content border-radius"
+        ]
+      },
+      {
+        "ref": "{imported.tooltip.body-content-tooltip-text.color}",
+        "value": "#ffffff",
+        "usageSites": [
+          "Tooltip:root/Body/Content/Tooltip text color"
+        ]
+      },
+      {
+        "ref": "{imported.tooltip.body-content-tooltip-text.font-size}",
+        "value": "14px",
+        "usageSites": [
+          "Tooltip:root/Body/Content/Tooltip text font-size"
+        ]
+      },
+      {
+        "ref": "{imported.tooltip.arrow-wrapper-arrow.background-color}",
+        "value": "#27272a",
+        "usageSites": [
+          "Tooltip:root/Arrow Wrapper/Arrow background-color"
+        ]
+      }
+    ]
+  }
+}

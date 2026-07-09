@@ -1,0 +1,61 @@
+{
+  "htmlOk": true,
+  "script": {
+    "bytes": 42889,
+    "mintedPreamble": true,
+    "syntaxOk": true
+  },
+  "compiled": {
+    "setName": "Tooltip",
+    "variants": [
+      {
+        "name": "placement=left",
+        "rootFill": null,
+        "rootStroke": null,
+        "bindings": {}
+      },
+      {
+        "name": "placement=topLeft",
+        "rootFill": null,
+        "rootStroke": null,
+        "bindings": {}
+      },
+      {
+        "name": "placement=bottomLeft",
+        "rootFill": null,
+        "rootStroke": null,
+        "bindings": {}
+      },
+      {
+        "name": "placement=bottom",
+        "rootFill": null,
+        "rootStroke": null,
+        "bindings": {}
+      },
+      {
+        "name": "placement=top",
+        "rootFill": null,
+        "rootStroke": null,
+        "bindings": {}
+      },
+      {
+        "name": "placement=topRight",
+        "rootFill": null,
+        "rootStroke": null,
+        "bindings": {}
+      },
+      {
+        "name": "placement=bottomRight",
+        "rootFill": null,
+        "rootStroke": null,
+        "bindings": {}
+      },
+      {
+        "name": "placement=right",
+        "rootFill": null,
+        "rootStroke": null,
+        "bindings": {}
+      }
+    ]
+  }
+}

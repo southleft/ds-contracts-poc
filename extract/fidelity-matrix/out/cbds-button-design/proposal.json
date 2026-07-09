@@ -1,0 +1,170 @@
+{
+  "notes": [
+    "semantics.element defaulted to \"div\" — element/role/ARIA are not drawn on the canvas; set the real host element",
+    "Button-Brand Primary:root/Icon: nested instance of \"Icon\" has no known contract — component ref proposed as \"ds.icon\", review",
+    "Button-Brand Primary:root/Icon: fixed props of \"Icon\" canonicalized by spelling (dump v1.1) — verify against the child contract's bindings",
+    "Button-Brand Primary:root/Icon 2: nested instance of \"Icon\" has no known contract — component ref proposed as \"ds.icon\", review",
+    "Button-Brand Primary:root/Icon 2: fixed props of \"Icon\" canonicalized by spelling (dump v1.1) — verify against the child contract's bindings",
+    "Button-Brand Primary:root/Tooltip: typography (12px Regular) matches 0 derived text styles — font tokens not proposed, review",
+    "MINTED {imported.button-brand-primary.root.background-color.default} = #0e61ba — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Button-Brand Primary:root background-color (state=default)",
+    "MINTED {imported.button-brand-primary.root.background-color.hover} = #003e81 — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Button-Brand Primary:root background-color (state=hover)",
+    "MINTED {imported.button-brand-primary.root.background-color.focus} = #0e61ba — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Button-Brand Primary:root background-color (state=focus)",
+    "MINTED {imported.button-brand-primary.root.background-color.pressed} = #002854 — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Button-Brand Primary:root background-color (state=pressed)",
+    "MINTED {imported.button-brand-primary.root.background-color.disabled} = #dfe3eb — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Button-Brand Primary:root background-color (state=disabled)",
+    "MINTED {imported.shared.size-8} = 8px — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Button-Brand Primary:root gap, Button-Brand Primary:root padding-block, Button-Brand Primary:root border-radius",
+    "MINTED {imported.button-brand-primary.root.padding-inline.large} = 16px — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Button-Brand Primary:root padding-inline (size=large)",
+    "MINTED {imported.button-brand-primary.root.padding-inline.medium} = 16px — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Button-Brand Primary:root padding-inline (size=medium)",
+    "MINTED {imported.button-brand-primary.root.padding-inline.small} = 12px — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Button-Brand Primary:root padding-inline (size=small)",
+    "MINTED {imported.button-brand-primary.button.color.default} = #fcfeff — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Button-Brand Primary:root/Button color (state=default)",
+    "MINTED {imported.button-brand-primary.button.color.hover} = #fcfeff — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Button-Brand Primary:root/Button color (state=hover)",
+    "MINTED {imported.button-brand-primary.button.color.focus} = #fcfeff — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Button-Brand Primary:root/Button color (state=focus)",
+    "MINTED {imported.button-brand-primary.button.color.pressed} = #fcfeff — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Button-Brand Primary:root/Button color (state=pressed)",
+    "MINTED {imported.button-brand-primary.button.color.disabled} = #556275 — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Button-Brand Primary:root/Button color (state=disabled)",
+    "MINTED {imported.button-brand-primary.tooltip.color} = #000000 — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Button-Brand Primary:root/Tooltip color",
+    "MINTED {imported.button-brand-primary.tooltip.font-size} = 12px — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Button-Brand Primary:root/Tooltip font-size",
+    "MINTED {imported.button-brand-primary.focus-ring.border-color} = #0e61ba — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Button-Brand Primary:root/Focus ring border-color",
+    "MINTED {imported.button-brand-primary.focus-ring.border-radius} = 12px — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Button-Brand Primary:root/Focus ring border-radius",
+    "MINTED {imported.button-brand-primary.focus-ring.border-width} = 2px — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Button-Brand Primary:root/Focus ring border-width"
+  ],
+  "unbound": [],
+  "minted": {
+    "count": 19,
+    "entries": [
+      {
+        "ref": "{imported.button-brand-primary.root.background-color.default}",
+        "value": "#0e61ba",
+        "usageSites": [
+          "Button-Brand Primary:root background-color (state=default)"
+        ]
+      },
+      {
+        "ref": "{imported.button-brand-primary.root.background-color.hover}",
+        "value": "#003e81",
+        "usageSites": [
+          "Button-Brand Primary:root background-color (state=hover)"
+        ]
+      },
+      {
+        "ref": "{imported.button-brand-primary.root.background-color.focus}",
+        "value": "#0e61ba",
+        "usageSites": [
+          "Button-Brand Primary:root background-color (state=focus)"
+        ]
+      },
+      {
+        "ref": "{imported.button-brand-primary.root.background-color.pressed}",
+        "value": "#002854",
+        "usageSites": [
+          "Button-Brand Primary:root background-color (state=pressed)"
+        ]
+      },
+      {
+        "ref": "{imported.button-brand-primary.root.background-color.disabled}",
+        "value": "#dfe3eb",
+        "usageSites": [
+          "Button-Brand Primary:root background-color (state=disabled)"
+        ]
+      },
+      {
+        "ref": "{imported.shared.size-8}",
+        "value": "8px",
+        "usageSites": [
+          "Button-Brand Primary:root gap",
+          "Button-Brand Primary:root padding-block",
+          "Button-Brand Primary:root border-radius"
+        ]
+      },
+      {
+        "ref": "{imported.button-brand-primary.root.padding-inline.large}",
+        "value": "16px",
+        "usageSites": [
+          "Button-Brand Primary:root padding-inline (size=large)"
+        ]
+      },
+      {
+        "ref": "{imported.button-brand-primary.root.padding-inline.medium}",
+        "value": "16px",
+        "usageSites": [
+          "Button-Brand Primary:root padding-inline (size=medium)"
+        ]
+      },
+      {
+        "ref": "{imported.button-brand-primary.root.padding-inline.small}",
+        "value": "12px",
+        "usageSites": [
+          "Button-Brand Primary:root padding-inline (size=small)"
+        ]
+      },
+      {
+        "ref": "{imported.button-brand-primary.button.color.default}",
+        "value": "#fcfeff",
+        "usageSites": [
+          "Button-Brand Primary:root/Button color (state=default)"
+        ]
+      },
+      {
+        "ref": "{imported.button-brand-primary.button.color.hover}",
+        "value": "#fcfeff",
+        "usageSites": [
+          "Button-Brand Primary:root/Button color (state=hover)"
+        ]
+      },
+      {
+        "ref": "{imported.button-brand-primary.button.color.focus}",
+        "value": "#fcfeff",
+        "usageSites": [
+          "Button-Brand Primary:root/Button color (state=focus)"
+        ]
+      },
+      {
+        "ref": "{imported.button-brand-primary.button.color.pressed}",
+        "value": "#fcfeff",
+        "usageSites": [
+          "Button-Brand Primary:root/Button color (state=pressed)"
+        ]
+      },
+      {
+        "ref": "{imported.button-brand-primary.button.color.disabled}",
+        "value": "#556275",
+        "usageSites": [
+          "Button-Brand Primary:root/Button color (state=disabled)"
+        ]
+      },
+      {
+        "ref": "{imported.button-brand-primary.tooltip.color}",
+        "value": "#000000",
+        "usageSites": [
+          "Button-Brand Primary:root/Tooltip color"
+        ]
+      },
+      {
+        "ref": "{imported.button-brand-primary.tooltip.font-size}",
+        "value": "12px",
+        "usageSites": [
+          "Button-Brand Primary:root/Tooltip font-size"
+        ]
+      },
+      {
+        "ref": "{imported.button-brand-primary.focus-ring.border-color}",
+        "value": "#0e61ba",
+        "usageSites": [
+          "Button-Brand Primary:root/Focus ring border-color"
+        ]
+      },
+      {
+        "ref": "{imported.button-brand-primary.focus-ring.border-radius}",
+        "value": "12px",
+        "usageSites": [
+          "Button-Brand Primary:root/Focus ring border-radius"
+        ]
+      },
+      {
+        "ref": "{imported.button-brand-primary.focus-ring.border-width}",
+        "value": "2px",
+        "usageSites": [
+          "Button-Brand Primary:root/Focus ring border-width"
+        ]
+      }
+    ]
+  }
+}

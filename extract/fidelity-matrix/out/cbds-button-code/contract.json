@@ -1,0 +1,145 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "ds.button",
+  "name": "Button",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "PROPOSED contract extracted from southleft/cbds-components/src/components/Button/Button.tsx (react-tsx + css-module adapters) — API surface AND anatomy (structure, token bindings, layout, states) read from source; design bindings await reconciliation and human review.",
+  "semantics": {
+    "element": "button"
+  },
+  "props": [
+    {
+      "name": "variant",
+      "type": {
+        "enum": [
+          "primary",
+          "surface",
+          "danger",
+          "ghost"
+        ]
+      },
+      "default": "primary",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Variant",
+          "values": {
+            "primary": "Primary",
+            "surface": "Surface",
+            "danger": "Danger",
+            "ghost": "Ghost"
+          }
+        },
+        "code": {
+          "prop": "variant"
+        }
+      }
+    },
+    {
+      "name": "size",
+      "type": {
+        "enum": [
+          "small",
+          "medium",
+          "large"
+        ]
+      },
+      "default": "medium",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Size",
+          "values": {
+            "small": "Small",
+            "medium": "Medium",
+            "large": "Large"
+          }
+        },
+        "code": {
+          "prop": "size"
+        }
+      }
+    },
+    {
+      "name": "fullWidth",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Full Width"
+        },
+        "code": {
+          "prop": "fullWidth"
+        }
+      }
+    }
+  ],
+  "states": [
+    "hover",
+    "focus-visible",
+    "disabled"
+  ],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "inline-flex",
+        "align": "center",
+        "justify": "center"
+      },
+      "tokens": {
+        "gap": "{imported.button.root.gap}",
+        "padding-block": "{imported.button.root.padding-block}",
+        "padding-inline": "{imported.button.root.padding-inline.{size}}",
+        "border-radius": "{imported.button.root.border-radius}",
+        "background-color": "{imported.button.root.background-color.{variant}}",
+        "color": "{imported.button.root.color.{variant}}",
+        "font-size": "{imported.button.root.font-size.{size}}",
+        "font-weight": "{imported.button.root.font-weight}",
+        "line-height": "{imported.button.root.line-height.{size}}",
+        "min-height": "{imported.button.root.min-height.{size}}"
+      },
+      "states": {
+        "hover": {
+          "background-color": "{imported.button.root.hover.background-color.{variant}}"
+        },
+        "disabled": {
+          "background-color": "{imported.button.root.disabled.background-color.{variant}}",
+          "color": "{imported.button.root.disabled.color}"
+        }
+      },
+      "parts": {
+        "iconLeft": {
+          "element": "span",
+          "slot": {
+            "name": "iconLeft"
+          },
+          "optional": true
+        },
+        "children": {
+          "slot": {
+            "name": "children"
+          }
+        },
+        "iconRight": {
+          "element": "span",
+          "slot": {
+            "name": "iconRight"
+          },
+          "optional": true
+        }
+      }
+    }
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "southleft/cbds-components/src/components/Button/Button",
+      "export": "Button"
+    }
+  }
+}

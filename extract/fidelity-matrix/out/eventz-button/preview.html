@@ -1,0 +1,570 @@
+<!doctype html>
+<html>
+<head><meta charset="utf-8">
+<style>/**
+ * GENERATED FILE — DO NOT EDIT.
+ * Source of truth: tokens/*.tokens.json — regenerate with: npm run tokens
+ */
+
+:root {
+  --color-white: #FFFFFF;
+  --color-black: #000000;
+  --color-gray-50: #F9FAFB;
+  --color-gray-100: #F3F4F6;
+  --color-gray-200: #E5E7EB;
+  --color-gray-300: #D1D5DB;
+  --color-gray-400: #9CA3AF;
+  --color-gray-500: #6B7280;
+  --color-gray-600: #4B5563;
+  --color-gray-700: #374151;
+  --color-gray-800: #1F2937;
+  --color-gray-900: #111827;
+  --color-blue-100: #DBEAFE;
+  --color-blue-300: #93C5FD;
+  --color-blue-400: #60A5FA;
+  --color-blue-500: #3B82F6;
+  --color-blue-600: #2563EB;
+  --color-blue-700: #1D4ED8;
+  --color-blue-900: #1E3A8A;
+  --color-red-100: #FEE2E2;
+  --color-red-300: #FCA5A5;
+  --color-red-400: #F87171;
+  --color-red-500: #EF4444;
+  --color-red-600: #DC2626;
+  --color-red-700: #B91C1C;
+  --color-red-900: #7F1D1D;
+  --color-green-100: #DCFCE7;
+  --color-green-500: #22C55E;
+  --color-green-600: #16A34A;
+  --color-green-700: #15803D;
+  --color-green-900: #14532D;
+  --color-amber-100: #FEF3C7;
+  --color-amber-500: #F59E0B;
+  --color-amber-600: #D97706;
+  --color-amber-700: #B45309;
+  --color-amber-900: #78350F;
+  --color-orange-100: #FFEDD5;
+  --color-orange-700: #C2410C;
+  --color-orange-900: #7C2D12;
+  --color-yellow-100: #FEF9C3;
+  --color-yellow-700: #A16207;
+  --color-yellow-900: #713F12;
+  --color-teal-100: #CCFBF1;
+  --color-teal-300: #5EEAD4;
+  --color-teal-400: #2DD4BF;
+  --color-teal-500: #14B8A6;
+  --color-teal-600: #0D9488;
+  --color-teal-700: #0F766E;
+  --color-teal-900: #134E4A;
+  --color-cyan-100: #CFFAFE;
+  --color-cyan-700: #0E7490;
+  --color-cyan-900: #164E63;
+  --color-purple-100: #F3E8FF;
+  --color-purple-300: #D8B4FE;
+  --color-purple-400: #C084FC;
+  --color-purple-500: #A855F7;
+  --color-purple-600: #9333EA;
+  --color-purple-700: #7E22CE;
+  --color-purple-900: #581C87;
+  --color-pink-100: #FCE7F3;
+  --color-pink-700: #BE185D;
+  --color-pink-900: #831843;
+  --space-25: 2px;
+  --space-50: 4px;
+  --space-100: 8px;
+  --space-150: 12px;
+  --space-200: 16px;
+  --space-250: 20px;
+  --space-300: 24px;
+  --space-400: 32px;
+  --space-overlap: -8px;
+  --radius-100: 4px;
+  --radius-200: 8px;
+  --radius-pill: 999px;
+  --radius-none: 0px;
+  --border-width-100: 1px;
+  --border-width-200: 2px;
+  --container-sm: 320px;
+  --container-xs: 120px;
+  --container-md: 480px;
+  --container-lg: 640px;
+  --font-family-sans: Inter, system-ui, -apple-system, sans-serif;
+  --font-family-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --font-size-100: 12px;
+  --font-size-200: 14px;
+  --font-size-300: 16px;
+  --font-size-400: 18px;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --opacity-disabled: 0.5;
+  --control-sm: 28px;
+  --control-md: 36px;
+  --control-lg: 44px;
+  --brand-accent-100: var(--color-blue-100);
+  --brand-accent-300: var(--color-blue-300);
+  --brand-accent-400: var(--color-blue-400);
+  --brand-accent-500: var(--color-blue-500);
+  --brand-accent-600: var(--color-blue-600);
+  --brand-accent-700: var(--color-blue-700);
+  --brand-accent-900: var(--color-blue-900);
+  --brand-radius-control: var(--radius-200);
+  --brand-font-control-family: var(--font-family-sans);
+  --brand-font-control-weight: var(--font-weight-medium);
+  --space-inset-x-sm: var(--space-150);
+  --space-inset-x-md: var(--space-200);
+  --space-inset-x-lg: var(--space-300);
+  --space-inset-x-xs: var(--space-100);
+  --space-inset-y-sm: var(--space-50);
+  --space-inset-y-md: var(--space-100);
+  --space-inset-y-lg: var(--space-150);
+  --space-inset-y-xs: var(--space-25);
+  --space-gap-control: var(--space-100);
+  --space-gap-sm: var(--space-100);
+  --space-gap-md: var(--space-200);
+  --space-gap-lg: var(--space-300);
+  --space-table-cell-y-comfortable: var(--space-150);
+  --space-table-cell-y-compact: var(--space-50);
+  --space-list-compact: var(--space-50);
+  --space-list-balanced: var(--space-100);
+  --space-list-spacious: var(--space-150);
+  --space-avatarGroup-overlap: var(--space-overlap);
+  --radius-control: var(--brand-radius-control);
+  --radius-badge: var(--radius-pill);
+  --radius-card: var(--radius-200);
+  --radius-avatar: var(--radius-pill);
+  --radius-banner-card: var(--radius-200);
+  --radius-banner-section: var(--radius-none);
+  --radius-skeleton-text: var(--radius-100);
+  --radius-skeleton-rect: var(--radius-200);
+  --radius-skeleton-circle: var(--radius-pill);
+  --size-avatar-sm: var(--space-300);
+  --size-avatar-md: var(--space-400);
+  --size-card-width: var(--container-sm);
+  --size-table-width: var(--container-md);
+  --size-table-cell-width: var(--container-xs);
+  --size-banner-width: var(--container-lg);
+  --size-icon-button-sm: var(--control-sm);
+  --size-icon-button-md: var(--control-md);
+  --size-icon-button-lg: var(--control-lg);
+  --size-checkbox-sm: var(--space-200);
+  --size-checkbox-md: var(--space-250);
+  --size-dot: var(--space-100);
+  --size-divider-length: var(--container-sm);
+  --size-toolbar-sm: var(--control-sm);
+  --size-toolbar-md: var(--control-md);
+  --size-toolbar-lg: var(--control-lg);
+  --size-progress-width: var(--container-sm);
+  --size-progress-height: var(--space-100);
+  --size-slider-width: var(--container-sm);
+  --size-slider-track: var(--space-50);
+  --size-slider-thumb: var(--space-200);
+  --size-switch-width: var(--space-400);
+  --size-switch-height: var(--space-250);
+  --size-switch-thumb: var(--space-200);
+  --size-spinner-sm: var(--space-150);
+  --size-spinner-md: var(--space-200);
+  --size-spinner-lg: var(--space-300);
+  --size-skeleton-text-width: var(--container-xs);
+  --size-skeleton-text-height: var(--space-150);
+  --size-skeleton-rect-width: var(--container-sm);
+  --size-skeleton-rect-height: var(--space-400);
+  --size-skeleton-circle-width: var(--space-400);
+  --size-skeleton-circle-height: var(--space-400);
+  --border-width-focus: var(--border-width-200);
+  --border-width-divider-subtle: var(--border-width-100);
+  --border-width-divider-strong: var(--border-width-200);
+  --font-control-family: var(--brand-font-control-family);
+  --font-control-weight: var(--brand-font-control-weight);
+  --font-control-size-sm: var(--font-size-200);
+  --font-control-size-md: var(--font-size-300);
+  --font-control-size-lg: var(--font-size-400);
+  --font-badge-size: var(--font-size-100);
+  --font-title-size: var(--font-size-300);
+  --font-title-weight: var(--font-weight-semibold);
+  --font-avatar-size-sm: var(--font-size-100);
+  --font-avatar-size-md: var(--font-size-200);
+  --font-code-family: var(--font-family-mono);
+  --font-tab-default-weight: var(--font-weight-medium);
+  --font-tab-selected-weight: var(--font-weight-semibold);
+  --color-surface-background: var(--color-gray-50);
+  --color-surface-foreground: var(--color-gray-900);
+  --color-surface-raised: var(--color-white);
+  --color-surface-sunken: var(--color-gray-100);
+  --color-action-primary-background: var(--brand-accent-600);
+  --color-action-primary-background-hover: var(--brand-accent-700);
+  --color-action-primary-foreground: var(--color-white);
+  --color-action-secondary-background: var(--color-gray-200);
+  --color-action-secondary-background-hover: var(--color-gray-300);
+  --color-action-secondary-foreground: var(--color-gray-900);
+  --color-action-danger-background: var(--color-red-600);
+  --color-action-danger-background-hover: var(--color-red-700);
+  --color-action-danger-foreground: var(--color-white);
+  --color-action-destructive-background: var(--color-red-600);
+  --color-action-destructive-background-hover: var(--color-red-700);
+  --color-action-destructive-foreground: var(--color-white);
+  --color-action-ghost-background: var(--color-gray-50);
+  --color-action-ghost-foreground: var(--color-gray-700);
+  --color-action-ghost-background-hover: var(--color-gray-200);
+  --color-border-focus: var(--brand-accent-500);
+  --color-border-subtle: var(--color-gray-200);
+  --color-feedback-info-background: var(--color-blue-100);
+  --color-feedback-info-foreground: var(--color-blue-700);
+  --color-feedback-success-background: var(--color-green-100);
+  --color-feedback-success-foreground: var(--color-green-700);
+  --color-feedback-warning-background: var(--color-amber-100);
+  --color-feedback-warning-foreground: var(--color-amber-700);
+  --color-feedback-danger-background: var(--color-red-100);
+  --color-feedback-danger-foreground: var(--color-red-700);
+  --color-feedback-error-background: var(--color-red-100);
+  --color-feedback-error-foreground: var(--color-red-700);
+  --color-identity-background: var(--brand-accent-100);
+  --color-identity-foreground: var(--brand-accent-700);
+  --color-table-row-default: var(--color-white);
+  --color-table-row-selected: var(--brand-accent-100);
+  --color-token-default-background: var(--color-gray-100);
+  --color-token-default-foreground: var(--color-gray-700);
+  --color-token-gray-background: var(--color-gray-200);
+  --color-token-gray-foreground: var(--color-gray-700);
+  --color-token-red-background: var(--color-red-100);
+  --color-token-red-foreground: var(--color-red-700);
+  --color-token-orange-background: var(--color-orange-100);
+  --color-token-orange-foreground: var(--color-orange-700);
+  --color-token-yellow-background: var(--color-yellow-100);
+  --color-token-yellow-foreground: var(--color-yellow-700);
+  --color-token-green-background: var(--color-green-100);
+  --color-token-green-foreground: var(--color-green-700);
+  --color-token-teal-background: var(--color-teal-100);
+  --color-token-teal-foreground: var(--color-teal-700);
+  --color-token-cyan-background: var(--color-cyan-100);
+  --color-token-cyan-foreground: var(--color-cyan-700);
+  --color-token-blue-background: var(--color-blue-100);
+  --color-token-blue-foreground: var(--color-blue-700);
+  --color-token-purple-background: var(--color-purple-100);
+  --color-token-purple-foreground: var(--color-purple-700);
+  --color-token-pink-background: var(--color-pink-100);
+  --color-token-pink-foreground: var(--color-pink-700);
+  --color-status-success: var(--color-green-600);
+  --color-status-warning: var(--color-amber-500);
+  --color-status-error: var(--color-red-600);
+  --color-status-accent: var(--brand-accent-600);
+  --color-status-neutral: var(--color-gray-400);
+  --color-divider-subtle: var(--color-gray-200);
+  --color-divider-strong: var(--color-gray-400);
+  --color-input-background: var(--color-white);
+  --color-input-placeholder: var(--color-gray-500);
+  --color-toast-info-background: var(--color-gray-900);
+  --color-toast-info-foreground: var(--color-gray-100);
+  --color-toast-error-background: var(--color-red-600);
+  --color-toast-error-foreground: var(--color-white);
+  --color-text-secondary: var(--color-gray-600);
+  --color-checkbox-unchecked-background: var(--color-white);
+  --color-checkbox-unchecked-border: var(--color-gray-400);
+  --color-checkbox-checked-background: var(--brand-accent-600);
+  --color-checkbox-checked-border: var(--brand-accent-600);
+  --color-checkbox-indeterminate-background: var(--brand-accent-600);
+  --color-checkbox-indeterminate-border: var(--brand-accent-600);
+  --color-checkbox-icon: var(--color-white);
+  --color-section-section: var(--color-white);
+  --color-section-muted: var(--color-gray-100);
+  --color-chat-user-background: var(--brand-accent-100);
+  --color-chat-user-foreground: var(--color-gray-900);
+  --color-chat-assistant-background: var(--color-gray-100);
+  --color-chat-assistant-foreground: var(--color-gray-900);
+  --color-chat-system-background: var(--color-gray-50);
+  --color-chat-system-foreground: var(--color-gray-600);
+  --color-tab-default-foreground: var(--color-gray-600);
+  --color-tab-selected-foreground: var(--brand-accent-600);
+  --color-nav-selected-background: var(--brand-accent-100);
+  --color-nav-selected-foreground: var(--brand-accent-700);
+  --color-nav-default-background: var(--color-white);
+  --color-nav-default-foreground: var(--color-gray-700);
+  --color-switch-off-track: var(--color-gray-300);
+  --color-switch-on-track: var(--brand-accent-600);
+  --color-switch-thumb: var(--color-white);
+  --color-progress-track: var(--color-gray-200);
+  --color-progress-accent: var(--brand-accent-600);
+  --color-progress-success: var(--color-green-600);
+  --color-progress-warning: var(--color-amber-500);
+  --color-progress-error: var(--color-red-600);
+  --color-progress-neutral: var(--color-gray-500);
+  --color-skeleton: var(--color-gray-200);
+}
+</style>
+<style>/* Minted provisional tokens (imported.*) — literal fidelity. */
+:root {
+  --imported-button-root-background-color-primary-default: #3d7a95;
+  --imported-button-root-background-color-primary-hover: #2d6079;
+  --imported-button-root-background-color-primary-active: #2d6079;
+  --imported-button-root-background-color-primary-focus: #3d7a95;
+  --imported-button-root-background-color-knockout-default: #f7f8f7;
+  --imported-button-root-background-color-knockout-hover: #c6c7c6;
+  --imported-button-root-background-color-knockout-active: #f7f8f7;
+  --imported-button-root-background-color-knockout-focus: #f7f8f7;
+  --imported-button-root-background-color-secondary-default: #000002;
+  --imported-button-root-background-color-secondary-hover: #000002;
+  --imported-button-root-background-color-secondary-active: #000002;
+  --imported-button-root-background-color-secondary-focus: #000002;
+  --imported-button-root-background-color-bare-default: #000002;
+  --imported-button-root-background-color-bare-hover: #000002;
+  --imported-button-root-background-color-bare-active: #000002;
+  --imported-button-root-background-color-bare-focus: #000002;
+  --imported-button-root-gap: 4px;
+  --imported-button-root-padding-inline: 12px;
+  --imported-button-root-padding-block: 6px;
+  --imported-button-root-border-radius: 8px;
+  --imported-button-root-border-width-primary: 1px;
+  --imported-button-root-border-width-knockout: 0px;
+  --imported-button-root-border-width-secondary: 1px;
+  --imported-button-root-border-width-bare: 0px;
+  --imported-button-focus-ring-border-color: #2d6079;
+  --imported-button-focus-ring-border-radius: 11px;
+  --imported-button-focus-ring-border-width: 2px;
+  --imported-button-label-color-primary: #ffffff;
+  --imported-button-label-color-knockout: #252729;
+  --imported-button-label-color-secondary: #252729;
+  --imported-button-label-color-bare: #252729;
+  --imported-button-label-font-size: 14px;
+}</style>
+<style>body { margin: 0; padding: 20px; background: #f5f5f5; color: #1a1a1a; font-family: var(--font-family-sans, system-ui, sans-serif); }</style>
+<style>/* Button — from ds.button v0.1.0 (core/emit-html.ts) */
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-style: solid;
+  gap: var(--imported-button-root-gap);
+  padding-inline: var(--imported-button-root-padding-inline);
+  padding-block: var(--imported-button-root-padding-block);
+  border-radius: var(--imported-button-root-border-radius);
+}
+
+.button--variant-primary {
+  border-width: var(--imported-button-root-border-width-primary);
+}
+
+.button--variant-knockout {
+  border-width: var(--imported-button-root-border-width-knockout);
+}
+
+.button--variant-secondary {
+  border-width: var(--imported-button-root-border-width-secondary);
+}
+
+.button--variant-bare {
+  border-width: var(--imported-button-root-border-width-bare);
+}
+
+.button--variant-primary.button--state-default {
+  background-color: var(--imported-button-root-background-color-primary-default);
+}
+
+.button--variant-primary.button--state-hover {
+  background-color: var(--imported-button-root-background-color-primary-hover);
+}
+
+.button--variant-primary.button--state-active {
+  background-color: var(--imported-button-root-background-color-primary-active);
+}
+
+.button--variant-primary.button--state-focus {
+  background-color: var(--imported-button-root-background-color-primary-focus);
+}
+
+.button--variant-knockout.button--state-default {
+  background-color: var(--imported-button-root-background-color-knockout-default);
+}
+
+.button--variant-knockout.button--state-hover {
+  background-color: var(--imported-button-root-background-color-knockout-hover);
+}
+
+.button--variant-knockout.button--state-active {
+  background-color: var(--imported-button-root-background-color-knockout-active);
+}
+
+.button--variant-knockout.button--state-focus {
+  background-color: var(--imported-button-root-background-color-knockout-focus);
+}
+
+.button--variant-secondary.button--state-default {
+  background-color: var(--imported-button-root-background-color-secondary-default);
+}
+
+.button--variant-secondary.button--state-hover {
+  background-color: var(--imported-button-root-background-color-secondary-hover);
+}
+
+.button--variant-secondary.button--state-active {
+  background-color: var(--imported-button-root-background-color-secondary-active);
+}
+
+.button--variant-secondary.button--state-focus {
+  background-color: var(--imported-button-root-background-color-secondary-focus);
+}
+
+.button--variant-bare.button--state-default {
+  background-color: var(--imported-button-root-background-color-bare-default);
+}
+
+.button--variant-bare.button--state-hover {
+  background-color: var(--imported-button-root-background-color-bare-hover);
+}
+
+.button--variant-bare.button--state-active {
+  background-color: var(--imported-button-root-background-color-bare-active);
+}
+
+.button--variant-bare.button--state-focus {
+  background-color: var(--imported-button-root-background-color-bare-focus);
+}
+
+.button__focusRing {
+  border-color: var(--imported-button-focus-ring-border-color);
+  border-radius: var(--imported-button-focus-ring-border-radius);
+  border-width: var(--imported-button-focus-ring-border-width);
+  border-style: solid;
+}
+
+.button__startIcon {
+  display: flex;
+}
+
+.button__Label {
+  font-size: var(--imported-button-label-font-size);
+}
+
+.button--variant-primary .button__Label {
+  color: var(--imported-button-label-color-primary);
+}
+
+.button--variant-knockout .button__Label {
+  color: var(--imported-button-label-color-knockout);
+}
+
+.button--variant-secondary .button__Label {
+  color: var(--imported-button-label-color-secondary);
+}
+
+.button--variant-bare .button__Label {
+  color: var(--imported-button-label-color-bare);
+}
+
+.button__endIcon {
+  display: flex;
+}
+
+/* showcase chrome */
+.showcase { display: flex; flex-direction: column; gap: 24px; align-items: flex-start; font-family: sans-serif; }
+.showcase__label { margin: 0 0 8px; font: 12px/1 monospace; opacity: 0.6; }
+</style>
+</head><body>
+<!--
+  Button — static HTML+CSS emitted from contract ds.button v0.1.0 by core/emit-html.ts.
+  Token values arrive via CSS custom properties (the same custom-property names the CSS Modules
+  bind) — include the token stylesheet (src/styles/tokens.css) on the page or nothing resolves.
+  Fidelity: no events, no interactivity beyond CSS states (:hover/:focus-visible/:disabled).
+  Slots render their declared defaultContent, else a named placeholder. Booleans render per showcase item.
+-->
+<section class="showcase showcase--button">
+  <div class="showcase__item">
+    <p class="showcase__label">default</p>
+    <div class="button button--variant-primary button--state-default" data-has-start-icon="true" data-has-end-icon="true">
+      <div class="button__startIcon">
+        <span class="button__slot-placeholder">[startIcon slot]</span>
+      </div>
+      <span class="button__Label">Label</span>
+      <div class="button__endIcon">
+        <span class="button__slot-placeholder">[endIcon slot]</span>
+      </div>
+    </div>
+  </div>
+  <div class="showcase__item">
+    <p class="showcase__label">variant=knockout</p>
+    <div class="button button--variant-knockout button--state-default" data-has-start-icon="true" data-has-end-icon="true">
+      <div class="button__startIcon">
+        <span class="button__slot-placeholder">[startIcon slot]</span>
+      </div>
+      <span class="button__Label">Label</span>
+      <div class="button__endIcon">
+        <span class="button__slot-placeholder">[endIcon slot]</span>
+      </div>
+    </div>
+  </div>
+  <div class="showcase__item">
+    <p class="showcase__label">variant=secondary</p>
+    <div class="button button--variant-secondary button--state-default" data-has-start-icon="true" data-has-end-icon="true">
+      <div class="button__startIcon">
+        <span class="button__slot-placeholder">[startIcon slot]</span>
+      </div>
+      <span class="button__Label">Label</span>
+      <div class="button__endIcon">
+        <span class="button__slot-placeholder">[endIcon slot]</span>
+      </div>
+    </div>
+  </div>
+  <div class="showcase__item">
+    <p class="showcase__label">variant=bare</p>
+    <div class="button button--variant-bare button--state-default" data-has-start-icon="true" data-has-end-icon="true">
+      <div class="button__startIcon">
+        <span class="button__slot-placeholder">[startIcon slot]</span>
+      </div>
+      <span class="button__Label">Label</span>
+      <div class="button__endIcon">
+        <span class="button__slot-placeholder">[endIcon slot]</span>
+      </div>
+    </div>
+  </div>
+  <div class="showcase__item">
+    <p class="showcase__label">state=hover</p>
+    <div class="button button--variant-primary button--state-hover" data-has-start-icon="true" data-has-end-icon="true">
+      <div class="button__startIcon">
+        <span class="button__slot-placeholder">[startIcon slot]</span>
+      </div>
+      <span class="button__Label">Label</span>
+      <div class="button__endIcon">
+        <span class="button__slot-placeholder">[endIcon slot]</span>
+      </div>
+    </div>
+  </div>
+  <div class="showcase__item">
+    <p class="showcase__label">state=active</p>
+    <div class="button button--variant-primary button--state-active" data-has-start-icon="true" data-has-end-icon="true">
+      <div class="button__startIcon">
+        <span class="button__slot-placeholder">[startIcon slot]</span>
+      </div>
+      <span class="button__Label">Label</span>
+      <div class="button__endIcon">
+        <span class="button__slot-placeholder">[endIcon slot]</span>
+      </div>
+    </div>
+  </div>
+  <div class="showcase__item">
+    <p class="showcase__label">state=focus</p>
+    <div class="button button--variant-primary button--state-focus" data-has-start-icon="true" data-has-end-icon="true">
+      <div class="button__focusRing"></div>
+      <div class="button__startIcon">
+        <span class="button__slot-placeholder">[startIcon slot]</span>
+      </div>
+      <span class="button__Label">Label</span>
+      <div class="button__endIcon">
+        <span class="button__slot-placeholder">[endIcon slot]</span>
+      </div>
+    </div>
+  </div>
+  <div class="showcase__item">
+    <p class="showcase__label">isDisabled=true</p>
+    <div class="button button--variant-primary button--state-default" data-is-disabled="true" data-has-start-icon="true" data-has-end-icon="true">
+      <div class="button__startIcon">
+        <span class="button__slot-placeholder">[startIcon slot]</span>
+      </div>
+      <span class="button__Label">Label</span>
+      <div class="button__endIcon">
+        <span class="button__slot-placeholder">[endIcon slot]</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+</body></html>
