@@ -28,6 +28,7 @@
     "extract:figma:rest": "tsx extract/figma/rest/cli.ts",
     "extract:figma:rest:roundtrip": "tsx extract/figma/rest/roundtrip-rest.ts",
     "extract:figma:mcp": "tsx extract/figma/mcp/cli.ts",
+    "extract:figma:mcp:receipt": "tsx extract/figma/mcp/receipt.ts",
     "reconcile": "tsx extract/run.ts reconcile",
     "diagnose": "tsx parity/diagnose.ts",
     "figma:serve": "node scripts/figma-serve.mjs",
