@@ -71,6 +71,16 @@ export {
   type MintedEntry,
 } from './mint-tokens.js';
 
+// Code-import twin: raw literals + foreign var()s → imported.* tree.
+export {
+  collectRootCustomProps,
+  mintFromCss,
+  type CarriedVerbatimVar,
+  type CodeMintBinding,
+  type CodeMintFinding,
+  type CodeMintResult,
+} from './mint-code.js';
+
 // Contract → code (the shipping generator's core).
 export {
   emitReact,
