@@ -219,6 +219,10 @@ behind their actions. Live-path receipt: a browser-direct api.figma.com call
 answers (403 with a bogus token — no CORS block), so URL import needs only a
 real token; the Pages-Function proxy fallback remains unbuilt until needed.
 
+To run the Figma script output for real, copy it and paste it into the Sync
+Runner dev plugin's "Paste a script" tab (figma-sync/plugin/README.md) — the
+report comes back in the plugin window.
+
 ## Receipts discipline
 Every phase lands with: gates green (52/52+), new eval cases where the
 engine grew, MILESTONES.md entry, and a demo path documented in this file.
