@@ -19,6 +19,7 @@
  * path, so the whole flow is verifiable without a key.
  */
 import badgeContract from '../../../contracts/badge.contract.json';
+import buttonContract from '../../../contracts/button.contract.json';
 import { activeTokens } from './token-source.js';
 
 /** Fixed model — cheap + capable default for schema-constrained generation. */
@@ -287,16 +288,46 @@ export const CONTRACT_TOOL_JSON = JSON.stringify(CONTRACT_TOOL);
 
 const pascal = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
 
-function exemplar(): string {
-  const raw = badgeContract as Record<string, unknown>;
+/** A repo contract, rewritten to the prompt-born shape: $schema dropped,
+ *  version reset to 0.1.0, anchors nulled to the no-canvas-yet form. */
+function promptBorn(raw: Record<string, unknown>, exportName: string): Record<string, unknown> {
   const { $schema: _drop, ...rest } = raw;
-  return JSON.stringify({
+  return {
     ...rest,
+    version: '0.1.0',
+    status: 'draft',
     anchors: {
       figma: { fileKey: null, componentSetKey: null, nodeId: null },
-      code: { importPath: '@ds/components', export: 'Badge' },
+      code: { importPath: '@ds/components', export: exportName },
     },
-  });
+  };
+}
+
+function badgeExemplar(): string {
+  return JSON.stringify(promptBorn(badgeContract as Record<string, unknown>, 'Badge'));
+}
+
+/** Button — the interactive exemplar: TWO enum axes, each driving several
+ *  substituted refs; state overrides; a boolean-gated part; text content.
+ *  Channels outside the tool schema are pruned (figmaStatePreviews; the
+ *  icon/animation spinner becomes a text glyph — the tool cannot spell
+ *  icons, and an exemplar must not teach fields the schema refuses). */
+function buttonExemplar(): string {
+  const born = promptBorn(buttonContract as Record<string, unknown>, 'Button');
+  delete born.figmaStatePreviews;
+  const anatomy = JSON.parse(JSON.stringify(born.anatomy)) as {
+    root: { parts?: Record<string, Record<string, unknown>> };
+  };
+  if (anatomy.root.parts?.loadingSpinner) {
+    anatomy.root.parts.loadingSpinner = {
+      description: 'Busy indicator, shown while loading.',
+      element: 'span',
+      text: '…',
+      visibleWhen: { prop: 'loading' },
+    };
+  }
+  born.anatomy = anatomy;
+  return JSON.stringify(born);
 }
 
 export function buildSystemPrompt(): string {
@@ -329,12 +360,25 @@ export function buildSystemPrompt(): string {
     '   overrides.',
     '6. Prefer the smallest complete contract: only the props, parts, and',
     '   states the described component actually needs.',
+    '7. Every enum prop must DRIVE the rendering: at least one token binding',
+    '   must substitute it ({…{prop}…} — preferred, see the exemplars) or a',
+    '   part must key on it via visibleWhen equals. An axis that changes',
+    '   nothing visible when switched is a defect, not a contract.',
+    '8. Every text prop must RENDER: exactly one part binds it via',
+    '   {"content":{"prop":<name>}}. A text prop nothing renders is dead API.',
+    '9. semantics.element "select" renders content ONLY through parts with',
+    '   element "option" — HTML drops bare text and non-option children',
+    '   inside a select.',
     '',
     `TOKEN INVENTORY (${source.inventory.size} paths — ${source.label}):`,
     inventory,
     '',
-    'EXEMPLAR (Badge — the shape and scale to aim for):',
-    exemplar(),
+    'EXEMPLAR — minimal, static (Badge):',
+    badgeExemplar(),
+    '',
+    'EXEMPLAR — interactive (Button: two enum axes each driving substituted',
+    'refs, state overrides, a boolean-gated part, text content):',
+    buttonExemplar(),
   ].join('\n');
 }
 
