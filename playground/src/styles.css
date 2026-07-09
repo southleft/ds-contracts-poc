@@ -626,12 +626,44 @@ label {
   flex: 1;
   min-height: 0;
   display: grid;
-  grid-template-columns: 420px minmax(360px, 1fr) minmax(420px, 1.1fr);
+  /* rail | gutter | center | gutter | output. The gutters are 5px drag
+   * handles that draw the 1px pane border down their middle (the panes no
+   * longer own border-right). A drag pins px widths via --pg-cols set
+   * inline; the stacked media query below outranks it by not reading the
+   * variable at all. */
+  grid-template-columns: var(--pg-cols, 420px 5px minmax(360px, 1fr) 5px minmax(420px, 1.1fr));
   min-height: 0;
 }
 
+.pg__gutter {
+  cursor: col-resize;
+  touch-action: none;
+  background: linear-gradient(
+    to right,
+    transparent 2px,
+    var(--pg-border) 2px,
+    var(--pg-border) 3px,
+    transparent 3px
+  );
+}
+
+.pg__gutter:hover,
+.pg__gutter:focus-visible {
+  background: linear-gradient(
+    to right,
+    transparent 2px,
+    var(--pg-border-strong) 2px,
+    var(--pg-border-strong) 3px,
+    transparent 3px
+  );
+}
+
+.pg__gutter:focus-visible {
+  outline: 2px solid var(--pg-accent);
+  outline-offset: -2px;
+}
+
 .pg__rail {
-  border-right: 1px solid var(--pg-border);
   display: flex;
   flex-direction: column;
   min-width: 0;
@@ -639,7 +671,6 @@ label {
 }
 
 .pg__center {
-  border-right: 1px solid var(--pg-border);
   display: flex;
   flex-direction: column;
   min-width: 0;
@@ -665,9 +696,13 @@ label {
     grid-template-columns: 1fr;
   }
 
+  /* Stacked panes don't resize — the gutters leave with the columns. */
+  .pg__gutter {
+    display: none;
+  }
+
   .pg__rail,
   .pg__center {
-    border-right: none;
     border-bottom: 1px solid var(--pg-border);
   }
 
