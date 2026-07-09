@@ -1,0 +1,32 @@
+# ds-contracts-assist — the playground's agentic-assist backend.
+#
+# Deploy checklist (details in README.md):
+#   1. npx wrangler kv namespace create ASSIST_KV   → paste the id below
+#   2. npx wrangler secret put ANTHROPIC_API_KEY
+#   3. npx wrangler deploy
+#   4. Flip ASSIST_ENABLED to "true" (below or via dashboard) once the
+#      owner has confirmed the daily budget number. It ships OFF.
+
+name = "ds-contracts-assist"
+main = "src/index.ts"
+compatibility_date = "2026-06-01"
+
+kv_namespaces = [
+  # Placeholder — replace with the id printed by:
+  #   npx wrangler kv namespace create ASSIST_KV
+  { binding = "ASSIST_KV", id = "REPLACE_WITH_KV_NAMESPACE_ID" },
+]
+
+[vars]
+# Kill switch. The Worker answers 503 to everything until this is "true".
+ASSIST_ENABLED = "false"
+
+# Per-IP daily request cap, per endpoint class (fetch-plan / name-tokens /
+# repo-profile each count separately). Cache hits do not count.
+ASSIST_IP_DAILY_LIMIT = "5"
+
+# Global daily token budget (input + output tokens, all visitors combined).
+# 600K tokens ≈ the owner-approved ~$10/day at Opus 4.8 pricing under a
+# typical input-heavy mix; absolute worst case (pure output) ≈ $15.
+# See README "Budget math" for the translation.
+ASSIST_DAILY_TOKEN_BUDGET = "600000"
