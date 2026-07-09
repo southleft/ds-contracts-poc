@@ -1,0 +1,191 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "ds.button",
+  "name": "Button",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "PROPOSED contract extracted from the design canvas (extract/figma dump v1) — API, anatomy, and token bindings inverted from the drawn structure. Semantics, a11y, events, and slot accepts are not canvas-recoverable; review before adoption.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "variant",
+      "type": {
+        "enum": [
+          "primary",
+          "knockout",
+          "secondary",
+          "bare"
+        ]
+      },
+      "default": "primary",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "variant",
+          "values": {
+            "primary": "primary",
+            "knockout": "knockout",
+            "secondary": "secondary",
+            "bare": "bare"
+          }
+        },
+        "code": {
+          "prop": "variant"
+        }
+      }
+    },
+    {
+      "name": "state",
+      "type": {
+        "enum": [
+          "default",
+          "hover",
+          "active",
+          "focus"
+        ]
+      },
+      "default": "default",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "state",
+          "values": {
+            "default": "default",
+            "hover": "hover",
+            "active": "active",
+            "focus": "focus"
+          }
+        },
+        "code": {
+          "prop": "state"
+        }
+      }
+    },
+    {
+      "name": "isDisabled",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "isDisabled",
+          "values": {
+            "false": "false",
+            "true": "true"
+          }
+        },
+        "code": {
+          "prop": "isDisabled"
+        }
+      }
+    },
+    {
+      "name": "text",
+      "type": "text",
+      "default": "Label",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "text"
+        },
+        "code": {
+          "prop": "text"
+        }
+      }
+    },
+    {
+      "name": "hasStartIcon",
+      "type": "boolean",
+      "default": true,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "hasStartIcon"
+        },
+        "code": {
+          "prop": "hasStartIcon"
+        }
+      }
+    },
+    {
+      "name": "hasEndIcon",
+      "type": "boolean",
+      "default": true,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "hasEndIcon"
+        },
+        "code": {
+          "prop": "hasEndIcon"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "tokens": {
+        "background-color": "{imported.button.root.background-color.{variant}.{state}}",
+        "gap": "{imported.button.root.gap}",
+        "padding-inline": "{imported.button.root.padding-inline}",
+        "padding-block": "{imported.button.root.padding-block}",
+        "border-radius": "{imported.button.root.border-radius}",
+        "border-width": "{imported.button.root.border-width.{variant}}"
+      },
+      "parts": {
+        "focusRing": {
+          "tokens": {
+            "border-color": "{imported.button.focus-ring.border-color}",
+            "border-radius": "{imported.button.focus-ring.border-radius}",
+            "border-width": "{imported.button.focus-ring.border-width}"
+          },
+          "visibleWhen": {
+            "prop": "state",
+            "equals": "focus"
+          }
+        },
+        "startIcon": {
+          "slot": {
+            "name": "startIcon",
+            "figmaProperty": "startIcon"
+          },
+          "visibleWhen": {
+            "prop": "hasStartIcon"
+          }
+        },
+        "Label": {
+          "tokens": {
+            "color": "{imported.button.label.color.{variant}}",
+            "font-size": "{imported.button.label.font-size}"
+          },
+          "content": {
+            "prop": "text"
+          }
+        },
+        "endIcon": {
+          "slot": {
+            "name": "endIcon",
+            "figmaProperty": "endIcon"
+          },
+          "visibleWhen": {
+            "prop": "hasEndIcon"
+          }
+        }
+      }
+    }
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": "E7oXr98i91HYQGZxA2USOQ",
+      "componentSetKey": "e480cd07dbf6ddbefd4e2c35cb16581b09285391",
+      "nodeId": "2313:42"
+    },
+    "code": {
+      "importPath": "src/components/Button",
+      "export": "Button"
+    }
+  }
+}

@@ -1,0 +1,2327 @@
+{
+  "fileName": "DEMO Eventz Design System",
+  "sets": [
+    "Button"
+  ],
+  "degradations": [
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=primary, state=default, isDisabled=false",
+      "field": "itemSpacing",
+      "message": "variable id VariableID:2567:4350 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=primary, state=default, isDisabled=false",
+      "field": "paddingLeft",
+      "message": "variable id VariableID:2567:4349 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=primary, state=default, isDisabled=false",
+      "field": "paddingTop",
+      "message": "variable id VariableID:2567:4339 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=primary, state=default, isDisabled=false",
+      "field": "paddingRight",
+      "message": "variable id VariableID:2567:4349 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=primary, state=default, isDisabled=false",
+      "field": "paddingBottom",
+      "message": "variable id VariableID:2567:4339 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=primary, state=default, isDisabled=false",
+      "field": "opacity",
+      "message": "variable id VariableID:2315:497 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=primary, state=default, isDisabled=false",
+      "field": "topLeftRadius",
+      "message": "variable id VariableID:2567:4440 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=primary, state=default, isDisabled=false",
+      "field": "topRightRadius",
+      "message": "variable id VariableID:2567:4440 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=primary, state=default, isDisabled=false",
+      "field": "bottomLeftRadius",
+      "message": "variable id VariableID:2567:4440 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=primary, state=default, isDisabled=false",
+      "field": "bottomRightRadius",
+      "message": "variable id VariableID:2567:4440 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=primary, state=default, isDisabled=false",
+      "field": "fill",
+      "message": "variable id VariableID:2759:71614 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=primary, state=default, isDisabled=false",
+      "field": "stroke",
+      "message": "variable id VariableID:2759:71589 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "paint-alpha-dropped",
+      "nodePath": "Button:variant=primary, state=default, isDisabled=false",
+      "field": "stroke",
+      "message": "paint alpha 0.10 dropped — dump v1 paints are opaque rrggbb hex"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=primary, state=default, isDisabled=false/Label",
+      "field": "fill",
+      "message": "variable id VariableID:2759:71598 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=knockout, state=default, isDisabled=false",
+      "field": "itemSpacing",
+      "message": "variable id VariableID:2567:4350 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=knockout, state=default, isDisabled=false",
+      "field": "paddingLeft",
+      "message": "variable id VariableID:2567:4349 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=knockout, state=default, isDisabled=false",
+      "field": "paddingTop",
+      "message": "variable id VariableID:2567:4339 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=knockout, state=default, isDisabled=false",
+      "field": "paddingRight",
+      "message": "variable id VariableID:2567:4349 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=knockout, state=default, isDisabled=false",
+      "field": "paddingBottom",
+      "message": "variable id VariableID:2567:4339 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=knockout, state=default, isDisabled=false",
+      "field": "opacity",
+      "message": "variable id VariableID:2315:497 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=knockout, state=default, isDisabled=false",
+      "field": "topLeftRadius",
+      "message": "variable id VariableID:2567:4440 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=knockout, state=default, isDisabled=false",
+      "field": "topRightRadius",
+      "message": "variable id VariableID:2567:4440 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=knockout, state=default, isDisabled=false",
+      "field": "bottomLeftRadius",
+      "message": "variable id VariableID:2567:4440 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=knockout, state=default, isDisabled=false",
+      "field": "bottomRightRadius",
+      "message": "variable id VariableID:2567:4440 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=knockout, state=default, isDisabled=false",
+      "field": "fill",
+      "message": "variable id VariableID:2759:71604 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=knockout, state=default, isDisabled=false/Label",
+      "field": "fill",
+      "message": "variable id VariableID:2759:71581 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=primary, state=default, isDisabled=true",
+      "field": "itemSpacing",
+      "message": "variable id VariableID:2567:4350 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=primary, state=default, isDisabled=true",
+      "field": "paddingLeft",
+      "message": "variable id VariableID:2567:4349 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=primary, state=default, isDisabled=true",
+      "field": "paddingTop",
+      "message": "variable id VariableID:2567:4339 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=primary, state=default, isDisabled=true",
+      "field": "paddingRight",
+      "message": "variable id VariableID:2567:4349 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=primary, state=default, isDisabled=true",
+      "field": "paddingBottom",
+      "message": "variable id VariableID:2567:4339 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=primary, state=default, isDisabled=true",
+      "field": "opacity",
+      "message": "variable id VariableID:578:402 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=primary, state=default, isDisabled=true",
+      "field": "topLeftRadius",
+      "message": "variable id VariableID:2567:4440 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=primary, state=default, isDisabled=true",
+      "field": "topRightRadius",
+      "message": "variable id VariableID:2567:4440 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=primary, state=default, isDisabled=true",
+      "field": "bottomLeftRadius",
+      "message": "variable id VariableID:2567:4440 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=primary, state=default, isDisabled=true",
+      "field": "bottomRightRadius",
+      "message": "variable id VariableID:2567:4440 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=primary, state=default, isDisabled=true",
+      "field": "fill",
+      "message": "variable id VariableID:2759:71614 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=primary, state=default, isDisabled=true",
+      "field": "stroke",
+      "message": "variable id VariableID:2759:71589 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "paint-alpha-dropped",
+      "nodePath": "Button:variant=primary, state=default, isDisabled=true",
+      "field": "stroke",
+      "message": "paint alpha 0.10 dropped — dump v1 paints are opaque rrggbb hex"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=primary, state=default, isDisabled=true/Label",
+      "field": "fill",
+      "message": "variable id VariableID:2759:71598 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=knockout, state=default, isDisabled=true",
+      "field": "itemSpacing",
+      "message": "variable id VariableID:2567:4350 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=knockout, state=default, isDisabled=true",
+      "field": "paddingLeft",
+      "message": "variable id VariableID:2567:4349 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=knockout, state=default, isDisabled=true",
+      "field": "paddingTop",
+      "message": "variable id VariableID:2567:4339 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=knockout, state=default, isDisabled=true",
+      "field": "paddingRight",
+      "message": "variable id VariableID:2567:4349 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=knockout, state=default, isDisabled=true",
+      "field": "paddingBottom",
+      "message": "variable id VariableID:2567:4339 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=knockout, state=default, isDisabled=true",
+      "field": "opacity",
+      "message": "variable id VariableID:578:402 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=knockout, state=default, isDisabled=true",
+      "field": "topLeftRadius",
+      "message": "variable id VariableID:2567:4440 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=knockout, state=default, isDisabled=true",
+      "field": "topRightRadius",
+      "message": "variable id VariableID:2567:4440 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=knockout, state=default, isDisabled=true",
+      "field": "bottomLeftRadius",
+      "message": "variable id VariableID:2567:4440 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=knockout, state=default, isDisabled=true",
+      "field": "bottomRightRadius",
+      "message": "variable id VariableID:2567:4440 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=knockout, state=default, isDisabled=true",
+      "field": "fill",
+      "message": "variable id VariableID:2759:71604 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=knockout, state=default, isDisabled=true/Label",
+      "field": "fill",
+      "message": "variable id VariableID:2759:71581 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=secondary, state=default, isDisabled=false",
+      "field": "itemSpacing",
+      "message": "variable id VariableID:2567:4350 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=secondary, state=default, isDisabled=false",
+      "field": "paddingLeft",
+      "message": "variable id VariableID:2567:4349 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=secondary, state=default, isDisabled=false",
+      "field": "paddingTop",
+      "message": "variable id VariableID:2567:4339 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=secondary, state=default, isDisabled=false",
+      "field": "paddingRight",
+      "message": "variable id VariableID:2567:4349 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=secondary, state=default, isDisabled=false",
+      "field": "paddingBottom",
+      "message": "variable id VariableID:2567:4339 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=secondary, state=default, isDisabled=false",
+      "field": "opacity",
+      "message": "variable id VariableID:2315:497 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=secondary, state=default, isDisabled=false",
+      "field": "topLeftRadius",
+      "message": "variable id VariableID:2567:4440 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=secondary, state=default, isDisabled=false",
+      "field": "topRightRadius",
+      "message": "variable id VariableID:2567:4440 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=secondary, state=default, isDisabled=false",
+      "field": "bottomLeftRadius",
+      "message": "variable id VariableID:2567:4440 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=secondary, state=default, isDisabled=false",
+      "field": "bottomRightRadius",
+      "message": "variable id VariableID:2567:4440 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=secondary, state=default, isDisabled=false",
+      "field": "fill",
+      "message": "variable id VariableID:2759:71597 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "paint-alpha-dropped",
+      "nodePath": "Button:variant=secondary, state=default, isDisabled=false",
+      "field": "fill",
+      "message": "paint alpha 0.05 dropped — dump v1 paints are opaque rrggbb hex"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=secondary, state=default, isDisabled=false",
+      "field": "stroke",
+      "message": "variable id VariableID:2759:71608 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "paint-alpha-dropped",
+      "nodePath": "Button:variant=secondary, state=default, isDisabled=false",
+      "field": "stroke",
+      "message": "paint alpha 0.10 dropped — dump v1 paints are opaque rrggbb hex"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=secondary, state=default, isDisabled=false/Label",
+      "field": "fill",
+      "message": "variable id VariableID:2759:71581 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=bare, state=default, isDisabled=false",
+      "field": "itemSpacing",
+      "message": "variable id VariableID:2567:4350 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=bare, state=default, isDisabled=false",
+      "field": "paddingLeft",
+      "message": "variable id VariableID:2567:4349 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=bare, state=default, isDisabled=false",
+      "field": "paddingTop",
+      "message": "variable id VariableID:2567:4339 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=bare, state=default, isDisabled=false",
+      "field": "paddingRight",
+      "message": "variable id VariableID:2567:4349 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=bare, state=default, isDisabled=false",
+      "field": "paddingBottom",
+      "message": "variable id VariableID:2567:4339 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=bare, state=default, isDisabled=false",
+      "field": "opacity",
+      "message": "variable id VariableID:2315:497 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=bare, state=default, isDisabled=false",
+      "field": "topLeftRadius",
+      "message": "variable id VariableID:2567:4440 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=bare, state=default, isDisabled=false",
+      "field": "topRightRadius",
+      "message": "variable id VariableID:2567:4440 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=bare, state=default, isDisabled=false",
+      "field": "bottomLeftRadius",
+      "message": "variable id VariableID:2567:4440 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=bare, state=default, isDisabled=false",
+      "field": "bottomRightRadius",
+      "message": "variable id VariableID:2567:4440 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=bare, state=default, isDisabled=false",
+      "field": "fill",
+      "message": "variable id VariableID:2323:192 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "paint-alpha-dropped",
+      "nodePath": "Button:variant=bare, state=default, isDisabled=false",
+      "field": "fill",
+      "message": "paint alpha 0.00 dropped — dump v1 paints are opaque rrggbb hex"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=bare, state=default, isDisabled=false/Label",
+      "field": "fill",
+      "message": "variable id VariableID:2759:71581 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=bare, state=default, isDisabled=true",
+      "field": "itemSpacing",
+      "message": "variable id VariableID:2567:4350 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=bare, state=default, isDisabled=true",
+      "field": "paddingLeft",
+      "message": "variable id VariableID:2567:4349 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=bare, state=default, isDisabled=true",
+      "field": "paddingTop",
+      "message": "variable id VariableID:2567:4339 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=bare, state=default, isDisabled=true",
+      "field": "paddingRight",
+      "message": "variable id VariableID:2567:4349 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=bare, state=default, isDisabled=true",
+      "field": "paddingBottom",
+      "message": "variable id VariableID:2567:4339 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=bare, state=default, isDisabled=true",
+      "field": "opacity",
+      "message": "variable id VariableID:578:402 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=bare, state=default, isDisabled=true",
+      "field": "topLeftRadius",
+      "message": "variable id VariableID:2567:4440 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=bare, state=default, isDisabled=true",
+      "field": "topRightRadius",
+      "message": "variable id VariableID:2567:4440 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=bare, state=default, isDisabled=true",
+      "field": "bottomLeftRadius",
+      "message": "variable id VariableID:2567:4440 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=bare, state=default, isDisabled=true",
+      "field": "bottomRightRadius",
+      "message": "variable id VariableID:2567:4440 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=bare, state=default, isDisabled=true",
+      "field": "fill",
+      "message": "variable id VariableID:2323:192 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "paint-alpha-dropped",
+      "nodePath": "Button:variant=bare, state=default, isDisabled=true",
+      "field": "fill",
+      "message": "paint alpha 0.00 dropped — dump v1 paints are opaque rrggbb hex"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=bare, state=default, isDisabled=true/Label",
+      "field": "fill",
+      "message": "variable id VariableID:2759:71581 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=secondary, state=default, isDisabled=true",
+      "field": "itemSpacing",
+      "message": "variable id VariableID:2567:4350 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=secondary, state=default, isDisabled=true",
+      "field": "paddingLeft",
+      "message": "variable id VariableID:2567:4349 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=secondary, state=default, isDisabled=true",
+      "field": "paddingTop",
+      "message": "variable id VariableID:2567:4339 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=secondary, state=default, isDisabled=true",
+      "field": "paddingRight",
+      "message": "variable id VariableID:2567:4349 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=secondary, state=default, isDisabled=true",
+      "field": "paddingBottom",
+      "message": "variable id VariableID:2567:4339 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=secondary, state=default, isDisabled=true",
+      "field": "opacity",
+      "message": "variable id VariableID:578:402 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=secondary, state=default, isDisabled=true",
+      "field": "topLeftRadius",
+      "message": "variable id VariableID:2567:4440 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=secondary, state=default, isDisabled=true",
+      "field": "topRightRadius",
+      "message": "variable id VariableID:2567:4440 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=secondary, state=default, isDisabled=true",
+      "field": "bottomLeftRadius",
+      "message": "variable id VariableID:2567:4440 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=secondary, state=default, isDisabled=true",
+      "field": "bottomRightRadius",
+      "message": "variable id VariableID:2567:4440 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=secondary, state=default, isDisabled=true",
+      "field": "fill",
+      "message": "variable id VariableID:2759:71597 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "paint-alpha-dropped",
+      "nodePath": "Button:variant=secondary, state=default, isDisabled=true",
+      "field": "fill",
+      "message": "paint alpha 0.05 dropped — dump v1 paints are opaque rrggbb hex"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=secondary, state=default, isDisabled=true",
+      "field": "stroke",
+      "message": "variable id VariableID:2759:71608 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "paint-alpha-dropped",
+      "nodePath": "Button:variant=secondary, state=default, isDisabled=true",
+      "field": "stroke",
+      "message": "paint alpha 0.10 dropped — dump v1 paints are opaque rrggbb hex"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=secondary, state=default, isDisabled=true/Label",
+      "field": "fill",
+      "message": "variable id VariableID:2759:71581 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=primary, state=hover, isDisabled=false",
+      "field": "itemSpacing",
+      "message": "variable id VariableID:2567:4350 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=primary, state=hover, isDisabled=false",
+      "field": "paddingLeft",
+      "message": "variable id VariableID:2567:4349 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=primary, state=hover, isDisabled=false",
+      "field": "paddingTop",
+      "message": "variable id VariableID:2567:4339 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=primary, state=hover, isDisabled=false",
+      "field": "paddingRight",
+      "message": "variable id VariableID:2567:4349 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=primary, state=hover, isDisabled=false",
+      "field": "paddingBottom",
+      "message": "variable id VariableID:2567:4339 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=primary, state=hover, isDisabled=false",
+      "field": "opacity",
+      "message": "variable id VariableID:2315:497 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=primary, state=hover, isDisabled=false",
+      "field": "topLeftRadius",
+      "message": "variable id VariableID:2567:4440 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=primary, state=hover, isDisabled=false",
+      "field": "topRightRadius",
+      "message": "variable id VariableID:2567:4440 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=primary, state=hover, isDisabled=false",
+      "field": "bottomLeftRadius",
+      "message": "variable id VariableID:2567:4440 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=primary, state=hover, isDisabled=false",
+      "field": "bottomRightRadius",
+      "message": "variable id VariableID:2567:4440 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=primary, state=hover, isDisabled=false",
+      "field": "fill",
+      "message": "variable id VariableID:2759:71605 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=primary, state=hover, isDisabled=false",
+      "field": "stroke",
+      "message": "variable id VariableID:2759:71589 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "paint-alpha-dropped",
+      "nodePath": "Button:variant=primary, state=hover, isDisabled=false",
+      "field": "stroke",
+      "message": "paint alpha 0.10 dropped — dump v1 paints are opaque rrggbb hex"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=primary, state=hover, isDisabled=false/Label",
+      "field": "fill",
+      "message": "variable id VariableID:2759:71612 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=knockout, state=hover, isDisabled=false",
+      "field": "itemSpacing",
+      "message": "variable id VariableID:2567:4350 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=knockout, state=hover, isDisabled=false",
+      "field": "paddingLeft",
+      "message": "variable id VariableID:2567:4349 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=knockout, state=hover, isDisabled=false",
+      "field": "paddingTop",
+      "message": "variable id VariableID:2567:4339 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=knockout, state=hover, isDisabled=false",
+      "field": "paddingRight",
+      "message": "variable id VariableID:2567:4349 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=knockout, state=hover, isDisabled=false",
+      "field": "paddingBottom",
+      "message": "variable id VariableID:2567:4339 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=knockout, state=hover, isDisabled=false",
+      "field": "opacity",
+      "message": "variable id VariableID:2315:497 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=knockout, state=hover, isDisabled=false",
+      "field": "topLeftRadius",
+      "message": "variable id VariableID:2567:4440 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=knockout, state=hover, isDisabled=false",
+      "field": "topRightRadius",
+      "message": "variable id VariableID:2567:4440 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=knockout, state=hover, isDisabled=false",
+      "field": "bottomLeftRadius",
+      "message": "variable id VariableID:2567:4440 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=knockout, state=hover, isDisabled=false",
+      "field": "bottomRightRadius",
+      "message": "variable id VariableID:2567:4440 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=knockout, state=hover, isDisabled=false",
+      "field": "fill",
+      "message": "variable id VariableID:2759:71602 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=knockout, state=hover, isDisabled=false/Label",
+      "field": "fill",
+      "message": "variable id VariableID:2759:71582 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=secondary, state=hover, isDisabled=false",
+      "field": "itemSpacing",
+      "message": "variable id VariableID:2567:4350 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=secondary, state=hover, isDisabled=false",
+      "field": "paddingLeft",
+      "message": "variable id VariableID:2567:4349 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=secondary, state=hover, isDisabled=false",
+      "field": "paddingTop",
+      "message": "variable id VariableID:2567:4339 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=secondary, state=hover, isDisabled=false",
+      "field": "paddingRight",
+      "message": "variable id VariableID:2567:4349 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=secondary, state=hover, isDisabled=false",
+      "field": "paddingBottom",
+      "message": "variable id VariableID:2567:4339 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=secondary, state=hover, isDisabled=false",
+      "field": "opacity",
+      "message": "variable id VariableID:2315:497 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=secondary, state=hover, isDisabled=false",
+      "field": "topLeftRadius",
+      "message": "variable id VariableID:2567:4440 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=secondary, state=hover, isDisabled=false",
+      "field": "topRightRadius",
+      "message": "variable id VariableID:2567:4440 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=secondary, state=hover, isDisabled=false",
+      "field": "bottomLeftRadius",
+      "message": "variable id VariableID:2567:4440 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=secondary, state=hover, isDisabled=false",
+      "field": "bottomRightRadius",
+      "message": "variable id VariableID:2567:4440 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=secondary, state=hover, isDisabled=false",
+      "field": "fill",
+      "message": "variable id VariableID:2759:71620 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "paint-alpha-dropped",
+      "nodePath": "Button:variant=secondary, state=hover, isDisabled=false",
+      "field": "fill",
+      "message": "paint alpha 0.20 dropped — dump v1 paints are opaque rrggbb hex"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=secondary, state=hover, isDisabled=false",
+      "field": "stroke",
+      "message": "variable id VariableID:2759:71601 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "paint-alpha-dropped",
+      "nodePath": "Button:variant=secondary, state=hover, isDisabled=false",
+      "field": "stroke",
+      "message": "paint alpha 0.10 dropped — dump v1 paints are opaque rrggbb hex"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=secondary, state=hover, isDisabled=false/Label",
+      "field": "fill",
+      "message": "variable id VariableID:2759:71582 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=bare, state=hover, isDisabled=false",
+      "field": "itemSpacing",
+      "message": "variable id VariableID:2567:4350 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=bare, state=hover, isDisabled=false",
+      "field": "paddingLeft",
+      "message": "variable id VariableID:2567:4349 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=bare, state=hover, isDisabled=false",
+      "field": "paddingTop",
+      "message": "variable id VariableID:2567:4339 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=bare, state=hover, isDisabled=false",
+      "field": "paddingRight",
+      "message": "variable id VariableID:2567:4349 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=bare, state=hover, isDisabled=false",
+      "field": "paddingBottom",
+      "message": "variable id VariableID:2567:4339 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=bare, state=hover, isDisabled=false",
+      "field": "opacity",
+      "message": "variable id VariableID:2315:497 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=bare, state=hover, isDisabled=false",
+      "field": "topLeftRadius",
+      "message": "variable id VariableID:2567:4440 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=bare, state=hover, isDisabled=false",
+      "field": "topRightRadius",
+      "message": "variable id VariableID:2567:4440 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=bare, state=hover, isDisabled=false",
+      "field": "bottomLeftRadius",
+      "message": "variable id VariableID:2567:4440 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=bare, state=hover, isDisabled=false",
+      "field": "bottomRightRadius",
+      "message": "variable id VariableID:2567:4440 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=bare, state=hover, isDisabled=false",
+      "field": "fill",
+      "message": "variable id VariableID:2759:71620 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "paint-alpha-dropped",
+      "nodePath": "Button:variant=bare, state=hover, isDisabled=false",
+      "field": "fill",
+      "message": "paint alpha 0.20 dropped — dump v1 paints are opaque rrggbb hex"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=bare, state=hover, isDisabled=false/Label",
+      "field": "fill",
+      "message": "variable id VariableID:2759:71582 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=primary, state=active, isDisabled=false",
+      "field": "itemSpacing",
+      "message": "variable id VariableID:2567:4350 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=primary, state=active, isDisabled=false",
+      "field": "paddingLeft",
+      "message": "variable id VariableID:2567:4349 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=primary, state=active, isDisabled=false",
+      "field": "paddingTop",
+      "message": "variable id VariableID:2567:4339 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=primary, state=active, isDisabled=false",
+      "field": "paddingRight",
+      "message": "variable id VariableID:2567:4349 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=primary, state=active, isDisabled=false",
+      "field": "paddingBottom",
+      "message": "variable id VariableID:2567:4339 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=primary, state=active, isDisabled=false",
+      "field": "opacity",
+      "message": "variable id VariableID:2315:497 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=primary, state=active, isDisabled=false",
+      "field": "topLeftRadius",
+      "message": "variable id VariableID:2567:4440 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=primary, state=active, isDisabled=false",
+      "field": "topRightRadius",
+      "message": "variable id VariableID:2567:4440 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=primary, state=active, isDisabled=false",
+      "field": "bottomLeftRadius",
+      "message": "variable id VariableID:2567:4440 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=primary, state=active, isDisabled=false",
+      "field": "bottomRightRadius",
+      "message": "variable id VariableID:2567:4440 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=primary, state=active, isDisabled=false",
+      "field": "fill",
+      "message": "variable id VariableID:2759:71613 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=primary, state=active, isDisabled=false",
+      "field": "stroke",
+      "message": "variable id VariableID:2759:71589 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "paint-alpha-dropped",
+      "nodePath": "Button:variant=primary, state=active, isDisabled=false",
+      "field": "stroke",
+      "message": "paint alpha 0.10 dropped — dump v1 paints are opaque rrggbb hex"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=primary, state=active, isDisabled=false/Label",
+      "field": "fill",
+      "message": "variable id VariableID:2759:71596 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=knockout, state=active, isDisabled=false",
+      "field": "itemSpacing",
+      "message": "variable id VariableID:2567:4350 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=knockout, state=active, isDisabled=false",
+      "field": "paddingLeft",
+      "message": "variable id VariableID:2567:4349 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=knockout, state=active, isDisabled=false",
+      "field": "paddingTop",
+      "message": "variable id VariableID:2567:4339 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=knockout, state=active, isDisabled=false",
+      "field": "paddingRight",
+      "message": "variable id VariableID:2567:4349 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=knockout, state=active, isDisabled=false",
+      "field": "paddingBottom",
+      "message": "variable id VariableID:2567:4339 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=knockout, state=active, isDisabled=false",
+      "field": "opacity",
+      "message": "variable id VariableID:2315:497 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=knockout, state=active, isDisabled=false",
+      "field": "topLeftRadius",
+      "message": "variable id VariableID:2567:4440 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=knockout, state=active, isDisabled=false",
+      "field": "topRightRadius",
+      "message": "variable id VariableID:2567:4440 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=knockout, state=active, isDisabled=false",
+      "field": "bottomLeftRadius",
+      "message": "variable id VariableID:2567:4440 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=knockout, state=active, isDisabled=false",
+      "field": "bottomRightRadius",
+      "message": "variable id VariableID:2567:4440 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=knockout, state=active, isDisabled=false",
+      "field": "fill",
+      "message": "variable id VariableID:2759:71609 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=knockout, state=active, isDisabled=false/Label",
+      "field": "fill",
+      "message": "variable id VariableID:2759:71580 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=secondary, state=active, isDisabled=false",
+      "field": "itemSpacing",
+      "message": "variable id VariableID:2567:4350 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=secondary, state=active, isDisabled=false",
+      "field": "paddingLeft",
+      "message": "variable id VariableID:2567:4349 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=secondary, state=active, isDisabled=false",
+      "field": "paddingTop",
+      "message": "variable id VariableID:2567:4339 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=secondary, state=active, isDisabled=false",
+      "field": "paddingRight",
+      "message": "variable id VariableID:2567:4349 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=secondary, state=active, isDisabled=false",
+      "field": "paddingBottom",
+      "message": "variable id VariableID:2567:4339 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=secondary, state=active, isDisabled=false",
+      "field": "opacity",
+      "message": "variable id VariableID:2315:497 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=secondary, state=active, isDisabled=false",
+      "field": "topLeftRadius",
+      "message": "variable id VariableID:2567:4440 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=secondary, state=active, isDisabled=false",
+      "field": "topRightRadius",
+      "message": "variable id VariableID:2567:4440 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=secondary, state=active, isDisabled=false",
+      "field": "bottomLeftRadius",
+      "message": "variable id VariableID:2567:4440 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=secondary, state=active, isDisabled=false",
+      "field": "bottomRightRadius",
+      "message": "variable id VariableID:2567:4440 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=secondary, state=active, isDisabled=false",
+      "field": "fill",
+      "message": "variable id VariableID:2759:71597 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "paint-alpha-dropped",
+      "nodePath": "Button:variant=secondary, state=active, isDisabled=false",
+      "field": "fill",
+      "message": "paint alpha 0.05 dropped — dump v1 paints are opaque rrggbb hex"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=secondary, state=active, isDisabled=false",
+      "field": "stroke",
+      "message": "variable id VariableID:2759:71595 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "paint-alpha-dropped",
+      "nodePath": "Button:variant=secondary, state=active, isDisabled=false",
+      "field": "stroke",
+      "message": "paint alpha 0.10 dropped — dump v1 paints are opaque rrggbb hex"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=secondary, state=active, isDisabled=false/Label",
+      "field": "fill",
+      "message": "variable id VariableID:2759:71581 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=bare, state=active, isDisabled=false",
+      "field": "itemSpacing",
+      "message": "variable id VariableID:2567:4350 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=bare, state=active, isDisabled=false",
+      "field": "paddingLeft",
+      "message": "variable id VariableID:2567:4349 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=bare, state=active, isDisabled=false",
+      "field": "paddingTop",
+      "message": "variable id VariableID:2567:4339 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=bare, state=active, isDisabled=false",
+      "field": "paddingRight",
+      "message": "variable id VariableID:2567:4349 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=bare, state=active, isDisabled=false",
+      "field": "paddingBottom",
+      "message": "variable id VariableID:2567:4339 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=bare, state=active, isDisabled=false",
+      "field": "opacity",
+      "message": "variable id VariableID:2315:497 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=bare, state=active, isDisabled=false",
+      "field": "topLeftRadius",
+      "message": "variable id VariableID:2567:4440 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=bare, state=active, isDisabled=false",
+      "field": "topRightRadius",
+      "message": "variable id VariableID:2567:4440 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=bare, state=active, isDisabled=false",
+      "field": "bottomLeftRadius",
+      "message": "variable id VariableID:2567:4440 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=bare, state=active, isDisabled=false",
+      "field": "bottomRightRadius",
+      "message": "variable id VariableID:2567:4440 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=bare, state=active, isDisabled=false",
+      "field": "fill",
+      "message": "variable id VariableID:2323:192 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "paint-alpha-dropped",
+      "nodePath": "Button:variant=bare, state=active, isDisabled=false",
+      "field": "fill",
+      "message": "paint alpha 0.00 dropped — dump v1 paints are opaque rrggbb hex"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=bare, state=active, isDisabled=false/Label",
+      "field": "fill",
+      "message": "variable id VariableID:2759:71580 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=primary, state=focus, isDisabled=false",
+      "field": "itemSpacing",
+      "message": "variable id VariableID:2567:4350 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=primary, state=focus, isDisabled=false",
+      "field": "paddingLeft",
+      "message": "variable id VariableID:2567:4349 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=primary, state=focus, isDisabled=false",
+      "field": "paddingTop",
+      "message": "variable id VariableID:2567:4339 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=primary, state=focus, isDisabled=false",
+      "field": "paddingRight",
+      "message": "variable id VariableID:2567:4349 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=primary, state=focus, isDisabled=false",
+      "field": "paddingBottom",
+      "message": "variable id VariableID:2567:4339 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=primary, state=focus, isDisabled=false",
+      "field": "opacity",
+      "message": "variable id VariableID:2315:497 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=primary, state=focus, isDisabled=false",
+      "field": "topLeftRadius",
+      "message": "variable id VariableID:2567:4440 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=primary, state=focus, isDisabled=false",
+      "field": "topRightRadius",
+      "message": "variable id VariableID:2567:4440 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=primary, state=focus, isDisabled=false",
+      "field": "bottomLeftRadius",
+      "message": "variable id VariableID:2567:4440 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=primary, state=focus, isDisabled=false",
+      "field": "bottomRightRadius",
+      "message": "variable id VariableID:2567:4440 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=primary, state=focus, isDisabled=false",
+      "field": "fill",
+      "message": "variable id VariableID:2759:71614 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=primary, state=focus, isDisabled=false",
+      "field": "stroke",
+      "message": "variable id VariableID:2759:71589 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "paint-alpha-dropped",
+      "nodePath": "Button:variant=primary, state=focus, isDisabled=false",
+      "field": "stroke",
+      "message": "paint alpha 0.10 dropped — dump v1 paints are opaque rrggbb hex"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=primary, state=focus, isDisabled=false/Focus ring",
+      "field": "topLeftRadius",
+      "message": "variable id VariableID:2325:1123 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=primary, state=focus, isDisabled=false/Focus ring",
+      "field": "topRightRadius",
+      "message": "variable id VariableID:2325:1123 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=primary, state=focus, isDisabled=false/Focus ring",
+      "field": "bottomLeftRadius",
+      "message": "variable id VariableID:2325:1123 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=primary, state=focus, isDisabled=false/Focus ring",
+      "field": "bottomRightRadius",
+      "message": "variable id VariableID:2325:1123 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=primary, state=focus, isDisabled=false/Focus ring",
+      "field": "stroke",
+      "message": "variable id VariableID:2759:71607 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=primary, state=focus, isDisabled=false/Label",
+      "field": "fill",
+      "message": "variable id VariableID:2759:71598 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=knockout, state=focus, isDisabled=false",
+      "field": "itemSpacing",
+      "message": "variable id VariableID:2567:4350 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=knockout, state=focus, isDisabled=false",
+      "field": "paddingLeft",
+      "message": "variable id VariableID:2567:4349 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=knockout, state=focus, isDisabled=false",
+      "field": "paddingTop",
+      "message": "variable id VariableID:2567:4339 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=knockout, state=focus, isDisabled=false",
+      "field": "paddingRight",
+      "message": "variable id VariableID:2567:4349 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=knockout, state=focus, isDisabled=false",
+      "field": "paddingBottom",
+      "message": "variable id VariableID:2567:4339 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=knockout, state=focus, isDisabled=false",
+      "field": "opacity",
+      "message": "variable id VariableID:2315:497 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=knockout, state=focus, isDisabled=false",
+      "field": "topLeftRadius",
+      "message": "variable id VariableID:2567:4440 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=knockout, state=focus, isDisabled=false",
+      "field": "topRightRadius",
+      "message": "variable id VariableID:2567:4440 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=knockout, state=focus, isDisabled=false",
+      "field": "bottomLeftRadius",
+      "message": "variable id VariableID:2567:4440 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=knockout, state=focus, isDisabled=false",
+      "field": "bottomRightRadius",
+      "message": "variable id VariableID:2567:4440 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=knockout, state=focus, isDisabled=false",
+      "field": "fill",
+      "message": "variable id VariableID:2759:71604 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=knockout, state=focus, isDisabled=false/Focus ring",
+      "field": "topLeftRadius",
+      "message": "variable id VariableID:2325:1123 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=knockout, state=focus, isDisabled=false/Focus ring",
+      "field": "topRightRadius",
+      "message": "variable id VariableID:2325:1123 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=knockout, state=focus, isDisabled=false/Focus ring",
+      "field": "bottomLeftRadius",
+      "message": "variable id VariableID:2325:1123 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=knockout, state=focus, isDisabled=false/Focus ring",
+      "field": "bottomRightRadius",
+      "message": "variable id VariableID:2325:1123 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=knockout, state=focus, isDisabled=false/Focus ring",
+      "field": "stroke",
+      "message": "variable id VariableID:2759:71607 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=knockout, state=focus, isDisabled=false/Label",
+      "field": "fill",
+      "message": "variable id VariableID:2759:71581 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=secondary, state=focus, isDisabled=false",
+      "field": "itemSpacing",
+      "message": "variable id VariableID:2567:4350 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=secondary, state=focus, isDisabled=false",
+      "field": "paddingLeft",
+      "message": "variable id VariableID:2567:4349 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=secondary, state=focus, isDisabled=false",
+      "field": "paddingTop",
+      "message": "variable id VariableID:2567:4339 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=secondary, state=focus, isDisabled=false",
+      "field": "paddingRight",
+      "message": "variable id VariableID:2567:4349 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=secondary, state=focus, isDisabled=false",
+      "field": "paddingBottom",
+      "message": "variable id VariableID:2567:4339 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=secondary, state=focus, isDisabled=false",
+      "field": "opacity",
+      "message": "variable id VariableID:2315:497 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=secondary, state=focus, isDisabled=false",
+      "field": "topLeftRadius",
+      "message": "variable id VariableID:2567:4440 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=secondary, state=focus, isDisabled=false",
+      "field": "topRightRadius",
+      "message": "variable id VariableID:2567:4440 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=secondary, state=focus, isDisabled=false",
+      "field": "bottomLeftRadius",
+      "message": "variable id VariableID:2567:4440 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=secondary, state=focus, isDisabled=false",
+      "field": "bottomRightRadius",
+      "message": "variable id VariableID:2567:4440 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=secondary, state=focus, isDisabled=false",
+      "field": "fill",
+      "message": "variable id VariableID:2759:71597 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "paint-alpha-dropped",
+      "nodePath": "Button:variant=secondary, state=focus, isDisabled=false",
+      "field": "fill",
+      "message": "paint alpha 0.05 dropped — dump v1 paints are opaque rrggbb hex"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=secondary, state=focus, isDisabled=false",
+      "field": "stroke",
+      "message": "variable id VariableID:2759:71608 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "paint-alpha-dropped",
+      "nodePath": "Button:variant=secondary, state=focus, isDisabled=false",
+      "field": "stroke",
+      "message": "paint alpha 0.10 dropped — dump v1 paints are opaque rrggbb hex"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=secondary, state=focus, isDisabled=false/Focus ring",
+      "field": "topLeftRadius",
+      "message": "variable id VariableID:2325:1123 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=secondary, state=focus, isDisabled=false/Focus ring",
+      "field": "topRightRadius",
+      "message": "variable id VariableID:2325:1123 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=secondary, state=focus, isDisabled=false/Focus ring",
+      "field": "bottomLeftRadius",
+      "message": "variable id VariableID:2325:1123 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=secondary, state=focus, isDisabled=false/Focus ring",
+      "field": "bottomRightRadius",
+      "message": "variable id VariableID:2325:1123 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=secondary, state=focus, isDisabled=false/Focus ring",
+      "field": "stroke",
+      "message": "variable id VariableID:2759:71607 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=secondary, state=focus, isDisabled=false/Label",
+      "field": "fill",
+      "message": "variable id VariableID:2759:71581 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=bare, state=focus, isDisabled=false",
+      "field": "itemSpacing",
+      "message": "variable id VariableID:2567:4350 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=bare, state=focus, isDisabled=false",
+      "field": "paddingLeft",
+      "message": "variable id VariableID:2567:4349 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=bare, state=focus, isDisabled=false",
+      "field": "paddingTop",
+      "message": "variable id VariableID:2567:4339 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=bare, state=focus, isDisabled=false",
+      "field": "paddingRight",
+      "message": "variable id VariableID:2567:4349 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=bare, state=focus, isDisabled=false",
+      "field": "paddingBottom",
+      "message": "variable id VariableID:2567:4339 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=bare, state=focus, isDisabled=false",
+      "field": "opacity",
+      "message": "variable id VariableID:2315:497 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=bare, state=focus, isDisabled=false",
+      "field": "topLeftRadius",
+      "message": "variable id VariableID:2567:4440 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=bare, state=focus, isDisabled=false",
+      "field": "topRightRadius",
+      "message": "variable id VariableID:2567:4440 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=bare, state=focus, isDisabled=false",
+      "field": "bottomLeftRadius",
+      "message": "variable id VariableID:2567:4440 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=bare, state=focus, isDisabled=false",
+      "field": "bottomRightRadius",
+      "message": "variable id VariableID:2567:4440 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=bare, state=focus, isDisabled=false",
+      "field": "fill",
+      "message": "variable id VariableID:2323:192 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "paint-alpha-dropped",
+      "nodePath": "Button:variant=bare, state=focus, isDisabled=false",
+      "field": "fill",
+      "message": "paint alpha 0.00 dropped — dump v1 paints are opaque rrggbb hex"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=bare, state=focus, isDisabled=false/Focus ring",
+      "field": "topLeftRadius",
+      "message": "variable id VariableID:2325:1123 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=bare, state=focus, isDisabled=false/Focus ring",
+      "field": "topRightRadius",
+      "message": "variable id VariableID:2325:1123 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=bare, state=focus, isDisabled=false/Focus ring",
+      "field": "bottomLeftRadius",
+      "message": "variable id VariableID:2325:1123 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=bare, state=focus, isDisabled=false/Focus ring",
+      "field": "bottomRightRadius",
+      "message": "variable id VariableID:2325:1123 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=bare, state=focus, isDisabled=false/Focus ring",
+      "field": "stroke",
+      "message": "variable id VariableID:2759:71607 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=bare, state=focus, isDisabled=false/Label",
+      "field": "fill",
+      "message": "variable id VariableID:2759:71581 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=primary, state=focus, isDisabled=true",
+      "field": "itemSpacing",
+      "message": "variable id VariableID:2567:4350 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=primary, state=focus, isDisabled=true",
+      "field": "topLeftRadius",
+      "message": "variable id VariableID:2567:4440 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=primary, state=focus, isDisabled=true",
+      "field": "topRightRadius",
+      "message": "variable id VariableID:2567:4440 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=primary, state=focus, isDisabled=true",
+      "field": "bottomLeftRadius",
+      "message": "variable id VariableID:2567:4440 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=primary, state=focus, isDisabled=true",
+      "field": "bottomRightRadius",
+      "message": "variable id VariableID:2567:4440 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=primary, state=focus, isDisabled=true",
+      "field": "fill",
+      "message": "variable id VariableID:2759:71614 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=primary, state=focus, isDisabled=true",
+      "field": "stroke",
+      "message": "variable id VariableID:2759:71589 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "paint-alpha-dropped",
+      "nodePath": "Button:variant=primary, state=focus, isDisabled=true",
+      "field": "stroke",
+      "message": "paint alpha 0.10 dropped — dump v1 paints are opaque rrggbb hex"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=primary, state=focus, isDisabled=true/Button",
+      "field": "itemSpacing",
+      "message": "variable id VariableID:2567:4350 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=primary, state=focus, isDisabled=true/Button",
+      "field": "paddingLeft",
+      "message": "variable id VariableID:2567:4349 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=primary, state=focus, isDisabled=true/Button",
+      "field": "paddingTop",
+      "message": "variable id VariableID:2567:4339 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=primary, state=focus, isDisabled=true/Button",
+      "field": "paddingRight",
+      "message": "variable id VariableID:2567:4349 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=primary, state=focus, isDisabled=true/Button",
+      "field": "paddingBottom",
+      "message": "variable id VariableID:2567:4339 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=primary, state=focus, isDisabled=true/Button",
+      "field": "opacity",
+      "message": "variable id VariableID:578:402 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=primary, state=focus, isDisabled=true/Button",
+      "field": "topLeftRadius",
+      "message": "variable id VariableID:2567:4440 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=primary, state=focus, isDisabled=true/Button",
+      "field": "topRightRadius",
+      "message": "variable id VariableID:2567:4440 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=primary, state=focus, isDisabled=true/Button",
+      "field": "bottomLeftRadius",
+      "message": "variable id VariableID:2567:4440 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=primary, state=focus, isDisabled=true/Button",
+      "field": "bottomRightRadius",
+      "message": "variable id VariableID:2567:4440 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=primary, state=focus, isDisabled=true/Button",
+      "field": "fill",
+      "message": "variable id VariableID:2759:71614 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=primary, state=focus, isDisabled=true/Button",
+      "field": "stroke",
+      "message": "variable id VariableID:2759:71589 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "paint-alpha-dropped",
+      "nodePath": "Button:variant=primary, state=focus, isDisabled=true/Button",
+      "field": "stroke",
+      "message": "paint alpha 0.10 dropped — dump v1 paints are opaque rrggbb hex"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=primary, state=focus, isDisabled=true/Focus ring",
+      "field": "topLeftRadius",
+      "message": "variable id VariableID:2325:1123 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=primary, state=focus, isDisabled=true/Focus ring",
+      "field": "topRightRadius",
+      "message": "variable id VariableID:2325:1123 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=primary, state=focus, isDisabled=true/Focus ring",
+      "field": "bottomLeftRadius",
+      "message": "variable id VariableID:2325:1123 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=primary, state=focus, isDisabled=true/Focus ring",
+      "field": "bottomRightRadius",
+      "message": "variable id VariableID:2325:1123 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=primary, state=focus, isDisabled=true/Focus ring",
+      "field": "stroke",
+      "message": "variable id VariableID:2759:71607 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=knockout, state=focus, isDisabled=true",
+      "field": "itemSpacing",
+      "message": "variable id VariableID:2567:4350 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=knockout, state=focus, isDisabled=true",
+      "field": "topLeftRadius",
+      "message": "variable id VariableID:2567:4440 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=knockout, state=focus, isDisabled=true",
+      "field": "topRightRadius",
+      "message": "variable id VariableID:2567:4440 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=knockout, state=focus, isDisabled=true",
+      "field": "bottomLeftRadius",
+      "message": "variable id VariableID:2567:4440 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=knockout, state=focus, isDisabled=true",
+      "field": "bottomRightRadius",
+      "message": "variable id VariableID:2567:4440 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=knockout, state=focus, isDisabled=true",
+      "field": "fill",
+      "message": "variable id VariableID:2759:71604 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=knockout, state=focus, isDisabled=true/Button",
+      "field": "itemSpacing",
+      "message": "variable id VariableID:2567:4350 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=knockout, state=focus, isDisabled=true/Button",
+      "field": "paddingLeft",
+      "message": "variable id VariableID:2567:4349 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=knockout, state=focus, isDisabled=true/Button",
+      "field": "paddingTop",
+      "message": "variable id VariableID:2567:4339 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=knockout, state=focus, isDisabled=true/Button",
+      "field": "paddingRight",
+      "message": "variable id VariableID:2567:4349 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=knockout, state=focus, isDisabled=true/Button",
+      "field": "paddingBottom",
+      "message": "variable id VariableID:2567:4339 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=knockout, state=focus, isDisabled=true/Button",
+      "field": "opacity",
+      "message": "variable id VariableID:578:402 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=knockout, state=focus, isDisabled=true/Button",
+      "field": "topLeftRadius",
+      "message": "variable id VariableID:2567:4440 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=knockout, state=focus, isDisabled=true/Button",
+      "field": "topRightRadius",
+      "message": "variable id VariableID:2567:4440 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=knockout, state=focus, isDisabled=true/Button",
+      "field": "bottomLeftRadius",
+      "message": "variable id VariableID:2567:4440 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=knockout, state=focus, isDisabled=true/Button",
+      "field": "bottomRightRadius",
+      "message": "variable id VariableID:2567:4440 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=knockout, state=focus, isDisabled=true/Button",
+      "field": "fill",
+      "message": "variable id VariableID:2759:71604 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=knockout, state=focus, isDisabled=true/Focus ring",
+      "field": "topLeftRadius",
+      "message": "variable id VariableID:2325:1123 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=knockout, state=focus, isDisabled=true/Focus ring",
+      "field": "topRightRadius",
+      "message": "variable id VariableID:2325:1123 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=knockout, state=focus, isDisabled=true/Focus ring",
+      "field": "bottomLeftRadius",
+      "message": "variable id VariableID:2325:1123 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=knockout, state=focus, isDisabled=true/Focus ring",
+      "field": "bottomRightRadius",
+      "message": "variable id VariableID:2325:1123 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=knockout, state=focus, isDisabled=true/Focus ring",
+      "field": "stroke",
+      "message": "variable id VariableID:2759:71607 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=secondary, state=focus, isDisabled=true",
+      "field": "itemSpacing",
+      "message": "variable id VariableID:2567:4350 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=secondary, state=focus, isDisabled=true",
+      "field": "fill",
+      "message": "variable id VariableID:2759:71597 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "paint-alpha-dropped",
+      "nodePath": "Button:variant=secondary, state=focus, isDisabled=true",
+      "field": "fill",
+      "message": "paint alpha 0.05 dropped — dump v1 paints are opaque rrggbb hex"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=secondary, state=focus, isDisabled=true",
+      "field": "stroke",
+      "message": "variable id VariableID:2759:71608 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "paint-alpha-dropped",
+      "nodePath": "Button:variant=secondary, state=focus, isDisabled=true",
+      "field": "stroke",
+      "message": "paint alpha 0.10 dropped — dump v1 paints are opaque rrggbb hex"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=secondary, state=focus, isDisabled=true/Button",
+      "field": "itemSpacing",
+      "message": "variable id VariableID:2567:4350 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=secondary, state=focus, isDisabled=true/Button",
+      "field": "paddingLeft",
+      "message": "variable id VariableID:2567:4349 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=secondary, state=focus, isDisabled=true/Button",
+      "field": "paddingTop",
+      "message": "variable id VariableID:2567:4339 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=secondary, state=focus, isDisabled=true/Button",
+      "field": "paddingRight",
+      "message": "variable id VariableID:2567:4349 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=secondary, state=focus, isDisabled=true/Button",
+      "field": "paddingBottom",
+      "message": "variable id VariableID:2567:4339 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=secondary, state=focus, isDisabled=true/Button",
+      "field": "opacity",
+      "message": "variable id VariableID:578:402 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=secondary, state=focus, isDisabled=true/Button",
+      "field": "topLeftRadius",
+      "message": "variable id VariableID:2567:4440 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=secondary, state=focus, isDisabled=true/Button",
+      "field": "topRightRadius",
+      "message": "variable id VariableID:2567:4440 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=secondary, state=focus, isDisabled=true/Button",
+      "field": "bottomLeftRadius",
+      "message": "variable id VariableID:2567:4440 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=secondary, state=focus, isDisabled=true/Button",
+      "field": "bottomRightRadius",
+      "message": "variable id VariableID:2567:4440 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=secondary, state=focus, isDisabled=true/Button",
+      "field": "fill",
+      "message": "variable id VariableID:2759:71597 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "paint-alpha-dropped",
+      "nodePath": "Button:variant=secondary, state=focus, isDisabled=true/Button",
+      "field": "fill",
+      "message": "paint alpha 0.05 dropped — dump v1 paints are opaque rrggbb hex"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=secondary, state=focus, isDisabled=true/Button",
+      "field": "stroke",
+      "message": "variable id VariableID:2759:71608 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "paint-alpha-dropped",
+      "nodePath": "Button:variant=secondary, state=focus, isDisabled=true/Button",
+      "field": "stroke",
+      "message": "paint alpha 0.10 dropped — dump v1 paints are opaque rrggbb hex"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=secondary, state=focus, isDisabled=true/Focus ring",
+      "field": "topLeftRadius",
+      "message": "variable id VariableID:2325:1123 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=secondary, state=focus, isDisabled=true/Focus ring",
+      "field": "topRightRadius",
+      "message": "variable id VariableID:2325:1123 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=secondary, state=focus, isDisabled=true/Focus ring",
+      "field": "bottomLeftRadius",
+      "message": "variable id VariableID:2325:1123 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=secondary, state=focus, isDisabled=true/Focus ring",
+      "field": "bottomRightRadius",
+      "message": "variable id VariableID:2325:1123 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=secondary, state=focus, isDisabled=true/Focus ring",
+      "field": "stroke",
+      "message": "variable id VariableID:2759:71607 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=bare, state=focus, isDisabled=true",
+      "field": "itemSpacing",
+      "message": "variable id VariableID:2567:4350 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=bare, state=focus, isDisabled=true",
+      "field": "topLeftRadius",
+      "message": "variable id VariableID:2567:4440 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=bare, state=focus, isDisabled=true",
+      "field": "topRightRadius",
+      "message": "variable id VariableID:2567:4440 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=bare, state=focus, isDisabled=true",
+      "field": "bottomLeftRadius",
+      "message": "variable id VariableID:2567:4440 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=bare, state=focus, isDisabled=true",
+      "field": "bottomRightRadius",
+      "message": "variable id VariableID:2567:4440 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=bare, state=focus, isDisabled=true",
+      "field": "fill",
+      "message": "variable id VariableID:2323:192 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "paint-alpha-dropped",
+      "nodePath": "Button:variant=bare, state=focus, isDisabled=true",
+      "field": "fill",
+      "message": "paint alpha 0.00 dropped — dump v1 paints are opaque rrggbb hex"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=bare, state=focus, isDisabled=true/Button",
+      "field": "itemSpacing",
+      "message": "variable id VariableID:2567:4350 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=bare, state=focus, isDisabled=true/Button",
+      "field": "paddingLeft",
+      "message": "variable id VariableID:2567:4349 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=bare, state=focus, isDisabled=true/Button",
+      "field": "paddingTop",
+      "message": "variable id VariableID:2567:4339 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=bare, state=focus, isDisabled=true/Button",
+      "field": "paddingRight",
+      "message": "variable id VariableID:2567:4349 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=bare, state=focus, isDisabled=true/Button",
+      "field": "paddingBottom",
+      "message": "variable id VariableID:2567:4339 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=bare, state=focus, isDisabled=true/Button",
+      "field": "opacity",
+      "message": "variable id VariableID:578:402 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=bare, state=focus, isDisabled=true/Button",
+      "field": "topLeftRadius",
+      "message": "variable id VariableID:2567:4440 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=bare, state=focus, isDisabled=true/Button",
+      "field": "topRightRadius",
+      "message": "variable id VariableID:2567:4440 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=bare, state=focus, isDisabled=true/Button",
+      "field": "bottomLeftRadius",
+      "message": "variable id VariableID:2567:4440 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=bare, state=focus, isDisabled=true/Button",
+      "field": "bottomRightRadius",
+      "message": "variable id VariableID:2567:4440 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=bare, state=focus, isDisabled=true/Button",
+      "field": "fill",
+      "message": "variable id VariableID:2323:192 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "paint-alpha-dropped",
+      "nodePath": "Button:variant=bare, state=focus, isDisabled=true/Button",
+      "field": "fill",
+      "message": "paint alpha 0.00 dropped — dump v1 paints are opaque rrggbb hex"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=bare, state=focus, isDisabled=true/Focus ring",
+      "field": "topLeftRadius",
+      "message": "variable id VariableID:2325:1123 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=bare, state=focus, isDisabled=true/Focus ring",
+      "field": "topRightRadius",
+      "message": "variable id VariableID:2325:1123 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=bare, state=focus, isDisabled=true/Focus ring",
+      "field": "bottomLeftRadius",
+      "message": "variable id VariableID:2325:1123 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=bare, state=focus, isDisabled=true/Focus ring",
+      "field": "bottomRightRadius",
+      "message": "variable id VariableID:2325:1123 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button:variant=bare, state=focus, isDisabled=true/Focus ring",
+      "field": "stroke",
+      "message": "variable id VariableID:2759:71607 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    }
+  ],
+  "notes": [
+    "variables response not provided — every bound fact degrades to its resolved literal; see variable-unresolved entries"
+  ]
+}

@@ -1,0 +1,142 @@
+/* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/button.contract.json (ds.button v0.1.0)
+ * Regenerate with: npm run generate
+ */
+
+.root {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-style: solid;
+  gap: var(--imported-button-root-gap);
+  padding-inline: var(--imported-button-root-padding-inline);
+  padding-block: var(--imported-button-root-padding-block);
+  border-radius: var(--imported-button-root-border-radius);
+}
+
+.variant-primary {
+  border-width: var(--imported-button-root-border-width-primary);
+}
+
+.state-default {
+}
+
+.variant-primary.state-default {
+  background-color: var(--imported-button-root-background-color-primary-default);
+}
+
+.state-hover {
+}
+
+.variant-primary.state-hover {
+  background-color: var(--imported-button-root-background-color-primary-hover);
+}
+
+.state-active {
+}
+
+.variant-primary.state-active {
+  background-color: var(--imported-button-root-background-color-primary-active);
+}
+
+.state-focus {
+}
+
+.variant-primary.state-focus {
+  background-color: var(--imported-button-root-background-color-primary-focus);
+}
+
+.variant-knockout {
+  border-width: var(--imported-button-root-border-width-knockout);
+}
+
+.variant-knockout.state-default {
+  background-color: var(--imported-button-root-background-color-knockout-default);
+}
+
+.variant-knockout.state-hover {
+  background-color: var(--imported-button-root-background-color-knockout-hover);
+}
+
+.variant-knockout.state-active {
+  background-color: var(--imported-button-root-background-color-knockout-active);
+}
+
+.variant-knockout.state-focus {
+  background-color: var(--imported-button-root-background-color-knockout-focus);
+}
+
+.variant-secondary {
+  border-width: var(--imported-button-root-border-width-secondary);
+}
+
+.variant-secondary.state-default {
+  background-color: var(--imported-button-root-background-color-secondary-default);
+}
+
+.variant-secondary.state-hover {
+  background-color: var(--imported-button-root-background-color-secondary-hover);
+}
+
+.variant-secondary.state-active {
+  background-color: var(--imported-button-root-background-color-secondary-active);
+}
+
+.variant-secondary.state-focus {
+  background-color: var(--imported-button-root-background-color-secondary-focus);
+}
+
+.variant-bare {
+  border-width: var(--imported-button-root-border-width-bare);
+}
+
+.variant-bare.state-default {
+  background-color: var(--imported-button-root-background-color-bare-default);
+}
+
+.variant-bare.state-hover {
+  background-color: var(--imported-button-root-background-color-bare-hover);
+}
+
+.variant-bare.state-active {
+  background-color: var(--imported-button-root-background-color-bare-active);
+}
+
+.variant-bare.state-focus {
+  background-color: var(--imported-button-root-background-color-bare-focus);
+}
+
+.focusRing {
+  border-color: var(--imported-button-focus-ring-border-color);
+  border-radius: var(--imported-button-focus-ring-border-radius);
+  border-width: var(--imported-button-focus-ring-border-width);
+  border-style: solid;
+}
+
+.startIcon {
+  display: flex;
+}
+
+.Label {
+  font-size: var(--imported-button-label-font-size);
+}
+
+.variant-primary .Label {
+  color: var(--imported-button-label-color-primary);
+}
+
+.variant-knockout .Label {
+  color: var(--imported-button-label-color-knockout);
+}
+
+.variant-secondary .Label {
+  color: var(--imported-button-label-color-secondary);
+}
+
+.variant-bare .Label {
+  color: var(--imported-button-label-color-bare);
+}
+
+.endIcon {
+  display: flex;
+}

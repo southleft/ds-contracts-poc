@@ -1,0 +1,303 @@
+{
+  "notes": [
+    "anatomy EXTRACTED from JSX + CSS Module — 4 part(s), 10 token binding(s), 1 raw value(s) reported. Anatomy is human-REVIEWED: check it against design intent before adoption.",
+    "prop `variant`: type resolved heuristically — review",
+    "prop `variant`: figma binding INFERRED as VARIANT \"Variant\" — confirm against the design library (reconcile step)",
+    "prop `size`: type resolved heuristically — review",
+    "prop `size`: figma binding INFERRED as VARIANT \"Size\" — confirm against the design library (reconcile step)",
+    "prop `iconLeft`: ReactNode — extracted as anatomy slot \"iconLeft\"",
+    "prop `iconRight`: ReactNode — extracted as anatomy slot \"iconRight\"",
+    "RAW VALUE (not tokenized): `.cbds-c-button--ghost { border-width: 1px }` — nearest tokens by value: `{border-width.100}`, `{border.width.divider.subtle}`. A raw value is reported, never turned into an invented token; bind it to a real token and re-extract.",
+    "jsx: root className clsx(…) read — root class \".cbds-c-button\"; modifier classes: cbds-c-button--${variant} → \"variant\" axis, cbds-c-button--${size} → \"size\" axis; boolean modifier class(es): .cbds-c-button--full-width (fullWidth)",
+    "jsx: root class \".cbds-c-button\" extracted as the contract root part (contract roots are named \"root\")",
+    "jsx: part \"root\" renders {children} between elements — extracted as an ordered slot part \"children\"",
+    "css: .cbds-c-button { text-decoration: none } — no inversion rule, not extracted",
+    "css: .cbds-c-button { transition: all 120ms ease } — no inversion rule, not extracted",
+    "css: .cbds-c-button { font-family: var(--cbds-font-family-primary, Inter), system-ui, -apple-system, sans-serif } — var() inside a shorthand is not invertible to a single binding, not extracted",
+    "css: .cbds-c-button { white-space: nowrap } — no inversion rule, not extracted",
+    "css: .cbds-c-button { outline: none } — no inversion rule, not extracted",
+    "css: selector `.cbds-c-button:active:not(:disabled)` — pseudo \":active:not(:disabled)\" is not a contract state, not extracted",
+    "css: .cbds-c-button:focus-visible { outline: 2px solid var(--cbds-border-focus) } — var() inside a shorthand is not invertible to a single binding, not extracted",
+    "css: selector `.cbds-c-button--surface:active:not(:disabled)` — pseudo \":active:not(:disabled)\" is not a contract state, not extracted",
+    "css: selector `.cbds-c-button--danger:active:not(:disabled)` — pseudo \":active:not(:disabled)\" is not a contract state, not extracted",
+    "css: .cbds-c-button--ghost { border-color } uses var(--cbds-border-primary) which resolves to NO token in the token tree — binding not proposed",
+    "css: .cbds-c-button--ghost:hover:not(:active, :disabled) { border-color } uses var(--cbds-border-primary-hover) which resolves to NO token in the token tree — binding not proposed",
+    "css: selector `.cbds-c-button--ghost:active:not(:disabled)` — pseudo \":active:not(:disabled)\" is not a contract state, not extracted",
+    "css: .cbds-c-button--ghost:disabled { border-color } uses var(--cbds-border-secondary) which resolves to NO token in the token tree — binding not proposed",
+    "css: .cbds-c-button--full-width — styles behind boolean prop \"fullWidth\" (1 declaration(s)); boolean-conditional styling is not extractable into anatomy, review by name",
+    "mint: root border-width — \"variant\" classes cover 1/4 values (missing primary, surface, danger) and no base rule fills the gap — nothing minted",
+    "mint: root border-color — \"variant\" classes cover 1/4 values (missing primary, surface, danger) and no base rule fills the gap — nothing minted",
+    "mint: root :hover border-color — \"variant\" classes cover 1/4 values (missing primary, surface, danger) and no base rule fills the gap — nothing minted",
+    "mint: root :disabled border-color — \"variant\" classes cover 1/4 values (missing primary, surface, danger) and no base rule fills the gap — nothing minted",
+    "MINTED {imported.button.root.gap} = 0.5rem — machine-named from a resolved value — rename against your real tokens (provisional); bound at: root gap",
+    "MINTED {imported.button.root.padding-block} = 0.5rem — machine-named from a resolved value — rename against your real tokens (provisional); bound at: root padding-block",
+    "MINTED {imported.button.root.padding-inline.small} = 0.75rem — machine-named from a resolved value — rename against your real tokens (provisional); bound at: root padding-inline (size=small)",
+    "MINTED {imported.button.root.padding-inline.medium} = 1rem — machine-named from a resolved value — rename against your real tokens (provisional); bound at: root padding-inline (size=medium)",
+    "MINTED {imported.button.root.padding-inline.large} = 1rem — machine-named from a resolved value — rename against your real tokens (provisional); bound at: root padding-inline (size=large)",
+    "MINTED {imported.button.root.border-radius} = 8px — machine-named from a resolved value — rename against your real tokens (provisional); bound at: root border-radius",
+    "MINTED {imported.button.root.background-color.surface} = #f5f7fa — machine-named from a resolved value — rename against your real tokens (provisional); bound at: root background-color (variant=surface)",
+    "MINTED {imported.button.root.background-color.danger} = #b51833 — machine-named from a resolved value — rename against your real tokens (provisional); bound at: root background-color (variant=danger)",
+    "MINTED {imported.button.root.background-color.ghost} = transparent — machine-named from a resolved value — rename against your real tokens (provisional); bound at: root background-color (variant=ghost)",
+    "MINTED {imported.button.root.background-color.primary} = #0e61ba — machine-named from a resolved value — rename against your real tokens (provisional); bound at: root background-color (variant=primary)",
+    "MINTED {imported.button.root.color.surface} = #050a0f — machine-named from a resolved value — rename against your real tokens (provisional); bound at: root color (variant=surface)",
+    "MINTED {imported.button.root.color.danger} = #fcfeff — machine-named from a resolved value — rename against your real tokens (provisional); bound at: root color (variant=danger)",
+    "MINTED {imported.button.root.color.ghost} = #050a0f — machine-named from a resolved value — rename against your real tokens (provisional); bound at: root color (variant=ghost)",
+    "MINTED {imported.button.root.color.primary} = #fcfeff — machine-named from a resolved value — rename against your real tokens (provisional); bound at: root color (variant=primary)",
+    "MINTED {imported.button.root.font-size.small} = 14px — machine-named from a resolved value — rename against your real tokens (provisional); bound at: root font-size (size=small)",
+    "MINTED {imported.button.root.font-size.medium} = 16px — machine-named from a resolved value — rename against your real tokens (provisional); bound at: root font-size (size=medium)",
+    "MINTED {imported.button.root.font-size.large} = 16px — machine-named from a resolved value — rename against your real tokens (provisional); bound at: root font-size (size=large)",
+    "MINTED {imported.button.root.font-weight} = 600 — machine-named from a resolved value — rename against your real tokens (provisional); bound at: root font-weight",
+    "MINTED {imported.button.root.line-height.small} = 16px — machine-named from a resolved value — rename against your real tokens (provisional); bound at: root line-height (size=small)",
+    "MINTED {imported.button.root.line-height.medium} = 20px — machine-named from a resolved value — rename against your real tokens (provisional); bound at: root line-height (size=medium)",
+    "MINTED {imported.button.root.line-height.large} = 20px — machine-named from a resolved value — rename against your real tokens (provisional); bound at: root line-height (size=large)",
+    "MINTED {imported.button.root.min-height.small} = 32px — machine-named from a resolved value — rename against your real tokens (provisional); bound at: root min-height (size=small)",
+    "MINTED {imported.button.root.min-height.medium} = 40px — machine-named from a resolved value — rename against your real tokens (provisional); bound at: root min-height (size=medium)",
+    "MINTED {imported.button.root.min-height.large} = 48px — machine-named from a resolved value — rename against your real tokens (provisional); bound at: root min-height (size=large)",
+    "MINTED {imported.button.root.hover.background-color.surface} = #dfe3eb — machine-named from a resolved value — rename against your real tokens (provisional); bound at: root :hover background-color (variant=surface)",
+    "MINTED {imported.button.root.hover.background-color.danger} = #7e0419 — machine-named from a resolved value — rename against your real tokens (provisional); bound at: root :hover background-color (variant=danger)",
+    "MINTED {imported.button.root.hover.background-color.ghost} = #f5f7fa — machine-named from a resolved value — rename against your real tokens (provisional); bound at: root :hover background-color (variant=ghost)",
+    "MINTED {imported.button.root.hover.background-color.primary} = #003e81 — machine-named from a resolved value — rename against your real tokens (provisional); bound at: root :hover background-color (variant=primary)",
+    "MINTED {imported.button.root.disabled.background-color.ghost} = transparent — machine-named from a resolved value — rename against your real tokens (provisional); bound at: root :disabled background-color (variant=ghost)",
+    "MINTED {imported.button.root.disabled.background-color.primary} = #dfe3eb — machine-named from a resolved value — rename against your real tokens (provisional); bound at: root :disabled background-color (variant=primary)",
+    "MINTED {imported.button.root.disabled.background-color.surface} = #dfe3eb — machine-named from a resolved value — rename against your real tokens (provisional); bound at: root :disabled background-color (variant=surface)",
+    "MINTED {imported.button.root.disabled.background-color.danger} = #dfe3eb — machine-named from a resolved value — rename against your real tokens (provisional); bound at: root :disabled background-color (variant=danger)",
+    "MINTED {imported.button.root.disabled.color} = #738094 — machine-named from a resolved value — rename against your real tokens (provisional); bound at: root :disabled color"
+  ],
+  "unbound": [],
+  "minted": {
+    "count": 33,
+    "entries": [
+      {
+        "ref": "{imported.button.root.gap}",
+        "value": "0.5rem",
+        "usageSites": [
+          "root gap"
+        ]
+      },
+      {
+        "ref": "{imported.button.root.padding-block}",
+        "value": "0.5rem",
+        "usageSites": [
+          "root padding-block"
+        ]
+      },
+      {
+        "ref": "{imported.button.root.padding-inline.small}",
+        "value": "0.75rem",
+        "usageSites": [
+          "root padding-inline (size=small)"
+        ]
+      },
+      {
+        "ref": "{imported.button.root.padding-inline.medium}",
+        "value": "1rem",
+        "usageSites": [
+          "root padding-inline (size=medium)"
+        ]
+      },
+      {
+        "ref": "{imported.button.root.padding-inline.large}",
+        "value": "1rem",
+        "usageSites": [
+          "root padding-inline (size=large)"
+        ]
+      },
+      {
+        "ref": "{imported.button.root.border-radius}",
+        "value": "8px",
+        "usageSites": [
+          "root border-radius"
+        ]
+      },
+      {
+        "ref": "{imported.button.root.background-color.surface}",
+        "value": "#f5f7fa",
+        "usageSites": [
+          "root background-color (variant=surface)"
+        ]
+      },
+      {
+        "ref": "{imported.button.root.background-color.danger}",
+        "value": "#b51833",
+        "usageSites": [
+          "root background-color (variant=danger)"
+        ]
+      },
+      {
+        "ref": "{imported.button.root.background-color.ghost}",
+        "value": "transparent",
+        "usageSites": [
+          "root background-color (variant=ghost)"
+        ]
+      },
+      {
+        "ref": "{imported.button.root.background-color.primary}",
+        "value": "#0e61ba",
+        "usageSites": [
+          "root background-color (variant=primary)"
+        ]
+      },
+      {
+        "ref": "{imported.button.root.color.surface}",
+        "value": "#050a0f",
+        "usageSites": [
+          "root color (variant=surface)"
+        ]
+      },
+      {
+        "ref": "{imported.button.root.color.danger}",
+        "value": "#fcfeff",
+        "usageSites": [
+          "root color (variant=danger)"
+        ]
+      },
+      {
+        "ref": "{imported.button.root.color.ghost}",
+        "value": "#050a0f",
+        "usageSites": [
+          "root color (variant=ghost)"
+        ]
+      },
+      {
+        "ref": "{imported.button.root.color.primary}",
+        "value": "#fcfeff",
+        "usageSites": [
+          "root color (variant=primary)"
+        ]
+      },
+      {
+        "ref": "{imported.button.root.font-size.small}",
+        "value": "14px",
+        "usageSites": [
+          "root font-size (size=small)"
+        ]
+      },
+      {
+        "ref": "{imported.button.root.font-size.medium}",
+        "value": "16px",
+        "usageSites": [
+          "root font-size (size=medium)"
+        ]
+      },
+      {
+        "ref": "{imported.button.root.font-size.large}",
+        "value": "16px",
+        "usageSites": [
+          "root font-size (size=large)"
+        ]
+      },
+      {
+        "ref": "{imported.button.root.font-weight}",
+        "value": "600",
+        "usageSites": [
+          "root font-weight"
+        ]
+      },
+      {
+        "ref": "{imported.button.root.line-height.small}",
+        "value": "16px",
+        "usageSites": [
+          "root line-height (size=small)"
+        ]
+      },
+      {
+        "ref": "{imported.button.root.line-height.medium}",
+        "value": "20px",
+        "usageSites": [
+          "root line-height (size=medium)"
+        ]
+      },
+      {
+        "ref": "{imported.button.root.line-height.large}",
+        "value": "20px",
+        "usageSites": [
+          "root line-height (size=large)"
+        ]
+      },
+      {
+        "ref": "{imported.button.root.min-height.small}",
+        "value": "32px",
+        "usageSites": [
+          "root min-height (size=small)"
+        ]
+      },
+      {
+        "ref": "{imported.button.root.min-height.medium}",
+        "value": "40px",
+        "usageSites": [
+          "root min-height (size=medium)"
+        ]
+      },
+      {
+        "ref": "{imported.button.root.min-height.large}",
+        "value": "48px",
+        "usageSites": [
+          "root min-height (size=large)"
+        ]
+      },
+      {
+        "ref": "{imported.button.root.hover.background-color.surface}",
+        "value": "#dfe3eb",
+        "usageSites": [
+          "root :hover background-color (variant=surface)"
+        ]
+      },
+      {
+        "ref": "{imported.button.root.hover.background-color.danger}",
+        "value": "#7e0419",
+        "usageSites": [
+          "root :hover background-color (variant=danger)"
+        ]
+      },
+      {
+        "ref": "{imported.button.root.hover.background-color.ghost}",
+        "value": "#f5f7fa",
+        "usageSites": [
+          "root :hover background-color (variant=ghost)"
+        ]
+      },
+      {
+        "ref": "{imported.button.root.hover.background-color.primary}",
+        "value": "#003e81",
+        "usageSites": [
+          "root :hover background-color (variant=primary)"
+        ]
+      },
+      {
+        "ref": "{imported.button.root.disabled.background-color.ghost}",
+        "value": "transparent",
+        "usageSites": [
+          "root :disabled background-color (variant=ghost)"
+        ]
+      },
+      {
+        "ref": "{imported.button.root.disabled.background-color.primary}",
+        "value": "#dfe3eb",
+        "usageSites": [
+          "root :disabled background-color (variant=primary)"
+        ]
+      },
+      {
+        "ref": "{imported.button.root.disabled.background-color.surface}",
+        "value": "#dfe3eb",
+        "usageSites": [
+          "root :disabled background-color (variant=surface)"
+        ]
+      },
+      {
+        "ref": "{imported.button.root.disabled.background-color.danger}",
+        "value": "#dfe3eb",
+        "usageSites": [
+          "root :disabled background-color (variant=danger)"
+        ]
+      },
+      {
+        "ref": "{imported.button.root.disabled.color}",
+        "value": "#738094",
+        "usageSites": [
+          "root :disabled color"
+        ]
+      }
+    ]
+  }
+}

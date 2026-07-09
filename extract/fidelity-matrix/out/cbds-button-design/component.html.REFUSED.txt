@@ -1,0 +1,5 @@
+Refused — 4 contract violation(s):
+  - ds.button-brand-primary: part "Icon" references component "ds.icon" which has no contract in scope
+  - ds.button-brand-primary: part "icon2" references component "ds.icon" which has no contract in scope
+  - ds.button-brand-primary: contract name "Button-Brand Primary" must be PascalCase — it becomes the exported component and its file names
+  - ds.button-brand-primary: prop "✏️text" code binding "✏️text" is not a legal camelCase identifier

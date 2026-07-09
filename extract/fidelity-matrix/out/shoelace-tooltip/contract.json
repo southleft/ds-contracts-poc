@@ -1,0 +1,131 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "ds.tooltip",
+  "name": "Tooltip",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "PROPOSED contract extracted from the design canvas (extract/figma dump v1) — API, anatomy, and token bindings inverted from the drawn structure. Semantics, a11y, events, and slot accepts are not canvas-recoverable; review before adoption.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "placement",
+      "type": {
+        "enum": [
+          "left",
+          "topleft",
+          "bottomleft",
+          "bottom",
+          "top",
+          "topright",
+          "bottomright",
+          "right"
+        ]
+      },
+      "default": "left",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "placement",
+          "values": {
+            "left": "left",
+            "topleft": "topLeft",
+            "bottomleft": "bottomLeft",
+            "bottom": "bottom",
+            "top": "top",
+            "topright": "topRight",
+            "bottomright": "bottomRight",
+            "right": "right"
+          }
+        },
+        "code": {
+          "prop": "placement"
+        }
+      }
+    },
+    {
+      "name": "text",
+      "type": "text",
+      "default": "Tooltip text",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "text"
+        },
+        "code": {
+          "prop": "text"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "flex",
+        "direction": "row",
+        "align": "center"
+      },
+      "parts": {
+        "Body": {
+          "layout": {
+            "direction": "column"
+          },
+          "tokens": {
+            "border-radius": "{imported.tooltip.body.border-radius}"
+          },
+          "parts": {
+            "Content": {
+              "layout": {
+                "direction": "row"
+              },
+              "tokens": {
+                "background-color": "{imported.tooltip.body-content.background-color}",
+                "padding-inline": "{imported.tooltip.body-content.padding-inline}",
+                "padding-block": "{imported.tooltip.body-content.padding-block}",
+                "border-radius": "{imported.tooltip.body-content.border-radius}"
+              },
+              "parts": {
+                "tooltipText": {
+                  "tokens": {
+                    "color": "{imported.tooltip.body-content-tooltip-text.color}",
+                    "font-size": "{imported.tooltip.body-content-tooltip-text.font-size}"
+                  },
+                  "content": {
+                    "prop": "text"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "arrowWrapper": {
+          "layout": {
+            "direction": "column",
+            "align": "center",
+            "justify": "center"
+          },
+          "parts": {
+            "Arrow": {
+              "tokens": {
+                "background-color": "{imported.tooltip.arrow-wrapper-arrow.background-color}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": "nl9P0h3brratHTdncjzKIr",
+      "componentSetKey": "ec60770103b254646e26257d2b3e82d88d6cdac5",
+      "nodeId": "37:142"
+    },
+    "code": {
+      "importPath": "src/components/Tooltip",
+      "export": "Tooltip"
+    }
+  }
+}

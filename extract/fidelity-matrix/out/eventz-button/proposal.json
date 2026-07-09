@@ -1,0 +1,292 @@
+{
+  "notes": [
+    "semantics.element defaulted to \"div\" — element/role/ARIA are not drawn on the canvas; set the real host element",
+    "Button:root: 4/24 variant(s) wrap an instance of the set's own base component \"Button\" — flattened: the instance's styling and captured componentProperties speak for those variants (no self-referencing component ref; base component internals not captured — dump v1 stops at instances; anatomy reflects the wrapper)",
+    "Button:root/startIcon: absent only in base-instance-flattened variant(s), where the base component's internals are not captured — kept unconditional",
+    "Button:root/startIcon: INSTANCE_SWAP-bound instance without a dedicated wrapper frame — slot proposed without layout, review",
+    "Button:root/startIcon: slot \"startIcon\" holds a \"play\" instance as design-time content — defaultContent not proposed (dump v1 does not carry its configuration), review",
+    "Button:root/startIcon: visibility bound to BOOLEAN \"hasStartIcon\" — proposed as prop `hasStartIcon` (default not recoverable from dump v1, review)",
+    "Button:root/Label: absent only in base-instance-flattened variant(s), where the base component's internals are not captured — kept unconditional",
+    "Button:root/Label: rides text style \"body/sm\" which is not a token-derived style — typography not proposed",
+    "Button:root/endIcon: absent only in base-instance-flattened variant(s), where the base component's internals are not captured — kept unconditional",
+    "Button:root/endIcon: INSTANCE_SWAP-bound instance without a dedicated wrapper frame — slot proposed without layout, review",
+    "Button:root/endIcon: slot \"endIcon\" holds a \"pause\" instance as design-time content — defaultContent not proposed (dump v1 does not carry its configuration), review",
+    "Button:root/endIcon: visibility bound to BOOLEAN \"hasEndIcon\" — proposed as prop `hasEndIcon` (default not recoverable from dump v1, review)",
+    "prop `hasEndIcon`: default true adopted from the base instance \"Button\" (BOOLEAN property \"hasEndIcon\")",
+    "prop `hasStartIcon`: default true adopted from the base instance \"Button\" (BOOLEAN property \"hasStartIcon\")",
+    "base instance \"Button\": property \"variant\" is one of the set's own variant axes (pinned to primary, knockout, secondary, bare in the flattened variant(s)) — not promoted",
+    "base instance \"Button\": property \"state\" is one of the set's own variant axes (pinned to default in the flattened variant(s)) — not promoted",
+    "base instance \"Button\": property \"isDisabled\" is one of the set's own variant axes (pinned to false in the flattened variant(s)) — not promoted",
+    "prop `isDisabled`: true/false variant axis proposed as a boolean (extract/reconcile.ts bool⇄axis rule)",
+    "MINTED {imported.button.root.background-color.primary.default} = #3d7a95 — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Button:root background-color (variant=primary, state=default)",
+    "MINTED {imported.button.root.background-color.knockout.default} = #f7f8f7 — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Button:root background-color (variant=knockout, state=default)",
+    "MINTED {imported.button.root.background-color.secondary.default} = #000002 — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Button:root background-color (variant=secondary, state=default)",
+    "MINTED {imported.button.root.background-color.bare.default} = #000002 — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Button:root background-color (variant=bare, state=default)",
+    "MINTED {imported.button.root.background-color.primary.hover} = #2d6079 — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Button:root background-color (variant=primary, state=hover)",
+    "MINTED {imported.button.root.background-color.knockout.hover} = #c6c7c6 — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Button:root background-color (variant=knockout, state=hover)",
+    "MINTED {imported.button.root.background-color.secondary.hover} = #000002 — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Button:root background-color (variant=secondary, state=hover)",
+    "MINTED {imported.button.root.background-color.bare.hover} = #000002 — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Button:root background-color (variant=bare, state=hover)",
+    "MINTED {imported.button.root.background-color.primary.active} = #2d6079 — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Button:root background-color (variant=primary, state=active)",
+    "MINTED {imported.button.root.background-color.knockout.active} = #f7f8f7 — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Button:root background-color (variant=knockout, state=active)",
+    "MINTED {imported.button.root.background-color.secondary.active} = #000002 — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Button:root background-color (variant=secondary, state=active)",
+    "MINTED {imported.button.root.background-color.bare.active} = #000002 — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Button:root background-color (variant=bare, state=active)",
+    "MINTED {imported.button.root.background-color.primary.focus} = #3d7a95 — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Button:root background-color (variant=primary, state=focus)",
+    "MINTED {imported.button.root.background-color.knockout.focus} = #f7f8f7 — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Button:root background-color (variant=knockout, state=focus)",
+    "MINTED {imported.button.root.background-color.secondary.focus} = #000002 — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Button:root background-color (variant=secondary, state=focus)",
+    "MINTED {imported.button.root.background-color.bare.focus} = #000002 — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Button:root background-color (variant=bare, state=focus)",
+    "MINTED {imported.button.root.gap} = 4px — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Button:root gap",
+    "MINTED {imported.button.root.padding-inline} = 12px — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Button:root padding-inline",
+    "MINTED {imported.button.root.padding-block} = 6px — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Button:root padding-block",
+    "MINTED {imported.button.root.border-radius} = 8px — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Button:root border-radius",
+    "MINTED {imported.button.root.border-width.primary} = 1px — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Button:root border-width (variant=primary)",
+    "MINTED {imported.button.root.border-width.knockout} = 0px — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Button:root border-width (variant=knockout)",
+    "MINTED {imported.button.root.border-width.secondary} = 1px — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Button:root border-width (variant=secondary)",
+    "MINTED {imported.button.root.border-width.bare} = 0px — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Button:root border-width (variant=bare)",
+    "MINTED {imported.button.focus-ring.border-color} = #2d6079 — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Button:root/Focus ring border-color",
+    "MINTED {imported.button.focus-ring.border-radius} = 11px — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Button:root/Focus ring border-radius",
+    "MINTED {imported.button.focus-ring.border-width} = 2px — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Button:root/Focus ring border-width",
+    "MINTED {imported.button.label.color.primary} = #ffffff — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Button:root/Label color (variant=primary)",
+    "MINTED {imported.button.label.color.knockout} = #252729 — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Button:root/Label color (variant=knockout)",
+    "MINTED {imported.button.label.color.secondary} = #252729 — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Button:root/Label color (variant=secondary)",
+    "MINTED {imported.button.label.color.bare} = #252729 — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Button:root/Label color (variant=bare)",
+    "MINTED {imported.button.label.font-size} = 14px — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Button:root/Label font-size",
+    "UNBOUND Button:root stroke = #000002 — no token invented; nearest tokens by value: (none found)"
+  ],
+  "unbound": [
+    {
+      "nodePath": "Button:root",
+      "property": "stroke",
+      "value": "#000002",
+      "suggestions": []
+    }
+  ],
+  "minted": {
+    "count": 32,
+    "entries": [
+      {
+        "ref": "{imported.button.root.background-color.primary.default}",
+        "value": "#3d7a95",
+        "usageSites": [
+          "Button:root background-color (variant=primary, state=default)"
+        ]
+      },
+      {
+        "ref": "{imported.button.root.background-color.knockout.default}",
+        "value": "#f7f8f7",
+        "usageSites": [
+          "Button:root background-color (variant=knockout, state=default)"
+        ]
+      },
+      {
+        "ref": "{imported.button.root.background-color.secondary.default}",
+        "value": "#000002",
+        "usageSites": [
+          "Button:root background-color (variant=secondary, state=default)"
+        ]
+      },
+      {
+        "ref": "{imported.button.root.background-color.bare.default}",
+        "value": "#000002",
+        "usageSites": [
+          "Button:root background-color (variant=bare, state=default)"
+        ]
+      },
+      {
+        "ref": "{imported.button.root.background-color.primary.hover}",
+        "value": "#2d6079",
+        "usageSites": [
+          "Button:root background-color (variant=primary, state=hover)"
+        ]
+      },
+      {
+        "ref": "{imported.button.root.background-color.knockout.hover}",
+        "value": "#c6c7c6",
+        "usageSites": [
+          "Button:root background-color (variant=knockout, state=hover)"
+        ]
+      },
+      {
+        "ref": "{imported.button.root.background-color.secondary.hover}",
+        "value": "#000002",
+        "usageSites": [
+          "Button:root background-color (variant=secondary, state=hover)"
+        ]
+      },
+      {
+        "ref": "{imported.button.root.background-color.bare.hover}",
+        "value": "#000002",
+        "usageSites": [
+          "Button:root background-color (variant=bare, state=hover)"
+        ]
+      },
+      {
+        "ref": "{imported.button.root.background-color.primary.active}",
+        "value": "#2d6079",
+        "usageSites": [
+          "Button:root background-color (variant=primary, state=active)"
+        ]
+      },
+      {
+        "ref": "{imported.button.root.background-color.knockout.active}",
+        "value": "#f7f8f7",
+        "usageSites": [
+          "Button:root background-color (variant=knockout, state=active)"
+        ]
+      },
+      {
+        "ref": "{imported.button.root.background-color.secondary.active}",
+        "value": "#000002",
+        "usageSites": [
+          "Button:root background-color (variant=secondary, state=active)"
+        ]
+      },
+      {
+        "ref": "{imported.button.root.background-color.bare.active}",
+        "value": "#000002",
+        "usageSites": [
+          "Button:root background-color (variant=bare, state=active)"
+        ]
+      },
+      {
+        "ref": "{imported.button.root.background-color.primary.focus}",
+        "value": "#3d7a95",
+        "usageSites": [
+          "Button:root background-color (variant=primary, state=focus)"
+        ]
+      },
+      {
+        "ref": "{imported.button.root.background-color.knockout.focus}",
+        "value": "#f7f8f7",
+        "usageSites": [
+          "Button:root background-color (variant=knockout, state=focus)"
+        ]
+      },
+      {
+        "ref": "{imported.button.root.background-color.secondary.focus}",
+        "value": "#000002",
+        "usageSites": [
+          "Button:root background-color (variant=secondary, state=focus)"
+        ]
+      },
+      {
+        "ref": "{imported.button.root.background-color.bare.focus}",
+        "value": "#000002",
+        "usageSites": [
+          "Button:root background-color (variant=bare, state=focus)"
+        ]
+      },
+      {
+        "ref": "{imported.button.root.gap}",
+        "value": "4px",
+        "usageSites": [
+          "Button:root gap"
+        ]
+      },
+      {
+        "ref": "{imported.button.root.padding-inline}",
+        "value": "12px",
+        "usageSites": [
+          "Button:root padding-inline"
+        ]
+      },
+      {
+        "ref": "{imported.button.root.padding-block}",
+        "value": "6px",
+        "usageSites": [
+          "Button:root padding-block"
+        ]
+      },
+      {
+        "ref": "{imported.button.root.border-radius}",
+        "value": "8px",
+        "usageSites": [
+          "Button:root border-radius"
+        ]
+      },
+      {
+        "ref": "{imported.button.root.border-width.primary}",
+        "value": "1px",
+        "usageSites": [
+          "Button:root border-width (variant=primary)"
+        ]
+      },
+      {
+        "ref": "{imported.button.root.border-width.knockout}",
+        "value": "0px",
+        "usageSites": [
+          "Button:root border-width (variant=knockout)"
+        ]
+      },
+      {
+        "ref": "{imported.button.root.border-width.secondary}",
+        "value": "1px",
+        "usageSites": [
+          "Button:root border-width (variant=secondary)"
+        ]
+      },
+      {
+        "ref": "{imported.button.root.border-width.bare}",
+        "value": "0px",
+        "usageSites": [
+          "Button:root border-width (variant=bare)"
+        ]
+      },
+      {
+        "ref": "{imported.button.focus-ring.border-color}",
+        "value": "#2d6079",
+        "usageSites": [
+          "Button:root/Focus ring border-color"
+        ]
+      },
+      {
+        "ref": "{imported.button.focus-ring.border-radius}",
+        "value": "11px",
+        "usageSites": [
+          "Button:root/Focus ring border-radius"
+        ]
+      },
+      {
+        "ref": "{imported.button.focus-ring.border-width}",
+        "value": "2px",
+        "usageSites": [
+          "Button:root/Focus ring border-width"
+        ]
+      },
+      {
+        "ref": "{imported.button.label.color.primary}",
+        "value": "#ffffff",
+        "usageSites": [
+          "Button:root/Label color (variant=primary)"
+        ]
+      },
+      {
+        "ref": "{imported.button.label.color.knockout}",
+        "value": "#252729",
+        "usageSites": [
+          "Button:root/Label color (variant=knockout)"
+        ]
+      },
+      {
+        "ref": "{imported.button.label.color.secondary}",
+        "value": "#252729",
+        "usageSites": [
+          "Button:root/Label color (variant=secondary)"
+        ]
+      },
+      {
+        "ref": "{imported.button.label.color.bare}",
+        "value": "#252729",
+        "usageSites": [
+          "Button:root/Label color (variant=bare)"
+        ]
+      },
+      {
+        "ref": "{imported.button.label.font-size}",
+        "value": "14px",
+        "usageSites": [
+          "Button:root/Label font-size"
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,154 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "ds.button-brand-primary",
+  "name": "Button-Brand Primary",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "PROPOSED contract extracted from the design canvas (extract/figma dump v1) — API, anatomy, and token bindings inverted from the drawn structure. Semantics, a11y, events, and slot accepts are not canvas-recoverable; review before adoption.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "size",
+      "type": {
+        "enum": [
+          "large",
+          "medium",
+          "small"
+        ]
+      },
+      "default": "large",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "size",
+          "values": {
+            "large": "large",
+            "medium": "medium",
+            "small": "small"
+          }
+        },
+        "code": {
+          "prop": "size"
+        }
+      }
+    },
+    {
+      "name": "state",
+      "type": {
+        "enum": [
+          "default",
+          "hover",
+          "focus",
+          "pressed",
+          "disabled"
+        ]
+      },
+      "default": "default",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "state",
+          "values": {
+            "default": "default",
+            "hover": "hover",
+            "focus": "focus",
+            "pressed": "pressed",
+            "disabled": "disabled"
+          }
+        },
+        "code": {
+          "prop": "state"
+        }
+      }
+    },
+    {
+      "name": "✏️text",
+      "type": "text",
+      "default": "Button",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "✏️text"
+        },
+        "code": {
+          "prop": "✏️text"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "tokens": {
+        "background-color": "{imported.button-brand-primary.root.background-color.{state}}",
+        "gap": "{imported.shared.size-8}",
+        "padding-inline": "{imported.button-brand-primary.root.padding-inline.{size}}",
+        "padding-block": "{imported.shared.size-8}",
+        "border-radius": "{imported.shared.size-8}"
+      },
+      "parts": {
+        "Icon": {
+          "component": {
+            "id": "ds.icon",
+            "props": {
+              "size": "large"
+            }
+          }
+        },
+        "Button": {
+          "tokens": {
+            "font-size": "{font.title.size}",
+            "font-weight": "{font.title.weight}",
+            "color": "{imported.button-brand-primary.button.color.{state}}"
+          },
+          "content": {
+            "prop": "✏️text"
+          }
+        },
+        "icon2": {
+          "component": {
+            "id": "ds.icon",
+            "props": {
+              "size": "large"
+            }
+          }
+        },
+        "Tooltip": {
+          "tokens": {
+            "color": "{imported.button-brand-primary.tooltip.color}",
+            "font-size": "{imported.button-brand-primary.tooltip.font-size}"
+          },
+          "text": "This action is currently unavailable",
+          "visibleWhen": {
+            "prop": "state",
+            "equals": "disabled"
+          }
+        },
+        "focusRing": {
+          "tokens": {
+            "border-color": "{imported.button-brand-primary.focus-ring.border-color}",
+            "border-radius": "{imported.button-brand-primary.focus-ring.border-radius}",
+            "border-width": "{imported.button-brand-primary.focus-ring.border-width}"
+          },
+          "visibleWhen": {
+            "prop": "state",
+            "equals": "focus"
+          }
+        }
+      }
+    }
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": "WofZT8xaxXuc2Q6Je9S4XE",
+      "componentSetKey": "7357ff93090290cc02b380fbd2b7c5e3cbb2c27c",
+      "nodeId": "258:1838"
+    },
+    "code": {
+      "importPath": "src/components/Button-Brand Primary",
+      "export": "Button-Brand Primary"
+    }
+  }
+}

@@ -1,0 +1,157 @@
+{
+  "htmlOk": false,
+  "script": {
+    "bytes": 30843,
+    "mintedPreamble": false,
+    "syntaxOk": true
+  },
+  "compiled": {
+    "setName": "Button group",
+    "variants": [
+      {
+        "name": "position=left, size=large, type=default",
+        "rootFill": null,
+        "rootStroke": null,
+        "bindings": {}
+      },
+      {
+        "name": "position=left, size=large, type=primary",
+        "rootFill": null,
+        "rootStroke": null,
+        "bindings": {}
+      },
+      {
+        "name": "position=left, size=small, type=default",
+        "rootFill": null,
+        "rootStroke": null,
+        "bindings": {}
+      },
+      {
+        "name": "position=left, size=small, type=primary",
+        "rootFill": null,
+        "rootStroke": null,
+        "bindings": {}
+      },
+      {
+        "name": "position=left, size=medium, type=default",
+        "rootFill": null,
+        "rootStroke": null,
+        "bindings": {}
+      },
+      {
+        "name": "position=left, size=medium, type=primary",
+        "rootFill": null,
+        "rootStroke": null,
+        "bindings": {}
+      },
+      {
+        "name": "position=center, size=large, type=default",
+        "rootFill": null,
+        "rootStroke": null,
+        "bindings": {}
+      },
+      {
+        "name": "position=center, size=large, type=primary",
+        "rootFill": null,
+        "rootStroke": null,
+        "bindings": {}
+      },
+      {
+        "name": "position=center, size=small, type=default",
+        "rootFill": null,
+        "rootStroke": null,
+        "bindings": {}
+      },
+      {
+        "name": "position=center, size=small, type=primary",
+        "rootFill": null,
+        "rootStroke": null,
+        "bindings": {}
+      },
+      {
+        "name": "position=center, size=medium, type=default",
+        "rootFill": null,
+        "rootStroke": null,
+        "bindings": {}
+      },
+      {
+        "name": "position=center, size=medium, type=primary",
+        "rootFill": null,
+        "rootStroke": null,
+        "bindings": {}
+      },
+      {
+        "name": "position=right, size=large, type=default",
+        "rootFill": null,
+        "rootStroke": null,
+        "bindings": {}
+      },
+      {
+        "name": "position=right, size=large, type=primary",
+        "rootFill": null,
+        "rootStroke": null,
+        "bindings": {}
+      },
+      {
+        "name": "position=right, size=small, type=default",
+        "rootFill": null,
+        "rootStroke": null,
+        "bindings": {}
+      },
+      {
+        "name": "position=right, size=small, type=primary",
+        "rootFill": null,
+        "rootStroke": null,
+        "bindings": {}
+      },
+      {
+        "name": "position=right, size=medium, type=default",
+        "rootFill": null,
+        "rootStroke": null,
+        "bindings": {}
+      },
+      {
+        "name": "position=right, size=medium, type=primary",
+        "rootFill": null,
+        "rootStroke": null,
+        "bindings": {}
+      },
+      {
+        "name": "position=position4, size=large, type=default",
+        "rootFill": null,
+        "rootStroke": null,
+        "bindings": {}
+      },
+      {
+        "name": "position=position4, size=large, type=primary",
+        "rootFill": null,
+        "rootStroke": null,
+        "bindings": {}
+      },
+      {
+        "name": "position=position4, size=small, type=default",
+        "rootFill": null,
+        "rootStroke": null,
+        "bindings": {}
+      },
+      {
+        "name": "position=position4, size=small, type=primary",
+        "rootFill": null,
+        "rootStroke": null,
+        "bindings": {}
+      },
+      {
+        "name": "position=position4, size=medium, type=default",
+        "rootFill": null,
+        "rootStroke": null,
+        "bindings": {}
+      },
+      {
+        "name": "position=position4, size=medium, type=primary",
+        "rootFill": null,
+        "rootStroke": null,
+        "bindings": {}
+      }
+    ]
+  }
+}

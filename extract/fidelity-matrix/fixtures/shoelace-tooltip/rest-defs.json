@@ -1,0 +1,44 @@
+{
+  "name": "Shoelace interactive UI library (Community)",
+  "nodes": {
+    "37:142": {
+      "id": "37:142",
+      "name": "Tooltip",
+      "type": "COMPONENT_SET",
+      "componentPropertyDefinitions": {
+        "text#37:15": {
+          "type": "TEXT",
+          "defaultValue": "Tooltip text"
+        },
+        "Text#507:175": {
+          "type": "TEXT",
+          "defaultValue": "Distinctively monetize cost effective networks for cross-media bandwidth"
+        },
+        "placement": {
+          "type": "VARIANT",
+          "defaultValue": "left",
+          "variantOptions": [
+            "bottom",
+            "bottomLeft",
+            "bottomRight",
+            "left",
+            "right",
+            "topLeft",
+            "topRight",
+            "top"
+          ]
+        }
+      },
+      "variantNames": [
+        "placement=left",
+        "placement=topLeft",
+        "placement=bottomLeft",
+        "placement=bottom",
+        "placement=top",
+        "placement=topRight",
+        "placement=bottomRight",
+        "placement=right"
+      ]
+    }
+  }
+}

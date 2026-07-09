@@ -1,0 +1,1026 @@
+{
+  "_provenance": {
+    "fileKey": "WofZT8xaxXuc2Q6Je9S4XE",
+    "extractedAt": "2026-07-09",
+    "note": "Node-tree dump mapped from the Figma REST API (extract/figma/rest/map.ts, dump v1.1) for design→contract proposal."
+  },
+  "Button-Brand Primary": {
+    "setName": "Button-Brand Primary",
+    "type": "COMPONENT_SET",
+    "nodeId": "258:1838",
+    "key": "7357ff93090290cc02b380fbd2b7c5e3cbb2c27c",
+    "variants": [
+      {
+        "name": "size=large, state=default",
+        "type": "COMPONENT",
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "CENTER",
+          "counter": "CENTER",
+          "spacing": 8,
+          "padding": [
+            8,
+            16,
+            8,
+            16
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "FIXED"
+        },
+        "cornerRadius": 8,
+        "fill": {
+          "hex": "0e61ba"
+        },
+        "children": [
+          {
+            "name": "Icon",
+            "type": "INSTANCE",
+            "hidden": true,
+            "propRefs": {
+              "visible": "↪️icon-left"
+            },
+            "instanceOf": "Icon",
+            "componentProperties": {
+              "size": "large"
+            }
+          },
+          {
+            "name": "Button",
+            "type": "TEXT",
+            "text": {
+              "characters": "Button",
+              "fontSize": 16,
+              "fontStyle": "Semi Bold"
+            },
+            "fill": {
+              "hex": "fcfeff"
+            },
+            "propRefs": {
+              "characters": "✏️text"
+            }
+          },
+          {
+            "name": "Icon",
+            "type": "INSTANCE",
+            "hidden": true,
+            "propRefs": {
+              "visible": "↪️icon-right"
+            },
+            "instanceOf": "Icon",
+            "componentProperties": {
+              "size": "large"
+            }
+          }
+        ]
+      },
+      {
+        "name": "size=medium, state=default",
+        "type": "COMPONENT",
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "CENTER",
+          "counter": "CENTER",
+          "spacing": 8,
+          "padding": [
+            8,
+            16,
+            8,
+            16
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "FIXED"
+        },
+        "cornerRadius": 8,
+        "fill": {
+          "hex": "0e61ba"
+        },
+        "children": [
+          {
+            "name": "Icon",
+            "type": "INSTANCE",
+            "hidden": true,
+            "propRefs": {
+              "visible": "↪️icon-left"
+            },
+            "instanceOf": "Icon",
+            "componentProperties": {
+              "size": "large"
+            }
+          },
+          {
+            "name": "Button",
+            "type": "TEXT",
+            "text": {
+              "characters": "Button",
+              "fontSize": 16,
+              "fontStyle": "Semi Bold"
+            },
+            "fill": {
+              "hex": "fcfeff"
+            },
+            "propRefs": {
+              "characters": "✏️text"
+            }
+          },
+          {
+            "name": "Icon",
+            "type": "INSTANCE",
+            "hidden": true,
+            "propRefs": {
+              "visible": "↪️icon-right"
+            },
+            "instanceOf": "Icon",
+            "componentProperties": {
+              "size": "large"
+            }
+          }
+        ]
+      },
+      {
+        "name": "size=small, state=default",
+        "type": "COMPONENT",
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "CENTER",
+          "counter": "CENTER",
+          "spacing": 8,
+          "padding": [
+            8,
+            12,
+            8,
+            12
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "FIXED"
+        },
+        "cornerRadius": 8,
+        "fill": {
+          "hex": "0e61ba"
+        },
+        "children": [
+          {
+            "name": "Icon",
+            "type": "INSTANCE",
+            "hidden": true,
+            "propRefs": {
+              "visible": "↪️icon-left"
+            },
+            "instanceOf": "Icon",
+            "componentProperties": {
+              "size": "small"
+            }
+          },
+          {
+            "name": "Button",
+            "type": "TEXT",
+            "text": {
+              "characters": "Button",
+              "fontSize": 14,
+              "fontStyle": "Semi Bold"
+            },
+            "fill": {
+              "hex": "fcfeff"
+            },
+            "propRefs": {
+              "characters": "✏️text"
+            }
+          },
+          {
+            "name": "Icon",
+            "type": "INSTANCE",
+            "hidden": true,
+            "propRefs": {
+              "visible": "↪️icon-right"
+            },
+            "instanceOf": "Icon",
+            "componentProperties": {
+              "size": "small"
+            }
+          }
+        ]
+      },
+      {
+        "name": "size=large, state=hover",
+        "type": "COMPONENT",
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "CENTER",
+          "counter": "CENTER",
+          "spacing": 8,
+          "padding": [
+            8,
+            16,
+            8,
+            16
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "FIXED"
+        },
+        "cornerRadius": 8,
+        "fill": {
+          "hex": "003e81"
+        },
+        "children": [
+          {
+            "name": "Icon",
+            "type": "INSTANCE",
+            "hidden": true,
+            "propRefs": {
+              "visible": "↪️icon-left"
+            },
+            "instanceOf": "Icon",
+            "componentProperties": {
+              "size": "large"
+            }
+          },
+          {
+            "name": "Button",
+            "type": "TEXT",
+            "text": {
+              "characters": "Button",
+              "fontSize": 16,
+              "fontStyle": "Semi Bold"
+            },
+            "fill": {
+              "hex": "fcfeff"
+            },
+            "propRefs": {
+              "characters": "✏️text"
+            }
+          },
+          {
+            "name": "Icon",
+            "type": "INSTANCE",
+            "hidden": true,
+            "propRefs": {
+              "visible": "↪️icon-right"
+            },
+            "instanceOf": "Icon",
+            "componentProperties": {
+              "size": "large"
+            }
+          }
+        ]
+      },
+      {
+        "name": "size=medium, state=hover",
+        "type": "COMPONENT",
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "CENTER",
+          "counter": "CENTER",
+          "spacing": 8,
+          "padding": [
+            8,
+            16,
+            8,
+            16
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "FIXED"
+        },
+        "cornerRadius": 8,
+        "fill": {
+          "hex": "003e81"
+        },
+        "children": [
+          {
+            "name": "Icon",
+            "type": "INSTANCE",
+            "hidden": true,
+            "propRefs": {
+              "visible": "↪️icon-left"
+            },
+            "instanceOf": "Icon",
+            "componentProperties": {
+              "size": "large"
+            }
+          },
+          {
+            "name": "Button",
+            "type": "TEXT",
+            "text": {
+              "characters": "Button",
+              "fontSize": 16,
+              "fontStyle": "Semi Bold"
+            },
+            "fill": {
+              "hex": "fcfeff"
+            },
+            "propRefs": {
+              "characters": "✏️text"
+            }
+          },
+          {
+            "name": "Icon",
+            "type": "INSTANCE",
+            "hidden": true,
+            "propRefs": {
+              "visible": "↪️icon-right"
+            },
+            "instanceOf": "Icon",
+            "componentProperties": {
+              "size": "large"
+            }
+          }
+        ]
+      },
+      {
+        "name": "size=small, state=hover",
+        "type": "COMPONENT",
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "CENTER",
+          "counter": "CENTER",
+          "spacing": 8,
+          "padding": [
+            8,
+            12,
+            8,
+            12
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "FIXED"
+        },
+        "cornerRadius": 8,
+        "fill": {
+          "hex": "003e81"
+        },
+        "children": [
+          {
+            "name": "Icon",
+            "type": "INSTANCE",
+            "hidden": true,
+            "propRefs": {
+              "visible": "↪️icon-left"
+            },
+            "instanceOf": "Icon",
+            "componentProperties": {
+              "size": "small"
+            }
+          },
+          {
+            "name": "Button",
+            "type": "TEXT",
+            "text": {
+              "characters": "Button",
+              "fontSize": 14,
+              "fontStyle": "Semi Bold"
+            },
+            "fill": {
+              "hex": "fcfeff"
+            },
+            "propRefs": {
+              "characters": "✏️text"
+            }
+          },
+          {
+            "name": "Icon",
+            "type": "INSTANCE",
+            "hidden": true,
+            "propRefs": {
+              "visible": "↪️icon-right"
+            },
+            "instanceOf": "Icon",
+            "componentProperties": {
+              "size": "small"
+            }
+          }
+        ]
+      },
+      {
+        "name": "size=large, state=focus",
+        "type": "COMPONENT",
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "CENTER",
+          "counter": "CENTER",
+          "spacing": 8,
+          "padding": [
+            8,
+            16,
+            8,
+            16
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "FIXED"
+        },
+        "cornerRadius": 8,
+        "fill": {
+          "hex": "0e61ba"
+        },
+        "children": [
+          {
+            "name": "Icon",
+            "type": "INSTANCE",
+            "hidden": true,
+            "propRefs": {
+              "visible": "↪️icon-left"
+            },
+            "instanceOf": "Icon",
+            "componentProperties": {
+              "size": "large"
+            }
+          },
+          {
+            "name": "Button",
+            "type": "TEXT",
+            "text": {
+              "characters": "Button",
+              "fontSize": 16,
+              "fontStyle": "Semi Bold"
+            },
+            "fill": {
+              "hex": "fcfeff"
+            },
+            "propRefs": {
+              "characters": "✏️text"
+            }
+          },
+          {
+            "name": "Icon",
+            "type": "INSTANCE",
+            "hidden": true,
+            "propRefs": {
+              "visible": "↪️icon-right"
+            },
+            "instanceOf": "Icon",
+            "componentProperties": {
+              "size": "large"
+            }
+          },
+          {
+            "name": "Focus ring",
+            "type": "RECTANGLE",
+            "cornerRadius": 12,
+            "stroke": {
+              "hex": "0e61ba"
+            },
+            "strokeWeight": 2
+          }
+        ]
+      },
+      {
+        "name": "size=medium, state=focus",
+        "type": "COMPONENT",
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "CENTER",
+          "counter": "CENTER",
+          "spacing": 8,
+          "padding": [
+            8,
+            16,
+            8,
+            16
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "FIXED"
+        },
+        "cornerRadius": 8,
+        "fill": {
+          "hex": "0e61ba"
+        },
+        "children": [
+          {
+            "name": "Icon",
+            "type": "INSTANCE",
+            "hidden": true,
+            "propRefs": {
+              "visible": "↪️icon-left"
+            },
+            "instanceOf": "Icon",
+            "componentProperties": {
+              "size": "large"
+            }
+          },
+          {
+            "name": "Button",
+            "type": "TEXT",
+            "text": {
+              "characters": "Button",
+              "fontSize": 16,
+              "fontStyle": "Semi Bold"
+            },
+            "fill": {
+              "hex": "fcfeff"
+            },
+            "propRefs": {
+              "characters": "✏️text"
+            }
+          },
+          {
+            "name": "Icon",
+            "type": "INSTANCE",
+            "hidden": true,
+            "propRefs": {
+              "visible": "↪️icon-right"
+            },
+            "instanceOf": "Icon",
+            "componentProperties": {
+              "size": "large"
+            }
+          },
+          {
+            "name": "Focus ring",
+            "type": "RECTANGLE",
+            "cornerRadius": 12,
+            "stroke": {
+              "hex": "0e61ba"
+            },
+            "strokeWeight": 2
+          }
+        ]
+      },
+      {
+        "name": "size=small, state=focus",
+        "type": "COMPONENT",
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "CENTER",
+          "counter": "CENTER",
+          "spacing": 8,
+          "padding": [
+            8,
+            12,
+            8,
+            12
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "FIXED"
+        },
+        "cornerRadius": 8,
+        "fill": {
+          "hex": "0e61ba"
+        },
+        "children": [
+          {
+            "name": "Icon",
+            "type": "INSTANCE",
+            "hidden": true,
+            "propRefs": {
+              "visible": "↪️icon-left"
+            },
+            "instanceOf": "Icon",
+            "componentProperties": {
+              "size": "small"
+            }
+          },
+          {
+            "name": "Button",
+            "type": "TEXT",
+            "text": {
+              "characters": "Button",
+              "fontSize": 14,
+              "fontStyle": "Semi Bold"
+            },
+            "fill": {
+              "hex": "fcfeff"
+            },
+            "propRefs": {
+              "characters": "✏️text"
+            }
+          },
+          {
+            "name": "Icon",
+            "type": "INSTANCE",
+            "hidden": true,
+            "propRefs": {
+              "visible": "↪️icon-right"
+            },
+            "instanceOf": "Icon",
+            "componentProperties": {
+              "size": "small"
+            }
+          },
+          {
+            "name": "Focus ring",
+            "type": "RECTANGLE",
+            "cornerRadius": 12,
+            "stroke": {
+              "hex": "0e61ba"
+            },
+            "strokeWeight": 2
+          }
+        ]
+      },
+      {
+        "name": "size=large, state=pressed",
+        "type": "COMPONENT",
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "CENTER",
+          "counter": "CENTER",
+          "spacing": 8,
+          "padding": [
+            8,
+            16,
+            8,
+            16
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "FIXED"
+        },
+        "cornerRadius": 8,
+        "fill": {
+          "hex": "002854"
+        },
+        "children": [
+          {
+            "name": "Icon",
+            "type": "INSTANCE",
+            "hidden": true,
+            "propRefs": {
+              "visible": "↪️icon-left"
+            },
+            "instanceOf": "Icon",
+            "componentProperties": {
+              "size": "large"
+            }
+          },
+          {
+            "name": "Button",
+            "type": "TEXT",
+            "text": {
+              "characters": "Button",
+              "fontSize": 16,
+              "fontStyle": "Semi Bold"
+            },
+            "fill": {
+              "hex": "fcfeff"
+            },
+            "propRefs": {
+              "characters": "✏️text"
+            }
+          },
+          {
+            "name": "Icon",
+            "type": "INSTANCE",
+            "hidden": true,
+            "propRefs": {
+              "visible": "↪️icon-right"
+            },
+            "instanceOf": "Icon",
+            "componentProperties": {
+              "size": "large"
+            }
+          }
+        ]
+      },
+      {
+        "name": "size=medium, state=pressed",
+        "type": "COMPONENT",
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "CENTER",
+          "counter": "CENTER",
+          "spacing": 8,
+          "padding": [
+            8,
+            16,
+            8,
+            16
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "FIXED"
+        },
+        "cornerRadius": 8,
+        "fill": {
+          "hex": "002854"
+        },
+        "children": [
+          {
+            "name": "Icon",
+            "type": "INSTANCE",
+            "hidden": true,
+            "propRefs": {
+              "visible": "↪️icon-left"
+            },
+            "instanceOf": "Icon",
+            "componentProperties": {
+              "size": "large"
+            }
+          },
+          {
+            "name": "Button",
+            "type": "TEXT",
+            "text": {
+              "characters": "Button",
+              "fontSize": 16,
+              "fontStyle": "Semi Bold"
+            },
+            "fill": {
+              "hex": "fcfeff"
+            },
+            "propRefs": {
+              "characters": "✏️text"
+            }
+          },
+          {
+            "name": "Icon",
+            "type": "INSTANCE",
+            "hidden": true,
+            "propRefs": {
+              "visible": "↪️icon-right"
+            },
+            "instanceOf": "Icon",
+            "componentProperties": {
+              "size": "large"
+            }
+          }
+        ]
+      },
+      {
+        "name": "size=small, state=pressed",
+        "type": "COMPONENT",
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "CENTER",
+          "counter": "CENTER",
+          "spacing": 8,
+          "padding": [
+            8,
+            12,
+            8,
+            12
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "FIXED"
+        },
+        "cornerRadius": 8,
+        "fill": {
+          "hex": "002854"
+        },
+        "children": [
+          {
+            "name": "Icon",
+            "type": "INSTANCE",
+            "hidden": true,
+            "propRefs": {
+              "visible": "↪️icon-left"
+            },
+            "instanceOf": "Icon",
+            "componentProperties": {
+              "size": "small"
+            }
+          },
+          {
+            "name": "Button",
+            "type": "TEXT",
+            "text": {
+              "characters": "Button",
+              "fontSize": 14,
+              "fontStyle": "Semi Bold"
+            },
+            "fill": {
+              "hex": "fcfeff"
+            },
+            "propRefs": {
+              "characters": "✏️text"
+            }
+          },
+          {
+            "name": "Icon",
+            "type": "INSTANCE",
+            "hidden": true,
+            "propRefs": {
+              "visible": "↪️icon-right"
+            },
+            "instanceOf": "Icon",
+            "componentProperties": {
+              "size": "small"
+            }
+          }
+        ]
+      },
+      {
+        "name": "size=large, state=disabled",
+        "type": "COMPONENT",
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "CENTER",
+          "counter": "CENTER",
+          "spacing": 8,
+          "padding": [
+            8,
+            16,
+            8,
+            16
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "FIXED"
+        },
+        "cornerRadius": 8,
+        "fill": {
+          "hex": "dfe3eb"
+        },
+        "children": [
+          {
+            "name": "Icon",
+            "type": "INSTANCE",
+            "hidden": true,
+            "propRefs": {
+              "visible": "↪️icon-left"
+            },
+            "instanceOf": "Icon",
+            "componentProperties": {
+              "size": "large"
+            }
+          },
+          {
+            "name": "Button",
+            "type": "TEXT",
+            "text": {
+              "characters": "Button",
+              "fontSize": 16,
+              "fontStyle": "Semi Bold"
+            },
+            "fill": {
+              "hex": "556275"
+            },
+            "propRefs": {
+              "characters": "✏️text"
+            }
+          },
+          {
+            "name": "Icon",
+            "type": "INSTANCE",
+            "hidden": true,
+            "propRefs": {
+              "visible": "↪️icon-right"
+            },
+            "instanceOf": "Icon",
+            "componentProperties": {
+              "size": "large"
+            }
+          },
+          {
+            "name": "Tooltip",
+            "type": "TEXT",
+            "hidden": true,
+            "text": {
+              "characters": "This action is currently unavailable",
+              "fontSize": 12,
+              "fontStyle": "Regular"
+            },
+            "fill": {
+              "hex": "000000"
+            }
+          }
+        ]
+      },
+      {
+        "name": "size=medium, state=disabled",
+        "type": "COMPONENT",
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "CENTER",
+          "counter": "CENTER",
+          "spacing": 8,
+          "padding": [
+            8,
+            16,
+            8,
+            16
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "FIXED"
+        },
+        "cornerRadius": 8,
+        "fill": {
+          "hex": "dfe3eb"
+        },
+        "children": [
+          {
+            "name": "Icon",
+            "type": "INSTANCE",
+            "hidden": true,
+            "propRefs": {
+              "visible": "↪️icon-left"
+            },
+            "instanceOf": "Icon",
+            "componentProperties": {
+              "size": "large"
+            }
+          },
+          {
+            "name": "Button",
+            "type": "TEXT",
+            "text": {
+              "characters": "Button",
+              "fontSize": 16,
+              "fontStyle": "Semi Bold"
+            },
+            "fill": {
+              "hex": "556275"
+            },
+            "propRefs": {
+              "characters": "✏️text"
+            }
+          },
+          {
+            "name": "Icon",
+            "type": "INSTANCE",
+            "hidden": true,
+            "propRefs": {
+              "visible": "↪️icon-right"
+            },
+            "instanceOf": "Icon",
+            "componentProperties": {
+              "size": "large"
+            }
+          },
+          {
+            "name": "Tooltip",
+            "type": "TEXT",
+            "hidden": true,
+            "text": {
+              "characters": "This action is currently unavailable",
+              "fontSize": 12,
+              "fontStyle": "Regular"
+            },
+            "fill": {
+              "hex": "000000"
+            }
+          }
+        ]
+      },
+      {
+        "name": "size=small, state=disabled",
+        "type": "COMPONENT",
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "CENTER",
+          "counter": "CENTER",
+          "spacing": 8,
+          "padding": [
+            8,
+            12,
+            8,
+            12
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "FIXED"
+        },
+        "cornerRadius": 8,
+        "fill": {
+          "hex": "dfe3eb"
+        },
+        "children": [
+          {
+            "name": "Icon",
+            "type": "INSTANCE",
+            "hidden": true,
+            "propRefs": {
+              "visible": "↪️icon-left"
+            },
+            "instanceOf": "Icon",
+            "componentProperties": {
+              "size": "small"
+            }
+          },
+          {
+            "name": "Button",
+            "type": "TEXT",
+            "text": {
+              "characters": "Button",
+              "fontSize": 14,
+              "fontStyle": "Semi Bold"
+            },
+            "fill": {
+              "hex": "556275"
+            },
+            "propRefs": {
+              "characters": "✏️text"
+            }
+          },
+          {
+            "name": "Icon",
+            "type": "INSTANCE",
+            "hidden": true,
+            "propRefs": {
+              "visible": "↪️icon-right"
+            },
+            "instanceOf": "Icon",
+            "componentProperties": {
+              "size": "small"
+            }
+          },
+          {
+            "name": "Tooltip",
+            "type": "TEXT",
+            "hidden": true,
+            "text": {
+              "characters": "This action is currently unavailable",
+              "fontSize": 12,
+              "fontStyle": "Regular"
+            },
+            "fill": {
+              "hex": "000000"
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

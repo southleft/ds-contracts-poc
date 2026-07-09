@@ -1,0 +1,1522 @@
+{
+  "_provenance": {
+    "fileKey": "E7oXr98i91HYQGZxA2USOQ",
+    "extractedAt": "2026-07-09",
+    "note": "Node-tree dump mapped from the Figma REST API (extract/figma/rest/map.ts, dump v1.1) for design→contract proposal."
+  },
+  "Button": {
+    "setName": "Button",
+    "type": "COMPONENT_SET",
+    "nodeId": "2313:42",
+    "key": "e480cd07dbf6ddbefd4e2c35cb16581b09285391",
+    "variants": [
+      {
+        "name": "variant=primary, state=default, isDisabled=false",
+        "type": "COMPONENT",
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "CENTER",
+          "counter": "CENTER",
+          "spacing": 4,
+          "padding": [
+            6,
+            12,
+            6,
+            12
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "AUTO"
+        },
+        "cornerRadius": 8,
+        "fill": {
+          "hex": "3d7a95"
+        },
+        "stroke": {
+          "hex": "000002"
+        },
+        "strokeWeight": 1,
+        "children": [
+          {
+            "name": "Icon",
+            "type": "INSTANCE",
+            "propRefs": {
+              "visible": "hasStartIcon",
+              "mainComponent": "startIcon"
+            },
+            "instanceOf": "play"
+          },
+          {
+            "name": "Label",
+            "type": "TEXT",
+            "text": {
+              "characters": "Label",
+              "fontSize": 14,
+              "fontStyle": "Medium",
+              "style": "body/sm"
+            },
+            "fill": {
+              "hex": "ffffff"
+            },
+            "propRefs": {
+              "characters": "text"
+            }
+          },
+          {
+            "name": "Icon",
+            "type": "INSTANCE",
+            "propRefs": {
+              "visible": "hasEndIcon",
+              "mainComponent": "endIcon"
+            },
+            "instanceOf": "pause"
+          }
+        ]
+      },
+      {
+        "name": "variant=knockout, state=default, isDisabled=false",
+        "type": "COMPONENT",
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "CENTER",
+          "counter": "CENTER",
+          "spacing": 4,
+          "padding": [
+            6,
+            12,
+            6,
+            12
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "AUTO"
+        },
+        "cornerRadius": 8,
+        "fill": {
+          "hex": "f7f8f7"
+        },
+        "children": [
+          {
+            "name": "Icon",
+            "type": "INSTANCE",
+            "propRefs": {
+              "visible": "hasStartIcon",
+              "mainComponent": "startIcon"
+            },
+            "instanceOf": "play"
+          },
+          {
+            "name": "Label",
+            "type": "TEXT",
+            "text": {
+              "characters": "Label",
+              "fontSize": 14,
+              "fontStyle": "Medium",
+              "style": "body/sm"
+            },
+            "fill": {
+              "hex": "252729"
+            },
+            "propRefs": {
+              "characters": "text"
+            }
+          },
+          {
+            "name": "Icon",
+            "type": "INSTANCE",
+            "propRefs": {
+              "visible": "hasEndIcon",
+              "mainComponent": "endIcon"
+            },
+            "instanceOf": "pause"
+          }
+        ]
+      },
+      {
+        "name": "variant=primary, state=default, isDisabled=true",
+        "type": "COMPONENT",
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "CENTER",
+          "counter": "CENTER",
+          "spacing": 4,
+          "padding": [
+            6,
+            12,
+            6,
+            12
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "AUTO"
+        },
+        "cornerRadius": 8,
+        "fill": {
+          "hex": "3d7a95"
+        },
+        "stroke": {
+          "hex": "000002"
+        },
+        "strokeWeight": 1,
+        "children": [
+          {
+            "name": "Icon",
+            "type": "INSTANCE",
+            "propRefs": {
+              "visible": "hasStartIcon",
+              "mainComponent": "startIcon"
+            },
+            "instanceOf": "play"
+          },
+          {
+            "name": "Label",
+            "type": "TEXT",
+            "text": {
+              "characters": "Label",
+              "fontSize": 14,
+              "fontStyle": "Medium",
+              "style": "body/sm"
+            },
+            "fill": {
+              "hex": "ffffff"
+            },
+            "propRefs": {
+              "characters": "text"
+            }
+          },
+          {
+            "name": "Icon",
+            "type": "INSTANCE",
+            "propRefs": {
+              "visible": "hasEndIcon",
+              "mainComponent": "endIcon"
+            },
+            "instanceOf": "pause"
+          }
+        ]
+      },
+      {
+        "name": "variant=knockout, state=default, isDisabled=true",
+        "type": "COMPONENT",
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "CENTER",
+          "counter": "CENTER",
+          "spacing": 4,
+          "padding": [
+            6,
+            12,
+            6,
+            12
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "AUTO"
+        },
+        "cornerRadius": 8,
+        "fill": {
+          "hex": "f7f8f7"
+        },
+        "children": [
+          {
+            "name": "Icon",
+            "type": "INSTANCE",
+            "propRefs": {
+              "visible": "hasStartIcon",
+              "mainComponent": "startIcon"
+            },
+            "instanceOf": "play"
+          },
+          {
+            "name": "Label",
+            "type": "TEXT",
+            "text": {
+              "characters": "Label",
+              "fontSize": 14,
+              "fontStyle": "Medium",
+              "style": "body/sm"
+            },
+            "fill": {
+              "hex": "252729"
+            },
+            "propRefs": {
+              "characters": "text"
+            }
+          },
+          {
+            "name": "Icon",
+            "type": "INSTANCE",
+            "propRefs": {
+              "visible": "hasEndIcon",
+              "mainComponent": "endIcon"
+            },
+            "instanceOf": "pause"
+          }
+        ]
+      },
+      {
+        "name": "variant=secondary, state=default, isDisabled=false",
+        "type": "COMPONENT",
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "CENTER",
+          "counter": "CENTER",
+          "spacing": 4,
+          "padding": [
+            6,
+            12,
+            6,
+            12
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "AUTO"
+        },
+        "cornerRadius": 8,
+        "fill": {
+          "hex": "000002"
+        },
+        "stroke": {
+          "hex": "000002"
+        },
+        "strokeWeight": 1,
+        "children": [
+          {
+            "name": "Icon",
+            "type": "INSTANCE",
+            "propRefs": {
+              "visible": "hasStartIcon",
+              "mainComponent": "startIcon"
+            },
+            "instanceOf": "play"
+          },
+          {
+            "name": "Label",
+            "type": "TEXT",
+            "text": {
+              "characters": "Label",
+              "fontSize": 14,
+              "fontStyle": "Medium",
+              "style": "body/sm"
+            },
+            "fill": {
+              "hex": "252729"
+            },
+            "propRefs": {
+              "characters": "text"
+            }
+          },
+          {
+            "name": "Icon",
+            "type": "INSTANCE",
+            "propRefs": {
+              "visible": "hasEndIcon",
+              "mainComponent": "endIcon"
+            },
+            "instanceOf": "pause"
+          }
+        ]
+      },
+      {
+        "name": "variant=bare, state=default, isDisabled=false",
+        "type": "COMPONENT",
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "CENTER",
+          "counter": "CENTER",
+          "spacing": 4,
+          "padding": [
+            6,
+            12,
+            6,
+            12
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "AUTO"
+        },
+        "cornerRadius": 8,
+        "fill": {
+          "hex": "000002"
+        },
+        "children": [
+          {
+            "name": "Icon",
+            "type": "INSTANCE",
+            "propRefs": {
+              "visible": "hasStartIcon",
+              "mainComponent": "startIcon"
+            },
+            "instanceOf": "play"
+          },
+          {
+            "name": "Label",
+            "type": "TEXT",
+            "text": {
+              "characters": "Label",
+              "fontSize": 14,
+              "fontStyle": "Medium",
+              "style": "body/sm"
+            },
+            "fill": {
+              "hex": "252729"
+            },
+            "propRefs": {
+              "characters": "text"
+            }
+          },
+          {
+            "name": "Icon",
+            "type": "INSTANCE",
+            "propRefs": {
+              "visible": "hasEndIcon",
+              "mainComponent": "endIcon"
+            },
+            "instanceOf": "pause"
+          }
+        ]
+      },
+      {
+        "name": "variant=bare, state=default, isDisabled=true",
+        "type": "COMPONENT",
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "CENTER",
+          "counter": "CENTER",
+          "spacing": 4,
+          "padding": [
+            6,
+            12,
+            6,
+            12
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "AUTO"
+        },
+        "cornerRadius": 8,
+        "fill": {
+          "hex": "000002"
+        },
+        "children": [
+          {
+            "name": "Icon",
+            "type": "INSTANCE",
+            "propRefs": {
+              "visible": "hasStartIcon",
+              "mainComponent": "startIcon"
+            },
+            "instanceOf": "play"
+          },
+          {
+            "name": "Label",
+            "type": "TEXT",
+            "text": {
+              "characters": "Label",
+              "fontSize": 14,
+              "fontStyle": "Medium",
+              "style": "body/sm"
+            },
+            "fill": {
+              "hex": "252729"
+            },
+            "propRefs": {
+              "characters": "text"
+            }
+          },
+          {
+            "name": "Icon",
+            "type": "INSTANCE",
+            "propRefs": {
+              "visible": "hasEndIcon",
+              "mainComponent": "endIcon"
+            },
+            "instanceOf": "pause"
+          }
+        ]
+      },
+      {
+        "name": "variant=secondary, state=default, isDisabled=true",
+        "type": "COMPONENT",
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "CENTER",
+          "counter": "CENTER",
+          "spacing": 4,
+          "padding": [
+            6,
+            12,
+            6,
+            12
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "AUTO"
+        },
+        "cornerRadius": 8,
+        "fill": {
+          "hex": "000002"
+        },
+        "stroke": {
+          "hex": "000002"
+        },
+        "strokeWeight": 1,
+        "children": [
+          {
+            "name": "Icon",
+            "type": "INSTANCE",
+            "propRefs": {
+              "visible": "hasStartIcon",
+              "mainComponent": "startIcon"
+            },
+            "instanceOf": "play"
+          },
+          {
+            "name": "Label",
+            "type": "TEXT",
+            "text": {
+              "characters": "Label",
+              "fontSize": 14,
+              "fontStyle": "Medium",
+              "style": "body/sm"
+            },
+            "fill": {
+              "hex": "252729"
+            },
+            "propRefs": {
+              "characters": "text"
+            }
+          },
+          {
+            "name": "Icon",
+            "type": "INSTANCE",
+            "propRefs": {
+              "visible": "hasEndIcon",
+              "mainComponent": "endIcon"
+            },
+            "instanceOf": "pause"
+          }
+        ]
+      },
+      {
+        "name": "variant=primary, state=hover, isDisabled=false",
+        "type": "COMPONENT",
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "CENTER",
+          "counter": "CENTER",
+          "spacing": 4,
+          "padding": [
+            6,
+            12,
+            6,
+            12
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "AUTO"
+        },
+        "cornerRadius": 8,
+        "fill": {
+          "hex": "2d6079"
+        },
+        "stroke": {
+          "hex": "000002"
+        },
+        "strokeWeight": 1,
+        "children": [
+          {
+            "name": "Icon",
+            "type": "INSTANCE",
+            "propRefs": {
+              "visible": "hasStartIcon",
+              "mainComponent": "startIcon"
+            },
+            "instanceOf": "play"
+          },
+          {
+            "name": "Label",
+            "type": "TEXT",
+            "text": {
+              "characters": "Label",
+              "fontSize": 14,
+              "fontStyle": "Medium",
+              "style": "body/sm"
+            },
+            "fill": {
+              "hex": "ffffff"
+            },
+            "propRefs": {
+              "characters": "text"
+            }
+          },
+          {
+            "name": "Icon",
+            "type": "INSTANCE",
+            "propRefs": {
+              "visible": "hasEndIcon",
+              "mainComponent": "endIcon"
+            },
+            "instanceOf": "pause"
+          }
+        ]
+      },
+      {
+        "name": "variant=knockout, state=hover, isDisabled=false",
+        "type": "COMPONENT",
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "CENTER",
+          "counter": "CENTER",
+          "spacing": 4,
+          "padding": [
+            6,
+            12,
+            6,
+            12
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "AUTO"
+        },
+        "cornerRadius": 8,
+        "fill": {
+          "hex": "c6c7c6"
+        },
+        "children": [
+          {
+            "name": "Icon",
+            "type": "INSTANCE",
+            "propRefs": {
+              "visible": "hasStartIcon",
+              "mainComponent": "startIcon"
+            },
+            "instanceOf": "play"
+          },
+          {
+            "name": "Label",
+            "type": "TEXT",
+            "text": {
+              "characters": "Label",
+              "fontSize": 14,
+              "fontStyle": "Medium",
+              "style": "body/sm"
+            },
+            "fill": {
+              "hex": "252729"
+            },
+            "propRefs": {
+              "characters": "text"
+            }
+          },
+          {
+            "name": "Icon",
+            "type": "INSTANCE",
+            "propRefs": {
+              "visible": "hasEndIcon",
+              "mainComponent": "endIcon"
+            },
+            "instanceOf": "pause"
+          }
+        ]
+      },
+      {
+        "name": "variant=secondary, state=hover, isDisabled=false",
+        "type": "COMPONENT",
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "CENTER",
+          "counter": "CENTER",
+          "spacing": 4,
+          "padding": [
+            6,
+            12,
+            6,
+            12
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "AUTO"
+        },
+        "cornerRadius": 8,
+        "fill": {
+          "hex": "000002"
+        },
+        "stroke": {
+          "hex": "000002"
+        },
+        "strokeWeight": 1,
+        "children": [
+          {
+            "name": "Icon",
+            "type": "INSTANCE",
+            "propRefs": {
+              "visible": "hasStartIcon",
+              "mainComponent": "startIcon"
+            },
+            "instanceOf": "play"
+          },
+          {
+            "name": "Label",
+            "type": "TEXT",
+            "text": {
+              "characters": "Label",
+              "fontSize": 14,
+              "fontStyle": "Medium",
+              "style": "body/sm"
+            },
+            "fill": {
+              "hex": "252729"
+            },
+            "propRefs": {
+              "characters": "text"
+            }
+          },
+          {
+            "name": "Icon",
+            "type": "INSTANCE",
+            "propRefs": {
+              "visible": "hasEndIcon",
+              "mainComponent": "endIcon"
+            },
+            "instanceOf": "pause"
+          }
+        ]
+      },
+      {
+        "name": "variant=bare, state=hover, isDisabled=false",
+        "type": "COMPONENT",
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "CENTER",
+          "counter": "CENTER",
+          "spacing": 4,
+          "padding": [
+            6,
+            12,
+            6,
+            12
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "AUTO"
+        },
+        "cornerRadius": 8,
+        "fill": {
+          "hex": "000002"
+        },
+        "children": [
+          {
+            "name": "Icon",
+            "type": "INSTANCE",
+            "propRefs": {
+              "visible": "hasStartIcon",
+              "mainComponent": "startIcon"
+            },
+            "instanceOf": "play"
+          },
+          {
+            "name": "Label",
+            "type": "TEXT",
+            "text": {
+              "characters": "Label",
+              "fontSize": 14,
+              "fontStyle": "Medium",
+              "style": "body/sm"
+            },
+            "fill": {
+              "hex": "252729"
+            },
+            "propRefs": {
+              "characters": "text"
+            }
+          },
+          {
+            "name": "Icon",
+            "type": "INSTANCE",
+            "propRefs": {
+              "visible": "hasEndIcon",
+              "mainComponent": "endIcon"
+            },
+            "instanceOf": "pause"
+          }
+        ]
+      },
+      {
+        "name": "variant=primary, state=active, isDisabled=false",
+        "type": "COMPONENT",
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "CENTER",
+          "counter": "CENTER",
+          "spacing": 4,
+          "padding": [
+            6,
+            12,
+            6,
+            12
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "AUTO"
+        },
+        "cornerRadius": 8,
+        "fill": {
+          "hex": "2d6079"
+        },
+        "stroke": {
+          "hex": "000002"
+        },
+        "strokeWeight": 1,
+        "children": [
+          {
+            "name": "Icon",
+            "type": "INSTANCE",
+            "propRefs": {
+              "visible": "hasStartIcon",
+              "mainComponent": "startIcon"
+            },
+            "instanceOf": "play"
+          },
+          {
+            "name": "Label",
+            "type": "TEXT",
+            "text": {
+              "characters": "Label",
+              "fontSize": 14,
+              "fontStyle": "Medium",
+              "style": "body/sm"
+            },
+            "fill": {
+              "hex": "ffffff"
+            },
+            "propRefs": {
+              "characters": "text"
+            }
+          },
+          {
+            "name": "Icon",
+            "type": "INSTANCE",
+            "propRefs": {
+              "visible": "hasEndIcon",
+              "mainComponent": "endIcon"
+            },
+            "instanceOf": "pause"
+          }
+        ]
+      },
+      {
+        "name": "variant=knockout, state=active, isDisabled=false",
+        "type": "COMPONENT",
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "CENTER",
+          "counter": "CENTER",
+          "spacing": 4,
+          "padding": [
+            6,
+            12,
+            6,
+            12
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "AUTO"
+        },
+        "cornerRadius": 8,
+        "fill": {
+          "hex": "f7f8f7"
+        },
+        "children": [
+          {
+            "name": "Icon",
+            "type": "INSTANCE",
+            "propRefs": {
+              "visible": "hasStartIcon",
+              "mainComponent": "startIcon"
+            },
+            "instanceOf": "play"
+          },
+          {
+            "name": "Label",
+            "type": "TEXT",
+            "text": {
+              "characters": "Label",
+              "fontSize": 14,
+              "fontStyle": "Medium",
+              "style": "body/sm"
+            },
+            "fill": {
+              "hex": "252729"
+            },
+            "propRefs": {
+              "characters": "text"
+            }
+          },
+          {
+            "name": "Icon",
+            "type": "INSTANCE",
+            "propRefs": {
+              "visible": "hasEndIcon",
+              "mainComponent": "endIcon"
+            },
+            "instanceOf": "pause"
+          }
+        ]
+      },
+      {
+        "name": "variant=secondary, state=active, isDisabled=false",
+        "type": "COMPONENT",
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "CENTER",
+          "counter": "CENTER",
+          "spacing": 4,
+          "padding": [
+            6,
+            12,
+            6,
+            12
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "AUTO"
+        },
+        "cornerRadius": 8,
+        "fill": {
+          "hex": "000002"
+        },
+        "stroke": {
+          "hex": "000002"
+        },
+        "strokeWeight": 1,
+        "children": [
+          {
+            "name": "Icon",
+            "type": "INSTANCE",
+            "propRefs": {
+              "visible": "hasStartIcon",
+              "mainComponent": "startIcon"
+            },
+            "instanceOf": "play"
+          },
+          {
+            "name": "Label",
+            "type": "TEXT",
+            "text": {
+              "characters": "Label",
+              "fontSize": 14,
+              "fontStyle": "Medium",
+              "style": "body/sm"
+            },
+            "fill": {
+              "hex": "252729"
+            },
+            "propRefs": {
+              "characters": "text"
+            }
+          },
+          {
+            "name": "Icon",
+            "type": "INSTANCE",
+            "propRefs": {
+              "visible": "hasEndIcon",
+              "mainComponent": "endIcon"
+            },
+            "instanceOf": "pause"
+          }
+        ]
+      },
+      {
+        "name": "variant=bare, state=active, isDisabled=false",
+        "type": "COMPONENT",
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "CENTER",
+          "counter": "CENTER",
+          "spacing": 4,
+          "padding": [
+            6,
+            12,
+            6,
+            12
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "AUTO"
+        },
+        "cornerRadius": 8,
+        "fill": {
+          "hex": "000002"
+        },
+        "children": [
+          {
+            "name": "Icon",
+            "type": "INSTANCE",
+            "propRefs": {
+              "visible": "hasStartIcon",
+              "mainComponent": "startIcon"
+            },
+            "instanceOf": "play"
+          },
+          {
+            "name": "Label",
+            "type": "TEXT",
+            "text": {
+              "characters": "Label",
+              "fontSize": 14,
+              "fontStyle": "Medium",
+              "style": "body/sm"
+            },
+            "fill": {
+              "hex": "252729"
+            },
+            "propRefs": {
+              "characters": "text"
+            }
+          },
+          {
+            "name": "Icon",
+            "type": "INSTANCE",
+            "propRefs": {
+              "visible": "hasEndIcon",
+              "mainComponent": "endIcon"
+            },
+            "instanceOf": "pause"
+          }
+        ]
+      },
+      {
+        "name": "variant=primary, state=focus, isDisabled=false",
+        "type": "COMPONENT",
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "CENTER",
+          "counter": "CENTER",
+          "spacing": 4,
+          "padding": [
+            6,
+            12,
+            6,
+            12
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "AUTO"
+        },
+        "cornerRadius": 8,
+        "fill": {
+          "hex": "3d7a95"
+        },
+        "stroke": {
+          "hex": "000002"
+        },
+        "strokeWeight": 1,
+        "children": [
+          {
+            "name": "Focus ring",
+            "type": "RECTANGLE",
+            "cornerRadius": 11,
+            "stroke": {
+              "hex": "2d6079"
+            },
+            "strokeWeight": 2
+          },
+          {
+            "name": "Icon",
+            "type": "INSTANCE",
+            "propRefs": {
+              "visible": "hasStartIcon",
+              "mainComponent": "startIcon"
+            },
+            "instanceOf": "play"
+          },
+          {
+            "name": "Label",
+            "type": "TEXT",
+            "text": {
+              "characters": "Label",
+              "fontSize": 14,
+              "fontStyle": "Medium",
+              "style": "body/sm"
+            },
+            "fill": {
+              "hex": "ffffff"
+            },
+            "propRefs": {
+              "characters": "text"
+            }
+          },
+          {
+            "name": "Icon",
+            "type": "INSTANCE",
+            "propRefs": {
+              "visible": "hasEndIcon",
+              "mainComponent": "endIcon"
+            },
+            "instanceOf": "pause"
+          }
+        ]
+      },
+      {
+        "name": "variant=knockout, state=focus, isDisabled=false",
+        "type": "COMPONENT",
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "CENTER",
+          "counter": "CENTER",
+          "spacing": 4,
+          "padding": [
+            6,
+            12,
+            6,
+            12
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "AUTO"
+        },
+        "cornerRadius": 8,
+        "fill": {
+          "hex": "f7f8f7"
+        },
+        "children": [
+          {
+            "name": "Focus ring",
+            "type": "RECTANGLE",
+            "cornerRadius": 11,
+            "stroke": {
+              "hex": "2d6079"
+            },
+            "strokeWeight": 2
+          },
+          {
+            "name": "Icon",
+            "type": "INSTANCE",
+            "propRefs": {
+              "visible": "hasStartIcon",
+              "mainComponent": "startIcon"
+            },
+            "instanceOf": "play"
+          },
+          {
+            "name": "Label",
+            "type": "TEXT",
+            "text": {
+              "characters": "Label",
+              "fontSize": 14,
+              "fontStyle": "Medium",
+              "style": "body/sm"
+            },
+            "fill": {
+              "hex": "252729"
+            },
+            "propRefs": {
+              "characters": "text"
+            }
+          },
+          {
+            "name": "Icon",
+            "type": "INSTANCE",
+            "propRefs": {
+              "visible": "hasEndIcon",
+              "mainComponent": "endIcon"
+            },
+            "instanceOf": "pause"
+          }
+        ]
+      },
+      {
+        "name": "variant=secondary, state=focus, isDisabled=false",
+        "type": "COMPONENT",
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "CENTER",
+          "counter": "CENTER",
+          "spacing": 4,
+          "padding": [
+            6,
+            12,
+            6,
+            12
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "AUTO"
+        },
+        "cornerRadius": 8,
+        "fill": {
+          "hex": "000002"
+        },
+        "stroke": {
+          "hex": "000002"
+        },
+        "strokeWeight": 1,
+        "children": [
+          {
+            "name": "Focus ring",
+            "type": "RECTANGLE",
+            "cornerRadius": 11,
+            "stroke": {
+              "hex": "2d6079"
+            },
+            "strokeWeight": 2
+          },
+          {
+            "name": "Icon",
+            "type": "INSTANCE",
+            "propRefs": {
+              "visible": "hasStartIcon",
+              "mainComponent": "startIcon"
+            },
+            "instanceOf": "play"
+          },
+          {
+            "name": "Label",
+            "type": "TEXT",
+            "text": {
+              "characters": "Label",
+              "fontSize": 14,
+              "fontStyle": "Medium",
+              "style": "body/sm"
+            },
+            "fill": {
+              "hex": "252729"
+            },
+            "propRefs": {
+              "characters": "text"
+            }
+          },
+          {
+            "name": "Icon",
+            "type": "INSTANCE",
+            "propRefs": {
+              "visible": "hasEndIcon",
+              "mainComponent": "endIcon"
+            },
+            "instanceOf": "pause"
+          }
+        ]
+      },
+      {
+        "name": "variant=bare, state=focus, isDisabled=false",
+        "type": "COMPONENT",
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "CENTER",
+          "counter": "CENTER",
+          "spacing": 4,
+          "padding": [
+            6,
+            12,
+            6,
+            12
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "AUTO"
+        },
+        "cornerRadius": 8,
+        "fill": {
+          "hex": "000002"
+        },
+        "children": [
+          {
+            "name": "Focus ring",
+            "type": "RECTANGLE",
+            "cornerRadius": 11,
+            "stroke": {
+              "hex": "2d6079"
+            },
+            "strokeWeight": 2
+          },
+          {
+            "name": "Icon",
+            "type": "INSTANCE",
+            "propRefs": {
+              "visible": "hasStartIcon",
+              "mainComponent": "startIcon"
+            },
+            "instanceOf": "play"
+          },
+          {
+            "name": "Label",
+            "type": "TEXT",
+            "text": {
+              "characters": "Label",
+              "fontSize": 14,
+              "fontStyle": "Medium",
+              "style": "body/sm"
+            },
+            "fill": {
+              "hex": "252729"
+            },
+            "propRefs": {
+              "characters": "text"
+            }
+          },
+          {
+            "name": "Icon",
+            "type": "INSTANCE",
+            "propRefs": {
+              "visible": "hasEndIcon",
+              "mainComponent": "endIcon"
+            },
+            "instanceOf": "pause"
+          }
+        ]
+      },
+      {
+        "name": "variant=primary, state=focus, isDisabled=true",
+        "type": "COMPONENT",
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "MIN",
+          "counter": "MIN",
+          "spacing": 4,
+          "padding": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "primarySizing": "FIXED",
+          "counterSizing": "AUTO"
+        },
+        "cornerRadius": 8,
+        "fill": {
+          "hex": "3d7a95"
+        },
+        "stroke": {
+          "hex": "000002"
+        },
+        "strokeWeight": 1,
+        "children": [
+          {
+            "name": "Button",
+            "type": "INSTANCE",
+            "layout": {
+              "mode": "HORIZONTAL",
+              "primary": "CENTER",
+              "counter": "CENTER",
+              "spacing": 4,
+              "padding": [
+                6,
+                12,
+                6,
+                12
+              ],
+              "primarySizing": "AUTO",
+              "counterSizing": "AUTO"
+            },
+            "cornerRadius": 8,
+            "fill": {
+              "hex": "3d7a95"
+            },
+            "stroke": {
+              "hex": "000002"
+            },
+            "strokeWeight": 1,
+            "instanceOf": "Button",
+            "componentProperties": {
+              "text": "Label",
+              "hasEndIcon": true,
+              "hasStartIcon": true,
+              "variant": "primary",
+              "state": "default",
+              "isDisabled": "false"
+            }
+          },
+          {
+            "name": "Focus ring",
+            "type": "RECTANGLE",
+            "cornerRadius": 11,
+            "stroke": {
+              "hex": "2d6079"
+            },
+            "strokeWeight": 2
+          }
+        ]
+      },
+      {
+        "name": "variant=knockout, state=focus, isDisabled=true",
+        "type": "COMPONENT",
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "MIN",
+          "counter": "MIN",
+          "spacing": 4,
+          "padding": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "primarySizing": "FIXED",
+          "counterSizing": "AUTO"
+        },
+        "cornerRadius": 8,
+        "fill": {
+          "hex": "f7f8f7"
+        },
+        "children": [
+          {
+            "name": "Button",
+            "type": "INSTANCE",
+            "layout": {
+              "mode": "HORIZONTAL",
+              "primary": "CENTER",
+              "counter": "CENTER",
+              "spacing": 4,
+              "padding": [
+                6,
+                12,
+                6,
+                12
+              ],
+              "primarySizing": "AUTO",
+              "counterSizing": "AUTO"
+            },
+            "cornerRadius": 8,
+            "fill": {
+              "hex": "f7f8f7"
+            },
+            "instanceOf": "Button",
+            "componentProperties": {
+              "text": "Label",
+              "hasEndIcon": true,
+              "hasStartIcon": true,
+              "variant": "knockout",
+              "state": "default",
+              "isDisabled": "false"
+            }
+          },
+          {
+            "name": "Focus ring",
+            "type": "RECTANGLE",
+            "cornerRadius": 11,
+            "stroke": {
+              "hex": "2d6079"
+            },
+            "strokeWeight": 2
+          }
+        ]
+      },
+      {
+        "name": "variant=secondary, state=focus, isDisabled=true",
+        "type": "COMPONENT",
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "MIN",
+          "counter": "MIN",
+          "spacing": 4,
+          "padding": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "AUTO"
+        },
+        "fill": {
+          "hex": "000002"
+        },
+        "stroke": {
+          "hex": "000002"
+        },
+        "strokeWeight": 1,
+        "children": [
+          {
+            "name": "Button",
+            "type": "INSTANCE",
+            "layout": {
+              "mode": "HORIZONTAL",
+              "primary": "CENTER",
+              "counter": "CENTER",
+              "spacing": 4,
+              "padding": [
+                6,
+                12,
+                6,
+                12
+              ],
+              "primarySizing": "AUTO",
+              "counterSizing": "AUTO"
+            },
+            "cornerRadius": 8,
+            "fill": {
+              "hex": "000002"
+            },
+            "stroke": {
+              "hex": "000002"
+            },
+            "strokeWeight": 1,
+            "instanceOf": "Button",
+            "componentProperties": {
+              "text": "Label",
+              "hasEndIcon": true,
+              "hasStartIcon": true,
+              "variant": "secondary",
+              "state": "default",
+              "isDisabled": "false"
+            }
+          },
+          {
+            "name": "Focus ring",
+            "type": "RECTANGLE",
+            "cornerRadius": 11,
+            "stroke": {
+              "hex": "2d6079"
+            },
+            "strokeWeight": 2
+          }
+        ]
+      },
+      {
+        "name": "variant=bare, state=focus, isDisabled=true",
+        "type": "COMPONENT",
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "MIN",
+          "counter": "MIN",
+          "spacing": 4,
+          "padding": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "AUTO"
+        },
+        "cornerRadius": 8,
+        "fill": {
+          "hex": "000002"
+        },
+        "children": [
+          {
+            "name": "Button",
+            "type": "INSTANCE",
+            "layout": {
+              "mode": "HORIZONTAL",
+              "primary": "CENTER",
+              "counter": "CENTER",
+              "spacing": 4,
+              "padding": [
+                6,
+                12,
+                6,
+                12
+              ],
+              "primarySizing": "AUTO",
+              "counterSizing": "AUTO"
+            },
+            "cornerRadius": 8,
+            "fill": {
+              "hex": "000002"
+            },
+            "instanceOf": "Button",
+            "componentProperties": {
+              "text": "Label",
+              "hasEndIcon": true,
+              "hasStartIcon": true,
+              "variant": "bare",
+              "state": "default",
+              "isDisabled": "false"
+            }
+          },
+          {
+            "name": "Focus ring",
+            "type": "RECTANGLE",
+            "cornerRadius": 11,
+            "stroke": {
+              "hex": "2d6079"
+            },
+            "strokeWeight": 2
+          }
+        ]
+      }
+    ]
+  }
+}

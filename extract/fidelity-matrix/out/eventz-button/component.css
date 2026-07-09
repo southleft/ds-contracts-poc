@@ -1,0 +1,131 @@
+/* Button — from ds.button v0.1.0 (core/emit-html.ts) */
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-style: solid;
+  gap: var(--imported-button-root-gap);
+  padding-inline: var(--imported-button-root-padding-inline);
+  padding-block: var(--imported-button-root-padding-block);
+  border-radius: var(--imported-button-root-border-radius);
+}
+
+.button--variant-primary {
+  border-width: var(--imported-button-root-border-width-primary);
+}
+
+.button--variant-knockout {
+  border-width: var(--imported-button-root-border-width-knockout);
+}
+
+.button--variant-secondary {
+  border-width: var(--imported-button-root-border-width-secondary);
+}
+
+.button--variant-bare {
+  border-width: var(--imported-button-root-border-width-bare);
+}
+
+.button--variant-primary.button--state-default {
+  background-color: var(--imported-button-root-background-color-primary-default);
+}
+
+.button--variant-primary.button--state-hover {
+  background-color: var(--imported-button-root-background-color-primary-hover);
+}
+
+.button--variant-primary.button--state-active {
+  background-color: var(--imported-button-root-background-color-primary-active);
+}
+
+.button--variant-primary.button--state-focus {
+  background-color: var(--imported-button-root-background-color-primary-focus);
+}
+
+.button--variant-knockout.button--state-default {
+  background-color: var(--imported-button-root-background-color-knockout-default);
+}
+
+.button--variant-knockout.button--state-hover {
+  background-color: var(--imported-button-root-background-color-knockout-hover);
+}
+
+.button--variant-knockout.button--state-active {
+  background-color: var(--imported-button-root-background-color-knockout-active);
+}
+
+.button--variant-knockout.button--state-focus {
+  background-color: var(--imported-button-root-background-color-knockout-focus);
+}
+
+.button--variant-secondary.button--state-default {
+  background-color: var(--imported-button-root-background-color-secondary-default);
+}
+
+.button--variant-secondary.button--state-hover {
+  background-color: var(--imported-button-root-background-color-secondary-hover);
+}
+
+.button--variant-secondary.button--state-active {
+  background-color: var(--imported-button-root-background-color-secondary-active);
+}
+
+.button--variant-secondary.button--state-focus {
+  background-color: var(--imported-button-root-background-color-secondary-focus);
+}
+
+.button--variant-bare.button--state-default {
+  background-color: var(--imported-button-root-background-color-bare-default);
+}
+
+.button--variant-bare.button--state-hover {
+  background-color: var(--imported-button-root-background-color-bare-hover);
+}
+
+.button--variant-bare.button--state-active {
+  background-color: var(--imported-button-root-background-color-bare-active);
+}
+
+.button--variant-bare.button--state-focus {
+  background-color: var(--imported-button-root-background-color-bare-focus);
+}
+
+.button__focusRing {
+  border-color: var(--imported-button-focus-ring-border-color);
+  border-radius: var(--imported-button-focus-ring-border-radius);
+  border-width: var(--imported-button-focus-ring-border-width);
+  border-style: solid;
+}
+
+.button__startIcon {
+  display: flex;
+}
+
+.button__Label {
+  font-size: var(--imported-button-label-font-size);
+}
+
+.button--variant-primary .button__Label {
+  color: var(--imported-button-label-color-primary);
+}
+
+.button--variant-knockout .button__Label {
+  color: var(--imported-button-label-color-knockout);
+}
+
+.button--variant-secondary .button__Label {
+  color: var(--imported-button-label-color-secondary);
+}
+
+.button--variant-bare .button__Label {
+  color: var(--imported-button-label-color-bare);
+}
+
+.button__endIcon {
+  display: flex;
+}
+
+/* showcase chrome */
+.showcase { display: flex; flex-direction: column; gap: 24px; align-items: flex-start; font-family: sans-serif; }
+.showcase__label { margin: 0 0 8px; font: 12px/1 monospace; opacity: 0.6; }

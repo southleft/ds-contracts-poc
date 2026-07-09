@@ -1,0 +1,36 @@
+{
+  "subject": "A. Shoelace Tooltip",
+  "truthSource": "rest-defs.json componentPropertyDefinitions",
+  "tally": {
+    "MATCH": 1,
+    "PARTIAL": 1,
+    "MISS": 1
+  },
+  "rows": [
+    {
+      "prop": "text#37:15",
+      "truthType": "TEXT",
+      "verdict": "MATCH",
+      "reasons": [],
+      "proposedAs": "text: text"
+    },
+    {
+      "prop": "Text#507:175",
+      "truthType": "TEXT",
+      "verdict": "MISS",
+      "reasons": [
+        "duplicate-named Figma property — proposed \"text\" is claimed by the TEXT axis; this TEXT definition has no counterpart in the contract"
+      ]
+    },
+    {
+      "prop": "placement",
+      "truthType": "VARIANT",
+      "verdict": "PARTIAL",
+      "reasons": [
+        "enum values case-flattened in the public API (figma binding preserves the original spellings)"
+      ],
+      "proposedAs": "placement: enum"
+    }
+  ],
+  "extras": []
+}

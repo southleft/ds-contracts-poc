@@ -1,0 +1,204 @@
+{
+  "subject": "D. CBDS Button (code side)",
+  "truthSource": "traced Button.module.css resolved through traced :root token CSS",
+  "factCells": 32,
+  "tally": {
+    "BOUND": 0,
+    "MINTED": 30,
+    "MISSING": 2,
+    "mismatched": 0
+  },
+  "rows": [
+    {
+      "part": "root",
+      "fact": "background-color",
+      "verdict": "MINTED",
+      "token": "{imported.button.root.background-color.primary}",
+      "truth": "#0e61ba",
+      "resolved": "#0e61ba",
+      "valueOk": true,
+      "variants": [
+        "variant=primary, size=medium",
+        "variant=primary, size=small",
+        "variant=primary, size=large"
+      ]
+    },
+    {
+      "part": "root",
+      "fact": "background-color",
+      "verdict": "MINTED",
+      "token": "{imported.button.root.background-color.surface}",
+      "truth": "#f5f7fa",
+      "resolved": "#f5f7fa",
+      "valueOk": true,
+      "variants": [
+        "variant=surface, size=medium"
+      ]
+    },
+    {
+      "part": "root",
+      "fact": "background-color",
+      "verdict": "MINTED",
+      "token": "{imported.button.root.background-color.danger}",
+      "truth": "#b51833",
+      "resolved": "#b51833",
+      "valueOk": true,
+      "variants": [
+        "variant=danger, size=medium"
+      ]
+    },
+    {
+      "part": "root",
+      "fact": "background-color",
+      "verdict": "MINTED",
+      "token": "{imported.button.root.background-color.ghost}",
+      "truth": "transparent",
+      "resolved": "transparent",
+      "valueOk": true,
+      "variants": [
+        "variant=ghost, size=medium"
+      ]
+    },
+    {
+      "part": "root",
+      "fact": "border-color",
+      "verdict": "MISSING",
+      "truth": "#a2aebf",
+      "variants": [
+        "variant=ghost, size=medium"
+      ]
+    },
+    {
+      "part": "root",
+      "fact": "border-radius",
+      "verdict": "MINTED",
+      "token": "{imported.button.root.border-radius}",
+      "truth": "8px",
+      "resolved": "8px",
+      "valueOk": true,
+      "variants": [
+        "variant=primary, size=medium",
+        "variant=surface, size=medium",
+        "variant=danger, size=medium",
+        "variant=ghost, size=medium",
+        "variant=primary, size=small",
+        "variant=primary, size=large"
+      ]
+    },
+    {
+      "part": "root",
+      "fact": "border-width",
+      "verdict": "MISSING",
+      "truth": "1px",
+      "variants": [
+        "variant=ghost, size=medium"
+      ]
+    },
+    {
+      "part": "root",
+      "fact": "color",
+      "verdict": "MINTED",
+      "token": "{imported.button.root.color.primary}",
+      "truth": "#fcfeff",
+      "resolved": "#fcfeff",
+      "valueOk": true,
+      "variants": [
+        "variant=primary, size=medium",
+        "variant=primary, size=small",
+        "variant=primary, size=large"
+      ]
+    },
+    {
+      "part": "root",
+      "fact": "color",
+      "verdict": "MINTED",
+      "token": "{imported.button.root.color.surface}",
+      "truth": "#050a0f",
+      "resolved": "#050a0f",
+      "valueOk": true,
+      "variants": [
+        "variant=surface, size=medium"
+      ]
+    },
+    {
+      "part": "root",
+      "fact": "color",
+      "verdict": "MINTED",
+      "token": "{imported.button.root.color.danger}",
+      "truth": "#fcfeff",
+      "resolved": "#fcfeff",
+      "valueOk": true,
+      "variants": [
+        "variant=danger, size=medium"
+      ]
+    },
+    {
+      "part": "root",
+      "fact": "color",
+      "verdict": "MINTED",
+      "token": "{imported.button.root.color.ghost}",
+      "truth": "#050a0f",
+      "resolved": "#050a0f",
+      "valueOk": true,
+      "variants": [
+        "variant=ghost, size=medium"
+      ]
+    },
+    {
+      "part": "root",
+      "fact": "padding-block",
+      "verdict": "MINTED",
+      "token": "{imported.button.root.padding-block}",
+      "truth": "0.5rem",
+      "resolved": "0.5rem",
+      "valueOk": true,
+      "variants": [
+        "variant=primary, size=medium",
+        "variant=surface, size=medium",
+        "variant=danger, size=medium",
+        "variant=ghost, size=medium",
+        "variant=primary, size=small",
+        "variant=primary, size=large"
+      ]
+    },
+    {
+      "part": "root",
+      "fact": "padding-inline",
+      "verdict": "MINTED",
+      "token": "{imported.button.root.padding-inline.medium}",
+      "truth": "1rem",
+      "resolved": "1rem",
+      "valueOk": true,
+      "variants": [
+        "variant=primary, size=medium",
+        "variant=surface, size=medium",
+        "variant=danger, size=medium",
+        "variant=ghost, size=medium"
+      ]
+    },
+    {
+      "part": "root",
+      "fact": "padding-inline",
+      "verdict": "MINTED",
+      "token": "{imported.button.root.padding-inline.small}",
+      "truth": "0.75rem",
+      "resolved": "0.75rem",
+      "valueOk": true,
+      "variants": [
+        "variant=primary, size=small"
+      ]
+    },
+    {
+      "part": "root",
+      "fact": "padding-inline",
+      "verdict": "MINTED",
+      "token": "{imported.button.root.padding-inline.large}",
+      "truth": "1rem",
+      "resolved": "1rem",
+      "valueOk": true,
+      "variants": [
+        "variant=primary, size=large"
+      ]
+    }
+  ]
+}

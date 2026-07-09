@@ -1,0 +1,1463 @@
+{
+  "fileName": "Shoelace interactive UI library (Community)",
+  "sets": [
+    "Button group"
+  ],
+  "degradations": [
+    {
+      "code": "radii-nonuniform",
+      "nodePath": "Button group:position=left, size=large, type=default, isPill=false/Button",
+      "message": "rectangleCornerRadii [8, 0, 0, 8] are not uniform — dump v1 carries a uniform radius only; omitted"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=left, size=large, type=default, isPill=false/Button",
+      "field": "itemSpacing",
+      "message": "variable id VariableID:4:5 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=left, size=large, type=default, isPill=false/Button",
+      "field": "paddingLeft",
+      "message": "variable id VariableID:4:6 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=left, size=large, type=default, isPill=false/Button",
+      "field": "paddingRight",
+      "message": "variable id VariableID:4:6 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=left, size=large, type=default, isPill=false/Button",
+      "field": "topLeftRadius",
+      "message": "variable id VariableID:4:27 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=left, size=large, type=default, isPill=false/Button",
+      "field": "bottomLeftRadius",
+      "message": "variable id VariableID:4:27 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=left, size=large, type=default, isPill=false/Button",
+      "field": "fill",
+      "message": "variable id VariableID:4:23 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=left, size=large, type=default, isPill=false/Button",
+      "field": "stroke",
+      "message": "variable id VariableID:4:22 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "radii-nonuniform",
+      "nodePath": "Button group:position=left, size=large, type=default, isPill=true/Button",
+      "message": "rectangleCornerRadii [9999, 0, 0, 9999] are not uniform — dump v1 carries a uniform radius only; omitted"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=left, size=large, type=default, isPill=true/Button",
+      "field": "itemSpacing",
+      "message": "variable id VariableID:4:5 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=left, size=large, type=default, isPill=true/Button",
+      "field": "paddingLeft",
+      "message": "variable id VariableID:4:6 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=left, size=large, type=default, isPill=true/Button",
+      "field": "paddingRight",
+      "message": "variable id VariableID:4:6 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=left, size=large, type=default, isPill=true/Button",
+      "field": "topLeftRadius",
+      "message": "variable id VariableID:4:30 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=left, size=large, type=default, isPill=true/Button",
+      "field": "bottomLeftRadius",
+      "message": "variable id VariableID:4:30 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=left, size=large, type=default, isPill=true/Button",
+      "field": "fill",
+      "message": "variable id VariableID:4:23 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=left, size=large, type=default, isPill=true/Button",
+      "field": "stroke",
+      "message": "variable id VariableID:4:22 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "radii-nonuniform",
+      "nodePath": "Button group:position=left, size=large, type=primary, isPill=false/Button",
+      "message": "rectangleCornerRadii [8, 0, 0, 8] are not uniform — dump v1 carries a uniform radius only; omitted"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=left, size=large, type=primary, isPill=false/Button",
+      "field": "itemSpacing",
+      "message": "variable id VariableID:4:5 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=left, size=large, type=primary, isPill=false/Button",
+      "field": "paddingLeft",
+      "message": "variable id VariableID:4:6 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=left, size=large, type=primary, isPill=false/Button",
+      "field": "paddingRight",
+      "message": "variable id VariableID:4:6 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=left, size=large, type=primary, isPill=false/Button",
+      "field": "topLeftRadius",
+      "message": "variable id VariableID:4:27 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=left, size=large, type=primary, isPill=false/Button",
+      "field": "bottomLeftRadius",
+      "message": "variable id VariableID:4:27 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=left, size=large, type=primary, isPill=false/Button",
+      "field": "fill",
+      "message": "variable id VariableID:4:72 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "radii-nonuniform",
+      "nodePath": "Button group:position=left, size=large, type=primary, isPill=true/Button",
+      "message": "rectangleCornerRadii [9999, 0, 0, 9999] are not uniform — dump v1 carries a uniform radius only; omitted"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=left, size=large, type=primary, isPill=true/Button",
+      "field": "itemSpacing",
+      "message": "variable id VariableID:4:5 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=left, size=large, type=primary, isPill=true/Button",
+      "field": "paddingLeft",
+      "message": "variable id VariableID:4:6 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=left, size=large, type=primary, isPill=true/Button",
+      "field": "paddingRight",
+      "message": "variable id VariableID:4:6 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=left, size=large, type=primary, isPill=true/Button",
+      "field": "topLeftRadius",
+      "message": "variable id VariableID:4:30 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=left, size=large, type=primary, isPill=true/Button",
+      "field": "bottomLeftRadius",
+      "message": "variable id VariableID:4:30 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=left, size=large, type=primary, isPill=true/Button",
+      "field": "fill",
+      "message": "variable id VariableID:4:72 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "radii-nonuniform",
+      "nodePath": "Button group:position=left, size=small, type=default, isPill=false/Button",
+      "message": "rectangleCornerRadii [3, 0, 0, 3] are not uniform — dump v1 carries a uniform radius only; omitted"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=left, size=small, type=default, isPill=false/Button",
+      "field": "itemSpacing",
+      "message": "variable id VariableID:4:3 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=left, size=small, type=default, isPill=false/Button",
+      "field": "paddingLeft",
+      "message": "variable id VariableID:4:4 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=left, size=small, type=default, isPill=false/Button",
+      "field": "paddingRight",
+      "message": "variable id VariableID:4:4 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=left, size=small, type=default, isPill=false/Button",
+      "field": "topLeftRadius",
+      "message": "variable id VariableID:4:26 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=left, size=small, type=default, isPill=false/Button",
+      "field": "bottomLeftRadius",
+      "message": "variable id VariableID:4:26 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=left, size=small, type=default, isPill=false/Button",
+      "field": "fill",
+      "message": "variable id VariableID:4:23 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=left, size=small, type=default, isPill=false/Button",
+      "field": "stroke",
+      "message": "variable id VariableID:4:22 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "radii-nonuniform",
+      "nodePath": "Button group:position=left, size=small, type=default, isPill=true/Button",
+      "message": "rectangleCornerRadii [9999, 0, 0, 9999] are not uniform — dump v1 carries a uniform radius only; omitted"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=left, size=small, type=default, isPill=true/Button",
+      "field": "itemSpacing",
+      "message": "variable id VariableID:4:3 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=left, size=small, type=default, isPill=true/Button",
+      "field": "paddingLeft",
+      "message": "variable id VariableID:4:4 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=left, size=small, type=default, isPill=true/Button",
+      "field": "paddingRight",
+      "message": "variable id VariableID:4:4 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=left, size=small, type=default, isPill=true/Button",
+      "field": "topLeftRadius",
+      "message": "variable id VariableID:4:30 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=left, size=small, type=default, isPill=true/Button",
+      "field": "bottomLeftRadius",
+      "message": "variable id VariableID:4:30 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=left, size=small, type=default, isPill=true/Button",
+      "field": "fill",
+      "message": "variable id VariableID:4:23 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=left, size=small, type=default, isPill=true/Button",
+      "field": "stroke",
+      "message": "variable id VariableID:4:22 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "radii-nonuniform",
+      "nodePath": "Button group:position=left, size=small, type=primary, isPill=false/Button",
+      "message": "rectangleCornerRadii [3, 0, 0, 3] are not uniform — dump v1 carries a uniform radius only; omitted"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=left, size=small, type=primary, isPill=false/Button",
+      "field": "itemSpacing",
+      "message": "variable id VariableID:4:3 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=left, size=small, type=primary, isPill=false/Button",
+      "field": "paddingLeft",
+      "message": "variable id VariableID:4:4 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=left, size=small, type=primary, isPill=false/Button",
+      "field": "paddingRight",
+      "message": "variable id VariableID:4:4 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=left, size=small, type=primary, isPill=false/Button",
+      "field": "topLeftRadius",
+      "message": "variable id VariableID:4:26 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=left, size=small, type=primary, isPill=false/Button",
+      "field": "bottomLeftRadius",
+      "message": "variable id VariableID:4:26 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=left, size=small, type=primary, isPill=false/Button",
+      "field": "fill",
+      "message": "variable id VariableID:4:72 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "radii-nonuniform",
+      "nodePath": "Button group:position=left, size=small, type=primary, isPill=true/Button",
+      "message": "rectangleCornerRadii [9999, 0, 0, 9999] are not uniform — dump v1 carries a uniform radius only; omitted"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=left, size=small, type=primary, isPill=true/Button",
+      "field": "itemSpacing",
+      "message": "variable id VariableID:4:3 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=left, size=small, type=primary, isPill=true/Button",
+      "field": "paddingLeft",
+      "message": "variable id VariableID:4:4 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=left, size=small, type=primary, isPill=true/Button",
+      "field": "paddingRight",
+      "message": "variable id VariableID:4:4 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=left, size=small, type=primary, isPill=true/Button",
+      "field": "topLeftRadius",
+      "message": "variable id VariableID:4:30 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=left, size=small, type=primary, isPill=true/Button",
+      "field": "bottomLeftRadius",
+      "message": "variable id VariableID:4:30 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=left, size=small, type=primary, isPill=true/Button",
+      "field": "fill",
+      "message": "variable id VariableID:4:72 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "radii-nonuniform",
+      "nodePath": "Button group:position=left, size=medium, type=default, isPill=false/Button",
+      "message": "rectangleCornerRadii [4, 0, 0, 4] are not uniform — dump v1 carries a uniform radius only; omitted"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=left, size=medium, type=default, isPill=false/Button",
+      "field": "itemSpacing",
+      "message": "variable id VariableID:4:4 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=left, size=medium, type=default, isPill=false/Button",
+      "field": "paddingLeft",
+      "message": "variable id VariableID:4:5 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=left, size=medium, type=default, isPill=false/Button",
+      "field": "paddingRight",
+      "message": "variable id VariableID:4:5 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=left, size=medium, type=default, isPill=false/Button",
+      "field": "topLeftRadius",
+      "message": "variable id VariableID:4:25 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=left, size=medium, type=default, isPill=false/Button",
+      "field": "bottomLeftRadius",
+      "message": "variable id VariableID:4:25 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=left, size=medium, type=default, isPill=false/Button",
+      "field": "fill",
+      "message": "variable id VariableID:4:23 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=left, size=medium, type=default, isPill=false/Button",
+      "field": "stroke",
+      "message": "variable id VariableID:4:22 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "radii-nonuniform",
+      "nodePath": "Button group:position=left, size=medium, type=default, isPill=true/Button",
+      "message": "rectangleCornerRadii [9999, 0, 0, 9999] are not uniform — dump v1 carries a uniform radius only; omitted"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=left, size=medium, type=default, isPill=true/Button",
+      "field": "itemSpacing",
+      "message": "variable id VariableID:4:4 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=left, size=medium, type=default, isPill=true/Button",
+      "field": "paddingLeft",
+      "message": "variable id VariableID:4:5 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=left, size=medium, type=default, isPill=true/Button",
+      "field": "paddingRight",
+      "message": "variable id VariableID:4:5 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=left, size=medium, type=default, isPill=true/Button",
+      "field": "topLeftRadius",
+      "message": "variable id VariableID:4:30 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=left, size=medium, type=default, isPill=true/Button",
+      "field": "bottomLeftRadius",
+      "message": "variable id VariableID:4:30 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=left, size=medium, type=default, isPill=true/Button",
+      "field": "fill",
+      "message": "variable id VariableID:4:23 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=left, size=medium, type=default, isPill=true/Button",
+      "field": "stroke",
+      "message": "variable id VariableID:4:22 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "radii-nonuniform",
+      "nodePath": "Button group:position=left, size=medium, type=primary, isPill=false/Button",
+      "message": "rectangleCornerRadii [4, 0, 0, 4] are not uniform — dump v1 carries a uniform radius only; omitted"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=left, size=medium, type=primary, isPill=false/Button",
+      "field": "itemSpacing",
+      "message": "variable id VariableID:4:4 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=left, size=medium, type=primary, isPill=false/Button",
+      "field": "paddingLeft",
+      "message": "variable id VariableID:4:5 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=left, size=medium, type=primary, isPill=false/Button",
+      "field": "paddingRight",
+      "message": "variable id VariableID:4:5 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=left, size=medium, type=primary, isPill=false/Button",
+      "field": "topLeftRadius",
+      "message": "variable id VariableID:4:25 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=left, size=medium, type=primary, isPill=false/Button",
+      "field": "bottomLeftRadius",
+      "message": "variable id VariableID:4:25 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=left, size=medium, type=primary, isPill=false/Button",
+      "field": "fill",
+      "message": "variable id VariableID:4:72 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "radii-nonuniform",
+      "nodePath": "Button group:position=left, size=medium, type=primary, isPill=true/Button",
+      "message": "rectangleCornerRadii [9999, 0, 0, 9999] are not uniform — dump v1 carries a uniform radius only; omitted"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=left, size=medium, type=primary, isPill=true/Button",
+      "field": "itemSpacing",
+      "message": "variable id VariableID:4:4 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=left, size=medium, type=primary, isPill=true/Button",
+      "field": "paddingLeft",
+      "message": "variable id VariableID:4:5 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=left, size=medium, type=primary, isPill=true/Button",
+      "field": "paddingRight",
+      "message": "variable id VariableID:4:5 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=left, size=medium, type=primary, isPill=true/Button",
+      "field": "topLeftRadius",
+      "message": "variable id VariableID:4:30 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=left, size=medium, type=primary, isPill=true/Button",
+      "field": "bottomLeftRadius",
+      "message": "variable id VariableID:4:30 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=left, size=medium, type=primary, isPill=true/Button",
+      "field": "fill",
+      "message": "variable id VariableID:4:72 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=center, size=large, type=default, isPill=false/Button",
+      "field": "itemSpacing",
+      "message": "variable id VariableID:4:5 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=center, size=large, type=default, isPill=false/Button",
+      "field": "paddingLeft",
+      "message": "variable id VariableID:4:6 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=center, size=large, type=default, isPill=false/Button",
+      "field": "paddingRight",
+      "message": "variable id VariableID:4:6 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=center, size=large, type=default, isPill=false/Button",
+      "field": "fill",
+      "message": "variable id VariableID:4:23 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=center, size=large, type=default, isPill=false/Button",
+      "field": "stroke",
+      "message": "variable id VariableID:4:22 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=center, size=large, type=default, isPill=true/Button",
+      "field": "itemSpacing",
+      "message": "variable id VariableID:4:5 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=center, size=large, type=default, isPill=true/Button",
+      "field": "paddingLeft",
+      "message": "variable id VariableID:4:6 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=center, size=large, type=default, isPill=true/Button",
+      "field": "paddingRight",
+      "message": "variable id VariableID:4:6 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=center, size=large, type=default, isPill=true/Button",
+      "field": "fill",
+      "message": "variable id VariableID:4:23 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=center, size=large, type=default, isPill=true/Button",
+      "field": "stroke",
+      "message": "variable id VariableID:4:22 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=center, size=large, type=primary, isPill=false/Button",
+      "field": "itemSpacing",
+      "message": "variable id VariableID:4:5 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=center, size=large, type=primary, isPill=false/Button",
+      "field": "paddingLeft",
+      "message": "variable id VariableID:4:6 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=center, size=large, type=primary, isPill=false/Button",
+      "field": "paddingRight",
+      "message": "variable id VariableID:4:6 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=center, size=large, type=primary, isPill=false/Button",
+      "field": "fill",
+      "message": "variable id VariableID:4:72 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=center, size=large, type=primary, isPill=false/Button",
+      "field": "stroke",
+      "message": "variable id VariableID:4:23 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=center, size=large, type=primary, isPill=true/Button",
+      "field": "itemSpacing",
+      "message": "variable id VariableID:4:5 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=center, size=large, type=primary, isPill=true/Button",
+      "field": "paddingLeft",
+      "message": "variable id VariableID:4:6 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=center, size=large, type=primary, isPill=true/Button",
+      "field": "paddingRight",
+      "message": "variable id VariableID:4:6 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=center, size=large, type=primary, isPill=true/Button",
+      "field": "fill",
+      "message": "variable id VariableID:4:72 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=center, size=large, type=primary, isPill=true/Button",
+      "field": "stroke",
+      "message": "variable id VariableID:4:23 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=center, size=small, type=default, isPill=false/Button",
+      "field": "itemSpacing",
+      "message": "variable id VariableID:4:3 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=center, size=small, type=default, isPill=false/Button",
+      "field": "paddingLeft",
+      "message": "variable id VariableID:4:4 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=center, size=small, type=default, isPill=false/Button",
+      "field": "paddingRight",
+      "message": "variable id VariableID:4:4 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=center, size=small, type=default, isPill=false/Button",
+      "field": "fill",
+      "message": "variable id VariableID:4:23 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=center, size=small, type=default, isPill=false/Button",
+      "field": "stroke",
+      "message": "variable id VariableID:4:22 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=center, size=small, type=default, isPill=true/Button",
+      "field": "itemSpacing",
+      "message": "variable id VariableID:4:3 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=center, size=small, type=default, isPill=true/Button",
+      "field": "paddingLeft",
+      "message": "variable id VariableID:4:4 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=center, size=small, type=default, isPill=true/Button",
+      "field": "paddingRight",
+      "message": "variable id VariableID:4:4 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=center, size=small, type=default, isPill=true/Button",
+      "field": "fill",
+      "message": "variable id VariableID:4:23 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=center, size=small, type=default, isPill=true/Button",
+      "field": "stroke",
+      "message": "variable id VariableID:4:22 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=center, size=small, type=primary, isPill=false/Button",
+      "field": "itemSpacing",
+      "message": "variable id VariableID:4:3 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=center, size=small, type=primary, isPill=false/Button",
+      "field": "paddingLeft",
+      "message": "variable id VariableID:4:4 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=center, size=small, type=primary, isPill=false/Button",
+      "field": "paddingRight",
+      "message": "variable id VariableID:4:4 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=center, size=small, type=primary, isPill=false/Button",
+      "field": "fill",
+      "message": "variable id VariableID:4:72 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=center, size=small, type=primary, isPill=false/Button",
+      "field": "stroke",
+      "message": "variable id VariableID:4:23 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=center, size=small, type=primary, isPill=true/Button",
+      "field": "itemSpacing",
+      "message": "variable id VariableID:4:3 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=center, size=small, type=primary, isPill=true/Button",
+      "field": "paddingLeft",
+      "message": "variable id VariableID:4:4 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=center, size=small, type=primary, isPill=true/Button",
+      "field": "paddingRight",
+      "message": "variable id VariableID:4:4 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=center, size=small, type=primary, isPill=true/Button",
+      "field": "fill",
+      "message": "variable id VariableID:4:72 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=center, size=small, type=primary, isPill=true/Button",
+      "field": "stroke",
+      "message": "variable id VariableID:4:23 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=center, size=medium, type=default, isPill=false/Button",
+      "field": "itemSpacing",
+      "message": "variable id VariableID:4:4 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=center, size=medium, type=default, isPill=false/Button",
+      "field": "paddingLeft",
+      "message": "variable id VariableID:4:5 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=center, size=medium, type=default, isPill=false/Button",
+      "field": "paddingRight",
+      "message": "variable id VariableID:4:5 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=center, size=medium, type=default, isPill=false/Button",
+      "field": "fill",
+      "message": "variable id VariableID:4:23 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=center, size=medium, type=default, isPill=false/Button",
+      "field": "stroke",
+      "message": "variable id VariableID:4:22 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=center, size=medium, type=default, isPill=true/Button",
+      "field": "itemSpacing",
+      "message": "variable id VariableID:4:4 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=center, size=medium, type=default, isPill=true/Button",
+      "field": "paddingLeft",
+      "message": "variable id VariableID:4:5 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=center, size=medium, type=default, isPill=true/Button",
+      "field": "paddingRight",
+      "message": "variable id VariableID:4:5 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=center, size=medium, type=default, isPill=true/Button",
+      "field": "fill",
+      "message": "variable id VariableID:4:23 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=center, size=medium, type=default, isPill=true/Button",
+      "field": "stroke",
+      "message": "variable id VariableID:4:22 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=center, size=medium, type=primary, isPill=false/Button",
+      "field": "itemSpacing",
+      "message": "variable id VariableID:4:4 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=center, size=medium, type=primary, isPill=false/Button",
+      "field": "paddingLeft",
+      "message": "variable id VariableID:4:5 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=center, size=medium, type=primary, isPill=false/Button",
+      "field": "paddingRight",
+      "message": "variable id VariableID:4:5 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=center, size=medium, type=primary, isPill=false/Button",
+      "field": "fill",
+      "message": "variable id VariableID:4:72 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=center, size=medium, type=primary, isPill=false/Button",
+      "field": "stroke",
+      "message": "variable id VariableID:4:23 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=center, size=medium, type=primary, isPill=true/Button",
+      "field": "itemSpacing",
+      "message": "variable id VariableID:4:4 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=center, size=medium, type=primary, isPill=true/Button",
+      "field": "paddingLeft",
+      "message": "variable id VariableID:4:5 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=center, size=medium, type=primary, isPill=true/Button",
+      "field": "paddingRight",
+      "message": "variable id VariableID:4:5 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=center, size=medium, type=primary, isPill=true/Button",
+      "field": "fill",
+      "message": "variable id VariableID:4:72 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=center, size=medium, type=primary, isPill=true/Button",
+      "field": "stroke",
+      "message": "variable id VariableID:4:23 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "radii-nonuniform",
+      "nodePath": "Button group:position=right, size=large, type=default, isPill=false/Button",
+      "message": "rectangleCornerRadii [0, 8, 8, 0] are not uniform — dump v1 carries a uniform radius only; omitted"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=right, size=large, type=default, isPill=false/Button",
+      "field": "itemSpacing",
+      "message": "variable id VariableID:4:5 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=right, size=large, type=default, isPill=false/Button",
+      "field": "paddingLeft",
+      "message": "variable id VariableID:4:6 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=right, size=large, type=default, isPill=false/Button",
+      "field": "paddingRight",
+      "message": "variable id VariableID:4:6 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=right, size=large, type=default, isPill=false/Button",
+      "field": "topRightRadius",
+      "message": "variable id VariableID:4:27 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=right, size=large, type=default, isPill=false/Button",
+      "field": "bottomRightRadius",
+      "message": "variable id VariableID:4:27 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=right, size=large, type=default, isPill=false/Button",
+      "field": "fill",
+      "message": "variable id VariableID:4:23 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=right, size=large, type=default, isPill=false/Button",
+      "field": "stroke",
+      "message": "variable id VariableID:4:22 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "radii-nonuniform",
+      "nodePath": "Button group:position=right, size=large, type=default, isPill=true/Button",
+      "message": "rectangleCornerRadii [0, 9999, 9999, 0] are not uniform — dump v1 carries a uniform radius only; omitted"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=right, size=large, type=default, isPill=true/Button",
+      "field": "itemSpacing",
+      "message": "variable id VariableID:4:5 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=right, size=large, type=default, isPill=true/Button",
+      "field": "paddingLeft",
+      "message": "variable id VariableID:4:6 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=right, size=large, type=default, isPill=true/Button",
+      "field": "paddingRight",
+      "message": "variable id VariableID:4:6 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=right, size=large, type=default, isPill=true/Button",
+      "field": "topRightRadius",
+      "message": "variable id VariableID:4:30 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=right, size=large, type=default, isPill=true/Button",
+      "field": "bottomRightRadius",
+      "message": "variable id VariableID:4:30 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=right, size=large, type=default, isPill=true/Button",
+      "field": "fill",
+      "message": "variable id VariableID:4:23 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=right, size=large, type=default, isPill=true/Button",
+      "field": "stroke",
+      "message": "variable id VariableID:4:22 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "radii-nonuniform",
+      "nodePath": "Button group:position=right, size=large, type=primary, isPill=false/Button",
+      "message": "rectangleCornerRadii [0, 8, 8, 0] are not uniform — dump v1 carries a uniform radius only; omitted"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=right, size=large, type=primary, isPill=false/Button",
+      "field": "itemSpacing",
+      "message": "variable id VariableID:4:5 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=right, size=large, type=primary, isPill=false/Button",
+      "field": "paddingLeft",
+      "message": "variable id VariableID:4:6 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=right, size=large, type=primary, isPill=false/Button",
+      "field": "paddingRight",
+      "message": "variable id VariableID:4:6 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=right, size=large, type=primary, isPill=false/Button",
+      "field": "topRightRadius",
+      "message": "variable id VariableID:4:27 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=right, size=large, type=primary, isPill=false/Button",
+      "field": "bottomRightRadius",
+      "message": "variable id VariableID:4:27 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=right, size=large, type=primary, isPill=false/Button",
+      "field": "fill",
+      "message": "variable id VariableID:4:72 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=right, size=large, type=primary, isPill=false/Button",
+      "field": "stroke",
+      "message": "variable id VariableID:4:23 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "radii-nonuniform",
+      "nodePath": "Button group:position=right, size=large, type=primary, isPill=true/Button",
+      "message": "rectangleCornerRadii [0, 9999, 9999, 0] are not uniform — dump v1 carries a uniform radius only; omitted"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=right, size=large, type=primary, isPill=true/Button",
+      "field": "itemSpacing",
+      "message": "variable id VariableID:4:5 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=right, size=large, type=primary, isPill=true/Button",
+      "field": "paddingLeft",
+      "message": "variable id VariableID:4:6 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=right, size=large, type=primary, isPill=true/Button",
+      "field": "paddingRight",
+      "message": "variable id VariableID:4:6 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=right, size=large, type=primary, isPill=true/Button",
+      "field": "topRightRadius",
+      "message": "variable id VariableID:4:30 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=right, size=large, type=primary, isPill=true/Button",
+      "field": "bottomRightRadius",
+      "message": "variable id VariableID:4:30 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=right, size=large, type=primary, isPill=true/Button",
+      "field": "fill",
+      "message": "variable id VariableID:4:72 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=right, size=large, type=primary, isPill=true/Button",
+      "field": "stroke",
+      "message": "variable id VariableID:4:23 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "radii-nonuniform",
+      "nodePath": "Button group:position=position4, size=small, type=default, isPill=false/Button",
+      "message": "rectangleCornerRadii [0, 3, 3, 0] are not uniform — dump v1 carries a uniform radius only; omitted"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=position4, size=small, type=default, isPill=false/Button",
+      "field": "itemSpacing",
+      "message": "variable id VariableID:4:3 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=position4, size=small, type=default, isPill=false/Button",
+      "field": "paddingLeft",
+      "message": "variable id VariableID:4:4 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=position4, size=small, type=default, isPill=false/Button",
+      "field": "paddingRight",
+      "message": "variable id VariableID:4:4 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=position4, size=small, type=default, isPill=false/Button",
+      "field": "topRightRadius",
+      "message": "variable id VariableID:4:26 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=position4, size=small, type=default, isPill=false/Button",
+      "field": "bottomRightRadius",
+      "message": "variable id VariableID:4:26 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=position4, size=small, type=default, isPill=false/Button",
+      "field": "fill",
+      "message": "variable id VariableID:4:23 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=position4, size=small, type=default, isPill=false/Button",
+      "field": "stroke",
+      "message": "variable id VariableID:4:22 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "radii-nonuniform",
+      "nodePath": "Button group:position=position4, size=small, type=default, isPill=true/Button",
+      "message": "rectangleCornerRadii [0, 9999, 9999, 0] are not uniform — dump v1 carries a uniform radius only; omitted"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=position4, size=small, type=default, isPill=true/Button",
+      "field": "itemSpacing",
+      "message": "variable id VariableID:4:3 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=position4, size=small, type=default, isPill=true/Button",
+      "field": "paddingLeft",
+      "message": "variable id VariableID:4:4 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=position4, size=small, type=default, isPill=true/Button",
+      "field": "paddingRight",
+      "message": "variable id VariableID:4:4 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=position4, size=small, type=default, isPill=true/Button",
+      "field": "topRightRadius",
+      "message": "variable id VariableID:4:30 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=position4, size=small, type=default, isPill=true/Button",
+      "field": "bottomRightRadius",
+      "message": "variable id VariableID:4:30 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=position4, size=small, type=default, isPill=true/Button",
+      "field": "fill",
+      "message": "variable id VariableID:4:23 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=position4, size=small, type=default, isPill=true/Button",
+      "field": "stroke",
+      "message": "variable id VariableID:4:22 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "radii-nonuniform",
+      "nodePath": "Button group:position=position4, size=small, type=primary, isPill=false/Button",
+      "message": "rectangleCornerRadii [0, 3, 3, 0] are not uniform — dump v1 carries a uniform radius only; omitted"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=position4, size=small, type=primary, isPill=false/Button",
+      "field": "itemSpacing",
+      "message": "variable id VariableID:4:3 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=position4, size=small, type=primary, isPill=false/Button",
+      "field": "paddingLeft",
+      "message": "variable id VariableID:4:4 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=position4, size=small, type=primary, isPill=false/Button",
+      "field": "paddingRight",
+      "message": "variable id VariableID:4:4 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=position4, size=small, type=primary, isPill=false/Button",
+      "field": "topRightRadius",
+      "message": "variable id VariableID:4:26 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=position4, size=small, type=primary, isPill=false/Button",
+      "field": "bottomRightRadius",
+      "message": "variable id VariableID:4:26 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=position4, size=small, type=primary, isPill=false/Button",
+      "field": "fill",
+      "message": "variable id VariableID:4:72 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=position4, size=small, type=primary, isPill=false/Button",
+      "field": "stroke",
+      "message": "variable id VariableID:4:23 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "radii-nonuniform",
+      "nodePath": "Button group:position=position4, size=small, type=primary, isPill=true/Button",
+      "message": "rectangleCornerRadii [0, 9999, 9999, 0] are not uniform — dump v1 carries a uniform radius only; omitted"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=position4, size=small, type=primary, isPill=true/Button",
+      "field": "itemSpacing",
+      "message": "variable id VariableID:4:3 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=position4, size=small, type=primary, isPill=true/Button",
+      "field": "paddingLeft",
+      "message": "variable id VariableID:4:4 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=position4, size=small, type=primary, isPill=true/Button",
+      "field": "paddingRight",
+      "message": "variable id VariableID:4:4 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=position4, size=small, type=primary, isPill=true/Button",
+      "field": "topRightRadius",
+      "message": "variable id VariableID:4:30 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=position4, size=small, type=primary, isPill=true/Button",
+      "field": "bottomRightRadius",
+      "message": "variable id VariableID:4:30 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=position4, size=small, type=primary, isPill=true/Button",
+      "field": "fill",
+      "message": "variable id VariableID:4:72 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=position4, size=small, type=primary, isPill=true/Button",
+      "field": "stroke",
+      "message": "variable id VariableID:4:23 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "radii-nonuniform",
+      "nodePath": "Button group:position=right, size=medium, type=default, isPill=false/Button",
+      "message": "rectangleCornerRadii [0, 4, 4, 0] are not uniform — dump v1 carries a uniform radius only; omitted"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=right, size=medium, type=default, isPill=false/Button",
+      "field": "itemSpacing",
+      "message": "variable id VariableID:4:4 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=right, size=medium, type=default, isPill=false/Button",
+      "field": "paddingLeft",
+      "message": "variable id VariableID:4:5 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=right, size=medium, type=default, isPill=false/Button",
+      "field": "paddingRight",
+      "message": "variable id VariableID:4:5 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=right, size=medium, type=default, isPill=false/Button",
+      "field": "topRightRadius",
+      "message": "variable id VariableID:4:25 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=right, size=medium, type=default, isPill=false/Button",
+      "field": "bottomRightRadius",
+      "message": "variable id VariableID:4:25 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=right, size=medium, type=default, isPill=false/Button",
+      "field": "fill",
+      "message": "variable id VariableID:4:23 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=right, size=medium, type=default, isPill=false/Button",
+      "field": "stroke",
+      "message": "variable id VariableID:4:22 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "radii-nonuniform",
+      "nodePath": "Button group:position=right, size=medium, type=default, isPill=true/Button",
+      "message": "rectangleCornerRadii [0, 9999, 9999, 0] are not uniform — dump v1 carries a uniform radius only; omitted"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=right, size=medium, type=default, isPill=true/Button",
+      "field": "itemSpacing",
+      "message": "variable id VariableID:4:4 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=right, size=medium, type=default, isPill=true/Button",
+      "field": "paddingLeft",
+      "message": "variable id VariableID:4:5 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=right, size=medium, type=default, isPill=true/Button",
+      "field": "paddingRight",
+      "message": "variable id VariableID:4:5 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=right, size=medium, type=default, isPill=true/Button",
+      "field": "topRightRadius",
+      "message": "variable id VariableID:4:30 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=right, size=medium, type=default, isPill=true/Button",
+      "field": "bottomRightRadius",
+      "message": "variable id VariableID:4:30 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=right, size=medium, type=default, isPill=true/Button",
+      "field": "fill",
+      "message": "variable id VariableID:4:23 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=right, size=medium, type=default, isPill=true/Button",
+      "field": "stroke",
+      "message": "variable id VariableID:4:22 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "radii-nonuniform",
+      "nodePath": "Button group:position=right, size=medium, type=primary, isPill=false/Button",
+      "message": "rectangleCornerRadii [0, 4, 4, 0] are not uniform — dump v1 carries a uniform radius only; omitted"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=right, size=medium, type=primary, isPill=false/Button",
+      "field": "itemSpacing",
+      "message": "variable id VariableID:4:4 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=right, size=medium, type=primary, isPill=false/Button",
+      "field": "paddingLeft",
+      "message": "variable id VariableID:4:5 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=right, size=medium, type=primary, isPill=false/Button",
+      "field": "paddingRight",
+      "message": "variable id VariableID:4:5 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=right, size=medium, type=primary, isPill=false/Button",
+      "field": "topRightRadius",
+      "message": "variable id VariableID:4:25 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=right, size=medium, type=primary, isPill=false/Button",
+      "field": "bottomRightRadius",
+      "message": "variable id VariableID:4:25 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=right, size=medium, type=primary, isPill=false/Button",
+      "field": "fill",
+      "message": "variable id VariableID:4:72 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=right, size=medium, type=primary, isPill=false/Button",
+      "field": "stroke",
+      "message": "variable id VariableID:4:23 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "radii-nonuniform",
+      "nodePath": "Button group:position=right, size=medium, type=primary, isPill=true/Button",
+      "message": "rectangleCornerRadii [0, 9999, 9999, 0] are not uniform — dump v1 carries a uniform radius only; omitted"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=right, size=medium, type=primary, isPill=true/Button",
+      "field": "itemSpacing",
+      "message": "variable id VariableID:4:4 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=right, size=medium, type=primary, isPill=true/Button",
+      "field": "paddingLeft",
+      "message": "variable id VariableID:4:5 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=right, size=medium, type=primary, isPill=true/Button",
+      "field": "paddingRight",
+      "message": "variable id VariableID:4:5 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=right, size=medium, type=primary, isPill=true/Button",
+      "field": "topRightRadius",
+      "message": "variable id VariableID:4:30 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=right, size=medium, type=primary, isPill=true/Button",
+      "field": "bottomRightRadius",
+      "message": "variable id VariableID:4:30 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=right, size=medium, type=primary, isPill=true/Button",
+      "field": "fill",
+      "message": "variable id VariableID:4:72 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button group:position=right, size=medium, type=primary, isPill=true/Button",
+      "field": "stroke",
+      "message": "variable id VariableID:4:23 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    }
+  ],
+  "notes": [
+    "variables response not provided — every bound fact degrades to its resolved literal; see variable-unresolved entries"
+  ]
+}

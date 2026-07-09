@@ -1,0 +1,1541 @@
+{
+  "fileName": "CBDS UI Kit Demo",
+  "sets": [
+    "Button-Brand Primary"
+  ],
+  "degradations": [
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=large, state=default",
+      "field": "itemSpacing",
+      "message": "variable id VariableID:118:871 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=large, state=default",
+      "field": "paddingLeft",
+      "message": "variable id VariableID:118:874 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=large, state=default",
+      "field": "paddingTop",
+      "message": "variable id VariableID:118:871 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=large, state=default",
+      "field": "paddingRight",
+      "message": "variable id VariableID:118:874 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=large, state=default",
+      "field": "paddingBottom",
+      "message": "variable id VariableID:118:871 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=large, state=default",
+      "field": "height",
+      "message": "variable id VariableID:118:904 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=large, state=default",
+      "field": "topLeftRadius",
+      "message": "variable id VariableID:118:907 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=large, state=default",
+      "field": "topRightRadius",
+      "message": "variable id VariableID:118:907 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=large, state=default",
+      "field": "bottomLeftRadius",
+      "message": "variable id VariableID:118:907 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=large, state=default",
+      "field": "bottomRightRadius",
+      "message": "variable id VariableID:118:907 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=large, state=default",
+      "field": "fill",
+      "message": "variable id VariableID:90:1077 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=large, state=default/Icon",
+      "field": "width",
+      "message": "variable id VariableID:118:906 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=large, state=default/Icon",
+      "field": "height",
+      "message": "variable id VariableID:118:899 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=large, state=default/Button",
+      "field": "fill",
+      "message": "variable id VariableID:93:879 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=large, state=default/Icon",
+      "field": "width",
+      "message": "variable id VariableID:118:906 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=large, state=default/Icon",
+      "field": "height",
+      "message": "variable id VariableID:118:899 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=medium, state=default",
+      "field": "itemSpacing",
+      "message": "variable id VariableID:118:871 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=medium, state=default",
+      "field": "paddingLeft",
+      "message": "variable id VariableID:118:874 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=medium, state=default",
+      "field": "paddingTop",
+      "message": "variable id VariableID:118:871 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=medium, state=default",
+      "field": "paddingRight",
+      "message": "variable id VariableID:118:874 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=medium, state=default",
+      "field": "paddingBottom",
+      "message": "variable id VariableID:118:871 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=medium, state=default",
+      "field": "height",
+      "message": "variable id VariableID:118:903 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=medium, state=default",
+      "field": "topLeftRadius",
+      "message": "variable id VariableID:118:907 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=medium, state=default",
+      "field": "topRightRadius",
+      "message": "variable id VariableID:118:907 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=medium, state=default",
+      "field": "bottomLeftRadius",
+      "message": "variable id VariableID:118:907 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=medium, state=default",
+      "field": "bottomRightRadius",
+      "message": "variable id VariableID:118:907 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=medium, state=default",
+      "field": "fill",
+      "message": "variable id VariableID:90:1077 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=medium, state=default/Icon",
+      "field": "width",
+      "message": "variable id VariableID:118:906 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=medium, state=default/Icon",
+      "field": "height",
+      "message": "variable id VariableID:118:899 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=medium, state=default/Button",
+      "field": "fill",
+      "message": "variable id VariableID:93:879 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=medium, state=default/Icon",
+      "field": "width",
+      "message": "variable id VariableID:118:906 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=medium, state=default/Icon",
+      "field": "height",
+      "message": "variable id VariableID:118:899 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=small, state=default",
+      "field": "itemSpacing",
+      "message": "variable id VariableID:118:871 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=small, state=default",
+      "field": "paddingLeft",
+      "message": "variable id VariableID:118:873 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=small, state=default",
+      "field": "paddingTop",
+      "message": "variable id VariableID:118:871 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=small, state=default",
+      "field": "paddingRight",
+      "message": "variable id VariableID:118:873 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=small, state=default",
+      "field": "paddingBottom",
+      "message": "variable id VariableID:118:871 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=small, state=default",
+      "field": "height",
+      "message": "variable id VariableID:118:902 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=small, state=default",
+      "field": "topLeftRadius",
+      "message": "variable id VariableID:118:907 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=small, state=default",
+      "field": "topRightRadius",
+      "message": "variable id VariableID:118:907 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=small, state=default",
+      "field": "bottomLeftRadius",
+      "message": "variable id VariableID:118:907 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=small, state=default",
+      "field": "bottomRightRadius",
+      "message": "variable id VariableID:118:907 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=small, state=default",
+      "field": "fill",
+      "message": "variable id VariableID:90:1077 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=small, state=default/Icon",
+      "field": "width",
+      "message": "variable id VariableID:118:901 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=small, state=default/Icon",
+      "field": "height",
+      "message": "variable id VariableID:118:901 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=small, state=default/Button",
+      "field": "fill",
+      "message": "variable id VariableID:93:879 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=small, state=default/Icon",
+      "field": "width",
+      "message": "variable id VariableID:118:901 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=small, state=default/Icon",
+      "field": "height",
+      "message": "variable id VariableID:118:901 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=large, state=hover",
+      "field": "itemSpacing",
+      "message": "variable id VariableID:118:871 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=large, state=hover",
+      "field": "paddingLeft",
+      "message": "variable id VariableID:118:874 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=large, state=hover",
+      "field": "paddingTop",
+      "message": "variable id VariableID:118:871 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=large, state=hover",
+      "field": "paddingRight",
+      "message": "variable id VariableID:118:874 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=large, state=hover",
+      "field": "paddingBottom",
+      "message": "variable id VariableID:118:871 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=large, state=hover",
+      "field": "height",
+      "message": "variable id VariableID:118:904 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=large, state=hover",
+      "field": "topLeftRadius",
+      "message": "variable id VariableID:118:907 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=large, state=hover",
+      "field": "topRightRadius",
+      "message": "variable id VariableID:118:907 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=large, state=hover",
+      "field": "bottomLeftRadius",
+      "message": "variable id VariableID:118:907 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=large, state=hover",
+      "field": "bottomRightRadius",
+      "message": "variable id VariableID:118:907 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=large, state=hover",
+      "field": "fill",
+      "message": "variable id VariableID:90:1078 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=large, state=hover/Icon",
+      "field": "width",
+      "message": "variable id VariableID:118:906 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=large, state=hover/Icon",
+      "field": "height",
+      "message": "variable id VariableID:118:899 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=large, state=hover/Button",
+      "field": "fill",
+      "message": "variable id VariableID:93:879 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=large, state=hover/Icon",
+      "field": "width",
+      "message": "variable id VariableID:118:906 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=large, state=hover/Icon",
+      "field": "height",
+      "message": "variable id VariableID:118:899 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=medium, state=hover",
+      "field": "itemSpacing",
+      "message": "variable id VariableID:118:871 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=medium, state=hover",
+      "field": "paddingLeft",
+      "message": "variable id VariableID:118:874 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=medium, state=hover",
+      "field": "paddingTop",
+      "message": "variable id VariableID:118:871 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=medium, state=hover",
+      "field": "paddingRight",
+      "message": "variable id VariableID:118:874 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=medium, state=hover",
+      "field": "paddingBottom",
+      "message": "variable id VariableID:118:871 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=medium, state=hover",
+      "field": "height",
+      "message": "variable id VariableID:118:903 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=medium, state=hover",
+      "field": "topLeftRadius",
+      "message": "variable id VariableID:118:907 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=medium, state=hover",
+      "field": "topRightRadius",
+      "message": "variable id VariableID:118:907 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=medium, state=hover",
+      "field": "bottomLeftRadius",
+      "message": "variable id VariableID:118:907 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=medium, state=hover",
+      "field": "bottomRightRadius",
+      "message": "variable id VariableID:118:907 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=medium, state=hover",
+      "field": "fill",
+      "message": "variable id VariableID:90:1078 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=medium, state=hover/Icon",
+      "field": "width",
+      "message": "variable id VariableID:118:906 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=medium, state=hover/Icon",
+      "field": "height",
+      "message": "variable id VariableID:118:899 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=medium, state=hover/Button",
+      "field": "fill",
+      "message": "variable id VariableID:93:879 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=medium, state=hover/Icon",
+      "field": "width",
+      "message": "variable id VariableID:118:906 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=medium, state=hover/Icon",
+      "field": "height",
+      "message": "variable id VariableID:118:899 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=small, state=hover",
+      "field": "itemSpacing",
+      "message": "variable id VariableID:118:871 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=small, state=hover",
+      "field": "paddingLeft",
+      "message": "variable id VariableID:118:873 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=small, state=hover",
+      "field": "paddingTop",
+      "message": "variable id VariableID:118:871 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=small, state=hover",
+      "field": "paddingRight",
+      "message": "variable id VariableID:118:873 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=small, state=hover",
+      "field": "paddingBottom",
+      "message": "variable id VariableID:118:871 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=small, state=hover",
+      "field": "height",
+      "message": "variable id VariableID:118:902 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=small, state=hover",
+      "field": "topLeftRadius",
+      "message": "variable id VariableID:118:907 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=small, state=hover",
+      "field": "topRightRadius",
+      "message": "variable id VariableID:118:907 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=small, state=hover",
+      "field": "bottomLeftRadius",
+      "message": "variable id VariableID:118:907 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=small, state=hover",
+      "field": "bottomRightRadius",
+      "message": "variable id VariableID:118:907 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=small, state=hover",
+      "field": "fill",
+      "message": "variable id VariableID:90:1078 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=small, state=hover/Icon",
+      "field": "width",
+      "message": "variable id VariableID:118:901 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=small, state=hover/Icon",
+      "field": "height",
+      "message": "variable id VariableID:118:901 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=small, state=hover/Button",
+      "field": "fill",
+      "message": "variable id VariableID:93:879 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=small, state=hover/Icon",
+      "field": "width",
+      "message": "variable id VariableID:118:901 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=small, state=hover/Icon",
+      "field": "height",
+      "message": "variable id VariableID:118:901 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=large, state=focus",
+      "field": "itemSpacing",
+      "message": "variable id VariableID:118:871 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=large, state=focus",
+      "field": "paddingLeft",
+      "message": "variable id VariableID:118:874 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=large, state=focus",
+      "field": "paddingTop",
+      "message": "variable id VariableID:118:871 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=large, state=focus",
+      "field": "paddingRight",
+      "message": "variable id VariableID:118:874 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=large, state=focus",
+      "field": "paddingBottom",
+      "message": "variable id VariableID:118:871 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=large, state=focus",
+      "field": "height",
+      "message": "variable id VariableID:118:904 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=large, state=focus",
+      "field": "topLeftRadius",
+      "message": "variable id VariableID:118:907 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=large, state=focus",
+      "field": "topRightRadius",
+      "message": "variable id VariableID:118:907 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=large, state=focus",
+      "field": "bottomLeftRadius",
+      "message": "variable id VariableID:118:907 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=large, state=focus",
+      "field": "bottomRightRadius",
+      "message": "variable id VariableID:118:907 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=large, state=focus",
+      "field": "fill",
+      "message": "variable id VariableID:90:1077 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=large, state=focus/Icon",
+      "field": "width",
+      "message": "variable id VariableID:118:906 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=large, state=focus/Icon",
+      "field": "height",
+      "message": "variable id VariableID:118:899 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=large, state=focus/Button",
+      "field": "fill",
+      "message": "variable id VariableID:93:879 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=large, state=focus/Icon",
+      "field": "width",
+      "message": "variable id VariableID:118:906 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=large, state=focus/Icon",
+      "field": "height",
+      "message": "variable id VariableID:118:899 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=large, state=focus/Focus ring",
+      "field": "topLeftRadius",
+      "message": "variable id VariableID:118:908 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=large, state=focus/Focus ring",
+      "field": "topRightRadius",
+      "message": "variable id VariableID:118:908 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=large, state=focus/Focus ring",
+      "field": "bottomLeftRadius",
+      "message": "variable id VariableID:118:908 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=large, state=focus/Focus ring",
+      "field": "bottomRightRadius",
+      "message": "variable id VariableID:118:908 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=large, state=focus/Focus ring",
+      "field": "stroke",
+      "message": "variable id VariableID:116:898 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=medium, state=focus",
+      "field": "itemSpacing",
+      "message": "variable id VariableID:118:871 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=medium, state=focus",
+      "field": "paddingLeft",
+      "message": "variable id VariableID:118:874 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=medium, state=focus",
+      "field": "paddingTop",
+      "message": "variable id VariableID:118:871 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=medium, state=focus",
+      "field": "paddingRight",
+      "message": "variable id VariableID:118:874 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=medium, state=focus",
+      "field": "paddingBottom",
+      "message": "variable id VariableID:118:871 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=medium, state=focus",
+      "field": "height",
+      "message": "variable id VariableID:118:903 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=medium, state=focus",
+      "field": "topLeftRadius",
+      "message": "variable id VariableID:118:907 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=medium, state=focus",
+      "field": "topRightRadius",
+      "message": "variable id VariableID:118:907 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=medium, state=focus",
+      "field": "bottomLeftRadius",
+      "message": "variable id VariableID:118:907 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=medium, state=focus",
+      "field": "bottomRightRadius",
+      "message": "variable id VariableID:118:907 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=medium, state=focus",
+      "field": "fill",
+      "message": "variable id VariableID:90:1077 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=medium, state=focus/Icon",
+      "field": "width",
+      "message": "variable id VariableID:118:906 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=medium, state=focus/Icon",
+      "field": "height",
+      "message": "variable id VariableID:118:899 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=medium, state=focus/Button",
+      "field": "fill",
+      "message": "variable id VariableID:93:879 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=medium, state=focus/Icon",
+      "field": "width",
+      "message": "variable id VariableID:118:906 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=medium, state=focus/Icon",
+      "field": "height",
+      "message": "variable id VariableID:118:899 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=medium, state=focus/Focus ring",
+      "field": "topLeftRadius",
+      "message": "variable id VariableID:118:908 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=medium, state=focus/Focus ring",
+      "field": "topRightRadius",
+      "message": "variable id VariableID:118:908 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=medium, state=focus/Focus ring",
+      "field": "bottomLeftRadius",
+      "message": "variable id VariableID:118:908 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=medium, state=focus/Focus ring",
+      "field": "bottomRightRadius",
+      "message": "variable id VariableID:118:908 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=medium, state=focus/Focus ring",
+      "field": "stroke",
+      "message": "variable id VariableID:116:898 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=small, state=focus",
+      "field": "itemSpacing",
+      "message": "variable id VariableID:118:871 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=small, state=focus",
+      "field": "paddingLeft",
+      "message": "variable id VariableID:118:873 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=small, state=focus",
+      "field": "paddingTop",
+      "message": "variable id VariableID:118:871 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=small, state=focus",
+      "field": "paddingRight",
+      "message": "variable id VariableID:118:873 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=small, state=focus",
+      "field": "paddingBottom",
+      "message": "variable id VariableID:118:871 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=small, state=focus",
+      "field": "height",
+      "message": "variable id VariableID:118:902 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=small, state=focus",
+      "field": "topLeftRadius",
+      "message": "variable id VariableID:118:907 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=small, state=focus",
+      "field": "topRightRadius",
+      "message": "variable id VariableID:118:907 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=small, state=focus",
+      "field": "bottomLeftRadius",
+      "message": "variable id VariableID:118:907 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=small, state=focus",
+      "field": "bottomRightRadius",
+      "message": "variable id VariableID:118:907 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=small, state=focus",
+      "field": "fill",
+      "message": "variable id VariableID:90:1077 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=small, state=focus/Icon",
+      "field": "width",
+      "message": "variable id VariableID:118:901 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=small, state=focus/Icon",
+      "field": "height",
+      "message": "variable id VariableID:118:901 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=small, state=focus/Button",
+      "field": "fill",
+      "message": "variable id VariableID:93:879 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=small, state=focus/Icon",
+      "field": "width",
+      "message": "variable id VariableID:118:901 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=small, state=focus/Icon",
+      "field": "height",
+      "message": "variable id VariableID:118:901 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=small, state=focus/Focus ring",
+      "field": "topLeftRadius",
+      "message": "variable id VariableID:118:908 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=small, state=focus/Focus ring",
+      "field": "topRightRadius",
+      "message": "variable id VariableID:118:908 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=small, state=focus/Focus ring",
+      "field": "bottomLeftRadius",
+      "message": "variable id VariableID:118:908 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=small, state=focus/Focus ring",
+      "field": "bottomRightRadius",
+      "message": "variable id VariableID:118:908 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=small, state=focus/Focus ring",
+      "field": "stroke",
+      "message": "variable id VariableID:116:898 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=large, state=pressed",
+      "field": "itemSpacing",
+      "message": "variable id VariableID:118:871 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=large, state=pressed",
+      "field": "paddingLeft",
+      "message": "variable id VariableID:118:874 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=large, state=pressed",
+      "field": "paddingTop",
+      "message": "variable id VariableID:118:871 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=large, state=pressed",
+      "field": "paddingRight",
+      "message": "variable id VariableID:118:874 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=large, state=pressed",
+      "field": "paddingBottom",
+      "message": "variable id VariableID:118:871 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=large, state=pressed",
+      "field": "height",
+      "message": "variable id VariableID:118:904 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=large, state=pressed",
+      "field": "topLeftRadius",
+      "message": "variable id VariableID:118:907 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=large, state=pressed",
+      "field": "topRightRadius",
+      "message": "variable id VariableID:118:907 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=large, state=pressed",
+      "field": "bottomLeftRadius",
+      "message": "variable id VariableID:118:907 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=large, state=pressed",
+      "field": "bottomRightRadius",
+      "message": "variable id VariableID:118:907 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=large, state=pressed",
+      "field": "fill",
+      "message": "variable id VariableID:90:1079 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=large, state=pressed/Icon",
+      "field": "width",
+      "message": "variable id VariableID:118:906 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=large, state=pressed/Icon",
+      "field": "height",
+      "message": "variable id VariableID:118:899 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=large, state=pressed/Button",
+      "field": "fill",
+      "message": "variable id VariableID:93:879 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=large, state=pressed/Icon",
+      "field": "width",
+      "message": "variable id VariableID:118:906 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=large, state=pressed/Icon",
+      "field": "height",
+      "message": "variable id VariableID:118:899 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=medium, state=pressed",
+      "field": "itemSpacing",
+      "message": "variable id VariableID:118:871 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=medium, state=pressed",
+      "field": "paddingLeft",
+      "message": "variable id VariableID:118:874 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=medium, state=pressed",
+      "field": "paddingTop",
+      "message": "variable id VariableID:118:871 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=medium, state=pressed",
+      "field": "paddingRight",
+      "message": "variable id VariableID:118:874 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=medium, state=pressed",
+      "field": "paddingBottom",
+      "message": "variable id VariableID:118:871 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=medium, state=pressed",
+      "field": "height",
+      "message": "variable id VariableID:118:903 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=medium, state=pressed",
+      "field": "topLeftRadius",
+      "message": "variable id VariableID:118:907 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=medium, state=pressed",
+      "field": "topRightRadius",
+      "message": "variable id VariableID:118:907 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=medium, state=pressed",
+      "field": "bottomLeftRadius",
+      "message": "variable id VariableID:118:907 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=medium, state=pressed",
+      "field": "bottomRightRadius",
+      "message": "variable id VariableID:118:907 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=medium, state=pressed",
+      "field": "fill",
+      "message": "variable id VariableID:90:1079 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=medium, state=pressed/Icon",
+      "field": "width",
+      "message": "variable id VariableID:118:906 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=medium, state=pressed/Icon",
+      "field": "height",
+      "message": "variable id VariableID:118:899 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=medium, state=pressed/Button",
+      "field": "fill",
+      "message": "variable id VariableID:93:879 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=medium, state=pressed/Icon",
+      "field": "width",
+      "message": "variable id VariableID:118:906 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=medium, state=pressed/Icon",
+      "field": "height",
+      "message": "variable id VariableID:118:899 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=small, state=pressed",
+      "field": "itemSpacing",
+      "message": "variable id VariableID:118:871 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=small, state=pressed",
+      "field": "paddingLeft",
+      "message": "variable id VariableID:118:873 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=small, state=pressed",
+      "field": "paddingTop",
+      "message": "variable id VariableID:118:871 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=small, state=pressed",
+      "field": "paddingRight",
+      "message": "variable id VariableID:118:873 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=small, state=pressed",
+      "field": "paddingBottom",
+      "message": "variable id VariableID:118:871 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=small, state=pressed",
+      "field": "height",
+      "message": "variable id VariableID:118:902 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=small, state=pressed",
+      "field": "topLeftRadius",
+      "message": "variable id VariableID:118:907 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=small, state=pressed",
+      "field": "topRightRadius",
+      "message": "variable id VariableID:118:907 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=small, state=pressed",
+      "field": "bottomLeftRadius",
+      "message": "variable id VariableID:118:907 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=small, state=pressed",
+      "field": "bottomRightRadius",
+      "message": "variable id VariableID:118:907 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=small, state=pressed",
+      "field": "fill",
+      "message": "variable id VariableID:90:1079 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=small, state=pressed/Icon",
+      "field": "width",
+      "message": "variable id VariableID:118:901 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=small, state=pressed/Icon",
+      "field": "height",
+      "message": "variable id VariableID:118:901 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=small, state=pressed/Button",
+      "field": "fill",
+      "message": "variable id VariableID:93:879 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=small, state=pressed/Icon",
+      "field": "width",
+      "message": "variable id VariableID:118:901 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=small, state=pressed/Icon",
+      "field": "height",
+      "message": "variable id VariableID:118:901 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=large, state=disabled",
+      "field": "itemSpacing",
+      "message": "variable id VariableID:118:871 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=large, state=disabled",
+      "field": "paddingLeft",
+      "message": "variable id VariableID:118:874 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=large, state=disabled",
+      "field": "paddingTop",
+      "message": "variable id VariableID:118:871 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=large, state=disabled",
+      "field": "paddingRight",
+      "message": "variable id VariableID:118:874 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=large, state=disabled",
+      "field": "paddingBottom",
+      "message": "variable id VariableID:118:871 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=large, state=disabled",
+      "field": "height",
+      "message": "variable id VariableID:118:904 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=large, state=disabled",
+      "field": "topLeftRadius",
+      "message": "variable id VariableID:118:907 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=large, state=disabled",
+      "field": "topRightRadius",
+      "message": "variable id VariableID:118:907 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=large, state=disabled",
+      "field": "bottomLeftRadius",
+      "message": "variable id VariableID:118:907 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=large, state=disabled",
+      "field": "bottomRightRadius",
+      "message": "variable id VariableID:118:907 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=large, state=disabled",
+      "field": "fill",
+      "message": "variable id VariableID:94:903 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=large, state=disabled/Icon",
+      "field": "width",
+      "message": "variable id VariableID:118:906 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=large, state=disabled/Icon",
+      "field": "height",
+      "message": "variable id VariableID:118:899 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=large, state=disabled/Button",
+      "field": "fill",
+      "message": "variable id VariableID:94:915 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=large, state=disabled/Icon",
+      "field": "width",
+      "message": "variable id VariableID:118:906 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=large, state=disabled/Icon",
+      "field": "height",
+      "message": "variable id VariableID:118:899 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=medium, state=disabled",
+      "field": "itemSpacing",
+      "message": "variable id VariableID:118:871 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=medium, state=disabled",
+      "field": "paddingLeft",
+      "message": "variable id VariableID:118:874 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=medium, state=disabled",
+      "field": "paddingTop",
+      "message": "variable id VariableID:118:871 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=medium, state=disabled",
+      "field": "paddingRight",
+      "message": "variable id VariableID:118:874 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=medium, state=disabled",
+      "field": "paddingBottom",
+      "message": "variable id VariableID:118:871 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=medium, state=disabled",
+      "field": "height",
+      "message": "variable id VariableID:118:903 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=medium, state=disabled",
+      "field": "topLeftRadius",
+      "message": "variable id VariableID:118:907 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=medium, state=disabled",
+      "field": "topRightRadius",
+      "message": "variable id VariableID:118:907 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=medium, state=disabled",
+      "field": "bottomLeftRadius",
+      "message": "variable id VariableID:118:907 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=medium, state=disabled",
+      "field": "bottomRightRadius",
+      "message": "variable id VariableID:118:907 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=medium, state=disabled",
+      "field": "fill",
+      "message": "variable id VariableID:94:903 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=medium, state=disabled/Icon",
+      "field": "width",
+      "message": "variable id VariableID:118:906 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=medium, state=disabled/Icon",
+      "field": "height",
+      "message": "variable id VariableID:118:899 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=medium, state=disabled/Button",
+      "field": "fill",
+      "message": "variable id VariableID:94:915 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=medium, state=disabled/Icon",
+      "field": "width",
+      "message": "variable id VariableID:118:906 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=medium, state=disabled/Icon",
+      "field": "height",
+      "message": "variable id VariableID:118:899 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=small, state=disabled",
+      "field": "itemSpacing",
+      "message": "variable id VariableID:118:871 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=small, state=disabled",
+      "field": "paddingLeft",
+      "message": "variable id VariableID:118:873 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=small, state=disabled",
+      "field": "paddingTop",
+      "message": "variable id VariableID:118:871 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=small, state=disabled",
+      "field": "paddingRight",
+      "message": "variable id VariableID:118:873 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=small, state=disabled",
+      "field": "paddingBottom",
+      "message": "variable id VariableID:118:871 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=small, state=disabled",
+      "field": "height",
+      "message": "variable id VariableID:118:902 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=small, state=disabled",
+      "field": "topLeftRadius",
+      "message": "variable id VariableID:118:907 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=small, state=disabled",
+      "field": "topRightRadius",
+      "message": "variable id VariableID:118:907 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=small, state=disabled",
+      "field": "bottomLeftRadius",
+      "message": "variable id VariableID:118:907 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=small, state=disabled",
+      "field": "bottomRightRadius",
+      "message": "variable id VariableID:118:907 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=small, state=disabled",
+      "field": "fill",
+      "message": "variable id VariableID:94:903 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=small, state=disabled/Icon",
+      "field": "width",
+      "message": "variable id VariableID:118:901 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=small, state=disabled/Icon",
+      "field": "height",
+      "message": "variable id VariableID:118:901 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=small, state=disabled/Button",
+      "field": "fill",
+      "message": "variable id VariableID:94:915 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=small, state=disabled/Icon",
+      "field": "width",
+      "message": "variable id VariableID:118:901 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Button-Brand Primary:size=small, state=disabled/Icon",
+      "field": "height",
+      "message": "variable id VariableID:118:901 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    }
+  ],
+  "notes": [
+    "variables response not provided — every bound fact degrades to its resolved literal; see variable-unresolved entries"
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "subject": "B. Shoelace Button Group",
+  "truthSource": "dump.json resolved node values, per variant",
+  "factCells": 0,
+  "tally": {
+    "BOUND": 0,
+    "MINTED": 0,
+    "MISSING": 0,
+    "mismatched": 0
+  },
+  "rows": []
+}

@@ -1,0 +1,228 @@
+{
+  "subject": "D. CBDS Button — design-proposed vs code-proposed",
+  "axisTally": {
+    "AGREE": 0,
+    "PARTIAL": 4,
+    "DIVERGE": 0,
+    "DESIGN-ONLY": 1,
+    "CODE-ONLY": 2
+  },
+  "axes": [
+    {
+      "axis": "size",
+      "design": "enum [\"large\",\"medium\",\"small\"] default \"large\"",
+      "code": "enum [\"small\",\"medium\",\"large\"] default \"medium\"",
+      "verdict": "PARTIAL",
+      "note": "values identical; DEFAULTS differ (design large, code medium) — a real divergence between the kit and the shipped component"
+    },
+    {
+      "axis": "interaction states",
+      "design": "state variant axis [\"default\",\"hover\",\"focus\",\"pressed\",\"disabled\"]",
+      "code": "contract states [\"hover\",\"focus-visible\",\"disabled\"] (CSS pseudo-classes)",
+      "verdict": "PARTIAL",
+      "note": "same facts on two different mechanisms: design draws states as variants, code styles real pseudo-states; hover+focus+disabled overlap, pressed exists in BOTH truths but only the design proposal kept it (code extractor dropped &:active), and \"default\" is implicit in code"
+    },
+    {
+      "axis": "label content",
+      "design": "TEXT prop `✏️text` (default \"Button\")",
+      "code": "anatomy slot `children`",
+      "verdict": "PARTIAL",
+      "note": "same job, different shape — a text prop vs a ReactNode slot; reconcile would need a text⇄slot rule"
+    },
+    {
+      "axis": "icons",
+      "design": "unconditional `Icon`/`icon2` component-ref parts (the ↪️icon-left/right BOOLEAN toggles were DROPPED — see props-score)",
+      "code": "optional `iconLeft`/`iconRight` slots (from ReactNode props)",
+      "verdict": "PARTIAL",
+      "note": "both sides have two icon positions around the label; design lost the toggles, code kept optionality"
+    },
+    {
+      "axis": "variant (primary/surface/danger/ghost)",
+      "design": "(absent — the kit set is only Button-Brand Primary)",
+      "code": "enum [\"primary\",\"surface\",\"danger\",\"ghost\"] default \"primary\"",
+      "verdict": "CODE-ONLY",
+      "note": "the design library spreads brand variants across separate sets; single-set import cannot see the axis"
+    },
+    {
+      "axis": "fullWidth",
+      "design": "(absent)",
+      "code": "boolean default false",
+      "verdict": "CODE-ONLY",
+      "note": "layout behavior — rarely drawn as a Figma variant"
+    },
+    {
+      "axis": "disabled tooltip",
+      "design": "`Tooltip` part visibleWhen state=disabled (\"This action is currently unavailable\")",
+      "code": "(absent)",
+      "verdict": "DESIGN-ONLY",
+      "note": "the kit draws helper UI inside the component set that the shipped component never had"
+    }
+  ],
+  "factTally": {
+    "AGREE": 12,
+    "DIVERGE": 2,
+    "DESIGN-ONLY": 3,
+    "CODE-ONLY": 2
+  },
+  "factRows": [
+    {
+      "fact": "background-color (default)",
+      "designRef": "{imported.button-brand-primary.root.background-color.default}",
+      "codeRef": "{imported.button.root.background-color.primary}",
+      "design": "#0e61ba",
+      "code": "#0e61ba",
+      "verdict": "AGREE"
+    },
+    {
+      "fact": "background-color (hover)",
+      "designRef": "{imported.button-brand-primary.root.background-color.hover}",
+      "codeRef": "{imported.button.root.hover.background-color.primary}",
+      "design": "#003e81",
+      "code": "#003e81",
+      "verdict": "AGREE"
+    },
+    {
+      "fact": "background-color (pressed/active)",
+      "designRef": "{imported.button-brand-primary.root.background-color.pressed}",
+      "codeRef": null,
+      "design": "#002854",
+      "code": null,
+      "verdict": "DESIGN-ONLY",
+      "note": "the traced CSS HAS `&:active:not(:disabled)` (bg brand-pressed) — the code extractor dropped the state; the gap is in the code PROPOSAL, not the code truth"
+    },
+    {
+      "fact": "background-color (disabled)",
+      "designRef": "{imported.button-brand-primary.root.background-color.disabled}",
+      "codeRef": "{imported.button.root.disabled.background-color.primary}",
+      "design": "#dfe3eb",
+      "code": "#dfe3eb",
+      "verdict": "AGREE"
+    },
+    {
+      "fact": "label color (default)",
+      "designRef": "{imported.button-brand-primary.button.color.default}",
+      "codeRef": "{imported.button.root.color.primary}",
+      "design": "#fcfeff",
+      "code": "#fcfeff",
+      "verdict": "AGREE"
+    },
+    {
+      "fact": "label color (disabled)",
+      "designRef": "{imported.button-brand-primary.button.color.disabled}",
+      "codeRef": "{imported.button.root.disabled.color}",
+      "design": "#556275",
+      "code": "#738094",
+      "verdict": "DIVERGE"
+    },
+    {
+      "fact": "border-radius",
+      "designRef": "{imported.shared.size-8}",
+      "codeRef": "{imported.button.root.border-radius}",
+      "design": "8px",
+      "code": "8px",
+      "verdict": "AGREE"
+    },
+    {
+      "fact": "padding-block",
+      "designRef": "{imported.shared.size-8}",
+      "codeRef": "{imported.button.root.padding-block}",
+      "design": "8px",
+      "code": "0.5rem",
+      "verdict": "AGREE"
+    },
+    {
+      "fact": "padding-inline (small)",
+      "designRef": "{imported.button-brand-primary.root.padding-inline.small}",
+      "codeRef": "{imported.button.root.padding-inline.small}",
+      "design": "12px",
+      "code": "0.75rem",
+      "verdict": "AGREE"
+    },
+    {
+      "fact": "padding-inline (medium)",
+      "designRef": "{imported.button-brand-primary.root.padding-inline.medium}",
+      "codeRef": "{imported.button.root.padding-inline.medium}",
+      "design": "16px",
+      "code": "1rem",
+      "verdict": "AGREE"
+    },
+    {
+      "fact": "padding-inline (large)",
+      "designRef": "{imported.button-brand-primary.root.padding-inline.large}",
+      "codeRef": "{imported.button.root.padding-inline.large}",
+      "design": "16px",
+      "code": "1rem",
+      "verdict": "AGREE"
+    },
+    {
+      "fact": "gap",
+      "designRef": "{imported.shared.size-8}",
+      "codeRef": "{imported.button.root.gap}",
+      "design": "8px",
+      "code": "0.5rem",
+      "verdict": "AGREE"
+    },
+    {
+      "fact": "font-size (large)",
+      "designRef": "{font.title.size}",
+      "codeRef": "{imported.button.root.font-size.large}",
+      "design": "16px",
+      "code": "16px",
+      "verdict": "AGREE",
+      "note": "design side bound a REPO token (font.title.size) — reconcile hit, not a mint"
+    },
+    {
+      "fact": "font-size (small)",
+      "designRef": "{font.title.size}",
+      "codeRef": "{imported.button.root.font-size.small}",
+      "design": "16px",
+      "code": "14px",
+      "verdict": "DIVERGE",
+      "note": "kit dump truth for small IS 14px — the DESIGN proposal flattened font-size across sizes; the code side is the faithful one here"
+    },
+    {
+      "fact": "font-weight",
+      "designRef": "{font.title.weight}",
+      "codeRef": "{imported.button.root.font-weight}",
+      "design": "600",
+      "code": "600",
+      "verdict": "AGREE",
+      "note": "design side bound a REPO token"
+    },
+    {
+      "fact": "focus ring border-color",
+      "designRef": "{imported.button-brand-primary.focus-ring.border-color}",
+      "codeRef": null,
+      "design": "#0e61ba",
+      "code": null,
+      "verdict": "DESIGN-ONLY",
+      "note": "the traced CSS HAS `&:focus-visible { outline: 2px solid … }` — the code proposal declares the state but minted no facts (outline not in the extracted property set)"
+    },
+    {
+      "fact": "focus ring border-width",
+      "designRef": "{imported.button-brand-primary.focus-ring.border-width}",
+      "codeRef": null,
+      "design": "2px",
+      "code": null,
+      "verdict": "DESIGN-ONLY"
+    },
+    {
+      "fact": "min-height (per size)",
+      "designRef": null,
+      "codeRef": "{imported.button.root.min-height.medium}",
+      "design": null,
+      "code": "40px",
+      "verdict": "CODE-ONLY",
+      "note": "design auto-layout implies height; no explicit fact proposed"
+    },
+    {
+      "fact": "line-height (per size)",
+      "designRef": null,
+      "codeRef": "{imported.button.root.line-height.medium}",
+      "design": null,
+      "code": "20px",
+      "verdict": "CODE-ONLY",
+      "note": "design text style not token-derived — typography not proposed (see proposal note)"
+    }
+  ]
+}
