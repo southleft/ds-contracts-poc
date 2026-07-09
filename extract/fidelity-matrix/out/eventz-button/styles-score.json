@@ -1,0 +1,484 @@
+{
+  "subject": "C. Eventz Button",
+  "truthSource": "dump.json resolved node values, per variant",
+  "factCells": 155,
+  "tally": {
+    "BOUND": 0,
+    "MINTED": 143,
+    "MISSING": 12,
+    "mismatched": 0
+  },
+  "rows": [
+    {
+      "part": "Focus ring",
+      "fact": "border-color",
+      "verdict": "MINTED",
+      "token": "{imported.button.focus-ring.border-color}",
+      "truth": "#2d6079",
+      "resolved": "#2d6079",
+      "valueOk": true,
+      "variants": [
+        "variant=primary, state=focus, isDisabled=false",
+        "variant=knockout, state=focus, isDisabled=false",
+        "variant=secondary, state=focus, isDisabled=false",
+        "variant=bare, state=focus, isDisabled=false",
+        "variant=primary, state=focus, isDisabled=true",
+        "variant=knockout, state=focus, isDisabled=true",
+        "variant=secondary, state=focus, isDisabled=true",
+        "variant=bare, state=focus, isDisabled=true"
+      ]
+    },
+    {
+      "part": "Focus ring",
+      "fact": "border-radius",
+      "verdict": "MINTED",
+      "token": "{imported.button.focus-ring.border-radius}",
+      "truth": "11px",
+      "resolved": "11px",
+      "valueOk": true,
+      "variants": [
+        "variant=primary, state=focus, isDisabled=false",
+        "variant=knockout, state=focus, isDisabled=false",
+        "variant=secondary, state=focus, isDisabled=false",
+        "variant=bare, state=focus, isDisabled=false",
+        "variant=primary, state=focus, isDisabled=true",
+        "variant=knockout, state=focus, isDisabled=true",
+        "variant=secondary, state=focus, isDisabled=true",
+        "variant=bare, state=focus, isDisabled=true"
+      ]
+    },
+    {
+      "part": "Focus ring",
+      "fact": "border-width",
+      "verdict": "MINTED",
+      "token": "{imported.button.focus-ring.border-width}",
+      "truth": "2px",
+      "resolved": "2px",
+      "valueOk": true,
+      "variants": [
+        "variant=primary, state=focus, isDisabled=false",
+        "variant=knockout, state=focus, isDisabled=false",
+        "variant=secondary, state=focus, isDisabled=false",
+        "variant=bare, state=focus, isDisabled=false",
+        "variant=primary, state=focus, isDisabled=true",
+        "variant=knockout, state=focus, isDisabled=true",
+        "variant=secondary, state=focus, isDisabled=true",
+        "variant=bare, state=focus, isDisabled=true"
+      ]
+    },
+    {
+      "part": "Label",
+      "fact": "color",
+      "verdict": "MINTED",
+      "token": "{imported.button.label.color.primary}",
+      "truth": "#ffffff",
+      "resolved": "#ffffff",
+      "valueOk": true,
+      "variants": [
+        "variant=primary, state=default, isDisabled=false",
+        "variant=primary, state=default, isDisabled=true",
+        "variant=primary, state=hover, isDisabled=false",
+        "variant=primary, state=active, isDisabled=false",
+        "variant=primary, state=focus, isDisabled=false"
+      ]
+    },
+    {
+      "part": "Label",
+      "fact": "color",
+      "verdict": "MINTED",
+      "token": "{imported.button.label.color.knockout}",
+      "truth": "#252729",
+      "resolved": "#252729",
+      "valueOk": true,
+      "variants": [
+        "variant=knockout, state=default, isDisabled=false",
+        "variant=knockout, state=default, isDisabled=true",
+        "variant=knockout, state=hover, isDisabled=false",
+        "variant=knockout, state=active, isDisabled=false",
+        "variant=knockout, state=focus, isDisabled=false"
+      ]
+    },
+    {
+      "part": "Label",
+      "fact": "color",
+      "verdict": "MINTED",
+      "token": "{imported.button.label.color.secondary}",
+      "truth": "#252729",
+      "resolved": "#252729",
+      "valueOk": true,
+      "variants": [
+        "variant=secondary, state=default, isDisabled=false",
+        "variant=secondary, state=default, isDisabled=true",
+        "variant=secondary, state=hover, isDisabled=false",
+        "variant=secondary, state=active, isDisabled=false",
+        "variant=secondary, state=focus, isDisabled=false"
+      ]
+    },
+    {
+      "part": "Label",
+      "fact": "color",
+      "verdict": "MINTED",
+      "token": "{imported.button.label.color.bare}",
+      "truth": "#252729",
+      "resolved": "#252729",
+      "valueOk": true,
+      "variants": [
+        "variant=bare, state=default, isDisabled=false",
+        "variant=bare, state=default, isDisabled=true",
+        "variant=bare, state=hover, isDisabled=false",
+        "variant=bare, state=active, isDisabled=false",
+        "variant=bare, state=focus, isDisabled=false"
+      ]
+    },
+    {
+      "part": "root",
+      "fact": "background-color",
+      "verdict": "MINTED",
+      "token": "{imported.button.root.background-color.primary.default}",
+      "truth": "#3d7a95",
+      "resolved": "#3d7a95",
+      "valueOk": true,
+      "variants": [
+        "variant=primary, state=default, isDisabled=false",
+        "variant=primary, state=default, isDisabled=true"
+      ]
+    },
+    {
+      "part": "root",
+      "fact": "background-color",
+      "verdict": "MINTED",
+      "token": "{imported.button.root.background-color.knockout.default}",
+      "truth": "#f7f8f7",
+      "resolved": "#f7f8f7",
+      "valueOk": true,
+      "variants": [
+        "variant=knockout, state=default, isDisabled=false",
+        "variant=knockout, state=default, isDisabled=true"
+      ]
+    },
+    {
+      "part": "root",
+      "fact": "background-color",
+      "verdict": "MINTED",
+      "token": "{imported.button.root.background-color.secondary.default}",
+      "truth": "#000002",
+      "resolved": "#000002",
+      "valueOk": true,
+      "variants": [
+        "variant=secondary, state=default, isDisabled=false",
+        "variant=secondary, state=default, isDisabled=true"
+      ]
+    },
+    {
+      "part": "root",
+      "fact": "background-color",
+      "verdict": "MINTED",
+      "token": "{imported.button.root.background-color.bare.default}",
+      "truth": "#000002",
+      "resolved": "#000002",
+      "valueOk": true,
+      "variants": [
+        "variant=bare, state=default, isDisabled=false",
+        "variant=bare, state=default, isDisabled=true"
+      ]
+    },
+    {
+      "part": "root",
+      "fact": "background-color",
+      "verdict": "MINTED",
+      "token": "{imported.button.root.background-color.primary.hover}",
+      "truth": "#2d6079",
+      "resolved": "#2d6079",
+      "valueOk": true,
+      "variants": [
+        "variant=primary, state=hover, isDisabled=false"
+      ]
+    },
+    {
+      "part": "root",
+      "fact": "background-color",
+      "verdict": "MINTED",
+      "token": "{imported.button.root.background-color.knockout.hover}",
+      "truth": "#c6c7c6",
+      "resolved": "#c6c7c6",
+      "valueOk": true,
+      "variants": [
+        "variant=knockout, state=hover, isDisabled=false"
+      ]
+    },
+    {
+      "part": "root",
+      "fact": "background-color",
+      "verdict": "MINTED",
+      "token": "{imported.button.root.background-color.secondary.hover}",
+      "truth": "#000002",
+      "resolved": "#000002",
+      "valueOk": true,
+      "variants": [
+        "variant=secondary, state=hover, isDisabled=false"
+      ]
+    },
+    {
+      "part": "root",
+      "fact": "background-color",
+      "verdict": "MINTED",
+      "token": "{imported.button.root.background-color.bare.hover}",
+      "truth": "#000002",
+      "resolved": "#000002",
+      "valueOk": true,
+      "variants": [
+        "variant=bare, state=hover, isDisabled=false"
+      ]
+    },
+    {
+      "part": "root",
+      "fact": "background-color",
+      "verdict": "MINTED",
+      "token": "{imported.button.root.background-color.primary.active}",
+      "truth": "#2d6079",
+      "resolved": "#2d6079",
+      "valueOk": true,
+      "variants": [
+        "variant=primary, state=active, isDisabled=false"
+      ]
+    },
+    {
+      "part": "root",
+      "fact": "background-color",
+      "verdict": "MINTED",
+      "token": "{imported.button.root.background-color.knockout.active}",
+      "truth": "#f7f8f7",
+      "resolved": "#f7f8f7",
+      "valueOk": true,
+      "variants": [
+        "variant=knockout, state=active, isDisabled=false"
+      ]
+    },
+    {
+      "part": "root",
+      "fact": "background-color",
+      "verdict": "MINTED",
+      "token": "{imported.button.root.background-color.secondary.active}",
+      "truth": "#000002",
+      "resolved": "#000002",
+      "valueOk": true,
+      "variants": [
+        "variant=secondary, state=active, isDisabled=false"
+      ]
+    },
+    {
+      "part": "root",
+      "fact": "background-color",
+      "verdict": "MINTED",
+      "token": "{imported.button.root.background-color.bare.active}",
+      "truth": "#000002",
+      "resolved": "#000002",
+      "valueOk": true,
+      "variants": [
+        "variant=bare, state=active, isDisabled=false"
+      ]
+    },
+    {
+      "part": "root",
+      "fact": "background-color",
+      "verdict": "MINTED",
+      "token": "{imported.button.root.background-color.primary.focus}",
+      "truth": "#3d7a95",
+      "resolved": "#3d7a95",
+      "valueOk": true,
+      "variants": [
+        "variant=primary, state=focus, isDisabled=false",
+        "variant=primary, state=focus, isDisabled=true"
+      ]
+    },
+    {
+      "part": "root",
+      "fact": "background-color",
+      "verdict": "MINTED",
+      "token": "{imported.button.root.background-color.knockout.focus}",
+      "truth": "#f7f8f7",
+      "resolved": "#f7f8f7",
+      "valueOk": true,
+      "variants": [
+        "variant=knockout, state=focus, isDisabled=false",
+        "variant=knockout, state=focus, isDisabled=true"
+      ]
+    },
+    {
+      "part": "root",
+      "fact": "background-color",
+      "verdict": "MINTED",
+      "token": "{imported.button.root.background-color.secondary.focus}",
+      "truth": "#000002",
+      "resolved": "#000002",
+      "valueOk": true,
+      "variants": [
+        "variant=secondary, state=focus, isDisabled=false",
+        "variant=secondary, state=focus, isDisabled=true"
+      ]
+    },
+    {
+      "part": "root",
+      "fact": "background-color",
+      "verdict": "MINTED",
+      "token": "{imported.button.root.background-color.bare.focus}",
+      "truth": "#000002",
+      "resolved": "#000002",
+      "valueOk": true,
+      "variants": [
+        "variant=bare, state=focus, isDisabled=false",
+        "variant=bare, state=focus, isDisabled=true"
+      ]
+    },
+    {
+      "part": "root",
+      "fact": "border-color",
+      "verdict": "MISSING",
+      "truth": "#000002",
+      "variants": [
+        "variant=primary, state=default, isDisabled=false",
+        "variant=primary, state=default, isDisabled=true",
+        "variant=secondary, state=default, isDisabled=false",
+        "variant=secondary, state=default, isDisabled=true",
+        "variant=primary, state=hover, isDisabled=false",
+        "variant=secondary, state=hover, isDisabled=false",
+        "variant=primary, state=active, isDisabled=false",
+        "variant=secondary, state=active, isDisabled=false",
+        "variant=primary, state=focus, isDisabled=false",
+        "variant=secondary, state=focus, isDisabled=false",
+        "variant=primary, state=focus, isDisabled=true",
+        "variant=secondary, state=focus, isDisabled=true"
+      ]
+    },
+    {
+      "part": "root",
+      "fact": "border-radius",
+      "verdict": "MINTED",
+      "token": "{imported.button.root.border-radius}",
+      "truth": "8px",
+      "resolved": "8px",
+      "valueOk": true,
+      "variants": [
+        "variant=primary, state=default, isDisabled=false",
+        "variant=knockout, state=default, isDisabled=false",
+        "variant=primary, state=default, isDisabled=true",
+        "variant=knockout, state=default, isDisabled=true",
+        "variant=secondary, state=default, isDisabled=false",
+        "variant=bare, state=default, isDisabled=false",
+        "variant=bare, state=default, isDisabled=true",
+        "variant=secondary, state=default, isDisabled=true",
+        "variant=primary, state=hover, isDisabled=false",
+        "variant=knockout, state=hover, isDisabled=false",
+        "variant=secondary, state=hover, isDisabled=false",
+        "variant=bare, state=hover, isDisabled=false",
+        "variant=primary, state=active, isDisabled=false",
+        "variant=knockout, state=active, isDisabled=false",
+        "variant=secondary, state=active, isDisabled=false",
+        "variant=bare, state=active, isDisabled=false",
+        "variant=primary, state=focus, isDisabled=false",
+        "variant=knockout, state=focus, isDisabled=false",
+        "variant=secondary, state=focus, isDisabled=false",
+        "variant=bare, state=focus, isDisabled=false",
+        "variant=primary, state=focus, isDisabled=true",
+        "variant=knockout, state=focus, isDisabled=true",
+        "variant=bare, state=focus, isDisabled=true"
+      ]
+    },
+    {
+      "part": "root",
+      "fact": "border-width",
+      "verdict": "MINTED",
+      "token": "{imported.button.root.border-width.primary}",
+      "truth": "1px",
+      "resolved": "1px",
+      "valueOk": true,
+      "variants": [
+        "variant=primary, state=default, isDisabled=false",
+        "variant=primary, state=default, isDisabled=true",
+        "variant=primary, state=hover, isDisabled=false",
+        "variant=primary, state=active, isDisabled=false",
+        "variant=primary, state=focus, isDisabled=false",
+        "variant=primary, state=focus, isDisabled=true"
+      ]
+    },
+    {
+      "part": "root",
+      "fact": "border-width",
+      "verdict": "MINTED",
+      "token": "{imported.button.root.border-width.secondary}",
+      "truth": "1px",
+      "resolved": "1px",
+      "valueOk": true,
+      "variants": [
+        "variant=secondary, state=default, isDisabled=false",
+        "variant=secondary, state=default, isDisabled=true",
+        "variant=secondary, state=hover, isDisabled=false",
+        "variant=secondary, state=active, isDisabled=false",
+        "variant=secondary, state=focus, isDisabled=false",
+        "variant=secondary, state=focus, isDisabled=true"
+      ]
+    },
+    {
+      "part": "root",
+      "fact": "padding-block",
+      "verdict": "MINTED",
+      "token": "{imported.button.root.padding-block}",
+      "truth": "6px",
+      "resolved": "6px",
+      "valueOk": true,
+      "variants": [
+        "variant=primary, state=default, isDisabled=false",
+        "variant=knockout, state=default, isDisabled=false",
+        "variant=primary, state=default, isDisabled=true",
+        "variant=knockout, state=default, isDisabled=true",
+        "variant=secondary, state=default, isDisabled=false",
+        "variant=bare, state=default, isDisabled=false",
+        "variant=bare, state=default, isDisabled=true",
+        "variant=secondary, state=default, isDisabled=true",
+        "variant=primary, state=hover, isDisabled=false",
+        "variant=knockout, state=hover, isDisabled=false",
+        "variant=secondary, state=hover, isDisabled=false",
+        "variant=bare, state=hover, isDisabled=false",
+        "variant=primary, state=active, isDisabled=false",
+        "variant=knockout, state=active, isDisabled=false",
+        "variant=secondary, state=active, isDisabled=false",
+        "variant=bare, state=active, isDisabled=false",
+        "variant=primary, state=focus, isDisabled=false",
+        "variant=knockout, state=focus, isDisabled=false",
+        "variant=secondary, state=focus, isDisabled=false",
+        "variant=bare, state=focus, isDisabled=false"
+      ]
+    },
+    {
+      "part": "root",
+      "fact": "padding-inline",
+      "verdict": "MINTED",
+      "token": "{imported.button.root.padding-inline}",
+      "truth": "12px",
+      "resolved": "12px",
+      "valueOk": true,
+      "variants": [
+        "variant=primary, state=default, isDisabled=false",
+        "variant=knockout, state=default, isDisabled=false",
+        "variant=primary, state=default, isDisabled=true",
+        "variant=knockout, state=default, isDisabled=true",
+        "variant=secondary, state=default, isDisabled=false",
+        "variant=bare, state=default, isDisabled=false",
+        "variant=bare, state=default, isDisabled=true",
+        "variant=secondary, state=default, isDisabled=true",
+        "variant=primary, state=hover, isDisabled=false",
+        "variant=knockout, state=hover, isDisabled=false",
+        "variant=secondary, state=hover, isDisabled=false",
+        "variant=bare, state=hover, isDisabled=false",
+        "variant=primary, state=active, isDisabled=false",
+        "variant=knockout, state=active, isDisabled=false",
+        "variant=secondary, state=active, isDisabled=false",
+        "variant=bare, state=active, isDisabled=false",
+        "variant=primary, state=focus, isDisabled=false",
+        "variant=knockout, state=focus, isDisabled=false",
+        "variant=secondary, state=focus, isDisabled=false",
+        "variant=bare, state=focus, isDisabled=false"
+      ]
+    }
+  ]
+}

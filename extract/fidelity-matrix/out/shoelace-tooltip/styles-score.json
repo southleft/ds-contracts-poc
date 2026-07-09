@@ -1,0 +1,169 @@
+{
+  "subject": "A. Shoelace Tooltip",
+  "truthSource": "dump.json resolved node values, per variant",
+  "factCells": 63,
+  "tally": {
+    "BOUND": 0,
+    "MINTED": 56,
+    "MISSING": 7,
+    "mismatched": 0
+  },
+  "rows": [
+    {
+      "part": "Arrow Wrapper",
+      "fact": "padding-inline",
+      "verdict": "MISSING",
+      "truth": "16px",
+      "variants": [
+        "placement=topLeft",
+        "placement=bottomLeft",
+        "placement=bottom",
+        "placement=top",
+        "placement=topRight",
+        "placement=bottomRight"
+      ]
+    },
+    {
+      "part": "Arrow Wrapper/Arrow",
+      "fact": "background-color",
+      "verdict": "MINTED",
+      "token": "{imported.tooltip.arrow-wrapper-arrow.background-color}",
+      "truth": "#27272a",
+      "resolved": "#27272a",
+      "valueOk": true,
+      "variants": [
+        "placement=left",
+        "placement=topLeft",
+        "placement=bottomLeft",
+        "placement=bottom",
+        "placement=top",
+        "placement=topRight",
+        "placement=bottomRight",
+        "placement=right"
+      ]
+    },
+    {
+      "part": "Body",
+      "fact": "background-color",
+      "verdict": "MISSING",
+      "truth": "#27272a",
+      "variants": [
+        "placement=left"
+      ]
+    },
+    {
+      "part": "Body",
+      "fact": "border-radius",
+      "verdict": "MINTED",
+      "token": "{imported.tooltip.body.border-radius}",
+      "truth": "3px",
+      "resolved": "3px",
+      "valueOk": true,
+      "variants": [
+        "placement=left",
+        "placement=topLeft",
+        "placement=bottomLeft",
+        "placement=bottom",
+        "placement=top",
+        "placement=topRight",
+        "placement=bottomRight",
+        "placement=right"
+      ]
+    },
+    {
+      "part": "Body/Content",
+      "fact": "background-color",
+      "verdict": "MINTED",
+      "token": "{imported.tooltip.body-content.background-color}",
+      "truth": "#27272a",
+      "resolved": "#27272a",
+      "valueOk": true,
+      "variants": [
+        "placement=left",
+        "placement=topLeft",
+        "placement=bottomLeft",
+        "placement=bottom",
+        "placement=top",
+        "placement=topRight",
+        "placement=bottomRight",
+        "placement=right"
+      ]
+    },
+    {
+      "part": "Body/Content",
+      "fact": "border-radius",
+      "verdict": "MINTED",
+      "token": "{imported.tooltip.body-content.border-radius}",
+      "truth": "4px",
+      "resolved": "4px",
+      "valueOk": true,
+      "variants": [
+        "placement=left",
+        "placement=topLeft",
+        "placement=bottomLeft",
+        "placement=bottom",
+        "placement=top",
+        "placement=topRight",
+        "placement=bottomRight",
+        "placement=right"
+      ]
+    },
+    {
+      "part": "Body/Content",
+      "fact": "padding-block",
+      "verdict": "MINTED",
+      "token": "{imported.tooltip.body-content.padding-block}",
+      "truth": "8px",
+      "resolved": "8px",
+      "valueOk": true,
+      "variants": [
+        "placement=left",
+        "placement=topLeft",
+        "placement=bottomLeft",
+        "placement=bottom",
+        "placement=top",
+        "placement=topRight",
+        "placement=bottomRight",
+        "placement=right"
+      ]
+    },
+    {
+      "part": "Body/Content",
+      "fact": "padding-inline",
+      "verdict": "MINTED",
+      "token": "{imported.tooltip.body-content.padding-inline}",
+      "truth": "8px",
+      "resolved": "8px",
+      "valueOk": true,
+      "variants": [
+        "placement=left",
+        "placement=topLeft",
+        "placement=bottomLeft",
+        "placement=bottom",
+        "placement=top",
+        "placement=topRight",
+        "placement=bottomRight",
+        "placement=right"
+      ]
+    },
+    {
+      "part": "Body/Content/Tooltip text",
+      "fact": "color",
+      "verdict": "MINTED",
+      "token": "{imported.tooltip.body-content-tooltip-text.color}",
+      "truth": "#ffffff",
+      "resolved": "#ffffff",
+      "valueOk": true,
+      "variants": [
+        "placement=left",
+        "placement=topLeft",
+        "placement=bottomLeft",
+        "placement=bottom",
+        "placement=top",
+        "placement=topRight",
+        "placement=bottomRight",
+        "placement=right"
+      ]
+    }
+  ]
+}

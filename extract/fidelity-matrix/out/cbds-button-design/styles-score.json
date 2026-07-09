@@ -1,0 +1,295 @@
+{
+  "subject": "D. CBDS Button (design side)",
+  "truthSource": "dump.json resolved node values, per variant",
+  "factCells": 84,
+  "tally": {
+    "BOUND": 0,
+    "MINTED": 84,
+    "MISSING": 0,
+    "mismatched": 0
+  },
+  "rows": [
+    {
+      "part": "Button",
+      "fact": "color",
+      "verdict": "MINTED",
+      "token": "{imported.button-brand-primary.button.color.default}",
+      "truth": "#fcfeff",
+      "resolved": "#fcfeff",
+      "valueOk": true,
+      "variants": [
+        "size=large, state=default",
+        "size=medium, state=default",
+        "size=small, state=default"
+      ]
+    },
+    {
+      "part": "Button",
+      "fact": "color",
+      "verdict": "MINTED",
+      "token": "{imported.button-brand-primary.button.color.hover}",
+      "truth": "#fcfeff",
+      "resolved": "#fcfeff",
+      "valueOk": true,
+      "variants": [
+        "size=large, state=hover",
+        "size=medium, state=hover",
+        "size=small, state=hover"
+      ]
+    },
+    {
+      "part": "Button",
+      "fact": "color",
+      "verdict": "MINTED",
+      "token": "{imported.button-brand-primary.button.color.focus}",
+      "truth": "#fcfeff",
+      "resolved": "#fcfeff",
+      "valueOk": true,
+      "variants": [
+        "size=large, state=focus",
+        "size=medium, state=focus",
+        "size=small, state=focus"
+      ]
+    },
+    {
+      "part": "Button",
+      "fact": "color",
+      "verdict": "MINTED",
+      "token": "{imported.button-brand-primary.button.color.pressed}",
+      "truth": "#fcfeff",
+      "resolved": "#fcfeff",
+      "valueOk": true,
+      "variants": [
+        "size=large, state=pressed",
+        "size=medium, state=pressed",
+        "size=small, state=pressed"
+      ]
+    },
+    {
+      "part": "Button",
+      "fact": "color",
+      "verdict": "MINTED",
+      "token": "{imported.button-brand-primary.button.color.disabled}",
+      "truth": "#556275",
+      "resolved": "#556275",
+      "valueOk": true,
+      "variants": [
+        "size=large, state=disabled",
+        "size=medium, state=disabled",
+        "size=small, state=disabled"
+      ]
+    },
+    {
+      "part": "Focus ring",
+      "fact": "border-color",
+      "verdict": "MINTED",
+      "token": "{imported.button-brand-primary.focus-ring.border-color}",
+      "truth": "#0e61ba",
+      "resolved": "#0e61ba",
+      "valueOk": true,
+      "variants": [
+        "size=large, state=focus",
+        "size=medium, state=focus",
+        "size=small, state=focus"
+      ]
+    },
+    {
+      "part": "Focus ring",
+      "fact": "border-radius",
+      "verdict": "MINTED",
+      "token": "{imported.button-brand-primary.focus-ring.border-radius}",
+      "truth": "12px",
+      "resolved": "12px",
+      "valueOk": true,
+      "variants": [
+        "size=large, state=focus",
+        "size=medium, state=focus",
+        "size=small, state=focus"
+      ]
+    },
+    {
+      "part": "Focus ring",
+      "fact": "border-width",
+      "verdict": "MINTED",
+      "token": "{imported.button-brand-primary.focus-ring.border-width}",
+      "truth": "2px",
+      "resolved": "2px",
+      "valueOk": true,
+      "variants": [
+        "size=large, state=focus",
+        "size=medium, state=focus",
+        "size=small, state=focus"
+      ]
+    },
+    {
+      "part": "root",
+      "fact": "background-color",
+      "verdict": "MINTED",
+      "token": "{imported.button-brand-primary.root.background-color.default}",
+      "truth": "#0e61ba",
+      "resolved": "#0e61ba",
+      "valueOk": true,
+      "variants": [
+        "size=large, state=default",
+        "size=medium, state=default",
+        "size=small, state=default"
+      ]
+    },
+    {
+      "part": "root",
+      "fact": "background-color",
+      "verdict": "MINTED",
+      "token": "{imported.button-brand-primary.root.background-color.hover}",
+      "truth": "#003e81",
+      "resolved": "#003e81",
+      "valueOk": true,
+      "variants": [
+        "size=large, state=hover",
+        "size=medium, state=hover",
+        "size=small, state=hover"
+      ]
+    },
+    {
+      "part": "root",
+      "fact": "background-color",
+      "verdict": "MINTED",
+      "token": "{imported.button-brand-primary.root.background-color.focus}",
+      "truth": "#0e61ba",
+      "resolved": "#0e61ba",
+      "valueOk": true,
+      "variants": [
+        "size=large, state=focus",
+        "size=medium, state=focus",
+        "size=small, state=focus"
+      ]
+    },
+    {
+      "part": "root",
+      "fact": "background-color",
+      "verdict": "MINTED",
+      "token": "{imported.button-brand-primary.root.background-color.pressed}",
+      "truth": "#002854",
+      "resolved": "#002854",
+      "valueOk": true,
+      "variants": [
+        "size=large, state=pressed",
+        "size=medium, state=pressed",
+        "size=small, state=pressed"
+      ]
+    },
+    {
+      "part": "root",
+      "fact": "background-color",
+      "verdict": "MINTED",
+      "token": "{imported.button-brand-primary.root.background-color.disabled}",
+      "truth": "#dfe3eb",
+      "resolved": "#dfe3eb",
+      "valueOk": true,
+      "variants": [
+        "size=large, state=disabled",
+        "size=medium, state=disabled",
+        "size=small, state=disabled"
+      ]
+    },
+    {
+      "part": "root",
+      "fact": "border-radius",
+      "verdict": "MINTED",
+      "token": "{imported.shared.size-8}",
+      "truth": "8px",
+      "resolved": "8px",
+      "valueOk": true,
+      "variants": [
+        "size=large, state=default",
+        "size=medium, state=default",
+        "size=small, state=default",
+        "size=large, state=hover",
+        "size=medium, state=hover",
+        "size=small, state=hover",
+        "size=large, state=focus",
+        "size=medium, state=focus",
+        "size=small, state=focus",
+        "size=large, state=pressed",
+        "size=medium, state=pressed",
+        "size=small, state=pressed",
+        "size=large, state=disabled",
+        "size=medium, state=disabled",
+        "size=small, state=disabled"
+      ]
+    },
+    {
+      "part": "root",
+      "fact": "padding-block",
+      "verdict": "MINTED",
+      "token": "{imported.shared.size-8}",
+      "truth": "8px",
+      "resolved": "8px",
+      "valueOk": true,
+      "variants": [
+        "size=large, state=default",
+        "size=medium, state=default",
+        "size=small, state=default",
+        "size=large, state=hover",
+        "size=medium, state=hover",
+        "size=small, state=hover",
+        "size=large, state=focus",
+        "size=medium, state=focus",
+        "size=small, state=focus",
+        "size=large, state=pressed",
+        "size=medium, state=pressed",
+        "size=small, state=pressed",
+        "size=large, state=disabled",
+        "size=medium, state=disabled",
+        "size=small, state=disabled"
+      ]
+    },
+    {
+      "part": "root",
+      "fact": "padding-inline",
+      "verdict": "MINTED",
+      "token": "{imported.button-brand-primary.root.padding-inline.large}",
+      "truth": "16px",
+      "resolved": "16px",
+      "valueOk": true,
+      "variants": [
+        "size=large, state=default",
+        "size=large, state=hover",
+        "size=large, state=focus",
+        "size=large, state=pressed",
+        "size=large, state=disabled"
+      ]
+    },
+    {
+      "part": "root",
+      "fact": "padding-inline",
+      "verdict": "MINTED",
+      "token": "{imported.button-brand-primary.root.padding-inline.medium}",
+      "truth": "16px",
+      "resolved": "16px",
+      "valueOk": true,
+      "variants": [
+        "size=medium, state=default",
+        "size=medium, state=hover",
+        "size=medium, state=focus",
+        "size=medium, state=pressed",
+        "size=medium, state=disabled"
+      ]
+    },
+    {
+      "part": "root",
+      "fact": "padding-inline",
+      "verdict": "MINTED",
+      "token": "{imported.button-brand-primary.root.padding-inline.small}",
+      "truth": "12px",
+      "resolved": "12px",
+      "valueOk": true,
+      "variants": [
+        "size=small, state=default",
+        "size=small, state=hover",
+        "size=small, state=focus",
+        "size=small, state=pressed",
+        "size=small, state=disabled"
+      ]
+    }
+  ]
+}
