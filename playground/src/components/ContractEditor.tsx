@@ -82,9 +82,13 @@ export const ContractEditor = forwardRef<ContractEditorHandle, ContractEditorPro
     useEffect(() => {
       if (prism) return;
       let live = true;
-      void loadPrism().then((p) => {
-        if (live) setPrism(p);
-      });
+      void loadPrism()
+        .then((p) => {
+          if (live) setPrism(p);
+        })
+        .catch(() => {
+          /* chunk failure reported by prism-lazy — stay plain */
+        });
       return () => {
         live = false;
       };

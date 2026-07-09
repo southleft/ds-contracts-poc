@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link, useRoute } from './router';
 import { ThemeProvider, useTheme } from './theme';
+import { useChunkFailure } from './engine/chunk-guard';
 import { HelpDrawer } from './components/HelpDrawer';
 import { Landing } from './pages/Landing';
 import { Examples } from './pages/Examples';
@@ -57,11 +58,27 @@ function Routes() {
   return <Landing />;
 }
 
+/** One calm strip for the one recoverable infrastructure failure: a lazy
+ *  chunk 404ing because the site was redeployed under this tab. */
+function ChunkBanner() {
+  const failed = useChunkFailure();
+  if (!failed) return null;
+  return (
+    <div className="chunk-banner" role="alert">
+      <span>The playground was updated since this tab loaded — reload to continue.</span>
+      <button type="button" className="btn--small" onClick={() => window.location.reload()}>
+        Reload
+      </button>
+    </div>
+  );
+}
+
 export function App() {
   return (
     <ThemeProvider>
       <div className="app">
         <TopBar />
+        <ChunkBanner />
         <main className="app__main">
           <Routes />
         </main>

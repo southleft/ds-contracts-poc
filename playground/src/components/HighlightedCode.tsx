@@ -22,9 +22,13 @@ export function HighlightedCode({ path, code }: { path: string; code: string }) 
   useEffect(() => {
     if (prism || !lang || oversized) return;
     let live = true;
-    void loadPrism().then((p) => {
-      if (live) setPrism(p);
-    });
+    void loadPrism()
+      .then((p) => {
+        if (live) setPrism(p);
+      })
+      .catch(() => {
+        /* chunk failure reported by prism-lazy — stay plain */
+      });
     return () => {
       live = false;
     };

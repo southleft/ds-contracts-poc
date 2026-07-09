@@ -1237,6 +1237,21 @@ label {
 
 /* first-visit onboarding strip — three clickable steps, no modal, no tour */
 
+/* chunk-failure banner — one calm strip, never a raw red error */
+
+.chunk-banner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 6px 16px;
+  border-bottom: 1px solid var(--pg-border);
+  background: var(--pg-surface);
+  color: var(--pg-fg);
+  font-size: 12.5px;
+  flex-shrink: 0;
+}
+
 .onboard {
   display: flex;
   align-items: center;

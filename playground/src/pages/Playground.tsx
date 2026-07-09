@@ -58,6 +58,7 @@ import {
   type WorkspaceEntry,
   type WorkspaceSource,
 } from '../engine/workspace';
+import { reportIfChunkError } from '../engine/chunk-guard';
 import { buildPreviewAtState, type PreviewPropOverrides } from '../engine/preview';
 import type { ReceiptGroup, Receipts } from '../receipts';
 import { ContractEditor, type ContractEditorHandle } from '../components/ContractEditor';
@@ -439,7 +440,9 @@ export function Playground() {
       setCodeBusy('Proposing…');
       applyCodeResult(proposeFromCodeText(tsx, css, 'playground/Pasted.tsx'), origin, []);
     } catch (e) {
-      setCodeError(e instanceof Error ? e.message : String(e));
+      // A chunk-load failure is the redeploy condition — the banner is the
+      // message; anything else stays a named inline error.
+      if (!reportIfChunkError(e)) setCodeError(e instanceof Error ? e.message : String(e));
     } finally {
       setCodeBusy(null);
     }
@@ -493,7 +496,7 @@ export function Playground() {
       setCodeTrace(trace);
       setCodeGaps([...trace.gaps, ...skippedGaps]);
     } catch (e) {
-      setCodeError(e instanceof Error ? e.message : String(e));
+      if (!reportIfChunkError(e)) setCodeError(e instanceof Error ? e.message : String(e));
     } finally {
       setCodeBusy(null);
     }
@@ -597,7 +600,7 @@ export function Playground() {
       setCodeTsx(files[0].source);
       setCodeCss(files[0].css ?? '');
     } catch (e) {
-      setCodeError(e instanceof Error ? e.message : String(e));
+      if (!reportIfChunkError(e)) setCodeError(e instanceof Error ? e.message : String(e));
     } finally {
       setCodeBusy(null);
     }
@@ -843,7 +846,7 @@ export function Playground() {
         demo ? 'prompt generation (demo fixture)' : `prompt generation — ${descModel}`,
       );
     } catch (e) {
-      setDescError(e instanceof Error ? e.message : String(e));
+      if (!reportIfChunkError(e)) setDescError(e instanceof Error ? e.message : String(e));
     } finally {
       setDescBusy(null);
     }
@@ -1062,7 +1065,7 @@ export function Playground() {
     if (!format || !emitted?.files) return;
     let cancelled = false;
     setFormatting(true);
-    (async () => {
+    void (async () => {
       const { formatTsx, formatCss } = await import('../engine/format-lazy');
       const files = await Promise.all(
         emitted.files!.map(async (f) => {
@@ -1076,9 +1079,15 @@ export function Playground() {
         }),
       );
       if (!cancelled) setFormattedFiles(files);
-    })().finally(() => {
-      if (!cancelled) setFormatting(false);
-    });
+    })()
+      .catch((e) => {
+        // The prettier chunk failing to load is the redeploy condition —
+        // the banner handles it; output simply stays unformatted.
+        reportIfChunkError(e);
+      })
+      .finally(() => {
+        if (!cancelled) setFormatting(false);
+      });
     return () => {
       cancelled = true;
     };

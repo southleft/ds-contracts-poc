@@ -13,6 +13,8 @@ export type PrismApi = typeof import('prismjs');
  *  highlighting is synchronous and jank is worse than monochrome. */
 export const HIGHLIGHT_LIMIT = 200_000;
 
+import { reportIfChunkError } from './chunk-guard';
+
 let loaded: PrismApi | null = null;
 let loading: Promise<PrismApi> | null = null;
 
@@ -28,10 +30,18 @@ export function loadPrism(): Promise<PrismApi> {
       Prism?: { manual?: boolean; disableWorkerMessageHandler?: boolean };
     };
     scope.Prism = { ...scope.Prism, manual: true, disableWorkerMessageHandler: true };
-    loading = import('./prism-bundle').then((m) => {
-      loaded = m.default;
-      return m.default;
-    });
+    loading = import('./prism-bundle').then(
+      (m) => {
+        loaded = m.default;
+        return m.default;
+      },
+      (e) => {
+        // Chunk 404 after a redeploy → the global banner; code stays plain.
+        reportIfChunkError(e);
+        loading = null;
+        throw e;
+      },
+    );
   }
   return loading;
 }
