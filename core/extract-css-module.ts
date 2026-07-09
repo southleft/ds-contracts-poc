@@ -108,6 +108,26 @@ interface CssRule {
   decls: CssDecl[];
 }
 
+/** Split a selector list on top-level commas only — `:not(:a, :b)` keeps its
+ *  inner comma. */
+function splitSelectors(list: string): string[] {
+  const out: string[] = [];
+  let depth = 0;
+  let cur = '';
+  for (const ch of list) {
+    if (ch === '(') depth++;
+    else if (ch === ')') depth--;
+    if (ch === ',' && depth === 0) {
+      out.push(cur.trim());
+      cur = '';
+    } else {
+      cur += ch;
+    }
+  }
+  if (cur.trim()) out.push(cur.trim());
+  return out.filter((s) => s.length > 0);
+}
+
 function parseCss(css: string, notes: string[]): CssRule[] {
   const src = css.replace(/\/\*[\s\S]*?\*\//g, '');
   const rules: CssRule[] = [];
@@ -123,34 +143,62 @@ function parseCss(css: string, notes: string[]): CssRule[] {
       }
     }
   };
-  while (i < src.length) {
-    const open = src.indexOf('{', i);
-    if (open === -1) break;
-    const selector = src.slice(i, open).trim();
-    i = open;
-    if (selector.startsWith('@')) {
-      if (!selector.startsWith('@keyframes ds-')) {
-        notes.push(`css: at-rule \`${selector}\` skipped — not extractable into anatomy`);
+  /** Parse one block body (or the top level when `parents` is null),
+   *  flattening NESTED rules the standard CSS-nesting way: `&:hover` appends
+   *  to every parent selector, anything else nests as a descendant. Rules
+   *  land in document order; a rule's decls object is shared across its
+   *  comma-split selectors and keeps accepting declarations found after
+   *  nested blocks. */
+  const parseBody = (parents: string[] | null, decls: CssDecl[] | null) => {
+    let buf = '';
+    const flushDecl = () => {
+      const colon = buf.indexOf(':');
+      if (colon !== -1 && decls) {
+        const prop = buf.slice(0, colon).trim();
+        const value = buf.slice(colon + 1).trim().replace(/\s+/g, ' ');
+        if (prop) decls.push({ prop, value });
       }
-      skipBlock();
-      continue;
+      buf = '';
+    };
+    while (i < src.length) {
+      const ch = src[i];
+      if (ch === ';') {
+        flushDecl();
+        i++;
+        continue;
+      }
+      if (ch === '}') {
+        flushDecl();
+        i++;
+        return;
+      }
+      if (ch === '{') {
+        const header = buf.trim();
+        buf = '';
+        if (header.startsWith('@')) {
+          if (!header.startsWith('@keyframes ds-')) {
+            notes.push(`css: at-rule \`${header}\` skipped — not extractable into anatomy`);
+          }
+          skipBlock();
+          continue;
+        }
+        const own = splitSelectors(header);
+        const combined =
+          parents === null
+            ? own
+            : parents.flatMap((p) => own.map((s) => (s.startsWith('&') ? `${p}${s.slice(1)}` : `${p} ${s}`)));
+        const childDecls: CssDecl[] = [];
+        for (const sel of combined) rules.push({ selector: sel, decls: childDecls });
+        i++; // past '{'
+        parseBody(combined, childDecls);
+        continue;
+      }
+      buf += ch;
+      i++;
     }
-    const close = src.indexOf('}', open);
-    if (close === -1) break;
-    const body = src.slice(open + 1, close);
-    i = close + 1;
-    const decls: CssDecl[] = [];
-    for (const chunk of body.split(';')) {
-      const colon = chunk.indexOf(':');
-      if (colon === -1) continue;
-      const prop = chunk.slice(0, colon).trim();
-      const value = chunk.slice(colon + 1).trim().replace(/\s+/g, ' ');
-      if (prop) decls.push({ prop, value });
-    }
-    for (const sel of selector.split(',').map((s) => s.trim())) {
-      if (sel) rules.push({ selector: sel, decls });
-    }
-  }
+    flushDecl();
+  };
+  parseBody(null, null);
   return rules;
 }
 
@@ -367,7 +415,40 @@ const STATE_SELECTOR_INV: Record<string, string> = {
   ':focus-visible': 'focus-visible',
   ':disabled': 'disabled',
 };
+/** `:not(…)` guards that only exclude other interaction states are cascade
+ *  bookkeeping, not meaning — `:hover:not(:active, :disabled)` IS the hover
+ *  state. Stripped before the state lookup; anything else stays unmatched. */
+const STATE_GUARD_RE = /:not\(\s*(?::(?:active|disabled|hover)\s*,?\s*)+\)/g;
+const stateOfPseudo = (pseudo: string): string | undefined =>
+  STATE_SELECTOR_INV[pseudo.replace(STATE_GUARD_RE, '')];
+/** A pseudo suffix is "simple" when it is only chained pseudo-classes (with
+ *  optional parenthesized arguments) — no descendants, no extra classes. */
+const SIMPLE_PSEUDO_RE = /^(?::[\w-]+(?:\([^)]*\))?)*$/;
 const STATE_ORDER = ['hover', 'focus-visible', 'disabled'];
+
+/** How the JSX spells its CSS classes — the referee for BEM-style modules
+ *  where class names do NOT equal part/axis names (block__element,
+ *  block--modifier). Built by the JSX walk, consumed by analyzeCss. The
+ *  generator's own spelling (class = part name, `axis-value` modifiers)
+ *  needs none of this and keeps working unchanged. */
+export interface ClassMap {
+  /** The root element's CSS-module class ('root' in generator output). */
+  rootClass: string | null;
+  /** css class → enum axis value, from root className modifier templates
+   *  (`styles[\`block--${variant}\`]` × the axis's declared values). */
+  axisValueByClass: Map<string, { axis: string; value: string }>;
+  /** css class → boolean prop, from `flag && styles['block--x']`. */
+  boolPropByClass: Map<string, string>;
+  /** css class → canonical extracted part name (`block__icon-left` → iconLeft). */
+  partNameByClass: Map<string, string>;
+}
+
+const emptyClassMap = (): ClassMap => ({
+  rootClass: null,
+  axisValueByClass: new Map(),
+  boolPropByClass: new Map(),
+  partNameByClass: new Map(),
+});
 
 interface CssModel {
   partStyles: Map<string, PartStyle>;
@@ -385,6 +466,7 @@ function analyzeCss(
   index: TokenIndex,
   notes: string[],
   rawValues: RawValueFinding[],
+  classes: ClassMap,
 ): CssModel {
   const rules = parseCss(css, notes);
   const partStyles = new Map<string, PartStyle>();
@@ -393,15 +475,19 @@ function analyzeCss(
   const overlapGap = new Map<string, string>();
   const cssPartNames = new Set<string>();
 
-  // axis-value class detection: "variant-primary" → [variant, primary]
+  // axis-value class detection: the generator's "variant-primary" spelling,
+  // or a JSX-discovered BEM modifier ("cbds-c-button--primary").
   const axisValueOf = (cls: string): { axis: string; value: string } | null => {
     for (const [axis, values] of enumProps) {
       for (const v of values) {
         if (cls === `${axis}-${v}`) return { axis, value: v };
       }
     }
-    return null;
+    return classes.axisValueByClass.get(cls) ?? null;
   };
+  /** Canonical part name for a css class — 'root' for the root class. */
+  const partNameOf = (cls: string): string =>
+    cls === 'root' || cls === classes.rootClass ? 'root' : (classes.partNameByClass.get(cls) ?? cls);
 
   // buckets for substituted-ref inference
   // key: `${target} ${state} ${axis} ${cssProp}` → value → path
@@ -432,6 +518,8 @@ function analyzeCss(
       if (m) {
         const path = resolveVar(m[1], `${rule.selector} { ${prop} }`, index, notes);
         if (path) onPath(prop, path);
+      } else if (value.includes('var(')) {
+        notes.push(`css: ${rule.selector} { ${prop}: ${value} } — var() inside a shorthand is not invertible to a single binding, not extracted`);
       } else if (LAYOUT_PROPS.has(prop)) {
         notes.push(
           `css: ${rule.selector} { ${prop}: ${value} } — a per-variant layout override (contract layoutByProp); not extracted, author it against design intent`,
@@ -465,19 +553,29 @@ function analyzeCss(
     }
 
     // single class, optionally with a state pseudo suffix
-    if ((m = sel.match(/^\.([\w-]+)((?::[\w()-]+)*)$/))) {
+    if ((m = sel.match(/^\.([\w-]+)((?::.*)?)$/)) && SIMPLE_PSEUDO_RE.test(m[2])) {
       const cls = m[1];
       const pseudo = m[2];
       const av = axisValueOf(cls);
+      const boolProp = classes.boolPropByClass.get(cls);
+      if (boolProp !== undefined) {
+        // Boolean-modifier styling has no extractable contract channel
+        // (stylesWhen is authored against design intent, not inverted).
+        notes.push(
+          `css: .${cls}${pseudo} — styles behind boolean prop "${boolProp}" (${rule.decls.length} declaration(s)); boolean-conditional styling is not extractable into anatomy, review by name`,
+        );
+        continue;
+      }
       if (!pseudo) {
         if (av) {
           collectVarDecls(rule, (cssProp, path) => {
             bucket('root', '', av.axis, cssProp, sel).set(av.value, path);
           });
         } else {
-          cssPartNames.add(cls);
+          const partName = partNameOf(cls);
+          cssPartNames.add(partName);
           const style = invertDecls(sel, rule.decls, index, notes, rawValues);
-          const existing = ensure(cls);
+          const existing = ensure(partName);
           Object.assign(existing.tokens, style.tokens);
           if (style.layout) existing.layout = { ...existing.layout, ...style.layout };
           if (style.overlay) existing.overlay = style.overlay;
@@ -485,13 +583,13 @@ function analyzeCss(
         }
         continue;
       }
-      const state = STATE_SELECTOR_INV[pseudo];
+      const state = stateOfPseudo(pseudo);
       if (!state) {
         notes.push(`css: selector \`${sel}\` — pseudo "${pseudo}" is not a contract state, not extracted`);
         continue;
       }
       statesSeen.add(state);
-      if (cls === 'root') {
+      if (partNameOf(cls) === 'root' && !av) {
         collectVarDecls(rule, (cssProp, path) => {
           (rootStates[state] ??= {})[cssProp] = `{${path}}`;
         });
@@ -508,7 +606,7 @@ function analyzeCss(
     // descendant: `.axis-value .part` (nested substituted ref)
     if ((m = sel.match(/^\.([\w-]+)\s+\.([\w-]+)$/))) {
       const av = axisValueOf(m[1]);
-      const partName = m[2];
+      const partName = partNameOf(m[2]);
       if (av) {
         cssPartNames.add(partName);
         collectVarDecls(rule, (cssProp, path) => {
@@ -527,7 +625,25 @@ function analyzeCss(
   for (const [key, byValue] of subst) {
     const { target, state, axis, cssProp, selector } = substMeta.get(key)!;
     const values = enumProps.get(axis)!;
-    const covered = values.filter((v) => byValue.has(v));
+    let covered = values.filter((v) => byValue.has(v));
+    if (covered.length < values.length) {
+      // BEM modules often emit NO class for the default value (`variant !==
+      // "primary" && …`) — the base rule carries that value's declaration.
+      // Fill the gap from the base binding (the cascade's own semantics)
+      // when one exists; anything still missing stays a named refusal.
+      const missing = values.filter((v) => !byValue.has(v));
+      const baseRef = state
+        ? rootStates[state]?.[cssProp]
+        : partStyles.get(target)?.tokens[cssProp];
+      const basePath = baseRef?.match(/^\{([a-z0-9.-]+)\}$/i)?.[1];
+      if (basePath !== undefined) {
+        for (const v of missing) byValue.set(v, basePath);
+        notes.push(
+          `css: ${selector} — "${axis}" classes cover ${covered.length}/${values.length} values for "${cssProp}"; ${missing.join(', ')} filled from the base rule (the cascade's default)`,
+        );
+        covered = values;
+      }
+    }
     if (covered.length < values.length) {
       notes.push(
         `css: ${selector} — enum class rules for "${axis}" cover ${covered.length}/${values.length} values for "${cssProp}"; substituted binding not proposed (partial coverage)`,
@@ -569,6 +685,7 @@ function attributesOf(el: JsxEl): ts.JsxAttributes {
 }
 
 const lowerFirst = (s: string) => s.charAt(0).toLowerCase() + s.slice(1);
+const camelize = (s: string) => lowerFirst(s.replace(/[-_]+(\w)/g, (_, c: string) => c.toUpperCase()));
 
 interface JsxContext {
   sf: ts.SourceFile;
@@ -579,6 +696,51 @@ interface JsxContext {
   clickHandlers: Map<string, string>;
   /** part name → aria state attr present as an expression (checked/…) */
   ariaOnPart: Map<string, string>;
+  /** JSX → CSS class spelling (BEM-aware); shared with analyzeCss. */
+  bem: ClassMap;
+}
+
+/** `styles.x` / `styles["x"]` → the class name; anything else null. */
+function stylesClassOf(e: ts.Expression): string | null {
+  if (ts.isPropertyAccessExpression(e) && e.expression.getText() === 'styles') return e.name.text;
+  if (
+    ts.isElementAccessExpression(e) &&
+    e.expression.getText() === 'styles' &&
+    ts.isStringLiteralLike(e.argumentExpression)
+  ) {
+    return e.argumentExpression.text;
+  }
+  return null;
+}
+
+/** `styles[\`head${ident}tail\`]` → the modifier template; else null. */
+function stylesTemplateOf(e: ts.Expression): { head: string; ident: string; tail: string } | null {
+  if (
+    ts.isElementAccessExpression(e) &&
+    e.expression.getText() === 'styles' &&
+    ts.isTemplateExpression(e.argumentExpression) &&
+    e.argumentExpression.templateSpans.length === 1 &&
+    ts.isIdentifier(e.argumentExpression.templateSpans[0].expression)
+  ) {
+    const t = e.argumentExpression;
+    return { head: t.head.text, ident: (t.templateSpans[0].expression as ts.Identifier).text, tail: t.templateSpans[0].literal.text };
+  }
+  return null;
+}
+
+/** A part's canonical name for a CSS-module class: BEM `block__icon-left`
+ *  under the discovered root class camelizes its element segment; anything
+ *  else camelizes the whole class (the generator's classes are already
+ *  camelCase part names, so they pass through unchanged). Registered in the
+ *  ClassMap so analyzeCss attaches the class's styles to the same name. */
+function partNameFromClass(cls: string, ctx: JsxContext): string {
+  const known = ctx.bem.partNameByClass.get(cls);
+  if (known) return known;
+  const root = ctx.bem.rootClass;
+  const stem = root && cls.startsWith(`${root}__`) ? cls.slice(root.length + 2) : cls;
+  const name = camelize(stem);
+  ctx.bem.partNameByClass.set(cls, name);
+  return name;
 }
 
 function classNameOf(el: JsxEl, ctx: JsxContext): { kind: 'part'; name: string } | { kind: 'root' } | { kind: 'none' } | { kind: 'opaque'; text: string } {
@@ -590,14 +752,115 @@ function classNameOf(el: JsxEl, ctx: JsxContext): { kind: 'part'; name: string }
     if (ts.isJsxExpression(init) && init.expression) {
       const e = init.expression;
       if (ts.isPropertyAccessExpression(e) && e.expression.getText() === 'styles') {
-        return e.name.text === 'root' ? { kind: 'root' } : { kind: 'part', name: e.name.text };
+        return e.name.text === 'root' || e.name.text === ctx.bem.rootClass
+          ? { kind: 'root' }
+          : { kind: 'part', name: partNameFromClass(e.name.text, ctx) };
+      }
+      const cls = stylesClassOf(e);
+      if (cls !== null) {
+        return cls === 'root' || cls === ctx.bem.rootClass
+          ? { kind: 'root' }
+          : { kind: 'part', name: partNameFromClass(cls, ctx) };
       }
       if (ts.isIdentifier(e) && ctx.rootClassVars.has(e.text)) return { kind: 'root' };
+      // clsx/classnames on a nested part: the first plain styles ref names
+      // the part; modifier arguments are reported, not guessed.
+      if (ts.isCallExpression(e) && ts.isIdentifier(e.expression) && /^(clsx|classnames|classNames|cx)$/.test(e.expression.text)) {
+        for (const arg of e.arguments) {
+          const argCls = stylesClassOf(unparen(arg as ts.Expression));
+          if (argCls !== null) {
+            if (argCls === 'root' || argCls === ctx.bem.rootClass) return { kind: 'root' }; // readRootClasses already noted it
+            if (e.arguments.length > 1) {
+              ctx.notes.push(
+                `jsx: <${tagNameOf(el)}> className ${e.expression.text}(…) — read as class "${argCls}"; the other ${e.arguments.length - 1} argument(s) are modifiers, not extracted`,
+              );
+            }
+            return { kind: 'part', name: partNameFromClass(argCls, ctx) };
+          }
+        }
+      }
       return { kind: 'opaque', text: e.getText().slice(0, 60) };
     }
     return { kind: 'opaque', text: init.getText().slice(0, 60) };
   }
   return { kind: 'none' };
+}
+
+/**
+ * Read the ROOT element's className expression into the ClassMap — the step
+ * that makes BEM modules legible. Handles the common spellings:
+ *   · styles.root / styles["block"]            → the root class
+ *   · clsx(styles["block"],
+ *       cond && styles[`block--${axis}`],      → axis modifier classes
+ *       flag && styles["block--x"],            → boolean modifier classes
+ *       className)                             → passthrough plumbing, ignored
+ * Anything else degrades to the existing opaque note. Returns true when a
+ * root class was discovered.
+ */
+function readRootClasses(rootEl: JsxEl, ctx: JsxContext, enumProps: Map<string, string[]>): boolean {
+  for (const attr of attributesOf(rootEl).properties) {
+    if (!ts.isJsxAttribute(attr) || attr.name.getText() !== 'className') continue;
+    const init = attr.initializer;
+    if (!init || !ts.isJsxExpression(init) || !init.expression) return false;
+    const e = init.expression;
+    const plain = stylesClassOf(e);
+    if (plain !== null) {
+      ctx.bem.rootClass = plain;
+      return true;
+    }
+    if (!ts.isCallExpression(e) || !ts.isIdentifier(e.expression) || !/^(clsx|classnames|classNames|cx)$/.test(e.expression.text)) {
+      return false;
+    }
+    const unread: string[] = [];
+    const axisNotes: string[] = [];
+    for (const rawArg of e.arguments) {
+      const arg = unparen(rawArg as ts.Expression);
+      const cls = stylesClassOf(arg);
+      if (cls !== null) {
+        if (ctx.bem.rootClass === null) ctx.bem.rootClass = cls;
+        else unread.push(`styles ref "${cls}" beyond the first — role unclear`);
+        continue;
+      }
+      if (ts.isIdentifier(arg) && arg.text === 'className') continue; // consumer passthrough — plumbing
+      if (ts.isBinaryExpression(arg) && arg.operatorToken.kind === ts.SyntaxKind.AmpersandAmpersandToken) {
+        const right = unparen(arg.right);
+        const template = stylesTemplateOf(right);
+        if (template && enumProps.has(template.ident)) {
+          for (const v of enumProps.get(template.ident)!) {
+            ctx.bem.axisValueByClass.set(`${template.head}${v}${template.tail}`, { axis: template.ident, value: v });
+          }
+          axisNotes.push(`${template.head}\${${template.ident}}${template.tail} → "${template.ident}" axis`);
+          continue;
+        }
+        const rightCls = right === undefined ? null : stylesClassOf(right);
+        const cond = unparen(arg.left);
+        if (rightCls !== null && ts.isIdentifier(cond) && ctx.propKind.get(cond.text) === 'boolean') {
+          ctx.bem.boolPropByClass.set(rightCls, cond.text);
+          continue;
+        }
+        unread.push(arg.getText().replace(/\s+/g, ' ').slice(0, 60));
+        continue;
+      }
+      unread.push(arg.getText().replace(/\s+/g, ' ').slice(0, 60));
+    }
+    if (ctx.bem.rootClass !== null) {
+      ctx.notes.push(
+        `jsx: root className ${e.expression.text}(…) read — root class ".${ctx.bem.rootClass}"${
+          axisNotes.length > 0 ? `; modifier classes: ${axisNotes.join(', ')}` : ''
+        }${
+          ctx.bem.boolPropByClass.size > 0
+            ? `; boolean modifier class(es): ${[...ctx.bem.boolPropByClass.entries()].map(([c, p]) => `.${c} (${p})`).join(', ')}`
+            : ''
+        }`,
+      );
+      for (const u of unread) {
+        ctx.notes.push(`jsx: root className argument \`${u}\` — not readable as a class binding, skipped by name`);
+      }
+      return true;
+    }
+    return false;
+  }
+  return false;
 }
 
 /** Literal/expression attributes → contract attrs, minus event/plumbing. */
@@ -749,6 +1012,43 @@ function fillChildren(el: JsxEl, part: ExtractedPart, partName: string, ctx: Jsx
     parts[key] = built.part;
   };
 
+  // Loose {children}/{textProp} expressions BETWEEN element children need a
+  // part of their own — the order-preserving spelling of "the label renders
+  // between the icons". A part-less container keeps the existing channel
+  // (slot/content on the container itself).
+  const isElementish = (kid: ts.JsxChild): boolean => {
+    if (ts.isJsxElement(kid) || ts.isJsxSelfClosingElement(kid)) return true;
+    if (ts.isJsxExpression(kid) && kid.expression) {
+      const e = unparen(kid.expression);
+      if (ts.isConditionalExpression(e)) return true;
+      if (ts.isBinaryExpression(e) && e.operatorToken.kind === ts.SyntaxKind.AmpersandAmpersandToken) return true;
+    }
+    return false;
+  };
+  const hasElementKids = kids.some(isElementish);
+
+  /** `cond ? <el/> : null` and `cond && <el/>` share their condition
+   *  vocabulary: presence (non-boolean prop) → optional, boolean prop →
+   *  visibleWhen, `prop === "value"` → visibleWhen equals. */
+  const conditionOf = (cond: ts.Expression): ExtractedPart['visibleWhen'] | 'optional' | undefined => {
+    if (ts.isBinaryExpression(cond) && ts.isIdentifier(cond.left)) {
+      const op = cond.operatorToken.kind;
+      if (op === ts.SyntaxKind.ExclamationEqualsToken && cond.right.kind === ts.SyntaxKind.NullKeyword) {
+        return 'optional';
+      }
+      if (op === ts.SyntaxKind.EqualsEqualsEqualsToken && ts.isStringLiteral(cond.right)) {
+        return { prop: cond.left.text, equals: cond.right.text };
+      }
+      return undefined;
+    }
+    if (ts.isIdentifier(cond)) {
+      // A node/text prop used as its own guard ({icon && …}) is a
+      // presence check — the part is optional, not boolean-driven.
+      return ctx.propKind.get(cond.text) === 'boolean' ? { prop: cond.text } : 'optional';
+    }
+    return undefined;
+  };
+
   for (const kid of kids) {
     if (ts.isJsxText(kid)) {
       if (kid.text.trim() !== '') texts.push(kid.text.trim());
@@ -764,12 +1064,37 @@ function fillChildren(el: JsxEl, part: ExtractedPart, partName: string, ctx: Jsx
       if (ts.isIdentifier(e)) {
         const kind = e.text === 'children' ? 'node' : ctx.propKind.get(e.text);
         if (e.text === 'children' || kind === 'node') {
-          part.slot = { name: e.text };
+          if (hasElementKids) {
+            addChild({ name: e.text, part: { slot: { name: e.text } } });
+            ctx.notes.push(`jsx: part "${partName}" renders {${e.text}} between elements — extracted as an ordered slot part "${e.text}"`);
+          } else {
+            part.slot = { name: e.text };
+          }
         } else if (kind === 'string') {
-          part.content = { prop: e.text };
+          if (hasElementKids) {
+            addChild({ name: e.text, part: { element: 'span', content: { prop: e.text } } });
+            ctx.notes.push(`jsx: part "${partName}" renders {${e.text}} between elements — extracted as an ordered content part "${e.text}"`);
+          } else {
+            part.content = { prop: e.text };
+          }
         } else {
           ctx.notes.push(`jsx: part "${partName}" renders {${e.text}} — not a known text/node prop, not extracted`);
         }
+        continue;
+      }
+      if (ts.isBinaryExpression(e) && e.operatorToken.kind === ts.SyntaxKind.AmpersandAmpersandToken) {
+        const right = unparen(e.right);
+        if (ts.isJsxElement(right) || ts.isJsxSelfClosingElement(right)) {
+          const cond = unparen(e.left);
+          const condition = conditionOf(cond);
+          if (condition === undefined) {
+            ctx.notes.push(`jsx: part "${partName}" conditional \`${cond.getText().slice(0, 60)}\` — condition shape not extractable, part skipped by name`);
+            continue;
+          }
+          addChild(buildPart(right, ctx, condition));
+          continue;
+        }
+        ctx.notes.push(`jsx: part "${partName}" expression \`${e.getText().slice(0, 60)}\` — && without a JSX element, not extractable`);
         continue;
       }
       if (ts.isConditionalExpression(e)) {
@@ -778,20 +1103,7 @@ function fillChildren(el: JsxEl, part: ExtractedPart, partName: string, ctx: Jsx
         const isNullElse = whenFalse.kind === ts.SyntaxKind.NullKeyword;
         if (isNullElse && (ts.isJsxElement(whenTrue) || ts.isJsxSelfClosingElement(whenTrue))) {
           const cond = unparen(e.condition);
-          let condition: ExtractedPart['visibleWhen'] | 'optional' | undefined;
-          if (ts.isBinaryExpression(cond) && ts.isIdentifier(cond.left)) {
-            const op = cond.operatorToken.kind;
-            if (op === ts.SyntaxKind.ExclamationEqualsToken && cond.right.kind === ts.SyntaxKind.NullKeyword) {
-              condition = 'optional';
-            } else if (
-              (op === ts.SyntaxKind.EqualsEqualsEqualsToken) &&
-              ts.isStringLiteral(cond.right)
-            ) {
-              condition = { prop: cond.left.text, equals: cond.right.text };
-            }
-          } else if (ts.isIdentifier(cond)) {
-            condition = { prop: cond.text };
-          }
+          const condition = conditionOf(cond);
           if (condition === undefined) {
             ctx.notes.push(`jsx: part "${partName}" conditional \`${cond.getText().slice(0, 60)}\` — condition shape not extractable, part skipped by name`);
             continue;
@@ -957,6 +1269,7 @@ export function extractAnatomy(input: AnatomyInput): ExtractedAnatomy | null {
     notes,
     clickHandlers: new Map(),
     ariaOnPart: new Map(),
+    bem: emptyClassMap(),
   };
 
   const rootTag = tagNameOf(rootEl);
@@ -965,11 +1278,16 @@ export function extractAnatomy(input: AnatomyInput): ExtractedAnatomy | null {
     return { root: {}, element: 'div', states: [], rawValues, notes };
   }
 
+  // BEM/clsx legibility: read the root's class spelling FIRST so every later
+  // class lookup (JSX parts and CSS selectors alike) resolves through it.
+  readRootClasses(rootEl, ctx, enumProps);
   const cn = classNameOf(rootEl, ctx);
   if (cn.kind === 'opaque') {
     notes.push(`jsx: root className ${cn.text} is not a CSS-module reference — parts under it are still read where legible`);
   } else if (cn.kind === 'part') {
     notes.push(`jsx: root class ".${cn.name}" extracted as the contract root part (contract roots are named "root")`);
+  } else if (cn.kind === 'root' && ctx.bem.rootClass !== null && ctx.bem.rootClass !== 'root') {
+    notes.push(`jsx: root class ".${ctx.bem.rootClass}" extracted as the contract root part (contract roots are named "root")`);
   }
 
   // Root attrs: role → semantics.role, the rest are root-part attrs.
@@ -991,7 +1309,7 @@ export function extractAnatomy(input: AnatomyInput): ExtractedAnatomy | null {
   }
 
   // CSS side
-  const model = analyzeCss(input.css, enumProps, input.tokens, notes, rawValues);
+  const model = analyzeCss(input.css, enumProps, input.tokens, notes, rawValues, ctx.bem);
 
   // Attach styles per part name across the JSX tree.
   const jsxPartNames = new Set<string>(['root']);

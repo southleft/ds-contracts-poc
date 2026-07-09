@@ -34,16 +34,22 @@ export function HelpDrawer({ open, onClose }: { open: boolean; onClose: () => vo
           <section>
             <h3 className="drawer__section-title">Coming from design</h3>
             <p>
-              Open the <b>Figma</b> tab. Three rungs, by variable-name fidelity: paste a plugin
-              dump in the JSON tab (native names, zero ambiguity); run{' '}
-              <code>npm run extract:figma:mcp</code> in the repo against the desktop app (full
-              names on any plan — CLI-only, the desktop server allows no browser origins); or
-              paste a figma.com URL + token here. The token stays in your browser, sent only to
-              api.figma.com. When the plan withholds variable names, resolved values are minted
-              as provisional <code>imported.*</code> tokens — the preview stays styled, the
-              receipts list every mint, and &lsquo;Suggest semantic names (AI)&rsquo; proposes
-              renames you apply one by one, refereed. No token? Demo import runs the identical
-              path over a committed fixture.
+              Open the <b>Figma</b> tab and paste a figma.com component URL + personal access
+              token. The token stays in your browser, sent only to api.figma.com. When the plan
+              withholds variable names, resolved values are minted as provisional{' '}
+              <code>imported.*</code> tokens — the preview stays styled, the receipts list every
+              mint, and &lsquo;Suggest semantic names (AI)&rsquo; proposes renames you apply one
+              by one, refereed. No token? Demo import runs the identical path over a committed
+              fixture.
+            </p>
+            <p className="drawer__subnote">
+              <b>Working locally?</b> Two more rungs, by variable-name fidelity: paste a plugin
+              dump (<code>extract/figma/dump.plugin.js</code> output) in the <b>JSON</b> tab —
+              native variable names, zero ambiguity; or run{' '}
+              <code>npm run extract:figma:mcp</code> in the repo against the desktop app — full
+              names on any plan, CLI-only (the desktop MCP server allows no browser origins).
+              Same dump, same proposer, same refusals as the URL import; only how much of the
+              variable names survives differs.
             </p>
           </section>
           <section>

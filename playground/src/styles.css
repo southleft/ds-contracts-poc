@@ -264,6 +264,16 @@ textarea,
   font-weight: 600;
 }
 
+/* "Working locally?" sub-note — the CLI rungs, boxed under the section. */
+
+.drawer__body .drawer__subnote {
+  margin-top: 8px;
+  padding: 8px 10px;
+  border: 1px solid var(--pg-border);
+  background: var(--pg-surface);
+  font-size: 12.5px;
+}
+
 /* Glossary — term/definition pairs, one sentence each. */
 
 .drawer__glossary {
@@ -1237,36 +1247,6 @@ label {
 
 /* first-visit onboarding strip — three clickable steps, no modal, no tour */
 
-/* fidelity ladder (Figma tab) — compact, above the form */
-
-.ladder {
-  margin-bottom: 14px;
-  padding: 8px 10px;
-  border: 1px solid var(--pg-border);
-  background: var(--pg-surface);
-  font-size: 12px;
-}
-
-.ladder__title {
-  font-size: 10.5px;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  color: var(--pg-muted);
-  margin-bottom: 6px;
-}
-
-.ladder__list {
-  margin: 0;
-  padding-left: 18px;
-  display: grid;
-  gap: 5px;
-}
-
-.ladder__list code {
-  font-family: var(--pg-mono);
-  font-size: 11px;
-}
-
 /* chunk-failure banner — one calm strip, never a raw red error */
 
 .chunk-banner {
@@ -1703,6 +1683,48 @@ label {
 .preview__bar-hint {
   font-size: 11.5px;
   color: var(--pg-faint);
+}
+
+/* surface toggle sits at the bar's far end */
+.preview__surface {
+  margin-left: auto;
+}
+
+/* Split view — code left, canvas right, one divider. The money view. */
+
+.preview__split {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 0;
+}
+
+.preview__split-col {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 0;
+}
+
+.preview__split-col + .preview__split-col {
+  border-left: 1px solid var(--pg-border);
+}
+
+.preview__split-col iframe {
+  flex: 1;
+  width: 100%;
+  border: 0;
+  background: transparent;
+}
+
+.preview__split-cap {
+  flex-shrink: 0;
+  padding: 4px 14px;
+  font-size: 10.5px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--pg-faint);
+  border-bottom: 1px solid var(--pg-border);
 }
 
 .pv-controls {
