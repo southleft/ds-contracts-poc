@@ -151,11 +151,14 @@ function run(id: string, kind: 'figma' | 'code'): void {
   }
 
   // ---- react surface -------------------------------------------------------
+  // Saved under the contract's own component name (the generator's file
+  // shape) so the emitted imports (./Tooltip, ./Button.module.css) resolve
+  // and the artifacts typecheck with the root tsc.
   try {
     const { tsx, css, stories } = emitReact(contract, { tokens: composed.inventory, icons: data.icons, contracts });
-    save('Component.tsx', tsx);
-    save('Component.module.css', css);
-    save('Component.stories.tsx', stories);
+    save(`${contract.name}.tsx`, tsx);
+    save(`${contract.name}.module.css`, css);
+    save(`${contract.name}.stories.tsx`, stories);
     console.log('  emitReact: ok');
   } catch (e) {
     save('Component.tsx.REFUSED.txt', String(e instanceof Error ? e.message : e) + '\n');

@@ -133,8 +133,8 @@ function findPart(rootPart: AnatomyPart, dumpPath: string): AnatomyPart | undefi
   let cur: AnatomyPart | undefined = rootPart;
   for (const seg of dumpPath.split('/')) {
     if (!cur?.parts) return undefined;
-    const keys = Object.keys(cur.parts);
-    const key = keys.find((k) => norm(k) === norm(seg)) ?? keys.find((k) => norm(k).replace(/\d+$/, '') === norm(seg));
+    const keys: string[] = Object.keys(cur.parts);
+    const key: string | undefined = keys.find((k) => norm(k) === norm(seg)) ?? keys.find((k) => norm(k).replace(/\d+$/, '') === norm(seg));
     if (!key) return undefined;
     cur = cur.parts[key];
   }
