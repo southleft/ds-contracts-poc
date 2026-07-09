@@ -12,7 +12,7 @@
       "truthType": "BOOLEAN",
       "verdict": "MISS",
       "reasons": [
-        "BOOLEAN visibility property not surfaced — the toggled node was not present/attributed in the captured variants"
+        "dump DOES capture the toggle (visible on //size=large, state=default/Icon (hidden) +14 more) — propose keeps the hidden node as an unconditional part and drops the visibility prop (visibleWhen is only wired for slot/swap parts, not nested component-ref parts)"
       ]
     },
     {
@@ -20,7 +20,7 @@
       "truthType": "BOOLEAN",
       "verdict": "MISS",
       "reasons": [
-        "BOOLEAN visibility property not surfaced — the toggled node was not present/attributed in the captured variants"
+        "dump DOES capture the toggle (visible on //size=large, state=default/Icon (hidden) +14 more) — propose keeps the hidden node as an unconditional part and drops the visibility prop (visibleWhen is only wired for slot/swap parts, not nested component-ref parts)"
       ]
     },
     {
