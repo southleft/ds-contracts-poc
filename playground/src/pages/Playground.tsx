@@ -410,15 +410,30 @@ export function Playground() {
     preGroups: ReceiptGroup[],
   ): string[] => {
     const groups: ReceiptGroup[] = [...preGroups];
-    for (const { name, proposal } of result.proposals) {
-      if (proposal.notes.length > 0) {
+    result.proposals.forEach(({ name, proposal }, index) => {
+      // The LOADED proposal's MINTED lines move into the dedicated group
+      // below (kind 'minted' — where the assist rename block attaches, the
+      // Figma path's spelling); other proposals keep them inline since only
+      // the loaded contract's layer is registered.
+      const isLoaded = index === 0;
+      const notes = isLoaded ? proposal.notes.filter((n) => !n.startsWith('MINTED ')) : proposal.notes;
+      if (notes.length > 0) {
         groups.push({
           title: `Proposal notes — ${name}`,
           kind: 'note',
-          entries: proposal.notes.map((message) => ({ message })),
+          entries: notes.map((message) => ({ message })),
         });
       }
-    }
+      if (isLoaded && proposal.mintedTokens && proposal.mintedTokens.count > 0) {
+        groups.push({
+          title: 'Minted provisional tokens',
+          kind: 'minted',
+          entries: proposal.mintedTokens.entries.map((e) => ({
+            message: `${e.ref} = ${e.value} — machine-named from a resolved value — rename against your real tokens (provisional); bound at: ${e.usageSites.join(', ')}`,
+          })),
+        });
+      }
+    });
     if (result.skipped.length > 0) {
       groups.push({
         title: 'Skipped components (visible but not readable)',
