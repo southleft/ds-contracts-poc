@@ -19,12 +19,28 @@
  *             nearest-token candidates, and NOTHING is fabricated — no color
  *             token ref appears anywhere in the degraded proposal.
  *
+ *   MINTED    the same degraded dump proposed with `mintUnbound: true`
+ *             (core/mint-tokens.ts). Bars: every previously-unbound value is
+ *             now BOUND to a provisional `imported.*` ref (zero UNBOUND
+ *             entries), zero semantic-looking names (no minted ref outside
+ *             the `imported.` namespace, nothing outside the repo inventory
+ *             fabricated), every minted ref noted as provisional, and the
+ *             proposal GENERATES: emitReact + emitHtml run green with an
+ *             inventory of repo trees + the minted tree, the emitted css
+ *             referencing the minted custom properties whose literal values
+ *             ride mintedTokenCss.
+ *
  * Output: extract/figma/rest/ROUNDTRIP-REST.md (committed receipt) + exit 1
  * on any failed bar. `npm run extract:figma:rest:roundtrip`.
  */
 import { readFileSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { ContractSchema, type Contract } from '../../../scripts/contract-schema.js';
+import { emitHtml } from '../../../core/emit-html.js';
+import { emitReact } from '../../../core/emit-react.js';
+import { MINT_NAMESPACE, mintedTokenCss } from '../../../core/mint-tokens.js';
+import { tokenInventoryFromJson } from '../../../core/tokens.js';
 import { kebab } from '../../types.js';
 import { isDumpSet } from '../types.js';
 import { loadTokenCorpus } from '../tokens.js';
@@ -123,6 +139,89 @@ function main() {
   );
   const degraded: DegradedResult = { component: 'Badge', mapReport: degradedReport, proposal: degradedProposal, checks };
 
+  // ------------------------------------------------------ DEGRADED + MINTED
+  // The same degraded dump, with provisional minting on: styles must survive
+  // at literal fidelity through machine-named imported.* tokens — and nothing
+  // may look semantic.
+  const mintedProposal = proposeFromDump(badgeSet, { corpus, contractIdByName, fileKey: null, mintUnbound: true });
+  const mChecks: DegradedResult['checks'] = [];
+  const mCheck = (ok: boolean, label: string) => mChecks.push({ ok, label });
+
+  const mintedTokens = mintedProposal.mintedTokens;
+  const entries = mintedTokens?.entries ?? [];
+  mCheck(mintedTokens !== undefined && mintedTokens.count > 0, `provisional tree minted (${mintedTokens?.count ?? 0} leaves)`);
+  mCheck(
+    mintedProposal.unbound.length === 0,
+    `every previously-unbound value is bound to a minted ref (UNBOUND entries: ${mintedProposal.unbound.length})`,
+  );
+  mCheck(
+    entries.length > 0 && entries.every((e) => e.ref.startsWith(`{${MINT_NAMESPACE}.`)),
+    'zero semantic-looking names: every minted ref lives under the imported. namespace',
+  );
+  mCheck(
+    entries.every((e) => mintedProposal.notes.some((n) => n.includes(e.ref) && n.includes('rename against your real tokens (provisional)'))),
+    'every minted ref lands in notes as provisional (rename against your real tokens)',
+  );
+
+  // Nothing fabricated: every token ref in the proposal resolves through the
+  // repo inventory or the imported namespace — no third vocabulary exists.
+  const readRootJson = (rel: string) => readJson<Record<string, unknown>>(path.resolve(root, rel));
+  const repoTrees = [
+    readRootJson('tokens/primitives.tokens.json'),
+    readRootJson('tokens/semantic.tokens.json'),
+    readRootJson('tokens/modes/semantic.light.tokens.json'),
+    readRootJson('tokens/modes/semantic.dark.tokens.json'),
+  ];
+  const repoInventory = tokenInventoryFromJson(repoTrees);
+  const enumValues = new Map<string, string[]>(
+    (mintedProposal.contract.props as Array<{ name: string; type: unknown }>)
+      .filter((p): p is { name: string; type: { enum: string[] } } => typeof p.type === 'object' && p.type !== null && 'enum' in (p.type as object))
+      .map((p) => [p.name, p.type.enum]),
+  );
+  const collectRefs = (node: unknown, out: string[]): string[] => {
+    if (!node || typeof node !== 'object') return out;
+    for (const [key, value] of Object.entries(node)) {
+      if (key === 'tokens' && value && typeof value === 'object') out.push(...Object.values(value as Record<string, string>));
+      else collectRefs(value, out);
+    }
+    return out;
+  };
+  const resolvable = collectRefs(mintedProposal.contract.anatomy, []).every((r) => {
+    const p = r.slice(1, -1);
+    if (p.startsWith(`${MINT_NAMESPACE}.`)) return true;
+    const ph = p.match(/\{([a-z][\w-]*)\}/);
+    if (!ph) return repoInventory.has(p);
+    return (enumValues.get(ph[1]) ?? []).every((v) => repoInventory.has(p.replaceAll(`{${ph[1]}}`, v)));
+  });
+  mCheck(resolvable, 'every anatomy binding resolves through the repo inventory or imported.* — nothing fabricated');
+
+  // The proposal GENERATES: schema-parse (already enforced by proposeFromDump),
+  // then emitReact + emitHtml with an inventory of repo trees + the minted tree.
+  let generated: { css: string } | null = null;
+  let generationError = '';
+  try {
+    const parsed: Contract = ContractSchema.parse(mintedProposal.contract);
+    const emitCtx = {
+      tokens: tokenInventoryFromJson([...repoTrees, mintedTokens?.tree ?? {}]),
+      icons: new Map<string, string>(),
+      contracts: new Map([[parsed.id, parsed]]),
+    };
+    emitReact(parsed, emitCtx);
+    generated = { css: emitHtml(parsed, emitCtx).css };
+  } catch (e) {
+    generationError = String(e);
+  }
+  mCheck(generated !== null, `emitReact + emitHtml run green with repo + minted trees${generationError ? ` — ${generationError}` : ''}`);
+  const mintedCssVars = mintedTokenCss(mintedTokens?.tree ?? {});
+  mCheck(
+    generated !== null && entries.some((e) => generated!.css.includes(`var(--${e.ref.slice(1, -1).split('.').join('-')})`)),
+    'emitted css references the minted custom properties',
+  );
+  mCheck(
+    entries.every((e) => mintedCssVars.includes(`--${e.ref.slice(1, -1).split('.').join('-')}: ${e.value};`)),
+    'mintedTokenCss renders every literal the bindings resolve to (styles survive at literal fidelity)',
+  );
+
   // --------------------------------------------------------------- RECEIPT
   const count = (fs: Finding[], status: Finding['status']) => fs.filter((f) => f.status === status).length;
   const lines: string[] = [
@@ -130,7 +229,7 @@ function main() {
     '',
     '<!-- GENERATED by extract/figma/rest/roundtrip-rest.ts (`npm run extract:figma:rest:roundtrip`) — DO NOT EDIT. -->',
     '',
-    'Fixtures in `extract/figma/rest/fixtures/` are hand-crafted `GetFileNodesResponse` / `GetLocalVariablesResponse` renditions (shapes per figma/rest-api-spec) of the SAME Badge and Card canvases the plugin dump captured — semantic ground truth: `extract/figma/fixtures/main-file-dumps.json`. `map.ts` maps REST → dump v1; the EXISTING proposer and comparator do the rest. Bars: zero MISMATCH and zero map degradations on the full path; on the degraded path (variables response absent — the endpoint is Enterprise-only) the proposal must stay schema-valid, surface raw values as named UNBOUND entries with nearest-token candidates, and fabricate nothing.',
+    'Fixtures in `extract/figma/rest/fixtures/` are hand-crafted `GetFileNodesResponse` / `GetLocalVariablesResponse` renditions (shapes per figma/rest-api-spec) of the SAME Badge and Card canvases the plugin dump captured — semantic ground truth: `extract/figma/fixtures/main-file-dumps.json`. `map.ts` maps REST → dump v1; the EXISTING proposer and comparator do the rest. Bars: zero MISMATCH and zero map degradations on the full path; on the degraded path (variables response absent — the endpoint is Enterprise-only) the proposal must stay schema-valid, surface raw values as named UNBOUND entries with nearest-token candidates, and fabricate nothing. A third pass re-proposes the degraded dump with `mintUnbound: true` (core/mint-tokens.ts): every unbound value must bind to a provisional machine-named `imported.*` token, zero semantic-looking names, and the proposal must GENERATE (emitReact + emitHtml) against repo trees + the minted tree.',
     '',
     '## Full path (nodes + variables)',
     '',
@@ -182,6 +281,17 @@ function main() {
   }
   lines.push('');
 
+  lines.push('## Degraded path with minting (`mintUnbound: true`)', '');
+  for (const c of mChecks) {
+    if (!c.ok) failed = true;
+    lines.push(`- ${c.ok ? '✅' : '❌'} ${c.label}`);
+  }
+  lines.push('', `### Minted provisional tokens (${entries.length} leaves — every name machine-derived, every one a rename candidate)`, '');
+  for (const e of entries) {
+    lines.push(`- \`${e.ref}\` = \`${e.value}\` — bound at ${e.usageSites.map((s) => `\`${s}\``).join(', ')}`);
+  }
+  lines.push('');
+
   const outPath = path.join(HERE, 'ROUNDTRIP-REST.md');
   writeFileSync(outPath, lines.join('\n') + '\n');
 
@@ -196,6 +306,8 @@ function main() {
   }
   console.log(`Badge (degraded): ${degraded.checks.filter((c) => c.ok).length}/${degraded.checks.length} checks`);
   for (const c of degraded.checks) if (!c.ok) console.log(`  ✗ ${c.label}`);
+  console.log(`Badge (degraded + minted): ${mChecks.filter((c) => c.ok).length}/${mChecks.length} checks · ${entries.length} minted leaves`);
+  for (const c of mChecks) if (!c.ok) console.log(`  ✗ ${c.label}`);
   console.log(`receipt → ${path.relative(root, outPath)}`);
   if (failed) {
     console.error('REST round trip has failures — the bar is zero mismatch, zero silent degradation.');
