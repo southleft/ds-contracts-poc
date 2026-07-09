@@ -108,3 +108,23 @@ hex on both sides' minted tokens; radius 8px both; padding-inline 16px
 - **B. Shoelace Button Group** — still figma.png only, refusal now 8
   violations (the non-PascalCase name violation is gone; the 8 foreign
   `ds.button` props remain the honest blocker).
+
+### Style-fidelity addendum (dump v1.2 audit)
+
+- **A. Shoelace Tooltip — placements finally differ.** `render.png`
+  recaptured after layoutByProp landed end-to-end (propose → emit-react →
+  emit-html): top/topLeft/topRight stack column with per-value alignment,
+  bottom* stack column-reverse, right runs row-reverse — visible as
+  per-placement offsets/alignment in the showcase. The arrow itself is
+  still #42 (geometry not captured), now receipted per node
+  (`vector-geometry-unsupported` ×8, `rotation-unsupported` ×6).
+- **C. Eventz Button — the disabled wash-out is fixed.** The
+  `isDisabled=true` showcase row renders at opacity 0.4 (dump v1.2 node
+  opacity → `stylesWhen`), matching the Figma truth that dump v1.1 rendered
+  at full ink. Remaining divergences unchanged and named: slot placeholder
+  icons, #42 focus-ring rectangle.
+- **D. CBDS Button (code)** — no visual change in the static render
+  (states render on interaction), but the emitted CSS now carries
+  `.root:active:not(:disabled)` per-variant pressed fills and the
+  `:focus-visible` outline pair — inspectable in `Button.module.css` /
+  `component.css`.

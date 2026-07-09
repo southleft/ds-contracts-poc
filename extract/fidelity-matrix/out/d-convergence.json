@@ -18,9 +18,9 @@
     {
       "axis": "interaction states",
       "design": "state variant axis [\"default\",\"hover\",\"focus\",\"pressed\",\"disabled\"]",
-      "code": "contract states [\"hover\",\"focus-visible\",\"disabled\"] (CSS pseudo-classes)",
+      "code": "contract states [\"hover\",\"active\",\"focus-visible\",\"disabled\"] (CSS pseudo-classes)",
       "verdict": "PARTIAL",
-      "note": "same facts on two different mechanisms: design draws states as variants, code styles real pseudo-states; hover+focus+disabled overlap, pressed exists in BOTH truths but only the design proposal kept it (code extractor dropped &:active), and \"default\" is implicit in code"
+      "note": "same facts on two different mechanisms: design draws states as variants, code styles real pseudo-states; hover+active(pressed)+focus+disabled ALL overlap now (:active joined the contract state vocabulary), and \"default\" is implicit in code"
     },
     {
       "axis": "label content",
@@ -59,9 +59,9 @@
     }
   ],
   "factTally": {
-    "AGREE": 12,
+    "AGREE": 15,
     "DIVERGE": 2,
-    "DESIGN-ONLY": 3,
+    "DESIGN-ONLY": 0,
     "CODE-ONLY": 2
   },
   "factRows": [
@@ -84,11 +84,11 @@
     {
       "fact": "background-color (pressed/active)",
       "designRef": "{imported.button-brand-primary.root.background-color.pressed}",
-      "codeRef": null,
+      "codeRef": "{imported.button.root.active.background-color.primary}",
       "design": "#002854",
-      "code": null,
-      "verdict": "DESIGN-ONLY",
-      "note": "the traced CSS HAS `&:active:not(:disabled)` (bg brand-pressed) — the code extractor dropped the state; the gap is in the code PROPOSAL, not the code truth"
+      "code": "#002854",
+      "verdict": "AGREE",
+      "note": "both sides now speak: design State=Pressed variant fill ≡ code `&:active:not(:disabled)` — the code extractor extracts :active since the STYLE-FIDELITY fixes (scorecard punch 4)"
     },
     {
       "fact": "background-color (disabled)",
@@ -190,21 +190,21 @@
       "note": "design side bound a REPO token"
     },
     {
-      "fact": "focus ring border-color",
+      "fact": "focus ring color",
       "designRef": "{imported.button-brand-primary.focus-ring.border-color}",
-      "codeRef": null,
+      "codeRef": "{imported.button.root.focus-visible.outline-color}",
       "design": "#0e61ba",
-      "code": null,
-      "verdict": "DESIGN-ONLY",
-      "note": "the traced CSS HAS `&:focus-visible { outline: 2px solid … }` — the code proposal declares the state but minted no facts (outline not in the extracted property set)"
+      "code": "#0e61ba",
+      "verdict": "AGREE",
+      "note": "design draws the ring as a border on a dedicated Focus ring part; code styles `&:focus-visible { outline: 2px solid … }` — the outline shorthand now expands (STYLE-FIDELITY fixes) and both sides carry the fact"
     },
     {
-      "fact": "focus ring border-width",
+      "fact": "focus ring width",
       "designRef": "{imported.button-brand-primary.focus-ring.border-width}",
-      "codeRef": null,
+      "codeRef": "{imported.button.root.focus-visible.outline-width}",
       "design": "2px",
-      "code": null,
-      "verdict": "DESIGN-ONLY"
+      "code": "2px",
+      "verdict": "AGREE"
     },
     {
       "fact": "min-height (per size)",

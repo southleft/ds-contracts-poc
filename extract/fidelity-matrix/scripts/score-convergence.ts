@@ -79,8 +79,8 @@ const factSpecs: [string, string | null, string | null, string?][] = [
   [
     'background-color (pressed/active)',
     D('root.background-color.pressed'),
-    null,
-    'the traced CSS HAS `&:active:not(:disabled)` (bg brand-pressed) — the code extractor dropped the state; the gap is in the code PROPOSAL, not the code truth',
+    C('active.background-color.primary'),
+    'both sides now speak: design State=Pressed variant fill ≡ code `&:active:not(:disabled)` — the code extractor extracts :active since the STYLE-FIDELITY fixes (scorecard punch 4)',
   ],
   ['background-color (disabled)', D('root.background-color.disabled'), C('disabled.background-color.primary')],
   ['label color (default)', D('button.color.default'), C('color.primary')],
@@ -100,12 +100,12 @@ const factSpecs: [string, string | null, string | null, string?][] = [
   ],
   ['font-weight', '{font.title.weight}', C('font-weight'), 'design side bound a REPO token'],
   [
-    'focus ring border-color',
+    'focus ring color',
     D('focus-ring.border-color'),
-    null,
-    'the traced CSS HAS `&:focus-visible { outline: 2px solid … }` — the code proposal declares the state but minted no facts (outline not in the extracted property set)',
+    C('focus-visible.outline-color'),
+    'design draws the ring as a border on a dedicated Focus ring part; code styles `&:focus-visible { outline: 2px solid … }` — the outline shorthand now expands (STYLE-FIDELITY fixes) and both sides carry the fact',
   ],
-  ['focus ring border-width', D('focus-ring.border-width'), null, ''],
+  ['focus ring width', D('focus-ring.border-width'), C('focus-visible.outline-width'), ''],
   ['min-height (per size)', null, C('min-height.medium'), 'design auto-layout implies height; no explicit fact proposed'],
   ['line-height (per size)', null, C('line-height.medium'), 'design text style not token-derived — typography not proposed (see proposal note)'],
 ];
@@ -158,7 +158,7 @@ const axes: Axis[] = [
     design: `state variant axis ${JSON.stringify((prop(dContract, 'state')?.type as { enum: string[] })?.enum)}`,
     code: `contract states ${JSON.stringify(cContract.states)} (CSS pseudo-classes)`,
     verdict: 'PARTIAL',
-    note: 'same facts on two different mechanisms: design draws states as variants, code styles real pseudo-states; hover+focus+disabled overlap, pressed exists in BOTH truths but only the design proposal kept it (code extractor dropped &:active), and "default" is implicit in code',
+    note: 'same facts on two different mechanisms: design draws states as variants, code styles real pseudo-states; hover+active(pressed)+focus+disabled ALL overlap now (:active joined the contract state vocabulary), and "default" is implicit in code',
   },
   {
     axis: 'label content',

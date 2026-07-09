@@ -75,6 +75,10 @@ export interface NodeSpec {
   /** v7 overlay: runtime sets layoutPositioning ABSOLUTE after append, with
    *  placement-derived constraints and position. */
   overlay?: { placement: 'top' | 'bottom' | 'start' | 'end' };
+  /** NODE opacity (dump v1.2 channel, inverted back out): a stylesWhen
+   *  `opacity` whose condition resolves TRUE for this compiled combo. The
+   *  runtime sets node.opacity after construction. */
+  opacity?: number;
   // svg (icon parts) — markup with currentColor resolved to the variant's
   // literal foreground color (SVG paint is not variable-bindable on import)
   svg?: string;
@@ -602,6 +606,8 @@ function applyTokens(
         // uses it) — but the mapping is general: opacity is bindable.
         spec.bindings = { ...spec.bindings, opacity: varName };
         break;
+      case 'box-shadow':
+        break; // no canvas projection in v1 — NAMED at proposal (dump v1.2 effects note)
       default:
         break; // outline-* etc. are state/CSS concerns
     }
@@ -757,6 +763,32 @@ function applyVisibleWhen(spec: NodeSpec, part: Part, contract: Contract): void 
 }
 
 /** Drop parts whose visibleWhen.equals doesn't match this variant's values. */
+/** v7 stylesWhen, canvas slice: OPACITY is the one whitelisted literal the
+ *  canvas can honestly render (node opacity — the dump v1.2 channel inverted
+ *  back out; field case: Eventz `isDisabled` roots at 0.4). A condition
+ *  resolves at COMPILE time: enum `equals` against the combo's subst; a
+ *  boolean against its contract DEFAULT (boolean-true combos are not
+ *  compiled — the documented canvas limit). Every other stylesWhen key stays
+ *  the documented canvas fidelity limit (schema note on StylesWhenSchema). */
+function applyStylesWhenOpacity(
+  spec: NodeSpec,
+  part: Part,
+  contract: Contract,
+  subst: Record<string, string>,
+): void {
+  for (const sw of part.stylesWhen ?? []) {
+    const raw = sw.styles['opacity'];
+    if (raw === undefined) continue;
+    const applies =
+      sw.equals !== undefined
+        ? subst[sw.prop] === sw.equals
+        : contract.props.find((p) => p.name === sw.prop)?.default === true;
+    if (!applies) continue;
+    const value = Number.parseFloat(raw);
+    if (!Number.isNaN(value)) spec.opacity = value;
+  }
+}
+
 function variantParts(
   parts: Record<string, Part>,
   subst: Record<string, string>,
@@ -782,6 +814,7 @@ function partToSpec(
   // runtime applies it after the node is appended (layoutPositioning
   // requires an auto-layout parent).
   if (part.overlay) spec.overlay = part.overlay;
+  applyStylesWhenOpacity(spec, part, contract, subst);
   return spec;
 }
 
@@ -1006,6 +1039,7 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
       layout: layoutSpec(root, true, subst),
     };
     const ctx = applyTokens(rootSpec, root.tokens ?? {}, subst, {});
+    applyStylesWhenOpacity(rootSpec, root, contract, subst);
     if (root.parts) {
       rootSpec.children = variantParts(root.parts, subst).map(([childName, child]) =>
         partToSpec(childName, child, contract, byId, ctx, subst),
@@ -1079,6 +1113,7 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
           subst,
           baseCtx,
         );
+        applyStylesWhenOpacity(rootSpec, root, contract, subst);
         if (root.parts) {
           rootSpec.children = variantParts(root.parts, subst).map(([childName, child]) =>
             partToSpec(childName, child, contract, byId, ctx, subst),
@@ -1161,11 +1196,16 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
 function mintedPreamble(mintedTokens?: Record<string, unknown>): string {
   const minted = mintedTokens ? flatten(mintedTokens) : null;
   if (!minted || minted.size === 0) return '';
-  const vars = [...minted].map(([p, entry]) => ({
-    name: figmaName(p),
-    type: figmaType(entry),
-    value: figmaValue(entry),
-  }));
+  // Shadow-typed leaves (box-shadow values, dump v1.2) have no Figma
+  // variable projection — skipped here; the limit is NAMED at proposal.
+  const vars = [...minted]
+    .filter(([, entry]) => entry.type !== 'shadow')
+    .map(([p, entry]) => ({
+      name: figmaName(p),
+      type: figmaType(entry),
+      value: figmaValue(entry),
+    }));
+  if (vars.length === 0) return '';
   return `// ---------------------------------------------------------------------------
 // PROVISIONAL VARIABLES — minted from resolved values by a degraded import.
 // This contract binds ${vars.length} provisional token(s) whose real variable names were
@@ -1207,6 +1247,21 @@ const MINTED_VARIABLES = ${JSON.stringify(vars)};
 `;
 }
 
+/** True when any compiled spec in the tree carries node opacity — the
+ *  runtime opacity line is emitted ONLY then, so contracts without the
+ *  channel emit byte-identical scripts (the golden guard's invariant, same
+ *  discipline as mintedPreamble). */
+const specHasOpacity = (s: NodeSpec): boolean =>
+  typeof s.opacity === 'number' || (s.children ?? []).some(specHasOpacity);
+const dataHasOpacity = (d: ComponentData): boolean =>
+  [...d.variants, ...(d.stateVariants ?? [])].some((v) => specHasOpacity(v.spec));
+const opacityRuntime = (has: boolean): string =>
+  has
+    ? `
+  // Node opacity (dump v1.2 channel): applies to every node kind.
+  if (typeof spec.opacity === 'number') node.opacity = spec.opacity;`
+    : '';
+
 function buildComponentScript(
   contract: Contract,
   byId: Map<string, Contract>,
@@ -1214,6 +1269,7 @@ function buildComponentScript(
   mintedTokens?: Record<string, unknown>,
 ): string {
   const data = compileComponentData(contract, byId);
+  const hasOpacity = dataHasOpacity(data);
 
   return `// GENERATED by scripts/generate-figma.ts — DO NOT EDIT.
 // Source of truth: contracts/${contract.id.replace(/^[^.]+\./, '')}.contract.json (${contract.id} v${contract.version})
@@ -1513,7 +1569,7 @@ async function buildNode(spec, registry) {
     node = spec.type === 'root' ? figma.createComponent() : figma.createFrame();
     applyFrameSpec(node, spec);
   }
-  node.name = spec.name;
+  node.name = spec.name;${opacityRuntime(hasOpacity)}
   if (spec.visibleProp) {
     registry.visibles.push({ node, prop: spec.visibleProp, default: spec.visibleDefault === true });
   }
@@ -1652,6 +1708,7 @@ return {
 // ---------------------------------------------------------------------------
 
 function buildBatchScript(datas: ComponentData[], fileKey: string | null): string {
+  const hasOpacity = datas.some(dataHasOpacity);
   return `// GENERATED by scripts/generate-figma.ts — DO NOT EDIT.
 // Batch sync: ${datas.map((d) => d.setName).join(', ')} (existing components skip).
 const COMPONENTS = ${JSON.stringify(datas)};
@@ -1910,7 +1967,7 @@ async function buildNode(spec, registry) {
     node = spec.type === 'root' ? figma.createComponent() : figma.createFrame();
     applyFrameSpec(node, spec);
   }
-  node.name = spec.name;
+  node.name = spec.name;${opacityRuntime(hasOpacity)}
   if (spec.visibleProp) {
     registry.visibles.push({ node, prop: spec.visibleProp, default: spec.visibleDefault === true });
   }

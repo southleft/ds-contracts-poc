@@ -321,6 +321,12 @@
   --imported-button-root-hover-background-color-danger: #7e0419;
   --imported-button-root-hover-background-color-ghost: #f5f7fa;
   --imported-button-root-hover-background-color-primary: #003e81;
+  --imported-button-root-active-background-color-surface: #a2aebf;
+  --imported-button-root-active-background-color-danger: #51000e;
+  --imported-button-root-active-background-color-ghost: #dfe3eb;
+  --imported-button-root-active-background-color-primary: #002854;
+  --imported-button-root-focus-visible-outline-width: 2px;
+  --imported-button-root-focus-visible-outline-color: #0e61ba;
   --imported-button-root-disabled-background-color-ghost: transparent;
   --imported-button-root-disabled-background-color-primary: #dfe3eb;
   --imported-button-root-disabled-background-color-surface: #dfe3eb;
@@ -406,6 +412,30 @@
 
 .button--variant-ghost:hover:not(:disabled) {
   background-color: var(--imported-button-root-hover-background-color-ghost);
+}
+
+.button--variant-primary:active:not(:disabled) {
+  background-color: var(--imported-button-root-active-background-color-primary);
+}
+
+.button--variant-surface:active:not(:disabled) {
+  background-color: var(--imported-button-root-active-background-color-surface);
+}
+
+.button--variant-danger:active:not(:disabled) {
+  background-color: var(--imported-button-root-active-background-color-danger);
+}
+
+.button--variant-ghost:active:not(:disabled) {
+  background-color: var(--imported-button-root-active-background-color-ghost);
+}
+
+.button:focus-visible {
+  outline-width: var(--imported-button-root-focus-visible-outline-width);
+}
+
+.button:focus-visible {
+  outline-color: var(--imported-button-root-focus-visible-outline-color);
 }
 
 .button--variant-primary:disabled {

@@ -294,3 +294,87 @@ paints and `hidden`).
   reconcile rule away from AGREE. Punch items 4 (code `:active` /
   `:focus-visible` extraction), 6 (per-variant layout), 7 (#42 vectors) and
   8 (reconcile pass) remain the ordered worklist.
+
+---
+
+## Style-fidelity addendum — dump v1.2 + the zero-silence audit (2026-07-09)
+
+The STYLE-FIDELITY matrix (docs/STYLE-FIDELITY.md) audited every style
+channel end-to-end and counted **13 SILENT-LOSS channels** in the dump v1.1
+capture. This pass closed all of them: four became implementations (node
+opacity, drop shadows, per-variant layout, per-variant literal triggers —
+plus `:active` and the focus-ring outline on the code side), the other nine
+became named degradation receipts in BOTH captures (REST mapper codes +
+a new plugin-dump `_degradations` channel). Same scripts, same committed
+fixtures (remapped offline to dump v1.2 from their committed rest-nodes).
+
+### Updated matrix rows
+
+| Subject | Props (vs truth defs) | Style facts (vs dump values) | HTML | React | Canvas script | Image pair |
+|---|---|---|---|---|---|---|
+| A. Shoelace Tooltip | unchanged (1 MATCH · 1 PARTIAL · 1 MISS) | 63 fact-cells: **62 MINTED · 1 MISSING · 0 value misses** (was 56 · 7) — the Arrow Wrapper's 16px inline padding mints per placement now; the 1 MISSING is Body background painted in 1/8 variants (named by design) | ok | ok | constructs, 8 variants (layoutByProp resolved per variant, reversed child order honored) | **placements now DIFFER**: root proposes `layoutByProp` on `placement` — 7 overrides (column/column-reverse/row-reverse + per-value align); arrows themselves stay #42, now receipted (`vector-geometry-unsupported` ×8, `rotation-unsupported` ×6) |
+| C. Eventz Button | unchanged (6 MATCH · 2 PARTIAL) | unchanged (143 MINTED · 12 MISSING · 0 value misses; border-color stays the named partial-stroke report) | ok | ok | constructs, 16 variants | **disabled washes out at opacity 0.4** — dump v1.2 captures NODE opacity; it rides `stylesWhen { prop: isDisabled, styles: { opacity: 0.4 } }` and renders on every CSS surface (render.png row `isDisabled=true`); text lineHeight losses now receipted (`text-channel-unsupported` ×20) |
+| D. CBDS Button (code) | unchanged (6 MATCH of 6) | 32 fact-cells: 30 MINTED · 2 MISSING (ghost `border: 1px solid` raw-value note, unchanged) — **and the proposal now carries the pressed fills per variant (`states.active`, minted `{imported.button.root.active.background-color.{variant}}`) AND the focus ring (`states.focus-visible` outline-width + outline-color from the expanded `outline:` shorthand)** | ok | ok | constructs, 12 variants | — |
+| **D convergence** | axes unchanged: 4 PARTIAL · 1 DESIGN-ONLY · 2 CODE-ONLY (interaction-states note updated: hover+active+focus+disabled ALL overlap now) | facts: **15 AGREE · 2 DIVERGE · 2 CODE-ONLY · 0 DESIGN-ONLY** (was 12 · 2 · 3 DESIGN-ONLY · 2 CODE-ONLY) — pressed bg `#002854` and the focus ring (`#0e61ba`, 2px) moved from DESIGN-ONLY to AGREE | — | — | — | the thesis measurement, three rows greener |
+
+### What closed, receipt by receipt
+
+1. **Node opacity (the re-filed disabled wash-out) — closed.** dump v1.2
+   captures `opacity` (node channel, distinct from paint alpha) in the
+   plugin dump AND the REST mapper. propose inverts it three ways: constant
+   or enum-correlated → a unitless **number-kind mint** on `tokens.opacity`
+   ($type number — one spelling that is a CSS opacity value and a Figma
+   FLOAT variable); a function of ONE boolean axis, opaque on the false
+   side → `stylesWhen { prop, styles: { opacity } }` (Eventz `isDisabled`
+   0.4 — the field case); anything else → a named note. The figma-script
+   engine resolves stylesWhen opacity per compiled combo and sets
+   `node.opacity` (runtime line emitted ONLY when a spec carries it — the
+   golden byte-invariant, same discipline as the minted preamble).
+2. **Code `:active` + focus ring (scorecard punch 4) — closed.** `active`
+   joined the contract state vocabulary (schema enum; emit-react/emit-html
+   render `:active:not(:disabled)`); the extractor inverts
+   `&:active:not(:disabled)` rules and expands `outline: W solid C` to
+   outline-width/outline-color exactly like `border` (the generator's
+   focus boilerplate carries style/offset). CBDS-code now proposes
+   `states.active` (per-variant) and `states.focus-visible` (ring facts).
+3. **Per-variant layout (scorecard gap 6, the tooltip-placement class) —
+   closed.** `invertLayoutByProp` inverts axis-correlated auto-layout
+   differences into the v7 `layoutByProp` vocabulary (MIN spelled
+   explicitly as `start` so overrides merge; a variant whose child order
+   reverses the merged order inverts to `-reverse` directions). emit-html
+   (the preview surface) now renders layoutByProp like emit-react always
+   did. Tooltip render.png: the eight placements finally differ.
+4. **Per-variant literal triggers (the other half of gap 6) — closed.**
+   The unbound/mint triggers scan EVERY variant instead of the default
+   one; the Arrow Wrapper padding MISSING ×6 became per-placement mints.
+5. **Drop shadows — captured + minted.** dump v1.2 `effects` carries
+   visible shadows with geometry + `{hex, alpha}` color (blur types by
+   name). Exactly-one-DROP_SHADOW-in-every-variant mints as a box-shadow
+   value (`0px 4px 8px #0000001a`, $type shadow, enum-axis correlation via
+   the existing classifier); inner shadows / blurs / stacks / partial
+   presence are NAMED notes; the minted preamble skips shadow leaves and
+   the canvas names box-shadow as a v1 limit at proposal. (No matrix
+   subject carries effects — the receipt is the synthetic eval pin.)
+6. **The remaining nine silent channels — receipted.** New degradation
+   codes in the REST mapper, mirrored by the plugin dump's `_degradations`
+   channel: `paint-stack-truncated`, `stroke-weights-nonuniform`,
+   `stroke-style-unsupported`, `blend-mode-unsupported`,
+   `rotation-unsupported`, `vector-geometry-unsupported` (#42),
+   `min-max-size-unsupported`, `text-channel-unsupported`; plus per-corner
+   `radii-nonuniform` on the plugin side (was `figma.mixed` silence) and a
+   propose note for bound variables outside the contract vocabulary
+   (maxWidth, minHeight, …). Stroke DETAIL on instances stays unreceipted
+   by design — instance styling is elided downstream.
+
+### Still open, ranked (all NAMED)
+
+1. Instance boundary (dump stops at instances) — the largest ceiling.
+2. #42 vector geometry — arrows render invisible; receipted, not built.
+3. Canvas token-key whitelist — box-shadow/line-height/min-height reach
+   CSS surfaces only; named at proposal.
+4. Multi-shadow / inner-shadow / blur effects; gradients & images as CSS
+   values (capture receipts carry the types).
+5. Text channels (lineHeight/letterSpacing/textCase/decoration) — dump
+   v1.3 candidates, receipted per node.
+6. Nested-part states, boolean-conditional styling, media queries — the
+   authored vocabulary exists; inversion does not.

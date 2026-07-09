@@ -101,10 +101,20 @@
       "message": "variable id VariableID:102:2305 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
     },
     {
+      "code": "rotation-unsupported",
+      "nodePath": "Tooltip:placement=left/Arrow Wrapper",
+      "message": "rotation -1.5707963705062848 has no dump v1 projection — node renders unrotated (#42 class)"
+    },
+    {
       "code": "variable-unresolved",
       "nodePath": "Tooltip:placement=left/Arrow Wrapper/Arrow",
       "field": "fill",
       "message": "variable id VariableID:102:2307 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "vector-geometry-unsupported",
+      "nodePath": "Tooltip:placement=left/Arrow Wrapper/Arrow",
+      "message": "VECTOR geometry is not captured (#42) — the node carries paints only and renders as a box"
     },
     {
       "code": "variable-unresolved",
@@ -203,10 +213,25 @@
       "message": "variable id VariableID:102:2307 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
     },
     {
+      "code": "vector-geometry-unsupported",
+      "nodePath": "Tooltip:placement=topLeft/Arrow Wrapper/Arrow",
+      "message": "VECTOR geometry is not captured (#42) — the node carries paints only and renders as a box"
+    },
+    {
       "code": "variable-unresolved",
       "nodePath": "Tooltip:placement=bottomLeft/Arrow Wrapper/Arrow",
       "field": "fill",
       "message": "variable id VariableID:102:2307 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "rotation-unsupported",
+      "nodePath": "Tooltip:placement=bottomLeft/Arrow Wrapper/Arrow",
+      "message": "rotation -3.1415925661670165 has no dump v1 projection — node renders unrotated (#42 class)"
+    },
+    {
+      "code": "vector-geometry-unsupported",
+      "nodePath": "Tooltip:placement=bottomLeft/Arrow Wrapper/Arrow",
+      "message": "VECTOR geometry is not captured (#42) — the node carries paints only and renders as a box"
     },
     {
       "code": "variable-unresolved",
@@ -303,6 +328,16 @@
       "nodePath": "Tooltip:placement=bottom/Arrow Wrapper/Arrow",
       "field": "fill",
       "message": "variable id VariableID:102:2307 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "rotation-unsupported",
+      "nodePath": "Tooltip:placement=bottom/Arrow Wrapper/Arrow",
+      "message": "rotation -3.1415925661670165 has no dump v1 projection — node renders unrotated (#42 class)"
+    },
+    {
+      "code": "vector-geometry-unsupported",
+      "nodePath": "Tooltip:placement=bottom/Arrow Wrapper/Arrow",
+      "message": "VECTOR geometry is not captured (#42) — the node carries paints only and renders as a box"
     },
     {
       "code": "variable-unresolved",
@@ -491,6 +526,11 @@
       "message": "variable id VariableID:102:2307 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
     },
     {
+      "code": "vector-geometry-unsupported",
+      "nodePath": "Tooltip:placement=top/Arrow Wrapper/Arrow",
+      "message": "VECTOR geometry is not captured (#42) — the node carries paints only and renders as a box"
+    },
+    {
       "code": "variable-unresolved",
       "nodePath": "Tooltip:placement=topRight/Body",
       "field": "topLeftRadius",
@@ -587,10 +627,25 @@
       "message": "variable id VariableID:102:2307 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
     },
     {
+      "code": "vector-geometry-unsupported",
+      "nodePath": "Tooltip:placement=topRight/Arrow Wrapper/Arrow",
+      "message": "VECTOR geometry is not captured (#42) — the node carries paints only and renders as a box"
+    },
+    {
       "code": "variable-unresolved",
       "nodePath": "Tooltip:placement=bottomRight/Arrow Wrapper/Arrow",
       "field": "fill",
       "message": "variable id VariableID:102:2307 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "rotation-unsupported",
+      "nodePath": "Tooltip:placement=bottomRight/Arrow Wrapper/Arrow",
+      "message": "rotation -3.1415925661670165 has no dump v1 projection — node renders unrotated (#42 class)"
+    },
+    {
+      "code": "vector-geometry-unsupported",
+      "nodePath": "Tooltip:placement=bottomRight/Arrow Wrapper/Arrow",
+      "message": "VECTOR geometry is not captured (#42) — the node carries paints only and renders as a box"
     },
     {
       "code": "variable-unresolved",
@@ -683,10 +738,25 @@
       "message": "variable id VariableID:102:2305 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
     },
     {
+      "code": "rotation-unsupported",
+      "nodePath": "Tooltip:placement=right/Arrow Wrapper",
+      "message": "rotation -1.5707963705062848 has no dump v1 projection — node renders unrotated (#42 class)"
+    },
+    {
       "code": "variable-unresolved",
       "nodePath": "Tooltip:placement=right/Arrow Wrapper/Arrow",
       "field": "fill",
       "message": "variable id VariableID:102:2307 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
+    },
+    {
+      "code": "rotation-unsupported",
+      "nodePath": "Tooltip:placement=right/Arrow Wrapper/Arrow",
+      "message": "rotation -3.1415925661670165 has no dump v1 projection — node renders unrotated (#42 class)"
+    },
+    {
+      "code": "vector-geometry-unsupported",
+      "nodePath": "Tooltip:placement=right/Arrow Wrapper/Arrow",
+      "message": "VECTOR geometry is not captured (#42) — the node carries paints only and renders as a box"
     },
     {
       "code": "variable-unresolved",

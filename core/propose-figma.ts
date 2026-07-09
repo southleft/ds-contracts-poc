@@ -22,7 +22,7 @@
  */
 import { ContractSchema, pascal } from '../scripts/contract-schema.js';
 import { kebab } from '../extract/types.js';
-import type { DumpNode, DumpSet } from '../extract/figma/types.js';
+import type { DumpEffect, DumpNode, DumpSet } from '../extract/figma/types.js';
 import type { TokenCorpus } from './token-corpus.js';
 import { mintTokens, type MintAxis, type MintObservation, type MintedEntry } from './mint-tokens.js';
 
@@ -384,7 +384,7 @@ function mintObservation(
   target: Record<string, string>,
   where: string,
   cssProperty: string,
-  kind: 'color' | 'px',
+  kind: 'color' | 'px' | 'number' | 'shadow',
   occ: Array<{ variant: string; value: string | number }>,
   source?: string,
 ) {
@@ -541,28 +541,168 @@ function invertNodeTokens(m: Merged, isRoot: boolean, ctx: Ctx, where: string): 
   const opacity = f('opacity');
   if (opacity) tokens.opacity = opacity;
 
+  // Bound variables on fields OUTSIDE the contract vocabulary (maxWidth,
+  // minHeight, counterAxisSpacing, …) are NAMED per field — a captured
+  // binding must never vanish without a receipt (STYLE-FIDELITY audit A19).
+  const CONSUMED_BOUND_FIELDS = new Set([
+    'paddingLeft', 'paddingRight', 'paddingTop', 'paddingBottom',
+    'topLeftRadius', 'topRightRadius', 'bottomLeftRadius', 'bottomRightRadius',
+    'strokeTopWeight', 'strokeRightWeight', 'strokeBottomWeight', 'strokeLeftWeight',
+    'strokeWeight', 'itemSpacing', 'width', 'height', 'minWidth', 'opacity',
+  ]);
+  for (const field of fields) {
+    if (!CONSUMED_BOUND_FIELDS.has(field)) {
+      ctx.notes.push(
+        `${where}: bound variable on "${field}" has no contract vocabulary — binding NAMED, not proposed (review)`,
+      );
+    }
+  }
+
   // Unbound literals on a non-utility node: named, suggested, never invented.
-  // With minting on, each report is ALSO captured with its per-variant values
-  // (the classic report reads the default variant only).
+  // With minting on, each report is ALSO captured with its per-variant values.
+  // Triggers scan EVERY variant — a value that is zero/absent in the DEFAULT
+  // variant but set elsewhere (field case: Tooltip Arrow Wrapper 16px inline
+  // padding on 6 of 8 placements; the default `left` carries none) previously
+  // fired nothing and the 6 variants' padding vanished without a receipt.
   const n0 = m.occ[0].node;
-  const l = n0.layout;
-  if (l && l.spacing !== 0 && !fields.has('itemSpacing') && (n0.children?.length ?? 0) > 1) {
-    reportUnbound(ctx, where, 'itemSpacing', l.spacing);
+  const firstNode = <T>(pick: (n: DumpNode) => T | undefined, bad: T): DumpNode =>
+    m.occ.find((o) => {
+      const v = pick(o.node);
+      return v !== undefined && v !== bad;
+    })?.node ?? n0;
+  if (
+    !fields.has('itemSpacing') &&
+    (n0.children?.length ?? 0) > 1 &&
+    m.occ.some((o) => (o.node.layout?.spacing ?? 0) !== 0)
+  ) {
+    reportUnbound(ctx, where, 'itemSpacing', firstNode((n) => n.layout?.spacing, 0).layout!.spacing);
     mintObservation(ctx, tokens, where, 'gap', 'px', numOccurrences(m, (n) => n.layout?.spacing), `${where}|itemSpacing`);
   }
-  if (l && l.padding.some((p) => p !== 0) && !fields.has('paddingLeft') && !fields.has('paddingTop')) {
-    reportUnbound(ctx, where, 'padding', l.padding.join(' '));
+  if (
+    !fields.has('paddingLeft') &&
+    !fields.has('paddingTop') &&
+    m.occ.some((o) => (o.node.layout?.padding ?? [0, 0, 0, 0]).some((pd) => pd !== 0))
+  ) {
+    const padded = m.occ.find((o) => (o.node.layout?.padding ?? [0, 0, 0, 0]).some((pd) => pd !== 0))!;
+    reportUnbound(ctx, where, 'padding', padded.node.layout!.padding.join(' '));
     mintPadding(ctx, tokens, m, where);
   }
-  if (n0.cornerRadius !== undefined && !radii.some((r) => fields.has(r))) {
-    reportUnbound(ctx, where, 'cornerRadius', n0.cornerRadius);
+  if (!radii.some((r) => fields.has(r)) && m.occ.some((o) => o.node.cornerRadius !== undefined)) {
+    reportUnbound(ctx, where, 'cornerRadius', firstNode((n) => n.cornerRadius, undefined).cornerRadius ?? 0);
     mintObservation(ctx, tokens, where, 'border-radius', 'px', numOccurrences(m, (n) => n.cornerRadius), `${where}|cornerRadius`);
   }
-  if (n0.strokeWeight !== undefined && n0.stroke && !weights.some((w) => fields.has(w)) && !fields.has('strokeWeight')) {
-    reportUnbound(ctx, where, 'strokeWeight', n0.strokeWeight);
+  if (
+    !weights.some((w) => fields.has(w)) &&
+    !fields.has('strokeWeight') &&
+    m.occ.some((o) => o.node.strokeWeight !== undefined && o.node.stroke !== undefined)
+  ) {
+    const stroked = m.occ.find((o) => o.node.strokeWeight !== undefined && o.node.stroke !== undefined)!;
+    reportUnbound(ctx, where, 'strokeWeight', stroked.node.strokeWeight!);
+    // Variants without a stroke mint width 0 — faithful (nothing renders at
+    // width 0); a PARTIAL stroke's COLOR stays the named refusal
+    // (base-instance-check pins exactly this split).
     mintObservation(ctx, tokens, where, 'border-width', 'px', numOccurrences(m, (n) => n.strokeWeight), `${where}|strokeWeight`);
   }
   return tokens;
+}
+
+/** NODE opacity (dump v1.2) — distinct from paint alpha. A bound opacity
+ *  variable already rides `tokens.opacity` (invertNodeTokens). A LITERAL
+ *  opacity < 1 has three honest inversions, tried in order:
+ *    1. constant across variants, or varying with an ENUM axis → an unbound
+ *       report + (with minting) a unitless `number` mint on tokens.opacity;
+ *    2. a function of ONE boolean variant axis, opaque on the false side →
+ *       `stylesWhen { prop, styles: { opacity } }` (the literal-CSS
+ *       conditional vocabulary — field case: Eventz `isDisabled` variant
+ *       roots at opacity 0.4, the disabled wash-out dump v1.1 lost);
+ *    3. anything else → a named note, nothing invented. */
+function invertNodeOpacity(
+  m: Merged,
+  holder: Record<string, unknown>,
+  tokens: Record<string, string>,
+  ctx: Ctx,
+  where: string,
+) {
+  if (m.occ.some((o) => o.node.bound?.opacity)) return; // rides tokens.opacity
+  const occ = m.occ.map((o) => ({ variant: o.variant, value: o.node.opacity ?? 1 }));
+  if (occ.every((o) => o.value === 1)) return;
+  const distinct = [...new Set(occ.map((o) => o.value))];
+  if (distinct.length > 1) {
+    // One boolean axis, opaque on the false side → stylesWhen.
+    for (const axis of ctx.axes) {
+      if (!isBoolAxis(axis.values)) continue;
+      const side = (want: string) =>
+        new Set(
+          occ
+            .filter((o) => (axisValuesOf(o.variant)[axis.property] ?? '').trim().toLowerCase() === want)
+            .map((o) => o.value),
+        );
+      const whenTrue = side('true');
+      const whenFalse = side('false');
+      if (whenFalse.size === 1 && whenFalse.has(1) && whenTrue.size === 1 && !whenTrue.has(1)) {
+        const value = [...whenTrue][0];
+        const stylesWhen = (holder.stylesWhen as Array<Record<string, unknown>> | undefined) ?? [];
+        stylesWhen.push({ prop: axis.propName, styles: { opacity: String(value) } });
+        holder.stylesWhen = stylesWhen;
+        ctx.notes.push(
+          `${where}: node opacity ${value} rides boolean axis "${axis.property}" (opaque when false) — proposed as stylesWhen { prop: ${axis.propName}, styles: { opacity } } (dump v1.2)`,
+        );
+        return;
+      }
+      if (whenTrue.size === 1 && whenTrue.has(1) && whenFalse.size === 1 && !whenFalse.has(1)) {
+        ctx.notes.push(
+          `${where}: node opacity ${[...whenFalse][0]} rides the FALSE side of boolean axis "${axis.property}" — stylesWhen cannot express negation; not proposed, review`,
+        );
+        return;
+      }
+    }
+  }
+  // Constant, or enum-axis-correlated — the mint classifier owns the split;
+  // an uncorrelated spread stays a named refusal from the mint pass (or the
+  // note below when minting is off).
+  reportUnbound(ctx, where, 'opacity', occ[0].value);
+  mintObservation(ctx, tokens, where, 'opacity', 'number', occ, `${where}|opacity`);
+  if (!ctx.mint && distinct.length > 1) {
+    ctx.notes.push(
+      `${where}: node opacity differs across variants (${distinct.join(', ')}) without a boolean-axis correlation — not representable without minting; review`,
+    );
+  }
+}
+
+/** One DROP_SHADOW as a CSS box-shadow value: "0px 4px 8px [2px] #0000001a"
+ *  — the same literal-fidelity single-string discipline as 8-digit hex. */
+const shadowCss = (e: DumpEffect): string => {
+  const px = (n: number) => `${Math.round(n * 100) / 100}px`;
+  const spread = e.spread !== undefined && e.spread !== 0 ? ` ${px(e.spread)}` : '';
+  return `${px(e.offset?.x ?? 0)} ${px(e.offset?.y ?? 0)} ${px(e.radius ?? 0)}${spread} ${paintCssHex(e.color ?? { hex: '000000' })}`;
+};
+
+/** VISIBLE effects (dump v1.2). Exactly ONE DROP_SHADOW in EVERY variant →
+ *  an unbound report + (with minting) a `box-shadow` shadow-kind mint (enum
+ *  correlation handled by the classifier). Anything else — inner shadows,
+ *  blurs, effect stacks, partial presence across variants — is a NAMED note
+ *  carrying the effect types: the channel never drops silently. The canvas
+ *  preview has no box-shadow projection in v1; that limit is named here at
+ *  proposal (the minted preamble also skips shadow-typed leaves). */
+function invertNodeEffects(m: Merged, tokens: Record<string, string>, ctx: Ctx, where: string) {
+  if (m.occ.every((o) => (o.node.effects?.length ?? 0) === 0)) return;
+  const kinds = [...new Set(m.occ.flatMap((o) => (o.node.effects ?? []).map((e) => e.type)))];
+  const singleDropShadowEverywhere = m.occ.every((o) => {
+    const eff = o.node.effects ?? [];
+    return eff.length === 1 && eff[0].type === 'DROP_SHADOW';
+  });
+  if (!singleDropShadowEverywhere) {
+    ctx.notes.push(
+      `${where}: visible effect(s) [${kinds.join(', ')}] — only a single DROP_SHADOW present in every variant maps to box-shadow (dump v1.2); channel NAMED, not proposed`,
+    );
+    return;
+  }
+  const occ = m.occ.map((o) => ({ variant: o.variant, value: shadowCss(o.node.effects![0]) }));
+  reportUnbound(ctx, where, 'effects', occ[0].value);
+  mintObservation(ctx, tokens, where, 'box-shadow', 'shadow', occ, `${where}|effects`);
+  ctx.notes.push(
+    `${where}: DROP_SHADOW proposed as a box-shadow value (dump v1.2) — CSS surfaces render it; the canvas preview has no box-shadow projection in v1 (named fidelity limit)`,
+  );
 }
 
 /** The contract's padding vocabulary is symmetric (padding-inline/-block):
@@ -684,10 +824,8 @@ function invertLayout(
 ): Record<string, unknown> | undefined {
   const layouts = m.occ.map((o) => o.node.layout).filter((l) => l !== undefined);
   const l = layouts[0];
-  if (l) {
-    const differs = layouts.some((x) => x!.mode !== l.mode || x!.primary !== l.primary || x!.counter !== l.counter);
-    if (differs) ctx.notes.push(`${where}: auto-layout differs across variants — using the default variant's`);
-  }
+  // Per-variant layout differences are handled by invertLayoutByProp (which
+  // notes an uncorrelated spread); the base layout is the default variant's.
   const grow =
     parentMode === 'HORIZONTAL' && m.occ.every((o) => o.node.fillWidth === true) ? true : undefined;
   if (!l) return grow ? { grow } : undefined;
@@ -708,6 +846,95 @@ function invertLayout(
   if (align && hasChildren) out.align = align;
   if (grow) out.grow = grow;
   return Object.keys(out).length > 0 ? out : undefined;
+}
+
+/** Per-variant AUTO-LAYOUT differences → layoutByProp (the v7 vocabulary the
+ *  schema already ships). Field case: Shoelace Tooltip — the root's
+ *  direction/counter-align AND child order (Body vs Arrow first) are a pure
+ *  function of the `placement` axis; dump v1.1 proposals collapsed all 8 to
+ *  the default variant's layout and placement rendered inert.
+ *
+ *  Rules: each variant's (direction, justify, align) tuple is computed with
+ *  MIN spelled EXPLICITLY as 'start' (an override merges over the base — an
+ *  absent key would not override); a variant whose child sequence is the
+ *  REVERSE of the merged order inverts to a `-reverse` direction (the code
+ *  side emits flex-direction, the canvas reverses compiled child order —
+ *  both already implemented for layoutByProp). Differences must be a
+ *  function of exactly ONE enum axis with full value coverage; only the
+ *  values that deviate from the default variant's tuple appear in the map.
+ *  Anything less correlated keeps the named collapse note. */
+function invertLayoutByProp(
+  m: Merged,
+  ctx: Ctx,
+  where: string,
+): Record<string, unknown> | undefined {
+  interface Tuple {
+    direction: string;
+    justify: string;
+    align: string;
+  }
+  const mergedOrder = m.children.map((c) => c.name);
+  const tupleOf = (o: Occ): Tuple | null => {
+    const l = o.node.layout;
+    if (!l) return null;
+    let direction = l.mode === 'VERTICAL' ? 'column' : 'row';
+    const seq = (o.node.children ?? []).map((n) => n.name);
+    const expected = mergedOrder.filter((n) => seq.includes(n));
+    if (
+      seq.length >= 2 &&
+      seq.join('\u0000') !== expected.join('\u0000') &&
+      seq.join('\u0000') === [...expected].reverse().join('\u0000')
+    ) {
+      direction += '-reverse';
+    }
+    return {
+      direction,
+      justify: JUSTIFY_INV[l.primary] ?? 'start',
+      align: ALIGN_INV[l.counter] ?? 'start',
+    };
+  };
+  const tuples = m.occ.map((o) => ({ variant: o.variant, tuple: tupleOf(o) }));
+  if (tuples.some((t) => t.tuple === null)) return undefined; // layout absent somewhere — other channels report
+  const key = (t: Tuple) => `${t.direction}|${t.justify}|${t.align}`;
+  const base = tuples[0].tuple!;
+  if (tuples.every((t) => key(t.tuple!) === key(base))) return undefined;
+  for (const axis of ctx.axes) {
+    if (isBoolAxis(axis.values)) continue;
+    const byValue = new Map<string, Tuple>();
+    let fits = true;
+    for (const t of tuples) {
+      const value = axisValuesOf(t.variant)[axis.property];
+      if (value === undefined) {
+        fits = false;
+        break;
+      }
+      const seen = byValue.get(value);
+      if (seen && key(seen) !== key(t.tuple!)) {
+        fits = false;
+        break;
+      }
+      byValue.set(value, t.tuple!);
+    }
+    if (!fits || !axis.values.every((v) => byValue.has(v))) continue;
+    const map: Record<string, Record<string, string>> = {};
+    for (const value of axis.values) {
+      const t = byValue.get(value)!;
+      const override: Record<string, string> = {};
+      if (t.direction !== base.direction) override.direction = t.direction;
+      if (t.justify !== base.justify) override.justify = t.justify;
+      if (t.align !== base.align) override.align = t.align;
+      if (Object.keys(override).length > 0) map[camel(value)] = override;
+    }
+    if (Object.keys(map).length === 0) return undefined;
+    ctx.notes.push(
+      `${where}: auto-layout differs across variants as a function of axis "${axis.property}" — proposed layoutByProp on \`${axis.propName}\` (${Object.keys(map).length} override(s); reversed child order spelled as -reverse directions)`,
+    );
+    return { prop: axis.propName, map };
+  }
+  ctx.notes.push(
+    `${where}: auto-layout differs across variants without correlating to any variant axis — using the default variant's`,
+  );
+  return undefined;
 }
 
 // ---------------------------------------------------------------------------
@@ -823,6 +1050,12 @@ function buildPart(
 
   if (m.type === 'TEXT') {
     const tokens = invertTextTokens(m, ctx, where);
+    invertNodeOpacity(m, part, tokens, ctx, where);
+    if (m.occ.some((o) => (o.node.effects?.length ?? 0) > 0)) {
+      ctx.notes.push(
+        `${where}: visible effect(s) on a TEXT node — a text shadow has no contract vocabulary (box-shadow is a box channel); channel NAMED, not proposed (dump v1.2)`,
+      );
+    }
     const property = unifiedPropRef(m, 'characters', ctx, where);
     const characters = first(m.occ, (n) => n.text?.characters) ?? '';
     if (property) {
@@ -840,6 +1073,21 @@ function buildPart(
   }
 
   if (m.type === 'INSTANCE') {
+    // Node opacity/effects on an instance are PARENT-context visual facts,
+    // but the part elides styling (the child contract owns it) and
+    // stylesWhen/tokens are refused on component refs — named, never
+    // silently dropped.
+    const instOpacity = m.occ.find((o) => (o.node.opacity ?? 1) < 1);
+    if (instOpacity) {
+      ctx.notes.push(
+        `${where}: node opacity ${instOpacity.node.opacity} on a nested instance — parent-context opacity is not representable on a component ref (dump v1.2); review`,
+      );
+    }
+    if (m.occ.some((o) => (o.node.effects?.length ?? 0) > 0)) {
+      ctx.notes.push(
+        `${where}: visible effect(s) on a nested instance — not representable on a component ref (dump v1.2); review`,
+      );
+    }
     const swapProperty = unifiedPropRef(m, 'mainComponent', ctx, where);
     if (swapProperty) {
       // A swap-bound instance outside a dedicated wrapper: still a slot part,
@@ -932,6 +1180,8 @@ function buildPart(
   if (isSpacer(m)) {
     const layout = invertLayout(m, false, parentMode, ctx, where);
     if (layout) part.layout = layout;
+    const byProp = invertLayoutByProp(m, ctx, where);
+    if (byProp) part.layoutByProp = byProp;
     if (visibleWhen) part.visibleWhen = visibleWhen;
     return part;
   }
@@ -944,6 +1194,10 @@ function buildPart(
   if (soleChild && soleSwap) {
     const layout = invertLayout(m, false, parentMode, ctx, where);
     if (layout) part.layout = layout;
+    const byProp = invertLayoutByProp(m, ctx, where);
+    if (byProp) part.layoutByProp = byProp;
+    invertNodeOpacity(m, part, tokens, ctx, where);
+    invertNodeEffects(m, tokens, ctx, where);
     attachTokens(ctx, part, tokens);
     const slot: Record<string, unknown> = { name: canonicalPropName(soleSwap) };
     const instanceOf = first(soleChild.occ, (n) => n.instanceOf);
@@ -968,6 +1222,8 @@ function buildPart(
   }
 
   if (isWrapArtifact(m)) {
+    invertNodeOpacity(m, part, tokens, ctx, where);
+    invertNodeEffects(m, tokens, ctx, where);
     attachTokens(ctx, part, tokens);
     if (visibleWhen) part.visibleWhen = visibleWhen;
     return part;
@@ -975,6 +1231,10 @@ function buildPart(
 
   const layout = invertLayout(m, false, parentMode, ctx, where);
   if (layout) part.layout = layout;
+  const byProp = invertLayoutByProp(m, ctx, where);
+  if (byProp) part.layoutByProp = byProp;
+  invertNodeOpacity(m, part, tokens, ctx, where);
+  invertNodeEffects(m, tokens, ctx, where);
   attachTokens(ctx, part, tokens);
   const visibleRef = unifiedPropRef(m, 'visible', ctx, where);
   if (visibleRef) applyVisibleBinding(part, visibleRef, ctx, where, m);
@@ -1109,6 +1369,7 @@ function flattenBaseInstances(variants: DumpNode[], ctx: Ctx): BaseInstanceCaptu
     }
     if (inst.bound) variant.bound = { ...(variant.bound ?? {}), ...inst.bound };
     if (inst.fillWidth !== undefined) variant.fillWidth = inst.fillWidth;
+    if (inst.opacity !== undefined) variant.opacity = inst.opacity; // dump v1.2
     variant.children = [...kids.slice(0, index), ...(inst.children ?? []), ...kids.slice(index + 1)];
     captures.push({
       variant: variant.name,
@@ -1348,6 +1609,8 @@ export function proposeFromDump(
   const root: Record<string, unknown> = {};
   const rootLayout = invertLayout(merged, true, null, ctx, where);
   if (rootLayout) root.layout = rootLayout;
+  const rootByProp = invertLayoutByProp(merged, ctx, where);
+  if (rootByProp) root.layoutByProp = rootByProp;
   const rootTokens = invertNodeTokens(merged, true, ctx, where);
 
   // Generator artifact: a root whose only child is the auto-injected `label`
@@ -1378,6 +1641,8 @@ export function proposeFromDump(
     }
     if (Object.keys(parts).length > 0) root.parts = parts;
   }
+  invertNodeOpacity(merged, root, rootTokens, ctx, where);
+  invertNodeEffects(merged, rootTokens, ctx, where);
   attachTokens(ctx, root, rootTokens);
 
   // Promotion from the flattened base instance(s) — after the anatomy, so

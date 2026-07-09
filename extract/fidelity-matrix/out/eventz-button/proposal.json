@@ -12,6 +12,7 @@
     "Button:root/endIcon: INSTANCE_SWAP-bound instance without a dedicated wrapper frame — slot proposed without layout, review",
     "Button:root/endIcon: slot \"endIcon\" holds a \"pause\" instance as design-time content — defaultContent not proposed (dump v1 does not carry its configuration), review",
     "Button:root/endIcon: visibility bound to BOOLEAN \"hasEndIcon\" — proposed as prop `hasEndIcon` (default not recoverable from dump v1, review)",
+    "Button:root: node opacity 0.4 rides boolean axis \"isDisabled\" (opaque when false) — proposed as stylesWhen { prop: isDisabled, styles: { opacity } } (dump v1.2)",
     "prop `hasEndIcon`: default true adopted from the base instance \"Button\" (BOOLEAN property \"hasEndIcon\")",
     "prop `hasStartIcon`: default true adopted from the base instance \"Button\" (BOOLEAN property \"hasStartIcon\")",
     "base instance \"Button\": property \"variant\" is one of the set's own variant axes (pinned to primary, knockout, secondary, bare in the flattened variant(s)) — not promoted",

@@ -127,6 +127,14 @@
   "states": [],
   "anatomy": {
     "root": {
+      "stylesWhen": [
+        {
+          "prop": "isDisabled",
+          "styles": {
+            "opacity": "0.4"
+          }
+        }
+      ],
       "tokens": {
         "background-color": "{imported.button.root.background-color.{variant}.{state}}",
         "gap": "{imported.button.root.gap}",

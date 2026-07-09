@@ -51,6 +51,19 @@ export interface DumpText {
   fillVar?: string;
 }
 
+/** One visible effect (dump v1.2, additive). Shadows carry their full
+ *  geometry + color; blur types carry the type (and radius) only — enough
+ *  for propose.ts to NAME the gap instead of losing the channel silently. */
+export interface DumpEffect {
+  type: 'DROP_SHADOW' | 'INNER_SHADOW' | 'LAYER_BLUR' | 'BACKGROUND_BLUR' | string;
+  /** Shadow color (shadow types only) — same {hex, alpha} shape as paints. */
+  color?: { hex: string; alpha?: number };
+  offset?: { x: number; y: number };
+  radius?: number;
+  /** Omitted when 0. */
+  spread?: number;
+}
+
 export interface DumpNode {
   name: string;
   type: 'COMPONENT' | 'FRAME' | 'TEXT' | 'INSTANCE' | string;
@@ -72,6 +85,16 @@ export interface DumpNode {
    *  boolean-prop default of false. Absence means visible (REST mapper) or
    *  not captured (dump v1 fixtures) — never inverted into `true`. */
   hidden?: boolean;
+  /** NODE opacity 0–1 (dump v1.2, additive) — OMITTED when 1. Distinct from
+   *  paint alpha: Eventz disables whole variants with `opacity: 0.4` on the
+   *  variant ROOT while the paints stay byte-identical to enabled; dump v1.1
+   *  dropped the channel and every surface rendered disabled at full ink.
+   *  Absence in older dumps means opaque, a declared limit. */
+  opacity?: number;
+  /** VISIBLE effects (dump v1.2, additive) — omitted when none. A single
+   *  DROP_SHADOW mints as a box-shadow value; everything else is a NAMED
+   *  proposal note. Absence in older dumps means not captured. */
+  effects?: DumpEffect[];
   text?: DumpText;
   /** componentPropertyReferences, property-id suffixes stripped:
    *  characters → TEXT property, mainComponent → INSTANCE_SWAP property,
@@ -99,9 +122,22 @@ export interface DumpSet {
   variants: DumpNode[];
 }
 
+/** One capture-side degradation receipt (dump v1.2) — the plugin dump's
+ *  mirror of extract/figma/rest/map.ts MapDegradation: every channel the
+ *  capture reads but cannot carry is NAMED, never dropped silently. */
+export interface DumpDegradation {
+  code: string;
+  /** setName:variant/child/… — same spelling as propose.ts note paths. */
+  nodePath: string;
+  message: string;
+}
+
 export interface DumpFile {
   _provenance?: { fileKey?: string | null; extractedAt?: string | number; note?: string };
-  [setName: string]: DumpSet | DumpFile['_provenance'];
+  /** dump v1.2, additive — absent in older dumps (their captures were run
+   *  before the channel existed; absence means "not receipted", not clean). */
+  _degradations?: DumpDegradation[];
+  [setName: string]: DumpSet | DumpFile['_provenance'] | DumpDegradation[] | undefined;
 }
 
 export const isDumpSet = (v: unknown): v is DumpSet =>

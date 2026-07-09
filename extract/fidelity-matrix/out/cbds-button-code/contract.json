@@ -78,6 +78,7 @@
   ],
   "states": [
     "hover",
+    "active",
     "focus-visible",
     "disabled"
   ],
@@ -103,6 +104,13 @@
       "states": {
         "hover": {
           "background-color": "{imported.button.root.hover.background-color.{variant}}"
+        },
+        "active": {
+          "background-color": "{imported.button.root.active.background-color.{variant}}"
+        },
+        "focus-visible": {
+          "outline-width": "{imported.button.root.focus-visible.outline-width}",
+          "outline-color": "{imported.button.root.focus-visible.outline-color}"
         },
         "disabled": {
           "background-color": "{imported.button.root.disabled.background-color.{variant}}",

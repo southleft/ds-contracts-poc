@@ -31,6 +31,8 @@
  *   boundVariables.paddingLeft/itemSpacing/…        bound.<same name> (plugin spelling ≡ REST spelling here)
  *   layoutSizingHorizontal === 'FILL'               fillWidth: true
  *   visible === false                               hidden: true (dump v1.1 — visibility-bound parts recover boolean defaults from it)
+ *   opacity (omitted at 1)                          opacity (dump v1.2 — NODE opacity, distinct from paint alpha)
+ *   effects[] (visible)                             effects (dump v1.2 — shadows with geometry+color; blur types by name)
  *   characters + style{fontSize,fontWeight}         text.characters / .fontSize / .fontStyle
  *     (fontWeight → Inter style name via the generator's FONT_STYLE_BY_WEIGHT)
  *   node.styles.text → styles metadata map          text.style (name), else omitted + degradation
@@ -44,7 +46,7 @@
  * the exact reason (e.g. a variable id that cannot be resolved because the
  * variables endpoint is Enterprise-only). Nothing is invented.
  */
-import type { DumpFile, DumpLayout, DumpNode, DumpPaint, DumpSet, DumpText } from '../types.js';
+import type { DumpEffect, DumpFile, DumpLayout, DumpNode, DumpPaint, DumpSet, DumpText } from '../types.js';
 
 // ---------------------------------------------------------------------------
 // REST shapes (trimmed to the consumed fields; figma/rest-api-spec names)
@@ -72,6 +74,12 @@ export interface RestTypeStyle {
   fontSize?: number;
   fontStyle?: string;
   italic?: boolean;
+  // Read ONLY to name their loss (dump v1 has no projection for them):
+  letterSpacing?: number;
+  textCase?: string;
+  textDecoration?: string;
+  lineHeightUnit?: string;
+  lineHeightPx?: number;
 }
 
 /** HasBoundVariablesTrait (api_types.ts) — the spellings that differ from the
@@ -97,6 +105,16 @@ export interface RestBoundVariables {
     | undefined;
 }
 
+/** Effect (api_types.ts), trimmed to the consumed fields. */
+export interface RestEffect {
+  type: string;
+  visible?: boolean;
+  color?: { r: number; g: number; b: number; a: number };
+  offset?: { x: number; y: number };
+  radius?: number;
+  spread?: number;
+}
+
 /** ComponentProperty (api_types.ts) — applied values on an INSTANCE. */
 export interface RestComponentProperty {
   type: 'BOOLEAN' | 'INSTANCE_SWAP' | 'TEXT' | 'VARIANT';
@@ -108,6 +126,8 @@ export interface RestNode {
   name: string;
   type: string;
   visible?: boolean;
+  /** NODE opacity 0–1 (omitted at 1) — dump v1.2 `opacity`. */
+  opacity?: number;
   children?: RestNode[];
   // HasFramePropertiesTrait
   layoutMode?: 'NONE' | 'HORIZONTAL' | 'VERTICAL' | 'GRID';
@@ -130,6 +150,8 @@ export interface RestNode {
   strokeWeight?: number;
   /** StyleType → style id; names live in the response's styles metadata map. */
   styles?: Record<string, string>;
+  // HasEffectsTrait
+  effects?: RestEffect[];
   // HasLayoutTrait
   layoutSizingHorizontal?: 'FIXED' | 'HUG' | 'FILL';
   // TypePropertiesTrait
@@ -138,6 +160,16 @@ export interface RestNode {
   // IsLayerTrait
   componentPropertyReferences?: Record<string, string>;
   boundVariables?: RestBoundVariables;
+  // Channels read ONLY to name their loss (STYLE-FIDELITY audit, dump v1.2):
+  blendMode?: string;
+  rotation?: number;
+  strokeAlign?: string;
+  strokeDashes?: number[];
+  individualStrokeWeights?: { top?: number; right?: number; bottom?: number; left?: number };
+  minWidth?: number | null;
+  maxWidth?: number | null;
+  minHeight?: number | null;
+  maxHeight?: number | null;
   // InstanceNode
   componentId?: string;
   componentProperties?: Record<string, RestComponentProperty>;
@@ -174,7 +206,17 @@ export type MapDegradationCode =
   // CAPTURED ({ hex, alpha }) instead of degraded away.
   | 'paint-unsupported'
   | 'layout-grid-unsupported'
-  | 'radii-nonuniform';
+  | 'radii-nonuniform'
+  // dump v1.2 (STYLE-FIDELITY audit): every channel the capture reads but
+  // cannot carry is a RECEIPT now — the silent-loss census hit zero.
+  | 'paint-stack-truncated'
+  | 'stroke-weights-nonuniform'
+  | 'stroke-style-unsupported'
+  | 'blend-mode-unsupported'
+  | 'rotation-unsupported'
+  | 'vector-geometry-unsupported'
+  | 'min-max-size-unsupported'
+  | 'text-channel-unsupported';
 
 export interface MapDegradation {
   code: MapDegradationCode;
@@ -278,9 +320,10 @@ function mapPaint(
   paintField: 'fill' | 'stroke',
 ): DumpPaint | undefined {
   if (!Array.isArray(paints)) return undefined;
-  const p = paints.find((x) => x.visible !== false && x.type === 'SOLID');
+  const visibles = paints.filter((x) => x.visible !== false);
+  const p = visibles.find((x) => x.type === 'SOLID');
   if (!p) {
-    const visible = paints.find((x) => x.visible !== false);
+    const visible = visibles[0];
     if (visible) {
       ctx.report.degradations.push({
         code: 'paint-unsupported',
@@ -290,6 +333,17 @@ function mapPaint(
       });
     }
     return undefined;
+  }
+  // dump v1.2: a paint STACK (or a non-solid layer alongside the captured
+  // solid) is truncated to the first solid — named, never silent.
+  const extra = visibles.filter((x) => x !== p);
+  if (extra.length > 0) {
+    ctx.report.degradations.push({
+      code: 'paint-stack-truncated',
+      nodePath,
+      field: paintField,
+      message: `${visibles.length} visible ${paintField} paints (${visibles.map((x) => x.type).join(', ')}) — dump v1 carries the first SOLID only; ${extra.length} paint(s) dropped`,
+    });
   }
   const effectiveAlpha = (p.color?.a ?? 1) * (p.opacity ?? 1);
   const withAlpha = (paint: DumpPaint): DumpPaint =>
@@ -412,6 +466,22 @@ function mapText(node: RestNode, ctx: Ctx, nodePath: string): DumpText {
     fontSize: s.fontSize ?? 0,
     fontStyle,
   };
+  // dump v1.2: text channels with no dump projection are NAMED per node.
+  const channels: string[] = [];
+  if (typeof s.letterSpacing === 'number' && s.letterSpacing !== 0) channels.push(`letterSpacing ${s.letterSpacing}`);
+  if (s.textCase !== undefined && s.textCase !== 'ORIGINAL') channels.push(`textCase ${s.textCase}`);
+  if (s.textDecoration !== undefined && s.textDecoration !== 'NONE') channels.push(`textDecoration ${s.textDecoration}`);
+  if (s.lineHeightUnit !== undefined && s.lineHeightUnit !== 'INTRINSIC_%') {
+    channels.push(`lineHeight ${s.lineHeightPx ?? '?'}px (${s.lineHeightUnit})`);
+  }
+  if (channels.length > 0) {
+    ctx.report.degradations.push({
+      code: 'text-channel-unsupported',
+      nodePath,
+      field: 'text',
+      message: `text channel(s) with no dump v1 projection: ${channels.join('; ')} — typography carries (fontSize, fontStyle, style identity) only`,
+    });
+  }
   const styleId = node.styles?.text ?? node.styles?.TEXT;
   if (styleId) {
     const name = ctx.styleNameById.get(styleId);
@@ -436,6 +506,76 @@ function mapPropRefs(node: RestNode): Record<string, string> | undefined {
   return Object.keys(propRefs).length > 0 ? propRefs : undefined;
 }
 
+const VECTOR_TYPES = new Set(['VECTOR', 'STAR', 'POLYGON', 'REGULAR_POLYGON', 'LINE', 'BOOLEAN_OPERATION', 'ELLIPSE']);
+
+/** Channels a node can carry that dump v1.2 still has NO projection for —
+ *  each becomes a degradation receipt (STYLE-FIDELITY audit: zero silence). */
+function nameUnsupportedChannels(node: RestNode, ctx: Ctx, nodePath: string, strokeEmitted: boolean) {
+  if (node.blendMode !== undefined && node.blendMode !== 'NORMAL' && node.blendMode !== 'PASS_THROUGH') {
+    ctx.report.degradations.push({
+      code: 'blend-mode-unsupported',
+      nodePath,
+      message: `blendMode ${node.blendMode} has no dump v1 projection — node renders as NORMAL`,
+    });
+  }
+  if (typeof node.rotation === 'number' && Math.abs(node.rotation) > 1e-6) {
+    ctx.report.degradations.push({
+      code: 'rotation-unsupported',
+      nodePath,
+      message: `rotation ${node.rotation} has no dump v1 projection — node renders unrotated (#42 class)`,
+    });
+  }
+  if (VECTOR_TYPES.has(node.type)) {
+    ctx.report.degradations.push({
+      code: 'vector-geometry-unsupported',
+      nodePath,
+      message: `${node.type} geometry is not captured (#42) — the node carries paints only and renders as a box`,
+    });
+  }
+  // Stroke DETAIL on an INSTANCE is elided by design downstream (instance
+  // styling belongs to the child contract; the Slot utility's dashed border
+  // is the utility's own) — no receipt needed for a channel that is
+  // deliberately not consumed.
+  const strokeDetail = strokeEmitted && node.type !== 'INSTANCE';
+  const w = node.individualStrokeWeights;
+  if (w && node.type !== 'INSTANCE') {
+    const values = [w.top ?? 0, w.right ?? 0, w.bottom ?? 0, w.left ?? 0];
+    if (new Set(values).size > 1) {
+      ctx.report.degradations.push({
+        code: 'stroke-weights-nonuniform',
+        nodePath,
+        message: `per-side stroke weights [${values.join(', ')}] — dump v1 carries a uniform strokeWeight only; per-side weights dropped`,
+      });
+    }
+  }
+  if (strokeDetail && Array.isArray(node.strokeDashes) && node.strokeDashes.length > 0) {
+    ctx.report.degradations.push({
+      code: 'stroke-style-unsupported',
+      nodePath,
+      message: `strokeDashes [${node.strokeDashes.join(', ')}] — dashed strokes have no dump v1 projection; stroke renders solid`,
+    });
+  }
+  if (strokeDetail && node.strokeAlign !== undefined && node.strokeAlign !== 'INSIDE') {
+    ctx.report.degradations.push({
+      code: 'stroke-style-unsupported',
+      nodePath,
+      message: `strokeAlign ${node.strokeAlign} — dump consumers render INSIDE strokes (CSS borders); alignment dropped`,
+    });
+  }
+  const sizes: string[] = [];
+  if (node.minWidth != null) sizes.push(`minWidth ${node.minWidth}`);
+  if (node.maxWidth != null) sizes.push(`maxWidth ${node.maxWidth}`);
+  if (node.minHeight != null) sizes.push(`minHeight ${node.minHeight}`);
+  if (node.maxHeight != null) sizes.push(`maxHeight ${node.maxHeight}`);
+  if (sizes.length > 0) {
+    ctx.report.degradations.push({
+      code: 'min-max-size-unsupported',
+      nodePath,
+      message: `literal min/max sizing (${sizes.join(', ')}) has no dump v1 projection — dropped (bound min-width variables DO ride \`bound\`)`,
+    });
+  }
+}
+
 function mapNode(node: RestNode, ctx: Ctx, nodePath: string): RestDumpNode {
   const out: RestDumpNode = { name: node.name, type: node.type };
 
@@ -453,8 +593,34 @@ function mapNode(node: RestNode, ctx: Ctx, nodePath: string): RestDumpNode {
     out.stroke = stroke;
     if (typeof node.strokeWeight === 'number') out.strokeWeight = node.strokeWeight;
   }
+  nameUnsupportedChannels(node, ctx, nodePath, stroke !== undefined);
   if (node.layoutSizingHorizontal === 'FILL') out.fillWidth = true;
   if (node.visible === false) out.hidden = true;
+  // dump v1.2: NODE opacity (distinct from paint alpha) — the disabled-variant
+  // wash-out channel (Eventz roots at opacity 0.4). Omitted when 1.
+  if (typeof node.opacity === 'number' && node.opacity < 1) {
+    out.opacity = Math.round(node.opacity * 10000) / 10000;
+  }
+  // dump v1.2: VISIBLE effects — shadows with geometry + color; blur types
+  // by name only (propose.ts names the gap; nothing is lost silently).
+  const effects: DumpEffect[] = [];
+  for (const e of node.effects ?? []) {
+    if (e.visible === false) continue;
+    if ((e.type === 'DROP_SHADOW' || e.type === 'INNER_SHADOW') && e.color && e.offset) {
+      const alpha = e.color.a ?? 1;
+      const eff: DumpEffect = {
+        type: e.type,
+        color: alpha < 1 ? { hex: rgbToHex(e.color), alpha: Math.round(alpha * 10000) / 10000 } : { hex: rgbToHex(e.color) },
+        offset: { x: e.offset.x, y: e.offset.y },
+        radius: e.radius ?? 0,
+      };
+      if (typeof e.spread === 'number' && e.spread !== 0) eff.spread = e.spread;
+      effects.push(eff);
+    } else {
+      effects.push(typeof e.radius === 'number' ? { type: e.type, radius: e.radius } : { type: e.type });
+    }
+  }
+  if (effects.length > 0) out.effects = effects;
 
   if (node.type === 'TEXT') {
     out.text = mapText(node, ctx, nodePath);
@@ -513,7 +679,7 @@ export function mapRestToDump(nodesResponse: RestNodesResponse, options: MapOpti
     _provenance: {
       fileKey: options.fileKey ?? null,
       extractedAt: new Date().toISOString().slice(0, 10),
-      note: 'Node-tree dump mapped from the Figma REST API (extract/figma/rest/map.ts, dump v1.1) for design→contract proposal.',
+      note: 'Node-tree dump mapped from the Figma REST API (extract/figma/rest/map.ts, dump v1.2) for design→contract proposal.',
     },
   };
 

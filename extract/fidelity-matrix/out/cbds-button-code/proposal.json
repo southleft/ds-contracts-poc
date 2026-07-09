@@ -16,18 +16,15 @@
     "css: .cbds-c-button { font-family: var(--cbds-font-family-primary, Inter), system-ui, -apple-system, sans-serif } — var() inside a shorthand is not invertible to a single binding, not extracted",
     "css: .cbds-c-button { white-space: nowrap } — no inversion rule, not extracted",
     "css: .cbds-c-button { outline: none } — no inversion rule, not extracted",
-    "css: selector `.cbds-c-button:active:not(:disabled)` — pseudo \":active:not(:disabled)\" is not a contract state, not extracted",
-    "css: .cbds-c-button:focus-visible { outline: 2px solid var(--cbds-border-focus) } — var() inside a shorthand is not invertible to a single binding, not extracted",
-    "css: selector `.cbds-c-button--surface:active:not(:disabled)` — pseudo \":active:not(:disabled)\" is not a contract state, not extracted",
-    "css: selector `.cbds-c-button--danger:active:not(:disabled)` — pseudo \":active:not(:disabled)\" is not a contract state, not extracted",
     "css: .cbds-c-button--ghost { border-color } uses var(--cbds-border-primary) which resolves to NO token in the token tree — binding not proposed",
     "css: .cbds-c-button--ghost:hover:not(:active, :disabled) { border-color } uses var(--cbds-border-primary-hover) which resolves to NO token in the token tree — binding not proposed",
-    "css: selector `.cbds-c-button--ghost:active:not(:disabled)` — pseudo \":active:not(:disabled)\" is not a contract state, not extracted",
+    "css: .cbds-c-button--ghost:active:not(:disabled) { border-color } uses var(--cbds-border-strong) which resolves to NO token in the token tree — binding not proposed",
     "css: .cbds-c-button--ghost:disabled { border-color } uses var(--cbds-border-secondary) which resolves to NO token in the token tree — binding not proposed",
     "css: .cbds-c-button--full-width — styles behind boolean prop \"fullWidth\" (1 declaration(s)); boolean-conditional styling is not extractable into anatomy, review by name",
     "mint: root border-width — \"variant\" classes cover 1/4 values (missing primary, surface, danger) and no base rule fills the gap — nothing minted",
     "mint: root border-color — \"variant\" classes cover 1/4 values (missing primary, surface, danger) and no base rule fills the gap — nothing minted",
     "mint: root :hover border-color — \"variant\" classes cover 1/4 values (missing primary, surface, danger) and no base rule fills the gap — nothing minted",
+    "mint: root :active border-color — \"variant\" classes cover 1/4 values (missing primary, surface, danger) and no base rule fills the gap — nothing minted",
     "mint: root :disabled border-color — \"variant\" classes cover 1/4 values (missing primary, surface, danger) and no base rule fills the gap — nothing minted",
     "MINTED {imported.button.root.gap} = 0.5rem — machine-named from a resolved value — rename against your real tokens (provisional); bound at: root gap",
     "MINTED {imported.button.root.padding-block} = 0.5rem — machine-named from a resolved value — rename against your real tokens (provisional); bound at: root padding-block",
@@ -57,6 +54,12 @@
     "MINTED {imported.button.root.hover.background-color.danger} = #7e0419 — machine-named from a resolved value — rename against your real tokens (provisional); bound at: root :hover background-color (variant=danger)",
     "MINTED {imported.button.root.hover.background-color.ghost} = #f5f7fa — machine-named from a resolved value — rename against your real tokens (provisional); bound at: root :hover background-color (variant=ghost)",
     "MINTED {imported.button.root.hover.background-color.primary} = #003e81 — machine-named from a resolved value — rename against your real tokens (provisional); bound at: root :hover background-color (variant=primary)",
+    "MINTED {imported.button.root.active.background-color.surface} = #a2aebf — machine-named from a resolved value — rename against your real tokens (provisional); bound at: root :active background-color (variant=surface)",
+    "MINTED {imported.button.root.active.background-color.danger} = #51000e — machine-named from a resolved value — rename against your real tokens (provisional); bound at: root :active background-color (variant=danger)",
+    "MINTED {imported.button.root.active.background-color.ghost} = #dfe3eb — machine-named from a resolved value — rename against your real tokens (provisional); bound at: root :active background-color (variant=ghost)",
+    "MINTED {imported.button.root.active.background-color.primary} = #002854 — machine-named from a resolved value — rename against your real tokens (provisional); bound at: root :active background-color (variant=primary)",
+    "MINTED {imported.button.root.focus-visible.outline-width} = 2px — machine-named from a resolved value — rename against your real tokens (provisional); bound at: root :focus-visible outline-width",
+    "MINTED {imported.button.root.focus-visible.outline-color} = #0e61ba — machine-named from a resolved value — rename against your real tokens (provisional); bound at: root :focus-visible outline-color",
     "MINTED {imported.button.root.disabled.background-color.ghost} = transparent — machine-named from a resolved value — rename against your real tokens (provisional); bound at: root :disabled background-color (variant=ghost)",
     "MINTED {imported.button.root.disabled.background-color.primary} = #dfe3eb — machine-named from a resolved value — rename against your real tokens (provisional); bound at: root :disabled background-color (variant=primary)",
     "MINTED {imported.button.root.disabled.background-color.surface} = #dfe3eb — machine-named from a resolved value — rename against your real tokens (provisional); bound at: root :disabled background-color (variant=surface)",
@@ -65,7 +68,7 @@
   ],
   "unbound": [],
   "minted": {
-    "count": 33,
+    "count": 39,
     "entries": [
       {
         "ref": "{imported.button.root.gap}",
@@ -261,6 +264,48 @@
         "value": "#003e81",
         "usageSites": [
           "root :hover background-color (variant=primary)"
+        ]
+      },
+      {
+        "ref": "{imported.button.root.active.background-color.surface}",
+        "value": "#a2aebf",
+        "usageSites": [
+          "root :active background-color (variant=surface)"
+        ]
+      },
+      {
+        "ref": "{imported.button.root.active.background-color.danger}",
+        "value": "#51000e",
+        "usageSites": [
+          "root :active background-color (variant=danger)"
+        ]
+      },
+      {
+        "ref": "{imported.button.root.active.background-color.ghost}",
+        "value": "#dfe3eb",
+        "usageSites": [
+          "root :active background-color (variant=ghost)"
+        ]
+      },
+      {
+        "ref": "{imported.button.root.active.background-color.primary}",
+        "value": "#002854",
+        "usageSites": [
+          "root :active background-color (variant=primary)"
+        ]
+      },
+      {
+        "ref": "{imported.button.root.focus-visible.outline-width}",
+        "value": "2px",
+        "usageSites": [
+          "root :focus-visible outline-width"
+        ]
+      },
+      {
+        "ref": "{imported.button.root.focus-visible.outline-color}",
+        "value": "#0e61ba",
+        "usageSites": [
+          "root :focus-visible outline-color"
         ]
       },
       {
