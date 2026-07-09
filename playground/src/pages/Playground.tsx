@@ -59,7 +59,7 @@ import {
   type WorkspaceSource,
 } from '../engine/workspace';
 import { reportIfChunkError } from '../engine/chunk-guard';
-import { buildPreviewAtState, type PreviewPropOverrides } from '../engine/preview';
+import { buildPreviewAtState, type PreviewPropOverrides, type PreviewSurface } from '../engine/preview';
 import type { ReceiptGroup, Receipts } from '../receipts';
 import { ContractEditor, type ContractEditorHandle } from '../components/ContractEditor';
 import { CopyButton } from '../components/CopyButton';
@@ -116,6 +116,14 @@ const wsTime = (ms: number) =>
 
 /** Session flag: the switch strip, once dismissed, stays gone for the session. */
 const SWITCH_STRIP_KEY = 'ds-playground.switch-strip-dismissed';
+
+/** Persisted preview-surface choice (light / dark / checker backdrop). */
+const PREVIEW_SURFACE_KEY = 'ds-playground.preview-surface';
+const PREVIEW_SURFACES: ReadonlyArray<readonly [PreviewSurface, string]> = [
+  ['light', 'Light'],
+  ['dark', 'Dark'],
+  ['checker', 'Checker'],
+];
 
 const pretty = (value: unknown) => JSON.stringify(value, null, 2);
 
@@ -1122,6 +1130,25 @@ export function Playground() {
   // Single (controls + one instance at the chosen props) is the default;
   // All variants is the classic showcase grid, one row per axis value.
   const [previewMode, setPreviewMode] = useState<'single' | 'all'>('single');
+  // The canvas SURFACE behind the component — neutral light by default, like
+  // Figma's canvas, independent of the app theme (a dark-styled import must
+  // stay visible with the app in dark mode). Persisted per browser.
+  const [previewSurface, setPreviewSurface] = useState<PreviewSurface>(() => {
+    try {
+      const stored = window.localStorage.getItem(PREVIEW_SURFACE_KEY);
+      return stored === 'dark' || stored === 'checker' ? stored : 'light';
+    } catch {
+      return 'light';
+    }
+  });
+  const changePreviewSurface = (s: PreviewSurface) => {
+    setPreviewSurface(s);
+    try {
+      window.localStorage.setItem(PREVIEW_SURFACE_KEY, s);
+    } catch {
+      /* storage unavailable — the choice just doesn't persist */
+    }
+  };
   const [previewOverrides, setPreviewOverrides] = useState<PreviewPropOverrides>({});
   // The prop whose last toggle changed nothing visible — honest inline note.
   const [previewNoteProp, setPreviewNoteProp] = useState<string | null>(null);
@@ -1146,10 +1173,10 @@ export function Playground() {
 
   const singlePreview = useMemo(() => {
     if (!previewData || outputTab !== 'preview' || previewMode !== 'single') return null;
-    return buildPreviewAtState(previewData.contract, previewData.contracts, theme, activeOverrides);
+    return buildPreviewAtState(previewData.contract, previewData.contracts, previewSurface, activeOverrides);
     // buildPreviewAtState reads the active token source.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [previewData?.contract, previewData?.contracts, theme, activeOverrides, tokenSource, outputTab, previewMode]);
+  }, [previewData?.contract, previewData?.contracts, previewSurface, activeOverrides, tokenSource, outputTab, previewMode]);
 
   // Honest-note bookkeeping: when a control change leaves the instance
   // markup byte-identical, the change had no visible effect BY DESIGN (the
@@ -1940,6 +1967,24 @@ export function Playground() {
                       ? 'One instance at the props you pick — rendered live by the same HTML emitter.'
                       : 'Every variant value and boolean, one row each.'}
                   </span>
+                  <div
+                    className="seg preview__surface"
+                    role="group"
+                    aria-label="Preview canvas surface"
+                    title="The backdrop behind the component — independent of the app theme, like Figma's canvas. Dark also switches the token mode."
+                  >
+                    {PREVIEW_SURFACES.map(([s, label]) => (
+                      <button
+                        key={s}
+                        type="button"
+                        className={`seg__btn${previewSurface === s ? ' is-active' : ''}`}
+                        aria-pressed={previewSurface === s}
+                        onClick={() => changePreviewSurface(s)}
+                      >
+                        {label}
+                      </button>
+                    ))}
+                  </div>
                 </div>
                 {previewMode === 'single' ? (
                   <>
@@ -1963,6 +2008,7 @@ export function Playground() {
                   <PreviewFrame
                     contract={previewData.contract}
                     contracts={previewData.contracts}
+                    surface={previewSurface}
                     title={previewTarget ? 'Contract preview' : 'Contract preview (last valid)'}
                   />
                 )}

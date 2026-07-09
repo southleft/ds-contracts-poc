@@ -1685,6 +1685,11 @@ label {
   color: var(--pg-faint);
 }
 
+/* surface toggle sits at the bar's far end */
+.preview__surface {
+  margin-left: auto;
+}
+
 .pv-controls {
   display: flex;
   flex-wrap: wrap;

@@ -2,8 +2,10 @@
  * Live preview = the `html` emitter as the preview engine. The contract is
  * emitted to static HTML+CSS (core/emit-html.ts) and rendered inside a
  * sandboxed iframe via srcdoc, with the repo's generated token stylesheets
- * injected so every var(--…) resolves. Theme is the iframe's [data-theme] —
- * the same switch src/styles/tokens.dark.css keys on. Zero runtime TSX
+ * injected so every var(--…) resolves. The backdrop is a neutral canvas
+ * SURFACE (PreviewSurface, Figma-style, independent of the app theme); the
+ * 'dark' surface also sets the iframe's [data-theme] — the same switch
+ * src/styles/tokens.dark.css keys on. Zero runtime TSX
  * compilation; works for ANY schema-valid contract, including imported ones.
  */
 import { emitHtml, type Contract } from '../../../core/index.js';
@@ -21,30 +23,50 @@ export type StatePreviewResult =
   | { ok: true; doc: string; instanceHtml: string | null }
   | { ok: false; error: string };
 
-const FRAME_BODY_CSS = `
+/**
+ * The canvas SURFACE behind the rendered component — a neutral backdrop like
+ * Figma's, deliberately independent of the app theme (a dark-styled import
+ * must never vanish dark-on-dark just because the app chrome is dark).
+ * 'dark' also flips the token mode ([data-theme="dark"]) so mode-aware
+ * tokens render their dark values against the dark surface; 'checker' keeps
+ * light tokens over a transparency checkerboard.
+ */
+export type PreviewSurface = 'light' | 'dark' | 'checker';
+
+const SURFACE_CSS: Record<PreviewSurface, string> = {
+  light: 'background: #f5f5f5; color: #1a1a1a;',
+  dark: 'background: #2c2c2c; color: #e6e6e6;',
+  checker: [
+    'background-color: #ffffff;',
+    'background-image: conic-gradient(#e4e4e4 0 25%, transparent 0 50%, #e4e4e4 0 75%, transparent 0);',
+    'background-size: 16px 16px;',
+    'color: #1a1a1a;',
+  ].join(' '),
+};
+
+const frameBodyCss = (surface: PreviewSurface) => `
   html { color-scheme: light; }
   html[data-theme="dark"] { color-scheme: dark; }
   body {
     margin: 0;
     padding: 20px;
-    background: var(--color-surface-background, Canvas);
-    color: var(--color-surface-foreground, CanvasText);
+    ${SURFACE_CSS[surface]}
     font-family: var(--font-family-sans, system-ui, sans-serif);
   }
 `;
 
 function assembleDoc(
   emitted: { html: string; css: string },
-  theme: 'light' | 'dark',
+  surface: PreviewSurface,
   extraCss = '',
 ): string {
   const { stylesheets } = activeTokens();
   return [
     '<!doctype html>',
-    `<html${theme === 'dark' ? ' data-theme="dark"' : ''}>`,
+    `<html${surface === 'dark' ? ' data-theme="dark"' : ''}>`,
     '<head><meta charset="utf-8">',
     `<style>${stylesheets.base}\n${stylesheets.dark}\n${stylesheets.brands}</style>`,
-    `<style>${FRAME_BODY_CSS}</style>`,
+    `<style>${frameBodyCss(surface)}</style>`,
     `<style>${emitted.css}</style>`,
     ...(extraCss ? [`<style>${extraCss}</style>`] : []),
     '</head><body>',
@@ -56,7 +78,7 @@ function assembleDoc(
 export function buildPreview(
   contract: Contract,
   contracts: Map<string, Contract>,
-  theme: 'light' | 'dark',
+  surface: PreviewSurface,
 ): PreviewResult {
   // The ACTIVE token source: repo stylesheets by default; a pasted user tree
   // swaps in a stylesheet regenerated from the paste (token-source.ts).
@@ -67,7 +89,7 @@ export function buildPreview(
   } catch (e) {
     return { ok: false, error: e instanceof Error ? e.message : String(e) };
   }
-  return { ok: true, doc: assembleDoc(emitted, theme) };
+  return { ok: true, doc: assembleDoc(emitted, surface) };
 }
 
 // ---------------------------------------------------------------------------
@@ -115,7 +137,7 @@ function instanceSignature(html: string): string | null {
 export function buildPreviewAtState(
   contract: Contract,
   contracts: Map<string, Contract>,
-  theme: 'light' | 'dark',
+  surface: PreviewSurface,
   overrides: PreviewPropOverrides,
 ): StatePreviewResult {
   const { inventory } = activeTokens();
@@ -131,7 +153,7 @@ export function buildPreviewAtState(
   }
   return {
     ok: true,
-    doc: assembleDoc(emitted, theme, SINGLE_ITEM_CSS),
+    doc: assembleDoc(emitted, surface, SINGLE_ITEM_CSS),
     instanceHtml: instanceSignature(emitted.html),
   };
 }
