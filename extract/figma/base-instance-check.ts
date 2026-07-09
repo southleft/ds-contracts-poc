@@ -396,4 +396,75 @@ if (failures.length > 0) {
   console.error(`\n✖ ${failures.length} base-instance invariant(s) failed`);
   process.exit(1);
 }
+
+// ---------------------------------------------------------------------------
+// Generator-level cycle refusal (hand-edited contracts)
+// ---------------------------------------------------------------------------
+// The proposer never emits a self-reference, but hand-authored/edited
+// contracts can still contain one. Live owner repro: after hand-deleting the
+// two icon props, the surviving {"component":{"id":"ds.button"}} inside
+// ds.button's own anatomy crashed the emitters with 'Maximum call stack size
+// exceeded'. validateContract must refuse the cycle BY NAME instead —
+// directly and transitively — on every emitter that routes through it.
+
+console.log('\nGenerator-level cycle refusal (hand-edited contracts)');
+
+const inventory = tokenInventoryFromJson([
+  read('tokens/primitives.tokens.json'),
+  read('tokens/semantic.tokens.json'),
+  read('tokens/modes/semantic.light.tokens.json'),
+  read('tokens/modes/semantic.dark.tokens.json'),
+  flat.mintedTokens?.tree ?? {},
+]);
+const refusal = (fn: () => void): string => {
+  try {
+    fn();
+    return '';
+  } catch (e) {
+    return String(e);
+  }
+};
+
+// Direct self-reference: the owner's hand-edit, verbatim shape.
+const selfRef = clone(flat.contract) as J;
+(selfRef.anatomy as J).root.parts = {
+  Button: { component: { id: 'ds.button', props: { label: 'Label' } } },
+};
+const selfRefContract: Contract = ContractSchema.parse(selfRef);
+const selfCtx = {
+  tokens: inventory,
+  icons: new Map<string, string>(),
+  contracts: new Map([[selfRefContract.id, selfRefContract]]),
+};
+const wanted = 'component ref creates a cycle (ds.button → ds.button) — a contract cannot compose itself';
+const reactMsg = refusal(() => emitReact(selfRefContract, selfCtx));
+check('emitReact REFUSES the direct self-ref by name (no stack overflow)', reactMsg.includes(wanted));
+const htmlMsg = refusal(() => emitHtml(selfRefContract, selfCtx));
+check('emitHtml REFUSES the direct self-ref by name (routes through validateContract)', htmlMsg.includes(wanted));
+
+// Transitive cycle: ds.alpha → ds.beta → ds.alpha, refused at the entry part
+// with the whole chain spelled out.
+const mkContract = (id: string, name: string, depId: string): Contract => {
+  const c = clone(flat.contract) as J;
+  c.id = id;
+  c.name = name;
+  (c.anatomy as J).root.parts = { dep: { component: { id: depId } } };
+  return ContractSchema.parse(c);
+};
+const alpha = mkContract('ds.alpha', 'Alpha', 'ds.beta');
+const beta = mkContract('ds.beta', 'Beta', 'ds.alpha');
+const cycleCtx = {
+  tokens: inventory,
+  icons: new Map<string, string>(),
+  contracts: new Map([
+    [alpha.id, alpha],
+    [beta.id, beta],
+  ]),
+};
+const transMsg = refusal(() => emitReact(alpha, cycleCtx));
+check(
+  'transitive cycle refused with the chain spelled out (ds.alpha → ds.beta → ds.alpha)',
+  transMsg.includes('creates a cycle (ds.alpha → ds.beta → ds.alpha) — a contract cannot compose itself'),
+);
+
 console.log('\n✔ all base-instance invariants hold (no self-ref, flattening, promotion, styles, generation, named fallbacks)');
