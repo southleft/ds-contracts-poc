@@ -974,6 +974,30 @@ label {
   background: color-mix(in srgb, var(--pg-danger) 14%, transparent);
 }
 
+/* When Prism paints the backdrop, the backdrop IS the text layer: the
+ * textarea's glyphs go transparent (caret and selection stay visible) and
+ * the backdrop-pre's color flips on. Metrics never change — same font,
+ * size, line-height, padding — so the caret sits exactly on the colored
+ * glyphs, and refusal-line backgrounds layer under them. */
+
+.editor__wrap--hl .editor__backdrop-pre {
+  color: var(--pg-fg);
+}
+
+.editor__wrap--hl .editor__textarea {
+  color: transparent;
+  caret-color: var(--pg-fg);
+}
+
+.editor__wrap--hl .editor__textarea::selection {
+  color: transparent;
+  background: color-mix(in srgb, var(--pg-accent) 30%, transparent);
+}
+
+.editor__textarea::placeholder {
+  color: var(--pg-faint);
+}
+
 .editor__textarea {
   position: relative;
   flex: 1;
