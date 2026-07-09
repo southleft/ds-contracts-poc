@@ -1188,6 +1188,26 @@ const cases: Case[] = [
       if (r.status === 0) throw new Error('A node:fs import inside the core passed the browser bundle check');
     },
   },
+  {
+    // Degraded Figma imports mint provisional tokens and keep their styles —
+    // and minted names never leave the imported. namespace.
+    id: 'design-rest-degraded-minting-binds-styles',
+    claim: 'C5-extraction',
+    run: () => {
+      const roundtrip = run(TSX, ['extract/figma/rest/roundtrip-rest.ts']);
+      if (roundtrip.status !== 0) throw new Error(`REST roundtrip failed:\n${roundtrip.out}`);
+      if (!/Badge \(degraded \+ minted\): 8\/8 checks/.test(roundtrip.out)) {
+        throw new Error('degraded+minted pass did not report 8/8 checks');
+      }
+      const receipt = readFileSync(path.join(SCRATCH, 'extract/figma/rest/ROUNDTRIP-REST.md'), 'utf8');
+      const refs = [...receipt.matchAll(/- `\{([a-z0-9.{}-]+)\}` = `/gi)].map((m) => m[1]);
+      if (refs.length === 0) throw new Error('receipt lists no minted refs');
+      const semantic = refs.filter((r) => !r.startsWith('imported.'));
+      if (semantic.length > 0) throw new Error(`minted refs outside imported.: ${semantic.join(', ')}`);
+      const mint = run(TSX, ['core/mint-check.ts']);
+      if (mint.status !== 0) throw new Error(`mint invariants failed:\n${mint.out}`);
+    },
+  },
 ];
 
 // ---------------------------------------------------------------------------

@@ -1,6 +1,6 @@
 {
-  "passed": 56,
-  "total": 56,
+  "passed": 57,
+  "total": 57,
   "results": [
     {
       "id": "refuse-unknown-token-reference",
@@ -280,6 +280,11 @@
     {
       "id": "core-browser-importable",
       "claim": "C1-determinism",
+      "pass": true
+    },
+    {
+      "id": "design-rest-degraded-minting-binds-styles",
+      "claim": "C5-extraction",
       "pass": true
     }
   ]

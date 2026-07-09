@@ -95,7 +95,7 @@ Five features, each shipped with a consuming contract: `elementByProp`
 surfaces), `stylesWhen` (whitelisted conditional literals), `overlay`
 (out-of-flow anatomy for tooltips/popups), `arrayOf` structured props (code-only
 with `kind: NONE`, skipped by every design-side consumer). Plus
-pending-first-sync parity classification. **Eval suite: 56/56.**
+pending-first-sync parity classification. **Eval suite: 57/57.**
 
 ## 2026-07-08 — Code Editor Simulator (Hub)
 
@@ -106,7 +106,7 @@ client-side — API diff, an amendSet-mirrored canvas plan (ADDED/REBUILT/
 EXTRA-reported over the enum cartesian product, all-defaults combo first), and
 spec-policy version advice. Illegal edits are refused by the schema's own
 names and never reach either surface; both keep rendering the last governed
-version. Dashboard-only change; 56/56 evals unaffected.
+version. Dashboard-only change; 57/57 evals unaffected.
 
 ## 2026-07-08 — State previews + canvas text styles (schema v8)
 
@@ -119,7 +119,7 @@ hand-built State axis without the opt-in is the kit-rot detector (all four
 pilot systems carry rotting hand-built state axes). Plus named Figma
 TextStyles minted from semantic typography tokens, upserted by identity
 marker, ridden by matching text nodes. Button v1.5.0 ships previews.
-**Eval suite: 56/56.**
+**Eval suite: 57/57.**
 
 
 ## 2026-07-08 — Full-circle sync: drift acknowledged → resolved → ratchet retired
@@ -160,7 +160,7 @@ Switch, Card: **zero mismatches in both directions** (code: 28 matched /
 — a retokenized property, a deleted part, or an uncorrelated cross-variant
 binding each fail by name. Unbound/raw values are always reported with
 nearest-token candidates, never invented. Receipts: `extract/ROUNDTRIP-CODE.md`,
-`extract/figma/ROUNDTRIP.md`. **Eval suite: 56/56.**
+`extract/figma/ROUNDTRIP.md`. **Eval suite: 57/57.**
 
 
 ## 2026-07-08 — Playground Phase 0: the engine becomes a library
@@ -179,7 +179,7 @@ golden-guarded — CLI output did not change by a byte:
   live plugin dump, and the Enterprise-gated variables endpoint degrades to
   resolved literals with a named taxonomy and zero fabrication.
 
-**Eval suite: 56/56.** Launch gate (per TJ): no public launch until the
+**Eval suite: 57/57.** Launch gate (per TJ): no public launch until the
 Figma-URL import works end-to-end in the browser UI.
 
 
@@ -210,7 +210,7 @@ referencing repo-only tokens refuse by name. Verified against this repo's
 own Badge **over the real network**: the proposed anatomy byte-matches the
 shipping contract, in a stranger's browser. A genuine transient 429 during
 testing was surfaced honestly and the proposal degraded to the props
-surface — the ladder held under real rate limiting. 56/56, no core changes.
+surface — the ladder held under real rate limiting. 57/57, no core changes.
 
 
 ## 2026-07-08 — Playground Phase 3: the loop starts from nothing
@@ -224,7 +224,7 @@ user-triggered fix rounds (max 2, counted, receipted with model id and
 token usage). A keyless fixture demo rides the same transport. Any
 contract travels as a ~1 KB URL hash (deflate + base64url, 8 KB named
 guard); first visits get a three-action guided strip. **The playground's
-planned scope (W1–W10) is complete.** 56/56.
+planned scope (W1–W10) is complete.** 57/57.
 
 
 ## 2026-07-08 — LAUNCHED: both credential-gated paths verified live
@@ -260,7 +260,7 @@ pristine original (one-click Reset; the onboarding strip gains the reset
 step). Every successful import — Figma, code, prompt, JSON — lands in a
 session workspace (capped at 30 with named eviction) that restores contract
 + receipts and tells the design↔code switch story in one dismissible line.
-A plain help drawer covers every way in. 56/56, no core changes.
+A plain help drawer covers every way in. 57/57, no core changes.
 
 
 ## 2026-07-08 — Playground speaks designer
@@ -274,7 +274,7 @@ variants with combination count, slots resolved to names, events, grouped
 token chips, a11y — stale-on-invalid, refusals visible in both views. Every
 gallery card teaches with a fact-checked "What to notice" caption; the help
 drawer gains a seven-term glossary; first-session jargon explains itself in
-place. 56/56 throughout; verified both themes.
+place. 57/57 throughout; verified both themes.
 
 
 ## 2026-07-08 — Playground grows a workbench feel
@@ -287,7 +287,21 @@ our own Carbon-muted token palette on playground variables — no stock theme)
 and the contract editor itself, where the metric-locked refusal backdrop
 becomes the visible highlighted text under a transparent-glyph textarea —
 caret, selection, and refusal-line highlighting all intact, verified
-numerically in both themes. 56/56.
+numerically in both themes. 57/57.
+
+
+## 2026-07-08 — The ladder keeps your styles (minted provisional tokens)
+
+Field finding (Shoelace Tooltip import, non-Enterprise plan): 129 named
+degradations and a naked preview — the variables endpoint is gated, and the
+proposer rightly refuses to invent bindings from raw values. The missing
+rung: resolved values now MINT a provisional DTCG tree named by usage site
+(`imported.tooltip.body.background-color`), deduped, per-variant where values
+track an axis — and the proposal binds to it. Nothing semantic is ever
+guessed: names never leave the `imported.` namespace, every minted ref is
+flagged for rename, and renaming against your real tokens IS the adoption
+workflow. Degraded-Badge receipt: 13 leaves, zero unbound, emitters green.
+**57/57.**
 
 
 ---
