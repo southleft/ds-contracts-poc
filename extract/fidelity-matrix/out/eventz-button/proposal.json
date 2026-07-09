@@ -20,20 +20,20 @@
     "prop `isDisabled`: true/false variant axis proposed as a boolean (extract/reconcile.ts bool⇄axis rule)",
     "MINTED {imported.button.root.background-color.primary.default} = #3d7a95 — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Button:root background-color (variant=primary, state=default)",
     "MINTED {imported.button.root.background-color.knockout.default} = #f7f8f7 — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Button:root background-color (variant=knockout, state=default)",
-    "MINTED {imported.button.root.background-color.secondary.default} = #000002 — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Button:root background-color (variant=secondary, state=default)",
-    "MINTED {imported.button.root.background-color.bare.default} = #000002 — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Button:root background-color (variant=bare, state=default)",
+    "MINTED {imported.button.root.background-color.secondary.default} = #0000020d — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Button:root background-color (variant=secondary, state=default)",
+    "MINTED {imported.button.root.background-color.bare.default} = #00000200 — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Button:root background-color (variant=bare, state=default)",
     "MINTED {imported.button.root.background-color.primary.hover} = #2d6079 — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Button:root background-color (variant=primary, state=hover)",
     "MINTED {imported.button.root.background-color.knockout.hover} = #c6c7c6 — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Button:root background-color (variant=knockout, state=hover)",
-    "MINTED {imported.button.root.background-color.secondary.hover} = #000002 — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Button:root background-color (variant=secondary, state=hover)",
-    "MINTED {imported.button.root.background-color.bare.hover} = #000002 — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Button:root background-color (variant=bare, state=hover)",
+    "MINTED {imported.button.root.background-color.secondary.hover} = #00000233 — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Button:root background-color (variant=secondary, state=hover)",
+    "MINTED {imported.button.root.background-color.bare.hover} = #00000233 — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Button:root background-color (variant=bare, state=hover)",
     "MINTED {imported.button.root.background-color.primary.active} = #2d6079 — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Button:root background-color (variant=primary, state=active)",
     "MINTED {imported.button.root.background-color.knockout.active} = #f7f8f7 — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Button:root background-color (variant=knockout, state=active)",
-    "MINTED {imported.button.root.background-color.secondary.active} = #000002 — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Button:root background-color (variant=secondary, state=active)",
-    "MINTED {imported.button.root.background-color.bare.active} = #000002 — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Button:root background-color (variant=bare, state=active)",
+    "MINTED {imported.button.root.background-color.secondary.active} = #0000020d — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Button:root background-color (variant=secondary, state=active)",
+    "MINTED {imported.button.root.background-color.bare.active} = #00000200 — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Button:root background-color (variant=bare, state=active)",
     "MINTED {imported.button.root.background-color.primary.focus} = #3d7a95 — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Button:root background-color (variant=primary, state=focus)",
     "MINTED {imported.button.root.background-color.knockout.focus} = #f7f8f7 — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Button:root background-color (variant=knockout, state=focus)",
-    "MINTED {imported.button.root.background-color.secondary.focus} = #000002 — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Button:root background-color (variant=secondary, state=focus)",
-    "MINTED {imported.button.root.background-color.bare.focus} = #000002 — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Button:root background-color (variant=bare, state=focus)",
+    "MINTED {imported.button.root.background-color.secondary.focus} = #0000020d — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Button:root background-color (variant=secondary, state=focus)",
+    "MINTED {imported.button.root.background-color.bare.focus} = #00000200 — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Button:root background-color (variant=bare, state=focus)",
     "MINTED {imported.button.root.gap} = 4px — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Button:root gap",
     "MINTED {imported.button.root.padding-inline} = 12px — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Button:root padding-inline",
     "MINTED {imported.button.root.padding-block} = 6px — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Button:root padding-block",
@@ -50,13 +50,13 @@
     "MINTED {imported.button.label.color.secondary} = #252729 — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Button:root/Label color (variant=secondary)",
     "MINTED {imported.button.label.color.bare} = #252729 — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Button:root/Label color (variant=bare)",
     "MINTED {imported.button.label.font-size} = 14px — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Button:root/Label font-size",
-    "UNBOUND Button:root stroke = #000002 — no token invented; nearest tokens by value: (none found)"
+    "UNBOUND Button:root stroke = #0000021a — no token invented; nearest tokens by value: (none found)"
   ],
   "unbound": [
     {
       "nodePath": "Button:root",
       "property": "stroke",
-      "value": "#000002",
+      "value": "#0000021a",
       "suggestions": []
     }
   ],
@@ -79,14 +79,14 @@
       },
       {
         "ref": "{imported.button.root.background-color.secondary.default}",
-        "value": "#000002",
+        "value": "#0000020d",
         "usageSites": [
           "Button:root background-color (variant=secondary, state=default)"
         ]
       },
       {
         "ref": "{imported.button.root.background-color.bare.default}",
-        "value": "#000002",
+        "value": "#00000200",
         "usageSites": [
           "Button:root background-color (variant=bare, state=default)"
         ]
@@ -107,14 +107,14 @@
       },
       {
         "ref": "{imported.button.root.background-color.secondary.hover}",
-        "value": "#000002",
+        "value": "#00000233",
         "usageSites": [
           "Button:root background-color (variant=secondary, state=hover)"
         ]
       },
       {
         "ref": "{imported.button.root.background-color.bare.hover}",
-        "value": "#000002",
+        "value": "#00000233",
         "usageSites": [
           "Button:root background-color (variant=bare, state=hover)"
         ]
@@ -135,14 +135,14 @@
       },
       {
         "ref": "{imported.button.root.background-color.secondary.active}",
-        "value": "#000002",
+        "value": "#0000020d",
         "usageSites": [
           "Button:root background-color (variant=secondary, state=active)"
         ]
       },
       {
         "ref": "{imported.button.root.background-color.bare.active}",
-        "value": "#000002",
+        "value": "#00000200",
         "usageSites": [
           "Button:root background-color (variant=bare, state=active)"
         ]
@@ -163,14 +163,14 @@
       },
       {
         "ref": "{imported.button.root.background-color.secondary.focus}",
-        "value": "#000002",
+        "value": "#0000020d",
         "usageSites": [
           "Button:root background-color (variant=secondary, state=focus)"
         ]
       },
       {
         "ref": "{imported.button.root.background-color.bare.focus}",
-        "value": "#000002",
+        "value": "#00000200",
         "usageSites": [
           "Button:root background-color (variant=bare, state=focus)"
         ]

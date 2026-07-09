@@ -30,6 +30,11 @@ export interface DumpLayout {
 export interface DumpPaint {
   var?: string;
   hex?: string;
+  /** Effective paint opacity 0–1 (color alpha × paint opacity), dump v1.1,
+   *  additive — OMITTED when 1. Field case: Eventz secondary/bare fills are
+   *  black at 5% opacity; dump v1 dropped it and every consumer rendered
+   *  opaque black. Absence in older dumps means opaque, a declared limit. */
+  alpha?: number;
 }
 
 export interface DumpText {
@@ -62,6 +67,11 @@ export interface DumpNode {
    *  `layout.grow` (in a row parent) and `align: stretch` (on children of a
    *  column parent); propose.ts disambiguates by parent direction. */
   fillWidth?: boolean;
+  /** visible === false on the node (dump v1.1, additive). Positive evidence
+   *  only: a visibility-bound part hidden in the default variant recovers a
+   *  boolean-prop default of false. Absence means visible (REST mapper) or
+   *  not captured (dump v1 fixtures) — never inverted into `true`. */
+  hidden?: boolean;
   text?: DumpText;
   /** componentPropertyReferences, property-id suffixes stripped:
    *  characters → TEXT property, mainComponent → INSTANCE_SWAP property,

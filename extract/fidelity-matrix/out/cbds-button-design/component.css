@@ -1,0 +1,93 @@
+/* Icon — from ds.icon v0.1.0 (core/emit-html.ts) */
+
+.icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+}
+
+/* ButtonBrandPrimary — from ds.button-brand-primary v0.1.0 (core/emit-html.ts) */
+
+.button-brand-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  gap: var(--imported-shared-size-8);
+  padding-block: var(--imported-shared-size-8);
+  border-radius: var(--imported-shared-size-8);
+}
+
+.button-brand-primary--state-default {
+  background-color: var(--imported-button-brand-primary-root-background-color-default);
+}
+
+.button-brand-primary--state-hover {
+  background-color: var(--imported-button-brand-primary-root-background-color-hover);
+}
+
+.button-brand-primary--state-focus {
+  background-color: var(--imported-button-brand-primary-root-background-color-focus);
+}
+
+.button-brand-primary--state-pressed {
+  background-color: var(--imported-button-brand-primary-root-background-color-pressed);
+}
+
+.button-brand-primary--state-disabled {
+  background-color: var(--imported-button-brand-primary-root-background-color-disabled);
+}
+
+.button-brand-primary--size-large {
+  padding-inline: var(--imported-button-brand-primary-root-padding-inline-large);
+}
+
+.button-brand-primary--size-medium {
+  padding-inline: var(--imported-button-brand-primary-root-padding-inline-medium);
+}
+
+.button-brand-primary--size-small {
+  padding-inline: var(--imported-button-brand-primary-root-padding-inline-small);
+}
+
+.button-brand-primary__Button {
+  font-size: var(--font-title-size);
+  font-weight: var(--font-title-weight);
+}
+
+.button-brand-primary--state-default .button-brand-primary__Button {
+  color: var(--imported-button-brand-primary-button-color-default);
+}
+
+.button-brand-primary--state-hover .button-brand-primary__Button {
+  color: var(--imported-button-brand-primary-button-color-hover);
+}
+
+.button-brand-primary--state-focus .button-brand-primary__Button {
+  color: var(--imported-button-brand-primary-button-color-focus);
+}
+
+.button-brand-primary--state-pressed .button-brand-primary__Button {
+  color: var(--imported-button-brand-primary-button-color-pressed);
+}
+
+.button-brand-primary--state-disabled .button-brand-primary__Button {
+  color: var(--imported-button-brand-primary-button-color-disabled);
+}
+
+.button-brand-primary__Tooltip {
+  color: var(--imported-button-brand-primary-tooltip-color);
+  font-size: var(--imported-button-brand-primary-tooltip-font-size);
+}
+
+.button-brand-primary__focusRing {
+  border-color: var(--imported-button-brand-primary-focus-ring-border-color);
+  border-radius: var(--imported-button-brand-primary-focus-ring-border-radius);
+  border-width: var(--imported-button-brand-primary-focus-ring-border-width);
+  border-style: solid;
+}
+
+/* showcase chrome */
+.showcase { display: flex; flex-direction: column; gap: 24px; align-items: flex-start; font-family: sans-serif; }
+.showcase__label { margin: 0 0 8px; font: 12px/1 monospace; opacity: 0.6; }

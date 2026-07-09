@@ -1,7 +1,7 @@
 {
   "$schema": "./contract.schema.json",
   "id": "ds.button-brand-primary",
-  "name": "Button-Brand Primary",
+  "name": "ButtonBrandPrimary",
   "version": "0.1.0",
   "status": "draft",
   "description": "PROPOSED contract extracted from the design canvas (extract/figma dump v1) — API, anatomy, and token bindings inverted from the drawn structure. Semantics, a11y, events, and slot accepts are not canvas-recoverable; review before adoption.",
@@ -64,7 +64,7 @@
       }
     },
     {
-      "name": "✏️text",
+      "name": "text",
       "type": "text",
       "default": "Button",
       "bindings": {
@@ -73,7 +73,35 @@
           "property": "✏️text"
         },
         "code": {
-          "prop": "✏️text"
+          "prop": "text"
+        }
+      }
+    },
+    {
+      "name": "iconLeft",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "↪️icon-left"
+        },
+        "code": {
+          "prop": "iconLeft"
+        }
+      }
+    },
+    {
+      "name": "iconRight",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "↪️icon-right"
+        },
+        "code": {
+          "prop": "iconRight"
         }
       }
     }
@@ -95,6 +123,9 @@
             "props": {
               "size": "large"
             }
+          },
+          "visibleWhen": {
+            "prop": "iconLeft"
           }
         },
         "Button": {
@@ -104,7 +135,7 @@
             "color": "{imported.button-brand-primary.button.color.{state}}"
           },
           "content": {
-            "prop": "✏️text"
+            "prop": "text"
           }
         },
         "icon2": {
@@ -113,6 +144,9 @@
             "props": {
               "size": "large"
             }
+          },
+          "visibleWhen": {
+            "prop": "iconRight"
           }
         },
         "Tooltip": {
@@ -147,8 +181,8 @@
       "nodeId": "258:1838"
     },
     "code": {
-      "importPath": "src/components/Button-Brand Primary",
-      "export": "Button-Brand Primary"
+      "importPath": "src/components/ButtonBrandPrimary",
+      "export": "ButtonBrandPrimary"
     }
   }
 }

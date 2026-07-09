@@ -1,4 +1,253 @@
 {
-  "htmlOk": false,
-  "error": "Cannot read properties of undefined (reading 'name')"
+  "htmlOk": true,
+  "script": {
+    "bytes": 50826,
+    "mintedPreamble": true,
+    "syntaxOk": true
+  },
+  "compiled": {
+    "setName": "ButtonBrandPrimary",
+    "variants": [
+      {
+        "name": "size=large, state=default",
+        "rootFill": "imported/button-brand-primary/root/background-color/default",
+        "rootStroke": null,
+        "bindings": {
+          "itemSpacing": "imported/shared/size-8",
+          "paddingLeft": "imported/button-brand-primary/root/padding-inline/large",
+          "paddingRight": "imported/button-brand-primary/root/padding-inline/large",
+          "paddingTop": "imported/shared/size-8",
+          "paddingBottom": "imported/shared/size-8",
+          "topLeftRadius": "imported/shared/size-8",
+          "topRightRadius": "imported/shared/size-8",
+          "bottomLeftRadius": "imported/shared/size-8",
+          "bottomRightRadius": "imported/shared/size-8"
+        }
+      },
+      {
+        "name": "size=large, state=hover",
+        "rootFill": "imported/button-brand-primary/root/background-color/hover",
+        "rootStroke": null,
+        "bindings": {
+          "itemSpacing": "imported/shared/size-8",
+          "paddingLeft": "imported/button-brand-primary/root/padding-inline/large",
+          "paddingRight": "imported/button-brand-primary/root/padding-inline/large",
+          "paddingTop": "imported/shared/size-8",
+          "paddingBottom": "imported/shared/size-8",
+          "topLeftRadius": "imported/shared/size-8",
+          "topRightRadius": "imported/shared/size-8",
+          "bottomLeftRadius": "imported/shared/size-8",
+          "bottomRightRadius": "imported/shared/size-8"
+        }
+      },
+      {
+        "name": "size=large, state=focus",
+        "rootFill": "imported/button-brand-primary/root/background-color/focus",
+        "rootStroke": null,
+        "bindings": {
+          "itemSpacing": "imported/shared/size-8",
+          "paddingLeft": "imported/button-brand-primary/root/padding-inline/large",
+          "paddingRight": "imported/button-brand-primary/root/padding-inline/large",
+          "paddingTop": "imported/shared/size-8",
+          "paddingBottom": "imported/shared/size-8",
+          "topLeftRadius": "imported/shared/size-8",
+          "topRightRadius": "imported/shared/size-8",
+          "bottomLeftRadius": "imported/shared/size-8",
+          "bottomRightRadius": "imported/shared/size-8"
+        }
+      },
+      {
+        "name": "size=large, state=pressed",
+        "rootFill": "imported/button-brand-primary/root/background-color/pressed",
+        "rootStroke": null,
+        "bindings": {
+          "itemSpacing": "imported/shared/size-8",
+          "paddingLeft": "imported/button-brand-primary/root/padding-inline/large",
+          "paddingRight": "imported/button-brand-primary/root/padding-inline/large",
+          "paddingTop": "imported/shared/size-8",
+          "paddingBottom": "imported/shared/size-8",
+          "topLeftRadius": "imported/shared/size-8",
+          "topRightRadius": "imported/shared/size-8",
+          "bottomLeftRadius": "imported/shared/size-8",
+          "bottomRightRadius": "imported/shared/size-8"
+        }
+      },
+      {
+        "name": "size=large, state=disabled",
+        "rootFill": "imported/button-brand-primary/root/background-color/disabled",
+        "rootStroke": null,
+        "bindings": {
+          "itemSpacing": "imported/shared/size-8",
+          "paddingLeft": "imported/button-brand-primary/root/padding-inline/large",
+          "paddingRight": "imported/button-brand-primary/root/padding-inline/large",
+          "paddingTop": "imported/shared/size-8",
+          "paddingBottom": "imported/shared/size-8",
+          "topLeftRadius": "imported/shared/size-8",
+          "topRightRadius": "imported/shared/size-8",
+          "bottomLeftRadius": "imported/shared/size-8",
+          "bottomRightRadius": "imported/shared/size-8"
+        }
+      },
+      {
+        "name": "size=medium, state=default",
+        "rootFill": "imported/button-brand-primary/root/background-color/default",
+        "rootStroke": null,
+        "bindings": {
+          "itemSpacing": "imported/shared/size-8",
+          "paddingLeft": "imported/button-brand-primary/root/padding-inline/medium",
+          "paddingRight": "imported/button-brand-primary/root/padding-inline/medium",
+          "paddingTop": "imported/shared/size-8",
+          "paddingBottom": "imported/shared/size-8",
+          "topLeftRadius": "imported/shared/size-8",
+          "topRightRadius": "imported/shared/size-8",
+          "bottomLeftRadius": "imported/shared/size-8",
+          "bottomRightRadius": "imported/shared/size-8"
+        }
+      },
+      {
+        "name": "size=medium, state=hover",
+        "rootFill": "imported/button-brand-primary/root/background-color/hover",
+        "rootStroke": null,
+        "bindings": {
+          "itemSpacing": "imported/shared/size-8",
+          "paddingLeft": "imported/button-brand-primary/root/padding-inline/medium",
+          "paddingRight": "imported/button-brand-primary/root/padding-inline/medium",
+          "paddingTop": "imported/shared/size-8",
+          "paddingBottom": "imported/shared/size-8",
+          "topLeftRadius": "imported/shared/size-8",
+          "topRightRadius": "imported/shared/size-8",
+          "bottomLeftRadius": "imported/shared/size-8",
+          "bottomRightRadius": "imported/shared/size-8"
+        }
+      },
+      {
+        "name": "size=medium, state=focus",
+        "rootFill": "imported/button-brand-primary/root/background-color/focus",
+        "rootStroke": null,
+        "bindings": {
+          "itemSpacing": "imported/shared/size-8",
+          "paddingLeft": "imported/button-brand-primary/root/padding-inline/medium",
+          "paddingRight": "imported/button-brand-primary/root/padding-inline/medium",
+          "paddingTop": "imported/shared/size-8",
+          "paddingBottom": "imported/shared/size-8",
+          "topLeftRadius": "imported/shared/size-8",
+          "topRightRadius": "imported/shared/size-8",
+          "bottomLeftRadius": "imported/shared/size-8",
+          "bottomRightRadius": "imported/shared/size-8"
+        }
+      },
+      {
+        "name": "size=medium, state=pressed",
+        "rootFill": "imported/button-brand-primary/root/background-color/pressed",
+        "rootStroke": null,
+        "bindings": {
+          "itemSpacing": "imported/shared/size-8",
+          "paddingLeft": "imported/button-brand-primary/root/padding-inline/medium",
+          "paddingRight": "imported/button-brand-primary/root/padding-inline/medium",
+          "paddingTop": "imported/shared/size-8",
+          "paddingBottom": "imported/shared/size-8",
+          "topLeftRadius": "imported/shared/size-8",
+          "topRightRadius": "imported/shared/size-8",
+          "bottomLeftRadius": "imported/shared/size-8",
+          "bottomRightRadius": "imported/shared/size-8"
+        }
+      },
+      {
+        "name": "size=medium, state=disabled",
+        "rootFill": "imported/button-brand-primary/root/background-color/disabled",
+        "rootStroke": null,
+        "bindings": {
+          "itemSpacing": "imported/shared/size-8",
+          "paddingLeft": "imported/button-brand-primary/root/padding-inline/medium",
+          "paddingRight": "imported/button-brand-primary/root/padding-inline/medium",
+          "paddingTop": "imported/shared/size-8",
+          "paddingBottom": "imported/shared/size-8",
+          "topLeftRadius": "imported/shared/size-8",
+          "topRightRadius": "imported/shared/size-8",
+          "bottomLeftRadius": "imported/shared/size-8",
+          "bottomRightRadius": "imported/shared/size-8"
+        }
+      },
+      {
+        "name": "size=small, state=default",
+        "rootFill": "imported/button-brand-primary/root/background-color/default",
+        "rootStroke": null,
+        "bindings": {
+          "itemSpacing": "imported/shared/size-8",
+          "paddingLeft": "imported/button-brand-primary/root/padding-inline/small",
+          "paddingRight": "imported/button-brand-primary/root/padding-inline/small",
+          "paddingTop": "imported/shared/size-8",
+          "paddingBottom": "imported/shared/size-8",
+          "topLeftRadius": "imported/shared/size-8",
+          "topRightRadius": "imported/shared/size-8",
+          "bottomLeftRadius": "imported/shared/size-8",
+          "bottomRightRadius": "imported/shared/size-8"
+        }
+      },
+      {
+        "name": "size=small, state=hover",
+        "rootFill": "imported/button-brand-primary/root/background-color/hover",
+        "rootStroke": null,
+        "bindings": {
+          "itemSpacing": "imported/shared/size-8",
+          "paddingLeft": "imported/button-brand-primary/root/padding-inline/small",
+          "paddingRight": "imported/button-brand-primary/root/padding-inline/small",
+          "paddingTop": "imported/shared/size-8",
+          "paddingBottom": "imported/shared/size-8",
+          "topLeftRadius": "imported/shared/size-8",
+          "topRightRadius": "imported/shared/size-8",
+          "bottomLeftRadius": "imported/shared/size-8",
+          "bottomRightRadius": "imported/shared/size-8"
+        }
+      },
+      {
+        "name": "size=small, state=focus",
+        "rootFill": "imported/button-brand-primary/root/background-color/focus",
+        "rootStroke": null,
+        "bindings": {
+          "itemSpacing": "imported/shared/size-8",
+          "paddingLeft": "imported/button-brand-primary/root/padding-inline/small",
+          "paddingRight": "imported/button-brand-primary/root/padding-inline/small",
+          "paddingTop": "imported/shared/size-8",
+          "paddingBottom": "imported/shared/size-8",
+          "topLeftRadius": "imported/shared/size-8",
+          "topRightRadius": "imported/shared/size-8",
+          "bottomLeftRadius": "imported/shared/size-8",
+          "bottomRightRadius": "imported/shared/size-8"
+        }
+      },
+      {
+        "name": "size=small, state=pressed",
+        "rootFill": "imported/button-brand-primary/root/background-color/pressed",
+        "rootStroke": null,
+        "bindings": {
+          "itemSpacing": "imported/shared/size-8",
+          "paddingLeft": "imported/button-brand-primary/root/padding-inline/small",
+          "paddingRight": "imported/button-brand-primary/root/padding-inline/small",
+          "paddingTop": "imported/shared/size-8",
+          "paddingBottom": "imported/shared/size-8",
+          "topLeftRadius": "imported/shared/size-8",
+          "topRightRadius": "imported/shared/size-8",
+          "bottomLeftRadius": "imported/shared/size-8",
+          "bottomRightRadius": "imported/shared/size-8"
+        }
+      },
+      {
+        "name": "size=small, state=disabled",
+        "rootFill": "imported/button-brand-primary/root/background-color/disabled",
+        "rootStroke": null,
+        "bindings": {
+          "itemSpacing": "imported/shared/size-8",
+          "paddingLeft": "imported/button-brand-primary/root/padding-inline/small",
+          "paddingRight": "imported/button-brand-primary/root/padding-inline/small",
+          "paddingTop": "imported/shared/size-8",
+          "paddingBottom": "imported/shared/size-8",
+          "topLeftRadius": "imported/shared/size-8",
+          "topRightRadius": "imported/shared/size-8",
+          "bottomLeftRadius": "imported/shared/size-8",
+          "bottomRightRadius": "imported/shared/size-8"
+        }
+      }
+    ]
+  }
 }

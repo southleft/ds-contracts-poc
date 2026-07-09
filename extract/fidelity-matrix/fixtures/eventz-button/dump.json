@@ -32,7 +32,8 @@
           "hex": "3d7a95"
         },
         "stroke": {
-          "hex": "000002"
+          "hex": "000002",
+          "alpha": 0.1
         },
         "strokeWeight": 1,
         "children": [
@@ -152,7 +153,8 @@
           "hex": "3d7a95"
         },
         "stroke": {
-          "hex": "000002"
+          "hex": "000002",
+          "alpha": 0.1
         },
         "strokeWeight": 1,
         "children": [
@@ -269,10 +271,12 @@
         },
         "cornerRadius": 8,
         "fill": {
-          "hex": "000002"
+          "hex": "000002",
+          "alpha": 0.05
         },
         "stroke": {
-          "hex": "000002"
+          "hex": "000002",
+          "alpha": 0.1
         },
         "strokeWeight": 1,
         "children": [
@@ -331,7 +335,8 @@
         },
         "cornerRadius": 8,
         "fill": {
-          "hex": "000002"
+          "hex": "000002",
+          "alpha": 0
         },
         "children": [
           {
@@ -389,7 +394,8 @@
         },
         "cornerRadius": 8,
         "fill": {
-          "hex": "000002"
+          "hex": "000002",
+          "alpha": 0
         },
         "children": [
           {
@@ -447,10 +453,12 @@
         },
         "cornerRadius": 8,
         "fill": {
-          "hex": "000002"
+          "hex": "000002",
+          "alpha": 0.05
         },
         "stroke": {
-          "hex": "000002"
+          "hex": "000002",
+          "alpha": 0.1
         },
         "strokeWeight": 1,
         "children": [
@@ -512,7 +520,8 @@
           "hex": "2d6079"
         },
         "stroke": {
-          "hex": "000002"
+          "hex": "000002",
+          "alpha": 0.1
         },
         "strokeWeight": 1,
         "children": [
@@ -629,10 +638,12 @@
         },
         "cornerRadius": 8,
         "fill": {
-          "hex": "000002"
+          "hex": "000002",
+          "alpha": 0.2
         },
         "stroke": {
-          "hex": "000002"
+          "hex": "000002",
+          "alpha": 0.1
         },
         "strokeWeight": 1,
         "children": [
@@ -691,7 +702,8 @@
         },
         "cornerRadius": 8,
         "fill": {
-          "hex": "000002"
+          "hex": "000002",
+          "alpha": 0.2
         },
         "children": [
           {
@@ -752,7 +764,8 @@
           "hex": "2d6079"
         },
         "stroke": {
-          "hex": "000002"
+          "hex": "000002",
+          "alpha": 0.1
         },
         "strokeWeight": 1,
         "children": [
@@ -869,10 +882,12 @@
         },
         "cornerRadius": 8,
         "fill": {
-          "hex": "000002"
+          "hex": "000002",
+          "alpha": 0.05
         },
         "stroke": {
-          "hex": "000002"
+          "hex": "000002",
+          "alpha": 0.1
         },
         "strokeWeight": 1,
         "children": [
@@ -931,7 +946,8 @@
         },
         "cornerRadius": 8,
         "fill": {
-          "hex": "000002"
+          "hex": "000002",
+          "alpha": 0
         },
         "children": [
           {
@@ -992,7 +1008,8 @@
           "hex": "3d7a95"
         },
         "stroke": {
-          "hex": "000002"
+          "hex": "000002",
+          "alpha": 0.1
         },
         "strokeWeight": 1,
         "children": [
@@ -1127,10 +1144,12 @@
         },
         "cornerRadius": 8,
         "fill": {
-          "hex": "000002"
+          "hex": "000002",
+          "alpha": 0.05
         },
         "stroke": {
-          "hex": "000002"
+          "hex": "000002",
+          "alpha": 0.1
         },
         "strokeWeight": 1,
         "children": [
@@ -1198,7 +1217,8 @@
         },
         "cornerRadius": 8,
         "fill": {
-          "hex": "000002"
+          "hex": "000002",
+          "alpha": 0
         },
         "children": [
           {
@@ -1268,7 +1288,8 @@
           "hex": "3d7a95"
         },
         "stroke": {
-          "hex": "000002"
+          "hex": "000002",
+          "alpha": 0.1
         },
         "strokeWeight": 1,
         "children": [
@@ -1294,7 +1315,8 @@
               "hex": "3d7a95"
             },
             "stroke": {
-              "hex": "000002"
+              "hex": "000002",
+              "alpha": 0.1
             },
             "strokeWeight": 1,
             "instanceOf": "Button",
@@ -1400,10 +1422,12 @@
           "counterSizing": "AUTO"
         },
         "fill": {
-          "hex": "000002"
+          "hex": "000002",
+          "alpha": 0.05
         },
         "stroke": {
-          "hex": "000002"
+          "hex": "000002",
+          "alpha": 0.1
         },
         "strokeWeight": 1,
         "children": [
@@ -1426,10 +1450,12 @@
             },
             "cornerRadius": 8,
             "fill": {
-              "hex": "000002"
+              "hex": "000002",
+              "alpha": 0.05
             },
             "stroke": {
-              "hex": "000002"
+              "hex": "000002",
+              "alpha": 0.1
             },
             "strokeWeight": 1,
             "instanceOf": "Button",
@@ -1472,7 +1498,8 @@
         },
         "cornerRadius": 8,
         "fill": {
-          "hex": "000002"
+          "hex": "000002",
+          "alpha": 0
         },
         "children": [
           {
@@ -1494,7 +1521,8 @@
             },
             "cornerRadius": 8,
             "fill": {
-              "hex": "000002"
+              "hex": "000002",
+              "alpha": 0
             },
             "instanceOf": "Button",
             "componentProperties": {

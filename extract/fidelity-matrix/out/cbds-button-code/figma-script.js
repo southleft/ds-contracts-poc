@@ -823,13 +823,17 @@ for (const page of figma.root.children) {
 // ---------------------------------------------------------------------------
 const MINTED_VARIABLES = [{"name":"imported/button/root/gap","type":"FLOAT","value":0.5},{"name":"imported/button/root/padding-block","type":"FLOAT","value":0.5},{"name":"imported/button/root/padding-inline/small","type":"FLOAT","value":0.75},{"name":"imported/button/root/padding-inline/medium","type":"FLOAT","value":1},{"name":"imported/button/root/padding-inline/large","type":"FLOAT","value":1},{"name":"imported/button/root/border-radius","type":"FLOAT","value":8},{"name":"imported/button/root/background-color/surface","type":"COLOR","value":"#f5f7fa"},{"name":"imported/button/root/background-color/danger","type":"COLOR","value":"#b51833"},{"name":"imported/button/root/background-color/ghost","type":"COLOR","value":"transparent"},{"name":"imported/button/root/background-color/primary","type":"COLOR","value":"#0e61ba"},{"name":"imported/button/root/color/surface","type":"COLOR","value":"#050a0f"},{"name":"imported/button/root/color/danger","type":"COLOR","value":"#fcfeff"},{"name":"imported/button/root/color/ghost","type":"COLOR","value":"#050a0f"},{"name":"imported/button/root/color/primary","type":"COLOR","value":"#fcfeff"},{"name":"imported/button/root/font-size/small","type":"FLOAT","value":14},{"name":"imported/button/root/font-size/medium","type":"FLOAT","value":16},{"name":"imported/button/root/font-size/large","type":"FLOAT","value":16},{"name":"imported/button/root/font-weight","type":"FLOAT","value":600},{"name":"imported/button/root/line-height/small","type":"FLOAT","value":16},{"name":"imported/button/root/line-height/medium","type":"FLOAT","value":20},{"name":"imported/button/root/line-height/large","type":"FLOAT","value":20},{"name":"imported/button/root/min-height/small","type":"FLOAT","value":32},{"name":"imported/button/root/min-height/medium","type":"FLOAT","value":40},{"name":"imported/button/root/min-height/large","type":"FLOAT","value":48},{"name":"imported/button/root/hover/background-color/surface","type":"COLOR","value":"#dfe3eb"},{"name":"imported/button/root/hover/background-color/danger","type":"COLOR","value":"#7e0419"},{"name":"imported/button/root/hover/background-color/ghost","type":"COLOR","value":"#f5f7fa"},{"name":"imported/button/root/hover/background-color/primary","type":"COLOR","value":"#003e81"},{"name":"imported/button/root/disabled/background-color/ghost","type":"COLOR","value":"transparent"},{"name":"imported/button/root/disabled/background-color/primary","type":"COLOR","value":"#dfe3eb"},{"name":"imported/button/root/disabled/background-color/surface","type":"COLOR","value":"#dfe3eb"},{"name":"imported/button/root/disabled/background-color/danger","type":"COLOR","value":"#dfe3eb"},{"name":"imported/button/root/disabled/color","type":"COLOR","value":"#738094"}];
 {
+  // Minted colors may be 8-digit hex (paint opacity captured by dump v1.1) —
+  // Figma COLOR variables accept RGBA, so the alpha channel survives.
   const hexToRgb = (hex) => {
     const h = hex.replace('#', '');
-    return {
+    const c = {
       r: parseInt(h.slice(0, 2), 16) / 255,
       g: parseInt(h.slice(2, 4), 16) / 255,
       b: parseInt(h.slice(4, 6), 16) / 255,
     };
+    if (h.length === 8) c.a = parseInt(h.slice(6, 8), 16) / 255;
+    return c;
   };
   const cols = await figma.variables.getLocalVariableCollectionsAsync();
   let col = cols.find((c) => c.name === 'Imported (provisional)');

@@ -755,13 +755,17 @@ for (const page of figma.root.children) {
 // ---------------------------------------------------------------------------
 const MINTED_VARIABLES = [{"name":"imported/tooltip/body/border-radius","type":"FLOAT","value":3},{"name":"imported/tooltip/body-content/background-color","type":"COLOR","value":"#27272a"},{"name":"imported/tooltip/body-content/padding-inline","type":"FLOAT","value":8},{"name":"imported/tooltip/body-content/padding-block","type":"FLOAT","value":8},{"name":"imported/tooltip/body-content/border-radius","type":"FLOAT","value":4},{"name":"imported/tooltip/body-content-tooltip-text/color","type":"COLOR","value":"#ffffff"},{"name":"imported/tooltip/body-content-tooltip-text/font-size","type":"FLOAT","value":14},{"name":"imported/tooltip/arrow-wrapper-arrow/background-color","type":"COLOR","value":"#27272a"}];
 {
+  // Minted colors may be 8-digit hex (paint opacity captured by dump v1.1) —
+  // Figma COLOR variables accept RGBA, so the alpha channel survives.
   const hexToRgb = (hex) => {
     const h = hex.replace('#', '');
-    return {
+    const c = {
       r: parseInt(h.slice(0, 2), 16) / 255,
       g: parseInt(h.slice(2, 4), 16) / 255,
       b: parseInt(h.slice(4, 6), 16) / 255,
     };
+    if (h.length === 8) c.a = parseInt(h.slice(6, 8), 16) / 255;
+    return c;
   };
   const cols = await figma.variables.getLocalVariableCollectionsAsync();
   let col = cols.find((c) => c.name === 'Imported (provisional)');

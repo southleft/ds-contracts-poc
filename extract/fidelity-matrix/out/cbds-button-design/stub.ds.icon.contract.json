@@ -1,0 +1,50 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "ds.icon",
+  "name": "Icon",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "STUB contract auto-proposed for the nested \"Icon\" instances of Button-Brand Primary — the child set was not imported. Props are the observed applied values ONLY; anatomy and styling are NOT captured (dump v1 stops at instance boundaries). Import the child set to replace this stub.",
+  "semantics": {
+    "element": "span"
+  },
+  "props": [
+    {
+      "name": "size",
+      "type": {
+        "enum": [
+          "large",
+          "small"
+        ]
+      },
+      "default": "large",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "size",
+          "values": {
+            "large": "large",
+            "small": "small"
+          }
+        },
+        "code": {
+          "prop": "size"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {}
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": "WofZT8xaxXuc2Q6Je9S4XE",
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "src/components/Icon",
+      "export": "Icon"
+    }
+  }
+}

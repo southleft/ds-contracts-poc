@@ -49,6 +49,10 @@ interface Proposed {
   notes: string[];
   unbound: unknown[];
   minted: MintedShape | undefined;
+  /** Auto-proposed child contract stubs (nested instances whose child
+   *  contract is not in scope) — registered alongside the proposal so the
+   *  emitters resolve the refs (core/propose-figma.ts childStubs). */
+  childStubs: Contract[];
 }
 
 function proposeFigmaSubject(id: string): Proposed {
@@ -67,6 +71,7 @@ function proposeFigmaSubject(id: string): Proposed {
     notes: result.notes,
     unbound: result.unbound,
     minted: result.mintedTokens,
+    childStubs: (result.childStubs ?? []).map((s) => ContractSchema.parse(s)),
   };
 }
 
@@ -90,6 +95,7 @@ function proposeCodeSubject(id: string): Proposed {
     notes: first.proposal.notes,
     unbound: [],
     minted: first.proposal.mintedTokens,
+    childStubs: [],
   };
 }
 
@@ -135,6 +141,17 @@ function run(id: string, kind: 'figma' | 'code'): void {
   const composed = composeMinted(data, minted);
   const contracts = new Map(data.contracts);
   contracts.set(contract.id, contract);
+  // Auto-proposed child stubs ride the proposal into scope (and their own
+  // emitted React artifacts land at out/<Name>.tsx — where the parent's
+  // `import { <Name> } from '../<Name>'` resolves, so root tsc stays green).
+  for (const stub of proposed.childStubs) {
+    contracts.set(stub.id, stub);
+    save(`stub.${stub.id}.contract.json`, JSON.stringify(stub, null, 2) + '\n');
+    const emitted = emitReact(stub, { tokens: composed.inventory, icons: data.icons, contracts: new Map([[stub.id, stub]]) });
+    writeFileSync(path.join(MATRIX, 'out', `${stub.name}.tsx`), emitted.tsx);
+    writeFileSync(path.join(MATRIX, 'out', `${stub.name}.module.css`), emitted.css);
+    console.log(`  child stub: ${stub.id} (${stub.props.length} observed prop(s)) → out/${stub.name}.tsx`);
+  }
 
   // ---- html surface --------------------------------------------------------
   let htmlOk = false;

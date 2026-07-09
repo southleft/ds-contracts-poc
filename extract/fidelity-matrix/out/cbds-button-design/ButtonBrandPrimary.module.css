@@ -1,0 +1,83 @@
+/* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/button-brand-primary.contract.json (ds.button-brand-primary v0.1.0)
+ * Regenerate with: npm run generate
+ */
+
+.root {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  gap: var(--imported-shared-size-8);
+  padding-block: var(--imported-shared-size-8);
+  border-radius: var(--imported-shared-size-8);
+}
+
+.state-default {
+  background-color: var(--imported-button-brand-primary-root-background-color-default);
+}
+
+.state-hover {
+  background-color: var(--imported-button-brand-primary-root-background-color-hover);
+}
+
+.state-focus {
+  background-color: var(--imported-button-brand-primary-root-background-color-focus);
+}
+
+.state-pressed {
+  background-color: var(--imported-button-brand-primary-root-background-color-pressed);
+}
+
+.state-disabled {
+  background-color: var(--imported-button-brand-primary-root-background-color-disabled);
+}
+
+.size-large {
+  padding-inline: var(--imported-button-brand-primary-root-padding-inline-large);
+}
+
+.size-medium {
+  padding-inline: var(--imported-button-brand-primary-root-padding-inline-medium);
+}
+
+.size-small {
+  padding-inline: var(--imported-button-brand-primary-root-padding-inline-small);
+}
+
+.Button {
+  font-size: var(--font-title-size);
+  font-weight: var(--font-title-weight);
+}
+
+.state-default .Button {
+  color: var(--imported-button-brand-primary-button-color-default);
+}
+
+.state-hover .Button {
+  color: var(--imported-button-brand-primary-button-color-hover);
+}
+
+.state-focus .Button {
+  color: var(--imported-button-brand-primary-button-color-focus);
+}
+
+.state-pressed .Button {
+  color: var(--imported-button-brand-primary-button-color-pressed);
+}
+
+.state-disabled .Button {
+  color: var(--imported-button-brand-primary-button-color-disabled);
+}
+
+.Tooltip {
+  color: var(--imported-button-brand-primary-tooltip-color);
+  font-size: var(--imported-button-brand-primary-tooltip-font-size);
+}
+
+.focusRing {
+  border-color: var(--imported-button-brand-primary-focus-ring-border-color);
+  border-radius: var(--imported-button-brand-primary-focus-ring-border-radius);
+  border-width: var(--imported-button-brand-primary-focus-ring-border-width);
+  border-style: solid;
+}

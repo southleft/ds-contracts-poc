@@ -3,7 +3,8 @@
     "semantics.element defaulted to \"div\" — element/role/ARIA are not drawn on the canvas; set the real host element",
     "Button group:root/Button: fixed props of \"Button\" canonicalized by spelling (dump v1.1) — verify against the child contract's bindings",
     "prop `type`: two-value axis [default, primary] kept as an ENUM (both states render truthfully on both surfaces); a code boolean is a compatible code-side binding — see extract/reconcile.ts bool⇄axis treatment",
-    "prop `isPill`: true/false variant axis proposed as a boolean (extract/reconcile.ts bool⇄axis rule)"
+    "prop `isPill`: true/false variant axis proposed as a boolean (extract/reconcile.ts bool⇄axis rule)",
+    "contract name: drawn set name \"Button group\" is not a PascalCase component name — proposed as \"ButtonGroup\" (the canvas set keeps its own name; the componentSetKey/nodeId anchors carry identity)"
   ],
   "unbound": [],
   "minted": null
