@@ -1444,29 +1444,10 @@ export function Playground() {
 
         {sourceTab === 'figma' && (
           <div className="rail__section">
-            {/* The three-rung fidelity ladder (extract/figma/mcp/README.md) —
-                same dump, same proposer, same refusals; only how much of the
-                variable NAMES survives differs. The desktop rung is CLI-only:
-                the desktop app's MCP server has no CORS, browsers need not
-                apply — documented, not wired. */}
-            <div className="ladder" role="note" aria-label="Import fidelity ladder">
-              <div className="ladder__title">Three ways in, by name fidelity</div>
-              <ol className="ladder__list">
-                <li>
-                  <b>Plugin dump</b> — paste <code>extract/figma/dump.plugin.js</code> output in
-                  the JSON tab. Native variable names, zero ambiguity.
-                </li>
-                <li>
-                  <b>Desktop MCP</b> — <code>npm run extract:figma:mcp</code> in the repo: full
-                  names on any plan via the desktop app. CLI-only (the desktop server allows no
-                  browser origins).
-                </li>
-                <li>
-                  <b>URL + token, here</b> — resolved values; names the plan withholds are minted
-                  as provisional <code>imported.*</code> tokens, styled and renameable.
-                </li>
-              </ol>
-            </div>
+            {/* The three-rung fidelity ladder moved to the Help drawer
+                ("Coming from design" → "Working locally?") — public visitors
+                can't run CLIs, so the tab keeps only what runs HERE:
+                URL + token, and the fixture demo. */}
             <div className="field">
               <label htmlFor="figma-url">figma.com component URL</label>
               <input
