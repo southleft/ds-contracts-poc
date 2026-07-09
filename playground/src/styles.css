@@ -1397,6 +1397,77 @@ label {
   color: var(--pg-faint);
 }
 
+/* assist rename flow (inside the minted receipts group) */
+
+.mint-assist {
+  margin: 6px 0 4px 12px;
+  padding: 8px 10px;
+  border-left: 2px solid var(--pg-border-strong);
+}
+
+.mint-assist__bar {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.mint-assist__hint {
+  margin: 6px 0 0;
+  font-size: 11.5px;
+}
+
+.mint-assist__error {
+  margin-top: 8px;
+}
+
+.mint-assist__row {
+  margin-top: 10px;
+  font-size: 11.5px;
+}
+
+.mint-assist__line {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+  font-family: var(--pg-mono);
+}
+
+.mint-assist__tag {
+  font-family: var(--pg-font);
+  font-size: 10px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--pg-muted);
+  border: 1px solid var(--pg-border-strong);
+  padding: 1px 5px;
+}
+
+.mint-assist__to {
+  color: var(--pg-accent);
+}
+
+.mint-assist__applied {
+  color: var(--pg-ok);
+}
+
+.mint-assist__rationale {
+  margin-top: 2px;
+  color: var(--pg-muted);
+}
+
+.mint-assist__refusal {
+  margin-top: 2px;
+  color: var(--pg-danger);
+  font-family: var(--pg-mono);
+}
+
+.mint-assist__note {
+  margin-top: 2px;
+  color: var(--pg-muted);
+  font-family: var(--pg-mono);
+}
+
 /* output pane */
 
 .output__files {

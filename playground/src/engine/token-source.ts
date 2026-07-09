@@ -211,7 +211,10 @@ export function setMintedTokens(layer: MintedTokenLayer | null): void {
  * layer's tree at the new path, so the composed inventory/stylesheet resolve
  * the renamed ref immediately. Returns a NAMED error instead of guessing.
  */
-export function applyMintedRename(fromPath: string, toPath: string): { ok: true } | { ok: false; error: string } {
+export function applyMintedRename(
+  fromPath: string,
+  toPath: string,
+): { ok: true; deduped: boolean } | { ok: false; error: string } {
   if (!mintedLayer) return { ok: false, error: 'no minted token layer is active' };
   const flat = flattenTokens(mintedLayer.tree);
   const entry = flat.get(fromPath);
@@ -242,7 +245,7 @@ export function applyMintedRename(fromPath: string, toPath: string): { ok: true 
   };
   recompose();
   notify();
-  return { ok: true };
+  return { ok: true, deduped };
 }
 
 export function subscribeTokens(fn: () => void): () => void {

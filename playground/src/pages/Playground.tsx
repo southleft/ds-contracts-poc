@@ -30,6 +30,7 @@ import {
   sharePayloadFromLocation,
 } from '../engine/permalink';
 import {
+  activeMintedTokens,
   applyUserTokens,
   resetToRepoTokens,
   setMintedTokens,
@@ -53,6 +54,7 @@ import { buildPreviewAtState, type PreviewPropOverrides } from '../engine/previe
 import type { ReceiptGroup, Receipts } from '../receipts';
 import { ContractEditor, type ContractEditorHandle } from '../components/ContractEditor';
 import { CopyButton } from '../components/CopyButton';
+import { MintAssist } from '../components/MintAssist';
 import { HighlightedCode } from '../components/HighlightedCode';
 import { usePaneResize } from '../components/PaneResize';
 import { PreviewControls, sanitizeOverrides } from '../components/PreviewControls';
@@ -289,6 +291,9 @@ export function Playground() {
 
   // -------------------------------------------------------------- receipts
   const [receipts, setReceipts] = useState<Receipts | null>(null);
+  // The live minted layer (tokenSource re-renders this component whenever it
+  // changes) — drives the assist rename block under the minted receipts group.
+  const mintedLayer = activeMintedTokens();
 
   // -------------------------------------------------------- resizable panes
   const pgRef = useRef<HTMLDivElement>(null);
@@ -1642,7 +1647,20 @@ export function Playground() {
               </>
             )}
           </div>
-          <ReceiptsPanel receipts={receipts} />
+          <ReceiptsPanel
+            receipts={receipts}
+            mintedExtras={
+              mintedLayer ? (
+                <MintAssist
+                  key={provenance}
+                  minted={mintedLayer}
+                  component={lastSpec.current?.contract.name ?? 'Component'}
+                  text={text}
+                  onApplyText={setText}
+                />
+              ) : undefined
+            }
+          />
         </div>
       </section>
 
