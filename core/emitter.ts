@@ -38,6 +38,10 @@ export interface EmitterCtx {
   contracts: Map<string, Contract>;
   /** figma-script: overrides the anchor file key in the WRONG FILE guard. */
   fileKey?: string;
+  /** figma-script: minted provisional tokens (`imported.*` DTCG tree) — the
+   *  script gains a preamble that upserts them as Figma variables, so it runs
+   *  in files that never synced them. Absent/empty → no preamble. */
+  mintedTokens?: Record<string, unknown>;
   /** react-inline: token resolution mode (default 'light'). */
   mode?: 'light' | 'dark';
 }
@@ -110,6 +114,7 @@ export const figmaScriptEmitter: Emitter = {
           icons: ctx.icons,
           contracts: ctx.contracts,
           fileKey: ctx.fileKey,
+          mintedTokens: ctx.mintedTokens,
         }),
       },
     ];

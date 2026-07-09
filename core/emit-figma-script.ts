@@ -144,11 +144,24 @@ export interface FigmaScriptCtx extends FigmaEngineInput {
   /** Overrides the anchor file key baked into the script's WRONG FILE guard
    *  (the CLI passes FIGMA_FILE_KEY for rebuild-into-a-fresh-file support). */
   fileKey?: string;
+  /** Minted provisional tokens (the playground's `imported.*` layer, a DTCG
+   *  tree). When present and non-empty, the component script gains a preamble
+   *  that upserts one Figma variable per minted leaf into an 'Imported
+   *  (provisional)' collection — so the script's variable lookups resolve in
+   *  the ORIGIN file the designer pastes it back into, which never synced
+   *  these tokens. Absent or empty → no preamble, byte-identical output
+   *  (evals/golden.json safety: repo contracts mint nothing). */
+  mintedTokens?: Record<string, unknown>;
 }
 
 /** Contract → the single-component sync script text (pure). */
 export function emitFigmaScript(contract: Contract, ctx: FigmaScriptCtx): string {
-  return createFigmaEngine(ctx).buildComponentScript(contract, ctx.contracts, ctx.fileKey);
+  return createFigmaEngine(ctx).buildComponentScript(
+    contract,
+    ctx.contracts,
+    ctx.fileKey,
+    ctx.mintedTokens,
+  );
 }
 
 /**
@@ -1097,10 +1110,59 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
   };
 }
 
+/** The conditional minted-variable preamble (see FigmaScriptCtx.mintedTokens).
+ *  Returns '' when the tree is absent/empty, so contracts without a minted
+ *  layer emit byte-identical scripts — the golden guard's invariant. */
+function mintedPreamble(mintedTokens?: Record<string, unknown>): string {
+  const minted = mintedTokens ? flatten(mintedTokens) : null;
+  if (!minted || minted.size === 0) return '';
+  const vars = [...minted].map(([p, entry]) => ({
+    name: figmaName(p),
+    type: figmaType(entry),
+    value: figmaValue(entry),
+  }));
+  return `// ---------------------------------------------------------------------------
+// PROVISIONAL VARIABLES — minted from resolved values by a degraded import.
+// This contract binds ${vars.length} provisional token(s) whose real variable names were
+// unrecoverable, so this section upserts each one as a Figma variable in a
+// collection named 'Imported (provisional)' — idempotent by name, within that
+// collection only — before the bindings below look anything up. The values
+// are literal-fidelity stand-ins, not your design vocabulary: rename them
+// against your real tokens when you adopt the contract.
+// ---------------------------------------------------------------------------
+const MINTED_VARIABLES = ${JSON.stringify(vars)};
+{
+  const hexToRgb = (hex) => {
+    const h = hex.replace('#', '');
+    return {
+      r: parseInt(h.slice(0, 2), 16) / 255,
+      g: parseInt(h.slice(2, 4), 16) / 255,
+      b: parseInt(h.slice(4, 6), 16) / 255,
+    };
+  };
+  const cols = await figma.variables.getLocalVariableCollectionsAsync();
+  let col = cols.find((c) => c.name === 'Imported (provisional)');
+  if (!col) col = figma.variables.createVariableCollection('Imported (provisional)');
+  const modeId = col.modes[0].modeId;
+  const byName = {};
+  for (const v of await figma.variables.getLocalVariablesAsync()) {
+    if (v.variableCollectionId === col.id) byName[v.name] = v;
+  }
+  for (const t of MINTED_VARIABLES) {
+    let v = byName[t.name];
+    if (!v) { v = figma.variables.createVariable(t.name, col, t.type); byName[t.name] = v; }
+    v.setValueForMode(modeId, t.type === 'COLOR' ? hexToRgb(t.value) : t.value);
+  }
+}
+
+`;
+}
+
 function buildComponentScript(
   contract: Contract,
   byId: Map<string, Contract>,
   fileKeyOverride?: string,
+  mintedTokens?: Record<string, unknown>,
 ): string {
   const data = compileComponentData(contract, byId);
 
@@ -1161,7 +1223,7 @@ for (const page of figma.root.children) {
   if (foreign) { SET_NAME = SET_NAME + ' (' + CONTRACT_ID + ')'; break; }
 }
 
-const allVars = await figma.variables.getLocalVariablesAsync();
+${mintedPreamble(mintedTokens)}const allVars = await figma.variables.getLocalVariablesAsync();
 const varByName = {};
 for (const v of allVars) varByName[v.name] = v;
 const need = (name) => {
