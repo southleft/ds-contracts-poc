@@ -44,7 +44,10 @@
  *              carried alpha (dump v1.1; a legal DTCG color $value AND a CSS
  *              color, see core/propose-figma.ts paintCssHex) — ($type color);
  *              numbers from px-like canvas fields (padding / radius /
- *              spacing / size / fontSize) are '<n>px' ($type dimension).
+ *              spacing / size / fontSize) are '<n>px' ($type dimension);
+ *              UNITLESS numbers (node opacity, dump v1.2) are '<n>'
+ *              ($type number — a Figma FLOAT variable and a CSS opacity
+ *              value in one spelling).
  *
  * Pure module (no node:* imports) — part of the browser-importable core.
  */
@@ -74,8 +77,9 @@ export interface MintObservation {
   part: string;
   /** Contract token key ("background-color", "padding-inline", …). */
   cssProperty: string;
-  /** 'color' → '#rrggbb' / $type color; 'px' → '<n>px' / $type dimension. */
-  kind: 'color' | 'px';
+  /** 'color' → '#rrggbb' / $type color; 'px' → '<n>px' / $type dimension;
+   *  'number' → unitless '<n>' / $type number (node opacity, dump v1.2). */
+  kind: 'color' | 'px' | 'number';
   /** One entry per variant the node occurs in. */
   occurrences: MintOccurrence[];
 }
@@ -141,16 +145,19 @@ const partSegment = (rawPath: string): string => {
   return segs.length > 0 ? segs.join('-') : 'root';
 };
 
-const formatValue = (kind: 'color' | 'px', value: string | number): string =>
+const formatValue = (kind: 'color' | 'px' | 'number', value: string | number): string =>
   kind === 'color'
     ? `#${String(value).replace(/^#/, '').toLowerCase()}`
-    : `${value}px`;
+    : kind === 'number'
+      ? String(value)
+      : `${value}px`;
 
-/** Shared-leaf name for a deduped literal: color-1f2937 / size-4 / size-0-5. */
-const sharedName = (kind: 'color' | 'px', value: string | number): string =>
+/** Shared-leaf name for a deduped literal: color-1f2937 / size-4 / size-0-5 /
+ *  num-0-4. */
+const sharedName = (kind: 'color' | 'px' | 'number', value: string | number): string =>
   kind === 'color'
     ? `color-${String(value).replace(/^#/, '').toLowerCase()}`
-    : `size-${String(value).replace(/^-/, 'neg-').replace(/\./g, '-')}`;
+    : `${kind === 'number' ? 'num' : 'size'}-${String(value).replace(/^-/, 'neg-').replace(/\./g, '-')}`;
 
 // ---------------------------------------------------------------------------
 // Classification: uniform / axis-correlated / uncorrelated
@@ -253,7 +260,7 @@ export function mintTokens(
   const hasDescendants = (path: string) => [...leaves.keys()].some((k) => k.startsWith(`${path}.`));
   const claim = (
     wantedPath: string,
-    kind: 'color' | 'px',
+    kind: 'color' | 'px' | 'number',
     value: string | number,
     usageSite: string,
   ): string => {
@@ -325,7 +332,11 @@ export function mintTokens(
     for (const seg of segs.slice(0, -1)) {
       node = (node[seg] ??= {}) as Record<string, unknown>;
     }
-    const kind = entry.value.startsWith('#') ? 'color' : 'dimension';
+    const kind = entry.value.startsWith('#')
+      ? 'color'
+      : entry.value.endsWith('px')
+        ? 'dimension'
+        : 'number';
     node[segs[segs.length - 1]] = { $value: entry.value, $type: kind };
   }
 

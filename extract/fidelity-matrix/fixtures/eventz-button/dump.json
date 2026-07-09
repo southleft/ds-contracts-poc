@@ -2,7 +2,7 @@
   "_provenance": {
     "fileKey": "E7oXr98i91HYQGZxA2USOQ",
     "extractedAt": "2026-07-09",
-    "note": "Node-tree dump mapped from the Figma REST API (extract/figma/rest/map.ts, dump v1.1) for design→contract proposal."
+    "note": "Node-tree dump mapped from the Figma REST API (extract/figma/rest/map.ts, dump v1.2) for design→contract proposal."
   },
   "Button": {
     "setName": "Button",
@@ -157,6 +157,7 @@
           "alpha": 0.1
         },
         "strokeWeight": 1,
+        "opacity": 0.4,
         "children": [
           {
             "name": "Icon",
@@ -215,6 +216,7 @@
         "fill": {
           "hex": "f7f8f7"
         },
+        "opacity": 0.4,
         "children": [
           {
             "name": "Icon",
@@ -397,6 +399,7 @@
           "hex": "000002",
           "alpha": 0
         },
+        "opacity": 0.4,
         "children": [
           {
             "name": "Icon",
@@ -461,6 +464,7 @@
           "alpha": 0.1
         },
         "strokeWeight": 1,
+        "opacity": 0.4,
         "children": [
           {
             "name": "Icon",
@@ -1292,6 +1296,7 @@
           "alpha": 0.1
         },
         "strokeWeight": 1,
+        "opacity": 0.4,
         "children": [
           {
             "name": "Button",
@@ -1319,6 +1324,7 @@
               "alpha": 0.1
             },
             "strokeWeight": 1,
+            "opacity": 0.4,
             "instanceOf": "Button",
             "componentProperties": {
               "text": "Label",
@@ -1361,6 +1367,7 @@
         "fill": {
           "hex": "f7f8f7"
         },
+        "opacity": 0.4,
         "children": [
           {
             "name": "Button",
@@ -1383,6 +1390,7 @@
             "fill": {
               "hex": "f7f8f7"
             },
+            "opacity": 0.4,
             "instanceOf": "Button",
             "componentProperties": {
               "text": "Label",
@@ -1430,6 +1438,7 @@
           "alpha": 0.1
         },
         "strokeWeight": 1,
+        "opacity": 0.4,
         "children": [
           {
             "name": "Button",
@@ -1458,6 +1467,7 @@
               "alpha": 0.1
             },
             "strokeWeight": 1,
+            "opacity": 0.4,
             "instanceOf": "Button",
             "componentProperties": {
               "text": "Label",
@@ -1501,6 +1511,7 @@
           "hex": "000002",
           "alpha": 0
         },
+        "opacity": 0.4,
         "children": [
           {
             "name": "Button",
@@ -1524,6 +1535,7 @@
               "hex": "000002",
               "alpha": 0
             },
+            "opacity": 0.4,
             "instanceOf": "Button",
             "componentProperties": {
               "text": "Label",

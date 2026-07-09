@@ -72,6 +72,12 @@ export interface DumpNode {
    *  boolean-prop default of false. Absence means visible (REST mapper) or
    *  not captured (dump v1 fixtures) — never inverted into `true`. */
   hidden?: boolean;
+  /** NODE opacity 0–1 (dump v1.2, additive) — OMITTED when 1. Distinct from
+   *  paint alpha: Eventz disables whole variants with `opacity: 0.4` on the
+   *  variant ROOT while the paints stay byte-identical to enabled; dump v1.1
+   *  dropped the channel and every surface rendered disabled at full ink.
+   *  Absence in older dumps means opaque, a declared limit. */
+  opacity?: number;
   text?: DumpText;
   /** componentPropertyReferences, property-id suffixes stripped:
    *  characters → TEXT property, mainComponent → INSTANCE_SWAP property,

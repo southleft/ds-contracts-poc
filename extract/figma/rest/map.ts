@@ -108,6 +108,8 @@ export interface RestNode {
   name: string;
   type: string;
   visible?: boolean;
+  /** NODE opacity 0–1 (omitted at 1) — dump v1.2 `opacity`. */
+  opacity?: number;
   children?: RestNode[];
   // HasFramePropertiesTrait
   layoutMode?: 'NONE' | 'HORIZONTAL' | 'VERTICAL' | 'GRID';
@@ -455,6 +457,11 @@ function mapNode(node: RestNode, ctx: Ctx, nodePath: string): RestDumpNode {
   }
   if (node.layoutSizingHorizontal === 'FILL') out.fillWidth = true;
   if (node.visible === false) out.hidden = true;
+  // dump v1.2: NODE opacity (distinct from paint alpha) — the disabled-variant
+  // wash-out channel (Eventz roots at opacity 0.4). Omitted when 1.
+  if (typeof node.opacity === 'number' && node.opacity < 1) {
+    out.opacity = Math.round(node.opacity * 10000) / 10000;
+  }
 
   if (node.type === 'TEXT') {
     out.text = mapText(node, ctx, nodePath);
@@ -513,7 +520,7 @@ export function mapRestToDump(nodesResponse: RestNodesResponse, options: MapOpti
     _provenance: {
       fileKey: options.fileKey ?? null,
       extractedAt: new Date().toISOString().slice(0, 10),
-      note: 'Node-tree dump mapped from the Figma REST API (extract/figma/rest/map.ts, dump v1.1) for design→contract proposal.',
+      note: 'Node-tree dump mapped from the Figma REST API (extract/figma/rest/map.ts, dump v1.2) for design→contract proposal.',
     },
   };
 

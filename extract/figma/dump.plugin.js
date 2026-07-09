@@ -109,6 +109,11 @@ async function dumpNode(node) {
   // dump v1.1: hidden nodes are captured, not skipped — visibility-bound
   // parts recover their boolean default from this (REST mapper parity).
   if (node.visible === false) out.hidden = true;
+  // dump v1.2: NODE opacity (distinct from paint alpha) — the disabled-variant
+  // wash-out channel (Eventz roots at opacity 0.4). Omitted when 1.
+  if ('opacity' in node && typeof node.opacity === 'number' && node.opacity < 1) {
+    out.opacity = Math.round(node.opacity * 10000) / 10000;
+  }
 
   if (node.type === 'TEXT') {
     const text = {
@@ -163,7 +168,7 @@ const dumps = {
   _provenance: {
     fileKey: figma.fileKey || null,
     extractedAt: new Date().toISOString().slice(0, 10),
-    note: 'Node-tree dump (extract/figma/dump.plugin.js, dump v1.1) for design→contract proposal.',
+    note: 'Node-tree dump (extract/figma/dump.plugin.js, dump v1.2) for design→contract proposal.',
   },
 };
 for (const page of figma.root.children) {

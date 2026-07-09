@@ -384,7 +384,7 @@ function mintObservation(
   target: Record<string, string>,
   where: string,
   cssProperty: string,
-  kind: 'color' | 'px',
+  kind: 'color' | 'px' | 'number',
   occ: Array<{ variant: string; value: string | number }>,
   source?: string,
 ) {
@@ -563,6 +563,69 @@ function invertNodeTokens(m: Merged, isRoot: boolean, ctx: Ctx, where: string): 
     mintObservation(ctx, tokens, where, 'border-width', 'px', numOccurrences(m, (n) => n.strokeWeight), `${where}|strokeWeight`);
   }
   return tokens;
+}
+
+/** NODE opacity (dump v1.2) — distinct from paint alpha. A bound opacity
+ *  variable already rides `tokens.opacity` (invertNodeTokens). A LITERAL
+ *  opacity < 1 has three honest inversions, tried in order:
+ *    1. constant across variants, or varying with an ENUM axis → an unbound
+ *       report + (with minting) a unitless `number` mint on tokens.opacity;
+ *    2. a function of ONE boolean variant axis, opaque on the false side →
+ *       `stylesWhen { prop, styles: { opacity } }` (the literal-CSS
+ *       conditional vocabulary — field case: Eventz `isDisabled` variant
+ *       roots at opacity 0.4, the disabled wash-out dump v1.1 lost);
+ *    3. anything else → a named note, nothing invented. */
+function invertNodeOpacity(
+  m: Merged,
+  holder: Record<string, unknown>,
+  tokens: Record<string, string>,
+  ctx: Ctx,
+  where: string,
+) {
+  if (m.occ.some((o) => o.node.bound?.opacity)) return; // rides tokens.opacity
+  const occ = m.occ.map((o) => ({ variant: o.variant, value: o.node.opacity ?? 1 }));
+  if (occ.every((o) => o.value === 1)) return;
+  const distinct = [...new Set(occ.map((o) => o.value))];
+  if (distinct.length > 1) {
+    // One boolean axis, opaque on the false side → stylesWhen.
+    for (const axis of ctx.axes) {
+      if (!isBoolAxis(axis.values)) continue;
+      const side = (want: string) =>
+        new Set(
+          occ
+            .filter((o) => (axisValuesOf(o.variant)[axis.property] ?? '').trim().toLowerCase() === want)
+            .map((o) => o.value),
+        );
+      const whenTrue = side('true');
+      const whenFalse = side('false');
+      if (whenFalse.size === 1 && whenFalse.has(1) && whenTrue.size === 1 && !whenTrue.has(1)) {
+        const value = [...whenTrue][0];
+        const stylesWhen = (holder.stylesWhen as Array<Record<string, unknown>> | undefined) ?? [];
+        stylesWhen.push({ prop: axis.propName, styles: { opacity: String(value) } });
+        holder.stylesWhen = stylesWhen;
+        ctx.notes.push(
+          `${where}: node opacity ${value} rides boolean axis "${axis.property}" (opaque when false) — proposed as stylesWhen { prop: ${axis.propName}, styles: { opacity } } (dump v1.2)`,
+        );
+        return;
+      }
+      if (whenTrue.size === 1 && whenTrue.has(1) && whenFalse.size === 1 && !whenFalse.has(1)) {
+        ctx.notes.push(
+          `${where}: node opacity ${[...whenFalse][0]} rides the FALSE side of boolean axis "${axis.property}" — stylesWhen cannot express negation; not proposed, review`,
+        );
+        return;
+      }
+    }
+  }
+  // Constant, or enum-axis-correlated — the mint classifier owns the split;
+  // an uncorrelated spread stays a named refusal from the mint pass (or the
+  // note below when minting is off).
+  reportUnbound(ctx, where, 'opacity', occ[0].value);
+  mintObservation(ctx, tokens, where, 'opacity', 'number', occ, `${where}|opacity`);
+  if (!ctx.mint && distinct.length > 1) {
+    ctx.notes.push(
+      `${where}: node opacity differs across variants (${distinct.join(', ')}) without a boolean-axis correlation — not representable without minting; review`,
+    );
+  }
 }
 
 /** The contract's padding vocabulary is symmetric (padding-inline/-block):
@@ -823,6 +886,7 @@ function buildPart(
 
   if (m.type === 'TEXT') {
     const tokens = invertTextTokens(m, ctx, where);
+    invertNodeOpacity(m, part, tokens, ctx, where);
     const property = unifiedPropRef(m, 'characters', ctx, where);
     const characters = first(m.occ, (n) => n.text?.characters) ?? '';
     if (property) {
@@ -840,6 +904,15 @@ function buildPart(
   }
 
   if (m.type === 'INSTANCE') {
+    // Node opacity on an instance is a PARENT-context visual fact, but the
+    // part elides styling (the child contract owns it) and stylesWhen/tokens
+    // are refused on component refs — named, never silently dropped.
+    const instOpacity = m.occ.find((o) => (o.node.opacity ?? 1) < 1);
+    if (instOpacity) {
+      ctx.notes.push(
+        `${where}: node opacity ${instOpacity.node.opacity} on a nested instance — parent-context opacity is not representable on a component ref (dump v1.2); review`,
+      );
+    }
     const swapProperty = unifiedPropRef(m, 'mainComponent', ctx, where);
     if (swapProperty) {
       // A swap-bound instance outside a dedicated wrapper: still a slot part,
@@ -944,6 +1017,7 @@ function buildPart(
   if (soleChild && soleSwap) {
     const layout = invertLayout(m, false, parentMode, ctx, where);
     if (layout) part.layout = layout;
+    invertNodeOpacity(m, part, tokens, ctx, where);
     attachTokens(ctx, part, tokens);
     const slot: Record<string, unknown> = { name: canonicalPropName(soleSwap) };
     const instanceOf = first(soleChild.occ, (n) => n.instanceOf);
@@ -968,6 +1042,7 @@ function buildPart(
   }
 
   if (isWrapArtifact(m)) {
+    invertNodeOpacity(m, part, tokens, ctx, where);
     attachTokens(ctx, part, tokens);
     if (visibleWhen) part.visibleWhen = visibleWhen;
     return part;
@@ -975,6 +1050,7 @@ function buildPart(
 
   const layout = invertLayout(m, false, parentMode, ctx, where);
   if (layout) part.layout = layout;
+  invertNodeOpacity(m, part, tokens, ctx, where);
   attachTokens(ctx, part, tokens);
   const visibleRef = unifiedPropRef(m, 'visible', ctx, where);
   if (visibleRef) applyVisibleBinding(part, visibleRef, ctx, where, m);
@@ -1109,6 +1185,7 @@ function flattenBaseInstances(variants: DumpNode[], ctx: Ctx): BaseInstanceCaptu
     }
     if (inst.bound) variant.bound = { ...(variant.bound ?? {}), ...inst.bound };
     if (inst.fillWidth !== undefined) variant.fillWidth = inst.fillWidth;
+    if (inst.opacity !== undefined) variant.opacity = inst.opacity; // dump v1.2
     variant.children = [...kids.slice(0, index), ...(inst.children ?? []), ...kids.slice(index + 1)];
     captures.push({
       variant: variant.name,
@@ -1378,6 +1455,7 @@ export function proposeFromDump(
     }
     if (Object.keys(parts).length > 0) root.parts = parts;
   }
+  invertNodeOpacity(merged, root, rootTokens, ctx, where);
   attachTokens(ctx, root, rootTokens);
 
   // Promotion from the flattened base instance(s) — after the anatomy, so
