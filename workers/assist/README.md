@@ -1,7 +1,7 @@
 # ds-contracts-assist
 
 The playground's agentic-assist backend: a small Cloudflare Worker that lets
-**anonymous visitors** borrow a **server-held Anthropic key** for three narrow,
+**anonymous visitors** borrow a **server-held Anthropic key** for four narrow,
 tool-forced tasks. The owner funds it, so everything here is built around hard
 caps — and around one governance rule that never bends:
 
@@ -11,7 +11,7 @@ caps — and around one governance rule that never bends:
 > side-effect capabilities (no repo writes, no fetching on the model's
 > behalf, no tool loop), and the client labels its output `ai-proposed`.
 
-All three endpoints run `claude-opus-4-8` — the owner's call: outputs people
+All four endpoints run `claude-opus-4-8` — the owner's call: outputs people
 can feel confident in, with cost contained by the caps below rather than by a
 cheaper model.
 
@@ -100,6 +100,39 @@ shareable across visitors by design** — the playground only imports from
 public repositories, so a profile contains nothing visitor-specific and the
 next visitor importing from the same `repo@ref` gets it for free.
 
+### `POST /v1/assist/fix-contract`
+
+Repairs a contract the playground's referee refused — changing **only** what
+the refusals name. The system prompt forbids restructuring, renaming, or
+"improving" anything a refusal does not mention (untouched fields come back
+byte-stable wherever the schema allows), restricts every token ref to the
+provided inventory (`imported.*` paths included; enum placeholders legal only
+when every expansion exists), and tells the model to substitute dead token
+paths by **role** at that CSS property, never by spelling similarity.
+
+```jsonc
+// request
+{
+  "contract": { /* the refused contract */ },        // object, ≤ 64KB serialized
+  "refusals": ["anatomy root/background: …"],        // required, non-empty, ≤ 50
+  "tokenPaths": ["imported.badge.background", "…"]   // required, non-empty, ≤ 3000
+}
+// response (proposal)
+{ "contract": { /* minimally edited */ }, "model": "…", "usage": { … } }
+```
+
+`max_tokens` 8192. The forced tool (`propose_contract_fix`) wraps a
+**hand-kept, non-strict mirror of the playground's `CONTRACT_TOOL` schema**
+(`playground/src/engine/prompt-import.ts`): the contract shape needs
+`oneOf`/`const`/`pattern`, which `strict: true` tool schemas refuse, so this
+tool ships without the strict flag. **Divergence risk, named:** the mirror is
+maintained by hand — if the playground's contract shape changes and this copy
+lags, the model is aimed at a stale shape. The failure mode is contained:
+the Worker shape-checks the output only (a non-object contract answers `502`),
+and the client re-runs the exact same schema + generator referee over the
+proposal, so a stale mirror produces refused proposals, never accepted bad
+ones. Keep the two in sync when the contract shape changes.
+
 ## Hard caps & abuse resistance
 
 | Layer | Default | Refusal |
@@ -108,8 +141,8 @@ next visitor importing from the same `repo@ref` gets it for free.
 | CORS | playground origin + `*.pages.dev` previews only; no-Origin (curl) refused | `403` |
 | Per-IP daily cap (`ASSIST_IP_DAILY_LIMIT`) | 5/day per endpoint class (each endpoint is its own class) | `429` |
 | Global daily token budget (`ASSIST_DAILY_TOKEN_BUDGET`) | 600,000 tokens/day (input+output, all visitors) | `429` — "daily assist budget spent — bring your own key in the Describe tab pattern, or try tomorrow" |
-| Per-call output cap | `max_tokens` 1024 / 4096 / 2048 | enforced by the API |
-| Body size | 320KB (repo-profile samples cap separately at 200KB) | `413` / `400` |
+| Per-call output cap | `max_tokens` 1024 / 4096 / 2048 / 8192 | enforced by the API |
+| Body size | 320KB (repo-profile samples cap separately at 200KB; fix-contract contracts at 64KB serialized) | `413` / `400` |
 
 Ordering: CORS → kill switch → route → validation → **cache** (repo-profile
 hits cost zero tokens and burn no quota) → per-IP → budget → one model call.
@@ -138,6 +171,7 @@ Per-request estimates at the same pricing:
 | fetch-plan | ~3–6K in + ≤1K out ≈ **$0.02–0.06** | 2000-entry listing ≈ $0.15 |
 | name-tokens | ~4–10K in + ≤4K out ≈ **$0.05–0.15** | 200 entries + 3000 paths ≈ $0.30 |
 | repo-profile | ~15–30K in + ≤2K out ≈ **$0.10–0.20** | 200KB samples + full tree ≈ $0.45 — then cached 7 days: **$0** |
+| fix-contract | ~8–20K in + 2–6K out ≈ **$0.08–0.25** | 64KB contract + 3000 paths + 8K out ≈ **$0.45** |
 
 At the defaults, the budget covers roughly 30–100 fresh Opus calls/day.
 
@@ -212,12 +246,17 @@ network. Covered:
 - Per-IP cap: N+1 → 429 (named), other IPs unaffected.
 - Budget: pre-spent day → named 429 with no model call; usage accrual from
   mocked `usage`; the bounded-overshoot semantics.
-- Happy paths for all three endpoints: exact Anthropic request shape (model,
+- Happy paths for all four endpoints: exact Anthropic request shape (model,
   `max_tokens`, forced `tool_choice`, `thinking: disabled`, key in header
   only), response shape, the `{ wrapper }` tool-input envelope unwrapping,
   fetch-list clamp to 12 + enum fallback, profile caching (hit path, per-ref
   keys, no quota burn on hits), and upstream failure mapping (no tool_use →
   502, upstream 429/529 → retryable 429, no upstream detail leaked).
+- fix-contract specifics: the non-strict forced tool, double-wrapped
+  `{ contract: { contract } }` unwrapping and flat-contract salvage, the
+  named-400/413 refusal table, per-IP class isolation from the other
+  endpoints, the spent-budget short-circuit (zero model calls), and the
+  non-object-output 502 with usage still charged.
 
 **Not covered — needs live infra:** real workerd runtime behavior
 (`wrangler dev` locally / `wrangler deploy` + smoke request are the check),

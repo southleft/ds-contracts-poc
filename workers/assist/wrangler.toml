@@ -22,7 +22,7 @@ kv_namespaces = [
 ASSIST_ENABLED = "true"
 
 # Per-IP daily request cap, per endpoint class (fetch-plan / name-tokens /
-# repo-profile each count separately). Cache hits do not count.
+# repo-profile / fix-contract each count separately). Cache hits do not count.
 ASSIST_IP_DAILY_LIMIT = "5"
 
 # Global daily token budget (input + output tokens, all visitors combined).
