@@ -347,6 +347,22 @@ receipts: the Shoelace-Tooltip class of import renders colored, and the
 CBDS Button imports clean over live network in both URL forms. **58/58.**
 
 
+## 2026-07-09 — The loop closes on the canvas (v0.4.0)
+
+The contract got its design side on screen — Code | Canvas | Split, the
+figma engine's variant grid rendered on a true white canvas with a
+Light/Dark/Checker surface. Code imports caught up with Figma imports:
+foreign var(--*) properties and raw literals mint the same imported.*
+layer, with token stylesheets discovered across the repo tree (CBDS Button
+imports STYLED at the fully deterministic rung — variant and size both
+drive substituted refs). And the designer validation loop closed live,
+owner-confirmed: a degraded import's Figma script upserts its provisional
+variables first, builds the contract's version beside the original in the
+source file, and the Sync Runner's paste box ends every run on the canvas —
+zoomed to what it built, or plain words plus Select-it when it already
+exists. **58/58.**
+
+
 ---
 
 **Standing scoreboard** (updated with each milestone):

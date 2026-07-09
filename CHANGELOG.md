@@ -6,6 +6,21 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+## [0.4.0] - 2026-07-09
+
+### Added
+
+- **Canvas preview** — Code | Canvas | Split views: the figma engine's compiled variant grid rendered Figma-canvas-styled; Light/Dark/Checker preview surface independent of app theme.
+- **Code-import token minting** — raw literals and foreign `var(--*)` properties mint the provisional `imported.*` layer (substituted refs per enum axis, state leaves, verbatim carry for unresolvables); token stylesheets discovered across the repo tree when traced CSS uses undeclared properties.
+- **The designer validation loop** — a minted contract's Figma script upserts an 'Imported (provisional)' variable collection before first lookup, so pasting it back into the source file builds the contract's version beside the original; the Sync Runner gained a paste-box UI that ends every run on the canvas (zoom to result, or plain-words already-exists with Select-it).
+- **Wild-CSS extraction** — nesting, clsx/classnames maps, BEM modifiers, padding/border shorthand inversion.
+- **Describe quality rules** — every enum axis must drive a visible binding, text props must render, selects render through options; Button exemplar.
+
+### Fixed
+
+- emitHtml select content model (previews showed an empty box); minted receipts parity for code imports; Cloudflare re-auth deploy gap.
+
+
 ## [0.3.0] - 2026-07-09
 
 ### Added
@@ -99,6 +114,7 @@ First public release: the contract-as-source-of-truth loop, proven end-to-end an
 - Extractor gaps found by self-audit: cva/`VariantProps` support; skipped components are always reported, never silent.
 
 [Unreleased]: https://github.com/southleft/ds-contracts-poc/compare/v0.1.0...HEAD
+[0.4.0]: https://github.com/southleft/ds-contracts-poc/compare/v0.3.0...v0.4.0
 [0.3.0]: https://github.com/southleft/ds-contracts-poc/compare/v0.2.0...v0.3.0
 [0.2.0]: https://github.com/southleft/ds-contracts-poc/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/southleft/ds-contracts-poc/releases/tag/v0.1.0
