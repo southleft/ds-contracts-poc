@@ -953,7 +953,7 @@ label {
   margin: 0;
   padding: 12px 14px;
   font-family: var(--pg-mono);
-  font-size: 13px;
+  font-size: 13.5px;
   line-height: 1.55;
   white-space: pre;
   width: max-content;
@@ -970,7 +970,7 @@ label {
   flex: 1;
   border: none;
   padding: 12px 14px;
-  font-size: 13px;
+  font-size: 13.5px;
   line-height: 1.55;
   background: transparent;
   min-height: 240px;
@@ -1397,7 +1397,7 @@ label {
 .output__code {
   margin: 0;
   padding: 12px 14px;
-  font-size: 13px;
+  font-size: 14px;
   line-height: 1.6;
   overflow-x: auto;
 }
