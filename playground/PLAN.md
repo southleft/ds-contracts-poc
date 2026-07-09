@@ -219,9 +219,18 @@ behind their actions. Live-path receipt: a browser-direct api.figma.com call
 answers (403 with a bogus token — no CORS block), so URL import needs only a
 real token; the Pages-Function proxy fallback remains unbuilt until needed.
 
-To run the Figma script output for real, copy it and paste it into the Sync
-Runner dev plugin's "Paste a script" tab (figma-sync/plugin/README.md) — the
-report comes back in the plugin window.
+**The designer validation loop** — to run the Figma script output for real,
+copy it and paste it into the Sync Runner dev plugin's "Paste a script" tab
+(figma-sync/plugin/README.md). Paste it back into the SOURCE file the import
+came from: it builds the contract's version beside your original for A/B —
+or, when the contract's component already exists there, the plugin says so
+in plain words and offers to select it. A contract from a degraded import
+(minted `imported.*` tokens) carries a preamble that first upserts those
+tokens as variables in an 'Imported (provisional)' collection — the output
+toolbar counts them ("includes N provisional variables") — so the script
+runs in files that never synced them; rename the provisional variables
+against your real tokens when you adopt the contract. On success the plugin
+selects and zooms to the result automatically.
 
 ## Receipts discipline
 Every phase lands with: gates green (52/52+), new eval cases where the

@@ -87,7 +87,8 @@ const OUTPUT_TITLES: Record<string, string> = {
   react: 'The component code the shipping generator produces — TSX, scoped CSS, and stories.',
   html: 'Plain HTML + CSS you can paste anywhere — no build step needed.',
   'react-inline': 'React with the token values written in as plain numbers and colors — for codebases without a token pipeline.',
-  'figma-script': 'The script that builds or updates this component in Figma.',
+  'figma-script':
+    'The script that builds or updates this component in Figma. Paste it back into the source file: it builds the contract’s version beside your original for A/B.',
 };
 
 /** Workspace source tags — plain text, grouped display order. */
@@ -1114,13 +1115,17 @@ export function Playground() {
           icons,
           contracts: emittable.contracts,
           mode: theme,
+          // The active minted provisional layer rides along: the Figma script
+          // gains a preamble that upserts imported.* variables, so pasting it
+          // back into the ORIGIN file (which never synced them) just works.
+          mintedTokens: mintedLayer?.tree,
         }),
         error: null as string | null,
       };
     } catch (e) {
       return { files: null, error: e instanceof Error ? e.message : String(e) };
     }
-  }, [outputTab, emittable, theme, tokenSource]);
+  }, [outputTab, emittable, theme, tokenSource, mintedLayer]);
 
   useEffect(() => {
     setFormattedFiles(null);
@@ -2157,6 +2162,18 @@ export function Playground() {
                 <span>
                   tokens resolved for {theme} mode
                   {tokenSource.kind === 'user' ? ' — from your pasted tree' : ''}
+                </span>
+              ) : null}
+              {outputTab === 'figma-script' ? (
+                <span>
+                  {mintedLayer && mintedLayer.count > 0
+                    ? `includes ${mintedLayer.count} provisional variable${
+                        mintedLayer.count === 1 ? '' : 's'
+                      } (imported.*) the script creates first — rename against your real tokens. `
+                    : ''}
+                  Paste back into the source Figma file (Sync Runner plugin): builds the
+                  contract&rsquo;s version beside your original for A/B — or takes you to the
+                  existing one.
                 </span>
               ) : null}
             </div>
