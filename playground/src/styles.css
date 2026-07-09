@@ -381,6 +381,8 @@ label {
   flex-shrink: 0;
   border-bottom: 1px solid var(--pg-border);
   overflow-x: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--pg-border) transparent;
 }
 
 .tabs__tab {
@@ -417,19 +419,12 @@ label {
 }
 
 /* Up to seven source tabs (Workspace appears with the first import) share
- * the rail's 360px — tighter than the output tabs, but with air between
- * labels: all seven fit on one row (Tokens dot included), no wrap, no
- * horizontal scroll. */
-.pg__rail > .tabs {
-  flex-wrap: wrap;
-  height: auto;
-  min-height: 37px;
-}
-
+ * the rail — always ONE 37px row: overflow scrolls horizontally behind the
+ * thin scrollbar (never wraps, so the 1px bottom border stays on the same
+ * line the other pane headers draw). The active tab is scrolled into view
+ * on selection. */
 .pg__rail > .tabs > .tabs__tab {
-  height: 37px;
   padding: 0 11px;
-  font-size: 13px;
 }
 
 /* Marker on the Tokens tab while a pasted user tree is the active source. */

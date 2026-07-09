@@ -273,6 +273,14 @@ export function Playground() {
   // ------------------------------------------------------------- input rail
   const [sourceTab, setSourceTab] = useState<SourceTab>('examples');
   const [activeExample, setActiveExample] = useState<string | null>(null);
+  // The rail tabs scroll horizontally (one row, never wrapping) — keep the
+  // active tab visible when the selection lands off-screen.
+  const railTabsRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    railTabsRef.current
+      ?.querySelector<HTMLElement>('.tabs__tab.is-active')
+      ?.scrollIntoView({ inline: 'nearest', block: 'nearest' });
+  }, [sourceTab]);
 
   // ---------------------------------------------------- session workspace
   const workspace = useWorkspace();
@@ -1020,7 +1028,7 @@ export function Playground() {
       <div className="pg">
       {/* ------------------------------------------------------- left rail */}
       <aside className="pg__rail">
-        <div className="tabs" role="tablist" aria-label="Input source">
+        <div className="tabs" role="tablist" aria-label="Input source" ref={railTabsRef}>
           {(
             [
               // The Workspace tab appears with the first import (and stays
