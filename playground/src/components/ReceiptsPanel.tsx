@@ -13,20 +13,30 @@ import { receiptCount } from '../receipts';
 export function ReceiptsPanel({
   receipts,
   mintedExtras,
+  embedded = false,
 }: {
   receipts: Receipts | null;
   mintedExtras?: ReactNode;
+  /** Inside the output drawer the tab already says "Receipts (N)" — the
+   *  panel keeps only the provenance line, not its own title row. */
+  embedded?: boolean;
 }) {
   return (
     <section className="receipts" aria-label="Receipts">
-      <div className="receipts__head">
-        <span className="pane__title">Receipts</span>
-        {receipts ? (
-          <span className="receipts__source">
-            {receipts.source} — {receiptCount(receipts)} entr{receiptCount(receipts) === 1 ? 'y' : 'ies'}
-          </span>
-        ) : null}
-      </div>
+      {!embedded ? (
+        <div className="receipts__head">
+          <span className="pane__title">Receipts</span>
+          {receipts ? (
+            <span className="receipts__source">
+              {receipts.source} — {receiptCount(receipts)} entr{receiptCount(receipts) === 1 ? 'y' : 'ies'}
+            </span>
+          ) : null}
+        </div>
+      ) : receipts ? (
+        <div className="receipts__head">
+          <span className="receipts__source">{receipts.source}</span>
+        </div>
+      ) : null}
       {receipts ? (
         <p className="receipts__sub">
           What the engine reported instead of guessing — every gap, note, and raw value from this

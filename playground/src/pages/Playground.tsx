@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState, type CSSProperties } from 'react';
+import { useEffect, useMemo, useRef, useState, type CSSProperties, type ReactNode } from 'react';
 import { emitters, type Contract, type EmittedFile, type SourceFileInput } from '../../../core/index.js';
 import { useRoute } from '../router';
 import { useTheme } from '../theme';
@@ -62,15 +62,18 @@ import {
 import { reportIfChunkError } from '../engine/chunk-guard';
 import { buildPreviewAtState, type PreviewPropOverrides, type PreviewSurface } from '../engine/preview';
 import type { ReceiptGroup, Receipts } from '../receipts';
+import { DEMO_SESSION_TOKEN, rememberFigmaSession } from '../engine/figma-render';
 import { CanvasFrame } from '../components/CanvasFrame';
 import { ContractEditor, type ContractEditorHandle } from '../components/ContractEditor';
 import { CopyButton } from '../components/CopyButton';
+import { FigmaGroundTruth } from '../components/FigmaGroundTruth';
+import { InfoPopover } from '../components/InfoPopover';
 import { MintAssist } from '../components/MintAssist';
 import { HighlightedCode } from '../components/HighlightedCode';
+import { OutputDrawer } from '../components/OutputDrawer';
 import { usePaneResize } from '../components/PaneResize';
-import { PreviewControls, sanitizeOverrides } from '../components/PreviewControls';
+import { PreviewControls, previewControlsFor, sanitizeOverrides } from '../components/PreviewControls';
 import { PreviewFrame } from '../components/PreviewFrame';
-import { ReceiptsPanel } from '../components/ReceiptsPanel';
 import { SpecSheet } from '../components/SpecSheet';
 
 type SourceTab = 'workspace' | 'examples' | 'describe' | 'figma' | 'code' | 'json' | 'tokens';
@@ -120,13 +123,42 @@ const wsTime = (ms: number) =>
 /** Session flag: the switch strip, once dismissed, stays gone for the session. */
 const SWITCH_STRIP_KEY = 'ds-playground.switch-strip-dismissed';
 
-/** Persisted preview-surface choice (light / dark / checker backdrop). */
+/** Persisted preview-surface choice (light / dark / checker backdrop).
+ *  The toolbar shows these as compact icon segments (label via title). */
 const PREVIEW_SURFACE_KEY = 'ds-playground.preview-surface';
 const PREVIEW_SURFACES: ReadonlyArray<readonly [PreviewSurface, string]> = [
-  ['light', 'Light'],
-  ['dark', 'Dark'],
-  ['checker', 'Checker'],
+  ['light', 'Light surface'],
+  ['dark', 'Dark surface'],
+  ['checker', 'Checker surface'],
 ];
+const SURFACE_ICONS: Record<PreviewSurface, ReactNode> = {
+  light: (
+    <svg width="12" height="12" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+      <circle cx="8" cy="8" r="3.2" stroke="currentColor" strokeWidth="1.3" />
+      <path
+        d="M8 1.2v2M8 12.8v2M1.2 8h2M12.8 8h2M3.2 3.2l1.4 1.4M11.4 11.4l1.4 1.4M12.8 3.2l-1.4 1.4M4.6 11.4l-1.4 1.4"
+        stroke="currentColor"
+        strokeWidth="1.3"
+        strokeLinecap="round"
+      />
+    </svg>
+  ),
+  dark: (
+    <svg width="12" height="12" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+      <path
+        d="M13.2 9.6A6 6 0 1 1 6.4 2.8a4.8 4.8 0 0 0 6.8 6.8Z"
+        stroke="currentColor"
+        strokeWidth="1.3"
+        strokeLinejoin="round"
+      />
+    </svg>
+  ),
+  checker: (
+    <svg width="12" height="12" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+      <path d="M2 2h4v4H2zM10 2h4v4h-4zM6 6h4v4H6zM2 10h4v4H2zM10 10h4v4h-4z" fill="currentColor" />
+    </svg>
+  ),
+};
 
 /** Persisted preview VIEW: the code side, the design side, or both. */
 type PreviewView = 'code' | 'canvas' | 'split';
@@ -720,6 +752,9 @@ export function Playground() {
     setFigmaError(null);
     try {
       const result = await importFigmaUrl(figmaUrl.trim(), figmaToken.trim());
+      // The ground-truth panel reuses the token this import just proved —
+      // session memory only, never persisted (see engine/figma-render.ts).
+      rememberFigmaSession(figmaToken.trim());
       handleImportResult(result, 'Figma REST import');
     } catch (e) {
       setFigmaError(e instanceof Error ? e.message : String(e));
@@ -733,6 +768,9 @@ export function Playground() {
     setFigmaError(null);
     try {
       const result = await importFigmaDemo({ degraded });
+      // The demo marker lets ground truth serve its recorded fixture render;
+      // a real session token always outranks it.
+      rememberFigmaSession(DEMO_SESSION_TOKEN);
       handleImportResult(
         result,
         degraded ? 'Figma REST import (demo fixture, variables 403)' : 'Figma REST import (demo fixture)',
@@ -1227,6 +1265,10 @@ export function Playground() {
       /* storage unavailable — the choice just doesn't persist */
     }
   };
+  // GROUND TRUTH: Figma's own render (images API) beside the compiled canvas.
+  // Session state only — the toggle lives on the Canvas/Split views; for
+  // contracts without a Figma anchor the panel explains itself away.
+  const [showGroundTruth, setShowGroundTruth] = useState(false);
   const [previewOverrides, setPreviewOverrides] = useState<PreviewPropOverrides>({});
   // The prop whose last toggle changed nothing visible — honest inline note.
   const [previewNoteProp, setPreviewNoteProp] = useState<string | null>(null);
@@ -1947,20 +1989,6 @@ export function Playground() {
               </>
             )}
           </div>
-          <ReceiptsPanel
-            receipts={receipts}
-            mintedExtras={
-              mintedLayer ? (
-                <MintAssist
-                  key={provenance}
-                  minted={mintedLayer}
-                  component={lastSpec.current?.contract.name ?? 'Component'}
-                  text={text}
-                  onApplyText={setText}
-                />
-              ) : undefined
-            }
-          />
         </div>
       </section>
 
@@ -1988,50 +2016,154 @@ export function Playground() {
             </button>
           </div>
         ) : null}
-        <div className="tabs" role="tablist" aria-label="Output target">
-          <button
-            type="button"
-            role="tab"
-            aria-selected={outputTab === 'preview'}
-            className={`tabs__tab${outputTab === 'preview' ? ' is-active' : ''}`}
-            onClick={() => setOutputTab('preview')}
-          >
-            Preview
-          </button>
-          {emitters.map((e) => (
+        {/* ONE toolbar row: output tabs left, view controls right (compact). */}
+        <div className="output__bar">
+          <div className="tabs output__tabs" role="tablist" aria-label="Output target">
             <button
-              key={e.name}
               type="button"
               role="tab"
-              aria-selected={outputTab === e.name}
-              title={OUTPUT_TITLES[e.name] ?? e.label}
-              className={`tabs__tab${outputTab === e.name ? ' is-active' : ''}`}
-              onClick={() => setOutputTab(e.name)}
+              aria-selected={outputTab === 'preview'}
+              className={`tabs__tab${outputTab === 'preview' ? ' is-active' : ''}`}
+              onClick={() => setOutputTab('preview')}
             >
-              {OUTPUT_LABELS[e.name] ?? e.name}
+              Preview
             </button>
-          ))}
+            {emitters.map((e) => (
+              <button
+                key={e.name}
+                type="button"
+                role="tab"
+                aria-selected={outputTab === e.name}
+                title={OUTPUT_TITLES[e.name] ?? e.label}
+                className={`tabs__tab${outputTab === e.name ? ' is-active' : ''}`}
+                onClick={() => setOutputTab(e.name)}
+              >
+                {OUTPUT_LABELS[e.name] ?? e.name}
+              </button>
+            ))}
+          </div>
+          <div className="output__bar-right">
+            {outputTab === 'preview' && previewData ? (
+              <>
+                <div className="seg" role="group" aria-label="Preview side">
+                  {PREVIEW_VIEWS.map(([v, label, hint]) => (
+                    <button
+                      key={v}
+                      type="button"
+                      className={`seg__btn${previewView === v ? ' is-active' : ''}`}
+                      aria-pressed={previewView === v}
+                      title={hint}
+                      onClick={() => changePreviewView(v)}
+                    >
+                      {label}
+                    </button>
+                  ))}
+                </div>
+                {previewView !== 'canvas' ? (
+                  <div className="seg" role="group" aria-label="Preview mode">
+                    <button
+                      type="button"
+                      className={`seg__btn${previewMode === 'single' ? ' is-active' : ''}`}
+                      aria-pressed={previewMode === 'single'}
+                      title="One instance at the props you pick (drawer controls) — rendered live by the same HTML emitter."
+                      onClick={() => setPreviewMode('single')}
+                    >
+                      Single
+                    </button>
+                    <button
+                      type="button"
+                      className={`seg__btn${previewMode === 'all' ? ' is-active' : ''}`}
+                      aria-pressed={previewMode === 'all'}
+                      title="Every variant value and boolean, one row each."
+                      onClick={() => setPreviewMode('all')}
+                    >
+                      All
+                    </button>
+                  </div>
+                ) : null}
+                {previewView !== 'canvas' ? (
+                  <div
+                    className="seg"
+                    role="group"
+                    aria-label="Preview canvas surface"
+                    title="The backdrop behind the component — independent of the app theme, like Figma's canvas. Dark also switches the token mode. (The Canvas side is always light, like Figma.)"
+                  >
+                    {PREVIEW_SURFACES.map(([s, label]) => (
+                      <button
+                        key={s}
+                        type="button"
+                        className={`seg__btn seg__btn--icon${previewSurface === s ? ' is-active' : ''}`}
+                        aria-pressed={previewSurface === s}
+                        aria-label={label}
+                        title={label}
+                        onClick={() => changePreviewSurface(s)}
+                      >
+                        {SURFACE_ICONS[s]}
+                      </button>
+                    ))}
+                  </div>
+                ) : null}
+                {previewView !== 'code' ? (
+                  <div className="seg" role="group" aria-label="Ground truth">
+                    <button
+                      type="button"
+                      className={`seg__btn${showGroundTruth ? ' is-active' : ''}`}
+                      aria-pressed={showGroundTruth}
+                      title="Figma's own render of the imported node (images API), beside the canvas compiled from the contract. For contracts without a Figma source, the panel says so."
+                      onClick={() => setShowGroundTruth((v) => !v)}
+                    >
+                      Figma render
+                    </button>
+                  </div>
+                ) : null}
+              </>
+            ) : outputTab !== 'preview' ? (
+              <>
+                <label className="output__format" title="prettier over the emitted files — lazy chunk (~1.4 MB), first run only">
+                  <input type="checkbox" checked={format} onChange={(e) => setFormat(e.target.checked)} />
+                  Format{formatting ? '…' : ''}
+                </label>
+                {outputTab === 'react-inline' ? (
+                  <InfoPopover title="How these token literals resolve">
+                    <p>
+                      Tokens resolved for <strong>{theme}</strong> mode
+                      {tokenSource.kind === 'user' ? ' — from your pasted tree' : ''}. Flip the app
+                      theme to re-resolve.
+                    </p>
+                  </InfoPopover>
+                ) : null}
+                {outputTab === 'figma-script' ? (
+                  <InfoPopover title="What to do with this script">
+                    <p>
+                      {mintedLayer && mintedLayer.count > 0
+                        ? `Includes ${mintedLayer.count} provisional variable${
+                            mintedLayer.count === 1 ? '' : 's'
+                          } (imported.*) the script creates first — rename against your real tokens. `
+                        : ''}
+                      Paste back into the source Figma file (Sync Runner plugin): builds the
+                      contract&rsquo;s version beside your original for A/B — or takes you to the
+                      existing one.
+                    </p>
+                  </InfoPopover>
+                ) : null}
+              </>
+            ) : null}
+          </div>
         </div>
 
-        {outputTab === 'preview' ? (
-          <div className="preview">
-            {stale ? (
-              <div className="preview__stale">
-                Contract invalid — showing the last valid render. Fix the named refusals to update.
-              </div>
-            ) : null}
-            {previewData ? (
-              (() => {
-                const codeBody =
-                  previewMode === 'single' ? (
-                    <>
-                      <PreviewControls
-                        contract={previewData.contract}
-                        overrides={activeOverrides}
-                        onChange={handlePreviewControl}
-                        notedProp={previewNoteProp}
-                      />
-                      {singlePreview?.ok ? (
+        <div className="output__body">
+          {outputTab === 'preview' ? (
+            <div className="preview">
+              {stale ? (
+                <div className="preview__stale">
+                  Contract invalid — showing the last valid render. Fix the named refusals to update.
+                </div>
+              ) : null}
+              {previewData ? (
+                (() => {
+                  const codeBody =
+                    previewMode === 'single' ? (
+                      singlePreview?.ok ? (
                         <iframe
                           sandbox=""
                           srcDoc={singlePreview.doc}
@@ -2039,144 +2171,62 @@ export function Playground() {
                         />
                       ) : singlePreview ? (
                         <div className="output__error">{singlePreview.error}</div>
-                      ) : null}
-                    </>
-                  ) : (
-                    <PreviewFrame
+                      ) : null
+                    ) : (
+                      <PreviewFrame
+                        contract={previewData.contract}
+                        contracts={previewData.contracts}
+                        surface={previewSurface}
+                        title={previewTarget ? 'Contract preview' : 'Contract preview (last valid)'}
+                      />
+                    );
+                  const canvasBody = (
+                    <CanvasFrame
                       contract={previewData.contract}
                       contracts={previewData.contracts}
-                      surface={previewSurface}
-                      title={previewTarget ? 'Contract preview' : 'Contract preview (last valid)'}
+                      title={previewTarget ? 'Canvas preview' : 'Canvas preview (last valid)'}
+                      cap={showGroundTruth ? 'Canvas — compiled from the contract' : 'Canvas — figma engine'}
                     />
                   );
-                const canvasBody = (
-                  <CanvasFrame
-                    contract={previewData.contract}
-                    contracts={previewData.contracts}
-                    title={previewTarget ? 'Canvas preview' : 'Canvas preview (last valid)'}
-                  />
-                );
-                return (
-                  <>
-                    <div className="preview__bar">
-                      <div className="seg" role="group" aria-label="Preview side">
-                        {PREVIEW_VIEWS.map(([v, label, hint]) => (
-                          <button
-                            key={v}
-                            type="button"
-                            className={`seg__btn${previewView === v ? ' is-active' : ''}`}
-                            aria-pressed={previewView === v}
-                            title={hint}
-                            onClick={() => changePreviewView(v)}
-                          >
-                            {label}
-                          </button>
-                        ))}
-                      </div>
-                      {previewView !== 'canvas' ? (
-                        <div className="seg" role="group" aria-label="Preview mode">
-                          <button
-                            type="button"
-                            className={`seg__btn${previewMode === 'single' ? ' is-active' : ''}`}
-                            aria-pressed={previewMode === 'single'}
-                            onClick={() => setPreviewMode('single')}
-                          >
-                            Single
-                          </button>
-                          <button
-                            type="button"
-                            className={`seg__btn${previewMode === 'all' ? ' is-active' : ''}`}
-                            aria-pressed={previewMode === 'all'}
-                            onClick={() => setPreviewMode('all')}
-                          >
-                            All variants
-                          </button>
-                        </div>
-                      ) : null}
-                      <span className="preview__bar-hint">
-                        {previewView === 'canvas'
-                          ? PREVIEW_VIEWS[1][2]
-                          : previewView === 'split'
-                            ? 'Both sides compiled from the same contract — code left, canvas right.'
-                            : previewMode === 'single'
-                              ? 'One instance at the props you pick — rendered live by the same HTML emitter.'
-                              : 'Every variant value and boolean, one row each.'}
-                      </span>
-                      {previewView !== 'canvas' ? (
-                        <div
-                          className="seg preview__surface"
-                          role="group"
-                          aria-label="Preview canvas surface"
-                          title="The backdrop behind the component — independent of the app theme, like Figma's canvas. Dark also switches the token mode. (The Canvas side is always light, like Figma.)"
-                        >
-                          {PREVIEW_SURFACES.map(([s, label]) => (
-                            <button
-                              key={s}
-                              type="button"
-                              className={`seg__btn${previewSurface === s ? ' is-active' : ''}`}
-                              aria-pressed={previewSurface === s}
-                              onClick={() => changePreviewSurface(s)}
-                            >
-                              {label}
-                            </button>
-                          ))}
-                        </div>
-                      ) : null}
+                  const groundTruthCol = showGroundTruth ? (
+                    <div className="preview__split-col preview__split-col--gt">
+                      <FigmaGroundTruth contract={previewData.contract} />
                     </div>
-                    {previewView === 'code' ? (
-                      codeBody
-                    ) : previewView === 'canvas' ? (
-                      canvasBody
-                    ) : (
+                  ) : null;
+                  if (previewView === 'code') return codeBody;
+                  if (previewView === 'canvas') {
+                    return showGroundTruth ? (
                       <div className="preview__split">
-                        <div className="preview__split-col">
-                          <div className="preview__split-cap">Code — HTML emitter</div>
-                          {codeBody}
-                        </div>
-                        <div className="preview__split-col">
-                          <div className="preview__split-cap">Canvas — figma engine</div>
-                          {canvasBody}
-                        </div>
+                        <div className="preview__split-col">{canvasBody}</div>
+                        {groundTruthCol}
                       </div>
-                    )}
-                  </>
-                );
-              })()
-            ) : neutralPreview ? (
-              <div className="pane__body hint preview__neutral">
-                No valid render yet{currentContractId ? ` for ${currentContractId}` : ''} — fix the
-                refusals to see it{demoRefusalSuffix}
-              </div>
-            ) : (
-              <div className="pane__body hint">Nothing to render yet.</div>
-            )}
-          </div>
-        ) : (
-          <>
-            <div className="output__toolbar">
-              <label>
-                <input type="checkbox" checked={format} onChange={(e) => setFormat(e.target.checked)} />
-                Format (prettier, lazy ~1.4 MB){formatting ? ' — formatting…' : ''}
-              </label>
-              {outputTab === 'react-inline' ? (
-                <span>
-                  tokens resolved for {theme} mode
-                  {tokenSource.kind === 'user' ? ' — from your pasted tree' : ''}
-                </span>
-              ) : null}
-              {outputTab === 'figma-script' ? (
-                <span>
-                  {mintedLayer && mintedLayer.count > 0
-                    ? `includes ${mintedLayer.count} provisional variable${
-                        mintedLayer.count === 1 ? '' : 's'
-                      } (imported.*) the script creates first — rename against your real tokens. `
-                    : ''}
-                  Paste back into the source Figma file (Sync Runner plugin): builds the
-                  contract&rsquo;s version beside your original for A/B — or takes you to the
-                  existing one.
-                </span>
-              ) : null}
+                    ) : (
+                      canvasBody
+                    );
+                  }
+                  return (
+                    <div className={`preview__split${showGroundTruth ? ' preview__split--3' : ''}`}>
+                      <div className="preview__split-col">
+                        <div className="preview__cap">
+                          <span>Code — HTML emitter</span>
+                        </div>
+                        {codeBody}
+                      </div>
+                      <div className="preview__split-col">{canvasBody}</div>
+                      {groundTruthCol}
+                    </div>
+                  );
+                })()
+              ) : neutralPreview ? (
+                <div className="pane__body hint preview__neutral">
+                  No valid render yet{currentContractId ? ` for ${currentContractId}` : ''} — fix the
+                  refusals to see it{demoRefusalSuffix}
+                </div>
+              ) : (
+                <div className="pane__body hint">Nothing to render yet.</div>
+              )}
             </div>
+          ) : (
             <div className="output__files">
               {!emittable ? (
                 <div className="pane__body hint">A schema-valid contract flows here.</div>
@@ -2194,19 +2244,60 @@ export function Playground() {
                 ))
               )}
             </div>
-          </>
-        )}
-        <div className="provenance">
-          Generated in your browser by the same core that ships the repo&rsquo;s{' '}
-          {contractsById.size} components — core/index.ts,{' '}
-          <span
-            title="Golden-guarded: the CLI's output from this same core is byte-compared against committed reference files on every eval run — the playground cannot drift from the shipping generator."
-            style={{ textDecoration: 'underline dotted', cursor: 'help' }}
-          >
-            golden-guarded
-          </span>
-          .
+          )}
         </div>
+
+        {/* Storybook-style bottom drawer: Controls | Receipts (N). */}
+        <OutputDrawer
+          receipts={receipts}
+          mintedExtras={
+            mintedLayer ? (
+              <MintAssist
+                key={provenance}
+                minted={mintedLayer}
+                component={lastSpec.current?.contract.name ?? 'Component'}
+                text={text}
+                onApplyText={setText}
+              />
+            ) : undefined
+          }
+          controls={
+            previewData ? (
+              previewControlsFor(previewData.contract).length > 0 ||
+              (previewData.contract.events?.length ?? 0) > 0 ? (
+                <>
+                  {outputTab !== 'preview' || previewView === 'canvas' || previewMode !== 'single' ? (
+                    <p className="dock__hint">
+                      Controls drive the Preview tab&rsquo;s Single view — values persist and apply
+                      there.
+                    </p>
+                  ) : null}
+                  <PreviewControls
+                    contract={previewData.contract}
+                    overrides={activeOverrides}
+                    onChange={handlePreviewControl}
+                    notedProp={previewNoteProp}
+                  />
+                </>
+              ) : (
+                <p className="dock__hint">This contract declares no props — nothing to control.</p>
+              )
+            ) : (
+              <p className="dock__hint">Load a contract and its prop controls appear here.</p>
+            )
+          }
+          footNote={
+            <InfoPopover title="How this output is generated">
+              <p>
+                Generated in your browser by the same core that ships the repo&rsquo;s{' '}
+                {contractsById.size} components — core/index.ts, <strong>golden-guarded</strong>:
+                the CLI&rsquo;s output from this same core is byte-compared against committed
+                reference files on every eval run, so the playground cannot drift from the
+                shipping generator.
+              </p>
+            </InfoPopover>
+          }
+        />
       </section>
       </div>
     </>

@@ -31,7 +31,7 @@ import { icons } from './data.js';
 import { activeTokens } from './token-source.js';
 
 export type CanvasPreviewResult =
-  | { ok: true; doc: string }
+  | { ok: true; doc: string; notes: string[] }
   | { ok: false; error: string };
 
 // ---------------------------------------------------------------------------
@@ -264,7 +264,9 @@ function withStateAxis(data: ComponentData): VariantSpec[] {
 }
 
 // ---------------------------------------------------------------------------
-// Fidelity notes — NAMED, shown only when the condition is on screen
+// Fidelity notes — NAMED, shown only when the condition is on screen.
+// Rendered OUTSIDE the document (the ⓘ popover on the Canvas cap), so the
+// canvas itself stays what Figma shows: the set, nothing else.
 // ---------------------------------------------------------------------------
 
 function fidelityNotes(contract: Contract, data: ComponentData, used: Set<string>): string[] {
@@ -364,17 +366,6 @@ const CANVAS_CSS = `
     font-size: 11px;
     padding: 6px 10px;
   }
-  .cv-footer {
-    margin-top: 28px;
-    border-top: 1px solid #e6e6e6;
-    padding-top: 10px;
-    font-size: 11px;
-    color: #7b7b7b;
-    max-width: 720px;
-  }
-  .cv-footer ul { margin: 6px 0 0; padding-left: 16px; }
-  .cv-footer li { margin-top: 3px; }
-  .cv-footer__det { color: #1e1e1e; font-weight: 600; }
 `;
 
 /** Figma's component-set diamond cluster, inline. */
@@ -430,6 +421,7 @@ export function buildCanvasPreview(
     const stylesheets = source.stylesheets;
     return {
       ok: true,
+      notes,
       doc: [
         '<!doctype html>',
         '<html>', // no data-theme, ever: the canvas is ALWAYS light, like Figma
@@ -440,11 +432,6 @@ export function buildCanvasPreview(
         `<div class="cv-set" role="figure" aria-label="${escapeHtml(data.setName)} component set">`,
         `<div class="cv-set__label">${SET_GLYPH}${escapeHtml(data.setName)}</div>`,
         `<div class="cv-grid">${cells}</div>`,
-        '</div>',
-        '<div class="cv-footer">',
-        `<span class="cv-footer__det">Deterministic — both sides compiled from the same contract; no AI.</span>`,
-        ` This is the sync script’s node spec (VARIANTS${(data.stateVariants ?? []).length > 0 ? ' + STATE_VARIANTS' : ''}) rendered as HTML. Fidelity notes:`,
-        `<ul>${notes.map((n) => `<li>${escapeHtml(n)}</li>`).join('')}</ul>`,
         '</div>',
         '</body></html>',
       ].join('\n'),
