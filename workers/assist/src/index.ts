@@ -1,7 +1,7 @@
 /**
  * ds-contracts-assist — the playground's agentic-assist backend.
  *
- * Anonymous visitors borrow a server-held Anthropic key for three narrow,
+ * Anonymous visitors borrow a server-held Anthropic key for four narrow,
  * tool-forced tasks. The Worker is deliberately NOT a governance bypass:
  * everything it returns is a proposal, the playground's contract schema is
  * the referee, and the Worker has zero side-effect capabilities.
