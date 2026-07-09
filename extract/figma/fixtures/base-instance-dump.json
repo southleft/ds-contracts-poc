@@ -1,0 +1,260 @@
+{
+  "_provenance": {
+    "fileKey": null,
+    "note": "HAND-CRAFTED fixture modeled on the Eventz DS Button field case (file E7oXr98i91HYQGZxA2USOQ, node 2313-42): every variant of the set is a thin wrapper around an INSTANCE of the shared base \"Button\" component, carrying componentProperties (hasEndIcon / hasStartIcon booleans + a \"Label#1:0\" TEXT property). Three axes including a true/false axis. The wrapper's literal cornerRadius exercises the unbound/mint path. Consumed by extract/figma/base-instance-check.ts."
+  },
+  "Button": {
+    "setName": "Button",
+    "type": "COMPONENT_SET",
+    "variants": [
+      {
+        "name": "variant=primary, state=default, isDisabled=false",
+        "type": "COMPONENT",
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "CENTER",
+          "counter": "CENTER",
+          "spacing": 0,
+          "padding": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "AUTO"
+        },
+        "cornerRadius": 8,
+        "children": [
+          {
+            "name": "Button",
+            "type": "INSTANCE",
+            "instanceOf": "Button",
+            "componentProperties": {
+              "hasEndIcon": false,
+              "hasStartIcon": false,
+              "Label#1:0": "Label"
+            }
+          }
+        ]
+      },
+      {
+        "name": "variant=primary, state=default, isDisabled=true",
+        "type": "COMPONENT",
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "CENTER",
+          "counter": "CENTER",
+          "spacing": 0,
+          "padding": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "AUTO"
+        },
+        "cornerRadius": 8,
+        "children": [
+          {
+            "name": "Button",
+            "type": "INSTANCE",
+            "instanceOf": "Button",
+            "componentProperties": {
+              "hasEndIcon": false,
+              "hasStartIcon": false,
+              "Label#1:0": "Label"
+            }
+          }
+        ]
+      },
+      {
+        "name": "variant=primary, state=hover, isDisabled=false",
+        "type": "COMPONENT",
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "CENTER",
+          "counter": "CENTER",
+          "spacing": 0,
+          "padding": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "AUTO"
+        },
+        "cornerRadius": 8,
+        "children": [
+          {
+            "name": "Button",
+            "type": "INSTANCE",
+            "instanceOf": "Button",
+            "componentProperties": {
+              "hasEndIcon": false,
+              "hasStartIcon": false,
+              "Label#1:0": "Label"
+            }
+          }
+        ]
+      },
+      {
+        "name": "variant=primary, state=hover, isDisabled=true",
+        "type": "COMPONENT",
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "CENTER",
+          "counter": "CENTER",
+          "spacing": 0,
+          "padding": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "AUTO"
+        },
+        "cornerRadius": 8,
+        "children": [
+          {
+            "name": "Button",
+            "type": "INSTANCE",
+            "instanceOf": "Button",
+            "componentProperties": {
+              "hasEndIcon": false,
+              "hasStartIcon": false,
+              "Label#1:0": "Label"
+            }
+          }
+        ]
+      },
+      {
+        "name": "variant=secondary, state=default, isDisabled=false",
+        "type": "COMPONENT",
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "CENTER",
+          "counter": "CENTER",
+          "spacing": 0,
+          "padding": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "AUTO"
+        },
+        "cornerRadius": 8,
+        "children": [
+          {
+            "name": "Button",
+            "type": "INSTANCE",
+            "instanceOf": "Button",
+            "componentProperties": {
+              "hasEndIcon": false,
+              "hasStartIcon": false,
+              "Label#1:0": "Label"
+            }
+          }
+        ]
+      },
+      {
+        "name": "variant=secondary, state=default, isDisabled=true",
+        "type": "COMPONENT",
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "CENTER",
+          "counter": "CENTER",
+          "spacing": 0,
+          "padding": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "AUTO"
+        },
+        "cornerRadius": 8,
+        "children": [
+          {
+            "name": "Button",
+            "type": "INSTANCE",
+            "instanceOf": "Button",
+            "componentProperties": {
+              "hasEndIcon": false,
+              "hasStartIcon": false,
+              "Label#1:0": "Label"
+            }
+          }
+        ]
+      },
+      {
+        "name": "variant=secondary, state=hover, isDisabled=false",
+        "type": "COMPONENT",
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "CENTER",
+          "counter": "CENTER",
+          "spacing": 0,
+          "padding": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "AUTO"
+        },
+        "cornerRadius": 8,
+        "children": [
+          {
+            "name": "Button",
+            "type": "INSTANCE",
+            "instanceOf": "Button",
+            "componentProperties": {
+              "hasEndIcon": false,
+              "hasStartIcon": false,
+              "Label#1:0": "Label"
+            }
+          }
+        ]
+      },
+      {
+        "name": "variant=secondary, state=hover, isDisabled=true",
+        "type": "COMPONENT",
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "CENTER",
+          "counter": "CENTER",
+          "spacing": 0,
+          "padding": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "AUTO"
+        },
+        "cornerRadius": 8,
+        "children": [
+          {
+            "name": "Button",
+            "type": "INSTANCE",
+            "instanceOf": "Button",
+            "componentProperties": {
+              "hasEndIcon": false,
+              "hasStartIcon": false,
+              "Label#1:0": "Label"
+            }
+          }
+        ]
+      }
+    ]
+  }
+}
