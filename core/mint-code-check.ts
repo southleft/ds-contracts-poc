@@ -23,12 +23,19 @@
  *
  * Node script over pure functions — the same shell/core split as mint-check.
  */
+import { readFileSync } from 'node:fs';
+import path from 'node:path';
 import {
   collectRootCustomProps,
   mintFromCss,
   type CodeMintFinding,
 } from './mint-code.js';
 import { MINT_NAMESPACE, mintedTokenCss, type MintAxis } from './mint-tokens.js';
+import { proposeFromCode } from './propose-code.js';
+import { ContractSchema, type Contract } from '../scripts/contract-schema.js';
+import { emitReact } from './emit-react.js';
+import { emitHtml } from './emit-html.js';
+import { tokenInventoryFromJson } from './tokens.js';
 
 const failures: string[] = [];
 const check = (label: string, cond: boolean) => {
@@ -214,8 +221,151 @@ check(
   result.entries.every((e) => css.includes(`--${e.ref.slice(1, -1).split('.').join('-')}: ${e.value};`)),
 );
 
+// ---------------------------------------------------------------------------
+// Wired path — proposeFromCode with mintUnbound over a BEM button whose
+// stylesheet speaks only foreign var()s + raw literals (the CBDS shape)
+// ---------------------------------------------------------------------------
+
+const wildTsx = `
+import React from "react";
+import { clsx } from "clsx";
+import styles from "./WildButton.module.css";
+
+type Variant = "primary" | "surface" | "danger";
+type Size = "small" | "medium";
+
+export type WildButtonProps = {
+  variant?: Variant;
+  size?: Size;
+  children?: React.ReactNode;
+};
+
+export const WildButton: React.FC<WildButtonProps> = ({
+  variant = "primary",
+  size = "medium",
+  children,
+}) => (
+  <button
+    className={clsx(
+      styles["wild-button"],
+      variant !== "primary" && styles[\`wild-button--\${variant}\`],
+      size !== "medium" && styles[\`wild-button--\${size}\`],
+    )}
+  >
+    {children}
+  </button>
+);
+`;
+
+const wildCss = `
+.wild-button {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--acme-spacing-100) 16px;
+  border-radius: var(--acme-radius);
+  background-color: var(--acme-bg-brand);
+  color: var(--acme-text-inverse);
+  min-height: 40px;
+
+  &:hover:not(:disabled) {
+    background-color: var(--acme-bg-brand-hover);
+  }
+}
+
+.wild-button--surface {
+  background-color: var(--acme-bg-surface);
+}
+
+.wild-button--danger {
+  background-color: var(--acme-bg-danger);
+}
+
+.wild-button--small {
+  min-height: 32px;
+}
+`;
+
+console.log('\nWired: proposeFromCode default (mint off — report-only behavior unchanged)');
+const sourceInput = { sourcePath: 'acme/WildButton.tsx', source: wildTsx, css: wildCss };
+const plain = proposeFromCode(sourceInput, { tokens: [] });
+const plainProposal = plain.proposals[0]?.proposal;
+check('no mintedTokens on the result', plainProposal?.mintedTokens === undefined);
+check('no imported.* ref anywhere', !JSON.stringify(plainProposal?.contract ?? {}).includes(`{${MINT_NAMESPACE}.`));
+check(
+  'foreign vars stay named refusals',
+  (plainProposal?.notes ?? []).some((n) => n.includes('var(--acme-bg-brand) which resolves to NO token')),
+);
+check(
+  'raw literals stay RAW VALUE report entries',
+  (plainProposal?.notes ?? []).some((n) => n.includes('RAW VALUE') && n.includes('min-height: 40px')),
+);
+
+console.log('\nWired: proposeFromCode with mintUnbound + extraCss (tokens.css)');
+const minted2 = proposeFromCode(sourceInput, { tokens: [], mintUnbound: true, extraCss: [tokensCss] });
+const proposal = minted2.proposals[0]?.proposal;
+const contract2 = proposal?.contract as Record<string, any>;
+const rootPart = contract2?.anatomy?.root;
+check('mintedTokens returned on the proposal', (proposal?.mintedTokens?.count ?? 0) > 0);
+check(
+  'variant-classed background binds the substituted ref in the CONTRACT',
+  rootPart?.tokens?.['background-color'] === '{imported.wild-button.root.background-color.{variant}}',
+);
+check(
+  'padding shorthand split and minted (padding-inline 16px)',
+  rootPart?.tokens?.['padding-inline'] === '{imported.wild-button.root.padding-inline}',
+);
+check(
+  'hover state bound to the minted state leaf',
+  rootPart?.states?.hover?.['background-color'] === '{imported.wild-button.root.hover.background-color}',
+);
+check('hover reaches the contract states list', (contract2?.states ?? []).includes('hover'));
+check(
+  'unresolvable var carried verbatim in the notes, not bound',
+  (proposal?.notes ?? []).some((n) => n.startsWith('CARRIED VERBATIM') && n.includes('var(--acme-text-inverse)')) &&
+    rootPart?.tokens?.color === undefined,
+);
+check(
+  'MINTED notes name every leaf as provisional',
+  (proposal?.mintedTokens?.entries ?? []).every((e) =>
+    (proposal?.notes ?? []).some((n) => n.includes(e.ref) && n.includes('rename against your real tokens (provisional)')),
+  ),
+);
+check(
+  'bound sites no longer report as refusals',
+  !(proposal?.notes ?? []).some((n) => n.includes('var(--acme-bg-brand) which resolves to NO token')),
+);
+
+// The minted proposal validates and GENERATES: emitReact + emitHtml run green
+// with an inventory of the repo trees + the minted tree.
+const ROOT = process.cwd();
+const read = (p: string) => JSON.parse(readFileSync(path.join(ROOT, p), 'utf8')) as Record<string, unknown>;
+let generated = true;
+let htmlCss = '';
+try {
+  const parsed: Contract = ContractSchema.parse(contract2);
+  const inventory = tokenInventoryFromJson([
+    read('tokens/primitives.tokens.json'),
+    read('tokens/semantic.tokens.json'),
+    read('tokens/modes/semantic.light.tokens.json'),
+    read('tokens/modes/semantic.dark.tokens.json'),
+    proposal?.mintedTokens?.tree ?? {},
+  ]);
+  const emitCtx = { tokens: inventory, icons: new Map<string, string>(), contracts: new Map([[parsed.id, parsed]]) };
+  emitReact(parsed, emitCtx);
+  htmlCss = emitHtml(parsed, emitCtx).css;
+} catch (e) {
+  generated = false;
+  console.error(String(e));
+}
+check('emitReact + emitHtml run green with repo + minted trees', generated);
+check(
+  'emitted css references the minted custom properties per variant',
+  htmlCss.includes('var(--imported-wild-button-root-background-color-danger)') &&
+    htmlCss.includes('var(--imported-wild-button-root-hover-background-color)'),
+);
+
 if (failures.length > 0) {
   console.error(`\n✖ ${failures.length} code-minting invariant(s) failed`);
   process.exit(1);
 }
-console.log('\n✔ all code-minting invariants hold (harvest, uniform, dedupe, variants, states, verbatim, determinism)');
+console.log('\n✔ all code-minting invariants hold (harvest, uniform, dedupe, variants, states, verbatim, wiring, generation)');

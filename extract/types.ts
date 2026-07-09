@@ -115,6 +115,11 @@ export interface ExtractedAnatomy {
   rawValues: RawValueFinding[];
   /** Named degradation notes — everything seen but not extracted. */
   notes: string[];
+  /** Structural capture of every unbindable styled declaration (raw literals
+   *  + foreign var()s, each with part/state/axis context) — the input for
+   *  OPT-IN provisional minting (core/mint-code.ts). The report channels
+   *  above are unchanged; nothing here binds unless a proposer mints. */
+  mintables?: import('../core/mint-code.js').CodeMintFinding[];
 }
 
 /** A design-side component set, from extract/figma-dump.js or the parity

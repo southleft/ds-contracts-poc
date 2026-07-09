@@ -133,4 +133,4 @@ export {
 export { proposeFromCode, type ProposeCodeCtx, type ProposeCodeResult } from './propose-code.js';
 export { extractFromSource, type SkippedComponent, type SourceFileInput } from './extract-react-tsx.js';
 export { extractAnatomy, tokenIndexFromJson, type AnatomyInput, type TokenIndex } from './extract-css-module.js';
-export { proposeContract, proposalsReport, type ProposalResult } from '../extract/propose.js';
+export { proposeContract, proposalsReport, type ProposalResult, type ProposeMintOptions } from '../extract/propose.js';

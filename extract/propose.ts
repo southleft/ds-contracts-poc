@@ -21,12 +21,26 @@
  * The sidecar report (proposals.md) lists every inference and every skip.
  */
 import { ContractSchema } from '../scripts/contract-schema.js';
+import { mintFromCss } from '../core/mint-code.js';
+import type { MintAxis, MintedEntry } from '../core/mint-tokens.js';
 import { kebab, titleCase } from './types.js';
 import type { ExtractedAnatomy, ExtractedComponent, ExtractedPart } from './types.js';
 
 export interface ProposalResult {
   contract: Record<string, unknown>;
   notes: string[];
+  /** Present only when proposeContract ran with a mint option and at least
+   *  one provisional leaf was minted — the same shape the Figma path returns
+   *  (register it as the playground's minted token layer). */
+  mintedTokens?: { tree: Record<string, unknown>; count: number; entries: MintedEntry[] };
+}
+
+/** Opt-in provisional minting for the code path: unbindable styled
+ *  declarations (raw literals + foreign var()s) become imported.* leaves.
+ *  `customProps` is the `:root` vocabulary harvested across the WHOLE fetched
+ *  CSS set (core/mint-code.ts collectRootCustomProps). */
+export interface ProposeMintOptions {
+  customProps: Map<string, string>;
 }
 
 const RESERVED = new Set(['children', 'className', 'style', 'ref', 'key', 'id']);
@@ -86,7 +100,11 @@ function anatomyNotes(anatomy: ExtractedAnatomy): string[] {
   return notes;
 }
 
-export function proposeContract(c: ExtractedComponent, prefix: string): ProposalResult {
+export function proposeContract(
+  c: ExtractedComponent,
+  prefix: string,
+  mint?: ProposeMintOptions,
+): ProposalResult {
   const notes: string[] = [];
   const props: Record<string, unknown>[] = [];
   const events: Record<string, unknown>[] = [];
@@ -201,6 +219,107 @@ export function proposeContract(c: ExtractedComponent, prefix: string): Proposal
     }
   }
 
+  // Mint pass (opt-in): every captured unbindable declaration becomes a
+  // binding to a provisional `imported.*` leaf where the values allow it —
+  // the proposal keeps the wild stylesheet's styling at literal fidelity
+  // instead of shipping naked. Runs BEFORE anatomy conversion so bindings
+  // land in the contract, and BEFORE schema validation so a bad minted ref
+  // is refused, not returned.
+  let mintedTokens: ProposalResult['mintedTokens'];
+  const mintNotes: string[] = [];
+  if (mint && anatomy?.mintables && anatomy.mintables.length > 0) {
+    const axes: MintAxis[] = c.props
+      .filter((p) => p.kind === 'enum' && p.values && p.values.length > 0)
+      .map((p) => ({ propName: p.name, values: p.values! }));
+    const minted = mintFromCss(c.name, anatomy.mintables, axes, mint.customProps);
+
+    const partByName = new Map<string, ExtractedPart>([['root', anatomy.root]]);
+    const walkParts = (p: ExtractedPart) => {
+      for (const [name, child] of Object.entries(p.parts ?? {})) {
+        if (!partByName.has(name)) partByName.set(name, child);
+        walkParts(child);
+      }
+    };
+    walkParts(anatomy.root);
+
+    const groupKey = (part: string, state: string | undefined, cssProperty: string) =>
+      [part, state ?? '', cssProperty].join(' ');
+    const boundGroups = new Set<string>();
+    for (const b of minted.bindings) {
+      const site = `${b.part}${b.state ? ` :${b.state}` : ''} ${b.cssProperty}`;
+      if (!b.ref) {
+        if (b.reason) mintNotes.push(`mint: ${site} — ${b.reason}`);
+        continue;
+      }
+      if (b.state) {
+        if (b.part !== 'root') {
+          mintNotes.push(`mint: ${site} — state bindings live on the root only; ${b.ref} not attached`);
+          continue;
+        }
+        const bucket = ((anatomy.root.states ??= {})[b.state] ??= {});
+        if (bucket[b.cssProperty] === undefined) {
+          bucket[b.cssProperty] = b.ref;
+          boundGroups.add(groupKey(b.part, b.state, b.cssProperty));
+        } else {
+          mintNotes.push(`mint: ${site} — a real token binding already covers it; ${b.ref} not attached`);
+        }
+        continue;
+      }
+      const target = partByName.get(b.part);
+      if (!target) {
+        mintNotes.push(`mint: ${site} — css part "${b.part}" has no matching extracted JSX part; ${b.ref} not attached`);
+        continue;
+      }
+      if (target.tokens?.[b.cssProperty] === undefined) {
+        target.tokens = { ...target.tokens, [b.cssProperty]: b.ref };
+        boundGroups.add(groupKey(b.part, undefined, b.cssProperty));
+      } else {
+        mintNotes.push(`mint: ${site} — a real token binding already covers it; ${b.ref} not attached`);
+      }
+    }
+
+    // A fully minted usage site is bound now — its RAW VALUE report line and
+    // foreign-var refusal note would contradict the contract; drop them in
+    // favor of the MINTED/CARRIED VERBATIM lines below (the mint-tokens
+    // unbound-filtering discipline, applied to the code path's channels).
+    const handled = (f: NonNullable<ExtractedAnatomy['mintables']>[number]) =>
+      boundGroups.has(groupKey(f.part, f.state, f.cssProperty));
+    anatomy.rawValues = anatomy.rawValues.filter(
+      (rv) =>
+        !anatomy.mintables!.some(
+          (f) => handled(f) && f.selector === rv.selector && f.cssProperty === rv.property && f.raw === rv.value,
+        ),
+    );
+    const silencedVars = new Set<string>();
+    for (const f of anatomy.mintables) {
+      const name = f.raw.match(/^var\(\s*--([A-Za-z0-9_-]+)/)?.[1];
+      if (name && handled(f)) silencedVars.add(name);
+    }
+    for (const cv of minted.carriedVerbatim) {
+      const name = cv.expression.match(/^var\(\s*--([A-Za-z0-9_-]+)/)?.[1];
+      if (name) silencedVars.add(name); // replaced by the richer CARRIED VERBATIM line
+    }
+    if (silencedVars.size > 0) {
+      anatomy.notes = anatomy.notes.filter(
+        (n) => ![...silencedVars].some((v) => n.includes(`uses var(--${v}) which resolves to NO token`)),
+      );
+    }
+
+    for (const e of minted.entries) {
+      mintNotes.push(
+        `MINTED ${e.ref} = ${e.value} — machine-named from a resolved value — rename against your real tokens (provisional); bound at: ${e.usageSites.join(', ')}`,
+      );
+    }
+    for (const cv of minted.carriedVerbatim) {
+      mintNotes.push(
+        `CARRIED VERBATIM \`${cv.selector} { ${cv.cssProperty}: ${cv.expression} }\` — ${cv.reason}; no token minted, the declaration survives only in the source`,
+      );
+    }
+    if (minted.count > 0) {
+      mintedTokens = { tree: minted.tree, count: minted.count, entries: minted.entries };
+    }
+  }
+
   let anatomyJson: Record<string, unknown> = { root: {} };
   let element = 'div';
   let role: string | undefined;
@@ -217,6 +336,7 @@ export function proposeContract(c: ExtractedComponent, prefix: string): Proposal
     states = anatomy.states;
     anatomyJson = { root: convertPart(anatomy.root, prefix, notes) };
     notes.push(...anatomyNotes(anatomy));
+    notes.push(...mintNotes);
   }
 
   const contract = {
@@ -256,7 +376,7 @@ export function proposeContract(c: ExtractedComponent, prefix: string): Proposal
     notes.unshift(`semantics.element defaulted to "div" — set the real host element`);
     notes.unshift(`anatomy is a stub — anatomy is human-owned, author it (or adopt diagnostic-only without it)`);
   }
-  return { contract, notes };
+  return { contract, notes, ...(mintedTokens ? { mintedTokens } : {}) };
 }
 
 export function proposalsReport(
