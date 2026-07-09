@@ -139,20 +139,48 @@ export function mergeOrders(sequences: string[][]): string[] {
   return result;
 }
 
+/** Sibling merge keys: same-named siblings get ordinal-tagged keys, so a
+ *  start icon and an end icon both drawn as "Icon" merge as TWO children —
+ *  merging by bare name would silently collapse them into one (field case:
+ *  Eventz Button, whose startIcon/endIcon instances share the name "Icon"). */
+const siblingKeys = (children: DumpNode[]): string[] => {
+  const counts = new Map<string, number>();
+  return children.map((c) => {
+    const n = counts.get(c.name) ?? 0;
+    counts.set(c.name, n + 1);
+    return n === 0 ? c.name : `${c.name}\u0000${n}`;
+  });
+};
+
 function mergeOcc(name: string, occ: Occ[], notes: string[], where: string): Merged {
   const types = [...new Set(occ.map((o) => o.node.type))];
   if (types.length > 1) {
     notes.push(`${where}: node type differs across variants (${types.join(', ')}) — using ${types[0]}`);
   }
-  const sequences = occ.map((o) => (o.node.children ?? []).map((c) => c.name));
+  const sequences = occ.map((o) => siblingKeys(o.node.children ?? []));
   const order = mergeOrders(sequences);
-  const children = order.map((childName) => {
+  const nameCount = new Map<string, number>();
+  for (const key of order) {
+    const childName = key.split('\u0000')[0];
+    nameCount.set(childName, (nameCount.get(childName) ?? 0) + 1);
+  }
+  const children = order.map((childKey) => {
+    const [childName, ordStr] = childKey.split('\u0000');
+    const ord = ordStr ? Number(ordStr) : 0;
     const childOcc: Occ[] = [];
     for (const o of occ) {
-      const child = (o.node.children ?? []).find((c) => c.name === childName);
+      const child = (o.node.children ?? []).filter((c) => c.name === childName)[ord];
       if (child) childOcc.push({ variant: o.variant, node: child });
     }
-    return mergeOcc(childName, childOcc, notes, `${where}/${childName}`);
+    // Duplicated sibling names need distinct merged names (they become note
+    // paths and part keys): a swap-bound duplicate takes its INSTANCE_SWAP
+    // property name ("Icon" → "startIcon"); anything else takes an ordinal.
+    let display = childName;
+    if ((nameCount.get(childName) ?? 0) > 1) {
+      const swap = [...new Set(childOcc.map((o) => o.node.propRefs?.mainComponent).filter((v) => v !== undefined))];
+      display = swap.length === 1 ? swap[0]! : ord === 0 ? childName : `${childName} ${ord + 1}`;
+    }
+    return mergeOcc(display, childOcc, notes, `${where}/${display}`);
   });
   return { name, type: types[0], occ, children };
 }
@@ -276,6 +304,9 @@ interface Ctx {
   boolProps: Array<{ name: string; property: string; default?: boolean }>;
   /** Slot parts in tree order, for the default-slot ("children") judgment. */
   slots: Array<{ part: Record<string, unknown>; property: string; optional: boolean }>;
+  /** Variant names whose base instance was flattened into the variant root —
+   *  a child absent ONLY there is a fidelity limit, not drift. */
+  flattenedVariants: Set<string>;
   mint?: MintCapture;
 }
 
@@ -628,6 +659,15 @@ function visibilityFromPresence(m: Merged, ctx: Ctx, where: string): Record<stri
       if (matches) return { prop: axis.propName, equals: camel(value) };
     }
   }
+  // Absences fully explained by base-instance-flattened variants are a
+  // declared fidelity limit (the base component's internals are not captured
+  // in those variants), not structural drift — named, but not alarmed.
+  if (ctx.totalVariants.every((v) => present.has(v) || ctx.flattenedVariants.has(v))) {
+    ctx.notes.push(
+      `${where}: absent only in base-instance-flattened variant(s), where the base component's internals are not captured — kept unconditional`,
+    );
+    return undefined;
+  }
   ctx.notes.push(
     `${where}: present in ${m.occ.length}/${ctx.totalVariants.length} variants without correlating to any axis value — kept unconditional, review`,
   );
@@ -672,6 +712,18 @@ const isWrapArtifact = (m: Merged): boolean => {
     (n.fill !== undefined || n.bound !== undefined)
   );
 };
+
+/** Anatomy part key for a merged child: identifier-safe (the React emitter
+ *  writes `styles.<key>` and `<div className={styles.<key>}>`, so a drawn
+ *  name like "Focus ring" must not leak into the key) and unique among
+ *  siblings. A name that is already a legal identifier keeps its spelling. */
+function partKey(name: string, taken: Set<string>): string {
+  const base = /^[A-Za-z][A-Za-z0-9]*$/.test(name) ? name : camel(name) || 'part';
+  let key = base;
+  for (let n = 2; taken.has(key); n++) key = `${base}${n}`;
+  taken.add(key);
+  return key;
+}
 
 /** Attach a part's tokens record — and remember it when minting, so a record
  *  whose FIRST binding arrives from the mint pass still lands on the part. */
@@ -723,9 +775,25 @@ function buildPart(
       // A swap-bound instance outside a dedicated wrapper: still a slot part,
       // just without wrapper geometry (not the generator's shape — note it).
       ctx.notes.push(`${where}: INSTANCE_SWAP-bound instance without a dedicated wrapper frame — slot proposed without layout, review`);
-      part.slot = { name: camel(swapProperty) };
-      ctx.slots.push({ part, property: swapProperty, optional: false });
-      if (visibleWhen) part.visibleWhen = visibleWhen;
+      part.slot = { name: canonicalPropName(swapProperty) };
+      const instanceOf = first(m.occ, (n) => n.instanceOf);
+      if (instanceOf && instanceOf !== 'Slot') {
+        ctx.notes.push(
+          `${where}: slot "${swapProperty}" holds a "${instanceOf}" instance as design-time content — defaultContent not proposed (dump v1 does not carry its configuration), review`,
+        );
+      }
+      // Same visibility conventions as the wrapper-frame slot path: the
+      // "Show <Property>" convention marks the slot optional; any other
+      // BOOLEAN visibility binding becomes a real boolean prop driving the
+      // part (field case: Eventz Button icons, visible → hasStartIcon /
+      // hasEndIcon). Either way the slot is conditional content, so it is
+      // never judged the DEFAULT slot.
+      const visibleRef = unifiedPropRef(m, 'visible', ctx, where);
+      const optional = visibleRef === `Show ${swapProperty}`;
+      if (optional) part.optional = true;
+      else if (visibleRef) applyVisibleBinding(part, visibleRef, ctx, where);
+      ctx.slots.push({ part, property: swapProperty, optional: optional || visibleRef !== undefined });
+      if (visibleWhen && !part.visibleWhen) part.visibleWhen = visibleWhen;
       return part;
     }
     const instanceOf = first(m.occ, (n) => n.instanceOf) ?? m.name;
@@ -734,13 +802,14 @@ function buildPart(
       // A nested instance that resolves to the set's own contract id must
       // NEVER become a component ref — the generator refuses a contract that
       // sets its own (unknown) props, and a contract cannot contain itself.
-      // Reaching here means the base-instance flattening heuristic did not
-      // promote it (proposeFromDump handles the sole-wrapped-child shape), so
-      // the part ships without a component ref and the skip is NAMED.
+      // Reaching here means the per-variant base-instance flattening did not
+      // absorb it (no componentProperties captured, or the variant carried
+      // more than one self-instance), so the part ships without a component
+      // ref and the skip is NAMED.
       const applied = first(m.occ, (n) => n.componentProperties);
       const propNames = applied ? Object.keys(applied).map((k) => k.split('#')[0]) : [];
       const reason = applied
-        ? 'flattening heuristic not met — the instance is not the sole wrapped child of every variant'
+        ? 'flattening heuristic not met — the variant carries more than one instance of the set itself'
         : 'componentProperties not captured — dump v1 stops at instances';
       ctx.notes.push(
         `${where}: nested instance of the set's own base component "${instanceOf}" — no component ref proposed (a contract cannot reference itself); props ${
@@ -788,7 +857,7 @@ function buildPart(
     const layout = invertLayout(m, false, parentMode, ctx, where);
     if (layout) part.layout = layout;
     attachTokens(ctx, part, tokens);
-    const slot: Record<string, unknown> = { name: camel(soleSwap) };
+    const slot: Record<string, unknown> = { name: canonicalPropName(soleSwap) };
     const instanceOf = first(soleChild.occ, (n) => n.instanceOf);
     if (instanceOf && instanceOf !== 'Slot') {
       ctx.notes.push(
@@ -823,9 +892,10 @@ function buildPart(
   if (visibleRef) applyVisibleBinding(part, visibleRef, ctx, where);
   const mode = m.occ[0].node.layout?.mode ?? null;
   const parts: Record<string, unknown> = {};
+  const taken = new Set<string>();
   for (const child of m.children) {
     const built = buildPart(child, mode, ctx, `${where}/${child.name}`);
-    if (built) parts[child.name] = built;
+    if (built) parts[partKey(child.name, taken)] = built;
   }
   if (Object.keys(parts).length > 0) part.parts = parts;
   if (visibleWhen) part.visibleWhen = visibleWhen;
@@ -895,51 +965,115 @@ function canonicalizeInstanceProps(
 // Base-instance flattening (field case: Eventz DS Button, node 2313-42)
 // ---------------------------------------------------------------------------
 
-/** Detects the wrapper-set pattern: every variant of the set is a thin
- *  wrapper whose SOLE child is an instance of one shared base component
- *  name-matching the set itself ("Button" variants each wrapping a "Button"
- *  instance). Called on the root's only merged child; the sole-child
- *  requirement is enforced at the call site. Confidence requires:
- *    · the instance appears in EVERY variant (same shared base throughout)
- *    · it is not swap-bound (a swap-bound instance is a slot, not a base)
- *    · componentProperties were captured on every occurrence (dump v1.1) —
- *      promotion must be grounded in observed values, never guessed.
- *  Anything less falls back to the NAMED self-reference skip in buildPart. */
-function isBaseInstance(m: Merged, ctx: Ctx): boolean {
-  if (m.type !== 'INSTANCE') return false;
-  if (m.occ.length !== ctx.totalVariants.length) return false;
-  if (m.occ.some((o) => o.node.propRefs?.mainComponent)) return false;
-  const instanceOf = first(m.occ, (n) => n.instanceOf) ?? m.name;
-  if (!isSelfInstance(instanceOf, ctx)) return false;
-  return m.occ.every((o) => o.node.componentProperties !== undefined);
+/** One flattened variant's captured base-instance facts. */
+interface BaseInstanceCapture {
+  variant: string;
+  instanceOf: string;
+  properties: Record<string, string | boolean>;
 }
 
-/** PROMOTE the base instance's captured componentProperties to the
+/** PER-VARIANT flattening, pre-merge: a variant whose children include ONE
+ *  instance of the set's own shared base component ("Button" wrapping a
+ *  "Button" instance — with or without siblings such as a focus ring) is a
+ *  wrapper artifact. The INSTANCE is the styled node: its layout and paints
+ *  replace the wrapper's, its captured componentProperties are captured for
+ *  promotion, and the instance node dissolves in place (dump v1 does not
+ *  recurse into instances, so it contributes no children). Confidence
+ *  requires the instance NOT be swap-bound (that is a slot) and
+ *  componentProperties be captured (dump v1.1) — anything less falls back to
+ *  the NAMED self-reference skip in buildPart. Mutates the (caller-cloned)
+ *  variant nodes. */
+function flattenBaseInstances(variants: DumpNode[], ctx: Ctx): BaseInstanceCapture[] {
+  const captures: BaseInstanceCapture[] = [];
+  for (const variant of variants) {
+    const kids = variant.children ?? [];
+    const selfKids = kids
+      .map((node, index) => ({ node, index }))
+      .filter(
+        ({ node }) =>
+          node.type === 'INSTANCE' &&
+          !node.propRefs?.mainComponent &&
+          isSelfInstance(node.instanceOf ?? node.name, ctx) &&
+          node.componentProperties !== undefined,
+      );
+    if (selfKids.length !== 1) {
+      // Zero: nothing to flatten. More than one: ambiguous — buildPart's
+      // self-reference guard names the skip per instance.
+      continue;
+    }
+    const { node: inst, index } = selfKids[0];
+    // The instance's own styling speaks for the variant; wrapper fields
+    // survive only where the instance carries nothing.
+    if (inst.layout) variant.layout = inst.layout;
+    if (inst.cornerRadius !== undefined) variant.cornerRadius = inst.cornerRadius;
+    if (inst.fill) variant.fill = inst.fill;
+    if (inst.stroke) {
+      variant.stroke = inst.stroke;
+      if (inst.strokeWeight !== undefined) variant.strokeWeight = inst.strokeWeight;
+    }
+    if (inst.bound) variant.bound = { ...(variant.bound ?? {}), ...inst.bound };
+    if (inst.fillWidth !== undefined) variant.fillWidth = inst.fillWidth;
+    variant.children = [...kids.slice(0, index), ...(inst.children ?? []), ...kids.slice(index + 1)];
+    captures.push({
+      variant: variant.name,
+      instanceOf: inst.instanceOf ?? inst.name,
+      properties: inst.componentProperties!,
+    });
+    ctx.flattenedVariants.add(variant.name);
+  }
+  if (captures.length > 0) {
+    const instanceOf = captures[0].instanceOf;
+    ctx.notes.push(
+      `${ctx.setName}:root: ${captures.length}/${ctx.totalVariants.length} variant(s) wrap an instance of the set's own base component "${instanceOf}" — flattened: the instance's styling and captured componentProperties speak for those variants (no self-referencing component ref; base component internals not captured — dump v1 stops at instances; anatomy reflects the wrapper)`,
+    );
+  }
+  return captures;
+}
+
+/** PROMOTE the flattened base instance's captured componentProperties to the
  *  CONTRACT'S props: booleans become boolean props bound to the base's
- *  property names, TEXT properties (the "#id"-suffixed string keys) become
- *  text props. The instance part itself is elided — its internals belong to
- *  the base component, which dump v1 does not recurse into. */
-function promoteBaseInstanceProps(m: Merged, ctx: Ctx, where: string) {
-  const instanceOf = first(m.occ, (n) => n.instanceOf) ?? m.name;
-  const at = `${where}/${m.name}`;
-  const defaults = m.occ[0].node.componentProperties ?? {};
-  for (const [key, value] of Object.entries(defaults)) {
+ *  property names (or hand an observed default to a boolean the anatomy
+ *  already discovered through a visibility binding), TEXT properties (the
+ *  "#id"-suffixed string keys) become text props. Runs AFTER the anatomy is
+ *  built so discovery through drawn structure wins and promotion only fills
+ *  the gaps. */
+function promoteBaseInstanceCaptures(captures: BaseInstanceCapture[], ctx: Ctx) {
+  if (captures.length === 0) return;
+  const instanceOf = captures[0].instanceOf;
+  const keys: string[] = [];
+  for (const c of captures) {
+    for (const key of Object.keys(c.properties)) if (!keys.includes(key)) keys.push(key);
+  }
+  for (const key of keys) {
     const property = key.split('#')[0];
     const name = canonicalPropName(property);
+    const values = captures.map((c) => c.properties[key]).filter((v) => v !== undefined);
+    const value = values[0];
+    const distinct = [...new Set(values.map((v) => String(v)))];
     if (ctx.axes.some((a) => a.property === property || a.propName === name)) {
+      // The wrapper's own axis: the pinned value names the base state the
+      // flattened variant(s) delegate to — API stays the set's axes.
       ctx.notes.push(
-        `${at}: base-instance property "${property}" not promoted — it is already one of the set's own variant axes`,
+        `base instance "${instanceOf}": property "${property}" is one of the set's own variant axes (pinned to ${distinct.join(', ')} in the flattened variant(s)) — not promoted`,
       );
       continue;
     }
-    const captured = [...new Set(m.occ.map((o) => (o.node.componentProperties ?? {})[key]).filter((v) => v !== undefined))];
-    if (captured.length > 1) {
+    if (distinct.length > 1) {
       ctx.notes.push(
-        `${at}: base-instance property "${property}" varies across variants (${captured.join(', ')}) — default taken from the default variant`,
+        `base instance "${instanceOf}": property "${property}" varies across the flattened variants (${distinct.join(', ')}) — default taken from the first`,
       );
     }
     if (typeof value === 'boolean') {
-      if (ctx.boolProps.some((b) => b.property === property)) continue;
+      const existing = ctx.boolProps.find((b) => b.property === property);
+      if (existing) {
+        if (existing.default === undefined) {
+          existing.default = value;
+          ctx.notes.push(
+            `prop \`${existing.name}\`: default ${value} adopted from the base instance "${instanceOf}" (BOOLEAN property "${property}")`,
+          );
+        }
+        continue;
+      }
       ctx.boolProps.push({ name, property, default: value });
       ctx.notes.push(
         `prop \`${name}\`: promoted from the base instance "${instanceOf}" (BOOLEAN property "${property}", default ${value})`,
@@ -947,19 +1081,21 @@ function promoteBaseInstanceProps(m: Merged, ctx: Ctx, where: string) {
     } else if (key.includes('#')) {
       // Non-variant properties carry "#id" suffixes — a suffixed string key
       // is a TEXT property with certainty.
+      if (ctx.textProps.some((t) => t.property === property)) continue;
       registerTextProp(ctx, property, value, name);
       ctx.notes.push(
         `prop \`${name}\`: promoted from the base instance "${instanceOf}" (TEXT property "${property}", default "${value}")`,
       );
+    } else if (ctx.textProps.some((t) => t.property === property)) {
+      // Already a text prop discovered through a bound text node — the
+      // capture confirms it, nothing to add.
+      continue;
     } else {
       ctx.notes.push(
-        `${at}: base-instance string property "${property}" = "${value}" not promoted — without a "#id" suffix it is indistinguishable from the base component's own VARIANT property; model it as an axis on the set if it belongs in the API`,
+        `base instance "${instanceOf}": string property "${property}" = "${value}" not promoted — without a "#id" suffix it is indistinguishable from the base component's own VARIANT property; model it as an axis on the set if it belongs in the API`,
       );
     }
   }
-  ctx.notes.push(
-    `${at}: base component internals not captured — dump v1 stops at instances; anatomy reflects the wrapper`,
-  );
 }
 
 // ---------------------------------------------------------------------------
@@ -997,6 +1133,7 @@ export function proposeFromDump(
     textProps: [],
     boolProps: [],
     slots: [],
+    flattenedVariants: new Set(),
     mint: opts.mintUnbound
       ? {
           axes: enumAxes.map((a) => ({ propName: a.propName, values: a.values.map(camel) })),
@@ -1017,9 +1154,17 @@ export function proposeFromDump(
       : undefined,
   };
 
+  // Base-instance flattening runs PRE-merge, per variant, on a private clone
+  // (a caller's dump is never mutated): each variant wrapping an instance of
+  // the set's own base component dissolves the instance in place — its
+  // styling speaks for the variant, its captured componentProperties are
+  // promoted after the anatomy is built.
+  const variants = JSON.parse(JSON.stringify(set.variants)) as DumpNode[];
+  const captures = flattenBaseInstances(variants, ctx);
+
   const merged = mergeOcc(
     'root',
-    set.variants.map((v) => ({ variant: v.name, node: v })),
+    variants.map((v) => ({ variant: v.name, node: v })),
     ctx.notes,
     `${set.setName}:root`,
   );
@@ -1036,14 +1181,7 @@ export function proposeFromDump(
   const only = merged.children.length === 1 ? merged.children[0] : undefined;
   const autoLabel =
     only && only.type === 'TEXT' && only.name === 'label' && unifiedPropRef(only, 'characters', ctx, `${where}/label`);
-  if (only && isBaseInstance(only, ctx)) {
-    // Base-instance flattening: every variant solely wraps an instance of
-    // the set's own shared base component. The instance's captured
-    // componentProperties become the CONTRACT'S props; the instance part is
-    // elided (no self-referencing component ref — the generator refuses one),
-    // and the anatomy keeps the wrapper's observable structure.
-    promoteBaseInstanceProps(only, ctx, where);
-  } else if (only && autoLabel) {
+  if (only && autoLabel) {
     const textTokens = invertTextTokens(only, ctx, `${where}/label`);
     Object.assign(rootTokens, textTokens);
     // The label's tokens hoisted — retarget its captured mint observations
@@ -1058,19 +1196,24 @@ export function proposeFromDump(
   } else {
     const mode = merged.occ[0].node.layout?.mode ?? null;
     const parts: Record<string, unknown> = {};
+    const taken = new Set<string>();
     for (const child of merged.children) {
       const built = buildPart(child, mode, ctx, `${where}/${child.name}`);
-      if (built) parts[child.name] = built;
+      if (built) parts[partKey(child.name, taken)] = built;
     }
     if (Object.keys(parts).length > 0) root.parts = parts;
   }
   attachTokens(ctx, root, rootTokens);
 
+  // Promotion from the flattened base instance(s) — after the anatomy, so
+  // structure discovered from drawn nodes wins and promotion fills the gaps.
+  promoteBaseInstanceCaptures(captures, ctx);
+
   // Default-slot judgment: the first non-optional slot in tree order is the
   // component's main content — name `children` (the code-side default slot).
   const defaultSlot = ctx.slots.find((s) => !s.optional);
   for (const s of ctx.slots) {
-    const name = s === defaultSlot ? 'children' : camel(s.property);
+    const name = s === defaultSlot ? 'children' : canonicalPropName(s.property);
     const slot = s.part.slot as Record<string, unknown>;
     slot.name = name;
     if (pascal(name) !== s.property) slot.figmaProperty = s.property;

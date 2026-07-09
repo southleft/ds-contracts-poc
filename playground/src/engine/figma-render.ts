@@ -7,11 +7,14 @@
  * the dump's _provenance + set nodeId), and the workspace entry's
  * contractText carries the anchors with it — nothing extra to store.
  *
- * Token handling: the personal access token is SESSION-ONLY state, exactly
- * like the Figma tab's field — remembered here (module memory) when an
- * import succeeds, sent to api.figma.com and nowhere else, never persisted,
- * gone on reload. When it's gone, the panel says so and asks for a
- * re-import; it never nags for a token of its own.
+ * Token handling: the personal access token is SESSION-ONLY state by
+ * default, exactly like the Figma tab's field — remembered here (module
+ * memory) when an import succeeds, sent to api.figma.com and nowhere else,
+ * gone on reload. The one exception is the visitor's own opt-in: a token
+ * remembered via "Remember on this device" (engine/remembered-tokens.ts,
+ * localStorage) stands in when the session has none. When neither exists,
+ * the panel says so and asks for a re-import; it never nags for a token of
+ * its own.
  *
  * CORS: the images API answers JSON with a short-lived S3 URL; the PNG
  * itself loads via a plain <img src>, which needs no CORS grant.
@@ -23,6 +26,7 @@
  * identical semantics, fixture transport, named as such.
  */
 import { FIGMA_API_BASE } from '../../../extract/figma/rest/fetch.js';
+import { FIGMA_TOKEN_STORAGE_KEY, readRememberedToken } from './remembered-tokens.js';
 import demoRenderUrl from './fixtures/badge.figma-render.png';
 
 /** The marker the demo import remembers instead of a real token. */
@@ -46,7 +50,12 @@ export function rememberFigmaSession(token: string): void {
 }
 
 export function figmaSessionToken(): string | null {
-  return sessionToken;
+  // A token remembered on this device (opt-in "Remember on this device",
+  // engine/remembered-tokens.ts) stands in when the session has none — so
+  // ground truth works across reloads for visitors who opted in. A live
+  // session token (a real import this session) still outranks it.
+  if (sessionToken && sessionToken !== DEMO_SESSION_TOKEN) return sessionToken;
+  return readRememberedToken(FIGMA_TOKEN_STORAGE_KEY) ?? sessionToken;
 }
 
 // ---------------------------------------------------------------------------

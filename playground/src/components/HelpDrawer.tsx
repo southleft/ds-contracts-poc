@@ -35,7 +35,10 @@ export function HelpDrawer({ open, onClose }: { open: boolean; onClose: () => vo
             <h3 className="drawer__section-title">Coming from design</h3>
             <p>
               Open the <b>Figma</b> tab and paste a figma.com component URL + personal access
-              token. The token stays in your browser, sent only to api.figma.com. When the plan
+              token. The token stays in your browser, sent only to api.figma.com — session-only by
+              default; the &ldquo;Remember on this device&rdquo; checkbox (and the matching one on
+              the Describe tab&rsquo;s Anthropic key) opts a secret into this browser&rsquo;s
+              localStorage ONLY, until you clear it from the same field. When the plan
               withholds variable names, resolved values are minted as provisional{' '}
               <code>imported.*</code> tokens — the preview stays styled, the receipts list every
               mint, and &lsquo;Suggest semantic names (AI)&rsquo; proposes renames you apply one

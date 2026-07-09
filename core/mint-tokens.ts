@@ -28,9 +28,17 @@
  *              `imported.<component>.<part>.<css-property>.<axisValue>` —
  *              and the binding is the substituted ref
  *              `{imported.<component>.<part>.<css-property>.{<axisProp>}}`
- *              (the existing enum-substitution machinery renders it). A
- *              difference that does NOT correlate with an axis mints
- *              nothing: the binding stays null with a named reason.
+ *              (the existing enum-substitution machinery renders it). When no
+ *              single axis fits but a PAIR of enum axes does (field case:
+ *              Eventz Button background = f(variant, state); every value
+ *              combination covered, one value per combination), a leaf is
+ *              minted per combination —
+ *              `….<css-property>.<axisAValue>.<axisBValue>` — and the binding
+ *              substitutes both axes:
+ *              `{….<css-property>.{<axisA>}.{<axisB>}}` (root tokens only in
+ *              the emitters; two placeholders max). A difference that does
+ *              NOT correlate with an axis or axis pair mints nothing: the
+ *              binding stays null with a named reason.
  *
  *   UNITS      colors are '#rrggbb' ($type color); numbers from px-like
  *              canvas fields (padding / radius / spacing / size / fontSize)
@@ -149,7 +157,12 @@ const sharedName = (kind: 'color' | 'px', value: string | number): string =>
 type Classified =
   | { kind: 'uniform'; value: string | number }
   | { kind: 'variant'; axis: MintAxis; byValue: Map<string, string | number> }
+  | { kind: 'variant2'; axes: [MintAxis, MintAxis]; byValue: Map<string, string | number> }
   | { kind: 'none'; reason: string };
+
+/** Key for a two-axis value combination — '.'-joined because the leaf path
+ *  appends it verbatim ('primary.hover' under the group base). */
+const pairKey = (a: string, b: string) => `${a}.${b}`;
 
 function classify(obs: MintObservation, axes: MintAxis[]): Classified {
   if (obs.occurrences.length === 0) return { kind: 'none', reason: 'no occurrences observed — nothing minted' };
@@ -172,9 +185,40 @@ function classify(obs: MintObservation, axes: MintAxis[]): Classified {
       return { kind: 'variant', axis, byValue };
     }
   }
+  // Two-axis correlation — ROOT tokens only (the emitters render a
+  // two-placeholder ref as compound enum classes on the root; nested parts
+  // support a single substitution, so a nested two-axis value stays a named
+  // refusal). Axis order = discovery order, deterministic; every combination
+  // of the two axes' values must be observed with a single value — the
+  // emitters expand a two-placeholder root ref over the full cartesian.
+  if (obs.part !== '') {
+    return {
+      kind: 'none',
+      reason: 'resolved values differ across variants without correlating to any variant axis — nothing minted; bind manually',
+    };
+  }
+  for (let i = 0; i < axes.length; i++) {
+    for (let j = i + 1; j < axes.length; j++) {
+      const [a, b] = [axes[i], axes[j]];
+      const byValue = new Map<string, string | number>();
+      let fits = true;
+      for (const o of obs.occurrences) {
+        const va = o.axisValues[a.propName];
+        const vb = o.axisValues[b.propName];
+        if (va === undefined || vb === undefined) { fits = false; break; }
+        const key = pairKey(va, vb);
+        const seen = byValue.get(key);
+        if (seen !== undefined && seen !== o.value) { fits = false; break; }
+        byValue.set(key, o.value);
+      }
+      if (fits && a.values.every((va) => b.values.every((vb) => byValue.has(pairKey(va, vb))))) {
+        return { kind: 'variant2', axes: [a, b], byValue };
+      }
+    }
+  }
   return {
     kind: 'none',
-    reason: 'resolved values differ across variants without correlating to any variant axis — nothing minted; bind manually',
+    reason: 'resolved values differ across variants without correlating to any variant axis (or axis pair) — nothing minted; bind manually',
   };
 }
 
@@ -243,26 +287,30 @@ export function mintTokens(
       const path = claim(wanted, obs.kind, c.value, site);
       return { nodePath: obs.nodePath, cssProperty: obs.cssProperty, ref: `{${path}}` };
     }
-    // Per-variant: one leaf per axis value under a common base. The base must
-    // be free (or value-compatible) for EVERY axis value — probe suffixes as
-    // a group so the substituted ref stays a real tree prefix.
+    // Per-variant (one or two axes): one leaf per axis value (or value
+    // combination) under a common base. The base must be free (or value-
+    // compatible) for EVERY key — probe suffixes as a group so the
+    // substituted ref stays a real tree prefix.
+    const axisProps = c.kind === 'variant' ? [c.axis.propName] : c.axes.map((a) => a.propName);
+    const siteSuffix = (key: string) =>
+      key.split('.').map((v, i) => `${axisProps[i]}=${v}`).join(', ');
     for (let n = 1; ; n++) {
       const groupBase = n === 1 ? base : `${base}-${n}`;
       const compatible =
         !leaves.has(groupBase) &&
-        [...c.byValue.entries()].every(([axisValue, value]) => {
-          const existing = leaves.get(`${groupBase}.${axisValue}`);
+        [...c.byValue.entries()].every(([key, value]) => {
+          const existing = leaves.get(`${groupBase}.${key}`);
           if (existing !== undefined) return existing.value === formatValue(obs.kind, value);
-          return !hasDescendants(`${groupBase}.${axisValue}`);
+          return !hasDescendants(`${groupBase}.${key}`);
         });
       if (!compatible) continue;
-      for (const [axisValue, value] of c.byValue) {
-        claim(`${groupBase}.${axisValue}`, obs.kind, value, `${site} (${c.axis.propName}=${axisValue})`);
+      for (const [key, value] of c.byValue) {
+        claim(`${groupBase}.${key}`, obs.kind, value, `${site} (${siteSuffix(key)})`);
       }
       return {
         nodePath: obs.nodePath,
         cssProperty: obs.cssProperty,
-        ref: `{${groupBase}.{${c.axis.propName}}}`,
+        ref: `{${groupBase}.${axisProps.map((p) => `{${p}}`).join('.')}}`,
       };
     }
   });

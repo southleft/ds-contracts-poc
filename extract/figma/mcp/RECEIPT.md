@@ -67,10 +67,10 @@ Fixtures in `extract/figma/mcp/fixtures/` are RECORDED LIVE responses (Figma des
 
 - `[paint-unsupported]` Alert:variant=success `fill` — first visible paint is GRADIENT_LINEAR, not SOLID — dump v1 carries solid paints only; paint omitted
 
-### Proposal notes (review line items, 11)
+### Proposal notes (review line items, 14)
 
 - semantics.element defaulted to "div" — element/role/ARIA are not drawn on the canvas; set the real host element
-- Alert:root/container: visibility bound to BOOLEAN "hasIcon" — proposed as prop `hasicon` (default not recoverable from dump v1, review)
+- Alert:root/container: visibility bound to BOOLEAN "hasIcon" — proposed as prop `hasIcon` (default not recoverable from dump v1, review)
 - Alert:root/container/Icon: nested instance of "check circle" has no known contract — component ref proposed as "ds.check-circle", review
 - Alert:root/container/Icon: fixed prop values of the nested "check circle" instance are not captured in dump v1 — declared fidelity limit, author them if the instance is configured
 - Alert:root/horizontal stack itemSpacing: variable name "spacing/0․5" contains characters outside the token-ref grammar ([a-z0-9.-]) — binding not proposed; rename the variable or map it manually
@@ -78,6 +78,9 @@ Fixtures in `extract/figma/mcp/fixtures/` are RECORDED LIVE responses (Figma des
 - Alert:root/horizontal stack/horizontal stack/Description: rides text style "body/sm" which is not a token-derived style — typography not proposed
 - Alert:root/horizontal stack/Text link: nested instance of "Text link" has no known contract — component ref proposed as "ds.text-link", review
 - Alert:root/horizontal stack/Text link: fixed props of "Text link" canonicalized by spelling (dump v1.1) — verify against the child contract's bindings
+- Alert:root/container 2: visibility bound to BOOLEAN "isDismissible" — proposed as prop `isDismissible` (default not recoverable from dump v1, review)
+- Alert:root/container 2/Icon: nested instance of "close" has no known contract — component ref proposed as "ds.close", review
+- Alert:root/container 2/Icon: fixed prop values of the nested "close" instance are not captured in dump v1 — declared fidelity limit, author them if the instance is configured
 - MINTED {imported.alert.horizontal-stack-horizontal-stack-title.font-size} = 16px — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Alert:root/horizontal stack/horizontal stack/Title font-size
 - MINTED {imported.alert.horizontal-stack-horizontal-stack-description.font-size} = 14px — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Alert:root/horizontal stack/horizontal stack/Description font-size
 
