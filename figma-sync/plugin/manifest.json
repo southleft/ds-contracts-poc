@@ -13,8 +13,7 @@
     ],
     "devAllowedDomains": [
       "http://localhost:8765",
-      "http://localhost:8787",
-      "http://127.0.0.1:8787"
+      "http://localhost:8787"
     ],
     "reasoning": "Send to Playground POSTs the read-only component dump to the playground's pairing bridge (the workers.dev origin). Dev-only: the local runner fetches generated figma-sync scripts from npm run figma:serve (port 8765), and 8787 is wrangler dev for testing the bridge locally."
   }
