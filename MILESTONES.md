@@ -483,6 +483,31 @@ plan. Live contrast: the same import = 0 `variable-unresolved` via the
 bridge vs 50 via degraded REST. 45/45 worker tests; e2e proven without
 Figma (simulated plugin POST → playground imports real token bindings).
 
+## 2026-07-10 — The chain closes: his send, zero refusals, his tokens rendering
+
+The owner's sixth field test walked the last unbuilt link. His plugin send
+arrived semantically right (element button, states promoted, real token
+names bound) — and the referee refused all nine of HIS names because it
+knew only the repo corpus. Three fixes closed the chain: dump v1.4 carries
+each bound variable's **resolved value** (`_variables`), and the playground
+registers captured variables as an import-scoped token layer (repo tokens
+win collisions, by name; the whole layer receipted, persisted per workspace
+entry). The padding/height drop was root-caused honestly — the owner's
+state-variant hypothesis was disproven by replay; the true cause was
+name-level-only substitution in `unifyRefs` (`spacing.200` can't spell
+"large") — fixed with value-level correlation over one enum axis
+(injectivity not required) carried as schema-v10 `tokensByProp` on every
+surface. Literal min/max sizing carries (his 44px tap target renders;
+the degradation retired). Receipt: `extract:figma:cbds:bridge:check`
+(60 checks) — ZERO refusals where he saw nine (the refusal reproduced as a
+control), background #0e61ba from HIS `{bg.brand.default}`, hover/active/
+disabled/focus from his state tokens, padding-inline 16/12px and heights
+48/40/32px per size from `{spacing.*}`/`{component-size.*}`, min-height 44,
+a focusable `<button>` — verified live in the built playground through the
+bridge seam. **72/72.** The import frontier is now FROZEN by decision:
+field fixtures are the standing acceptance suite; the next deliverable is
+the confidence artifact, not features.
+
 ---
 
 **Standing scoreboard** (updated with each milestone):
