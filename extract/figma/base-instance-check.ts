@@ -34,9 +34,10 @@
  *                    by their INSTANCE_SWAP properties (startIcon/endIcon),
  *                    visibility bindings become boolean props + visibleWhen,
  *                    part keys are identifier-safe ("Focus ring" → focusRing)
- *   4. STYLES        the minted layer lands and binds — including the root
- *                    background, a function of BOTH the variant and state
- *                    axes ({imported.button.root.background-color.{variant}.{state}})
+ *   4. STYLES        the minted layer lands and binds — the root background
+ *                    per variant ({imported.button.root.background-color.{variant}})
+ *                    with the state axis PROMOTED into contract states whose
+ *                    hover/active overrides substitute {variant}
  *   5. GENERATION    emitReact + emitHtml run green with the minted layer
  *   6. NOTES         every promotion, flatten, and fidelity limit is named
  *   7. FALLBACK      without componentProperties (dump v1) the skip is
@@ -132,8 +133,12 @@ check(
   JSON.stringify(rByName.get('variant')?.type) === JSON.stringify({ enum: ['primary', 'knockout', 'secondary', 'bare'] }),
 );
 check(
-  'axis `state` proposed as an enum [default, hover, active, focus]',
-  JSON.stringify(rByName.get('state')?.type) === JSON.stringify({ enum: ['default', 'hover', 'active', 'focus'] }),
+  'state axis PROMOTED — no `state` prop ships in the API',
+  rByName.get('state') === undefined,
+);
+check(
+  'contract states [hover, active, focus-visible] declared with figmaStatePreviews',
+  JSON.stringify(rc.states) === JSON.stringify(['hover', 'active', 'focus-visible']) && rc.figmaStatePreviews === true,
 );
 const rDisabled = rByName.get('isDisabled');
 check(
@@ -167,7 +172,7 @@ check(
   'text prop `text` proposed: default "Label", figma TEXT property "text"',
   rText !== undefined && rText.type === 'text' && rText.default === 'Label' && rText.bindings.figma.kind === 'TEXT',
 );
-check('no extra props invented (3 axes + text + 2 icon booleans)', rProps.length === 6);
+check('no extra props invented (2 axes + text + 2 icon booleans; state promoted away)', rProps.length === 5);
 
 // 5. Anatomy: the same-named "Icon" siblings survive as SEPARATE slot parts
 //    named by their swap properties, each visible when its boolean is set;
@@ -181,19 +186,27 @@ check(
   rParts.endIcon?.slot?.name === 'endIcon' && rParts.endIcon?.visibleWhen?.prop === 'hasEndIcon',
 );
 check('Label part binds content to the `text` prop', rParts.Label?.content?.prop === 'text');
+const rStates = (rc.anatomy as J).root.states ?? {};
 check(
-  'Focus ring → part key "focusRing" (identifier-safe), visible when state=focus',
-  rParts.focusRing !== undefined &&
-    rParts.focusRing.visibleWhen?.prop === 'state' &&
-    rParts.focusRing.visibleWhen?.equals === 'focus',
+  'Focus ring (drawn only in the focus state) inverted to focus-visible OUTLINE overrides',
+  rStates['focus-visible']?.['outline-color'] === '{imported.button.state-focus-visible.outline-color}' &&
+    rStates['focus-visible']?.['outline-width'] === '{imported.button.state-focus-visible.outline-width}' &&
+    rParts.focusRing === undefined,
 );
 
 // 6. Styles LAND: the minted layer binds the wrapper's resolved literals —
-//    including the root background, a function of BOTH variant and state.
+//    the base background per variant; the state dimension of the old
+//    per-(variant×state) capture now lives in contract `states`, whose
+//    hover/active overrides substitute {variant}.
 const rRootTokens = (rc.anatomy as J).root.tokens ?? {};
 check(
-  'root background bound to the two-axis minted ref {imported.button.root.background-color.{variant}.{state}}',
-  rRootTokens['background-color'] === '{imported.button.root.background-color.{variant}.{state}}',
+  'root background bound per variant ({imported.button.root.background-color.{variant}})',
+  rRootTokens['background-color'] === '{imported.button.root.background-color.{variant}}',
+);
+check(
+  'hover/active state overrides substitute {variant} (per-(variant×state) capture, promoted)',
+  rStates.hover?.['background-color'] === '{imported.button.state-hover.background-color.{variant}}' &&
+    rStates.active?.['background-color'] === '{imported.button.state-active.background-color.{variant}}',
 );
 for (const [prop, ref] of [
   ['padding-inline', '{imported.button.root.padding-inline}'],
@@ -205,20 +218,21 @@ for (const [prop, ref] of [
   check(`root ${prop} bound to ${ref}`, rRootTokens[prop] === ref);
 }
 check(
-  'label color bound per variant, focus ring styled',
-  rParts.Label?.tokens?.color === '{imported.button.label.color.{variant}}' &&
-    rParts.focusRing?.tokens?.['border-color'] === '{imported.button.focus-ring.border-color}',
+  'label color bound per variant',
+  rParts.Label?.tokens?.color === '{imported.button.label.color.{variant}}',
 );
-check(`minted layer is not empty (${real.mintedTokens?.count ?? 0} leaves ≥ 30)`, (real.mintedTokens?.count ?? 0) >= 30);
+check(`minted layer is not empty (${real.mintedTokens?.count ?? 0} leaves ≥ 25)`, (real.mintedTokens?.count ?? 0) >= 25);
 check(
   'the ONE honest refusal survives: root stroke (absent on knockout/bare) stays a NAMED unbound entry',
   real.unbound.length === 1 && real.unbound[0].property === 'stroke',
 );
 
-// 7. Flatten + promotion notes are NAMED.
+// 7. Flatten + promotion notes are NAMED. (The 4 wrapped variants are all
+//    state=focus, isDisabled=true — they live in the promoted focus group
+//    now, so the flatten receipt is the state-group note.)
 check(
-  'flatten note names the 4/24 wrapped variants and the fidelity limit',
-  real.notes.some((n) => n.includes("4/24 variant(s) wrap an instance of the set's own base component") && n.includes('dump v1 stops at instances')),
+  'flatten note names the 4 wrapped state-axis variants and the fill-only rule',
+  real.notes.some((n) => n.includes("4 state-axis variant(s) wrapped an instance of the set's own base component") && n.includes('FILL defaults')),
 );
 check(
   'boolean defaults adopted from the base instance are named',
@@ -227,17 +241,18 @@ check(
   ),
 );
 
-// 8. Generation: both emitters green; the two-axis binding renders as
-//    compound enum classes referencing the minted custom properties.
+// 8. Generation: both emitters green; the promoted state overrides render as
+//    REAL pseudo-class rules per variant, referencing the minted custom
+//    properties — the preview actually hovers.
 const rCss = generates('real Eventz proposal', real);
 check(
-  'React CSS renders the compound two-axis rule (.variant-primary.state-hover)',
-  rCss.tsxCss.includes('.variant-primary.state-hover') &&
-    rCss.tsxCss.includes('var(--imported-button-root-background-color-primary-hover)'),
+  'React CSS renders the per-variant hover rule (.variant-primary:hover:not(:disabled))',
+  rCss.tsxCss.includes('.variant-primary:hover:not(:disabled)') &&
+    rCss.tsxCss.includes('var(--imported-button-state-hover-background-color-primary)'),
 );
 check(
-  'HTML CSS renders the compound two-axis rule (.button--variant-primary.button--state-hover)',
-  rCss.htmlCss.includes('.button--variant-primary.button--state-hover'),
+  'HTML CSS renders the per-variant hover rule (.button--variant-primary:hover:not(:disabled))',
+  rCss.htmlCss.includes('.button--variant-primary:hover:not(:disabled)'),
 );
 
 // Classic pass (no minting): the proposal still parses and generates; the
@@ -297,15 +312,16 @@ check(
   JSON.stringify(byName.get('variant')?.type) === JSON.stringify({ enum: ['primary', 'secondary'] }),
 );
 check(
-  'axis `state` proposed as an enum [default, hover]',
-  JSON.stringify(byName.get('state')?.type) === JSON.stringify({ enum: ['default', 'hover'] }),
+  'state axis PROMOTED away (no `state` prop) with the no-overrides receipt named',
+  byName.get('state') === undefined &&
+    flat.notes.some((n) => n.includes('state "hover": promoted from the axis but no root override was recoverable')),
 );
 const isDisabled = byName.get('isDisabled');
 check(
   'axis `isDisabled` keeps its camelCase spelling and is a boolean (true/false axis)',
   isDisabled !== undefined && isDisabled.type === 'boolean' && isDisabled.bindings.figma.property === 'isDisabled',
 );
-check('no extra props invented', props.length === 6);
+check('no extra props invented', props.length === 5);
 
 // 5. Promotion + fidelity notes are NAMED.
 check(
@@ -348,8 +364,8 @@ const fallbackA = proposeFromDump(v1, { ...opts, mintUnbound: true });
 const aContract = fallbackA.contract as J;
 check('still no component ref (self-reference guard holds without flattening)', componentRefs(aContract.anatomy as J).length === 0);
 check(
-  'nothing promoted — props are the axes alone',
-  (aContract.props as J[]).length === 3 && !(aContract.props as J[]).some((p) => ['hasEndIcon', 'hasStartIcon', 'label'].includes(p.name)),
+  'nothing promoted — props are the axes alone (state axis promoted away, not a prop)',
+  (aContract.props as J[]).length === 2 && !(aContract.props as J[]).some((p) => ['hasEndIcon', 'hasStartIcon', 'label', 'state'].includes(p.name)),
 );
 check(
   "NAMED skip: nested instance of the set's own base component, props not extracted, reason given",

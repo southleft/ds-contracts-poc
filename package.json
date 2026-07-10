@@ -30,6 +30,7 @@
     "extract:figma": "tsx extract/figma/propose.ts",
     "extract:figma:roundtrip": "tsx extract/figma/roundtrip.ts",
     "extract:figma:base:check": "tsx extract/figma/base-instance-check.ts",
+    "extract:figma:cbds:check": "tsx extract/figma/cbds-check.ts",
     "extract:figma:rest": "tsx extract/figma/rest/cli.ts",
     "extract:figma:rest:roundtrip": "tsx extract/figma/rest/roundtrip-rest.ts",
     "extract:figma:mcp": "tsx extract/figma/mcp/cli.ts",
