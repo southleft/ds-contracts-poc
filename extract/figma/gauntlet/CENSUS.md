@@ -15,7 +15,7 @@ Every component set in the owner's kit replayed through the full deterministic r
 | plain COMPONENTs (icon-class, single variant) | 1542 | 0 | 100.0% |
 | **real COMPONENT_SETs (variant axes)** | 76 | 0 | **100.0%** |
 
-CLEAN = proposed, zero referee violations, all 4 surfaces emit. The whole-kit number is icon-inflated: 95.3% of the kit is single-variant COMPONENTs. The honest capability number is the COMPONENT_SET row — the failures concentrate exactly in the owner's real composites (Menu, Card-Image, Avatar group, Breadcrumb, Dialog…).
+CLEAN = proposed, zero referee violations, all 4 surfaces emit. The whole-kit number is icon-inflated: 95.3% of the kit is single-variant COMPONENTs. The honest capability number is the COMPONENT_SET row — the owner's real composites (Menu, Card-Image, Avatar group, Breadcrumb, Dialog…), where the failures used to concentrate, are clean too.
 
 **Refusal-free ≠ pixel-right.** "Clean" is qualified by the facts-carried metric: across the kit the proposals carry **3234 token-bound style facts** (median 1 per proposed set — icons bind one fill; median 14 per COMPONENT_SET), of which 863 are minted provisional (`imported.*` — literal fidelity, machine names), while **5252 named notes**, **23 unbound leftovers**, and **3316 capture degradations** name facts the pipeline read but did not carry. Per-set numbers ride census.json.
 
@@ -24,6 +24,7 @@ CLEAN = proposed, zero referee violations, all 4 surfaces emit. The whole-kit nu
 ## Failure classes, ranked by set frequency
 
 _None — every set is clean._
+
 ## Fixed classes (census class-fix batch) — gone from the ranking
 
 Each fix is replayable offline against the committed class fixture (`fixtures/<class>-<set>.dump.json`) via `tsx extract/figma/gauntlet/class-fix-check.ts`, and the fourth guard rides along: emit-figma-script now calls validateContract, so an invalid contract refuses BY NAME on the canvas surface like the other three emitters.
