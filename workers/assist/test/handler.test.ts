@@ -499,6 +499,68 @@ test('fix-contract: a flat contract (model omits the wrapper) is salvaged', asyn
   assert.deepEqual(((await res.json()) as { contract: unknown }).contract, FIXED_CONTRACT);
 });
 
+// --- removal guardrails (owner field case: an AI round "fixed" duplicate part
+// --- names by DELETING parts — the rendered Dialog lost its close icon and
+// --- action buttons; legal-but-lossy). The prompt forbids removal-as-fix and
+// --- the tool carries a machine-readable `removals` declaration channel.
+
+test('fix-contract: the system prompt forbids removal-as-fix and demands declared removals', async () => {
+  const { fetchImpl, calls } = mockAnthropic({ propose_contract_fix: { contract: FIXED_CONTRACT } });
+  await handleRequest(req('/v1/assist/fix-contract', FIX_CONTRACT_BODY), makeEnv(), deps(fetchImpl));
+  const system = String(calls[0].body.system);
+  assert.match(system, /NEVER remove anatomy parts, component refs, slots, props, or events/);
+  assert.match(system, /deletion is not a fix/);
+  assert.match(system, /RENAMING/);
+  assert.match(system, /DECLARE every removed thing in the `removals` field/);
+  assert.match(system, /undeclared loss/);
+  assert.match(system, /removals: \[\]/);
+});
+
+test('fix-contract: the forced tool schema carries the removals declaration channel', async () => {
+  const { fetchImpl, calls } = mockAnthropic({ propose_contract_fix: { contract: FIXED_CONTRACT } });
+  await handleRequest(req('/v1/assist/fix-contract', FIX_CONTRACT_BODY), makeEnv(), deps(fetchImpl));
+  const tool = (calls[0].body.tools as Array<Record<string, unknown>>)[0];
+  const schema = tool.input_schema as {
+    required: string[];
+    properties: { removals?: { items?: { required?: string[]; properties?: { kind?: { enum?: string[] } } } } };
+  };
+  assert.ok(schema.required.includes('removals'), 'removals is a required top-level key');
+  const items = schema.properties.removals?.items;
+  assert.deepEqual(items?.required, ['kind', 'path', 'reason']);
+  assert.ok(items?.properties?.kind?.enum?.includes('part'));
+  assert.ok(items?.properties?.kind?.enum?.includes('component-ref'));
+  assert.ok(items?.properties?.kind?.enum?.includes('slot'));
+  assert.ok(items?.properties?.kind?.enum?.includes('prop'));
+});
+
+test('fix-contract: declared removals pass through shape-checked — junk dropped, unknown kind folds to "other"', async () => {
+  const { fetchImpl } = mockAnthropic({
+    propose_contract_fix: {
+      contract: FIXED_CONTRACT,
+      removals: [
+        { kind: 'part', path: 'root/Actions/buttonBrandPrimary', reason: 'refusal named it unresolvable' },
+        { kind: 'something-weird', path: 'root/scrollBar' },
+        { reason: 'no path — dropped' },
+        'not even an object',
+      ],
+    },
+  });
+  const res = await handleRequest(req('/v1/assist/fix-contract', FIX_CONTRACT_BODY), makeEnv(), deps(fetchImpl));
+  assert.equal(res.status, 200);
+  const body = (await res.json()) as { removals: unknown };
+  assert.deepEqual(body.removals, [
+    { kind: 'part', path: 'root/Actions/buttonBrandPrimary', reason: 'refusal named it unresolvable' },
+    { kind: 'other', path: 'root/scrollBar', reason: '' },
+  ]);
+});
+
+test('fix-contract: a response without removals answers an EMPTY array — never invented, never undefined', async () => {
+  const { fetchImpl } = mockAnthropic({ propose_contract_fix: { contract: FIXED_CONTRACT } });
+  const res = await handleRequest(req('/v1/assist/fix-contract', FIX_CONTRACT_BODY), makeEnv(), deps(fetchImpl));
+  assert.equal(res.status, 200);
+  assert.deepEqual(((await res.json()) as { removals: unknown }).removals, []);
+});
+
 test('fix-contract: every input violation is refused by name; the oversized body is a 413', async () => {
   const { fetchImpl, calls } = mockAnthropic({ propose_contract_fix: { contract: FIXED_CONTRACT } });
   const env = makeEnv();

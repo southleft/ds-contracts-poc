@@ -33,7 +33,12 @@ const TSX = path.join(SCRATCH, 'node_modules', '.bin', 'tsx');
 function resetScratch() {
   rmSync(SCRATCH, { recursive: true, force: true });
   mkdirSync(SCRATCH, { recursive: true });
-  for (const dir of ['contracts', 'tokens', 'scripts', 'core', 'parity', 'src', 'catalog', 'context', 'assets', 'extract']) {
+  // playground rides along READ-ONLY: the canvas-box-parity receipt pins the
+  // canvas renderer's border-box semantics against its source (the module is
+  // vite-only at runtime — import.meta.glob — so the receipt reads, never runs).
+  // workers rides along for the AI-fix guardrail eval (the worker test suite
+  // runs in scratch via the root tsx — workers/assist has no own node_modules).
+  for (const dir of ['contracts', 'tokens', 'scripts', 'core', 'parity', 'src', 'catalog', 'context', 'assets', 'extract', 'playground', 'workers']) {
     cpSync(path.join(ROOT, dir), path.join(SCRATCH, dir), { recursive: true });
   }
   cpSync(path.join(ROOT, 'evals', 'fixtures'), path.join(SCRATCH, 'evals', 'fixtures'), {
@@ -1531,6 +1536,104 @@ const cases: Case[] = [
       ]) {
         if (!r.out.includes(line)) throw new Error(`missing check: ${line}`);
       }
+    },
+  },
+  {
+    // Owner P0 (global part-name dedup): his Dialog refused with 'duplicate
+    // anatomy part name "Title"' + '"Icon"'. Part names are contract-wide
+    // identity (CSS classes, swap layers, note paths) but the proposer
+    // deduped only among SIBLINGS — his Title[FRAME] > Title[TEXT] nest and
+    // two Icon instances under DIFFERENT parents slipped through to an emit
+    // refusal. Fixed with a contract-global registry in partKey: pre-order
+    // claiming (first drawn part keeps its name), parent-derived prefix for
+    // later collisions ("frame2Icon"), else ordinal ("Title2"); every rename
+    // a NAMED note carrying the node path.
+    id: 'design-dialog-global-part-dedup',
+    claim: 'C5-extraction',
+    run: () => {
+      const r = run(TSX, ['extract/figma/dialog-check.ts']);
+      if (r.status !== 0) throw new Error(`Dialog dedup receipt failed:\n${r.out}`);
+      for (const line of [
+        '✔ 1 proposed, 0 skipped (the send completes)',
+        '✔ part names are UNIQUE contract-wide (17 parts, 17 distinct)',
+        '✔ the drawn "Title" WRAPPER keeps its name (first drawn part wins)',
+        '✔ the "Title" TEXT inside it takes the ordinal — "Title2" (parent key IS the colliding name, so no prefix)',
+        '✔ the second "Icon" (close icon, under "Frame 2") takes the parent-derived prefix — "frame2Icon"',
+        '✔ the "Title" rename is a NAMED note carrying the node path',
+        '✔ the "Icon" rename is a NAMED note carrying the node path',
+        '✔ BOTH _Slot-Dialog underscore-instances carry as slots (swap-bound INSTANCE_SWAP → slot parts, sanitized names)',
+        '✔ all FOUR action-button component refs present under Actions',
+        '✔ BOTH Icon instances (title icon + close icon) reference the ds.icon stub',
+        '✔ the scroll bar carries (hidden RECTANGLE → "scrollBar" part)',
+        '✔ ZERO referee violations (got 0)',
+        "✔ in particular: zero 'duplicate anatomy part name' refusals (the owner's Dialog refusal class)",
+        '✔ emitHtml renders (validateContract passed — the duplicate refusal is GONE)',
+        '✔ the canvas compiles — 4 variants (size axis; got 4)',
+        '✔ its id rides the sanitize rule — "ds.modal-confirmation-dialog" (got ds.modal-confirmation-dialog)',
+      ]) {
+        if (!r.out.includes(line)) throw new Error(`missing check: ${line}`);
+      }
+    },
+  },
+  {
+    // Owner P0 (canvas metrics): the Code preview rendered his Button right
+    // (16/12 padding-inline, 48/40/32 heights) but the CANVAS drew too-tall
+    // uniform boxes (~64px, all sizes identical). Two root causes, fixed:
+    // (1) compileComponentData applied `root.tokens` instead of
+    // resolveTokens(root, subst) — the ROOT's tokensByProp per-size overrides
+    // never reached the compiled specs (child parts already resolved right);
+    // (2) the canvas preview drew content-box divs, so a bound 48px height
+    // PLUS 8px padding-block rendered 64px — Figma boxes are border-box.
+    // The receipt pins all 15 cells box-equal to the dump's own captured
+    // variant boxes, per-size differences differing, and the border-box rule.
+    id: 'design-canvas-box-parity',
+    claim: 'C5-extraction',
+    run: () => {
+      const r = run(TSX, ['extract/figma/canvas-box-check.ts']);
+      if (r.status !== 0) throw new Error(`canvas-box receipt failed:\n${r.out}`);
+      for (const line of [
+        '✔ 15 canvas cells compile (got 15)',
+        '✔ every cell name maps to a distinct captured variant',
+        '✔ cell "size=large" box == captured "size=large, state=default" box (h=48 via component-size/xlarge, pad=[8,16,8,16], gap=8, hug width)',
+        '✔ cell "size=medium" box == captured "size=medium, state=default" box (h=40 via component-size/large, pad=[8,16,8,16], gap=8, hug width)',
+        '✔ cell "size=small" box == captured "size=small, state=default" box (h=32 via component-size/medium, pad=[8,12,8,12], gap=8, hug width)',
+        '✔ cell "size=small, State=Focus Visible" box == captured "size=small, state=focus" box (h=32 via component-size/medium, pad=[8,12,8,12], gap=8, hug width)',
+        '✔ cell "size=small" text 14px/21px == captured 14px/21px',
+        '✔ heights 48/40/32 per size, DISTINCT (got large=48, medium=40, small=32)',
+        '✔ padding-inline 16/16/12 — small DIFFERS (got large=16, medium=16, small=12)',
+        '✔ min-height 44 stays CSS-side BY DESIGN (the canvas draws the real per-variant height; the contract carries the fact for the code surfaces)',
+        '✔ the canvas stylesheet declares box-sizing: border-box (a FIXED height includes padding, like Figma — 48px means 48px, not 48+8+8)',
+      ]) {
+        if (!r.out.includes(line)) throw new Error(`missing check: ${line}`);
+      }
+    },
+  },
+  {
+    // Owner P0 (AI-fix guardrails): Fix-with-AI resolved his Dialog's
+    // duplicate-part-name refusals by DELETING parts — the rendered Dialog
+    // lost its close icon and all four action buttons; legal per schema,
+    // lossy in fact, and nothing said so. The worker's fix-contract prompt
+    // now FORBIDS removal-as-fix (rename/dedup/restructure instead) and the
+    // forced tool carries a machine-readable `removals` declaration channel
+    // (shape-checked passthrough; missing → []); the playground diffs every
+    // AI round against the pre-fix contract and renders deletions loud/red
+    // (undeclared losses loudest). This eval runs the worker test suite —
+    // guardrail prompt text, removals schema, passthrough filtering — in the
+    // scratch copy via the root tsx.
+    id: 'design-ai-fix-removal-guardrails',
+    claim: 'C2-refusal',
+    run: () => {
+      const r = run(TSX, ['--test', 'workers/assist/test/handler.test.ts', 'workers/assist/test/bridge.test.ts']);
+      if (r.status !== 0) throw new Error(`worker test suite failed:\n${r.out.slice(0, 4000)}`);
+      for (const line of [
+        'fix-contract: the system prompt forbids removal-as-fix and demands declared removals',
+        'fix-contract: the forced tool schema carries the removals declaration channel',
+        'fix-contract: declared removals pass through shape-checked — junk dropped, unknown kind folds to "other"',
+        'fix-contract: a response without removals answers an EMPTY array — never invented, never undefined',
+      ]) {
+        if (!r.out.includes(line)) throw new Error(`missing worker test: ${line}`);
+      }
+      if (!/# fail 0/.test(r.out)) throw new Error(`worker suite reports failures:\n${r.out.slice(-2000)}`);
     },
   },
   {

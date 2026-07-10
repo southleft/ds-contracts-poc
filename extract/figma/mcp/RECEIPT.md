@@ -67,19 +67,21 @@ Fixtures in `extract/figma/mcp/fixtures/` are RECORDED LIVE responses (Figma des
 
 - `[paint-unsupported]` Alert:variant=success `fill` — first visible paint is GRADIENT_LINEAR, not SOLID — dump v1 carries solid paints only; paint omitted
 
-### Proposal notes (review line items, 21)
+### Proposal notes (review line items, 23)
 
 - semantics.element defaulted to "div" — element/role/ARIA are not drawn on the canvas and the name/axis inference table matched nothing; set the real host element
 - Alert:root/container: visibility bound to BOOLEAN "hasIcon" — proposed as prop `hasIcon` (default not recoverable from dump v1, review)
 - Alert:root/container/Icon: nested instance of "check circle" has no known contract — component ref proposed as "ds.check-circle" with a STUB child contract auto-proposed alongside (childStubs; API from observed applied values only, anatomy not captured — import the real child set to replace it)
 - Alert:root/container/Icon: fixed prop values of the nested "check circle" instance are not captured in dump v1 — declared fidelity limit, author them if the instance is configured
 - Alert:root/horizontal stack itemSpacing: variable name "spacing/0․5" contains characters outside the token-ref grammar ([a-z0-9.-]) — binding not proposed; rename the variable or map it manually
+- Alert:root/horizontal stack/horizontal stack: part name "horizontalStack" already names another part of this contract (part names are contract-wide: CSS classes, swap layers, and note paths key on them) — renamed to "horizontalStack2" (rule: first drawn part keeps the name; later collisions take the parent-derived prefix, else an ordinal suffix)
 - Alert:root/horizontal stack/horizontal stack/Title: rides text style "body/md-bold" which is not a token-derived style — typography not proposed
 - Alert:root/horizontal stack/horizontal stack/Description: rides text style "body/sm" which is not a token-derived style — typography not proposed
 - Alert:root/horizontal stack/Text link: nested instance of "Text link" has no known contract — component ref proposed as "ds.text-link" with a STUB child contract auto-proposed alongside (childStubs; API from observed applied values only, anatomy not captured — import the real child set to replace it)
 - Alert:root/horizontal stack/Text link: fixed props of "Text link" canonicalized by spelling (dump v1.1) — verify against the child contract's bindings
 - Alert:root/horizontal stack/Text link: visibility bound to BOOLEAN "hasLink" — proposed as prop `hasLink` (default not recoverable from dump v1, review)
 - Alert:root/container 2: visibility bound to BOOLEAN "isDismissible" — proposed as prop `isDismissible` (default not recoverable from dump v1, review)
+- Alert:root/container 2/Icon: part name "Icon" already names another part of this contract (part names are contract-wide: CSS classes, swap layers, and note paths key on them) — renamed to "container2Icon" (rule: first drawn part keeps the name; later collisions take the parent-derived prefix, else an ordinal suffix)
 - Alert:root/container 2/Icon: nested instance of "close" has no known contract — component ref proposed as "ds.close" with a STUB child contract auto-proposed alongside (childStubs; API from observed applied values only, anatomy not captured — import the real child set to replace it)
 - Alert:root/container 2/Icon: fixed prop values of the nested "close" instance are not captured in dump v1 — declared fidelity limit, author them if the instance is configured
 - Alert:root: visible effect(s) [DROP_SHADOW] — only a single DROP_SHADOW present in every variant maps to box-shadow (dump v1.2); channel NAMED, not proposed

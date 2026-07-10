@@ -36,7 +36,9 @@ import {
   FIX_CONTRACT_MAX_REFUSALS,
   FIX_CONTRACT_MAX_TOKEN_PATHS,
   MAX_AI_FIX_ROUNDS,
+  type AssistDeclaredRemoval,
 } from '../engine/assist';
+import { diffAiFixRound, type AiFixDiff } from '../engine/ai-fix-diff';
 import type { ProposeCodeResult } from '../engine/code-import';
 import {
   ANTHROPIC_MODEL,
@@ -458,12 +460,22 @@ export function Playground() {
   const [aiFixError, setAiFixError] = useState<string | null>(null);
   const [aiFixRounds, setAiFixRounds] = useState(0);
   const [aiFixUndo, setAiFixUndo] = useState<{ text: string; provenance: string } | null>(null);
+  // Plain-words diff of the loaded AI round vs the pre-fix contract —
+  // deletions render loud/red (owner field case: a round "fixed" duplicate
+  // part names by DELETING parts; the Dialog lost its close icon and action
+  // buttons, and nothing said so).
+  const [aiFixDiff, setAiFixDiff] = useState<{
+    diff: AiFixDiff;
+    declared: AssistDeclaredRemoval[];
+    undeclared: string[];
+  } | null>(null);
   // A fresh load (example, import, generation, share link) starts a fresh
   // fix session — `pristine` changes exactly then, never on a fix round.
   useEffect(() => {
     setAiFixRounds(0);
     setAiFixUndo(null);
     setAiFixError(null);
+    setAiFixDiff(null);
   }, [pristine]);
 
   /** Append one ai-fix group to whatever receipts are showing — the record
@@ -533,6 +545,15 @@ export function Playground() {
             ? [v.message]
             : [];
       const addressed = refusals.filter((r) => !remaining.includes(r));
+      // Plain-words diff vs the PRE-FIX contract — the client's own referee
+      // over what the round kept/renamed/REMOVED, independent of what the
+      // model declared in `removals` (an undeclared loss renders loudest).
+      const diff = diffAiFixRound(JSON.parse(sentText) as unknown, result.data.contract);
+      const declared = result.data.removals ?? [];
+      const undeclared = diff.lost.filter(
+        (item) => !declared.some((d) => item.includes(`"${d.path.split('/').pop() ?? d.path}"`)),
+      );
+      setAiFixDiff({ diff, declared, undeclared });
       setAiFixUndo({ text: sentText, provenance });
       setAiFixRounds(round);
       setText(fixedText);
@@ -548,6 +569,17 @@ export function Playground() {
               ? `tokens: ${usage.input_tokens ?? '?'} in / ${usage.output_tokens ?? '?'} out`
               : 'tokens: not reported by the response',
         },
+        { message: `diff vs the pre-fix contract: ${diff.summary}` },
+        ...declared.map((d) => ({
+          message: `the model DECLARED a removal: ${d.kind} ${d.path}${d.reason ? ` — ${d.reason}` : ''}`,
+        })),
+        ...(undeclared.length > 0
+          ? [
+              {
+                message: `UNDECLARED loss: ${undeclared.join(', ')} — removed by the round without a removals entry; review before trusting (Undo restores the pre-fix contract)`,
+              },
+            ]
+          : []),
         ...(addressed.length > 0
           ? addressed.map((r) => ({ message: `addressed: ${r}` }))
           : [{ message: 'addressed: none of the sent refusals cleared' }]),
@@ -568,6 +600,7 @@ export function Playground() {
     setText(aiFixUndo.text);
     setProvenance(aiFixUndo.provenance);
     setAiFixUndo(null);
+    setAiFixDiff(null);
   };
 
   // -------------------------------------------------------- resizable panes
@@ -1114,6 +1147,9 @@ export function Playground() {
   const [bridgeRemaining, setBridgeRemaining] = useState(0);
   const [bridgeBusy, setBridgeBusy] = useState(false);
   const [bridgeError, setBridgeError] = useState<PlainError | null>(null);
+  /** Plain-words delivery line shown with the FRESH code after an auto-renew
+   *  ("Delivered Dialog — ready for your next send with code ABC234."). */
+  const [bridgeDelivered, setBridgeDelivered] = useState<string | null>(null);
   const bridgeTimer = useRef<number | null>(null);
   const bridgeInFlight = useRef(false);
 
@@ -1124,6 +1160,7 @@ export function Playground() {
     }
     bridgeInFlight.current = false;
     setBridge(null);
+    setBridgeDelivered(null);
   };
   useEffect(
     () => () => {
@@ -1132,7 +1169,9 @@ export function Playground() {
     [],
   );
 
-  const handleBridgeDump = (dump: unknown, code: string) => {
+  /** Returns the delivered set names (for the auto-renew delivery line);
+   *  null when the dump could not be handled at all. */
+  const handleBridgeDump = (dump: unknown, code: string): string[] | null => {
     try {
       const groups: ReceiptGroup[] = [
         {
@@ -1173,7 +1212,7 @@ export function Playground() {
             : notice('The plugin sent a dump with no component set to propose from.'),
         );
         if (groups.length > 0) setReceipts({ source: 'Figma plugin import', groups });
-        return;
+        return [];
       }
       importGroupsRef.current = groups;
       figmaOriginRef.current = { origin: 'Figma plugin import', ws: 'figma' };
@@ -1183,10 +1222,12 @@ export function Playground() {
       capturedRef.current = capturedTokensFromDump(dump as Record<string, unknown>);
       setFigmaProposals(batch.proposals);
       applyProposal(batch.proposals[0], 'Figma plugin import', 'figma');
+      return batch.proposals.map((p) => (p.contract as { name?: string }).name ?? 'a component set');
     } catch (e) {
       // Never the raw exception text as a headline (owner field case: a zod
       // issue array rendered verbatim here) — plain words + expandable detail.
       setBridgeError(plainWordsError(e));
+      return null;
     }
   };
 
@@ -1203,8 +1244,13 @@ export function Playground() {
     try {
       const poll = await pollBridge(code);
       if (poll.status === 'delivered') {
+        // One-time read by design (the bridge already deleted its copy) —
+        // the CODE is spent, not the listener. Process the dump, then
+        // immediately ask for a fresh session so the next send needs no
+        // extra click; polling continues on the new code until Cancel/expiry.
         stopBridge();
-        handleBridgeDump(poll.dump, code);
+        const delivered = handleBridgeDump(poll.dump, code);
+        await startBridge(delivered ?? []);
       } else if (poll.status === 'error' && poll.fatal) {
         stopBridge();
         setBridgeError(notice(poll.message));
@@ -1215,8 +1261,11 @@ export function Playground() {
     }
   };
 
-  const startBridge = async () => {
-    setBridgeError(null);
+  /** Mint a session and start polling. `deliveredNames` marks an AUTO-RENEW
+   *  after a delivery: the fresh code renders with a plain-words delivery
+   *  line, and any error handleBridgeDump just surfaced is left standing. */
+  const startBridge = async (deliveredNames?: string[]) => {
+    if (deliveredNames === undefined) setBridgeError(null);
     setBridgeBusy(true);
     const result = await createBridgeSession();
     setBridgeBusy(false);
@@ -1226,6 +1275,11 @@ export function Playground() {
     }
     const expiresAt = Date.now() + result.session.ttlSeconds * 1000;
     setBridge({ code: result.session.code, expiresAt });
+    setBridgeDelivered(
+      deliveredNames === undefined
+        ? null
+        : `Delivered ${deliveredNames.length > 0 ? deliveredNames.join(', ') : 'the plugin’s dump'} — ready for your next send with code ${result.session.code}.`,
+    );
     setBridgeRemaining(result.session.ttlSeconds);
     bridgeTimer.current = window.setInterval(
       () => void bridgeTick(result.session.code, expiresAt),
@@ -2149,6 +2203,9 @@ export function Playground() {
                 </button>
               ) : (
                 <div className="notice" aria-live="polite">
+                  {bridgeDelivered ? (
+                    <div style={{ fontWeight: 600, marginBottom: 6 }}>{bridgeDelivered}</div>
+                  ) : null}
                   <div
                     style={{
                       fontFamily: 'var(--pg-mono)',
@@ -2664,10 +2721,25 @@ export function Playground() {
               <span className="ai-fix-strip__text">
                 fix round {aiFixRounds} of {MAX_AI_FIX_ROUNDS} loaded and re-refereed above —
                 nothing applied silently.
+                {aiFixDiff ? <> Diff vs your pre-fix contract: {aiFixDiff.diff.summary}.</> : null}
               </span>
               <button type="button" className="btn--small" onClick={undoAiFix}>
                 Undo
               </button>
+            </div>
+          ) : null}
+          {aiFixUndo && aiFixDiff && aiFixDiff.diff.lost.length > 0 ? (
+            <div className="notice notice--error ai-fix-strip__loss" role="alert">
+              The AI round <strong>REMOVED {aiFixDiff.diff.lost.length}</strong>:{' '}
+              {aiFixDiff.diff.lost.join(', ')} — review before trusting.
+              {aiFixDiff.undeclared.length > 0 ? (
+                <>
+                  {' '}
+                  {aiFixDiff.undeclared.length} of these the model did not even declare in its
+                  removals list.
+                </>
+              ) : null}{' '}
+              Undo restores the pre-fix contract.
             </div>
           ) : null}
         </div>

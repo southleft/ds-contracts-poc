@@ -1,6 +1,6 @@
 {
-  "passed": 72,
-  "total": 72,
+  "passed": 75,
+  "total": 75,
   "results": [
     {
       "id": "refuse-unknown-token-reference",
@@ -355,6 +355,21 @@
     {
       "id": "design-correlation-over-default-state-occurrences",
       "claim": "C5-extraction",
+      "pass": true
+    },
+    {
+      "id": "design-dialog-global-part-dedup",
+      "claim": "C5-extraction",
+      "pass": true
+    },
+    {
+      "id": "design-canvas-box-parity",
+      "claim": "C5-extraction",
+      "pass": true
+    },
+    {
+      "id": "design-ai-fix-removal-guardrails",
+      "claim": "C2-refusal",
       "pass": true
     },
     {

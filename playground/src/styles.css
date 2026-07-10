@@ -1280,6 +1280,12 @@ label {
   flex: 1;
 }
 
+/* Loud/red loss banner under the strip: the AI round REMOVED things. */
+.ai-fix-strip__loss {
+  margin: 0 14px 8px;
+  flex-shrink: 0;
+}
+
 /* first-visit onboarding strip — three clickable steps, no modal, no tour */
 
 /* chunk-failure banner — one calm strip, never a raw red error */

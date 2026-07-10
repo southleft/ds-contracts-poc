@@ -554,17 +554,23 @@ const CONTRACT_SHAPE = {
   },
 } as const;
 
+/** The removal-declaration kinds the fix tool may report — mirrored by the
+ *  playground's diff summary (anything lost but undeclared renders louder). */
+export const FIX_REMOVAL_KINDS = ['part', 'component-ref', 'slot', 'prop', 'event', 'state', 'other'] as const;
+
 const fixContractTool = {
   name: 'propose_contract_fix',
   description:
     'Propose a minimally-edited version of a component contract that resolves the named ' +
     'refusals and nothing else. Every token reference must come from the provided inventory. ' +
+    'Never delete anatomy parts, component refs, slots, props, or events to satisfy a refusal; ' +
+    'if a removal is truly unavoidable it MUST be declared in `removals`. ' +
     'The output is a proposal — the client re-validates it with the same schema and generator ' +
     'that refused the original.',
   // No `strict: true` here on purpose — see the CONTRACT_SHAPE comment.
   input_schema: {
     type: 'object',
-    required: ['contract'],
+    required: ['contract', 'removals'],
     $defs: {
       tokenRef: {
         type: 'string',
@@ -632,6 +638,31 @@ const fixContractTool = {
     },
     properties: {
       contract: CONTRACT_SHAPE,
+      removals: {
+        type: 'array',
+        description:
+          'Every anatomy part, component ref, slot, prop, event, or state present in the ' +
+          'ORIGINAL contract but absent from your fixed contract. An empty array — nothing ' +
+          'removed — is the strongly preferred outcome. A deletion without a matching entry ' +
+          'here is an undeclared loss the client surfaces loudly.',
+        items: {
+          type: 'object',
+          additionalProperties: false,
+          required: ['kind', 'path', 'reason'],
+          properties: {
+            kind: { enum: [...FIX_REMOVAL_KINDS] },
+            path: {
+              type: 'string',
+              description:
+                'What was removed — the anatomy part path (e.g. "root/Actions/buttonBrandPrimary") or the prop/event/state name.',
+            },
+            reason: {
+              type: 'string',
+              description: 'One line: which named refusal made removal the ONLY possible fix.',
+            },
+          },
+        },
+      },
     },
   },
 } as const;
@@ -648,6 +679,16 @@ const fixContract: AssistEndpoint = {
     'inventory. Fix ONLY what the refusals name. Do not restructure, rename, reorder, or ' +
     '"improve" anything a refusal does not mention — every field the refusals do not touch ' +
     'must come back byte-for-byte identical wherever the schema allows it. ' +
+    'NEVER remove anatomy parts, component refs, slots, props, or events to satisfy a ' +
+    'refusal — deletion is not a fix, it is data loss (field case: a round "fixed" duplicate ' +
+    'part names by DELETING the parts, and the rendered Dialog lost its close icon and all ' +
+    'four action buttons). A duplicate-name refusal is fixed by RENAMING the later part ' +
+    '(parent-derived prefix like "frame2Icon", else an ordinal suffix like "Title2") or by ' +
+    'restructuring that keeps every part, ref, slot, and prop present and functional. ' +
+    'If removal is TRULY the only possible fix for a named refusal, keep it minimal and ' +
+    'DECLARE every removed thing in the `removals` field (kind, path, reason) — anything ' +
+    'absent from your fixed contract but missing from `removals` is an undeclared loss the ' +
+    'client surfaces loudly. When nothing was removed, return `removals: []`. ' +
     'Every token reference in your output must be a path from the provided inventory (paths ' +
     'under imported.* are part of the inventory and equally legal), brace-wrapped; never ' +
     'invent, abbreviate, or guess a path. An enum-prop placeholder like ' +
@@ -706,7 +747,21 @@ const fixContract: AssistEndpoint = {
     if (!isObj(contract)) {
       throw new AssistUpstreamError(502, 'the model returned no contract object');
     }
-    return { contract };
+    // Declared removals pass through shape-checked (kind folded to 'other'
+    // when unknown, junk entries dropped, missing field → empty array). The
+    // CONTENT judgment — declared vs actually-lost — is the client's diff.
+    const removals = Array.isArray(o.removals)
+      ? o.removals
+          .filter((r): r is Record<string, unknown> => isObj(r) && isStr(r.path))
+          .map((r) => ({
+            kind: (FIX_REMOVAL_KINDS as readonly string[]).includes(r.kind as string)
+              ? (r.kind as string)
+              : 'other',
+            path: r.path as string,
+            reason: isStr(r.reason) ? r.reason : '',
+          }))
+      : [];
+    return { contract, removals };
   },
 };
 

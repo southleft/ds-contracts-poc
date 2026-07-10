@@ -134,17 +134,20 @@
       placeholder="ABC234" />
     <span class="hint">In the playground&rsquo;s Figma tab, press
       <strong>Receive from plugin</strong> — it shows a 6-character code (good
-      for 15 minutes).</span>
+      for 15 minutes). Codes are one-time: after each delivery the playground
+      shows a FRESH code automatically — use that one for your next send.</span>
   </div>
   <div class="field">
     <label for="send-sets">Component set names (optional)</label>
     <input type="text" id="send-sets" spellcheck="false" autocomplete="off"
       placeholder="Badge, Switch, Card" />
-    <span class="hint">Comma-separated, exact names — the explicit override.
-      Left empty, the plugin sends the component set(s) of your CURRENT
-      SELECTION on the canvas; with nothing selected it sends every component
-      set in this file (the Slot utility is always skipped) — the same scoping
-      the dump script&rsquo;s TARGET_SETS line gives the copy/paste route.</span>
+    <span class="hint">Comma-separated, exact names — MULTIPLE sets travel in
+      ONE send (e.g. <code>Dialog, Button-Brand Primary</code> arrives as one
+      dump and proposes together). Left empty, the plugin sends the component
+      set(s) of your CURRENT SELECTION on the canvas; with nothing selected it
+      sends every component set in this file (the Slot utility is always
+      skipped) — the same scoping the dump script&rsquo;s TARGET_SETS line
+      gives the copy/paste route.</span>
   </div>
   <div class="row">
     <button class="primary" id="send-run">Send to Playground</button>
