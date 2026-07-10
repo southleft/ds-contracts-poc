@@ -274,6 +274,35 @@ export function validateContract(
         errors.push(`${contract.id}: part "${name}" is a component instance — layoutByProp cannot restyle it (the child contract owns its layout)`);
       }
     }
+    // v10 tokensByProp: the driving prop must be a declared enum, every map
+    // key one of its values, and every mapped ref plain (per-value maps ARE
+    // the substitution — a placeholder inside one is double substitution);
+    // component parts style themselves via their own contract.
+    if (part.tokensByProp) {
+      const tbp = part.tokensByProp;
+      const tbpProp = contract.props.find((pr) => pr.name === tbp.prop);
+      if (!tbpProp) {
+        errors.push(`${contract.id}: part "${name}" tokensByProp references unknown prop "${tbp.prop}"`);
+      } else if (!isEnum(tbpProp)) {
+        errors.push(`${contract.id}: part "${name}" tokensByProp prop "${tbp.prop}" must be an enum prop`);
+      } else {
+        for (const [k, overrides] of Object.entries(tbp.map)) {
+          if (!tbpProp.type.enum.includes(k)) {
+            errors.push(`${contract.id}: part "${name}" tokensByProp map key "${k}" is not a value of prop "${tbp.prop}"`);
+          }
+          for (const ref of Object.values(overrides)) {
+            if (placeholdersIn(stripBraces(ref)).length > 0) {
+              errors.push(
+                `${contract.id}: part "${name}" tokensByProp ref "${ref}" carries a substitution placeholder — per-value maps hold plain refs only`,
+              );
+            }
+          }
+        }
+      }
+      if (part.component) {
+        errors.push(`${contract.id}: part "${name}" is a component instance — tokensByProp cannot restyle it (the child contract owns its styling)`);
+      }
+    }
     // v7 overlay: out-of-flow parts must stay out of the flow arithmetic —
     // grow/overlap are in-flow sizing semantics, and the root cannot attach
     // to its own edge. Minimal, named refusals.
@@ -711,6 +740,22 @@ export function generateCss(contract: Contract, tokenInventory: Set<string>, err
     }
   }
 
+  // v10 tokensByProp on the root: per-enum-value overrides land in the SAME
+  // enum-class rules substituted refs use — emitted after .root, so the
+  // override wins at equal specificity (the layoutByProp discipline).
+  if (root.tokensByProp) {
+    const { prop: tbpProp, map } = root.tokensByProp;
+    for (const [value, overrides] of Object.entries(map)) {
+      for (const [cssProp, ref] of Object.entries(overrides)) {
+        const refPath = stripBraces(ref);
+        if (!checkToken(refPath, `anatomy.root.tokensByProp.${value}.${cssProp}`)) continue;
+        const cls = `${tbpProp}-${value}`;
+        if (!enumRules.has(cls)) enumRules.set(cls, new Map());
+        enumRules.get(cls)!.set(cssProp, cssVar(refPath));
+      }
+    }
+  }
+
   lines.push('', '.root {');
   for (const d of rootDecls) lines.push(`  ${d};`);
   lines.push('}');
@@ -854,6 +899,19 @@ export function generateCss(contract: Contract, tokenInventory: Set<string>, err
     }
     if ((part.tokens && ('border-width' in part.tokens || 'border-color' in part.tokens))) {
       decls.push('border-style: solid');
+    }
+    // v10 tokensByProp on a nested part: descendant rule under the root's
+    // enum class — exactly the nested-token-substitution rule shape.
+    if (part.tokensByProp) {
+      for (const [value, overrides] of Object.entries(part.tokensByProp.map)) {
+        for (const [cssProp, ref] of Object.entries(overrides)) {
+          const refPath = stripBraces(ref);
+          if (!checkToken(refPath, `anatomy.${name}.tokensByProp.${value}.${cssProp}`)) continue;
+          nestedSubRules.push(
+            `\n.${part.tokensByProp.prop}-${value} .${name} {\n  ${cssProp}: ${cssVar(refPath)};\n}`,
+          );
+        }
+      }
     }
     // v7 layoutByProp on a nested part: descendant rule under the root's
     // enum class — exactly the nested-token-substitution rule shape.

@@ -32,6 +32,7 @@
     "extract:figma:base:check": "tsx extract/figma/base-instance-check.ts",
     "extract:figma:cbds:check": "tsx extract/figma/cbds-check.ts",
     "extract:figma:cbds:batch:check": "tsx extract/figma/cbds-batch-check.ts",
+    "extract:figma:cbds:bridge:check": "tsx extract/figma/cbds-bridge-check.ts",
     "extract:figma:tooltip:check": "tsx extract/figma/tooltip-check.ts",
     "extract:figma:rest": "tsx extract/figma/rest/cli.ts",
     "extract:figma:rest:roundtrip": "tsx extract/figma/rest/roundtrip-rest.ts",

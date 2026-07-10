@@ -226,6 +226,17 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
         }
       }
     }
+    // v10 tokensByProp: per-enum-value token overrides merged over the base
+    // (resolved to literals like every other token here).
+    if (part.tokensByProp) {
+      for (const [value, overrides] of Object.entries(part.tokensByProp.map)) {
+        const decls: StyleRecord = {};
+        for (const [cssProp, ref] of Object.entries(overrides)) {
+          decls[camel(cssProp)] = resolveValue(stripBraces(ref));
+        }
+        addVariant(part.tokensByProp.prop, value, partName, decls);
+      }
+    }
     // layoutByProp: per-enum-value layout overrides merged over the base.
     if (part.layoutByProp) {
       for (const [value, _override] of Object.entries(part.layoutByProp.map)) {

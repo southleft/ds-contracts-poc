@@ -50,8 +50,8 @@ Fixtures in `extract/figma/mcp/fixtures/` are RECORDED LIVE responses (Figma des
 - ✅ foreign vocabulary recovered by name: "color/content/inverse"
 - ✅ the U+2024 variable ("spacing/0․5", ONE DOT LEADER) is itself recovered by name by the join…
 - ✅ …and then REFUSED by the token-ref grammar (binding not proposed, named in notes) — the refusal fires on live foreign data
-- ✅ recovered names BIND in the proposal: root carries {spacing.4} / {spacing.3} / {component.border.radius.rounded-md} / {spacing.2} (got {"padding-inline":"{spacing.4}","padding-block":"{spacing.3}","border-radius":"{component.border.radius.rounded-md}","gap":"{spacing.2}"})
-- ✅ everything the join could not name still ships at literal fidelity as imported.* mints (6 minted, 0 unbound)
+- ✅ recovered names BIND in the proposal: root carries {spacing.4} / {spacing.3} / {component.border.radius.rounded-md} / {spacing.2} (got {"padding-inline":"{spacing.4}","padding-block":"{spacing.3}","border-radius":"{component.border.radius.rounded-md}","gap":"{spacing.2}","max-width":"{imported.alert.root.max-width}"})
+- ✅ everything the join could not name still ships at literal fidelity as imported.* mints (7 minted, 0 unbound)
 
 ### Names recovered by the join (7 ids, 9 get_variable_defs calls)
 
@@ -66,9 +66,8 @@ Fixtures in `extract/figma/mcp/fixtures/` are RECORDED LIVE responses (Figma des
 ### Map degradations (named, never silent)
 
 - `[paint-unsupported]` Alert:variant=success `fill` — first visible paint is GRADIENT_LINEAR, not SOLID — dump v1 carries solid paints only; paint omitted
-- `[min-max-size-unsupported]` Alert:variant=success — literal min/max sizing (maxWidth 880) has no dump v1 projection — dropped (bound min-width variables DO ride `bound`)
 
-### Proposal notes (review line items, 20)
+### Proposal notes (review line items, 21)
 
 - semantics.element defaulted to "div" — element/role/ARIA are not drawn on the canvas and the name/axis inference table matched nothing; set the real host element
 - Alert:root/container: visibility bound to BOOLEAN "hasIcon" — proposed as prop `hasIcon` (default not recoverable from dump v1, review)
@@ -84,6 +83,7 @@ Fixtures in `extract/figma/mcp/fixtures/` are RECORDED LIVE responses (Figma des
 - Alert:root/container 2/Icon: nested instance of "close" has no known contract — component ref proposed as "ds.close" with a STUB child contract auto-proposed alongside (childStubs; API from observed applied values only, anatomy not captured — import the real child set to replace it)
 - Alert:root/container 2/Icon: fixed prop values of the nested "close" instance are not captured in dump v1 — declared fidelity limit, author them if the instance is configured
 - Alert:root: visible effect(s) [DROP_SHADOW] — only a single DROP_SHADOW present in every variant maps to box-shadow (dump v1.2); channel NAMED, not proposed
+- MINTED {imported.alert.root.max-width} = 880px — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Alert:root max-width
 - MINTED {imported.alert.horizontal-stack-horizontal-stack-title.font-size} = 16px — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Alert:root/horizontal stack/horizontal stack/Title font-size
 - MINTED {imported.alert.horizontal-stack-horizontal-stack-title.font-weight} = 700 — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Alert:root/horizontal stack/horizontal stack/Title font-weight
 - MINTED {imported.alert.horizontal-stack-horizontal-stack-title.line-height} = 20px — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Alert:root/horizontal stack/horizontal stack/Title line-height

@@ -446,9 +446,31 @@ function mergeOcc(name: string, occ: Occ[], notes: string[], where: string): Mer
 // Token-ref unification (literal / enum-substituted / drift)
 // ---------------------------------------------------------------------------
 
+/** A binding that is a plain FUNCTION of one enum axis by VALUE (v10
+ *  tokensByProp; owner field case: CBDS root paddingLeft {spacing.200} on
+ *  large/medium vs {spacing.150} on small — the token names do not spell the
+ *  axis values, so the substituted-ref shape cannot carry it). `byValue` is
+ *  keyed by canonical (camel) axis value, full coverage; `defaultValue` is
+ *  the axis's first (default) value — its ref becomes the part's base token,
+ *  the deviating values become tokensByProp overrides. Correlation does NOT
+ *  require injectivity: large/medium sharing a ref is still a function. */
+export interface PerValueRef {
+  propName: string;
+  defaultValue: string;
+  byValue: Record<string, string>;
+}
+
+type UnifiedRef = string | PerValueRef;
+
+/** Identity key for unified refs — lets the padding/radius pairing rules
+ *  compare per-value functions the way they compare plain ref strings. */
+const refKey = (u: UnifiedRef | undefined): string | undefined =>
+  u === undefined ? undefined : typeof u === 'string' ? u : `f(${u.propName}):${JSON.stringify(u.byValue)}`;
+
 type Unified =
   | { kind: 'none' }
   | { kind: 'ref'; ref: string }
+  | { kind: 'per-value'; perValue: PerValueRef }
   | { kind: 'drift'; detail: string };
 
 function unifyRefs(
@@ -479,26 +501,63 @@ function unifyRefs(
 
   const segs = defined.map((o) => o.path.split('.'));
   const len = segs[0].length;
-  if (segs.some((s) => s.length !== len)) {
-    return { kind: 'drift', detail: `token paths differ in depth: ${distinct.join(' vs ')}` };
-  }
-  const diffIdx: number[] = [];
-  for (let i = 0; i < len; i++) {
-    if (new Set(segs.map((s) => s[i])).size > 1) diffIdx.push(i);
-  }
-  if (diffIdx.length === 1) {
-    const i = diffIdx[0];
-    for (const axis of axes) {
-      const fits = defined.every((o, k) => {
-        const value = axisValuesOf(o.variant)[axis.property];
-        return value !== undefined && segs[k][i] === camel(value);
-      });
-      if (fits) {
-        const parts = [...segs[0]];
-        parts[i] = `{${axis.propName}}`;
-        return { kind: 'ref', ref: `{${parts.join('.')}}` };
+  const sameDepth = segs.every((s) => s.length === len);
+  if (sameDepth) {
+    const diffIdx: number[] = [];
+    for (let i = 0; i < len; i++) {
+      if (new Set(segs.map((s) => s[i])).size > 1) diffIdx.push(i);
+    }
+    if (diffIdx.length === 1) {
+      const i = diffIdx[0];
+      for (const axis of axes) {
+        const fits = defined.every((o, k) => {
+          const value = axisValuesOf(o.variant)[axis.property];
+          return value !== undefined && segs[k][i] === camel(value);
+        });
+        if (fits) {
+          const parts = [...segs[0]];
+          parts[i] = `{${axis.propName}}`;
+          return { kind: 'ref', ref: `{${parts.join('.')}}` };
+        }
       }
     }
+  }
+  // VALUE-level correlation (v10 tokensByProp): the refs are a consistent
+  // function of exactly ONE enum axis with full value coverage. Injectivity
+  // is NOT required — two axis values sharing a ref is still a function of
+  // the axis (CBDS paddingLeft: spacing.200 for large AND medium). Name
+  // substitution above stays the preferred shape (it generalizes to unseen
+  // values); this is the fallback for vocabularies whose names spell scale
+  // steps, not axis values.
+  for (const axis of axes) {
+    if (isBoolAxis(axis.values)) continue;
+    const byValue = new Map<string, string>();
+    let fits = true;
+    for (const o of defined) {
+      const value = axisValuesOf(o.variant)[axis.property];
+      if (value === undefined) {
+        fits = false;
+        break;
+      }
+      const seen = byValue.get(value);
+      if (seen !== undefined && seen !== o.path) {
+        fits = false;
+        break;
+      }
+      byValue.set(value, o.path);
+    }
+    if (!fits || !axis.values.every((v) => byValue.has(v))) continue;
+    return {
+      kind: 'per-value',
+      perValue: {
+        propName: axis.propName,
+        defaultValue: camel(axis.values[0]),
+        byValue: Object.fromEntries([...byValue].map(([v, p]) => [camel(v), `{${p}}`])),
+      },
+    };
+  }
+  if (!sameDepth) {
+    return { kind: 'drift', detail: `token paths differ in depth: ${distinct.join(' vs ')}` };
   }
   return {
     kind: 'drift',
@@ -644,14 +703,67 @@ const numOccurrences = (m: Merged, valueOf: (n: DumpNode) => number | undefined)
 // Bindings → tokens
 // ---------------------------------------------------------------------------
 
-function unifyField(m: Merged, field: string, ctx: Ctx, where: string): string | undefined {
+function unifyField(m: Merged, field: string, ctx: Ctx, where: string): UnifiedRef | undefined {
   const u = unifyRefs(
     m.occ.map((o) => ({ variant: o.variant, path: o.node.bound?.[field] ? dotPath(o.node.bound[field]) : undefined })),
     ctx.axes,
   );
   if (u.kind === 'ref') return u.ref;
+  if (u.kind === 'per-value') return u.perValue;
   if (u.kind === 'drift') ctx.notes.push(`${where} ${field}: ${u.detail}`);
   return undefined;
+}
+
+/** Per-part collector for value-level correlations: every per-value carry on
+ *  one part must ride the SAME enum axis (tokensByProp holds one `prop`);
+ *  a second axis is a NAMED refusal, never a silent merge. */
+interface ByPropCollector {
+  prop?: string;
+  map: Record<string, Record<string, string>>;
+}
+
+/** Carry one unified ref into a part's tokens record: plain refs land as
+ *  before; a per-value function lands as the DEFAULT value's ref in `tokens`
+ *  plus tokensByProp overrides for the values whose ref deviates (the
+ *  layoutByProp override discipline — only deviating values appear). */
+function carryRef(
+  tokens: Record<string, string>,
+  byProp: ByPropCollector,
+  cssProp: string,
+  u: UnifiedRef | undefined,
+  ctx: Ctx,
+  where: string,
+): void {
+  if (u === undefined) return;
+  if (typeof u === 'string') {
+    tokens[cssProp] = u;
+    return;
+  }
+  if (byProp.prop !== undefined && byProp.prop !== u.propName) {
+    ctx.notes.push(
+      `${where} ${cssProp}: bindings are a function of enum axis "${u.propName}" by value, but this part's per-value overrides already ride "${byProp.prop}" — tokensByProp carries ONE axis per part; NAMED, not proposed (review)`,
+    );
+    return;
+  }
+  byProp.prop = u.propName;
+  const baseRef = u.byValue[u.defaultValue];
+  tokens[cssProp] = baseRef;
+  const deviating: string[] = [];
+  for (const [value, ref] of Object.entries(u.byValue)) {
+    if (value === u.defaultValue || ref === baseRef) continue;
+    (byProp.map[value] ??= {})[cssProp] = ref;
+    deviating.push(`${value}=${ref}`);
+  }
+  ctx.notes.push(
+    `${where} ${cssProp}: bindings are a function of variant axis "${u.propName}" by VALUE (default ${u.defaultValue}=${baseRef}${deviating.length > 0 ? `; ${deviating.join(', ')}` : ''}) — carried as tokensByProp overrides (v10; the token names do not spell the axis values, so the substituted-ref shape cannot carry them)`,
+  );
+}
+
+/** Attach a collected tokensByProp to its part — after every carry ran. */
+function attachByProp(holder: Record<string, unknown>, byProp: ByPropCollector): void {
+  if (byProp.prop !== undefined && Object.keys(byProp.map).length > 0) {
+    holder.tokensByProp = { prop: byProp.prop, map: byProp.map };
+  }
 }
 
 /** Canvas paint → CSS color literal: '#rrggbb', or 8-digit '#rrggbbaa' when
@@ -675,7 +787,7 @@ function unifyPaint(
   where: string,
   paintName: string,
   mint?: { cssProperty: string; target: Record<string, string> },
-): string | undefined {
+): UnifiedRef | undefined {
   const paints = m.occ.map((o) => ({ variant: o.variant, paint: pick(o.node) }));
   if (paints.every((p) => p.paint === undefined)) return undefined;
   const raw = paints.find((p) => p.paint?.hex !== undefined);
@@ -700,7 +812,7 @@ function unifyPaint(
     paints.map((p) => ({ variant: p.variant, path: p.paint?.var ? dotPath(p.paint.var) : undefined })),
     ctx.axes,
   );
-  if (u.kind === 'ref') {
+  if (u.kind === 'ref' || u.kind === 'per-value') {
     // A BOUND paint whose alpha < 1: the token ref carries the color, not
     // the paint's opacity — no place in the contract vocabulary for it, so
     // the loss is NAMED (dump v1.1 captures it; the ref stays proposed).
@@ -710,46 +822,61 @@ function unifyPaint(
         `${where} ${paintName}: paint opacity ${alphaBound.paint!.alpha} rides the bound variable "${alphaBound.paint!.var}" — alpha is not representable on a token ref; binding proposed at full opacity, review`,
       );
     }
-    return u.ref;
+    return u.kind === 'ref' ? u.ref : u.perValue;
   }
   if (u.kind === 'drift') ctx.notes.push(`${where} ${paintName}: ${u.detail}`);
   return undefined;
 }
 
-/** Invert a node's variable bindings + paints into contract token refs. */
-function invertNodeTokens(m: Merged, isRoot: boolean, ctx: Ctx, where: string): Record<string, string> {
+/** Invert a node's variable bindings + paints into contract token refs.
+ *  Value-level correlations (v10) collect into `byProp` — the caller
+ *  attaches them to the part via attachByProp. */
+function invertNodeTokens(
+  m: Merged,
+  isRoot: boolean,
+  ctx: Ctx,
+  where: string,
+  byProp: ByPropCollector,
+): Record<string, string> {
   const tokens: Record<string, string> = {};
   const fields = new Set<string>();
   for (const o of m.occ) for (const f of Object.keys(o.node.bound ?? {})) fields.add(f);
   const f = (name: string) => (fields.has(name) ? unifyField(m, name, ctx, where) : undefined);
+  const carry = (cssProp: string, u: UnifiedRef | undefined) => carryRef(tokens, byProp, cssProp, u, ctx, where);
 
-  const bg = unifyPaint(m, (n) => (n.type === 'TEXT' ? undefined : n.fill), ctx, where, 'fill', {
-    cssProperty: 'background-color',
-    target: tokens,
-  });
-  if (bg) tokens['background-color'] = bg;
-  const strokeRef = unifyPaint(m, (n) => n.stroke, ctx, where, 'stroke', {
-    cssProperty: 'border-color',
-    target: tokens,
-  });
-  if (strokeRef) tokens['border-color'] = strokeRef;
+  carry(
+    'background-color',
+    unifyPaint(m, (n) => (n.type === 'TEXT' ? undefined : n.fill), ctx, where, 'fill', {
+      cssProperty: 'background-color',
+      target: tokens,
+    }),
+  );
+  carry(
+    'border-color',
+    unifyPaint(m, (n) => n.stroke, ctx, where, 'stroke', {
+      cssProperty: 'border-color',
+      target: tokens,
+    }),
+  );
 
-  // Paired fields → the contract's coarser vocabulary.
-  const pair = (a?: string, b?: string) => (a !== undefined && a === b ? a : undefined);
+  // Paired fields → the contract's coarser vocabulary. Per-value functions
+  // pair by identity (same axis, same per-value refs — see refKey).
+  const pair = (a?: UnifiedRef, b?: UnifiedRef) =>
+    a !== undefined && refKey(a) === refKey(b) ? a : undefined;
   const inline = pair(f('paddingLeft'), f('paddingRight'));
-  if (inline) tokens['padding-inline'] = inline;
+  if (inline) carry('padding-inline', inline);
   else if (fields.has('paddingLeft') || fields.has('paddingRight')) {
     ctx.notes.push(`${where}: left/right padding bindings differ — padding-inline not representable, review`);
   }
   const block = pair(f('paddingTop'), f('paddingBottom'));
-  if (block) tokens['padding-block'] = block;
+  if (block) carry('padding-block', block);
   else if (fields.has('paddingTop') || fields.has('paddingBottom')) {
     ctx.notes.push(`${where}: top/bottom padding bindings differ — padding-block not representable, review`);
   }
   const radii = ['topLeftRadius', 'topRightRadius', 'bottomLeftRadius', 'bottomRightRadius'];
   if (radii.some((r) => fields.has(r))) {
     const rs = radii.map((r) => f(r));
-    if (rs[0] !== undefined && rs.every((r) => r === rs[0])) tokens['border-radius'] = rs[0];
+    if (rs[0] !== undefined && rs.every((r) => refKey(r) === refKey(rs[0]))) carry('border-radius', rs[0]);
     else ctx.notes.push(`${where}: corner radii bindings are not uniform — border-radius not representable, review`);
   }
   const weights = ['strokeTopWeight', 'strokeRightWeight', 'strokeBottomWeight', 'strokeLeftWeight'];
@@ -758,30 +885,33 @@ function invertNodeTokens(m: Merged, isRoot: boolean, ctx: Ctx, where: string): 
       ? f('strokeWeight')
       : (() => {
           const ws = weights.map((x) => f(x));
-          return ws[0] !== undefined && ws.every((x) => x === ws[0]) ? ws[0] : undefined;
+          return ws[0] !== undefined && ws.every((x) => refKey(x) === refKey(ws[0])) ? ws[0] : undefined;
         })();
-    if (w) tokens['border-width'] = w;
+    if (w) carry('border-width', w);
     else ctx.notes.push(`${where}: stroke weight bindings are not uniform — border-width not representable, review`);
   }
-  const gap = f('itemSpacing');
-  if (gap) tokens.gap = gap;
-  const width = f('width');
-  if (width) tokens[isRoot ? 'max-width' : 'width'] = width;
-  const height = f('height');
-  if (height) tokens.height = height;
-  const minWidth = f('minWidth');
-  if (minWidth) tokens['min-width'] = minWidth;
-  const opacity = f('opacity');
-  if (opacity) tokens.opacity = opacity;
+  carry('gap', f('itemSpacing'));
+  carry(isRoot ? 'max-width' : 'width', f('width'));
+  carry('height', f('height'));
+  carry('min-width', f('minWidth'));
+  carry('min-height', f('minHeight'));
+  if (tokens['max-width'] === undefined) carry('max-width', f('maxWidth'));
+  else if (fields.has('maxWidth')) {
+    ctx.notes.push(`${where}: bound maxWidth collides with the root width→max-width convention — binding NAMED, not proposed (review)`);
+  }
+  carry('max-height', f('maxHeight'));
+  carry('opacity', f('opacity'));
 
-  // Bound variables on fields OUTSIDE the contract vocabulary (maxWidth,
-  // minHeight, counterAxisSpacing, …) are NAMED per field — a captured
-  // binding must never vanish without a receipt (STYLE-FIDELITY audit A19).
+  // Bound variables on fields OUTSIDE the contract vocabulary
+  // (counterAxisSpacing, …) are NAMED per field — a captured binding must
+  // never vanish without a receipt (STYLE-FIDELITY audit A19). min/max
+  // sizing joined the vocabulary in dump v1.4.
   const CONSUMED_BOUND_FIELDS = new Set([
     'paddingLeft', 'paddingRight', 'paddingTop', 'paddingBottom',
     'topLeftRadius', 'topRightRadius', 'bottomLeftRadius', 'bottomRightRadius',
     'strokeTopWeight', 'strokeRightWeight', 'strokeBottomWeight', 'strokeLeftWeight',
-    'strokeWeight', 'itemSpacing', 'width', 'height', 'minWidth', 'opacity',
+    'strokeWeight', 'itemSpacing', 'width', 'height', 'opacity',
+    'minWidth', 'minHeight', 'maxWidth', 'maxHeight',
   ]);
   for (const field of fields) {
     if (!CONSUMED_BOUND_FIELDS.has(field)) {
@@ -835,6 +965,42 @@ function invertNodeTokens(m: Merged, isRoot: boolean, ctx: Ctx, where: string): 
     // width 0); a PARTIAL stroke's COLOR stays the named refusal
     // (base-instance-check pins exactly this split).
     mintObservation(ctx, tokens, where, 'border-width', 'px', numOccurrences(m, (n) => n.strokeWeight), `${where}|strokeWeight`);
+  }
+  // Literal min/max sizing (dump v1.4): bounded, exact px facts — a drawn
+  // minHeight 44 is a tap-target fact that belongs in the render. Bound
+  // variables on these fields already rode `bound` above; literals mint like
+  // any other px channel (axis-correlated values take the substituted-ref
+  // shape through the mint classifier). Partial presence stays NAMED.
+  const MINMAX = [
+    ['minWidth', 'min-width'],
+    ['minHeight', 'min-height'],
+    ['maxWidth', 'max-width'],
+    ['maxHeight', 'max-height'],
+  ] as const;
+  for (const [field, cssProp] of MINMAX) {
+    if (fields.has(field)) continue; // bound — carried above
+    const pick = (n: DumpNode) => n[field];
+    const withVal = m.occ.filter((o) => typeof pick(o.node) === 'number');
+    if (withVal.length === 0) continue;
+    if (tokens[cssProp] !== undefined) {
+      ctx.notes.push(
+        `${where}: literal ${field} also present where "${cssProp}" already carries a binding — literal NAMED, not minted (review)`,
+      );
+      continue;
+    }
+    reportUnbound(ctx, where, field, pick(withVal[0].node)!);
+    if (withVal.length !== m.occ.length) {
+      ctx.mint?.partialSources.add(`${where}|${field}`);
+      ctx.notes.push(
+        `${where}: literal ${field} present in ${withVal.length}/${m.occ.length} variants — inconsistent, NAMED, not minted; review`,
+      );
+      continue;
+    }
+    mintObservation(
+      ctx, tokens, where, cssProp, 'px',
+      m.occ.map((o) => ({ variant: o.variant, value: pick(o.node)! })),
+      `${where}|${field}`,
+    );
   }
   return tokens;
 }
@@ -1289,7 +1455,7 @@ function mintTextChannels(
   );
 }
 
-function invertTextTokens(m: Merged, ctx: Ctx, where: string): Record<string, string> {
+function invertTextTokens(m: Merged, ctx: Ctx, where: string, byProp: ByPropCollector): Record<string, string> {
   const tokens: Record<string, string> = {};
   const color = unifyPaint(
     m,
@@ -1299,7 +1465,7 @@ function invertTextTokens(m: Merged, ctx: Ctx, where: string): Record<string, st
     'text fill',
     { cssProperty: 'color', target: tokens },
   );
-  if (color) tokens.color = color;
+  carryRef(tokens, byProp, 'color', color, ctx, where);
 
   const t = first(m.occ, (n) => n.text);
   if (!t) return tokens;
@@ -1646,7 +1812,9 @@ function buildPart(
   const visibleWhen = visibilityFromPresence(m, ctx, where);
 
   if (m.type === 'TEXT') {
-    const tokens = invertTextTokens(m, ctx, where);
+    const byProp: ByPropCollector = { map: {} };
+    const tokens = invertTextTokens(m, ctx, where, byProp);
+    attachByProp(part, byProp);
     invertNodeOpacity(m, part, tokens, ctx, where);
     if (m.occ.some((o) => (o.node.effects?.length ?? 0) > 0)) {
       ctx.notes.push(
@@ -1799,7 +1967,9 @@ function buildPart(
     return part;
   }
 
-  const tokens = invertNodeTokens(m, false, ctx, where);
+  const partByProp: ByPropCollector = { map: {} };
+  const tokens = invertNodeTokens(m, false, ctx, where, partByProp);
+  attachByProp(part, partByProp);
 
   // v9 shape (#42, dump v1.3): parametric leaf decor — the part carries the
   // captured geometry, hidden-pattern visibility, and per-variant placement.
@@ -1995,6 +2165,11 @@ function flattenBaseInstances(variants: DumpNode[], ctx: Ctx): BaseInstanceCaptu
     if (inst.bound) variant.bound = { ...(variant.bound ?? {}), ...inst.bound };
     if (inst.fillWidth !== undefined) variant.fillWidth = inst.fillWidth;
     if (inst.opacity !== undefined) variant.opacity = inst.opacity; // dump v1.2
+    // dump v1.4: literal min/max sizing travels with the styled node.
+    if (inst.minWidth !== undefined) variant.minWidth = inst.minWidth;
+    if (inst.minHeight !== undefined) variant.minHeight = inst.minHeight;
+    if (inst.maxWidth !== undefined) variant.maxWidth = inst.maxWidth;
+    if (inst.maxHeight !== undefined) variant.maxHeight = inst.maxHeight;
     variant.children = [...kids.slice(0, index), ...(inst.children ?? []), ...kids.slice(index + 1)];
     captures.push({
       variant: variant.name,
@@ -2247,6 +2422,10 @@ function proposeStateDiffs(
       );
       if (u.kind === 'ref') {
         if (u.ref !== baseRootTokens[cssProp]) target[cssProp] = u.ref;
+      } else if (u.kind === 'per-value') {
+        ctx.notes.push(
+          `${where} ${paintName} (state ${state}): bindings are a function of an enum axis by value — a state block holds ONE ref per channel (tokensByProp has no per-state form); NAMED, not proposed (review)`,
+        );
       } else if (u.kind === 'drift') {
         ctx.notes.push(`${where} ${paintName} (state ${state}): ${u.detail}`);
       }
@@ -2558,7 +2737,8 @@ export function proposeFromDump(
   if (rootLayout) root.layout = rootLayout;
   const rootByProp = invertLayoutByProp(merged, ctx, where);
   if (rootByProp) root.layoutByProp = rootByProp;
-  const rootTokens = invertNodeTokens(merged, true, ctx, where);
+  const rootTokensByProp: ByPropCollector = { map: {} };
+  const rootTokens = invertNodeTokens(merged, true, ctx, where, rootTokensByProp);
 
   // Generator artifact: a root whose only child is the auto-injected `label`
   // text node (contracts with a `children` text prop and no parts). The node
@@ -2567,7 +2747,9 @@ export function proposeFromDump(
   const autoLabel =
     only && only.type === 'TEXT' && only.name === 'label' && unifiedPropRef(only, 'characters', ctx, `${where}/label`);
   if (only && autoLabel) {
-    const textTokens = invertTextTokens(only, ctx, `${where}/label`);
+    // The label's tokens hoist to the root — its per-value correlations ride
+    // the SAME root collector, so a hoisted function lands on root.tokensByProp.
+    const textTokens = invertTextTokens(only, ctx, `${where}/label`, rootTokensByProp);
     Object.assign(rootTokens, textTokens);
     // The label's tokens hoisted — retarget its captured mint observations
     // to the record that actually ships (rootTokens).
@@ -2590,6 +2772,7 @@ export function proposeFromDump(
   }
   invertNodeOpacity(merged, root, rootTokens, ctx, where);
   invertNodeEffects(merged, rootTokens, ctx, where);
+  attachByProp(root, rootTokensByProp);
   attachTokens(ctx, root, rootTokens);
 
   // Promotion from the flattened base instance(s) — after the anatomy, so

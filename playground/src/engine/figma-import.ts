@@ -11,6 +11,10 @@
  */
 import { importFromUrl } from '../../../extract/figma/rest/fetch.js';
 import { proposeBatchFromDump, proposeFromFigmaDump } from '../../../core/index.js';
+
+// Captured tokens (dump v1.4 `_variables`) — the designer's real variables,
+// built by the SAME core function the receipts referee.
+export { capturedTokensFromDump } from '../../../core/index.js';
 import { contractIdByName } from './data.js';
 import { activeTokens } from './token-source.js';
 

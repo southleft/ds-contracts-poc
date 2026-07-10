@@ -34,6 +34,7 @@ import {
   STATE_PREVIEW_PROPERTY,
   pascal,
   resolveLayout,
+  resolveTokens,
   slotFigmaProperty,
   slotVisibilityProperty,
   statePreviewLabel,
@@ -656,7 +657,11 @@ function applyTokens(
         next.lineHeight = px(resolveLiteral(tokenPath));
         break;
       default:
-        break; // outline-* etc. are state/CSS concerns
+        // outline-* are state/CSS concerns; min-height/max-height (dump
+        // v1.4 style facts) are CSS-side — the canvas variant is drawn at
+        // its real per-variant height, so a min/max binding would be
+        // redundant chrome there (and the sync scripts are golden-pinned).
+        break;
     }
   }
   return next;
@@ -740,7 +745,7 @@ function formControlSpec(
     layout: { mode: 'HORIZONTAL', primary: 'MIN', counter: 'CENTER' },
     grow: part.layout?.grow || undefined,
   };
-  const childCtx = applyTokens(spec, part.tokens ?? {}, subst, ctx);
+  const childCtx = applyTokens(spec, resolveTokens(part, subst), subst, ctx);
   const ref = (part.attrs?.placeholder ?? '').match(PLACEHOLDER_ATTR_REF);
   const prop = ref
     ? contract.props.find((p) => p.type === 'text' && p.name === ref[1])
@@ -930,7 +935,7 @@ function partToSpecInner(
 ): NodeSpec {
   if (part.icon) {
     // The part's own tokens (e.g. a color override) apply to the glyph.
-    const iconCtx = applyTokens({ type: 'frame', name: '_' }, part.tokens ?? {}, subst, ctx);
+    const iconCtx = applyTokens({ type: 'frame', name: '_' }, resolveTokens(part, subst), subst, ctx);
     const spec: NodeSpec = {
       type: 'svg',
       name,
@@ -944,7 +949,7 @@ function partToSpecInner(
   // fill from tokens, placement/rotation from the compiled stylesWhen.
   if (part.shape) {
     const spec: NodeSpec = { type: 'shape', name, shape: { ...part.shape } };
-    applyTokens(spec, part.tokens ?? {}, subst, ctx);
+    applyTokens(spec, resolveTokens(part, subst), subst, ctx);
     const placement = shapePlacement(part, contract, subst);
     if (placement.absolute) spec.absolute = placement.absolute;
     if (placement.rotation !== undefined) spec.shape!.rotation = placement.rotation;
@@ -987,13 +992,13 @@ function partToSpecInner(
         return { dep: dep.name, props: mapDepProps(dep, item.props ?? {}, subst, item.text) };
       });
     }
-    applyTokens(spec, part.tokens ?? {}, subst, ctx);
+    applyTokens(spec, resolveTokens(part, subst), subst, ctx);
     applyVisibleWhen(spec, part, contract);
     return spec;
   }
   if (part.text !== undefined) {
     const spec: NodeSpec = { type: 'text', name };
-    const textCtx = applyTokens(spec, part.tokens ?? {}, subst, ctx);
+    const textCtx = applyTokens(spec, resolveTokens(part, subst), subst, ctx);
     spec.characters = part.text;
     spec.fontSize = textCtx.fontSize ?? 14;
     spec.fontStyle = textCtx.fontStyle ?? 'Medium';
@@ -1010,7 +1015,7 @@ function partToSpecInner(
     };
     const fraction = Math.min(1, Math.max(0, num(part.meter.valueProp, 0) / (num(part.meter.maxProp, 100) || 100)));
     const spec: NodeSpec = { type: 'frame', name, layout: { mode: 'HORIZONTAL', primary: 'MIN', counter: 'MIN' }, pct: fraction, children: [] };
-    applyTokens(spec, part.tokens ?? {}, subst, ctx);
+    applyTokens(spec, resolveTokens(part, subst), subst, ctx);
     applyVisibleWhen(spec, part, contract);
     return spec;
   }
@@ -1019,7 +1024,7 @@ function partToSpecInner(
       (p) => p.type === 'text' && p.bindings.code.prop === part.content!.prop,
     )!;
     const spec: NodeSpec = { type: 'text', name };
-    const textCtx = applyTokens(spec, part.tokens ?? {}, subst, ctx);
+    const textCtx = applyTokens(spec, resolveTokens(part, subst), subst, ctx);
     spec.characters = typeof prop.default === 'string' ? prop.default : contract.name;
     spec.fontSize = textCtx.fontSize ?? 16;
     spec.fontStyle = textCtx.fontStyle ?? 'Medium';
@@ -1036,7 +1041,7 @@ function partToSpecInner(
     layout: layoutSpec(part, false, subst),
     grow: part.layout?.grow || undefined,
   };
-  const childCtx = applyTokens(spec, part.tokens ?? {}, subst, ctx);
+  const childCtx = applyTokens(spec, resolveTokens(part, subst), subst, ctx);
   spec.children = variantParts(part.parts ?? {}, subst).map(([childName, child]) =>
     partToSpec(childName, child, contract, byId, childCtx, subst),
   );

@@ -224,7 +224,9 @@ export type MapDegradationCode =
   | 'blend-mode-unsupported'
   | 'rotation-unsupported'
   | 'vector-geometry-unsupported'
-  | 'min-max-size-unsupported'
+  // 'min-max-size-unsupported' retired in dump v1.4: literal min/max sizing
+  // is CARRIED (minWidth/minHeight/maxWidth/maxHeight style facts) instead
+  // of degraded away.
   | 'text-channel-unsupported';
 
 export interface MapDegradation {
@@ -658,18 +660,7 @@ function nameUnsupportedChannels(node: RestNode, ctx: Ctx, nodePath: string, str
       message: `strokeAlign ${node.strokeAlign} — dump consumers render INSIDE strokes (CSS borders); alignment dropped`,
     });
   }
-  const sizes: string[] = [];
-  if (node.minWidth != null) sizes.push(`minWidth ${node.minWidth}`);
-  if (node.maxWidth != null) sizes.push(`maxWidth ${node.maxWidth}`);
-  if (node.minHeight != null) sizes.push(`minHeight ${node.minHeight}`);
-  if (node.maxHeight != null) sizes.push(`maxHeight ${node.maxHeight}`);
-  if (sizes.length > 0) {
-    ctx.report.degradations.push({
-      code: 'min-max-size-unsupported',
-      nodePath,
-      message: `literal min/max sizing (${sizes.join(', ')}) has no dump v1 projection — dropped (bound min-width variables DO ride \`bound\`)`,
-    });
-  }
+  // Literal min/max sizing is CARRIED since dump v1.4 (mapNode) — no receipt.
 }
 
 function mapNode(
@@ -697,6 +688,12 @@ function mapNode(
   const shape = mapShape(node, ctx, nodePath, parentBox);
   if (shape) out.shape = shape;
   nameUnsupportedChannels(node, ctx, nodePath, stroke !== undefined, shape !== undefined);
+  // dump v1.4: literal min/max sizing carries as style facts (a drawn
+  // minHeight 44 is a tap-target fact) — previously a named degradation.
+  if (typeof node.minWidth === 'number') out.minWidth = node.minWidth;
+  if (typeof node.minHeight === 'number') out.minHeight = node.minHeight;
+  if (typeof node.maxWidth === 'number') out.maxWidth = node.maxWidth;
+  if (typeof node.maxHeight === 'number') out.maxHeight = node.maxHeight;
   if (node.layoutSizingHorizontal === 'FILL') out.fillWidth = true;
   if (node.visible === false) out.hidden = true;
   // dump v1.2: NODE opacity (distinct from paint alpha) — the disabled-variant

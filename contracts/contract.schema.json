@@ -668,6 +668,35 @@
             "pattern": "^\\{[a-z0-9.{}-]+\\}$"
           }
         },
+        "tokensByProp": {
+          "type": "object",
+          "properties": {
+            "prop": {
+              "type": "string"
+            },
+            "map": {
+              "type": "object",
+              "propertyNames": {
+                "type": "string"
+              },
+              "additionalProperties": {
+                "type": "object",
+                "propertyNames": {
+                  "type": "string"
+                },
+                "additionalProperties": {
+                  "type": "string",
+                  "pattern": "^\\{[a-z0-9.{}-]+\\}$"
+                }
+              }
+            }
+          },
+          "required": [
+            "prop",
+            "map"
+          ],
+          "additionalProperties": false
+        },
         "states": {
           "type": "object",
           "propertyNames": {

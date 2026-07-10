@@ -29,6 +29,7 @@ export {
   componentRefsOf,
   pascal,
   resolveLayout,
+  resolveTokens,
   slotFigmaProperty,
   slotVisibilityProperty,
   slotsOf,
@@ -70,6 +71,14 @@ export {
   type MintedBinding,
   type MintedEntry,
 } from './mint-tokens.js';
+
+// Captured tokens (dump v1.4 _variables → the designer's real token layer).
+export {
+  capturedTokensFromDump,
+  type CapturedTokenEntry,
+  type CapturedTokenLayer,
+  type CapturedTokenSkip,
+} from './captured-tokens.js';
 
 // Code-import twin: raw literals + foreign var()s → imported.* tree.
 export {

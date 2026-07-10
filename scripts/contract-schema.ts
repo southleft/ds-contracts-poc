@@ -126,6 +126,24 @@ export const LayoutByPropSchema = z.strictObject({
   map: z.record(z.string(), VariantLayoutSchema),
 });
 
+/** v10: token bindings driven by an enum prop — the VALUE-level sibling of
+ *  the substituted ref (owner field case: CBDS Button-Brand Primary, whose
+ *  root paddingLeft/paddingRight bind {spacing.200} on large/medium and
+ *  {spacing.150} on small, and whose height binds {component-size.xlarge|
+ *  large|medium} per size). A substituted ref ({spacing.{size}}) can only
+ *  carry bindings whose token NAMES spell the axis value; real foreign
+ *  vocabularies name tokens by scale step, so a binding that is a plain
+ *  FUNCTION of one enum axis needs a per-value map. `map` values are
+ *  OVERRIDES merged over the part's base `tokens` (layoutByProp semantics:
+ *  only the values that deviate appear; refs are plain — no placeholders).
+ *  Code: enum-modifier rules on the root / descendant rules on nested parts
+ *  (exactly the substituted-ref rule shapes); canvas + inline emitters:
+ *  resolved per compiled variant via resolveTokens below. */
+export const TokensByPropSchema = z.strictObject({
+  prop: z.string(),
+  map: z.record(z.string(), z.record(z.string(), TokenRefSchema)),
+});
+
 /** v7 stylesWhen: the tight whitelist of literal CSS properties a
  *  conditional style may set. Deliberately NOT tokens — these are
  *  behavioral/positional properties with no token vocabulary (a color or a
@@ -288,6 +306,8 @@ export interface Part {
   /** CSS property → token reference. The CSS Module AND the Figma bindings
    *  are generated from these — there is no handwritten style layer. */
   tokens?: Record<string, string>;
+  /** v10: per-enum-value token overrides merged over `tokens`. */
+  tokensByProp?: z.infer<typeof TokensByPropSchema>;
   /** interaction state → (CSS property → token reference). Root-level only
    *  in the current generators. */
   states?: Record<string, Record<string, string>>;
@@ -328,6 +348,8 @@ export const PartSchema: z.ZodType<Part> = z.lazy(() =>
     /** v9. */
     shape: ShapeSchema.optional(),
     tokens: z.record(z.string(), TokenRefSchema).optional(),
+    /** v10. */
+    tokensByProp: TokensByPropSchema.optional(),
     states: z.record(z.string(), z.record(z.string(), TokenRefSchema)).optional(),
     content: z.strictObject({ prop: z.string() }).optional(),
     text: z.string().optional(),
@@ -483,6 +505,21 @@ export function resolveLayout(
 ): ResolvedLayout | undefined {
   const base = part.layout as ResolvedLayout | undefined;
   const byProp = part.layoutByProp;
+  const override = byProp ? byProp.map[subst[byProp.prop] ?? ''] : undefined;
+  if (!override) return base;
+  return { ...base, ...override };
+}
+
+/** The token record a part carries under one concrete variant combo:
+ *  tokensByProp override (if the combo's value has one) merged over the base
+ *  `tokens` (v10 — the resolveLayout shape). With an empty subst (no enum
+ *  context) the base tokens win. The ONE shared resolver for every surface
+ *  that compiles per variant (figma script, inline emitter, canvas preview);
+ *  the static CSS emitters render the map as enum-class/descendant rules
+ *  instead. */
+export function resolveTokens(part: Part, subst: Record<string, string>): Record<string, string> {
+  const base = part.tokens ?? {};
+  const byProp = part.tokensByProp;
   const override = byProp ? byProp.map[subst[byProp.prop] ?? ''] : undefined;
   if (!override) return base;
   return { ...base, ...override };

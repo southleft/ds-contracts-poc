@@ -123,6 +123,15 @@ export interface DumpNode {
   fill?: DumpPaint;
   stroke?: DumpPaint;
   strokeWeight?: number;
+  /** Literal min/max sizing in px (dump v1.4, additive) — carried as
+   *  min-width/min-height/max-width/max-height style facts (a drawn
+   *  minHeight 44 is a tap-target fact). Bound min/max variables ride
+   *  `bound` instead. Absence in older dumps means not captured (their
+   *  captures receipted the channel as min-max-size-unsupported). */
+  minWidth?: number;
+  minHeight?: number;
+  maxWidth?: number;
+  maxHeight?: number;
   /** layoutSizingHorizontal === 'FILL' — the canvas projection of both
    *  `layout.grow` (in a row parent) and `align: stretch` (on children of a
    *  column parent); propose.ts disambiguates by parent direction. */
@@ -182,12 +191,29 @@ export interface DumpDegradation {
   message: string;
 }
 
+/** One captured variable (dump v1.4) — the resolved value for the consuming
+ *  mode plus the Plugin API's resolvedType. COLOR values are '#rrggbb' (or
+ *  8-digit '#rrggbbaa'); FLOAT values are raw numbers (the consumer decides
+ *  px vs unitless from usage — opacity-bound variables are unitless).
+ *  STRING/BOOLEAN variables are carried for completeness but are not
+ *  registrable as CSS custom properties (named receipt downstream). */
+export interface DumpVariable {
+  type: 'COLOR' | 'FLOAT' | 'STRING' | 'BOOLEAN' | string;
+  value: string | number | boolean;
+}
+
 export interface DumpFile {
   _provenance?: { fileKey?: string | null; extractedAt?: string | number; note?: string };
   /** dump v1.2, additive — absent in older dumps (their captures were run
    *  before the channel existed; absence means "not receipted", not clean). */
   _degradations?: DumpDegradation[];
-  [setName: string]: DumpSet | DumpFile['_provenance'] | DumpDegradation[] | undefined;
+  /** dump v1.4, additive — every variable the capture resolved a binding
+   *  through, keyed by its slash-form name, with the resolved value for the
+   *  consuming mode. Absent in older dumps (names-only capture) and in REST
+   *  dumps (the variables endpoint is Enterprise-only — value-only minting
+   *  stays the degraded route there). */
+  _variables?: Record<string, DumpVariable>;
+  [setName: string]: DumpSet | DumpFile['_provenance'] | DumpDegradation[] | Record<string, DumpVariable> | undefined;
 }
 
 export const isDumpSet = (v: unknown): v is DumpSet =>
