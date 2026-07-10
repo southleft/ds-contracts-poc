@@ -147,8 +147,49 @@ function reportSubject(report) {
 
 let busy = false; // one run at a time, across both modes
 
+// The current selection's component set name(s) — the empty-names-box default
+// for Send to Playground (a real UI kit's ALL-SETS dump is a megadump; the
+// selection is almost always what the designer means). Each selected node
+// resolves to the nearest component identity: an ancestor COMPONENT_SET, an
+// ancestor COMPONENT (its owning set when it has one), or — for instances —
+// the main component's owning set. Read-only; unresolvable nodes are skipped.
+async function selectionSetNames() {
+  const names = [];
+  const add = (name) => {
+    if (name && name !== 'Slot' && names.indexOf(name) < 0) names.push(name);
+  };
+  for (const node of figma.currentPage.selection) {
+    let n = node;
+    while (n && n.type !== 'PAGE') {
+      if (n.type === 'COMPONENT_SET') { add(n.name); break; }
+      if (n.type === 'COMPONENT') {
+        add(n.parent && n.parent.type === 'COMPONENT_SET' ? n.parent.name : n.name);
+        break;
+      }
+      if (n.type === 'INSTANCE') {
+        try {
+          const main = await n.getMainComponentAsync();
+          if (main) add(main.parent && main.parent.type === 'COMPONENT_SET' ? main.parent.name : main.name);
+        } catch (e) { /* detached/broken instance — no set to name */ }
+        break;
+      }
+      n = n.parent;
+    }
+  }
+  return names;
+}
+
 figma.ui.onmessage = async (msg) => {
   if (!msg || !msg.type) return;
+  if (msg.type === 'query-selection-sets') {
+    // Allowed anytime (read-only), like select-node.
+    try {
+      post({ type: 'selection-sets', names: await selectionSetNames() });
+    } catch (e) {
+      post({ type: 'selection-sets', names: [] });
+    }
+    return;
+  }
   if (msg.type === 'select-node') {
     // Canvas focus only — allowed anytime, never blocked by a run.
     try {
@@ -233,7 +274,7 @@ async function runSendToPlayground(dumpCode, pairCode) {
   }
   const setNames = Object.keys(dump || {}).filter(function (k) { return k !== '_provenance' && k !== '_degradations'; });
   if (setNames.length === 0) {
-    return done(false, 'No component sets matched — check the names against this file’s component sets, or leave the box empty to send every set.');
+    return done(false, 'No component sets matched — check the names against this file’s component sets. An empty names box sends your current selection’s set(s); with nothing selected it sends every set.');
   }
 
   const body = JSON.stringify(dump);

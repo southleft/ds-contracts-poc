@@ -13,6 +13,9 @@ export interface ReceiptEntry {
   message: string;
   /** Nearest-token candidates, verbatim. */
   suggestions?: string[];
+  /** Raw technical detail (e.g. a validator's own text) — rendered as an
+   *  expandable secondary line, NEVER as the headline. */
+  detail?: string;
 }
 
 export interface ReceiptGroup {

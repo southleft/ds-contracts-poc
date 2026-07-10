@@ -1406,6 +1406,63 @@ const cases: Case[] = [
       }
     },
   },
+  {
+    // Owner field failure (first live Send-to-Playground, CBDS UI Kit Demo):
+    // private-helper names ("_Avatar Indicator"), template names
+    // ("Button / Primary / Medium", "Type=Text, Variant=Error"), and the
+    // child-stub ids derived from them produced contract ids the schema
+    // refuses. The rule: sanitize AT PROPOSAL (componentIdSlug — the
+    // prop-identifier discipline), every changed spelling a NAMED note, the
+    // component ref and its stub sharing ONE function so they cannot drift.
+    // Receipt runs over the LIVE plugin-transport dumps, committed verbatim.
+    id: 'design-id-sanitize-at-proposal',
+    claim: 'C5-extraction',
+    run: () => {
+      const r = run(TSX, ['extract/figma/cbds-batch-check.ts']);
+      if (r.status !== 0) throw new Error(`CBDS batch receipt failed:\n${r.out}`);
+      for (const line of [
+        '✔ componentIdSlug("_variable-list-item") = "variable-list-item"',
+        '✔ componentIdSlug("Button / Primary / Medium") = "button-primary-medium"',
+        '✔ componentIdSlug("Type=Text, Variant=Error") = "type-text-variant-error"',
+        '✔ componentIdSlug("01 Icons") = "c-01-icons"',
+        '✔ "_variable-list-item" proposes with id "ds.variable-list-item"',
+        '✔ its sanitize note NAMES the original spelling and the rule',
+        '✔ "Avatar" child stub id is "ds.avatar-indicator"',
+        '✔ the anatomy component ref uses the SAME sanitized id as the stub',
+        '✔ the stub-id sanitize note NAMES "_Avatar Indicator" → "ds.avatar-indicator"',
+        '✔ no "ds.-" id survives anywhere in the Avatar proposal or its stubs',
+      ]) {
+        if (!r.out.includes(line)) throw new Error(`missing check: ${line}`);
+      }
+    },
+  },
+  {
+    // The other half of the field failure: ONE bad set killed the WHOLE
+    // receive and the raw zod issue array rendered verbatim in the rail.
+    // proposeBatchFromDump (the function the playground receive paths run)
+    // must complete the full ALL-SETS replay with zero raw errors, name a
+    // poisoned set as a plain-words skip while the rest import, name real
+    // sanitized-id collisions, and never headline machine text.
+    id: 'design-batch-isolation-plain-words-skips',
+    claim: 'C5-extraction',
+    run: () => {
+      const r = run(TSX, ['extract/figma/cbds-batch-check.ts']);
+      if (r.status !== 0) throw new Error(`CBDS batch receipt failed:\n${r.out}`);
+      for (const line of [
+        '✔ every set accounted for: proposed + skipped = total',
+        '✔ ALL 1618 sets propose (zero skips on the live dump after sanitize)',
+        '✔ every proposed id satisfies the schema pattern',
+        '✔ the real id collision ("RadioButton" vs "Radio button" → ds.radio-button) is NAMED, never silent',
+        '✔ the healthy set still proposes',
+        '✔ the poisoned set is a NAMED skip',
+        '✔ the skip reason is plain words ("Set "Poisoned" could not be proposed: …"), not machine output',
+        '✔ a thrown zod error formats as words ("the proposed contract did not fit the contract schema — …")',
+        '✔ the raw zod text survives as expandable detail, not the headline',
+      ]) {
+        if (!r.out.includes(line)) throw new Error(`missing check: ${line}`);
+      }
+    },
+  },
 ];
 
 // ---------------------------------------------------------------------------

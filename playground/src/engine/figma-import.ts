@@ -10,12 +10,11 @@
  * what CI referees (roundtrip-rest) is what the demo shows.
  */
 import { importFromUrl } from '../../../extract/figma/rest/fetch.js';
-import { proposeFromFigmaDump } from '../../../core/index.js';
+import { proposeBatchFromDump, proposeFromFigmaDump } from '../../../core/index.js';
 import { contractIdByName } from './data.js';
 import { activeTokens } from './token-source.js';
 
 export type FigmaImportResult = Awaited<ReturnType<typeof importFromUrl>>;
-type DumpSetArg = Parameters<typeof proposeFromFigmaDump>[0];
 export type FigmaProposal = ReturnType<typeof proposeFromFigmaDump> & { setName: string };
 
 /** The fixture canvas: the repo's own Badge set, REST-shaped (fixtures/badge.rest.json). */
@@ -52,27 +51,25 @@ export async function importFigmaDemo(opts: { degraded: boolean }): Promise<Figm
   return importFromUrl(DEMO_URL, 'demo-fixture-token', { fetchImpl });
 }
 
-/** Every component set in a dump (imported or pasted) → a proposed contract
- *  + its receipts. */
-export function proposalsFromDump(dump: FigmaImportResult['dump']): FigmaProposal[] {
-  const fileKey = dump._provenance?.fileKey ?? null;
-  const out: FigmaProposal[] = [];
-  for (const [name, value] of Object.entries(dump)) {
-    if (name === '_provenance' || !value || typeof value !== 'object' || !('variants' in value)) continue;
-    out.push({
-      setName: name,
-      // The ACTIVE corpus — nearest-token suggestions and hex→token matching
-      // come from the user's pasted tree when one is applied. mintUnbound:
-      // values whose variable names are unrecoverable (the non-Enterprise
-      // 403) become provisional `imported.*` tokens the proposal binds — the
-      // degraded import stays styled at literal fidelity (core/mint-tokens.ts).
-      ...proposeFromFigmaDump(value as DumpSetArg, {
-        corpus: activeTokens().corpus,
-        contractIdByName,
-        fileKey,
-        mintUnbound: true,
-      }),
-    });
-  }
-  return out;
+export type DumpProposalBatch = ReturnType<typeof proposeBatchFromDump>;
+
+/** Every component set in a dump (imported, pasted, or bridge-delivered) → a
+ *  proposed contract + its receipts, with PER-SET ISOLATION (owner field
+ *  case: a real UI-kit dump carries template/private-helper sets whose
+ *  proposal can refuse) — one set failing must not kill the batch, and raw
+ *  validator JSON never leaves the engine as a headline. The isolation loop
+ *  itself is core (proposeBatchFromDump — the code CI's receipts referee);
+ *  this wrapper only supplies the playground's live corpus and options. */
+export function proposalsFromDump(dump: FigmaImportResult['dump']): DumpProposalBatch {
+  // The ACTIVE corpus — nearest-token suggestions and hex→token matching
+  // come from the user's pasted tree when one is applied. mintUnbound:
+  // values whose variable names are unrecoverable (the non-Enterprise
+  // 403) become provisional `imported.*` tokens the proposal binds — the
+  // degraded import stays styled at literal fidelity (core/mint-tokens.ts).
+  return proposeBatchFromDump(dump, {
+    corpus: activeTokens().corpus,
+    contractIdByName,
+    fileKey: dump._provenance?.fileKey ?? null,
+    mintUnbound: true,
+  });
 }
