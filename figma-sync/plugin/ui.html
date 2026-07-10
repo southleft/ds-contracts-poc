@@ -140,10 +140,11 @@
     <label for="send-sets">Component set names (optional)</label>
     <input type="text" id="send-sets" spellcheck="false" autocomplete="off"
       placeholder="Badge, Switch, Card" />
-    <span class="hint">Comma-separated, exact names. Leave empty to send every
-      component set in this file (the Slot utility is always skipped) — the
-      same scoping the dump script&rsquo;s TARGET_SETS line gives the
-      copy/paste route.</span>
+    <span class="hint">Comma-separated, exact names — the explicit override.
+      Left empty, the plugin sends the component set(s) of your CURRENT
+      SELECTION on the canvas; with nothing selected it sends every component
+      set in this file (the Slot utility is always skipped) — the same scoping
+      the dump script&rsquo;s TARGET_SETS line gives the copy/paste route.</span>
   </div>
   <div class="row">
     <button class="primary" id="send-run">Send to Playground</button>
@@ -231,6 +232,26 @@
     box.appendChild(line);
   }
 
+  // Scope + send. Empty names box + a canvas selection = the selection's
+  // component set(s), in plain words; empty box + no selection = every set
+  // (also in plain words). The names box stays the explicit override, and the
+  // scoping mechanism is unchanged: the TARGET_SETS seam of the VERBATIM
+  // embedded dump script.
+  function doSend(pairCode, sets, scopeLine) {
+    var source = $('dump-source').textContent.replace(/^\n/, '');
+    var scoped = source.replace(/^const TARGET_SETS = \[[^\n]*\];$/m,
+      'const TARGET_SETS = ' + JSON.stringify(sets) + ';');
+    if (scoped === source) {
+      sendError('Could not scope the dump script (its TARGET_SETS line was not found) — this build is broken; re-download the plugin from the playground.');
+      setBusy(false);
+      return;
+    }
+    $('send-status').textContent = scopeLine;
+    parent.postMessage({ pluginMessage: { type: 'run-send', dumpCode: scoped, pairCode: pairCode } }, '*');
+  }
+
+  var pendingSendCode = null; // pairing code awaiting the selection answer
+
   sendRun.onclick = function () {
     $('send-result').hidden = true;
     var pairCode = $('send-code').value.trim().toUpperCase();
@@ -239,16 +260,15 @@
       return;
     }
     var sets = $('send-sets').value.split(',').map(function (s) { return s.trim(); }).filter(Boolean);
-    var source = $('dump-source').textContent.replace(/^\n/, '');
-    var scoped = source.replace(/^const TARGET_SETS = \[[^\n]*\];$/m,
-      'const TARGET_SETS = ' + JSON.stringify(sets) + ';');
-    if (scoped === source && sets.length > 0) {
-      sendError('Could not scope the dump script (its TARGET_SETS line was not found) — this build is broken; re-download the plugin from the playground.');
+    setBusy(true);
+    if (sets.length > 0) {
+      doSend(pairCode, sets, 'Sending: ' + sets.join(', ') + ' (from the names box)…');
       return;
     }
-    setBusy(true);
-    $('send-status').textContent = 'Reading this file’s component sets…';
-    parent.postMessage({ pluginMessage: { type: 'run-send', dumpCode: scoped, pairCode: pairCode } }, '*');
+    // Empty box: ask code.js what the current selection resolves to.
+    pendingSendCode = pairCode;
+    $('send-status').textContent = 'Checking your selection…';
+    parent.postMessage({ pluginMessage: { type: 'query-selection-sets' } }, '*');
   };
 
   function showSendResult(msg) {
@@ -378,6 +398,16 @@
       setBusy(false);
       $('paste-status').textContent = '';
       showPasteResult(msg);
+    } else if (msg.type === 'selection-sets') {
+      if (pendingSendCode === null) return;
+      var code = pendingSendCode;
+      pendingSendCode = null;
+      var names = Array.isArray(msg.names) ? msg.names : [];
+      if (names.length > 0) {
+        doSend(code, names, 'Sending: ' + names.join(', ') + ' (from your selection)…');
+      } else {
+        doSend(code, [], 'Nothing selected and the names box is empty — sending every component set in this file…');
+      }
     } else if (msg.type === 'send-status') {
       $('send-status').textContent = msg.line;
     } else if (msg.type === 'send-result') {

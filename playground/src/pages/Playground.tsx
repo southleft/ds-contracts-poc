@@ -9,9 +9,11 @@ import {
   importFigmaDemo,
   importFigmaUrl,
   proposalsFromDump,
+  type DumpProposalBatch,
   type FigmaImportResult,
   type FigmaProposal,
 } from '../engine/figma-import';
+import { plainWordsError, type PlainError } from '../engine/plain-error';
 import {
   BRIDGE_POLL_INTERVAL_MS,
   createBridgeSession,
@@ -123,6 +125,29 @@ const WS_TAGS: Record<WorkspaceSource, string> = {
   json: 'JSON',
 };
 const WS_ORDER: WorkspaceSource[] = ['figma', 'code', 'prompt', 'json'];
+
+/** Short transport label for a workspace entry — a REST import must never be
+ *  mistaken for a plugin send (owner field case: a stale REST entry displayed
+ *  right after a plugin send read as the send's result). Derived from the
+ *  entry's own receipts provenance line; display-only, nothing stored. */
+const wsOriginLabel = (entry: WorkspaceEntry): string | null => {
+  const source = entry.receipts?.source ?? '';
+  if (/plugin/i.test(source)) return 'plugin';
+  if (/REST/i.test(source)) return 'REST';
+  if (/pasted/i.test(source)) return 'pasted';
+  if (/demo/i.test(source)) return 'demo';
+  return null;
+};
+
+/** Import date + time — the loud restore label ("Jul 8, 5:12 PM", not just a
+ *  clock time that reads as "moments ago"). */
+const wsDateTime = (ms: number) =>
+  new Date(ms).toLocaleString(undefined, {
+    month: 'short',
+    day: 'numeric',
+    hour: 'numeric',
+    minute: '2-digit',
+  });
 const WS_GROUP_TITLES: Record<WorkspaceSource, string> = {
   figma: 'From Figma',
   code: 'From code',
@@ -137,9 +162,6 @@ const WS_SWITCH_LINES: Record<WorkspaceSource, string> = {
   prompt: 'Generated — both sides below.',
   json: 'Imported from JSON — both sides below.',
 };
-
-const wsTime = (ms: number) =>
-  new Date(ms).toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit' });
 
 /** Session flag: the switch strip, once dismissed, stays gone for the session. */
 const SWITCH_STRIP_KEY = 'ds-playground.switch-strip-dismissed';
@@ -266,6 +288,49 @@ function proposalGroups(proposal: FigmaProposal): ReceiptGroup[] {
   }
   return groups;
 }
+
+/** Batch-level receipts: per-set skips (plain words, technical detail as an
+ *  expandable line — never the headline) and id-collision notes. */
+function batchReceiptGroups(batch: DumpProposalBatch): ReceiptGroup[] {
+  const groups: ReceiptGroup[] = [];
+  if (batch.skipped.length > 0) {
+    groups.push({
+      title: 'Sets that could not be proposed',
+      kind: 'skipped',
+      entries: batch.skipped.map((s) => ({
+        message: s.reason,
+        ...(s.detail ? { detail: s.detail } : {}),
+      })),
+    });
+  }
+  if (batch.notes.length > 0) {
+    groups.push({
+      title: 'Import notes — contract ids',
+      kind: 'note',
+      entries: batch.notes.map((message) => ({ message })),
+    });
+  }
+  return groups;
+}
+
+/** Error notice — headline in words; any raw technical text stays behind an
+ *  expandable line. The ONLY way an import error reaches the rail. */
+function ErrorNotice({ error }: { error: PlainError | null }) {
+  if (!error) return null;
+  return (
+    <div className="notice notice--error">
+      {error.headline}
+      {error.detail ? (
+        <details className="notice__detail">
+          <summary>technical detail</summary>
+          <pre style={{ whiteSpace: 'pre-wrap', overflowWrap: 'anywhere', margin: '6px 0 0' }}>{error.detail}</pre>
+        </details>
+      ) : null}
+    </div>
+  );
+}
+
+const notice = (headline: string): PlainError => ({ headline });
 
 // ---------------------------------------------------------------------------
 // The page
@@ -541,15 +606,60 @@ export function Playground() {
   };
 
   const loadWorkspaceEntry = (entry: WorkspaceEntry) => {
-    const origin = `workspace — ${entry.name} (${entry.source} import)`;
+    const importOrigin = entry.receipts?.source ?? `${entry.source} import`;
+    const origin = `workspace — ${entry.name} (${importOrigin}, imported ${wsDateTime(entry.importedAt)})`;
     setText(entry.contractText);
     setProvenance(origin);
     setPristine({ text: entry.contractText, provenance: origin });
-    setReceipts(entry.receipts);
     // The entry's minted provisional layer comes back with it (or clears),
-    // and so do its auto-proposed child STUBS (composition keeps resolving).
+    // and its auto-proposed child STUBS re-run against the CURRENT engine —
+    // setChildStubs re-parses each stored stub against today's schema, so a
+    // stub the engine of import day refused (or accepted) is re-refereed
+    // now, not trusted from the stored receipts.
     setMintedTokens(entry.mintedTokens ?? null);
-    setChildStubs(entry.childStubs ?? null);
+    const stubResult = setChildStubs(entry.childStubs ?? null);
+    // DISPLAY-STATE RECOMPUTE (stored data untouched): the stored receipt
+    // groups are the record AS OF IMPORT DAY and are labeled so; anything
+    // recomputable cheaply — stub registration, and the editor referee that
+    // re-validates the text live on load — speaks for TODAY. This is the
+    // stale-refusal fix: a pre-stub-era entry no longer presents years-old
+    // refusals as current truth.
+    const provenanceGroup: ReceiptGroup = {
+      title: 'Restored workspace entry',
+      kind: 'note',
+      entries: [
+        {
+          message: `Imported ${wsDateTime(entry.importedAt)} via ${importOrigin}. The groups marked "(as recorded at import)" are that import's record, verbatim — the engine may have moved since. The contract itself is re-refereed live in the editor, and child stubs were re-registered against the current engine just now.`,
+        },
+      ],
+    };
+    const currentStubGroup: ReceiptGroup[] =
+      stubResult.registered.length > 0 || stubResult.refused.length > 0
+        ? [
+            {
+              title: 'Child stub contracts — re-refereed on restore',
+              kind: 'note',
+              entries: [
+                ...stubResult.registered.map((stub) => ({
+                  message: `${stub.id} re-registered PROVISIONALLY against the current engine — composition refs keep resolving. Import the real child set to replace it.`,
+                })),
+                ...stubResult.refused.map((message) => ({ message })),
+              ],
+            },
+          ]
+        : [];
+    setReceipts(
+      entry.receipts
+        ? {
+            source: origin,
+            groups: [
+              provenanceGroup,
+              ...currentStubGroup,
+              ...entry.receipts.groups.map((g) => ({ ...g, title: `${g.title} (as recorded at import)` })),
+            ],
+          }
+        : { source: origin, groups: [provenanceGroup, ...currentStubGroup] },
+    );
     setActiveExample(null);
     setWsLoaded(entry);
   };
@@ -870,7 +980,7 @@ export function Playground() {
   };
   const [figmaDegraded, setFigmaDegraded] = useState(false);
   const [figmaBusy, setFigmaBusy] = useState(false);
-  const [figmaError, setFigmaError] = useState<string | null>(null);
+  const [figmaError, setFigmaError] = useState<PlainError | null>(null);
   const [figmaProposals, setFigmaProposals] = useState<FigmaProposal[] | null>(null);
   const importGroupsRef = useRef<ReceiptGroup[]>([]);
   // Provenance of the proposals currently listed under "Proposed sets" —
@@ -927,15 +1037,23 @@ export function Playground() {
   };
 
   const handleImportResult = (result: FigmaImportResult, origin: string) => {
-    const proposals = proposalsFromDump(result.dump);
-    if (proposals.length === 0) {
-      setFigmaError('The import returned no component set to propose from.');
+    const batch = proposalsFromDump(result.dump);
+    const groups = [...importReportGroups(result.report), ...batchReceiptGroups(batch)];
+    if (batch.proposals.length === 0) {
+      setFigmaError(
+        batch.skipped.length > 0
+          ? notice(
+              `None of the ${batch.skipped.length} component set(s) could be proposed — each skip is named in the receipts below.`,
+            )
+          : notice('The import returned no component set to propose from.'),
+      );
+      if (groups.length > 0) setReceipts({ source: origin, groups });
       return;
     }
-    importGroupsRef.current = importReportGroups(result.report);
+    importGroupsRef.current = groups;
     figmaOriginRef.current = { origin, ws: 'figma' };
-    setFigmaProposals(proposals);
-    applyProposal(proposals[0], origin, 'figma');
+    setFigmaProposals(batch.proposals);
+    applyProposal(batch.proposals[0], origin, 'figma');
   };
 
   // ------------------------------------------------------ plugin bridge state
@@ -945,7 +1063,7 @@ export function Playground() {
   const [bridge, setBridge] = useState<{ code: string; expiresAt: number } | null>(null);
   const [bridgeRemaining, setBridgeRemaining] = useState(0);
   const [bridgeBusy, setBridgeBusy] = useState(false);
-  const [bridgeError, setBridgeError] = useState<string | null>(null);
+  const [bridgeError, setBridgeError] = useState<PlainError | null>(null);
   const bridgeTimer = useRef<number | null>(null);
   const bridgeInFlight = useRef(false);
 
@@ -994,17 +1112,27 @@ export function Playground() {
           }),
         });
       }
-      const proposals = proposalsFromDump(dump as FigmaImportResult['dump']);
-      if (proposals.length === 0) {
-        setBridgeError('The plugin sent a dump with no component set to propose from.');
+      const batch = proposalsFromDump(dump as FigmaImportResult['dump']);
+      groups.push(...batchReceiptGroups(batch));
+      if (batch.proposals.length === 0) {
+        setBridgeError(
+          batch.skipped.length > 0
+            ? notice(
+                `None of the ${batch.skipped.length} component set(s) the plugin sent could be proposed — each skip is named in the receipts below.`,
+              )
+            : notice('The plugin sent a dump with no component set to propose from.'),
+        );
+        if (groups.length > 0) setReceipts({ source: 'Figma plugin import', groups });
         return;
       }
       importGroupsRef.current = groups;
       figmaOriginRef.current = { origin: 'Figma plugin import', ws: 'figma' };
-      setFigmaProposals(proposals);
-      applyProposal(proposals[0], 'Figma plugin import', 'figma');
+      setFigmaProposals(batch.proposals);
+      applyProposal(batch.proposals[0], 'Figma plugin import', 'figma');
     } catch (e) {
-      setBridgeError(e instanceof Error ? e.message : String(e));
+      // Never the raw exception text as a headline (owner field case: a zod
+      // issue array rendered verbatim here) — plain words + expandable detail.
+      setBridgeError(plainWordsError(e));
     }
   };
 
@@ -1013,7 +1141,7 @@ export function Playground() {
     setBridgeRemaining(remaining);
     if (remaining <= 0) {
       stopBridge();
-      setBridgeError('The code expired before anything arrived — press “Receive from plugin” for a fresh one.');
+      setBridgeError(notice('The code expired before anything arrived — press “Receive from plugin” for a fresh one.'));
       return;
     }
     if (bridgeInFlight.current) return; // one in-flight poll at a time
@@ -1025,7 +1153,7 @@ export function Playground() {
         handleBridgeDump(poll.dump, code);
       } else if (poll.status === 'error' && poll.fatal) {
         stopBridge();
-        setBridgeError(poll.message);
+        setBridgeError(notice(poll.message));
       }
       // 'waiting' and transient network errors: keep listening until expiry.
     } finally {
@@ -1039,7 +1167,7 @@ export function Playground() {
     const result = await createBridgeSession();
     setBridgeBusy(false);
     if (!result.ok) {
-      setBridgeError(result.message);
+      setBridgeError(notice(result.message));
       return;
     }
     const expiresAt = Date.now() + result.session.ttlSeconds * 1000;
@@ -1061,7 +1189,7 @@ export function Playground() {
       rememberFigmaSession(figmaToken.trim());
       handleImportResult(result, 'Figma REST import');
     } catch (e) {
-      setFigmaError(e instanceof Error ? e.message : String(e));
+      setFigmaError(plainWordsError(e));
     } finally {
       setFigmaBusy(false);
     }
@@ -1080,7 +1208,7 @@ export function Playground() {
         degraded ? 'Figma REST import (demo fixture, variables 403)' : 'Figma REST import (demo fixture)',
       );
     } catch (e) {
-      setFigmaError(e instanceof Error ? e.message : String(e));
+      setFigmaError(plainWordsError(e));
     } finally {
       setFigmaBusy(false);
     }
@@ -1088,7 +1216,7 @@ export function Playground() {
 
   // ------------------------------------------------------------- json state
   const [jsonText, setJsonText] = useState('');
-  const [jsonError, setJsonError] = useState<string | null>(null);
+  const [jsonError, setJsonError] = useState<PlainError | null>(null);
 
   const loadJson = () => {
     setJsonError(null);
@@ -1096,7 +1224,7 @@ export function Playground() {
     try {
       parsed = JSON.parse(jsonText);
     } catch (e) {
-      setJsonError(e instanceof Error ? e.message : String(e));
+      setJsonError(plainWordsError(e));
       return;
     }
     const isDump =
@@ -1107,17 +1235,26 @@ export function Playground() {
       );
     if (isDump) {
       try {
-        importGroupsRef.current = [];
-        const proposals = proposalsFromDump(parsed as FigmaImportResult['dump']);
-        if (proposals.length === 0) {
-          setJsonError('No component set found in the pasted dump.');
+        const batch = proposalsFromDump(parsed as FigmaImportResult['dump']);
+        const groups = batchReceiptGroups(batch);
+        if (batch.proposals.length === 0) {
+          setJsonError(
+            batch.skipped.length > 0
+              ? notice(
+                  `None of the ${batch.skipped.length} component set(s) in the pasted dump could be proposed — each skip is named in the receipts below.`,
+                )
+              : notice('No component set found in the pasted dump.'),
+          );
+          if (groups.length > 0) setReceipts({ source: 'pasted Figma dump', groups });
           return;
         }
+        importGroupsRef.current = groups;
         figmaOriginRef.current = { origin: 'pasted Figma dump', ws: 'json' };
-        setFigmaProposals(proposals);
-        applyProposal(proposals[0], 'pasted Figma dump', 'json');
+        setFigmaProposals(batch.proposals);
+        applyProposal(batch.proposals[0], 'pasted Figma dump', 'json');
       } catch (e) {
-        setJsonError(e instanceof Error ? e.message : String(e));
+        // Same rule as the bridge path: plain words, detail expandable.
+        setJsonError(plainWordsError(e));
       }
       return;
     }
@@ -1651,17 +1788,16 @@ export function Playground() {
         type="button"
         className={`rail__item ws__load${wsLoaded?.id === entry.id ? ' is-active' : ''}`}
         onClick={() => loadWorkspaceEntry(entry)}
-        title={
-          entry.contractId
-            ? `${entry.contractId} — imported at ${wsTime(entry.importedAt)}`
-            : `imported at ${wsTime(entry.importedAt)}`
-        }
+        title={`${entry.contractId ? `${entry.contractId} — ` : ''}${
+          entry.receipts?.source ?? `${entry.source} import`
+        }, imported ${wsDateTime(entry.importedAt)}`}
       >
         <span className="ws__tag" aria-hidden>
           {WS_TAGS[entry.source]}
+          {wsOriginLabel(entry) ? ` · ${wsOriginLabel(entry)}` : ''}
         </span>
         <span className="ws__name">{entry.name}</span>
-        <span className="ws__time">{wsTime(entry.importedAt)}</span>
+        <span className="ws__time">{wsDateTime(entry.importedAt)}</span>
       </button>
       <button
         type="button"
@@ -1978,7 +2114,7 @@ export function Playground() {
                   </div>
                 </div>
               )}
-              {bridgeError ? <div className="notice notice--error">{bridgeError}</div> : null}
+              <ErrorNotice error={bridgeError} />
               <details className="rail__details">
                 <summary>First time? Install the plugin (about a minute)</summary>
                 <ol className="hint" style={{ paddingLeft: 18, margin: '6px 0' }}>
@@ -2003,10 +2139,12 @@ export function Playground() {
                   </li>
                 </ol>
                 <p className="hint">
-                  The plugin is read-only in your file. What it sends: the chosen component
-                  sets&rsquo; structure, styles, and variable names — never your Figma token.
-                  The bridge holds a dump for at most 15 minutes, deletes it the moment this
-                  tab picks it up, and never logs its contents.
+                  The plugin is read-only in your file. By default it sends the component
+                  set you have <em>selected</em> on the canvas (its names box overrides;
+                  empty box + no selection sends every set, and it says so). What it sends:
+                  the chosen component sets&rsquo; structure, styles, and variable names —
+                  never your Figma token. The bridge holds a dump for at most 15 minutes,
+                  deletes it the moment this tab picks it up, and never logs its contents.
                 </p>
               </details>
             </div>
@@ -2095,7 +2233,7 @@ export function Playground() {
             </button>
             <p className="hint">Fixture URL: {DEMO_URL.replace('https://www.', '')}</p>
 
-            {figmaError ? <div className="notice notice--error">{figmaError}</div> : null}
+            <ErrorNotice error={figmaError} />
 
             {figmaProposals && figmaProposals.length > 1 ? (
               <div className="rail__group" style={{ marginTop: 12 }}>
@@ -2247,7 +2385,7 @@ export function Playground() {
             <button type="button" className="btn--primary" disabled={!jsonText.trim()} onClick={loadJson}>
               Load
             </button>
-            {jsonError ? <div className="notice notice--error">{jsonError}</div> : null}
+            <ErrorNotice error={jsonError} />
           </div>
         )}
 

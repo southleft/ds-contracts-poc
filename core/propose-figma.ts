@@ -22,7 +22,7 @@
  */
 import { ContractSchema, pascal, STATE_PREVIEW_PROPERTY, statePreviewLabel } from '../scripts/contract-schema.js';
 import { kebab } from '../extract/types.js';
-import type { DumpEffect, DumpNode, DumpSet } from '../extract/figma/types.js';
+import { isDumpSet, type DumpEffect, type DumpNode, type DumpSet } from '../extract/figma/types.js';
 import type { TokenCorpus } from './token-corpus.js';
 import { mintTokens, type MintAxis, type MintObservation, type MintedEntry } from './mint-tokens.js';
 
@@ -62,19 +62,49 @@ export const canonicalPropName = (property: string): string => {
 export const propNameSanitized = (property: string): boolean =>
   /[^A-Za-z0-9 _-]/.test(property.split('#')[0].trim());
 
+/** Contract-id slug for a drawn component/set name — the SAME discipline as
+ *  canonicalPropName: sanitize AT PROPOSAL, never refuse at emit. The schema's
+ *  id segment is `[a-z][a-z0-9-]*`, and real UI kits ship names that plain
+ *  kebab() cannot make legal ("Button / Primary / Medium",
+ *  "Type=Text, Variant=Error", digit-led "01 Icons", emoji prefixes). Rule,
+ *  in order and deterministic:
+ *    1. kebab() (camelCase split, whitespace/underscores → hyphens, lowercase)
+ *    2. every remaining illegal character (slashes, '=', ',', emoji, …) → '-'
+ *    3. hyphen runs collapse to one; leading/trailing hyphens strip
+ *    4. a digit-led or empty result gets the deterministic prefix "c" —
+ *       "01 Icons" → "c-01-icons"; an all-illegal name → "c"
+ *  Every call site that changes a spelling writes a NAMED note carrying the
+ *  original; the design binding (set name / anchors) keeps the original. */
+export const componentIdSlug = (name: string): string => {
+  const cleaned = kebab(name)
+    .replace(/[^a-z0-9-]+/g, '-')
+    .replace(/-{2,}/g, '-')
+    .replace(/^-+|-+$/g, '');
+  return /^[a-z]/.test(cleaned) ? cleaned : `c${cleaned ? `-${cleaned}` : ''}`;
+};
+
+/** True when componentIdSlug had to do more than plain kebab() — the trigger
+ *  for the sanitize note (kebab-clean names like "Button-Brand Primary" pass
+ *  through silently, exactly as before). */
+export const idSlugSanitized = (name: string): boolean => componentIdSlug(name) !== kebab(name);
+
 /** Contract name for a drawn set: PascalCase over the alphanumeric words.
  *  "Button-Brand Primary" → "ButtonBrandPrimary", "Button group" →
  *  "ButtonGroup" — the emitters make the name an exported component and its
  *  file names, so an unsanitized set name is a guaranteed emit refusal. The
  *  canvas set keeps its own name; identity anchors are componentSetKey/nodeId. */
-export const pascalComponentName = (setName: string): string =>
-  setName
+export const pascalComponentName = (setName: string): string => {
+  const pascal = setName
     .replace(/[^A-Za-z0-9]+/g, ' ')
     .trim()
     .split(/\s+/)
     .filter((w) => w.length > 0)
     .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
     .join('');
+  // A digit-led or all-illegal name cannot be an exported identifier — the
+  // deterministic "C" prefix mirrors componentIdSlug's "c" (documented there).
+  return /^[A-Za-z]/.test(pascal) ? pascal : `C${pascal || 'omponent'}`;
+};
 
 /** The slice of a child contract canonicalization needs — kept minimal so the
  * playground can pass its bundled contracts without importing the zod types. */
@@ -1525,14 +1555,29 @@ function visibilityFromPresence(m: Merged, ctx: Ctx, where: string): Record<stri
 // ---------------------------------------------------------------------------
 
 /** The contract id this proposal will claim for itself. */
-const selfContractId = (ctx: Ctx): string => `${ctx.prefix}.${kebab(ctx.setName)}`;
+const selfContractId = (ctx: Ctx): string => `${ctx.prefix}.${componentIdSlug(ctx.setName)}`;
 
 /** True when a nested instance resolves to the set's own contract — either
  *  through the contract index (name → id lands on the proposal's own id) or
  *  by the name-match fallback the id would be derived from. */
 function isSelfInstance(instanceOf: string, ctx: Ctx): boolean {
-  const resolved = ctx.contractIdByName.get(instanceOf) ?? `${ctx.prefix}.${kebab(instanceOf)}`;
-  return resolved === selfContractId(ctx) || kebab(instanceOf) === kebab(ctx.setName);
+  const resolved = ctx.contractIdByName.get(instanceOf) ?? `${ctx.prefix}.${componentIdSlug(instanceOf)}`;
+  return resolved === selfContractId(ctx) || componentIdSlug(instanceOf) === componentIdSlug(ctx.setName);
+}
+
+/** Stub contract id for a nested instance name — ONE function serves both the
+ *  component ref and the stub contract, so the two can never drift apart.
+ *  Distinct instance names that sanitize to the same slug (or collide with the
+ *  proposal's own id) get a deterministic numeric suffix in arrival order —
+ *  never a silent merge; the caller notes the collision by name. */
+function stubIdFor(instanceOf: string, ctx: Ctx): { id: string; collidedWith: string | null } {
+  for (const capture of ctx.stubs.values()) {
+    if (capture.instanceOf === instanceOf) return { id: capture.id, collidedWith: null };
+  }
+  const base = `${ctx.prefix}.${componentIdSlug(instanceOf)}`;
+  let id = base;
+  for (let n = 2; ctx.stubs.has(id) || id === selfContractId(ctx); n += 1) id = `${base}-${n}`;
+  return { id, collidedWith: id === base ? null : ctx.stubs.get(base)?.instanceOf ?? ctx.setName };
 }
 
 const isSpacer = (m: Merged): boolean =>
@@ -1697,17 +1742,33 @@ function buildPart(
       // contract alongside itself (childStubs), built from the observed
       // applied values ONLY. Nothing about the child's real API or anatomy
       // is guessed; the stub names its own provisionality.
-      const stubId = `${ctx.prefix}.${kebab(instanceOf)}`;
+      const resolved = stubIdFor(instanceOf, ctx);
+      const stubId = resolved.id;
+      const isNew = !ctx.stubs.has(stubId);
       const capture = ctx.stubs.get(stubId) ?? { id: stubId, instanceOf, applied: [] };
       for (const o of m.occ) {
         if (o.node.componentProperties) capture.applied.push(o.node.componentProperties);
       }
       ctx.stubs.set(stubId, capture);
+      if (isNew && idSlugSanitized(instanceOf)) {
+        // Field case (CBDS kit): private-helper names ("_Avatar Indicator")
+        // and template names ("Button / Primary / Medium") derive ids the
+        // schema refuses — sanitized AT PROPOSAL, never refused at receive.
+        ctx.notes.push(
+          `${where}: nested instance name "${instanceOf}" contains characters a contract id cannot carry — stub id sanitized to "${stubId}" (rule: lowercase kebab, illegal characters → hyphens, runs collapsed, edge hyphens stripped, digit-led/empty gets "c"); the original spelling stays on the stub's name/description and in this note`,
+        );
+      }
+      if (isNew && resolved.collidedWith) {
+        ctx.notes.push(
+          `${where}: sanitized stub id for "${instanceOf}" collides with the id already claimed for "${resolved.collidedWith}" — disambiguated deterministically to "${stubId}" (arrival order), never silently merged`,
+        );
+      }
       ctx.notes.push(
         `${where}: nested instance of "${instanceOf}" has no known contract — component ref proposed as "${stubId}" with a STUB child contract auto-proposed alongside (childStubs; API from observed applied values only, anatomy not captured — import the real child set to replace it)`,
       );
     }
-    const component: Record<string, unknown> = { id: id ?? `${ctx.prefix}.${kebab(instanceOf)}` };
+    // The ref and the stub share stubIdFor — they can never drift apart.
+    const component: Record<string, unknown> = { id: id ?? stubIdFor(instanceOf, ctx).id };
     const applied = first(m.occ, (n) => n.componentProperties);
     if (applied) {
       component.props = canonicalizeInstanceProps(instanceOf, applied, ctx, where);
@@ -2679,6 +2740,16 @@ export function proposeFromDump(
       `contract name: drawn set name "${set.setName}" is not a PascalCase component name — proposed as "${componentName}" (the canvas set keeps its own name; the componentSetKey/nodeId anchors carry identity)`,
     );
   }
+  const selfId = `${prefix}.${componentIdSlug(set.setName)}`;
+  if (idSlugSanitized(set.setName)) {
+    // Field case (CBDS kit, first live plugin send): "_variable-list-item",
+    // "Button / Primary / Medium", "Type=Text, Variant=Error" all derive ids
+    // the schema's ^[a-z][a-z0-9-]*\.[a-z][a-z0-9-]*$ refuses — sanitize AT
+    // PROPOSAL (the prop-identifier discipline), never refuse at receive.
+    ctx.notes.push(
+      `contract id: drawn set name "${set.setName}" contains characters a contract id cannot carry — id proposed as "${selfId}" (rule: lowercase kebab, illegal characters → hyphens, runs collapsed, edge hyphens stripped, digit-led/empty gets "c"); the canvas set keeps its own name and the componentSetKey/nodeId anchors carry identity`,
+    );
+  }
   for (const p of props) {
     const property = (p.bindings as { figma?: { property?: string } }).figma?.property;
     if (property && propNameSanitized(property)) {
@@ -2694,7 +2765,7 @@ export function proposeFromDump(
   const inferred = inferSemantics(set.setName, axes, statePromo !== null);
   const contract: Record<string, unknown> = {
     $schema: './contract.schema.json',
-    id: `${prefix}.${kebab(set.setName)}`,
+    id: selfId,
     name: componentName,
     version: '0.1.0',
     status: 'draft',
@@ -2726,7 +2797,10 @@ export function proposeFromDump(
   let mintedTokens: FigmaProposalResult['mintedTokens'];
   if (ctx.mint && ctx.mint.observations.length > 0) {
     const observations = ctx.mint.observations;
-    const minted = mintTokens(kebab(set.setName), observations, ctx.mint.axes);
+    // The minted-ref component segment must be a legal token-path segment —
+    // the same slug the contract id uses (kebab alone lets "/" or "=" leak
+    // into `imported.*` refs, which the token-ref grammar refuses).
+    const minted = mintTokens(componentIdSlug(set.setName), observations, ctx.mint.axes);
     const bySource = new Map<string, { total: number; bound: number }>();
     minted.bindings.forEach((binding, i) => {
       const obs = observations[i];
@@ -2857,4 +2931,94 @@ export function figmaProposalsReport(
     lines.push('');
   }
   return lines.join('\n');
+}
+
+// ---------------------------------------------------------------------------
+// Batch proposal with per-set isolation (owner field case: the first live
+// CBDS plugin send)
+// ---------------------------------------------------------------------------
+
+/** Plain-words rendering of a caught proposal error. Raw validator/exception
+ *  JSON must NEVER be a headline anywhere downstream (the field failure: a
+ *  zod issue array rendered verbatim in the playground rail); the verbatim
+ *  technical text always survives as `detail`. */
+export function plainWordsProposalError(e: unknown): { headline: string; detail?: string } {
+  const issues = (e as { issues?: unknown } | null)?.issues;
+  if (Array.isArray(issues) && issues.length > 0 && issues.every((i) => i && typeof i === 'object')) {
+    const first = issues[0] as { path?: unknown[]; message?: unknown };
+    const path = Array.isArray(first.path)
+      ? first.path.filter((p) => typeof p === 'string' || typeof p === 'number').join('.')
+      : '';
+    const message = typeof first.message === 'string' ? first.message : 'invalid value';
+    const rest = issues.length > 1 ? ` (and ${issues.length - 1} more issue${issues.length === 2 ? '' : 's'})` : '';
+    return {
+      headline: `the proposed contract did not fit the contract schema — field "${path || 'the contract root'}": ${message}${rest}.`,
+      detail: e instanceof Error ? e.message : JSON.stringify(issues, null, 2),
+    };
+  }
+  const message = e instanceof Error ? e.message : String(e);
+  if (/^\s*[[{"]/.test(message) || message.length > 400) {
+    return { headline: 'the proposal failed with a technical error (full text below).', detail: message };
+  }
+  return { headline: message };
+}
+
+/** One set a batch could not propose — a named, plain-words skip. */
+export interface SkippedSet {
+  setName: string;
+  /** Plain words ("Set "X" could not be proposed: …"), headline-safe. */
+  reason: string;
+  /** The verbatim technical text (e.g. the validator's own output). */
+  detail?: string;
+}
+
+export interface DumpBatchResult {
+  proposals: Array<{ setName: string } & FigmaProposalResult>;
+  skipped: SkippedSet[];
+  /** Batch-level observations (e.g. two sets whose sanitized ids collide) —
+   *  named notes, never silent. */
+  notes: string[];
+}
+
+/** Every component set in a dump → a proposal, with PER-SET ISOLATION: one
+ *  set failing to propose must not kill the batch (the CBDS field failure —
+ *  a real UI kit ships template/private-helper sets alongside the one the
+ *  designer meant). A failure becomes a plain-words named skip; sanitized
+ *  contract ids that collide across sets are named, never silently merged.
+ *  This is the SAME function the playground's receive paths run — receipts
+ *  and evals referee the shipping code path. */
+export function proposeBatchFromDump(
+  dump: Record<string, unknown>,
+  opts: Parameters<typeof proposeFromDump>[1],
+): DumpBatchResult {
+  const proposals: DumpBatchResult['proposals'] = [];
+  const skipped: SkippedSet[] = [];
+  const notes: string[] = [];
+  const claimedIds = new Map<string, string>(); // contract id → set name
+  for (const [name, value] of Object.entries(dump)) {
+    if (name === '_provenance' || !isDumpSet(value)) continue;
+    try {
+      const proposal = { setName: name, ...proposeFromDump(value, opts) };
+      const id = (proposal.contract as { id?: unknown }).id;
+      if (typeof id === 'string') {
+        const holder = claimedIds.get(id);
+        if (holder !== undefined) {
+          notes.push(
+            `contract id "${id}" is claimed by two sets in this dump ("${holder}" and "${name}") — their names sanitize to the same id; rename one set (or edit one id) before adopting both`,
+          );
+        } else {
+          claimedIds.set(id, name);
+        }
+      }
+      proposals.push(proposal);
+    } catch (e) {
+      const plain = plainWordsProposalError(e);
+      skipped.push({
+        setName: name,
+        reason: `Set "${name}" could not be proposed: ${plain.headline}`,
+        ...(plain.detail ? { detail: plain.detail } : {}),
+      });
+    }
+  }
+  return { proposals, skipped, notes };
 }

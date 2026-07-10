@@ -122,10 +122,16 @@ export {
 
 // Design → contract (proposals from a canvas dump).
 export {
+  componentIdSlug,
   figmaProposalsReport,
+  idSlugSanitized,
+  plainWordsProposalError,
+  proposeBatchFromDump,
   proposeFromDump,
   proposeFromDump as proposeFromFigmaDump,
+  type DumpBatchResult,
   type FigmaProposalResult,
+  type SkippedSet,
   type UnboundValue,
 } from './propose-figma.js';
 

@@ -100,11 +100,10 @@ import type { MinimalChildContract } from '../../core/propose-figma.js';
 import { mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { kebab } from '../types.js';
 import type { DumpFile } from './types.js';
 import { isDumpSet } from './types.js';
 import { loadTokenCorpus } from './tokens.js';
-import { figmaProposalsReport, proposeFromDump, type FigmaProposalResult } from '../../core/propose-figma.js';
+import { componentIdSlug, figmaProposalsReport, proposeFromDump, type FigmaProposalResult } from '../../core/propose-figma.js';
 
 // The inversion engine itself is the pure core module — re-exported here so
 // existing importers (extract/figma/roundtrip.ts) keep their import path.
@@ -177,7 +176,9 @@ function main() {
     if (name === '_provenance' || !isDumpSet(value)) continue;
     const proposal = proposeFromDump(value, { corpus, contractIdByName, contractsById: loaded.byId, fileKey });
     results.push({ setName: name, proposal });
-    const file = path.resolve(root, outDir, `${kebab(name)}.contract.proposed.json`);
+    // componentIdSlug, not raw kebab: a set name like "Button / Primary /
+    // Medium" must not turn the output filename into a directory walk.
+    const file = path.resolve(root, outDir, `${componentIdSlug(name)}.contract.proposed.json`);
     writeFileSync(file, JSON.stringify(proposal.contract, null, 2) + '\n');
     console.log(`✔ ${name} → ${path.relative(root, file)} (${proposal.notes.length} notes, ${proposal.unbound.length} unbound value(s))`);
   }

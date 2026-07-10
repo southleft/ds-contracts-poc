@@ -1,0 +1,1454 @@
+{
+  "_provenance": {
+    "fileKey": "WofZT8xaxXuc2Q6Je9S4XE",
+    "extractedAt": "2026-07-10",
+    "note": "Node-tree dump (extract/figma/dump.plugin.js, dump v1.3) for design\u2192contract proposal."
+  },
+  "_degradations": [
+    {
+      "code": "min-max-size-unsupported",
+      "nodePath": "Button-Brand Primary:size=large, state=default",
+      "message": "literal min/max sizing (minHeight 44) has no dump v1 projection \u2014 dropped (bound min-width variables DO ride `bound`)"
+    },
+    {
+      "code": "min-max-size-unsupported",
+      "nodePath": "Button-Brand Primary:size=medium, state=default",
+      "message": "literal min/max sizing (minHeight 44) has no dump v1 projection \u2014 dropped (bound min-width variables DO ride `bound`)"
+    },
+    {
+      "code": "min-max-size-unsupported",
+      "nodePath": "Button-Brand Primary:size=small, state=default",
+      "message": "literal min/max sizing (minHeight 44) has no dump v1 projection \u2014 dropped (bound min-width variables DO ride `bound`)"
+    },
+    {
+      "code": "min-max-size-unsupported",
+      "nodePath": "Button-Brand Primary:size=large, state=hover",
+      "message": "literal min/max sizing (minHeight 44) has no dump v1 projection \u2014 dropped (bound min-width variables DO ride `bound`)"
+    },
+    {
+      "code": "min-max-size-unsupported",
+      "nodePath": "Button-Brand Primary:size=medium, state=hover",
+      "message": "literal min/max sizing (minHeight 44) has no dump v1 projection \u2014 dropped (bound min-width variables DO ride `bound`)"
+    },
+    {
+      "code": "min-max-size-unsupported",
+      "nodePath": "Button-Brand Primary:size=small, state=hover",
+      "message": "literal min/max sizing (minHeight 44) has no dump v1 projection \u2014 dropped (bound min-width variables DO ride `bound`)"
+    },
+    {
+      "code": "min-max-size-unsupported",
+      "nodePath": "Button-Brand Primary:size=large, state=focus",
+      "message": "literal min/max sizing (minHeight 44) has no dump v1 projection \u2014 dropped (bound min-width variables DO ride `bound`)"
+    },
+    {
+      "code": "min-max-size-unsupported",
+      "nodePath": "Button-Brand Primary:size=medium, state=focus",
+      "message": "literal min/max sizing (minHeight 44) has no dump v1 projection \u2014 dropped (bound min-width variables DO ride `bound`)"
+    },
+    {
+      "code": "min-max-size-unsupported",
+      "nodePath": "Button-Brand Primary:size=small, state=focus",
+      "message": "literal min/max sizing (minHeight 44) has no dump v1 projection \u2014 dropped (bound min-width variables DO ride `bound`)"
+    },
+    {
+      "code": "min-max-size-unsupported",
+      "nodePath": "Button-Brand Primary:size=large, state=pressed",
+      "message": "literal min/max sizing (minHeight 44) has no dump v1 projection \u2014 dropped (bound min-width variables DO ride `bound`)"
+    },
+    {
+      "code": "min-max-size-unsupported",
+      "nodePath": "Button-Brand Primary:size=medium, state=pressed",
+      "message": "literal min/max sizing (minHeight 44) has no dump v1 projection \u2014 dropped (bound min-width variables DO ride `bound`)"
+    },
+    {
+      "code": "min-max-size-unsupported",
+      "nodePath": "Button-Brand Primary:size=small, state=pressed",
+      "message": "literal min/max sizing (minHeight 44) has no dump v1 projection \u2014 dropped (bound min-width variables DO ride `bound`)"
+    },
+    {
+      "code": "min-max-size-unsupported",
+      "nodePath": "Button-Brand Primary:size=large, state=disabled",
+      "message": "literal min/max sizing (minHeight 44) has no dump v1 projection \u2014 dropped (bound min-width variables DO ride `bound`)"
+    },
+    {
+      "code": "min-max-size-unsupported",
+      "nodePath": "Button-Brand Primary:size=medium, state=disabled",
+      "message": "literal min/max sizing (minHeight 44) has no dump v1 projection \u2014 dropped (bound min-width variables DO ride `bound`)"
+    },
+    {
+      "code": "min-max-size-unsupported",
+      "nodePath": "Button-Brand Primary:size=small, state=disabled",
+      "message": "literal min/max sizing (minHeight 44) has no dump v1 projection \u2014 dropped (bound min-width variables DO ride `bound`)"
+    }
+  ],
+  "Button-Brand Primary": {
+    "setName": "Button-Brand Primary",
+    "type": "COMPONENT_SET",
+    "nodeId": "258:1838",
+    "key": "7357ff93090290cc02b380fbd2b7c5e3cbb2c27c",
+    "variants": [
+      {
+        "name": "size=large, state=default",
+        "type": "COMPONENT",
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "CENTER",
+          "counter": "CENTER",
+          "spacing": 8,
+          "padding": [
+            8,
+            16,
+            8,
+            16
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "FIXED"
+        },
+        "cornerRadius": 8,
+        "bound": {
+          "itemSpacing": "spacing/100",
+          "paddingLeft": "spacing/200",
+          "paddingTop": "spacing/100",
+          "paddingRight": "spacing/200",
+          "paddingBottom": "spacing/100",
+          "height": "component-size/xlarge",
+          "topLeftRadius": "corner-radius/100",
+          "topRightRadius": "corner-radius/100",
+          "bottomLeftRadius": "corner-radius/100",
+          "bottomRightRadius": "corner-radius/100"
+        },
+        "fill": {
+          "var": "bg/brand/default"
+        },
+        "children": [
+          {
+            "name": "Icon",
+            "type": "INSTANCE",
+            "bound": {
+              "width": "component-size/small",
+              "height": "icon-size/large"
+            },
+            "hidden": true,
+            "propRefs": {
+              "visible": "\u21aa\ufe0ficon-left"
+            },
+            "instanceOf": "Icon",
+            "componentProperties": {
+              "size": "large"
+            }
+          },
+          {
+            "name": "Button",
+            "type": "TEXT",
+            "text": {
+              "characters": "Button",
+              "fontSize": 16,
+              "fontStyle": "Semi Bold",
+              "lineHeight": 24,
+              "fillVar": "text/inverse-primary"
+            },
+            "fill": {
+              "var": "text/inverse-primary"
+            },
+            "propRefs": {
+              "characters": "\u270f\ufe0ftext"
+            }
+          },
+          {
+            "name": "Icon",
+            "type": "INSTANCE",
+            "bound": {
+              "width": "component-size/small",
+              "height": "icon-size/large"
+            },
+            "hidden": true,
+            "propRefs": {
+              "visible": "\u21aa\ufe0ficon-right"
+            },
+            "instanceOf": "Icon",
+            "componentProperties": {
+              "size": "large"
+            }
+          }
+        ]
+      },
+      {
+        "name": "size=medium, state=default",
+        "type": "COMPONENT",
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "CENTER",
+          "counter": "CENTER",
+          "spacing": 8,
+          "padding": [
+            8,
+            16,
+            8,
+            16
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "FIXED"
+        },
+        "cornerRadius": 8,
+        "bound": {
+          "itemSpacing": "spacing/100",
+          "paddingLeft": "spacing/200",
+          "paddingTop": "spacing/100",
+          "paddingRight": "spacing/200",
+          "paddingBottom": "spacing/100",
+          "height": "component-size/large",
+          "topLeftRadius": "corner-radius/100",
+          "topRightRadius": "corner-radius/100",
+          "bottomLeftRadius": "corner-radius/100",
+          "bottomRightRadius": "corner-radius/100"
+        },
+        "fill": {
+          "var": "bg/brand/default"
+        },
+        "children": [
+          {
+            "name": "Icon",
+            "type": "INSTANCE",
+            "bound": {
+              "width": "component-size/small",
+              "height": "icon-size/large"
+            },
+            "hidden": true,
+            "propRefs": {
+              "visible": "\u21aa\ufe0ficon-left"
+            },
+            "instanceOf": "Icon",
+            "componentProperties": {
+              "size": "large"
+            }
+          },
+          {
+            "name": "Button",
+            "type": "TEXT",
+            "text": {
+              "characters": "Button",
+              "fontSize": 16,
+              "fontStyle": "Semi Bold",
+              "lineHeight": 24,
+              "fillVar": "text/inverse-primary"
+            },
+            "fill": {
+              "var": "text/inverse-primary"
+            },
+            "propRefs": {
+              "characters": "\u270f\ufe0ftext"
+            }
+          },
+          {
+            "name": "Icon",
+            "type": "INSTANCE",
+            "bound": {
+              "width": "component-size/small",
+              "height": "icon-size/large"
+            },
+            "hidden": true,
+            "propRefs": {
+              "visible": "\u21aa\ufe0ficon-right"
+            },
+            "instanceOf": "Icon",
+            "componentProperties": {
+              "size": "large"
+            }
+          }
+        ]
+      },
+      {
+        "name": "size=small, state=default",
+        "type": "COMPONENT",
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "CENTER",
+          "counter": "CENTER",
+          "spacing": 8,
+          "padding": [
+            8,
+            12,
+            8,
+            12
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "FIXED"
+        },
+        "cornerRadius": 8,
+        "bound": {
+          "itemSpacing": "spacing/100",
+          "paddingLeft": "spacing/150",
+          "paddingTop": "spacing/100",
+          "paddingRight": "spacing/150",
+          "paddingBottom": "spacing/100",
+          "height": "component-size/medium",
+          "topLeftRadius": "corner-radius/100",
+          "topRightRadius": "corner-radius/100",
+          "bottomLeftRadius": "corner-radius/100",
+          "bottomRightRadius": "corner-radius/100"
+        },
+        "fill": {
+          "var": "bg/brand/default"
+        },
+        "children": [
+          {
+            "name": "Icon",
+            "type": "INSTANCE",
+            "bound": {
+              "width": "icon-size/small",
+              "height": "icon-size/small"
+            },
+            "hidden": true,
+            "propRefs": {
+              "visible": "\u21aa\ufe0ficon-left"
+            },
+            "instanceOf": "Icon",
+            "componentProperties": {
+              "size": "small"
+            }
+          },
+          {
+            "name": "Button",
+            "type": "TEXT",
+            "text": {
+              "characters": "Button",
+              "fontSize": 14,
+              "fontStyle": "Semi Bold",
+              "lineHeight": 21,
+              "fillVar": "text/inverse-primary"
+            },
+            "fill": {
+              "var": "text/inverse-primary"
+            },
+            "propRefs": {
+              "characters": "\u270f\ufe0ftext"
+            }
+          },
+          {
+            "name": "Icon",
+            "type": "INSTANCE",
+            "bound": {
+              "width": "icon-size/small",
+              "height": "icon-size/small"
+            },
+            "hidden": true,
+            "propRefs": {
+              "visible": "\u21aa\ufe0ficon-right"
+            },
+            "instanceOf": "Icon",
+            "componentProperties": {
+              "size": "small"
+            }
+          }
+        ]
+      },
+      {
+        "name": "size=large, state=hover",
+        "type": "COMPONENT",
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "CENTER",
+          "counter": "CENTER",
+          "spacing": 8,
+          "padding": [
+            8,
+            16,
+            8,
+            16
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "FIXED"
+        },
+        "cornerRadius": 8,
+        "bound": {
+          "itemSpacing": "spacing/100",
+          "paddingLeft": "spacing/200",
+          "paddingTop": "spacing/100",
+          "paddingRight": "spacing/200",
+          "paddingBottom": "spacing/100",
+          "height": "component-size/xlarge",
+          "topLeftRadius": "corner-radius/100",
+          "topRightRadius": "corner-radius/100",
+          "bottomLeftRadius": "corner-radius/100",
+          "bottomRightRadius": "corner-radius/100"
+        },
+        "fill": {
+          "var": "bg/brand/hover"
+        },
+        "children": [
+          {
+            "name": "Icon",
+            "type": "INSTANCE",
+            "bound": {
+              "width": "component-size/small",
+              "height": "icon-size/large"
+            },
+            "hidden": true,
+            "propRefs": {
+              "visible": "\u21aa\ufe0ficon-left"
+            },
+            "instanceOf": "Icon",
+            "componentProperties": {
+              "size": "large"
+            }
+          },
+          {
+            "name": "Button",
+            "type": "TEXT",
+            "text": {
+              "characters": "Button",
+              "fontSize": 16,
+              "fontStyle": "Semi Bold",
+              "lineHeight": 24,
+              "fillVar": "text/inverse-primary"
+            },
+            "fill": {
+              "var": "text/inverse-primary"
+            },
+            "propRefs": {
+              "characters": "\u270f\ufe0ftext"
+            }
+          },
+          {
+            "name": "Icon",
+            "type": "INSTANCE",
+            "bound": {
+              "width": "component-size/small",
+              "height": "icon-size/large"
+            },
+            "hidden": true,
+            "propRefs": {
+              "visible": "\u21aa\ufe0ficon-right"
+            },
+            "instanceOf": "Icon",
+            "componentProperties": {
+              "size": "large"
+            }
+          }
+        ]
+      },
+      {
+        "name": "size=medium, state=hover",
+        "type": "COMPONENT",
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "CENTER",
+          "counter": "CENTER",
+          "spacing": 8,
+          "padding": [
+            8,
+            16,
+            8,
+            16
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "FIXED"
+        },
+        "cornerRadius": 8,
+        "bound": {
+          "itemSpacing": "spacing/100",
+          "paddingLeft": "spacing/200",
+          "paddingTop": "spacing/100",
+          "paddingRight": "spacing/200",
+          "paddingBottom": "spacing/100",
+          "height": "component-size/large",
+          "topLeftRadius": "corner-radius/100",
+          "topRightRadius": "corner-radius/100",
+          "bottomLeftRadius": "corner-radius/100",
+          "bottomRightRadius": "corner-radius/100"
+        },
+        "fill": {
+          "var": "bg/brand/hover"
+        },
+        "children": [
+          {
+            "name": "Icon",
+            "type": "INSTANCE",
+            "bound": {
+              "width": "component-size/small",
+              "height": "icon-size/large"
+            },
+            "hidden": true,
+            "propRefs": {
+              "visible": "\u21aa\ufe0ficon-left"
+            },
+            "instanceOf": "Icon",
+            "componentProperties": {
+              "size": "large"
+            }
+          },
+          {
+            "name": "Button",
+            "type": "TEXT",
+            "text": {
+              "characters": "Button",
+              "fontSize": 16,
+              "fontStyle": "Semi Bold",
+              "lineHeight": 24,
+              "fillVar": "text/inverse-primary"
+            },
+            "fill": {
+              "var": "text/inverse-primary"
+            },
+            "propRefs": {
+              "characters": "\u270f\ufe0ftext"
+            }
+          },
+          {
+            "name": "Icon",
+            "type": "INSTANCE",
+            "bound": {
+              "width": "component-size/small",
+              "height": "icon-size/large"
+            },
+            "hidden": true,
+            "propRefs": {
+              "visible": "\u21aa\ufe0ficon-right"
+            },
+            "instanceOf": "Icon",
+            "componentProperties": {
+              "size": "large"
+            }
+          }
+        ]
+      },
+      {
+        "name": "size=small, state=hover",
+        "type": "COMPONENT",
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "CENTER",
+          "counter": "CENTER",
+          "spacing": 8,
+          "padding": [
+            8,
+            12,
+            8,
+            12
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "FIXED"
+        },
+        "cornerRadius": 8,
+        "bound": {
+          "itemSpacing": "spacing/100",
+          "paddingLeft": "spacing/150",
+          "paddingTop": "spacing/100",
+          "paddingRight": "spacing/150",
+          "paddingBottom": "spacing/100",
+          "height": "component-size/medium",
+          "topLeftRadius": "corner-radius/100",
+          "topRightRadius": "corner-radius/100",
+          "bottomLeftRadius": "corner-radius/100",
+          "bottomRightRadius": "corner-radius/100"
+        },
+        "fill": {
+          "var": "bg/brand/hover"
+        },
+        "children": [
+          {
+            "name": "Icon",
+            "type": "INSTANCE",
+            "bound": {
+              "width": "icon-size/small",
+              "height": "icon-size/small"
+            },
+            "hidden": true,
+            "propRefs": {
+              "visible": "\u21aa\ufe0ficon-left"
+            },
+            "instanceOf": "Icon",
+            "componentProperties": {
+              "size": "small"
+            }
+          },
+          {
+            "name": "Button",
+            "type": "TEXT",
+            "text": {
+              "characters": "Button",
+              "fontSize": 14,
+              "fontStyle": "Semi Bold",
+              "lineHeight": 21,
+              "fillVar": "text/inverse-primary"
+            },
+            "fill": {
+              "var": "text/inverse-primary"
+            },
+            "propRefs": {
+              "characters": "\u270f\ufe0ftext"
+            }
+          },
+          {
+            "name": "Icon",
+            "type": "INSTANCE",
+            "bound": {
+              "width": "icon-size/small",
+              "height": "icon-size/small"
+            },
+            "hidden": true,
+            "propRefs": {
+              "visible": "\u21aa\ufe0ficon-right"
+            },
+            "instanceOf": "Icon",
+            "componentProperties": {
+              "size": "small"
+            }
+          }
+        ]
+      },
+      {
+        "name": "size=large, state=focus",
+        "type": "COMPONENT",
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "CENTER",
+          "counter": "CENTER",
+          "spacing": 8,
+          "padding": [
+            8,
+            16,
+            8,
+            16
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "FIXED"
+        },
+        "cornerRadius": 8,
+        "bound": {
+          "itemSpacing": "spacing/100",
+          "paddingLeft": "spacing/200",
+          "paddingTop": "spacing/100",
+          "paddingRight": "spacing/200",
+          "paddingBottom": "spacing/100",
+          "height": "component-size/xlarge",
+          "topLeftRadius": "corner-radius/100",
+          "topRightRadius": "corner-radius/100",
+          "bottomLeftRadius": "corner-radius/100",
+          "bottomRightRadius": "corner-radius/100"
+        },
+        "fill": {
+          "var": "bg/brand/default"
+        },
+        "children": [
+          {
+            "name": "Icon",
+            "type": "INSTANCE",
+            "bound": {
+              "width": "component-size/small",
+              "height": "icon-size/large"
+            },
+            "hidden": true,
+            "propRefs": {
+              "visible": "\u21aa\ufe0ficon-left"
+            },
+            "instanceOf": "Icon",
+            "componentProperties": {
+              "size": "large"
+            }
+          },
+          {
+            "name": "Button",
+            "type": "TEXT",
+            "text": {
+              "characters": "Button",
+              "fontSize": 16,
+              "fontStyle": "Semi Bold",
+              "lineHeight": 24,
+              "fillVar": "text/inverse-primary"
+            },
+            "fill": {
+              "var": "text/inverse-primary"
+            },
+            "propRefs": {
+              "characters": "\u270f\ufe0ftext"
+            }
+          },
+          {
+            "name": "Icon",
+            "type": "INSTANCE",
+            "bound": {
+              "width": "component-size/small",
+              "height": "icon-size/large"
+            },
+            "hidden": true,
+            "propRefs": {
+              "visible": "\u21aa\ufe0ficon-right"
+            },
+            "instanceOf": "Icon",
+            "componentProperties": {
+              "size": "large"
+            }
+          },
+          {
+            "name": "Focus ring",
+            "type": "RECTANGLE",
+            "cornerRadius": 12,
+            "bound": {
+              "topLeftRadius": "corner-radius/150",
+              "topRightRadius": "corner-radius/150",
+              "bottomLeftRadius": "corner-radius/150",
+              "bottomRightRadius": "corner-radius/150"
+            },
+            "stroke": {
+              "var": "border/focus"
+            },
+            "strokeWeight": 2
+          }
+        ]
+      },
+      {
+        "name": "size=medium, state=focus",
+        "type": "COMPONENT",
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "CENTER",
+          "counter": "CENTER",
+          "spacing": 8,
+          "padding": [
+            8,
+            16,
+            8,
+            16
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "FIXED"
+        },
+        "cornerRadius": 8,
+        "bound": {
+          "itemSpacing": "spacing/100",
+          "paddingLeft": "spacing/200",
+          "paddingTop": "spacing/100",
+          "paddingRight": "spacing/200",
+          "paddingBottom": "spacing/100",
+          "height": "component-size/large",
+          "topLeftRadius": "corner-radius/100",
+          "topRightRadius": "corner-radius/100",
+          "bottomLeftRadius": "corner-radius/100",
+          "bottomRightRadius": "corner-radius/100"
+        },
+        "fill": {
+          "var": "bg/brand/default"
+        },
+        "children": [
+          {
+            "name": "Icon",
+            "type": "INSTANCE",
+            "bound": {
+              "width": "component-size/small",
+              "height": "icon-size/large"
+            },
+            "hidden": true,
+            "propRefs": {
+              "visible": "\u21aa\ufe0ficon-left"
+            },
+            "instanceOf": "Icon",
+            "componentProperties": {
+              "size": "large"
+            }
+          },
+          {
+            "name": "Button",
+            "type": "TEXT",
+            "text": {
+              "characters": "Button",
+              "fontSize": 16,
+              "fontStyle": "Semi Bold",
+              "lineHeight": 24,
+              "fillVar": "text/inverse-primary"
+            },
+            "fill": {
+              "var": "text/inverse-primary"
+            },
+            "propRefs": {
+              "characters": "\u270f\ufe0ftext"
+            }
+          },
+          {
+            "name": "Icon",
+            "type": "INSTANCE",
+            "bound": {
+              "width": "component-size/small",
+              "height": "icon-size/large"
+            },
+            "hidden": true,
+            "propRefs": {
+              "visible": "\u21aa\ufe0ficon-right"
+            },
+            "instanceOf": "Icon",
+            "componentProperties": {
+              "size": "large"
+            }
+          },
+          {
+            "name": "Focus ring",
+            "type": "RECTANGLE",
+            "cornerRadius": 12,
+            "bound": {
+              "topLeftRadius": "corner-radius/150",
+              "topRightRadius": "corner-radius/150",
+              "bottomLeftRadius": "corner-radius/150",
+              "bottomRightRadius": "corner-radius/150"
+            },
+            "stroke": {
+              "var": "border/focus"
+            },
+            "strokeWeight": 2
+          }
+        ]
+      },
+      {
+        "name": "size=small, state=focus",
+        "type": "COMPONENT",
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "CENTER",
+          "counter": "CENTER",
+          "spacing": 8,
+          "padding": [
+            8,
+            12,
+            8,
+            12
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "FIXED"
+        },
+        "cornerRadius": 8,
+        "bound": {
+          "itemSpacing": "spacing/100",
+          "paddingLeft": "spacing/150",
+          "paddingTop": "spacing/100",
+          "paddingRight": "spacing/150",
+          "paddingBottom": "spacing/100",
+          "height": "component-size/medium",
+          "topLeftRadius": "corner-radius/100",
+          "topRightRadius": "corner-radius/100",
+          "bottomLeftRadius": "corner-radius/100",
+          "bottomRightRadius": "corner-radius/100"
+        },
+        "fill": {
+          "var": "bg/brand/default"
+        },
+        "children": [
+          {
+            "name": "Icon",
+            "type": "INSTANCE",
+            "bound": {
+              "width": "icon-size/small",
+              "height": "icon-size/small"
+            },
+            "hidden": true,
+            "propRefs": {
+              "visible": "\u21aa\ufe0ficon-left"
+            },
+            "instanceOf": "Icon",
+            "componentProperties": {
+              "size": "small"
+            }
+          },
+          {
+            "name": "Button",
+            "type": "TEXT",
+            "text": {
+              "characters": "Button",
+              "fontSize": 14,
+              "fontStyle": "Semi Bold",
+              "lineHeight": 21,
+              "fillVar": "text/inverse-primary"
+            },
+            "fill": {
+              "var": "text/inverse-primary"
+            },
+            "propRefs": {
+              "characters": "\u270f\ufe0ftext"
+            }
+          },
+          {
+            "name": "Icon",
+            "type": "INSTANCE",
+            "bound": {
+              "width": "icon-size/small",
+              "height": "icon-size/small"
+            },
+            "hidden": true,
+            "propRefs": {
+              "visible": "\u21aa\ufe0ficon-right"
+            },
+            "instanceOf": "Icon",
+            "componentProperties": {
+              "size": "small"
+            }
+          },
+          {
+            "name": "Focus ring",
+            "type": "RECTANGLE",
+            "cornerRadius": 12,
+            "bound": {
+              "topLeftRadius": "corner-radius/150",
+              "topRightRadius": "corner-radius/150",
+              "bottomLeftRadius": "corner-radius/150",
+              "bottomRightRadius": "corner-radius/150"
+            },
+            "stroke": {
+              "var": "border/focus"
+            },
+            "strokeWeight": 2
+          }
+        ]
+      },
+      {
+        "name": "size=large, state=pressed",
+        "type": "COMPONENT",
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "CENTER",
+          "counter": "CENTER",
+          "spacing": 8,
+          "padding": [
+            8,
+            16,
+            8,
+            16
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "FIXED"
+        },
+        "cornerRadius": 8,
+        "bound": {
+          "itemSpacing": "spacing/100",
+          "paddingLeft": "spacing/200",
+          "paddingTop": "spacing/100",
+          "paddingRight": "spacing/200",
+          "paddingBottom": "spacing/100",
+          "height": "component-size/xlarge",
+          "topLeftRadius": "corner-radius/100",
+          "topRightRadius": "corner-radius/100",
+          "bottomLeftRadius": "corner-radius/100",
+          "bottomRightRadius": "corner-radius/100"
+        },
+        "fill": {
+          "var": "bg/brand/pressed"
+        },
+        "children": [
+          {
+            "name": "Icon",
+            "type": "INSTANCE",
+            "bound": {
+              "width": "component-size/small",
+              "height": "icon-size/large"
+            },
+            "hidden": true,
+            "propRefs": {
+              "visible": "\u21aa\ufe0ficon-left"
+            },
+            "instanceOf": "Icon",
+            "componentProperties": {
+              "size": "large"
+            }
+          },
+          {
+            "name": "Button",
+            "type": "TEXT",
+            "text": {
+              "characters": "Button",
+              "fontSize": 16,
+              "fontStyle": "Semi Bold",
+              "lineHeight": 24,
+              "fillVar": "text/inverse-primary"
+            },
+            "fill": {
+              "var": "text/inverse-primary"
+            },
+            "propRefs": {
+              "characters": "\u270f\ufe0ftext"
+            }
+          },
+          {
+            "name": "Icon",
+            "type": "INSTANCE",
+            "bound": {
+              "width": "component-size/small",
+              "height": "icon-size/large"
+            },
+            "hidden": true,
+            "propRefs": {
+              "visible": "\u21aa\ufe0ficon-right"
+            },
+            "instanceOf": "Icon",
+            "componentProperties": {
+              "size": "large"
+            }
+          }
+        ]
+      },
+      {
+        "name": "size=medium, state=pressed",
+        "type": "COMPONENT",
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "CENTER",
+          "counter": "CENTER",
+          "spacing": 8,
+          "padding": [
+            8,
+            16,
+            8,
+            16
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "FIXED"
+        },
+        "cornerRadius": 8,
+        "bound": {
+          "itemSpacing": "spacing/100",
+          "paddingLeft": "spacing/200",
+          "paddingTop": "spacing/100",
+          "paddingRight": "spacing/200",
+          "paddingBottom": "spacing/100",
+          "height": "component-size/large",
+          "topLeftRadius": "corner-radius/100",
+          "topRightRadius": "corner-radius/100",
+          "bottomLeftRadius": "corner-radius/100",
+          "bottomRightRadius": "corner-radius/100"
+        },
+        "fill": {
+          "var": "bg/brand/pressed"
+        },
+        "children": [
+          {
+            "name": "Icon",
+            "type": "INSTANCE",
+            "bound": {
+              "width": "component-size/small",
+              "height": "icon-size/large"
+            },
+            "hidden": true,
+            "propRefs": {
+              "visible": "\u21aa\ufe0ficon-left"
+            },
+            "instanceOf": "Icon",
+            "componentProperties": {
+              "size": "large"
+            }
+          },
+          {
+            "name": "Button",
+            "type": "TEXT",
+            "text": {
+              "characters": "Button",
+              "fontSize": 16,
+              "fontStyle": "Semi Bold",
+              "lineHeight": 24,
+              "fillVar": "text/inverse-primary"
+            },
+            "fill": {
+              "var": "text/inverse-primary"
+            },
+            "propRefs": {
+              "characters": "\u270f\ufe0ftext"
+            }
+          },
+          {
+            "name": "Icon",
+            "type": "INSTANCE",
+            "bound": {
+              "width": "component-size/small",
+              "height": "icon-size/large"
+            },
+            "hidden": true,
+            "propRefs": {
+              "visible": "\u21aa\ufe0ficon-right"
+            },
+            "instanceOf": "Icon",
+            "componentProperties": {
+              "size": "large"
+            }
+          }
+        ]
+      },
+      {
+        "name": "size=small, state=pressed",
+        "type": "COMPONENT",
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "CENTER",
+          "counter": "CENTER",
+          "spacing": 8,
+          "padding": [
+            8,
+            12,
+            8,
+            12
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "FIXED"
+        },
+        "cornerRadius": 8,
+        "bound": {
+          "itemSpacing": "spacing/100",
+          "paddingLeft": "spacing/150",
+          "paddingTop": "spacing/100",
+          "paddingRight": "spacing/150",
+          "paddingBottom": "spacing/100",
+          "height": "component-size/medium",
+          "topLeftRadius": "corner-radius/100",
+          "topRightRadius": "corner-radius/100",
+          "bottomLeftRadius": "corner-radius/100",
+          "bottomRightRadius": "corner-radius/100"
+        },
+        "fill": {
+          "var": "bg/brand/pressed"
+        },
+        "children": [
+          {
+            "name": "Icon",
+            "type": "INSTANCE",
+            "bound": {
+              "width": "icon-size/small",
+              "height": "icon-size/small"
+            },
+            "hidden": true,
+            "propRefs": {
+              "visible": "\u21aa\ufe0ficon-left"
+            },
+            "instanceOf": "Icon",
+            "componentProperties": {
+              "size": "small"
+            }
+          },
+          {
+            "name": "Button",
+            "type": "TEXT",
+            "text": {
+              "characters": "Button",
+              "fontSize": 14,
+              "fontStyle": "Semi Bold",
+              "lineHeight": 21,
+              "fillVar": "text/inverse-primary"
+            },
+            "fill": {
+              "var": "text/inverse-primary"
+            },
+            "propRefs": {
+              "characters": "\u270f\ufe0ftext"
+            }
+          },
+          {
+            "name": "Icon",
+            "type": "INSTANCE",
+            "bound": {
+              "width": "icon-size/small",
+              "height": "icon-size/small"
+            },
+            "hidden": true,
+            "propRefs": {
+              "visible": "\u21aa\ufe0ficon-right"
+            },
+            "instanceOf": "Icon",
+            "componentProperties": {
+              "size": "small"
+            }
+          }
+        ]
+      },
+      {
+        "name": "size=large, state=disabled",
+        "type": "COMPONENT",
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "CENTER",
+          "counter": "CENTER",
+          "spacing": 8,
+          "padding": [
+            8,
+            16,
+            8,
+            16
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "FIXED"
+        },
+        "cornerRadius": 8,
+        "bound": {
+          "itemSpacing": "spacing/100",
+          "paddingLeft": "spacing/200",
+          "paddingTop": "spacing/100",
+          "paddingRight": "spacing/200",
+          "paddingBottom": "spacing/100",
+          "height": "component-size/xlarge",
+          "topLeftRadius": "corner-radius/100",
+          "topRightRadius": "corner-radius/100",
+          "bottomLeftRadius": "corner-radius/100",
+          "bottomRightRadius": "corner-radius/100"
+        },
+        "fill": {
+          "var": "bg/disabled"
+        },
+        "children": [
+          {
+            "name": "Icon",
+            "type": "INSTANCE",
+            "bound": {
+              "width": "component-size/small",
+              "height": "icon-size/large"
+            },
+            "hidden": true,
+            "propRefs": {
+              "visible": "\u21aa\ufe0ficon-left"
+            },
+            "instanceOf": "Icon",
+            "componentProperties": {
+              "size": "large"
+            }
+          },
+          {
+            "name": "Button",
+            "type": "TEXT",
+            "text": {
+              "characters": "Button",
+              "fontSize": 16,
+              "fontStyle": "Semi Bold",
+              "lineHeight": 24,
+              "fillVar": "text/disabled"
+            },
+            "fill": {
+              "var": "text/disabled"
+            },
+            "propRefs": {
+              "characters": "\u270f\ufe0ftext"
+            }
+          },
+          {
+            "name": "Icon",
+            "type": "INSTANCE",
+            "bound": {
+              "width": "component-size/small",
+              "height": "icon-size/large"
+            },
+            "hidden": true,
+            "propRefs": {
+              "visible": "\u21aa\ufe0ficon-right"
+            },
+            "instanceOf": "Icon",
+            "componentProperties": {
+              "size": "large"
+            }
+          },
+          {
+            "name": "Tooltip",
+            "type": "TEXT",
+            "hidden": true,
+            "text": {
+              "characters": "This action is currently unavailable",
+              "fontSize": 12,
+              "fontStyle": "Regular",
+              "lineHeight": 18
+            },
+            "fill": {
+              "hex": "000000"
+            }
+          }
+        ]
+      },
+      {
+        "name": "size=medium, state=disabled",
+        "type": "COMPONENT",
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "CENTER",
+          "counter": "CENTER",
+          "spacing": 8,
+          "padding": [
+            8,
+            16,
+            8,
+            16
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "FIXED"
+        },
+        "cornerRadius": 8,
+        "bound": {
+          "itemSpacing": "spacing/100",
+          "paddingLeft": "spacing/200",
+          "paddingTop": "spacing/100",
+          "paddingRight": "spacing/200",
+          "paddingBottom": "spacing/100",
+          "height": "component-size/large",
+          "topLeftRadius": "corner-radius/100",
+          "topRightRadius": "corner-radius/100",
+          "bottomLeftRadius": "corner-radius/100",
+          "bottomRightRadius": "corner-radius/100"
+        },
+        "fill": {
+          "var": "bg/disabled"
+        },
+        "children": [
+          {
+            "name": "Icon",
+            "type": "INSTANCE",
+            "bound": {
+              "width": "component-size/small",
+              "height": "icon-size/large"
+            },
+            "hidden": true,
+            "propRefs": {
+              "visible": "\u21aa\ufe0ficon-left"
+            },
+            "instanceOf": "Icon",
+            "componentProperties": {
+              "size": "large"
+            }
+          },
+          {
+            "name": "Button",
+            "type": "TEXT",
+            "text": {
+              "characters": "Button",
+              "fontSize": 16,
+              "fontStyle": "Semi Bold",
+              "lineHeight": 24,
+              "fillVar": "text/disabled"
+            },
+            "fill": {
+              "var": "text/disabled"
+            },
+            "propRefs": {
+              "characters": "\u270f\ufe0ftext"
+            }
+          },
+          {
+            "name": "Icon",
+            "type": "INSTANCE",
+            "bound": {
+              "width": "component-size/small",
+              "height": "icon-size/large"
+            },
+            "hidden": true,
+            "propRefs": {
+              "visible": "\u21aa\ufe0ficon-right"
+            },
+            "instanceOf": "Icon",
+            "componentProperties": {
+              "size": "large"
+            }
+          },
+          {
+            "name": "Tooltip",
+            "type": "TEXT",
+            "hidden": true,
+            "text": {
+              "characters": "This action is currently unavailable",
+              "fontSize": 12,
+              "fontStyle": "Regular",
+              "lineHeight": 18
+            },
+            "fill": {
+              "hex": "000000"
+            }
+          }
+        ]
+      },
+      {
+        "name": "size=small, state=disabled",
+        "type": "COMPONENT",
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "CENTER",
+          "counter": "CENTER",
+          "spacing": 8,
+          "padding": [
+            8,
+            12,
+            8,
+            12
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "FIXED"
+        },
+        "cornerRadius": 8,
+        "bound": {
+          "itemSpacing": "spacing/100",
+          "paddingLeft": "spacing/150",
+          "paddingTop": "spacing/100",
+          "paddingRight": "spacing/150",
+          "paddingBottom": "spacing/100",
+          "height": "component-size/medium",
+          "topLeftRadius": "corner-radius/100",
+          "topRightRadius": "corner-radius/100",
+          "bottomLeftRadius": "corner-radius/100",
+          "bottomRightRadius": "corner-radius/100"
+        },
+        "fill": {
+          "var": "bg/disabled"
+        },
+        "children": [
+          {
+            "name": "Icon",
+            "type": "INSTANCE",
+            "bound": {
+              "width": "icon-size/small",
+              "height": "icon-size/small"
+            },
+            "hidden": true,
+            "propRefs": {
+              "visible": "\u21aa\ufe0ficon-left"
+            },
+            "instanceOf": "Icon",
+            "componentProperties": {
+              "size": "small"
+            }
+          },
+          {
+            "name": "Button",
+            "type": "TEXT",
+            "text": {
+              "characters": "Button",
+              "fontSize": 14,
+              "fontStyle": "Semi Bold",
+              "lineHeight": 21,
+              "fillVar": "text/disabled"
+            },
+            "fill": {
+              "var": "text/disabled"
+            },
+            "propRefs": {
+              "characters": "\u270f\ufe0ftext"
+            }
+          },
+          {
+            "name": "Icon",
+            "type": "INSTANCE",
+            "bound": {
+              "width": "icon-size/small",
+              "height": "icon-size/small"
+            },
+            "hidden": true,
+            "propRefs": {
+              "visible": "\u21aa\ufe0ficon-right"
+            },
+            "instanceOf": "Icon",
+            "componentProperties": {
+              "size": "small"
+            }
+          },
+          {
+            "name": "Tooltip",
+            "type": "TEXT",
+            "hidden": true,
+            "text": {
+              "characters": "This action is currently unavailable",
+              "fontSize": 12,
+              "fontStyle": "Regular",
+              "lineHeight": 18
+            },
+            "fill": {
+              "hex": "000000"
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

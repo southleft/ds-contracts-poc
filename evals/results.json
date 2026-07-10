@@ -1,6 +1,6 @@
 {
-  "passed": 67,
-  "total": 67,
+  "passed": 69,
+  "total": 69,
   "results": [
     {
       "id": "refuse-unknown-token-reference",
@@ -334,6 +334,16 @@
     },
     {
       "id": "design-text-weight-and-line-height-carried",
+      "claim": "C5-extraction",
+      "pass": true
+    },
+    {
+      "id": "design-id-sanitize-at-proposal",
+      "claim": "C5-extraction",
+      "pass": true
+    },
+    {
+      "id": "design-batch-isolation-plain-words-skips",
       "claim": "C5-extraction",
       "pass": true
     }

@@ -66,6 +66,12 @@ export function ReceiptsPanel({
                     nearest tokens: {entry.suggestions.join(', ')}
                   </div>
                 ) : null}
+                {entry.detail ? (
+                  <details className="receipts__detail">
+                    <summary>technical detail</summary>
+                    <pre>{entry.detail}</pre>
+                  </details>
+                ) : null}
               </div>
             ))}
             {group.kind === 'minted' ? mintedExtras : null}
