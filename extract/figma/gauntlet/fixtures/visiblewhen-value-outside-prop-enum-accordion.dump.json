@@ -1,0 +1,4293 @@
+{
+ "_provenance": {
+  "fileKey": "WofZT8xaxXuc2Q6Je9S4XE",
+  "extractedAt": "2026-07-10",
+  "note": "Single-set gauntlet fixture for class \"visiblewhen-value-outside-prop-enum\" — extracted from cbds-plugin-all-sets.v14.dump.json by extract/figma/gauntlet/census.ts."
+ },
+ "_degradations": [
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "Accordion:expand=false, size=small, state=default/Divider",
+   "message": "LINE geometry (arbitrary paths) is not captured — parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-style-unsupported",
+   "nodePath": "Accordion:expand=false, size=small, state=default/Divider",
+   "message": "strokeAlign CENTER — dump consumers render INSIDE strokes (CSS borders); alignment dropped"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "Accordion:expand=false, size=small, state=disabled/Divider",
+   "message": "LINE geometry (arbitrary paths) is not captured — parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-style-unsupported",
+   "nodePath": "Accordion:expand=false, size=small, state=disabled/Divider",
+   "message": "strokeAlign CENTER — dump consumers render INSIDE strokes (CSS borders); alignment dropped"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "Accordion:expand=false, size=small, state=focus/Divider",
+   "message": "LINE geometry (arbitrary paths) is not captured — parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-style-unsupported",
+   "nodePath": "Accordion:expand=false, size=small, state=focus/Divider",
+   "message": "strokeAlign CENTER — dump consumers render INSIDE strokes (CSS borders); alignment dropped"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "Accordion:expand=false, size=small, state=hover/Divider",
+   "message": "LINE geometry (arbitrary paths) is not captured — parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-style-unsupported",
+   "nodePath": "Accordion:expand=false, size=small, state=hover/Divider",
+   "message": "strokeAlign CENTER — dump consumers render INSIDE strokes (CSS borders); alignment dropped"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "Accordion:expand=false, size=medium, state=default/Divider",
+   "message": "LINE geometry (arbitrary paths) is not captured — parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-style-unsupported",
+   "nodePath": "Accordion:expand=false, size=medium, state=default/Divider",
+   "message": "strokeAlign CENTER — dump consumers render INSIDE strokes (CSS borders); alignment dropped"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "Accordion:expand=false, size=medium, state=disabled/Divider",
+   "message": "LINE geometry (arbitrary paths) is not captured — parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-style-unsupported",
+   "nodePath": "Accordion:expand=false, size=medium, state=disabled/Divider",
+   "message": "strokeAlign CENTER — dump consumers render INSIDE strokes (CSS borders); alignment dropped"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "Accordion:expand=false, size=medium, state=focus/Divider",
+   "message": "LINE geometry (arbitrary paths) is not captured — parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-style-unsupported",
+   "nodePath": "Accordion:expand=false, size=medium, state=focus/Divider",
+   "message": "strokeAlign CENTER — dump consumers render INSIDE strokes (CSS borders); alignment dropped"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "Accordion:expand=false, size=medium, state=hover/Divider",
+   "message": "LINE geometry (arbitrary paths) is not captured — parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-style-unsupported",
+   "nodePath": "Accordion:expand=false, size=medium, state=hover/Divider",
+   "message": "strokeAlign CENTER — dump consumers render INSIDE strokes (CSS borders); alignment dropped"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "Accordion:expand=false, size=large, state=default/Divider",
+   "message": "LINE geometry (arbitrary paths) is not captured — parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-style-unsupported",
+   "nodePath": "Accordion:expand=false, size=large, state=default/Divider",
+   "message": "strokeAlign CENTER — dump consumers render INSIDE strokes (CSS borders); alignment dropped"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "Accordion:expand=false, size=large, state=disabled/Divider",
+   "message": "LINE geometry (arbitrary paths) is not captured — parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-style-unsupported",
+   "nodePath": "Accordion:expand=false, size=large, state=disabled/Divider",
+   "message": "strokeAlign CENTER — dump consumers render INSIDE strokes (CSS borders); alignment dropped"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "Accordion:expand=false, size=large, state=focus/Divider",
+   "message": "LINE geometry (arbitrary paths) is not captured — parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-style-unsupported",
+   "nodePath": "Accordion:expand=false, size=large, state=focus/Divider",
+   "message": "strokeAlign CENTER — dump consumers render INSIDE strokes (CSS borders); alignment dropped"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "Accordion:expand=false, size=large, state=hover/Divider",
+   "message": "LINE geometry (arbitrary paths) is not captured — parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-style-unsupported",
+   "nodePath": "Accordion:expand=false, size=large, state=hover/Divider",
+   "message": "strokeAlign CENTER — dump consumers render INSIDE strokes (CSS borders); alignment dropped"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "Accordion:expand=true, size=small, state=default/Header/Divider",
+   "message": "LINE geometry (arbitrary paths) is not captured — parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-style-unsupported",
+   "nodePath": "Accordion:expand=true, size=small, state=default/Header/Divider",
+   "message": "strokeAlign CENTER — dump consumers render INSIDE strokes (CSS borders); alignment dropped"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "Accordion:expand=true, size=small, state=hover/Header/Divider",
+   "message": "LINE geometry (arbitrary paths) is not captured — parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-style-unsupported",
+   "nodePath": "Accordion:expand=true, size=small, state=hover/Header/Divider",
+   "message": "strokeAlign CENTER — dump consumers render INSIDE strokes (CSS borders); alignment dropped"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "Accordion:expand=true, size=small, state=focus/Header/Divider",
+   "message": "LINE geometry (arbitrary paths) is not captured — parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-style-unsupported",
+   "nodePath": "Accordion:expand=true, size=small, state=focus/Header/Divider",
+   "message": "strokeAlign CENTER — dump consumers render INSIDE strokes (CSS borders); alignment dropped"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "Accordion:expand=true, size=medium, state=default/Header/Divider",
+   "message": "LINE geometry (arbitrary paths) is not captured — parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-style-unsupported",
+   "nodePath": "Accordion:expand=true, size=medium, state=default/Header/Divider",
+   "message": "strokeAlign CENTER — dump consumers render INSIDE strokes (CSS borders); alignment dropped"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "Accordion:expand=true, size=medium, state=hover/Header/Divider",
+   "message": "LINE geometry (arbitrary paths) is not captured — parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-style-unsupported",
+   "nodePath": "Accordion:expand=true, size=medium, state=hover/Header/Divider",
+   "message": "strokeAlign CENTER — dump consumers render INSIDE strokes (CSS borders); alignment dropped"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "Accordion:expand=true, size=medium, state=focus/Header/Divider",
+   "message": "LINE geometry (arbitrary paths) is not captured — parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-style-unsupported",
+   "nodePath": "Accordion:expand=true, size=medium, state=focus/Header/Divider",
+   "message": "strokeAlign CENTER — dump consumers render INSIDE strokes (CSS borders); alignment dropped"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "Accordion:expand=true, size=large, state=default/Header/Divider",
+   "message": "LINE geometry (arbitrary paths) is not captured — parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-style-unsupported",
+   "nodePath": "Accordion:expand=true, size=large, state=default/Header/Divider",
+   "message": "strokeAlign CENTER — dump consumers render INSIDE strokes (CSS borders); alignment dropped"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "Accordion:expand=true, size=large, state=hover/Header/Divider",
+   "message": "LINE geometry (arbitrary paths) is not captured — parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-style-unsupported",
+   "nodePath": "Accordion:expand=true, size=large, state=hover/Header/Divider",
+   "message": "strokeAlign CENTER — dump consumers render INSIDE strokes (CSS borders); alignment dropped"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "Accordion:expand=true, size=large, state=focus/Header/Divider",
+   "message": "LINE geometry (arbitrary paths) is not captured — parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-style-unsupported",
+   "nodePath": "Accordion:expand=true, size=large, state=focus/Header/Divider",
+   "message": "strokeAlign CENTER — dump consumers render INSIDE strokes (CSS borders); alignment dropped"
+  }
+ ],
+ "_variables": {
+  "spacing/100": {
+   "type": "FLOAT",
+   "value": 8
+  },
+  "spacing/200": {
+   "type": "FLOAT",
+   "value": 16
+  },
+  "bg/surface-primary": {
+   "type": "COLOR",
+   "value": "#fcfeff"
+  },
+  "icon-size/small": {
+   "type": "FLOAT",
+   "value": 16
+  },
+  "text/primary": {
+   "type": "COLOR",
+   "value": "#050a0f"
+  },
+  "text/tertiary": {
+   "type": "COLOR",
+   "value": "#556275"
+  },
+  "border/primary": {
+   "type": "COLOR",
+   "value": "#a2aebf"
+  },
+  "bg/disabled": {
+   "type": "COLOR",
+   "value": "#dfe3eb"
+  },
+  "text/disabled": {
+   "type": "COLOR",
+   "value": "#556275"
+  },
+  "border/focus": {
+   "type": "COLOR",
+   "value": "#0e61ba"
+  },
+  "bg/surface-primary-hover": {
+   "type": "COLOR",
+   "value": "#f5f7fa"
+  }
+ },
+ "Accordion": {
+  "setName": "Accordion",
+  "type": "COMPONENT_SET",
+  "nodeId": "359:1013",
+  "key": "8731e1f5e0fc40f02d478a5ef499c1a140268f64",
+  "variants": [
+   {
+    "name": "expand=false, size=small, state=default",
+    "type": "COMPONENT",
+    "layout": {
+     "mode": "HORIZONTAL",
+     "primary": "MIN",
+     "counter": "CENTER",
+     "spacing": 8,
+     "padding": [
+      8,
+      16,
+      8,
+      16
+     ],
+     "primarySizing": "FIXED",
+     "counterSizing": "AUTO"
+    },
+    "bound": {
+     "itemSpacing": "spacing/100",
+     "paddingLeft": "spacing/200",
+     "paddingTop": "spacing/100",
+     "paddingRight": "spacing/200",
+     "paddingBottom": "spacing/100"
+    },
+    "fill": {
+     "var": "bg/surface-primary"
+    },
+    "minHeight": 32,
+    "children": [
+     {
+      "name": "Header",
+      "type": "FRAME",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "CENTER",
+       "spacing": 8,
+       "padding": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "AUTO"
+      },
+      "fillWidth": true,
+      "children": [
+       {
+        "name": "Icon",
+        "type": "INSTANCE",
+        "bound": {
+         "width": "icon-size/small",
+         "height": "icon-size/small"
+        },
+        "hidden": true,
+        "propRefs": {
+         "visible": "↪️icon-left"
+        },
+        "instanceOf": "Icon",
+        "componentProperties": {
+         "size": "small"
+        }
+       },
+       {
+        "name": "Text container",
+        "type": "FRAME",
+        "layout": {
+         "mode": "VERTICAL",
+         "primary": "MIN",
+         "counter": "MIN",
+         "spacing": 0,
+         "padding": [
+          0,
+          0,
+          0,
+          0
+         ],
+         "primarySizing": "AUTO",
+         "counterSizing": "FIXED"
+        },
+        "children": [
+         {
+          "name": "Title",
+          "type": "TEXT",
+          "fillWidth": true,
+          "text": {
+           "characters": "Title",
+           "fontSize": 14,
+           "fontStyle": "Semi Bold",
+           "lineHeight": 16,
+           "style": "Label/Medium",
+           "fillVar": "text/primary"
+          },
+          "fill": {
+           "var": "text/primary"
+          },
+          "propRefs": {
+           "characters": "text-title"
+          }
+         },
+         {
+          "name": "Subtext",
+          "type": "TEXT",
+          "hidden": true,
+          "text": {
+           "characters": "Subtext",
+           "fontSize": 12,
+           "fontStyle": "Regular",
+           "lineHeight": 16,
+           "style": "Body/Small",
+           "fillVar": "text/tertiary"
+          },
+          "fill": {
+           "var": "text/tertiary"
+          },
+          "propRefs": {
+           "visible": "subtext",
+           "characters": "text-subtext"
+          }
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "name": "Icon",
+      "type": "INSTANCE",
+      "bound": {
+       "width": "icon-size/small",
+       "height": "icon-size/small"
+      },
+      "hidden": true,
+      "propRefs": {
+       "visible": "↪️icon-right"
+      },
+      "instanceOf": "Icon",
+      "componentProperties": {
+       "size": "small"
+      }
+     },
+     {
+      "name": "Caret",
+      "type": "INSTANCE",
+      "bound": {
+       "width": "icon-size/small",
+       "height": "icon-size/small"
+      },
+      "instanceOf": "Icon",
+      "componentProperties": {
+       "size": "small"
+      }
+     },
+     {
+      "name": "Divider",
+      "type": "LINE",
+      "stroke": {
+       "var": "border/primary"
+      },
+      "strokeWeight": 1,
+      "propRefs": {
+       "visible": "divider"
+      }
+     }
+    ]
+   },
+   {
+    "name": "expand=false, size=small, state=disabled",
+    "type": "COMPONENT",
+    "layout": {
+     "mode": "HORIZONTAL",
+     "primary": "MIN",
+     "counter": "CENTER",
+     "spacing": 8,
+     "padding": [
+      8,
+      16,
+      8,
+      16
+     ],
+     "primarySizing": "FIXED",
+     "counterSizing": "AUTO"
+    },
+    "bound": {
+     "itemSpacing": "spacing/100",
+     "paddingLeft": "spacing/200",
+     "paddingTop": "spacing/100",
+     "paddingRight": "spacing/200",
+     "paddingBottom": "spacing/100"
+    },
+    "fill": {
+     "var": "bg/disabled"
+    },
+    "minHeight": 32,
+    "children": [
+     {
+      "name": "Header",
+      "type": "FRAME",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "CENTER",
+       "spacing": 8,
+       "padding": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "AUTO"
+      },
+      "fillWidth": true,
+      "children": [
+       {
+        "name": "Icon",
+        "type": "INSTANCE",
+        "bound": {
+         "width": "icon-size/small",
+         "height": "icon-size/small"
+        },
+        "hidden": true,
+        "propRefs": {
+         "visible": "↪️icon-left"
+        },
+        "instanceOf": "Icon",
+        "componentProperties": {
+         "size": "small"
+        }
+       },
+       {
+        "name": "Text container",
+        "type": "FRAME",
+        "layout": {
+         "mode": "VERTICAL",
+         "primary": "MIN",
+         "counter": "MIN",
+         "spacing": 0,
+         "padding": [
+          0,
+          0,
+          0,
+          0
+         ],
+         "primarySizing": "AUTO",
+         "counterSizing": "FIXED"
+        },
+        "children": [
+         {
+          "name": "Title",
+          "type": "TEXT",
+          "fillWidth": true,
+          "text": {
+           "characters": "Title",
+           "fontSize": 14,
+           "fontStyle": "Semi Bold",
+           "lineHeight": 16,
+           "style": "Label/Medium",
+           "fillVar": "text/disabled"
+          },
+          "fill": {
+           "var": "text/disabled"
+          },
+          "propRefs": {
+           "characters": "text-title"
+          }
+         },
+         {
+          "name": "Subtext",
+          "type": "TEXT",
+          "hidden": true,
+          "text": {
+           "characters": "Subtext",
+           "fontSize": 12,
+           "fontStyle": "Regular",
+           "lineHeight": 16,
+           "style": "Body/Small",
+           "fillVar": "text/disabled"
+          },
+          "fill": {
+           "var": "text/disabled"
+          },
+          "propRefs": {
+           "visible": "subtext",
+           "characters": "text-subtext"
+          }
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "name": "Icon",
+      "type": "INSTANCE",
+      "bound": {
+       "width": "icon-size/small",
+       "height": "icon-size/small"
+      },
+      "hidden": true,
+      "propRefs": {
+       "visible": "↪️icon-right"
+      },
+      "instanceOf": "Icon",
+      "componentProperties": {
+       "size": "small"
+      }
+     },
+     {
+      "name": "Caret",
+      "type": "INSTANCE",
+      "bound": {
+       "width": "icon-size/small",
+       "height": "icon-size/small"
+      },
+      "instanceOf": "Icon",
+      "componentProperties": {
+       "size": "small"
+      }
+     },
+     {
+      "name": "Divider",
+      "type": "LINE",
+      "stroke": {
+       "var": "border/primary"
+      },
+      "strokeWeight": 1,
+      "propRefs": {
+       "visible": "divider"
+      }
+     }
+    ]
+   },
+   {
+    "name": "expand=false, size=small, state=focus",
+    "type": "COMPONENT",
+    "layout": {
+     "mode": "HORIZONTAL",
+     "primary": "MIN",
+     "counter": "CENTER",
+     "spacing": 8,
+     "padding": [
+      8,
+      16,
+      8,
+      16
+     ],
+     "primarySizing": "FIXED",
+     "counterSizing": "AUTO"
+    },
+    "bound": {
+     "itemSpacing": "spacing/100",
+     "paddingLeft": "spacing/200",
+     "paddingTop": "spacing/100",
+     "paddingRight": "spacing/200",
+     "paddingBottom": "spacing/100"
+    },
+    "fill": {
+     "var": "bg/surface-primary"
+    },
+    "minHeight": 32,
+    "children": [
+     {
+      "name": "Header",
+      "type": "FRAME",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "CENTER",
+       "spacing": 8,
+       "padding": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "AUTO"
+      },
+      "fillWidth": true,
+      "children": [
+       {
+        "name": "Icon",
+        "type": "INSTANCE",
+        "bound": {
+         "width": "icon-size/small",
+         "height": "icon-size/small"
+        },
+        "hidden": true,
+        "propRefs": {
+         "visible": "↪️icon-left"
+        },
+        "instanceOf": "Icon",
+        "componentProperties": {
+         "size": "small"
+        }
+       },
+       {
+        "name": "Text container",
+        "type": "FRAME",
+        "layout": {
+         "mode": "VERTICAL",
+         "primary": "MIN",
+         "counter": "MIN",
+         "spacing": 0,
+         "padding": [
+          0,
+          0,
+          0,
+          0
+         ],
+         "primarySizing": "AUTO",
+         "counterSizing": "FIXED"
+        },
+        "children": [
+         {
+          "name": "Title",
+          "type": "TEXT",
+          "fillWidth": true,
+          "text": {
+           "characters": "Title",
+           "fontSize": 14,
+           "fontStyle": "Semi Bold",
+           "lineHeight": 16,
+           "style": "Label/Medium",
+           "fillVar": "text/primary"
+          },
+          "fill": {
+           "var": "text/primary"
+          },
+          "propRefs": {
+           "characters": "text-title"
+          }
+         },
+         {
+          "name": "Subtext",
+          "type": "TEXT",
+          "hidden": true,
+          "text": {
+           "characters": "Subtext",
+           "fontSize": 12,
+           "fontStyle": "Regular",
+           "lineHeight": 16,
+           "style": "Body/Small",
+           "fillVar": "text/tertiary"
+          },
+          "fill": {
+           "var": "text/tertiary"
+          },
+          "propRefs": {
+           "visible": "subtext",
+           "characters": "text-subtext"
+          }
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "name": "Icon",
+      "type": "INSTANCE",
+      "bound": {
+       "width": "icon-size/small",
+       "height": "icon-size/small"
+      },
+      "hidden": true,
+      "propRefs": {
+       "visible": "↪️icon-right"
+      },
+      "instanceOf": "Icon",
+      "componentProperties": {
+       "size": "small"
+      }
+     },
+     {
+      "name": "Caret",
+      "type": "INSTANCE",
+      "bound": {
+       "width": "icon-size/small",
+       "height": "icon-size/small"
+      },
+      "instanceOf": "Icon",
+      "componentProperties": {
+       "size": "small"
+      }
+     },
+     {
+      "name": "Divider",
+      "type": "LINE",
+      "stroke": {
+       "var": "border/primary"
+      },
+      "strokeWeight": 1,
+      "propRefs": {
+       "visible": "divider"
+      }
+     },
+     {
+      "name": "Focus ring",
+      "type": "RECTANGLE",
+      "stroke": {
+       "var": "border/focus"
+      },
+      "strokeWeight": 2
+     }
+    ]
+   },
+   {
+    "name": "expand=false, size=small, state=hover",
+    "type": "COMPONENT",
+    "layout": {
+     "mode": "HORIZONTAL",
+     "primary": "MIN",
+     "counter": "CENTER",
+     "spacing": 8,
+     "padding": [
+      8,
+      16,
+      8,
+      16
+     ],
+     "primarySizing": "FIXED",
+     "counterSizing": "AUTO"
+    },
+    "bound": {
+     "itemSpacing": "spacing/100",
+     "paddingLeft": "spacing/200",
+     "paddingTop": "spacing/100",
+     "paddingRight": "spacing/200",
+     "paddingBottom": "spacing/100"
+    },
+    "fill": {
+     "var": "bg/surface-primary-hover"
+    },
+    "minHeight": 32,
+    "children": [
+     {
+      "name": "Header",
+      "type": "FRAME",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "CENTER",
+       "spacing": 8,
+       "padding": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "AUTO"
+      },
+      "fillWidth": true,
+      "children": [
+       {
+        "name": "Icon",
+        "type": "INSTANCE",
+        "bound": {
+         "width": "icon-size/small",
+         "height": "icon-size/small"
+        },
+        "hidden": true,
+        "propRefs": {
+         "visible": "↪️icon-left"
+        },
+        "instanceOf": "Icon",
+        "componentProperties": {
+         "size": "small"
+        }
+       },
+       {
+        "name": "Text container",
+        "type": "FRAME",
+        "layout": {
+         "mode": "VERTICAL",
+         "primary": "MIN",
+         "counter": "MIN",
+         "spacing": 0,
+         "padding": [
+          0,
+          0,
+          0,
+          0
+         ],
+         "primarySizing": "AUTO",
+         "counterSizing": "FIXED"
+        },
+        "children": [
+         {
+          "name": "Title",
+          "type": "TEXT",
+          "fillWidth": true,
+          "text": {
+           "characters": "Title",
+           "fontSize": 14,
+           "fontStyle": "Semi Bold",
+           "lineHeight": 16,
+           "style": "Label/Medium",
+           "fillVar": "text/primary"
+          },
+          "fill": {
+           "var": "text/primary"
+          },
+          "propRefs": {
+           "characters": "text-title"
+          }
+         },
+         {
+          "name": "Subtext",
+          "type": "TEXT",
+          "hidden": true,
+          "text": {
+           "characters": "Subtext",
+           "fontSize": 12,
+           "fontStyle": "Regular",
+           "lineHeight": 16,
+           "style": "Body/Small",
+           "fillVar": "text/tertiary"
+          },
+          "fill": {
+           "var": "text/tertiary"
+          },
+          "propRefs": {
+           "visible": "subtext",
+           "characters": "text-subtext"
+          }
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "name": "Icon",
+      "type": "INSTANCE",
+      "bound": {
+       "width": "icon-size/small",
+       "height": "icon-size/small"
+      },
+      "hidden": true,
+      "propRefs": {
+       "visible": "↪️icon-right"
+      },
+      "instanceOf": "Icon",
+      "componentProperties": {
+       "size": "small"
+      }
+     },
+     {
+      "name": "Caret",
+      "type": "INSTANCE",
+      "bound": {
+       "width": "icon-size/small",
+       "height": "icon-size/small"
+      },
+      "instanceOf": "Icon",
+      "componentProperties": {
+       "size": "small"
+      }
+     },
+     {
+      "name": "Divider",
+      "type": "LINE",
+      "stroke": {
+       "var": "border/primary"
+      },
+      "strokeWeight": 1,
+      "propRefs": {
+       "visible": "divider"
+      }
+     }
+    ]
+   },
+   {
+    "name": "expand=false, size=medium, state=default",
+    "type": "COMPONENT",
+    "layout": {
+     "mode": "HORIZONTAL",
+     "primary": "MIN",
+     "counter": "CENTER",
+     "spacing": 8,
+     "padding": [
+      8,
+      16,
+      8,
+      16
+     ],
+     "primarySizing": "FIXED",
+     "counterSizing": "AUTO"
+    },
+    "bound": {
+     "itemSpacing": "spacing/100",
+     "paddingLeft": "spacing/200",
+     "paddingTop": "spacing/100",
+     "paddingRight": "spacing/200",
+     "paddingBottom": "spacing/100"
+    },
+    "fill": {
+     "var": "bg/surface-primary"
+    },
+    "minHeight": 40,
+    "children": [
+     {
+      "name": "Header",
+      "type": "FRAME",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "CENTER",
+       "spacing": 8,
+       "padding": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "AUTO"
+      },
+      "fillWidth": true,
+      "children": [
+       {
+        "name": "Icon",
+        "type": "INSTANCE",
+        "bound": {
+         "width": "icon-size/small",
+         "height": "icon-size/small"
+        },
+        "hidden": true,
+        "propRefs": {
+         "visible": "↪️icon-left"
+        },
+        "instanceOf": "Icon",
+        "componentProperties": {
+         "size": "small"
+        }
+       },
+       {
+        "name": "Text container",
+        "type": "FRAME",
+        "layout": {
+         "mode": "VERTICAL",
+         "primary": "MIN",
+         "counter": "MIN",
+         "spacing": 0,
+         "padding": [
+          0,
+          0,
+          0,
+          0
+         ],
+         "primarySizing": "AUTO",
+         "counterSizing": "FIXED"
+        },
+        "children": [
+         {
+          "name": "Title",
+          "type": "TEXT",
+          "fillWidth": true,
+          "text": {
+           "characters": "Title",
+           "fontSize": 16,
+           "fontStyle": "Semi Bold",
+           "lineHeight": 20,
+           "style": "Label/Large",
+           "fillVar": "text/primary"
+          },
+          "fill": {
+           "var": "text/primary"
+          },
+          "propRefs": {
+           "characters": "text-title"
+          }
+         },
+         {
+          "name": "Subtext",
+          "type": "TEXT",
+          "hidden": true,
+          "text": {
+           "characters": "Subtext",
+           "fontSize": 12,
+           "fontStyle": "Regular",
+           "lineHeight": 16,
+           "style": "Body/Small",
+           "fillVar": "text/tertiary"
+          },
+          "fill": {
+           "var": "text/tertiary"
+          },
+          "propRefs": {
+           "visible": "subtext",
+           "characters": "text-subtext"
+          }
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "name": "Icon",
+      "type": "INSTANCE",
+      "bound": {
+       "width": "icon-size/small",
+       "height": "icon-size/small"
+      },
+      "hidden": true,
+      "propRefs": {
+       "visible": "↪️icon-right"
+      },
+      "instanceOf": "Icon",
+      "componentProperties": {
+       "size": "small"
+      }
+     },
+     {
+      "name": "Caret",
+      "type": "INSTANCE",
+      "bound": {
+       "width": "icon-size/small",
+       "height": "icon-size/small"
+      },
+      "instanceOf": "Icon",
+      "componentProperties": {
+       "size": "small"
+      }
+     },
+     {
+      "name": "Divider",
+      "type": "LINE",
+      "stroke": {
+       "var": "border/primary"
+      },
+      "strokeWeight": 1,
+      "propRefs": {
+       "visible": "divider"
+      }
+     }
+    ]
+   },
+   {
+    "name": "expand=false, size=medium, state=disabled",
+    "type": "COMPONENT",
+    "layout": {
+     "mode": "HORIZONTAL",
+     "primary": "MIN",
+     "counter": "CENTER",
+     "spacing": 8,
+     "padding": [
+      8,
+      16,
+      8,
+      16
+     ],
+     "primarySizing": "FIXED",
+     "counterSizing": "AUTO"
+    },
+    "bound": {
+     "itemSpacing": "spacing/100",
+     "paddingLeft": "spacing/200",
+     "paddingTop": "spacing/100",
+     "paddingRight": "spacing/200",
+     "paddingBottom": "spacing/100"
+    },
+    "fill": {
+     "var": "bg/disabled"
+    },
+    "minHeight": 40,
+    "children": [
+     {
+      "name": "Header",
+      "type": "FRAME",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "CENTER",
+       "spacing": 8,
+       "padding": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "AUTO"
+      },
+      "fillWidth": true,
+      "children": [
+       {
+        "name": "Icon",
+        "type": "INSTANCE",
+        "bound": {
+         "width": "icon-size/small",
+         "height": "icon-size/small"
+        },
+        "hidden": true,
+        "propRefs": {
+         "visible": "↪️icon-left"
+        },
+        "instanceOf": "Icon",
+        "componentProperties": {
+         "size": "small"
+        }
+       },
+       {
+        "name": "Text container",
+        "type": "FRAME",
+        "layout": {
+         "mode": "VERTICAL",
+         "primary": "MIN",
+         "counter": "MIN",
+         "spacing": 0,
+         "padding": [
+          0,
+          0,
+          0,
+          0
+         ],
+         "primarySizing": "AUTO",
+         "counterSizing": "FIXED"
+        },
+        "children": [
+         {
+          "name": "Title",
+          "type": "TEXT",
+          "fillWidth": true,
+          "text": {
+           "characters": "Title",
+           "fontSize": 16,
+           "fontStyle": "Semi Bold",
+           "lineHeight": 20,
+           "style": "Label/Large",
+           "fillVar": "text/disabled"
+          },
+          "fill": {
+           "var": "text/disabled"
+          },
+          "propRefs": {
+           "characters": "text-title"
+          }
+         },
+         {
+          "name": "Subtext",
+          "type": "TEXT",
+          "hidden": true,
+          "text": {
+           "characters": "Subtext",
+           "fontSize": 12,
+           "fontStyle": "Regular",
+           "lineHeight": 16,
+           "style": "Body/Small",
+           "fillVar": "text/disabled"
+          },
+          "fill": {
+           "var": "text/disabled"
+          },
+          "propRefs": {
+           "visible": "subtext",
+           "characters": "text-subtext"
+          }
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "name": "Icon",
+      "type": "INSTANCE",
+      "bound": {
+       "width": "icon-size/small",
+       "height": "icon-size/small"
+      },
+      "hidden": true,
+      "propRefs": {
+       "visible": "↪️icon-right"
+      },
+      "instanceOf": "Icon",
+      "componentProperties": {
+       "size": "small"
+      }
+     },
+     {
+      "name": "Caret",
+      "type": "INSTANCE",
+      "bound": {
+       "width": "icon-size/small",
+       "height": "icon-size/small"
+      },
+      "instanceOf": "Icon",
+      "componentProperties": {
+       "size": "small"
+      }
+     },
+     {
+      "name": "Divider",
+      "type": "LINE",
+      "stroke": {
+       "var": "border/primary"
+      },
+      "strokeWeight": 1,
+      "propRefs": {
+       "visible": "divider"
+      }
+     }
+    ]
+   },
+   {
+    "name": "expand=false, size=medium, state=focus",
+    "type": "COMPONENT",
+    "layout": {
+     "mode": "HORIZONTAL",
+     "primary": "MIN",
+     "counter": "CENTER",
+     "spacing": 8,
+     "padding": [
+      8,
+      16,
+      8,
+      16
+     ],
+     "primarySizing": "FIXED",
+     "counterSizing": "AUTO"
+    },
+    "bound": {
+     "itemSpacing": "spacing/100",
+     "paddingLeft": "spacing/200",
+     "paddingTop": "spacing/100",
+     "paddingRight": "spacing/200",
+     "paddingBottom": "spacing/100"
+    },
+    "fill": {
+     "var": "bg/surface-primary"
+    },
+    "minHeight": 40,
+    "children": [
+     {
+      "name": "Header",
+      "type": "FRAME",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "CENTER",
+       "spacing": 8,
+       "padding": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "AUTO"
+      },
+      "fillWidth": true,
+      "children": [
+       {
+        "name": "Icon",
+        "type": "INSTANCE",
+        "bound": {
+         "width": "icon-size/small",
+         "height": "icon-size/small"
+        },
+        "hidden": true,
+        "propRefs": {
+         "visible": "↪️icon-left"
+        },
+        "instanceOf": "Icon",
+        "componentProperties": {
+         "size": "small"
+        }
+       },
+       {
+        "name": "Text container",
+        "type": "FRAME",
+        "layout": {
+         "mode": "VERTICAL",
+         "primary": "MIN",
+         "counter": "MIN",
+         "spacing": 0,
+         "padding": [
+          0,
+          0,
+          0,
+          0
+         ],
+         "primarySizing": "AUTO",
+         "counterSizing": "FIXED"
+        },
+        "children": [
+         {
+          "name": "Title",
+          "type": "TEXT",
+          "fillWidth": true,
+          "text": {
+           "characters": "Title",
+           "fontSize": 16,
+           "fontStyle": "Semi Bold",
+           "lineHeight": 20,
+           "style": "Label/Large",
+           "fillVar": "text/primary"
+          },
+          "fill": {
+           "var": "text/primary"
+          },
+          "propRefs": {
+           "characters": "text-title"
+          }
+         },
+         {
+          "name": "Subtext",
+          "type": "TEXT",
+          "hidden": true,
+          "text": {
+           "characters": "Subtext",
+           "fontSize": 12,
+           "fontStyle": "Regular",
+           "lineHeight": 16,
+           "style": "Body/Small",
+           "fillVar": "text/tertiary"
+          },
+          "fill": {
+           "var": "text/tertiary"
+          },
+          "propRefs": {
+           "visible": "subtext",
+           "characters": "text-subtext"
+          }
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "name": "Icon",
+      "type": "INSTANCE",
+      "bound": {
+       "width": "icon-size/small",
+       "height": "icon-size/small"
+      },
+      "hidden": true,
+      "propRefs": {
+       "visible": "↪️icon-right"
+      },
+      "instanceOf": "Icon",
+      "componentProperties": {
+       "size": "small"
+      }
+     },
+     {
+      "name": "Caret",
+      "type": "INSTANCE",
+      "bound": {
+       "width": "icon-size/small",
+       "height": "icon-size/small"
+      },
+      "instanceOf": "Icon",
+      "componentProperties": {
+       "size": "small"
+      }
+     },
+     {
+      "name": "Divider",
+      "type": "LINE",
+      "stroke": {
+       "var": "border/primary"
+      },
+      "strokeWeight": 1,
+      "propRefs": {
+       "visible": "divider"
+      }
+     },
+     {
+      "name": "Focus ring",
+      "type": "RECTANGLE",
+      "stroke": {
+       "var": "border/focus"
+      },
+      "strokeWeight": 2
+     }
+    ]
+   },
+   {
+    "name": "expand=false, size=medium, state=hover",
+    "type": "COMPONENT",
+    "layout": {
+     "mode": "HORIZONTAL",
+     "primary": "MIN",
+     "counter": "CENTER",
+     "spacing": 8,
+     "padding": [
+      8,
+      16,
+      8,
+      16
+     ],
+     "primarySizing": "FIXED",
+     "counterSizing": "AUTO"
+    },
+    "bound": {
+     "itemSpacing": "spacing/100",
+     "paddingLeft": "spacing/200",
+     "paddingTop": "spacing/100",
+     "paddingRight": "spacing/200",
+     "paddingBottom": "spacing/100"
+    },
+    "fill": {
+     "var": "bg/surface-primary-hover"
+    },
+    "minHeight": 40,
+    "children": [
+     {
+      "name": "Header",
+      "type": "FRAME",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "CENTER",
+       "spacing": 8,
+       "padding": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "AUTO"
+      },
+      "fillWidth": true,
+      "children": [
+       {
+        "name": "Icon",
+        "type": "INSTANCE",
+        "bound": {
+         "width": "icon-size/small",
+         "height": "icon-size/small"
+        },
+        "hidden": true,
+        "propRefs": {
+         "visible": "↪️icon-left"
+        },
+        "instanceOf": "Icon",
+        "componentProperties": {
+         "size": "small"
+        }
+       },
+       {
+        "name": "Text container",
+        "type": "FRAME",
+        "layout": {
+         "mode": "VERTICAL",
+         "primary": "MIN",
+         "counter": "MIN",
+         "spacing": 0,
+         "padding": [
+          0,
+          0,
+          0,
+          0
+         ],
+         "primarySizing": "AUTO",
+         "counterSizing": "FIXED"
+        },
+        "children": [
+         {
+          "name": "Title",
+          "type": "TEXT",
+          "fillWidth": true,
+          "text": {
+           "characters": "Title",
+           "fontSize": 16,
+           "fontStyle": "Semi Bold",
+           "lineHeight": 20,
+           "style": "Label/Large",
+           "fillVar": "text/primary"
+          },
+          "fill": {
+           "var": "text/primary"
+          },
+          "propRefs": {
+           "characters": "text-title"
+          }
+         },
+         {
+          "name": "Subtext",
+          "type": "TEXT",
+          "hidden": true,
+          "text": {
+           "characters": "Subtext",
+           "fontSize": 12,
+           "fontStyle": "Regular",
+           "lineHeight": 16,
+           "style": "Body/Small",
+           "fillVar": "text/tertiary"
+          },
+          "fill": {
+           "var": "text/tertiary"
+          },
+          "propRefs": {
+           "visible": "subtext",
+           "characters": "text-subtext"
+          }
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "name": "Icon",
+      "type": "INSTANCE",
+      "bound": {
+       "width": "icon-size/small",
+       "height": "icon-size/small"
+      },
+      "hidden": true,
+      "propRefs": {
+       "visible": "↪️icon-right"
+      },
+      "instanceOf": "Icon",
+      "componentProperties": {
+       "size": "small"
+      }
+     },
+     {
+      "name": "Caret",
+      "type": "INSTANCE",
+      "bound": {
+       "width": "icon-size/small",
+       "height": "icon-size/small"
+      },
+      "instanceOf": "Icon",
+      "componentProperties": {
+       "size": "small"
+      }
+     },
+     {
+      "name": "Divider",
+      "type": "LINE",
+      "stroke": {
+       "var": "border/primary"
+      },
+      "strokeWeight": 1,
+      "propRefs": {
+       "visible": "divider"
+      }
+     }
+    ]
+   },
+   {
+    "name": "expand=false, size=large, state=default",
+    "type": "COMPONENT",
+    "layout": {
+     "mode": "HORIZONTAL",
+     "primary": "MIN",
+     "counter": "CENTER",
+     "spacing": 8,
+     "padding": [
+      8,
+      16,
+      8,
+      16
+     ],
+     "primarySizing": "FIXED",
+     "counterSizing": "AUTO"
+    },
+    "bound": {
+     "itemSpacing": "spacing/100",
+     "paddingLeft": "spacing/200",
+     "paddingTop": "spacing/100",
+     "paddingRight": "spacing/200",
+     "paddingBottom": "spacing/100"
+    },
+    "fill": {
+     "var": "bg/surface-primary"
+    },
+    "minHeight": 48,
+    "children": [
+     {
+      "name": "Header",
+      "type": "FRAME",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "CENTER",
+       "spacing": 8,
+       "padding": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "AUTO"
+      },
+      "fillWidth": true,
+      "children": [
+       {
+        "name": "Icon",
+        "type": "INSTANCE",
+        "bound": {
+         "width": "icon-size/small",
+         "height": "icon-size/small"
+        },
+        "hidden": true,
+        "propRefs": {
+         "visible": "↪️icon-left"
+        },
+        "instanceOf": "Icon",
+        "componentProperties": {
+         "size": "small"
+        }
+       },
+       {
+        "name": "Text container",
+        "type": "FRAME",
+        "layout": {
+         "mode": "VERTICAL",
+         "primary": "MIN",
+         "counter": "MIN",
+         "spacing": 0,
+         "padding": [
+          0,
+          0,
+          0,
+          0
+         ],
+         "primarySizing": "AUTO",
+         "counterSizing": "FIXED"
+        },
+        "children": [
+         {
+          "name": "Title",
+          "type": "TEXT",
+          "fillWidth": true,
+          "text": {
+           "characters": "Title",
+           "fontSize": 16,
+           "fontStyle": "Semi Bold",
+           "lineHeight": 20,
+           "style": "Label/Large",
+           "fillVar": "text/primary"
+          },
+          "fill": {
+           "var": "text/primary"
+          },
+          "propRefs": {
+           "characters": "text-title"
+          }
+         },
+         {
+          "name": "Subtext",
+          "type": "TEXT",
+          "hidden": true,
+          "text": {
+           "characters": "Subtext",
+           "fontSize": 12,
+           "fontStyle": "Regular",
+           "lineHeight": 16,
+           "style": "Body/Small",
+           "fillVar": "text/tertiary"
+          },
+          "fill": {
+           "var": "text/tertiary"
+          },
+          "propRefs": {
+           "visible": "subtext",
+           "characters": "text-subtext"
+          }
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "name": "Icon",
+      "type": "INSTANCE",
+      "bound": {
+       "width": "icon-size/small",
+       "height": "icon-size/small"
+      },
+      "hidden": true,
+      "propRefs": {
+       "visible": "↪️icon-right"
+      },
+      "instanceOf": "Icon",
+      "componentProperties": {
+       "size": "small"
+      }
+     },
+     {
+      "name": "Caret",
+      "type": "INSTANCE",
+      "bound": {
+       "width": "icon-size/small",
+       "height": "icon-size/small"
+      },
+      "instanceOf": "Icon",
+      "componentProperties": {
+       "size": "small"
+      }
+     },
+     {
+      "name": "Divider",
+      "type": "LINE",
+      "stroke": {
+       "var": "border/primary"
+      },
+      "strokeWeight": 1,
+      "propRefs": {
+       "visible": "divider"
+      }
+     }
+    ]
+   },
+   {
+    "name": "expand=false, size=large, state=disabled",
+    "type": "COMPONENT",
+    "layout": {
+     "mode": "HORIZONTAL",
+     "primary": "MIN",
+     "counter": "CENTER",
+     "spacing": 8,
+     "padding": [
+      8,
+      16,
+      8,
+      16
+     ],
+     "primarySizing": "FIXED",
+     "counterSizing": "AUTO"
+    },
+    "bound": {
+     "itemSpacing": "spacing/100",
+     "paddingLeft": "spacing/200",
+     "paddingTop": "spacing/100",
+     "paddingRight": "spacing/200",
+     "paddingBottom": "spacing/100"
+    },
+    "fill": {
+     "var": "bg/disabled"
+    },
+    "minHeight": 48,
+    "children": [
+     {
+      "name": "Header",
+      "type": "FRAME",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "CENTER",
+       "spacing": 8,
+       "padding": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "AUTO"
+      },
+      "fillWidth": true,
+      "children": [
+       {
+        "name": "Icon",
+        "type": "INSTANCE",
+        "bound": {
+         "width": "icon-size/small",
+         "height": "icon-size/small"
+        },
+        "hidden": true,
+        "propRefs": {
+         "visible": "↪️icon-left"
+        },
+        "instanceOf": "Icon",
+        "componentProperties": {
+         "size": "small"
+        }
+       },
+       {
+        "name": "Text container",
+        "type": "FRAME",
+        "layout": {
+         "mode": "VERTICAL",
+         "primary": "MIN",
+         "counter": "MIN",
+         "spacing": 0,
+         "padding": [
+          0,
+          0,
+          0,
+          0
+         ],
+         "primarySizing": "AUTO",
+         "counterSizing": "FIXED"
+        },
+        "children": [
+         {
+          "name": "Title",
+          "type": "TEXT",
+          "fillWidth": true,
+          "text": {
+           "characters": "Title",
+           "fontSize": 16,
+           "fontStyle": "Semi Bold",
+           "lineHeight": 20,
+           "style": "Label/Large",
+           "fillVar": "text/disabled"
+          },
+          "fill": {
+           "var": "text/disabled"
+          },
+          "propRefs": {
+           "characters": "text-title"
+          }
+         },
+         {
+          "name": "Subtext",
+          "type": "TEXT",
+          "hidden": true,
+          "text": {
+           "characters": "Subtext",
+           "fontSize": 12,
+           "fontStyle": "Regular",
+           "lineHeight": 16,
+           "style": "Body/Small",
+           "fillVar": "text/disabled"
+          },
+          "fill": {
+           "var": "text/disabled"
+          },
+          "propRefs": {
+           "visible": "subtext",
+           "characters": "text-subtext"
+          }
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "name": "Icon",
+      "type": "INSTANCE",
+      "bound": {
+       "width": "icon-size/small",
+       "height": "icon-size/small"
+      },
+      "hidden": true,
+      "propRefs": {
+       "visible": "↪️icon-right"
+      },
+      "instanceOf": "Icon",
+      "componentProperties": {
+       "size": "small"
+      }
+     },
+     {
+      "name": "Caret",
+      "type": "INSTANCE",
+      "bound": {
+       "width": "icon-size/small",
+       "height": "icon-size/small"
+      },
+      "instanceOf": "Icon",
+      "componentProperties": {
+       "size": "small"
+      }
+     },
+     {
+      "name": "Divider",
+      "type": "LINE",
+      "stroke": {
+       "var": "border/primary"
+      },
+      "strokeWeight": 1,
+      "propRefs": {
+       "visible": "divider"
+      }
+     }
+    ]
+   },
+   {
+    "name": "expand=false, size=large, state=focus",
+    "type": "COMPONENT",
+    "layout": {
+     "mode": "HORIZONTAL",
+     "primary": "MIN",
+     "counter": "CENTER",
+     "spacing": 8,
+     "padding": [
+      8,
+      16,
+      8,
+      16
+     ],
+     "primarySizing": "FIXED",
+     "counterSizing": "AUTO"
+    },
+    "bound": {
+     "itemSpacing": "spacing/100",
+     "paddingLeft": "spacing/200",
+     "paddingTop": "spacing/100",
+     "paddingRight": "spacing/200",
+     "paddingBottom": "spacing/100"
+    },
+    "fill": {
+     "var": "bg/surface-primary"
+    },
+    "minHeight": 48,
+    "children": [
+     {
+      "name": "Header",
+      "type": "FRAME",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "CENTER",
+       "spacing": 8,
+       "padding": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "AUTO"
+      },
+      "fillWidth": true,
+      "children": [
+       {
+        "name": "Icon",
+        "type": "INSTANCE",
+        "bound": {
+         "width": "icon-size/small",
+         "height": "icon-size/small"
+        },
+        "hidden": true,
+        "propRefs": {
+         "visible": "↪️icon-left"
+        },
+        "instanceOf": "Icon",
+        "componentProperties": {
+         "size": "small"
+        }
+       },
+       {
+        "name": "Text container",
+        "type": "FRAME",
+        "layout": {
+         "mode": "VERTICAL",
+         "primary": "MIN",
+         "counter": "MIN",
+         "spacing": 0,
+         "padding": [
+          0,
+          0,
+          0,
+          0
+         ],
+         "primarySizing": "AUTO",
+         "counterSizing": "FIXED"
+        },
+        "children": [
+         {
+          "name": "Title",
+          "type": "TEXT",
+          "fillWidth": true,
+          "text": {
+           "characters": "Title",
+           "fontSize": 16,
+           "fontStyle": "Semi Bold",
+           "lineHeight": 20,
+           "style": "Label/Large",
+           "fillVar": "text/primary"
+          },
+          "fill": {
+           "var": "text/primary"
+          },
+          "propRefs": {
+           "characters": "text-title"
+          }
+         },
+         {
+          "name": "Subtext",
+          "type": "TEXT",
+          "hidden": true,
+          "text": {
+           "characters": "Subtext",
+           "fontSize": 12,
+           "fontStyle": "Regular",
+           "lineHeight": 16,
+           "style": "Body/Small",
+           "fillVar": "text/tertiary"
+          },
+          "fill": {
+           "var": "text/tertiary"
+          },
+          "propRefs": {
+           "visible": "subtext",
+           "characters": "text-subtext"
+          }
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "name": "Icon",
+      "type": "INSTANCE",
+      "bound": {
+       "width": "icon-size/small",
+       "height": "icon-size/small"
+      },
+      "hidden": true,
+      "propRefs": {
+       "visible": "↪️icon-right"
+      },
+      "instanceOf": "Icon",
+      "componentProperties": {
+       "size": "small"
+      }
+     },
+     {
+      "name": "Caret",
+      "type": "INSTANCE",
+      "bound": {
+       "width": "icon-size/small",
+       "height": "icon-size/small"
+      },
+      "instanceOf": "Icon",
+      "componentProperties": {
+       "size": "small"
+      }
+     },
+     {
+      "name": "Divider",
+      "type": "LINE",
+      "stroke": {
+       "var": "border/primary"
+      },
+      "strokeWeight": 1,
+      "propRefs": {
+       "visible": "divider"
+      }
+     },
+     {
+      "name": "Focus ring",
+      "type": "RECTANGLE",
+      "stroke": {
+       "var": "border/focus"
+      },
+      "strokeWeight": 2
+     }
+    ]
+   },
+   {
+    "name": "expand=false, size=large, state=hover",
+    "type": "COMPONENT",
+    "layout": {
+     "mode": "HORIZONTAL",
+     "primary": "MIN",
+     "counter": "CENTER",
+     "spacing": 8,
+     "padding": [
+      8,
+      16,
+      8,
+      16
+     ],
+     "primarySizing": "FIXED",
+     "counterSizing": "AUTO"
+    },
+    "bound": {
+     "itemSpacing": "spacing/100",
+     "paddingLeft": "spacing/200",
+     "paddingTop": "spacing/100",
+     "paddingRight": "spacing/200",
+     "paddingBottom": "spacing/100"
+    },
+    "fill": {
+     "var": "bg/surface-primary-hover"
+    },
+    "minHeight": 48,
+    "children": [
+     {
+      "name": "Header",
+      "type": "FRAME",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "CENTER",
+       "spacing": 8,
+       "padding": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "AUTO"
+      },
+      "fillWidth": true,
+      "children": [
+       {
+        "name": "Icon",
+        "type": "INSTANCE",
+        "bound": {
+         "width": "icon-size/small",
+         "height": "icon-size/small"
+        },
+        "hidden": true,
+        "propRefs": {
+         "visible": "↪️icon-left"
+        },
+        "instanceOf": "Icon",
+        "componentProperties": {
+         "size": "small"
+        }
+       },
+       {
+        "name": "Text container",
+        "type": "FRAME",
+        "layout": {
+         "mode": "VERTICAL",
+         "primary": "MIN",
+         "counter": "MIN",
+         "spacing": 0,
+         "padding": [
+          0,
+          0,
+          0,
+          0
+         ],
+         "primarySizing": "AUTO",
+         "counterSizing": "FIXED"
+        },
+        "children": [
+         {
+          "name": "Title",
+          "type": "TEXT",
+          "fillWidth": true,
+          "text": {
+           "characters": "Title",
+           "fontSize": 16,
+           "fontStyle": "Semi Bold",
+           "lineHeight": 20,
+           "style": "Label/Large",
+           "fillVar": "text/primary"
+          },
+          "fill": {
+           "var": "text/primary"
+          },
+          "propRefs": {
+           "characters": "text-title"
+          }
+         },
+         {
+          "name": "Subtext",
+          "type": "TEXT",
+          "hidden": true,
+          "text": {
+           "characters": "Subtext",
+           "fontSize": 12,
+           "fontStyle": "Regular",
+           "lineHeight": 16,
+           "style": "Body/Small",
+           "fillVar": "text/tertiary"
+          },
+          "fill": {
+           "var": "text/tertiary"
+          },
+          "propRefs": {
+           "visible": "subtext",
+           "characters": "text-subtext"
+          }
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "name": "Icon",
+      "type": "INSTANCE",
+      "bound": {
+       "width": "icon-size/small",
+       "height": "icon-size/small"
+      },
+      "hidden": true,
+      "propRefs": {
+       "visible": "↪️icon-right"
+      },
+      "instanceOf": "Icon",
+      "componentProperties": {
+       "size": "small"
+      }
+     },
+     {
+      "name": "Caret",
+      "type": "INSTANCE",
+      "bound": {
+       "width": "icon-size/small",
+       "height": "icon-size/small"
+      },
+      "instanceOf": "Icon",
+      "componentProperties": {
+       "size": "small"
+      }
+     },
+     {
+      "name": "Divider",
+      "type": "LINE",
+      "stroke": {
+       "var": "border/primary"
+      },
+      "strokeWeight": 1,
+      "propRefs": {
+       "visible": "divider"
+      }
+     }
+    ]
+   },
+   {
+    "name": "expand=true, size=small, state=default",
+    "type": "COMPONENT",
+    "layout": {
+     "mode": "VERTICAL",
+     "primary": "MIN",
+     "counter": "MIN",
+     "spacing": 0,
+     "padding": [
+      0,
+      0,
+      0,
+      0
+     ],
+     "primarySizing": "AUTO",
+     "counterSizing": "FIXED"
+    },
+    "fill": {
+     "var": "bg/surface-primary"
+    },
+    "children": [
+     {
+      "name": "Header",
+      "type": "FRAME",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "CENTER",
+       "spacing": 8,
+       "padding": [
+        8,
+        16,
+        8,
+        16
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "AUTO"
+      },
+      "bound": {
+       "itemSpacing": "spacing/100",
+       "paddingLeft": "spacing/200",
+       "paddingTop": "spacing/100",
+       "paddingRight": "spacing/200",
+       "paddingBottom": "spacing/100"
+      },
+      "fill": {
+       "var": "bg/surface-primary"
+      },
+      "minHeight": 32,
+      "fillWidth": true,
+      "children": [
+       {
+        "name": "Container",
+        "type": "FRAME",
+        "layout": {
+         "mode": "HORIZONTAL",
+         "primary": "MIN",
+         "counter": "CENTER",
+         "spacing": 8,
+         "padding": [
+          0,
+          0,
+          0,
+          0
+         ],
+         "primarySizing": "FIXED",
+         "counterSizing": "AUTO"
+        },
+        "fillWidth": true,
+        "children": [
+         {
+          "name": "Icon",
+          "type": "INSTANCE",
+          "bound": {
+           "width": "icon-size/small",
+           "height": "icon-size/small"
+          },
+          "hidden": true,
+          "propRefs": {
+           "visible": "↪️icon-left"
+          },
+          "instanceOf": "Icon",
+          "componentProperties": {
+           "size": "small"
+          }
+         },
+         {
+          "name": "Text container",
+          "type": "FRAME",
+          "layout": {
+           "mode": "VERTICAL",
+           "primary": "MIN",
+           "counter": "MIN",
+           "spacing": 0,
+           "padding": [
+            0,
+            0,
+            0,
+            0
+           ],
+           "primarySizing": "AUTO",
+           "counterSizing": "FIXED"
+          },
+          "children": [
+           {
+            "name": "Title",
+            "type": "TEXT",
+            "fillWidth": true,
+            "text": {
+             "characters": "Title",
+             "fontSize": 14,
+             "fontStyle": "Semi Bold",
+             "lineHeight": 16,
+             "style": "Label/Medium",
+             "fillVar": "text/primary"
+            },
+            "fill": {
+             "var": "text/primary"
+            },
+            "propRefs": {
+             "characters": "text-title"
+            }
+           },
+           {
+            "name": "Subtext",
+            "type": "TEXT",
+            "hidden": true,
+            "text": {
+             "characters": "Subtext",
+             "fontSize": 12,
+             "fontStyle": "Regular",
+             "lineHeight": 16,
+             "style": "Body/Small",
+             "fillVar": "text/tertiary"
+            },
+            "fill": {
+             "var": "text/tertiary"
+            },
+            "propRefs": {
+             "visible": "subtext",
+             "characters": "text-subtext"
+            }
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "name": "Icon",
+        "type": "INSTANCE",
+        "bound": {
+         "width": "icon-size/small",
+         "height": "icon-size/small"
+        },
+        "hidden": true,
+        "propRefs": {
+         "visible": "↪️icon-right"
+        },
+        "instanceOf": "Icon",
+        "componentProperties": {
+         "size": "small"
+        }
+       },
+       {
+        "name": "Caret",
+        "type": "INSTANCE",
+        "bound": {
+         "width": "icon-size/small",
+         "height": "icon-size/small"
+        },
+        "instanceOf": "Icon",
+        "componentProperties": {
+         "size": "small"
+        }
+       },
+       {
+        "name": "Divider",
+        "type": "LINE",
+        "stroke": {
+         "var": "border/primary"
+        },
+        "strokeWeight": 1,
+        "hidden": true
+       }
+      ]
+     },
+     {
+      "name": "_Panel-Accordion",
+      "type": "INSTANCE",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "MIN",
+       "spacing": 0,
+       "padding": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "AUTO"
+      },
+      "fillWidth": true,
+      "instanceOf": "_Panel-Accordion",
+      "componentProperties": {
+       "↪️item-6": false,
+       "↪️item-2": true,
+       "↪️item-3": true,
+       "↪️item-7": false,
+       "↪️item-5": true,
+       "divider": true,
+       "↪️item-1": true,
+       "↪️item-4": true,
+       "↪️item-8": false,
+       "type": "text-block"
+      }
+     }
+    ]
+   },
+   {
+    "name": "expand=true, size=small, state=hover",
+    "type": "COMPONENT",
+    "layout": {
+     "mode": "VERTICAL",
+     "primary": "MIN",
+     "counter": "MIN",
+     "spacing": 0,
+     "padding": [
+      0,
+      0,
+      0,
+      0
+     ],
+     "primarySizing": "AUTO",
+     "counterSizing": "FIXED"
+    },
+    "fill": {
+     "var": "bg/surface-primary"
+    },
+    "children": [
+     {
+      "name": "Header",
+      "type": "FRAME",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "CENTER",
+       "spacing": 8,
+       "padding": [
+        8,
+        16,
+        8,
+        16
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "AUTO"
+      },
+      "bound": {
+       "itemSpacing": "spacing/100",
+       "paddingLeft": "spacing/200",
+       "paddingTop": "spacing/100",
+       "paddingRight": "spacing/200",
+       "paddingBottom": "spacing/100"
+      },
+      "fill": {
+       "var": "bg/surface-primary-hover"
+      },
+      "minHeight": 32,
+      "fillWidth": true,
+      "children": [
+       {
+        "name": "Container",
+        "type": "FRAME",
+        "layout": {
+         "mode": "HORIZONTAL",
+         "primary": "MIN",
+         "counter": "CENTER",
+         "spacing": 8,
+         "padding": [
+          0,
+          0,
+          0,
+          0
+         ],
+         "primarySizing": "FIXED",
+         "counterSizing": "AUTO"
+        },
+        "fillWidth": true,
+        "children": [
+         {
+          "name": "Icon",
+          "type": "INSTANCE",
+          "bound": {
+           "width": "icon-size/small",
+           "height": "icon-size/small"
+          },
+          "hidden": true,
+          "propRefs": {
+           "visible": "↪️icon-left"
+          },
+          "instanceOf": "Icon",
+          "componentProperties": {
+           "size": "small"
+          }
+         },
+         {
+          "name": "Text container",
+          "type": "FRAME",
+          "layout": {
+           "mode": "VERTICAL",
+           "primary": "MIN",
+           "counter": "MIN",
+           "spacing": 0,
+           "padding": [
+            0,
+            0,
+            0,
+            0
+           ],
+           "primarySizing": "AUTO",
+           "counterSizing": "FIXED"
+          },
+          "children": [
+           {
+            "name": "Title",
+            "type": "TEXT",
+            "fillWidth": true,
+            "text": {
+             "characters": "Title",
+             "fontSize": 14,
+             "fontStyle": "Semi Bold",
+             "lineHeight": 16,
+             "style": "Label/Medium",
+             "fillVar": "text/primary"
+            },
+            "fill": {
+             "var": "text/primary"
+            },
+            "propRefs": {
+             "characters": "text-title"
+            }
+           },
+           {
+            "name": "Subtext",
+            "type": "TEXT",
+            "hidden": true,
+            "text": {
+             "characters": "Subtext",
+             "fontSize": 12,
+             "fontStyle": "Regular",
+             "lineHeight": 16,
+             "style": "Body/Small",
+             "fillVar": "text/tertiary"
+            },
+            "fill": {
+             "var": "text/tertiary"
+            },
+            "propRefs": {
+             "visible": "subtext",
+             "characters": "text-subtext"
+            }
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "name": "Icon",
+        "type": "INSTANCE",
+        "bound": {
+         "width": "icon-size/small",
+         "height": "icon-size/small"
+        },
+        "hidden": true,
+        "propRefs": {
+         "visible": "↪️icon-right"
+        },
+        "instanceOf": "Icon",
+        "componentProperties": {
+         "size": "small"
+        }
+       },
+       {
+        "name": "Caret",
+        "type": "INSTANCE",
+        "bound": {
+         "width": "icon-size/small",
+         "height": "icon-size/small"
+        },
+        "instanceOf": "Icon",
+        "componentProperties": {
+         "size": "small"
+        }
+       },
+       {
+        "name": "Divider",
+        "type": "LINE",
+        "stroke": {
+         "var": "border/primary"
+        },
+        "strokeWeight": 1,
+        "hidden": true
+       }
+      ]
+     },
+     {
+      "name": "_Panel-Accordion",
+      "type": "INSTANCE",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "MIN",
+       "spacing": 0,
+       "padding": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "AUTO"
+      },
+      "fillWidth": true,
+      "instanceOf": "_Panel-Accordion",
+      "componentProperties": {
+       "↪️item-6": false,
+       "↪️item-2": true,
+       "↪️item-3": true,
+       "↪️item-7": false,
+       "↪️item-5": true,
+       "divider": true,
+       "↪️item-1": true,
+       "↪️item-4": true,
+       "↪️item-8": false,
+       "type": "text-block"
+      }
+     }
+    ]
+   },
+   {
+    "name": "expand=true, size=small, state=focus",
+    "type": "COMPONENT",
+    "layout": {
+     "mode": "VERTICAL",
+     "primary": "MIN",
+     "counter": "MIN",
+     "spacing": 0,
+     "padding": [
+      0,
+      0,
+      0,
+      0
+     ],
+     "primarySizing": "AUTO",
+     "counterSizing": "FIXED"
+    },
+    "fill": {
+     "var": "bg/surface-primary"
+    },
+    "children": [
+     {
+      "name": "Header",
+      "type": "FRAME",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "CENTER",
+       "spacing": 8,
+       "padding": [
+        8,
+        16,
+        8,
+        16
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "AUTO"
+      },
+      "bound": {
+       "itemSpacing": "spacing/100",
+       "paddingLeft": "spacing/200",
+       "paddingTop": "spacing/100",
+       "paddingRight": "spacing/200",
+       "paddingBottom": "spacing/100"
+      },
+      "fill": {
+       "var": "bg/surface-primary"
+      },
+      "minHeight": 32,
+      "fillWidth": true,
+      "children": [
+       {
+        "name": "Container",
+        "type": "FRAME",
+        "layout": {
+         "mode": "HORIZONTAL",
+         "primary": "MIN",
+         "counter": "CENTER",
+         "spacing": 8,
+         "padding": [
+          0,
+          0,
+          0,
+          0
+         ],
+         "primarySizing": "FIXED",
+         "counterSizing": "AUTO"
+        },
+        "fillWidth": true,
+        "children": [
+         {
+          "name": "Icon",
+          "type": "INSTANCE",
+          "bound": {
+           "width": "icon-size/small",
+           "height": "icon-size/small"
+          },
+          "hidden": true,
+          "propRefs": {
+           "visible": "↪️icon-left"
+          },
+          "instanceOf": "Icon",
+          "componentProperties": {
+           "size": "small"
+          }
+         },
+         {
+          "name": "Text container",
+          "type": "FRAME",
+          "layout": {
+           "mode": "VERTICAL",
+           "primary": "MIN",
+           "counter": "MIN",
+           "spacing": 0,
+           "padding": [
+            0,
+            0,
+            0,
+            0
+           ],
+           "primarySizing": "AUTO",
+           "counterSizing": "FIXED"
+          },
+          "children": [
+           {
+            "name": "Title",
+            "type": "TEXT",
+            "fillWidth": true,
+            "text": {
+             "characters": "Title",
+             "fontSize": 14,
+             "fontStyle": "Semi Bold",
+             "lineHeight": 16,
+             "style": "Label/Medium",
+             "fillVar": "text/primary"
+            },
+            "fill": {
+             "var": "text/primary"
+            },
+            "propRefs": {
+             "characters": "text-title"
+            }
+           },
+           {
+            "name": "Subtext",
+            "type": "TEXT",
+            "hidden": true,
+            "text": {
+             "characters": "Subtext",
+             "fontSize": 12,
+             "fontStyle": "Regular",
+             "lineHeight": 16,
+             "style": "Body/Small",
+             "fillVar": "text/tertiary"
+            },
+            "fill": {
+             "var": "text/tertiary"
+            },
+            "propRefs": {
+             "visible": "subtext",
+             "characters": "text-subtext"
+            }
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "name": "Icon",
+        "type": "INSTANCE",
+        "bound": {
+         "width": "icon-size/small",
+         "height": "icon-size/small"
+        },
+        "hidden": true,
+        "propRefs": {
+         "visible": "↪️icon-right"
+        },
+        "instanceOf": "Icon",
+        "componentProperties": {
+         "size": "small"
+        }
+       },
+       {
+        "name": "Caret",
+        "type": "INSTANCE",
+        "bound": {
+         "width": "icon-size/small",
+         "height": "icon-size/small"
+        },
+        "instanceOf": "Icon",
+        "componentProperties": {
+         "size": "small"
+        }
+       },
+       {
+        "name": "Divider",
+        "type": "LINE",
+        "stroke": {
+         "var": "border/primary"
+        },
+        "strokeWeight": 1,
+        "hidden": true
+       }
+      ]
+     },
+     {
+      "name": "_Panel-Accordion",
+      "type": "INSTANCE",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "MIN",
+       "spacing": 0,
+       "padding": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "AUTO"
+      },
+      "fillWidth": true,
+      "instanceOf": "_Panel-Accordion",
+      "componentProperties": {
+       "↪️item-6": false,
+       "↪️item-2": true,
+       "↪️item-3": true,
+       "↪️item-7": false,
+       "↪️item-5": true,
+       "divider": true,
+       "↪️item-1": true,
+       "↪️item-4": true,
+       "↪️item-8": false,
+       "type": "text-block"
+      }
+     },
+     {
+      "name": "Focus ring",
+      "type": "RECTANGLE",
+      "stroke": {
+       "var": "border/focus"
+      },
+      "strokeWeight": 2
+     }
+    ]
+   },
+   {
+    "name": "expand=true, size=medium, state=default",
+    "type": "COMPONENT",
+    "layout": {
+     "mode": "VERTICAL",
+     "primary": "MIN",
+     "counter": "MIN",
+     "spacing": 0,
+     "padding": [
+      0,
+      0,
+      0,
+      0
+     ],
+     "primarySizing": "AUTO",
+     "counterSizing": "FIXED"
+    },
+    "fill": {
+     "var": "bg/surface-primary"
+    },
+    "children": [
+     {
+      "name": "Header",
+      "type": "FRAME",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "CENTER",
+       "spacing": 8,
+       "padding": [
+        8,
+        16,
+        8,
+        16
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "AUTO"
+      },
+      "bound": {
+       "itemSpacing": "spacing/100",
+       "paddingLeft": "spacing/200",
+       "paddingTop": "spacing/100",
+       "paddingRight": "spacing/200",
+       "paddingBottom": "spacing/100"
+      },
+      "fill": {
+       "var": "bg/surface-primary"
+      },
+      "minHeight": 40,
+      "fillWidth": true,
+      "children": [
+       {
+        "name": "Container",
+        "type": "FRAME",
+        "layout": {
+         "mode": "HORIZONTAL",
+         "primary": "MIN",
+         "counter": "CENTER",
+         "spacing": 8,
+         "padding": [
+          0,
+          0,
+          0,
+          0
+         ],
+         "primarySizing": "FIXED",
+         "counterSizing": "AUTO"
+        },
+        "fillWidth": true,
+        "children": [
+         {
+          "name": "Icon",
+          "type": "INSTANCE",
+          "bound": {
+           "width": "icon-size/small",
+           "height": "icon-size/small"
+          },
+          "hidden": true,
+          "propRefs": {
+           "visible": "↪️icon-left"
+          },
+          "instanceOf": "Icon",
+          "componentProperties": {
+           "size": "small"
+          }
+         },
+         {
+          "name": "Text container",
+          "type": "FRAME",
+          "layout": {
+           "mode": "VERTICAL",
+           "primary": "MIN",
+           "counter": "MIN",
+           "spacing": 0,
+           "padding": [
+            0,
+            0,
+            0,
+            0
+           ],
+           "primarySizing": "AUTO",
+           "counterSizing": "FIXED"
+          },
+          "children": [
+           {
+            "name": "Title",
+            "type": "TEXT",
+            "fillWidth": true,
+            "text": {
+             "characters": "Title",
+             "fontSize": 16,
+             "fontStyle": "Semi Bold",
+             "lineHeight": 20,
+             "style": "Label/Large",
+             "fillVar": "text/primary"
+            },
+            "fill": {
+             "var": "text/primary"
+            },
+            "propRefs": {
+             "characters": "text-title"
+            }
+           },
+           {
+            "name": "Subtext",
+            "type": "TEXT",
+            "hidden": true,
+            "text": {
+             "characters": "Subtext",
+             "fontSize": 12,
+             "fontStyle": "Regular",
+             "lineHeight": 16,
+             "style": "Body/Small",
+             "fillVar": "text/tertiary"
+            },
+            "fill": {
+             "var": "text/tertiary"
+            },
+            "propRefs": {
+             "visible": "subtext",
+             "characters": "text-subtext"
+            }
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "name": "Icon",
+        "type": "INSTANCE",
+        "bound": {
+         "width": "icon-size/small",
+         "height": "icon-size/small"
+        },
+        "hidden": true,
+        "propRefs": {
+         "visible": "↪️icon-right"
+        },
+        "instanceOf": "Icon",
+        "componentProperties": {
+         "size": "small"
+        }
+       },
+       {
+        "name": "Caret",
+        "type": "INSTANCE",
+        "bound": {
+         "width": "icon-size/small",
+         "height": "icon-size/small"
+        },
+        "instanceOf": "Icon",
+        "componentProperties": {
+         "size": "small"
+        }
+       },
+       {
+        "name": "Divider",
+        "type": "LINE",
+        "stroke": {
+         "var": "border/primary"
+        },
+        "strokeWeight": 1,
+        "hidden": true
+       }
+      ]
+     },
+     {
+      "name": "_Panel-Accordion",
+      "type": "INSTANCE",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "MIN",
+       "spacing": 0,
+       "padding": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "AUTO"
+      },
+      "fillWidth": true,
+      "instanceOf": "_Panel-Accordion",
+      "componentProperties": {
+       "↪️item-6": false,
+       "↪️item-2": true,
+       "↪️item-3": true,
+       "↪️item-7": false,
+       "↪️item-5": true,
+       "divider": true,
+       "↪️item-1": true,
+       "↪️item-4": true,
+       "↪️item-8": false,
+       "type": "text-block"
+      }
+     }
+    ]
+   },
+   {
+    "name": "expand=true, size=medium, state=hover",
+    "type": "COMPONENT",
+    "layout": {
+     "mode": "VERTICAL",
+     "primary": "MIN",
+     "counter": "MIN",
+     "spacing": 0,
+     "padding": [
+      0,
+      0,
+      0,
+      0
+     ],
+     "primarySizing": "AUTO",
+     "counterSizing": "FIXED"
+    },
+    "fill": {
+     "var": "bg/surface-primary"
+    },
+    "children": [
+     {
+      "name": "Header",
+      "type": "FRAME",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "CENTER",
+       "spacing": 8,
+       "padding": [
+        8,
+        16,
+        8,
+        16
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "AUTO"
+      },
+      "bound": {
+       "itemSpacing": "spacing/100",
+       "paddingLeft": "spacing/200",
+       "paddingTop": "spacing/100",
+       "paddingRight": "spacing/200",
+       "paddingBottom": "spacing/100"
+      },
+      "fill": {
+       "var": "bg/surface-primary-hover"
+      },
+      "minHeight": 40,
+      "fillWidth": true,
+      "children": [
+       {
+        "name": "Container",
+        "type": "FRAME",
+        "layout": {
+         "mode": "HORIZONTAL",
+         "primary": "MIN",
+         "counter": "CENTER",
+         "spacing": 8,
+         "padding": [
+          0,
+          0,
+          0,
+          0
+         ],
+         "primarySizing": "FIXED",
+         "counterSizing": "AUTO"
+        },
+        "fillWidth": true,
+        "children": [
+         {
+          "name": "Icon",
+          "type": "INSTANCE",
+          "bound": {
+           "width": "icon-size/small",
+           "height": "icon-size/small"
+          },
+          "hidden": true,
+          "propRefs": {
+           "visible": "↪️icon-left"
+          },
+          "instanceOf": "Icon",
+          "componentProperties": {
+           "size": "small"
+          }
+         },
+         {
+          "name": "Text container",
+          "type": "FRAME",
+          "layout": {
+           "mode": "VERTICAL",
+           "primary": "MIN",
+           "counter": "MIN",
+           "spacing": 0,
+           "padding": [
+            0,
+            0,
+            0,
+            0
+           ],
+           "primarySizing": "AUTO",
+           "counterSizing": "FIXED"
+          },
+          "children": [
+           {
+            "name": "Title",
+            "type": "TEXT",
+            "fillWidth": true,
+            "text": {
+             "characters": "Title",
+             "fontSize": 16,
+             "fontStyle": "Semi Bold",
+             "lineHeight": 20,
+             "style": "Label/Large",
+             "fillVar": "text/primary"
+            },
+            "fill": {
+             "var": "text/primary"
+            },
+            "propRefs": {
+             "characters": "text-title"
+            }
+           },
+           {
+            "name": "Subtext",
+            "type": "TEXT",
+            "hidden": true,
+            "text": {
+             "characters": "Subtext",
+             "fontSize": 12,
+             "fontStyle": "Regular",
+             "lineHeight": 16,
+             "style": "Body/Small",
+             "fillVar": "text/tertiary"
+            },
+            "fill": {
+             "var": "text/tertiary"
+            },
+            "propRefs": {
+             "visible": "subtext",
+             "characters": "text-subtext"
+            }
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "name": "Icon",
+        "type": "INSTANCE",
+        "bound": {
+         "width": "icon-size/small",
+         "height": "icon-size/small"
+        },
+        "hidden": true,
+        "propRefs": {
+         "visible": "↪️icon-right"
+        },
+        "instanceOf": "Icon",
+        "componentProperties": {
+         "size": "small"
+        }
+       },
+       {
+        "name": "Caret",
+        "type": "INSTANCE",
+        "bound": {
+         "width": "icon-size/small",
+         "height": "icon-size/small"
+        },
+        "instanceOf": "Icon",
+        "componentProperties": {
+         "size": "small"
+        }
+       },
+       {
+        "name": "Divider",
+        "type": "LINE",
+        "stroke": {
+         "var": "border/primary"
+        },
+        "strokeWeight": 1,
+        "hidden": true
+       }
+      ]
+     },
+     {
+      "name": "_Panel-Accordion",
+      "type": "INSTANCE",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "MIN",
+       "spacing": 0,
+       "padding": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "AUTO"
+      },
+      "fillWidth": true,
+      "instanceOf": "_Panel-Accordion",
+      "componentProperties": {
+       "↪️item-6": false,
+       "↪️item-2": true,
+       "↪️item-3": true,
+       "↪️item-7": false,
+       "↪️item-5": true,
+       "divider": true,
+       "↪️item-1": true,
+       "↪️item-4": true,
+       "↪️item-8": false,
+       "type": "text-block"
+      }
+     }
+    ]
+   },
+   {
+    "name": "expand=true, size=medium, state=focus",
+    "type": "COMPONENT",
+    "layout": {
+     "mode": "VERTICAL",
+     "primary": "MIN",
+     "counter": "MIN",
+     "spacing": 0,
+     "padding": [
+      0,
+      0,
+      0,
+      0
+     ],
+     "primarySizing": "AUTO",
+     "counterSizing": "FIXED"
+    },
+    "fill": {
+     "var": "bg/surface-primary"
+    },
+    "children": [
+     {
+      "name": "Header",
+      "type": "FRAME",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "CENTER",
+       "spacing": 8,
+       "padding": [
+        8,
+        16,
+        8,
+        16
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "AUTO"
+      },
+      "bound": {
+       "itemSpacing": "spacing/100",
+       "paddingLeft": "spacing/200",
+       "paddingTop": "spacing/100",
+       "paddingRight": "spacing/200",
+       "paddingBottom": "spacing/100"
+      },
+      "fill": {
+       "var": "bg/surface-primary"
+      },
+      "minHeight": 40,
+      "fillWidth": true,
+      "children": [
+       {
+        "name": "Container",
+        "type": "FRAME",
+        "layout": {
+         "mode": "HORIZONTAL",
+         "primary": "MIN",
+         "counter": "CENTER",
+         "spacing": 8,
+         "padding": [
+          0,
+          0,
+          0,
+          0
+         ],
+         "primarySizing": "FIXED",
+         "counterSizing": "AUTO"
+        },
+        "fillWidth": true,
+        "children": [
+         {
+          "name": "Icon",
+          "type": "INSTANCE",
+          "bound": {
+           "width": "icon-size/small",
+           "height": "icon-size/small"
+          },
+          "hidden": true,
+          "propRefs": {
+           "visible": "↪️icon-left"
+          },
+          "instanceOf": "Icon",
+          "componentProperties": {
+           "size": "small"
+          }
+         },
+         {
+          "name": "Text container",
+          "type": "FRAME",
+          "layout": {
+           "mode": "VERTICAL",
+           "primary": "MIN",
+           "counter": "MIN",
+           "spacing": 0,
+           "padding": [
+            0,
+            0,
+            0,
+            0
+           ],
+           "primarySizing": "AUTO",
+           "counterSizing": "FIXED"
+          },
+          "children": [
+           {
+            "name": "Title",
+            "type": "TEXT",
+            "fillWidth": true,
+            "text": {
+             "characters": "Title",
+             "fontSize": 16,
+             "fontStyle": "Semi Bold",
+             "lineHeight": 20,
+             "style": "Label/Large",
+             "fillVar": "text/primary"
+            },
+            "fill": {
+             "var": "text/primary"
+            },
+            "propRefs": {
+             "characters": "text-title"
+            }
+           },
+           {
+            "name": "Subtext",
+            "type": "TEXT",
+            "hidden": true,
+            "text": {
+             "characters": "Subtext",
+             "fontSize": 12,
+             "fontStyle": "Regular",
+             "lineHeight": 16,
+             "style": "Body/Small",
+             "fillVar": "text/tertiary"
+            },
+            "fill": {
+             "var": "text/tertiary"
+            },
+            "propRefs": {
+             "visible": "subtext",
+             "characters": "text-subtext"
+            }
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "name": "Icon",
+        "type": "INSTANCE",
+        "bound": {
+         "width": "icon-size/small",
+         "height": "icon-size/small"
+        },
+        "hidden": true,
+        "propRefs": {
+         "visible": "↪️icon-right"
+        },
+        "instanceOf": "Icon",
+        "componentProperties": {
+         "size": "small"
+        }
+       },
+       {
+        "name": "Caret",
+        "type": "INSTANCE",
+        "bound": {
+         "width": "icon-size/small",
+         "height": "icon-size/small"
+        },
+        "instanceOf": "Icon",
+        "componentProperties": {
+         "size": "small"
+        }
+       },
+       {
+        "name": "Divider",
+        "type": "LINE",
+        "stroke": {
+         "var": "border/primary"
+        },
+        "strokeWeight": 1,
+        "hidden": true
+       }
+      ]
+     },
+     {
+      "name": "_Panel-Accordion",
+      "type": "INSTANCE",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "MIN",
+       "spacing": 0,
+       "padding": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "AUTO"
+      },
+      "fillWidth": true,
+      "instanceOf": "_Panel-Accordion",
+      "componentProperties": {
+       "↪️item-6": false,
+       "↪️item-2": true,
+       "↪️item-3": true,
+       "↪️item-7": false,
+       "↪️item-5": true,
+       "divider": true,
+       "↪️item-1": true,
+       "↪️item-4": true,
+       "↪️item-8": false,
+       "type": "text-block"
+      }
+     },
+     {
+      "name": "Focus ring",
+      "type": "RECTANGLE",
+      "stroke": {
+       "var": "border/focus"
+      },
+      "strokeWeight": 2
+     }
+    ]
+   },
+   {
+    "name": "expand=true, size=large, state=default",
+    "type": "COMPONENT",
+    "layout": {
+     "mode": "VERTICAL",
+     "primary": "MIN",
+     "counter": "MIN",
+     "spacing": 0,
+     "padding": [
+      0,
+      0,
+      0,
+      0
+     ],
+     "primarySizing": "AUTO",
+     "counterSizing": "FIXED"
+    },
+    "fill": {
+     "var": "bg/surface-primary"
+    },
+    "children": [
+     {
+      "name": "Header",
+      "type": "FRAME",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "CENTER",
+       "spacing": 8,
+       "padding": [
+        8,
+        16,
+        8,
+        16
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "AUTO"
+      },
+      "bound": {
+       "itemSpacing": "spacing/100",
+       "paddingLeft": "spacing/200",
+       "paddingTop": "spacing/100",
+       "paddingRight": "spacing/200",
+       "paddingBottom": "spacing/100"
+      },
+      "fill": {
+       "var": "bg/surface-primary"
+      },
+      "minHeight": 48,
+      "fillWidth": true,
+      "children": [
+       {
+        "name": "Container",
+        "type": "FRAME",
+        "layout": {
+         "mode": "HORIZONTAL",
+         "primary": "MIN",
+         "counter": "CENTER",
+         "spacing": 8,
+         "padding": [
+          0,
+          0,
+          0,
+          0
+         ],
+         "primarySizing": "FIXED",
+         "counterSizing": "AUTO"
+        },
+        "fillWidth": true,
+        "children": [
+         {
+          "name": "Icon",
+          "type": "INSTANCE",
+          "bound": {
+           "width": "icon-size/small",
+           "height": "icon-size/small"
+          },
+          "hidden": true,
+          "propRefs": {
+           "visible": "↪️icon-left"
+          },
+          "instanceOf": "Icon",
+          "componentProperties": {
+           "size": "small"
+          }
+         },
+         {
+          "name": "Text container",
+          "type": "FRAME",
+          "layout": {
+           "mode": "VERTICAL",
+           "primary": "MIN",
+           "counter": "MIN",
+           "spacing": 0,
+           "padding": [
+            0,
+            0,
+            0,
+            0
+           ],
+           "primarySizing": "AUTO",
+           "counterSizing": "FIXED"
+          },
+          "children": [
+           {
+            "name": "Title",
+            "type": "TEXT",
+            "fillWidth": true,
+            "text": {
+             "characters": "Title",
+             "fontSize": 16,
+             "fontStyle": "Semi Bold",
+             "lineHeight": 20,
+             "style": "Label/Large",
+             "fillVar": "text/primary"
+            },
+            "fill": {
+             "var": "text/primary"
+            },
+            "propRefs": {
+             "characters": "text-title"
+            }
+           },
+           {
+            "name": "Subtext",
+            "type": "TEXT",
+            "hidden": true,
+            "text": {
+             "characters": "Subtext",
+             "fontSize": 12,
+             "fontStyle": "Regular",
+             "lineHeight": 16,
+             "style": "Body/Small",
+             "fillVar": "text/tertiary"
+            },
+            "fill": {
+             "var": "text/tertiary"
+            },
+            "propRefs": {
+             "visible": "subtext",
+             "characters": "text-subtext"
+            }
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "name": "Icon",
+        "type": "INSTANCE",
+        "bound": {
+         "width": "icon-size/small",
+         "height": "icon-size/small"
+        },
+        "hidden": true,
+        "propRefs": {
+         "visible": "↪️icon-right"
+        },
+        "instanceOf": "Icon",
+        "componentProperties": {
+         "size": "small"
+        }
+       },
+       {
+        "name": "Caret",
+        "type": "INSTANCE",
+        "bound": {
+         "width": "icon-size/small",
+         "height": "icon-size/small"
+        },
+        "instanceOf": "Icon",
+        "componentProperties": {
+         "size": "small"
+        }
+       },
+       {
+        "name": "Divider",
+        "type": "LINE",
+        "stroke": {
+         "var": "border/primary"
+        },
+        "strokeWeight": 1,
+        "hidden": true
+       }
+      ]
+     },
+     {
+      "name": "_Panel-Accordion",
+      "type": "INSTANCE",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "MIN",
+       "spacing": 0,
+       "padding": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "AUTO"
+      },
+      "fillWidth": true,
+      "instanceOf": "_Panel-Accordion",
+      "componentProperties": {
+       "↪️item-6": false,
+       "↪️item-2": true,
+       "↪️item-3": true,
+       "↪️item-7": false,
+       "↪️item-5": true,
+       "divider": true,
+       "↪️item-1": true,
+       "↪️item-4": true,
+       "↪️item-8": false,
+       "type": "text-block"
+      }
+     }
+    ]
+   },
+   {
+    "name": "expand=true, size=large, state=hover",
+    "type": "COMPONENT",
+    "layout": {
+     "mode": "VERTICAL",
+     "primary": "MIN",
+     "counter": "MIN",
+     "spacing": 0,
+     "padding": [
+      0,
+      0,
+      0,
+      0
+     ],
+     "primarySizing": "AUTO",
+     "counterSizing": "FIXED"
+    },
+    "fill": {
+     "var": "bg/surface-primary"
+    },
+    "children": [
+     {
+      "name": "Header",
+      "type": "FRAME",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "CENTER",
+       "spacing": 8,
+       "padding": [
+        8,
+        16,
+        8,
+        16
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "AUTO"
+      },
+      "bound": {
+       "itemSpacing": "spacing/100",
+       "paddingLeft": "spacing/200",
+       "paddingTop": "spacing/100",
+       "paddingRight": "spacing/200",
+       "paddingBottom": "spacing/100"
+      },
+      "fill": {
+       "var": "bg/surface-primary-hover"
+      },
+      "minHeight": 48,
+      "fillWidth": true,
+      "children": [
+       {
+        "name": "Container",
+        "type": "FRAME",
+        "layout": {
+         "mode": "HORIZONTAL",
+         "primary": "MIN",
+         "counter": "CENTER",
+         "spacing": 8,
+         "padding": [
+          0,
+          0,
+          0,
+          0
+         ],
+         "primarySizing": "FIXED",
+         "counterSizing": "AUTO"
+        },
+        "fillWidth": true,
+        "children": [
+         {
+          "name": "Icon",
+          "type": "INSTANCE",
+          "bound": {
+           "width": "icon-size/small",
+           "height": "icon-size/small"
+          },
+          "hidden": true,
+          "propRefs": {
+           "visible": "↪️icon-left"
+          },
+          "instanceOf": "Icon",
+          "componentProperties": {
+           "size": "small"
+          }
+         },
+         {
+          "name": "Text container",
+          "type": "FRAME",
+          "layout": {
+           "mode": "VERTICAL",
+           "primary": "MIN",
+           "counter": "MIN",
+           "spacing": 0,
+           "padding": [
+            0,
+            0,
+            0,
+            0
+           ],
+           "primarySizing": "AUTO",
+           "counterSizing": "FIXED"
+          },
+          "children": [
+           {
+            "name": "Title",
+            "type": "TEXT",
+            "fillWidth": true,
+            "text": {
+             "characters": "Title",
+             "fontSize": 16,
+             "fontStyle": "Semi Bold",
+             "lineHeight": 20,
+             "style": "Label/Large",
+             "fillVar": "text/primary"
+            },
+            "fill": {
+             "var": "text/primary"
+            },
+            "propRefs": {
+             "characters": "text-title"
+            }
+           },
+           {
+            "name": "Subtext",
+            "type": "TEXT",
+            "hidden": true,
+            "text": {
+             "characters": "Subtext",
+             "fontSize": 12,
+             "fontStyle": "Regular",
+             "lineHeight": 16,
+             "style": "Body/Small",
+             "fillVar": "text/tertiary"
+            },
+            "fill": {
+             "var": "text/tertiary"
+            },
+            "propRefs": {
+             "visible": "subtext",
+             "characters": "text-subtext"
+            }
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "name": "Icon",
+        "type": "INSTANCE",
+        "bound": {
+         "width": "icon-size/small",
+         "height": "icon-size/small"
+        },
+        "hidden": true,
+        "propRefs": {
+         "visible": "↪️icon-right"
+        },
+        "instanceOf": "Icon",
+        "componentProperties": {
+         "size": "small"
+        }
+       },
+       {
+        "name": "Caret",
+        "type": "INSTANCE",
+        "bound": {
+         "width": "icon-size/small",
+         "height": "icon-size/small"
+        },
+        "instanceOf": "Icon",
+        "componentProperties": {
+         "size": "small"
+        }
+       },
+       {
+        "name": "Divider",
+        "type": "LINE",
+        "stroke": {
+         "var": "border/primary"
+        },
+        "strokeWeight": 1,
+        "hidden": true
+       }
+      ]
+     },
+     {
+      "name": "_Panel-Accordion",
+      "type": "INSTANCE",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "MIN",
+       "spacing": 0,
+       "padding": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "AUTO"
+      },
+      "fillWidth": true,
+      "instanceOf": "_Panel-Accordion",
+      "componentProperties": {
+       "↪️item-6": false,
+       "↪️item-2": true,
+       "↪️item-3": true,
+       "↪️item-7": false,
+       "↪️item-5": true,
+       "divider": true,
+       "↪️item-1": true,
+       "↪️item-4": true,
+       "↪️item-8": false,
+       "type": "text-block"
+      }
+     }
+    ]
+   },
+   {
+    "name": "expand=true, size=large, state=focus",
+    "type": "COMPONENT",
+    "layout": {
+     "mode": "VERTICAL",
+     "primary": "MIN",
+     "counter": "MIN",
+     "spacing": 0,
+     "padding": [
+      0,
+      0,
+      0,
+      0
+     ],
+     "primarySizing": "AUTO",
+     "counterSizing": "FIXED"
+    },
+    "fill": {
+     "var": "bg/surface-primary"
+    },
+    "children": [
+     {
+      "name": "Header",
+      "type": "FRAME",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "CENTER",
+       "spacing": 8,
+       "padding": [
+        8,
+        16,
+        8,
+        16
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "AUTO"
+      },
+      "bound": {
+       "itemSpacing": "spacing/100",
+       "paddingLeft": "spacing/200",
+       "paddingTop": "spacing/100",
+       "paddingRight": "spacing/200",
+       "paddingBottom": "spacing/100"
+      },
+      "fill": {
+       "var": "bg/surface-primary"
+      },
+      "minHeight": 48,
+      "fillWidth": true,
+      "children": [
+       {
+        "name": "Container",
+        "type": "FRAME",
+        "layout": {
+         "mode": "HORIZONTAL",
+         "primary": "MIN",
+         "counter": "CENTER",
+         "spacing": 8,
+         "padding": [
+          0,
+          0,
+          0,
+          0
+         ],
+         "primarySizing": "FIXED",
+         "counterSizing": "AUTO"
+        },
+        "fillWidth": true,
+        "children": [
+         {
+          "name": "Icon",
+          "type": "INSTANCE",
+          "bound": {
+           "width": "icon-size/small",
+           "height": "icon-size/small"
+          },
+          "hidden": true,
+          "propRefs": {
+           "visible": "↪️icon-left"
+          },
+          "instanceOf": "Icon",
+          "componentProperties": {
+           "size": "small"
+          }
+         },
+         {
+          "name": "Text container",
+          "type": "FRAME",
+          "layout": {
+           "mode": "VERTICAL",
+           "primary": "MIN",
+           "counter": "MIN",
+           "spacing": 0,
+           "padding": [
+            0,
+            0,
+            0,
+            0
+           ],
+           "primarySizing": "AUTO",
+           "counterSizing": "FIXED"
+          },
+          "children": [
+           {
+            "name": "Title",
+            "type": "TEXT",
+            "fillWidth": true,
+            "text": {
+             "characters": "Title",
+             "fontSize": 16,
+             "fontStyle": "Semi Bold",
+             "lineHeight": 20,
+             "style": "Label/Large",
+             "fillVar": "text/primary"
+            },
+            "fill": {
+             "var": "text/primary"
+            },
+            "propRefs": {
+             "characters": "text-title"
+            }
+           },
+           {
+            "name": "Subtext",
+            "type": "TEXT",
+            "hidden": true,
+            "text": {
+             "characters": "Subtext",
+             "fontSize": 12,
+             "fontStyle": "Regular",
+             "lineHeight": 16,
+             "style": "Body/Small",
+             "fillVar": "text/tertiary"
+            },
+            "fill": {
+             "var": "text/tertiary"
+            },
+            "propRefs": {
+             "visible": "subtext",
+             "characters": "text-subtext"
+            }
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "name": "Icon",
+        "type": "INSTANCE",
+        "bound": {
+         "width": "icon-size/small",
+         "height": "icon-size/small"
+        },
+        "hidden": true,
+        "propRefs": {
+         "visible": "↪️icon-right"
+        },
+        "instanceOf": "Icon",
+        "componentProperties": {
+         "size": "small"
+        }
+       },
+       {
+        "name": "Caret",
+        "type": "INSTANCE",
+        "bound": {
+         "width": "icon-size/small",
+         "height": "icon-size/small"
+        },
+        "instanceOf": "Icon",
+        "componentProperties": {
+         "size": "small"
+        }
+       },
+       {
+        "name": "Divider",
+        "type": "LINE",
+        "stroke": {
+         "var": "border/primary"
+        },
+        "strokeWeight": 1,
+        "hidden": true
+       }
+      ]
+     },
+     {
+      "name": "_Panel-Accordion",
+      "type": "INSTANCE",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "MIN",
+       "spacing": 0,
+       "padding": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "AUTO"
+      },
+      "fillWidth": true,
+      "instanceOf": "_Panel-Accordion",
+      "componentProperties": {
+       "↪️item-6": false,
+       "↪️item-2": true,
+       "↪️item-3": true,
+       "↪️item-7": false,
+       "↪️item-5": true,
+       "divider": true,
+       "↪️item-1": true,
+       "↪️item-4": true,
+       "↪️item-8": false,
+       "type": "text-block"
+      }
+     },
+     {
+      "name": "Focus ring",
+      "type": "RECTANGLE",
+      "stroke": {
+       "var": "border/focus"
+      },
+      "strokeWeight": 2
+     }
+    ]
+   }
+  ]
+ }
+}

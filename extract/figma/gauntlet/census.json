@@ -7,18 +7,18 @@
  "summary": {
   "dump": "extract/figma/fixtures/cbds-plugin-all-sets.v14.dump.json",
   "sets": 1618,
-  "clean": 1577,
-  "notClean": 41,
+  "clean": 1597,
+  "notClean": 21,
   "skipped": 0,
   "proposed": 1618,
-  "emitAllFour": 1577,
+  "emitAllFour": 1597,
   "componentSets": {
    "total": 76,
-   "clean": 48
+   "clean": 57
   },
   "plainComponents": {
    "total": 1542,
-   "clean": 1529
+   "clean": 1540
   },
   "capturedTokens": {
    "count": 126,
@@ -40,7 +40,7 @@
    "tokenRefsMedian": 1,
    "tokenRefsMedianComponentSets": 14,
    "mintedTotal": 863,
-   "notesTotal": 4726,
+   "notesTotal": 4858,
    "unboundTotal": 23,
    "degradationsTotal": 3316
   }
@@ -49,31 +49,6 @@
   "contract id \"ds.radio-button\" is claimed by two sets in this dump (\"RadioButton\" and \"Radio button\") — their names sanitize to the same id; rename one set (or edit one id) before adopting both"
  ],
  "classes": [
-  {
-   "cls": "duplicate-part-name",
-   "sets": 32,
-   "surfaces": [
-    "html",
-    "react",
-    "react-inline",
-    "referee"
-   ],
-   "fixInFlight": true,
-   "examples": [
-    {
-     "set": "_variable-list-item",
-     "message": "ds.variable-list-item: duplicate anatomy part name \"variableName\""
-    },
-    {
-     "set": "_typography-list-item-2",
-     "message": "ds.typography-list-item-2: duplicate anatomy part name \"variableName\""
-    },
-    {
-     "set": "_typography-list-item",
-     "message": "ds.typography-list-item: duplicate anatomy part name \"variableName\""
-    }
-   ]
-  },
   {
    "cls": "component-ref-unknown-child-prop",
    "sets": 12,
@@ -144,19 +119,14 @@
  ],
  "fixtures": [
   {
-   "cls": "duplicate-part-name",
-   "setName": "Accordion",
-   "file": "duplicate-part-name-accordion.dump.json"
-  },
-  {
    "cls": "component-ref-unknown-child-prop",
    "setName": "Avatar group",
    "file": "component-ref-unknown-child-prop-avatar-group.dump.json"
   },
   {
    "cls": "visiblewhen-value-outside-prop-enum",
-   "setName": "Alert",
-   "file": "visiblewhen-value-outside-prop-enum-alert.dump.json"
+   "setName": "Accordion",
+   "file": "visiblewhen-value-outside-prop-enum-accordion.dump.json"
   },
   {
    "cls": "prop-binding-not-camelcase",
@@ -182,6 +152,11 @@
    "cls": "pattern-state-axis",
    "setName": "Chip",
    "file": "pattern-state-axis-chip.dump.json"
+  },
+  {
+   "cls": "pattern-deep-composition",
+   "setName": "_variable-list-item",
+   "file": "pattern-deep-composition-variable-list-item.dump.json"
   }
  ],
  "sets": [
@@ -189,47 +164,16 @@
    "setName": "_variable-list-item",
    "type": "COMPONENT",
    "proposed": true,
-   "violations": [
-    "ds.variable-list-item: duplicate anatomy part name \"variableName\"",
-    "ds.variable-list-item: duplicate anatomy part name \"Swatches\"",
-    "ds.variable-list-item: duplicate anatomy part name \"Swatch\"",
-    "ds.variable-list-item: duplicate anatomy part name \"colourValue\"",
-    "ds.variable-list-item: duplicate anatomy part name \"primitive\""
-   ],
-   "violationClasses": [
-    "duplicate-part-name",
-    "duplicate-part-name",
-    "duplicate-part-name",
-    "duplicate-part-name",
-    "duplicate-part-name"
-   ],
-   "emitterRefusals": [
-    {
-     "emitter": "react",
-     "classes": [
-      "duplicate-part-name"
-     ],
-     "message": "ds.variable-list-item: duplicate anatomy part name \"variableName\""
-    },
-    {
-     "emitter": "html",
-     "classes": [
-      "duplicate-part-name"
-     ],
-     "message": "ds.variable-list-item: duplicate anatomy part name \"variableName\""
-    },
-    {
-     "emitter": "react-inline",
-     "classes": [
-      "duplicate-part-name"
-     ],
-     "message": "ds.variable-list-item: duplicate anatomy part name \"variableName\""
-    }
-   ],
+   "violations": [],
+   "violationClasses": [],
+   "emitterRefusals": [],
    "emittedSurfaces": [
+    "react",
+    "html",
+    "react-inline",
     "figma-script"
    ],
-   "noteCount": 17,
+   "noteCount": 22,
    "unboundCount": 0,
    "mintedCount": 9,
    "tokenRefsCarried": 48,
@@ -254,71 +198,22 @@
     "textStyleVariety": 2,
     "geometryParts": 0
    },
-   "clean": false
+   "clean": true
   },
   {
    "setName": "_typography-list-item-2",
    "type": "COMPONENT",
    "proposed": true,
-   "violations": [
-    "ds.typography-list-item-2: duplicate anatomy part name \"variableName\"",
-    "ds.typography-list-item-2: duplicate anatomy part name \"Icon\"",
-    "ds.typography-list-item-2: duplicate anatomy part name \"valueOfPrimitive\"",
-    "ds.typography-list-item-2: duplicate anatomy part name \"colourValue\"",
-    "ds.typography-list-item-2: duplicate anatomy part name \"primitive\"",
-    "ds.typography-list-item-2: duplicate anatomy part name \"valueOfPrimitive\"",
-    "ds.typography-list-item-2: duplicate anatomy part name \"primitive2\"",
-    "ds.typography-list-item-2: duplicate anatomy part name \"valueOfPrimitive\"",
-    "ds.typography-list-item-2: duplicate anatomy part name \"colourValue\"",
-    "ds.typography-list-item-2: duplicate anatomy part name \"primitive\"",
-    "ds.typography-list-item-2: duplicate anatomy part name \"valueOfPrimitive\"",
-    "ds.typography-list-item-2: duplicate anatomy part name \"primitive2\"",
-    "ds.typography-list-item-2: duplicate anatomy part name \"Icon\"",
-    "ds.typography-list-item-2: duplicate anatomy part name \"valueOfPrimitive\""
-   ],
-   "violationClasses": [
-    "duplicate-part-name",
-    "duplicate-part-name",
-    "duplicate-part-name",
-    "duplicate-part-name",
-    "duplicate-part-name",
-    "duplicate-part-name",
-    "duplicate-part-name",
-    "duplicate-part-name",
-    "duplicate-part-name",
-    "duplicate-part-name",
-    "duplicate-part-name",
-    "duplicate-part-name",
-    "duplicate-part-name",
-    "duplicate-part-name"
-   ],
-   "emitterRefusals": [
-    {
-     "emitter": "react",
-     "classes": [
-      "duplicate-part-name"
-     ],
-     "message": "ds.typography-list-item-2: duplicate anatomy part name \"variableName\""
-    },
-    {
-     "emitter": "html",
-     "classes": [
-      "duplicate-part-name"
-     ],
-     "message": "ds.typography-list-item-2: duplicate anatomy part name \"variableName\""
-    },
-    {
-     "emitter": "react-inline",
-     "classes": [
-      "duplicate-part-name"
-     ],
-     "message": "ds.typography-list-item-2: duplicate anatomy part name \"variableName\""
-    }
-   ],
+   "violations": [],
+   "violationClasses": [],
+   "emitterRefusals": [],
    "emittedSurfaces": [
+    "react",
+    "html",
+    "react-inline",
     "figma-script"
    ],
-   "noteCount": 29,
+   "noteCount": 43,
    "unboundCount": 0,
    "mintedCount": 13,
    "tokenRefsCarried": 72,
@@ -343,67 +238,22 @@
     "textStyleVariety": 5,
     "geometryParts": 0
    },
-   "clean": false
+   "clean": true
   },
   {
    "setName": "_typography-list-item",
    "type": "COMPONENT",
    "proposed": true,
-   "violations": [
-    "ds.typography-list-item: duplicate anatomy part name \"variableName\"",
-    "ds.typography-list-item: duplicate anatomy part name \"valueOfPrimitive\"",
-    "ds.typography-list-item: duplicate anatomy part name \"colourValue\"",
-    "ds.typography-list-item: duplicate anatomy part name \"primitive\"",
-    "ds.typography-list-item: duplicate anatomy part name \"valueOfPrimitive\"",
-    "ds.typography-list-item: duplicate anatomy part name \"primitive2\"",
-    "ds.typography-list-item: duplicate anatomy part name \"valueOfPrimitive\"",
-    "ds.typography-list-item: duplicate anatomy part name \"colourValue\"",
-    "ds.typography-list-item: duplicate anatomy part name \"primitive\"",
-    "ds.typography-list-item: duplicate anatomy part name \"valueOfPrimitive\"",
-    "ds.typography-list-item: duplicate anatomy part name \"primitive2\"",
-    "ds.typography-list-item: duplicate anatomy part name \"valueOfPrimitive\""
-   ],
-   "violationClasses": [
-    "duplicate-part-name",
-    "duplicate-part-name",
-    "duplicate-part-name",
-    "duplicate-part-name",
-    "duplicate-part-name",
-    "duplicate-part-name",
-    "duplicate-part-name",
-    "duplicate-part-name",
-    "duplicate-part-name",
-    "duplicate-part-name",
-    "duplicate-part-name",
-    "duplicate-part-name"
-   ],
-   "emitterRefusals": [
-    {
-     "emitter": "react",
-     "classes": [
-      "duplicate-part-name"
-     ],
-     "message": "ds.typography-list-item: duplicate anatomy part name \"variableName\""
-    },
-    {
-     "emitter": "html",
-     "classes": [
-      "duplicate-part-name"
-     ],
-     "message": "ds.typography-list-item: duplicate anatomy part name \"variableName\""
-    },
-    {
-     "emitter": "react-inline",
-     "classes": [
-      "duplicate-part-name"
-     ],
-     "message": "ds.typography-list-item: duplicate anatomy part name \"variableName\""
-    }
-   ],
+   "violations": [],
+   "violationClasses": [],
+   "emitterRefusals": [],
    "emittedSurfaces": [
+    "react",
+    "html",
+    "react-inline",
     "figma-script"
    ],
-   "noteCount": 25,
+   "noteCount": 37,
    "unboundCount": 0,
    "mintedCount": 9,
    "tokenRefsCarried": 66,
@@ -426,47 +276,22 @@
     "textStyleVariety": 3,
     "geometryParts": 0
    },
-   "clean": false
+   "clean": true
   },
   {
    "setName": "_numbers-list-ite",
    "type": "COMPONENT",
    "proposed": true,
-   "violations": [
-    "ds.numbers-list-ite: duplicate anatomy part name \"variableName\"",
-    "ds.numbers-list-ite: duplicate anatomy part name \"valueOfPrimitive\""
-   ],
-   "violationClasses": [
-    "duplicate-part-name",
-    "duplicate-part-name"
-   ],
-   "emitterRefusals": [
-    {
-     "emitter": "react",
-     "classes": [
-      "duplicate-part-name"
-     ],
-     "message": "ds.numbers-list-ite: duplicate anatomy part name \"variableName\""
-    },
-    {
-     "emitter": "html",
-     "classes": [
-      "duplicate-part-name"
-     ],
-     "message": "ds.numbers-list-ite: duplicate anatomy part name \"variableName\""
-    },
-    {
-     "emitter": "react-inline",
-     "classes": [
-      "duplicate-part-name"
-     ],
-     "message": "ds.numbers-list-ite: duplicate anatomy part name \"variableName\""
-    }
-   ],
+   "violations": [],
+   "violationClasses": [],
+   "emitterRefusals": [],
    "emittedSurfaces": [
+    "react",
+    "html",
+    "react-inline",
     "figma-script"
    ],
-   "noteCount": 20,
+   "noteCount": 22,
    "unboundCount": 0,
    "mintedCount": 11,
    "tokenRefsCarried": 34,
@@ -489,47 +314,22 @@
     "textStyleVariety": 3,
     "geometryParts": 0
    },
-   "clean": false
+   "clean": true
   },
   {
    "setName": "_Elevation",
    "type": "COMPONENT",
    "proposed": true,
-   "violations": [
-    "ds.elevation: duplicate anatomy part name \"variableName\"",
-    "ds.elevation: duplicate anatomy part name \"valueOfPrimitive\""
-   ],
-   "violationClasses": [
-    "duplicate-part-name",
-    "duplicate-part-name"
-   ],
-   "emitterRefusals": [
-    {
-     "emitter": "react",
-     "classes": [
-      "duplicate-part-name"
-     ],
-     "message": "ds.elevation: duplicate anatomy part name \"variableName\""
-    },
-    {
-     "emitter": "html",
-     "classes": [
-      "duplicate-part-name"
-     ],
-     "message": "ds.elevation: duplicate anatomy part name \"variableName\""
-    },
-    {
-     "emitter": "react-inline",
-     "classes": [
-      "duplicate-part-name"
-     ],
-     "message": "ds.elevation: duplicate anatomy part name \"variableName\""
-    }
-   ],
+   "violations": [],
+   "violationClasses": [],
+   "emitterRefusals": [],
    "emittedSurfaces": [
+    "react",
+    "html",
+    "react-inline",
     "figma-script"
    ],
-   "noteCount": 17,
+   "noteCount": 19,
    "unboundCount": 0,
    "mintedCount": 11,
    "tokenRefsCarried": 34,
@@ -552,7 +352,7 @@
     "textStyleVariety": 3,
     "geometryParts": 0
    },
-   "clean": false
+   "clean": true
   },
   {
    "setName": "YoutubeLogo",
@@ -22966,10 +22766,6 @@
     "ds.note: part \"Badge\" sets unknown ds.badge prop \"style\"",
     "ds.note: part \"Badge\" sets unknown ds.badge prop \"size\"",
     "ds.note: part \"Badge\" sets unknown ds.badge prop \"rounded\"",
-    "ds.note: duplicate anatomy part name \"lastEdited:\"",
-    "ds.note: duplicate anatomy part name \"23/09/2024\"",
-    "ds.note: duplicate anatomy part name \"lastEdited:\"",
-    "ds.note: duplicate anatomy part name \"23/09/2024\"",
     "ds.note: prop \"2ndParagraph\" code binding \"2ndParagraph\" is not a legal camelCase identifier",
     "ds.note: prop \"3rdParagraph\" code binding \"3rdParagraph\" is not a legal camelCase identifier",
     "ds.note: prop \"4thParagraph\" code binding \"4thParagraph\" is not a legal camelCase identifier"
@@ -22982,10 +22778,6 @@
     "component-ref-unknown-child-prop",
     "component-ref-unknown-child-prop",
     "component-ref-unknown-child-prop",
-    "duplicate-part-name",
-    "duplicate-part-name",
-    "duplicate-part-name",
-    "duplicate-part-name",
     "prop-binding-not-camelcase",
     "prop-binding-not-camelcase",
     "prop-binding-not-camelcase"
@@ -22995,7 +22787,6 @@
      "emitter": "react",
      "classes": [
       "component-ref-unknown-child-prop",
-      "duplicate-part-name",
       "prop-binding-not-camelcase"
      ],
      "message": "ds.note: part \"Badge\" sets unknown ds.badge prop \"iconRight\""
@@ -23004,7 +22795,6 @@
      "emitter": "html",
      "classes": [
       "component-ref-unknown-child-prop",
-      "duplicate-part-name",
       "prop-binding-not-camelcase"
      ],
      "message": "ds.note: part \"Badge\" sets unknown ds.badge prop \"iconRight\""
@@ -23013,7 +22803,6 @@
      "emitter": "react-inline",
      "classes": [
       "component-ref-unknown-child-prop",
-      "duplicate-part-name",
       "prop-binding-not-camelcase"
      ],
      "message": "ds.note: part \"Badge\" sets unknown ds.badge prop \"iconRight\""
@@ -23022,7 +22811,7 @@
    "emittedSurfaces": [
     "figma-script"
    ],
-   "noteCount": 21,
+   "noteCount": 25,
    "unboundCount": 0,
    "mintedCount": 7,
    "tokenRefsCarried": 42,
@@ -61612,7 +61401,7 @@
     "react-inline",
     "figma-script"
    ],
-   "noteCount": 24,
+   "noteCount": 27,
    "unboundCount": 0,
    "mintedCount": 6,
    "tokenRefsCarried": 31,
@@ -61648,35 +61437,30 @@
    "type": "COMPONENT_SET",
    "proposed": true,
    "violations": [
-    "ds.alert: part \"linkBlue\" visibleWhen.equals \"true\" is not a value of prop \"inlineAction\"",
-    "ds.alert: duplicate anatomy part name \"linkBlue\""
+    "ds.alert: part \"linkBlue\" visibleWhen.equals \"true\" is not a value of prop \"inlineAction\""
    ],
    "violationClasses": [
-    "visiblewhen-value-outside-prop-enum",
-    "duplicate-part-name"
+    "visiblewhen-value-outside-prop-enum"
    ],
    "emitterRefusals": [
     {
      "emitter": "react",
      "classes": [
-      "visiblewhen-value-outside-prop-enum",
-      "duplicate-part-name"
+      "visiblewhen-value-outside-prop-enum"
      ],
      "message": "ds.alert: part \"linkBlue\" visibleWhen.equals \"true\" is not a value of prop \"inlineAction\""
     },
     {
      "emitter": "html",
      "classes": [
-      "visiblewhen-value-outside-prop-enum",
-      "duplicate-part-name"
+      "visiblewhen-value-outside-prop-enum"
      ],
      "message": "ds.alert: part \"linkBlue\" visibleWhen.equals \"true\" is not a value of prop \"inlineAction\""
     },
     {
      "emitter": "react-inline",
      "classes": [
-      "visiblewhen-value-outside-prop-enum",
-      "duplicate-part-name"
+      "visiblewhen-value-outside-prop-enum"
      ],
      "message": "ds.alert: part \"linkBlue\" visibleWhen.equals \"true\" is not a value of prop \"inlineAction\""
     }
@@ -61684,7 +61468,7 @@
    "emittedSurfaces": [
     "figma-script"
    ],
-   "noteCount": 35,
+   "noteCount": 36,
    "unboundCount": 0,
    "mintedCount": 5,
    "tokenRefsCarried": 15,
@@ -61723,65 +61507,48 @@
     "ds.accordion: part \"textContainer\" visibleWhen.equals \"true\" is not a value of prop \"expand\"",
     "ds.accordion: part \"Title\" visibleWhen.equals \"true\" is not a value of prop \"expand\"",
     "ds.accordion: part \"Subtext\" visibleWhen.equals \"true\" is not a value of prop \"expand\"",
-    "ds.accordion: duplicate anatomy part name \"Icon\"",
     "ds.accordion: part \"Caret\" visibleWhen.equals \"true\" is not a value of prop \"expand\"",
     "ds.accordion: part \"Divider\" visibleWhen.equals \"true\" is not a value of prop \"expand\"",
-    "ds.accordion: duplicate anatomy part name \"textContainer\"",
-    "ds.accordion: part \"textContainer\" visibleWhen.equals \"false\" is not a value of prop \"expand\"",
-    "ds.accordion: duplicate anatomy part name \"Title\"",
-    "ds.accordion: part \"Title\" visibleWhen.equals \"false\" is not a value of prop \"expand\"",
-    "ds.accordion: duplicate anatomy part name \"Subtext\"",
-    "ds.accordion: part \"Subtext\" visibleWhen.equals \"false\" is not a value of prop \"expand\"",
+    "ds.accordion: part \"HeaderTextContainer\" visibleWhen.equals \"false\" is not a value of prop \"expand\"",
+    "ds.accordion: part \"HeaderTextContainerTitle\" visibleWhen.equals \"false\" is not a value of prop \"expand\"",
+    "ds.accordion: part \"HeaderTextContainerSubtext\" visibleWhen.equals \"false\" is not a value of prop \"expand\"",
     "ds.accordion: part \"PanelAccordion\" visibleWhen.equals \"true\" is not a value of prop \"expand\"",
-    "ds.accordion: duplicate anatomy part name \"Icon\"",
-    "ds.accordion: duplicate anatomy part name \"Caret\"",
-    "ds.accordion: part \"Caret\" visibleWhen.equals \"false\" is not a value of prop \"expand\"",
-    "ds.accordion: duplicate anatomy part name \"Divider\"",
-    "ds.accordion: part \"Divider\" visibleWhen.equals \"false\" is not a value of prop \"expand\""
+    "ds.accordion: part \"Caret2\" visibleWhen.equals \"false\" is not a value of prop \"expand\"",
+    "ds.accordion: part \"Divider2\" visibleWhen.equals \"false\" is not a value of prop \"expand\""
    ],
    "violationClasses": [
     "visiblewhen-value-outside-prop-enum",
     "visiblewhen-value-outside-prop-enum",
     "visiblewhen-value-outside-prop-enum",
     "visiblewhen-value-outside-prop-enum",
-    "duplicate-part-name",
     "visiblewhen-value-outside-prop-enum",
     "visiblewhen-value-outside-prop-enum",
-    "duplicate-part-name",
-    "visiblewhen-value-outside-prop-enum",
-    "duplicate-part-name",
-    "visiblewhen-value-outside-prop-enum",
-    "duplicate-part-name",
     "visiblewhen-value-outside-prop-enum",
     "visiblewhen-value-outside-prop-enum",
-    "duplicate-part-name",
-    "duplicate-part-name",
     "visiblewhen-value-outside-prop-enum",
-    "duplicate-part-name",
+    "visiblewhen-value-outside-prop-enum",
+    "visiblewhen-value-outside-prop-enum",
     "visiblewhen-value-outside-prop-enum"
    ],
    "emitterRefusals": [
     {
      "emitter": "react",
      "classes": [
-      "visiblewhen-value-outside-prop-enum",
-      "duplicate-part-name"
+      "visiblewhen-value-outside-prop-enum"
      ],
      "message": "ds.accordion: part \"Container\" visibleWhen.equals \"true\" is not a value of prop \"expand\""
     },
     {
      "emitter": "html",
      "classes": [
-      "visiblewhen-value-outside-prop-enum",
-      "duplicate-part-name"
+      "visiblewhen-value-outside-prop-enum"
      ],
      "message": "ds.accordion: part \"Container\" visibleWhen.equals \"true\" is not a value of prop \"expand\""
     },
     {
      "emitter": "react-inline",
      "classes": [
-      "visiblewhen-value-outside-prop-enum",
-      "duplicate-part-name"
+      "visiblewhen-value-outside-prop-enum"
      ],
      "message": "ds.accordion: part \"Container\" visibleWhen.equals \"true\" is not a value of prop \"expand\""
     }
@@ -61789,7 +61556,7 @@
    "emittedSurfaces": [
     "figma-script"
    ],
-   "noteCount": 76,
+   "noteCount": 83,
    "unboundCount": 2,
    "mintedCount": 24,
    "tokenRefsCarried": 21,
@@ -61829,39 +61596,16 @@
    "setName": "_Text-block-Panel",
    "type": "COMPONENT_SET",
    "proposed": true,
-   "violations": [
-    "ds.text-block-panel: duplicate anatomy part name \"Icon\""
-   ],
-   "violationClasses": [
-    "duplicate-part-name"
-   ],
-   "emitterRefusals": [
-    {
-     "emitter": "react",
-     "classes": [
-      "duplicate-part-name"
-     ],
-     "message": "ds.text-block-panel: duplicate anatomy part name \"Icon\""
-    },
-    {
-     "emitter": "html",
-     "classes": [
-      "duplicate-part-name"
-     ],
-     "message": "ds.text-block-panel: duplicate anatomy part name \"Icon\""
-    },
-    {
-     "emitter": "react-inline",
-     "classes": [
-      "duplicate-part-name"
-     ],
-     "message": "ds.text-block-panel: duplicate anatomy part name \"Icon\""
-    }
-   ],
+   "violations": [],
+   "violationClasses": [],
+   "emitterRefusals": [],
    "emittedSurfaces": [
+    "react",
+    "html",
+    "react-inline",
     "figma-script"
    ],
-   "noteCount": 24,
+   "noteCount": 25,
    "unboundCount": 0,
    "mintedCount": 8,
    "tokenRefsCarried": 15,
@@ -61889,7 +61633,7 @@
     "textStyleVariety": 1,
     "geometryParts": 1
    },
-   "clean": false
+   "clean": true
   },
   {
    "setName": "_Panel-Accordion",
@@ -62055,49 +61799,16 @@
    "setName": "_Breadcrumb item",
    "type": "COMPONENT_SET",
    "proposed": true,
-   "violations": [
-    "ds.breadcrumb-item: duplicate anatomy part name \"...\"",
-    "ds.breadcrumb-item: duplicate anatomy part name \"...\"",
-    "ds.breadcrumb-item: duplicate anatomy part name \"Slash\"",
-    "ds.breadcrumb-item: duplicate anatomy part name \"/\"",
-    "ds.breadcrumb-item: duplicate anatomy part name \"Breadcrumb\"",
-    "ds.breadcrumb-item: duplicate anatomy part name \"Icon\""
-   ],
-   "violationClasses": [
-    "duplicate-part-name",
-    "duplicate-part-name",
-    "duplicate-part-name",
-    "duplicate-part-name",
-    "duplicate-part-name",
-    "duplicate-part-name"
-   ],
-   "emitterRefusals": [
-    {
-     "emitter": "react",
-     "classes": [
-      "duplicate-part-name"
-     ],
-     "message": "ds.breadcrumb-item: duplicate anatomy part name \"...\""
-    },
-    {
-     "emitter": "html",
-     "classes": [
-      "duplicate-part-name"
-     ],
-     "message": "ds.breadcrumb-item: duplicate anatomy part name \"...\""
-    },
-    {
-     "emitter": "react-inline",
-     "classes": [
-      "duplicate-part-name"
-     ],
-     "message": "ds.breadcrumb-item: duplicate anatomy part name \"...\""
-    }
-   ],
+   "violations": [],
+   "violationClasses": [],
+   "emitterRefusals": [],
    "emittedSurfaces": [
+    "react",
+    "html",
+    "react-inline",
     "figma-script"
    ],
-   "noteCount": 52,
+   "noteCount": 59,
    "unboundCount": 1,
    "mintedCount": 5,
    "tokenRefsCarried": 31,
@@ -62129,7 +61840,7 @@
     "textStyleVariety": 2,
     "geometryParts": 0
    },
-   "clean": false
+   "clean": true
   },
   {
    "setName": "Button-Neutral Primary",
@@ -63099,18 +62810,11 @@
     "ds.card-image: part \"Text\" visibleWhen.equals \"true\" is not a value of prop \"imageBottom\"",
     "ds.card-image: part \"cardTitle\" visibleWhen.equals \"true\" is not a value of prop \"imageBottom\"",
     "ds.card-image: part \"Subtext\" visibleWhen.equals \"true\" is not a value of prop \"imageBottom\"",
-    "ds.card-image: duplicate anatomy part name \"titleText\"",
-    "ds.card-image: duplicate anatomy part name \"Avatar\"",
-    "ds.card-image: part \"Avatar\" sets unknown ds.avatar prop \"notification\"",
-    "ds.card-image: part \"Avatar\" sets unknown ds.avatar prop \"isVisible\"",
-    "ds.card-image: part \"Avatar\" sets unknown ds.avatar prop \"indicator\"",
-    "ds.card-image: part \"Avatar\" sets unknown ds.avatar prop \"round\"",
-    "ds.card-image: part \"Avatar\" sets unknown ds.avatar prop \"type\"",
-    "ds.card-image: duplicate anatomy part name \"Icon\"",
-    "ds.card-image: duplicate anatomy part name \"Text\"",
-    "ds.card-image: duplicate anatomy part name \"cardTitle\"",
-    "ds.card-image: duplicate anatomy part name \"Subtext\"",
-    "ds.card-image: duplicate anatomy part name \"icon2\"",
+    "ds.card-image: part \"ContentTitleTextAvatar\" sets unknown ds.avatar prop \"notification\"",
+    "ds.card-image: part \"ContentTitleTextAvatar\" sets unknown ds.avatar prop \"isVisible\"",
+    "ds.card-image: part \"ContentTitleTextAvatar\" sets unknown ds.avatar prop \"indicator\"",
+    "ds.card-image: part \"ContentTitleTextAvatar\" sets unknown ds.avatar prop \"round\"",
+    "ds.card-image: part \"ContentTitleTextAvatar\" sets unknown ds.avatar prop \"type\"",
     "ds.card-image: part \"Badge\" sets unknown ds.badge prop \"text\"",
     "ds.card-image: part \"Badge\" sets unknown ds.badge prop \"iconRight\"",
     "ds.card-image: part \"Badge\" sets unknown ds.badge prop \"iconLeft\"",
@@ -63118,39 +62822,26 @@
     "ds.card-image: part \"Badge\" sets unknown ds.badge prop \"style\"",
     "ds.card-image: part \"Badge\" sets unknown ds.badge prop \"size\"",
     "ds.card-image: part \"Badge\" sets unknown ds.badge prop \"rounded\"",
-    "ds.card-image: duplicate anatomy part name \"Badge\"",
-    "ds.card-image: part \"Badge\" sets unknown ds.badge prop \"text\"",
-    "ds.card-image: part \"Badge\" sets unknown ds.badge prop \"iconRight\"",
-    "ds.card-image: part \"Badge\" sets unknown ds.badge prop \"iconLeft\"",
-    "ds.card-image: part \"Badge\" sets unknown ds.badge prop \"type\"",
-    "ds.card-image: part \"Badge\" sets unknown ds.badge prop \"style\"",
-    "ds.card-image: part \"Badge\" sets unknown ds.badge prop \"size\"",
-    "ds.card-image: part \"Badge\" sets unknown ds.badge prop \"rounded\"",
-    "ds.card-image: duplicate anatomy part name \"Description\"",
-    "ds.card-image: part \"Description\" visibleWhen.equals \"true\" is not a value of prop \"imageBottom\"",
-    "ds.card-image: duplicate anatomy part name \"Content\"",
-    "ds.card-image: duplicate anatomy part name \"titleText\"",
-    "ds.card-image: duplicate anatomy part name \"Avatar\"",
-    "ds.card-image: part \"Avatar\" sets unknown ds.avatar prop \"notification\"",
-    "ds.card-image: part \"Avatar\" sets unknown ds.avatar prop \"isVisible\"",
-    "ds.card-image: part \"Avatar\" sets unknown ds.avatar prop \"indicator\"",
-    "ds.card-image: part \"Avatar\" sets unknown ds.avatar prop \"round\"",
-    "ds.card-image: part \"Avatar\" sets unknown ds.avatar prop \"type\"",
-    "ds.card-image: duplicate anatomy part name \"Icon\"",
-    "ds.card-image: duplicate anatomy part name \"Text\"",
-    "ds.card-image: duplicate anatomy part name \"cardTitle\"",
-    "ds.card-image: duplicate anatomy part name \"Subtext\"",
-    "ds.card-image: duplicate anatomy part name \"icon2\"",
-    "ds.card-image: duplicate anatomy part name \"Badge\"",
-    "ds.card-image: part \"Badge\" sets unknown ds.badge prop \"text\"",
-    "ds.card-image: part \"Badge\" sets unknown ds.badge prop \"iconRight\"",
-    "ds.card-image: part \"Badge\" sets unknown ds.badge prop \"iconLeft\"",
-    "ds.card-image: part \"Badge\" sets unknown ds.badge prop \"type\"",
-    "ds.card-image: part \"Badge\" sets unknown ds.badge prop \"style\"",
-    "ds.card-image: part \"Badge\" sets unknown ds.badge prop \"size\"",
-    "ds.card-image: part \"Badge\" sets unknown ds.badge prop \"rounded\"",
-    "ds.card-image: duplicate anatomy part name \"Description\"",
-    "ds.card-image: duplicate anatomy part name \"SlotCard\""
+    "ds.card-image: part \"contentBottomBadge\" sets unknown ds.badge prop \"text\"",
+    "ds.card-image: part \"contentBottomBadge\" sets unknown ds.badge prop \"iconRight\"",
+    "ds.card-image: part \"contentBottomBadge\" sets unknown ds.badge prop \"iconLeft\"",
+    "ds.card-image: part \"contentBottomBadge\" sets unknown ds.badge prop \"type\"",
+    "ds.card-image: part \"contentBottomBadge\" sets unknown ds.badge prop \"style\"",
+    "ds.card-image: part \"contentBottomBadge\" sets unknown ds.badge prop \"size\"",
+    "ds.card-image: part \"contentBottomBadge\" sets unknown ds.badge prop \"rounded\"",
+    "ds.card-image: part \"contentBottomDescription\" visibleWhen.equals \"true\" is not a value of prop \"imageBottom\"",
+    "ds.card-image: part \"contentBottomContentTitleTextAvatar\" sets unknown ds.avatar prop \"notification\"",
+    "ds.card-image: part \"contentBottomContentTitleTextAvatar\" sets unknown ds.avatar prop \"isVisible\"",
+    "ds.card-image: part \"contentBottomContentTitleTextAvatar\" sets unknown ds.avatar prop \"indicator\"",
+    "ds.card-image: part \"contentBottomContentTitleTextAvatar\" sets unknown ds.avatar prop \"round\"",
+    "ds.card-image: part \"contentBottomContentTitleTextAvatar\" sets unknown ds.avatar prop \"type\"",
+    "ds.card-image: part \"contentBottomContentBadge\" sets unknown ds.badge prop \"text\"",
+    "ds.card-image: part \"contentBottomContentBadge\" sets unknown ds.badge prop \"iconRight\"",
+    "ds.card-image: part \"contentBottomContentBadge\" sets unknown ds.badge prop \"iconLeft\"",
+    "ds.card-image: part \"contentBottomContentBadge\" sets unknown ds.badge prop \"type\"",
+    "ds.card-image: part \"contentBottomContentBadge\" sets unknown ds.badge prop \"style\"",
+    "ds.card-image: part \"contentBottomContentBadge\" sets unknown ds.badge prop \"size\"",
+    "ds.card-image: part \"contentBottomContentBadge\" sets unknown ds.badge prop \"rounded\""
    ],
    "violationClasses": [
     "visiblewhen-value-outside-prop-enum",
@@ -63162,18 +62853,6 @@
     "visiblewhen-value-outside-prop-enum",
     "visiblewhen-value-outside-prop-enum",
     "visiblewhen-value-outside-prop-enum",
-    "duplicate-part-name",
-    "duplicate-part-name",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "duplicate-part-name",
-    "duplicate-part-name",
-    "duplicate-part-name",
-    "duplicate-part-name",
-    "duplicate-part-name",
     "component-ref-unknown-child-prop",
     "component-ref-unknown-child-prop",
     "component-ref-unknown-child-prop",
@@ -63181,7 +62860,6 @@
     "component-ref-unknown-child-prop",
     "component-ref-unknown-child-prop",
     "component-ref-unknown-child-prop",
-    "duplicate-part-name",
     "component-ref-unknown-child-prop",
     "component-ref-unknown-child-prop",
     "component-ref-unknown-child-prop",
@@ -63189,22 +62867,12 @@
     "component-ref-unknown-child-prop",
     "component-ref-unknown-child-prop",
     "component-ref-unknown-child-prop",
-    "duplicate-part-name",
+    "component-ref-unknown-child-prop",
+    "component-ref-unknown-child-prop",
+    "component-ref-unknown-child-prop",
+    "component-ref-unknown-child-prop",
+    "component-ref-unknown-child-prop",
     "visiblewhen-value-outside-prop-enum",
-    "duplicate-part-name",
-    "duplicate-part-name",
-    "duplicate-part-name",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "duplicate-part-name",
-    "duplicate-part-name",
-    "duplicate-part-name",
-    "duplicate-part-name",
-    "duplicate-part-name",
-    "duplicate-part-name",
     "component-ref-unknown-child-prop",
     "component-ref-unknown-child-prop",
     "component-ref-unknown-child-prop",
@@ -63212,16 +62880,18 @@
     "component-ref-unknown-child-prop",
     "component-ref-unknown-child-prop",
     "component-ref-unknown-child-prop",
-    "duplicate-part-name",
-    "duplicate-part-name"
+    "component-ref-unknown-child-prop",
+    "component-ref-unknown-child-prop",
+    "component-ref-unknown-child-prop",
+    "component-ref-unknown-child-prop",
+    "component-ref-unknown-child-prop"
    ],
    "emitterRefusals": [
     {
      "emitter": "react",
      "classes": [
       "visiblewhen-value-outside-prop-enum",
-      "component-ref-unknown-child-prop",
-      "duplicate-part-name"
+      "component-ref-unknown-child-prop"
      ],
      "message": "ds.card-image: part \"titleText\" visibleWhen.equals \"true\" is not a value of prop \"imageBottom\""
     },
@@ -63229,8 +62899,7 @@
      "emitter": "html",
      "classes": [
       "visiblewhen-value-outside-prop-enum",
-      "component-ref-unknown-child-prop",
-      "duplicate-part-name"
+      "component-ref-unknown-child-prop"
      ],
      "message": "ds.card-image: part \"titleText\" visibleWhen.equals \"true\" is not a value of prop \"imageBottom\""
     },
@@ -63238,8 +62907,7 @@
      "emitter": "react-inline",
      "classes": [
       "visiblewhen-value-outside-prop-enum",
-      "component-ref-unknown-child-prop",
-      "duplicate-part-name"
+      "component-ref-unknown-child-prop"
      ],
      "message": "ds.card-image: part \"titleText\" visibleWhen.equals \"true\" is not a value of prop \"imageBottom\""
     }
@@ -63247,7 +62915,7 @@
    "emittedSurfaces": [
     "figma-script"
    ],
-   "noteCount": 111,
+   "noteCount": 131,
    "unboundCount": 0,
    "mintedCount": 28,
    "tokenRefsCarried": 34,
@@ -63451,43 +63119,16 @@
    "setName": "_Icon group-card",
    "type": "COMPONENT",
    "proposed": true,
-   "violations": [
-    "ds.icon-group-card: duplicate anatomy part name \"Icon\"",
-    "ds.icon-group-card: duplicate anatomy part name \"iconContainer\"",
-    "ds.icon-group-card: duplicate anatomy part name \"Icon\""
-   ],
-   "violationClasses": [
-    "duplicate-part-name",
-    "duplicate-part-name",
-    "duplicate-part-name"
-   ],
-   "emitterRefusals": [
-    {
-     "emitter": "react",
-     "classes": [
-      "duplicate-part-name"
-     ],
-     "message": "ds.icon-group-card: duplicate anatomy part name \"Icon\""
-    },
-    {
-     "emitter": "html",
-     "classes": [
-      "duplicate-part-name"
-     ],
-     "message": "ds.icon-group-card: duplicate anatomy part name \"Icon\""
-    },
-    {
-     "emitter": "react-inline",
-     "classes": [
-      "duplicate-part-name"
-     ],
-     "message": "ds.icon-group-card: duplicate anatomy part name \"Icon\""
-    }
-   ],
+   "violations": [],
+   "violationClasses": [],
+   "emitterRefusals": [],
    "emittedSurfaces": [
+    "react",
+    "html",
+    "react-inline",
     "figma-script"
    ],
-   "noteCount": 10,
+   "noteCount": 13,
    "unboundCount": 0,
    "mintedCount": 1,
    "tokenRefsCarried": 8,
@@ -63510,7 +63151,7 @@
     "textStyleVariety": 0,
     "geometryParts": 0
    },
-   "clean": false
+   "clean": true
   },
   {
    "setName": "_Link group-card",
@@ -63635,41 +63276,16 @@
    "setName": "Dialog",
    "type": "COMPONENT_SET",
    "proposed": true,
-   "violations": [
-    "ds.dialog: duplicate anatomy part name \"Title\"",
-    "ds.dialog: duplicate anatomy part name \"Icon\""
-   ],
-   "violationClasses": [
-    "duplicate-part-name",
-    "duplicate-part-name"
-   ],
-   "emitterRefusals": [
-    {
-     "emitter": "react",
-     "classes": [
-      "duplicate-part-name"
-     ],
-     "message": "ds.dialog: duplicate anatomy part name \"Title\""
-    },
-    {
-     "emitter": "html",
-     "classes": [
-      "duplicate-part-name"
-     ],
-     "message": "ds.dialog: duplicate anatomy part name \"Title\""
-    },
-    {
-     "emitter": "react-inline",
-     "classes": [
-      "duplicate-part-name"
-     ],
-     "message": "ds.dialog: duplicate anatomy part name \"Title\""
-    }
-   ],
+   "violations": [],
+   "violationClasses": [],
+   "emitterRefusals": [],
    "emittedSurfaces": [
+    "react",
+    "html",
+    "react-inline",
     "figma-script"
    ],
-   "noteCount": 57,
+   "noteCount": 59,
    "unboundCount": 0,
    "mintedCount": 20,
    "tokenRefsCarried": 18,
@@ -63696,7 +63312,7 @@
     "textStyleVariety": 5,
     "geometryParts": 0
    },
-   "clean": false
+   "clean": true
   },
   {
    "setName": "Dropdown",
@@ -63838,43 +63454,38 @@
    "type": "COMPONENT_SET",
    "proposed": true,
    "violations": [
-    "ds.input-number: duplicate anatomy part name \"100000\"",
     "ds.input-number: part \"Controls\" visibleWhen.equals \"true\" is not a value of prop \"controls\""
    ],
    "violationClasses": [
-    "duplicate-part-name",
     "visiblewhen-value-outside-prop-enum"
    ],
    "emitterRefusals": [
     {
      "emitter": "react",
      "classes": [
-      "duplicate-part-name",
       "visiblewhen-value-outside-prop-enum"
      ],
-     "message": "ds.input-number: duplicate anatomy part name \"100000\""
+     "message": "ds.input-number: part \"Controls\" visibleWhen.equals \"true\" is not a value of prop \"controls\""
     },
     {
      "emitter": "html",
      "classes": [
-      "duplicate-part-name",
       "visiblewhen-value-outside-prop-enum"
      ],
-     "message": "ds.input-number: duplicate anatomy part name \"100000\""
+     "message": "ds.input-number: part \"Controls\" visibleWhen.equals \"true\" is not a value of prop \"controls\""
     },
     {
      "emitter": "react-inline",
      "classes": [
-      "duplicate-part-name",
       "visiblewhen-value-outside-prop-enum"
      ],
-     "message": "ds.input-number: duplicate anatomy part name \"100000\""
+     "message": "ds.input-number: part \"Controls\" visibleWhen.equals \"true\" is not a value of prop \"controls\""
     }
    ],
    "emittedSurfaces": [
     "figma-script"
    ],
-   "noteCount": 84,
+   "noteCount": 87,
    "unboundCount": 0,
    "mintedCount": 28,
    "tokenRefsCarried": 24,
@@ -63956,14 +63567,12 @@
    "violations": [
     "ds.country-code: part \"usUnitedStates\" visibleWhen.equals \"true\" is not a value of prop \"flag\"",
     "ds.country-code: part \"codeAndDropdown\" visibleWhen.equals \"true\" is not a value of prop \"flag\"",
-    "ds.country-code: part \"+1\" visibleWhen.equals \"true\" is not a value of prop \"flag\"",
+    "ds.country-code: part \"part\" visibleWhen.equals \"true\" is not a value of prop \"flag\"",
     "ds.country-code: part \"Icon\" visibleWhen.equals \"true\" is not a value of prop \"flag\"",
     "ds.country-code: part \"countryAndCode\" visibleWhen.equals \"false\" is not a value of prop \"flag\"",
     "ds.country-code: part \"US\" visibleWhen.equals \"false\" is not a value of prop \"flag\"",
-    "ds.country-code: duplicate anatomy part name \"+1\"",
-    "ds.country-code: part \"+1\" visibleWhen.equals \"false\" is not a value of prop \"flag\"",
-    "ds.country-code: duplicate anatomy part name \"Icon\"",
-    "ds.country-code: part \"Icon\" visibleWhen.equals \"false\" is not a value of prop \"flag\""
+    "ds.country-code: part \"countryAndCodePart\" visibleWhen.equals \"false\" is not a value of prop \"flag\"",
+    "ds.country-code: part \"Icon2\" visibleWhen.equals \"false\" is not a value of prop \"flag\""
    ],
    "violationClasses": [
     "visiblewhen-value-outside-prop-enum",
@@ -63972,33 +63581,28 @@
     "visiblewhen-value-outside-prop-enum",
     "visiblewhen-value-outside-prop-enum",
     "visiblewhen-value-outside-prop-enum",
-    "duplicate-part-name",
     "visiblewhen-value-outside-prop-enum",
-    "duplicate-part-name",
     "visiblewhen-value-outside-prop-enum"
    ],
    "emitterRefusals": [
     {
      "emitter": "react",
      "classes": [
-      "visiblewhen-value-outside-prop-enum",
-      "duplicate-part-name"
+      "visiblewhen-value-outside-prop-enum"
      ],
      "message": "ds.country-code: part \"usUnitedStates\" visibleWhen.equals \"true\" is not a value of prop \"flag\""
     },
     {
      "emitter": "html",
      "classes": [
-      "visiblewhen-value-outside-prop-enum",
-      "duplicate-part-name"
+      "visiblewhen-value-outside-prop-enum"
      ],
      "message": "ds.country-code: part \"usUnitedStates\" visibleWhen.equals \"true\" is not a value of prop \"flag\""
     },
     {
      "emitter": "react-inline",
      "classes": [
-      "visiblewhen-value-outside-prop-enum",
-      "duplicate-part-name"
+      "visiblewhen-value-outside-prop-enum"
      ],
      "message": "ds.country-code: part \"usUnitedStates\" visibleWhen.equals \"true\" is not a value of prop \"flag\""
     }
@@ -64006,7 +63610,7 @@
    "emittedSurfaces": [
     "figma-script"
    ],
-   "noteCount": 30,
+   "noteCount": 32,
    "unboundCount": 0,
    "mintedCount": 14,
    "tokenRefsCarried": 7,
@@ -64154,39 +63758,16 @@
    "setName": "Input Text",
    "type": "COMPONENT_SET",
    "proposed": true,
-   "violations": [
-    "ds.input-text: duplicate anatomy part name \"inputText\""
-   ],
-   "violationClasses": [
-    "duplicate-part-name"
-   ],
-   "emitterRefusals": [
-    {
-     "emitter": "react",
-     "classes": [
-      "duplicate-part-name"
-     ],
-     "message": "ds.input-text: duplicate anatomy part name \"inputText\""
-    },
-    {
-     "emitter": "html",
-     "classes": [
-      "duplicate-part-name"
-     ],
-     "message": "ds.input-text: duplicate anatomy part name \"inputText\""
-    },
-    {
-     "emitter": "react-inline",
-     "classes": [
-      "duplicate-part-name"
-     ],
-     "message": "ds.input-text: duplicate anatomy part name \"inputText\""
-    }
-   ],
+   "violations": [],
+   "violationClasses": [],
+   "emitterRefusals": [],
    "emittedSurfaces": [
+    "react",
+    "html",
+    "react-inline",
     "figma-script"
    ],
-   "noteCount": 59,
+   "noteCount": 60,
    "unboundCount": 0,
    "mintedCount": 20,
    "tokenRefsCarried": 18,
@@ -64216,7 +63797,7 @@
     "textStyleVariety": 2,
     "geometryParts": 0
    },
-   "clean": false
+   "clean": true
   },
   {
    "setName": "List item",
@@ -64228,7 +63809,6 @@
     "ds.list-item: part \"Avatar\" sets unknown ds.avatar prop \"indicator\"",
     "ds.list-item: part \"Avatar\" sets unknown ds.avatar prop \"round\"",
     "ds.list-item: part \"Avatar\" sets unknown ds.avatar prop \"type\"",
-    "ds.list-item: duplicate anatomy part name \"Icon\"",
     "ds.list-item: part \"Badge\" sets unknown ds.badge prop \"text\"",
     "ds.list-item: part \"Badge\" sets unknown ds.badge prop \"iconRight\"",
     "ds.list-item: part \"Badge\" sets unknown ds.badge prop \"iconLeft\"",
@@ -64243,7 +63823,6 @@
     "component-ref-unknown-child-prop",
     "component-ref-unknown-child-prop",
     "component-ref-unknown-child-prop",
-    "duplicate-part-name",
     "component-ref-unknown-child-prop",
     "component-ref-unknown-child-prop",
     "component-ref-unknown-child-prop",
@@ -64256,24 +63835,21 @@
     {
      "emitter": "react",
      "classes": [
-      "component-ref-unknown-child-prop",
-      "duplicate-part-name"
+      "component-ref-unknown-child-prop"
      ],
      "message": "ds.list-item: part \"Avatar\" sets unknown ds.avatar prop \"isVisible\""
     },
     {
      "emitter": "html",
      "classes": [
-      "component-ref-unknown-child-prop",
-      "duplicate-part-name"
+      "component-ref-unknown-child-prop"
      ],
      "message": "ds.list-item: part \"Avatar\" sets unknown ds.avatar prop \"isVisible\""
     },
     {
      "emitter": "react-inline",
      "classes": [
-      "component-ref-unknown-child-prop",
-      "duplicate-part-name"
+      "component-ref-unknown-child-prop"
      ],
      "message": "ds.list-item: part \"Avatar\" sets unknown ds.avatar prop \"isVisible\""
     }
@@ -64281,7 +63857,7 @@
    "emittedSurfaces": [
     "figma-script"
    ],
-   "noteCount": 73,
+   "noteCount": 74,
    "unboundCount": 1,
    "mintedCount": 27,
    "tokenRefsCarried": 22,
@@ -64668,8 +64244,7 @@
     "ds.navigation-side: part \"Header\" visibleWhen.equals \"false\" is not a value of prop \"open\"",
     "ds.navigation-side: part \"Logo\" visibleWhen.equals \"false\" is not a value of prop \"open\"",
     "ds.navigation-side: part \"Icon\" visibleWhen.equals \"false\" is not a value of prop \"open\"",
-    "ds.navigation-side: duplicate anatomy part name \"Search\"",
-    "ds.navigation-side: part \"Search\" visibleWhen.equals \"true\" is not a value of prop \"open\"",
+    "ds.navigation-side: part \"Search2\" visibleWhen.equals \"true\" is not a value of prop \"open\"",
     "ds.navigation-side: part \"accountBlock\" visibleWhen.equals \"false\" is not a value of prop \"open\"",
     "ds.navigation-side: part \"Avatar\" sets unknown ds.avatar prop \"isVisible\"",
     "ds.navigation-side: part \"Avatar\" sets unknown ds.avatar prop \"notification\"",
@@ -64682,7 +64257,6 @@
     "visiblewhen-value-outside-prop-enum",
     "visiblewhen-value-outside-prop-enum",
     "visiblewhen-value-outside-prop-enum",
-    "duplicate-part-name",
     "visiblewhen-value-outside-prop-enum",
     "visiblewhen-value-outside-prop-enum",
     "component-ref-unknown-child-prop",
@@ -64697,7 +64271,6 @@
      "emitter": "react",
      "classes": [
       "visiblewhen-value-outside-prop-enum",
-      "duplicate-part-name",
       "component-ref-unknown-child-prop"
      ],
      "message": "ds.navigation-side: part \"Header\" visibleWhen.equals \"false\" is not a value of prop \"open\""
@@ -64706,7 +64279,6 @@
      "emitter": "html",
      "classes": [
       "visiblewhen-value-outside-prop-enum",
-      "duplicate-part-name",
       "component-ref-unknown-child-prop"
      ],
      "message": "ds.navigation-side: part \"Header\" visibleWhen.equals \"false\" is not a value of prop \"open\""
@@ -64715,7 +64287,6 @@
      "emitter": "react-inline",
      "classes": [
       "visiblewhen-value-outside-prop-enum",
-      "duplicate-part-name",
       "component-ref-unknown-child-prop"
      ],
      "message": "ds.navigation-side: part \"Header\" visibleWhen.equals \"false\" is not a value of prop \"open\""
@@ -64724,7 +64295,7 @@
    "emittedSurfaces": [
     "figma-script"
    ],
-   "noteCount": 81,
+   "noteCount": 82,
    "unboundCount": 0,
    "mintedCount": 2,
    "tokenRefsCarried": 13,
@@ -64759,39 +64330,16 @@
    "setName": "_Nav-item-base-open",
    "type": "COMPONENT_SET",
    "proposed": true,
-   "violations": [
-    "ds.nav-item-base-open: duplicate anatomy part name \"Icon\""
-   ],
-   "violationClasses": [
-    "duplicate-part-name"
-   ],
-   "emitterRefusals": [
-    {
-     "emitter": "react",
-     "classes": [
-      "duplicate-part-name"
-     ],
-     "message": "ds.nav-item-base-open: duplicate anatomy part name \"Icon\""
-    },
-    {
-     "emitter": "html",
-     "classes": [
-      "duplicate-part-name"
-     ],
-     "message": "ds.nav-item-base-open: duplicate anatomy part name \"Icon\""
-    },
-    {
-     "emitter": "react-inline",
-     "classes": [
-      "duplicate-part-name"
-     ],
-     "message": "ds.nav-item-base-open: duplicate anatomy part name \"Icon\""
-    }
-   ],
+   "violations": [],
+   "violationClasses": [],
+   "emitterRefusals": [],
    "emittedSurfaces": [
+    "react",
+    "html",
+    "react-inline",
     "figma-script"
    ],
-   "noteCount": 31,
+   "noteCount": 32,
    "unboundCount": 0,
    "mintedCount": 5,
    "tokenRefsCarried": 14,
@@ -64821,7 +64369,7 @@
     "textStyleVariety": 1,
     "geometryParts": 3
    },
-   "clean": false
+   "clean": true
   },
   {
    "setName": "_Nav-item-menu",
@@ -65049,7 +64597,6 @@
    "type": "COMPONENT_SET",
    "proposed": true,
    "violations": [
-    "ds.navigation-header: duplicate anatomy part name \"iconButtonNeutralTertiary\"",
     "ds.navigation-header: part \"Avatar\" sets unknown ds.avatar prop \"isVisible\"",
     "ds.navigation-header: part \"Avatar\" sets unknown ds.avatar prop \"notification\"",
     "ds.navigation-header: part \"Avatar\" sets unknown ds.avatar prop \"indicator\"",
@@ -65057,7 +64604,6 @@
     "ds.navigation-header: part \"Avatar\" sets unknown ds.avatar prop \"type\""
    ],
    "violationClasses": [
-    "duplicate-part-name",
     "component-ref-unknown-child-prop",
     "component-ref-unknown-child-prop",
     "component-ref-unknown-child-prop",
@@ -65068,32 +64614,29 @@
     {
      "emitter": "react",
      "classes": [
-      "duplicate-part-name",
       "component-ref-unknown-child-prop"
      ],
-     "message": "ds.navigation-header: duplicate anatomy part name \"iconButtonNeutralTertiary\""
+     "message": "ds.navigation-header: part \"Avatar\" sets unknown ds.avatar prop \"isVisible\""
     },
     {
      "emitter": "html",
      "classes": [
-      "duplicate-part-name",
       "component-ref-unknown-child-prop"
      ],
-     "message": "ds.navigation-header: duplicate anatomy part name \"iconButtonNeutralTertiary\""
+     "message": "ds.navigation-header: part \"Avatar\" sets unknown ds.avatar prop \"isVisible\""
     },
     {
      "emitter": "react-inline",
      "classes": [
-      "duplicate-part-name",
       "component-ref-unknown-child-prop"
      ],
-     "message": "ds.navigation-header: duplicate anatomy part name \"iconButtonNeutralTertiary\""
+     "message": "ds.navigation-header: part \"Avatar\" sets unknown ds.avatar prop \"isVisible\""
     }
    ],
    "emittedSurfaces": [
     "figma-script"
    ],
-   "noteCount": 53,
+   "noteCount": 54,
    "unboundCount": 0,
    "mintedCount": 4,
    "tokenRefsCarried": 11,
@@ -65165,49 +64708,38 @@
    "type": "COMPONENT_SET",
    "proposed": true,
    "violations": [
-    "ds.pagination-2: duplicate anatomy part name \"buttonNeutralSecondary\"",
-    "ds.pagination-2: part \"PaginationNumber6\" visibleWhen.equals \"true\" is not a value of prop \"truncation\"",
-    "ds.pagination-2: duplicate anatomy part name \"buttonNeutralSecondary\"",
-    "ds.pagination-2: duplicate anatomy part name \"buttonNeutralSecondary2\"",
-    "ds.pagination-2: duplicate anatomy part name \"buttonNeutralSecondary2\""
+    "ds.pagination-2: part \"PaginationNumber6\" visibleWhen.equals \"true\" is not a value of prop \"truncation\""
    ],
    "violationClasses": [
-    "duplicate-part-name",
-    "visiblewhen-value-outside-prop-enum",
-    "duplicate-part-name",
-    "duplicate-part-name",
-    "duplicate-part-name"
+    "visiblewhen-value-outside-prop-enum"
    ],
    "emitterRefusals": [
     {
      "emitter": "react",
      "classes": [
-      "duplicate-part-name",
       "visiblewhen-value-outside-prop-enum"
      ],
-     "message": "ds.pagination-2: duplicate anatomy part name \"buttonNeutralSecondary\""
+     "message": "ds.pagination-2: part \"PaginationNumber6\" visibleWhen.equals \"true\" is not a value of prop \"truncation\""
     },
     {
      "emitter": "html",
      "classes": [
-      "duplicate-part-name",
       "visiblewhen-value-outside-prop-enum"
      ],
-     "message": "ds.pagination-2: duplicate anatomy part name \"buttonNeutralSecondary\""
+     "message": "ds.pagination-2: part \"PaginationNumber6\" visibleWhen.equals \"true\" is not a value of prop \"truncation\""
     },
     {
      "emitter": "react-inline",
      "classes": [
-      "duplicate-part-name",
       "visiblewhen-value-outside-prop-enum"
      ],
-     "message": "ds.pagination-2: duplicate anatomy part name \"buttonNeutralSecondary\""
+     "message": "ds.pagination-2: part \"PaginationNumber6\" visibleWhen.equals \"true\" is not a value of prop \"truncation\""
     }
    ],
    "emittedSurfaces": [
     "figma-script"
    ],
-   "noteCount": 32,
+   "noteCount": 36,
    "unboundCount": 0,
    "mintedCount": 2,
    "tokenRefsCarried": 6,
@@ -65240,49 +64772,38 @@
    "type": "COMPONENT_SET",
    "proposed": true,
    "violations": [
-    "ds.pagination-3: duplicate anatomy part name \"iconButtonNeutralSecondary\"",
-    "ds.pagination-3: part \"PaginationNumber6\" visibleWhen.equals \"true\" is not a value of prop \"truncation\"",
-    "ds.pagination-3: duplicate anatomy part name \"iconButtonNeutralSecondary\"",
-    "ds.pagination-3: duplicate anatomy part name \"iconButtonNeutralSecondary2\"",
-    "ds.pagination-3: duplicate anatomy part name \"iconButtonNeutralSecondary2\""
+    "ds.pagination-3: part \"PaginationNumber6\" visibleWhen.equals \"true\" is not a value of prop \"truncation\""
    ],
    "violationClasses": [
-    "duplicate-part-name",
-    "visiblewhen-value-outside-prop-enum",
-    "duplicate-part-name",
-    "duplicate-part-name",
-    "duplicate-part-name"
+    "visiblewhen-value-outside-prop-enum"
    ],
    "emitterRefusals": [
     {
      "emitter": "react",
      "classes": [
-      "duplicate-part-name",
       "visiblewhen-value-outside-prop-enum"
      ],
-     "message": "ds.pagination-3: duplicate anatomy part name \"iconButtonNeutralSecondary\""
+     "message": "ds.pagination-3: part \"PaginationNumber6\" visibleWhen.equals \"true\" is not a value of prop \"truncation\""
     },
     {
      "emitter": "html",
      "classes": [
-      "duplicate-part-name",
       "visiblewhen-value-outside-prop-enum"
      ],
-     "message": "ds.pagination-3: duplicate anatomy part name \"iconButtonNeutralSecondary\""
+     "message": "ds.pagination-3: part \"PaginationNumber6\" visibleWhen.equals \"true\" is not a value of prop \"truncation\""
     },
     {
      "emitter": "react-inline",
      "classes": [
-      "duplicate-part-name",
       "visiblewhen-value-outside-prop-enum"
      ],
-     "message": "ds.pagination-3: duplicate anatomy part name \"iconButtonNeutralSecondary\""
+     "message": "ds.pagination-3: part \"PaginationNumber6\" visibleWhen.equals \"true\" is not a value of prop \"truncation\""
     }
    ],
    "emittedSurfaces": [
     "figma-script"
    ],
-   "noteCount": 30,
+   "noteCount": 34,
    "unboundCount": 0,
    "mintedCount": 1,
    "tokenRefsCarried": 7,
@@ -65359,39 +64880,16 @@
    "setName": "Search",
    "type": "COMPONENT_SET",
    "proposed": true,
-   "violations": [
-    "ds.search: duplicate anatomy part name \"Icon\""
-   ],
-   "violationClasses": [
-    "duplicate-part-name"
-   ],
-   "emitterRefusals": [
-    {
-     "emitter": "react",
-     "classes": [
-      "duplicate-part-name"
-     ],
-     "message": "ds.search: duplicate anatomy part name \"Icon\""
-    },
-    {
-     "emitter": "html",
-     "classes": [
-      "duplicate-part-name"
-     ],
-     "message": "ds.search: duplicate anatomy part name \"Icon\""
-    },
-    {
-     "emitter": "react-inline",
-     "classes": [
-      "duplicate-part-name"
-     ],
-     "message": "ds.search: duplicate anatomy part name \"Icon\""
-    }
-   ],
+   "violations": [],
+   "violationClasses": [],
+   "emitterRefusals": [],
    "emittedSurfaces": [
+    "react",
+    "html",
+    "react-inline",
     "figma-script"
    ],
-   "noteCount": 49,
+   "noteCount": 50,
    "unboundCount": 0,
    "mintedCount": 17,
    "tokenRefsCarried": 16,
@@ -65421,45 +64919,22 @@
     "textStyleVariety": 2,
     "geometryParts": 0
    },
-   "clean": false
+   "clean": true
   },
   {
    "setName": "Search-MultiSelect",
    "type": "COMPONENT_SET",
    "proposed": true,
-   "violations": [
-    "ds.search-multi-select: duplicate anatomy part name \"Icon\""
-   ],
-   "violationClasses": [
-    "duplicate-part-name"
-   ],
-   "emitterRefusals": [
-    {
-     "emitter": "react",
-     "classes": [
-      "duplicate-part-name"
-     ],
-     "message": "ds.search-multi-select: duplicate anatomy part name \"Icon\""
-    },
-    {
-     "emitter": "html",
-     "classes": [
-      "duplicate-part-name"
-     ],
-     "message": "ds.search-multi-select: duplicate anatomy part name \"Icon\""
-    },
-    {
-     "emitter": "react-inline",
-     "classes": [
-      "duplicate-part-name"
-     ],
-     "message": "ds.search-multi-select: duplicate anatomy part name \"Icon\""
-    }
-   ],
+   "violations": [],
+   "violationClasses": [],
+   "emitterRefusals": [],
    "emittedSurfaces": [
+    "react",
+    "html",
+    "react-inline",
     "figma-script"
    ],
-   "noteCount": 79,
+   "noteCount": 80,
    "unboundCount": 0,
    "mintedCount": 18,
    "tokenRefsCarried": 17,
@@ -65489,49 +64964,22 @@
     "textStyleVariety": 2,
     "geometryParts": 0
    },
-   "clean": false
+   "clean": true
   },
   {
    "setName": "Checkbox",
    "type": "COMPONENT_SET",
    "proposed": true,
-   "violations": [
-    "ds.checkbox: duplicate anatomy part name \"errorText\"",
-    "ds.checkbox: duplicate anatomy part name \"checkboxIcon\"",
-    "ds.checkbox: duplicate anatomy part name \"checkboxLabel\""
-   ],
-   "violationClasses": [
-    "duplicate-part-name",
-    "duplicate-part-name",
-    "duplicate-part-name"
-   ],
-   "emitterRefusals": [
-    {
-     "emitter": "react",
-     "classes": [
-      "duplicate-part-name"
-     ],
-     "message": "ds.checkbox: duplicate anatomy part name \"errorText\""
-    },
-    {
-     "emitter": "html",
-     "classes": [
-      "duplicate-part-name"
-     ],
-     "message": "ds.checkbox: duplicate anatomy part name \"errorText\""
-    },
-    {
-     "emitter": "react-inline",
-     "classes": [
-      "duplicate-part-name"
-     ],
-     "message": "ds.checkbox: duplicate anatomy part name \"errorText\""
-    }
-   ],
+   "violations": [],
+   "violationClasses": [],
+   "emitterRefusals": [],
    "emittedSurfaces": [
+    "react",
+    "html",
+    "react-inline",
     "figma-script"
    ],
-   "noteCount": 35,
+   "noteCount": 38,
    "unboundCount": 0,
    "mintedCount": 12,
    "tokenRefsCarried": 11,
@@ -65562,49 +65010,22 @@
     "textStyleVariety": 3,
     "geometryParts": 0
    },
-   "clean": false
+   "clean": true
   },
   {
    "setName": "Radio button",
    "type": "COMPONENT_SET",
    "proposed": true,
-   "violations": [
-    "ds.radio-button: duplicate anatomy part name \"errorText\"",
-    "ds.radio-button: duplicate anatomy part name \"radioButtonIcon\"",
-    "ds.radio-button: duplicate anatomy part name \"radioLabel\""
-   ],
-   "violationClasses": [
-    "duplicate-part-name",
-    "duplicate-part-name",
-    "duplicate-part-name"
-   ],
-   "emitterRefusals": [
-    {
-     "emitter": "react",
-     "classes": [
-      "duplicate-part-name"
-     ],
-     "message": "ds.radio-button: duplicate anatomy part name \"errorText\""
-    },
-    {
-     "emitter": "html",
-     "classes": [
-      "duplicate-part-name"
-     ],
-     "message": "ds.radio-button: duplicate anatomy part name \"errorText\""
-    },
-    {
-     "emitter": "react-inline",
-     "classes": [
-      "duplicate-part-name"
-     ],
-     "message": "ds.radio-button: duplicate anatomy part name \"errorText\""
-    }
-   ],
+   "violations": [],
+   "violationClasses": [],
+   "emitterRefusals": [],
    "emittedSurfaces": [
+    "react",
+    "html",
+    "react-inline",
     "figma-script"
    ],
-   "noteCount": 36,
+   "noteCount": 39,
    "unboundCount": 0,
    "mintedCount": 12,
    "tokenRefsCarried": 11,
@@ -65635,7 +65056,7 @@
     "textStyleVariety": 3,
     "geometryParts": 0
    },
-   "clean": false
+   "clean": true
   },
   {
    "setName": "Toggle",
@@ -66159,7 +65580,6 @@
     "ds.table-data-cell: part \"Avatar\" sets unknown ds.avatar prop \"indicator\"",
     "ds.table-data-cell: part \"Avatar\" sets unknown ds.avatar prop \"round\"",
     "ds.table-data-cell: part \"Avatar\" sets unknown ds.avatar prop \"type\"",
-    "ds.table-data-cell: duplicate anatomy part name \"text/data\"",
     "ds.table-data-cell: part \"avatarGroup\" sets unknown ds.avatar-group prop \"item5\"",
     "ds.table-data-cell: part \"avatarGroup\" sets unknown ds.avatar-group prop \"item2\"",
     "ds.table-data-cell: part \"avatarGroup\" sets unknown ds.avatar-group prop \"item4\"",
@@ -66181,7 +65601,6 @@
     "component-ref-unknown-child-prop",
     "component-ref-unknown-child-prop",
     "component-ref-unknown-child-prop",
-    "duplicate-part-name",
     "component-ref-unknown-child-prop",
     "component-ref-unknown-child-prop",
     "component-ref-unknown-child-prop",
@@ -66201,24 +65620,21 @@
     {
      "emitter": "react",
      "classes": [
-      "component-ref-unknown-child-prop",
-      "duplicate-part-name"
+      "component-ref-unknown-child-prop"
      ],
      "message": "ds.table-data-cell: part \"Avatar\" sets unknown ds.avatar prop \"isVisible\""
     },
     {
      "emitter": "html",
      "classes": [
-      "component-ref-unknown-child-prop",
-      "duplicate-part-name"
+      "component-ref-unknown-child-prop"
      ],
      "message": "ds.table-data-cell: part \"Avatar\" sets unknown ds.avatar prop \"isVisible\""
     },
     {
      "emitter": "react-inline",
      "classes": [
-      "component-ref-unknown-child-prop",
-      "duplicate-part-name"
+      "component-ref-unknown-child-prop"
      ],
      "message": "ds.table-data-cell: part \"Avatar\" sets unknown ds.avatar prop \"isVisible\""
     }
@@ -66226,7 +65642,7 @@
    "emittedSurfaces": [
     "figma-script"
    ],
-   "noteCount": 77,
+   "noteCount": 78,
    "unboundCount": 1,
    "mintedCount": 23,
    "tokenRefsCarried": 22,
@@ -66348,41 +65764,16 @@
    "setName": "Accordion Group Test",
    "type": "COMPONENT",
    "proposed": true,
-   "violations": [
-    "ds.accordion-group-test: duplicate anatomy part name \"Header\"",
-    "ds.accordion-group-test: duplicate anatomy part name \"Title\""
-   ],
-   "violationClasses": [
-    "duplicate-part-name",
-    "duplicate-part-name"
-   ],
-   "emitterRefusals": [
-    {
-     "emitter": "react",
-     "classes": [
-      "duplicate-part-name"
-     ],
-     "message": "ds.accordion-group-test: duplicate anatomy part name \"Header\""
-    },
-    {
-     "emitter": "html",
-     "classes": [
-      "duplicate-part-name"
-     ],
-     "message": "ds.accordion-group-test: duplicate anatomy part name \"Header\""
-    },
-    {
-     "emitter": "react-inline",
-     "classes": [
-      "duplicate-part-name"
-     ],
-     "message": "ds.accordion-group-test: duplicate anatomy part name \"Header\""
-    }
-   ],
+   "violations": [],
+   "violationClasses": [],
+   "emitterRefusals": [],
    "emittedSurfaces": [
+    "react",
+    "html",
+    "react-inline",
     "figma-script"
    ],
-   "noteCount": 14,
+   "noteCount": 16,
    "unboundCount": 0,
    "mintedCount": 12,
    "tokenRefsCarried": 21,
@@ -66405,7 +65796,7 @@
     "textStyleVariety": 1,
     "geometryParts": 0
    },
-   "clean": false
+   "clean": true
   },
   {
    "setName": "Button / Primary / Medium",
@@ -66563,41 +65954,16 @@
    "setName": "Navigation / Horizontal Menu",
    "type": "COMPONENT",
    "proposed": true,
-   "violations": [
-    "ds.navigation-horizontal-menu: duplicate anatomy part name \"#text\"",
-    "ds.navigation-horizontal-menu: duplicate anatomy part name \"#text\""
-   ],
-   "violationClasses": [
-    "duplicate-part-name",
-    "duplicate-part-name"
-   ],
-   "emitterRefusals": [
-    {
-     "emitter": "react",
-     "classes": [
-      "duplicate-part-name"
-     ],
-     "message": "ds.navigation-horizontal-menu: duplicate anatomy part name \"#text\""
-    },
-    {
-     "emitter": "html",
-     "classes": [
-      "duplicate-part-name"
-     ],
-     "message": "ds.navigation-horizontal-menu: duplicate anatomy part name \"#text\""
-    },
-    {
-     "emitter": "react-inline",
-     "classes": [
-      "duplicate-part-name"
-     ],
-     "message": "ds.navigation-horizontal-menu: duplicate anatomy part name \"#text\""
-    }
-   ],
+   "violations": [],
+   "violationClasses": [],
+   "emitterRefusals": [],
    "emittedSurfaces": [
+    "react",
+    "html",
+    "react-inline",
     "figma-script"
    ],
-   "noteCount": 19,
+   "noteCount": 21,
    "unboundCount": 0,
    "mintedCount": 12,
    "tokenRefsCarried": 29,
@@ -66620,47 +65986,22 @@
     "textStyleVariety": 2,
     "geometryParts": 0
    },
-   "clean": false
+   "clean": true
   },
   {
    "setName": "Modal / Confirmation Dialog",
    "type": "COMPONENT",
    "proposed": true,
-   "violations": [
-    "ds.modal-confirmation-dialog: duplicate anatomy part name \"#text\"",
-    "ds.modal-confirmation-dialog: duplicate anatomy part name \"#text\""
-   ],
-   "violationClasses": [
-    "duplicate-part-name",
-    "duplicate-part-name"
-   ],
-   "emitterRefusals": [
-    {
-     "emitter": "react",
-     "classes": [
-      "duplicate-part-name"
-     ],
-     "message": "ds.modal-confirmation-dialog: duplicate anatomy part name \"#text\""
-    },
-    {
-     "emitter": "html",
-     "classes": [
-      "duplicate-part-name"
-     ],
-     "message": "ds.modal-confirmation-dialog: duplicate anatomy part name \"#text\""
-    },
-    {
-     "emitter": "react-inline",
-     "classes": [
-      "duplicate-part-name"
-     ],
-     "message": "ds.modal-confirmation-dialog: duplicate anatomy part name \"#text\""
-    }
-   ],
+   "violations": [],
+   "violationClasses": [],
+   "emitterRefusals": [],
    "emittedSurfaces": [
+    "react",
+    "html",
+    "react-inline",
     "figma-script"
    ],
-   "noteCount": 33,
+   "noteCount": 35,
    "unboundCount": 0,
    "mintedCount": 25,
    "tokenRefsCarried": 43,
@@ -66683,59 +66024,22 @@
     "textStyleVariety": 4,
     "geometryParts": 0
    },
-   "clean": false
+   "clean": true
   },
   {
    "setName": "Table / Data Grid",
    "type": "COMPONENT",
    "proposed": true,
-   "violations": [
-    "ds.table-data-grid: duplicate anatomy part name \"td\"",
-    "ds.table-data-grid: duplicate anatomy part name \"tdStatus\"",
-    "ds.table-data-grid: duplicate anatomy part name \"#text\"",
-    "ds.table-data-grid: duplicate anatomy part name \"td2\"",
-    "ds.table-data-grid: duplicate anatomy part name \"td\"",
-    "ds.table-data-grid: duplicate anatomy part name \"tdStatus\"",
-    "ds.table-data-grid: duplicate anatomy part name \"#text\"",
-    "ds.table-data-grid: duplicate anatomy part name \"td2\""
-   ],
-   "violationClasses": [
-    "duplicate-part-name",
-    "duplicate-part-name",
-    "duplicate-part-name",
-    "duplicate-part-name",
-    "duplicate-part-name",
-    "duplicate-part-name",
-    "duplicate-part-name",
-    "duplicate-part-name"
-   ],
-   "emitterRefusals": [
-    {
-     "emitter": "react",
-     "classes": [
-      "duplicate-part-name"
-     ],
-     "message": "ds.table-data-grid: duplicate anatomy part name \"td\""
-    },
-    {
-     "emitter": "html",
-     "classes": [
-      "duplicate-part-name"
-     ],
-     "message": "ds.table-data-grid: duplicate anatomy part name \"td\""
-    },
-    {
-     "emitter": "react-inline",
-     "classes": [
-      "duplicate-part-name"
-     ],
-     "message": "ds.table-data-grid: duplicate anatomy part name \"td\""
-    }
-   ],
+   "violations": [],
+   "violationClasses": [],
+   "emitterRefusals": [],
    "emittedSurfaces": [
+    "react",
+    "html",
+    "react-inline",
     "figma-script"
    ],
-   "noteCount": 35,
+   "noteCount": 43,
    "unboundCount": 0,
    "mintedCount": 20,
    "tokenRefsCarried": 67,
@@ -66758,7 +66062,7 @@
     "textStyleVariety": 3,
     "geometryParts": 0
    },
-   "clean": false
+   "clean": true
   },
   {
    "setName": "GitLab Badge / Neutral",
@@ -66840,53 +66144,16 @@
    "setName": "Shopify / Entrepreneurs Section",
    "type": "COMPONENT",
    "proposed": true,
-   "violations": [
-    "ds.shopify-entrepreneurs-section: duplicate anatomy part name \"cardImage\"",
-    "ds.shopify-entrepreneurs-section: duplicate anatomy part name \"cardContent\"",
-    "ds.shopify-entrepreneurs-section: duplicate anatomy part name \"cardTitle\"",
-    "ds.shopify-entrepreneurs-section: duplicate anatomy part name \"cardDescription\"",
-    "ds.shopify-entrepreneurs-section: duplicate anatomy part name \"cardImage\"",
-    "ds.shopify-entrepreneurs-section: duplicate anatomy part name \"cardContent\"",
-    "ds.shopify-entrepreneurs-section: duplicate anatomy part name \"cardTitle\"",
-    "ds.shopify-entrepreneurs-section: duplicate anatomy part name \"cardDescription\""
-   ],
-   "violationClasses": [
-    "duplicate-part-name",
-    "duplicate-part-name",
-    "duplicate-part-name",
-    "duplicate-part-name",
-    "duplicate-part-name",
-    "duplicate-part-name",
-    "duplicate-part-name",
-    "duplicate-part-name"
-   ],
-   "emitterRefusals": [
-    {
-     "emitter": "react",
-     "classes": [
-      "duplicate-part-name"
-     ],
-     "message": "ds.shopify-entrepreneurs-section: duplicate anatomy part name \"cardImage\""
-    },
-    {
-     "emitter": "html",
-     "classes": [
-      "duplicate-part-name"
-     ],
-     "message": "ds.shopify-entrepreneurs-section: duplicate anatomy part name \"cardImage\""
-    },
-    {
-     "emitter": "react-inline",
-     "classes": [
-      "duplicate-part-name"
-     ],
-     "message": "ds.shopify-entrepreneurs-section: duplicate anatomy part name \"cardImage\""
-    }
-   ],
+   "violations": [],
+   "violationClasses": [],
+   "emitterRefusals": [],
    "emittedSurfaces": [
+    "react",
+    "html",
+    "react-inline",
     "figma-script"
    ],
-   "noteCount": 35,
+   "noteCount": 43,
    "unboundCount": 3,
    "mintedCount": 21,
    "tokenRefsCarried": 56,
@@ -66909,7 +66176,7 @@
     "textStyleVariety": 4,
     "geometryParts": 0
    },
-   "clean": false
+   "clean": true
   },
   {
    "setName": "Title card",
