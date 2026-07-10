@@ -508,6 +508,35 @@ bridge seam. **72/72.** The import frontier is now FROZEN by decision:
 field fixtures are the standing acceptance suite; the next deliverable is
 the confidence artifact, not features.
 
+## 2026-07-10 — The gauntlet: his whole kit, censused to 100%
+
+The owner asked for proactive class coverage instead of failure-per-test.
+Three parallel audits delivered it: an **engine capability matrix**
+(expressible vs proposed vs rendered per surface — surfacing the
+never-proposed free wins: overlay, icon parts, arrayOf, number props, and
+the name-only session-linking gap), a **pattern taxonomy** across a dozen
+design systems (25 composite patterns crossed against the vocabulary,
+APG role graphs for 22 composites, theme/mode-axis promotion rules, an
+11-item DON'T-infer list, native-Figma-slots addendum), and the
+centerpiece: **the census** — his entire CBDS kit live-recaptured at dump
+v1.4 (1,618 sets, 127 variables, zero stale) and replayed through the
+full pipeline, every failure classified and ranked by frequency.
+
+Starting score: 1,577/1,618 whole-kit, **48/76 composites (63.2%)** — the
+measured explanation for "every test finds an issue" (his random draws
+had ~10% odds of five clean composites). The Dialog batch (global part
+dedup, canvas border-box + root tokensByProp, code auto-renew, AI-removal
+guardrails) took composites to 75.0%. The class-fix batch (unmappable
+child props dropped-with-note, boolean visibleWhen truthy form with the
+false side named-inexpressible, digit-led prop prefix, and a figma-script
+referee guard the census itself exposed) finished it:
+**1,618/1,618 — 100.0% — and 76/76 composites, zero named residue.**
+`npm run extract:figma:gauntlet` is a standing deterministic instrument;
+class fixtures are retained for regression replay. **79/79 evals.**
+Next: the taxonomy's ranked richness program (repeat/arrayOf collections,
+theme-axis promotion, slot capture pass incl. native slots + session
+linking, overlay inference) — richness, not refusals.
+
 ---
 
 **Standing scoreboard** (updated with each milestone):
