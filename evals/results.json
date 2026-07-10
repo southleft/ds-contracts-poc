@@ -1,6 +1,6 @@
 {
-  "passed": 69,
-  "total": 69,
+  "passed": 72,
+  "total": 72,
   "results": [
     {
       "id": "refuse-unknown-token-reference",
@@ -344,6 +344,21 @@
     },
     {
       "id": "design-batch-isolation-plain-words-skips",
+      "claim": "C5-extraction",
+      "pass": true
+    },
+    {
+      "id": "design-imported-token-layer-registration-resolution",
+      "claim": "C5-extraction",
+      "pass": true
+    },
+    {
+      "id": "design-correlation-over-default-state-occurrences",
+      "claim": "C5-extraction",
+      "pass": true
+    },
+    {
+      "id": "design-min-height-carried",
       "claim": "C5-extraction",
       "pass": true
     }

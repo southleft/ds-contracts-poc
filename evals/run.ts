@@ -1463,6 +1463,98 @@ const cases: Case[] = [
       }
     },
   },
+  {
+    // Owner P0 (the final link — his CBDS Button-Brand Primary bridge send):
+    // the proposal bound his REAL token names and the playground referee
+    // refused ALL NINE ("does not exist in tokens/") because it knew only the
+    // repo corpus. Dump v1.4 carries each bound variable's RESOLVED value
+    // (_variables); the playground registers them as an import-scoped token
+    // layer (core/captured-tokens.ts + token-source capturedLayer, repo
+    // tokens winning on name collision), so the referee resolves his names
+    // and the preview renders HIS values — ZERO refusals, pinned numerically
+    // against the committed fixture, with the refusal reproduced as a control.
+    id: 'design-imported-token-layer-registration-resolution',
+    claim: 'C5-extraction',
+    run: () => {
+      const r = run(TSX, ['extract/figma/cbds-bridge-check.ts']);
+      if (r.status !== 0) throw new Error(`CBDS bridge receipt failed:\n${r.out}`);
+      for (const line of [
+        '✔ 18 variables captured, 18 registrable, 0 skipped',
+        '✔ captured {bg.brand.default} resolves EXACTLY to #0e61ba',
+        '✔ captured {spacing.200} resolves EXACTLY to 16px',
+        '✔ zero captured names shadow repo tokens — all 18 register',
+        '✔ ZERO referee violations (got 0)',
+        '✔ in particular: zero "does not exist in tokens/" refusals (the owner saw NINE)',
+        '✔ control: WITHOUT the captured layer the referee refuses his real names by name',
+        '✔ renders a focusable <button> (not a div)',
+        '✔ computed background = #0e61ba from HIS {bg.brand.default} (got #0e61ba)',
+        '✔ :hover computed background = #003e81 from HIS {bg.brand.hover} (got #003e81)',
+        '✔ :active computed background = #002854 from HIS {bg.brand.pressed} (got #002854)',
+        '✔ :disabled computed background = #dfe3eb from HIS {bg.disabled} (got #dfe3eb)',
+        '✔ :focus-visible computed outline-color = #0e61ba from HIS {border.focus} (got #0e61ba)',
+        '✔ label computed color = #fcfeff from HIS {text.inverse-primary} (got #fcfeff)',
+      ]) {
+        if (!r.out.includes(line)) throw new Error(`missing check: ${line}`);
+      }
+    },
+  },
+  {
+    // Owner P0 (axis-correlation): his notes showed root paddingLeft/
+    // paddingRight ({spacing.200} vs {spacing.150}) and height
+    // ({component-size.xlarge|large|medium}) dropped as 'bindings differ
+    // across variants without correlating to any variant axis'. TRUE root
+    // cause (his state-variant hypothesis disproven by replay — base facts
+    // already come from default-state variants only): unifyRefs required the
+    // differing path SEGMENT to spell camel(axisValue) ('200' ≠ 'large').
+    // Correlation now also works by VALUE over the default-state occurrences
+    // — a plain function of ONE enum axis, injectivity NOT required
+    // (large/medium sharing {spacing.200} is still a function of size) —
+    // and carries as tokensByProp with his real refs.
+    id: 'design-correlation-over-default-state-occurrences',
+    claim: 'C5-extraction',
+    run: () => {
+      const r = run(TSX, ['extract/figma/cbds-bridge-check.ts']);
+      if (r.status !== 0) throw new Error(`CBDS bridge receipt failed:\n${r.out}`);
+      for (const line of [
+        '✔ root padding-inline base = {spacing.200} (large/medium)',
+        '✔ tokensByProp rides the `size` axis',
+        '✔ tokensByProp small override: padding-inline = {spacing.150}',
+        '✔ large/medium share {spacing.200} — a valid (non-injective) function of size, no medium padding override needed',
+        '✔ root height base = {component-size.xlarge} (large)',
+        '✔ tokensByProp medium override: height = {component-size.large}',
+        '✔ tokensByProp small override: height = {component-size.medium}',
+        '✔ the old drift note is GONE (no "bindings differ across variants without correlating" for padding/height)',
+        '✔ size=small: computed padding-inline = 12px from {spacing.150} (got 12px)',
+        '✔ size=small: computed height = 32px from {component-size.medium} (got 32px)',
+        '✔ size=medium: computed height = 40px from {component-size.large} (got 40px)',
+        '✔ computed padding-inline = 16px (large; got 16px)',
+      ]) {
+        if (!r.out.includes(line)) throw new Error(`missing check: ${line}`);
+      }
+    },
+  },
+  {
+    // Owner P0 (min/max sizing): his minHeight 44 dropped as
+    // [min-max-size-unsupported] ×15. Dump v1.4 carries literal min/max
+    // sizing as node facts; the proposer mints them as bounded, exact px
+    // style facts (min-height/min-width/max-height/max-width) — the
+    // tap-target renders, and the degradation is retired for literal cases.
+    id: 'design-min-height-carried',
+    claim: 'C5-extraction',
+    run: () => {
+      const r = run(TSX, ['extract/figma/cbds-bridge-check.ts']);
+      if (r.status !== 0) throw new Error(`CBDS bridge receipt failed:\n${r.out}`);
+      for (const line of [
+        '✔ root min-height binds a minted px fact',
+        '✔ min-height resolves EXACTLY to 44px (got 44px)',
+        '✔ the min-max-size-unsupported degradation is RETIRED for the literal case (fixture carries zero)',
+        '✔ computed min-height = 44px (got 44px)',
+        '✔ zero UNBOUND leftovers (every raw literal minted or refused by name)',
+      ]) {
+        if (!r.out.includes(line)) throw new Error(`missing check: ${line}`);
+      }
+    },
+  },
 ];
 
 // ---------------------------------------------------------------------------
