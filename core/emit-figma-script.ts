@@ -54,7 +54,7 @@ export interface LayoutSpec {
 }
 
 export interface NodeSpec {
-  type: 'root' | 'frame' | 'text' | 'instance' | 'slot' | 'svg';
+  type: 'root' | 'frame' | 'text' | 'instance' | 'slot' | 'svg' | 'shape';
   name: string;
   layout?: LayoutSpec;
   bindings?: Record<string, string>;
@@ -79,6 +79,25 @@ export interface NodeSpec {
    *  `opacity` whose condition resolves TRUE for this compiled combo. The
    *  runtime sets node.opacity after construction. */
   opacity?: number;
+  /** v9 shape (#42): the runtime constructs a REAL RegularPolygon / Ellipse /
+   *  Rectangle node — pointCount from sides, exact resize, NATIVE rotation
+   *  (the contract's CSS-clockwise degrees negate into the Plugin API's
+   *  counterclockwise degrees). Rotation here is already resolved per combo
+   *  (base shape.rotation, or the stylesWhen rotate for this combo). */
+  shape?: { kind: 'polygon' | 'ellipse' | 'rect'; sides?: number; width: number; height: number; rotation?: number };
+  /** v9 shape placement — compiled from the part's stylesWhen entries whose
+   *  condition holds for this combo (the proposer's closed placement
+   *  grammar: position:absolute + px/50% offsets + translate(-50%)). The
+   *  runtime sets layoutPositioning ABSOLUTE + constraints + exact offsets
+   *  after append. h/v: MIN pins left/top, MAX right/bottom, CENTER centers. */
+  absolute?: { h: 'MIN' | 'MAX' | 'CENTER'; v: 'MIN' | 'MAX' | 'CENTER'; left?: number; right?: number; top?: number; bottom?: number };
+  /** Single DROP_SHADOW (dump v1.2 box-shadow grammar), parsed at compile
+   *  time from the resolved box-shadow token value — the runtime applies it
+   *  as a native effect. color is 6- or 8-digit hex. */
+  dropShadow?: { x: number; y: number; radius: number; spread?: number; color: string };
+  /** PIXEL line height (dump v1.3) — the runtime sets
+   *  node.lineHeight = { unit: 'PIXELS', value }. */
+  lineHeight?: number;
   // svg (icon parts) — markup with currentColor resolved to the variant's
   // literal foreground color (SVG paint is not variable-bindable on import)
   svg?: string;
@@ -208,10 +227,15 @@ export function createFigmaEngine(input: FigmaEngineInput) {
   }
 
 const FONT_STYLE_BY_WEIGHT: Record<number, string> = {
+  100: 'Thin',
+  200: 'Extra Light',
+  300: 'Light',
   400: 'Regular',
   500: 'Medium',
   600: 'Semi Bold',
   700: 'Bold',
+  800: 'Extra Bold',
+  900: 'Black',
 };
 
 function figmaType(entry: TokenEntry): 'COLOR' | 'FLOAT' | 'STRING' {
@@ -496,6 +520,20 @@ interface TextCtx {
   /** Token dot-path behind fontSize — text nodes whose bindings exactly match
    *  a derived text style's definition carry that style (see matchTextStyle). */
   fontSizePath?: string;
+  /** PIXEL line height (dump v1.3) — resolved literal. */
+  lineHeight?: number;
+}
+
+/** The dump v1.2 single-DROP_SHADOW box-shadow grammar
+ *  ("0px 2px 4px [2px] #00000029") → the runtime effect struct. Anything
+ *  else (multi-shadow, keywords, rgba()) has no canvas projection — the
+ *  proposer only ever mints this grammar; foreign spellings stay CSS-only. */
+function parseBoxShadow(value: string): NodeSpec['dropShadow'] | undefined {
+  const m = value.trim().match(/^(-?[\d.]+)px (-?[\d.]+)px ([\d.]+)px(?: (-?[\d.]+)px)? (#[0-9a-fA-F]{6}(?:[0-9a-fA-F]{2})?)$/);
+  if (!m) return undefined;
+  const out: NodeSpec['dropShadow'] = { x: parseFloat(m[1]), y: parseFloat(m[2]), radius: parseFloat(m[3]), color: m[5].toLowerCase() };
+  if (m[4] !== undefined && parseFloat(m[4]) !== 0) out.spread = parseFloat(m[4]);
+  return out;
 }
 
 const ALIGN_FIGMA: Record<string, 'MIN' | 'CENTER' | 'MAX'> = {
@@ -606,8 +644,17 @@ function applyTokens(
         // uses it) — but the mapping is general: opacity is bindable.
         spec.bindings = { ...spec.bindings, opacity: varName };
         break;
-      case 'box-shadow':
-        break; // no canvas projection in v1 — NAMED at proposal (dump v1.2 effects note)
+      case 'box-shadow': {
+        // dump v1.3: the resolved single-DROP_SHADOW value projects as a
+        // native effect (runtime) / CSS box-shadow (canvas preview).
+        const shadow = parseBoxShadow(String(resolveLiteral(tokenPath)));
+        if (shadow) spec.dropShadow = shadow;
+        break;
+      }
+      case 'line-height':
+        // dump v1.3: PIXEL line heights ride text nodes.
+        next.lineHeight = px(resolveLiteral(tokenPath));
+        break;
       default:
         break; // outline-* etc. are state/CSS concerns
     }
@@ -708,6 +755,7 @@ function formControlSpec(
           : (part.attrs?.placeholder ?? ''),
       fontSize: childCtx.fontSize ?? 16,
       fontStyle: childCtx.fontStyle ?? 'Medium',
+      ...(childCtx.lineHeight !== undefined ? { lineHeight: childCtx.lineHeight } : {}),
       textStyle: matchTextStyle(childCtx),
       textFill: 'color/input/placeholder',
       contentProp: prop?.bindings.figma.property,
@@ -789,15 +837,69 @@ function applyStylesWhenOpacity(
   }
 }
 
+/** v9 shape placement, compiled per combo from the part's stylesWhen — the
+ *  PROPOSER'S closed grammar only (position:absolute; left/right/top/bottom
+ *  as '<n>px' or '50%'; transform of translateX/Y(-50%) and rotate(<n>deg)).
+ *  A condition holds like applyStylesWhenOpacity: enum `equals` against the
+ *  combo's subst, a boolean against its contract default. Styles outside the
+ *  grammar keep the documented canvas stylesWhen fidelity limit. */
+function shapePlacement(
+  part: Part,
+  contract: Contract,
+  subst: Record<string, string>,
+): { absolute?: NodeSpec['absolute']; rotation?: number } {
+  const out: { absolute?: NodeSpec['absolute']; rotation?: number } = {};
+  const PX = /^(-?[\d.]+)px$/;
+  for (const sw of part.stylesWhen ?? []) {
+    const applies =
+      sw.equals !== undefined
+        ? subst[sw.prop] === sw.equals
+        : contract.props.find((p) => p.name === sw.prop)?.default === true;
+    if (!applies) continue;
+    const st = sw.styles;
+    if (st['position'] !== 'absolute') {
+      const rot = (st['transform'] ?? '').match(/rotate\((-?[\d.]+)deg\)/);
+      if (rot) out.rotation = parseFloat(rot[1]);
+      continue;
+    }
+    const a: NonNullable<NodeSpec['absolute']> = { h: 'MIN', v: 'MIN' };
+    const t = st['transform'] ?? '';
+    const px = (v: string | undefined) => {
+      const m = (v ?? '').match(PX);
+      return m ? parseFloat(m[1]) : undefined;
+    };
+    if (st['left'] === '50%' && t.includes('translateX(-50%)')) a.h = 'CENTER';
+    else if (px(st['right']) !== undefined) { a.h = 'MAX'; a.right = px(st['right']); }
+    else if (px(st['left']) !== undefined) { a.h = 'MIN'; a.left = px(st['left']); }
+    if (st['top'] === '50%' && t.includes('translateY(-50%)')) a.v = 'CENTER';
+    else if (px(st['bottom']) !== undefined) { a.v = 'MAX'; a.bottom = px(st['bottom']); }
+    else if (px(st['top']) !== undefined) { a.v = 'MIN'; a.top = px(st['top']); }
+    out.absolute = a;
+    const rot = t.match(/rotate\((-?[\d.]+)deg\)/);
+    if (rot) out.rotation = parseFloat(rot[1]);
+  }
+  return out;
+}
+
 function variantParts(
   parts: Record<string, Part>,
   subst: Record<string, string>,
 ): Array<[string, Part]> {
   return Object.entries(parts).filter(([, p]) => {
     const vw = p.visibleWhen;
-    if (!vw || vw.equals === undefined) return true;
-    const value = subst[vw.prop];
-    return value === undefined || value === vw.equals;
+    if (vw && vw.equals !== undefined) {
+      const value = subst[vw.prop];
+      if (value !== undefined && value !== vw.equals) return false;
+    }
+    // v9: an enum-conditioned stylesWhen display:none that matches this
+    // combo suppresses the part — the shape-placement spelling for axis
+    // values where the decor is hidden in every drawn variant.
+    for (const sw of p.stylesWhen ?? []) {
+      if (sw.equals !== undefined && subst[sw.prop] === sw.equals && sw.styles['display'] === 'none') {
+        return false;
+      }
+    }
+    return true;
   });
 }
 
@@ -835,6 +937,18 @@ function partToSpecInner(
       svg: iconSvg(part, subst, iconCtx),
       grow: part.layout?.grow || undefined,
     };
+    applyVisibleWhen(spec, part, contract);
+    return spec;
+  }
+  // v9 shape (#42): a REAL parametric node — geometry from the contract,
+  // fill from tokens, placement/rotation from the compiled stylesWhen.
+  if (part.shape) {
+    const spec: NodeSpec = { type: 'shape', name, shape: { ...part.shape } };
+    applyTokens(spec, part.tokens ?? {}, subst, ctx);
+    const placement = shapePlacement(part, contract, subst);
+    if (placement.absolute) spec.absolute = placement.absolute;
+    if (placement.rotation !== undefined) spec.shape!.rotation = placement.rotation;
+    if (spec.shape!.rotation === undefined) delete spec.shape!.rotation;
     applyVisibleWhen(spec, part, contract);
     return spec;
   }
@@ -885,6 +999,7 @@ function partToSpecInner(
     spec.fontStyle = textCtx.fontStyle ?? 'Medium';
     spec.textStyle = matchTextStyle(textCtx);
     spec.textFill = textCtx.textFill;
+    if (textCtx.lineHeight !== undefined) spec.lineHeight = textCtx.lineHeight;
     applyVisibleWhen(spec, part, contract);
     return spec;
   }
@@ -910,6 +1025,7 @@ function partToSpecInner(
     spec.fontStyle = textCtx.fontStyle ?? 'Medium';
     spec.textStyle = matchTextStyle(textCtx);
     spec.textFill = textCtx.textFill;
+    if (textCtx.lineHeight !== undefined) spec.lineHeight = textCtx.lineHeight;
     spec.contentProp = prop.bindings.figma.property;
     applyVisibleWhen(spec, part, contract);
     return spec;
@@ -1055,6 +1171,7 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
           fontStyle: ctx.fontStyle ?? 'Medium',
           textStyle: matchTextStyle(ctx),
           textFill: ctx.textFill,
+          ...(ctx.lineHeight !== undefined ? { lineHeight: ctx.lineHeight } : {}),
           contentProp: textProp.bindings.figma.property,
         },
       ];
@@ -1129,6 +1246,7 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
               fontStyle: ctx.fontStyle ?? 'Medium',
               textStyle: matchTextStyle(ctx),
               textFill: ctx.textFill,
+              ...(ctx.lineHeight !== undefined ? { lineHeight: ctx.lineHeight } : {}),
               contentProp: textProp.bindings.figma.property,
             },
           ];
@@ -1262,6 +1380,99 @@ const opacityRuntime = (has: boolean): string =>
   if (typeof spec.opacity === 'number') node.opacity = spec.opacity;`
     : '';
 
+// Conditional runtimes (same golden discipline as opacityRuntime: contracts
+// without the channel emit byte-identical scripts).
+const specSome = (s: NodeSpec, pred: (x: NodeSpec) => boolean): boolean =>
+  pred(s) || (s.children ?? []).some((c) => specSome(c, pred));
+const dataSome = (d: ComponentData, pred: (x: NodeSpec) => boolean): boolean =>
+  [...d.variants, ...(d.stateVariants ?? [])].some((v) => specSome(v.spec, pred));
+
+/** v9 shape: node-creation branch — a REAL RegularPolygon/Ellipse/Rectangle
+ *  with native rotation (contract CSS-clockwise degrees → plugin CCW). */
+const shapeRuntime = (has: boolean): string =>
+  has
+    ? ` else if (spec.type === 'shape') {
+    // v9 shape (#42): a REAL parametric node with native rotation.
+    node = spec.shape.kind === 'ellipse' ? figma.createEllipse()
+      : spec.shape.kind === 'rect' ? figma.createRectangle()
+      : figma.createPolygon();
+    if (spec.shape.kind === 'polygon' && spec.shape.sides) node.pointCount = spec.shape.sides;
+    node.resize(spec.shape.width, spec.shape.height);
+    if (spec.fill) node.fills = [boundPaint(spec.fill, node)];
+    if (typeof spec.shape.rotation === 'number' && spec.shape.rotation !== 0) node.rotation = -spec.shape.rotation;
+  }`
+    : '';
+
+/** v9: PIXEL line height on text nodes (dump v1.3). */
+const lineHeightRuntime = (has: boolean): string =>
+  has
+    ? `
+    if (typeof spec.lineHeight === 'number') node.lineHeight = { unit: 'PIXELS', value: spec.lineHeight };`
+    : '';
+
+/** dump v1.2 single DROP_SHADOW as a native effect (applyFrameSpec tail). */
+const shadowRuntime = (has: boolean): string =>
+  has
+    ? `
+  if (spec.dropShadow) {
+    // Single DROP_SHADOW (dump v1.2 box-shadow grammar) as a native effect.
+    const s8 = spec.dropShadow.color.replace('#', '');
+    node.effects = [{
+      type: 'DROP_SHADOW',
+      color: {
+        r: parseInt(s8.slice(0, 2), 16) / 255,
+        g: parseInt(s8.slice(2, 4), 16) / 255,
+        b: parseInt(s8.slice(4, 6), 16) / 255,
+        a: s8.length === 8 ? parseInt(s8.slice(6, 8), 16) / 255 : 1,
+      },
+      offset: { x: spec.dropShadow.x, y: spec.dropShadow.y },
+      radius: spec.dropShadow.radius,
+      spread: spec.dropShadow.spread || 0,
+      visible: true,
+      blendMode: 'NORMAL',
+    }];
+  }`
+    : '';
+
+/** v9 shape placement: layoutPositioning ABSOLUTE + constraints + exact
+ *  offsets vs the parent box, AFTER append (mirrors applyOverlay). */
+const absoluteRuntime = (has: boolean): string =>
+  has
+    ? `
+// v9 shape placement: exact offsets vs the parent box, after append.
+function applyShapeAbsolute(parent, childNode, childSpec) {
+  if (!childSpec.absolute) return;
+  try {
+    childNode.layoutPositioning = 'ABSOLUTE';
+    const a = childSpec.absolute;
+    childNode.constraints = {
+      horizontal: a.h === 'MAX' ? 'MAX' : a.h === 'CENTER' ? 'CENTER' : 'MIN',
+      vertical: a.v === 'MAX' ? 'MAX' : a.v === 'CENTER' ? 'CENTER' : 'MIN',
+    };
+    const w = childSpec.shape ? childSpec.shape.width : childNode.width;
+    const h = childSpec.shape ? childSpec.shape.height : childNode.height;
+    // Center of the intrinsic box in parent coordinates (MIN pins left/top,
+    // MAX pins right/bottom, CENTER centers):
+    const cx = a.left !== undefined ? a.left + w / 2 : a.right !== undefined ? parent.width - a.right - w / 2 : parent.width / 2;
+    const cy = a.top !== undefined ? a.top + h / 2 : a.bottom !== undefined ? parent.height - a.bottom - h / 2 : parent.height / 2;
+    // Rotation moves the measured box — correct against the actual bounds.
+    const bb = childNode.absoluteBoundingBox;
+    const pb = parent.absoluteBoundingBox;
+    if (bb && pb) {
+      childNode.x += cx - bb.width / 2 - (bb.x - pb.x);
+      childNode.y += cy - bb.height / 2 - (bb.y - pb.y);
+    } else {
+      childNode.x = cx - w / 2;
+      childNode.y = cy - h / 2;
+    }
+  } catch (e) { /* parent not auto-layout — leave in flow */ }
+}
+`
+    : '';
+const absoluteCall = (has: boolean, args: string): string =>
+  has ? `
+    applyShapeAbsolute(${args});` : '';
+
 function buildComponentScript(
   contract: Contract,
   byId: Map<string, Contract>,
@@ -1270,6 +1481,10 @@ function buildComponentScript(
 ): string {
   const data = compileComponentData(contract, byId);
   const hasOpacity = dataHasOpacity(data);
+  const hasShape = dataSome(data, (x) => x.shape !== undefined);
+  const hasShadow = dataSome(data, (x) => x.dropShadow !== undefined);
+  const hasLineHeight = dataSome(data, (x) => x.lineHeight !== undefined);
+  const hasAbsolute = dataSome(data, (x) => x.absolute !== undefined);
 
   return `// GENERATED by scripts/generate-figma.ts — DO NOT EDIT.
 // Source of truth: contracts/${contract.id.replace(/^[^.]+\./, '')}.contract.json (${contract.id} v${contract.version})
@@ -1449,7 +1664,7 @@ function applyFrameSpec(node, spec) {
   if (spec.stroke) {
     node.strokes = [boundPaint(spec.stroke, node)];
     node.strokeAlign = 'INSIDE';
-  }
+  }${shadowRuntime(hasShadow)}
   if (spec.fixedWidth || spec.fixedHeight) {
     const w = spec.fixedWidth ? spec.fixedWidth.px : node.width;
     const h = spec.fixedHeight ? spec.fixedHeight.px : node.height;
@@ -1485,7 +1700,7 @@ function applyOverlay(parent, childNode, childSpec) {
     else { childNode.x = parent.width; childNode.y = 0; }
   } catch (e) { /* parent not auto-layout — leave in flow */ }
 }
-
+${absoluteRuntime(hasAbsolute)}
 async function buildNode(spec, registry) {
   let node;
   if (spec.type === 'svg') {
@@ -1496,7 +1711,7 @@ async function buildNode(spec, registry) {
     node = figma.createText();
     node.fontName = { family: 'Inter', style: spec.fontStyle || 'Medium' };
     node.fontSize = spec.fontSize || 16;
-    node.characters = spec.characters || '';
+    node.characters = spec.characters || '';${lineHeightRuntime(hasLineHeight)}
     if (spec.textStyle) {
       // Exact-definition match compiled in: ride the named style. Text
       // styles own typography only — the bound fill paint below coexists.
@@ -1565,7 +1780,7 @@ async function buildNode(spec, registry) {
       // >1 → multi-child slot: content rendered directly, no swap property
       // (INSTANCE_SWAP holds exactly one instance; native SLOT is the fix).
     }
-  } else {
+  }${shapeRuntime(hasShape)} else {
     node = spec.type === 'root' ? figma.createComponent() : figma.createFrame();
     applyFrameSpec(node, spec);
   }
@@ -1576,7 +1791,7 @@ async function buildNode(spec, registry) {
   for (const child of spec.children || []) {
     const childNode = await buildNode(child, registry);
     node.appendChild(childNode);
-    applyOverlay(node, childNode, child);
+    applyOverlay(node, childNode, child);${absoluteCall(hasAbsolute, 'node, childNode, child')}
     if (child.pct != null) {
       try {
         childNode.resize(Math.max(1, Math.round(node.width * child.pct)), childNode.height);
@@ -1709,6 +1924,10 @@ return {
 
 function buildBatchScript(datas: ComponentData[], fileKey: string | null): string {
   const hasOpacity = datas.some(dataHasOpacity);
+  const hasShape = datas.some((d) => dataSome(d, (x) => x.shape !== undefined));
+  const hasShadow = datas.some((d) => dataSome(d, (x) => x.dropShadow !== undefined));
+  const hasLineHeight = datas.some((d) => dataSome(d, (x) => x.lineHeight !== undefined));
+  const hasAbsolute = datas.some((d) => dataSome(d, (x) => x.absolute !== undefined));
   return `// GENERATED by scripts/generate-figma.ts — DO NOT EDIT.
 // Batch sync: ${datas.map((d) => d.setName).join(', ')} (existing components skip).
 const COMPONENTS = ${JSON.stringify(datas)};
@@ -1850,7 +2069,7 @@ function applyFrameSpec(node, spec) {
   if (spec.stroke) {
     node.strokes = [boundPaint(spec.stroke, node)];
     node.strokeAlign = 'INSIDE';
-  }
+  }${shadowRuntime(hasShadow)}
   if (spec.fixedWidth || spec.fixedHeight) {
     const w = spec.fixedWidth ? spec.fixedWidth.px : node.width;
     const h = spec.fixedHeight ? spec.fixedHeight.px : node.height;
@@ -1886,7 +2105,7 @@ function applyOverlay(parent, childNode, childSpec) {
     else { childNode.x = parent.width; childNode.y = 0; }
   } catch (e) { /* parent not auto-layout — leave in flow */ }
 }
-
+${absoluteRuntime(hasAbsolute)}
 async function buildNode(spec, registry) {
   let node;
   if (spec.type === 'svg') {
@@ -1897,7 +2116,7 @@ async function buildNode(spec, registry) {
     node = figma.createText();
     node.fontName = { family: 'Inter', style: spec.fontStyle || 'Medium' };
     node.fontSize = spec.fontSize || 16;
-    node.characters = spec.characters || '';
+    node.characters = spec.characters || '';${lineHeightRuntime(hasLineHeight)}
     if (spec.textStyle) {
       // Exact-definition match compiled in: ride the named style. Text
       // styles own typography only — the bound fill paint below coexists.
@@ -1963,7 +2182,7 @@ async function buildNode(spec, registry) {
         registry.slots.push({ spec, wrapper: node, instance: instances[0].inst, defaultId: instances[0].main.id });
       }
     }
-  } else {
+  }${shapeRuntime(hasShape)} else {
     node = spec.type === 'root' ? figma.createComponent() : figma.createFrame();
     applyFrameSpec(node, spec);
   }
@@ -1974,7 +2193,7 @@ async function buildNode(spec, registry) {
   for (const child of spec.children || []) {
     const childNode = await buildNode(child, registry);
     node.appendChild(childNode);
-    applyOverlay(node, childNode, child);
+    applyOverlay(node, childNode, child);${absoluteCall(hasAbsolute, 'node, childNode, child')}
     if (child.pct != null) {
       try {
         childNode.resize(Math.max(1, Math.round(node.width * child.pct)), childNode.height);
@@ -2075,7 +2294,7 @@ async function amendSet(set, C) {
       for (const childSpec of v.spec.children || []) {
         const childNode = await buildNode(childSpec, registry);
         comp.appendChild(childNode);
-        applyOverlay(comp, childNode, childSpec);
+        applyOverlay(comp, childNode, childSpec);${absoluteCall(hasAbsolute, 'comp, childNode, childSpec')}
         if (childSpec.pct != null) {
           try { childNode.resize(Math.max(1, Math.round(comp.width * childSpec.pct)), childNode.height); childNode.primaryAxisSizingMode = 'FIXED'; } catch (e) {}
         }

@@ -20,6 +20,7 @@
 import {
   pascal,
   resolveLayout,
+  shapeCssDecls,
   slotsOf,
   walkAnatomy,
   type Contract,
@@ -155,7 +156,13 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
       else s.border = 0;
       if ('max-width' in rootTokens) { s.width = '100%'; s.minWidth = 'fit-content'; }
       if (contract.semantics.element === 'button') s.cursor = 'pointer';
-      if (walkAnatomy(contract).some((w) => w.part.overlay)) s.position = 'relative';
+      if (
+        walkAnatomy(contract).some(
+          (w) => w.part.overlay || (w.part.stylesWhen ?? []).some((sw) => sw.styles['position'] === 'absolute'),
+        )
+      ) {
+        s.position = 'relative';
+      }
     } else {
       if (isStructural(part)) {
         s.display = part.layout?.display ?? 'flex';
@@ -165,6 +172,13 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
       }
       if (part.layout?.grow) { s.flex = '1 1 auto'; s.minWidth = 0; }
       if (part.overlay) Object.assign(s, { position: 'absolute' }, OVERLAY_CSS[part.overlay.placement]);
+      // v9 shape: the shared projection, camelCased for style objects.
+      if (part.shape) {
+        for (const decl of shapeCssDecls(part.shape)) {
+          const i = decl.indexOf(': ');
+          s[camel(decl.slice(0, i))] = decl.slice(i + 2);
+        }
+      }
       if (part.element === 'button' && events.some((e) => e.trigger === partName)) {
         Object.assign(s, {
           appearance: 'none', background: 'none', border: 'none', margin: 0, padding: 0,

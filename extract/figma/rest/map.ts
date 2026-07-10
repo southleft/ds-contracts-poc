@@ -39,6 +39,10 @@
  *   componentPropertyReferences ("Label#1:0")       propRefs { kind: name-without-#suffix }
  *   componentId → components/componentSets maps     instanceOf (owning set name, else component name)
  *   componentProperties (non-INSTANCE_SWAP)         componentProperties (dump v1.1, additive)
+ *   REGULAR_POLYGON | ELLIPSE | rotated RECTANGLE   shape (dump v1.3, #42 — kind, intrinsic size, CSS-degrees rotation,
+ *     + absoluteBoundingBox/rotation/constraints      ABSOLUTE placement offsets vs the parent box); VECTOR/STAR/LINE/
+ *                                                     BOOLEAN_OPERATION stay named receipts (arbitrary paths)
+ *   style.lineHeightPx (lineHeightUnit PIXELS)      text.lineHeight (dump v1.3; non-pixel units stay receipts)
  *   INSTANCE children                               NOT recursed — instance internals belong to the child contract
  *
  * Refusals are receipts, not silence: every place the REST surface cannot
@@ -46,7 +50,7 @@
  * the exact reason (e.g. a variable id that cannot be resolved because the
  * variables endpoint is Enterprise-only). Nothing is invented.
  */
-import type { DumpEffect, DumpFile, DumpLayout, DumpNode, DumpPaint, DumpSet, DumpText } from '../types.js';
+import type { DumpEffect, DumpFile, DumpLayout, DumpNode, DumpPaint, DumpSet, DumpShape, DumpText } from '../types.js';
 
 // ---------------------------------------------------------------------------
 // REST shapes (trimmed to the consumed fields; figma/rest-api-spec names)
@@ -160,6 +164,11 @@ export interface RestNode {
   // IsLayerTrait
   componentPropertyReferences?: Record<string, string>;
   boundVariables?: RestBoundVariables;
+  // Decor-shape geometry (dump v1.3, #42): the post-rotation axis-aligned
+  // box, radians rotation, out-of-flow marker + constraints.
+  absoluteBoundingBox?: { x: number; y: number; width: number; height: number } | null;
+  layoutPositioning?: 'AUTO' | 'ABSOLUTE';
+  constraints?: { vertical: string; horizontal: string };
   // Channels read ONLY to name their loss (STYLE-FIDELITY audit, dump v1.2):
   blendMode?: string;
   rotation?: number;
@@ -466,13 +475,18 @@ function mapText(node: RestNode, ctx: Ctx, nodePath: string): DumpText {
     fontSize: s.fontSize ?? 0,
     fontStyle,
   };
+  // dump v1.3: PIXEL line heights are CAPTURED (text.lineHeight); other
+  // explicit units stay receipts below.
+  if (s.lineHeightUnit === 'PIXELS' && typeof s.lineHeightPx === 'number') {
+    text.lineHeight = s.lineHeightPx;
+  }
   // dump v1.2: text channels with no dump projection are NAMED per node.
   const channels: string[] = [];
   if (typeof s.letterSpacing === 'number' && s.letterSpacing !== 0) channels.push(`letterSpacing ${s.letterSpacing}`);
   if (s.textCase !== undefined && s.textCase !== 'ORIGINAL') channels.push(`textCase ${s.textCase}`);
   if (s.textDecoration !== undefined && s.textDecoration !== 'NONE') channels.push(`textDecoration ${s.textDecoration}`);
-  if (s.lineHeightUnit !== undefined && s.lineHeightUnit !== 'INTRINSIC_%') {
-    channels.push(`lineHeight ${s.lineHeightPx ?? '?'}px (${s.lineHeightUnit})`);
+  if (s.lineHeightUnit !== undefined && s.lineHeightUnit !== 'INTRINSIC_%' && s.lineHeightUnit !== 'PIXELS') {
+    channels.push(`lineHeight ${s.lineHeightPx ?? '?'}px (${s.lineHeightUnit} — only PIXELS carries, dump v1.3)`);
   }
   if (channels.length > 0) {
     ctx.report.degradations.push({
@@ -506,11 +520,90 @@ function mapPropRefs(node: RestNode): Record<string, string> | undefined {
   return Object.keys(propRefs).length > 0 ? propRefs : undefined;
 }
 
-const VECTOR_TYPES = new Set(['VECTOR', 'STAR', 'POLYGON', 'REGULAR_POLYGON', 'LINE', 'BOOLEAN_OPERATION', 'ELLIPSE']);
+/** Arbitrary-path vector types with NO parametric projection — still #42
+ *  receipts. REGULAR_POLYGON / ELLIPSE / rotated RECTANGLE are CARRIED since
+ *  dump v1.3 (see mapShape) and are deliberately not in this set. */
+const VECTOR_TYPES = new Set(['VECTOR', 'STAR', 'POLYGON', 'LINE', 'BOOLEAN_OPERATION']);
+
+/** Node types whose geometry is parametric — carried as DumpShape (dump
+ *  v1.3, #42). A RECTANGLE joins only when rotated (an unrotated rectangle
+ *  is an ordinary box; the existing box channels speak for it). */
+const SHAPE_KIND_BY_TYPE: Record<string, DumpShape['kind']> = {
+  REGULAR_POLYGON: 'polygon',
+  ELLIPSE: 'ellipse',
+  RECTANGLE: 'rect',
+};
+
+const round2 = (n: number) => Math.round(n * 100) / 100;
+
+/** REST `rotation` rides RADIANS whose sign matches CSS clockwise rotation
+ *  (verified against absoluteRenderBounds on the CBDS Tooltip pointers:
+ *  -π/2 points the triangle apex WEST, +π/2 EAST, π SOUTH). */
+const restRotationToCssDeg = (rad: number | undefined): number =>
+  round2(((rad ?? 0) * 180) / Math.PI);
+
+/**
+ * Decor-shape capture (dump v1.3, #42): REGULAR_POLYGON / ELLIPSE / rotated
+ * RECTANGLE → { kind, width, height, rotation, placement }. REST gives only
+ * the POST-rotation bounding box; quarter-turn rotations derive the intrinsic
+ * size exactly (±90° swaps the axes), anything else approximates by the box
+ * and is RECEIPTED. Placement (x/y/right/bottom + constraints) is captured
+ * only for out-of-flow nodes (layoutPositioning ABSOLUTE) with a known
+ * parent box. The polygon side count is not on the REST surface — absent
+ * means not captured (the plugin dump carries pointCount).
+ */
+function mapShape(
+  node: RestNode,
+  ctx: Ctx,
+  nodePath: string,
+  parentBox: { x: number; y: number; width: number; height: number } | null,
+): DumpShape | undefined {
+  const kind = SHAPE_KIND_BY_TYPE[node.type];
+  if (kind === undefined) return undefined;
+  const rotation = restRotationToCssDeg(node.rotation);
+  if (kind === 'rect' && rotation === 0) return undefined; // ordinary box — existing channels
+  const box = node.absoluteBoundingBox;
+  if (!box) {
+    ctx.report.degradations.push({
+      code: 'vector-geometry-unsupported',
+      nodePath,
+      message: `${node.type} carries no absoluteBoundingBox — shape geometry not capturable (#42); the node carries paints only and renders as a box`,
+    });
+    return undefined;
+  }
+  const nearestQuarter = Math.round(rotation / 90);
+  const quarter = Math.abs(rotation - nearestQuarter * 90) < 0.05;
+  const swapped = quarter && nearestQuarter % 2 !== 0;
+  if (!quarter) {
+    ctx.report.degradations.push({
+      code: 'rotation-unsupported',
+      nodePath,
+      message: `rotation ${rotation}° is not a quarter turn — the intrinsic size is not derivable from the REST bounding box; shape size approximated by the post-rotation box (#42 residue)`,
+    });
+  }
+  const width = round2(swapped ? box.height : box.width);
+  const height = round2(swapped ? box.width : box.height);
+  const shape: DumpShape = { kind, width, height };
+  if (rotation !== 0) shape.rotation = rotation;
+  if (node.layoutPositioning === 'ABSOLUTE' && parentBox) {
+    // Center-preserving intrinsic top-left: rotating the intrinsic box about
+    // its center reproduces the captured bounding box exactly.
+    const cx = box.x - parentBox.x + box.width / 2;
+    const cy = box.y - parentBox.y + box.height / 2;
+    shape.x = round2(cx - width / 2);
+    shape.y = round2(cy - height / 2);
+    shape.right = round2(parentBox.width - cx - width / 2);
+    shape.bottom = round2(parentBox.height - cy - height / 2);
+    if (node.constraints) {
+      shape.constraints = { horizontal: node.constraints.horizontal, vertical: node.constraints.vertical };
+    }
+  }
+  return shape;
+}
 
 /** Channels a node can carry that dump v1.2 still has NO projection for —
  *  each becomes a degradation receipt (STYLE-FIDELITY audit: zero silence). */
-function nameUnsupportedChannels(node: RestNode, ctx: Ctx, nodePath: string, strokeEmitted: boolean) {
+function nameUnsupportedChannels(node: RestNode, ctx: Ctx, nodePath: string, strokeEmitted: boolean, shapeCarried: boolean) {
   if (node.blendMode !== undefined && node.blendMode !== 'NORMAL' && node.blendMode !== 'PASS_THROUGH') {
     ctx.report.degradations.push({
       code: 'blend-mode-unsupported',
@@ -518,18 +611,21 @@ function nameUnsupportedChannels(node: RestNode, ctx: Ctx, nodePath: string, str
       message: `blendMode ${node.blendMode} has no dump v1 projection — node renders as NORMAL`,
     });
   }
-  if (typeof node.rotation === 'number' && Math.abs(node.rotation) > 1e-6) {
+  // Rotation RIDES the shape channel since dump v1.3 (quarter turns exactly;
+  // non-quarter turns receipt inside mapShape) — only a rotated node OUTSIDE
+  // the shape vocabulary is still a receipt.
+  if (!shapeCarried && typeof node.rotation === 'number' && Math.abs(node.rotation) > 1e-6) {
     ctx.report.degradations.push({
       code: 'rotation-unsupported',
       nodePath,
-      message: `rotation ${node.rotation} has no dump v1 projection — node renders unrotated (#42 class)`,
+      message: `rotation ${node.rotation} on a ${node.type} has no dump projection (rotation is carried only on shape decor — dump v1.3) — node renders unrotated (#42 residue)`,
     });
   }
   if (VECTOR_TYPES.has(node.type)) {
     ctx.report.degradations.push({
       code: 'vector-geometry-unsupported',
       nodePath,
-      message: `${node.type} geometry is not captured (#42) — the node carries paints only and renders as a box`,
+      message: `${node.type} geometry (arbitrary paths) is not captured — parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)`,
     });
   }
   // Stroke DETAIL on an INSTANCE is elided by design downstream (instance
@@ -576,7 +672,12 @@ function nameUnsupportedChannels(node: RestNode, ctx: Ctx, nodePath: string, str
   }
 }
 
-function mapNode(node: RestNode, ctx: Ctx, nodePath: string): RestDumpNode {
+function mapNode(
+  node: RestNode,
+  ctx: Ctx,
+  nodePath: string,
+  parentBox: { x: number; y: number; width: number; height: number } | null = null,
+): RestDumpNode {
   const out: RestDumpNode = { name: node.name, type: node.type };
 
   const layout = mapLayout(node, ctx, nodePath);
@@ -593,7 +694,9 @@ function mapNode(node: RestNode, ctx: Ctx, nodePath: string): RestDumpNode {
     out.stroke = stroke;
     if (typeof node.strokeWeight === 'number') out.strokeWeight = node.strokeWeight;
   }
-  nameUnsupportedChannels(node, ctx, nodePath, stroke !== undefined);
+  const shape = mapShape(node, ctx, nodePath, parentBox);
+  if (shape) out.shape = shape;
+  nameUnsupportedChannels(node, ctx, nodePath, stroke !== undefined, shape !== undefined);
   if (node.layoutSizingHorizontal === 'FILL') out.fillWidth = true;
   if (node.visible === false) out.hidden = true;
   // dump v1.2: NODE opacity (distinct from paint alpha) — the disabled-variant
@@ -658,7 +761,9 @@ function mapNode(node: RestNode, ctx: Ctx, nodePath: string): RestDumpNode {
   }
 
   if (Array.isArray(node.children)) {
-    out.children = node.children.map((child) => mapNode(child, ctx, `${nodePath}/${child.name}`));
+    out.children = node.children.map((child) =>
+      mapNode(child, ctx, `${nodePath}/${child.name}`, node.absoluteBoundingBox ?? null),
+    );
   }
   return out;
 }
@@ -679,7 +784,7 @@ export function mapRestToDump(nodesResponse: RestNodesResponse, options: MapOpti
     _provenance: {
       fileKey: options.fileKey ?? null,
       extractedAt: new Date().toISOString().slice(0, 10),
-      note: 'Node-tree dump mapped from the Figma REST API (extract/figma/rest/map.ts, dump v1.2) for design→contract proposal.',
+      note: 'Node-tree dump mapped from the Figma REST API (extract/figma/rest/map.ts, dump v1.3) for design→contract proposal.',
     },
   };
 

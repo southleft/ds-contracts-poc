@@ -50,7 +50,46 @@ const rgbToHex = (c) => {
 // cannot carry lands here by name (STYLE-FIDELITY audit: zero silent loss).
 const degradations = [];
 const degrade = (code, nodePath, message) => degradations.push({ code, nodePath, message });
-const VECTOR_TYPES = ['VECTOR', 'STAR', 'POLYGON', 'REGULAR_POLYGON', 'LINE', 'BOOLEAN_OPERATION', 'ELLIPSE'];
+// Arbitrary-path vectors — still #42 receipts. REGULAR_POLYGON / ELLIPSE /
+// rotated RECTANGLE are CARRIED since dump v1.3 (see dumpShape below).
+const VECTOR_TYPES = ['VECTOR', 'STAR', 'POLYGON', 'LINE', 'BOOLEAN_OPERATION'];
+const SHAPE_KIND_BY_TYPE = { REGULAR_POLYGON: 'polygon', ELLIPSE: 'ellipse', RECTANGLE: 'rect' };
+const round2 = (n) => Math.round(n * 100) / 100;
+
+// Decor-shape capture (dump v1.3, #42) — the plugin mirror of
+// extract/figma/rest/map.ts mapShape. The Plugin API gives the INTRINSIC
+// (pre-rotation) size directly (node.width/height) and rotation in
+// COUNTERCLOCKWISE degrees — negated into the dump's CSS-clockwise degrees.
+// Placement (ABSOLUTE nodes only) comes from absoluteBoundingBox deltas,
+// spelled center-preserving exactly like the REST mapper; constraints are
+// normalized to the REST spelling (MIN→LEFT/TOP, MAX→RIGHT/BOTTOM).
+function dumpShape(node, parent) {
+  const kind = SHAPE_KIND_BY_TYPE[node.type];
+  if (!kind) return null;
+  const rotation = round2(-(typeof node.rotation === 'number' ? node.rotation : 0));
+  if (kind === 'rect' && rotation === 0) return null; // ordinary box — existing channels
+  const shape = { kind, width: round2(node.width), height: round2(node.height) };
+  if (node.type === 'REGULAR_POLYGON' && typeof node.pointCount === 'number') shape.sides = node.pointCount;
+  if (rotation !== 0) shape.rotation = rotation;
+  const box = node.absoluteBoundingBox;
+  const parentBox = parent && parent.absoluteBoundingBox;
+  if (node.layoutPositioning === 'ABSOLUTE' && box && parentBox) {
+    const cx = box.x - parentBox.x + box.width / 2;
+    const cy = box.y - parentBox.y + box.height / 2;
+    shape.x = round2(cx - shape.width / 2);
+    shape.y = round2(cy - shape.height / 2);
+    shape.right = round2(parentBox.width - cx - shape.width / 2);
+    shape.bottom = round2(parentBox.height - cy - shape.height / 2);
+    if (node.constraints) {
+      const H = { MIN: 'LEFT', MAX: 'RIGHT', CENTER: 'CENTER' };
+      const V = { MIN: 'TOP', MAX: 'BOTTOM', CENTER: 'CENTER' };
+      const h = H[node.constraints.horizontal];
+      const v = V[node.constraints.vertical];
+      if (h && v) shape.constraints = { horizontal: h, vertical: v };
+    }
+  }
+  return shape;
+}
 
 const varNameById = async (id) => {
   const v = await figma.variables.getVariableByIdAsync(id);
@@ -83,18 +122,22 @@ const dumpPaint = async (paints, nodePath, field) => {
   return withAlpha({ hex: rgbToHex(p.color) });
 };
 
-async function dumpNode(node, nodePath) {
+async function dumpNode(node, nodePath, parent) {
   const out = { name: node.name, type: node.type };
+
+  // dump v1.3 (#42): parametric decor geometry is CARRIED (rotation rides it).
+  const shape = dumpShape(node, parent);
+  if (shape) out.shape = shape;
 
   // dump v1.2: channels with NO dump projection are named receipts.
   if ('blendMode' in node && node.blendMode !== 'NORMAL' && node.blendMode !== 'PASS_THROUGH') {
     degrade('blend-mode-unsupported', nodePath, 'blendMode ' + node.blendMode + ' has no dump v1 projection — node renders as NORMAL');
   }
-  if ('rotation' in node && typeof node.rotation === 'number' && Math.abs(node.rotation) > 1e-6) {
-    degrade('rotation-unsupported', nodePath, 'rotation ' + node.rotation + ' has no dump v1 projection — node renders unrotated (#42 class)');
+  if (!shape && 'rotation' in node && typeof node.rotation === 'number' && Math.abs(node.rotation) > 1e-6) {
+    degrade('rotation-unsupported', nodePath, 'rotation ' + node.rotation + ' on a ' + node.type + ' has no dump projection (rotation is carried only on shape decor — dump v1.3) — node renders unrotated (#42 residue)');
   }
   if (VECTOR_TYPES.indexOf(node.type) >= 0) {
-    degrade('vector-geometry-unsupported', nodePath, node.type + ' geometry is not captured (#42) — the node carries paints only and renders as a box');
+    degrade('vector-geometry-unsupported', nodePath, node.type + ' geometry (arbitrary paths) is not captured — parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)');
   }
 
   if ('layoutMode' in node && node.layoutMode !== 'NONE') {
@@ -186,14 +229,20 @@ async function dumpNode(node, nodePath) {
   }
 
   if (node.type === 'TEXT') {
+    // dump v1.3: PIXEL line heights are CAPTURED; other explicit units stay
+    // receipts below.
+    const pxLineHeight =
+      node.lineHeight !== figma.mixed && node.lineHeight && node.lineHeight.unit === 'PIXELS'
+        ? node.lineHeight.value
+        : null;
     const channels = [];
     if (node.letterSpacing !== figma.mixed && node.letterSpacing && node.letterSpacing.value !== 0) {
       channels.push('letterSpacing ' + node.letterSpacing.value + node.letterSpacing.unit);
     }
     if (node.textCase !== figma.mixed && node.textCase && node.textCase !== 'ORIGINAL') channels.push('textCase ' + node.textCase);
     if (node.textDecoration !== figma.mixed && node.textDecoration && node.textDecoration !== 'NONE') channels.push('textDecoration ' + node.textDecoration);
-    if (node.lineHeight !== figma.mixed && node.lineHeight && node.lineHeight.unit !== 'AUTO') {
-      channels.push('lineHeight ' + node.lineHeight.value + node.lineHeight.unit);
+    if (node.lineHeight !== figma.mixed && node.lineHeight && node.lineHeight.unit !== 'AUTO' && node.lineHeight.unit !== 'PIXELS') {
+      channels.push('lineHeight ' + node.lineHeight.value + node.lineHeight.unit + ' — only PIXELS carries, dump v1.3');
     }
     if (channels.length > 0) {
       degrade('text-channel-unsupported', nodePath, 'text channel(s) with no dump v1 projection: ' + channels.join('; ') + ' — typography carries (fontSize, fontStyle, style identity) only');
@@ -203,6 +252,7 @@ async function dumpNode(node, nodePath) {
       fontSize: typeof node.fontSize === 'number' ? node.fontSize : null,
       fontStyle: node.fontName === figma.mixed ? null : node.fontName.style,
     };
+    if (typeof pxLineHeight === 'number') text.lineHeight = pxLineHeight;
     if (node.textStyleId && node.textStyleId !== figma.mixed) {
       const style = await figma.getStyleByIdAsync(node.textStyleId);
       if (style) text.style = style.name;
@@ -241,7 +291,7 @@ async function dumpNode(node, nodePath) {
 
   if ('children' in node && node.type !== 'INSTANCE') {
     out.children = [];
-    for (const child of node.children) out.children.push(await dumpNode(child, nodePath + '/' + child.name));
+    for (const child of node.children) out.children.push(await dumpNode(child, nodePath + '/' + child.name, node));
   }
   return out;
 }
@@ -250,7 +300,7 @@ const dumps = {
   _provenance: {
     fileKey: figma.fileKey || null,
     extractedAt: new Date().toISOString().slice(0, 10),
-    note: 'Node-tree dump (extract/figma/dump.plugin.js, dump v1.2) for design→contract proposal.',
+    note: 'Node-tree dump (extract/figma/dump.plugin.js, dump v1.3) for design→contract proposal.',
   },
 };
 dumps._degradations = degradations;

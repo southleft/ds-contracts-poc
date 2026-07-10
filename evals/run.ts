@@ -1320,6 +1320,92 @@ const cases: Case[] = [
         throw new Error('registered-stub emit check missing/failed');
     },
   },
+  {
+    // Owner field case (CBDS Tooltip): the root's DROP_SHADOW must mint
+    // byte-equal to the dump (0px 2px 4px #00000029), render on the CSS
+    // surface, AND project onto the canvas surfaces as a native effect —
+    // the exact channel whose loss made the imported tooltip "look
+    // unstyled". Fixture replay of the owner's live node (695-313).
+    id: 'design-shadow-mints-and-renders',
+    claim: 'C5-extraction',
+    run: () => {
+      const r = run(TSX, ['extract/figma/tooltip-check.ts']);
+      if (r.status !== 0) throw new Error(`Tooltip receipt failed:\n${r.out}`);
+      for (const line of [
+        "✔ box-shadow MINTED byte-equal to the dump's DROP_SHADOW (0px 2px 4px #00000029)",
+        '✔ emitReact CSS: box-shadow declaration on the root',
+        '✔ canvas spec: root carries the native DROP_SHADOW (0/2/4 #00000029 — numeric equality with the dump)',
+        '✔ the shadow note states the canvas surfaces PROJECT it (the v1 "no box-shadow projection" limit is retired)',
+      ]) {
+        if (!r.out.includes(line)) throw new Error(`missing check: ${line}`);
+      }
+    },
+  },
+  {
+    // Owner field case (CBDS Tooltip): the Pointer REGULAR_POLYGON is a REAL
+    // part — triangle geometry + rotation carried (#42, dump v1.3), and the
+    // pointer-position axis drives genuinely DIFFERENT absolute placements
+    // whose offsets equal the captured boxes exactly.
+    id: 'design-pointer-geometry-carried',
+    claim: 'C5-extraction',
+    run: () => {
+      const r = run(TSX, ['extract/figma/tooltip-check.ts']);
+      if (r.status !== 0) throw new Error(`Tooltip receipt failed:\n${r.out}`);
+      for (const line of [
+        '✔ Pointer is a REAL shape part: polygon, 3 sides, 12×12 (dump intrinsic size)',
+        "✔ Pointer fill resolves to the dump's #fcfeff",
+        '✔ top-right placement EXACT from the captured box (right: 12px, top: -8px, rotation 0)',
+        '✔ bottom-left placement EXACT (left: 12px, bottom: -8px, rotate(180deg))',
+        '✔ left-center placement EXACT (left: -8px, vertically centered, rotate(-90deg))',
+        '✔ the three placements genuinely DIFFER',
+        '✔ canvas spec: pointer compiles to a shape node with per-variant constraints + rotation (top-right MAX/MIN rot0 · bottom-left MIN/MAX rot180 · left-center MIN/CENTER rot-90)',
+        '✔ sync script constructs a REAL polygon with native rotation + ABSOLUTE placement + DROP_SHADOW effect + PIXELS line height',
+      ]) {
+        if (!r.out.includes(line)) throw new Error(`missing check: ${line}`);
+      }
+    },
+  },
+  {
+    // Owner field case (CBDS Tooltip): pointer=false must render NO arrow —
+    // the boolean the set already carries drives the part on every surface
+    // (visibleWhen inverted from the hidden pattern), and the never-drawn
+    // pointer-position=none combo is suppressed rather than guessed.
+    id: 'design-pointer-false-no-arrow',
+    claim: 'C5-extraction',
+    run: () => {
+      const r = run(TSX, ['extract/figma/tooltip-check.ts']);
+      if (r.status !== 0) throw new Error(`Tooltip receipt failed:\n${r.out}`);
+      for (const line of [
+        '✔ visibleWhen { prop: pointer } inverted from the hidden pattern (boolean axis)',
+        '✔ emitReact TSX: the arrow renders conditionally ({pointer ? …})',
+        '✔ pointer-position=none suppresses the arrow even against defaults (display: none stylesWhen)',
+        '✔ canvas spec: the pointer-position=none variant compiles WITHOUT the shape node (suppressed)',
+      ]) {
+        if (!r.out.includes(line)) throw new Error(`missing check: ${line}`);
+      }
+    },
+  },
+  {
+    // Owner follow-up (same tooltip): the Semi Bold title and the 16px line
+    // height must CARRY — font-weight through the bounded weight-name table,
+    // line-height when the canvas spells PIXELS (dump v1.3) — with numeric
+    // equality against the dump on the emitted surface.
+    id: 'design-text-weight-and-line-height-carried',
+    claim: 'C5-extraction',
+    run: () => {
+      const r = run(TSX, ['extract/figma/tooltip-check.ts']);
+      if (r.status !== 0) throw new Error(`Tooltip receipt failed:\n${r.out}`);
+      for (const line of [
+        '✔ Main text ("Semi Bold") font-weight resolves to 600 EXACTLY (weight-name table)',
+        '✔ Main text line-height resolves to 16px EXACTLY (dump v1.3 PIXELS)',
+        '✔ Supporting text ("Regular") font-weight resolves to 400 + line-height 16px',
+        '✔ emitReact CSS: font-weight + line-height declarations on both text parts',
+        '✔ canvas spec: text nodes carry Semi Bold + lineHeight 16 (weight table + dump v1.3)',
+      ]) {
+        if (!r.out.includes(line)) throw new Error(`missing check: ${line}`);
+      }
+    },
+  },
 ];
 
 // ---------------------------------------------------------------------------

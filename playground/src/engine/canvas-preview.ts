@@ -27,6 +27,7 @@ import {
 } from '../../../core/emit-figma-script.js';
 
 type FigmaEngine = ReturnType<typeof createFigmaEngine>;
+import { polygonClipPath } from '../../../scripts/contract-schema.js';
 import { icons } from './data.js';
 import { activeTokens } from './token-source.js';
 
@@ -46,10 +47,15 @@ const escapeHtml = (s: string) =>
   s.replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;');
 
 const FONT_WEIGHT_BY_STYLE: Record<string, number> = {
+  Thin: 100,
+  'Extra Light': 200,
+  Light: 300,
   Regular: 400,
   Medium: 500,
   'Semi Bold': 600,
   Bold: 700,
+  'Extra Bold': 800,
+  Black: 900,
 };
 
 /** Figma binding field → CSS declaration. */
@@ -112,6 +118,14 @@ function nodeStyle(spec: NodeSpec, ctx: RenderCtx): string {
     d.push(`align-items: ${spec.layout.stretchChildren ? 'stretch' : COUNTER_CSS[spec.layout.counter]}`);
   }
   if (spec.fill) d.push(`background-color: ${cssVarOf(spec.fill)}`);
+  if (spec.dropShadow) {
+    // dump v1.2 single DROP_SHADOW — the same value the CSS surfaces render.
+    const sh = spec.dropShadow;
+    ctx.used.add('shadow');
+    d.push(
+      `box-shadow: ${sh.x}px ${sh.y}px ${sh.radius}px${sh.spread ? ` ${sh.spread}px` : ''} ${sh.color}`,
+    );
+  }
   if (spec.stroke) {
     d.push(`border-color: ${cssVarOf(spec.stroke)}`, 'border-style: solid');
     if (!spec.bindings?.strokeWeight) d.push('border-width: 1px');
@@ -187,6 +201,36 @@ function renderInstance(
   return renderNode(variant.spec, ctx, overrides, extraStyle);
 }
 
+/** v9 shape decor: the SAME projection the code surfaces emit
+ *  (scripts/contract-schema.ts shapeCssDecls), plus the compiled absolute
+ *  placement (spec.absolute) — translate joins rotate in one transform. */
+function shapeStyle(spec: NodeSpec, ctx: RenderCtx): string {
+  const sh = spec.shape!;
+  ctx.used.add('shape');
+  const d = [`width: ${sh.width}px`, `height: ${sh.height}px`, 'flex-shrink: 0'];
+  if (sh.kind === 'polygon') d.push(`clip-path: ${polygonClipPath(sh.sides ?? 3)}`);
+  if (sh.kind === 'ellipse') d.push('border-radius: 50%');
+  if (spec.fill) d.push(`background-color: ${cssVarOf(spec.fill)}`);
+  const transform: string[] = [];
+  const a = spec.absolute;
+  if (a) {
+    d.push('position: absolute');
+    if (a.h === 'CENTER') {
+      d.push('left: 50%');
+      transform.push('translateX(-50%)');
+    } else if (a.h === 'MAX' && a.right !== undefined) d.push(`right: ${a.right}px`);
+    else if (a.left !== undefined) d.push(`left: ${a.left}px`);
+    if (a.v === 'CENTER') {
+      d.push('top: 50%');
+      transform.push('translateY(-50%)');
+    } else if (a.v === 'MAX' && a.bottom !== undefined) d.push(`bottom: ${a.bottom}px`);
+    else if (a.top !== undefined) d.push(`top: ${a.top}px`);
+  }
+  if (sh.rotation) transform.push(`rotate(${sh.rotation}deg)`);
+  if (transform.length > 0) d.push(`transform: ${transform.join(' ')}`);
+  return d.join('; ');
+}
+
 function renderNode(
   spec: NodeSpec,
   ctx: RenderCtx,
@@ -194,6 +238,11 @@ function renderNode(
   extraStyle = '',
 ): string {
   if (!isVisible(spec, overrides)) return '';
+
+  if (spec.type === 'shape') {
+    const style = [shapeStyle(spec, ctx), extraStyle].filter(Boolean).join('; ');
+    return `<div style="${style}"></div>`;
+  }
 
   if (spec.type === 'svg') {
     ctx.used.add('svg');
@@ -206,7 +255,7 @@ function renderNode(
       `font-size: ${spec.fontSize ?? 14}px`,
       `font-weight: ${FONT_WEIGHT_BY_STYLE[spec.fontStyle ?? 'Medium'] ?? 500}`,
       "font-family: Inter, system-ui, sans-serif",
-      'line-height: 1.2',
+      `line-height: ${typeof spec.lineHeight === 'number' ? `${spec.lineHeight}px` : '1.2'}`,
       'white-space: pre-wrap',
     ];
     ctx.used.add('font');
@@ -235,7 +284,7 @@ function renderNode(
   }
 
   // root / frame
-  const hasOverlayChild = (spec.children ?? []).some((c) => c.overlay);
+  const hasOverlayChild = (spec.children ?? []).some((c) => c.overlay || c.absolute);
   const style = [
     nodeStyle(spec, ctx),
     hasOverlayChild ? 'position: relative' : '',
@@ -296,6 +345,11 @@ function fidelityNotes(contract: Contract, data: ComponentData, used: Set<string
   }
   if (used.has('meter')) {
     notes.push('meter fill — rendered at the contract defaults’ fraction, as the sync script lays it out.');
+  }
+  if (used.has('shape')) {
+    notes.push(
+      'shape decor — parametric vectors (polygon/ellipse) render as CSS clip-path boxes with the compiled rotation and exact captured placement; the sync script constructs REAL polygon/ellipse nodes.',
+    );
   }
   if (used.has('overlay')) {
     notes.push('overlay parts — absolute placement mirrors the runtime’s constraints, not canvas pixel positions.');

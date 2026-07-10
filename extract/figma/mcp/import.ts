@@ -109,9 +109,10 @@ export interface AugmentReport {
 // Occurrence collection — mirrors exactly what map.ts consumes
 // ---------------------------------------------------------------------------
 
-/** Raw-response fields the join needs beyond the mapper's RestNode view. */
+/** Raw-response fields the join needs beyond the mapper's RestNode view.
+ *  (absoluteBoundingBox moved onto RestNode itself in dump v1.3 — the shape
+ *  channel consumes it there.) */
 interface RawRestNode extends RestNode {
-  absoluteBoundingBox?: { width?: number; height?: number };
   individualStrokeWeights?: { top?: number; right?: number; bottom?: number; left?: number };
   children?: RawRestNode[];
 }

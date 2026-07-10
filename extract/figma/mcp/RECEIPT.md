@@ -51,7 +51,7 @@ Fixtures in `extract/figma/mcp/fixtures/` are RECORDED LIVE responses (Figma des
 - ✅ the U+2024 variable ("spacing/0․5", ONE DOT LEADER) is itself recovered by name by the join…
 - ✅ …and then REFUSED by the token-ref grammar (binding not proposed, named in notes) — the refusal fires on live foreign data
 - ✅ recovered names BIND in the proposal: root carries {spacing.4} / {spacing.3} / {component.border.radius.rounded-md} / {spacing.2} (got {"padding-inline":"{spacing.4}","padding-block":"{spacing.3}","border-radius":"{component.border.radius.rounded-md}","gap":"{spacing.2}"})
-- ✅ everything the join could not name still ships at literal fidelity as imported.* mints (2 minted, 0 unbound)
+- ✅ everything the join could not name still ships at literal fidelity as imported.* mints (6 minted, 0 unbound)
 
 ### Names recovered by the join (7 ids, 9 get_variable_defs calls)
 
@@ -67,9 +67,8 @@ Fixtures in `extract/figma/mcp/fixtures/` are RECORDED LIVE responses (Figma des
 
 - `[paint-unsupported]` Alert:variant=success `fill` — first visible paint is GRADIENT_LINEAR, not SOLID — dump v1 carries solid paints only; paint omitted
 - `[min-max-size-unsupported]` Alert:variant=success — literal min/max sizing (maxWidth 880) has no dump v1 projection — dropped (bound min-width variables DO ride `bound`)
-- `[text-channel-unsupported]` Alert:variant=success/horizontal stack/horizontal stack/Title `text` — text channel(s) with no dump v1 projection: lineHeight 20px (PIXELS) — typography carries (fontSize, fontStyle, style identity) only
 
-### Proposal notes (review line items, 17)
+### Proposal notes (review line items, 20)
 
 - semantics.element defaulted to "div" — element/role/ARIA are not drawn on the canvas and the name/axis inference table matched nothing; set the real host element
 - Alert:root/container: visibility bound to BOOLEAN "hasIcon" — proposed as prop `hasIcon` (default not recoverable from dump v1, review)
@@ -77,7 +76,6 @@ Fixtures in `extract/figma/mcp/fixtures/` are RECORDED LIVE responses (Figma des
 - Alert:root/container/Icon: fixed prop values of the nested "check circle" instance are not captured in dump v1 — declared fidelity limit, author them if the instance is configured
 - Alert:root/horizontal stack itemSpacing: variable name "spacing/0․5" contains characters outside the token-ref grammar ([a-z0-9.-]) — binding not proposed; rename the variable or map it manually
 - Alert:root/horizontal stack/horizontal stack/Title: rides text style "body/md-bold" which is not a token-derived style — typography not proposed
-- Alert:root/horizontal stack/horizontal stack/Title: font weight "Bold" has no token identity (no matching derived style) — font-weight NAMED, not proposed; review
 - Alert:root/horizontal stack/horizontal stack/Description: rides text style "body/sm" which is not a token-derived style — typography not proposed
 - Alert:root/horizontal stack/Text link: nested instance of "Text link" has no known contract — component ref proposed as "ds.text-link" with a STUB child contract auto-proposed alongside (childStubs; API from observed applied values only, anatomy not captured — import the real child set to replace it)
 - Alert:root/horizontal stack/Text link: fixed props of "Text link" canonicalized by spelling (dump v1.1) — verify against the child contract's bindings
@@ -87,5 +85,9 @@ Fixtures in `extract/figma/mcp/fixtures/` are RECORDED LIVE responses (Figma des
 - Alert:root/container 2/Icon: fixed prop values of the nested "close" instance are not captured in dump v1 — declared fidelity limit, author them if the instance is configured
 - Alert:root: visible effect(s) [DROP_SHADOW] — only a single DROP_SHADOW present in every variant maps to box-shadow (dump v1.2); channel NAMED, not proposed
 - MINTED {imported.alert.horizontal-stack-horizontal-stack-title.font-size} = 16px — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Alert:root/horizontal stack/horizontal stack/Title font-size
+- MINTED {imported.alert.horizontal-stack-horizontal-stack-title.font-weight} = 700 — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Alert:root/horizontal stack/horizontal stack/Title font-weight
+- MINTED {imported.alert.horizontal-stack-horizontal-stack-title.line-height} = 20px — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Alert:root/horizontal stack/horizontal stack/Title line-height
 - MINTED {imported.alert.horizontal-stack-horizontal-stack-description.font-size} = 14px — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Alert:root/horizontal stack/horizontal stack/Description font-size
+- MINTED {imported.alert.horizontal-stack-horizontal-stack-description.font-weight} = 500 — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Alert:root/horizontal stack/horizontal stack/Description font-weight
+- MINTED {imported.alert.horizontal-stack-horizontal-stack-description.line-height} = 20px — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Alert:root/horizontal stack/horizontal stack/Description line-height
 
