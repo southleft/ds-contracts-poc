@@ -1,4 +1,4 @@
-// Design-side ANATOMY dump — the canonical node-tree capture (dump v1).
+// Design-side ANATOMY dump — the canonical node-tree capture (dump v1.4).
 //
 // Transport-agnostic Plugin API script (same boundary as extract/figma-dump.js
 // and parity/extract-figma.plugin.js): run it through any console/plugin-runner
@@ -13,6 +13,17 @@
 //                      literal spacing + padding [top,right,bottom,left], sizing modes
 //   bound              variable bindings: Plugin-API field → variable name
 //                      (slash-form, e.g. paddingLeft: "space/inset-x/sm")
+//   minWidth/minHeight/maxWidth/maxHeight
+//                      literal min/max sizing in px (dump v1.4) — carried as
+//                      style facts (a drawn minHeight 44 is a tap-target
+//                      fact); bound min/max variables ride `bound` instead
+//   _variables         top-level channel (dump v1.4): every variable a
+//                      binding resolved through, keyed by slash-form name →
+//                      { type, value } — the RESOLVED value for the consuming
+//                      mode (Variable.resolveForConsumer). Colors are hex
+//                      strings; floats stay raw numbers. The playground
+//                      registers these as an import-scoped token layer so the
+//                      proposal's real-name refs resolve and render.
 //   cornerRadius       literal uniform radius (bound radii appear in `bound`)
 //   fill / stroke      first visible solid paint: { var: name } when bound,
 //                      { hex: "rrggbb" } when raw, plus { alpha } when the
@@ -91,15 +102,36 @@ function dumpShape(node, parent) {
   return shape;
 }
 
-const varNameById = async (id) => {
+// dump v1.4: every variable a binding resolves through also lands in
+// `_variables` with its RESOLVED value for the consuming node's mode —
+// COLOR as hex ('#rrggbb', 8-digit when alpha < 1), FLOAT as the raw
+// number, STRING/BOOLEAN as-is. A variable whose value cannot resolve is a
+// named degradation, never a silent absence.
+const capturedVariables = {};
+const varNameById = async (id, consumer) => {
   const v = await figma.variables.getVariableByIdAsync(id);
-  return v ? v.name : null;
+  if (!v) return null;
+  if (consumer && !(v.name in capturedVariables)) {
+    try {
+      const r = v.resolveForConsumer(consumer);
+      if (r && r.resolvedType === 'COLOR') {
+        const alpha = typeof r.value.a === 'number' ? r.value.a : 1;
+        const suffix = alpha < 1 ? Math.round(alpha * 255).toString(16).padStart(2, '0') : '';
+        capturedVariables[v.name] = { type: 'COLOR', value: '#' + rgbToHex(r.value) + suffix };
+      } else if (r) {
+        capturedVariables[v.name] = { type: r.resolvedType, value: r.value };
+      }
+    } catch (e) {
+      degrade('variable-value-unresolved', v.name, 'resolveForConsumer threw (' + (e && e.message ? e.message : String(e)) + ') — the name still binds; the value is not captured (dump v1.4)');
+    }
+  }
+  return v.name;
 };
 
 // First visible solid paint → { var } | { hex } | null, with the paint's
 // effective opacity as `alpha` when < 1 (dump v1.1 — 5%-black fills are a
 // real kit idiom; without alpha they mint opaque black).
-const dumpPaint = async (paints, nodePath, field) => {
+const dumpPaint = async (paints, nodePath, field, consumer) => {
   if (!Array.isArray(paints)) return null; // figma.mixed
   const visibles = paints.filter((x) => x.visible !== false);
   const p = visibles.find((x) => x.type === 'SOLID');
@@ -116,7 +148,7 @@ const dumpPaint = async (paints, nodePath, field) => {
   const withAlpha = (paint) => (alpha < 1 ? Object.assign(paint, { alpha }) : paint);
   const alias = p.boundVariables && p.boundVariables.color;
   if (alias) {
-    const name = await varNameById(alias.id);
+    const name = await varNameById(alias.id, consumer);
     if (name) return withAlpha({ var: name });
   }
   return withAlpha({ hex: rgbToHex(p.color) });
@@ -162,16 +194,16 @@ async function dumpNode(node, nodePath, parent) {
   const bound = {};
   for (const [field, alias] of Object.entries(node.boundVariables || {})) {
     if (Array.isArray(alias) || !alias || !alias.id) continue; // fills/strokes/characters
-    const name = await varNameById(alias.id);
+    const name = await varNameById(alias.id, node);
     if (name) bound[field] = name;
   }
   if (Object.keys(bound).length > 0) out.bound = bound;
 
   if (node.type !== 'TEXT') {
-    const fill = 'fills' in node ? await dumpPaint(node.fills, nodePath, 'fill') : null;
+    const fill = 'fills' in node ? await dumpPaint(node.fills, nodePath, 'fill', node) : null;
     if (fill) out.fill = fill;
   }
-  const stroke = 'strokes' in node ? await dumpPaint(node.strokes, nodePath, 'stroke') : null;
+  const stroke = 'strokes' in node ? await dumpPaint(node.strokes, nodePath, 'stroke', node) : null;
   if (stroke) {
     out.stroke = stroke;
     if (typeof node.strokeWeight === 'number') out.strokeWeight = node.strokeWeight;
@@ -190,14 +222,13 @@ async function dumpNode(node, nodePath, parent) {
       }
     }
   }
-  const sizes = [];
-  if ('minWidth' in node && node.minWidth != null) sizes.push('minWidth ' + node.minWidth);
-  if ('maxWidth' in node && node.maxWidth != null) sizes.push('maxWidth ' + node.maxWidth);
-  if ('minHeight' in node && node.minHeight != null) sizes.push('minHeight ' + node.minHeight);
-  if ('maxHeight' in node && node.maxHeight != null) sizes.push('maxHeight ' + node.maxHeight);
-  if (sizes.length > 0) {
-    degrade('min-max-size-unsupported', nodePath, 'literal min/max sizing (' + sizes.join(', ') + ') has no dump v1 projection — dropped (bound min-width variables DO ride `bound`)');
-  }
+  // dump v1.4: literal min/max sizing is CARRIED as style facts (a drawn
+  // minHeight 44 is a tap-target fact) — previously a named degradation.
+  // Bound min/max variables ride `bound` instead.
+  if ('minWidth' in node && typeof node.minWidth === 'number') out.minWidth = node.minWidth;
+  if ('maxWidth' in node && typeof node.maxWidth === 'number') out.maxWidth = node.maxWidth;
+  if ('minHeight' in node && typeof node.minHeight === 'number') out.minHeight = node.minHeight;
+  if ('maxHeight' in node && typeof node.maxHeight === 'number') out.maxHeight = node.maxHeight;
   if ('layoutSizingHorizontal' in node && node.layoutSizingHorizontal === 'FILL') {
     out.fillWidth = true;
   }
@@ -257,7 +288,7 @@ async function dumpNode(node, nodePath, parent) {
       const style = await figma.getStyleByIdAsync(node.textStyleId);
       if (style) text.style = style.name;
     }
-    const fill = await dumpPaint(node.fills, nodePath, 'fill');
+    const fill = await dumpPaint(node.fills, nodePath, 'fill', node);
     if (fill && fill.var) text.fillVar = fill.var;
     out.text = text;
     if (fill) out.fill = fill;
@@ -300,10 +331,11 @@ const dumps = {
   _provenance: {
     fileKey: figma.fileKey || null,
     extractedAt: new Date().toISOString().slice(0, 10),
-    note: 'Node-tree dump (extract/figma/dump.plugin.js, dump v1.3) for design→contract proposal.',
+    note: 'Node-tree dump (extract/figma/dump.plugin.js, dump v1.4) for design→contract proposal.',
   },
 };
 dumps._degradations = degradations;
+dumps._variables = capturedVariables;
 for (const page of figma.root.children) {
   for (const node of page.findAllWithCriteria({ types: ['COMPONENT_SET', 'COMPONENT'] })) {
     if (node.type === 'COMPONENT' && node.parent && node.parent.type === 'COMPONENT_SET') continue;

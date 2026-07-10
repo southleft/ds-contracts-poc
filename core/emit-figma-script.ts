@@ -657,7 +657,11 @@ function applyTokens(
         next.lineHeight = px(resolveLiteral(tokenPath));
         break;
       default:
-        break; // outline-* etc. are state/CSS concerns
+        // outline-* are state/CSS concerns; min-height/max-height (dump
+        // v1.4 style facts) are CSS-side — the canvas variant is drawn at
+        // its real per-variant height, so a min/max binding would be
+        // redundant chrome there (and the sync scripts are golden-pinned).
+        break;
     }
   }
   return next;

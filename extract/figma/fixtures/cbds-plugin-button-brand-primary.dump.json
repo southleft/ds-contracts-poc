@@ -2,85 +2,9 @@
   "_provenance": {
     "fileKey": "WofZT8xaxXuc2Q6Je9S4XE",
     "extractedAt": "2026-07-10",
-    "note": "Node-tree dump (extract/figma/dump.plugin.js, dump v1.3) for design\u2192contract proposal."
+    "note": "Node-tree dump (extract/figma/dump.plugin.js, dump v1.4) for design→contract proposal."
   },
-  "_degradations": [
-    {
-      "code": "min-max-size-unsupported",
-      "nodePath": "Button-Brand Primary:size=large, state=default",
-      "message": "literal min/max sizing (minHeight 44) has no dump v1 projection \u2014 dropped (bound min-width variables DO ride `bound`)"
-    },
-    {
-      "code": "min-max-size-unsupported",
-      "nodePath": "Button-Brand Primary:size=medium, state=default",
-      "message": "literal min/max sizing (minHeight 44) has no dump v1 projection \u2014 dropped (bound min-width variables DO ride `bound`)"
-    },
-    {
-      "code": "min-max-size-unsupported",
-      "nodePath": "Button-Brand Primary:size=small, state=default",
-      "message": "literal min/max sizing (minHeight 44) has no dump v1 projection \u2014 dropped (bound min-width variables DO ride `bound`)"
-    },
-    {
-      "code": "min-max-size-unsupported",
-      "nodePath": "Button-Brand Primary:size=large, state=hover",
-      "message": "literal min/max sizing (minHeight 44) has no dump v1 projection \u2014 dropped (bound min-width variables DO ride `bound`)"
-    },
-    {
-      "code": "min-max-size-unsupported",
-      "nodePath": "Button-Brand Primary:size=medium, state=hover",
-      "message": "literal min/max sizing (minHeight 44) has no dump v1 projection \u2014 dropped (bound min-width variables DO ride `bound`)"
-    },
-    {
-      "code": "min-max-size-unsupported",
-      "nodePath": "Button-Brand Primary:size=small, state=hover",
-      "message": "literal min/max sizing (minHeight 44) has no dump v1 projection \u2014 dropped (bound min-width variables DO ride `bound`)"
-    },
-    {
-      "code": "min-max-size-unsupported",
-      "nodePath": "Button-Brand Primary:size=large, state=focus",
-      "message": "literal min/max sizing (minHeight 44) has no dump v1 projection \u2014 dropped (bound min-width variables DO ride `bound`)"
-    },
-    {
-      "code": "min-max-size-unsupported",
-      "nodePath": "Button-Brand Primary:size=medium, state=focus",
-      "message": "literal min/max sizing (minHeight 44) has no dump v1 projection \u2014 dropped (bound min-width variables DO ride `bound`)"
-    },
-    {
-      "code": "min-max-size-unsupported",
-      "nodePath": "Button-Brand Primary:size=small, state=focus",
-      "message": "literal min/max sizing (minHeight 44) has no dump v1 projection \u2014 dropped (bound min-width variables DO ride `bound`)"
-    },
-    {
-      "code": "min-max-size-unsupported",
-      "nodePath": "Button-Brand Primary:size=large, state=pressed",
-      "message": "literal min/max sizing (minHeight 44) has no dump v1 projection \u2014 dropped (bound min-width variables DO ride `bound`)"
-    },
-    {
-      "code": "min-max-size-unsupported",
-      "nodePath": "Button-Brand Primary:size=medium, state=pressed",
-      "message": "literal min/max sizing (minHeight 44) has no dump v1 projection \u2014 dropped (bound min-width variables DO ride `bound`)"
-    },
-    {
-      "code": "min-max-size-unsupported",
-      "nodePath": "Button-Brand Primary:size=small, state=pressed",
-      "message": "literal min/max sizing (minHeight 44) has no dump v1 projection \u2014 dropped (bound min-width variables DO ride `bound`)"
-    },
-    {
-      "code": "min-max-size-unsupported",
-      "nodePath": "Button-Brand Primary:size=large, state=disabled",
-      "message": "literal min/max sizing (minHeight 44) has no dump v1 projection \u2014 dropped (bound min-width variables DO ride `bound`)"
-    },
-    {
-      "code": "min-max-size-unsupported",
-      "nodePath": "Button-Brand Primary:size=medium, state=disabled",
-      "message": "literal min/max sizing (minHeight 44) has no dump v1 projection \u2014 dropped (bound min-width variables DO ride `bound`)"
-    },
-    {
-      "code": "min-max-size-unsupported",
-      "nodePath": "Button-Brand Primary:size=small, state=disabled",
-      "message": "literal min/max sizing (minHeight 44) has no dump v1 projection \u2014 dropped (bound min-width variables DO ride `bound`)"
-    }
-  ],
+  "_degradations": [],
   "Button-Brand Primary": {
     "setName": "Button-Brand Primary",
     "type": "COMPONENT_SET",
@@ -130,7 +54,7 @@
             },
             "hidden": true,
             "propRefs": {
-              "visible": "\u21aa\ufe0ficon-left"
+              "visible": "↪️icon-left"
             },
             "instanceOf": "Icon",
             "componentProperties": {
@@ -151,7 +75,7 @@
               "var": "text/inverse-primary"
             },
             "propRefs": {
-              "characters": "\u270f\ufe0ftext"
+              "characters": "✏️text"
             }
           },
           {
@@ -163,14 +87,15 @@
             },
             "hidden": true,
             "propRefs": {
-              "visible": "\u21aa\ufe0ficon-right"
+              "visible": "↪️icon-right"
             },
             "instanceOf": "Icon",
             "componentProperties": {
               "size": "large"
             }
           }
-        ]
+        ],
+        "minHeight": 44
       },
       {
         "name": "size=medium, state=default",
@@ -215,7 +140,7 @@
             },
             "hidden": true,
             "propRefs": {
-              "visible": "\u21aa\ufe0ficon-left"
+              "visible": "↪️icon-left"
             },
             "instanceOf": "Icon",
             "componentProperties": {
@@ -236,7 +161,7 @@
               "var": "text/inverse-primary"
             },
             "propRefs": {
-              "characters": "\u270f\ufe0ftext"
+              "characters": "✏️text"
             }
           },
           {
@@ -248,14 +173,15 @@
             },
             "hidden": true,
             "propRefs": {
-              "visible": "\u21aa\ufe0ficon-right"
+              "visible": "↪️icon-right"
             },
             "instanceOf": "Icon",
             "componentProperties": {
               "size": "large"
             }
           }
-        ]
+        ],
+        "minHeight": 44
       },
       {
         "name": "size=small, state=default",
@@ -300,7 +226,7 @@
             },
             "hidden": true,
             "propRefs": {
-              "visible": "\u21aa\ufe0ficon-left"
+              "visible": "↪️icon-left"
             },
             "instanceOf": "Icon",
             "componentProperties": {
@@ -321,7 +247,7 @@
               "var": "text/inverse-primary"
             },
             "propRefs": {
-              "characters": "\u270f\ufe0ftext"
+              "characters": "✏️text"
             }
           },
           {
@@ -333,14 +259,15 @@
             },
             "hidden": true,
             "propRefs": {
-              "visible": "\u21aa\ufe0ficon-right"
+              "visible": "↪️icon-right"
             },
             "instanceOf": "Icon",
             "componentProperties": {
               "size": "small"
             }
           }
-        ]
+        ],
+        "minHeight": 44
       },
       {
         "name": "size=large, state=hover",
@@ -385,7 +312,7 @@
             },
             "hidden": true,
             "propRefs": {
-              "visible": "\u21aa\ufe0ficon-left"
+              "visible": "↪️icon-left"
             },
             "instanceOf": "Icon",
             "componentProperties": {
@@ -406,7 +333,7 @@
               "var": "text/inverse-primary"
             },
             "propRefs": {
-              "characters": "\u270f\ufe0ftext"
+              "characters": "✏️text"
             }
           },
           {
@@ -418,14 +345,15 @@
             },
             "hidden": true,
             "propRefs": {
-              "visible": "\u21aa\ufe0ficon-right"
+              "visible": "↪️icon-right"
             },
             "instanceOf": "Icon",
             "componentProperties": {
               "size": "large"
             }
           }
-        ]
+        ],
+        "minHeight": 44
       },
       {
         "name": "size=medium, state=hover",
@@ -470,7 +398,7 @@
             },
             "hidden": true,
             "propRefs": {
-              "visible": "\u21aa\ufe0ficon-left"
+              "visible": "↪️icon-left"
             },
             "instanceOf": "Icon",
             "componentProperties": {
@@ -491,7 +419,7 @@
               "var": "text/inverse-primary"
             },
             "propRefs": {
-              "characters": "\u270f\ufe0ftext"
+              "characters": "✏️text"
             }
           },
           {
@@ -503,14 +431,15 @@
             },
             "hidden": true,
             "propRefs": {
-              "visible": "\u21aa\ufe0ficon-right"
+              "visible": "↪️icon-right"
             },
             "instanceOf": "Icon",
             "componentProperties": {
               "size": "large"
             }
           }
-        ]
+        ],
+        "minHeight": 44
       },
       {
         "name": "size=small, state=hover",
@@ -555,7 +484,7 @@
             },
             "hidden": true,
             "propRefs": {
-              "visible": "\u21aa\ufe0ficon-left"
+              "visible": "↪️icon-left"
             },
             "instanceOf": "Icon",
             "componentProperties": {
@@ -576,7 +505,7 @@
               "var": "text/inverse-primary"
             },
             "propRefs": {
-              "characters": "\u270f\ufe0ftext"
+              "characters": "✏️text"
             }
           },
           {
@@ -588,14 +517,15 @@
             },
             "hidden": true,
             "propRefs": {
-              "visible": "\u21aa\ufe0ficon-right"
+              "visible": "↪️icon-right"
             },
             "instanceOf": "Icon",
             "componentProperties": {
               "size": "small"
             }
           }
-        ]
+        ],
+        "minHeight": 44
       },
       {
         "name": "size=large, state=focus",
@@ -640,7 +570,7 @@
             },
             "hidden": true,
             "propRefs": {
-              "visible": "\u21aa\ufe0ficon-left"
+              "visible": "↪️icon-left"
             },
             "instanceOf": "Icon",
             "componentProperties": {
@@ -661,7 +591,7 @@
               "var": "text/inverse-primary"
             },
             "propRefs": {
-              "characters": "\u270f\ufe0ftext"
+              "characters": "✏️text"
             }
           },
           {
@@ -673,7 +603,7 @@
             },
             "hidden": true,
             "propRefs": {
-              "visible": "\u21aa\ufe0ficon-right"
+              "visible": "↪️icon-right"
             },
             "instanceOf": "Icon",
             "componentProperties": {
@@ -695,7 +625,8 @@
             },
             "strokeWeight": 2
           }
-        ]
+        ],
+        "minHeight": 44
       },
       {
         "name": "size=medium, state=focus",
@@ -740,7 +671,7 @@
             },
             "hidden": true,
             "propRefs": {
-              "visible": "\u21aa\ufe0ficon-left"
+              "visible": "↪️icon-left"
             },
             "instanceOf": "Icon",
             "componentProperties": {
@@ -761,7 +692,7 @@
               "var": "text/inverse-primary"
             },
             "propRefs": {
-              "characters": "\u270f\ufe0ftext"
+              "characters": "✏️text"
             }
           },
           {
@@ -773,7 +704,7 @@
             },
             "hidden": true,
             "propRefs": {
-              "visible": "\u21aa\ufe0ficon-right"
+              "visible": "↪️icon-right"
             },
             "instanceOf": "Icon",
             "componentProperties": {
@@ -795,7 +726,8 @@
             },
             "strokeWeight": 2
           }
-        ]
+        ],
+        "minHeight": 44
       },
       {
         "name": "size=small, state=focus",
@@ -840,7 +772,7 @@
             },
             "hidden": true,
             "propRefs": {
-              "visible": "\u21aa\ufe0ficon-left"
+              "visible": "↪️icon-left"
             },
             "instanceOf": "Icon",
             "componentProperties": {
@@ -861,7 +793,7 @@
               "var": "text/inverse-primary"
             },
             "propRefs": {
-              "characters": "\u270f\ufe0ftext"
+              "characters": "✏️text"
             }
           },
           {
@@ -873,7 +805,7 @@
             },
             "hidden": true,
             "propRefs": {
-              "visible": "\u21aa\ufe0ficon-right"
+              "visible": "↪️icon-right"
             },
             "instanceOf": "Icon",
             "componentProperties": {
@@ -895,7 +827,8 @@
             },
             "strokeWeight": 2
           }
-        ]
+        ],
+        "minHeight": 44
       },
       {
         "name": "size=large, state=pressed",
@@ -940,7 +873,7 @@
             },
             "hidden": true,
             "propRefs": {
-              "visible": "\u21aa\ufe0ficon-left"
+              "visible": "↪️icon-left"
             },
             "instanceOf": "Icon",
             "componentProperties": {
@@ -961,7 +894,7 @@
               "var": "text/inverse-primary"
             },
             "propRefs": {
-              "characters": "\u270f\ufe0ftext"
+              "characters": "✏️text"
             }
           },
           {
@@ -973,14 +906,15 @@
             },
             "hidden": true,
             "propRefs": {
-              "visible": "\u21aa\ufe0ficon-right"
+              "visible": "↪️icon-right"
             },
             "instanceOf": "Icon",
             "componentProperties": {
               "size": "large"
             }
           }
-        ]
+        ],
+        "minHeight": 44
       },
       {
         "name": "size=medium, state=pressed",
@@ -1025,7 +959,7 @@
             },
             "hidden": true,
             "propRefs": {
-              "visible": "\u21aa\ufe0ficon-left"
+              "visible": "↪️icon-left"
             },
             "instanceOf": "Icon",
             "componentProperties": {
@@ -1046,7 +980,7 @@
               "var": "text/inverse-primary"
             },
             "propRefs": {
-              "characters": "\u270f\ufe0ftext"
+              "characters": "✏️text"
             }
           },
           {
@@ -1058,14 +992,15 @@
             },
             "hidden": true,
             "propRefs": {
-              "visible": "\u21aa\ufe0ficon-right"
+              "visible": "↪️icon-right"
             },
             "instanceOf": "Icon",
             "componentProperties": {
               "size": "large"
             }
           }
-        ]
+        ],
+        "minHeight": 44
       },
       {
         "name": "size=small, state=pressed",
@@ -1110,7 +1045,7 @@
             },
             "hidden": true,
             "propRefs": {
-              "visible": "\u21aa\ufe0ficon-left"
+              "visible": "↪️icon-left"
             },
             "instanceOf": "Icon",
             "componentProperties": {
@@ -1131,7 +1066,7 @@
               "var": "text/inverse-primary"
             },
             "propRefs": {
-              "characters": "\u270f\ufe0ftext"
+              "characters": "✏️text"
             }
           },
           {
@@ -1143,14 +1078,15 @@
             },
             "hidden": true,
             "propRefs": {
-              "visible": "\u21aa\ufe0ficon-right"
+              "visible": "↪️icon-right"
             },
             "instanceOf": "Icon",
             "componentProperties": {
               "size": "small"
             }
           }
-        ]
+        ],
+        "minHeight": 44
       },
       {
         "name": "size=large, state=disabled",
@@ -1195,7 +1131,7 @@
             },
             "hidden": true,
             "propRefs": {
-              "visible": "\u21aa\ufe0ficon-left"
+              "visible": "↪️icon-left"
             },
             "instanceOf": "Icon",
             "componentProperties": {
@@ -1216,7 +1152,7 @@
               "var": "text/disabled"
             },
             "propRefs": {
-              "characters": "\u270f\ufe0ftext"
+              "characters": "✏️text"
             }
           },
           {
@@ -1228,7 +1164,7 @@
             },
             "hidden": true,
             "propRefs": {
-              "visible": "\u21aa\ufe0ficon-right"
+              "visible": "↪️icon-right"
             },
             "instanceOf": "Icon",
             "componentProperties": {
@@ -1249,7 +1185,8 @@
               "hex": "000000"
             }
           }
-        ]
+        ],
+        "minHeight": 44
       },
       {
         "name": "size=medium, state=disabled",
@@ -1294,7 +1231,7 @@
             },
             "hidden": true,
             "propRefs": {
-              "visible": "\u21aa\ufe0ficon-left"
+              "visible": "↪️icon-left"
             },
             "instanceOf": "Icon",
             "componentProperties": {
@@ -1315,7 +1252,7 @@
               "var": "text/disabled"
             },
             "propRefs": {
-              "characters": "\u270f\ufe0ftext"
+              "characters": "✏️text"
             }
           },
           {
@@ -1327,7 +1264,7 @@
             },
             "hidden": true,
             "propRefs": {
-              "visible": "\u21aa\ufe0ficon-right"
+              "visible": "↪️icon-right"
             },
             "instanceOf": "Icon",
             "componentProperties": {
@@ -1348,7 +1285,8 @@
               "hex": "000000"
             }
           }
-        ]
+        ],
+        "minHeight": 44
       },
       {
         "name": "size=small, state=disabled",
@@ -1393,7 +1331,7 @@
             },
             "hidden": true,
             "propRefs": {
-              "visible": "\u21aa\ufe0ficon-left"
+              "visible": "↪️icon-left"
             },
             "instanceOf": "Icon",
             "componentProperties": {
@@ -1414,7 +1352,7 @@
               "var": "text/disabled"
             },
             "propRefs": {
-              "characters": "\u270f\ufe0ftext"
+              "characters": "✏️text"
             }
           },
           {
@@ -1426,7 +1364,7 @@
             },
             "hidden": true,
             "propRefs": {
-              "visible": "\u21aa\ufe0ficon-right"
+              "visible": "↪️icon-right"
             },
             "instanceOf": "Icon",
             "componentProperties": {
@@ -1447,8 +1385,83 @@
               "hex": "000000"
             }
           }
-        ]
+        ],
+        "minHeight": 44
       }
     ]
+  },
+  "_variables": {
+    "spacing/100": {
+      "type": "FLOAT",
+      "value": 8
+    },
+    "spacing/150": {
+      "type": "FLOAT",
+      "value": 12
+    },
+    "spacing/200": {
+      "type": "FLOAT",
+      "value": 16
+    },
+    "corner-radius/100": {
+      "type": "FLOAT",
+      "value": 8
+    },
+    "corner-radius/150": {
+      "type": "FLOAT",
+      "value": 12
+    },
+    "component-size/small": {
+      "type": "FLOAT",
+      "value": 24
+    },
+    "component-size/medium": {
+      "type": "FLOAT",
+      "value": 32
+    },
+    "component-size/large": {
+      "type": "FLOAT",
+      "value": 40
+    },
+    "component-size/xlarge": {
+      "type": "FLOAT",
+      "value": 48
+    },
+    "icon-size/small": {
+      "type": "FLOAT",
+      "value": 16
+    },
+    "icon-size/large": {
+      "type": "FLOAT",
+      "value": 24
+    },
+    "bg/brand/default": {
+      "type": "COLOR",
+      "value": "#0e61ba"
+    },
+    "bg/brand/hover": {
+      "type": "COLOR",
+      "value": "#003e81"
+    },
+    "bg/brand/pressed": {
+      "type": "COLOR",
+      "value": "#002854"
+    },
+    "bg/disabled": {
+      "type": "COLOR",
+      "value": "#dfe3eb"
+    },
+    "text/inverse-primary": {
+      "type": "COLOR",
+      "value": "#fcfeff"
+    },
+    "text/disabled": {
+      "type": "COLOR",
+      "value": "#556275"
+    },
+    "border/focus": {
+      "type": "COLOR",
+      "value": "#0e61ba"
+    }
   }
 }
