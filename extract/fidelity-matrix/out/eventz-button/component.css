@@ -5,101 +5,80 @@
   align-items: center;
   justify-content: center;
   border-style: solid;
+  cursor: pointer;
   gap: var(--imported-button-root-gap);
   padding-inline: var(--imported-button-root-padding-inline);
   padding-block: var(--imported-button-root-padding-block);
   border-radius: var(--imported-button-root-border-radius);
 }
 
+.button:focus-visible {
+  outline-style: solid;
+  outline-offset: 2px;
+}
+
 .button--variant-primary {
+  background-color: var(--imported-button-root-background-color-primary);
   border-width: var(--imported-button-root-border-width-primary);
 }
 
 .button--variant-knockout {
+  background-color: var(--imported-button-root-background-color-knockout);
   border-width: var(--imported-button-root-border-width-knockout);
 }
 
 .button--variant-secondary {
+  background-color: var(--imported-button-root-background-color-secondary);
   border-width: var(--imported-button-root-border-width-secondary);
 }
 
 .button--variant-bare {
+  background-color: var(--imported-button-root-background-color-bare);
   border-width: var(--imported-button-root-border-width-bare);
 }
 
-.button--variant-primary.button--state-default {
-  background-color: var(--imported-button-root-background-color-primary-default);
+.button--variant-primary:hover:not(:disabled) {
+  background-color: var(--imported-button-state-hover-background-color-primary);
 }
 
-.button--variant-primary.button--state-hover {
-  background-color: var(--imported-button-root-background-color-primary-hover);
+.button--variant-knockout:hover:not(:disabled) {
+  background-color: var(--imported-button-state-hover-background-color-knockout);
 }
 
-.button--variant-primary.button--state-active {
-  background-color: var(--imported-button-root-background-color-primary-active);
+.button--variant-secondary:hover:not(:disabled) {
+  background-color: var(--imported-button-state-hover-background-color-secondary);
 }
 
-.button--variant-primary.button--state-focus {
-  background-color: var(--imported-button-root-background-color-primary-focus);
+.button--variant-bare:hover:not(:disabled) {
+  background-color: var(--imported-button-state-hover-background-color-bare);
 }
 
-.button--variant-knockout.button--state-default {
-  background-color: var(--imported-button-root-background-color-knockout-default);
+.button--variant-primary:active:not(:disabled) {
+  background-color: var(--imported-button-state-active-background-color-primary);
 }
 
-.button--variant-knockout.button--state-hover {
-  background-color: var(--imported-button-root-background-color-knockout-hover);
+.button--variant-knockout:active:not(:disabled) {
+  background-color: var(--imported-button-state-active-background-color-knockout);
 }
 
-.button--variant-knockout.button--state-active {
-  background-color: var(--imported-button-root-background-color-knockout-active);
+.button--variant-secondary:active:not(:disabled) {
+  background-color: var(--imported-button-state-active-background-color-secondary);
 }
 
-.button--variant-knockout.button--state-focus {
-  background-color: var(--imported-button-root-background-color-knockout-focus);
+.button--variant-bare:active:not(:disabled) {
+  background-color: var(--imported-button-state-active-background-color-bare);
 }
 
-.button--variant-secondary.button--state-default {
-  background-color: var(--imported-button-root-background-color-secondary-default);
+.button:focus-visible {
+  outline-color: var(--imported-button-state-focus-visible-outline-color);
 }
 
-.button--variant-secondary.button--state-hover {
-  background-color: var(--imported-button-root-background-color-secondary-hover);
-}
-
-.button--variant-secondary.button--state-active {
-  background-color: var(--imported-button-root-background-color-secondary-active);
-}
-
-.button--variant-secondary.button--state-focus {
-  background-color: var(--imported-button-root-background-color-secondary-focus);
-}
-
-.button--variant-bare.button--state-default {
-  background-color: var(--imported-button-root-background-color-bare-default);
-}
-
-.button--variant-bare.button--state-hover {
-  background-color: var(--imported-button-root-background-color-bare-hover);
-}
-
-.button--variant-bare.button--state-active {
-  background-color: var(--imported-button-root-background-color-bare-active);
-}
-
-.button--variant-bare.button--state-focus {
-  background-color: var(--imported-button-root-background-color-bare-focus);
+.button:focus-visible {
+  outline-width: var(--imported-button-state-focus-visible-outline-width);
 }
 
 .button[data-is-disabled] {
   opacity: 0.4;
-}
-
-.button__focusRing {
-  border-color: var(--imported-button-focus-ring-border-color);
-  border-radius: var(--imported-button-focus-ring-border-radius);
-  border-width: var(--imported-button-focus-ring-border-width);
-  border-style: solid;
 }
 
 .button__startIcon {

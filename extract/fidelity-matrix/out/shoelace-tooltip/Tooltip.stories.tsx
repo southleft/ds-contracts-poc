@@ -11,7 +11,7 @@ const meta = {
   component: Tooltip,
   tags: ['autodocs'],
   parameters: {
-    docs: { description: { component: "PROPOSED contract extracted from the design canvas (extract/figma dump v1) — API, anatomy, and token bindings inverted from the drawn structure. Semantics, a11y, events, and slot accepts are not canvas-recoverable; review before adoption." } },
+    docs: { description: { component: "PROPOSED contract extracted from the design canvas (extract/figma dump v1) — API, anatomy, and token bindings inverted from the drawn structure. Semantics beyond the name/axis inference table, a11y, events, and slot accepts are not canvas-recoverable; review before adoption." } },
   },
   argTypes: {
     placement: { control: 'select', options: ['left', 'topleft', 'bottomleft', 'bottom', 'top', 'topright', 'bottomright', 'right'] },

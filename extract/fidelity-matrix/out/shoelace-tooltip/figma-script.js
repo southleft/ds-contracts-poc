@@ -2,7 +2,7 @@
 // Source of truth: contracts/tooltip.contract.json (ds.tooltip v0.1.0)
 let SET_NAME = "Tooltip";
 const CONTRACT_ID = "ds.tooltip";
-const DESCRIPTION = "PROPOSED contract extracted from the design canvas (extract/figma dump v1) — API, anatomy, and token bindings inverted from the drawn structure. Semantics, a11y, events, and slot accepts are not canvas-recoverable; review before adoption. — governed by contract ds.tooltip v0.1.0";
+const DESCRIPTION = "PROPOSED contract extracted from the design canvas (extract/figma dump v1) — API, anatomy, and token bindings inverted from the drawn structure. Semantics beyond the name/axis inference table, a11y, events, and slot accepts are not canvas-recoverable; review before adoption. — governed by contract ds.tooltip v0.1.0";
 const IS_SET = true;
 const BOOL_PROPS = [];
 const TEXT_PROPS = [];

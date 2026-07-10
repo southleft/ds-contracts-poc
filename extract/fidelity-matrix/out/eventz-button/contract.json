@@ -4,9 +4,9 @@
   "name": "Button",
   "version": "0.1.0",
   "status": "draft",
-  "description": "PROPOSED contract extracted from the design canvas (extract/figma dump v1) — API, anatomy, and token bindings inverted from the drawn structure. Semantics, a11y, events, and slot accepts are not canvas-recoverable; review before adoption.",
+  "description": "PROPOSED contract extracted from the design canvas (extract/figma dump v1) — API, anatomy, and token bindings inverted from the drawn structure. Semantics beyond the name/axis inference table, a11y, events, and slot accepts are not canvas-recoverable; review before adoption.",
   "semantics": {
-    "element": "div"
+    "element": "button"
   },
   "props": [
     {
@@ -33,33 +33,6 @@
         },
         "code": {
           "prop": "variant"
-        }
-      }
-    },
-    {
-      "name": "state",
-      "type": {
-        "enum": [
-          "default",
-          "hover",
-          "active",
-          "focus"
-        ]
-      },
-      "default": "default",
-      "bindings": {
-        "figma": {
-          "kind": "VARIANT",
-          "property": "state",
-          "values": {
-            "default": "default",
-            "hover": "hover",
-            "active": "active",
-            "focus": "focus"
-          }
-        },
-        "code": {
-          "prop": "state"
         }
       }
     },
@@ -124,7 +97,12 @@
       }
     }
   ],
-  "states": [],
+  "states": [
+    "hover",
+    "active",
+    "focus-visible"
+  ],
+  "figmaStatePreviews": true,
   "anatomy": {
     "root": {
       "stylesWhen": [
@@ -136,25 +114,26 @@
         }
       ],
       "tokens": {
-        "background-color": "{imported.button.root.background-color.{variant}.{state}}",
+        "background-color": "{imported.button.root.background-color.{variant}}",
         "gap": "{imported.button.root.gap}",
         "padding-inline": "{imported.button.root.padding-inline}",
         "padding-block": "{imported.button.root.padding-block}",
         "border-radius": "{imported.button.root.border-radius}",
         "border-width": "{imported.button.root.border-width.{variant}}"
       },
-      "parts": {
-        "focusRing": {
-          "tokens": {
-            "border-color": "{imported.button.focus-ring.border-color}",
-            "border-radius": "{imported.button.focus-ring.border-radius}",
-            "border-width": "{imported.button.focus-ring.border-width}"
-          },
-          "visibleWhen": {
-            "prop": "state",
-            "equals": "focus"
-          }
+      "states": {
+        "hover": {
+          "background-color": "{imported.button.state-hover.background-color.{variant}}"
         },
+        "active": {
+          "background-color": "{imported.button.state-active.background-color.{variant}}"
+        },
+        "focus-visible": {
+          "outline-color": "{imported.button.state-focus-visible.outline-color}",
+          "outline-width": "{imported.button.state-focus-visible.outline-width}"
+        }
+      },
+      "parts": {
         "startIcon": {
           "slot": {
             "name": "startIcon",

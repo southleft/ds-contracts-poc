@@ -4,8 +4,8 @@
   "factCells": 84,
   "tally": {
     "BOUND": 0,
-    "MINTED": 84,
-    "MISSING": 0,
+    "MINTED": 78,
+    "MISSING": 6,
     "mismatched": 0
   },
   "rows": [
@@ -13,53 +13,20 @@
       "part": "Button",
       "fact": "color",
       "verdict": "MINTED",
-      "token": "{imported.button-brand-primary.button.color.default}",
+      "token": "{imported.button-brand-primary.button.color}",
       "truth": "#fcfeff",
       "resolved": "#fcfeff",
       "valueOk": true,
       "variants": [
         "size=large, state=default",
         "size=medium, state=default",
-        "size=small, state=default"
-      ]
-    },
-    {
-      "part": "Button",
-      "fact": "color",
-      "verdict": "MINTED",
-      "token": "{imported.button-brand-primary.button.color.hover}",
-      "truth": "#fcfeff",
-      "resolved": "#fcfeff",
-      "valueOk": true,
-      "variants": [
+        "size=small, state=default",
         "size=large, state=hover",
         "size=medium, state=hover",
-        "size=small, state=hover"
-      ]
-    },
-    {
-      "part": "Button",
-      "fact": "color",
-      "verdict": "MINTED",
-      "token": "{imported.button-brand-primary.button.color.focus}",
-      "truth": "#fcfeff",
-      "resolved": "#fcfeff",
-      "valueOk": true,
-      "variants": [
+        "size=small, state=hover",
         "size=large, state=focus",
         "size=medium, state=focus",
-        "size=small, state=focus"
-      ]
-    },
-    {
-      "part": "Button",
-      "fact": "color",
-      "verdict": "MINTED",
-      "token": "{imported.button-brand-primary.button.color.pressed}",
-      "truth": "#fcfeff",
-      "resolved": "#fcfeff",
-      "valueOk": true,
-      "variants": [
+        "size=small, state=focus",
         "size=large, state=pressed",
         "size=medium, state=pressed",
         "size=small, state=pressed"
@@ -68,11 +35,8 @@
     {
       "part": "Button",
       "fact": "color",
-      "verdict": "MINTED",
-      "token": "{imported.button-brand-primary.button.color.disabled}",
+      "verdict": "MISSING",
       "truth": "#556275",
-      "resolved": "#556275",
-      "valueOk": true,
       "variants": [
         "size=large, state=disabled",
         "size=medium, state=disabled",
@@ -83,7 +47,7 @@
       "part": "Focus ring",
       "fact": "border-color",
       "verdict": "MINTED",
-      "token": "{imported.button-brand-primary.focus-ring.border-color}",
+      "token": "{imported.button-brand-primary.state-focus-visible.outline-color}",
       "truth": "#0e61ba",
       "resolved": "#0e61ba",
       "valueOk": true,
@@ -96,11 +60,8 @@
     {
       "part": "Focus ring",
       "fact": "border-radius",
-      "verdict": "MINTED",
-      "token": "{imported.button-brand-primary.focus-ring.border-radius}",
+      "verdict": "MISSING",
       "truth": "12px",
-      "resolved": "12px",
-      "valueOk": true,
       "variants": [
         "size=large, state=focus",
         "size=medium, state=focus",
@@ -111,7 +72,7 @@
       "part": "Focus ring",
       "fact": "border-width",
       "verdict": "MINTED",
-      "token": "{imported.button-brand-primary.focus-ring.border-width}",
+      "token": "{imported.button-brand-primary.state-focus-visible.outline-width}",
       "truth": "2px",
       "resolved": "2px",
       "valueOk": true,
@@ -125,21 +86,24 @@
       "part": "root",
       "fact": "background-color",
       "verdict": "MINTED",
-      "token": "{imported.button-brand-primary.root.background-color.default}",
+      "token": "{imported.button-brand-primary.root.background-color}",
       "truth": "#0e61ba",
       "resolved": "#0e61ba",
       "valueOk": true,
       "variants": [
         "size=large, state=default",
         "size=medium, state=default",
-        "size=small, state=default"
+        "size=small, state=default",
+        "size=large, state=focus",
+        "size=medium, state=focus",
+        "size=small, state=focus"
       ]
     },
     {
       "part": "root",
       "fact": "background-color",
       "verdict": "MINTED",
-      "token": "{imported.button-brand-primary.root.background-color.hover}",
+      "token": "{imported.button-brand-primary.state-hover.background-color}",
       "truth": "#003e81",
       "resolved": "#003e81",
       "valueOk": true,
@@ -153,21 +117,7 @@
       "part": "root",
       "fact": "background-color",
       "verdict": "MINTED",
-      "token": "{imported.button-brand-primary.root.background-color.focus}",
-      "truth": "#0e61ba",
-      "resolved": "#0e61ba",
-      "valueOk": true,
-      "variants": [
-        "size=large, state=focus",
-        "size=medium, state=focus",
-        "size=small, state=focus"
-      ]
-    },
-    {
-      "part": "root",
-      "fact": "background-color",
-      "verdict": "MINTED",
-      "token": "{imported.button-brand-primary.root.background-color.pressed}",
+      "token": "{imported.button-brand-primary.state-active.background-color}",
       "truth": "#002854",
       "resolved": "#002854",
       "valueOk": true,
@@ -181,7 +131,7 @@
       "part": "root",
       "fact": "background-color",
       "verdict": "MINTED",
-      "token": "{imported.button-brand-primary.root.background-color.disabled}",
+      "token": "{imported.button-brand-primary.state-disabled.background-color}",
       "truth": "#dfe3eb",
       "resolved": "#dfe3eb",
       "valueOk": true,

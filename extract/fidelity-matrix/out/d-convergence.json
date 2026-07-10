@@ -1,8 +1,8 @@
 {
   "subject": "D. CBDS Button — design-proposed vs code-proposed",
   "axisTally": {
-    "AGREE": 0,
-    "PARTIAL": 4,
+    "AGREE": 1,
+    "PARTIAL": 3,
     "DIVERGE": 0,
     "DESIGN-ONLY": 1,
     "CODE-ONLY": 2
@@ -17,10 +17,10 @@
     },
     {
       "axis": "interaction states",
-      "design": "state variant axis [\"default\",\"hover\",\"focus\",\"pressed\",\"disabled\"]",
+      "design": "contract states [\"hover\",\"active\",\"focus-visible\",\"disabled\"] + a native `disabled` boolean — PROMOTED from the drawn state axis (default|hover|focus|pressed|disabled); figmaStatePreviews round-trips it",
       "code": "contract states [\"hover\",\"active\",\"focus-visible\",\"disabled\"] (CSS pseudo-classes)",
-      "verdict": "PARTIAL",
-      "note": "same facts on two different mechanisms: design draws states as variants, code styles real pseudo-states; hover+active(pressed)+focus+disabled ALL overlap now (:active joined the contract state vocabulary), and \"default\" is implicit in code"
+      "verdict": "AGREE",
+      "note": "ONE mechanism now: both sides declare the SAME contract states — the drawn axis never ships as a code prop (state-axis promotion)"
     },
     {
       "axis": "label content",
@@ -52,22 +52,22 @@
     },
     {
       "axis": "disabled tooltip",
-      "design": "`Tooltip` part visibleWhen state=disabled (\"This action is currently unavailable\")",
+      "design": "hidden `Tooltip` text drawn only in the disabled variants — dropped with a NAMED receipt (design-time helper; state promotion keeps per-state anatomy out of the contract)",
       "code": "(absent)",
       "verdict": "DESIGN-ONLY",
-      "note": "the kit draws helper UI inside the component set that the shipped component never had"
+      "note": "the kit draws helper UI inside the component set that the shipped component never had; the proposal names it instead of modeling it"
     }
   ],
   "factTally": {
     "AGREE": 15,
-    "DIVERGE": 2,
+    "DIVERGE": 0,
     "DESIGN-ONLY": 0,
-    "CODE-ONLY": 2
+    "CODE-ONLY": 4
   },
   "factRows": [
     {
       "fact": "background-color (default)",
-      "designRef": "{imported.button-brand-primary.root.background-color.default}",
+      "designRef": "{imported.button-brand-primary.root.background-color}",
       "codeRef": "{imported.button.root.background-color.primary}",
       "design": "#0e61ba",
       "code": "#0e61ba",
@@ -75,24 +75,25 @@
     },
     {
       "fact": "background-color (hover)",
-      "designRef": "{imported.button-brand-primary.root.background-color.hover}",
+      "designRef": "{imported.button-brand-primary.state-hover.background-color}",
       "codeRef": "{imported.button.root.hover.background-color.primary}",
       "design": "#003e81",
       "code": "#003e81",
-      "verdict": "AGREE"
+      "verdict": "AGREE",
+      "note": "SAME mechanism now: the drawn state axis PROMOTED into contract states — design states.hover ≡ code `:hover:not(:disabled)`"
     },
     {
       "fact": "background-color (pressed/active)",
-      "designRef": "{imported.button-brand-primary.root.background-color.pressed}",
+      "designRef": "{imported.button-brand-primary.state-active.background-color}",
       "codeRef": "{imported.button.root.active.background-color.primary}",
       "design": "#002854",
       "code": "#002854",
       "verdict": "AGREE",
-      "note": "both sides now speak: design State=Pressed variant fill ≡ code `&:active:not(:disabled)` — the code extractor extracts :active since the STYLE-FIDELITY fixes (scorecard punch 4)"
+      "note": "design State=Pressed variant promoted to states.active ≡ code `&:active:not(:disabled)` (state-axis promotion + scorecard punch 4)"
     },
     {
       "fact": "background-color (disabled)",
-      "designRef": "{imported.button-brand-primary.root.background-color.disabled}",
+      "designRef": "{imported.button-brand-primary.state-disabled.background-color}",
       "codeRef": "{imported.button.root.disabled.background-color.primary}",
       "design": "#dfe3eb",
       "code": "#dfe3eb",
@@ -100,7 +101,7 @@
     },
     {
       "fact": "label color (default)",
-      "designRef": "{imported.button-brand-primary.button.color.default}",
+      "designRef": "{imported.button-brand-primary.button.color}",
       "codeRef": "{imported.button.root.color.primary}",
       "design": "#fcfeff",
       "code": "#fcfeff",
@@ -108,11 +109,12 @@
     },
     {
       "fact": "label color (disabled)",
-      "designRef": "{imported.button-brand-primary.button.color.disabled}",
+      "designRef": null,
       "codeRef": "{imported.button.root.disabled.color}",
-      "design": "#556275",
+      "design": null,
       "code": "#738094",
-      "verdict": "DIVERGE"
+      "verdict": "CODE-ONLY",
+      "note": "design side NAMES the gap: part-level state overrides are outside the contract vocabulary (STYLE-FIDELITY B7 — proposal note on Button fill in state \"disabled\"); never a silently wrong value"
     },
     {
       "fact": "border-radius",
@@ -164,43 +166,43 @@
     },
     {
       "fact": "font-size (large)",
-      "designRef": "{font.title.size}",
+      "designRef": "{imported.button-brand-primary.button.font-size.large}",
       "codeRef": "{imported.button.root.font-size.large}",
       "design": "16px",
       "code": "16px",
       "verdict": "AGREE",
-      "note": "design side bound a REPO token (font.title.size) — reconcile hit, not a mint"
+      "note": "design side now mints font-size PER SIZE (typography-uniformity guard) — no more first-variant constant"
     },
     {
       "fact": "font-size (small)",
-      "designRef": "{font.title.size}",
+      "designRef": "{imported.button-brand-primary.button.font-size.small}",
       "codeRef": "{imported.button.root.font-size.small}",
-      "design": "16px",
+      "design": "14px",
       "code": "14px",
-      "verdict": "DIVERGE",
-      "note": "kit dump truth for small IS 14px — the DESIGN proposal flattened font-size across sizes; the code side is the faithful one here"
+      "verdict": "AGREE",
+      "note": "kit dump truth for small IS 14px and the design proposal now carries it exactly — the flattening bug (font.title adopted from the first variant) is fixed"
     },
     {
       "fact": "font-weight",
-      "designRef": "{font.title.weight}",
+      "designRef": null,
       "codeRef": "{imported.button.root.font-weight}",
-      "design": "600",
+      "design": null,
       "code": "600",
-      "verdict": "AGREE",
-      "note": "design side bound a REPO token"
+      "verdict": "CODE-ONLY",
+      "note": "design side NAMES the gap: weight \"Semi Bold\" has no token identity once per-size typography rules out a single style adoption (proposal note) — named, never a guessed constant"
     },
     {
       "fact": "focus ring color",
-      "designRef": "{imported.button-brand-primary.focus-ring.border-color}",
+      "designRef": "{imported.button-brand-primary.state-focus-visible.outline-color}",
       "codeRef": "{imported.button.root.focus-visible.outline-color}",
       "design": "#0e61ba",
       "code": "#0e61ba",
       "verdict": "AGREE",
-      "note": "design draws the ring as a border on a dedicated Focus ring part; code styles `&:focus-visible { outline: 2px solid … }` — the outline shorthand now expands (STYLE-FIDELITY fixes) and both sides carry the fact"
+      "note": "SAME mechanism now: the drawn Focus ring child inverted to focus-visible OUTLINE overrides (state promotion) ≡ code `&:focus-visible { outline: 2px solid … }`"
     },
     {
       "fact": "focus ring width",
-      "designRef": "{imported.button-brand-primary.focus-ring.border-width}",
+      "designRef": "{imported.button-brand-primary.state-focus-visible.outline-width}",
       "codeRef": "{imported.button.root.focus-visible.outline-width}",
       "design": "2px",
       "code": "2px",

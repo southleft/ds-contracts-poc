@@ -293,24 +293,19 @@
 </style>
 <style>/* Minted provisional tokens (imported.*) — literal fidelity. */
 :root {
-  --imported-button-brand-primary-root-background-color-default: #0e61ba;
-  --imported-button-brand-primary-root-background-color-hover: #003e81;
-  --imported-button-brand-primary-root-background-color-focus: #0e61ba;
-  --imported-button-brand-primary-root-background-color-pressed: #002854;
-  --imported-button-brand-primary-root-background-color-disabled: #dfe3eb;
+  --imported-button-brand-primary-root-background-color: #0e61ba;
   --imported-button-brand-primary-root-padding-inline-large: 16px;
   --imported-button-brand-primary-root-padding-inline-medium: 16px;
   --imported-button-brand-primary-root-padding-inline-small: 12px;
-  --imported-button-brand-primary-button-color-default: #fcfeff;
-  --imported-button-brand-primary-button-color-hover: #fcfeff;
-  --imported-button-brand-primary-button-color-focus: #fcfeff;
-  --imported-button-brand-primary-button-color-pressed: #fcfeff;
-  --imported-button-brand-primary-button-color-disabled: #556275;
-  --imported-button-brand-primary-tooltip-color: #000000;
-  --imported-button-brand-primary-tooltip-font-size: 12px;
-  --imported-button-brand-primary-focus-ring-border-color: #0e61ba;
-  --imported-button-brand-primary-focus-ring-border-radius: 12px;
-  --imported-button-brand-primary-focus-ring-border-width: 2px;
+  --imported-button-brand-primary-button-color: #fcfeff;
+  --imported-button-brand-primary-button-font-size-large: 16px;
+  --imported-button-brand-primary-button-font-size-medium: 16px;
+  --imported-button-brand-primary-button-font-size-small: 14px;
+  --imported-button-brand-primary-state-hover-background-color: #003e81;
+  --imported-button-brand-primary-state-focus-visible-outline-color: #0e61ba;
+  --imported-button-brand-primary-state-focus-visible-outline-width: 2px;
+  --imported-button-brand-primary-state-active-background-color: #002854;
+  --imported-button-brand-primary-state-disabled-background-color: #dfe3eb;
   --imported-shared-size-8: 8px;
 }</style>
 <style>body { margin: 0; padding: 20px; background: #f5f5f5; color: #1a1a1a; font-family: var(--font-family-sans, system-ui, sans-serif); }</style>
@@ -330,29 +325,20 @@
   align-items: center;
   justify-content: center;
   border: 0;
+  cursor: pointer;
+  background-color: var(--imported-button-brand-primary-root-background-color);
   gap: var(--imported-shared-size-8);
   padding-block: var(--imported-shared-size-8);
   border-radius: var(--imported-shared-size-8);
 }
 
-.button-brand-primary--state-default {
-  background-color: var(--imported-button-brand-primary-root-background-color-default);
+.button-brand-primary:focus-visible {
+  outline-style: solid;
+  outline-offset: 2px;
 }
 
-.button-brand-primary--state-hover {
-  background-color: var(--imported-button-brand-primary-root-background-color-hover);
-}
-
-.button-brand-primary--state-focus {
-  background-color: var(--imported-button-brand-primary-root-background-color-focus);
-}
-
-.button-brand-primary--state-pressed {
-  background-color: var(--imported-button-brand-primary-root-background-color-pressed);
-}
-
-.button-brand-primary--state-disabled {
-  background-color: var(--imported-button-brand-primary-root-background-color-disabled);
+.button-brand-primary:disabled {
+  cursor: not-allowed;
 }
 
 .button-brand-primary--size-large {
@@ -367,41 +353,40 @@
   padding-inline: var(--imported-button-brand-primary-root-padding-inline-small);
 }
 
+.button-brand-primary:hover:not(:disabled) {
+  background-color: var(--imported-button-brand-primary-state-hover-background-color);
+}
+
+.button-brand-primary:active:not(:disabled) {
+  background-color: var(--imported-button-brand-primary-state-active-background-color);
+}
+
+.button-brand-primary:focus-visible {
+  outline-color: var(--imported-button-brand-primary-state-focus-visible-outline-color);
+}
+
+.button-brand-primary:focus-visible {
+  outline-width: var(--imported-button-brand-primary-state-focus-visible-outline-width);
+}
+
+.button-brand-primary:disabled {
+  background-color: var(--imported-button-brand-primary-state-disabled-background-color);
+}
+
 .button-brand-primary__Button {
-  font-size: var(--font-title-size);
-  font-weight: var(--font-title-weight);
+  color: var(--imported-button-brand-primary-button-color);
 }
 
-.button-brand-primary--state-default .button-brand-primary__Button {
-  color: var(--imported-button-brand-primary-button-color-default);
+.button-brand-primary--size-large .button-brand-primary__Button {
+  font-size: var(--imported-button-brand-primary-button-font-size-large);
 }
 
-.button-brand-primary--state-hover .button-brand-primary__Button {
-  color: var(--imported-button-brand-primary-button-color-hover);
+.button-brand-primary--size-medium .button-brand-primary__Button {
+  font-size: var(--imported-button-brand-primary-button-font-size-medium);
 }
 
-.button-brand-primary--state-focus .button-brand-primary__Button {
-  color: var(--imported-button-brand-primary-button-color-focus);
-}
-
-.button-brand-primary--state-pressed .button-brand-primary__Button {
-  color: var(--imported-button-brand-primary-button-color-pressed);
-}
-
-.button-brand-primary--state-disabled .button-brand-primary__Button {
-  color: var(--imported-button-brand-primary-button-color-disabled);
-}
-
-.button-brand-primary__Tooltip {
-  color: var(--imported-button-brand-primary-tooltip-color);
-  font-size: var(--imported-button-brand-primary-tooltip-font-size);
-}
-
-.button-brand-primary__focusRing {
-  border-color: var(--imported-button-brand-primary-focus-ring-border-color);
-  border-radius: var(--imported-button-brand-primary-focus-ring-border-radius);
-  border-width: var(--imported-button-brand-primary-focus-ring-border-width);
-  border-style: solid;
+.button-brand-primary--size-small .button-brand-primary__Button {
+  font-size: var(--imported-button-brand-primary-button-font-size-small);
 }
 
 /* showcase chrome */
@@ -419,65 +404,45 @@
 <section class="showcase showcase--button-brand-primary">
   <div class="showcase__item">
     <p class="showcase__label">default</p>
-    <div class="button-brand-primary button-brand-primary--size-large button-brand-primary--state-default">
+    <button class="button-brand-primary button-brand-primary--size-large">
       <span class="button-brand-primary__Button">Button</span>
-    </div>
+    </button>
   </div>
   <div class="showcase__item">
     <p class="showcase__label">size=medium</p>
-    <div class="button-brand-primary button-brand-primary--size-medium button-brand-primary--state-default">
+    <button class="button-brand-primary button-brand-primary--size-medium">
       <span class="button-brand-primary__Button">Button</span>
-    </div>
+    </button>
   </div>
   <div class="showcase__item">
     <p class="showcase__label">size=small</p>
-    <div class="button-brand-primary button-brand-primary--size-small button-brand-primary--state-default">
+    <button class="button-brand-primary button-brand-primary--size-small">
       <span class="button-brand-primary__Button">Button</span>
-    </div>
-  </div>
-  <div class="showcase__item">
-    <p class="showcase__label">state=hover</p>
-    <div class="button-brand-primary button-brand-primary--size-large button-brand-primary--state-hover">
-      <span class="button-brand-primary__Button">Button</span>
-    </div>
-  </div>
-  <div class="showcase__item">
-    <p class="showcase__label">state=focus</p>
-    <div class="button-brand-primary button-brand-primary--size-large button-brand-primary--state-focus">
-      <span class="button-brand-primary__Button">Button</span>
-      <div class="button-brand-primary__focusRing"></div>
-    </div>
-  </div>
-  <div class="showcase__item">
-    <p class="showcase__label">state=pressed</p>
-    <div class="button-brand-primary button-brand-primary--size-large button-brand-primary--state-pressed">
-      <span class="button-brand-primary__Button">Button</span>
-    </div>
-  </div>
-  <div class="showcase__item">
-    <p class="showcase__label">state=disabled</p>
-    <div class="button-brand-primary button-brand-primary--size-large button-brand-primary--state-disabled">
-      <span class="button-brand-primary__Button">Button</span>
-      <span class="button-brand-primary__Tooltip">This action is currently unavailable</span>
-    </div>
+    </button>
   </div>
   <div class="showcase__item">
     <p class="showcase__label">iconLeft=true</p>
-    <div class="button-brand-primary button-brand-primary--size-large button-brand-primary--state-default" data-icon-left="true">
+    <button class="button-brand-primary button-brand-primary--size-large" data-icon-left="true">
       <span class="icon icon--size-large">
         Icon
       </span>
       <span class="button-brand-primary__Button">Button</span>
-    </div>
+    </button>
   </div>
   <div class="showcase__item">
     <p class="showcase__label">iconRight=true</p>
-    <div class="button-brand-primary button-brand-primary--size-large button-brand-primary--state-default" data-icon-right="true">
+    <button class="button-brand-primary button-brand-primary--size-large" data-icon-right="true">
       <span class="button-brand-primary__Button">Button</span>
       <span class="icon icon--size-large">
         Icon
       </span>
-    </div>
+    </button>
+  </div>
+  <div class="showcase__item">
+    <p class="showcase__label">disabled=true</p>
+    <button class="button-brand-primary button-brand-primary--size-large" disabled>
+      <span class="button-brand-primary__Button">Button</span>
+    </button>
   </div>
 </section>
 

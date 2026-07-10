@@ -2,25 +2,25 @@
 // Source of truth: contracts/button.contract.json (ds.button v0.1.0)
 let SET_NAME = "Button";
 const CONTRACT_ID = "ds.button";
-const DESCRIPTION = "PROPOSED contract extracted from the design canvas (extract/figma dump v1) — API, anatomy, and token bindings inverted from the drawn structure. Semantics, a11y, events, and slot accepts are not canvas-recoverable; review before adoption. — governed by contract ds.button v0.1.0";
+const DESCRIPTION = "PROPOSED contract extracted from the design canvas (extract/figma dump v1) — API, anatomy, and token bindings inverted from the drawn structure. Semantics beyond the name/axis inference table, a11y, events, and slot accepts are not canvas-recoverable; review before adoption. — governed by contract ds.button v0.1.0";
 const IS_SET = true;
 const BOOL_PROPS = [{"property":"isDisabled","default":false},{"property":"hasStartIcon","default":true},{"property":"hasEndIcon","default":true}];
 const TEXT_PROPS = [];
 const FONT_STYLES = ["Medium"];
 const VARIANTS = [
   {
-    "name": "variant=primary, state=default",
+    "name": "variant=primary",
     "row": 0,
     "col": 0,
     "spec": {
       "type": "root",
-      "name": "variant=primary, state=default",
+      "name": "variant=primary",
       "layout": {
         "mode": "HORIZONTAL",
         "primary": "CENTER",
         "counter": "CENTER"
       },
-      "fill": "imported/button/root/background-color/primary/default",
+      "fill": "imported/button/root/background-color/primary",
       "bindings": {
         "itemSpacing": "imported/button/root/gap",
         "paddingLeft": "imported/button/root/padding-inline",
@@ -73,228 +73,18 @@ const VARIANTS = [
     }
   },
   {
-    "name": "variant=primary, state=hover",
-    "row": 0,
-    "col": 1,
-    "spec": {
-      "type": "root",
-      "name": "variant=primary, state=hover",
-      "layout": {
-        "mode": "HORIZONTAL",
-        "primary": "CENTER",
-        "counter": "CENTER"
-      },
-      "fill": "imported/button/root/background-color/primary/hover",
-      "bindings": {
-        "itemSpacing": "imported/button/root/gap",
-        "paddingLeft": "imported/button/root/padding-inline",
-        "paddingRight": "imported/button/root/padding-inline",
-        "paddingTop": "imported/button/root/padding-block",
-        "paddingBottom": "imported/button/root/padding-block",
-        "topLeftRadius": "imported/button/root/border-radius",
-        "topRightRadius": "imported/button/root/border-radius",
-        "bottomLeftRadius": "imported/button/root/border-radius",
-        "bottomRightRadius": "imported/button/root/border-radius",
-        "strokeWeight": "imported/button/root/border-width/primary"
-      },
-      "children": [
-        {
-          "type": "slot",
-          "name": "startIcon",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "MIN",
-            "counter": "MIN"
-          },
-          "slotProperty": "startIcon",
-          "slotAccepts": [],
-          "visibleProp": "hasStartIcon",
-          "visibleDefault": true
-        },
-        {
-          "type": "text",
-          "name": "Label",
-          "characters": "Label",
-          "fontSize": 14,
-          "fontStyle": "Medium",
-          "textFill": "imported/button/label/color/primary",
-          "contentProp": "text"
-        },
-        {
-          "type": "slot",
-          "name": "endIcon",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "MIN",
-            "counter": "MIN"
-          },
-          "slotProperty": "endIcon",
-          "slotAccepts": [],
-          "visibleProp": "hasEndIcon",
-          "visibleDefault": true
-        }
-      ]
-    }
-  },
-  {
-    "name": "variant=primary, state=active",
-    "row": 0,
-    "col": 2,
-    "spec": {
-      "type": "root",
-      "name": "variant=primary, state=active",
-      "layout": {
-        "mode": "HORIZONTAL",
-        "primary": "CENTER",
-        "counter": "CENTER"
-      },
-      "fill": "imported/button/root/background-color/primary/active",
-      "bindings": {
-        "itemSpacing": "imported/button/root/gap",
-        "paddingLeft": "imported/button/root/padding-inline",
-        "paddingRight": "imported/button/root/padding-inline",
-        "paddingTop": "imported/button/root/padding-block",
-        "paddingBottom": "imported/button/root/padding-block",
-        "topLeftRadius": "imported/button/root/border-radius",
-        "topRightRadius": "imported/button/root/border-radius",
-        "bottomLeftRadius": "imported/button/root/border-radius",
-        "bottomRightRadius": "imported/button/root/border-radius",
-        "strokeWeight": "imported/button/root/border-width/primary"
-      },
-      "children": [
-        {
-          "type": "slot",
-          "name": "startIcon",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "MIN",
-            "counter": "MIN"
-          },
-          "slotProperty": "startIcon",
-          "slotAccepts": [],
-          "visibleProp": "hasStartIcon",
-          "visibleDefault": true
-        },
-        {
-          "type": "text",
-          "name": "Label",
-          "characters": "Label",
-          "fontSize": 14,
-          "fontStyle": "Medium",
-          "textFill": "imported/button/label/color/primary",
-          "contentProp": "text"
-        },
-        {
-          "type": "slot",
-          "name": "endIcon",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "MIN",
-            "counter": "MIN"
-          },
-          "slotProperty": "endIcon",
-          "slotAccepts": [],
-          "visibleProp": "hasEndIcon",
-          "visibleDefault": true
-        }
-      ]
-    }
-  },
-  {
-    "name": "variant=primary, state=focus",
-    "row": 0,
-    "col": 3,
-    "spec": {
-      "type": "root",
-      "name": "variant=primary, state=focus",
-      "layout": {
-        "mode": "HORIZONTAL",
-        "primary": "CENTER",
-        "counter": "CENTER"
-      },
-      "fill": "imported/button/root/background-color/primary/focus",
-      "bindings": {
-        "itemSpacing": "imported/button/root/gap",
-        "paddingLeft": "imported/button/root/padding-inline",
-        "paddingRight": "imported/button/root/padding-inline",
-        "paddingTop": "imported/button/root/padding-block",
-        "paddingBottom": "imported/button/root/padding-block",
-        "topLeftRadius": "imported/button/root/border-radius",
-        "topRightRadius": "imported/button/root/border-radius",
-        "bottomLeftRadius": "imported/button/root/border-radius",
-        "bottomRightRadius": "imported/button/root/border-radius",
-        "strokeWeight": "imported/button/root/border-width/primary"
-      },
-      "children": [
-        {
-          "type": "frame",
-          "name": "focusRing",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "MIN",
-            "counter": "MIN"
-          },
-          "stroke": "imported/button/focus-ring/border-color",
-          "bindings": {
-            "topLeftRadius": "imported/button/focus-ring/border-radius",
-            "topRightRadius": "imported/button/focus-ring/border-radius",
-            "bottomLeftRadius": "imported/button/focus-ring/border-radius",
-            "bottomRightRadius": "imported/button/focus-ring/border-radius",
-            "strokeWeight": "imported/button/focus-ring/border-width"
-          },
-          "children": []
-        },
-        {
-          "type": "slot",
-          "name": "startIcon",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "MIN",
-            "counter": "MIN"
-          },
-          "slotProperty": "startIcon",
-          "slotAccepts": [],
-          "visibleProp": "hasStartIcon",
-          "visibleDefault": true
-        },
-        {
-          "type": "text",
-          "name": "Label",
-          "characters": "Label",
-          "fontSize": 14,
-          "fontStyle": "Medium",
-          "textFill": "imported/button/label/color/primary",
-          "contentProp": "text"
-        },
-        {
-          "type": "slot",
-          "name": "endIcon",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "MIN",
-            "counter": "MIN"
-          },
-          "slotProperty": "endIcon",
-          "slotAccepts": [],
-          "visibleProp": "hasEndIcon",
-          "visibleDefault": true
-        }
-      ]
-    }
-  },
-  {
-    "name": "variant=knockout, state=default",
+    "name": "variant=knockout",
     "row": 1,
     "col": 0,
     "spec": {
       "type": "root",
-      "name": "variant=knockout, state=default",
+      "name": "variant=knockout",
       "layout": {
         "mode": "HORIZONTAL",
         "primary": "CENTER",
         "counter": "CENTER"
       },
-      "fill": "imported/button/root/background-color/knockout/default",
+      "fill": "imported/button/root/background-color/knockout",
       "bindings": {
         "itemSpacing": "imported/button/root/gap",
         "paddingLeft": "imported/button/root/padding-inline",
@@ -347,228 +137,18 @@ const VARIANTS = [
     }
   },
   {
-    "name": "variant=knockout, state=hover",
-    "row": 1,
-    "col": 1,
-    "spec": {
-      "type": "root",
-      "name": "variant=knockout, state=hover",
-      "layout": {
-        "mode": "HORIZONTAL",
-        "primary": "CENTER",
-        "counter": "CENTER"
-      },
-      "fill": "imported/button/root/background-color/knockout/hover",
-      "bindings": {
-        "itemSpacing": "imported/button/root/gap",
-        "paddingLeft": "imported/button/root/padding-inline",
-        "paddingRight": "imported/button/root/padding-inline",
-        "paddingTop": "imported/button/root/padding-block",
-        "paddingBottom": "imported/button/root/padding-block",
-        "topLeftRadius": "imported/button/root/border-radius",
-        "topRightRadius": "imported/button/root/border-radius",
-        "bottomLeftRadius": "imported/button/root/border-radius",
-        "bottomRightRadius": "imported/button/root/border-radius",
-        "strokeWeight": "imported/button/root/border-width/knockout"
-      },
-      "children": [
-        {
-          "type": "slot",
-          "name": "startIcon",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "MIN",
-            "counter": "MIN"
-          },
-          "slotProperty": "startIcon",
-          "slotAccepts": [],
-          "visibleProp": "hasStartIcon",
-          "visibleDefault": true
-        },
-        {
-          "type": "text",
-          "name": "Label",
-          "characters": "Label",
-          "fontSize": 14,
-          "fontStyle": "Medium",
-          "textFill": "imported/button/label/color/knockout",
-          "contentProp": "text"
-        },
-        {
-          "type": "slot",
-          "name": "endIcon",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "MIN",
-            "counter": "MIN"
-          },
-          "slotProperty": "endIcon",
-          "slotAccepts": [],
-          "visibleProp": "hasEndIcon",
-          "visibleDefault": true
-        }
-      ]
-    }
-  },
-  {
-    "name": "variant=knockout, state=active",
-    "row": 1,
-    "col": 2,
-    "spec": {
-      "type": "root",
-      "name": "variant=knockout, state=active",
-      "layout": {
-        "mode": "HORIZONTAL",
-        "primary": "CENTER",
-        "counter": "CENTER"
-      },
-      "fill": "imported/button/root/background-color/knockout/active",
-      "bindings": {
-        "itemSpacing": "imported/button/root/gap",
-        "paddingLeft": "imported/button/root/padding-inline",
-        "paddingRight": "imported/button/root/padding-inline",
-        "paddingTop": "imported/button/root/padding-block",
-        "paddingBottom": "imported/button/root/padding-block",
-        "topLeftRadius": "imported/button/root/border-radius",
-        "topRightRadius": "imported/button/root/border-radius",
-        "bottomLeftRadius": "imported/button/root/border-radius",
-        "bottomRightRadius": "imported/button/root/border-radius",
-        "strokeWeight": "imported/button/root/border-width/knockout"
-      },
-      "children": [
-        {
-          "type": "slot",
-          "name": "startIcon",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "MIN",
-            "counter": "MIN"
-          },
-          "slotProperty": "startIcon",
-          "slotAccepts": [],
-          "visibleProp": "hasStartIcon",
-          "visibleDefault": true
-        },
-        {
-          "type": "text",
-          "name": "Label",
-          "characters": "Label",
-          "fontSize": 14,
-          "fontStyle": "Medium",
-          "textFill": "imported/button/label/color/knockout",
-          "contentProp": "text"
-        },
-        {
-          "type": "slot",
-          "name": "endIcon",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "MIN",
-            "counter": "MIN"
-          },
-          "slotProperty": "endIcon",
-          "slotAccepts": [],
-          "visibleProp": "hasEndIcon",
-          "visibleDefault": true
-        }
-      ]
-    }
-  },
-  {
-    "name": "variant=knockout, state=focus",
-    "row": 1,
-    "col": 3,
-    "spec": {
-      "type": "root",
-      "name": "variant=knockout, state=focus",
-      "layout": {
-        "mode": "HORIZONTAL",
-        "primary": "CENTER",
-        "counter": "CENTER"
-      },
-      "fill": "imported/button/root/background-color/knockout/focus",
-      "bindings": {
-        "itemSpacing": "imported/button/root/gap",
-        "paddingLeft": "imported/button/root/padding-inline",
-        "paddingRight": "imported/button/root/padding-inline",
-        "paddingTop": "imported/button/root/padding-block",
-        "paddingBottom": "imported/button/root/padding-block",
-        "topLeftRadius": "imported/button/root/border-radius",
-        "topRightRadius": "imported/button/root/border-radius",
-        "bottomLeftRadius": "imported/button/root/border-radius",
-        "bottomRightRadius": "imported/button/root/border-radius",
-        "strokeWeight": "imported/button/root/border-width/knockout"
-      },
-      "children": [
-        {
-          "type": "frame",
-          "name": "focusRing",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "MIN",
-            "counter": "MIN"
-          },
-          "stroke": "imported/button/focus-ring/border-color",
-          "bindings": {
-            "topLeftRadius": "imported/button/focus-ring/border-radius",
-            "topRightRadius": "imported/button/focus-ring/border-radius",
-            "bottomLeftRadius": "imported/button/focus-ring/border-radius",
-            "bottomRightRadius": "imported/button/focus-ring/border-radius",
-            "strokeWeight": "imported/button/focus-ring/border-width"
-          },
-          "children": []
-        },
-        {
-          "type": "slot",
-          "name": "startIcon",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "MIN",
-            "counter": "MIN"
-          },
-          "slotProperty": "startIcon",
-          "slotAccepts": [],
-          "visibleProp": "hasStartIcon",
-          "visibleDefault": true
-        },
-        {
-          "type": "text",
-          "name": "Label",
-          "characters": "Label",
-          "fontSize": 14,
-          "fontStyle": "Medium",
-          "textFill": "imported/button/label/color/knockout",
-          "contentProp": "text"
-        },
-        {
-          "type": "slot",
-          "name": "endIcon",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "MIN",
-            "counter": "MIN"
-          },
-          "slotProperty": "endIcon",
-          "slotAccepts": [],
-          "visibleProp": "hasEndIcon",
-          "visibleDefault": true
-        }
-      ]
-    }
-  },
-  {
-    "name": "variant=secondary, state=default",
+    "name": "variant=secondary",
     "row": 2,
     "col": 0,
     "spec": {
       "type": "root",
-      "name": "variant=secondary, state=default",
+      "name": "variant=secondary",
       "layout": {
         "mode": "HORIZONTAL",
         "primary": "CENTER",
         "counter": "CENTER"
       },
-      "fill": "imported/button/root/background-color/secondary/default",
+      "fill": "imported/button/root/background-color/secondary",
       "bindings": {
         "itemSpacing": "imported/button/root/gap",
         "paddingLeft": "imported/button/root/padding-inline",
@@ -621,228 +201,18 @@ const VARIANTS = [
     }
   },
   {
-    "name": "variant=secondary, state=hover",
-    "row": 2,
-    "col": 1,
-    "spec": {
-      "type": "root",
-      "name": "variant=secondary, state=hover",
-      "layout": {
-        "mode": "HORIZONTAL",
-        "primary": "CENTER",
-        "counter": "CENTER"
-      },
-      "fill": "imported/button/root/background-color/secondary/hover",
-      "bindings": {
-        "itemSpacing": "imported/button/root/gap",
-        "paddingLeft": "imported/button/root/padding-inline",
-        "paddingRight": "imported/button/root/padding-inline",
-        "paddingTop": "imported/button/root/padding-block",
-        "paddingBottom": "imported/button/root/padding-block",
-        "topLeftRadius": "imported/button/root/border-radius",
-        "topRightRadius": "imported/button/root/border-radius",
-        "bottomLeftRadius": "imported/button/root/border-radius",
-        "bottomRightRadius": "imported/button/root/border-radius",
-        "strokeWeight": "imported/button/root/border-width/secondary"
-      },
-      "children": [
-        {
-          "type": "slot",
-          "name": "startIcon",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "MIN",
-            "counter": "MIN"
-          },
-          "slotProperty": "startIcon",
-          "slotAccepts": [],
-          "visibleProp": "hasStartIcon",
-          "visibleDefault": true
-        },
-        {
-          "type": "text",
-          "name": "Label",
-          "characters": "Label",
-          "fontSize": 14,
-          "fontStyle": "Medium",
-          "textFill": "imported/button/label/color/secondary",
-          "contentProp": "text"
-        },
-        {
-          "type": "slot",
-          "name": "endIcon",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "MIN",
-            "counter": "MIN"
-          },
-          "slotProperty": "endIcon",
-          "slotAccepts": [],
-          "visibleProp": "hasEndIcon",
-          "visibleDefault": true
-        }
-      ]
-    }
-  },
-  {
-    "name": "variant=secondary, state=active",
-    "row": 2,
-    "col": 2,
-    "spec": {
-      "type": "root",
-      "name": "variant=secondary, state=active",
-      "layout": {
-        "mode": "HORIZONTAL",
-        "primary": "CENTER",
-        "counter": "CENTER"
-      },
-      "fill": "imported/button/root/background-color/secondary/active",
-      "bindings": {
-        "itemSpacing": "imported/button/root/gap",
-        "paddingLeft": "imported/button/root/padding-inline",
-        "paddingRight": "imported/button/root/padding-inline",
-        "paddingTop": "imported/button/root/padding-block",
-        "paddingBottom": "imported/button/root/padding-block",
-        "topLeftRadius": "imported/button/root/border-radius",
-        "topRightRadius": "imported/button/root/border-radius",
-        "bottomLeftRadius": "imported/button/root/border-radius",
-        "bottomRightRadius": "imported/button/root/border-radius",
-        "strokeWeight": "imported/button/root/border-width/secondary"
-      },
-      "children": [
-        {
-          "type": "slot",
-          "name": "startIcon",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "MIN",
-            "counter": "MIN"
-          },
-          "slotProperty": "startIcon",
-          "slotAccepts": [],
-          "visibleProp": "hasStartIcon",
-          "visibleDefault": true
-        },
-        {
-          "type": "text",
-          "name": "Label",
-          "characters": "Label",
-          "fontSize": 14,
-          "fontStyle": "Medium",
-          "textFill": "imported/button/label/color/secondary",
-          "contentProp": "text"
-        },
-        {
-          "type": "slot",
-          "name": "endIcon",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "MIN",
-            "counter": "MIN"
-          },
-          "slotProperty": "endIcon",
-          "slotAccepts": [],
-          "visibleProp": "hasEndIcon",
-          "visibleDefault": true
-        }
-      ]
-    }
-  },
-  {
-    "name": "variant=secondary, state=focus",
-    "row": 2,
-    "col": 3,
-    "spec": {
-      "type": "root",
-      "name": "variant=secondary, state=focus",
-      "layout": {
-        "mode": "HORIZONTAL",
-        "primary": "CENTER",
-        "counter": "CENTER"
-      },
-      "fill": "imported/button/root/background-color/secondary/focus",
-      "bindings": {
-        "itemSpacing": "imported/button/root/gap",
-        "paddingLeft": "imported/button/root/padding-inline",
-        "paddingRight": "imported/button/root/padding-inline",
-        "paddingTop": "imported/button/root/padding-block",
-        "paddingBottom": "imported/button/root/padding-block",
-        "topLeftRadius": "imported/button/root/border-radius",
-        "topRightRadius": "imported/button/root/border-radius",
-        "bottomLeftRadius": "imported/button/root/border-radius",
-        "bottomRightRadius": "imported/button/root/border-radius",
-        "strokeWeight": "imported/button/root/border-width/secondary"
-      },
-      "children": [
-        {
-          "type": "frame",
-          "name": "focusRing",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "MIN",
-            "counter": "MIN"
-          },
-          "stroke": "imported/button/focus-ring/border-color",
-          "bindings": {
-            "topLeftRadius": "imported/button/focus-ring/border-radius",
-            "topRightRadius": "imported/button/focus-ring/border-radius",
-            "bottomLeftRadius": "imported/button/focus-ring/border-radius",
-            "bottomRightRadius": "imported/button/focus-ring/border-radius",
-            "strokeWeight": "imported/button/focus-ring/border-width"
-          },
-          "children": []
-        },
-        {
-          "type": "slot",
-          "name": "startIcon",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "MIN",
-            "counter": "MIN"
-          },
-          "slotProperty": "startIcon",
-          "slotAccepts": [],
-          "visibleProp": "hasStartIcon",
-          "visibleDefault": true
-        },
-        {
-          "type": "text",
-          "name": "Label",
-          "characters": "Label",
-          "fontSize": 14,
-          "fontStyle": "Medium",
-          "textFill": "imported/button/label/color/secondary",
-          "contentProp": "text"
-        },
-        {
-          "type": "slot",
-          "name": "endIcon",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "MIN",
-            "counter": "MIN"
-          },
-          "slotProperty": "endIcon",
-          "slotAccepts": [],
-          "visibleProp": "hasEndIcon",
-          "visibleDefault": true
-        }
-      ]
-    }
-  },
-  {
-    "name": "variant=bare, state=default",
+    "name": "variant=bare",
     "row": 3,
     "col": 0,
     "spec": {
       "type": "root",
-      "name": "variant=bare, state=default",
+      "name": "variant=bare",
       "layout": {
         "mode": "HORIZONTAL",
         "primary": "CENTER",
         "counter": "CENTER"
       },
-      "fill": "imported/button/root/background-color/bare/default",
+      "fill": "imported/button/root/background-color/bare",
       "bindings": {
         "itemSpacing": "imported/button/root/gap",
         "paddingLeft": "imported/button/root/padding-inline",
@@ -856,216 +226,6 @@ const VARIANTS = [
         "strokeWeight": "imported/button/root/border-width/bare"
       },
       "children": [
-        {
-          "type": "slot",
-          "name": "startIcon",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "MIN",
-            "counter": "MIN"
-          },
-          "slotProperty": "startIcon",
-          "slotAccepts": [],
-          "visibleProp": "hasStartIcon",
-          "visibleDefault": true
-        },
-        {
-          "type": "text",
-          "name": "Label",
-          "characters": "Label",
-          "fontSize": 14,
-          "fontStyle": "Medium",
-          "textFill": "imported/button/label/color/bare",
-          "contentProp": "text"
-        },
-        {
-          "type": "slot",
-          "name": "endIcon",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "MIN",
-            "counter": "MIN"
-          },
-          "slotProperty": "endIcon",
-          "slotAccepts": [],
-          "visibleProp": "hasEndIcon",
-          "visibleDefault": true
-        }
-      ]
-    }
-  },
-  {
-    "name": "variant=bare, state=hover",
-    "row": 3,
-    "col": 1,
-    "spec": {
-      "type": "root",
-      "name": "variant=bare, state=hover",
-      "layout": {
-        "mode": "HORIZONTAL",
-        "primary": "CENTER",
-        "counter": "CENTER"
-      },
-      "fill": "imported/button/root/background-color/bare/hover",
-      "bindings": {
-        "itemSpacing": "imported/button/root/gap",
-        "paddingLeft": "imported/button/root/padding-inline",
-        "paddingRight": "imported/button/root/padding-inline",
-        "paddingTop": "imported/button/root/padding-block",
-        "paddingBottom": "imported/button/root/padding-block",
-        "topLeftRadius": "imported/button/root/border-radius",
-        "topRightRadius": "imported/button/root/border-radius",
-        "bottomLeftRadius": "imported/button/root/border-radius",
-        "bottomRightRadius": "imported/button/root/border-radius",
-        "strokeWeight": "imported/button/root/border-width/bare"
-      },
-      "children": [
-        {
-          "type": "slot",
-          "name": "startIcon",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "MIN",
-            "counter": "MIN"
-          },
-          "slotProperty": "startIcon",
-          "slotAccepts": [],
-          "visibleProp": "hasStartIcon",
-          "visibleDefault": true
-        },
-        {
-          "type": "text",
-          "name": "Label",
-          "characters": "Label",
-          "fontSize": 14,
-          "fontStyle": "Medium",
-          "textFill": "imported/button/label/color/bare",
-          "contentProp": "text"
-        },
-        {
-          "type": "slot",
-          "name": "endIcon",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "MIN",
-            "counter": "MIN"
-          },
-          "slotProperty": "endIcon",
-          "slotAccepts": [],
-          "visibleProp": "hasEndIcon",
-          "visibleDefault": true
-        }
-      ]
-    }
-  },
-  {
-    "name": "variant=bare, state=active",
-    "row": 3,
-    "col": 2,
-    "spec": {
-      "type": "root",
-      "name": "variant=bare, state=active",
-      "layout": {
-        "mode": "HORIZONTAL",
-        "primary": "CENTER",
-        "counter": "CENTER"
-      },
-      "fill": "imported/button/root/background-color/bare/active",
-      "bindings": {
-        "itemSpacing": "imported/button/root/gap",
-        "paddingLeft": "imported/button/root/padding-inline",
-        "paddingRight": "imported/button/root/padding-inline",
-        "paddingTop": "imported/button/root/padding-block",
-        "paddingBottom": "imported/button/root/padding-block",
-        "topLeftRadius": "imported/button/root/border-radius",
-        "topRightRadius": "imported/button/root/border-radius",
-        "bottomLeftRadius": "imported/button/root/border-radius",
-        "bottomRightRadius": "imported/button/root/border-radius",
-        "strokeWeight": "imported/button/root/border-width/bare"
-      },
-      "children": [
-        {
-          "type": "slot",
-          "name": "startIcon",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "MIN",
-            "counter": "MIN"
-          },
-          "slotProperty": "startIcon",
-          "slotAccepts": [],
-          "visibleProp": "hasStartIcon",
-          "visibleDefault": true
-        },
-        {
-          "type": "text",
-          "name": "Label",
-          "characters": "Label",
-          "fontSize": 14,
-          "fontStyle": "Medium",
-          "textFill": "imported/button/label/color/bare",
-          "contentProp": "text"
-        },
-        {
-          "type": "slot",
-          "name": "endIcon",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "MIN",
-            "counter": "MIN"
-          },
-          "slotProperty": "endIcon",
-          "slotAccepts": [],
-          "visibleProp": "hasEndIcon",
-          "visibleDefault": true
-        }
-      ]
-    }
-  },
-  {
-    "name": "variant=bare, state=focus",
-    "row": 3,
-    "col": 3,
-    "spec": {
-      "type": "root",
-      "name": "variant=bare, state=focus",
-      "layout": {
-        "mode": "HORIZONTAL",
-        "primary": "CENTER",
-        "counter": "CENTER"
-      },
-      "fill": "imported/button/root/background-color/bare/focus",
-      "bindings": {
-        "itemSpacing": "imported/button/root/gap",
-        "paddingLeft": "imported/button/root/padding-inline",
-        "paddingRight": "imported/button/root/padding-inline",
-        "paddingTop": "imported/button/root/padding-block",
-        "paddingBottom": "imported/button/root/padding-block",
-        "topLeftRadius": "imported/button/root/border-radius",
-        "topRightRadius": "imported/button/root/border-radius",
-        "bottomLeftRadius": "imported/button/root/border-radius",
-        "bottomRightRadius": "imported/button/root/border-radius",
-        "strokeWeight": "imported/button/root/border-width/bare"
-      },
-      "children": [
-        {
-          "type": "frame",
-          "name": "focusRing",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "MIN",
-            "counter": "MIN"
-          },
-          "stroke": "imported/button/focus-ring/border-color",
-          "bindings": {
-            "topLeftRadius": "imported/button/focus-ring/border-radius",
-            "topRightRadius": "imported/button/focus-ring/border-radius",
-            "bottomLeftRadius": "imported/button/focus-ring/border-radius",
-            "bottomRightRadius": "imported/button/focus-ring/border-radius",
-            "strokeWeight": "imported/button/focus-ring/border-width"
-          },
-          "children": []
-        },
         {
           "type": "slot",
           "name": "startIcon",
@@ -1106,7 +266,780 @@ const VARIANTS = [
   }
 ];
 // figmaStatePreviews (canvas-only): preview variants carrying the State axis.
-const STATE_VARIANTS = [];
+const STATE_VARIANTS = [
+  {
+    "name": "variant=primary, State=Hover",
+    "row": 0,
+    "col": 1,
+    "spec": {
+      "type": "root",
+      "name": "variant=primary, State=Hover",
+      "layout": {
+        "mode": "HORIZONTAL",
+        "primary": "CENTER",
+        "counter": "CENTER"
+      },
+      "fill": "imported/button/state-hover/background-color/primary",
+      "bindings": {
+        "itemSpacing": "imported/button/root/gap",
+        "paddingLeft": "imported/button/root/padding-inline",
+        "paddingRight": "imported/button/root/padding-inline",
+        "paddingTop": "imported/button/root/padding-block",
+        "paddingBottom": "imported/button/root/padding-block",
+        "topLeftRadius": "imported/button/root/border-radius",
+        "topRightRadius": "imported/button/root/border-radius",
+        "bottomLeftRadius": "imported/button/root/border-radius",
+        "bottomRightRadius": "imported/button/root/border-radius",
+        "strokeWeight": "imported/button/root/border-width/primary"
+      },
+      "children": [
+        {
+          "type": "slot",
+          "name": "startIcon",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "MIN",
+            "counter": "MIN"
+          },
+          "slotProperty": "startIcon",
+          "slotAccepts": [],
+          "visibleProp": "hasStartIcon",
+          "visibleDefault": true
+        },
+        {
+          "type": "text",
+          "name": "Label",
+          "characters": "Label",
+          "fontSize": 14,
+          "fontStyle": "Medium",
+          "textFill": "imported/button/label/color/primary",
+          "contentProp": "text"
+        },
+        {
+          "type": "slot",
+          "name": "endIcon",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "MIN",
+            "counter": "MIN"
+          },
+          "slotProperty": "endIcon",
+          "slotAccepts": [],
+          "visibleProp": "hasEndIcon",
+          "visibleDefault": true
+        }
+      ]
+    }
+  },
+  {
+    "name": "variant=knockout, State=Hover",
+    "row": 1,
+    "col": 1,
+    "spec": {
+      "type": "root",
+      "name": "variant=knockout, State=Hover",
+      "layout": {
+        "mode": "HORIZONTAL",
+        "primary": "CENTER",
+        "counter": "CENTER"
+      },
+      "fill": "imported/button/state-hover/background-color/knockout",
+      "bindings": {
+        "itemSpacing": "imported/button/root/gap",
+        "paddingLeft": "imported/button/root/padding-inline",
+        "paddingRight": "imported/button/root/padding-inline",
+        "paddingTop": "imported/button/root/padding-block",
+        "paddingBottom": "imported/button/root/padding-block",
+        "topLeftRadius": "imported/button/root/border-radius",
+        "topRightRadius": "imported/button/root/border-radius",
+        "bottomLeftRadius": "imported/button/root/border-radius",
+        "bottomRightRadius": "imported/button/root/border-radius",
+        "strokeWeight": "imported/button/root/border-width/knockout"
+      },
+      "children": [
+        {
+          "type": "slot",
+          "name": "startIcon",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "MIN",
+            "counter": "MIN"
+          },
+          "slotProperty": "startIcon",
+          "slotAccepts": [],
+          "visibleProp": "hasStartIcon",
+          "visibleDefault": true
+        },
+        {
+          "type": "text",
+          "name": "Label",
+          "characters": "Label",
+          "fontSize": 14,
+          "fontStyle": "Medium",
+          "textFill": "imported/button/label/color/knockout",
+          "contentProp": "text"
+        },
+        {
+          "type": "slot",
+          "name": "endIcon",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "MIN",
+            "counter": "MIN"
+          },
+          "slotProperty": "endIcon",
+          "slotAccepts": [],
+          "visibleProp": "hasEndIcon",
+          "visibleDefault": true
+        }
+      ]
+    }
+  },
+  {
+    "name": "variant=secondary, State=Hover",
+    "row": 2,
+    "col": 1,
+    "spec": {
+      "type": "root",
+      "name": "variant=secondary, State=Hover",
+      "layout": {
+        "mode": "HORIZONTAL",
+        "primary": "CENTER",
+        "counter": "CENTER"
+      },
+      "fill": "imported/button/state-hover/background-color/secondary",
+      "bindings": {
+        "itemSpacing": "imported/button/root/gap",
+        "paddingLeft": "imported/button/root/padding-inline",
+        "paddingRight": "imported/button/root/padding-inline",
+        "paddingTop": "imported/button/root/padding-block",
+        "paddingBottom": "imported/button/root/padding-block",
+        "topLeftRadius": "imported/button/root/border-radius",
+        "topRightRadius": "imported/button/root/border-radius",
+        "bottomLeftRadius": "imported/button/root/border-radius",
+        "bottomRightRadius": "imported/button/root/border-radius",
+        "strokeWeight": "imported/button/root/border-width/secondary"
+      },
+      "children": [
+        {
+          "type": "slot",
+          "name": "startIcon",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "MIN",
+            "counter": "MIN"
+          },
+          "slotProperty": "startIcon",
+          "slotAccepts": [],
+          "visibleProp": "hasStartIcon",
+          "visibleDefault": true
+        },
+        {
+          "type": "text",
+          "name": "Label",
+          "characters": "Label",
+          "fontSize": 14,
+          "fontStyle": "Medium",
+          "textFill": "imported/button/label/color/secondary",
+          "contentProp": "text"
+        },
+        {
+          "type": "slot",
+          "name": "endIcon",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "MIN",
+            "counter": "MIN"
+          },
+          "slotProperty": "endIcon",
+          "slotAccepts": [],
+          "visibleProp": "hasEndIcon",
+          "visibleDefault": true
+        }
+      ]
+    }
+  },
+  {
+    "name": "variant=bare, State=Hover",
+    "row": 3,
+    "col": 1,
+    "spec": {
+      "type": "root",
+      "name": "variant=bare, State=Hover",
+      "layout": {
+        "mode": "HORIZONTAL",
+        "primary": "CENTER",
+        "counter": "CENTER"
+      },
+      "fill": "imported/button/state-hover/background-color/bare",
+      "bindings": {
+        "itemSpacing": "imported/button/root/gap",
+        "paddingLeft": "imported/button/root/padding-inline",
+        "paddingRight": "imported/button/root/padding-inline",
+        "paddingTop": "imported/button/root/padding-block",
+        "paddingBottom": "imported/button/root/padding-block",
+        "topLeftRadius": "imported/button/root/border-radius",
+        "topRightRadius": "imported/button/root/border-radius",
+        "bottomLeftRadius": "imported/button/root/border-radius",
+        "bottomRightRadius": "imported/button/root/border-radius",
+        "strokeWeight": "imported/button/root/border-width/bare"
+      },
+      "children": [
+        {
+          "type": "slot",
+          "name": "startIcon",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "MIN",
+            "counter": "MIN"
+          },
+          "slotProperty": "startIcon",
+          "slotAccepts": [],
+          "visibleProp": "hasStartIcon",
+          "visibleDefault": true
+        },
+        {
+          "type": "text",
+          "name": "Label",
+          "characters": "Label",
+          "fontSize": 14,
+          "fontStyle": "Medium",
+          "textFill": "imported/button/label/color/bare",
+          "contentProp": "text"
+        },
+        {
+          "type": "slot",
+          "name": "endIcon",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "MIN",
+            "counter": "MIN"
+          },
+          "slotProperty": "endIcon",
+          "slotAccepts": [],
+          "visibleProp": "hasEndIcon",
+          "visibleDefault": true
+        }
+      ]
+    }
+  },
+  {
+    "name": "variant=primary, State=Active",
+    "row": 0,
+    "col": 2,
+    "spec": {
+      "type": "root",
+      "name": "variant=primary, State=Active",
+      "layout": {
+        "mode": "HORIZONTAL",
+        "primary": "CENTER",
+        "counter": "CENTER"
+      },
+      "fill": "imported/button/state-active/background-color/primary",
+      "bindings": {
+        "itemSpacing": "imported/button/root/gap",
+        "paddingLeft": "imported/button/root/padding-inline",
+        "paddingRight": "imported/button/root/padding-inline",
+        "paddingTop": "imported/button/root/padding-block",
+        "paddingBottom": "imported/button/root/padding-block",
+        "topLeftRadius": "imported/button/root/border-radius",
+        "topRightRadius": "imported/button/root/border-radius",
+        "bottomLeftRadius": "imported/button/root/border-radius",
+        "bottomRightRadius": "imported/button/root/border-radius",
+        "strokeWeight": "imported/button/root/border-width/primary"
+      },
+      "children": [
+        {
+          "type": "slot",
+          "name": "startIcon",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "MIN",
+            "counter": "MIN"
+          },
+          "slotProperty": "startIcon",
+          "slotAccepts": [],
+          "visibleProp": "hasStartIcon",
+          "visibleDefault": true
+        },
+        {
+          "type": "text",
+          "name": "Label",
+          "characters": "Label",
+          "fontSize": 14,
+          "fontStyle": "Medium",
+          "textFill": "imported/button/label/color/primary",
+          "contentProp": "text"
+        },
+        {
+          "type": "slot",
+          "name": "endIcon",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "MIN",
+            "counter": "MIN"
+          },
+          "slotProperty": "endIcon",
+          "slotAccepts": [],
+          "visibleProp": "hasEndIcon",
+          "visibleDefault": true
+        }
+      ]
+    }
+  },
+  {
+    "name": "variant=knockout, State=Active",
+    "row": 1,
+    "col": 2,
+    "spec": {
+      "type": "root",
+      "name": "variant=knockout, State=Active",
+      "layout": {
+        "mode": "HORIZONTAL",
+        "primary": "CENTER",
+        "counter": "CENTER"
+      },
+      "fill": "imported/button/state-active/background-color/knockout",
+      "bindings": {
+        "itemSpacing": "imported/button/root/gap",
+        "paddingLeft": "imported/button/root/padding-inline",
+        "paddingRight": "imported/button/root/padding-inline",
+        "paddingTop": "imported/button/root/padding-block",
+        "paddingBottom": "imported/button/root/padding-block",
+        "topLeftRadius": "imported/button/root/border-radius",
+        "topRightRadius": "imported/button/root/border-radius",
+        "bottomLeftRadius": "imported/button/root/border-radius",
+        "bottomRightRadius": "imported/button/root/border-radius",
+        "strokeWeight": "imported/button/root/border-width/knockout"
+      },
+      "children": [
+        {
+          "type": "slot",
+          "name": "startIcon",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "MIN",
+            "counter": "MIN"
+          },
+          "slotProperty": "startIcon",
+          "slotAccepts": [],
+          "visibleProp": "hasStartIcon",
+          "visibleDefault": true
+        },
+        {
+          "type": "text",
+          "name": "Label",
+          "characters": "Label",
+          "fontSize": 14,
+          "fontStyle": "Medium",
+          "textFill": "imported/button/label/color/knockout",
+          "contentProp": "text"
+        },
+        {
+          "type": "slot",
+          "name": "endIcon",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "MIN",
+            "counter": "MIN"
+          },
+          "slotProperty": "endIcon",
+          "slotAccepts": [],
+          "visibleProp": "hasEndIcon",
+          "visibleDefault": true
+        }
+      ]
+    }
+  },
+  {
+    "name": "variant=secondary, State=Active",
+    "row": 2,
+    "col": 2,
+    "spec": {
+      "type": "root",
+      "name": "variant=secondary, State=Active",
+      "layout": {
+        "mode": "HORIZONTAL",
+        "primary": "CENTER",
+        "counter": "CENTER"
+      },
+      "fill": "imported/button/state-active/background-color/secondary",
+      "bindings": {
+        "itemSpacing": "imported/button/root/gap",
+        "paddingLeft": "imported/button/root/padding-inline",
+        "paddingRight": "imported/button/root/padding-inline",
+        "paddingTop": "imported/button/root/padding-block",
+        "paddingBottom": "imported/button/root/padding-block",
+        "topLeftRadius": "imported/button/root/border-radius",
+        "topRightRadius": "imported/button/root/border-radius",
+        "bottomLeftRadius": "imported/button/root/border-radius",
+        "bottomRightRadius": "imported/button/root/border-radius",
+        "strokeWeight": "imported/button/root/border-width/secondary"
+      },
+      "children": [
+        {
+          "type": "slot",
+          "name": "startIcon",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "MIN",
+            "counter": "MIN"
+          },
+          "slotProperty": "startIcon",
+          "slotAccepts": [],
+          "visibleProp": "hasStartIcon",
+          "visibleDefault": true
+        },
+        {
+          "type": "text",
+          "name": "Label",
+          "characters": "Label",
+          "fontSize": 14,
+          "fontStyle": "Medium",
+          "textFill": "imported/button/label/color/secondary",
+          "contentProp": "text"
+        },
+        {
+          "type": "slot",
+          "name": "endIcon",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "MIN",
+            "counter": "MIN"
+          },
+          "slotProperty": "endIcon",
+          "slotAccepts": [],
+          "visibleProp": "hasEndIcon",
+          "visibleDefault": true
+        }
+      ]
+    }
+  },
+  {
+    "name": "variant=bare, State=Active",
+    "row": 3,
+    "col": 2,
+    "spec": {
+      "type": "root",
+      "name": "variant=bare, State=Active",
+      "layout": {
+        "mode": "HORIZONTAL",
+        "primary": "CENTER",
+        "counter": "CENTER"
+      },
+      "fill": "imported/button/state-active/background-color/bare",
+      "bindings": {
+        "itemSpacing": "imported/button/root/gap",
+        "paddingLeft": "imported/button/root/padding-inline",
+        "paddingRight": "imported/button/root/padding-inline",
+        "paddingTop": "imported/button/root/padding-block",
+        "paddingBottom": "imported/button/root/padding-block",
+        "topLeftRadius": "imported/button/root/border-radius",
+        "topRightRadius": "imported/button/root/border-radius",
+        "bottomLeftRadius": "imported/button/root/border-radius",
+        "bottomRightRadius": "imported/button/root/border-radius",
+        "strokeWeight": "imported/button/root/border-width/bare"
+      },
+      "children": [
+        {
+          "type": "slot",
+          "name": "startIcon",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "MIN",
+            "counter": "MIN"
+          },
+          "slotProperty": "startIcon",
+          "slotAccepts": [],
+          "visibleProp": "hasStartIcon",
+          "visibleDefault": true
+        },
+        {
+          "type": "text",
+          "name": "Label",
+          "characters": "Label",
+          "fontSize": 14,
+          "fontStyle": "Medium",
+          "textFill": "imported/button/label/color/bare",
+          "contentProp": "text"
+        },
+        {
+          "type": "slot",
+          "name": "endIcon",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "MIN",
+            "counter": "MIN"
+          },
+          "slotProperty": "endIcon",
+          "slotAccepts": [],
+          "visibleProp": "hasEndIcon",
+          "visibleDefault": true
+        }
+      ]
+    }
+  },
+  {
+    "name": "variant=primary, State=Focus Visible",
+    "row": 0,
+    "col": 3,
+    "spec": {
+      "type": "root",
+      "name": "variant=primary, State=Focus Visible",
+      "layout": {
+        "mode": "HORIZONTAL",
+        "primary": "CENTER",
+        "counter": "CENTER"
+      },
+      "fill": "imported/button/root/background-color/primary",
+      "bindings": {
+        "itemSpacing": "imported/button/root/gap",
+        "paddingLeft": "imported/button/root/padding-inline",
+        "paddingRight": "imported/button/root/padding-inline",
+        "paddingTop": "imported/button/root/padding-block",
+        "paddingBottom": "imported/button/root/padding-block",
+        "topLeftRadius": "imported/button/root/border-radius",
+        "topRightRadius": "imported/button/root/border-radius",
+        "bottomLeftRadius": "imported/button/root/border-radius",
+        "bottomRightRadius": "imported/button/root/border-radius",
+        "strokeWeight": "imported/button/state-focus-visible/outline-width"
+      },
+      "stroke": "imported/button/state-focus-visible/outline-color",
+      "children": [
+        {
+          "type": "slot",
+          "name": "startIcon",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "MIN",
+            "counter": "MIN"
+          },
+          "slotProperty": "startIcon",
+          "slotAccepts": [],
+          "visibleProp": "hasStartIcon",
+          "visibleDefault": true
+        },
+        {
+          "type": "text",
+          "name": "Label",
+          "characters": "Label",
+          "fontSize": 14,
+          "fontStyle": "Medium",
+          "textFill": "imported/button/label/color/primary",
+          "contentProp": "text"
+        },
+        {
+          "type": "slot",
+          "name": "endIcon",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "MIN",
+            "counter": "MIN"
+          },
+          "slotProperty": "endIcon",
+          "slotAccepts": [],
+          "visibleProp": "hasEndIcon",
+          "visibleDefault": true
+        }
+      ]
+    }
+  },
+  {
+    "name": "variant=knockout, State=Focus Visible",
+    "row": 1,
+    "col": 3,
+    "spec": {
+      "type": "root",
+      "name": "variant=knockout, State=Focus Visible",
+      "layout": {
+        "mode": "HORIZONTAL",
+        "primary": "CENTER",
+        "counter": "CENTER"
+      },
+      "fill": "imported/button/root/background-color/knockout",
+      "bindings": {
+        "itemSpacing": "imported/button/root/gap",
+        "paddingLeft": "imported/button/root/padding-inline",
+        "paddingRight": "imported/button/root/padding-inline",
+        "paddingTop": "imported/button/root/padding-block",
+        "paddingBottom": "imported/button/root/padding-block",
+        "topLeftRadius": "imported/button/root/border-radius",
+        "topRightRadius": "imported/button/root/border-radius",
+        "bottomLeftRadius": "imported/button/root/border-radius",
+        "bottomRightRadius": "imported/button/root/border-radius",
+        "strokeWeight": "imported/button/state-focus-visible/outline-width"
+      },
+      "stroke": "imported/button/state-focus-visible/outline-color",
+      "children": [
+        {
+          "type": "slot",
+          "name": "startIcon",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "MIN",
+            "counter": "MIN"
+          },
+          "slotProperty": "startIcon",
+          "slotAccepts": [],
+          "visibleProp": "hasStartIcon",
+          "visibleDefault": true
+        },
+        {
+          "type": "text",
+          "name": "Label",
+          "characters": "Label",
+          "fontSize": 14,
+          "fontStyle": "Medium",
+          "textFill": "imported/button/label/color/knockout",
+          "contentProp": "text"
+        },
+        {
+          "type": "slot",
+          "name": "endIcon",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "MIN",
+            "counter": "MIN"
+          },
+          "slotProperty": "endIcon",
+          "slotAccepts": [],
+          "visibleProp": "hasEndIcon",
+          "visibleDefault": true
+        }
+      ]
+    }
+  },
+  {
+    "name": "variant=secondary, State=Focus Visible",
+    "row": 2,
+    "col": 3,
+    "spec": {
+      "type": "root",
+      "name": "variant=secondary, State=Focus Visible",
+      "layout": {
+        "mode": "HORIZONTAL",
+        "primary": "CENTER",
+        "counter": "CENTER"
+      },
+      "fill": "imported/button/root/background-color/secondary",
+      "bindings": {
+        "itemSpacing": "imported/button/root/gap",
+        "paddingLeft": "imported/button/root/padding-inline",
+        "paddingRight": "imported/button/root/padding-inline",
+        "paddingTop": "imported/button/root/padding-block",
+        "paddingBottom": "imported/button/root/padding-block",
+        "topLeftRadius": "imported/button/root/border-radius",
+        "topRightRadius": "imported/button/root/border-radius",
+        "bottomLeftRadius": "imported/button/root/border-radius",
+        "bottomRightRadius": "imported/button/root/border-radius",
+        "strokeWeight": "imported/button/state-focus-visible/outline-width"
+      },
+      "stroke": "imported/button/state-focus-visible/outline-color",
+      "children": [
+        {
+          "type": "slot",
+          "name": "startIcon",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "MIN",
+            "counter": "MIN"
+          },
+          "slotProperty": "startIcon",
+          "slotAccepts": [],
+          "visibleProp": "hasStartIcon",
+          "visibleDefault": true
+        },
+        {
+          "type": "text",
+          "name": "Label",
+          "characters": "Label",
+          "fontSize": 14,
+          "fontStyle": "Medium",
+          "textFill": "imported/button/label/color/secondary",
+          "contentProp": "text"
+        },
+        {
+          "type": "slot",
+          "name": "endIcon",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "MIN",
+            "counter": "MIN"
+          },
+          "slotProperty": "endIcon",
+          "slotAccepts": [],
+          "visibleProp": "hasEndIcon",
+          "visibleDefault": true
+        }
+      ]
+    }
+  },
+  {
+    "name": "variant=bare, State=Focus Visible",
+    "row": 3,
+    "col": 3,
+    "spec": {
+      "type": "root",
+      "name": "variant=bare, State=Focus Visible",
+      "layout": {
+        "mode": "HORIZONTAL",
+        "primary": "CENTER",
+        "counter": "CENTER"
+      },
+      "fill": "imported/button/root/background-color/bare",
+      "bindings": {
+        "itemSpacing": "imported/button/root/gap",
+        "paddingLeft": "imported/button/root/padding-inline",
+        "paddingRight": "imported/button/root/padding-inline",
+        "paddingTop": "imported/button/root/padding-block",
+        "paddingBottom": "imported/button/root/padding-block",
+        "topLeftRadius": "imported/button/root/border-radius",
+        "topRightRadius": "imported/button/root/border-radius",
+        "bottomLeftRadius": "imported/button/root/border-radius",
+        "bottomRightRadius": "imported/button/root/border-radius",
+        "strokeWeight": "imported/button/state-focus-visible/outline-width"
+      },
+      "stroke": "imported/button/state-focus-visible/outline-color",
+      "children": [
+        {
+          "type": "slot",
+          "name": "startIcon",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "MIN",
+            "counter": "MIN"
+          },
+          "slotProperty": "startIcon",
+          "slotAccepts": [],
+          "visibleProp": "hasStartIcon",
+          "visibleDefault": true
+        },
+        {
+          "type": "text",
+          "name": "Label",
+          "characters": "Label",
+          "fontSize": 14,
+          "fontStyle": "Medium",
+          "textFill": "imported/button/label/color/bare",
+          "contentProp": "text"
+        },
+        {
+          "type": "slot",
+          "name": "endIcon",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "MIN",
+            "counter": "MIN"
+          },
+          "slotProperty": "endIcon",
+          "slotAccepts": [],
+          "visibleProp": "hasEndIcon",
+          "visibleDefault": true
+        }
+      ]
+    }
+  }
+];
 const COL_W = 380, ROW_H = 240, PAD = 40;
 
 // State previews: merge the enum-API cartesian with the preview overlay;
@@ -1154,14 +1087,14 @@ for (const page of figma.root.children) {
 
 // ---------------------------------------------------------------------------
 // PROVISIONAL VARIABLES — minted from resolved values by a degraded import.
-// This contract binds 32 provisional token(s) whose real variable names were
+// This contract binds 27 provisional token(s) whose real variable names were
 // unrecoverable, so this section upserts each one as a Figma variable in a
 // collection named 'Imported (provisional)' — idempotent by name, within that
 // collection only — before the bindings below look anything up. The values
 // are literal-fidelity stand-ins, not your design vocabulary: rename them
 // against your real tokens when you adopt the contract.
 // ---------------------------------------------------------------------------
-const MINTED_VARIABLES = [{"name":"imported/button/root/background-color/primary/default","type":"COLOR","value":"#3d7a95"},{"name":"imported/button/root/background-color/primary/hover","type":"COLOR","value":"#2d6079"},{"name":"imported/button/root/background-color/primary/active","type":"COLOR","value":"#2d6079"},{"name":"imported/button/root/background-color/primary/focus","type":"COLOR","value":"#3d7a95"},{"name":"imported/button/root/background-color/knockout/default","type":"COLOR","value":"#f7f8f7"},{"name":"imported/button/root/background-color/knockout/hover","type":"COLOR","value":"#c6c7c6"},{"name":"imported/button/root/background-color/knockout/active","type":"COLOR","value":"#f7f8f7"},{"name":"imported/button/root/background-color/knockout/focus","type":"COLOR","value":"#f7f8f7"},{"name":"imported/button/root/background-color/secondary/default","type":"COLOR","value":"#0000020d"},{"name":"imported/button/root/background-color/secondary/hover","type":"COLOR","value":"#00000233"},{"name":"imported/button/root/background-color/secondary/active","type":"COLOR","value":"#0000020d"},{"name":"imported/button/root/background-color/secondary/focus","type":"COLOR","value":"#0000020d"},{"name":"imported/button/root/background-color/bare/default","type":"COLOR","value":"#00000200"},{"name":"imported/button/root/background-color/bare/hover","type":"COLOR","value":"#00000233"},{"name":"imported/button/root/background-color/bare/active","type":"COLOR","value":"#00000200"},{"name":"imported/button/root/background-color/bare/focus","type":"COLOR","value":"#00000200"},{"name":"imported/button/root/gap","type":"FLOAT","value":4},{"name":"imported/button/root/padding-inline","type":"FLOAT","value":12},{"name":"imported/button/root/padding-block","type":"FLOAT","value":6},{"name":"imported/button/root/border-radius","type":"FLOAT","value":8},{"name":"imported/button/root/border-width/primary","type":"FLOAT","value":1},{"name":"imported/button/root/border-width/knockout","type":"FLOAT","value":0},{"name":"imported/button/root/border-width/secondary","type":"FLOAT","value":1},{"name":"imported/button/root/border-width/bare","type":"FLOAT","value":0},{"name":"imported/button/focus-ring/border-color","type":"COLOR","value":"#2d6079"},{"name":"imported/button/focus-ring/border-radius","type":"FLOAT","value":11},{"name":"imported/button/focus-ring/border-width","type":"FLOAT","value":2},{"name":"imported/button/label/color/primary","type":"COLOR","value":"#ffffff"},{"name":"imported/button/label/color/knockout","type":"COLOR","value":"#252729"},{"name":"imported/button/label/color/secondary","type":"COLOR","value":"#252729"},{"name":"imported/button/label/color/bare","type":"COLOR","value":"#252729"},{"name":"imported/button/label/font-size","type":"FLOAT","value":14}];
+const MINTED_VARIABLES = [{"name":"imported/button/root/background-color/primary","type":"COLOR","value":"#3d7a95"},{"name":"imported/button/root/background-color/knockout","type":"COLOR","value":"#f7f8f7"},{"name":"imported/button/root/background-color/secondary","type":"COLOR","value":"#0000020d"},{"name":"imported/button/root/background-color/bare","type":"COLOR","value":"#00000200"},{"name":"imported/button/root/gap","type":"FLOAT","value":4},{"name":"imported/button/root/padding-inline","type":"FLOAT","value":12},{"name":"imported/button/root/padding-block","type":"FLOAT","value":6},{"name":"imported/button/root/border-radius","type":"FLOAT","value":8},{"name":"imported/button/root/border-width/primary","type":"FLOAT","value":1},{"name":"imported/button/root/border-width/knockout","type":"FLOAT","value":0},{"name":"imported/button/root/border-width/secondary","type":"FLOAT","value":1},{"name":"imported/button/root/border-width/bare","type":"FLOAT","value":0},{"name":"imported/button/label/color/primary","type":"COLOR","value":"#ffffff"},{"name":"imported/button/label/color/knockout","type":"COLOR","value":"#252729"},{"name":"imported/button/label/color/secondary","type":"COLOR","value":"#252729"},{"name":"imported/button/label/color/bare","type":"COLOR","value":"#252729"},{"name":"imported/button/label/font-size","type":"FLOAT","value":14},{"name":"imported/button/state-hover/background-color/primary","type":"COLOR","value":"#2d6079"},{"name":"imported/button/state-hover/background-color/knockout","type":"COLOR","value":"#c6c7c6"},{"name":"imported/button/state-hover/background-color/secondary","type":"COLOR","value":"#00000233"},{"name":"imported/button/state-hover/background-color/bare","type":"COLOR","value":"#00000233"},{"name":"imported/button/state-active/background-color/primary","type":"COLOR","value":"#2d6079"},{"name":"imported/button/state-active/background-color/knockout","type":"COLOR","value":"#f7f8f7"},{"name":"imported/button/state-active/background-color/secondary","type":"COLOR","value":"#0000020d"},{"name":"imported/button/state-active/background-color/bare","type":"COLOR","value":"#00000200"},{"name":"imported/button/state-focus-visible/outline-color","type":"COLOR","value":"#2d6079"},{"name":"imported/button/state-focus-visible/outline-width","type":"FLOAT","value":2}];
 {
   // Minted colors may be 8-digit hex (paint opacity captured by dump v1.1) —
   // Figma COLOR variables accept RGBA, so the alpha channel survives.

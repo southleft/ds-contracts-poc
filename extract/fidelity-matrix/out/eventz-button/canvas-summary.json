@@ -1,7 +1,7 @@
 {
   "htmlOk": true,
   "script": {
-    "bytes": 57263,
+    "bytes": 54226,
     "mintedPreamble": true,
     "syntaxOk": true
   },
@@ -9,8 +9,8 @@
     "setName": "Button",
     "variants": [
       {
-        "name": "variant=primary, state=default",
-        "rootFill": "imported/button/root/background-color/primary/default",
+        "name": "variant=primary",
+        "rootFill": "imported/button/root/background-color/primary",
         "rootStroke": null,
         "bindings": {
           "itemSpacing": "imported/button/root/gap",
@@ -26,59 +26,8 @@
         }
       },
       {
-        "name": "variant=primary, state=hover",
-        "rootFill": "imported/button/root/background-color/primary/hover",
-        "rootStroke": null,
-        "bindings": {
-          "itemSpacing": "imported/button/root/gap",
-          "paddingLeft": "imported/button/root/padding-inline",
-          "paddingRight": "imported/button/root/padding-inline",
-          "paddingTop": "imported/button/root/padding-block",
-          "paddingBottom": "imported/button/root/padding-block",
-          "topLeftRadius": "imported/button/root/border-radius",
-          "topRightRadius": "imported/button/root/border-radius",
-          "bottomLeftRadius": "imported/button/root/border-radius",
-          "bottomRightRadius": "imported/button/root/border-radius",
-          "strokeWeight": "imported/button/root/border-width/primary"
-        }
-      },
-      {
-        "name": "variant=primary, state=active",
-        "rootFill": "imported/button/root/background-color/primary/active",
-        "rootStroke": null,
-        "bindings": {
-          "itemSpacing": "imported/button/root/gap",
-          "paddingLeft": "imported/button/root/padding-inline",
-          "paddingRight": "imported/button/root/padding-inline",
-          "paddingTop": "imported/button/root/padding-block",
-          "paddingBottom": "imported/button/root/padding-block",
-          "topLeftRadius": "imported/button/root/border-radius",
-          "topRightRadius": "imported/button/root/border-radius",
-          "bottomLeftRadius": "imported/button/root/border-radius",
-          "bottomRightRadius": "imported/button/root/border-radius",
-          "strokeWeight": "imported/button/root/border-width/primary"
-        }
-      },
-      {
-        "name": "variant=primary, state=focus",
-        "rootFill": "imported/button/root/background-color/primary/focus",
-        "rootStroke": null,
-        "bindings": {
-          "itemSpacing": "imported/button/root/gap",
-          "paddingLeft": "imported/button/root/padding-inline",
-          "paddingRight": "imported/button/root/padding-inline",
-          "paddingTop": "imported/button/root/padding-block",
-          "paddingBottom": "imported/button/root/padding-block",
-          "topLeftRadius": "imported/button/root/border-radius",
-          "topRightRadius": "imported/button/root/border-radius",
-          "bottomLeftRadius": "imported/button/root/border-radius",
-          "bottomRightRadius": "imported/button/root/border-radius",
-          "strokeWeight": "imported/button/root/border-width/primary"
-        }
-      },
-      {
-        "name": "variant=knockout, state=default",
-        "rootFill": "imported/button/root/background-color/knockout/default",
+        "name": "variant=knockout",
+        "rootFill": "imported/button/root/background-color/knockout",
         "rootStroke": null,
         "bindings": {
           "itemSpacing": "imported/button/root/gap",
@@ -94,59 +43,8 @@
         }
       },
       {
-        "name": "variant=knockout, state=hover",
-        "rootFill": "imported/button/root/background-color/knockout/hover",
-        "rootStroke": null,
-        "bindings": {
-          "itemSpacing": "imported/button/root/gap",
-          "paddingLeft": "imported/button/root/padding-inline",
-          "paddingRight": "imported/button/root/padding-inline",
-          "paddingTop": "imported/button/root/padding-block",
-          "paddingBottom": "imported/button/root/padding-block",
-          "topLeftRadius": "imported/button/root/border-radius",
-          "topRightRadius": "imported/button/root/border-radius",
-          "bottomLeftRadius": "imported/button/root/border-radius",
-          "bottomRightRadius": "imported/button/root/border-radius",
-          "strokeWeight": "imported/button/root/border-width/knockout"
-        }
-      },
-      {
-        "name": "variant=knockout, state=active",
-        "rootFill": "imported/button/root/background-color/knockout/active",
-        "rootStroke": null,
-        "bindings": {
-          "itemSpacing": "imported/button/root/gap",
-          "paddingLeft": "imported/button/root/padding-inline",
-          "paddingRight": "imported/button/root/padding-inline",
-          "paddingTop": "imported/button/root/padding-block",
-          "paddingBottom": "imported/button/root/padding-block",
-          "topLeftRadius": "imported/button/root/border-radius",
-          "topRightRadius": "imported/button/root/border-radius",
-          "bottomLeftRadius": "imported/button/root/border-radius",
-          "bottomRightRadius": "imported/button/root/border-radius",
-          "strokeWeight": "imported/button/root/border-width/knockout"
-        }
-      },
-      {
-        "name": "variant=knockout, state=focus",
-        "rootFill": "imported/button/root/background-color/knockout/focus",
-        "rootStroke": null,
-        "bindings": {
-          "itemSpacing": "imported/button/root/gap",
-          "paddingLeft": "imported/button/root/padding-inline",
-          "paddingRight": "imported/button/root/padding-inline",
-          "paddingTop": "imported/button/root/padding-block",
-          "paddingBottom": "imported/button/root/padding-block",
-          "topLeftRadius": "imported/button/root/border-radius",
-          "topRightRadius": "imported/button/root/border-radius",
-          "bottomLeftRadius": "imported/button/root/border-radius",
-          "bottomRightRadius": "imported/button/root/border-radius",
-          "strokeWeight": "imported/button/root/border-width/knockout"
-        }
-      },
-      {
-        "name": "variant=secondary, state=default",
-        "rootFill": "imported/button/root/background-color/secondary/default",
+        "name": "variant=secondary",
+        "rootFill": "imported/button/root/background-color/secondary",
         "rootStroke": null,
         "bindings": {
           "itemSpacing": "imported/button/root/gap",
@@ -162,110 +60,8 @@
         }
       },
       {
-        "name": "variant=secondary, state=hover",
-        "rootFill": "imported/button/root/background-color/secondary/hover",
-        "rootStroke": null,
-        "bindings": {
-          "itemSpacing": "imported/button/root/gap",
-          "paddingLeft": "imported/button/root/padding-inline",
-          "paddingRight": "imported/button/root/padding-inline",
-          "paddingTop": "imported/button/root/padding-block",
-          "paddingBottom": "imported/button/root/padding-block",
-          "topLeftRadius": "imported/button/root/border-radius",
-          "topRightRadius": "imported/button/root/border-radius",
-          "bottomLeftRadius": "imported/button/root/border-radius",
-          "bottomRightRadius": "imported/button/root/border-radius",
-          "strokeWeight": "imported/button/root/border-width/secondary"
-        }
-      },
-      {
-        "name": "variant=secondary, state=active",
-        "rootFill": "imported/button/root/background-color/secondary/active",
-        "rootStroke": null,
-        "bindings": {
-          "itemSpacing": "imported/button/root/gap",
-          "paddingLeft": "imported/button/root/padding-inline",
-          "paddingRight": "imported/button/root/padding-inline",
-          "paddingTop": "imported/button/root/padding-block",
-          "paddingBottom": "imported/button/root/padding-block",
-          "topLeftRadius": "imported/button/root/border-radius",
-          "topRightRadius": "imported/button/root/border-radius",
-          "bottomLeftRadius": "imported/button/root/border-radius",
-          "bottomRightRadius": "imported/button/root/border-radius",
-          "strokeWeight": "imported/button/root/border-width/secondary"
-        }
-      },
-      {
-        "name": "variant=secondary, state=focus",
-        "rootFill": "imported/button/root/background-color/secondary/focus",
-        "rootStroke": null,
-        "bindings": {
-          "itemSpacing": "imported/button/root/gap",
-          "paddingLeft": "imported/button/root/padding-inline",
-          "paddingRight": "imported/button/root/padding-inline",
-          "paddingTop": "imported/button/root/padding-block",
-          "paddingBottom": "imported/button/root/padding-block",
-          "topLeftRadius": "imported/button/root/border-radius",
-          "topRightRadius": "imported/button/root/border-radius",
-          "bottomLeftRadius": "imported/button/root/border-radius",
-          "bottomRightRadius": "imported/button/root/border-radius",
-          "strokeWeight": "imported/button/root/border-width/secondary"
-        }
-      },
-      {
-        "name": "variant=bare, state=default",
-        "rootFill": "imported/button/root/background-color/bare/default",
-        "rootStroke": null,
-        "bindings": {
-          "itemSpacing": "imported/button/root/gap",
-          "paddingLeft": "imported/button/root/padding-inline",
-          "paddingRight": "imported/button/root/padding-inline",
-          "paddingTop": "imported/button/root/padding-block",
-          "paddingBottom": "imported/button/root/padding-block",
-          "topLeftRadius": "imported/button/root/border-radius",
-          "topRightRadius": "imported/button/root/border-radius",
-          "bottomLeftRadius": "imported/button/root/border-radius",
-          "bottomRightRadius": "imported/button/root/border-radius",
-          "strokeWeight": "imported/button/root/border-width/bare"
-        }
-      },
-      {
-        "name": "variant=bare, state=hover",
-        "rootFill": "imported/button/root/background-color/bare/hover",
-        "rootStroke": null,
-        "bindings": {
-          "itemSpacing": "imported/button/root/gap",
-          "paddingLeft": "imported/button/root/padding-inline",
-          "paddingRight": "imported/button/root/padding-inline",
-          "paddingTop": "imported/button/root/padding-block",
-          "paddingBottom": "imported/button/root/padding-block",
-          "topLeftRadius": "imported/button/root/border-radius",
-          "topRightRadius": "imported/button/root/border-radius",
-          "bottomLeftRadius": "imported/button/root/border-radius",
-          "bottomRightRadius": "imported/button/root/border-radius",
-          "strokeWeight": "imported/button/root/border-width/bare"
-        }
-      },
-      {
-        "name": "variant=bare, state=active",
-        "rootFill": "imported/button/root/background-color/bare/active",
-        "rootStroke": null,
-        "bindings": {
-          "itemSpacing": "imported/button/root/gap",
-          "paddingLeft": "imported/button/root/padding-inline",
-          "paddingRight": "imported/button/root/padding-inline",
-          "paddingTop": "imported/button/root/padding-block",
-          "paddingBottom": "imported/button/root/padding-block",
-          "topLeftRadius": "imported/button/root/border-radius",
-          "topRightRadius": "imported/button/root/border-radius",
-          "bottomLeftRadius": "imported/button/root/border-radius",
-          "bottomRightRadius": "imported/button/root/border-radius",
-          "strokeWeight": "imported/button/root/border-width/bare"
-        }
-      },
-      {
-        "name": "variant=bare, state=focus",
-        "rootFill": "imported/button/root/background-color/bare/focus",
+        "name": "variant=bare",
+        "rootFill": "imported/button/root/background-color/bare",
         "rootStroke": null,
         "bindings": {
           "itemSpacing": "imported/button/root/gap",

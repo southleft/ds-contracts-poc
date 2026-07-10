@@ -378,3 +378,39 @@ fixtures (remapped offline to dump v1.2 from their committed rest-nodes).
    v1.3 candidates, receipted per node.
 6. Nested-part states, boolean-conditional styling, media queries — the
    authored vocabulary exists; inversion does not.
+
+## Owner-P0 addendum — semantics + state-axis promotion + exact values (2026-07-09)
+
+Everything above stands as written; this section is additive. Field case:
+the owner's own CBDS **Button-Brand Primary** import (`WofZT8xaxXuc2Q6Je9S4XE`,
+node `258-1838` — committed live at
+`extract/figma/fixtures/cbds-button-brand-primary.rest-dump.json`, byte-identical
+to the D-design fixture). What he got before this branch: a button rendering
+as an unfocusable `div`, a fake `state` enum prop shipped to code, two
+"ds.icon has no contract in scope" refusals, and — the trust-killer —
+**wrong padding/font-size** (the small button rendered at 16px because the
+proposer adopted a single text-style identity from the FIRST variant).
+
+| # | fix | receipt |
+|---|-----|---------|
+| 1 | **semantics.element inferred deterministically** inside `proposeFromDump` — a pure name/axis table (`inferSemantics`), zero AI: button/btn→`button`, link→`a`, tooltip→`div`+role, heading+level axis→`h*`+elementByProp, switch/checkbox/select/input→form elements, `group`→no match, no-match→`div` hedge; an interaction-state axis alone corroborates `button`. Every hit is a NAMED review note. | `npm run extract:figma:cbds:check`; eval `design-semantics-element-inference` |
+| 2 | **Interaction-state axis promotion** — an axis whose values ⊆ {default, hover, focus, focus-visible, active, pressed, disabled} never becomes a prop: base facts come from the default-state variants; hover→`states.hover`, pressed→`states.active`, focus→`states.focus-visible` as root overrides (bound→refs; raw→the SAME mint pass, per-remaining-axis substituted refs — Eventz hover = `{imported.button.state-hover.background-color.{variant}}`); `disabled`→ a native BOOLEAN prop + `states.disabled`; a stroke-only child drawn only in focus variants (both Focus rings) inverts to the **outline pair**; `figmaStatePreviews: true` round-trips the axis (respelled `State`/`Hover`/`Active`/`Focus Visible` — rename DOCUMENTED in a note). | eval `design-state-axis-promotion-cbds-replay`; base-instance-check re-pinned |
+| 3 | **Exact per-size values** — the typography-uniformity guard refuses single-style adoption when fontSize/weight vary across variants (the 16px-everywhere bug); font-size mints per size. Emitted padding-inline/-block and font-size now resolve BYTE-EQUAL to the dump per size (large 16px/8px/16px, small 12px/8px/14px). Root cause was (a): `invertTextTokens` sampled `first(m.occ)` and matched the repo corpus (`font.title`) — a plausible-but-wrong constant; capture was correct all along. | cbds-check `size=*: padding/font-size EXACT` lines |
+| 4 | **Child stubs registered in the playground** — `engine/stub-contracts.ts` (module store, the minted-layer pattern); `validate.ts` merges stubs into the contracts map (never overriding repo contracts or the edited contract); workspace persists/restores them; receipts carry a "Child stub contracts (provisional)" group. The owner's two ds.icon refusals cannot recur. | eval `design-child-stubs-prevent-scope-refusals` |
+
+Re-scored after the change (scorers taught to read the promoted vocabulary —
+`score-props` maps a state axis to contract `states`; `score-styles` overlays
+`root.states` per state variant, remaps the focus ring to the outline pair,
+and reclassifies part-level state diffs as MISSING-named per B7):
+
+| subject | props | style fact-cells | mismatches |
+|---|---|---|---|
+| C. Eventz Button | 6✓ 2◐ 0✗ (state → states [hover, active, focus-visible]) | 155: 135 MINTED, 20 MISSING (all named: focus-ring radius ×8, partial stroke ×12) | **0** |
+| D. CBDS design | 5✓ 0◐ 0✗ (state → states + native `disabled`) | 84: 78 MINTED, 6 MISSING (named: disabled label color B7 ×3, focus-ring radius ×3) | **0** |
+| D-convergence | axes 1 AGREE / 3 PARTIAL / 1 DESIGN-ONLY / 2 CODE-ONLY — "interaction states" is now **AGREE** (both sides declare the SAME contract states) | facts **15 AGREE / 0 DIVERGE** / 4 CODE-ONLY (each named) | — |
+
+The `font-size (small)` DIVERGE — the row that carried the owner's complaint —
+is now AGREE at 14px on both sides. The two facts that left the AGREE column
+(label-color-disabled, font-weight) did not become wrong values: both moved to
+CODE-ONLY with the design side naming its own gap (B7 part-level states; no
+weight identity without a single text style).

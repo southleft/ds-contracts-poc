@@ -2,7 +2,7 @@
 // Source of truth: contracts/button-group.contract.json (ds.button-group v0.1.0)
 let SET_NAME = "ButtonGroup";
 const CONTRACT_ID = "ds.button-group";
-const DESCRIPTION = "PROPOSED contract extracted from the design canvas (extract/figma dump v1) — API, anatomy, and token bindings inverted from the drawn structure. Semantics, a11y, events, and slot accepts are not canvas-recoverable; review before adoption. — governed by contract ds.button-group v0.1.0";
+const DESCRIPTION = "PROPOSED contract extracted from the design canvas (extract/figma dump v1) — API, anatomy, and token bindings inverted from the drawn structure. Semantics beyond the name/axis inference table, a11y, events, and slot accepts are not canvas-recoverable; review before adoption. — governed by contract ds.button-group v0.1.0";
 const IS_SET = true;
 const BOOL_PROPS = [{"property":"isPill","default":false}];
 const TEXT_PROPS = [];

@@ -2,25 +2,25 @@
 // Source of truth: contracts/button-brand-primary.contract.json (ds.button-brand-primary v0.1.0)
 let SET_NAME = "ButtonBrandPrimary";
 const CONTRACT_ID = "ds.button-brand-primary";
-const DESCRIPTION = "PROPOSED contract extracted from the design canvas (extract/figma dump v1) — API, anatomy, and token bindings inverted from the drawn structure. Semantics, a11y, events, and slot accepts are not canvas-recoverable; review before adoption. — governed by contract ds.button-brand-primary v0.1.0";
+const DESCRIPTION = "PROPOSED contract extracted from the design canvas (extract/figma dump v1) — API, anatomy, and token bindings inverted from the drawn structure. Semantics beyond the name/axis inference table, a11y, events, and slot accepts are not canvas-recoverable; review before adoption. — governed by contract ds.button-brand-primary v0.1.0";
 const IS_SET = true;
-const BOOL_PROPS = [{"property":"↪️icon-left","default":false},{"property":"↪️icon-right","default":false}];
+const BOOL_PROPS = [{"property":"↪️icon-left","default":false},{"property":"↪️icon-right","default":false},{"property":"Disabled","default":false}];
 const TEXT_PROPS = [];
-const FONT_STYLES = ["Medium","Semi Bold"];
+const FONT_STYLES = ["Medium"];
 const VARIANTS = [
   {
-    "name": "size=large, state=default",
+    "name": "size=large",
     "row": 0,
     "col": 0,
     "spec": {
       "type": "root",
-      "name": "size=large, state=default",
+      "name": "size=large",
       "layout": {
         "mode": "HORIZONTAL",
         "primary": "CENTER",
         "counter": "CENTER"
       },
-      "fill": "imported/button-brand-primary/root/background-color/default",
+      "fill": "imported/button-brand-primary/root/background-color",
       "bindings": {
         "itemSpacing": "imported/shared/size-8",
         "paddingLeft": "imported/button-brand-primary/root/padding-inline/large",
@@ -48,295 +48,36 @@ const VARIANTS = [
           "name": "Button",
           "characters": "Button",
           "fontSize": 16,
-          "fontStyle": "Semi Bold",
-          "textStyle": "title",
-          "textFill": "imported/button-brand-primary/button/color/default",
-          "contentProp": "✏️text"
-        },
-        {
-          "type": "instance",
-          "name": "icon2",
-          "dep": "Icon",
-          "depProps": {
-            "size": "large"
-          },
-          "visibleProp": "↪️icon-right",
-          "visibleDefault": false
-        }
-      ]
-    }
-  },
-  {
-    "name": "size=large, state=hover",
-    "row": 0,
-    "col": 1,
-    "spec": {
-      "type": "root",
-      "name": "size=large, state=hover",
-      "layout": {
-        "mode": "HORIZONTAL",
-        "primary": "CENTER",
-        "counter": "CENTER"
-      },
-      "fill": "imported/button-brand-primary/root/background-color/hover",
-      "bindings": {
-        "itemSpacing": "imported/shared/size-8",
-        "paddingLeft": "imported/button-brand-primary/root/padding-inline/large",
-        "paddingRight": "imported/button-brand-primary/root/padding-inline/large",
-        "paddingTop": "imported/shared/size-8",
-        "paddingBottom": "imported/shared/size-8",
-        "topLeftRadius": "imported/shared/size-8",
-        "topRightRadius": "imported/shared/size-8",
-        "bottomLeftRadius": "imported/shared/size-8",
-        "bottomRightRadius": "imported/shared/size-8"
-      },
-      "children": [
-        {
-          "type": "instance",
-          "name": "Icon",
-          "dep": "Icon",
-          "depProps": {
-            "size": "large"
-          },
-          "visibleProp": "↪️icon-left",
-          "visibleDefault": false
-        },
-        {
-          "type": "text",
-          "name": "Button",
-          "characters": "Button",
-          "fontSize": 16,
-          "fontStyle": "Semi Bold",
-          "textStyle": "title",
-          "textFill": "imported/button-brand-primary/button/color/hover",
-          "contentProp": "✏️text"
-        },
-        {
-          "type": "instance",
-          "name": "icon2",
-          "dep": "Icon",
-          "depProps": {
-            "size": "large"
-          },
-          "visibleProp": "↪️icon-right",
-          "visibleDefault": false
-        }
-      ]
-    }
-  },
-  {
-    "name": "size=large, state=focus",
-    "row": 0,
-    "col": 2,
-    "spec": {
-      "type": "root",
-      "name": "size=large, state=focus",
-      "layout": {
-        "mode": "HORIZONTAL",
-        "primary": "CENTER",
-        "counter": "CENTER"
-      },
-      "fill": "imported/button-brand-primary/root/background-color/focus",
-      "bindings": {
-        "itemSpacing": "imported/shared/size-8",
-        "paddingLeft": "imported/button-brand-primary/root/padding-inline/large",
-        "paddingRight": "imported/button-brand-primary/root/padding-inline/large",
-        "paddingTop": "imported/shared/size-8",
-        "paddingBottom": "imported/shared/size-8",
-        "topLeftRadius": "imported/shared/size-8",
-        "topRightRadius": "imported/shared/size-8",
-        "bottomLeftRadius": "imported/shared/size-8",
-        "bottomRightRadius": "imported/shared/size-8"
-      },
-      "children": [
-        {
-          "type": "instance",
-          "name": "Icon",
-          "dep": "Icon",
-          "depProps": {
-            "size": "large"
-          },
-          "visibleProp": "↪️icon-left",
-          "visibleDefault": false
-        },
-        {
-          "type": "text",
-          "name": "Button",
-          "characters": "Button",
-          "fontSize": 16,
-          "fontStyle": "Semi Bold",
-          "textStyle": "title",
-          "textFill": "imported/button-brand-primary/button/color/focus",
-          "contentProp": "✏️text"
-        },
-        {
-          "type": "instance",
-          "name": "icon2",
-          "dep": "Icon",
-          "depProps": {
-            "size": "large"
-          },
-          "visibleProp": "↪️icon-right",
-          "visibleDefault": false
-        },
-        {
-          "type": "frame",
-          "name": "focusRing",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "MIN",
-            "counter": "MIN"
-          },
-          "stroke": "imported/button-brand-primary/focus-ring/border-color",
-          "bindings": {
-            "topLeftRadius": "imported/button-brand-primary/focus-ring/border-radius",
-            "topRightRadius": "imported/button-brand-primary/focus-ring/border-radius",
-            "bottomLeftRadius": "imported/button-brand-primary/focus-ring/border-radius",
-            "bottomRightRadius": "imported/button-brand-primary/focus-ring/border-radius",
-            "strokeWeight": "imported/button-brand-primary/focus-ring/border-width"
-          },
-          "children": []
-        }
-      ]
-    }
-  },
-  {
-    "name": "size=large, state=pressed",
-    "row": 0,
-    "col": 3,
-    "spec": {
-      "type": "root",
-      "name": "size=large, state=pressed",
-      "layout": {
-        "mode": "HORIZONTAL",
-        "primary": "CENTER",
-        "counter": "CENTER"
-      },
-      "fill": "imported/button-brand-primary/root/background-color/pressed",
-      "bindings": {
-        "itemSpacing": "imported/shared/size-8",
-        "paddingLeft": "imported/button-brand-primary/root/padding-inline/large",
-        "paddingRight": "imported/button-brand-primary/root/padding-inline/large",
-        "paddingTop": "imported/shared/size-8",
-        "paddingBottom": "imported/shared/size-8",
-        "topLeftRadius": "imported/shared/size-8",
-        "topRightRadius": "imported/shared/size-8",
-        "bottomLeftRadius": "imported/shared/size-8",
-        "bottomRightRadius": "imported/shared/size-8"
-      },
-      "children": [
-        {
-          "type": "instance",
-          "name": "Icon",
-          "dep": "Icon",
-          "depProps": {
-            "size": "large"
-          },
-          "visibleProp": "↪️icon-left",
-          "visibleDefault": false
-        },
-        {
-          "type": "text",
-          "name": "Button",
-          "characters": "Button",
-          "fontSize": 16,
-          "fontStyle": "Semi Bold",
-          "textStyle": "title",
-          "textFill": "imported/button-brand-primary/button/color/pressed",
-          "contentProp": "✏️text"
-        },
-        {
-          "type": "instance",
-          "name": "icon2",
-          "dep": "Icon",
-          "depProps": {
-            "size": "large"
-          },
-          "visibleProp": "↪️icon-right",
-          "visibleDefault": false
-        }
-      ]
-    }
-  },
-  {
-    "name": "size=large, state=disabled",
-    "row": 0,
-    "col": 4,
-    "spec": {
-      "type": "root",
-      "name": "size=large, state=disabled",
-      "layout": {
-        "mode": "HORIZONTAL",
-        "primary": "CENTER",
-        "counter": "CENTER"
-      },
-      "fill": "imported/button-brand-primary/root/background-color/disabled",
-      "bindings": {
-        "itemSpacing": "imported/shared/size-8",
-        "paddingLeft": "imported/button-brand-primary/root/padding-inline/large",
-        "paddingRight": "imported/button-brand-primary/root/padding-inline/large",
-        "paddingTop": "imported/shared/size-8",
-        "paddingBottom": "imported/shared/size-8",
-        "topLeftRadius": "imported/shared/size-8",
-        "topRightRadius": "imported/shared/size-8",
-        "bottomLeftRadius": "imported/shared/size-8",
-        "bottomRightRadius": "imported/shared/size-8"
-      },
-      "children": [
-        {
-          "type": "instance",
-          "name": "Icon",
-          "dep": "Icon",
-          "depProps": {
-            "size": "large"
-          },
-          "visibleProp": "↪️icon-left",
-          "visibleDefault": false
-        },
-        {
-          "type": "text",
-          "name": "Button",
-          "characters": "Button",
-          "fontSize": 16,
-          "fontStyle": "Semi Bold",
-          "textStyle": "title",
-          "textFill": "imported/button-brand-primary/button/color/disabled",
-          "contentProp": "✏️text"
-        },
-        {
-          "type": "instance",
-          "name": "icon2",
-          "dep": "Icon",
-          "depProps": {
-            "size": "large"
-          },
-          "visibleProp": "↪️icon-right",
-          "visibleDefault": false
-        },
-        {
-          "type": "text",
-          "name": "Tooltip",
-          "characters": "This action is currently unavailable",
-          "fontSize": 12,
           "fontStyle": "Medium",
-          "textFill": "imported/button-brand-primary/tooltip/color"
+          "textFill": "imported/button-brand-primary/button/color",
+          "contentProp": "✏️text"
+        },
+        {
+          "type": "instance",
+          "name": "icon2",
+          "dep": "Icon",
+          "depProps": {
+            "size": "large"
+          },
+          "visibleProp": "↪️icon-right",
+          "visibleDefault": false
         }
       ]
     }
   },
   {
-    "name": "size=medium, state=default",
+    "name": "size=medium",
     "row": 1,
     "col": 0,
     "spec": {
       "type": "root",
-      "name": "size=medium, state=default",
+      "name": "size=medium",
       "layout": {
         "mode": "HORIZONTAL",
         "primary": "CENTER",
         "counter": "CENTER"
       },
-      "fill": "imported/button-brand-primary/root/background-color/default",
+      "fill": "imported/button-brand-primary/root/background-color",
       "bindings": {
         "itemSpacing": "imported/shared/size-8",
         "paddingLeft": "imported/button-brand-primary/root/padding-inline/medium",
@@ -364,295 +105,36 @@ const VARIANTS = [
           "name": "Button",
           "characters": "Button",
           "fontSize": 16,
-          "fontStyle": "Semi Bold",
-          "textStyle": "title",
-          "textFill": "imported/button-brand-primary/button/color/default",
-          "contentProp": "✏️text"
-        },
-        {
-          "type": "instance",
-          "name": "icon2",
-          "dep": "Icon",
-          "depProps": {
-            "size": "large"
-          },
-          "visibleProp": "↪️icon-right",
-          "visibleDefault": false
-        }
-      ]
-    }
-  },
-  {
-    "name": "size=medium, state=hover",
-    "row": 1,
-    "col": 1,
-    "spec": {
-      "type": "root",
-      "name": "size=medium, state=hover",
-      "layout": {
-        "mode": "HORIZONTAL",
-        "primary": "CENTER",
-        "counter": "CENTER"
-      },
-      "fill": "imported/button-brand-primary/root/background-color/hover",
-      "bindings": {
-        "itemSpacing": "imported/shared/size-8",
-        "paddingLeft": "imported/button-brand-primary/root/padding-inline/medium",
-        "paddingRight": "imported/button-brand-primary/root/padding-inline/medium",
-        "paddingTop": "imported/shared/size-8",
-        "paddingBottom": "imported/shared/size-8",
-        "topLeftRadius": "imported/shared/size-8",
-        "topRightRadius": "imported/shared/size-8",
-        "bottomLeftRadius": "imported/shared/size-8",
-        "bottomRightRadius": "imported/shared/size-8"
-      },
-      "children": [
-        {
-          "type": "instance",
-          "name": "Icon",
-          "dep": "Icon",
-          "depProps": {
-            "size": "large"
-          },
-          "visibleProp": "↪️icon-left",
-          "visibleDefault": false
-        },
-        {
-          "type": "text",
-          "name": "Button",
-          "characters": "Button",
-          "fontSize": 16,
-          "fontStyle": "Semi Bold",
-          "textStyle": "title",
-          "textFill": "imported/button-brand-primary/button/color/hover",
-          "contentProp": "✏️text"
-        },
-        {
-          "type": "instance",
-          "name": "icon2",
-          "dep": "Icon",
-          "depProps": {
-            "size": "large"
-          },
-          "visibleProp": "↪️icon-right",
-          "visibleDefault": false
-        }
-      ]
-    }
-  },
-  {
-    "name": "size=medium, state=focus",
-    "row": 1,
-    "col": 2,
-    "spec": {
-      "type": "root",
-      "name": "size=medium, state=focus",
-      "layout": {
-        "mode": "HORIZONTAL",
-        "primary": "CENTER",
-        "counter": "CENTER"
-      },
-      "fill": "imported/button-brand-primary/root/background-color/focus",
-      "bindings": {
-        "itemSpacing": "imported/shared/size-8",
-        "paddingLeft": "imported/button-brand-primary/root/padding-inline/medium",
-        "paddingRight": "imported/button-brand-primary/root/padding-inline/medium",
-        "paddingTop": "imported/shared/size-8",
-        "paddingBottom": "imported/shared/size-8",
-        "topLeftRadius": "imported/shared/size-8",
-        "topRightRadius": "imported/shared/size-8",
-        "bottomLeftRadius": "imported/shared/size-8",
-        "bottomRightRadius": "imported/shared/size-8"
-      },
-      "children": [
-        {
-          "type": "instance",
-          "name": "Icon",
-          "dep": "Icon",
-          "depProps": {
-            "size": "large"
-          },
-          "visibleProp": "↪️icon-left",
-          "visibleDefault": false
-        },
-        {
-          "type": "text",
-          "name": "Button",
-          "characters": "Button",
-          "fontSize": 16,
-          "fontStyle": "Semi Bold",
-          "textStyle": "title",
-          "textFill": "imported/button-brand-primary/button/color/focus",
-          "contentProp": "✏️text"
-        },
-        {
-          "type": "instance",
-          "name": "icon2",
-          "dep": "Icon",
-          "depProps": {
-            "size": "large"
-          },
-          "visibleProp": "↪️icon-right",
-          "visibleDefault": false
-        },
-        {
-          "type": "frame",
-          "name": "focusRing",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "MIN",
-            "counter": "MIN"
-          },
-          "stroke": "imported/button-brand-primary/focus-ring/border-color",
-          "bindings": {
-            "topLeftRadius": "imported/button-brand-primary/focus-ring/border-radius",
-            "topRightRadius": "imported/button-brand-primary/focus-ring/border-radius",
-            "bottomLeftRadius": "imported/button-brand-primary/focus-ring/border-radius",
-            "bottomRightRadius": "imported/button-brand-primary/focus-ring/border-radius",
-            "strokeWeight": "imported/button-brand-primary/focus-ring/border-width"
-          },
-          "children": []
-        }
-      ]
-    }
-  },
-  {
-    "name": "size=medium, state=pressed",
-    "row": 1,
-    "col": 3,
-    "spec": {
-      "type": "root",
-      "name": "size=medium, state=pressed",
-      "layout": {
-        "mode": "HORIZONTAL",
-        "primary": "CENTER",
-        "counter": "CENTER"
-      },
-      "fill": "imported/button-brand-primary/root/background-color/pressed",
-      "bindings": {
-        "itemSpacing": "imported/shared/size-8",
-        "paddingLeft": "imported/button-brand-primary/root/padding-inline/medium",
-        "paddingRight": "imported/button-brand-primary/root/padding-inline/medium",
-        "paddingTop": "imported/shared/size-8",
-        "paddingBottom": "imported/shared/size-8",
-        "topLeftRadius": "imported/shared/size-8",
-        "topRightRadius": "imported/shared/size-8",
-        "bottomLeftRadius": "imported/shared/size-8",
-        "bottomRightRadius": "imported/shared/size-8"
-      },
-      "children": [
-        {
-          "type": "instance",
-          "name": "Icon",
-          "dep": "Icon",
-          "depProps": {
-            "size": "large"
-          },
-          "visibleProp": "↪️icon-left",
-          "visibleDefault": false
-        },
-        {
-          "type": "text",
-          "name": "Button",
-          "characters": "Button",
-          "fontSize": 16,
-          "fontStyle": "Semi Bold",
-          "textStyle": "title",
-          "textFill": "imported/button-brand-primary/button/color/pressed",
-          "contentProp": "✏️text"
-        },
-        {
-          "type": "instance",
-          "name": "icon2",
-          "dep": "Icon",
-          "depProps": {
-            "size": "large"
-          },
-          "visibleProp": "↪️icon-right",
-          "visibleDefault": false
-        }
-      ]
-    }
-  },
-  {
-    "name": "size=medium, state=disabled",
-    "row": 1,
-    "col": 4,
-    "spec": {
-      "type": "root",
-      "name": "size=medium, state=disabled",
-      "layout": {
-        "mode": "HORIZONTAL",
-        "primary": "CENTER",
-        "counter": "CENTER"
-      },
-      "fill": "imported/button-brand-primary/root/background-color/disabled",
-      "bindings": {
-        "itemSpacing": "imported/shared/size-8",
-        "paddingLeft": "imported/button-brand-primary/root/padding-inline/medium",
-        "paddingRight": "imported/button-brand-primary/root/padding-inline/medium",
-        "paddingTop": "imported/shared/size-8",
-        "paddingBottom": "imported/shared/size-8",
-        "topLeftRadius": "imported/shared/size-8",
-        "topRightRadius": "imported/shared/size-8",
-        "bottomLeftRadius": "imported/shared/size-8",
-        "bottomRightRadius": "imported/shared/size-8"
-      },
-      "children": [
-        {
-          "type": "instance",
-          "name": "Icon",
-          "dep": "Icon",
-          "depProps": {
-            "size": "large"
-          },
-          "visibleProp": "↪️icon-left",
-          "visibleDefault": false
-        },
-        {
-          "type": "text",
-          "name": "Button",
-          "characters": "Button",
-          "fontSize": 16,
-          "fontStyle": "Semi Bold",
-          "textStyle": "title",
-          "textFill": "imported/button-brand-primary/button/color/disabled",
-          "contentProp": "✏️text"
-        },
-        {
-          "type": "instance",
-          "name": "icon2",
-          "dep": "Icon",
-          "depProps": {
-            "size": "large"
-          },
-          "visibleProp": "↪️icon-right",
-          "visibleDefault": false
-        },
-        {
-          "type": "text",
-          "name": "Tooltip",
-          "characters": "This action is currently unavailable",
-          "fontSize": 12,
           "fontStyle": "Medium",
-          "textFill": "imported/button-brand-primary/tooltip/color"
+          "textFill": "imported/button-brand-primary/button/color",
+          "contentProp": "✏️text"
+        },
+        {
+          "type": "instance",
+          "name": "icon2",
+          "dep": "Icon",
+          "depProps": {
+            "size": "large"
+          },
+          "visibleProp": "↪️icon-right",
+          "visibleDefault": false
         }
       ]
     }
   },
   {
-    "name": "size=small, state=default",
+    "name": "size=small",
     "row": 2,
     "col": 0,
     "spec": {
       "type": "root",
-      "name": "size=small, state=default",
+      "name": "size=small",
       "layout": {
         "mode": "HORIZONTAL",
         "primary": "CENTER",
         "counter": "CENTER"
       },
-      "fill": "imported/button-brand-primary/root/background-color/default",
+      "fill": "imported/button-brand-primary/root/background-color",
       "bindings": {
         "itemSpacing": "imported/shared/size-8",
         "paddingLeft": "imported/button-brand-primary/root/padding-inline/small",
@@ -679,286 +161,718 @@ const VARIANTS = [
           "type": "text",
           "name": "Button",
           "characters": "Button",
-          "fontSize": 16,
-          "fontStyle": "Semi Bold",
-          "textStyle": "title",
-          "textFill": "imported/button-brand-primary/button/color/default",
-          "contentProp": "✏️text"
-        },
-        {
-          "type": "instance",
-          "name": "icon2",
-          "dep": "Icon",
-          "depProps": {
-            "size": "large"
-          },
-          "visibleProp": "↪️icon-right",
-          "visibleDefault": false
-        }
-      ]
-    }
-  },
-  {
-    "name": "size=small, state=hover",
-    "row": 2,
-    "col": 1,
-    "spec": {
-      "type": "root",
-      "name": "size=small, state=hover",
-      "layout": {
-        "mode": "HORIZONTAL",
-        "primary": "CENTER",
-        "counter": "CENTER"
-      },
-      "fill": "imported/button-brand-primary/root/background-color/hover",
-      "bindings": {
-        "itemSpacing": "imported/shared/size-8",
-        "paddingLeft": "imported/button-brand-primary/root/padding-inline/small",
-        "paddingRight": "imported/button-brand-primary/root/padding-inline/small",
-        "paddingTop": "imported/shared/size-8",
-        "paddingBottom": "imported/shared/size-8",
-        "topLeftRadius": "imported/shared/size-8",
-        "topRightRadius": "imported/shared/size-8",
-        "bottomLeftRadius": "imported/shared/size-8",
-        "bottomRightRadius": "imported/shared/size-8"
-      },
-      "children": [
-        {
-          "type": "instance",
-          "name": "Icon",
-          "dep": "Icon",
-          "depProps": {
-            "size": "large"
-          },
-          "visibleProp": "↪️icon-left",
-          "visibleDefault": false
-        },
-        {
-          "type": "text",
-          "name": "Button",
-          "characters": "Button",
-          "fontSize": 16,
-          "fontStyle": "Semi Bold",
-          "textStyle": "title",
-          "textFill": "imported/button-brand-primary/button/color/hover",
-          "contentProp": "✏️text"
-        },
-        {
-          "type": "instance",
-          "name": "icon2",
-          "dep": "Icon",
-          "depProps": {
-            "size": "large"
-          },
-          "visibleProp": "↪️icon-right",
-          "visibleDefault": false
-        }
-      ]
-    }
-  },
-  {
-    "name": "size=small, state=focus",
-    "row": 2,
-    "col": 2,
-    "spec": {
-      "type": "root",
-      "name": "size=small, state=focus",
-      "layout": {
-        "mode": "HORIZONTAL",
-        "primary": "CENTER",
-        "counter": "CENTER"
-      },
-      "fill": "imported/button-brand-primary/root/background-color/focus",
-      "bindings": {
-        "itemSpacing": "imported/shared/size-8",
-        "paddingLeft": "imported/button-brand-primary/root/padding-inline/small",
-        "paddingRight": "imported/button-brand-primary/root/padding-inline/small",
-        "paddingTop": "imported/shared/size-8",
-        "paddingBottom": "imported/shared/size-8",
-        "topLeftRadius": "imported/shared/size-8",
-        "topRightRadius": "imported/shared/size-8",
-        "bottomLeftRadius": "imported/shared/size-8",
-        "bottomRightRadius": "imported/shared/size-8"
-      },
-      "children": [
-        {
-          "type": "instance",
-          "name": "Icon",
-          "dep": "Icon",
-          "depProps": {
-            "size": "large"
-          },
-          "visibleProp": "↪️icon-left",
-          "visibleDefault": false
-        },
-        {
-          "type": "text",
-          "name": "Button",
-          "characters": "Button",
-          "fontSize": 16,
-          "fontStyle": "Semi Bold",
-          "textStyle": "title",
-          "textFill": "imported/button-brand-primary/button/color/focus",
-          "contentProp": "✏️text"
-        },
-        {
-          "type": "instance",
-          "name": "icon2",
-          "dep": "Icon",
-          "depProps": {
-            "size": "large"
-          },
-          "visibleProp": "↪️icon-right",
-          "visibleDefault": false
-        },
-        {
-          "type": "frame",
-          "name": "focusRing",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "MIN",
-            "counter": "MIN"
-          },
-          "stroke": "imported/button-brand-primary/focus-ring/border-color",
-          "bindings": {
-            "topLeftRadius": "imported/button-brand-primary/focus-ring/border-radius",
-            "topRightRadius": "imported/button-brand-primary/focus-ring/border-radius",
-            "bottomLeftRadius": "imported/button-brand-primary/focus-ring/border-radius",
-            "bottomRightRadius": "imported/button-brand-primary/focus-ring/border-radius",
-            "strokeWeight": "imported/button-brand-primary/focus-ring/border-width"
-          },
-          "children": []
-        }
-      ]
-    }
-  },
-  {
-    "name": "size=small, state=pressed",
-    "row": 2,
-    "col": 3,
-    "spec": {
-      "type": "root",
-      "name": "size=small, state=pressed",
-      "layout": {
-        "mode": "HORIZONTAL",
-        "primary": "CENTER",
-        "counter": "CENTER"
-      },
-      "fill": "imported/button-brand-primary/root/background-color/pressed",
-      "bindings": {
-        "itemSpacing": "imported/shared/size-8",
-        "paddingLeft": "imported/button-brand-primary/root/padding-inline/small",
-        "paddingRight": "imported/button-brand-primary/root/padding-inline/small",
-        "paddingTop": "imported/shared/size-8",
-        "paddingBottom": "imported/shared/size-8",
-        "topLeftRadius": "imported/shared/size-8",
-        "topRightRadius": "imported/shared/size-8",
-        "bottomLeftRadius": "imported/shared/size-8",
-        "bottomRightRadius": "imported/shared/size-8"
-      },
-      "children": [
-        {
-          "type": "instance",
-          "name": "Icon",
-          "dep": "Icon",
-          "depProps": {
-            "size": "large"
-          },
-          "visibleProp": "↪️icon-left",
-          "visibleDefault": false
-        },
-        {
-          "type": "text",
-          "name": "Button",
-          "characters": "Button",
-          "fontSize": 16,
-          "fontStyle": "Semi Bold",
-          "textStyle": "title",
-          "textFill": "imported/button-brand-primary/button/color/pressed",
-          "contentProp": "✏️text"
-        },
-        {
-          "type": "instance",
-          "name": "icon2",
-          "dep": "Icon",
-          "depProps": {
-            "size": "large"
-          },
-          "visibleProp": "↪️icon-right",
-          "visibleDefault": false
-        }
-      ]
-    }
-  },
-  {
-    "name": "size=small, state=disabled",
-    "row": 2,
-    "col": 4,
-    "spec": {
-      "type": "root",
-      "name": "size=small, state=disabled",
-      "layout": {
-        "mode": "HORIZONTAL",
-        "primary": "CENTER",
-        "counter": "CENTER"
-      },
-      "fill": "imported/button-brand-primary/root/background-color/disabled",
-      "bindings": {
-        "itemSpacing": "imported/shared/size-8",
-        "paddingLeft": "imported/button-brand-primary/root/padding-inline/small",
-        "paddingRight": "imported/button-brand-primary/root/padding-inline/small",
-        "paddingTop": "imported/shared/size-8",
-        "paddingBottom": "imported/shared/size-8",
-        "topLeftRadius": "imported/shared/size-8",
-        "topRightRadius": "imported/shared/size-8",
-        "bottomLeftRadius": "imported/shared/size-8",
-        "bottomRightRadius": "imported/shared/size-8"
-      },
-      "children": [
-        {
-          "type": "instance",
-          "name": "Icon",
-          "dep": "Icon",
-          "depProps": {
-            "size": "large"
-          },
-          "visibleProp": "↪️icon-left",
-          "visibleDefault": false
-        },
-        {
-          "type": "text",
-          "name": "Button",
-          "characters": "Button",
-          "fontSize": 16,
-          "fontStyle": "Semi Bold",
-          "textStyle": "title",
-          "textFill": "imported/button-brand-primary/button/color/disabled",
-          "contentProp": "✏️text"
-        },
-        {
-          "type": "instance",
-          "name": "icon2",
-          "dep": "Icon",
-          "depProps": {
-            "size": "large"
-          },
-          "visibleProp": "↪️icon-right",
-          "visibleDefault": false
-        },
-        {
-          "type": "text",
-          "name": "Tooltip",
-          "characters": "This action is currently unavailable",
-          "fontSize": 12,
+          "fontSize": 14,
           "fontStyle": "Medium",
-          "textFill": "imported/button-brand-primary/tooltip/color"
+          "textFill": "imported/button-brand-primary/button/color",
+          "contentProp": "✏️text"
+        },
+        {
+          "type": "instance",
+          "name": "icon2",
+          "dep": "Icon",
+          "depProps": {
+            "size": "large"
+          },
+          "visibleProp": "↪️icon-right",
+          "visibleDefault": false
         }
       ]
     }
   }
 ];
 // figmaStatePreviews (canvas-only): preview variants carrying the State axis.
-const STATE_VARIANTS = [];
+const STATE_VARIANTS = [
+  {
+    "name": "size=large, State=Hover",
+    "row": 0,
+    "col": 1,
+    "spec": {
+      "type": "root",
+      "name": "size=large, State=Hover",
+      "layout": {
+        "mode": "HORIZONTAL",
+        "primary": "CENTER",
+        "counter": "CENTER"
+      },
+      "fill": "imported/button-brand-primary/state-hover/background-color",
+      "bindings": {
+        "itemSpacing": "imported/shared/size-8",
+        "paddingLeft": "imported/button-brand-primary/root/padding-inline/large",
+        "paddingRight": "imported/button-brand-primary/root/padding-inline/large",
+        "paddingTop": "imported/shared/size-8",
+        "paddingBottom": "imported/shared/size-8",
+        "topLeftRadius": "imported/shared/size-8",
+        "topRightRadius": "imported/shared/size-8",
+        "bottomLeftRadius": "imported/shared/size-8",
+        "bottomRightRadius": "imported/shared/size-8"
+      },
+      "children": [
+        {
+          "type": "instance",
+          "name": "Icon",
+          "dep": "Icon",
+          "depProps": {
+            "size": "large"
+          },
+          "visibleProp": "↪️icon-left",
+          "visibleDefault": false
+        },
+        {
+          "type": "text",
+          "name": "Button",
+          "characters": "Button",
+          "fontSize": 16,
+          "fontStyle": "Medium",
+          "textFill": "imported/button-brand-primary/button/color",
+          "contentProp": "✏️text"
+        },
+        {
+          "type": "instance",
+          "name": "icon2",
+          "dep": "Icon",
+          "depProps": {
+            "size": "large"
+          },
+          "visibleProp": "↪️icon-right",
+          "visibleDefault": false
+        }
+      ]
+    }
+  },
+  {
+    "name": "size=medium, State=Hover",
+    "row": 1,
+    "col": 1,
+    "spec": {
+      "type": "root",
+      "name": "size=medium, State=Hover",
+      "layout": {
+        "mode": "HORIZONTAL",
+        "primary": "CENTER",
+        "counter": "CENTER"
+      },
+      "fill": "imported/button-brand-primary/state-hover/background-color",
+      "bindings": {
+        "itemSpacing": "imported/shared/size-8",
+        "paddingLeft": "imported/button-brand-primary/root/padding-inline/medium",
+        "paddingRight": "imported/button-brand-primary/root/padding-inline/medium",
+        "paddingTop": "imported/shared/size-8",
+        "paddingBottom": "imported/shared/size-8",
+        "topLeftRadius": "imported/shared/size-8",
+        "topRightRadius": "imported/shared/size-8",
+        "bottomLeftRadius": "imported/shared/size-8",
+        "bottomRightRadius": "imported/shared/size-8"
+      },
+      "children": [
+        {
+          "type": "instance",
+          "name": "Icon",
+          "dep": "Icon",
+          "depProps": {
+            "size": "large"
+          },
+          "visibleProp": "↪️icon-left",
+          "visibleDefault": false
+        },
+        {
+          "type": "text",
+          "name": "Button",
+          "characters": "Button",
+          "fontSize": 16,
+          "fontStyle": "Medium",
+          "textFill": "imported/button-brand-primary/button/color",
+          "contentProp": "✏️text"
+        },
+        {
+          "type": "instance",
+          "name": "icon2",
+          "dep": "Icon",
+          "depProps": {
+            "size": "large"
+          },
+          "visibleProp": "↪️icon-right",
+          "visibleDefault": false
+        }
+      ]
+    }
+  },
+  {
+    "name": "size=small, State=Hover",
+    "row": 2,
+    "col": 1,
+    "spec": {
+      "type": "root",
+      "name": "size=small, State=Hover",
+      "layout": {
+        "mode": "HORIZONTAL",
+        "primary": "CENTER",
+        "counter": "CENTER"
+      },
+      "fill": "imported/button-brand-primary/state-hover/background-color",
+      "bindings": {
+        "itemSpacing": "imported/shared/size-8",
+        "paddingLeft": "imported/button-brand-primary/root/padding-inline/small",
+        "paddingRight": "imported/button-brand-primary/root/padding-inline/small",
+        "paddingTop": "imported/shared/size-8",
+        "paddingBottom": "imported/shared/size-8",
+        "topLeftRadius": "imported/shared/size-8",
+        "topRightRadius": "imported/shared/size-8",
+        "bottomLeftRadius": "imported/shared/size-8",
+        "bottomRightRadius": "imported/shared/size-8"
+      },
+      "children": [
+        {
+          "type": "instance",
+          "name": "Icon",
+          "dep": "Icon",
+          "depProps": {
+            "size": "large"
+          },
+          "visibleProp": "↪️icon-left",
+          "visibleDefault": false
+        },
+        {
+          "type": "text",
+          "name": "Button",
+          "characters": "Button",
+          "fontSize": 14,
+          "fontStyle": "Medium",
+          "textFill": "imported/button-brand-primary/button/color",
+          "contentProp": "✏️text"
+        },
+        {
+          "type": "instance",
+          "name": "icon2",
+          "dep": "Icon",
+          "depProps": {
+            "size": "large"
+          },
+          "visibleProp": "↪️icon-right",
+          "visibleDefault": false
+        }
+      ]
+    }
+  },
+  {
+    "name": "size=large, State=Active",
+    "row": 0,
+    "col": 2,
+    "spec": {
+      "type": "root",
+      "name": "size=large, State=Active",
+      "layout": {
+        "mode": "HORIZONTAL",
+        "primary": "CENTER",
+        "counter": "CENTER"
+      },
+      "fill": "imported/button-brand-primary/state-active/background-color",
+      "bindings": {
+        "itemSpacing": "imported/shared/size-8",
+        "paddingLeft": "imported/button-brand-primary/root/padding-inline/large",
+        "paddingRight": "imported/button-brand-primary/root/padding-inline/large",
+        "paddingTop": "imported/shared/size-8",
+        "paddingBottom": "imported/shared/size-8",
+        "topLeftRadius": "imported/shared/size-8",
+        "topRightRadius": "imported/shared/size-8",
+        "bottomLeftRadius": "imported/shared/size-8",
+        "bottomRightRadius": "imported/shared/size-8"
+      },
+      "children": [
+        {
+          "type": "instance",
+          "name": "Icon",
+          "dep": "Icon",
+          "depProps": {
+            "size": "large"
+          },
+          "visibleProp": "↪️icon-left",
+          "visibleDefault": false
+        },
+        {
+          "type": "text",
+          "name": "Button",
+          "characters": "Button",
+          "fontSize": 16,
+          "fontStyle": "Medium",
+          "textFill": "imported/button-brand-primary/button/color",
+          "contentProp": "✏️text"
+        },
+        {
+          "type": "instance",
+          "name": "icon2",
+          "dep": "Icon",
+          "depProps": {
+            "size": "large"
+          },
+          "visibleProp": "↪️icon-right",
+          "visibleDefault": false
+        }
+      ]
+    }
+  },
+  {
+    "name": "size=medium, State=Active",
+    "row": 1,
+    "col": 2,
+    "spec": {
+      "type": "root",
+      "name": "size=medium, State=Active",
+      "layout": {
+        "mode": "HORIZONTAL",
+        "primary": "CENTER",
+        "counter": "CENTER"
+      },
+      "fill": "imported/button-brand-primary/state-active/background-color",
+      "bindings": {
+        "itemSpacing": "imported/shared/size-8",
+        "paddingLeft": "imported/button-brand-primary/root/padding-inline/medium",
+        "paddingRight": "imported/button-brand-primary/root/padding-inline/medium",
+        "paddingTop": "imported/shared/size-8",
+        "paddingBottom": "imported/shared/size-8",
+        "topLeftRadius": "imported/shared/size-8",
+        "topRightRadius": "imported/shared/size-8",
+        "bottomLeftRadius": "imported/shared/size-8",
+        "bottomRightRadius": "imported/shared/size-8"
+      },
+      "children": [
+        {
+          "type": "instance",
+          "name": "Icon",
+          "dep": "Icon",
+          "depProps": {
+            "size": "large"
+          },
+          "visibleProp": "↪️icon-left",
+          "visibleDefault": false
+        },
+        {
+          "type": "text",
+          "name": "Button",
+          "characters": "Button",
+          "fontSize": 16,
+          "fontStyle": "Medium",
+          "textFill": "imported/button-brand-primary/button/color",
+          "contentProp": "✏️text"
+        },
+        {
+          "type": "instance",
+          "name": "icon2",
+          "dep": "Icon",
+          "depProps": {
+            "size": "large"
+          },
+          "visibleProp": "↪️icon-right",
+          "visibleDefault": false
+        }
+      ]
+    }
+  },
+  {
+    "name": "size=small, State=Active",
+    "row": 2,
+    "col": 2,
+    "spec": {
+      "type": "root",
+      "name": "size=small, State=Active",
+      "layout": {
+        "mode": "HORIZONTAL",
+        "primary": "CENTER",
+        "counter": "CENTER"
+      },
+      "fill": "imported/button-brand-primary/state-active/background-color",
+      "bindings": {
+        "itemSpacing": "imported/shared/size-8",
+        "paddingLeft": "imported/button-brand-primary/root/padding-inline/small",
+        "paddingRight": "imported/button-brand-primary/root/padding-inline/small",
+        "paddingTop": "imported/shared/size-8",
+        "paddingBottom": "imported/shared/size-8",
+        "topLeftRadius": "imported/shared/size-8",
+        "topRightRadius": "imported/shared/size-8",
+        "bottomLeftRadius": "imported/shared/size-8",
+        "bottomRightRadius": "imported/shared/size-8"
+      },
+      "children": [
+        {
+          "type": "instance",
+          "name": "Icon",
+          "dep": "Icon",
+          "depProps": {
+            "size": "large"
+          },
+          "visibleProp": "↪️icon-left",
+          "visibleDefault": false
+        },
+        {
+          "type": "text",
+          "name": "Button",
+          "characters": "Button",
+          "fontSize": 14,
+          "fontStyle": "Medium",
+          "textFill": "imported/button-brand-primary/button/color",
+          "contentProp": "✏️text"
+        },
+        {
+          "type": "instance",
+          "name": "icon2",
+          "dep": "Icon",
+          "depProps": {
+            "size": "large"
+          },
+          "visibleProp": "↪️icon-right",
+          "visibleDefault": false
+        }
+      ]
+    }
+  },
+  {
+    "name": "size=large, State=Focus Visible",
+    "row": 0,
+    "col": 3,
+    "spec": {
+      "type": "root",
+      "name": "size=large, State=Focus Visible",
+      "layout": {
+        "mode": "HORIZONTAL",
+        "primary": "CENTER",
+        "counter": "CENTER"
+      },
+      "fill": "imported/button-brand-primary/root/background-color",
+      "bindings": {
+        "itemSpacing": "imported/shared/size-8",
+        "paddingLeft": "imported/button-brand-primary/root/padding-inline/large",
+        "paddingRight": "imported/button-brand-primary/root/padding-inline/large",
+        "paddingTop": "imported/shared/size-8",
+        "paddingBottom": "imported/shared/size-8",
+        "topLeftRadius": "imported/shared/size-8",
+        "topRightRadius": "imported/shared/size-8",
+        "bottomLeftRadius": "imported/shared/size-8",
+        "bottomRightRadius": "imported/shared/size-8",
+        "strokeWeight": "imported/button-brand-primary/state-focus-visible/outline-width"
+      },
+      "stroke": "imported/button-brand-primary/state-focus-visible/outline-color",
+      "children": [
+        {
+          "type": "instance",
+          "name": "Icon",
+          "dep": "Icon",
+          "depProps": {
+            "size": "large"
+          },
+          "visibleProp": "↪️icon-left",
+          "visibleDefault": false
+        },
+        {
+          "type": "text",
+          "name": "Button",
+          "characters": "Button",
+          "fontSize": 16,
+          "fontStyle": "Medium",
+          "textFill": "imported/button-brand-primary/button/color",
+          "contentProp": "✏️text"
+        },
+        {
+          "type": "instance",
+          "name": "icon2",
+          "dep": "Icon",
+          "depProps": {
+            "size": "large"
+          },
+          "visibleProp": "↪️icon-right",
+          "visibleDefault": false
+        }
+      ]
+    }
+  },
+  {
+    "name": "size=medium, State=Focus Visible",
+    "row": 1,
+    "col": 3,
+    "spec": {
+      "type": "root",
+      "name": "size=medium, State=Focus Visible",
+      "layout": {
+        "mode": "HORIZONTAL",
+        "primary": "CENTER",
+        "counter": "CENTER"
+      },
+      "fill": "imported/button-brand-primary/root/background-color",
+      "bindings": {
+        "itemSpacing": "imported/shared/size-8",
+        "paddingLeft": "imported/button-brand-primary/root/padding-inline/medium",
+        "paddingRight": "imported/button-brand-primary/root/padding-inline/medium",
+        "paddingTop": "imported/shared/size-8",
+        "paddingBottom": "imported/shared/size-8",
+        "topLeftRadius": "imported/shared/size-8",
+        "topRightRadius": "imported/shared/size-8",
+        "bottomLeftRadius": "imported/shared/size-8",
+        "bottomRightRadius": "imported/shared/size-8",
+        "strokeWeight": "imported/button-brand-primary/state-focus-visible/outline-width"
+      },
+      "stroke": "imported/button-brand-primary/state-focus-visible/outline-color",
+      "children": [
+        {
+          "type": "instance",
+          "name": "Icon",
+          "dep": "Icon",
+          "depProps": {
+            "size": "large"
+          },
+          "visibleProp": "↪️icon-left",
+          "visibleDefault": false
+        },
+        {
+          "type": "text",
+          "name": "Button",
+          "characters": "Button",
+          "fontSize": 16,
+          "fontStyle": "Medium",
+          "textFill": "imported/button-brand-primary/button/color",
+          "contentProp": "✏️text"
+        },
+        {
+          "type": "instance",
+          "name": "icon2",
+          "dep": "Icon",
+          "depProps": {
+            "size": "large"
+          },
+          "visibleProp": "↪️icon-right",
+          "visibleDefault": false
+        }
+      ]
+    }
+  },
+  {
+    "name": "size=small, State=Focus Visible",
+    "row": 2,
+    "col": 3,
+    "spec": {
+      "type": "root",
+      "name": "size=small, State=Focus Visible",
+      "layout": {
+        "mode": "HORIZONTAL",
+        "primary": "CENTER",
+        "counter": "CENTER"
+      },
+      "fill": "imported/button-brand-primary/root/background-color",
+      "bindings": {
+        "itemSpacing": "imported/shared/size-8",
+        "paddingLeft": "imported/button-brand-primary/root/padding-inline/small",
+        "paddingRight": "imported/button-brand-primary/root/padding-inline/small",
+        "paddingTop": "imported/shared/size-8",
+        "paddingBottom": "imported/shared/size-8",
+        "topLeftRadius": "imported/shared/size-8",
+        "topRightRadius": "imported/shared/size-8",
+        "bottomLeftRadius": "imported/shared/size-8",
+        "bottomRightRadius": "imported/shared/size-8",
+        "strokeWeight": "imported/button-brand-primary/state-focus-visible/outline-width"
+      },
+      "stroke": "imported/button-brand-primary/state-focus-visible/outline-color",
+      "children": [
+        {
+          "type": "instance",
+          "name": "Icon",
+          "dep": "Icon",
+          "depProps": {
+            "size": "large"
+          },
+          "visibleProp": "↪️icon-left",
+          "visibleDefault": false
+        },
+        {
+          "type": "text",
+          "name": "Button",
+          "characters": "Button",
+          "fontSize": 14,
+          "fontStyle": "Medium",
+          "textFill": "imported/button-brand-primary/button/color",
+          "contentProp": "✏️text"
+        },
+        {
+          "type": "instance",
+          "name": "icon2",
+          "dep": "Icon",
+          "depProps": {
+            "size": "large"
+          },
+          "visibleProp": "↪️icon-right",
+          "visibleDefault": false
+        }
+      ]
+    }
+  },
+  {
+    "name": "size=large, State=Disabled",
+    "row": 0,
+    "col": 4,
+    "spec": {
+      "type": "root",
+      "name": "size=large, State=Disabled",
+      "layout": {
+        "mode": "HORIZONTAL",
+        "primary": "CENTER",
+        "counter": "CENTER"
+      },
+      "fill": "imported/button-brand-primary/state-disabled/background-color",
+      "bindings": {
+        "itemSpacing": "imported/shared/size-8",
+        "paddingLeft": "imported/button-brand-primary/root/padding-inline/large",
+        "paddingRight": "imported/button-brand-primary/root/padding-inline/large",
+        "paddingTop": "imported/shared/size-8",
+        "paddingBottom": "imported/shared/size-8",
+        "topLeftRadius": "imported/shared/size-8",
+        "topRightRadius": "imported/shared/size-8",
+        "bottomLeftRadius": "imported/shared/size-8",
+        "bottomRightRadius": "imported/shared/size-8"
+      },
+      "children": [
+        {
+          "type": "instance",
+          "name": "Icon",
+          "dep": "Icon",
+          "depProps": {
+            "size": "large"
+          },
+          "visibleProp": "↪️icon-left",
+          "visibleDefault": false
+        },
+        {
+          "type": "text",
+          "name": "Button",
+          "characters": "Button",
+          "fontSize": 16,
+          "fontStyle": "Medium",
+          "textFill": "imported/button-brand-primary/button/color",
+          "contentProp": "✏️text"
+        },
+        {
+          "type": "instance",
+          "name": "icon2",
+          "dep": "Icon",
+          "depProps": {
+            "size": "large"
+          },
+          "visibleProp": "↪️icon-right",
+          "visibleDefault": false
+        }
+      ]
+    }
+  },
+  {
+    "name": "size=medium, State=Disabled",
+    "row": 1,
+    "col": 4,
+    "spec": {
+      "type": "root",
+      "name": "size=medium, State=Disabled",
+      "layout": {
+        "mode": "HORIZONTAL",
+        "primary": "CENTER",
+        "counter": "CENTER"
+      },
+      "fill": "imported/button-brand-primary/state-disabled/background-color",
+      "bindings": {
+        "itemSpacing": "imported/shared/size-8",
+        "paddingLeft": "imported/button-brand-primary/root/padding-inline/medium",
+        "paddingRight": "imported/button-brand-primary/root/padding-inline/medium",
+        "paddingTop": "imported/shared/size-8",
+        "paddingBottom": "imported/shared/size-8",
+        "topLeftRadius": "imported/shared/size-8",
+        "topRightRadius": "imported/shared/size-8",
+        "bottomLeftRadius": "imported/shared/size-8",
+        "bottomRightRadius": "imported/shared/size-8"
+      },
+      "children": [
+        {
+          "type": "instance",
+          "name": "Icon",
+          "dep": "Icon",
+          "depProps": {
+            "size": "large"
+          },
+          "visibleProp": "↪️icon-left",
+          "visibleDefault": false
+        },
+        {
+          "type": "text",
+          "name": "Button",
+          "characters": "Button",
+          "fontSize": 16,
+          "fontStyle": "Medium",
+          "textFill": "imported/button-brand-primary/button/color",
+          "contentProp": "✏️text"
+        },
+        {
+          "type": "instance",
+          "name": "icon2",
+          "dep": "Icon",
+          "depProps": {
+            "size": "large"
+          },
+          "visibleProp": "↪️icon-right",
+          "visibleDefault": false
+        }
+      ]
+    }
+  },
+  {
+    "name": "size=small, State=Disabled",
+    "row": 2,
+    "col": 4,
+    "spec": {
+      "type": "root",
+      "name": "size=small, State=Disabled",
+      "layout": {
+        "mode": "HORIZONTAL",
+        "primary": "CENTER",
+        "counter": "CENTER"
+      },
+      "fill": "imported/button-brand-primary/state-disabled/background-color",
+      "bindings": {
+        "itemSpacing": "imported/shared/size-8",
+        "paddingLeft": "imported/button-brand-primary/root/padding-inline/small",
+        "paddingRight": "imported/button-brand-primary/root/padding-inline/small",
+        "paddingTop": "imported/shared/size-8",
+        "paddingBottom": "imported/shared/size-8",
+        "topLeftRadius": "imported/shared/size-8",
+        "topRightRadius": "imported/shared/size-8",
+        "bottomLeftRadius": "imported/shared/size-8",
+        "bottomRightRadius": "imported/shared/size-8"
+      },
+      "children": [
+        {
+          "type": "instance",
+          "name": "Icon",
+          "dep": "Icon",
+          "depProps": {
+            "size": "large"
+          },
+          "visibleProp": "↪️icon-left",
+          "visibleDefault": false
+        },
+        {
+          "type": "text",
+          "name": "Button",
+          "characters": "Button",
+          "fontSize": 14,
+          "fontStyle": "Medium",
+          "textFill": "imported/button-brand-primary/button/color",
+          "contentProp": "✏️text"
+        },
+        {
+          "type": "instance",
+          "name": "icon2",
+          "dep": "Icon",
+          "depProps": {
+            "size": "large"
+          },
+          "visibleProp": "↪️icon-right",
+          "visibleDefault": false
+        }
+      ]
+    }
+  }
+];
 const COL_W = 380, ROW_H = 240, PAD = 40;
 
 // State previews: merge the enum-API cartesian with the preview overlay;
@@ -1006,14 +920,14 @@ for (const page of figma.root.children) {
 
 // ---------------------------------------------------------------------------
 // PROVISIONAL VARIABLES — minted from resolved values by a degraded import.
-// This contract binds 19 provisional token(s) whose real variable names were
+// This contract binds 14 provisional token(s) whose real variable names were
 // unrecoverable, so this section upserts each one as a Figma variable in a
 // collection named 'Imported (provisional)' — idempotent by name, within that
 // collection only — before the bindings below look anything up. The values
 // are literal-fidelity stand-ins, not your design vocabulary: rename them
 // against your real tokens when you adopt the contract.
 // ---------------------------------------------------------------------------
-const MINTED_VARIABLES = [{"name":"imported/button-brand-primary/root/background-color/default","type":"COLOR","value":"#0e61ba"},{"name":"imported/button-brand-primary/root/background-color/hover","type":"COLOR","value":"#003e81"},{"name":"imported/button-brand-primary/root/background-color/focus","type":"COLOR","value":"#0e61ba"},{"name":"imported/button-brand-primary/root/background-color/pressed","type":"COLOR","value":"#002854"},{"name":"imported/button-brand-primary/root/background-color/disabled","type":"COLOR","value":"#dfe3eb"},{"name":"imported/button-brand-primary/root/padding-inline/large","type":"FLOAT","value":16},{"name":"imported/button-brand-primary/root/padding-inline/medium","type":"FLOAT","value":16},{"name":"imported/button-brand-primary/root/padding-inline/small","type":"FLOAT","value":12},{"name":"imported/button-brand-primary/button/color/default","type":"COLOR","value":"#fcfeff"},{"name":"imported/button-brand-primary/button/color/hover","type":"COLOR","value":"#fcfeff"},{"name":"imported/button-brand-primary/button/color/focus","type":"COLOR","value":"#fcfeff"},{"name":"imported/button-brand-primary/button/color/pressed","type":"COLOR","value":"#fcfeff"},{"name":"imported/button-brand-primary/button/color/disabled","type":"COLOR","value":"#556275"},{"name":"imported/button-brand-primary/tooltip/color","type":"COLOR","value":"#000000"},{"name":"imported/button-brand-primary/tooltip/font-size","type":"FLOAT","value":12},{"name":"imported/button-brand-primary/focus-ring/border-color","type":"COLOR","value":"#0e61ba"},{"name":"imported/button-brand-primary/focus-ring/border-radius","type":"FLOAT","value":12},{"name":"imported/button-brand-primary/focus-ring/border-width","type":"FLOAT","value":2},{"name":"imported/shared/size-8","type":"FLOAT","value":8}];
+const MINTED_VARIABLES = [{"name":"imported/button-brand-primary/root/background-color","type":"COLOR","value":"#0e61ba"},{"name":"imported/button-brand-primary/root/padding-inline/large","type":"FLOAT","value":16},{"name":"imported/button-brand-primary/root/padding-inline/medium","type":"FLOAT","value":16},{"name":"imported/button-brand-primary/root/padding-inline/small","type":"FLOAT","value":12},{"name":"imported/button-brand-primary/button/color","type":"COLOR","value":"#fcfeff"},{"name":"imported/button-brand-primary/button/font-size/large","type":"FLOAT","value":16},{"name":"imported/button-brand-primary/button/font-size/medium","type":"FLOAT","value":16},{"name":"imported/button-brand-primary/button/font-size/small","type":"FLOAT","value":14},{"name":"imported/button-brand-primary/state-hover/background-color","type":"COLOR","value":"#003e81"},{"name":"imported/button-brand-primary/state-focus-visible/outline-color","type":"COLOR","value":"#0e61ba"},{"name":"imported/button-brand-primary/state-focus-visible/outline-width","type":"FLOAT","value":2},{"name":"imported/button-brand-primary/state-active/background-color","type":"COLOR","value":"#002854"},{"name":"imported/button-brand-primary/state-disabled/background-color","type":"COLOR","value":"#dfe3eb"},{"name":"imported/shared/size-8","type":"FLOAT","value":8}];
 {
   // Minted colors may be 8-digit hex (paint opacity captured by dump v1.1) —
   // Figma COLOR variables accept RGBA, so the alpha channel survives.

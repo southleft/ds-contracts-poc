@@ -8,113 +8,80 @@
   align-items: center;
   justify-content: center;
   border-style: solid;
+  cursor: pointer;
   gap: var(--imported-button-root-gap);
   padding-inline: var(--imported-button-root-padding-inline);
   padding-block: var(--imported-button-root-padding-block);
   border-radius: var(--imported-button-root-border-radius);
 }
 
+.root:focus-visible {
+  outline-style: solid;
+  outline-offset: 2px;
+}
+
 .variant-primary {
+  background-color: var(--imported-button-root-background-color-primary);
   border-width: var(--imported-button-root-border-width-primary);
 }
 
-.state-default {
-}
-
-.variant-primary.state-default {
-  background-color: var(--imported-button-root-background-color-primary-default);
-}
-
-.state-hover {
-}
-
-.variant-primary.state-hover {
-  background-color: var(--imported-button-root-background-color-primary-hover);
-}
-
-.state-active {
-}
-
-.variant-primary.state-active {
-  background-color: var(--imported-button-root-background-color-primary-active);
-}
-
-.state-focus {
-}
-
-.variant-primary.state-focus {
-  background-color: var(--imported-button-root-background-color-primary-focus);
-}
-
 .variant-knockout {
+  background-color: var(--imported-button-root-background-color-knockout);
   border-width: var(--imported-button-root-border-width-knockout);
 }
 
-.variant-knockout.state-default {
-  background-color: var(--imported-button-root-background-color-knockout-default);
-}
-
-.variant-knockout.state-hover {
-  background-color: var(--imported-button-root-background-color-knockout-hover);
-}
-
-.variant-knockout.state-active {
-  background-color: var(--imported-button-root-background-color-knockout-active);
-}
-
-.variant-knockout.state-focus {
-  background-color: var(--imported-button-root-background-color-knockout-focus);
-}
-
 .variant-secondary {
+  background-color: var(--imported-button-root-background-color-secondary);
   border-width: var(--imported-button-root-border-width-secondary);
 }
 
-.variant-secondary.state-default {
-  background-color: var(--imported-button-root-background-color-secondary-default);
-}
-
-.variant-secondary.state-hover {
-  background-color: var(--imported-button-root-background-color-secondary-hover);
-}
-
-.variant-secondary.state-active {
-  background-color: var(--imported-button-root-background-color-secondary-active);
-}
-
-.variant-secondary.state-focus {
-  background-color: var(--imported-button-root-background-color-secondary-focus);
-}
-
 .variant-bare {
+  background-color: var(--imported-button-root-background-color-bare);
   border-width: var(--imported-button-root-border-width-bare);
 }
 
-.variant-bare.state-default {
-  background-color: var(--imported-button-root-background-color-bare-default);
+.variant-primary:hover:not(:disabled) {
+  background-color: var(--imported-button-state-hover-background-color-primary);
 }
 
-.variant-bare.state-hover {
-  background-color: var(--imported-button-root-background-color-bare-hover);
+.variant-knockout:hover:not(:disabled) {
+  background-color: var(--imported-button-state-hover-background-color-knockout);
 }
 
-.variant-bare.state-active {
-  background-color: var(--imported-button-root-background-color-bare-active);
+.variant-secondary:hover:not(:disabled) {
+  background-color: var(--imported-button-state-hover-background-color-secondary);
 }
 
-.variant-bare.state-focus {
-  background-color: var(--imported-button-root-background-color-bare-focus);
+.variant-bare:hover:not(:disabled) {
+  background-color: var(--imported-button-state-hover-background-color-bare);
+}
+
+.variant-primary:active:not(:disabled) {
+  background-color: var(--imported-button-state-active-background-color-primary);
+}
+
+.variant-knockout:active:not(:disabled) {
+  background-color: var(--imported-button-state-active-background-color-knockout);
+}
+
+.variant-secondary:active:not(:disabled) {
+  background-color: var(--imported-button-state-active-background-color-secondary);
+}
+
+.variant-bare:active:not(:disabled) {
+  background-color: var(--imported-button-state-active-background-color-bare);
+}
+
+.root:focus-visible {
+  outline-color: var(--imported-button-state-focus-visible-outline-color);
+}
+
+.root:focus-visible {
+  outline-width: var(--imported-button-state-focus-visible-outline-width);
 }
 
 .root[data-is-disabled] {
   opacity: 0.4;
-}
-
-.focusRing {
-  border-color: var(--imported-button-focus-ring-border-color);
-  border-radius: var(--imported-button-focus-ring-border-radius);
-  border-width: var(--imported-button-focus-ring-border-width);
-  border-style: solid;
 }
 
 .startIcon {

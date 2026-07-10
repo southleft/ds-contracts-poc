@@ -187,6 +187,17 @@ function resolveRepoToken(ref: string, seen = new Set<string>()): string | undef
 // ---------------------------------------------------------------------------
 // scoring core (shared by figma + code subjects)
 
+/** Promoted-state context for one truth variant: the contract state whose
+ *  root overrides apply, and the base truths (matching default-state variant)
+ *  for part-level cells the state vocabulary cannot carry. */
+interface StateContext {
+  state: string;
+  /** root.states[state] overrides — overlay over root tokens. */
+  overrides: Record<string, string>;
+  /** (part§fact) → truth in the matching default-state variant. */
+  baseTruth: Map<string, string>;
+}
+
 function scoreFacts(
   id: string,
   variantName: string,
@@ -194,21 +205,43 @@ function scoreFacts(
   propValues: Record<string, string>,
   anatomyRoot: AnatomyPart,
   mintedByRef: Map<string, string>,
+  stateCtx?: StateContext,
 ): Cell[] {
   return facts.map((f) => {
     const part = findPart(anatomyRoot, f.part);
-    const ref = part?.tokens?.[f.fact];
+    let ref = part?.tokens?.[f.fact];
+    if (f.part === 'root' && stateCtx?.overrides[f.fact]) ref = stateCtx.overrides[f.fact];
+    if (!part && stateCtx?.state === 'focus-visible') {
+      // A child drawn only in the focus state (the focus ring) inverts to the
+      // root's focus-visible OUTLINE pair — score its stroke facts there.
+      const remap: Record<string, string> = { 'border-color': 'outline-color', 'border-width': 'outline-width' };
+      const outlineRef = remap[f.fact] ? stateCtx.overrides[remap[f.fact]] : undefined;
+      if (outlineRef) ref = outlineRef;
+    }
     if (!ref) return { ...f, variant: variantName, verdict: 'MISSING' };
     const concrete = substitute(ref, propValues);
     const minted = mintedByRef.get(concrete);
     const resolved = minted ?? resolveRepoToken(concrete);
+    const valueOk = resolved !== undefined && valuesAgree(f.fact, resolved, f.truth);
+    if (!valueOk && stateCtx && f.part !== 'root') {
+      // Part-level state overrides are OUTSIDE the contract vocabulary
+      // (STYLE-FIDELITY B7 — the proposal names each one). When the truth
+      // genuinely changed with the state (≠ the matching default variant's
+      // truth), the contract carries NO binding for this (part, fact, state)
+      // cell — MISSING (named), never a silent wrong value. A truth that
+      // MATCHES the base and still disagrees stays a real mismatch.
+      const base = stateCtx.baseTruth.get(`${f.part}§${f.fact}`);
+      if (base !== undefined && !valuesAgree(f.fact, base, f.truth)) {
+        return { ...f, variant: variantName, verdict: 'MISSING' };
+      }
+    }
     return {
       ...f,
       variant: variantName,
       verdict: minted !== undefined ? 'MINTED' : 'BOUND',
       token: concrete,
       ...(resolved !== undefined ? { resolved } : {}),
-      valueOk: resolved !== undefined && valuesAgree(f.fact, resolved, f.truth),
+      valueOk,
     };
   });
 }
@@ -216,7 +249,8 @@ function scoreFacts(
 function contractContext(id: string) {
   const contract = readJson(path.join(MATRIX, 'out', id, 'contract.json')) as {
     props: { name: string; bindings?: { figma?: { property?: string; values?: Record<string, string> } } }[];
-    anatomy: { root: AnatomyPart };
+    anatomy: { root: AnatomyPart & { states?: Record<string, Record<string, string>> } };
+    states?: string[];
   };
   const proposal = readJson(path.join(MATRIX, 'out', id, 'proposal.json')) as {
     minted: { entries: { ref: string; value: string }[] } | null;
@@ -356,8 +390,44 @@ for (const s of SUBJECTS) {
   if (s.kind === 'figma') {
     const dump = readJson(path.join(MATRIX, 'fixtures', s.id, 'dump.json')) as Record<string, unknown>;
     const set = Object.entries(dump).find(([k]) => k !== '_provenance')?.[1] as { variants: DumpNode[] };
+    // Promoted interaction-state axis (mirrors core/propose-figma.ts): an
+    // axis pair whose property is bound by NO contract prop and whose value
+    // maps into the state vocabulary selects the root.states overlay.
+    const STATE_MAP: Record<string, string> = {
+      hover: 'hover', active: 'active', pressed: 'active',
+      focus: 'focus-visible', 'focus-visible': 'focus-visible', disabled: 'disabled',
+    };
+    const boundProperties = new Set(contract.props.map((p) => p.bindings?.figma?.property).filter(Boolean));
+    const promotedStateOf = (variantName: string): { state: string; baseName: string } | null => {
+      if ((contract.states?.length ?? 0) === 0 && !contract.anatomy.root.states) return null;
+      const pairs = variantName.split(',').map((x) => x.trim()).filter(Boolean);
+      for (const pair of pairs) {
+        const [prop, val] = pair.split('=').map((x) => x.trim());
+        if (!prop || val === undefined || boundProperties.has(prop)) continue;
+        const mapped = STATE_MAP[val.toLowerCase().replace(/[\s_]+/g, '-')];
+        if (val.toLowerCase() === 'default') {
+          return null; // the base itself
+        }
+        if (mapped) {
+          const baseName = pairs.map((x) => (x === pair ? `${prop}=default` : x)).join(', ');
+          return { state: mapped, baseName };
+        }
+      }
+      return null;
+    };
+    const truthByVariant = new Map<string, Map<string, string>>(
+      set.variants.map((v) => [v.name, new Map(variantFacts(v).map((f) => [`${f.part}§${f.fact}`, f.truth]))]),
+    );
     for (const v of set.variants) {
-      cells.push(...scoreFacts(s.id, v.name, variantFacts(v), propValuesFor(v.name), contract.anatomy.root, mintedByRef));
+      const promoted = promotedStateOf(v.name);
+      const stateCtx: StateContext | undefined = promoted
+        ? {
+            state: promoted.state,
+            overrides: contract.anatomy.root.states?.[promoted.state] ?? {},
+            baseTruth: truthByVariant.get(promoted.baseName) ?? new Map(),
+          }
+        : undefined;
+      cells.push(...scoreFacts(s.id, v.name, variantFacts(v), propValuesFor(v.name), contract.anatomy.root, mintedByRef, stateCtx));
     }
   } else {
     for (const v of cssTruth(s.id).variants) {
