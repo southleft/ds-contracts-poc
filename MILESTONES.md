@@ -450,6 +450,39 @@ DIVERGE→AGREE at 14px — the owner's exact complaint). Receipt:
 `npm run extract:figma:cbds:check` (36 checks) on a committed live fixture.
 **63/63.**
 
+## 2026-07-10 — The tooltip renders whole (shape geometry + text channels)
+
+Second owner field case, same file: his CBDS Tooltip imported clean but drew
+no shadow (canvas had no box-shadow projection — a named v1 limit), no arrow
+(the pointer is a rotated `REGULAR_POLYGON` — the receipted #42 class), and
+an unbolded title (font-weight only carried via token-derived style
+identity). All three became carried channels: dump v1.3 captures parametric
+shape geometry (kind, intrinsic size, rotation, absolute placement +
+constraints); contract v9 adds a bounded `Part.shape` with ONE shared CSS
+projection so React/HTML/inline/canvas cannot fork, and the Figma script
+constructs a *real* rotated polygon with a native DROP_SHADOW; per-variant
+pointer placement is spelled from Figma's own constraints so it generalizes
+with content; a fixed weight-name table (Semi Bold → 600) and PIXELS
+line-heights mint when no style identity matches. The #42 receipt narrowed
+to its true residue (freeform vectors, stars, boolean ops). Receipt:
+`npm run extract:figma:tooltip:check` (30 exact-value checks) on his live
+node; Playwright probed 8 placed arrows + 1 honest suppression, shadow on
+all 9 bubbles, computed 600/16px. **67/67.**
+
+## 2026-07-10 — Send to Playground (the Enterprise gap closes for everyone)
+
+The plugin gained a bridge: a 6-char pairing code minted by the playground,
+the repo's dump script embedded VERBATIM in the plugin (a build-time drift
+guard refuses to package a stale copy — it fired on its first merge, catching
+the v1.2→v1.3 bump, and was right), a one-time-read relay on the assist
+worker (15-min TTL, 4MB cap, own kill switch, contents never logged), and a
+downloadable plugin zip with an install walkthrough in the Figma tab. The
+two import routes are now positioned honestly: URL+token = quick, values
+exact, names receipted; plugin = full token NAMES and values on any Figma
+plan. Live contrast: the same import = 0 `variable-unresolved` via the
+bridge vs 50 via degraded REST. 45/45 worker tests; e2e proven without
+Figma (simulated plugin POST → playground imports real token bindings).
+
 ---
 
 **Standing scoreboard** (updated with each milestone):
