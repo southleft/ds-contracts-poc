@@ -29,6 +29,7 @@ export {
   componentRefsOf,
   pascal,
   resolveLayout,
+  resolveTokens,
   slotFigmaProperty,
   slotVisibilityProperty,
   slotsOf,
