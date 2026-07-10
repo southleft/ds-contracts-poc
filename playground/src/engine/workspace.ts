@@ -31,6 +31,9 @@ export interface WorkspaceEntry {
   /** Minted provisional token layer (degraded Figma imports) — re-registered
    *  on load so the entry's contract renders styled again. */
   mintedTokens?: MintedTokenLayer;
+  /** Auto-proposed child STUB contracts that rode the import (raw JSON,
+   *  verbatim) — re-registered on load so composition refs keep resolving. */
+  childStubs?: unknown[];
   /** Epoch ms. */
   importedAt: number;
 }
@@ -102,6 +105,7 @@ export interface RecordImportInput {
   contractText: string;
   receipts: Receipts | null;
   mintedTokens?: MintedTokenLayer;
+  childStubs?: unknown[];
 }
 
 export interface RecordImportResult {
@@ -121,6 +125,7 @@ export function recordImport(input: RecordImportInput): RecordImportResult {
     contractText: input.contractText,
     receipts: input.receipts,
     ...(input.mintedTokens && input.mintedTokens.count > 0 ? { mintedTokens: input.mintedTokens } : {}),
+    ...(input.childStubs && input.childStubs.length > 0 ? { childStubs: input.childStubs } : {}),
     importedAt: Date.now(),
   };
   const notes: string[] = [];

@@ -11,6 +11,7 @@ import {
 } from '../../../core/index.js';
 import { contractsById, icons } from './data.js';
 import type { RefusalIssue } from './refusal-lines.js';
+import { activeChildStubs } from './stub-contracts.js';
 import { activeTokens } from './token-source.js';
 
 export type ValidationResult =
@@ -49,6 +50,12 @@ export function validateContractText(text: string): ValidationResult {
   // (and self-references) resolve the way the repo's contracts do.
   const contracts = new Map(contractsById);
   contracts.set(contract.id, contract);
+  // Auto-proposed child STUBS (labeled provisional in the receipts) fill ids
+  // that would otherwise refuse "no contract in scope" — never overriding a
+  // repo contract or the contract in the editor (field case: CBDS ds.icon).
+  for (const [id, stub] of activeChildStubs()?.stubs ?? []) {
+    if (!contracts.has(id)) contracts.set(id, stub);
+  }
   const errors: string[] = [];
   validateContract(contract, contracts, errors, icons);
   // The ACTIVE token inventory referees {token.ref}s — with a pasted user

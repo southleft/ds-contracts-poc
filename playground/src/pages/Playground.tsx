@@ -57,6 +57,7 @@ import {
   type MintedTokenLayer,
 } from '../engine/token-source';
 import { locateJsonParseError, resolveIssueLines } from '../engine/refusal-lines';
+import { setChildStubs } from '../engine/stub-contracts';
 import { validateContractText } from '../engine/validate';
 import {
   clearWorkspace,
@@ -540,8 +541,10 @@ export function Playground() {
     setProvenance(origin);
     setPristine({ text: entry.contractText, provenance: origin });
     setReceipts(entry.receipts);
-    // The entry's minted provisional layer comes back with it (or clears).
+    // The entry's minted provisional layer comes back with it (or clears),
+    // and so do its auto-proposed child STUBS (composition keeps resolving).
     setMintedTokens(entry.mintedTokens ?? null);
+    setChildStubs(entry.childStubs ?? null);
     setActiveExample(null);
     setWsLoaded(entry);
   };
@@ -552,6 +555,7 @@ export function Playground() {
     setText(pretty(raw));
     setReceipts(null);
     setMintedTokens(null);
+    setChildStubs(null);
     setProvenance(source);
     setPristine({ text: pretty(raw), provenance: source });
     setActiveExample(slug ?? contractId);
@@ -623,6 +627,7 @@ export function Playground() {
       const minted: MintedTokenLayer | null =
         first.proposal.mintedTokens && first.proposal.mintedTokens.count > 0 ? first.proposal.mintedTokens : null;
       setMintedTokens(minted);
+      setChildStubs(null); // code proposals ship no child stubs
       // A successful code import lands in the session workspace.
       const recorded = recordImport({
         name: first.name,
@@ -872,6 +877,25 @@ export function Playground() {
     // Register the minted provisional layer BEFORE the text lands, so the
     // editor's very first validation pass already resolves imported.* refs.
     setMintedTokens(minted);
+    // Auto-proposed child STUBS register the same way (labeled provisional
+    // in the receipts) — the emitters resolve nested-instance refs instead
+    // of refusing "no contract in scope" (field case: CBDS ds.icon).
+    const stubResult = setChildStubs(proposal.childStubs ?? null);
+    const stubGroups: ReceiptGroup[] =
+      stubResult.registered.length > 0 || stubResult.refused.length > 0
+        ? [
+            {
+              title: 'Child stub contracts (provisional)',
+              kind: 'note',
+              entries: [
+                ...stubResult.registered.map((stub) => ({
+                  message: `${stub.id} registered PROVISIONALLY for this session — auto-proposed from the nested "${stub.name}" instances (observed applied values only; anatomy not captured). Import the real child set to replace it.`,
+                })),
+                ...stubResult.refused.map((message) => ({ message })),
+              ],
+            },
+          ]
+        : [];
     // A successful design import lands in the session workspace, receipts
     // and all — re-applying the same set refreshes its entry.
     const recorded = recordImport({
@@ -879,8 +903,9 @@ export function Playground() {
       contractId: contractIdOf(proposal.contract),
       source: wsSource,
       contractText,
-      receipts: { source: origin, groups: [...importGroupsRef.current, ...proposalGroups(proposal)] },
+      receipts: { source: origin, groups: [...importGroupsRef.current, ...proposalGroups(proposal), ...stubGroups] },
       ...(minted ? { mintedTokens: minted } : {}),
+      ...(proposal.childStubs && proposal.childStubs.length > 0 ? { childStubs: proposal.childStubs } : {}),
     });
     setText(contractText);
     setProvenance(provenanceLine);
@@ -987,6 +1012,7 @@ export function Playground() {
     setText(contractText);
     setReceipts(recorded.receipts);
     setMintedTokens(null);
+    setChildStubs(null);
     setProvenance('pasted contract JSON');
     setPristine({ text: contractText, provenance: 'pasted contract JSON' });
     setActiveExample(null);
@@ -1027,6 +1053,7 @@ export function Playground() {
     const contractText = pretty(result.contract);
     setText(contractText);
     setMintedTokens(null);
+    setChildStubs(null);
     setProvenance(origin);
     setPristine({ text: contractText, provenance: origin });
     setActiveExample(null);
@@ -1207,6 +1234,7 @@ export function Playground() {
         if (cancelled) return;
         setText(state.contract);
         setMintedTokens(null);
+    setChildStubs(null);
         setProvenance('loaded from share link');
         setPristine({ text: state.contract, provenance: 'loaded from share link' });
         setActiveExample(null);
