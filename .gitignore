@@ -12,3 +12,6 @@ private/
 .env.figma
 .env.local
 .playwright-mcp/
+
+# built at playground build time (scripts/build-plugin-zip.mjs)
+playground/public/ds-contracts-sync-runner-plugin.zip
