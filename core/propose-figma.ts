@@ -904,7 +904,231 @@ function invertNodeEffects(m: Merged, tokens: Record<string, string>, ctx: Ctx, 
   reportUnbound(ctx, where, 'effects', occ[0].value);
   mintObservation(ctx, tokens, where, 'box-shadow', 'shadow', occ, `${where}|effects`);
   ctx.notes.push(
-    `${where}: DROP_SHADOW proposed as a box-shadow value (dump v1.2) — CSS surfaces render it; the canvas preview has no box-shadow projection in v1 (named fidelity limit)`,
+    `${where}: DROP_SHADOW proposed as a box-shadow value (dump v1.2) — CSS surfaces render it; the canvas preview and the Figma sync script project it as a native DROP_SHADOW effect (dump v1.3)`,
+  );
+}
+
+// ---------------------------------------------------------------------------
+// Shape decor (#42, dump v1.3) — field case: the CBDS Tooltip pointer.
+// A captured DumpShape becomes a REAL part: part.shape carries kind + exact
+// intrinsic size (+ rotation when constant); per-variant placement and
+// axis-correlated rotation ride the EXISTING stylesWhen vocabulary
+// (position/top/right/bottom/left/transform are already whitelisted), spelled
+// from the captured constraints so the placement generalizes with content:
+//   LEFT/TOP     → left/top: <x>px      (exact captured offset)
+//   RIGHT/BOTTOM → right/bottom: <px>   (exact captured edge distance)
+//   CENTER       → 50% + translate(-50%) (a snap residue vs the drawn pixel
+//                  is NAMED when the canvas pixel-grid rounded the center)
+// Anything the rules cannot carry is a NAMED note, never a guess.
+// ---------------------------------------------------------------------------
+
+/** Hidden-pattern visibility (dump v1.1 `hidden`, inverted for shape parts):
+ *  a node drawn in EVERY variant but hidden exactly where one boolean axis
+ *  is false (Tooltip pointer=false), or visible for exactly one enum value,
+ *  becomes visibleWhen. Anything else is a NAMED note. */
+function invertHiddenVisibility(m: Merged, part: Record<string, unknown>, ctx: Ctx, where: string) {
+  if (part.visibleWhen !== undefined) return;
+  if (m.occ.every((o) => o.node.hidden !== true)) return;
+  if (m.occ.every((o) => o.node.hidden === true)) {
+    ctx.notes.push(`${where}: hidden in every variant — drawn as a design-time helper; proposed anyway, review`);
+    return;
+  }
+  for (const axis of ctx.axes) {
+    if (isBoolAxis(axis.values)) {
+      const fits = m.occ.every((o) => {
+        const v = (axisValuesOf(o.variant)[axis.property] ?? '').trim().toLowerCase();
+        return (o.node.hidden === true) === (v === 'false');
+      });
+      if (fits) {
+        part.visibleWhen = { prop: axis.propName };
+        ctx.notes.push(
+          `${where}: hidden exactly where "${axis.property}" is false — proposed as visibleWhen { prop: ${axis.propName} } (dump v1.1 hidden channel)`,
+        );
+        return;
+      }
+    } else {
+      const visibleValues = new Set(
+        m.occ.filter((o) => o.node.hidden !== true).map((o) => axisValuesOf(o.variant)[axis.property]),
+      );
+      const hiddenValues = new Set(
+        m.occ.filter((o) => o.node.hidden === true).map((o) => axisValuesOf(o.variant)[axis.property]),
+      );
+      const only = visibleValues.size === 1 ? [...visibleValues][0] : undefined;
+      if (only !== undefined && !hiddenValues.has(only)) {
+        part.visibleWhen = { prop: axis.propName, equals: camel(only) };
+        ctx.notes.push(
+          `${where}: visible only where "${axis.property}" = "${only}" — proposed as visibleWhen { prop: ${axis.propName}, equals: ${camel(only)} }`,
+        );
+        return;
+      }
+    }
+  }
+  ctx.notes.push(
+    `${where}: hidden in ${m.occ.filter((o) => o.node.hidden === true).length}/${m.occ.length} variants without correlating to any axis — kept unconditional, review`,
+  );
+}
+
+interface ShapePlacement {
+  /** stylesWhen-vocabulary styles, transform EXCLUDED (built by the caller
+   *  so per-value rotation can join the same transform). */
+  styles: Record<string, string>;
+  translate: string[];
+  /** |drawn − exact-center| px, when a CENTER constraint pixel-snapped. */
+  centerResidue?: number;
+}
+
+function shapePlacementOf(sh: NonNullable<DumpNode['shape']>): ShapePlacement | null {
+  if (sh.x === undefined || sh.y === undefined) return null;
+  const styles: Record<string, string> = { position: 'absolute' };
+  const translate: string[] = [];
+  let centerResidue: number | undefined;
+  const px = (n: number) => `${Math.round(n * 100) / 100}px`;
+  const h = sh.constraints?.horizontal ?? 'LEFT';
+  if (h === 'RIGHT' && sh.right !== undefined) styles.right = px(sh.right);
+  else if (h === 'CENTER' && sh.right !== undefined) {
+    styles.left = '50%';
+    translate.push('translateX(-50%)');
+    const residue = Math.round(Math.abs(sh.x - sh.right) * 50) / 100;
+    if (residue > 0.01) centerResidue = Math.max(centerResidue ?? 0, residue);
+  } else styles.left = px(sh.x);
+  const v = sh.constraints?.vertical ?? 'TOP';
+  if (v === 'BOTTOM' && sh.bottom !== undefined) styles.bottom = px(sh.bottom);
+  else if (v === 'CENTER' && sh.bottom !== undefined) {
+    styles.top = '50%';
+    translate.push('translateY(-50%)');
+    const residue = Math.round(Math.abs(sh.y - sh.bottom) * 50) / 100;
+    if (residue > 0.01) centerResidue = Math.max(centerResidue ?? 0, residue);
+  } else styles.top = px(sh.y);
+  return { styles, translate, centerResidue };
+}
+
+/** Invert captured DumpShape geometry into part.shape (+ per-variant
+ *  placement/rotation stylesWhen). Values are EXACT from the dump. */
+function invertNodeShape(m: Merged, part: Record<string, unknown>, ctx: Ctx, where: string) {
+  const withShape = m.occ.filter((o) => o.node.shape !== undefined);
+  if (withShape.length === 0) return;
+  if (withShape.length !== m.occ.length) {
+    ctx.notes.push(
+      `${where}: shape geometry captured in ${withShape.length}/${m.occ.length} variants — inconsistent capture, shape not carried; review`,
+    );
+    return;
+  }
+  const shapes = m.occ.map((o) => ({ variant: o.variant, hidden: o.node.hidden === true, sh: o.node.shape! }));
+  const kinds = [...new Set(shapes.map((s) => s.sh.kind))];
+  if (kinds.length > 1) {
+    ctx.notes.push(`${where}: shape kind differs across variants (${kinds.join(', ')}) — shape not carried; review`);
+    return;
+  }
+  const first = shapes[0].sh;
+  const shape: Record<string, unknown> = { kind: first.kind, width: first.width, height: first.height };
+  const sizes = [...new Set(shapes.map((s) => `${s.sh.width}×${s.sh.height}`))];
+  if (sizes.length > 1) {
+    ctx.notes.push(
+      `${where}: shape size differs across variants (${sizes.join(', ')}) — the first variant's ${sizes[0]} carried; review`,
+    );
+  }
+  if (first.kind === 'polygon') {
+    const sides = [...new Set(shapes.map((s) => s.sh.sides).filter((v): v is number => v !== undefined))];
+    if (sides.length >= 1) {
+      shape.sides = sides[0];
+      if (sides.length > 1) {
+        ctx.notes.push(`${where}: polygon side count differs across variants (${sides.join(', ')}) — ${sides[0]} carried; review`);
+      }
+    } else {
+      shape.sides = 3;
+      ctx.notes.push(
+        `${where}: polygon point count is not on the REST surface — sides: 3 (the Figma default, a triangle) ASSUMED; verify against the canvas`,
+      );
+    }
+  }
+
+  // Rotation: constant → shape.rotation; varying → per-axis-value transform
+  // (joined with placement below); uncorrelated → NAMED.
+  const rotations = shapes.map((s) => s.sh.rotation ?? 0);
+  const distinctRot = [...new Set(rotations)];
+  const rotationVaries = distinctRot.length > 1;
+  if (!rotationVaries && distinctRot[0] !== 0) shape.rotation = distinctRot[0];
+  part.shape = shape;
+
+  // Placement (+ varying rotation): must be a function of ONE enum axis with
+  // per-value consistency — or uniform (then it rides the part's boolean
+  // visibleWhen condition). Axis values whose variants are ALL hidden get no
+  // entry (nothing renders there).
+  const specOf = (s: (typeof shapes)[number]): string => {
+    const p = shapePlacementOf(s.sh);
+    return JSON.stringify({ p: p?.styles ?? null, t: p?.translate ?? [], r: rotationVaries ? (s.sh.rotation ?? 0) : 0 });
+  };
+  const anyPlacement = shapes.some((s) => shapePlacementOf(s.sh) !== null);
+  if (!anyPlacement && !rotationVaries) return; // in-flow, constant rotation — done
+  const buildStyles = (s: (typeof shapes)[number]): Record<string, string> | null => {
+    const p = shapePlacementOf(s.sh);
+    const transform: string[] = [...(p?.translate ?? [])];
+    if (rotationVaries && (s.sh.rotation ?? 0) !== 0) transform.push(`rotate(${s.sh.rotation}deg)`);
+    const styles: Record<string, string> = { ...(p?.styles ?? {}) };
+    if (transform.length > 0) styles.transform = transform.join(' ');
+    if (p?.centerResidue !== undefined) {
+      ctx.notes.push(
+        `${where}: CENTER-constrained placement carried as 50% + translate — the drawn offset differs from the exact center by ${p.centerResidue}px (canvas pixel snap); review`,
+      );
+    }
+    return Object.keys(styles).length > 0 ? styles : null;
+  };
+
+  for (const axis of ctx.axes) {
+    if (isBoolAxis(axis.values)) continue;
+    const byValue = new Map<string, (typeof shapes)[number]>();
+    let fits = true;
+    for (const s of shapes) {
+      const value = axisValuesOf(s.variant)[axis.property];
+      if (value === undefined) {
+        fits = false;
+        break;
+      }
+      const seen = byValue.get(value);
+      if (seen && specOf(seen) !== specOf(s)) {
+        fits = false;
+        break;
+      }
+      if (!seen) byValue.set(value, s);
+    }
+    if (!fits || !axis.values.every((v) => byValue.has(v))) continue;
+    const stylesWhen = (part.stylesWhen as Array<Record<string, unknown>> | undefined) ?? [];
+    let emitted = 0;
+    for (const value of axis.values) {
+      const variantsOfValue = shapes.filter((s) => axisValuesOf(s.variant)[axis.property] === value);
+      if (variantsOfValue.every((s) => s.hidden)) continue; // never renders there
+      const styles = buildStyles(byValue.get(value)!);
+      if (!styles) continue;
+      stylesWhen.push({ prop: axis.propName, equals: camel(value), styles });
+      emitted++;
+    }
+    if (emitted > 0) part.stylesWhen = stylesWhen;
+    ctx.notes.push(
+      `${where}: ${kinds[0]} decor carried as a shape part (${String(shape.width)}×${String(shape.height)}${shape.sides !== undefined ? `, ${String(shape.sides)} sides` : ''}) with per-variant absolute placement${rotationVaries ? ' + rotation' : ''} as stylesWhen on \`${axis.propName}\` (${emitted} placement(s); offsets EXACT from the captured boxes — dump v1.3, #42)`,
+    );
+    return;
+  }
+  // Uniform placement/rotation across every variant?
+  const specs = [...new Set(shapes.map(specOf))];
+  if (specs.length === 1) {
+    const styles = buildStyles(shapes[0]);
+    const vw = part.visibleWhen as { prop: string; equals?: string } | undefined;
+    if (styles && vw && vw.equals === undefined) {
+      const stylesWhen = (part.stylesWhen as Array<Record<string, unknown>> | undefined) ?? [];
+      stylesWhen.push({ prop: vw.prop, styles });
+      part.stylesWhen = stylesWhen;
+      ctx.notes.push(
+        `${where}: uniform absolute placement carried as stylesWhen on the part's own visibility boolean \`${vw.prop}\` (the part only renders when it holds) — dump v1.3, #42`,
+      );
+    } else if (styles) {
+      ctx.notes.push(
+        `${where}: absolute placement is uniform across variants but the stylesWhen vocabulary is conditional — placement NAMED, not proposed (${JSON.stringify(styles)}); review`,
+      );
+    }
+    return;
+  }
+  ctx.notes.push(
+    `${where}: shape placement/rotation differs across variants without correlating to any enum axis — NAMED, not proposed; review`,
   );
 }
 
@@ -935,6 +1159,98 @@ function mintPadding(ctx: Ctx, target: Record<string, string>, m: Merged, where:
 // Text → typography tokens
 // ---------------------------------------------------------------------------
 
+/** BOUNDED font-style-name → numeric weight table (owner field case: CBDS
+ *  Tooltip title drawn "Semi Bold" — imports with no token-derived style
+ *  identity previously NAMED the weight and dropped it; the title rendered
+ *  un-bold). Names normalize by lowercasing and stripping spaces/hyphens;
+ *  a trailing "Italic" is NOT weight — it is receipted separately as an
+ *  uncarried channel. Unknown names stay NAMED receipts, never guessed. */
+const FONT_WEIGHT_BY_STYLE_NAME: Record<string, number> = {
+  thin: 100,
+  extralight: 200,
+  ultralight: 200,
+  light: 300,
+  regular: 400,
+  normal: 400,
+  medium: 500,
+  semibold: 600,
+  demibold: 600,
+  bold: 700,
+  extrabold: 800,
+  ultrabold: 800,
+  black: 900,
+  heavy: 900,
+};
+
+export function fontStyleWeight(fontStyle: string): { weight?: number; italic: boolean } {
+  let key = fontStyle.toLowerCase().replace(/[\s_-]+/g, '');
+  let italic = false;
+  if (key.endsWith('italic')) {
+    italic = true;
+    key = key.slice(0, -'italic'.length);
+  }
+  if (key === '') return { weight: italic ? 400 : undefined, italic }; // bare "Italic" = Regular Italic
+  return { weight: FONT_WEIGHT_BY_STYLE_NAME[key], italic };
+}
+
+/** Mint the text channels that ride OUTSIDE a token-derived style identity:
+ *  font-weight through the bounded weight-name table (dump fontStyle), and
+ *  line-height when the dump captured a PIXEL value (dump v1.3). Uniformity
+ *  rules mirror font-size: identical across variants → one mint; varying →
+ *  per-variant substituted refs (the mint classifier owns the split).
+ *  Unknown weight names and italic styles are NAMED receipts. */
+function mintTextChannels(
+  m: Merged,
+  tokens: Record<string, string>,
+  ctx: Ctx,
+  where: string,
+  opts: { weight: boolean },
+) {
+  const textOcc = m.occ.filter((o) => o.node.text !== undefined);
+  if (textOcc.length === 0) return;
+  if (opts.weight) {
+    const parsed = textOcc.map((o) => ({
+      variant: o.variant,
+      fontStyle: o.node.text!.fontStyle ?? 'Medium',
+      ...fontStyleWeight(o.node.text!.fontStyle ?? 'Medium'),
+    }));
+    const unknown = [...new Set(parsed.filter((p) => p.weight === undefined).map((p) => p.fontStyle))];
+    if (unknown.length > 0) {
+      ctx.notes.push(
+        `${where}: font style name(s) ${unknown.map((u) => `"${u}"`).join(', ')} are outside the weight-name table (Thin…Black) — font-weight NAMED, not proposed; review`,
+      );
+    } else {
+      reportUnbound(ctx, where, 'fontWeight', parsed[0].weight!);
+      mintObservation(
+        ctx, tokens, where, 'font-weight', 'number',
+        parsed.map((p) => ({ variant: p.variant, value: p.weight! })),
+        `${where}|fontWeight`,
+      );
+    }
+    const italics = parsed.filter((p) => p.italic);
+    if (italics.length > 0) {
+      ctx.notes.push(
+        `${where}: italic font style ("${italics[0].fontStyle}") — font-style has no contract vocabulary; italic NAMED, not carried (review)`,
+      );
+    }
+  }
+  // line-height (dump v1.3, PIXELS only — other units were receipted at capture).
+  const withLh = textOcc.filter((o) => typeof o.node.text!.lineHeight === 'number');
+  if (withLh.length === 0) return;
+  if (withLh.length !== textOcc.length) {
+    ctx.notes.push(
+      `${where}: line-height captured in ${withLh.length}/${textOcc.length} variants (absent means AUTO or an older dump) — inconsistent, NAMED, not proposed; review`,
+    );
+    return;
+  }
+  reportUnbound(ctx, where, 'lineHeight', withLh[0].node.text!.lineHeight!);
+  mintObservation(
+    ctx, tokens, where, 'line-height', 'px',
+    withLh.map((o) => ({ variant: o.variant, value: o.node.text!.lineHeight! })),
+    `${where}|lineHeight`,
+  );
+}
+
 function invertTextTokens(m: Merged, ctx: Ctx, where: string): Record<string, string> {
   const tokens: Record<string, string> = {};
   const color = unifyPaint(
@@ -961,10 +1277,11 @@ function invertTextTokens(m: Merged, ctx: Ctx, where: string): Record<string, st
   const distinctWeights = [...new Set(textOcc.map((o) => o.node.text!.fontStyle ?? 'Medium'))];
   if (distinctSizes.length > 1 || distinctWeights.length > 1) {
     ctx.notes.push(
-      `${where}: typography varies across variants (fontSize ${distinctSizes.join('/')}, weight ${distinctWeights.join('/')}) — no single text-style identity adopted (the first variant's value would be wrong for the others); font-size ${ctx.mint ? 'minted per variant where axis-correlated' : 'not proposed without minting'}${distinctWeights.length > 1 ? '; per-variant font-weight has no vocabulary — NAMED, not proposed' : ''} (review)`,
+      `${where}: typography varies across variants (fontSize ${distinctSizes.join('/')}, weight ${distinctWeights.join('/')}) — no single text-style identity adopted (the first variant's value would be wrong for the others); font-size ${ctx.mint ? 'minted per variant where axis-correlated' : 'not proposed without minting'}${distinctWeights.length > 1 ? '; font-weight minted per variant through the weight-name table where every name maps (unknown names stay NAMED)' : ''} (review)`,
     );
     reportUnbound(ctx, where, 'fontSize', t.fontSize);
     mintObservation(ctx, tokens, where, 'font-size', 'px', numOccurrences(m, (n) => n.text?.fontSize), `${where}|fontSize`);
+    mintTextChannels(m, tokens, ctx, where, { weight: true });
     return tokens;
   }
   const styleNames = [...new Set(m.occ.map((o) => o.node.text?.style).filter((s) => s !== undefined))];
@@ -999,17 +1316,16 @@ function invertTextTokens(m: Merged, ctx: Ctx, where: string): Record<string, st
       ctx.notes.push(`${where}: node weight "${t.fontStyle}" overrides style "${style.name}" — override not token-recoverable, review`);
     }
   } else if (ctx.mint && t.fontSize > 0) {
-    // No token-derived style identity — mint the literal size (font-family
-    // and weight stay unproposed; weight inversion is style-identity work).
+    // No token-derived style identity — mint the literal size.
     mintObservation(ctx, tokens, where, 'font-size', 'px', numOccurrences(m, (n) => n.text?.fontSize));
   }
-  if (!style && (t.fontStyle ?? 'Medium') !== 'Medium') {
-    // The weight channel must not die silently: without a style identity a
-    // non-default weight has no token to ride (STYLE-FIDELITY A21 receipt).
-    ctx.notes.push(
-      `${where}: font weight "${t.fontStyle}" has no token identity (no matching derived style) — font-weight NAMED, not proposed; review`,
-    );
-  }
+  // Channels OUTSIDE the style identity: font-weight through the bounded
+  // weight-name table when no derived style matched (the identity path stays
+  // the PREFERRED route — a matched style already carries its weight token);
+  // PIXEL line-height always (a text style's definition does not carry it).
+  // Field case: the CBDS Tooltip title drawn "Semi Bold" at 12/16 rendered
+  // un-bold and mis-proportioned when both channels were note-only.
+  mintTextChannels(m, tokens, ctx, where, { weight: !style });
   return tokens;
 }
 
@@ -1415,6 +1731,18 @@ function buildPart(
   }
 
   const tokens = invertNodeTokens(m, false, ctx, where);
+
+  // v9 shape (#42, dump v1.3): parametric leaf decor — the part carries the
+  // captured geometry, hidden-pattern visibility, and per-variant placement.
+  if (m.occ.some((o) => o.node.shape !== undefined)) {
+    if (visibleWhen) part.visibleWhen = visibleWhen;
+    invertHiddenVisibility(m, part, ctx, where);
+    invertNodeShape(m, part, ctx, where);
+    invertNodeOpacity(m, part, tokens, ctx, where);
+    invertNodeEffects(m, tokens, ctx, where);
+    attachTokens(ctx, part, tokens);
+    return part;
+  }
 
   // Slot wrapper: a frame whose sole child is a swap-bound instance.
   const soleChild = m.children.length === 1 ? m.children[0] : undefined;

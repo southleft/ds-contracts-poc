@@ -19,6 +19,7 @@ import {
   STATE_PREVIEW_PROPERTY,
   STYLES_WHEN_ALLOWED,
   pascal,
+  shapeCssDecls,
   slotsOf,
   statePreviewSubstProps,
   walkAnatomy,
@@ -317,6 +318,21 @@ export function validateContract(
         if (value.includes('{')) {
           errors.push(`${contract.id}: part "${name}" stylesWhen "${cssProp}" value ${JSON.stringify(value)} looks like a token reference — stylesWhen is literal CSS; token-driven styling belongs in "tokens"`);
         }
+      }
+    }
+    // v9 shape: a parametric leaf decor — anything that would give it
+    // children or content contradicts the leaf-ness and is refused by name.
+    if (part.shape) {
+      for (const [field, present] of Object.entries({
+        parts: part.parts, slot: part.slot, component: part.component,
+        content: part.content, text: part.text, icon: part.icon, meter: part.meter,
+      })) {
+        if (present !== undefined) {
+          errors.push(`${contract.id}: part "${name}" is a shape (leaf decor) — it cannot also carry "${field}"`);
+        }
+      }
+      if (part.shape.sides !== undefined && part.shape.kind !== 'polygon') {
+        errors.push(`${contract.id}: part "${name}" shape kind "${part.shape.kind}" cannot declare sides — side count is polygon vocabulary`);
       }
     }
     if (part.visibleWhen) {
@@ -626,8 +642,16 @@ export function generateCss(contract: Contract, tokenInventory: Set<string>, err
   // min-widths); containers narrower than that should scroll.
   if ('max-width' in rootTokens) rootDecls.push('width: 100%', 'min-width: fit-content');
   if (contract.semantics.element === 'button') rootDecls.push('cursor: pointer');
-  // v7 overlay: any overlay part positions against the root.
-  if (walkAnatomy(contract).some((w) => w.part.overlay)) rootDecls.push('position: relative');
+  // v7 overlay / v9 shape placement: any out-of-flow part (an overlay, or a
+  // part whose stylesWhen carries position: absolute — the shape-placement
+  // spelling) positions against the root.
+  if (
+    walkAnatomy(contract).some(
+      (w) => w.part.overlay || (w.part.stylesWhen ?? []).some((sw) => sw.styles['position'] === 'absolute'),
+    )
+  ) {
+    rootDecls.push('position: relative');
+  }
 
   const enumRules = new Map<string, Map<string, string>>(); // class → decls
   const stateRules: string[] = [];
@@ -759,6 +783,10 @@ export function generateCss(contract: Contract, tokenInventory: Set<string>, err
     if (part.layout?.grow) decls.push('flex: 1 1 auto', 'min-width: 0');
     // v7 overlay: out of flow, attached to the root's edge.
     if (part.overlay) decls.push('position: absolute', ...OVERLAY_CSS[part.overlay.placement]);
+    // v9 shape: parametric leaf decor — the ONE shared projection
+    // (scripts/contract-schema.ts shapeCssDecls); placement/rotation-per-
+    // variant ride stylesWhen rules below.
+    if (part.shape) decls.push(...shapeCssDecls(part.shape));
     // Event-trigger buttons: neutralize UA button styles BEFORE token decls
     // so the contract's tokens (padding, background, font) win.
     if (part.element === 'button' && (contract.events ?? []).some((e) => e.trigger === name)) {

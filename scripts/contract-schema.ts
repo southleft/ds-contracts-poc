@@ -160,6 +160,57 @@ export const OverlaySchema = z.strictObject({
   placement: z.enum(['top', 'bottom', 'start', 'end']),
 });
 
+/** v9 shape: a LEAF decor part that is a parametric vector, not a box —
+ *  the projection of dump v1.3 geometry capture (#42; field case: the CBDS
+ *  Tooltip pointer triangle). Bounded by construction: exactly three kinds
+ *  (polygon by side count / ellipse / rect), an explicit intrinsic size, and
+ *  a CSS-clockwise rotation. Everything else about a shape rides existing
+ *  channels: fill via `tokens.background-color`, per-variant placement via
+ *  `stylesWhen` (position/top/right/bottom/left/transform are already in the
+ *  literal whitelist), visibility via `visibleWhen`.
+ *  Projections: code surfaces render width/height + clip-path polygon (or
+ *  border-radius 50%) + transform rotate — see shapeCssDecls below, the ONE
+ *  shared implementation; the Figma generator constructs a REAL
+ *  RegularPolygon/Ellipse/Rectangle node with native rotation. Refusal
+ *  rules (emit-react validateContract): a shape part must be a leaf (no
+ *  parts/slot/component/content/text/icon/meter), sides only on polygons. */
+export const ShapeSchema = z.strictObject({
+  kind: z.enum(['polygon', 'ellipse', 'rect']),
+  /** Polygon point count, ≥3. Figma's REGULAR_POLYGON default is 3. */
+  sides: z.number().int().min(3).optional(),
+  /** Intrinsic (pre-rotation) size, px. */
+  width: z.number().positive(),
+  height: z.number().positive(),
+  /** CSS-clockwise degrees (`transform: rotate(<n>deg)`). Omit for 0. */
+  rotation: z.number().optional(),
+});
+
+/** Vertex list for a regular n-gon inscribed in its box, as CSS clip-path
+ *  percentages — vertex 0 at the top center, matching Figma's
+ *  REGULAR_POLYGON (a triangle's apex points up at rotation 0). */
+export function polygonClipPath(sides: number): string {
+  const pts: string[] = [];
+  const fmt = (n: number) => `${Math.round(n * 10000) / 10000}%`;
+  for (let k = 0; k < sides; k++) {
+    const a = ((-90 + (k * 360) / sides) * Math.PI) / 180;
+    pts.push(`${fmt(50 + 50 * Math.cos(a))} ${fmt(50 + 50 * Math.sin(a))}`);
+  }
+  return `polygon(${pts.join(', ')})`;
+}
+
+/** The shape's CSS declarations — shared by every code-side surface
+ *  (emit-react, emit-html, emit-react-inline, the playground canvas
+ *  preview) so the projection cannot fork. A polygon with no captured side
+ *  count renders the Figma default (3) — the proposer NAMES that assumption
+ *  in its notes. */
+export function shapeCssDecls(shape: z.infer<typeof ShapeSchema>): string[] {
+  const d = [`width: ${shape.width}px`, `height: ${shape.height}px`, 'flex-shrink: 0'];
+  if (shape.kind === 'polygon') d.push(`clip-path: ${polygonClipPath(shape.sides ?? 3)}`);
+  if (shape.kind === 'ellipse') d.push('border-radius: 50%');
+  if (shape.rotation !== undefined && shape.rotation !== 0) d.push(`transform: rotate(${shape.rotation}deg)`);
+  return d;
+}
+
 /** Conditional part visibility (schema v4, gap G1): the part renders only
  *  when the prop matches. Boolean props map to Figma visibility bindings;
  *  enum conditions resolve per variant. */
@@ -232,6 +283,8 @@ export interface Part {
   stylesWhen?: Array<z.infer<typeof StylesWhenSchema>>;
   /** v7: out-of-flow edge attachment (tooltip/popup anatomy). */
   overlay?: z.infer<typeof OverlaySchema>;
+  /** v9: parametric leaf decor (triangle/ellipse/rotated rect — #42). */
+  shape?: z.infer<typeof ShapeSchema>;
   /** CSS property → token reference. The CSS Module AND the Figma bindings
    *  are generated from these — there is no handwritten style layer. */
   tokens?: Record<string, string>;
@@ -272,6 +325,8 @@ export const PartSchema: z.ZodType<Part> = z.lazy(() =>
     stylesWhen: z.array(StylesWhenSchema).optional(),
     /** v7. */
     overlay: OverlaySchema.optional(),
+    /** v9. */
+    shape: ShapeSchema.optional(),
     tokens: z.record(z.string(), TokenRefSchema).optional(),
     states: z.record(z.string(), z.record(z.string(), TokenRefSchema)).optional(),
     content: z.strictObject({ prop: z.string() }).optional(),
