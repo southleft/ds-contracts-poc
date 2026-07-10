@@ -34,6 +34,7 @@
     "extract:figma:cbds:batch:check": "tsx extract/figma/cbds-batch-check.ts",
     "extract:figma:cbds:bridge:check": "tsx extract/figma/cbds-bridge-check.ts",
     "extract:figma:canvas:check": "tsx extract/figma/canvas-box-check.ts",
+    "extract:figma:dialog:check": "tsx extract/figma/dialog-check.ts",
     "extract:figma:tooltip:check": "tsx extract/figma/tooltip-check.ts",
     "extract:figma:rest": "tsx extract/figma/rest/cli.ts",
     "extract:figma:rest:roundtrip": "tsx extract/figma/rest/roundtrip-rest.ts",

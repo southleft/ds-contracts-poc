@@ -1537,6 +1537,43 @@ const cases: Case[] = [
     },
   },
   {
+    // Owner P0 (global part-name dedup): his Dialog refused with 'duplicate
+    // anatomy part name "Title"' + '"Icon"'. Part names are contract-wide
+    // identity (CSS classes, swap layers, note paths) but the proposer
+    // deduped only among SIBLINGS — his Title[FRAME] > Title[TEXT] nest and
+    // two Icon instances under DIFFERENT parents slipped through to an emit
+    // refusal. Fixed with a contract-global registry in partKey: pre-order
+    // claiming (first drawn part keeps its name), parent-derived prefix for
+    // later collisions ("frame2Icon"), else ordinal ("Title2"); every rename
+    // a NAMED note carrying the node path.
+    id: 'design-dialog-global-part-dedup',
+    claim: 'C5-extraction',
+    run: () => {
+      const r = run(TSX, ['extract/figma/dialog-check.ts']);
+      if (r.status !== 0) throw new Error(`Dialog dedup receipt failed:\n${r.out}`);
+      for (const line of [
+        '✔ 1 proposed, 0 skipped (the send completes)',
+        '✔ part names are UNIQUE contract-wide (17 parts, 17 distinct)',
+        '✔ the drawn "Title" WRAPPER keeps its name (first drawn part wins)',
+        '✔ the "Title" TEXT inside it takes the ordinal — "Title2" (parent key IS the colliding name, so no prefix)',
+        '✔ the second "Icon" (close icon, under "Frame 2") takes the parent-derived prefix — "frame2Icon"',
+        '✔ the "Title" rename is a NAMED note carrying the node path',
+        '✔ the "Icon" rename is a NAMED note carrying the node path',
+        '✔ BOTH _Slot-Dialog underscore-instances carry as slots (swap-bound INSTANCE_SWAP → slot parts, sanitized names)',
+        '✔ all FOUR action-button component refs present under Actions',
+        '✔ BOTH Icon instances (title icon + close icon) reference the ds.icon stub',
+        '✔ the scroll bar carries (hidden RECTANGLE → "scrollBar" part)',
+        '✔ ZERO referee violations (got 0)',
+        "✔ in particular: zero 'duplicate anatomy part name' refusals (the owner's Dialog refusal class)",
+        '✔ emitHtml renders (validateContract passed — the duplicate refusal is GONE)',
+        '✔ the canvas compiles — 4 variants (size axis; got 4)',
+        '✔ its id rides the sanitize rule — "ds.modal-confirmation-dialog" (got ds.modal-confirmation-dialog)',
+      ]) {
+        if (!r.out.includes(line)) throw new Error(`missing check: ${line}`);
+      }
+    },
+  },
+  {
     // Owner P0 (canvas metrics): the Code preview rendered his Button right
     // (16/12 padding-inline, 48/40/32 heights) but the CANVAS drew too-tall
     // uniform boxes (~64px, all sizes identical). Two root causes, fixed:

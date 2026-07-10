@@ -633,6 +633,14 @@ interface Ctx {
   /** Nested instances whose child contract is not in scope, keyed by the
    *  stub contract id they will claim — turned into childStubs post-build. */
   stubs: Map<string, StubCapture>;
+  /** GLOBAL part-name registry (one per proposal): part names are contract-
+   *  wide identity (CSS classes, swap layers, note paths — emit-react refuses
+   *  duplicates anywhere in the anatomy), so sibling-scope dedup is not
+   *  enough. Owner field case: his Dialog drew Title[FRAME] > Title[TEXT]
+   *  (wrapper and text at different depths) and two Icon instances under
+   *  DIFFERENT parents — legal on the canvas, refused at emit. Seeded with
+   *  'root' (the root is a walked part name too). */
+  partNames: Set<string>;
   mint?: MintCapture;
 }
 
@@ -1772,12 +1780,42 @@ const isWrapArtifact = (m: Merged): boolean => {
 
 /** Anatomy part key for a merged child: identifier-safe (the React emitter
  *  writes `styles.<key>` and `<div className={styles.<key>}>`, so a drawn
- *  name like "Focus ring" must not leak into the key) and unique among
- *  siblings. A name that is already a legal identifier keeps its spelling. */
-function partKey(name: string, taken: Set<string>): string {
-  const base = /^[A-Za-z][A-Za-z0-9]*$/.test(name) ? name : camel(name) || 'part';
+ *  name like "Focus ring" must not leak into the key) and unique across the
+ *  WHOLE contract (ctx.partNames — part names are contract-wide identity;
+ *  emit-react refuses duplicates anywhere in the anatomy, not just among
+ *  siblings). A name that is already a legal identifier keeps its spelling.
+ *
+ *  THE DEDUP RULE (deterministic, documented): keys are claimed in anatomy
+ *  order, parents before their children (pre-order) — the FIRST drawn part
+ *  keeps its name. A later collision is disambiguated by PARENT-DERIVED
+ *  PREFIX (parentKey + PascalName, e.g. the second "Icon", under "Frame 2",
+ *  becomes "frame2Icon") when the parent's key adds information (it differs
+ *  from the colliding name and the prefixed key is itself free); otherwise
+ *  by ORDINAL SUFFIX ("Title" inside the "Title" wrapper becomes "Title2").
+ *  Every rename is a NAMED note carrying the node path — never silent. */
+function partKey(name: string, ctx: Ctx, where: string, parentKey: string): string {
+  // camel() only folds space/underscore/hyphen word breaks — a drawn name
+  // with other punctuation (the owner's Dialog body is the full lorem-ipsum
+  // SENTENCE, commas and periods included) would leak an illegal identifier
+  // into CSS selectors; strip everything outside [A-Za-z0-9] after cameling.
+  const camelSafe = camel(name).replace(/[^A-Za-z0-9]/g, '');
+  const base = /^[A-Za-z][A-Za-z0-9]*$/.test(name)
+    ? name
+    : /^[A-Za-z]/.test(camelSafe)
+      ? camelSafe
+      : 'part';
+  const taken = ctx.partNames;
   let key = base;
-  for (let n = 2; taken.has(key); n++) key = `${base}${n}`;
+  if (taken.has(base)) {
+    const contextual = parentKey && parentKey !== 'root' && parentKey !== base
+      ? `${parentKey}${base.charAt(0).toUpperCase()}${base.slice(1)}`
+      : '';
+    if (contextual && !taken.has(contextual)) key = contextual;
+    else for (let n = 2; taken.has(key); n++) key = `${base}${n}`;
+    ctx.notes.push(
+      `${where}: part name "${base}" already names another part of this contract (part names are contract-wide: CSS classes, swap layers, and note paths key on them) — renamed to "${key}" (rule: first drawn part keeps the name; later collisions take the parent-derived prefix, else an ordinal suffix)`,
+    );
+  }
   taken.add(key);
   return key;
 }
@@ -1807,6 +1845,9 @@ function buildPart(
   parentMode: 'HORIZONTAL' | 'VERTICAL' | null,
   ctx: Ctx,
   where: string,
+  /** This part's own claimed key — the parent-derived-prefix context for its
+   *  children's dedup (see partKey). */
+  selfKey: string,
 ): Record<string, unknown> | null {
   const part: Record<string, unknown> = {};
   const visibleWhen = visibilityFromPresence(m, ctx, where);
@@ -2035,10 +2076,13 @@ function buildPart(
   if (visibleRef) applyVisibleBinding(part, visibleRef, ctx, where, m);
   const mode = m.occ[0].node.layout?.mode ?? null;
   const parts: Record<string, unknown> = {};
-  const taken = new Set<string>();
   for (const child of m.children) {
-    const built = buildPart(child, mode, ctx, `${where}/${child.name}`);
-    if (built) parts[partKey(child.name, taken)] = built;
+    // Claim the key BEFORE descending (pre-order): the parent-derived-prefix
+    // rule needs the parent's key settled, and the first DRAWN part keeps
+    // its name (see partKey — the registry is contract-global).
+    const key = partKey(child.name, ctx, `${where}/${child.name}`, selfKey);
+    const built = buildPart(child, mode, ctx, `${where}/${child.name}`, key);
+    if (built) parts[key] = built;
   }
   if (Object.keys(parts).length > 0) part.parts = parts;
   if (visibleWhen) part.visibleWhen = visibleWhen;
@@ -2676,6 +2720,7 @@ export function proposeFromDump(
     slots: [],
     flattenedVariants: new Set(),
     stubs: new Map(),
+    partNames: new Set(['root']),
     mint: opts.mintUnbound
       ? {
           axes: enumAxes.map((a) => ({ propName: a.propName, values: a.values.map(camel) })),
@@ -2763,10 +2808,11 @@ export function proposeFromDump(
   } else {
     const mode = merged.occ[0].node.layout?.mode ?? null;
     const parts: Record<string, unknown> = {};
-    const taken = new Set<string>();
     for (const child of merged.children) {
-      const built = buildPart(child, mode, ctx, `${where}/${child.name}`);
-      if (built) parts[partKey(child.name, taken)] = built;
+      // Pre-order claim against the contract-global registry (see partKey).
+      const key = partKey(child.name, ctx, `${where}/${child.name}`, 'root');
+      const built = buildPart(child, mode, ctx, `${where}/${child.name}`, key);
+      if (built) parts[key] = built;
     }
     if (Object.keys(parts).length > 0) root.parts = parts;
   }
