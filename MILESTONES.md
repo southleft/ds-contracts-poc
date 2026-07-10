@@ -411,6 +411,45 @@ surfaces without guessing a child's API. D-convergence stands at 12/19 style
 facts in byte-agreement, each divergence attributed to the side that owns it.
 **60/60.**
 
+## 2026-07-09 — "This is a freaking button" (semantics + state promotion)
+
+An owner field test exposed the worst failure class the project recognizes:
+a component set named **Button-Brand Primary** imported as a non-focusable
+`div` with a fake `state` enum prop and a first-variant font size shipped as
+a constant for every size — plausible-but-wrong values wearing the costume of
+truth. Three root causes, all fixed at the source, none with AI:
+
+- **Deterministic semantics inference** inside `proposeFromDump` — a pure
+  name/axis table (button/link/tooltip/heading/switch/…; `*group*`
+  deliberately excluded; an interaction-state axis alone corroborates
+  `button`). Every hit is a named review note; no hit stays `div` with the
+  hedge. Emitted React is a real `<button>` on `ButtonHTMLAttributes`.
+- **State-axis promotion** — a drawn `state=default|hover|focus|pressed|
+  disabled` axis is the platform's interaction vocabulary, not API: it never
+  ships as a prop. hover/pressed/focus become real `states` overrides
+  (through the same mint pass, substituted refs per remaining axis),
+  `disabled` becomes a native boolean, a stroke-only focus child inverts to
+  the outline pair, and `figmaStatePreviews` round-trips the axis to canvas
+  (the rename documented honestly in a proposal note).
+- **Typography-uniformity guard** — style identity is adopted only when
+  fontSize and weight agree across every variant; otherwise per-variant
+  minting. The 16px-everywhere constant is dead: the acceptance receipt
+  asserts **numeric equality** of emitted padding and font-size against the
+  live REST dump per size variant (small = 12px inline / 14px type, large =
+  16px / 16px), and pins that the values genuinely differ across sizes.
+- **Playground stub registration** — the engine already proposed child stubs;
+  the playground dropped them. `stub-contracts.ts` registers them
+  (provisional, labeled, never overriding repo contracts), so the owner's
+  `ds.icon has no contract in scope` refusals cannot recur.
+
+Verified live in the deployed playground: Tab focuses a real button showing
+the `:focus-visible` ring; controls show `size/text/iconLeft/iconRight/
+disabled` and no state control. Fidelity matrix re-scored under the promoted
+vocabulary: D-convergence **15 AGREE / 0 DIVERGE** (font-size small moved
+DIVERGE→AGREE at 14px — the owner's exact complaint). Receipt:
+`npm run extract:figma:cbds:check` (36 checks) on a committed live fixture.
+**63/63.**
+
 ---
 
 **Standing scoreboard** (updated with each milestone):
