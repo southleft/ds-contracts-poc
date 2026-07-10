@@ -1,0 +1,2333 @@
+{
+ "_provenance": {
+  "fileKey": "WofZT8xaxXuc2Q6Je9S4XE",
+  "extractedAt": "2026-07-10",
+  "note": "Single-set gauntlet fixture for class \"pattern-arrayof-candidate\" — extracted from cbds-plugin-all-sets.v14.dump.json by extract/figma/gauntlet/census.ts."
+ },
+ "_degradations": [],
+ "_variables": {
+  "spacing/050": {
+   "type": "FLOAT",
+   "value": 4
+  },
+  "spacing/025": {
+   "type": "FLOAT",
+   "value": 2
+  },
+  "spacing/100": {
+   "type": "FLOAT",
+   "value": 8
+  },
+  "spacing/150": {
+   "type": "FLOAT",
+   "value": 12
+  },
+  "corner-radius/100": {
+   "type": "FLOAT",
+   "value": 8
+  },
+  "bg/surface-primary": {
+   "type": "COLOR",
+   "value": "#fcfeff"
+  },
+  "border/primary": {
+   "type": "COLOR",
+   "value": "#a2aebf"
+  },
+  "text/placeholder": {
+   "type": "COLOR",
+   "value": "#556275"
+  },
+  "border/primary-hover": {
+   "type": "COLOR",
+   "value": "#556275"
+  },
+  "border/focus": {
+   "type": "COLOR",
+   "value": "#0e61ba"
+  },
+  "text/primary": {
+   "type": "COLOR",
+   "value": "#050a0f"
+  },
+  "utility/foreground/grey": {
+   "type": "COLOR",
+   "value": "#3a475b"
+  },
+  "bg/disabled": {
+   "type": "COLOR",
+   "value": "#dfe3eb"
+  },
+  "text/disabled": {
+   "type": "COLOR",
+   "value": "#556275"
+  },
+  "border/danger/default": {
+   "type": "COLOR",
+   "value": "#b51833"
+  },
+  "component-size/small": {
+   "type": "FLOAT",
+   "value": 24
+  },
+  "icon-size/large": {
+   "type": "FLOAT",
+   "value": 24
+  },
+  "icon-size/small": {
+   "type": "FLOAT",
+   "value": 16
+  }
+ },
+ "Text Area": {
+  "setName": "Text Area",
+  "type": "COMPONENT_SET",
+  "nodeId": "199:1428",
+  "key": "49a2f9bbc016f01d589bb603fe5330116059b501",
+  "variants": [
+   {
+    "name": "size=large, state=default",
+    "type": "COMPONENT",
+    "layout": {
+     "mode": "VERTICAL",
+     "primary": "MIN",
+     "counter": "MIN",
+     "spacing": 4,
+     "padding": [
+      0,
+      0,
+      0,
+      0
+     ],
+     "primarySizing": "AUTO",
+     "counterSizing": "AUTO"
+    },
+    "bound": {
+     "itemSpacing": "spacing/050"
+    },
+    "children": [
+     {
+      "name": "_Input label",
+      "type": "INSTANCE",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "CENTER",
+       "spacing": 2,
+       "padding": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "AUTO"
+      },
+      "bound": {
+       "itemSpacing": "spacing/025"
+      },
+      "fillWidth": true,
+      "propRefs": {
+       "visible": "↪️input-label"
+      },
+      "instanceOf": "_Input label",
+      "componentProperties": {
+       "✏️label-text": "Label",
+       "is-required": false
+      }
+     },
+     {
+      "name": "Input field",
+      "type": "FRAME",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "MIN",
+       "spacing": 8,
+       "padding": [
+        8,
+        12,
+        8,
+        12
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "FIXED"
+      },
+      "cornerRadius": 8,
+      "bound": {
+       "itemSpacing": "spacing/100",
+       "paddingLeft": "spacing/150",
+       "paddingTop": "spacing/100",
+       "paddingRight": "spacing/150",
+       "paddingBottom": "spacing/100",
+       "topLeftRadius": "corner-radius/100",
+       "topRightRadius": "corner-radius/100",
+       "bottomLeftRadius": "corner-radius/100",
+       "bottomRightRadius": "corner-radius/100"
+      },
+      "fill": {
+       "var": "bg/surface-primary"
+      },
+      "stroke": {
+       "var": "border/primary"
+      },
+      "strokeWeight": 1,
+      "children": [
+       {
+        "name": "Placeholder",
+        "type": "TEXT",
+        "fillWidth": true,
+        "text": {
+         "characters": "Placeholder",
+         "fontSize": 16,
+         "fontStyle": "Regular",
+         "lineHeight": 24,
+         "style": "Body/Large",
+         "fillVar": "text/placeholder"
+        },
+        "fill": {
+         "var": "text/placeholder"
+        },
+        "propRefs": {
+         "visible": "placeholder",
+         "characters": "✏️text-placeholder"
+        }
+       },
+       {
+        "name": "Notches",
+        "type": "INSTANCE",
+        "propRefs": {
+         "visible": "pull-handle"
+        },
+        "instanceOf": "Notches"
+       }
+      ]
+     },
+     {
+      "name": "_Helper text",
+      "type": "INSTANCE",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "CENTER",
+       "spacing": 8,
+       "padding": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "AUTO"
+      },
+      "bound": {
+       "itemSpacing": "spacing/100"
+      },
+      "hidden": true,
+      "propRefs": {
+       "visible": "↪️helper-text"
+      },
+      "instanceOf": "_Helper text",
+      "componentProperties": {
+       "helper-text": true,
+       "✏️text": "Helper text",
+       "counter": false
+      }
+     }
+    ]
+   },
+   {
+    "name": "size=small, state=default",
+    "type": "COMPONENT",
+    "layout": {
+     "mode": "VERTICAL",
+     "primary": "MIN",
+     "counter": "MIN",
+     "spacing": 4,
+     "padding": [
+      0,
+      0,
+      0,
+      0
+     ],
+     "primarySizing": "AUTO",
+     "counterSizing": "AUTO"
+    },
+    "bound": {
+     "itemSpacing": "spacing/050"
+    },
+    "children": [
+     {
+      "name": "_Input label",
+      "type": "INSTANCE",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "CENTER",
+       "spacing": 2,
+       "padding": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "AUTO"
+      },
+      "bound": {
+       "itemSpacing": "spacing/025"
+      },
+      "fillWidth": true,
+      "propRefs": {
+       "visible": "↪️input-label"
+      },
+      "instanceOf": "_Input label",
+      "componentProperties": {
+       "✏️label-text": "Label",
+       "is-required": false
+      }
+     },
+     {
+      "name": "Input field",
+      "type": "FRAME",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "MIN",
+       "spacing": 8,
+       "padding": [
+        8,
+        12,
+        8,
+        12
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "FIXED"
+      },
+      "cornerRadius": 8,
+      "bound": {
+       "itemSpacing": "spacing/100",
+       "paddingLeft": "spacing/150",
+       "paddingTop": "spacing/100",
+       "paddingRight": "spacing/150",
+       "paddingBottom": "spacing/100",
+       "topLeftRadius": "corner-radius/100",
+       "topRightRadius": "corner-radius/100",
+       "bottomLeftRadius": "corner-radius/100",
+       "bottomRightRadius": "corner-radius/100"
+      },
+      "fill": {
+       "var": "bg/surface-primary"
+      },
+      "stroke": {
+       "var": "border/primary"
+      },
+      "strokeWeight": 1,
+      "children": [
+       {
+        "name": "Placeholder",
+        "type": "TEXT",
+        "fillWidth": true,
+        "text": {
+         "characters": "Placeholder",
+         "fontSize": 14,
+         "fontStyle": "Regular",
+         "lineHeight": 20,
+         "style": "Body/Medium",
+         "fillVar": "text/placeholder"
+        },
+        "fill": {
+         "var": "text/placeholder"
+        },
+        "propRefs": {
+         "visible": "placeholder",
+         "characters": "✏️text-placeholder"
+        }
+       },
+       {
+        "name": "Notches",
+        "type": "INSTANCE",
+        "propRefs": {
+         "visible": "pull-handle"
+        },
+        "instanceOf": "Notches"
+       },
+       {
+        "name": "Notches",
+        "type": "INSTANCE",
+        "instanceOf": "Notches"
+       },
+       {
+        "name": "Notches",
+        "type": "INSTANCE",
+        "instanceOf": "Notches"
+       },
+       {
+        "name": "Notches",
+        "type": "INSTANCE",
+        "instanceOf": "Notches"
+       }
+      ]
+     },
+     {
+      "name": "_Helper text",
+      "type": "INSTANCE",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "CENTER",
+       "spacing": 8,
+       "padding": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "AUTO"
+      },
+      "bound": {
+       "itemSpacing": "spacing/100"
+      },
+      "hidden": true,
+      "propRefs": {
+       "visible": "↪️helper-text"
+      },
+      "instanceOf": "_Helper text",
+      "componentProperties": {
+       "helper-text": true,
+       "✏️text": "Helper text",
+       "counter": false
+      }
+     }
+    ]
+   },
+   {
+    "name": "size=large, state=hover",
+    "type": "COMPONENT",
+    "layout": {
+     "mode": "VERTICAL",
+     "primary": "MIN",
+     "counter": "MIN",
+     "spacing": 4,
+     "padding": [
+      0,
+      0,
+      0,
+      0
+     ],
+     "primarySizing": "AUTO",
+     "counterSizing": "AUTO"
+    },
+    "bound": {
+     "itemSpacing": "spacing/050"
+    },
+    "children": [
+     {
+      "name": "_Input label",
+      "type": "INSTANCE",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "CENTER",
+       "spacing": 2,
+       "padding": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "AUTO"
+      },
+      "bound": {
+       "itemSpacing": "spacing/025"
+      },
+      "fillWidth": true,
+      "propRefs": {
+       "visible": "↪️input-label"
+      },
+      "instanceOf": "_Input label",
+      "componentProperties": {
+       "✏️label-text": "Label",
+       "is-required": false
+      }
+     },
+     {
+      "name": "Input field",
+      "type": "FRAME",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "MIN",
+       "spacing": 8,
+       "padding": [
+        8,
+        12,
+        8,
+        12
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "FIXED"
+      },
+      "cornerRadius": 8,
+      "bound": {
+       "itemSpacing": "spacing/100",
+       "paddingLeft": "spacing/150",
+       "paddingTop": "spacing/100",
+       "paddingRight": "spacing/150",
+       "paddingBottom": "spacing/100",
+       "topLeftRadius": "corner-radius/100",
+       "topRightRadius": "corner-radius/100",
+       "bottomLeftRadius": "corner-radius/100",
+       "bottomRightRadius": "corner-radius/100"
+      },
+      "fill": {
+       "var": "bg/surface-primary"
+      },
+      "stroke": {
+       "var": "border/primary-hover"
+      },
+      "strokeWeight": 1,
+      "children": [
+       {
+        "name": "Placeholder",
+        "type": "TEXT",
+        "fillWidth": true,
+        "text": {
+         "characters": "Placeholder",
+         "fontSize": 16,
+         "fontStyle": "Regular",
+         "lineHeight": 24,
+         "style": "Body/Large",
+         "fillVar": "text/placeholder"
+        },
+        "fill": {
+         "var": "text/placeholder"
+        },
+        "propRefs": {
+         "visible": "placeholder",
+         "characters": "✏️text-placeholder"
+        }
+       },
+       {
+        "name": "Notches",
+        "type": "INSTANCE",
+        "propRefs": {
+         "visible": "pull-handle"
+        },
+        "instanceOf": "Notches"
+       }
+      ]
+     },
+     {
+      "name": "_Helper text",
+      "type": "INSTANCE",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "CENTER",
+       "spacing": 8,
+       "padding": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "AUTO"
+      },
+      "bound": {
+       "itemSpacing": "spacing/100"
+      },
+      "hidden": true,
+      "propRefs": {
+       "visible": "↪️helper-text"
+      },
+      "instanceOf": "_Helper text",
+      "componentProperties": {
+       "helper-text": true,
+       "✏️text": "Helper text",
+       "counter": false
+      }
+     }
+    ]
+   },
+   {
+    "name": "size=small, state=hover",
+    "type": "COMPONENT",
+    "layout": {
+     "mode": "VERTICAL",
+     "primary": "MIN",
+     "counter": "MIN",
+     "spacing": 4,
+     "padding": [
+      0,
+      0,
+      0,
+      0
+     ],
+     "primarySizing": "AUTO",
+     "counterSizing": "AUTO"
+    },
+    "bound": {
+     "itemSpacing": "spacing/050"
+    },
+    "children": [
+     {
+      "name": "_Input label",
+      "type": "INSTANCE",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "CENTER",
+       "spacing": 2,
+       "padding": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "AUTO"
+      },
+      "bound": {
+       "itemSpacing": "spacing/025"
+      },
+      "fillWidth": true,
+      "propRefs": {
+       "visible": "↪️input-label"
+      },
+      "instanceOf": "_Input label",
+      "componentProperties": {
+       "✏️label-text": "Label",
+       "is-required": false
+      }
+     },
+     {
+      "name": "Input field",
+      "type": "FRAME",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "MIN",
+       "spacing": 8,
+       "padding": [
+        8,
+        12,
+        8,
+        12
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "FIXED"
+      },
+      "cornerRadius": 8,
+      "bound": {
+       "itemSpacing": "spacing/100",
+       "paddingLeft": "spacing/150",
+       "paddingTop": "spacing/100",
+       "paddingRight": "spacing/150",
+       "paddingBottom": "spacing/100",
+       "topLeftRadius": "corner-radius/100",
+       "topRightRadius": "corner-radius/100",
+       "bottomLeftRadius": "corner-radius/100",
+       "bottomRightRadius": "corner-radius/100"
+      },
+      "fill": {
+       "var": "bg/surface-primary"
+      },
+      "stroke": {
+       "var": "border/primary-hover"
+      },
+      "strokeWeight": 1,
+      "children": [
+       {
+        "name": "Placeholder",
+        "type": "TEXT",
+        "fillWidth": true,
+        "text": {
+         "characters": "Placeholder",
+         "fontSize": 14,
+         "fontStyle": "Regular",
+         "lineHeight": 20,
+         "style": "Body/Medium",
+         "fillVar": "text/placeholder"
+        },
+        "fill": {
+         "var": "text/placeholder"
+        },
+        "propRefs": {
+         "visible": "placeholder",
+         "characters": "✏️text-placeholder"
+        }
+       },
+       {
+        "name": "Notches",
+        "type": "INSTANCE",
+        "propRefs": {
+         "visible": "pull-handle"
+        },
+        "instanceOf": "Notches"
+       },
+       {
+        "name": "Notches",
+        "type": "INSTANCE",
+        "instanceOf": "Notches"
+       },
+       {
+        "name": "Notches",
+        "type": "INSTANCE",
+        "instanceOf": "Notches"
+       },
+       {
+        "name": "Notches",
+        "type": "INSTANCE",
+        "instanceOf": "Notches"
+       }
+      ]
+     },
+     {
+      "name": "_Helper text",
+      "type": "INSTANCE",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "CENTER",
+       "spacing": 8,
+       "padding": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "AUTO"
+      },
+      "bound": {
+       "itemSpacing": "spacing/100"
+      },
+      "hidden": true,
+      "propRefs": {
+       "visible": "↪️helper-text"
+      },
+      "instanceOf": "_Helper text",
+      "componentProperties": {
+       "helper-text": true,
+       "✏️text": "Helper text",
+       "counter": false
+      }
+     }
+    ]
+   },
+   {
+    "name": "size=large, state=focus",
+    "type": "COMPONENT",
+    "layout": {
+     "mode": "VERTICAL",
+     "primary": "MIN",
+     "counter": "MIN",
+     "spacing": 4,
+     "padding": [
+      0,
+      0,
+      0,
+      0
+     ],
+     "primarySizing": "AUTO",
+     "counterSizing": "AUTO"
+    },
+    "bound": {
+     "itemSpacing": "spacing/050"
+    },
+    "children": [
+     {
+      "name": "_Input label",
+      "type": "INSTANCE",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "CENTER",
+       "spacing": 2,
+       "padding": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "AUTO"
+      },
+      "bound": {
+       "itemSpacing": "spacing/025"
+      },
+      "fillWidth": true,
+      "propRefs": {
+       "visible": "↪️input-label"
+      },
+      "instanceOf": "_Input label",
+      "componentProperties": {
+       "✏️label-text": "Label",
+       "is-required": false
+      }
+     },
+     {
+      "name": "Input field",
+      "type": "FRAME",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "MIN",
+       "spacing": 8,
+       "padding": [
+        8,
+        12,
+        8,
+        12
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "FIXED"
+      },
+      "cornerRadius": 8,
+      "bound": {
+       "itemSpacing": "spacing/100",
+       "paddingLeft": "spacing/150",
+       "paddingTop": "spacing/100",
+       "paddingRight": "spacing/150",
+       "paddingBottom": "spacing/100",
+       "topLeftRadius": "corner-radius/100",
+       "topRightRadius": "corner-radius/100",
+       "bottomLeftRadius": "corner-radius/100",
+       "bottomRightRadius": "corner-radius/100"
+      },
+      "fill": {
+       "var": "bg/surface-primary"
+      },
+      "stroke": {
+       "var": "border/focus"
+      },
+      "strokeWeight": 2,
+      "children": [
+       {
+        "name": "Placeholder",
+        "type": "TEXT",
+        "fillWidth": true,
+        "text": {
+         "characters": "Placeholder",
+         "fontSize": 16,
+         "fontStyle": "Regular",
+         "lineHeight": 24,
+         "style": "Body/Large",
+         "fillVar": "text/placeholder"
+        },
+        "fill": {
+         "var": "text/placeholder"
+        },
+        "propRefs": {
+         "visible": "placeholder",
+         "characters": "✏️text-placeholder"
+        }
+       },
+       {
+        "name": "Notches",
+        "type": "INSTANCE",
+        "propRefs": {
+         "visible": "pull-handle"
+        },
+        "instanceOf": "Notches"
+       }
+      ]
+     },
+     {
+      "name": "_Helper text",
+      "type": "INSTANCE",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "CENTER",
+       "spacing": 8,
+       "padding": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "AUTO"
+      },
+      "bound": {
+       "itemSpacing": "spacing/100"
+      },
+      "hidden": true,
+      "propRefs": {
+       "visible": "↪️helper-text"
+      },
+      "instanceOf": "_Helper text",
+      "componentProperties": {
+       "helper-text": true,
+       "✏️text": "Helper text",
+       "counter": false
+      }
+     }
+    ]
+   },
+   {
+    "name": "size=small, state=focus",
+    "type": "COMPONENT",
+    "layout": {
+     "mode": "VERTICAL",
+     "primary": "MIN",
+     "counter": "MIN",
+     "spacing": 4,
+     "padding": [
+      0,
+      0,
+      0,
+      0
+     ],
+     "primarySizing": "AUTO",
+     "counterSizing": "AUTO"
+    },
+    "bound": {
+     "itemSpacing": "spacing/050"
+    },
+    "children": [
+     {
+      "name": "_Input label",
+      "type": "INSTANCE",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "CENTER",
+       "spacing": 2,
+       "padding": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "AUTO"
+      },
+      "bound": {
+       "itemSpacing": "spacing/025"
+      },
+      "fillWidth": true,
+      "propRefs": {
+       "visible": "↪️input-label"
+      },
+      "instanceOf": "_Input label",
+      "componentProperties": {
+       "✏️label-text": "Label",
+       "is-required": false
+      }
+     },
+     {
+      "name": "Input field",
+      "type": "FRAME",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "MIN",
+       "spacing": 8,
+       "padding": [
+        8,
+        12,
+        8,
+        12
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "FIXED"
+      },
+      "cornerRadius": 8,
+      "bound": {
+       "itemSpacing": "spacing/100",
+       "paddingLeft": "spacing/150",
+       "paddingTop": "spacing/100",
+       "paddingRight": "spacing/150",
+       "paddingBottom": "spacing/100",
+       "topLeftRadius": "corner-radius/100",
+       "topRightRadius": "corner-radius/100",
+       "bottomLeftRadius": "corner-radius/100",
+       "bottomRightRadius": "corner-radius/100"
+      },
+      "fill": {
+       "var": "bg/surface-primary"
+      },
+      "stroke": {
+       "var": "border/focus"
+      },
+      "strokeWeight": 2,
+      "children": [
+       {
+        "name": "Placeholder",
+        "type": "TEXT",
+        "fillWidth": true,
+        "text": {
+         "characters": "Placeholder",
+         "fontSize": 14,
+         "fontStyle": "Regular",
+         "lineHeight": 20,
+         "style": "Body/Medium",
+         "fillVar": "text/placeholder"
+        },
+        "fill": {
+         "var": "text/placeholder"
+        },
+        "propRefs": {
+         "visible": "placeholder",
+         "characters": "✏️text-placeholder"
+        }
+       },
+       {
+        "name": "Notches",
+        "type": "INSTANCE",
+        "propRefs": {
+         "visible": "pull-handle"
+        },
+        "instanceOf": "Notches"
+       },
+       {
+        "name": "Notches",
+        "type": "INSTANCE",
+        "instanceOf": "Notches"
+       },
+       {
+        "name": "Notches",
+        "type": "INSTANCE",
+        "instanceOf": "Notches"
+       },
+       {
+        "name": "Notches",
+        "type": "INSTANCE",
+        "instanceOf": "Notches"
+       }
+      ]
+     },
+     {
+      "name": "_Helper text",
+      "type": "INSTANCE",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "CENTER",
+       "spacing": 8,
+       "padding": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "AUTO"
+      },
+      "bound": {
+       "itemSpacing": "spacing/100"
+      },
+      "hidden": true,
+      "propRefs": {
+       "visible": "↪️helper-text"
+      },
+      "instanceOf": "_Helper text",
+      "componentProperties": {
+       "helper-text": true,
+       "✏️text": "Helper text",
+       "counter": false
+      }
+     }
+    ]
+   },
+   {
+    "name": "size=large, state=filled",
+    "type": "COMPONENT",
+    "layout": {
+     "mode": "VERTICAL",
+     "primary": "MIN",
+     "counter": "MIN",
+     "spacing": 4,
+     "padding": [
+      0,
+      0,
+      0,
+      0
+     ],
+     "primarySizing": "AUTO",
+     "counterSizing": "AUTO"
+    },
+    "bound": {
+     "itemSpacing": "spacing/050"
+    },
+    "children": [
+     {
+      "name": "_Input label",
+      "type": "INSTANCE",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "CENTER",
+       "spacing": 2,
+       "padding": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "AUTO"
+      },
+      "bound": {
+       "itemSpacing": "spacing/025"
+      },
+      "fillWidth": true,
+      "propRefs": {
+       "visible": "↪️input-label"
+      },
+      "instanceOf": "_Input label",
+      "componentProperties": {
+       "✏️label-text": "Label",
+       "is-required": false
+      }
+     },
+     {
+      "name": "Input field",
+      "type": "FRAME",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "MIN",
+       "spacing": 0,
+       "padding": [
+        8,
+        12,
+        8,
+        12
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "FIXED"
+      },
+      "cornerRadius": 8,
+      "bound": {
+       "paddingLeft": "spacing/150",
+       "paddingTop": "spacing/100",
+       "paddingRight": "spacing/150",
+       "paddingBottom": "spacing/100",
+       "topLeftRadius": "corner-radius/100",
+       "topRightRadius": "corner-radius/100",
+       "bottomLeftRadius": "corner-radius/100",
+       "bottomRightRadius": "corner-radius/100"
+      },
+      "fill": {
+       "var": "bg/surface-primary"
+      },
+      "stroke": {
+       "var": "border/primary"
+      },
+      "strokeWeight": 1,
+      "children": [
+       {
+        "name": "This is a sample input text. This could extend to multiple lines.",
+        "type": "TEXT",
+        "fillWidth": true,
+        "text": {
+         "characters": "This is a sample input text. This could extend to multiple lines.",
+         "fontSize": 16,
+         "fontStyle": "Regular",
+         "lineHeight": 24,
+         "style": "Body/Large",
+         "fillVar": "text/primary"
+        },
+        "fill": {
+         "var": "text/primary"
+        },
+        "propRefs": {
+         "characters": "✏️text-input"
+        }
+       },
+       {
+        "name": "Notches",
+        "type": "INSTANCE",
+        "propRefs": {
+         "visible": "pull-handle"
+        },
+        "instanceOf": "Notches"
+       }
+      ]
+     },
+     {
+      "name": "_Helper text",
+      "type": "INSTANCE",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "CENTER",
+       "spacing": 8,
+       "padding": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "AUTO"
+      },
+      "bound": {
+       "itemSpacing": "spacing/100"
+      },
+      "hidden": true,
+      "propRefs": {
+       "visible": "↪️helper-text"
+      },
+      "instanceOf": "_Helper text",
+      "componentProperties": {
+       "helper-text": true,
+       "✏️text": "Helper text",
+       "counter": false
+      }
+     }
+    ]
+   },
+   {
+    "name": "size=small, state=filled",
+    "type": "COMPONENT",
+    "layout": {
+     "mode": "VERTICAL",
+     "primary": "MIN",
+     "counter": "MIN",
+     "spacing": 4,
+     "padding": [
+      0,
+      0,
+      0,
+      0
+     ],
+     "primarySizing": "AUTO",
+     "counterSizing": "AUTO"
+    },
+    "bound": {
+     "itemSpacing": "spacing/050"
+    },
+    "children": [
+     {
+      "name": "_Input label",
+      "type": "INSTANCE",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "CENTER",
+       "spacing": 2,
+       "padding": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "AUTO"
+      },
+      "bound": {
+       "itemSpacing": "spacing/025"
+      },
+      "fillWidth": true,
+      "propRefs": {
+       "visible": "↪️input-label"
+      },
+      "instanceOf": "_Input label",
+      "componentProperties": {
+       "✏️label-text": "Label",
+       "is-required": false
+      }
+     },
+     {
+      "name": "Input field",
+      "type": "FRAME",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "MIN",
+       "spacing": 0,
+       "padding": [
+        8,
+        12,
+        8,
+        12
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "FIXED"
+      },
+      "cornerRadius": 8,
+      "bound": {
+       "paddingLeft": "spacing/150",
+       "paddingTop": "spacing/100",
+       "paddingRight": "spacing/150",
+       "paddingBottom": "spacing/100",
+       "topLeftRadius": "corner-radius/100",
+       "topRightRadius": "corner-radius/100",
+       "bottomLeftRadius": "corner-radius/100",
+       "bottomRightRadius": "corner-radius/100"
+      },
+      "fill": {
+       "var": "bg/surface-primary"
+      },
+      "stroke": {
+       "var": "border/primary"
+      },
+      "strokeWeight": 1,
+      "children": [
+       {
+        "name": "This is a sample input text. This could extend to multiple lines.",
+        "type": "TEXT",
+        "fillWidth": true,
+        "text": {
+         "characters": "This is a sample input text. This could extend to multiple lines.",
+         "fontSize": 16,
+         "fontStyle": "Regular",
+         "lineHeight": 24,
+         "style": "Body/Large",
+         "fillVar": "text/primary"
+        },
+        "fill": {
+         "var": "text/primary"
+        },
+        "propRefs": {
+         "characters": "✏️text-input"
+        }
+       },
+       {
+        "name": "Notches",
+        "type": "INSTANCE",
+        "propRefs": {
+         "visible": "pull-handle"
+        },
+        "instanceOf": "Notches"
+       },
+       {
+        "name": "Notches",
+        "type": "INSTANCE",
+        "instanceOf": "Notches"
+       },
+       {
+        "name": "Notches",
+        "type": "INSTANCE",
+        "instanceOf": "Notches"
+       },
+       {
+        "name": "Notches",
+        "type": "INSTANCE",
+        "instanceOf": "Notches"
+       }
+      ]
+     },
+     {
+      "name": "_Helper text",
+      "type": "INSTANCE",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "CENTER",
+       "spacing": 8,
+       "padding": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "AUTO"
+      },
+      "bound": {
+       "itemSpacing": "spacing/100"
+      },
+      "hidden": true,
+      "propRefs": {
+       "visible": "↪️helper-text"
+      },
+      "instanceOf": "_Helper text",
+      "componentProperties": {
+       "helper-text": true,
+       "✏️text": "Helper text",
+       "counter": false
+      }
+     }
+    ]
+   },
+   {
+    "name": "size=large, state=active",
+    "type": "COMPONENT",
+    "layout": {
+     "mode": "VERTICAL",
+     "primary": "MIN",
+     "counter": "MIN",
+     "spacing": 4,
+     "padding": [
+      0,
+      0,
+      0,
+      0
+     ],
+     "primarySizing": "AUTO",
+     "counterSizing": "AUTO"
+    },
+    "bound": {
+     "itemSpacing": "spacing/050"
+    },
+    "children": [
+     {
+      "name": "_Input label",
+      "type": "INSTANCE",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "CENTER",
+       "spacing": 2,
+       "padding": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "AUTO"
+      },
+      "bound": {
+       "itemSpacing": "spacing/025"
+      },
+      "fillWidth": true,
+      "propRefs": {
+       "visible": "↪️input-label"
+      },
+      "instanceOf": "_Input label",
+      "componentProperties": {
+       "✏️label-text": "Label",
+       "is-required": false
+      }
+     },
+     {
+      "name": "Input field",
+      "type": "FRAME",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "MIN",
+       "spacing": 0,
+       "padding": [
+        8,
+        12,
+        8,
+        12
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "FIXED"
+      },
+      "cornerRadius": 8,
+      "bound": {
+       "paddingLeft": "spacing/150",
+       "paddingTop": "spacing/100",
+       "paddingRight": "spacing/150",
+       "paddingBottom": "spacing/100",
+       "topLeftRadius": "corner-radius/100",
+       "topRightRadius": "corner-radius/100",
+       "bottomLeftRadius": "corner-radius/100",
+       "bottomRightRadius": "corner-radius/100"
+      },
+      "fill": {
+       "var": "bg/surface-primary"
+      },
+      "stroke": {
+       "var": "border/focus"
+      },
+      "strokeWeight": 2,
+      "children": [
+       {
+        "name": "This is a sample input text",
+        "type": "TEXT",
+        "text": {
+         "characters": "This is a sample input text",
+         "fontSize": 16,
+         "fontStyle": "Regular",
+         "lineHeight": 24,
+         "style": "Body/Large",
+         "fillVar": "text/primary"
+        },
+        "fill": {
+         "var": "text/primary"
+        }
+       },
+       {
+        "name": "Caret",
+        "type": "RECTANGLE",
+        "fill": {
+         "var": "utility/foreground/grey"
+        }
+       },
+       {
+        "name": "Notches",
+        "type": "INSTANCE",
+        "propRefs": {
+         "visible": "pull-handle"
+        },
+        "instanceOf": "Notches"
+       }
+      ]
+     },
+     {
+      "name": "_Helper text",
+      "type": "INSTANCE",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "CENTER",
+       "spacing": 8,
+       "padding": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "AUTO"
+      },
+      "bound": {
+       "itemSpacing": "spacing/100"
+      },
+      "hidden": true,
+      "propRefs": {
+       "visible": "↪️helper-text"
+      },
+      "instanceOf": "_Helper text",
+      "componentProperties": {
+       "helper-text": true,
+       "✏️text": "Helper text",
+       "counter": false
+      }
+     }
+    ]
+   },
+   {
+    "name": "size=small, state=active",
+    "type": "COMPONENT",
+    "layout": {
+     "mode": "VERTICAL",
+     "primary": "MIN",
+     "counter": "MIN",
+     "spacing": 4,
+     "padding": [
+      0,
+      0,
+      0,
+      0
+     ],
+     "primarySizing": "AUTO",
+     "counterSizing": "AUTO"
+    },
+    "bound": {
+     "itemSpacing": "spacing/050"
+    },
+    "children": [
+     {
+      "name": "_Input label",
+      "type": "INSTANCE",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "CENTER",
+       "spacing": 2,
+       "padding": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "AUTO"
+      },
+      "bound": {
+       "itemSpacing": "spacing/025"
+      },
+      "fillWidth": true,
+      "propRefs": {
+       "visible": "↪️input-label"
+      },
+      "instanceOf": "_Input label",
+      "componentProperties": {
+       "✏️label-text": "Label",
+       "is-required": false
+      }
+     },
+     {
+      "name": "Input field",
+      "type": "FRAME",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "MIN",
+       "spacing": 0,
+       "padding": [
+        8,
+        12,
+        8,
+        12
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "FIXED"
+      },
+      "cornerRadius": 8,
+      "bound": {
+       "paddingLeft": "spacing/150",
+       "paddingTop": "spacing/100",
+       "paddingRight": "spacing/150",
+       "paddingBottom": "spacing/100",
+       "topLeftRadius": "corner-radius/100",
+       "topRightRadius": "corner-radius/100",
+       "bottomLeftRadius": "corner-radius/100",
+       "bottomRightRadius": "corner-radius/100"
+      },
+      "fill": {
+       "var": "bg/surface-primary"
+      },
+      "stroke": {
+       "var": "border/focus"
+      },
+      "strokeWeight": 2,
+      "children": [
+       {
+        "name": "This is a sample input text",
+        "type": "TEXT",
+        "text": {
+         "characters": "This is a sample input text",
+         "fontSize": 14,
+         "fontStyle": "Regular",
+         "lineHeight": 20,
+         "style": "Body/Medium",
+         "fillVar": "text/primary"
+        },
+        "fill": {
+         "var": "text/primary"
+        }
+       },
+       {
+        "name": "Caret",
+        "type": "RECTANGLE",
+        "fill": {
+         "var": "utility/foreground/grey"
+        }
+       },
+       {
+        "name": "Notches",
+        "type": "INSTANCE",
+        "propRefs": {
+         "visible": "pull-handle"
+        },
+        "instanceOf": "Notches"
+       },
+       {
+        "name": "Notches",
+        "type": "INSTANCE",
+        "instanceOf": "Notches"
+       },
+       {
+        "name": "Notches",
+        "type": "INSTANCE",
+        "instanceOf": "Notches"
+       },
+       {
+        "name": "Notches",
+        "type": "INSTANCE",
+        "instanceOf": "Notches"
+       }
+      ]
+     },
+     {
+      "name": "_Helper text",
+      "type": "INSTANCE",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "CENTER",
+       "spacing": 8,
+       "padding": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "AUTO"
+      },
+      "bound": {
+       "itemSpacing": "spacing/100"
+      },
+      "hidden": true,
+      "propRefs": {
+       "visible": "↪️helper-text"
+      },
+      "instanceOf": "_Helper text",
+      "componentProperties": {
+       "helper-text": true,
+       "✏️text": "Helper text",
+       "counter": false
+      }
+     }
+    ]
+   },
+   {
+    "name": "size=large, state=diabled",
+    "type": "COMPONENT",
+    "layout": {
+     "mode": "VERTICAL",
+     "primary": "MIN",
+     "counter": "MIN",
+     "spacing": 4,
+     "padding": [
+      0,
+      0,
+      0,
+      0
+     ],
+     "primarySizing": "AUTO",
+     "counterSizing": "AUTO"
+    },
+    "bound": {
+     "itemSpacing": "spacing/050"
+    },
+    "children": [
+     {
+      "name": "_Input label",
+      "type": "INSTANCE",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "CENTER",
+       "spacing": 2,
+       "padding": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "AUTO"
+      },
+      "bound": {
+       "itemSpacing": "spacing/025"
+      },
+      "fillWidth": true,
+      "propRefs": {
+       "visible": "↪️input-label"
+      },
+      "instanceOf": "_Input label",
+      "componentProperties": {
+       "✏️label-text": "Label",
+       "is-required": false
+      }
+     },
+     {
+      "name": "Input field",
+      "type": "FRAME",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "MIN",
+       "spacing": 8,
+       "padding": [
+        8,
+        12,
+        8,
+        12
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "FIXED"
+      },
+      "cornerRadius": 8,
+      "bound": {
+       "itemSpacing": "spacing/100",
+       "paddingLeft": "spacing/150",
+       "paddingTop": "spacing/100",
+       "paddingRight": "spacing/150",
+       "paddingBottom": "spacing/100",
+       "topLeftRadius": "corner-radius/100",
+       "topRightRadius": "corner-radius/100",
+       "bottomLeftRadius": "corner-radius/100",
+       "bottomRightRadius": "corner-radius/100"
+      },
+      "fill": {
+       "var": "bg/disabled"
+      },
+      "stroke": {
+       "var": "border/primary"
+      },
+      "strokeWeight": 1,
+      "children": [
+       {
+        "name": "This is a sample input text. This could extend to multiple lines.",
+        "type": "TEXT",
+        "fillWidth": true,
+        "text": {
+         "characters": "This is a sample input text. This could extend to multiple lines.",
+         "fontSize": 16,
+         "fontStyle": "Regular",
+         "lineHeight": 24,
+         "style": "Body/Large",
+         "fillVar": "text/disabled"
+        },
+        "fill": {
+         "var": "text/disabled"
+        },
+        "propRefs": {
+         "characters": "✏️text-input"
+        }
+       },
+       {
+        "name": "Notches",
+        "type": "INSTANCE",
+        "instanceOf": "Notches"
+       }
+      ]
+     },
+     {
+      "name": "_Helper text",
+      "type": "INSTANCE",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "CENTER",
+       "spacing": 8,
+       "padding": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "AUTO"
+      },
+      "bound": {
+       "itemSpacing": "spacing/100"
+      },
+      "hidden": true,
+      "propRefs": {
+       "visible": "↪️helper-text"
+      },
+      "instanceOf": "_Helper text",
+      "componentProperties": {
+       "helper-text": true,
+       "✏️text": "Helper text",
+       "counter": false
+      }
+     }
+    ]
+   },
+   {
+    "name": "size=small, state=diabled",
+    "type": "COMPONENT",
+    "layout": {
+     "mode": "VERTICAL",
+     "primary": "MIN",
+     "counter": "MIN",
+     "spacing": 4,
+     "padding": [
+      0,
+      0,
+      0,
+      0
+     ],
+     "primarySizing": "AUTO",
+     "counterSizing": "AUTO"
+    },
+    "bound": {
+     "itemSpacing": "spacing/050"
+    },
+    "children": [
+     {
+      "name": "_Input label",
+      "type": "INSTANCE",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "CENTER",
+       "spacing": 2,
+       "padding": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "AUTO"
+      },
+      "bound": {
+       "itemSpacing": "spacing/025"
+      },
+      "fillWidth": true,
+      "propRefs": {
+       "visible": "↪️input-label"
+      },
+      "instanceOf": "_Input label",
+      "componentProperties": {
+       "✏️label-text": "Label",
+       "is-required": false
+      }
+     },
+     {
+      "name": "Input field",
+      "type": "FRAME",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "MIN",
+       "spacing": 8,
+       "padding": [
+        8,
+        12,
+        8,
+        12
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "FIXED"
+      },
+      "cornerRadius": 8,
+      "bound": {
+       "itemSpacing": "spacing/100",
+       "paddingLeft": "spacing/150",
+       "paddingTop": "spacing/100",
+       "paddingRight": "spacing/150",
+       "paddingBottom": "spacing/100",
+       "topLeftRadius": "corner-radius/100",
+       "topRightRadius": "corner-radius/100",
+       "bottomLeftRadius": "corner-radius/100",
+       "bottomRightRadius": "corner-radius/100"
+      },
+      "fill": {
+       "var": "bg/disabled"
+      },
+      "stroke": {
+       "var": "border/primary"
+      },
+      "strokeWeight": 1,
+      "children": [
+       {
+        "name": "This is a sample input text. This could extend to multiple lines.",
+        "type": "TEXT",
+        "fillWidth": true,
+        "text": {
+         "characters": "This is a sample input text. This could extend to multiple lines.",
+         "fontSize": 14,
+         "fontStyle": "Regular",
+         "lineHeight": 20,
+         "style": "Body/Medium",
+         "fillVar": "text/disabled"
+        },
+        "fill": {
+         "var": "text/disabled"
+        },
+        "propRefs": {
+         "characters": "✏️text-input"
+        }
+       },
+       {
+        "name": "Notches",
+        "type": "INSTANCE",
+        "propRefs": {
+         "visible": "pull-handle"
+        },
+        "instanceOf": "Notches"
+       },
+       {
+        "name": "Notches",
+        "type": "INSTANCE",
+        "instanceOf": "Notches"
+       },
+       {
+        "name": "Notches",
+        "type": "INSTANCE",
+        "instanceOf": "Notches"
+       },
+       {
+        "name": "Notches",
+        "type": "INSTANCE",
+        "instanceOf": "Notches"
+       }
+      ]
+     },
+     {
+      "name": "_Helper text",
+      "type": "INSTANCE",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "CENTER",
+       "spacing": 8,
+       "padding": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "AUTO"
+      },
+      "bound": {
+       "itemSpacing": "spacing/100"
+      },
+      "hidden": true,
+      "propRefs": {
+       "visible": "↪️helper-text"
+      },
+      "instanceOf": "_Helper text",
+      "componentProperties": {
+       "helper-text": true,
+       "✏️text": "Helper text",
+       "counter": false
+      }
+     }
+    ]
+   },
+   {
+    "name": "size=large, state=error",
+    "type": "COMPONENT",
+    "layout": {
+     "mode": "VERTICAL",
+     "primary": "MIN",
+     "counter": "MIN",
+     "spacing": 4,
+     "padding": [
+      0,
+      0,
+      0,
+      0
+     ],
+     "primarySizing": "AUTO",
+     "counterSizing": "AUTO"
+    },
+    "bound": {
+     "itemSpacing": "spacing/050"
+    },
+    "children": [
+     {
+      "name": "_Input label",
+      "type": "INSTANCE",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "CENTER",
+       "spacing": 2,
+       "padding": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "AUTO"
+      },
+      "bound": {
+       "itemSpacing": "spacing/025"
+      },
+      "fillWidth": true,
+      "propRefs": {
+       "visible": "↪️input-label"
+      },
+      "instanceOf": "_Input label",
+      "componentProperties": {
+       "✏️label-text": "Label",
+       "is-required": false
+      }
+     },
+     {
+      "name": "Input field",
+      "type": "FRAME",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "MIN",
+       "spacing": 8,
+       "padding": [
+        8,
+        12,
+        8,
+        12
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "FIXED"
+      },
+      "cornerRadius": 8,
+      "bound": {
+       "itemSpacing": "spacing/100",
+       "paddingLeft": "spacing/150",
+       "paddingTop": "spacing/100",
+       "paddingRight": "spacing/150",
+       "paddingBottom": "spacing/100",
+       "topLeftRadius": "corner-radius/100",
+       "topRightRadius": "corner-radius/100",
+       "bottomLeftRadius": "corner-radius/100",
+       "bottomRightRadius": "corner-radius/100"
+      },
+      "fill": {
+       "var": "bg/surface-primary"
+      },
+      "stroke": {
+       "var": "border/danger/default"
+      },
+      "strokeWeight": 1,
+      "children": [
+       {
+        "name": "Placeholder",
+        "type": "TEXT",
+        "fillWidth": true,
+        "text": {
+         "characters": "Placeholder",
+         "fontSize": 16,
+         "fontStyle": "Regular",
+         "lineHeight": 24,
+         "style": "Body/Large",
+         "fillVar": "text/placeholder"
+        },
+        "fill": {
+         "var": "text/placeholder"
+        },
+        "propRefs": {
+         "visible": "placeholder",
+         "characters": "✏️text-placeholder"
+        }
+       },
+       {
+        "name": "Icon",
+        "type": "INSTANCE",
+        "bound": {
+         "width": "component-size/small",
+         "height": "icon-size/large"
+        },
+        "propRefs": {
+         "visible": "icon-error"
+        },
+        "instanceOf": "Icon",
+        "componentProperties": {
+         "size": "large"
+        }
+       },
+       {
+        "name": "Notches",
+        "type": "INSTANCE",
+        "propRefs": {
+         "visible": "pull-handle"
+        },
+        "instanceOf": "Notches"
+       },
+       {
+        "name": "Notches",
+        "type": "INSTANCE",
+        "instanceOf": "Notches"
+       }
+      ]
+     },
+     {
+      "name": "_Error text",
+      "type": "INSTANCE",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "CENTER",
+       "spacing": 8,
+       "padding": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "AUTO"
+      },
+      "bound": {
+       "itemSpacing": "spacing/100"
+      },
+      "fillWidth": true,
+      "propRefs": {
+       "visible": "error-text"
+      },
+      "instanceOf": "_Error text",
+      "componentProperties": {
+       "✏️text-error": "Error text"
+      }
+     }
+    ]
+   },
+   {
+    "name": "size=small, state=error",
+    "type": "COMPONENT",
+    "layout": {
+     "mode": "VERTICAL",
+     "primary": "MIN",
+     "counter": "MIN",
+     "spacing": 4,
+     "padding": [
+      0,
+      0,
+      0,
+      0
+     ],
+     "primarySizing": "AUTO",
+     "counterSizing": "AUTO"
+    },
+    "bound": {
+     "itemSpacing": "spacing/050"
+    },
+    "children": [
+     {
+      "name": "_Input label",
+      "type": "INSTANCE",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "CENTER",
+       "spacing": 2,
+       "padding": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "AUTO"
+      },
+      "bound": {
+       "itemSpacing": "spacing/025"
+      },
+      "fillWidth": true,
+      "propRefs": {
+       "visible": "↪️input-label"
+      },
+      "instanceOf": "_Input label",
+      "componentProperties": {
+       "✏️label-text": "Label",
+       "is-required": false
+      }
+     },
+     {
+      "name": "Input field",
+      "type": "FRAME",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "MIN",
+       "spacing": 8,
+       "padding": [
+        8,
+        12,
+        8,
+        12
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "FIXED"
+      },
+      "cornerRadius": 8,
+      "bound": {
+       "itemSpacing": "spacing/100",
+       "paddingLeft": "spacing/150",
+       "paddingTop": "spacing/100",
+       "paddingRight": "spacing/150",
+       "paddingBottom": "spacing/100",
+       "topLeftRadius": "corner-radius/100",
+       "topRightRadius": "corner-radius/100",
+       "bottomLeftRadius": "corner-radius/100",
+       "bottomRightRadius": "corner-radius/100"
+      },
+      "fill": {
+       "var": "bg/surface-primary"
+      },
+      "stroke": {
+       "var": "border/danger/default"
+      },
+      "strokeWeight": 1,
+      "children": [
+       {
+        "name": "Placeholder",
+        "type": "TEXT",
+        "fillWidth": true,
+        "text": {
+         "characters": "Placeholder",
+         "fontSize": 14,
+         "fontStyle": "Regular",
+         "lineHeight": 20,
+         "style": "Body/Medium",
+         "fillVar": "text/placeholder"
+        },
+        "fill": {
+         "var": "text/placeholder"
+        },
+        "propRefs": {
+         "visible": "placeholder",
+         "characters": "✏️text-placeholder"
+        }
+       },
+       {
+        "name": "Icon",
+        "type": "INSTANCE",
+        "bound": {
+         "width": "icon-size/small",
+         "height": "icon-size/small"
+        },
+        "propRefs": {
+         "visible": "icon-error"
+        },
+        "instanceOf": "Icon",
+        "componentProperties": {
+         "size": "small"
+        }
+       },
+       {
+        "name": "Notches",
+        "type": "INSTANCE",
+        "propRefs": {
+         "visible": "pull-handle"
+        },
+        "instanceOf": "Notches"
+       },
+       {
+        "name": "Notches",
+        "type": "INSTANCE",
+        "instanceOf": "Notches"
+       },
+       {
+        "name": "Notches",
+        "type": "INSTANCE",
+        "instanceOf": "Notches"
+       },
+       {
+        "name": "Notches",
+        "type": "INSTANCE",
+        "instanceOf": "Notches"
+       }
+      ]
+     },
+     {
+      "name": "_Error text",
+      "type": "INSTANCE",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "CENTER",
+       "spacing": 8,
+       "padding": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "AUTO"
+      },
+      "bound": {
+       "itemSpacing": "spacing/100"
+      },
+      "fillWidth": true,
+      "propRefs": {
+       "visible": "error-text"
+      },
+      "instanceOf": "_Error text",
+      "componentProperties": {
+       "✏️text-error": "Error text"
+      }
+     }
+    ]
+   }
+  ]
+ }
+}

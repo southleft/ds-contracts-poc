@@ -1,0 +1,4661 @@
+{
+ "_provenance": {
+  "fileKey": "WofZT8xaxXuc2Q6Je9S4XE",
+  "extractedAt": "2026-07-10",
+  "note": "Single-set gauntlet fixture for class \"pattern-instance-swap\" — extracted from cbds-plugin-all-sets.v14.dump.json by extract/figma/gauntlet/census.ts."
+ },
+ "_degradations": [
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "List item:type=list-item, size=small, state=default/Divider",
+   "message": "LINE geometry (arbitrary paths) is not captured — parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-style-unsupported",
+   "nodePath": "List item:type=list-item, size=small, state=default/Divider",
+   "message": "strokeAlign CENTER — dump consumers render INSIDE strokes (CSS borders); alignment dropped"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "List item:type=header, size=small, state=default/Container/Line 1",
+   "message": "LINE geometry (arbitrary paths) is not captured — parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-style-unsupported",
+   "nodePath": "List item:type=header, size=small, state=default/Container/Line 1",
+   "message": "strokeAlign CENTER — dump consumers render INSIDE strokes (CSS borders); alignment dropped"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "List item:type=header, size=medium, state=default/Container/Line 1",
+   "message": "LINE geometry (arbitrary paths) is not captured — parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-style-unsupported",
+   "nodePath": "List item:type=header, size=medium, state=default/Container/Line 1",
+   "message": "strokeAlign CENTER — dump consumers render INSIDE strokes (CSS borders); alignment dropped"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "List item:type=header, size=large, state=default/Container/Line 1",
+   "message": "LINE geometry (arbitrary paths) is not captured — parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-style-unsupported",
+   "nodePath": "List item:type=header, size=large, state=default/Container/Line 1",
+   "message": "strokeAlign CENTER — dump consumers render INSIDE strokes (CSS borders); alignment dropped"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "List item:type=list-item, size=medium, state=default/Divider",
+   "message": "LINE geometry (arbitrary paths) is not captured — parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-style-unsupported",
+   "nodePath": "List item:type=list-item, size=medium, state=default/Divider",
+   "message": "strokeAlign CENTER — dump consumers render INSIDE strokes (CSS borders); alignment dropped"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "List item:type=list-item, size=large, state=default/Divider",
+   "message": "LINE geometry (arbitrary paths) is not captured — parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-style-unsupported",
+   "nodePath": "List item:type=list-item, size=large, state=default/Divider",
+   "message": "strokeAlign CENTER — dump consumers render INSIDE strokes (CSS borders); alignment dropped"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "List item:type=list-item, size=small, state=hover/Divider",
+   "message": "LINE geometry (arbitrary paths) is not captured — parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-style-unsupported",
+   "nodePath": "List item:type=list-item, size=small, state=hover/Divider",
+   "message": "strokeAlign CENTER — dump consumers render INSIDE strokes (CSS borders); alignment dropped"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "List item:type=list-item, size=medium, state=hover/Divider",
+   "message": "LINE geometry (arbitrary paths) is not captured — parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-style-unsupported",
+   "nodePath": "List item:type=list-item, size=medium, state=hover/Divider",
+   "message": "strokeAlign CENTER — dump consumers render INSIDE strokes (CSS borders); alignment dropped"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "List item:type=list-item, size=large, state=hover/Divider",
+   "message": "LINE geometry (arbitrary paths) is not captured — parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-style-unsupported",
+   "nodePath": "List item:type=list-item, size=large, state=hover/Divider",
+   "message": "strokeAlign CENTER — dump consumers render INSIDE strokes (CSS borders); alignment dropped"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "List item:type=list-item, size=small, state=focus/Divider",
+   "message": "LINE geometry (arbitrary paths) is not captured — parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-style-unsupported",
+   "nodePath": "List item:type=list-item, size=small, state=focus/Divider",
+   "message": "strokeAlign CENTER — dump consumers render INSIDE strokes (CSS borders); alignment dropped"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "List item:type=list-item, size=medium, state=focus/Divider",
+   "message": "LINE geometry (arbitrary paths) is not captured — parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-style-unsupported",
+   "nodePath": "List item:type=list-item, size=medium, state=focus/Divider",
+   "message": "strokeAlign CENTER — dump consumers render INSIDE strokes (CSS borders); alignment dropped"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "List item:type=list-item, size=large, state=focus/Divider",
+   "message": "LINE geometry (arbitrary paths) is not captured — parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-style-unsupported",
+   "nodePath": "List item:type=list-item, size=large, state=focus/Divider",
+   "message": "strokeAlign CENTER — dump consumers render INSIDE strokes (CSS borders); alignment dropped"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "List item:type=list-item, size=small, state=selected/Divider",
+   "message": "LINE geometry (arbitrary paths) is not captured — parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-style-unsupported",
+   "nodePath": "List item:type=list-item, size=small, state=selected/Divider",
+   "message": "strokeAlign CENTER — dump consumers render INSIDE strokes (CSS borders); alignment dropped"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "List item:type=list-item, size=medium, state=selected/Divider",
+   "message": "LINE geometry (arbitrary paths) is not captured — parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-style-unsupported",
+   "nodePath": "List item:type=list-item, size=medium, state=selected/Divider",
+   "message": "strokeAlign CENTER — dump consumers render INSIDE strokes (CSS borders); alignment dropped"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "List item:type=list-item, size=large, state=selected/Divider",
+   "message": "LINE geometry (arbitrary paths) is not captured — parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-style-unsupported",
+   "nodePath": "List item:type=list-item, size=large, state=selected/Divider",
+   "message": "strokeAlign CENTER — dump consumers render INSIDE strokes (CSS borders); alignment dropped"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "List item:type=list-item, size=small, state=disabled/Divider",
+   "message": "LINE geometry (arbitrary paths) is not captured — parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-style-unsupported",
+   "nodePath": "List item:type=list-item, size=small, state=disabled/Divider",
+   "message": "strokeAlign CENTER — dump consumers render INSIDE strokes (CSS borders); alignment dropped"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "List item:type=list-item, size=medium, state=disabled/Divider",
+   "message": "LINE geometry (arbitrary paths) is not captured — parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-style-unsupported",
+   "nodePath": "List item:type=list-item, size=medium, state=disabled/Divider",
+   "message": "strokeAlign CENTER — dump consumers render INSIDE strokes (CSS borders); alignment dropped"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "List item:type=list-item, size=large, state=disabled/Divider",
+   "message": "LINE geometry (arbitrary paths) is not captured — parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-style-unsupported",
+   "nodePath": "List item:type=list-item, size=large, state=disabled/Divider",
+   "message": "strokeAlign CENTER — dump consumers render INSIDE strokes (CSS borders); alignment dropped"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "List item:type=divider, size=small, state=default/Divider",
+   "message": "LINE geometry (arbitrary paths) is not captured — parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-style-unsupported",
+   "nodePath": "List item:type=divider, size=small, state=default/Divider",
+   "message": "strokeAlign CENTER — dump consumers render INSIDE strokes (CSS borders); alignment dropped"
+  }
+ ],
+ "_variables": {
+  "spacing/100": {
+   "type": "FLOAT",
+   "value": 8
+  },
+  "spacing/200": {
+   "type": "FLOAT",
+   "value": 16
+  },
+  "spacing/050": {
+   "type": "FLOAT",
+   "value": 4
+  },
+  "bg/surface-primary": {
+   "type": "COLOR",
+   "value": "#fcfeff"
+  },
+  "icon-size/small": {
+   "type": "FLOAT",
+   "value": 16
+  },
+  "component-size/xsmall": {
+   "type": "FLOAT",
+   "value": 16
+  },
+  "text/primary": {
+   "type": "COLOR",
+   "value": "#050a0f"
+  },
+  "text/tertiary": {
+   "type": "COLOR",
+   "value": "#556275"
+  },
+  "text/secondary": {
+   "type": "COLOR",
+   "value": "#3a475b"
+  },
+  "border/secondary": {
+   "type": "COLOR",
+   "value": "#dfe3eb"
+  },
+  "corner-radius/1200": {
+   "type": "FLOAT",
+   "value": 96
+  },
+  "bg/brand/default": {
+   "type": "COLOR",
+   "value": "#0e61ba"
+  },
+  "border/primary": {
+   "type": "COLOR",
+   "value": "#a2aebf"
+  },
+  "spacing/150": {
+   "type": "FLOAT",
+   "value": 12
+  },
+  "bg/surface-primary-hover": {
+   "type": "COLOR",
+   "value": "#f5f7fa"
+  },
+  "border/focus": {
+   "type": "COLOR",
+   "value": "#0e61ba"
+  },
+  "bg/selected": {
+   "type": "COLOR",
+   "value": "#e6f7ff"
+  },
+  "bg/disabled": {
+   "type": "COLOR",
+   "value": "#dfe3eb"
+  },
+  "text/disabled": {
+   "type": "COLOR",
+   "value": "#556275"
+  },
+  "component-size/medium": {
+   "type": "FLOAT",
+   "value": 36
+  },
+  "corner-radius/100": {
+   "type": "FLOAT",
+   "value": 8
+  },
+  "border/brand/default": {
+   "type": "COLOR",
+   "value": "#0e61ba"
+  }
+ },
+ "List item": {
+  "setName": "List item",
+  "type": "COMPONENT_SET",
+  "nodeId": "303:3743",
+  "key": "9044749052b6e90f86b2e4966938e71c58d7c45a",
+  "variants": [
+   {
+    "name": "type=list-item, size=small, state=default",
+    "type": "COMPONENT",
+    "layout": {
+     "mode": "HORIZONTAL",
+     "primary": "MIN",
+     "counter": "CENTER",
+     "spacing": 8,
+     "padding": [
+      4,
+      16,
+      4,
+      16
+     ],
+     "primarySizing": "FIXED",
+     "counterSizing": "AUTO"
+    },
+    "bound": {
+     "itemSpacing": "spacing/100",
+     "paddingLeft": "spacing/200",
+     "paddingTop": "spacing/050",
+     "paddingRight": "spacing/200",
+     "paddingBottom": "spacing/050"
+    },
+    "fill": {
+     "var": "bg/surface-primary"
+    },
+    "children": [
+     {
+      "name": "Container",
+      "type": "FRAME",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "CENTER",
+       "spacing": 8,
+       "padding": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "AUTO"
+      },
+      "bound": {
+       "itemSpacing": "spacing/100"
+      },
+      "minHeight": 24,
+      "fillWidth": true,
+      "children": [
+       {
+        "name": "Icon",
+        "type": "INSTANCE",
+        "bound": {
+         "width": "icon-size/small",
+         "height": "icon-size/small"
+        },
+        "hidden": true,
+        "propRefs": {
+         "visible": "item-left",
+         "mainComponent": "↪️swap-item-left"
+        },
+        "instanceOf": "Icon",
+        "componentProperties": {
+         "size": "small"
+        }
+       },
+       {
+        "name": "Avatar",
+        "type": "INSTANCE",
+        "bound": {
+         "width": "component-size/xsmall",
+         "height": "component-size/xsmall"
+        },
+        "hidden": true,
+        "propRefs": {
+         "visible": "↪️avatar"
+        },
+        "instanceOf": "Avatar",
+        "componentProperties": {
+         "isVisible": true,
+         "↪️notification": false,
+         "↪️indicator": false,
+         "round": "true",
+         "size": "2xsmall(16x16)",
+         "type": "image"
+        }
+       },
+       {
+        "name": "Text container",
+        "type": "FRAME",
+        "layout": {
+         "mode": "VERTICAL",
+         "primary": "MIN",
+         "counter": "MIN",
+         "spacing": 0,
+         "padding": [
+          0,
+          0,
+          0,
+          0
+         ],
+         "primarySizing": "AUTO",
+         "counterSizing": "FIXED"
+        },
+        "fillWidth": true,
+        "children": [
+         {
+          "name": "List item",
+          "type": "TEXT",
+          "fillWidth": true,
+          "text": {
+           "characters": "List item",
+           "fontSize": 14,
+           "fontStyle": "Regular",
+           "lineHeight": 20,
+           "style": "Body/Medium",
+           "fillVar": "text/primary"
+          },
+          "fill": {
+           "var": "text/primary"
+          },
+          "propRefs": {
+           "characters": "✏️text"
+          }
+         },
+         {
+          "name": "subtext",
+          "type": "TEXT",
+          "hidden": true,
+          "text": {
+           "characters": "subtext",
+           "fontSize": 12,
+           "fontStyle": "Regular",
+           "lineHeight": 16,
+           "style": "Body/Small",
+           "fillVar": "text/tertiary"
+          },
+          "fill": {
+           "var": "text/tertiary"
+          },
+          "propRefs": {
+           "visible": "subtext",
+           "characters": "✏️text-subtext"
+          }
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "name": "Secondary text",
+      "type": "TEXT",
+      "hidden": true,
+      "text": {
+       "characters": "Secondary text",
+       "fontSize": 12,
+       "fontStyle": "Regular",
+       "lineHeight": 16,
+       "style": "Body/Small",
+       "fillVar": "text/secondary"
+      },
+      "fill": {
+       "var": "text/secondary"
+      },
+      "propRefs": {
+       "visible": "secondary-text",
+       "characters": "✏️text-secondary"
+      }
+     },
+     {
+      "name": "Divider",
+      "type": "LINE",
+      "stroke": {
+       "var": "border/secondary"
+      },
+      "strokeWeight": 1,
+      "hidden": true,
+      "propRefs": {
+       "visible": "divider"
+      }
+     },
+     {
+      "name": "Icon",
+      "type": "INSTANCE",
+      "bound": {
+       "width": "icon-size/small",
+       "height": "icon-size/small"
+      },
+      "hidden": true,
+      "propRefs": {
+       "visible": "item-right",
+       "mainComponent": "↪️swap-item-right"
+      },
+      "instanceOf": "Icon",
+      "componentProperties": {
+       "size": "small"
+      }
+     },
+     {
+      "name": "Badge",
+      "type": "INSTANCE",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "CENTER",
+       "counter": "CENTER",
+       "spacing": 8,
+       "padding": [
+        8,
+        8,
+        8,
+        8
+       ],
+       "primarySizing": "AUTO",
+       "counterSizing": "FIXED"
+      },
+      "cornerRadius": 96,
+      "bound": {
+       "itemSpacing": "spacing/100",
+       "paddingLeft": "spacing/100",
+       "paddingTop": "spacing/100",
+       "paddingRight": "spacing/100",
+       "paddingBottom": "spacing/100",
+       "height": "component-size/xsmall",
+       "topLeftRadius": "corner-radius/1200",
+       "topRightRadius": "corner-radius/1200",
+       "bottomLeftRadius": "corner-radius/1200",
+       "bottomRightRadius": "corner-radius/1200"
+      },
+      "fill": {
+       "var": "bg/brand/default"
+      },
+      "hidden": true,
+      "propRefs": {
+       "visible": "↪️badge"
+      },
+      "instanceOf": "Badge",
+      "componentProperties": {
+       "✏️text": "Label",
+       "↪️icon-right": false,
+       "↪️icon-left": false,
+       "type": "brand",
+       "style": "fill",
+       "size": "small",
+       "rounded": "true"
+      }
+     }
+    ]
+   },
+   {
+    "name": "type=header, size=small, state=default",
+    "type": "COMPONENT",
+    "layout": {
+     "mode": "VERTICAL",
+     "primary": "CENTER",
+     "counter": "MIN",
+     "spacing": 8,
+     "padding": [
+      4,
+      16,
+      4,
+      16
+     ],
+     "primarySizing": "AUTO",
+     "counterSizing": "FIXED"
+    },
+    "bound": {
+     "itemSpacing": "spacing/100",
+     "paddingLeft": "spacing/200",
+     "paddingTop": "spacing/050",
+     "paddingRight": "spacing/200",
+     "paddingBottom": "spacing/050"
+    },
+    "fill": {
+     "var": "bg/surface-primary"
+    },
+    "children": [
+     {
+      "name": "Container",
+      "type": "FRAME",
+      "layout": {
+       "mode": "VERTICAL",
+       "primary": "MIN",
+       "counter": "MIN",
+       "spacing": 8,
+       "padding": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "primarySizing": "AUTO",
+       "counterSizing": "FIXED"
+      },
+      "bound": {
+       "itemSpacing": "spacing/100"
+      },
+      "children": [
+       {
+        "name": "Header",
+        "type": "TEXT",
+        "text": {
+         "characters": "Header",
+         "fontSize": 12,
+         "fontStyle": "Semi Bold",
+         "lineHeight": 16,
+         "style": "Label/Small",
+         "fillVar": "text/secondary"
+        },
+        "fill": {
+         "var": "text/secondary"
+        }
+       },
+       {
+        "name": "Line 1",
+        "type": "LINE",
+        "stroke": {
+         "var": "border/primary"
+        },
+        "strokeWeight": 1,
+        "fillWidth": true,
+        "propRefs": {
+         "visible": "header-divider"
+        }
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "name": "type=header, size=medium, state=default",
+    "type": "COMPONENT",
+    "layout": {
+     "mode": "VERTICAL",
+     "primary": "CENTER",
+     "counter": "MIN",
+     "spacing": 8,
+     "padding": [
+      8,
+      16,
+      8,
+      16
+     ],
+     "primarySizing": "AUTO",
+     "counterSizing": "FIXED"
+    },
+    "bound": {
+     "itemSpacing": "spacing/100",
+     "paddingLeft": "spacing/200",
+     "paddingTop": "spacing/100",
+     "paddingRight": "spacing/200",
+     "paddingBottom": "spacing/100"
+    },
+    "fill": {
+     "var": "bg/surface-primary"
+    },
+    "children": [
+     {
+      "name": "Container",
+      "type": "FRAME",
+      "layout": {
+       "mode": "VERTICAL",
+       "primary": "MIN",
+       "counter": "MIN",
+       "spacing": 8,
+       "padding": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "primarySizing": "AUTO",
+       "counterSizing": "FIXED"
+      },
+      "bound": {
+       "itemSpacing": "spacing/100"
+      },
+      "children": [
+       {
+        "name": "Header",
+        "type": "TEXT",
+        "text": {
+         "characters": "Header",
+         "fontSize": 14,
+         "fontStyle": "Semi Bold",
+         "lineHeight": 16,
+         "style": "Label/Medium",
+         "fillVar": "text/secondary"
+        },
+        "fill": {
+         "var": "text/secondary"
+        }
+       },
+       {
+        "name": "Line 1",
+        "type": "LINE",
+        "stroke": {
+         "var": "border/primary"
+        },
+        "strokeWeight": 1,
+        "fillWidth": true,
+        "propRefs": {
+         "visible": "header-divider"
+        }
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "name": "type=header, size=large, state=default",
+    "type": "COMPONENT",
+    "layout": {
+     "mode": "VERTICAL",
+     "primary": "CENTER",
+     "counter": "MIN",
+     "spacing": 8,
+     "padding": [
+      12,
+      16,
+      12,
+      16
+     ],
+     "primarySizing": "AUTO",
+     "counterSizing": "FIXED"
+    },
+    "bound": {
+     "itemSpacing": "spacing/100",
+     "paddingLeft": "spacing/200",
+     "paddingTop": "spacing/150",
+     "paddingRight": "spacing/200",
+     "paddingBottom": "spacing/150"
+    },
+    "fill": {
+     "var": "bg/surface-primary"
+    },
+    "children": [
+     {
+      "name": "Container",
+      "type": "FRAME",
+      "layout": {
+       "mode": "VERTICAL",
+       "primary": "MIN",
+       "counter": "MIN",
+       "spacing": 8,
+       "padding": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "primarySizing": "AUTO",
+       "counterSizing": "FIXED"
+      },
+      "bound": {
+       "itemSpacing": "spacing/100"
+      },
+      "children": [
+       {
+        "name": "Header",
+        "type": "TEXT",
+        "text": {
+         "characters": "Header",
+         "fontSize": 14,
+         "fontStyle": "Semi Bold",
+         "lineHeight": 16,
+         "style": "Label/Medium",
+         "fillVar": "text/secondary"
+        },
+        "fill": {
+         "var": "text/secondary"
+        }
+       },
+       {
+        "name": "Line 1",
+        "type": "LINE",
+        "stroke": {
+         "var": "border/primary"
+        },
+        "strokeWeight": 1,
+        "fillWidth": true,
+        "propRefs": {
+         "visible": "header-divider"
+        }
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "name": "type=list-item, size=medium, state=default",
+    "type": "COMPONENT",
+    "layout": {
+     "mode": "HORIZONTAL",
+     "primary": "MIN",
+     "counter": "CENTER",
+     "spacing": 8,
+     "padding": [
+      8,
+      16,
+      8,
+      16
+     ],
+     "primarySizing": "FIXED",
+     "counterSizing": "AUTO"
+    },
+    "bound": {
+     "itemSpacing": "spacing/100",
+     "paddingLeft": "spacing/200",
+     "paddingTop": "spacing/100",
+     "paddingRight": "spacing/200",
+     "paddingBottom": "spacing/100"
+    },
+    "fill": {
+     "var": "bg/surface-primary"
+    },
+    "children": [
+     {
+      "name": "Container",
+      "type": "FRAME",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "CENTER",
+       "spacing": 8,
+       "padding": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "AUTO"
+      },
+      "bound": {
+       "itemSpacing": "spacing/100"
+      },
+      "minHeight": 24,
+      "fillWidth": true,
+      "children": [
+       {
+        "name": "Icon",
+        "type": "INSTANCE",
+        "bound": {
+         "width": "icon-size/small",
+         "height": "icon-size/small"
+        },
+        "hidden": true,
+        "propRefs": {
+         "visible": "item-left",
+         "mainComponent": "↪️swap-item-left"
+        },
+        "instanceOf": "Icon",
+        "componentProperties": {
+         "size": "small"
+        }
+       },
+       {
+        "name": "Avatar",
+        "type": "INSTANCE",
+        "bound": {
+         "width": "component-size/xsmall",
+         "height": "component-size/xsmall"
+        },
+        "hidden": true,
+        "propRefs": {
+         "visible": "↪️avatar"
+        },
+        "instanceOf": "Avatar",
+        "componentProperties": {
+         "isVisible": true,
+         "↪️notification": false,
+         "↪️indicator": false,
+         "round": "true",
+         "size": "2xsmall(16x16)",
+         "type": "image"
+        }
+       },
+       {
+        "name": "Text container",
+        "type": "FRAME",
+        "layout": {
+         "mode": "VERTICAL",
+         "primary": "MIN",
+         "counter": "MIN",
+         "spacing": 0,
+         "padding": [
+          0,
+          0,
+          0,
+          0
+         ],
+         "primarySizing": "AUTO",
+         "counterSizing": "FIXED"
+        },
+        "fillWidth": true,
+        "children": [
+         {
+          "name": "List item",
+          "type": "TEXT",
+          "fillWidth": true,
+          "text": {
+           "characters": "List item",
+           "fontSize": 16,
+           "fontStyle": "Regular",
+           "lineHeight": 24,
+           "style": "Body/Large",
+           "fillVar": "text/primary"
+          },
+          "fill": {
+           "var": "text/primary"
+          },
+          "propRefs": {
+           "characters": "✏️text"
+          }
+         },
+         {
+          "name": "subtext",
+          "type": "TEXT",
+          "hidden": true,
+          "text": {
+           "characters": "subtext",
+           "fontSize": 12,
+           "fontStyle": "Regular",
+           "lineHeight": 16,
+           "style": "Body/Small",
+           "fillVar": "text/tertiary"
+          },
+          "fill": {
+           "var": "text/tertiary"
+          },
+          "propRefs": {
+           "visible": "subtext",
+           "characters": "✏️text-subtext"
+          }
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "name": "Secondary text",
+      "type": "TEXT",
+      "hidden": true,
+      "text": {
+       "characters": "Secondary text",
+       "fontSize": 14,
+       "fontStyle": "Regular",
+       "lineHeight": 20,
+       "style": "Body/Medium",
+       "fillVar": "text/secondary"
+      },
+      "fill": {
+       "var": "text/secondary"
+      },
+      "propRefs": {
+       "visible": "secondary-text",
+       "characters": "✏️text-secondary"
+      }
+     },
+     {
+      "name": "Divider",
+      "type": "LINE",
+      "stroke": {
+       "var": "border/secondary"
+      },
+      "strokeWeight": 1,
+      "hidden": true,
+      "propRefs": {
+       "visible": "divider"
+      }
+     },
+     {
+      "name": "Icon",
+      "type": "INSTANCE",
+      "bound": {
+       "width": "icon-size/small",
+       "height": "icon-size/small"
+      },
+      "hidden": true,
+      "propRefs": {
+       "visible": "item-right",
+       "mainComponent": "↪️swap-item-right"
+      },
+      "instanceOf": "Icon",
+      "componentProperties": {
+       "size": "small"
+      }
+     },
+     {
+      "name": "Badge",
+      "type": "INSTANCE",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "CENTER",
+       "counter": "CENTER",
+       "spacing": 8,
+       "padding": [
+        8,
+        8,
+        8,
+        8
+       ],
+       "primarySizing": "AUTO",
+       "counterSizing": "FIXED"
+      },
+      "cornerRadius": 96,
+      "bound": {
+       "itemSpacing": "spacing/100",
+       "paddingLeft": "spacing/100",
+       "paddingTop": "spacing/100",
+       "paddingRight": "spacing/100",
+       "paddingBottom": "spacing/100",
+       "height": "component-size/xsmall",
+       "topLeftRadius": "corner-radius/1200",
+       "topRightRadius": "corner-radius/1200",
+       "bottomLeftRadius": "corner-radius/1200",
+       "bottomRightRadius": "corner-radius/1200"
+      },
+      "fill": {
+       "var": "bg/brand/default"
+      },
+      "hidden": true,
+      "propRefs": {
+       "visible": "↪️badge"
+      },
+      "instanceOf": "Badge",
+      "componentProperties": {
+       "✏️text": "Label",
+       "↪️icon-right": false,
+       "↪️icon-left": false,
+       "type": "brand",
+       "style": "fill",
+       "size": "small",
+       "rounded": "true"
+      }
+     }
+    ]
+   },
+   {
+    "name": "type=list-item, size=large, state=default",
+    "type": "COMPONENT",
+    "layout": {
+     "mode": "HORIZONTAL",
+     "primary": "MIN",
+     "counter": "CENTER",
+     "spacing": 8,
+     "padding": [
+      12,
+      16,
+      12,
+      16
+     ],
+     "primarySizing": "FIXED",
+     "counterSizing": "AUTO"
+    },
+    "bound": {
+     "itemSpacing": "spacing/100",
+     "paddingLeft": "spacing/200",
+     "paddingTop": "spacing/150",
+     "paddingRight": "spacing/200",
+     "paddingBottom": "spacing/150"
+    },
+    "fill": {
+     "var": "bg/surface-primary"
+    },
+    "children": [
+     {
+      "name": "Container",
+      "type": "FRAME",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "CENTER",
+       "spacing": 8,
+       "padding": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "AUTO"
+      },
+      "bound": {
+       "itemSpacing": "spacing/100"
+      },
+      "minHeight": 24,
+      "fillWidth": true,
+      "children": [
+       {
+        "name": "Icon",
+        "type": "INSTANCE",
+        "bound": {
+         "width": "icon-size/small",
+         "height": "icon-size/small"
+        },
+        "hidden": true,
+        "propRefs": {
+         "visible": "item-left",
+         "mainComponent": "↪️swap-item-left"
+        },
+        "instanceOf": "Icon",
+        "componentProperties": {
+         "size": "small"
+        }
+       },
+       {
+        "name": "Avatar",
+        "type": "INSTANCE",
+        "bound": {
+         "width": "component-size/xsmall",
+         "height": "component-size/xsmall"
+        },
+        "hidden": true,
+        "propRefs": {
+         "visible": "↪️avatar"
+        },
+        "instanceOf": "Avatar",
+        "componentProperties": {
+         "isVisible": true,
+         "↪️notification": false,
+         "↪️indicator": false,
+         "round": "true",
+         "size": "2xsmall(16x16)",
+         "type": "image"
+        }
+       },
+       {
+        "name": "Text container",
+        "type": "FRAME",
+        "layout": {
+         "mode": "VERTICAL",
+         "primary": "MIN",
+         "counter": "MIN",
+         "spacing": 0,
+         "padding": [
+          0,
+          0,
+          0,
+          0
+         ],
+         "primarySizing": "AUTO",
+         "counterSizing": "FIXED"
+        },
+        "fillWidth": true,
+        "children": [
+         {
+          "name": "List item",
+          "type": "TEXT",
+          "fillWidth": true,
+          "text": {
+           "characters": "List item",
+           "fontSize": 16,
+           "fontStyle": "Regular",
+           "lineHeight": 24,
+           "style": "Body/Large",
+           "fillVar": "text/primary"
+          },
+          "fill": {
+           "var": "text/primary"
+          },
+          "propRefs": {
+           "characters": "✏️text"
+          }
+         },
+         {
+          "name": "subtext",
+          "type": "TEXT",
+          "hidden": true,
+          "text": {
+           "characters": "subtext",
+           "fontSize": 12,
+           "fontStyle": "Regular",
+           "lineHeight": 16,
+           "style": "Body/Small",
+           "fillVar": "text/tertiary"
+          },
+          "fill": {
+           "var": "text/tertiary"
+          },
+          "propRefs": {
+           "visible": "subtext",
+           "characters": "✏️text-subtext"
+          }
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "name": "Secondary text",
+      "type": "TEXT",
+      "hidden": true,
+      "text": {
+       "characters": "Secondary text",
+       "fontSize": 14,
+       "fontStyle": "Regular",
+       "lineHeight": 20,
+       "style": "Body/Medium",
+       "fillVar": "text/secondary"
+      },
+      "fill": {
+       "var": "text/secondary"
+      },
+      "propRefs": {
+       "visible": "secondary-text",
+       "characters": "✏️text-secondary"
+      }
+     },
+     {
+      "name": "Divider",
+      "type": "LINE",
+      "stroke": {
+       "var": "border/secondary"
+      },
+      "strokeWeight": 1,
+      "hidden": true,
+      "propRefs": {
+       "visible": "divider"
+      }
+     },
+     {
+      "name": "Icon",
+      "type": "INSTANCE",
+      "bound": {
+       "width": "icon-size/small",
+       "height": "icon-size/small"
+      },
+      "hidden": true,
+      "propRefs": {
+       "visible": "item-right",
+       "mainComponent": "↪️swap-item-right"
+      },
+      "instanceOf": "Icon",
+      "componentProperties": {
+       "size": "small"
+      }
+     },
+     {
+      "name": "Badge",
+      "type": "INSTANCE",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "CENTER",
+       "counter": "CENTER",
+       "spacing": 8,
+       "padding": [
+        8,
+        8,
+        8,
+        8
+       ],
+       "primarySizing": "AUTO",
+       "counterSizing": "FIXED"
+      },
+      "cornerRadius": 96,
+      "bound": {
+       "itemSpacing": "spacing/100",
+       "paddingLeft": "spacing/100",
+       "paddingTop": "spacing/100",
+       "paddingRight": "spacing/100",
+       "paddingBottom": "spacing/100",
+       "height": "component-size/xsmall",
+       "topLeftRadius": "corner-radius/1200",
+       "topRightRadius": "corner-radius/1200",
+       "bottomLeftRadius": "corner-radius/1200",
+       "bottomRightRadius": "corner-radius/1200"
+      },
+      "fill": {
+       "var": "bg/brand/default"
+      },
+      "hidden": true,
+      "propRefs": {
+       "visible": "↪️badge"
+      },
+      "instanceOf": "Badge",
+      "componentProperties": {
+       "✏️text": "Label",
+       "↪️icon-right": false,
+       "↪️icon-left": false,
+       "type": "brand",
+       "style": "fill",
+       "size": "small",
+       "rounded": "true"
+      }
+     }
+    ]
+   },
+   {
+    "name": "type=list-item, size=small, state=hover",
+    "type": "COMPONENT",
+    "layout": {
+     "mode": "HORIZONTAL",
+     "primary": "MIN",
+     "counter": "CENTER",
+     "spacing": 8,
+     "padding": [
+      4,
+      16,
+      4,
+      16
+     ],
+     "primarySizing": "FIXED",
+     "counterSizing": "AUTO"
+    },
+    "bound": {
+     "itemSpacing": "spacing/100",
+     "paddingLeft": "spacing/200",
+     "paddingTop": "spacing/050",
+     "paddingRight": "spacing/200",
+     "paddingBottom": "spacing/050"
+    },
+    "fill": {
+     "var": "bg/surface-primary-hover"
+    },
+    "children": [
+     {
+      "name": "Container",
+      "type": "FRAME",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "CENTER",
+       "spacing": 8,
+       "padding": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "AUTO"
+      },
+      "bound": {
+       "itemSpacing": "spacing/100"
+      },
+      "minHeight": 24,
+      "fillWidth": true,
+      "children": [
+       {
+        "name": "Icon",
+        "type": "INSTANCE",
+        "bound": {
+         "width": "icon-size/small",
+         "height": "icon-size/small"
+        },
+        "hidden": true,
+        "propRefs": {
+         "visible": "item-left",
+         "mainComponent": "↪️swap-item-left"
+        },
+        "instanceOf": "Icon",
+        "componentProperties": {
+         "size": "small"
+        }
+       },
+       {
+        "name": "Avatar",
+        "type": "INSTANCE",
+        "bound": {
+         "width": "component-size/xsmall",
+         "height": "component-size/xsmall"
+        },
+        "hidden": true,
+        "propRefs": {
+         "visible": "↪️avatar"
+        },
+        "instanceOf": "Avatar",
+        "componentProperties": {
+         "isVisible": true,
+         "↪️notification": false,
+         "↪️indicator": false,
+         "round": "true",
+         "size": "2xsmall(16x16)",
+         "type": "image"
+        }
+       },
+       {
+        "name": "Text container",
+        "type": "FRAME",
+        "layout": {
+         "mode": "VERTICAL",
+         "primary": "MIN",
+         "counter": "MIN",
+         "spacing": 0,
+         "padding": [
+          0,
+          0,
+          0,
+          0
+         ],
+         "primarySizing": "AUTO",
+         "counterSizing": "FIXED"
+        },
+        "fillWidth": true,
+        "children": [
+         {
+          "name": "List item",
+          "type": "TEXT",
+          "fillWidth": true,
+          "text": {
+           "characters": "List item",
+           "fontSize": 14,
+           "fontStyle": "Regular",
+           "lineHeight": 20,
+           "style": "Body/Medium",
+           "fillVar": "text/primary"
+          },
+          "fill": {
+           "var": "text/primary"
+          },
+          "propRefs": {
+           "characters": "✏️text"
+          }
+         },
+         {
+          "name": "subtext",
+          "type": "TEXT",
+          "hidden": true,
+          "text": {
+           "characters": "subtext",
+           "fontSize": 12,
+           "fontStyle": "Regular",
+           "lineHeight": 16,
+           "style": "Body/Small",
+           "fillVar": "text/tertiary"
+          },
+          "fill": {
+           "var": "text/tertiary"
+          },
+          "propRefs": {
+           "visible": "subtext",
+           "characters": "✏️text-subtext"
+          }
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "name": "Secondary text",
+      "type": "TEXT",
+      "hidden": true,
+      "text": {
+       "characters": "Secondary text",
+       "fontSize": 12,
+       "fontStyle": "Regular",
+       "lineHeight": 16,
+       "style": "Body/Small",
+       "fillVar": "text/secondary"
+      },
+      "fill": {
+       "var": "text/secondary"
+      },
+      "propRefs": {
+       "visible": "secondary-text",
+       "characters": "✏️text-secondary"
+      }
+     },
+     {
+      "name": "Divider",
+      "type": "LINE",
+      "stroke": {
+       "var": "border/secondary"
+      },
+      "strokeWeight": 1,
+      "hidden": true,
+      "propRefs": {
+       "visible": "divider"
+      }
+     },
+     {
+      "name": "Icon",
+      "type": "INSTANCE",
+      "bound": {
+       "width": "icon-size/small",
+       "height": "icon-size/small"
+      },
+      "hidden": true,
+      "propRefs": {
+       "visible": "item-right",
+       "mainComponent": "↪️swap-item-right"
+      },
+      "instanceOf": "Icon",
+      "componentProperties": {
+       "size": "small"
+      }
+     },
+     {
+      "name": "Badge",
+      "type": "INSTANCE",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "CENTER",
+       "counter": "CENTER",
+       "spacing": 8,
+       "padding": [
+        8,
+        8,
+        8,
+        8
+       ],
+       "primarySizing": "AUTO",
+       "counterSizing": "FIXED"
+      },
+      "cornerRadius": 96,
+      "bound": {
+       "itemSpacing": "spacing/100",
+       "paddingLeft": "spacing/100",
+       "paddingTop": "spacing/100",
+       "paddingRight": "spacing/100",
+       "paddingBottom": "spacing/100",
+       "height": "component-size/xsmall",
+       "topLeftRadius": "corner-radius/1200",
+       "topRightRadius": "corner-radius/1200",
+       "bottomLeftRadius": "corner-radius/1200",
+       "bottomRightRadius": "corner-radius/1200"
+      },
+      "fill": {
+       "var": "bg/brand/default"
+      },
+      "hidden": true,
+      "propRefs": {
+       "visible": "↪️badge"
+      },
+      "instanceOf": "Badge",
+      "componentProperties": {
+       "✏️text": "Label",
+       "↪️icon-right": false,
+       "↪️icon-left": false,
+       "type": "brand",
+       "style": "fill",
+       "size": "small",
+       "rounded": "true"
+      }
+     }
+    ]
+   },
+   {
+    "name": "type=list-item, size=medium, state=hover",
+    "type": "COMPONENT",
+    "layout": {
+     "mode": "HORIZONTAL",
+     "primary": "MIN",
+     "counter": "CENTER",
+     "spacing": 8,
+     "padding": [
+      8,
+      16,
+      8,
+      16
+     ],
+     "primarySizing": "FIXED",
+     "counterSizing": "AUTO"
+    },
+    "bound": {
+     "itemSpacing": "spacing/100",
+     "paddingLeft": "spacing/200",
+     "paddingTop": "spacing/100",
+     "paddingRight": "spacing/200",
+     "paddingBottom": "spacing/100"
+    },
+    "fill": {
+     "var": "bg/surface-primary-hover"
+    },
+    "children": [
+     {
+      "name": "Container",
+      "type": "FRAME",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "CENTER",
+       "spacing": 8,
+       "padding": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "AUTO"
+      },
+      "bound": {
+       "itemSpacing": "spacing/100"
+      },
+      "minHeight": 24,
+      "fillWidth": true,
+      "children": [
+       {
+        "name": "Icon",
+        "type": "INSTANCE",
+        "bound": {
+         "width": "icon-size/small",
+         "height": "icon-size/small"
+        },
+        "hidden": true,
+        "propRefs": {
+         "visible": "item-left",
+         "mainComponent": "↪️swap-item-left"
+        },
+        "instanceOf": "Icon",
+        "componentProperties": {
+         "size": "small"
+        }
+       },
+       {
+        "name": "Avatar",
+        "type": "INSTANCE",
+        "bound": {
+         "width": "component-size/xsmall",
+         "height": "component-size/xsmall"
+        },
+        "hidden": true,
+        "propRefs": {
+         "visible": "↪️avatar"
+        },
+        "instanceOf": "Avatar",
+        "componentProperties": {
+         "isVisible": true,
+         "↪️notification": false,
+         "↪️indicator": false,
+         "round": "true",
+         "size": "2xsmall(16x16)",
+         "type": "image"
+        }
+       },
+       {
+        "name": "Text container",
+        "type": "FRAME",
+        "layout": {
+         "mode": "VERTICAL",
+         "primary": "MIN",
+         "counter": "MIN",
+         "spacing": 0,
+         "padding": [
+          0,
+          0,
+          0,
+          0
+         ],
+         "primarySizing": "AUTO",
+         "counterSizing": "FIXED"
+        },
+        "fillWidth": true,
+        "children": [
+         {
+          "name": "List item",
+          "type": "TEXT",
+          "fillWidth": true,
+          "text": {
+           "characters": "List item",
+           "fontSize": 16,
+           "fontStyle": "Regular",
+           "lineHeight": 24,
+           "style": "Body/Large",
+           "fillVar": "text/primary"
+          },
+          "fill": {
+           "var": "text/primary"
+          },
+          "propRefs": {
+           "characters": "✏️text"
+          }
+         },
+         {
+          "name": "subtext",
+          "type": "TEXT",
+          "hidden": true,
+          "text": {
+           "characters": "subtext",
+           "fontSize": 12,
+           "fontStyle": "Regular",
+           "lineHeight": 16,
+           "style": "Body/Small",
+           "fillVar": "text/tertiary"
+          },
+          "fill": {
+           "var": "text/tertiary"
+          },
+          "propRefs": {
+           "visible": "subtext",
+           "characters": "✏️text-subtext"
+          }
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "name": "Secondary text",
+      "type": "TEXT",
+      "hidden": true,
+      "text": {
+       "characters": "Secondary text",
+       "fontSize": 14,
+       "fontStyle": "Regular",
+       "lineHeight": 20,
+       "style": "Body/Medium",
+       "fillVar": "text/secondary"
+      },
+      "fill": {
+       "var": "text/secondary"
+      },
+      "propRefs": {
+       "visible": "secondary-text",
+       "characters": "✏️text-secondary"
+      }
+     },
+     {
+      "name": "Divider",
+      "type": "LINE",
+      "stroke": {
+       "var": "border/secondary"
+      },
+      "strokeWeight": 1,
+      "hidden": true,
+      "propRefs": {
+       "visible": "divider"
+      }
+     },
+     {
+      "name": "Icon",
+      "type": "INSTANCE",
+      "bound": {
+       "width": "icon-size/small",
+       "height": "icon-size/small"
+      },
+      "hidden": true,
+      "propRefs": {
+       "visible": "item-right",
+       "mainComponent": "↪️swap-item-right"
+      },
+      "instanceOf": "Icon",
+      "componentProperties": {
+       "size": "small"
+      }
+     },
+     {
+      "name": "Badge",
+      "type": "INSTANCE",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "CENTER",
+       "counter": "CENTER",
+       "spacing": 8,
+       "padding": [
+        8,
+        8,
+        8,
+        8
+       ],
+       "primarySizing": "AUTO",
+       "counterSizing": "FIXED"
+      },
+      "cornerRadius": 96,
+      "bound": {
+       "itemSpacing": "spacing/100",
+       "paddingLeft": "spacing/100",
+       "paddingTop": "spacing/100",
+       "paddingRight": "spacing/100",
+       "paddingBottom": "spacing/100",
+       "height": "component-size/xsmall",
+       "topLeftRadius": "corner-radius/1200",
+       "topRightRadius": "corner-radius/1200",
+       "bottomLeftRadius": "corner-radius/1200",
+       "bottomRightRadius": "corner-radius/1200"
+      },
+      "fill": {
+       "var": "bg/brand/default"
+      },
+      "hidden": true,
+      "propRefs": {
+       "visible": "↪️badge"
+      },
+      "instanceOf": "Badge",
+      "componentProperties": {
+       "✏️text": "Label",
+       "↪️icon-right": false,
+       "↪️icon-left": false,
+       "type": "brand",
+       "style": "fill",
+       "size": "small",
+       "rounded": "true"
+      }
+     }
+    ]
+   },
+   {
+    "name": "type=list-item, size=large, state=hover",
+    "type": "COMPONENT",
+    "layout": {
+     "mode": "HORIZONTAL",
+     "primary": "MIN",
+     "counter": "CENTER",
+     "spacing": 8,
+     "padding": [
+      12,
+      16,
+      12,
+      16
+     ],
+     "primarySizing": "FIXED",
+     "counterSizing": "AUTO"
+    },
+    "bound": {
+     "itemSpacing": "spacing/100",
+     "paddingLeft": "spacing/200",
+     "paddingTop": "spacing/150",
+     "paddingRight": "spacing/200",
+     "paddingBottom": "spacing/150"
+    },
+    "fill": {
+     "var": "bg/surface-primary-hover"
+    },
+    "children": [
+     {
+      "name": "Container",
+      "type": "FRAME",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "CENTER",
+       "spacing": 8,
+       "padding": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "AUTO"
+      },
+      "bound": {
+       "itemSpacing": "spacing/100"
+      },
+      "minHeight": 24,
+      "fillWidth": true,
+      "children": [
+       {
+        "name": "Icon",
+        "type": "INSTANCE",
+        "bound": {
+         "width": "icon-size/small",
+         "height": "icon-size/small"
+        },
+        "hidden": true,
+        "propRefs": {
+         "visible": "item-left",
+         "mainComponent": "↪️swap-item-left"
+        },
+        "instanceOf": "Icon",
+        "componentProperties": {
+         "size": "small"
+        }
+       },
+       {
+        "name": "Avatar",
+        "type": "INSTANCE",
+        "bound": {
+         "width": "component-size/xsmall",
+         "height": "component-size/xsmall"
+        },
+        "hidden": true,
+        "propRefs": {
+         "visible": "↪️avatar"
+        },
+        "instanceOf": "Avatar",
+        "componentProperties": {
+         "isVisible": true,
+         "↪️notification": false,
+         "↪️indicator": false,
+         "round": "true",
+         "size": "2xsmall(16x16)",
+         "type": "image"
+        }
+       },
+       {
+        "name": "Text container",
+        "type": "FRAME",
+        "layout": {
+         "mode": "VERTICAL",
+         "primary": "MIN",
+         "counter": "MIN",
+         "spacing": 0,
+         "padding": [
+          0,
+          0,
+          0,
+          0
+         ],
+         "primarySizing": "AUTO",
+         "counterSizing": "FIXED"
+        },
+        "fillWidth": true,
+        "children": [
+         {
+          "name": "List item",
+          "type": "TEXT",
+          "fillWidth": true,
+          "text": {
+           "characters": "List item",
+           "fontSize": 16,
+           "fontStyle": "Regular",
+           "lineHeight": 24,
+           "style": "Body/Large",
+           "fillVar": "text/primary"
+          },
+          "fill": {
+           "var": "text/primary"
+          },
+          "propRefs": {
+           "characters": "✏️text"
+          }
+         },
+         {
+          "name": "subtext",
+          "type": "TEXT",
+          "hidden": true,
+          "text": {
+           "characters": "subtext",
+           "fontSize": 12,
+           "fontStyle": "Regular",
+           "lineHeight": 16,
+           "style": "Body/Small",
+           "fillVar": "text/tertiary"
+          },
+          "fill": {
+           "var": "text/tertiary"
+          },
+          "propRefs": {
+           "visible": "subtext",
+           "characters": "✏️text-subtext"
+          }
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "name": "Secondary text",
+      "type": "TEXT",
+      "hidden": true,
+      "text": {
+       "characters": "Secondary text",
+       "fontSize": 14,
+       "fontStyle": "Regular",
+       "lineHeight": 20,
+       "style": "Body/Medium",
+       "fillVar": "text/secondary"
+      },
+      "fill": {
+       "var": "text/secondary"
+      },
+      "propRefs": {
+       "visible": "secondary-text",
+       "characters": "✏️text-secondary"
+      }
+     },
+     {
+      "name": "Divider",
+      "type": "LINE",
+      "stroke": {
+       "var": "border/secondary"
+      },
+      "strokeWeight": 1,
+      "hidden": true,
+      "propRefs": {
+       "visible": "divider"
+      }
+     },
+     {
+      "name": "Icon",
+      "type": "INSTANCE",
+      "bound": {
+       "width": "icon-size/small",
+       "height": "icon-size/small"
+      },
+      "hidden": true,
+      "propRefs": {
+       "visible": "item-right",
+       "mainComponent": "↪️swap-item-right"
+      },
+      "instanceOf": "Icon",
+      "componentProperties": {
+       "size": "small"
+      }
+     },
+     {
+      "name": "Badge",
+      "type": "INSTANCE",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "CENTER",
+       "counter": "CENTER",
+       "spacing": 8,
+       "padding": [
+        8,
+        8,
+        8,
+        8
+       ],
+       "primarySizing": "AUTO",
+       "counterSizing": "FIXED"
+      },
+      "cornerRadius": 96,
+      "bound": {
+       "itemSpacing": "spacing/100",
+       "paddingLeft": "spacing/100",
+       "paddingTop": "spacing/100",
+       "paddingRight": "spacing/100",
+       "paddingBottom": "spacing/100",
+       "height": "component-size/xsmall",
+       "topLeftRadius": "corner-radius/1200",
+       "topRightRadius": "corner-radius/1200",
+       "bottomLeftRadius": "corner-radius/1200",
+       "bottomRightRadius": "corner-radius/1200"
+      },
+      "fill": {
+       "var": "bg/brand/default"
+      },
+      "hidden": true,
+      "propRefs": {
+       "visible": "↪️badge"
+      },
+      "instanceOf": "Badge",
+      "componentProperties": {
+       "✏️text": "Label",
+       "↪️icon-right": false,
+       "↪️icon-left": false,
+       "type": "brand",
+       "style": "fill",
+       "size": "small",
+       "rounded": "true"
+      }
+     }
+    ]
+   },
+   {
+    "name": "type=list-item, size=small, state=focus",
+    "type": "COMPONENT",
+    "layout": {
+     "mode": "HORIZONTAL",
+     "primary": "MIN",
+     "counter": "CENTER",
+     "spacing": 8,
+     "padding": [
+      4,
+      16,
+      4,
+      16
+     ],
+     "primarySizing": "FIXED",
+     "counterSizing": "AUTO"
+    },
+    "bound": {
+     "itemSpacing": "spacing/100",
+     "paddingLeft": "spacing/200",
+     "paddingTop": "spacing/050",
+     "paddingRight": "spacing/200",
+     "paddingBottom": "spacing/050"
+    },
+    "fill": {
+     "var": "bg/surface-primary"
+    },
+    "stroke": {
+     "var": "border/focus"
+    },
+    "strokeWeight": 2,
+    "children": [
+     {
+      "name": "Container",
+      "type": "FRAME",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "CENTER",
+       "spacing": 8,
+       "padding": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "AUTO"
+      },
+      "bound": {
+       "itemSpacing": "spacing/100"
+      },
+      "minHeight": 24,
+      "fillWidth": true,
+      "children": [
+       {
+        "name": "Icon",
+        "type": "INSTANCE",
+        "bound": {
+         "width": "icon-size/small",
+         "height": "icon-size/small"
+        },
+        "hidden": true,
+        "propRefs": {
+         "visible": "item-left",
+         "mainComponent": "↪️swap-item-left"
+        },
+        "instanceOf": "Icon",
+        "componentProperties": {
+         "size": "small"
+        }
+       },
+       {
+        "name": "Avatar",
+        "type": "INSTANCE",
+        "bound": {
+         "width": "component-size/xsmall",
+         "height": "component-size/xsmall"
+        },
+        "hidden": true,
+        "propRefs": {
+         "visible": "↪️avatar"
+        },
+        "instanceOf": "Avatar",
+        "componentProperties": {
+         "isVisible": true,
+         "↪️notification": false,
+         "↪️indicator": false,
+         "round": "true",
+         "size": "2xsmall(16x16)",
+         "type": "image"
+        }
+       },
+       {
+        "name": "Text container",
+        "type": "FRAME",
+        "layout": {
+         "mode": "VERTICAL",
+         "primary": "MIN",
+         "counter": "MIN",
+         "spacing": 0,
+         "padding": [
+          0,
+          0,
+          0,
+          0
+         ],
+         "primarySizing": "AUTO",
+         "counterSizing": "FIXED"
+        },
+        "fillWidth": true,
+        "children": [
+         {
+          "name": "List item",
+          "type": "TEXT",
+          "fillWidth": true,
+          "text": {
+           "characters": "List item",
+           "fontSize": 14,
+           "fontStyle": "Regular",
+           "lineHeight": 20,
+           "style": "Body/Medium",
+           "fillVar": "text/primary"
+          },
+          "fill": {
+           "var": "text/primary"
+          },
+          "propRefs": {
+           "characters": "✏️text"
+          }
+         },
+         {
+          "name": "subtext",
+          "type": "TEXT",
+          "hidden": true,
+          "text": {
+           "characters": "subtext",
+           "fontSize": 12,
+           "fontStyle": "Regular",
+           "lineHeight": 16,
+           "style": "Body/Small",
+           "fillVar": "text/tertiary"
+          },
+          "fill": {
+           "var": "text/tertiary"
+          },
+          "propRefs": {
+           "visible": "subtext",
+           "characters": "✏️text-subtext"
+          }
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "name": "Secondary text",
+      "type": "TEXT",
+      "hidden": true,
+      "text": {
+       "characters": "Secondary text",
+       "fontSize": 12,
+       "fontStyle": "Regular",
+       "lineHeight": 16,
+       "style": "Body/Small",
+       "fillVar": "text/secondary"
+      },
+      "fill": {
+       "var": "text/secondary"
+      },
+      "propRefs": {
+       "visible": "secondary-text",
+       "characters": "✏️text-secondary"
+      }
+     },
+     {
+      "name": "Divider",
+      "type": "LINE",
+      "stroke": {
+       "var": "border/secondary"
+      },
+      "strokeWeight": 1,
+      "hidden": true,
+      "propRefs": {
+       "visible": "divider"
+      }
+     },
+     {
+      "name": "Icon",
+      "type": "INSTANCE",
+      "bound": {
+       "width": "icon-size/small",
+       "height": "icon-size/small"
+      },
+      "hidden": true,
+      "propRefs": {
+       "visible": "item-right",
+       "mainComponent": "↪️swap-item-right"
+      },
+      "instanceOf": "Icon",
+      "componentProperties": {
+       "size": "small"
+      }
+     },
+     {
+      "name": "Badge",
+      "type": "INSTANCE",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "CENTER",
+       "counter": "CENTER",
+       "spacing": 8,
+       "padding": [
+        8,
+        8,
+        8,
+        8
+       ],
+       "primarySizing": "AUTO",
+       "counterSizing": "FIXED"
+      },
+      "cornerRadius": 96,
+      "bound": {
+       "itemSpacing": "spacing/100",
+       "paddingLeft": "spacing/100",
+       "paddingTop": "spacing/100",
+       "paddingRight": "spacing/100",
+       "paddingBottom": "spacing/100",
+       "height": "component-size/xsmall",
+       "topLeftRadius": "corner-radius/1200",
+       "topRightRadius": "corner-radius/1200",
+       "bottomLeftRadius": "corner-radius/1200",
+       "bottomRightRadius": "corner-radius/1200"
+      },
+      "fill": {
+       "var": "bg/brand/default"
+      },
+      "hidden": true,
+      "propRefs": {
+       "visible": "↪️badge"
+      },
+      "instanceOf": "Badge",
+      "componentProperties": {
+       "✏️text": "Label",
+       "↪️icon-right": false,
+       "↪️icon-left": false,
+       "type": "brand",
+       "style": "fill",
+       "size": "small",
+       "rounded": "true"
+      }
+     }
+    ]
+   },
+   {
+    "name": "type=list-item, size=medium, state=focus",
+    "type": "COMPONENT",
+    "layout": {
+     "mode": "HORIZONTAL",
+     "primary": "MIN",
+     "counter": "CENTER",
+     "spacing": 8,
+     "padding": [
+      8,
+      16,
+      8,
+      16
+     ],
+     "primarySizing": "FIXED",
+     "counterSizing": "AUTO"
+    },
+    "bound": {
+     "itemSpacing": "spacing/100",
+     "paddingLeft": "spacing/200",
+     "paddingTop": "spacing/100",
+     "paddingRight": "spacing/200",
+     "paddingBottom": "spacing/100"
+    },
+    "fill": {
+     "var": "bg/surface-primary"
+    },
+    "stroke": {
+     "var": "border/focus"
+    },
+    "strokeWeight": 2,
+    "children": [
+     {
+      "name": "Container",
+      "type": "FRAME",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "CENTER",
+       "spacing": 8,
+       "padding": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "AUTO"
+      },
+      "bound": {
+       "itemSpacing": "spacing/100"
+      },
+      "minHeight": 24,
+      "fillWidth": true,
+      "children": [
+       {
+        "name": "Icon",
+        "type": "INSTANCE",
+        "bound": {
+         "width": "icon-size/small",
+         "height": "icon-size/small"
+        },
+        "hidden": true,
+        "propRefs": {
+         "visible": "item-left",
+         "mainComponent": "↪️swap-item-left"
+        },
+        "instanceOf": "Icon",
+        "componentProperties": {
+         "size": "small"
+        }
+       },
+       {
+        "name": "Avatar",
+        "type": "INSTANCE",
+        "bound": {
+         "width": "component-size/xsmall",
+         "height": "component-size/xsmall"
+        },
+        "hidden": true,
+        "propRefs": {
+         "visible": "↪️avatar"
+        },
+        "instanceOf": "Avatar",
+        "componentProperties": {
+         "isVisible": true,
+         "↪️notification": false,
+         "↪️indicator": false,
+         "round": "true",
+         "size": "2xsmall(16x16)",
+         "type": "image"
+        }
+       },
+       {
+        "name": "Text container",
+        "type": "FRAME",
+        "layout": {
+         "mode": "VERTICAL",
+         "primary": "MIN",
+         "counter": "MIN",
+         "spacing": 0,
+         "padding": [
+          0,
+          0,
+          0,
+          0
+         ],
+         "primarySizing": "AUTO",
+         "counterSizing": "FIXED"
+        },
+        "fillWidth": true,
+        "children": [
+         {
+          "name": "List item",
+          "type": "TEXT",
+          "fillWidth": true,
+          "text": {
+           "characters": "List item",
+           "fontSize": 16,
+           "fontStyle": "Regular",
+           "lineHeight": 24,
+           "style": "Body/Large",
+           "fillVar": "text/primary"
+          },
+          "fill": {
+           "var": "text/primary"
+          },
+          "propRefs": {
+           "characters": "✏️text"
+          }
+         },
+         {
+          "name": "subtext",
+          "type": "TEXT",
+          "hidden": true,
+          "text": {
+           "characters": "subtext",
+           "fontSize": 12,
+           "fontStyle": "Regular",
+           "lineHeight": 16,
+           "style": "Body/Small",
+           "fillVar": "text/tertiary"
+          },
+          "fill": {
+           "var": "text/tertiary"
+          },
+          "propRefs": {
+           "visible": "subtext",
+           "characters": "✏️text-subtext"
+          }
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "name": "Secondary text",
+      "type": "TEXT",
+      "hidden": true,
+      "text": {
+       "characters": "Secondary text",
+       "fontSize": 14,
+       "fontStyle": "Regular",
+       "lineHeight": 20,
+       "style": "Body/Medium",
+       "fillVar": "text/secondary"
+      },
+      "fill": {
+       "var": "text/secondary"
+      },
+      "propRefs": {
+       "visible": "secondary-text",
+       "characters": "✏️text-secondary"
+      }
+     },
+     {
+      "name": "Divider",
+      "type": "LINE",
+      "stroke": {
+       "var": "border/secondary"
+      },
+      "strokeWeight": 1,
+      "hidden": true,
+      "propRefs": {
+       "visible": "divider"
+      }
+     },
+     {
+      "name": "Icon",
+      "type": "INSTANCE",
+      "bound": {
+       "width": "icon-size/small",
+       "height": "icon-size/small"
+      },
+      "hidden": true,
+      "propRefs": {
+       "visible": "item-right",
+       "mainComponent": "↪️swap-item-right"
+      },
+      "instanceOf": "Icon",
+      "componentProperties": {
+       "size": "small"
+      }
+     },
+     {
+      "name": "Badge",
+      "type": "INSTANCE",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "CENTER",
+       "counter": "CENTER",
+       "spacing": 8,
+       "padding": [
+        8,
+        8,
+        8,
+        8
+       ],
+       "primarySizing": "AUTO",
+       "counterSizing": "FIXED"
+      },
+      "cornerRadius": 96,
+      "bound": {
+       "itemSpacing": "spacing/100",
+       "paddingLeft": "spacing/100",
+       "paddingTop": "spacing/100",
+       "paddingRight": "spacing/100",
+       "paddingBottom": "spacing/100",
+       "height": "component-size/xsmall",
+       "topLeftRadius": "corner-radius/1200",
+       "topRightRadius": "corner-radius/1200",
+       "bottomLeftRadius": "corner-radius/1200",
+       "bottomRightRadius": "corner-radius/1200"
+      },
+      "fill": {
+       "var": "bg/brand/default"
+      },
+      "hidden": true,
+      "propRefs": {
+       "visible": "↪️badge"
+      },
+      "instanceOf": "Badge",
+      "componentProperties": {
+       "✏️text": "Label",
+       "↪️icon-right": false,
+       "↪️icon-left": false,
+       "type": "brand",
+       "style": "fill",
+       "size": "small",
+       "rounded": "true"
+      }
+     }
+    ]
+   },
+   {
+    "name": "type=list-item, size=large, state=focus",
+    "type": "COMPONENT",
+    "layout": {
+     "mode": "HORIZONTAL",
+     "primary": "MIN",
+     "counter": "CENTER",
+     "spacing": 8,
+     "padding": [
+      12,
+      16,
+      12,
+      16
+     ],
+     "primarySizing": "FIXED",
+     "counterSizing": "AUTO"
+    },
+    "bound": {
+     "itemSpacing": "spacing/100",
+     "paddingLeft": "spacing/200",
+     "paddingTop": "spacing/150",
+     "paddingRight": "spacing/200",
+     "paddingBottom": "spacing/150"
+    },
+    "fill": {
+     "var": "bg/surface-primary"
+    },
+    "stroke": {
+     "var": "border/focus"
+    },
+    "strokeWeight": 2,
+    "children": [
+     {
+      "name": "Container",
+      "type": "FRAME",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "CENTER",
+       "spacing": 8,
+       "padding": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "AUTO"
+      },
+      "bound": {
+       "itemSpacing": "spacing/100"
+      },
+      "minHeight": 24,
+      "fillWidth": true,
+      "children": [
+       {
+        "name": "Icon",
+        "type": "INSTANCE",
+        "bound": {
+         "width": "icon-size/small",
+         "height": "icon-size/small"
+        },
+        "hidden": true,
+        "propRefs": {
+         "visible": "item-left",
+         "mainComponent": "↪️swap-item-left"
+        },
+        "instanceOf": "Icon",
+        "componentProperties": {
+         "size": "small"
+        }
+       },
+       {
+        "name": "Avatar",
+        "type": "INSTANCE",
+        "bound": {
+         "width": "component-size/xsmall",
+         "height": "component-size/xsmall"
+        },
+        "hidden": true,
+        "propRefs": {
+         "visible": "↪️avatar"
+        },
+        "instanceOf": "Avatar",
+        "componentProperties": {
+         "isVisible": true,
+         "↪️notification": false,
+         "↪️indicator": false,
+         "round": "true",
+         "size": "2xsmall(16x16)",
+         "type": "image"
+        }
+       },
+       {
+        "name": "Text container",
+        "type": "FRAME",
+        "layout": {
+         "mode": "VERTICAL",
+         "primary": "MIN",
+         "counter": "MIN",
+         "spacing": 0,
+         "padding": [
+          0,
+          0,
+          0,
+          0
+         ],
+         "primarySizing": "AUTO",
+         "counterSizing": "FIXED"
+        },
+        "fillWidth": true,
+        "children": [
+         {
+          "name": "List item",
+          "type": "TEXT",
+          "fillWidth": true,
+          "text": {
+           "characters": "List item",
+           "fontSize": 16,
+           "fontStyle": "Regular",
+           "lineHeight": 24,
+           "style": "Body/Large",
+           "fillVar": "text/primary"
+          },
+          "fill": {
+           "var": "text/primary"
+          },
+          "propRefs": {
+           "characters": "✏️text"
+          }
+         },
+         {
+          "name": "subtext",
+          "type": "TEXT",
+          "hidden": true,
+          "text": {
+           "characters": "subtext",
+           "fontSize": 12,
+           "fontStyle": "Regular",
+           "lineHeight": 16,
+           "style": "Body/Small",
+           "fillVar": "text/tertiary"
+          },
+          "fill": {
+           "var": "text/tertiary"
+          },
+          "propRefs": {
+           "visible": "subtext",
+           "characters": "✏️text-subtext"
+          }
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "name": "Secondary text",
+      "type": "TEXT",
+      "hidden": true,
+      "text": {
+       "characters": "Secondary text",
+       "fontSize": 14,
+       "fontStyle": "Regular",
+       "lineHeight": 20,
+       "style": "Body/Medium",
+       "fillVar": "text/secondary"
+      },
+      "fill": {
+       "var": "text/secondary"
+      },
+      "propRefs": {
+       "visible": "secondary-text",
+       "characters": "✏️text-secondary"
+      }
+     },
+     {
+      "name": "Divider",
+      "type": "LINE",
+      "stroke": {
+       "var": "border/secondary"
+      },
+      "strokeWeight": 1,
+      "hidden": true,
+      "propRefs": {
+       "visible": "divider"
+      }
+     },
+     {
+      "name": "Icon",
+      "type": "INSTANCE",
+      "bound": {
+       "width": "icon-size/small",
+       "height": "icon-size/small"
+      },
+      "hidden": true,
+      "propRefs": {
+       "visible": "item-right",
+       "mainComponent": "↪️swap-item-right"
+      },
+      "instanceOf": "Icon",
+      "componentProperties": {
+       "size": "small"
+      }
+     },
+     {
+      "name": "Badge",
+      "type": "INSTANCE",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "CENTER",
+       "counter": "CENTER",
+       "spacing": 8,
+       "padding": [
+        8,
+        8,
+        8,
+        8
+       ],
+       "primarySizing": "AUTO",
+       "counterSizing": "FIXED"
+      },
+      "cornerRadius": 96,
+      "bound": {
+       "itemSpacing": "spacing/100",
+       "paddingLeft": "spacing/100",
+       "paddingTop": "spacing/100",
+       "paddingRight": "spacing/100",
+       "paddingBottom": "spacing/100",
+       "height": "component-size/xsmall",
+       "topLeftRadius": "corner-radius/1200",
+       "topRightRadius": "corner-radius/1200",
+       "bottomLeftRadius": "corner-radius/1200",
+       "bottomRightRadius": "corner-radius/1200"
+      },
+      "fill": {
+       "var": "bg/brand/default"
+      },
+      "hidden": true,
+      "propRefs": {
+       "visible": "↪️badge"
+      },
+      "instanceOf": "Badge",
+      "componentProperties": {
+       "✏️text": "Label",
+       "↪️icon-right": false,
+       "↪️icon-left": false,
+       "type": "brand",
+       "style": "fill",
+       "size": "small",
+       "rounded": "true"
+      }
+     }
+    ]
+   },
+   {
+    "name": "type=list-item, size=small, state=selected",
+    "type": "COMPONENT",
+    "layout": {
+     "mode": "HORIZONTAL",
+     "primary": "MIN",
+     "counter": "CENTER",
+     "spacing": 8,
+     "padding": [
+      4,
+      16,
+      4,
+      16
+     ],
+     "primarySizing": "FIXED",
+     "counterSizing": "AUTO"
+    },
+    "bound": {
+     "itemSpacing": "spacing/100",
+     "paddingLeft": "spacing/200",
+     "paddingTop": "spacing/050",
+     "paddingRight": "spacing/200",
+     "paddingBottom": "spacing/050"
+    },
+    "fill": {
+     "var": "bg/selected"
+    },
+    "children": [
+     {
+      "name": "Container",
+      "type": "FRAME",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "CENTER",
+       "spacing": 8,
+       "padding": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "AUTO"
+      },
+      "bound": {
+       "itemSpacing": "spacing/100"
+      },
+      "minHeight": 24,
+      "fillWidth": true,
+      "children": [
+       {
+        "name": "Icon",
+        "type": "INSTANCE",
+        "bound": {
+         "width": "icon-size/small",
+         "height": "icon-size/small"
+        },
+        "hidden": true,
+        "propRefs": {
+         "visible": "item-left",
+         "mainComponent": "↪️swap-item-left"
+        },
+        "instanceOf": "Icon",
+        "componentProperties": {
+         "size": "small"
+        }
+       },
+       {
+        "name": "Avatar",
+        "type": "INSTANCE",
+        "bound": {
+         "width": "component-size/xsmall",
+         "height": "component-size/xsmall"
+        },
+        "hidden": true,
+        "propRefs": {
+         "visible": "↪️avatar"
+        },
+        "instanceOf": "Avatar",
+        "componentProperties": {
+         "isVisible": true,
+         "↪️notification": false,
+         "↪️indicator": false,
+         "round": "true",
+         "size": "2xsmall(16x16)",
+         "type": "image"
+        }
+       },
+       {
+        "name": "Text container",
+        "type": "FRAME",
+        "layout": {
+         "mode": "VERTICAL",
+         "primary": "MIN",
+         "counter": "MIN",
+         "spacing": 0,
+         "padding": [
+          0,
+          0,
+          0,
+          0
+         ],
+         "primarySizing": "AUTO",
+         "counterSizing": "FIXED"
+        },
+        "fillWidth": true,
+        "children": [
+         {
+          "name": "List item",
+          "type": "TEXT",
+          "fillWidth": true,
+          "text": {
+           "characters": "List item",
+           "fontSize": 14,
+           "fontStyle": "Regular",
+           "lineHeight": 20,
+           "style": "Body/Medium",
+           "fillVar": "text/primary"
+          },
+          "fill": {
+           "var": "text/primary"
+          },
+          "propRefs": {
+           "characters": "✏️text"
+          }
+         },
+         {
+          "name": "subtext",
+          "type": "TEXT",
+          "hidden": true,
+          "text": {
+           "characters": "subtext",
+           "fontSize": 12,
+           "fontStyle": "Regular",
+           "lineHeight": 16,
+           "style": "Body/Small",
+           "fillVar": "text/tertiary"
+          },
+          "fill": {
+           "var": "text/tertiary"
+          },
+          "propRefs": {
+           "visible": "subtext",
+           "characters": "✏️text-subtext"
+          }
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "name": "Secondary text",
+      "type": "TEXT",
+      "hidden": true,
+      "text": {
+       "characters": "Secondary text",
+       "fontSize": 12,
+       "fontStyle": "Regular",
+       "lineHeight": 16,
+       "style": "Body/Small",
+       "fillVar": "text/secondary"
+      },
+      "fill": {
+       "var": "text/secondary"
+      },
+      "propRefs": {
+       "visible": "secondary-text",
+       "characters": "✏️text-secondary"
+      }
+     },
+     {
+      "name": "Divider",
+      "type": "LINE",
+      "stroke": {
+       "var": "border/secondary"
+      },
+      "strokeWeight": 1,
+      "hidden": true,
+      "propRefs": {
+       "visible": "divider"
+      }
+     },
+     {
+      "name": "Icon",
+      "type": "INSTANCE",
+      "bound": {
+       "width": "icon-size/small",
+       "height": "icon-size/small"
+      },
+      "hidden": true,
+      "propRefs": {
+       "visible": "item-right",
+       "mainComponent": "↪️swap-item-right"
+      },
+      "instanceOf": "Icon",
+      "componentProperties": {
+       "size": "small"
+      }
+     },
+     {
+      "name": "Badge",
+      "type": "INSTANCE",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "CENTER",
+       "counter": "CENTER",
+       "spacing": 8,
+       "padding": [
+        8,
+        8,
+        8,
+        8
+       ],
+       "primarySizing": "AUTO",
+       "counterSizing": "FIXED"
+      },
+      "cornerRadius": 96,
+      "bound": {
+       "itemSpacing": "spacing/100",
+       "paddingLeft": "spacing/100",
+       "paddingTop": "spacing/100",
+       "paddingRight": "spacing/100",
+       "paddingBottom": "spacing/100",
+       "height": "component-size/xsmall",
+       "topLeftRadius": "corner-radius/1200",
+       "topRightRadius": "corner-radius/1200",
+       "bottomLeftRadius": "corner-radius/1200",
+       "bottomRightRadius": "corner-radius/1200"
+      },
+      "fill": {
+       "var": "bg/brand/default"
+      },
+      "hidden": true,
+      "propRefs": {
+       "visible": "↪️badge"
+      },
+      "instanceOf": "Badge",
+      "componentProperties": {
+       "✏️text": "Label",
+       "↪️icon-right": false,
+       "↪️icon-left": false,
+       "type": "brand",
+       "style": "fill",
+       "size": "small",
+       "rounded": "true"
+      }
+     }
+    ]
+   },
+   {
+    "name": "type=list-item, size=medium, state=selected",
+    "type": "COMPONENT",
+    "layout": {
+     "mode": "HORIZONTAL",
+     "primary": "MIN",
+     "counter": "CENTER",
+     "spacing": 8,
+     "padding": [
+      8,
+      16,
+      8,
+      16
+     ],
+     "primarySizing": "FIXED",
+     "counterSizing": "AUTO"
+    },
+    "bound": {
+     "itemSpacing": "spacing/100",
+     "paddingLeft": "spacing/200",
+     "paddingTop": "spacing/100",
+     "paddingRight": "spacing/200",
+     "paddingBottom": "spacing/100"
+    },
+    "fill": {
+     "var": "bg/selected"
+    },
+    "children": [
+     {
+      "name": "Container",
+      "type": "FRAME",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "CENTER",
+       "spacing": 8,
+       "padding": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "AUTO"
+      },
+      "bound": {
+       "itemSpacing": "spacing/100"
+      },
+      "minHeight": 24,
+      "fillWidth": true,
+      "children": [
+       {
+        "name": "Icon",
+        "type": "INSTANCE",
+        "bound": {
+         "width": "icon-size/small",
+         "height": "icon-size/small"
+        },
+        "hidden": true,
+        "propRefs": {
+         "visible": "item-left",
+         "mainComponent": "↪️swap-item-left"
+        },
+        "instanceOf": "Icon",
+        "componentProperties": {
+         "size": "small"
+        }
+       },
+       {
+        "name": "Avatar",
+        "type": "INSTANCE",
+        "bound": {
+         "width": "component-size/xsmall",
+         "height": "component-size/xsmall"
+        },
+        "hidden": true,
+        "propRefs": {
+         "visible": "↪️avatar"
+        },
+        "instanceOf": "Avatar",
+        "componentProperties": {
+         "isVisible": true,
+         "↪️notification": false,
+         "↪️indicator": false,
+         "round": "true",
+         "size": "2xsmall(16x16)",
+         "type": "image"
+        }
+       },
+       {
+        "name": "Text container",
+        "type": "FRAME",
+        "layout": {
+         "mode": "VERTICAL",
+         "primary": "MIN",
+         "counter": "MIN",
+         "spacing": 0,
+         "padding": [
+          0,
+          0,
+          0,
+          0
+         ],
+         "primarySizing": "AUTO",
+         "counterSizing": "FIXED"
+        },
+        "fillWidth": true,
+        "children": [
+         {
+          "name": "List item",
+          "type": "TEXT",
+          "fillWidth": true,
+          "text": {
+           "characters": "List item",
+           "fontSize": 16,
+           "fontStyle": "Regular",
+           "lineHeight": 24,
+           "style": "Body/Large",
+           "fillVar": "text/primary"
+          },
+          "fill": {
+           "var": "text/primary"
+          },
+          "propRefs": {
+           "characters": "✏️text"
+          }
+         },
+         {
+          "name": "subtext",
+          "type": "TEXT",
+          "hidden": true,
+          "text": {
+           "characters": "subtext",
+           "fontSize": 12,
+           "fontStyle": "Regular",
+           "lineHeight": 16,
+           "style": "Body/Small",
+           "fillVar": "text/tertiary"
+          },
+          "fill": {
+           "var": "text/tertiary"
+          },
+          "propRefs": {
+           "visible": "subtext",
+           "characters": "✏️text-subtext"
+          }
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "name": "Secondary text",
+      "type": "TEXT",
+      "hidden": true,
+      "text": {
+       "characters": "Secondary text",
+       "fontSize": 14,
+       "fontStyle": "Regular",
+       "lineHeight": 20,
+       "style": "Body/Medium",
+       "fillVar": "text/secondary"
+      },
+      "fill": {
+       "var": "text/secondary"
+      },
+      "propRefs": {
+       "visible": "secondary-text",
+       "characters": "✏️text-secondary"
+      }
+     },
+     {
+      "name": "Divider",
+      "type": "LINE",
+      "stroke": {
+       "var": "border/secondary"
+      },
+      "strokeWeight": 1,
+      "hidden": true,
+      "propRefs": {
+       "visible": "divider"
+      }
+     },
+     {
+      "name": "Icon",
+      "type": "INSTANCE",
+      "bound": {
+       "width": "icon-size/small",
+       "height": "icon-size/small"
+      },
+      "hidden": true,
+      "propRefs": {
+       "visible": "item-right",
+       "mainComponent": "↪️swap-item-right"
+      },
+      "instanceOf": "Icon",
+      "componentProperties": {
+       "size": "small"
+      }
+     },
+     {
+      "name": "Badge",
+      "type": "INSTANCE",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "CENTER",
+       "counter": "CENTER",
+       "spacing": 8,
+       "padding": [
+        8,
+        8,
+        8,
+        8
+       ],
+       "primarySizing": "AUTO",
+       "counterSizing": "FIXED"
+      },
+      "cornerRadius": 96,
+      "bound": {
+       "itemSpacing": "spacing/100",
+       "paddingLeft": "spacing/100",
+       "paddingTop": "spacing/100",
+       "paddingRight": "spacing/100",
+       "paddingBottom": "spacing/100",
+       "height": "component-size/xsmall",
+       "topLeftRadius": "corner-radius/1200",
+       "topRightRadius": "corner-radius/1200",
+       "bottomLeftRadius": "corner-radius/1200",
+       "bottomRightRadius": "corner-radius/1200"
+      },
+      "fill": {
+       "var": "bg/brand/default"
+      },
+      "hidden": true,
+      "propRefs": {
+       "visible": "↪️badge"
+      },
+      "instanceOf": "Badge",
+      "componentProperties": {
+       "✏️text": "Label",
+       "↪️icon-right": false,
+       "↪️icon-left": false,
+       "type": "brand",
+       "style": "fill",
+       "size": "small",
+       "rounded": "true"
+      }
+     }
+    ]
+   },
+   {
+    "name": "type=list-item, size=large, state=selected",
+    "type": "COMPONENT",
+    "layout": {
+     "mode": "HORIZONTAL",
+     "primary": "MIN",
+     "counter": "CENTER",
+     "spacing": 8,
+     "padding": [
+      12,
+      16,
+      12,
+      16
+     ],
+     "primarySizing": "FIXED",
+     "counterSizing": "AUTO"
+    },
+    "bound": {
+     "itemSpacing": "spacing/100",
+     "paddingLeft": "spacing/200",
+     "paddingTop": "spacing/150",
+     "paddingRight": "spacing/200",
+     "paddingBottom": "spacing/150"
+    },
+    "fill": {
+     "var": "bg/selected"
+    },
+    "children": [
+     {
+      "name": "Container",
+      "type": "FRAME",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "CENTER",
+       "spacing": 8,
+       "padding": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "AUTO"
+      },
+      "bound": {
+       "itemSpacing": "spacing/100"
+      },
+      "minHeight": 24,
+      "fillWidth": true,
+      "children": [
+       {
+        "name": "Icon",
+        "type": "INSTANCE",
+        "bound": {
+         "width": "icon-size/small",
+         "height": "icon-size/small"
+        },
+        "hidden": true,
+        "propRefs": {
+         "visible": "item-left",
+         "mainComponent": "↪️swap-item-left"
+        },
+        "instanceOf": "Icon",
+        "componentProperties": {
+         "size": "small"
+        }
+       },
+       {
+        "name": "Avatar",
+        "type": "INSTANCE",
+        "bound": {
+         "width": "component-size/xsmall",
+         "height": "component-size/xsmall"
+        },
+        "hidden": true,
+        "propRefs": {
+         "visible": "↪️avatar"
+        },
+        "instanceOf": "Avatar",
+        "componentProperties": {
+         "isVisible": true,
+         "↪️notification": false,
+         "↪️indicator": false,
+         "round": "true",
+         "size": "2xsmall(16x16)",
+         "type": "image"
+        }
+       },
+       {
+        "name": "Text container",
+        "type": "FRAME",
+        "layout": {
+         "mode": "VERTICAL",
+         "primary": "MIN",
+         "counter": "MIN",
+         "spacing": 0,
+         "padding": [
+          0,
+          0,
+          0,
+          0
+         ],
+         "primarySizing": "AUTO",
+         "counterSizing": "FIXED"
+        },
+        "fillWidth": true,
+        "children": [
+         {
+          "name": "List item",
+          "type": "TEXT",
+          "fillWidth": true,
+          "text": {
+           "characters": "List item",
+           "fontSize": 16,
+           "fontStyle": "Regular",
+           "lineHeight": 24,
+           "style": "Body/Large",
+           "fillVar": "text/primary"
+          },
+          "fill": {
+           "var": "text/primary"
+          },
+          "propRefs": {
+           "characters": "✏️text"
+          }
+         },
+         {
+          "name": "subtext",
+          "type": "TEXT",
+          "hidden": true,
+          "text": {
+           "characters": "subtext",
+           "fontSize": 12,
+           "fontStyle": "Regular",
+           "lineHeight": 16,
+           "style": "Body/Small",
+           "fillVar": "text/tertiary"
+          },
+          "fill": {
+           "var": "text/tertiary"
+          },
+          "propRefs": {
+           "visible": "subtext",
+           "characters": "✏️text-subtext"
+          }
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "name": "Secondary text",
+      "type": "TEXT",
+      "hidden": true,
+      "text": {
+       "characters": "Secondary text",
+       "fontSize": 14,
+       "fontStyle": "Regular",
+       "lineHeight": 20,
+       "style": "Body/Medium",
+       "fillVar": "text/secondary"
+      },
+      "fill": {
+       "var": "text/secondary"
+      },
+      "propRefs": {
+       "visible": "secondary-text",
+       "characters": "✏️text-secondary"
+      }
+     },
+     {
+      "name": "Divider",
+      "type": "LINE",
+      "stroke": {
+       "var": "border/secondary"
+      },
+      "strokeWeight": 1,
+      "hidden": true,
+      "propRefs": {
+       "visible": "divider"
+      }
+     },
+     {
+      "name": "Icon",
+      "type": "INSTANCE",
+      "bound": {
+       "width": "icon-size/small",
+       "height": "icon-size/small"
+      },
+      "hidden": true,
+      "propRefs": {
+       "visible": "item-right",
+       "mainComponent": "↪️swap-item-right"
+      },
+      "instanceOf": "Icon",
+      "componentProperties": {
+       "size": "small"
+      }
+     },
+     {
+      "name": "Badge",
+      "type": "INSTANCE",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "CENTER",
+       "counter": "CENTER",
+       "spacing": 8,
+       "padding": [
+        8,
+        8,
+        8,
+        8
+       ],
+       "primarySizing": "AUTO",
+       "counterSizing": "FIXED"
+      },
+      "cornerRadius": 96,
+      "bound": {
+       "itemSpacing": "spacing/100",
+       "paddingLeft": "spacing/100",
+       "paddingTop": "spacing/100",
+       "paddingRight": "spacing/100",
+       "paddingBottom": "spacing/100",
+       "height": "component-size/xsmall",
+       "topLeftRadius": "corner-radius/1200",
+       "topRightRadius": "corner-radius/1200",
+       "bottomLeftRadius": "corner-radius/1200",
+       "bottomRightRadius": "corner-radius/1200"
+      },
+      "fill": {
+       "var": "bg/brand/default"
+      },
+      "hidden": true,
+      "propRefs": {
+       "visible": "↪️badge"
+      },
+      "instanceOf": "Badge",
+      "componentProperties": {
+       "✏️text": "Label",
+       "↪️icon-right": false,
+       "↪️icon-left": false,
+       "type": "brand",
+       "style": "fill",
+       "size": "small",
+       "rounded": "true"
+      }
+     }
+    ]
+   },
+   {
+    "name": "type=list-item, size=small, state=disabled",
+    "type": "COMPONENT",
+    "layout": {
+     "mode": "HORIZONTAL",
+     "primary": "MIN",
+     "counter": "CENTER",
+     "spacing": 8,
+     "padding": [
+      4,
+      16,
+      4,
+      16
+     ],
+     "primarySizing": "FIXED",
+     "counterSizing": "AUTO"
+    },
+    "bound": {
+     "itemSpacing": "spacing/100",
+     "paddingLeft": "spacing/200",
+     "paddingTop": "spacing/050",
+     "paddingRight": "spacing/200",
+     "paddingBottom": "spacing/050"
+    },
+    "fill": {
+     "var": "bg/disabled"
+    },
+    "children": [
+     {
+      "name": "Container",
+      "type": "FRAME",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "CENTER",
+       "spacing": 8,
+       "padding": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "AUTO"
+      },
+      "bound": {
+       "itemSpacing": "spacing/100"
+      },
+      "minHeight": 24,
+      "fillWidth": true,
+      "children": [
+       {
+        "name": "Icon",
+        "type": "INSTANCE",
+        "bound": {
+         "width": "icon-size/small",
+         "height": "icon-size/small"
+        },
+        "hidden": true,
+        "propRefs": {
+         "visible": "item-left",
+         "mainComponent": "↪️swap-item-left"
+        },
+        "instanceOf": "Icon",
+        "componentProperties": {
+         "size": "small"
+        }
+       },
+       {
+        "name": "Avatar",
+        "type": "INSTANCE",
+        "bound": {
+         "width": "component-size/xsmall",
+         "height": "component-size/xsmall"
+        },
+        "hidden": true,
+        "propRefs": {
+         "visible": "↪️avatar"
+        },
+        "instanceOf": "Avatar",
+        "componentProperties": {
+         "isVisible": true,
+         "↪️notification": false,
+         "↪️indicator": false,
+         "round": "true",
+         "size": "2xsmall(16x16)",
+         "type": "image"
+        }
+       },
+       {
+        "name": "Text container",
+        "type": "FRAME",
+        "layout": {
+         "mode": "VERTICAL",
+         "primary": "MIN",
+         "counter": "MIN",
+         "spacing": 0,
+         "padding": [
+          0,
+          0,
+          0,
+          0
+         ],
+         "primarySizing": "AUTO",
+         "counterSizing": "FIXED"
+        },
+        "fillWidth": true,
+        "children": [
+         {
+          "name": "List item",
+          "type": "TEXT",
+          "fillWidth": true,
+          "text": {
+           "characters": "List item",
+           "fontSize": 14,
+           "fontStyle": "Regular",
+           "lineHeight": 20,
+           "style": "Body/Medium",
+           "fillVar": "text/disabled"
+          },
+          "fill": {
+           "var": "text/disabled"
+          },
+          "propRefs": {
+           "characters": "✏️text"
+          }
+         },
+         {
+          "name": "subtext",
+          "type": "TEXT",
+          "hidden": true,
+          "text": {
+           "characters": "subtext",
+           "fontSize": 12,
+           "fontStyle": "Regular",
+           "lineHeight": 16,
+           "style": "Body/Small",
+           "fillVar": "text/tertiary"
+          },
+          "fill": {
+           "var": "text/tertiary"
+          },
+          "propRefs": {
+           "visible": "subtext",
+           "characters": "✏️text-subtext"
+          }
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "name": "Secondary text",
+      "type": "TEXT",
+      "hidden": true,
+      "text": {
+       "characters": "Secondary text",
+       "fontSize": 12,
+       "fontStyle": "Regular",
+       "lineHeight": 16,
+       "style": "Body/Small",
+       "fillVar": "text/secondary"
+      },
+      "fill": {
+       "var": "text/secondary"
+      },
+      "propRefs": {
+       "visible": "secondary-text",
+       "characters": "✏️text-secondary"
+      }
+     },
+     {
+      "name": "Divider",
+      "type": "LINE",
+      "stroke": {
+       "var": "border/secondary"
+      },
+      "strokeWeight": 1,
+      "hidden": true,
+      "propRefs": {
+       "visible": "divider"
+      }
+     },
+     {
+      "name": "Icon",
+      "type": "INSTANCE",
+      "bound": {
+       "width": "icon-size/small",
+       "height": "icon-size/small"
+      },
+      "hidden": true,
+      "propRefs": {
+       "visible": "item-right",
+       "mainComponent": "↪️swap-item-right"
+      },
+      "instanceOf": "Icon",
+      "componentProperties": {
+       "size": "small"
+      }
+     },
+     {
+      "name": "Badge",
+      "type": "INSTANCE",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "CENTER",
+       "counter": "CENTER",
+       "spacing": 8,
+       "padding": [
+        8,
+        8,
+        8,
+        8
+       ],
+       "primarySizing": "AUTO",
+       "counterSizing": "FIXED"
+      },
+      "cornerRadius": 96,
+      "bound": {
+       "itemSpacing": "spacing/100",
+       "paddingLeft": "spacing/100",
+       "paddingTop": "spacing/100",
+       "paddingRight": "spacing/100",
+       "paddingBottom": "spacing/100",
+       "height": "component-size/xsmall",
+       "topLeftRadius": "corner-radius/1200",
+       "topRightRadius": "corner-radius/1200",
+       "bottomLeftRadius": "corner-radius/1200",
+       "bottomRightRadius": "corner-radius/1200"
+      },
+      "fill": {
+       "var": "bg/brand/default"
+      },
+      "hidden": true,
+      "propRefs": {
+       "visible": "↪️badge"
+      },
+      "instanceOf": "Badge",
+      "componentProperties": {
+       "✏️text": "Label",
+       "↪️icon-right": false,
+       "↪️icon-left": false,
+       "type": "brand",
+       "style": "fill",
+       "size": "small",
+       "rounded": "true"
+      }
+     }
+    ]
+   },
+   {
+    "name": "type=list-item, size=medium, state=disabled",
+    "type": "COMPONENT",
+    "layout": {
+     "mode": "HORIZONTAL",
+     "primary": "MIN",
+     "counter": "CENTER",
+     "spacing": 8,
+     "padding": [
+      8,
+      16,
+      8,
+      16
+     ],
+     "primarySizing": "FIXED",
+     "counterSizing": "AUTO"
+    },
+    "bound": {
+     "itemSpacing": "spacing/100",
+     "paddingLeft": "spacing/200",
+     "paddingTop": "spacing/100",
+     "paddingRight": "spacing/200",
+     "paddingBottom": "spacing/100"
+    },
+    "fill": {
+     "var": "bg/disabled"
+    },
+    "children": [
+     {
+      "name": "Container",
+      "type": "FRAME",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "CENTER",
+       "spacing": 8,
+       "padding": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "AUTO"
+      },
+      "bound": {
+       "itemSpacing": "spacing/100"
+      },
+      "minHeight": 24,
+      "fillWidth": true,
+      "children": [
+       {
+        "name": "Icon",
+        "type": "INSTANCE",
+        "bound": {
+         "width": "icon-size/small",
+         "height": "icon-size/small"
+        },
+        "hidden": true,
+        "propRefs": {
+         "visible": "item-left",
+         "mainComponent": "↪️swap-item-left"
+        },
+        "instanceOf": "Icon",
+        "componentProperties": {
+         "size": "small"
+        }
+       },
+       {
+        "name": "Avatar",
+        "type": "INSTANCE",
+        "bound": {
+         "width": "component-size/xsmall",
+         "height": "component-size/xsmall"
+        },
+        "hidden": true,
+        "propRefs": {
+         "visible": "↪️avatar"
+        },
+        "instanceOf": "Avatar",
+        "componentProperties": {
+         "isVisible": true,
+         "↪️notification": false,
+         "↪️indicator": false,
+         "round": "true",
+         "size": "2xsmall(16x16)",
+         "type": "image"
+        }
+       },
+       {
+        "name": "Text container",
+        "type": "FRAME",
+        "layout": {
+         "mode": "VERTICAL",
+         "primary": "MIN",
+         "counter": "MIN",
+         "spacing": 0,
+         "padding": [
+          0,
+          0,
+          0,
+          0
+         ],
+         "primarySizing": "AUTO",
+         "counterSizing": "FIXED"
+        },
+        "fillWidth": true,
+        "children": [
+         {
+          "name": "List item",
+          "type": "TEXT",
+          "fillWidth": true,
+          "text": {
+           "characters": "List item",
+           "fontSize": 16,
+           "fontStyle": "Regular",
+           "lineHeight": 24,
+           "style": "Body/Large",
+           "fillVar": "text/disabled"
+          },
+          "fill": {
+           "var": "text/disabled"
+          },
+          "propRefs": {
+           "characters": "✏️text"
+          }
+         },
+         {
+          "name": "subtext",
+          "type": "TEXT",
+          "hidden": true,
+          "text": {
+           "characters": "subtext",
+           "fontSize": 12,
+           "fontStyle": "Regular",
+           "lineHeight": 16,
+           "style": "Body/Small",
+           "fillVar": "text/tertiary"
+          },
+          "fill": {
+           "var": "text/tertiary"
+          },
+          "propRefs": {
+           "visible": "subtext",
+           "characters": "✏️text-subtext"
+          }
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "name": "Secondary text",
+      "type": "TEXT",
+      "hidden": true,
+      "text": {
+       "characters": "Secondary text",
+       "fontSize": 14,
+       "fontStyle": "Regular",
+       "lineHeight": 20,
+       "style": "Body/Medium",
+       "fillVar": "text/secondary"
+      },
+      "fill": {
+       "var": "text/secondary"
+      },
+      "propRefs": {
+       "visible": "secondary-text",
+       "characters": "✏️text-secondary"
+      }
+     },
+     {
+      "name": "Divider",
+      "type": "LINE",
+      "stroke": {
+       "var": "border/secondary"
+      },
+      "strokeWeight": 1,
+      "hidden": true,
+      "propRefs": {
+       "visible": "divider"
+      }
+     },
+     {
+      "name": "Icon",
+      "type": "INSTANCE",
+      "bound": {
+       "width": "icon-size/small",
+       "height": "icon-size/small"
+      },
+      "hidden": true,
+      "propRefs": {
+       "visible": "item-right",
+       "mainComponent": "↪️swap-item-right"
+      },
+      "instanceOf": "Icon",
+      "componentProperties": {
+       "size": "small"
+      }
+     },
+     {
+      "name": "Badge",
+      "type": "INSTANCE",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "CENTER",
+       "counter": "CENTER",
+       "spacing": 8,
+       "padding": [
+        8,
+        8,
+        8,
+        8
+       ],
+       "primarySizing": "AUTO",
+       "counterSizing": "FIXED"
+      },
+      "cornerRadius": 96,
+      "bound": {
+       "itemSpacing": "spacing/100",
+       "paddingLeft": "spacing/100",
+       "paddingTop": "spacing/100",
+       "paddingRight": "spacing/100",
+       "paddingBottom": "spacing/100",
+       "height": "component-size/xsmall",
+       "topLeftRadius": "corner-radius/1200",
+       "topRightRadius": "corner-radius/1200",
+       "bottomLeftRadius": "corner-radius/1200",
+       "bottomRightRadius": "corner-radius/1200"
+      },
+      "fill": {
+       "var": "bg/brand/default"
+      },
+      "hidden": true,
+      "propRefs": {
+       "visible": "↪️badge"
+      },
+      "instanceOf": "Badge",
+      "componentProperties": {
+       "✏️text": "Label",
+       "↪️icon-right": false,
+       "↪️icon-left": false,
+       "type": "brand",
+       "style": "fill",
+       "size": "small",
+       "rounded": "true"
+      }
+     }
+    ]
+   },
+   {
+    "name": "type=list-item, size=large, state=disabled",
+    "type": "COMPONENT",
+    "layout": {
+     "mode": "HORIZONTAL",
+     "primary": "MIN",
+     "counter": "CENTER",
+     "spacing": 8,
+     "padding": [
+      12,
+      16,
+      12,
+      16
+     ],
+     "primarySizing": "FIXED",
+     "counterSizing": "AUTO"
+    },
+    "bound": {
+     "itemSpacing": "spacing/100",
+     "paddingLeft": "spacing/200",
+     "paddingTop": "spacing/150",
+     "paddingRight": "spacing/200",
+     "paddingBottom": "spacing/150"
+    },
+    "fill": {
+     "var": "bg/disabled"
+    },
+    "children": [
+     {
+      "name": "Container",
+      "type": "FRAME",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "CENTER",
+       "spacing": 8,
+       "padding": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "AUTO"
+      },
+      "bound": {
+       "itemSpacing": "spacing/100"
+      },
+      "minHeight": 24,
+      "fillWidth": true,
+      "children": [
+       {
+        "name": "Icon",
+        "type": "INSTANCE",
+        "bound": {
+         "width": "icon-size/small",
+         "height": "icon-size/small"
+        },
+        "hidden": true,
+        "propRefs": {
+         "visible": "item-left",
+         "mainComponent": "↪️swap-item-left"
+        },
+        "instanceOf": "Icon",
+        "componentProperties": {
+         "size": "small"
+        }
+       },
+       {
+        "name": "Avatar",
+        "type": "INSTANCE",
+        "bound": {
+         "width": "component-size/xsmall",
+         "height": "component-size/xsmall"
+        },
+        "hidden": true,
+        "propRefs": {
+         "visible": "↪️avatar"
+        },
+        "instanceOf": "Avatar",
+        "componentProperties": {
+         "isVisible": true,
+         "↪️notification": false,
+         "↪️indicator": false,
+         "round": "true",
+         "size": "2xsmall(16x16)",
+         "type": "image"
+        }
+       },
+       {
+        "name": "Text container",
+        "type": "FRAME",
+        "layout": {
+         "mode": "VERTICAL",
+         "primary": "MIN",
+         "counter": "MIN",
+         "spacing": 0,
+         "padding": [
+          0,
+          0,
+          0,
+          0
+         ],
+         "primarySizing": "AUTO",
+         "counterSizing": "FIXED"
+        },
+        "fillWidth": true,
+        "children": [
+         {
+          "name": "List item",
+          "type": "TEXT",
+          "fillWidth": true,
+          "text": {
+           "characters": "List item",
+           "fontSize": 16,
+           "fontStyle": "Regular",
+           "lineHeight": 24,
+           "style": "Body/Large",
+           "fillVar": "text/disabled"
+          },
+          "fill": {
+           "var": "text/disabled"
+          },
+          "propRefs": {
+           "characters": "✏️text"
+          }
+         },
+         {
+          "name": "subtext",
+          "type": "TEXT",
+          "hidden": true,
+          "text": {
+           "characters": "subtext",
+           "fontSize": 12,
+           "fontStyle": "Regular",
+           "lineHeight": 16,
+           "style": "Body/Small",
+           "fillVar": "text/tertiary"
+          },
+          "fill": {
+           "var": "text/tertiary"
+          },
+          "propRefs": {
+           "visible": "subtext",
+           "characters": "✏️text-subtext"
+          }
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "name": "Secondary text",
+      "type": "TEXT",
+      "hidden": true,
+      "text": {
+       "characters": "Secondary text",
+       "fontSize": 14,
+       "fontStyle": "Regular",
+       "lineHeight": 20,
+       "style": "Body/Medium",
+       "fillVar": "text/secondary"
+      },
+      "fill": {
+       "var": "text/secondary"
+      },
+      "propRefs": {
+       "visible": "secondary-text",
+       "characters": "✏️text-secondary"
+      }
+     },
+     {
+      "name": "Divider",
+      "type": "LINE",
+      "stroke": {
+       "var": "border/secondary"
+      },
+      "strokeWeight": 1,
+      "hidden": true,
+      "propRefs": {
+       "visible": "divider"
+      }
+     },
+     {
+      "name": "Icon",
+      "type": "INSTANCE",
+      "bound": {
+       "width": "icon-size/small",
+       "height": "icon-size/small"
+      },
+      "hidden": true,
+      "propRefs": {
+       "visible": "item-right",
+       "mainComponent": "↪️swap-item-right"
+      },
+      "instanceOf": "Icon",
+      "componentProperties": {
+       "size": "small"
+      }
+     },
+     {
+      "name": "Badge",
+      "type": "INSTANCE",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "CENTER",
+       "counter": "CENTER",
+       "spacing": 8,
+       "padding": [
+        8,
+        8,
+        8,
+        8
+       ],
+       "primarySizing": "AUTO",
+       "counterSizing": "FIXED"
+      },
+      "cornerRadius": 96,
+      "bound": {
+       "itemSpacing": "spacing/100",
+       "paddingLeft": "spacing/100",
+       "paddingTop": "spacing/100",
+       "paddingRight": "spacing/100",
+       "paddingBottom": "spacing/100",
+       "height": "component-size/xsmall",
+       "topLeftRadius": "corner-radius/1200",
+       "topRightRadius": "corner-radius/1200",
+       "bottomLeftRadius": "corner-radius/1200",
+       "bottomRightRadius": "corner-radius/1200"
+      },
+      "fill": {
+       "var": "bg/brand/default"
+      },
+      "hidden": true,
+      "propRefs": {
+       "visible": "↪️badge"
+      },
+      "instanceOf": "Badge",
+      "componentProperties": {
+       "✏️text": "Label",
+       "↪️icon-right": false,
+       "↪️icon-left": false,
+       "type": "brand",
+       "style": "fill",
+       "size": "small",
+       "rounded": "true"
+      }
+     }
+    ]
+   },
+   {
+    "name": "type=divider, size=small, state=default",
+    "type": "COMPONENT",
+    "layout": {
+     "mode": "VERTICAL",
+     "primary": "MIN",
+     "counter": "MIN",
+     "spacing": 8,
+     "padding": [
+      8,
+      16,
+      8,
+      16
+     ],
+     "primarySizing": "AUTO",
+     "counterSizing": "FIXED"
+    },
+    "bound": {
+     "paddingLeft": "spacing/200",
+     "paddingTop": "spacing/100",
+     "paddingRight": "spacing/200",
+     "paddingBottom": "spacing/100"
+    },
+    "fill": {
+     "var": "bg/surface-primary"
+    },
+    "children": [
+     {
+      "name": "Divider",
+      "type": "LINE",
+      "stroke": {
+       "var": "border/secondary"
+      },
+      "strokeWeight": 1,
+      "fillWidth": true
+     }
+    ]
+   },
+   {
+    "name": "type=button, size=small, state=default",
+    "type": "COMPONENT",
+    "layout": {
+     "mode": "VERTICAL",
+     "primary": "MIN",
+     "counter": "MIN",
+     "spacing": 0,
+     "padding": [
+      8,
+      16,
+      8,
+      16
+     ],
+     "primarySizing": "AUTO",
+     "counterSizing": "FIXED"
+    },
+    "bound": {
+     "paddingLeft": "spacing/200",
+     "paddingTop": "spacing/100",
+     "paddingRight": "spacing/200",
+     "paddingBottom": "spacing/100"
+    },
+    "fill": {
+     "var": "bg/surface-primary"
+    },
+    "children": [
+     {
+      "name": "Button-Brand Primary",
+      "type": "INSTANCE",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "CENTER",
+       "counter": "CENTER",
+       "spacing": 8,
+       "padding": [
+        8,
+        12,
+        8,
+        12
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "FIXED"
+      },
+      "cornerRadius": 8,
+      "bound": {
+       "itemSpacing": "spacing/100",
+       "paddingLeft": "spacing/150",
+       "paddingTop": "spacing/100",
+       "paddingRight": "spacing/150",
+       "paddingBottom": "spacing/100",
+       "height": "component-size/medium",
+       "topLeftRadius": "corner-radius/100",
+       "topRightRadius": "corner-radius/100",
+       "bottomLeftRadius": "corner-radius/100",
+       "bottomRightRadius": "corner-radius/100"
+      },
+      "fill": {
+       "var": "bg/brand/default"
+      },
+      "minHeight": 44,
+      "fillWidth": true,
+      "instanceOf": "Button-Brand Primary",
+      "componentProperties": {
+       "✏️text": "Button",
+       "↪️icon-right": false,
+       "↪️icon-left": false,
+       "size": "small",
+       "state": "default"
+      }
+     }
+    ]
+   },
+   {
+    "name": "type=button-group, size=small, state=default",
+    "type": "COMPONENT",
+    "layout": {
+     "mode": "HORIZONTAL",
+     "primary": "MIN",
+     "counter": "MIN",
+     "spacing": 8,
+     "padding": [
+      8,
+      16,
+      8,
+      16
+     ],
+     "primarySizing": "FIXED",
+     "counterSizing": "AUTO"
+    },
+    "bound": {
+     "itemSpacing": "spacing/100",
+     "paddingLeft": "spacing/200",
+     "paddingTop": "spacing/100",
+     "paddingRight": "spacing/200",
+     "paddingBottom": "spacing/100"
+    },
+    "fill": {
+     "var": "bg/surface-primary"
+    },
+    "children": [
+     {
+      "name": "Button-Brand Secondary",
+      "type": "INSTANCE",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "CENTER",
+       "counter": "CENTER",
+       "spacing": 8,
+       "padding": [
+        8,
+        12,
+        8,
+        12
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "FIXED"
+      },
+      "cornerRadius": 8,
+      "bound": {
+       "itemSpacing": "spacing/100",
+       "paddingLeft": "spacing/150",
+       "paddingTop": "spacing/100",
+       "paddingRight": "spacing/150",
+       "paddingBottom": "spacing/100",
+       "height": "component-size/medium",
+       "topLeftRadius": "corner-radius/100",
+       "topRightRadius": "corner-radius/100",
+       "bottomLeftRadius": "corner-radius/100",
+       "bottomRightRadius": "corner-radius/100"
+      },
+      "fill": {
+       "var": "bg/surface-primary"
+      },
+      "stroke": {
+       "var": "border/brand/default"
+      },
+      "strokeWeight": 1,
+      "fillWidth": true,
+      "instanceOf": "Button-Brand Secondary",
+      "componentProperties": {
+       "✏️text": "Button",
+       "↪️icon-right": false,
+       "↪️icon-left": false,
+       "size": "small",
+       "state": "default"
+      }
+     },
+     {
+      "name": "Button-Brand Primary",
+      "type": "INSTANCE",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "CENTER",
+       "counter": "CENTER",
+       "spacing": 8,
+       "padding": [
+        8,
+        12,
+        8,
+        12
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "FIXED"
+      },
+      "cornerRadius": 8,
+      "bound": {
+       "itemSpacing": "spacing/100",
+       "paddingLeft": "spacing/150",
+       "paddingTop": "spacing/100",
+       "paddingRight": "spacing/150",
+       "paddingBottom": "spacing/100",
+       "height": "component-size/medium",
+       "topLeftRadius": "corner-radius/100",
+       "topRightRadius": "corner-radius/100",
+       "bottomLeftRadius": "corner-radius/100",
+       "bottomRightRadius": "corner-radius/100"
+      },
+      "fill": {
+       "var": "bg/brand/default"
+      },
+      "minHeight": 44,
+      "fillWidth": true,
+      "instanceOf": "Button-Brand Primary",
+      "componentProperties": {
+       "✏️text": "Button",
+       "↪️icon-right": false,
+       "↪️icon-left": false,
+       "size": "small",
+       "state": "default"
+      }
+     }
+    ]
+   },
+   {
+    "name": "type=search, size=small, state=default",
+    "type": "COMPONENT",
+    "layout": {
+     "mode": "VERTICAL",
+     "primary": "MIN",
+     "counter": "MIN",
+     "spacing": 0,
+     "padding": [
+      8,
+      16,
+      8,
+      16
+     ],
+     "primarySizing": "AUTO",
+     "counterSizing": "FIXED"
+    },
+    "bound": {
+     "paddingLeft": "spacing/200",
+     "paddingTop": "spacing/100",
+     "paddingRight": "spacing/200",
+     "paddingBottom": "spacing/100"
+    },
+    "fill": {
+     "var": "bg/surface-primary"
+    },
+    "children": [
+     {
+      "name": "Input Text",
+      "type": "INSTANCE",
+      "layout": {
+       "mode": "VERTICAL",
+       "primary": "MIN",
+       "counter": "MIN",
+       "spacing": 4,
+       "padding": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "primarySizing": "AUTO",
+       "counterSizing": "FIXED"
+      },
+      "bound": {
+       "itemSpacing": "spacing/050"
+      },
+      "fillWidth": true,
+      "instanceOf": "Input Text",
+      "componentProperties": {
+       "✏️text-input": "Input text",
+       "✏️text-placeholder": "Search",
+       "error-text": true,
+       "icon-error": true,
+       "placeholder": true,
+       "↪️input-label": false,
+       "↪️icon-right": false,
+       "helper-text": false,
+       "↪️icon-left": true,
+       "size": "small",
+       "state": "default"
+      }
+     }
+    ]
+   },
+   {
+    "name": "type=search, size=large, state=default",
+    "type": "COMPONENT",
+    "layout": {
+     "mode": "VERTICAL",
+     "primary": "MIN",
+     "counter": "MIN",
+     "spacing": 0,
+     "padding": [
+      8,
+      16,
+      8,
+      16
+     ],
+     "primarySizing": "AUTO",
+     "counterSizing": "FIXED"
+    },
+    "bound": {
+     "paddingLeft": "spacing/200",
+     "paddingTop": "spacing/100",
+     "paddingRight": "spacing/200",
+     "paddingBottom": "spacing/100"
+    },
+    "fill": {
+     "var": "bg/surface-primary"
+    },
+    "children": [
+     {
+      "name": "Input Text",
+      "type": "INSTANCE",
+      "layout": {
+       "mode": "VERTICAL",
+       "primary": "MIN",
+       "counter": "MIN",
+       "spacing": 4,
+       "padding": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "primarySizing": "AUTO",
+       "counterSizing": "FIXED"
+      },
+      "bound": {
+       "itemSpacing": "spacing/050"
+      },
+      "fillWidth": true,
+      "instanceOf": "Input Text",
+      "componentProperties": {
+       "✏️text-input": "Input text",
+       "✏️text-placeholder": "Search",
+       "icon-error": true,
+       "placeholder": true,
+       "↪️input-label": false,
+       "error-text": true,
+       "↪️icon-right": false,
+       "helper-text": false,
+       "↪️icon-left": true,
+       "size": "large",
+       "state": "default"
+      }
+     }
+    ]
+   }
+  ]
+ }
+}

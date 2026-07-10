@@ -1,0 +1,854 @@
+{
+ "_provenance": {
+  "fileKey": "WofZT8xaxXuc2Q6Je9S4XE",
+  "extractedAt": "2026-07-10",
+  "note": "Single-set gauntlet fixture for class \"component-ref-unknown-child-prop\" — extracted from cbds-plugin-all-sets.v14.dump.json by extract/figma/gauntlet/census.ts."
+ },
+ "_degradations": [],
+ "_variables": {
+  "spacing/050": {
+   "type": "FLOAT",
+   "value": 4
+  },
+  "component-size/small": {
+   "type": "FLOAT",
+   "value": 24
+  },
+  "spacing/100 negative": {
+   "type": "FLOAT",
+   "value": -8
+  },
+  "component-size/medium": {
+   "type": "FLOAT",
+   "value": 36
+  },
+  "component-size/large": {
+   "type": "FLOAT",
+   "value": 40
+  }
+ },
+ "Avatar group": {
+  "setName": "Avatar group",
+  "type": "COMPONENT_SET",
+  "nodeId": "1530:20247",
+  "key": "57d80cd1cf2369a3f81ab3c0ed3e6f85c6fb8e0b",
+  "variants": [
+   {
+    "name": "size=small, type=space",
+    "type": "COMPONENT",
+    "layout": {
+     "mode": "HORIZONTAL",
+     "primary": "MIN",
+     "counter": "CENTER",
+     "spacing": 4,
+     "padding": [
+      0,
+      0,
+      0,
+      0
+     ],
+     "primarySizing": "AUTO",
+     "counterSizing": "AUTO"
+    },
+    "bound": {
+     "itemSpacing": "spacing/050"
+    },
+    "children": [
+     {
+      "name": "Avatar",
+      "type": "INSTANCE",
+      "bound": {
+       "width": "component-size/small",
+       "height": "component-size/small"
+      },
+      "instanceOf": "Avatar",
+      "componentProperties": {
+       "isVisible": true,
+       "↪️notification": false,
+       "↪️indicator": false,
+       "round": "true",
+       "size": "xsmall(24x24)",
+       "type": "image"
+      }
+     },
+     {
+      "name": "Avatar",
+      "type": "INSTANCE",
+      "bound": {
+       "width": "component-size/small",
+       "height": "component-size/small"
+      },
+      "propRefs": {
+       "visible": "↪️item-2"
+      },
+      "instanceOf": "Avatar",
+      "componentProperties": {
+       "isVisible": true,
+       "↪️notification": false,
+       "↪️indicator": false,
+       "round": "true",
+       "size": "xsmall(24x24)",
+       "type": "image"
+      }
+     },
+     {
+      "name": "Avatar",
+      "type": "INSTANCE",
+      "bound": {
+       "width": "component-size/small",
+       "height": "component-size/small"
+      },
+      "propRefs": {
+       "visible": "↪️item-3"
+      },
+      "instanceOf": "Avatar",
+      "componentProperties": {
+       "isVisible": true,
+       "↪️notification": false,
+       "↪️indicator": false,
+       "round": "true",
+       "size": "xsmall(24x24)",
+       "type": "image"
+      }
+     },
+     {
+      "name": "Avatar",
+      "type": "INSTANCE",
+      "bound": {
+       "width": "component-size/small",
+       "height": "component-size/small"
+      },
+      "propRefs": {
+       "visible": "↪️item-4"
+      },
+      "instanceOf": "Avatar",
+      "componentProperties": {
+       "isVisible": true,
+       "↪️notification": false,
+       "↪️indicator": false,
+       "round": "true",
+       "size": "xsmall(24x24)",
+       "type": "image"
+      }
+     },
+     {
+      "name": "Avatar",
+      "type": "INSTANCE",
+      "bound": {
+       "width": "component-size/small",
+       "height": "component-size/small"
+      },
+      "propRefs": {
+       "visible": "↪️item-5"
+      },
+      "instanceOf": "Avatar",
+      "componentProperties": {
+       "isVisible": true,
+       "↪️notification": false,
+       "↪️indicator": false,
+       "round": "true",
+       "size": "xsmall(24x24)",
+       "type": "image"
+      }
+     },
+     {
+      "name": "Avatar",
+      "type": "INSTANCE",
+      "propRefs": {
+       "visible": "count"
+      },
+      "instanceOf": "Avatar",
+      "componentProperties": {
+       "↪️notification": false,
+       "isVisible": true,
+       "↪️indicator": false,
+       "round": "true",
+       "size": "xsmall(24x24)",
+       "type": "initials"
+      }
+     }
+    ]
+   },
+   {
+    "name": "size=small, type=overlap",
+    "type": "COMPONENT",
+    "layout": {
+     "mode": "HORIZONTAL",
+     "primary": "MIN",
+     "counter": "CENTER",
+     "spacing": -8,
+     "padding": [
+      0,
+      0,
+      0,
+      0
+     ],
+     "primarySizing": "AUTO",
+     "counterSizing": "AUTO"
+    },
+    "bound": {
+     "itemSpacing": "spacing/100 negative"
+    },
+    "children": [
+     {
+      "name": "Avatar",
+      "type": "INSTANCE",
+      "bound": {
+       "width": "component-size/small",
+       "height": "component-size/small"
+      },
+      "instanceOf": "Avatar",
+      "componentProperties": {
+       "isVisible": true,
+       "↪️notification": false,
+       "↪️indicator": false,
+       "round": "true",
+       "size": "xsmall(24x24)",
+       "type": "image"
+      }
+     },
+     {
+      "name": "Avatar",
+      "type": "INSTANCE",
+      "bound": {
+       "width": "component-size/small",
+       "height": "component-size/small"
+      },
+      "propRefs": {
+       "visible": "↪️item-2"
+      },
+      "instanceOf": "Avatar",
+      "componentProperties": {
+       "isVisible": true,
+       "↪️notification": false,
+       "↪️indicator": false,
+       "round": "true",
+       "size": "xsmall(24x24)",
+       "type": "image"
+      }
+     },
+     {
+      "name": "Avatar",
+      "type": "INSTANCE",
+      "bound": {
+       "width": "component-size/small",
+       "height": "component-size/small"
+      },
+      "propRefs": {
+       "visible": "↪️item-3"
+      },
+      "instanceOf": "Avatar",
+      "componentProperties": {
+       "isVisible": true,
+       "↪️notification": false,
+       "↪️indicator": false,
+       "round": "true",
+       "size": "xsmall(24x24)",
+       "type": "image"
+      }
+     },
+     {
+      "name": "Avatar",
+      "type": "INSTANCE",
+      "bound": {
+       "width": "component-size/small",
+       "height": "component-size/small"
+      },
+      "propRefs": {
+       "visible": "↪️item-4"
+      },
+      "instanceOf": "Avatar",
+      "componentProperties": {
+       "isVisible": true,
+       "↪️notification": false,
+       "↪️indicator": false,
+       "round": "true",
+       "size": "xsmall(24x24)",
+       "type": "image"
+      }
+     },
+     {
+      "name": "Avatar",
+      "type": "INSTANCE",
+      "bound": {
+       "width": "component-size/small",
+       "height": "component-size/small"
+      },
+      "propRefs": {
+       "visible": "↪️item-5"
+      },
+      "instanceOf": "Avatar",
+      "componentProperties": {
+       "isVisible": true,
+       "↪️notification": false,
+       "↪️indicator": false,
+       "round": "true",
+       "size": "xsmall(24x24)",
+       "type": "image"
+      }
+     },
+     {
+      "name": "Avatar",
+      "type": "INSTANCE",
+      "propRefs": {
+       "visible": "count"
+      },
+      "instanceOf": "Avatar",
+      "componentProperties": {
+       "↪️notification": false,
+       "isVisible": true,
+       "↪️indicator": false,
+       "round": "true",
+       "size": "xsmall(24x24)",
+       "type": "initials"
+      }
+     }
+    ]
+   },
+   {
+    "name": "size=medium, type=space",
+    "type": "COMPONENT",
+    "layout": {
+     "mode": "HORIZONTAL",
+     "primary": "MIN",
+     "counter": "CENTER",
+     "spacing": 4,
+     "padding": [
+      0,
+      0,
+      0,
+      0
+     ],
+     "primarySizing": "AUTO",
+     "counterSizing": "AUTO"
+    },
+    "bound": {
+     "itemSpacing": "spacing/050"
+    },
+    "children": [
+     {
+      "name": "Avatar",
+      "type": "INSTANCE",
+      "bound": {
+       "width": "component-size/medium",
+       "height": "component-size/medium"
+      },
+      "instanceOf": "Avatar",
+      "componentProperties": {
+       "isVisible": true,
+       "↪️notification": false,
+       "↪️indicator": false,
+       "round": "true",
+       "size": "small(32x32)",
+       "type": "image"
+      }
+     },
+     {
+      "name": "Avatar",
+      "type": "INSTANCE",
+      "bound": {
+       "width": "component-size/medium",
+       "height": "component-size/medium"
+      },
+      "propRefs": {
+       "visible": "↪️item-2"
+      },
+      "instanceOf": "Avatar",
+      "componentProperties": {
+       "isVisible": true,
+       "↪️notification": false,
+       "↪️indicator": false,
+       "round": "true",
+       "size": "small(32x32)",
+       "type": "image"
+      }
+     },
+     {
+      "name": "Avatar",
+      "type": "INSTANCE",
+      "bound": {
+       "width": "component-size/medium",
+       "height": "component-size/medium"
+      },
+      "propRefs": {
+       "visible": "↪️item-3"
+      },
+      "instanceOf": "Avatar",
+      "componentProperties": {
+       "isVisible": true,
+       "↪️notification": false,
+       "↪️indicator": false,
+       "round": "true",
+       "size": "small(32x32)",
+       "type": "image"
+      }
+     },
+     {
+      "name": "Avatar",
+      "type": "INSTANCE",
+      "bound": {
+       "width": "component-size/medium",
+       "height": "component-size/medium"
+      },
+      "propRefs": {
+       "visible": "↪️item-4"
+      },
+      "instanceOf": "Avatar",
+      "componentProperties": {
+       "isVisible": true,
+       "↪️notification": false,
+       "↪️indicator": false,
+       "round": "true",
+       "size": "small(32x32)",
+       "type": "image"
+      }
+     },
+     {
+      "name": "Avatar",
+      "type": "INSTANCE",
+      "bound": {
+       "width": "component-size/medium",
+       "height": "component-size/medium"
+      },
+      "propRefs": {
+       "visible": "↪️item-5"
+      },
+      "instanceOf": "Avatar",
+      "componentProperties": {
+       "isVisible": true,
+       "↪️notification": false,
+       "↪️indicator": false,
+       "round": "true",
+       "size": "small(32x32)",
+       "type": "image"
+      }
+     },
+     {
+      "name": "Avatar",
+      "type": "INSTANCE",
+      "propRefs": {
+       "visible": "count"
+      },
+      "instanceOf": "Avatar",
+      "componentProperties": {
+       "↪️notification": false,
+       "isVisible": true,
+       "↪️indicator": false,
+       "round": "true",
+       "size": "small(32x32)",
+       "type": "initials"
+      }
+     }
+    ]
+   },
+   {
+    "name": "size=medium, type=overlap",
+    "type": "COMPONENT",
+    "layout": {
+     "mode": "HORIZONTAL",
+     "primary": "MIN",
+     "counter": "CENTER",
+     "spacing": -8,
+     "padding": [
+      0,
+      0,
+      0,
+      0
+     ],
+     "primarySizing": "AUTO",
+     "counterSizing": "AUTO"
+    },
+    "bound": {
+     "itemSpacing": "spacing/100 negative"
+    },
+    "children": [
+     {
+      "name": "Avatar",
+      "type": "INSTANCE",
+      "bound": {
+       "width": "component-size/medium",
+       "height": "component-size/medium"
+      },
+      "instanceOf": "Avatar",
+      "componentProperties": {
+       "isVisible": true,
+       "↪️notification": false,
+       "↪️indicator": false,
+       "round": "true",
+       "size": "small(32x32)",
+       "type": "image"
+      }
+     },
+     {
+      "name": "Avatar",
+      "type": "INSTANCE",
+      "bound": {
+       "width": "component-size/medium",
+       "height": "component-size/medium"
+      },
+      "propRefs": {
+       "visible": "↪️item-2"
+      },
+      "instanceOf": "Avatar",
+      "componentProperties": {
+       "isVisible": true,
+       "↪️notification": false,
+       "↪️indicator": false,
+       "round": "true",
+       "size": "small(32x32)",
+       "type": "image"
+      }
+     },
+     {
+      "name": "Avatar",
+      "type": "INSTANCE",
+      "bound": {
+       "width": "component-size/medium",
+       "height": "component-size/medium"
+      },
+      "propRefs": {
+       "visible": "↪️item-3"
+      },
+      "instanceOf": "Avatar",
+      "componentProperties": {
+       "isVisible": true,
+       "↪️notification": false,
+       "↪️indicator": false,
+       "round": "true",
+       "size": "small(32x32)",
+       "type": "image"
+      }
+     },
+     {
+      "name": "Avatar",
+      "type": "INSTANCE",
+      "bound": {
+       "width": "component-size/medium",
+       "height": "component-size/medium"
+      },
+      "propRefs": {
+       "visible": "↪️item-4"
+      },
+      "instanceOf": "Avatar",
+      "componentProperties": {
+       "isVisible": true,
+       "↪️notification": false,
+       "↪️indicator": false,
+       "round": "true",
+       "size": "small(32x32)",
+       "type": "image"
+      }
+     },
+     {
+      "name": "Avatar",
+      "type": "INSTANCE",
+      "bound": {
+       "width": "component-size/medium",
+       "height": "component-size/medium"
+      },
+      "propRefs": {
+       "visible": "↪️item-5"
+      },
+      "instanceOf": "Avatar",
+      "componentProperties": {
+       "isVisible": true,
+       "↪️notification": false,
+       "↪️indicator": false,
+       "round": "true",
+       "size": "small(32x32)",
+       "type": "image"
+      }
+     },
+     {
+      "name": "Avatar",
+      "type": "INSTANCE",
+      "propRefs": {
+       "visible": "count"
+      },
+      "instanceOf": "Avatar",
+      "componentProperties": {
+       "↪️notification": false,
+       "isVisible": true,
+       "↪️indicator": false,
+       "round": "true",
+       "size": "small(32x32)",
+       "type": "initials"
+      }
+     }
+    ]
+   },
+   {
+    "name": "size=large, type=space",
+    "type": "COMPONENT",
+    "layout": {
+     "mode": "HORIZONTAL",
+     "primary": "MIN",
+     "counter": "CENTER",
+     "spacing": 4,
+     "padding": [
+      0,
+      0,
+      0,
+      0
+     ],
+     "primarySizing": "AUTO",
+     "counterSizing": "AUTO"
+    },
+    "bound": {
+     "itemSpacing": "spacing/050"
+    },
+    "children": [
+     {
+      "name": "Avatar",
+      "type": "INSTANCE",
+      "bound": {
+       "width": "component-size/large",
+       "height": "component-size/large"
+      },
+      "instanceOf": "Avatar",
+      "componentProperties": {
+       "↪️notification": false,
+       "isVisible": true,
+       "↪️indicator": false,
+       "round": "true",
+       "size": "medium(40x40)",
+       "type": "image"
+      }
+     },
+     {
+      "name": "Avatar",
+      "type": "INSTANCE",
+      "bound": {
+       "width": "component-size/large",
+       "height": "component-size/large"
+      },
+      "propRefs": {
+       "visible": "↪️item-2"
+      },
+      "instanceOf": "Avatar",
+      "componentProperties": {
+       "↪️notification": false,
+       "isVisible": true,
+       "↪️indicator": false,
+       "round": "true",
+       "size": "medium(40x40)",
+       "type": "image"
+      }
+     },
+     {
+      "name": "Avatar",
+      "type": "INSTANCE",
+      "bound": {
+       "width": "component-size/large",
+       "height": "component-size/large"
+      },
+      "propRefs": {
+       "visible": "↪️item-3"
+      },
+      "instanceOf": "Avatar",
+      "componentProperties": {
+       "↪️notification": false,
+       "isVisible": true,
+       "↪️indicator": false,
+       "round": "true",
+       "size": "medium(40x40)",
+       "type": "image"
+      }
+     },
+     {
+      "name": "Avatar",
+      "type": "INSTANCE",
+      "bound": {
+       "width": "component-size/large",
+       "height": "component-size/large"
+      },
+      "propRefs": {
+       "visible": "↪️item-4"
+      },
+      "instanceOf": "Avatar",
+      "componentProperties": {
+       "↪️notification": false,
+       "isVisible": true,
+       "↪️indicator": false,
+       "round": "true",
+       "size": "medium(40x40)",
+       "type": "image"
+      }
+     },
+     {
+      "name": "Avatar",
+      "type": "INSTANCE",
+      "bound": {
+       "width": "component-size/large",
+       "height": "component-size/large"
+      },
+      "propRefs": {
+       "visible": "↪️item-5"
+      },
+      "instanceOf": "Avatar",
+      "componentProperties": {
+       "↪️notification": false,
+       "isVisible": true,
+       "↪️indicator": false,
+       "round": "true",
+       "size": "medium(40x40)",
+       "type": "image"
+      }
+     },
+     {
+      "name": "Avatar",
+      "type": "INSTANCE",
+      "propRefs": {
+       "visible": "count"
+      },
+      "instanceOf": "Avatar",
+      "componentProperties": {
+       "isVisible": true,
+       "↪️notification": false,
+       "↪️indicator": false,
+       "round": "true",
+       "size": "medium(40x40)",
+       "type": "initials"
+      }
+     }
+    ]
+   },
+   {
+    "name": "size=large, type=overlap",
+    "type": "COMPONENT",
+    "layout": {
+     "mode": "HORIZONTAL",
+     "primary": "MIN",
+     "counter": "CENTER",
+     "spacing": -8,
+     "padding": [
+      0,
+      0,
+      0,
+      0
+     ],
+     "primarySizing": "AUTO",
+     "counterSizing": "AUTO"
+    },
+    "bound": {
+     "itemSpacing": "spacing/100 negative"
+    },
+    "children": [
+     {
+      "name": "Avatar",
+      "type": "INSTANCE",
+      "bound": {
+       "width": "component-size/large",
+       "height": "component-size/large"
+      },
+      "instanceOf": "Avatar",
+      "componentProperties": {
+       "↪️notification": false,
+       "isVisible": true,
+       "↪️indicator": false,
+       "round": "true",
+       "size": "medium(40x40)",
+       "type": "image"
+      }
+     },
+     {
+      "name": "Avatar",
+      "type": "INSTANCE",
+      "bound": {
+       "width": "component-size/large",
+       "height": "component-size/large"
+      },
+      "propRefs": {
+       "visible": "↪️item-2"
+      },
+      "instanceOf": "Avatar",
+      "componentProperties": {
+       "↪️notification": false,
+       "isVisible": true,
+       "↪️indicator": false,
+       "round": "true",
+       "size": "medium(40x40)",
+       "type": "image"
+      }
+     },
+     {
+      "name": "Avatar",
+      "type": "INSTANCE",
+      "bound": {
+       "width": "component-size/large",
+       "height": "component-size/large"
+      },
+      "propRefs": {
+       "visible": "↪️item-3"
+      },
+      "instanceOf": "Avatar",
+      "componentProperties": {
+       "↪️notification": false,
+       "isVisible": true,
+       "↪️indicator": false,
+       "round": "true",
+       "size": "medium(40x40)",
+       "type": "image"
+      }
+     },
+     {
+      "name": "Avatar",
+      "type": "INSTANCE",
+      "bound": {
+       "width": "component-size/large",
+       "height": "component-size/large"
+      },
+      "propRefs": {
+       "visible": "↪️item-4"
+      },
+      "instanceOf": "Avatar",
+      "componentProperties": {
+       "↪️notification": false,
+       "isVisible": true,
+       "↪️indicator": false,
+       "round": "true",
+       "size": "medium(40x40)",
+       "type": "image"
+      }
+     },
+     {
+      "name": "Avatar",
+      "type": "INSTANCE",
+      "bound": {
+       "width": "component-size/large",
+       "height": "component-size/large"
+      },
+      "propRefs": {
+       "visible": "↪️item-5"
+      },
+      "instanceOf": "Avatar",
+      "componentProperties": {
+       "↪️notification": false,
+       "isVisible": true,
+       "↪️indicator": false,
+       "round": "true",
+       "size": "medium(40x40)",
+       "type": "image"
+      }
+     },
+     {
+      "name": "Avatar",
+      "type": "INSTANCE",
+      "propRefs": {
+       "visible": "count"
+      },
+      "instanceOf": "Avatar",
+      "componentProperties": {
+       "isVisible": true,
+       "↪️notification": false,
+       "↪️indicator": false,
+       "round": "true",
+       "size": "medium(40x40)",
+       "type": "initials"
+      }
+     }
+    ]
+   }
+  ]
+ }
+}
