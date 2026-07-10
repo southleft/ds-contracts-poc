@@ -365,6 +365,11 @@ function fidelityNotes(contract: Contract, data: ComponentData, used: Set<string
 // ---------------------------------------------------------------------------
 
 const CANVAS_CSS = `
+  /* Figma boxes are border-box: a FIXED height/width includes padding and
+     stroke. Without this, a bound height (48px) plus padding-block (8px)
+     drew a 64px content-box cell — visibly taller than the captured Figma
+     variant box (extract/figma/canvas-box-check.ts pins the parity). */
+  *, *::before, *::after { box-sizing: border-box; }
   html { color-scheme: light; }
   body {
     margin: 0;

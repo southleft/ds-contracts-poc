@@ -1159,7 +1159,11 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
       name: nameParts.join(', ') || contract.name,
       layout: layoutSpec(root, true, subst),
     };
-    const ctx = applyTokens(rootSpec, root.tokens ?? {}, subst, {});
+    // resolveTokens, not root.tokens: the root's tokensByProp overrides (v10
+    // — per-size padding-inline/height on the owner's Button) resolve per
+    // combo exactly like every child part's. Byte-neutral for contracts
+    // without tokensByProp (resolveTokens returns the base map unchanged).
+    const ctx = applyTokens(rootSpec, resolveTokens(root, subst), subst, {});
     applyStylesWhenOpacity(rootSpec, root, contract, subst);
     if (root.parts) {
       rootSpec.children = variantParts(root.parts, subst).map(([childName, child]) =>
@@ -1228,7 +1232,9 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
           name: nameParts.join(', '),
           layout: layoutSpec(root, true, subst),
         };
-        const baseCtx = applyTokens(rootSpec, root.tokens ?? {}, subst, {});
+        // Same resolveTokens rule as the base loop: per-combo tokensByProp
+        // overrides apply BEFORE the state overrides layer on top.
+        const baseCtx = applyTokens(rootSpec, resolveTokens(root, subst), subst, {});
         const ctx = applyTokens(
           rootSpec,
           translateStateOverrides(overrides[stateName] ?? {}),

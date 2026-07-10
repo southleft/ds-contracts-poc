@@ -33,7 +33,10 @@ const TSX = path.join(SCRATCH, 'node_modules', '.bin', 'tsx');
 function resetScratch() {
   rmSync(SCRATCH, { recursive: true, force: true });
   mkdirSync(SCRATCH, { recursive: true });
-  for (const dir of ['contracts', 'tokens', 'scripts', 'core', 'parity', 'src', 'catalog', 'context', 'assets', 'extract']) {
+  // playground rides along READ-ONLY: the canvas-box-parity receipt pins the
+  // canvas renderer's border-box semantics against its source (the module is
+  // vite-only at runtime — import.meta.glob — so the receipt reads, never runs).
+  for (const dir of ['contracts', 'tokens', 'scripts', 'core', 'parity', 'src', 'catalog', 'context', 'assets', 'extract', 'playground']) {
     cpSync(path.join(ROOT, dir), path.join(SCRATCH, dir), { recursive: true });
   }
   cpSync(path.join(ROOT, 'evals', 'fixtures'), path.join(SCRATCH, 'evals', 'fixtures'), {
@@ -1528,6 +1531,39 @@ const cases: Case[] = [
         '✔ size=small: computed height = 32px from {component-size.medium} (got 32px)',
         '✔ size=medium: computed height = 40px from {component-size.large} (got 40px)',
         '✔ computed padding-inline = 16px (large; got 16px)',
+      ]) {
+        if (!r.out.includes(line)) throw new Error(`missing check: ${line}`);
+      }
+    },
+  },
+  {
+    // Owner P0 (canvas metrics): the Code preview rendered his Button right
+    // (16/12 padding-inline, 48/40/32 heights) but the CANVAS drew too-tall
+    // uniform boxes (~64px, all sizes identical). Two root causes, fixed:
+    // (1) compileComponentData applied `root.tokens` instead of
+    // resolveTokens(root, subst) — the ROOT's tokensByProp per-size overrides
+    // never reached the compiled specs (child parts already resolved right);
+    // (2) the canvas preview drew content-box divs, so a bound 48px height
+    // PLUS 8px padding-block rendered 64px — Figma boxes are border-box.
+    // The receipt pins all 15 cells box-equal to the dump's own captured
+    // variant boxes, per-size differences differing, and the border-box rule.
+    id: 'design-canvas-box-parity',
+    claim: 'C5-extraction',
+    run: () => {
+      const r = run(TSX, ['extract/figma/canvas-box-check.ts']);
+      if (r.status !== 0) throw new Error(`canvas-box receipt failed:\n${r.out}`);
+      for (const line of [
+        '✔ 15 canvas cells compile (got 15)',
+        '✔ every cell name maps to a distinct captured variant',
+        '✔ cell "size=large" box == captured "size=large, state=default" box (h=48 via component-size/xlarge, pad=[8,16,8,16], gap=8, hug width)',
+        '✔ cell "size=medium" box == captured "size=medium, state=default" box (h=40 via component-size/large, pad=[8,16,8,16], gap=8, hug width)',
+        '✔ cell "size=small" box == captured "size=small, state=default" box (h=32 via component-size/medium, pad=[8,12,8,12], gap=8, hug width)',
+        '✔ cell "size=small, State=Focus Visible" box == captured "size=small, state=focus" box (h=32 via component-size/medium, pad=[8,12,8,12], gap=8, hug width)',
+        '✔ cell "size=small" text 14px/21px == captured 14px/21px',
+        '✔ heights 48/40/32 per size, DISTINCT (got large=48, medium=40, small=32)',
+        '✔ padding-inline 16/16/12 — small DIFFERS (got large=16, medium=16, small=12)',
+        '✔ min-height 44 stays CSS-side BY DESIGN (the canvas draws the real per-variant height; the contract carries the fact for the code surfaces)',
+        '✔ the canvas stylesheet declares box-sizing: border-box (a FIXED height includes padding, like Figma — 48px means 48px, not 48+8+8)',
       ]) {
         if (!r.out.includes(line)) throw new Error(`missing check: ${line}`);
       }
