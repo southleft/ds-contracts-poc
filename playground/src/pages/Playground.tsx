@@ -13,6 +13,11 @@ import {
   type FigmaProposal,
 } from '../engine/figma-import';
 import {
+  BRIDGE_POLL_INTERVAL_MS,
+  createBridgeSession,
+  pollBridge,
+} from '../engine/bridge';
+import {
   discoverTokenStylesheets,
   fetchRepoFile,
   fetchRepoTree,
@@ -868,6 +873,12 @@ export function Playground() {
   const [figmaError, setFigmaError] = useState<string | null>(null);
   const [figmaProposals, setFigmaProposals] = useState<FigmaProposal[] | null>(null);
   const importGroupsRef = useRef<ReceiptGroup[]>([]);
+  // Provenance of the proposals currently listed under "Proposed sets" —
+  // clicking a set re-applies with the import's own origin, not a fixed one.
+  const figmaOriginRef = useRef<{ origin: string; ws: WorkspaceSource }>({
+    origin: 'Figma REST import',
+    ws: 'figma',
+  });
 
   const applyProposal = (proposal: FigmaProposal, origin: string, wsSource: WorkspaceSource) => {
     const contractText = pretty(proposal.contract);
@@ -922,8 +933,122 @@ export function Playground() {
       return;
     }
     importGroupsRef.current = importReportGroups(result.report);
+    figmaOriginRef.current = { origin, ws: 'figma' };
     setFigmaProposals(proposals);
     applyProposal(proposals[0], origin, 'figma');
+  };
+
+  // ------------------------------------------------------ plugin bridge state
+  // "Receive from plugin": mint a pairing code, poll until the Sync Runner
+  // plugin sends the dump, then feed the SAME dump→proposal path a pasted
+  // dump takes (engine/bridge.ts is transport only).
+  const [bridge, setBridge] = useState<{ code: string; expiresAt: number } | null>(null);
+  const [bridgeRemaining, setBridgeRemaining] = useState(0);
+  const [bridgeBusy, setBridgeBusy] = useState(false);
+  const [bridgeError, setBridgeError] = useState<string | null>(null);
+  const bridgeTimer = useRef<number | null>(null);
+  const bridgeInFlight = useRef(false);
+
+  const stopBridge = () => {
+    if (bridgeTimer.current !== null) {
+      window.clearInterval(bridgeTimer.current);
+      bridgeTimer.current = null;
+    }
+    bridgeInFlight.current = false;
+    setBridge(null);
+  };
+  useEffect(
+    () => () => {
+      if (bridgeTimer.current !== null) window.clearInterval(bridgeTimer.current);
+    },
+    [],
+  );
+
+  const handleBridgeDump = (dump: unknown, code: string) => {
+    try {
+      const groups: ReceiptGroup[] = [
+        {
+          title: 'Plugin bridge',
+          kind: 'note',
+          entries: [
+            {
+              message: `received over pairing code ${code} — the plugin ran the repo's dump script in the open Figma file, so bound variable NAMES arrive resolved on any plan; the bridge deleted its copy on delivery.`,
+            },
+          ],
+        },
+      ];
+      // dump v1.2 capture receipts ride the dump itself (_degradations) —
+      // surface them verbatim, same discipline as the REST MapReport.
+      const degradations = (dump as { _degradations?: unknown } | null)?._degradations;
+      if (Array.isArray(degradations) && degradations.length > 0) {
+        groups.push({
+          title: 'Capture receipts — dump script degradations',
+          kind: 'degradation',
+          entries: degradations.map((d) => {
+            const entry = d as { code?: unknown; nodePath?: unknown; message?: unknown };
+            return {
+              ...(typeof entry.code === 'string' ? { code: entry.code } : {}),
+              ...(typeof entry.nodePath === 'string' ? { label: entry.nodePath } : {}),
+              message: typeof entry.message === 'string' ? entry.message : String(d),
+            };
+          }),
+        });
+      }
+      const proposals = proposalsFromDump(dump as FigmaImportResult['dump']);
+      if (proposals.length === 0) {
+        setBridgeError('The plugin sent a dump with no component set to propose from.');
+        return;
+      }
+      importGroupsRef.current = groups;
+      figmaOriginRef.current = { origin: 'Figma plugin import', ws: 'figma' };
+      setFigmaProposals(proposals);
+      applyProposal(proposals[0], 'Figma plugin import', 'figma');
+    } catch (e) {
+      setBridgeError(e instanceof Error ? e.message : String(e));
+    }
+  };
+
+  const bridgeTick = async (code: string, expiresAt: number) => {
+    const remaining = Math.max(0, Math.round((expiresAt - Date.now()) / 1000));
+    setBridgeRemaining(remaining);
+    if (remaining <= 0) {
+      stopBridge();
+      setBridgeError('The code expired before anything arrived — press “Receive from plugin” for a fresh one.');
+      return;
+    }
+    if (bridgeInFlight.current) return; // one in-flight poll at a time
+    bridgeInFlight.current = true;
+    try {
+      const poll = await pollBridge(code);
+      if (poll.status === 'delivered') {
+        stopBridge();
+        handleBridgeDump(poll.dump, code);
+      } else if (poll.status === 'error' && poll.fatal) {
+        stopBridge();
+        setBridgeError(poll.message);
+      }
+      // 'waiting' and transient network errors: keep listening until expiry.
+    } finally {
+      bridgeInFlight.current = false;
+    }
+  };
+
+  const startBridge = async () => {
+    setBridgeError(null);
+    setBridgeBusy(true);
+    const result = await createBridgeSession();
+    setBridgeBusy(false);
+    if (!result.ok) {
+      setBridgeError(result.message);
+      return;
+    }
+    const expiresAt = Date.now() + result.session.ttlSeconds * 1000;
+    setBridge({ code: result.session.code, expiresAt });
+    setBridgeRemaining(result.session.ttlSeconds);
+    bridgeTimer.current = window.setInterval(
+      () => void bridgeTick(result.session.code, expiresAt),
+      BRIDGE_POLL_INTERVAL_MS,
+    );
   };
 
   const runFigmaImport = async () => {
@@ -988,6 +1113,7 @@ export function Playground() {
           setJsonError('No component set found in the pasted dump.');
           return;
         }
+        figmaOriginRef.current = { origin: 'pasted Figma dump', ws: 'json' };
         setFigmaProposals(proposals);
         applyProposal(proposals[0], 'pasted Figma dump', 'json');
       } catch (e) {
@@ -1807,10 +1933,93 @@ export function Playground() {
 
         {sourceTab === 'figma' && (
           <div className="rail__section">
-            {/* The three-rung fidelity ladder moved to the Help drawer
-                ("Coming from design" → "Working locally?") — public visitors
-                can't run CLIs, so the tab keeps only what runs HERE:
-                URL + token, and the fixture demo. */}
+            {/* Two routes in, plugin first (recommended): the Plugin API
+                resolves bound variable NAMES on any Figma plan, closing the
+                Enterprise-only REST variables gap. The three-rung fidelity
+                ladder lives in the Help drawer. */}
+            <div className="rail__group">
+              <div className="rail__group-title">From the Figma plugin — recommended</div>
+              <p className="hint">
+                Full token names <em>and</em> values, on any Figma plan. The plugin reads your
+                component sets right out of the open file, so every bound variable arrives with
+                its real name — the contract binds your tokens, nothing has to be minted.
+              </p>
+              {bridge === null ? (
+                <button
+                  type="button"
+                  className="btn--primary"
+                  disabled={bridgeBusy}
+                  onClick={() => void startBridge()}
+                >
+                  {bridgeBusy ? 'Asking for a code…' : 'Receive from plugin'}
+                </button>
+              ) : (
+                <div className="notice" aria-live="polite">
+                  <div
+                    style={{
+                      fontFamily: 'var(--pg-mono)',
+                      fontSize: 22,
+                      letterSpacing: 6,
+                      fontWeight: 600,
+                      margin: '4px 0 8px',
+                    }}
+                  >
+                    {bridge.code}
+                  </div>
+                  Waiting for the plugin… In Figma desktop, run{' '}
+                  <strong>Plugins → Development → DS Contracts Sync Runner</strong>, open the{' '}
+                  <strong>Send to Playground</strong> tab, and enter this code. It expires in{' '}
+                  {Math.floor(bridgeRemaining / 60)}:
+                  {String(bridgeRemaining % 60).padStart(2, '0')}.
+                  <div style={{ marginTop: 8 }}>
+                    <button type="button" onClick={stopBridge}>
+                      Cancel
+                    </button>
+                  </div>
+                </div>
+              )}
+              {bridgeError ? <div className="notice notice--error">{bridgeError}</div> : null}
+              <details className="rail__details">
+                <summary>First time? Install the plugin (about a minute)</summary>
+                <ol className="hint" style={{ paddingLeft: 18, margin: '6px 0' }}>
+                  <li>
+                    <a href="/ds-contracts-sync-runner-plugin.zip" download>
+                      Download the plugin zip
+                    </a>{' '}
+                    and unzip it.
+                  </li>
+                  <li>
+                    Open your file in the <strong>Figma desktop app</strong> — development
+                    plugins only load there, not on figma.com. Any plan works; no admin
+                    approval needed.
+                  </li>
+                  <li>
+                    <strong>Plugins → Development → Import plugin from manifest…</strong> and
+                    pick <code>manifest.json</code> from the unzipped folder.
+                  </li>
+                  <li>
+                    Run <strong>DS Contracts Sync Runner</strong> and open its{' '}
+                    <strong>Send to Playground</strong> tab.
+                  </li>
+                </ol>
+                <p className="hint">
+                  The plugin is read-only in your file. What it sends: the chosen component
+                  sets&rsquo; structure, styles, and variable names — never your Figma token.
+                  The bridge holds a dump for at most 15 minutes, deletes it the moment this
+                  tab picks it up, and never logs its contents.
+                </p>
+              </details>
+            </div>
+
+            <div className="rail__group" style={{ marginTop: 16 }}>
+              <div className="rail__group-title">From a figma.com URL + token — quick</div>
+              <p className="hint">
+                No install, but variable (token) <em>names</em> are unavailable outside
+                Enterprise plans on this route — values still come through exactly, and every
+                unresolved name is receipted, never invented. For true-to-form token bindings,
+                use the plugin route above.
+              </p>
+            </div>
             <div className="field">
               <label htmlFor="figma-url">figma.com component URL</label>
               <input
@@ -1896,7 +2105,7 @@ export function Playground() {
                     key={p.setName}
                     type="button"
                     className="rail__item"
-                    onClick={() => applyProposal(p, 'Figma REST import', 'figma')}
+                    onClick={() => applyProposal(p, figmaOriginRef.current.origin, figmaOriginRef.current.ws)}
                   >
                     {p.setName}
                   </button>

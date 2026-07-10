@@ -133,6 +133,43 @@ and the client re-runs the exact same schema + generator referee over the
 proposal, so a stale mirror produces refused proposals, never accepted bad
 ones. Keep the two in sync when the contract shape changes.
 
+## Plugin bridge (`/bridge/*`) — "Send to Playground"
+
+A second, Anthropic-free surface on the same Worker (`src/bridge.ts`): the
+Sync Runner Figma plugin (`figma-sync/plugin`) POSTs a dump v1 JSON here
+under a short-lived pairing code; the playground's Figma tab polls the code
+and imports on arrival — the plugin-transport replacement for copying a dump
+out of Figma and pasting it into the JSON tab. Because the Plugin API
+resolves bound variable **names** on any Figma plan, this route closes the
+Enterprise-only REST variables gap.
+
+| Route | Who | What |
+|---|---|---|
+| `POST /bridge/session` | playground (origin-gated like assist) | mints `{ code, ttlSeconds: 900 }` — 6 chars, crypto-random, alphabet `ABCDEFGHJKMNPQRSTUVWXYZ23456789` (no I/L/O/0/1), ~890M codes |
+| `POST /bridge/:code` | the plugin — **any** origin, including `null` | uploads the dump while the session is open; last write wins; `404` on wrong/expired code, `413` over 4MB, `400` non-JSON |
+| `GET /bridge/:code` | playground (origin-gated) | `{ status: "waiting" }` until upload; then `{ status: "delivered", dump }` **once** — both KV keys are deleted on delivery; afterwards `410` |
+
+Deliberate asymmetry: a Figma plugin's fetch arrives with `Origin: null`
+(sandboxed plugin iframe), so the upload route cannot be origin-gated — the
+**pairing code is the auth**: unguessable at 15-minute one-time-read scale,
+minted only for the playground origin, rendered only where the human is
+looking. Wrong-code and expired-code uploads share one code path (a single
+KV read, one message), so the errors are not timing-distinguishable.
+
+Privacy: dump contents are never logged, never inspected beyond "is JSON /
+under 4MB", and never persisted past one delivery or the 15-minute TTL,
+whichever comes first (KV deletes are best-effort under eventual
+consistency; the TTL bounds any residue). The bridge holds no secrets — the
+plugin never sends a Figma token, and the Anthropic key is untouched by
+these routes.
+
+Caps: its own kill switch (`BRIDGE_ENABLED`, independent of
+`ASSIST_ENABLED` — the bridge costs KV operations only, never model
+tokens) and per-IP daily caps (`BRIDGE_IP_DAILY_LIMIT`, default 40, session
+creation and uploads counted as separate classes). Playground polls are
+deliberately uncounted: origin-gated KV reads against an unguessable code,
+one every 2.5s for at most 15 minutes.
+
 ## Hard caps & abuse resistance
 
 | Layer | Default | Refusal |
