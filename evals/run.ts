@@ -1252,6 +1252,74 @@ const cases: Case[] = [
         throw new Error('transitive-cycle refusal check missing/failed');
     },
   },
+  {
+    // Owner P0 (CBDS Button-Brand Primary): semantics.element is inferred
+    // DETERMINISTICALLY inside proposeFromDump (name/axis table, zero AI) —
+    // button from the set name, "a" from "link", no match stays div with the
+    // hedge note. "This is a freaking button" must never render as a div.
+    id: 'design-semantics-element-inference',
+    claim: 'C5-extraction',
+    run: () => {
+      const r = run(TSX, ['extract/figma/cbds-check.ts']);
+      if (r.status !== 0) throw new Error(`CBDS receipt failed:\n${r.out}`);
+      if (!r.out.includes('✔ element "button" inferred (deterministic, inside proposeFromDump) and NOTED'))
+        throw new Error('button inference check missing/failed');
+      if (!r.out.includes('✔ name "Nav Link" → element "a", with a named inference note'))
+        throw new Error('link inference check missing/failed');
+      if (!r.out.includes('✔ no table match ("Chip") → element stays "div" with the existing hedge note'))
+        throw new Error('no-match hedge check missing/failed');
+      if (!r.out.includes('✔ emitReact: root renders <button (not a div)'))
+        throw new Error('emitted <button> check missing/failed');
+    },
+  },
+  {
+    // Owner P0: a drawn `state` enum axis (default|hover|focus|pressed|
+    // disabled) is the platform's interaction states, not API. Fixture replay
+    // of the REAL imported set: the axis never becomes a prop; hover/pressed/
+    // focus land as real state overrides; disabled is a BOOLEAN prop;
+    // figmaStatePreviews round-trips the axis to the canvas; and the emitted
+    // padding/font-size per SIZE variant EQUAL the dump's values exactly —
+    // a wrong-but-plausible constant is the worst outcome and is refused.
+    id: 'design-state-axis-promotion-cbds-replay',
+    claim: 'C5-extraction',
+    run: () => {
+      const r = run(TSX, ['extract/figma/cbds-check.ts']);
+      if (r.status !== 0) throw new Error(`CBDS receipt failed:\n${r.out}`);
+      for (const line of [
+        '✔ NO `state` prop ships in the API',
+        '✔ contract states [hover, active, focus-visible, disabled] declared',
+        '✔ `disabled` is a real BOOLEAN prop (default false) — never an enum value shipped to code',
+        '✔ figmaStatePreviews: true (the canvas round-trips the states as a State preview axis)',
+        '✔ size=large: padding EXACT — emitted padding-inline resolves to 16px/16px, padding-block to 8px/8px (dump values)',
+        '✔ size=small: padding EXACT — emitted padding-inline resolves to 12px/12px, padding-block to 8px/8px (dump values)',
+        '✔ size=large: font-size EXACT — emitted value resolves to 16px (dump value)',
+        '✔ size=small: font-size EXACT — emitted value resolves to 14px (dump value)',
+        '✔ per-size values genuinely DIFFER in the emitted output (small ≠ large padding and font-size — no first-variant constant)',
+        '✔ canvas script constructs the State preview axis (State=Hover / State=Active / State=Focus Visible / State=Disabled)',
+      ]) {
+        if (!r.out.includes(line)) throw new Error(`missing check: ${line}`);
+      }
+    },
+  },
+  {
+    // Owner P0: a proposal whose nested instance has no contract in scope
+    // ships a child STUB — registering it makes the emitters run; NOT
+    // registering it reproduces the owner's exact refusal, BY NAME. Pinned at
+    // the engine level (the playground registers result.childStubs into its
+    // contracts map via engine/stub-contracts.ts).
+    id: 'design-child-stubs-prevent-scope-refusals',
+    claim: 'C5-extraction',
+    run: () => {
+      const r = run(TSX, ['extract/figma/cbds-check.ts']);
+      if (r.status !== 0) throw new Error(`CBDS receipt failed:\n${r.out}`);
+      if (!r.out.includes('✔ ds.icon child STUB auto-proposed alongside (parses against the contract schema)'))
+        throw new Error('child-stub proposal check missing/failed');
+      if (!r.out.includes("✔ WITHOUT the stub registered, emitReact refuses BY NAME (\"ds.icon\" … no contract in scope) — the owner's refusal, pinned"))
+        throw new Error('unregistered-stub refusal check missing/failed');
+      if (!r.out.includes('✔ emitReact: props extend ButtonHTMLAttributes<HTMLButtonElement>'))
+        throw new Error('registered-stub emit check missing/failed');
+    },
+  },
 ];
 
 // ---------------------------------------------------------------------------
