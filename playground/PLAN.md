@@ -144,13 +144,27 @@ browser. No backend, no analytics, no accounts.
    click that scrolls to its line. Preview holds the last valid render and
    says so. A Reset in the pane header restores the pristine original
    whenever the text has diverged from what was loaded.
-4. **Figma tab** — the W6 UI: URL + session-only token → `importFromUrl`
-   (the same function the CLI runs) → proposal + Import-report receipts.
-   No token? "Demo import" runs the identical code path over the committed
-   REST fixture via the client's injectable fetch; the "non-Enterprise plan"
-   checkbox answers variables with the 403 and shows the full degradation
-   ladder (50 named `variable-unresolved` entries + unbound values with
-   nearest-token candidates on the Badge fixture).
+4. **Figma tab** — two routes in, plugin first. **From the Figma plugin
+   (recommended)**: "Receive from plugin" asks workers/assist for a pairing
+   session and shows a 6-char code; the Sync Runner plugin's "Send to
+   Playground" tab runs the repo's dump script (embedded verbatim; zip build
+   drift-guarded) over the named sets and POSTs the dump to the bridge; the
+   tab polls, imports on arrival through the SAME dump→proposal path a
+   pasted dump takes, and the receipts open with a Plugin-bridge provenance
+   line plus any dump-v1.2 capture receipts. Because the Plugin API resolves
+   bound variable NAMES on any plan, the proposal binds real tokens — zero
+   `variable-unresolved`, zero minted `imported.*`. The plugin zip +
+   install walkthrough (Figma desktop requirement stated) live under the
+   button. **From a figma.com URL + token (quick)** — the W6 UI: URL +
+   session-only token → `importFromUrl` (the same function the CLI runs) →
+   proposal + Import-report receipts; the tab names the Enterprise-only
+   variables caveat and points at the plugin route for true-to-form
+   bindings. No token? "Demo import" runs the identical code path over the
+   committed REST fixture via the client's injectable fetch; the
+   "non-Enterprise plan" checkbox answers variables with the 403 and shows
+   the full degradation ladder (50 named `variable-unresolved` entries +
+   unbound values with nearest-token candidates on the Badge fixture) — the
+   exact gap the plugin route closes.
 5. **Code tab** — paste TSX+CSS (or load the Callout example): the
    TypeScript compiler arrives as a lazy chunk, raw values are reported
    with candidates in the Receipts panel, nothing invented.

@@ -294,6 +294,15 @@ network. Covered:
   named-400/413 refusal table, per-IP class isolation from the other
   endpoints, the spent-budget short-circuit (zero model calls), and the
   non-object-output 502 with usage still charged.
+- Plugin bridge (`test/bridge.test.ts`): code shape/alphabet, the full
+  session lifecycle (create → waiting → null-origin upload → delivered once
+  → 410), lowercase-code normalization, last-write-wins re-send, wrong and
+  malformed codes by name, expired-session refusal, the 15-minute
+  `expirationTtl` on every write, the 4MB cap, non-JSON refusal, per-IP
+  caps per class with uncounted polls, the asymmetric origin gates
+  (playground-only session/read vs. any-origin upload, `*` preflight), the
+  independent kill switch, and 405s. Bridge routes never touch the
+  Anthropic transport (the mock throws if reached).
 
 **Not covered — needs live infra:** real workerd runtime behavior
 (`wrangler dev` locally / `wrangler deploy` + smoke request are the check),
