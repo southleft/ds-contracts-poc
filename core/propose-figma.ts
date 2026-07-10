@@ -1094,17 +1094,25 @@ function invertNodeShape(m: Merged, part: Record<string, unknown>, ctx: Ctx, whe
     if (!fits || !axis.values.every((v) => byValue.has(v))) continue;
     const stylesWhen = (part.stylesWhen as Array<Record<string, unknown>> | undefined) ?? [];
     let emitted = 0;
+    let suppressed = 0;
     for (const value of axis.values) {
       const variantsOfValue = shapes.filter((s) => axisValuesOf(s.variant)[axis.property] === value);
-      if (variantsOfValue.every((s) => s.hidden)) continue; // never renders there
+      if (variantsOfValue.every((s) => s.hidden)) {
+        // The shape NEVER renders at this axis value in the drawn set — the
+        // honest completion for combos the design never drew (pointer=true
+        // at pointer-position=none) is an explicit display: none.
+        stylesWhen.push({ prop: axis.propName, equals: camel(value), styles: { display: 'none' } });
+        suppressed++;
+        continue;
+      }
       const styles = buildStyles(byValue.get(value)!);
       if (!styles) continue;
       stylesWhen.push({ prop: axis.propName, equals: camel(value), styles });
       emitted++;
     }
-    if (emitted > 0) part.stylesWhen = stylesWhen;
+    if (emitted + suppressed > 0) part.stylesWhen = stylesWhen;
     ctx.notes.push(
-      `${where}: ${kinds[0]} decor carried as a shape part (${String(shape.width)}×${String(shape.height)}${shape.sides !== undefined ? `, ${String(shape.sides)} sides` : ''}) with per-variant absolute placement${rotationVaries ? ' + rotation' : ''} as stylesWhen on \`${axis.propName}\` (${emitted} placement(s); offsets EXACT from the captured boxes — dump v1.3, #42)`,
+      `${where}: ${kinds[0]} decor carried as a shape part (${String(shape.width)}×${String(shape.height)}${shape.sides !== undefined ? `, ${String(shape.sides)} sides` : ''}) with per-variant absolute placement${rotationVaries ? ' + rotation' : ''} as stylesWhen on \`${axis.propName}\` (${emitted} placement(s)${suppressed > 0 ? `; ${suppressed} value(s) where the shape is hidden in every drawn variant carry display: none` : ''}; offsets EXACT from the captured boxes — dump v1.3, #42)`,
     );
     return;
   }
