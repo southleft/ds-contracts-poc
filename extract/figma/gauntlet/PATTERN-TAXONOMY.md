@@ -311,3 +311,25 @@ Sources: [sixtythirtyten 2026 comparison](https://www.sixtythirtyten.co/blog/fro
 [WAI-APG patterns](https://www.w3.org/WAI/ARIA/apg/patterns/),
 [designsystems.surf blueprints](https://designsystems.surf/blueprints) (via Design Systems Assistant MCP),
 [Figma Slots — Schema 2025](https://help.figma.com/hc/en-us/articles/35794667554839) (via MCP).
+
+---
+
+## Addendum (owner, 2026-07-10): native Figma slots are AVAILABLE NOW
+
+The owner confirms Figma's API supports slots today (the connected figma-console
+MCP exposes create/add-property/get/append/reset slot operations, corroborating
+Plugin API runtime support). This upgrades two items from "future migration"
+to buildable:
+
+1. **Capture (dump v1.5)**: read native SLOT nodes and slot properties alongside
+   the INSTANCE_SWAP spelling — kits authored with real slots must import with
+   true slot semantics, not placeholder-name inference. Both spellings map to
+   the same contract `slot` part; the capture records which spelling the design
+   used (a named provenance note, since regeneration should reproduce it).
+2. **emit-figma-script**: construct native slots on regeneration — retires the
+   schema's documented limit "a slot whose defaultContent has >1 item is
+   inexpressible as a Figma INSTANCE_SWAP" (contract-schema.ts:273-275).
+   Multi-child slots become fully round-trippable.
+
+Sequencing: fold both into the P5 capture pass (preferredValues + component
+keys + native slots — one dump revision, three payoffs).
