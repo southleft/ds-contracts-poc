@@ -5,6 +5,7 @@ import { useTheme } from '../theme';
 import { contractsById, icons, rawContractById } from '../engine/data';
 import { exampleBySlug, examples, type CodeExample } from '../engine/examples';
 import {
+  capturedTokensFromDump,
   DEMO_URL,
   importFigmaDemo,
   importFigmaUrl,
@@ -56,11 +57,14 @@ import {
 import {
   activeMintedTokens,
   applyUserTokens,
+  capturedShadowedNames,
   resetToRepoTokens,
+  setCapturedTokens,
   setMintedTokens,
   STARTER_USER_TOKENS,
   storedUserTokensText,
   useTokenSource,
+  type CapturedTokenLayer,
   type MintedTokenLayer,
 } from '../engine/token-source';
 import { locateJsonParseError, resolveIssueLines } from '../engine/refusal-lines';
@@ -617,6 +621,7 @@ export function Playground() {
     // stub the engine of import day refused (or accepted) is re-refereed
     // now, not trusted from the stored receipts.
     setMintedTokens(entry.mintedTokens ?? null);
+    setCapturedTokens(entry.capturedTokens ?? null);
     const stubResult = setChildStubs(entry.childStubs ?? null);
     // DISPLAY-STATE RECOMPUTE (stored data untouched): the stored receipt
     // groups are the record AS OF IMPORT DAY and are labeled so; anything
@@ -670,6 +675,7 @@ export function Playground() {
     setText(pretty(raw));
     setReceipts(null);
     setMintedTokens(null);
+    setCapturedTokens(null);
     setChildStubs(null);
     setProvenance(source);
     setPristine({ text: pretty(raw), provenance: source });
@@ -742,6 +748,7 @@ export function Playground() {
       const minted: MintedTokenLayer | null =
         first.proposal.mintedTokens && first.proposal.mintedTokens.count > 0 ? first.proposal.mintedTokens : null;
       setMintedTokens(minted);
+      setCapturedTokens(null); // code imports carry no Figma variables
       setChildStubs(null); // code proposals ship no child stubs
       // A successful code import lands in the session workspace.
       const recorded = recordImport({
@@ -989,6 +996,36 @@ export function Playground() {
     origin: 'Figma REST import',
     ws: 'figma',
   });
+  // Captured tokens are DUMP-scoped (one `_variables` channel serves every
+  // set in a batch) — the receiving handler stows the layer here and every
+  // applyProposal of that batch registers the same one.
+  const capturedRef = useRef<CapturedTokenLayer | null>(null);
+
+  /** Receipt group for the captured-token layer — built AFTER registration
+   *  so the shadowed-name census reflects the live layering rule. */
+  const capturedTokenGroups = (layer: CapturedTokenLayer | null): ReceiptGroup[] => {
+    if (!layer || layer.count === 0) return [];
+    const shadowed = new Set(capturedShadowedNames());
+    const registered = layer.entries.filter((e) => !shadowed.has(e.name));
+    return [
+      {
+        title: `Captured tokens (from your Figma variables) — ${registered.length} registered`,
+        kind: 'note',
+        entries: [
+          {
+            message: `The plugin captured each bound variable's RESOLVED value (dump v1.4), so the contract binds your real token names AND the referee + preview resolve them — nothing minted for these. Session-only, like the workspace.`,
+          },
+          ...registered.map((e) => ({
+            message: `{${e.path}} = ${e.value} — from your Figma variable "${e.name}"`,
+          })),
+          ...[...shadowed].map((name) => ({
+            message: `"${name}" shadows a token the active token source already defines — the existing value wins (repo/user tokens outrank captured ones); NOT registered, review`,
+          })),
+          ...layer.skipped.map((s) => ({ message: `"${s.name}" NOT registered — ${s.reason}` })),
+        ],
+      },
+    ];
+  };
 
   const applyProposal = (proposal: FigmaProposal, origin: string, wsSource: WorkspaceSource) => {
     const contractText = pretty(proposal.contract);
@@ -998,6 +1035,12 @@ export function Playground() {
     // Register the minted provisional layer BEFORE the text lands, so the
     // editor's very first validation pass already resolves imported.* refs.
     setMintedTokens(minted);
+    // The captured-token layer (the designer's real variables, dump v1.4)
+    // registers the same way — the proposal's real-name refs resolve on the
+    // very first validation pass instead of refusing "does not exist".
+    const captured = capturedRef.current;
+    setCapturedTokens(captured);
+    const capturedGroups = capturedTokenGroups(captured);
     // Auto-proposed child STUBS register the same way (labeled provisional
     // in the receipts) — the emitters resolve nested-instance refs instead
     // of refusing "no contract in scope" (field case: CBDS ds.icon).
@@ -1024,8 +1067,12 @@ export function Playground() {
       contractId: contractIdOf(proposal.contract),
       source: wsSource,
       contractText,
-      receipts: { source: origin, groups: [...importGroupsRef.current, ...proposalGroups(proposal), ...stubGroups] },
+      receipts: {
+        source: origin,
+        groups: [...importGroupsRef.current, ...capturedGroups, ...proposalGroups(proposal), ...stubGroups],
+      },
       ...(minted ? { mintedTokens: minted } : {}),
+      ...(captured && captured.count > 0 ? { capturedTokens: captured } : {}),
       ...(proposal.childStubs && proposal.childStubs.length > 0 ? { childStubs: proposal.childStubs } : {}),
     });
     setText(contractText);
@@ -1052,6 +1099,9 @@ export function Playground() {
     }
     importGroupsRef.current = groups;
     figmaOriginRef.current = { origin, ws: 'figma' };
+    // REST dumps carry no `_variables` (Enterprise-only endpoint) — this is
+    // null there and the minted route stays the degraded fallback.
+    capturedRef.current = capturedTokensFromDump(result.dump as Record<string, unknown>);
     setFigmaProposals(batch.proposals);
     applyProposal(batch.proposals[0], origin, 'figma');
   };
@@ -1127,6 +1177,10 @@ export function Playground() {
       }
       importGroupsRef.current = groups;
       figmaOriginRef.current = { origin: 'Figma plugin import', ws: 'figma' };
+      // dump v1.4: the plugin captured each bound variable's resolved value —
+      // register them as the session's captured-token layer so the proposal's
+      // real-name refs resolve (the ZERO-refusals promise, made true here).
+      capturedRef.current = capturedTokensFromDump(dump as Record<string, unknown>);
       setFigmaProposals(batch.proposals);
       applyProposal(batch.proposals[0], 'Figma plugin import', 'figma');
     } catch (e) {
@@ -1250,6 +1304,7 @@ export function Playground() {
         }
         importGroupsRef.current = groups;
         figmaOriginRef.current = { origin: 'pasted Figma dump', ws: 'json' };
+        capturedRef.current = capturedTokensFromDump(parsed as Record<string, unknown>);
         setFigmaProposals(batch.proposals);
         applyProposal(batch.proposals[0], 'pasted Figma dump', 'json');
       } catch (e) {
@@ -1275,6 +1330,7 @@ export function Playground() {
     setText(contractText);
     setReceipts(recorded.receipts);
     setMintedTokens(null);
+    setCapturedTokens(null);
     setChildStubs(null);
     setProvenance('pasted contract JSON');
     setPristine({ text: contractText, provenance: 'pasted contract JSON' });
@@ -1316,6 +1372,7 @@ export function Playground() {
     const contractText = pretty(result.contract);
     setText(contractText);
     setMintedTokens(null);
+    setCapturedTokens(null);
     setChildStubs(null);
     setProvenance(origin);
     setPristine({ text: contractText, provenance: origin });
@@ -1497,7 +1554,8 @@ export function Playground() {
         if (cancelled) return;
         setText(state.contract);
         setMintedTokens(null);
-    setChildStubs(null);
+        setCapturedTokens(null);
+        setChildStubs(null);
         setProvenance('loaded from share link');
         setPristine({ text: state.contract, provenance: 'loaded from share link' });
         setActiveExample(null);

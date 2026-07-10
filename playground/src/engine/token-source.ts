@@ -25,6 +25,7 @@ import {
   mintedTokenCss,
   tokenCorpusFromJson,
   tokenInventoryFromJson,
+  type CapturedTokenLayer,
   type MintedEntry,
   type TokenCorpus,
   type TokenTreeInput,
@@ -151,6 +152,65 @@ export interface MintedTokenLayer {
   entries: MintedEntry[];
 }
 
+// ---------------------------------------------------------------------------
+// Captured tokens — the designer's REAL variables (dump v1.4 `_variables`),
+// an ADDITIONAL layer with the same lifecycle as the minted layer: a plugin
+// import that carried resolved variable values registers it (the proposal's
+// real-name refs — {bg.brand.default}, {spacing.200} — resolve and the
+// preview renders HIS values); every other load path clears or replaces it;
+// a workspace entry restores its own. LAYERING RULE: repo/user tokens win
+// on name collision — a captured name that shadows a base token is pruned
+// from the composed source and surfaced by name (capturedShadowedNames),
+// never silently overridden.
+// ---------------------------------------------------------------------------
+
+export type { CapturedTokenLayer };
+
+/** Nested DTCG tree from the layer's entries, `paths` only. */
+function capturedTree(layer: CapturedTokenLayer, paths: Set<string>): Record<string, unknown> {
+  const tree: Record<string, unknown> = {};
+  for (const e of layer.entries) {
+    if (!paths.has(e.path)) continue;
+    const segs = e.path.split('.');
+    let node = tree;
+    for (const seg of segs.slice(0, -1)) node = (node[seg] ??= {}) as Record<string, unknown>;
+    node[segs[segs.length - 1]] = { $value: e.value, $type: e.type };
+  }
+  return tree;
+}
+
+/** Compose base + captured: registrable entries join the inventory, the
+ *  emitter tree's semantic slot, treesForCode, and the preview stylesheet;
+ *  shadowed names (already defined by the base source) are EXCLUDED — the
+ *  base value keeps winning everywhere — and reported via
+ *  capturedShadowedNames for the receipts rail. */
+function composeCaptured(
+  base: TokenSource,
+  captured: CapturedTokenLayer | null,
+): { source: TokenSource; shadowed: string[] } {
+  if (!captured || captured.count === 0) return { source: base, shadowed: [] };
+  const shadowed = captured.entries.filter((e) => base.inventory.has(e.path)).map((e) => e.name);
+  const registered = captured.entries.filter((e) => !base.inventory.has(e.path));
+  if (registered.length === 0) return { source: base, shadowed };
+  const paths = new Set(registered.map((e) => e.path));
+  const tree = capturedTree(captured, paths);
+  const semantic = mergeTrees([base.tree.semantic as Record<string, unknown>, tree]);
+  return {
+    shadowed,
+    source: {
+      ...base,
+      label: `${base.label} + ${registered.length} captured Figma variable${registered.length === 1 ? '' : 's'}`,
+      tree: { ...base.tree, semantic },
+      inventory: new Set([...base.inventory, ...paths]),
+      treesForCode: [...base.treesForCode, tree],
+      stylesheets: {
+        ...base.stylesheets,
+        base: `${base.stylesheets.base}\n/* Captured tokens (from your Figma variables) — ${registered.length} registered; repo tokens win on name collision. */\n${mintedTokenCss(tree)}`,
+      },
+    },
+  };
+}
+
 /** Compose base + minted into the TokenSource every consumer reads. The
  *  minted tree deep-merges into the semantic slot (its root is `imported` —
  *  no semantic group ever collides by the MINT_NAMESPACE invariant). */
@@ -178,14 +238,39 @@ const STORAGE_KEY = 'ds-playground.user-tokens';
 
 let baseSource: TokenSource = repoTokenSource;
 let mintedLayer: MintedTokenLayer | null = null;
+let capturedLayer: CapturedTokenLayer | null = null;
+let capturedShadowed: string[] = [];
 let active: TokenSource = repoTokenSource;
 const listeners = new Set<() => void>();
 const recompose = () => {
-  active = composeSource(baseSource, mintedLayer);
+  // Layer order: base (repo or user paste) → captured (the designer's real
+  // variables; base wins on collisions) → minted (imported.* — its namespace
+  // never collides by the MINT_NAMESPACE invariant).
+  const withCaptured = composeCaptured(baseSource, capturedLayer);
+  capturedShadowed = withCaptured.shadowed;
+  active = composeSource(withCaptured.source, mintedLayer);
 };
 const notify = () => listeners.forEach((fn) => fn());
 
 export const activeTokens = (): TokenSource => active;
+
+/** The registered captured-token layer, if any. */
+export const activeCapturedTokens = (): CapturedTokenLayer | null => capturedLayer;
+
+/** Captured variable names the BASE source shadows (repo/user value wins) —
+ *  recomputed on every recompose; the receipts rail names them. */
+export const capturedShadowedNames = (): string[] => capturedShadowed;
+
+/** Register (or clear) the captured-token layer (dump v1.4 `_variables`).
+ *  Playground calls this on every load path, exactly like setMintedTokens,
+ *  so the layer always belongs to the import on screen. */
+export function setCapturedTokens(layer: CapturedTokenLayer | null): void {
+  const next = layer && layer.count > 0 ? layer : null;
+  if (next === capturedLayer) return;
+  capturedLayer = next;
+  recompose();
+  notify();
+}
 
 /** The base (repo or user-pasted) source, minted layer excluded — the path
  *  list assist rename suggestions should follow. */

@@ -13,7 +13,7 @@
  */
 import { useSyncExternalStore } from 'react';
 import type { ReceiptGroup, Receipts } from '../receipts.js';
-import type { MintedTokenLayer } from './token-source.js';
+import type { CapturedTokenLayer, MintedTokenLayer } from './token-source.js';
 
 export type WorkspaceSource = 'figma' | 'code' | 'prompt' | 'json';
 
@@ -31,6 +31,9 @@ export interface WorkspaceEntry {
   /** Minted provisional token layer (degraded Figma imports) — re-registered
    *  on load so the entry's contract renders styled again. */
   mintedTokens?: MintedTokenLayer;
+  /** Captured tokens (dump v1.4 `_variables` — the designer's real
+   *  variables) — re-registered on load so real-name refs keep resolving. */
+  capturedTokens?: CapturedTokenLayer;
   /** Auto-proposed child STUB contracts that rode the import (raw JSON,
    *  verbatim) — re-registered on load so composition refs keep resolving. */
   childStubs?: unknown[];
@@ -105,6 +108,7 @@ export interface RecordImportInput {
   contractText: string;
   receipts: Receipts | null;
   mintedTokens?: MintedTokenLayer;
+  capturedTokens?: CapturedTokenLayer;
   childStubs?: unknown[];
 }
 
@@ -125,6 +129,7 @@ export function recordImport(input: RecordImportInput): RecordImportResult {
     contractText: input.contractText,
     receipts: input.receipts,
     ...(input.mintedTokens && input.mintedTokens.count > 0 ? { mintedTokens: input.mintedTokens } : {}),
+    ...(input.capturedTokens && input.capturedTokens.count > 0 ? { capturedTokens: input.capturedTokens } : {}),
     ...(input.childStubs && input.childStubs.length > 0 ? { childStubs: input.childStubs } : {}),
     importedAt: Date.now(),
   };
