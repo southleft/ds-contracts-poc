@@ -1,6 +1,6 @@
 {
-  "passed": 63,
-  "total": 63,
+  "passed": 67,
+  "total": 67,
   "results": [
     {
       "id": "refuse-unknown-token-reference",
@@ -314,6 +314,26 @@
     },
     {
       "id": "design-child-stubs-prevent-scope-refusals",
+      "claim": "C5-extraction",
+      "pass": true
+    },
+    {
+      "id": "design-shadow-mints-and-renders",
+      "claim": "C5-extraction",
+      "pass": true
+    },
+    {
+      "id": "design-pointer-geometry-carried",
+      "claim": "C5-extraction",
+      "pass": true
+    },
+    {
+      "id": "design-pointer-false-no-arrow",
+      "claim": "C5-extraction",
+      "pass": true
+    },
+    {
+      "id": "design-text-weight-and-line-height-carried",
       "claim": "C5-extraction",
       "pass": true
     }
