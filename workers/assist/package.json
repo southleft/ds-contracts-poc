@@ -8,7 +8,7 @@
     "dev": "wrangler dev",
     "deploy": "wrangler deploy",
     "typecheck": "tsc -p .",
-    "test": "tsx --test test/handler.test.ts"
+    "test": "tsx --test test/handler.test.ts test/bridge.test.ts"
   },
   "devDependencies": {
     "tsx": "^4.19.0",

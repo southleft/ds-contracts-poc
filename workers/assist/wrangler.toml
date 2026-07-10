@@ -30,3 +30,12 @@ ASSIST_IP_DAILY_LIMIT = "5"
 # typical input-heavy mix; absolute worst case (pure output) ≈ $15.
 # See README "Budget math" for the translation.
 ASSIST_DAILY_TOKEN_BUDGET = "600000"
+
+# Plugin bridge ("Send to Playground") — its own kill switch: the bridge
+# costs KV reads/writes only, never Anthropic tokens. See README "Plugin
+# bridge" and src/bridge.ts.
+BRIDGE_ENABLED = "true"
+
+# Per-IP daily cap for bridge session creation and uploads (each counted as
+# its own class). Playground polls are uncounted by design.
+BRIDGE_IP_DAILY_LIMIT = "40"

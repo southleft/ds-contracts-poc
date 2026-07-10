@@ -16,6 +16,7 @@ import type { Env, KVNamespaceLite } from './env';
 
 export const DEFAULT_IP_DAILY_LIMIT = 5;
 export const DEFAULT_DAILY_TOKEN_BUDGET = 600_000;
+export const DEFAULT_BRIDGE_IP_DAILY_LIMIT = 40;
 
 const DAY_TTL_SECONDS = 2 * 24 * 60 * 60; // outlive the UTC day, then vanish
 
@@ -52,6 +53,26 @@ export async function reserveIpSlot(
 ): Promise<boolean> {
   const limit = intVar(env.ASSIST_IP_DAILY_LIMIT, DEFAULT_IP_DAILY_LIMIT);
   const key = `ip:${endpoint}:${ip}:${utcDay(now)}`;
+  const used = await readCount(env.ASSIST_KV, key);
+  if (used >= limit) return false;
+  await env.ASSIST_KV.put(key, String(used + 1), { expirationTtl: DAY_TTL_SECONDS });
+  return true;
+}
+
+/**
+ * Same counter, bridge classes (`bridge-session` / `bridge-upload`), its own
+ * higher default: pairing retries are cheap KV writes, not model calls.
+ * Playground polls (GET) are deliberately uncounted — origin-gated reads
+ * against an unguessable code.
+ */
+export async function reserveBridgeSlot(
+  env: Env,
+  kind: 'session' | 'upload',
+  ip: string,
+  now: Date,
+): Promise<boolean> {
+  const limit = intVar(env.BRIDGE_IP_DAILY_LIMIT, DEFAULT_BRIDGE_IP_DAILY_LIMIT);
+  const key = `ip:bridge-${kind}:${ip}:${utcDay(now)}`;
   const used = await readCount(env.ASSIST_KV, key);
   if (used >= limit) return false;
   await env.ASSIST_KV.put(key, String(used + 1), { expirationTtl: DAY_TTL_SECONDS });
