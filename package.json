@@ -34,6 +34,7 @@
     "extract:figma:cbds:batch:check": "tsx extract/figma/cbds-batch-check.ts",
     "extract:figma:cbds:bridge:check": "tsx extract/figma/cbds-bridge-check.ts",
     "extract:figma:tooltip:check": "tsx extract/figma/tooltip-check.ts",
+    "extract:figma:gauntlet": "tsx extract/figma/gauntlet/census.ts",
     "extract:figma:rest": "tsx extract/figma/rest/cli.ts",
     "extract:figma:rest:roundtrip": "tsx extract/figma/rest/roundtrip-rest.ts",
     "extract:figma:mcp": "tsx extract/figma/mcp/cli.ts",
