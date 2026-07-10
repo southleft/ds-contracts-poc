@@ -1,6 +1,6 @@
 {
-  "passed": 75,
-  "total": 75,
+  "passed": 79,
+  "total": 79,
   "results": [
     {
       "id": "refuse-unknown-token-reference",
@@ -375,6 +375,26 @@
     {
       "id": "design-min-height-carried",
       "claim": "C5-extraction",
+      "pass": true
+    },
+    {
+      "id": "design-census-unmappable-child-props-dropped",
+      "claim": "C5-extraction",
+      "pass": true
+    },
+    {
+      "id": "design-census-boolean-visiblewhen-truthy-form",
+      "claim": "C5-extraction",
+      "pass": true
+    },
+    {
+      "id": "design-census-digit-led-prop-binding-prefixed",
+      "claim": "C5-extraction",
+      "pass": true
+    },
+    {
+      "id": "figma-script-referees-invalid-contracts",
+      "claim": "C2-refusal",
       "pass": true
     }
   ]

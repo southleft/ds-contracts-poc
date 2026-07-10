@@ -51,16 +51,32 @@ const ref = (slashName: string) => `{${dotPath(slashName)}}`;
  *  CBDS Button) and the honest move is to sanitize AT PROPOSAL, keeping the
  *  original spelling as the design binding (bindings.figma.property), not to
  *  refuse at emit. The "#id" suffix non-variant properties carry is never
- *  part of the name. */
+ *  part of the name. A digit-led spelling gets the componentIdSlug digit-led
+ *  discipline (rule 4 below) applied to prop code bindings: a code identifier
+ *  cannot start with a digit, so the deterministic prefix "p" is applied —
+ *  the kit's "2nd paragraph" TEXT property becomes prop \`p2ndParagraph\`
+ *  ("2ndParagraph" is not a legal camelCase identifier and emit refuses it);
+ *  an all-illegal name becomes "p". Every rename is a NAMED note at the call
+ *  sites (propNameDigitLed is the trigger); the figma binding keeps the
+ *  original spelling. */
 export const canonicalPropName = (property: string): string => {
   const bare = property.split('#')[0].trim();
   if (/^[a-z][A-Za-z0-9]*$/.test(bare)) return bare;
-  return camel(bare.replace(/[^A-Za-z0-9 _-]+/g, ' ').trim());
+  const name = camel(bare.replace(/[^A-Za-z0-9 _-]+/g, ' ').trim());
+  return /^[a-z]/.test(name) ? name : `p${name}`;
 };
 
 /** True when canonicalPropName had to strip characters — the note trigger. */
 export const propNameSanitized = (property: string): boolean =>
   /[^A-Za-z0-9 _-]/.test(property.split('#')[0].trim());
+
+/** True when canonicalPropName had to apply the digit-led "p" prefix — the
+ *  rename-note trigger (mirrors idSlugSanitized for contract ids). */
+export const propNameDigitLed = (property: string): boolean => {
+  const bare = property.split('#')[0].trim();
+  if (/^[a-z][A-Za-z0-9]*$/.test(bare)) return false;
+  return !/^[a-z]/.test(camel(bare.replace(/[^A-Za-z0-9 _-]+/g, ' ').trim()));
+};
 
 /** Contract-id slug for a drawn component/set name — the SAME discipline as
  *  canonicalPropName: sanitize AT PROPOSAL, never refuse at emit. The schema's
@@ -1700,14 +1716,39 @@ function invertLayoutByProp(
 function visibilityFromPresence(m: Merged, ctx: Ctx, where: string): Record<string, unknown> | undefined {
   if (m.occ.length === ctx.totalVariants.length) return undefined;
   const present = new Set(m.occ.map((o) => o.variant));
+  let boolFalseSide: Axis | undefined;
   for (const axis of ctx.axes) {
     for (const value of axis.values) {
       const matches = ctx.totalVariants.every((v) => {
         const is = axisValuesOf(v)[axis.property] === value;
         return is === present.has(v);
       });
-      if (matches) return { prop: axis.propName, equals: camel(value) };
+      if (!matches) continue;
+      // A true/false axis promotes to a BOOLEAN prop (see the props pass) —
+      // `equals: "true"` would refuse at the referee (visibleWhen.equals is
+      // enum vocabulary). The truthy form `{ prop }` is the boolean spelling.
+      if (isBoolAxis(axis.values)) {
+        if (value.trim().toLowerCase() === 'true') {
+          ctx.notes.push(
+            `${where}: present exactly where "${axis.property}" is true — proposed as visibleWhen { prop: ${axis.propName} } (boolean axis, truthy form)`,
+          );
+          return { prop: axis.propName };
+        }
+        // Present exactly where the boolean is FALSE: the visibleWhen
+        // vocabulary has no negated form (and stylesWhen cannot negate
+        // either) — remember, keep scanning for an expressible axis, and
+        // name the limit if none fits.
+        boolFalseSide = axis;
+        continue;
+      }
+      return { prop: axis.propName, equals: camel(value) };
     }
+  }
+  if (boolFalseSide) {
+    ctx.notes.push(
+      `${where}: present exactly where "${boolFalseSide.property}" is false — the visibleWhen vocabulary has no negated form, so the condition is inexpressible; kept unconditional (declared fidelity limit), review`,
+    );
+    return undefined;
   }
   // Absences fully explained by base-instance-flattened variants are a
   // declared fidelity limit (the base component's internals are not captured
@@ -1980,7 +2021,10 @@ function buildPart(
     const component: Record<string, unknown> = { id: id ?? stubIdFor(instanceOf, ctx).id };
     const applied = first(m.occ, (n) => n.componentProperties);
     if (applied) {
-      component.props = canonicalizeInstanceProps(instanceOf, applied, ctx, where);
+      const canonical = canonicalizeInstanceProps(instanceOf, applied, ctx, where);
+      // Every applied prop may have been dropped as unmappable (each is a
+      // named note) — an empty props object carries nothing.
+      if (Object.keys(canonical).length > 0) component.props = canonical;
     } else {
       ctx.notes.push(
         `${where}: fixed prop values of the nested "${instanceOf}" instance are not captured in dump v1 — declared fidelity limit, author them if the instance is configured`,
@@ -2118,8 +2162,17 @@ function canonicalizeInstanceProps(
 ): Record<string, string | boolean> {
   const out: Record<string, string | boolean> = {};
   const childId = ctx.contractIdByName.get(instanceOf);
-  const child = childId ? ctx.contractsById?.get(childId) : undefined;
+  // The ref id and the stub share stubIdFor — when the NAME lookup misses but
+  // the derived id lands on a contract already in scope (live-kit census:
+  // "ListItem"/"BreadcrumbItem"/"AvatarGroup" slugs collide with the repo's
+  // ds.list-item / ds.breadcrumb-item / ds.avatar-group), the emitted ref
+  // resolves to THAT contract (a stub never overrides a registered contract),
+  // so canonicalization must run against it too.
+  const child =
+    (childId ? ctx.contractsById?.get(childId) : undefined) ??
+    ctx.contractsById?.get(stubIdFor(instanceOf, ctx).id);
   let mapped = 0;
+  let dropped = 0;
   for (const [property, value] of Object.entries(applied)) {
     // Preferred: canonicalize through the child contract's own bindings —
     // the figma property name and value spelling map back to the canonical
@@ -2145,13 +2198,29 @@ function canonicalizeInstanceProps(
       mapped++;
       continue;
     }
+    if (child) {
+      // The child contract IS in scope but this applied prop does not map
+      // through its bindings.figma — DROPPED with a named note, never
+      // guessed (a guessed spelling is an unknown child prop the referee
+      // refuses; the mismatch usually means the child contract is stale
+      // against the live kit).
+      dropped++;
+      ctx.notes.push(
+        `${where}: applied prop "${property.split('#')[0]}" on nested "${instanceOf}" does not map through ${child.id}'s bindings — not carried; verify the child contract is current`,
+      );
+      continue;
+    }
     // Fallback without the child contract in scope: canonical spelling.
     out[canonicalPropName(property)] = typeof value === 'string' ? camel(value) : value;
   }
   if (child && mapped === Object.keys(applied).length) {
     ctx.notes.push(`${where}: fixed props of "${instanceOf}" canonicalized through ${child.id}'s bindings`);
+  } else if (child) {
+    ctx.notes.push(
+      `${where}: fixed props of "${instanceOf}": ${mapped} canonicalized through ${child.id}'s bindings, ${dropped} dropped as unmappable (named per prop above)`,
+    );
   } else {
-    ctx.notes.push(`${where}: fixed props of "${instanceOf}" canonicalized by spelling (dump v1.1)${child ? ' — some values missing from ' + child.id + "'s bindings, verify" : " — verify against the child contract's bindings"}`);
+    ctx.notes.push(`${where}: fixed props of "${instanceOf}" canonicalized by spelling (dump v1.1) — verify against the child contract's bindings`);
   }
   return out;
 }
@@ -2873,6 +2942,11 @@ export function proposeFromDump(
         `slot \`${name}\`: Figma property "${s.property}" contains characters outside a legal identifier — name sanitized at proposal; the original spelling stays the design binding (slot.figmaProperty)`,
       );
     }
+    if (s !== defaultSlot && propNameDigitLed(s.property)) {
+      ctx.notes.push(
+        `slot \`${name}\`: Figma property "${s.property}" is digit-led — a code identifier cannot start with a digit, so the name gets the deterministic "p" prefix (the componentIdSlug digit-led discipline); the original spelling stays the design binding (slot.figmaProperty)`,
+      );
+    }
     if (s === defaultSlot) {
       ctx.notes.push(
         `slot "${s.property}": first non-optional slot in tree order — judged the DEFAULT slot (name \`children\`); rename if it is not the main content`,
@@ -2984,6 +3058,11 @@ export function proposeFromDump(
     if (property && propNameSanitized(property)) {
       ctx.notes.push(
         `prop \`${String(p.name)}\`: Figma property "${property}" contains characters outside a legal identifier — name sanitized at proposal; the original spelling stays the design binding (bindings.figma.property)`,
+      );
+    }
+    if (property && propNameDigitLed(property)) {
+      ctx.notes.push(
+        `prop \`${String(p.name)}\`: Figma property "${property}" is digit-led — a code identifier cannot start with a digit, so the name gets the deterministic "p" prefix (the componentIdSlug digit-led discipline applied to prop code bindings); the original spelling stays the design binding (bindings.figma.property)`,
       );
     }
   }

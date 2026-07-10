@@ -631,11 +631,11 @@ const ENGINEERING_READS: Record<string, string> = {
   'duplicate-part-name':
     'Dies at the referee: `validateContract` (core/emit-react.ts:180) requires part names to be unique across the WHOLE anatomy (`walkAnatomy` global `seen` set), but the proposer dedupes only among SIBLINGS — `partKey` (core/propose-figma.ts:1777, `taken` is per-sibling-scope). Two same-named parts under different parents (Dialog\'s two "Title" sections, Table rows\' repeated "td") pass proposal and refuse at validation, which also blocks the react/html/react-inline emitters. Likely fix: thread one contract-global `taken` set (or parent-qualified names) through `partKey`, with the rename receipted as a note — this is the in-flight dedup branch.',
   'component-ref-unknown-child-prop':
-    'Dies at the referee: `validateContract` (core/emit-react.ts:195) refuses component-ref props absent from the child contract\'s API. Source: `canonicalizeInstanceProps` (core/propose-figma.ts:2069) — when the nested instance\'s child IS in scope (repo ds.avatar / ds.badge / ds.list-item matched by name) but an applied Figma property does not map through the child\'s `bindings.figma`, the fallback branch still emits it under `canonicalPropName(property)` ("isVisible", "notification", "iconRight"). Likely fix: when the child contract is in scope, DROP unmappable applied props with a named note (declared fidelity limit) instead of emitting them — and separately reconcile the repo child contracts with the kit\'s current property APIs, since the mismatch also signals the repo contracts are stale against the live kit.',
+    'FIXED (census class-fix batch) — `canonicalizeInstanceProps` (core/propose-figma.ts) now DROPS applied props that do not map through an in-scope child contract\'s `bindings.figma`, each with a named note (\'applied prop "X" on nested "Y" does not map through ds.y\'s bindings — not carried; verify the child contract is current\'), never a guessed spelling the referee (core/emit-react.ts:195) would refuse. If this class ranks again, it is a REGRESSION — replay `extract/figma/gauntlet/class-fix-check.ts`.',
   'visiblewhen-value-outside-prop-enum':
-    'Dies at the referee: `validateContract` (core/emit-react.ts:371) requires `visibleWhen.equals` to be a member of the prop\'s ENUM values, but the prop the condition points at was promoted to a BOOLEAN (True/False variant axis — "inlineAction", "imageBottom"). Source: presence inversion emits `equals: camel(value)` unconditionally (`visibilityFromPresence`, core/propose-figma.ts:1689-1701, and the hidden-channel path at :1154). Likely fix: when the referenced axis proposes as a boolean prop, spell presence as `visibleWhen { prop }` (truthy form, already legal — see :1139) or negate, instead of `equals: "true"`.',
+    'FIXED (census class-fix batch) — `visibilityFromPresence` (core/propose-figma.ts) now spells presence on a true/false axis as the truthy form `visibleWhen { prop }` (the axis promotes to a BOOLEAN prop; `equals: "true"` is enum vocabulary the referee at core/emit-react.ts:371 refuses). The false side (present exactly where the boolean is false) is inexpressible — visibleWhen has no negated form — and stays a NAMED note, kept unconditional. If this class ranks again, it is a REGRESSION — replay `extract/figma/gauntlet/class-fix-check.ts`.',
   'prop-binding-not-camelcase':
-    'Dies at the referee: `validateContract` (core/emit-react.ts:425) refuses code bindings that are not legal camelCase identifiers. Source: `canonicalPropName`/`camel` (core/propose-figma.ts:34-62) preserve digit-led spellings — the kit\'s "2nd paragraph" text property becomes prop "2ndParagraph". Likely fix: the digit-led guard `componentIdSlug` already applies to contract ids (prefix rule, core/propose-figma.ts:78) applied to prop code bindings too, with the rename noted.',
+    'FIXED (census class-fix batch) — `canonicalPropName` (core/propose-figma.ts) now applies the componentIdSlug digit-led discipline to prop code bindings: a digit-led spelling gets the deterministic "p" prefix ("2nd paragraph" → `p2ndParagraph`) with a named note; the figma binding keeps the original spelling. If this class ranks again, it is a REGRESSION — replay `extract/figma/gauntlet/class-fix-check.ts`.',
   'pattern-arrayof-candidate':
     'Not a refusal — a capability frontier. ≥3 same-named siblings (avatar stacks, table rows, pagination numbers) propose as N independent parts; the contract vocabulary has no arrayOf/repeat, so emitted code hard-codes the drawn count. Proposal-side detection would live where merged children are walked (core/propose-figma.ts `partKey`/merge pass); the vocabulary decision is a schema question (scripts/contract-schema.ts).',
   'pattern-slot-placeholder':
@@ -736,7 +736,7 @@ md.push(`| plain COMPONENTs (icon-class, single variant) | ${cleanPlain.length} 
 md.push(`| **real COMPONENT_SETs (variant axes)** | ${cleanComponentSets.length} | ${componentSets.length - cleanComponentSets.length} | **${pct(cleanComponentSets.length, componentSets.length)}** |`);
 md.push('');
 md.push(
-  `CLEAN = proposed, zero referee violations, all ${emitters.length} surfaces emit. The whole-kit number is icon-inflated: ${pct(plainComponents.length)} of the kit is single-variant COMPONENTs. The honest capability number is the COMPONENT_SET row — the failures concentrate exactly in the owner's real composites (Menu, Card-Image, Avatar group, Breadcrumb, Dialog…).`,
+  `CLEAN = proposed, zero referee violations, all ${emitters.length} surfaces emit. The whole-kit number is icon-inflated: ${pct(plainComponents.length)} of the kit is single-variant COMPONENTs. The honest capability number is the COMPONENT_SET row — ${notClean.length > 0 ? "the failures concentrate exactly in the owner's real composites (Menu, Card-Image, Avatar group, Breadcrumb, Dialog…)" : "the owner's real composites (Menu, Card-Image, Avatar group, Breadcrumb, Dialog…), where the failures used to concentrate, are clean too"}.`,
 );
 md.push('');
 md.push(
@@ -744,7 +744,7 @@ md.push(
 );
 md.push('');
 md.push(
-  `**Surface honesty:** the figma-script emitter does not referee (core/emit-figma-script.ts never calls validateContract) — every one of the ${notClean.length - skipped.length} violating sets still emits a sync script while react/html/react-inline refuse. That is why "not clean" sets report 1 emitted surface, not 0.`,
+  `**Surface honesty:** all four emitters referee — emit-figma-script calls validateContract (census class-fix batch), so a referee-violating contract refuses BY NAME on the canvas surface exactly like react/html/react-inline. (Before the batch it was the one surface that still emitted sync scripts for violating sets.)`,
 );
 md.push('');
 md.push('## Failure classes, ranked by set frequency');
@@ -752,6 +752,7 @@ md.push('');
 const failureClasses = rankedClasses.filter((c) => !c.cls.startsWith('pattern-'));
 if (failureClasses.length === 0) {
   md.push('_None — every set is clean._');
+  md.push('');
 } else {
   for (const [i, agg] of failureClasses.entries()) {
     const flag = FIX_IN_FLIGHT.has(agg.cls)
@@ -773,6 +774,48 @@ if (failureClasses.length === 0) {
     if (setNames.length > 3) md.push(`(all ${setNames.length}: ${setNames.join(', ')})`);
     md.push('');
   }
+}
+// Fixed classes (census class-fix batch): printed only while the class is
+// genuinely absent from the ranking — if it ranks again above, that section
+// is the truth and this one goes quiet for it.
+const FIXED_CLASSES: Array<{ cls: string; was: string; fixture: string; fixtureSet: string; text: string }> = [
+  {
+    cls: 'component-ref-unknown-child-prop',
+    was: '12 sets',
+    fixture: 'component-ref-unknown-child-prop-avatar-group.dump.json',
+    fixtureSet: 'Avatar group',
+    text:
+      'when the nested instance\'s child contract IS in scope, applied props that do not map through the child\'s `bindings.figma` are DROPPED, each with a named note (\'applied prop "X" on nested "Y" does not map through ds.y\'s bindings — not carried; verify the child contract is current\'), never a guessed spelling. "In scope" resolves exactly like the emitted ref id does: by contract name, then by the stubIdFor slug — a slug that lands on a registered contract (ds.list-item, ds.breadcrumb-item, ds.avatar-group) canonicalizes against it, since a stub never overrides a registered contract. Several repo child contracts (ds.avatar, ds.badge, ds.list-item, ds.breadcrumb-item, ds.avatar-group) are STALE against the live kit\'s current property APIs ("isVisible", "notification", "iconRight", "textBreadcrumb", … exist on the canvas but not in the repo contracts) — dropping with a note is the honest behavior either way; reconcile the child contracts to carry those props again.',
+  },
+  {
+    cls: 'visiblewhen-value-outside-prop-enum',
+    was: '11 sets',
+    fixture: 'visiblewhen-value-outside-prop-enum-alert.dump.json',
+    fixtureSet: 'Alert',
+    text:
+      'presence riding a true/false variant axis now spells the truthy form `visibleWhen { prop }` (the axis promotes to a BOOLEAN prop; `equals: "true"` is enum vocabulary the referee refuses). The false side — present exactly where the boolean is false — is inexpressible (visibleWhen has no negated form) and stays a NAMED note, kept unconditional.',
+  },
+  {
+    cls: 'prop-binding-not-camelcase',
+    was: '1 set',
+    fixture: 'prop-binding-not-camelcase-note.dump.json',
+    fixtureSet: 'Note',
+    text:
+      'digit-led property spellings get the componentIdSlug digit-led discipline applied to prop code bindings — the deterministic "p" prefix ("2nd paragraph" → `p2ndParagraph`) with a named note; the figma binding keeps the original spelling.',
+  },
+];
+const fixedNow = FIXED_CLASSES.filter((f) => !rankedClasses.some((c) => c.cls === f.cls));
+if (fixedNow.length > 0) {
+  md.push('## Fixed classes (census class-fix batch) — gone from the ranking');
+  md.push('');
+  md.push(
+    `Each fix is replayable offline against the committed class fixture (\`fixtures/<class>-<set>.dump.json\`) via \`tsx extract/figma/gauntlet/class-fix-check.ts\`, and the fourth guard rides along: emit-figma-script now calls validateContract, so an invalid contract refuses BY NAME on the canvas surface like the other three emitters.`,
+  );
+  md.push('');
+  for (const f of fixedNow) {
+    md.push(`- \`${f.cls}\` (was ${f.was}) — ${f.text}`);
+  }
+  md.push('');
 }
 md.push('## Engineering read per top class — where it dies, what the fix likely is');
 md.push('');
@@ -825,7 +868,7 @@ const hitLines = failureClasses.slice(0, 4).map((agg) => {
   return `\`${agg.cls}\` (${(100 * (1 - Math.pow(1 - f, 5))).toFixed(0)}% whole-kit / ${(100 * (1 - Math.pow(1 - fSets, 5))).toFixed(0)}% if he draws COMPONENT_SETs)`;
 });
 md.push(
-  `If the owner imports **5 sets at random** from this kit: expected clean count **${expected.toFixed(1)} of 5** (per-set clean rate ${pct(clean.length)}); probability all five are clean **${(100 * pAll).toFixed(1)}%** (= ${p.toFixed(3)}^5). But a random draw is icon-heavy (${pct(plainComponents.length)} of keys are single-variant COMPONENTs) — if the five "random component imports" are the components a person actually reaches for, the COMPONENT_SET population is the honest base: clean rate ${pct(cleanComponentSets.length, componentSets.length)}, expected **${(5 * pSet).toFixed(1)} of 5** clean, probability all five clean **${(100 * Math.pow(pSet, 5)).toFixed(1)}%** (= ${pSet.toFixed(3)}^5). Chance at least one of the five hits each top class, by simple frequency: ${hitLines.join('; ')}. No usage weighting — pure per-set frequency, both populations shown.`,
+  `If the owner imports **5 sets at random** from this kit: expected clean count **${expected.toFixed(1)} of 5** (per-set clean rate ${pct(clean.length)}); probability all five are clean **${(100 * pAll).toFixed(1)}%** (= ${p.toFixed(3)}^5). But a random draw is icon-heavy (${pct(plainComponents.length)} of keys are single-variant COMPONENTs) — if the five "random component imports" are the components a person actually reaches for, the COMPONENT_SET population is the honest base: clean rate ${pct(cleanComponentSets.length, componentSets.length)}, expected **${(5 * pSet).toFixed(1)} of 5** clean, probability all five clean **${(100 * Math.pow(pSet, 5)).toFixed(1)}%** (= ${pSet.toFixed(3)}^5). ${hitLines.length > 0 ? `Chance at least one of the five hits each top class, by simple frequency: ${hitLines.join('; ')}. ` : 'No failure class remains to hit. '}No usage weighting — pure per-set frequency, both populations shown.`,
 );
 md.push('');
 md.push('## Class acceptance fixtures');
@@ -836,6 +879,12 @@ md.push(
 md.push('');
 for (const f of fixtures) md.push(`- \`${f.file}\` — class \`${f.cls}\`, set **${f.setName}**`);
 md.push('');
+if (fixedNow.length > 0) {
+  md.push('Fixed-class fixtures stay committed for regression replay (`tsx extract/figma/gauntlet/class-fix-check.ts`):');
+  md.push('');
+  for (const f of fixedNow) md.push(`- \`${f.fixture}\` — class \`${f.cls}\` (fixed), set **${f.fixtureSet}**`);
+  md.push('');
+}
 if (writeOutputs) writeFileSync(path.join(OUT_DIR, 'CENSUS.md'), md.join('\n') + '\n');
 
 console.log(`\nclean ${clean.length}/${records.length} (${pct(clean.length)}) — COMPONENT_SETs ${cleanComponentSets.length}/${componentSets.length} (${pct(cleanComponentSets.length, componentSets.length)})`);
