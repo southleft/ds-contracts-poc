@@ -7,18 +7,18 @@
  "summary": {
   "dump": "extract/figma/fixtures/cbds-plugin-all-sets.v14.dump.json",
   "sets": 1618,
-  "clean": 1597,
-  "notClean": 21,
+  "clean": 1618,
+  "notClean": 0,
   "skipped": 0,
   "proposed": 1618,
-  "emitAllFour": 1597,
+  "emitAllFour": 1618,
   "componentSets": {
    "total": 76,
-   "clean": 57
+   "clean": 76
   },
   "plainComponents": {
    "total": 1542,
-   "clean": 1540
+   "clean": 1542
   },
   "capturedTokens": {
    "count": 126,
@@ -40,7 +40,7 @@
    "tokenRefsMedian": 1,
    "tokenRefsMedianComponentSets": 14,
    "mintedTotal": 863,
-   "notesTotal": 4858,
+   "notesTotal": 5252,
    "unboundTotal": 23,
    "degradationsTotal": 3316
   }
@@ -48,91 +48,8 @@
  "batchNotes": [
   "contract id \"ds.radio-button\" is claimed by two sets in this dump (\"RadioButton\" and \"Radio button\") — their names sanitize to the same id; rename one set (or edit one id) before adopting both"
  ],
- "classes": [
-  {
-   "cls": "component-ref-unknown-child-prop",
-   "sets": 12,
-   "surfaces": [
-    "html",
-    "react",
-    "react-inline",
-    "referee"
-   ],
-   "fixInFlight": false,
-   "examples": [
-    {
-     "set": "Note",
-     "message": "ds.note: part \"Badge\" sets unknown ds.badge prop \"iconRight\""
-    },
-    {
-     "set": "Avatar group",
-     "message": "ds.avatar-group: part \"Avatar\" sets unknown ds.avatar prop \"isVisible\""
-    },
-    {
-     "set": "Chip",
-     "message": "ds.chip: part \"Avatar\" sets unknown ds.avatar prop \"isVisible\""
-    }
-   ]
-  },
-  {
-   "cls": "visiblewhen-value-outside-prop-enum",
-   "sets": 11,
-   "surfaces": [
-    "html",
-    "react",
-    "react-inline",
-    "referee"
-   ],
-   "fixInFlight": false,
-   "examples": [
-    {
-     "set": "Alert",
-     "message": "ds.alert: part \"linkBlue\" visibleWhen.equals \"true\" is not a value of prop \"inlineAction\""
-    },
-    {
-     "set": "Accordion",
-     "message": "ds.accordion: part \"Container\" visibleWhen.equals \"true\" is not a value of prop \"expand\""
-    },
-    {
-     "set": "Card-Image",
-     "message": "ds.card-image: part \"titleText\" visibleWhen.equals \"true\" is not a value of prop \"imageBottom\""
-    }
-   ]
-  },
-  {
-   "cls": "prop-binding-not-camelcase",
-   "sets": 1,
-   "surfaces": [
-    "html",
-    "react",
-    "react-inline",
-    "referee"
-   ],
-   "fixInFlight": false,
-   "examples": [
-    {
-     "set": "Note",
-     "message": "ds.note: prop \"2ndParagraph\" code binding \"2ndParagraph\" is not a legal camelCase identifier"
-    }
-   ]
-  }
- ],
+ "classes": [],
  "fixtures": [
-  {
-   "cls": "component-ref-unknown-child-prop",
-   "setName": "Avatar group",
-   "file": "component-ref-unknown-child-prop-avatar-group.dump.json"
-  },
-  {
-   "cls": "visiblewhen-value-outside-prop-enum",
-   "setName": "Accordion",
-   "file": "visiblewhen-value-outside-prop-enum-accordion.dump.json"
-  },
-  {
-   "cls": "prop-binding-not-camelcase",
-   "setName": "Note",
-   "file": "prop-binding-not-camelcase-note.dump.json"
-  },
   {
    "cls": "pattern-arrayof-candidate",
    "setName": "Text Area",
@@ -22758,60 +22675,16 @@
    "setName": "Note",
    "type": "COMPONENT",
    "proposed": true,
-   "violations": [
-    "ds.note: part \"Badge\" sets unknown ds.badge prop \"iconRight\"",
-    "ds.note: part \"Badge\" sets unknown ds.badge prop \"text\"",
-    "ds.note: part \"Badge\" sets unknown ds.badge prop \"iconLeft\"",
-    "ds.note: part \"Badge\" sets unknown ds.badge prop \"type\"",
-    "ds.note: part \"Badge\" sets unknown ds.badge prop \"style\"",
-    "ds.note: part \"Badge\" sets unknown ds.badge prop \"size\"",
-    "ds.note: part \"Badge\" sets unknown ds.badge prop \"rounded\"",
-    "ds.note: prop \"2ndParagraph\" code binding \"2ndParagraph\" is not a legal camelCase identifier",
-    "ds.note: prop \"3rdParagraph\" code binding \"3rdParagraph\" is not a legal camelCase identifier",
-    "ds.note: prop \"4thParagraph\" code binding \"4thParagraph\" is not a legal camelCase identifier"
-   ],
-   "violationClasses": [
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "prop-binding-not-camelcase",
-    "prop-binding-not-camelcase",
-    "prop-binding-not-camelcase"
-   ],
-   "emitterRefusals": [
-    {
-     "emitter": "react",
-     "classes": [
-      "component-ref-unknown-child-prop",
-      "prop-binding-not-camelcase"
-     ],
-     "message": "ds.note: part \"Badge\" sets unknown ds.badge prop \"iconRight\""
-    },
-    {
-     "emitter": "html",
-     "classes": [
-      "component-ref-unknown-child-prop",
-      "prop-binding-not-camelcase"
-     ],
-     "message": "ds.note: part \"Badge\" sets unknown ds.badge prop \"iconRight\""
-    },
-    {
-     "emitter": "react-inline",
-     "classes": [
-      "component-ref-unknown-child-prop",
-      "prop-binding-not-camelcase"
-     ],
-     "message": "ds.note: part \"Badge\" sets unknown ds.badge prop \"iconRight\""
-    }
-   ],
+   "violations": [],
+   "violationClasses": [],
+   "emitterRefusals": [],
    "emittedSurfaces": [
+    "react",
+    "html",
+    "react-inline",
     "figma-script"
    ],
-   "noteCount": 25,
+   "noteCount": 35,
    "unboundCount": 0,
    "mintedCount": 7,
    "tokenRefsCarried": 42,
@@ -22836,7 +22709,7 @@
     "textStyleVariety": 2,
     "geometryParts": 0
    },
-   "clean": false
+   "clean": true
   },
   {
    "setName": "Notches",
@@ -61056,97 +60929,16 @@
    "setName": "Avatar group",
    "type": "COMPONENT_SET",
    "proposed": true,
-   "violations": [
-    "ds.avatar-group: part \"Avatar\" sets unknown ds.avatar prop \"isVisible\"",
-    "ds.avatar-group: part \"Avatar\" sets unknown ds.avatar prop \"notification\"",
-    "ds.avatar-group: part \"Avatar\" sets unknown ds.avatar prop \"indicator\"",
-    "ds.avatar-group: part \"Avatar\" sets unknown ds.avatar prop \"round\"",
-    "ds.avatar-group: part \"Avatar\" sets unknown ds.avatar prop \"type\"",
-    "ds.avatar-group: part \"avatar2\" sets unknown ds.avatar prop \"isVisible\"",
-    "ds.avatar-group: part \"avatar2\" sets unknown ds.avatar prop \"notification\"",
-    "ds.avatar-group: part \"avatar2\" sets unknown ds.avatar prop \"indicator\"",
-    "ds.avatar-group: part \"avatar2\" sets unknown ds.avatar prop \"round\"",
-    "ds.avatar-group: part \"avatar2\" sets unknown ds.avatar prop \"type\"",
-    "ds.avatar-group: part \"avatar3\" sets unknown ds.avatar prop \"isVisible\"",
-    "ds.avatar-group: part \"avatar3\" sets unknown ds.avatar prop \"notification\"",
-    "ds.avatar-group: part \"avatar3\" sets unknown ds.avatar prop \"indicator\"",
-    "ds.avatar-group: part \"avatar3\" sets unknown ds.avatar prop \"round\"",
-    "ds.avatar-group: part \"avatar3\" sets unknown ds.avatar prop \"type\"",
-    "ds.avatar-group: part \"avatar4\" sets unknown ds.avatar prop \"isVisible\"",
-    "ds.avatar-group: part \"avatar4\" sets unknown ds.avatar prop \"notification\"",
-    "ds.avatar-group: part \"avatar4\" sets unknown ds.avatar prop \"indicator\"",
-    "ds.avatar-group: part \"avatar4\" sets unknown ds.avatar prop \"round\"",
-    "ds.avatar-group: part \"avatar4\" sets unknown ds.avatar prop \"type\"",
-    "ds.avatar-group: part \"avatar5\" sets unknown ds.avatar prop \"isVisible\"",
-    "ds.avatar-group: part \"avatar5\" sets unknown ds.avatar prop \"notification\"",
-    "ds.avatar-group: part \"avatar5\" sets unknown ds.avatar prop \"indicator\"",
-    "ds.avatar-group: part \"avatar5\" sets unknown ds.avatar prop \"round\"",
-    "ds.avatar-group: part \"avatar5\" sets unknown ds.avatar prop \"type\"",
-    "ds.avatar-group: part \"avatar6\" sets unknown ds.avatar prop \"notification\"",
-    "ds.avatar-group: part \"avatar6\" sets unknown ds.avatar prop \"isVisible\"",
-    "ds.avatar-group: part \"avatar6\" sets unknown ds.avatar prop \"indicator\"",
-    "ds.avatar-group: part \"avatar6\" sets unknown ds.avatar prop \"round\"",
-    "ds.avatar-group: part \"avatar6\" sets unknown ds.avatar prop \"type\""
-   ],
-   "violationClasses": [
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop"
-   ],
-   "emitterRefusals": [
-    {
-     "emitter": "react",
-     "classes": [
-      "component-ref-unknown-child-prop"
-     ],
-     "message": "ds.avatar-group: part \"Avatar\" sets unknown ds.avatar prop \"isVisible\""
-    },
-    {
-     "emitter": "html",
-     "classes": [
-      "component-ref-unknown-child-prop"
-     ],
-     "message": "ds.avatar-group: part \"Avatar\" sets unknown ds.avatar prop \"isVisible\""
-    },
-    {
-     "emitter": "react-inline",
-     "classes": [
-      "component-ref-unknown-child-prop"
-     ],
-     "message": "ds.avatar-group: part \"Avatar\" sets unknown ds.avatar prop \"isVisible\""
-    }
-   ],
+   "violations": [],
+   "violationClasses": [],
+   "emitterRefusals": [],
    "emittedSurfaces": [
+    "react",
+    "html",
+    "react-inline",
     "figma-script"
    ],
-   "noteCount": 19,
+   "noteCount": 55,
    "unboundCount": 0,
    "mintedCount": 0,
    "tokenRefsCarried": 0,
@@ -61174,7 +60966,7 @@
     "textStyleVariety": 0,
     "geometryParts": 0
    },
-   "clean": false
+   "clean": true
   },
   {
    "setName": "Badge",
@@ -61269,47 +61061,16 @@
    "setName": "Chip",
    "type": "COMPONENT_SET",
    "proposed": true,
-   "violations": [
-    "ds.chip: part \"Avatar\" sets unknown ds.avatar prop \"isVisible\"",
-    "ds.chip: part \"Avatar\" sets unknown ds.avatar prop \"notification\"",
-    "ds.chip: part \"Avatar\" sets unknown ds.avatar prop \"indicator\"",
-    "ds.chip: part \"Avatar\" sets unknown ds.avatar prop \"round\"",
-    "ds.chip: part \"Avatar\" sets unknown ds.avatar prop \"type\""
-   ],
-   "violationClasses": [
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop"
-   ],
-   "emitterRefusals": [
-    {
-     "emitter": "react",
-     "classes": [
-      "component-ref-unknown-child-prop"
-     ],
-     "message": "ds.chip: part \"Avatar\" sets unknown ds.avatar prop \"isVisible\""
-    },
-    {
-     "emitter": "html",
-     "classes": [
-      "component-ref-unknown-child-prop"
-     ],
-     "message": "ds.chip: part \"Avatar\" sets unknown ds.avatar prop \"isVisible\""
-    },
-    {
-     "emitter": "react-inline",
-     "classes": [
-      "component-ref-unknown-child-prop"
-     ],
-     "message": "ds.chip: part \"Avatar\" sets unknown ds.avatar prop \"isVisible\""
-    }
-   ],
+   "violations": [],
+   "violationClasses": [],
+   "emitterRefusals": [],
    "emittedSurfaces": [
+    "react",
+    "html",
+    "react-inline",
     "figma-script"
    ],
-   "noteCount": 36,
+   "noteCount": 42,
    "unboundCount": 0,
    "mintedCount": 3,
    "tokenRefsCarried": 8,
@@ -61342,7 +61103,7 @@
     "textStyleVariety": 1,
     "geometryParts": 0
    },
-   "clean": false
+   "clean": true
   },
   {
    "setName": "Tooltip",
@@ -61436,39 +61197,16 @@
    "setName": "Alert",
    "type": "COMPONENT_SET",
    "proposed": true,
-   "violations": [
-    "ds.alert: part \"linkBlue\" visibleWhen.equals \"true\" is not a value of prop \"inlineAction\""
-   ],
-   "violationClasses": [
-    "visiblewhen-value-outside-prop-enum"
-   ],
-   "emitterRefusals": [
-    {
-     "emitter": "react",
-     "classes": [
-      "visiblewhen-value-outside-prop-enum"
-     ],
-     "message": "ds.alert: part \"linkBlue\" visibleWhen.equals \"true\" is not a value of prop \"inlineAction\""
-    },
-    {
-     "emitter": "html",
-     "classes": [
-      "visiblewhen-value-outside-prop-enum"
-     ],
-     "message": "ds.alert: part \"linkBlue\" visibleWhen.equals \"true\" is not a value of prop \"inlineAction\""
-    },
-    {
-     "emitter": "react-inline",
-     "classes": [
-      "visiblewhen-value-outside-prop-enum"
-     ],
-     "message": "ds.alert: part \"linkBlue\" visibleWhen.equals \"true\" is not a value of prop \"inlineAction\""
-    }
-   ],
+   "violations": [],
+   "violationClasses": [],
+   "emitterRefusals": [],
    "emittedSurfaces": [
+    "react",
+    "html",
+    "react-inline",
     "figma-script"
    ],
-   "noteCount": 36,
+   "noteCount": 37,
    "unboundCount": 0,
    "mintedCount": 5,
    "tokenRefsCarried": 15,
@@ -61496,67 +61234,22 @@
     "textStyleVariety": 2,
     "geometryParts": 0
    },
-   "clean": false
+   "clean": true
   },
   {
    "setName": "Accordion",
    "type": "COMPONENT_SET",
    "proposed": true,
-   "violations": [
-    "ds.accordion: part \"Container\" visibleWhen.equals \"true\" is not a value of prop \"expand\"",
-    "ds.accordion: part \"textContainer\" visibleWhen.equals \"true\" is not a value of prop \"expand\"",
-    "ds.accordion: part \"Title\" visibleWhen.equals \"true\" is not a value of prop \"expand\"",
-    "ds.accordion: part \"Subtext\" visibleWhen.equals \"true\" is not a value of prop \"expand\"",
-    "ds.accordion: part \"Caret\" visibleWhen.equals \"true\" is not a value of prop \"expand\"",
-    "ds.accordion: part \"Divider\" visibleWhen.equals \"true\" is not a value of prop \"expand\"",
-    "ds.accordion: part \"HeaderTextContainer\" visibleWhen.equals \"false\" is not a value of prop \"expand\"",
-    "ds.accordion: part \"HeaderTextContainerTitle\" visibleWhen.equals \"false\" is not a value of prop \"expand\"",
-    "ds.accordion: part \"HeaderTextContainerSubtext\" visibleWhen.equals \"false\" is not a value of prop \"expand\"",
-    "ds.accordion: part \"PanelAccordion\" visibleWhen.equals \"true\" is not a value of prop \"expand\"",
-    "ds.accordion: part \"Caret2\" visibleWhen.equals \"false\" is not a value of prop \"expand\"",
-    "ds.accordion: part \"Divider2\" visibleWhen.equals \"false\" is not a value of prop \"expand\""
-   ],
-   "violationClasses": [
-    "visiblewhen-value-outside-prop-enum",
-    "visiblewhen-value-outside-prop-enum",
-    "visiblewhen-value-outside-prop-enum",
-    "visiblewhen-value-outside-prop-enum",
-    "visiblewhen-value-outside-prop-enum",
-    "visiblewhen-value-outside-prop-enum",
-    "visiblewhen-value-outside-prop-enum",
-    "visiblewhen-value-outside-prop-enum",
-    "visiblewhen-value-outside-prop-enum",
-    "visiblewhen-value-outside-prop-enum",
-    "visiblewhen-value-outside-prop-enum",
-    "visiblewhen-value-outside-prop-enum"
-   ],
-   "emitterRefusals": [
-    {
-     "emitter": "react",
-     "classes": [
-      "visiblewhen-value-outside-prop-enum"
-     ],
-     "message": "ds.accordion: part \"Container\" visibleWhen.equals \"true\" is not a value of prop \"expand\""
-    },
-    {
-     "emitter": "html",
-     "classes": [
-      "visiblewhen-value-outside-prop-enum"
-     ],
-     "message": "ds.accordion: part \"Container\" visibleWhen.equals \"true\" is not a value of prop \"expand\""
-    },
-    {
-     "emitter": "react-inline",
-     "classes": [
-      "visiblewhen-value-outside-prop-enum"
-     ],
-     "message": "ds.accordion: part \"Container\" visibleWhen.equals \"true\" is not a value of prop \"expand\""
-    }
-   ],
+   "violations": [],
+   "violationClasses": [],
+   "emitterRefusals": [],
    "emittedSurfaces": [
+    "react",
+    "html",
+    "react-inline",
     "figma-script"
    ],
-   "noteCount": 83,
+   "noteCount": 97,
    "unboundCount": 2,
    "mintedCount": 24,
    "tokenRefsCarried": 21,
@@ -61590,7 +61283,7 @@
     "textStyleVariety": 3,
     "geometryParts": 21
    },
-   "clean": false
+   "clean": true
   },
   {
    "setName": "_Text-block-Panel",
@@ -61682,93 +61375,16 @@
    "setName": "Breadcrumb",
    "type": "COMPONENT_SET",
    "proposed": true,
-   "violations": [
-    "ds.breadcrumb: part \"BreadcrumbItem\" sets unknown ds.breadcrumb-item prop \"textBreadcrumb\"",
-    "ds.breadcrumb: part \"BreadcrumbItem\" sets unknown ds.breadcrumb-item prop \"type\"",
-    "ds.breadcrumb: part \"BreadcrumbItem\" sets unknown ds.breadcrumb-item prop \"overflow\"",
-    "ds.breadcrumb: part \"BreadcrumbItem\" sets unknown ds.breadcrumb-item prop \"state\"",
-    "ds.breadcrumb: part \"BreadcrumbItem2\" sets unknown ds.breadcrumb-item prop \"textBreadcrumb\"",
-    "ds.breadcrumb: part \"BreadcrumbItem2\" sets unknown ds.breadcrumb-item prop \"type\"",
-    "ds.breadcrumb: part \"BreadcrumbItem2\" sets unknown ds.breadcrumb-item prop \"overflow\"",
-    "ds.breadcrumb: part \"BreadcrumbItem2\" sets unknown ds.breadcrumb-item prop \"state\"",
-    "ds.breadcrumb: part \"BreadcrumbItem3\" sets unknown ds.breadcrumb-item prop \"textBreadcrumb\"",
-    "ds.breadcrumb: part \"BreadcrumbItem3\" sets unknown ds.breadcrumb-item prop \"type\"",
-    "ds.breadcrumb: part \"BreadcrumbItem3\" sets unknown ds.breadcrumb-item prop \"overflow\"",
-    "ds.breadcrumb: part \"BreadcrumbItem3\" sets unknown ds.breadcrumb-item prop \"state\"",
-    "ds.breadcrumb: part \"BreadcrumbItem4\" sets unknown ds.breadcrumb-item prop \"textBreadcrumb\"",
-    "ds.breadcrumb: part \"BreadcrumbItem4\" sets unknown ds.breadcrumb-item prop \"type\"",
-    "ds.breadcrumb: part \"BreadcrumbItem4\" sets unknown ds.breadcrumb-item prop \"overflow\"",
-    "ds.breadcrumb: part \"BreadcrumbItem4\" sets unknown ds.breadcrumb-item prop \"state\"",
-    "ds.breadcrumb: part \"BreadcrumbItem5\" sets unknown ds.breadcrumb-item prop \"textBreadcrumb\"",
-    "ds.breadcrumb: part \"BreadcrumbItem5\" sets unknown ds.breadcrumb-item prop \"type\"",
-    "ds.breadcrumb: part \"BreadcrumbItem5\" sets unknown ds.breadcrumb-item prop \"overflow\"",
-    "ds.breadcrumb: part \"BreadcrumbItem5\" sets unknown ds.breadcrumb-item prop \"state\"",
-    "ds.breadcrumb: part \"BreadcrumbItem6\" sets unknown ds.breadcrumb-item prop \"textBreadcrumb\"",
-    "ds.breadcrumb: part \"BreadcrumbItem6\" sets unknown ds.breadcrumb-item prop \"type\"",
-    "ds.breadcrumb: part \"BreadcrumbItem6\" sets unknown ds.breadcrumb-item prop \"overflow\"",
-    "ds.breadcrumb: part \"BreadcrumbItem6\" sets unknown ds.breadcrumb-item prop \"state\"",
-    "ds.breadcrumb: part \"BreadcrumbItem7\" sets unknown ds.breadcrumb-item prop \"textBreadcrumb\"",
-    "ds.breadcrumb: part \"BreadcrumbItem7\" sets unknown ds.breadcrumb-item prop \"type\"",
-    "ds.breadcrumb: part \"BreadcrumbItem7\" sets unknown ds.breadcrumb-item prop \"overflow\"",
-    "ds.breadcrumb: part \"BreadcrumbItem7\" sets unknown ds.breadcrumb-item prop \"state\""
-   ],
-   "violationClasses": [
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop"
-   ],
-   "emitterRefusals": [
-    {
-     "emitter": "react",
-     "classes": [
-      "component-ref-unknown-child-prop"
-     ],
-     "message": "ds.breadcrumb: part \"BreadcrumbItem\" sets unknown ds.breadcrumb-item prop \"textBreadcrumb\""
-    },
-    {
-     "emitter": "html",
-     "classes": [
-      "component-ref-unknown-child-prop"
-     ],
-     "message": "ds.breadcrumb: part \"BreadcrumbItem\" sets unknown ds.breadcrumb-item prop \"textBreadcrumb\""
-    },
-    {
-     "emitter": "react-inline",
-     "classes": [
-      "component-ref-unknown-child-prop"
-     ],
-     "message": "ds.breadcrumb: part \"BreadcrumbItem\" sets unknown ds.breadcrumb-item prop \"textBreadcrumb\""
-    }
-   ],
+   "violations": [],
+   "violationClasses": [],
+   "emitterRefusals": [],
    "emittedSurfaces": [
+    "react",
+    "html",
+    "react-inline",
     "figma-script"
    ],
-   "noteCount": 27,
+   "noteCount": 55,
    "unboundCount": 0,
    "mintedCount": 0,
    "tokenRefsCarried": 1,
@@ -61793,7 +61409,7 @@
     "textStyleVariety": 0,
     "geometryParts": 0
    },
-   "clean": false
+   "clean": true
   },
   {
    "setName": "_Breadcrumb item",
@@ -62800,122 +62416,16 @@
    "setName": "Card-Image",
    "type": "COMPONENT_SET",
    "proposed": true,
-   "violations": [
-    "ds.card-image: part \"titleText\" visibleWhen.equals \"true\" is not a value of prop \"imageBottom\"",
-    "ds.card-image: part \"Avatar\" sets unknown ds.avatar prop \"notification\"",
-    "ds.card-image: part \"Avatar\" sets unknown ds.avatar prop \"isVisible\"",
-    "ds.card-image: part \"Avatar\" sets unknown ds.avatar prop \"indicator\"",
-    "ds.card-image: part \"Avatar\" sets unknown ds.avatar prop \"round\"",
-    "ds.card-image: part \"Avatar\" sets unknown ds.avatar prop \"type\"",
-    "ds.card-image: part \"Text\" visibleWhen.equals \"true\" is not a value of prop \"imageBottom\"",
-    "ds.card-image: part \"cardTitle\" visibleWhen.equals \"true\" is not a value of prop \"imageBottom\"",
-    "ds.card-image: part \"Subtext\" visibleWhen.equals \"true\" is not a value of prop \"imageBottom\"",
-    "ds.card-image: part \"ContentTitleTextAvatar\" sets unknown ds.avatar prop \"notification\"",
-    "ds.card-image: part \"ContentTitleTextAvatar\" sets unknown ds.avatar prop \"isVisible\"",
-    "ds.card-image: part \"ContentTitleTextAvatar\" sets unknown ds.avatar prop \"indicator\"",
-    "ds.card-image: part \"ContentTitleTextAvatar\" sets unknown ds.avatar prop \"round\"",
-    "ds.card-image: part \"ContentTitleTextAvatar\" sets unknown ds.avatar prop \"type\"",
-    "ds.card-image: part \"Badge\" sets unknown ds.badge prop \"text\"",
-    "ds.card-image: part \"Badge\" sets unknown ds.badge prop \"iconRight\"",
-    "ds.card-image: part \"Badge\" sets unknown ds.badge prop \"iconLeft\"",
-    "ds.card-image: part \"Badge\" sets unknown ds.badge prop \"type\"",
-    "ds.card-image: part \"Badge\" sets unknown ds.badge prop \"style\"",
-    "ds.card-image: part \"Badge\" sets unknown ds.badge prop \"size\"",
-    "ds.card-image: part \"Badge\" sets unknown ds.badge prop \"rounded\"",
-    "ds.card-image: part \"contentBottomBadge\" sets unknown ds.badge prop \"text\"",
-    "ds.card-image: part \"contentBottomBadge\" sets unknown ds.badge prop \"iconRight\"",
-    "ds.card-image: part \"contentBottomBadge\" sets unknown ds.badge prop \"iconLeft\"",
-    "ds.card-image: part \"contentBottomBadge\" sets unknown ds.badge prop \"type\"",
-    "ds.card-image: part \"contentBottomBadge\" sets unknown ds.badge prop \"style\"",
-    "ds.card-image: part \"contentBottomBadge\" sets unknown ds.badge prop \"size\"",
-    "ds.card-image: part \"contentBottomBadge\" sets unknown ds.badge prop \"rounded\"",
-    "ds.card-image: part \"contentBottomDescription\" visibleWhen.equals \"true\" is not a value of prop \"imageBottom\"",
-    "ds.card-image: part \"contentBottomContentTitleTextAvatar\" sets unknown ds.avatar prop \"notification\"",
-    "ds.card-image: part \"contentBottomContentTitleTextAvatar\" sets unknown ds.avatar prop \"isVisible\"",
-    "ds.card-image: part \"contentBottomContentTitleTextAvatar\" sets unknown ds.avatar prop \"indicator\"",
-    "ds.card-image: part \"contentBottomContentTitleTextAvatar\" sets unknown ds.avatar prop \"round\"",
-    "ds.card-image: part \"contentBottomContentTitleTextAvatar\" sets unknown ds.avatar prop \"type\"",
-    "ds.card-image: part \"contentBottomContentBadge\" sets unknown ds.badge prop \"text\"",
-    "ds.card-image: part \"contentBottomContentBadge\" sets unknown ds.badge prop \"iconRight\"",
-    "ds.card-image: part \"contentBottomContentBadge\" sets unknown ds.badge prop \"iconLeft\"",
-    "ds.card-image: part \"contentBottomContentBadge\" sets unknown ds.badge prop \"type\"",
-    "ds.card-image: part \"contentBottomContentBadge\" sets unknown ds.badge prop \"style\"",
-    "ds.card-image: part \"contentBottomContentBadge\" sets unknown ds.badge prop \"size\"",
-    "ds.card-image: part \"contentBottomContentBadge\" sets unknown ds.badge prop \"rounded\""
-   ],
-   "violationClasses": [
-    "visiblewhen-value-outside-prop-enum",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "visiblewhen-value-outside-prop-enum",
-    "visiblewhen-value-outside-prop-enum",
-    "visiblewhen-value-outside-prop-enum",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "visiblewhen-value-outside-prop-enum",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop"
-   ],
-   "emitterRefusals": [
-    {
-     "emitter": "react",
-     "classes": [
-      "visiblewhen-value-outside-prop-enum",
-      "component-ref-unknown-child-prop"
-     ],
-     "message": "ds.card-image: part \"titleText\" visibleWhen.equals \"true\" is not a value of prop \"imageBottom\""
-    },
-    {
-     "emitter": "html",
-     "classes": [
-      "visiblewhen-value-outside-prop-enum",
-      "component-ref-unknown-child-prop"
-     ],
-     "message": "ds.card-image: part \"titleText\" visibleWhen.equals \"true\" is not a value of prop \"imageBottom\""
-    },
-    {
-     "emitter": "react-inline",
-     "classes": [
-      "visiblewhen-value-outside-prop-enum",
-      "component-ref-unknown-child-prop"
-     ],
-     "message": "ds.card-image: part \"titleText\" visibleWhen.equals \"true\" is not a value of prop \"imageBottom\""
-    }
-   ],
+   "violations": [],
+   "violationClasses": [],
+   "emitterRefusals": [],
    "emittedSurfaces": [
+    "react",
+    "html",
+    "react-inline",
     "figma-script"
    ],
-   "noteCount": 131,
+   "noteCount": 179,
    "unboundCount": 0,
    "mintedCount": 28,
    "tokenRefsCarried": 34,
@@ -62948,67 +62458,22 @@
     "textStyleVariety": 5,
     "geometryParts": 0
    },
-   "clean": false
+   "clean": true
   },
   {
    "setName": "Card-Basic",
    "type": "COMPONENT_SET",
    "proposed": true,
-   "violations": [
-    "ds.card-basic: part \"Avatar\" sets unknown ds.avatar prop \"notification\"",
-    "ds.card-basic: part \"Avatar\" sets unknown ds.avatar prop \"isVisible\"",
-    "ds.card-basic: part \"Avatar\" sets unknown ds.avatar prop \"indicator\"",
-    "ds.card-basic: part \"Avatar\" sets unknown ds.avatar prop \"round\"",
-    "ds.card-basic: part \"Avatar\" sets unknown ds.avatar prop \"type\"",
-    "ds.card-basic: part \"Badge\" sets unknown ds.badge prop \"text\"",
-    "ds.card-basic: part \"Badge\" sets unknown ds.badge prop \"iconRight\"",
-    "ds.card-basic: part \"Badge\" sets unknown ds.badge prop \"iconLeft\"",
-    "ds.card-basic: part \"Badge\" sets unknown ds.badge prop \"type\"",
-    "ds.card-basic: part \"Badge\" sets unknown ds.badge prop \"style\"",
-    "ds.card-basic: part \"Badge\" sets unknown ds.badge prop \"size\"",
-    "ds.card-basic: part \"Badge\" sets unknown ds.badge prop \"rounded\""
-   ],
-   "violationClasses": [
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop"
-   ],
-   "emitterRefusals": [
-    {
-     "emitter": "react",
-     "classes": [
-      "component-ref-unknown-child-prop"
-     ],
-     "message": "ds.card-basic: part \"Avatar\" sets unknown ds.avatar prop \"notification\""
-    },
-    {
-     "emitter": "html",
-     "classes": [
-      "component-ref-unknown-child-prop"
-     ],
-     "message": "ds.card-basic: part \"Avatar\" sets unknown ds.avatar prop \"notification\""
-    },
-    {
-     "emitter": "react-inline",
-     "classes": [
-      "component-ref-unknown-child-prop"
-     ],
-     "message": "ds.card-basic: part \"Avatar\" sets unknown ds.avatar prop \"notification\""
-    }
-   ],
+   "violations": [],
+   "violationClasses": [],
+   "emitterRefusals": [],
    "emittedSurfaces": [
+    "react",
+    "html",
+    "react-inline",
     "figma-script"
    ],
-   "noteCount": 40,
+   "noteCount": 53,
    "unboundCount": 0,
    "mintedCount": 13,
    "tokenRefsCarried": 15,
@@ -63035,7 +62500,7 @@
     "textStyleVariety": 5,
     "geometryParts": 0
    },
-   "clean": false
+   "clean": true
   },
   {
    "setName": "_Button group-card",
@@ -63453,39 +62918,16 @@
    "setName": "Input Number",
    "type": "COMPONENT_SET",
    "proposed": true,
-   "violations": [
-    "ds.input-number: part \"Controls\" visibleWhen.equals \"true\" is not a value of prop \"controls\""
-   ],
-   "violationClasses": [
-    "visiblewhen-value-outside-prop-enum"
-   ],
-   "emitterRefusals": [
-    {
-     "emitter": "react",
-     "classes": [
-      "visiblewhen-value-outside-prop-enum"
-     ],
-     "message": "ds.input-number: part \"Controls\" visibleWhen.equals \"true\" is not a value of prop \"controls\""
-    },
-    {
-     "emitter": "html",
-     "classes": [
-      "visiblewhen-value-outside-prop-enum"
-     ],
-     "message": "ds.input-number: part \"Controls\" visibleWhen.equals \"true\" is not a value of prop \"controls\""
-    },
-    {
-     "emitter": "react-inline",
-     "classes": [
-      "visiblewhen-value-outside-prop-enum"
-     ],
-     "message": "ds.input-number: part \"Controls\" visibleWhen.equals \"true\" is not a value of prop \"controls\""
-    }
-   ],
+   "violations": [],
+   "violationClasses": [],
+   "emitterRefusals": [],
    "emittedSurfaces": [
+    "react",
+    "html",
+    "react-inline",
     "figma-script"
    ],
-   "noteCount": 87,
+   "noteCount": 89,
    "unboundCount": 0,
    "mintedCount": 28,
    "tokenRefsCarried": 24,
@@ -63516,7 +62958,7 @@
     "textStyleVariety": 2,
     "geometryParts": 0
    },
-   "clean": false
+   "clean": true
   },
   {
    "setName": "_Controls",
@@ -63564,53 +63006,16 @@
    "setName": "_Country code",
    "type": "COMPONENT_SET",
    "proposed": true,
-   "violations": [
-    "ds.country-code: part \"usUnitedStates\" visibleWhen.equals \"true\" is not a value of prop \"flag\"",
-    "ds.country-code: part \"codeAndDropdown\" visibleWhen.equals \"true\" is not a value of prop \"flag\"",
-    "ds.country-code: part \"part\" visibleWhen.equals \"true\" is not a value of prop \"flag\"",
-    "ds.country-code: part \"Icon\" visibleWhen.equals \"true\" is not a value of prop \"flag\"",
-    "ds.country-code: part \"countryAndCode\" visibleWhen.equals \"false\" is not a value of prop \"flag\"",
-    "ds.country-code: part \"US\" visibleWhen.equals \"false\" is not a value of prop \"flag\"",
-    "ds.country-code: part \"countryAndCodePart\" visibleWhen.equals \"false\" is not a value of prop \"flag\"",
-    "ds.country-code: part \"Icon2\" visibleWhen.equals \"false\" is not a value of prop \"flag\""
-   ],
-   "violationClasses": [
-    "visiblewhen-value-outside-prop-enum",
-    "visiblewhen-value-outside-prop-enum",
-    "visiblewhen-value-outside-prop-enum",
-    "visiblewhen-value-outside-prop-enum",
-    "visiblewhen-value-outside-prop-enum",
-    "visiblewhen-value-outside-prop-enum",
-    "visiblewhen-value-outside-prop-enum",
-    "visiblewhen-value-outside-prop-enum"
-   ],
-   "emitterRefusals": [
-    {
-     "emitter": "react",
-     "classes": [
-      "visiblewhen-value-outside-prop-enum"
-     ],
-     "message": "ds.country-code: part \"usUnitedStates\" visibleWhen.equals \"true\" is not a value of prop \"flag\""
-    },
-    {
-     "emitter": "html",
-     "classes": [
-      "visiblewhen-value-outside-prop-enum"
-     ],
-     "message": "ds.country-code: part \"usUnitedStates\" visibleWhen.equals \"true\" is not a value of prop \"flag\""
-    },
-    {
-     "emitter": "react-inline",
-     "classes": [
-      "visiblewhen-value-outside-prop-enum"
-     ],
-     "message": "ds.country-code: part \"usUnitedStates\" visibleWhen.equals \"true\" is not a value of prop \"flag\""
-    }
-   ],
+   "violations": [],
+   "violationClasses": [],
+   "emitterRefusals": [],
    "emittedSurfaces": [
+    "react",
+    "html",
+    "react-inline",
     "figma-script"
    ],
-   "noteCount": 32,
+   "noteCount": 40,
    "unboundCount": 0,
    "mintedCount": 14,
    "tokenRefsCarried": 7,
@@ -63638,7 +63043,7 @@
     "textStyleVariety": 2,
     "geometryParts": 0
    },
-   "clean": false
+   "clean": true
   },
   {
    "setName": "_Input label",
@@ -63803,61 +63208,16 @@
    "setName": "List item",
    "type": "COMPONENT_SET",
    "proposed": true,
-   "violations": [
-    "ds.list-item: part \"Avatar\" sets unknown ds.avatar prop \"isVisible\"",
-    "ds.list-item: part \"Avatar\" sets unknown ds.avatar prop \"notification\"",
-    "ds.list-item: part \"Avatar\" sets unknown ds.avatar prop \"indicator\"",
-    "ds.list-item: part \"Avatar\" sets unknown ds.avatar prop \"round\"",
-    "ds.list-item: part \"Avatar\" sets unknown ds.avatar prop \"type\"",
-    "ds.list-item: part \"Badge\" sets unknown ds.badge prop \"text\"",
-    "ds.list-item: part \"Badge\" sets unknown ds.badge prop \"iconRight\"",
-    "ds.list-item: part \"Badge\" sets unknown ds.badge prop \"iconLeft\"",
-    "ds.list-item: part \"Badge\" sets unknown ds.badge prop \"type\"",
-    "ds.list-item: part \"Badge\" sets unknown ds.badge prop \"style\"",
-    "ds.list-item: part \"Badge\" sets unknown ds.badge prop \"size\"",
-    "ds.list-item: part \"Badge\" sets unknown ds.badge prop \"rounded\""
-   ],
-   "violationClasses": [
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop"
-   ],
-   "emitterRefusals": [
-    {
-     "emitter": "react",
-     "classes": [
-      "component-ref-unknown-child-prop"
-     ],
-     "message": "ds.list-item: part \"Avatar\" sets unknown ds.avatar prop \"isVisible\""
-    },
-    {
-     "emitter": "html",
-     "classes": [
-      "component-ref-unknown-child-prop"
-     ],
-     "message": "ds.list-item: part \"Avatar\" sets unknown ds.avatar prop \"isVisible\""
-    },
-    {
-     "emitter": "react-inline",
-     "classes": [
-      "component-ref-unknown-child-prop"
-     ],
-     "message": "ds.list-item: part \"Avatar\" sets unknown ds.avatar prop \"isVisible\""
-    }
-   ],
+   "violations": [],
+   "violationClasses": [],
+   "emitterRefusals": [],
    "emittedSurfaces": [
+    "react",
+    "html",
+    "react-inline",
     "figma-script"
    ],
-   "noteCount": 74,
+   "noteCount": 87,
    "unboundCount": 1,
    "mintedCount": 27,
    "tokenRefsCarried": 22,
@@ -63891,323 +63251,22 @@
     "textStyleVariety": 5,
     "geometryParts": 19
    },
-   "clean": false
+   "clean": true
   },
   {
    "setName": "Menu",
    "type": "COMPONENT_SET",
    "proposed": true,
-   "violations": [
-    "ds.menu: part \"listItem\" sets unknown ds.list-item prop \"headerDivider\"",
-    "ds.menu: part \"listItem\" sets unknown ds.list-item prop \"itemRight\"",
-    "ds.menu: part \"listItem\" sets unknown ds.list-item prop \"textSubtext\"",
-    "ds.menu: part \"listItem\" sets unknown ds.list-item prop \"text\"",
-    "ds.menu: part \"listItem\" sets unknown ds.list-item prop \"badge\"",
-    "ds.menu: part \"listItem\" sets unknown ds.list-item prop \"avatar\"",
-    "ds.menu: part \"listItem\" sets unknown ds.list-item prop \"textSecondary\"",
-    "ds.menu: part \"listItem\" sets unknown ds.list-item prop \"divider\"",
-    "ds.menu: part \"listItem\" sets unknown ds.list-item prop \"subtext\"",
-    "ds.menu: part \"listItem\" sets unknown ds.list-item prop \"itemLeft\"",
-    "ds.menu: part \"listItem\" sets unknown ds.list-item prop \"secondaryText\"",
-    "ds.menu: part \"listItem\" sets unknown ds.list-item prop \"type\"",
-    "ds.menu: part \"listItem\" sets unknown ds.list-item prop \"size\"",
-    "ds.menu: part \"listItem\" sets unknown ds.list-item prop \"state\"",
-    "ds.menu: part \"listItem2\" sets unknown ds.list-item prop \"headerDivider\"",
-    "ds.menu: part \"listItem2\" sets unknown ds.list-item prop \"itemRight\"",
-    "ds.menu: part \"listItem2\" sets unknown ds.list-item prop \"textSubtext\"",
-    "ds.menu: part \"listItem2\" sets unknown ds.list-item prop \"text\"",
-    "ds.menu: part \"listItem2\" sets unknown ds.list-item prop \"badge\"",
-    "ds.menu: part \"listItem2\" sets unknown ds.list-item prop \"avatar\"",
-    "ds.menu: part \"listItem2\" sets unknown ds.list-item prop \"textSecondary\"",
-    "ds.menu: part \"listItem2\" sets unknown ds.list-item prop \"divider\"",
-    "ds.menu: part \"listItem2\" sets unknown ds.list-item prop \"subtext\"",
-    "ds.menu: part \"listItem2\" sets unknown ds.list-item prop \"itemLeft\"",
-    "ds.menu: part \"listItem2\" sets unknown ds.list-item prop \"secondaryText\"",
-    "ds.menu: part \"listItem2\" sets unknown ds.list-item prop \"type\"",
-    "ds.menu: part \"listItem2\" sets unknown ds.list-item prop \"size\"",
-    "ds.menu: part \"listItem2\" sets unknown ds.list-item prop \"state\"",
-    "ds.menu: part \"listItem3\" sets unknown ds.list-item prop \"headerDivider\"",
-    "ds.menu: part \"listItem3\" sets unknown ds.list-item prop \"itemRight\"",
-    "ds.menu: part \"listItem3\" sets unknown ds.list-item prop \"textSubtext\"",
-    "ds.menu: part \"listItem3\" sets unknown ds.list-item prop \"text\"",
-    "ds.menu: part \"listItem3\" sets unknown ds.list-item prop \"badge\"",
-    "ds.menu: part \"listItem3\" sets unknown ds.list-item prop \"avatar\"",
-    "ds.menu: part \"listItem3\" sets unknown ds.list-item prop \"textSecondary\"",
-    "ds.menu: part \"listItem3\" sets unknown ds.list-item prop \"divider\"",
-    "ds.menu: part \"listItem3\" sets unknown ds.list-item prop \"subtext\"",
-    "ds.menu: part \"listItem3\" sets unknown ds.list-item prop \"itemLeft\"",
-    "ds.menu: part \"listItem3\" sets unknown ds.list-item prop \"secondaryText\"",
-    "ds.menu: part \"listItem3\" sets unknown ds.list-item prop \"type\"",
-    "ds.menu: part \"listItem3\" sets unknown ds.list-item prop \"size\"",
-    "ds.menu: part \"listItem3\" sets unknown ds.list-item prop \"state\"",
-    "ds.menu: part \"listItem4\" sets unknown ds.list-item prop \"headerDivider\"",
-    "ds.menu: part \"listItem4\" sets unknown ds.list-item prop \"itemRight\"",
-    "ds.menu: part \"listItem4\" sets unknown ds.list-item prop \"textSubtext\"",
-    "ds.menu: part \"listItem4\" sets unknown ds.list-item prop \"text\"",
-    "ds.menu: part \"listItem4\" sets unknown ds.list-item prop \"badge\"",
-    "ds.menu: part \"listItem4\" sets unknown ds.list-item prop \"avatar\"",
-    "ds.menu: part \"listItem4\" sets unknown ds.list-item prop \"textSecondary\"",
-    "ds.menu: part \"listItem4\" sets unknown ds.list-item prop \"divider\"",
-    "ds.menu: part \"listItem4\" sets unknown ds.list-item prop \"subtext\"",
-    "ds.menu: part \"listItem4\" sets unknown ds.list-item prop \"itemLeft\"",
-    "ds.menu: part \"listItem4\" sets unknown ds.list-item prop \"secondaryText\"",
-    "ds.menu: part \"listItem4\" sets unknown ds.list-item prop \"type\"",
-    "ds.menu: part \"listItem4\" sets unknown ds.list-item prop \"size\"",
-    "ds.menu: part \"listItem4\" sets unknown ds.list-item prop \"state\"",
-    "ds.menu: part \"listItem5\" sets unknown ds.list-item prop \"headerDivider\"",
-    "ds.menu: part \"listItem5\" sets unknown ds.list-item prop \"itemRight\"",
-    "ds.menu: part \"listItem5\" sets unknown ds.list-item prop \"textSubtext\"",
-    "ds.menu: part \"listItem5\" sets unknown ds.list-item prop \"text\"",
-    "ds.menu: part \"listItem5\" sets unknown ds.list-item prop \"badge\"",
-    "ds.menu: part \"listItem5\" sets unknown ds.list-item prop \"avatar\"",
-    "ds.menu: part \"listItem5\" sets unknown ds.list-item prop \"textSecondary\"",
-    "ds.menu: part \"listItem5\" sets unknown ds.list-item prop \"divider\"",
-    "ds.menu: part \"listItem5\" sets unknown ds.list-item prop \"subtext\"",
-    "ds.menu: part \"listItem5\" sets unknown ds.list-item prop \"itemLeft\"",
-    "ds.menu: part \"listItem5\" sets unknown ds.list-item prop \"secondaryText\"",
-    "ds.menu: part \"listItem5\" sets unknown ds.list-item prop \"type\"",
-    "ds.menu: part \"listItem5\" sets unknown ds.list-item prop \"size\"",
-    "ds.menu: part \"listItem5\" sets unknown ds.list-item prop \"state\"",
-    "ds.menu: part \"listItem6\" sets unknown ds.list-item prop \"headerDivider\"",
-    "ds.menu: part \"listItem6\" sets unknown ds.list-item prop \"itemRight\"",
-    "ds.menu: part \"listItem6\" sets unknown ds.list-item prop \"textSubtext\"",
-    "ds.menu: part \"listItem6\" sets unknown ds.list-item prop \"text\"",
-    "ds.menu: part \"listItem6\" sets unknown ds.list-item prop \"badge\"",
-    "ds.menu: part \"listItem6\" sets unknown ds.list-item prop \"avatar\"",
-    "ds.menu: part \"listItem6\" sets unknown ds.list-item prop \"textSecondary\"",
-    "ds.menu: part \"listItem6\" sets unknown ds.list-item prop \"divider\"",
-    "ds.menu: part \"listItem6\" sets unknown ds.list-item prop \"subtext\"",
-    "ds.menu: part \"listItem6\" sets unknown ds.list-item prop \"itemLeft\"",
-    "ds.menu: part \"listItem6\" sets unknown ds.list-item prop \"secondaryText\"",
-    "ds.menu: part \"listItem6\" sets unknown ds.list-item prop \"type\"",
-    "ds.menu: part \"listItem6\" sets unknown ds.list-item prop \"size\"",
-    "ds.menu: part \"listItem6\" sets unknown ds.list-item prop \"state\"",
-    "ds.menu: part \"listItem7\" sets unknown ds.list-item prop \"headerDivider\"",
-    "ds.menu: part \"listItem7\" sets unknown ds.list-item prop \"itemRight\"",
-    "ds.menu: part \"listItem7\" sets unknown ds.list-item prop \"textSubtext\"",
-    "ds.menu: part \"listItem7\" sets unknown ds.list-item prop \"text\"",
-    "ds.menu: part \"listItem7\" sets unknown ds.list-item prop \"badge\"",
-    "ds.menu: part \"listItem7\" sets unknown ds.list-item prop \"avatar\"",
-    "ds.menu: part \"listItem7\" sets unknown ds.list-item prop \"textSecondary\"",
-    "ds.menu: part \"listItem7\" sets unknown ds.list-item prop \"divider\"",
-    "ds.menu: part \"listItem7\" sets unknown ds.list-item prop \"subtext\"",
-    "ds.menu: part \"listItem7\" sets unknown ds.list-item prop \"itemLeft\"",
-    "ds.menu: part \"listItem7\" sets unknown ds.list-item prop \"secondaryText\"",
-    "ds.menu: part \"listItem7\" sets unknown ds.list-item prop \"type\"",
-    "ds.menu: part \"listItem7\" sets unknown ds.list-item prop \"size\"",
-    "ds.menu: part \"listItem7\" sets unknown ds.list-item prop \"state\"",
-    "ds.menu: part \"listItem8\" sets unknown ds.list-item prop \"headerDivider\"",
-    "ds.menu: part \"listItem8\" sets unknown ds.list-item prop \"itemRight\"",
-    "ds.menu: part \"listItem8\" sets unknown ds.list-item prop \"textSubtext\"",
-    "ds.menu: part \"listItem8\" sets unknown ds.list-item prop \"text\"",
-    "ds.menu: part \"listItem8\" sets unknown ds.list-item prop \"badge\"",
-    "ds.menu: part \"listItem8\" sets unknown ds.list-item prop \"avatar\"",
-    "ds.menu: part \"listItem8\" sets unknown ds.list-item prop \"textSecondary\"",
-    "ds.menu: part \"listItem8\" sets unknown ds.list-item prop \"divider\"",
-    "ds.menu: part \"listItem8\" sets unknown ds.list-item prop \"subtext\"",
-    "ds.menu: part \"listItem8\" sets unknown ds.list-item prop \"itemLeft\"",
-    "ds.menu: part \"listItem8\" sets unknown ds.list-item prop \"secondaryText\"",
-    "ds.menu: part \"listItem8\" sets unknown ds.list-item prop \"type\"",
-    "ds.menu: part \"listItem8\" sets unknown ds.list-item prop \"size\"",
-    "ds.menu: part \"listItem8\" sets unknown ds.list-item prop \"state\"",
-    "ds.menu: part \"listItem9\" sets unknown ds.list-item prop \"headerDivider\"",
-    "ds.menu: part \"listItem9\" sets unknown ds.list-item prop \"itemRight\"",
-    "ds.menu: part \"listItem9\" sets unknown ds.list-item prop \"textSubtext\"",
-    "ds.menu: part \"listItem9\" sets unknown ds.list-item prop \"text\"",
-    "ds.menu: part \"listItem9\" sets unknown ds.list-item prop \"badge\"",
-    "ds.menu: part \"listItem9\" sets unknown ds.list-item prop \"avatar\"",
-    "ds.menu: part \"listItem9\" sets unknown ds.list-item prop \"textSecondary\"",
-    "ds.menu: part \"listItem9\" sets unknown ds.list-item prop \"divider\"",
-    "ds.menu: part \"listItem9\" sets unknown ds.list-item prop \"subtext\"",
-    "ds.menu: part \"listItem9\" sets unknown ds.list-item prop \"itemLeft\"",
-    "ds.menu: part \"listItem9\" sets unknown ds.list-item prop \"secondaryText\"",
-    "ds.menu: part \"listItem9\" sets unknown ds.list-item prop \"type\"",
-    "ds.menu: part \"listItem9\" sets unknown ds.list-item prop \"size\"",
-    "ds.menu: part \"listItem9\" sets unknown ds.list-item prop \"state\"",
-    "ds.menu: part \"listItem10\" sets unknown ds.list-item prop \"headerDivider\"",
-    "ds.menu: part \"listItem10\" sets unknown ds.list-item prop \"itemRight\"",
-    "ds.menu: part \"listItem10\" sets unknown ds.list-item prop \"textSubtext\"",
-    "ds.menu: part \"listItem10\" sets unknown ds.list-item prop \"text\"",
-    "ds.menu: part \"listItem10\" sets unknown ds.list-item prop \"badge\"",
-    "ds.menu: part \"listItem10\" sets unknown ds.list-item prop \"avatar\"",
-    "ds.menu: part \"listItem10\" sets unknown ds.list-item prop \"textSecondary\"",
-    "ds.menu: part \"listItem10\" sets unknown ds.list-item prop \"divider\"",
-    "ds.menu: part \"listItem10\" sets unknown ds.list-item prop \"subtext\"",
-    "ds.menu: part \"listItem10\" sets unknown ds.list-item prop \"itemLeft\"",
-    "ds.menu: part \"listItem10\" sets unknown ds.list-item prop \"secondaryText\"",
-    "ds.menu: part \"listItem10\" sets unknown ds.list-item prop \"type\"",
-    "ds.menu: part \"listItem10\" sets unknown ds.list-item prop \"size\"",
-    "ds.menu: part \"listItem10\" sets unknown ds.list-item prop \"state\""
-   ],
-   "violationClasses": [
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop"
-   ],
-   "emitterRefusals": [
-    {
-     "emitter": "react",
-     "classes": [
-      "component-ref-unknown-child-prop"
-     ],
-     "message": "ds.menu: part \"listItem\" sets unknown ds.list-item prop \"headerDivider\""
-    },
-    {
-     "emitter": "html",
-     "classes": [
-      "component-ref-unknown-child-prop"
-     ],
-     "message": "ds.menu: part \"listItem\" sets unknown ds.list-item prop \"headerDivider\""
-    },
-    {
-     "emitter": "react-inline",
-     "classes": [
-      "component-ref-unknown-child-prop"
-     ],
-     "message": "ds.menu: part \"listItem\" sets unknown ds.list-item prop \"headerDivider\""
-    }
-   ],
+   "violations": [],
+   "violationClasses": [],
+   "emitterRefusals": [],
    "emittedSurfaces": [
+    "react",
+    "html",
+    "react-inline",
     "figma-script"
    ],
-   "noteCount": 44,
+   "noteCount": 184,
    "unboundCount": 0,
    "mintedCount": 1,
    "tokenRefsCarried": 6,
@@ -64234,68 +63293,22 @@
     "textStyleVariety": 0,
     "geometryParts": 0
    },
-   "clean": false
+   "clean": true
   },
   {
    "setName": "Navigation-Side",
    "type": "COMPONENT_SET",
    "proposed": true,
-   "violations": [
-    "ds.navigation-side: part \"Header\" visibleWhen.equals \"false\" is not a value of prop \"open\"",
-    "ds.navigation-side: part \"Logo\" visibleWhen.equals \"false\" is not a value of prop \"open\"",
-    "ds.navigation-side: part \"Icon\" visibleWhen.equals \"false\" is not a value of prop \"open\"",
-    "ds.navigation-side: part \"Search2\" visibleWhen.equals \"true\" is not a value of prop \"open\"",
-    "ds.navigation-side: part \"accountBlock\" visibleWhen.equals \"false\" is not a value of prop \"open\"",
-    "ds.navigation-side: part \"Avatar\" sets unknown ds.avatar prop \"isVisible\"",
-    "ds.navigation-side: part \"Avatar\" sets unknown ds.avatar prop \"notification\"",
-    "ds.navigation-side: part \"Avatar\" sets unknown ds.avatar prop \"indicator\"",
-    "ds.navigation-side: part \"Avatar\" sets unknown ds.avatar prop \"round\"",
-    "ds.navigation-side: part \"Avatar\" sets unknown ds.avatar prop \"type\"",
-    "ds.navigation-side: part \"Avatar\" visibleWhen.equals \"false\" is not a value of prop \"open\""
-   ],
-   "violationClasses": [
-    "visiblewhen-value-outside-prop-enum",
-    "visiblewhen-value-outside-prop-enum",
-    "visiblewhen-value-outside-prop-enum",
-    "visiblewhen-value-outside-prop-enum",
-    "visiblewhen-value-outside-prop-enum",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "visiblewhen-value-outside-prop-enum"
-   ],
-   "emitterRefusals": [
-    {
-     "emitter": "react",
-     "classes": [
-      "visiblewhen-value-outside-prop-enum",
-      "component-ref-unknown-child-prop"
-     ],
-     "message": "ds.navigation-side: part \"Header\" visibleWhen.equals \"false\" is not a value of prop \"open\""
-    },
-    {
-     "emitter": "html",
-     "classes": [
-      "visiblewhen-value-outside-prop-enum",
-      "component-ref-unknown-child-prop"
-     ],
-     "message": "ds.navigation-side: part \"Header\" visibleWhen.equals \"false\" is not a value of prop \"open\""
-    },
-    {
-     "emitter": "react-inline",
-     "classes": [
-      "visiblewhen-value-outside-prop-enum",
-      "component-ref-unknown-child-prop"
-     ],
-     "message": "ds.navigation-side: part \"Header\" visibleWhen.equals \"false\" is not a value of prop \"open\""
-    }
-   ],
+   "violations": [],
+   "violationClasses": [],
+   "emitterRefusals": [],
    "emittedSurfaces": [
+    "react",
+    "html",
+    "react-inline",
     "figma-script"
    ],
-   "noteCount": 82,
+   "noteCount": 116,
    "unboundCount": 0,
    "mintedCount": 2,
    "tokenRefsCarried": 13,
@@ -64324,7 +63337,7 @@
     "textStyleVariety": 0,
     "geometryParts": 2
    },
-   "clean": false
+   "clean": true
   },
   {
    "setName": "_Nav-item-base-open",
@@ -64375,43 +63388,16 @@
    "setName": "_Nav-item-menu",
    "type": "COMPONENT_SET",
    "proposed": true,
-   "violations": [
-    "ds.nav-item-menu: part \"NavItemBaseOpen2\" visibleWhen.equals \"true\" is not a value of prop \"expanded\"",
-    "ds.nav-item-menu: part \"NavItemBaseOpen3\" visibleWhen.equals \"true\" is not a value of prop \"expanded\"",
-    "ds.nav-item-menu: part \"NavItemBaseOpen4\" visibleWhen.equals \"true\" is not a value of prop \"expanded\""
-   ],
-   "violationClasses": [
-    "visiblewhen-value-outside-prop-enum",
-    "visiblewhen-value-outside-prop-enum",
-    "visiblewhen-value-outside-prop-enum"
-   ],
-   "emitterRefusals": [
-    {
-     "emitter": "react",
-     "classes": [
-      "visiblewhen-value-outside-prop-enum"
-     ],
-     "message": "ds.nav-item-menu: part \"NavItemBaseOpen2\" visibleWhen.equals \"true\" is not a value of prop \"expanded\""
-    },
-    {
-     "emitter": "html",
-     "classes": [
-      "visiblewhen-value-outside-prop-enum"
-     ],
-     "message": "ds.nav-item-menu: part \"NavItemBaseOpen2\" visibleWhen.equals \"true\" is not a value of prop \"expanded\""
-    },
-    {
-     "emitter": "react-inline",
-     "classes": [
-      "visiblewhen-value-outside-prop-enum"
-     ],
-     "message": "ds.nav-item-menu: part \"NavItemBaseOpen2\" visibleWhen.equals \"true\" is not a value of prop \"expanded\""
-    }
-   ],
+   "violations": [],
+   "violationClasses": [],
+   "emitterRefusals": [],
    "emittedSurfaces": [
+    "react",
+    "html",
+    "react-inline",
     "figma-script"
    ],
-   "noteCount": 15,
+   "noteCount": 18,
    "unboundCount": 0,
    "mintedCount": 0,
    "tokenRefsCarried": 0,
@@ -64436,7 +63422,7 @@
     "textStyleVariety": 0,
     "geometryParts": 0
    },
-   "clean": false
+   "clean": true
   },
   {
    "setName": "_Nav-item-base-close",
@@ -64527,47 +63513,16 @@
    "setName": "_Footer-Nav",
    "type": "COMPONENT",
    "proposed": true,
-   "violations": [
-    "ds.footer-nav: part \"Avatar\" sets unknown ds.avatar prop \"isVisible\"",
-    "ds.footer-nav: part \"Avatar\" sets unknown ds.avatar prop \"notification\"",
-    "ds.footer-nav: part \"Avatar\" sets unknown ds.avatar prop \"indicator\"",
-    "ds.footer-nav: part \"Avatar\" sets unknown ds.avatar prop \"round\"",
-    "ds.footer-nav: part \"Avatar\" sets unknown ds.avatar prop \"type\""
-   ],
-   "violationClasses": [
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop"
-   ],
-   "emitterRefusals": [
-    {
-     "emitter": "react",
-     "classes": [
-      "component-ref-unknown-child-prop"
-     ],
-     "message": "ds.footer-nav: part \"Avatar\" sets unknown ds.avatar prop \"isVisible\""
-    },
-    {
-     "emitter": "html",
-     "classes": [
-      "component-ref-unknown-child-prop"
-     ],
-     "message": "ds.footer-nav: part \"Avatar\" sets unknown ds.avatar prop \"isVisible\""
-    },
-    {
-     "emitter": "react-inline",
-     "classes": [
-      "component-ref-unknown-child-prop"
-     ],
-     "message": "ds.footer-nav: part \"Avatar\" sets unknown ds.avatar prop \"isVisible\""
-    }
-   ],
+   "violations": [],
+   "violationClasses": [],
+   "emitterRefusals": [],
    "emittedSurfaces": [
+    "react",
+    "html",
+    "react-inline",
     "figma-script"
    ],
-   "noteCount": 13,
+   "noteCount": 19,
    "unboundCount": 0,
    "mintedCount": 5,
    "tokenRefsCarried": 12,
@@ -64590,53 +63545,22 @@
     "textStyleVariety": 2,
     "geometryParts": 0
    },
-   "clean": false
+   "clean": true
   },
   {
    "setName": "Navigation-Header",
    "type": "COMPONENT_SET",
    "proposed": true,
-   "violations": [
-    "ds.navigation-header: part \"Avatar\" sets unknown ds.avatar prop \"isVisible\"",
-    "ds.navigation-header: part \"Avatar\" sets unknown ds.avatar prop \"notification\"",
-    "ds.navigation-header: part \"Avatar\" sets unknown ds.avatar prop \"indicator\"",
-    "ds.navigation-header: part \"Avatar\" sets unknown ds.avatar prop \"round\"",
-    "ds.navigation-header: part \"Avatar\" sets unknown ds.avatar prop \"type\""
-   ],
-   "violationClasses": [
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop"
-   ],
-   "emitterRefusals": [
-    {
-     "emitter": "react",
-     "classes": [
-      "component-ref-unknown-child-prop"
-     ],
-     "message": "ds.navigation-header: part \"Avatar\" sets unknown ds.avatar prop \"isVisible\""
-    },
-    {
-     "emitter": "html",
-     "classes": [
-      "component-ref-unknown-child-prop"
-     ],
-     "message": "ds.navigation-header: part \"Avatar\" sets unknown ds.avatar prop \"isVisible\""
-    },
-    {
-     "emitter": "react-inline",
-     "classes": [
-      "component-ref-unknown-child-prop"
-     ],
-     "message": "ds.navigation-header: part \"Avatar\" sets unknown ds.avatar prop \"isVisible\""
-    }
-   ],
+   "violations": [],
+   "violationClasses": [],
+   "emitterRefusals": [],
    "emittedSurfaces": [
+    "react",
+    "html",
+    "react-inline",
     "figma-script"
    ],
-   "noteCount": 54,
+   "noteCount": 60,
    "unboundCount": 0,
    "mintedCount": 4,
    "tokenRefsCarried": 11,
@@ -64663,7 +63587,7 @@
     "textStyleVariety": 1,
     "geometryParts": 0
    },
-   "clean": false
+   "clean": true
   },
   {
    "setName": "Pagination-1",
@@ -64707,39 +63631,16 @@
    "setName": "Pagination-2",
    "type": "COMPONENT_SET",
    "proposed": true,
-   "violations": [
-    "ds.pagination-2: part \"PaginationNumber6\" visibleWhen.equals \"true\" is not a value of prop \"truncation\""
-   ],
-   "violationClasses": [
-    "visiblewhen-value-outside-prop-enum"
-   ],
-   "emitterRefusals": [
-    {
-     "emitter": "react",
-     "classes": [
-      "visiblewhen-value-outside-prop-enum"
-     ],
-     "message": "ds.pagination-2: part \"PaginationNumber6\" visibleWhen.equals \"true\" is not a value of prop \"truncation\""
-    },
-    {
-     "emitter": "html",
-     "classes": [
-      "visiblewhen-value-outside-prop-enum"
-     ],
-     "message": "ds.pagination-2: part \"PaginationNumber6\" visibleWhen.equals \"true\" is not a value of prop \"truncation\""
-    },
-    {
-     "emitter": "react-inline",
-     "classes": [
-      "visiblewhen-value-outside-prop-enum"
-     ],
-     "message": "ds.pagination-2: part \"PaginationNumber6\" visibleWhen.equals \"true\" is not a value of prop \"truncation\""
-    }
-   ],
+   "violations": [],
+   "violationClasses": [],
+   "emitterRefusals": [],
    "emittedSurfaces": [
+    "react",
+    "html",
+    "react-inline",
     "figma-script"
    ],
-   "noteCount": 36,
+   "noteCount": 37,
    "unboundCount": 0,
    "mintedCount": 2,
    "tokenRefsCarried": 6,
@@ -64765,45 +63666,22 @@
     "textStyleVariety": 0,
     "geometryParts": 0
    },
-   "clean": false
+   "clean": true
   },
   {
    "setName": "Pagination-3",
    "type": "COMPONENT_SET",
    "proposed": true,
-   "violations": [
-    "ds.pagination-3: part \"PaginationNumber6\" visibleWhen.equals \"true\" is not a value of prop \"truncation\""
-   ],
-   "violationClasses": [
-    "visiblewhen-value-outside-prop-enum"
-   ],
-   "emitterRefusals": [
-    {
-     "emitter": "react",
-     "classes": [
-      "visiblewhen-value-outside-prop-enum"
-     ],
-     "message": "ds.pagination-3: part \"PaginationNumber6\" visibleWhen.equals \"true\" is not a value of prop \"truncation\""
-    },
-    {
-     "emitter": "html",
-     "classes": [
-      "visiblewhen-value-outside-prop-enum"
-     ],
-     "message": "ds.pagination-3: part \"PaginationNumber6\" visibleWhen.equals \"true\" is not a value of prop \"truncation\""
-    },
-    {
-     "emitter": "react-inline",
-     "classes": [
-      "visiblewhen-value-outside-prop-enum"
-     ],
-     "message": "ds.pagination-3: part \"PaginationNumber6\" visibleWhen.equals \"true\" is not a value of prop \"truncation\""
-    }
-   ],
+   "violations": [],
+   "violationClasses": [],
+   "emitterRefusals": [],
    "emittedSurfaces": [
+    "react",
+    "html",
+    "react-inline",
     "figma-script"
    ],
-   "noteCount": 34,
+   "noteCount": 35,
    "unboundCount": 0,
    "mintedCount": 1,
    "tokenRefsCarried": 7,
@@ -64829,7 +63707,7 @@
     "textStyleVariety": 0,
     "geometryParts": 0
    },
-   "clean": false
+   "clean": true
   },
   {
    "setName": "_pagination-number",
@@ -65155,41 +64033,16 @@
    "setName": "Radio button-icon",
    "type": "COMPONENT_SET",
    "proposed": true,
-   "violations": [
-    "ds.radio-button-icon: part \"RadioButton\" visibleWhen.equals \"true\" is not a value of prop \"selected\"",
-    "ds.radio-button-icon: part \"Circle\" visibleWhen.equals \"false\" is not a value of prop \"selected\""
-   ],
-   "violationClasses": [
-    "visiblewhen-value-outside-prop-enum",
-    "visiblewhen-value-outside-prop-enum"
-   ],
-   "emitterRefusals": [
-    {
-     "emitter": "react",
-     "classes": [
-      "visiblewhen-value-outside-prop-enum"
-     ],
-     "message": "ds.radio-button-icon: part \"RadioButton\" visibleWhen.equals \"true\" is not a value of prop \"selected\""
-    },
-    {
-     "emitter": "html",
-     "classes": [
-      "visiblewhen-value-outside-prop-enum"
-     ],
-     "message": "ds.radio-button-icon: part \"RadioButton\" visibleWhen.equals \"true\" is not a value of prop \"selected\""
-    },
-    {
-     "emitter": "react-inline",
-     "classes": [
-      "visiblewhen-value-outside-prop-enum"
-     ],
-     "message": "ds.radio-button-icon: part \"RadioButton\" visibleWhen.equals \"true\" is not a value of prop \"selected\""
-    }
-   ],
+   "violations": [],
+   "violationClasses": [],
+   "emitterRefusals": [],
    "emittedSurfaces": [
+    "react",
+    "html",
+    "react-inline",
     "figma-script"
    ],
-   "noteCount": 18,
+   "noteCount": 20,
    "unboundCount": 0,
    "mintedCount": 1,
    "tokenRefsCarried": 6,
@@ -65221,47 +64074,22 @@
     "textStyleVariety": 0,
     "geometryParts": 0
    },
-   "clean": false
+   "clean": true
   },
   {
    "setName": "Toggle-icon",
    "type": "COMPONENT_SET",
    "proposed": true,
-   "violations": [
-    "ds.toggle-icon: part \"ToggleRight\" visibleWhen.equals \"true\" is not a value of prop \"switchOn\"",
-    "ds.toggle-icon: part \"ToggleLeft\" visibleWhen.equals \"false\" is not a value of prop \"switchOn\""
-   ],
-   "violationClasses": [
-    "visiblewhen-value-outside-prop-enum",
-    "visiblewhen-value-outside-prop-enum"
-   ],
-   "emitterRefusals": [
-    {
-     "emitter": "react",
-     "classes": [
-      "visiblewhen-value-outside-prop-enum"
-     ],
-     "message": "ds.toggle-icon: part \"ToggleRight\" visibleWhen.equals \"true\" is not a value of prop \"switchOn\""
-    },
-    {
-     "emitter": "html",
-     "classes": [
-      "visiblewhen-value-outside-prop-enum"
-     ],
-     "message": "ds.toggle-icon: part \"ToggleRight\" visibleWhen.equals \"true\" is not a value of prop \"switchOn\""
-    },
-    {
-     "emitter": "react-inline",
-     "classes": [
-      "visiblewhen-value-outside-prop-enum"
-     ],
-     "message": "ds.toggle-icon: part \"ToggleRight\" visibleWhen.equals \"true\" is not a value of prop \"switchOn\""
-    }
-   ],
+   "violations": [],
+   "violationClasses": [],
+   "emitterRefusals": [],
    "emittedSurfaces": [
+    "react",
+    "html",
+    "react-inline",
     "figma-script"
    ],
-   "noteCount": 17,
+   "noteCount": 19,
    "unboundCount": 0,
    "mintedCount": 1,
    "tokenRefsCarried": 6,
@@ -65292,7 +64120,7 @@
     "textStyleVariety": 0,
     "geometryParts": 0
    },
-   "clean": false
+   "clean": true
   },
   {
    "setName": "_Tab-item",
@@ -65574,75 +64402,16 @@
    "setName": "Table-Data cell",
    "type": "COMPONENT_SET",
    "proposed": true,
-   "violations": [
-    "ds.table-data-cell: part \"Avatar\" sets unknown ds.avatar prop \"isVisible\"",
-    "ds.table-data-cell: part \"Avatar\" sets unknown ds.avatar prop \"notification\"",
-    "ds.table-data-cell: part \"Avatar\" sets unknown ds.avatar prop \"indicator\"",
-    "ds.table-data-cell: part \"Avatar\" sets unknown ds.avatar prop \"round\"",
-    "ds.table-data-cell: part \"Avatar\" sets unknown ds.avatar prop \"type\"",
-    "ds.table-data-cell: part \"avatarGroup\" sets unknown ds.avatar-group prop \"item5\"",
-    "ds.table-data-cell: part \"avatarGroup\" sets unknown ds.avatar-group prop \"item2\"",
-    "ds.table-data-cell: part \"avatarGroup\" sets unknown ds.avatar-group prop \"item4\"",
-    "ds.table-data-cell: part \"avatarGroup\" sets unknown ds.avatar-group prop \"count\"",
-    "ds.table-data-cell: part \"avatarGroup\" sets unknown ds.avatar-group prop \"item3\"",
-    "ds.table-data-cell: part \"avatarGroup\" sets unknown ds.avatar-group prop \"size\"",
-    "ds.table-data-cell: part \"avatarGroup\" sets unknown ds.avatar-group prop \"type\"",
-    "ds.table-data-cell: part \"Badge\" sets unknown ds.badge prop \"text\"",
-    "ds.table-data-cell: part \"Badge\" sets unknown ds.badge prop \"iconRight\"",
-    "ds.table-data-cell: part \"Badge\" sets unknown ds.badge prop \"iconLeft\"",
-    "ds.table-data-cell: part \"Badge\" sets unknown ds.badge prop \"type\"",
-    "ds.table-data-cell: part \"Badge\" sets unknown ds.badge prop \"style\"",
-    "ds.table-data-cell: part \"Badge\" sets unknown ds.badge prop \"size\"",
-    "ds.table-data-cell: part \"Badge\" sets unknown ds.badge prop \"rounded\""
-   ],
-   "violationClasses": [
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop",
-    "component-ref-unknown-child-prop"
-   ],
-   "emitterRefusals": [
-    {
-     "emitter": "react",
-     "classes": [
-      "component-ref-unknown-child-prop"
-     ],
-     "message": "ds.table-data-cell: part \"Avatar\" sets unknown ds.avatar prop \"isVisible\""
-    },
-    {
-     "emitter": "html",
-     "classes": [
-      "component-ref-unknown-child-prop"
-     ],
-     "message": "ds.table-data-cell: part \"Avatar\" sets unknown ds.avatar prop \"isVisible\""
-    },
-    {
-     "emitter": "react-inline",
-     "classes": [
-      "component-ref-unknown-child-prop"
-     ],
-     "message": "ds.table-data-cell: part \"Avatar\" sets unknown ds.avatar prop \"isVisible\""
-    }
-   ],
+   "violations": [],
+   "violationClasses": [],
+   "emitterRefusals": [],
    "emittedSurfaces": [
+    "react",
+    "html",
+    "react-inline",
     "figma-script"
    ],
-   "noteCount": 78,
+   "noteCount": 98,
    "unboundCount": 1,
    "mintedCount": 23,
    "tokenRefsCarried": 22,
@@ -65675,7 +64444,7 @@
     "textStyleVariety": 6,
     "geometryParts": 15
    },
-   "clean": false
+   "clean": true
   },
   {
    "setName": "Text Area",

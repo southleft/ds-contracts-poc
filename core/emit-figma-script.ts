@@ -45,6 +45,7 @@ import {
   type Prop,
 } from '../scripts/contract-schema.js';
 import { flattenTokens, aliasTarget, px, type TokenEntry, type TokenTreeInput } from './tokens.js';
+import { validateContract } from './emit-react.js';
 
 
 export interface LayoutSpec {
@@ -1490,6 +1491,17 @@ function buildComponentScript(
   fileKeyOverride?: string,
   mintedTokens?: Record<string, unknown>,
 ): string {
+  // The referee, same wording as emitReact: an invalid contract refuses BY
+  // NAME on the canvas surface too. The gauntlet census found this was the
+  // one emitter that never called validateContract — every referee-violating
+  // set still emitted a sync script while react/html/react-inline refused.
+  const refereeErrors: string[] = [];
+  validateContract(contract, byId, refereeErrors, input.icons);
+  if (refereeErrors.length > 0) {
+    throw new Error(
+      `Refused — ${refereeErrors.length} contract violation(s):\n${refereeErrors.map((e) => `  - ${e}`).join('\n')}`,
+    );
+  }
   const data = compileComponentData(contract, byId);
   const hasOpacity = dataHasOpacity(data);
   const hasShape = dataSome(data, (x) => x.shape !== undefined);

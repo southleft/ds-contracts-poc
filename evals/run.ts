@@ -1658,6 +1658,96 @@ const cases: Case[] = [
       }
     },
   },
+  {
+    // Census class fix 1/3 (component-ref-unknown-child-prop, was 12 sets):
+    // an applied Figma prop on a nested instance that does not map through
+    // the in-scope child contract's bindings.figma is DROPPED with a named
+    // note — never emitted under a guessed spelling the referee refuses.
+    // Fixture replay of the live Avatar group set.
+    id: 'design-census-unmappable-child-props-dropped',
+    claim: 'C5-extraction',
+    run: () => {
+      const r = run(TSX, ['extract/figma/gauntlet/class-fix-check.ts']);
+      if (r.status !== 0) throw new Error(`class-fix receipt failed:\n${r.out}`);
+      for (const line of [
+        '✔ the unmappable applied prop is DROPPED with the named note (isVisible on nested Avatar → ds.avatar)',
+        '✔ "isVisible" appears NOWHERE in the emitted anatomy (dropped, not guessed)',
+        '✔ referee CLEAN (validateContract + generateCss report zero violations; got 0)',
+        '✔ no "sets unknown … prop" violation anywhere',
+        '✔ ALL FOUR surfaces emit (react, html, react-inline, figma-script)',
+      ]) {
+        if (!r.out.includes(line)) throw new Error(`missing check: ${line}`);
+      }
+    },
+  },
+  {
+    // Census class fix 2/3 (visiblewhen-value-outside-prop-enum, was 11
+    // sets): presence riding a true/false axis spells the truthy form
+    // visibleWhen { prop } (the axis promotes to a BOOLEAN prop; equals:
+    // "true" is enum vocabulary). The inexpressible false side is a NAMED
+    // note, kept unconditional — never a wrong condition. Fixture replay of
+    // the live Alert set + a synthesized false-side set.
+    id: 'design-census-boolean-visiblewhen-truthy-form',
+    claim: 'C5-extraction',
+    run: () => {
+      const r = run(TSX, ['extract/figma/gauntlet/class-fix-check.ts']);
+      if (r.status !== 0) throw new Error(`class-fix receipt failed:\n${r.out}`);
+      for (const line of [
+        '✔ presence on the true/false axis is spelled as the TRUTHY form with the named note (visibleWhen { prop: inlineAction })',
+        '✔ no visibleWhen carries equals:"true"/"false" (boolean spelling, not enum vocabulary)',
+        '✔ the axis promoted to a BOOLEAN prop `inlineAction`',
+        '✔ no "visibleWhen.equals … is not a value of prop" violation anywhere',
+        '✔ false side: the inexpressible condition is a NAMED note (visibleWhen has no negated form; kept unconditional)',
+        '✔ false side: NO visibleWhen is invented on the part (never wrong)',
+        '✔ false side: referee CLEAN (got 0)',
+      ]) {
+        if (!r.out.includes(line)) throw new Error(`missing check: ${line}`);
+      }
+    },
+  },
+  {
+    // Census class fix 3/3 (prop-binding-not-camelcase, was 1 set): a
+    // digit-led property spelling gets the componentIdSlug digit-led
+    // discipline on prop code bindings ("2nd paragraph" → `p2ndParagraph`,
+    // deterministic "p" prefix) with a named note; the figma binding keeps
+    // the original spelling. Fixture replay of the live Note set.
+    id: 'design-census-digit-led-prop-binding-prefixed',
+    claim: 'C5-extraction',
+    run: () => {
+      const r = run(TSX, ['extract/figma/gauntlet/class-fix-check.ts']);
+      if (r.status !== 0) throw new Error(`class-fix receipt failed:\n${r.out}`);
+      for (const line of [
+        '✔ the digit-led rename is a NAMED note (`p2ndParagraph` ← "2nd paragraph", componentIdSlug discipline)',
+        '✔ prop name and code binding are `p2ndParagraph` (legal camelCase)',
+        '✔ the figma binding keeps the ORIGINAL spelling "2nd paragraph"',
+        '✔ no "is not a legal camelCase identifier" violation anywhere',
+        '✔ ALL FOUR surfaces emit (react, html, react-inline, figma-script)',
+      ]) {
+        if (!r.out.includes(line)) throw new Error(`missing check: ${line}`);
+      }
+    },
+  },
+  {
+    // Census guard 4: emit-figma-script referees. The census found the
+    // canvas surface was the one emitter that never called validateContract
+    // — every referee-violating set still emitted a sync script. An invalid
+    // contract must refuse BY NAME on the canvas surface like the other
+    // three, and valid repo contracts must emit unchanged (golden safety).
+    id: 'figma-script-referees-invalid-contracts',
+    claim: 'C2-refusal',
+    run: () => {
+      const r = run(TSX, ['extract/figma/gauntlet/class-fix-check.ts']);
+      if (r.status !== 0) throw new Error(`class-fix receipt failed:\n${r.out}`);
+      for (const line of [
+        '✔ emitFigmaScript REFUSES the invalid contract (no sync script emitted)',
+        '✔ the refusal is NAMED with the emitReact wording ("Refused — 1 contract violation(s)")',
+        '✔ the violation names the part and prop (visibleWhen references unknown prop "nonexistent")',
+        '✔ the VALID repo contract still emits its sync script (golden untouched)',
+      ]) {
+        if (!r.out.includes(line)) throw new Error(`missing check: ${line}`);
+      }
+    },
+  },
 ];
 
 // ---------------------------------------------------------------------------
