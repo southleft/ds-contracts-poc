@@ -28,6 +28,13 @@
 const BASE = 'http://localhost:8765';
 const TOKEN_STORAGE_KEY = 'ds_contracts_runner_token';
 
+// Send to Playground — the pairing bridge (workers/assist/src/bridge.ts).
+// The plugin POSTs one dump under a short-lived code; the playground tab
+// polls the same code and imports on arrival. Must stay in manifest.json's
+// networkAccess.allowedDomains.
+const BRIDGE_BASE = 'https://ds-contracts-assist.southleft-llc.workers.dev';
+const BRIDGE_MAX_DUMP_BYTES = 4 * 1024 * 1024; // mirror of the worker's cap, checked before sending
+
 // ---------------------------------------------------------------------------
 // Pure-JS SHA-256 (the plugin sandbox has no WebCrypto). Standard FIPS 180-4
 // implementation over the UTF-8 bytes of the input string; returns lowercase
@@ -194,12 +201,69 @@ figma.ui.onmessage = async (msg) => {
       figma.notify('Pasted script threw — see the plugin window.', { error: true });
     }
     busy = false;
+  } else if (msg.type === 'run-send') {
+    busy = true;
+    await runSendToPlayground(String(msg.dumpCode || ''), String(msg.pairCode || ''));
+    busy = false;
   } else if (msg.type === 'run-runner') {
     busy = true;
     await runLocalRunner();
     busy = false;
   }
 };
+
+// ---------------------------------------------------------------------------
+// Send to Playground — runs the SAME dump script the paste box runs (the UI
+// hands it over verbatim, TARGET_SETS scoped), then POSTs the returned dump
+// to the bridge under the pairing code. Read-only in this file; the dump
+// leaves for the bridge and nowhere else.
+// ---------------------------------------------------------------------------
+async function runSendToPlayground(dumpCode, pairCode) {
+  const status = (line) => post({ type: 'send-status', line });
+  const done = (ok, message) => {
+    post({ type: 'send-result', ok, message });
+    figma.notify(ok ? 'Sent to the playground.' : 'Send failed — see the plugin window.', ok ? {} : { error: true });
+  };
+
+  let dump;
+  try {
+    dump = await runScript(dumpCode);
+  } catch (e) {
+    return done(false, 'The dump script threw while reading this file: ' + String(e && e.message ? e.message : e));
+  }
+  const setNames = Object.keys(dump || {}).filter(function (k) { return k !== '_provenance' && k !== '_degradations'; });
+  if (setNames.length === 0) {
+    return done(false, 'No component sets matched — check the names against this file’s component sets, or leave the box empty to send every set.');
+  }
+
+  const body = JSON.stringify(dump);
+  if (body.length > BRIDGE_MAX_DUMP_BYTES) {
+    return done(false, 'This dump is too large for the bridge (' + (body.length / (1024 * 1024)).toFixed(1) + ' MB, cap 4 MB) — name fewer component sets and send again.');
+  }
+
+  status('Sending ' + setNames.length + ' set' + (setNames.length === 1 ? '' : 's') + ' (' + Math.max(1, Math.round(body.length / 1024)) + ' KB)…');
+  let res;
+  try {
+    res = await fetch(BRIDGE_BASE + '/bridge/' + encodeURIComponent(pairCode), {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: body,
+    });
+  } catch (e) {
+    return done(false, 'Could not reach the bridge (' + String(e && e.message ? e.message : e) + ') — check your connection and try again.');
+  }
+  if (res.ok) {
+    return done(true, 'Delivered ' + setNames.join(', ') + ' — the playground tab showing code ' + pairCode + ' picks it up within a few seconds. The paste route still works any time.');
+  }
+  // The worker's refusals are plain words already (wrong/expired code 404,
+  // too large 413, rate limit 429) — show them verbatim when it sent one.
+  let workerMessage = null;
+  try {
+    const parsed = await res.json();
+    if (parsed && typeof parsed.error === 'string') workerMessage = parsed.error;
+  } catch (e) { /* non-JSON error body — fall through to the status line */ }
+  return done(false, workerMessage || ('The bridge answered HTTP ' + res.status + ' with no named message — try again.'));
+}
 
 // ---------------------------------------------------------------------------
 // Local runner — the original from-disk flow, now button-triggered from the
