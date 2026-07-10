@@ -36,7 +36,9 @@ import {
   FIX_CONTRACT_MAX_REFUSALS,
   FIX_CONTRACT_MAX_TOKEN_PATHS,
   MAX_AI_FIX_ROUNDS,
+  type AssistDeclaredRemoval,
 } from '../engine/assist';
+import { diffAiFixRound, type AiFixDiff } from '../engine/ai-fix-diff';
 import type { ProposeCodeResult } from '../engine/code-import';
 import {
   ANTHROPIC_MODEL,
@@ -458,12 +460,22 @@ export function Playground() {
   const [aiFixError, setAiFixError] = useState<string | null>(null);
   const [aiFixRounds, setAiFixRounds] = useState(0);
   const [aiFixUndo, setAiFixUndo] = useState<{ text: string; provenance: string } | null>(null);
+  // Plain-words diff of the loaded AI round vs the pre-fix contract —
+  // deletions render loud/red (owner field case: a round "fixed" duplicate
+  // part names by DELETING parts; the Dialog lost its close icon and action
+  // buttons, and nothing said so).
+  const [aiFixDiff, setAiFixDiff] = useState<{
+    diff: AiFixDiff;
+    declared: AssistDeclaredRemoval[];
+    undeclared: string[];
+  } | null>(null);
   // A fresh load (example, import, generation, share link) starts a fresh
   // fix session — `pristine` changes exactly then, never on a fix round.
   useEffect(() => {
     setAiFixRounds(0);
     setAiFixUndo(null);
     setAiFixError(null);
+    setAiFixDiff(null);
   }, [pristine]);
 
   /** Append one ai-fix group to whatever receipts are showing — the record
@@ -533,6 +545,15 @@ export function Playground() {
             ? [v.message]
             : [];
       const addressed = refusals.filter((r) => !remaining.includes(r));
+      // Plain-words diff vs the PRE-FIX contract — the client's own referee
+      // over what the round kept/renamed/REMOVED, independent of what the
+      // model declared in `removals` (an undeclared loss renders loudest).
+      const diff = diffAiFixRound(JSON.parse(sentText) as unknown, result.data.contract);
+      const declared = result.data.removals ?? [];
+      const undeclared = diff.lost.filter(
+        (item) => !declared.some((d) => item.includes(`"${d.path.split('/').pop() ?? d.path}"`)),
+      );
+      setAiFixDiff({ diff, declared, undeclared });
       setAiFixUndo({ text: sentText, provenance });
       setAiFixRounds(round);
       setText(fixedText);
@@ -548,6 +569,17 @@ export function Playground() {
               ? `tokens: ${usage.input_tokens ?? '?'} in / ${usage.output_tokens ?? '?'} out`
               : 'tokens: not reported by the response',
         },
+        { message: `diff vs the pre-fix contract: ${diff.summary}` },
+        ...declared.map((d) => ({
+          message: `the model DECLARED a removal: ${d.kind} ${d.path}${d.reason ? ` — ${d.reason}` : ''}`,
+        })),
+        ...(undeclared.length > 0
+          ? [
+              {
+                message: `UNDECLARED loss: ${undeclared.join(', ')} — removed by the round without a removals entry; review before trusting (Undo restores the pre-fix contract)`,
+              },
+            ]
+          : []),
         ...(addressed.length > 0
           ? addressed.map((r) => ({ message: `addressed: ${r}` }))
           : [{ message: 'addressed: none of the sent refusals cleared' }]),
@@ -568,6 +600,7 @@ export function Playground() {
     setText(aiFixUndo.text);
     setProvenance(aiFixUndo.provenance);
     setAiFixUndo(null);
+    setAiFixDiff(null);
   };
 
   // -------------------------------------------------------- resizable panes
@@ -2688,10 +2721,25 @@ export function Playground() {
               <span className="ai-fix-strip__text">
                 fix round {aiFixRounds} of {MAX_AI_FIX_ROUNDS} loaded and re-refereed above —
                 nothing applied silently.
+                {aiFixDiff ? <> Diff vs your pre-fix contract: {aiFixDiff.diff.summary}.</> : null}
               </span>
               <button type="button" className="btn--small" onClick={undoAiFix}>
                 Undo
               </button>
+            </div>
+          ) : null}
+          {aiFixUndo && aiFixDiff && aiFixDiff.diff.lost.length > 0 ? (
+            <div className="notice notice--error ai-fix-strip__loss" role="alert">
+              The AI round <strong>REMOVED {aiFixDiff.diff.lost.length}</strong>:{' '}
+              {aiFixDiff.diff.lost.join(', ')} — review before trusting.
+              {aiFixDiff.undeclared.length > 0 ? (
+                <>
+                  {' '}
+                  {aiFixDiff.undeclared.length} of these the model did not even declare in its
+                  removals list.
+                </>
+              ) : null}{' '}
+              Undo restores the pre-fix contract.
             </div>
           ) : null}
         </div>

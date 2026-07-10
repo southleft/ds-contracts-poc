@@ -133,8 +133,20 @@ export const FIX_CONTRACT_MAX_BYTES = 64 * 1024;
 export const FIX_CONTRACT_MAX_REFUSALS = 50;
 export const FIX_CONTRACT_MAX_TOKEN_PATHS = 3000;
 
+/** A removal the model DECLARED (worker guardrail: deletion is never a fix
+ *  unless declared here — and the client diffs the contracts itself, so an
+ *  undeclared loss is caught regardless). */
+export interface AssistDeclaredRemoval {
+  kind: string;
+  path: string;
+  reason: string;
+}
+
 export interface FixContractResponse {
   contract: unknown;
+  /** Always present from the current worker ([] when nothing was removed);
+   *  optional here for older deployments. */
+  removals?: AssistDeclaredRemoval[];
   model?: string;
   usage?: { input_tokens?: number; output_tokens?: number };
 }

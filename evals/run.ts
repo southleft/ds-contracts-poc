@@ -36,7 +36,9 @@ function resetScratch() {
   // playground rides along READ-ONLY: the canvas-box-parity receipt pins the
   // canvas renderer's border-box semantics against its source (the module is
   // vite-only at runtime — import.meta.glob — so the receipt reads, never runs).
-  for (const dir of ['contracts', 'tokens', 'scripts', 'core', 'parity', 'src', 'catalog', 'context', 'assets', 'extract', 'playground']) {
+  // workers rides along for the AI-fix guardrail eval (the worker test suite
+  // runs in scratch via the root tsx — workers/assist has no own node_modules).
+  for (const dir of ['contracts', 'tokens', 'scripts', 'core', 'parity', 'src', 'catalog', 'context', 'assets', 'extract', 'playground', 'workers']) {
     cpSync(path.join(ROOT, dir), path.join(SCRATCH, dir), { recursive: true });
   }
   cpSync(path.join(ROOT, 'evals', 'fixtures'), path.join(SCRATCH, 'evals', 'fixtures'), {
@@ -1604,6 +1606,34 @@ const cases: Case[] = [
       ]) {
         if (!r.out.includes(line)) throw new Error(`missing check: ${line}`);
       }
+    },
+  },
+  {
+    // Owner P0 (AI-fix guardrails): Fix-with-AI resolved his Dialog's
+    // duplicate-part-name refusals by DELETING parts — the rendered Dialog
+    // lost its close icon and all four action buttons; legal per schema,
+    // lossy in fact, and nothing said so. The worker's fix-contract prompt
+    // now FORBIDS removal-as-fix (rename/dedup/restructure instead) and the
+    // forced tool carries a machine-readable `removals` declaration channel
+    // (shape-checked passthrough; missing → []); the playground diffs every
+    // AI round against the pre-fix contract and renders deletions loud/red
+    // (undeclared losses loudest). This eval runs the worker test suite —
+    // guardrail prompt text, removals schema, passthrough filtering — in the
+    // scratch copy via the root tsx.
+    id: 'design-ai-fix-removal-guardrails',
+    claim: 'C2-refusal',
+    run: () => {
+      const r = run(TSX, ['--test', 'workers/assist/test/handler.test.ts', 'workers/assist/test/bridge.test.ts']);
+      if (r.status !== 0) throw new Error(`worker test suite failed:\n${r.out.slice(0, 4000)}`);
+      for (const line of [
+        'fix-contract: the system prompt forbids removal-as-fix and demands declared removals',
+        'fix-contract: the forced tool schema carries the removals declaration channel',
+        'fix-contract: declared removals pass through shape-checked — junk dropped, unknown kind folds to "other"',
+        'fix-contract: a response without removals answers an EMPTY array — never invented, never undefined',
+      ]) {
+        if (!r.out.includes(line)) throw new Error(`missing worker test: ${line}`);
+      }
+      if (!/# fail 0/.test(r.out)) throw new Error(`worker suite reports failures:\n${r.out.slice(-2000)}`);
     },
   },
   {
