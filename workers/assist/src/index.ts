@@ -16,6 +16,7 @@ import { corsHeaders, resolveOrigin } from './cors';
 import { budgetSpent, chargeBudget, clientIp, reserveIpSlot } from './limits';
 import { AssistUpstreamError, callClaude, MODEL } from './anthropic';
 import { ENDPOINTS } from './endpoints';
+import { handleBridge } from './bridge';
 
 export const MESSAGES = {
   disabled: 'assist is switched off — the owner has not enabled the shared budget yet',
@@ -42,6 +43,14 @@ export async function handleRequest(
   env: Env,
   deps: Deps = { fetchImpl: (...args: Parameters<typeof fetch>) => fetch(...args), now: () => new Date() },
 ): Promise<Response> {
+  // The plugin bridge routes first: it has its own (asymmetric) origin gate —
+  // the Figma plugin's upload arrives with `Origin: null` — and its own kill
+  // switch. Nothing below (assist CORS, ASSIST_ENABLED, Anthropic) applies.
+  const url = new URL(request.url);
+  if (url.pathname === '/bridge/session' || url.pathname.startsWith('/bridge/')) {
+    return handleBridge(request, url, env, deps);
+  }
+
   // CORS first: an origin we do not serve learns nothing else about us.
   const origin = resolveOrigin(request, env);
   if (!origin) return json(403, { error: MESSAGES.forbiddenOrigin });

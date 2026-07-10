@@ -1,14 +1,26 @@
-import { defineConfig } from 'vite';
+import { defineConfig, type PluginOption } from 'vite';
 import react from '@vitejs/plugin-react';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { buildPluginZip } from '../scripts/build-plugin-zip.mjs';
 
 const playgroundRoot = dirname(fileURLToPath(import.meta.url));
 const repoRoot = resolve(playgroundRoot, '..');
 
+/** Package the Sync Runner dev plugin into public/ so the Figma tab can
+ *  serve it as a download. Runs for dev AND build; refuses (fails the
+ *  build) when the dump script embedded in the plugin UI has drifted from
+ *  extract/figma/dump.plugin.js — see scripts/build-plugin-zip.mjs. */
+const pluginZip: PluginOption = {
+  name: 'ds-contracts-plugin-zip',
+  async buildStart() {
+    await buildPluginZip();
+  },
+};
+
 export default defineConfig({
   root: playgroundRoot,
-  plugins: [react()],
+  plugins: [react(), pluginZip],
   server: {
     port: 5181,
     fs: {

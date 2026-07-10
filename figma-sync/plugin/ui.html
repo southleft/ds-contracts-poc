@@ -81,10 +81,24 @@
   .log-line.ok { color: var(--figma-color-text-success, #198f51); }
   .log-line.warn { color: var(--figma-color-text-warning, #a86a00); }
   .log-line.error { color: var(--figma-color-text-danger, #dc3412); }
+  .field { display: flex; flex-direction: column; gap: 4px; flex: none; }
+  .field label { font-weight: 600; }
+  input[type="text"] {
+    font: inherit; color: var(--figma-color-text, #333);
+    background: var(--figma-color-bg-secondary, #f5f5f5);
+    border: 1px solid var(--figma-color-border, #d9d9d9);
+    border-radius: 0; padding: 6px 8px; outline: none;
+  }
+  input[type="text"]:focus { border-color: var(--figma-color-border-selected, #0d99ff); }
+  #send-code {
+    font-family: "SF Mono", Menlo, Consolas, monospace;
+    font-size: 14px; letter-spacing: 3px; text-transform: uppercase;
+  }
 </style>
 
 <div class="tabs" role="tablist">
   <button class="tab" id="tab-paste" role="tab" aria-selected="true" aria-controls="panel-paste">Paste a script</button>
+  <button class="tab" id="tab-send" role="tab" aria-selected="false" aria-controls="panel-send">Send to Playground</button>
   <button class="tab" id="tab-runner" role="tab" aria-selected="false" aria-controls="panel-runner">Local runner</button>
 </div>
 
@@ -104,6 +118,44 @@
     <span class="status" id="paste-status"></span>
   </div>
   <div class="result" id="paste-result" hidden></div>
+</div>
+
+<div class="panel" id="panel-send" role="tabpanel">
+  <div class="hint">
+    Reads this file&rsquo;s component sets with the repo&rsquo;s dump script
+    (read-only — nothing in this file changes) and sends the dump to the
+    playground under a pairing code. The Plugin API resolves bound variable
+    <em>names</em> on any Figma plan, so the playground&rsquo;s proposal binds
+    your real tokens instead of minting provisional ones.
+  </div>
+  <div class="field">
+    <label for="send-code">Pairing code</label>
+    <input type="text" id="send-code" maxlength="6" spellcheck="false" autocomplete="off"
+      placeholder="ABC234" />
+    <span class="hint">In the playground&rsquo;s Figma tab, press
+      <strong>Receive from plugin</strong> — it shows a 6-character code (good
+      for 15 minutes).</span>
+  </div>
+  <div class="field">
+    <label for="send-sets">Component set names (optional)</label>
+    <input type="text" id="send-sets" spellcheck="false" autocomplete="off"
+      placeholder="Badge, Switch, Card" />
+    <span class="hint">Comma-separated, exact names. Leave empty to send every
+      component set in this file (the Slot utility is always skipped) — the
+      same scoping the dump script&rsquo;s TARGET_SETS line gives the
+      copy/paste route.</span>
+  </div>
+  <div class="row">
+    <button class="primary" id="send-run">Send to Playground</button>
+    <span class="status" id="send-status"></span>
+  </div>
+  <div class="result" id="send-result" hidden></div>
+  <div class="hint">
+    Privacy: the dump (component structure, styles, variable names — never
+    your Figma token, never file contents beyond the chosen sets) goes to the
+    playground&rsquo;s bridge, is held at most 15 minutes, and is deleted the
+    moment your playground tab picks it up. Its contents are never logged.
+  </div>
 </div>
 
 <div class="panel" id="panel-runner" role="tabpanel">
@@ -128,28 +180,90 @@
 
   // --- tabs -----------------------------------------------------------------
   function select(which) {
-    ['paste', 'runner'].forEach(function (name) {
+    ['paste', 'send', 'runner'].forEach(function (name) {
       var on = name === which;
       $('tab-' + name).setAttribute('aria-selected', String(on));
       $('panel-' + name).classList.toggle('active', on);
     });
   }
   $('tab-paste').onclick = function () { select('paste'); };
+  $('tab-send').onclick = function () { select('send'); };
   $('tab-runner').onclick = function () { select('runner'); };
 
   // --- paste mode -----------------------------------------------------------
   var pasteRun = $('paste-run');
   var runnerRun = $('runner-run');
+  var sendRun = $('send-run');
+
+  function setBusy(on) {
+    pasteRun.disabled = on;
+    runnerRun.disabled = on;
+    sendRun.disabled = on;
+  }
 
   pasteRun.onclick = function () {
     var code = $('paste-input').value;
     if (!code.trim()) { $('paste-status').textContent = 'Nothing to run — paste a script first.'; return; }
-    pasteRun.disabled = true;
-    runnerRun.disabled = true;
+    setBusy(true);
     $('paste-status').textContent = 'Running…';
     $('paste-result').hidden = true;
     parent.postMessage({ pluginMessage: { type: 'run-paste', code: code } }, '*');
   };
+
+  // --- send to playground -----------------------------------------------------
+  // The dump logic is the repo's extract/figma/dump.plugin.js, embedded
+  // VERBATIM in the #dump-source block below (the plugin-zip build refuses to
+  // package a drifted copy). The only change made at send time is the same
+  // one the copy/paste route makes by hand: the TARGET_SETS line.
+  var CODE_ALPHABET_RE = /^[ABCDEFGHJKMNPQRSTUVWXYZ23456789]{6}$/;
+
+  function sendError(message) {
+    var box = $('send-result');
+    box.hidden = false;
+    box.className = 'result err';
+    box.textContent = '';
+    var headline = document.createElement('div');
+    headline.className = 'headline';
+    headline.textContent = 'Not sent.';
+    box.appendChild(headline);
+    var line = document.createElement('div');
+    line.textContent = message;
+    box.appendChild(line);
+  }
+
+  sendRun.onclick = function () {
+    $('send-result').hidden = true;
+    var pairCode = $('send-code').value.trim().toUpperCase();
+    if (!CODE_ALPHABET_RE.test(pairCode)) {
+      sendError('That does not look like a pairing code — 6 letters/digits from the playground’s “Receive from plugin” panel (letters I, L, O and digits 0, 1 are never used).');
+      return;
+    }
+    var sets = $('send-sets').value.split(',').map(function (s) { return s.trim(); }).filter(Boolean);
+    var source = $('dump-source').textContent.replace(/^\n/, '');
+    var scoped = source.replace(/^const TARGET_SETS = \[[^\n]*\];$/m,
+      'const TARGET_SETS = ' + JSON.stringify(sets) + ';');
+    if (scoped === source && sets.length > 0) {
+      sendError('Could not scope the dump script (its TARGET_SETS line was not found) — this build is broken; re-download the plugin from the playground.');
+      return;
+    }
+    setBusy(true);
+    $('send-status').textContent = 'Reading this file’s component sets…';
+    parent.postMessage({ pluginMessage: { type: 'run-send', dumpCode: scoped, pairCode: pairCode } }, '*');
+  };
+
+  function showSendResult(msg) {
+    var box = $('send-result');
+    box.hidden = false;
+    box.className = 'result ' + (msg.ok ? 'ok' : 'err');
+    box.textContent = '';
+    var headline = document.createElement('div');
+    headline.className = 'headline';
+    headline.textContent = msg.ok ? 'Sent — switch to your playground tab.' : 'Not sent.';
+    box.appendChild(headline);
+    var line = document.createElement('div');
+    line.textContent = msg.message;
+    box.appendChild(line);
+  }
 
   // Summary chips from the well-known report keys the generated scripts
   // return (created/amended/skipped, variants, node ids, props). Anything
@@ -239,8 +353,7 @@
 
   // --- local runner ---------------------------------------------------------
   runnerRun.onclick = function () {
-    runnerRun.disabled = true;
-    pasteRun.disabled = true;
+    setBusy(true);
     $('runner-status').textContent = 'Running…';
     $('runner-result').hidden = false;
     $('runner-result').className = 'result';
@@ -262,18 +375,306 @@
     var msg = event.data && event.data.pluginMessage;
     if (!msg) return;
     if (msg.type === 'paste-result') {
-      pasteRun.disabled = false;
-      runnerRun.disabled = false;
+      setBusy(false);
       $('paste-status').textContent = '';
       showPasteResult(msg);
+    } else if (msg.type === 'send-status') {
+      $('send-status').textContent = msg.line;
+    } else if (msg.type === 'send-result') {
+      setBusy(false);
+      $('send-status').textContent = '';
+      showSendResult(msg);
     } else if (msg.type === 'runner-log') {
       appendLog(msg.line, msg.level);
     } else if (msg.type === 'runner-done') {
-      runnerRun.disabled = false;
-      pasteRun.disabled = false;
+      setBusy(false);
       $('runner-status').textContent = '';
       $('runner-result').className = 'result ' + (msg.ok ? 'ok' : 'err');
       $('runner-headline').textContent = msg.summary;
     }
   };
+</script>
+
+<!-- The repo's extract/figma/dump.plugin.js, embedded VERBATIM (read-only dump
+     logic — the same script the copy/paste route runs through the paste box).
+     Do not edit here: scripts/build-plugin-zip.mjs refuses to package this
+     plugin when the block below differs from the repo file. -->
+<script type="text/plain" id="dump-source">
+// Design-side ANATOMY dump — the canonical node-tree capture (dump v1).
+//
+// Transport-agnostic Plugin API script (same boundary as extract/figma-dump.js
+// and parity/extract-figma.plugin.js): run it through any console/plugin-runner
+// bridge that executes Plugin API code in the open file, then save the returned
+// JSON and feed it to `npm run extract:figma -- <dump.json>`.
+//
+// Where extract/figma-dump.js reads only the API surface, this script reads the
+// DRAWN STRUCTURE — the facts propose.ts inverts into a contract's anatomy:
+//
+//   name / type        node identity ("track", FRAME) — part names come from here
+//   layout             auto-layout: mode/primary/counter (direction/justify/align),
+//                      literal spacing + padding [top,right,bottom,left], sizing modes
+//   bound              variable bindings: Plugin-API field → variable name
+//                      (slash-form, e.g. paddingLeft: "space/inset-x/sm")
+//   cornerRadius       literal uniform radius (bound radii appear in `bound`)
+//   fill / stroke      first visible solid paint: { var: name } when bound,
+//                      { hex: "rrggbb" } when raw, plus { alpha } when the
+//                      paint's effective opacity < 1 (dump v1.1) — raw paints
+//                      are REPORTED by propose.ts, never silently tokenized
+//   strokeWeight       literal stroke weight (bound weights appear in `bound`)
+//   fillWidth          layoutSizingHorizontal === 'FILL' — canvas projection of
+//                      grow (row parents) / align:stretch (column parents)
+//   text               characters, fontSize, fontStyle, named TextStyle (token
+//                      identity: "badge" ← font.badge.size), bound fill var
+//   propRefs           componentPropertyReferences with property-id suffixes
+//                      stripped: characters→TEXT, mainComponent→INSTANCE_SWAP,
+//                      visible→BOOLEAN ("Show X" optional-part convention)
+//   instanceOf         INSTANCE nodes: the main component's owning set name
+//   componentProperties INSTANCE nodes (dump v1.1, additive): applied property
+//                      values, so nested component refs keep their fixed props
+//
+// NOT captured in v1 (declared limits, noted by propose.ts): INSTANCE_SWAP
+// preferredValues (→ slot `accepts`), property definitions/defaults, element
+// semantics, events. Read-only — mutates nothing.
+
+// Target set names. Empty array = every local set/component except the Slot
+// utility. For the shipped fixtures this was ['Badge', 'Switch', 'Card'].
+const TARGET_SETS = ['Badge', 'Switch', 'Card'];
+
+await figma.loadAllPagesAsync();
+
+const rgbToHex = (c) => {
+  const h = (x) => Math.round(x * 255).toString(16).padStart(2, '0');
+  return h(c.r) + h(c.g) + h(c.b);
+};
+
+// dump v1.2: capture-side degradation receipts — the plugin mirror of the
+// REST mapper's MapReport.degradations. Every channel this script reads but
+// cannot carry lands here by name (STYLE-FIDELITY audit: zero silent loss).
+const degradations = [];
+const degrade = (code, nodePath, message) => degradations.push({ code, nodePath, message });
+const VECTOR_TYPES = ['VECTOR', 'STAR', 'POLYGON', 'REGULAR_POLYGON', 'LINE', 'BOOLEAN_OPERATION', 'ELLIPSE'];
+
+const varNameById = async (id) => {
+  const v = await figma.variables.getVariableByIdAsync(id);
+  return v ? v.name : null;
+};
+
+// First visible solid paint → { var } | { hex } | null, with the paint's
+// effective opacity as `alpha` when < 1 (dump v1.1 — 5%-black fills are a
+// real kit idiom; without alpha they mint opaque black).
+const dumpPaint = async (paints, nodePath, field) => {
+  if (!Array.isArray(paints)) return null; // figma.mixed
+  const visibles = paints.filter((x) => x.visible !== false);
+  const p = visibles.find((x) => x.type === 'SOLID');
+  if (!p) {
+    if (visibles.length > 0 && nodePath) {
+      degrade('paint-unsupported', nodePath, 'first visible ' + field + ' paint is ' + visibles[0].type + ', not SOLID — dump v1 carries solid paints only; paint omitted');
+    }
+    return null;
+  }
+  if (visibles.length > 1 && nodePath) {
+    degrade('paint-stack-truncated', nodePath, visibles.length + ' visible ' + field + ' paints (' + visibles.map((x) => x.type).join(', ') + ') — dump v1 carries the first SOLID only');
+  }
+  const alpha = typeof p.opacity === 'number' ? p.opacity : 1;
+  const withAlpha = (paint) => (alpha < 1 ? Object.assign(paint, { alpha }) : paint);
+  const alias = p.boundVariables && p.boundVariables.color;
+  if (alias) {
+    const name = await varNameById(alias.id);
+    if (name) return withAlpha({ var: name });
+  }
+  return withAlpha({ hex: rgbToHex(p.color) });
+};
+
+async function dumpNode(node, nodePath) {
+  const out = { name: node.name, type: node.type };
+
+  // dump v1.2: channels with NO dump projection are named receipts.
+  if ('blendMode' in node && node.blendMode !== 'NORMAL' && node.blendMode !== 'PASS_THROUGH') {
+    degrade('blend-mode-unsupported', nodePath, 'blendMode ' + node.blendMode + ' has no dump v1 projection — node renders as NORMAL');
+  }
+  if ('rotation' in node && typeof node.rotation === 'number' && Math.abs(node.rotation) > 1e-6) {
+    degrade('rotation-unsupported', nodePath, 'rotation ' + node.rotation + ' has no dump v1 projection — node renders unrotated (#42 class)');
+  }
+  if (VECTOR_TYPES.indexOf(node.type) >= 0) {
+    degrade('vector-geometry-unsupported', nodePath, node.type + ' geometry is not captured (#42) — the node carries paints only and renders as a box');
+  }
+
+  if ('layoutMode' in node && node.layoutMode !== 'NONE') {
+    out.layout = {
+      mode: node.layoutMode,
+      primary: node.primaryAxisAlignItems,
+      counter: node.counterAxisAlignItems,
+      spacing: node.itemSpacing,
+      padding: [node.paddingTop, node.paddingRight, node.paddingBottom, node.paddingLeft],
+      primarySizing: node.primaryAxisSizingMode,
+      counterSizing: node.counterAxisSizingMode,
+    };
+  }
+  if ('cornerRadius' in node && typeof node.cornerRadius === 'number' && node.cornerRadius !== 0) {
+    out.cornerRadius = node.cornerRadius;
+  } else if ('cornerRadius' in node && typeof node.cornerRadius !== 'number') {
+    // figma.mixed — per-corner radii (dump v1.2: named, no longer silent)
+    degrade('radii-nonuniform', nodePath, 'per-corner radii [' + [node.topLeftRadius, node.topRightRadius, node.bottomRightRadius, node.bottomLeftRadius].join(', ') + '] are not uniform — dump v1 carries a uniform radius only; omitted');
+  }
+
+  // Direct variable bindings (paint bindings ride fill/stroke/text instead).
+  const bound = {};
+  for (const [field, alias] of Object.entries(node.boundVariables || {})) {
+    if (Array.isArray(alias) || !alias || !alias.id) continue; // fills/strokes/characters
+    const name = await varNameById(alias.id);
+    if (name) bound[field] = name;
+  }
+  if (Object.keys(bound).length > 0) out.bound = bound;
+
+  if (node.type !== 'TEXT') {
+    const fill = 'fills' in node ? await dumpPaint(node.fills, nodePath, 'fill') : null;
+    if (fill) out.fill = fill;
+  }
+  const stroke = 'strokes' in node ? await dumpPaint(node.strokes, nodePath, 'stroke') : null;
+  if (stroke) {
+    out.stroke = stroke;
+    if (typeof node.strokeWeight === 'number') out.strokeWeight = node.strokeWeight;
+    // Stroke DETAIL on an INSTANCE is elided by design downstream (instance
+    // styling belongs to the child contract; the Slot utility's dashed
+    // border is the utility's own) — no receipt for an unconsumed channel.
+    if (node.type !== 'INSTANCE') {
+      if (typeof node.strokeWeight !== 'number') {
+        degrade('stroke-weights-nonuniform', nodePath, 'per-side stroke weights [' + [node.strokeTopWeight, node.strokeRightWeight, node.strokeBottomWeight, node.strokeLeftWeight].join(', ') + '] — dump v1 carries a uniform strokeWeight only');
+      }
+      if (Array.isArray(node.dashPattern) && node.dashPattern.length > 0) {
+        degrade('stroke-style-unsupported', nodePath, 'dashPattern [' + node.dashPattern.join(', ') + '] — dashed strokes have no dump v1 projection; stroke renders solid');
+      }
+      if ('strokeAlign' in node && node.strokeAlign !== 'INSIDE') {
+        degrade('stroke-style-unsupported', nodePath, 'strokeAlign ' + node.strokeAlign + ' — dump consumers render INSIDE strokes (CSS borders); alignment dropped');
+      }
+    }
+  }
+  const sizes = [];
+  if ('minWidth' in node && node.minWidth != null) sizes.push('minWidth ' + node.minWidth);
+  if ('maxWidth' in node && node.maxWidth != null) sizes.push('maxWidth ' + node.maxWidth);
+  if ('minHeight' in node && node.minHeight != null) sizes.push('minHeight ' + node.minHeight);
+  if ('maxHeight' in node && node.maxHeight != null) sizes.push('maxHeight ' + node.maxHeight);
+  if (sizes.length > 0) {
+    degrade('min-max-size-unsupported', nodePath, 'literal min/max sizing (' + sizes.join(', ') + ') has no dump v1 projection — dropped (bound min-width variables DO ride `bound`)');
+  }
+  if ('layoutSizingHorizontal' in node && node.layoutSizingHorizontal === 'FILL') {
+    out.fillWidth = true;
+  }
+  // dump v1.1: hidden nodes are captured, not skipped — visibility-bound
+  // parts recover their boolean default from this (REST mapper parity).
+  if (node.visible === false) out.hidden = true;
+  // dump v1.2: NODE opacity (distinct from paint alpha) — the disabled-variant
+  // wash-out channel (Eventz roots at opacity 0.4). Omitted when 1.
+  if ('opacity' in node && typeof node.opacity === 'number' && node.opacity < 1) {
+    out.opacity = Math.round(node.opacity * 10000) / 10000;
+  }
+  // dump v1.2: VISIBLE effects. Shadows carry geometry + color; blur types
+  // carry the type — propose.ts NAMES what it cannot invert.
+  if ('effects' in node && Array.isArray(node.effects) && node.effects.length > 0) {
+    const effects = [];
+    for (const e of node.effects) {
+      if (e.visible === false) continue;
+      if (e.type === 'DROP_SHADOW' || e.type === 'INNER_SHADOW') {
+        const alpha = typeof e.color.a === 'number' ? e.color.a : 1;
+        const color = alpha < 1 ? { hex: rgbToHex(e.color), alpha: Math.round(alpha * 10000) / 10000 } : { hex: rgbToHex(e.color) };
+        const eff = { type: e.type, color, offset: { x: e.offset.x, y: e.offset.y }, radius: e.radius };
+        if (typeof e.spread === 'number' && e.spread !== 0) eff.spread = e.spread;
+        effects.push(eff);
+      } else {
+        effects.push(typeof e.radius === 'number' ? { type: e.type, radius: e.radius } : { type: e.type });
+      }
+    }
+    if (effects.length > 0) out.effects = effects;
+  }
+
+  if (node.type === 'TEXT') {
+    const channels = [];
+    if (node.letterSpacing !== figma.mixed && node.letterSpacing && node.letterSpacing.value !== 0) {
+      channels.push('letterSpacing ' + node.letterSpacing.value + node.letterSpacing.unit);
+    }
+    if (node.textCase !== figma.mixed && node.textCase && node.textCase !== 'ORIGINAL') channels.push('textCase ' + node.textCase);
+    if (node.textDecoration !== figma.mixed && node.textDecoration && node.textDecoration !== 'NONE') channels.push('textDecoration ' + node.textDecoration);
+    if (node.lineHeight !== figma.mixed && node.lineHeight && node.lineHeight.unit !== 'AUTO') {
+      channels.push('lineHeight ' + node.lineHeight.value + node.lineHeight.unit);
+    }
+    if (channels.length > 0) {
+      degrade('text-channel-unsupported', nodePath, 'text channel(s) with no dump v1 projection: ' + channels.join('; ') + ' — typography carries (fontSize, fontStyle, style identity) only');
+    }
+    const text = {
+      characters: node.characters,
+      fontSize: typeof node.fontSize === 'number' ? node.fontSize : null,
+      fontStyle: node.fontName === figma.mixed ? null : node.fontName.style,
+    };
+    if (node.textStyleId && node.textStyleId !== figma.mixed) {
+      const style = await figma.getStyleByIdAsync(node.textStyleId);
+      if (style) text.style = style.name;
+    }
+    const fill = await dumpPaint(node.fills, nodePath, 'fill');
+    if (fill && fill.var) text.fillVar = fill.var;
+    out.text = text;
+    if (fill) out.fill = fill;
+  }
+
+  const propRefs = {};
+  for (const [kind, key] of Object.entries(node.componentPropertyReferences || {})) {
+    if (key) propRefs[kind] = key.split('#')[0];
+  }
+  if (Object.keys(propRefs).length > 0) out.propRefs = propRefs;
+
+  if (node.type === 'INSTANCE') {
+    const main = await node.getMainComponentAsync();
+    if (main) {
+      out.instanceOf =
+        main.parent && main.parent.type === 'COMPONENT_SET' ? main.parent.name : main.name;
+    }
+    // dump v1.1: applied property values, so component refs keep fixed props.
+    try {
+      const props = {};
+      for (const [key, def] of Object.entries(node.componentProperties || {})) {
+        if (def.type === 'INSTANCE_SWAP') continue; // slots ride propRefs instead
+        props[key.split('#')[0]] = def.value;
+      }
+      if (Object.keys(props).length > 0) out.componentProperties = props;
+    } catch (e) {
+      // componentProperties can throw on detached/broken instances — dump v1
+      // fixtures shipped without this field, so absence is always tolerated.
+    }
+  }
+
+  if ('children' in node && node.type !== 'INSTANCE') {
+    out.children = [];
+    for (const child of node.children) out.children.push(await dumpNode(child, nodePath + '/' + child.name));
+  }
+  return out;
+}
+
+const dumps = {
+  _provenance: {
+    fileKey: figma.fileKey || null,
+    extractedAt: new Date().toISOString().slice(0, 10),
+    note: 'Node-tree dump (extract/figma/dump.plugin.js, dump v1.2) for design→contract proposal.',
+  },
+};
+dumps._degradations = degradations;
+for (const page of figma.root.children) {
+  for (const node of page.findAllWithCriteria({ types: ['COMPONENT_SET', 'COMPONENT'] })) {
+    if (node.type === 'COMPONENT' && node.parent && node.parent.type === 'COMPONENT_SET') continue;
+    if (node.name === 'Slot') continue; // utility, never a contract component
+    if (TARGET_SETS.length > 0 && !TARGET_SETS.includes(node.name)) continue;
+    const variants = [];
+    if (node.type === 'COMPONENT_SET') {
+      for (const variant of node.children) variants.push(await dumpNode(variant, node.name + ':' + variant.name));
+    } else {
+      variants.push(await dumpNode(node, node.name + ':' + node.name));
+    }
+    dumps[node.name] = {
+      setName: node.name,
+      type: node.type,
+      nodeId: node.id,
+      key: node.key,
+      variants,
+    };
+  }
+}
+return dumps;
 </script>

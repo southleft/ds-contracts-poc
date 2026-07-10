@@ -1,6 +1,19 @@
 # DS Contracts Sync Runner (Figma dev plugin)
 
-Runs the generated figma-sync scripts in the **current Figma file**, two ways:
+Runs the generated figma-sync scripts in the **current Figma file** (two
+ways), and sends the current file's component sets **to** the playground:
+
+- **Send to Playground** — the recommended import route for the
+  [playground](../../playground/PLAN.md). Runs the repo's read-only dump
+  script (`extract/figma/dump.plugin.js`, embedded verbatim in `ui.html`;
+  the plugin-zip build refuses a drifted copy) over the named component sets
+  (empty = all), then POSTs the dump to the pairing bridge
+  (`workers/assist/src/bridge.ts`) under the 6-character code the
+  playground's Figma tab shows. Because the Plugin API resolves bound
+  variable **names** on any Figma plan, the playground's proposal binds real
+  tokens — no Enterprise REST gap, no copy/paste. Privacy: the dump is held
+  by the bridge at most 15 minutes, deleted on pickup, contents never
+  logged; nothing in the Figma file changes.
 
 - **Paste a script** — paste one generated script and run it. This is the
   designer trust round-trip for the [playground](../../playground/PLAN.md):
@@ -17,6 +30,11 @@ Runs the generated figma-sync scripts in the **current Figma file**, two ways:
 
 ## Load it (one-time)
 
+The playground serves this directory as a downloadable zip
+(`/ds-contracts-sync-runner-plugin.zip`, built by
+`scripts/build-plugin-zip.mjs` at playground build time) with the same steps
+in its Figma tab. From the repo:
+
 1. Open the target file in the Figma **desktop** app (dev plugins don't load
    on figma.com) with edit access.
 2. **Plugins → Development → Import plugin from manifest…** and pick
@@ -31,9 +49,11 @@ Runs the generated figma-sync scripts in the **current Figma file**, two ways:
   output, or `figma-sync/*.js` from a repo state you trust). There is no
   manifest to verify a paste against; the integrity check applies to the
   local-runner transport only.
-- Network access is dev-only `http://localhost:8765` (see `manifest.json`);
-  the plugin talks to nothing else. Optional server token: see the header
-  comment in `code.js`.
+- Network access (see `manifest.json`): the pairing bridge origin
+  (`ds-contracts-assist.southleft-llc.workers.dev`, used ONLY by Send to
+  Playground) plus dev-only `http://localhost:8765` (local runner) and
+  `:8787` (wrangler dev for the bridge). The plugin talks to nothing else.
+  Optional server token: see the header comment in `code.js`.
 
 ## Files
 
