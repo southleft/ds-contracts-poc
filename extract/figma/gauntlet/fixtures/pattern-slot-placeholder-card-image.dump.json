@@ -1,0 +1,4261 @@
+{
+ "_provenance": {
+  "fileKey": "WofZT8xaxXuc2Q6Je9S4XE",
+  "extractedAt": "2026-07-10",
+  "note": "Single-set gauntlet fixture for class \"pattern-slot-placeholder\" — extracted from cbds-plugin-all-sets.v14.dump.json by extract/figma/gauntlet/census.ts."
+ },
+ "_degradations": [
+  {
+   "code": "paint-stack-truncated",
+   "nodePath": "Card-Image:type=vertical, size=large, image-fill=false, image-bottom=false/Image",
+   "message": "2 visible fill paints (SOLID, IMAGE) — dump v1 carries the first SOLID only"
+  },
+  {
+   "code": "paint-stack-truncated",
+   "nodePath": "Card-Image:type=vertical, size=small, image-fill=false, image-bottom=false/Image",
+   "message": "2 visible fill paints (SOLID, IMAGE) — dump v1 carries the first SOLID only"
+  },
+  {
+   "code": "radii-nonuniform",
+   "nodePath": "Card-Image:type=vertical, size=large, image-fill=true, image-bottom=false/Image",
+   "message": "per-corner radii [8, 8, 0, 0] are not uniform — dump v1 carries a uniform radius only; omitted"
+  },
+  {
+   "code": "paint-stack-truncated",
+   "nodePath": "Card-Image:type=vertical, size=large, image-fill=true, image-bottom=false/Image",
+   "message": "2 visible fill paints (SOLID, IMAGE) — dump v1 carries the first SOLID only"
+  },
+  {
+   "code": "radii-nonuniform",
+   "nodePath": "Card-Image:type=vertical, size=small, image-fill=true, image-bottom=false/Image",
+   "message": "per-corner radii [8, 8, 0, 0] are not uniform — dump v1 carries a uniform radius only; omitted"
+  },
+  {
+   "code": "paint-stack-truncated",
+   "nodePath": "Card-Image:type=vertical, size=small, image-fill=true, image-bottom=false/Image",
+   "message": "2 visible fill paints (SOLID, IMAGE) — dump v1 carries the first SOLID only"
+  },
+  {
+   "code": "paint-stack-truncated",
+   "nodePath": "Card-Image:type=vertical, size=large, image-fill=false, image-bottom=true/Image",
+   "message": "2 visible fill paints (SOLID, IMAGE) — dump v1 carries the first SOLID only"
+  },
+  {
+   "code": "paint-stack-truncated",
+   "nodePath": "Card-Image:type=vertical, size=small, image-fill=false, image-bottom=true/Image",
+   "message": "2 visible fill paints (SOLID, IMAGE) — dump v1 carries the first SOLID only"
+  },
+  {
+   "code": "paint-stack-truncated",
+   "nodePath": "Card-Image:type=vertical, size=large, image-fill=true, image-bottom=true/Image",
+   "message": "2 visible fill paints (SOLID, IMAGE) — dump v1 carries the first SOLID only"
+  },
+  {
+   "code": "paint-stack-truncated",
+   "nodePath": "Card-Image:type=vertical, size=small, image-fill=true, image-bottom=true/Image",
+   "message": "2 visible fill paints (SOLID, IMAGE) — dump v1 carries the first SOLID only"
+  },
+  {
+   "code": "radii-nonuniform",
+   "nodePath": "Card-Image:type=horizontal, size=large, image-fill=true, image-bottom=false/Image",
+   "message": "per-corner radii [8, 0, 0, 8] are not uniform — dump v1 carries a uniform radius only; omitted"
+  },
+  {
+   "code": "paint-stack-truncated",
+   "nodePath": "Card-Image:type=horizontal, size=large, image-fill=true, image-bottom=false/Image",
+   "message": "2 visible fill paints (SOLID, IMAGE) — dump v1 carries the first SOLID only"
+  },
+  {
+   "code": "radii-nonuniform",
+   "nodePath": "Card-Image:type=horizontal, size=small, image-fill=true, image-bottom=false/Image",
+   "message": "per-corner radii [8, 0, 0, 8] are not uniform — dump v1 carries a uniform radius only; omitted"
+  },
+  {
+   "code": "paint-stack-truncated",
+   "nodePath": "Card-Image:type=horizontal, size=small, image-fill=true, image-bottom=false/Image",
+   "message": "2 visible fill paints (SOLID, IMAGE) — dump v1 carries the first SOLID only"
+  },
+  {
+   "code": "paint-stack-truncated",
+   "nodePath": "Card-Image:type=horizontal, size=large, image-fill=false, image-bottom=false/Image",
+   "message": "2 visible fill paints (SOLID, IMAGE) — dump v1 carries the first SOLID only"
+  },
+  {
+   "code": "paint-stack-truncated",
+   "nodePath": "Card-Image:type=horizontal, size=small, image-fill=false, image-bottom=false/Image",
+   "message": "2 visible fill paints (SOLID, IMAGE) — dump v1 carries the first SOLID only"
+  }
+ ],
+ "_variables": {
+  "spacing/200": {
+   "type": "FLOAT",
+   "value": 16
+  },
+  "corner-radius/100": {
+   "type": "FLOAT",
+   "value": 8
+  },
+  "bg/surface-primary": {
+   "type": "COLOR",
+   "value": "#fcfeff"
+  },
+  "corner-radius/050": {
+   "type": "FLOAT",
+   "value": 4
+  },
+  "bg/brand/weakest": {
+   "type": "COLOR",
+   "value": "#e6f7ff"
+  },
+  "spacing/100": {
+   "type": "FLOAT",
+   "value": 8
+  },
+  "component-size/large": {
+   "type": "FLOAT",
+   "value": 40
+  },
+  "component-size/small": {
+   "type": "FLOAT",
+   "value": 24
+  },
+  "icon-size/large": {
+   "type": "FLOAT",
+   "value": 24
+  },
+  "text/primary": {
+   "type": "COLOR",
+   "value": "#050a0f"
+  },
+  "text/secondary": {
+   "type": "COLOR",
+   "value": "#3a475b"
+  },
+  "spacing/150": {
+   "type": "FLOAT",
+   "value": 12
+  },
+  "bg/brand/weak": {
+   "type": "COLOR",
+   "value": "#d6f1ff"
+  },
+  "bg/brand/default": {
+   "type": "COLOR",
+   "value": "#0e61ba"
+  }
+ },
+ "Card-Image": {
+  "setName": "Card-Image",
+  "type": "COMPONENT_SET",
+  "nodeId": "419:763",
+  "key": "7061fdd02e4771dbc23d00e53d479762341a89cd",
+  "variants": [
+   {
+    "name": "type=vertical, size=large, image-fill=false, image-bottom=false",
+    "type": "COMPONENT",
+    "layout": {
+     "mode": "VERTICAL",
+     "primary": "MIN",
+     "counter": "MIN",
+     "spacing": 16,
+     "padding": [
+      16,
+      16,
+      16,
+      16
+     ],
+     "primarySizing": "AUTO",
+     "counterSizing": "FIXED"
+    },
+    "cornerRadius": 8,
+    "bound": {
+     "itemSpacing": "spacing/200",
+     "paddingLeft": "spacing/200",
+     "paddingTop": "spacing/200",
+     "paddingRight": "spacing/200",
+     "paddingBottom": "spacing/200",
+     "topLeftRadius": "corner-radius/100",
+     "topRightRadius": "corner-radius/100",
+     "bottomLeftRadius": "corner-radius/100",
+     "bottomRightRadius": "corner-radius/100"
+    },
+    "fill": {
+     "var": "bg/surface-primary"
+    },
+    "children": [
+     {
+      "name": "Image",
+      "type": "FRAME",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "CENTER",
+       "spacing": 8,
+       "padding": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "FIXED"
+      },
+      "cornerRadius": 4,
+      "bound": {
+       "topLeftRadius": "corner-radius/050",
+       "topRightRadius": "corner-radius/050",
+       "bottomLeftRadius": "corner-radius/050",
+       "bottomRightRadius": "corner-radius/050"
+      },
+      "fill": {
+       "var": "bg/brand/weakest"
+      },
+      "fillWidth": true,
+      "children": []
+     },
+     {
+      "name": "Content bottom",
+      "type": "FRAME",
+      "layout": {
+       "mode": "VERTICAL",
+       "primary": "MIN",
+       "counter": "MIN",
+       "spacing": 16,
+       "padding": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "primarySizing": "AUTO",
+       "counterSizing": "FIXED"
+      },
+      "bound": {
+       "itemSpacing": "spacing/200"
+      },
+      "fillWidth": true,
+      "children": [
+       {
+        "name": "Content",
+        "type": "FRAME",
+        "layout": {
+         "mode": "VERTICAL",
+         "primary": "MIN",
+         "counter": "MIN",
+         "spacing": 8,
+         "padding": [
+          0,
+          0,
+          0,
+          0
+         ],
+         "primarySizing": "AUTO",
+         "counterSizing": "FIXED"
+        },
+        "bound": {
+         "itemSpacing": "spacing/100"
+        },
+        "fillWidth": true,
+        "children": [
+         {
+          "name": "Title text",
+          "type": "FRAME",
+          "layout": {
+           "mode": "HORIZONTAL",
+           "primary": "MIN",
+           "counter": "CENTER",
+           "spacing": 8,
+           "padding": [
+            0,
+            0,
+            0,
+            0
+           ],
+           "primarySizing": "FIXED",
+           "counterSizing": "AUTO"
+          },
+          "bound": {
+           "itemSpacing": "spacing/100"
+          },
+          "fillWidth": true,
+          "children": [
+           {
+            "name": "Avatar",
+            "type": "INSTANCE",
+            "bound": {
+             "width": "component-size/large",
+             "height": "component-size/large"
+            },
+            "hidden": true,
+            "propRefs": {
+             "visible": "↪️avatar"
+            },
+            "instanceOf": "Avatar",
+            "componentProperties": {
+             "↪️notification": false,
+             "isVisible": true,
+             "↪️indicator": false,
+             "round": "true",
+             "size": "medium(40x40)",
+             "type": "image"
+            }
+           },
+           {
+            "name": "Icon",
+            "type": "INSTANCE",
+            "bound": {
+             "width": "component-size/small",
+             "height": "icon-size/large"
+            },
+            "hidden": true,
+            "propRefs": {
+             "visible": "↪️icon-left"
+            },
+            "instanceOf": "Icon",
+            "componentProperties": {
+             "size": "large"
+            }
+           },
+           {
+            "name": "Text",
+            "type": "FRAME",
+            "layout": {
+             "mode": "VERTICAL",
+             "primary": "MIN",
+             "counter": "MIN",
+             "spacing": 0,
+             "padding": [
+              0,
+              0,
+              0,
+              0
+             ],
+             "primarySizing": "AUTO",
+             "counterSizing": "FIXED"
+            },
+            "fillWidth": true,
+            "children": [
+             {
+              "name": "Card title",
+              "type": "TEXT",
+              "fillWidth": true,
+              "text": {
+               "characters": "Card title",
+               "fontSize": 20,
+               "fontStyle": "Semi Bold",
+               "lineHeight": 28,
+               "style": "Heading/Small/Semibold",
+               "fillVar": "text/primary"
+              },
+              "fill": {
+               "var": "text/primary"
+              }
+             },
+             {
+              "name": "Subtext",
+              "type": "TEXT",
+              "hidden": true,
+              "text": {
+               "characters": "Subtext",
+               "fontSize": 12,
+               "fontStyle": "Regular",
+               "lineHeight": 16,
+               "style": "Body/Small",
+               "fillVar": "text/secondary"
+              },
+              "fill": {
+               "var": "text/secondary"
+              },
+              "propRefs": {
+               "visible": "subtext",
+               "characters": "✏️text-subtext"
+              }
+             }
+            ]
+           },
+           {
+            "name": "Icon",
+            "type": "INSTANCE",
+            "bound": {
+             "width": "component-size/small",
+             "height": "icon-size/large"
+            },
+            "hidden": true,
+            "propRefs": {
+             "visible": "↪️icon-right"
+            },
+            "instanceOf": "Icon",
+            "componentProperties": {
+             "size": "large"
+            }
+           }
+          ]
+         },
+         {
+          "name": "Badge",
+          "type": "INSTANCE",
+          "layout": {
+           "mode": "HORIZONTAL",
+           "primary": "CENTER",
+           "counter": "CENTER",
+           "spacing": 8,
+           "padding": [
+            8,
+            12,
+            8,
+            12
+           ],
+           "primarySizing": "AUTO",
+           "counterSizing": "FIXED"
+          },
+          "cornerRadius": 4,
+          "bound": {
+           "itemSpacing": "spacing/100",
+           "paddingLeft": "spacing/150",
+           "paddingTop": "spacing/100",
+           "paddingRight": "spacing/150",
+           "paddingBottom": "spacing/100",
+           "height": "component-size/small",
+           "topLeftRadius": "corner-radius/050",
+           "topRightRadius": "corner-radius/050",
+           "bottomLeftRadius": "corner-radius/050",
+           "bottomRightRadius": "corner-radius/050"
+          },
+          "fill": {
+           "var": "bg/brand/weak"
+          },
+          "hidden": true,
+          "propRefs": {
+           "visible": "badge"
+          },
+          "instanceOf": "Badge",
+          "componentProperties": {
+           "✏️text": "Label",
+           "↪️icon-right": false,
+           "↪️icon-left": false,
+           "type": "brand",
+           "style": "tonal",
+           "size": "large",
+           "rounded": "false"
+          }
+         },
+         {
+          "name": "Description",
+          "type": "TEXT",
+          "fillWidth": true,
+          "text": {
+           "characters": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis.",
+           "fontSize": 16,
+           "fontStyle": "Regular",
+           "lineHeight": 24,
+           "style": "Body/Large",
+           "fillVar": "text/primary"
+          },
+          "fill": {
+           "var": "text/primary"
+          },
+          "propRefs": {
+           "visible": "description",
+           "characters": "✏️text-description"
+          }
+         }
+        ]
+       },
+       {
+        "name": "_Slot-card",
+        "type": "INSTANCE",
+        "layout": {
+         "mode": "HORIZONTAL",
+         "primary": "CENTER",
+         "counter": "CENTER",
+         "spacing": 0,
+         "padding": [
+          0,
+          8,
+          0,
+          8
+         ],
+         "primarySizing": "FIXED",
+         "counterSizing": "AUTO"
+        },
+        "cornerRadius": 8,
+        "bound": {
+         "paddingLeft": "spacing/100",
+         "paddingRight": "spacing/100",
+         "topLeftRadius": "corner-radius/100",
+         "topRightRadius": "corner-radius/100",
+         "bottomLeftRadius": "corner-radius/100",
+         "bottomRightRadius": "corner-radius/100"
+        },
+        "stroke": {
+         "var": "bg/brand/default"
+        },
+        "strokeWeight": 1,
+        "minHeight": 32,
+        "fillWidth": true,
+        "propRefs": {
+         "visible": "↪️action",
+         "mainComponent": "swap action"
+        },
+        "instanceOf": "_Slot-card"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "name": "type=vertical, size=small, image-fill=false, image-bottom=false",
+    "type": "COMPONENT",
+    "layout": {
+     "mode": "VERTICAL",
+     "primary": "MIN",
+     "counter": "MIN",
+     "spacing": 16,
+     "padding": [
+      16,
+      16,
+      16,
+      16
+     ],
+     "primarySizing": "AUTO",
+     "counterSizing": "FIXED"
+    },
+    "cornerRadius": 8,
+    "bound": {
+     "itemSpacing": "spacing/200",
+     "paddingLeft": "spacing/200",
+     "paddingTop": "spacing/200",
+     "paddingRight": "spacing/200",
+     "paddingBottom": "spacing/200",
+     "topLeftRadius": "corner-radius/100",
+     "topRightRadius": "corner-radius/100",
+     "bottomLeftRadius": "corner-radius/100",
+     "bottomRightRadius": "corner-radius/100"
+    },
+    "fill": {
+     "var": "bg/surface-primary"
+    },
+    "children": [
+     {
+      "name": "Image",
+      "type": "FRAME",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "CENTER",
+       "spacing": 8,
+       "padding": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "FIXED"
+      },
+      "cornerRadius": 4,
+      "bound": {
+       "topLeftRadius": "corner-radius/050",
+       "topRightRadius": "corner-radius/050",
+       "bottomLeftRadius": "corner-radius/050",
+       "bottomRightRadius": "corner-radius/050"
+      },
+      "fill": {
+       "var": "bg/brand/weakest"
+      },
+      "fillWidth": true,
+      "children": []
+     },
+     {
+      "name": "Content bottom",
+      "type": "FRAME",
+      "layout": {
+       "mode": "VERTICAL",
+       "primary": "MIN",
+       "counter": "MIN",
+       "spacing": 16,
+       "padding": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "primarySizing": "AUTO",
+       "counterSizing": "FIXED"
+      },
+      "bound": {
+       "itemSpacing": "spacing/200"
+      },
+      "fillWidth": true,
+      "children": [
+       {
+        "name": "Content",
+        "type": "FRAME",
+        "layout": {
+         "mode": "VERTICAL",
+         "primary": "MIN",
+         "counter": "MIN",
+         "spacing": 8,
+         "padding": [
+          0,
+          0,
+          0,
+          0
+         ],
+         "primarySizing": "AUTO",
+         "counterSizing": "FIXED"
+        },
+        "bound": {
+         "itemSpacing": "spacing/100"
+        },
+        "fillWidth": true,
+        "children": [
+         {
+          "name": "Title text",
+          "type": "FRAME",
+          "layout": {
+           "mode": "HORIZONTAL",
+           "primary": "MIN",
+           "counter": "CENTER",
+           "spacing": 8,
+           "padding": [
+            0,
+            0,
+            0,
+            0
+           ],
+           "primarySizing": "FIXED",
+           "counterSizing": "AUTO"
+          },
+          "bound": {
+           "itemSpacing": "spacing/100"
+          },
+          "fillWidth": true,
+          "children": [
+           {
+            "name": "Avatar",
+            "type": "INSTANCE",
+            "bound": {
+             "width": "component-size/large",
+             "height": "component-size/large"
+            },
+            "hidden": true,
+            "propRefs": {
+             "visible": "↪️avatar"
+            },
+            "instanceOf": "Avatar",
+            "componentProperties": {
+             "↪️notification": false,
+             "isVisible": true,
+             "↪️indicator": false,
+             "round": "true",
+             "size": "medium(40x40)",
+             "type": "image"
+            }
+           },
+           {
+            "name": "Icon",
+            "type": "INSTANCE",
+            "bound": {
+             "width": "component-size/small",
+             "height": "icon-size/large"
+            },
+            "hidden": true,
+            "propRefs": {
+             "visible": "↪️icon-left"
+            },
+            "instanceOf": "Icon",
+            "componentProperties": {
+             "size": "large"
+            }
+           },
+           {
+            "name": "Text",
+            "type": "FRAME",
+            "layout": {
+             "mode": "VERTICAL",
+             "primary": "MIN",
+             "counter": "MIN",
+             "spacing": 0,
+             "padding": [
+              0,
+              0,
+              0,
+              0
+             ],
+             "primarySizing": "AUTO",
+             "counterSizing": "FIXED"
+            },
+            "fillWidth": true,
+            "children": [
+             {
+              "name": "Card title",
+              "type": "TEXT",
+              "fillWidth": true,
+              "text": {
+               "characters": "Card title",
+               "fontSize": 16,
+               "fontStyle": "Semi Bold",
+               "lineHeight": 20,
+               "style": "Label/Large",
+               "fillVar": "text/primary"
+              },
+              "fill": {
+               "var": "text/primary"
+              }
+             },
+             {
+              "name": "Subtext",
+              "type": "TEXT",
+              "hidden": true,
+              "text": {
+               "characters": "Subtext",
+               "fontSize": 12,
+               "fontStyle": "Regular",
+               "lineHeight": 16,
+               "style": "Body/Small",
+               "fillVar": "text/secondary"
+              },
+              "fill": {
+               "var": "text/secondary"
+              },
+              "propRefs": {
+               "visible": "subtext",
+               "characters": "✏️text-subtext"
+              }
+             }
+            ]
+           },
+           {
+            "name": "Icon",
+            "type": "INSTANCE",
+            "bound": {
+             "width": "component-size/small",
+             "height": "icon-size/large"
+            },
+            "hidden": true,
+            "propRefs": {
+             "visible": "↪️icon-right"
+            },
+            "instanceOf": "Icon",
+            "componentProperties": {
+             "size": "large"
+            }
+           }
+          ]
+         },
+         {
+          "name": "Badge",
+          "type": "INSTANCE",
+          "layout": {
+           "mode": "HORIZONTAL",
+           "primary": "CENTER",
+           "counter": "CENTER",
+           "spacing": 8,
+           "padding": [
+            8,
+            12,
+            8,
+            12
+           ],
+           "primarySizing": "AUTO",
+           "counterSizing": "FIXED"
+          },
+          "cornerRadius": 4,
+          "bound": {
+           "itemSpacing": "spacing/100",
+           "paddingLeft": "spacing/150",
+           "paddingTop": "spacing/100",
+           "paddingRight": "spacing/150",
+           "paddingBottom": "spacing/100",
+           "height": "component-size/small",
+           "topLeftRadius": "corner-radius/050",
+           "topRightRadius": "corner-radius/050",
+           "bottomLeftRadius": "corner-radius/050",
+           "bottomRightRadius": "corner-radius/050"
+          },
+          "fill": {
+           "var": "bg/brand/weak"
+          },
+          "hidden": true,
+          "propRefs": {
+           "visible": "badge"
+          },
+          "instanceOf": "Badge",
+          "componentProperties": {
+           "✏️text": "Label",
+           "↪️icon-right": false,
+           "↪️icon-left": false,
+           "type": "brand",
+           "style": "tonal",
+           "size": "large",
+           "rounded": "false"
+          }
+         },
+         {
+          "name": "Description",
+          "type": "TEXT",
+          "fillWidth": true,
+          "text": {
+           "characters": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis.",
+           "fontSize": 14,
+           "fontStyle": "Regular",
+           "lineHeight": 20,
+           "style": "Body/Medium",
+           "fillVar": "text/primary"
+          },
+          "fill": {
+           "var": "text/primary"
+          },
+          "propRefs": {
+           "visible": "description",
+           "characters": "✏️text-description"
+          }
+         }
+        ]
+       },
+       {
+        "name": "_Slot-card",
+        "type": "INSTANCE",
+        "layout": {
+         "mode": "HORIZONTAL",
+         "primary": "CENTER",
+         "counter": "CENTER",
+         "spacing": 0,
+         "padding": [
+          0,
+          8,
+          0,
+          8
+         ],
+         "primarySizing": "FIXED",
+         "counterSizing": "AUTO"
+        },
+        "cornerRadius": 8,
+        "bound": {
+         "paddingLeft": "spacing/100",
+         "paddingRight": "spacing/100",
+         "topLeftRadius": "corner-radius/100",
+         "topRightRadius": "corner-radius/100",
+         "bottomLeftRadius": "corner-radius/100",
+         "bottomRightRadius": "corner-radius/100"
+        },
+        "stroke": {
+         "var": "bg/brand/default"
+        },
+        "strokeWeight": 1,
+        "minHeight": 32,
+        "fillWidth": true,
+        "propRefs": {
+         "visible": "↪️action",
+         "mainComponent": "swap action"
+        },
+        "instanceOf": "_Slot-card"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "name": "type=vertical, size=large, image-fill=true, image-bottom=false",
+    "type": "COMPONENT",
+    "layout": {
+     "mode": "VERTICAL",
+     "primary": "MIN",
+     "counter": "MIN",
+     "spacing": 16,
+     "padding": [
+      0,
+      0,
+      16,
+      0
+     ],
+     "primarySizing": "AUTO",
+     "counterSizing": "FIXED"
+    },
+    "cornerRadius": 8,
+    "bound": {
+     "itemSpacing": "spacing/200",
+     "paddingBottom": "spacing/200",
+     "topLeftRadius": "corner-radius/100",
+     "topRightRadius": "corner-radius/100",
+     "bottomLeftRadius": "corner-radius/100",
+     "bottomRightRadius": "corner-radius/100"
+    },
+    "fill": {
+     "var": "bg/surface-primary"
+    },
+    "children": [
+     {
+      "name": "Image",
+      "type": "FRAME",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "CENTER",
+       "spacing": 8,
+       "padding": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "FIXED"
+      },
+      "bound": {
+       "topLeftRadius": "corner-radius/100",
+       "topRightRadius": "corner-radius/100"
+      },
+      "fill": {
+       "var": "bg/brand/weakest"
+      },
+      "fillWidth": true,
+      "children": []
+     },
+     {
+      "name": "Content bottom",
+      "type": "FRAME",
+      "layout": {
+       "mode": "VERTICAL",
+       "primary": "MIN",
+       "counter": "MIN",
+       "spacing": 16,
+       "padding": [
+        0,
+        16,
+        0,
+        16
+       ],
+       "primarySizing": "AUTO",
+       "counterSizing": "FIXED"
+      },
+      "bound": {
+       "itemSpacing": "spacing/200",
+       "paddingLeft": "spacing/200",
+       "paddingRight": "spacing/200"
+      },
+      "fillWidth": true,
+      "children": [
+       {
+        "name": "Content",
+        "type": "FRAME",
+        "layout": {
+         "mode": "VERTICAL",
+         "primary": "MIN",
+         "counter": "MIN",
+         "spacing": 8,
+         "padding": [
+          0,
+          0,
+          0,
+          0
+         ],
+         "primarySizing": "AUTO",
+         "counterSizing": "FIXED"
+        },
+        "bound": {
+         "itemSpacing": "spacing/100"
+        },
+        "fillWidth": true,
+        "children": [
+         {
+          "name": "Title text",
+          "type": "FRAME",
+          "layout": {
+           "mode": "HORIZONTAL",
+           "primary": "MIN",
+           "counter": "CENTER",
+           "spacing": 8,
+           "padding": [
+            0,
+            0,
+            0,
+            0
+           ],
+           "primarySizing": "FIXED",
+           "counterSizing": "AUTO"
+          },
+          "bound": {
+           "itemSpacing": "spacing/100"
+          },
+          "fillWidth": true,
+          "children": [
+           {
+            "name": "Avatar",
+            "type": "INSTANCE",
+            "bound": {
+             "width": "component-size/large",
+             "height": "component-size/large"
+            },
+            "hidden": true,
+            "propRefs": {
+             "visible": "↪️avatar"
+            },
+            "instanceOf": "Avatar",
+            "componentProperties": {
+             "↪️notification": false,
+             "isVisible": true,
+             "↪️indicator": false,
+             "round": "true",
+             "size": "medium(40x40)",
+             "type": "image"
+            }
+           },
+           {
+            "name": "Icon",
+            "type": "INSTANCE",
+            "bound": {
+             "width": "component-size/small",
+             "height": "icon-size/large"
+            },
+            "hidden": true,
+            "propRefs": {
+             "visible": "↪️icon-left"
+            },
+            "instanceOf": "Icon",
+            "componentProperties": {
+             "size": "large"
+            }
+           },
+           {
+            "name": "Text",
+            "type": "FRAME",
+            "layout": {
+             "mode": "VERTICAL",
+             "primary": "MIN",
+             "counter": "MIN",
+             "spacing": 0,
+             "padding": [
+              0,
+              0,
+              0,
+              0
+             ],
+             "primarySizing": "AUTO",
+             "counterSizing": "FIXED"
+            },
+            "fillWidth": true,
+            "children": [
+             {
+              "name": "Card title",
+              "type": "TEXT",
+              "fillWidth": true,
+              "text": {
+               "characters": "Card title",
+               "fontSize": 20,
+               "fontStyle": "Semi Bold",
+               "lineHeight": 28,
+               "style": "Heading/Small/Semibold",
+               "fillVar": "text/primary"
+              },
+              "fill": {
+               "var": "text/primary"
+              }
+             },
+             {
+              "name": "Subtext",
+              "type": "TEXT",
+              "hidden": true,
+              "text": {
+               "characters": "Subtext",
+               "fontSize": 12,
+               "fontStyle": "Regular",
+               "lineHeight": 16,
+               "style": "Body/Small",
+               "fillVar": "text/secondary"
+              },
+              "fill": {
+               "var": "text/secondary"
+              },
+              "propRefs": {
+               "visible": "subtext",
+               "characters": "✏️text-subtext"
+              }
+             }
+            ]
+           },
+           {
+            "name": "Icon",
+            "type": "INSTANCE",
+            "bound": {
+             "width": "component-size/small",
+             "height": "icon-size/large"
+            },
+            "hidden": true,
+            "propRefs": {
+             "visible": "↪️icon-right"
+            },
+            "instanceOf": "Icon",
+            "componentProperties": {
+             "size": "large"
+            }
+           }
+          ]
+         },
+         {
+          "name": "Badge",
+          "type": "INSTANCE",
+          "layout": {
+           "mode": "HORIZONTAL",
+           "primary": "CENTER",
+           "counter": "CENTER",
+           "spacing": 8,
+           "padding": [
+            8,
+            12,
+            8,
+            12
+           ],
+           "primarySizing": "AUTO",
+           "counterSizing": "FIXED"
+          },
+          "cornerRadius": 4,
+          "bound": {
+           "itemSpacing": "spacing/100",
+           "paddingLeft": "spacing/150",
+           "paddingTop": "spacing/100",
+           "paddingRight": "spacing/150",
+           "paddingBottom": "spacing/100",
+           "height": "component-size/small",
+           "topLeftRadius": "corner-radius/050",
+           "topRightRadius": "corner-radius/050",
+           "bottomLeftRadius": "corner-radius/050",
+           "bottomRightRadius": "corner-radius/050"
+          },
+          "fill": {
+           "var": "bg/brand/weak"
+          },
+          "hidden": true,
+          "propRefs": {
+           "visible": "badge"
+          },
+          "instanceOf": "Badge",
+          "componentProperties": {
+           "✏️text": "Label",
+           "↪️icon-right": false,
+           "↪️icon-left": false,
+           "type": "brand",
+           "style": "tonal",
+           "size": "large",
+           "rounded": "false"
+          }
+         },
+         {
+          "name": "Description",
+          "type": "TEXT",
+          "fillWidth": true,
+          "text": {
+           "characters": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis.",
+           "fontSize": 16,
+           "fontStyle": "Regular",
+           "lineHeight": 24,
+           "style": "Body/Large",
+           "fillVar": "text/primary"
+          },
+          "fill": {
+           "var": "text/primary"
+          },
+          "propRefs": {
+           "visible": "description",
+           "characters": "✏️text-description"
+          }
+         }
+        ]
+       },
+       {
+        "name": "_Slot-card",
+        "type": "INSTANCE",
+        "layout": {
+         "mode": "HORIZONTAL",
+         "primary": "CENTER",
+         "counter": "CENTER",
+         "spacing": 0,
+         "padding": [
+          0,
+          8,
+          0,
+          8
+         ],
+         "primarySizing": "FIXED",
+         "counterSizing": "AUTO"
+        },
+        "cornerRadius": 8,
+        "bound": {
+         "paddingLeft": "spacing/100",
+         "paddingRight": "spacing/100",
+         "topLeftRadius": "corner-radius/100",
+         "topRightRadius": "corner-radius/100",
+         "bottomLeftRadius": "corner-radius/100",
+         "bottomRightRadius": "corner-radius/100"
+        },
+        "stroke": {
+         "var": "bg/brand/default"
+        },
+        "strokeWeight": 1,
+        "minHeight": 32,
+        "fillWidth": true,
+        "propRefs": {
+         "visible": "↪️action",
+         "mainComponent": "swap action"
+        },
+        "instanceOf": "_Slot-card"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "name": "type=vertical, size=small, image-fill=true, image-bottom=false",
+    "type": "COMPONENT",
+    "layout": {
+     "mode": "VERTICAL",
+     "primary": "MIN",
+     "counter": "MIN",
+     "spacing": 16,
+     "padding": [
+      0,
+      0,
+      16,
+      0
+     ],
+     "primarySizing": "AUTO",
+     "counterSizing": "FIXED"
+    },
+    "cornerRadius": 8,
+    "bound": {
+     "itemSpacing": "spacing/200",
+     "paddingBottom": "spacing/200",
+     "topLeftRadius": "corner-radius/100",
+     "topRightRadius": "corner-radius/100",
+     "bottomLeftRadius": "corner-radius/100",
+     "bottomRightRadius": "corner-radius/100"
+    },
+    "fill": {
+     "var": "bg/surface-primary"
+    },
+    "children": [
+     {
+      "name": "Image",
+      "type": "FRAME",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "CENTER",
+       "spacing": 8,
+       "padding": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "FIXED"
+      },
+      "bound": {
+       "topLeftRadius": "corner-radius/100",
+       "topRightRadius": "corner-radius/100"
+      },
+      "fill": {
+       "var": "bg/brand/weakest"
+      },
+      "fillWidth": true,
+      "children": []
+     },
+     {
+      "name": "Content bottom",
+      "type": "FRAME",
+      "layout": {
+       "mode": "VERTICAL",
+       "primary": "MIN",
+       "counter": "MIN",
+       "spacing": 16,
+       "padding": [
+        0,
+        16,
+        0,
+        16
+       ],
+       "primarySizing": "AUTO",
+       "counterSizing": "FIXED"
+      },
+      "bound": {
+       "itemSpacing": "spacing/200",
+       "paddingLeft": "spacing/200",
+       "paddingRight": "spacing/200"
+      },
+      "fillWidth": true,
+      "children": [
+       {
+        "name": "Content",
+        "type": "FRAME",
+        "layout": {
+         "mode": "VERTICAL",
+         "primary": "MIN",
+         "counter": "MIN",
+         "spacing": 8,
+         "padding": [
+          0,
+          0,
+          0,
+          0
+         ],
+         "primarySizing": "AUTO",
+         "counterSizing": "FIXED"
+        },
+        "bound": {
+         "itemSpacing": "spacing/100"
+        },
+        "fillWidth": true,
+        "children": [
+         {
+          "name": "Title text",
+          "type": "FRAME",
+          "layout": {
+           "mode": "HORIZONTAL",
+           "primary": "MIN",
+           "counter": "CENTER",
+           "spacing": 8,
+           "padding": [
+            0,
+            0,
+            0,
+            0
+           ],
+           "primarySizing": "FIXED",
+           "counterSizing": "AUTO"
+          },
+          "bound": {
+           "itemSpacing": "spacing/100"
+          },
+          "fillWidth": true,
+          "children": [
+           {
+            "name": "Avatar",
+            "type": "INSTANCE",
+            "bound": {
+             "width": "component-size/large",
+             "height": "component-size/large"
+            },
+            "hidden": true,
+            "propRefs": {
+             "visible": "↪️avatar"
+            },
+            "instanceOf": "Avatar",
+            "componentProperties": {
+             "↪️notification": false,
+             "isVisible": true,
+             "↪️indicator": false,
+             "round": "true",
+             "size": "medium(40x40)",
+             "type": "image"
+            }
+           },
+           {
+            "name": "Icon",
+            "type": "INSTANCE",
+            "bound": {
+             "width": "component-size/small",
+             "height": "icon-size/large"
+            },
+            "hidden": true,
+            "propRefs": {
+             "visible": "↪️icon-left"
+            },
+            "instanceOf": "Icon",
+            "componentProperties": {
+             "size": "large"
+            }
+           },
+           {
+            "name": "Text",
+            "type": "FRAME",
+            "layout": {
+             "mode": "VERTICAL",
+             "primary": "MIN",
+             "counter": "MIN",
+             "spacing": 0,
+             "padding": [
+              0,
+              0,
+              0,
+              0
+             ],
+             "primarySizing": "AUTO",
+             "counterSizing": "FIXED"
+            },
+            "fillWidth": true,
+            "children": [
+             {
+              "name": "Card title",
+              "type": "TEXT",
+              "fillWidth": true,
+              "text": {
+               "characters": "Card title",
+               "fontSize": 16,
+               "fontStyle": "Semi Bold",
+               "lineHeight": 20,
+               "style": "Label/Large",
+               "fillVar": "text/primary"
+              },
+              "fill": {
+               "var": "text/primary"
+              }
+             },
+             {
+              "name": "Subtext",
+              "type": "TEXT",
+              "hidden": true,
+              "text": {
+               "characters": "Subtext",
+               "fontSize": 12,
+               "fontStyle": "Regular",
+               "lineHeight": 16,
+               "style": "Body/Small",
+               "fillVar": "text/secondary"
+              },
+              "fill": {
+               "var": "text/secondary"
+              },
+              "propRefs": {
+               "visible": "subtext",
+               "characters": "✏️text-subtext"
+              }
+             }
+            ]
+           },
+           {
+            "name": "Icon",
+            "type": "INSTANCE",
+            "bound": {
+             "width": "component-size/small",
+             "height": "icon-size/large"
+            },
+            "hidden": true,
+            "propRefs": {
+             "visible": "↪️icon-right"
+            },
+            "instanceOf": "Icon",
+            "componentProperties": {
+             "size": "large"
+            }
+           }
+          ]
+         },
+         {
+          "name": "Badge",
+          "type": "INSTANCE",
+          "layout": {
+           "mode": "HORIZONTAL",
+           "primary": "CENTER",
+           "counter": "CENTER",
+           "spacing": 8,
+           "padding": [
+            8,
+            12,
+            8,
+            12
+           ],
+           "primarySizing": "AUTO",
+           "counterSizing": "FIXED"
+          },
+          "cornerRadius": 4,
+          "bound": {
+           "itemSpacing": "spacing/100",
+           "paddingLeft": "spacing/150",
+           "paddingTop": "spacing/100",
+           "paddingRight": "spacing/150",
+           "paddingBottom": "spacing/100",
+           "height": "component-size/small",
+           "topLeftRadius": "corner-radius/050",
+           "topRightRadius": "corner-radius/050",
+           "bottomLeftRadius": "corner-radius/050",
+           "bottomRightRadius": "corner-radius/050"
+          },
+          "fill": {
+           "var": "bg/brand/weak"
+          },
+          "hidden": true,
+          "propRefs": {
+           "visible": "badge"
+          },
+          "instanceOf": "Badge",
+          "componentProperties": {
+           "✏️text": "Label",
+           "↪️icon-right": false,
+           "↪️icon-left": false,
+           "type": "brand",
+           "style": "tonal",
+           "size": "large",
+           "rounded": "false"
+          }
+         },
+         {
+          "name": "Description",
+          "type": "TEXT",
+          "fillWidth": true,
+          "text": {
+           "characters": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis.",
+           "fontSize": 14,
+           "fontStyle": "Regular",
+           "lineHeight": 20,
+           "style": "Body/Medium",
+           "fillVar": "text/primary"
+          },
+          "fill": {
+           "var": "text/primary"
+          },
+          "propRefs": {
+           "visible": "description",
+           "characters": "✏️text-description"
+          }
+         }
+        ]
+       },
+       {
+        "name": "_Slot-card",
+        "type": "INSTANCE",
+        "layout": {
+         "mode": "HORIZONTAL",
+         "primary": "CENTER",
+         "counter": "CENTER",
+         "spacing": 0,
+         "padding": [
+          0,
+          8,
+          0,
+          8
+         ],
+         "primarySizing": "FIXED",
+         "counterSizing": "AUTO"
+        },
+        "cornerRadius": 8,
+        "bound": {
+         "paddingLeft": "spacing/100",
+         "paddingRight": "spacing/100",
+         "topLeftRadius": "corner-radius/100",
+         "topRightRadius": "corner-radius/100",
+         "bottomLeftRadius": "corner-radius/100",
+         "bottomRightRadius": "corner-radius/100"
+        },
+        "stroke": {
+         "var": "bg/brand/default"
+        },
+        "strokeWeight": 1,
+        "minHeight": 32,
+        "fillWidth": true,
+        "propRefs": {
+         "visible": "↪️action",
+         "mainComponent": "swap action"
+        },
+        "instanceOf": "_Slot-card"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "name": "type=vertical, size=large, image-fill=false, image-bottom=true",
+    "type": "COMPONENT",
+    "layout": {
+     "mode": "VERTICAL",
+     "primary": "MIN",
+     "counter": "MIN",
+     "spacing": 16,
+     "padding": [
+      16,
+      16,
+      16,
+      16
+     ],
+     "primarySizing": "AUTO",
+     "counterSizing": "FIXED"
+    },
+    "cornerRadius": 8,
+    "bound": {
+     "itemSpacing": "spacing/200",
+     "paddingLeft": "spacing/200",
+     "paddingTop": "spacing/200",
+     "paddingRight": "spacing/200",
+     "paddingBottom": "spacing/200",
+     "topLeftRadius": "corner-radius/100",
+     "topRightRadius": "corner-radius/100",
+     "bottomLeftRadius": "corner-radius/100",
+     "bottomRightRadius": "corner-radius/100"
+    },
+    "fill": {
+     "var": "bg/surface-primary"
+    },
+    "children": [
+     {
+      "name": "Title text",
+      "type": "FRAME",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "CENTER",
+       "spacing": 8,
+       "padding": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "AUTO"
+      },
+      "bound": {
+       "itemSpacing": "spacing/100"
+      },
+      "fillWidth": true,
+      "children": [
+       {
+        "name": "Avatar",
+        "type": "INSTANCE",
+        "bound": {
+         "width": "component-size/large",
+         "height": "component-size/large"
+        },
+        "hidden": true,
+        "propRefs": {
+         "visible": "↪️avatar"
+        },
+        "instanceOf": "Avatar",
+        "componentProperties": {
+         "↪️notification": false,
+         "isVisible": true,
+         "↪️indicator": false,
+         "round": "true",
+         "size": "medium(40x40)",
+         "type": "image"
+        }
+       },
+       {
+        "name": "Icon",
+        "type": "INSTANCE",
+        "bound": {
+         "width": "component-size/small",
+         "height": "icon-size/large"
+        },
+        "hidden": true,
+        "propRefs": {
+         "visible": "↪️icon-left"
+        },
+        "instanceOf": "Icon",
+        "componentProperties": {
+         "size": "large"
+        }
+       },
+       {
+        "name": "Text",
+        "type": "FRAME",
+        "layout": {
+         "mode": "VERTICAL",
+         "primary": "MIN",
+         "counter": "MIN",
+         "spacing": 0,
+         "padding": [
+          0,
+          0,
+          0,
+          0
+         ],
+         "primarySizing": "AUTO",
+         "counterSizing": "FIXED"
+        },
+        "fillWidth": true,
+        "children": [
+         {
+          "name": "Card title",
+          "type": "TEXT",
+          "fillWidth": true,
+          "text": {
+           "characters": "Card title",
+           "fontSize": 20,
+           "fontStyle": "Semi Bold",
+           "lineHeight": 28,
+           "style": "Heading/Small/Semibold",
+           "fillVar": "text/primary"
+          },
+          "fill": {
+           "var": "text/primary"
+          }
+         },
+         {
+          "name": "Subtext",
+          "type": "TEXT",
+          "hidden": true,
+          "text": {
+           "characters": "Subtext",
+           "fontSize": 12,
+           "fontStyle": "Regular",
+           "lineHeight": 16,
+           "style": "Body/Small",
+           "fillVar": "text/secondary"
+          },
+          "fill": {
+           "var": "text/secondary"
+          },
+          "propRefs": {
+           "visible": "subtext",
+           "characters": "✏️text-subtext"
+          }
+         }
+        ]
+       },
+       {
+        "name": "Icon",
+        "type": "INSTANCE",
+        "bound": {
+         "width": "component-size/small",
+         "height": "icon-size/large"
+        },
+        "hidden": true,
+        "propRefs": {
+         "visible": "↪️icon-right"
+        },
+        "instanceOf": "Icon",
+        "componentProperties": {
+         "size": "large"
+        }
+       }
+      ]
+     },
+     {
+      "name": "Image",
+      "type": "FRAME",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "CENTER",
+       "spacing": 8,
+       "padding": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "FIXED"
+      },
+      "cornerRadius": 4,
+      "bound": {
+       "topLeftRadius": "corner-radius/050",
+       "topRightRadius": "corner-radius/050",
+       "bottomLeftRadius": "corner-radius/050",
+       "bottomRightRadius": "corner-radius/050"
+      },
+      "fill": {
+       "var": "bg/brand/weakest"
+      },
+      "fillWidth": true,
+      "children": []
+     },
+     {
+      "name": "Content bottom",
+      "type": "FRAME",
+      "layout": {
+       "mode": "VERTICAL",
+       "primary": "MIN",
+       "counter": "MIN",
+       "spacing": 16,
+       "padding": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "primarySizing": "AUTO",
+       "counterSizing": "FIXED"
+      },
+      "bound": {
+       "itemSpacing": "spacing/200"
+      },
+      "fillWidth": true,
+      "children": [
+       {
+        "name": "Badge",
+        "type": "INSTANCE",
+        "layout": {
+         "mode": "HORIZONTAL",
+         "primary": "CENTER",
+         "counter": "CENTER",
+         "spacing": 8,
+         "padding": [
+          8,
+          12,
+          8,
+          12
+         ],
+         "primarySizing": "AUTO",
+         "counterSizing": "FIXED"
+        },
+        "cornerRadius": 4,
+        "bound": {
+         "itemSpacing": "spacing/100",
+         "paddingLeft": "spacing/150",
+         "paddingTop": "spacing/100",
+         "paddingRight": "spacing/150",
+         "paddingBottom": "spacing/100",
+         "height": "component-size/small",
+         "topLeftRadius": "corner-radius/050",
+         "topRightRadius": "corner-radius/050",
+         "bottomLeftRadius": "corner-radius/050",
+         "bottomRightRadius": "corner-radius/050"
+        },
+        "fill": {
+         "var": "bg/brand/weak"
+        },
+        "hidden": true,
+        "propRefs": {
+         "visible": "badge"
+        },
+        "instanceOf": "Badge",
+        "componentProperties": {
+         "✏️text": "Label",
+         "↪️icon-right": false,
+         "↪️icon-left": false,
+         "type": "brand",
+         "style": "tonal",
+         "size": "large",
+         "rounded": "false"
+        }
+       },
+       {
+        "name": "Description",
+        "type": "TEXT",
+        "fillWidth": true,
+        "text": {
+         "characters": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis.",
+         "fontSize": 16,
+         "fontStyle": "Regular",
+         "lineHeight": 24,
+         "style": "Body/Large",
+         "fillVar": "text/primary"
+        },
+        "fill": {
+         "var": "text/primary"
+        },
+        "propRefs": {
+         "visible": "description",
+         "characters": "✏️text-description"
+        }
+       },
+       {
+        "name": "_Slot-card",
+        "type": "INSTANCE",
+        "layout": {
+         "mode": "HORIZONTAL",
+         "primary": "CENTER",
+         "counter": "CENTER",
+         "spacing": 0,
+         "padding": [
+          0,
+          8,
+          0,
+          8
+         ],
+         "primarySizing": "FIXED",
+         "counterSizing": "AUTO"
+        },
+        "cornerRadius": 8,
+        "bound": {
+         "paddingLeft": "spacing/100",
+         "paddingRight": "spacing/100",
+         "topLeftRadius": "corner-radius/100",
+         "topRightRadius": "corner-radius/100",
+         "bottomLeftRadius": "corner-radius/100",
+         "bottomRightRadius": "corner-radius/100"
+        },
+        "stroke": {
+         "var": "bg/brand/default"
+        },
+        "strokeWeight": 1,
+        "minHeight": 32,
+        "fillWidth": true,
+        "propRefs": {
+         "visible": "↪️action",
+         "mainComponent": "swap action"
+        },
+        "instanceOf": "_Slot-card"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "name": "type=vertical, size=small, image-fill=false, image-bottom=true",
+    "type": "COMPONENT",
+    "layout": {
+     "mode": "VERTICAL",
+     "primary": "MIN",
+     "counter": "MIN",
+     "spacing": 16,
+     "padding": [
+      16,
+      16,
+      16,
+      16
+     ],
+     "primarySizing": "AUTO",
+     "counterSizing": "FIXED"
+    },
+    "cornerRadius": 8,
+    "bound": {
+     "itemSpacing": "spacing/200",
+     "paddingLeft": "spacing/200",
+     "paddingTop": "spacing/200",
+     "paddingRight": "spacing/200",
+     "paddingBottom": "spacing/200",
+     "topLeftRadius": "corner-radius/100",
+     "topRightRadius": "corner-radius/100",
+     "bottomLeftRadius": "corner-radius/100",
+     "bottomRightRadius": "corner-radius/100"
+    },
+    "fill": {
+     "var": "bg/surface-primary"
+    },
+    "children": [
+     {
+      "name": "Title text",
+      "type": "FRAME",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "CENTER",
+       "spacing": 8,
+       "padding": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "AUTO"
+      },
+      "bound": {
+       "itemSpacing": "spacing/100"
+      },
+      "fillWidth": true,
+      "children": [
+       {
+        "name": "Avatar",
+        "type": "INSTANCE",
+        "bound": {
+         "width": "component-size/large",
+         "height": "component-size/large"
+        },
+        "hidden": true,
+        "propRefs": {
+         "visible": "↪️avatar"
+        },
+        "instanceOf": "Avatar",
+        "componentProperties": {
+         "↪️notification": false,
+         "isVisible": true,
+         "↪️indicator": false,
+         "round": "true",
+         "size": "medium(40x40)",
+         "type": "image"
+        }
+       },
+       {
+        "name": "Icon",
+        "type": "INSTANCE",
+        "bound": {
+         "width": "component-size/small",
+         "height": "icon-size/large"
+        },
+        "hidden": true,
+        "propRefs": {
+         "visible": "↪️icon-left"
+        },
+        "instanceOf": "Icon",
+        "componentProperties": {
+         "size": "large"
+        }
+       },
+       {
+        "name": "Text",
+        "type": "FRAME",
+        "layout": {
+         "mode": "VERTICAL",
+         "primary": "MIN",
+         "counter": "MIN",
+         "spacing": 0,
+         "padding": [
+          0,
+          0,
+          0,
+          0
+         ],
+         "primarySizing": "AUTO",
+         "counterSizing": "FIXED"
+        },
+        "fillWidth": true,
+        "children": [
+         {
+          "name": "Card title",
+          "type": "TEXT",
+          "fillWidth": true,
+          "text": {
+           "characters": "Card title",
+           "fontSize": 16,
+           "fontStyle": "Semi Bold",
+           "lineHeight": 20,
+           "style": "Label/Large",
+           "fillVar": "text/primary"
+          },
+          "fill": {
+           "var": "text/primary"
+          }
+         },
+         {
+          "name": "Subtext",
+          "type": "TEXT",
+          "hidden": true,
+          "text": {
+           "characters": "Subtext",
+           "fontSize": 12,
+           "fontStyle": "Regular",
+           "lineHeight": 16,
+           "style": "Body/Small",
+           "fillVar": "text/secondary"
+          },
+          "fill": {
+           "var": "text/secondary"
+          },
+          "propRefs": {
+           "visible": "subtext",
+           "characters": "✏️text-subtext"
+          }
+         }
+        ]
+       },
+       {
+        "name": "Icon",
+        "type": "INSTANCE",
+        "bound": {
+         "width": "component-size/small",
+         "height": "icon-size/large"
+        },
+        "hidden": true,
+        "propRefs": {
+         "visible": "↪️icon-right"
+        },
+        "instanceOf": "Icon",
+        "componentProperties": {
+         "size": "large"
+        }
+       }
+      ]
+     },
+     {
+      "name": "Image",
+      "type": "FRAME",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "CENTER",
+       "spacing": 8,
+       "padding": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "FIXED"
+      },
+      "cornerRadius": 4,
+      "bound": {
+       "topLeftRadius": "corner-radius/050",
+       "topRightRadius": "corner-radius/050",
+       "bottomLeftRadius": "corner-radius/050",
+       "bottomRightRadius": "corner-radius/050"
+      },
+      "fill": {
+       "var": "bg/brand/weakest"
+      },
+      "fillWidth": true,
+      "children": []
+     },
+     {
+      "name": "Content bottom",
+      "type": "FRAME",
+      "layout": {
+       "mode": "VERTICAL",
+       "primary": "MIN",
+       "counter": "MIN",
+       "spacing": 16,
+       "padding": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "primarySizing": "AUTO",
+       "counterSizing": "FIXED"
+      },
+      "bound": {
+       "itemSpacing": "spacing/200"
+      },
+      "fillWidth": true,
+      "children": [
+       {
+        "name": "Badge",
+        "type": "INSTANCE",
+        "layout": {
+         "mode": "HORIZONTAL",
+         "primary": "CENTER",
+         "counter": "CENTER",
+         "spacing": 8,
+         "padding": [
+          8,
+          12,
+          8,
+          12
+         ],
+         "primarySizing": "AUTO",
+         "counterSizing": "FIXED"
+        },
+        "cornerRadius": 4,
+        "bound": {
+         "itemSpacing": "spacing/100",
+         "paddingLeft": "spacing/150",
+         "paddingTop": "spacing/100",
+         "paddingRight": "spacing/150",
+         "paddingBottom": "spacing/100",
+         "height": "component-size/small",
+         "topLeftRadius": "corner-radius/050",
+         "topRightRadius": "corner-radius/050",
+         "bottomLeftRadius": "corner-radius/050",
+         "bottomRightRadius": "corner-radius/050"
+        },
+        "fill": {
+         "var": "bg/brand/weak"
+        },
+        "hidden": true,
+        "propRefs": {
+         "visible": "badge"
+        },
+        "instanceOf": "Badge",
+        "componentProperties": {
+         "✏️text": "Label",
+         "↪️icon-right": false,
+         "↪️icon-left": false,
+         "type": "brand",
+         "style": "tonal",
+         "size": "large",
+         "rounded": "false"
+        }
+       },
+       {
+        "name": "Description",
+        "type": "TEXT",
+        "fillWidth": true,
+        "text": {
+         "characters": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis.",
+         "fontSize": 14,
+         "fontStyle": "Regular",
+         "lineHeight": 20,
+         "style": "Body/Medium",
+         "fillVar": "text/primary"
+        },
+        "fill": {
+         "var": "text/primary"
+        },
+        "propRefs": {
+         "visible": "description",
+         "characters": "✏️text-description"
+        }
+       },
+       {
+        "name": "_Slot-card",
+        "type": "INSTANCE",
+        "layout": {
+         "mode": "HORIZONTAL",
+         "primary": "CENTER",
+         "counter": "CENTER",
+         "spacing": 0,
+         "padding": [
+          0,
+          8,
+          0,
+          8
+         ],
+         "primarySizing": "FIXED",
+         "counterSizing": "AUTO"
+        },
+        "cornerRadius": 8,
+        "bound": {
+         "paddingLeft": "spacing/100",
+         "paddingRight": "spacing/100",
+         "topLeftRadius": "corner-radius/100",
+         "topRightRadius": "corner-radius/100",
+         "bottomLeftRadius": "corner-radius/100",
+         "bottomRightRadius": "corner-radius/100"
+        },
+        "stroke": {
+         "var": "bg/brand/default"
+        },
+        "strokeWeight": 1,
+        "minHeight": 32,
+        "fillWidth": true,
+        "propRefs": {
+         "visible": "↪️action",
+         "mainComponent": "swap action"
+        },
+        "instanceOf": "_Slot-card"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "name": "type=vertical, size=large, image-fill=true, image-bottom=true",
+    "type": "COMPONENT",
+    "layout": {
+     "mode": "VERTICAL",
+     "primary": "MIN",
+     "counter": "MIN",
+     "spacing": 16,
+     "padding": [
+      16,
+      0,
+      16,
+      0
+     ],
+     "primarySizing": "AUTO",
+     "counterSizing": "FIXED"
+    },
+    "cornerRadius": 8,
+    "bound": {
+     "itemSpacing": "spacing/200",
+     "paddingTop": "spacing/200",
+     "paddingBottom": "spacing/200",
+     "topLeftRadius": "corner-radius/100",
+     "topRightRadius": "corner-radius/100",
+     "bottomLeftRadius": "corner-radius/100",
+     "bottomRightRadius": "corner-radius/100"
+    },
+    "fill": {
+     "var": "bg/surface-primary"
+    },
+    "children": [
+     {
+      "name": "Title text",
+      "type": "FRAME",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "CENTER",
+       "spacing": 8,
+       "padding": [
+        0,
+        16,
+        0,
+        16
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "AUTO"
+      },
+      "bound": {
+       "itemSpacing": "spacing/100",
+       "paddingLeft": "spacing/200",
+       "paddingRight": "spacing/200"
+      },
+      "fillWidth": true,
+      "children": [
+       {
+        "name": "Avatar",
+        "type": "INSTANCE",
+        "bound": {
+         "width": "component-size/large",
+         "height": "component-size/large"
+        },
+        "hidden": true,
+        "propRefs": {
+         "visible": "↪️avatar"
+        },
+        "instanceOf": "Avatar",
+        "componentProperties": {
+         "↪️notification": false,
+         "isVisible": true,
+         "↪️indicator": false,
+         "round": "true",
+         "size": "medium(40x40)",
+         "type": "image"
+        }
+       },
+       {
+        "name": "Icon",
+        "type": "INSTANCE",
+        "bound": {
+         "width": "component-size/small",
+         "height": "icon-size/large"
+        },
+        "hidden": true,
+        "propRefs": {
+         "visible": "↪️icon-left"
+        },
+        "instanceOf": "Icon",
+        "componentProperties": {
+         "size": "large"
+        }
+       },
+       {
+        "name": "Text",
+        "type": "FRAME",
+        "layout": {
+         "mode": "VERTICAL",
+         "primary": "MIN",
+         "counter": "MIN",
+         "spacing": 0,
+         "padding": [
+          0,
+          0,
+          0,
+          0
+         ],
+         "primarySizing": "AUTO",
+         "counterSizing": "FIXED"
+        },
+        "fillWidth": true,
+        "children": [
+         {
+          "name": "Card title",
+          "type": "TEXT",
+          "fillWidth": true,
+          "text": {
+           "characters": "Card title",
+           "fontSize": 20,
+           "fontStyle": "Semi Bold",
+           "lineHeight": 28,
+           "style": "Heading/Small/Semibold",
+           "fillVar": "text/primary"
+          },
+          "fill": {
+           "var": "text/primary"
+          }
+         },
+         {
+          "name": "Subtext",
+          "type": "TEXT",
+          "hidden": true,
+          "text": {
+           "characters": "Subtext",
+           "fontSize": 12,
+           "fontStyle": "Regular",
+           "lineHeight": 16,
+           "style": "Body/Small",
+           "fillVar": "text/secondary"
+          },
+          "fill": {
+           "var": "text/secondary"
+          },
+          "propRefs": {
+           "visible": "subtext",
+           "characters": "✏️text-subtext"
+          }
+         }
+        ]
+       },
+       {
+        "name": "Icon",
+        "type": "INSTANCE",
+        "bound": {
+         "width": "component-size/small",
+         "height": "icon-size/large"
+        },
+        "hidden": true,
+        "propRefs": {
+         "visible": "↪️icon-right"
+        },
+        "instanceOf": "Icon",
+        "componentProperties": {
+         "size": "large"
+        }
+       }
+      ]
+     },
+     {
+      "name": "Image",
+      "type": "FRAME",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "CENTER",
+       "spacing": 8,
+       "padding": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "FIXED"
+      },
+      "fill": {
+       "var": "bg/brand/weakest"
+      },
+      "fillWidth": true,
+      "children": []
+     },
+     {
+      "name": "Content bottom",
+      "type": "FRAME",
+      "layout": {
+       "mode": "VERTICAL",
+       "primary": "MIN",
+       "counter": "MIN",
+       "spacing": 16,
+       "padding": [
+        0,
+        16,
+        0,
+        16
+       ],
+       "primarySizing": "AUTO",
+       "counterSizing": "FIXED"
+      },
+      "bound": {
+       "itemSpacing": "spacing/200",
+       "paddingLeft": "spacing/200",
+       "paddingRight": "spacing/200"
+      },
+      "fillWidth": true,
+      "children": [
+       {
+        "name": "Badge",
+        "type": "INSTANCE",
+        "layout": {
+         "mode": "HORIZONTAL",
+         "primary": "CENTER",
+         "counter": "CENTER",
+         "spacing": 8,
+         "padding": [
+          8,
+          12,
+          8,
+          12
+         ],
+         "primarySizing": "AUTO",
+         "counterSizing": "FIXED"
+        },
+        "cornerRadius": 4,
+        "bound": {
+         "itemSpacing": "spacing/100",
+         "paddingLeft": "spacing/150",
+         "paddingTop": "spacing/100",
+         "paddingRight": "spacing/150",
+         "paddingBottom": "spacing/100",
+         "height": "component-size/small",
+         "topLeftRadius": "corner-radius/050",
+         "topRightRadius": "corner-radius/050",
+         "bottomLeftRadius": "corner-radius/050",
+         "bottomRightRadius": "corner-radius/050"
+        },
+        "fill": {
+         "var": "bg/brand/weak"
+        },
+        "hidden": true,
+        "propRefs": {
+         "visible": "badge"
+        },
+        "instanceOf": "Badge",
+        "componentProperties": {
+         "✏️text": "Label",
+         "↪️icon-right": false,
+         "↪️icon-left": false,
+         "type": "brand",
+         "style": "tonal",
+         "size": "large",
+         "rounded": "false"
+        }
+       },
+       {
+        "name": "Description",
+        "type": "TEXT",
+        "fillWidth": true,
+        "text": {
+         "characters": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis.",
+         "fontSize": 16,
+         "fontStyle": "Regular",
+         "lineHeight": 24,
+         "style": "Body/Large",
+         "fillVar": "text/primary"
+        },
+        "fill": {
+         "var": "text/primary"
+        },
+        "propRefs": {
+         "visible": "description",
+         "characters": "✏️text-description"
+        }
+       },
+       {
+        "name": "_Slot-card",
+        "type": "INSTANCE",
+        "layout": {
+         "mode": "HORIZONTAL",
+         "primary": "CENTER",
+         "counter": "CENTER",
+         "spacing": 0,
+         "padding": [
+          0,
+          8,
+          0,
+          8
+         ],
+         "primarySizing": "FIXED",
+         "counterSizing": "AUTO"
+        },
+        "cornerRadius": 8,
+        "bound": {
+         "paddingLeft": "spacing/100",
+         "paddingRight": "spacing/100",
+         "topLeftRadius": "corner-radius/100",
+         "topRightRadius": "corner-radius/100",
+         "bottomLeftRadius": "corner-radius/100",
+         "bottomRightRadius": "corner-radius/100"
+        },
+        "stroke": {
+         "var": "bg/brand/default"
+        },
+        "strokeWeight": 1,
+        "minHeight": 32,
+        "fillWidth": true,
+        "propRefs": {
+         "visible": "↪️action",
+         "mainComponent": "swap action"
+        },
+        "instanceOf": "_Slot-card"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "name": "type=vertical, size=small, image-fill=true, image-bottom=true",
+    "type": "COMPONENT",
+    "layout": {
+     "mode": "VERTICAL",
+     "primary": "MIN",
+     "counter": "MIN",
+     "spacing": 16,
+     "padding": [
+      16,
+      0,
+      16,
+      0
+     ],
+     "primarySizing": "AUTO",
+     "counterSizing": "FIXED"
+    },
+    "cornerRadius": 8,
+    "bound": {
+     "itemSpacing": "spacing/200",
+     "paddingTop": "spacing/200",
+     "paddingBottom": "spacing/200",
+     "topLeftRadius": "corner-radius/100",
+     "topRightRadius": "corner-radius/100",
+     "bottomLeftRadius": "corner-radius/100",
+     "bottomRightRadius": "corner-radius/100"
+    },
+    "fill": {
+     "var": "bg/surface-primary"
+    },
+    "children": [
+     {
+      "name": "Title text",
+      "type": "FRAME",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "CENTER",
+       "spacing": 8,
+       "padding": [
+        0,
+        16,
+        0,
+        16
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "AUTO"
+      },
+      "bound": {
+       "itemSpacing": "spacing/100",
+       "paddingLeft": "spacing/200",
+       "paddingRight": "spacing/200"
+      },
+      "fillWidth": true,
+      "children": [
+       {
+        "name": "Avatar",
+        "type": "INSTANCE",
+        "bound": {
+         "width": "component-size/large",
+         "height": "component-size/large"
+        },
+        "hidden": true,
+        "propRefs": {
+         "visible": "↪️avatar"
+        },
+        "instanceOf": "Avatar",
+        "componentProperties": {
+         "↪️notification": false,
+         "isVisible": true,
+         "↪️indicator": false,
+         "round": "true",
+         "size": "medium(40x40)",
+         "type": "image"
+        }
+       },
+       {
+        "name": "Icon",
+        "type": "INSTANCE",
+        "bound": {
+         "width": "component-size/small",
+         "height": "icon-size/large"
+        },
+        "hidden": true,
+        "propRefs": {
+         "visible": "↪️icon-left"
+        },
+        "instanceOf": "Icon",
+        "componentProperties": {
+         "size": "large"
+        }
+       },
+       {
+        "name": "Text",
+        "type": "FRAME",
+        "layout": {
+         "mode": "VERTICAL",
+         "primary": "MIN",
+         "counter": "MIN",
+         "spacing": 0,
+         "padding": [
+          0,
+          0,
+          0,
+          0
+         ],
+         "primarySizing": "AUTO",
+         "counterSizing": "FIXED"
+        },
+        "fillWidth": true,
+        "children": [
+         {
+          "name": "Card title",
+          "type": "TEXT",
+          "fillWidth": true,
+          "text": {
+           "characters": "Card title",
+           "fontSize": 16,
+           "fontStyle": "Semi Bold",
+           "lineHeight": 20,
+           "style": "Label/Large",
+           "fillVar": "text/primary"
+          },
+          "fill": {
+           "var": "text/primary"
+          }
+         },
+         {
+          "name": "Subtext",
+          "type": "TEXT",
+          "hidden": true,
+          "text": {
+           "characters": "Subtext",
+           "fontSize": 12,
+           "fontStyle": "Regular",
+           "lineHeight": 16,
+           "style": "Body/Small",
+           "fillVar": "text/secondary"
+          },
+          "fill": {
+           "var": "text/secondary"
+          },
+          "propRefs": {
+           "visible": "subtext",
+           "characters": "✏️text-subtext"
+          }
+         }
+        ]
+       },
+       {
+        "name": "Icon",
+        "type": "INSTANCE",
+        "bound": {
+         "width": "component-size/small",
+         "height": "icon-size/large"
+        },
+        "hidden": true,
+        "propRefs": {
+         "visible": "↪️icon-right"
+        },
+        "instanceOf": "Icon",
+        "componentProperties": {
+         "size": "large"
+        }
+       }
+      ]
+     },
+     {
+      "name": "Image",
+      "type": "FRAME",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "CENTER",
+       "spacing": 8,
+       "padding": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "FIXED"
+      },
+      "fill": {
+       "var": "bg/brand/weakest"
+      },
+      "fillWidth": true,
+      "children": []
+     },
+     {
+      "name": "Content bottom",
+      "type": "FRAME",
+      "layout": {
+       "mode": "VERTICAL",
+       "primary": "MIN",
+       "counter": "MIN",
+       "spacing": 16,
+       "padding": [
+        0,
+        16,
+        0,
+        16
+       ],
+       "primarySizing": "AUTO",
+       "counterSizing": "FIXED"
+      },
+      "bound": {
+       "itemSpacing": "spacing/200",
+       "paddingLeft": "spacing/200",
+       "paddingRight": "spacing/200"
+      },
+      "fillWidth": true,
+      "children": [
+       {
+        "name": "Badge",
+        "type": "INSTANCE",
+        "layout": {
+         "mode": "HORIZONTAL",
+         "primary": "CENTER",
+         "counter": "CENTER",
+         "spacing": 8,
+         "padding": [
+          8,
+          12,
+          8,
+          12
+         ],
+         "primarySizing": "AUTO",
+         "counterSizing": "FIXED"
+        },
+        "cornerRadius": 4,
+        "bound": {
+         "itemSpacing": "spacing/100",
+         "paddingLeft": "spacing/150",
+         "paddingTop": "spacing/100",
+         "paddingRight": "spacing/150",
+         "paddingBottom": "spacing/100",
+         "height": "component-size/small",
+         "topLeftRadius": "corner-radius/050",
+         "topRightRadius": "corner-radius/050",
+         "bottomLeftRadius": "corner-radius/050",
+         "bottomRightRadius": "corner-radius/050"
+        },
+        "fill": {
+         "var": "bg/brand/weak"
+        },
+        "hidden": true,
+        "propRefs": {
+         "visible": "badge"
+        },
+        "instanceOf": "Badge",
+        "componentProperties": {
+         "✏️text": "Label",
+         "↪️icon-right": false,
+         "↪️icon-left": false,
+         "type": "brand",
+         "style": "tonal",
+         "size": "large",
+         "rounded": "false"
+        }
+       },
+       {
+        "name": "Description",
+        "type": "TEXT",
+        "fillWidth": true,
+        "text": {
+         "characters": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis.",
+         "fontSize": 14,
+         "fontStyle": "Regular",
+         "lineHeight": 20,
+         "style": "Body/Medium",
+         "fillVar": "text/primary"
+        },
+        "fill": {
+         "var": "text/primary"
+        },
+        "propRefs": {
+         "visible": "description",
+         "characters": "✏️text-description"
+        }
+       },
+       {
+        "name": "_Slot-card",
+        "type": "INSTANCE",
+        "layout": {
+         "mode": "HORIZONTAL",
+         "primary": "CENTER",
+         "counter": "CENTER",
+         "spacing": 0,
+         "padding": [
+          0,
+          8,
+          0,
+          8
+         ],
+         "primarySizing": "FIXED",
+         "counterSizing": "AUTO"
+        },
+        "cornerRadius": 8,
+        "bound": {
+         "paddingLeft": "spacing/100",
+         "paddingRight": "spacing/100",
+         "topLeftRadius": "corner-radius/100",
+         "topRightRadius": "corner-radius/100",
+         "bottomLeftRadius": "corner-radius/100",
+         "bottomRightRadius": "corner-radius/100"
+        },
+        "stroke": {
+         "var": "bg/brand/default"
+        },
+        "strokeWeight": 1,
+        "minHeight": 32,
+        "fillWidth": true,
+        "propRefs": {
+         "visible": "↪️action",
+         "mainComponent": "swap action"
+        },
+        "instanceOf": "_Slot-card"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "name": "type=horizontal, size=large, image-fill=true, image-bottom=false",
+    "type": "COMPONENT",
+    "layout": {
+     "mode": "HORIZONTAL",
+     "primary": "MIN",
+     "counter": "CENTER",
+     "spacing": 0,
+     "padding": [
+      0,
+      0,
+      0,
+      0
+     ],
+     "primarySizing": "FIXED",
+     "counterSizing": "AUTO"
+    },
+    "cornerRadius": 8,
+    "bound": {
+     "topLeftRadius": "corner-radius/100",
+     "topRightRadius": "corner-radius/100",
+     "bottomLeftRadius": "corner-radius/100",
+     "bottomRightRadius": "corner-radius/100"
+    },
+    "fill": {
+     "var": "bg/surface-primary"
+    },
+    "children": [
+     {
+      "name": "Image",
+      "type": "FRAME",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "CENTER",
+       "spacing": 8,
+       "padding": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "FIXED"
+      },
+      "bound": {
+       "topLeftRadius": "corner-radius/100",
+       "bottomLeftRadius": "corner-radius/100"
+      },
+      "fill": {
+       "var": "bg/brand/weakest"
+      },
+      "children": []
+     },
+     {
+      "name": "Content right",
+      "type": "FRAME",
+      "layout": {
+       "mode": "VERTICAL",
+       "primary": "CENTER",
+       "counter": "MIN",
+       "spacing": 16,
+       "padding": [
+        16,
+        16,
+        16,
+        16
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "FIXED"
+      },
+      "bound": {
+       "itemSpacing": "spacing/200",
+       "paddingLeft": "spacing/200",
+       "paddingTop": "spacing/200",
+       "paddingRight": "spacing/200",
+       "paddingBottom": "spacing/200"
+      },
+      "fillWidth": true,
+      "children": [
+       {
+        "name": "Content",
+        "type": "FRAME",
+        "layout": {
+         "mode": "VERTICAL",
+         "primary": "MIN",
+         "counter": "MIN",
+         "spacing": 8,
+         "padding": [
+          0,
+          0,
+          0,
+          0
+         ],
+         "primarySizing": "AUTO",
+         "counterSizing": "FIXED"
+        },
+        "bound": {
+         "itemSpacing": "spacing/100"
+        },
+        "fillWidth": true,
+        "children": [
+         {
+          "name": "Title text",
+          "type": "FRAME",
+          "layout": {
+           "mode": "HORIZONTAL",
+           "primary": "MIN",
+           "counter": "CENTER",
+           "spacing": 8,
+           "padding": [
+            0,
+            0,
+            0,
+            0
+           ],
+           "primarySizing": "FIXED",
+           "counterSizing": "AUTO"
+          },
+          "bound": {
+           "itemSpacing": "spacing/100"
+          },
+          "fillWidth": true,
+          "children": [
+           {
+            "name": "Avatar",
+            "type": "INSTANCE",
+            "bound": {
+             "width": "component-size/large",
+             "height": "component-size/large"
+            },
+            "hidden": true,
+            "propRefs": {
+             "visible": "↪️avatar"
+            },
+            "instanceOf": "Avatar",
+            "componentProperties": {
+             "↪️notification": false,
+             "isVisible": true,
+             "↪️indicator": false,
+             "round": "true",
+             "size": "medium(40x40)",
+             "type": "image"
+            }
+           },
+           {
+            "name": "Icon",
+            "type": "INSTANCE",
+            "bound": {
+             "width": "component-size/small",
+             "height": "icon-size/large"
+            },
+            "hidden": true,
+            "propRefs": {
+             "visible": "↪️icon-left"
+            },
+            "instanceOf": "Icon",
+            "componentProperties": {
+             "size": "large"
+            }
+           },
+           {
+            "name": "Text",
+            "type": "FRAME",
+            "layout": {
+             "mode": "VERTICAL",
+             "primary": "MIN",
+             "counter": "MIN",
+             "spacing": 0,
+             "padding": [
+              0,
+              0,
+              0,
+              0
+             ],
+             "primarySizing": "AUTO",
+             "counterSizing": "FIXED"
+            },
+            "fillWidth": true,
+            "children": [
+             {
+              "name": "Card title",
+              "type": "TEXT",
+              "fillWidth": true,
+              "text": {
+               "characters": "Card title",
+               "fontSize": 20,
+               "fontStyle": "Semi Bold",
+               "lineHeight": 28,
+               "style": "Heading/Small/Semibold",
+               "fillVar": "text/primary"
+              },
+              "fill": {
+               "var": "text/primary"
+              }
+             },
+             {
+              "name": "Subtext",
+              "type": "TEXT",
+              "hidden": true,
+              "text": {
+               "characters": "Subtext",
+               "fontSize": 12,
+               "fontStyle": "Regular",
+               "lineHeight": 16,
+               "style": "Body/Small",
+               "fillVar": "text/secondary"
+              },
+              "fill": {
+               "var": "text/secondary"
+              },
+              "propRefs": {
+               "visible": "subtext",
+               "characters": "✏️text-subtext"
+              }
+             }
+            ]
+           },
+           {
+            "name": "Icon",
+            "type": "INSTANCE",
+            "bound": {
+             "width": "component-size/small",
+             "height": "icon-size/large"
+            },
+            "hidden": true,
+            "propRefs": {
+             "visible": "↪️icon-right"
+            },
+            "instanceOf": "Icon",
+            "componentProperties": {
+             "size": "large"
+            }
+           }
+          ]
+         },
+         {
+          "name": "Badge",
+          "type": "INSTANCE",
+          "layout": {
+           "mode": "HORIZONTAL",
+           "primary": "CENTER",
+           "counter": "CENTER",
+           "spacing": 8,
+           "padding": [
+            8,
+            12,
+            8,
+            12
+           ],
+           "primarySizing": "AUTO",
+           "counterSizing": "FIXED"
+          },
+          "cornerRadius": 4,
+          "bound": {
+           "itemSpacing": "spacing/100",
+           "paddingLeft": "spacing/150",
+           "paddingTop": "spacing/100",
+           "paddingRight": "spacing/150",
+           "paddingBottom": "spacing/100",
+           "height": "component-size/small",
+           "topLeftRadius": "corner-radius/050",
+           "topRightRadius": "corner-radius/050",
+           "bottomLeftRadius": "corner-radius/050",
+           "bottomRightRadius": "corner-radius/050"
+          },
+          "fill": {
+           "var": "bg/brand/weak"
+          },
+          "hidden": true,
+          "propRefs": {
+           "visible": "badge"
+          },
+          "instanceOf": "Badge",
+          "componentProperties": {
+           "✏️text": "Label",
+           "↪️icon-right": false,
+           "↪️icon-left": false,
+           "type": "brand",
+           "style": "tonal",
+           "size": "large",
+           "rounded": "false"
+          }
+         },
+         {
+          "name": "Description",
+          "type": "TEXT",
+          "fillWidth": true,
+          "text": {
+           "characters": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis.",
+           "fontSize": 16,
+           "fontStyle": "Regular",
+           "lineHeight": 24,
+           "style": "Body/Large",
+           "fillVar": "text/primary"
+          },
+          "fill": {
+           "var": "text/primary"
+          },
+          "propRefs": {
+           "characters": "✏️text-description"
+          }
+         }
+        ]
+       },
+       {
+        "name": "_Slot-card",
+        "type": "INSTANCE",
+        "layout": {
+         "mode": "HORIZONTAL",
+         "primary": "CENTER",
+         "counter": "CENTER",
+         "spacing": 0,
+         "padding": [
+          0,
+          8,
+          0,
+          8
+         ],
+         "primarySizing": "FIXED",
+         "counterSizing": "AUTO"
+        },
+        "cornerRadius": 8,
+        "bound": {
+         "paddingLeft": "spacing/100",
+         "paddingRight": "spacing/100",
+         "topLeftRadius": "corner-radius/100",
+         "topRightRadius": "corner-radius/100",
+         "bottomLeftRadius": "corner-radius/100",
+         "bottomRightRadius": "corner-radius/100"
+        },
+        "stroke": {
+         "var": "bg/brand/default"
+        },
+        "strokeWeight": 1,
+        "minHeight": 32,
+        "fillWidth": true,
+        "propRefs": {
+         "visible": "↪️action",
+         "mainComponent": "swap action"
+        },
+        "instanceOf": "_Slot-card"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "name": "type=horizontal, size=small, image-fill=true, image-bottom=false",
+    "type": "COMPONENT",
+    "layout": {
+     "mode": "HORIZONTAL",
+     "primary": "MIN",
+     "counter": "CENTER",
+     "spacing": 0,
+     "padding": [
+      0,
+      0,
+      0,
+      0
+     ],
+     "primarySizing": "FIXED",
+     "counterSizing": "AUTO"
+    },
+    "cornerRadius": 8,
+    "bound": {
+     "topLeftRadius": "corner-radius/100",
+     "topRightRadius": "corner-radius/100",
+     "bottomLeftRadius": "corner-radius/100",
+     "bottomRightRadius": "corner-radius/100"
+    },
+    "fill": {
+     "var": "bg/surface-primary"
+    },
+    "children": [
+     {
+      "name": "Image",
+      "type": "FRAME",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "CENTER",
+       "spacing": 8,
+       "padding": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "FIXED"
+      },
+      "bound": {
+       "topLeftRadius": "corner-radius/100",
+       "bottomLeftRadius": "corner-radius/100"
+      },
+      "fill": {
+       "var": "bg/brand/weakest"
+      },
+      "children": []
+     },
+     {
+      "name": "Content right",
+      "type": "FRAME",
+      "layout": {
+       "mode": "VERTICAL",
+       "primary": "CENTER",
+       "counter": "MIN",
+       "spacing": 16,
+       "padding": [
+        16,
+        16,
+        16,
+        16
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "FIXED"
+      },
+      "bound": {
+       "itemSpacing": "spacing/200",
+       "paddingLeft": "spacing/200",
+       "paddingTop": "spacing/200",
+       "paddingRight": "spacing/200",
+       "paddingBottom": "spacing/200"
+      },
+      "fillWidth": true,
+      "children": [
+       {
+        "name": "Content",
+        "type": "FRAME",
+        "layout": {
+         "mode": "VERTICAL",
+         "primary": "MIN",
+         "counter": "MIN",
+         "spacing": 8,
+         "padding": [
+          0,
+          0,
+          0,
+          0
+         ],
+         "primarySizing": "AUTO",
+         "counterSizing": "FIXED"
+        },
+        "bound": {
+         "itemSpacing": "spacing/100"
+        },
+        "fillWidth": true,
+        "children": [
+         {
+          "name": "Title text",
+          "type": "FRAME",
+          "layout": {
+           "mode": "HORIZONTAL",
+           "primary": "MIN",
+           "counter": "CENTER",
+           "spacing": 8,
+           "padding": [
+            0,
+            0,
+            0,
+            0
+           ],
+           "primarySizing": "FIXED",
+           "counterSizing": "AUTO"
+          },
+          "bound": {
+           "itemSpacing": "spacing/100"
+          },
+          "fillWidth": true,
+          "children": [
+           {
+            "name": "Avatar",
+            "type": "INSTANCE",
+            "bound": {
+             "width": "component-size/large",
+             "height": "component-size/large"
+            },
+            "hidden": true,
+            "propRefs": {
+             "visible": "↪️avatar"
+            },
+            "instanceOf": "Avatar",
+            "componentProperties": {
+             "↪️notification": false,
+             "isVisible": true,
+             "↪️indicator": false,
+             "round": "true",
+             "size": "medium(40x40)",
+             "type": "image"
+            }
+           },
+           {
+            "name": "Icon",
+            "type": "INSTANCE",
+            "bound": {
+             "width": "component-size/small",
+             "height": "icon-size/large"
+            },
+            "hidden": true,
+            "propRefs": {
+             "visible": "↪️icon-left"
+            },
+            "instanceOf": "Icon",
+            "componentProperties": {
+             "size": "large"
+            }
+           },
+           {
+            "name": "Text",
+            "type": "FRAME",
+            "layout": {
+             "mode": "VERTICAL",
+             "primary": "MIN",
+             "counter": "MIN",
+             "spacing": 0,
+             "padding": [
+              0,
+              0,
+              0,
+              0
+             ],
+             "primarySizing": "AUTO",
+             "counterSizing": "FIXED"
+            },
+            "fillWidth": true,
+            "children": [
+             {
+              "name": "Card title",
+              "type": "TEXT",
+              "fillWidth": true,
+              "text": {
+               "characters": "Card title",
+               "fontSize": 16,
+               "fontStyle": "Semi Bold",
+               "lineHeight": 20,
+               "style": "Label/Large",
+               "fillVar": "text/primary"
+              },
+              "fill": {
+               "var": "text/primary"
+              }
+             },
+             {
+              "name": "Subtext",
+              "type": "TEXT",
+              "hidden": true,
+              "text": {
+               "characters": "Subtext",
+               "fontSize": 12,
+               "fontStyle": "Regular",
+               "lineHeight": 16,
+               "style": "Body/Small",
+               "fillVar": "text/secondary"
+              },
+              "fill": {
+               "var": "text/secondary"
+              },
+              "propRefs": {
+               "visible": "subtext",
+               "characters": "✏️text-subtext"
+              }
+             }
+            ]
+           },
+           {
+            "name": "Icon",
+            "type": "INSTANCE",
+            "bound": {
+             "width": "component-size/small",
+             "height": "icon-size/large"
+            },
+            "hidden": true,
+            "propRefs": {
+             "visible": "↪️icon-right"
+            },
+            "instanceOf": "Icon",
+            "componentProperties": {
+             "size": "large"
+            }
+           }
+          ]
+         },
+         {
+          "name": "Badge",
+          "type": "INSTANCE",
+          "layout": {
+           "mode": "HORIZONTAL",
+           "primary": "CENTER",
+           "counter": "CENTER",
+           "spacing": 8,
+           "padding": [
+            8,
+            12,
+            8,
+            12
+           ],
+           "primarySizing": "AUTO",
+           "counterSizing": "FIXED"
+          },
+          "cornerRadius": 4,
+          "bound": {
+           "itemSpacing": "spacing/100",
+           "paddingLeft": "spacing/150",
+           "paddingTop": "spacing/100",
+           "paddingRight": "spacing/150",
+           "paddingBottom": "spacing/100",
+           "height": "component-size/small",
+           "topLeftRadius": "corner-radius/050",
+           "topRightRadius": "corner-radius/050",
+           "bottomLeftRadius": "corner-radius/050",
+           "bottomRightRadius": "corner-radius/050"
+          },
+          "fill": {
+           "var": "bg/brand/weak"
+          },
+          "hidden": true,
+          "propRefs": {
+           "visible": "badge"
+          },
+          "instanceOf": "Badge",
+          "componentProperties": {
+           "✏️text": "Label",
+           "↪️icon-right": false,
+           "↪️icon-left": false,
+           "type": "brand",
+           "style": "tonal",
+           "size": "large",
+           "rounded": "false"
+          }
+         },
+         {
+          "name": "Description",
+          "type": "TEXT",
+          "fillWidth": true,
+          "text": {
+           "characters": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis.",
+           "fontSize": 14,
+           "fontStyle": "Regular",
+           "lineHeight": 20,
+           "style": "Body/Medium",
+           "fillVar": "text/primary"
+          },
+          "fill": {
+           "var": "text/primary"
+          },
+          "propRefs": {
+           "characters": "✏️text-description"
+          }
+         }
+        ]
+       },
+       {
+        "name": "_Slot-card",
+        "type": "INSTANCE",
+        "layout": {
+         "mode": "HORIZONTAL",
+         "primary": "CENTER",
+         "counter": "CENTER",
+         "spacing": 0,
+         "padding": [
+          0,
+          8,
+          0,
+          8
+         ],
+         "primarySizing": "FIXED",
+         "counterSizing": "AUTO"
+        },
+        "cornerRadius": 8,
+        "bound": {
+         "paddingLeft": "spacing/100",
+         "paddingRight": "spacing/100",
+         "topLeftRadius": "corner-radius/100",
+         "topRightRadius": "corner-radius/100",
+         "bottomLeftRadius": "corner-radius/100",
+         "bottomRightRadius": "corner-radius/100"
+        },
+        "stroke": {
+         "var": "bg/brand/default"
+        },
+        "strokeWeight": 1,
+        "minHeight": 32,
+        "fillWidth": true,
+        "propRefs": {
+         "visible": "↪️action",
+         "mainComponent": "swap action"
+        },
+        "instanceOf": "_Slot-card"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "name": "type=horizontal, size=large, image-fill=false, image-bottom=false",
+    "type": "COMPONENT",
+    "layout": {
+     "mode": "HORIZONTAL",
+     "primary": "MIN",
+     "counter": "CENTER",
+     "spacing": 16,
+     "padding": [
+      16,
+      16,
+      16,
+      16
+     ],
+     "primarySizing": "FIXED",
+     "counterSizing": "AUTO"
+    },
+    "cornerRadius": 8,
+    "bound": {
+     "itemSpacing": "spacing/200",
+     "paddingLeft": "spacing/200",
+     "paddingTop": "spacing/200",
+     "paddingRight": "spacing/200",
+     "paddingBottom": "spacing/200",
+     "topLeftRadius": "corner-radius/100",
+     "topRightRadius": "corner-radius/100",
+     "bottomLeftRadius": "corner-radius/100",
+     "bottomRightRadius": "corner-radius/100"
+    },
+    "fill": {
+     "var": "bg/surface-primary"
+    },
+    "children": [
+     {
+      "name": "Image",
+      "type": "FRAME",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "CENTER",
+       "spacing": 8,
+       "padding": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "FIXED"
+      },
+      "cornerRadius": 4,
+      "bound": {
+       "topLeftRadius": "corner-radius/050",
+       "topRightRadius": "corner-radius/050",
+       "bottomLeftRadius": "corner-radius/050",
+       "bottomRightRadius": "corner-radius/050"
+      },
+      "fill": {
+       "var": "bg/brand/weakest"
+      },
+      "children": []
+     },
+     {
+      "name": "Content right",
+      "type": "FRAME",
+      "layout": {
+       "mode": "VERTICAL",
+       "primary": "CENTER",
+       "counter": "MIN",
+       "spacing": 16,
+       "padding": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "primarySizing": "AUTO",
+       "counterSizing": "FIXED"
+      },
+      "bound": {
+       "itemSpacing": "spacing/200"
+      },
+      "fillWidth": true,
+      "children": [
+       {
+        "name": "Content",
+        "type": "FRAME",
+        "layout": {
+         "mode": "VERTICAL",
+         "primary": "MIN",
+         "counter": "MIN",
+         "spacing": 8,
+         "padding": [
+          0,
+          0,
+          0,
+          0
+         ],
+         "primarySizing": "AUTO",
+         "counterSizing": "FIXED"
+        },
+        "bound": {
+         "itemSpacing": "spacing/100"
+        },
+        "fillWidth": true,
+        "children": [
+         {
+          "name": "Title text",
+          "type": "FRAME",
+          "layout": {
+           "mode": "HORIZONTAL",
+           "primary": "MIN",
+           "counter": "CENTER",
+           "spacing": 8,
+           "padding": [
+            0,
+            0,
+            0,
+            0
+           ],
+           "primarySizing": "FIXED",
+           "counterSizing": "AUTO"
+          },
+          "bound": {
+           "itemSpacing": "spacing/100"
+          },
+          "fillWidth": true,
+          "children": [
+           {
+            "name": "Avatar",
+            "type": "INSTANCE",
+            "bound": {
+             "width": "component-size/large",
+             "height": "component-size/large"
+            },
+            "hidden": true,
+            "propRefs": {
+             "visible": "↪️avatar"
+            },
+            "instanceOf": "Avatar",
+            "componentProperties": {
+             "↪️notification": false,
+             "isVisible": true,
+             "↪️indicator": false,
+             "round": "true",
+             "size": "medium(40x40)",
+             "type": "image"
+            }
+           },
+           {
+            "name": "Icon",
+            "type": "INSTANCE",
+            "bound": {
+             "width": "component-size/small",
+             "height": "icon-size/large"
+            },
+            "hidden": true,
+            "propRefs": {
+             "visible": "↪️icon-left"
+            },
+            "instanceOf": "Icon",
+            "componentProperties": {
+             "size": "large"
+            }
+           },
+           {
+            "name": "Text",
+            "type": "FRAME",
+            "layout": {
+             "mode": "VERTICAL",
+             "primary": "MIN",
+             "counter": "MIN",
+             "spacing": 0,
+             "padding": [
+              0,
+              0,
+              0,
+              0
+             ],
+             "primarySizing": "AUTO",
+             "counterSizing": "FIXED"
+            },
+            "fillWidth": true,
+            "children": [
+             {
+              "name": "Card title",
+              "type": "TEXT",
+              "fillWidth": true,
+              "text": {
+               "characters": "Card title",
+               "fontSize": 20,
+               "fontStyle": "Semi Bold",
+               "lineHeight": 28,
+               "style": "Heading/Small/Semibold",
+               "fillVar": "text/primary"
+              },
+              "fill": {
+               "var": "text/primary"
+              }
+             },
+             {
+              "name": "Subtext",
+              "type": "TEXT",
+              "hidden": true,
+              "text": {
+               "characters": "Subtext",
+               "fontSize": 12,
+               "fontStyle": "Regular",
+               "lineHeight": 16,
+               "style": "Body/Small",
+               "fillVar": "text/secondary"
+              },
+              "fill": {
+               "var": "text/secondary"
+              },
+              "propRefs": {
+               "visible": "subtext",
+               "characters": "✏️text-subtext"
+              }
+             }
+            ]
+           },
+           {
+            "name": "Icon",
+            "type": "INSTANCE",
+            "bound": {
+             "width": "component-size/small",
+             "height": "icon-size/large"
+            },
+            "hidden": true,
+            "propRefs": {
+             "visible": "↪️icon-right"
+            },
+            "instanceOf": "Icon",
+            "componentProperties": {
+             "size": "large"
+            }
+           }
+          ]
+         },
+         {
+          "name": "Badge",
+          "type": "INSTANCE",
+          "layout": {
+           "mode": "HORIZONTAL",
+           "primary": "CENTER",
+           "counter": "CENTER",
+           "spacing": 8,
+           "padding": [
+            8,
+            12,
+            8,
+            12
+           ],
+           "primarySizing": "AUTO",
+           "counterSizing": "FIXED"
+          },
+          "cornerRadius": 4,
+          "bound": {
+           "itemSpacing": "spacing/100",
+           "paddingLeft": "spacing/150",
+           "paddingTop": "spacing/100",
+           "paddingRight": "spacing/150",
+           "paddingBottom": "spacing/100",
+           "height": "component-size/small",
+           "topLeftRadius": "corner-radius/050",
+           "topRightRadius": "corner-radius/050",
+           "bottomLeftRadius": "corner-radius/050",
+           "bottomRightRadius": "corner-radius/050"
+          },
+          "fill": {
+           "var": "bg/brand/weak"
+          },
+          "hidden": true,
+          "propRefs": {
+           "visible": "badge"
+          },
+          "instanceOf": "Badge",
+          "componentProperties": {
+           "✏️text": "Label",
+           "↪️icon-right": false,
+           "↪️icon-left": false,
+           "type": "brand",
+           "style": "tonal",
+           "size": "large",
+           "rounded": "false"
+          }
+         },
+         {
+          "name": "Description",
+          "type": "TEXT",
+          "fillWidth": true,
+          "text": {
+           "characters": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis.",
+           "fontSize": 16,
+           "fontStyle": "Regular",
+           "lineHeight": 24,
+           "style": "Body/Large",
+           "fillVar": "text/primary"
+          },
+          "fill": {
+           "var": "text/primary"
+          },
+          "propRefs": {
+           "characters": "✏️text-description"
+          }
+         }
+        ]
+       },
+       {
+        "name": "_Slot-card",
+        "type": "INSTANCE",
+        "layout": {
+         "mode": "HORIZONTAL",
+         "primary": "CENTER",
+         "counter": "CENTER",
+         "spacing": 0,
+         "padding": [
+          0,
+          8,
+          0,
+          8
+         ],
+         "primarySizing": "FIXED",
+         "counterSizing": "AUTO"
+        },
+        "cornerRadius": 8,
+        "bound": {
+         "paddingLeft": "spacing/100",
+         "paddingRight": "spacing/100",
+         "topLeftRadius": "corner-radius/100",
+         "topRightRadius": "corner-radius/100",
+         "bottomLeftRadius": "corner-radius/100",
+         "bottomRightRadius": "corner-radius/100"
+        },
+        "stroke": {
+         "var": "bg/brand/default"
+        },
+        "strokeWeight": 1,
+        "minHeight": 32,
+        "fillWidth": true,
+        "propRefs": {
+         "visible": "↪️action",
+         "mainComponent": "swap action"
+        },
+        "instanceOf": "_Slot-card"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "name": "type=horizontal, size=small, image-fill=false, image-bottom=false",
+    "type": "COMPONENT",
+    "layout": {
+     "mode": "HORIZONTAL",
+     "primary": "MIN",
+     "counter": "CENTER",
+     "spacing": 16,
+     "padding": [
+      16,
+      16,
+      16,
+      16
+     ],
+     "primarySizing": "FIXED",
+     "counterSizing": "AUTO"
+    },
+    "cornerRadius": 8,
+    "bound": {
+     "itemSpacing": "spacing/200",
+     "paddingLeft": "spacing/200",
+     "paddingTop": "spacing/200",
+     "paddingRight": "spacing/200",
+     "paddingBottom": "spacing/200",
+     "topLeftRadius": "corner-radius/100",
+     "topRightRadius": "corner-radius/100",
+     "bottomLeftRadius": "corner-radius/100",
+     "bottomRightRadius": "corner-radius/100"
+    },
+    "fill": {
+     "var": "bg/surface-primary"
+    },
+    "children": [
+     {
+      "name": "Image",
+      "type": "FRAME",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "CENTER",
+       "spacing": 8,
+       "padding": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "FIXED"
+      },
+      "cornerRadius": 4,
+      "bound": {
+       "topLeftRadius": "corner-radius/050",
+       "topRightRadius": "corner-radius/050",
+       "bottomLeftRadius": "corner-radius/050",
+       "bottomRightRadius": "corner-radius/050"
+      },
+      "fill": {
+       "var": "bg/brand/weakest"
+      },
+      "children": []
+     },
+     {
+      "name": "Content right",
+      "type": "FRAME",
+      "layout": {
+       "mode": "VERTICAL",
+       "primary": "CENTER",
+       "counter": "MIN",
+       "spacing": 16,
+       "padding": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "primarySizing": "AUTO",
+       "counterSizing": "FIXED"
+      },
+      "bound": {
+       "itemSpacing": "spacing/200"
+      },
+      "fillWidth": true,
+      "children": [
+       {
+        "name": "Content",
+        "type": "FRAME",
+        "layout": {
+         "mode": "VERTICAL",
+         "primary": "MIN",
+         "counter": "MIN",
+         "spacing": 8,
+         "padding": [
+          0,
+          0,
+          0,
+          0
+         ],
+         "primarySizing": "AUTO",
+         "counterSizing": "FIXED"
+        },
+        "bound": {
+         "itemSpacing": "spacing/100"
+        },
+        "fillWidth": true,
+        "children": [
+         {
+          "name": "Title text",
+          "type": "FRAME",
+          "layout": {
+           "mode": "HORIZONTAL",
+           "primary": "MIN",
+           "counter": "CENTER",
+           "spacing": 8,
+           "padding": [
+            0,
+            0,
+            0,
+            0
+           ],
+           "primarySizing": "FIXED",
+           "counterSizing": "AUTO"
+          },
+          "bound": {
+           "itemSpacing": "spacing/100"
+          },
+          "fillWidth": true,
+          "children": [
+           {
+            "name": "Avatar",
+            "type": "INSTANCE",
+            "bound": {
+             "width": "component-size/large",
+             "height": "component-size/large"
+            },
+            "hidden": true,
+            "propRefs": {
+             "visible": "↪️avatar"
+            },
+            "instanceOf": "Avatar",
+            "componentProperties": {
+             "↪️notification": false,
+             "isVisible": true,
+             "↪️indicator": false,
+             "round": "true",
+             "size": "medium(40x40)",
+             "type": "image"
+            }
+           },
+           {
+            "name": "Icon",
+            "type": "INSTANCE",
+            "bound": {
+             "width": "component-size/small",
+             "height": "icon-size/large"
+            },
+            "hidden": true,
+            "propRefs": {
+             "visible": "↪️icon-left"
+            },
+            "instanceOf": "Icon",
+            "componentProperties": {
+             "size": "large"
+            }
+           },
+           {
+            "name": "Text",
+            "type": "FRAME",
+            "layout": {
+             "mode": "VERTICAL",
+             "primary": "MIN",
+             "counter": "MIN",
+             "spacing": 0,
+             "padding": [
+              0,
+              0,
+              0,
+              0
+             ],
+             "primarySizing": "AUTO",
+             "counterSizing": "FIXED"
+            },
+            "fillWidth": true,
+            "children": [
+             {
+              "name": "Card title",
+              "type": "TEXT",
+              "fillWidth": true,
+              "text": {
+               "characters": "Card title",
+               "fontSize": 16,
+               "fontStyle": "Semi Bold",
+               "lineHeight": 20,
+               "style": "Label/Large",
+               "fillVar": "text/primary"
+              },
+              "fill": {
+               "var": "text/primary"
+              }
+             },
+             {
+              "name": "Subtext",
+              "type": "TEXT",
+              "hidden": true,
+              "text": {
+               "characters": "Subtext",
+               "fontSize": 12,
+               "fontStyle": "Regular",
+               "lineHeight": 16,
+               "style": "Body/Small",
+               "fillVar": "text/secondary"
+              },
+              "fill": {
+               "var": "text/secondary"
+              },
+              "propRefs": {
+               "visible": "subtext",
+               "characters": "✏️text-subtext"
+              }
+             }
+            ]
+           },
+           {
+            "name": "Icon",
+            "type": "INSTANCE",
+            "bound": {
+             "width": "component-size/small",
+             "height": "icon-size/large"
+            },
+            "hidden": true,
+            "propRefs": {
+             "visible": "↪️icon-right"
+            },
+            "instanceOf": "Icon",
+            "componentProperties": {
+             "size": "large"
+            }
+           }
+          ]
+         },
+         {
+          "name": "Badge",
+          "type": "INSTANCE",
+          "layout": {
+           "mode": "HORIZONTAL",
+           "primary": "CENTER",
+           "counter": "CENTER",
+           "spacing": 8,
+           "padding": [
+            8,
+            12,
+            8,
+            12
+           ],
+           "primarySizing": "AUTO",
+           "counterSizing": "FIXED"
+          },
+          "cornerRadius": 4,
+          "bound": {
+           "itemSpacing": "spacing/100",
+           "paddingLeft": "spacing/150",
+           "paddingTop": "spacing/100",
+           "paddingRight": "spacing/150",
+           "paddingBottom": "spacing/100",
+           "height": "component-size/small",
+           "topLeftRadius": "corner-radius/050",
+           "topRightRadius": "corner-radius/050",
+           "bottomLeftRadius": "corner-radius/050",
+           "bottomRightRadius": "corner-radius/050"
+          },
+          "fill": {
+           "var": "bg/brand/weak"
+          },
+          "hidden": true,
+          "propRefs": {
+           "visible": "badge"
+          },
+          "instanceOf": "Badge",
+          "componentProperties": {
+           "✏️text": "Label",
+           "↪️icon-right": false,
+           "↪️icon-left": false,
+           "type": "brand",
+           "style": "tonal",
+           "size": "large",
+           "rounded": "false"
+          }
+         },
+         {
+          "name": "Description",
+          "type": "TEXT",
+          "fillWidth": true,
+          "text": {
+           "characters": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis.",
+           "fontSize": 14,
+           "fontStyle": "Regular",
+           "lineHeight": 20,
+           "style": "Body/Medium",
+           "fillVar": "text/primary"
+          },
+          "fill": {
+           "var": "text/primary"
+          },
+          "propRefs": {
+           "characters": "✏️text-description"
+          }
+         }
+        ]
+       },
+       {
+        "name": "_Slot-card",
+        "type": "INSTANCE",
+        "layout": {
+         "mode": "HORIZONTAL",
+         "primary": "CENTER",
+         "counter": "CENTER",
+         "spacing": 0,
+         "padding": [
+          0,
+          8,
+          0,
+          8
+         ],
+         "primarySizing": "FIXED",
+         "counterSizing": "AUTO"
+        },
+        "cornerRadius": 8,
+        "bound": {
+         "paddingLeft": "spacing/100",
+         "paddingRight": "spacing/100",
+         "topLeftRadius": "corner-radius/100",
+         "topRightRadius": "corner-radius/100",
+         "bottomLeftRadius": "corner-radius/100",
+         "bottomRightRadius": "corner-radius/100"
+        },
+        "stroke": {
+         "var": "bg/brand/default"
+        },
+        "strokeWeight": 1,
+        "minHeight": 32,
+        "fillWidth": true,
+        "propRefs": {
+         "visible": "↪️action",
+         "mainComponent": "swap action"
+        },
+        "instanceOf": "_Slot-card"
+       }
+      ]
+     }
+    ]
+   }
+  ]
+ }
+}

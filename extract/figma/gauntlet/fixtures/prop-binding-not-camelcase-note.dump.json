@@ -1,0 +1,368 @@
+{
+ "_provenance": {
+  "fileKey": "WofZT8xaxXuc2Q6Je9S4XE",
+  "extractedAt": "2026-07-10",
+  "note": "Single-set gauntlet fixture for class \"prop-binding-not-camelcase\" — extracted from cbds-plugin-all-sets.v14.dump.json by extract/figma/gauntlet/census.ts."
+ },
+ "_degradations": [
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "Note:Note/Vector",
+   "message": "VECTOR geometry (arbitrary paths) is not captured — parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "Note:Note/Vector",
+   "message": "VECTOR geometry (arbitrary paths) is not captured — parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  }
+ ],
+ "_variables": {
+  "corner-radius/050": {
+   "type": "FLOAT",
+   "value": 4
+  },
+  "utility/bg/yellow-weak": {
+   "type": "COLOR",
+   "value": "#fff6cc"
+  },
+  "spacing/100": {
+   "type": "FLOAT",
+   "value": 8
+  },
+  "spacing/150": {
+   "type": "FLOAT",
+   "value": 12
+  },
+  "component-size/small": {
+   "type": "FLOAT",
+   "value": 24
+  },
+  "bg/warning/default": {
+   "type": "COLOR",
+   "value": "#b67300"
+  },
+  "text/primary": {
+   "type": "COLOR",
+   "value": "#050a0f"
+  },
+  "bg/surface-secondary": {
+   "type": "COLOR",
+   "value": "#f5f7fa"
+  }
+ },
+ "Note": {
+  "setName": "Note",
+  "type": "COMPONENT",
+  "nodeId": "582:16",
+  "key": "dd16724e7b613a74bd75ec5be2a1ffdabe43da95",
+  "variants": [
+   {
+    "name": "Note",
+    "type": "COMPONENT",
+    "layout": {
+     "mode": "VERTICAL",
+     "primary": "MIN",
+     "counter": "MIN",
+     "spacing": 16,
+     "padding": [
+      21,
+      21,
+      21,
+      21
+     ],
+     "primarySizing": "AUTO",
+     "counterSizing": "FIXED"
+    },
+    "cornerRadius": 4,
+    "bound": {
+     "topLeftRadius": "corner-radius/050",
+     "topRightRadius": "corner-radius/050",
+     "bottomLeftRadius": "corner-radius/050",
+     "bottomRightRadius": "corner-radius/050"
+    },
+    "fill": {
+     "var": "utility/bg/yellow-weak"
+    },
+    "children": [
+     {
+      "name": "Badge",
+      "type": "INSTANCE",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "CENTER",
+       "counter": "CENTER",
+       "spacing": 8,
+       "padding": [
+        8,
+        12,
+        8,
+        12
+       ],
+       "primarySizing": "AUTO",
+       "counterSizing": "FIXED"
+      },
+      "cornerRadius": 4,
+      "bound": {
+       "itemSpacing": "spacing/100",
+       "paddingLeft": "spacing/150",
+       "paddingTop": "spacing/100",
+       "paddingRight": "spacing/150",
+       "paddingBottom": "spacing/100",
+       "height": "component-size/small",
+       "topLeftRadius": "corner-radius/050",
+       "topRightRadius": "corner-radius/050",
+       "bottomLeftRadius": "corner-radius/050",
+       "bottomRightRadius": "corner-radius/050"
+      },
+      "fill": {
+       "var": "bg/warning/default"
+      },
+      "instanceOf": "Badge",
+      "componentProperties": {
+       "↪️icon-right": false,
+       "✏️text": "Note",
+       "↪️icon-left": false,
+       "type": "warning",
+       "style": "fill",
+       "size": "large",
+       "rounded": "false"
+      }
+     },
+     {
+      "name": "Description",
+      "type": "FRAME",
+      "layout": {
+       "mode": "VERTICAL",
+       "primary": "MIN",
+       "counter": "MIN",
+       "spacing": 4,
+       "padding": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "primarySizing": "AUTO",
+       "counterSizing": "FIXED"
+      },
+      "fillWidth": true,
+      "children": [
+       {
+        "name": "Description:",
+        "type": "TEXT",
+        "fillWidth": true,
+        "text": {
+         "characters": "Description:",
+         "fontSize": 16,
+         "fontStyle": "Semi Bold",
+         "lineHeight": 20,
+         "style": "Label/Large",
+         "fillVar": "text/primary"
+        },
+        "fill": {
+         "var": "text/primary"
+        }
+       },
+       {
+        "name": "This is a description of the note",
+        "type": "TEXT",
+        "fillWidth": true,
+        "text": {
+         "characters": "This is a description of the note",
+         "fontSize": 14,
+         "fontStyle": "Regular",
+         "lineHeight": 20,
+         "style": "Body/Medium",
+         "fillVar": "text/primary"
+        },
+        "fill": {
+         "var": "text/primary"
+        }
+       }
+      ]
+     },
+     {
+      "name": "Description",
+      "type": "FRAME",
+      "layout": {
+       "mode": "VERTICAL",
+       "primary": "MIN",
+       "counter": "MIN",
+       "spacing": 4,
+       "padding": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "primarySizing": "AUTO",
+       "counterSizing": "FIXED"
+      },
+      "fillWidth": true,
+      "propRefs": {
+       "visible": "2nd paragraph"
+      },
+      "children": [
+       {
+        "name": "Last Edited:",
+        "type": "TEXT",
+        "fillWidth": true,
+        "text": {
+         "characters": "Last Edited:",
+         "fontSize": 16,
+         "fontStyle": "Semi Bold",
+         "lineHeight": 20,
+         "style": "Label/Large",
+         "fillVar": "text/primary"
+        },
+        "fill": {
+         "var": "text/primary"
+        }
+       },
+       {
+        "name": "23/09/2024",
+        "type": "TEXT",
+        "fillWidth": true,
+        "text": {
+         "characters": "23/09/2024",
+         "fontSize": 14,
+         "fontStyle": "Regular",
+         "lineHeight": 20,
+         "style": "Body/Medium",
+         "fillVar": "text/primary"
+        },
+        "fill": {
+         "var": "text/primary"
+        }
+       }
+      ]
+     },
+     {
+      "name": "Image",
+      "type": "FRAME",
+      "fill": {
+       "var": "bg/surface-secondary"
+      },
+      "hidden": true,
+      "propRefs": {
+       "visible": "image"
+      },
+      "children": []
+     },
+     {
+      "name": "Description",
+      "type": "FRAME",
+      "layout": {
+       "mode": "VERTICAL",
+       "primary": "MIN",
+       "counter": "MIN",
+       "spacing": 4,
+       "padding": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "primarySizing": "AUTO",
+       "counterSizing": "FIXED"
+      },
+      "hidden": true,
+      "propRefs": {
+       "visible": "3rd-paragraph"
+      },
+      "children": [
+       {
+        "name": "Last Edited:",
+        "type": "TEXT",
+        "fillWidth": true,
+        "text": {
+         "characters": "Last Edited:",
+         "fontSize": 16,
+         "fontStyle": "Semi Bold",
+         "lineHeight": 20,
+         "style": "Label/Large",
+         "fillVar": "text/primary"
+        },
+        "fill": {
+         "var": "text/primary"
+        }
+       },
+       {
+        "name": "23/09/2024",
+        "type": "TEXT",
+        "fillWidth": true,
+        "text": {
+         "characters": "23/09/2024",
+         "fontSize": 14,
+         "fontStyle": "Regular",
+         "lineHeight": 20,
+         "style": "Body/Medium",
+         "fillVar": "text/primary"
+        },
+        "fill": {
+         "var": "text/primary"
+        }
+       }
+      ]
+     },
+     {
+      "name": "Description",
+      "type": "FRAME",
+      "layout": {
+       "mode": "VERTICAL",
+       "primary": "MIN",
+       "counter": "MIN",
+       "spacing": 4,
+       "padding": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "primarySizing": "AUTO",
+       "counterSizing": "FIXED"
+      },
+      "hidden": true,
+      "propRefs": {
+       "visible": "4th-paragraph"
+      },
+      "children": [
+       {
+        "name": "Last Edited:",
+        "type": "TEXT",
+        "fillWidth": true,
+        "text": {
+         "characters": "Last Edited:",
+         "fontSize": 16,
+         "fontStyle": "Semi Bold",
+         "lineHeight": 20,
+         "style": "Label/Large",
+         "fillVar": "text/primary"
+        },
+        "fill": {
+         "var": "text/primary"
+        }
+       },
+       {
+        "name": "23/09/2024",
+        "type": "TEXT",
+        "fillWidth": true,
+        "text": {
+         "characters": "23/09/2024",
+         "fontSize": 14,
+         "fontStyle": "Regular",
+         "lineHeight": 20,
+         "style": "Body/Medium",
+         "fillVar": "text/primary"
+        },
+        "fill": {
+         "var": "text/primary"
+        }
+       }
+      ]
+     }
+    ]
+   }
+  ]
+ }
+}
