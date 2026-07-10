@@ -20,7 +20,7 @@
  * `mintedTokens` — styles survive at literal fidelity, names stay mechanical
  * and reviewable, semantics are never guessed.
  */
-import { ContractSchema, pascal } from '../scripts/contract-schema.js';
+import { ContractSchema, pascal, STATE_PREVIEW_PROPERTY, statePreviewLabel } from '../scripts/contract-schema.js';
 import { kebab } from '../extract/types.js';
 import type { DumpEffect, DumpNode, DumpSet } from '../extract/figma/types.js';
 import type { TokenCorpus } from './token-corpus.js';
@@ -126,6 +126,209 @@ const isBoolAxis = (options: string[]): boolean => {
   const set = new Set(options.map((o) => o.trim().toLowerCase()));
   return set.size === 2 && set.has('true') && set.has('false');
 };
+
+// ---------------------------------------------------------------------------
+// Interaction-state axis promotion (field case: CBDS "Button-Brand Primary",
+// axes size × state where state = default|hover|focus|pressed|disabled).
+//
+// A drawn "state" enum axis is NOT API — those states are what the platform
+// RUNS (:hover / :active / :focus-visible / native disabled). Shipping the
+// axis as a code prop is the drift pattern applied forward; this promotes it
+// backward into the vocabulary the code side already owns:
+//
+//   value → contract state   hover → hover · pressed/active → active ·
+//                            focus/focus-visible → focus-visible
+//   default                  the BASE: anatomy and base facts are built from
+//                            the default-state variants only
+//   disabled                 a `disabled` BOOLEAN prop (native attribute on
+//                            interactive elements) + a `disabled` state block
+//
+// Root-level channel diffs against the matching default-state variant become
+// anatomy.root.states overrides — bound facts as (substituted) refs, raw
+// literals through the SAME mint pass as base facts, so an override that
+// varies with a remaining enum axis takes the substituted-ref shape the code
+// extractor already produces. Round trip: figmaStatePreviews is set when the
+// promoted states carry overrides, so the canvas regeneration draws a State
+// preview axis — a RENAME relative to the import (property "State", values
+// Default/Hover/Active/Focus Visible per statePreviewLabel; disabled becomes
+// BOOLEAN property "Disabled"): the vocabulary carries no custom state-axis
+// spellings, and the rename is DOCUMENTED in a note, never silent.
+// ---------------------------------------------------------------------------
+
+const INTERACTION_STATE_BY_VALUE: Record<string, 'default' | 'hover' | 'active' | 'focus-visible' | 'disabled'> = {
+  default: 'default',
+  hover: 'hover',
+  active: 'active',
+  pressed: 'active',
+  focus: 'focus-visible',
+  'focus-visible': 'focus-visible',
+  disabled: 'disabled',
+};
+const normStateValue = (v: string) => v.trim().toLowerCase().replace(/[\s_]+/g, '-');
+
+type PromotedState = 'hover' | 'active' | 'focus-visible';
+
+export interface StatePromotion {
+  axis: Axis;
+  /** Figma value spelling of the base state. */
+  defaultValue: string;
+  /** Figma value → contract state (base and disabled excluded). */
+  promoted: Array<{ value: string; state: PromotedState }>;
+  /** Figma value that maps to the disabled state, when present. */
+  disabledValue?: string;
+}
+
+/** Detect an enum axis that IS interaction states. Rules (documented table):
+ *  every value maps into the interaction-state vocabulary above, a "default"
+ *  value exists (the base to diff against), and there is at least one
+ *  promotable non-default value — with ≥2 non-default values required when
+ *  the axis is NOT named `state`/`states` (an unnamed single-state axis is
+ *  weak evidence). Near-misses on a NAMED axis are noted, never guessed. */
+function detectStateAxis(axes: Axis[], notes: string[]): StatePromotion | null {
+  for (const axis of axes) {
+    if (isBoolAxis(axis.values)) continue;
+    const named = /^states?$/i.test(axis.property.trim());
+    const unmapped = axis.values.filter((v) => INTERACTION_STATE_BY_VALUE[normStateValue(v)] === undefined);
+    if (unmapped.length > 0) {
+      if (named) {
+        notes.push(
+          `variant axis "${axis.property}": named like an interaction-state axis but value(s) ${unmapped.join(', ')} are outside the interaction-state vocabulary (default|hover|focus|focus-visible|active|pressed|disabled) — kept as an enum prop, review`,
+        );
+      }
+      continue;
+    }
+    const mapped = axis.values.map((value) => ({ value, state: INTERACTION_STATE_BY_VALUE[normStateValue(value)]! }));
+    const defaultValue = mapped.find((m) => m.state === 'default')?.value;
+    const nonDefault = mapped.filter((m) => m.state !== 'default');
+    if (defaultValue === undefined || nonDefault.length === 0) {
+      if (named) {
+        notes.push(
+          `variant axis "${axis.property}": carries interaction-state values but no default/non-default split to promote — kept as an enum prop, review`,
+        );
+      }
+      continue;
+    }
+    if (!named && nonDefault.length < 2) continue;
+    const promoted: StatePromotion['promoted'] = [];
+    let disabledValue: string | undefined;
+    for (const m of nonDefault) {
+      if (m.state === 'disabled') {
+        disabledValue = m.value;
+        continue;
+      }
+      const prior = promoted.find((p) => p.state === m.state);
+      if (prior) {
+        notes.push(
+          `variant axis "${axis.property}": values "${prior.value}" and "${m.value}" both map to contract state "${m.state}" — "${m.value}" is not promoted, review`,
+        );
+        continue;
+      }
+      promoted.push({ value: m.value, state: m.state as PromotedState });
+    }
+    return { axis, defaultValue, promoted, disabledValue };
+  }
+  return null;
+}
+
+/** "size=large, state=default" minus the state axis → "size=large"; a name
+ *  left with no pairs falls back (standalone-component semantics). */
+function stripAxisFromName(name: string, property: string, fallback: string): string {
+  if (!name.includes('=')) return name;
+  const pairs = name
+    .split(',')
+    .map((s) => s.trim())
+    .filter((pair) => pair.split('=')[0].trim() !== property);
+  return pairs.length > 0 ? pairs.join(', ') : fallback;
+}
+
+// ---------------------------------------------------------------------------
+// Semantics inference — deterministic, bounded, NOTED. The canvas draws no
+// element/role, but a component-set NAME plus structure carries signal a
+// reviewer should not have to re-derive ("this is a freaking button"). The
+// full table, checked in order (every hit is a named note; no hit → the
+// existing "div" hedge). Zero AI involvement — a pure string/axis table.
+//
+//   name contains…            → element (all in the emitters' vocabulary)
+//   group                     → NO match (containers of the named element)
+//   button | btn              → button
+//   link                      → a
+//   tooltip                   → div + role "tooltip"
+//   heading | title + a level axis (values 1–6 / h1–h6)
+//                             → h<default> + elementByProp over the axis
+//   switch | toggle           → input + role "switch"
+//   checkbox                  → input (type attr not canvas-recoverable)
+//   textarea                  → textarea
+//   select | dropdown         → select
+//   input | textfield         → input
+//   (no name signal) + a detected interaction-state axis
+//                             → button (state axes imply interactivity)
+// ---------------------------------------------------------------------------
+
+export interface InferredSemantics {
+  element: string;
+  role?: string;
+  elementByProp?: { prop: string; map: Record<string, string> };
+  note: string;
+}
+
+export function inferSemantics(setName: string, axes: Axis[], interactive: boolean): InferredSemantics | null {
+  const review = (what: string): string =>
+    `semantics: ${what} inferred from the set name "${setName}" — inference is mechanical (name/axis table), review`;
+  // "Button Group" / "Link Group" are CONTAINERS of the named element, not
+  // the element (a root <button> holding buttons is invalid HTML) — no match.
+  if (/\bgroup\b/i.test(setName)) return null;
+  if (/\b(button|btn)\b/i.test(setName)) {
+    return { element: 'button', note: review('element "button"') };
+  }
+  if (/\blink\b/i.test(setName)) {
+    return { element: 'a', note: review('element "a" ("link")') };
+  }
+  if (/\btooltip\b/i.test(setName)) {
+    return { element: 'div', role: 'tooltip', note: review('element "div" + role "tooltip"') };
+  }
+  if (/\b(heading|title)\b/i.test(setName)) {
+    const level = axes.find(
+      (a) => /^levels?$/i.test(a.property.trim()) && !isBoolAxis(a.values) && a.values.every((v) => /^h?[1-6]$/i.test(v.trim())),
+    );
+    if (level) {
+      const heading = (v: string) => `h${v.trim().replace(/^h/i, '')}`;
+      return {
+        element: heading(level.values[0]),
+        elementByProp: {
+          prop: level.propName,
+          map: Object.fromEntries(level.values.map((v) => [camel(v), heading(v)])),
+        },
+        note: review(`heading semantics (element "${heading(level.values[0])}" + elementByProp over the "${level.property}" axis)`),
+      };
+    }
+    return null; // "title"/"heading" without a level axis is too ambiguous
+  }
+  if (/\b(switch|toggle)\b/i.test(setName)) {
+    return { element: 'input', role: 'switch', note: review('element "input" + role "switch"') };
+  }
+  if (/\bcheckbox\b/i.test(setName)) {
+    return {
+      element: 'input',
+      note: review('element "input" ("checkbox"; the type="checkbox" attribute is not canvas-recoverable — author it)'),
+    };
+  }
+  if (/\btext\s?area\b/i.test(setName)) {
+    return { element: 'textarea', note: review('element "textarea"') };
+  }
+  if (/\b(select|dropdown)\b/i.test(setName)) {
+    return { element: 'select', note: review('element "select"') };
+  }
+  if (/\b(input|text\s?field)\b/i.test(setName)) {
+    return { element: 'input', note: review('element "input"') };
+  }
+  if (interactive) {
+    return {
+      element: 'button',
+      note: `semantics: element "button" inferred STRUCTURALLY — the set carries an interaction-state variant axis (hover/pressed/… are platform states of an interactive element) and the name gave no signal; review`,
+    };
+  }
+  return null;
+}
 
 // ---------------------------------------------------------------------------
 // Cross-variant merge
@@ -746,6 +949,24 @@ function invertTextTokens(m: Merged, ctx: Ctx, where: string): Record<string, st
 
   const t = first(m.occ, (n) => n.text);
   if (!t) return tokens;
+  // UNIFORMITY GUARD (owner field case: CBDS Button, 16px large/medium vs
+  // 14px small). Style identity — named-style adoption AND the style-less
+  // (fontSize, fontStyle) definition match below — is only honest when the
+  // typography is the SAME in every variant: sampling the first variant would
+  // ship a plausible-but-WRONG constant for the others, the worst outcome.
+  // Varying typography mints per variant instead (axis-correlated values take
+  // the substituted-ref shape), and the variance is NAMED.
+  const textOcc = m.occ.filter((o) => o.node.text !== undefined);
+  const distinctSizes = [...new Set(textOcc.map((o) => o.node.text!.fontSize))];
+  const distinctWeights = [...new Set(textOcc.map((o) => o.node.text!.fontStyle ?? 'Medium'))];
+  if (distinctSizes.length > 1 || distinctWeights.length > 1) {
+    ctx.notes.push(
+      `${where}: typography varies across variants (fontSize ${distinctSizes.join('/')}, weight ${distinctWeights.join('/')}) — no single text-style identity adopted (the first variant's value would be wrong for the others); font-size ${ctx.mint ? 'minted per variant where axis-correlated' : 'not proposed without minting'}${distinctWeights.length > 1 ? '; per-variant font-weight has no vocabulary — NAMED, not proposed' : ''} (review)`,
+    );
+    reportUnbound(ctx, where, 'fontSize', t.fontSize);
+    mintObservation(ctx, tokens, where, 'font-size', 'px', numOccurrences(m, (n) => n.text?.fontSize), `${where}|fontSize`);
+    return tokens;
+  }
   const styleNames = [...new Set(m.occ.map((o) => o.node.text?.style).filter((s) => s !== undefined))];
   if (styleNames.length > 1) {
     ctx.notes.push(`${where}: text style differs across variants (${styleNames.join(', ')}) — using ${styleNames[0]}`);
@@ -781,6 +1002,13 @@ function invertTextTokens(m: Merged, ctx: Ctx, where: string): Record<string, st
     // No token-derived style identity — mint the literal size (font-family
     // and weight stay unproposed; weight inversion is style-identity work).
     mintObservation(ctx, tokens, where, 'font-size', 'px', numOccurrences(m, (n) => n.text?.fontSize));
+  }
+  if (!style && (t.fontStyle ?? 'Medium') !== 'Medium') {
+    // The weight channel must not die silently: without a style identity a
+    // non-default weight has no token to ride (STYLE-FIDELITY A21 receipt).
+    ctx.notes.push(
+      `${where}: font weight "${t.fontStyle}" has no token identity (no matching derived style) — font-weight NAMED, not proposed; review`,
+    );
   }
   return tokens;
 }
@@ -1394,7 +1622,7 @@ function flattenBaseInstances(variants: DumpNode[], ctx: Ctx): BaseInstanceCaptu
  *  "#id"-suffixed string keys) become text props. Runs AFTER the anatomy is
  *  built so discovery through drawn structure wins and promotion only fills
  *  the gaps. */
-function promoteBaseInstanceCaptures(captures: BaseInstanceCapture[], ctx: Ctx) {
+function promoteBaseInstanceCaptures(captures: BaseInstanceCapture[], ctx: Ctx, opts?: { fillOnly?: boolean }) {
   if (captures.length === 0) return;
   const instanceOf = captures[0].instanceOf;
   const keys: string[] = [];
@@ -1431,6 +1659,7 @@ function promoteBaseInstanceCaptures(captures: BaseInstanceCapture[], ctx: Ctx) 
         }
         continue;
       }
+      if (opts?.fillOnly) continue; // state-group captures never invent API
       ctx.boolProps.push({ name, property, default: value });
       ctx.notes.push(
         `prop \`${name}\`: promoted from the base instance "${instanceOf}" (BOOLEAN property "${property}", default ${value})`,
@@ -1439,6 +1668,7 @@ function promoteBaseInstanceCaptures(captures: BaseInstanceCapture[], ctx: Ctx) 
       // Non-variant properties carry "#id" suffixes — a suffixed string key
       // is a TEXT property with certainty.
       if (ctx.textProps.some((t) => t.property === property)) continue;
+      if (opts?.fillOnly) continue; // state-group captures never invent API
       registerTextProp(ctx, property, value, name);
       ctx.notes.push(
         `prop \`${name}\`: promoted from the base instance "${instanceOf}" (TEXT property "${property}", default "${value}")`,
@@ -1447,7 +1677,7 @@ function promoteBaseInstanceCaptures(captures: BaseInstanceCapture[], ctx: Ctx) 
       // Already a text prop discovered through a bound text node — the
       // capture confirms it, nothing to add.
       continue;
-    } else {
+    } else if (!opts?.fillOnly) {
       ctx.notes.push(
         `base instance "${instanceOf}": string property "${property}" = "${value}" not promoted — without a "#id" suffix it is indistinguishable from the base component's own VARIANT property; model it as an axis on the set if it belongs in the API`,
       );
@@ -1534,6 +1764,267 @@ function buildChildStub(capture: StubCapture, ctx: Ctx, fileKey: string | null):
 }
 
 // ---------------------------------------------------------------------------
+// State-axis promotion: root diffs → anatomy.root.states overrides
+// ---------------------------------------------------------------------------
+
+const paintKey = (p?: { var?: string; hex?: string; alpha?: number }): string =>
+  p === undefined ? 'none' : p.var !== undefined ? `var:${p.var}` : `hex:${paintCssHex(p)}`;
+
+/** Push a mint observation for a STATE override — same machinery as base
+ *  observations (ONE mintTokens call dedupes/claims across both), with the
+ *  part spelled `state-<state>` so minted paths read
+ *  `imported.<component>.state-hover.background-color` and never collide
+ *  with a base usage site. */
+function mintStateObservation(
+  ctx: Ctx,
+  target: Record<string, string>,
+  state: string,
+  cssProperty: string,
+  kind: 'color' | 'px' | 'number',
+  occ: Array<{ variant: string; value: string | number }>,
+  source: string,
+) {
+  if (!ctx.mint) return;
+  ctx.mint.observations.push({
+    nodePath: `${ctx.setName}:root (state ${state})`,
+    part: `state-${state}`,
+    cssProperty,
+    kind,
+    occurrences: occ.map((o) => ({
+      variant: o.variant,
+      axisValues: ctx.mint!.axisValuesByVariant.get(o.variant) ?? {},
+      value: o.value,
+    })),
+    target,
+    source,
+  });
+}
+
+/** Diff ONE promoted state's (flattened) variants against the matching
+ *  default-state variants and propose root `states` overrides: bound facts as
+ *  (substituted) refs, raw literals as mint observations, everything the
+ *  vocabulary cannot carry as a NAMED note. Channels are the root box facts
+ *  the dump carries: fill, stroke (+weight), corner radius, node opacity.
+ *  Depth-1 part fills that change are RECEIPTED (part-level state overrides
+ *  are outside the vocabulary — STYLE-FIDELITY B7); a child drawn ONLY in
+ *  the focus state carrying a stroke inverts to the focus-visible outline
+ *  pair (the ds.button focus-ring convention). */
+function proposeStateDiffs(
+  ctx: Ctx,
+  state: string,
+  group: DumpNode[],
+  baseByName: Map<string, DumpNode>,
+  baseChildNames: Set<string>,
+  baseRootTokens: Record<string, string>,
+  target: Record<string, string>,
+) {
+  const where = `${ctx.setName}:root`;
+  const missing = group.filter((v) => !baseByName.get(v.name));
+  if (missing.length > 0) {
+    ctx.notes.push(
+      `${where}: state "${state}" variant(s) ${missing.map((v) => v.name).join(', ')} have no matching default-state variant — state diffs skipped for them, review`,
+    );
+  }
+  const occs = group
+    .filter((v) => baseByName.has(v.name))
+    .map((v) => ({ variant: v.name, node: v, base: baseByName.get(v.name)! }));
+  if (occs.length === 0) return;
+
+  const paintChannel = (
+    cssProp: string,
+    paintName: string,
+    pick: (n: DumpNode) => { var?: string; hex?: string; alpha?: number } | undefined,
+  ) => {
+    if (!occs.some((o) => paintKey(pick(o.node)) !== paintKey(pick(o.base)))) return;
+    const paints = occs.map((o) => ({ variant: o.variant, paint: pick(o.node) }));
+    if (paints.some((p) => p.paint === undefined)) {
+      ctx.notes.push(
+        `${where}: ${paintName} differs in state "${state}" but is absent in some of its variant(s) — a state override cannot unset a channel; NAMED, not proposed (review)`,
+      );
+      return;
+    }
+    if (paints.every((p) => p.paint!.var !== undefined)) {
+      const u = unifyRefs(
+        paints.map((p) => ({ variant: p.variant, path: dotPath(p.paint!.var!) })),
+        ctx.axes,
+      );
+      if (u.kind === 'ref') {
+        if (u.ref !== baseRootTokens[cssProp]) target[cssProp] = u.ref;
+      } else if (u.kind === 'drift') {
+        ctx.notes.push(`${where} ${paintName} (state ${state}): ${u.detail}`);
+      }
+      return;
+    }
+    if (paints.every((p) => p.paint!.hex !== undefined)) {
+      reportUnbound(ctx, `${where} (state ${state})`, paintName, paintCssHex(paints[0].paint!));
+      mintStateObservation(
+        ctx, target, state, cssProp, 'color',
+        paints.map((p) => ({ variant: p.variant, value: paintCssHex(p.paint!) })),
+        `${where} (state ${state})|${paintName}`,
+      );
+      if (!ctx.mint) {
+        ctx.notes.push(
+          `${where}: ${paintName} changes in state "${state}" (${paintCssHex(paints[0].paint!)}) — a literal state override needs minting (mintUnbound); NAMED, not proposed`,
+        );
+      }
+      return;
+    }
+    ctx.notes.push(
+      `${where}: ${paintName} in state "${state}" mixes bound and raw paints across variants — not proposed, review`,
+    );
+  };
+
+  const numberChannel = (
+    cssProp: string,
+    fieldName: string,
+    kind: 'px' | 'number',
+    pick: (n: DumpNode) => number | undefined,
+    fallback: number,
+    boundFields: string[],
+  ) => {
+    const value = (n: DumpNode) => pick(n) ?? fallback;
+    if (!occs.some((o) => value(o.node) !== value(o.base))) return;
+    if (occs.some((o) => boundFields.some((f) => o.node.bound?.[f] !== undefined || o.base.bound?.[f] !== undefined))) {
+      ctx.notes.push(
+        `${where}: ${fieldName} differs in state "${state}" with bound variables in play — bound number-channel state inversion is not implemented; NAMED, review`,
+      );
+      return;
+    }
+    reportUnbound(ctx, `${where} (state ${state})`, fieldName, value(occs[0].node));
+    mintStateObservation(
+      ctx, target, state, cssProp, kind,
+      occs.map((o) => ({ variant: o.variant, value: value(o.node) })),
+      `${where} (state ${state})|${fieldName}`,
+    );
+    if (!ctx.mint) {
+      ctx.notes.push(
+        `${where}: ${fieldName} changes in state "${state}" — a literal state override needs minting (mintUnbound); NAMED, not proposed`,
+      );
+    }
+  };
+
+  paintChannel('background-color', 'fill', (n) => (n.type === 'TEXT' ? undefined : n.fill));
+  paintChannel('border-color', 'stroke', (n) => n.stroke);
+  numberChannel('border-width', 'strokeWeight', 'px', (n) => n.strokeWeight, 0, ['strokeWeight', 'strokeTopWeight', 'strokeRightWeight', 'strokeBottomWeight', 'strokeLeftWeight']);
+  numberChannel('border-radius', 'cornerRadius', 'px', (n) => n.cornerRadius, 0, ['topLeftRadius', 'topRightRadius', 'bottomLeftRadius', 'bottomRightRadius']);
+  numberChannel('opacity', 'opacity', 'number', (n) => n.opacity, 1, ['opacity']);
+
+  // A state-only border cannot render honestly outside focus-visible: the
+  // base element draws `border: 0` (no border-style to inherit). The
+  // focus-visible pair remaps to the outline vocabulary the generators
+  // already ship (outline-style/offset ride the focus boilerplate).
+  if (baseRootTokens['border-color'] === undefined && baseRootTokens['border-width'] === undefined) {
+    const hasBorder = target['border-color'] !== undefined || target['border-width'] !== undefined;
+    if (hasBorder && state === 'focus-visible') {
+      for (const [from, to] of [['border-color', 'outline-color'], ['border-width', 'outline-width']] as const) {
+        if (target[from] !== undefined) {
+          target[to] = target[from];
+          delete target[from];
+        }
+      }
+      remapStateMintTargets(ctx, target, state);
+      ctx.notes.push(
+        `${where}: state "${state}" adds a border the base does not draw — proposed as the focus OUTLINE pair (outline-color/outline-width; the generators' focus boilerplate carries outline-style + offset), review`,
+      );
+    } else if (hasBorder) {
+      delete target['border-color'];
+      delete target['border-width'];
+      dropStateMintTargets(ctx, target, state, ['border-color', 'border-width']);
+      ctx.notes.push(
+        `${where}: state "${state}" adds a border the base does not draw — the base rule sets border: 0 and a state override cannot add border-style; NAMED, not proposed (review)`,
+      );
+    }
+  }
+
+  // Children drawn ONLY in this state's variants (kept with their variant).
+  const extras = new Map<string, Array<{ variant: string; node: DumpNode }>>();
+  for (const o of occs) {
+    for (const c of o.node.children ?? []) {
+      if (baseChildNames.has(c.name)) continue;
+      const list = extras.get(c.name) ?? [];
+      list.push({ variant: o.variant, node: c });
+      extras.set(c.name, list);
+    }
+  }
+  for (const [childName, found] of extras) {
+    const at = `${where}/${childName}`;
+    const nodes = found.map((f) => f.node);
+    if (nodes.every((n) => n.hidden === true)) {
+      ctx.notes.push(
+        `${at}: drawn only in state "${state}" variants and hidden — design-time helper, not proposed (review)`,
+      );
+      continue;
+    }
+    const strokeOnly =
+      nodes.every((n) => n.stroke !== undefined && (n.children ?? []).length === 0 && n.text === undefined);
+    if (state === 'focus-visible' && strokeOnly) {
+      // The drawn focus ring → the outline pair (the ds.button convention).
+      if (nodes.every((n) => n.stroke!.var !== undefined)) {
+        const distinct = [...new Set(nodes.map((n) => dotPath(n.stroke!.var!)))];
+        if (distinct.length === 1) target['outline-color'] = `{${distinct[0]}}`;
+        else ctx.notes.push(`${at}: focus-ring stroke binds differently across variants (${distinct.join(' vs ')}) — not proposed, review`);
+      } else if (nodes.every((n) => n.stroke!.hex !== undefined)) {
+        mintStateObservation(
+          ctx, target, state, 'outline-color', 'color',
+          found.map((f) => ({ variant: f.variant, value: paintCssHex(f.node.stroke!) })),
+          `${at} (state ${state})|stroke`,
+        );
+        reportUnbound(ctx, `${at} (state ${state})`, 'stroke', paintCssHex(nodes[0].stroke!));
+      }
+      if (nodes.some((n) => n.strokeWeight !== undefined)) {
+        mintStateObservation(
+          ctx, target, state, 'outline-width', 'px',
+          found.map((f) => ({ variant: f.variant, value: f.node.strokeWeight ?? 0 })),
+          `${at} (state ${state})|strokeWeight`,
+        );
+        reportUnbound(ctx, `${at} (state ${state})`, 'strokeWeight', nodes[0].strokeWeight ?? 0);
+      }
+      ctx.notes.push(
+        `${at}: drawn only in the focus state and carries a stroke — inverted to focus-visible outline overrides (outline-color/outline-width); its own corner radius is not carried (the outline follows the root's shape + offset), review`,
+      );
+      continue;
+    }
+    ctx.notes.push(
+      `${at}: present only in state "${state}" variants — per-state anatomy has no contract vocabulary; NAMED, not proposed (review)`,
+    );
+  }
+
+  // Depth-1 part fills that change with the state: receipted, not proposed.
+  const partDiffs = new Set<string>();
+  for (const o of occs) {
+    for (const c of o.node.children ?? []) {
+      const bc = (o.base.children ?? []).find((x) => x.name === c.name);
+      if (bc && paintKey(c.fill) !== paintKey(bc.fill)) partDiffs.add(c.name);
+    }
+  }
+  for (const name of partDiffs) {
+    ctx.notes.push(
+      `${where}/${name}: fill differs in state "${state}" — part-level state overrides are outside the contract vocabulary (root states only, STYLE-FIDELITY B7); NAMED, not proposed (review)`,
+    );
+  }
+}
+
+/** After a border→outline remap the already-queued mint observations still
+ *  point at the old cssProperty — retarget them so the minted ref lands on
+ *  the outline key. */
+function remapStateMintTargets(ctx: Ctx, target: Record<string, string>, state: string) {
+  if (!ctx.mint) return;
+  for (const o of ctx.mint.observations) {
+    if (o.target !== target || o.part !== `state-${state}`) continue;
+    if (o.cssProperty === 'border-color') o.cssProperty = 'outline-color';
+    if (o.cssProperty === 'border-width') o.cssProperty = 'outline-width';
+  }
+}
+
+/** Drop queued mint observations for state channels judged unrepresentable. */
+function dropStateMintTargets(ctx: Ctx, target: Record<string, string>, state: string, cssProps: string[]) {
+  if (!ctx.mint) return;
+  ctx.mint.observations = ctx.mint.observations.filter(
+    (o) => !(o.target === target && o.part === `state-${state}` && cssProps.includes(o.cssProperty)),
+  );
+}
+
+// ---------------------------------------------------------------------------
 // Whole-set proposal
 // ---------------------------------------------------------------------------
 
@@ -1552,7 +2043,46 @@ export function proposeFromDump(
   },
 ): FigmaProposalResult {
   const prefix = opts.prefix ?? 'ds';
-  const variantNames = set.variants.map((v) => v.name);
+  const preNotes: string[] = [];
+
+  // Interaction-state axis promotion (see the section doc above): detect the
+  // axis over the FULL variant set, then partition — default-state variants
+  // are the base the whole pipeline runs on; each promoted state's variants
+  // (and the disabled group) are kept aside, names stripped of the state
+  // pair, for the root-diff pass after the anatomy is built.
+  let statePromo = detectStateAxis(parseAxes(set.variants.map((v) => v.name)), preNotes);
+  let baseVariants: DumpNode[] | null = null;
+  const stateGroups = new Map<PromotedState, DumpNode[]>();
+  let disabledGroup: DumpNode[] = [];
+  if (statePromo) {
+    const promo = statePromo;
+    const valueOf = (v: DumpNode) => axisValuesOf(v.name)[promo.axis.property];
+    if (set.variants.some((v) => valueOf(v) === undefined)) {
+      preNotes.push(
+        `variant axis "${promo.axis.property}": interaction-state axis detected but some variant names omit the pair — promotion unsafe, axis kept as an enum prop; review`,
+      );
+      statePromo = null;
+    } else {
+      const strip = (v: DumpNode): DumpNode => ({
+        ...(JSON.parse(JSON.stringify(v)) as DumpNode),
+        name: stripAxisFromName(v.name, promo.axis.property, set.setName),
+      });
+      baseVariants = set.variants.filter((v) => valueOf(v) === promo.defaultValue).map(strip);
+      for (const p of promo.promoted) {
+        stateGroups.set(p.state, set.variants.filter((v) => valueOf(v) === p.value).map(strip));
+      }
+      if (promo.disabledValue !== undefined) {
+        disabledGroup = set.variants.filter((v) => valueOf(v) === promo.disabledValue).map(strip);
+      }
+      preNotes.push(
+        `variant axis "${promo.axis.property}" (${promo.axis.values.join('|')}) IS the platform's interaction states, not API — promoted: the axis is NOT a prop; anatomy and base facts come from the ${baseVariants.length} default-state variant(s); ${promo.promoted
+          .map((p) => `${p.value}→${p.state}`)
+          .join(', ')} propose root state overrides${promo.disabledValue !== undefined ? `; ${promo.disabledValue}→ a \`disabled\` BOOLEAN prop + disabled state block` : ''}`,
+      );
+    }
+  }
+
+  const variantNames = (baseVariants ?? set.variants).map((v) => v.name);
   const axes = parseAxes(variantNames);
   const enumAxes = axes.filter((a) => !isBoolAxis(a.values));
   const ctx: Ctx = {
@@ -1590,13 +2120,33 @@ export function proposeFromDump(
       : undefined,
   };
 
+  ctx.notes.push(...preNotes);
+
   // Base-instance flattening runs PRE-merge, per variant, on a private clone
   // (a caller's dump is never mutated): each variant wrapping an instance of
   // the set's own base component dissolves the instance in place — its
   // styling speaks for the variant, its captured componentProperties are
-  // promoted after the anatomy is built.
-  const variants = JSON.parse(JSON.stringify(set.variants)) as DumpNode[];
+  // promoted after the anatomy is built. (With state promotion the base
+  // variants were already cloned + name-stripped above.)
+  const variants = baseVariants ?? (JSON.parse(JSON.stringify(set.variants)) as DumpNode[]);
   const captures = flattenBaseInstances(variants, ctx);
+  const stateGroupCaptures: BaseInstanceCapture[] = [];
+  if (statePromo) {
+    // The state groups get the SAME flattening before diffing — their styled
+    // facts may live on a wrapped base instance too (Eventz focus variants).
+    // Their captures do NOT promote (the base group owns promotion) and
+    // their names must not pollute ctx.flattenedVariants (same stripped
+    // names as base variants), so a scratch context absorbs both.
+    const scratch: Ctx = { ...ctx, notes: [], flattenedVariants: new Set() };
+    for (const group of [...stateGroups.values(), disabledGroup]) {
+      stateGroupCaptures.push(...flattenBaseInstances(group, scratch));
+    }
+    if (stateGroupCaptures.length > 0) {
+      ctx.notes.push(
+        `${set.setName}: ${stateGroupCaptures.length} state-axis variant(s) wrapped an instance of the set's own base component — flattened before state diffing (same rule as the default variants); their captured componentProperties only FILL defaults of props the base anatomy already discovered`,
+      );
+    }
+  }
 
   const merged = mergeOcc(
     'root',
@@ -1647,7 +2197,42 @@ export function proposeFromDump(
 
   // Promotion from the flattened base instance(s) — after the anatomy, so
   // structure discovered from drawn nodes wins and promotion fills the gaps.
+  // State-group captures only FILL defaults of already-discovered props
+  // (fillOnly) — a property observed only in state variants is design-time
+  // state, never invented API.
   promoteBaseInstanceCaptures(captures, ctx);
+  promoteBaseInstanceCaptures(stateGroupCaptures, ctx, { fillOnly: true });
+
+  // State-axis promotion: diff each promoted state's variants against the
+  // base and collect root `states` overrides (bound → refs now; raw → mint
+  // observations resolved in the mint pass below, writing straight into
+  // these records). Attached to the contract AFTER the mint pass.
+  const stateOverrides: Record<string, Record<string, string>> = {};
+  if (statePromo) {
+    const baseByName = new Map(variants.map((v) => [v.name, v]));
+    const baseChildNames = new Set<string>();
+    for (const v of variants) for (const c of v.children ?? []) baseChildNames.add(c.name);
+    const groups: Array<[string, DumpNode[]]> = [...stateGroups.entries()];
+    if (disabledGroup.length > 0) groups.push(['disabled', disabledGroup]);
+    for (const [state, group] of groups) {
+      const target = (stateOverrides[state] ??= {});
+      proposeStateDiffs(ctx, state, group, baseByName, baseChildNames, rootTokens, target);
+    }
+    // The disabled axis value → a REAL boolean prop (native attribute on
+    // interactive elements), bound the forward generator's way.
+    if (statePromo.disabledValue !== undefined) {
+      if (ctx.boolProps.some((b) => b.name === 'disabled')) {
+        ctx.notes.push(
+          `prop \`disabled\`: axis value "${statePromo.axis.property}=${statePromo.disabledValue}" maps to the disabled state but a \`disabled\` boolean already exists — not re-promoted, review`,
+        );
+      } else {
+        ctx.boolProps.push({ name: 'disabled', property: 'Disabled', default: false });
+        ctx.notes.push(
+          `prop \`disabled\`: promoted from axis value "${statePromo.axis.property}=${statePromo.disabledValue}" — a BOOLEAN prop (native disabled attribute on interactive elements), bound to design property "Disabled" (the forward generator's spelling; the imported set spelled it as an axis value — rename consequence documented here)`,
+        );
+      }
+    }
+  }
 
   // Default-slot judgment: the first non-optional slot in tree order is the
   // component's main content — name `children` (the code-side default slot).
@@ -1737,6 +2322,17 @@ export function proposeFromDump(
     });
   }
 
+  // Text-prop convention (NOTE-ONLY, extract/reconcile keeps prop-name
+  // fidelity to the design property): repo contracts bind a component's main
+  // label to the code prop "children" (ds.button). Renaming mechanically
+  // would break the design-property round trip, so the convention is named
+  // for the reviewer instead.
+  if (ctx.textProps.length === 1 && ctx.textProps[0].name !== 'children') {
+    ctx.notes.push(
+      `prop \`${ctx.textProps[0].name}\`: the single text prop carries the component's main content — repo contracts bind main content to code prop "children" (ds.button convention); adopt by setting bindings.code.prop to "children" when this is the label (note-only, nothing renamed mechanically)`,
+    );
+  }
+
   // Identifier sanitization at PROPOSAL, not refusal at emit: the component
   // name must be PascalCase (it becomes the export and its file names) and
   // every prop/slot name a legal identifier. Original spellings survive in
@@ -1756,14 +2352,24 @@ export function proposeFromDump(
     }
   }
 
+  // Deterministic semantics inference (name/axis table — zero AI, see
+  // inferSemantics). A detected interaction-state axis is the structural
+  // corroboration that the component is interactive.
+  const inferred = inferSemantics(set.setName, axes, statePromo !== null);
   const contract: Record<string, unknown> = {
     $schema: './contract.schema.json',
     id: `${prefix}.${kebab(set.setName)}`,
     name: componentName,
     version: '0.1.0',
     status: 'draft',
-    description: `PROPOSED contract extracted from the design canvas (extract/figma dump v1) — API, anatomy, and token bindings inverted from the drawn structure. Semantics, a11y, events, and slot accepts are not canvas-recoverable; review before adoption.`,
-    semantics: { element: 'div' },
+    description: `PROPOSED contract extracted from the design canvas (extract/figma dump v1) — API, anatomy, and token bindings inverted from the drawn structure. Semantics beyond the name/axis inference table, a11y, events, and slot accepts are not canvas-recoverable; review before adoption.`,
+    semantics: inferred
+      ? {
+          element: inferred.element,
+          ...(inferred.role ? { role: inferred.role } : {}),
+          ...(inferred.elementByProp ? { elementByProp: inferred.elementByProp } : {}),
+        }
+      : { element: 'div' },
     props,
     states: [],
     anatomy: { root },
@@ -1815,6 +2421,57 @@ export function proposeFromDump(
     mintedTokens = { tree: minted.tree, count: minted.count, entries: minted.entries };
   }
 
+  // State-axis promotion, final attach — AFTER the mint pass so minted state
+  // refs have landed in their records. States whose overrides all refused
+  // are dropped BY NAME; the survivors become the contract's `states` + root
+  // overrides, and figmaStatePreviews opts in when its own refusal rules
+  // hold (every declared state has overrides — guaranteed here; overrides
+  // substitute ≤1 enum prop; the "State" design property is free).
+  if (statePromo) {
+    const ORDER = ['hover', 'active', 'focus-visible', 'disabled'];
+    const declared = ORDER.filter((s) => stateOverrides[s] !== undefined);
+    const present = declared.filter((s) => Object.keys(stateOverrides[s]).length > 0);
+    for (const s of declared) {
+      if (!present.includes(s)) {
+        ctx.notes.push(
+          `state "${s}": promoted from the axis but no root override was recoverable — state not declared (its variants render identically to default at the root, or every channel refused by name above)`,
+        );
+      }
+    }
+    if (present.length > 0) {
+      root.states = Object.fromEntries(present.map((s) => [s, stateOverrides[s]]));
+      contract.states = present;
+      const enumNames = new Set(
+        props.filter((p) => typeof p.type === 'object' && 'enum' in (p.type as object)).map((p) => p.name as string),
+      );
+      const substProps = new Set<string>();
+      for (const s of present) {
+        for (const ref of Object.values(stateOverrides[s])) {
+          for (const m of ref.matchAll(/\{([a-z][\w-]*)\}/g)) {
+            if (enumNames.has(m[1])) substProps.add(m[1]);
+          }
+        }
+      }
+      const statePropertyTaken = props.some(
+        (p) => (p.bindings as { figma?: { property?: string } }).figma?.property === STATE_PREVIEW_PROPERTY,
+      );
+      if (substProps.size <= 1 && !statePropertyTaken) {
+        contract.figmaStatePreviews = true;
+        ctx.notes.push(
+          `figmaStatePreviews: true — regenerating the canvas draws the promoted states as a "${STATE_PREVIEW_PROPERTY}" preview axis (values ${['Default', ...present.filter((s) => s !== 'disabled').map(statePreviewLabel)].join('|')}, the shared spelling rules) — a RENAME relative to the imported axis "${statePromo.axis.property}" (${statePromo.axis.values.join('|')}); the contract vocabulary carries no custom state-axis spellings, so the original spelling lives in this note and in the anchors' set`,
+        );
+      } else {
+        ctx.notes.push(
+          `figmaStatePreviews NOT set: ${statePropertyTaken ? `a prop already binds the reserved design property "${STATE_PREVIEW_PROPERTY}"` : `state overrides substitute ${substProps.size} enum props (${[...substProps].join(', ')}) — previews multiply exactly ONE primary axis`} — canvas state previews refused by name, review`,
+        );
+      }
+    } else {
+      ctx.notes.push(
+        `state axis promoted but NO state overrides were recoverable — the contract declares no states; the axis still does not become a prop (its values are platform states), review the notes above`,
+      );
+    }
+  }
+
   // Auto-proposed child stubs (see buildChildStub) — each must parse too.
   const childStubs = [...ctx.stubs.values()].map((capture) =>
     buildChildStub(capture, ctx, opts.fileKey ?? null),
@@ -1823,7 +2480,11 @@ export function proposeFromDump(
   // Refuse to emit an unusable proposal.
   ContractSchema.parse(contract);
   for (const stub of childStubs) ContractSchema.parse(stub);
-  ctx.notes.unshift(`semantics.element defaulted to "div" — element/role/ARIA are not drawn on the canvas; set the real host element`);
+  if (inferred) {
+    ctx.notes.unshift(inferred.note);
+  } else {
+    ctx.notes.unshift(`semantics.element defaulted to "div" — element/role/ARIA are not drawn on the canvas and the name/axis inference table matched nothing; set the real host element`);
+  }
   for (const u of ctx.unbound) {
     ctx.notes.push(
       `UNBOUND ${u.nodePath} ${u.property} = ${u.value} — no token invented; nearest tokens by value: ${

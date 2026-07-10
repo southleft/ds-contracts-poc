@@ -1,6 +1,6 @@
 {
-  "passed": 60,
-  "total": 60,
+  "passed": 63,
+  "total": 63,
   "results": [
     {
       "id": "refuse-unknown-token-reference",
@@ -300,6 +300,21 @@
     {
       "id": "generator-refuses-component-ref-cycles",
       "claim": "C2-refusal",
+      "pass": true
+    },
+    {
+      "id": "design-semantics-element-inference",
+      "claim": "C5-extraction",
+      "pass": true
+    },
+    {
+      "id": "design-state-axis-promotion-cbds-replay",
+      "claim": "C5-extraction",
+      "pass": true
+    },
+    {
+      "id": "design-child-stubs-prevent-scope-refusals",
+      "claim": "C5-extraction",
       "pass": true
     }
   ]

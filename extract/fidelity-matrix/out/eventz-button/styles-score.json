@@ -4,8 +4,8 @@
   "factCells": 155,
   "tally": {
     "BOUND": 0,
-    "MINTED": 143,
-    "MISSING": 12,
+    "MINTED": 135,
+    "MISSING": 20,
     "mismatched": 0
   },
   "rows": [
@@ -13,7 +13,7 @@
       "part": "Focus ring",
       "fact": "border-color",
       "verdict": "MINTED",
-      "token": "{imported.button.focus-ring.border-color}",
+      "token": "{imported.button.state-focus-visible.outline-color}",
       "truth": "#2d6079",
       "resolved": "#2d6079",
       "valueOk": true,
@@ -31,11 +31,8 @@
     {
       "part": "Focus ring",
       "fact": "border-radius",
-      "verdict": "MINTED",
-      "token": "{imported.button.focus-ring.border-radius}",
+      "verdict": "MISSING",
       "truth": "11px",
-      "resolved": "11px",
-      "valueOk": true,
       "variants": [
         "variant=primary, state=focus, isDisabled=false",
         "variant=knockout, state=focus, isDisabled=false",
@@ -51,7 +48,7 @@
       "part": "Focus ring",
       "fact": "border-width",
       "verdict": "MINTED",
-      "token": "{imported.button.focus-ring.border-width}",
+      "token": "{imported.button.state-focus-visible.outline-width}",
       "truth": "2px",
       "resolved": "2px",
       "valueOk": true,
@@ -134,59 +131,67 @@
       "part": "root",
       "fact": "background-color",
       "verdict": "MINTED",
-      "token": "{imported.button.root.background-color.primary.default}",
+      "token": "{imported.button.root.background-color.primary}",
       "truth": "#3d7a95",
       "resolved": "#3d7a95",
       "valueOk": true,
       "variants": [
         "variant=primary, state=default, isDisabled=false",
-        "variant=primary, state=default, isDisabled=true"
+        "variant=primary, state=default, isDisabled=true",
+        "variant=primary, state=focus, isDisabled=false",
+        "variant=primary, state=focus, isDisabled=true"
       ]
     },
     {
       "part": "root",
       "fact": "background-color",
       "verdict": "MINTED",
-      "token": "{imported.button.root.background-color.knockout.default}",
+      "token": "{imported.button.root.background-color.knockout}",
       "truth": "#f7f8f7",
       "resolved": "#f7f8f7",
       "valueOk": true,
       "variants": [
         "variant=knockout, state=default, isDisabled=false",
-        "variant=knockout, state=default, isDisabled=true"
+        "variant=knockout, state=default, isDisabled=true",
+        "variant=knockout, state=focus, isDisabled=false",
+        "variant=knockout, state=focus, isDisabled=true"
       ]
     },
     {
       "part": "root",
       "fact": "background-color",
       "verdict": "MINTED",
-      "token": "{imported.button.root.background-color.secondary.default}",
+      "token": "{imported.button.root.background-color.secondary}",
       "truth": "#0000020d",
       "resolved": "#0000020d",
       "valueOk": true,
       "variants": [
         "variant=secondary, state=default, isDisabled=false",
-        "variant=secondary, state=default, isDisabled=true"
+        "variant=secondary, state=default, isDisabled=true",
+        "variant=secondary, state=focus, isDisabled=false",
+        "variant=secondary, state=focus, isDisabled=true"
       ]
     },
     {
       "part": "root",
       "fact": "background-color",
       "verdict": "MINTED",
-      "token": "{imported.button.root.background-color.bare.default}",
+      "token": "{imported.button.root.background-color.bare}",
       "truth": "#00000200",
       "resolved": "#00000200",
       "valueOk": true,
       "variants": [
         "variant=bare, state=default, isDisabled=false",
-        "variant=bare, state=default, isDisabled=true"
+        "variant=bare, state=default, isDisabled=true",
+        "variant=bare, state=focus, isDisabled=false",
+        "variant=bare, state=focus, isDisabled=true"
       ]
     },
     {
       "part": "root",
       "fact": "background-color",
       "verdict": "MINTED",
-      "token": "{imported.button.root.background-color.primary.hover}",
+      "token": "{imported.button.state-hover.background-color.primary}",
       "truth": "#2d6079",
       "resolved": "#2d6079",
       "valueOk": true,
@@ -198,7 +203,7 @@
       "part": "root",
       "fact": "background-color",
       "verdict": "MINTED",
-      "token": "{imported.button.root.background-color.knockout.hover}",
+      "token": "{imported.button.state-hover.background-color.knockout}",
       "truth": "#c6c7c6",
       "resolved": "#c6c7c6",
       "valueOk": true,
@@ -210,7 +215,7 @@
       "part": "root",
       "fact": "background-color",
       "verdict": "MINTED",
-      "token": "{imported.button.root.background-color.secondary.hover}",
+      "token": "{imported.button.state-hover.background-color.secondary}",
       "truth": "#00000233",
       "resolved": "#00000233",
       "valueOk": true,
@@ -222,7 +227,7 @@
       "part": "root",
       "fact": "background-color",
       "verdict": "MINTED",
-      "token": "{imported.button.root.background-color.bare.hover}",
+      "token": "{imported.button.state-hover.background-color.bare}",
       "truth": "#00000233",
       "resolved": "#00000233",
       "valueOk": true,
@@ -234,7 +239,7 @@
       "part": "root",
       "fact": "background-color",
       "verdict": "MINTED",
-      "token": "{imported.button.root.background-color.primary.active}",
+      "token": "{imported.button.state-active.background-color.primary}",
       "truth": "#2d6079",
       "resolved": "#2d6079",
       "valueOk": true,
@@ -246,7 +251,7 @@
       "part": "root",
       "fact": "background-color",
       "verdict": "MINTED",
-      "token": "{imported.button.root.background-color.knockout.active}",
+      "token": "{imported.button.state-active.background-color.knockout}",
       "truth": "#f7f8f7",
       "resolved": "#f7f8f7",
       "valueOk": true,
@@ -258,7 +263,7 @@
       "part": "root",
       "fact": "background-color",
       "verdict": "MINTED",
-      "token": "{imported.button.root.background-color.secondary.active}",
+      "token": "{imported.button.state-active.background-color.secondary}",
       "truth": "#0000020d",
       "resolved": "#0000020d",
       "valueOk": true,
@@ -270,64 +275,12 @@
       "part": "root",
       "fact": "background-color",
       "verdict": "MINTED",
-      "token": "{imported.button.root.background-color.bare.active}",
+      "token": "{imported.button.state-active.background-color.bare}",
       "truth": "#00000200",
       "resolved": "#00000200",
       "valueOk": true,
       "variants": [
         "variant=bare, state=active, isDisabled=false"
-      ]
-    },
-    {
-      "part": "root",
-      "fact": "background-color",
-      "verdict": "MINTED",
-      "token": "{imported.button.root.background-color.primary.focus}",
-      "truth": "#3d7a95",
-      "resolved": "#3d7a95",
-      "valueOk": true,
-      "variants": [
-        "variant=primary, state=focus, isDisabled=false",
-        "variant=primary, state=focus, isDisabled=true"
-      ]
-    },
-    {
-      "part": "root",
-      "fact": "background-color",
-      "verdict": "MINTED",
-      "token": "{imported.button.root.background-color.knockout.focus}",
-      "truth": "#f7f8f7",
-      "resolved": "#f7f8f7",
-      "valueOk": true,
-      "variants": [
-        "variant=knockout, state=focus, isDisabled=false",
-        "variant=knockout, state=focus, isDisabled=true"
-      ]
-    },
-    {
-      "part": "root",
-      "fact": "background-color",
-      "verdict": "MINTED",
-      "token": "{imported.button.root.background-color.secondary.focus}",
-      "truth": "#0000020d",
-      "resolved": "#0000020d",
-      "valueOk": true,
-      "variants": [
-        "variant=secondary, state=focus, isDisabled=false",
-        "variant=secondary, state=focus, isDisabled=true"
-      ]
-    },
-    {
-      "part": "root",
-      "fact": "background-color",
-      "verdict": "MINTED",
-      "token": "{imported.button.root.background-color.bare.focus}",
-      "truth": "#00000200",
-      "resolved": "#00000200",
-      "valueOk": true,
-      "variants": [
-        "variant=bare, state=focus, isDisabled=false",
-        "variant=bare, state=focus, isDisabled=true"
       ]
     },
     {

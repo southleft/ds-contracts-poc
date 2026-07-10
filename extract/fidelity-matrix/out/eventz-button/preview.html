@@ -293,22 +293,10 @@
 </style>
 <style>/* Minted provisional tokens (imported.*) — literal fidelity. */
 :root {
-  --imported-button-root-background-color-primary-default: #3d7a95;
-  --imported-button-root-background-color-primary-hover: #2d6079;
-  --imported-button-root-background-color-primary-active: #2d6079;
-  --imported-button-root-background-color-primary-focus: #3d7a95;
-  --imported-button-root-background-color-knockout-default: #f7f8f7;
-  --imported-button-root-background-color-knockout-hover: #c6c7c6;
-  --imported-button-root-background-color-knockout-active: #f7f8f7;
-  --imported-button-root-background-color-knockout-focus: #f7f8f7;
-  --imported-button-root-background-color-secondary-default: #0000020d;
-  --imported-button-root-background-color-secondary-hover: #00000233;
-  --imported-button-root-background-color-secondary-active: #0000020d;
-  --imported-button-root-background-color-secondary-focus: #0000020d;
-  --imported-button-root-background-color-bare-default: #00000200;
-  --imported-button-root-background-color-bare-hover: #00000233;
-  --imported-button-root-background-color-bare-active: #00000200;
-  --imported-button-root-background-color-bare-focus: #00000200;
+  --imported-button-root-background-color-primary: #3d7a95;
+  --imported-button-root-background-color-knockout: #f7f8f7;
+  --imported-button-root-background-color-secondary: #0000020d;
+  --imported-button-root-background-color-bare: #00000200;
   --imported-button-root-gap: 4px;
   --imported-button-root-padding-inline: 12px;
   --imported-button-root-padding-block: 6px;
@@ -317,14 +305,21 @@
   --imported-button-root-border-width-knockout: 0px;
   --imported-button-root-border-width-secondary: 1px;
   --imported-button-root-border-width-bare: 0px;
-  --imported-button-focus-ring-border-color: #2d6079;
-  --imported-button-focus-ring-border-radius: 11px;
-  --imported-button-focus-ring-border-width: 2px;
   --imported-button-label-color-primary: #ffffff;
   --imported-button-label-color-knockout: #252729;
   --imported-button-label-color-secondary: #252729;
   --imported-button-label-color-bare: #252729;
   --imported-button-label-font-size: 14px;
+  --imported-button-state-hover-background-color-primary: #2d6079;
+  --imported-button-state-hover-background-color-knockout: #c6c7c6;
+  --imported-button-state-hover-background-color-secondary: #00000233;
+  --imported-button-state-hover-background-color-bare: #00000233;
+  --imported-button-state-active-background-color-primary: #2d6079;
+  --imported-button-state-active-background-color-knockout: #f7f8f7;
+  --imported-button-state-active-background-color-secondary: #0000020d;
+  --imported-button-state-active-background-color-bare: #00000200;
+  --imported-button-state-focus-visible-outline-color: #2d6079;
+  --imported-button-state-focus-visible-outline-width: 2px;
 }</style>
 <style>body { margin: 0; padding: 20px; background: #f5f5f5; color: #1a1a1a; font-family: var(--font-family-sans, system-ui, sans-serif); }</style>
 <style>/* Button — from ds.button v0.1.0 (core/emit-html.ts) */
@@ -334,101 +329,80 @@
   align-items: center;
   justify-content: center;
   border-style: solid;
+  cursor: pointer;
   gap: var(--imported-button-root-gap);
   padding-inline: var(--imported-button-root-padding-inline);
   padding-block: var(--imported-button-root-padding-block);
   border-radius: var(--imported-button-root-border-radius);
 }
 
+.button:focus-visible {
+  outline-style: solid;
+  outline-offset: 2px;
+}
+
 .button--variant-primary {
+  background-color: var(--imported-button-root-background-color-primary);
   border-width: var(--imported-button-root-border-width-primary);
 }
 
 .button--variant-knockout {
+  background-color: var(--imported-button-root-background-color-knockout);
   border-width: var(--imported-button-root-border-width-knockout);
 }
 
 .button--variant-secondary {
+  background-color: var(--imported-button-root-background-color-secondary);
   border-width: var(--imported-button-root-border-width-secondary);
 }
 
 .button--variant-bare {
+  background-color: var(--imported-button-root-background-color-bare);
   border-width: var(--imported-button-root-border-width-bare);
 }
 
-.button--variant-primary.button--state-default {
-  background-color: var(--imported-button-root-background-color-primary-default);
+.button--variant-primary:hover:not(:disabled) {
+  background-color: var(--imported-button-state-hover-background-color-primary);
 }
 
-.button--variant-primary.button--state-hover {
-  background-color: var(--imported-button-root-background-color-primary-hover);
+.button--variant-knockout:hover:not(:disabled) {
+  background-color: var(--imported-button-state-hover-background-color-knockout);
 }
 
-.button--variant-primary.button--state-active {
-  background-color: var(--imported-button-root-background-color-primary-active);
+.button--variant-secondary:hover:not(:disabled) {
+  background-color: var(--imported-button-state-hover-background-color-secondary);
 }
 
-.button--variant-primary.button--state-focus {
-  background-color: var(--imported-button-root-background-color-primary-focus);
+.button--variant-bare:hover:not(:disabled) {
+  background-color: var(--imported-button-state-hover-background-color-bare);
 }
 
-.button--variant-knockout.button--state-default {
-  background-color: var(--imported-button-root-background-color-knockout-default);
+.button--variant-primary:active:not(:disabled) {
+  background-color: var(--imported-button-state-active-background-color-primary);
 }
 
-.button--variant-knockout.button--state-hover {
-  background-color: var(--imported-button-root-background-color-knockout-hover);
+.button--variant-knockout:active:not(:disabled) {
+  background-color: var(--imported-button-state-active-background-color-knockout);
 }
 
-.button--variant-knockout.button--state-active {
-  background-color: var(--imported-button-root-background-color-knockout-active);
+.button--variant-secondary:active:not(:disabled) {
+  background-color: var(--imported-button-state-active-background-color-secondary);
 }
 
-.button--variant-knockout.button--state-focus {
-  background-color: var(--imported-button-root-background-color-knockout-focus);
+.button--variant-bare:active:not(:disabled) {
+  background-color: var(--imported-button-state-active-background-color-bare);
 }
 
-.button--variant-secondary.button--state-default {
-  background-color: var(--imported-button-root-background-color-secondary-default);
+.button:focus-visible {
+  outline-color: var(--imported-button-state-focus-visible-outline-color);
 }
 
-.button--variant-secondary.button--state-hover {
-  background-color: var(--imported-button-root-background-color-secondary-hover);
-}
-
-.button--variant-secondary.button--state-active {
-  background-color: var(--imported-button-root-background-color-secondary-active);
-}
-
-.button--variant-secondary.button--state-focus {
-  background-color: var(--imported-button-root-background-color-secondary-focus);
-}
-
-.button--variant-bare.button--state-default {
-  background-color: var(--imported-button-root-background-color-bare-default);
-}
-
-.button--variant-bare.button--state-hover {
-  background-color: var(--imported-button-root-background-color-bare-hover);
-}
-
-.button--variant-bare.button--state-active {
-  background-color: var(--imported-button-root-background-color-bare-active);
-}
-
-.button--variant-bare.button--state-focus {
-  background-color: var(--imported-button-root-background-color-bare-focus);
+.button:focus-visible {
+  outline-width: var(--imported-button-state-focus-visible-outline-width);
 }
 
 .button[data-is-disabled] {
   opacity: 0.4;
-}
-
-.button__focusRing {
-  border-color: var(--imported-button-focus-ring-border-color);
-  border-radius: var(--imported-button-focus-ring-border-radius);
-  border-width: var(--imported-button-focus-ring-border-width);
-  border-style: solid;
 }
 
 .button__startIcon {
@@ -474,7 +448,7 @@
 <section class="showcase showcase--button">
   <div class="showcase__item">
     <p class="showcase__label">default</p>
-    <div class="button button--variant-primary button--state-default" data-has-start-icon="true" data-has-end-icon="true">
+    <button class="button button--variant-primary" data-has-start-icon="true" data-has-end-icon="true">
       <div class="button__startIcon">
         <span class="button__slot-placeholder">[startIcon slot]</span>
       </div>
@@ -482,11 +456,11 @@
       <div class="button__endIcon">
         <span class="button__slot-placeholder">[endIcon slot]</span>
       </div>
-    </div>
+    </button>
   </div>
   <div class="showcase__item">
     <p class="showcase__label">variant=knockout</p>
-    <div class="button button--variant-knockout button--state-default" data-has-start-icon="true" data-has-end-icon="true">
+    <button class="button button--variant-knockout" data-has-start-icon="true" data-has-end-icon="true">
       <div class="button__startIcon">
         <span class="button__slot-placeholder">[startIcon slot]</span>
       </div>
@@ -494,11 +468,11 @@
       <div class="button__endIcon">
         <span class="button__slot-placeholder">[endIcon slot]</span>
       </div>
-    </div>
+    </button>
   </div>
   <div class="showcase__item">
     <p class="showcase__label">variant=secondary</p>
-    <div class="button button--variant-secondary button--state-default" data-has-start-icon="true" data-has-end-icon="true">
+    <button class="button button--variant-secondary" data-has-start-icon="true" data-has-end-icon="true">
       <div class="button__startIcon">
         <span class="button__slot-placeholder">[startIcon slot]</span>
       </div>
@@ -506,11 +480,11 @@
       <div class="button__endIcon">
         <span class="button__slot-placeholder">[endIcon slot]</span>
       </div>
-    </div>
+    </button>
   </div>
   <div class="showcase__item">
     <p class="showcase__label">variant=bare</p>
-    <div class="button button--variant-bare button--state-default" data-has-start-icon="true" data-has-end-icon="true">
+    <button class="button button--variant-bare" data-has-start-icon="true" data-has-end-icon="true">
       <div class="button__startIcon">
         <span class="button__slot-placeholder">[startIcon slot]</span>
       </div>
@@ -518,48 +492,11 @@
       <div class="button__endIcon">
         <span class="button__slot-placeholder">[endIcon slot]</span>
       </div>
-    </div>
-  </div>
-  <div class="showcase__item">
-    <p class="showcase__label">state=hover</p>
-    <div class="button button--variant-primary button--state-hover" data-has-start-icon="true" data-has-end-icon="true">
-      <div class="button__startIcon">
-        <span class="button__slot-placeholder">[startIcon slot]</span>
-      </div>
-      <span class="button__Label">Label</span>
-      <div class="button__endIcon">
-        <span class="button__slot-placeholder">[endIcon slot]</span>
-      </div>
-    </div>
-  </div>
-  <div class="showcase__item">
-    <p class="showcase__label">state=active</p>
-    <div class="button button--variant-primary button--state-active" data-has-start-icon="true" data-has-end-icon="true">
-      <div class="button__startIcon">
-        <span class="button__slot-placeholder">[startIcon slot]</span>
-      </div>
-      <span class="button__Label">Label</span>
-      <div class="button__endIcon">
-        <span class="button__slot-placeholder">[endIcon slot]</span>
-      </div>
-    </div>
-  </div>
-  <div class="showcase__item">
-    <p class="showcase__label">state=focus</p>
-    <div class="button button--variant-primary button--state-focus" data-has-start-icon="true" data-has-end-icon="true">
-      <div class="button__focusRing"></div>
-      <div class="button__startIcon">
-        <span class="button__slot-placeholder">[startIcon slot]</span>
-      </div>
-      <span class="button__Label">Label</span>
-      <div class="button__endIcon">
-        <span class="button__slot-placeholder">[endIcon slot]</span>
-      </div>
-    </div>
+    </button>
   </div>
   <div class="showcase__item">
     <p class="showcase__label">isDisabled=true</p>
-    <div class="button button--variant-primary button--state-default" data-is-disabled="true" data-has-start-icon="true" data-has-end-icon="true">
+    <button class="button button--variant-primary" data-is-disabled="true" data-has-start-icon="true" data-has-end-icon="true">
       <div class="button__startIcon">
         <span class="button__slot-placeholder">[startIcon slot]</span>
       </div>
@@ -567,7 +504,7 @@
       <div class="button__endIcon">
         <span class="button__slot-placeholder">[endIcon slot]</span>
       </div>
-    </div>
+    </button>
   </div>
 </section>
 

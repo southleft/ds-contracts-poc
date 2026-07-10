@@ -4,9 +4,9 @@
   "name": "ButtonBrandPrimary",
   "version": "0.1.0",
   "status": "draft",
-  "description": "PROPOSED contract extracted from the design canvas (extract/figma dump v1) — API, anatomy, and token bindings inverted from the drawn structure. Semantics, a11y, events, and slot accepts are not canvas-recoverable; review before adoption.",
+  "description": "PROPOSED contract extracted from the design canvas (extract/figma dump v1) — API, anatomy, and token bindings inverted from the drawn structure. Semantics beyond the name/axis inference table, a11y, events, and slot accepts are not canvas-recoverable; review before adoption.",
   "semantics": {
-    "element": "div"
+    "element": "button"
   },
   "props": [
     {
@@ -31,35 +31,6 @@
         },
         "code": {
           "prop": "size"
-        }
-      }
-    },
-    {
-      "name": "state",
-      "type": {
-        "enum": [
-          "default",
-          "hover",
-          "focus",
-          "pressed",
-          "disabled"
-        ]
-      },
-      "default": "default",
-      "bindings": {
-        "figma": {
-          "kind": "VARIANT",
-          "property": "state",
-          "values": {
-            "default": "default",
-            "hover": "hover",
-            "focus": "focus",
-            "pressed": "pressed",
-            "disabled": "disabled"
-          }
-        },
-        "code": {
-          "prop": "state"
         }
       }
     },
@@ -104,17 +75,52 @@
           "prop": "iconRight"
         }
       }
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Disabled"
+        },
+        "code": {
+          "prop": "disabled"
+        }
+      }
     }
   ],
-  "states": [],
+  "states": [
+    "hover",
+    "active",
+    "focus-visible",
+    "disabled"
+  ],
+  "figmaStatePreviews": true,
   "anatomy": {
     "root": {
       "tokens": {
-        "background-color": "{imported.button-brand-primary.root.background-color.{state}}",
+        "background-color": "{imported.button-brand-primary.root.background-color}",
         "gap": "{imported.shared.size-8}",
         "padding-inline": "{imported.button-brand-primary.root.padding-inline.{size}}",
         "padding-block": "{imported.shared.size-8}",
         "border-radius": "{imported.shared.size-8}"
+      },
+      "states": {
+        "hover": {
+          "background-color": "{imported.button-brand-primary.state-hover.background-color}"
+        },
+        "active": {
+          "background-color": "{imported.button-brand-primary.state-active.background-color}"
+        },
+        "focus-visible": {
+          "outline-color": "{imported.button-brand-primary.state-focus-visible.outline-color}",
+          "outline-width": "{imported.button-brand-primary.state-focus-visible.outline-width}"
+        },
+        "disabled": {
+          "background-color": "{imported.button-brand-primary.state-disabled.background-color}"
+        }
       },
       "parts": {
         "Icon": {
@@ -130,9 +136,8 @@
         },
         "Button": {
           "tokens": {
-            "font-size": "{font.title.size}",
-            "font-weight": "{font.title.weight}",
-            "color": "{imported.button-brand-primary.button.color.{state}}"
+            "color": "{imported.button-brand-primary.button.color}",
+            "font-size": "{imported.button-brand-primary.button.font-size.{size}}"
           },
           "content": {
             "prop": "text"
@@ -147,28 +152,6 @@
           },
           "visibleWhen": {
             "prop": "iconRight"
-          }
-        },
-        "Tooltip": {
-          "tokens": {
-            "color": "{imported.button-brand-primary.tooltip.color}",
-            "font-size": "{imported.button-brand-primary.tooltip.font-size}"
-          },
-          "text": "This action is currently unavailable",
-          "visibleWhen": {
-            "prop": "state",
-            "equals": "disabled"
-          }
-        },
-        "focusRing": {
-          "tokens": {
-            "border-color": "{imported.button-brand-primary.focus-ring.border-color}",
-            "border-radius": "{imported.button-brand-primary.focus-ring.border-radius}",
-            "border-width": "{imported.button-brand-primary.focus-ring.border-width}"
-          },
-          "visibleWhen": {
-            "prop": "state",
-            "equals": "focus"
           }
         }
       }

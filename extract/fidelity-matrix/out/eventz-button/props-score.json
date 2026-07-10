@@ -57,8 +57,10 @@
       "prop": "state",
       "truthType": "VARIANT",
       "verdict": "MATCH",
-      "reasons": [],
-      "proposedAs": "state: enum"
+      "reasons": [
+        "interaction-state axis PROMOTED, not a prop: values land as contract states [hover, active, focus-visible]; figmaStatePreviews round-trips the axis to the canvas"
+      ],
+      "proposedAs": "states [hover, active, focus-visible]"
     },
     {
       "prop": "isDisabled",

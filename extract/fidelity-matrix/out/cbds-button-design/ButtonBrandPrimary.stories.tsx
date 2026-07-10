@@ -11,21 +11,21 @@ const meta = {
   component: ButtonBrandPrimary,
   tags: ['autodocs'],
   parameters: {
-    docs: { description: { component: "PROPOSED contract extracted from the design canvas (extract/figma dump v1) — API, anatomy, and token bindings inverted from the drawn structure. Semantics, a11y, events, and slot accepts are not canvas-recoverable; review before adoption." } },
+    docs: { description: { component: "PROPOSED contract extracted from the design canvas (extract/figma dump v1) — API, anatomy, and token bindings inverted from the drawn structure. Semantics beyond the name/axis inference table, a11y, events, and slot accepts are not canvas-recoverable; review before adoption." } },
   },
   argTypes: {
     size: { control: 'select', options: ['large', 'medium', 'small'] },
-    state: { control: 'select', options: ['default', 'hover', 'focus', 'pressed', 'disabled'] },
     text: { control: 'text' },
     iconLeft: { control: 'boolean' },
     iconRight: { control: 'boolean' },
+    disabled: { control: 'boolean' },
   },
   args: {
     size: 'large',
-    state: 'default',
     text: 'Button',
     iconLeft: false,
     iconRight: false,
+    disabled: false,
   },
 } satisfies Meta<typeof ButtonBrandPrimary>;
 
@@ -45,7 +45,10 @@ export const Medium: Story = {
 export const Small: Story = {
   args: { size: 'small' },
 };
-/** Every legal combination the contract defines (size × state). */
+export const Disabled: Story = {
+  args: { disabled: true },
+};
+/** Every legal combination the contract defines. */
 export const Matrix: Story = {
   parameters: { controls: { disable: true } },
   render: () => (
@@ -53,26 +56,14 @@ export const Matrix: Story = {
       style={{
         display: 'grid',
         gap: 16,
-        gridTemplateColumns: 'repeat(5, max-content)',
+        gridTemplateColumns: 'repeat(1, max-content)',
         alignItems: 'center',
         justifyItems: 'start',
       }}
     >
-        <ButtonBrandPrimary size="large" state="default" />
-        <ButtonBrandPrimary size="large" state="hover" />
-        <ButtonBrandPrimary size="large" state="focus" />
-        <ButtonBrandPrimary size="large" state="pressed" />
-        <ButtonBrandPrimary size="large" state="disabled" />
-        <ButtonBrandPrimary size="medium" state="default" />
-        <ButtonBrandPrimary size="medium" state="hover" />
-        <ButtonBrandPrimary size="medium" state="focus" />
-        <ButtonBrandPrimary size="medium" state="pressed" />
-        <ButtonBrandPrimary size="medium" state="disabled" />
-        <ButtonBrandPrimary size="small" state="default" />
-        <ButtonBrandPrimary size="small" state="hover" />
-        <ButtonBrandPrimary size="small" state="focus" />
-        <ButtonBrandPrimary size="small" state="pressed" />
-        <ButtonBrandPrimary size="small" state="disabled" />
+        <ButtonBrandPrimary size="large" />
+        <ButtonBrandPrimary size="medium" />
+        <ButtonBrandPrimary size="small" />
     </div>
   ),
 };

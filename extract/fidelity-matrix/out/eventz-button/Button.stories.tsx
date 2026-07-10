@@ -11,11 +11,10 @@ const meta = {
   component: Button,
   tags: ['autodocs'],
   parameters: {
-    docs: { description: { component: "PROPOSED contract extracted from the design canvas (extract/figma dump v1) — API, anatomy, and token bindings inverted from the drawn structure. Semantics, a11y, events, and slot accepts are not canvas-recoverable; review before adoption." } },
+    docs: { description: { component: "PROPOSED contract extracted from the design canvas (extract/figma dump v1) — API, anatomy, and token bindings inverted from the drawn structure. Semantics beyond the name/axis inference table, a11y, events, and slot accepts are not canvas-recoverable; review before adoption." } },
   },
   argTypes: {
     variant: { control: 'select', options: ['primary', 'knockout', 'secondary', 'bare'] },
-    state: { control: 'select', options: ['default', 'hover', 'active', 'focus'] },
     isDisabled: { control: 'boolean' },
     text: { control: 'text' },
     hasStartIcon: { control: 'boolean' },
@@ -25,7 +24,6 @@ const meta = {
   },
   args: {
     variant: 'primary',
-    state: 'default',
     isDisabled: false,
     text: 'Label',
     hasStartIcon: true,
@@ -53,7 +51,7 @@ export const Secondary: Story = {
 export const Bare: Story = {
   args: { variant: 'bare' },
 };
-/** Every legal combination the contract defines (variant × state). */
+/** Every legal combination the contract defines. */
 export const Matrix: Story = {
   parameters: { controls: { disable: true } },
   render: () => (
@@ -61,27 +59,15 @@ export const Matrix: Story = {
       style={{
         display: 'grid',
         gap: 16,
-        gridTemplateColumns: 'repeat(4, max-content)',
+        gridTemplateColumns: 'repeat(1, max-content)',
         alignItems: 'center',
         justifyItems: 'start',
       }}
     >
-        <Button variant="primary" state="default" />
-        <Button variant="primary" state="hover" />
-        <Button variant="primary" state="active" />
-        <Button variant="primary" state="focus" />
-        <Button variant="knockout" state="default" />
-        <Button variant="knockout" state="hover" />
-        <Button variant="knockout" state="active" />
-        <Button variant="knockout" state="focus" />
-        <Button variant="secondary" state="default" />
-        <Button variant="secondary" state="hover" />
-        <Button variant="secondary" state="active" />
-        <Button variant="secondary" state="focus" />
-        <Button variant="bare" state="default" />
-        <Button variant="bare" state="hover" />
-        <Button variant="bare" state="active" />
-        <Button variant="bare" state="focus" />
+        <Button variant="primary" />
+        <Button variant="knockout" />
+        <Button variant="secondary" />
+        <Button variant="bare" />
     </div>
   ),
 };

@@ -1,74 +1,48 @@
 {
   "notes": [
-    "semantics.element defaulted to \"div\" — element/role/ARIA are not drawn on the canvas; set the real host element",
+    "semantics: element \"button\" inferred from the set name \"Button-Brand Primary\" — inference is mechanical (name/axis table), review",
+    "variant axis \"state\" (default|hover|focus|pressed|disabled) IS the platform's interaction states, not API — promoted: the axis is NOT a prop; anatomy and base facts come from the 3 default-state variant(s); hover→hover, focus→focus-visible, pressed→active propose root state overrides; disabled→ a `disabled` BOOLEAN prop + disabled state block",
     "Button-Brand Primary:root/Icon: nested instance of \"Icon\" has no known contract — component ref proposed as \"ds.icon\" with a STUB child contract auto-proposed alongside (childStubs; API from observed applied values only, anatomy not captured — import the real child set to replace it)",
     "Button-Brand Primary:root/Icon: fixed props of \"Icon\" canonicalized by spelling (dump v1.1) — verify against the child contract's bindings",
     "Button-Brand Primary:root/Icon: visibility bound to BOOLEAN \"↪️icon-left\" — proposed as prop `iconLeft` (default false: the node is hidden in the default variant, dump v1.1)",
+    "Button-Brand Primary:root/Button: typography varies across variants (fontSize 16/14, weight Semi Bold) — no single text-style identity adopted (the first variant's value would be wrong for the others); font-size minted per variant where axis-correlated (review)",
     "Button-Brand Primary:root/Icon 2: nested instance of \"Icon\" has no known contract — component ref proposed as \"ds.icon\" with a STUB child contract auto-proposed alongside (childStubs; API from observed applied values only, anatomy not captured — import the real child set to replace it)",
     "Button-Brand Primary:root/Icon 2: fixed props of \"Icon\" canonicalized by spelling (dump v1.1) — verify against the child contract's bindings",
     "Button-Brand Primary:root/Icon 2: visibility bound to BOOLEAN \"↪️icon-right\" — proposed as prop `iconRight` (default false: the node is hidden in the default variant, dump v1.1)",
-    "Button-Brand Primary:root/Tooltip: typography (12px Regular) matches 0 derived text styles — font tokens not proposed, review",
+    "Button-Brand Primary:root/Focus ring: drawn only in the focus state and carries a stroke — inverted to focus-visible outline overrides (outline-color/outline-width); its own corner radius is not carried (the outline follows the root's shape + offset), review",
+    "Button-Brand Primary:root/Tooltip: drawn only in state \"disabled\" variants and hidden — design-time helper, not proposed (review)",
+    "Button-Brand Primary:root/Button: fill differs in state \"disabled\" — part-level state overrides are outside the contract vocabulary (root states only, STYLE-FIDELITY B7); NAMED, not proposed (review)",
+    "prop `disabled`: promoted from axis value \"state=disabled\" — a BOOLEAN prop (native disabled attribute on interactive elements), bound to design property \"Disabled\" (the forward generator's spelling; the imported set spelled it as an axis value — rename consequence documented here)",
+    "prop `text`: the single text prop carries the component's main content — repo contracts bind main content to code prop \"children\" (ds.button convention); adopt by setting bindings.code.prop to \"children\" when this is the label (note-only, nothing renamed mechanically)",
     "contract name: drawn set name \"Button-Brand Primary\" is not a PascalCase component name — proposed as \"ButtonBrandPrimary\" (the canvas set keeps its own name; the componentSetKey/nodeId anchors carry identity)",
     "prop `text`: Figma property \"✏️text\" contains characters outside a legal identifier — name sanitized at proposal; the original spelling stays the design binding (bindings.figma.property)",
     "prop `iconLeft`: Figma property \"↪️icon-left\" contains characters outside a legal identifier — name sanitized at proposal; the original spelling stays the design binding (bindings.figma.property)",
     "prop `iconRight`: Figma property \"↪️icon-right\" contains characters outside a legal identifier — name sanitized at proposal; the original spelling stays the design binding (bindings.figma.property)",
-    "MINTED {imported.button-brand-primary.root.background-color.default} = #0e61ba — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Button-Brand Primary:root background-color (state=default)",
-    "MINTED {imported.button-brand-primary.root.background-color.hover} = #003e81 — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Button-Brand Primary:root background-color (state=hover)",
-    "MINTED {imported.button-brand-primary.root.background-color.focus} = #0e61ba — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Button-Brand Primary:root background-color (state=focus)",
-    "MINTED {imported.button-brand-primary.root.background-color.pressed} = #002854 — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Button-Brand Primary:root background-color (state=pressed)",
-    "MINTED {imported.button-brand-primary.root.background-color.disabled} = #dfe3eb — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Button-Brand Primary:root background-color (state=disabled)",
+    "MINTED {imported.button-brand-primary.root.background-color} = #0e61ba — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Button-Brand Primary:root background-color",
     "MINTED {imported.shared.size-8} = 8px — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Button-Brand Primary:root gap, Button-Brand Primary:root padding-block, Button-Brand Primary:root border-radius",
     "MINTED {imported.button-brand-primary.root.padding-inline.large} = 16px — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Button-Brand Primary:root padding-inline (size=large)",
     "MINTED {imported.button-brand-primary.root.padding-inline.medium} = 16px — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Button-Brand Primary:root padding-inline (size=medium)",
     "MINTED {imported.button-brand-primary.root.padding-inline.small} = 12px — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Button-Brand Primary:root padding-inline (size=small)",
-    "MINTED {imported.button-brand-primary.button.color.default} = #fcfeff — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Button-Brand Primary:root/Button color (state=default)",
-    "MINTED {imported.button-brand-primary.button.color.hover} = #fcfeff — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Button-Brand Primary:root/Button color (state=hover)",
-    "MINTED {imported.button-brand-primary.button.color.focus} = #fcfeff — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Button-Brand Primary:root/Button color (state=focus)",
-    "MINTED {imported.button-brand-primary.button.color.pressed} = #fcfeff — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Button-Brand Primary:root/Button color (state=pressed)",
-    "MINTED {imported.button-brand-primary.button.color.disabled} = #556275 — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Button-Brand Primary:root/Button color (state=disabled)",
-    "MINTED {imported.button-brand-primary.tooltip.color} = #000000 — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Button-Brand Primary:root/Tooltip color",
-    "MINTED {imported.button-brand-primary.tooltip.font-size} = 12px — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Button-Brand Primary:root/Tooltip font-size",
-    "MINTED {imported.button-brand-primary.focus-ring.border-color} = #0e61ba — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Button-Brand Primary:root/Focus ring border-color",
-    "MINTED {imported.button-brand-primary.focus-ring.border-radius} = 12px — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Button-Brand Primary:root/Focus ring border-radius",
-    "MINTED {imported.button-brand-primary.focus-ring.border-width} = 2px — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Button-Brand Primary:root/Focus ring border-width"
+    "MINTED {imported.button-brand-primary.button.color} = #fcfeff — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Button-Brand Primary:root/Button color",
+    "MINTED {imported.button-brand-primary.button.font-size.large} = 16px — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Button-Brand Primary:root/Button font-size (size=large)",
+    "MINTED {imported.button-brand-primary.button.font-size.medium} = 16px — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Button-Brand Primary:root/Button font-size (size=medium)",
+    "MINTED {imported.button-brand-primary.button.font-size.small} = 14px — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Button-Brand Primary:root/Button font-size (size=small)",
+    "MINTED {imported.button-brand-primary.state-hover.background-color} = #003e81 — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Button-Brand Primary:root (state hover) background-color",
+    "MINTED {imported.button-brand-primary.state-focus-visible.outline-color} = #0e61ba — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Button-Brand Primary:root (state focus-visible) outline-color",
+    "MINTED {imported.button-brand-primary.state-focus-visible.outline-width} = 2px — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Button-Brand Primary:root (state focus-visible) outline-width",
+    "MINTED {imported.button-brand-primary.state-active.background-color} = #002854 — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Button-Brand Primary:root (state active) background-color",
+    "MINTED {imported.button-brand-primary.state-disabled.background-color} = #dfe3eb — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Button-Brand Primary:root (state disabled) background-color",
+    "figmaStatePreviews: true — regenerating the canvas draws the promoted states as a \"State\" preview axis (values Default|Hover|Active|Focus Visible, the shared spelling rules) — a RENAME relative to the imported axis \"state\" (default|hover|focus|pressed|disabled); the contract vocabulary carries no custom state-axis spellings, so the original spelling lives in this note and in the anchors' set"
   ],
   "unbound": [],
   "minted": {
-    "count": 19,
+    "count": 14,
     "entries": [
       {
-        "ref": "{imported.button-brand-primary.root.background-color.default}",
+        "ref": "{imported.button-brand-primary.root.background-color}",
         "value": "#0e61ba",
         "usageSites": [
-          "Button-Brand Primary:root background-color (state=default)"
-        ]
-      },
-      {
-        "ref": "{imported.button-brand-primary.root.background-color.hover}",
-        "value": "#003e81",
-        "usageSites": [
-          "Button-Brand Primary:root background-color (state=hover)"
-        ]
-      },
-      {
-        "ref": "{imported.button-brand-primary.root.background-color.focus}",
-        "value": "#0e61ba",
-        "usageSites": [
-          "Button-Brand Primary:root background-color (state=focus)"
-        ]
-      },
-      {
-        "ref": "{imported.button-brand-primary.root.background-color.pressed}",
-        "value": "#002854",
-        "usageSites": [
-          "Button-Brand Primary:root background-color (state=pressed)"
-        ]
-      },
-      {
-        "ref": "{imported.button-brand-primary.root.background-color.disabled}",
-        "value": "#dfe3eb",
-        "usageSites": [
-          "Button-Brand Primary:root background-color (state=disabled)"
+          "Button-Brand Primary:root background-color"
         ]
       },
       {
@@ -102,73 +76,66 @@
         ]
       },
       {
-        "ref": "{imported.button-brand-primary.button.color.default}",
+        "ref": "{imported.button-brand-primary.button.color}",
         "value": "#fcfeff",
         "usageSites": [
-          "Button-Brand Primary:root/Button color (state=default)"
+          "Button-Brand Primary:root/Button color"
         ]
       },
       {
-        "ref": "{imported.button-brand-primary.button.color.hover}",
-        "value": "#fcfeff",
+        "ref": "{imported.button-brand-primary.button.font-size.large}",
+        "value": "16px",
         "usageSites": [
-          "Button-Brand Primary:root/Button color (state=hover)"
+          "Button-Brand Primary:root/Button font-size (size=large)"
         ]
       },
       {
-        "ref": "{imported.button-brand-primary.button.color.focus}",
-        "value": "#fcfeff",
+        "ref": "{imported.button-brand-primary.button.font-size.medium}",
+        "value": "16px",
         "usageSites": [
-          "Button-Brand Primary:root/Button color (state=focus)"
+          "Button-Brand Primary:root/Button font-size (size=medium)"
         ]
       },
       {
-        "ref": "{imported.button-brand-primary.button.color.pressed}",
-        "value": "#fcfeff",
+        "ref": "{imported.button-brand-primary.button.font-size.small}",
+        "value": "14px",
         "usageSites": [
-          "Button-Brand Primary:root/Button color (state=pressed)"
+          "Button-Brand Primary:root/Button font-size (size=small)"
         ]
       },
       {
-        "ref": "{imported.button-brand-primary.button.color.disabled}",
-        "value": "#556275",
+        "ref": "{imported.button-brand-primary.state-hover.background-color}",
+        "value": "#003e81",
         "usageSites": [
-          "Button-Brand Primary:root/Button color (state=disabled)"
+          "Button-Brand Primary:root (state hover) background-color"
         ]
       },
       {
-        "ref": "{imported.button-brand-primary.tooltip.color}",
-        "value": "#000000",
-        "usageSites": [
-          "Button-Brand Primary:root/Tooltip color"
-        ]
-      },
-      {
-        "ref": "{imported.button-brand-primary.tooltip.font-size}",
-        "value": "12px",
-        "usageSites": [
-          "Button-Brand Primary:root/Tooltip font-size"
-        ]
-      },
-      {
-        "ref": "{imported.button-brand-primary.focus-ring.border-color}",
+        "ref": "{imported.button-brand-primary.state-focus-visible.outline-color}",
         "value": "#0e61ba",
         "usageSites": [
-          "Button-Brand Primary:root/Focus ring border-color"
+          "Button-Brand Primary:root (state focus-visible) outline-color"
         ]
       },
       {
-        "ref": "{imported.button-brand-primary.focus-ring.border-radius}",
-        "value": "12px",
-        "usageSites": [
-          "Button-Brand Primary:root/Focus ring border-radius"
-        ]
-      },
-      {
-        "ref": "{imported.button-brand-primary.focus-ring.border-width}",
+        "ref": "{imported.button-brand-primary.state-focus-visible.outline-width}",
         "value": "2px",
         "usageSites": [
-          "Button-Brand Primary:root/Focus ring border-width"
+          "Button-Brand Primary:root (state focus-visible) outline-width"
+        ]
+      },
+      {
+        "ref": "{imported.button-brand-primary.state-active.background-color}",
+        "value": "#002854",
+        "usageSites": [
+          "Button-Brand Primary:root (state active) background-color"
+        ]
+      },
+      {
+        "ref": "{imported.button-brand-primary.state-disabled.background-color}",
+        "value": "#dfe3eb",
+        "usageSites": [
+          "Button-Brand Primary:root (state disabled) background-color"
         ]
       }
     ]
