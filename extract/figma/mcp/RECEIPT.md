@@ -67,7 +67,6 @@ Fixtures in `extract/figma/mcp/fixtures/` are RECORDED LIVE responses (Figma des
 
 - `[paint-unsupported]` Alert:variant=success `fill` — first visible paint is GRADIENT_LINEAR, not SOLID — dump v1 carries solid paints only; paint omitted
 - `[min-max-size-unsupported]` Alert:variant=success — literal min/max sizing (maxWidth 880) has no dump v1 projection — dropped (bound min-width variables DO ride `bound`)
-- `[text-channel-unsupported]` Alert:variant=success/horizontal stack/horizontal stack/Title `text` — text channel(s) with no dump v1 projection: lineHeight 20px (PIXELS) — typography carries (fontSize, fontStyle, style identity) only
 
 ### Proposal notes (review line items, 17)
 

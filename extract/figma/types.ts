@@ -43,6 +43,13 @@ export interface DumpText {
   /** Inter style name ('Medium', 'Semi Bold', …) — the canvas projection of a
    *  font-weight token through FONT_STYLE_BY_WEIGHT. */
   fontStyle: string;
+  /** Line height in PX (dump v1.3, additive) — captured ONLY when the canvas
+   *  spells it in PIXELS (REST lineHeightUnit 'PIXELS' / Plugin lineHeight
+   *  unit 'PIXELS'). PERCENT/AUTO units stay named degradation receipts
+   *  (text-channel-unsupported). Absence in older dumps means not captured.
+   *  Field case: CBDS Tooltip rides 16px line height on 12px text — dropping
+   *  it distorts the text block's proportions. */
+  lineHeight?: number;
   /** Name of the named TextStyle the node rides, when it rides one — derived
    *  styles mirror semantic size-token paths ('badge' ← font.badge.size,
    *  'control/sm' ← font.control.size.sm), so this is a token identity. */
@@ -62,6 +69,46 @@ export interface DumpEffect {
   radius?: number;
   /** Omitted when 0. */
   spread?: number;
+}
+
+/** Decor-shape geometry (dump v1.3, additive) — captured for the closed set
+ *  of parametric vector nodes the pipeline can carry faithfully:
+ *  REGULAR_POLYGON, ELLIPSE, and rotated RECTANGLE (#42). Arbitrary-path
+ *  vectors (VECTOR / STAR / LINE / BOOLEAN_OPERATION) remain named
+ *  degradation receipts — their geometry is not parametric.
+ *  Field case: the CBDS Tooltip "Pointer" triangle (12×12 REGULAR_POLYGON,
+ *  rotated per placement, absolutely positioned against the bubble). */
+export interface DumpShape {
+  kind: 'polygon' | 'ellipse' | 'rect';
+  /** Polygon point count (Plugin API pointCount). The REST surface does not
+   *  expose it — ABSENT means not captured; the proposer assumes the Figma
+   *  default of 3 with a named review note, never silently. */
+  sides?: number;
+  /** Intrinsic (pre-rotation) size, px. REST exposes only the post-rotation
+   *  bounding box; for quarter-turn rotations the intrinsic size is derived
+   *  exactly (±90° swaps the axes). Non-quarter-turn rotations approximate
+   *  by the bounding box, NAMED in a degradation receipt. */
+  width: number;
+  height: number;
+  /** CSS-clockwise degrees: `transform: rotate(<n>deg)` reproduces the
+   *  canvas rendering. The REST `rotation` field rides RADIANS with the same
+   *  visual sign (verified against absoluteRenderBounds of the CBDS Tooltip
+   *  pointers); the Plugin API's degrees are counterclockwise → negated.
+   *  Omitted when 0. */
+  rotation?: number;
+  /** Placement within the PARENT box (px), captured only for out-of-flow
+   *  nodes (layoutPositioning ABSOLUTE): offsets of the intrinsic box's
+   *  top-left from the parent's top-left (x, y) and the mirror distances to
+   *  the parent's right/bottom edges — spelled so that rotating the
+   *  intrinsic box about its center reproduces the captured bounding box. */
+  x?: number;
+  y?: number;
+  right?: number;
+  bottom?: number;
+  /** Figma constraints (REST spelling: LEFT|RIGHT|CENTER / TOP|BOTTOM|CENTER)
+   *  — how the placement generalizes when the parent resizes; the proposer
+   *  picks which offset spelling to carry from these. */
+  constraints?: { horizontal: string; vertical: string };
 }
 
 export interface DumpNode {
@@ -95,6 +142,9 @@ export interface DumpNode {
    *  DROP_SHADOW mints as a box-shadow value; everything else is a NAMED
    *  proposal note. Absence in older dumps means not captured. */
   effects?: DumpEffect[];
+  /** Decor-shape geometry (dump v1.3, additive — see DumpShape). Absence in
+   *  older dumps means not captured, never "no shape". */
+  shape?: DumpShape;
   text?: DumpText;
   /** componentPropertyReferences, property-id suffixes stripped:
    *  characters → TEXT property, mainComponent → INSTANCE_SWAP property,

@@ -1,0 +1,867 @@
+{
+  "_provenance": {
+    "fileKey": "WofZT8xaxXuc2Q6Je9S4XE",
+    "extractedAt": "2026-07-10",
+    "note": "Node-tree dump mapped from the Figma REST API (extract/figma/rest/map.ts, dump v1.3) for design→contract proposal."
+  },
+  "Tooltip": {
+    "setName": "Tooltip",
+    "type": "COMPONENT_SET",
+    "nodeId": "695:313",
+    "key": "624e8ca0ae3534e82133b6493b972b41061ed563",
+    "variants": [
+      {
+        "name": "pointer=true, pointer-position=top-right",
+        "type": "COMPONENT",
+        "layout": {
+          "mode": "VERTICAL",
+          "primary": "CENTER",
+          "counter": "MIN",
+          "spacing": 4,
+          "padding": [
+            8,
+            8,
+            8,
+            8
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "AUTO"
+        },
+        "cornerRadius": 4,
+        "fill": {
+          "hex": "fcfeff"
+        },
+        "effects": [
+          {
+            "type": "DROP_SHADOW",
+            "color": {
+              "hex": "000000",
+              "alpha": 0.16
+            },
+            "offset": {
+              "x": 0,
+              "y": 2
+            },
+            "radius": 4
+          }
+        ],
+        "children": [
+          {
+            "name": "Main text",
+            "type": "TEXT",
+            "text": {
+              "characters": "Tooltip title",
+              "fontSize": 12,
+              "fontStyle": "Semi Bold",
+              "lineHeight": 16,
+              "style": "Label/Small"
+            },
+            "fill": {
+              "hex": "050a0f"
+            },
+            "propRefs": {
+              "visible": "title",
+              "characters": "✏️text-title"
+            }
+          },
+          {
+            "name": "Supporting text",
+            "type": "TEXT",
+            "text": {
+              "characters": "This is the supporting text",
+              "fontSize": 12,
+              "fontStyle": "Regular",
+              "lineHeight": 16,
+              "style": "Body/Small"
+            },
+            "fill": {
+              "hex": "3a475b"
+            },
+            "propRefs": {
+              "visible": "supporting-text",
+              "characters": "✏️text-support"
+            }
+          },
+          {
+            "name": "Pointer",
+            "type": "REGULAR_POLYGON",
+            "fill": {
+              "hex": "fcfeff"
+            },
+            "shape": {
+              "kind": "polygon",
+              "width": 12,
+              "height": 12,
+              "x": 141,
+              "y": -8,
+              "right": 12,
+              "bottom": 48,
+              "constraints": {
+                "horizontal": "RIGHT",
+                "vertical": "TOP"
+              }
+            }
+          }
+        ]
+      },
+      {
+        "name": "pointer=false, pointer-position=none",
+        "type": "COMPONENT",
+        "layout": {
+          "mode": "VERTICAL",
+          "primary": "CENTER",
+          "counter": "MIN",
+          "spacing": 4,
+          "padding": [
+            8,
+            8,
+            8,
+            8
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "AUTO"
+        },
+        "cornerRadius": 4,
+        "fill": {
+          "hex": "fcfeff"
+        },
+        "effects": [
+          {
+            "type": "DROP_SHADOW",
+            "color": {
+              "hex": "000000",
+              "alpha": 0.16
+            },
+            "offset": {
+              "x": 0,
+              "y": 2
+            },
+            "radius": 4
+          }
+        ],
+        "children": [
+          {
+            "name": "Main text",
+            "type": "TEXT",
+            "text": {
+              "characters": "Tooltip title",
+              "fontSize": 12,
+              "fontStyle": "Semi Bold",
+              "lineHeight": 16,
+              "style": "Label/Small"
+            },
+            "fill": {
+              "hex": "050a0f"
+            },
+            "propRefs": {
+              "visible": "title",
+              "characters": "✏️text-title"
+            }
+          },
+          {
+            "name": "Supporting text",
+            "type": "TEXT",
+            "text": {
+              "characters": "This is the supporting text",
+              "fontSize": 12,
+              "fontStyle": "Regular",
+              "lineHeight": 16,
+              "style": "Body/Small"
+            },
+            "fill": {
+              "hex": "3a475b"
+            },
+            "propRefs": {
+              "visible": "supporting-text",
+              "characters": "✏️text-support"
+            }
+          },
+          {
+            "name": "Pointer",
+            "type": "REGULAR_POLYGON",
+            "fill": {
+              "hex": "fcfeff"
+            },
+            "shape": {
+              "kind": "polygon",
+              "width": 12,
+              "height": 12,
+              "x": 141,
+              "y": -8,
+              "right": 12,
+              "bottom": 48,
+              "constraints": {
+                "horizontal": "RIGHT",
+                "vertical": "TOP"
+              }
+            },
+            "hidden": true
+          }
+        ]
+      },
+      {
+        "name": "pointer=true, pointer-position=bottom-right",
+        "type": "COMPONENT",
+        "layout": {
+          "mode": "VERTICAL",
+          "primary": "CENTER",
+          "counter": "MIN",
+          "spacing": 4,
+          "padding": [
+            8,
+            8,
+            8,
+            8
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "AUTO"
+        },
+        "cornerRadius": 4,
+        "fill": {
+          "hex": "fcfeff"
+        },
+        "effects": [
+          {
+            "type": "DROP_SHADOW",
+            "color": {
+              "hex": "000000",
+              "alpha": 0.16
+            },
+            "offset": {
+              "x": 0,
+              "y": 2
+            },
+            "radius": 4
+          }
+        ],
+        "children": [
+          {
+            "name": "Main text",
+            "type": "TEXT",
+            "text": {
+              "characters": "Tooltip title",
+              "fontSize": 12,
+              "fontStyle": "Semi Bold",
+              "lineHeight": 16,
+              "style": "Label/Small"
+            },
+            "fill": {
+              "hex": "050a0f"
+            },
+            "propRefs": {
+              "visible": "title",
+              "characters": "✏️text-title"
+            }
+          },
+          {
+            "name": "Supporting text",
+            "type": "TEXT",
+            "text": {
+              "characters": "This is the supporting text",
+              "fontSize": 12,
+              "fontStyle": "Regular",
+              "lineHeight": 16,
+              "style": "Body/Small"
+            },
+            "fill": {
+              "hex": "3a475b"
+            },
+            "propRefs": {
+              "visible": "supporting-text",
+              "characters": "✏️text-support"
+            }
+          },
+          {
+            "name": "Pointer",
+            "type": "REGULAR_POLYGON",
+            "fill": {
+              "hex": "fcfeff"
+            },
+            "shape": {
+              "kind": "polygon",
+              "width": 12,
+              "height": 12,
+              "rotation": 180,
+              "x": 141,
+              "y": 48,
+              "right": 12,
+              "bottom": -8,
+              "constraints": {
+                "horizontal": "RIGHT",
+                "vertical": "BOTTOM"
+              }
+            }
+          }
+        ]
+      },
+      {
+        "name": "pointer=true, pointer-position=left-center",
+        "type": "COMPONENT",
+        "layout": {
+          "mode": "VERTICAL",
+          "primary": "CENTER",
+          "counter": "MIN",
+          "spacing": 4,
+          "padding": [
+            8,
+            8,
+            8,
+            8
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "AUTO"
+        },
+        "cornerRadius": 4,
+        "fill": {
+          "hex": "fcfeff"
+        },
+        "effects": [
+          {
+            "type": "DROP_SHADOW",
+            "color": {
+              "hex": "000000",
+              "alpha": 0.16
+            },
+            "offset": {
+              "x": 0,
+              "y": 2
+            },
+            "radius": 4
+          }
+        ],
+        "children": [
+          {
+            "name": "Main text",
+            "type": "TEXT",
+            "text": {
+              "characters": "Tooltip title",
+              "fontSize": 12,
+              "fontStyle": "Semi Bold",
+              "lineHeight": 16,
+              "style": "Label/Small"
+            },
+            "fill": {
+              "hex": "050a0f"
+            },
+            "propRefs": {
+              "visible": "title",
+              "characters": "✏️text-title"
+            }
+          },
+          {
+            "name": "Supporting text",
+            "type": "TEXT",
+            "text": {
+              "characters": "This is the supporting text",
+              "fontSize": 12,
+              "fontStyle": "Regular",
+              "lineHeight": 16,
+              "style": "Body/Small"
+            },
+            "fill": {
+              "hex": "3a475b"
+            },
+            "propRefs": {
+              "visible": "supporting-text",
+              "characters": "✏️text-support"
+            }
+          },
+          {
+            "name": "Pointer",
+            "type": "REGULAR_POLYGON",
+            "fill": {
+              "hex": "fcfeff"
+            },
+            "shape": {
+              "kind": "polygon",
+              "width": 12,
+              "height": 12,
+              "rotation": -90,
+              "x": -8,
+              "y": 20,
+              "right": 161,
+              "bottom": 20,
+              "constraints": {
+                "horizontal": "LEFT",
+                "vertical": "CENTER"
+              }
+            }
+          }
+        ]
+      },
+      {
+        "name": "pointer=true, pointer-position=top-center",
+        "type": "COMPONENT",
+        "layout": {
+          "mode": "VERTICAL",
+          "primary": "CENTER",
+          "counter": "MIN",
+          "spacing": 4,
+          "padding": [
+            8,
+            8,
+            8,
+            8
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "AUTO"
+        },
+        "cornerRadius": 4,
+        "fill": {
+          "hex": "fcfeff"
+        },
+        "effects": [
+          {
+            "type": "DROP_SHADOW",
+            "color": {
+              "hex": "000000",
+              "alpha": 0.16
+            },
+            "offset": {
+              "x": 0,
+              "y": 2
+            },
+            "radius": 4
+          }
+        ],
+        "children": [
+          {
+            "name": "Main text",
+            "type": "TEXT",
+            "text": {
+              "characters": "Tooltip title",
+              "fontSize": 12,
+              "fontStyle": "Semi Bold",
+              "lineHeight": 16,
+              "style": "Label/Small"
+            },
+            "fill": {
+              "hex": "050a0f"
+            },
+            "propRefs": {
+              "visible": "title",
+              "characters": "✏️text-title"
+            }
+          },
+          {
+            "name": "Supporting text",
+            "type": "TEXT",
+            "text": {
+              "characters": "This is the supporting text",
+              "fontSize": 12,
+              "fontStyle": "Regular",
+              "lineHeight": 16,
+              "style": "Body/Small"
+            },
+            "fill": {
+              "hex": "3a475b"
+            },
+            "propRefs": {
+              "visible": "supporting-text",
+              "characters": "✏️text-support"
+            }
+          },
+          {
+            "name": "Pointer",
+            "type": "REGULAR_POLYGON",
+            "fill": {
+              "hex": "fcfeff"
+            },
+            "shape": {
+              "kind": "polygon",
+              "width": 12,
+              "height": 12,
+              "x": 76,
+              "y": -8,
+              "right": 77,
+              "bottom": 48,
+              "constraints": {
+                "horizontal": "CENTER",
+                "vertical": "TOP"
+              }
+            }
+          }
+        ]
+      },
+      {
+        "name": "pointer=true, pointer-position=bottom-center",
+        "type": "COMPONENT",
+        "layout": {
+          "mode": "VERTICAL",
+          "primary": "CENTER",
+          "counter": "MIN",
+          "spacing": 4,
+          "padding": [
+            8,
+            8,
+            8,
+            8
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "AUTO"
+        },
+        "cornerRadius": 4,
+        "fill": {
+          "hex": "fcfeff"
+        },
+        "effects": [
+          {
+            "type": "DROP_SHADOW",
+            "color": {
+              "hex": "000000",
+              "alpha": 0.16
+            },
+            "offset": {
+              "x": 0,
+              "y": 2
+            },
+            "radius": 4
+          }
+        ],
+        "children": [
+          {
+            "name": "Main text",
+            "type": "TEXT",
+            "text": {
+              "characters": "Tooltip title",
+              "fontSize": 12,
+              "fontStyle": "Semi Bold",
+              "lineHeight": 16,
+              "style": "Label/Small"
+            },
+            "fill": {
+              "hex": "050a0f"
+            },
+            "propRefs": {
+              "visible": "title",
+              "characters": "✏️text-title"
+            }
+          },
+          {
+            "name": "Supporting text",
+            "type": "TEXT",
+            "text": {
+              "characters": "This is the supporting text",
+              "fontSize": 12,
+              "fontStyle": "Regular",
+              "lineHeight": 16,
+              "style": "Body/Small"
+            },
+            "fill": {
+              "hex": "3a475b"
+            },
+            "propRefs": {
+              "visible": "supporting-text",
+              "characters": "✏️text-support"
+            }
+          },
+          {
+            "name": "Pointer",
+            "type": "REGULAR_POLYGON",
+            "fill": {
+              "hex": "fcfeff"
+            },
+            "shape": {
+              "kind": "polygon",
+              "width": 12,
+              "height": 12,
+              "rotation": 180,
+              "x": 77,
+              "y": 48,
+              "right": 76,
+              "bottom": -8,
+              "constraints": {
+                "horizontal": "CENTER",
+                "vertical": "BOTTOM"
+              }
+            }
+          }
+        ]
+      },
+      {
+        "name": "pointer=true, pointer-position=right-center",
+        "type": "COMPONENT",
+        "layout": {
+          "mode": "VERTICAL",
+          "primary": "CENTER",
+          "counter": "MIN",
+          "spacing": 4,
+          "padding": [
+            8,
+            8,
+            8,
+            8
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "AUTO"
+        },
+        "cornerRadius": 4,
+        "fill": {
+          "hex": "fcfeff"
+        },
+        "effects": [
+          {
+            "type": "DROP_SHADOW",
+            "color": {
+              "hex": "000000",
+              "alpha": 0.16
+            },
+            "offset": {
+              "x": 0,
+              "y": 2
+            },
+            "radius": 4
+          }
+        ],
+        "children": [
+          {
+            "name": "Main text",
+            "type": "TEXT",
+            "text": {
+              "characters": "Tooltip title",
+              "fontSize": 12,
+              "fontStyle": "Semi Bold",
+              "lineHeight": 16,
+              "style": "Label/Small"
+            },
+            "fill": {
+              "hex": "050a0f"
+            },
+            "propRefs": {
+              "visible": "title",
+              "characters": "✏️text-title"
+            }
+          },
+          {
+            "name": "Supporting text",
+            "type": "TEXT",
+            "text": {
+              "characters": "This is the supporting text",
+              "fontSize": 12,
+              "fontStyle": "Regular",
+              "lineHeight": 16,
+              "style": "Body/Small"
+            },
+            "fill": {
+              "hex": "3a475b"
+            },
+            "propRefs": {
+              "visible": "supporting-text",
+              "characters": "✏️text-support"
+            }
+          },
+          {
+            "name": "Pointer",
+            "type": "REGULAR_POLYGON",
+            "fill": {
+              "hex": "fcfeff"
+            },
+            "shape": {
+              "kind": "polygon",
+              "width": 12,
+              "height": 12,
+              "rotation": 90,
+              "x": 161,
+              "y": 20,
+              "right": -8,
+              "bottom": 20,
+              "constraints": {
+                "horizontal": "RIGHT",
+                "vertical": "CENTER"
+              }
+            }
+          }
+        ]
+      },
+      {
+        "name": "pointer=true, pointer-position=top-left",
+        "type": "COMPONENT",
+        "layout": {
+          "mode": "VERTICAL",
+          "primary": "CENTER",
+          "counter": "MIN",
+          "spacing": 4,
+          "padding": [
+            8,
+            8,
+            8,
+            8
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "AUTO"
+        },
+        "cornerRadius": 4,
+        "fill": {
+          "hex": "fcfeff"
+        },
+        "effects": [
+          {
+            "type": "DROP_SHADOW",
+            "color": {
+              "hex": "000000",
+              "alpha": 0.16
+            },
+            "offset": {
+              "x": 0,
+              "y": 2
+            },
+            "radius": 4
+          }
+        ],
+        "children": [
+          {
+            "name": "Main text",
+            "type": "TEXT",
+            "text": {
+              "characters": "Tooltip title",
+              "fontSize": 12,
+              "fontStyle": "Semi Bold",
+              "lineHeight": 16,
+              "style": "Label/Small"
+            },
+            "fill": {
+              "hex": "050a0f"
+            },
+            "propRefs": {
+              "visible": "title",
+              "characters": "✏️text-title"
+            }
+          },
+          {
+            "name": "Supporting text",
+            "type": "TEXT",
+            "text": {
+              "characters": "This is the supporting text",
+              "fontSize": 12,
+              "fontStyle": "Regular",
+              "lineHeight": 16,
+              "style": "Body/Small"
+            },
+            "fill": {
+              "hex": "3a475b"
+            },
+            "propRefs": {
+              "visible": "supporting-text",
+              "characters": "✏️text-support"
+            }
+          },
+          {
+            "name": "Pointer",
+            "type": "REGULAR_POLYGON",
+            "fill": {
+              "hex": "fcfeff"
+            },
+            "shape": {
+              "kind": "polygon",
+              "width": 12,
+              "height": 12,
+              "x": 12,
+              "y": -8,
+              "right": 141,
+              "bottom": 48,
+              "constraints": {
+                "horizontal": "LEFT",
+                "vertical": "TOP"
+              }
+            }
+          }
+        ]
+      },
+      {
+        "name": "pointer=true, pointer-position=bottom-left",
+        "type": "COMPONENT",
+        "layout": {
+          "mode": "VERTICAL",
+          "primary": "CENTER",
+          "counter": "MIN",
+          "spacing": 4,
+          "padding": [
+            8,
+            8,
+            8,
+            8
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "AUTO"
+        },
+        "cornerRadius": 4,
+        "fill": {
+          "hex": "fcfeff"
+        },
+        "effects": [
+          {
+            "type": "DROP_SHADOW",
+            "color": {
+              "hex": "000000",
+              "alpha": 0.16
+            },
+            "offset": {
+              "x": 0,
+              "y": 2
+            },
+            "radius": 4
+          }
+        ],
+        "children": [
+          {
+            "name": "Main text",
+            "type": "TEXT",
+            "text": {
+              "characters": "Tooltip title",
+              "fontSize": 12,
+              "fontStyle": "Semi Bold",
+              "lineHeight": 16,
+              "style": "Label/Small"
+            },
+            "fill": {
+              "hex": "050a0f"
+            },
+            "propRefs": {
+              "visible": "title",
+              "characters": "✏️text-title"
+            }
+          },
+          {
+            "name": "Supporting text",
+            "type": "TEXT",
+            "text": {
+              "characters": "This is the supporting text",
+              "fontSize": 12,
+              "fontStyle": "Regular",
+              "lineHeight": 16,
+              "style": "Body/Small"
+            },
+            "fill": {
+              "hex": "3a475b"
+            },
+            "propRefs": {
+              "visible": "supporting-text",
+              "characters": "✏️text-support"
+            }
+          },
+          {
+            "name": "Pointer",
+            "type": "REGULAR_POLYGON",
+            "fill": {
+              "hex": "fcfeff"
+            },
+            "shape": {
+              "kind": "polygon",
+              "width": 12,
+              "height": 12,
+              "rotation": 180,
+              "x": 12,
+              "y": 48,
+              "right": 141,
+              "bottom": -8,
+              "constraints": {
+                "horizontal": "LEFT",
+                "vertical": "BOTTOM"
+              }
+            }
+          }
+        ]
+      }
+    ]
+  }
+}
