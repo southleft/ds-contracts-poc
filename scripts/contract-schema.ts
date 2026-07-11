@@ -294,6 +294,12 @@ export interface Part {
   /** HTML element for this part (code side). Defaults: div (structural),
    *  span (content). Root uses semantics.element. */
   element?: string;
+  /** v11: DECLARED exception to the native-semantics lint — a one-sentence
+   *  reason why this part claims an ARIA role (via attrs.role) that has a
+   *  native HTML equivalent, on a non-native element. Legitimate APG
+   *  composites declare it; everything else refuses by name. The sentence
+   *  renders on the spec sheet so the exception is reviewable, never silent. */
+  roleException?: string;
   layout?: z.infer<typeof LayoutSchema>;
   /** v7: per-enum-value layout overrides merged over `layout`. */
   layoutByProp?: z.infer<typeof LayoutByPropSchema>;
@@ -338,6 +344,8 @@ export const PartSchema: z.ZodType<Part> = z.lazy(() =>
   z.strictObject({
     description: z.string().optional(),
     element: z.string().optional(),
+    /** v11: named exception to the native-semantics lint (see Part). */
+    roleException: z.string().optional(),
     layout: LayoutSchema.optional(),
     /** v7. */
     layoutByProp: LayoutByPropSchema.optional(),
@@ -421,6 +429,13 @@ export const ContractSchema = z.strictObject({
       'blockquote', 'code', 'kbd', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6',
     ]),
     role: z.string().optional(),
+    /** v11: DECLARED exception to the native-semantics lint for ROOT-level
+     *  role claims (semantics.role, semantics.roleByProp, anatomy.root
+     *  attrs.role) — a one-sentence reason why the role rides a non-native
+     *  element (e.g. ProgressBar: <progress> cannot host the styled
+     *  track/fill anatomy). Renders on the spec sheet; reviewable, never
+     *  silent. */
+    roleException: z.string().optional(),
     /** v4, gap G7: ARIA role driven by an enum prop (e.g. Banner: error →
      *  alert, info → status). Code emits a lookup; overrides `role`. */
     roleByProp: z
@@ -523,6 +538,23 @@ export function resolveTokens(part: Part, subst: Record<string, string>): Record
   const override = byProp ? byProp.map[subst[byProp.prop] ?? ''] : undefined;
   if (!override) return base;
   return { ...base, ...override };
+}
+
+/** A native CHECKABLE control part — a real `<input type="checkbox|radio">`
+ *  inside a presentational box (the wrapper-label + visually-managed-input
+ *  pattern; the imported-button P0 applied to checkable controls: native
+ *  elements over ARIA re-creation, always). ONE shared predicate so every
+ *  surface agrees on the projection:
+ *    · code surfaces (react / html / react-inline) render the input as the
+ *      focusable, checkable control (checked/indeterminate are DOM state,
+ *      never ARIA attributes) and visually manage it over its parent box;
+ *    · the canvas surfaces (figma script, canvas preview) draw NOTHING for
+ *      it — the box and glyphs are the visual; semantics don't draw. */
+export function isNativeCheckablePart(part: Part): boolean {
+  return (
+    part.element === 'input' &&
+    (part.attrs?.type === 'checkbox' || part.attrs?.type === 'radio')
+  );
 }
 
 // ---------------------------------------------------------------------------

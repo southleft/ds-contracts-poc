@@ -1,6 +1,6 @@
 /**
  * GENERATED FILE — DO NOT EDIT.
- * Source of truth: contracts/checkbox.contract.json (ds.checkbox v1.1.0)
+ * Source of truth: contracts/checkbox.contract.json (ds.checkbox v2.0.0)
  * Regenerate with: npm run generate
  */
 import type { Meta, StoryObj } from '@storybook/react-vite';
@@ -14,7 +14,7 @@ const meta = {
     docs: {
       description: {
         component:
-          'Toggles a single on/off value — settings, terms acceptance, opt-ins. API mirrors industry convention (Astryx CheckboxInput): checked, unchecked, and indeterminate are prop-driven appearance states.',
+          'Toggles a single on/off value — settings, terms acceptance, opt-ins. API mirrors industry convention (Astryx CheckboxInput): checked, unchecked, and indeterminate are prop-driven appearance states. v2.0.0 (breaking, DOM shape): the control is a NATIVE input[type=checkbox] inside the wrapping label — checked/indeterminate are DOM state, not ARIA on a button; the box and glyphs are presentational.',
       },
     },
   },
@@ -33,7 +33,7 @@ const meta = {
     onToggle: {
       control: false,
       description:
-        'Fires when the box is activated; uncontrolled instances flip unchecked/checked (indeterminate resolves to checked).',
+        'Fires when the input is toggled; uncontrolled instances flip unchecked/checked (indeterminate resolves to checked).',
     },
   },
   args: {

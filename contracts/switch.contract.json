@@ -2,9 +2,9 @@
   "$schema": "./contract.schema.json",
   "id": "ds.switch",
   "name": "Switch",
-  "version": "1.1.0",
+  "version": "2.0.0",
   "status": "draft",
-  "description": "Toggle for on/off settings that take effect immediately. API mirrors industry convention (Astryx Switch) with the boolean value flattened to an off/on enum so both surfaces render both states truthfully; toggle behavior is a declared boundary.",
+  "description": "Toggle for on/off settings that take effect immediately. API mirrors industry convention (Astryx Switch) with the boolean value flattened to an off/on enum so both surfaces render both states truthfully; toggle behavior is a declared boundary. v2.0.0 (breaking, DOM shape): the control is a NATIVE input[type=checkbox] with role=switch (the modern switch pattern) inside the wrapping label — checked is DOM state, not ARIA on a button; track and thumb are presentational.",
   "semantics": {
     "element": "label"
   },
@@ -80,7 +80,8 @@
       },
       "parts": {
         "track": {
-          "description": "The switch track. Thumb position is expressed structurally: a growing spacer sits on the off side.",
+          "description": "The switch track — presentational. Thumb position is expressed structurally: a growing spacer sits on the off side; the real input sits inside, visually managed.",
+          "element": "span",
           "layout": {
             "direction": "row",
             "align": "center"
@@ -94,6 +95,14 @@
             "padding-block": "{space.inset-y.xs}"
           },
           "parts": {
+            "input": {
+              "description": "The real checkable control — a native input[type=checkbox] carrying role=switch (the modern switch pattern). Checked is DOM state, never aria-checked on a button; the wrapping label gives implicit association. Canvas: not drawn (semantics don't draw).",
+              "element": "input",
+              "attrs": {
+                "type": "checkbox",
+                "role": "switch"
+              }
+            },
             "spacerStart": {
               "layout": {
                 "grow": true
@@ -122,10 +131,6 @@
                 "equals": "off"
               }
             }
-          },
-          "element": "button",
-          "attrs": {
-            "role": "switch"
           }
         },
         "textCol": {
@@ -179,13 +184,13 @@
   "events": [
     {
       "name": "toggle",
-      "description": "Fires when the track is activated; uncontrolled instances flip value off/on themselves.",
+      "description": "Fires when the input is toggled; uncontrolled instances flip value off/on themselves.",
       "bindings": {
         "code": {
           "prop": "onToggle"
         }
       },
-      "trigger": "track",
+      "trigger": "input",
       "toggles": {
         "prop": "value",
         "between": [

@@ -1,0 +1,85 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "ds.heading",
+  "name": "Heading",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "PROPOSED contract extracted from src/components/Heading/Heading.tsx (react-tsx + css-module adapters) — API surface AND anatomy (structure, token bindings, layout, states) read from source; design bindings await reconciliation and human review.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "level",
+      "description": "Document outline level — drives the rendered element (h1–h6) and the size ramp.",
+      "type": {
+        "enum": [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6"
+        ]
+      },
+      "default": "2",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Level",
+          "values": {
+            "1": "1",
+            "2": "2",
+            "3": "3",
+            "4": "4",
+            "5": "5",
+            "6": "6"
+          }
+        },
+        "code": {
+          "prop": "level"
+        }
+      }
+    },
+    {
+      "name": "size",
+      "description": "Visual size on the control type scale — independent of the document outline level.",
+      "type": {
+        "enum": [
+          "sm",
+          "md",
+          "lg"
+        ]
+      },
+      "default": "lg",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Size",
+          "values": {
+            "sm": "Sm",
+            "md": "Md",
+            "lg": "Lg"
+          }
+        },
+        "code": {
+          "prop": "size"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {}
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "src/components/Heading/Heading",
+      "export": "Heading"
+    }
+  }
+}

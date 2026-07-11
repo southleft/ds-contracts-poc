@@ -44,7 +44,107 @@
       "color-text-secondary",
       "font-control-size-sm",
       "font-control-weight"
-    ]
+    ],
+    "anatomy": {
+      "root": {
+        "parts": {
+          "trigger": {
+            "element": "button",
+            "parts": {
+              "chevron": {
+                "element": "span",
+                "tokens": {
+                  "color": "{color.text.secondary}"
+                },
+                "layout": {
+                  "display": "inline-flex"
+                }
+              },
+              "titleText": {
+                "element": "span",
+                "content": {
+                  "prop": "title"
+                },
+                "tokens": {
+                  "font-size": "{font.control.size.sm}",
+                  "font-weight": "{font.control.weight}"
+                },
+                "layout": {
+                  "grow": true
+                }
+              }
+            },
+            "tokens": {
+              "gap": "{space.gap.sm}",
+              "padding-inline": "{space.inset-x.sm}",
+              "padding-block": "{space.inset-y.md}"
+            },
+            "layout": {
+              "display": "flex",
+              "direction": "row",
+              "align": "center"
+            }
+          },
+          "contentArea": {
+            "element": "div",
+            "slot": {
+              "name": "children"
+            },
+            "visibleWhen": {
+              "prop": "state",
+              "equals": "open"
+            },
+            "tokens": {
+              "padding-inline": "{space.inset-x.sm}",
+              "padding-block": "{space.inset-y.md}",
+              "font-size": "{font.control.size.sm}",
+              "color": "{color.text.secondary}"
+            },
+            "layout": {
+              "display": "flex",
+              "direction": "column",
+              "align": "stretch"
+            }
+          }
+        },
+        "tokens": {
+          "max-width": "{size.card.width}",
+          "border-color": "{color.border.subtle}",
+          "border-width": "{border-width.100}",
+          "border-radius": "{radius.card}",
+          "background-color": "{color.surface.raised}",
+          "font-family": "{font.control.family}",
+          "color": "{color.surface.foreground}"
+        },
+        "layout": {
+          "display": "flex",
+          "direction": "column",
+          "align": "stretch"
+        }
+      },
+      "element": "div",
+      "states": [],
+      "events": {
+        "toggle": {
+          "trigger": "trigger",
+          "toggles": {
+            "prop": "state",
+            "between": [
+              "closed",
+              "open"
+            ],
+            "aria": "expanded"
+          },
+          "uncontrolledDefault": "closed"
+        }
+      },
+      "rawValues": [],
+      "notes": [
+        "jsx: part \"chevron\" renders an inline SVG glyph — icon asset not extracted (review item)",
+        "css: selector `.chevron svg` — icon glyph sizing, not extracted (icon parts are review items)",
+        "css: .chevron { flex-shrink: 0 } — no inversion rule, not extracted"
+      ]
+    }
   },
   {
     "name": "Avatar",
@@ -74,7 +174,34 @@
       "font-avatar-size-sm",
       "size-avatar-md",
       "font-avatar-size-md"
-    ]
+    ],
+    "anatomy": {
+      "root": {
+        "tokens": {
+          "border-radius": "{radius.avatar}",
+          "background-color": "{color.identity.background}",
+          "color": "{color.identity.foreground}",
+          "font-family": "{font.control.family}",
+          "font-weight": "{font.control.weight}",
+          "width": "{size.avatar.{size}}",
+          "height": "{size.avatar.{size}}",
+          "font-size": "{font.avatar.size.{size}}"
+        },
+        "layout": {
+          "display": "inline-flex",
+          "direction": "row",
+          "align": "center",
+          "justify": "center"
+        }
+      },
+      "element": "span",
+      "role": "img",
+      "states": [],
+      "rawValues": [],
+      "notes": [
+        "jsx: root renders {children} directly — children channel (text prop vs default slot) is not decidable from code"
+      ]
+    }
   },
   {
     "name": "AvatarGroup",
@@ -99,7 +226,56 @@
       "font-control-family",
       "font-avatar-size-md",
       "font-control-weight"
-    ]
+    ],
+    "anatomy": {
+      "root": {
+        "parts": {
+          "stack": {
+            "element": "div",
+            "slot": {
+              "name": "children"
+            },
+            "layout": {
+              "display": "flex",
+              "direction": "row",
+              "align": "center",
+              "overlap": true
+            },
+            "tokens": {
+              "gap": "{space.avatarGroup.overlap}"
+            }
+          },
+          "overflowText": {
+            "element": "span",
+            "content": {
+              "prop": "overflowLabel"
+            },
+            "tokens": {
+              "width": "{size.avatar.md}",
+              "height": "{size.avatar.md}",
+              "background-color": "{color.action.secondary.background}",
+              "color": "{color.text.secondary}",
+              "border-radius": "{radius.pill}",
+              "font-family": "{font.control.family}",
+              "font-size": "{font.avatar.size.md}",
+              "font-weight": "{font.control.weight}"
+            }
+          }
+        },
+        "tokens": {
+          "gap": "{space.gap.sm}"
+        },
+        "layout": {
+          "display": "inline-flex",
+          "direction": "row",
+          "align": "center"
+        }
+      },
+      "element": "div",
+      "states": [],
+      "rawValues": [],
+      "notes": []
+    }
   },
   {
     "name": "Badge",
@@ -115,7 +291,8 @@
           "info",
           "success",
           "warning",
-          "danger"
+          "danger",
+          "error"
         ],
         "confidence": "declared",
         "default": "info"
@@ -135,8 +312,36 @@
       "color-feedback-warning-background",
       "color-feedback-warning-foreground",
       "color-feedback-danger-background",
-      "color-feedback-danger-foreground"
-    ]
+      "color-feedback-danger-foreground",
+      "color-feedback-error-background",
+      "color-feedback-error-foreground"
+    ],
+    "anatomy": {
+      "root": {
+        "tokens": {
+          "padding-inline": "{space.inset-x.sm}",
+          "padding-block": "{space.inset-y.sm}",
+          "border-radius": "{radius.badge}",
+          "font-family": "{font.control.family}",
+          "font-weight": "{font.control.weight}",
+          "font-size": "{font.badge.size}",
+          "background-color": "{color.feedback.{variant}.background}",
+          "color": "{color.feedback.{variant}.foreground}"
+        },
+        "layout": {
+          "display": "inline-flex",
+          "align": "center",
+          "justify": "center"
+        }
+      },
+      "element": "span",
+      "role": "status",
+      "states": [],
+      "rawValues": [],
+      "notes": [
+        "jsx: root renders {children} directly — children channel (text prop vs default slot) is not decidable from code"
+      ]
+    }
   },
   {
     "name": "Banner",
@@ -221,7 +426,126 @@
       "font-title-weight",
       "font-control-size-sm",
       "space-gap-sm"
-    ]
+    ],
+    "anatomy": {
+      "root": {
+        "parts": {
+          "statusIcon": {
+            "element": "span",
+            "layout": {
+              "display": "inline-flex"
+            }
+          },
+          "body": {
+            "element": "div",
+            "parts": {
+              "title": {
+                "element": "div",
+                "content": {
+                  "prop": "title"
+                },
+                "tokens": {
+                  "font-family": "{font.control.family}",
+                  "font-size": "{font.control.size.md}",
+                  "font-weight": "{font.title.weight}"
+                }
+              },
+              "descriptionText": {
+                "element": "div",
+                "content": {
+                  "prop": "description"
+                },
+                "tokens": {
+                  "font-family": "{font.control.family}",
+                  "font-size": "{font.control.size.sm}"
+                }
+              }
+            },
+            "tokens": {
+              "gap": "{space.inset-y.sm}"
+            },
+            "layout": {
+              "display": "flex",
+              "direction": "column",
+              "grow": true
+            }
+          },
+          "endArea": {
+            "element": "div",
+            "parts": {
+              "endContent": {
+                "element": "div",
+                "slot": {
+                  "name": "endContent"
+                },
+                "optional": true,
+                "layout": {
+                  "display": "flex",
+                  "direction": "row",
+                  "align": "center"
+                }
+              },
+              "close": {
+                "element": "button",
+                "attrs": {
+                  "aria-label": "Dismiss",
+                  "type": "button",
+                  "data-action": "dismiss"
+                },
+                "parts": {
+                  "closeGlyph": {
+                    "element": "span",
+                    "layout": {
+                      "display": "inline-flex"
+                    }
+                  }
+                },
+                "visibleWhen": {
+                  "prop": "isDismissable"
+                },
+                "layout": {
+                  "display": "inline-flex",
+                  "align": "center",
+                  "justify": "center"
+                }
+              }
+            },
+            "tokens": {
+              "gap": "{space.gap.sm}"
+            },
+            "layout": {
+              "display": "flex",
+              "direction": "row",
+              "align": "center"
+            }
+          }
+        },
+        "tokens": {
+          "max-width": "{size.banner.width}",
+          "gap": "{space.gap.control}",
+          "padding-inline": "{space.inset-x.md}",
+          "padding-block": "{space.inset-y.lg}",
+          "background-color": "{color.feedback.{status}.background}",
+          "color": "{color.feedback.{status}.foreground}",
+          "border-radius": "{radius.banner.{container}}"
+        },
+        "layout": {
+          "display": "flex",
+          "direction": "row",
+          "align": "start"
+        }
+      },
+      "element": "div",
+      "states": [],
+      "rawValues": [],
+      "notes": [
+        "jsx: <div> attribute role={…} — expression not extractable, skipped",
+        "jsx: part \"statusIcon\" renders an inline SVG glyph — icon asset not extracted (review item)",
+        "jsx: part \"closeGlyph\" renders an inline SVG glyph — icon asset not extracted (review item)",
+        "css: .statusIcon { flex-shrink: 0 } — no inversion rule, not extracted",
+        "css: .close { flex-shrink: 0 } — no inversion rule, not extracted"
+      ]
+    }
   },
   {
     "name": "Blockquote",
@@ -246,7 +570,54 @@
       "font-control-family",
       "font-control-size-md",
       "font-control-size-sm"
-    ]
+    ],
+    "anatomy": {
+      "root": {
+        "parts": {
+          "quote": {
+            "element": "div",
+            "slot": {
+              "name": "children"
+            },
+            "layout": {
+              "display": "flex",
+              "direction": "column"
+            }
+          },
+          "citation": {
+            "element": "footer",
+            "slot": {
+              "name": "cite"
+            },
+            "optional": true,
+            "tokens": {
+              "font-size": "{font.control.size.sm}"
+            },
+            "layout": {
+              "display": "flex"
+            }
+          }
+        },
+        "tokens": {
+          "border-left-width": "{border.width.divider.strong}",
+          "border-left-color": "{color.divider.strong}",
+          "padding-inline": "{space.inset-x.md}",
+          "padding-block": "{space.inset-y.md}",
+          "gap": "{space.gap.sm}",
+          "color": "{color.text.secondary}",
+          "font-family": "{font.control.family}",
+          "font-size": "{font.control.size.md}"
+        },
+        "layout": {
+          "display": "flex",
+          "direction": "column"
+        }
+      },
+      "element": "blockquote",
+      "states": [],
+      "rawValues": [],
+      "notes": []
+    }
   },
   {
     "name": "BreadcrumbItem",
@@ -282,7 +653,55 @@
       "font-control-family",
       "font-control-size-sm",
       "color-text-secondary"
-    ]
+    ],
+    "anatomy": {
+      "root": {
+        "parts": {
+          "separatorIcon": {
+            "element": "span",
+            "visibleWhen": {
+              "prop": "hasSeparator"
+            },
+            "tokens": {
+              "color": "{color.text.secondary}"
+            },
+            "layout": {
+              "display": "inline-flex"
+            }
+          },
+          "link": {
+            "element": "a",
+            "attrs": {
+              "href": "{href}"
+            },
+            "content": {
+              "prop": "label"
+            },
+            "tokens": {
+              "color": "{color.text.secondary}"
+            }
+          }
+        },
+        "tokens": {
+          "gap": "{space.inset-y.sm}",
+          "font-family": "{font.control.family}",
+          "font-size": "{font.control.size.sm}"
+        },
+        "layout": {
+          "display": "inline-flex",
+          "direction": "row",
+          "align": "center"
+        }
+      },
+      "element": "span",
+      "states": [],
+      "rawValues": [],
+      "notes": [
+        "jsx: part \"separatorIcon\" renders an inline SVG glyph — icon asset not extracted (review item)",
+        "css: selector `.separatorIcon svg` — icon glyph sizing, not extracted (icon parts are review items)",
+        "css: .separatorIcon { flex-shrink: 0 } — no inversion rule, not extracted"
+      ]
+    }
   },
   {
     "name": "Breadcrumbs",
@@ -299,7 +718,39 @@
     ],
     "cssVars": [
       "space-inset-y-sm"
-    ]
+    ],
+    "anatomy": {
+      "root": {
+        "parts": {
+          "trail": {
+            "element": "div",
+            "slot": {
+              "name": "children"
+            },
+            "tokens": {
+              "gap": "{space.inset-y.sm}"
+            },
+            "layout": {
+              "display": "flex",
+              "direction": "row",
+              "align": "center"
+            }
+          }
+        },
+        "tokens": {
+          "gap": "{space.inset-y.sm}"
+        },
+        "layout": {
+          "display": "flex",
+          "direction": "row",
+          "align": "center"
+        }
+      },
+      "element": "nav",
+      "states": [],
+      "rawValues": [],
+      "notes": []
+    }
   },
   {
     "name": "Button",
@@ -314,7 +765,8 @@
         "values": [
           "primary",
           "secondary",
-          "danger"
+          "danger",
+          "ghost"
         ],
         "confidence": "declared",
         "default": "primary"
@@ -360,6 +812,8 @@
       "color-action-secondary-foreground",
       "color-action-danger-background",
       "color-action-danger-foreground",
+      "color-action-ghost-background",
+      "color-action-ghost-foreground",
       "space-inset-x-sm",
       "space-inset-y-sm",
       "font-control-size-sm",
@@ -372,10 +826,75 @@
       "color-action-primary-background-hover",
       "color-action-secondary-background-hover",
       "color-action-danger-background-hover",
+      "color-action-ghost-background-hover",
       "color-border-focus",
       "border-width-focus",
       "opacity-disabled"
-    ]
+    ],
+    "anatomy": {
+      "root": {
+        "parts": {
+          "loadingSpinner": {
+            "element": "span",
+            "visibleWhen": {
+              "prop": "loading"
+            },
+            "layout": {
+              "display": "inline-flex"
+            },
+            "animation": "spin"
+          },
+          "label": {
+            "element": "span",
+            "slot": {
+              "name": "children"
+            }
+          }
+        },
+        "tokens": {
+          "border-radius": "{radius.control}",
+          "gap": "{space.gap.control}",
+          "font-family": "{font.control.family}",
+          "font-weight": "{font.control.weight}",
+          "background-color": "{color.action.{variant}.background}",
+          "color": "{color.action.{variant}.foreground}",
+          "padding-inline": "{space.inset-x.{size}}",
+          "padding-block": "{space.inset-y.{size}}",
+          "font-size": "{font.control.size.{size}}"
+        },
+        "layout": {
+          "display": "inline-flex",
+          "direction": "row",
+          "align": "center",
+          "justify": "center"
+        },
+        "states": {
+          "focus-visible": {
+            "outline-color": "{color.border.focus}",
+            "outline-width": "{border.width.focus}"
+          },
+          "disabled": {
+            "opacity": "{opacity.disabled}"
+          },
+          "hover": {
+            "background-color": "{color.action.{variant}.background-hover}"
+          }
+        }
+      },
+      "element": "button",
+      "states": [
+        "hover",
+        "focus-visible",
+        "disabled"
+      ],
+      "rawValues": [],
+      "notes": [
+        "jsx: <button> attribute disabled={…} — expression not extractable, skipped",
+        "jsx: part \"loadingSpinner\" renders an inline SVG glyph — icon asset not extracted (review item)",
+        "css: selector `.loadingSpinner svg` — icon glyph sizing, not extracted (icon parts are review items)",
+        "css: .loadingSpinner { flex-shrink: 0 } — no inversion rule, not extracted"
+      ]
+    }
   },
   {
     "name": "Card",
@@ -411,7 +930,102 @@
       "font-title-size",
       "font-title-weight",
       "font-control-size-sm"
-    ]
+    ],
+    "anatomy": {
+      "root": {
+        "parts": {
+          "header": {
+            "element": "header",
+            "parts": {
+              "avatar": {
+                "component": {
+                  "name": "Avatar",
+                  "props": {
+                    "size": "sm"
+                  },
+                  "text": "AB"
+                }
+              },
+              "title": {
+                "element": "span",
+                "content": {
+                  "prop": "title"
+                },
+                "tokens": {
+                  "color": "{color.surface.foreground}",
+                  "font-family": "{font.control.family}",
+                  "font-size": "{font.title.size}",
+                  "font-weight": "{font.title.weight}"
+                }
+              }
+            },
+            "tokens": {
+              "gap": "{space.gap.control}",
+              "padding-inline": "{space.inset-x.md}",
+              "padding-block": "{space.inset-y.md}"
+            },
+            "layout": {
+              "display": "flex",
+              "direction": "row",
+              "align": "center"
+            }
+          },
+          "body": {
+            "element": "div",
+            "slot": {
+              "name": "children"
+            },
+            "tokens": {
+              "gap": "{space.gap.control}",
+              "padding-inline": "{space.inset-x.md}",
+              "padding-block": "{space.inset-y.md}",
+              "color": "{color.surface.foreground}",
+              "font-family": "{font.control.family}",
+              "font-size": "{font.control.size.sm}"
+            },
+            "layout": {
+              "display": "flex",
+              "direction": "column",
+              "align": "stretch"
+            }
+          },
+          "footer": {
+            "element": "footer",
+            "slot": {
+              "name": "actions"
+            },
+            "optional": true,
+            "tokens": {
+              "gap": "{space.gap.control}",
+              "padding-inline": "{space.inset-x.md}",
+              "padding-block": "{space.inset-y.md}"
+            },
+            "layout": {
+              "display": "flex",
+              "direction": "row",
+              "align": "center",
+              "justify": "end"
+            }
+          }
+        },
+        "tokens": {
+          "background-color": "{color.surface.raised}",
+          "border-color": "{color.border.subtle}",
+          "border-width": "{border-width.100}",
+          "border-radius": "{radius.card}",
+          "max-width": "{size.card.width}"
+        },
+        "layout": {
+          "display": "flex",
+          "direction": "column",
+          "align": "stretch"
+        }
+      },
+      "element": "article",
+      "states": [],
+      "rawValues": [],
+      "notes": []
+    }
   },
   {
     "name": "ChatMessage",
@@ -472,7 +1086,99 @@
       "color-chat-user-foreground",
       "color-chat-assistant-foreground",
       "color-chat-system-foreground"
-    ]
+    ],
+    "anatomy": {
+      "root": {
+        "parts": {
+          "avatarSlot": {
+            "element": "div",
+            "slot": {
+              "name": "avatar"
+            },
+            "optional": true,
+            "layout": {
+              "display": "flex",
+              "direction": "row",
+              "align": "start"
+            }
+          },
+          "body": {
+            "element": "div",
+            "parts": {
+              "nameText": {
+                "element": "span",
+                "content": {
+                  "prop": "name"
+                },
+                "tokens": {
+                  "font-size": "{font.badge.size}",
+                  "font-weight": "{font.title.weight}",
+                  "color": "{color.text.secondary}"
+                }
+              },
+              "bubble": {
+                "element": "div",
+                "slot": {
+                  "name": "children"
+                },
+                "tokens": {
+                  "border-radius": "{radius.card}",
+                  "gap": "{space.inset-y.sm}",
+                  "padding-inline": "{space.inset-x.sm}",
+                  "padding-block": "{space.inset-y.md}",
+                  "font-size": "{font.control.size.sm}",
+                  "background-color": "{color.chat.{sender}.background}",
+                  "color": "{color.chat.{sender}.foreground}"
+                },
+                "layout": {
+                  "display": "flex",
+                  "direction": "column",
+                  "align": "stretch"
+                }
+              },
+              "metadataSlot": {
+                "element": "div",
+                "slot": {
+                  "name": "metadata"
+                },
+                "optional": true,
+                "layout": {
+                  "display": "flex",
+                  "direction": "row",
+                  "align": "center"
+                }
+              }
+            },
+            "tokens": {
+              "gap": "{space.inset-y.sm}"
+            },
+            "layout": {
+              "display": "flex",
+              "direction": "column",
+              "align": "stretch",
+              "grow": true
+            }
+          }
+        },
+        "tokens": {
+          "max-width": "{size.banner.width}",
+          "gap": "{space.gap.sm}",
+          "font-family": "{font.control.family}"
+        },
+        "layout": {
+          "display": "flex",
+          "direction": "row",
+          "align": "start"
+        }
+      },
+      "element": "div",
+      "states": [],
+      "rawValues": [],
+      "notes": [
+        "css: .sender-user { flex-direction: row-reverse } — a per-variant layout override (contract layoutByProp); not extracted, author it against design intent",
+        "css: .sender-user .body { align-items: flex-end } — a per-variant layout override (contract layoutByProp); not extracted, author it against design intent"
+      ]
+    }
   },
   {
     "name": "ChatMessageMetadata",
@@ -515,7 +1221,59 @@
       "font-control-family",
       "font-badge-size",
       "color-text-secondary"
-    ]
+    ],
+    "anatomy": {
+      "root": {
+        "parts": {
+          "statusIcon": {
+            "element": "span",
+            "layout": {
+              "display": "inline-flex"
+            }
+          },
+          "timestampText": {
+            "element": "span",
+            "content": {
+              "prop": "timestamp"
+            }
+          },
+          "footer": {
+            "element": "div",
+            "slot": {
+              "name": "footer"
+            },
+            "optional": true,
+            "tokens": {
+              "gap": "{space.inset-y.sm}"
+            },
+            "layout": {
+              "display": "flex",
+              "direction": "row",
+              "align": "center"
+            }
+          }
+        },
+        "tokens": {
+          "gap": "{space.inset-y.sm}",
+          "font-family": "{font.control.family}",
+          "font-size": "{font.badge.size}",
+          "color": "{color.text.secondary}"
+        },
+        "layout": {
+          "display": "flex",
+          "direction": "row",
+          "align": "center"
+        }
+      },
+      "element": "div",
+      "states": [],
+      "rawValues": [],
+      "notes": [
+        "jsx: part \"statusIcon\" renders an inline SVG glyph — icon asset not extracted (review item)",
+        "css: selector `.statusIcon svg` — icon glyph sizing, not extracted (icon parts are review items)",
+        "css: .statusIcon { flex-shrink: 0 } — no inversion rule, not extracted"
+      ]
+    }
   },
   {
     "name": "ChatSystemMessage",
@@ -556,7 +1314,78 @@
       "color-text-secondary",
       "border-width-divider-subtle",
       "color-divider-subtle"
-    ]
+    ],
+    "anatomy": {
+      "root": {
+        "parts": {
+          "lineStart": {
+            "element": "div",
+            "visibleWhen": {
+              "prop": "variant",
+              "equals": "divider"
+            },
+            "tokens": {
+              "height": "{border.width.divider.subtle}",
+              "background-color": "{color.divider.subtle}"
+            },
+            "layout": {
+              "display": "flex",
+              "grow": true
+            }
+          },
+          "iconSlot": {
+            "element": "div",
+            "slot": {
+              "name": "icon"
+            },
+            "optional": true,
+            "layout": {
+              "display": "flex",
+              "direction": "row",
+              "align": "center"
+            }
+          },
+          "messageText": {
+            "element": "span",
+            "content": {
+              "prop": "message"
+            }
+          },
+          "lineEnd": {
+            "element": "div",
+            "visibleWhen": {
+              "prop": "variant",
+              "equals": "divider"
+            },
+            "tokens": {
+              "height": "{border.width.divider.subtle}",
+              "background-color": "{color.divider.subtle}"
+            },
+            "layout": {
+              "display": "flex",
+              "grow": true
+            }
+          }
+        },
+        "tokens": {
+          "max-width": "{size.card.width}",
+          "gap": "{space.gap.sm}",
+          "font-family": "{font.control.family}",
+          "font-size": "{font.badge.size}",
+          "color": "{color.text.secondary}"
+        },
+        "layout": {
+          "display": "flex",
+          "direction": "row",
+          "align": "center",
+          "justify": "center"
+        }
+      },
+      "element": "div",
+      "states": [],
+      "rawValues": [],
+      "notes": []
+    }
   },
   {
     "name": "Checkbox",
@@ -605,7 +1434,7 @@
       {
         "name": "onToggle",
         "optional": true,
-        "description": "Fires when the box is activated; uncontrolled instances flip unchecked/checked (indeterminate resolves to checked).",
+        "description": "Fires when the input is toggled; uncontrolled instances flip unchecked/checked (indeterminate resolves to checked).",
         "kind": "event",
         "confidence": "declared"
       }
@@ -629,7 +1458,158 @@
       "font-control-size-sm",
       "font-control-weight",
       "color-text-secondary"
-    ]
+    ],
+    "anatomy": {
+      "root": {
+        "parts": {
+          "box": {
+            "element": "span",
+            "parts": {
+              "input": {
+                "element": "input",
+                "attrs": {
+                  "type": "checkbox"
+                }
+              },
+              "checkGlyph": {
+                "element": "span",
+                "visibleWhen": {
+                  "prop": "value",
+                  "equals": "checked"
+                },
+                "layout": {
+                  "display": "inline-flex"
+                }
+              },
+              "dashGlyph": {
+                "element": "span",
+                "visibleWhen": {
+                  "prop": "value",
+                  "equals": "indeterminate"
+                },
+                "layout": {
+                  "display": "inline-flex"
+                }
+              }
+            },
+            "tokens": {
+              "border-width": "{border-width.100}",
+              "border-radius": "{radius.100}",
+              "color": "{color.checkbox.icon}",
+              "width": "{size.checkbox.{size}}",
+              "height": "{size.checkbox.{size}}",
+              "background-color": "{color.checkbox.{value}.background}",
+              "border-color": "{color.checkbox.{value}.border}"
+            },
+            "layout": {
+              "display": "flex",
+              "direction": "row",
+              "align": "center",
+              "justify": "center"
+            }
+          },
+          "textCol": {
+            "element": "div",
+            "parts": {
+              "labelText": {
+                "element": "span",
+                "content": {
+                  "prop": "label"
+                },
+                "tokens": {
+                  "font-size": "{font.control.size.sm}",
+                  "font-weight": "{font.control.weight}"
+                }
+              },
+              "descriptionText": {
+                "element": "span",
+                "content": {
+                  "prop": "description"
+                },
+                "tokens": {
+                  "font-size": "{font.control.size.sm}",
+                  "color": "{color.text.secondary}"
+                }
+              }
+            },
+            "tokens": {
+              "gap": "{space.inset-y.xs}"
+            },
+            "layout": {
+              "display": "flex",
+              "direction": "column",
+              "grow": true
+            }
+          }
+        },
+        "tokens": {
+          "gap": "{space.gap.sm}",
+          "font-family": "{font.control.family}",
+          "color": "{color.surface.foreground}"
+        },
+        "layout": {
+          "display": "flex",
+          "direction": "row",
+          "align": "start"
+        }
+      },
+      "element": "label",
+      "states": [],
+      "events": {
+        "toggle": {
+          "trigger": "input",
+          "toggles": {
+            "prop": "value",
+            "between": [
+              "unchecked",
+              "checked"
+            ],
+            "aria": "checked"
+          },
+          "uncontrolledDefault": "unchecked"
+        }
+      },
+      "rawValues": [
+        {
+          "selector": ".input",
+          "property": "width",
+          "value": "100%",
+          "candidates": []
+        },
+        {
+          "selector": ".input",
+          "property": "height",
+          "value": "100%",
+          "candidates": []
+        }
+      ],
+      "notes": [
+        "jsx: part \"checkGlyph\" renders an inline SVG glyph — icon asset not extracted (review item)",
+        "jsx: part \"dashGlyph\" renders an inline SVG glyph — icon asset not extracted (review item)",
+        "css: selector `.box:has(> .input:focus-visible)` — pseudo \":has(> .input:focus-visible)\" is not a contract state, not extracted",
+        "css: .input { inset: 0 } — no inversion rule, not extracted",
+        "css: .input { opacity: 0 } — no inversion rule, not extracted",
+        "css: .input position:absolute with insets (top:;bottom:;left:;right:) — not a generator overlay placement, not extracted",
+        "css: selector `.checkGlyph svg` — icon glyph sizing, not extracted (icon parts are review items)",
+        "css: .checkGlyph { flex-shrink: 0 } — no inversion rule, not extracted",
+        "css: selector `.dashGlyph svg` — icon glyph sizing, not extracted (icon parts are review items)",
+        "css: .dashGlyph { flex-shrink: 0 } — no inversion rule, not extracted"
+      ],
+      "mintables": [
+        {
+          "selector": ".input",
+          "part": "input",
+          "cssProperty": "width",
+          "raw": "100%"
+        },
+        {
+          "selector": ".input",
+          "part": "input",
+          "cssProperty": "height",
+          "raw": "100%"
+        }
+      ]
+    }
   },
   {
     "name": "Citation",
@@ -681,7 +1661,52 @@
       "font-control-family",
       "font-badge-size",
       "font-control-weight"
-    ]
+    ],
+    "anatomy": {
+      "root": {
+        "parts": {
+          "labelText": {
+            "element": "span",
+            "content": {
+              "prop": "sourceTitle"
+            },
+            "visibleWhen": {
+              "prop": "variant",
+              "equals": "label"
+            }
+          },
+          "numberText": {
+            "element": "span",
+            "content": {
+              "prop": "number"
+            },
+            "visibleWhen": {
+              "prop": "variant",
+              "equals": "number"
+            }
+          }
+        },
+        "tokens": {
+          "background-color": "{color.surface.sunken}",
+          "color": "{color.text.secondary}",
+          "border-radius": "{radius.100}",
+          "padding-inline": "{space.inset-x.xs}",
+          "padding-block": "{space.inset-y.xs}",
+          "font-family": "{font.control.family}",
+          "font-size": "{font.badge.size}",
+          "font-weight": "{font.control.weight}"
+        },
+        "layout": {
+          "display": "inline-flex",
+          "direction": "row",
+          "align": "center"
+        }
+      },
+      "element": "a",
+      "states": [],
+      "rawValues": [],
+      "notes": []
+    }
   },
   {
     "name": "Code",
@@ -696,7 +1721,31 @@
       "space-inset-y-xs",
       "font-code-family",
       "font-control-size-sm"
-    ]
+    ],
+    "anatomy": {
+      "root": {
+        "tokens": {
+          "background-color": "{color.surface.sunken}",
+          "color": "{color.surface.foreground}",
+          "border-radius": "{radius.100}",
+          "padding-inline": "{space.inset-x.xs}",
+          "padding-block": "{space.inset-y.xs}",
+          "font-family": "{font.code.family}",
+          "font-size": "{font.control.size.sm}"
+        },
+        "layout": {
+          "display": "inline-flex",
+          "align": "center",
+          "justify": "center"
+        }
+      },
+      "element": "code",
+      "states": [],
+      "rawValues": [],
+      "notes": [
+        "jsx: root renders {children} directly — children channel (text prop vs default slot) is not decidable from code"
+      ]
+    }
   },
   {
     "name": "Divider",
@@ -722,7 +1771,28 @@
       "border-width-divider-subtle",
       "color-divider-strong",
       "border-width-divider-strong"
-    ]
+    ],
+    "anatomy": {
+      "root": {
+        "tokens": {
+          "max-width": "{size.divider.length}",
+          "background-color": "{color.divider.{variant}}",
+          "height": "{border.width.divider.{variant}}"
+        },
+        "layout": {
+          "display": "inline-flex",
+          "align": "center",
+          "justify": "center"
+        }
+      },
+      "element": "hr",
+      "role": "separator",
+      "states": [],
+      "rawValues": [],
+      "notes": [
+        "jsx: root renders {children} directly — children channel (text prop vs default slot) is not decidable from code"
+      ]
+    }
   },
   {
     "name": "EmptyState",
@@ -770,7 +1840,82 @@
       "font-control-size-sm",
       "color-text-secondary",
       "space-inset-y-sm"
-    ]
+    ],
+    "anatomy": {
+      "root": {
+        "parts": {
+          "iconArea": {
+            "element": "div",
+            "attrs": {
+              "aria-hidden": "true"
+            },
+            "slot": {
+              "name": "icon"
+            },
+            "optional": true,
+            "layout": {
+              "display": "flex",
+              "direction": "row",
+              "align": "center",
+              "justify": "center"
+            }
+          },
+          "title": {
+            "element": "span",
+            "content": {
+              "prop": "title"
+            },
+            "tokens": {
+              "font-size": "{font.control.size.md}",
+              "font-weight": "{font.title.weight}"
+            }
+          },
+          "descriptionText": {
+            "element": "span",
+            "content": {
+              "prop": "description"
+            },
+            "tokens": {
+              "font-size": "{font.control.size.sm}",
+              "color": "{color.text.secondary}"
+            }
+          },
+          "actions": {
+            "element": "div",
+            "slot": {
+              "name": "actions"
+            },
+            "optional": true,
+            "tokens": {
+              "gap": "{space.gap.sm}",
+              "padding-block": "{space.inset-y.sm}"
+            },
+            "layout": {
+              "display": "flex",
+              "direction": "row",
+              "align": "center"
+            }
+          }
+        },
+        "tokens": {
+          "max-width": "{size.card.width}",
+          "gap": "{space.gap.sm}",
+          "padding-inline": "{space.inset-x.lg}",
+          "padding-block": "{space.inset-x.lg}",
+          "font-family": "{font.control.family}",
+          "color": "{color.surface.foreground}"
+        },
+        "layout": {
+          "display": "flex",
+          "direction": "column",
+          "align": "center"
+        }
+      },
+      "element": "div",
+      "states": [],
+      "rawValues": [],
+      "notes": []
+    }
   },
   {
     "name": "Field",
@@ -817,7 +1962,142 @@
       "font-control-weight",
       "color-action-danger-background",
       "color-text-secondary"
-    ]
+    ],
+    "anatomy": {
+      "root": {
+        "parts": {
+          "labelRow": {
+            "element": "label",
+            "attrs": {
+              "htmlFor": "{inputID}"
+            },
+            "parts": {
+              "labelText": {
+                "element": "span",
+                "content": {
+                  "prop": "label"
+                }
+              },
+              "requiredMark": {
+                "element": "span",
+                "visibleWhen": {
+                  "prop": "isRequired"
+                },
+                "tokens": {
+                  "color": "{color.action.danger.background}"
+                },
+                "layout": {
+                  "display": "inline-flex"
+                }
+              }
+            },
+            "tokens": {
+              "gap": "{space.inset-y.sm}",
+              "font-size": "{font.control.size.sm}",
+              "font-weight": "{font.control.weight}"
+            },
+            "layout": {
+              "display": "flex",
+              "direction": "row",
+              "align": "center"
+            }
+          },
+          "descriptionText": {
+            "element": "span",
+            "content": {
+              "prop": "description"
+            },
+            "tokens": {
+              "font-size": "{font.control.size.sm}",
+              "color": "{color.text.secondary}"
+            }
+          },
+          "control": {
+            "element": "div",
+            "slot": {
+              "name": "children"
+            },
+            "layout": {
+              "display": "flex",
+              "direction": "column",
+              "align": "stretch"
+            }
+          }
+        },
+        "tokens": {
+          "max-width": "{size.card.width}",
+          "gap": "{space.inset-y.sm}",
+          "font-family": "{font.control.family}",
+          "color": "{color.surface.foreground}"
+        },
+        "layout": {
+          "display": "flex",
+          "direction": "column",
+          "align": "stretch"
+        }
+      },
+      "element": "div",
+      "states": [],
+      "rawValues": [],
+      "notes": [
+        "jsx: part \"requiredMark\" renders an inline SVG glyph — icon asset not extracted (review item)",
+        "css: selector `.requiredMark svg` — icon glyph sizing, not extracted (icon parts are review items)",
+        "css: .requiredMark { flex-shrink: 0 } — no inversion rule, not extracted"
+      ]
+    }
+  },
+  {
+    "name": "Heading",
+    "source": "src/components/Heading/Heading.tsx",
+    "adapter": "react-tsx",
+    "props": [
+      {
+        "name": "level",
+        "optional": true,
+        "description": "Document outline level — drives the rendered element (h1–h6) and the size ramp.",
+        "kind": "enum",
+        "values": [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6"
+        ],
+        "confidence": "declared",
+        "default": "2"
+      },
+      {
+        "name": "size",
+        "optional": true,
+        "description": "Visual size on the control type scale — independent of the document outline level.",
+        "kind": "enum",
+        "values": [
+          "sm",
+          "md",
+          "lg"
+        ],
+        "confidence": "declared",
+        "default": "lg"
+      }
+    ],
+    "cssVars": [
+      "font-control-family",
+      "font-title-weight",
+      "color-surface-foreground",
+      "font-control-size-sm",
+      "font-control-size-md",
+      "font-control-size-lg"
+    ],
+    "anatomy": {
+      "root": {},
+      "element": "div",
+      "states": [],
+      "rawValues": [],
+      "notes": [
+        "jsx: root element <Tag> is a component — anatomy not extracted (wrapper components are review items)"
+      ]
+    }
   },
   {
     "name": "IconButton",
@@ -893,7 +2173,54 @@
       "color-action-destructive-background-hover",
       "color-border-focus",
       "border-width-focus"
-    ]
+    ],
+    "anatomy": {
+      "root": {
+        "parts": {
+          "iconSlot": {
+            "element": "div",
+            "slot": {
+              "name": "icon"
+            },
+            "layout": {
+              "display": "flex",
+              "direction": "row",
+              "align": "center",
+              "justify": "center"
+            }
+          }
+        },
+        "tokens": {
+          "border-radius": "{radius.control}",
+          "width": "{size.icon-button.{size}}",
+          "height": "{size.icon-button.{size}}",
+          "background-color": "{color.action.{variant}.background}",
+          "color": "{color.action.{variant}.foreground}"
+        },
+        "layout": {
+          "display": "inline-flex",
+          "direction": "row",
+          "align": "center",
+          "justify": "center"
+        },
+        "states": {
+          "focus-visible": {
+            "outline-color": "{color.border.focus}",
+            "outline-width": "{border.width.focus}"
+          },
+          "hover": {
+            "background-color": "{color.action.{variant}.background-hover}"
+          }
+        }
+      },
+      "element": "button",
+      "states": [
+        "hover",
+        "focus-visible"
+      ],
+      "rawValues": [],
+      "notes": []
+    }
   },
   {
     "name": "Inline",
@@ -918,7 +2245,25 @@
       "space-gap-sm",
       "space-gap-md",
       "space-gap-lg"
-    ]
+    ],
+    "anatomy": {
+      "root": {
+        "tokens": {
+          "gap": "{space.gap.{gap}}"
+        },
+        "layout": {
+          "display": "flex",
+          "direction": "row",
+          "align": "center"
+        }
+      },
+      "element": "div",
+      "states": [],
+      "rawValues": [],
+      "notes": [
+        "jsx: root renders {children} directly — children channel (text prop vs default slot) is not decidable from code"
+      ]
+    }
   },
   {
     "name": "Kbd",
@@ -943,7 +2288,40 @@
       "space-inset-y-xs",
       "font-code-family",
       "font-badge-size"
-    ]
+    ],
+    "anatomy": {
+      "root": {
+        "parts": {
+          "keysText": {
+            "element": "span",
+            "content": {
+              "prop": "keys"
+            }
+          }
+        },
+        "tokens": {
+          "background-color": "{color.surface.sunken}",
+          "color": "{color.surface.foreground}",
+          "border-color": "{color.border.subtle}",
+          "border-width": "{border-width.100}",
+          "border-radius": "{radius.100}",
+          "padding-inline": "{space.inset-x.xs}",
+          "padding-block": "{space.inset-y.xs}",
+          "font-family": "{font.code.family}",
+          "font-size": "{font.badge.size}"
+        },
+        "layout": {
+          "display": "inline-flex",
+          "direction": "row",
+          "align": "center",
+          "justify": "center"
+        }
+      },
+      "element": "kbd",
+      "states": [],
+      "rawValues": [],
+      "notes": []
+    }
   },
   {
     "name": "List",
@@ -974,7 +2352,46 @@
       "space-list-compact",
       "space-list-balanced",
       "space-list-spacious"
-    ]
+    ],
+    "anatomy": {
+      "root": {
+        "parts": {
+          "items": {
+            "element": "div",
+            "slot": {
+              "name": "children"
+            },
+            "tokens": {
+              "gap": "{space.list.{density}}"
+            },
+            "layout": {
+              "display": "flex",
+              "direction": "column",
+              "align": "stretch"
+            }
+          }
+        },
+        "tokens": {
+          "max-width": "{size.card.width}",
+          "background-color": "{color.surface.raised}",
+          "border-color": "{color.border.subtle}",
+          "border-width": "{border-width.100}",
+          "border-radius": "{radius.card}",
+          "padding-inline": "{space.inset-y.sm}",
+          "padding-block": "{space.inset-y.sm}",
+          "gap": "{space.list.{density}}"
+        },
+        "layout": {
+          "display": "flex",
+          "direction": "column",
+          "align": "stretch"
+        }
+      },
+      "element": "ul",
+      "states": [],
+      "rawValues": [],
+      "notes": []
+    }
   },
   {
     "name": "ListItem",
@@ -1021,7 +2438,86 @@
       "font-control-size-sm",
       "font-control-weight",
       "color-text-secondary"
-    ]
+    ],
+    "anatomy": {
+      "root": {
+        "parts": {
+          "startContent": {
+            "element": "div",
+            "slot": {
+              "name": "startContent"
+            },
+            "optional": true,
+            "layout": {
+              "display": "flex",
+              "direction": "row",
+              "align": "center"
+            }
+          },
+          "textCol": {
+            "element": "div",
+            "parts": {
+              "labelText": {
+                "element": "span",
+                "content": {
+                  "prop": "label"
+                },
+                "tokens": {
+                  "font-size": "{font.control.size.sm}",
+                  "font-weight": "{font.control.weight}"
+                }
+              },
+              "descriptionText": {
+                "element": "span",
+                "content": {
+                  "prop": "description"
+                },
+                "tokens": {
+                  "font-size": "{font.control.size.sm}",
+                  "color": "{color.text.secondary}"
+                }
+              }
+            },
+            "tokens": {
+              "gap": "{space.inset-y.xs}"
+            },
+            "layout": {
+              "display": "flex",
+              "direction": "column",
+              "grow": true
+            }
+          },
+          "endContent": {
+            "element": "div",
+            "slot": {
+              "name": "endContent"
+            },
+            "optional": true,
+            "layout": {
+              "display": "flex",
+              "direction": "row",
+              "align": "center"
+            }
+          }
+        },
+        "tokens": {
+          "gap": "{space.gap.sm}",
+          "padding-inline": "{space.inset-x.sm}",
+          "padding-block": "{space.inset-y.md}",
+          "font-family": "{font.control.family}",
+          "color": "{color.surface.foreground}"
+        },
+        "layout": {
+          "display": "flex",
+          "direction": "row",
+          "align": "center"
+        }
+      },
+      "element": "li",
+      "states": [],
+      "rawValues": [],
+      "notes": []
+    }
   },
   {
     "name": "MetadataList",
@@ -1044,7 +2540,52 @@
       "font-control-size-sm",
       "font-title-weight",
       "color-surface-foreground"
-    ]
+    ],
+    "anatomy": {
+      "root": {
+        "parts": {
+          "titleText": {
+            "element": "span",
+            "content": {
+              "prop": "title"
+            },
+            "tokens": {
+              "font-size": "{font.control.size.sm}",
+              "font-weight": "{font.title.weight}",
+              "color": "{color.surface.foreground}"
+            }
+          },
+          "items": {
+            "element": "div",
+            "slot": {
+              "name": "children"
+            },
+            "tokens": {
+              "gap": "{space.gap.sm}"
+            },
+            "layout": {
+              "display": "flex",
+              "direction": "column",
+              "align": "stretch"
+            }
+          }
+        },
+        "tokens": {
+          "max-width": "{size.card.width}",
+          "gap": "{space.gap.sm}",
+          "font-family": "{font.control.family}"
+        },
+        "layout": {
+          "display": "flex",
+          "direction": "column",
+          "align": "stretch"
+        }
+      },
+      "element": "div",
+      "states": [],
+      "rawValues": [],
+      "notes": []
+    }
   },
   {
     "name": "MetadataListItem",
@@ -1082,7 +2623,62 @@
       "container-xs",
       "color-surface-foreground",
       "font-control-weight"
-    ]
+    ],
+    "anatomy": {
+      "root": {
+        "parts": {
+          "iconSlot": {
+            "element": "div",
+            "slot": {
+              "name": "icon"
+            },
+            "optional": true,
+            "layout": {
+              "display": "flex",
+              "direction": "row",
+              "align": "center"
+            }
+          },
+          "labelText": {
+            "element": "span",
+            "content": {
+              "prop": "label"
+            },
+            "tokens": {
+              "color": "{color.text.secondary}",
+              "min-width": "{container.xs}"
+            }
+          },
+          "valueText": {
+            "element": "span",
+            "content": {
+              "prop": "value"
+            },
+            "tokens": {
+              "color": "{color.surface.foreground}",
+              "font-weight": "{font.control.weight}"
+            },
+            "layout": {
+              "grow": true
+            }
+          }
+        },
+        "tokens": {
+          "gap": "{space.gap.md}",
+          "font-family": "{font.control.family}",
+          "font-size": "{font.control.size.sm}"
+        },
+        "layout": {
+          "display": "flex",
+          "direction": "row",
+          "align": "start"
+        }
+      },
+      "element": "div",
+      "states": [],
+      "rawValues": [],
+      "notes": []
+    }
   },
   {
     "name": "Pagination",
@@ -1135,7 +2731,217 @@
       "radius-pill",
       "color-status-accent",
       "color-status-neutral"
-    ]
+    ],
+    "anatomy": {
+      "root": {
+        "parts": {
+          "prevButton": {
+            "element": "button",
+            "attrs": {
+              "aria-label": "Previous page",
+              "type": "button"
+            },
+            "parts": {
+              "prevButtonGlyph": {
+                "element": "span",
+                "layout": {
+                  "display": "inline-flex"
+                }
+              }
+            },
+            "tokens": {
+              "color": "{color.text.secondary}"
+            },
+            "layout": {
+              "display": "inline-flex",
+              "align": "center",
+              "justify": "center"
+            }
+          },
+          "pagesGroup": {
+            "element": "div",
+            "parts": {
+              "pageOne": {
+                "element": "button",
+                "attrs": {
+                  "type": "button"
+                },
+                "text": "1",
+                "tokens": {
+                  "padding-inline": "{space.inset-y.md}",
+                  "padding-block": "{space.inset-y.sm}",
+                  "border-radius": "{radius.100}",
+                  "color": "{color.text.secondary}"
+                }
+              },
+              "pageCurrent": {
+                "element": "button",
+                "attrs": {
+                  "type": "button",
+                  "aria-current": "page"
+                },
+                "text": "2",
+                "tokens": {
+                  "padding-inline": "{space.inset-y.md}",
+                  "padding-block": "{space.inset-y.sm}",
+                  "border-radius": "{radius.100}",
+                  "background-color": "{color.nav.selected.background}",
+                  "color": "{color.nav.selected.foreground}",
+                  "font-weight": "{font.title.weight}"
+                }
+              },
+              "pageThree": {
+                "element": "button",
+                "attrs": {
+                  "type": "button"
+                },
+                "text": "3",
+                "tokens": {
+                  "padding-inline": "{space.inset-y.md}",
+                  "padding-block": "{space.inset-y.sm}",
+                  "border-radius": "{radius.100}",
+                  "color": "{color.text.secondary}"
+                }
+              },
+              "ellipsis": {
+                "element": "span",
+                "text": "…",
+                "tokens": {
+                  "color": "{color.text.secondary}"
+                }
+              },
+              "pageLast": {
+                "element": "button",
+                "attrs": {
+                  "type": "button"
+                },
+                "text": "10",
+                "tokens": {
+                  "padding-inline": "{space.inset-y.md}",
+                  "padding-block": "{space.inset-y.sm}",
+                  "border-radius": "{radius.100}",
+                  "color": "{color.text.secondary}"
+                }
+              }
+            },
+            "visibleWhen": {
+              "prop": "variant",
+              "equals": "pages"
+            },
+            "tokens": {
+              "gap": "{space.inset-y.xs}"
+            },
+            "layout": {
+              "display": "flex",
+              "direction": "row",
+              "align": "center"
+            }
+          },
+          "compactText": {
+            "element": "span",
+            "content": {
+              "prop": "pageLabel"
+            },
+            "visibleWhen": {
+              "prop": "variant",
+              "equals": "compact"
+            },
+            "tokens": {
+              "color": "{color.text.secondary}"
+            }
+          },
+          "dotsGroup": {
+            "element": "div",
+            "parts": {
+              "dotActive": {
+                "element": "span",
+                "tokens": {
+                  "width": "{size.dot}",
+                  "height": "{size.dot}",
+                  "border-radius": "{radius.pill}",
+                  "background-color": "{color.status.accent}"
+                }
+              },
+              "dotTwo": {
+                "element": "span",
+                "tokens": {
+                  "width": "{size.dot}",
+                  "height": "{size.dot}",
+                  "border-radius": "{radius.pill}",
+                  "background-color": "{color.status.neutral}"
+                }
+              },
+              "dotThree": {
+                "element": "span",
+                "tokens": {
+                  "width": "{size.dot}",
+                  "height": "{size.dot}",
+                  "border-radius": "{radius.pill}",
+                  "background-color": "{color.status.neutral}"
+                }
+              }
+            },
+            "visibleWhen": {
+              "prop": "variant",
+              "equals": "dots"
+            },
+            "tokens": {
+              "gap": "{space.inset-y.sm}"
+            },
+            "layout": {
+              "display": "flex",
+              "direction": "row",
+              "align": "center"
+            }
+          },
+          "nextButton": {
+            "element": "button",
+            "attrs": {
+              "aria-label": "Next page",
+              "type": "button"
+            },
+            "parts": {
+              "nextButtonGlyph": {
+                "element": "span",
+                "layout": {
+                  "display": "inline-flex"
+                }
+              }
+            },
+            "tokens": {
+              "color": "{color.text.secondary}"
+            },
+            "layout": {
+              "display": "inline-flex",
+              "align": "center",
+              "justify": "center"
+            }
+          }
+        },
+        "tokens": {
+          "gap": "{space.gap.sm}",
+          "font-family": "{font.control.family}",
+          "font-size": "{font.control.size.sm}",
+          "color": "{color.surface.foreground}"
+        },
+        "layout": {
+          "display": "flex",
+          "direction": "row",
+          "align": "center"
+        }
+      },
+      "element": "nav",
+      "states": [],
+      "rawValues": [],
+      "notes": [
+        "jsx: part \"prevButtonGlyph\" renders an inline SVG glyph — icon asset not extracted (review item)",
+        "jsx: part \"nextButtonGlyph\" renders an inline SVG glyph — icon asset not extracted (review item)",
+        "css: selector `.prevButton svg` — icon glyph sizing, not extracted (icon parts are review items)",
+        "css: .prevButton { flex-shrink: 0 } — no inversion rule, not extracted",
+        "css: selector `.nextButton svg` — icon glyph sizing, not extracted (icon parts are review items)",
+        "css: .nextButton { flex-shrink: 0 } — no inversion rule, not extracted"
+      ]
+    }
   },
   {
     "name": "ProgressBar",
@@ -1191,7 +2997,48 @@
       "color-progress-warning",
       "color-progress-error",
       "color-progress-neutral"
-    ]
+    ],
+    "anatomy": {
+      "root": {
+        "parts": {
+          "track": {
+            "element": "div",
+            "parts": {
+              "fill": {
+                "element": "div",
+                "tokens": {
+                  "height": "{size.progress.height}",
+                  "border-radius": "{radius.100}",
+                  "background-color": "{color.progress.{variant}}"
+                }
+              }
+            },
+            "tokens": {
+              "width": "{size.progress.width}",
+              "height": "{size.progress.height}",
+              "background-color": "{color.progress.track}",
+              "border-radius": "{radius.100}"
+            },
+            "layout": {
+              "display": "flex",
+              "direction": "row",
+              "align": "center"
+            }
+          }
+        },
+        "tokens": {
+          "max-width": "{size.progress.width}"
+        },
+        "layout": {
+          "display": "flex",
+          "direction": "column"
+        }
+      },
+      "element": "div",
+      "states": [],
+      "rawValues": [],
+      "notes": []
+    }
   },
   {
     "name": "Section",
@@ -1220,7 +3067,46 @@
       "space-inset-x-md",
       "color-section-section",
       "color-section-muted"
-    ]
+    ],
+    "anatomy": {
+      "root": {
+        "parts": {
+          "content": {
+            "element": "div",
+            "slot": {
+              "name": "children"
+            },
+            "tokens": {
+              "gap": "{space.gap.sm}"
+            },
+            "layout": {
+              "display": "flex",
+              "direction": "column",
+              "align": "stretch"
+            }
+          }
+        },
+        "tokens": {
+          "max-width": "{size.card.width}",
+          "border-color": "{color.border.subtle}",
+          "border-width": "{border-width.100}",
+          "border-radius": "{radius.card}",
+          "gap": "{space.gap.sm}",
+          "padding-inline": "{space.inset-x.md}",
+          "padding-block": "{space.inset-x.md}",
+          "background-color": "{color.section.{variant}}"
+        },
+        "layout": {
+          "display": "flex",
+          "direction": "column",
+          "align": "stretch"
+        }
+      },
+      "element": "section",
+      "states": [],
+      "rawValues": [],
+      "notes": []
+    }
   },
   {
     "name": "SideNavItem",
@@ -1282,7 +3168,74 @@
       "color-nav-selected-background",
       "color-nav-selected-foreground",
       "color-surface-sunken"
-    ]
+    ],
+    "anatomy": {
+      "root": {
+        "parts": {
+          "iconSlot": {
+            "element": "div",
+            "slot": {
+              "name": "icon"
+            },
+            "optional": true,
+            "layout": {
+              "display": "flex",
+              "direction": "row",
+              "align": "center"
+            }
+          },
+          "labelText": {
+            "element": "span",
+            "content": {
+              "prop": "label"
+            },
+            "layout": {
+              "grow": true
+            }
+          },
+          "endContent": {
+            "element": "div",
+            "slot": {
+              "name": "endContent"
+            },
+            "optional": true,
+            "layout": {
+              "display": "flex",
+              "direction": "row",
+              "align": "center"
+            }
+          }
+        },
+        "tokens": {
+          "max-width": "{size.card.width}",
+          "border-radius": "{radius.control}",
+          "gap": "{space.gap.sm}",
+          "padding-inline": "{space.inset-x.sm}",
+          "padding-block": "{space.inset-y.md}",
+          "font-family": "{font.control.family}",
+          "font-size": "{font.control.size.sm}",
+          "font-weight": "{font.control.weight}",
+          "background-color": "{color.nav.{state}.background}",
+          "color": "{color.nav.{state}.foreground}"
+        },
+        "layout": {
+          "display": "flex",
+          "direction": "row",
+          "align": "center"
+        },
+        "states": {
+          "hover": {
+            "background-color": "{color.surface.sunken}"
+          }
+        }
+      },
+      "element": "a",
+      "states": [
+        "hover"
+      ],
+      "rawValues": [],
+      "notes": []
+    }
   },
   {
     "name": "Skeleton",
@@ -1314,7 +3267,31 @@
       "radius-skeleton-text",
       "radius-skeleton-rect",
       "radius-skeleton-circle"
-    ]
+    ],
+    "anatomy": {
+      "root": {
+        "parts": {
+          "block": {
+            "element": "span",
+            "tokens": {
+              "background-color": "{color.skeleton}",
+              "width": "{size.skeleton.{variant}.width}",
+              "height": "{size.skeleton.{variant}.height}",
+              "border-radius": "{radius.skeleton.{variant}}"
+            },
+            "animation": "pulse"
+          }
+        },
+        "layout": {
+          "display": "inline-flex",
+          "direction": "row"
+        }
+      },
+      "element": "span",
+      "states": [],
+      "rawValues": [],
+      "notes": []
+    }
   },
   {
     "name": "Slider",
@@ -1360,7 +3337,81 @@
       "border-width-200",
       "radius-pill",
       "color-progress-track"
-    ]
+    ],
+    "anatomy": {
+      "root": {
+        "parts": {
+          "labelText": {
+            "element": "span",
+            "content": {
+              "prop": "label"
+            },
+            "tokens": {
+              "font-size": "{font.control.size.sm}",
+              "font-weight": "{font.control.weight}"
+            }
+          },
+          "trackRow": {
+            "element": "div",
+            "parts": {
+              "filled": {
+                "element": "div",
+                "tokens": {
+                  "height": "{size.slider.track}",
+                  "background-color": "{color.progress.accent}",
+                  "border-radius": "{radius.100}"
+                }
+              },
+              "thumb": {
+                "element": "span",
+                "tokens": {
+                  "width": "{size.slider.thumb}",
+                  "height": "{size.slider.thumb}",
+                  "background-color": "{color.switch.thumb}",
+                  "border-color": "{color.progress.accent}",
+                  "border-width": "{border-width.200}",
+                  "border-radius": "{radius.pill}"
+                }
+              },
+              "remainder": {
+                "element": "div",
+                "tokens": {
+                  "height": "{size.slider.track}",
+                  "background-color": "{color.progress.track}",
+                  "border-radius": "{radius.100}"
+                },
+                "layout": {
+                  "display": "flex",
+                  "grow": true
+                }
+              }
+            },
+            "tokens": {
+              "width": "{size.slider.width}"
+            },
+            "layout": {
+              "display": "flex",
+              "direction": "row",
+              "align": "center"
+            }
+          }
+        },
+        "tokens": {
+          "max-width": "{size.slider.width}",
+          "gap": "{space.inset-y.sm}",
+          "font-family": "{font.control.family}",
+          "color": "{color.surface.foreground}"
+        },
+        "layout": {
+          "display": "flex",
+          "direction": "column"
+        }
+      },
+      "element": "div",
+      "states": [],
+      "rawValues": [],
+      "notes": []
+    }
   },
   {
     "name": "Spinner",
@@ -1377,7 +3428,36 @@
     ],
     "cssVars": [
       "color-action-primary-background"
-    ]
+    ],
+    "anatomy": {
+      "root": {
+        "parts": {
+          "arc": {
+            "element": "span",
+            "layout": {
+              "display": "inline-flex"
+            },
+            "animation": "spin"
+          }
+        },
+        "tokens": {
+          "color": "{color.action.primary.background}"
+        },
+        "layout": {
+          "display": "inline-flex",
+          "direction": "row",
+          "align": "center"
+        }
+      },
+      "element": "span",
+      "role": "status",
+      "states": [],
+      "rawValues": [],
+      "notes": [
+        "jsx: part \"arc\" renders an inline SVG glyph — icon asset not extracted (review item)",
+        "css: .arc { flex-shrink: 0 } — no inversion rule, not extracted"
+      ]
+    }
   },
   {
     "name": "Stack",
@@ -1402,7 +3482,25 @@
       "space-gap-sm",
       "space-gap-md",
       "space-gap-lg"
-    ]
+    ],
+    "anatomy": {
+      "root": {
+        "tokens": {
+          "gap": "{space.gap.{gap}}"
+        },
+        "layout": {
+          "display": "flex",
+          "direction": "column",
+          "align": "stretch"
+        }
+      },
+      "element": "div",
+      "states": [],
+      "rawValues": [],
+      "notes": [
+        "jsx: root renders {children} directly — children channel (text prop vs default slot) is not decidable from code"
+      ]
+    }
   },
   {
     "name": "StatusDot",
@@ -1440,7 +3538,29 @@
       "color-status-error",
       "color-status-accent",
       "color-status-neutral"
-    ]
+    ],
+    "anatomy": {
+      "root": {
+        "tokens": {
+          "width": "{size.dot}",
+          "height": "{size.dot}",
+          "border-radius": "{radius.pill}",
+          "background-color": "{color.status.{variant}}"
+        },
+        "layout": {
+          "display": "inline-flex",
+          "align": "center",
+          "justify": "center"
+        }
+      },
+      "element": "span",
+      "role": "img",
+      "states": [],
+      "rawValues": [],
+      "notes": [
+        "jsx: root renders {children} directly — children channel (text prop vs default slot) is not decidable from code"
+      ]
+    }
   },
   {
     "name": "Switch",
@@ -1476,7 +3596,7 @@
       {
         "name": "onToggle",
         "optional": true,
-        "description": "Fires when the track is activated; uncontrolled instances flip value off/on themselves.",
+        "description": "Fires when the input is toggled; uncontrolled instances flip value off/on themselves.",
         "kind": "event",
         "confidence": "declared"
       }
@@ -1496,7 +3616,162 @@
       "font-control-size-sm",
       "font-control-weight",
       "color-text-secondary"
-    ]
+    ],
+    "anatomy": {
+      "root": {
+        "parts": {
+          "track": {
+            "element": "span",
+            "parts": {
+              "input": {
+                "element": "input",
+                "attrs": {
+                  "type": "checkbox",
+                  "role": "switch"
+                }
+              },
+              "spacerStart": {
+                "element": "div",
+                "visibleWhen": {
+                  "prop": "value",
+                  "equals": "on"
+                },
+                "layout": {
+                  "display": "flex",
+                  "grow": true
+                }
+              },
+              "thumb": {
+                "element": "span",
+                "tokens": {
+                  "width": "{size.switch.thumb}",
+                  "height": "{size.switch.thumb}",
+                  "background-color": "{color.switch.thumb}",
+                  "border-radius": "{radius.pill}"
+                }
+              },
+              "spacerEnd": {
+                "element": "div",
+                "visibleWhen": {
+                  "prop": "value",
+                  "equals": "off"
+                },
+                "layout": {
+                  "display": "flex",
+                  "grow": true
+                }
+              }
+            },
+            "tokens": {
+              "width": "{size.switch.width}",
+              "height": "{size.switch.height}",
+              "border-radius": "{radius.pill}",
+              "padding-inline": "{space.inset-y.xs}",
+              "padding-block": "{space.inset-y.xs}",
+              "background-color": "{color.switch.{value}.track}"
+            },
+            "layout": {
+              "display": "flex",
+              "direction": "row",
+              "align": "center"
+            }
+          },
+          "textCol": {
+            "element": "div",
+            "parts": {
+              "labelText": {
+                "element": "span",
+                "content": {
+                  "prop": "label"
+                },
+                "tokens": {
+                  "font-size": "{font.control.size.sm}",
+                  "font-weight": "{font.control.weight}"
+                }
+              },
+              "descriptionText": {
+                "element": "span",
+                "content": {
+                  "prop": "description"
+                },
+                "tokens": {
+                  "font-size": "{font.control.size.sm}",
+                  "color": "{color.text.secondary}"
+                }
+              }
+            },
+            "tokens": {
+              "gap": "{space.inset-y.xs}"
+            },
+            "layout": {
+              "display": "flex",
+              "direction": "column",
+              "grow": true
+            }
+          }
+        },
+        "tokens": {
+          "gap": "{space.gap.sm}",
+          "font-family": "{font.control.family}",
+          "color": "{color.surface.foreground}"
+        },
+        "layout": {
+          "display": "flex",
+          "direction": "row",
+          "align": "start"
+        }
+      },
+      "element": "label",
+      "states": [],
+      "events": {
+        "toggle": {
+          "trigger": "input",
+          "toggles": {
+            "prop": "value",
+            "between": [
+              "off",
+              "on"
+            ],
+            "aria": "checked"
+          },
+          "uncontrolledDefault": "off"
+        }
+      },
+      "rawValues": [
+        {
+          "selector": ".input",
+          "property": "width",
+          "value": "100%",
+          "candidates": []
+        },
+        {
+          "selector": ".input",
+          "property": "height",
+          "value": "100%",
+          "candidates": []
+        }
+      ],
+      "notes": [
+        "css: selector `.track:has(> .input:focus-visible)` — pseudo \":has(> .input:focus-visible)\" is not a contract state, not extracted",
+        "css: .input { inset: 0 } — no inversion rule, not extracted",
+        "css: .input { opacity: 0 } — no inversion rule, not extracted",
+        "css: .input position:absolute with insets (top:;bottom:;left:;right:) — not a generator overlay placement, not extracted"
+      ],
+      "mintables": [
+        {
+          "selector": ".input",
+          "part": "input",
+          "cssProperty": "width",
+          "raw": "100%"
+        },
+        {
+          "selector": ".input",
+          "part": "input",
+          "cssProperty": "height",
+          "raw": "100%"
+        }
+      ]
+    }
   },
   {
     "name": "Tab",
@@ -1549,7 +3824,71 @@
       "color-tab-selected-foreground",
       "font-tab-selected-weight",
       "color-surface-sunken"
-    ]
+    ],
+    "anatomy": {
+      "root": {
+        "parts": {
+          "iconSlot": {
+            "element": "div",
+            "slot": {
+              "name": "icon"
+            },
+            "optional": true,
+            "layout": {
+              "display": "flex",
+              "direction": "row",
+              "align": "center"
+            }
+          },
+          "labelText": {
+            "element": "span",
+            "content": {
+              "prop": "label"
+            }
+          },
+          "endContent": {
+            "element": "div",
+            "slot": {
+              "name": "endContent"
+            },
+            "optional": true,
+            "layout": {
+              "display": "flex",
+              "direction": "row",
+              "align": "center"
+            }
+          }
+        },
+        "tokens": {
+          "background-color": "{color.surface.background}",
+          "font-family": "{font.control.family}",
+          "font-size": "{font.control.size.sm}",
+          "gap": "{space.inset-y.sm}",
+          "padding-inline": "{space.inset-x.sm}",
+          "padding-block": "{space.inset-y.md}",
+          "border-radius": "{radius.100}",
+          "color": "{color.tab.{state}.foreground}",
+          "font-weight": "{font.tab.{state}.weight}"
+        },
+        "layout": {
+          "display": "inline-flex",
+          "direction": "row",
+          "align": "center"
+        },
+        "states": {
+          "hover": {
+            "background-color": "{color.surface.sunken}"
+          }
+        }
+      },
+      "element": "button",
+      "role": "tab",
+      "states": [
+        "hover"
+      ],
+      "rawValues": [],
+      "notes": []
+    }
   },
   {
     "name": "Table",
@@ -1576,7 +3915,84 @@
       "radius-card",
       "size-table-width",
       "color-surface-sunken"
-    ]
+    ],
+    "anatomy": {
+      "root": {
+        "parts": {
+          "header": {
+            "element": "div",
+            "parts": {
+              "tableHeaderCell": {
+                "component": {
+                  "name": "TableHeaderCell",
+                  "props": {
+                    "density": "{density}"
+                  },
+                  "text": "Name"
+                }
+              },
+              "tableHeaderCell2": {
+                "component": {
+                  "name": "TableHeaderCell",
+                  "props": {
+                    "density": "{density}"
+                  },
+                  "text": "Role"
+                }
+              },
+              "tableHeaderCell3": {
+                "component": {
+                  "name": "TableHeaderCell",
+                  "props": {
+                    "density": "{density}"
+                  },
+                  "text": "Status"
+                }
+              }
+            },
+            "tokens": {
+              "background-color": "{color.surface.sunken}"
+            },
+            "layout": {
+              "display": "flex",
+              "direction": "row",
+              "align": "center"
+            }
+          },
+          "body": {
+            "element": "div",
+            "slot": {
+              "name": "children"
+            },
+            "layout": {
+              "display": "flex",
+              "direction": "column",
+              "align": "stretch"
+            }
+          }
+        },
+        "tokens": {
+          "background-color": "{color.surface.raised}",
+          "border-color": "{color.border.subtle}",
+          "border-width": "{border-width.100}",
+          "border-radius": "{radius.card}",
+          "max-width": "{size.table.width}"
+        },
+        "layout": {
+          "display": "flex",
+          "direction": "column",
+          "align": "stretch"
+        }
+      },
+      "element": "div",
+      "role": "table",
+      "states": [],
+      "rawValues": [],
+      "notes": [
+        "jsx: duplicate part class \"tableHeaderCell\" — second occurrence extracted as \"tableHeaderCell2\" (review: part names must be unique)",
+        "jsx: duplicate part class \"tableHeaderCell\" — second occurrence extracted as \"tableHeaderCell3\" (review: part names must be unique)"
+      ]
+    }
   },
   {
     "name": "TableCell",
@@ -1604,7 +4020,31 @@
       "size-table-cell-width",
       "space-table-cell-y-comfortable",
       "space-table-cell-y-compact"
-    ]
+    ],
+    "anatomy": {
+      "root": {
+        "tokens": {
+          "padding-inline": "{space.inset-x.sm}",
+          "color": "{color.surface.foreground}",
+          "font-family": "{font.control.family}",
+          "font-size": "{font.control.size.sm}",
+          "min-width": "{size.table.cell-width}",
+          "padding-block": "{space.table.cell-y.{density}}"
+        },
+        "layout": {
+          "display": "flex",
+          "direction": "row",
+          "align": "center"
+        }
+      },
+      "element": "div",
+      "role": "cell",
+      "states": [],
+      "rawValues": [],
+      "notes": [
+        "jsx: root renders {children} directly — children channel (text prop vs default slot) is not decidable from code"
+      ]
+    }
   },
   {
     "name": "TableHeaderCell",
@@ -1633,7 +4073,32 @@
       "size-table-cell-width",
       "space-table-cell-y-comfortable",
       "space-table-cell-y-compact"
-    ]
+    ],
+    "anatomy": {
+      "root": {
+        "tokens": {
+          "padding-inline": "{space.inset-x.sm}",
+          "color": "{color.surface.foreground}",
+          "font-family": "{font.control.family}",
+          "font-size": "{font.control.size.sm}",
+          "font-weight": "{font.title.weight}",
+          "min-width": "{size.table.cell-width}",
+          "padding-block": "{space.table.cell-y.{density}}"
+        },
+        "layout": {
+          "display": "flex",
+          "direction": "row",
+          "align": "center"
+        }
+      },
+      "element": "div",
+      "role": "columnheader",
+      "states": [],
+      "rawValues": [],
+      "notes": [
+        "jsx: root renders {children} directly — children channel (text prop vs default slot) is not decidable from code"
+      ]
+    }
   },
   {
     "name": "TableRow",
@@ -1656,7 +4121,37 @@
     "cssVars": [
       "color-table-row-default",
       "color-table-row-selected"
-    ]
+    ],
+    "anatomy": {
+      "root": {
+        "parts": {
+          "cells": {
+            "element": "div",
+            "slot": {
+              "name": "children"
+            },
+            "layout": {
+              "display": "flex",
+              "direction": "row",
+              "align": "center"
+            }
+          }
+        },
+        "tokens": {
+          "background-color": "{color.table.row.{state}}"
+        },
+        "layout": {
+          "display": "flex",
+          "direction": "row",
+          "align": "center"
+        }
+      },
+      "element": "div",
+      "role": "row",
+      "states": [],
+      "rawValues": [],
+      "notes": []
+    }
   },
   {
     "name": "TabList",
@@ -1667,7 +4162,42 @@
       "space-inset-y-sm",
       "color-border-subtle",
       "space-inset-y-xs"
-    ]
+    ],
+    "anatomy": {
+      "root": {
+        "parts": {
+          "tabs": {
+            "element": "div",
+            "slot": {
+              "name": "children"
+            },
+            "tokens": {
+              "gap": "{space.inset-y.sm}"
+            },
+            "layout": {
+              "display": "flex",
+              "direction": "row",
+              "align": "center"
+            }
+          }
+        },
+        "tokens": {
+          "gap": "{space.inset-y.sm}",
+          "border-color": "{color.border.subtle}",
+          "padding-block": "{space.inset-y.xs}"
+        },
+        "layout": {
+          "display": "flex",
+          "direction": "row",
+          "align": "center"
+        }
+      },
+      "element": "div",
+      "role": "tablist",
+      "states": [],
+      "rawValues": [],
+      "notes": []
+    }
   },
   {
     "name": "TextArea",
@@ -1737,7 +4267,93 @@
       "space-inset-y-lg",
       "font-control-size-md",
       "font-control-size-lg"
-    ]
+    ],
+    "anatomy": {
+      "root": {
+        "parts": {
+          "labelRow": {
+            "element": "div",
+            "parts": {
+              "labelText": {
+                "element": "span",
+                "content": {
+                  "prop": "label"
+                }
+              },
+              "requiredMark": {
+                "element": "span",
+                "visibleWhen": {
+                  "prop": "isRequired"
+                },
+                "tokens": {
+                  "color": "{color.action.danger.background}"
+                },
+                "layout": {
+                  "display": "inline-flex"
+                }
+              }
+            },
+            "tokens": {
+              "gap": "{space.inset-y.sm}",
+              "font-size": "{font.control.size.sm}",
+              "font-weight": "{font.control.weight}"
+            },
+            "layout": {
+              "display": "flex",
+              "direction": "row",
+              "align": "center"
+            }
+          },
+          "descriptionText": {
+            "element": "span",
+            "content": {
+              "prop": "description"
+            },
+            "tokens": {
+              "font-size": "{font.control.size.sm}",
+              "color": "{color.text.secondary}"
+            }
+          },
+          "input": {
+            "element": "textarea",
+            "attrs": {
+              "rows": "3",
+              "placeholder": "{placeholder}"
+            },
+            "tokens": {
+              "background-color": "{color.input.background}",
+              "border-color": "{color.border.subtle}",
+              "border-width": "{border-width.100}",
+              "border-radius": "{radius.control}",
+              "padding-inline": "{space.inset-x.sm}",
+              "font-family": "{font.control.family}",
+              "color": "{color.surface.foreground}",
+              "padding-block": "{space.inset-y.{size}}",
+              "font-size": "{font.control.size.{size}}"
+            }
+          }
+        },
+        "tokens": {
+          "max-width": "{size.card.width}",
+          "gap": "{space.inset-y.sm}",
+          "font-family": "{font.control.family}",
+          "color": "{color.surface.foreground}"
+        },
+        "layout": {
+          "display": "flex",
+          "direction": "column",
+          "align": "stretch"
+        }
+      },
+      "element": "label",
+      "states": [],
+      "rawValues": [],
+      "notes": [
+        "jsx: part \"requiredMark\" renders an inline SVG glyph — icon asset not extracted (review item)",
+        "css: selector `.requiredMark svg` — icon glyph sizing, not extracted (icon parts are review items)",
+        "css: .requiredMark { flex-shrink: 0 } — no inversion rule, not extracted"
+      ]
+    }
   },
   {
     "name": "TextField",
@@ -1815,7 +4431,94 @@
       "space-inset-y-lg",
       "font-control-size-md",
       "font-control-size-lg"
-    ]
+    ],
+    "anatomy": {
+      "root": {
+        "parts": {
+          "labelRow": {
+            "element": "div",
+            "parts": {
+              "labelText": {
+                "element": "span",
+                "content": {
+                  "prop": "label"
+                }
+              },
+              "requiredMark": {
+                "element": "span",
+                "visibleWhen": {
+                  "prop": "isRequired"
+                },
+                "tokens": {
+                  "color": "{color.action.danger.background}"
+                },
+                "layout": {
+                  "display": "inline-flex"
+                }
+              }
+            },
+            "tokens": {
+              "gap": "{space.inset-y.sm}",
+              "font-size": "{font.control.size.sm}",
+              "font-weight": "{font.control.weight}"
+            },
+            "layout": {
+              "display": "flex",
+              "direction": "row",
+              "align": "center"
+            }
+          },
+          "descriptionText": {
+            "element": "span",
+            "content": {
+              "prop": "description"
+            },
+            "tokens": {
+              "font-size": "{font.control.size.sm}",
+              "color": "{color.text.secondary}"
+            }
+          },
+          "input": {
+            "element": "input",
+            "attrs": {
+              "type": "text",
+              "placeholder": "{placeholder}"
+            },
+            "tokens": {
+              "background-color": "{color.input.background}",
+              "border-color": "{color.border.subtle}",
+              "border-width": "{border-width.100}",
+              "border-radius": "{radius.control}",
+              "padding-inline": "{space.inset-x.sm}",
+              "font-family": "{font.control.family}",
+              "color": "{color.surface.foreground}",
+              "padding-block": "{space.inset-y.{size}}",
+              "font-size": "{font.control.size.{size}}"
+            }
+          }
+        },
+        "tokens": {
+          "max-width": "{size.card.width}",
+          "gap": "{space.inset-y.sm}",
+          "font-family": "{font.control.family}",
+          "color": "{color.surface.foreground}"
+        },
+        "layout": {
+          "display": "flex",
+          "direction": "column",
+          "align": "stretch"
+        }
+      },
+      "element": "label",
+      "states": [],
+      "rawValues": [],
+      "notes": [
+        "jsx: part \"requiredMark\" renders an inline SVG glyph — icon asset not extracted (review item)",
+        "css: selector `.root[data-is-disabled]` — not extractable into anatomy, skipped by name",
+        "css: selector `.requiredMark svg` — icon glyph sizing, not extracted (icon parts are review items)",
+        "css: .requiredMark { flex-shrink: 0 } — no inversion rule, not extracted"
+      ]
+    }
   },
   {
     "name": "Toast",
@@ -1854,7 +4557,59 @@
       "color-toast-info-foreground",
       "color-toast-error-background",
       "color-toast-error-foreground"
-    ]
+    ],
+    "anatomy": {
+      "root": {
+        "parts": {
+          "body": {
+            "element": "div",
+            "slot": {
+              "name": "children"
+            },
+            "layout": {
+              "display": "flex",
+              "direction": "row",
+              "align": "center",
+              "grow": true
+            }
+          },
+          "endContent": {
+            "element": "div",
+            "slot": {
+              "name": "endContent"
+            },
+            "optional": true,
+            "layout": {
+              "display": "flex",
+              "direction": "row",
+              "align": "center"
+            }
+          }
+        },
+        "tokens": {
+          "max-width": "{size.card.width}",
+          "border-radius": "{radius.control}",
+          "gap": "{space.gap.sm}",
+          "padding-inline": "{space.inset-x.md}",
+          "padding-block": "{space.inset-y.md}",
+          "font-family": "{font.control.family}",
+          "font-size": "{font.control.size.sm}",
+          "background-color": "{color.toast.{type}.background}",
+          "color": "{color.toast.{type}.foreground}"
+        },
+        "layout": {
+          "display": "flex",
+          "direction": "row",
+          "align": "center"
+        }
+      },
+      "element": "div",
+      "states": [],
+      "rawValues": [],
+      "notes": [
+        "jsx: <div> attribute role={…} — expression not extractable, skipped"
+      ]
+    }
   },
   {
     "name": "Token",
@@ -1955,7 +4710,63 @@
       "color-token-pink-foreground",
       "color-token-gray-background",
       "color-token-gray-foreground"
-    ]
+    ],
+    "anatomy": {
+      "root": {
+        "parts": {
+          "iconSlot": {
+            "element": "div",
+            "slot": {
+              "name": "icon"
+            },
+            "optional": true,
+            "layout": {
+              "display": "flex",
+              "direction": "row",
+              "align": "center"
+            }
+          },
+          "labelText": {
+            "element": "span",
+            "content": {
+              "prop": "label"
+            }
+          },
+          "endContent": {
+            "element": "div",
+            "slot": {
+              "name": "endContent"
+            },
+            "optional": true,
+            "layout": {
+              "display": "flex",
+              "direction": "row",
+              "align": "center"
+            }
+          }
+        },
+        "tokens": {
+          "border-radius": "{radius.100}",
+          "gap": "{space.inset-y.sm}",
+          "padding-inline": "{space.inset-x.xs}",
+          "padding-block": "{space.inset-y.xs}",
+          "font-family": "{font.control.family}",
+          "font-size": "{font.badge.size}",
+          "font-weight": "{font.control.weight}",
+          "background-color": "{color.token.{color}.background}",
+          "color": "{color.token.{color}.foreground}"
+        },
+        "layout": {
+          "display": "inline-flex",
+          "direction": "row",
+          "align": "center"
+        }
+      },
+      "element": "span",
+      "states": [],
+      "rawValues": [],
+      "notes": []
+    }
   },
   {
     "name": "Toolbar",
@@ -2017,7 +4828,80 @@
       "size-toolbar-md",
       "size-toolbar-lg",
       "space-gap-sm"
-    ]
+    ],
+    "anatomy": {
+      "root": {
+        "parts": {
+          "startContent": {
+            "element": "div",
+            "slot": {
+              "name": "startContent"
+            },
+            "optional": true,
+            "tokens": {
+              "gap": "{space.gap.sm}"
+            },
+            "layout": {
+              "display": "flex",
+              "direction": "row",
+              "align": "center"
+            }
+          },
+          "centerContent": {
+            "element": "div",
+            "slot": {
+              "name": "centerContent"
+            },
+            "optional": true,
+            "tokens": {
+              "gap": "{space.gap.sm}"
+            },
+            "layout": {
+              "display": "flex",
+              "direction": "row",
+              "align": "center"
+            }
+          },
+          "endContent": {
+            "element": "div",
+            "slot": {
+              "name": "endContent"
+            },
+            "optional": true,
+            "tokens": {
+              "gap": "{space.gap.sm}"
+            },
+            "layout": {
+              "display": "flex",
+              "direction": "row",
+              "align": "center"
+            }
+          }
+        },
+        "tokens": {
+          "max-width": "{size.banner.width}",
+          "background-color": "{color.surface.raised}",
+          "border-color": "{color.border.subtle}",
+          "border-width": "{border-width.100}",
+          "border-radius": "{radius.control}",
+          "gap": "{space.gap.md}",
+          "padding-inline": "{space.inset-x.sm}",
+          "padding-block": "{space.inset-y.sm}",
+          "min-height": "{size.toolbar.{size}}"
+        },
+        "layout": {
+          "display": "flex",
+          "direction": "row",
+          "align": "center",
+          "justify": "space-between"
+        }
+      },
+      "element": "div",
+      "role": "toolbar",
+      "states": [],
+      "rawValues": [],
+      "notes": []
+    }
   },
   {
     "name": "TopNav",
@@ -2063,7 +4947,78 @@
       "space-inset-y-md",
       "space-gap-sm",
       "space-inset-y-sm"
-    ]
+    ],
+    "anatomy": {
+      "root": {
+        "parts": {
+          "heading": {
+            "element": "div",
+            "slot": {
+              "name": "heading"
+            },
+            "optional": true,
+            "tokens": {
+              "gap": "{space.gap.sm}"
+            },
+            "layout": {
+              "display": "flex",
+              "direction": "row",
+              "align": "center"
+            }
+          },
+          "startContent": {
+            "element": "div",
+            "slot": {
+              "name": "startContent"
+            },
+            "optional": true,
+            "tokens": {
+              "gap": "{space.inset-y.sm}"
+            },
+            "layout": {
+              "display": "flex",
+              "direction": "row",
+              "align": "center",
+              "grow": true
+            }
+          },
+          "endContent": {
+            "element": "div",
+            "slot": {
+              "name": "endContent"
+            },
+            "optional": true,
+            "tokens": {
+              "gap": "{space.gap.sm}"
+            },
+            "layout": {
+              "display": "flex",
+              "direction": "row",
+              "align": "center"
+            }
+          }
+        },
+        "tokens": {
+          "max-width": "{size.banner.width}",
+          "background-color": "{color.surface.raised}",
+          "border-color": "{color.border.subtle}",
+          "border-width": "{border-width.100}",
+          "gap": "{space.gap.md}",
+          "padding-inline": "{space.inset-x.md}",
+          "padding-block": "{space.inset-y.md}"
+        },
+        "layout": {
+          "display": "flex",
+          "direction": "row",
+          "align": "center",
+          "justify": "space-between"
+        }
+      },
+      "element": "nav",
+      "states": [],
+      "rawValues": [],
+      "notes": []
+    }
   },
   {
     "name": "TopNavItem",
@@ -2117,7 +5072,58 @@
       "color-nav-selected-background",
       "color-nav-selected-foreground",
       "color-surface-sunken"
-    ]
+    ],
+    "anatomy": {
+      "root": {
+        "parts": {
+          "iconSlot": {
+            "element": "div",
+            "slot": {
+              "name": "icon"
+            },
+            "optional": true,
+            "layout": {
+              "display": "flex",
+              "direction": "row",
+              "align": "center"
+            }
+          },
+          "labelText": {
+            "element": "span",
+            "content": {
+              "prop": "label"
+            }
+          }
+        },
+        "tokens": {
+          "border-radius": "{radius.control}",
+          "gap": "{space.inset-y.sm}",
+          "padding-inline": "{space.inset-x.sm}",
+          "padding-block": "{space.inset-y.md}",
+          "font-family": "{font.control.family}",
+          "font-size": "{font.control.size.sm}",
+          "font-weight": "{font.control.weight}",
+          "background-color": "{color.nav.{state}.background}",
+          "color": "{color.nav.{state}.foreground}"
+        },
+        "layout": {
+          "display": "inline-flex",
+          "direction": "row",
+          "align": "center"
+        },
+        "states": {
+          "hover": {
+            "background-color": "{color.surface.sunken}"
+          }
+        }
+      },
+      "element": "a",
+      "states": [
+        "hover"
+      ],
+      "rawValues": [],
+      "notes": []
+    }
   },
   {
     "name": "TypeaheadItem",
@@ -2161,6 +5167,84 @@
       "font-control-size-sm",
       "font-control-weight",
       "color-text-secondary"
-    ]
+    ],
+    "anatomy": {
+      "root": {
+        "parts": {
+          "iconSlot": {
+            "element": "div",
+            "slot": {
+              "name": "icon"
+            },
+            "optional": true,
+            "layout": {
+              "display": "flex",
+              "direction": "row",
+              "align": "center"
+            }
+          },
+          "textCol": {
+            "element": "div",
+            "parts": {
+              "labelText": {
+                "element": "span",
+                "content": {
+                  "prop": "label"
+                },
+                "tokens": {
+                  "font-size": "{font.control.size.sm}",
+                  "font-weight": "{font.control.weight}"
+                }
+              },
+              "descriptionText": {
+                "element": "span",
+                "content": {
+                  "prop": "description"
+                },
+                "tokens": {
+                  "font-size": "{font.control.size.sm}",
+                  "color": "{color.text.secondary}"
+                }
+              }
+            },
+            "tokens": {
+              "gap": "{space.inset-y.xs}"
+            },
+            "layout": {
+              "display": "flex",
+              "direction": "column",
+              "grow": true
+            }
+          }
+        },
+        "tokens": {
+          "max-width": "{size.card.width}",
+          "background-color": "{color.surface.raised}",
+          "border-radius": "{radius.100}",
+          "gap": "{space.gap.sm}",
+          "padding-inline": "{space.inset-x.sm}",
+          "padding-block": "{space.inset-y.md}",
+          "font-family": "{font.control.family}",
+          "color": "{color.surface.foreground}"
+        },
+        "layout": {
+          "display": "flex",
+          "direction": "row",
+          "align": "center"
+        },
+        "states": {
+          "hover": {
+            "background-color": "{color.surface.sunken}"
+          }
+        }
+      },
+      "element": "div",
+      "role": "option",
+      "states": [
+        "hover"
+      ],
+      "rawValues": [],
+      "notes": []
+    }
   }
 ]

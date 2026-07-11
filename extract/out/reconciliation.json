@@ -165,6 +165,11 @@
         },
         {
           "status": "design-only",
+          "designProp": "State",
+          "detail": "variant [Default, Hover, Focus Visible, Disabled] — no matching code prop"
+        },
+        {
+          "status": "design-only",
           "designProp": "Label",
           "detail": "no matching code prop — a design TEXT property with no code counterpart is often bound to React `children` (invisible in a props interface); confirm before treating as drift"
         }
@@ -354,6 +359,29 @@
           "status": "agree",
           "codeProp": "description",
           "designProp": "Description"
+        }
+      ]
+    },
+    {
+      "component": "Heading",
+      "codeSource": "src/components/Heading/Heading.tsx",
+      "designName": "Heading",
+      "findings": [
+        {
+          "status": "options-differ",
+          "codeProp": "level",
+          "designProp": "Level",
+          "detail": "code [1, 2, 3, 4, 5, 6] vs design [H2, H1, H3, H4, H5, H6]"
+        },
+        {
+          "status": "agree",
+          "codeProp": "size",
+          "designProp": "Size"
+        },
+        {
+          "status": "design-only",
+          "designProp": "Text",
+          "detail": "no matching code prop — a design TEXT property with no code counterpart is often bound to React `children` (invisible in a props interface); confirm before treating as drift"
         }
       ]
     },
@@ -897,9 +925,9 @@
   ],
   "designOnly": [],
   "stats": {
-    "components": 50,
-    "matched": 48,
-    "propsAgree": 102,
-    "propsDiffer": 6
+    "components": 51,
+    "matched": 49,
+    "propsAgree": 103,
+    "propsDiffer": 9
   }
 }

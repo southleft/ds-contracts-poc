@@ -1,6 +1,6 @@
 /**
  * GENERATED FILE — DO NOT EDIT.
- * Source of truth: contracts/switch.contract.json (ds.switch v1.1.0)
+ * Source of truth: contracts/switch.contract.json (ds.switch v2.0.0)
  * Regenerate with: npm run generate
  */
 import { forwardRef, useState } from 'react';
@@ -14,11 +14,11 @@ export interface SwitchProps extends LabelHTMLAttributes<HTMLLabelElement> {
   label: string;
   /** Secondary text below the label. */
   description?: string;
-  /** Fires when the track is activated; uncontrolled instances flip value off/on themselves. */
+  /** Fires when the input is toggled; uncontrolled instances flip value off/on themselves. */
   onToggle?: () => void;
 }
 
-/** Toggle for on/off settings that take effect immediately. API mirrors industry convention (Astryx Switch) with the boolean value flattened to an off/on enum so both surfaces render both states truthfully; toggle behavior is a declared boundary. */
+/** Toggle for on/off settings that take effect immediately. API mirrors industry convention (Astryx Switch) with the boolean value flattened to an off/on enum so both surfaces render both states truthfully; toggle behavior is a declared boundary. v2.0.0 (breaking, DOM shape): the control is a NATIVE input[type=checkbox] with role=switch (the modern switch pattern) inside the wrapping label — checked is DOM state, not ARIA on a button; track and thumb are presentational. */
 export const Switch = forwardRef<HTMLLabelElement, SwitchProps>(function Switch(
   {
     value: valueProp,
@@ -40,17 +40,18 @@ export const Switch = forwardRef<HTMLLabelElement, SwitchProps>(function Switch(
   const classes = [styles.root, styles[`value-${value}`], className].filter(Boolean).join(' ');
   return (
     <label ref={ref} className={classes} {...rest}>
-      <button
-        className={styles.track}
-        role="switch"
-        type="button"
-        onClick={handleToggle}
-        aria-checked={value === 'on'}
-      >
+      <span className={styles.track}>
+        <input
+          className={styles.input}
+          type="checkbox"
+          role="switch"
+          checked={value === 'on'}
+          onChange={handleToggle}
+        ></input>
         {value === 'on' ? <div className={styles.spacerStart}></div> : null}
         <span className={styles.thumb}></span>
         {value === 'off' ? <div className={styles.spacerEnd}></div> : null}
-      </button>
+      </span>
       <div className={styles.textCol}>
         <span className={styles.labelText}>{label}</span>
         <span className={styles.descriptionText}>{description}</span>

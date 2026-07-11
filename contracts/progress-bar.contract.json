@@ -2,11 +2,12 @@
   "$schema": "./contract.schema.json",
   "id": "ds.progress-bar",
   "name": "ProgressBar",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "status": "draft",
   "description": "Horizontal bar showing completion progress. API mirrors industry convention (Astryx ProgressBar): number-valued value/max drive the fill; the canvas renders the defaults' fraction as its honest static state. Indeterminate mode needs animation on the canvas — a documented boundary.",
   "semantics": {
-    "element": "div"
+    "element": "div",
+    "roleException": "Native <progress> cannot host the contract's styled track/fill anatomy (its rendering is only reachable through vendor pseudo-elements, outside the token vocabulary), so the progressbar role rides a div per WAI-APG."
   },
   "props": [
     {

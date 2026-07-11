@@ -4,7 +4,7 @@
   "name": "Field",
   "version": "0.1.0",
   "status": "draft",
-  "description": "PROPOSED contract extracted from src/components/Field/Field.tsx (react-tsx adapter) — API surface only; anatomy, tokens, and design bindings await reconciliation and human review.",
+  "description": "PROPOSED contract extracted from src/components/Field/Field.tsx (react-tsx + css-module adapters) — API surface AND anatomy (structure, token bindings, layout, states) read from source; design bindings await reconciliation and human review.",
   "semantics": {
     "element": "div"
   },
@@ -72,7 +72,78 @@
   ],
   "states": [],
   "anatomy": {
-    "root": {}
+    "root": {
+      "layout": {
+        "display": "flex",
+        "direction": "column",
+        "align": "stretch"
+      },
+      "tokens": {
+        "max-width": "{size.card.width}",
+        "gap": "{space.inset-y.sm}",
+        "font-family": "{font.control.family}",
+        "color": "{color.surface.foreground}"
+      },
+      "parts": {
+        "labelRow": {
+          "element": "label",
+          "layout": {
+            "display": "flex",
+            "direction": "row",
+            "align": "center"
+          },
+          "tokens": {
+            "gap": "{space.inset-y.sm}",
+            "font-size": "{font.control.size.sm}",
+            "font-weight": "{font.control.weight}"
+          },
+          "attrs": {
+            "htmlFor": "{inputID}"
+          },
+          "parts": {
+            "labelText": {
+              "element": "span",
+              "content": {
+                "prop": "label"
+              }
+            },
+            "requiredMark": {
+              "element": "span",
+              "layout": {
+                "display": "inline-flex"
+              },
+              "tokens": {
+                "color": "{color.action.danger.background}"
+              },
+              "visibleWhen": {
+                "prop": "isRequired"
+              }
+            }
+          }
+        },
+        "descriptionText": {
+          "element": "span",
+          "tokens": {
+            "font-size": "{font.control.size.sm}",
+            "color": "{color.text.secondary}"
+          },
+          "content": {
+            "prop": "description"
+          }
+        },
+        "control": {
+          "element": "div",
+          "layout": {
+            "display": "flex",
+            "direction": "column",
+            "align": "stretch"
+          },
+          "slot": {
+            "name": "children"
+          }
+        }
+      }
+    }
   },
   "anchors": {
     "figma": {

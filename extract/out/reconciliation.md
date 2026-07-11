@@ -1,6 +1,6 @@
 # Reconciliation — where your two surfaces disagree
 
-**48/50** code components matched a design component by name. Across matched pairs: **102** properties agree, **6** need a human decision. Each disagreement below is a reconciliation-workshop line item: decide code-is-right, design-is-right, or neither — the decisions become contract v1 (docs/11 Phase 2).
+**49/51** code components matched a design component by name. Across matched pairs: **103** properties agree, **9** need a human decision. Each disagreement below is a reconciliation-workshop line item: decide code-is-right, design-is-right, or neither — the decisions become contract v1 (docs/11 Phase 2).
 
 ## AccordionItem ⇄ AccordionItem
 
@@ -38,7 +38,8 @@
 
 ## Button ⇄ Button
 
-- agrees on 4/5 properties
+- agrees on 4/6 properties
+- ⚠️ **State** — design only: variant [Default, Hover, Focus Visible, Disabled] — no matching code prop
 - ⚠️ **Label** — design only: no matching code prop — a design TEXT property with no code counterpart is often bound to React `children` (invisible in a props interface); confirm before treating as drift
 
 ## Card ⇄ Card
@@ -81,6 +82,12 @@
 ## Field ⇄ Field
 
 - agrees on 4/4 properties
+
+## Heading ⇄ Heading
+
+- agrees on 1/3 properties
+- ⚠️ **level / Level** — option sets differ: code [1, 2, 3, 4, 5, 6] vs design [H2, H1, H3, H4, H5, H6]
+- ⚠️ **Text** — design only: no matching code prop — a design TEXT property with no code counterpart is often bound to React `children` (invisible in a props interface); confirm before treating as drift
 
 ## IconButton ⇄ IconButton
 

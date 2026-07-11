@@ -2,9 +2,9 @@
   "$schema": "./contract.schema.json",
   "id": "ds.checkbox",
   "name": "Checkbox",
-  "version": "1.1.0",
+  "version": "2.0.0",
   "status": "draft",
-  "description": "Toggles a single on/off value \u2014 settings, terms acceptance, opt-ins. API mirrors industry convention (Astryx CheckboxInput): checked, unchecked, and indeterminate are prop-driven appearance states.",
+  "description": "Toggles a single on/off value \u2014 settings, terms acceptance, opt-ins. API mirrors industry convention (Astryx CheckboxInput): checked, unchecked, and indeterminate are prop-driven appearance states. v2.0.0 (breaking, DOM shape): the control is a NATIVE input[type=checkbox] inside the wrapping label \u2014 checked/indeterminate are DOM state, not ARIA on a button; the box and glyphs are presentational.",
   "semantics": {
     "element": "label"
   },
@@ -106,7 +106,8 @@
       },
       "parts": {
         "box": {
-          "description": "The visual checkbox. Fill and glyph follow the value prop.",
+          "description": "The visual checkbox — presentational. Fill and glyph follow the value prop; the real input sits inside, visually managed.",
+          "element": "span",
           "layout": {
             "direction": "row",
             "align": "center",
@@ -122,6 +123,13 @@
             "color": "{color.checkbox.icon}"
           },
           "parts": {
+            "input": {
+              "description": "The real checkable control — a native input. Checked and indeterminate are DOM state (checked + el.indeterminate), never ARIA attributes; the wrapping label gives implicit association. Canvas: not drawn (semantics don't draw).",
+              "element": "input",
+              "attrs": {
+                "type": "checkbox"
+              }
+            },
             "checkGlyph": {
               "icon": {
                 "asset": "check",
@@ -142,10 +150,6 @@
                 "equals": "indeterminate"
               }
             }
-          },
-          "element": "button",
-          "attrs": {
-            "role": "checkbox"
           }
         },
         "textCol": {
@@ -199,13 +203,13 @@
   "events": [
     {
       "name": "toggle",
-      "description": "Fires when the box is activated; uncontrolled instances flip unchecked/checked (indeterminate resolves to checked).",
+      "description": "Fires when the input is toggled; uncontrolled instances flip unchecked/checked (indeterminate resolves to checked).",
       "bindings": {
         "code": {
           "prop": "onToggle"
         }
       },
-      "trigger": "box",
+      "trigger": "input",
       "toggles": {
         "prop": "value",
         "between": [

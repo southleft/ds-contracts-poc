@@ -1,6 +1,6 @@
 /**
  * GENERATED FILE — DO NOT EDIT.
- * Source of truth: contracts/checkbox.contract.json (ds.checkbox v1.1.0)
+ * Source of truth: contracts/checkbox.contract.json (ds.checkbox v2.0.0)
  * Regenerate with: npm run generate
  */
 import { forwardRef, useState } from 'react';
@@ -22,11 +22,11 @@ export interface CheckboxProps extends LabelHTMLAttributes<HTMLLabelElement> {
   label: string;
   /** Secondary text below the label. */
   description?: string;
-  /** Fires when the box is activated; uncontrolled instances flip unchecked/checked (indeterminate resolves to checked). */
+  /** Fires when the input is toggled; uncontrolled instances flip unchecked/checked (indeterminate resolves to checked). */
   onToggle?: () => void;
 }
 
-/** Toggles a single on/off value — settings, terms acceptance, opt-ins. API mirrors industry convention (Astryx CheckboxInput): checked, unchecked, and indeterminate are prop-driven appearance states. */
+/** Toggles a single on/off value — settings, terms acceptance, opt-ins. API mirrors industry convention (Astryx CheckboxInput): checked, unchecked, and indeterminate are prop-driven appearance states. v2.0.0 (breaking, DOM shape): the control is a NATIVE input[type=checkbox] inside the wrapping label — checked/indeterminate are DOM state, not ARIA on a button; the box and glyphs are presentational. */
 export const Checkbox = forwardRef<HTMLLabelElement, CheckboxProps>(function Checkbox(
   {
     value: valueProp,
@@ -53,13 +53,16 @@ export const Checkbox = forwardRef<HTMLLabelElement, CheckboxProps>(function Che
     .join(' ');
   return (
     <label ref={ref} className={classes} {...rest}>
-      <button
-        className={styles.box}
-        role="checkbox"
-        type="button"
-        onClick={handleToggle}
-        aria-checked={value === 'checked' ? true : value === 'unchecked' ? false : 'mixed'}
-      >
+      <span className={styles.box}>
+        <input
+          className={styles.input}
+          type="checkbox"
+          checked={value === 'checked'}
+          ref={(el) => {
+            if (el) el.indeterminate = value === 'indeterminate';
+          }}
+          onChange={handleToggle}
+        ></input>
         {value === 'checked' ? (
           <span
             className={styles.checkGlyph}
@@ -74,7 +77,7 @@ export const Checkbox = forwardRef<HTMLLabelElement, CheckboxProps>(function Che
             dangerouslySetInnerHTML={{ __html: ICONS['dash'] }}
           />
         ) : null}
-      </button>
+      </span>
       <div className={styles.textCol}>
         <span className={styles.labelText}>{label}</span>
         <span className={styles.descriptionText}>{description}</span>

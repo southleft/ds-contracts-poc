@@ -1,9 +1,9 @@
 {
   "id": "ds.checkbox",
   "name": "Checkbox",
-  "version": "1.1.0",
+  "version": "2.0.0",
   "status": "draft",
-  "description": "Toggles a single on/off value — settings, terms acceptance, opt-ins. API mirrors industry convention (Astryx CheckboxInput): checked, unchecked, and indeterminate are prop-driven appearance states.",
+  "description": "Toggles a single on/off value — settings, terms acceptance, opt-ins. API mirrors industry convention (Astryx CheckboxInput): checked, unchecked, and indeterminate are prop-driven appearance states. v2.0.0 (breaking, DOM shape): the control is a NATIVE input[type=checkbox] inside the wrapping label — checked/indeterminate are DOM state, not ARIA on a button; the box and glyphs are presentational.",
   "figma": {
     "representation": "component",
     "componentSetKey": "9bc54e5a3f7c074b9ed016dfac8edff95ec45e23"
@@ -46,7 +46,7 @@
     {
       "prop": "onToggle",
       "type": "() => void",
-      "description": "Fires when the box is activated; uncontrolled instances flip unchecked/checked (indeterminate resolves to checked)."
+      "description": "Fires when the input is toggled; uncontrolled instances flip unchecked/checked (indeterminate resolves to checked)."
     }
   ],
   "children": {
