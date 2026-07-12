@@ -109,6 +109,13 @@ export function composeSubject(subject: ParitySubject): RenderablePackage {
   const result = proposeFromDump(picked[1], {
     corpus: d.corpus,
     contractIdByName: d.contractIdByName,
+    // Without the contracts themselves, canonicalizeInstanceProps falls back
+    // to spelling passthrough — a name-coincidence child ("Button" in the
+    // Shoelace kit → repo ds.button) then carries foreign props the referee
+    // refuses (field failure: shoelace-button-group, 8 named violations, 36
+    // variants undiffable). With the contracts in scope, unmappable applied
+    // props DROP with a named note each and the composite renders.
+    contractsById: d.contracts,
     fileKey: dump._provenance?.fileKey ?? subject.fileKey,
     mintUnbound: true,
   });
