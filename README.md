@@ -82,7 +82,7 @@ All of it is gated by **99 executable checks** (`npm run eval`) that run the rea
 
 ## Quick start
 
-Requires Node ≥ 20.
+Requires Node ≥ 20. (Two checks drive a real Chromium — one eval and the visual-parity instrument; if none is found on your machine, the error names the fix: `npx playwright install chromium`, or point `PLAYWRIGHT_CHROMIUM_PATH` at any Chrome/Chromium binary.)
 
 ```bash
 npm install

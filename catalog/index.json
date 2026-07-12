@@ -2,8 +2,8 @@
   "_protocol": "Retrieval protocol: load index.json always; fetch catalog/components/<x>.json (x = component id without the namespace prefix, e.g. ds.button → button.json) for each component you intend to use; fetch tokens.json when styling. catalog/catalog.json is the equivalent monolithic form — do not load it when the sharded form is available.",
   "system": {
     "name": "DS Contracts POC",
-    "catalogVersion": "0.5.0",
-    "gitCommit": "39892c3",
+    "catalogVersion": "0.6.0",
+    "gitCommit": "85b50d4",
     "source": "Compiled from contracts/*.contract.json + tokens/ + context/rules.json — do not edit."
   },
   "package": {
@@ -575,7 +575,7 @@
     {
       "id": "ds.token",
       "name": "Token",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "status": "draft",
       "propNames": [
         "color",
