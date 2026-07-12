@@ -49,8 +49,15 @@ const CLIP_MARGIN = 48; // px around the painted union box (shadows, outlines)
 
 export function chromiumExecutable(): string {
   if (process.env.PLAYWRIGHT_CHROMIUM_PATH) return process.env.PLAYWRIGHT_CHROMIUM_PATH;
-  const cache = path.join(homedir(), 'Library', 'Caches', 'ms-playwright');
-  if (existsSync(cache)) {
+  // playwright's browser cache: macOS and Linux locations (Windows untested — use the env var).
+  const caches = [
+    path.join(homedir(), 'Library', 'Caches', 'ms-playwright'),
+    process.env.XDG_CACHE_HOME
+      ? path.join(process.env.XDG_CACHE_HOME, 'ms-playwright')
+      : path.join(homedir(), '.cache', 'ms-playwright'),
+  ];
+  for (const cache of caches) {
+    if (!existsSync(cache)) continue;
     const revs = readdirSync(cache)
       .map((d) => /^chromium-(\d+)$/.exec(d))
       .filter((m): m is RegExpExecArray => m !== null)
@@ -60,14 +67,22 @@ export function chromiumExecutable(): string {
         'chrome-mac-arm64/Google Chrome for Testing.app/Contents/MacOS/Google Chrome for Testing',
         'chrome-mac/Google Chrome for Testing.app/Contents/MacOS/Google Chrome for Testing',
         'chrome-mac/Chromium.app/Contents/MacOS/Chromium',
+        'chrome-linux/chrome',
+        'chrome-linux64/chrome',
       ]) {
         const p = path.join(cache, m[0], rel);
         if (existsSync(p)) return p;
       }
     }
   }
-  const systemChrome = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
-  if (existsSync(systemChrome)) return systemChrome;
+  for (const sys of [
+    '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
+    '/usr/bin/google-chrome',
+    '/usr/bin/chromium',
+    '/usr/bin/chromium-browser',
+  ]) {
+    if (existsSync(sys)) return sys;
+  }
   throw new Error(
     'No Chromium found — set PLAYWRIGHT_CHROMIUM_PATH, or install one via `npx playwright install chromium`',
   );

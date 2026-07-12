@@ -44,10 +44,10 @@
       "screens": 5,
       "adherentScreens": 0,
       "meanScore": 69,
-      "totalViolations": 91,
+      "totalViolations": 90,
       "totalChecks": 283,
       "violationsByRule": {
-        "components-from-catalog": 66,
+        "components-from-catalog": 65,
         "tokens-only": 22,
         "no-style-overrides": 3
       },
@@ -60,8 +60,8 @@
         },
         {
           "file": "notification-center.tsx",
-          "score": 74,
-          "violations": 9,
+          "score": 77,
+          "violations": 8,
           "adherent": false
         },
         {
@@ -292,10 +292,6 @@
             "detail": "<Inline> has no prop \"justify\""
           },
           {
-            "rule": "components-from-catalog",
-            "detail": "<Button variant=\"ghost\"> — legal values: primary | secondary | danger"
-          },
-          {
             "rule": "tokens-only",
             "detail": "Literal color #6b7280"
           },
@@ -304,7 +300,7 @@
             "detail": "Literal color #4b5563"
           }
         ],
-        "score": 74,
+        "score": 77,
         "adherent": false
       },
       {
@@ -358,7 +354,7 @@
           },
           {
             "rule": "components-from-catalog",
-            "detail": "<Badge variant=\"primary\"> — legal values: info | success | warning | danger"
+            "detail": "<Badge variant=\"primary\"> — legal values: info | success | warning | danger | error"
           },
           {
             "rule": "components-from-catalog",

@@ -12,6 +12,8 @@ private/
 .env.figma
 .env.local
 .playwright-mcp/
+.serena/
+.wrangler/
 
 # visual-parity artifacts: cached Figma PNGs + per-variant triptychs (the
 # worst-10 triptychs are committed under extract/figma/visual-parity/report-assets/)
