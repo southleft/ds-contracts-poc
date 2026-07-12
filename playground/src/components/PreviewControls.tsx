@@ -113,6 +113,15 @@ function DebouncedInput({
 const NO_CHANGE_NOTE =
   'No visible change — by design: this prop has no effect in the static HTML preview (it manifests in code or on the canvas).';
 
+/** DISPLAY order for an enum select: the contract's default first, the rest
+ *  alphabetical — a proposed contract arrives in raw canvas order (`none`
+ *  buried mid-list on the tooltip fixture). The CONTRACT is never reordered;
+ *  this is a controls-UI concern only. */
+export function enumDisplayOrder(values: string[], defaultValue: string): string[] {
+  const rest = values.filter((v) => v !== defaultValue).sort((a, b) => a.localeCompare(b));
+  return values.includes(defaultValue) ? [defaultValue, ...rest] : rest;
+}
+
 export function PreviewControls({
   contract,
   overrides,
@@ -163,7 +172,7 @@ export function PreviewControls({
                   {c.name}
                 </label>
                 <select id={id} value={String(current)} onChange={(e) => onChange(c.name, e.target.value)}>
-                  {c.values!.map((v) => (
+                  {enumDisplayOrder(c.values!, String(c.fallback)).map((v) => (
                     <option key={v} value={v}>
                       {v}
                     </option>

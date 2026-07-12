@@ -41,6 +41,14 @@ export function Examples() {
               <div className="excard__caption">
                 <span className="excard__caption-label">What to notice</span>
                 {e.caption}
+                {e.expectedRefusal ? (
+                  <span
+                    className="excard__flag"
+                    title={e.expectedRefusal}
+                  >
+                    refuses on purpose
+                  </span>
+                ) : null}
               </div>
             </div>
           </Link>

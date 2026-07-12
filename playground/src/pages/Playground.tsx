@@ -83,6 +83,7 @@ import {
 } from '../engine/workspace';
 import { reportIfChunkError } from '../engine/chunk-guard';
 import { buildPreviewAtState, type PreviewPropOverrides, type PreviewSurface } from '../engine/preview';
+import { renderSignature } from '../engine/measure';
 import type { ReceiptEntry, ReceiptGroup, Receipts } from '../receipts';
 import { DEMO_SESSION_TOKEN, rememberFigmaSession } from '../engine/figma-render';
 import {
@@ -612,14 +613,11 @@ export function Playground() {
   // ------------------------------------------------------------- input rail
   const [sourceTab, setSourceTab] = useState<SourceTab>('examples');
   const [activeExample, setActiveExample] = useState<string | null>(null);
-  // The rail tabs scroll horizontally (one row, never wrapping) — keep the
-  // active tab visible when the selection lands off-screen.
-  const railTabsRef = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    railTabsRef.current
-      ?.querySelector<HTMLElement>('.tabs__tab.is-active')
-      ?.scrollIntoView({ inline: 'nearest', block: 'nearest' });
-  }, [sourceTab]);
+  // Deliberate-refusal labeling, data-driven from the example entry: while
+  // the loaded content is an example that MEANS to refuse, the refusal wall
+  // and the empty preview both say so (same explicit voice as the Describe
+  // demo). Any other load clears it.
+  const [expectedRefusal, setExpectedRefusal] = useState<string | null>(null);
 
   // ---------------------------------------------------- session workspace
   const workspace = useWorkspace();
@@ -662,9 +660,14 @@ export function Playground() {
     // re-validates the text live on load — speaks for TODAY. This is the
     // stale-refusal fix: a pre-stub-era entry no longer presents years-old
     // refusals as current truth.
+    // Both display-state groups are `uncounted`: the Receipts badge after a
+    // restore must equal the badge the import showed (owner field case: the
+    // tooltip fixture read 28 restored vs 27 imported — the extra was this
+    // provenance note being counted into the import's record).
     const provenanceGroup: ReceiptGroup = {
       title: 'Restored workspace entry',
       kind: 'note',
+      uncounted: true,
       entries: [
         {
           message: `Imported ${wsDateTime(entry.importedAt)} via ${importOrigin}. The groups marked "(as recorded at import)" are that import's record, verbatim — the engine may have moved since. The contract itself is re-refereed live in the editor, and child stubs were re-registered against the current engine just now.`,
@@ -677,6 +680,7 @@ export function Playground() {
             {
               title: 'Child stub contracts — re-refereed on restore',
               kind: 'note',
+              uncounted: true,
               entries: [
                 ...stubResult.registered.map((stub) => ({
                   message: `${stub.id} re-registered PROVISIONALLY against the current engine — composition refs keep resolving. Import the real child set to replace it.`,
@@ -699,6 +703,7 @@ export function Playground() {
         : { source: origin, groups: [provenanceGroup, ...currentStubGroup] },
     );
     setActiveExample(null);
+    setExpectedRefusal(null);
     setWsLoaded(entry);
   };
 
@@ -713,6 +718,7 @@ export function Playground() {
     setProvenance(source);
     setPristine({ text: pretty(raw), provenance: source });
     setActiveExample(slug ?? contractId);
+    setExpectedRefusal((slug && exampleBySlug.get(slug)?.expectedRefusal) || null);
     setWsLoaded(null);
   };
 
@@ -830,6 +836,9 @@ export function Playground() {
     setCodeTsx(example.tsx);
     setCodeCss(example.css);
     setActiveExample(example.slug);
+    // The deliberate-refusal note survives the propose run (applyCodeResult
+    // never touches it) — the refusal this example lands on is the lesson.
+    setExpectedRefusal(example.expectedRefusal ?? null);
     if (autoRun) void runCodePropose(example.tsx, example.css, `code proposal — ${example.sourcePath}`);
   };
 
@@ -1113,6 +1122,7 @@ export function Playground() {
     setPristine({ text: contractText, provenance: provenanceLine });
     setReceipts(recorded.receipts);
     setActiveExample(null);
+    setExpectedRefusal(null);
     setWsLoaded(null);
   };
 
@@ -1328,6 +1338,7 @@ export function Playground() {
 
   const loadJson = () => {
     setJsonError(null);
+    setExpectedRefusal(null);
     let parsed: unknown;
     try {
       parsed = JSON.parse(jsonText);
@@ -1431,6 +1442,7 @@ export function Playground() {
     setProvenance(origin);
     setPristine({ text: contractText, provenance: origin });
     setActiveExample(null);
+    setExpectedRefusal(null); // the Describe demo carries its own labeling
     // The SAME governed editor referees the model output — run it now so the
     // fix affordance appears exactly when the refusals do.
     const v = validateContractText(contractText);
@@ -1613,6 +1625,7 @@ export function Playground() {
         setProvenance('loaded from share link');
         setPristine({ text: state.contract, provenance: 'loaded from share link' });
         setActiveExample(null);
+        setExpectedRefusal(null);
         setOutputTab(
           state.output === 'preview' || emitters.some((e) => e.name === state.output)
             ? state.output
@@ -1843,7 +1856,7 @@ export function Playground() {
   // The prop whose last toggle changed nothing visible — honest inline note.
   const [previewNoteProp, setPreviewNoteProp] = useState<string | null>(null);
   const lastChangedProp = useRef<string | null>(null);
-  const prevInstance = useRef<{ stateKey: string; sig: string | null } | null>(null);
+  const prevInstance = useRef<{ stateKey: string; sig: string | null; doc: string } | null>(null);
 
   const previewData = previewTarget ?? holdLastRender;
   const previewContractId = previewData?.contract.id ?? null;
@@ -1869,23 +1882,38 @@ export function Playground() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [previewData?.contract, previewData?.contracts, previewSurface, activeOverrides, tokenSource, outputTab, previewMode, previewView]);
 
-  // Honest-note bookkeeping: when a control change leaves the instance
-  // markup byte-identical, the change had no visible effect BY DESIGN (the
-  // emitted CSS is state-independent) — say so on that control.
+  // Honest-note bookkeeping: does the control change actually LOOK like
+  // anything? Identical instance markup is a fast yes-it's-dead (the emitted
+  // CSS is state-independent). When markup differs, the docs' rendered
+  // geometry + paint are compared offscreen (engine/measure.ts) — class
+  // strings can change while pixels don't (ds.token's size axis used to
+  // toggle classes the stylesheet never styled, and the note stayed silent).
   useEffect(() => {
     if (!singlePreview?.ok) return;
     const stateKey = JSON.stringify(activeOverrides);
     const prev = prevInstance.current;
+    prevInstance.current = { stateKey, sig: singlePreview.instanceHtml, doc: singlePreview.doc };
+    if (!prev || prev.stateKey === stateKey || !lastChangedProp.current) return;
+    const changed = lastChangedProp.current;
     if (
-      prev &&
-      prev.stateKey !== stateKey &&
-      lastChangedProp.current &&
       prev.sig !== null &&
-      singlePreview.instanceHtml !== null
+      singlePreview.instanceHtml !== null &&
+      prev.sig === singlePreview.instanceHtml
     ) {
-      setPreviewNoteProp(prev.sig === singlePreview.instanceHtml ? lastChangedProp.current : null);
+      setPreviewNoteProp(changed);
+      return;
     }
-    prevInstance.current = { stateKey, sig: singlePreview.instanceHtml };
+    let cancelled = false;
+    void Promise.all([renderSignature(prev.doc), renderSignature(singlePreview.doc)]).then(
+      ([before, after]) => {
+        if (cancelled) return;
+        // An unmeasurable doc must never CLAIM "no visible change".
+        setPreviewNoteProp(before !== null && before === after ? changed : null);
+      },
+    );
+    return () => {
+      cancelled = true;
+    };
   }, [singlePreview, activeOverrides]);
 
   const handlePreviewControl = (name: string, value: string | boolean | number) => {
@@ -1969,7 +1997,9 @@ export function Playground() {
       >
       {/* ------------------------------------------------------- left rail */}
       <aside className="pg__rail" ref={railRef}>
-        <div className="tabs" role="tablist" aria-label="Input source" ref={railTabsRef}>
+        {/* The strip WRAPS when the rail is narrow — all seven tabs stay
+            visible; nothing scrolls out of reach or clips mid-label. */}
+        <div className="tabs" role="tablist" aria-label="Input source">
           {(
             [
               // The Workspace tab appears with the first import (and stays
@@ -2410,7 +2440,10 @@ export function Playground() {
                   type="button"
                   className="btn--primary"
                   disabled={!!codeBusy || !codeUrl.trim()}
-                  onClick={() => void runGithubImport()}
+                  onClick={() => {
+                    setExpectedRefusal(null);
+                    void runGithubImport();
+                  }}
                 >
                   {codeBusy ? 'Working…' : 'Fetch & propose'}
                 </button>
@@ -2466,7 +2499,10 @@ export function Playground() {
                   type="button"
                   className="btn--primary"
                   disabled={!!codeBusy || !codeTsx.trim()}
-                  onClick={() => void runCodePropose(codeTsx, codeCss, 'code proposal — pasted source')}
+                  onClick={() => {
+                    setExpectedRefusal(null); // a manual paste is not the curated refusal demo
+                    void runCodePropose(codeTsx, codeCss, 'code proposal — pasted source');
+                  }}
                 >
                   {codeBusy ? 'Working…' : 'Propose contract'}
                 </button>
@@ -2593,7 +2629,10 @@ export function Playground() {
               Spec
             </button>
           </div>
-          <span className="editor__meta">{provenance}</span>
+          {/* One line, ellipsized when narrow — the full text rides title. */}
+          <span className="editor__meta" title={provenance}>
+            {provenance}
+          </span>
           {pristine !== null && text !== pristine.text ? (
             <button
               type="button"
@@ -2712,6 +2751,13 @@ export function Playground() {
                 ) : null}
               </>
             )}
+            {expectedRefusal &&
+            (validation.status === 'violations' || validation.status === 'schema-error') ? (
+              <div className="validation__expected" role="note">
+                <span className="validation__expected-tag">refuses on purpose</span>
+                {expectedRefusal}
+              </div>
+            ) : null}
           </div>
           {aiFixUndo ? (
             <div className="ai-fix-strip" role="note">
@@ -2974,6 +3020,12 @@ export function Playground() {
                 <div className="pane__body hint preview__neutral">
                   No valid render yet{currentContractId ? ` for ${currentContractId}` : ''} — fix the
                   refusals to see it{demoRefusalSuffix}
+                  {expectedRefusal ? (
+                    <div className="preview__expected" role="note">
+                      <span className="validation__expected-tag">refuses on purpose</span>
+                      {expectedRefusal}
+                    </div>
+                  ) : null}
                 </div>
               ) : (
                 <div className="pane__body hint">Nothing to render yet.</div>

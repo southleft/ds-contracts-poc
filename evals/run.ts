@@ -1836,6 +1836,28 @@ const cases: Case[] = [
       }
     },
   },
+  {
+    // The Examples gallery captions state FACTS about their contracts, and
+    // one shipped wrong (the Badge card said "four variant classes" over a
+    // five-variant contract). Countable claims are DERIVED in
+    // playground/src/engine/examples.ts; this receipt pins every derivation
+    // site against the real contracts and refuses reintroduced hardcoded
+    // counts (playground/scripts/caption-check.ts — reads source as text,
+    // same discipline as design-canvas-box-parity).
+    id: 'playground-caption-consistency',
+    claim: 'C3-detection',
+    run: () => {
+      const r = run(TSX, ['playground/scripts/caption-check.ts']);
+      if (r.status !== 0) throw new Error(`caption-consistency check failed:\n${r.out}`);
+      for (const line of [
+        'contractId references all resolve to shipping contracts',
+        'enum-derivation sites resolve to non-empty enums',
+        'caption-consistency: all claims hold',
+      ]) {
+        if (!r.out.includes(line)) throw new Error(`caption check receipt missing "${line}":\n${r.out}`);
+      }
+    },
+  },
 ];
 
 // ---------------------------------------------------------------------------

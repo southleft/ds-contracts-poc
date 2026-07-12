@@ -38,14 +38,19 @@ export function HelpDrawer({ open, onClose }: { open: boolean; onClose: () => vo
               token. The token stays in your browser, sent only to api.figma.com — session-only by
               default; the &ldquo;Remember on this device&rdquo; checkbox (and the matching one on
               the Describe tab&rsquo;s Anthropic key) opts a secret into this browser&rsquo;s
-              localStorage ONLY, until you clear it from the same field. When the plan
-              withholds variable names, resolved values are minted as provisional{' '}
+              localStorage ONLY, until you clear it from the same field.
+            </p>
+            <p>
+              When the plan withholds variable names, resolved values are minted as provisional{' '}
               <code>imported.*</code> tokens — the preview stays styled, the receipts list every
               mint, and &lsquo;Suggest semantic names (AI)&rsquo; proposes renames you apply one
               by one, refereed. No token? Demo import runs the identical path over a committed
-              fixture. To close the loop, copy the <b>Figma script</b> output and paste it back
-              into the source file (Sync Runner plugin): it builds the contract&rsquo;s version
-              beside your original for A/B — provisional variables included.
+              fixture.
+            </p>
+            <p>
+              To close the loop, copy the <b>Figma script</b> output and paste it back into the
+              source file (Sync Runner plugin): it builds the contract&rsquo;s version beside
+              your original for A/B — provisional variables included.
             </p>
             <p className="drawer__subnote">
               <b>Working locally?</b> Two more rungs, by variable-name fidelity: paste a plugin
@@ -63,8 +68,11 @@ export function HelpDrawer({ open, onClose }: { open: boolean; onClose: () => vo
               Open the <b>Code</b> tab. Paste TSX + CSS, or a public GitHub file or directory
               URL — the tracer follows the entry&rsquo;s relative imports (every fetch
               receipted), and anything it cannot close is a named gap with an AI fetch-plan as
-              the next rung. Every raw value is reported with nearest-token candidates, nothing
-              invented. Check the Figma script tab for its design side.
+              the next rung.
+            </p>
+            <p>
+              Every raw value is reported with nearest-token candidates, nothing invented. Check
+              the Figma script tab for its design side.
             </p>
           </section>
           <section>
@@ -72,11 +80,13 @@ export function HelpDrawer({ open, onClose }: { open: boolean; onClose: () => vo
             <p>
               Pick a contract from the <b>Examples</b> gallery. Edit it in the center pane — the
               schema and generator referee every keystroke, refusals by name, offending lines
-              highlighted. The output tabs regenerate live. When the generator refuses a
-              schema-valid contract, <b>Fix with AI</b> in the refusal banner sends the named
-              refusals to the shared assist Worker — the corrected contract loads as an
-              ai-proposed round (2 max, Undo included) and is re-refereed; nothing applies
-              silently.
+              highlighted. The output tabs regenerate live.
+            </p>
+            <p>
+              When the generator refuses a schema-valid contract, <b>Fix with AI</b> in the
+              refusal banner sends the named refusals to the shared assist Worker — the corrected
+              contract loads as an ai-proposed round (2 max, Undo included) and is re-refereed;
+              nothing applies silently.
             </p>
           </section>
           <section>
