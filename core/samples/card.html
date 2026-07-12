@@ -3,7 +3,8 @@
   Token values arrive via CSS custom properties (the same custom-property names the CSS Modules
   bind) — include the token stylesheet (src/styles/tokens.css) on the page or nothing resolves.
   Fidelity: no events, no interactivity beyond CSS states (:hover/:focus-visible/:disabled).
-  Slots render their declared defaultContent, else a named placeholder. Booleans render per showcase item.
+  Slots render their declared defaultContent; an empty slot renders its wrapper empty (absent content
+  is absent — named in an inline comment, never painted as placeholder text). Booleans render per showcase item.
 -->
 <section class="showcase showcase--card">
   <div class="showcase__item">
@@ -15,12 +16,8 @@
         </span>
         <span class="card__title">Card title</span>
       </header>
-      <div class="card__body">
-        <span class="card__slot-placeholder">[children slot]</span>
-      </div>
-      <footer class="card__footer">
-        <span class="card__slot-placeholder">[actions slot]</span>
-      </footer>
+      <div class="card__body"><!-- children slot: no content --></div>
+      <footer class="card__footer"><!-- actions slot: no content --></footer>
     </article>
   </div>
 </section>

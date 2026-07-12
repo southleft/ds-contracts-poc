@@ -11,6 +11,17 @@
   gap: var(--space-gap-control);
   font-family: var(--font-control-family);
   font-weight: var(--font-control-weight);
+  position: relative;
+}
+
+.button::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: max(100%, 44px);
+  height: max(100%, 44px);
+  transform: translate(-50%, -50%);
 }
 
 .button:focus-visible {

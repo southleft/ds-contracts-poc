@@ -642,11 +642,20 @@ function applyTokens(
       case 'height':
         spec.fixedHeight = { px: px(resolveLiteral(tokenPath)), varName };
         break;
-      case 'opacity':
+      case 'opacity': {
         // Only reachable via state-preview overrides today (no base token
-        // uses it) — but the mapping is general: opacity is bindable.
-        spec.bindings = { ...spec.bindings, opacity: varName };
+        // uses it). NOT bound as a variable: Figma's opacity field is
+        // PERCENT-scaled (0-100), so binding the repo's 0-1 number token
+        // (opacity.disabled = 0.5) rendered the synced disabled preview at
+        // 0.5% — nearly invisible (visual-parity receipt: Button
+        // State=Disabled washed to #ffffff, 93.91% masked, vs the CSS
+        // surfaces' correct 0.5 fade). A ×100 shadow variable would fork the
+        // token's value; the honest rendering is the literal on the node —
+        // the same node-opacity channel the dump v1.2 inversion uses.
+        const value = px(resolveLiteral(tokenPath));
+        if (!Number.isNaN(value)) spec.opacity = Math.min(1, Math.max(0, value));
         break;
+      }
       case 'box-shadow': {
         // dump v1.3: the resolved single-DROP_SHADOW value projects as a
         // native effect (runtime) / CSS box-shadow (canvas preview).

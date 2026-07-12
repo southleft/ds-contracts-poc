@@ -68,6 +68,23 @@ const STATE_SELECTORS: Record<string, string> = {
   disabled: ':disabled',
 };
 
+/** Elements the UA stylesheet gives default MARGINS. A component's box is
+ *  contract-governed — spacing between components belongs to the composing
+ *  layout, never to a UA default leaking through (field failure: Heading's
+ *  h1-h6 carried the UA's 0.67em block margins into every composition). The
+ *  emitters neutralize margin on the root class when the root can render as
+ *  one of these (semantics.element or any elementByProp value). */
+export const UA_MARGIN_ELEMENTS = new Set([
+  'h1', 'h2', 'h3', 'h4', 'h5', 'h6',
+  'p', 'blockquote', 'figure', 'hr', 'ul', 'ol', 'dl', 'dd', 'pre', 'fieldset',
+]);
+
+/** Every element the contract's root can render as. */
+export function rootElementsOf(contract: Contract): string[] {
+  const ebp = contract.semantics.elementByProp;
+  return [contract.semantics.element, ...(ebp ? Object.values(ebp.map) : [])];
+}
+
 /** v7 overlay: placement → inset declarations. The overlay part is
  *  position:absolute against the root (which becomes position:relative). */
 const OVERLAY_CSS: Record<string, string[]> = {
@@ -749,6 +766,10 @@ export function generateCss(contract: Contract, tokenInventory: Set<string>, err
     rootDecls.push('display: inline-flex', 'align-items: center', 'justify-content: center');
   }
   const rootTokens = root.tokens ?? {};
+  // UA-margin neutralization: see UA_MARGIN_ELEMENTS.
+  if (rootElementsOf(contract).some((el) => UA_MARGIN_ELEMENTS.has(el))) {
+    rootDecls.push('margin: 0');
+  }
   const hasBorder = 'border-width' in rootTokens || 'border-color' in rootTokens;
   if (hasBorder) rootDecls.push('border-style: solid');
   else rootDecls.push('border: 0');
@@ -844,9 +865,36 @@ export function generateCss(contract: Contract, tokenInventory: Set<string>, err
     }
   }
 
+  // a11y.minHitArea: the declared floor is ENFORCED, not aspirational — the
+  // standard non-visual hit-target extension (an absolutely centered ::before
+  // at max(100%, floor) per axis; it paints nothing and never affects layout,
+  // but pointer events on it hit the component). Field failure: Button
+  // declared 44 while the small size rendered a 36px-tall target and nothing
+  // enforced the difference.
+  const minHitArea = contract.a11y?.minHitArea;
+  if (typeof minHitArea === 'number' && !rootDecls.includes('position: relative')) {
+    rootDecls.push('position: relative');
+  }
+
   lines.push('', '.root {');
   for (const d of rootDecls) lines.push(`  ${d};`);
   lines.push('}');
+
+  if (typeof minHitArea === 'number') {
+    lines.push(
+      '',
+      '/* a11y.minHitArea: non-visual hit-target floor — see contract */',
+      '.root::before {',
+      "  content: '';",
+      '  position: absolute;',
+      '  left: 50%;',
+      '  top: 50%;',
+      `  width: max(100%, ${minHitArea}px);`,
+      `  height: max(100%, ${minHitArea}px);`,
+      '  transform: translate(-50%, -50%);',
+      '}',
+    );
+  }
 
   if (contract.states.includes('focus-visible')) {
     lines.push('', '.root:focus-visible {', '  outline-style: solid;', '  outline-offset: 2px;', '}');

@@ -941,9 +941,9 @@ const STATE_VARIANTS = [
         "topRightRadius": "radius/control",
         "bottomLeftRadius": "radius/control",
         "bottomRightRadius": "radius/control",
-        "itemSpacing": "space/gap/control",
-        "opacity": "opacity/disabled"
+        "itemSpacing": "space/gap/control"
       },
+      "opacity": 0.5,
       "children": [
         {
           "type": "svg",
@@ -987,9 +987,9 @@ const STATE_VARIANTS = [
         "topRightRadius": "radius/control",
         "bottomLeftRadius": "radius/control",
         "bottomRightRadius": "radius/control",
-        "itemSpacing": "space/gap/control",
-        "opacity": "opacity/disabled"
+        "itemSpacing": "space/gap/control"
       },
+      "opacity": 0.5,
       "children": [
         {
           "type": "svg",
@@ -1033,9 +1033,9 @@ const STATE_VARIANTS = [
         "topRightRadius": "radius/control",
         "bottomLeftRadius": "radius/control",
         "bottomRightRadius": "radius/control",
-        "itemSpacing": "space/gap/control",
-        "opacity": "opacity/disabled"
+        "itemSpacing": "space/gap/control"
       },
+      "opacity": 0.5,
       "children": [
         {
           "type": "svg",
@@ -1079,9 +1079,9 @@ const STATE_VARIANTS = [
         "topRightRadius": "radius/control",
         "bottomLeftRadius": "radius/control",
         "bottomRightRadius": "radius/control",
-        "itemSpacing": "space/gap/control",
-        "opacity": "opacity/disabled"
+        "itemSpacing": "space/gap/control"
       },
+      "opacity": 0.5,
       "children": [
         {
           "type": "svg",
@@ -1391,6 +1391,8 @@ async function buildNode(spec, registry) {
     applyFrameSpec(node, spec);
   }
   node.name = spec.name;
+  // Node opacity (dump v1.2 channel): applies to every node kind.
+  if (typeof spec.opacity === 'number') node.opacity = spec.opacity;
   if (spec.visibleProp) {
     registry.visibles.push({ node, prop: spec.visibleProp, default: spec.visibleDefault === true });
   }

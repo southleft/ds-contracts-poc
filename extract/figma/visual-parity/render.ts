@@ -158,6 +158,14 @@ export async function renderVariant(
   // in the page context (ReferenceError on every evaluate).
   await page.evaluate('document.fonts.ready');
 
+  // Neutralize residual pointer state: the page's virtual mouse KEEPS its
+  // position across setContent, so a prior hover/active row leaves :hover
+  // matching on the NEXT row's element (field failure: every CBDS/Eventz
+  // focus row screenshotted the HOVER fill under the focus ring — 68-70%
+  // masked — because the hover row ran just before on the same page).
+  // (0,0) is inside the body's 32px padding, off every component.
+  await page.mouse.move(0, 0);
+
   // Interaction BEFORE measuring (a hover style could move descendants).
   const root = page.locator(ROOT_SELECTOR);
   if ((await root.count()) === 0) return { ok: false, error: `preview markup has no ${ROOT_SELECTOR}` };

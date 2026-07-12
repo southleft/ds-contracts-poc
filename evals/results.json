@@ -1,6 +1,6 @@
 {
-  "passed": 82,
-  "total": 82,
+  "passed": 88,
+  "total": 88,
   "results": [
     {
       "id": "refuse-unknown-token-reference",
@@ -410,6 +410,36 @@
     {
       "id": "playground-caption-consistency",
       "claim": "C3-detection",
+      "pass": true
+    },
+    {
+      "id": "switch-canvas-thumb",
+      "claim": "C1-determinism",
+      "pass": true
+    },
+    {
+      "id": "focus-not-pressed-browser-probe",
+      "claim": "C1-determinism",
+      "pass": true
+    },
+    {
+      "id": "slot-empty-not-placeholder",
+      "claim": "C1-determinism",
+      "pass": true
+    },
+    {
+      "id": "heading-margin-reset",
+      "claim": "C1-determinism",
+      "pass": true
+    },
+    {
+      "id": "hit-area-enforced",
+      "claim": "C1-determinism",
+      "pass": true
+    },
+    {
+      "id": "token-size-live",
+      "claim": "C1-determinism",
       "pass": true
     }
   ]

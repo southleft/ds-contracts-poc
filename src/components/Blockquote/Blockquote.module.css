@@ -6,6 +6,7 @@
 .root {
   display: flex;
   flex-direction: column;
+  margin: 0;
   border: 0;
   border-left-width: var(--border-width-divider-strong);
   border-left-color: var(--color-divider-strong);
