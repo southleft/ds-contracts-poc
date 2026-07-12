@@ -183,9 +183,9 @@
   "src/components/Toast/Toast.stories.tsx": "236c7c2ca50520a347972d3ead043d183126b01a46120277b5deb203acf19e5d",
   "src/components/Toast/Toast.tsx": "492b63d1991c94a6d050b8b42adc337fd461c02e6dfdde8cca7a05d2c3665ca6",
   "src/components/Toast/index.ts": "b2b42b8647a43e3b09abc682303c5ec4d8d72e53fcae06a3045fbd0cf6e7f8f4",
-  "src/components/Token/Token.module.css": "47a849dc2658f0648fdbde260aa5671b6aef3b8514477d2ed54bd379c8a3f637",
-  "src/components/Token/Token.stories.tsx": "3ea6c1608926f1e591ee5e8ac8723ae189451c411a8c8cce1ac6aedb8c738f7a",
-  "src/components/Token/Token.tsx": "1c56a86013913a33138eaaa1addcace69681fd317693f43cfafe1b219911dc22",
+  "src/components/Token/Token.module.css": "a9df0a8f19959593df8141812c0753def49c21870272ceb29c3d3855c172ae39",
+  "src/components/Token/Token.stories.tsx": "8b2aa38f117645967479a9c1433078b138c5dd5fcc8ae5e58e5d2ce2a7fa009b",
+  "src/components/Token/Token.tsx": "5334fb9bce64acd4ce424066f4b1d7ec90c838b5737950e1277bc51231b4dbb2",
   "src/components/Token/index.ts": "4a4ad4ab2d7825812aa767bec95780d52c0f016b9439d1916b5863bbc700e558",
   "src/components/Toolbar/Toolbar.module.css": "1f9ff2d2cdf04f1b0e96a7b1f0680d525090b48ac7782f5b28d079c456758015",
   "src/components/Toolbar/Toolbar.stories.tsx": "7fc118374b078bce5c9312a8867bfa2515a5c96df3020f809ca2e94bea7b1fbc",
@@ -255,7 +255,7 @@
   "figma-sync/43-textarea.js": "5deb4e086d760c22e7159f20f8d8262d3deeba4582b9d2f6420c002235dcb753",
   "figma-sync/44-textfield.js": "c560bde4daff28af00bfc13c648c68d1cd5a0fcb7dcee8cb03a9f31e4915833d",
   "figma-sync/45-toast.js": "3fed6e47891e4d91ab56ece126b2ed0da8553ed3132b841bb31cca5251d437b3",
-  "figma-sync/46-token.js": "b44213e62e749513c4cebbee9056bcf274675f0b592c987950422d34a509e19f",
+  "figma-sync/46-token.js": "672df3c5c800ffb13d657755796c39ea61f55c254988039c47043499230c5283",
   "figma-sync/47-toolbar.js": "9daf7d64dbef89f93b113d3220539d41dd9c02fd9278c688ac15279b925db1c2",
   "figma-sync/48-topnavitem.js": "4ac70b7c82489b617878231780709f0d18e7bf93eb6ea9cf199045f01cb5c483",
   "figma-sync/49-topnav.js": "e6a64295bb2f0384f32b7a73a7d08f46b61a4da74617d7cd6a379d8473dc433a",
@@ -263,5 +263,5 @@
   "figma-sync/batch-01.js": "7636600c4b98f58a0fa6cef0f6cad63052d54760eb6b387451d03db572b38b5e",
   "figma-sync/batch-02.js": "f1784cf5a4130390ba55417aa79d09e4204f3e2a2f321b8fd3919e473a5b0764",
   "figma-sync/batch-03.js": "ab9ace68c749f2d0bb5a7dcfcafdf209e1735dea8877f874fa3ab2d27bb7d5b2",
-  "figma-sync/batch-04.js": "702421f73ff0d254d26405624faaf7617ce68897fdea337ccd5ec4aef5bb30d6"
+  "figma-sync/batch-04.js": "a294788ad83dc49fd808c993abf23978f1acd7a7792fe9d43b74a1eb3b3872ea"
 }
