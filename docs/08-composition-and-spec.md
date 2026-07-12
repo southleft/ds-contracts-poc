@@ -53,7 +53,7 @@ What exists today that a spec draft can be cut from:
 
 1. **The format**: `contracts/contract.schema.json` (generated from the Zod source of truth) — props with per-surface bindings, nested anatomy with token bindings, slots, component refs, states, a11y, dual anchors.
 2. **Reference implementations**: two generators (React/CSS Modules/CSF3 for code, and one targeting a commercial design tool's canvas) and a three-surface conformance checker (the parity differ) — a spec with a verifier is what separates this from CEM.
-3. **A conformance suite**: the 60 evals are, in effect, the spec's test suite (refusal semantics, detection semantics, convergence semantics, judge semantics).
+3. **A conformance suite**: the 99 evals are, in effect, the spec's test suite (refusal semantics, detection semantics, convergence semantics, judge semantics).
 
 What a publishable draft still needs, in rough order:
 

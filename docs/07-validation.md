@@ -1,6 +1,8 @@
 # 7 · Validation — Claims, Evals, Evidence
 
-This PoC makes five falsifiable claims. Each is backed by an automated eval (`npm run eval`, 60 cases, runs the real pipeline in a scratch copy — not mocks) or an executed live design-tool check. Current status: **60/60 deterministic evals pass** (`evals/results.json`), all live checks pass. This section is written to be lifted into a PRD.
+This PoC makes five falsifiable claims. Each is backed by an automated eval (`npm run eval`, 99 cases, runs the real pipeline in a scratch copy — not mocks) or an executed live design-tool check. Current status: **99/99 deterministic evals pass** (`evals/results.json`), all live checks pass. This section is written to be lifted into a PRD.
+
+**Rounds 11+ addendum (the import frontier, censused and instrumented, 2026-07-09 → 07-12):** the eval count grew 60 → 99 across the July field-test arc, and three standing instruments joined the suite alongside the evals. **The whole-kit census** (`npm run extract:figma:gauntlet`) replays every component set in a live enterprise Figma kit — 1,618 sets, 76 variant composites — through the full deterministic import pipeline: 100.0% clean, with facts-carried, named-note, and degradation counts per set so "clean" is never confused with "pixel-right" ([`extract/figma/gauntlet/CENSUS.md`](../extract/figma/gauntlet/CENSUS.md)). **The visual-parity instrument** (`npm run extract:figma:visual`) perceptually diffs emitted previews against Figma's own PNG renders (pixelmatch, text-masked second score, real browser interaction states) and maintains a worst-first fix queue ([`extract/figma/visual-parity/REPORT.md`](../extract/figma/visual-parity/REPORT.md)). **The enterprise code gauntlet** ran Carbon, Fluent 2, Spectrum, and Polaris at pinned SHAs through the unmodified code-extraction pipeline; the two silent-loss classes it exposed (vanishing `as`-expression exports, hollow intersection-of-named-refs props) were eliminated and receipt-locked ([`extract/pilots/ENTERPRISE-GAUNTLET.md`](../extract/pilots/ENTERPRISE-GAUNTLET.md)). The dump format advanced to v1.6 (paint alpha → shape geometry → resolved variable values → composite child keys → collection modes), and each capability landed with its own committed check: `extract:figma:tooltip:check`, `dialog:check`, `cbds:bridge:check`, `composite:check`, `overlap:check`, `repeat:check`, `theme:check`. The dated narrative is [MILESTONES.md](../MILESTONES.md).
 
 **Round 6 addendum (governed generation):** two eval cases exercise the deterministic generation judge itself — `judge-passes-canonical-screen` and `judge-catches-all-violation-classes` — backing the measured 100-vs-69 governed-generation A/B result in [docs/10](10-honest-generation.md).
 
@@ -122,14 +124,14 @@ Harness design:
 - **Judges are deterministic, not LLM:** run the existing extraction + differ over each output — do all props/values exist in the contract? Are all colors/spacing `var(--…)` references into `tokens.css` (zero hex/px literals)? Are variant combinations legal? The parity differ **is** the judge; no rubric drift.
 - **Metric:** adherence rate per arm; the gap A−B quantifies what the contract layer is worth.
 
-**Executed result:** ungoverned arm **69/100 with 91 violations**; governed arm **100/100 with zero violations**, including honest gap-reporting when the system lacked a needed component. Full write-up, judge internals, and the two judge evals: [docs/10 — Honest Generation](10-honest-generation.md).
+**Executed result:** ungoverned arm **69/100 with 90 violations**; governed arm **100/100 with zero violations**, including honest gap-reporting when the system lacked a needed component. Full write-up, judge internals, and the two judge evals: [docs/10 — Honest Generation](10-honest-generation.md).
 
 ## Reproducing everything
 
 ```bash
 npm install
 npm run build     # C1/C2 gates run here too
-npm run eval      # 60 deterministic evals → evals/results.json
+npm run eval      # 99 deterministic evals → evals/results.json
 npm run parity    # current three-surface drift report
 ```
 

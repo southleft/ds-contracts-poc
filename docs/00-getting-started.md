@@ -25,7 +25,7 @@ Because the alternative always ends the same way. If code is canonical, the desi
 
 The contract dissolves the argument by making it a category error: **both surfaces are renderers.** Asking whether the design file or the code is the truth becomes like asking whether the PDF or the print-out is the original document. The original is the contract, it's versioned in Git, and every change to it is a reviewable diff.
 
-There's a second reason, and it's becoming the bigger one: **AI generation.** When an agent builds UI, an ungoverned agent invents props, hard-codes colors, and restyles components — measured here at 69/100 adherence with 91 violations. The same model constrained by the compiled contract catalog scored **100/100 with zero violations**, and when it hit a genuine gap in the system it reported the gap instead of faking around it. The contract isn't just how design and code stay aligned — it's how *generation* stays honest. (Full evidence: [Validation](./07-validation.md).)
+There's a second reason, and it's becoming the bigger one: **AI generation.** When an agent builds UI, an ungoverned agent invents props, hard-codes colors, and restyles components — measured here at 69/100 adherence with 90 violations. The same model constrained by the compiled contract catalog scored **100/100 with zero violations**, and when it hit a genuine gap in the system it reported the gap instead of faking around it. The contract isn't just how design and code stay aligned — it's how *generation* stays honest. (Full evidence: [Validation](./07-validation.md).)
 
 ## How the two sides stay connected
 
@@ -165,6 +165,6 @@ Then prove the loop to yourself in about two minutes:
 2. Open a contract in `contracts/` and change something small — add an enum value, tweak a token binding.
 3. `npm run build && npm run parity` — the differ now reports the canvas **behind**, naming exactly what's missing and how to fix it. That honest red state *is* the product: nothing pretends to be in sync when it isn't.
 4. Revert, or carry the change through — regenerate, sync the canvas, and watch it go green again.
-5. `npm run eval` — 60 deterministic checks that the machinery itself (detection, refusal, convergence, byte-identical regeneration) still holds.
+5. `npm run eval` — 99 deterministic checks that the machinery itself (detection, refusal, convergence, byte-identical regeneration) still holds.
 
 From there: [The Bridge](./00-the-bridge.md) for the narrative, [Architecture](./01-architecture.md) for the model, [Contract Specification](./02-contract-spec.md) when you're ready to write one.

@@ -18,6 +18,7 @@ The playground runs the repository's actual engine (`core/`) in your browser —
 - a gallery of live-emitted examples from the shipping contracts
 - a governed contract editor — schema violations and generator refusals shown on screen, by name
 - import a component from a **figma.com URL** (your token), with an honest degradation ladder when your plan gates the variables endpoint
+- or send your live selection from the **companion Figma plugin** — a one-time pairing code relays a full-fidelity dump (token names *and* resolved values, on any Figma plan)
 - import code from a **public GitHub file URL** — the co-located stylesheet auto-discovered, every failure named
 - paste **your own DTCG tokens** and watch every consumer rebind to them
 - describe a component in a sentence and let Claude (your key) propose a contract the schema can refuse
@@ -38,7 +39,7 @@ This project takes a third position: **the source of truth is neither surface.**
 
 The rule that makes it work: **surfaces never sync side-to-side.** An engineer's new prop and a designer's color change take the same path — flagged by the differ, promoted into the contract as a reviewable diff, then regenerated out to the other surface. One arbiter, version-controlled, no arbitration meetings. It's the governance model that made Git work for code and the DTCG token format work for design tokens, run one level up — at the component-API layer.
 
-There's a second reason, and it's becoming the bigger one: **AI generation.** In this repo's A/B evaluation, an ungoverned agent building screens scored **69/100 adherence with 91 violations** — invented props, hard-coded colors, restyled components. The same model constrained by the compiled contract catalog scored **100/100 with zero violations**, and when it hit a real gap in the system, it *reported the gap* instead of faking around it. The gap became a contract proposal, the proposal became a version bump, and the score went back to 100. The contract isn't just how design and code stay aligned — it's how generation stays honest.
+There's a second reason, and it's becoming the bigger one: **AI generation.** In this repo's A/B evaluation, an ungoverned agent building screens scored **69/100 adherence with 90 violations** — invented props, hard-coded colors, restyled components. The same model constrained by the compiled contract catalog scored **100/100 with zero violations**, and when it hit a real gap in the system, it *reported the gap* instead of faking around it. The gap became a contract proposal, the proposal became a version bump, and the score went back to 100. The contract isn't just how design and code stay aligned — it's how generation stays honest.
 
 ## What this proves
 
@@ -53,11 +54,14 @@ Every capability claim in this repository is backed by an executable check or a 
 | **Honest AI generation** | catalog-governed 100/100 vs ungoverned 69/100, scored by a deterministic judge | [docs/10](docs/10-honest-generation.md) |
 | **Round-trip identity** | this repo's own generated components re-extracted — code→contract and design→contract — match their shipping contracts with **zero mismatches**, both directions, red-tested | [`extract/ROUNDTRIP-CODE.md`](extract/ROUNDTRIP-CODE.md) · [`extract/figma/ROUNDTRIP.md`](extract/figma/ROUNDTRIP.md) · [`extract/figma/rest/ROUNDTRIP-REST.md`](extract/figma/rest/ROUNDTRIP-REST.md) |
 | **Brownfield** | four unrelated design systems — Shoelace, Mantine, Eventz, CBDS — extracted and diagnosed, drift catalogued from real files | [`extract/pilots/`](extract/pilots/) |
+| **Enterprise scale** | Carbon, Fluent 2, Spectrum, and Polaris run through the unmodified code-extraction pipeline at pinned SHAs — scores, silent-loss classes found and eliminated, every workaround named | [`extract/pilots/ENTERPRISE-GAUNTLET.md`](extract/pilots/ENTERPRISE-GAUNTLET.md) |
+| **Whole-kit census** | every component set in a live enterprise Figma kit (1,618 sets, 76 variant composites) replayed through the full import pipeline — 100.0% clean, facts-carried and degradations counted per set | [`extract/figma/gauntlet/CENSUS.md`](extract/figma/gauntlet/CENSUS.md) · `npm run extract:figma:gauntlet` |
+| **Visual parity** | emitted previews perceptually diffed against Figma's own renders (pixelmatch, text-masked score) — a standing worst-first fix queue, cross-renderer deltas named | [`extract/figma/visual-parity/REPORT.md`](extract/figma/visual-parity/REPORT.md) |
 | **Non-destructive sync** | in-place amend of live component sets: node IDs, property IDs, and instance overrides preserved through repeated passes, inside a foreign enterprise kit | CBDS pilot forensics ([`extract/pilots/cbds/`](extract/pilots/cbds/)) |
 | **Theming** | a brand is a token-layer dimension, nothing else — adding one leaves every component byte-identical | `brand-added-token-layer-only` eval |
 | **Engine as library** | the whole pipeline is browser-safe pure functions; CLI output golden-guarded through the refactor | `npm run core:browser-check` · [docs/15](docs/15-engine-as-library.md) |
 
-All of it is gated by **60 executable checks** (`npm run eval`) that run the real pipeline in a scratch copy — not mocks.
+All of it is gated by **99 executable checks** (`npm run eval`) that run the real pipeline in a scratch copy — not mocks.
 
 ## What's actually here
 
@@ -71,7 +75,7 @@ All of it is gated by **60 executable checks** (`npm run eval`) that run the rea
 | `parity/` | The three-way differ: classifies every difference between contract, code, and canvas as *ahead*, *behind*, or *mismatched* — with a proposed remedy. Plus the adherence judge and the brownfield `diagnose` referee. | ✅ |
 | `extract/` | Brownfield extraction: code→contract (React/TSX, CSS Modules, Custom Elements Manifest) and design→contract (plugin dump + Figma REST) adapters that propose **full contracts** — API, anatomy, and token bindings — plus the four pilot write-ups and the round-trip receipts. | ✅ |
 | `catalog/` + `context/` | The compiled generation constraint (every API + every token + the governance rules) that an AI agent — or a human — can be held to, sharded to fit an agent's context window at any component count, plus the org rules and memory that feed it. | catalog ❌ · rules ✅ |
-| `evals/` | 60 deterministic checks on the machinery itself: byte-identical regeneration against golden manifests, refusal of illegal contracts, detection of every claimed drift class, convergence after promotion, extraction round-trips. | ✅ |
+| `evals/` | 99 deterministic checks on the machinery itself: byte-identical regeneration against golden manifests, refusal of illegal contracts, detection of every claimed drift class, convergence after promotion, extraction round-trips. | ✅ |
 | `playground/` | The public browser playground ([live](https://ds-contracts-playground.pages.dev)) — a Vite app importing `core/` unmodified. | ✅ |
 | `dashboard/` | The **Contract Hub** — a local app visualizing the whole system: live component previews, per-prop binding maps across all three surfaces, token provenance, one-click parity runs, contract editing with regeneration, and the full docs. | ✅ |
 | `docs/` | The working documents — start at [Getting Started](docs/00-getting-started.md). | ✅ |
@@ -94,7 +98,7 @@ npm run parity   # ① clean — code, canvas, and tokens all match the contract
 # ② edit any contract in contracts/ — add an enum value, change a token binding
 npm run build && npm run parity
 #    ③ the differ reports exactly what is now behind, and how to fix it
-npm run eval     # ④ 60 checks that detection, refusal, and convergence still hold
+npm run eval     # ④ 99 checks that detection, refusal, and convergence still hold
 ```
 
 That honest red state in step ③ is the product. Most design-system tooling shows you the happy path; this one is built to tell you precisely when and where the surfaces have stopped agreeing. (Point a token binding at a token that doesn't exist and the *build itself* fails — the contract↔token integrity gate.)
@@ -110,7 +114,7 @@ npm run reconcile      # → the disagreement report: where your code and design
 
 Code-side adapters ship for `react-tsx` (function components, forwardRef/memo, any props-type convention, defaults, `on*` events) with CSS Modules anatomy extraction, and `cem` (**any** library publishing a Custom Elements Manifest: Web Components, Lit, Shoelace-style systems). Design-side, a component imports from a figma.com URL (`npm run extract:figma:rest`) or a plugin dump. Adapters normalize into one shape, so everything downstream is framework-blind.
 
-Field-tested against four systems this project doesn't own: **Shoelace** (58/58 components, reconciled against its community Figma kit — real kit rot found mechanically), **Mantine** (245 components, 1,691 props, <1s), **Eventz** (a complete brownfield pair: one team's real code library ⇄ its own hand-built design library), and **CBDS** (coexistence and in-place amend inside a foreign enterprise kit) — receipts in [`extract/pilots/`](extract/pilots/). Extraction proposes and reports; unbound or raw values are always reported with nearest-token candidates, never invented. Full walkthrough: [docs/13 — Try It With Your Own System](docs/13-try-it-with-your-system.md).
+Field-tested against four systems this project doesn't own: **Shoelace** (58/58 components, reconciled against its community Figma kit — real kit rot found mechanically), **Mantine** (245 components, 1,691 props, <1s), **Eventz** (a complete brownfield pair: one team's real code library ⇄ its own hand-built design library), and **CBDS** (coexistence and in-place amend inside a foreign enterprise kit) — receipts in [`extract/pilots/`](extract/pilots/). The same unmodified pipeline was then run against **Carbon, Fluent 2, Spectrum, and Polaris** at pinned SHAs — the enterprise gauntlet ([`extract/pilots/ENTERPRISE-GAUNTLET.md`](extract/pilots/ENTERPRISE-GAUNTLET.md)) — which surfaced and then eliminated two silent-loss classes the pilots never hit. Extraction proposes and reports; unbound or raw values are always reported with nearest-token candidates, never invented. Full walkthrough: [docs/13 — Try It With Your Own System](docs/13-try-it-with-your-system.md).
 
 ## How a contract reads
 
@@ -174,7 +178,7 @@ Not everything is expressible yet, and nothing here pretends otherwise:
 
 ## Status
 
-The model is validated end-to-end and running in public: generation into both surfaces, the parity loop executed in both directions with receipts, 60/60 evals, a measured 100-vs-69 governed-generation result, bidirectional anatomy extraction with zero-mismatch round-trip receipts, four brownfield pilots on systems this project doesn't own, in-place amend proven forensically on live files, and a launched browser playground running the same engine. The reference design-tool integration lives behind a transport-agnostic script boundary (`docs/internal/`) — the contract format itself is tool-agnostic.
+The model is validated end-to-end and running in public: generation into both surfaces, the parity loop executed in both directions with receipts, 99/99 evals, a measured 100-vs-69 governed-generation result, bidirectional anatomy extraction with zero-mismatch round-trip receipts, four brownfield pilots plus an enterprise code gauntlet (Carbon, Fluent 2, Spectrum, Polaris) on systems this project doesn't own, a live enterprise Figma kit censused to 100.0% clean (1,618 sets), a standing pixel-level visual-parity instrument, in-place amend proven forensically on live files, and a launched browser playground running the same engine — with a companion Figma plugin bridging live selections into it. The reference design-tool integration lives behind a transport-agnostic script boundary (`docs/internal/`) — the contract format itself is tool-agnostic.
 
 - **What has been proven, dated, with receipts:** [MILESTONES.md](MILESTONES.md)
 - **Release history:** [CHANGELOG.md](CHANGELOG.md)
