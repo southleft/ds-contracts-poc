@@ -1004,8 +1004,29 @@ function invertNodeTokens(
     (n0.children?.length ?? 0) > 1 &&
     m.occ.some((o) => (o.node.layout?.spacing ?? 0) !== 0)
   ) {
+    const spacings = m.occ.map((o) => o.node.layout?.spacing ?? 0);
+    const negatives = spacings.filter((s) => s < 0).length;
     reportUnbound(ctx, where, 'itemSpacing', firstNode((n) => n.layout?.spacing, 0).layout!.spacing);
-    mintObservation(ctx, tokens, where, 'gap', 'px', numOccurrences(m, (n) => n.layout?.spacing), `${where}|itemSpacing`);
+    if (negatives > 0 && negatives < spacings.length) {
+      // P21, mixed-sign spacing (owner field case: Avatar group's
+      // type=space 4px vs type=overlap -8px): children overlap only in SOME
+      // variants, but `layout.overlap` is a per-part invariant (the v7
+      // VariantLayoutSchema deliberately excludes it — no per-variant form),
+      // and a negative px value minted as a PLAIN gap token is an invalid
+      // CSS fact (`gap: -8px` parses to nothing and the overlap silently
+      // vanishes — the pre-P21 bug). NAMED, never minted; the unbound report
+      // survives for review.
+      ctx.mint?.partialSources.add(`${where}|itemSpacing`);
+      ctx.notes.push(
+        `${where}: itemSpacing is NEGATIVE in ${negatives}/${spacings.length} variant(s) (${[...new Set(spacings)].join('/')}) — children overlap only there, but layout.overlap is a per-part invariant with no per-variant form (P21); gap NOT minted (a mixed-sign spacing cannot carry, and a plain negative-px gap token is an invalid CSS fact), NAMED for review`,
+      );
+    } else {
+      // Uniform sign: mint as before. A uniformly NEGATIVE spacing rides the
+      // overlap projection (invertLayout set layout.overlap: true, so the
+      // gap token's negative value renders as a negative child margin /
+      // negative itemSpacing — never as an invalid CSS `gap`).
+      mintObservation(ctx, tokens, where, 'gap', 'px', numOccurrences(m, (n) => n.layout?.spacing), `${where}|itemSpacing`);
+    }
   }
   if (
     !fields.has('paddingLeft') &&
@@ -1645,6 +1666,22 @@ function invertLayout(
   if (!l) return grow ? { grow } : undefined;
 
   const hasChildren = m.children.length > 0;
+  // P21 overlap collections (AvatarGroup shape): negative itemSpacing in
+  // EVERY variant means the children OVERLAP — the existing `layout.overlap`
+  // vocabulary, whose shipped projection (ds.avatar-group owner-precedent:
+  // {space.avatarGroup.overlap} → {space.overlap} = -8px) is a NEGATIVE-
+  // valued gap token rendered as a negative child margin in CSS and as
+  // negative itemSpacing on the canvas. Mixed-sign spacing across variants
+  // stays a NAMED note in the gap channel (overlap is a per-part invariant).
+  const overlap =
+    hasChildren && m.occ.length > 0 && m.occ.every((o) => (o.node.layout?.spacing ?? 0) < 0)
+      ? true
+      : undefined;
+  if (overlap) {
+    ctx.notes.push(
+      `${where}: negative itemSpacing in every variant — children OVERLAP (P21); proposed as layout.overlap: true, with the gap channel carrying the DRAWN (negative) magnitude — the schema's negative-margin projection (CSS: a negative child margin from the gap token, the ds.avatar-group owner-precedent where {space.overlap} = -8px; canvas: negative itemSpacing) — never an invalid CSS \`gap\``,
+    );
+  }
   const out: Record<string, unknown> = {};
   const direction = l.mode === 'VERTICAL' ? 'column' : 'row';
   const justify = JUSTIFY_INV[l.primary];
@@ -1652,13 +1689,16 @@ function invertLayout(
   if (isRoot) {
     // The generator's root default is row/center/center — a root drawn
     // exactly there proposes no layout block.
-    if (direction === 'row' && justify === 'center' && align === 'center' && !grow) return undefined;
+    if (direction === 'row' && justify === 'center' && align === 'center' && !grow && !overlap) {
+      return undefined;
+    }
     out.display = 'flex';
   }
   if (hasChildren || direction === 'column') out.direction = direction;
   if (justify && hasChildren) out.justify = justify;
   if (align && hasChildren) out.align = align;
   if (grow) out.grow = grow;
+  if (overlap) out.overlap = overlap;
   return Object.keys(out).length > 0 ? out : undefined;
 }
 

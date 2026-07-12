@@ -793,9 +793,27 @@ export function generateCss(contract: Contract, tokenInventory: Set<string>, err
 
   const enumRules = new Map<string, Map<string, string>>(); // class → decls
   const stateRules: string[] = [];
+  const rootSubRules: string[] = [];
 
   for (const [cssProp, ref] of Object.entries(rootTokens)) {
     const refPath = stripBraces(ref);
+    // overlap on the ROOT (P21, proposed avatar-group shape): the gap token
+    // becomes a negative child margin (CSS gap cannot be negative); the
+    // canvas side uses negative itemSpacing — same projection as nested
+    // parts below, single-placeholder refs expand per enum class.
+    if (cssProp === 'gap' && root.layout?.overlap) {
+      const phs = placeholdersIn(refPath);
+      if (phs.length === 1) {
+        for (const value of enums.get(phs[0]) ?? []) {
+          const resolved = refPath.replaceAll(`{${phs[0]}}`, value);
+          if (!checkToken(resolved, 'anatomy.root.tokens.gap')) continue;
+          rootSubRules.push(`\n.${phs[0]}-${value} > * + * {\n  margin-left: ${cssVar(resolved)};\n}`);
+        }
+      } else if (checkToken(refPath, 'anatomy.root.tokens.gap')) {
+        rootSubRules.push(`\n.root > * + * {\n  margin-left: ${cssVar(refPath)};\n}`);
+      }
+      continue;
+    }
     const phs = placeholdersIn(refPath);
     if (phs.length === 0) {
       if (checkToken(refPath, `anatomy.root.tokens.${cssProp}`)) {
@@ -879,6 +897,7 @@ export function generateCss(contract: Contract, tokenInventory: Set<string>, err
   lines.push('', '.root {');
   for (const d of rootDecls) lines.push(`  ${d};`);
   lines.push('}');
+  lines.push(...rootSubRules);
 
   if (typeof minHitArea === 'number') {
     lines.push(
@@ -1028,8 +1047,17 @@ export function generateCss(contract: Contract, tokenInventory: Set<string>, err
       const refPath = stripBraces(ref);
       // overlap: the gap token becomes a negative child margin (CSS gap
       // cannot be negative); the canvas side uses negative itemSpacing.
+      // Single-placeholder refs expand per enum class (P21 minted per-axis
+      // magnitudes), the nested-token-substitution rule shape.
       if (cssProp === 'gap' && part.layout?.overlap) {
-        if (checkToken(refPath, `anatomy.${name}.tokens.gap`)) {
+        const overlapPhs = placeholdersIn(refPath);
+        if (overlapPhs.length === 1) {
+          for (const value of enums.get(overlapPhs[0]) ?? []) {
+            const resolved = refPath.replaceAll(`{${overlapPhs[0]}}`, value);
+            if (!checkToken(resolved, `anatomy.${name}.tokens.gap`)) continue;
+            nestedSubRules.push(`\n.${overlapPhs[0]}-${value} .${name} > * + * {\n  margin-left: ${cssVar(resolved)};\n}`);
+          }
+        } else if (checkToken(refPath, `anatomy.${name}.tokens.gap`)) {
           nestedSubRules.push(`\n.${name} > * + * {\n  margin-left: ${cssVar(refPath)};\n}`);
         }
         continue;

@@ -2268,6 +2268,36 @@ const cases: Case[] = [
       if (!tsx.includes('styles[`size-${size}`]')) throw new Error('Token.tsx no longer composes the size class');
     },
   },
+  {
+    // P21 (overlap collections): negative auto-layout spacing must NEVER
+    // mint a plain negative-px gap token (`gap: -8px` is invalid CSS and the
+    // overlap silently vanished — the pre-P21 bug). Uniform negative spacing
+    // inverts to the existing `layout.overlap` vocabulary with the drawn
+    // magnitude on the gap token (the ds.avatar-group owner-precedent:
+    // {space.overlap} = -8px, projected as a negative child margin / negative
+    // itemSpacing); mixed-sign spacing is a NAMED per-part-invariant limit.
+    // Receipt replays the owner's live Avatar group census fixture.
+    id: 'negative-spacing-overlap',
+    claim: 'C5-extraction',
+    run: () => {
+      const r = run(TSX, ['extract/figma/overlap-check.ts']);
+      if (r.status !== 0) throw new Error(`overlap receipt failed:\n${r.out}`);
+      for (const line of [
+        '✔ root proposes layout.overlap: true (children OVERLAP — P21)',
+        '✔ the overlap carry is a NAMED note (owner-precedent projection spelled out)',
+        '✔ the minted gap token carries the DRAWN magnitude -8px (got -8px)',
+        '✔ CSS projects the overlap as a negative CHILD MARGIN (.root > * + * { margin-left: … })',
+        '✔ CSS never emits the invalid `gap:` declaration for the overlap token',
+        '✔ the mixed-sign limit is a NAMED note (per-part invariant, gap NOT minted)',
+        '✔ layout.overlap is NOT set (overlap holds in only half the variants — never guessed)',
+        '✔ NO negative px token mints anywhere (got 0; the pre-P21 bug class is gone)',
+        '✔ the unbound itemSpacing report SURVIVES for review',
+        '✔ the bound-negative channel keeps its existing NAMED refusal (illegal variable name — rename or map manually)',
+      ]) {
+        if (!r.out.includes(line)) throw new Error(`missing check: ${line}`);
+      }
+    },
+  },
 ];
 
 // ---------------------------------------------------------------------------
