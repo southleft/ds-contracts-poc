@@ -988,8 +988,16 @@ const cases: Case[] = [
       if (hover?.spec.fill !== 'color/action/danger/background-hover')
         throw new Error(`Hover preview must bind the state override token, got ${hover?.spec.fill}`);
       const disabled = sv.find((v: any) => v.name === 'Variant=Primary, Size=Medium, State=Disabled');
-      if (disabled?.spec.bindings?.opacity !== 'opacity/disabled')
-        throw new Error('Disabled preview must bind opacity/disabled');
+      // LITERAL node opacity, never a bound variable: Figma's opacity field is
+      // percent-scaled (0-100), so binding the 0-1 token (opacity.disabled=0.5)
+      // rendered the synced Disabled preview at 0.5% — near-invisible white
+      // (visual-parity receipt, Button State=Disabled 93.91% masked).
+      if (disabled?.spec.opacity !== 0.5)
+        throw new Error(`Disabled preview must carry literal node opacity 0.5 (the token's resolved value), got ${disabled?.spec.opacity}`);
+      if (disabled?.spec.bindings?.opacity !== undefined)
+        throw new Error('Disabled preview must NOT bind a 0-1 opacity variable (Figma reads the field as percent — renders ~0%)');
+      if (!script.includes('node.opacity = spec.opacity'))
+        throw new Error('node-opacity runtime line missing — the literal never reaches the node');
       if (sv.some((v: any) => v.name.includes('Size=Small') || v.name.includes('Size=Large')))
         throw new Error('Explosion not bounded — a preview multiplied a non-primary axis');
       if (!script.includes('withStateAxis')) throw new Error('runtime merge helper missing');
