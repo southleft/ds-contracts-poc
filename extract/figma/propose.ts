@@ -62,16 +62,29 @@
  *               instance's own styling (stroke/padding/radius) is the
  *               utility's, and is elided. A "Show <Property>" visibility
  *               binding on the wrapper marks the part optional (and is NOT an
- *               API prop). preferredValues (→ accepts) are not in dump v1 —
- *               noted, never invented. The first non-optional slot in tree
- *               order is judged the default slot (name "children").
+ *               API prop). preferredValues (dump v1.5 swapPreferredValues)
+ *               resolve by component key into `accepts` (acceptsMode
+ *               'prefer'); unresolvable keys stay a NAMED note — older dumps
+ *               keep the "author accepts manually" note, never invented.
+ *               Drawn design-time content becomes defaultContent: LINKED
+ *               when the child resolves, else a geometry STUB (dump v1.5
+ *               bbox). Native SLOT nodes (Schema 2025) map to the same slot
+ *               part with a provenance note. The first non-optional slot in
+ *               tree order is judged the default slot (name "children").
  *
  *   COMPOSITION A non-Slot INSTANCE child → anatomy `component` ref, id
- *               resolved through the known contracts corpus by set name. Its
- *               internals (the child component's own geometry/paints) belong
- *               to the child contract and are elided. Fixed prop values ride
- *               dump v1.1 componentProperties when present; their absence is
- *               a declared limit, not a guess.
+ *               resolved by componentSetKey FIRST (dump v1.5 instanceSetKey/
+ *               instanceKey against in-scope contracts' anchors — rename-
+ *               safe), drawn name as the fallback; a name match whose keys
+ *               CONTRADICT is refused by name (a foreign kit's "Button" must
+ *               not link to ds.button). Its internals (the child component's
+ *               own geometry/paints) belong to the child contract and are
+ *               elided — but a child with NO contract in scope ships a STUB
+ *               rendering the OBSERVED bounding box + primary paint (dump
+ *               v1.5) as minted imported.stub-* tokens. Fixed prop values
+ *               ride componentProperties; a value tracking a parent enum
+ *               axis 1:1 threads as "{parentProp}". Absences stay declared
+ *               limits, not guesses.
  *
  *   ARTIFACTS   Two generator artifacts are recognized and folded away:
  *               (1) the auto-injected `label` text node (a root with no parts
@@ -103,7 +116,7 @@ import { fileURLToPath } from 'node:url';
 import type { DumpFile } from './types.js';
 import { isDumpSet } from './types.js';
 import { loadTokenCorpus } from './tokens.js';
-import { componentIdSlug, figmaProposalsReport, proposeFromDump, type FigmaProposalResult } from '../../core/propose-figma.js';
+import { componentIdSlug, dumpCapturesHidden, figmaProposalsReport, proposeFromDump, type FigmaProposalResult } from '../../core/propose-figma.js';
 
 // The inversion engine itself is the pure core module — re-exported here so
 // existing importers (extract/figma/roundtrip.ts) keep their import path.
@@ -125,24 +138,39 @@ export function loadContractIdsByName(dir: string): Map<string, string> {
 }
 
 /** Name→id map plus the contracts themselves (for fixed-prop canonicalization). */
-export function loadContracts(dir: string): { byName: Map<string, string>; byId: Map<string, MinimalChildContract> } {
+export function loadContracts(dir: string): {
+  byName: Map<string, string>;
+  byId: Map<string, MinimalChildContract>;
+  /** componentSetKey → id (dump v1.5 session linking — key checked FIRST). */
+  byKey: Map<string, string>;
+} {
   const out = new Map<string, string>();
   const contractsById = new Map<string, MinimalChildContract>();
+  const byKey = new Map<string, string>();
   let files: string[] = [];
   try {
     files = readdirSync(dir).filter((f) => f.endsWith('.contract.json'));
   } catch {
-    return { byName: out, byId: contractsById };
+    return { byName: out, byId: contractsById, byKey };
   }
   for (const f of files) {
     try {
-      const c = JSON.parse(readFileSync(path.join(dir, f), 'utf8')) as { id?: string; name?: string };
-      if (c.id && c.name) { out.set(c.name, c.id); contractsById.set(c.id, c as unknown as MinimalChildContract); }
+      const c = JSON.parse(readFileSync(path.join(dir, f), 'utf8')) as {
+        id?: string;
+        name?: string;
+        anchors?: { figma?: { componentSetKey?: string | null } };
+      };
+      if (c.id && c.name) {
+        out.set(c.name, c.id);
+        contractsById.set(c.id, c as unknown as MinimalChildContract);
+        const key = c.anchors?.figma?.componentSetKey;
+        if (key) byKey.set(key, c.id);
+      }
     } catch {
       /* not a contract — skip */
     }
   }
-  return { byName: out, byId: contractsById };
+  return { byName: out, byId: contractsById, byKey };
 }
 
 
@@ -174,7 +202,14 @@ function main() {
   mkdirSync(path.resolve(root, outDir), { recursive: true });
   for (const [name, value] of Object.entries(dump)) {
     if (name === '_provenance' || !isDumpSet(value)) continue;
-    const proposal = proposeFromDump(value, { corpus, contractIdByName, contractsById: loaded.byId, fileKey });
+    const proposal = proposeFromDump(value, {
+      corpus,
+      contractIdByName,
+      contractsById: loaded.byId,
+      contractIdByKey: loaded.byKey,
+      fileKey,
+      hiddenCaptured: dumpCapturesHidden(dump._provenance),
+    });
     results.push({ setName: name, proposal });
     // componentIdSlug, not raw kebab: a set name like "Button / Primary /
     // Medium" must not turn the output filename into a directory walk.

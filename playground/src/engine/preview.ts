@@ -8,8 +8,9 @@
  * src/styles/tokens.dark.css keys on. Zero runtime TSX
  * compilation; works for ANY schema-valid contract, including imported ones.
  */
-import { emitHtml, type Contract } from '../../../core/index.js';
+import { emitHtml, mintedTokenCss, type Contract } from '../../../core/index.js';
 import { icons } from './data.js';
+import { sessionRegistry } from './session-registry.js';
 import { activeTokens } from './token-source.js';
 
 export type PreviewResult =
@@ -55,6 +56,19 @@ const frameBodyCss = (surface: PreviewSurface) => `
   }
 `;
 
+/** SESSION minted layers (dump v1.5 linking): a linked child imported
+ *  EARLIER binds its own imported.* leaves, which the single active minted
+ *  layer (the on-screen contract's) does not carry — without this block the
+ *  child renders unstyled. Namespaced per component; the active layer is
+ *  injected after and wins on a re-import of the same name. */
+export function sessionMintedCss(): string {
+  const trees = sessionRegistry().mintedTrees;
+  if (trees.length === 0) return '';
+  return trees
+    .map((tree) => `/* Session minted tokens (earlier import, imported.*) */\n${mintedTokenCss(tree)}`)
+    .join('\n');
+}
+
 function assembleDoc(
   emitted: { html: string; css: string },
   surface: PreviewSurface,
@@ -65,6 +79,7 @@ function assembleDoc(
     '<!doctype html>',
     `<html${surface === 'dark' ? ' data-theme="dark"' : ''}>`,
     '<head><meta charset="utf-8">',
+    `<style>${sessionMintedCss()}</style>`,
     `<style>${stylesheets.base}\n${stylesheets.dark}\n${stylesheets.brands}</style>`,
     `<style>${frameBodyCss(surface)}</style>`,
     `<style>${emitted.css}</style>`,

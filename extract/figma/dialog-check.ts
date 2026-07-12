@@ -137,7 +137,16 @@ check(
   partByName.get('Icon')?.component?.id === 'ds.icon' && partByName.get('frame2Icon')?.component?.id === 'ds.icon',
 );
 check('the scroll bar carries (hidden RECTANGLE → "scrollBar" part)', names.includes('scrollBar'));
-check(`5 child stubs total (icon + 4 buttons; got ${stubs.length})`, stubs.length === 5);
+// REVIEWED (dump v1.5): the fixture's reviewed bbox augmentation gives the
+// "_Slot-Dialog" design-time content observed geometry, so the slot proposes
+// defaultContent with a ds.slot-dialog geometry stub — the 6th stub (was 5:
+// icon + 4 buttons). Figma's own render draws the placeholder box, so the
+// honest-geometry stub is what the pixels expect.
+check(`6 child stubs total (icon + 4 buttons + slot placeholder; got ${stubs.length})`, stubs.length === 6);
+check(
+  'the slot placeholder stub is ds.slot-dialog (observed-geometry defaultContent, dump v1.5)',
+  stubIds.has('ds.slot-dialog'),
+);
 // Every drawn node accounted for: dump tree leaves vs anatomy names.
 const dumpNames: string[] = [];
 const walkDump = (n: DumpNode & { name?: string }) => {

@@ -135,6 +135,7 @@ export {
   figmaProposalsReport,
   idSlugSanitized,
   plainWordsProposalError,
+  dumpCapturesHidden,
   proposeBatchFromDump,
   proposeFromDump,
   proposeFromDump as proposeFromFigmaDump,

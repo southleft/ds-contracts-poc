@@ -11,6 +11,7 @@ import {
 } from '../../../core/index.js';
 import { contractsById, icons } from './data.js';
 import type { RefusalIssue } from './refusal-lines.js';
+import { sessionRegistry } from './session-registry.js';
 import { activeChildStubs } from './stub-contracts.js';
 import { activeTokens } from './token-source.js';
 
@@ -49,11 +50,25 @@ export function validateContractText(text: string): ValidationResult {
   // Imported/edited contracts join the known set so their composition refs
   // (and self-references) resolve the way the repo's contracts do.
   const contracts = new Map(contractsById);
+  // SESSION contracts (dump v1.5 linking): everything imported earlier this
+  // session joins the render scope, so a composite that LINKED to a prior
+  // import renders the child's real anatomy instead of "no contract in
+  // scope" (field failure: imported-to-imported refs rendered hollow — the
+  // workspace was a display log, never a scope).
+  const session = sessionRegistry();
+  for (const [id, c] of session.contracts) {
+    if (!contracts.has(id)) contracts.set(id, c);
+  }
   contracts.set(contract.id, contract);
   // Auto-proposed child STUBS (labeled provisional in the receipts) fill ids
   // that would otherwise refuse "no contract in scope" — never overriding a
-  // repo contract or the contract in the editor (field case: CBDS ds.icon).
+  // repo contract, a session contract, or the contract in the editor (field
+  // case: CBDS ds.icon). The CURRENT contract's stubs first, then session
+  // entries' stubs.
   for (const [id, stub] of activeChildStubs()?.stubs ?? []) {
+    if (!contracts.has(id)) contracts.set(id, stub);
+  }
+  for (const [id, stub] of session.stubs) {
     if (!contracts.has(id)) contracts.set(id, stub);
   }
   const errors: string[] = [];

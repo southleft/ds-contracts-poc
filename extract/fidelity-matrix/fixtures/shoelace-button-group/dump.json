@@ -1,14 +1,18 @@
 {
   "_provenance": {
     "fileKey": "nl9P0h3brratHTdncjzKIr",
-    "extractedAt": "2026-07-09",
-    "note": "Node-tree dump mapped from the Figma REST API (extract/figma/rest/map.ts, dump v1.2) for design→contract proposal."
+    "extractedAt": "2026-07-12",
+    "note": "Node-tree dump mapped from the Figma REST API (extract/figma/rest/map.ts, dump v1.5) for design→contract proposal.",
+    "dumpVersion": "1.5"
   },
   "Button group": {
     "setName": "Button group",
     "type": "COMPONENT_SET",
     "nodeId": "376:3540",
     "key": "8ea76f7b0299bf1a13c947556dbdf36986a879c1",
+    "boolDefaults": {
+      "isPill": false
+    },
     "variants": [
       {
         "name": "position=left, size=large, type=default, isPill=false",
@@ -53,17 +57,23 @@
             },
             "strokeWeight": 1,
             "instanceOf": "Button",
+            "instanceKey": "40e0c3abd4c65a19659c83b504e2a19d5b0433b5",
+            "instanceSetKey": "9f85393fca2c907d99631d038f406d861cb4df4b",
             "componentProperties": {
-              "showLabel": true,
-              "label": "Label",
-              "showSuffix": false,
-              "showPrefix": false,
+              "showLabel#84:9": true,
+              "label#84:12": "Label",
+              "showSuffix#84:10": false,
+              "showPrefix#84:11": false,
               "variant": "default",
               "size": "large",
               "state": "default",
               "isOutline": "false",
               "isPill": "false",
               "isCircle": "false"
+            },
+            "bbox": {
+              "width": 82,
+              "height": 50
             }
           }
         ]
@@ -111,17 +121,23 @@
             },
             "strokeWeight": 1,
             "instanceOf": "Button",
+            "instanceKey": "db4ba84f22c706156dc053cce2fbe3874f0bd55c",
+            "instanceSetKey": "9f85393fca2c907d99631d038f406d861cb4df4b",
             "componentProperties": {
-              "showLabel": true,
-              "label": "Label",
-              "showSuffix": false,
-              "showPrefix": false,
+              "showLabel#84:9": true,
+              "label#84:12": "Label",
+              "showSuffix#84:10": false,
+              "showPrefix#84:11": false,
               "variant": "default",
               "size": "large",
               "state": "default",
               "isOutline": "false",
               "isPill": "true",
               "isCircle": "false"
+            },
+            "bbox": {
+              "width": 82,
+              "height": 50
             }
           }
         ]
@@ -165,17 +181,23 @@
               "hex": "0284c7"
             },
             "instanceOf": "Button",
+            "instanceKey": "ecce2fe7d317c7cc8cd19052454c69ec2b097932",
+            "instanceSetKey": "9f85393fca2c907d99631d038f406d861cb4df4b",
             "componentProperties": {
-              "showLabel": true,
-              "label": "Label",
-              "showSuffix": false,
-              "showPrefix": false,
+              "showLabel#84:9": true,
+              "label#84:12": "Label",
+              "showSuffix#84:10": false,
+              "showPrefix#84:11": false,
               "variant": "primary",
               "size": "large",
               "state": "default",
               "isOutline": "false",
               "isPill": "false",
               "isCircle": "false"
+            },
+            "bbox": {
+              "width": 82,
+              "height": 50
             }
           }
         ]
@@ -219,17 +241,23 @@
               "hex": "0284c7"
             },
             "instanceOf": "Button",
+            "instanceKey": "36951372d27fd357ff85dedf6318aa2a79a40e59",
+            "instanceSetKey": "9f85393fca2c907d99631d038f406d861cb4df4b",
             "componentProperties": {
-              "showLabel": true,
-              "label": "Label",
-              "showSuffix": false,
-              "showPrefix": false,
+              "showLabel#84:9": true,
+              "label#84:12": "Label",
+              "showSuffix#84:10": false,
+              "showPrefix#84:11": false,
               "variant": "primary",
               "size": "large",
               "state": "default",
               "isOutline": "false",
               "isPill": "true",
               "isCircle": "false"
+            },
+            "bbox": {
+              "width": 82,
+              "height": 50
             }
           }
         ]
@@ -277,17 +305,23 @@
             },
             "strokeWeight": 1,
             "instanceOf": "Button",
+            "instanceKey": "04e63791f21bd415f8ad639745fcb8e14bf83f7b",
+            "instanceSetKey": "9f85393fca2c907d99631d038f406d861cb4df4b",
             "componentProperties": {
-              "showLabel": true,
-              "label": "Label",
-              "showSuffix": false,
-              "showPrefix": false,
+              "showLabel#84:9": true,
+              "label#84:12": "Label",
+              "showSuffix#84:10": false,
+              "showPrefix#84:11": false,
               "variant": "default",
               "size": "small",
               "state": "default",
               "isOutline": "false",
               "isPill": "false",
               "isCircle": "false"
+            },
+            "bbox": {
+              "width": 44,
+              "height": 30
             }
           }
         ]
@@ -335,17 +369,23 @@
             },
             "strokeWeight": 1,
             "instanceOf": "Button",
+            "instanceKey": "2a3d7c83594e9f7853f246c9a7d6ad7b6549189c",
+            "instanceSetKey": "9f85393fca2c907d99631d038f406d861cb4df4b",
             "componentProperties": {
-              "showLabel": true,
-              "label": "Label",
-              "showSuffix": false,
-              "showPrefix": false,
+              "showLabel#84:9": true,
+              "label#84:12": "Label",
+              "showSuffix#84:10": false,
+              "showPrefix#84:11": false,
               "variant": "default",
               "size": "small",
               "state": "default",
               "isOutline": "false",
               "isPill": "true",
               "isCircle": "false"
+            },
+            "bbox": {
+              "width": 44,
+              "height": 30
             }
           }
         ]
@@ -389,17 +429,23 @@
               "hex": "0284c7"
             },
             "instanceOf": "Button",
+            "instanceKey": "ba5e1fb34d9fab44be3f2d117044be1ffd0021e2",
+            "instanceSetKey": "9f85393fca2c907d99631d038f406d861cb4df4b",
             "componentProperties": {
-              "showLabel": true,
-              "label": "Label",
-              "showSuffix": false,
-              "showPrefix": false,
+              "showLabel#84:9": true,
+              "label#84:12": "Label",
+              "showSuffix#84:10": false,
+              "showPrefix#84:11": false,
               "variant": "primary",
               "size": "small",
               "state": "default",
               "isOutline": "false",
               "isPill": "false",
               "isCircle": "false"
+            },
+            "bbox": {
+              "width": 44,
+              "height": 30
             }
           }
         ]
@@ -443,17 +489,23 @@
               "hex": "0284c7"
             },
             "instanceOf": "Button",
+            "instanceKey": "adcc835534308a1f5aff69ef109f4be2b864240b",
+            "instanceSetKey": "9f85393fca2c907d99631d038f406d861cb4df4b",
             "componentProperties": {
-              "showLabel": true,
-              "label": "Label",
-              "showSuffix": false,
-              "showPrefix": false,
+              "showLabel#84:9": true,
+              "label#84:12": "Label",
+              "showSuffix#84:10": false,
+              "showPrefix#84:11": false,
               "variant": "primary",
               "size": "small",
               "state": "default",
               "isOutline": "false",
               "isPill": "true",
               "isCircle": "false"
+            },
+            "bbox": {
+              "width": 44,
+              "height": 30
             }
           }
         ]
@@ -501,17 +553,23 @@
             },
             "strokeWeight": 1,
             "instanceOf": "Button",
+            "instanceKey": "66e1e8b1066101adb398be5aed5df9d82d142759",
+            "instanceSetKey": "9f85393fca2c907d99631d038f406d861cb4df4b",
             "componentProperties": {
-              "showLabel": true,
-              "label": "Label",
-              "showSuffix": false,
-              "showPrefix": false,
+              "showLabel#84:9": true,
+              "label#84:12": "Label",
+              "showSuffix#84:10": false,
+              "showPrefix#84:11": false,
               "variant": "default",
               "size": "medium",
               "state": "default",
               "isOutline": "false",
               "isPill": "false",
               "isCircle": "false"
+            },
+            "bbox": {
+              "width": 61,
+              "height": 40
             }
           }
         ]
@@ -559,17 +617,23 @@
             },
             "strokeWeight": 1,
             "instanceOf": "Button",
+            "instanceKey": "03840b50c9d3432a965b0b7031f39777e1006b0c",
+            "instanceSetKey": "9f85393fca2c907d99631d038f406d861cb4df4b",
             "componentProperties": {
-              "showLabel": true,
-              "label": "Label",
-              "showSuffix": false,
-              "showPrefix": false,
+              "showLabel#84:9": true,
+              "label#84:12": "Label",
+              "showSuffix#84:10": false,
+              "showPrefix#84:11": false,
               "variant": "default",
               "size": "medium",
               "state": "default",
               "isOutline": "false",
               "isPill": "true",
               "isCircle": "false"
+            },
+            "bbox": {
+              "width": 61,
+              "height": 40
             }
           }
         ]
@@ -613,17 +677,23 @@
               "hex": "0284c7"
             },
             "instanceOf": "Button",
+            "instanceKey": "478eb43199b61a626daddc6188c307b1855a0b97",
+            "instanceSetKey": "9f85393fca2c907d99631d038f406d861cb4df4b",
             "componentProperties": {
-              "showLabel": true,
-              "label": "Label",
-              "showSuffix": false,
-              "showPrefix": false,
+              "showLabel#84:9": true,
+              "label#84:12": "Label",
+              "showSuffix#84:10": false,
+              "showPrefix#84:11": false,
               "variant": "primary",
               "size": "medium",
               "state": "default",
               "isOutline": "false",
               "isPill": "false",
               "isCircle": "false"
+            },
+            "bbox": {
+              "width": 61,
+              "height": 40
             }
           }
         ]
@@ -667,17 +737,23 @@
               "hex": "0284c7"
             },
             "instanceOf": "Button",
+            "instanceKey": "68b69ab21669d16c6b3e673118329020c420366f",
+            "instanceSetKey": "9f85393fca2c907d99631d038f406d861cb4df4b",
             "componentProperties": {
-              "showLabel": true,
-              "label": "Label",
-              "showSuffix": false,
-              "showPrefix": false,
+              "showLabel#84:9": true,
+              "label#84:12": "Label",
+              "showSuffix#84:10": false,
+              "showPrefix#84:11": false,
               "variant": "primary",
               "size": "medium",
               "state": "default",
               "isOutline": "false",
               "isPill": "true",
               "isCircle": "false"
+            },
+            "bbox": {
+              "width": 61,
+              "height": 40
             }
           }
         ]
@@ -725,17 +801,23 @@
             },
             "strokeWeight": 1,
             "instanceOf": "Button",
+            "instanceKey": "40e0c3abd4c65a19659c83b504e2a19d5b0433b5",
+            "instanceSetKey": "9f85393fca2c907d99631d038f406d861cb4df4b",
             "componentProperties": {
-              "showLabel": true,
-              "label": "Label",
-              "showSuffix": false,
-              "showPrefix": false,
+              "showLabel#84:9": true,
+              "label#84:12": "Label",
+              "showSuffix#84:10": false,
+              "showPrefix#84:11": false,
               "variant": "default",
               "size": "large",
               "state": "default",
               "isOutline": "false",
               "isPill": "false",
               "isCircle": "false"
+            },
+            "bbox": {
+              "width": 82,
+              "height": 50
             }
           }
         ]
@@ -783,17 +865,23 @@
             },
             "strokeWeight": 1,
             "instanceOf": "Button",
+            "instanceKey": "db4ba84f22c706156dc053cce2fbe3874f0bd55c",
+            "instanceSetKey": "9f85393fca2c907d99631d038f406d861cb4df4b",
             "componentProperties": {
-              "showLabel": true,
-              "label": "Label",
-              "showSuffix": false,
-              "showPrefix": false,
+              "showLabel#84:9": true,
+              "label#84:12": "Label",
+              "showSuffix#84:10": false,
+              "showPrefix#84:11": false,
               "variant": "default",
               "size": "large",
               "state": "default",
               "isOutline": "false",
               "isPill": "true",
               "isCircle": "false"
+            },
+            "bbox": {
+              "width": 82,
+              "height": 50
             }
           }
         ]
@@ -841,17 +929,23 @@
             },
             "strokeWeight": 1,
             "instanceOf": "Button",
+            "instanceKey": "ecce2fe7d317c7cc8cd19052454c69ec2b097932",
+            "instanceSetKey": "9f85393fca2c907d99631d038f406d861cb4df4b",
             "componentProperties": {
-              "showLabel": true,
-              "label": "Label",
-              "showSuffix": false,
-              "showPrefix": false,
+              "showLabel#84:9": true,
+              "label#84:12": "Label",
+              "showSuffix#84:10": false,
+              "showPrefix#84:11": false,
               "variant": "primary",
               "size": "large",
               "state": "default",
               "isOutline": "false",
               "isPill": "false",
               "isCircle": "false"
+            },
+            "bbox": {
+              "width": 82,
+              "height": 50
             }
           }
         ]
@@ -899,17 +993,23 @@
             },
             "strokeWeight": 1,
             "instanceOf": "Button",
+            "instanceKey": "36951372d27fd357ff85dedf6318aa2a79a40e59",
+            "instanceSetKey": "9f85393fca2c907d99631d038f406d861cb4df4b",
             "componentProperties": {
-              "showLabel": true,
-              "label": "Label",
-              "showSuffix": false,
-              "showPrefix": false,
+              "showLabel#84:9": true,
+              "label#84:12": "Label",
+              "showSuffix#84:10": false,
+              "showPrefix#84:11": false,
               "variant": "primary",
               "size": "large",
               "state": "default",
               "isOutline": "false",
               "isPill": "true",
               "isCircle": "false"
+            },
+            "bbox": {
+              "width": 82,
+              "height": 50
             }
           }
         ]
@@ -957,17 +1057,23 @@
             },
             "strokeWeight": 1,
             "instanceOf": "Button",
+            "instanceKey": "04e63791f21bd415f8ad639745fcb8e14bf83f7b",
+            "instanceSetKey": "9f85393fca2c907d99631d038f406d861cb4df4b",
             "componentProperties": {
-              "showLabel": true,
-              "label": "Label",
-              "showSuffix": false,
-              "showPrefix": false,
+              "showLabel#84:9": true,
+              "label#84:12": "Label",
+              "showSuffix#84:10": false,
+              "showPrefix#84:11": false,
               "variant": "default",
               "size": "small",
               "state": "default",
               "isOutline": "false",
               "isPill": "false",
               "isCircle": "false"
+            },
+            "bbox": {
+              "width": 44,
+              "height": 30
             }
           }
         ]
@@ -1015,17 +1121,23 @@
             },
             "strokeWeight": 1,
             "instanceOf": "Button",
+            "instanceKey": "2a3d7c83594e9f7853f246c9a7d6ad7b6549189c",
+            "instanceSetKey": "9f85393fca2c907d99631d038f406d861cb4df4b",
             "componentProperties": {
-              "showLabel": true,
-              "label": "Label",
-              "showSuffix": false,
-              "showPrefix": false,
+              "showLabel#84:9": true,
+              "label#84:12": "Label",
+              "showSuffix#84:10": false,
+              "showPrefix#84:11": false,
               "variant": "default",
               "size": "small",
               "state": "default",
               "isOutline": "false",
               "isPill": "true",
               "isCircle": "false"
+            },
+            "bbox": {
+              "width": 44,
+              "height": 30
             }
           }
         ]
@@ -1073,17 +1185,23 @@
             },
             "strokeWeight": 1,
             "instanceOf": "Button",
+            "instanceKey": "ba5e1fb34d9fab44be3f2d117044be1ffd0021e2",
+            "instanceSetKey": "9f85393fca2c907d99631d038f406d861cb4df4b",
             "componentProperties": {
-              "showLabel": true,
-              "label": "Label",
-              "showSuffix": false,
-              "showPrefix": false,
+              "showLabel#84:9": true,
+              "label#84:12": "Label",
+              "showSuffix#84:10": false,
+              "showPrefix#84:11": false,
               "variant": "primary",
               "size": "small",
               "state": "default",
               "isOutline": "false",
               "isPill": "false",
               "isCircle": "false"
+            },
+            "bbox": {
+              "width": 44,
+              "height": 30
             }
           }
         ]
@@ -1131,17 +1249,23 @@
             },
             "strokeWeight": 1,
             "instanceOf": "Button",
+            "instanceKey": "adcc835534308a1f5aff69ef109f4be2b864240b",
+            "instanceSetKey": "9f85393fca2c907d99631d038f406d861cb4df4b",
             "componentProperties": {
-              "showLabel": true,
-              "label": "Label",
-              "showSuffix": false,
-              "showPrefix": false,
+              "showLabel#84:9": true,
+              "label#84:12": "Label",
+              "showSuffix#84:10": false,
+              "showPrefix#84:11": false,
               "variant": "primary",
               "size": "small",
               "state": "default",
               "isOutline": "false",
               "isPill": "true",
               "isCircle": "false"
+            },
+            "bbox": {
+              "width": 44,
+              "height": 30
             }
           }
         ]
@@ -1189,17 +1313,23 @@
             },
             "strokeWeight": 1,
             "instanceOf": "Button",
+            "instanceKey": "66e1e8b1066101adb398be5aed5df9d82d142759",
+            "instanceSetKey": "9f85393fca2c907d99631d038f406d861cb4df4b",
             "componentProperties": {
-              "showLabel": true,
-              "label": "Label",
-              "showSuffix": false,
-              "showPrefix": false,
+              "showLabel#84:9": true,
+              "label#84:12": "Label",
+              "showSuffix#84:10": false,
+              "showPrefix#84:11": false,
               "variant": "default",
               "size": "medium",
               "state": "default",
               "isOutline": "false",
               "isPill": "false",
               "isCircle": "false"
+            },
+            "bbox": {
+              "width": 61,
+              "height": 40
             }
           }
         ]
@@ -1247,17 +1377,23 @@
             },
             "strokeWeight": 1,
             "instanceOf": "Button",
+            "instanceKey": "03840b50c9d3432a965b0b7031f39777e1006b0c",
+            "instanceSetKey": "9f85393fca2c907d99631d038f406d861cb4df4b",
             "componentProperties": {
-              "showLabel": true,
-              "label": "Label",
-              "showSuffix": false,
-              "showPrefix": false,
+              "showLabel#84:9": true,
+              "label#84:12": "Label",
+              "showSuffix#84:10": false,
+              "showPrefix#84:11": false,
               "variant": "default",
               "size": "medium",
               "state": "default",
               "isOutline": "false",
               "isPill": "true",
               "isCircle": "false"
+            },
+            "bbox": {
+              "width": 61,
+              "height": 40
             }
           }
         ]
@@ -1305,17 +1441,23 @@
             },
             "strokeWeight": 1,
             "instanceOf": "Button",
+            "instanceKey": "478eb43199b61a626daddc6188c307b1855a0b97",
+            "instanceSetKey": "9f85393fca2c907d99631d038f406d861cb4df4b",
             "componentProperties": {
-              "showLabel": true,
-              "label": "Label",
-              "showSuffix": false,
-              "showPrefix": false,
+              "showLabel#84:9": true,
+              "label#84:12": "Label",
+              "showSuffix#84:10": false,
+              "showPrefix#84:11": false,
               "variant": "primary",
               "size": "medium",
               "state": "default",
               "isOutline": "false",
               "isPill": "false",
               "isCircle": "false"
+            },
+            "bbox": {
+              "width": 61,
+              "height": 40
             }
           }
         ]
@@ -1363,17 +1505,23 @@
             },
             "strokeWeight": 1,
             "instanceOf": "Button",
+            "instanceKey": "68b69ab21669d16c6b3e673118329020c420366f",
+            "instanceSetKey": "9f85393fca2c907d99631d038f406d861cb4df4b",
             "componentProperties": {
-              "showLabel": true,
-              "label": "Label",
-              "showSuffix": false,
-              "showPrefix": false,
+              "showLabel#84:9": true,
+              "label#84:12": "Label",
+              "showSuffix#84:10": false,
+              "showPrefix#84:11": false,
               "variant": "primary",
               "size": "medium",
               "state": "default",
               "isOutline": "false",
               "isPill": "true",
               "isCircle": "false"
+            },
+            "bbox": {
+              "width": 61,
+              "height": 40
             }
           }
         ]
@@ -1421,17 +1569,23 @@
             },
             "strokeWeight": 1,
             "instanceOf": "Button",
+            "instanceKey": "40e0c3abd4c65a19659c83b504e2a19d5b0433b5",
+            "instanceSetKey": "9f85393fca2c907d99631d038f406d861cb4df4b",
             "componentProperties": {
-              "showLabel": true,
-              "label": "Label",
-              "showSuffix": false,
-              "showPrefix": false,
+              "showLabel#84:9": true,
+              "label#84:12": "Label",
+              "showSuffix#84:10": false,
+              "showPrefix#84:11": false,
               "variant": "default",
               "size": "large",
               "state": "default",
               "isOutline": "false",
               "isPill": "false",
               "isCircle": "false"
+            },
+            "bbox": {
+              "width": 82,
+              "height": 50
             }
           }
         ]
@@ -1479,17 +1633,23 @@
             },
             "strokeWeight": 1,
             "instanceOf": "Button",
+            "instanceKey": "db4ba84f22c706156dc053cce2fbe3874f0bd55c",
+            "instanceSetKey": "9f85393fca2c907d99631d038f406d861cb4df4b",
             "componentProperties": {
-              "showLabel": true,
-              "label": "Label",
-              "showSuffix": false,
-              "showPrefix": false,
+              "showLabel#84:9": true,
+              "label#84:12": "Label",
+              "showSuffix#84:10": false,
+              "showPrefix#84:11": false,
               "variant": "default",
               "size": "large",
               "state": "default",
               "isOutline": "false",
               "isPill": "true",
               "isCircle": "false"
+            },
+            "bbox": {
+              "width": 82,
+              "height": 50
             }
           }
         ]
@@ -1537,17 +1697,23 @@
             },
             "strokeWeight": 1,
             "instanceOf": "Button",
+            "instanceKey": "ecce2fe7d317c7cc8cd19052454c69ec2b097932",
+            "instanceSetKey": "9f85393fca2c907d99631d038f406d861cb4df4b",
             "componentProperties": {
-              "showLabel": true,
-              "label": "Label",
-              "showSuffix": false,
-              "showPrefix": false,
+              "showLabel#84:9": true,
+              "label#84:12": "Label",
+              "showSuffix#84:10": false,
+              "showPrefix#84:11": false,
               "variant": "primary",
               "size": "large",
               "state": "default",
               "isOutline": "false",
               "isPill": "false",
               "isCircle": "false"
+            },
+            "bbox": {
+              "width": 82,
+              "height": 50
             }
           }
         ]
@@ -1595,17 +1761,23 @@
             },
             "strokeWeight": 1,
             "instanceOf": "Button",
+            "instanceKey": "36951372d27fd357ff85dedf6318aa2a79a40e59",
+            "instanceSetKey": "9f85393fca2c907d99631d038f406d861cb4df4b",
             "componentProperties": {
-              "showLabel": true,
-              "label": "Label",
-              "showSuffix": false,
-              "showPrefix": false,
+              "showLabel#84:9": true,
+              "label#84:12": "Label",
+              "showSuffix#84:10": false,
+              "showPrefix#84:11": false,
               "variant": "primary",
               "size": "large",
               "state": "default",
               "isOutline": "false",
               "isPill": "true",
               "isCircle": "false"
+            },
+            "bbox": {
+              "width": 82,
+              "height": 50
             }
           }
         ]
@@ -1653,17 +1825,23 @@
             },
             "strokeWeight": 1,
             "instanceOf": "Button",
+            "instanceKey": "04e63791f21bd415f8ad639745fcb8e14bf83f7b",
+            "instanceSetKey": "9f85393fca2c907d99631d038f406d861cb4df4b",
             "componentProperties": {
-              "showLabel": true,
-              "label": "Label",
-              "showSuffix": false,
-              "showPrefix": false,
+              "showLabel#84:9": true,
+              "label#84:12": "Label",
+              "showSuffix#84:10": false,
+              "showPrefix#84:11": false,
               "variant": "default",
               "size": "small",
               "state": "default",
               "isOutline": "false",
               "isPill": "false",
               "isCircle": "false"
+            },
+            "bbox": {
+              "width": 44,
+              "height": 30
             }
           }
         ]
@@ -1711,17 +1889,23 @@
             },
             "strokeWeight": 1,
             "instanceOf": "Button",
+            "instanceKey": "2a3d7c83594e9f7853f246c9a7d6ad7b6549189c",
+            "instanceSetKey": "9f85393fca2c907d99631d038f406d861cb4df4b",
             "componentProperties": {
-              "showLabel": true,
-              "label": "Label",
-              "showSuffix": false,
-              "showPrefix": false,
+              "showLabel#84:9": true,
+              "label#84:12": "Label",
+              "showSuffix#84:10": false,
+              "showPrefix#84:11": false,
               "variant": "default",
               "size": "small",
               "state": "default",
               "isOutline": "false",
               "isPill": "true",
               "isCircle": "false"
+            },
+            "bbox": {
+              "width": 44,
+              "height": 30
             }
           }
         ]
@@ -1769,17 +1953,23 @@
             },
             "strokeWeight": 1,
             "instanceOf": "Button",
+            "instanceKey": "ba5e1fb34d9fab44be3f2d117044be1ffd0021e2",
+            "instanceSetKey": "9f85393fca2c907d99631d038f406d861cb4df4b",
             "componentProperties": {
-              "showLabel": true,
-              "label": "Label",
-              "showSuffix": false,
-              "showPrefix": false,
+              "showLabel#84:9": true,
+              "label#84:12": "Label",
+              "showSuffix#84:10": false,
+              "showPrefix#84:11": false,
               "variant": "primary",
               "size": "small",
               "state": "default",
               "isOutline": "false",
               "isPill": "false",
               "isCircle": "false"
+            },
+            "bbox": {
+              "width": 44,
+              "height": 30
             }
           }
         ]
@@ -1827,17 +2017,23 @@
             },
             "strokeWeight": 1,
             "instanceOf": "Button",
+            "instanceKey": "adcc835534308a1f5aff69ef109f4be2b864240b",
+            "instanceSetKey": "9f85393fca2c907d99631d038f406d861cb4df4b",
             "componentProperties": {
-              "showLabel": true,
-              "label": "Label",
-              "showSuffix": false,
-              "showPrefix": false,
+              "showLabel#84:9": true,
+              "label#84:12": "Label",
+              "showSuffix#84:10": false,
+              "showPrefix#84:11": false,
               "variant": "primary",
               "size": "small",
               "state": "default",
               "isOutline": "false",
               "isPill": "true",
               "isCircle": "false"
+            },
+            "bbox": {
+              "width": 44,
+              "height": 30
             }
           }
         ]
@@ -1885,17 +2081,23 @@
             },
             "strokeWeight": 1,
             "instanceOf": "Button",
+            "instanceKey": "66e1e8b1066101adb398be5aed5df9d82d142759",
+            "instanceSetKey": "9f85393fca2c907d99631d038f406d861cb4df4b",
             "componentProperties": {
-              "showLabel": true,
-              "label": "Label",
-              "showSuffix": false,
-              "showPrefix": false,
+              "showLabel#84:9": true,
+              "label#84:12": "Label",
+              "showSuffix#84:10": false,
+              "showPrefix#84:11": false,
               "variant": "default",
               "size": "medium",
               "state": "default",
               "isOutline": "false",
               "isPill": "false",
               "isCircle": "false"
+            },
+            "bbox": {
+              "width": 61,
+              "height": 40
             }
           }
         ]
@@ -1943,17 +2145,23 @@
             },
             "strokeWeight": 1,
             "instanceOf": "Button",
+            "instanceKey": "03840b50c9d3432a965b0b7031f39777e1006b0c",
+            "instanceSetKey": "9f85393fca2c907d99631d038f406d861cb4df4b",
             "componentProperties": {
-              "showLabel": true,
-              "label": "Label",
-              "showSuffix": false,
-              "showPrefix": false,
+              "showLabel#84:9": true,
+              "label#84:12": "Label",
+              "showSuffix#84:10": false,
+              "showPrefix#84:11": false,
               "variant": "default",
               "size": "medium",
               "state": "default",
               "isOutline": "false",
               "isPill": "true",
               "isCircle": "false"
+            },
+            "bbox": {
+              "width": 61,
+              "height": 40
             }
           }
         ]
@@ -2001,17 +2209,23 @@
             },
             "strokeWeight": 1,
             "instanceOf": "Button",
+            "instanceKey": "478eb43199b61a626daddc6188c307b1855a0b97",
+            "instanceSetKey": "9f85393fca2c907d99631d038f406d861cb4df4b",
             "componentProperties": {
-              "showLabel": true,
-              "label": "Label",
-              "showSuffix": false,
-              "showPrefix": false,
+              "showLabel#84:9": true,
+              "label#84:12": "Label",
+              "showSuffix#84:10": false,
+              "showPrefix#84:11": false,
               "variant": "primary",
               "size": "medium",
               "state": "default",
               "isOutline": "false",
               "isPill": "false",
               "isCircle": "false"
+            },
+            "bbox": {
+              "width": 61,
+              "height": 40
             }
           }
         ]
@@ -2059,17 +2273,23 @@
             },
             "strokeWeight": 1,
             "instanceOf": "Button",
+            "instanceKey": "68b69ab21669d16c6b3e673118329020c420366f",
+            "instanceSetKey": "9f85393fca2c907d99631d038f406d861cb4df4b",
             "componentProperties": {
-              "showLabel": true,
-              "label": "Label",
-              "showSuffix": false,
-              "showPrefix": false,
+              "showLabel#84:9": true,
+              "label#84:12": "Label",
+              "showSuffix#84:10": false,
+              "showPrefix#84:11": false,
               "variant": "primary",
               "size": "medium",
               "state": "default",
               "isOutline": "false",
               "isPill": "true",
               "isCircle": "false"
+            },
+            "bbox": {
+              "width": 61,
+              "height": 40
             }
           }
         ]

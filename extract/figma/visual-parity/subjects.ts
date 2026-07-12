@@ -27,6 +27,12 @@ export interface DumpSubject {
   dumpPath: string;
   /** Set name inside the dump — required when the dump carries several sets. */
   set?: string;
+  /** SESSION SCOPE (dump v1.5 linking): sibling dumps proposed FIRST and
+   *  registered (contract + minted tokens + key/name indexes) before this
+   *  subject proposes — the parity mirror of "import Button-Brand Primary,
+   *  then import Dialog": the Dialog's nested instances LINK to the sibling
+   *  contract (componentSetKey first, name fallback) instead of stubbing. */
+  scope?: Array<{ dumpPath: string; set?: string }>;
   fileKey: string;
   setNodeId: string;
 }
@@ -70,6 +76,10 @@ export const PARITY_SUBJECTS: ParitySubject[] = [
     label: 'CBDS Dialog',
     kind: 'dump',
     dumpPath: 'extract/figma/fixtures/cbds-plugin-dialog.dump.json',
+    // Session: the owner imported Button-Brand Primary before the Dialog —
+    // the Dialog's ↪️action-1 button LINKS to ds.button-brand-primary
+    // (name fallback: the plugin dialog dump predates v1.5 keys).
+    scope: [{ dumpPath: 'extract/figma/fixtures/cbds-plugin-button-brand-primary.dump.json' }],
     fileKey: CBDS,
     setNodeId: '599:1333',
   },

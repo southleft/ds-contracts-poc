@@ -35,6 +35,7 @@
     "extract:figma:cbds:bridge:check": "tsx extract/figma/cbds-bridge-check.ts",
     "extract:figma:canvas:check": "tsx extract/figma/canvas-box-check.ts",
     "extract:figma:dialog:check": "tsx extract/figma/dialog-check.ts",
+    "extract:figma:composite:check": "tsx extract/figma/composite-check.ts",
     "extract:figma:tooltip:check": "tsx extract/figma/tooltip-check.ts",
     "extract:figma:gauntlet": "tsx extract/figma/gauntlet/census.ts",
     "extract:figma:gauntlet:classfix": "tsx extract/figma/gauntlet/class-fix-check.ts",

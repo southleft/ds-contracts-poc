@@ -32,6 +32,9 @@ export interface RepoData {
   treesForCode: unknown[];
   contracts: Map<string, Contract>;
   contractIdByName: Map<string, string>;
+  /** componentSetKey → contract id (dump v1.5 session linking) — every repo
+   *  contract with a non-null anchors.figma.componentSetKey. */
+  contractIdByKey: Map<string, string>;
   icons: Map<string, string>;
   /** src/styles/tokens.css — the preview document's custom-property source. */
   tokensCss: string;
@@ -66,6 +69,11 @@ export function loadRepoData(): RepoData {
     treesForCode: [primitives, semantic, light, dark],
     contracts,
     contractIdByName: new Map([...contracts.values()].map((c) => [c.name, c.id])),
+    contractIdByKey: new Map(
+      [...contracts.values()]
+        .filter((c) => c.anchors.figma.componentSetKey !== null)
+        .map((c) => [c.anchors.figma.componentSetKey!, c.id]),
+    ),
     icons,
     tokensCss: readFileSync(path.join(REPO, 'src', 'styles', 'tokens.css'), 'utf8'),
   };
