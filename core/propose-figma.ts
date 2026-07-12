@@ -3205,9 +3205,10 @@ function mergeMintTree(into: Record<string, unknown>, from: Record<string, unkno
  *  instead of nothing. Per-variant sizes correlate against the STUB'S OWN
  *  enum props (the observed applied values), the same axis machinery the
  *  parent's mint pass uses. Nothing about the child's internals is guessed.
- *  Figma strokes are INSIDE the box — when a border is carried, the minted
- *  width/height subtract 2×strokeWeight so the CSS content-box + border
- *  reproduces the observed box exactly. */
+ *  Minted width/height are the OBSERVED bbox VERBATIM — size tokens speak
+ *  border-box, Figma's own box model (canvas-box parity rule; emit-html
+ *  scopes `box-sizing: border-box`; the playground carries it globally), so
+ *  an inside stroke draws inside the box exactly like Figma draws it. */
 function stubGeometry(
   capture: StubCapture,
   props: Array<Record<string, unknown>>,
@@ -3235,17 +3236,15 @@ function stubGeometry(
   // stroke with one shared weight. Anything less — partial presence (field
   // case: the Shoelace kit strokes SOME primary variants and not others,
   // so presence is not even a function of the axes), var-bound paints,
-  // mixed weights — is a NAMED limit: a width coupled to an inconsistent
-  // inset would stop correlating with any axis and the whole box would
-  // refuse to mint.
+  // mixed weights — is a NAMED limit: a border that appears on some axis
+  // values but not others is not a function of the axes and cannot mint.
+  // (Sizes are unaffected either way: border-box, bbox verbatim.)
   const strokesCarriable =
     geo.every((o) => o.stroke?.hex !== undefined && typeof o.strokeWeight === 'number') &&
     new Set(geo.map((o) => o.strokeWeight)).size === 1;
-  const insetOf = (o: StubCapture['observed'][number]): number =>
-    strokesCarriable && o.stroke ? 2 * o.strokeWeight! : 0;
   if (!strokesCarriable && geo.some((o) => o.stroke !== undefined)) {
     ctx.notes.push(
-      `stub ${capture.id}: stroke drawn on ${geo.filter((o) => o.stroke).length}/${geo.length} observed occurrence(s) (or var-bound/non-uniform) — border not carried on the stub geometry (an inconsistent inset would decouple the box from its axes), review`,
+      `stub ${capture.id}: stroke drawn on ${geo.filter((o) => o.stroke).length}/${geo.length} observed occurrence(s) (or var-bound/non-uniform) — border not carried on the stub geometry (presence is not a function of the stub's axes), review`,
     );
   }
   const observations: MintObservation[] = [];
@@ -3260,8 +3259,8 @@ function stubGeometry(
       occurrences: occ as Array<{ variant: string; axisValues: Record<string, string>; value: string | number }>,
     });
   };
-  push('width', 'px', (o) => Math.round((o.bbox!.width - insetOf(o)) * 100) / 100);
-  push('height', 'px', (o) => Math.round((o.bbox!.height - insetOf(o)) * 100) / 100);
+  push('width', 'px', (o) => Math.round(o.bbox!.width * 100) / 100);
+  push('height', 'px', (o) => Math.round(o.bbox!.height * 100) / 100);
   const fills = geo.filter((o) => o.fill !== undefined);
   if (fills.length > 0 && fills.every((o) => o.fill!.hex !== undefined)) {
     // Occurrences without a fill are honestly TRANSPARENT (#00000000 — a
@@ -3409,15 +3408,16 @@ function invertRootFixedSize(merged: Merged, rootTokens: Record<string, string>,
     const alongPrimary = (l.mode === 'HORIZONTAL') === (dim === 'width');
     return (alongPrimary ? l.primarySizing : l.counterSizing) === 'FIXED';
   };
-  // The bbox is the BORDER box; CSS width/height tokens speak content-box —
-  // subtract the drawn padding (and the inside stroke, when one is drawn) so
-  // the rendered box reproduces the observed one exactly.
-  const contentDim = (o: Occ, dim: 'width' | 'height'): number => {
-    const pad = o.node.layout!.padding;
-    const inset = (dim === 'width' ? pad[1] + pad[3] : pad[0] + pad[2]) +
-      (o.node.stroke && typeof o.node.strokeWeight === 'number' ? 2 * o.node.strokeWeight : 0);
-    return Math.round((o.node.bbox![dim] - inset) * 100) / 100;
-  };
+  // The bbox is the BORDER box and size tokens SPEAK border-box — Figma's
+  // own box model, the same convention captured size variables carry (a
+  // bound 48px height IS the drawn 48px box; canvas-box parity rule). Every
+  // rendering surface agrees: the canvas preview and the playground set
+  // box-sizing: border-box globally, and emit-html scopes the same rule
+  // into its emitted CSS. The bbox therefore mints VERBATIM — padding and
+  // inside strokes draw INSIDE it, exactly like Figma draws them.
+  // (Previously this inverted to content-box, which contradicted the
+  // captured-variable convention on the same root — visual-parity receipt:
+  // Dialog width minted 272 for a drawn 320 box.)
   for (const dim of ['width', 'height'] as const) {
     if (!withBox.every((o) => fixedAxis(o, dim))) continue;
     if (rootTokens[dim] !== undefined || merged.occ.some((o) => o.node.bound?.[dim])) continue;
@@ -3427,7 +3427,7 @@ function invertRootFixedSize(merged: Merged, rootTokens: Record<string, string>,
       where,
       dim,
       'px',
-      withBox.map((o) => ({ variant: o.variant, value: contentDim(o, dim) })),
+      withBox.map((o) => ({ variant: o.variant, value: Math.round(o.node.bbox![dim] * 100) / 100 })),
     );
     ctx.notes.push(
       `${where}: root ${dim} is DRAWN FIXED in every variant — the observed dimension (${[...new Set(withBox.map((o) => o.node.bbox![dim]))].join('/')}px, dump v1.5 bbox) is proposed as a minted root token (the drawn value is the only witness; rename against your real tokens)`,

@@ -1,5 +1,9 @@
 /* Badge — from ds.badge v1.1.0 (core/emit-html.ts) */
 
+.badge, .badge *, .badge *::before, .badge *::after {
+  box-sizing: border-box;
+}
+
 .badge {
   display: inline-flex;
   align-items: center;
