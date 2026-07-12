@@ -50,8 +50,8 @@ Fixtures in `extract/figma/mcp/fixtures/` are RECORDED LIVE responses (Figma des
 - ✅ foreign vocabulary recovered by name: "color/content/inverse"
 - ✅ the U+2024 variable ("spacing/0․5", ONE DOT LEADER) is itself recovered by name by the join…
 - ✅ …and then REFUSED by the token-ref grammar (binding not proposed, named in notes) — the refusal fires on live foreign data
-- ✅ recovered names BIND in the proposal: root carries {spacing.4} / {spacing.3} / {component.border.radius.rounded-md} / {spacing.2} (got {"padding-inline":"{spacing.4}","padding-block":"{spacing.3}","border-radius":"{component.border.radius.rounded-md}","gap":"{spacing.2}","max-width":"{imported.alert.root.max-width}"})
-- ✅ everything the join could not name still ships at literal fidelity as imported.* mints (7 minted, 0 unbound)
+- ✅ recovered names BIND in the proposal: root carries {spacing.4} / {spacing.3} / {component.border.radius.rounded-md} / {spacing.2} (got {"padding-inline":"{spacing.4}","padding-block":"{spacing.3}","border-radius":"{component.border.radius.rounded-md}","gap":"{spacing.2}","max-width":"{imported.alert.root.max-width}","width":"{imported.alert.root.width}"})
+- ✅ everything the join could not name still ships at literal fidelity as imported.* mints (14 minted, 0 unbound)
 
 ### Names recovered by the join (7 ids, 9 get_variable_defs calls)
 
@@ -67,10 +67,10 @@ Fixtures in `extract/figma/mcp/fixtures/` are RECORDED LIVE responses (Figma des
 
 - `[paint-unsupported]` Alert:variant=success `fill` — first visible paint is GRADIENT_LINEAR, not SOLID — dump v1 carries solid paints only; paint omitted
 
-### Proposal notes (review line items, 23)
+### Proposal notes (review line items, 34)
 
 - semantics.element defaulted to "div" — element/role/ARIA are not drawn on the canvas and the name/axis inference table matched nothing; set the real host element
-- Alert:root/container: visibility bound to BOOLEAN "hasIcon" — proposed as prop `hasIcon` (default not recoverable from dump v1, review)
+- Alert:root/container: visibility bound to BOOLEAN "hasIcon" — proposed as prop `hasIcon` (default true: the property definition's defaultValue, dump v1.5)
 - Alert:root/container/Icon: nested instance of "check circle" has no known contract — component ref proposed as "ds.check-circle" with a STUB child contract auto-proposed alongside (childStubs; API from observed applied values only, anatomy not captured — import the real child set to replace it)
 - Alert:root/container/Icon: fixed prop values of the nested "check circle" instance are not captured in dump v1 — declared fidelity limit, author them if the instance is configured
 - Alert:root/horizontal stack itemSpacing: variable name "spacing/0․5" contains characters outside the token-ref grammar ([a-z0-9.-]) — binding not proposed; rename the variable or map it manually
@@ -79,12 +79,13 @@ Fixtures in `extract/figma/mcp/fixtures/` are RECORDED LIVE responses (Figma des
 - Alert:root/horizontal stack/horizontal stack/Description: rides text style "body/sm" which is not a token-derived style — typography not proposed
 - Alert:root/horizontal stack/Text link: nested instance of "Text link" has no known contract — component ref proposed as "ds.text-link" with a STUB child contract auto-proposed alongside (childStubs; API from observed applied values only, anatomy not captured — import the real child set to replace it)
 - Alert:root/horizontal stack/Text link: fixed props of "Text link" canonicalized by spelling (dump v1.1) — verify against the child contract's bindings
-- Alert:root/horizontal stack/Text link: visibility bound to BOOLEAN "hasLink" — proposed as prop `hasLink` (default not recoverable from dump v1, review)
-- Alert:root/container 2: visibility bound to BOOLEAN "isDismissible" — proposed as prop `isDismissible` (default not recoverable from dump v1, review)
+- Alert:root/horizontal stack/Text link: visibility bound to BOOLEAN "hasLink" — proposed as prop `hasLink` (default true: the property definition's defaultValue, dump v1.5)
+- Alert:root/container 2: visibility bound to BOOLEAN "isDismissible" — proposed as prop `isDismissible` (default true: the property definition's defaultValue, dump v1.5)
 - Alert:root/container 2/Icon: part name "Icon" already names another part of this contract (part names are contract-wide: CSS classes, swap layers, and note paths key on them) — renamed to "container2Icon" (rule: first drawn part keeps the name; later collisions take the parent-derived prefix, else an ordinal suffix)
 - Alert:root/container 2/Icon: nested instance of "close" has no known contract — component ref proposed as "ds.close" with a STUB child contract auto-proposed alongside (childStubs; API from observed applied values only, anatomy not captured — import the real child set to replace it)
 - Alert:root/container 2/Icon: fixed prop values of the nested "close" instance are not captured in dump v1 — declared fidelity limit, author them if the instance is configured
 - Alert:root: visible effect(s) [DROP_SHADOW] — only a single DROP_SHADOW present in every variant maps to box-shadow (dump v1.2); channel NAMED, not proposed
+- Alert:root: root width is DRAWN FIXED in every variant — the observed dimension (390px, dump v1.5 bbox) is proposed as a minted root token (the drawn value is the only witness; rename against your real tokens)
 - MINTED {imported.alert.root.max-width} = 880px — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Alert:root max-width
 - MINTED {imported.alert.horizontal-stack-horizontal-stack-title.font-size} = 16px — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Alert:root/horizontal stack/horizontal stack/Title font-size
 - MINTED {imported.alert.horizontal-stack-horizontal-stack-title.font-weight} = 700 — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Alert:root/horizontal stack/horizontal stack/Title font-weight
@@ -92,4 +93,14 @@ Fixtures in `extract/figma/mcp/fixtures/` are RECORDED LIVE responses (Figma des
 - MINTED {imported.alert.horizontal-stack-horizontal-stack-description.font-size} = 14px — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Alert:root/horizontal stack/horizontal stack/Description font-size
 - MINTED {imported.alert.horizontal-stack-horizontal-stack-description.font-weight} = 500 — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Alert:root/horizontal stack/horizontal stack/Description font-weight
 - MINTED {imported.alert.horizontal-stack-horizontal-stack-description.line-height} = 20px — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Alert:root/horizontal stack/horizontal stack/Description line-height
+- MINTED {imported.alert.root.width} = 358px — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Alert:root width
+- stub ds.check-circle: renders HONEST OBSERVED GEOMETRY (dump v1.5 bounding box) via minted imported.stub-* tokens — a correctly-sized box, NOT the child's anatomy (still not captured); import the real child set to replace it
+- MINTED {imported.stub-check-circle.root.width} = 16px — stub geometry (the "check circle" instances' OBSERVED box/paint, dump v1.5; provisional) — bound at: stub ds.check-circle width
+- MINTED {imported.stub-check-circle.root.height} = 16px — stub geometry (the "check circle" instances' OBSERVED box/paint, dump v1.5; provisional) — bound at: stub ds.check-circle height
+- stub ds.text-link: renders HONEST OBSERVED GEOMETRY (dump v1.5 bounding box) via minted imported.stub-* tokens — a correctly-sized box, NOT the child's anatomy (still not captured); import the real child set to replace it
+- MINTED {imported.stub-text-link.root.width} = 37px — stub geometry (the "Text link" instances' OBSERVED box/paint, dump v1.5; provisional) — bound at: stub ds.text-link width
+- MINTED {imported.stub-text-link.root.height} = 20px — stub geometry (the "Text link" instances' OBSERVED box/paint, dump v1.5; provisional) — bound at: stub ds.text-link height
+- stub ds.close: renders HONEST OBSERVED GEOMETRY (dump v1.5 bounding box) via minted imported.stub-* tokens — a correctly-sized box, NOT the child's anatomy (still not captured); import the real child set to replace it
+- MINTED {imported.stub-close.root.width} = 16px — stub geometry (the "close" instances' OBSERVED box/paint, dump v1.5; provisional) — bound at: stub ds.close width
+- MINTED {imported.stub-close.root.height} = 16px — stub geometry (the "close" instances' OBSERVED box/paint, dump v1.5; provisional) — bound at: stub ds.close height
 

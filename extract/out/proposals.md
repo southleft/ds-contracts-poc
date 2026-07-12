@@ -81,6 +81,7 @@
 - prop `size`: figma binding INFERRED as VARIANT "Size" — confirm against the design library (reconcile step)
 - jsx: <button> attribute disabled={…} — expression not extractable, skipped
 - jsx: part "loadingSpinner" renders an inline SVG glyph — icon asset not extracted (review item)
+- css: selector `.root::before` — not extractable into anatomy, skipped by name
 - css: selector `.loadingSpinner svg` — icon glyph sizing, not extracted (icon parts are review items)
 - css: .loadingSpinner { flex-shrink: 0 } — no inversion rule, not extracted
 
@@ -156,6 +157,7 @@
 - source: `src/components/Code/Code.tsx` (react-tsx)
 - proposed: 0 props, 0 events
 - anatomy EXTRACTED from JSX + CSS Module — 1 part(s), 7 token binding(s), 0 raw value(s) reported. Anatomy is human-REVIEWED: check it against design intent before adoption.
+- props type has NO OWN members (extends HTMLAttributes<HTMLElement> — parent members are outside single-file extraction): zero own props is what this module declares — review
 - jsx: root renders {children} directly — children channel (text prop vs default slot) is not decidable from code
 
 ## Divider
@@ -380,6 +382,7 @@
 - source: `src/components/TabList/TabList.tsx` (react-tsx)
 - proposed: 0 props, 0 events
 - anatomy EXTRACTED from JSX + CSS Module — 2 part(s), 4 token binding(s), 0 raw value(s) reported. Anatomy is human-REVIEWED: check it against design intent before adoption.
+- props type has NO OWN members (extends HTMLAttributes<HTMLDivElement> — parent members are outside single-file extraction): zero own props is what this module declares — review
 
 ## TextArea
 
@@ -420,6 +423,12 @@
 - prop `size`: figma binding INFERRED as VARIANT "Size" — confirm against the design library (reconcile step)
 - prop `icon`: ReactNode — extracted as anatomy slot "icon"
 - prop `endContent`: ReactNode — extracted as anatomy slot "endContent"
+- css: .size-sm — "size" classes cover 2/3 values for "padding-inline"; md filled from the base rule (the cascade's default)
+- css: "padding-inline" across .size-* classes has no consistent substitution template (space.inset-y.sm, space.inset-x.xs, space.inset-x.sm) — not proposed
+- css: .size-lg — "size" classes cover 1/3 values for "font-size"; sm, md filled from the base rule (the cascade's default)
+- css: "font-size" across .size-* classes has no consistent substitution template (font.badge.size, font.badge.size, font.control.size.sm) — not proposed
+- css: .size-lg — "size" classes cover 1/3 values for "padding-block"; sm, md filled from the base rule (the cascade's default)
+- css: "padding-block" across .size-* classes has no consistent substitution template (space.inset-y.xs, space.inset-y.xs, space.inset-y.sm) — not proposed
 
 ## Toolbar
 

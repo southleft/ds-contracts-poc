@@ -163,10 +163,6 @@
           "detail": "<Inline> has no prop \"justify\""
         },
         {
-          "rule": "components-from-catalog",
-          "detail": "<Button variant=\"ghost\"> — legal values: primary | secondary | danger"
-        },
-        {
           "rule": "tokens-only",
           "detail": "Literal color #6b7280"
         },
@@ -175,7 +171,7 @@
           "detail": "Literal color #4b5563"
         }
       ],
-      "score": 74,
+      "score": 77,
       "adherent": false
     },
     {
@@ -229,7 +225,7 @@
         },
         {
           "rule": "components-from-catalog",
-          "detail": "<Badge variant=\"primary\"> — legal values: info | success | warning | danger"
+          "detail": "<Badge variant=\"primary\"> — legal values: info | success | warning | danger | error"
         },
         {
           "rule": "components-from-catalog",

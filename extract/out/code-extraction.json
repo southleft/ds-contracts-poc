@@ -891,6 +891,7 @@
       "notes": [
         "jsx: <button> attribute disabled={…} — expression not extractable, skipped",
         "jsx: part \"loadingSpinner\" renders an inline SVG glyph — icon asset not extracted (review item)",
+        "css: selector `.root::before` — not extractable into anatomy, skipped by name",
         "css: selector `.loadingSpinner svg` — icon glyph sizing, not extracted (icon parts are review items)",
         "css: .loadingSpinner { flex-shrink: 0 } — no inversion rule, not extracted"
       ]
@@ -1713,6 +1714,9 @@
     "source": "src/components/Code/Code.tsx",
     "adapter": "react-tsx",
     "props": [],
+    "notes": [
+      "props type has NO OWN members (extends HTMLAttributes<HTMLElement> — parent members are outside single-file extraction): zero own props is what this module declares — review"
+    ],
     "cssVars": [
       "color-surface-sunken",
       "color-surface-foreground",
@@ -4158,6 +4162,9 @@
     "source": "src/components/TabList/TabList.tsx",
     "adapter": "react-tsx",
     "props": [],
+    "notes": [
+      "props type has NO OWN members (extends HTMLAttributes<HTMLDivElement> — parent members are outside single-file extraction): zero own props is what this module declares — review"
+    ],
     "cssVars": [
       "space-inset-y-sm",
       "color-border-subtle",
@@ -4709,7 +4716,9 @@
       "color-token-pink-background",
       "color-token-pink-foreground",
       "color-token-gray-background",
-      "color-token-gray-foreground"
+      "color-token-gray-foreground",
+      "font-control-size-sm",
+      "space-inset-x-sm"
     ],
     "anatomy": {
       "root": {
@@ -4765,7 +4774,14 @@
       "element": "span",
       "states": [],
       "rawValues": [],
-      "notes": []
+      "notes": [
+        "css: .size-sm — \"size\" classes cover 2/3 values for \"padding-inline\"; md filled from the base rule (the cascade's default)",
+        "css: \"padding-inline\" across .size-* classes has no consistent substitution template (space.inset-y.sm, space.inset-x.xs, space.inset-x.sm) — not proposed",
+        "css: .size-lg — \"size\" classes cover 1/3 values for \"font-size\"; sm, md filled from the base rule (the cascade's default)",
+        "css: \"font-size\" across .size-* classes has no consistent substitution template (font.badge.size, font.badge.size, font.control.size.sm) — not proposed",
+        "css: .size-lg — \"size\" classes cover 1/3 values for \"padding-block\"; sm, md filled from the base rule (the cascade's default)",
+        "css: \"padding-block\" across .size-* classes has no consistent substitution template (space.inset-y.xs, space.inset-y.xs, space.inset-y.sm) — not proposed"
+      ]
     }
   },
   {
