@@ -1,0 +1,5 @@
+{
+  "code": { "adapter": "cem", "manifest": "extract/fixtures/foreign-wc/nameless-event.custom-elements.json" },
+  "idPrefix": "acme",
+  "out": "extract/fixtures/.out-wc-nameless"
+}

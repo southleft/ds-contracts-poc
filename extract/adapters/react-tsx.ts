@@ -74,9 +74,19 @@ export function extractReactTsx(
     const src = readFileSync(file, 'utf8');
     const cssPath = file.replace(/\.tsx?$/, '.module.css');
     const css = existsSync(cssPath) ? readFileSync(cssPath, 'utf8') : undefined;
+    // SIBLING-TYPE-FILE RULE: `<X>.tsx` + co-located `<X>.types.ts(x)` are one
+    // declared module surface (the `import type { XProps } from './X.types'`
+    // convention — Fluent-style but general). The sibling's type declarations
+    // join the type table; component discovery stays in the component file.
+    const typesPath = [file.replace(/\.tsx?$/, '.types.ts'), file.replace(/\.tsx?$/, '.types.tsx')].find(
+      (p) => p !== file && existsSync(p),
+    );
+    const types = typesPath
+      ? [{ sourcePath: path.relative(process.cwd(), typesPath), source: readFileSync(typesPath, 'utf8') }]
+      : undefined;
     out.push(
       ...extractFromSource(
-        { sourcePath: path.relative(process.cwd(), file), source: src, css },
+        { sourcePath: path.relative(process.cwd(), file), source: src, css, ...(types ? { types } : {}) },
         tokens,
         seen,
         skipped,

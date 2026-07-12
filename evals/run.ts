@@ -611,6 +611,136 @@ const cases: Case[] = [
     },
   },
   {
+    // Enterprise gauntlet fix #1 (SIBLING-TYPE-FILE + CAST-TRANSPARENCY
+    // rules): a Fluent-2-shaped component — props interface in a sibling
+    // `X.types.ts`, export cast `as ForwardRefComponent<XProps>` — was
+    // invisible (measured: Fluent census 0/23). It must extract with its
+    // enum axes, the one-hop alias resolving THROUGH the merged table, and
+    // the unreadable generic intersection member receipted by name.
+    id: 'fluent-sibling-types-merge',
+    claim: 'C5-extraction',
+    run: () => {
+      const r = run(TSX, ['extract/run.ts', 'code', 'extract/fixtures/foreign-sibling.config.json']);
+      if (r.status !== 0) throw new Error(`Extraction failed:\n${r.out}`);
+      const widget = JSON.parse(
+        readFileSync(path.join(SCRATCH, 'extract/fixtures/.out-sibling/contracts/widget.contract.json'), 'utf8'),
+      );
+      const appearance = widget.props.find((p: any) => p.name === 'appearance');
+      if (appearance?.type?.enum?.join('|') !== 'primary|outline|subtle') {
+        throw new Error('Widget.appearance: sibling-types enum not extracted');
+      }
+      const size = widget.props.find((p: any) => p.name === 'size');
+      if (size?.type?.enum?.join('|') !== 'small|medium|large') {
+        throw new Error('Widget.size: one-hop alias behind the SIBLING table not resolved');
+      }
+      if (widget.props.find((p: any) => p.name === 'disabled')?.type !== 'boolean') {
+        throw new Error('Widget.disabled: boolean not extracted through the cast');
+      }
+      const notes = readFileSync(path.join(SCRATCH, 'extract/fixtures/.out-sibling/proposals.md'), 'utf8');
+      if (!notes.includes('ComponentProps<WidgetSlots>') || !notes.includes('NOT carried')) {
+        throw new Error('Unreadable generic intersection member not receipted by name');
+      }
+    },
+  },
+  {
+    // Enterprise gauntlet fix #2 (silent-loss class B): `as`-cast exports.
+    // The CAST-ALIAS rule extracts the public name (`const Pill = PillBase
+    // as PillComponent`) with the base's props; an as-cast component whose
+    // props type is imported lands as a NAMED skip — nothing silent.
+    id: 'as-expression-named',
+    claim: 'C5-extraction',
+    run: () => {
+      const r = run(TSX, ['extract/run.ts', 'code', 'extract/fixtures/foreign-sibling.config.json']);
+      if (r.status !== 0) throw new Error(`Extraction failed:\n${r.out}`);
+      for (const id of ['pill', 'pill-base']) {
+        const c = JSON.parse(
+          readFileSync(path.join(SCRATCH, `extract/fixtures/.out-sibling/contracts/${id}.contract.json`), 'utf8'),
+        );
+        const tone = c.props.find((p: any) => p.name === 'tone');
+        if (tone?.type?.enum?.join('|') !== 'neutral|bold|critical' || tone.default !== 'neutral') {
+          throw new Error(`${id}: cast-alias did not carry the base component's props`);
+        }
+      }
+      const notes = readFileSync(path.join(SCRATCH, 'extract/fixtures/.out-sibling/proposals.md'), 'utf8');
+      if (!notes.includes('**Opal**') || !notes.includes('OpalProps')) {
+        throw new Error('as-cast component with imported props type not NAMED-skipped (silent loss)');
+      }
+    },
+  },
+  {
+    // Enterprise gauntlet fix #3 (silent-loss class C): intersections of
+    // named refs. Same-file refs RESOLVE (`type BannerProps = A & B` carries
+    // A+B members instead of a hollow 0-prop "resolved" API); imported refs
+    // become a NAMED skip listing them; an extends-only interface extracts
+    // as genuinely zero-own-prop WITH the hollow receipt naming heritage.
+    id: 'intersection-named',
+    claim: 'C5-extraction',
+    run: () => {
+      const r = run(TSX, ['extract/run.ts', 'code', 'extract/fixtures/foreign-sibling.config.json']);
+      if (r.status !== 0) throw new Error(`Extraction failed:\n${r.out}`);
+      const banner = JSON.parse(
+        readFileSync(path.join(SCRATCH, 'extract/fixtures/.out-sibling/contracts/banner.contract.json'), 'utf8'),
+      );
+      const tone = banner.props.find((p: any) => p.name === 'tone');
+      if (tone?.type?.enum?.join('|') !== 'info|warning|critical' || tone.default !== 'info') {
+        throw new Error('Banner.tone: intersection-of-named-refs member not resolved');
+      }
+      if (banner.props.find((p: any) => p.name === 'dismissible')?.type !== 'boolean') {
+        throw new Error('Banner.dismissible: second intersection member not resolved');
+      }
+      const notes = readFileSync(path.join(SCRATCH, 'extract/fixtures/.out-sibling/proposals.md'), 'utf8');
+      if (!notes.includes('**Ghost**') || !notes.includes('[GhostA, GhostB]')) {
+        throw new Error('Imported-refs intersection not NAMED-skipped with the refs listed');
+      }
+      if (!notes.includes('NO OWN members (extends React.HTMLAttributes<HTMLDivElement>')) {
+        throw new Error('Extends-only interface missing the hollow receipt naming its heritage');
+      }
+      const plainBox = JSON.parse(
+        readFileSync(path.join(SCRATCH, 'extract/fixtures/.out-sibling/contracts/plain-box.contract.json'), 'utf8'),
+      );
+      if (plainBox.props.length !== 0) throw new Error('PlainBox: extends-only interface should carry zero own props');
+    },
+  },
+  {
+    // Enterprise gauntlet fix #4: published CEM manifests ship events
+    // WITHOUT a name (SWC ships 7) — extract/adapters/cem.ts:82 used to
+    // crash with a TypeError. A nameless event must become a NAMED per-event
+    // skip while the component and its named events keep extracting.
+    id: 'cem-nameless-event-skip',
+    claim: 'C5-extraction',
+    run: () => {
+      const r = run(TSX, ['extract/run.ts', 'code', 'extract/fixtures/foreign-wc-nameless.config.json']);
+      if (r.status !== 0) throw new Error(`Nameless-event manifest crashed extraction:\n${r.out}`);
+      const c = JSON.parse(
+        readFileSync(path.join(SCRATCH, 'extract/fixtures/.out-wc-nameless/contracts/glass-dialog.contract.json'), 'utf8'),
+      );
+      if (c.props.find((p: any) => p.name === 'size')?.type?.enum?.length !== 3) {
+        throw new Error('GlassDialog.size: attributes no longer extracted alongside the bad event');
+      }
+      if (c.events?.[0]?.bindings?.code?.prop !== 'onClose') {
+        throw new Error('GlassDialog: the NAMED event gd-close was not carried');
+      }
+      const notes = readFileSync(path.join(SCRATCH, 'extract/fixtures/.out-wc-nameless/proposals.md'), 'utf8');
+      if (!notes.includes('GlassDialog event[0]') || !notes.includes('CEM event has no "name"')) {
+        throw new Error('Nameless event not skipped BY NAME');
+      }
+    },
+  },
+  {
+    // Enterprise gauntlet fix #6: none of Carbon/Fluent/Spectrum/Polaris
+    // publishes DTCG, but every published shape is one MECHANICAL $value
+    // wrap away — core/wrap-plain-tokens.ts. Fixture shapes mirror all four;
+    // unknowns are skipped by name; already-DTCG input is refused (null).
+    id: 'plain-token-wrap',
+    claim: 'C5-extraction',
+    run: () => {
+      const r = run(TSX, ['evals/fixtures/plain-token-wrap-check.ts']);
+      if (r.status !== 0 || !r.out.includes('all shapes load, all refusals named')) {
+        throw new Error(`plain-token-wrap check failed:\n${r.out}`);
+      }
+    },
+  },
+  {
     // Red-team (2026-07-08): these five drift classes previously passed
     // "parity clean" — boolean/text defaults on the canvas were
     // presence-only, numeric code defaults were invisible to extraction,

@@ -41,6 +41,11 @@ export interface ExtractedComponent {
   source: string;
   adapter: string;
   description?: string;
+  /** Named extraction receipts at the component level — e.g. the hollow-
+   *  extraction receipt (a props type that resolved with zero members says
+   *  WHY) and partial-composition receipts (named refs whose members are
+   *  outside module scope). propose.ts carries them into proposal notes. */
+  notes?: string[];
   props: ExtractedProp[];
   /** CSS custom properties consumed, when the adapter can see a stylesheet */
   cssVars?: string[];
@@ -160,6 +165,17 @@ export interface ExtractConfig {
     contracts?: string;
   };
 }
+
+/** THE one rule for function-valued props, shared by the proposer
+ *  (extract/propose.ts) and the referee (parity/diagnose.ts): only
+ *  `/^on[A-Z]/` callbacks are contract EVENTS. Any other function-valued
+ *  prop (render prop, formatter, imperative setter — `formatLabel`,
+ *  `renderValue`, `setRef`) is outside the contracted API surface: propose
+ *  receipts it ("function-typed but not on* — skipped, review manually")
+ *  and diagnose treats it as outside declared scope — NOT [code AHEAD]
+ *  drift. Two sides, one classification; the referee never flags the
+ *  pipeline's own documented skip. */
+export const isEventCallbackName = (name: string): boolean => /^on[A-Z]/.test(name);
 
 export const normalizeName = (s: string): string =>
   s.toLowerCase().replace(/[^a-z0-9]/g, '');

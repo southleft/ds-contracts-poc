@@ -10,6 +10,7 @@
  * standard manifest exists.
  */
 import { readFileSync } from 'node:fs';
+import type { SkippedComponent } from '../../core/extract-react-tsx.js';
 import type { ExtractedComponent, ExtractedProp } from '../types.js';
 
 interface CemType {
@@ -24,7 +25,11 @@ interface CemAttrOrMember {
   privacy?: string;
 }
 interface CemEvent {
-  name: string;
+  /** Published manifests DO ship nameless events (a bare `{ type }` from a
+   *  re-dispatched TransitionEvent, say) — optional here so the adapter
+   *  degrades to a named skip instead of a TypeError. */
+  name?: string;
+  type?: CemType;
   description?: string;
 }
 interface CemDeclaration {
@@ -83,12 +88,25 @@ const eventPropName = (eventName: string): string =>
     .replace(/-([a-z])/g, (_, c: string) => c.toUpperCase())
     .replace(/^[a-z]/, (c) => c.toUpperCase());
 
-export function extractCem(manifestPath: string): ExtractedComponent[] {
+export function extractCem(manifestPath: string, skipped?: SkippedComponent[]): ExtractedComponent[] {
   const manifest = JSON.parse(readFileSync(manifestPath, 'utf8')) as { modules?: CemModule[] };
   const out: ExtractedComponent[] = [];
   for (const mod of manifest.modules ?? []) {
     for (const decl of mod.declarations ?? []) {
-      if (!decl.customElement && decl.kind !== 'class') continue;
+      if (!decl.customElement && decl.kind !== 'class') {
+        // A mixin that carries a component-shaped surface (attributes/events)
+        // is visible-but-not-a-component: its surface reaches the manifest
+        // through the classes that apply it. NAMED skip, not silence — plain
+        // functions/variables carry no component surface and stay out.
+        if (decl.kind === 'mixin' && decl.name && ((decl.attributes?.length ?? 0) > 0 || (decl.events?.length ?? 0) > 0)) {
+          skipped?.push({
+            name: decl.name,
+            source: `${manifestPath}${mod.path ? ` (${mod.path})` : ''}`,
+            reason: `CEM "mixin" declaration with ${decl.attributes?.length ?? 0} attribute(s) / ${decl.events?.length ?? 0} event(s) — not a custom element; its surface is carried by the classes that apply it, not extracted as a component`,
+          });
+        }
+        continue;
+      }
       const name = decl.name ?? decl.tagName;
       if (!name) continue;
       const props: ExtractedProp[] = [];
@@ -111,7 +129,18 @@ export function extractCem(manifestPath: string): ExtractedComponent[] {
           confidence: 'declared',
         });
       }
-      for (const e of decl.events ?? []) {
+      for (const [i, e] of (decl.events ?? []).entries()) {
+        if (!e.name) {
+          // A manifest event with no name cannot map to an event prop —
+          // reported BY NAME (component + index + whatever the manifest does
+          // say), never a crash, never silently dropped.
+          skipped?.push({
+            name: `${name} event[${i}]`,
+            source: `${manifestPath}${mod.path ? ` (${mod.path})` : ''}`,
+            reason: `CEM event has no "name"${e.type?.text ? ` (type: ${e.type.text})` : ''}${e.description ? ` (description: ${e.description})` : ''} — cannot derive an event prop; skipped`,
+          });
+          continue;
+        }
         props.push({
           name: eventPropName(e.name),
           kind: 'event',
