@@ -923,6 +923,38 @@ function variantParts(
   });
 }
 
+/** v12 repeat (P9): a repeat part compiles to its OBSERVED sample — one REAL
+ *  instance per drawn sibling (the meter discipline: the canvas renders the
+ *  collection's honest static state; the array prop is code-only, kind
+ *  'NONE'). Every other part kind compiles to exactly one spec. */
+function partToSpecs(
+  name: string,
+  part: Part,
+  contract: Contract,
+  byId: Map<string, Contract>,
+  ctx: TextCtx,
+  subst: Record<string, string>,
+): NodeSpec[] {
+  if (part.repeat && part.component) {
+    const dep = byId.get(part.component.id)!; // resolvability guaranteed by refuseUnresolvableRefs
+    return part.repeat.sample.map((rec, i) => {
+      // Field values map through the child's bindings exactly like fixed
+      // props (numbers spell as strings on the canvas — TEXT properties).
+      const fields: Record<string, string | boolean> = {};
+      for (const [k, v] of Object.entries(rec)) fields[k] = typeof v === 'number' ? String(v) : v;
+      const spec: NodeSpec = {
+        type: 'instance',
+        name: i === 0 ? name : `${name} ${i + 1}`,
+        dep: dep.name,
+        depProps: mapDepProps(dep, { ...(part.component!.props ?? {}), ...fields }, subst, part.component!.text),
+      };
+      applyVisibleWhen(spec, part, contract);
+      return spec;
+    });
+  }
+  return [partToSpec(name, part, contract, byId, ctx, subst)];
+}
+
 function partToSpec(
   name: string,
   part: Part,
@@ -1057,8 +1089,8 @@ function partToSpecInner(
     grow: part.layout?.grow || undefined,
   };
   const childCtx = applyTokens(spec, resolveTokens(part, subst), subst, ctx);
-  spec.children = variantParts(part.parts ?? {}, subst).map(([childName, child]) =>
-    partToSpec(childName, child, contract, byId, childCtx, subst),
+  spec.children = variantParts(part.parts ?? {}, subst).flatMap(([childName, child]) =>
+    partToSpecs(childName, child, contract, byId, childCtx, subst),
   );
   if (isReversed(part, subst)) spec.children.reverse();
   applyVisibleWhen(spec, part, contract);
@@ -1181,8 +1213,8 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
     const ctx = applyTokens(rootSpec, resolveTokens(root, subst), subst, {});
     applyStylesWhenOpacity(rootSpec, root, contract, subst);
     if (root.parts) {
-      rootSpec.children = variantParts(root.parts, subst).map(([childName, child]) =>
-        partToSpec(childName, child, contract, byId, ctx, subst),
+      rootSpec.children = variantParts(root.parts, subst).flatMap(([childName, child]) =>
+        partToSpecs(childName, child, contract, byId, ctx, subst),
       );
       if (isReversed(root, subst)) rootSpec.children.reverse();
     } else if (textProp) {
@@ -1258,8 +1290,8 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
         );
         applyStylesWhenOpacity(rootSpec, root, contract, subst);
         if (root.parts) {
-          rootSpec.children = variantParts(root.parts, subst).map(([childName, child]) =>
-            partToSpec(childName, child, contract, byId, ctx, subst),
+          rootSpec.children = variantParts(root.parts, subst).flatMap(([childName, child]) =>
+            partToSpecs(childName, child, contract, byId, ctx, subst),
           );
           if (isReversed(root, subst)) rootSpec.children.reverse();
         } else if (textProp) {

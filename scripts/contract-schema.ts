@@ -229,6 +229,30 @@ export function shapeCssDecls(shape: z.infer<typeof ShapeSchema>): string[] {
   return d;
 }
 
+/** v12: repeated-children collection (P9 — menu items, breadcrumb segments,
+ *  tab items, avatar stacks). The part is an ITEM TEMPLATE: a component-ref
+ *  part rendered once per record of the `itemsProp` arrayOf prop. Field →
+ *  child-prop mapping is BY NAME: every arrayOf field of `itemsProp` names a
+ *  prop of the referenced child contract (text field → child text prop,
+ *  boolean → boolean, number → number; per-item ENUM differences — the
+ *  selected tab — are P10 and stay receipted, never carried). Constant child
+ *  props ride `component.props` as today.
+ *  Projections: the React surface maps the live array
+ *  (`{items?.map(…)}` — undefined renders nothing, the arrayOf discipline);
+ *  the static surfaces (html, react-inline) and the canvas render `sample` —
+ *  the OBSERVED drawn siblings, the collection's honest static state (the
+ *  `meter` discipline: the canvas renders the defaults' fraction; here it
+ *  renders the drawn items). `sample` records hold field values only. */
+export const RepeatSchema = z.strictObject({
+  /** The arrayOf prop (by canonical name) the template maps over in code. */
+  itemsProp: z.string(),
+  /** The OBSERVED design-time sample — one record per drawn sibling, keys ⊆
+   *  the arrayOf fields. Required: the canvas/static projection IS the
+   *  sample; a sample-less collection would render nothing everywhere but
+   *  React. */
+  sample: z.array(z.record(z.string(), z.union([z.string(), z.boolean(), z.number()]))).min(1),
+});
+
 /** Conditional part visibility (schema v4, gap G1): the part renders only
  *  when the prop matches. Boolean props map to Figma visibility bindings;
  *  enum conditions resolve per variant. */
@@ -331,6 +355,10 @@ export interface Part {
   animation?: 'spin' | 'pulse';
   slot?: z.infer<typeof SlotSchema>;
   component?: z.infer<typeof ComponentRefSchema>;
+  /** v12: the part is an item TEMPLATE repeated over an arrayOf prop (P9).
+   *  Requires `component` (the template is a component ref); refusal rules
+   *  in emit-react validateContract. */
+  repeat?: z.infer<typeof RepeatSchema>;
   icon?: { asset: string; size?: number };
   attrs?: Record<string, string>;
   visibleWhen?: z.infer<typeof VisibleWhenSchema>;
@@ -365,6 +393,8 @@ export const PartSchema: z.ZodType<Part> = z.lazy(() =>
     animation: z.enum(['spin', 'pulse']).optional(),
     slot: SlotSchema.optional(),
     component: ComponentRefSchema.optional(),
+    /** v12 (P9). */
+    repeat: RepeatSchema.optional(),
     /** Icon part (v4, gap G6): renders assets/icons/<asset>.svg inline on the
      *  code side and as a vector in Figma. '{prop}' substitutes an enum prop
      *  (icon-by-status). Icons are always decorative (aria-hidden). */
@@ -499,6 +529,7 @@ export type Prop = z.infer<typeof PropSchema>;
 export type ContractEvent = z.infer<typeof EventSchema>;
 export type Slot = z.infer<typeof SlotSchema>;
 export type ComponentRef = z.infer<typeof ComponentRefSchema>;
+export type Repeat = z.infer<typeof RepeatSchema>;
 export type Layout = z.infer<typeof LayoutSchema>;
 export type VariantLayout = z.infer<typeof VariantLayoutSchema>;
 

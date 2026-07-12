@@ -864,6 +864,42 @@
           ],
           "additionalProperties": false
         },
+        "repeat": {
+          "type": "object",
+          "properties": {
+            "itemsProp": {
+              "type": "string"
+            },
+            "sample": {
+              "minItems": 1,
+              "type": "array",
+              "items": {
+                "type": "object",
+                "propertyNames": {
+                  "type": "string"
+                },
+                "additionalProperties": {
+                  "anyOf": [
+                    {
+                      "type": "string"
+                    },
+                    {
+                      "type": "boolean"
+                    },
+                    {
+                      "type": "number"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "required": [
+            "itemsProp",
+            "sample"
+          ],
+          "additionalProperties": false
+        },
         "icon": {
           "type": "object",
           "properties": {

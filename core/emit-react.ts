@@ -403,6 +403,56 @@ export function validateContract(
         errors.push(`${contract.id}: part "${name}" shape kind "${part.shape.kind}" cannot declare sides — side count is polygon vocabulary`);
       }
     }
+    // v12 repeat (P9): the item template must be mechanically renderable on
+    // every surface — a component-ref template, an arrayOf prop to map, and
+    // fields that map BY NAME onto the child contract's props with matching
+    // scalar types. Everything else refuses by name.
+    if (part.repeat) {
+      if (!part.component) {
+        errors.push(`${contract.id}: part "${name}" declares repeat but no component — the item template is a component ref (v12; text/frame templates have no vocabulary)`);
+      }
+      for (const [field, present] of Object.entries({
+        slot: part.slot, content: part.content, text: part.text,
+        meter: part.meter, icon: part.icon, shape: part.shape, parts: part.parts,
+      })) {
+        if (present !== undefined) {
+          errors.push(`${contract.id}: part "${name}" is a repeat template — it cannot also carry "${field}"`);
+        }
+      }
+      const rp = contract.props.find((pr) => pr.name === part.repeat!.itemsProp);
+      if (!rp) {
+        errors.push(`${contract.id}: part "${name}" repeat references unknown prop "${part.repeat.itemsProp}"`);
+      } else if (!isArrayType(rp)) {
+        errors.push(`${contract.id}: part "${name}" repeat prop "${part.repeat.itemsProp}" must be an arrayOf prop`);
+      } else {
+        const dep = part.component ? byId.get(part.component.id) : undefined;
+        const FIELD_TO_PROP: Record<string, string> = { text: 'text', boolean: 'boolean', number: 'number' };
+        for (const [field, ftype] of Object.entries(rp.type.arrayOf)) {
+          if (part.component?.props && field in part.component.props) {
+            errors.push(`${contract.id}: part "${name}" repeat field "${field}" collides with a fixed component prop — a field is per-item, a fixed prop is constant`);
+          }
+          if (!dep) continue; // missing child contract already refused above
+          const depProp = dep.props.find((dp) => dp.name === field);
+          if (!depProp) {
+            errors.push(`${contract.id}: part "${name}" repeat field "${field}" names no ${dep.id} prop`);
+          } else if (depProp.type !== FIELD_TO_PROP[ftype]) {
+            errors.push(
+              `${contract.id}: part "${name}" repeat field "${field}" (${ftype}) does not match ${dep.id} prop "${field}" (${typeof depProp.type === 'object' ? JSON.stringify(depProp.type) : depProp.type}) — per-item enum differences are P10 and stay receipted`,
+            );
+          }
+        }
+        for (const [i, rec] of part.repeat.sample.entries()) {
+          for (const [key, value] of Object.entries(rec)) {
+            const ftype = rp.type.arrayOf[key];
+            if (ftype === undefined) {
+              errors.push(`${contract.id}: part "${name}" repeat sample[${i}] key "${key}" is not a field of "${part.repeat.itemsProp}"`);
+            } else if ((ftype === 'boolean') !== (typeof value === 'boolean') || (ftype === 'number') !== (typeof value === 'number')) {
+              errors.push(`${contract.id}: part "${name}" repeat sample[${i}].${key} is a ${typeof value} but the field is ${ftype}`);
+            }
+          }
+        }
+      }
+    }
     if (part.visibleWhen) {
       const vwProp = contract.props.find((pr) => pr.name === part.visibleWhen!.prop);
       if (!vwProp) {
@@ -1490,6 +1540,33 @@ export function generateTsx(
         : `<span className={styles.${partName}} aria-hidden="true" ${glyph} />`;
       return wrapVisibleWhen(part, node);
     }
+    if (part.repeat && part.component) {
+      // v12 repeat (P9): the item template maps the live arrayOf prop — one
+      // child instance per record, fields bound by name through the child's
+      // code bindings (a text field whose child code prop is `children`
+      // renders as JSX children). `undefined` renders nothing — the arrayOf
+      // discipline (never a silent []); the static surfaces render the
+      // contract's observed `sample` instead.
+      const dep = byId.get(part.component.id)!;
+      const rp = contract.props.find((p) => p.name === part.repeat!.itemsProp)!;
+      const codeName = rp.bindings.code.prop;
+      const fixedAttrs = depAttrString(dep, part.component.props ?? {}, contract);
+      let childrenField: string | null = null;
+      const fieldAttrs = Object.keys((rp.type as { arrayOf: Record<string, string> }).arrayOf)
+        .map((field) => {
+          const depProp = dep.props.find((p) => p.name === field)!;
+          if (depProp.bindings.code.prop === 'children') {
+            childrenField = field;
+            return '';
+          }
+          return ` ${depProp.bindings.code.prop}={item.${field}}`;
+        })
+        .join('');
+      const node = childrenField
+        ? `<${dep.name} key={index}${fixedAttrs}${fieldAttrs}>{item.${childrenField}}</${dep.name}>`
+        : `<${dep.name} key={index}${fixedAttrs}${fieldAttrs} />`;
+      return wrapVisibleWhen(part, `{${codeName}?.map((item, index) => (${node}))}`);
+    }
     if (part.component) {
       const dep = byId.get(part.component.id)!;
       const attrs = depAttrString(dep, part.component.props ?? {}, contract);
@@ -1622,6 +1699,13 @@ export function generateStories(contract: Contract, byId: Map<string, Contract>)
       }
     } else if (isArrayType(p)) {
       argTypes.push(`    ${codeName}: { control: false${desc} },`);
+      // v12 repeat (P9): a collection's story renders the contract's OBSERVED
+      // sample as the array arg — the same honest static state the canvas
+      // and static surfaces render.
+      const repeatPart = walkAnatomy(contract).find((w) => w.part.repeat?.itemsProp === p.name);
+      if (repeatPart) {
+        args.push(`    ${codeName}: ${JSON.stringify(repeatPart.part.repeat!.sample)},`);
+      }
     } else if (p.type === 'boolean') {
       argTypes.push(`    ${codeName}: { control: 'boolean'${desc} },`);
       args.push(`    ${codeName}: ${p.default === true},`);
