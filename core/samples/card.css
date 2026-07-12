@@ -1,5 +1,9 @@
 /* Avatar — from ds.avatar v1.0.0 (core/emit-html.ts) */
 
+.avatar, .avatar *, .avatar *::before, .avatar *::after {
+  box-sizing: border-box;
+}
+
 .avatar {
   display: inline-flex;
   flex-direction: row;
@@ -26,6 +30,10 @@
 }
 
 /* Card — from ds.card v1.1.0 (core/emit-html.ts) */
+
+.card, .card *, .card *::before, .card *::after {
+  box-sizing: border-box;
+}
 
 .card {
   display: flex;

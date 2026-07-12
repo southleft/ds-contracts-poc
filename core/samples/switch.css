@@ -1,5 +1,9 @@
 /* Switch — from ds.switch v2.0.0 (core/emit-html.ts) */
 
+.switch, .switch *, .switch *::before, .switch *::after {
+  box-sizing: border-box;
+}
+
 .switch {
   display: flex;
   flex-direction: row;
