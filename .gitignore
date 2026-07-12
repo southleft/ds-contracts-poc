@@ -13,5 +13,9 @@ private/
 .env.local
 .playwright-mcp/
 
+# visual-parity artifacts: cached Figma PNGs + per-variant triptychs (the
+# worst-10 triptychs are committed under extract/figma/visual-parity/report-assets/)
+extract/figma/visual-parity/out/
+
 # built at playground build time (scripts/build-plugin-zip.mjs)
 playground/public/ds-contracts-sync-runner-plugin.zip
