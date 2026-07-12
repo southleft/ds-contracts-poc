@@ -37,7 +37,9 @@ import {
   namedSlots,
   namedTextProps,
   numberProps,
+  rootElementsOf,
   textProps,
+  UA_MARGIN_ELEMENTS,
   validateContract,
   ELEMENT_META,
 } from './emit-react.js';
@@ -153,6 +155,10 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
         s.justifyContent = 'center';
       }
       const rootTokens = part.tokens ?? {};
+      // UA-margin neutralization (emit-react UA_MARGIN_ELEMENTS): the
+      // component's box is contract-governed — h1-h6/p/hr/ul/… UA margins
+      // never leak into the composing layout.
+      if (rootElementsOf(contract).some((el) => UA_MARGIN_ELEMENTS.has(el))) s.margin = 0;
       if ('border-width' in rootTokens || 'border-color' in rootTokens) s.borderStyle = 'solid';
       else s.border = 0;
       if ('max-width' in rootTokens) { s.width = '100%'; s.minWidth = 'fit-content'; }
