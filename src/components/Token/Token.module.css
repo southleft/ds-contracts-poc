@@ -1,5 +1,5 @@
 /* GENERATED FILE — DO NOT EDIT.
- * Source of truth: contracts/token.contract.json (ds.token v1.0.0)
+ * Source of truth: contracts/token.contract.json (ds.token v1.1.0)
  * Regenerate with: npm run generate
  */
 
@@ -70,6 +70,16 @@
 .color-gray {
   background-color: var(--color-token-gray-background);
   color: var(--color-token-gray-foreground);
+}
+
+.size-sm {
+  padding-inline: var(--space-inset-y-sm);
+}
+
+.size-lg {
+  font-size: var(--font-control-size-sm);
+  padding-inline: var(--space-inset-x-sm);
+  padding-block: var(--space-inset-y-sm);
 }
 
 .iconSlot {
