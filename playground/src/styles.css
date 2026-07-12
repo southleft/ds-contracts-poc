@@ -214,7 +214,7 @@ textarea,
   top: 0;
   right: 0;
   bottom: 0;
-  width: min(400px, 92vw);
+  width: min(460px, 92vw);
   background: var(--pg-bg);
   border-left: 1px solid var(--pg-border);
   z-index: 21;
@@ -237,11 +237,13 @@ textarea,
 
 .drawer__body {
   overflow-y: auto;
-  padding: 16px;
+  padding: 20px;
 }
 
 .drawer__body section + section {
-  margin-top: 20px;
+  margin-top: 26px;
+  padding-top: 18px;
+  border-top: 1px solid var(--pg-border);
 }
 
 .drawer__section-title {
@@ -250,13 +252,30 @@ textarea,
   text-transform: uppercase;
   letter-spacing: 0.06em;
   color: var(--pg-faint);
-  margin: 0 0 6px;
+  margin: 0 0 8px;
 }
 
 .drawer__body p {
   margin: 0;
   font-size: 13px;
+  line-height: 1.6;
   color: var(--pg-muted);
+}
+
+.drawer__body p + p {
+  margin-top: 8px;
+}
+
+.drawer__list {
+  margin: 8px 0 0;
+  padding-left: 18px;
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--pg-muted);
+}
+
+.drawer__list li + li {
+  margin-top: 4px;
 }
 
 .drawer__body b {
@@ -438,11 +457,18 @@ label {
 }
 
 /* Up to seven source tabs (Workspace appears with the first import) share
- * the rail — always ONE 37px row: overflow scrolls horizontally behind the
- * thin scrollbar (never wraps, so the 1px bottom border stays on the same
- * line the other pane headers draw). The active tab is scrolled into view
- * on selection. */
+ * the rail. The strip WRAPS to a second row when the rail is too narrow for
+ * one — every tab stays visible and readable at any rail width (≥280px);
+ * nothing scrolls out of reach or clips mid-label. */
+.pg__rail > .tabs {
+  flex-wrap: wrap;
+  height: auto;
+  min-height: 37px;
+  overflow-x: visible;
+}
+
 .pg__rail > .tabs > .tabs__tab {
+  height: 36px;
   padding: 0 11px;
 }
 
@@ -460,9 +486,18 @@ label {
 /* -------------------------------------------------------------- landing */
 
 .landing {
-  max-width: 760px;
+  max-width: 880px;
   margin: 0 auto;
-  padding: 56px 24px 80px;
+  padding: 56px 32px 80px;
+}
+
+.landing__kicker {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--pg-faint);
+  margin: 0 0 8px;
 }
 
 .landing h1 {
@@ -476,10 +511,16 @@ label {
   font-size: 16px;
   color: var(--pg-muted);
   margin: 0 0 32px;
-  max-width: 640px;
+  max-width: 72ch;
 }
 
+/* The one-line thesis. It may WRAP (between steps, never mid-word) — the
+ * pipeline must read whole at every width, so no nowrap, no clipping. */
 .landing__loop {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 10px;
   font-family: var(--pg-mono);
   font-size: 13px;
   border: 1px solid var(--pg-border);
@@ -487,8 +528,14 @@ label {
   margin-bottom: 40px;
   color: var(--pg-fg);
   background: var(--pg-surface);
-  overflow-x: auto;
+}
+
+.landing__loop-step {
   white-space: nowrap;
+}
+
+.landing__loop-arrow {
+  color: var(--pg-faint);
 }
 
 .landing__loop b {
@@ -587,6 +634,15 @@ label {
   pointer-events: none;
 }
 
+/* Cropped thumbnails end in a deliberate fade, not a mid-row guillotine —
+ * the fade says "there is more" instead of slicing a variant in half.
+ * Contract thumbs mask the iframe itself (theme-safe: whatever the surface
+ * behind it, the content dissolves into it); code thumbs paint a gradient
+ * to their own themed background. */
+.excard__thumb iframe {
+  mask-image: linear-gradient(to bottom, #000 calc(100% - 72px), transparent);
+}
+
 .excard__thumb--code {
   padding: 12px;
   font-family: var(--pg-mono);
@@ -595,6 +651,17 @@ label {
   color: var(--pg-muted);
   white-space: pre;
   overflow: hidden;
+}
+
+.excard__thumb--code::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 32px;
+  background: linear-gradient(to bottom, transparent, var(--pg-bg));
+  pointer-events: none;
 }
 
 .excard__body {
@@ -637,6 +704,19 @@ label {
   letter-spacing: 0.06em;
   color: var(--pg-faint);
   margin-bottom: 2px;
+}
+
+/* Deliberate-refusal marker — data-driven from the example entry. */
+.excard__flag {
+  display: inline-block;
+  margin-top: 6px;
+  border: 1px solid var(--pg-warn);
+  color: var(--pg-warn);
+  font-size: 10.5px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 1px 6px;
 }
 
 /* ----------------------------------------------------------- playground */
@@ -943,10 +1023,18 @@ label {
   min-height: 0;
 }
 
+/* Provenance line in the pane header — one line, ellipsized when the pane
+ * is narrow (1280 case: "loaded from examples — ds.but…" used to wrap and
+ * clip); the full text rides the title attribute. */
 .editor__meta {
   font-size: 12px;
   color: var(--pg-muted);
   margin-left: auto;
+  min-width: 0;
+  flex: 0 1 auto;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 /* Refusal-line highlighting: a transparent-text <pre> backdrop under the
@@ -1246,6 +1334,41 @@ label {
   word-break: break-word;
 }
 
+/* Deliberate-refusal note under the refusal list — the example MEANS to
+ * refuse; the note says so and what that teaches. Neutral voice, not danger:
+ * the refusal above stays red, the explanation reads calm. */
+.validation__expected {
+  margin-top: 8px;
+  padding: 6px 10px;
+  border: 1px solid var(--pg-warn);
+  font-family: var(--pg-font);
+  font-size: 12px;
+  color: var(--pg-fg);
+}
+
+.validation__expected-tag {
+  display: inline-block;
+  border: 1px solid var(--pg-warn);
+  color: var(--pg-warn);
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 0 5px;
+  margin-right: 8px;
+  vertical-align: 1px;
+}
+
+/* The same note inside the (empty) preview pane. */
+.preview__expected {
+  margin: 10px 14px 0;
+  padding: 8px 10px;
+  border: 1px solid var(--pg-warn);
+  font-size: 12px;
+  color: var(--pg-muted);
+  max-width: 60ch;
+}
+
 /* "Fix with AI" — the generator-refusal backfill row inside the banner. */
 .validation__fix {
   display: flex;
@@ -1461,6 +1584,39 @@ label {
   padding: 4px 14px 12px;
   font-size: 12px;
   color: var(--pg-faint);
+}
+
+/* Collapsed repeat-entries: one line carries the exact constituent count;
+ * the per-use list expands below it. Totals stay arithmetically verifiable —
+ * the group title's (N) still counts every constituent. */
+.receipts__cluster-count {
+  color: var(--pg-muted);
+  font-weight: 600;
+}
+
+.receipts__cluster {
+  margin-top: 3px;
+}
+
+.receipts__cluster summary {
+  cursor: pointer;
+  color: var(--pg-faint);
+  font-size: 11px;
+}
+
+.receipts__cluster summary:hover {
+  color: var(--pg-fg);
+}
+
+.receipts__cluster ul {
+  margin: 4px 0 0;
+  padding-left: 16px;
+  list-style: none;
+  color: var(--pg-muted);
+}
+
+.receipts__cluster li {
+  padding: 1px 0;
 }
 
 /* assist rename flow (inside the minted receipts group) */
@@ -1781,6 +1937,77 @@ label {
   width: 100%;
   border: 0;
   background: transparent;
+}
+
+/* Canvas fit-to-pane: the frame measures its document's natural size and
+ * scales down (never up) so the variant grid is visible AT REST in a narrow
+ * split pane instead of silently clipping. Below the readability floor the
+ * wrapper scrolls — with an always-visible scrollbar, not an invisible
+ * overlay one. */
+.canvas-fit {
+  flex: 1;
+  min-height: 0;
+  min-width: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  background: #ffffff; /* the canvas is ALWAYS light, like Figma */
+  scrollbar-width: thin;
+  scrollbar-color: #a8a8a8 transparent;
+}
+
+/* Floored-scale case: this inner wrapper owns the horizontal scrollbar so
+ * the affordance sits directly UNDER the grid, always visible. */
+.canvas-fit__scroll {
+  overflow-x: auto;
+  max-width: 100%;
+  flex-shrink: 0;
+  scrollbar-width: thin;
+  scrollbar-color: #a8a8a8 #f4f4f4;
+}
+
+.canvas-fit::-webkit-scrollbar,
+.canvas-fit__scroll::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+.canvas-fit__scroll::-webkit-scrollbar-track {
+  background: #ececec;
+}
+
+.canvas-fit::-webkit-scrollbar-thumb,
+.canvas-fit__scroll::-webkit-scrollbar-thumb {
+  background: #8d8d8d;
+  border: 3px solid #ececec;
+  border-radius: 6px;
+}
+
+.canvas-fit__box {
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.canvas-fit__box iframe,
+.preview .canvas-fit__box iframe,
+.preview__split-col .canvas-fit__box iframe {
+  flex: 0 0 auto;
+  transform-origin: 0 0;
+}
+
+.canvas-fit > iframe {
+  flex: 1;
+  width: 100%;
+  border: 0;
+}
+
+.preview__cap-zoom {
+  font-family: var(--pg-mono);
+  color: var(--pg-faint);
+  text-transform: none;
+  letter-spacing: normal;
+  margin-left: auto;
 }
 
 /* Caption strip over a preview column (Canvas / Code / Figma's own render).

@@ -22,6 +22,11 @@ export interface ReceiptGroup {
   title: string;
   kind: 'degradation' | 'note' | 'unbound' | 'skipped' | 'minted';
   entries: ReceiptEntry[];
+  /** Display-state groups the UI ADDS after the fact (workspace-restore
+   *  provenance, stub re-referee) stay out of the badge count — the count is
+   *  the import's own record, so a restored entry shows the same N its
+   *  import did. The group still renders, title carrying its own (n). */
+  uncounted?: boolean;
 }
 
 export interface Receipts {
@@ -31,4 +36,4 @@ export interface Receipts {
 }
 
 export const receiptCount = (r: Receipts): number =>
-  r.groups.reduce((n, g) => n + g.entries.length, 0);
+  r.groups.reduce((n, g) => n + (g.uncounted ? 0 : g.entries.length), 0);

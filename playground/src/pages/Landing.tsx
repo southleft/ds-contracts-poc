@@ -5,6 +5,7 @@ import { contractsById } from '../engine/data';
 export function Landing() {
   return (
     <div className="landing">
+      <p className="landing__kicker">Design-system contracts — proof of concept</p>
       <h1>The contract loop, in your browser.</h1>
       <p className="landing__pitch">
         A component contract is a machine-readable agreement about a component&rsquo;s API,
@@ -16,9 +17,22 @@ export function Landing() {
         paste leaves your browser.
       </p>
 
+      {/* The one-line thesis: it may wrap BETWEEN steps at narrow widths but
+          never truncates — a pipeline that ends in "React · HT" isn't one. */}
       <div className="landing__loop" aria-label="The contract loop">
-        design / code&nbsp;&nbsp;→&nbsp;&nbsp;<b>proposed contract</b>&nbsp;&nbsp;→&nbsp;&nbsp;schema
-        governance (named refusals)&nbsp;&nbsp;→&nbsp;&nbsp;React · HTML · inline · Figma
+        <span className="landing__loop-step">design / code</span>
+        <span className="landing__loop-arrow" aria-hidden>
+          →
+        </span>
+        <b className="landing__loop-step">proposed contract</b>
+        <span className="landing__loop-arrow" aria-hidden>
+          →
+        </span>
+        <span className="landing__loop-step">schema governance (named refusals)</span>
+        <span className="landing__loop-arrow" aria-hidden>
+          →
+        </span>
+        <span className="landing__loop-step">React · HTML · inline · Figma</span>
       </div>
 
       <div className="landing__ctas">
