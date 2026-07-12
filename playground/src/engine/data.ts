@@ -73,6 +73,14 @@ export const contractIdByName = new Map<string, string>(
   [...contractsById.values()].map((c) => [c.name, c.id]),
 );
 
+/** componentSetKey → contract id (dump v1.5 SESSION LINKING — nested
+ *  instances resolve by publish key FIRST, rename-safe on both sides). */
+export const contractIdByKey = new Map<string, string>(
+  [...contractsById.values()]
+    .filter((c) => c.anchors.figma.componentSetKey !== null)
+    .map((c) => [c.anchors.figma.componentSetKey!, c.id]),
+);
+
 // ---------------------------------------------------------------------------
 // Icon assets — the same assets/icons/*.svg the generator inlines.
 // ---------------------------------------------------------------------------

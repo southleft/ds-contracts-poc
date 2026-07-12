@@ -44,13 +44,21 @@
  *                                                     BOOLEAN_OPERATION stay named receipts (arbitrary paths)
  *   style.lineHeightPx (lineHeightUnit PIXELS)      text.lineHeight (dump v1.3; non-pixel units stay receipts)
  *   INSTANCE children                               NOT recursed — instance internals belong to the child contract
+ *   components[componentId].key /                   instanceKey / instanceSetKey (dump v1.5 — rename-safe identity
+ *     componentSets[setId].key                        the session-linking resolver matches against contract anchors)
+ *   INSTANCE absoluteBoundingBox                    bbox { width, height } (dump v1.5 — observed geometry for child stubs)
+ *   componentPropertyDefinitions INSTANCE_SWAP      set.swapPreferredValues (dump v1.5 — keys → slot `accepts` downstream)
+ *     .preferredValues
+ *   componentPropertyDefinitions BOOLEAN            set.boolDefaults (dump v1.5 — visibility-bound boolean prop defaults)
+ *     .defaultValue
+ *   SLOT documents (native slots, Schema 2025)      carried verbatim (type 'SLOT') — propose maps them to slot parts
  *
  * Refusals are receipts, not silence: every place the REST surface cannot
  * yield the dump fact lands in MapReport.degradations with a named code and
  * the exact reason (e.g. a variable id that cannot be resolved because the
  * variables endpoint is Enterprise-only). Nothing is invented.
  */
-import type { DumpEffect, DumpFile, DumpLayout, DumpNode, DumpPaint, DumpSet, DumpShape, DumpText } from '../types.js';
+import type { DumpEffect, DumpFile, DumpLayout, DumpNode, DumpPaint, DumpPreferredValue, DumpSet, DumpShape, DumpText } from '../types.js';
 
 // ---------------------------------------------------------------------------
 // REST shapes (trimmed to the consumed fields; figma/rest-api-spec names)
@@ -125,6 +133,14 @@ export interface RestComponentProperty {
   value: boolean | string;
 }
 
+/** ComponentPropertyDefinition (api_types.ts) — set-level definitions; only
+ *  INSTANCE_SWAP preferredValues are consumed (dump v1.5). */
+export interface RestComponentPropertyDefinition {
+  type: 'BOOLEAN' | 'INSTANCE_SWAP' | 'TEXT' | 'VARIANT';
+  defaultValue?: boolean | string;
+  preferredValues?: Array<{ type: string; key: string }>;
+}
+
 export interface RestNode {
   id: string;
   name: string;
@@ -182,6 +198,8 @@ export interface RestNode {
   // InstanceNode
   componentId?: string;
   componentProperties?: Record<string, RestComponentProperty>;
+  // COMPONENT_SET / COMPONENT documents (dump v1.5): swap preferredValues.
+  componentPropertyDefinitions?: Record<string, RestComponentPropertyDefinition>;
 }
 
 /** GetFileNodesResponse (api_types.ts), trimmed. */
@@ -294,8 +312,8 @@ const isAlias = (v: unknown): v is RestVariableAlias =>
 interface Ctx {
   varNameById: Map<string, string>;
   styleNameById: Map<string, string>;
-  components: Map<string, { name: string; componentSetId?: string }>;
-  componentSets: Map<string, { name: string }>;
+  components: Map<string, { name: string; componentSetId?: string; key?: string }>;
+  componentSets: Map<string, { name: string; key?: string }>;
   report: MapReport;
 }
 
@@ -671,6 +689,12 @@ function mapNode(
 ): RestDumpNode {
   const out: RestDumpNode = { name: node.name, type: node.type };
 
+  // dump v1.5: variant-ROOT observed bounding box — the drawn dimension of a
+  // FIXED root axis is otherwise unrecoverable (CBDS Dialog field case).
+  if (node.type === 'COMPONENT' && node.absoluteBoundingBox) {
+    out.bbox = { width: round2(node.absoluteBoundingBox.width), height: round2(node.absoluteBoundingBox.height) };
+  }
+
   const layout = mapLayout(node, ctx, nodePath);
   if (layout) out.layout = layout;
   const cornerRadius = mapCornerRadius(node, ctx, nodePath);
@@ -737,9 +761,12 @@ function mapNode(
     const componentId = node.componentId;
     const component = componentId ? ctx.components.get(componentId) : undefined;
     if (component) {
-      out.instanceOf = component.componentSetId
-        ? (ctx.componentSets.get(component.componentSetId)?.name ?? component.name)
-        : component.name;
+      const owningSet = component.componentSetId ? ctx.componentSets.get(component.componentSetId) : undefined;
+      out.instanceOf = owningSet?.name ?? component.name;
+      // dump v1.5: rename-safe identity — the main component's publish key
+      // and its owning set's key, straight off the response metadata maps.
+      if (component.key) out.instanceKey = component.key;
+      if (owningSet?.key) out.instanceSetKey = owningSet.key;
     } else {
       ctx.report.degradations.push({
         code: 'instance-main-unresolved',
@@ -751,9 +778,18 @@ function mapNode(
     const props: Record<string, string | boolean> = {};
     for (const [key, def] of Object.entries(node.componentProperties ?? {})) {
       if (def.type === 'INSTANCE_SWAP') continue; // slots ride propRefs instead
-      props[key.split('#')[0]] = def.value;
+      // dump v1.5: keys keep their "#id" suffix (the Plugin API's own
+      // spelling). A suffixed string key is a TEXT property WITH CERTAINTY —
+      // stripping it (dump v1.1) collapsed TEXT and VARIANT properties into
+      // one ambiguous shape and every stub modeled its label as an enum.
+      props[key] = def.value;
     }
     if (Object.keys(props).length > 0) out.componentProperties = props;
+    // dump v1.5: the OBSERVED bounding box — the honest geometry a child STUB
+    // renders when the child contract is out of scope (dump v1 still never
+    // recurses into instance internals).
+    const box = node.absoluteBoundingBox;
+    if (box) out.bbox = { width: round2(box.width), height: round2(box.height) };
     return out; // instance internals belong to the child contract — no children
   }
 
@@ -781,7 +817,8 @@ export function mapRestToDump(nodesResponse: RestNodesResponse, options: MapOpti
     _provenance: {
       fileKey: options.fileKey ?? null,
       extractedAt: new Date().toISOString().slice(0, 10),
-      note: 'Node-tree dump mapped from the Figma REST API (extract/figma/rest/map.ts, dump v1.3) for design→contract proposal.',
+      note: 'Node-tree dump mapped from the Figma REST API (extract/figma/rest/map.ts, dump v1.5) for design→contract proposal.',
+      dumpVersion: '1.5',
     },
   };
 
@@ -820,11 +857,28 @@ export function mapRestToDump(nodesResponse: RestNodesResponse, options: MapOpti
     const key =
       (entry.componentSets?.[doc.id] as { key?: string } | undefined)?.key ??
       (entry.components?.[doc.id] as { key?: string } | undefined)?.key;
+    // dump v1.5: INSTANCE_SWAP preferredValues, keyed by suffix-stripped
+    // property name — the component keys resolve downstream into slot
+    // `accepts` (unresolvable keys stay named notes, never guessed ids).
+    const swapPreferredValues: Record<string, DumpPreferredValue[]> = {};
+    const boolDefaults: Record<string, boolean> = {};
+    for (const [propName, def] of Object.entries(doc.componentPropertyDefinitions ?? {})) {
+      if (def.type === 'INSTANCE_SWAP' && Array.isArray(def.preferredValues) && def.preferredValues.length > 0) {
+        swapPreferredValues[propName.split('#')[0]] = def.preferredValues.map((v) => ({ type: v.type, key: v.key }));
+      }
+      // dump v1.5: BOOLEAN defaults — the one property default variants alone
+      // cannot recover (visibility-bound parts' boolean prop defaults).
+      if (def.type === 'BOOLEAN' && typeof def.defaultValue === 'boolean') {
+        boolDefaults[propName.split('#')[0]] = def.defaultValue;
+      }
+    }
     const set: DumpSet = {
       setName: doc.name,
       type: doc.type,
       nodeId: doc.id,
       ...(key ? { key } : {}),
+      ...(Object.keys(swapPreferredValues).length > 0 ? { swapPreferredValues } : {}),
+      ...(Object.keys(boolDefaults).length > 0 ? { boolDefaults } : {}),
       variants,
     };
     dump[doc.name] = set;

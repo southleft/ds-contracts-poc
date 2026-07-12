@@ -113,7 +113,11 @@ export interface DumpShape {
 
 export interface DumpNode {
   name: string;
-  type: 'COMPONENT' | 'FRAME' | 'TEXT' | 'INSTANCE' | string;
+  /** Node type. 'SLOT' (dump v1.5): a NATIVE Figma slot node (Schema 2025) —
+   *  captured verbatim where the API exposes it; propose.ts maps it to the
+   *  same contract `slot` part the INSTANCE_SWAP spelling maps to, with a
+   *  named provenance note (regeneration should reproduce the spelling). */
+  type: 'COMPONENT' | 'FRAME' | 'TEXT' | 'INSTANCE' | 'SLOT' | string;
   layout?: DumpLayout;
   /** Literal corner radius when uniform and nonzero. Bound radii are in `bound`. */
   cornerRadius?: number;
@@ -161,11 +165,47 @@ export interface DumpNode {
   propRefs?: Record<string, string>;
   /** For INSTANCE nodes: the main component's owning set/component name. */
   instanceOf?: string;
+  /** For INSTANCE nodes (dump v1.5, additive): the main COMPONENT's publish
+   *  key. Identity that survives renames — the session-linking resolver
+   *  matches it against in-scope contracts' anchors. Absence in older dumps
+   *  means not captured, never "no key". */
+  instanceKey?: string;
+  /** For INSTANCE nodes (dump v1.5, additive): the main component's OWNING
+   *  COMPONENT_SET publish key (absent when the main component is not in a
+   *  set). Matches contracts' anchors.figma.componentSetKey — checked FIRST
+   *  by the resolver; instanceKey is the fallback for setless components. */
+  instanceSetKey?: string;
+  /** OBSERVED bounding box (dump v1.5, additive; post-layout width/height,
+   *  px) on two node classes:
+   *  · INSTANCE nodes — dump v1 stops at instance boundaries by design;
+   *    this is the honest OBSERVED geometry a child STUB renders (a
+   *    correctly-sized box, never invented anatomy).
+   *  · variant ROOT (COMPONENT) nodes — when a root axis is drawn FIXED
+   *    (primary/counterSizing), the drawn dimension is otherwise
+   *    unrecoverable (field case: the CBDS Dialog's per-size fixed widths —
+   *    without them the body text never wraps and every variant renders
+   *    hundreds of px too wide).
+   *  Absence in older dumps means not captured. */
+  bbox?: { width: number; height: number };
   /** For INSTANCE nodes: applied component property values (dump v1.1,
    *  additive — the shipped fixtures predate it; propose.ts treats absence
-   *  as a declared fidelity limit and never invents the values). */
+   *  as a declared fidelity limit and never invents the values).
+   *  KEYS (dump v1.5): keep their "#id" suffix, the Plugin API's own
+   *  spelling — a suffixed string key is a TEXT property with certainty
+   *  (promoteBaseInstanceCaptures' rule); v1.1–v1.4 producers stripped the
+   *  suffix, so bare string keys stay VARIANT/TEXT-ambiguous. Consumers
+   *  split on '#' for the property NAME either way. */
   componentProperties?: Record<string, string | boolean>;
   children?: DumpNode[];
+}
+
+/** One INSTANCE_SWAP preferred value (dump v1.5) — the component (or set)
+ *  publish key the design names as preferred slot content. Keys resolve
+ *  through in-scope contracts' anchors (componentSetKey / component key) into
+ *  slot `accepts`; unresolvable keys stay NAMED notes, never guessed ids. */
+export interface DumpPreferredValue {
+  type: 'COMPONENT' | 'COMPONENT_SET' | string;
+  key: string;
 }
 
 export interface DumpSet {
@@ -174,6 +214,20 @@ export interface DumpSet {
   /** Set-level anchors (dump v1.1, additive). */
   nodeId?: string;
   key?: string;
+  /** INSTANCE_SWAP property definitions' preferredValues (dump v1.5,
+   *  additive), keyed by property name with the "#id" suffix stripped —
+   *  the same spelling propRefs.mainComponent carries. Absence in older
+   *  dumps means not captured (their proposals note "author `accepts`
+   *  manually"), never "no preferred values". */
+  swapPreferredValues?: Record<string, DumpPreferredValue[]>;
+  /** BOOLEAN property definitions' defaultValues (dump v1.5, additive),
+   *  keyed by suffix-stripped property name. The one property default the
+   *  variants alone cannot recover (TEXT defaults ride characters, VARIANT
+   *  defaults ride canvas order): a visibility-bound part's boolean prop
+   *  default comes from HERE as captured evidence — field case: Eventz
+   *  Button hasStartIcon/hasEndIcon default true, previously "default not
+   *  recoverable, review". Absence in older dumps means not captured. */
+  boolDefaults?: Record<string, boolean>;
   /** Each variant's node tree. Variant names carry the axes
    *  ("Variant=Info", "Value=Off, Size=Sm"); a standalone COMPONENT has a
    *  single entry named after the component. Order is the canvas order —
@@ -203,7 +257,13 @@ export interface DumpVariable {
 }
 
 export interface DumpFile {
-  _provenance?: { fileKey?: string | null; extractedAt?: string | number; note?: string };
+  /** `dumpVersion` (dump v1.5, additive): producers that capture the FULL
+   *  v1.5 surface stamp '1.5' here. Consumers use it as POSITIVE evidence
+   *  for channels whose absence is ambiguous in older dumps — e.g. a
+   *  visibility-bound node NOT hidden in the default variant recovers a
+   *  boolean default of true only when the producer is known to capture
+   *  `hidden` (absent marker → absence stays "not captured"). */
+  _provenance?: { fileKey?: string | null; extractedAt?: string | number; note?: string; dumpVersion?: string };
   /** dump v1.2, additive — absent in older dumps (their captures were run
    *  before the channel existed; absence means "not receipted", not clean). */
   _degradations?: DumpDegradation[];

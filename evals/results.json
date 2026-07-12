@@ -1,6 +1,6 @@
 {
-  "passed": 93,
-  "total": 93,
+  "passed": 96,
+  "total": 96,
   "results": [
     {
       "id": "refuse-unknown-token-reference",
@@ -339,6 +339,21 @@
     },
     {
       "id": "design-child-stubs-prevent-scope-refusals",
+      "claim": "C5-extraction",
+      "pass": true
+    },
+    {
+      "id": "key-based-linking",
+      "claim": "C5-extraction",
+      "pass": true
+    },
+    {
+      "id": "stub-geometry-render",
+      "claim": "C5-extraction",
+      "pass": true
+    },
+    {
+      "id": "preferred-values-accepts",
       "claim": "C5-extraction",
       "pass": true
     },

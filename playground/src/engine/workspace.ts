@@ -84,6 +84,9 @@ const subscribe = (fn: () => void): (() => void) => {
 };
 const snapshot = () => entries;
 
+/** Imperative snapshot for non-React consumers (session-registry.ts). */
+export const workspaceSnapshot = (): WorkspaceEntry[] => entries;
+
 /** React binding — newest first. */
 export function useWorkspace(): WorkspaceEntry[] {
   return useSyncExternalStore(subscribe, snapshot);

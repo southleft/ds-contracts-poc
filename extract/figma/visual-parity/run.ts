@@ -94,6 +94,7 @@ function diagnose(aligned: Aligned, diff: DiffResult): string {
 function receiptsLine(pkg: RenderablePackage): string {
   const r = pkg.receipts;
   const bits: string[] = [];
+  if (r.sessionContracts.length > 0) bits.push(`session scope: ${r.sessionContracts.join(', ')}`);
   if (r.capturedCount > 0) bits.push(`${r.capturedCount} captured variables`);
   if (r.capturedShadowed.length > 0) bits.push(`${r.capturedShadowed.length} shadowed by repo tokens`);
   if (r.mintedCount > 0) bits.push(`${r.mintedCount} minted imported.*`);

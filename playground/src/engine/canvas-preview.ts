@@ -29,6 +29,7 @@ import {
 type FigmaEngine = ReturnType<typeof createFigmaEngine>;
 import { polygonClipPath } from '../../../scripts/contract-schema.js';
 import { icons } from './data.js';
+import { sessionMintedCss } from './preview.js';
 import { activeTokens } from './token-source.js';
 
 export type CanvasPreviewResult =
@@ -510,6 +511,10 @@ export function buildCanvasPreview(
         '<!doctype html>',
         '<html>', // no data-theme, ever: the canvas is ALWAYS light, like Figma
         '<head><meta charset="utf-8">',
+        // Session minted layers (dump v1.5 linking): a LINKED child imported
+        // earlier binds its own imported.* leaves — the active layer only
+        // carries the on-screen contract's (see preview.ts sessionMintedCss).
+        `<style>${sessionMintedCss()}</style>`,
         `<style>${stylesheets.base}\n${stylesheets.brands}</style>`,
         `<style>${CANVAS_CSS}</style>`,
         '</head><body>',

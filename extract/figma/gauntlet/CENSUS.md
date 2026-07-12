@@ -17,7 +17,7 @@ Every component set in the owner's kit replayed through the full deterministic r
 
 CLEAN = proposed, zero referee violations, all 4 surfaces emit. The whole-kit number is icon-inflated: 95.3% of the kit is single-variant COMPONENTs. The honest capability number is the COMPONENT_SET row — the owner's real composites (Menu, Card-Image, Avatar group, Breadcrumb, Dialog…), where the failures used to concentrate, are clean too.
 
-**Refusal-free ≠ pixel-right.** "Clean" is qualified by the facts-carried metric: across the kit the proposals carry **3234 token-bound style facts** (median 1 per proposed set — icons bind one fill; median 14 per COMPONENT_SET), of which 863 are minted provisional (`imported.*` — literal fidelity, machine names), while **5272 named notes**, **23 unbound leftovers**, and **3316 capture degradations** name facts the pipeline read but did not carry. Per-set numbers ride census.json.
+**Refusal-free ≠ pixel-right.** "Clean" is qualified by the facts-carried metric: across the kit the proposals carry **3284 token-bound style facts** (median 1 per proposed set — icons bind one fill; median 14 per COMPONENT_SET), of which 863 are minted provisional (`imported.*` — literal fidelity, machine names), while **5414 named notes**, **23 unbound leftovers**, and **3316 capture degradations** name facts the pipeline read but did not carry. Per-set numbers ride census.json.
 
 **Surface honesty:** all four emitters referee — emit-figma-script calls validateContract (census class-fix batch), so a referee-violating contract refuses BY NAME on the canvas surface exactly like react/html/react-inline. (Before the batch it was the one surface that still emitted sync scripts for violating sets.)
 

@@ -83,12 +83,6 @@
       "message": "variable id VariableID:2759:71598 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
     },
     {
-      "code": "text-channel-unsupported",
-      "nodePath": "Button:variant=primary, state=default, isDisabled=false/Label",
-      "field": "text",
-      "message": "text channel(s) with no dump v1 projection: lineHeight 20px (PIXELS) — typography carries (fontSize, fontStyle, style identity) only"
-    },
-    {
       "code": "variable-unresolved",
       "nodePath": "Button:variant=knockout, state=default, isDisabled=false",
       "field": "itemSpacing",
@@ -159,12 +153,6 @@
       "nodePath": "Button:variant=knockout, state=default, isDisabled=false/Label",
       "field": "fill",
       "message": "variable id VariableID:2759:71581 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
-    },
-    {
-      "code": "text-channel-unsupported",
-      "nodePath": "Button:variant=knockout, state=default, isDisabled=false/Label",
-      "field": "text",
-      "message": "text channel(s) with no dump v1 projection: lineHeight 20px (PIXELS) — typography carries (fontSize, fontStyle, style identity) only"
     },
     {
       "code": "variable-unresolved",
@@ -245,12 +233,6 @@
       "message": "variable id VariableID:2759:71598 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
     },
     {
-      "code": "text-channel-unsupported",
-      "nodePath": "Button:variant=primary, state=default, isDisabled=true/Label",
-      "field": "text",
-      "message": "text channel(s) with no dump v1 projection: lineHeight 20px (PIXELS) — typography carries (fontSize, fontStyle, style identity) only"
-    },
-    {
       "code": "variable-unresolved",
       "nodePath": "Button:variant=knockout, state=default, isDisabled=true",
       "field": "itemSpacing",
@@ -323,12 +305,6 @@
       "message": "variable id VariableID:2759:71581 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
     },
     {
-      "code": "text-channel-unsupported",
-      "nodePath": "Button:variant=knockout, state=default, isDisabled=true/Label",
-      "field": "text",
-      "message": "text channel(s) with no dump v1 projection: lineHeight 20px (PIXELS) — typography carries (fontSize, fontStyle, style identity) only"
-    },
-    {
       "code": "variable-unresolved",
       "nodePath": "Button:variant=secondary, state=default, isDisabled=false",
       "field": "itemSpacing",
@@ -407,12 +383,6 @@
       "message": "variable id VariableID:2759:71581 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
     },
     {
-      "code": "text-channel-unsupported",
-      "nodePath": "Button:variant=secondary, state=default, isDisabled=false/Label",
-      "field": "text",
-      "message": "text channel(s) with no dump v1 projection: lineHeight 20px (PIXELS) — typography carries (fontSize, fontStyle, style identity) only"
-    },
-    {
       "code": "variable-unresolved",
       "nodePath": "Button:variant=bare, state=default, isDisabled=false",
       "field": "itemSpacing",
@@ -485,12 +455,6 @@
       "message": "variable id VariableID:2759:71581 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
     },
     {
-      "code": "text-channel-unsupported",
-      "nodePath": "Button:variant=bare, state=default, isDisabled=false/Label",
-      "field": "text",
-      "message": "text channel(s) with no dump v1 projection: lineHeight 20px (PIXELS) — typography carries (fontSize, fontStyle, style identity) only"
-    },
-    {
       "code": "variable-unresolved",
       "nodePath": "Button:variant=bare, state=default, isDisabled=true",
       "field": "itemSpacing",
@@ -561,12 +525,6 @@
       "nodePath": "Button:variant=bare, state=default, isDisabled=true/Label",
       "field": "fill",
       "message": "variable id VariableID:2759:71581 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
-    },
-    {
-      "code": "text-channel-unsupported",
-      "nodePath": "Button:variant=bare, state=default, isDisabled=true/Label",
-      "field": "text",
-      "message": "text channel(s) with no dump v1 projection: lineHeight 20px (PIXELS) — typography carries (fontSize, fontStyle, style identity) only"
     },
     {
       "code": "variable-unresolved",
@@ -645,12 +603,6 @@
       "nodePath": "Button:variant=secondary, state=default, isDisabled=true/Label",
       "field": "fill",
       "message": "variable id VariableID:2759:71581 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
-    },
-    {
-      "code": "text-channel-unsupported",
-      "nodePath": "Button:variant=secondary, state=default, isDisabled=true/Label",
-      "field": "text",
-      "message": "text channel(s) with no dump v1 projection: lineHeight 20px (PIXELS) — typography carries (fontSize, fontStyle, style identity) only"
     },
     {
       "code": "variable-unresolved",
@@ -731,12 +683,6 @@
       "message": "variable id VariableID:2759:71612 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
     },
     {
-      "code": "text-channel-unsupported",
-      "nodePath": "Button:variant=primary, state=hover, isDisabled=false/Label",
-      "field": "text",
-      "message": "text channel(s) with no dump v1 projection: lineHeight 20px (PIXELS) — typography carries (fontSize, fontStyle, style identity) only"
-    },
-    {
       "code": "variable-unresolved",
       "nodePath": "Button:variant=knockout, state=hover, isDisabled=false",
       "field": "itemSpacing",
@@ -807,12 +753,6 @@
       "nodePath": "Button:variant=knockout, state=hover, isDisabled=false/Label",
       "field": "fill",
       "message": "variable id VariableID:2759:71582 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
-    },
-    {
-      "code": "text-channel-unsupported",
-      "nodePath": "Button:variant=knockout, state=hover, isDisabled=false/Label",
-      "field": "text",
-      "message": "text channel(s) with no dump v1 projection: lineHeight 20px (PIXELS) — typography carries (fontSize, fontStyle, style identity) only"
     },
     {
       "code": "variable-unresolved",
@@ -893,12 +833,6 @@
       "message": "variable id VariableID:2759:71582 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
     },
     {
-      "code": "text-channel-unsupported",
-      "nodePath": "Button:variant=secondary, state=hover, isDisabled=false/Label",
-      "field": "text",
-      "message": "text channel(s) with no dump v1 projection: lineHeight 20px (PIXELS) — typography carries (fontSize, fontStyle, style identity) only"
-    },
-    {
       "code": "variable-unresolved",
       "nodePath": "Button:variant=bare, state=hover, isDisabled=false",
       "field": "itemSpacing",
@@ -969,12 +903,6 @@
       "nodePath": "Button:variant=bare, state=hover, isDisabled=false/Label",
       "field": "fill",
       "message": "variable id VariableID:2759:71582 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
-    },
-    {
-      "code": "text-channel-unsupported",
-      "nodePath": "Button:variant=bare, state=hover, isDisabled=false/Label",
-      "field": "text",
-      "message": "text channel(s) with no dump v1 projection: lineHeight 20px (PIXELS) — typography carries (fontSize, fontStyle, style identity) only"
     },
     {
       "code": "variable-unresolved",
@@ -1055,12 +983,6 @@
       "message": "variable id VariableID:2759:71596 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
     },
     {
-      "code": "text-channel-unsupported",
-      "nodePath": "Button:variant=primary, state=active, isDisabled=false/Label",
-      "field": "text",
-      "message": "text channel(s) with no dump v1 projection: lineHeight 20px (PIXELS) — typography carries (fontSize, fontStyle, style identity) only"
-    },
-    {
       "code": "variable-unresolved",
       "nodePath": "Button:variant=knockout, state=active, isDisabled=false",
       "field": "itemSpacing",
@@ -1131,12 +1053,6 @@
       "nodePath": "Button:variant=knockout, state=active, isDisabled=false/Label",
       "field": "fill",
       "message": "variable id VariableID:2759:71580 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
-    },
-    {
-      "code": "text-channel-unsupported",
-      "nodePath": "Button:variant=knockout, state=active, isDisabled=false/Label",
-      "field": "text",
-      "message": "text channel(s) with no dump v1 projection: lineHeight 20px (PIXELS) — typography carries (fontSize, fontStyle, style identity) only"
     },
     {
       "code": "variable-unresolved",
@@ -1217,12 +1133,6 @@
       "message": "variable id VariableID:2759:71581 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
     },
     {
-      "code": "text-channel-unsupported",
-      "nodePath": "Button:variant=secondary, state=active, isDisabled=false/Label",
-      "field": "text",
-      "message": "text channel(s) with no dump v1 projection: lineHeight 20px (PIXELS) — typography carries (fontSize, fontStyle, style identity) only"
-    },
-    {
       "code": "variable-unresolved",
       "nodePath": "Button:variant=bare, state=active, isDisabled=false",
       "field": "itemSpacing",
@@ -1293,12 +1203,6 @@
       "nodePath": "Button:variant=bare, state=active, isDisabled=false/Label",
       "field": "fill",
       "message": "variable id VariableID:2759:71580 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
-    },
-    {
-      "code": "text-channel-unsupported",
-      "nodePath": "Button:variant=bare, state=active, isDisabled=false/Label",
-      "field": "text",
-      "message": "text channel(s) with no dump v1 projection: lineHeight 20px (PIXELS) — typography carries (fontSize, fontStyle, style identity) only"
     },
     {
       "code": "variable-unresolved",
@@ -1409,12 +1313,6 @@
       "message": "variable id VariableID:2759:71598 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
     },
     {
-      "code": "text-channel-unsupported",
-      "nodePath": "Button:variant=primary, state=focus, isDisabled=false/Label",
-      "field": "text",
-      "message": "text channel(s) with no dump v1 projection: lineHeight 20px (PIXELS) — typography carries (fontSize, fontStyle, style identity) only"
-    },
-    {
       "code": "variable-unresolved",
       "nodePath": "Button:variant=knockout, state=focus, isDisabled=false",
       "field": "itemSpacing",
@@ -1515,12 +1413,6 @@
       "nodePath": "Button:variant=knockout, state=focus, isDisabled=false/Label",
       "field": "fill",
       "message": "variable id VariableID:2759:71581 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
-    },
-    {
-      "code": "text-channel-unsupported",
-      "nodePath": "Button:variant=knockout, state=focus, isDisabled=false/Label",
-      "field": "text",
-      "message": "text channel(s) with no dump v1 projection: lineHeight 20px (PIXELS) — typography carries (fontSize, fontStyle, style identity) only"
     },
     {
       "code": "variable-unresolved",
@@ -1631,12 +1523,6 @@
       "message": "variable id VariableID:2759:71581 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
     },
     {
-      "code": "text-channel-unsupported",
-      "nodePath": "Button:variant=secondary, state=focus, isDisabled=false/Label",
-      "field": "text",
-      "message": "text channel(s) with no dump v1 projection: lineHeight 20px (PIXELS) — typography carries (fontSize, fontStyle, style identity) only"
-    },
-    {
       "code": "variable-unresolved",
       "nodePath": "Button:variant=bare, state=focus, isDisabled=false",
       "field": "itemSpacing",
@@ -1737,12 +1623,6 @@
       "nodePath": "Button:variant=bare, state=focus, isDisabled=false/Label",
       "field": "fill",
       "message": "variable id VariableID:2759:71581 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used"
-    },
-    {
-      "code": "text-channel-unsupported",
-      "nodePath": "Button:variant=bare, state=focus, isDisabled=false/Label",
-      "field": "text",
-      "message": "text channel(s) with no dump v1 projection: lineHeight 20px (PIXELS) — typography carries (fontSize, fontStyle, style identity) only"
     },
     {
       "code": "variable-unresolved",

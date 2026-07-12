@@ -10,12 +10,13 @@
  * what CI referees (roundtrip-rest) is what the demo shows.
  */
 import { importFromUrl } from '../../../extract/figma/rest/fetch.js';
-import { proposeBatchFromDump, proposeFromFigmaDump } from '../../../core/index.js';
+import { dumpCapturesHidden, proposeBatchFromDump, proposeFromFigmaDump } from '../../../core/index.js';
 
 // Captured tokens (dump v1.4 `_variables`) — the designer's real variables,
 // built by the SAME core function the receipts referee.
 export { capturedTokensFromDump } from '../../../core/index.js';
-import { contractIdByName } from './data.js';
+import { contractIdByKey, contractIdByName, contractsById } from './data.js';
+import { sessionRegistry } from './session-registry.js';
 import { activeTokens } from './token-source.js';
 
 export type FigmaImportResult = Awaited<ReturnType<typeof importFromUrl>>;
@@ -70,10 +71,20 @@ export function proposalsFromDump(dump: FigmaImportResult['dump']): DumpProposal
   // values whose variable names are unrecoverable (the non-Enterprise
   // 403) become provisional `imported.*` tokens the proposal binds — the
   // degraded import stays styled at literal fidelity (core/mint-tokens.ts).
+  // SESSION LINKING (dump v1.5): the scope is repo contracts PLUS every
+  // contract already imported this session (workspace) — a composite
+  // imported after its children LINKS to them (componentSetKey first, name
+  // fallback; a name match whose keys contradict is refused by name).
+  const session = sessionRegistry();
   return proposeBatchFromDump(dump, {
     corpus: activeTokens().corpus,
-    contractIdByName,
+    contractIdByName: new Map([...contractIdByName, ...session.idByName]),
+    contractIdByKey: new Map([...contractIdByKey, ...session.idByKey]),
+    contractsById: new Map([...contractsById, ...session.contracts]),
     fileKey: dump._provenance?.fileKey ?? null,
     mintUnbound: true,
+    // Visible-in-default-variant boolean defaults are evidence only when the
+    // dump's producer captures `hidden` (dump v1.1+ provenance).
+    hiddenCaptured: dumpCapturesHidden(dump._provenance),
   });
 }

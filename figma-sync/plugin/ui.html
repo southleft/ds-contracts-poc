@@ -433,7 +433,7 @@
      Do not edit here: scripts/build-plugin-zip.mjs refuses to package this
      plugin when the block below differs from the repo file. -->
 <script type="text/plain" id="dump-source">
-// Design-side ANATOMY dump — the canonical node-tree capture (dump v1.4).
+// Design-side ANATOMY dump — the canonical node-tree capture (dump v1.5).
 //
 // Transport-agnostic Plugin API script (same boundary as extract/figma-dump.js
 // and parity/extract-figma.plugin.js): run it through any console/plugin-runner
@@ -475,9 +475,22 @@
 //   instanceOf         INSTANCE nodes: the main component's owning set name
 //   componentProperties INSTANCE nodes (dump v1.1, additive): applied property
 //                      values, so nested component refs keep their fixed props
+//   instanceKey /      INSTANCE nodes (dump v1.5): the main component's publish
+//   instanceSetKey     key and its owning set's key — rename-safe identity the
+//                      session-linking resolver matches against in-scope
+//                      contracts' anchors (componentSetKey first, name fallback)
+//   bbox               INSTANCE nodes (dump v1.5): the OBSERVED bounding box —
+//                      honest geometry for child STUBS (a correctly-sized box;
+//                      instance internals still never recursed)
+//   swapPreferredValues set-level (dump v1.5): INSTANCE_SWAP preferredValues
+//                      (component keys) → slot `accepts` where the keys resolve
+//   boolDefaults       set-level (dump v1.5): BOOLEAN property defaultValues —
+//                      visibility-bound boolean prop defaults, captured evidence
+//   SLOT nodes         native Figma slots (Schema 2025, dump v1.5): carried
+//                      verbatim (type 'SLOT', children walked) — propose maps
+//                      them to the same contract slot part as INSTANCE_SWAP
 //
-// NOT captured in v1 (declared limits, noted by propose.ts): INSTANCE_SWAP
-// preferredValues (→ slot `accepts`), property definitions/defaults, element
+// NOT captured in v1 (declared limits, noted by propose.ts): element
 // semantics, events. Read-only — mutates nothing.
 
 // Target set names. Empty array = every local set/component except the Slot
@@ -591,6 +604,12 @@ const dumpPaint = async (paints, nodePath, field, consumer) => {
 
 async function dumpNode(node, nodePath, parent) {
   const out = { name: node.name, type: node.type };
+
+  // dump v1.5: variant-ROOT observed bounding box — the drawn dimension of a
+  // FIXED root axis is otherwise unrecoverable (CBDS Dialog field case).
+  if (node.type === 'COMPONENT' && typeof node.width === 'number' && typeof node.height === 'number') {
+    out.bbox = { width: round2(node.width), height: round2(node.height) };
+  }
 
   // dump v1.3 (#42): parametric decor geometry is CARRIED (rotation rides it).
   const shape = dumpShape(node, parent);
@@ -740,13 +759,28 @@ async function dumpNode(node, nodePath, parent) {
     if (main) {
       out.instanceOf =
         main.parent && main.parent.type === 'COMPONENT_SET' ? main.parent.name : main.name;
+      // dump v1.5: rename-safe identity — the main component's publish key
+      // and its owning set's key; the session-linking resolver matches these
+      // against in-scope contracts' anchors (componentSetKey first).
+      if (main.key) out.instanceKey = main.key;
+      if (main.parent && main.parent.type === 'COMPONENT_SET' && main.parent.key) {
+        out.instanceSetKey = main.parent.key;
+      }
+    }
+    // dump v1.5: OBSERVED bounding box — honest geometry for child stubs
+    // (dump v1 still never recurses into instance internals).
+    if (typeof node.width === 'number' && typeof node.height === 'number') {
+      out.bbox = { width: round2(node.width), height: round2(node.height) };
     }
     // dump v1.1: applied property values, so component refs keep fixed props.
+    // dump v1.5: keys keep their "#id" suffix (the Plugin API's own spelling)
+    // — a suffixed string key is a TEXT property with certainty; stripping
+    // collapsed TEXT and VARIANT properties into one ambiguous shape.
     try {
       const props = {};
       for (const [key, def] of Object.entries(node.componentProperties || {})) {
         if (def.type === 'INSTANCE_SWAP') continue; // slots ride propRefs instead
-        props[key.split('#')[0]] = def.value;
+        props[key] = def.value;
       }
       if (Object.keys(props).length > 0) out.componentProperties = props;
     } catch (e) {
@@ -762,11 +796,36 @@ async function dumpNode(node, nodePath, parent) {
   return out;
 }
 
+// dump v1.5: set-level INSTANCE_SWAP preferredValues (component keys →
+// slot `accepts` downstream) and BOOLEAN property defaults (the one
+// property default the variants alone cannot recover — visibility-bound
+// boolean props). Definitions can throw on broken sets — tolerated, the
+// channels are additive.
+function dumpPropertyDefinitions(node) {
+  const out = { swapPreferredValues: {}, boolDefaults: {} };
+  try {
+    for (const [propName, def] of Object.entries(node.componentPropertyDefinitions || {})) {
+      const name = propName.split('#')[0];
+      if (def.type === 'INSTANCE_SWAP' && Array.isArray(def.preferredValues) && def.preferredValues.length > 0) {
+        out.swapPreferredValues[name] = def.preferredValues.map((v) => ({ type: v.type, key: v.key }));
+      }
+      if (def.type === 'BOOLEAN' && typeof def.defaultValue === 'boolean') {
+        out.boolDefaults[name] = def.defaultValue;
+      }
+    }
+  } catch (e) {
+    // componentPropertyDefinitions throws on some non-set components —
+    // absence of the channels means not captured, a declared limit.
+  }
+  return out;
+}
+
 const dumps = {
   _provenance: {
     fileKey: figma.fileKey || null,
     extractedAt: new Date().toISOString().slice(0, 10),
-    note: 'Node-tree dump (extract/figma/dump.plugin.js, dump v1.4) for design→contract proposal.',
+    note: 'Node-tree dump (extract/figma/dump.plugin.js, dump v1.5) for design→contract proposal.',
+    dumpVersion: '1.5',
   },
 };
 dumps._degradations = degradations;
@@ -782,6 +841,7 @@ for (const page of figma.root.children) {
     } else {
       variants.push(await dumpNode(node, node.name + ':' + node.name));
     }
+    const defs = dumpPropertyDefinitions(node);
     dumps[node.name] = {
       setName: node.name,
       type: node.type,
@@ -789,6 +849,8 @@ for (const page of figma.root.children) {
       key: node.key,
       variants,
     };
+    if (Object.keys(defs.swapPreferredValues).length > 0) dumps[node.name].swapPreferredValues = defs.swapPreferredValues;
+    if (Object.keys(defs.boolDefaults).length > 0) dumps[node.name].boolDefaults = defs.boolDefaults;
   }
 }
 return dumps;

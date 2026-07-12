@@ -103,7 +103,7 @@
     {
       "code": "rotation-unsupported",
       "nodePath": "Tooltip:placement=left/Arrow Wrapper",
-      "message": "rotation -1.5707963705062848 has no dump v1 projection — node renders unrotated (#42 class)"
+      "message": "rotation -1.5707963705062848 on a FRAME has no dump projection (rotation is carried only on shape decor — dump v1.3) — node renders unrotated (#42 residue)"
     },
     {
       "code": "variable-unresolved",
@@ -114,7 +114,7 @@
     {
       "code": "vector-geometry-unsupported",
       "nodePath": "Tooltip:placement=left/Arrow Wrapper/Arrow",
-      "message": "VECTOR geometry is not captured (#42) — the node carries paints only and renders as a box"
+      "message": "VECTOR geometry (arbitrary paths) is not captured — parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
     },
     {
       "code": "variable-unresolved",
@@ -215,7 +215,7 @@
     {
       "code": "vector-geometry-unsupported",
       "nodePath": "Tooltip:placement=topLeft/Arrow Wrapper/Arrow",
-      "message": "VECTOR geometry is not captured (#42) — the node carries paints only and renders as a box"
+      "message": "VECTOR geometry (arbitrary paths) is not captured — parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
     },
     {
       "code": "variable-unresolved",
@@ -226,12 +226,12 @@
     {
       "code": "rotation-unsupported",
       "nodePath": "Tooltip:placement=bottomLeft/Arrow Wrapper/Arrow",
-      "message": "rotation -3.1415925661670165 has no dump v1 projection — node renders unrotated (#42 class)"
+      "message": "rotation -3.1415925661670165 on a VECTOR has no dump projection (rotation is carried only on shape decor — dump v1.3) — node renders unrotated (#42 residue)"
     },
     {
       "code": "vector-geometry-unsupported",
       "nodePath": "Tooltip:placement=bottomLeft/Arrow Wrapper/Arrow",
-      "message": "VECTOR geometry is not captured (#42) — the node carries paints only and renders as a box"
+      "message": "VECTOR geometry (arbitrary paths) is not captured — parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
     },
     {
       "code": "variable-unresolved",
@@ -332,12 +332,12 @@
     {
       "code": "rotation-unsupported",
       "nodePath": "Tooltip:placement=bottom/Arrow Wrapper/Arrow",
-      "message": "rotation -3.1415925661670165 has no dump v1 projection — node renders unrotated (#42 class)"
+      "message": "rotation -3.1415925661670165 on a VECTOR has no dump projection (rotation is carried only on shape decor — dump v1.3) — node renders unrotated (#42 residue)"
     },
     {
       "code": "vector-geometry-unsupported",
       "nodePath": "Tooltip:placement=bottom/Arrow Wrapper/Arrow",
-      "message": "VECTOR geometry is not captured (#42) — the node carries paints only and renders as a box"
+      "message": "VECTOR geometry (arbitrary paths) is not captured — parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
     },
     {
       "code": "variable-unresolved",
@@ -528,7 +528,7 @@
     {
       "code": "vector-geometry-unsupported",
       "nodePath": "Tooltip:placement=top/Arrow Wrapper/Arrow",
-      "message": "VECTOR geometry is not captured (#42) — the node carries paints only and renders as a box"
+      "message": "VECTOR geometry (arbitrary paths) is not captured — parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
     },
     {
       "code": "variable-unresolved",
@@ -629,7 +629,7 @@
     {
       "code": "vector-geometry-unsupported",
       "nodePath": "Tooltip:placement=topRight/Arrow Wrapper/Arrow",
-      "message": "VECTOR geometry is not captured (#42) — the node carries paints only and renders as a box"
+      "message": "VECTOR geometry (arbitrary paths) is not captured — parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
     },
     {
       "code": "variable-unresolved",
@@ -640,12 +640,12 @@
     {
       "code": "rotation-unsupported",
       "nodePath": "Tooltip:placement=bottomRight/Arrow Wrapper/Arrow",
-      "message": "rotation -3.1415925661670165 has no dump v1 projection — node renders unrotated (#42 class)"
+      "message": "rotation -3.1415925661670165 on a VECTOR has no dump projection (rotation is carried only on shape decor — dump v1.3) — node renders unrotated (#42 residue)"
     },
     {
       "code": "vector-geometry-unsupported",
       "nodePath": "Tooltip:placement=bottomRight/Arrow Wrapper/Arrow",
-      "message": "VECTOR geometry is not captured (#42) — the node carries paints only and renders as a box"
+      "message": "VECTOR geometry (arbitrary paths) is not captured — parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
     },
     {
       "code": "variable-unresolved",
@@ -740,7 +740,7 @@
     {
       "code": "rotation-unsupported",
       "nodePath": "Tooltip:placement=right/Arrow Wrapper",
-      "message": "rotation -1.5707963705062848 has no dump v1 projection — node renders unrotated (#42 class)"
+      "message": "rotation -1.5707963705062848 on a FRAME has no dump projection (rotation is carried only on shape decor — dump v1.3) — node renders unrotated (#42 residue)"
     },
     {
       "code": "variable-unresolved",
@@ -751,12 +751,12 @@
     {
       "code": "rotation-unsupported",
       "nodePath": "Tooltip:placement=right/Arrow Wrapper/Arrow",
-      "message": "rotation -3.1415925661670165 has no dump v1 projection — node renders unrotated (#42 class)"
+      "message": "rotation -3.1415925661670165 on a VECTOR has no dump projection (rotation is carried only on shape decor — dump v1.3) — node renders unrotated (#42 residue)"
     },
     {
       "code": "vector-geometry-unsupported",
       "nodePath": "Tooltip:placement=right/Arrow Wrapper/Arrow",
-      "message": "VECTOR geometry is not captured (#42) — the node carries paints only and renders as a box"
+      "message": "VECTOR geometry (arbitrary paths) is not captured — parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
     },
     {
       "code": "variable-unresolved",

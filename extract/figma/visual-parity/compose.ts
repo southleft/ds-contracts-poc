@@ -8,12 +8,20 @@
  * dump subjects run the real import path (proposeFromDump with minting +
  * child stubs); contract subjects are the shipping catalog contracts over
  * repo tokens alone.
+ *
+ * SESSION SCOPE (dump v1.5): a dump subject may declare sibling dumps
+ * (subject.scope) that are proposed FIRST and registered — contract, drawn
+ * set name, componentSetKey, minted + captured token layers — before the
+ * subject proposes. This is the parity mirror of importing components in
+ * sequence in one playground session: the subject's nested instances LINK
+ * to the session contracts (key first, name fallback) instead of stubbing.
  */
 import { readFileSync } from 'node:fs';
 import path from 'node:path';
 import {
   capturedTokensFromDump,
   ContractSchema,
+  dumpCapturesHidden,
   mintedTokenCss,
   proposeFromDump,
   tokenInventoryFromJson,
@@ -39,6 +47,9 @@ export interface RenderablePackage {
     /** Captured variable names pruned because a repo token shadows them. */
     capturedShadowed: string[];
     childStubs: string[];
+    /** Contracts proposed from session-scope sibling dumps (dump v1.5
+     *  linking) and registered before the subject proposed. */
+    sessionContracts: string[];
     proposalNotes: number;
   };
 }
@@ -74,6 +85,19 @@ function composeCaptured(
   };
 }
 
+function pickSet(dump: DumpFile, dumpPath: string, wanted: string | undefined, who: string): [string, DumpSet] {
+  const sets = Object.entries(dump).filter(
+    (e): e is [string, DumpSet] => !e[0].startsWith('_') && isDumpSet(e[1]),
+  );
+  const picked = wanted ? sets.find(([name]) => name === wanted) : sets.length === 1 ? sets[0] : undefined;
+  if (!picked) {
+    throw new Error(
+      `${who}: ${wanted ? `set "${wanted}" not in ${dumpPath}` : `${dumpPath} carries ${sets.length} sets — name one`}`,
+    );
+  }
+  return picked;
+}
+
 export function composeSubject(subject: ParitySubject): RenderablePackage {
   const d = data();
   const baseCss = readFileSync(path.join(REPO, 'src', 'styles', 'tokens.css'), 'utf8');
@@ -88,68 +112,111 @@ export function composeSubject(subject: ParitySubject): RenderablePackage {
       inventory: d.inventory,
       tokensCss: baseCss,
       icons: d.icons,
-      receipts: { mintedCount: 0, capturedCount: 0, capturedShadowed: [], childStubs: [], proposalNotes: 0 },
+      receipts: { mintedCount: 0, capturedCount: 0, capturedShadowed: [], childStubs: [], sessionContracts: [], proposalNotes: 0 },
     };
   }
 
-  const dump = readJson(path.join(REPO, subject.dumpPath)) as DumpFile;
-  const sets = Object.entries(dump).filter(
-    (e): e is [string, DumpSet] => !e[0].startsWith('_') && isDumpSet(e[1]),
-  );
-  const picked = subject.set ? sets.find(([name]) => name === subject.set) : sets.length === 1 ? sets[0] : undefined;
-  if (!picked) {
-    throw new Error(
-      `${subject.id}: ${subject.set ? `set "${subject.set}" not in dump` : `dump carries ${sets.length} sets — name one via subject.set`}`,
-    );
-  }
-  if (picked[1].nodeId && picked[1].nodeId !== subject.setNodeId) {
-    throw new Error(`${subject.id}: dump set nodeId ${picked[1].nodeId} != registry setNodeId ${subject.setNodeId}`);
-  }
-
-  const result = proposeFromDump(picked[1], {
-    corpus: d.corpus,
-    contractIdByName: d.contractIdByName,
-    // Without the contracts themselves, canonicalizeInstanceProps falls back
-    // to spelling passthrough — a name-coincidence child ("Button" in the
-    // Shoelace kit → repo ds.button) then carries foreign props the referee
-    // refuses (field failure: shoelace-button-group, 8 named violations, 36
-    // variants undiffable). With the contracts in scope, unmappable applied
-    // props DROP with a named note each and the composite renders.
-    contractsById: d.contracts,
-    fileKey: dump._provenance?.fileKey ?? subject.fileKey,
-    mintUnbound: true,
-  });
-  const contract = ContractSchema.parse(result.contract);
-  const childStubs = (result.childStubs ?? []).map((s) => ContractSchema.parse(s));
-
-  // Layer order (token-source.ts recompose): repo → captured → minted.
-  const captured = capturedTokensFromDump(dump as Record<string, unknown>);
-  const withCaptured = composeCaptured(d.inventory, captured);
-  const minted = result.mintedTokens;
-  const inventory = minted
-    ? new Set([...withCaptured.inventory, ...tokenInventoryFromJson([minted.tree])])
-    : withCaptured.inventory;
-  const mintedCssBlock = minted
-    ? `/* Minted provisional tokens (imported.*) — literal fidelity. */\n${mintedTokenCss(minted.tree)}`
-    : '';
-
+  // Accumulating SESSION registries — repo contracts first, then each scope
+  // proposal, then the subject (the playground's import-in-sequence shape).
   const contracts = new Map(d.contracts);
-  contracts.set(contract.id, contract);
-  for (const stub of childStubs) contracts.set(stub.id, stub);
+  const contractIdByName = new Map(d.contractIdByName);
+  const contractIdByKey = new Map(d.contractIdByKey);
+  let inventory = d.inventory;
+  const cssBlocks: string[] = [baseCss];
+  const receipts: RenderablePackage['receipts'] = {
+    mintedCount: 0,
+    capturedCount: 0,
+    capturedShadowed: [],
+    childStubs: [],
+    sessionContracts: [],
+    proposalNotes: 0,
+  };
+
+  const proposeOne = (
+    dumpPath: string,
+    wantedSet: string | undefined,
+    who: string,
+  ): { contract: Contract; stubs: Contract[]; notes: number } => {
+    const dump = readJson(path.join(REPO, dumpPath)) as DumpFile;
+    const [setName, set] = pickSet(dump, dumpPath, wantedSet, who);
+    // Captured layer BEFORE the proposal registers minted refs (token-source
+    // recompose order: repo → captured → minted; repo wins on collision, and
+    // a captured name already registered by an earlier session dump is
+    // shadowed the same way).
+    const captured = capturedTokensFromDump(dump as Record<string, unknown>);
+    const withCaptured = composeCaptured(inventory, captured);
+    inventory = withCaptured.inventory;
+    if (withCaptured.css) cssBlocks.push(withCaptured.css);
+    receipts.capturedCount += withCaptured.count;
+    receipts.capturedShadowed.push(...withCaptured.shadowed);
+
+    const result = proposeFromDump(set, {
+      corpus: d.corpus,
+      // The SESSION registries — repo + every previously registered proposal:
+      // nested instances LINK (componentSetKey first, drawn-name fallback)
+      // instead of stubbing; unmappable applied props DROP with a named note
+      // each (field failure: shoelace-button-group, 8 named violations, 36
+      // variants undiffable, when foreign props rode a name-coincidence ref).
+      contractIdByName,
+      contractIdByKey,
+      contractsById: contracts,
+      fileKey: dump._provenance?.fileKey ?? subject.fileKey,
+      mintUnbound: true,
+      // Visible-in-default-variant boolean defaults are evidence only when
+      // the dump's producer captures `hidden` (dump v1.1+ provenance).
+      hiddenCaptured: dumpCapturesHidden(dump._provenance),
+    });
+    const contract = ContractSchema.parse(result.contract);
+    const stubs = (result.childStubs ?? []).map((s) => ContractSchema.parse(s));
+
+    if (result.mintedTokens) {
+      inventory = new Set([...inventory, ...tokenInventoryFromJson([result.mintedTokens.tree])]);
+      cssBlocks.push(
+        `/* Minted provisional tokens (imported.*) — ${who}, literal fidelity. */\n${mintedTokenCss(result.mintedTokens.tree)}`,
+      );
+      receipts.mintedCount += result.mintedTokens.count;
+    }
+
+    // Register: the contract under its id, its DRAWN set name AND its
+    // contract name (a sanitized proposal name differs from the drawn set
+    // name nested instances are spelled with), and its componentSetKey.
+    contracts.set(contract.id, contract);
+    contractIdByName.set(contract.name, contract.id);
+    contractIdByName.set(setName, contract.id);
+    const setKey = contract.anchors.figma.componentSetKey;
+    if (setKey) contractIdByKey.set(setKey, contract.id);
+    // Stubs never override a registered contract (playground precedence).
+    for (const stub of stubs) {
+      if (!contracts.has(stub.id)) contracts.set(stub.id, stub);
+    }
+    return { contract, stubs, notes: result.notes.length };
+  };
+
+  for (const entry of subject.scope ?? []) {
+    const scoped = proposeOne(entry.dumpPath, entry.set, `${subject.id} scope(${entry.dumpPath})`);
+    receipts.sessionContracts.push(scoped.contract.id);
+    receipts.proposalNotes += scoped.notes;
+  }
+
+  const own = proposeOne(subject.dumpPath, subject.set, subject.id);
+  receipts.childStubs.push(...own.stubs.map((s) => s.id));
+  receipts.proposalNotes += own.notes;
+
+  // Registry/dump agreement (the original guard): the subject's set nodeId
+  // must match the parity registry's.
+  const ownDump = readJson(path.join(REPO, subject.dumpPath)) as DumpFile;
+  const [, ownSet] = pickSet(ownDump, subject.dumpPath, subject.set, subject.id);
+  if (ownSet.nodeId && ownSet.nodeId !== subject.setNodeId) {
+    throw new Error(`${subject.id}: dump set nodeId ${ownSet.nodeId} != registry setNodeId ${subject.setNodeId}`);
+  }
 
   return {
     subject,
-    contract,
+    contract: own.contract,
     contracts,
     inventory,
-    tokensCss: [baseCss, withCaptured.css, mintedCssBlock].filter(Boolean).join('\n'),
+    tokensCss: cssBlocks.filter(Boolean).join('\n'),
     icons: d.icons,
-    receipts: {
-      mintedCount: minted?.count ?? 0,
-      capturedCount: withCaptured.count,
-      capturedShadowed: withCaptured.shadowed,
-      childStubs: childStubs.map((s) => s.id),
-      proposalNotes: result.notes.length,
-    },
+    receipts,
   };
 }

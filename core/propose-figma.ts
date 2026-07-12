@@ -22,7 +22,7 @@
  */
 import { ContractSchema, pascal, STATE_PREVIEW_PROPERTY, statePreviewLabel } from '../scripts/contract-schema.js';
 import { kebab } from '../extract/types.js';
-import { isDumpSet, type DumpEffect, type DumpNode, type DumpSet } from '../extract/figma/types.js';
+import { isDumpSet, type DumpEffect, type DumpNode, type DumpPaint, type DumpPreferredValue, type DumpSet } from '../extract/figma/types.js';
 import type { TokenCorpus } from './token-corpus.js';
 import { mintTokens, type MintAxis, type MintObservation, type MintedEntry } from './mint-tokens.js';
 
@@ -122,11 +122,27 @@ export const pascalComponentName = (setName: string): string => {
   return /^[A-Za-z]/.test(pascal) ? pascal : `C${pascal || 'omponent'}`;
 };
 
+/** True when a dump's PRODUCER captures node visibility (`hidden`, dump
+ *  v1.1+) — the provenance names its dump revision (`dumpVersion` since
+ *  v1.5; the note string names v1.1–v1.4). With a capturing producer,
+ *  a visibility-bound node NOT hidden in the default variant is POSITIVE
+ *  evidence its boolean prop defaults to true; without one, absence stays
+ *  "not captured" and no default is invented. */
+export const dumpCapturesHidden = (prov?: { note?: string; dumpVersion?: string } | null): boolean => {
+  if (!prov) return false;
+  if (typeof prov.dumpVersion === 'string') return true;
+  return /dump v1\.[1-9]/.test(prov.note ?? '');
+};
+
 /** The slice of a child contract canonicalization needs — kept minimal so the
- * playground can pass its bundled contracts without importing the zod types. */
+ * playground can pass its bundled contracts without importing the zod types.
+ * `anchors` (dump v1.5) lets the resolver refuse a NAME-coincidence link when
+ * key evidence contradicts it (a "Button" drawn in a foreign kit must not
+ * link to the repo's ds.button just because the names collide). */
 export interface MinimalChildContract {
   id: string;
   props: Array<{ name: string; bindings: { figma: { property?: string; values?: Record<string, string> } } }>;
+  anchors?: { figma?: { componentSetKey?: string | null } };
 }
 
 // ---------------------------------------------------------------------------
@@ -636,6 +652,16 @@ interface Ctx {
   corpus: TokenCorpus;
   contractIdByName: Map<string, string>;
   contractsById?: Map<string, MinimalChildContract>;
+  /** componentSetKey (or setless component key) → contract id (dump v1.5) —
+   *  the session-linking index; checked BEFORE the name lookup. */
+  contractIdByKey?: Map<string, string>;
+  /** Set-level INSTANCE_SWAP preferredValues (dump v1.5), property → keys. */
+  swapPreferredValues?: Record<string, DumpPreferredValue[]>;
+  /** Set-level BOOLEAN property defaults (dump v1.5). */
+  boolDefaults?: Record<string, boolean>;
+  /** The dump's producer captures `hidden` (dump v1.1+) — see
+   *  dumpCapturesHidden; callers derive it from the dump's _provenance. */
+  hiddenCaptured?: boolean;
   prefix: string;
   notes: string[];
   unbound: UnboundValue[];
@@ -664,8 +690,24 @@ interface Ctx {
 interface StubCapture {
   id: string;
   instanceOf: string;
+  /** The observed owning-set publish key (dump v1.5) — carried onto the
+   *  stub's anchors.figma.componentSetKey so importing the real set later
+   *  LINKS back to this identity by key. */
+  setKey?: string;
   /** Every occurrence's applied componentProperties, across variants. */
   applied: Array<Record<string, string | boolean>>;
+  /** dump v1.5 observed per-occurrence geometry facts — the honest box the
+   *  stub renders (bbox + primary paints as drawn; anatomy stays uncaptured).
+   *  Empty for pre-v1.5 dumps: the stub renders nothing, as before. */
+  observed: Array<{
+    variant: string;
+    applied?: Record<string, string | boolean>;
+    bbox?: { width: number; height: number };
+    fill?: DumpPaint;
+    stroke?: DumpPaint;
+    strokeWeight?: number;
+    cornerRadius?: number;
+  }>;
 }
 
 const first = <T>(occ: Occ[], pick: (n: DumpNode) => T | undefined): T | undefined => {
@@ -1784,15 +1826,290 @@ function isSelfInstance(instanceOf: string, ctx: Ctx): boolean {
  *  component ref and the stub contract, so the two can never drift apart.
  *  Distinct instance names that sanitize to the same slug (or collide with the
  *  proposal's own id) get a deterministic numeric suffix in arrival order —
- *  never a silent merge; the caller notes the collision by name. */
-function stubIdFor(instanceOf: string, ctx: Ctx): { id: string; collidedWith: string | null } {
+ *  never a silent merge; the caller notes the collision by name.
+ *
+ *  KEY-AWARE (dump v1.5): when the instance carries a key, a derived id that
+ *  lands on an IN-SCOPE contract whose componentSetKey CONTRADICTS it is
+ *  suffixed past — otherwise the refused name-coincidence link would sneak
+ *  back in through the stub id ("Button" in a foreign kit deriving ds.button
+ *  while the repo's ds.button holds a different key). Without keys the
+ *  landing stays deliberate (census field case: "ListItem" landing on the
+ *  repo's ds.list-item is the wanted link). */
+function stubIdFor(
+  instanceOf: string,
+  ctx: Ctx,
+  keys?: { setKey?: string; key?: string },
+): { id: string; collidedWith: string | null } {
   for (const capture of ctx.stubs.values()) {
     if (capture.instanceOf === instanceOf) return { id: capture.id, collidedWith: null };
   }
+  const instKey = keys?.setKey ?? keys?.key;
+  const registeredConflict = (id: string): boolean => {
+    if (instKey === undefined) return false;
+    const regKey = ctx.contractsById?.get(id)?.anchors?.figma?.componentSetKey ?? null;
+    return regKey !== null && regKey !== instKey;
+  };
   const base = `${ctx.prefix}.${componentIdSlug(instanceOf)}`;
   let id = base;
-  for (let n = 2; ctx.stubs.has(id) || id === selfContractId(ctx); n += 1) id = `${base}-${n}`;
-  return { id, collidedWith: id === base ? null : ctx.stubs.get(base)?.instanceOf ?? ctx.setName };
+  for (let n = 2; ctx.stubs.has(id) || id === selfContractId(ctx) || registeredConflict(id); n += 1) {
+    id = `${base}-${n}`;
+  }
+  return {
+    id,
+    collidedWith:
+      id === base
+        ? null
+        : ctx.stubs.get(base)?.instanceOf ??
+          (registeredConflict(base) ? `the in-scope contract ${base} (its componentSetKey contradicts this instance's key)` : ctx.setName),
+  };
+}
+
+/** How (whether) a nested instance resolved to an in-scope contract. */
+interface ChildResolution {
+  id: string | null;
+  /** 'key' — matched an in-scope contract's componentSetKey/component key
+   *  (rename-safe); 'name' — the drawn name matched with no contradicting
+   *  key evidence. */
+  mechanism: 'key' | 'name' | null;
+  /** Set when a NAME match was REFUSED: the instance carries a key, the
+   *  named contract carries a different non-null componentSetKey — a
+   *  name-coincidence, not the same component. */
+  keyMismatch?: { contractId: string; contractKey: string; instanceKey: string };
+}
+
+/** SESSION-LINKING RESOLVER (dump v1.5): componentSetKey FIRST, name as the
+ *  fallback — and a name match that key evidence CONTRADICTS is refused
+ *  (field case: the Shoelace kit's "Button" name-collided with the repo's
+ *  ds.button and rendered the wrong design system's button). */
+function resolveChildContract(
+  instanceOf: string,
+  keys: { setKey?: string; key?: string },
+  ctx: Ctx,
+): ChildResolution {
+  const byKey = ctx.contractIdByKey;
+  if (byKey) {
+    const keyHit =
+      (keys.setKey !== undefined ? byKey.get(keys.setKey) : undefined) ??
+      (keys.key !== undefined ? byKey.get(keys.key) : undefined);
+    if (keyHit) return { id: keyHit, mechanism: 'key' };
+  }
+  const named = ctx.contractIdByName.get(instanceOf);
+  if (!named) return { id: null, mechanism: null };
+  const instKey = keys.setKey ?? keys.key;
+  const contractKey = ctx.contractsById?.get(named)?.anchors?.figma?.componentSetKey ?? null;
+  if (instKey !== undefined && contractKey !== null && contractKey !== instKey) {
+    return { id: null, mechanism: null, keyMismatch: { contractId: named, contractKey, instanceKey: instKey } };
+  }
+  return { id: named, mechanism: 'name' };
+}
+
+/** First captured identity keys across a merged node's occurrences. */
+const instanceKeysOf = (m: Merged): { setKey?: string; key?: string } => ({
+  setKey: first(m.occ, (n) => n.instanceSetKey),
+  key: first(m.occ, (n) => n.instanceKey),
+});
+
+/** Register (or extend) the STUB capture for an unresolved nested instance
+ *  and return its claimed contract id. ONE registration path serves the
+ *  component-ref branch and the slot design-time-content branch, so applied
+ *  values AND the dump v1.5 observed geometry (bbox + primary paints) land
+ *  on the same capture wherever the instance appears. */
+function captureStub(instanceOf: string, m: Merged, ctx: Ctx, where: string): string {
+  const resolved = stubIdFor(instanceOf, ctx, instanceKeysOf(m));
+  const stubId = resolved.id;
+  const isNew = !ctx.stubs.has(stubId);
+  const capture = ctx.stubs.get(stubId) ?? { id: stubId, instanceOf, applied: [], observed: [] };
+  if (capture.setKey === undefined) {
+    const setKey = first(m.occ, (n) => n.instanceSetKey);
+    if (setKey !== undefined) capture.setKey = setKey;
+  }
+  for (const o of m.occ) {
+    if (o.node.componentProperties) capture.applied.push(o.node.componentProperties);
+    if (o.node.bbox) {
+      capture.observed.push({
+        variant: o.variant,
+        ...(o.node.componentProperties ? { applied: o.node.componentProperties } : {}),
+        bbox: o.node.bbox,
+        ...(o.node.fill ? { fill: o.node.fill } : {}),
+        ...(o.node.stroke ? { stroke: o.node.stroke } : {}),
+        ...(o.node.strokeWeight !== undefined ? { strokeWeight: o.node.strokeWeight } : {}),
+        ...(o.node.cornerRadius !== undefined ? { cornerRadius: o.node.cornerRadius } : {}),
+      });
+    }
+  }
+  ctx.stubs.set(stubId, capture);
+  if (isNew && idSlugSanitized(instanceOf)) {
+    // Field case (CBDS kit): private-helper names ("_Avatar Indicator")
+    // and template names ("Button / Primary / Medium") derive ids the
+    // schema refuses — sanitized AT PROPOSAL, never refused at receive.
+    ctx.notes.push(
+      `${where}: nested instance name "${instanceOf}" contains characters a contract id cannot carry — stub id sanitized to "${stubId}" (rule: lowercase kebab, illegal characters → hyphens, runs collapsed, edge hyphens stripped, digit-led/empty gets "c"); the original spelling stays on the stub's name/description and in this note`,
+    );
+  }
+  if (isNew && resolved.collidedWith) {
+    ctx.notes.push(
+      `${where}: sanitized stub id for "${instanceOf}" collides with the id already claimed for "${resolved.collidedWith}" — disambiguated deterministically to "${stubId}" (arrival order), never silently merged`,
+    );
+  }
+  return stubId;
+}
+
+/** Named note for HOW a nested instance resolved (or why the name match was
+ *  refused) — every link mechanism is a review line, never silent. */
+function noteResolution(res: ChildResolution, instanceOf: string, keys: { setKey?: string; key?: string }, ctx: Ctx, where: string) {
+  if (res.mechanism === 'key') {
+    ctx.notes.push(
+      `${where}: nested instance of "${instanceOf}" LINKED to ${res.id} by componentSetKey ${keys.setKey ?? keys.key} (dump v1.5 — rename-safe: the key matches the contract's anchors, whatever either side is named)`,
+    );
+  } else if (res.mechanism === 'name' && res.id) {
+    ctx.notes.push(
+      `${where}: nested instance of "${instanceOf}" linked to ${res.id} by NAME${
+        keys.setKey ?? keys.key
+          ? ' (the instance carries a key but the contract\'s componentSetKey anchor is null — key confirmation unavailable; verify the link)'
+          : ' (no key captured — pre-v1.5 dump; verify the link)'
+      }`,
+    );
+  } else if (res.keyMismatch) {
+    ctx.notes.push(
+      `${where}: nested instance of "${instanceOf}" name-matches ${res.keyMismatch.contractId} but the keys CONTRADICT (instance ${res.keyMismatch.instanceKey} vs contract anchor ${res.keyMismatch.contractKey}) — name-coincidence link REFUSED (dump v1.5); a stub carries the child instead`,
+    );
+  }
+}
+
+/** Thread applied props that track a parent enum axis 1:1 into
+ *  "{parentProp}" refs (ComponentRefSchema: the child prop follows the
+ *  parent's per variant). Detection is exact-correlation over EVERY
+ *  occurrence: the canonical applied value equals the parent axis's
+ *  canonical value in each variant. Anything that varies WITHOUT an exact
+ *  axis match keeps the first value with a named note — never guessed. */
+function threadInstanceProps(
+  base: Record<string, string | boolean>,
+  perOccurrence: Array<{ variant: string; canonical: Record<string, string | boolean> }>,
+  ctx: Ctx,
+  where: string,
+  instanceOf: string,
+) {
+  if (perOccurrence.length < 2) return;
+  const enumAxes = ctx.axes.filter((a) => !isBoolAxis(a.values));
+  for (const propName of Object.keys(base)) {
+    const values = perOccurrence
+      .filter((o) => o.canonical[propName] !== undefined)
+      .map((o) => ({ variant: o.variant, value: o.canonical[propName] }));
+    const distinct = [...new Set(values.map((v) => String(v.value)))];
+    if (distinct.length <= 1) continue;
+    const axis = enumAxes.find((a) =>
+      values.every((v) => {
+        const axisValue = axisValuesOf(v.variant)[a.property];
+        return axisValue !== undefined && typeof v.value === 'string' && camel(axisValue) === v.value;
+      }),
+    );
+    if (axis) {
+      base[propName] = `{${axis.propName}}`;
+      ctx.notes.push(
+        `${where}: applied prop "${propName}" of the nested "${instanceOf}" tracks the "${axis.propName}" axis exactly across all ${values.length} occurrence(s) — threaded as "{${axis.propName}}" (the child follows the parent per variant)`,
+      );
+    } else {
+      ctx.notes.push(
+        `${where}: applied prop "${propName}" of the nested "${instanceOf}" varies across variants (${distinct.join(', ')}) without tracking any enum axis — first value "${String(base[propName])}" carried, review`,
+      );
+    }
+  }
+}
+
+/** Slot `accepts` from captured INSTANCE_SWAP preferredValues (dump v1.5):
+ *  keys that resolve through the session-linking index become accepts ids
+ *  (acceptsMode 'prefer' — Figma's own preferredValues tier); unresolved
+ *  keys stay a NAMED note carrying the keys verbatim. Pre-v1.5 dumps keep
+ *  the classic "author `accepts` manually" note. */
+function applySlotAccepts(slot: Record<string, unknown>, property: string, ctx: Ctx, where: string) {
+  const prefs = ctx.swapPreferredValues?.[property];
+  if (!prefs || prefs.length === 0) {
+    ctx.notes.push(
+      `${where}: slot "${property}" accepts (INSTANCE_SWAP preferredValues) is not captured in dump v1 — author \`accepts\` manually`,
+    );
+    return;
+  }
+  const resolvedIds: string[] = [];
+  const unresolved: string[] = [];
+  for (const p of prefs) {
+    const id = ctx.contractIdByKey?.get(p.key);
+    if (id && !resolvedIds.includes(id)) resolvedIds.push(id);
+    else if (!id) unresolved.push(p.key);
+  }
+  if (resolvedIds.length > 0) {
+    slot.accepts = resolvedIds;
+    slot.acceptsMode = 'prefer';
+    ctx.notes.push(
+      `${where}: slot "${property}" accepts proposed from INSTANCE_SWAP preferredValues (dump v1.5) — ${resolvedIds.join(', ')} resolved by component key; acceptsMode 'prefer' (Figma's preferredValues tier)`,
+    );
+  }
+  if (unresolved.length > 0) {
+    ctx.notes.push(
+      `${where}: slot "${property}" preferredValues name ${unresolved.length} component key(s) with no in-scope contract (${unresolved.join(', ')}) — not carried into \`accepts\` (import the referenced set(s) to resolve them by key)`,
+    );
+  }
+}
+
+/** Design-time slot content (dump v1.5): the drawn instance inside a swap-
+ *  bound slot becomes the slot's `defaultContent` — LINKED when the child
+ *  resolves in scope, otherwise a STUB with the observed geometry. Skipped
+ *  (named) when `accepts` is present and excludes the content id, and on
+ *  pre-v1.5 dumps (no bbox, nothing honest to render for a stub). */
+function applySlotDefaultContent(
+  slot: Record<string, unknown>,
+  property: string,
+  contentInstance: Merged,
+  ctx: Ctx,
+  where: string,
+) {
+  const instanceOf = first(contentInstance.occ, (n) => n.instanceOf);
+  if (!instanceOf || instanceOf === 'Slot') {
+    ctx.notes.push(`${where}: Slot-utility instance styling is the utility's own — elided`);
+    return;
+  }
+  const keys = instanceKeysOf(contentInstance);
+  const res = resolveChildContract(instanceOf, keys, ctx);
+  let contentId: string | null = res.id;
+  let provisional = false;
+  if (!contentId) {
+    const hasBbox = contentInstance.occ.some((o) => o.node.bbox !== undefined);
+    if (!hasBbox) {
+      // Pre-v1.5 dump: neither a contract nor observed geometry — the classic
+      // named limit stands.
+      ctx.notes.push(
+        `${where}: slot "${property}" holds a "${instanceOf}" instance as design-time content — defaultContent not proposed (${
+          res.keyMismatch
+            ? `name-matches ${res.keyMismatch.contractId} but the keys contradict, and no observed geometry is captured`
+            : 'no contract in scope and no observed geometry captured (pre-v1.5 dump)'
+        }), review`,
+      );
+      return;
+    }
+    noteResolution(res, instanceOf, keys, ctx, where);
+    contentId = captureStub(instanceOf, contentInstance, ctx, where);
+    provisional = true;
+  } else {
+    noteResolution(res, instanceOf, keys, ctx, where);
+  }
+  const accepts = slot.accepts as string[] | undefined;
+  if (accepts && !accepts.includes(contentId)) {
+    ctx.notes.push(
+      `${where}: slot "${property}" design-time content "${instanceOf}" (${contentId}) is outside the slot's proposed accepts (${accepts.join(', ')}) — defaultContent not proposed (defaultContent must be drawn from accepts), review`,
+    );
+    return;
+  }
+  const item: Record<string, unknown> = { id: contentId };
+  const applied = first(contentInstance.occ, (n) => n.componentProperties);
+  if (applied && !provisional) {
+    const canonical = canonicalizeInstanceProps(instanceOf, applied, res.id, ctx, where);
+    if (Object.keys(canonical).length > 0) item.props = canonical;
+  }
+  slot.defaultContent = [item];
+  ctx.notes.push(
+    provisional
+      ? `${where}: slot "${property}" design-time content "${instanceOf}" proposed as defaultContent [${contentId}] — a STUB rendering the OBSERVED geometry only (dump v1.5 bbox + primary paint; PROVISIONAL — import the real child set to replace it)`
+      : `${where}: slot "${property}" design-time content "${instanceOf}" proposed as defaultContent [${contentId}] (linked contract in scope, dump v1.5)`,
+  );
 }
 
 const isSpacer = (m: Merged): boolean =>
@@ -1934,6 +2251,21 @@ function buildPart(
     return part;
   }
 
+  if (m.type === 'SLOT') {
+    // NATIVE Figma slot node (Schema 2025, dump v1.5) — maps to the SAME
+    // contract slot part the INSTANCE_SWAP spelling maps to; the drawn
+    // spelling is provenance (regeneration should reproduce it).
+    const nativeSlot: Record<string, unknown> = { name: canonicalPropName(m.name) };
+    applySlotAccepts(nativeSlot, m.name, ctx, where);
+    part.slot = nativeSlot;
+    ctx.notes.push(
+      `${where}: NATIVE Figma slot node "${m.name}" (Schema 2025) — proposed as slot part (native-slot spelling, dump v1.5; regeneration should reproduce a native slot, not an INSTANCE_SWAP)`,
+    );
+    ctx.slots.push({ part, property: m.name, optional: false });
+    if (visibleWhen) part.visibleWhen = visibleWhen;
+    return part;
+  }
+
   if (m.type === 'INSTANCE') {
     // Node opacity/effects on an instance are PARENT-context visual facts,
     // but the part elides styling (the child contract owns it) and
@@ -1955,13 +2287,10 @@ function buildPart(
       // A swap-bound instance outside a dedicated wrapper: still a slot part,
       // just without wrapper geometry (not the generator's shape — note it).
       ctx.notes.push(`${where}: INSTANCE_SWAP-bound instance without a dedicated wrapper frame — slot proposed without layout, review`);
-      part.slot = { name: canonicalPropName(swapProperty) };
-      const instanceOf = first(m.occ, (n) => n.instanceOf);
-      if (instanceOf && instanceOf !== 'Slot') {
-        ctx.notes.push(
-          `${where}: slot "${swapProperty}" holds a "${instanceOf}" instance as design-time content — defaultContent not proposed (dump v1 does not carry its configuration), review`,
-        );
-      }
+      const bareSlot: Record<string, unknown> = { name: canonicalPropName(swapProperty) };
+      applySlotAccepts(bareSlot, swapProperty, ctx, where);
+      applySlotDefaultContent(bareSlot, swapProperty, m, ctx, where);
+      part.slot = bareSlot;
       // Same visibility conventions as the wrapper-frame slot path: the
       // "Show <Property>" convention marks the slot optional; any other
       // BOOLEAN visibility binding becomes a real boolean prop driving the
@@ -1999,44 +2328,39 @@ function buildPart(
       if (visibleWhen) part.visibleWhen = visibleWhen;
       return part;
     }
-    const id = ctx.contractIdByName.get(instanceOf);
+    // SESSION-LINKING (dump v1.5): componentSetKey FIRST, name fallback, and
+    // a name match the keys contradict is REFUSED — see resolveChildContract.
+    const keys = instanceKeysOf(m);
+    const resolution = resolveChildContract(instanceOf, keys, ctx);
+    const id = resolution.id;
+    noteResolution(resolution, instanceOf, keys, ctx, where);
     if (!id) {
       // AUTO-PROPOSED CHILD STUB (field case: CBDS Button → ds.icon). A
       // component ref to a contract nobody has is a guaranteed emit refusal
       // ("no contract in scope") — so the proposal ships a STUB child
       // contract alongside itself (childStubs), built from the observed
-      // applied values ONLY. Nothing about the child's real API or anatomy
-      // is guessed; the stub names its own provisionality.
-      const resolved = stubIdFor(instanceOf, ctx);
-      const stubId = resolved.id;
-      const isNew = !ctx.stubs.has(stubId);
-      const capture = ctx.stubs.get(stubId) ?? { id: stubId, instanceOf, applied: [] };
-      for (const o of m.occ) {
-        if (o.node.componentProperties) capture.applied.push(o.node.componentProperties);
-      }
-      ctx.stubs.set(stubId, capture);
-      if (isNew && idSlugSanitized(instanceOf)) {
-        // Field case (CBDS kit): private-helper names ("_Avatar Indicator")
-        // and template names ("Button / Primary / Medium") derive ids the
-        // schema refuses — sanitized AT PROPOSAL, never refused at receive.
-        ctx.notes.push(
-          `${where}: nested instance name "${instanceOf}" contains characters a contract id cannot carry — stub id sanitized to "${stubId}" (rule: lowercase kebab, illegal characters → hyphens, runs collapsed, edge hyphens stripped, digit-led/empty gets "c"); the original spelling stays on the stub's name/description and in this note`,
-        );
-      }
-      if (isNew && resolved.collidedWith) {
-        ctx.notes.push(
-          `${where}: sanitized stub id for "${instanceOf}" collides with the id already claimed for "${resolved.collidedWith}" — disambiguated deterministically to "${stubId}" (arrival order), never silently merged`,
-        );
-      }
+      // applied values (and, dump v1.5, the OBSERVED bounding box + primary
+      // paint — honest geometry, never guessed anatomy). The stub names its
+      // own provisionality.
+      const stubId = captureStub(instanceOf, m, ctx, where);
       ctx.notes.push(
         `${where}: nested instance of "${instanceOf}" has no known contract — component ref proposed as "${stubId}" with a STUB child contract auto-proposed alongside (childStubs; API from observed applied values only, anatomy not captured — import the real child set to replace it)`,
       );
     }
     // The ref and the stub share stubIdFor — they can never drift apart.
-    const component: Record<string, unknown> = { id: id ?? stubIdFor(instanceOf, ctx).id };
-    const applied = first(m.occ, (n) => n.componentProperties);
-    if (applied) {
-      const canonical = canonicalizeInstanceProps(instanceOf, applied, ctx, where);
+    const component: Record<string, unknown> = { id: id ?? stubIdFor(instanceOf, ctx, keys).id };
+    const appliedOcc = m.occ.filter((o) => o.node.componentProperties !== undefined);
+    if (appliedOcc.length > 0) {
+      const canonical = canonicalizeInstanceProps(instanceOf, appliedOcc[0].node.componentProperties!, id, ctx, where, false, keys);
+      // Prop threading: an applied value that tracks a parent enum axis 1:1
+      // becomes "{parentProp}" (per-variant fidelity); the per-occurrence
+      // values are canonicalized QUIETLY (the first occurrence above already
+      // carried the named notes).
+      const perOccurrence = appliedOcc.map((o) => ({
+        variant: o.variant,
+        canonical: canonicalizeInstanceProps(instanceOf, o.node.componentProperties!, id, ctx, where, true, keys),
+      }));
+      threadInstanceProps(canonical, perOccurrence, ctx, where, instanceOf);
       // Every applied prop may have been dropped as unmappable (each is a
       // named note) — an empty props object carries nothing.
       if (Object.keys(canonical).length > 0) component.props = canonical;
@@ -2095,17 +2419,8 @@ function buildPart(
     invertNodeEffects(m, tokens, ctx, where);
     attachTokens(ctx, part, tokens);
     const slot: Record<string, unknown> = { name: canonicalPropName(soleSwap) };
-    const instanceOf = first(soleChild.occ, (n) => n.instanceOf);
-    if (instanceOf && instanceOf !== 'Slot') {
-      ctx.notes.push(
-        `${where}: slot "${soleSwap}" holds a "${instanceOf}" instance as design-time content — defaultContent not proposed (dump v1 does not carry its configuration), review`,
-      );
-    } else {
-      ctx.notes.push(`${where}: Slot-utility instance styling is the utility's own — elided`);
-    }
-    ctx.notes.push(
-      `${where}: slot "${soleSwap}" accepts (INSTANCE_SWAP preferredValues) is not captured in dump v1 — author \`accepts\` manually`,
-    );
+    applySlotAccepts(slot, soleSwap, ctx, where);
+    applySlotDefaultContent(slot, soleSwap, soleChild, ctx, where);
     const visibleRef = unifiedPropRef(m, 'visible', ctx, where);
     const optional = visibleRef === `Show ${soleSwap}`;
     if (optional) part.optional = true;
@@ -2157,14 +2472,39 @@ function buildPart(
 function applyVisibleBinding(part: Record<string, unknown>, property: string, ctx: Ctx, where: string, m?: Merged) {
   const name = canonicalPropName(property);
   if (!ctx.boolProps.some((b) => b.property === property)) {
-    const hiddenInDefault =
-      m?.occ.find((o) => o.variant === ctx.totalVariants[0])?.node.hidden === true;
-    ctx.boolProps.push({ name, property, ...(hiddenInDefault ? { default: false } : {}) });
-    ctx.notes.push(
-      hiddenInDefault
-        ? `${where}: visibility bound to BOOLEAN "${property}" — proposed as prop \`${name}\` (default false: the node is hidden in the default variant, dump v1.1)`
-        : `${where}: visibility bound to BOOLEAN "${property}" — proposed as prop \`${name}\` (default not recoverable from dump v1, review)`,
-    );
+    // dump v1.5: the BOOLEAN property definition's defaultValue is CAPTURED
+    // evidence — it wins over the hidden-pattern inference (field case:
+    // Eventz hasStartIcon/hasEndIcon default true; the icons are visible in
+    // every drawn variant, so the hidden pattern could never recover it).
+    const definitionDefault = ctx.boolDefaults?.[property];
+    const inDefault = m?.occ.find((o) => o.variant === ctx.totalVariants[0]);
+    const hiddenInDefault = inDefault?.node.hidden === true;
+    if (definitionDefault !== undefined) {
+      ctx.boolProps.push({ name, property, default: definitionDefault });
+      ctx.notes.push(
+        `${where}: visibility bound to BOOLEAN "${property}" — proposed as prop \`${name}\` (default ${definitionDefault}: the property definition's defaultValue, dump v1.5)`,
+      );
+    } else if (hiddenInDefault) {
+      ctx.boolProps.push({ name, property, default: false });
+      ctx.notes.push(
+        `${where}: visibility bound to BOOLEAN "${property}" — proposed as prop \`${name}\` (default false: the node is hidden in the default variant, dump v1.1)`,
+      );
+    } else if (ctx.hiddenCaptured && inDefault) {
+      // The producer CAPTURES `hidden` (dump v1.1+, named in _provenance) —
+      // the node drawn VISIBLE in the default variant is positive evidence,
+      // the exact mirror of the hidden→false rule above. Field case: the
+      // CBDS Dialog's ↪️action-* buttons, drawn visible in every variant,
+      // rendered nothing because their defaults were "not recoverable".
+      ctx.boolProps.push({ name, property, default: true });
+      ctx.notes.push(
+        `${where}: visibility bound to BOOLEAN "${property}" — proposed as prop \`${name}\` (default true: the node is visible in the default variant and this dump's producer captures visibility — dump v1.1+ provenance)`,
+      );
+    } else {
+      ctx.boolProps.push({ name, property });
+      ctx.notes.push(
+        `${where}: visibility bound to BOOLEAN "${property}" — proposed as prop \`${name}\` (default not recoverable from dump v1, review)`,
+      );
+    }
   }
   part.visibleWhen = { prop: name };
 }
@@ -2172,20 +2512,32 @@ function applyVisibleBinding(part: Record<string, unknown>, property: string, ct
 function canonicalizeInstanceProps(
   instanceOf: string,
   applied: Record<string, string | boolean>,
+  /** The SESSION-LINKED contract id (resolveChildContract) — null when the
+   *  instance did not resolve. Canonicalization must run against the SAME
+   *  contract the emitted ref points at, never a fresh name lookup (a name-
+   *  coincidence the resolver refused must not sneak back in here). */
+  resolvedId: string | null,
   ctx: Ctx,
   where: string,
+  /** Quiet mode (prop threading's per-occurrence pass): map without notes —
+   *  the first occurrence already carried the named notes. */
+  quiet = false,
+  /** The instance's captured identity keys — stubIdFor is key-aware. */
+  keys?: { setKey?: string; key?: string },
 ): Record<string, string | boolean> {
   const out: Record<string, string | boolean> = {};
-  const childId = ctx.contractIdByName.get(instanceOf);
-  // The ref id and the stub share stubIdFor — when the NAME lookup misses but
+  const note = (text: string) => {
+    if (!quiet) ctx.notes.push(text);
+  };
+  // The ref id and the stub share stubIdFor — when the resolver misses but
   // the derived id lands on a contract already in scope (live-kit census:
   // "ListItem"/"BreadcrumbItem"/"AvatarGroup" slugs collide with the repo's
   // ds.list-item / ds.breadcrumb-item / ds.avatar-group), the emitted ref
   // resolves to THAT contract (a stub never overrides a registered contract),
   // so canonicalization must run against it too.
   const child =
-    (childId ? ctx.contractsById?.get(childId) : undefined) ??
-    ctx.contractsById?.get(stubIdFor(instanceOf, ctx).id);
+    (resolvedId ? ctx.contractsById?.get(resolvedId) : undefined) ??
+    ctx.contractsById?.get(stubIdFor(instanceOf, ctx, keys).id);
   let mapped = 0;
   let dropped = 0;
   for (const [property, value] of Object.entries(applied)) {
@@ -2220,22 +2572,29 @@ function canonicalizeInstanceProps(
       // refuses; the mismatch usually means the child contract is stale
       // against the live kit).
       dropped++;
-      ctx.notes.push(
+      note(
         `${where}: applied prop "${property.split('#')[0]}" on nested "${instanceOf}" does not map through ${child.id}'s bindings — not carried; verify the child contract is current`,
       );
       continue;
     }
     // Fallback without the child contract in scope: canonical spelling.
-    out[canonicalPropName(property)] = typeof value === 'string' ? camel(value) : value;
+    // The key may carry its "#id" suffix (dump v1.5) — the NAME is the part
+    // before it, exactly as buildChildStub derives the stub's prop names,
+    // and a suffixed string key is a TEXT property whose VALUE passes
+    // through VERBATIM (camel-canonicalizing "Label" into "label" would
+    // rewrite drawn content).
+    const isTextKey = property.includes('#') && typeof value === 'string';
+    out[canonicalPropName(property.split('#')[0])] =
+      typeof value === 'string' && !isTextKey ? camel(value) : value;
   }
   if (child && mapped === Object.keys(applied).length) {
-    ctx.notes.push(`${where}: fixed props of "${instanceOf}" canonicalized through ${child.id}'s bindings`);
+    note(`${where}: fixed props of "${instanceOf}" canonicalized through ${child.id}'s bindings`);
   } else if (child) {
-    ctx.notes.push(
+    note(
       `${where}: fixed props of "${instanceOf}": ${mapped} canonicalized through ${child.id}'s bindings, ${dropped} dropped as unmappable (named per prop above)`,
     );
   } else {
-    ctx.notes.push(`${where}: fixed props of "${instanceOf}" canonicalized by spelling (dump v1.1) — verify against the child contract's bindings`);
+    note(`${where}: fixed props of "${instanceOf}" canonicalized by spelling (dump v1.1) — verify against the child contract's bindings`);
   }
   return out;
 }
@@ -2398,7 +2757,118 @@ function promoteBaseInstanceCaptures(captures: BaseInstanceCapture[], ctx: Ctx, 
  *  v1 stops at instances — the child's structure is simply not captured), and
  *  the description says so. The stub exists so the parent's component ref can
  *  EMIT instead of refusing; importing the real child set replaces it. */
-function buildChildStub(capture: StubCapture, ctx: Ctx, fileKey: string | null): Record<string, unknown> {
+/** Deep-merge one minted DTCG tree into another (namespaced sub-trees only —
+ *  parent mints ride imported.<component>.*, stub geometry imported.stub-*.*,
+ *  so leaves never collide; groups merge recursively). */
+function mergeMintTree(into: Record<string, unknown>, from: Record<string, unknown>) {
+  for (const [key, value] of Object.entries(from)) {
+    const existing = into[key];
+    if (existing && typeof existing === 'object' && value && typeof value === 'object' && !('$value' in (value as object))) {
+      mergeMintTree(existing as Record<string, unknown>, value as Record<string, unknown>);
+    } else {
+      into[key] = value;
+    }
+  }
+}
+
+/** STUB GEOMETRY (dump v1.5): mint the stub's OBSERVED bounding box and
+ *  primary paints into provisional `imported.stub-<id>.*` leaves and bind
+ *  the stub's root tokens to them — a correctly-sized, correctly-colored
+ *  box, so a composite whose child is out of scope renders honest geometry
+ *  instead of nothing. Per-variant sizes correlate against the STUB'S OWN
+ *  enum props (the observed applied values), the same axis machinery the
+ *  parent's mint pass uses. Nothing about the child's internals is guessed.
+ *  Figma strokes are INSIDE the box — when a border is carried, the minted
+ *  width/height subtract 2×strokeWeight so the CSS content-box + border
+ *  reproduces the observed box exactly. */
+function stubGeometry(
+  capture: StubCapture,
+  props: Array<Record<string, unknown>>,
+  ctx: Ctx,
+): { tokens: Record<string, string>; tree: Record<string, unknown>; count: number; entries: MintedEntry[] } | null {
+  if (!ctx.mint) return null;
+  const geo = capture.observed.filter((o) => o.bbox !== undefined);
+  if (geo.length === 0) return null;
+  const enumProps = props.filter(
+    (p): p is Record<string, unknown> & { name: string; type: { enum: string[] } } =>
+      typeof p.type === 'object' && p.type !== null && 'enum' in (p.type as object),
+  );
+  const axes: MintAxis[] = enumProps.map((p) => ({ propName: p.name, values: p.type.enum }));
+  const axisValuesFor = (o: StubCapture['observed'][number]): Record<string, string> => {
+    const rec: Record<string, string> = {};
+    for (const p of enumProps) {
+      const property = (p.bindings as { figma: { property: string } }).figma.property;
+      for (const [key, value] of Object.entries(o.applied ?? {})) {
+        if (key.split('#')[0] === property && typeof value === 'string') rec[p.name] = camel(value);
+      }
+    }
+    return rec;
+  };
+  // Border is carried only when EVERY observed occurrence draws a raw-hex
+  // stroke with one shared weight. Anything less — partial presence (field
+  // case: the Shoelace kit strokes SOME primary variants and not others,
+  // so presence is not even a function of the axes), var-bound paints,
+  // mixed weights — is a NAMED limit: a width coupled to an inconsistent
+  // inset would stop correlating with any axis and the whole box would
+  // refuse to mint.
+  const strokesCarriable =
+    geo.every((o) => o.stroke?.hex !== undefined && typeof o.strokeWeight === 'number') &&
+    new Set(geo.map((o) => o.strokeWeight)).size === 1;
+  const insetOf = (o: StubCapture['observed'][number]): number =>
+    strokesCarriable && o.stroke ? 2 * o.strokeWeight! : 0;
+  if (!strokesCarriable && geo.some((o) => o.stroke !== undefined)) {
+    ctx.notes.push(
+      `stub ${capture.id}: stroke drawn on ${geo.filter((o) => o.stroke).length}/${geo.length} observed occurrence(s) (or var-bound/non-uniform) — border not carried on the stub geometry (an inconsistent inset would decouple the box from its axes), review`,
+    );
+  }
+  const observations: MintObservation[] = [];
+  const push = (cssProperty: string, kind: MintObservation['kind'], value: (o: StubCapture['observed'][number]) => string | number | null) => {
+    const occ = geo.map((o) => ({ variant: o.variant, axisValues: axisValuesFor(o), value: value(o) }));
+    if (occ.some((x) => x.value === null)) return;
+    observations.push({
+      nodePath: `stub ${capture.id}`,
+      part: '',
+      cssProperty,
+      kind,
+      occurrences: occ as Array<{ variant: string; axisValues: Record<string, string>; value: string | number }>,
+    });
+  };
+  push('width', 'px', (o) => Math.round((o.bbox!.width - insetOf(o)) * 100) / 100);
+  push('height', 'px', (o) => Math.round((o.bbox!.height - insetOf(o)) * 100) / 100);
+  const fills = geo.filter((o) => o.fill !== undefined);
+  if (fills.length > 0 && fills.every((o) => o.fill!.hex !== undefined)) {
+    // Occurrences without a fill are honestly TRANSPARENT (#00000000 — a
+    // legal DTCG color and a CSS color), so a per-variant fill mints per
+    // axis instead of dropping the channel.
+    push('background-color', 'color', (o) => (o.fill ? paintCssHex(o.fill) : '#00000000'));
+  } else if (fills.length > 0) {
+    ctx.notes.push(
+      `stub ${capture.id}: fill var-bound on observed occurrence(s) — background not carried on the stub geometry, review`,
+    );
+  }
+  if (strokesCarriable) {
+    push('border-color', 'color', (o) => (o.stroke ? paintCssHex(o.stroke) : '#00000000'));
+    push('border-width', 'px', (o) => (o.stroke ? o.strokeWeight! : 0));
+  }
+  if (geo.some((o) => (o.cornerRadius ?? 0) !== 0)) {
+    push('border-radius', 'px', (o) => o.cornerRadius ?? 0);
+  }
+  if (observations.length === 0) return null;
+  const minted = mintTokens(`stub-${capture.id.split('.').slice(1).join('-')}`, observations, axes);
+  const tokens: Record<string, string> = {};
+  minted.bindings.forEach((binding, i) => {
+    if (binding.ref) tokens[observations[i].cssProperty] = binding.ref;
+    else if (binding.reason) ctx.notes.push(`stub ${capture.id} ${observations[i].cssProperty}: ${binding.reason}`);
+  });
+  if (Object.keys(tokens).length === 0) return null;
+  return { tokens, tree: minted.tree, count: minted.count, entries: minted.entries };
+}
+
+function buildChildStub(
+  capture: StubCapture,
+  ctx: Ctx,
+  fileKey: string | null,
+): { contract: Record<string, unknown>; geometry: ReturnType<typeof stubGeometry> } {
   const observed = new Map<string, { suffixed: boolean; values: Array<string | boolean> }>();
   for (const applied of capture.applied) {
     for (const [key, value] of Object.entries(applied)) {
@@ -2445,22 +2915,97 @@ function buildChildStub(capture: StubCapture, ctx: Ctx, fileKey: string | null):
     }
   }
   const name = pascalComponentName(capture.instanceOf);
+  // dump v1.5: stub geometry — the observed box binds the root's tokens to
+  // minted provisional leaves; a text prop observed on the instances renders
+  // as the box's content (the drawn label is real observed content).
+  const geometry = stubGeometry(capture, props, ctx);
+  const root: Record<string, unknown> = {};
+  // Every stub renders its OBSERVED truth and nothing else: a captured TEXT
+  // prop becomes the box's content (the drawn label is real observed
+  // content); otherwise the root carries EXPLICIT empty parts — without
+  // them the html surface falls back to rendering the contract NAME as
+  // content, invented ink (field failures: the 20×20 icon stub rendered
+  // the word "Play" and widened every eventz row's content crop; the CBDS
+  // Dialog rendered "ButtonBrandSecondary" and "Icon" as literal strings).
+  const textProp = props.find((p) => p.type === 'text');
+  root.parts = textProp
+    ? { [String(textProp.name)]: { content: { prop: String(textProp.name) } } }
+    : {};
+  if (geometry) {
+    root.tokens = geometry.tokens;
+    ctx.notes.push(
+      `stub ${capture.id}: renders HONEST OBSERVED GEOMETRY (dump v1.5 bounding box${geometry.tokens['background-color'] ? ' + primary paint' : ''}${geometry.tokens['border-color'] ? ' + border' : ''}) via minted imported.stub-* tokens — a correctly-sized box, NOT the child's anatomy (still not captured); import the real child set to replace it`,
+    );
+  }
   return {
-    $schema: './contract.schema.json',
-    id: capture.id,
-    name,
-    version: '0.1.0',
-    status: 'draft',
-    description: `STUB contract auto-proposed for the nested "${capture.instanceOf}" instances of ${ctx.setName} — the child set was not imported. Props are the observed applied values ONLY; anatomy and styling are NOT captured (dump v1 stops at instance boundaries). Import the child set to replace this stub.`,
-    semantics: { element: 'span' },
-    props,
-    states: [],
-    anatomy: { root: {} },
-    anchors: {
-      figma: { fileKey, componentSetKey: null },
-      code: { importPath: `src/components/${name}`, export: name },
+    contract: {
+      $schema: './contract.schema.json',
+      id: capture.id,
+      name,
+      version: '0.1.0',
+      status: 'draft',
+      description: `STUB contract auto-proposed for the nested "${capture.instanceOf}" instances of ${ctx.setName} — the child set was not imported. Props are the observed applied values ONLY; anatomy and styling are NOT captured (dump v1 stops at instance boundaries)${geometry ? '; the root renders the OBSERVED bounding box and primary paint (dump v1.5) as honest provisional geometry' : ''}. Import the child set to replace this stub.`,
+      semantics: { element: 'span' },
+      props,
+      states: [],
+      anatomy: { root },
+      anchors: {
+        figma: { fileKey, componentSetKey: capture.setKey ?? null },
+        code: { importPath: `src/components/${name}`, export: name },
+      },
     },
+    geometry,
   };
+}
+
+/** ROOT FIXED-SIZE inversion (dump v1.5): a root axis DRAWN as FIXED
+ *  (primary/counterAxisSizingMode) carries its dimension nowhere in the
+ *  layout facts — the observed bbox is the only witness. When every variant
+ *  declares the axis FIXED and carries a bbox, the dimension becomes a mint
+ *  observation on the root tokens (uniform → one leaf; per-variant →
+ *  axis-substituted, the standard machinery). A width/height already bound
+ *  to a variable stays the variable's. Field case: the CBDS Dialog's
+ *  per-size widths (320/496/800) — without them the body text never wraps
+ *  and every variant renders hundreds of px too wide. */
+function invertRootFixedSize(merged: Merged, rootTokens: Record<string, string>, ctx: Ctx, where: string) {
+  if (!ctx.mint) return;
+  const withBox = merged.occ.filter((o) => o.node.bbox !== undefined && o.node.layout !== undefined);
+  if (withBox.length === 0) return;
+  if (withBox.length !== merged.occ.length) {
+    ctx.notes.push(
+      `${where}: root bbox captured on ${withBox.length}/${merged.occ.length} variant(s) only — fixed root size not proposed (partial evidence), review`,
+    );
+    return;
+  }
+  const fixedAxis = (o: Occ, dim: 'width' | 'height'): boolean => {
+    const l = o.node.layout!;
+    const alongPrimary = (l.mode === 'HORIZONTAL') === (dim === 'width');
+    return (alongPrimary ? l.primarySizing : l.counterSizing) === 'FIXED';
+  };
+  // The bbox is the BORDER box; CSS width/height tokens speak content-box —
+  // subtract the drawn padding (and the inside stroke, when one is drawn) so
+  // the rendered box reproduces the observed one exactly.
+  const contentDim = (o: Occ, dim: 'width' | 'height'): number => {
+    const pad = o.node.layout!.padding;
+    const inset = (dim === 'width' ? pad[1] + pad[3] : pad[0] + pad[2]) +
+      (o.node.stroke && typeof o.node.strokeWeight === 'number' ? 2 * o.node.strokeWeight : 0);
+    return Math.round((o.node.bbox![dim] - inset) * 100) / 100;
+  };
+  for (const dim of ['width', 'height'] as const) {
+    if (!withBox.every((o) => fixedAxis(o, dim))) continue;
+    if (rootTokens[dim] !== undefined || merged.occ.some((o) => o.node.bound?.[dim])) continue;
+    mintObservation(
+      ctx,
+      rootTokens,
+      where,
+      dim,
+      'px',
+      withBox.map((o) => ({ variant: o.variant, value: contentDim(o, dim) })),
+    );
+    ctx.notes.push(
+      `${where}: root ${dim} is DRAWN FIXED in every variant — the observed dimension (${[...new Set(withBox.map((o) => o.node.bbox![dim]))].join('/')}px, dump v1.5 bbox) is proposed as a minted root token (the drawn value is the only witness; rename against your real tokens)`,
+    );
+  }
 }
 
 // ---------------------------------------------------------------------------
@@ -2738,12 +3283,22 @@ export function proposeFromDump(
     corpus: TokenCorpus;
     contractIdByName: Map<string, string>;
     contractsById?: Map<string, MinimalChildContract>;
+    /** componentSetKey (or setless component key) → contract id (dump v1.5)
+     *  — the SESSION-LINKING index, checked BEFORE the name lookup; build it
+     *  from every in-scope contract's anchors.figma.componentSetKey
+     *  (repo contracts AND previously imported ones). */
+    contractIdByKey?: Map<string, string>;
     prefix?: string;
     fileKey?: string | null;
     /** Mint provisional tokens (core/mint-tokens.ts) from the unbound-value
      *  observations and BIND the proposal to them, instead of dropping every
      *  degraded style. Default false — the classic report-only behavior. */
     mintUnbound?: boolean;
+    /** The dump's producer captures `hidden` (dump v1.1+) — derive from the
+     *  dump's _provenance via dumpCapturesHidden. Unlocks the visible-in-
+     *  default-variant → boolean default TRUE inference; default false
+     *  (absence stays "not captured", nothing invented). */
+    hiddenCaptured?: boolean;
   },
 ): FigmaProposalResult {
   const prefix = opts.prefix ?? 'ds';
@@ -2796,6 +3351,10 @@ export function proposeFromDump(
     corpus: opts.corpus,
     contractIdByName: opts.contractIdByName,
     contractsById: opts.contractsById,
+    contractIdByKey: opts.contractIdByKey,
+    swapPreferredValues: set.swapPreferredValues,
+    boolDefaults: set.boolDefaults,
+    hiddenCaptured: opts.hiddenCaptured,
     prefix,
     notes: [],
     unbound: [],
@@ -2902,6 +3461,7 @@ export function proposeFromDump(
   }
   invertNodeOpacity(merged, root, rootTokens, ctx, where);
   invertNodeEffects(merged, rootTokens, ctx, where);
+  invertRootFixedSize(merged, rootTokens, ctx, where);
   attachByProp(root, rootTokensByProp);
   attachTokens(ctx, root, rootTokens);
 
@@ -3206,9 +3766,26 @@ export function proposeFromDump(
   }
 
   // Auto-proposed child stubs (see buildChildStub) — each must parse too.
-  const childStubs = [...ctx.stubs.values()].map((capture) =>
-    buildChildStub(capture, ctx, opts.fileKey ?? null),
-  );
+  // dump v1.5: a stub with observed geometry mints imported.stub-* leaves;
+  // its tree merges into the proposal's mintedTokens (namespaced sub-trees,
+  // no leaf collisions) so the stub's honest box renders wherever the
+  // proposal's own minted styles render.
+  const childStubs: Array<Record<string, unknown>> = [];
+  for (const capture of ctx.stubs.values()) {
+    const built = buildChildStub(capture, ctx, opts.fileKey ?? null);
+    childStubs.push(built.contract);
+    if (built.geometry) {
+      if (!mintedTokens) mintedTokens = { tree: {}, count: 0, entries: [] };
+      mergeMintTree(mintedTokens.tree, built.geometry.tree);
+      mintedTokens.count += built.geometry.count;
+      mintedTokens.entries.push(...built.geometry.entries);
+      for (const e of built.geometry.entries) {
+        ctx.notes.push(
+          `MINTED ${e.ref} = ${e.value} — stub geometry (the "${capture.instanceOf}" instances' OBSERVED box/paint, dump v1.5; provisional) — bound at: ${e.usageSites.join(', ')}`,
+        );
+      }
+    }
+  }
 
   // Refuse to emit an unusable proposal.
   ContractSchema.parse(contract);

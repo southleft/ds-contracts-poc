@@ -1464,6 +1464,69 @@ const cases: Case[] = [
     },
   },
   {
+    // COMPOSITE CHILDREN, mechanism 1 (dump v1.5): nested instances resolve
+    // by componentSetKey FIRST — RENAME-SAFE (same key, different name,
+    // LINKS) — and a NAME match whose keys contradict is refused by name
+    // (field failure: Shoelace "Button" name-collided with repo ds.button
+    // and rendered the wrong design system's button on all 36 variants).
+    id: 'key-based-linking',
+    claim: 'C5-extraction',
+    run: () => {
+      const r = run(TSX, ['extract/figma/composite-check.ts']);
+      if (r.status !== 0) throw new Error(`composite receipt failed:\n${r.out}`);
+      for (const line of [
+        '✔ same key + DIFFERENT name LINKS (rename-safe): component ref → sl.totally-renamed-button',
+        '✔ name-coincidence link REFUSED by key contradiction (no component ref to ds.button)',
+        '✔ the stub id is suffixed PAST the contradicting in-scope contract (ds.button-2, never ds.button)',
+      ]) {
+        if (!r.out.includes(line)) throw new Error(`missing check: ${line}`);
+      }
+    },
+  },
+  {
+    // COMPOSITE CHILDREN, mechanism 2 (dump v1.5): a child with no contract
+    // in scope renders its OBSERVED bounding box + primary paint as minted
+    // imported.stub-* tokens (per-variant via the stub's own axes; parent
+    // props threaded "{size}"/"{type}") instead of a hollow nothing — and
+    // never invents anatomy, borders, or its contract name as content.
+    id: 'stub-geometry-render',
+    claim: 'C5-extraction',
+    run: () => {
+      const r = run(TSX, ['extract/figma/composite-check.ts']);
+      if (r.status !== 0) throw new Error(`composite receipt failed:\n${r.out}`);
+      for (const line of [
+        "✔ stub root binds minted geometry per the STUB'S OWN axes (width/height substitute {size})",
+        '✔ minted leaves carry the OBSERVED values (small width 44px, large 82px, default fill #ffffff)',
+        '✔ the parent\'s applied props THREAD the axes ("{size}"/"{type}" per variant, ComponentRefSchema)',
+        '✔ emit-html: the stub box renders per size (.button--size-small { width: var(--imported-stub-button-2-root-width-small) })',
+        '✔ emit-html: the stub renders its OBSERVED label text, and never its contract name',
+        '✔ inconsistent stroke is NAMED, never faked (border not carried on the stub geometry)',
+        '✔ eventz: slot design-time content proposed as defaultContent (startIcon → ds.play stub)',
+      ]) {
+        if (!r.out.includes(line)) throw new Error(`missing check: ${line}`);
+      }
+    },
+  },
+  {
+    // COMPOSITE CHILDREN, mechanism 3 (dump v1.5): INSTANCE_SWAP
+    // preferredValues (component keys) resolve through the session key index
+    // into slot `accepts` (acceptsMode 'prefer' — Figma's own tier);
+    // unresolvable keys stay a NAMED note carrying the keys verbatim.
+    id: 'preferred-values-accepts',
+    claim: 'C5-extraction',
+    run: () => {
+      const r = run(TSX, ['extract/figma/composite-check.ts']);
+      if (r.status !== 0) throw new Error(`composite receipt failed:\n${r.out}`);
+      for (const line of [
+        '✔ unresolvable keys stay a NAMED note carrying the keys verbatim (no accepts invented)',
+        '✔ with the key in scope, accepts resolves: slot accepts ["ev.icon"], acceptsMode "prefer"',
+        '✔ the resolution is NAMED (preferredValues → accepts note)',
+      ]) {
+        if (!r.out.includes(line)) throw new Error(`missing check: ${line}`);
+      }
+    },
+  },
+  {
     // Owner field case (CBDS Tooltip): the root's DROP_SHADOW must mint
     // byte-equal to the dump (0px 2px 4px #00000029), render on the CSS
     // surface, AND project onto the canvas surfaces as a native effect —
