@@ -1,0 +1,1177 @@
+{
+ "generatedAt": "2026-07-12T22:53:11.782Z",
+ "headCommit": "15984bec170a36804bf388baa7baab4b48305c63",
+ "epsilonPp": 0.1,
+ "subjects": {
+  "cbds-button-brand-primary": {
+   "version": "2374568486037958769",
+   "fontFamilies": [
+    "Inter"
+   ],
+   "pinned": {
+    "variant": "size=large, state=default",
+    "sizeOurs": "168×96"
+   }
+  },
+  "cbds-tooltip": {
+   "version": "2374568486037958769",
+   "fontFamilies": [
+    "Inter"
+   ],
+   "pinned": {
+    "variant": "pointer=true, pointer-position=top-right",
+    "sizeOurs": "328×117"
+   }
+  },
+  "cbds-dialog": {
+   "version": "2374568486037958769",
+   "fontFamilies": [
+    "Inter"
+   ],
+   "pinned": {
+    "variant": "size=large",
+    "sizeOurs": "1604×442"
+   }
+  },
+  "shoelace-tooltip": {
+   "version": "2373270883017400308",
+   "fontFamilies": [
+    "SF Pro"
+   ],
+   "pinned": {
+    "variant": "placement=left",
+    "sizeOurs": "180×66"
+   }
+  },
+  "shoelace-button-group": {
+   "version": "2373270883017400308",
+   "fontFamilies": [
+    "Material Symbols Outlined",
+    "SF Pro"
+   ],
+   "pinned": {
+    "variant": "position=left, size=large, type=default, isPill=false",
+    "sizeOurs": "164×100"
+   }
+  },
+  "eventz-button": {
+   "version": "2374201129417791367",
+   "fontFamilies": [
+    "Geist"
+   ],
+   "pinned": {
+    "variant": "variant=primary, state=default, isDisabled=false",
+    "sizeOurs": "216×68"
+   }
+  },
+  "badge": {
+   "version": "2374040948613425901",
+   "fontFamilies": [
+    "Inter"
+   ],
+   "pinned": {
+    "variant": "Variant=Info",
+    "sizeOurs": "122×46"
+   }
+  },
+  "button": {
+   "version": "2374040948613425901",
+   "fontFamilies": [
+    "Inter"
+   ],
+   "pinned": {
+    "variant": "Variant=Primary, Size=Medium, State=Default",
+    "sizeOurs": "164×72"
+   }
+  },
+  "checkbox": {
+   "version": "2374040948613425901",
+   "fontFamilies": [
+    "Inter"
+   ],
+   "pinned": {
+    "variant": "Value=Unchecked, Size=Medium",
+    "sizeOurs": "480×72"
+   }
+  },
+  "switch": {
+   "version": "2374040948613425901",
+   "fontFamilies": [
+    "Inter"
+   ],
+   "pinned": {
+    "variant": "Value=Off",
+    "sizeOurs": "415×72"
+   }
+  },
+  "heading": {
+   "version": "2374040948613425901",
+   "fontFamilies": [
+    "Inter"
+   ],
+   "pinned": {
+    "variant": "Level=H2, Size=Large",
+    "sizeOurs": "140×36"
+   }
+  }
+ },
+ "rows": {
+  "cbds-button-brand-primary :: size=large, state=default": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 1.922123015873016,
+   "sizeOurs": "168×96",
+   "causeClass": "renderer"
+  },
+  "cbds-button-brand-primary :: size=medium, state=default": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 2.096861471861472,
+   "sizeOurs": "168×88",
+   "causeClass": "renderer"
+  },
+  "cbds-button-brand-primary :: size=small, state=default": {
+   "status": "diffed",
+   "masked": 1.5430622009569377,
+   "unmasked": 3.189935064935065,
+   "sizeOurs": "138×88",
+   "causeClass": "renderer"
+  },
+  "cbds-button-brand-primary :: size=large, state=hover": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 1.922123015873016,
+   "sizeOurs": "168×96",
+   "causeClass": "renderer"
+  },
+  "cbds-button-brand-primary :: size=medium, state=hover": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 2.096861471861472,
+   "sizeOurs": "168×88",
+   "causeClass": "renderer"
+  },
+  "cbds-button-brand-primary :: size=small, state=hover": {
+   "status": "diffed",
+   "masked": 1.5430622009569377,
+   "unmasked": 3.189935064935065,
+   "sizeOurs": "138×88",
+   "causeClass": "renderer"
+  },
+  "cbds-button-brand-primary :: size=large, state=focus": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 1.5042701863354038,
+   "sizeOurs": "184×112",
+   "causeClass": "renderer"
+  },
+  "cbds-button-brand-primary :: size=medium, state=focus": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 1.6199832775919731,
+   "sizeOurs": "184×104",
+   "causeClass": "renderer"
+  },
+  "cbds-button-brand-primary :: size=small, state=focus": {
+   "status": "diffed",
+   "masked": 3.0088062622309195,
+   "unmasked": 3.901627218934911,
+   "sizeOurs": "154×104",
+   "causeClass": "renderer"
+  },
+  "cbds-button-brand-primary :: size=large, state=pressed": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 1.9283234126984128,
+   "sizeOurs": "168×96",
+   "causeClass": "renderer"
+  },
+  "cbds-button-brand-primary :: size=medium, state=pressed": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 2.1036255411255413,
+   "sizeOurs": "168×88",
+   "causeClass": "renderer"
+  },
+  "cbds-button-brand-primary :: size=small, state=pressed": {
+   "status": "diffed",
+   "masked": 1.555023923444976,
+   "unmasked": 3.1980519480519476,
+   "sizeOurs": "138×88",
+   "causeClass": "renderer"
+  },
+  "cbds-button-brand-primary :: size=large, state=disabled": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 5.251736111111112,
+   "sizeOurs": "168×96",
+   "causeClass": "renderer"
+  },
+  "cbds-button-brand-primary :: size=medium, state=disabled": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 5.729166666666666,
+   "sizeOurs": "168×88",
+   "causeClass": "renderer"
+  },
+  "cbds-button-brand-primary :: size=small, state=disabled": {
+   "status": "diffed",
+   "masked": 1.3995215311004785,
+   "unmasked": 5.909090909090909,
+   "sizeOurs": "138×88",
+   "causeClass": "renderer"
+  },
+  "cbds-tooltip :: pointer=true, pointer-position=top-right": {
+   "status": "diffed",
+   "masked": 5.496726214533991,
+   "unmasked": 9.09156626506024,
+   "sizeOurs": "328×117",
+   "causeClass": "capture-gap"
+  },
+  "cbds-tooltip :: pointer=false, pointer-position=none": {
+   "status": "diffed",
+   "masked": 5.397084125690483,
+   "unmasked": 8.74523735969519,
+   "sizeOurs": "328×117",
+   "causeClass": "renderer"
+  },
+  "cbds-tooltip :: pointer=true, pointer-position=bottom-right": {
+   "status": "diffed",
+   "masked": 5.853045663287411,
+   "unmasked": 7.003012048192771,
+   "sizeOurs": "328×117",
+   "causeClass": "capture-gap"
+  },
+  "cbds-tooltip :: pointer=true, pointer-position=left-center": {
+   "status": "diffed",
+   "masked": 4.735539616626819,
+   "unmasked": 7.835168353900343,
+   "sizeOurs": "328×117",
+   "causeClass": "capture-gap"
+  },
+  "cbds-tooltip :: pointer=true, pointer-position=top-center": {
+   "status": "diffed",
+   "masked": 5.496726214533991,
+   "unmasked": 9.09156626506024,
+   "sizeOurs": "328×117",
+   "causeClass": "capture-gap"
+  },
+  "cbds-tooltip :: pointer=true, pointer-position=bottom-center": {
+   "status": "diffed",
+   "masked": 5.861710423706785,
+   "unmasked": 7.008032128514056,
+   "sizeOurs": "328×117",
+   "causeClass": "capture-gap"
+  },
+  "cbds-tooltip :: pointer=true, pointer-position=right-center": {
+   "status": "diffed",
+   "masked": 4.706178432112747,
+   "unmasked": 8.010049508608587,
+   "sizeOurs": "328×117",
+   "causeClass": "capture-gap"
+  },
+  "cbds-tooltip :: pointer=true, pointer-position=top-left": {
+   "status": "diffed",
+   "masked": 5.496726214533991,
+   "unmasked": 9.09156626506024,
+   "sizeOurs": "328×117",
+   "causeClass": "capture-gap"
+  },
+  "cbds-tooltip :: pointer=true, pointer-position=bottom-left": {
+   "status": "diffed",
+   "masked": 5.8227190018196,
+   "unmasked": 6.985441767068274,
+   "sizeOurs": "328×117",
+   "causeClass": "capture-gap"
+  },
+  "cbds-dialog :: size=large": {
+   "status": "diffed",
+   "masked": 0.6147393609718145,
+   "unmasked": 1.7779363807675381,
+   "sizeOurs": "1604×442",
+   "causeClass": "renderer"
+  },
+  "cbds-dialog :: size=medium": {
+   "status": "diffed",
+   "masked": 2.8682910266017236,
+   "unmasked": 4.988854941296285,
+   "sizeOurs": "996×418",
+   "causeClass": "renderer"
+  },
+  "cbds-dialog :: size=small-vertical": {
+   "status": "diffed",
+   "masked": 15.447594967190417,
+   "unmasked": 15.472339831073095,
+   "sizeOurs": "644×578",
+   "causeClass": "capture-gap"
+  },
+  "cbds-dialog :: size=small": {
+   "status": "diffed",
+   "masked": 4.756979396581181,
+   "unmasked": 7.667701863354037,
+   "sizeOurs": "644×450",
+   "causeClass": "renderer"
+  },
+  "shoelace-tooltip :: placement=left": {
+   "status": "diffed",
+   "masked": 11.045751633986928,
+   "unmasked": 12.050189393939394,
+   "sizeOurs": "180×66",
+   "causeClass": "capture-gap"
+  },
+  "shoelace-tooltip :: placement=topLeft": {
+   "status": "diffed",
+   "masked": 27.190170940170937,
+   "unmasked": 20.04985754985755,
+   "sizeOurs": "180×66",
+   "causeClass": "capture-gap"
+  },
+  "shoelace-tooltip :: placement=bottomLeft": {
+   "status": "diffed",
+   "masked": 27.190170940170937,
+   "unmasked": 19.330484330484328,
+   "sizeOurs": "180×66",
+   "causeClass": "capture-gap"
+  },
+  "shoelace-tooltip :: placement=bottom": {
+   "status": "diffed",
+   "masked": 27.190170940170937,
+   "unmasked": 19.330484330484328,
+   "sizeOurs": "180×66",
+   "causeClass": "capture-gap"
+  },
+  "shoelace-tooltip :: placement=top": {
+   "status": "diffed",
+   "masked": 27.190170940170937,
+   "unmasked": 20.04985754985755,
+   "sizeOurs": "180×66",
+   "causeClass": "capture-gap"
+  },
+  "shoelace-tooltip :: placement=topRight": {
+   "status": "diffed",
+   "masked": 27.190170940170937,
+   "unmasked": 20.04985754985755,
+   "sizeOurs": "180×66",
+   "causeClass": "capture-gap"
+  },
+  "shoelace-tooltip :: placement=bottomRight": {
+   "status": "diffed",
+   "masked": 27.190170940170937,
+   "unmasked": 19.330484330484328,
+   "sizeOurs": "180×66",
+   "causeClass": "capture-gap"
+  },
+  "shoelace-tooltip :: placement=right": {
+   "status": "diffed",
+   "masked": 10.915032679738562,
+   "unmasked": 12.334280303030303,
+   "sizeOurs": "180×66",
+   "causeClass": "capture-gap"
+  },
+  "shoelace-button-group :: position=left, size=large, type=default, isPill=false": {
+   "status": "diffed",
+   "masked": 6.514900662251656,
+   "unmasked": 7.274390243902438,
+   "sizeOurs": "164×100",
+   "causeClass": "capture-gap"
+  },
+  "shoelace-button-group :: position=left, size=large, type=default, isPill=true": {
+   "status": "diffed",
+   "masked": 5.173841059602649,
+   "unmasked": 6.286585365853659,
+   "sizeOurs": "164×100",
+   "causeClass": "capture-gap"
+  },
+  "shoelace-button-group :: position=left, size=large, type=primary, isPill=false": {
+   "status": "diffed",
+   "masked": 0.695364238410596,
+   "unmasked": 2.99390243902439,
+   "sizeOurs": "164×100",
+   "causeClass": "capture-gap"
+  },
+  "shoelace-button-group :: position=left, size=large, type=primary, isPill=true": {
+   "status": "diffed",
+   "masked": 8.27814569536424,
+   "unmasked": 8.579268292682928,
+   "sizeOurs": "164×100",
+   "causeClass": "capture-gap"
+  },
+  "shoelace-button-group :: position=left, size=small, type=default, isPill=false": {
+   "status": "diffed",
+   "masked": 32.765151515151516,
+   "unmasked": 18.882575757575758,
+   "sizeOurs": "88×60",
+   "causeClass": "capture-gap"
+  },
+  "shoelace-button-group :: position=left, size=small, type=default, isPill=true": {
+   "status": "diffed",
+   "masked": 26.041666666666668,
+   "unmasked": 16.83712121212121,
+   "sizeOurs": "88×60",
+   "causeClass": "capture-gap"
+  },
+  "shoelace-button-group :: position=left, size=small, type=primary, isPill=false": {
+   "status": "diffed",
+   "masked": 0.7575757575757576,
+   "unmasked": 10.681818181818182,
+   "sizeOurs": "88×60",
+   "causeClass": "capture-gap"
+  },
+  "shoelace-button-group :: position=left, size=small, type=primary, isPill=true": {
+   "status": "diffed",
+   "masked": 18.560606060606062,
+   "unmasked": 17.007575757575758,
+   "sizeOurs": "88×60",
+   "causeClass": "capture-gap"
+  },
+  "shoelace-button-group :: position=left, size=medium, type=default, isPill=false": {
+   "status": "diffed",
+   "masked": 11.231617647058824,
+   "unmasked": 12.110655737704919,
+   "sizeOurs": "122×80",
+   "causeClass": "capture-gap"
+  },
+  "shoelace-button-group :: position=left, size=medium, type=default, isPill=true": {
+   "status": "diffed",
+   "masked": 8.474264705882353,
+   "unmasked": 10.573770491803279,
+   "sizeOurs": "122×80",
+   "causeClass": "capture-gap"
+  },
+  "shoelace-button-group :: position=left, size=medium, type=primary, isPill=false": {
+   "status": "diffed",
+   "masked": 0.29411764705882354,
+   "unmasked": 6.055327868852459,
+   "sizeOurs": "122×80",
+   "causeClass": "capture-gap"
+  },
+  "shoelace-button-group :: position=left, size=medium, type=primary, isPill=true": {
+   "status": "diffed",
+   "masked": 11.50735294117647,
+   "unmasked": 12.305327868852459,
+   "sizeOurs": "122×80",
+   "causeClass": "capture-gap"
+  },
+  "shoelace-button-group :: position=center, size=large, type=default, isPill=false": {
+   "status": "diffed",
+   "masked": 7.0198675496688745,
+   "unmasked": 7.646341463414634,
+   "sizeOurs": "164×100",
+   "causeClass": "capture-gap"
+  },
+  "shoelace-button-group :: position=center, size=large, type=default, isPill=true": {
+   "status": "diffed",
+   "masked": 7.0198675496688745,
+   "unmasked": 7.646341463414634,
+   "sizeOurs": "164×100",
+   "causeClass": "capture-gap"
+  },
+  "shoelace-button-group :: position=center, size=large, type=primary, isPill=false": {
+   "status": "diffed",
+   "masked": 1.6556291390728477,
+   "unmasked": 3.701219512195122,
+   "sizeOurs": "164×100",
+   "causeClass": "capture-gap"
+  },
+  "shoelace-button-group :: position=center, size=large, type=primary, isPill=true": {
+   "status": "diffed",
+   "masked": 1.6556291390728477,
+   "unmasked": 3.701219512195122,
+   "sizeOurs": "164×100",
+   "causeClass": "capture-gap"
+  },
+  "shoelace-button-group :: position=center, size=small, type=default, isPill=false": {
+   "status": "diffed",
+   "masked": 34.84848484848485,
+   "unmasked": 19.261363636363637,
+   "sizeOurs": "88×60",
+   "causeClass": "capture-gap"
+  },
+  "shoelace-button-group :: position=center, size=small, type=default, isPill=true": {
+   "status": "diffed",
+   "masked": 34.84848484848485,
+   "unmasked": 19.261363636363637,
+   "sizeOurs": "88×60",
+   "causeClass": "capture-gap"
+  },
+  "shoelace-button-group :: position=center, size=small, type=primary, isPill=false": {
+   "status": "diffed",
+   "masked": 2.272727272727273,
+   "unmasked": 12.803030303030303,
+   "sizeOurs": "88×60",
+   "causeClass": "capture-gap"
+  },
+  "shoelace-button-group :: position=center, size=small, type=primary, isPill=true": {
+   "status": "diffed",
+   "masked": 2.272727272727273,
+   "unmasked": 12.803030303030303,
+   "sizeOurs": "88×60",
+   "causeClass": "capture-gap"
+  },
+  "shoelace-button-group :: position=center, size=medium, type=default, isPill=false": {
+   "status": "diffed",
+   "masked": 11.76470588235294,
+   "unmasked": 12.407786885245901,
+   "sizeOurs": "122×80",
+   "causeClass": "capture-gap"
+  },
+  "shoelace-button-group :: position=center, size=medium, type=default, isPill=true": {
+   "status": "diffed",
+   "masked": 11.76470588235294,
+   "unmasked": 12.407786885245901,
+   "sizeOurs": "122×80",
+   "causeClass": "capture-gap"
+  },
+  "shoelace-button-group :: position=center, size=medium, type=primary, isPill=false": {
+   "status": "diffed",
+   "masked": 2.941176470588235,
+   "unmasked": 7.530737704918032,
+   "sizeOurs": "122×80",
+   "causeClass": "capture-gap"
+  },
+  "shoelace-button-group :: position=center, size=medium, type=primary, isPill=true": {
+   "status": "diffed",
+   "masked": 2.941176470588235,
+   "unmasked": 7.530737704918032,
+   "sizeOurs": "122×80",
+   "causeClass": "capture-gap"
+  },
+  "shoelace-button-group :: position=right, size=large, type=default, isPill=false": {
+   "status": "diffed",
+   "masked": 8.071192052980132,
+   "unmasked": 8.420731707317074,
+   "sizeOurs": "164×100",
+   "causeClass": "capture-gap"
+  },
+  "shoelace-button-group :: position=right, size=large, type=default, isPill=true": {
+   "status": "diffed",
+   "masked": 6.763245033112583,
+   "unmasked": 7.4573170731707314,
+   "sizeOurs": "164×100",
+   "causeClass": "capture-gap"
+  },
+  "shoelace-button-group :: position=right, size=large, type=primary, isPill=false": {
+   "status": "diffed",
+   "masked": 2.3509933774834435,
+   "unmasked": 4.213414634146342,
+   "sizeOurs": "164×100",
+   "causeClass": "capture-gap"
+  },
+  "shoelace-button-group :: position=right, size=large, type=primary, isPill=true": {
+   "status": "diffed",
+   "masked": 9.933774834437086,
+   "unmasked": 9.798780487804878,
+   "sizeOurs": "164×100",
+   "causeClass": "capture-gap"
+  },
+  "shoelace-button-group :: position=position4, size=small, type=default, isPill=false": {
+   "status": "diffed",
+   "masked": 34.46969696969697,
+   "unmasked": 21.022727272727273,
+   "sizeOurs": "88×60",
+   "causeClass": "capture-gap"
+  },
+  "shoelace-button-group :: position=position4, size=small, type=default, isPill=true": {
+   "status": "diffed",
+   "masked": 27.178030303030305,
+   "unmasked": 18.901515151515152,
+   "sizeOurs": "88×60",
+   "causeClass": "capture-gap"
+  },
+  "shoelace-button-group :: position=position4, size=small, type=primary, isPill=false": {
+   "status": "diffed",
+   "masked": 3.0303030303030303,
+   "unmasked": 12.954545454545455,
+   "sizeOurs": "88×60",
+   "causeClass": "capture-gap"
+  },
+  "shoelace-button-group :: position=position4, size=small, type=primary, isPill=true": {
+   "status": "diffed",
+   "masked": 20.833333333333336,
+   "unmasked": 19.28030303030303,
+   "sizeOurs": "88×60",
+   "causeClass": "capture-gap"
+  },
+  "shoelace-button-group :: position=right, size=medium, type=default, isPill=false": {
+   "status": "diffed",
+   "masked": 14.025735294117647,
+   "unmasked": 13.668032786885245,
+   "sizeOurs": "122×80",
+   "causeClass": "capture-gap"
+  },
+  "shoelace-button-group :: position=right, size=medium, type=default, isPill=true": {
+   "status": "diffed",
+   "masked": 11.213235294117647,
+   "unmasked": 12.100409836065573,
+   "sizeOurs": "122×80",
+   "causeClass": "capture-gap"
+  },
+  "shoelace-button-group :: position=right, size=medium, type=primary, isPill=false": {
+   "status": "diffed",
+   "masked": 3.2352941176470593,
+   "unmasked": 7.6946721311475414,
+   "sizeOurs": "122×80",
+   "causeClass": "capture-gap"
+  },
+  "shoelace-button-group :: position=right, size=medium, type=primary, isPill=true": {
+   "status": "diffed",
+   "masked": 14.448529411764705,
+   "unmasked": 13.94467213114754,
+   "sizeOurs": "122×80",
+   "causeClass": "capture-gap"
+  },
+  "eventz-button :: variant=primary, state=default, isDisabled=false": {
+   "status": "diffed",
+   "masked": 13.717643051771116,
+   "unmasked": 11.623043712898003,
+   "sizeOurs": "216×68",
+   "causeClass": "capture-gap"
+  },
+  "eventz-button :: variant=knockout, state=default, isDisabled=false": {
+   "status": "diffed",
+   "masked": 4.920897718910964,
+   "unmasked": 4.630160550458716,
+   "sizeOurs": "212×64",
+   "causeClass": "capture-gap"
+  },
+  "eventz-button :: variant=primary, state=default, isDisabled=true": {
+   "status": "diffed",
+   "masked": 13.555858310626704,
+   "unmasked": 11.46788990825688,
+   "sizeOurs": "216×68",
+   "causeClass": "capture-gap"
+  },
+  "eventz-button :: variant=knockout, state=default, isDisabled=true": {
+   "status": "diffed",
+   "masked": 4.920897718910964,
+   "unmasked": 4.608658256880735,
+   "sizeOurs": "212×64",
+   "causeClass": "capture-gap"
+  },
+  "eventz-button :: variant=secondary, state=default, isDisabled=false": {
+   "status": "diffed",
+   "masked": 13.683583106267031,
+   "unmasked": 11.589314624932543,
+   "sizeOurs": "216×68",
+   "causeClass": "capture-gap"
+  },
+  "eventz-button :: variant=bare, state=default, isDisabled=false": {
+   "status": "diffed",
+   "masked": 29.433760683760685,
+   "unmasked": 21.37325761486835,
+   "sizeOurs": "66×22",
+   "causeClass": "capture-gap"
+  },
+  "eventz-button :: variant=bare, state=default, isDisabled=true": {
+   "status": "diffed",
+   "masked": 29.433760683760685,
+   "unmasked": 20.96024780588539,
+   "sizeOurs": "65×22",
+   "causeClass": "capture-gap"
+  },
+  "eventz-button :: variant=secondary, state=default, isDisabled=true": {
+   "status": "diffed",
+   "masked": 13.249483115093039,
+   "unmasked": 13.051470588235295,
+   "sizeOurs": "216×68",
+   "causeClass": "harness"
+  },
+  "eventz-button :: variant=primary, state=hover, isDisabled=false": {
+   "status": "diffed",
+   "masked": 13.726158038147137,
+   "unmasked": 11.63653534808419,
+   "sizeOurs": "216×68",
+   "causeClass": "capture-gap"
+  },
+  "eventz-button :: variant=knockout, state=hover, isDisabled=false": {
+   "status": "diffed",
+   "masked": 7.671081677704194,
+   "unmasked": 6.77322247706422,
+   "sizeOurs": "212×64",
+   "causeClass": "capture-gap"
+  },
+  "eventz-button :: variant=secondary, state=hover, isDisabled=false": {
+   "status": "diffed",
+   "masked": 13.751702997275203,
+   "unmasked": 11.64328116567728,
+   "sizeOurs": "216×68",
+   "causeClass": "capture-gap"
+  },
+  "eventz-button :: variant=bare, state=hover, isDisabled=false": {
+   "status": "diffed",
+   "masked": 7.671081677704194,
+   "unmasked": 6.77322247706422,
+   "sizeOurs": "212×64",
+   "causeClass": "capture-gap"
+  },
+  "eventz-button :: variant=primary, state=active, isDisabled=false": {
+   "status": "diffed",
+   "masked": 13.726158038147137,
+   "unmasked": 11.63653534808419,
+   "sizeOurs": "216×68",
+   "causeClass": "capture-gap"
+  },
+  "eventz-button :: variant=knockout, state=active, isDisabled=false": {
+   "status": "diffed",
+   "masked": 4.920897718910964,
+   "unmasked": 4.630160550458716,
+   "sizeOurs": "212×64",
+   "causeClass": "capture-gap"
+  },
+  "eventz-button :: variant=secondary, state=active, isDisabled=false": {
+   "status": "diffed",
+   "masked": 13.683583106267031,
+   "unmasked": 11.589314624932543,
+   "sizeOurs": "216×68",
+   "causeClass": "capture-gap"
+  },
+  "eventz-button :: variant=bare, state=active, isDisabled=false": {
+   "status": "diffed",
+   "masked": 29.433760683760685,
+   "unmasked": 21.37325761486835,
+   "sizeOurs": "66×22",
+   "causeClass": "capture-gap"
+  },
+  "eventz-button :: variant=primary, state=focus, isDisabled=false": {
+   "status": "diffed",
+   "masked": 19.866071428571427,
+   "unmasked": 17.322954822954824,
+   "sizeOurs": "232×84",
+   "causeClass": "renderer"
+  },
+  "eventz-button :: variant=knockout, state=focus, isDisabled=false": {
+   "status": "diffed",
+   "masked": 8.714833759590793,
+   "unmasked": 7.8739316239316235,
+   "sizeOurs": "228×80",
+   "causeClass": "renderer"
+  },
+  "eventz-button :: variant=secondary, state=focus, isDisabled=false": {
+   "status": "diffed",
+   "masked": 19.878137065637066,
+   "unmasked": 17.32804232804233,
+   "sizeOurs": "232×84",
+   "causeClass": "renderer"
+  },
+  "eventz-button :: variant=bare, state=focus, isDisabled=false": {
+   "status": "diffed",
+   "masked": 8.714833759590793,
+   "unmasked": 7.905982905982905,
+   "sizeOurs": "228×80",
+   "causeClass": "renderer"
+  },
+  "eventz-button :: variant=primary, state=focus, isDisabled=true": {
+   "status": "diffed",
+   "masked": 16.535955598455597,
+   "unmasked": 15.313390313390313,
+   "sizeOurs": "232×84",
+   "causeClass": "renderer"
+  },
+  "eventz-button :: variant=knockout, state=focus, isDisabled=true": {
+   "status": "diffed",
+   "masked": 8.702046035805626,
+   "unmasked": 9.476495726495726,
+   "sizeOurs": "228×80",
+   "causeClass": "renderer"
+  },
+  "eventz-button :: variant=secondary, state=focus, isDisabled=true": {
+   "status": "diffed",
+   "masked": 19.473938223938227,
+   "unmasked": 18.019943019943018,
+   "sizeOurs": "232×84",
+   "causeClass": "renderer"
+  },
+  "eventz-button :: variant=bare, state=focus, isDisabled=true": {
+   "status": "diffed",
+   "masked": 8.702046035805626,
+   "unmasked": 8.958333333333334,
+   "sizeOurs": "228×80",
+   "causeClass": "renderer"
+  },
+  "badge :: Variant=Info": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 0.08909479686386315,
+   "sizeOurs": "122×46",
+   "causeClass": "renderer"
+  },
+  "badge :: Variant=Success": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 0.08909479686386315,
+   "sizeOurs": "122×46",
+   "causeClass": "renderer"
+  },
+  "badge :: Variant=Warning": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 0.08909479686386315,
+   "sizeOurs": "122×46",
+   "causeClass": "renderer"
+  },
+  "badge :: Variant=Danger": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 0.07127583749109052,
+   "sizeOurs": "122×46",
+   "causeClass": "renderer"
+  },
+  "badge :: Variant=Error": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 0.07127583749109052,
+   "sizeOurs": "122×46",
+   "causeClass": "renderer"
+  },
+  "button :: Variant=Primary, Size=Medium, State=Default": {
+   "status": "diffed",
+   "masked": 5.49645390070922,
+   "unmasked": 4.183400267737617,
+   "sizeOurs": "164×72",
+   "causeClass": "renderer"
+  },
+  "button :: Variant=Primary, Size=Small, State=Default": {
+   "status": "diffed",
+   "masked": 1.8479776847977685,
+   "unmasked": 1.3043478260869565,
+   "sizeOurs": "136×50",
+   "causeClass": "renderer"
+  },
+  "button :: Variant=Primary, Size=Large, State=Default": {
+   "status": "diffed",
+   "masked": 5.191054502369669,
+   "unmasked": 5.173297785069729,
+   "sizeOurs": "208×90",
+   "causeClass": "renderer"
+  },
+  "button :: Variant=Secondary, Size=Small, State=Default": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 0.5217391304347827,
+   "sizeOurs": "136×50",
+   "causeClass": "renderer"
+  },
+  "button :: Variant=Secondary, Size=Medium, State=Default": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 1.0876840696117804,
+   "sizeOurs": "164×72",
+   "causeClass": "renderer"
+  },
+  "button :: Variant=Secondary, Size=Large, State=Default": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 1.620180475799836,
+   "sizeOurs": "208×90",
+   "causeClass": "renderer"
+  },
+  "button :: Variant=Danger, Size=Small, State=Default": {
+   "status": "diffed",
+   "masked": 1.8479776847977685,
+   "unmasked": 1.3043478260869565,
+   "sizeOurs": "136×50",
+   "causeClass": "renderer"
+  },
+  "button :: Variant=Danger, Size=Medium, State=Default": {
+   "status": "diffed",
+   "masked": 5.49645390070922,
+   "unmasked": 4.183400267737617,
+   "sizeOurs": "164×72",
+   "causeClass": "renderer"
+  },
+  "button :: Variant=Danger, Size=Large, State=Default": {
+   "status": "diffed",
+   "masked": 5.191054502369669,
+   "unmasked": 5.173297785069729,
+   "sizeOurs": "208×90",
+   "causeClass": "renderer"
+  },
+  "button :: Variant=Ghost, Size=Medium, State=Default": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 1.0876840696117804,
+   "sizeOurs": "164×72",
+   "causeClass": "renderer"
+  },
+  "button :: Variant=Ghost, Size=Small, State=Default": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 0.5217391304347827,
+   "sizeOurs": "136×50",
+   "causeClass": "renderer"
+  },
+  "button :: Variant=Ghost, Size=Large, State=Default": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 1.620180475799836,
+   "sizeOurs": "208×90",
+   "causeClass": "renderer"
+  },
+  "button :: Variant=Primary, Size=Medium, State=Hover": {
+   "status": "diffed",
+   "masked": 5.49645390070922,
+   "unmasked": 4.183400267737617,
+   "sizeOurs": "164×72",
+   "causeClass": "renderer"
+  },
+  "button :: Variant=Secondary, Size=Medium, State=Hover": {
+   "status": "diffed",
+   "masked": 5.304373522458629,
+   "unmasked": 4.091365461847389,
+   "sizeOurs": "164×72",
+   "causeClass": "renderer"
+  },
+  "button :: Variant=Danger, Size=Medium, State=Hover": {
+   "status": "diffed",
+   "masked": 5.49645390070922,
+   "unmasked": 4.183400267737617,
+   "sizeOurs": "164×72",
+   "causeClass": "renderer"
+  },
+  "button :: Variant=Ghost, Size=Medium, State=Hover": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 1.0876840696117804,
+   "sizeOurs": "164×72",
+   "causeClass": "renderer"
+  },
+  "button :: Variant=Primary, Size=Medium, State=Focus Visible": {
+   "status": "diffed",
+   "masked": 34.8536036036036,
+   "unmasked": 24.255050505050505,
+   "sizeOurs": "180×88",
+   "causeClass": "design"
+  },
+  "button :: Variant=Secondary, Size=Medium, State=Focus Visible": {
+   "status": "diffed",
+   "masked": 32.33858858858859,
+   "unmasked": 22.575757575757578,
+   "sizeOurs": "180×88",
+   "causeClass": "design"
+  },
+  "button :: Variant=Danger, Size=Medium, State=Focus Visible": {
+   "status": "diffed",
+   "masked": 34.8536036036036,
+   "unmasked": 24.255050505050505,
+   "sizeOurs": "180×88",
+   "causeClass": "design"
+  },
+  "button :: Variant=Ghost, Size=Medium, State=Focus Visible": {
+   "status": "diffed",
+   "masked": 32.376126126126124,
+   "unmasked": 22.601010101010104,
+   "sizeOurs": "180×88",
+   "causeClass": "design"
+  },
+  "button :: Variant=Primary, Size=Medium, State=Disabled": {
+   "status": "diffed",
+   "masked": 93.91252955082743,
+   "unmasked": 86.25334672021418,
+   "sizeOurs": "164×72",
+   "causeClass": "design"
+  },
+  "button :: Variant=Secondary, Size=Medium, State=Disabled": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 5.915327978580991,
+   "sizeOurs": "164×72",
+   "causeClass": "design"
+  },
+  "button :: Variant=Danger, Size=Medium, State=Disabled": {
+   "status": "diffed",
+   "masked": 93.91252955082743,
+   "unmasked": 86.25334672021418,
+   "sizeOurs": "164×72",
+   "causeClass": "design"
+  },
+  "button :: Variant=Ghost, Size=Medium, State=Disabled": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 5.915327978580991,
+   "sizeOurs": "164×72",
+   "causeClass": "design"
+  },
+  "checkbox :: Value=Unchecked, Size=Medium": {
+   "status": "diffed",
+   "masked": 2.407832069147998,
+   "unmasked": 8.678416609628108,
+   "sizeOurs": "480×72",
+   "causeClass": "renderer"
+  },
+  "checkbox :: Value=Unchecked, Size=Small": {
+   "status": "diffed",
+   "masked": 1.9420182122282101,
+   "unmasked": 8.637787056367433,
+   "sizeOurs": "472×72",
+   "causeClass": "renderer"
+  },
+  "checkbox :: Value=Checked, Size=Medium": {
+   "status": "diffed",
+   "masked": 2.1520550361615807,
+   "unmasked": 8.595710700433493,
+   "sizeOurs": "480×72",
+   "causeClass": "renderer"
+  },
+  "checkbox :: Value=Checked, Size=Small": {
+   "status": "diffed",
+   "masked": 1.8212228210369819,
+   "unmasked": 8.600092785896543,
+   "sizeOurs": "472×72",
+   "causeClass": "renderer"
+  },
+  "checkbox :: Value=Indeterminate, Size=Medium": {
+   "status": "diffed",
+   "masked": 1.8345387193508553,
+   "unmasked": 8.493041295916038,
+   "sizeOurs": "480×72",
+   "causeClass": "renderer"
+  },
+  "checkbox :: Value=Indeterminate, Size=Small": {
+   "status": "diffed",
+   "masked": 1.4867125069689648,
+   "unmasked": 8.495708652284852,
+   "sizeOurs": "472×72",
+   "causeClass": "renderer"
+  },
+  "switch :: Value=Off": {
+   "status": "diffed",
+   "masked": 2.974714923153198,
+   "unmasked": 8.14528899445764,
+   "sizeOurs": "415×72",
+   "causeClass": "renderer"
+  },
+  "switch :: Value=On": {
+   "status": "diffed",
+   "masked": 3.036688150718889,
+   "unmasked": 8.161784111902877,
+   "sizeOurs": "415×72",
+   "causeClass": "renderer"
+  },
+  "heading :: Level=H2, Size=Large": {
+   "status": "diffed",
+   "masked": null,
+   "unmasked": 2.186761229314421,
+   "sizeOurs": "140×36",
+   "causeClass": "renderer"
+  },
+  "heading :: Level=H2, Size=Small": {
+   "status": "diffed",
+   "masked": null,
+   "unmasked": 4.1505791505791505,
+   "sizeOurs": "111×28",
+   "causeClass": "renderer"
+  },
+  "heading :: Level=H2, Size=Medium": {
+   "status": "diffed",
+   "masked": null,
+   "unmasked": 1,
+   "sizeOurs": "125×32",
+   "causeClass": "renderer"
+  },
+  "heading :: Level=H1, Size=Large": {
+   "status": "diffed",
+   "masked": null,
+   "unmasked": 2.186761229314421,
+   "sizeOurs": "140×36",
+   "causeClass": "renderer"
+  },
+  "heading :: Level=H1, Size=Small": {
+   "status": "diffed",
+   "masked": null,
+   "unmasked": 4.1505791505791505,
+   "sizeOurs": "111×28",
+   "causeClass": "renderer"
+  },
+  "heading :: Level=H1, Size=Medium": {
+   "status": "diffed",
+   "masked": null,
+   "unmasked": 1,
+   "sizeOurs": "125×32",
+   "causeClass": "renderer"
+  },
+  "heading :: Level=H3, Size=Large": {
+   "status": "diffed",
+   "masked": null,
+   "unmasked": 2.186761229314421,
+   "sizeOurs": "140×36",
+   "causeClass": "renderer"
+  },
+  "heading :: Level=H3, Size=Small": {
+   "status": "diffed",
+   "masked": null,
+   "unmasked": 4.1505791505791505,
+   "sizeOurs": "111×28",
+   "causeClass": "renderer"
+  },
+  "heading :: Level=H3, Size=Medium": {
+   "status": "diffed",
+   "masked": null,
+   "unmasked": 1,
+   "sizeOurs": "125×32",
+   "causeClass": "renderer"
+  },
+  "heading :: Level=H4, Size=Large": {
+   "status": "diffed",
+   "masked": null,
+   "unmasked": 2.186761229314421,
+   "sizeOurs": "140×36",
+   "causeClass": "renderer"
+  },
+  "heading :: Level=H4, Size=Small": {
+   "status": "diffed",
+   "masked": null,
+   "unmasked": 4.1505791505791505,
+   "sizeOurs": "111×28",
+   "causeClass": "renderer"
+  },
+  "heading :: Level=H4, Size=Medium": {
+   "status": "diffed",
+   "masked": null,
+   "unmasked": 1,
+   "sizeOurs": "125×32",
+   "causeClass": "renderer"
+  },
+  "heading :: Level=H5, Size=Large": {
+   "status": "diffed",
+   "masked": null,
+   "unmasked": 2.186761229314421,
+   "sizeOurs": "140×36",
+   "causeClass": "renderer"
+  },
+  "heading :: Level=H5, Size=Small": {
+   "status": "diffed",
+   "masked": null,
+   "unmasked": 4.1505791505791505,
+   "sizeOurs": "111×28",
+   "causeClass": "renderer"
+  },
+  "heading :: Level=H5, Size=Medium": {
+   "status": "diffed",
+   "masked": null,
+   "unmasked": 1,
+   "sizeOurs": "125×32",
+   "causeClass": "renderer"
+  },
+  "heading :: Level=H6, Size=Large": {
+   "status": "diffed",
+   "masked": null,
+   "unmasked": 2.186761229314421,
+   "sizeOurs": "140×36",
+   "causeClass": "renderer"
+  },
+  "heading :: Level=H6, Size=Small": {
+   "status": "diffed",
+   "masked": null,
+   "unmasked": 4.1505791505791505,
+   "sizeOurs": "111×28",
+   "causeClass": "renderer"
+  },
+  "heading :: Level=H6, Size=Medium": {
+   "status": "diffed",
+   "masked": null,
+   "unmasked": 1,
+   "sizeOurs": "125×32",
+   "causeClass": "renderer"
+  }
+ }
+}
