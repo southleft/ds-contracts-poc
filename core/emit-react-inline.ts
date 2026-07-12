@@ -15,6 +15,9 @@
  *     styles — omitted. Disabled-state tokens DO apply, via the disabled prop.
  *   · Animations (spinner/skeleton) ship as an embedded <style> keyframes
  *     block — the one thing inline style objects cannot carry.
+ *   · a11y.minHitArea's non-visual ::before hit-target extension is a
+ *     pseudo-element — not expressible inline; same declared limit as the
+ *     hover/focus pseudo-classes above (the css/html emitters enforce it).
  *   · Composition imports sibling inline-emitted components ('./Dep').
  */
 import {

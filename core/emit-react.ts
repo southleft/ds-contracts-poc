@@ -865,9 +865,36 @@ export function generateCss(contract: Contract, tokenInventory: Set<string>, err
     }
   }
 
+  // a11y.minHitArea: the declared floor is ENFORCED, not aspirational — the
+  // standard non-visual hit-target extension (an absolutely centered ::before
+  // at max(100%, floor) per axis; it paints nothing and never affects layout,
+  // but pointer events on it hit the component). Field failure: Button
+  // declared 44 while the small size rendered a 36px-tall target and nothing
+  // enforced the difference.
+  const minHitArea = contract.a11y?.minHitArea;
+  if (typeof minHitArea === 'number' && !rootDecls.includes('position: relative')) {
+    rootDecls.push('position: relative');
+  }
+
   lines.push('', '.root {');
   for (const d of rootDecls) lines.push(`  ${d};`);
   lines.push('}');
+
+  if (typeof minHitArea === 'number') {
+    lines.push(
+      '',
+      '/* a11y.minHitArea: non-visual hit-target floor — see contract */',
+      '.root::before {',
+      "  content: '';",
+      '  position: absolute;',
+      '  left: 50%;',
+      '  top: 50%;',
+      `  width: max(100%, ${minHitArea}px);`,
+      `  height: max(100%, ${minHitArea}px);`,
+      '  transform: translate(-50%, -50%);',
+      '}',
+    );
+  }
 
   if (contract.states.includes('focus-visible')) {
     lines.push('', '.root:focus-visible {', '  outline-style: solid;', '  outline-offset: 2px;', '}');
