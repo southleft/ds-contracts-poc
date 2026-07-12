@@ -2269,6 +2269,39 @@ const cases: Case[] = [
     },
   },
   {
+    // P9 (repeated-children collections, schema v12 `repeat`): ≥3 adjacent
+    // sibling instances of the same child with a carriable per-item field
+    // propose as ONE item-template part + arrayOf prop — React maps the live
+    // array, the canvas/static surfaces render the OBSERVED sample (the
+    // meter discipline). Per-item enum/state differences (P10) and pre-v1.5
+    // TEXT/VARIANT-ambiguous keys stay NAMED receipts; "Show item N" count
+    // booleans never promote. Receipt runs the REAL owner's-kit
+    // Navigation-Header fixture + a v1.5-shaped synthetic run.
+    id: 'repeated-children-collection',
+    claim: 'C5-extraction',
+    run: () => {
+      const r = run(TSX, ['extract/figma/repeat-collection-check.ts']);
+      if (r.status !== 0) throw new Error(`repeat receipt failed:\n${r.out}`);
+      for (const line of [
+        '✔ exactly ONE repeat part proposes for the 5 drawn menu items (got 1)',
+        '✔ the sample carries the 5 OBSERVED siblings (got 5)',
+        '✔ the arrayOf prop `items` ships code-only (bindings.figma.kind NONE)',
+        '✔ the collection carry is the NAMED flagship note (P9, meter discipline spelled out)',
+        '✔ the per-item TEXT stays a NAMED ambiguity receipt (pre-v1.5 dump — never guessed)',
+        '✔ the "Show item N" count booleans are receipted, never promoted (rename story named)',
+        '✔ React maps the LIVE array ({items?.map((item, index) => …iconRight={item.iconRight}…)})',
+        '✔ the canvas constructs the OBSERVED instances (5 LinkNeutral sample instances in the sync script)',
+        '✔ per-item TEXT carries as a field — the "#id" suffix is TEXT certainty (fields: { children: text })',
+        '✔ the sample carries the drawn labels VERBATIM (One/Two/Three/Four)',
+        '✔ the varying enum is the P10 receipt (selected-item stays note-gated, never carried)',
+        '✔ the static surface renders the OBSERVED sample per item (One…Four appear in the html)',
+        '✔ the pattern is DETECTED and the fallback is a NAMED note (no field invented)',
+      ]) {
+        if (!r.out.includes(line)) throw new Error(`missing check: ${line}`);
+      }
+    },
+  },
+  {
     // P21 (overlap collections): negative auto-layout spacing must NEVER
     // mint a plain negative-px gap token (`gap: -8px` is invalid CSS and the
     // overlap silently vanished — the pre-P21 bug). Uniform negative spacing

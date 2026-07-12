@@ -141,7 +141,9 @@ export const dumpCapturesHidden = (prov?: { note?: string; dumpVersion?: string 
  * link to the repo's ds.button just because the names collide). */
 export interface MinimalChildContract {
   id: string;
-  props: Array<{ name: string; bindings: { figma: { property?: string; values?: Record<string, string> } } }>;
+  /** `type` (P9): the repeat field classifier reads it to tell TEXT-certain
+   *  props from enums — optional so pre-P9 callers keep passing slices. */
+  props: Array<{ name: string; type?: unknown; bindings: { figma: { property?: string; values?: Record<string, string> } } }>;
   anchors?: { figma?: { componentSetKey?: string | null } };
 }
 
@@ -667,6 +669,9 @@ interface Ctx {
   unbound: UnboundValue[];
   textProps: Array<{ name: string; property: string; default: string }>;
   boolProps: Array<{ name: string; property: string; default?: boolean }>;
+  /** P9 repeated-children collections: one arrayOf prop per repeat part,
+   *  emitted after text/bool props (code-only, bindings.figma.kind NONE). */
+  arrayProps: Array<{ name: string; fields: Record<string, 'text' | 'boolean'>; instanceOf: string }>;
   /** Slot parts in tree order, for the default-slot ("children") judgment. */
   slots: Array<{ part: Record<string, unknown>; property: string; optional: boolean }>;
   /** Variant names whose base instance was flattened into the variant root —
@@ -2253,6 +2258,245 @@ function unifiedPropRef(m: Merged, kind: string, ctx: Ctx, where: string): strin
   return values[0];
 }
 
+// ---------------------------------------------------------------------------
+// P9: repeated-children collections (menu items, breadcrumb segments, tab
+// items). ≥3 ADJACENT sibling instances of the SAME child component with a
+// homogeneous applied-prop shape propose as ONE item-template part carrying
+// `repeat` + a new arrayOf prop — instead of N hard-coded component-ref
+// parts. Field rules (deterministic, every carry/skip NAMED):
+//   · a VARYING boolean applied prop → a boolean field
+//   · a TEXT-CERTAIN string prop (the resolved child contract models it as a
+//     text prop, or the key carries the dump v1.5 "#id" suffix) → a text
+//     field (varying or not — per-item content is per-item API)
+//   · a VARYING enum/ambiguous string prop → a NAMED receipt (per-item
+//     enum/state differences are P10, selected-item — no repeat vocabulary;
+//     bare string keys in pre-v1.5 dumps are VARIANT/TEXT-ambiguous)
+//   · constant props stay FIXED on component.props (canonicalized as today)
+// No carriable field → the pattern is receipted and the siblings build as
+// fixed parts, exactly as before. Per-sibling VISIBILITY bindings (the
+// "Show item 3" count-control booleans the taxonomy names as P9's canvas
+// count spelling) ride the run: they are NOT promoted to boolean props —
+// the array prop owns the count in code — and the non-promotion is a named
+// rename story (regeneration renders the sample's items).
+// ---------------------------------------------------------------------------
+
+/** The maximal P9 run starting at children[i], or null (< 3 members). */
+function repeatRunAt(children: Merged[], i: number, ctx: Ctx): Merged[] | null {
+  const eligible = (m: Merged): boolean =>
+    m.type === 'INSTANCE' &&
+    first(m.occ, (n) => n.propRefs?.mainComponent) === undefined &&
+    first(m.occ, (n) => n.componentProperties) !== undefined &&
+    !isSelfInstance(first(m.occ, (n) => n.instanceOf) ?? m.name, ctx);
+  if (!eligible(children[i])) return null;
+  const instanceOf = first(children[i].occ, (n) => n.instanceOf) ?? children[i].name;
+  const shapeOf = (m: Merged): string =>
+    Object.keys(first(m.occ, (n) => n.componentProperties) ?? {})
+      .map((k) => k.split('#')[0])
+      .sort()
+      .join(' ');
+  const shape = shapeOf(children[i]);
+  const run: Merged[] = [];
+  for (let j = i; j < children.length; j++) {
+    const m = children[j];
+    if (!eligible(m)) break;
+    if ((first(m.occ, (n) => n.instanceOf) ?? m.name) !== instanceOf) break;
+    if (shapeOf(m) !== shape) break;
+    run.push(m);
+  }
+  return run.length >= 3 ? run : null;
+}
+
+/** Build the ONE repeat part for a P9 run — or null when no per-item field
+ *  is carriable (the caller falls back to fixed parts; the skip is NAMED). */
+function buildRepeatPart(run: Merged[], ctx: Ctx, where: string, selfKey: string): Record<string, unknown> | null {
+  const head = run[0];
+  const instanceOf = first(head.occ, (n) => n.instanceOf) ?? head.name;
+  const keys = instanceKeysOf(head);
+  const res = resolveChildContract(instanceOf, keys, ctx);
+  // Field classification runs against the contract the emitted ref will BIND:
+  // the resolved contract, or the contract the derived stub id lands on (a
+  // stub never overrides a registered contract) — never a fresh name lookup.
+  const refId = res.id ?? stubIdFor(instanceOf, ctx, keys).id;
+  const mapping = ctx.contractsById?.get(refId);
+  // Per-sibling applied record — the DEFAULT variant's occurrence preferred.
+  const appliedOf = (sib: Merged): Record<string, string | boolean> =>
+    (sib.occ.find((o) => o.variant === ctx.totalVariants[0]) ?? sib.occ[0]).node.componentProperties ?? {};
+  const records = run.map(appliedOf);
+
+  const fields: Record<string, 'text' | 'boolean'> = {};
+  const fieldKeyByName: Record<string, string> = {};
+  const constantKeys: string[] = [];
+  const claimField = (name: string, type: 'text' | 'boolean', rawKey: string, bare: string): boolean => {
+    if (fields[name] !== undefined) {
+      ctx.notes.push(
+        `${where}: per-item field name "${name}" (from applied prop "${bare}") collides with another field — not carried, review (P9)`,
+      );
+      return false;
+    }
+    fields[name] = type;
+    fieldKeyByName[name] = rawKey;
+    return true;
+  };
+  for (const rawKey of Object.keys(records[0])) {
+    const bare = rawKey.split('#')[0];
+    const values = records.map((r) => r[rawKey]);
+    const varying = new Set(values.map((v) => String(v))).size > 1;
+    const mappingProp = mapping?.props.find((p) => p.bindings.figma.property === bare);
+    if (typeof values[0] === 'boolean') {
+      if (!varying) {
+        constantKeys.push(rawKey);
+      } else if (mapping && (!mappingProp || mappingProp.type !== 'boolean')) {
+        ctx.notes.push(
+          `${where}: per-item boolean "${bare}" does not map through ${mapping.id}'s bindings as a boolean prop — not carried as a field; verify the child contract is current (P9)`,
+        );
+      } else {
+        claimField(mappingProp?.name ?? canonicalPropName(bare), 'boolean', rawKey, bare);
+      }
+      continue;
+    }
+    const textCertain = mapping ? mappingProp?.type === 'text' : rawKey.includes('#');
+    if (textCertain) {
+      claimField(mappingProp?.name ?? canonicalPropName(bare), 'text', rawKey, bare);
+    } else if (!varying) {
+      constantKeys.push(rawKey);
+    } else if (mapping && !mappingProp) {
+      ctx.notes.push(
+        `${where}: applied prop "${bare}" varies per sibling (${[...new Set(values.map(String))].join(', ')}) but does not map through ${mapping.id}'s bindings — not carried as a field; verify the child contract is current (P9)`,
+      );
+    } else if (mapping) {
+      ctx.notes.push(
+        `${where}: applied prop "${bare}" varies per sibling (${[...new Set(values.map(String))].join(', ')}) — per-item enum/state differences are P10 (selected-item) with no repeat vocabulary; receipted, the sample renders ${mapping.id}'s default (review)`,
+      );
+    } else {
+      ctx.notes.push(
+        `${where}: applied prop "${bare}" varies per sibling (${[...new Set(values.map(String))].join(', ')}) but a bare string key is VARIANT/TEXT-ambiguous (pre-v1.5 dump, no "#id" suffix) — not carried as a field; recapture with the v1.5 plugin to carry per-item text (review)`,
+      );
+    }
+  }
+  if (Object.keys(fields).length === 0) {
+    ctx.notes.push(
+      `${where}: ${run.length} adjacent sibling instances of "${instanceOf}" (repeated-children collection, P9) but no per-item field is carriable — kept as ${run.length} fixed parts, review`,
+    );
+    return null;
+  }
+
+  // The run proposes — register resolution notes / stubs ONCE, for the run.
+  noteResolution(res, instanceOf, keys, ctx, where);
+  if (!res.id) for (const sib of run) captureStub(instanceOf, sib, ctx, where);
+
+  // Per-sibling visibility bindings ("Show item N") are the canvas's drawn
+  // count controls — NOT promoted to boolean props (N "show item" booleans
+  // would be absurd code API; the array prop owns the count). Named rename
+  // story for the canvas round trip.
+  const visibleRefs = [
+    ...new Set(run.map((sib) => first(sib.occ, (n) => n.propRefs?.visible)).filter((v): v is string => v !== undefined)),
+  ];
+  if (visibleRefs.length > 0) {
+    ctx.notes.push(
+      `${where}: per-sibling visibility bindings (${visibleRefs.join(', ')}) are the canvas's drawn COUNT controls ("Show item N", the P9 canvas count spelling) — not promoted to boolean props (the array prop owns the count in code); regeneration renders repeat.sample's items, the drawn booleans stay on the source set (rename story, named here)`,
+    );
+  }
+
+  // arrayOf prop name: `items` when free, else `<partKey>Items` — deterministic.
+  const taken = new Set<string>([
+    ...ctx.axes.map((a) => a.propName),
+    ...ctx.textProps.map((t) => t.name),
+    ...ctx.boolProps.map((b) => b.name),
+    ...ctx.arrayProps.map((a) => a.name),
+  ]);
+  const propName = taken.has('items') ? `${selfKey}Items` : 'items';
+  ctx.arrayProps.push({ name: propName, fields, instanceOf });
+  ctx.notes.push(
+    `prop \`${propName}\`: structured array prop proposed for the repeated "${instanceOf}" collection — code-only by declared fidelity limit (bindings.figma.kind NONE: the canvas has no list-of-records property type); the canvas renders repeat.sample instead`,
+  );
+
+  // The observed sample — one record per drawn sibling, field values only
+  // (text verbatim, booleans as drawn).
+  const sample = records.map((rec) => {
+    const out: Record<string, string | boolean> = {};
+    for (const [name, rawKey] of Object.entries(fieldKeyByName)) {
+      const v = rec[rawKey];
+      if (v !== undefined) out[name] = v;
+    }
+    return out;
+  });
+
+  // Constant applied props stay fixed — canonicalized through the child's
+  // bindings exactly like a single instance, threading included.
+  const part: Record<string, unknown> = {};
+  const component: Record<string, unknown> = { id: refId };
+  const constantApplied: Record<string, string | boolean> = {};
+  for (const k of constantKeys) constantApplied[k] = records[0][k];
+  if (Object.keys(constantApplied).length > 0) {
+    const canonical = canonicalizeInstanceProps(instanceOf, constantApplied, res.id, ctx, where, false, keys);
+    const perOccurrence = head.occ
+      .filter((o) => o.node.componentProperties !== undefined)
+      .map((o) => {
+        const constOnly: Record<string, string | boolean> = {};
+        for (const k of constantKeys) {
+          const v = o.node.componentProperties![k];
+          if (v !== undefined) constOnly[k] = v;
+        }
+        return { variant: o.variant, canonical: canonicalizeInstanceProps(instanceOf, constOnly, res.id, ctx, where, true, keys) };
+      });
+    threadInstanceProps(canonical, perOccurrence, ctx, where, instanceOf);
+    if (Object.keys(canonical).length > 0) component.props = canonical;
+  }
+  part.component = component;
+  part.repeat = { itemsProp: propName, sample };
+
+  if (run.some((sib) => sib.occ.length !== ctx.totalVariants.length)) {
+    const counts = ctx.totalVariants.map(
+      (v) => run.filter((sib) => sib.occ.some((o) => o.variant === v)).length,
+    );
+    ctx.notes.push(
+      `${where}: sibling count varies per variant (${[...new Set(counts)].join('/')}) — repeat.sample carries the UNION of drawn siblings; the live count is the array prop's (code side), review`,
+    );
+  }
+  ctx.notes.push(
+    `${where}: ${run.length} adjacent sibling instances of "${instanceOf}" with a homogeneous applied-prop shape — proposed as ONE item-template part with repeat over arrayOf prop \`${propName}\` (P9; fields: ${Object.entries(fields).map(([n, t]) => `${n}:${t}`).join(', ')}); the drawn siblings become the canvas's static sample (repeat.sample — the meter discipline: canvas and static surfaces render the OBSERVED sample; code maps the live array)`,
+  );
+  return part;
+}
+
+/** Children → parts record, with P9 run detection in front of the per-child
+ *  walk (ONE walker serves buildPart's frame branch and the root). */
+function buildChildParts(
+  children: Merged[],
+  mode: 'HORIZONTAL' | 'VERTICAL' | null,
+  ctx: Ctx,
+  where: string,
+  selfKey: string,
+): Record<string, unknown> {
+  const parts: Record<string, unknown> = {};
+  let i = 0;
+  while (i < children.length) {
+    const child = children[i];
+    const run = repeatRunAt(children, i, ctx);
+    if (run) {
+      // Claim the key BEFORE building (pre-order, the partKey discipline).
+      const key = partKey(child.name, ctx, `${where}/${child.name}`, selfKey);
+      const repeatPart = buildRepeatPart(run, ctx, `${where}/${child.name}`, key);
+      if (repeatPart) {
+        parts[key] = repeatPart;
+        i += run.length;
+        continue;
+      }
+      // No carriable field (named above) — the first sibling builds under the
+      // already-claimed key; the rest walk as before.
+      const built = buildPart(child, mode, ctx, `${where}/${child.name}`, key);
+      if (built) parts[key] = built;
+      i++;
+      continue;
+    }
+    const key = partKey(child.name, ctx, `${where}/${child.name}`, selfKey);
+    const built = buildPart(child, mode, ctx, `${where}/${child.name}`, key);
+    if (built) parts[key] = built;
+    i++;
+  }
+  return parts;
+}
+
 function buildPart(
   m: Merged,
   parentMode: 'HORIZONTAL' | 'VERTICAL' | null,
@@ -2489,15 +2733,8 @@ function buildPart(
   const visibleRef = unifiedPropRef(m, 'visible', ctx, where);
   if (visibleRef) applyVisibleBinding(part, visibleRef, ctx, where, m);
   const mode = m.occ[0].node.layout?.mode ?? null;
-  const parts: Record<string, unknown> = {};
-  for (const child of m.children) {
-    // Claim the key BEFORE descending (pre-order): the parent-derived-prefix
-    // rule needs the parent's key settled, and the first DRAWN part keeps
-    // its name (see partKey — the registry is contract-global).
-    const key = partKey(child.name, ctx, `${where}/${child.name}`, selfKey);
-    const built = buildPart(child, mode, ctx, `${where}/${child.name}`, key);
-    if (built) parts[key] = built;
-  }
+  // Pre-order key claiming + P9 run detection — see buildChildParts.
+  const parts = buildChildParts(m.children, mode, ctx, where, selfKey);
   if (Object.keys(parts).length > 0) part.parts = parts;
   if (visibleWhen) part.visibleWhen = visibleWhen;
   return part;
@@ -3400,6 +3637,7 @@ export function proposeFromDump(
     unbound: [],
     textProps: [],
     boolProps: [],
+    arrayProps: [],
     slots: [],
     flattenedVariants: new Set(),
     stubs: new Map(),
@@ -3490,13 +3728,8 @@ export function proposeFromDump(
     );
   } else {
     const mode = merged.occ[0].node.layout?.mode ?? null;
-    const parts: Record<string, unknown> = {};
-    for (const child of merged.children) {
-      // Pre-order claim against the contract-global registry (see partKey).
-      const key = partKey(child.name, ctx, `${where}/${child.name}`, 'root');
-      const built = buildPart(child, mode, ctx, `${where}/${child.name}`, key);
-      if (built) parts[key] = built;
-    }
+    // Pre-order key claiming + P9 run detection — see buildChildParts.
+    const parts = buildChildParts(merged.children, mode, ctx, where, 'root');
     if (Object.keys(parts).length > 0) root.parts = parts;
   }
   invertNodeOpacity(merged, root, rootTokens, ctx, where);
@@ -3633,6 +3866,19 @@ export function proposeFromDump(
       bindings: {
         figma: { kind: 'BOOLEAN', property: b.property },
         code: { prop: b.name },
+      },
+    });
+  }
+  // P9 repeated-children collections: the arrayOf prop each repeat part maps
+  // over — code-only by declared fidelity limit (bindings.figma.kind NONE;
+  // the canvas renders repeat.sample instead). No default: an optional array.
+  for (const a of ctx.arrayProps) {
+    props.push({
+      name: a.name,
+      type: { arrayOf: a.fields },
+      bindings: {
+        figma: { kind: 'NONE' },
+        code: { prop: a.name },
       },
     });
   }
