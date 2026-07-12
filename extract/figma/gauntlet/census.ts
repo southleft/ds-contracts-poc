@@ -345,6 +345,9 @@ interface SetRecord {
   degradationsByCode: Record<string, number>;
   stubCount: number;
   stubRefusals: string[];
+  /** P9 (schema v12): repeat parts the PROPOSAL carries (vs. the dump-side
+   *  arrayOfCandidateGroups feature — candidates the detector saw). */
+  repeatParts: number;
   features: SetFeatures;
   clean: boolean;
   internalError?: string;
@@ -391,6 +394,7 @@ for (const setName of setKeys) {
     degradationsByCode,
     stubCount: 0,
     stubRefusals: [],
+    repeatParts: 0,
     features: featuresOf(set),
     clean: false,
   };
@@ -407,6 +411,7 @@ for (const setName of setKeys) {
       rec.unboundCount = proposal.unbound.length;
       rec.mintedCount = proposal.mintedTokens?.count ?? 0;
       rec.tokenRefsCarried = (JSON.stringify(proposal.contract).match(TOKEN_REF) ?? []).length;
+      rec.repeatParts = (JSON.stringify(proposal.contract).match(/"repeat":/g) ?? []).length;
 
       // Referee (playground validate.ts): schema, then validateContract +
       // generateCss over repo + captured + minted.
@@ -562,6 +567,10 @@ const PATTERN_CLASSES: Array<{ cls: string; pick: () => string | null }> = [
     pick: () => representative(records.filter((r) => r.features.arrayOfCandidateGroups > 0), (r) => r.features.arrayOfCandidateGroups),
   },
   {
+    cls: 'pattern-repeat-collection',
+    pick: () => representative(records.filter((r) => r.repeatParts > 0), (r) => r.repeatParts),
+  },
+  {
     cls: 'pattern-slot-placeholder',
     pick: () => representative(records.filter((r) => r.features.slotPlaceholderNodes > 0), (r) => r.features.slotPlaceholderNodes),
   },
@@ -637,13 +646,15 @@ const ENGINEERING_READS: Record<string, string> = {
   'prop-binding-not-camelcase':
     'FIXED (census class-fix batch) — `canonicalPropName` (core/propose-figma.ts) now applies the componentIdSlug digit-led discipline to prop code bindings: a digit-led spelling gets the deterministic "p" prefix ("2nd paragraph" → `p2ndParagraph`) with a named note; the figma binding keeps the original spelling. If this class ranks again, it is a REGRESSION — replay `extract/figma/gauntlet/class-fix-check.ts`.',
   'pattern-arrayof-candidate':
-    'Not a refusal — a capability frontier. ≥3 same-named siblings (avatar stacks, table rows, pagination numbers) propose as N independent parts; the contract vocabulary has no arrayOf/repeat, so emitted code hard-codes the drawn count. Proposal-side detection would live where merged children are walked (core/propose-figma.ts `partKey`/merge pass); the vocabulary decision is a schema question (scripts/contract-schema.ts).',
+    'PARTIALLY SHIPPED (P9, schema v12 `repeat`): ≥3 ADJACENT sibling instances with a homogeneous applied-prop shape and ≥1 carriable per-item field now propose as ONE item-template part + arrayOf prop (core/propose-figma.ts repeatRunAt/buildRepeatPart; receipt extract/figma/repeat-collection-check.ts). Candidates WITHOUT a carriable field (constant props, varying enums — P10, or pre-v1.5 TEXT-ambiguous keys) stay N fixed parts with named notes — this fixture pins that residue.',
+  'pattern-repeat-collection':
+    'Not a refusal — P9 SHIPPED (schema v12 `repeat`): the fixture pins a live set whose sibling run proposes as ONE repeat part + arrayOf prop; React maps the live array, the canvas/static surfaces render repeat.sample (the observed drawn siblings).',
   'pattern-slot-placeholder':
     'Not a refusal — slot fidelity. `_Slot*`/placeholder/swap-named instances propose as component refs to the Slot utility or stubs rather than slot declarations with `accepts`; INSTANCE_SWAP preferredValues are a declared dump v1 limit (extract/figma/dump.plugin.js header). The seam is the INSTANCE branch of propose (core/propose-figma.ts:1935+) plus the dump capture.',
   'pattern-instance-swap':
     'Not a refusal — INSTANCE_SWAP propRefs (`propRefs.mainComponent`) ride the dump but the proposal has no swap-prop vocabulary beyond slots; preferredValues (→ slot `accepts`) are not captured in dump v1 (declared limit). Seam: dump.plugin.js propRefs capture + the slot branch in propose.',
   'pattern-theme-mode-axis':
-    'Not a refusal — a theme/mode/density-like variant axis currently proposes as an ordinary enum prop (a code prop the consumer must set) instead of promoting to token modes/brand switches. Promotion rules are catalogued in extract/figma/gauntlet/PATTERN-TAXONOMY.md; the seam is axis classification in propose (core/propose-figma.ts inferSemantics / axis handling).',
+    'SHIPPED (§3, detectModeAxis in core/propose-figma.ts): a theme|mode|color-scheme|scheme|appearance axis with mode-vocabulary values that is STRUCTURALLY CORROBORATED promotes to token modes (excluded from props; per-mode captured values ride the captured-token layer, dump v1.6); near-misses stay enum props with named notes. This kit draws no such axis (the census THEME_AXIS regex is broader — density/brand/contrast/dark stay enum props by design until corroborated); receipt extract/figma/theme-mode-check.ts.',
   'pattern-state-axis':
     'Not a refusal — state-like axes DO promote to CSS states since the aca43a9 chain (hover→:hover etc.); the fixture pins the behavior on a live set for regression.',
   'pattern-deep-composition':
@@ -839,6 +850,7 @@ featRow('COMPONENT_SET (variant axes)', (r) => r.type === 'COMPONENT_SET');
 featRow('composite (≥1 nested instance)', (r) => r.features.instances > 0);
 featRow('deep composition (anatomy depth ≥ 3)', (r) => r.features.depth >= 3);
 featRow('arrayOf candidates (≥3 same-named siblings)', (r) => r.features.arrayOfCandidateGroups > 0);
+featRow('repeat collections PROPOSED (P9, schema v12)', (r) => r.repeatParts > 0);
 featRow('slot-placeholder names (_Slot*/placeholder/swap)', (r) => r.features.slotPlaceholderNodes > 0);
 featRow('INSTANCE_SWAP properties', (r) => r.features.instanceSwapRefs > 0);
 featRow('boolean-visibility pairs (Show X)', (r) => r.features.booleanVisibilityRefs > 0);
