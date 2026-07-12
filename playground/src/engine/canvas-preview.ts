@@ -145,6 +145,10 @@ function nodeStyle(spec: NodeSpec, ctx: RenderCtx): string {
     ctx.used.add('overlay');
     d.push('position: absolute', OVERLAY_CSS[spec.overlay.placement].replace(/;$/, ''));
   }
+  // NODE opacity (dump v1.2 channel) — the runtime sets node.opacity after
+  // construction; the canvas renders the same value or the row silently
+  // loses its wash (field failure: Eventz disabled variants at opacity 0.4).
+  if (typeof spec.opacity === 'number') d.push(`opacity: ${spec.opacity}`);
   return d.join('; ');
 }
 
@@ -264,6 +268,27 @@ function renderNode(
       spec.contentProp && overrides.texts[spec.contentProp] !== undefined
         ? overrides.texts[spec.contentProp]
         : (spec.characters ?? '');
+    // Styled static text (page chips, dots, the Switch thumb): the sync
+    // script wraps the text node in a frame carrying the fill / dimensions /
+    // radius bindings (emit-figma-script buildNode) — and drops the text
+    // node entirely when characters are empty. Mirror that wrap here or the
+    // box styling silently vanishes (field failure: the Switch thumb — a
+    // text:"" part with width/height/fill tokens — rendered as a height-0
+    // transparent span; no thumb on the canvas).
+    if (spec.fill || spec.fixedWidth || spec.fixedHeight || spec.bindings) {
+      const box = [
+        'display: inline-flex',
+        'align-items: center',
+        'justify-content: center',
+        'flex-shrink: 0',
+        nodeStyle(spec, ctx),
+        extraStyle,
+      ]
+        .filter(Boolean)
+        .join('; ');
+      const inner = text === '' ? '' : `<span style="${d.join('; ')}">${escapeHtml(text)}</span>`;
+      return `<div style="${box}">${inner}</div>`;
+    }
     const style = [d.join('; '), extraStyle].filter(Boolean).join('; ');
     return `<span style="${style}">${escapeHtml(text)}</span>`;
   }
