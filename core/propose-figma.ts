@@ -141,7 +141,9 @@ export const dumpCapturesHidden = (prov?: { note?: string; dumpVersion?: string 
  * link to the repo's ds.button just because the names collide). */
 export interface MinimalChildContract {
   id: string;
-  props: Array<{ name: string; bindings: { figma: { property?: string; values?: Record<string, string> } } }>;
+  /** `type` (P9): the repeat field classifier reads it to tell TEXT-certain
+   *  props from enums — optional so pre-P9 callers keep passing slices. */
+  props: Array<{ name: string; type?: unknown; bindings: { figma: { property?: string; values?: Record<string, string> } } }>;
   anchors?: { figma?: { componentSetKey?: string | null } };
 }
 
@@ -301,6 +303,156 @@ function stripAxisFromName(name: string, property: string, fallback: string): st
     .map((s) => s.trim())
     .filter((pair) => pair.split('=')[0].trim() !== property);
   return pairs.length > 0 ? pairs.join(', ') : fallback;
+}
+
+// ---------------------------------------------------------------------------
+// Theme/mode-axis promotion (§3, P17 — the mirror image of interaction-state
+// promotion). Some drawn axes are NOT API: `Theme=Light|Dark` is a token
+// MODE (DTCG modes / Figma variable-collection modes). Shipping
+// `theme: 'light' | 'dark'` as a component prop is the same category error
+// as shipping `state: 'hover'` — Carbon, Material, and Fluent all model
+// theme as token layers, never per-component props (enterprise-gauntlet
+// corroboration: Carbon's four themes are identical 306-key token sets).
+//
+// Detection is TWO independent signals, both required (name alone is never
+// enough — D4):
+//   1. NAME TABLE (the detectStateAxis discipline): axis property named
+//      theme|mode|color-scheme|scheme|appearance with values ⊆
+//      {light, dark, high-contrast, dim, black, white}. Near-misses on a
+//      named axis are NOTED, never guessed.
+//   2. STRUCTURAL CORROBORATION (what makes promotion SAFE): partition the
+//      variants by the candidate axis holding all other axes fixed; every
+//      pair must have (a) an IDENTICAL merged anatomy (same children, order,
+//      types), (b) the same bound variable NAMES on every field (only
+//      resolved values differ — the variable itself is mode-switched), with
+//      raw literals allowed to differ ONLY on color-kind channels
+//      (fill/stroke/effect-color hex). ANY other difference → NOT a mode;
+//      the axis stays an enum prop with a WARNING note.
+//
+// Promotion: the axis is EXCLUDED from props; anatomy and facts build from
+// the axis's FIRST (default) value's variants only (the state-promotion
+// base-variant discipline); mode-excluded variants never feed the mint pass
+// (a dark-mode hex minting imported.* tokens would fabricate a second
+// palette); per-mode captured-variable values ride the captured-token
+// layer's `modes` channel (dump v1.6); the contract carries receipt-grade
+// `modes` metadata; the rename story is a named note (regeneration draws
+// the default mode only — the axis spelling lives in the note + source set).
+// ---------------------------------------------------------------------------
+
+const MODE_AXIS_NAME = /^(theme|mode|color[\s_-]?scheme|scheme|appearance)$/i;
+const MODE_AXIS_VALUES = new Set(['light', 'dark', 'high-contrast', 'dim', 'black', 'white']);
+
+export interface ModePromotion {
+  axis: Axis;
+  /** Figma value spelling of the default (base) mode — the axis's first value. */
+  defaultValue: string;
+}
+
+/** First structural/binding difference between two variants that a token
+ *  mode CANNOT explain — or null when the pair corroborates. Raw literals
+ *  may differ ONLY on color-kind channels (fill/stroke/effect color); bound
+ *  fields must bind the SAME variable names; everything else must be equal. */
+function modeStructuralDiff(a: DumpNode, b: DumpNode, path: string): string | null {
+  if (a.type !== b.type) return `${path}: node type ${a.type} vs ${b.type}`;
+  const aBound = a.bound ?? {};
+  const bBound = b.bound ?? {};
+  for (const k of new Set([...Object.keys(aBound), ...Object.keys(bBound)])) {
+    if (aBound[k] !== bBound[k]) {
+      return `${path}: field "${k}" binds "${aBound[k] ?? '(unbound)'}" vs "${bBound[k] ?? '(unbound)'}"`;
+    }
+  }
+  const paintShape = (p?: DumpPaint): string => (p === undefined ? 'none' : p.var !== undefined ? `var:${p.var}` : 'raw');
+  if (paintShape(a.fill) !== paintShape(b.fill)) return `${path}: fill ${paintShape(a.fill)} vs ${paintShape(b.fill)}`;
+  if (paintShape(a.stroke) !== paintShape(b.stroke)) return `${path}: stroke ${paintShape(a.stroke)} vs ${paintShape(b.stroke)}`;
+  if (JSON.stringify(a.layout ?? null) !== JSON.stringify(b.layout ?? null)) return `${path}: auto-layout differs`;
+  if ((a.cornerRadius ?? null) !== (b.cornerRadius ?? null)) return `${path}: corner radius differs`;
+  if ((a.strokeWeight ?? null) !== (b.strokeWeight ?? null)) return `${path}: stroke weight differs`;
+  if ((a.opacity ?? 1) !== (b.opacity ?? 1)) return `${path}: node opacity differs`;
+  if ((a.hidden ?? false) !== (b.hidden ?? false)) return `${path}: visibility differs`;
+  for (const dim of ['minWidth', 'minHeight', 'maxWidth', 'maxHeight'] as const) {
+    if ((a[dim] ?? null) !== (b[dim] ?? null)) return `${path}: ${dim} differs`;
+  }
+  if ((a.text === undefined) !== (b.text === undefined)) return `${path}: text presence differs`;
+  if (a.text && b.text) {
+    const at = a.text;
+    const bt = b.text;
+    if (
+      at.characters !== bt.characters || at.fontSize !== bt.fontSize || at.fontStyle !== bt.fontStyle ||
+      (at.lineHeight ?? null) !== (bt.lineHeight ?? null) || (at.style ?? null) !== (bt.style ?? null)
+    ) {
+      return `${path}: text/typography differs`;
+    }
+    if ((at.fillVar ?? null) !== (bt.fillVar ?? null)) return `${path}: text fill binds "${at.fillVar ?? '(raw)'}" vs "${bt.fillVar ?? '(raw)'}"`;
+  }
+  const effectShape = (e?: DumpEffect[]): string =>
+    JSON.stringify((e ?? []).map((x) => ({ t: x.type, o: x.offset ?? null, r: x.radius ?? null, s: x.spread ?? null })));
+  if (effectShape(a.effects) !== effectShape(b.effects)) return `${path}: effects differ`;
+  if ((a.instanceOf ?? null) !== (b.instanceOf ?? null)) return `${path}: nested instance differs`;
+  if (JSON.stringify(a.componentProperties ?? null) !== JSON.stringify(b.componentProperties ?? null)) {
+    return `${path}: applied instance props differ`;
+  }
+  if (JSON.stringify(a.propRefs ?? null) !== JSON.stringify(b.propRefs ?? null)) return `${path}: property references differ`;
+  const ak = a.children ?? [];
+  const bk = b.children ?? [];
+  if (ak.length !== bk.length) return `${path}: ${ak.length} vs ${bk.length} children`;
+  for (let i = 0; i < ak.length; i++) {
+    if (ak[i].name !== bk[i].name) return `${path}: child "${ak[i].name}" vs "${bk[i].name}"`;
+    const d = modeStructuralDiff(ak[i], bk[i], `${path}/${ak[i].name}`);
+    if (d) return d;
+  }
+  return null;
+}
+
+/** Detect a token-mode axis — name table AND structural corroboration, both
+ *  note-gated. Returns the promotion, or null (every near-miss NAMED). */
+function detectModeAxis(axes: Axis[], variants: DumpNode[], setName: string, notes: string[]): ModePromotion | null {
+  for (const axis of axes) {
+    if (!MODE_AXIS_NAME.test(axis.property.trim())) continue;
+    if (isBoolAxis(axis.values)) continue;
+    const unmapped = axis.values.filter((v) => !MODE_AXIS_VALUES.has(normStateValue(v)));
+    if (unmapped.length > 0) {
+      notes.push(
+        `variant axis "${axis.property}": named like a token-mode axis but value(s) ${unmapped.join(', ')} are outside the mode vocabulary (light|dark|high-contrast|dim|black|white) — kept as an enum prop, review`,
+      );
+      continue;
+    }
+    if (variants.some((v) => axisValuesOf(v.name)[axis.property] === undefined)) {
+      notes.push(
+        `variant axis "${axis.property}": token-mode axis detected but some variant names omit the pair — promotion unsafe, axis kept as an enum prop; review`,
+      );
+      continue;
+    }
+    // Structural corroboration: hold all other axes fixed (the residual
+    // variant name), compare each non-default-mode variant to its
+    // default-mode counterpart.
+    const defaultValue = axis.values[0];
+    const residual = (v: DumpNode) => stripAxisFromName(v.name, axis.property, setName);
+    const base = new Map<string, DumpNode>();
+    for (const v of variants) {
+      if (axisValuesOf(v.name)[axis.property] === defaultValue) base.set(residual(v), v);
+    }
+    let failure: string | null = null;
+    for (const v of variants) {
+      const value = axisValuesOf(v.name)[axis.property];
+      if (value === defaultValue) continue;
+      const counterpart = base.get(residual(v));
+      if (!counterpart) {
+        failure = `variant "${v.name}" has no ${axis.property}=${defaultValue} counterpart`;
+        break;
+      }
+      // Root names differ by exactly the axis pair — neutralize before the diff.
+      failure = modeStructuralDiff(counterpart, { ...v, name: counterpart.name }, residual(v));
+      if (failure) break;
+    }
+    if (failure) {
+      notes.push(
+        `variant axis "${axis.property}" (${axis.values.join('|')}): named like a token mode but the variants differ beyond color across its values (${failure}) — NOT promoted; kept as an enum prop (if this is theming, unify the drawn structure), review`,
+      );
+      continue;
+    }
+    return { axis, defaultValue };
+  }
+  return null;
 }
 
 // ---------------------------------------------------------------------------
@@ -667,6 +819,9 @@ interface Ctx {
   unbound: UnboundValue[];
   textProps: Array<{ name: string; property: string; default: string }>;
   boolProps: Array<{ name: string; property: string; default?: boolean }>;
+  /** P9 repeated-children collections: one arrayOf prop per repeat part,
+   *  emitted after text/bool props (code-only, bindings.figma.kind NONE). */
+  arrayProps: Array<{ name: string; fields: Record<string, 'text' | 'boolean'>; instanceOf: string }>;
   /** Slot parts in tree order, for the default-slot ("children") judgment. */
   slots: Array<{ part: Record<string, unknown>; property: string; optional: boolean }>;
   /** Variant names whose base instance was flattened into the variant root —
@@ -1004,8 +1159,29 @@ function invertNodeTokens(
     (n0.children?.length ?? 0) > 1 &&
     m.occ.some((o) => (o.node.layout?.spacing ?? 0) !== 0)
   ) {
+    const spacings = m.occ.map((o) => o.node.layout?.spacing ?? 0);
+    const negatives = spacings.filter((s) => s < 0).length;
     reportUnbound(ctx, where, 'itemSpacing', firstNode((n) => n.layout?.spacing, 0).layout!.spacing);
-    mintObservation(ctx, tokens, where, 'gap', 'px', numOccurrences(m, (n) => n.layout?.spacing), `${where}|itemSpacing`);
+    if (negatives > 0 && negatives < spacings.length) {
+      // P21, mixed-sign spacing (owner field case: Avatar group's
+      // type=space 4px vs type=overlap -8px): children overlap only in SOME
+      // variants, but `layout.overlap` is a per-part invariant (the v7
+      // VariantLayoutSchema deliberately excludes it — no per-variant form),
+      // and a negative px value minted as a PLAIN gap token is an invalid
+      // CSS fact (`gap: -8px` parses to nothing and the overlap silently
+      // vanishes — the pre-P21 bug). NAMED, never minted; the unbound report
+      // survives for review.
+      ctx.mint?.partialSources.add(`${where}|itemSpacing`);
+      ctx.notes.push(
+        `${where}: itemSpacing is NEGATIVE in ${negatives}/${spacings.length} variant(s) (${[...new Set(spacings)].join('/')}) — children overlap only there, but layout.overlap is a per-part invariant with no per-variant form (P21); gap NOT minted (a mixed-sign spacing cannot carry, and a plain negative-px gap token is an invalid CSS fact), NAMED for review`,
+      );
+    } else {
+      // Uniform sign: mint as before. A uniformly NEGATIVE spacing rides the
+      // overlap projection (invertLayout set layout.overlap: true, so the
+      // gap token's negative value renders as a negative child margin /
+      // negative itemSpacing — never as an invalid CSS `gap`).
+      mintObservation(ctx, tokens, where, 'gap', 'px', numOccurrences(m, (n) => n.layout?.spacing), `${where}|itemSpacing`);
+    }
   }
   if (
     !fields.has('paddingLeft') &&
@@ -1645,6 +1821,22 @@ function invertLayout(
   if (!l) return grow ? { grow } : undefined;
 
   const hasChildren = m.children.length > 0;
+  // P21 overlap collections (AvatarGroup shape): negative itemSpacing in
+  // EVERY variant means the children OVERLAP — the existing `layout.overlap`
+  // vocabulary, whose shipped projection (ds.avatar-group owner-precedent:
+  // {space.avatarGroup.overlap} → {space.overlap} = -8px) is a NEGATIVE-
+  // valued gap token rendered as a negative child margin in CSS and as
+  // negative itemSpacing on the canvas. Mixed-sign spacing across variants
+  // stays a NAMED note in the gap channel (overlap is a per-part invariant).
+  const overlap =
+    hasChildren && m.occ.length > 0 && m.occ.every((o) => (o.node.layout?.spacing ?? 0) < 0)
+      ? true
+      : undefined;
+  if (overlap) {
+    ctx.notes.push(
+      `${where}: negative itemSpacing in every variant — children OVERLAP (P21); proposed as layout.overlap: true, with the gap channel carrying the DRAWN (negative) magnitude — the schema's negative-margin projection (CSS: a negative child margin from the gap token, the ds.avatar-group owner-precedent where {space.overlap} = -8px; canvas: negative itemSpacing) — never an invalid CSS \`gap\``,
+    );
+  }
   const out: Record<string, unknown> = {};
   const direction = l.mode === 'VERTICAL' ? 'column' : 'row';
   const justify = JUSTIFY_INV[l.primary];
@@ -1652,13 +1844,16 @@ function invertLayout(
   if (isRoot) {
     // The generator's root default is row/center/center — a root drawn
     // exactly there proposes no layout block.
-    if (direction === 'row' && justify === 'center' && align === 'center' && !grow) return undefined;
+    if (direction === 'row' && justify === 'center' && align === 'center' && !grow && !overlap) {
+      return undefined;
+    }
     out.display = 'flex';
   }
   if (hasChildren || direction === 'column') out.direction = direction;
   if (justify && hasChildren) out.justify = justify;
   if (align && hasChildren) out.align = align;
   if (grow) out.grow = grow;
+  if (overlap) out.overlap = overlap;
   return Object.keys(out).length > 0 ? out : undefined;
 }
 
@@ -2213,6 +2408,245 @@ function unifiedPropRef(m: Merged, kind: string, ctx: Ctx, where: string): strin
   return values[0];
 }
 
+// ---------------------------------------------------------------------------
+// P9: repeated-children collections (menu items, breadcrumb segments, tab
+// items). ≥3 ADJACENT sibling instances of the SAME child component with a
+// homogeneous applied-prop shape propose as ONE item-template part carrying
+// `repeat` + a new arrayOf prop — instead of N hard-coded component-ref
+// parts. Field rules (deterministic, every carry/skip NAMED):
+//   · a VARYING boolean applied prop → a boolean field
+//   · a TEXT-CERTAIN string prop (the resolved child contract models it as a
+//     text prop, or the key carries the dump v1.5 "#id" suffix) → a text
+//     field (varying or not — per-item content is per-item API)
+//   · a VARYING enum/ambiguous string prop → a NAMED receipt (per-item
+//     enum/state differences are P10, selected-item — no repeat vocabulary;
+//     bare string keys in pre-v1.5 dumps are VARIANT/TEXT-ambiguous)
+//   · constant props stay FIXED on component.props (canonicalized as today)
+// No carriable field → the pattern is receipted and the siblings build as
+// fixed parts, exactly as before. Per-sibling VISIBILITY bindings (the
+// "Show item 3" count-control booleans the taxonomy names as P9's canvas
+// count spelling) ride the run: they are NOT promoted to boolean props —
+// the array prop owns the count in code — and the non-promotion is a named
+// rename story (regeneration renders the sample's items).
+// ---------------------------------------------------------------------------
+
+/** The maximal P9 run starting at children[i], or null (< 3 members). */
+function repeatRunAt(children: Merged[], i: number, ctx: Ctx): Merged[] | null {
+  const eligible = (m: Merged): boolean =>
+    m.type === 'INSTANCE' &&
+    first(m.occ, (n) => n.propRefs?.mainComponent) === undefined &&
+    first(m.occ, (n) => n.componentProperties) !== undefined &&
+    !isSelfInstance(first(m.occ, (n) => n.instanceOf) ?? m.name, ctx);
+  if (!eligible(children[i])) return null;
+  const instanceOf = first(children[i].occ, (n) => n.instanceOf) ?? children[i].name;
+  const shapeOf = (m: Merged): string =>
+    Object.keys(first(m.occ, (n) => n.componentProperties) ?? {})
+      .map((k) => k.split('#')[0])
+      .sort()
+      .join(' ');
+  const shape = shapeOf(children[i]);
+  const run: Merged[] = [];
+  for (let j = i; j < children.length; j++) {
+    const m = children[j];
+    if (!eligible(m)) break;
+    if ((first(m.occ, (n) => n.instanceOf) ?? m.name) !== instanceOf) break;
+    if (shapeOf(m) !== shape) break;
+    run.push(m);
+  }
+  return run.length >= 3 ? run : null;
+}
+
+/** Build the ONE repeat part for a P9 run — or null when no per-item field
+ *  is carriable (the caller falls back to fixed parts; the skip is NAMED). */
+function buildRepeatPart(run: Merged[], ctx: Ctx, where: string, selfKey: string): Record<string, unknown> | null {
+  const head = run[0];
+  const instanceOf = first(head.occ, (n) => n.instanceOf) ?? head.name;
+  const keys = instanceKeysOf(head);
+  const res = resolveChildContract(instanceOf, keys, ctx);
+  // Field classification runs against the contract the emitted ref will BIND:
+  // the resolved contract, or the contract the derived stub id lands on (a
+  // stub never overrides a registered contract) — never a fresh name lookup.
+  const refId = res.id ?? stubIdFor(instanceOf, ctx, keys).id;
+  const mapping = ctx.contractsById?.get(refId);
+  // Per-sibling applied record — the DEFAULT variant's occurrence preferred.
+  const appliedOf = (sib: Merged): Record<string, string | boolean> =>
+    (sib.occ.find((o) => o.variant === ctx.totalVariants[0]) ?? sib.occ[0]).node.componentProperties ?? {};
+  const records = run.map(appliedOf);
+
+  const fields: Record<string, 'text' | 'boolean'> = {};
+  const fieldKeyByName: Record<string, string> = {};
+  const constantKeys: string[] = [];
+  const claimField = (name: string, type: 'text' | 'boolean', rawKey: string, bare: string): boolean => {
+    if (fields[name] !== undefined) {
+      ctx.notes.push(
+        `${where}: per-item field name "${name}" (from applied prop "${bare}") collides with another field — not carried, review (P9)`,
+      );
+      return false;
+    }
+    fields[name] = type;
+    fieldKeyByName[name] = rawKey;
+    return true;
+  };
+  for (const rawKey of Object.keys(records[0])) {
+    const bare = rawKey.split('#')[0];
+    const values = records.map((r) => r[rawKey]);
+    const varying = new Set(values.map((v) => String(v))).size > 1;
+    const mappingProp = mapping?.props.find((p) => p.bindings.figma.property === bare);
+    if (typeof values[0] === 'boolean') {
+      if (!varying) {
+        constantKeys.push(rawKey);
+      } else if (mapping && (!mappingProp || mappingProp.type !== 'boolean')) {
+        ctx.notes.push(
+          `${where}: per-item boolean "${bare}" does not map through ${mapping.id}'s bindings as a boolean prop — not carried as a field; verify the child contract is current (P9)`,
+        );
+      } else {
+        claimField(mappingProp?.name ?? canonicalPropName(bare), 'boolean', rawKey, bare);
+      }
+      continue;
+    }
+    const textCertain = mapping ? mappingProp?.type === 'text' : rawKey.includes('#');
+    if (textCertain) {
+      claimField(mappingProp?.name ?? canonicalPropName(bare), 'text', rawKey, bare);
+    } else if (!varying) {
+      constantKeys.push(rawKey);
+    } else if (mapping && !mappingProp) {
+      ctx.notes.push(
+        `${where}: applied prop "${bare}" varies per sibling (${[...new Set(values.map(String))].join(', ')}) but does not map through ${mapping.id}'s bindings — not carried as a field; verify the child contract is current (P9)`,
+      );
+    } else if (mapping) {
+      ctx.notes.push(
+        `${where}: applied prop "${bare}" varies per sibling (${[...new Set(values.map(String))].join(', ')}) — per-item enum/state differences are P10 (selected-item) with no repeat vocabulary; receipted, the sample renders ${mapping.id}'s default (review)`,
+      );
+    } else {
+      ctx.notes.push(
+        `${where}: applied prop "${bare}" varies per sibling (${[...new Set(values.map(String))].join(', ')}) but a bare string key is VARIANT/TEXT-ambiguous (pre-v1.5 dump, no "#id" suffix) — not carried as a field; recapture with the v1.5 plugin to carry per-item text (review)`,
+      );
+    }
+  }
+  if (Object.keys(fields).length === 0) {
+    ctx.notes.push(
+      `${where}: ${run.length} adjacent sibling instances of "${instanceOf}" (repeated-children collection, P9) but no per-item field is carriable — kept as ${run.length} fixed parts, review`,
+    );
+    return null;
+  }
+
+  // The run proposes — register resolution notes / stubs ONCE, for the run.
+  noteResolution(res, instanceOf, keys, ctx, where);
+  if (!res.id) for (const sib of run) captureStub(instanceOf, sib, ctx, where);
+
+  // Per-sibling visibility bindings ("Show item N") are the canvas's drawn
+  // count controls — NOT promoted to boolean props (N "show item" booleans
+  // would be absurd code API; the array prop owns the count). Named rename
+  // story for the canvas round trip.
+  const visibleRefs = [
+    ...new Set(run.map((sib) => first(sib.occ, (n) => n.propRefs?.visible)).filter((v): v is string => v !== undefined)),
+  ];
+  if (visibleRefs.length > 0) {
+    ctx.notes.push(
+      `${where}: per-sibling visibility bindings (${visibleRefs.join(', ')}) are the canvas's drawn COUNT controls ("Show item N", the P9 canvas count spelling) — not promoted to boolean props (the array prop owns the count in code); regeneration renders repeat.sample's items, the drawn booleans stay on the source set (rename story, named here)`,
+    );
+  }
+
+  // arrayOf prop name: `items` when free, else `<partKey>Items` — deterministic.
+  const taken = new Set<string>([
+    ...ctx.axes.map((a) => a.propName),
+    ...ctx.textProps.map((t) => t.name),
+    ...ctx.boolProps.map((b) => b.name),
+    ...ctx.arrayProps.map((a) => a.name),
+  ]);
+  const propName = taken.has('items') ? `${selfKey}Items` : 'items';
+  ctx.arrayProps.push({ name: propName, fields, instanceOf });
+  ctx.notes.push(
+    `prop \`${propName}\`: structured array prop proposed for the repeated "${instanceOf}" collection — code-only by declared fidelity limit (bindings.figma.kind NONE: the canvas has no list-of-records property type); the canvas renders repeat.sample instead`,
+  );
+
+  // The observed sample — one record per drawn sibling, field values only
+  // (text verbatim, booleans as drawn).
+  const sample = records.map((rec) => {
+    const out: Record<string, string | boolean> = {};
+    for (const [name, rawKey] of Object.entries(fieldKeyByName)) {
+      const v = rec[rawKey];
+      if (v !== undefined) out[name] = v;
+    }
+    return out;
+  });
+
+  // Constant applied props stay fixed — canonicalized through the child's
+  // bindings exactly like a single instance, threading included.
+  const part: Record<string, unknown> = {};
+  const component: Record<string, unknown> = { id: refId };
+  const constantApplied: Record<string, string | boolean> = {};
+  for (const k of constantKeys) constantApplied[k] = records[0][k];
+  if (Object.keys(constantApplied).length > 0) {
+    const canonical = canonicalizeInstanceProps(instanceOf, constantApplied, res.id, ctx, where, false, keys);
+    const perOccurrence = head.occ
+      .filter((o) => o.node.componentProperties !== undefined)
+      .map((o) => {
+        const constOnly: Record<string, string | boolean> = {};
+        for (const k of constantKeys) {
+          const v = o.node.componentProperties![k];
+          if (v !== undefined) constOnly[k] = v;
+        }
+        return { variant: o.variant, canonical: canonicalizeInstanceProps(instanceOf, constOnly, res.id, ctx, where, true, keys) };
+      });
+    threadInstanceProps(canonical, perOccurrence, ctx, where, instanceOf);
+    if (Object.keys(canonical).length > 0) component.props = canonical;
+  }
+  part.component = component;
+  part.repeat = { itemsProp: propName, sample };
+
+  if (run.some((sib) => sib.occ.length !== ctx.totalVariants.length)) {
+    const counts = ctx.totalVariants.map(
+      (v) => run.filter((sib) => sib.occ.some((o) => o.variant === v)).length,
+    );
+    ctx.notes.push(
+      `${where}: sibling count varies per variant (${[...new Set(counts)].join('/')}) — repeat.sample carries the UNION of drawn siblings; the live count is the array prop's (code side), review`,
+    );
+  }
+  ctx.notes.push(
+    `${where}: ${run.length} adjacent sibling instances of "${instanceOf}" with a homogeneous applied-prop shape — proposed as ONE item-template part with repeat over arrayOf prop \`${propName}\` (P9; fields: ${Object.entries(fields).map(([n, t]) => `${n}:${t}`).join(', ')}); the drawn siblings become the canvas's static sample (repeat.sample — the meter discipline: canvas and static surfaces render the OBSERVED sample; code maps the live array)`,
+  );
+  return part;
+}
+
+/** Children → parts record, with P9 run detection in front of the per-child
+ *  walk (ONE walker serves buildPart's frame branch and the root). */
+function buildChildParts(
+  children: Merged[],
+  mode: 'HORIZONTAL' | 'VERTICAL' | null,
+  ctx: Ctx,
+  where: string,
+  selfKey: string,
+): Record<string, unknown> {
+  const parts: Record<string, unknown> = {};
+  let i = 0;
+  while (i < children.length) {
+    const child = children[i];
+    const run = repeatRunAt(children, i, ctx);
+    if (run) {
+      // Claim the key BEFORE building (pre-order, the partKey discipline).
+      const key = partKey(child.name, ctx, `${where}/${child.name}`, selfKey);
+      const repeatPart = buildRepeatPart(run, ctx, `${where}/${child.name}`, key);
+      if (repeatPart) {
+        parts[key] = repeatPart;
+        i += run.length;
+        continue;
+      }
+      // No carriable field (named above) — the first sibling builds under the
+      // already-claimed key; the rest walk as before.
+      const built = buildPart(child, mode, ctx, `${where}/${child.name}`, key);
+      if (built) parts[key] = built;
+      i++;
+      continue;
+    }
+    const key = partKey(child.name, ctx, `${where}/${child.name}`, selfKey);
+    const built = buildPart(child, mode, ctx, `${where}/${child.name}`, key);
+    if (built) parts[key] = built;
+    i++;
+  }
+  return parts;
+}
+
 function buildPart(
   m: Merged,
   parentMode: 'HORIZONTAL' | 'VERTICAL' | null,
@@ -2449,15 +2883,8 @@ function buildPart(
   const visibleRef = unifiedPropRef(m, 'visible', ctx, where);
   if (visibleRef) applyVisibleBinding(part, visibleRef, ctx, where, m);
   const mode = m.occ[0].node.layout?.mode ?? null;
-  const parts: Record<string, unknown> = {};
-  for (const child of m.children) {
-    // Claim the key BEFORE descending (pre-order): the parent-derived-prefix
-    // rule needs the parent's key settled, and the first DRAWN part keeps
-    // its name (see partKey — the registry is contract-global).
-    const key = partKey(child.name, ctx, `${where}/${child.name}`, selfKey);
-    const built = buildPart(child, mode, ctx, `${where}/${child.name}`, key);
-    if (built) parts[key] = built;
-  }
+  // Pre-order key claiming + P9 run detection — see buildChildParts.
+  const parts = buildChildParts(m.children, mode, ctx, where, selfKey);
   if (Object.keys(parts).length > 0) part.parts = parts;
   if (visibleWhen) part.visibleWhen = visibleWhen;
   return part;
@@ -3304,19 +3731,39 @@ export function proposeFromDump(
   const prefix = opts.prefix ?? 'ds';
   const preNotes: string[] = [];
 
+  // Theme/mode-axis promotion (§3 — see the section doc above): runs FIRST,
+  // over the full drawn set. A corroborated mode axis is excluded from the
+  // API; the whole pipeline (state promotion included) then runs on the
+  // DEFAULT mode's variants only — the other modes never feed anatomy,
+  // facts, or the mint pass (their resolved literals are receipts, not a
+  // second palette).
+  const modePromo = detectModeAxis(parseAxes(set.variants.map((v) => v.name)), set.variants, set.setName, preNotes);
+  let sourceVariants = set.variants;
+  if (modePromo) {
+    sourceVariants = set.variants
+      .filter((v) => axisValuesOf(v.name)[modePromo.axis.property] === modePromo.defaultValue)
+      .map((v) => ({
+        ...(JSON.parse(JSON.stringify(v)) as DumpNode),
+        name: stripAxisFromName(v.name, modePromo.axis.property, set.setName),
+      }));
+    preNotes.push(
+      `variant axis "${modePromo.axis.property}" (${modePromo.axis.values.join('|')}) IS a token-mode axis, not API (§3 — structurally corroborated: identical anatomy and bound variable NAMES across the axis; only color-kind literals/resolved values differ) — excluded from props; anatomy and facts build from the ${sourceVariants.length} "${modePromo.defaultValue}" (default-mode) variant(s) only; bindings resolve per mode through the variable collection (the captured-token layer carries per-mode values when the dump provides them — dump v1.6 \`modes\`); other modes' resolved literals are NOT minted (a dark-mode hex minting imported.* tokens would fabricate a second palette). Rename story: regeneration draws the default mode only — the axis spelling lives in this note and on the source set, and the contract's \`modes\` metadata names the modes`,
+    );
+  }
+
   // Interaction-state axis promotion (see the section doc above): detect the
   // axis over the FULL variant set, then partition — default-state variants
   // are the base the whole pipeline runs on; each promoted state's variants
   // (and the disabled group) are kept aside, names stripped of the state
   // pair, for the root-diff pass after the anatomy is built.
-  let statePromo = detectStateAxis(parseAxes(set.variants.map((v) => v.name)), preNotes);
+  let statePromo = detectStateAxis(parseAxes(sourceVariants.map((v) => v.name)), preNotes);
   let baseVariants: DumpNode[] | null = null;
   const stateGroups = new Map<PromotedState, DumpNode[]>();
   let disabledGroup: DumpNode[] = [];
   if (statePromo) {
     const promo = statePromo;
     const valueOf = (v: DumpNode) => axisValuesOf(v.name)[promo.axis.property];
-    if (set.variants.some((v) => valueOf(v) === undefined)) {
+    if (sourceVariants.some((v) => valueOf(v) === undefined)) {
       preNotes.push(
         `variant axis "${promo.axis.property}": interaction-state axis detected but some variant names omit the pair — promotion unsafe, axis kept as an enum prop; review`,
       );
@@ -3326,12 +3773,12 @@ export function proposeFromDump(
         ...(JSON.parse(JSON.stringify(v)) as DumpNode),
         name: stripAxisFromName(v.name, promo.axis.property, set.setName),
       });
-      baseVariants = set.variants.filter((v) => valueOf(v) === promo.defaultValue).map(strip);
+      baseVariants = sourceVariants.filter((v) => valueOf(v) === promo.defaultValue).map(strip);
       for (const p of promo.promoted) {
-        stateGroups.set(p.state, set.variants.filter((v) => valueOf(v) === p.value).map(strip));
+        stateGroups.set(p.state, sourceVariants.filter((v) => valueOf(v) === p.value).map(strip));
       }
       if (promo.disabledValue !== undefined) {
-        disabledGroup = set.variants.filter((v) => valueOf(v) === promo.disabledValue).map(strip);
+        disabledGroup = sourceVariants.filter((v) => valueOf(v) === promo.disabledValue).map(strip);
       }
       preNotes.push(
         `variant axis "${promo.axis.property}" (${promo.axis.values.join('|')}) IS the platform's interaction states, not API — promoted: the axis is NOT a prop; anatomy and base facts come from the ${baseVariants.length} default-state variant(s); ${promo.promoted
@@ -3341,7 +3788,7 @@ export function proposeFromDump(
     }
   }
 
-  const variantNames = (baseVariants ?? set.variants).map((v) => v.name);
+  const variantNames = (baseVariants ?? sourceVariants).map((v) => v.name);
   const axes = parseAxes(variantNames);
   const enumAxes = axes.filter((a) => !isBoolAxis(a.values));
   const ctx: Ctx = {
@@ -3360,6 +3807,7 @@ export function proposeFromDump(
     unbound: [],
     textProps: [],
     boolProps: [],
+    arrayProps: [],
     slots: [],
     flattenedVariants: new Set(),
     stubs: new Map(),
@@ -3392,7 +3840,7 @@ export function proposeFromDump(
   // styling speaks for the variant, its captured componentProperties are
   // promoted after the anatomy is built. (With state promotion the base
   // variants were already cloned + name-stripped above.)
-  const variants = baseVariants ?? (JSON.parse(JSON.stringify(set.variants)) as DumpNode[]);
+  const variants = baseVariants ?? (JSON.parse(JSON.stringify(sourceVariants)) as DumpNode[]);
   const captures = flattenBaseInstances(variants, ctx);
   const stateGroupCaptures: BaseInstanceCapture[] = [];
   if (statePromo) {
@@ -3450,13 +3898,8 @@ export function proposeFromDump(
     );
   } else {
     const mode = merged.occ[0].node.layout?.mode ?? null;
-    const parts: Record<string, unknown> = {};
-    for (const child of merged.children) {
-      // Pre-order claim against the contract-global registry (see partKey).
-      const key = partKey(child.name, ctx, `${where}/${child.name}`, 'root');
-      const built = buildPart(child, mode, ctx, `${where}/${child.name}`, key);
-      if (built) parts[key] = built;
-    }
+    // Pre-order key claiming + P9 run detection — see buildChildParts.
+    const parts = buildChildParts(merged.children, mode, ctx, where, 'root');
     if (Object.keys(parts).length > 0) root.parts = parts;
   }
   invertNodeOpacity(merged, root, rootTokens, ctx, where);
@@ -3596,6 +4039,19 @@ export function proposeFromDump(
       },
     });
   }
+  // P9 repeated-children collections: the arrayOf prop each repeat part maps
+  // over — code-only by declared fidelity limit (bindings.figma.kind NONE;
+  // the canvas renders repeat.sample instead). No default: an optional array.
+  for (const a of ctx.arrayProps) {
+    props.push({
+      name: a.name,
+      type: { arrayOf: a.fields },
+      bindings: {
+        figma: { kind: 'NONE' },
+        code: { prop: a.name },
+      },
+    });
+  }
 
   // Text-prop convention (NOTE-ONLY, extract/reconcile keeps prop-name
   // fidelity to the design property): repo contracts bind a component's main
@@ -3662,6 +4118,9 @@ export function proposeFromDump(
       : { element: 'div' },
     props,
     states: [],
+    // §3: receipt-grade metadata — the promoted mode axis's values as mode
+    // names (never a prop; changes no emitter output).
+    ...(modePromo ? { modes: modePromo.axis.values.map(normStateValue) } : {}),
     anatomy: { root },
     anchors: {
       figma: {

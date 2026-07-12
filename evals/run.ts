@@ -2268,6 +2268,99 @@ const cases: Case[] = [
       if (!tsx.includes('styles[`size-${size}`]')) throw new Error('Token.tsx no longer composes the size class');
     },
   },
+  {
+    // §3 (theme/mode-axis promotion, P17): a drawn Theme=Light|Dark variant
+    // axis is a TOKEN MODE, never a component prop — the mirror image of
+    // state promotion. Promotion requires the bounded name table AND
+    // structural corroboration; base facts come from the default mode only;
+    // mode-excluded variants never feed the mint pass; per-mode captured-
+    // variable values ride the captured-token layer's modes channel (dump
+    // v1.6). Near-misses stay enum props with NAMED notes.
+    id: 'theme-axis-promotion',
+    claim: 'C5-extraction',
+    run: () => {
+      const r = run(TSX, ['extract/figma/theme-mode-check.ts']);
+      if (r.status !== 0) throw new Error(`theme-mode receipt failed:\n${r.out}`);
+      for (const line of [
+        '✔ NO `theme` prop ships in the API',
+        '✔ contract `modes` metadata names the token modes (["light","dark"])',
+        '✔ the promotion is the NAMED §3 receipt (corroboration + mint isolation + rename story spelled out)',
+        '✔ base facts bind the REAL variable names from the light variants (background-color = {bg.{variant}}; got {bg.{variant}})',
+        '✔ the DARK accent literal mints NOWHERE (#9ec2ff — mode-excluded variants never fabricate a second palette)',
+        '✔ {bg.info} RESOLVES per mode — light #eef4ff, dark #0b1d3a (got #eef4ff / #0b1d3a)',
+        '✔ the near-miss is a WARNING note naming the first structural difference (2 vs 3 children)',
+        '✔ `theme` STAYS an enum prop (uncorroborated promotion never drops an axis silently)',
+        '✔ the out-of-vocabulary value is a NAMED note; the axis stays a prop',
+        '✔ `variant` ships as an enum prop (default|inverse)',
+        '✔ no mode-axis note fires at all (the name table never matches "variant")',
+      ]) {
+        if (!r.out.includes(line)) throw new Error(`missing check: ${line}`);
+      }
+    },
+  },
+  {
+    // P9 (repeated-children collections, schema v12 `repeat`): ≥3 adjacent
+    // sibling instances of the same child with a carriable per-item field
+    // propose as ONE item-template part + arrayOf prop — React maps the live
+    // array, the canvas/static surfaces render the OBSERVED sample (the
+    // meter discipline). Per-item enum/state differences (P10) and pre-v1.5
+    // TEXT/VARIANT-ambiguous keys stay NAMED receipts; "Show item N" count
+    // booleans never promote. Receipt runs the REAL owner's-kit
+    // Navigation-Header fixture + a v1.5-shaped synthetic run.
+    id: 'repeated-children-collection',
+    claim: 'C5-extraction',
+    run: () => {
+      const r = run(TSX, ['extract/figma/repeat-collection-check.ts']);
+      if (r.status !== 0) throw new Error(`repeat receipt failed:\n${r.out}`);
+      for (const line of [
+        '✔ exactly ONE repeat part proposes for the 5 drawn menu items (got 1)',
+        '✔ the sample carries the 5 OBSERVED siblings (got 5)',
+        '✔ the arrayOf prop `items` ships code-only (bindings.figma.kind NONE)',
+        '✔ the collection carry is the NAMED flagship note (P9, meter discipline spelled out)',
+        '✔ the per-item TEXT stays a NAMED ambiguity receipt (pre-v1.5 dump — never guessed)',
+        '✔ the "Show item N" count booleans are receipted, never promoted (rename story named)',
+        '✔ React maps the LIVE array ({items?.map((item, index) => …iconRight={item.iconRight}…)})',
+        '✔ the canvas constructs the OBSERVED instances (5 LinkNeutral sample instances in the sync script)',
+        '✔ per-item TEXT carries as a field — the "#id" suffix is TEXT certainty (fields: { children: text })',
+        '✔ the sample carries the drawn labels VERBATIM (One/Two/Three/Four)',
+        '✔ the varying enum is the P10 receipt (selected-item stays note-gated, never carried)',
+        '✔ the static surface renders the OBSERVED sample per item (One…Four appear in the html)',
+        '✔ the pattern is DETECTED and the fallback is a NAMED note (no field invented)',
+      ]) {
+        if (!r.out.includes(line)) throw new Error(`missing check: ${line}`);
+      }
+    },
+  },
+  {
+    // P21 (overlap collections): negative auto-layout spacing must NEVER
+    // mint a plain negative-px gap token (`gap: -8px` is invalid CSS and the
+    // overlap silently vanished — the pre-P21 bug). Uniform negative spacing
+    // inverts to the existing `layout.overlap` vocabulary with the drawn
+    // magnitude on the gap token (the ds.avatar-group owner-precedent:
+    // {space.overlap} = -8px, projected as a negative child margin / negative
+    // itemSpacing); mixed-sign spacing is a NAMED per-part-invariant limit.
+    // Receipt replays the owner's live Avatar group census fixture.
+    id: 'negative-spacing-overlap',
+    claim: 'C5-extraction',
+    run: () => {
+      const r = run(TSX, ['extract/figma/overlap-check.ts']);
+      if (r.status !== 0) throw new Error(`overlap receipt failed:\n${r.out}`);
+      for (const line of [
+        '✔ root proposes layout.overlap: true (children OVERLAP — P21)',
+        '✔ the overlap carry is a NAMED note (owner-precedent projection spelled out)',
+        '✔ the minted gap token carries the DRAWN magnitude -8px (got -8px)',
+        '✔ CSS projects the overlap as a negative CHILD MARGIN (.root > * + * { margin-left: … })',
+        '✔ CSS never emits the invalid `gap:` declaration for the overlap token',
+        '✔ the mixed-sign limit is a NAMED note (per-part invariant, gap NOT minted)',
+        '✔ layout.overlap is NOT set (overlap holds in only half the variants — never guessed)',
+        '✔ NO negative px token mints anywhere (got 0; the pre-P21 bug class is gone)',
+        '✔ the unbound itemSpacing report SURVIVES for review',
+        '✔ the bound-negative channel keeps its existing NAMED refusal (illegal variable name — rename or map manually)',
+      ]) {
+        if (!r.out.includes(line)) throw new Error(`missing check: ${line}`);
+      }
+    },
+  },
 ];
 
 // ---------------------------------------------------------------------------

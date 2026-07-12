@@ -1,6 +1,6 @@
 {
-  "passed": 96,
-  "total": 96,
+  "passed": 99,
+  "total": 99,
   "results": [
     {
       "id": "refuse-unknown-token-reference",
@@ -480,6 +480,21 @@
     {
       "id": "token-size-live",
       "claim": "C1-determinism",
+      "pass": true
+    },
+    {
+      "id": "theme-axis-promotion",
+      "claim": "C5-extraction",
+      "pass": true
+    },
+    {
+      "id": "repeated-children-collection",
+      "claim": "C5-extraction",
+      "pass": true
+    },
+    {
+      "id": "negative-spacing-overlap",
+      "claim": "C5-extraction",
       "pass": true
     }
   ]

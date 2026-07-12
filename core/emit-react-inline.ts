@@ -525,6 +525,39 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
         : `<span style=${styleExpr(partName, false, stylesWhenExprs(part))} aria-hidden="true" ${glyph} />`;
       return wrapVisibleWhen(part, node);
     }
+    if (part.repeat && part.component) {
+      // v12 repeat (P9): the inline surface renders the contract's OBSERVED
+      // sample as fixed instances (the meter discipline; the full React
+      // surface maps the live array) — a declared fidelity limit, named in
+      // the emitted header comment (repeatNote).
+      const dep = ctx.contracts.get(part.component.id)!;
+      return wrapVisibleWhen(
+        part,
+        part.repeat.sample
+          .map((rec) => {
+            let itemText: string | undefined;
+            let fieldAttrs = '';
+            for (const [field, v] of Object.entries(rec)) {
+              const depProp = dep.props.find((p) => p.name === field);
+              const codeName = depProp?.bindings.code.prop ?? field;
+              if (typeof v === 'string' && codeName === 'children') {
+                itemText = v;
+              } else if (typeof v === 'boolean') {
+                fieldAttrs += v ? ` ${codeName}` : '';
+              } else if (typeof v === 'number') {
+                fieldAttrs += ` ${codeName}={${v}}`;
+              } else {
+                fieldAttrs += ` ${codeName}="${v}"`;
+              }
+            }
+            const attrs = depAttrString(dep, part.component!.props ?? {}) + fieldAttrs;
+            return itemText !== undefined
+              ? `<${dep.name}${attrs}>${itemText}</${dep.name}>`
+              : `<${dep.name}${attrs} />`;
+          })
+          .join('\n'),
+      );
+    }
     if (part.component) {
       const dep = ctx.contracts.get(part.component.id)!;
       const attrs = depAttrString(dep, part.component.props ?? {});
@@ -644,6 +677,9 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
   const overlapNote = walkAnatomy(contract).some((w) => w.part.layout?.overlap && w.part.tokens?.gap)
     ? `\n * Fidelity: the overlap gap (negative child margins) needs a child selector — not\n * expressible inline; children render without the overlap offset.`
     : '';
+  const repeatNote = walkAnatomy(contract).some((w) => w.part.repeat)
+    ? `\n * Fidelity: repeat collections render the contract's OBSERVED sample as fixed\n * instances (the array prop is declared but not mapped on this surface) — the\n * full React surface maps the live array.`
+    : '';
 
   const tsx = `/**
  * GENERATED FILE (inline-styles emitter) — DO NOT EDIT.
@@ -653,7 +689,7 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
  * tokens at emit time. Resolution mode: ${mode} (brand: default). To retheme,
  * re-emit against different tokens — do not edit literals by hand.
  * Fidelity: :hover/:focus-visible state tokens are not expressible as inline
- * styles and are omitted; disabled-state tokens apply via the disabled prop.${overlapNote}
+ * styles and are omitted; disabled-state tokens apply via the disabled prop.${overlapNote}${repeatNote}
  */
 import { forwardRef${events.some((e) => e.toggles) ? ', useState' : ''} } from 'react';
 import type { ${typeImports} } from 'react';

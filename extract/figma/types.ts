@@ -254,6 +254,14 @@ export interface DumpDegradation {
 export interface DumpVariable {
   type: 'COLOR' | 'FLOAT' | 'STRING' | 'BOOLEAN' | string;
   value: string | number | boolean;
+  /** Per-mode resolved values, keyed by MODE NAME (dump v1.6, additive) —
+   *  captured only when the variable's collection has more than one mode.
+   *  The consuming mode's value stays `value` (v1.4 shape); the captured-
+   *  token layer projects `modes` as per-mode token trees (the repo's own
+   *  tokens/modes/*.tokens.json shape) so a §3-promoted theme axis resolves
+   *  per mode instead of losing the non-default modes. Absence in older
+   *  dumps means not captured, never "single-mode". */
+  modes?: Record<string, string | number | boolean>;
 }
 
 export interface DumpFile {
