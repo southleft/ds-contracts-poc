@@ -6,8 +6,22 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+## [0.6.0] - 2026-07-12
+
+The July field-test arc: the contract schema advanced v9 → v12, the plugin dump format v1.0 → v1.6, the eval suite 60 → 99, and three standing instruments joined the suite — the whole-kit census, the visual-parity pixel gate, and the enterprise code gauntlet. The dated narrative with receipts is [MILESTONES.md](MILESTONES.md).
+
 ### Added
 
+- **Schema v9–v12** — `Part.shape` (drawn vector geometry: the tooltip pointer), `tokensByProp` on every surface (per-enum-value token substitution recovered by value-level correlation, not name matching), `part.repeat` + `arrayOf` props (repeated-children collections: React maps the live array, static surfaces render the observed sample), and receipt-grade `modes` metadata (theme/mode-axis promotion). `contract.schema.json` regenerated at each step.
+- **Dump v1.2–v1.6** — box shadows and per-corner radii; shape geometry; the `_variables` resolved-value channel (bound token names arrive WITH their values — the captured-token layer registers them as an import-scoped layer, repo tokens winning collisions by name); `instanceKey`/`instanceSetKey`, bounding boxes, boolean defaults, `swapPreferredValues`, and native SLOT nodes (composite child linking); collection modes with alias resolution (per-mode token values). Every channel the capture reads but cannot carry is a named degradation receipt — the zero-silent-losses rule, REST mapper included.
+- **The whole-kit census** (`npm run extract:figma:gauntlet`) — every component set in a live enterprise Figma kit (1,618 sets, 76 variant composites) replayed through the full import pipeline; per-set facts-carried, named-note, and degradation counts; class fixtures retained for regression replay. 63.2% composite-clean at first measure, 100.0% after the class-fix batches — the instrument stands so the number cannot silently regress.
+- **The visual-parity instrument** (`npm run extract:figma:visual`) — emitted previews perceptually diffed against Figma's own PNG renders: pixelmatch, a text-masked second score (cross-renderer font rasterization never flatters a result), real browser interaction states, disk-cached Figma PNGs, worst-first REPORT with per-row diagnosis and triptychs.
+- **The enterprise code gauntlet** (`extract/pilots/ENTERPRISE-GAUNTLET.md`) — Carbon, Fluent 2, Spectrum, and Polaris at pinned SHAs through the unmodified pipeline, plus the fix batch it demanded: sibling-type-file resolution, cast transparency, intersection-named-ref rules (Fluent 0→23 components, Polaris hollow 5→0), nameless-CEM-event named skips, one function-prop rule shared by propose and diagnose (26 false findings → 0), and `wrap-plain-tokens` (all four enterprise token shapes load via a mechanical `$value` wrap).
+- **Send-to-Playground plugin bridge** — a one-time 6-char pairing code relays the plugin's dump (the repo's dump script embedded verbatim, a build-time drift guard refusing stale copies — it has fired three times, correctly) through a one-time-read relay on the assist worker (15-min TTL, 4 MB cap, own kill switch); full token names AND values on any Figma plan.
+- **Composite children render real** — key-based session linking (`resolveChildContract`: key first, name fallback noted, name-contradicting-key refused), linked refs rendering child anatomy with applied + threaded `{parentProp}` props, unlinked stubs rendering observed geometry via minted `imported.stub-*` tokens; workspace imports join the propose scope.
+- **Proposer trio** — theme/mode-axis promotion (a structurally-corroborated Theme axis is a token mode, never a prop; near-misses stay props by name), repeated-children collections (≥3 homogeneous siblings → one item-template part + `arrayOf`), negative-spacing overlap (`layout.overlap` carries the drawn magnitude; a negative-px gap token can no longer mint).
+- **Native controls** — Checkbox/Switch 2.0.0 render a real `input[type=checkbox]`; standing `NATIVE_ROLE_HOSTS` semantic lint (role-on-non-native refuses by name; declared `roleException` is the governed escape).
+- **Enforced a11y** — `a11y.minHitArea` emits the non-visual `::before` hit-target floor on both CSS surfaces (previously declarative-only); UA margins neutralized on component roots.
 - **Fidelity matrix** (`extract/fidelity-matrix/`) — four real components (Shoelace Tooltip and Button Group, Eventz Button, CBDS Button design + code) imported live, proposed, emitted, and scored against their own captures; committed fixtures replay every number offline. SCORECARD with 12 named gaps, causes, and an ordered punch list.
 - **Dump v1.1** — solid paints capture `{hex, alpha}` and node visibility (`hidden`) in both the REST mapper and the plugin dump; alpha<1 paints mint as 8-digit hex (one string that is a legal DTCG color `$value`, a CSS color, and invertible to Figma RGBA); the `paint-alpha-dropped` degradation is retired.
 - **Auto-proposed child contract stubs** — a nested instance whose child contract is not in scope ships a STUB contract alongside the proposal (observed applied values only, provisionality named) so component refs emit instead of refusing.
@@ -15,10 +29,18 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 - **Identifier sanitization at proposal** — non-PascalCase set names and emoji-prefixed prop/slot names sanitize when the contract is proposed (original spellings stay the figma bindings, every sanitization noted); emit no longer refuses on spelling.
 - **Visible propRefs on component-ref parts** — icon-toggle booleans captured on nested instances become contract props with `visibleWhen`, defaults recovered from dump v1.1 `hidden` evidence.
 
+### Changed
+
+- Contract-global part-name dedup with named renames (first drawn part keeps the name; collisions take a parent-derived prefix, else an ordinal suffix) and a 24-char derived-name cap.
+- Playground surface batch: captions derived from the contracts (eval-refused hardcoded counts), receipts wall dedups repeats with exact counts preserved, deliberate refusals labeled, tab rail and landing strip wrap instead of clipping, plain-words JSON errors.
+- ds.token 1.1.0: the declared size scale is live (per-size `tokensByProp` against existing repo tokens; md byte-identical).
+
 ### Fixed
 
 - Canvas engine crash (`undefined.name`) on contracts referencing a contract-less component — now a named refusal.
 - Styles scorer compares full RGBA instead of truncating to 6-digit hex.
+- Switch canvas thumb spec carries fill/box/radius; state previews use literal node opacity (a bound 0–1 variable rendered the disabled preview at 0.5%); empty slots render empty, absent-and-named, instead of placeholder text; focus no longer renders the pressed fill (real-Chromium keyboard-focus probe pins it).
+- Figma's manifest validator rejects IP-literal dev URLs — plugin manifest fixed so the plugin loads at all.
 
 ## [0.5.0] - 2026-07-09
 

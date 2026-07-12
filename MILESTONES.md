@@ -537,6 +537,119 @@ Next: the taxonomy's ranked richness program (repeat/arrayOf collections,
 theme-axis promotion, slot capture pass incl. native slots + session
 linking, overlay inference) — richness, not refusals.
 
+## 2026-07-11 — Pixels as receipts: the visual-parity instrument, and the fix queue it opened
+
+Refusal-free was never the same claim as pixel-right, so the gap got its own
+instrument: `npm run extract:figma:visual` renders every subject variant in a
+real Chromium, fetches Figma's own PNG of the same node, and scores the pair
+with pixelmatch — twice, the second score masking text rects so cross-renderer
+font rasterization can never flatter or damn a result. Cross-renderer deltas
+(glyph hinting, antialiasing, blur kernels, fractional-pixel layout) are NAMED
+in the report header, handled by masking — never by a fatter threshold. The
+baseline was honest and ugly: **115 variants diffed, 40 over the provisional
+10% line**, and the worst rows were real defects, not noise — focus rendering
+the pressed fill on the owner's button, the dialog losing its panel chrome,
+literal slot placeholder text rendering as content.
+
+The queue drove three merge batches. Native controls: Checkbox/Switch 2.0.0
+render a real `input[type=checkbox]` (indeterminate set as the DOM property via
+callback ref; Space toggles natively), plus a standing semantic lint —
+`NATIVE_ROLE_HOSTS` refuses role-on-non-native by name, with declared
+`roleException` as the governed escape (evals 79→81). A playground surface
+batch closed 12 adversarial-review defects, including caption drift fixed at
+the root: display captions are now DERIVED from the contracts, with an eval
+refusing future hardcoded counts (81→82). The engine-fix batch landed six
+pinned defects — the switch canvas thumb, state-preview opacity literals,
+empty slots rendering empty, UA-margin neutralization, `a11y.minHitArea`
+ENFORCED (the `::before` hit-target floor, previously aspirational), and
+ds.token's dead size prop made live — each with its own eval, golden updates
+reviewed ×3 (82→88). Residue, named: the re-run improved the original worst-10
+out of the list and exposed the next queue top — shoelace-button-group's 36
+variants, newly measurable at 95–98% masked because child buttons weren't
+resolved (the composite-children problem, below). **88/88 evals.**
+
+## 2026-07-12 — The enterprise code gauntlet: Carbon, Fluent 2, Spectrum, Polaris
+
+The owner's mandate: pretend it's Carbon, Fluent, Spectrum, Polaris. The
+gauntlet didn't pretend — it RAN all four, shallow-cloned at pinned SHAs,
+through the unmodified pipeline (`extract/pilots/ENTERPRISE-GAUNTLET.md`;
+nothing tuned to make the numbers better, every workaround named). Starting
+truth: Carbon 20/24 with three silent losses, **Fluent 0/23** (every shipping
+component invisible behind sibling `types.ts` files and `ForwardRefComponent`
+casts), Spectrum via CEM 22/22, Polaris 23/23 with **5 silently hollow** — and
+two of those classes violated the nothing-silent invariant outright:
+`as`-expression exports vanished without a note, intersection-of-named-refs
+props extracted hollow. A nameless CEM event crashed the run over Spectrum's
+1,264-module manifest. Raw DTCG ingest: 0% on all four token sets (all publish
+plain values; the spec wants `$value`).
+
+The fix batch made the type-legibility tier real: sibling-type-file resolution,
+cast transparency, cast-alias and intersection-named-ref rules take **Fluent
+0→23** and Polaris hollow 5→0 with named heritage receipts (Carbon silent
+losses 3→0, TextField 0→35 props); nameless CEM events become named skips
+(crash → exit 0); one function-prop rule shared by propose AND diagnose kills
+26 false findings on foreign libraries; and `wrap-plain-tokens` loads all four
+enterprise token shapes via a mechanical `$value` wrap, offered in the
+playground's Tokens tab (live Polaris bind: 351→71 foreign notes, 0→48
+bindings). Residue, named: fact coverage is honest, not flattering — Carbon
+78%, Spectrum 73%, Polaris 57% of facts carried; the ranking put code-side
+type legibility ABOVE the taxonomy's richness program, which is why this
+batch jumped the queue. **93/93 evals; golden and the design census untouched.**
+
+## 2026-07-12 — Composite children render real: dump v1.5 + session linking
+
+The shoelace queue-top and the dialog's flat children were one defect class:
+component refs rendered as named boxes, not as their contracts. Dump v1.5
+captures what linking needs — `instanceKey`/`instanceSetKey` (identity that
+survives renames), bounding boxes on instances and variant roots, boolean
+property defaults, `swapPreferredValues`, native SLOT nodes, and
+`_provenance.dumpVersion`; the plugin UI re-embedded it behind the drift
+guard. `resolveChildContract` links key-first with name fallback NOTED — and a
+name match that contradicts the key REFUSES, never guesses. Linked refs now
+render the child's real anatomy with applied + threaded `{parentProp}` props;
+unlinked refs render honest stubs at OBSERVED geometry via minted
+`imported.stub-*` tokens instead of naked boxes; workspace imports join the
+propose scope through a session registry, so importing the child set upgrades
+the parent's stubs to real renders.
+
+The parity meter moved the way the claim said it should: shoelace-button-group
+36 rows median **92→8.2%** masked (sizes Δ0), eventz width Δ−82→Δ0–6
+(boolDefaults render the icons that were silently hidden), dialog large
+5.6→0.6%; the >10% bucket **73→47** (the bucket had grown 40→73 as previously
+refusing rows became measurable — both moves honest). Residue, named: two
+dialog regressions stay on the queue — instance-level FILL overrides on refs
+are a vocabulary limit, and stub widths correlated with a parent axis render
+one observed width. **96/96 evals; census 1,618/1,618 regen reviewed.**
+
+## 2026-07-12 — The proposer trio: modes, collections, overlap (dump v1.6, schema v12)
+
+The taxonomy's ranked richness program, shipped as three proposers in one
+merge. **Theme/mode-axis promotion (P17):** a drawn Theme|Mode axis with
+values inside the light/dark/high-contrast vocabulary, STRUCTURALLY
+corroborated (identical anatomy + identical bound variable names across the
+axis), is a token mode, never a prop — the axis leaves the API, mode-excluded
+variants never feed the mint pass (no fabricated second palette), and dump
+v1.6 captures collection modes with alias resolution so promoted bindings
+resolve per mode. Near-misses stay props BY NAME, never guessed. No themed set
+exists in the owner's kit — checked, so the fixture is synthetic in the CBDS
+shape and says so in the receipt. **Repeated-children collections (P9, schema
+v12):** ≥3 adjacent siblings of the same child with a homogeneous applied-prop
+shape propose as ONE item-template part plus a code-only `arrayOf` prop —
+React maps the live array, static surfaces render the OBSERVED sample as the
+collection's honest static state, field carry rules deterministic and named
+per skip. **Negative-spacing overlap (P21):** uniform-negative auto-layout
+spacing inverts to `layout.overlap` carrying the drawn magnitude (the
+ds.avatar-group owner-precedent); a negative-px gap token — invalid CSS,
+silently ignored — can no longer mint anywhere; mixed-sign spacing is a named
+limit.
+
+Census re-run: **1,618/1,618 HOLDS**, zero violation deltas — 11 sets GAIN P9
+receipts, 2 propose repeat (their per-sibling note piles collapse, 65→46 and
+18→11), total named notes 5,414→5,496. Parity: zero moved rows. The v1.6
+re-embed was initially missed — and the plugin zip drift guard refused the
+build until the canonical script was re-embedded, exactly as designed, third
+time it has fired. **99/99 evals.**
+
 ---
 
 **Standing scoreboard** (updated with each milestone):
@@ -550,3 +663,6 @@ linking, overlay inference) — richness, not refusals.
 | Brownfield | 4 external systems extracted/diagnosed | `extract/pilots/` |
 | Non-destructive sync | in-place amend, IDs preserved | CBDS + Instance Lab forensics |
 | Theming | brand = token layer only | `brand-added-token-layer-only` eval |
+| Enterprise scale (code) | Carbon/Fluent 2/Spectrum/Polaris at pinned SHAs, pipeline unmodified | `extract/pilots/ENTERPRISE-GAUNTLET.md` |
+| Whole-kit census | 1,618/1,618 sets clean, facts/degradations counted | `npm run extract:figma:gauntlet` → `CENSUS.md` |
+| Visual parity | pixel diff vs Figma's own renders, worst-first queue | `npm run extract:figma:visual` → `REPORT.md` |
