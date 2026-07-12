@@ -1,0 +1,27 @@
+{
+  "schemaVersion": "1.0.0",
+  "readme": "FIXTURE (Spectrum-Web-Components-shaped, synthesized): published manifests DO ship events without a name (e.g. a re-dispatched TransitionEvent) — the adapter must degrade to a NAMED per-event skip, never a crash, and keep carrying the named events.",
+  "modules": [
+    {
+      "kind": "javascript-module",
+      "path": "src/glass-dialog.js",
+      "declarations": [
+        {
+          "kind": "class",
+          "customElement": true,
+          "name": "GlassDialog",
+          "tagName": "glass-dialog",
+          "description": "A dialog that re-dispatches transition events.",
+          "attributes": [
+            { "name": "open", "type": { "text": "boolean" }, "default": "false" },
+            { "name": "size", "type": { "text": "'s' | 'm' | 'l'" }, "default": "'m'" }
+          ],
+          "events": [
+            { "type": { "text": "TransitionEvent" } },
+            { "name": "gd-close", "description": "Fired when the dialog closes." }
+          ]
+        }
+      ]
+    }
+  ]
+}

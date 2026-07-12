@@ -1561,9 +1561,15 @@ export function Playground() {
   const [tokensText, setTokensText] = useState(() => storedUserTokensText());
   const [tokensErrors, setTokensErrors] = useState<string[] | null>(null);
   const [tokensNote, setTokensNote] = useState<string | null>(null);
+  const [plainWrapOffer, setPlainWrapOffer] = useState<{
+    text: string;
+    count: number;
+    skipped: { path: string; reason: string }[];
+  } | null>(null);
 
-  const applyTokens = () => {
-    const result = applyUserTokens(tokensText);
+  const applyTokens = (text = tokensText) => {
+    const result = applyUserTokens(text);
+    setPlainWrapOffer(null);
     if (result.ok) {
       setTokensErrors(null);
       setTokensNote(
@@ -1574,7 +1580,16 @@ export function Playground() {
     } else {
       setTokensNote(null);
       setTokensErrors(result.errors);
+      // Not DTCG but a plain token map (what Carbon/Fluent/Polaris/Spectrum
+      // publish)? OFFER the mechanical $value wrap — applied only on click.
+      if (result.plainWrap) setPlainWrapOffer(result.plainWrap);
     }
+  };
+
+  const applyPlainWrap = () => {
+    if (!plainWrapOffer) return;
+    setTokensText(plainWrapOffer.text);
+    applyTokens(plainWrapOffer.text);
   };
 
   // ----------------------------------------------- URL params (?example=…)
@@ -2548,7 +2563,7 @@ export function Playground() {
               suggestions, the inline emitter&rsquo;s literals, and the preview stylesheet all
               bind against this tree.
               {tokenSource.kind === 'user' ? (
-                <button type="button" onClick={() => { resetToRepoTokens(); setTokensNote(null); setTokensErrors(null); }}>
+                <button type="button" onClick={() => { resetToRepoTokens(); setTokensNote(null); setTokensErrors(null); setPlainWrapOffer(null); }}>
                   Back to repo tokens
                 </button>
               ) : null}
@@ -2570,7 +2585,7 @@ export function Playground() {
               </p>
             </div>
             <div className="btn-row">
-              <button type="button" className="btn--primary" disabled={!tokensText.trim()} onClick={applyTokens}>
+              <button type="button" className="btn--primary" disabled={!tokensText.trim()} onClick={() => applyTokens()}>
                 Apply tokens
               </button>
               <button type="button" onClick={() => setTokensText(STARTER_USER_TOKENS)}>
@@ -2591,6 +2606,33 @@ export function Playground() {
                     <li key={i}>{err}</li>
                   ))}
                 </ul>
+              </div>
+            ) : null}
+            {plainWrapOffer ? (
+              <div className="notice">
+                This looks like a plain token map (name → value / {'{ value }'} entries), not DTCG.
+                A mechanical <code>$value</code> wrap converts it — values verbatim, types inferred
+                from value shape, nothing invented: {plainWrapOffer.count} token
+                {plainWrapOffer.count === 1 ? '' : 's'}, {plainWrapOffer.skipped.length} skipped by
+                name.
+                <div className="btn-row">
+                  <button type="button" className="btn--primary" onClick={applyPlainWrap}>
+                    Convert to DTCG &amp; apply ({plainWrapOffer.count} tokens
+                    {plainWrapOffer.skipped.length > 0 ? `, ${plainWrapOffer.skipped.length} skipped` : ''})
+                  </button>
+                </div>
+                {plainWrapOffer.skipped.length > 0 ? (
+                  <ul className="validation__list">
+                    {plainWrapOffer.skipped.slice(0, 8).map((s, i) => (
+                      <li key={i}>
+                        <code>{s.path}</code> — {s.reason}
+                      </li>
+                    ))}
+                    {plainWrapOffer.skipped.length > 8 ? (
+                      <li>… and {plainWrapOffer.skipped.length - 8} more (all named in the converted paste)</li>
+                    ) : null}
+                  </ul>
+                ) : null}
               </div>
             ) : null}
           </div>

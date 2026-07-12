@@ -25,7 +25,7 @@ import { loadConfig, outDir } from '../extract/config.js';
 import { extractReactTsx } from '../extract/adapters/react-tsx.js';
 import { extractCem } from '../extract/adapters/cem.js';
 import { loadDesign } from '../extract/reconcile.js';
-import { normalizeName } from '../extract/types.js';
+import { isEventCallbackName, normalizeName } from '../extract/types.js';
 import type { ExtractedComponent } from '../extract/types.js';
 
 interface Finding {
@@ -134,6 +134,12 @@ for (const contract of contracts) {
     for (const cp of c.props) {
       if (contractCodeNames.has(cp.name) || RESERVED.has(cp.name)) continue;
       if (cp.kind === 'node' || cp.kind === 'other') continue; // outside declared scope
+      // Non-on* function props (render props, formatters) are outside the
+      // contracted API surface BY THE SAME RULE the proposer applies
+      // (extract/types.ts isEventCallbackName): propose receipts the skip,
+      // so the referee flagging it as [code AHEAD] would be the pipeline
+      // disagreeing with itself — not drift.
+      if (cp.kind === 'event' && !isEventCallbackName(cp.name)) continue;
       add({
         surface: 'code',
         classification: 'ahead',

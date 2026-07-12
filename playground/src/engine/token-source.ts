@@ -25,8 +25,10 @@ import {
   mintedTokenCss,
   tokenCorpusFromJson,
   tokenInventoryFromJson,
+  wrapPlainTokensAsDtcg,
   type CapturedTokenLayer,
   type MintedEntry,
+  type PlainWrapSkip,
   type TokenCorpus,
   type TokenTreeInput,
 } from '../../../core/index.js';
@@ -68,7 +70,19 @@ export const repoTokenSource: TokenSource = {
   docCount: 4,
 };
 
-export type ApplyTokensResult = { ok: true; source: TokenSource } | { ok: false; errors: string[] };
+export type ApplyTokensResult =
+  | { ok: true; source: TokenSource }
+  | {
+      ok: false;
+      errors: string[];
+      /** Present when the paste is not DTCG but IS a plain token map (flat
+       *  string/number leaves, `{ value: … }` maps, nested groups) — the
+       *  mechanical `$value` wrap (core/wrap-plain-tokens.ts), offered to
+       *  the user, never applied silently. `text` is the converted DTCG
+       *  JSON ready to re-apply; `skipped` names every entry the wrap
+       *  refused. */
+      plainWrap?: { text: string; count: number; skipped: PlainWrapSkip[] };
+    };
 
 /** Deep-merge DTCG documents, later documents winning on conflicts. */
 function mergeTrees(docs: Record<string, unknown>[]): Record<string, unknown> {
@@ -107,10 +121,25 @@ export function buildUserTokenSource(text: string): ApplyTokensResult {
   const trees = docs as Record<string, unknown>[];
   const inventory = tokenInventoryFromJson(trees);
   if (inventory.size === 0) {
-    return {
-      ok: false,
-      errors: ['Not DTCG-shaped: no $value leaves found — tokens must be objects like { "$value": "#dbeafe", "$type": "color" }'],
-    };
+    const notDtcg =
+      'Not DTCG-shaped: no $value leaves found — tokens must be objects like { "$value": "#dbeafe", "$type": "color" }';
+    // Plain token map? (flat name→value leaves, Style-Dictionary `{ value }`
+    // maps, nested groups — what Carbon/Fluent/Polaris/Spectrum actually
+    // publish.) Offer the mechanical wrap; the user applies it, we never do.
+    const wraps = trees.map((t) => wrapPlainTokensAsDtcg(t));
+    if (wraps.length > 0 && wraps.every((w) => w !== null)) {
+      const wrapped = wraps.map((w) => w!.tree);
+      return {
+        ok: false,
+        errors: [notDtcg],
+        plainWrap: {
+          text: JSON.stringify(wrapped.length === 1 ? wrapped[0] : wrapped, null, 2) + '\n',
+          count: wraps.reduce((n, w) => n + w!.count, 0),
+          skipped: wraps.flatMap((w) => w!.skipped),
+        },
+      };
+    }
+    return { ok: false, errors: [notDtcg] };
   }
 
   const merged = mergeTrees(trees);

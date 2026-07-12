@@ -1,0 +1,11 @@
+{
+  "colorNeutralForeground1": "#242424",
+  "colorNeutralForegroundInverted": "#ffffff",
+  "colorBrandBackground": "#0f6cbd",
+  "fontSizeBase300": "14px",
+  "fontWeightRegular": 400,
+  "fontWeightSemibold": 600,
+  "durationFast": "100ms",
+  "curveAccelerateMax": "cubic-bezier(0.9,0.1,1,0.2)",
+  "gradientStops": ["#0f6cbd", "#2886de"]
+}

@@ -23,7 +23,7 @@
 import { ContractSchema } from '../scripts/contract-schema.js';
 import { mintFromCss } from '../core/mint-code.js';
 import type { MintAxis, MintedEntry } from '../core/mint-tokens.js';
-import { kebab, titleCase } from './types.js';
+import { isEventCallbackName, kebab, titleCase } from './types.js';
 import type { ExtractedAnatomy, ExtractedComponent, ExtractedPart } from './types.js';
 
 export interface ProposalResult {
@@ -105,7 +105,7 @@ export function proposeContract(
   prefix: string,
   mint?: ProposeMintOptions,
 ): ProposalResult {
-  const notes: string[] = [];
+  const notes: string[] = [...(c.notes ?? [])];
   const props: Record<string, unknown>[] = [];
   const events: Record<string, unknown>[] = [];
   const anatomy = c.anatomy;
@@ -188,7 +188,10 @@ export function proposeContract(
         },
       });
     } else if (p.kind === 'event') {
-      if (/^on[A-Z]/.test(p.name)) {
+      // isEventCallbackName is THE shared function-prop rule — the referee
+      // (parity/diagnose.ts) applies the same predicate, so this skip is
+      // never re-flagged as drift.
+      if (isEventCallbackName(p.name)) {
         const name = p.name.slice(2).replace(/^[A-Z]/, (ch) => ch.toLowerCase());
         const wiring = anatomy?.events?.[name];
         events.push({

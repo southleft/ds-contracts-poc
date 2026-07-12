@@ -33,7 +33,7 @@ function runExtract(): ExtractedComponent[] {
     return extractReactTsx(config.code.root, skipped, { tokenFiles: config.tokens });
   }
   if (!config.code.manifest) throw new Error('cem adapter needs code.manifest');
-  return extractCem(config.code.manifest);
+  return extractCem(config.code.manifest, skipped);
 }
 
 if (command === 'code') {

@@ -1,0 +1,16 @@
+{
+  "accent-color-100": {
+    "sets": {
+      "light": { "value": "rgb(230, 240, 255)" },
+      "dark": { "value": "rgb(11, 38, 71)" }
+    }
+  },
+  "focus-indicator-thickness": { "value": "2px" },
+  "focus-indicator-color": { "value": "{accent-color-100}" },
+  "corner-radius-100": { "value": "8px" },
+  "android-elevation": { "value": 2 },
+  "drop-shadow-blur-100": {
+    "deprecated": true,
+    "value": "8px"
+  }
+}

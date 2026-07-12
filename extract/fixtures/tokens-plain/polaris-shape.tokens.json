@@ -1,0 +1,18 @@
+{
+  "color": {
+    "bg-surface": { "value": "rgba(255, 255, 255, 1)" },
+    "bg-surface-hover": { "value": "rgba(247, 247, 247, 1)" },
+    "text": { "value": "rgba(48, 48, 48, 1)" }
+  },
+  "space": {
+    "100": { "value": "4px" },
+    "200": { "value": "8px" }
+  },
+  "font": {
+    "size-325": { "value": "13px", "type": "fontSize" },
+    "weight-medium": { "value": 550 }
+  },
+  "motion": {
+    "keyframes-spin": { "value": null }
+  }
+}

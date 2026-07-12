@@ -1,6 +1,6 @@
 {
-  "passed": 88,
-  "total": 88,
+  "passed": 93,
+  "total": 93,
   "results": [
     {
       "id": "refuse-unknown-token-reference",
@@ -124,6 +124,31 @@
     },
     {
       "id": "diagnose-foreign-green-red-green",
+      "claim": "C5-extraction",
+      "pass": true
+    },
+    {
+      "id": "fluent-sibling-types-merge",
+      "claim": "C5-extraction",
+      "pass": true
+    },
+    {
+      "id": "as-expression-named",
+      "claim": "C5-extraction",
+      "pass": true
+    },
+    {
+      "id": "intersection-named",
+      "claim": "C5-extraction",
+      "pass": true
+    },
+    {
+      "id": "cem-nameless-event-skip",
+      "claim": "C5-extraction",
+      "pass": true
+    },
+    {
+      "id": "plain-token-wrap",
       "claim": "C5-extraction",
       "pass": true
     },
