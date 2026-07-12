@@ -1834,17 +1834,32 @@ const isWrapArtifact = (m: Merged): boolean => {
  *  from the colliding name and the prefixed key is itself free); otherwise
  *  by ORDINAL SUFFIX ("Title" inside the "Title" wrapper becomes "Title2").
  *  Every rename is a NAMED note carrying the node path — never silent. */
+/** Identifier-length cap for derived part keys (see partKey). */
+const PART_KEY_MAX = 24;
+
 function partKey(name: string, ctx: Ctx, where: string, parentKey: string): string {
   // camel() only folds space/underscore/hyphen word breaks — a drawn name
   // with other punctuation (the owner's Dialog body is the full lorem-ipsum
   // SENTENCE, commas and periods included) would leak an illegal identifier
   // into CSS selectors; strip everything outside [A-Za-z0-9] after cameling.
   const camelSafe = camel(name).replace(/[^A-Za-z0-9]/g, '');
-  const base = /^[A-Za-z][A-Za-z0-9]*$/.test(name)
+  let base = /^[A-Za-z][A-Za-z0-9]*$/.test(name)
     ? name
     : /^[A-Za-z]/.test(camelSafe)
       ? camelSafe
       : 'part';
+  // LENGTH CAP: content-derived names (Figma auto-names text layers with
+  // their characters — the owner's Dialog body cameled to a 200-char
+  // lorem-ipsum identifier) are bounded at 24 chars. Deterministic: the
+  // first 24 characters, named note; the drawn text itself is untouched
+  // (it rides the content/text channel, not the key).
+  if (base.length > PART_KEY_MAX) {
+    const capped = base.slice(0, PART_KEY_MAX);
+    ctx.notes.push(
+      `${where}: derived part name "${base.slice(0, 40)}${base.length > 40 ? '…' : ''}" (${base.length} chars) exceeds the ${PART_KEY_MAX}-char identifier cap — truncated to "${capped}" (deterministic: first ${PART_KEY_MAX} characters; the drawn text itself is untouched)`,
+    );
+    base = capped;
+  }
   const taken = ctx.partNames;
   let key = base;
   if (taken.has(base)) {

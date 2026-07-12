@@ -2,7 +2,7 @@
  "_provenance": {
   "generatedBy": "extract/figma/gauntlet/census.ts",
   "dump": "extract/figma/fixtures/cbds-plugin-all-sets.v14.dump.json",
-  "generatedAt": "2026-07-11"
+  "generatedAt": "2026-07-12"
  },
  "summary": {
   "dump": "extract/figma/fixtures/cbds-plugin-all-sets.v14.dump.json",
@@ -40,7 +40,7 @@
    "tokenRefsMedian": 1,
    "tokenRefsMedianComponentSets": 14,
    "mintedTotal": 863,
-   "notesTotal": 5252,
+   "notesTotal": 5272,
    "unboundTotal": 23,
    "degradationsTotal": 3316
   }
@@ -22684,7 +22684,7 @@
     "react-inline",
     "figma-script"
    ],
-   "noteCount": 35,
+   "noteCount": 36,
    "unboundCount": 0,
    "mintedCount": 7,
    "tokenRefsCarried": 42,
@@ -61298,7 +61298,7 @@
     "react-inline",
     "figma-script"
    ],
-   "noteCount": 25,
+   "noteCount": 26,
    "unboundCount": 0,
    "mintedCount": 8,
    "tokenRefsCarried": 15,
@@ -62750,7 +62750,7 @@
     "react-inline",
     "figma-script"
    ],
-   "noteCount": 59,
+   "noteCount": 60,
    "unboundCount": 0,
    "mintedCount": 20,
    "tokenRefsCarried": 18,
@@ -63560,7 +63560,7 @@
     "react-inline",
     "figma-script"
    ],
-   "noteCount": 60,
+   "noteCount": 64,
    "unboundCount": 0,
    "mintedCount": 4,
    "tokenRefsCarried": 11,
@@ -63602,7 +63602,7 @@
     "react-inline",
     "figma-script"
    ],
-   "noteCount": 13,
+   "noteCount": 16,
    "unboundCount": 0,
    "mintedCount": 4,
    "tokenRefsCarried": 12,
@@ -63640,7 +63640,7 @@
     "react-inline",
     "figma-script"
    ],
-   "noteCount": 37,
+   "noteCount": 38,
    "unboundCount": 0,
    "mintedCount": 2,
    "tokenRefsCarried": 6,
@@ -63681,7 +63681,7 @@
     "react-inline",
     "figma-script"
    ],
-   "noteCount": 35,
+   "noteCount": 43,
    "unboundCount": 0,
    "mintedCount": 1,
    "tokenRefsCarried": 7,
@@ -64459,7 +64459,7 @@
     "react-inline",
     "figma-script"
    ],
-   "noteCount": 63,
+   "noteCount": 64,
    "unboundCount": 2,
    "mintedCount": 16,
    "tokenRefsCarried": 17,
