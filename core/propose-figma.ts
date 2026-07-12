@@ -306,6 +306,156 @@ function stripAxisFromName(name: string, property: string, fallback: string): st
 }
 
 // ---------------------------------------------------------------------------
+// Theme/mode-axis promotion (§3, P17 — the mirror image of interaction-state
+// promotion). Some drawn axes are NOT API: `Theme=Light|Dark` is a token
+// MODE (DTCG modes / Figma variable-collection modes). Shipping
+// `theme: 'light' | 'dark'` as a component prop is the same category error
+// as shipping `state: 'hover'` — Carbon, Material, and Fluent all model
+// theme as token layers, never per-component props (enterprise-gauntlet
+// corroboration: Carbon's four themes are identical 306-key token sets).
+//
+// Detection is TWO independent signals, both required (name alone is never
+// enough — D4):
+//   1. NAME TABLE (the detectStateAxis discipline): axis property named
+//      theme|mode|color-scheme|scheme|appearance with values ⊆
+//      {light, dark, high-contrast, dim, black, white}. Near-misses on a
+//      named axis are NOTED, never guessed.
+//   2. STRUCTURAL CORROBORATION (what makes promotion SAFE): partition the
+//      variants by the candidate axis holding all other axes fixed; every
+//      pair must have (a) an IDENTICAL merged anatomy (same children, order,
+//      types), (b) the same bound variable NAMES on every field (only
+//      resolved values differ — the variable itself is mode-switched), with
+//      raw literals allowed to differ ONLY on color-kind channels
+//      (fill/stroke/effect-color hex). ANY other difference → NOT a mode;
+//      the axis stays an enum prop with a WARNING note.
+//
+// Promotion: the axis is EXCLUDED from props; anatomy and facts build from
+// the axis's FIRST (default) value's variants only (the state-promotion
+// base-variant discipline); mode-excluded variants never feed the mint pass
+// (a dark-mode hex minting imported.* tokens would fabricate a second
+// palette); per-mode captured-variable values ride the captured-token
+// layer's `modes` channel (dump v1.6); the contract carries receipt-grade
+// `modes` metadata; the rename story is a named note (regeneration draws
+// the default mode only — the axis spelling lives in the note + source set).
+// ---------------------------------------------------------------------------
+
+const MODE_AXIS_NAME = /^(theme|mode|color[\s_-]?scheme|scheme|appearance)$/i;
+const MODE_AXIS_VALUES = new Set(['light', 'dark', 'high-contrast', 'dim', 'black', 'white']);
+
+export interface ModePromotion {
+  axis: Axis;
+  /** Figma value spelling of the default (base) mode — the axis's first value. */
+  defaultValue: string;
+}
+
+/** First structural/binding difference between two variants that a token
+ *  mode CANNOT explain — or null when the pair corroborates. Raw literals
+ *  may differ ONLY on color-kind channels (fill/stroke/effect color); bound
+ *  fields must bind the SAME variable names; everything else must be equal. */
+function modeStructuralDiff(a: DumpNode, b: DumpNode, path: string): string | null {
+  if (a.type !== b.type) return `${path}: node type ${a.type} vs ${b.type}`;
+  const aBound = a.bound ?? {};
+  const bBound = b.bound ?? {};
+  for (const k of new Set([...Object.keys(aBound), ...Object.keys(bBound)])) {
+    if (aBound[k] !== bBound[k]) {
+      return `${path}: field "${k}" binds "${aBound[k] ?? '(unbound)'}" vs "${bBound[k] ?? '(unbound)'}"`;
+    }
+  }
+  const paintShape = (p?: DumpPaint): string => (p === undefined ? 'none' : p.var !== undefined ? `var:${p.var}` : 'raw');
+  if (paintShape(a.fill) !== paintShape(b.fill)) return `${path}: fill ${paintShape(a.fill)} vs ${paintShape(b.fill)}`;
+  if (paintShape(a.stroke) !== paintShape(b.stroke)) return `${path}: stroke ${paintShape(a.stroke)} vs ${paintShape(b.stroke)}`;
+  if (JSON.stringify(a.layout ?? null) !== JSON.stringify(b.layout ?? null)) return `${path}: auto-layout differs`;
+  if ((a.cornerRadius ?? null) !== (b.cornerRadius ?? null)) return `${path}: corner radius differs`;
+  if ((a.strokeWeight ?? null) !== (b.strokeWeight ?? null)) return `${path}: stroke weight differs`;
+  if ((a.opacity ?? 1) !== (b.opacity ?? 1)) return `${path}: node opacity differs`;
+  if ((a.hidden ?? false) !== (b.hidden ?? false)) return `${path}: visibility differs`;
+  for (const dim of ['minWidth', 'minHeight', 'maxWidth', 'maxHeight'] as const) {
+    if ((a[dim] ?? null) !== (b[dim] ?? null)) return `${path}: ${dim} differs`;
+  }
+  if ((a.text === undefined) !== (b.text === undefined)) return `${path}: text presence differs`;
+  if (a.text && b.text) {
+    const at = a.text;
+    const bt = b.text;
+    if (
+      at.characters !== bt.characters || at.fontSize !== bt.fontSize || at.fontStyle !== bt.fontStyle ||
+      (at.lineHeight ?? null) !== (bt.lineHeight ?? null) || (at.style ?? null) !== (bt.style ?? null)
+    ) {
+      return `${path}: text/typography differs`;
+    }
+    if ((at.fillVar ?? null) !== (bt.fillVar ?? null)) return `${path}: text fill binds "${at.fillVar ?? '(raw)'}" vs "${bt.fillVar ?? '(raw)'}"`;
+  }
+  const effectShape = (e?: DumpEffect[]): string =>
+    JSON.stringify((e ?? []).map((x) => ({ t: x.type, o: x.offset ?? null, r: x.radius ?? null, s: x.spread ?? null })));
+  if (effectShape(a.effects) !== effectShape(b.effects)) return `${path}: effects differ`;
+  if ((a.instanceOf ?? null) !== (b.instanceOf ?? null)) return `${path}: nested instance differs`;
+  if (JSON.stringify(a.componentProperties ?? null) !== JSON.stringify(b.componentProperties ?? null)) {
+    return `${path}: applied instance props differ`;
+  }
+  if (JSON.stringify(a.propRefs ?? null) !== JSON.stringify(b.propRefs ?? null)) return `${path}: property references differ`;
+  const ak = a.children ?? [];
+  const bk = b.children ?? [];
+  if (ak.length !== bk.length) return `${path}: ${ak.length} vs ${bk.length} children`;
+  for (let i = 0; i < ak.length; i++) {
+    if (ak[i].name !== bk[i].name) return `${path}: child "${ak[i].name}" vs "${bk[i].name}"`;
+    const d = modeStructuralDiff(ak[i], bk[i], `${path}/${ak[i].name}`);
+    if (d) return d;
+  }
+  return null;
+}
+
+/** Detect a token-mode axis — name table AND structural corroboration, both
+ *  note-gated. Returns the promotion, or null (every near-miss NAMED). */
+function detectModeAxis(axes: Axis[], variants: DumpNode[], setName: string, notes: string[]): ModePromotion | null {
+  for (const axis of axes) {
+    if (!MODE_AXIS_NAME.test(axis.property.trim())) continue;
+    if (isBoolAxis(axis.values)) continue;
+    const unmapped = axis.values.filter((v) => !MODE_AXIS_VALUES.has(normStateValue(v)));
+    if (unmapped.length > 0) {
+      notes.push(
+        `variant axis "${axis.property}": named like a token-mode axis but value(s) ${unmapped.join(', ')} are outside the mode vocabulary (light|dark|high-contrast|dim|black|white) — kept as an enum prop, review`,
+      );
+      continue;
+    }
+    if (variants.some((v) => axisValuesOf(v.name)[axis.property] === undefined)) {
+      notes.push(
+        `variant axis "${axis.property}": token-mode axis detected but some variant names omit the pair — promotion unsafe, axis kept as an enum prop; review`,
+      );
+      continue;
+    }
+    // Structural corroboration: hold all other axes fixed (the residual
+    // variant name), compare each non-default-mode variant to its
+    // default-mode counterpart.
+    const defaultValue = axis.values[0];
+    const residual = (v: DumpNode) => stripAxisFromName(v.name, axis.property, setName);
+    const base = new Map<string, DumpNode>();
+    for (const v of variants) {
+      if (axisValuesOf(v.name)[axis.property] === defaultValue) base.set(residual(v), v);
+    }
+    let failure: string | null = null;
+    for (const v of variants) {
+      const value = axisValuesOf(v.name)[axis.property];
+      if (value === defaultValue) continue;
+      const counterpart = base.get(residual(v));
+      if (!counterpart) {
+        failure = `variant "${v.name}" has no ${axis.property}=${defaultValue} counterpart`;
+        break;
+      }
+      // Root names differ by exactly the axis pair — neutralize before the diff.
+      failure = modeStructuralDiff(counterpart, { ...v, name: counterpart.name }, residual(v));
+      if (failure) break;
+    }
+    if (failure) {
+      notes.push(
+        `variant axis "${axis.property}" (${axis.values.join('|')}): named like a token mode but the variants differ beyond color across its values (${failure}) — NOT promoted; kept as an enum prop (if this is theming, unify the drawn structure), review`,
+      );
+      continue;
+    }
+    return { axis, defaultValue };
+  }
+  return null;
+}
+
+// ---------------------------------------------------------------------------
 // Semantics inference — deterministic, bounded, NOTED. The canvas draws no
 // element/role, but a component-set NAME plus structure carries signal a
 // reviewer should not have to re-derive ("this is a freaking button"). The
@@ -3581,19 +3731,39 @@ export function proposeFromDump(
   const prefix = opts.prefix ?? 'ds';
   const preNotes: string[] = [];
 
+  // Theme/mode-axis promotion (§3 — see the section doc above): runs FIRST,
+  // over the full drawn set. A corroborated mode axis is excluded from the
+  // API; the whole pipeline (state promotion included) then runs on the
+  // DEFAULT mode's variants only — the other modes never feed anatomy,
+  // facts, or the mint pass (their resolved literals are receipts, not a
+  // second palette).
+  const modePromo = detectModeAxis(parseAxes(set.variants.map((v) => v.name)), set.variants, set.setName, preNotes);
+  let sourceVariants = set.variants;
+  if (modePromo) {
+    sourceVariants = set.variants
+      .filter((v) => axisValuesOf(v.name)[modePromo.axis.property] === modePromo.defaultValue)
+      .map((v) => ({
+        ...(JSON.parse(JSON.stringify(v)) as DumpNode),
+        name: stripAxisFromName(v.name, modePromo.axis.property, set.setName),
+      }));
+    preNotes.push(
+      `variant axis "${modePromo.axis.property}" (${modePromo.axis.values.join('|')}) IS a token-mode axis, not API (§3 — structurally corroborated: identical anatomy and bound variable NAMES across the axis; only color-kind literals/resolved values differ) — excluded from props; anatomy and facts build from the ${sourceVariants.length} "${modePromo.defaultValue}" (default-mode) variant(s) only; bindings resolve per mode through the variable collection (the captured-token layer carries per-mode values when the dump provides them — dump v1.6 \`modes\`); other modes' resolved literals are NOT minted (a dark-mode hex minting imported.* tokens would fabricate a second palette). Rename story: regeneration draws the default mode only — the axis spelling lives in this note and on the source set, and the contract's \`modes\` metadata names the modes`,
+    );
+  }
+
   // Interaction-state axis promotion (see the section doc above): detect the
   // axis over the FULL variant set, then partition — default-state variants
   // are the base the whole pipeline runs on; each promoted state's variants
   // (and the disabled group) are kept aside, names stripped of the state
   // pair, for the root-diff pass after the anatomy is built.
-  let statePromo = detectStateAxis(parseAxes(set.variants.map((v) => v.name)), preNotes);
+  let statePromo = detectStateAxis(parseAxes(sourceVariants.map((v) => v.name)), preNotes);
   let baseVariants: DumpNode[] | null = null;
   const stateGroups = new Map<PromotedState, DumpNode[]>();
   let disabledGroup: DumpNode[] = [];
   if (statePromo) {
     const promo = statePromo;
     const valueOf = (v: DumpNode) => axisValuesOf(v.name)[promo.axis.property];
-    if (set.variants.some((v) => valueOf(v) === undefined)) {
+    if (sourceVariants.some((v) => valueOf(v) === undefined)) {
       preNotes.push(
         `variant axis "${promo.axis.property}": interaction-state axis detected but some variant names omit the pair — promotion unsafe, axis kept as an enum prop; review`,
       );
@@ -3603,12 +3773,12 @@ export function proposeFromDump(
         ...(JSON.parse(JSON.stringify(v)) as DumpNode),
         name: stripAxisFromName(v.name, promo.axis.property, set.setName),
       });
-      baseVariants = set.variants.filter((v) => valueOf(v) === promo.defaultValue).map(strip);
+      baseVariants = sourceVariants.filter((v) => valueOf(v) === promo.defaultValue).map(strip);
       for (const p of promo.promoted) {
-        stateGroups.set(p.state, set.variants.filter((v) => valueOf(v) === p.value).map(strip));
+        stateGroups.set(p.state, sourceVariants.filter((v) => valueOf(v) === p.value).map(strip));
       }
       if (promo.disabledValue !== undefined) {
-        disabledGroup = set.variants.filter((v) => valueOf(v) === promo.disabledValue).map(strip);
+        disabledGroup = sourceVariants.filter((v) => valueOf(v) === promo.disabledValue).map(strip);
       }
       preNotes.push(
         `variant axis "${promo.axis.property}" (${promo.axis.values.join('|')}) IS the platform's interaction states, not API — promoted: the axis is NOT a prop; anatomy and base facts come from the ${baseVariants.length} default-state variant(s); ${promo.promoted
@@ -3618,7 +3788,7 @@ export function proposeFromDump(
     }
   }
 
-  const variantNames = (baseVariants ?? set.variants).map((v) => v.name);
+  const variantNames = (baseVariants ?? sourceVariants).map((v) => v.name);
   const axes = parseAxes(variantNames);
   const enumAxes = axes.filter((a) => !isBoolAxis(a.values));
   const ctx: Ctx = {
@@ -3670,7 +3840,7 @@ export function proposeFromDump(
   // styling speaks for the variant, its captured componentProperties are
   // promoted after the anatomy is built. (With state promotion the base
   // variants were already cloned + name-stripped above.)
-  const variants = baseVariants ?? (JSON.parse(JSON.stringify(set.variants)) as DumpNode[]);
+  const variants = baseVariants ?? (JSON.parse(JSON.stringify(sourceVariants)) as DumpNode[]);
   const captures = flattenBaseInstances(variants, ctx);
   const stateGroupCaptures: BaseInstanceCapture[] = [];
   if (statePromo) {
@@ -3948,6 +4118,9 @@ export function proposeFromDump(
       : { element: 'div' },
     props,
     states: [],
+    // §3: receipt-grade metadata — the promoted mode axis's values as mode
+    // names (never a prop; changes no emitter output).
+    ...(modePromo ? { modes: modePromo.axis.values.map(normStateValue) } : {}),
     anatomy: { root },
     anchors: {
       figma: {

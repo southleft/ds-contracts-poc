@@ -359,6 +359,12 @@
         "native"
       ]
     },
+    "modes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
     "figmaStatePreviews": {
       "type": "boolean"
     },

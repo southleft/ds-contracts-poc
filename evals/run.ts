@@ -2269,6 +2269,36 @@ const cases: Case[] = [
     },
   },
   {
+    // §3 (theme/mode-axis promotion, P17): a drawn Theme=Light|Dark variant
+    // axis is a TOKEN MODE, never a component prop — the mirror image of
+    // state promotion. Promotion requires the bounded name table AND
+    // structural corroboration; base facts come from the default mode only;
+    // mode-excluded variants never feed the mint pass; per-mode captured-
+    // variable values ride the captured-token layer's modes channel (dump
+    // v1.6). Near-misses stay enum props with NAMED notes.
+    id: 'theme-axis-promotion',
+    claim: 'C5-extraction',
+    run: () => {
+      const r = run(TSX, ['extract/figma/theme-mode-check.ts']);
+      if (r.status !== 0) throw new Error(`theme-mode receipt failed:\n${r.out}`);
+      for (const line of [
+        '✔ NO `theme` prop ships in the API',
+        '✔ contract `modes` metadata names the token modes (["light","dark"])',
+        '✔ the promotion is the NAMED §3 receipt (corroboration + mint isolation + rename story spelled out)',
+        '✔ base facts bind the REAL variable names from the light variants (background-color = {bg.{variant}}; got {bg.{variant}})',
+        '✔ the DARK accent literal mints NOWHERE (#9ec2ff — mode-excluded variants never fabricate a second palette)',
+        '✔ {bg.info} RESOLVES per mode — light #eef4ff, dark #0b1d3a (got #eef4ff / #0b1d3a)',
+        '✔ the near-miss is a WARNING note naming the first structural difference (2 vs 3 children)',
+        '✔ `theme` STAYS an enum prop (uncorroborated promotion never drops an axis silently)',
+        '✔ the out-of-vocabulary value is a NAMED note; the axis stays a prop',
+        '✔ `variant` ships as an enum prop (default|inverse)',
+        '✔ no mode-axis note fires at all (the name table never matches "variant")',
+      ]) {
+        if (!r.out.includes(line)) throw new Error(`missing check: ${line}`);
+      }
+    },
+  },
+  {
     // P9 (repeated-children collections, schema v12 `repeat`): ≥3 adjacent
     // sibling instances of the same child with a carriable per-item field
     // propose as ONE item-template part + arrayOf prop — React maps the live

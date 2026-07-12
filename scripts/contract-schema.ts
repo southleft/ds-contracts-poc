@@ -490,6 +490,12 @@ export const ContractSchema = z.strictObject({
    *  is generated and parity does not expect one; the code surface is still
    *  fully generated and checked. */
   figmaRepresentation: z.enum(['component', 'native']).optional(),
+  /** v12 (§3 theme-mode promotion): RECEIPT-GRADE metadata naming the token
+   *  modes a drawn theme/mode variant axis carried (e.g. ['light','dark']).
+   *  The axis is NEVER a prop — theming lives in the token collection's
+   *  modes, not the component API — so this field changes no emitter output;
+   *  it names the fact for reviewers and round-trip tooling. */
+  modes: z.array(z.string()).optional(),
   /** OPT-IN canvas-only interaction previews — the mirror image of code-only
    *  events. When true, the FIGMA generator emits an additional "State"
    *  variant axis (State=Default, State=Hover, …) where each non-default

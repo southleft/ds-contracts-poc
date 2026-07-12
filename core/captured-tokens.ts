@@ -40,6 +40,11 @@ export interface CapturedTokenEntry {
   value: string;
   /** DTCG $type ('color' | 'dimension' | 'number'). */
   type: string;
+  /** Per-mode CSS-value spellings, keyed by MODE NAME (dump v1.6) — present
+   *  only when the variable's collection is multi-mode and the mode value
+   *  spells with the entry's own type rule. The §3 channel: a promoted theme
+   *  axis resolves per mode through these. */
+  modes?: Record<string, string>;
 }
 
 export interface CapturedTokenSkip {
@@ -53,6 +58,12 @@ export interface CapturedTokenLayer {
   /** Number of registrable entries (= entries.length). */
   count: number;
   entries: CapturedTokenEntry[];
+  /** Per-mode DTCG trees (dump v1.6) — the repo's own token vocabulary shape
+   *  (tokens/modes/semantic.<mode>.tokens.json: a tree per mode carrying the
+   *  entries that HAVE a value for that mode). Absent when no captured
+   *  variable is multi-mode. The §3 promotion receipt: "bindings resolve per
+   *  mode through the variable collection" resolves HERE. */
+  modes?: Record<string, { tree: Record<string, unknown>; count: number }>;
   /** Variables the layer could NOT register — named, never silent. */
   skipped: CapturedTokenSkip[];
 }
@@ -104,13 +115,35 @@ export function capturedTokensFromDump(dump: Record<string, unknown>): CapturedT
       });
       continue;
     }
+    // Per-mode values (dump v1.6): spelled with the SAME typing rule as the
+    // consuming-mode value; a mode value whose JS type contradicts the
+    // variable's resolvedType is skipped by name (never a silent coercion).
+    const modesOf = (spell: (v: string | number | boolean) => string | null): Record<string, string> | undefined => {
+      if (!cap.modes || typeof cap.modes !== 'object') return undefined;
+      const out: Record<string, string> = {};
+      for (const [mode, raw] of Object.entries(cap.modes)) {
+        const spelled = spell(raw);
+        if (spelled === null) {
+          skipped.push({
+            name,
+            reason: `mode "${mode}" value ${JSON.stringify(raw)} does not spell as resolved type ${String(cap.type)} — mode value not registered`,
+          });
+          continue;
+        }
+        out[mode] = spelled;
+      }
+      return Object.keys(out).length > 0 ? out : undefined;
+    };
     if (cap.type === 'COLOR' && typeof cap.value === 'string') {
-      entries.push({ path, name, value: cap.value, type: 'color' });
+      const modes = modesOf((v) => (typeof v === 'string' ? v : null));
+      entries.push({ path, name, value: cap.value, type: 'color', ...(modes ? { modes } : {}) });
     } else if (cap.type === 'FLOAT' && typeof cap.value === 'number') {
+      const unitless = opacityVars.has(name);
+      const modes = modesOf((v) => (typeof v === 'number' ? (unitless ? String(v) : `${v}px`) : null));
       entries.push(
-        opacityVars.has(name)
-          ? { path, name, value: String(cap.value), type: 'number' }
-          : { path, name, value: `${cap.value}px`, type: 'dimension' },
+        unitless
+          ? { path, name, value: String(cap.value), type: 'number', ...(modes ? { modes } : {}) }
+          : { path, name, value: `${cap.value}px`, type: 'dimension', ...(modes ? { modes } : {}) },
       );
     } else {
       skipped.push({
@@ -133,10 +166,23 @@ export function capturedTokensFromDump(dump: Record<string, unknown>): CapturedT
     return !isPrefix;
   });
 
+  // Per-mode trees (dump v1.6) — the repo tokens/modes/*.tokens.json shape:
+  // one tree per mode NAME, carrying the registrable entries that have a
+  // value for that mode (the entry's base type; only the $value differs).
+  const modeNames = [...new Set(registrable.flatMap((e) => Object.keys(e.modes ?? {})))];
+  const modes: Record<string, { tree: Record<string, unknown>; count: number }> = {};
+  for (const mode of modeNames) {
+    const modeEntries = registrable
+      .filter((e) => e.modes?.[mode] !== undefined)
+      .map((e) => ({ ...e, value: e.modes![mode] }));
+    modes[mode] = { tree: treeFromEntries(modeEntries), count: modeEntries.length };
+  }
+
   return {
     tree: treeFromEntries(registrable),
     count: registrable.length,
     entries: registrable,
+    ...(modeNames.length > 0 ? { modes } : {}),
     skipped,
   };
 }
