@@ -433,7 +433,7 @@
      Do not edit here: scripts/build-plugin-zip.mjs refuses to package this
      plugin when the block below differs from the repo file. -->
 <script type="text/plain" id="dump-source">
-// Design-side ANATOMY dump — the canonical node-tree capture (dump v1.5).
+// Design-side ANATOMY dump — the canonical node-tree capture (dump v1.6).
 //
 // Transport-agnostic Plugin API script (same boundary as extract/figma-dump.js
 // and parity/extract-figma.plugin.js): run it through any console/plugin-runner
@@ -459,6 +459,9 @@
 //                      strings; floats stay raw numbers. The playground
 //                      registers these as an import-scoped token layer so the
 //                      proposal's real-name refs resolve and render.
+//                      dump v1.6: multi-mode collections also carry `modes`
+//                      (mode NAME → resolved value per mode) — the channel
+//                      §3 theme-mode promotion resolves through.
 //   cornerRadius       literal uniform radius (bound radii appear in `bound`)
 //   fill / stroke      first visible solid paint: { var: name } when bound,
 //                      { hex: "rrggbb" } when raw, plus { alpha } when the
@@ -556,18 +559,60 @@ function dumpShape(node, parent) {
 // number, STRING/BOOLEAN as-is. A variable whose value cannot resolve is a
 // named degradation, never a silent absence.
 const capturedVariables = {};
+// dump v1.6: a variable whose COLLECTION has more than one mode ALSO carries
+// `modes` — mode NAME → resolved value per mode (direct values and one-hop-
+// resolved aliases; deeper alias chains resolve up to depth 5). This is the
+// channel §3 theme-mode promotion resolves through: the default mode's value
+// stays `value` (byte-compatible with v1.4 consumers), the other modes land
+// as MODES on the captured-token layer. A mode whose value cannot resolve is
+// a named degradation, never a silent absence.
+const spellVariableValue = (resolvedType, value) => {
+  if (resolvedType === 'COLOR' && value && typeof value === 'object') {
+    const alpha = typeof value.a === 'number' ? value.a : 1;
+    const suffix = alpha < 1 ? Math.round(alpha * 255).toString(16).padStart(2, '0') : '';
+    return '#' + rgbToHex(value) + suffix;
+  }
+  return value;
+};
+const resolveModeValue = async (raw, modeId, depth) => {
+  if (raw && typeof raw === 'object' && raw.type === 'VARIABLE_ALIAS') {
+    if (depth >= 5) return undefined;
+    const target = await figma.variables.getVariableByIdAsync(raw.id);
+    if (!target) return undefined;
+    // The aliased variable resolves through the SAME mode when its own
+    // collection carries it, else its collection's default mode.
+    const next = target.valuesByMode[modeId] !== undefined
+      ? target.valuesByMode[modeId]
+      : target.valuesByMode[Object.keys(target.valuesByMode)[0]];
+    return resolveModeValue(next, modeId, depth + 1);
+  }
+  return raw;
+};
 const varNameById = async (id, consumer) => {
   const v = await figma.variables.getVariableByIdAsync(id);
   if (!v) return null;
   if (consumer && !(v.name in capturedVariables)) {
     try {
       const r = v.resolveForConsumer(consumer);
-      if (r && r.resolvedType === 'COLOR') {
-        const alpha = typeof r.value.a === 'number' ? r.value.a : 1;
-        const suffix = alpha < 1 ? Math.round(alpha * 255).toString(16).padStart(2, '0') : '';
-        capturedVariables[v.name] = { type: 'COLOR', value: '#' + rgbToHex(r.value) + suffix };
-      } else if (r) {
-        capturedVariables[v.name] = { type: r.resolvedType, value: r.value };
+      if (r) {
+        capturedVariables[v.name] = { type: r.resolvedType, value: spellVariableValue(r.resolvedType, r.value) };
+        try {
+          const collection = await figma.variables.getVariableCollectionByIdAsync(v.variableCollectionId);
+          if (collection && collection.modes.length > 1) {
+            const modes = {};
+            for (const m of collection.modes) {
+              const resolved = await resolveModeValue(v.valuesByMode[m.modeId], m.modeId, 0);
+              if (resolved === undefined) {
+                degrade('variable-mode-unresolved', v.name, 'mode "' + m.name + '" did not resolve (alias chain too deep or target missing) — the mode value is not captured (dump v1.6)');
+              } else {
+                modes[m.name] = spellVariableValue(r.resolvedType, resolved);
+              }
+            }
+            if (Object.keys(modes).length > 0) capturedVariables[v.name].modes = modes;
+          }
+        } catch (e) {
+          degrade('variable-mode-unresolved', v.name, 'collection modes threw (' + (e && e.message ? e.message : String(e)) + ') — per-mode values not captured (dump v1.6)');
+        }
       }
     } catch (e) {
       degrade('variable-value-unresolved', v.name, 'resolveForConsumer threw (' + (e && e.message ? e.message : String(e)) + ') — the name still binds; the value is not captured (dump v1.4)');
@@ -824,8 +869,8 @@ const dumps = {
   _provenance: {
     fileKey: figma.fileKey || null,
     extractedAt: new Date().toISOString().slice(0, 10),
-    note: 'Node-tree dump (extract/figma/dump.plugin.js, dump v1.5) for design→contract proposal.',
-    dumpVersion: '1.5',
+    note: 'Node-tree dump (extract/figma/dump.plugin.js, dump v1.6) for design→contract proposal.',
+    dumpVersion: '1.6',
   },
 };
 dumps._degradations = degradations;
