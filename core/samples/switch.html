@@ -1,5 +1,5 @@
 <!--
-  Switch — static HTML+CSS emitted from contract ds.switch v1.1.0 by core/emit-html.ts.
+  Switch — static HTML+CSS emitted from contract ds.switch v2.0.0 by core/emit-html.ts.
   Token values arrive via CSS custom properties (the same custom-property names the CSS Modules
   bind) — include the token stylesheet (src/styles/tokens.css) on the page or nothing resolves.
   Fidelity: no events, no interactivity beyond CSS states (:hover/:focus-visible/:disabled).
@@ -9,10 +9,11 @@
   <div class="showcase__item">
     <p class="showcase__label">default</p>
     <label class="switch switch--value-off">
-      <button class="switch__track" role="switch">
+      <span class="switch__track">
+        <input class="switch__input" type="checkbox" role="switch">
         <span class="switch__thumb"></span>
         <div class="switch__spacerEnd"></div>
-      </button>
+      </span>
       <div class="switch__textCol">
         <span class="switch__labelText">Enable notifications</span>
         <span class="switch__descriptionText">Takes effect immediately.</span>
@@ -22,10 +23,11 @@
   <div class="showcase__item">
     <p class="showcase__label">value=on</p>
     <label class="switch switch--value-on">
-      <button class="switch__track" role="switch">
+      <span class="switch__track">
+        <input class="switch__input" type="checkbox" role="switch" checked>
         <div class="switch__spacerStart"></div>
         <span class="switch__thumb"></span>
-      </button>
+      </span>
       <div class="switch__textCol">
         <span class="switch__labelText">Enable notifications</span>
         <span class="switch__descriptionText">Takes effect immediately.</span>

@@ -2,8 +2,8 @@
   "_protocol": "Retrieval protocol: load index.json always; fetch catalog/components/<x>.json (x = component id without the namespace prefix, e.g. ds.button → button.json) for each component you intend to use; fetch tokens.json when styling. catalog/catalog.json is the equivalent monolithic form — do not load it when the sharded form is available.",
   "system": {
     "name": "DS Contracts POC",
-    "catalogVersion": "0.1.0",
-    "gitCommit": "66fede6",
+    "catalogVersion": "0.5.0",
+    "gitCommit": "39892c3",
     "source": "Compiled from contracts/*.contract.json + tokens/ + context/rules.json — do not edit."
   },
   "package": {
@@ -111,7 +111,7 @@
     {
       "id": "ds.button",
       "name": "Button",
-      "version": "1.4.0",
+      "version": "1.5.0",
       "status": "draft",
       "propNames": [
         "variant",
@@ -211,7 +211,7 @@
     {
       "id": "ds.checkbox",
       "name": "Checkbox",
-      "version": "1.1.0",
+      "version": "2.0.0",
       "status": "draft",
       "propNames": [
         "value",
@@ -377,7 +377,7 @@
     {
       "id": "ds.progress-bar",
       "name": "ProgressBar",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "status": "draft",
       "propNames": [
         "variant",
@@ -465,7 +465,7 @@
     {
       "id": "ds.switch",
       "name": "Switch",
-      "version": "1.1.0",
+      "version": "2.0.0",
       "status": "draft",
       "propNames": [
         "value",

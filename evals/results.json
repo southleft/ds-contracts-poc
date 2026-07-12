@@ -1,6 +1,6 @@
 {
-  "passed": 79,
-  "total": 79,
+  "passed": 81,
+  "total": 81,
   "results": [
     {
       "id": "refuse-unknown-token-reference",
@@ -394,6 +394,16 @@
     },
     {
       "id": "figma-script-referees-invalid-contracts",
+      "claim": "C2-refusal",
+      "pass": true
+    },
+    {
+      "id": "checkbox-native-input",
+      "claim": "C4-convergence",
+      "pass": true
+    },
+    {
+      "id": "refuse-role-recreating-native-control",
       "claim": "C2-refusal",
       "pass": true
     }

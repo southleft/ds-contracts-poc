@@ -1,5 +1,5 @@
 /* GENERATED FILE — DO NOT EDIT.
- * Source of truth: contracts/switch.contract.json (ds.switch v1.1.0)
+ * Source of truth: contracts/switch.contract.json (ds.switch v2.0.0)
  * Regenerate with: npm run generate
  */
 
@@ -17,20 +17,12 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  appearance: none;
-  background: none;
-  border: none;
-  margin: 0;
-  padding: 0;
-  font: inherit;
-  color: inherit;
-  text-align: inherit;
-  cursor: pointer;
   width: var(--size-switch-width);
   height: var(--size-switch-height);
   border-radius: var(--radius-pill);
   padding-inline: var(--space-inset-y-xs);
   padding-block: var(--space-inset-y-xs);
+  position: relative;
 }
 
 .value-off .track {
@@ -39,6 +31,22 @@
 
 .value-on .track {
   background-color: var(--color-switch-on-track);
+}
+
+.track:has(> .input:focus-visible) {
+  outline-style: solid;
+  outline-offset: 2px;
+}
+
+.input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  opacity: 0;
+  cursor: pointer;
 }
 
 .spacerStart {

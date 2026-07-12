@@ -1,6 +1,6 @@
 /**
  * GENERATED FILE — DO NOT EDIT.
- * Source of truth: contracts/progress-bar.contract.json (ds.progress-bar v1.0.0)
+ * Source of truth: contracts/progress-bar.contract.json (ds.progress-bar v1.0.1)
  * Regenerate with: npm run generate
  */
 import type { Meta, StoryObj } from '@storybook/react-vite';

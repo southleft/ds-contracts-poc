@@ -13,7 +13,7 @@ css-module anatomy adapter: **round-trip identity**. Verdicts:
   text props, slot constraints, prose); listed by name, never silently waved through
 - **MISMATCH** — extraction failure. **The bar is zero.**
 
-## Verdict: ✅ ZERO MISMATCH — 28 matched, 21 code-absent (listed), 0 mismatched
+## Verdict: ✅ ZERO MISMATCH — 29 matched, 22 code-absent (listed), 0 mismatched
 
 ## Badge — 5 matched · 5 code-absent · 0 mismatched
 
@@ -30,7 +30,7 @@ css-module anatomy adapter: **round-trip identity**. Verdicts:
 | `props.children` | CODE-ABSENT | children-bound text prop — code renders {children}; the TEXT property spelling and canvas default live in the contract |
 | `anatomy.root` | MATCHED | 8 token binding(s) |
 
-## Switch — 14 matched · 6 code-absent · 0 mismatched
+## Switch — 15 matched · 7 code-absent · 0 mismatched
 
 | subject | verdict | detail |
 |---|---|---|
@@ -44,10 +44,12 @@ css-module anatomy adapter: **round-trip identity**. Verdicts:
 | `props.label.default` | CODE-ABSENT | required text default "Enable notifications" is the canvas default + story sample — code has no destructure default for a required prop |
 | `props.label` | MATCHED | type + required |
 | `props.description` | MATCHED | type + default |
-| `events.toggle` | MATCHED | trigger "track", toggles value [off, on], aria-checked |
+| `events.toggle` | MATCHED | trigger "input", toggles value [off, on], aria-checked |
 | `anatomy.root` | MATCHED | 3 token binding(s) |
 | `anatomy.root.track.description` | CODE-ABSENT | part description is contract prose — nothing in code carries it |
-| `anatomy.root.track` | MATCHED | 6 token binding(s), attrs {"role":"switch"} |
+| `anatomy.root.track` | MATCHED | 6 token binding(s) |
+| `anatomy.root.track.input.description` | CODE-ABSENT | part description is contract prose — nothing in code carries it |
+| `anatomy.root.track.input` | MATCHED | attrs {"type":"checkbox","role":"switch"} |
 | `anatomy.root.track.spacerStart` | MATCHED | visibleWhen {"prop":"value","equals":"on"} |
 | `anatomy.root.track.thumb` | MATCHED | 4 token binding(s) |
 | `anatomy.root.track.spacerEnd` | MATCHED | visibleWhen {"prop":"value","equals":"off"} |

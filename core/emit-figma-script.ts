@@ -32,6 +32,7 @@
 import {
   STATE_PREVIEW_DEFAULT,
   STATE_PREVIEW_PROPERTY,
+  isNativeCheckablePart,
   pascal,
   resolveLayout,
   resolveTokens,
@@ -892,6 +893,10 @@ function variantParts(
   subst: Record<string, string>,
 ): Array<[string, Part]> {
   return Object.entries(parts).filter(([, p]) => {
+    // v11: a native checkable control (input[type=checkbox|radio]) is CODE
+    // semantics — the presentational box and glyphs are the visual; the
+    // canvas doesn't draw semantics, so the part compiles to no node at all.
+    if (isNativeCheckablePart(p)) return false;
     const vw = p.visibleWhen;
     if (vw && vw.equals !== undefined) {
       const value = subst[vw.prop];

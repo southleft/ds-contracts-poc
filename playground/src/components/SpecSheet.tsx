@@ -77,6 +77,26 @@ function layoutNotes(contract: Contract): string[] {
   return notes;
 }
 
+/** The contract's semantic shape: root element (+ role), and every DECLARED
+ *  native-semantics exception (semantics.roleException / part roleException)
+ *  — the lint's escape hatch renders here so it is reviewable, never silent. */
+function semanticsLines(contract: Contract): { summary: string; exceptions: string[] } {
+  const s = contract.semantics;
+  let summary = `<${s.element}>`;
+  if (s.elementByProp) summary += ` (element follows ${s.elementByProp.prop})`;
+  if (s.role && s.role !== s.element) summary += ` role="${s.role}"`;
+  if (s.roleByProp) summary += ` (role follows ${s.roleByProp.prop})`;
+  const rootAttrsRole = contract.anatomy.root?.attrs?.role;
+  if (rootAttrsRole) summary += ` role="${rootAttrsRole}"`;
+  const exceptions: string[] = [];
+  if (s.roleException) exceptions.push(`root: ${s.roleException}`);
+  for (const { name, part, path } of walkAnatomy(contract)) {
+    if (path[0] === 'root' && path.length === 1) continue;
+    if (part.roleException) exceptions.push(`${name}: ${part.roleException}`);
+  }
+  return { summary, exceptions };
+}
+
 function a11yLine(contract: Contract): string | null {
   const a = contract.a11y;
   if (!a) return null;
@@ -103,6 +123,7 @@ export function SpecSheet({
   const tokens = tokenGroups(contract);
   const layouts = layoutNotes(contract);
   const a11y = a11yLine(contract);
+  const semantics = semanticsLines(contract);
   const nameOf = (id: string) => contracts.get(id)?.name ?? id;
 
   return (
@@ -284,6 +305,16 @@ export function SpecSheet({
         <p className="spec__line">
           {contract.states.length > 0 ? contract.states.join(' · ') : 'none declared'}
         </p>
+      </section>
+
+      <section className="spec__section">
+        <h3 className="spec__section-title">Semantics</h3>
+        <p className="spec__line spec__mono">{semantics.summary}</p>
+        {semantics.exceptions.map((line) => (
+          <p key={line} className="spec__line">
+            Declared exception — {line}
+          </p>
+        ))}
       </section>
 
       {a11y ? (

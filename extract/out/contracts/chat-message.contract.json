@@ -4,7 +4,7 @@
   "name": "ChatMessage",
   "version": "0.1.0",
   "status": "draft",
-  "description": "PROPOSED contract extracted from src/components/ChatMessage/ChatMessage.tsx (react-tsx adapter) — API surface only; anatomy, tokens, and design bindings await reconciliation and human review.",
+  "description": "PROPOSED contract extracted from src/components/ChatMessage/ChatMessage.tsx (react-tsx + css-module adapters) — API surface AND anatomy (structure, token bindings, layout, states) read from source; design bindings await reconciliation and human review.",
   "semantics": {
     "element": "div"
   },
@@ -53,7 +53,89 @@
   ],
   "states": [],
   "anatomy": {
-    "root": {}
+    "root": {
+      "layout": {
+        "display": "flex",
+        "direction": "row",
+        "align": "start"
+      },
+      "tokens": {
+        "max-width": "{size.banner.width}",
+        "gap": "{space.gap.sm}",
+        "font-family": "{font.control.family}"
+      },
+      "parts": {
+        "avatarSlot": {
+          "element": "div",
+          "layout": {
+            "display": "flex",
+            "direction": "row",
+            "align": "start"
+          },
+          "slot": {
+            "name": "avatar"
+          },
+          "optional": true
+        },
+        "body": {
+          "element": "div",
+          "layout": {
+            "display": "flex",
+            "direction": "column",
+            "align": "stretch",
+            "grow": true
+          },
+          "tokens": {
+            "gap": "{space.inset-y.sm}"
+          },
+          "parts": {
+            "nameText": {
+              "element": "span",
+              "tokens": {
+                "font-size": "{font.badge.size}",
+                "font-weight": "{font.title.weight}",
+                "color": "{color.text.secondary}"
+              },
+              "content": {
+                "prop": "name"
+              }
+            },
+            "bubble": {
+              "element": "div",
+              "layout": {
+                "display": "flex",
+                "direction": "column",
+                "align": "stretch"
+              },
+              "tokens": {
+                "border-radius": "{radius.card}",
+                "gap": "{space.inset-y.sm}",
+                "padding-inline": "{space.inset-x.sm}",
+                "padding-block": "{space.inset-y.md}",
+                "font-size": "{font.control.size.sm}",
+                "background-color": "{color.chat.{sender}.background}",
+                "color": "{color.chat.{sender}.foreground}"
+              },
+              "slot": {
+                "name": "children"
+              }
+            },
+            "metadataSlot": {
+              "element": "div",
+              "layout": {
+                "display": "flex",
+                "direction": "row",
+                "align": "center"
+              },
+              "slot": {
+                "name": "metadata"
+              },
+              "optional": true
+            }
+          }
+        }
+      }
+    }
   },
   "anchors": {
     "figma": {

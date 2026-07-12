@@ -18,6 +18,7 @@
  *   · Composition imports sibling inline-emitted components ('./Dep').
  */
 import {
+  isNativeCheckablePart,
   pascal,
   resolveLayout,
   shapeCssDecls,
@@ -184,6 +185,19 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
           appearance: 'none', background: 'none', border: 'none', margin: 0, padding: 0,
           font: 'inherit', color: 'inherit', textAlign: 'inherit', cursor: 'pointer',
         });
+      }
+      // Native checkable inputs cover their presentational box invisibly —
+      // mirrors emit-react generateCss. (The :has focus ring is a pseudo-
+      // class, outside inline styles — the same declared limit as
+      // hover/active here.)
+      if (isNativeCheckablePart(part)) {
+        Object.assign(s, {
+          position: 'absolute', inset: 0, width: '100%', height: '100%',
+          margin: 0, padding: 0, opacity: 0, cursor: 'pointer',
+        });
+      }
+      if (Object.values(part.parts ?? {}).some((child) => isNativeCheckablePart(child))) {
+        s.position = 'relative';
       }
       if (part.icon) {
         s.display = 'inline-flex';
@@ -355,9 +369,27 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
     prelude.push(`  const handle${pascal(ev.name)} = () => { ${body.join(' ')} };`);
   }
 
-  const eventAttrsFor = (partName: string, partEl: string): string => {
+  const eventAttrsFor = (partName: string, part: Part | undefined, partEl: string): string => {
     const ev = events.find((e) => e.trigger === partName);
     if (!ev) return '';
+    // Native checkable trigger: checked + onChange, out-of-pair values set
+    // the DOM property via a callback ref — mirrors emit-react generateTsx.
+    if (part && isNativeCheckablePart(part)) {
+      let s = '';
+      if (ev.toggles) {
+        const prop = contract.props.find((p) => p.name === ev.toggles!.prop)!;
+        const code = prop.bindings.code.prop;
+        const [off, on] = ev.toggles.between;
+        const others = (prop.type as { enum: string[] }).enum.filter((v) => v !== off && v !== on);
+        s += ` checked={${code} === '${on}'}`;
+        if (others.length > 0) {
+          const cond = others.map((v) => `${code} === '${v}'`).join(' || ');
+          s += ` ref={(el) => { if (el) el.indeterminate = ${cond}; }}`;
+        }
+      }
+      s += ` onChange={handle${pascal(ev.name)}}`;
+      return s;
+    }
     let s = partEl === 'button' ? ' type="button"' : '';
     s += ` onClick={handle${pascal(ev.name)}}`;
     if (ev.toggles?.aria) {
@@ -480,7 +512,7 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
       const keyExpr = ref ? codePropOf(ref[1]) : JSON.stringify(part.icon.asset);
       const glyph = `dangerouslySetInnerHTML={{ __html: ICONS[${keyExpr}] }}`;
       const node = part.element
-        ? `<${part.element} style=${styleExpr(partName, false, stylesWhenExprs(part))}${partAttrString(part)}${eventAttrsFor(partName, part.element)}><span aria-hidden="true" style={{ display: 'inline-flex' }} ${glyph} /></${part.element}>`
+        ? `<${part.element} style=${styleExpr(partName, false, stylesWhenExprs(part))}${partAttrString(part)}${eventAttrsFor(partName, part, part.element)}><span aria-hidden="true" style={{ display: 'inline-flex' }} ${glyph} /></${part.element}>`
         : `<span style=${styleExpr(partName, false, stylesWhenExprs(part))} aria-hidden="true" ${glyph} />`;
       return wrapVisibleWhen(part, node);
     }
@@ -506,7 +538,7 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
       )!;
       return wrapVisibleWhen(
         part,
-        `<${el} style=${styleExpr(partName, false, stylesWhenExprs(part))}${partAttrString(part)}${eventAttrsFor(partName, el)}>{${prop.bindings.code.prop}}</${el}>`,
+        `<${el} style=${styleExpr(partName, false, stylesWhenExprs(part))}${partAttrString(part)}${eventAttrsFor(partName, part, el)}>{${prop.bindings.code.prop}}</${el}>`,
       );
     }
     if (part.text !== undefined) {
@@ -530,7 +562,7 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
       .join('\n');
     return wrapVisibleWhen(
       part,
-      `<${el} style=${styleExpr(partName, false, stylesWhenExprs(part))}${partAttrString(part)}${eventAttrsFor(partName, el)}>\n${inner}\n</${el}>`,
+      `<${el} style=${styleExpr(partName, false, stylesWhenExprs(part))}${partAttrString(part)}${eventAttrsFor(partName, part, el)}>\n${inner}\n</${el}>`,
     );
   };
 

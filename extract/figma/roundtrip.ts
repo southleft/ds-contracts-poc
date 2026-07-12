@@ -34,7 +34,7 @@
 import { readFileSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { pascal } from '../../scripts/contract-schema.js';
+import { isNativeCheckablePart, pascal, type Part } from '../../scripts/contract-schema.js';
 import { kebab } from '../types.js';
 import type { DumpFile } from './types.js';
 import { isDumpSet } from './types.js';
@@ -209,7 +209,20 @@ export function compareContracts(shipping: J, proposed: J, corpus: TokenCorpus):
   const pByPath = new Map(pWalk.map((w) => [w.path, w]));
   const sByPath = new Map(sWalk.map((w) => [w.path, w]));
   for (const w of sWalk) {
-    if (!pByPath.has(w.path)) mismatch(`part ${w.path}`, 'missing from proposal');
+    if (!pByPath.has(w.path)) {
+      // A native checkable control (input[type=checkbox|radio]) is CODE
+      // semantics by construction — the emitter deliberately draws nothing
+      // for it (the presentational box is the visual), so its absence from
+      // the proposal is a DECLARED limit, not drift.
+      if (isNativeCheckablePart(w.part as unknown as Part)) {
+        absent(
+          `part ${w.path}`,
+          'native checkable control — code semantics; the canvas draws the presentational box, never the input',
+        );
+      } else {
+        mismatch(`part ${w.path}`, 'missing from proposal');
+      }
+    }
   }
   for (const w of pWalk) {
     if (!sByPath.has(w.path)) mismatch(`part ${w.path}`, 'proposal has a part the contract does not');

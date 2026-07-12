@@ -35,8 +35,8 @@ Each fixture in `extract/figma/fixtures/main-file-dumps.json` is a LIVE node-tre
 - `a11y` — accessibility requirements are not canvas-recoverable
 - `events` — the canvas cannot run behavior — toggle not recoverable
 - `prop label required` — requiredness is not drawn on the canvas
-- `part root/track element` — host element ("button") is not drawn on the canvas
-- `part root/track attrs` — HTML/ARIA attributes are code-side surface
+- `part root/track/input` — native checkable control — code semantics; the canvas draws the presentational box, never the input
+- `part root/track element` — host element ("span") is not drawn on the canvas
 - `part root/track/thumb text ""` — empty static text renders no glyphs — the styled wrapper alone is on the canvas
 - `part root/track/thumb element` — host element ("span") is not drawn on the canvas
 - `part root/textCol/labelText element` — host element ("span") is not drawn on the canvas

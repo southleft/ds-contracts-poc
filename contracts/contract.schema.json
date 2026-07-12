@@ -66,6 +66,9 @@
         "role": {
           "type": "string"
         },
+        "roleException": {
+          "type": "string"
+        },
         "roleByProp": {
           "type": "object",
           "properties": {
@@ -472,6 +475,9 @@
           "type": "string"
         },
         "element": {
+          "type": "string"
+        },
+        "roleException": {
           "type": "string"
         },
         "layout": {

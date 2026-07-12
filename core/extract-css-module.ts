@@ -979,10 +979,15 @@ function attrsOf(el: JsxEl, partName: string, isRoot: boolean, hasOnClick: boole
     if (name === 'dangerouslySetInnerHTML') continue; // icon glyph — reported by caller
     if (name === 'type' && hasOnClick) continue; // generator adds type="button" to triggers
     if (/^on[A-Z]/.test(name)) {
-      if (name === 'onClick' && attr.initializer && ts.isJsxExpression(attr.initializer) && attr.initializer.expression && ts.isIdentifier(attr.initializer.expression)) {
+      // onChange on a native input is the checkable-control trigger wiring
+      // (the generator's native checkbox/switch shape) — same channel as
+      // onClick on a button trigger.
+      const isTriggerHandler =
+        name === 'onClick' || (name === 'onChange' && tagNameOf(el) === 'input');
+      if (isTriggerHandler && attr.initializer && ts.isJsxExpression(attr.initializer) && attr.initializer.expression && ts.isIdentifier(attr.initializer.expression)) {
         ctx.clickHandlers.set(isRoot ? 'root' : partName, attr.initializer.expression.text);
-      } else if (name !== 'onClick') {
-        ctx.notes.push(`jsx: <${tagNameOf(el)}> handler "${name}" — only onClick trigger wiring is extracted`);
+      } else if (!isTriggerHandler) {
+        ctx.notes.push(`jsx: <${tagNameOf(el)}> handler "${name}" — only onClick/onChange trigger wiring is extracted`);
       }
       continue;
     }
@@ -997,6 +1002,13 @@ function attrsOf(el: JsxEl, partName: string, isRoot: boolean, hasOnClick: boole
       const ariaState = name.match(/^aria-(checked|expanded|pressed|selected)$/);
       if (ariaState) {
         ctx.ariaOnPart.set(isRoot ? 'root' : partName, ariaState[1]);
+        continue;
+      }
+      // Native checkable input: checked={x === 'y'} is the checked-state
+      // binding — the DOM-property spelling of aria-checked on the old
+      // button-trigger shape. Same channel, native carrier.
+      if (name === 'checked' && tagNameOf(el) === 'input') {
+        ctx.ariaOnPart.set(isRoot ? 'root' : partName, 'checked');
         continue;
       }
       if (name.startsWith('aria-') || name.startsWith('data-')) continue; // bool-prop plumbing

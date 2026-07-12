@@ -18,6 +18,7 @@
 import {
   STATE_PREVIEW_PROPERTY,
   STYLES_WHEN_ALLOWED,
+  isNativeCheckablePart,
   pascal,
   shapeCssDecls,
   slotsOf,
@@ -27,6 +28,27 @@ import {
   type Part,
   type Prop,
 } from '../scripts/contract-schema.js';
+
+/** v11 SEMANTIC LINT — roles that RE-CREATE a control the platform already
+ *  ships. A contract claiming one of these roles (semantics.role, a
+ *  roleByProp value, or a part's attrs.role) on an element outside the
+ *  allowed native hosts REFUSES at validation time, on every surface, unless
+ *  it declares the exception (semantics.roleException for root-level claims,
+ *  part.roleException for part-level ones) — a one-sentence reason that
+ *  renders on the spec sheet so it is reviewable, never silent. Bounded by
+ *  design: exactly the roles with a native equivalent; APG composites
+ *  (tablist, option, toolbar, …) are not in the table. */
+export const NATIVE_ROLE_HOSTS: Record<string, { hosts: string[]; native: string }> = {
+  checkbox: { hosts: ['input'], native: '<input type="checkbox">' },
+  radio: { hosts: ['input'], native: '<input type="radio">' },
+  switch: { hosts: ['input'], native: '<input type="checkbox"> (role="switch" on it is the modern switch pattern)' },
+  button: { hosts: ['button'], native: '<button>' },
+  link: { hosts: ['a'], native: '<a href>' },
+  textbox: { hosts: ['input', 'textarea'], native: '<input> / <textarea>' },
+  slider: { hosts: ['input'], native: '<input type="range">' },
+  progressbar: { hosts: ['progress'], native: '<progress>' },
+  spinbutton: { hosts: ['input'], native: '<input type="number">' },
+};
 
 // ---------------------------------------------------------------------------
 // Shared helpers
@@ -509,11 +531,12 @@ export function validateContract(
     const trigger = partByName.get(ev.trigger);
     if (!trigger) {
       errors.push(`${contract.id}: event "${ev.name}" trigger references unknown part "${ev.trigger}"`);
-    } else if (ev.trigger !== 'root' && trigger.element !== 'button') {
-      // Interactivity must be honest: a clickable part is a <button> so
-      // keyboard activation comes from the platform, not a bolted-on handler.
+    } else if (ev.trigger !== 'root' && trigger.element !== 'button' && !isNativeCheckablePart(trigger)) {
+      // Interactivity must be honest: a clickable part is a <button> — or a
+      // native checkable input (input[type=checkbox|radio]) — so keyboard
+      // activation comes from the platform, not a bolted-on handler.
       errors.push(
-        `${contract.id}: event "${ev.name}" trigger part "${ev.trigger}" must have element "button" (got "${trigger.element ?? 'div'}")`,
+        `${contract.id}: event "${ev.name}" trigger part "${ev.trigger}" must have element "button" or be a native checkable input (input[type=checkbox|radio]) (got "${trigger.element ?? 'div'}")`,
       );
     }
     if (ev.toggles) {
@@ -594,6 +617,71 @@ export function validateContract(
         if (!(el in ELEMENT_META)) {
           errors.push(`${contract.id}: semantics.elementByProp maps "${k}" to unknown element "${el}" — must be one of the element vocabulary`);
         }
+      }
+    }
+  }
+
+  // v11 SEMANTIC LINT: a role claim that RE-CREATES a native control (see
+  // NATIVE_ROLE_HOSTS) refuses BY NAME on a non-native element — unless the
+  // contract declares the exception, whose one-sentence reason renders on
+  // the spec sheet. This gate exists because a shipped catalog contract
+  // (ds.checkbox v1.1.0) emitted <button role="checkbox"> where a native
+  // <input type="checkbox"> belongs; the mistake must be impossible to
+  // reintroduce silently. Every surface enforces it: react/html/react-inline
+  // /figma-script all call validateContract, as do the census and the
+  // playground referee.
+  {
+    /** True when the claim is a violation the exception would cover. */
+    const violates = (role: string | undefined, element: string): boolean => {
+      if (!role) return false;
+      const entry = NATIVE_ROLE_HOSTS[role];
+      return Boolean(entry && !entry.hosts.includes(element));
+    };
+    const declared = (exception: string | undefined) =>
+      typeof exception === 'string' && exception.trim().length > 0;
+    const refuse = (role: string, element: string, site: string, field: string) => {
+      const entry = NATIVE_ROLE_HOSTS[role]!;
+      errors.push(
+        `${contract.id}: ${site} claims role "${role}" on element "${element}" — native ${entry.native} exists; use it or declare the exception (${field}: "<one-sentence reason>")`,
+      );
+    };
+
+    // Root-level claims: semantics.role, roleByProp values, and the root
+    // part's attrs.role — all covered by semantics.roleException.
+    const rootEl = contract.semantics.element;
+    const rootClaims: Array<{ role: string; site: string }> = [];
+    if (violates(contract.semantics.role, rootEl)) {
+      rootClaims.push({ role: contract.semantics.role!, site: 'semantics.role' });
+    }
+    for (const [k, role] of Object.entries(contract.semantics.roleByProp?.map ?? {})) {
+      if (violates(role, rootEl)) rootClaims.push({ role, site: `semantics.roleByProp["${k}"]` });
+    }
+    const rootAttrsRole = contract.anatomy.root?.attrs?.role;
+    if (violates(rootAttrsRole, rootEl)) {
+      rootClaims.push({ role: rootAttrsRole!, site: 'anatomy.root attrs.role' });
+    }
+    if (!declared(contract.semantics.roleException)) {
+      for (const c of rootClaims) refuse(c.role, rootEl, c.site, 'semantics.roleException');
+    } else if (rootClaims.length === 0) {
+      errors.push(
+        `${contract.id}: semantics.roleException is declared but no root-level role claim needs it — exceptions never ride along silently`,
+      );
+    }
+
+    // Part-level claims: attrs.role on non-root parts, covered by the
+    // part's own roleException. Element default mirrors the emitters:
+    // span for content/text leaves, div otherwise.
+    for (const { name, part, path: p } of walkAnatomy(contract)) {
+      if (p[0] === 'root' && p.length === 1) continue;
+      const el = part.element ?? (part.content || part.text !== undefined ? 'span' : 'div');
+      const partRole = part.attrs?.role;
+      const isViolation = violates(partRole, el);
+      if (isViolation && !declared(part.roleException)) {
+        refuse(partRole!, el, `part "${name}"`, `roleException`);
+      } else if (!isViolation && declared(part.roleException)) {
+        errors.push(
+          `${contract.id}: part "${name}" declares roleException but claims no role that needs it — exceptions never ride along silently`,
+        );
       }
     }
   }
@@ -847,6 +935,21 @@ export function generateCss(contract: Contract, tokenInventory: Set<string>, err
         'cursor: pointer',
       );
     }
+    // Native checkable inputs (input[type=checkbox|radio]): the REAL control
+    // covers its presentational box invisibly — it stays the focusable,
+    // checkable element while the box and glyphs draw the visual.
+    if (isNativeCheckablePart(part)) {
+      decls.push(
+        'position: absolute',
+        'inset: 0',
+        'width: 100%',
+        'height: 100%',
+        'margin: 0',
+        'padding: 0',
+        'opacity: 0',
+        'cursor: pointer',
+      );
+    }
     if (part.icon) {
       decls.push('display: inline-flex', 'flex-shrink: 0');
       if (part.icon.size) {
@@ -923,6 +1026,17 @@ export function generateCss(contract: Contract, tokenInventory: Set<string>, err
           `\n.${part.layoutByProp.prop}-${value} .${name} {\n${lDecls.map((d) => `  ${d};`).join('\n')}\n}`,
         );
       }
+    }
+    // A box holding a visually-managed native input anchors it and carries
+    // the focus ring (the input is opacity:0, so its own outline is
+    // invisible; :has lifts :focus-visible onto the visible box — the same
+    // outline idiom as .root:focus-visible).
+    for (const [childName, child] of Object.entries(part.parts ?? {})) {
+      if (!isNativeCheckablePart(child)) continue;
+      decls.push('position: relative');
+      nestedSubRules.push(
+        `\n.${name}:has(> .${childName}:focus-visible) {\n  outline-style: solid;\n  outline-offset: 2px;\n}`,
+      );
     }
     // v7 stylesWhen on a nested part.
     nestedSubRules.push(...stylesWhenRules(contract, name, part, false));
@@ -1170,10 +1284,30 @@ export function generateTsx(
     prelude.push(`  const handle${pascal(ev.name)} = () => { ${body.join(' ')} };`);
   }
 
-  /** onClick + ARIA state for a part that is an event trigger. */
-  const eventAttrsFor = (partName: string, partEl: string): string => {
+  /** onClick + ARIA state for a part that is an event trigger. A NATIVE
+   *  checkable trigger (input[type=checkbox|radio]) gets the platform's own
+   *  channels instead: checked + onChange, and any out-of-pair toggle value
+   *  (Checkbox "indeterminate") sets the DOM PROPERTY via a callback ref —
+   *  never a fake attribute, never aria-checked on a native input. */
+  const eventAttrsFor = (partName: string, part: Part | undefined, partEl: string): string => {
     const ev = events.find((e) => e.trigger === partName);
     if (!ev) return '';
+    if (part && isNativeCheckablePart(part)) {
+      let s = '';
+      if (ev.toggles) {
+        const prop = contract.props.find((p) => p.name === ev.toggles!.prop)!;
+        const code = prop.bindings.code.prop;
+        const [off, on] = ev.toggles.between;
+        const others = (prop.type as { enum: string[] }).enum.filter((v) => v !== off && v !== on);
+        s += ` checked={${code} === '${on}'}`;
+        if (others.length > 0) {
+          const cond = others.map((v) => `${code} === '${v}'`).join(' || ');
+          s += ` ref={(el) => { if (el) el.indeterminate = ${cond}; }}`;
+        }
+      }
+      s += ` onChange={handle${pascal(ev.name)}}`;
+      return s;
+    }
     let s = partEl === 'button' ? ' type="button"' : '';
     s += ` onClick={handle${pascal(ev.name)}}`;
     if (ev.toggles?.aria) {
@@ -1276,7 +1410,7 @@ export function generateTsx(
       // accessible name comes from attrs (e.g. aria-label) — and only the
       // glyph itself is hidden.
       const node = part.element
-        ? `<${part.element} className={styles.${partName}}${partAttrString(part)}${eventAttrsFor(partName, part.element)}><span aria-hidden="true" className={styles.${partName}Glyph} ${glyph} /></${part.element}>`
+        ? `<${part.element} className={styles.${partName}}${partAttrString(part)}${eventAttrsFor(partName, part, part.element)}><span aria-hidden="true" className={styles.${partName}Glyph} ${glyph} /></${part.element}>`
         : `<span className={styles.${partName}} aria-hidden="true" ${glyph} />`;
       return wrapVisibleWhen(part, node);
     }
@@ -1302,7 +1436,7 @@ export function generateTsx(
       )!;
       return wrapVisibleWhen(
         part,
-        `<${el} className={styles.${partName}}${partAttrString(part)}${eventAttrsFor(partName, el)}>{${prop.bindings.code.prop}}</${el}>`,
+        `<${el} className={styles.${partName}}${partAttrString(part)}${eventAttrsFor(partName, part, el)}>{${prop.bindings.code.prop}}</${el}>`,
       );
     }
     if (part.text !== undefined) {
@@ -1326,7 +1460,7 @@ export function generateTsx(
       .join('\n');
     return wrapVisibleWhen(
       part,
-      `<${el} className={styles.${partName}}${partAttrString(part)}${eventAttrsFor(partName, el)}>\n${inner}\n</${el}>`,
+      `<${el} className={styles.${partName}}${partAttrString(part)}${eventAttrsFor(partName, part, el)}>\n${inner}\n</${el}>`,
     );
   };
 

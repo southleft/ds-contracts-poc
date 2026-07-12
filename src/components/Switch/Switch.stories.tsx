@@ -1,6 +1,6 @@
 /**
  * GENERATED FILE — DO NOT EDIT.
- * Source of truth: contracts/switch.contract.json (ds.switch v1.1.0)
+ * Source of truth: contracts/switch.contract.json (ds.switch v2.0.0)
  * Regenerate with: npm run generate
  */
 import type { Meta, StoryObj } from '@storybook/react-vite';
@@ -14,7 +14,7 @@ const meta = {
     docs: {
       description: {
         component:
-          'Toggle for on/off settings that take effect immediately. API mirrors industry convention (Astryx Switch) with the boolean value flattened to an off/on enum so both surfaces render both states truthfully; toggle behavior is a declared boundary.',
+          'Toggle for on/off settings that take effect immediately. API mirrors industry convention (Astryx Switch) with the boolean value flattened to an off/on enum so both surfaces render both states truthfully; toggle behavior is a declared boundary. v2.0.0 (breaking, DOM shape): the control is a NATIVE input[type=checkbox] with role=switch (the modern switch pattern) inside the wrapping label — checked is DOM state, not ARIA on a button; track and thumb are presentational.',
       },
     },
   },
@@ -32,7 +32,7 @@ const meta = {
     onToggle: {
       control: false,
       description:
-        'Fires when the track is activated; uncontrolled instances flip value off/on themselves.',
+        'Fires when the input is toggled; uncontrolled instances flip value off/on themselves.',
     },
   },
   args: {

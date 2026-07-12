@@ -1,8 +1,8 @@
 {
   "system": {
     "name": "DS Contracts POC",
-    "catalogVersion": "0.1.0",
-    "gitCommit": "66fede6",
+    "catalogVersion": "0.5.0",
+    "gitCommit": "39892c3",
     "source": "Compiled from contracts/*.contract.json + tokens/ + context/rules.json — do not edit."
   },
   "package": {
@@ -648,7 +648,7 @@
     {
       "id": "ds.button",
       "name": "Button",
-      "version": "1.4.0",
+      "version": "1.5.0",
       "status": "draft",
       "description": "Triggers an action or event. Use one primary button per context.",
       "figma": {
@@ -1032,9 +1032,9 @@
     {
       "id": "ds.checkbox",
       "name": "Checkbox",
-      "version": "1.1.0",
+      "version": "2.0.0",
       "status": "draft",
-      "description": "Toggles a single on/off value — settings, terms acceptance, opt-ins. API mirrors industry convention (Astryx CheckboxInput): checked, unchecked, and indeterminate are prop-driven appearance states.",
+      "description": "Toggles a single on/off value — settings, terms acceptance, opt-ins. API mirrors industry convention (Astryx CheckboxInput): checked, unchecked, and indeterminate are prop-driven appearance states. v2.0.0 (breaking, DOM shape): the control is a NATIVE input[type=checkbox] inside the wrapping label — checked/indeterminate are DOM state, not ARIA on a button; the box and glyphs are presentational.",
       "figma": {
         "representation": "component",
         "componentSetKey": "9bc54e5a3f7c074b9ed016dfac8edff95ec45e23"
@@ -1077,7 +1077,7 @@
         {
           "prop": "onToggle",
           "type": "() => void",
-          "description": "Fires when the box is activated; uncontrolled instances flip unchecked/checked (indeterminate resolves to checked)."
+          "description": "Fires when the input is toggled; uncontrolled instances flip unchecked/checked (indeterminate resolves to checked)."
         }
       ],
       "children": {
@@ -1277,7 +1277,7 @@
       "description": "Sectioning heading whose rendered HTML element follows the level prop (h1–h6) via semantics.elementByProp, with a visual size ramp on the existing control type scale — document outline and visual weight are deliberately independent axes. Text nodes carry no element semantics, so only code renders the element itself.",
       "figma": {
         "representation": "component",
-        "componentSetKey": null
+        "componentSetKey": "72c05e001310fd06ca059cede948454f54edc4f8"
       },
       "props": [
         {
@@ -1609,7 +1609,7 @@
     {
       "id": "ds.progress-bar",
       "name": "ProgressBar",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "status": "draft",
       "description": "Horizontal bar showing completion progress. API mirrors industry convention (Astryx ProgressBar): number-valued value/max drive the fill; the canvas renders the defaults' fraction as its honest static state. Indeterminate mode needs animation on the canvas — a documented boundary.",
       "figma": {
@@ -1895,9 +1895,9 @@
     {
       "id": "ds.switch",
       "name": "Switch",
-      "version": "1.1.0",
+      "version": "2.0.0",
       "status": "draft",
-      "description": "Toggle for on/off settings that take effect immediately. API mirrors industry convention (Astryx Switch) with the boolean value flattened to an off/on enum so both surfaces render both states truthfully; toggle behavior is a declared boundary.",
+      "description": "Toggle for on/off settings that take effect immediately. API mirrors industry convention (Astryx Switch) with the boolean value flattened to an off/on enum so both surfaces render both states truthfully; toggle behavior is a declared boundary. v2.0.0 (breaking, DOM shape): the control is a NATIVE input[type=checkbox] with role=switch (the modern switch pattern) inside the wrapping label — checked is DOM state, not ARIA on a button; track and thumb are presentational.",
       "figma": {
         "representation": "component",
         "componentSetKey": "7936496ebfb63f0f4908a29b7edd6dae340e4e23"
@@ -1930,7 +1930,7 @@
         {
           "prop": "onToggle",
           "type": "() => void",
-          "description": "Fires when the track is activated; uncontrolled instances flip value off/on themselves."
+          "description": "Fires when the input is toggled; uncontrolled instances flip value off/on themselves."
         }
       ],
       "children": {

@@ -1748,6 +1748,94 @@ const cases: Case[] = [
       }
     },
   },
+  {
+    // Owner finding (2026-07): ds.checkbox v1.1.0 emitted <button
+    // role="checkbox"> — an ARIA re-creation of a control the platform
+    // ships. The fixed shape is pinned on BOTH code surfaces: a real
+    // focusable <input type="checkbox"> is the control, checked rides the
+    // DOM (not aria-checked), and indeterminate is the DOM PROPERTY set via
+    // a ref — never a fake attribute. Switch pins the modern pattern:
+    // input[type=checkbox][role=switch].
+    id: 'checkbox-native-input',
+    claim: 'C4-convergence',
+    run: () => {
+      if (generate().status !== 0) throw new Error('generate failed');
+      const cb = readFileSync(path.join(SCRATCH, 'src/components/Checkbox/Checkbox.tsx'), 'utf8');
+      const sw = readFileSync(path.join(SCRATCH, 'src/components/Switch/Switch.tsx'), 'utf8');
+      const cbCss = readFileSync(path.join(SCRATCH, 'src/components/Checkbox/Checkbox.module.css'), 'utf8');
+      for (const [what, ok] of [
+        ['Checkbox renders a native input[type=checkbox]', cb.includes('type="checkbox"') && cb.includes('<input')],
+        ["Checkbox checked is DOM state (checked={value === 'checked'})", cb.includes("checked={value === 'checked'}")],
+        ['Checkbox indeterminate is the DOM PROPERTY via ref, not an attribute', cb.includes('el.indeterminate =') && !cb.includes('indeterminate=')],
+        ['Checkbox carries NO role="checkbox" and NO aria-checked (native semantics)', !cb.includes('role="checkbox"') && !cb.includes('aria-checked')],
+        ['Checkbox input toggles via onChange', cb.includes('onChange={handleToggle}')],
+        ['Checkbox input is focusable (visually managed, never display:none)', cbCss.includes('opacity: 0') && !cbCss.match(/\.input\s*\{[^}]*display:\s*none/)],
+        ['Switch is input[type=checkbox][role=switch] (modern switch pattern)', sw.includes('type="checkbox"') && sw.includes('role="switch"') && !sw.includes('aria-checked')],
+      ] as Array<[string, boolean]>) {
+        if (!ok) throw new Error(`pin failed: ${what}`);
+      }
+      // Same shape on the no-build-step surface: emitHtml renders a real
+      // void <input type="checkbox">, `checked` as the attribute on the on
+      // value, and NAMES indeterminate as a DOM property in a comment.
+      const probe = run(TSX, ['-e', `
+        import { emitHtml } from './core/emit-html.ts';
+        import { ContractSchema } from './scripts/contract-schema.ts';
+        import { tokenInventoryFromJson } from './core/tokens.ts';
+        import fs from 'node:fs';
+        const c = ContractSchema.parse(JSON.parse(fs.readFileSync('contracts/checkbox.contract.json','utf8')));
+        const trees = ['tokens/primitives.tokens.json','tokens/semantic.tokens.json','tokens/modes/semantic.light.tokens.json','tokens/modes/semantic.dark.tokens.json'].map(p=>JSON.parse(fs.readFileSync(p,'utf8')));
+        const icons = new Map(fs.readdirSync('assets/icons').filter(f=>f.endsWith('.svg')).map(f=>[f.replace('.svg',''),fs.readFileSync('assets/icons/'+f,'utf8').trim()]));
+        const { html } = emitHtml(c, { tokens: tokenInventoryFromJson(trees), icons, contracts: new Map([[c.id,c]]) });
+        if (!html.includes('<input class="checkbox__input" type="checkbox">')) throw new Error('html surface lost the native input');
+        if (!html.includes('type="checkbox" checked>')) throw new Error('html surface lost the checked attribute');
+        if (!html.includes('el.indeterminate = true')) throw new Error('html surface does not name indeterminate as a DOM property');
+        if (html.includes('indeterminate>') || html.includes('indeterminate=')) throw new Error('html surface fakes indeterminate as an attribute');
+        console.log('html surface converges on the native input');
+      `]);
+      if (probe.status !== 0 || !probe.out.includes('html surface converges on the native input')) {
+        throw new Error(`emitHtml probe failed:\n${probe.out}`);
+      }
+    },
+  },
+  {
+    // The STANDING SEMANTIC LINT — this class of error must be impossible,
+    // not just fixed. Reintroducing the exact owner-found shape (<button
+    // role="checkbox"> where a native input exists) refuses BY NAME at
+    // generation, on every surface that calls validateContract (react/html/
+    // react-inline/figma-script, the census, the playground referee). A
+    // DECLARED exception passes (ds.progress-bar ships one; the whole-catalog
+    // generate above is the positive case), and a dangling exception refuses
+    // too — it never rides along silently.
+    id: 'refuse-role-recreating-native-control',
+    claim: 'C2-refusal',
+    run: () => {
+      // Reintroduce the owner's finding on the checkbox contract.
+      editJson('contracts/checkbox.contract.json', (c) => {
+        const box = c.anatomy.root.parts.box;
+        delete box.parts.input;
+        box.element = 'button';
+        box.attrs = { role: 'checkbox' };
+        c.events[0].trigger = 'box';
+      });
+      const r = generate();
+      if (r.status === 0) throw new Error('Generator accepted <button role="checkbox"> — the owner-found shape must refuse');
+      if (!r.out.includes('claims role "checkbox" on element "button"') || !r.out.includes('native <input type="checkbox"> exists')) {
+        throw new Error(`Refusal not named (expected the native-equivalent violation):\n${r.out}`);
+      }
+      if (!r.out.includes('declare the exception')) throw new Error('Refusal does not point at the exception field');
+      // The exception mechanism must never ride along silently: removing the
+      // claim ds.progress-bar's declared exception covers refuses by name.
+      resetScratch();
+      editJson('contracts/progress-bar.contract.json', (c) => {
+        delete c.anatomy.root.attrs.role;
+      });
+      const r2 = generate();
+      if (r2.status === 0) throw new Error('Generator accepted a dangling roleException');
+      if (!r2.out.includes('roleException is declared but no root-level role claim needs it')) {
+        throw new Error(`Dangling exception not named:\n${r2.out}`);
+      }
+    },
+  },
 ];
 
 // ---------------------------------------------------------------------------
