@@ -1844,6 +1844,215 @@ const cases: Case[] = [
       }
     },
   },
+  {
+    // Field failure (Split view): the Switch thumb — a text:"" part carrying
+    // width/height/fill tokens — compiled correctly (the sync script wraps
+    // styled static text in a frame that carries the box) but the canvas
+    // preview's text branch dropped every box channel: a height-0 transparent
+    // span, no thumb on screen. Pins BOTH halves: the compiled spec carries
+    // the channels, and the canvas renderer's text branch renders them.
+    id: 'switch-canvas-thumb',
+    claim: 'C1-determinism',
+    run: () => {
+      const probe = run(TSX, ['-e', `
+        import fs from 'node:fs';
+        import { createFigmaEngine } from './core/emit-figma-script.ts';
+        import { ContractSchema } from './scripts/contract-schema.ts';
+        const j = (p) => JSON.parse(fs.readFileSync(p, 'utf8'));
+        const tokens = { primitives: j('tokens/primitives.tokens.json'), semantic: j('tokens/semantic.tokens.json'), light: j('tokens/modes/semantic.light.tokens.json'), dark: j('tokens/modes/semantic.dark.tokens.json'), brands: { default: j('tokens/modes/brand.default.tokens.json') } };
+        const icons = new Map(fs.readdirSync('assets/icons').filter(f=>f.endsWith('.svg')).map(f=>[f.replace('.svg',''),fs.readFileSync('assets/icons/'+f,'utf8')]));
+        const byId = new Map(fs.readdirSync('contracts').filter(f=>f.endsWith('.contract.json')).map(f=>ContractSchema.parse(j('contracts/'+f))).map(c=>[c.id,c]));
+        const data = createFigmaEngine({ tokens, icons }).compileComponentData(byId.get('ds.switch'), byId);
+        const find = (s, name) => s.name === name ? s : (s.children ?? []).map(c => find(c, name)).find(Boolean);
+        const thumb = find(data.variants[0].spec, 'thumb');
+        if (!thumb) throw new Error('no thumb spec compiled');
+        if (thumb.type !== 'text') throw new Error('thumb is expected to compile as a styled static TEXT spec, got ' + thumb.type);
+        if (thumb.fill !== 'color/switch/thumb') throw new Error('thumb spec lost its fill: ' + thumb.fill);
+        if (thumb.fixedWidth?.px !== 16 || thumb.fixedHeight?.px !== 16) throw new Error('thumb spec lost its 16px box');
+        if (thumb.bindings?.topLeftRadius !== 'radius/pill') throw new Error('thumb spec lost its radius binding');
+        console.log('thumb spec carries fill+16px box+radius');
+      `]);
+      if (probe.status !== 0 || !probe.out.includes('thumb spec carries fill+16px box+radius')) {
+        throw new Error(`thumb spec probe failed:\n${probe.out}`);
+      }
+      // The canvas renderer's text branch renders those channels (the same
+      // source-pin style as design-canvas-box-parity).
+      const canvasSrc = readFileSync(
+        path.join(SCRATCH, 'playground', 'src', 'engine', 'canvas-preview.ts'),
+        'utf8',
+      );
+      const textBranch = canvasSrc.slice(canvasSrc.indexOf("spec.type === 'text'"), canvasSrc.indexOf("spec.type === 'instance'"));
+      if (!/if \(spec\.fill \|\| spec\.fixedWidth \|\| spec\.fixedHeight \|\| spec\.bindings\)/.test(textBranch)) {
+        throw new Error('canvas text branch no longer renders the styled-static-text box wrap (the height-0 thumb class)');
+      }
+      if (!textBranch.includes('nodeStyle(spec, ctx)')) {
+        throw new Error('canvas text-box wrap no longer carries the box styles via nodeStyle');
+      }
+    },
+  },
+  {
+    // BROWSER PROBE — real keyboard focus must NOT render the pressed/hover
+    // fill. Field failure (visual-parity): every CBDS/Eventz focus row
+    // screenshotted the hover fill under the ring (68-70% masked) — the
+    // harness's stale mouse, not the emitters; this pins the emitter truth in
+    // a real browser so the class can never be a silent emitter regression.
+    id: 'focus-not-pressed-browser-probe',
+    claim: 'C1-determinism',
+    run: () => {
+      const probe = run(TSX, ['-e', `
+        import fs from 'node:fs';
+        import { chromium } from 'playwright-core';
+        import { chromiumExecutable } from './extract/figma/visual-parity/render.ts';
+        import { emitHtml } from './core/emit-html.ts';
+        import { ContractSchema } from './scripts/contract-schema.ts';
+        import { tokenInventoryFromJson } from './core/tokens.ts';
+        const j = (p) => JSON.parse(fs.readFileSync(p, 'utf8'));
+        const c = ContractSchema.parse(j('contracts/button.contract.json'));
+        const inv = tokenInventoryFromJson(['tokens/primitives.tokens.json','tokens/semantic.tokens.json','tokens/modes/semantic.light.tokens.json','tokens/modes/semantic.dark.tokens.json'].map(j));
+        const icons = new Map(fs.readdirSync('assets/icons').filter(f=>f.endsWith('.svg')).map(f=>[f.replace('.svg',''),fs.readFileSync('assets/icons/'+f,'utf8').trim()]));
+        const emitted = emitHtml(c, { tokens: inv, icons, contracts: new Map([[c.id, c]]) });
+        const doc = '<!doctype html><html><head><meta charset="utf-8"><style>' + fs.readFileSync('src/styles/tokens.css','utf8') + '</style><style>body{margin:0;padding:32px}</style><style>' + emitted.css + '</style></head><body>' + emitted.html + '</body></html>';
+        (async () => {
+          const browser = await chromium.launch({ executablePath: chromiumExecutable(), headless: true });
+          try {
+            const page = await browser.newPage();
+            await page.setContent(doc, { waitUntil: 'load' });
+            await page.mouse.move(0, 0); // pointer parked OFF the component
+            await page.keyboard.press('Tab');
+            const r = await page.evaluate("(() => { const el = document.querySelector('.showcase .button'); const cs = getComputedStyle(el); const v = (n) => { const probe = document.createElement('div'); probe.style.backgroundColor = 'var(' + n + ')'; document.body.appendChild(probe); const out = getComputedStyle(probe).backgroundColor; probe.remove(); return out; }; return { focused: document.activeElement === el, fv: el.matches(':focus-visible'), bg: cs.backgroundColor, outlineStyle: cs.outlineStyle, def: v('--color-action-primary-background'), hover: v('--color-action-primary-background-hover') }; })()");
+            if (!r.focused || !r.fv) throw new Error('Tab did not keyboard-focus the button: ' + JSON.stringify(r));
+            if (r.outlineStyle !== 'solid') throw new Error('focus ring missing: ' + JSON.stringify(r));
+            if (r.bg !== r.def) throw new Error('real keyboard focus changed the fill: got ' + r.bg + ', default is ' + r.def + ' (hover is ' + r.hover + ')');
+            if (r.bg === r.hover) throw new Error('focus renders the hover fill');
+            console.log('keyboard focus keeps the default fill under the ring');
+          } finally { await browser.close(); }
+        })().catch((e) => { console.error(e); process.exit(1); });
+      `]);
+      if (probe.status !== 0 || !probe.out.includes('keyboard focus keeps the default fill under the ring')) {
+        throw new Error(`focus browser probe failed:\n${probe.out}`);
+      }
+    },
+  },
+  {
+    // Empty slot = ABSENT content — never painted placeholder text (field
+    // failure: Eventz '[startIcon slot]' placeholders inflated every
+    // visual-parity row 55-97%). Declared defaultContent still renders.
+    id: 'slot-empty-not-placeholder',
+    claim: 'C1-determinism',
+    run: () => {
+      const probe = run(TSX, ['-e', `
+        import fs from 'node:fs';
+        import { emitHtml } from './core/emit-html.ts';
+        import { ContractSchema } from './scripts/contract-schema.ts';
+        import { tokenInventoryFromJson } from './core/tokens.ts';
+        const j = (p) => JSON.parse(fs.readFileSync(p, 'utf8'));
+        const inv = tokenInventoryFromJson(['tokens/primitives.tokens.json','tokens/semantic.tokens.json','tokens/modes/semantic.light.tokens.json','tokens/modes/semantic.dark.tokens.json'].map(j));
+        const icons = new Map(fs.readdirSync('assets/icons').filter(f=>f.endsWith('.svg')).map(f=>[f.replace('.svg',''),fs.readFileSync('assets/icons/'+f,'utf8').trim()]));
+        const byId = new Map(fs.readdirSync('contracts').filter(f=>f.endsWith('.contract.json')).map(f=>ContractSchema.parse(j('contracts/'+f))).map(c=>[c.id,c]));
+        // ds.token: two slots (icon, endContent), neither has defaultContent.
+        const token = emitHtml(byId.get('ds.token'), { tokens: inv, icons, contracts: byId }).html;
+        if (/\\[[a-zA-Z]+ slot\\]/.test(token)) throw new Error('empty slot painted bracket placeholder text');
+        if (token.includes('slot-placeholder')) throw new Error('slot placeholder class still emitted');
+        if (!token.includes('<!-- icon slot: no content -->')) throw new Error('empty slot absence not NAMED (comment missing)');
+        // ds.breadcrumbs: its items slot DECLARES defaultContent — it must
+        // still render composed children, never the absence comment.
+        const bc = emitHtml(byId.get('ds.breadcrumbs'), { tokens: inv, icons, contracts: byId }).html;
+        if (!bc.includes('breadcrumb-item')) throw new Error('declared defaultContent no longer renders: ' + bc.slice(0, 400));
+        if (bc.includes('slot: no content')) throw new Error('a slot WITH defaultContent was marked absent');
+        console.log('empty slots are absent-and-named; defaultContent renders');
+      `]);
+      if (probe.status !== 0 || !probe.out.includes('empty slots are absent-and-named; defaultContent renders')) {
+        throw new Error(`slot probe failed:\n${probe.out}`);
+      }
+    },
+  },
+  {
+    // UA-margin neutralization: a root that can render as a UA-margined
+    // element carries margin: 0 in the emitted CSS on BOTH css surfaces; a
+    // root that cannot (Badge: span) carries none.
+    id: 'heading-margin-reset',
+    claim: 'C1-determinism',
+    run: () => {
+      if (generate().status !== 0) throw new Error('generate failed');
+      const rootBlock = (css: string) => css.slice(css.indexOf('.root {'), css.indexOf('}', css.indexOf('.root {')));
+      for (const name of ['Heading', 'Blockquote', 'Divider', 'List']) {
+        const css = readFileSync(path.join(SCRATCH, `src/components/${name}/${name}.module.css`), 'utf8');
+        if (!rootBlock(css).includes('margin: 0;')) throw new Error(`${name} root lost the UA-margin reset`);
+      }
+      const badge = readFileSync(path.join(SCRATCH, 'src/components/Badge/Badge.module.css'), 'utf8');
+      if (rootBlock(badge).includes('margin: 0;')) throw new Error('Badge (span root — no UA margin) gained a gratuitous reset');
+      const probe = run(TSX, ['-e', `
+        import fs from 'node:fs';
+        import { emitHtml } from './core/emit-html.ts';
+        import { ContractSchema } from './scripts/contract-schema.ts';
+        import { tokenInventoryFromJson } from './core/tokens.ts';
+        const j = (p) => JSON.parse(fs.readFileSync(p, 'utf8'));
+        const c = ContractSchema.parse(j('contracts/heading.contract.json'));
+        const inv = tokenInventoryFromJson(['tokens/primitives.tokens.json','tokens/semantic.tokens.json','tokens/modes/semantic.light.tokens.json','tokens/modes/semantic.dark.tokens.json'].map(j));
+        const { css } = emitHtml(c, { tokens: inv, icons: new Map(), contracts: new Map([[c.id, c]]) });
+        const root = css.slice(css.indexOf('.heading {'), css.indexOf('}', css.indexOf('.heading {')));
+        if (!root.includes('margin: 0;')) throw new Error('html surface lost the UA-margin reset');
+        console.log('html surface resets UA margins on the heading root');
+      `]);
+      if (probe.status !== 0 || !probe.out.includes('html surface resets UA margins')) {
+        throw new Error(`heading html probe failed:\n${probe.out}`);
+      }
+    },
+  },
+  {
+    // a11y.minHitArea is ENFORCED by emitted CSS (declared floor → the
+    // centered ::before extension, both css surfaces), and the number FLOWS
+    // from the contract (raising it re-emits the raised floor — not
+    // hardcoded).
+    id: 'hit-area-enforced',
+    claim: 'C1-determinism',
+    run: () => {
+      if (generate().status !== 0) throw new Error('generate failed');
+      const css = readFileSync(path.join(SCRATCH, 'src/components/Button/Button.module.css'), 'utf8');
+      if (!css.includes('.root::before')) throw new Error('minHitArea ::before extension missing');
+      if (!css.includes('width: max(100%, 44px);') || !css.includes('height: max(100%, 44px);')) {
+        throw new Error('declared 44px floor not enforced per axis');
+      }
+      const rootBlock = css.slice(css.indexOf('.root {'), css.indexOf('}', css.indexOf('.root {')));
+      if (!rootBlock.includes('position: relative;')) throw new Error('root lost the positioning context for the hit-target extension');
+      // The floor flows from the contract.
+      editJson('contracts/button.contract.json', (c) => {
+        c.a11y.minHitArea = 48;
+      });
+      if (generate().status !== 0) throw new Error('generate failed after minHitArea edit');
+      const raised = readFileSync(path.join(SCRATCH, 'src/components/Button/Button.module.css'), 'utf8');
+      if (!raised.includes('max(100%, 48px)')) throw new Error('raised floor did not flow into the emitted CSS');
+    },
+  },
+  {
+    // ds.token's size scale is LIVE: each non-default size emits a distinct,
+    // non-empty override rule (the dead-prop class: an enum axis that binds
+    // nothing renders every value identically).
+    id: 'token-size-live',
+    claim: 'C1-determinism',
+    run: () => {
+      if (generate().status !== 0) throw new Error('generate failed');
+      const css = readFileSync(path.join(SCRATCH, 'src/components/Token/Token.module.css'), 'utf8');
+      const block = (cls: string) => {
+        const i = css.indexOf(`.${cls} {`);
+        if (i < 0) return null;
+        return css.slice(i, css.indexOf('}', i));
+      };
+      const sm = block('size-sm');
+      const lg = block('size-lg');
+      if (!sm || !sm.includes('padding-inline: var(--space-inset-y-sm);')) {
+        throw new Error('size-sm override missing — the size prop is dead again');
+      }
+      if (!lg || !lg.includes('font-size: var(--font-control-size-sm);') || !lg.includes('padding-inline: var(--space-inset-x-sm);')) {
+        throw new Error('size-lg override missing — the size prop is dead again');
+      }
+      if (sm === lg) throw new Error('size overrides do not differ');
+      // The tsx composes the class (it did even when the prop was dead —
+      // the CSS is what makes it live).
+      const tsx = readFileSync(path.join(SCRATCH, 'src/components/Token/Token.tsx'), 'utf8');
+      if (!tsx.includes('styles[`size-${size}`]')) throw new Error('Token.tsx no longer composes the size class');
+    },
+  },
 ];
 
 // ---------------------------------------------------------------------------
