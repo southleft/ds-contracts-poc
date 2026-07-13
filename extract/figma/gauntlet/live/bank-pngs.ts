@@ -18,7 +18,9 @@ import { tierSets, T12_VISUAL_SAMPLE } from './tiers.js';
 const HERE = path.resolve(new URL('.', import.meta.url).pathname);
 const ROOT = path.resolve(HERE, '..', '..', '..', '..');
 const OUT = path.join(HERE, 'out');
-const CACHE = path.join(OUT, '_cache');
+// PNG/nodes cache lives OUTSIDE extract/ (evals/.scratch copies extract/
+// recursively per reset — a 1GB cache in-tree makes every eval reset crawl).
+const CACHE = path.join(ROOT, '.gauntlet-live-cache');
 const DUMP = path.join(ROOT, 'extract', 'figma', 'fixtures', 'cbds-plugin-all-sets.v16.dump.json');
 const FILE_KEY = 'WofZT8xaxXuc2Q6Je9S4XE';
 

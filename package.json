@@ -42,6 +42,8 @@
     "extract:figma:theme:check": "tsx extract/figma/theme-mode-check.ts",
     "extract:figma:gauntlet": "tsx extract/figma/gauntlet/census.ts",
     "extract:figma:gauntlet:classfix": "tsx extract/figma/gauntlet/class-fix-check.ts",
+    "extract:figma:gauntlet:live": "tsx extract/figma/gauntlet/live/gauntlet.ts",
+    "extract:figma:gauntlet:live:visual": "tsx extract/figma/gauntlet/live/visual-live.ts",
     "extract:figma:visual": "tsx extract/figma/visual-parity/run.ts",
     "extract:figma:visual:summary": "tsx extract/figma/visual-parity/run.ts --summary",
     "extract:figma:rest": "tsx extract/figma/rest/cli.ts",
