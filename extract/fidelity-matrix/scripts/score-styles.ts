@@ -211,6 +211,15 @@ function scoreFacts(
     const part = findPart(anatomyRoot, f.part);
     let ref = part?.tokens?.[f.fact];
     if (f.part === 'root' && stateCtx?.overrides[f.fact]) ref = stateCtx.overrides[f.fact];
+    // v13 (P18 second half): part-level state overrides — Part.states carries
+    // color-kind channels per state; the override outranks the base binding
+    // inside that state's variants, exactly like root overrides do.
+    if (f.part !== 'root' && stateCtx) {
+      const partOverride = (part as { states?: Record<string, Record<string, string>> } | undefined)?.states?.[
+        stateCtx.state
+      ]?.[f.fact];
+      if (partOverride) ref = partOverride;
+    }
     if (!part && stateCtx?.state === 'focus-visible') {
       // A child drawn only in the focus state (the focus ring) inverts to the
       // root's focus-visible OUTLINE pair — score its stroke facts there.
@@ -224,12 +233,17 @@ function scoreFacts(
     const resolved = minted ?? resolveRepoToken(concrete);
     const valueOk = resolved !== undefined && valuesAgree(f.fact, resolved, f.truth);
     if (!valueOk && stateCtx && f.part !== 'root') {
-      // Part-level state overrides are OUTSIDE the contract vocabulary
-      // (STYLE-FIDELITY B7 — the proposal names each one). When the truth
-      // genuinely changed with the state (≠ the matching default variant's
-      // truth), the contract carries NO binding for this (part, fact, state)
-      // cell — MISSING (named), never a silent wrong value. A truth that
-      // MATCHES the base and still disagrees stays a real mismatch.
+      // Pre-v13 proposals: part-level state overrides were OUTSIDE the
+      // contract vocabulary (STYLE-FIDELITY B7 — the proposal named each
+      // one). Since v13 (P18 second half) the proposer CARRIES depth-1
+      // color-kind part diffs as Part.states and the scorer's part lookup
+      // above finds the binding first — this fallback only fires for
+      // pre-v13 proposals (like the committed matrix run) or channels the
+      // bounded vocabulary still excludes. When the truth genuinely changed
+      // with the state (≠ the matching default variant's truth), the
+      // contract carries NO binding for this (part, fact, state) cell —
+      // MISSING (named), never a silent wrong value. A truth that MATCHES
+      // the base and still disagrees stays a real mismatch.
       const base = stateCtx.baseTruth.get(`${f.part}§${f.fact}`);
       if (base !== undefined && !valuesAgree(f.fact, base, f.truth)) {
         return { ...f, variant: variantName, verdict: 'MISSING' };

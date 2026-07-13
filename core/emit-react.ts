@@ -68,6 +68,12 @@ const STATE_SELECTORS: Record<string, string> = {
   disabled: ':disabled',
 };
 
+/** v13 (P18 second half): the channels a NON-root part's `states` may carry —
+ *  color-kind only, bounded by the field evidence (the CBDS disabled label
+ *  drew #556275 on the #dfe3eb root; extend only when fixtures demand more).
+ *  The root keeps its full state vocabulary (outline-*, opacity, radius, …). */
+export const PART_STATE_CHANNELS = new Set(['color', 'background-color', 'border-color']);
+
 /** Elements the UA stylesheet gives default MARGINS. A component's box is
  *  contract-governed — spacing between components belongs to the composing
  *  layout, never to a UA default leaking through (field failure: Heading's
@@ -340,6 +346,37 @@ export function validateContract(
       }
       if (part.component) {
         errors.push(`${contract.id}: part "${name}" is a component instance — tokensByProp cannot restyle it (the child contract owns its styling)`);
+      }
+    }
+    // v13 part-level states (P18 second half): per-state token overrides on
+    // a NON-ref part — refusal-ruled, never silent: unknown state names
+    // refuse (the STATE_SELECTORS vocabulary AND the contract's declared
+    // states), ref/slot parts refuse (the child contract owns its styling;
+    // slot content is the consumer's), and channels outside the color-kind
+    // whitelist refuse by name. The ROOT's states keep their own path (full
+    // vocabulary, validated in generateCss).
+    if (part.states && !(p[0] === 'root' && p.length === 1)) {
+      if (part.component) {
+        errors.push(`${contract.id}: part "${name}" is a component instance — states cannot restyle it (the child contract owns its styling)`);
+      }
+      if (part.slot) {
+        errors.push(`${contract.id}: part "${name}" is a slot — states cannot restyle its content (the consumer owns it)`);
+      }
+      for (const [state, overrides] of Object.entries(part.states)) {
+        if (!(state in STATE_SELECTORS)) {
+          errors.push(`${contract.id}: part "${name}" states declares unknown state "${state}" — must be one of ${Object.keys(STATE_SELECTORS).join(', ')}`);
+          continue;
+        }
+        if (!contract.states.includes(state as Contract['states'][number])) {
+          errors.push(`${contract.id}: part "${name}" states declares "${state}" but the contract's \`states\` does not — declare it or drop the override`);
+        }
+        for (const cssProp of Object.keys(overrides)) {
+          if (!PART_STATE_CHANNELS.has(cssProp)) {
+            errors.push(
+              `${contract.id}: part "${name}" states.${state} sets "${cssProp}" which is not a part-state channel (${[...PART_STATE_CHANNELS].join(', ')} — color-kind only, v13)`,
+            );
+          }
+        }
       }
     }
     // v7 overlay: out-of-flow parts must stay out of the flow arithmetic —
@@ -641,9 +678,14 @@ export function validateContract(
     }
     const rootStates = contract.anatomy.root?.states ?? {};
     for (const state of contract.states) {
-      if (Object.keys(rootStates[state] ?? {}).length === 0) {
+      // v13: a state carried ONLY by part-level overrides still previews —
+      // the compile applies part states inside the State-axis variants.
+      const partCarries = walkAnatomy(contract).some(
+        (w) => !(w.path[0] === 'root' && w.path.length === 1) && Object.keys(w.part.states?.[state] ?? {}).length > 0,
+      );
+      if (Object.keys(rootStates[state] ?? {}).length === 0 && !partCarries) {
         errors.push(
-          `${contract.id}: figmaStatePreviews — state "${state}" declares no token overrides on anatomy.root.states, so its preview variant would render identically to Default`,
+          `${contract.id}: figmaStatePreviews — state "${state}" declares no token overrides on anatomy.root.states (or any part's states), so its preview variant would render identically to Default`,
         );
       }
     }
@@ -1139,6 +1181,30 @@ export function generateCss(contract: Contract, tokenInventory: Set<string>, err
           nestedSubRules.push(
             `\n.${part.tokensByProp.prop}-${value} .${name} {\n  ${cssProp}: ${cssVar(refPath)};\n}`,
           );
+        }
+      }
+    }
+    // v13 part-level states (P18 second half): descendant rules under the
+    // root's STATE selector — .root:disabled .label { color: … } — the same
+    // STATE_SELECTORS the root states ride (native :disabled; hover/active
+    // gated :not(:disabled)). Single-placeholder refs expand per enum value
+    // on the root's enum class, exactly like the root's own state rules.
+    for (const [state, overrides] of Object.entries(part.states ?? {})) {
+      const sel = STATE_SELECTORS[state];
+      if (!sel) continue; // refused by validateContract
+      for (const [cssProp, ref] of Object.entries(overrides)) {
+        const refPath = stripBraces(ref);
+        const phs = placeholdersIn(refPath);
+        if (phs.length === 0) {
+          if (checkToken(refPath, `anatomy.${name}.states.${state}.${cssProp}`)) {
+            nestedSubRules.push(`\n.root${sel} .${name} {\n  ${cssProp}: ${cssVar(refPath)};\n}`);
+          }
+        } else if (phs.length === 1) {
+          for (const value of enums.get(phs[0]) ?? []) {
+            const resolved = refPath.replaceAll(`{${phs[0]}}`, value);
+            if (!checkToken(resolved, `anatomy.${name}.states.${state}.${cssProp}`)) continue;
+            nestedSubRules.push(`\n.${phs[0]}-${value}${sel} .${name} {\n  ${cssProp}: ${cssVar(resolved)};\n}`);
+          }
         }
       }
     }

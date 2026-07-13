@@ -12,7 +12,11 @@
  *   · Resolution mode is named in the output (light default, dark selectable;
  *     brand: default) — an inline build is ONE theme by construction.
  *   · :hover / :focus-visible state tokens are not expressible as inline
- *     styles — omitted. Disabled-state tokens DO apply, via the disabled prop.
+ *     styles — omitted. ROOT disabled-state tokens DO apply, via the
+ *     disabled prop. v13 PART-level state overrides (Part.states on non-ref
+ *     parts — .root:disabled .label on the css/html surfaces) are pseudo-
+ *     class-selected descendant styling: the same declared limit as the
+ *     root hover states above — omitted, stated in the emitted header.
  *   · Animations (spinner/skeleton) ship as an embedded <style> keyframes
  *     block — the one thing inline style objects cannot carry.
  *   · a11y.minHitArea's non-visual ::before hit-target extension is a
@@ -689,7 +693,9 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
  * tokens at emit time. Resolution mode: ${mode} (brand: default). To retheme,
  * re-emit against different tokens — do not edit literals by hand.
  * Fidelity: :hover/:focus-visible state tokens are not expressible as inline
- * styles and are omitted; disabled-state tokens apply via the disabled prop.${overlapNote}${repeatNote}
+ * styles and are omitted; ROOT disabled-state tokens apply via the disabled
+ * prop; PART-level state overrides (Part.states, v13) are omitted — the same
+ * declared limit as the hover states (state-selected descendant styling).${overlapNote}${repeatNote}
  */
 import { forwardRef${events.some((e) => e.toggles) ? ', useState' : ''} } from 'react';
 import type { ${typeImports} } from 'react';

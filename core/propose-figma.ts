@@ -2617,6 +2617,10 @@ function buildChildParts(
   ctx: Ctx,
   where: string,
   selfKey: string,
+  /** v13 (P18): drawn child NAME → claimed part key, collected for the
+   *  DEPTH-1 call only — proposeStateDiffs maps state-variant children back
+   *  onto their built anatomy parts through it. */
+  keyByName?: Map<string, string>,
 ): Record<string, unknown> {
   const parts: Record<string, unknown> = {};
   let i = 0;
@@ -2626,6 +2630,7 @@ function buildChildParts(
     if (run) {
       // Claim the key BEFORE building (pre-order, the partKey discipline).
       const key = partKey(child.name, ctx, `${where}/${child.name}`, selfKey);
+      if (keyByName && !keyByName.has(child.name)) keyByName.set(child.name, key);
       const repeatPart = buildRepeatPart(run, ctx, `${where}/${child.name}`, key);
       if (repeatPart) {
         parts[key] = repeatPart;
@@ -2640,6 +2645,7 @@ function buildChildParts(
       continue;
     }
     const key = partKey(child.name, ctx, `${where}/${child.name}`, selfKey);
+    if (keyByName && !keyByName.has(child.name)) keyByName.set(child.name, key);
     const built = buildPart(child, mode, ctx, `${where}/${child.name}`, key);
     if (built) parts[key] = built;
     i++;
@@ -3455,11 +3461,17 @@ function mintStateObservation(
   kind: 'color' | 'px' | 'number',
   occ: Array<{ variant: string; value: string | number }>,
   source: string,
+  /** v13: a PART-level override — the part's claimed key. Minted paths then
+   *  read `imported.<component>.<key>-state-<state>.<channel>` (the root
+   *  spelling with the part segment in front); root when absent. */
+  partKey?: string,
 ) {
   if (!ctx.mint) return;
   ctx.mint.observations.push({
-    nodePath: `${ctx.setName}:root (state ${state})`,
-    part: `state-${state}`,
+    nodePath: partKey
+      ? `${ctx.setName}:root/${partKey} (state ${state})`
+      : `${ctx.setName}:root (state ${state})`,
+    part: partKey ? `${partKey}/state-${state}` : `state-${state}`,
     cssProperty,
     kind,
     occurrences: occ.map((o) => ({
@@ -3472,15 +3484,31 @@ function mintStateObservation(
   });
 }
 
+/** One collected part-level state override record — written by
+ *  proposeStateDiffs, attached to its part AFTER the mint pass (so minted
+ *  refs have landed), exactly the root stateOverrides lifecycle. */
+export interface PartStateTarget {
+  /** The built anatomy part record (the same object stored in root.parts). */
+  part: Record<string, unknown>;
+  state: string;
+  target: Record<string, string>;
+}
+
 /** Diff ONE promoted state's (flattened) variants against the matching
  *  default-state variants and propose root `states` overrides: bound facts as
  *  (substituted) refs, raw literals as mint observations, everything the
  *  vocabulary cannot carry as a NAMED note. Channels are the root box facts
  *  the dump carries: fill, stroke (+weight), corner radius, node opacity.
- *  Depth-1 part fills that change are RECEIPTED (part-level state overrides
- *  are outside the vocabulary — STYLE-FIDELITY B7); a child drawn ONLY in
- *  the focus state carrying a stroke inverts to the focus-visible outline
- *  pair (the ds.button focus-ring convention). */
+ *  v13 (P18 second half): depth-1 part color-kind diffs (text fill → color,
+ *  frame fill → background-color, stroke → border-color) are PROPOSED as
+ *  part-level `states` overrides through the same occurrence machinery —
+ *  per-variant refs unify, raw literals mint (`imported.<component>.<part>-
+ *  state-<state>.<channel>`); the old STYLE-FIDELITY B7 blanket receipt is
+ *  retired where the channel now carries and stays NARROW elsewhere
+ *  (component-ref/slot children — the child contract owns its styling — and
+ *  channels outside the color-kind set). A child drawn ONLY in the focus
+ *  state carrying a stroke inverts to the focus-visible outline pair (the
+ *  ds.button focus-ring convention). */
 function proposeStateDiffs(
   ctx: Ctx,
   state: string,
@@ -3489,6 +3517,12 @@ function proposeStateDiffs(
   baseChildNames: Set<string>,
   baseRootTokens: Record<string, string>,
   target: Record<string, string>,
+  /** The built root anatomy parts + the drawn-name → part-key map (depth-1)
+   *  and the cross-state collector. Absent parts (auto-label hoist) keep the
+   *  named-note path. */
+  rootParts?: Record<string, unknown>,
+  keyByChildName?: Map<string, string>,
+  partStates?: PartStateTarget[],
 ) {
   const where = `${ctx.setName}:root`;
   const missing = group.filter((v) => !baseByName.get(v.name));
@@ -3665,18 +3699,99 @@ function proposeStateDiffs(
     );
   }
 
-  // Depth-1 part fills that change with the state: receipted, not proposed.
-  const partDiffs = new Set<string>();
+  // Depth-1 part color-kind diffs (v13, P18 second half): PROPOSED as part-
+  // level `states` overrides on text/icon/box parts through the same
+  // occurrence machinery as the root channels (per-variant refs unify, raw
+  // literals mint). The old STYLE-FIDELITY B7 blanket receipt is RETIRED
+  // where the channel now carries; it stays NARROW where the vocabulary
+  // deliberately stops: component-ref/slot/repeat children (the child
+  // contract owns its styling) and channels outside the color-kind set.
+  const childOccByName = new Map<string, Array<{ variant: string; node: DumpNode; base: DumpNode }>>();
   for (const o of occs) {
     for (const c of o.node.children ?? []) {
       const bc = (o.base.children ?? []).find((x) => x.name === c.name);
-      if (bc && paintKey(c.fill) !== paintKey(bc.fill)) partDiffs.add(c.name);
+      if (!bc) continue;
+      const list = childOccByName.get(c.name) ?? [];
+      list.push({ variant: o.variant, node: c, base: bc });
+      childOccByName.set(c.name, list);
     }
   }
-  for (const name of partDiffs) {
-    ctx.notes.push(
-      `${where}/${name}: fill differs in state "${state}" — part-level state overrides are outside the contract vocabulary (root states only, STYLE-FIDELITY B7); NAMED, not proposed (review)`,
-    );
+  for (const [childName, childOccs] of childOccByName) {
+    type Pick = (n: DumpNode) => { var?: string; hex?: string; alpha?: number } | undefined;
+    const channels: Array<{ cssProp: string; paintName: string; pick: Pick }> =
+      childOccs.every((x) => x.node.type === 'TEXT')
+        ? [{ cssProp: 'color', paintName: 'fill', pick: (n) => n.fill }]
+        : [
+            { cssProp: 'background-color', paintName: 'fill', pick: (n) => n.fill },
+            { cssProp: 'border-color', paintName: 'stroke', pick: (n) => n.stroke },
+          ];
+    for (const ch of channels) {
+      if (!childOccs.some((x) => paintKey(ch.pick(x.node)) !== paintKey(ch.pick(x.base)))) continue;
+      const at = `${where}/${childName}`;
+      const key = keyByChildName?.get(childName);
+      const partRec = key !== undefined && rootParts ? (rootParts[key] as Record<string, unknown> | undefined) : undefined;
+      if (!partRec || !partStates) {
+        ctx.notes.push(
+          `${at}: ${ch.paintName} differs in state "${state}" but no anatomy part maps to this drawn child — NAMED, not proposed (review)`,
+        );
+        continue;
+      }
+      if (partRec.component !== undefined || partRec.slot !== undefined || partRec.repeat !== undefined) {
+        ctx.notes.push(
+          `${at}: ${ch.paintName} differs in state "${state}" on a ${partRec.slot !== undefined ? 'slot' : 'component-ref'} part — the child contract owns its styling (part-level state overrides carry on text/icon/box parts only, v13); NAMED, not proposed (review)`,
+        );
+        continue;
+      }
+      // One override record per (part, state) across channels — attached to
+      // the part AFTER the mint pass, the root stateOverrides lifecycle.
+      let rec = partStates.find((r) => r.part === partRec && r.state === state);
+      if (!rec) {
+        rec = { part: partRec, state, target: {} };
+        partStates.push(rec);
+      }
+      const paints = childOccs.map((x) => ({ variant: x.variant, paint: ch.pick(x.node) }));
+      if (paints.some((p) => p.paint === undefined)) {
+        ctx.notes.push(
+          `${at}: ${ch.paintName} differs in state "${state}" but is absent in some of its variant(s) — a state override cannot unset a channel; NAMED, not proposed (review)`,
+        );
+        continue;
+      }
+      const partBaseTokens = (partRec.tokens ?? {}) as Record<string, string>;
+      if (paints.every((p) => p.paint!.var !== undefined)) {
+        const u = unifyRefs(
+          paints.map((p) => ({ variant: p.variant, path: dotPath(p.paint!.var!) })),
+          ctx.axes,
+        );
+        if (u.kind === 'ref') {
+          if (u.ref !== partBaseTokens[ch.cssProp]) rec.target[ch.cssProp] = u.ref;
+        } else if (u.kind === 'per-value') {
+          ctx.notes.push(
+            `${at} ${ch.paintName} (state ${state}): bindings are a function of an enum axis by value — a state block holds ONE ref per channel; NAMED, not proposed (review)`,
+          );
+        } else if (u.kind === 'drift') {
+          ctx.notes.push(`${at} ${ch.paintName} (state ${state}): ${u.detail}`);
+        }
+        continue;
+      }
+      if (paints.every((p) => p.paint!.hex !== undefined)) {
+        reportUnbound(ctx, `${at} (state ${state})`, ch.paintName, paintCssHex(paints[0].paint!));
+        mintStateObservation(
+          ctx, rec.target, state, ch.cssProp, 'color',
+          paints.map((p) => ({ variant: p.variant, value: paintCssHex(p.paint!) })),
+          `${at} (state ${state})|${ch.paintName}`,
+          key,
+        );
+        if (!ctx.mint) {
+          ctx.notes.push(
+            `${at}: ${ch.paintName} changes in state "${state}" (${paintCssHex(paints[0].paint!)}) — a literal part-state override needs minting (mintUnbound); NAMED, not proposed`,
+          );
+        }
+        continue;
+      }
+      ctx.notes.push(
+        `${at}: ${ch.paintName} in state "${state}" mixes bound and raw paints across variants — not proposed, review`,
+      );
+    }
   }
 }
 
@@ -3869,6 +3984,7 @@ export function proposeFromDump(
   const where = `${set.setName}:root`;
 
   const root: Record<string, unknown> = {};
+  const rootKeyByChildName = new Map<string, string>();
   const rootLayout = invertLayout(merged, true, null, ctx, where);
   if (rootLayout) root.layout = rootLayout;
   const rootByProp = invertLayoutByProp(merged, ctx, where);
@@ -3899,7 +4015,9 @@ export function proposeFromDump(
   } else {
     const mode = merged.occ[0].node.layout?.mode ?? null;
     // Pre-order key claiming + P9 run detection — see buildChildParts.
-    const parts = buildChildParts(merged.children, mode, ctx, where, 'root');
+    // rootKeyByChildName maps drawn depth-1 names onto their claimed keys —
+    // the part-level state diff (v13) resolves parts through it.
+    const parts = buildChildParts(merged.children, mode, ctx, where, 'root', rootKeyByChildName);
     if (Object.keys(parts).length > 0) root.parts = parts;
   }
   invertNodeOpacity(merged, root, rootTokens, ctx, where);
@@ -3921,6 +4039,7 @@ export function proposeFromDump(
   // observations resolved in the mint pass below, writing straight into
   // these records). Attached to the contract AFTER the mint pass.
   const stateOverrides: Record<string, Record<string, string>> = {};
+  const partStateTargets: PartStateTarget[] = [];
   if (statePromo) {
     const baseByName = new Map(variants.map((v) => [v.name, v]));
     const baseChildNames = new Set<string>();
@@ -3929,7 +4048,12 @@ export function proposeFromDump(
     if (disabledGroup.length > 0) groups.push(['disabled', disabledGroup]);
     for (const [state, group] of groups) {
       const target = (stateOverrides[state] ??= {});
-      proposeStateDiffs(ctx, state, group, baseByName, baseChildNames, rootTokens, target);
+      proposeStateDiffs(
+        ctx, state, group, baseByName, baseChildNames, rootTokens, target,
+        (root.parts as Record<string, unknown> | undefined) ?? {},
+        rootKeyByChildName,
+        partStateTargets,
+      );
     }
     // The disabled axis value → a REAL boolean prop (native attribute on
     // interactive elements), bound the forward generator's way.
@@ -4182,16 +4306,42 @@ export function proposeFromDump(
   if (statePromo) {
     const ORDER = ['hover', 'active', 'focus-visible', 'disabled'];
     const declared = ORDER.filter((s) => stateOverrides[s] !== undefined);
-    const present = declared.filter((s) => Object.keys(stateOverrides[s]).length > 0);
+    // v13: part-level overrides (attached below) DECLARE a state exactly
+    // like root ones — the disabled label color alone is a real state.
+    const partPresent = new Set<string>();
+    for (const rec of partStateTargets) {
+      if (Object.keys(rec.target).length > 0) partPresent.add(rec.state);
+    }
+    const present = declared.filter(
+      (s) => Object.keys(stateOverrides[s]).length > 0 || partPresent.has(s),
+    );
     for (const s of declared) {
       if (!present.includes(s)) {
         ctx.notes.push(
-          `state "${s}": promoted from the axis but no root override was recoverable — state not declared (its variants render identically to default at the root, or every channel refused by name above)`,
+          `state "${s}": promoted from the axis but no root or part override was recoverable — state not declared (its variants render identically to default, or every channel refused by name above)`,
         );
       }
     }
+    // Part-level attach (v13): surviving records land on their parts'
+    // `states`, and each landing is a NAMED note (the B7 receipt's
+    // replacement — the channel now CARRIES).
+    for (const rec of partStateTargets) {
+      if (!present.includes(rec.state) || Object.keys(rec.target).length === 0) continue;
+      const states = (rec.part.states ?? {}) as Record<string, Record<string, string>>;
+      states[rec.state] = { ...(states[rec.state] ?? {}), ...rec.target };
+      rec.part.states = states;
+      const partKeyName = Object.entries((root.parts as Record<string, unknown>) ?? {}).find(([, v]) => v === rec.part)?.[0] ?? '(part)';
+      ctx.notes.push(
+        `${set.setName}:root/${partKeyName}: state "${rec.state}" part-level override proposed — ${Object.entries(rec.target)
+          .map(([k, v]) => `${k}: ${v}`)
+          .join(', ')} (P18 v13; formerly the STYLE-FIDELITY B7 named gap)`,
+      );
+    }
     if (present.length > 0) {
-      root.states = Object.fromEntries(present.map((s) => [s, stateOverrides[s]]));
+      const rootPresent = present.filter((s) => Object.keys(stateOverrides[s]).length > 0);
+      if (rootPresent.length > 0) {
+        root.states = Object.fromEntries(rootPresent.map((s) => [s, stateOverrides[s]]));
+      }
       contract.states = present;
       const enumNames = new Set(
         props.filter((p) => typeof p.type === 'object' && 'enum' in (p.type as object)).map((p) => p.name as string),
@@ -4201,6 +4351,14 @@ export function proposeFromDump(
         for (const ref of Object.values(stateOverrides[s])) {
           for (const m of ref.matchAll(/\{([a-z][\w-]*)\}/g)) {
             if (enumNames.has(m[1])) substProps.add(m[1]);
+          }
+        }
+        for (const rec of partStateTargets) {
+          if (rec.state !== s) continue;
+          for (const ref of Object.values(rec.target)) {
+            for (const m of ref.matchAll(/\{([a-z][\w-]*)\}/g)) {
+              if (enumNames.has(m[1])) substProps.add(m[1]);
+            }
           }
         }
       }

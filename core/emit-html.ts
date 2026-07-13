@@ -389,6 +389,26 @@ function componentCss(contract: Contract): string[] {
         );
       }
     }
+    // v13 part-level states (P18 second half): descendant rules under the
+    // root's state selector — mirrors core/emit-react.ts generateCss
+    // (.badge:disabled .badge__label { color: … }; native :disabled,
+    // hover/active gated :not(:disabled), the STATE_SELECTORS discipline).
+    for (const [state, overrides] of Object.entries(part.states ?? {})) {
+      const sel = STATE_SELECTORS[state];
+      if (!sel) continue; // refused by validateContract
+      for (const [cssProp, ref] of Object.entries(overrides)) {
+        const refPath = stripBraces(ref);
+        const phs = placeholdersIn(refPath);
+        if (phs.length === 0) {
+          rule(`${rootCls}${sel} ${partCls(name)}`, [`${cssProp}: ${cssVar(refPath)}`]);
+        } else if (phs.length === 1) {
+          for (const value of enums.get(phs[0]) ?? []) {
+            const resolved = refPath.replaceAll(`{${phs[0]}}`, value);
+            rule(`${enumCls(phs[0], value)}${sel} ${partCls(name)}`, [`${cssProp}: ${cssVar(resolved)}`]);
+          }
+        }
+      }
+    }
     // v7 layoutByProp on a nested part: descendant rule under the root's
     // enum modifier class.
     if (part.layoutByProp) {

@@ -314,7 +314,7 @@ check(
 check(
   'state axis PROMOTED away (no `state` prop) with the no-overrides receipt named',
   byName.get('state') === undefined &&
-    flat.notes.some((n) => n.includes('state "hover": promoted from the axis but no root override was recoverable')),
+    flat.notes.some((n) => n.includes('state "hover": promoted from the axis but no root or part override was recoverable')),
 );
 const isDisabled = byName.get('isDisabled');
 check(

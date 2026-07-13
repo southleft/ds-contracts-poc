@@ -72,7 +72,7 @@ named degradation — zero remain.
 | B4 | **`outline` shorthand on `:focus-visible`** (`outline: 2px solid var(--x)`) | **dropped** — "var() inside a shorthand" note; the focus ring vanished from the CBDS convergence diff | — | NAMED-GAP (scorecard punch 4, half) | **OK / MINTED** — outline expands to `outline-width` + `outline-color`; `outline-offset` rides the generator boilerplate |
 | B5 | `:hover` / `:focus-visible` / `:disabled` root rules (incl. `:not()` state guards) | yes | `states.*` + state minting | OK / MINTED | OK / MINTED |
 | B6 | **`:active` root rules** (`&:active:not(:disabled)`) | **dropped** — "pseudo is not a contract state" note; pressed fills one-sided in the convergence diff | — | NAMED-GAP (scorecard punch 4) | **OK / MINTED** — `active` joins the contract state vocabulary (schema, all emitters `:active:not(:disabled)`, extractor, minting) |
-| B7 | state rules on nested parts | no — root-level states only | note | NAMED-GAP | NAMED-GAP |
+| B7 | state rules on nested parts | vocabulary + emitters + design proposer: yes (v13 `Part.states` — color-kind channels on non-ref parts, `.root:disabled .part` rules, canvas State-preview cells, `proposeStateDiffs` proposes depth-1 diffs); CSS→contract inversion: no | proposed (design side) / precise named note (code side) | NAMED-GAP | **RETIRED (design side)** / NAMED-GAP (css inversion only — note names the v13 vocabulary) |
 | B8 | enum-modifier classes (incl. BEM) → substituted refs | yes | template inference / per-value minting | OK / MINTED | OK / MINTED |
 | B9 | boolean-modifier classes | no | note (stylesWhen is authored, not inverted) | NAMED-GAP | NAMED-GAP |
 | B10 | media queries / @supports / @container | no | named at-rule skip note | NAMED-GAP | NAMED-GAP |
@@ -118,8 +118,13 @@ codes, mirrored by the plugin dump's `_degradations` channel).
    dump v1.3 candidates, now receipted.
 6. **Gradients & images as CSS values** (A4–A5) — capturable into CSS
    `linear-gradient()` / `url()` mints later; degradations carry the stops.
-7. **Nested-part states, boolean-conditional styling, media queries**
-   (B7/B9/B10) — authored vocabulary exists (stylesWhen), inversion does not.
+7. **Boolean-conditional styling, media queries** (B9/B10) — authored
+   vocabulary exists (stylesWhen), inversion does not. Nested-part STATES
+   (B7) retired on the design side: `Part.states` (v13, color-kind channels
+   on non-ref parts) is proposed by `proposeStateDiffs` and rendered by every
+   emitter (`.root:disabled .part`; canvas State-preview cells); only the
+   CSS→contract inversion of that selector shape remains a precise named
+   note.
 8. **Blend modes** (A9) — no contract vocabulary; named only.
 9. **Stroke align/dash, min/max literal sizing, rotation** (A13/A20/A24) —
    named; low observed damage.

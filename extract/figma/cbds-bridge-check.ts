@@ -254,6 +254,10 @@ const computed = (selector: string, cssProp: string): string | undefined => {
   let decl: string | undefined;
   const needle = `${selector} {`;
   for (let at = css.indexOf(needle); at >= 0; at = css.indexOf(needle, at + 1)) {
+    // The selector must START its rule (line-anchored): `.x__Button {` is
+    // also a SUBSTRING of the v13 part-state rule `.x:disabled .x__Button {`
+    // — a different selector that must not shadow the base lookup.
+    if (at > 0 && css[at - 1] !== '\n') continue;
     const rule = css.slice(at + needle.length, css.indexOf('}', at));
     for (const line of rule.split('\n').map((l) => l.trim())) {
       if (line.startsWith(`${cssProp}:`)) decl = line;
@@ -317,6 +321,14 @@ check(
 check(
   `label computed color = #fcfeff from HIS {text.inverse-primary} (got ${computed(`${k}__Button`, 'color')})`,
   computed(`${k}__Button`, 'color') === '#fcfeff',
+);
+// v13 part-level state override (P18 second half — the retired STYLE-
+// FIDELITY B7): his kit draws the DISABLED label at text/disabled #556275
+// on the #dfe3eb disabled fill; the part-state rule now carries it as a
+// descendant rule under the root's :disabled selector.
+check(
+  `:disabled label computed color = #556275 from HIS {text.disabled} (part-level state override, v13 — B7 retired; got ${computed(`${k}:disabled ${k}__Button`, 'color')})`,
+  computed(`${k}:disabled ${k}__Button`, 'color') === '#556275',
 );
 
 // emitReact sanity on the same layered inventory (the code surface).
