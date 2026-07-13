@@ -1,6 +1,6 @@
 {
- "generatedAt": "2026-07-12T22:53:11.782Z",
- "headCommit": "15984bec170a36804bf388baa7baab4b48305c63",
+ "generatedAt": "2026-07-13T02:54:14.656Z",
+ "headCommit": "d6b0eb32b53815a3bf9aa005275b76b8a8ab7575",
  "epsilonPp": 0.1,
  "subjects": {
   "cbds-button-brand-primary": {
@@ -203,21 +203,21 @@
   "cbds-button-brand-primary :: size=large, state=disabled": {
    "status": "diffed",
    "masked": 0,
-   "unmasked": 5.251736111111112,
+   "unmasked": 1.9035218253968251,
    "sizeOurs": "168×96",
    "causeClass": "renderer"
   },
   "cbds-button-brand-primary :: size=medium, state=disabled": {
    "status": "diffed",
    "masked": 0,
-   "unmasked": 5.729166666666666,
+   "unmasked": 2.076569264069264,
    "sizeOurs": "168×88",
    "causeClass": "renderer"
   },
   "cbds-button-brand-primary :: size=small, state=disabled": {
    "status": "diffed",
    "masked": 1.3995215311004785,
-   "unmasked": 5.909090909090909,
+   "unmasked": 3.0925324675324677,
    "sizeOurs": "138×88",
    "causeClass": "renderer"
   },
