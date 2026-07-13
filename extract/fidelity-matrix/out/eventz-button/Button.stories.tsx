@@ -4,6 +4,8 @@
  * Regenerate with: npm run generate
  */
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { Play } from '../Play';
+import { Pause } from '../Pause';
 import { Button } from './Button';
 
 const meta = {
@@ -50,6 +52,18 @@ export const Secondary: Story = {
 
 export const Bare: Story = {
   args: { variant: 'bare' },
+};
+/** The "startIcon" slot accepts: anything. */
+export const WithStartIcon: Story = {
+  render: (args) => (
+    <Button {...args} startIcon={<><Play /></>} />
+  ),
+};
+/** The "endIcon" slot accepts: anything. */
+export const WithEndIcon: Story = {
+  render: (args) => (
+    <Button {...args} endIcon={<><Pause /></>} />
+  ),
 };
 /** Every legal combination the contract defines. */
 export const Matrix: Story = {

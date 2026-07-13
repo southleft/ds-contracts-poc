@@ -137,7 +137,12 @@
         "startIcon": {
           "slot": {
             "name": "startIcon",
-            "figmaProperty": "startIcon"
+            "figmaProperty": "startIcon",
+            "defaultContent": [
+              {
+                "id": "ds.play"
+              }
+            ]
           },
           "visibleWhen": {
             "prop": "hasStartIcon"
@@ -146,7 +151,9 @@
         "Label": {
           "tokens": {
             "color": "{imported.button.label.color.{variant}}",
-            "font-size": "{imported.button.label.font-size}"
+            "font-size": "{imported.button.label.font-size}",
+            "font-weight": "{imported.button.label.font-weight}",
+            "line-height": "{imported.button.label.line-height}"
           },
           "content": {
             "prop": "text"
@@ -155,7 +162,12 @@
         "endIcon": {
           "slot": {
             "name": "endIcon",
-            "figmaProperty": "endIcon"
+            "figmaProperty": "endIcon",
+            "defaultContent": [
+              {
+                "id": "ds.pause"
+              }
+            ]
           },
           "visibleWhen": {
             "prop": "hasEndIcon"

@@ -3,7 +3,6 @@
     "semantics: element \"div\" + role \"tooltip\" inferred from the set name \"Tooltip\" — inference is mechanical (name/axis table), review",
     "Tooltip:root: auto-layout differs across variants as a function of axis \"placement\" — proposed layoutByProp on `placement` (7 override(s); reversed child order spelled as -reverse directions)",
     "Tooltip:root/Body/Content/Tooltip text: rides text style \"Sans/Regular - Small\" which is not a token-derived style — typography not proposed",
-    "Tooltip:root/Body/Content/Tooltip text: font weight \"Regular\" has no token identity (no matching derived style) — font-weight NAMED, not proposed; review",
     "prop `text`: the single text prop carries the component's main content — repo contracts bind main content to code prop \"children\" (ds.button convention); adopt by setting bindings.code.prop to \"children\" when this is the label (note-only, nothing renamed mechanically)",
     "MINTED {imported.tooltip.body.border-radius} = 3px — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Tooltip:root/Body border-radius",
     "MINTED {imported.tooltip.body-content.background-color} = #27272a — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Tooltip:root/Body/Content background-color",
@@ -12,6 +11,7 @@
     "MINTED {imported.tooltip.body-content.border-radius} = 4px — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Tooltip:root/Body/Content border-radius",
     "MINTED {imported.tooltip.body-content-tooltip-text.color} = #ffffff — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Tooltip:root/Body/Content/Tooltip text color",
     "MINTED {imported.tooltip.body-content-tooltip-text.font-size} = 14px — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Tooltip:root/Body/Content/Tooltip text font-size",
+    "MINTED {imported.tooltip.body-content-tooltip-text.font-weight} = 400 — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Tooltip:root/Body/Content/Tooltip text font-weight",
     "MINTED {imported.tooltip.arrow-wrapper.padding-inline.left} = 0px — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Tooltip:root/Arrow Wrapper padding-inline (placement=left)",
     "MINTED {imported.tooltip.arrow-wrapper.padding-inline.topleft} = 16px — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Tooltip:root/Arrow Wrapper padding-inline (placement=topleft)",
     "MINTED {imported.tooltip.arrow-wrapper.padding-inline.bottomleft} = 16px — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Tooltip:root/Arrow Wrapper padding-inline (placement=bottomleft)",
@@ -32,7 +32,7 @@
     }
   ],
   "minted": {
-    "count": 16,
+    "count": 17,
     "entries": [
       {
         "ref": "{imported.tooltip.body.border-radius}",
@@ -81,6 +81,13 @@
         "value": "14px",
         "usageSites": [
           "Tooltip:root/Body/Content/Tooltip text font-size"
+        ]
+      },
+      {
+        "ref": "{imported.tooltip.body-content-tooltip-text.font-weight}",
+        "value": "400",
+        "usageSites": [
+          "Tooltip:root/Body/Content/Tooltip text font-weight"
         ]
       },
       {

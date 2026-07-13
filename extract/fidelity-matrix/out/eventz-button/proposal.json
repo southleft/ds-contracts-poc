@@ -4,15 +4,15 @@
     "variant axis \"state\" (default|hover|active|focus) IS the platform's interaction states, not API — promoted: the axis is NOT a prop; anatomy and base facts come from the 8 default-state variant(s); hover→hover, active→active, focus→focus-visible propose root state overrides",
     "Button: 4 state-axis variant(s) wrapped an instance of the set's own base component — flattened before state diffing (same rule as the default variants); their captured componentProperties only FILL defaults of props the base anatomy already discovered",
     "Button:root/startIcon: INSTANCE_SWAP-bound instance without a dedicated wrapper frame — slot proposed without layout, review",
-    "Button:root/startIcon: slot \"startIcon\" holds a \"play\" instance as design-time content — defaultContent not proposed (dump v1 does not carry its configuration), review",
-    "Button:root/startIcon: visibility bound to BOOLEAN \"hasStartIcon\" — proposed as prop `hasStartIcon` (default not recoverable from dump v1, review)",
+    "Button:root/startIcon: slot \"startIcon\" preferredValues name 1 component key(s) with no in-scope contract (b26c053080bd5f845829beb8a434724e954a0008) — not carried into `accepts` (import the referenced set(s) to resolve them by key)",
+    "Button:root/startIcon: slot \"startIcon\" design-time content \"play\" proposed as defaultContent [ds.play] — a STUB rendering the OBSERVED geometry only (dump v1.5 bbox + primary paint; PROVISIONAL — import the real child set to replace it)",
+    "Button:root/startIcon: visibility bound to BOOLEAN \"hasStartIcon\" — proposed as prop `hasStartIcon` (default true: the property definition's defaultValue, dump v1.5)",
     "Button:root/Label: rides text style \"body/sm\" which is not a token-derived style — typography not proposed",
     "Button:root/endIcon: INSTANCE_SWAP-bound instance without a dedicated wrapper frame — slot proposed without layout, review",
-    "Button:root/endIcon: slot \"endIcon\" holds a \"pause\" instance as design-time content — defaultContent not proposed (dump v1 does not carry its configuration), review",
-    "Button:root/endIcon: visibility bound to BOOLEAN \"hasEndIcon\" — proposed as prop `hasEndIcon` (default not recoverable from dump v1, review)",
+    "Button:root/endIcon: slot \"endIcon\" preferredValues name 1 component key(s) with no in-scope contract (b26c053080bd5f845829beb8a434724e954a0008) — not carried into `accepts` (import the referenced set(s) to resolve them by key)",
+    "Button:root/endIcon: slot \"endIcon\" design-time content \"pause\" proposed as defaultContent [ds.pause] — a STUB rendering the OBSERVED geometry only (dump v1.5 bbox + primary paint; PROVISIONAL — import the real child set to replace it)",
+    "Button:root/endIcon: visibility bound to BOOLEAN \"hasEndIcon\" — proposed as prop `hasEndIcon` (default true: the property definition's defaultValue, dump v1.5)",
     "Button:root: node opacity 0.4 rides boolean axis \"isDisabled\" (opaque when false) — proposed as stylesWhen { prop: isDisabled, styles: { opacity } } (dump v1.2)",
-    "prop `hasEndIcon`: default true adopted from the base instance \"Button\" (BOOLEAN property \"hasEndIcon\")",
-    "prop `hasStartIcon`: default true adopted from the base instance \"Button\" (BOOLEAN property \"hasStartIcon\")",
     "base instance \"Button\": property \"variant\" is one of the set's own variant axes (pinned to primary, knockout, secondary, bare in the flattened variant(s)) — not promoted",
     "base instance \"Button\": property \"isDisabled\" is one of the set's own variant axes (pinned to false in the flattened variant(s)) — not promoted",
     "Button:root/Focus ring: drawn only in the focus state and carries a stroke — inverted to focus-visible outline overrides (outline-color/outline-width); its own corner radius is not carried (the outline follows the root's shape + offset), review",
@@ -35,6 +35,8 @@
     "MINTED {imported.button.label.color.secondary} = #252729 — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Button:root/Label color (variant=secondary)",
     "MINTED {imported.button.label.color.bare} = #252729 — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Button:root/Label color (variant=bare)",
     "MINTED {imported.button.label.font-size} = 14px — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Button:root/Label font-size",
+    "MINTED {imported.button.label.font-weight} = 500 — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Button:root/Label font-weight",
+    "MINTED {imported.button.label.line-height} = 20px — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Button:root/Label line-height",
     "MINTED {imported.button.state-hover.background-color.primary} = #2d6079 — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Button:root (state hover) background-color (variant=primary)",
     "MINTED {imported.button.state-hover.background-color.knockout} = #c6c7c6 — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Button:root (state hover) background-color (variant=knockout)",
     "MINTED {imported.button.state-hover.background-color.secondary} = #00000233 — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Button:root (state hover) background-color (variant=secondary)",
@@ -46,6 +48,12 @@
     "MINTED {imported.button.state-focus-visible.outline-color} = #2d6079 — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Button:root (state focus-visible) outline-color",
     "MINTED {imported.button.state-focus-visible.outline-width} = 2px — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Button:root (state focus-visible) outline-width",
     "figmaStatePreviews: true — regenerating the canvas draws the promoted states as a \"State\" preview axis (values Default|Hover|Active|Focus Visible, the shared spelling rules) — a RENAME relative to the imported axis \"state\" (default|hover|active|focus); the contract vocabulary carries no custom state-axis spellings, so the original spelling lives in this note and in the anchors' set",
+    "stub ds.play: renders HONEST OBSERVED GEOMETRY (dump v1.5 bounding box) via minted imported.stub-* tokens — a correctly-sized box, NOT the child's anatomy (still not captured); import the real child set to replace it",
+    "MINTED {imported.stub-play.root.width} = 20px — stub geometry (the \"play\" instances' OBSERVED box/paint, dump v1.5; provisional) — bound at: stub ds.play width",
+    "MINTED {imported.stub-play.root.height} = 20px — stub geometry (the \"play\" instances' OBSERVED box/paint, dump v1.5; provisional) — bound at: stub ds.play height",
+    "stub ds.pause: renders HONEST OBSERVED GEOMETRY (dump v1.5 bounding box) via minted imported.stub-* tokens — a correctly-sized box, NOT the child's anatomy (still not captured); import the real child set to replace it",
+    "MINTED {imported.stub-pause.root.width} = 20px — stub geometry (the \"pause\" instances' OBSERVED box/paint, dump v1.5; provisional) — bound at: stub ds.pause width",
+    "MINTED {imported.stub-pause.root.height} = 20px — stub geometry (the \"pause\" instances' OBSERVED box/paint, dump v1.5; provisional) — bound at: stub ds.pause height",
     "UNBOUND Button:root stroke = #0000021a — no token invented; nearest tokens by value: (none found)"
   ],
   "unbound": [
@@ -57,7 +65,7 @@
     }
   ],
   "minted": {
-    "count": 27,
+    "count": 33,
     "entries": [
       {
         "ref": "{imported.button.root.background-color.primary}",
@@ -179,6 +187,20 @@
         ]
       },
       {
+        "ref": "{imported.button.label.font-weight}",
+        "value": "500",
+        "usageSites": [
+          "Button:root/Label font-weight"
+        ]
+      },
+      {
+        "ref": "{imported.button.label.line-height}",
+        "value": "20px",
+        "usageSites": [
+          "Button:root/Label line-height"
+        ]
+      },
+      {
         "ref": "{imported.button.state-hover.background-color.primary}",
         "value": "#2d6079",
         "usageSites": [
@@ -246,6 +268,34 @@
         "value": "2px",
         "usageSites": [
           "Button:root (state focus-visible) outline-width"
+        ]
+      },
+      {
+        "ref": "{imported.stub-play.root.width}",
+        "value": "20px",
+        "usageSites": [
+          "stub ds.play width"
+        ]
+      },
+      {
+        "ref": "{imported.stub-play.root.height}",
+        "value": "20px",
+        "usageSites": [
+          "stub ds.play height"
+        ]
+      },
+      {
+        "ref": "{imported.stub-pause.root.width}",
+        "value": "20px",
+        "usageSites": [
+          "stub ds.pause width"
+        ]
+      },
+      {
+        "ref": "{imported.stub-pause.root.height}",
+        "value": "20px",
+        "usageSites": [
+          "stub ds.pause height"
         ]
       }
     ]

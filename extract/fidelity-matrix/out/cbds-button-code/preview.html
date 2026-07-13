@@ -336,6 +336,10 @@
 <style>body { margin: 0; padding: 20px; background: #f5f5f5; color: #1a1a1a; font-family: var(--font-family-sans, system-ui, sans-serif); }</style>
 <style>/* Button — from ds.button v0.1.0 (core/emit-html.ts) */
 
+.button, .button *, .button *::before, .button *::after {
+  box-sizing: border-box;
+}
+
 .button {
   display: inline-flex;
   align-items: center;
@@ -480,105 +484,64 @@
   Token values arrive via CSS custom properties (the same custom-property names the CSS Modules
   bind) — include the token stylesheet (src/styles/tokens.css) on the page or nothing resolves.
   Fidelity: no events, no interactivity beyond CSS states (:hover/:focus-visible/:disabled).
-  Slots render their declared defaultContent, else a named placeholder. Booleans render per showcase item.
+  Slots render their declared defaultContent; an empty slot renders its wrapper empty (absent content
+  is absent — named in an inline comment, never painted as placeholder text). Booleans render per showcase item.
 -->
 <section class="showcase showcase--button">
   <div class="showcase__item">
     <p class="showcase__label">default</p>
     <button class="button button--variant-primary button--size-medium">
-      <span class="button__iconLeft">
-        <span class="button__slot-placeholder">[iconLeft slot]</span>
-      </span>
-      <div class="button__children">
-        <span class="button__slot-placeholder">[children slot]</span>
-      </div>
-      <span class="button__iconRight">
-        <span class="button__slot-placeholder">[iconRight slot]</span>
-      </span>
+      <span class="button__iconLeft"><!-- iconLeft slot: no content --></span>
+      <div class="button__children"><!-- children slot: no content --></div>
+      <span class="button__iconRight"><!-- iconRight slot: no content --></span>
     </button>
   </div>
   <div class="showcase__item">
     <p class="showcase__label">variant=surface</p>
     <button class="button button--variant-surface button--size-medium">
-      <span class="button__iconLeft">
-        <span class="button__slot-placeholder">[iconLeft slot]</span>
-      </span>
-      <div class="button__children">
-        <span class="button__slot-placeholder">[children slot]</span>
-      </div>
-      <span class="button__iconRight">
-        <span class="button__slot-placeholder">[iconRight slot]</span>
-      </span>
+      <span class="button__iconLeft"><!-- iconLeft slot: no content --></span>
+      <div class="button__children"><!-- children slot: no content --></div>
+      <span class="button__iconRight"><!-- iconRight slot: no content --></span>
     </button>
   </div>
   <div class="showcase__item">
     <p class="showcase__label">variant=danger</p>
     <button class="button button--variant-danger button--size-medium">
-      <span class="button__iconLeft">
-        <span class="button__slot-placeholder">[iconLeft slot]</span>
-      </span>
-      <div class="button__children">
-        <span class="button__slot-placeholder">[children slot]</span>
-      </div>
-      <span class="button__iconRight">
-        <span class="button__slot-placeholder">[iconRight slot]</span>
-      </span>
+      <span class="button__iconLeft"><!-- iconLeft slot: no content --></span>
+      <div class="button__children"><!-- children slot: no content --></div>
+      <span class="button__iconRight"><!-- iconRight slot: no content --></span>
     </button>
   </div>
   <div class="showcase__item">
     <p class="showcase__label">variant=ghost</p>
     <button class="button button--variant-ghost button--size-medium">
-      <span class="button__iconLeft">
-        <span class="button__slot-placeholder">[iconLeft slot]</span>
-      </span>
-      <div class="button__children">
-        <span class="button__slot-placeholder">[children slot]</span>
-      </div>
-      <span class="button__iconRight">
-        <span class="button__slot-placeholder">[iconRight slot]</span>
-      </span>
+      <span class="button__iconLeft"><!-- iconLeft slot: no content --></span>
+      <div class="button__children"><!-- children slot: no content --></div>
+      <span class="button__iconRight"><!-- iconRight slot: no content --></span>
     </button>
   </div>
   <div class="showcase__item">
     <p class="showcase__label">size=small</p>
     <button class="button button--variant-primary button--size-small">
-      <span class="button__iconLeft">
-        <span class="button__slot-placeholder">[iconLeft slot]</span>
-      </span>
-      <div class="button__children">
-        <span class="button__slot-placeholder">[children slot]</span>
-      </div>
-      <span class="button__iconRight">
-        <span class="button__slot-placeholder">[iconRight slot]</span>
-      </span>
+      <span class="button__iconLeft"><!-- iconLeft slot: no content --></span>
+      <div class="button__children"><!-- children slot: no content --></div>
+      <span class="button__iconRight"><!-- iconRight slot: no content --></span>
     </button>
   </div>
   <div class="showcase__item">
     <p class="showcase__label">size=large</p>
     <button class="button button--variant-primary button--size-large">
-      <span class="button__iconLeft">
-        <span class="button__slot-placeholder">[iconLeft slot]</span>
-      </span>
-      <div class="button__children">
-        <span class="button__slot-placeholder">[children slot]</span>
-      </div>
-      <span class="button__iconRight">
-        <span class="button__slot-placeholder">[iconRight slot]</span>
-      </span>
+      <span class="button__iconLeft"><!-- iconLeft slot: no content --></span>
+      <div class="button__children"><!-- children slot: no content --></div>
+      <span class="button__iconRight"><!-- iconRight slot: no content --></span>
     </button>
   </div>
   <div class="showcase__item">
     <p class="showcase__label">fullWidth=true</p>
     <button class="button button--variant-primary button--size-medium" data-full-width="true">
-      <span class="button__iconLeft">
-        <span class="button__slot-placeholder">[iconLeft slot]</span>
-      </span>
-      <div class="button__children">
-        <span class="button__slot-placeholder">[children slot]</span>
-      </div>
-      <span class="button__iconRight">
-        <span class="button__slot-placeholder">[iconRight slot]</span>
-      </span>
+      <span class="button__iconLeft"><!-- iconLeft slot: no content --></span>
+      <div class="button__children"><!-- children slot: no content --></div>
+      <span class="button__iconRight"><!-- iconRight slot: no content --></span>
     </button>
   </div>
 </section>

@@ -1,7 +1,11 @@
 {
   "notes": [
     "semantics.element defaulted to \"div\" — element/role/ARIA are not drawn on the canvas and the name/axis inference table matched nothing; set the real host element",
+    "Button group:root/Button: nested instance of \"Button\" linked to ds.button by NAME (the instance carries a key but the contract's componentSetKey anchor is null — key confirmation unavailable; verify the link)",
     "Button group:root/Button: fixed props of \"Button\" canonicalized by spelling (dump v1.1) — verify against the child contract's bindings",
+    "Button group:root/Button: applied prop \"variant\" of the nested \"Button\" tracks the \"type\" axis exactly across all 36 occurrence(s) — threaded as \"{type}\" (the child follows the parent per variant)",
+    "Button group:root/Button: applied prop \"size\" of the nested \"Button\" tracks the \"size\" axis exactly across all 36 occurrence(s) — threaded as \"{size}\" (the child follows the parent per variant)",
+    "Button group:root/Button: applied prop \"isPill\" of the nested \"Button\" varies across variants (false, true) without tracking any enum axis — first value \"false\" carried, review",
     "prop `type`: two-value axis [default, primary] kept as an ENUM (both states render truthfully on both surfaces); a code boolean is a compatible code-side binding — see extract/reconcile.ts bool⇄axis treatment",
     "prop `isPill`: true/false variant axis proposed as a boolean (extract/reconcile.ts bool⇄axis rule)",
     "contract name: drawn set name \"Button group\" is not a PascalCase component name — proposed as \"ButtonGroup\" (the canvas set keeps its own name; the componentSetKey/nodeId anchors carry identity)"

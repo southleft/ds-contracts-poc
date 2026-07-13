@@ -4,8 +4,8 @@
   "factCells": 84,
   "tally": {
     "BOUND": 0,
-    "MINTED": 78,
-    "MISSING": 6,
+    "MINTED": 81,
+    "MISSING": 3,
     "mismatched": 0
   },
   "rows": [
@@ -35,8 +35,11 @@
     {
       "part": "Button",
       "fact": "color",
-      "verdict": "MISSING",
+      "verdict": "MINTED",
+      "token": "{imported.button-brand-primary.button-state-disabled.color}",
       "truth": "#556275",
+      "resolved": "#556275",
+      "valueOk": true,
       "variants": [
         "size=large, state=disabled",
         "size=medium, state=disabled",

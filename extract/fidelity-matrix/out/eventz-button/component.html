@@ -3,18 +3,23 @@
   Token values arrive via CSS custom properties (the same custom-property names the CSS Modules
   bind) — include the token stylesheet (src/styles/tokens.css) on the page or nothing resolves.
   Fidelity: no events, no interactivity beyond CSS states (:hover/:focus-visible/:disabled).
-  Slots render their declared defaultContent, else a named placeholder. Booleans render per showcase item.
+  Slots render their declared defaultContent; an empty slot renders its wrapper empty (absent content
+  is absent — named in an inline comment, never painted as placeholder text). Booleans render per showcase item.
 -->
 <section class="showcase showcase--button">
   <div class="showcase__item">
     <p class="showcase__label">default</p>
     <button class="button button--variant-primary" data-has-start-icon="true" data-has-end-icon="true">
       <div class="button__startIcon">
-        <span class="button__slot-placeholder">[startIcon slot]</span>
+        <span class="play">
+
+        </span>
       </div>
       <span class="button__Label">Label</span>
       <div class="button__endIcon">
-        <span class="button__slot-placeholder">[endIcon slot]</span>
+        <span class="pause">
+
+        </span>
       </div>
     </button>
   </div>
@@ -22,11 +27,15 @@
     <p class="showcase__label">variant=knockout</p>
     <button class="button button--variant-knockout" data-has-start-icon="true" data-has-end-icon="true">
       <div class="button__startIcon">
-        <span class="button__slot-placeholder">[startIcon slot]</span>
+        <span class="play">
+
+        </span>
       </div>
       <span class="button__Label">Label</span>
       <div class="button__endIcon">
-        <span class="button__slot-placeholder">[endIcon slot]</span>
+        <span class="pause">
+
+        </span>
       </div>
     </button>
   </div>
@@ -34,11 +43,15 @@
     <p class="showcase__label">variant=secondary</p>
     <button class="button button--variant-secondary" data-has-start-icon="true" data-has-end-icon="true">
       <div class="button__startIcon">
-        <span class="button__slot-placeholder">[startIcon slot]</span>
+        <span class="play">
+
+        </span>
       </div>
       <span class="button__Label">Label</span>
       <div class="button__endIcon">
-        <span class="button__slot-placeholder">[endIcon slot]</span>
+        <span class="pause">
+
+        </span>
       </div>
     </button>
   </div>
@@ -46,11 +59,15 @@
     <p class="showcase__label">variant=bare</p>
     <button class="button button--variant-bare" data-has-start-icon="true" data-has-end-icon="true">
       <div class="button__startIcon">
-        <span class="button__slot-placeholder">[startIcon slot]</span>
+        <span class="play">
+
+        </span>
       </div>
       <span class="button__Label">Label</span>
       <div class="button__endIcon">
-        <span class="button__slot-placeholder">[endIcon slot]</span>
+        <span class="pause">
+
+        </span>
       </div>
     </button>
   </div>
@@ -58,11 +75,15 @@
     <p class="showcase__label">isDisabled=true</p>
     <button class="button button--variant-primary" data-is-disabled="true" data-has-start-icon="true" data-has-end-icon="true">
       <div class="button__startIcon">
-        <span class="button__slot-placeholder">[startIcon slot]</span>
+        <span class="play">
+
+        </span>
       </div>
       <span class="button__Label">Label</span>
       <div class="button__endIcon">
-        <span class="button__slot-placeholder">[endIcon slot]</span>
+        <span class="pause">
+
+        </span>
       </div>
     </button>
   </div>

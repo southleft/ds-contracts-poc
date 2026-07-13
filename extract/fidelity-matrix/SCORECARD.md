@@ -414,3 +414,42 @@ is now AGREE at 14px on both sides. The two facts that left the AGREE column
 (label-color-disabled, font-weight) did not become wrong values: both moved to
 CODE-ONLY with the design side naming its own gap (B7 part-level states; no
 weight identity without a single text style).
+
+## Part-level state overrides addendum — P18 v13, B7 retired (2026-07-13)
+
+Everything above stands as written; this section is additive. The owner hit
+the B7 wall twice: his kit draws the DISABLED button label at
+`{text.disabled}` #556275 on the `{bg.disabled}` #dfe3eb fill, and the
+part-level diff was a named note ("part-level state overrides are outside
+the contract vocabulary (root states only, B7); NAMED, not proposed") — so
+every preview drew the label at the default #fcfeff, near-invisible on the
+disabled background.
+
+`Part.states` is now unlocked BOUNDED (v13): per-state token overrides on
+NON-ref parts, color-kind channels only (color / background-color /
+border-color), refusal-ruled in validateContract (unknown or undeclared
+state names, ref/slot parts, non-color channels — all by name).
+`proposeStateDiffs` PROPOSES depth-1 child color diffs through the same
+occurrence machinery (refs unify; literals mint
+`imported.<comp>.<part>-state-<state>.<channel>`); react + html render
+`.root:disabled .label { color: … }` under the root's state selector; the
+canvas State-preview variants apply part overrides (the drawn
+State=Disabled cell shows the gray label); react-inline documents the
+declared limit. Receipts: `extract/figma/part-state-check.ts`, evals
+`part-level-state-overrides` + `part-state-disabled-label-browser-probe`
+(real-Chromium computed styles: #556275 on #dfe3eb).
+
+Matrix re-scored (replay at HEAD — also picks up font-weight minting and
+the Eventz/Shoelace shifts named in pairs-notes):
+
+| measure | before | after |
+|---|---|---|
+| D. CBDS design styles | 84: 78 MINTED, 6 MISSING (disabled label B7 ×3 + focus-ring radius ×3), 0 mismatched | 84: **81 MINTED**, 3 MISSING (focus-ring radius only, named by design), 0 mismatched |
+| D-convergence facts | 15 AGREE / 0 DIVERGE / 4 CODE-ONLY | **16 AGREE / 1 DIVERGE / 2 CODE-ONLY** |
+| label color (disabled) | CODE-ONLY (design silent, B7 note) | **DIVERGE — design #556275 vs code #738094**: a REAL kit↔code drift, visible for the first time because both sides finally speak; surfaced, not smoothed |
+| font-weight | CODE-ONLY (named: no weight identity) | AGREE (600 — design mints weights since the font-weight minting) |
+
+The remaining named residue of B7: component-ref/slot children (the child
+contract owns its styling — narrow notes) and CSS→contract inversion of the
+`.root:disabled .part` selector shape (the code extractor's note now names
+the v13 vocabulary instead of denying it exists).

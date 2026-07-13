@@ -301,15 +301,21 @@
   --imported-button-brand-primary-button-font-size-large: 16px;
   --imported-button-brand-primary-button-font-size-medium: 16px;
   --imported-button-brand-primary-button-font-size-small: 14px;
+  --imported-button-brand-primary-button-font-weight: 600;
   --imported-button-brand-primary-state-hover-background-color: #003e81;
   --imported-button-brand-primary-state-focus-visible-outline-color: #0e61ba;
   --imported-button-brand-primary-state-focus-visible-outline-width: 2px;
   --imported-button-brand-primary-state-active-background-color: #002854;
   --imported-button-brand-primary-state-disabled-background-color: #dfe3eb;
+  --imported-button-brand-primary-button-state-disabled-color: #556275;
   --imported-shared-size-8: 8px;
 }</style>
 <style>body { margin: 0; padding: 20px; background: #f5f5f5; color: #1a1a1a; font-family: var(--font-family-sans, system-ui, sans-serif); }</style>
 <style>/* Icon — from ds.icon v0.1.0 (core/emit-html.ts) */
+
+.icon, .icon *, .icon *::before, .icon *::after {
+  box-sizing: border-box;
+}
 
 .icon {
   display: inline-flex;
@@ -319,6 +325,10 @@
 }
 
 /* ButtonBrandPrimary — from ds.button-brand-primary v0.1.0 (core/emit-html.ts) */
+
+.button-brand-primary, .button-brand-primary *, .button-brand-primary *::before, .button-brand-primary *::after {
+  box-sizing: border-box;
+}
 
 .button-brand-primary {
   display: inline-flex;
@@ -375,6 +385,7 @@
 
 .button-brand-primary__Button {
   color: var(--imported-button-brand-primary-button-color);
+  font-weight: var(--imported-button-brand-primary-button-font-weight);
 }
 
 .button-brand-primary--size-large .button-brand-primary__Button {
@@ -389,6 +400,10 @@
   font-size: var(--imported-button-brand-primary-button-font-size-small);
 }
 
+.button-brand-primary:disabled .button-brand-primary__Button {
+  color: var(--imported-button-brand-primary-button-state-disabled-color);
+}
+
 /* showcase chrome */
 .showcase { display: flex; flex-direction: column; gap: 24px; align-items: flex-start; font-family: sans-serif; }
 .showcase__label { margin: 0 0 8px; font: 12px/1 monospace; opacity: 0.6; }
@@ -399,7 +414,8 @@
   Token values arrive via CSS custom properties (the same custom-property names the CSS Modules
   bind) — include the token stylesheet (src/styles/tokens.css) on the page or nothing resolves.
   Fidelity: no events, no interactivity beyond CSS states (:hover/:focus-visible/:disabled).
-  Slots render their declared defaultContent, else a named placeholder. Booleans render per showcase item.
+  Slots render their declared defaultContent; an empty slot renders its wrapper empty (absent content
+  is absent — named in an inline comment, never painted as placeholder text). Booleans render per showcase item.
 -->
 <section class="showcase showcase--button-brand-primary">
   <div class="showcase__item">
@@ -424,7 +440,7 @@
     <p class="showcase__label">iconLeft=true</p>
     <button class="button-brand-primary button-brand-primary--size-large" data-icon-left="true">
       <span class="icon icon--size-large">
-        Icon
+
       </span>
       <span class="button-brand-primary__Button">Button</span>
     </button>
@@ -434,7 +450,7 @@
     <button class="button-brand-primary button-brand-primary--size-large" data-icon-right="true">
       <span class="button-brand-primary__Button">Button</span>
       <span class="icon icon--size-large">
-        Icon
+
       </span>
     </button>
   </div>

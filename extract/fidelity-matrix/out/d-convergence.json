@@ -59,10 +59,10 @@
     }
   ],
   "factTally": {
-    "AGREE": 15,
-    "DIVERGE": 0,
+    "AGREE": 16,
+    "DIVERGE": 1,
     "DESIGN-ONLY": 0,
-    "CODE-ONLY": 4
+    "CODE-ONLY": 2
   },
   "factRows": [
     {
@@ -109,12 +109,12 @@
     },
     {
       "fact": "label color (disabled)",
-      "designRef": null,
+      "designRef": "{imported.button-brand-primary.button-state-disabled.color}",
       "codeRef": "{imported.button.root.disabled.color}",
-      "design": null,
+      "design": "#556275",
       "code": "#738094",
-      "verdict": "CODE-ONLY",
-      "note": "design side NAMES the gap: part-level state overrides are outside the contract vocabulary (STYLE-FIDELITY B7 — proposal note on Button fill in state \"disabled\"); never a silently wrong value"
+      "verdict": "DIVERGE",
+      "note": "SAME mechanism now (P18 v13 — B7 retired): the drawn disabled label fill PROPOSES as a part-level state override (Part.states on the label part) ≡ code `.root:disabled .label { color }`. Both sides finally SPEAK — and they genuinely DISAGREE: the kit draws #556275, the shipped CSS uses #738094. A REAL design↔code drift the matrix could not see while the design side was silent (was CODE-ONLY under B7); surfaced, not smoothed"
     },
     {
       "fact": "border-radius",
@@ -184,12 +184,12 @@
     },
     {
       "fact": "font-weight",
-      "designRef": null,
+      "designRef": "{imported.button-brand-primary.button.font-weight}",
       "codeRef": "{imported.button.root.font-weight}",
-      "design": null,
+      "design": "600",
       "code": "600",
-      "verdict": "CODE-ONLY",
-      "note": "design side NAMES the gap: weight \"Semi Bold\" has no token identity once per-size typography rules out a single style adoption (proposal note) — named, never a guessed constant"
+      "verdict": "AGREE",
+      "note": "design side now MINTS the weight (600 — the font-weight minting shipped after the original matrix run); previously NAMED-only (\"Semi Bold\" had no token identity)"
     },
     {
       "fact": "focus ring color",

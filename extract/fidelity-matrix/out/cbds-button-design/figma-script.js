@@ -6,7 +6,7 @@ const DESCRIPTION = "PROPOSED contract extracted from the design canvas (extract
 const IS_SET = true;
 const BOOL_PROPS = [{"property":"↪️icon-left","default":false},{"property":"↪️icon-right","default":false},{"property":"Disabled","default":false}];
 const TEXT_PROPS = [];
-const FONT_STYLES = ["Medium"];
+const FONT_STYLES = ["Medium","Semi Bold"];
 const VARIANTS = [
   {
     "name": "size=large",
@@ -48,7 +48,7 @@ const VARIANTS = [
           "name": "Button",
           "characters": "Button",
           "fontSize": 16,
-          "fontStyle": "Medium",
+          "fontStyle": "Semi Bold",
           "textFill": "imported/button-brand-primary/button/color",
           "contentProp": "✏️text"
         },
@@ -105,7 +105,7 @@ const VARIANTS = [
           "name": "Button",
           "characters": "Button",
           "fontSize": 16,
-          "fontStyle": "Medium",
+          "fontStyle": "Semi Bold",
           "textFill": "imported/button-brand-primary/button/color",
           "contentProp": "✏️text"
         },
@@ -162,7 +162,7 @@ const VARIANTS = [
           "name": "Button",
           "characters": "Button",
           "fontSize": 14,
-          "fontStyle": "Medium",
+          "fontStyle": "Semi Bold",
           "textFill": "imported/button-brand-primary/button/color",
           "contentProp": "✏️text"
         },
@@ -222,7 +222,7 @@ const STATE_VARIANTS = [
           "name": "Button",
           "characters": "Button",
           "fontSize": 16,
-          "fontStyle": "Medium",
+          "fontStyle": "Semi Bold",
           "textFill": "imported/button-brand-primary/button/color",
           "contentProp": "✏️text"
         },
@@ -279,7 +279,7 @@ const STATE_VARIANTS = [
           "name": "Button",
           "characters": "Button",
           "fontSize": 16,
-          "fontStyle": "Medium",
+          "fontStyle": "Semi Bold",
           "textFill": "imported/button-brand-primary/button/color",
           "contentProp": "✏️text"
         },
@@ -336,7 +336,7 @@ const STATE_VARIANTS = [
           "name": "Button",
           "characters": "Button",
           "fontSize": 14,
-          "fontStyle": "Medium",
+          "fontStyle": "Semi Bold",
           "textFill": "imported/button-brand-primary/button/color",
           "contentProp": "✏️text"
         },
@@ -393,7 +393,7 @@ const STATE_VARIANTS = [
           "name": "Button",
           "characters": "Button",
           "fontSize": 16,
-          "fontStyle": "Medium",
+          "fontStyle": "Semi Bold",
           "textFill": "imported/button-brand-primary/button/color",
           "contentProp": "✏️text"
         },
@@ -450,7 +450,7 @@ const STATE_VARIANTS = [
           "name": "Button",
           "characters": "Button",
           "fontSize": 16,
-          "fontStyle": "Medium",
+          "fontStyle": "Semi Bold",
           "textFill": "imported/button-brand-primary/button/color",
           "contentProp": "✏️text"
         },
@@ -507,7 +507,7 @@ const STATE_VARIANTS = [
           "name": "Button",
           "characters": "Button",
           "fontSize": 14,
-          "fontStyle": "Medium",
+          "fontStyle": "Semi Bold",
           "textFill": "imported/button-brand-primary/button/color",
           "contentProp": "✏️text"
         },
@@ -566,7 +566,7 @@ const STATE_VARIANTS = [
           "name": "Button",
           "characters": "Button",
           "fontSize": 16,
-          "fontStyle": "Medium",
+          "fontStyle": "Semi Bold",
           "textFill": "imported/button-brand-primary/button/color",
           "contentProp": "✏️text"
         },
@@ -625,7 +625,7 @@ const STATE_VARIANTS = [
           "name": "Button",
           "characters": "Button",
           "fontSize": 16,
-          "fontStyle": "Medium",
+          "fontStyle": "Semi Bold",
           "textFill": "imported/button-brand-primary/button/color",
           "contentProp": "✏️text"
         },
@@ -684,7 +684,7 @@ const STATE_VARIANTS = [
           "name": "Button",
           "characters": "Button",
           "fontSize": 14,
-          "fontStyle": "Medium",
+          "fontStyle": "Semi Bold",
           "textFill": "imported/button-brand-primary/button/color",
           "contentProp": "✏️text"
         },
@@ -741,8 +741,8 @@ const STATE_VARIANTS = [
           "name": "Button",
           "characters": "Button",
           "fontSize": 16,
-          "fontStyle": "Medium",
-          "textFill": "imported/button-brand-primary/button/color",
+          "fontStyle": "Semi Bold",
+          "textFill": "imported/button-brand-primary/button-state-disabled/color",
           "contentProp": "✏️text"
         },
         {
@@ -798,8 +798,8 @@ const STATE_VARIANTS = [
           "name": "Button",
           "characters": "Button",
           "fontSize": 16,
-          "fontStyle": "Medium",
-          "textFill": "imported/button-brand-primary/button/color",
+          "fontStyle": "Semi Bold",
+          "textFill": "imported/button-brand-primary/button-state-disabled/color",
           "contentProp": "✏️text"
         },
         {
@@ -855,8 +855,8 @@ const STATE_VARIANTS = [
           "name": "Button",
           "characters": "Button",
           "fontSize": 14,
-          "fontStyle": "Medium",
-          "textFill": "imported/button-brand-primary/button/color",
+          "fontStyle": "Semi Bold",
+          "textFill": "imported/button-brand-primary/button-state-disabled/color",
           "contentProp": "✏️text"
         },
         {
@@ -920,14 +920,14 @@ for (const page of figma.root.children) {
 
 // ---------------------------------------------------------------------------
 // PROVISIONAL VARIABLES — minted from resolved values by a degraded import.
-// This contract binds 14 provisional token(s) whose real variable names were
+// This contract binds 16 provisional token(s) whose real variable names were
 // unrecoverable, so this section upserts each one as a Figma variable in a
 // collection named 'Imported (provisional)' — idempotent by name, within that
 // collection only — before the bindings below look anything up. The values
 // are literal-fidelity stand-ins, not your design vocabulary: rename them
 // against your real tokens when you adopt the contract.
 // ---------------------------------------------------------------------------
-const MINTED_VARIABLES = [{"name":"imported/button-brand-primary/root/background-color","type":"COLOR","value":"#0e61ba"},{"name":"imported/button-brand-primary/root/padding-inline/large","type":"FLOAT","value":16},{"name":"imported/button-brand-primary/root/padding-inline/medium","type":"FLOAT","value":16},{"name":"imported/button-brand-primary/root/padding-inline/small","type":"FLOAT","value":12},{"name":"imported/button-brand-primary/button/color","type":"COLOR","value":"#fcfeff"},{"name":"imported/button-brand-primary/button/font-size/large","type":"FLOAT","value":16},{"name":"imported/button-brand-primary/button/font-size/medium","type":"FLOAT","value":16},{"name":"imported/button-brand-primary/button/font-size/small","type":"FLOAT","value":14},{"name":"imported/button-brand-primary/state-hover/background-color","type":"COLOR","value":"#003e81"},{"name":"imported/button-brand-primary/state-focus-visible/outline-color","type":"COLOR","value":"#0e61ba"},{"name":"imported/button-brand-primary/state-focus-visible/outline-width","type":"FLOAT","value":2},{"name":"imported/button-brand-primary/state-active/background-color","type":"COLOR","value":"#002854"},{"name":"imported/button-brand-primary/state-disabled/background-color","type":"COLOR","value":"#dfe3eb"},{"name":"imported/shared/size-8","type":"FLOAT","value":8}];
+const MINTED_VARIABLES = [{"name":"imported/button-brand-primary/root/background-color","type":"COLOR","value":"#0e61ba"},{"name":"imported/button-brand-primary/root/padding-inline/large","type":"FLOAT","value":16},{"name":"imported/button-brand-primary/root/padding-inline/medium","type":"FLOAT","value":16},{"name":"imported/button-brand-primary/root/padding-inline/small","type":"FLOAT","value":12},{"name":"imported/button-brand-primary/button/color","type":"COLOR","value":"#fcfeff"},{"name":"imported/button-brand-primary/button/font-size/large","type":"FLOAT","value":16},{"name":"imported/button-brand-primary/button/font-size/medium","type":"FLOAT","value":16},{"name":"imported/button-brand-primary/button/font-size/small","type":"FLOAT","value":14},{"name":"imported/button-brand-primary/button/font-weight","type":"FLOAT","value":600},{"name":"imported/button-brand-primary/state-hover/background-color","type":"COLOR","value":"#003e81"},{"name":"imported/button-brand-primary/state-focus-visible/outline-color","type":"COLOR","value":"#0e61ba"},{"name":"imported/button-brand-primary/state-focus-visible/outline-width","type":"FLOAT","value":2},{"name":"imported/button-brand-primary/state-active/background-color","type":"COLOR","value":"#002854"},{"name":"imported/button-brand-primary/state-disabled/background-color","type":"COLOR","value":"#dfe3eb"},{"name":"imported/button-brand-primary/button-state-disabled/color","type":"COLOR","value":"#556275"},{"name":"imported/shared/size-8","type":"FLOAT","value":8}];
 {
   // Minted colors may be 8-digit hex (paint opacity captured by dump v1.1) —
   // Figma COLOR variables accept RGBA, so the alpha channel survives.

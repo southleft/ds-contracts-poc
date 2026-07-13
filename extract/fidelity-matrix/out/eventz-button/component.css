@@ -1,4 +1,38 @@
+/* Play — from ds.play v0.1.0 (core/emit-html.ts) */
+
+.play, .play *, .play *::before, .play *::after {
+  box-sizing: border-box;
+}
+
+.play {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  width: var(--imported-stub-play-root-width);
+  height: var(--imported-stub-play-root-height);
+}
+
+/* Pause — from ds.pause v0.1.0 (core/emit-html.ts) */
+
+.pause, .pause *, .pause *::before, .pause *::after {
+  box-sizing: border-box;
+}
+
+.pause {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  width: var(--imported-stub-pause-root-width);
+  height: var(--imported-stub-pause-root-height);
+}
+
 /* Button — from ds.button v0.1.0 (core/emit-html.ts) */
+
+.button, .button *, .button *::before, .button *::after {
+  box-sizing: border-box;
+}
 
 .button {
   display: inline-flex;
@@ -87,6 +121,8 @@
 
 .button__Label {
   font-size: var(--imported-button-label-font-size);
+  font-weight: var(--imported-button-label-font-weight);
+  line-height: var(--imported-button-label-line-height);
 }
 
 .button--variant-primary .button__Label {

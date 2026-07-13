@@ -1,5 +1,9 @@
 /* Button — from ds.button v0.1.0 (core/emit-html.ts) */
 
+.button, .button *, .button *::before, .button *::after {
+  box-sizing: border-box;
+}
+
 .button {
   display: inline-flex;
   align-items: center;

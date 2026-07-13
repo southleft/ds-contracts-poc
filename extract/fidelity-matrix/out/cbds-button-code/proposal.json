@@ -1,6 +1,7 @@
 {
   "notes": [
     "anatomy EXTRACTED from JSX + CSS Module — 4 part(s), 10 token binding(s), 1 raw value(s) reported. Anatomy is human-REVIEWED: check it against design intent before adoption.",
+    "props type composes named reference(s) [React.ButtonHTMLAttributes<HTMLButtonElement>] whose members are outside module scope — those props are NOT carried (single-file extraction)",
     "prop `variant`: type resolved heuristically — review",
     "prop `variant`: figma binding INFERRED as VARIANT \"Variant\" — confirm against the design library (reconcile step)",
     "prop `size`: type resolved heuristically — review",

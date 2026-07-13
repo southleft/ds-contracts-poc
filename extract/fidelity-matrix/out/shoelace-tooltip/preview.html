@@ -300,6 +300,7 @@
   --imported-tooltip-body-content-border-radius: 4px;
   --imported-tooltip-body-content-tooltip-text-color: #ffffff;
   --imported-tooltip-body-content-tooltip-text-font-size: 14px;
+  --imported-tooltip-body-content-tooltip-text-font-weight: 400;
   --imported-tooltip-arrow-wrapper-padding-inline-left: 0px;
   --imported-tooltip-arrow-wrapper-padding-inline-topleft: 16px;
   --imported-tooltip-arrow-wrapper-padding-inline-bottomleft: 16px;
@@ -312,6 +313,10 @@
 }</style>
 <style>body { margin: 0; padding: 20px; background: #f5f5f5; color: #1a1a1a; font-family: var(--font-family-sans, system-ui, sans-serif); }</style>
 <style>/* Tooltip — from ds.tooltip v0.1.0 (core/emit-html.ts) */
+
+.tooltip, .tooltip *, .tooltip *::before, .tooltip *::after {
+  box-sizing: border-box;
+}
 
 .tooltip {
   display: flex;
@@ -370,6 +375,7 @@
 .tooltip__tooltipText {
   color: var(--imported-tooltip-body-content-tooltip-text-color);
   font-size: var(--imported-tooltip-body-content-tooltip-text-font-size);
+  font-weight: var(--imported-tooltip-body-content-tooltip-text-font-weight);
 }
 
 .tooltip__arrowWrapper {
@@ -425,7 +431,8 @@
   Token values arrive via CSS custom properties (the same custom-property names the CSS Modules
   bind) — include the token stylesheet (src/styles/tokens.css) on the page or nothing resolves.
   Fidelity: no events, no interactivity beyond CSS states (:hover/:focus-visible/:disabled).
-  Slots render their declared defaultContent, else a named placeholder. Booleans render per showcase item.
+  Slots render their declared defaultContent; an empty slot renders its wrapper empty (absent content
+  is absent — named in an inline comment, never painted as placeholder text). Booleans render per showcase item.
 -->
 <section class="showcase showcase--tooltip">
   <div class="showcase__item">
