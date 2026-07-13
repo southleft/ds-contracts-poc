@@ -18,7 +18,20 @@
  *   idByName  entry display name (the DRAWN set name) AND contract.name → id
  */
 import { ContractSchema, type Contract } from '../../../core/index.js';
+import type { CapturedTokenLayer, MintedTokenLayer } from './token-source.js';
 import { workspaceSnapshot, type WorkspaceEntry } from './workspace.js';
+
+/** One workspace entry's import token layers, keyed by its parsed contract
+ *  id — the linked-child token scope (linked-scope.ts) resolves through
+ *  these, so a LINKED contract's own imported.* mints and captured variables
+ *  ride every surface that renders it inside a later import. */
+export interface SessionEntryLayers {
+  /** The entry's display name — the DRAWN set name ("Button-Brand Primary"),
+   *  the spelling the cross-layer receipt line uses. */
+  name: string;
+  minted: MintedTokenLayer | null;
+  captured: CapturedTokenLayer | null;
+}
 
 export interface SessionRegistry {
   /** Parsed contracts of every workspace entry, by id (newest entry wins on
@@ -33,6 +46,13 @@ export interface SessionRegistry {
    *  component — collisions only between re-imports of the same name, where
    *  the newest wins by ORDER of application). */
   mintedTrees: Array<Record<string, unknown>>;
+  /** Captured-token layers, oldest first — the designer's real variables
+   *  that rode earlier imports (dump v1.4 `_variables`). The preview docs
+   *  inject their CSS BEFORE the base stylesheets, so the base source keeps
+   *  winning on name collision (the composeCaptured shadow rule). */
+  capturedLayers: CapturedTokenLayer[];
+  /** Per-contract import layers (newest entry wins) — see SessionEntryLayers. */
+  layersByContractId: Map<string, SessionEntryLayers>;
 }
 
 /** Parse cache — workspace entries are immutable by id. */
@@ -67,6 +87,8 @@ export function buildSessionRegistry(entries: WorkspaceEntry[]): SessionRegistry
     idByName: new Map(),
     idByKey: new Map(),
     mintedTrees: [],
+    capturedLayers: [],
+    layersByContractId: new Map(),
   };
   for (const entry of [...entries].reverse()) {
     const { contract, stubs } = parseEntry(entry);
@@ -74,8 +96,16 @@ export function buildSessionRegistry(entries: WorkspaceEntry[]): SessionRegistry
     if (entry.mintedTokens && entry.mintedTokens.count > 0) {
       registry.mintedTrees.push(entry.mintedTokens.tree);
     }
+    if (entry.capturedTokens && entry.capturedTokens.count > 0) {
+      registry.capturedLayers.push(entry.capturedTokens);
+    }
     if (!contract) continue;
     registry.contracts.set(contract.id, contract);
+    registry.layersByContractId.set(contract.id, {
+      name: entry.name || contract.name,
+      minted: entry.mintedTokens && entry.mintedTokens.count > 0 ? entry.mintedTokens : null,
+      captured: entry.capturedTokens && entry.capturedTokens.count > 0 ? entry.capturedTokens : null,
+    });
     // BOTH spellings index the id: the workspace entry's display name is the
     // DRAWN set name ("Button-Brand Primary"), the parsed contract's name is
     // the sanitized export ("ButtonBrandPrimary") — nested instances are

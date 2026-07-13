@@ -1484,6 +1484,37 @@ const cases: Case[] = [
     },
   },
   {
+    // CROSS-IMPORT MINTED-TOKEN SCOPE (owner field case, two-import session):
+    // import Button-Brand Primary (typography mints imported.*), then import
+    // Dialog — session linking links the action button, and the CANVAS used
+    // to refuse 'Cannot resolve token "imported.button-brand-primary.button.
+    // font-size.large"' (the composite batch carried earlier minted layers
+    // as CSS text only; the engine resolves literals through the token TREE).
+    // The receipt replays the exact session: control refusal BY NAME, then
+    // linkedImportScope compiles every surface with zero refusals and the
+    // labeled cross-layer receipt line.
+    id: 'cross-import-token-scope',
+    claim: 'C5-extraction',
+    run: () => {
+      const r = run(TSX, ['extract/figma/cross-import-check.ts']);
+      if (r.status !== 0) throw new Error(`cross-import receipt failed:\n${r.out}`);
+      for (const line of [
+        "✔ WITHOUT the scope, compiling the linked button refuses with the owner's exact message",
+        '✔ the CANVAS compiles: dialog 4 variants',
+        '✔ the LINKED button compiles too: 3 size variants',
+        "✔ the cross-layer receipt line is present and labeled: 'resolving through Button-Brand Primary's imported tokens — N'",
+        '✔ referee (generateCss over the scoped inventory): zero violations (got 0)',
+        '✔ react (css modules) emits with ZERO refusals',
+        '✔ html (preview surface) emits with ZERO refusals',
+        '✔ react-inline (literal resolution through the scoped tree) emits with ZERO refusals',
+        '✔ figma script (engine over the scoped tree) emits with ZERO refusals',
+        "✔ the figma script's minted preamble upserts the LINKED button's minted variables too",
+      ]) {
+        if (!r.out.includes(line)) throw new Error(`missing check: ${line}`);
+      }
+    },
+  },
+  {
     // COMPOSITE CHILDREN, mechanism 2 (dump v1.5): a child with no contract
     // in scope renders its OBSERVED bounding box + primary paint as minted
     // imported.stub-* tokens (per-variant via the stub's own axes; parent

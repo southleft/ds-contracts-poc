@@ -36,6 +36,7 @@
     "extract:figma:canvas:check": "tsx extract/figma/canvas-box-check.ts",
     "extract:figma:dialog:check": "tsx extract/figma/dialog-check.ts",
     "extract:figma:composite:check": "tsx extract/figma/composite-check.ts",
+    "extract:figma:cross:check": "tsx extract/figma/cross-import-check.ts",
     "extract:figma:tooltip:check": "tsx extract/figma/tooltip-check.ts",
     "extract:figma:overlap:check": "tsx extract/figma/overlap-check.ts",
     "extract:figma:repeat:check": "tsx extract/figma/repeat-collection-check.ts",
