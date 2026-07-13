@@ -1484,6 +1484,121 @@ const cases: Case[] = [
     },
   },
   {
+    // CROSS-IMPORT MINTED-TOKEN SCOPE (owner field case, two-import session):
+    // import Button-Brand Primary (typography mints imported.*), then import
+    // Dialog — session linking links the action button, and the CANVAS used
+    // to refuse 'Cannot resolve token "imported.button-brand-primary.button.
+    // font-size.large"' (the composite batch carried earlier minted layers
+    // as CSS text only; the engine resolves literals through the token TREE).
+    // The receipt replays the exact session: control refusal BY NAME, then
+    // linkedImportScope compiles every surface with zero refusals and the
+    // labeled cross-layer receipt line.
+    id: 'cross-import-token-scope',
+    claim: 'C5-extraction',
+    run: () => {
+      const r = run(TSX, ['extract/figma/cross-import-check.ts']);
+      if (r.status !== 0) throw new Error(`cross-import receipt failed:\n${r.out}`);
+      for (const line of [
+        "✔ WITHOUT the scope, compiling the linked button refuses with the owner's exact message",
+        '✔ the CANVAS compiles: dialog 4 variants',
+        '✔ the LINKED button compiles too: 3 size variants',
+        "✔ the cross-layer receipt line is present and labeled: 'resolving through Button-Brand Primary's imported tokens — N'",
+        '✔ referee (generateCss over the scoped inventory): zero violations (got 0)',
+        '✔ react (css modules) emits with ZERO refusals',
+        '✔ html (preview surface) emits with ZERO refusals',
+        '✔ react-inline (literal resolution through the scoped tree) emits with ZERO refusals',
+        '✔ figma script (engine over the scoped tree) emits with ZERO refusals',
+        "✔ the figma script's minted preamble upserts the LINKED button's minted variables too",
+      ]) {
+        if (!r.out.includes(line)) throw new Error(`missing check: ${line}`);
+      }
+    },
+  },
+  {
+    // PART-LEVEL STATE OVERRIDES (P18 second half, v13 — B7 retired; owner
+    // hit it twice): his kit draws the disabled button LABEL at #556275
+    // ({text.disabled}) on the #dfe3eb fill; the diff used to be the B7
+    // named note and the preview drew the default #fcfeff — near-invisible.
+    // Part.states now carries it (color-kind channels, non-ref parts,
+    // refusal-ruled), the proposer PROPOSES depth-1 diffs, and every
+    // surface renders it — including a refusal case per rule.
+    id: 'part-level-state-overrides',
+    claim: 'C5-extraction',
+    run: () => {
+      const r = run(TSX, ['extract/figma/part-state-check.ts']);
+      if (r.status !== 0) throw new Error(`part-state receipt failed:\n${r.out}`);
+      for (const line of [
+        '✔ the label part carries states.disabled.color = {text.disabled} (his real bound variable)',
+        '✔ the blanket B7 receipt is GONE from the notes (retired where the channel carries)',
+        '✔ unknown state name refuses BY NAME ("sparkle" is not a STATE_SELECTORS state)',
+        '✔ an UNDECLARED state refuses (states.hover on the part with `states: ["disabled"]` on the contract)',
+        '✔ a non-color channel refuses BY NAME (font-size is not a part-state channel)',
+        '✔ a component-ref part refuses (the child contract owns its styling)',
+        '✔ css-modules: .root:disabled .Button { color: var(--text-disabled) } (descendant rule under the root state selector)',
+        '✔ emit-html: .button-brand-primary:disabled .button-brand-primary__Button { color: var(--text-disabled) }',
+        '✔ EVERY State=Disabled cell draws the label bound to text/disabled (the gray label) on the bg/disabled fill',
+        '✔ the base variants keep the default label fill (text/inverse-primary — overrides never leak out of the state cells)',
+      ]) {
+        if (!r.out.includes(line)) throw new Error(`missing check: ${line}`);
+      }
+    },
+  },
+  {
+    // BROWSER PROBE — the owner's exact complaint, pixel-truth: toggle
+    // disabled in the preview and the label must COMPUTE #556275 on the
+    // #dfe3eb fill (his captured {text.disabled} / {bg.disabled} values),
+    // via the same emitHtml + captured/minted stylesheet pipeline the
+    // playground preview assembles. Real Chromium, getComputedStyle.
+    id: 'part-state-disabled-label-browser-probe',
+    claim: 'C1-determinism',
+    run: () => {
+      const probe = run(TSX, ['-e', `
+        import fs from 'node:fs';
+        import path from 'node:path';
+        import { chromium } from 'playwright-core';
+        import { chromiumExecutable } from './extract/figma/visual-parity/render.ts';
+        import { ContractSchema } from './scripts/contract-schema.ts';
+        import { loadTokenCorpus } from './extract/figma/tokens.ts';
+        import { loadContracts } from './extract/figma/propose.ts';
+        import { proposeBatchFromDump } from './core/propose-figma.ts';
+        import { capturedTokensFromDump } from './core/captured-tokens.ts';
+        import { emitHtml } from './core/emit-html.ts';
+        import { mintedTokenCss } from './core/mint-tokens.ts';
+        import { tokenInventoryFromJson } from './core/tokens.ts';
+        const j = (p) => JSON.parse(fs.readFileSync(p, 'utf8'));
+        const corpus = loadTokenCorpus(process.cwd());
+        const loaded = loadContracts(path.resolve('contracts'));
+        const dump = j('extract/figma/fixtures/cbds-plugin-button-brand-primary.dump.json');
+        const batch = proposeBatchFromDump(dump, { corpus, contractIdByName: loaded.byName, contractsById: loaded.byId, fileKey: 'WofZT8xaxXuc2Q6Je9S4XE', mintUnbound: true });
+        const p = batch.proposals[0];
+        const c = ContractSchema.parse(p.contract);
+        const contracts = new Map([[c.id, c]]);
+        for (const s of p.childStubs ?? []) { const sc = ContractSchema.parse(s); contracts.set(sc.id, sc); }
+        const captured = capturedTokensFromDump(dump);
+        const inv = tokenInventoryFromJson([j('tokens/primitives.tokens.json'), j('tokens/semantic.tokens.json'), j('tokens/modes/semantic.light.tokens.json'), j('tokens/modes/semantic.dark.tokens.json'), captured.tree, p.mintedTokens?.tree ?? {}]);
+        const emitted = emitHtml(c, { tokens: inv, icons: new Map(), contracts });
+        // The playground preview stylesheet layering: captured + minted token
+        // custom properties, then the emitted component CSS.
+        const doc = '<!doctype html><html><head><meta charset="utf-8"><style>' + mintedTokenCss(captured.tree) + '\\n' + mintedTokenCss(p.mintedTokens?.tree ?? {}) + '</style><style>body{margin:0;padding:32px}</style><style>' + emitted.css + '</style></head><body>' + emitted.html + '</body></html>';
+        (async () => {
+          const browser = await chromium.launch({ executablePath: chromiumExecutable(), headless: true });
+          try {
+            const page = await browser.newPage();
+            await page.setContent(doc, { waitUntil: 'load' });
+            const r = await page.evaluate("(() => { const toHex = (rgb) => '#' + rgb.match(/\\\\d+/g).slice(0,3).map((n) => (+n).toString(16).padStart(2,'0')).join(''); const items = [...document.querySelectorAll('.showcase__item')]; const disabledItem = items.find((it) => it.querySelector('.button-brand-primary:disabled')); const el = disabledItem.querySelector('.button-brand-primary'); const label = el.querySelector('.button-brand-primary__Button'); const defaultEl = items[0].querySelector('.button-brand-primary'); const defaultLabel = defaultEl.querySelector('.button-brand-primary__Button'); return { bg: toHex(getComputedStyle(el).backgroundColor), label: toHex(getComputedStyle(label).color), defaultLabel: toHex(getComputedStyle(defaultLabel).color) }; })()");
+            if (r.bg !== '#dfe3eb') throw new Error('disabled fill computed ' + r.bg + ', expected #dfe3eb ({bg.disabled})');
+            if (r.label !== '#556275') throw new Error('disabled label computed ' + r.label + ', expected #556275 ({text.disabled}) — the near-invisible-label class');
+            if (r.defaultLabel !== '#fcfeff') throw new Error('default label computed ' + r.defaultLabel + ', expected #fcfeff ({text.inverse-primary})');
+            console.log('disabled label computes #556275 on #dfe3eb; default label stays #fcfeff');
+          } finally { await browser.close(); }
+        })().catch((e) => { console.error(e); process.exit(1); });
+      `]);
+      if (probe.status !== 0 || !probe.out.includes('disabled label computes #556275 on #dfe3eb; default label stays #fcfeff')) {
+        throw new Error(`disabled-label browser probe failed:\n${probe.out}`);
+      }
+    },
+  },
+  {
     // COMPOSITE CHILDREN, mechanism 2 (dump v1.5): a child with no contract
     // in scope renders its OBSERVED bounding box + primary paint as minted
     // imported.stub-* tokens (per-variant via the stub's own axes; parent

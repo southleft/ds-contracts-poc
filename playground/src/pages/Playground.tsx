@@ -70,6 +70,8 @@ import {
   type MintedTokenLayer,
 } from '../engine/token-source';
 import { locateJsonParseError, resolveIssueLines } from '../engine/refusal-lines';
+import { applyLinkedScope, linkedImportScope, mergeTrees } from '../engine/linked-scope';
+import { sessionRegistry } from '../engine/session-registry';
 import { setChildStubs } from '../engine/stub-contracts';
 import { validateContractText } from '../engine/validate';
 import {
@@ -1745,16 +1747,32 @@ export function Playground() {
     const emitter = emitters.find((e) => e.name === outputTab);
     if (!emitter) return null;
     try {
+      // LINKED-CHILD TOKEN SCOPE (linked-scope.ts): a linked contract
+      // imported earlier this session resolves through its OWN minted +
+      // captured layers on every emitted surface — the emitter token trees
+      // gain them under the active source (active wins on collision).
+      const scope = linkedImportScope(
+        emittable.contract,
+        emittable.contracts,
+        sessionRegistry().layersByContractId,
+        tokenSource.inventory,
+      );
       return {
         files: emitter.emit(emittable.contract, {
-          tokens: tokenSource.tree,
+          tokens: applyLinkedScope(tokenSource.tree, scope),
           icons,
           contracts: emittable.contracts,
           mode: theme,
           // The active minted provisional layer rides along: the Figma script
           // gains a preamble that upserts imported.* variables, so pasting it
           // back into the ORIGIN file (which never synced them) just works.
-          mintedTokens: mintedLayer?.tree,
+          // Linked children's minted trees ride the SAME preamble (their
+          // captured variables do NOT — those are the origin file's real
+          // variables); the active layer merges last and wins.
+          mintedTokens:
+            scope.mintedTrees.length > 0
+              ? mergeTrees([...scope.mintedTrees, mintedLayer?.tree ?? {}])
+              : mintedLayer?.tree,
         }),
         error: null as string | null,
       };

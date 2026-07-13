@@ -693,6 +693,30 @@ function translateStateOverrides(overrides: Record<string, string>): Record<stri
   return out;
 }
 
+/** v13 part-level states (P18 second half): inside a State-axis PREVIEW
+ *  variant, every part carrying `states[stateName]` renders with those
+ *  color-kind overrides merged over its base tokens (the same
+ *  translateStateOverrides rule as the root), recursively — so the drawn
+ *  Disabled preview shows the disabled label color, not the default one
+ *  (owner field case: #556275 on the #dfe3eb disabled fill). Returns the
+ *  SAME object when nothing overrides, so base compiles stay byte-identical. */
+function withPartStateOverrides(parts: Record<string, Part>, stateName: string): Record<string, Part> {
+  let changed = false;
+  const out: Record<string, Part> = {};
+  for (const [key, part] of Object.entries(parts)) {
+    let next = part;
+    const nested = part.parts ? withPartStateOverrides(part.parts, stateName) : undefined;
+    if (nested && nested !== part.parts) next = { ...next, parts: nested };
+    const overrides = part.states?.[stateName];
+    if (overrides && Object.keys(overrides).length > 0 && !part.component && !part.slot) {
+      next = { ...next, tokens: { ...(next.tokens ?? {}), ...translateStateOverrides(overrides) } };
+    }
+    if (next !== part) changed = true;
+    out[key] = next;
+  }
+  return changed ? out : parts;
+}
+
 /** The derived text style a compiled text node rides, or undefined. EXACT
  *  definition match only: the node's font-size token must be a style's
  *  identity path AND the node's effective weight (its own font-weight
@@ -1290,7 +1314,12 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
         );
         applyStylesWhenOpacity(rootSpec, root, contract, subst);
         if (root.parts) {
-          rootSpec.children = variantParts(root.parts, subst).flatMap(([childName, child]) =>
+          // v13: part-level state overrides apply INSIDE the preview variant
+          // (withPartStateOverrides) — the State=Disabled cell draws the
+          // disabled label color, mirroring .root:disabled .label on the CSS
+          // surfaces.
+          const stateParts = withPartStateOverrides(root.parts, stateName);
+          rootSpec.children = variantParts(stateParts, subst).flatMap(([childName, child]) =>
             partToSpecs(childName, child, contract, byId, ctx, subst),
           );
           if (isReversed(root, subst)) rootSpec.children.reverse();

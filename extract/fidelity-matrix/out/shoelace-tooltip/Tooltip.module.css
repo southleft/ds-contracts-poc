@@ -60,6 +60,7 @@
 .tooltipText {
   color: var(--imported-tooltip-body-content-tooltip-text-color);
   font-size: var(--imported-tooltip-body-content-tooltip-text-font-size);
+  font-weight: var(--imported-tooltip-body-content-tooltip-text-font-weight);
 }
 
 .arrowWrapper {

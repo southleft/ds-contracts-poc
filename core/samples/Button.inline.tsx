@@ -6,7 +6,9 @@
  * tokens at emit time. Resolution mode: light (brand: default). To retheme,
  * re-emit against different tokens — do not edit literals by hand.
  * Fidelity: :hover/:focus-visible state tokens are not expressible as inline
- * styles and are omitted; disabled-state tokens apply via the disabled prop.
+ * styles and are omitted; ROOT disabled-state tokens apply via the disabled
+ * prop; PART-level state overrides (Part.states, v13) are omitted — the same
+ * declared limit as the hover states (state-selected descendant styling).
  */
 import { forwardRef } from 'react';
 import type { CSSProperties, ButtonHTMLAttributes } from 'react';

@@ -1,6 +1,6 @@
 {
-  "passed": 99,
-  "total": 99,
+  "passed": 102,
+  "total": 102,
   "results": [
     {
       "id": "refuse-unknown-token-reference",
@@ -345,6 +345,21 @@
     {
       "id": "key-based-linking",
       "claim": "C5-extraction",
+      "pass": true
+    },
+    {
+      "id": "cross-import-token-scope",
+      "claim": "C5-extraction",
+      "pass": true
+    },
+    {
+      "id": "part-level-state-overrides",
+      "claim": "C5-extraction",
+      "pass": true
+    },
+    {
+      "id": "part-state-disabled-label-browser-probe",
+      "claim": "C1-determinism",
       "pass": true
     },
     {

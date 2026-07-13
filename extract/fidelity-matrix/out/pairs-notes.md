@@ -128,3 +128,32 @@ hex on both sides' minted tokens; radius 8px both; padding-inline 16px
   `.root:active:not(:disabled)` per-variant pressed fills and the
   `:focus-visible` outline pair — inspectable in `Button.module.css` /
   `component.css`.
+
+### Part-level state overrides addendum (P18 v13 — B7 retired, 2026-07-13)
+
+- **D. CBDS Button (design) — the disabled label carries.** The kit draws
+  the disabled label at #556275 on the #dfe3eb fill; under B7 that diff was
+  a named note and the render drew the default #fcfeff — near-invisible on
+  the disabled background (the owner's exact complaint, hit twice). The
+  proposal now carries `Button.states.disabled.color =
+  {imported.button-brand-primary.button-state-disabled.color}` (= #556275;
+  the plugin-transport path binds his real `{text.disabled}`), the CSS
+  surfaces render `.root:disabled .Button { color: … }`, and the canvas
+  State=Disabled preview cells draw the gray label. styles-score: 84 cells,
+  78→81 MINTED, 6→3 MISSING (the 3 left are the focus-ring radius — named
+  by design), 0 mismatched.
+- **D-convergence — the sides finally disagree honestly.** `label color
+  (disabled)` moved CODE-ONLY → **DIVERGE**: design #556275 (the kit) vs
+  code #738094 (the shipped CSS). That is a REAL kit↔code drift the matrix
+  could not see while the design side was silent under B7 — surfaced, not
+  smoothed. `font-weight` moved CODE-ONLY → AGREE (600 — the design side
+  mints weights since the font-weight minting landed after the original
+  run). Facts now **16 AGREE / 1 DIVERGE (real, named) / 2 CODE-ONLY /
+  0 DESIGN-ONLY** (was 15/0/4/0 after the style-fidelity re-run).
+- **Re-run scope note.** `propose-emit` replays at today's HEAD, so this
+  re-run also picks up everything shipped since the last one: the Eventz
+  slot design-time content now proposes Play/Pause geometry stubs
+  (defaultContent), the Shoelace Tooltip mints its Regular font-weight, and
+  the Shoelace Button group carries session-linking/threading notes.
+  render.png recaptured for all four preview subjects; figma.png (ground
+  truth) untouched — the fixtures did not change.

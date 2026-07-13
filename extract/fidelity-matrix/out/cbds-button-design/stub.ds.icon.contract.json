@@ -35,7 +35,9 @@
   ],
   "states": [],
   "anatomy": {
-    "root": {}
+    "root": {
+      "parts": {}
+    }
   },
   "anchors": {
     "figma": {

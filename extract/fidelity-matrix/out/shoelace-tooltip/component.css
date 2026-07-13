@@ -1,5 +1,9 @@
 /* Tooltip — from ds.tooltip v0.1.0 (core/emit-html.ts) */
 
+.tooltip, .tooltip *, .tooltip *::before, .tooltip *::after {
+  box-sizing: border-box;
+}
+
 .tooltip {
   display: flex;
   flex-direction: row;
@@ -57,6 +61,7 @@
 .tooltip__tooltipText {
   color: var(--imported-tooltip-body-content-tooltip-text-color);
   font-size: var(--imported-tooltip-body-content-tooltip-text-font-size);
+  font-weight: var(--imported-tooltip-body-content-tooltip-text-font-weight);
 }
 
 .tooltip__arrowWrapper {

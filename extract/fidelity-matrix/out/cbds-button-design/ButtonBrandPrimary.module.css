@@ -58,6 +58,7 @@
 
 .Button {
   color: var(--imported-button-brand-primary-button-color);
+  font-weight: var(--imported-button-brand-primary-button-font-weight);
 }
 
 .size-large .Button {
@@ -70,4 +71,8 @@
 
 .size-small .Button {
   font-size: var(--imported-button-brand-primary-button-font-size-small);
+}
+
+.root:disabled .Button {
+  color: var(--imported-button-brand-primary-button-state-disabled-color);
 }

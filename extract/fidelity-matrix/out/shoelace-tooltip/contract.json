@@ -121,7 +121,8 @@
                 "tooltipText": {
                   "tokens": {
                     "color": "{imported.tooltip.body-content-tooltip-text.color}",
-                    "font-size": "{imported.tooltip.body-content-tooltip-text.font-size}"
+                    "font-size": "{imported.tooltip.body-content-tooltip-text.font-size}",
+                    "font-weight": "{imported.tooltip.body-content-tooltip-text.font-weight}"
                   },
                   "content": {
                     "prop": "text"

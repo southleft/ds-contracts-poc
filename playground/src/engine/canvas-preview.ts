@@ -29,7 +29,9 @@ import {
 type FigmaEngine = ReturnType<typeof createFigmaEngine>;
 import { polygonClipPath } from '../../../scripts/contract-schema.js';
 import { icons } from './data.js';
-import { sessionMintedCss } from './preview.js';
+import { applyLinkedScope, linkedImportScope } from './linked-scope.js';
+import { sessionImportCss } from './preview.js';
+import { sessionRegistry } from './session-registry.js';
 import { activeTokens } from './token-source.js';
 
 export type CanvasPreviewResult =
@@ -464,14 +466,24 @@ export function buildCanvasPreview(
 ): CanvasPreviewResult {
   const source = activeTokens();
   try {
+    const byId = new Map(contracts);
+    byId.set(contract.id, contract);
+
+    // LINKED-CHILD TOKEN SCOPE (linked-scope.ts): a linked contract imported
+    // earlier resolves its own minted+captured layers through the ENGINE's
+    // token tree — compileComponentData resolves typography/geometry
+    // LITERALS there, where the CSS channel (sessionImportCss below) cannot
+    // reach (field refusal: 'Cannot resolve token "imported.button-brand-
+    // primary.button.font-size.large"' on the Dialog's linked action
+    // button). The receipt lines join the fidelity notes.
+    const scope = linkedImportScope(contract, byId, sessionRegistry().layersByContractId, source.inventory);
+    const tree = applyLinkedScope(source.tree, scope);
+
     // createFigmaEngine requires a "default" brand mode; a pasted user tree
     // (or a minted-only layer) has none — an empty default brand keeps the
     // engine's resolution semantics without inventing values.
-    const brands = Object.keys(source.tree.brands).length > 0 ? source.tree.brands : { default: {} };
-    const engine: FigmaEngine = createFigmaEngine({ tokens: { ...source.tree, brands }, icons });
-
-    const byId = new Map(contracts);
-    byId.set(contract.id, contract);
+    const brands = Object.keys(tree.brands).length > 0 ? tree.brands : { default: {} };
+    const engine: FigmaEngine = createFigmaEngine({ tokens: { ...tree, brands }, icons });
     const byName = new Map<string, Contract>([...byId.values()].map((c) => [c.name, c]));
 
     const cache = new Map<string, ComponentData | null>();
@@ -502,7 +514,9 @@ export function buildCanvasPreview(
       })
       .join('\n');
 
-    const notes = fidelityNotes(contract, data, ctx.used);
+    // Cross-layer receipt lines FIRST — which linked contracts' import
+    // layers this render resolves through — then the fidelity notes.
+    const notes = [...scope.receipts, ...fidelityNotes(contract, data, ctx.used)];
     const stylesheets = source.stylesheets;
     return {
       ok: true,
@@ -511,10 +525,11 @@ export function buildCanvasPreview(
         '<!doctype html>',
         '<html>', // no data-theme, ever: the canvas is ALWAYS light, like Figma
         '<head><meta charset="utf-8">',
-        // Session minted layers (dump v1.5 linking): a LINKED child imported
-        // earlier binds its own imported.* leaves — the active layer only
-        // carries the on-screen contract's (see preview.ts sessionMintedCss).
-        `<style>${sessionMintedCss()}</style>`,
+        // Session import layers (dump v1.5 linking): a LINKED child imported
+        // earlier binds its own imported.* leaves and captured variables —
+        // the active layer pair only carries the on-screen contract's (see
+        // preview.ts sessionImportCss; the engine tree side is linked-scope).
+        `<style>${sessionImportCss()}</style>`,
         `<style>${stylesheets.base}\n${stylesheets.brands}</style>`,
         `<style>${CANVAS_CSS}</style>`,
         '</head><body>',

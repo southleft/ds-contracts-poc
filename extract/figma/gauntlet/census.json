@@ -2,7 +2,7 @@
  "_provenance": {
   "generatedBy": "extract/figma/gauntlet/census.ts",
   "dump": "extract/figma/fixtures/cbds-plugin-all-sets.v14.dump.json",
-  "generatedAt": "2026-07-12"
+  "generatedAt": "2026-07-13"
  },
  "summary": {
   "dump": "extract/figma/fixtures/cbds-plugin-all-sets.v14.dump.json",
@@ -36,11 +36,11 @@
    "stroke-weights-nonuniform": 29
   },
   "factsCarried": {
-   "tokenRefsTotal": 3284,
+   "tokenRefsTotal": 3319,
    "tokenRefsMedian": 1,
-   "tokenRefsMedianComponentSets": 14,
+   "tokenRefsMedianComponentSets": 15,
    "mintedTotal": 863,
-   "notesTotal": 5496,
+   "notesTotal": 5479,
    "unboundTotal": 23,
    "degradationsTotal": 3316
   }
@@ -63012,7 +63012,7 @@
    "noteCount": 30,
    "unboundCount": 0,
    "mintedCount": 8,
-   "tokenRefsCarried": 16,
+   "tokenRefsCarried": 17,
    "degradationsByCode": {},
    "stubCount": 1,
    "stubRefusals": [],
@@ -63058,7 +63058,7 @@
    "noteCount": 30,
    "unboundCount": 0,
    "mintedCount": 8,
-   "tokenRefsCarried": 16,
+   "tokenRefsCarried": 17,
    "degradationsByCode": {},
    "stubCount": 1,
    "stubRefusals": [],
@@ -63104,7 +63104,7 @@
    "noteCount": 33,
    "unboundCount": 0,
    "mintedCount": 9,
-   "tokenRefsCarried": 19,
+   "tokenRefsCarried": 22,
    "degradationsByCode": {},
    "stubCount": 1,
    "stubRefusals": [],
@@ -63150,7 +63150,7 @@
    "noteCount": 33,
    "unboundCount": 0,
    "mintedCount": 9,
-   "tokenRefsCarried": 22,
+   "tokenRefsCarried": 25,
    "degradationsByCode": {},
    "stubCount": 1,
    "stubRefusals": [],
@@ -63193,10 +63193,10 @@
     "react-inline",
     "figma-script"
    ],
-   "noteCount": 33,
+   "noteCount": 32,
    "unboundCount": 0,
    "mintedCount": 8,
-   "tokenRefsCarried": 14,
+   "tokenRefsCarried": 17,
    "degradationsByCode": {},
    "stubCount": 1,
    "stubRefusals": [],
@@ -63239,10 +63239,10 @@
     "react-inline",
     "figma-script"
    ],
-   "noteCount": 33,
+   "noteCount": 32,
    "unboundCount": 0,
    "mintedCount": 8,
-   "tokenRefsCarried": 14,
+   "tokenRefsCarried": 17,
    "degradationsByCode": {},
    "stubCount": 1,
    "stubRefusals": [],
@@ -63288,7 +63288,7 @@
    "noteCount": 32,
    "unboundCount": 0,
    "mintedCount": 9,
-   "tokenRefsCarried": 17,
+   "tokenRefsCarried": 18,
    "degradationsByCode": {},
    "stubCount": 1,
    "stubRefusals": [],
@@ -63334,7 +63334,7 @@
    "noteCount": 33,
    "unboundCount": 0,
    "mintedCount": 9,
-   "tokenRefsCarried": 21,
+   "tokenRefsCarried": 24,
    "degradationsByCode": {},
    "stubCount": 1,
    "stubRefusals": [],
@@ -63377,10 +63377,10 @@
     "react-inline",
     "figma-script"
    ],
-   "noteCount": 33,
+   "noteCount": 32,
    "unboundCount": 0,
    "mintedCount": 8,
-   "tokenRefsCarried": 14,
+   "tokenRefsCarried": 17,
    "degradationsByCode": {},
    "stubCount": 1,
    "stubRefusals": [],
@@ -63837,10 +63837,10 @@
     "react-inline",
     "figma-script"
    ],
-   "noteCount": 34,
+   "noteCount": 32,
    "unboundCount": 0,
    "mintedCount": 8,
-   "tokenRefsCarried": 11,
+   "tokenRefsCarried": 13,
    "degradationsByCode": {
     "text-channel-unsupported": 15
    },
@@ -63886,10 +63886,10 @@
     "react-inline",
     "figma-script"
    ],
-   "noteCount": 34,
+   "noteCount": 32,
    "unboundCount": 0,
    "mintedCount": 8,
-   "tokenRefsCarried": 11,
+   "tokenRefsCarried": 13,
    "degradationsByCode": {
     "text-channel-unsupported": 15
    },
@@ -63935,10 +63935,10 @@
     "react-inline",
     "figma-script"
    ],
-   "noteCount": 32,
+   "noteCount": 30,
    "unboundCount": 0,
    "mintedCount": 8,
-   "tokenRefsCarried": 11,
+   "tokenRefsCarried": 13,
    "degradationsByCode": {
     "text-channel-unsupported": 15
    },
@@ -65544,10 +65544,10 @@
     "react-inline",
     "figma-script"
    ],
-   "noteCount": 20,
+   "noteCount": 19,
    "unboundCount": 0,
    "mintedCount": 5,
-   "tokenRefsCarried": 4,
+   "tokenRefsCarried": 5,
    "degradationsByCode": {},
    "stubCount": 1,
    "stubRefusals": [],
@@ -65734,10 +65734,10 @@
     "react-inline",
     "figma-script"
    ],
-   "noteCount": 35,
+   "noteCount": 33,
    "unboundCount": 0,
    "mintedCount": 6,
-   "tokenRefsCarried": 9,
+   "tokenRefsCarried": 11,
    "degradationsByCode": {
     "stroke-weights-nonuniform": 8
    },
@@ -65783,10 +65783,10 @@
     "react-inline",
     "figma-script"
    ],
-   "noteCount": 44,
+   "noteCount": 43,
    "unboundCount": 0,
    "mintedCount": 6,
-   "tokenRefsCarried": 8,
+   "tokenRefsCarried": 9,
    "degradationsByCode": {},
    "stubCount": 2,
    "stubRefusals": [],
@@ -65830,10 +65830,10 @@
     "react-inline",
     "figma-script"
    ],
-   "noteCount": 37,
+   "noteCount": 35,
    "unboundCount": 0,
    "mintedCount": 6,
-   "tokenRefsCarried": 9,
+   "tokenRefsCarried": 11,
    "degradationsByCode": {
     "stroke-weights-nonuniform": 10
    },
@@ -65879,10 +65879,10 @@
     "react-inline",
     "figma-script"
    ],
-   "noteCount": 37,
+   "noteCount": 35,
    "unboundCount": 0,
    "mintedCount": 6,
-   "tokenRefsCarried": 9,
+   "tokenRefsCarried": 11,
    "degradationsByCode": {
     "stroke-weights-nonuniform": 10
    },

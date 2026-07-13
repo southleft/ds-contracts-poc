@@ -90,6 +90,8 @@
 
 .Label {
   font-size: var(--imported-button-label-font-size);
+  font-weight: var(--imported-button-label-font-weight);
+  line-height: var(--imported-button-label-line-height);
 }
 
 .variant-primary .Label {

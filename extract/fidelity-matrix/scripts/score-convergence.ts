@@ -91,9 +91,9 @@ const factSpecs: [string, string | null, string | null, string?][] = [
   ['label color (default)', D('button.color'), C('color.primary')],
   [
     'label color (disabled)',
-    null,
+    D('button-state-disabled.color'),
     C('disabled.color'),
-    'design side NAMES the gap: part-level state overrides are outside the contract vocabulary (STYLE-FIDELITY B7 — proposal note on Button fill in state "disabled"); never a silently wrong value',
+    'SAME mechanism now (P18 v13 — B7 retired): the drawn disabled label fill PROPOSES as a part-level state override (Part.states on the label part) ≡ code `.root:disabled .label { color }`. Both sides finally SPEAK — and they genuinely DISAGREE: the kit draws #556275, the shipped CSS uses #738094. A REAL design↔code drift the matrix could not see while the design side was silent (was CODE-ONLY under B7); surfaced, not smoothed',
   ],
   ['border-radius', '{imported.shared.size-8}', C('border-radius')],
   ['padding-block', '{imported.shared.size-8}', C('padding-block')],
@@ -110,9 +110,9 @@ const factSpecs: [string, string | null, string | null, string?][] = [
   ],
   [
     'font-weight',
-    null,
+    D('button.font-weight'),
     C('font-weight'),
-    'design side NAMES the gap: weight "Semi Bold" has no token identity once per-size typography rules out a single style adoption (proposal note) — named, never a guessed constant',
+    'design side now MINTS the weight (600 — the font-weight minting shipped after the original matrix run); previously NAMED-only ("Semi Bold" had no token identity)',
   ],
   [
     'focus ring color',

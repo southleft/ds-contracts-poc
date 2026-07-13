@@ -19,7 +19,7 @@ export const Icon = forwardRef<HTMLSpanElement, IconProps>(function Icon(
   const classes = [styles.root, styles[`size-${size}`], className].filter(Boolean).join(' ');
   return (
     <span ref={ref} className={classes} {...rest}>
-      {children}
+      
     </span>
   );
 });

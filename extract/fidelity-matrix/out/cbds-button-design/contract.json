@@ -137,7 +137,13 @@
         "Button": {
           "tokens": {
             "color": "{imported.button-brand-primary.button.color}",
-            "font-size": "{imported.button-brand-primary.button.font-size.{size}}"
+            "font-size": "{imported.button-brand-primary.button.font-size.{size}}",
+            "font-weight": "{imported.button-brand-primary.button.font-weight}"
+          },
+          "states": {
+            "disabled": {
+              "color": "{imported.button-brand-primary.button-state-disabled.color}"
+            }
           },
           "content": {
             "prop": "text"

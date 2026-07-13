@@ -704,8 +704,21 @@ function analyzeCss(
           bucket('root', state, av.axis, cssProp, sel).set(av.value, path);
         }, mintSink(sel, 'root', state, { prop: av.axis, value: av.value }));
       } else {
-        notes.push(`css: selector \`${sel}\` — state rules on nested parts are outside the contract's root-level states, not extracted`);
+        notes.push(`css: selector \`${sel}\` — part-scoped state pseudo; the contract vocabulary carries part-level states (Part.states, v13 — as \`.root${pseudo} .part\` descendant rules) but CSS inversion of this shape is not implemented; declare it on the contract directly, review`);
       }
+      continue;
+    }
+
+    // descendant with a state pseudo: `.root:disabled .label` — the shape
+    // the v13 Part.states vocabulary EMITS (generateCss part-state rules).
+    // Inversion (CSS → contract) is not implemented; the skip is a PRECISE
+    // named note now that authored contracts can carry the channel — the
+    // narrow remainder of STYLE-FIDELITY B7 (the design-side proposer DOES
+    // propose part-level state overrides from drawn state variants).
+    if ((m = sel.match(/^\.([\w-]+)(:[^\s]+)\s+\.([\w-]+)$/))) {
+      notes.push(
+        `css: selector \`${sel}\` — part-level state rule; the contract vocabulary carries it (Part.states, v13 — color-kind channels) but CSS inversion of part-state rules is not implemented; declare it on the contract directly, review`,
+      );
       continue;
     }
 

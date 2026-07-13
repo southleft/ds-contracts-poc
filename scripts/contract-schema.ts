@@ -338,8 +338,15 @@ export interface Part {
   tokens?: Record<string, string>;
   /** v10: per-enum-value token overrides merged over `tokens`. */
   tokensByProp?: z.infer<typeof TokensByPropSchema>;
-  /** interaction state → (CSS property → token reference). Root-level only
-   *  in the current generators. */
+  /** interaction state → (CSS property → token reference). On the ROOT:
+   *  the full state vocabulary (background-color, outline-*, opacity, …).
+   *  v13 (P18 second half): on a NON-ref part (text/icon/box — never a
+   *  component ref or slot), COLOR-KIND channels only (color,
+   *  background-color, border-color; emit-react PART_STATE_CHANNELS) —
+   *  rendered as descendant rules under the root's state selector
+   *  (.root:disabled .label { color: … }) and applied inside the canvas
+   *  State-preview variants. Unknown state names, undeclared states, ref/
+   *  slot parts, and non-color channels refuse by name (validateContract). */
   states?: Record<string, Record<string, string>>;
   /** Text content bound to a text prop: { prop: "title" }. */
   content?: { prop: string };
@@ -386,6 +393,8 @@ export const PartSchema: z.ZodType<Part> = z.lazy(() =>
     tokens: z.record(z.string(), TokenRefSchema).optional(),
     /** v10. */
     tokensByProp: TokensByPropSchema.optional(),
+    /** Root: full state vocabulary. v13: non-ref parts, color-kind channels
+     *  only — see the Part interface doc + emit-react validateContract. */
     states: z.record(z.string(), z.record(z.string(), TokenRefSchema)).optional(),
     content: z.strictObject({ prop: z.string() }).optional(),
     text: z.string().optional(),
@@ -654,11 +663,15 @@ export function statePreviewSubstProps(contract: Contract): string[] {
       .map((p) => p.name),
   );
   const out = new Set<string>();
-  const overrides = contract.anatomy.root?.states ?? {};
+  // Root overrides AND (v13) part-level overrides — a substituted part-state
+  // ref names the preview's primary axis exactly like a root one.
+  const stateMaps = walkAnatomy(contract).map((w) => w.part.states ?? {});
   for (const state of contract.states) {
-    for (const ref of Object.values(overrides[state] ?? {})) {
-      for (const m of ref.matchAll(/\{([a-z][\w-]*)\}/g)) {
-        if (enumNames.has(m[1])) out.add(m[1]);
+    for (const overrides of stateMaps) {
+      for (const ref of Object.values(overrides[state] ?? {})) {
+        for (const m of ref.matchAll(/\{([a-z][\w-]*)\}/g)) {
+          if (enumNames.has(m[1])) out.add(m[1]);
+        }
       }
     }
   }

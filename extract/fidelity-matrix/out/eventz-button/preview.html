@@ -310,6 +310,8 @@
   --imported-button-label-color-secondary: #252729;
   --imported-button-label-color-bare: #252729;
   --imported-button-label-font-size: 14px;
+  --imported-button-label-font-weight: 500;
+  --imported-button-label-line-height: 20px;
   --imported-button-state-hover-background-color-primary: #2d6079;
   --imported-button-state-hover-background-color-knockout: #c6c7c6;
   --imported-button-state-hover-background-color-secondary: #00000233;
@@ -320,9 +322,47 @@
   --imported-button-state-active-background-color-bare: #00000200;
   --imported-button-state-focus-visible-outline-color: #2d6079;
   --imported-button-state-focus-visible-outline-width: 2px;
+  --imported-stub-play-root-width: 20px;
+  --imported-stub-play-root-height: 20px;
+  --imported-stub-pause-root-width: 20px;
+  --imported-stub-pause-root-height: 20px;
 }</style>
 <style>body { margin: 0; padding: 20px; background: #f5f5f5; color: #1a1a1a; font-family: var(--font-family-sans, system-ui, sans-serif); }</style>
-<style>/* Button — from ds.button v0.1.0 (core/emit-html.ts) */
+<style>/* Play — from ds.play v0.1.0 (core/emit-html.ts) */
+
+.play, .play *, .play *::before, .play *::after {
+  box-sizing: border-box;
+}
+
+.play {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  width: var(--imported-stub-play-root-width);
+  height: var(--imported-stub-play-root-height);
+}
+
+/* Pause — from ds.pause v0.1.0 (core/emit-html.ts) */
+
+.pause, .pause *, .pause *::before, .pause *::after {
+  box-sizing: border-box;
+}
+
+.pause {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  width: var(--imported-stub-pause-root-width);
+  height: var(--imported-stub-pause-root-height);
+}
+
+/* Button — from ds.button v0.1.0 (core/emit-html.ts) */
+
+.button, .button *, .button *::before, .button *::after {
+  box-sizing: border-box;
+}
 
 .button {
   display: inline-flex;
@@ -411,6 +451,8 @@
 
 .button__Label {
   font-size: var(--imported-button-label-font-size);
+  font-weight: var(--imported-button-label-font-weight);
+  line-height: var(--imported-button-label-line-height);
 }
 
 .button--variant-primary .button__Label {
@@ -443,18 +485,23 @@
   Token values arrive via CSS custom properties (the same custom-property names the CSS Modules
   bind) — include the token stylesheet (src/styles/tokens.css) on the page or nothing resolves.
   Fidelity: no events, no interactivity beyond CSS states (:hover/:focus-visible/:disabled).
-  Slots render their declared defaultContent, else a named placeholder. Booleans render per showcase item.
+  Slots render their declared defaultContent; an empty slot renders its wrapper empty (absent content
+  is absent — named in an inline comment, never painted as placeholder text). Booleans render per showcase item.
 -->
 <section class="showcase showcase--button">
   <div class="showcase__item">
     <p class="showcase__label">default</p>
     <button class="button button--variant-primary" data-has-start-icon="true" data-has-end-icon="true">
       <div class="button__startIcon">
-        <span class="button__slot-placeholder">[startIcon slot]</span>
+        <span class="play">
+
+        </span>
       </div>
       <span class="button__Label">Label</span>
       <div class="button__endIcon">
-        <span class="button__slot-placeholder">[endIcon slot]</span>
+        <span class="pause">
+
+        </span>
       </div>
     </button>
   </div>
@@ -462,11 +509,15 @@
     <p class="showcase__label">variant=knockout</p>
     <button class="button button--variant-knockout" data-has-start-icon="true" data-has-end-icon="true">
       <div class="button__startIcon">
-        <span class="button__slot-placeholder">[startIcon slot]</span>
+        <span class="play">
+
+        </span>
       </div>
       <span class="button__Label">Label</span>
       <div class="button__endIcon">
-        <span class="button__slot-placeholder">[endIcon slot]</span>
+        <span class="pause">
+
+        </span>
       </div>
     </button>
   </div>
@@ -474,11 +525,15 @@
     <p class="showcase__label">variant=secondary</p>
     <button class="button button--variant-secondary" data-has-start-icon="true" data-has-end-icon="true">
       <div class="button__startIcon">
-        <span class="button__slot-placeholder">[startIcon slot]</span>
+        <span class="play">
+
+        </span>
       </div>
       <span class="button__Label">Label</span>
       <div class="button__endIcon">
-        <span class="button__slot-placeholder">[endIcon slot]</span>
+        <span class="pause">
+
+        </span>
       </div>
     </button>
   </div>
@@ -486,11 +541,15 @@
     <p class="showcase__label">variant=bare</p>
     <button class="button button--variant-bare" data-has-start-icon="true" data-has-end-icon="true">
       <div class="button__startIcon">
-        <span class="button__slot-placeholder">[startIcon slot]</span>
+        <span class="play">
+
+        </span>
       </div>
       <span class="button__Label">Label</span>
       <div class="button__endIcon">
-        <span class="button__slot-placeholder">[endIcon slot]</span>
+        <span class="pause">
+
+        </span>
       </div>
     </button>
   </div>
@@ -498,11 +557,15 @@
     <p class="showcase__label">isDisabled=true</p>
     <button class="button button--variant-primary" data-is-disabled="true" data-has-start-icon="true" data-has-end-icon="true">
       <div class="button__startIcon">
-        <span class="button__slot-placeholder">[startIcon slot]</span>
+        <span class="play">
+
+        </span>
       </div>
       <span class="button__Label">Label</span>
       <div class="button__endIcon">
-        <span class="button__slot-placeholder">[endIcon slot]</span>
+        <span class="pause">
+
+        </span>
       </div>
     </button>
   </div>

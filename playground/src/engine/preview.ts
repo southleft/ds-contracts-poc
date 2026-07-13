@@ -56,17 +56,27 @@ const frameBodyCss = (surface: PreviewSurface) => `
   }
 `;
 
-/** SESSION minted layers (dump v1.5 linking): a linked child imported
- *  EARLIER binds its own imported.* leaves, which the single active minted
- *  layer (the on-screen contract's) does not carry — without this block the
- *  child renders unstyled. Namespaced per component; the active layer is
- *  injected after and wins on a re-import of the same name. */
-export function sessionMintedCss(): string {
-  const trees = sessionRegistry().mintedTrees;
-  if (trees.length === 0) return '';
-  return trees
-    .map((tree) => `/* Session minted tokens (earlier import, imported.*) */\n${mintedTokenCss(tree)}`)
-    .join('\n');
+/** SESSION import layers (dump v1.5 linking): a linked child imported
+ *  EARLIER binds its own imported.* leaves AND its own captured Figma
+ *  variables, which the single active layer pair (the on-screen contract's)
+ *  does not carry — without this block the child renders unstyled. Injected
+ *  BEFORE the base stylesheets, so the base source (and the active layers
+ *  it composes) wins every name collision — captured names shadow nothing,
+ *  and a re-import of the same component wins by order of application.
+ *  The token-TREE side of the same rule (engine literal resolution,
+ *  emitter trees, the sync-script preamble) is linked-scope.ts. */
+export function sessionImportCss(): string {
+  const registry = sessionRegistry();
+  const blocks: string[] = [];
+  for (const layer of registry.capturedLayers) {
+    blocks.push(
+      `/* Session captured tokens (earlier import — the designer's real variables) */\n${mintedTokenCss(layer.tree)}`,
+    );
+  }
+  for (const tree of registry.mintedTrees) {
+    blocks.push(`/* Session minted tokens (earlier import, imported.*) */\n${mintedTokenCss(tree)}`);
+  }
+  return blocks.join('\n');
 }
 
 function assembleDoc(
@@ -79,7 +89,7 @@ function assembleDoc(
     '<!doctype html>',
     `<html${surface === 'dark' ? ' data-theme="dark"' : ''}>`,
     '<head><meta charset="utf-8">',
-    `<style>${sessionMintedCss()}</style>`,
+    `<style>${sessionImportCss()}</style>`,
     `<style>${stylesheets.base}\n${stylesheets.dark}\n${stylesheets.brands}</style>`,
     `<style>${frameBodyCss(surface)}</style>`,
     `<style>${emitted.css}</style>`,

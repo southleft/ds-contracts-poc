@@ -1,5 +1,9 @@
 /* Icon — from ds.icon v0.1.0 (core/emit-html.ts) */
 
+.icon, .icon *, .icon *::before, .icon *::after {
+  box-sizing: border-box;
+}
+
 .icon {
   display: inline-flex;
   align-items: center;
@@ -8,6 +12,10 @@
 }
 
 /* ButtonBrandPrimary — from ds.button-brand-primary v0.1.0 (core/emit-html.ts) */
+
+.button-brand-primary, .button-brand-primary *, .button-brand-primary *::before, .button-brand-primary *::after {
+  box-sizing: border-box;
+}
 
 .button-brand-primary {
   display: inline-flex;
@@ -64,6 +72,7 @@
 
 .button-brand-primary__Button {
   color: var(--imported-button-brand-primary-button-color);
+  font-weight: var(--imported-button-brand-primary-button-font-weight);
 }
 
 .button-brand-primary--size-large .button-brand-primary__Button {
@@ -76,6 +85,10 @@
 
 .button-brand-primary--size-small .button-brand-primary__Button {
   font-size: var(--imported-button-brand-primary-button-font-size-small);
+}
+
+.button-brand-primary:disabled .button-brand-primary__Button {
+  color: var(--imported-button-brand-primary-button-state-disabled-color);
 }
 
 /* showcase chrome */

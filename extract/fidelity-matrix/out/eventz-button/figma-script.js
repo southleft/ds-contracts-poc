@@ -44,6 +44,12 @@ const VARIANTS = [
           },
           "slotProperty": "startIcon",
           "slotAccepts": [],
+          "slotDefault": [
+            {
+              "dep": "Play",
+              "props": {}
+            }
+          ],
           "visibleProp": "hasStartIcon",
           "visibleDefault": true
         },
@@ -54,6 +60,7 @@ const VARIANTS = [
           "fontSize": 14,
           "fontStyle": "Medium",
           "textFill": "imported/button/label/color/primary",
+          "lineHeight": 20,
           "contentProp": "text"
         },
         {
@@ -66,6 +73,12 @@ const VARIANTS = [
           },
           "slotProperty": "endIcon",
           "slotAccepts": [],
+          "slotDefault": [
+            {
+              "dep": "Pause",
+              "props": {}
+            }
+          ],
           "visibleProp": "hasEndIcon",
           "visibleDefault": true
         }
@@ -108,6 +121,12 @@ const VARIANTS = [
           },
           "slotProperty": "startIcon",
           "slotAccepts": [],
+          "slotDefault": [
+            {
+              "dep": "Play",
+              "props": {}
+            }
+          ],
           "visibleProp": "hasStartIcon",
           "visibleDefault": true
         },
@@ -118,6 +137,7 @@ const VARIANTS = [
           "fontSize": 14,
           "fontStyle": "Medium",
           "textFill": "imported/button/label/color/knockout",
+          "lineHeight": 20,
           "contentProp": "text"
         },
         {
@@ -130,6 +150,12 @@ const VARIANTS = [
           },
           "slotProperty": "endIcon",
           "slotAccepts": [],
+          "slotDefault": [
+            {
+              "dep": "Pause",
+              "props": {}
+            }
+          ],
           "visibleProp": "hasEndIcon",
           "visibleDefault": true
         }
@@ -172,6 +198,12 @@ const VARIANTS = [
           },
           "slotProperty": "startIcon",
           "slotAccepts": [],
+          "slotDefault": [
+            {
+              "dep": "Play",
+              "props": {}
+            }
+          ],
           "visibleProp": "hasStartIcon",
           "visibleDefault": true
         },
@@ -182,6 +214,7 @@ const VARIANTS = [
           "fontSize": 14,
           "fontStyle": "Medium",
           "textFill": "imported/button/label/color/secondary",
+          "lineHeight": 20,
           "contentProp": "text"
         },
         {
@@ -194,6 +227,12 @@ const VARIANTS = [
           },
           "slotProperty": "endIcon",
           "slotAccepts": [],
+          "slotDefault": [
+            {
+              "dep": "Pause",
+              "props": {}
+            }
+          ],
           "visibleProp": "hasEndIcon",
           "visibleDefault": true
         }
@@ -236,6 +275,12 @@ const VARIANTS = [
           },
           "slotProperty": "startIcon",
           "slotAccepts": [],
+          "slotDefault": [
+            {
+              "dep": "Play",
+              "props": {}
+            }
+          ],
           "visibleProp": "hasStartIcon",
           "visibleDefault": true
         },
@@ -246,6 +291,7 @@ const VARIANTS = [
           "fontSize": 14,
           "fontStyle": "Medium",
           "textFill": "imported/button/label/color/bare",
+          "lineHeight": 20,
           "contentProp": "text"
         },
         {
@@ -258,6 +304,12 @@ const VARIANTS = [
           },
           "slotProperty": "endIcon",
           "slotAccepts": [],
+          "slotDefault": [
+            {
+              "dep": "Pause",
+              "props": {}
+            }
+          ],
           "visibleProp": "hasEndIcon",
           "visibleDefault": true
         }
@@ -303,6 +355,12 @@ const STATE_VARIANTS = [
           },
           "slotProperty": "startIcon",
           "slotAccepts": [],
+          "slotDefault": [
+            {
+              "dep": "Play",
+              "props": {}
+            }
+          ],
           "visibleProp": "hasStartIcon",
           "visibleDefault": true
         },
@@ -313,6 +371,7 @@ const STATE_VARIANTS = [
           "fontSize": 14,
           "fontStyle": "Medium",
           "textFill": "imported/button/label/color/primary",
+          "lineHeight": 20,
           "contentProp": "text"
         },
         {
@@ -325,6 +384,12 @@ const STATE_VARIANTS = [
           },
           "slotProperty": "endIcon",
           "slotAccepts": [],
+          "slotDefault": [
+            {
+              "dep": "Pause",
+              "props": {}
+            }
+          ],
           "visibleProp": "hasEndIcon",
           "visibleDefault": true
         }
@@ -367,6 +432,12 @@ const STATE_VARIANTS = [
           },
           "slotProperty": "startIcon",
           "slotAccepts": [],
+          "slotDefault": [
+            {
+              "dep": "Play",
+              "props": {}
+            }
+          ],
           "visibleProp": "hasStartIcon",
           "visibleDefault": true
         },
@@ -377,6 +448,7 @@ const STATE_VARIANTS = [
           "fontSize": 14,
           "fontStyle": "Medium",
           "textFill": "imported/button/label/color/knockout",
+          "lineHeight": 20,
           "contentProp": "text"
         },
         {
@@ -389,6 +461,12 @@ const STATE_VARIANTS = [
           },
           "slotProperty": "endIcon",
           "slotAccepts": [],
+          "slotDefault": [
+            {
+              "dep": "Pause",
+              "props": {}
+            }
+          ],
           "visibleProp": "hasEndIcon",
           "visibleDefault": true
         }
@@ -431,6 +509,12 @@ const STATE_VARIANTS = [
           },
           "slotProperty": "startIcon",
           "slotAccepts": [],
+          "slotDefault": [
+            {
+              "dep": "Play",
+              "props": {}
+            }
+          ],
           "visibleProp": "hasStartIcon",
           "visibleDefault": true
         },
@@ -441,6 +525,7 @@ const STATE_VARIANTS = [
           "fontSize": 14,
           "fontStyle": "Medium",
           "textFill": "imported/button/label/color/secondary",
+          "lineHeight": 20,
           "contentProp": "text"
         },
         {
@@ -453,6 +538,12 @@ const STATE_VARIANTS = [
           },
           "slotProperty": "endIcon",
           "slotAccepts": [],
+          "slotDefault": [
+            {
+              "dep": "Pause",
+              "props": {}
+            }
+          ],
           "visibleProp": "hasEndIcon",
           "visibleDefault": true
         }
@@ -495,6 +586,12 @@ const STATE_VARIANTS = [
           },
           "slotProperty": "startIcon",
           "slotAccepts": [],
+          "slotDefault": [
+            {
+              "dep": "Play",
+              "props": {}
+            }
+          ],
           "visibleProp": "hasStartIcon",
           "visibleDefault": true
         },
@@ -505,6 +602,7 @@ const STATE_VARIANTS = [
           "fontSize": 14,
           "fontStyle": "Medium",
           "textFill": "imported/button/label/color/bare",
+          "lineHeight": 20,
           "contentProp": "text"
         },
         {
@@ -517,6 +615,12 @@ const STATE_VARIANTS = [
           },
           "slotProperty": "endIcon",
           "slotAccepts": [],
+          "slotDefault": [
+            {
+              "dep": "Pause",
+              "props": {}
+            }
+          ],
           "visibleProp": "hasEndIcon",
           "visibleDefault": true
         }
@@ -559,6 +663,12 @@ const STATE_VARIANTS = [
           },
           "slotProperty": "startIcon",
           "slotAccepts": [],
+          "slotDefault": [
+            {
+              "dep": "Play",
+              "props": {}
+            }
+          ],
           "visibleProp": "hasStartIcon",
           "visibleDefault": true
         },
@@ -569,6 +679,7 @@ const STATE_VARIANTS = [
           "fontSize": 14,
           "fontStyle": "Medium",
           "textFill": "imported/button/label/color/primary",
+          "lineHeight": 20,
           "contentProp": "text"
         },
         {
@@ -581,6 +692,12 @@ const STATE_VARIANTS = [
           },
           "slotProperty": "endIcon",
           "slotAccepts": [],
+          "slotDefault": [
+            {
+              "dep": "Pause",
+              "props": {}
+            }
+          ],
           "visibleProp": "hasEndIcon",
           "visibleDefault": true
         }
@@ -623,6 +740,12 @@ const STATE_VARIANTS = [
           },
           "slotProperty": "startIcon",
           "slotAccepts": [],
+          "slotDefault": [
+            {
+              "dep": "Play",
+              "props": {}
+            }
+          ],
           "visibleProp": "hasStartIcon",
           "visibleDefault": true
         },
@@ -633,6 +756,7 @@ const STATE_VARIANTS = [
           "fontSize": 14,
           "fontStyle": "Medium",
           "textFill": "imported/button/label/color/knockout",
+          "lineHeight": 20,
           "contentProp": "text"
         },
         {
@@ -645,6 +769,12 @@ const STATE_VARIANTS = [
           },
           "slotProperty": "endIcon",
           "slotAccepts": [],
+          "slotDefault": [
+            {
+              "dep": "Pause",
+              "props": {}
+            }
+          ],
           "visibleProp": "hasEndIcon",
           "visibleDefault": true
         }
@@ -687,6 +817,12 @@ const STATE_VARIANTS = [
           },
           "slotProperty": "startIcon",
           "slotAccepts": [],
+          "slotDefault": [
+            {
+              "dep": "Play",
+              "props": {}
+            }
+          ],
           "visibleProp": "hasStartIcon",
           "visibleDefault": true
         },
@@ -697,6 +833,7 @@ const STATE_VARIANTS = [
           "fontSize": 14,
           "fontStyle": "Medium",
           "textFill": "imported/button/label/color/secondary",
+          "lineHeight": 20,
           "contentProp": "text"
         },
         {
@@ -709,6 +846,12 @@ const STATE_VARIANTS = [
           },
           "slotProperty": "endIcon",
           "slotAccepts": [],
+          "slotDefault": [
+            {
+              "dep": "Pause",
+              "props": {}
+            }
+          ],
           "visibleProp": "hasEndIcon",
           "visibleDefault": true
         }
@@ -751,6 +894,12 @@ const STATE_VARIANTS = [
           },
           "slotProperty": "startIcon",
           "slotAccepts": [],
+          "slotDefault": [
+            {
+              "dep": "Play",
+              "props": {}
+            }
+          ],
           "visibleProp": "hasStartIcon",
           "visibleDefault": true
         },
@@ -761,6 +910,7 @@ const STATE_VARIANTS = [
           "fontSize": 14,
           "fontStyle": "Medium",
           "textFill": "imported/button/label/color/bare",
+          "lineHeight": 20,
           "contentProp": "text"
         },
         {
@@ -773,6 +923,12 @@ const STATE_VARIANTS = [
           },
           "slotProperty": "endIcon",
           "slotAccepts": [],
+          "slotDefault": [
+            {
+              "dep": "Pause",
+              "props": {}
+            }
+          ],
           "visibleProp": "hasEndIcon",
           "visibleDefault": true
         }
@@ -816,6 +972,12 @@ const STATE_VARIANTS = [
           },
           "slotProperty": "startIcon",
           "slotAccepts": [],
+          "slotDefault": [
+            {
+              "dep": "Play",
+              "props": {}
+            }
+          ],
           "visibleProp": "hasStartIcon",
           "visibleDefault": true
         },
@@ -826,6 +988,7 @@ const STATE_VARIANTS = [
           "fontSize": 14,
           "fontStyle": "Medium",
           "textFill": "imported/button/label/color/primary",
+          "lineHeight": 20,
           "contentProp": "text"
         },
         {
@@ -838,6 +1001,12 @@ const STATE_VARIANTS = [
           },
           "slotProperty": "endIcon",
           "slotAccepts": [],
+          "slotDefault": [
+            {
+              "dep": "Pause",
+              "props": {}
+            }
+          ],
           "visibleProp": "hasEndIcon",
           "visibleDefault": true
         }
@@ -881,6 +1050,12 @@ const STATE_VARIANTS = [
           },
           "slotProperty": "startIcon",
           "slotAccepts": [],
+          "slotDefault": [
+            {
+              "dep": "Play",
+              "props": {}
+            }
+          ],
           "visibleProp": "hasStartIcon",
           "visibleDefault": true
         },
@@ -891,6 +1066,7 @@ const STATE_VARIANTS = [
           "fontSize": 14,
           "fontStyle": "Medium",
           "textFill": "imported/button/label/color/knockout",
+          "lineHeight": 20,
           "contentProp": "text"
         },
         {
@@ -903,6 +1079,12 @@ const STATE_VARIANTS = [
           },
           "slotProperty": "endIcon",
           "slotAccepts": [],
+          "slotDefault": [
+            {
+              "dep": "Pause",
+              "props": {}
+            }
+          ],
           "visibleProp": "hasEndIcon",
           "visibleDefault": true
         }
@@ -946,6 +1128,12 @@ const STATE_VARIANTS = [
           },
           "slotProperty": "startIcon",
           "slotAccepts": [],
+          "slotDefault": [
+            {
+              "dep": "Play",
+              "props": {}
+            }
+          ],
           "visibleProp": "hasStartIcon",
           "visibleDefault": true
         },
@@ -956,6 +1144,7 @@ const STATE_VARIANTS = [
           "fontSize": 14,
           "fontStyle": "Medium",
           "textFill": "imported/button/label/color/secondary",
+          "lineHeight": 20,
           "contentProp": "text"
         },
         {
@@ -968,6 +1157,12 @@ const STATE_VARIANTS = [
           },
           "slotProperty": "endIcon",
           "slotAccepts": [],
+          "slotDefault": [
+            {
+              "dep": "Pause",
+              "props": {}
+            }
+          ],
           "visibleProp": "hasEndIcon",
           "visibleDefault": true
         }
@@ -1011,6 +1206,12 @@ const STATE_VARIANTS = [
           },
           "slotProperty": "startIcon",
           "slotAccepts": [],
+          "slotDefault": [
+            {
+              "dep": "Play",
+              "props": {}
+            }
+          ],
           "visibleProp": "hasStartIcon",
           "visibleDefault": true
         },
@@ -1021,6 +1222,7 @@ const STATE_VARIANTS = [
           "fontSize": 14,
           "fontStyle": "Medium",
           "textFill": "imported/button/label/color/bare",
+          "lineHeight": 20,
           "contentProp": "text"
         },
         {
@@ -1033,6 +1235,12 @@ const STATE_VARIANTS = [
           },
           "slotProperty": "endIcon",
           "slotAccepts": [],
+          "slotDefault": [
+            {
+              "dep": "Pause",
+              "props": {}
+            }
+          ],
           "visibleProp": "hasEndIcon",
           "visibleDefault": true
         }
@@ -1087,14 +1295,14 @@ for (const page of figma.root.children) {
 
 // ---------------------------------------------------------------------------
 // PROVISIONAL VARIABLES — minted from resolved values by a degraded import.
-// This contract binds 27 provisional token(s) whose real variable names were
+// This contract binds 33 provisional token(s) whose real variable names were
 // unrecoverable, so this section upserts each one as a Figma variable in a
 // collection named 'Imported (provisional)' — idempotent by name, within that
 // collection only — before the bindings below look anything up. The values
 // are literal-fidelity stand-ins, not your design vocabulary: rename them
 // against your real tokens when you adopt the contract.
 // ---------------------------------------------------------------------------
-const MINTED_VARIABLES = [{"name":"imported/button/root/background-color/primary","type":"COLOR","value":"#3d7a95"},{"name":"imported/button/root/background-color/knockout","type":"COLOR","value":"#f7f8f7"},{"name":"imported/button/root/background-color/secondary","type":"COLOR","value":"#0000020d"},{"name":"imported/button/root/background-color/bare","type":"COLOR","value":"#00000200"},{"name":"imported/button/root/gap","type":"FLOAT","value":4},{"name":"imported/button/root/padding-inline","type":"FLOAT","value":12},{"name":"imported/button/root/padding-block","type":"FLOAT","value":6},{"name":"imported/button/root/border-radius","type":"FLOAT","value":8},{"name":"imported/button/root/border-width/primary","type":"FLOAT","value":1},{"name":"imported/button/root/border-width/knockout","type":"FLOAT","value":0},{"name":"imported/button/root/border-width/secondary","type":"FLOAT","value":1},{"name":"imported/button/root/border-width/bare","type":"FLOAT","value":0},{"name":"imported/button/label/color/primary","type":"COLOR","value":"#ffffff"},{"name":"imported/button/label/color/knockout","type":"COLOR","value":"#252729"},{"name":"imported/button/label/color/secondary","type":"COLOR","value":"#252729"},{"name":"imported/button/label/color/bare","type":"COLOR","value":"#252729"},{"name":"imported/button/label/font-size","type":"FLOAT","value":14},{"name":"imported/button/state-hover/background-color/primary","type":"COLOR","value":"#2d6079"},{"name":"imported/button/state-hover/background-color/knockout","type":"COLOR","value":"#c6c7c6"},{"name":"imported/button/state-hover/background-color/secondary","type":"COLOR","value":"#00000233"},{"name":"imported/button/state-hover/background-color/bare","type":"COLOR","value":"#00000233"},{"name":"imported/button/state-active/background-color/primary","type":"COLOR","value":"#2d6079"},{"name":"imported/button/state-active/background-color/knockout","type":"COLOR","value":"#f7f8f7"},{"name":"imported/button/state-active/background-color/secondary","type":"COLOR","value":"#0000020d"},{"name":"imported/button/state-active/background-color/bare","type":"COLOR","value":"#00000200"},{"name":"imported/button/state-focus-visible/outline-color","type":"COLOR","value":"#2d6079"},{"name":"imported/button/state-focus-visible/outline-width","type":"FLOAT","value":2}];
+const MINTED_VARIABLES = [{"name":"imported/button/root/background-color/primary","type":"COLOR","value":"#3d7a95"},{"name":"imported/button/root/background-color/knockout","type":"COLOR","value":"#f7f8f7"},{"name":"imported/button/root/background-color/secondary","type":"COLOR","value":"#0000020d"},{"name":"imported/button/root/background-color/bare","type":"COLOR","value":"#00000200"},{"name":"imported/button/root/gap","type":"FLOAT","value":4},{"name":"imported/button/root/padding-inline","type":"FLOAT","value":12},{"name":"imported/button/root/padding-block","type":"FLOAT","value":6},{"name":"imported/button/root/border-radius","type":"FLOAT","value":8},{"name":"imported/button/root/border-width/primary","type":"FLOAT","value":1},{"name":"imported/button/root/border-width/knockout","type":"FLOAT","value":0},{"name":"imported/button/root/border-width/secondary","type":"FLOAT","value":1},{"name":"imported/button/root/border-width/bare","type":"FLOAT","value":0},{"name":"imported/button/label/color/primary","type":"COLOR","value":"#ffffff"},{"name":"imported/button/label/color/knockout","type":"COLOR","value":"#252729"},{"name":"imported/button/label/color/secondary","type":"COLOR","value":"#252729"},{"name":"imported/button/label/color/bare","type":"COLOR","value":"#252729"},{"name":"imported/button/label/font-size","type":"FLOAT","value":14},{"name":"imported/button/label/font-weight","type":"FLOAT","value":500},{"name":"imported/button/label/line-height","type":"FLOAT","value":20},{"name":"imported/button/state-hover/background-color/primary","type":"COLOR","value":"#2d6079"},{"name":"imported/button/state-hover/background-color/knockout","type":"COLOR","value":"#c6c7c6"},{"name":"imported/button/state-hover/background-color/secondary","type":"COLOR","value":"#00000233"},{"name":"imported/button/state-hover/background-color/bare","type":"COLOR","value":"#00000233"},{"name":"imported/button/state-active/background-color/primary","type":"COLOR","value":"#2d6079"},{"name":"imported/button/state-active/background-color/knockout","type":"COLOR","value":"#f7f8f7"},{"name":"imported/button/state-active/background-color/secondary","type":"COLOR","value":"#0000020d"},{"name":"imported/button/state-active/background-color/bare","type":"COLOR","value":"#00000200"},{"name":"imported/button/state-focus-visible/outline-color","type":"COLOR","value":"#2d6079"},{"name":"imported/button/state-focus-visible/outline-width","type":"FLOAT","value":2},{"name":"imported/stub-play/root/width","type":"FLOAT","value":20},{"name":"imported/stub-play/root/height","type":"FLOAT","value":20},{"name":"imported/stub-pause/root/width","type":"FLOAT","value":20},{"name":"imported/stub-pause/root/height","type":"FLOAT","value":20}];
 {
   // Minted colors may be 8-digit hex (paint opacity captured by dump v1.1) —
   // Figma COLOR variables accept RGBA, so the alpha channel survives.
@@ -1292,6 +1500,7 @@ async function buildNode(spec, registry) {
     node.fontName = { family: 'Inter', style: spec.fontStyle || 'Medium' };
     node.fontSize = spec.fontSize || 16;
     node.characters = spec.characters || '';
+    if (typeof spec.lineHeight === 'number') node.lineHeight = { unit: 'PIXELS', value: spec.lineHeight };
     if (spec.textStyle) {
       // Exact-definition match compiled in: ride the named style. Text
       // styles own typography only — the bound fill paint below coexists.

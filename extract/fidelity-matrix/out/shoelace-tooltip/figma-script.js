@@ -6,7 +6,7 @@ const DESCRIPTION = "PROPOSED contract extracted from the design canvas (extract
 const IS_SET = true;
 const BOOL_PROPS = [];
 const TEXT_PROPS = [];
-const FONT_STYLES = ["Medium"];
+const FONT_STYLES = ["Medium","Regular"];
 const VARIANTS = [
   {
     "name": "placement=left",
@@ -61,7 +61,7 @@ const VARIANTS = [
                   "name": "tooltipText",
                   "characters": "Tooltip text",
                   "fontSize": 14,
-                  "fontStyle": "Medium",
+                  "fontStyle": "Regular",
                   "textFill": "imported/tooltip/body-content-tooltip-text/color",
                   "contentProp": "text"
                 }
@@ -151,7 +151,7 @@ const VARIANTS = [
                   "name": "tooltipText",
                   "characters": "Tooltip text",
                   "fontSize": 14,
-                  "fontStyle": "Medium",
+                  "fontStyle": "Regular",
                   "textFill": "imported/tooltip/body-content-tooltip-text/color",
                   "contentProp": "text"
                 }
@@ -267,7 +267,7 @@ const VARIANTS = [
                   "name": "tooltipText",
                   "characters": "Tooltip text",
                   "fontSize": 14,
-                  "fontStyle": "Medium",
+                  "fontStyle": "Regular",
                   "textFill": "imported/tooltip/body-content-tooltip-text/color",
                   "contentProp": "text"
                 }
@@ -357,7 +357,7 @@ const VARIANTS = [
                   "name": "tooltipText",
                   "characters": "Tooltip text",
                   "fontSize": 14,
-                  "fontStyle": "Medium",
+                  "fontStyle": "Regular",
                   "textFill": "imported/tooltip/body-content-tooltip-text/color",
                   "contentProp": "text"
                 }
@@ -421,7 +421,7 @@ const VARIANTS = [
                   "name": "tooltipText",
                   "characters": "Tooltip text",
                   "fontSize": 14,
-                  "fontStyle": "Medium",
+                  "fontStyle": "Regular",
                   "textFill": "imported/tooltip/body-content-tooltip-text/color",
                   "contentProp": "text"
                 }
@@ -511,7 +511,7 @@ const VARIANTS = [
                   "name": "tooltipText",
                   "characters": "Tooltip text",
                   "fontSize": 14,
-                  "fontStyle": "Medium",
+                  "fontStyle": "Regular",
                   "textFill": "imported/tooltip/body-content-tooltip-text/color",
                   "contentProp": "text"
                 }
@@ -627,7 +627,7 @@ const VARIANTS = [
                   "name": "tooltipText",
                   "characters": "Tooltip text",
                   "fontSize": 14,
-                  "fontStyle": "Medium",
+                  "fontStyle": "Regular",
                   "textFill": "imported/tooltip/body-content-tooltip-text/color",
                   "contentProp": "text"
                 }
@@ -717,7 +717,7 @@ const VARIANTS = [
                   "name": "tooltipText",
                   "characters": "Tooltip text",
                   "fontSize": 14,
-                  "fontStyle": "Medium",
+                  "fontStyle": "Regular",
                   "textFill": "imported/tooltip/body-content-tooltip-text/color",
                   "contentProp": "text"
                 }
@@ -778,14 +778,14 @@ for (const page of figma.root.children) {
 
 // ---------------------------------------------------------------------------
 // PROVISIONAL VARIABLES — minted from resolved values by a degraded import.
-// This contract binds 16 provisional token(s) whose real variable names were
+// This contract binds 17 provisional token(s) whose real variable names were
 // unrecoverable, so this section upserts each one as a Figma variable in a
 // collection named 'Imported (provisional)' — idempotent by name, within that
 // collection only — before the bindings below look anything up. The values
 // are literal-fidelity stand-ins, not your design vocabulary: rename them
 // against your real tokens when you adopt the contract.
 // ---------------------------------------------------------------------------
-const MINTED_VARIABLES = [{"name":"imported/tooltip/body/border-radius","type":"FLOAT","value":3},{"name":"imported/tooltip/body-content/background-color","type":"COLOR","value":"#27272a"},{"name":"imported/tooltip/body-content/padding-inline","type":"FLOAT","value":8},{"name":"imported/tooltip/body-content/padding-block","type":"FLOAT","value":8},{"name":"imported/tooltip/body-content/border-radius","type":"FLOAT","value":4},{"name":"imported/tooltip/body-content-tooltip-text/color","type":"COLOR","value":"#ffffff"},{"name":"imported/tooltip/body-content-tooltip-text/font-size","type":"FLOAT","value":14},{"name":"imported/tooltip/arrow-wrapper/padding-inline/left","type":"FLOAT","value":0},{"name":"imported/tooltip/arrow-wrapper/padding-inline/topleft","type":"FLOAT","value":16},{"name":"imported/tooltip/arrow-wrapper/padding-inline/bottomleft","type":"FLOAT","value":16},{"name":"imported/tooltip/arrow-wrapper/padding-inline/bottom","type":"FLOAT","value":16},{"name":"imported/tooltip/arrow-wrapper/padding-inline/top","type":"FLOAT","value":16},{"name":"imported/tooltip/arrow-wrapper/padding-inline/topright","type":"FLOAT","value":16},{"name":"imported/tooltip/arrow-wrapper/padding-inline/bottomright","type":"FLOAT","value":16},{"name":"imported/tooltip/arrow-wrapper/padding-inline/right","type":"FLOAT","value":0},{"name":"imported/tooltip/arrow-wrapper-arrow/background-color","type":"COLOR","value":"#27272a"}];
+const MINTED_VARIABLES = [{"name":"imported/tooltip/body/border-radius","type":"FLOAT","value":3},{"name":"imported/tooltip/body-content/background-color","type":"COLOR","value":"#27272a"},{"name":"imported/tooltip/body-content/padding-inline","type":"FLOAT","value":8},{"name":"imported/tooltip/body-content/padding-block","type":"FLOAT","value":8},{"name":"imported/tooltip/body-content/border-radius","type":"FLOAT","value":4},{"name":"imported/tooltip/body-content-tooltip-text/color","type":"COLOR","value":"#ffffff"},{"name":"imported/tooltip/body-content-tooltip-text/font-size","type":"FLOAT","value":14},{"name":"imported/tooltip/body-content-tooltip-text/font-weight","type":"FLOAT","value":400},{"name":"imported/tooltip/arrow-wrapper/padding-inline/left","type":"FLOAT","value":0},{"name":"imported/tooltip/arrow-wrapper/padding-inline/topleft","type":"FLOAT","value":16},{"name":"imported/tooltip/arrow-wrapper/padding-inline/bottomleft","type":"FLOAT","value":16},{"name":"imported/tooltip/arrow-wrapper/padding-inline/bottom","type":"FLOAT","value":16},{"name":"imported/tooltip/arrow-wrapper/padding-inline/top","type":"FLOAT","value":16},{"name":"imported/tooltip/arrow-wrapper/padding-inline/topright","type":"FLOAT","value":16},{"name":"imported/tooltip/arrow-wrapper/padding-inline/bottomright","type":"FLOAT","value":16},{"name":"imported/tooltip/arrow-wrapper/padding-inline/right","type":"FLOAT","value":0},{"name":"imported/tooltip/arrow-wrapper-arrow/background-color","type":"COLOR","value":"#27272a"}];
 {
   // Minted colors may be 8-digit hex (paint opacity captured by dump v1.1) —
   // Figma COLOR variables accept RGBA, so the alpha channel survives.
