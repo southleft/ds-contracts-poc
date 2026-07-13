@@ -1116,15 +1116,15 @@
     "figma-script"
    ],
    "emitterRefusals": [],
-   "notes": 44,
+   "notes": 42,
    "unbound": 0,
    "minted": 11,
-   "tokenRefs": 9,
+   "tokenRefs": 11,
    "factsCarriedPct": 100,
    "degradations": 8,
    "stubs": 2,
    "repeatParts": 0,
-   "b7Notes": 3,
+   "b7Notes": 0,
    "clean": true
   },
   {
@@ -1140,15 +1140,15 @@
     "figma-script"
    ],
    "emitterRefusals": [],
-   "notes": 53,
+   "notes": 52,
    "unbound": 0,
    "minted": 11,
-   "tokenRefs": 8,
+   "tokenRefs": 9,
    "factsCarriedPct": 100,
    "degradations": 0,
    "stubs": 2,
    "repeatParts": 0,
-   "b7Notes": 3,
+   "b7Notes": 0,
    "clean": true
   },
   {
@@ -1164,15 +1164,15 @@
     "figma-script"
    ],
    "emitterRefusals": [],
-   "notes": 46,
+   "notes": 44,
    "unbound": 0,
    "minted": 11,
-   "tokenRefs": 9,
+   "tokenRefs": 11,
    "factsCarriedPct": 100,
    "degradations": 10,
    "stubs": 2,
    "repeatParts": 0,
-   "b7Notes": 3,
+   "b7Notes": 0,
    "clean": true
   },
   {
@@ -1188,15 +1188,15 @@
     "figma-script"
    ],
    "emitterRefusals": [],
-   "notes": 46,
+   "notes": 44,
    "unbound": 0,
    "minted": 11,
-   "tokenRefs": 9,
+   "tokenRefs": 11,
    "factsCarriedPct": 100,
    "degradations": 10,
    "stubs": 2,
    "repeatParts": 0,
-   "b7Notes": 3,
+   "b7Notes": 0,
    "clean": true
   },
   {
@@ -1244,7 +1244,7 @@
    "degradations": 42,
    "stubs": 2,
    "repeatParts": 0,
-   "b7Notes": 1,
+   "b7Notes": 0,
    "clean": true
   },
   {
@@ -1455,12 +1455,12 @@
    "notes": 37,
    "unbound": 0,
    "minted": 13,
-   "tokenRefs": 17,
+   "tokenRefs": 18,
    "factsCarriedPct": 100,
    "degradations": 0,
    "stubs": 1,
    "repeatParts": 0,
-   "b7Notes": 1,
+   "b7Notes": 0,
    "clean": true
   },
   {
@@ -1479,12 +1479,12 @@
    "notes": 38,
    "unbound": 0,
    "minted": 13,
-   "tokenRefs": 21,
+   "tokenRefs": 24,
    "factsCarriedPct": 100,
    "degradations": 0,
    "stubs": 1,
    "repeatParts": 0,
-   "b7Notes": 3,
+   "b7Notes": 0,
    "clean": true
   },
   {
@@ -1500,15 +1500,15 @@
     "figma-script"
    ],
    "emitterRefusals": [],
-   "notes": 38,
+   "notes": 37,
    "unbound": 0,
    "minted": 12,
-   "tokenRefs": 14,
+   "tokenRefs": 17,
    "factsCarriedPct": 100,
    "degradations": 0,
    "stubs": 1,
    "repeatParts": 0,
-   "b7Notes": 3,
+   "b7Notes": 0,
    "clean": true
   },
   {
@@ -1527,88 +1527,16 @@
    "notes": 35,
    "unbound": 0,
    "minted": 12,
-   "tokenRefs": 16,
+   "tokenRefs": 17,
    "factsCarriedPct": 100,
    "degradations": 0,
    "stubs": 1,
    "repeatParts": 0,
-   "b7Notes": 1,
+   "b7Notes": 0,
    "clean": true
   },
   {
    "setName": "Button-Danger Secondary",
-   "type": "COMPONENT_SET",
-   "tier": "T3",
-   "proposed": true,
-   "violations": [],
-   "emitted": [
-    "react",
-    "html",
-    "react-inline",
-    "figma-script"
-   ],
-   "emitterRefusals": [],
-   "notes": 38,
-   "unbound": 0,
-   "minted": 13,
-   "tokenRefs": 19,
-   "factsCarriedPct": 100,
-   "degradations": 0,
-   "stubs": 1,
-   "repeatParts": 0,
-   "b7Notes": 3,
-   "clean": true
-  },
-  {
-   "setName": "Button-Danger Tertiary",
-   "type": "COMPONENT_SET",
-   "tier": "T3",
-   "proposed": true,
-   "violations": [],
-   "emitted": [
-    "react",
-    "html",
-    "react-inline",
-    "figma-script"
-   ],
-   "emitterRefusals": [],
-   "notes": 38,
-   "unbound": 0,
-   "minted": 12,
-   "tokenRefs": 14,
-   "factsCarriedPct": 100,
-   "degradations": 0,
-   "stubs": 1,
-   "repeatParts": 0,
-   "b7Notes": 3,
-   "clean": true
-  },
-  {
-   "setName": "Button-Neutral Primary",
-   "type": "COMPONENT_SET",
-   "tier": "T3",
-   "proposed": true,
-   "violations": [],
-   "emitted": [
-    "react",
-    "html",
-    "react-inline",
-    "figma-script"
-   ],
-   "emitterRefusals": [],
-   "notes": 35,
-   "unbound": 0,
-   "minted": 12,
-   "tokenRefs": 16,
-   "factsCarriedPct": 100,
-   "degradations": 0,
-   "stubs": 1,
-   "repeatParts": 0,
-   "b7Notes": 1,
-   "clean": true
-  },
-  {
-   "setName": "Button-Neutral Secondary",
    "type": "COMPONENT_SET",
    "tier": "T3",
    "proposed": true,
@@ -1628,7 +1556,79 @@
    "degradations": 0,
    "stubs": 1,
    "repeatParts": 0,
-   "b7Notes": 3,
+   "b7Notes": 0,
+   "clean": true
+  },
+  {
+   "setName": "Button-Danger Tertiary",
+   "type": "COMPONENT_SET",
+   "tier": "T3",
+   "proposed": true,
+   "violations": [],
+   "emitted": [
+    "react",
+    "html",
+    "react-inline",
+    "figma-script"
+   ],
+   "emitterRefusals": [],
+   "notes": 37,
+   "unbound": 0,
+   "minted": 12,
+   "tokenRefs": 17,
+   "factsCarriedPct": 100,
+   "degradations": 0,
+   "stubs": 1,
+   "repeatParts": 0,
+   "b7Notes": 0,
+   "clean": true
+  },
+  {
+   "setName": "Button-Neutral Primary",
+   "type": "COMPONENT_SET",
+   "tier": "T3",
+   "proposed": true,
+   "violations": [],
+   "emitted": [
+    "react",
+    "html",
+    "react-inline",
+    "figma-script"
+   ],
+   "emitterRefusals": [],
+   "notes": 35,
+   "unbound": 0,
+   "minted": 12,
+   "tokenRefs": 17,
+   "factsCarriedPct": 100,
+   "degradations": 0,
+   "stubs": 1,
+   "repeatParts": 0,
+   "b7Notes": 0,
+   "clean": true
+  },
+  {
+   "setName": "Button-Neutral Secondary",
+   "type": "COMPONENT_SET",
+   "tier": "T3",
+   "proposed": true,
+   "violations": [],
+   "emitted": [
+    "react",
+    "html",
+    "react-inline",
+    "figma-script"
+   ],
+   "emitterRefusals": [],
+   "notes": 38,
+   "unbound": 0,
+   "minted": 13,
+   "tokenRefs": 25,
+   "factsCarriedPct": 100,
+   "degradations": 0,
+   "stubs": 1,
+   "repeatParts": 0,
+   "b7Notes": 0,
    "clean": true
   },
   {
@@ -1644,15 +1644,15 @@
     "figma-script"
    ],
    "emitterRefusals": [],
-   "notes": 38,
+   "notes": 37,
    "unbound": 0,
    "minted": 12,
-   "tokenRefs": 14,
+   "tokenRefs": 17,
    "factsCarriedPct": 100,
    "degradations": 0,
    "stubs": 1,
    "repeatParts": 0,
-   "b7Notes": 3,
+   "b7Notes": 0,
    "clean": true
   },
   {
@@ -2172,15 +2172,15 @@
     "figma-script"
    ],
    "emitterRefusals": [],
-   "notes": 39,
+   "notes": 37,
    "unbound": 0,
    "minted": 12,
-   "tokenRefs": 11,
+   "tokenRefs": 13,
    "factsCarriedPct": 100,
    "degradations": 15,
    "stubs": 1,
    "repeatParts": 0,
-   "b7Notes": 2,
+   "b7Notes": 0,
    "clean": true
   },
   {
@@ -2196,15 +2196,15 @@
     "figma-script"
    ],
    "emitterRefusals": [],
-   "notes": 35,
+   "notes": 33,
    "unbound": 0,
    "minted": 10,
-   "tokenRefs": 11,
+   "tokenRefs": 13,
    "factsCarriedPct": 100,
    "degradations": 15,
    "stubs": 1,
    "repeatParts": 0,
-   "b7Notes": 2,
+   "b7Notes": 0,
    "clean": true
   },
   {
@@ -2220,15 +2220,15 @@
     "figma-script"
    ],
    "emitterRefusals": [],
-   "notes": 39,
+   "notes": 37,
    "unbound": 0,
    "minted": 12,
-   "tokenRefs": 11,
+   "tokenRefs": 13,
    "factsCarriedPct": 100,
    "degradations": 15,
    "stubs": 1,
    "repeatParts": 0,
-   "b7Notes": 2,
+   "b7Notes": 0,
    "clean": true
   },
   {
@@ -2628,15 +2628,15 @@
     "figma-script"
    ],
    "emitterRefusals": [],
-   "notes": 25,
+   "notes": 24,
    "unbound": 0,
    "minted": 9,
-   "tokenRefs": 4,
+   "tokenRefs": 5,
    "factsCarriedPct": 100,
    "degradations": 0,
    "stubs": 1,
    "repeatParts": 0,
-   "b7Notes": 1,
+   "b7Notes": 0,
    "clean": true
   },
   {
@@ -4078,8 +4078,10 @@
    "expected": "promote",
    "statePropInApi": null,
    "statesCarried": [
+    "hover",
     "active",
-    "focus-visible"
+    "focus-visible",
+    "disabled"
    ],
    "drawnDisabled": true,
    "disabledBoolean": "disabled",
@@ -4101,7 +4103,8 @@
    "expected": "promote",
    "statePropInApi": null,
    "statesCarried": [
-    "focus-visible"
+    "focus-visible",
+    "disabled"
    ],
    "drawnDisabled": true,
    "disabledBoolean": "disabled",
@@ -4123,8 +4126,10 @@
    "expected": "promote",
    "statePropInApi": null,
    "statesCarried": [
+    "hover",
     "active",
-    "focus-visible"
+    "focus-visible",
+    "disabled"
    ],
    "drawnDisabled": true,
    "disabledBoolean": "disabled",
@@ -4146,8 +4151,10 @@
    "expected": "promote",
    "statePropInApi": null,
    "statesCarried": [
+    "hover",
     "active",
-    "focus-visible"
+    "focus-visible",
+    "disabled"
    ],
    "drawnDisabled": true,
    "disabledBoolean": "disabled",
@@ -4243,7 +4250,8 @@
    "statesCarried": [
     "hover",
     "active",
-    "focus-visible"
+    "focus-visible",
+    "disabled"
    ],
    "drawnDisabled": true,
    "disabledBoolean": "disabled",
@@ -4317,7 +4325,8 @@
    "statesCarried": [
     "hover",
     "active",
-    "focus-visible"
+    "focus-visible",
+    "disabled"
    ],
    "drawnDisabled": true,
    "disabledBoolean": "disabled",
@@ -4391,7 +4400,8 @@
    "statesCarried": [
     "hover",
     "active",
-    "focus-visible"
+    "focus-visible",
+    "disabled"
    ],
    "drawnDisabled": true,
    "disabledBoolean": "disabled",
@@ -4823,7 +4833,9 @@
    "expected": "promote",
    "statePropInApi": null,
    "statesCarried": [
-    "focus-visible"
+    "hover",
+    "focus-visible",
+    "disabled"
    ],
    "drawnDisabled": true,
    "disabledBoolean": "disabled",
@@ -4844,7 +4856,9 @@
    "expected": "promote",
    "statePropInApi": null,
    "statesCarried": [
-    "focus-visible"
+    "hover",
+    "focus-visible",
+    "disabled"
    ],
    "drawnDisabled": true,
    "disabledBoolean": "disabled",
@@ -4865,7 +4879,9 @@
    "expected": "promote",
    "statePropInApi": null,
    "statesCarried": [
-    "focus-visible"
+    "hover",
+    "focus-visible",
+    "disabled"
    ],
    "drawnDisabled": true,
    "disabledBoolean": "disabled",
@@ -5043,7 +5059,9 @@
    "outOfVocab": [],
    "expected": "promote",
    "statePropInApi": null,
-   "statesCarried": [],
+   "statesCarried": [
+    "disabled"
+   ],
    "drawnDisabled": true,
    "disabledBoolean": "disabled",
    "nearMissNoteNamed": false,
@@ -6936,132 +6954,6 @@
   "contract id \"ds.radio-button\" is claimed by two sets in this dump (\"RadioButton\" and \"Radio button\") — their names sanitize to the same id; rename one set (or edit one id) before adopting both"
  ],
  "findings": [
-  {
-   "cls": "disabled-part-label-b7",
-   "set": "_Tab-item",
-   "evidence": "_Tab-item:root/Tab label: fill differs in state \"hover\" — part-level state overrides are outside the contract vocabulary (root states only, STYLE-FIDELITY B7); NAMED, not proposed (review)",
-   "where": "core/propose-figma.ts proposeStateDiffs — pre-P18 vocabulary (Part.states lands on the parallel worktree)",
-   "known": "fix-in-flight"
-  },
-  {
-   "cls": "disabled-part-label-b7",
-   "set": "_Tab-item-pill",
-   "evidence": "_Tab-item-pill:root/Tab label: fill differs in state \"hover\" — part-level state overrides are outside the contract vocabulary (root states only, STYLE-FIDELITY B7); NAMED, not proposed (review)",
-   "where": "core/propose-figma.ts proposeStateDiffs — pre-P18 vocabulary (Part.states lands on the parallel worktree)",
-   "known": "fix-in-flight"
-  },
-  {
-   "cls": "disabled-part-label-b7",
-   "set": "_Tab-item-vertical-left",
-   "evidence": "_Tab-item-vertical-left:root/Tab label: fill differs in state \"hover\" — part-level state overrides are outside the contract vocabulary (root states only, STYLE-FIDELITY B7); NAMED, not proposed (review)",
-   "where": "core/propose-figma.ts proposeStateDiffs — pre-P18 vocabulary (Part.states lands on the parallel worktree)",
-   "known": "fix-in-flight"
-  },
-  {
-   "cls": "disabled-part-label-b7",
-   "set": "_Tab-item-vertical-right",
-   "evidence": "_Tab-item-vertical-right:root/Tab label: fill differs in state \"hover\" — part-level state overrides are outside the contract vocabulary (root states only, STYLE-FIDELITY B7); NAMED, not proposed (review)",
-   "where": "core/propose-figma.ts proposeStateDiffs — pre-P18 vocabulary (Part.states lands on the parallel worktree)",
-   "known": "fix-in-flight"
-  },
-  {
-   "cls": "disabled-part-label-b7",
-   "set": "Accordion",
-   "evidence": "Accordion:root/Header: fill differs in state \"hover\" — part-level state overrides are outside the contract vocabulary (root states only, STYLE-FIDELITY B7); NAMED, not proposed (review)",
-   "where": "core/propose-figma.ts proposeStateDiffs — pre-P18 vocabulary (Part.states lands on the parallel worktree)",
-   "known": "fix-in-flight"
-  },
-  {
-   "cls": "disabled-part-label-b7",
-   "set": "Button-Brand Primary",
-   "evidence": "Button-Brand Primary:root/Button: fill differs in state \"disabled\" — part-level state overrides are outside the contract vocabulary (root states only, STYLE-FIDELITY B7); NAMED, not proposed (review)",
-   "where": "core/propose-figma.ts proposeStateDiffs — pre-P18 vocabulary (Part.states lands on the parallel worktree)",
-   "known": "fix-in-flight"
-  },
-  {
-   "cls": "disabled-part-label-b7",
-   "set": "Button-Brand Secondary",
-   "evidence": "Button-Brand Secondary:root/Button: fill differs in state \"hover\" — part-level state overrides are outside the contract vocabulary (root states only, STYLE-FIDELITY B7); NAMED, not proposed (review)",
-   "where": "core/propose-figma.ts proposeStateDiffs — pre-P18 vocabulary (Part.states lands on the parallel worktree)",
-   "known": "fix-in-flight"
-  },
-  {
-   "cls": "disabled-part-label-b7",
-   "set": "Button-Brand Tertiary",
-   "evidence": "Button-Brand Tertiary:root/Button: fill differs in state \"hover\" — part-level state overrides are outside the contract vocabulary (root states only, STYLE-FIDELITY B7); NAMED, not proposed (review)",
-   "where": "core/propose-figma.ts proposeStateDiffs — pre-P18 vocabulary (Part.states lands on the parallel worktree)",
-   "known": "fix-in-flight"
-  },
-  {
-   "cls": "disabled-part-label-b7",
-   "set": "Button-Danger Primary",
-   "evidence": "Button-Danger Primary:root/Button: fill differs in state \"disabled\" — part-level state overrides are outside the contract vocabulary (root states only, STYLE-FIDELITY B7); NAMED, not proposed (review)",
-   "where": "core/propose-figma.ts proposeStateDiffs — pre-P18 vocabulary (Part.states lands on the parallel worktree)",
-   "known": "fix-in-flight"
-  },
-  {
-   "cls": "disabled-part-label-b7",
-   "set": "Button-Danger Secondary",
-   "evidence": "Button-Danger Secondary:root/Button: fill differs in state \"hover\" — part-level state overrides are outside the contract vocabulary (root states only, STYLE-FIDELITY B7); NAMED, not proposed (review)",
-   "where": "core/propose-figma.ts proposeStateDiffs — pre-P18 vocabulary (Part.states lands on the parallel worktree)",
-   "known": "fix-in-flight"
-  },
-  {
-   "cls": "disabled-part-label-b7",
-   "set": "Button-Danger Tertiary",
-   "evidence": "Button-Danger Tertiary:root/Button: fill differs in state \"hover\" — part-level state overrides are outside the contract vocabulary (root states only, STYLE-FIDELITY B7); NAMED, not proposed (review)",
-   "where": "core/propose-figma.ts proposeStateDiffs — pre-P18 vocabulary (Part.states lands on the parallel worktree)",
-   "known": "fix-in-flight"
-  },
-  {
-   "cls": "disabled-part-label-b7",
-   "set": "Button-Neutral Primary",
-   "evidence": "Button-Neutral Primary:root/Button: fill differs in state \"disabled\" — part-level state overrides are outside the contract vocabulary (root states only, STYLE-FIDELITY B7); NAMED, not proposed (review)",
-   "where": "core/propose-figma.ts proposeStateDiffs — pre-P18 vocabulary (Part.states lands on the parallel worktree)",
-   "known": "fix-in-flight"
-  },
-  {
-   "cls": "disabled-part-label-b7",
-   "set": "Button-Neutral Secondary",
-   "evidence": "Button-Neutral Secondary:root/Button: fill differs in state \"hover\" — part-level state overrides are outside the contract vocabulary (root states only, STYLE-FIDELITY B7); NAMED, not proposed (review)",
-   "where": "core/propose-figma.ts proposeStateDiffs — pre-P18 vocabulary (Part.states lands on the parallel worktree)",
-   "known": "fix-in-flight"
-  },
-  {
-   "cls": "disabled-part-label-b7",
-   "set": "Button-Neutral Tertiary",
-   "evidence": "Button-Neutral Tertiary:root/Button: fill differs in state \"hover\" — part-level state overrides are outside the contract vocabulary (root states only, STYLE-FIDELITY B7); NAMED, not proposed (review)",
-   "where": "core/propose-figma.ts proposeStateDiffs — pre-P18 vocabulary (Part.states lands on the parallel worktree)",
-   "known": "fix-in-flight"
-  },
-  {
-   "cls": "disabled-part-label-b7",
-   "set": "Link-Blue",
-   "evidence": "Link-Blue:root/Link label: fill differs in state \"hover\" — part-level state overrides are outside the contract vocabulary (root states only, STYLE-FIDELITY B7); NAMED, not proposed (review)",
-   "where": "core/propose-figma.ts proposeStateDiffs — pre-P18 vocabulary (Part.states lands on the parallel worktree)",
-   "known": "fix-in-flight"
-  },
-  {
-   "cls": "disabled-part-label-b7",
-   "set": "Link-Danger",
-   "evidence": "Link-Danger:root/Link label: fill differs in state \"hover\" — part-level state overrides are outside the contract vocabulary (root states only, STYLE-FIDELITY B7); NAMED, not proposed (review)",
-   "where": "core/propose-figma.ts proposeStateDiffs — pre-P18 vocabulary (Part.states lands on the parallel worktree)",
-   "known": "fix-in-flight"
-  },
-  {
-   "cls": "disabled-part-label-b7",
-   "set": "Link-Neutral",
-   "evidence": "Link-Neutral:root/Link label: fill differs in state \"hover\" — part-level state overrides are outside the contract vocabulary (root states only, STYLE-FIDELITY B7); NAMED, not proposed (review)",
-   "where": "core/propose-figma.ts proposeStateDiffs — pre-P18 vocabulary (Part.states lands on the parallel worktree)",
-   "known": "fix-in-flight"
-  },
-  {
-   "cls": "disabled-part-label-b7",
-   "set": "Toggle",
-   "evidence": "Toggle:root/Toggle label: fill differs in state \"disabled\" — part-level state overrides are outside the contract vocabulary (root states only, STYLE-FIDELITY B7); NAMED, not proposed (review)",
-   "where": "core/propose-figma.ts proposeStateDiffs — pre-P18 vocabulary (Part.states lands on the parallel worktree)",
-   "known": "fix-in-flight"
-  },
   {
    "cls": "duplicate-name-key-contradiction",
    "set": "Checkbox-icon",
