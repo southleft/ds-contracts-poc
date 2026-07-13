@@ -1,0 +1,108 @@
+{
+  "order": [
+    "List item",
+    "Icon",
+    "Button-Brand Primary",
+    "Dialog",
+    "Menu",
+    "Avatar",
+    "Badge",
+    "Card-Image",
+    "Chip",
+    "Navigation-Header"
+  ],
+  "firstPass": {
+    "List item": {
+      "linkedSession": 0,
+      "stubbed": 5
+    },
+    "Icon": {
+      "linkedSession": 0,
+      "stubbed": 0
+    },
+    "Button-Brand Primary": {
+      "linkedSession": 2,
+      "stubbed": 0
+    },
+    "Dialog": {
+      "linkedSession": 3,
+      "stubbed": 3
+    },
+    "Menu": {
+      "linkedSession": 1,
+      "stubbed": 0
+    },
+    "Avatar": {
+      "linkedSession": 1,
+      "stubbed": 2
+    },
+    "Badge": {
+      "linkedSession": 2,
+      "stubbed": 0
+    },
+    "Card-Image": {
+      "linkedSession": 12,
+      "stubbed": 0
+    },
+    "Chip": {
+      "linkedSession": 3,
+      "stubbed": 0
+    },
+    "Navigation-Header": {
+      "linkedSession": 2,
+      "stubbed": 5
+    }
+  },
+  "relink": {
+    "List item": {
+      "linkedSession": 3,
+      "stubbed": 2,
+      "stubbedDespiteInScope": []
+    },
+    "Icon": {
+      "linkedSession": 0,
+      "stubbed": 0,
+      "stubbedDespiteInScope": []
+    },
+    "Button-Brand Primary": {
+      "linkedSession": 2,
+      "stubbed": 0,
+      "stubbedDespiteInScope": []
+    },
+    "Dialog": {
+      "linkedSession": 3,
+      "stubbed": 3,
+      "stubbedDespiteInScope": []
+    },
+    "Menu": {
+      "linkedSession": 1,
+      "stubbed": 0,
+      "stubbedDespiteInScope": []
+    },
+    "Avatar": {
+      "linkedSession": 1,
+      "stubbed": 2,
+      "stubbedDespiteInScope": []
+    },
+    "Badge": {
+      "linkedSession": 2,
+      "stubbed": 0,
+      "stubbedDespiteInScope": []
+    },
+    "Card-Image": {
+      "linkedSession": 12,
+      "stubbed": 0,
+      "stubbedDespiteInScope": []
+    },
+    "Chip": {
+      "linkedSession": 3,
+      "stubbed": 0,
+      "stubbedDespiteInScope": []
+    },
+    "Navigation-Header": {
+      "linkedSession": 2,
+      "stubbed": 5,
+      "stubbedDespiteInScope": []
+    }
+  }
+}

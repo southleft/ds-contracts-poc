@@ -1,0 +1,7166 @@
+{
+ "_provenance": {
+  "generatedBy": "extract/figma/gauntlet/live/gauntlet.ts",
+  "dump": "extract/figma/fixtures/cbds-plugin-all-sets.v16.dump.json",
+  "dumpFileVersion": "2374568486037958769",
+  "generatedAt": "2026-07-13"
+ },
+ "tierTotals": {
+  "T2": {
+   "sets": 7,
+   "clean": 7
+  },
+  "T4": {
+   "sets": 36,
+   "clean": 36
+  },
+  "T5": {
+   "sets": 9,
+   "clean": 9
+  },
+  "T3": {
+   "sets": 22,
+   "clean": 22
+  },
+  "T1": {
+   "sets": 2,
+   "clean": 2
+  },
+  "S": {
+   "sets": 51,
+   "clean": 51
+  }
+ },
+ "tiers": [
+  {
+   "setName": "_Avatar Indicator",
+   "tier": "T2",
+   "variants": 15,
+   "realDeps": [],
+   "stateAxes": []
+  },
+  {
+   "setName": "_Breadcrumb item",
+   "tier": "T4",
+   "variants": 16,
+   "realDeps": [
+    "Menu"
+   ],
+   "stateAxes": [
+    "state"
+   ]
+  },
+  {
+   "setName": "_Button single-card",
+   "tier": "T4",
+   "variants": 6,
+   "realDeps": [
+    "Button-Brand Primary",
+    "Button-Danger Primary",
+    "Button-Neutral Primary"
+   ],
+   "stateAxes": []
+  },
+  {
+   "setName": "_Controls",
+   "tier": "T4",
+   "variants": 2,
+   "realDeps": [
+    "CaretDown",
+    "CaretUp"
+   ],
+   "stateAxes": []
+  },
+  {
+   "setName": "_Country code",
+   "tier": "T2",
+   "variants": 4,
+   "realDeps": [],
+   "stateAxes": []
+  },
+  {
+   "setName": "_Nav-item-base-close",
+   "tier": "T4",
+   "variants": 3,
+   "realDeps": [
+    "Badge Notification"
+   ],
+   "stateAxes": [
+    "state"
+   ]
+  },
+  {
+   "setName": "_Nav-item-base-open",
+   "tier": "T4",
+   "variants": 3,
+   "realDeps": [
+    "Badge Notification"
+   ],
+   "stateAxes": [
+    "state"
+   ]
+  },
+  {
+   "setName": "_Nav-item-menu",
+   "tier": "T5",
+   "variants": 2,
+   "realDeps": [
+    "_Nav-item-base-open"
+   ],
+   "stateAxes": []
+  },
+  {
+   "setName": "_pagination-number",
+   "tier": "T3",
+   "variants": 8,
+   "realDeps": [],
+   "stateAxes": [
+    "state"
+   ]
+  },
+  {
+   "setName": "_Panel-Accordion",
+   "tier": "T4",
+   "variants": 2,
+   "realDeps": [
+    "_Text-block-Panel"
+   ],
+   "stateAxes": []
+  },
+  {
+   "setName": "_Tab-item",
+   "tier": "T4",
+   "variants": 18,
+   "realDeps": [
+    "Badge Notification"
+   ],
+   "stateAxes": [
+    "state"
+   ]
+  },
+  {
+   "setName": "_Tab-item-pill",
+   "tier": "T4",
+   "variants": 18,
+   "realDeps": [
+    "Badge Notification"
+   ],
+   "stateAxes": [
+    "state"
+   ]
+  },
+  {
+   "setName": "_Tab-item-vertical-left",
+   "tier": "T4",
+   "variants": 18,
+   "realDeps": [
+    "Badge Notification"
+   ],
+   "stateAxes": [
+    "state"
+   ]
+  },
+  {
+   "setName": "_Tab-item-vertical-right",
+   "tier": "T4",
+   "variants": 18,
+   "realDeps": [
+    "Badge Notification"
+   ],
+   "stateAxes": [
+    "state"
+   ]
+  },
+  {
+   "setName": "_Text-block-Panel",
+   "tier": "T5",
+   "variants": 2,
+   "realDeps": [],
+   "stateAxes": []
+  },
+  {
+   "setName": "Accordion",
+   "tier": "T4",
+   "variants": 21,
+   "realDeps": [
+    "_Panel-Accordion"
+   ],
+   "stateAxes": [
+    "state"
+   ]
+  },
+  {
+   "setName": "Alert",
+   "tier": "T4",
+   "variants": 30,
+   "realDeps": [
+    "Link-Blue"
+   ],
+   "stateAxes": []
+  },
+  {
+   "setName": "Avatar",
+   "tier": "T4",
+   "variants": 36,
+   "realDeps": [
+    "Badge Notification",
+    "_Avatar Indicator"
+   ],
+   "stateAxes": []
+  },
+  {
+   "setName": "Avatar group",
+   "tier": "T4",
+   "variants": 6,
+   "realDeps": [
+    "Avatar"
+   ],
+   "stateAxes": []
+  },
+  {
+   "setName": "Badge",
+   "tier": "T2",
+   "variants": 72,
+   "realDeps": [],
+   "stateAxes": []
+  },
+  {
+   "setName": "Badge (ds.badge) — resolved values (stub)",
+   "tier": "T1",
+   "variants": 4,
+   "realDeps": [],
+   "stateAxes": []
+  },
+  {
+   "setName": "Badge (ds.badge) — token-bound",
+   "tier": "T1",
+   "variants": 5,
+   "realDeps": [],
+   "stateAxes": []
+  },
+  {
+   "setName": "Badge Notification",
+   "tier": "T2",
+   "variants": 60,
+   "realDeps": [],
+   "stateAxes": []
+  },
+  {
+   "setName": "Breadcrumb",
+   "tier": "T4",
+   "variants": 2,
+   "realDeps": [
+    "_Breadcrumb item"
+   ],
+   "stateAxes": []
+  },
+  {
+   "setName": "Button-Brand Primary",
+   "tier": "T3",
+   "variants": 15,
+   "realDeps": [],
+   "stateAxes": [
+    "state"
+   ]
+  },
+  {
+   "setName": "Button-Brand Secondary",
+   "tier": "T3",
+   "variants": 15,
+   "realDeps": [],
+   "stateAxes": [
+    "state"
+   ]
+  },
+  {
+   "setName": "Button-Brand Tertiary",
+   "tier": "T3",
+   "variants": 15,
+   "realDeps": [],
+   "stateAxes": [
+    "state"
+   ]
+  },
+  {
+   "setName": "Button-Danger Primary",
+   "tier": "T3",
+   "variants": 15,
+   "realDeps": [],
+   "stateAxes": [
+    "state"
+   ]
+  },
+  {
+   "setName": "Button-Danger Secondary",
+   "tier": "T3",
+   "variants": 15,
+   "realDeps": [],
+   "stateAxes": [
+    "state"
+   ]
+  },
+  {
+   "setName": "Button-Danger Tertiary",
+   "tier": "T3",
+   "variants": 15,
+   "realDeps": [],
+   "stateAxes": [
+    "state"
+   ]
+  },
+  {
+   "setName": "Button-Neutral Primary",
+   "tier": "T3",
+   "variants": 15,
+   "realDeps": [],
+   "stateAxes": [
+    "state"
+   ]
+  },
+  {
+   "setName": "Button-Neutral Secondary",
+   "tier": "T3",
+   "variants": 15,
+   "realDeps": [],
+   "stateAxes": [
+    "state"
+   ]
+  },
+  {
+   "setName": "Button-Neutral Tertiary",
+   "tier": "T3",
+   "variants": 15,
+   "realDeps": [],
+   "stateAxes": [
+    "state"
+   ]
+  },
+  {
+   "setName": "Card-Basic",
+   "tier": "T5",
+   "variants": 2,
+   "realDeps": [
+    "Avatar",
+    "Badge",
+    "_Slot-card"
+   ],
+   "stateAxes": []
+  },
+  {
+   "setName": "Card-Image",
+   "tier": "T5",
+   "variants": 12,
+   "realDeps": [
+    "Avatar",
+    "Badge",
+    "_Slot-card"
+   ],
+   "stateAxes": []
+  },
+  {
+   "setName": "Checkbox",
+   "tier": "T4",
+   "variants": 12,
+   "realDeps": [
+    "Checkbox-icon"
+   ],
+   "stateAxes": [
+    "state"
+   ]
+  },
+  {
+   "setName": "Checkbox-icon",
+   "tier": "T4",
+   "variants": 42,
+   "realDeps": [
+    "CheckSquare",
+    "MinusSquare",
+    "Square"
+   ],
+   "stateAxes": [
+    "state"
+   ]
+  },
+  {
+   "setName": "Chip",
+   "tier": "T4",
+   "variants": 64,
+   "realDeps": [
+    "Avatar"
+   ],
+   "stateAxes": [
+    "state"
+   ]
+  },
+  {
+   "setName": "Dialog",
+   "tier": "T5",
+   "variants": 4,
+   "realDeps": [
+    "Button-Brand Primary",
+    "Button-Brand Secondary",
+    "Button-Danger Primary",
+    "Button-Neutral Tertiary",
+    "_Slot-Dialog"
+   ],
+   "stateAxes": []
+  },
+  {
+   "setName": "Dropdown",
+   "tier": "T4",
+   "variants": 14,
+   "realDeps": [
+    "Menu",
+    "_Error text",
+    "_Helper text",
+    "_Input label"
+   ],
+   "stateAxes": [
+    "state"
+   ]
+  },
+  {
+   "setName": "Dropdown-MutliSelect",
+   "tier": "T4",
+   "variants": 16,
+   "realDeps": [
+    "Chip",
+    "Menu",
+    "_Error text",
+    "_Helper text",
+    "_Input label"
+   ],
+   "stateAxes": [
+    "state"
+   ]
+  },
+  {
+   "setName": "Icon",
+   "tier": "T5",
+   "variants": 6,
+   "realDeps": [
+    "Placeholder"
+   ],
+   "stateAxes": []
+  },
+  {
+   "setName": "Icon Button Brand-Primary",
+   "tier": "T3",
+   "variants": 20,
+   "realDeps": [],
+   "stateAxes": [
+    "state"
+   ]
+  },
+  {
+   "setName": "Icon Button-Brand Secondary",
+   "tier": "T3",
+   "variants": 20,
+   "realDeps": [],
+   "stateAxes": [
+    "state"
+   ]
+  },
+  {
+   "setName": "Icon Button-Brand Tertiary",
+   "tier": "T3",
+   "variants": 20,
+   "realDeps": [],
+   "stateAxes": [
+    "state"
+   ]
+  },
+  {
+   "setName": "Icon Button-Danger Primary",
+   "tier": "T3",
+   "variants": 20,
+   "realDeps": [],
+   "stateAxes": [
+    "state"
+   ]
+  },
+  {
+   "setName": "Icon Button-Danger Secondary",
+   "tier": "T3",
+   "variants": 20,
+   "realDeps": [],
+   "stateAxes": [
+    "state"
+   ]
+  },
+  {
+   "setName": "Icon Button-Danger Tertiary",
+   "tier": "T3",
+   "variants": 20,
+   "realDeps": [],
+   "stateAxes": [
+    "state"
+   ]
+  },
+  {
+   "setName": "Icon Button-Neutral Primary",
+   "tier": "T3",
+   "variants": 20,
+   "realDeps": [],
+   "stateAxes": [
+    "state"
+   ]
+  },
+  {
+   "setName": "Icon Button-Neutral Secondary",
+   "tier": "T3",
+   "variants": 20,
+   "realDeps": [],
+   "stateAxes": [
+    "state"
+   ]
+  },
+  {
+   "setName": "Icon Button-Neutral Tertiary",
+   "tier": "T3",
+   "variants": 20,
+   "realDeps": [],
+   "stateAxes": [
+    "state"
+   ]
+  },
+  {
+   "setName": "Input Date",
+   "tier": "T4",
+   "variants": 14,
+   "realDeps": [
+    "_Error text",
+    "_Helper text",
+    "_Input label"
+   ],
+   "stateAxes": [
+    "state"
+   ]
+  },
+  {
+   "setName": "Input Number",
+   "tier": "T4",
+   "variants": 28,
+   "realDeps": [
+    "_Controls",
+    "_Country code",
+    "_Error text",
+    "_Helper text",
+    "_Input label"
+   ],
+   "stateAxes": [
+    "state"
+   ]
+  },
+  {
+   "setName": "Input Text",
+   "tier": "T4",
+   "variants": 14,
+   "realDeps": [
+    "_Error text",
+    "_Helper text",
+    "_Input label"
+   ],
+   "stateAxes": [
+    "state"
+   ]
+  },
+  {
+   "setName": "Link-Blue",
+   "tier": "T3",
+   "variants": 24,
+   "realDeps": [],
+   "stateAxes": [
+    "state"
+   ]
+  },
+  {
+   "setName": "Link-Danger",
+   "tier": "T3",
+   "variants": 24,
+   "realDeps": [],
+   "stateAxes": [
+    "state"
+   ]
+  },
+  {
+   "setName": "Link-Neutral",
+   "tier": "T3",
+   "variants": 24,
+   "realDeps": [],
+   "stateAxes": [
+    "state"
+   ]
+  },
+  {
+   "setName": "List item",
+   "tier": "T5",
+   "variants": 23,
+   "realDeps": [
+    "Avatar",
+    "Badge",
+    "Button-Brand Primary",
+    "Button-Brand Secondary",
+    "Input Text"
+   ],
+   "stateAxes": [
+    "state"
+   ]
+  },
+  {
+   "setName": "Menu",
+   "tier": "T4",
+   "variants": 3,
+   "realDeps": [
+    "List item"
+   ],
+   "stateAxes": []
+  },
+  {
+   "setName": "Navigation-Header",
+   "tier": "T5",
+   "variants": 3,
+   "realDeps": [
+    "Avatar",
+    "Button-Brand Primary",
+    "Button-Brand Secondary",
+    "Icon Button-Neutral Tertiary",
+    "Link-Neutral"
+   ],
+   "stateAxes": []
+  },
+  {
+   "setName": "Navigation-Side",
+   "tier": "T4",
+   "variants": 2,
+   "realDeps": [
+    "Avatar",
+    "Search",
+    "_Footer-Nav",
+    "_Header-Nav",
+    "_Nav-item-base-close",
+    "_Nav-item-menu"
+   ],
+   "stateAxes": []
+  },
+  {
+   "setName": "Pagination-2",
+   "tier": "T4",
+   "variants": 3,
+   "realDeps": [
+    "Button-Neutral Secondary",
+    "_pagination-number"
+   ],
+   "stateAxes": []
+  },
+  {
+   "setName": "Pagination-3",
+   "tier": "T4",
+   "variants": 3,
+   "realDeps": [
+    "Icon Button-Neutral Secondary",
+    "_pagination-number"
+   ],
+   "stateAxes": []
+  },
+  {
+   "setName": "Progress bar",
+   "tier": "T2",
+   "variants": 18,
+   "realDeps": [],
+   "stateAxes": []
+  },
+  {
+   "setName": "Radio button",
+   "tier": "T5",
+   "variants": 12,
+   "realDeps": [
+    "Radio button-icon"
+   ],
+   "stateAxes": [
+    "state"
+   ]
+  },
+  {
+   "setName": "Radio button-icon",
+   "tier": "T4",
+   "variants": 28,
+   "realDeps": [
+    "Circle",
+    "RadioButton"
+   ],
+   "stateAxes": [
+    "state"
+   ]
+  },
+  {
+   "setName": "Search",
+   "tier": "T4",
+   "variants": 12,
+   "realDeps": [
+    "Menu",
+    "_Helper text",
+    "_Input label"
+   ],
+   "stateAxes": [
+    "state"
+   ]
+  },
+  {
+   "setName": "Search-MultiSelect",
+   "tier": "T4",
+   "variants": 14,
+   "realDeps": [
+    "Chip",
+    "Menu",
+    "_Helper text",
+    "_Input label"
+   ],
+   "stateAxes": [
+    "state"
+   ]
+  },
+  {
+   "setName": "Tab-Line",
+   "tier": "T4",
+   "variants": 6,
+   "realDeps": [
+    "_Tab-item",
+    "_Tab-item-vertical-left",
+    "_Tab-item-vertical-right"
+   ],
+   "stateAxes": []
+  },
+  {
+   "setName": "Tab-Pill",
+   "tier": "T4",
+   "variants": 4,
+   "realDeps": [
+    "_Tab-item-pill"
+   ],
+   "stateAxes": []
+  },
+  {
+   "setName": "Table-Data cell",
+   "tier": "T4",
+   "variants": 15,
+   "realDeps": [
+    "Avatar",
+    "Avatar group",
+    "Badge",
+    "Button-Brand Primary",
+    "Checkbox-icon",
+    "Input Text",
+    "Link-Blue",
+    "Radio button-icon"
+   ],
+   "stateAxes": [
+    "state"
+   ]
+  },
+  {
+   "setName": "Text Area",
+   "tier": "T4",
+   "variants": 14,
+   "realDeps": [
+    "Notches",
+    "_Error text",
+    "_Helper text",
+    "_Input label"
+   ],
+   "stateAxes": [
+    "state"
+   ]
+  },
+  {
+   "setName": "Title card",
+   "tier": "T2",
+   "variants": 3,
+   "realDeps": [],
+   "stateAxes": []
+  },
+  {
+   "setName": "Toggle",
+   "tier": "T4",
+   "variants": 8,
+   "realDeps": [
+    "Toggle-icon"
+   ],
+   "stateAxes": [
+    "state"
+   ]
+  },
+  {
+   "setName": "Toggle-icon",
+   "tier": "T4",
+   "variants": 16,
+   "realDeps": [
+    "ToggleLeft",
+    "ToggleRight"
+   ],
+   "stateAxes": [
+    "state"
+   ]
+  },
+  {
+   "setName": "Tooltip",
+   "tier": "T2",
+   "variants": 9,
+   "realDeps": [],
+   "stateAxes": []
+  }
+ ],
+ "singlesSample": [
+  "Airplane",
+  "ArrowArcRight",
+  "ArrowBendLeftUp",
+  "ArrowCircleUpLeft",
+  "ArrowFatLineDown",
+  "ArrowFatLinesDown",
+  "ArrowLineUpRight",
+  "CalendarMinus",
+  "CalendarSlash",
+  "CaretCircleDoubleLeft",
+  "CaretLineRight",
+  "CellSignalNone",
+  "Champagne",
+  "City",
+  "ClockAfternoon",
+  "Coffee",
+  "Compass",
+  "CraneTower",
+  "CurrencyCircleDollar",
+  "Cylinder",
+  "Database",
+  "DiceTwo",
+  "GitBranch",
+  "GitDiff",
+  "GrainsSlash",
+  "GreaterThan",
+  "HandWithdraw",
+  "HeartStraight",
+  "HourglassHigh",
+  "Island",
+  "KeyReturn",
+  "ListDashes",
+  "MicrophoneSlash",
+  "MinusSquare",
+  "Monitor",
+  "MouseSimple",
+  "NotePencil",
+  "Nut",
+  "Pause",
+  "PersonSimpleSki",
+  "Ranking",
+  "Recycle",
+  "ShoppingBag",
+  "SmileyWink",
+  "Stack",
+  "StarFour",
+  "StripeLogo",
+  "SunHorizon",
+  "Sword",
+  "TextAlignRight"
+ ],
+ "baseRecords": [
+  {
+   "setName": "_Avatar Indicator",
+   "type": "COMPONENT_SET",
+   "tier": "T2",
+   "proposed": true,
+   "violations": [],
+   "emitted": [
+    "react",
+    "html",
+    "react-inline",
+    "figma-script"
+   ],
+   "emitterRefusals": [],
+   "notes": 6,
+   "unbound": 0,
+   "minted": 1,
+   "tokenRefs": 6,
+   "factsCarriedPct": 100,
+   "degradations": 15,
+   "stubs": 0,
+   "repeatParts": 0,
+   "b7Notes": 0,
+   "clean": true
+  },
+  {
+   "setName": "_Breadcrumb item",
+   "type": "COMPONENT_SET",
+   "tier": "T4",
+   "proposed": true,
+   "violations": [],
+   "emitted": [
+    "react",
+    "html",
+    "react-inline",
+    "figma-script"
+   ],
+   "emitterRefusals": [],
+   "notes": 67,
+   "unbound": 1,
+   "minted": 10,
+   "tokenRefs": 31,
+   "factsCarriedPct": 97,
+   "degradations": 6,
+   "stubs": 2,
+   "repeatParts": 0,
+   "b7Notes": 0,
+   "clean": true
+  },
+  {
+   "setName": "_Button single-card",
+   "type": "COMPONENT_SET",
+   "tier": "T4",
+   "proposed": true,
+   "violations": [],
+   "emitted": [
+    "react",
+    "html",
+    "react-inline",
+    "figma-script"
+   ],
+   "emitterRefusals": [],
+   "notes": 25,
+   "unbound": 0,
+   "minted": 6,
+   "tokenRefs": 0,
+   "factsCarriedPct": null,
+   "degradations": 0,
+   "stubs": 3,
+   "repeatParts": 0,
+   "b7Notes": 0,
+   "clean": true
+  },
+  {
+   "setName": "_Controls",
+   "type": "COMPONENT_SET",
+   "tier": "T4",
+   "proposed": true,
+   "violations": [],
+   "emitted": [
+    "react",
+    "html",
+    "react-inline",
+    "figma-script"
+   ],
+   "emitterRefusals": [],
+   "notes": 17,
+   "unbound": 0,
+   "minted": 3,
+   "tokenRefs": 2,
+   "factsCarriedPct": 100,
+   "degradations": 0,
+   "stubs": 2,
+   "repeatParts": 0,
+   "b7Notes": 0,
+   "clean": true
+  },
+  {
+   "setName": "_Country code",
+   "type": "COMPONENT_SET",
+   "tier": "T2",
+   "proposed": true,
+   "violations": [],
+   "emitted": [
+    "react",
+    "html",
+    "react-inline",
+    "figma-script"
+   ],
+   "emitterRefusals": [],
+   "notes": 48,
+   "unbound": 0,
+   "minted": 18,
+   "tokenRefs": 7,
+   "factsCarriedPct": 100,
+   "degradations": 0,
+   "stubs": 2,
+   "repeatParts": 0,
+   "b7Notes": 0,
+   "clean": true
+  },
+  {
+   "setName": "_Nav-item-base-close",
+   "type": "COMPONENT_SET",
+   "tier": "T4",
+   "proposed": true,
+   "violations": [],
+   "emitted": [
+    "react",
+    "html",
+    "react-inline",
+    "figma-script"
+   ],
+   "emitterRefusals": [],
+   "notes": 28,
+   "unbound": 0,
+   "minted": 7,
+   "tokenRefs": 9,
+   "factsCarriedPct": 100,
+   "degradations": 6,
+   "stubs": 2,
+   "repeatParts": 0,
+   "b7Notes": 0,
+   "clean": true
+  },
+  {
+   "setName": "_Nav-item-base-open",
+   "type": "COMPONENT_SET",
+   "tier": "T4",
+   "proposed": true,
+   "violations": [],
+   "emitted": [
+    "react",
+    "html",
+    "react-inline",
+    "figma-script"
+   ],
+   "emitterRefusals": [],
+   "notes": 42,
+   "unbound": 0,
+   "minted": 11,
+   "tokenRefs": 15,
+   "factsCarriedPct": 100,
+   "degradations": 6,
+   "stubs": 2,
+   "repeatParts": 0,
+   "b7Notes": 0,
+   "clean": true
+  },
+  {
+   "setName": "_Nav-item-menu",
+   "type": "COMPONENT_SET",
+   "tier": "T5",
+   "proposed": true,
+   "violations": [],
+   "emitted": [
+    "react",
+    "html",
+    "react-inline",
+    "figma-script"
+   ],
+   "emitterRefusals": [],
+   "notes": 15,
+   "unbound": 0,
+   "minted": 2,
+   "tokenRefs": 0,
+   "factsCarriedPct": null,
+   "degradations": 0,
+   "stubs": 1,
+   "repeatParts": 1,
+   "b7Notes": 0,
+   "clean": true
+  },
+  {
+   "setName": "_pagination-number",
+   "type": "COMPONENT_SET",
+   "tier": "T3",
+   "proposed": true,
+   "violations": [],
+   "emitted": [
+    "react",
+    "html",
+    "react-inline",
+    "figma-script"
+   ],
+   "emitterRefusals": [],
+   "notes": 25,
+   "unbound": 0,
+   "minted": 5,
+   "tokenRefs": 8,
+   "factsCarriedPct": 100,
+   "degradations": 0,
+   "stubs": 1,
+   "repeatParts": 0,
+   "b7Notes": 0,
+   "clean": true
+  },
+  {
+   "setName": "_Panel-Accordion",
+   "type": "COMPONENT_SET",
+   "tier": "T4",
+   "proposed": true,
+   "violations": [],
+   "emitted": [
+    "react",
+    "html",
+    "react-inline",
+    "figma-script"
+   ],
+   "emitterRefusals": [],
+   "notes": 52,
+   "unbound": 0,
+   "minted": 4,
+   "tokenRefs": 3,
+   "factsCarriedPct": 100,
+   "degradations": 2,
+   "stubs": 1,
+   "repeatParts": 0,
+   "b7Notes": 0,
+   "clean": true
+  },
+  {
+   "setName": "_Tab-item",
+   "type": "COMPONENT_SET",
+   "tier": "T4",
+   "proposed": true,
+   "violations": [],
+   "emitted": [
+    "react",
+    "html",
+    "react-inline",
+    "figma-script"
+   ],
+   "emitterRefusals": [],
+   "notes": 44,
+   "unbound": 0,
+   "minted": 11,
+   "tokenRefs": 9,
+   "factsCarriedPct": 100,
+   "degradations": 8,
+   "stubs": 2,
+   "repeatParts": 0,
+   "b7Notes": 3,
+   "clean": true
+  },
+  {
+   "setName": "_Tab-item-pill",
+   "type": "COMPONENT_SET",
+   "tier": "T4",
+   "proposed": true,
+   "violations": [],
+   "emitted": [
+    "react",
+    "html",
+    "react-inline",
+    "figma-script"
+   ],
+   "emitterRefusals": [],
+   "notes": 53,
+   "unbound": 0,
+   "minted": 11,
+   "tokenRefs": 8,
+   "factsCarriedPct": 100,
+   "degradations": 0,
+   "stubs": 2,
+   "repeatParts": 0,
+   "b7Notes": 3,
+   "clean": true
+  },
+  {
+   "setName": "_Tab-item-vertical-left",
+   "type": "COMPONENT_SET",
+   "tier": "T4",
+   "proposed": true,
+   "violations": [],
+   "emitted": [
+    "react",
+    "html",
+    "react-inline",
+    "figma-script"
+   ],
+   "emitterRefusals": [],
+   "notes": 46,
+   "unbound": 0,
+   "minted": 11,
+   "tokenRefs": 9,
+   "factsCarriedPct": 100,
+   "degradations": 10,
+   "stubs": 2,
+   "repeatParts": 0,
+   "b7Notes": 3,
+   "clean": true
+  },
+  {
+   "setName": "_Tab-item-vertical-right",
+   "type": "COMPONENT_SET",
+   "tier": "T4",
+   "proposed": true,
+   "violations": [],
+   "emitted": [
+    "react",
+    "html",
+    "react-inline",
+    "figma-script"
+   ],
+   "emitterRefusals": [],
+   "notes": 46,
+   "unbound": 0,
+   "minted": 11,
+   "tokenRefs": 9,
+   "factsCarriedPct": 100,
+   "degradations": 10,
+   "stubs": 2,
+   "repeatParts": 0,
+   "b7Notes": 3,
+   "clean": true
+  },
+  {
+   "setName": "_Text-block-Panel",
+   "type": "COMPONENT_SET",
+   "tier": "T5",
+   "proposed": true,
+   "violations": [],
+   "emitted": [
+    "react",
+    "html",
+    "react-inline",
+    "figma-script"
+   ],
+   "emitterRefusals": [],
+   "notes": 33,
+   "unbound": 0,
+   "minted": 11,
+   "tokenRefs": 16,
+   "factsCarriedPct": 100,
+   "degradations": 2,
+   "stubs": 1,
+   "repeatParts": 0,
+   "b7Notes": 0,
+   "clean": true
+  },
+  {
+   "setName": "Accordion",
+   "type": "COMPONENT_SET",
+   "tier": "T4",
+   "proposed": true,
+   "violations": [],
+   "emitted": [
+    "react",
+    "html",
+    "react-inline",
+    "figma-script"
+   ],
+   "emitterRefusals": [],
+   "notes": 105,
+   "unbound": 2,
+   "minted": 29,
+   "tokenRefs": 22,
+   "factsCarriedPct": 92,
+   "degradations": 42,
+   "stubs": 2,
+   "repeatParts": 0,
+   "b7Notes": 1,
+   "clean": true
+  },
+  {
+   "setName": "Alert",
+   "type": "COMPONENT_SET",
+   "tier": "T4",
+   "proposed": true,
+   "violations": [],
+   "emitted": [
+    "react",
+    "html",
+    "react-inline",
+    "figma-script"
+   ],
+   "emitterRefusals": [],
+   "notes": 46,
+   "unbound": 0,
+   "minted": 10,
+   "tokenRefs": 16,
+   "factsCarriedPct": 100,
+   "degradations": 0,
+   "stubs": 2,
+   "repeatParts": 0,
+   "b7Notes": 0,
+   "clean": true
+  },
+  {
+   "setName": "Avatar",
+   "type": "COMPONENT_SET",
+   "tier": "T4",
+   "proposed": true,
+   "violations": [],
+   "emitted": [
+    "react",
+    "html",
+    "react-inline",
+    "figma-script"
+   ],
+   "emitterRefusals": [],
+   "notes": 92,
+   "unbound": 2,
+   "minted": 30,
+   "tokenRefs": 12,
+   "factsCarriedPct": 86,
+   "degradations": 14,
+   "stubs": 3,
+   "repeatParts": 0,
+   "b7Notes": 0,
+   "clean": true
+  },
+  {
+   "setName": "Avatar group",
+   "type": "COMPONENT_SET",
+   "tier": "T4",
+   "proposed": true,
+   "violations": [],
+   "emitted": [
+    "react",
+    "html",
+    "react-inline",
+    "figma-script"
+   ],
+   "emitterRefusals": [],
+   "notes": 59,
+   "unbound": 0,
+   "minted": 12,
+   "tokenRefs": 0,
+   "factsCarriedPct": null,
+   "degradations": 0,
+   "stubs": 1,
+   "repeatParts": 0,
+   "b7Notes": 0,
+   "clean": true
+  },
+  {
+   "setName": "Badge",
+   "type": "COMPONENT_SET",
+   "tier": "T2",
+   "proposed": true,
+   "violations": [],
+   "emitted": [
+    "react",
+    "html",
+    "react-inline",
+    "figma-script"
+   ],
+   "emitterRefusals": [],
+   "notes": 40,
+   "unbound": 0,
+   "minted": 8,
+   "tokenRefs": 8,
+   "factsCarriedPct": 100,
+   "degradations": 0,
+   "stubs": 1,
+   "repeatParts": 0,
+   "b7Notes": 0,
+   "clean": true
+  },
+  {
+   "setName": "Badge (ds.badge) — resolved values (stub)",
+   "type": "COMPONENT_SET",
+   "tier": "T1",
+   "proposed": true,
+   "violations": [],
+   "emitted": [
+    "react",
+    "html",
+    "react-inline",
+    "figma-script"
+   ],
+   "emitterRefusals": [],
+   "notes": 18,
+   "unbound": 0,
+   "minted": 13,
+   "tokenRefs": 5,
+   "factsCarriedPct": 100,
+   "degradations": 0,
+   "stubs": 0,
+   "repeatParts": 0,
+   "b7Notes": 0,
+   "clean": true
+  },
+  {
+   "setName": "Badge (ds.badge) — token-bound",
+   "type": "COMPONENT_SET",
+   "tier": "T1",
+   "proposed": true,
+   "violations": [],
+   "emitted": [
+    "react",
+    "html",
+    "react-inline",
+    "figma-script"
+   ],
+   "emitterRefusals": [],
+   "notes": 7,
+   "unbound": 0,
+   "minted": 2,
+   "tokenRefs": 5,
+   "factsCarriedPct": 100,
+   "degradations": 0,
+   "stubs": 0,
+   "repeatParts": 0,
+   "b7Notes": 0,
+   "clean": true
+  },
+  {
+   "setName": "Badge Notification",
+   "type": "COMPONENT_SET",
+   "tier": "T2",
+   "proposed": true,
+   "violations": [],
+   "emitted": [
+    "react",
+    "html",
+    "react-inline",
+    "figma-script"
+   ],
+   "emitterRefusals": [],
+   "notes": 19,
+   "unbound": 3,
+   "minted": 2,
+   "tokenRefs": 6,
+   "factsCarriedPct": 67,
+   "degradations": 0,
+   "stubs": 0,
+   "repeatParts": 0,
+   "b7Notes": 0,
+   "clean": true
+  },
+  {
+   "setName": "Breadcrumb",
+   "type": "COMPONENT_SET",
+   "tier": "T4",
+   "proposed": true,
+   "violations": [],
+   "emitted": [
+    "react",
+    "html",
+    "react-inline",
+    "figma-script"
+   ],
+   "emitterRefusals": [],
+   "notes": 13,
+   "unbound": 0,
+   "minted": 1,
+   "tokenRefs": 2,
+   "factsCarriedPct": 100,
+   "degradations": 0,
+   "stubs": 1,
+   "repeatParts": 1,
+   "b7Notes": 0,
+   "clean": true
+  },
+  {
+   "setName": "Button-Brand Primary",
+   "type": "COMPONENT_SET",
+   "tier": "T3",
+   "proposed": true,
+   "violations": [],
+   "emitted": [
+    "react",
+    "html",
+    "react-inline",
+    "figma-script"
+   ],
+   "emitterRefusals": [],
+   "notes": 37,
+   "unbound": 0,
+   "minted": 13,
+   "tokenRefs": 17,
+   "factsCarriedPct": 100,
+   "degradations": 0,
+   "stubs": 1,
+   "repeatParts": 0,
+   "b7Notes": 1,
+   "clean": true
+  },
+  {
+   "setName": "Button-Brand Secondary",
+   "type": "COMPONENT_SET",
+   "tier": "T3",
+   "proposed": true,
+   "violations": [],
+   "emitted": [
+    "react",
+    "html",
+    "react-inline",
+    "figma-script"
+   ],
+   "emitterRefusals": [],
+   "notes": 38,
+   "unbound": 0,
+   "minted": 13,
+   "tokenRefs": 21,
+   "factsCarriedPct": 100,
+   "degradations": 0,
+   "stubs": 1,
+   "repeatParts": 0,
+   "b7Notes": 3,
+   "clean": true
+  },
+  {
+   "setName": "Button-Brand Tertiary",
+   "type": "COMPONENT_SET",
+   "tier": "T3",
+   "proposed": true,
+   "violations": [],
+   "emitted": [
+    "react",
+    "html",
+    "react-inline",
+    "figma-script"
+   ],
+   "emitterRefusals": [],
+   "notes": 38,
+   "unbound": 0,
+   "minted": 12,
+   "tokenRefs": 14,
+   "factsCarriedPct": 100,
+   "degradations": 0,
+   "stubs": 1,
+   "repeatParts": 0,
+   "b7Notes": 3,
+   "clean": true
+  },
+  {
+   "setName": "Button-Danger Primary",
+   "type": "COMPONENT_SET",
+   "tier": "T3",
+   "proposed": true,
+   "violations": [],
+   "emitted": [
+    "react",
+    "html",
+    "react-inline",
+    "figma-script"
+   ],
+   "emitterRefusals": [],
+   "notes": 35,
+   "unbound": 0,
+   "minted": 12,
+   "tokenRefs": 16,
+   "factsCarriedPct": 100,
+   "degradations": 0,
+   "stubs": 1,
+   "repeatParts": 0,
+   "b7Notes": 1,
+   "clean": true
+  },
+  {
+   "setName": "Button-Danger Secondary",
+   "type": "COMPONENT_SET",
+   "tier": "T3",
+   "proposed": true,
+   "violations": [],
+   "emitted": [
+    "react",
+    "html",
+    "react-inline",
+    "figma-script"
+   ],
+   "emitterRefusals": [],
+   "notes": 38,
+   "unbound": 0,
+   "minted": 13,
+   "tokenRefs": 19,
+   "factsCarriedPct": 100,
+   "degradations": 0,
+   "stubs": 1,
+   "repeatParts": 0,
+   "b7Notes": 3,
+   "clean": true
+  },
+  {
+   "setName": "Button-Danger Tertiary",
+   "type": "COMPONENT_SET",
+   "tier": "T3",
+   "proposed": true,
+   "violations": [],
+   "emitted": [
+    "react",
+    "html",
+    "react-inline",
+    "figma-script"
+   ],
+   "emitterRefusals": [],
+   "notes": 38,
+   "unbound": 0,
+   "minted": 12,
+   "tokenRefs": 14,
+   "factsCarriedPct": 100,
+   "degradations": 0,
+   "stubs": 1,
+   "repeatParts": 0,
+   "b7Notes": 3,
+   "clean": true
+  },
+  {
+   "setName": "Button-Neutral Primary",
+   "type": "COMPONENT_SET",
+   "tier": "T3",
+   "proposed": true,
+   "violations": [],
+   "emitted": [
+    "react",
+    "html",
+    "react-inline",
+    "figma-script"
+   ],
+   "emitterRefusals": [],
+   "notes": 35,
+   "unbound": 0,
+   "minted": 12,
+   "tokenRefs": 16,
+   "factsCarriedPct": 100,
+   "degradations": 0,
+   "stubs": 1,
+   "repeatParts": 0,
+   "b7Notes": 1,
+   "clean": true
+  },
+  {
+   "setName": "Button-Neutral Secondary",
+   "type": "COMPONENT_SET",
+   "tier": "T3",
+   "proposed": true,
+   "violations": [],
+   "emitted": [
+    "react",
+    "html",
+    "react-inline",
+    "figma-script"
+   ],
+   "emitterRefusals": [],
+   "notes": 38,
+   "unbound": 0,
+   "minted": 13,
+   "tokenRefs": 22,
+   "factsCarriedPct": 100,
+   "degradations": 0,
+   "stubs": 1,
+   "repeatParts": 0,
+   "b7Notes": 3,
+   "clean": true
+  },
+  {
+   "setName": "Button-Neutral Tertiary",
+   "type": "COMPONENT_SET",
+   "tier": "T3",
+   "proposed": true,
+   "violations": [],
+   "emitted": [
+    "react",
+    "html",
+    "react-inline",
+    "figma-script"
+   ],
+   "emitterRefusals": [],
+   "notes": 38,
+   "unbound": 0,
+   "minted": 12,
+   "tokenRefs": 14,
+   "factsCarriedPct": 100,
+   "degradations": 0,
+   "stubs": 1,
+   "repeatParts": 0,
+   "b7Notes": 3,
+   "clean": true
+  },
+  {
+   "setName": "Card-Basic",
+   "type": "COMPONENT_SET",
+   "tier": "T5",
+   "proposed": true,
+   "violations": [],
+   "emitted": [
+    "react",
+    "html",
+    "react-inline",
+    "figma-script"
+   ],
+   "emitterRefusals": [],
+   "notes": 66,
+   "unbound": 0,
+   "minted": 24,
+   "tokenRefs": 16,
+   "factsCarriedPct": 100,
+   "degradations": 0,
+   "stubs": 4,
+   "repeatParts": 0,
+   "b7Notes": 0,
+   "clean": true
+  },
+  {
+   "setName": "Card-Image",
+   "type": "COMPONENT_SET",
+   "tier": "T5",
+   "proposed": true,
+   "violations": [],
+   "emitted": [
+    "react",
+    "html",
+    "react-inline",
+    "figma-script"
+   ],
+   "emitterRefusals": [],
+   "notes": 176,
+   "unbound": 0,
+   "minted": 39,
+   "tokenRefs": 34,
+   "factsCarriedPct": 100,
+   "degradations": 16,
+   "stubs": 4,
+   "repeatParts": 0,
+   "b7Notes": 0,
+   "clean": true
+  },
+  {
+   "setName": "Checkbox",
+   "type": "COMPONENT_SET",
+   "tier": "T4",
+   "proposed": true,
+   "violations": [],
+   "emitted": [
+    "react",
+    "html",
+    "react-inline",
+    "figma-script"
+   ],
+   "emitterRefusals": [],
+   "notes": 49,
+   "unbound": 0,
+   "minted": 18,
+   "tokenRefs": 14,
+   "factsCarriedPct": 100,
+   "degradations": 0,
+   "stubs": 2,
+   "repeatParts": 0,
+   "b7Notes": 0,
+   "clean": true
+  },
+  {
+   "setName": "Checkbox-icon",
+   "type": "COMPONENT_SET",
+   "tier": "T4",
+   "proposed": true,
+   "violations": [],
+   "emitted": [
+    "react",
+    "html",
+    "react-inline",
+    "figma-script"
+   ],
+   "emitterRefusals": [],
+   "notes": 25,
+   "unbound": 0,
+   "minted": 1,
+   "tokenRefs": 6,
+   "factsCarriedPct": 100,
+   "degradations": 0,
+   "stubs": 3,
+   "repeatParts": 0,
+   "b7Notes": 0,
+   "clean": true
+  },
+  {
+   "setName": "Chip",
+   "type": "COMPONENT_SET",
+   "tier": "T4",
+   "proposed": true,
+   "violations": [],
+   "emitted": [
+    "react",
+    "html",
+    "react-inline",
+    "figma-script"
+   ],
+   "emitterRefusals": [],
+   "notes": 48,
+   "unbound": 0,
+   "minted": 9,
+   "tokenRefs": 8,
+   "factsCarriedPct": 100,
+   "degradations": 0,
+   "stubs": 2,
+   "repeatParts": 0,
+   "b7Notes": 0,
+   "clean": true
+  },
+  {
+   "setName": "Dialog",
+   "type": "COMPONENT_SET",
+   "tier": "T5",
+   "proposed": true,
+   "violations": [],
+   "emitted": [
+    "react",
+    "html",
+    "react-inline",
+    "figma-script"
+   ],
+   "emitterRefusals": [],
+   "notes": 102,
+   "unbound": 0,
+   "minted": 38,
+   "tokenRefs": 18,
+   "factsCarriedPct": 100,
+   "degradations": 0,
+   "stubs": 6,
+   "repeatParts": 0,
+   "b7Notes": 0,
+   "clean": true
+  },
+  {
+   "setName": "Dropdown",
+   "type": "COMPONENT_SET",
+   "tier": "T4",
+   "proposed": true,
+   "violations": [],
+   "emitted": [
+    "react",
+    "html",
+    "react-inline",
+    "figma-script"
+   ],
+   "emitterRefusals": [],
+   "notes": 82,
+   "unbound": 0,
+   "minted": 32,
+   "tokenRefs": 18,
+   "factsCarriedPct": 100,
+   "degradations": 0,
+   "stubs": 5,
+   "repeatParts": 0,
+   "b7Notes": 0,
+   "clean": true
+  },
+  {
+   "setName": "Dropdown-MutliSelect",
+   "type": "COMPONENT_SET",
+   "tier": "T4",
+   "proposed": true,
+   "violations": [],
+   "emitted": [
+    "react",
+    "html",
+    "react-inline",
+    "figma-script"
+   ],
+   "emitterRefusals": [],
+   "notes": 99,
+   "unbound": 0,
+   "minted": 33,
+   "tokenRefs": 19,
+   "factsCarriedPct": 100,
+   "degradations": 0,
+   "stubs": 6,
+   "repeatParts": 1,
+   "b7Notes": 0,
+   "clean": true
+  },
+  {
+   "setName": "Icon",
+   "type": "COMPONENT_SET",
+   "tier": "T5",
+   "proposed": true,
+   "violations": [],
+   "emitted": [
+    "react",
+    "html",
+    "react-inline",
+    "figma-script"
+   ],
+   "emitterRefusals": [],
+   "notes": 8,
+   "unbound": 0,
+   "minted": 0,
+   "tokenRefs": 6,
+   "factsCarriedPct": 100,
+   "degradations": 0,
+   "stubs": 1,
+   "repeatParts": 0,
+   "b7Notes": 0,
+   "clean": true
+  },
+  {
+   "setName": "Icon Button Brand-Primary",
+   "type": "COMPONENT_SET",
+   "tier": "T3",
+   "proposed": true,
+   "violations": [],
+   "emitted": [
+    "react",
+    "html",
+    "react-inline",
+    "figma-script"
+   ],
+   "emitterRefusals": [],
+   "notes": 20,
+   "unbound": 0,
+   "minted": 5,
+   "tokenRefs": 24,
+   "factsCarriedPct": 100,
+   "degradations": 0,
+   "stubs": 1,
+   "repeatParts": 0,
+   "b7Notes": 0,
+   "clean": true
+  },
+  {
+   "setName": "Icon Button-Brand Secondary",
+   "type": "COMPONENT_SET",
+   "tier": "T3",
+   "proposed": true,
+   "violations": [],
+   "emitted": [
+    "react",
+    "html",
+    "react-inline",
+    "figma-script"
+   ],
+   "emitterRefusals": [],
+   "notes": 21,
+   "unbound": 0,
+   "minted": 6,
+   "tokenRefs": 29,
+   "factsCarriedPct": 100,
+   "degradations": 0,
+   "stubs": 1,
+   "repeatParts": 0,
+   "b7Notes": 0,
+   "clean": true
+  },
+  {
+   "setName": "Icon Button-Brand Tertiary",
+   "type": "COMPONENT_SET",
+   "tier": "T3",
+   "proposed": true,
+   "violations": [],
+   "emitted": [
+    "react",
+    "html",
+    "react-inline",
+    "figma-script"
+   ],
+   "emitterRefusals": [],
+   "notes": 20,
+   "unbound": 0,
+   "minted": 5,
+   "tokenRefs": 21,
+   "factsCarriedPct": 100,
+   "degradations": 0,
+   "stubs": 1,
+   "repeatParts": 0,
+   "b7Notes": 0,
+   "clean": true
+  },
+  {
+   "setName": "Icon Button-Danger Primary",
+   "type": "COMPONENT_SET",
+   "tier": "T3",
+   "proposed": true,
+   "violations": [],
+   "emitted": [
+    "react",
+    "html",
+    "react-inline",
+    "figma-script"
+   ],
+   "emitterRefusals": [],
+   "notes": 20,
+   "unbound": 0,
+   "minted": 5,
+   "tokenRefs": 24,
+   "factsCarriedPct": 100,
+   "degradations": 0,
+   "stubs": 1,
+   "repeatParts": 0,
+   "b7Notes": 0,
+   "clean": true
+  },
+  {
+   "setName": "Icon Button-Danger Secondary",
+   "type": "COMPONENT_SET",
+   "tier": "T3",
+   "proposed": true,
+   "violations": [],
+   "emitted": [
+    "react",
+    "html",
+    "react-inline",
+    "figma-script"
+   ],
+   "emitterRefusals": [],
+   "notes": 21,
+   "unbound": 0,
+   "minted": 6,
+   "tokenRefs": 27,
+   "factsCarriedPct": 100,
+   "degradations": 0,
+   "stubs": 1,
+   "repeatParts": 0,
+   "b7Notes": 0,
+   "clean": true
+  },
+  {
+   "setName": "Icon Button-Danger Tertiary",
+   "type": "COMPONENT_SET",
+   "tier": "T3",
+   "proposed": true,
+   "violations": [],
+   "emitted": [
+    "react",
+    "html",
+    "react-inline",
+    "figma-script"
+   ],
+   "emitterRefusals": [],
+   "notes": 20,
+   "unbound": 0,
+   "minted": 5,
+   "tokenRefs": 22,
+   "factsCarriedPct": 100,
+   "degradations": 0,
+   "stubs": 1,
+   "repeatParts": 0,
+   "b7Notes": 0,
+   "clean": true
+  },
+  {
+   "setName": "Icon Button-Neutral Primary",
+   "type": "COMPONENT_SET",
+   "tier": "T3",
+   "proposed": true,
+   "violations": [],
+   "emitted": [
+    "react",
+    "html",
+    "react-inline",
+    "figma-script"
+   ],
+   "emitterRefusals": [],
+   "notes": 20,
+   "unbound": 0,
+   "minted": 5,
+   "tokenRefs": 24,
+   "factsCarriedPct": 100,
+   "degradations": 0,
+   "stubs": 1,
+   "repeatParts": 0,
+   "b7Notes": 0,
+   "clean": true
+  },
+  {
+   "setName": "Icon Button-Neutral Secondary",
+   "type": "COMPONENT_SET",
+   "tier": "T3",
+   "proposed": true,
+   "violations": [],
+   "emitted": [
+    "react",
+    "html",
+    "react-inline",
+    "figma-script"
+   ],
+   "emitterRefusals": [],
+   "notes": 21,
+   "unbound": 0,
+   "minted": 6,
+   "tokenRefs": 30,
+   "factsCarriedPct": 100,
+   "degradations": 0,
+   "stubs": 1,
+   "repeatParts": 0,
+   "b7Notes": 0,
+   "clean": true
+  },
+  {
+   "setName": "Icon Button-Neutral Tertiary",
+   "type": "COMPONENT_SET",
+   "tier": "T3",
+   "proposed": true,
+   "violations": [],
+   "emitted": [
+    "react",
+    "html",
+    "react-inline",
+    "figma-script"
+   ],
+   "emitterRefusals": [],
+   "notes": 21,
+   "unbound": 0,
+   "minted": 5,
+   "tokenRefs": 22,
+   "factsCarriedPct": 100,
+   "degradations": 0,
+   "stubs": 1,
+   "repeatParts": 0,
+   "b7Notes": 0,
+   "clean": true
+  },
+  {
+   "setName": "Input Date",
+   "type": "COMPONENT_SET",
+   "tier": "T4",
+   "proposed": true,
+   "violations": [],
+   "emitted": [
+    "react",
+    "html",
+    "react-inline",
+    "figma-script"
+   ],
+   "emitterRefusals": [],
+   "notes": 73,
+   "unbound": 0,
+   "minted": 28,
+   "tokenRefs": 19,
+   "factsCarriedPct": 100,
+   "degradations": 0,
+   "stubs": 4,
+   "repeatParts": 0,
+   "b7Notes": 0,
+   "clean": true
+  },
+  {
+   "setName": "Input Number",
+   "type": "COMPONENT_SET",
+   "tier": "T4",
+   "proposed": true,
+   "violations": [],
+   "emitted": [
+    "react",
+    "html",
+    "react-inline",
+    "figma-script"
+   ],
+   "emitterRefusals": [],
+   "notes": 119,
+   "unbound": 0,
+   "minted": 46,
+   "tokenRefs": 29,
+   "factsCarriedPct": 100,
+   "degradations": 0,
+   "stubs": 6,
+   "repeatParts": 0,
+   "b7Notes": 0,
+   "clean": true
+  },
+  {
+   "setName": "Input Text",
+   "type": "COMPONENT_SET",
+   "tier": "T4",
+   "proposed": true,
+   "violations": [],
+   "emitted": [
+    "react",
+    "html",
+    "react-inline",
+    "figma-script"
+   ],
+   "emitterRefusals": [],
+   "notes": 78,
+   "unbound": 0,
+   "minted": 31,
+   "tokenRefs": 21,
+   "factsCarriedPct": 100,
+   "degradations": 0,
+   "stubs": 4,
+   "repeatParts": 0,
+   "b7Notes": 0,
+   "clean": true
+  },
+  {
+   "setName": "Link-Blue",
+   "type": "COMPONENT_SET",
+   "tier": "T3",
+   "proposed": true,
+   "violations": [],
+   "emitted": [
+    "react",
+    "html",
+    "react-inline",
+    "figma-script"
+   ],
+   "emitterRefusals": [],
+   "notes": 39,
+   "unbound": 0,
+   "minted": 12,
+   "tokenRefs": 11,
+   "factsCarriedPct": 100,
+   "degradations": 15,
+   "stubs": 1,
+   "repeatParts": 0,
+   "b7Notes": 2,
+   "clean": true
+  },
+  {
+   "setName": "Link-Danger",
+   "type": "COMPONENT_SET",
+   "tier": "T3",
+   "proposed": true,
+   "violations": [],
+   "emitted": [
+    "react",
+    "html",
+    "react-inline",
+    "figma-script"
+   ],
+   "emitterRefusals": [],
+   "notes": 35,
+   "unbound": 0,
+   "minted": 10,
+   "tokenRefs": 11,
+   "factsCarriedPct": 100,
+   "degradations": 15,
+   "stubs": 1,
+   "repeatParts": 0,
+   "b7Notes": 2,
+   "clean": true
+  },
+  {
+   "setName": "Link-Neutral",
+   "type": "COMPONENT_SET",
+   "tier": "T3",
+   "proposed": true,
+   "violations": [],
+   "emitted": [
+    "react",
+    "html",
+    "react-inline",
+    "figma-script"
+   ],
+   "emitterRefusals": [],
+   "notes": 39,
+   "unbound": 0,
+   "minted": 12,
+   "tokenRefs": 11,
+   "factsCarriedPct": 100,
+   "degradations": 15,
+   "stubs": 1,
+   "repeatParts": 0,
+   "b7Notes": 2,
+   "clean": true
+  },
+  {
+   "setName": "List item",
+   "type": "COMPONENT_SET",
+   "tier": "T5",
+   "proposed": true,
+   "violations": [],
+   "emitted": [
+    "react",
+    "html",
+    "react-inline",
+    "figma-script"
+   ],
+   "emitterRefusals": [],
+   "notes": 116,
+   "unbound": 1,
+   "minted": 48,
+   "tokenRefs": 23,
+   "factsCarriedPct": 96,
+   "degradations": 38,
+   "stubs": 6,
+   "repeatParts": 0,
+   "b7Notes": 0,
+   "clean": true
+  },
+  {
+   "setName": "Menu",
+   "type": "COMPONENT_SET",
+   "tier": "T4",
+   "proposed": true,
+   "violations": [],
+   "emitted": [
+    "react",
+    "html",
+    "react-inline",
+    "figma-script"
+   ],
+   "emitterRefusals": [],
+   "notes": 18,
+   "unbound": 0,
+   "minted": 6,
+   "tokenRefs": 8,
+   "factsCarriedPct": 100,
+   "degradations": 0,
+   "stubs": 1,
+   "repeatParts": 1,
+   "b7Notes": 0,
+   "clean": true
+  },
+  {
+   "setName": "Navigation-Header",
+   "type": "COMPONENT_SET",
+   "tier": "T5",
+   "proposed": true,
+   "violations": [],
+   "emitted": [
+    "react",
+    "html",
+    "react-inline",
+    "figma-script"
+   ],
+   "emitterRefusals": [],
+   "notes": 65,
+   "unbound": 0,
+   "minted": 18,
+   "tokenRefs": 12,
+   "factsCarriedPct": 100,
+   "degradations": 2,
+   "stubs": 5,
+   "repeatParts": 1,
+   "b7Notes": 0,
+   "clean": true
+  },
+  {
+   "setName": "Navigation-Side",
+   "type": "COMPONENT_SET",
+   "tier": "T4",
+   "proposed": true,
+   "violations": [],
+   "emitted": [
+    "react",
+    "html",
+    "react-inline",
+    "figma-script"
+   ],
+   "emitterRefusals": [],
+   "notes": 158,
+   "unbound": 0,
+   "minted": 17,
+   "tokenRefs": 13,
+   "factsCarriedPct": 100,
+   "degradations": 5,
+   "stubs": 7,
+   "repeatParts": 0,
+   "b7Notes": 0,
+   "clean": true
+  },
+  {
+   "setName": "Pagination-2",
+   "type": "COMPONENT_SET",
+   "tier": "T4",
+   "proposed": true,
+   "violations": [],
+   "emitted": [
+    "react",
+    "html",
+    "react-inline",
+    "figma-script"
+   ],
+   "emitterRefusals": [],
+   "notes": 57,
+   "unbound": 0,
+   "minted": 7,
+   "tokenRefs": 6,
+   "factsCarriedPct": 100,
+   "degradations": 0,
+   "stubs": 2,
+   "repeatParts": 0,
+   "b7Notes": 0,
+   "clean": true
+  },
+  {
+   "setName": "Pagination-3",
+   "type": "COMPONENT_SET",
+   "tier": "T4",
+   "proposed": true,
+   "violations": [],
+   "emitted": [
+    "react",
+    "html",
+    "react-inline",
+    "figma-script"
+   ],
+   "emitterRefusals": [],
+   "notes": 64,
+   "unbound": 0,
+   "minted": 8,
+   "tokenRefs": 8,
+   "factsCarriedPct": 100,
+   "degradations": 0,
+   "stubs": 2,
+   "repeatParts": 0,
+   "b7Notes": 0,
+   "clean": true
+  },
+  {
+   "setName": "Progress bar",
+   "type": "COMPONENT_SET",
+   "tier": "T2",
+   "proposed": true,
+   "violations": [],
+   "emitted": [
+    "react",
+    "html",
+    "react-inline",
+    "figma-script"
+   ],
+   "emitterRefusals": [],
+   "notes": 32,
+   "unbound": 0,
+   "minted": 9,
+   "tokenRefs": 32,
+   "factsCarriedPct": 100,
+   "degradations": 0,
+   "stubs": 1,
+   "repeatParts": 0,
+   "b7Notes": 0,
+   "clean": true
+  },
+  {
+   "setName": "Radio button",
+   "type": "COMPONENT_SET",
+   "tier": "T5",
+   "proposed": true,
+   "violations": [],
+   "emitted": [
+    "react",
+    "html",
+    "react-inline",
+    "figma-script"
+   ],
+   "emitterRefusals": [],
+   "notes": 50,
+   "unbound": 0,
+   "minted": 18,
+   "tokenRefs": 14,
+   "factsCarriedPct": 100,
+   "degradations": 0,
+   "stubs": 2,
+   "repeatParts": 0,
+   "b7Notes": 0,
+   "clean": true
+  },
+  {
+   "setName": "Radio button-icon",
+   "type": "COMPONENT_SET",
+   "tier": "T4",
+   "proposed": true,
+   "violations": [],
+   "emitted": [
+    "react",
+    "html",
+    "react-inline",
+    "figma-script"
+   ],
+   "emitterRefusals": [],
+   "notes": 24,
+   "unbound": 0,
+   "minted": 1,
+   "tokenRefs": 6,
+   "factsCarriedPct": 100,
+   "degradations": 0,
+   "stubs": 2,
+   "repeatParts": 0,
+   "b7Notes": 0,
+   "clean": true
+  },
+  {
+   "setName": "Search",
+   "type": "COMPONENT_SET",
+   "tier": "T4",
+   "proposed": true,
+   "violations": [],
+   "emitted": [
+    "react",
+    "html",
+    "react-inline",
+    "figma-script"
+   ],
+   "emitterRefusals": [],
+   "notes": 70,
+   "unbound": 0,
+   "minted": 29,
+   "tokenRefs": 17,
+   "factsCarriedPct": 100,
+   "degradations": 0,
+   "stubs": 4,
+   "repeatParts": 0,
+   "b7Notes": 0,
+   "clean": true
+  },
+  {
+   "setName": "Search-MultiSelect",
+   "type": "COMPONENT_SET",
+   "tier": "T4",
+   "proposed": true,
+   "violations": [],
+   "emitted": [
+    "react",
+    "html",
+    "react-inline",
+    "figma-script"
+   ],
+   "emitterRefusals": [],
+   "notes": 90,
+   "unbound": 0,
+   "minted": 32,
+   "tokenRefs": 17,
+   "factsCarriedPct": 100,
+   "degradations": 0,
+   "stubs": 5,
+   "repeatParts": 1,
+   "b7Notes": 0,
+   "clean": true
+  },
+  {
+   "setName": "Tab-Line",
+   "type": "COMPONENT_SET",
+   "tier": "T4",
+   "proposed": true,
+   "violations": [],
+   "emitted": [
+    "react",
+    "html",
+    "react-inline",
+    "figma-script"
+   ],
+   "emitterRefusals": [],
+   "notes": 109,
+   "unbound": 0,
+   "minted": 10,
+   "tokenRefs": 21,
+   "factsCarriedPct": 100,
+   "degradations": 0,
+   "stubs": 3,
+   "repeatParts": 0,
+   "b7Notes": 0,
+   "clean": true
+  },
+  {
+   "setName": "Tab-Pill",
+   "type": "COMPONENT_SET",
+   "tier": "T4",
+   "proposed": true,
+   "violations": [],
+   "emitted": [
+    "react",
+    "html",
+    "react-inline",
+    "figma-script"
+   ],
+   "emitterRefusals": [],
+   "notes": 44,
+   "unbound": 0,
+   "minted": 4,
+   "tokenRefs": 8,
+   "factsCarriedPct": 100,
+   "degradations": 0,
+   "stubs": 1,
+   "repeatParts": 0,
+   "b7Notes": 0,
+   "clean": true
+  },
+  {
+   "setName": "Table-Data cell",
+   "type": "COMPONENT_SET",
+   "tier": "T4",
+   "proposed": true,
+   "violations": [],
+   "emitted": [
+    "react",
+    "html",
+    "react-inline",
+    "figma-script"
+   ],
+   "emitterRefusals": [],
+   "notes": 145,
+   "unbound": 1,
+   "minted": 58,
+   "tokenRefs": 23,
+   "factsCarriedPct": 96,
+   "degradations": 30,
+   "stubs": 9,
+   "repeatParts": 0,
+   "b7Notes": 0,
+   "clean": true
+  },
+  {
+   "setName": "Text Area",
+   "type": "COMPONENT_SET",
+   "tier": "T4",
+   "proposed": true,
+   "violations": [],
+   "emitted": [
+    "react",
+    "html",
+    "react-inline",
+    "figma-script"
+   ],
+   "emitterRefusals": [],
+   "notes": 82,
+   "unbound": 2,
+   "minted": 28,
+   "tokenRefs": 18,
+   "factsCarriedPct": 90,
+   "degradations": 0,
+   "stubs": 5,
+   "repeatParts": 0,
+   "b7Notes": 0,
+   "clean": true
+  },
+  {
+   "setName": "Title card",
+   "type": "COMPONENT_SET",
+   "tier": "T2",
+   "proposed": true,
+   "violations": [],
+   "emitted": [
+    "react",
+    "html",
+    "react-inline",
+    "figma-script"
+   ],
+   "emitterRefusals": [],
+   "notes": 47,
+   "unbound": 7,
+   "minted": 10,
+   "tokenRefs": 23,
+   "factsCarriedPct": 77,
+   "degradations": 0,
+   "stubs": 0,
+   "repeatParts": 0,
+   "b7Notes": 0,
+   "clean": true
+  },
+  {
+   "setName": "Toggle",
+   "type": "COMPONENT_SET",
+   "tier": "T4",
+   "proposed": true,
+   "violations": [],
+   "emitted": [
+    "react",
+    "html",
+    "react-inline",
+    "figma-script"
+   ],
+   "emitterRefusals": [],
+   "notes": 25,
+   "unbound": 0,
+   "minted": 9,
+   "tokenRefs": 4,
+   "factsCarriedPct": 100,
+   "degradations": 0,
+   "stubs": 1,
+   "repeatParts": 0,
+   "b7Notes": 1,
+   "clean": true
+  },
+  {
+   "setName": "Toggle-icon",
+   "type": "COMPONENT_SET",
+   "tier": "T4",
+   "proposed": true,
+   "violations": [],
+   "emitted": [
+    "react",
+    "html",
+    "react-inline",
+    "figma-script"
+   ],
+   "emitterRefusals": [],
+   "notes": 23,
+   "unbound": 0,
+   "minted": 1,
+   "tokenRefs": 6,
+   "factsCarriedPct": 100,
+   "degradations": 0,
+   "stubs": 2,
+   "repeatParts": 0,
+   "b7Notes": 0,
+   "clean": true
+  },
+  {
+   "setName": "Tooltip",
+   "type": "COMPONENT_SET",
+   "tier": "T2",
+   "proposed": true,
+   "violations": [],
+   "emitted": [
+    "react",
+    "html",
+    "react-inline",
+    "figma-script"
+   ],
+   "emitterRefusals": [],
+   "notes": 14,
+   "unbound": 0,
+   "minted": 7,
+   "tokenRefs": 15,
+   "factsCarriedPct": 100,
+   "degradations": 14,
+   "stubs": 0,
+   "repeatParts": 0,
+   "b7Notes": 0,
+   "clean": true
+  },
+  {
+   "setName": "Airplane",
+   "type": "COMPONENT",
+   "tier": "S",
+   "proposed": true,
+   "violations": [],
+   "emitted": [
+    "react",
+    "html",
+    "react-inline",
+    "figma-script"
+   ],
+   "emitterRefusals": [],
+   "notes": 1,
+   "unbound": 0,
+   "minted": 0,
+   "tokenRefs": 1,
+   "factsCarriedPct": 100,
+   "degradations": 2,
+   "stubs": 0,
+   "repeatParts": 0,
+   "b7Notes": 0,
+   "clean": true
+  },
+  {
+   "setName": "ArrowArcRight",
+   "type": "COMPONENT",
+   "tier": "S",
+   "proposed": true,
+   "violations": [],
+   "emitted": [
+    "react",
+    "html",
+    "react-inline",
+    "figma-script"
+   ],
+   "emitterRefusals": [],
+   "notes": 1,
+   "unbound": 0,
+   "minted": 0,
+   "tokenRefs": 1,
+   "factsCarriedPct": 100,
+   "degradations": 2,
+   "stubs": 0,
+   "repeatParts": 0,
+   "b7Notes": 0,
+   "clean": true
+  },
+  {
+   "setName": "ArrowBendLeftUp",
+   "type": "COMPONENT",
+   "tier": "S",
+   "proposed": true,
+   "violations": [],
+   "emitted": [
+    "react",
+    "html",
+    "react-inline",
+    "figma-script"
+   ],
+   "emitterRefusals": [],
+   "notes": 1,
+   "unbound": 0,
+   "minted": 0,
+   "tokenRefs": 1,
+   "factsCarriedPct": 100,
+   "degradations": 2,
+   "stubs": 0,
+   "repeatParts": 0,
+   "b7Notes": 0,
+   "clean": true
+  },
+  {
+   "setName": "ArrowCircleUpLeft",
+   "type": "COMPONENT",
+   "tier": "S",
+   "proposed": true,
+   "violations": [],
+   "emitted": [
+    "react",
+    "html",
+    "react-inline",
+    "figma-script"
+   ],
+   "emitterRefusals": [],
+   "notes": 1,
+   "unbound": 0,
+   "minted": 0,
+   "tokenRefs": 1,
+   "factsCarriedPct": 100,
+   "degradations": 2,
+   "stubs": 0,
+   "repeatParts": 0,
+   "b7Notes": 0,
+   "clean": true
+  },
+  {
+   "setName": "ArrowFatLineDown",
+   "type": "COMPONENT",
+   "tier": "S",
+   "proposed": true,
+   "violations": [],
+   "emitted": [
+    "react",
+    "html",
+    "react-inline",
+    "figma-script"
+   ],
+   "emitterRefusals": [],
+   "notes": 1,
+   "unbound": 0,
+   "minted": 0,
+   "tokenRefs": 1,
+   "factsCarriedPct": 100,
+   "degradations": 2,
+   "stubs": 0,
+   "repeatParts": 0,
+   "b7Notes": 0,
+   "clean": true
+  },
+  {
+   "setName": "ArrowFatLinesDown",
+   "type": "COMPONENT",
+   "tier": "S",
+   "proposed": true,
+   "violations": [],
+   "emitted": [
+    "react",
+    "html",
+    "react-inline",
+    "figma-script"
+   ],
+   "emitterRefusals": [],
+   "notes": 1,
+   "unbound": 0,
+   "minted": 0,
+   "tokenRefs": 1,
+   "factsCarriedPct": 100,
+   "degradations": 2,
+   "stubs": 0,
+   "repeatParts": 0,
+   "b7Notes": 0,
+   "clean": true
+  },
+  {
+   "setName": "ArrowLineUpRight",
+   "type": "COMPONENT",
+   "tier": "S",
+   "proposed": true,
+   "violations": [],
+   "emitted": [
+    "react",
+    "html",
+    "react-inline",
+    "figma-script"
+   ],
+   "emitterRefusals": [],
+   "notes": 1,
+   "unbound": 0,
+   "minted": 0,
+   "tokenRefs": 1,
+   "factsCarriedPct": 100,
+   "degradations": 2,
+   "stubs": 0,
+   "repeatParts": 0,
+   "b7Notes": 0,
+   "clean": true
+  },
+  {
+   "setName": "CalendarMinus",
+   "type": "COMPONENT",
+   "tier": "S",
+   "proposed": true,
+   "violations": [],
+   "emitted": [
+    "react",
+    "html",
+    "react-inline",
+    "figma-script"
+   ],
+   "emitterRefusals": [],
+   "notes": 1,
+   "unbound": 0,
+   "minted": 0,
+   "tokenRefs": 1,
+   "factsCarriedPct": 100,
+   "degradations": 2,
+   "stubs": 0,
+   "repeatParts": 0,
+   "b7Notes": 0,
+   "clean": true
+  },
+  {
+   "setName": "CalendarSlash",
+   "type": "COMPONENT",
+   "tier": "S",
+   "proposed": true,
+   "violations": [],
+   "emitted": [
+    "react",
+    "html",
+    "react-inline",
+    "figma-script"
+   ],
+   "emitterRefusals": [],
+   "notes": 1,
+   "unbound": 0,
+   "minted": 0,
+   "tokenRefs": 1,
+   "factsCarriedPct": 100,
+   "degradations": 2,
+   "stubs": 0,
+   "repeatParts": 0,
+   "b7Notes": 0,
+   "clean": true
+  },
+  {
+   "setName": "CaretCircleDoubleLeft",
+   "type": "COMPONENT",
+   "tier": "S",
+   "proposed": true,
+   "violations": [],
+   "emitted": [
+    "react",
+    "html",
+    "react-inline",
+    "figma-script"
+   ],
+   "emitterRefusals": [],
+   "notes": 1,
+   "unbound": 0,
+   "minted": 0,
+   "tokenRefs": 1,
+   "factsCarriedPct": 100,
+   "degradations": 2,
+   "stubs": 0,
+   "repeatParts": 0,
+   "b7Notes": 0,
+   "clean": true
+  },
+  {
+   "setName": "CaretLineRight",
+   "type": "COMPONENT",
+   "tier": "S",
+   "proposed": true,
+   "violations": [],
+   "emitted": [
+    "react",
+    "html",
+    "react-inline",
+    "figma-script"
+   ],
+   "emitterRefusals": [],
+   "notes": 1,
+   "unbound": 0,
+   "minted": 0,
+   "tokenRefs": 1,
+   "factsCarriedPct": 100,
+   "degradations": 2,
+   "stubs": 0,
+   "repeatParts": 0,
+   "b7Notes": 0,
+   "clean": true
+  },
+  {
+   "setName": "CellSignalNone",
+   "type": "COMPONENT",
+   "tier": "S",
+   "proposed": true,
+   "violations": [],
+   "emitted": [
+    "react",
+    "html",
+    "react-inline",
+    "figma-script"
+   ],
+   "emitterRefusals": [],
+   "notes": 1,
+   "unbound": 0,
+   "minted": 0,
+   "tokenRefs": 1,
+   "factsCarriedPct": 100,
+   "degradations": 2,
+   "stubs": 0,
+   "repeatParts": 0,
+   "b7Notes": 0,
+   "clean": true
+  },
+  {
+   "setName": "Champagne",
+   "type": "COMPONENT",
+   "tier": "S",
+   "proposed": true,
+   "violations": [],
+   "emitted": [
+    "react",
+    "html",
+    "react-inline",
+    "figma-script"
+   ],
+   "emitterRefusals": [],
+   "notes": 1,
+   "unbound": 0,
+   "minted": 0,
+   "tokenRefs": 1,
+   "factsCarriedPct": 100,
+   "degradations": 2,
+   "stubs": 0,
+   "repeatParts": 0,
+   "b7Notes": 0,
+   "clean": true
+  },
+  {
+   "setName": "City",
+   "type": "COMPONENT",
+   "tier": "S",
+   "proposed": true,
+   "violations": [],
+   "emitted": [
+    "react",
+    "html",
+    "react-inline",
+    "figma-script"
+   ],
+   "emitterRefusals": [],
+   "notes": 1,
+   "unbound": 0,
+   "minted": 0,
+   "tokenRefs": 1,
+   "factsCarriedPct": 100,
+   "degradations": 2,
+   "stubs": 0,
+   "repeatParts": 0,
+   "b7Notes": 0,
+   "clean": true
+  },
+  {
+   "setName": "ClockAfternoon",
+   "type": "COMPONENT",
+   "tier": "S",
+   "proposed": true,
+   "violations": [],
+   "emitted": [
+    "react",
+    "html",
+    "react-inline",
+    "figma-script"
+   ],
+   "emitterRefusals": [],
+   "notes": 1,
+   "unbound": 0,
+   "minted": 0,
+   "tokenRefs": 1,
+   "factsCarriedPct": 100,
+   "degradations": 2,
+   "stubs": 0,
+   "repeatParts": 0,
+   "b7Notes": 0,
+   "clean": true
+  },
+  {
+   "setName": "Coffee",
+   "type": "COMPONENT",
+   "tier": "S",
+   "proposed": true,
+   "violations": [],
+   "emitted": [
+    "react",
+    "html",
+    "react-inline",
+    "figma-script"
+   ],
+   "emitterRefusals": [],
+   "notes": 1,
+   "unbound": 0,
+   "minted": 0,
+   "tokenRefs": 1,
+   "factsCarriedPct": 100,
+   "degradations": 2,
+   "stubs": 0,
+   "repeatParts": 0,
+   "b7Notes": 0,
+   "clean": true
+  },
+  {
+   "setName": "Compass",
+   "type": "COMPONENT",
+   "tier": "S",
+   "proposed": true,
+   "violations": [],
+   "emitted": [
+    "react",
+    "html",
+    "react-inline",
+    "figma-script"
+   ],
+   "emitterRefusals": [],
+   "notes": 1,
+   "unbound": 0,
+   "minted": 0,
+   "tokenRefs": 1,
+   "factsCarriedPct": 100,
+   "degradations": 2,
+   "stubs": 0,
+   "repeatParts": 0,
+   "b7Notes": 0,
+   "clean": true
+  },
+  {
+   "setName": "CraneTower",
+   "type": "COMPONENT",
+   "tier": "S",
+   "proposed": true,
+   "violations": [],
+   "emitted": [
+    "react",
+    "html",
+    "react-inline",
+    "figma-script"
+   ],
+   "emitterRefusals": [],
+   "notes": 1,
+   "unbound": 0,
+   "minted": 0,
+   "tokenRefs": 2,
+   "factsCarriedPct": 100,
+   "degradations": 3,
+   "stubs": 0,
+   "repeatParts": 0,
+   "b7Notes": 0,
+   "clean": true
+  },
+  {
+   "setName": "CurrencyCircleDollar",
+   "type": "COMPONENT",
+   "tier": "S",
+   "proposed": true,
+   "violations": [],
+   "emitted": [
+    "react",
+    "html",
+    "react-inline",
+    "figma-script"
+   ],
+   "emitterRefusals": [],
+   "notes": 1,
+   "unbound": 0,
+   "minted": 0,
+   "tokenRefs": 1,
+   "factsCarriedPct": 100,
+   "degradations": 2,
+   "stubs": 0,
+   "repeatParts": 0,
+   "b7Notes": 0,
+   "clean": true
+  },
+  {
+   "setName": "Cylinder",
+   "type": "COMPONENT",
+   "tier": "S",
+   "proposed": true,
+   "violations": [],
+   "emitted": [
+    "react",
+    "html",
+    "react-inline",
+    "figma-script"
+   ],
+   "emitterRefusals": [],
+   "notes": 1,
+   "unbound": 0,
+   "minted": 0,
+   "tokenRefs": 1,
+   "factsCarriedPct": 100,
+   "degradations": 2,
+   "stubs": 0,
+   "repeatParts": 0,
+   "b7Notes": 0,
+   "clean": true
+  },
+  {
+   "setName": "Database",
+   "type": "COMPONENT",
+   "tier": "S",
+   "proposed": true,
+   "violations": [],
+   "emitted": [
+    "react",
+    "html",
+    "react-inline",
+    "figma-script"
+   ],
+   "emitterRefusals": [],
+   "notes": 2,
+   "unbound": 0,
+   "minted": 1,
+   "tokenRefs": 1,
+   "factsCarriedPct": 100,
+   "degradations": 2,
+   "stubs": 0,
+   "repeatParts": 0,
+   "b7Notes": 0,
+   "clean": true
+  },
+  {
+   "setName": "DiceTwo",
+   "type": "COMPONENT",
+   "tier": "S",
+   "proposed": true,
+   "violations": [],
+   "emitted": [
+    "react",
+    "html",
+    "react-inline",
+    "figma-script"
+   ],
+   "emitterRefusals": [],
+   "notes": 1,
+   "unbound": 0,
+   "minted": 0,
+   "tokenRefs": 1,
+   "factsCarriedPct": 100,
+   "degradations": 2,
+   "stubs": 0,
+   "repeatParts": 0,
+   "b7Notes": 0,
+   "clean": true
+  },
+  {
+   "setName": "GitBranch",
+   "type": "COMPONENT",
+   "tier": "S",
+   "proposed": true,
+   "violations": [],
+   "emitted": [
+    "react",
+    "html",
+    "react-inline",
+    "figma-script"
+   ],
+   "emitterRefusals": [],
+   "notes": 2,
+   "unbound": 0,
+   "minted": 1,
+   "tokenRefs": 1,
+   "factsCarriedPct": 100,
+   "degradations": 2,
+   "stubs": 0,
+   "repeatParts": 0,
+   "b7Notes": 0,
+   "clean": true
+  },
+  {
+   "setName": "GitDiff",
+   "type": "COMPONENT",
+   "tier": "S",
+   "proposed": true,
+   "violations": [],
+   "emitted": [
+    "react",
+    "html",
+    "react-inline",
+    "figma-script"
+   ],
+   "emitterRefusals": [],
+   "notes": 2,
+   "unbound": 0,
+   "minted": 1,
+   "tokenRefs": 1,
+   "factsCarriedPct": 100,
+   "degradations": 2,
+   "stubs": 0,
+   "repeatParts": 0,
+   "b7Notes": 0,
+   "clean": true
+  },
+  {
+   "setName": "GrainsSlash",
+   "type": "COMPONENT",
+   "tier": "S",
+   "proposed": true,
+   "violations": [],
+   "emitted": [
+    "react",
+    "html",
+    "react-inline",
+    "figma-script"
+   ],
+   "emitterRefusals": [],
+   "notes": 1,
+   "unbound": 0,
+   "minted": 0,
+   "tokenRefs": 1,
+   "factsCarriedPct": 100,
+   "degradations": 2,
+   "stubs": 0,
+   "repeatParts": 0,
+   "b7Notes": 0,
+   "clean": true
+  },
+  {
+   "setName": "GreaterThan",
+   "type": "COMPONENT",
+   "tier": "S",
+   "proposed": true,
+   "violations": [],
+   "emitted": [
+    "react",
+    "html",
+    "react-inline",
+    "figma-script"
+   ],
+   "emitterRefusals": [],
+   "notes": 1,
+   "unbound": 0,
+   "minted": 0,
+   "tokenRefs": 1,
+   "factsCarriedPct": 100,
+   "degradations": 2,
+   "stubs": 0,
+   "repeatParts": 0,
+   "b7Notes": 0,
+   "clean": true
+  },
+  {
+   "setName": "HandWithdraw",
+   "type": "COMPONENT",
+   "tier": "S",
+   "proposed": true,
+   "violations": [],
+   "emitted": [
+    "react",
+    "html",
+    "react-inline",
+    "figma-script"
+   ],
+   "emitterRefusals": [],
+   "notes": 1,
+   "unbound": 0,
+   "minted": 0,
+   "tokenRefs": 1,
+   "factsCarriedPct": 100,
+   "degradations": 2,
+   "stubs": 0,
+   "repeatParts": 0,
+   "b7Notes": 0,
+   "clean": true
+  },
+  {
+   "setName": "HeartStraight",
+   "type": "COMPONENT",
+   "tier": "S",
+   "proposed": true,
+   "violations": [],
+   "emitted": [
+    "react",
+    "html",
+    "react-inline",
+    "figma-script"
+   ],
+   "emitterRefusals": [],
+   "notes": 1,
+   "unbound": 0,
+   "minted": 0,
+   "tokenRefs": 1,
+   "factsCarriedPct": 100,
+   "degradations": 2,
+   "stubs": 0,
+   "repeatParts": 0,
+   "b7Notes": 0,
+   "clean": true
+  },
+  {
+   "setName": "HourglassHigh",
+   "type": "COMPONENT",
+   "tier": "S",
+   "proposed": true,
+   "violations": [],
+   "emitted": [
+    "react",
+    "html",
+    "react-inline",
+    "figma-script"
+   ],
+   "emitterRefusals": [],
+   "notes": 1,
+   "unbound": 0,
+   "minted": 0,
+   "tokenRefs": 1,
+   "factsCarriedPct": 100,
+   "degradations": 2,
+   "stubs": 0,
+   "repeatParts": 0,
+   "b7Notes": 0,
+   "clean": true
+  },
+  {
+   "setName": "Island",
+   "type": "COMPONENT",
+   "tier": "S",
+   "proposed": true,
+   "violations": [],
+   "emitted": [
+    "react",
+    "html",
+    "react-inline",
+    "figma-script"
+   ],
+   "emitterRefusals": [],
+   "notes": 1,
+   "unbound": 0,
+   "minted": 0,
+   "tokenRefs": 1,
+   "factsCarriedPct": 100,
+   "degradations": 2,
+   "stubs": 0,
+   "repeatParts": 0,
+   "b7Notes": 0,
+   "clean": true
+  },
+  {
+   "setName": "KeyReturn",
+   "type": "COMPONENT",
+   "tier": "S",
+   "proposed": true,
+   "violations": [],
+   "emitted": [
+    "react",
+    "html",
+    "react-inline",
+    "figma-script"
+   ],
+   "emitterRefusals": [],
+   "notes": 1,
+   "unbound": 0,
+   "minted": 0,
+   "tokenRefs": 1,
+   "factsCarriedPct": 100,
+   "degradations": 2,
+   "stubs": 0,
+   "repeatParts": 0,
+   "b7Notes": 0,
+   "clean": true
+  },
+  {
+   "setName": "ListDashes",
+   "type": "COMPONENT",
+   "tier": "S",
+   "proposed": true,
+   "violations": [],
+   "emitted": [
+    "react",
+    "html",
+    "react-inline",
+    "figma-script"
+   ],
+   "emitterRefusals": [],
+   "notes": 1,
+   "unbound": 0,
+   "minted": 0,
+   "tokenRefs": 1,
+   "factsCarriedPct": 100,
+   "degradations": 2,
+   "stubs": 0,
+   "repeatParts": 0,
+   "b7Notes": 0,
+   "clean": true
+  },
+  {
+   "setName": "MicrophoneSlash",
+   "type": "COMPONENT",
+   "tier": "S",
+   "proposed": true,
+   "violations": [],
+   "emitted": [
+    "react",
+    "html",
+    "react-inline",
+    "figma-script"
+   ],
+   "emitterRefusals": [],
+   "notes": 1,
+   "unbound": 0,
+   "minted": 0,
+   "tokenRefs": 1,
+   "factsCarriedPct": 100,
+   "degradations": 2,
+   "stubs": 0,
+   "repeatParts": 0,
+   "b7Notes": 0,
+   "clean": true
+  },
+  {
+   "setName": "MinusSquare",
+   "type": "COMPONENT",
+   "tier": "S",
+   "proposed": true,
+   "violations": [],
+   "emitted": [
+    "react",
+    "html",
+    "react-inline",
+    "figma-script"
+   ],
+   "emitterRefusals": [],
+   "notes": 1,
+   "unbound": 0,
+   "minted": 0,
+   "tokenRefs": 1,
+   "factsCarriedPct": 100,
+   "degradations": 2,
+   "stubs": 0,
+   "repeatParts": 0,
+   "b7Notes": 0,
+   "clean": true
+  },
+  {
+   "setName": "Monitor",
+   "type": "COMPONENT",
+   "tier": "S",
+   "proposed": true,
+   "violations": [],
+   "emitted": [
+    "react",
+    "html",
+    "react-inline",
+    "figma-script"
+   ],
+   "emitterRefusals": [],
+   "notes": 1,
+   "unbound": 0,
+   "minted": 0,
+   "tokenRefs": 1,
+   "factsCarriedPct": 100,
+   "degradations": 2,
+   "stubs": 0,
+   "repeatParts": 0,
+   "b7Notes": 0,
+   "clean": true
+  },
+  {
+   "setName": "MouseSimple",
+   "type": "COMPONENT",
+   "tier": "S",
+   "proposed": true,
+   "violations": [],
+   "emitted": [
+    "react",
+    "html",
+    "react-inline",
+    "figma-script"
+   ],
+   "emitterRefusals": [],
+   "notes": 1,
+   "unbound": 0,
+   "minted": 0,
+   "tokenRefs": 1,
+   "factsCarriedPct": 100,
+   "degradations": 2,
+   "stubs": 0,
+   "repeatParts": 0,
+   "b7Notes": 0,
+   "clean": true
+  },
+  {
+   "setName": "NotePencil",
+   "type": "COMPONENT",
+   "tier": "S",
+   "proposed": true,
+   "violations": [],
+   "emitted": [
+    "react",
+    "html",
+    "react-inline",
+    "figma-script"
+   ],
+   "emitterRefusals": [],
+   "notes": 1,
+   "unbound": 0,
+   "minted": 0,
+   "tokenRefs": 1,
+   "factsCarriedPct": 100,
+   "degradations": 2,
+   "stubs": 0,
+   "repeatParts": 0,
+   "b7Notes": 0,
+   "clean": true
+  },
+  {
+   "setName": "Nut",
+   "type": "COMPONENT",
+   "tier": "S",
+   "proposed": true,
+   "violations": [],
+   "emitted": [
+    "react",
+    "html",
+    "react-inline",
+    "figma-script"
+   ],
+   "emitterRefusals": [],
+   "notes": 1,
+   "unbound": 0,
+   "minted": 0,
+   "tokenRefs": 1,
+   "factsCarriedPct": 100,
+   "degradations": 2,
+   "stubs": 0,
+   "repeatParts": 0,
+   "b7Notes": 0,
+   "clean": true
+  },
+  {
+   "setName": "Pause",
+   "type": "COMPONENT",
+   "tier": "S",
+   "proposed": true,
+   "violations": [],
+   "emitted": [
+    "react",
+    "html",
+    "react-inline",
+    "figma-script"
+   ],
+   "emitterRefusals": [],
+   "notes": 1,
+   "unbound": 0,
+   "minted": 0,
+   "tokenRefs": 1,
+   "factsCarriedPct": 100,
+   "degradations": 2,
+   "stubs": 0,
+   "repeatParts": 0,
+   "b7Notes": 0,
+   "clean": true
+  },
+  {
+   "setName": "PersonSimpleSki",
+   "type": "COMPONENT",
+   "tier": "S",
+   "proposed": true,
+   "violations": [],
+   "emitted": [
+    "react",
+    "html",
+    "react-inline",
+    "figma-script"
+   ],
+   "emitterRefusals": [],
+   "notes": 1,
+   "unbound": 0,
+   "minted": 0,
+   "tokenRefs": 1,
+   "factsCarriedPct": 100,
+   "degradations": 2,
+   "stubs": 0,
+   "repeatParts": 0,
+   "b7Notes": 0,
+   "clean": true
+  },
+  {
+   "setName": "Ranking",
+   "type": "COMPONENT",
+   "tier": "S",
+   "proposed": true,
+   "violations": [],
+   "emitted": [
+    "react",
+    "html",
+    "react-inline",
+    "figma-script"
+   ],
+   "emitterRefusals": [],
+   "notes": 1,
+   "unbound": 0,
+   "minted": 0,
+   "tokenRefs": 1,
+   "factsCarriedPct": 100,
+   "degradations": 2,
+   "stubs": 0,
+   "repeatParts": 0,
+   "b7Notes": 0,
+   "clean": true
+  },
+  {
+   "setName": "Recycle",
+   "type": "COMPONENT",
+   "tier": "S",
+   "proposed": true,
+   "violations": [],
+   "emitted": [
+    "react",
+    "html",
+    "react-inline",
+    "figma-script"
+   ],
+   "emitterRefusals": [],
+   "notes": 1,
+   "unbound": 0,
+   "minted": 0,
+   "tokenRefs": 1,
+   "factsCarriedPct": 100,
+   "degradations": 2,
+   "stubs": 0,
+   "repeatParts": 0,
+   "b7Notes": 0,
+   "clean": true
+  },
+  {
+   "setName": "ShoppingBag",
+   "type": "COMPONENT",
+   "tier": "S",
+   "proposed": true,
+   "violations": [],
+   "emitted": [
+    "react",
+    "html",
+    "react-inline",
+    "figma-script"
+   ],
+   "emitterRefusals": [],
+   "notes": 1,
+   "unbound": 0,
+   "minted": 0,
+   "tokenRefs": 1,
+   "factsCarriedPct": 100,
+   "degradations": 2,
+   "stubs": 0,
+   "repeatParts": 0,
+   "b7Notes": 0,
+   "clean": true
+  },
+  {
+   "setName": "SmileyWink",
+   "type": "COMPONENT",
+   "tier": "S",
+   "proposed": true,
+   "violations": [],
+   "emitted": [
+    "react",
+    "html",
+    "react-inline",
+    "figma-script"
+   ],
+   "emitterRefusals": [],
+   "notes": 1,
+   "unbound": 0,
+   "minted": 0,
+   "tokenRefs": 1,
+   "factsCarriedPct": 100,
+   "degradations": 2,
+   "stubs": 0,
+   "repeatParts": 0,
+   "b7Notes": 0,
+   "clean": true
+  },
+  {
+   "setName": "Stack",
+   "type": "COMPONENT",
+   "tier": "S",
+   "proposed": true,
+   "violations": [],
+   "emitted": [
+    "react",
+    "html",
+    "react-inline",
+    "figma-script"
+   ],
+   "emitterRefusals": [],
+   "notes": 1,
+   "unbound": 0,
+   "minted": 0,
+   "tokenRefs": 3,
+   "factsCarriedPct": 100,
+   "degradations": 4,
+   "stubs": 0,
+   "repeatParts": 0,
+   "b7Notes": 0,
+   "clean": true
+  },
+  {
+   "setName": "StarFour",
+   "type": "COMPONENT",
+   "tier": "S",
+   "proposed": true,
+   "violations": [],
+   "emitted": [
+    "react",
+    "html",
+    "react-inline",
+    "figma-script"
+   ],
+   "emitterRefusals": [],
+   "notes": 1,
+   "unbound": 0,
+   "minted": 0,
+   "tokenRefs": 1,
+   "factsCarriedPct": 100,
+   "degradations": 2,
+   "stubs": 0,
+   "repeatParts": 0,
+   "b7Notes": 0,
+   "clean": true
+  },
+  {
+   "setName": "StripeLogo",
+   "type": "COMPONENT",
+   "tier": "S",
+   "proposed": true,
+   "violations": [],
+   "emitted": [
+    "react",
+    "html",
+    "react-inline",
+    "figma-script"
+   ],
+   "emitterRefusals": [],
+   "notes": 1,
+   "unbound": 0,
+   "minted": 0,
+   "tokenRefs": 1,
+   "factsCarriedPct": 100,
+   "degradations": 2,
+   "stubs": 0,
+   "repeatParts": 0,
+   "b7Notes": 0,
+   "clean": true
+  },
+  {
+   "setName": "SunHorizon",
+   "type": "COMPONENT",
+   "tier": "S",
+   "proposed": true,
+   "violations": [],
+   "emitted": [
+    "react",
+    "html",
+    "react-inline",
+    "figma-script"
+   ],
+   "emitterRefusals": [],
+   "notes": 1,
+   "unbound": 0,
+   "minted": 0,
+   "tokenRefs": 1,
+   "factsCarriedPct": 100,
+   "degradations": 2,
+   "stubs": 0,
+   "repeatParts": 0,
+   "b7Notes": 0,
+   "clean": true
+  },
+  {
+   "setName": "Sword",
+   "type": "COMPONENT",
+   "tier": "S",
+   "proposed": true,
+   "violations": [],
+   "emitted": [
+    "react",
+    "html",
+    "react-inline",
+    "figma-script"
+   ],
+   "emitterRefusals": [],
+   "notes": 1,
+   "unbound": 0,
+   "minted": 0,
+   "tokenRefs": 1,
+   "factsCarriedPct": 100,
+   "degradations": 2,
+   "stubs": 0,
+   "repeatParts": 0,
+   "b7Notes": 0,
+   "clean": true
+  },
+  {
+   "setName": "TextAlignRight",
+   "type": "COMPONENT",
+   "tier": "S",
+   "proposed": true,
+   "violations": [],
+   "emitted": [
+    "react",
+    "html",
+    "react-inline",
+    "figma-script"
+   ],
+   "emitterRefusals": [],
+   "notes": 1,
+   "unbound": 0,
+   "minted": 0,
+   "tokenRefs": 1,
+   "factsCarriedPct": 100,
+   "degradations": 2,
+   "stubs": 0,
+   "repeatParts": 0,
+   "b7Notes": 0,
+   "clean": true
+  },
+  {
+   "setName": "RadioButton",
+   "type": "COMPONENT",
+   "tier": "S",
+   "proposed": true,
+   "violations": [],
+   "emitted": [
+    "react",
+    "html",
+    "react-inline",
+    "figma-script"
+   ],
+   "emitterRefusals": [],
+   "notes": 1,
+   "unbound": 0,
+   "minted": 0,
+   "tokenRefs": 1,
+   "factsCarriedPct": 100,
+   "degradations": 2,
+   "stubs": 0,
+   "repeatParts": 0,
+   "b7Notes": 0,
+   "clean": true
+  }
+ ],
+ "comboRecords": [
+  {
+   "setName": "_Avatar Indicator",
+   "combos": 15,
+   "comboCap": false,
+   "htmlOk": 15,
+   "htmlFailures": [],
+   "canvasOk": true,
+   "canvasVariantSpecs": 15
+  },
+  {
+   "setName": "_Country code",
+   "combos": 4,
+   "comboCap": false,
+   "htmlOk": 4,
+   "htmlFailures": [],
+   "canvasOk": true,
+   "canvasVariantSpecs": 2
+  },
+  {
+   "setName": "Badge",
+   "combos": 256,
+   "comboCap": true,
+   "htmlOk": 256,
+   "htmlFailures": [],
+   "canvasOk": true,
+   "canvasVariantSpecs": 36
+  },
+  {
+   "setName": "Badge Notification",
+   "combos": 72,
+   "comboCap": false,
+   "htmlOk": 72,
+   "htmlFailures": [],
+   "canvasOk": true,
+   "canvasVariantSpecs": 72
+  },
+  {
+   "setName": "Progress bar",
+   "combos": 144,
+   "comboCap": false,
+   "htmlOk": 144,
+   "htmlFailures": [],
+   "canvasOk": true,
+   "canvasVariantSpecs": 36
+  },
+  {
+   "setName": "Title card",
+   "combos": 3,
+   "comboCap": false,
+   "htmlOk": 3,
+   "htmlFailures": [],
+   "canvasOk": true,
+   "canvasVariantSpecs": 3
+  },
+  {
+   "setName": "Tooltip",
+   "combos": 18,
+   "comboCap": false,
+   "htmlOk": 18,
+   "htmlFailures": [],
+   "canvasOk": true,
+   "canvasVariantSpecs": 9
+  }
+ ],
+ "promotionRecords": [
+  {
+   "setName": "_Breadcrumb item",
+   "tier": "T4",
+   "axis": "state",
+   "axisValues": [
+    "current-page",
+    "default",
+    "focus",
+    "hover",
+    "open"
+   ],
+   "outOfVocab": [
+    "current-page",
+    "open"
+   ],
+   "expected": "near-miss-enum",
+   "statePropInApi": "state",
+   "statesCarried": [],
+   "drawnDisabled": false,
+   "disabledBoolean": null,
+   "nearMissNoteNamed": true,
+   "ok": true
+  },
+  {
+   "setName": "_Nav-item-base-close",
+   "tier": "T4",
+   "axis": "state",
+   "axisValues": [
+    "default",
+    "hover",
+    "selected"
+   ],
+   "outOfVocab": [
+    "selected"
+   ],
+   "expected": "near-miss-enum",
+   "statePropInApi": "state",
+   "statesCarried": [],
+   "drawnDisabled": false,
+   "disabledBoolean": null,
+   "nearMissNoteNamed": true,
+   "ok": true
+  },
+  {
+   "setName": "_Nav-item-base-open",
+   "tier": "T4",
+   "axis": "state",
+   "axisValues": [
+    "default",
+    "hover",
+    "selected"
+   ],
+   "outOfVocab": [
+    "selected"
+   ],
+   "expected": "near-miss-enum",
+   "statePropInApi": "state",
+   "statesCarried": [],
+   "drawnDisabled": false,
+   "disabledBoolean": null,
+   "nearMissNoteNamed": true,
+   "ok": true
+  },
+  {
+   "setName": "_pagination-number",
+   "tier": "T3",
+   "axis": "state",
+   "axisValues": [
+    "default",
+    "hover",
+    "selected",
+    "truncation"
+   ],
+   "outOfVocab": [
+    "selected",
+    "truncation"
+   ],
+   "expected": "near-miss-enum",
+   "statePropInApi": "state",
+   "statesCarried": [],
+   "drawnDisabled": false,
+   "disabledBoolean": null,
+   "nearMissNoteNamed": true,
+   "ok": true
+  },
+  {
+   "setName": "_Tab-item",
+   "tier": "T4",
+   "axis": "state",
+   "axisValues": [
+    "default",
+    "disabled",
+    "focus",
+    "hover",
+    "pressed"
+   ],
+   "outOfVocab": [],
+   "expected": "promote",
+   "statePropInApi": null,
+   "statesCarried": [
+    "active",
+    "focus-visible"
+   ],
+   "drawnDisabled": true,
+   "disabledBoolean": "disabled",
+   "nearMissNoteNamed": false,
+   "ok": true
+  },
+  {
+   "setName": "_Tab-item-pill",
+   "tier": "T4",
+   "axis": "state",
+   "axisValues": [
+    "default",
+    "disabled",
+    "focus",
+    "hover",
+    "pressed"
+   ],
+   "outOfVocab": [],
+   "expected": "promote",
+   "statePropInApi": null,
+   "statesCarried": [
+    "focus-visible"
+   ],
+   "drawnDisabled": true,
+   "disabledBoolean": "disabled",
+   "nearMissNoteNamed": false,
+   "ok": true
+  },
+  {
+   "setName": "_Tab-item-vertical-left",
+   "tier": "T4",
+   "axis": "state",
+   "axisValues": [
+    "default",
+    "disabled",
+    "focus",
+    "hover",
+    "pressed"
+   ],
+   "outOfVocab": [],
+   "expected": "promote",
+   "statePropInApi": null,
+   "statesCarried": [
+    "active",
+    "focus-visible"
+   ],
+   "drawnDisabled": true,
+   "disabledBoolean": "disabled",
+   "nearMissNoteNamed": false,
+   "ok": true
+  },
+  {
+   "setName": "_Tab-item-vertical-right",
+   "tier": "T4",
+   "axis": "state",
+   "axisValues": [
+    "default",
+    "disabled",
+    "focus",
+    "hover",
+    "pressed"
+   ],
+   "outOfVocab": [],
+   "expected": "promote",
+   "statePropInApi": null,
+   "statesCarried": [
+    "active",
+    "focus-visible"
+   ],
+   "drawnDisabled": true,
+   "disabledBoolean": "disabled",
+   "nearMissNoteNamed": false,
+   "ok": true
+  },
+  {
+   "setName": "Accordion",
+   "tier": "T4",
+   "axis": "state",
+   "axisValues": [
+    "default",
+    "disabled",
+    "focus",
+    "hover"
+   ],
+   "outOfVocab": [],
+   "expected": "promote",
+   "statePropInApi": null,
+   "statesCarried": [
+    "focus-visible",
+    "disabled"
+   ],
+   "drawnDisabled": true,
+   "disabledBoolean": "disabled",
+   "nearMissNoteNamed": false,
+   "ok": true
+  },
+  {
+   "setName": "Button-Brand Primary",
+   "tier": "T3",
+   "axis": "state",
+   "axisValues": [
+    "default",
+    "disabled",
+    "focus",
+    "hover",
+    "pressed"
+   ],
+   "outOfVocab": [],
+   "expected": "promote",
+   "statePropInApi": null,
+   "statesCarried": [
+    "hover",
+    "active",
+    "focus-visible",
+    "disabled"
+   ],
+   "drawnDisabled": true,
+   "disabledBoolean": "disabled",
+   "nearMissNoteNamed": false,
+   "ok": true
+  },
+  {
+   "setName": "Button-Brand Secondary",
+   "tier": "T3",
+   "axis": "state",
+   "axisValues": [
+    "default",
+    "disabled",
+    "focus",
+    "hover",
+    "pressed"
+   ],
+   "outOfVocab": [],
+   "expected": "promote",
+   "statePropInApi": null,
+   "statesCarried": [
+    "hover",
+    "active",
+    "focus-visible",
+    "disabled"
+   ],
+   "drawnDisabled": true,
+   "disabledBoolean": "disabled",
+   "nearMissNoteNamed": false,
+   "ok": true
+  },
+  {
+   "setName": "Button-Brand Tertiary",
+   "tier": "T3",
+   "axis": "state",
+   "axisValues": [
+    "default",
+    "disabled",
+    "focus",
+    "hover",
+    "pressed"
+   ],
+   "outOfVocab": [],
+   "expected": "promote",
+   "statePropInApi": null,
+   "statesCarried": [
+    "hover",
+    "active",
+    "focus-visible"
+   ],
+   "drawnDisabled": true,
+   "disabledBoolean": "disabled",
+   "nearMissNoteNamed": false,
+   "ok": true
+  },
+  {
+   "setName": "Button-Danger Primary",
+   "tier": "T3",
+   "axis": "state",
+   "axisValues": [
+    "default",
+    "disabled",
+    "focus",
+    "hover",
+    "pressed"
+   ],
+   "outOfVocab": [],
+   "expected": "promote",
+   "statePropInApi": null,
+   "statesCarried": [
+    "hover",
+    "active",
+    "focus-visible",
+    "disabled"
+   ],
+   "drawnDisabled": true,
+   "disabledBoolean": "disabled",
+   "nearMissNoteNamed": false,
+   "ok": true
+  },
+  {
+   "setName": "Button-Danger Secondary",
+   "tier": "T3",
+   "axis": "state",
+   "axisValues": [
+    "default",
+    "disabled",
+    "focus",
+    "hover",
+    "pressed"
+   ],
+   "outOfVocab": [],
+   "expected": "promote",
+   "statePropInApi": null,
+   "statesCarried": [
+    "hover",
+    "active",
+    "focus-visible",
+    "disabled"
+   ],
+   "drawnDisabled": true,
+   "disabledBoolean": "disabled",
+   "nearMissNoteNamed": false,
+   "ok": true
+  },
+  {
+   "setName": "Button-Danger Tertiary",
+   "tier": "T3",
+   "axis": "state",
+   "axisValues": [
+    "default",
+    "disabled",
+    "focus",
+    "hover",
+    "pressed"
+   ],
+   "outOfVocab": [],
+   "expected": "promote",
+   "statePropInApi": null,
+   "statesCarried": [
+    "hover",
+    "active",
+    "focus-visible"
+   ],
+   "drawnDisabled": true,
+   "disabledBoolean": "disabled",
+   "nearMissNoteNamed": false,
+   "ok": true
+  },
+  {
+   "setName": "Button-Neutral Primary",
+   "tier": "T3",
+   "axis": "state",
+   "axisValues": [
+    "default",
+    "disabled",
+    "focus",
+    "hover",
+    "pressed"
+   ],
+   "outOfVocab": [],
+   "expected": "promote",
+   "statePropInApi": null,
+   "statesCarried": [
+    "hover",
+    "active",
+    "focus-visible",
+    "disabled"
+   ],
+   "drawnDisabled": true,
+   "disabledBoolean": "disabled",
+   "nearMissNoteNamed": false,
+   "ok": true
+  },
+  {
+   "setName": "Button-Neutral Secondary",
+   "tier": "T3",
+   "axis": "state",
+   "axisValues": [
+    "default",
+    "disabled",
+    "focus",
+    "hover",
+    "pressed"
+   ],
+   "outOfVocab": [],
+   "expected": "promote",
+   "statePropInApi": null,
+   "statesCarried": [
+    "hover",
+    "active",
+    "focus-visible",
+    "disabled"
+   ],
+   "drawnDisabled": true,
+   "disabledBoolean": "disabled",
+   "nearMissNoteNamed": false,
+   "ok": true
+  },
+  {
+   "setName": "Button-Neutral Tertiary",
+   "tier": "T3",
+   "axis": "state",
+   "axisValues": [
+    "default",
+    "disabled",
+    "focus",
+    "hover",
+    "pressed"
+   ],
+   "outOfVocab": [],
+   "expected": "promote",
+   "statePropInApi": null,
+   "statesCarried": [
+    "hover",
+    "active",
+    "focus-visible"
+   ],
+   "drawnDisabled": true,
+   "disabledBoolean": "disabled",
+   "nearMissNoteNamed": false,
+   "ok": true
+  },
+  {
+   "setName": "Checkbox",
+   "tier": "T4",
+   "axis": "state",
+   "axisValues": [
+    "default",
+    "disabled",
+    "error"
+   ],
+   "outOfVocab": [
+    "error"
+   ],
+   "expected": "near-miss-enum",
+   "statePropInApi": "state",
+   "statesCarried": [],
+   "drawnDisabled": true,
+   "disabledBoolean": null,
+   "nearMissNoteNamed": true,
+   "ok": true
+  },
+  {
+   "setName": "Checkbox-icon",
+   "tier": "T4",
+   "axis": "state",
+   "axisValues": [
+    "default",
+    "disabled",
+    "focus",
+    "hover"
+   ],
+   "outOfVocab": [],
+   "expected": "promote",
+   "statePropInApi": null,
+   "statesCarried": [
+    "focus-visible"
+   ],
+   "drawnDisabled": true,
+   "disabledBoolean": "disabled",
+   "nearMissNoteNamed": false,
+   "ok": true
+  },
+  {
+   "setName": "Chip",
+   "tier": "T4",
+   "axis": "state",
+   "axisValues": [
+    "default",
+    "disabled",
+    "hover",
+    "selected"
+   ],
+   "outOfVocab": [
+    "selected"
+   ],
+   "expected": "near-miss-enum",
+   "statePropInApi": "state",
+   "statesCarried": [],
+   "drawnDisabled": true,
+   "disabledBoolean": null,
+   "nearMissNoteNamed": true,
+   "ok": true
+  },
+  {
+   "setName": "Dropdown",
+   "tier": "T4",
+   "axis": "state",
+   "axisValues": [
+    "active",
+    "default",
+    "disabled",
+    "error",
+    "filled",
+    "focus",
+    "hover"
+   ],
+   "outOfVocab": [
+    "error",
+    "filled"
+   ],
+   "expected": "near-miss-enum",
+   "statePropInApi": "state",
+   "statesCarried": [],
+   "drawnDisabled": true,
+   "disabledBoolean": null,
+   "nearMissNoteNamed": true,
+   "ok": true
+  },
+  {
+   "setName": "Dropdown-MutliSelect",
+   "tier": "T4",
+   "axis": "state",
+   "axisValues": [
+    "active",
+    "active-checkbox",
+    "default",
+    "disabled",
+    "error",
+    "filled",
+    "focus",
+    "hover"
+   ],
+   "outOfVocab": [
+    "active-checkbox",
+    "error",
+    "filled"
+   ],
+   "expected": "near-miss-enum",
+   "statePropInApi": "state",
+   "statesCarried": [],
+   "drawnDisabled": true,
+   "disabledBoolean": null,
+   "nearMissNoteNamed": true,
+   "ok": true
+  },
+  {
+   "setName": "Icon Button Brand-Primary",
+   "tier": "T3",
+   "axis": "state",
+   "axisValues": [
+    "default",
+    "disabled",
+    "focus",
+    "hover",
+    "pressed"
+   ],
+   "outOfVocab": [],
+   "expected": "promote",
+   "statePropInApi": null,
+   "statesCarried": [
+    "hover",
+    "active",
+    "focus-visible",
+    "disabled"
+   ],
+   "drawnDisabled": true,
+   "disabledBoolean": "disabled",
+   "nearMissNoteNamed": false,
+   "ok": true
+  },
+  {
+   "setName": "Icon Button-Brand Secondary",
+   "tier": "T3",
+   "axis": "state",
+   "axisValues": [
+    "default",
+    "disabled",
+    "focus",
+    "hover",
+    "pressed"
+   ],
+   "outOfVocab": [],
+   "expected": "promote",
+   "statePropInApi": null,
+   "statesCarried": [
+    "hover",
+    "active",
+    "focus-visible",
+    "disabled"
+   ],
+   "drawnDisabled": true,
+   "disabledBoolean": "disabled",
+   "nearMissNoteNamed": false,
+   "ok": true
+  },
+  {
+   "setName": "Icon Button-Brand Tertiary",
+   "tier": "T3",
+   "axis": "state",
+   "axisValues": [
+    "default",
+    "disabled",
+    "focus",
+    "hover",
+    "pressed"
+   ],
+   "outOfVocab": [],
+   "expected": "promote",
+   "statePropInApi": null,
+   "statesCarried": [
+    "hover",
+    "active",
+    "focus-visible"
+   ],
+   "drawnDisabled": true,
+   "disabledBoolean": "disabled",
+   "nearMissNoteNamed": false,
+   "ok": true
+  },
+  {
+   "setName": "Icon Button-Danger Primary",
+   "tier": "T3",
+   "axis": "state",
+   "axisValues": [
+    "default",
+    "disabled",
+    "focus",
+    "hover",
+    "pressed"
+   ],
+   "outOfVocab": [],
+   "expected": "promote",
+   "statePropInApi": null,
+   "statesCarried": [
+    "hover",
+    "active",
+    "focus-visible",
+    "disabled"
+   ],
+   "drawnDisabled": true,
+   "disabledBoolean": "disabled",
+   "nearMissNoteNamed": false,
+   "ok": true
+  },
+  {
+   "setName": "Icon Button-Danger Secondary",
+   "tier": "T3",
+   "axis": "state",
+   "axisValues": [
+    "default",
+    "disabled",
+    "focus",
+    "hover",
+    "pressed"
+   ],
+   "outOfVocab": [],
+   "expected": "promote",
+   "statePropInApi": null,
+   "statesCarried": [
+    "hover",
+    "active",
+    "focus-visible",
+    "disabled"
+   ],
+   "drawnDisabled": true,
+   "disabledBoolean": "disabled",
+   "nearMissNoteNamed": false,
+   "ok": true
+  },
+  {
+   "setName": "Icon Button-Danger Tertiary",
+   "tier": "T3",
+   "axis": "state",
+   "axisValues": [
+    "default",
+    "disabled",
+    "focus",
+    "hover",
+    "pressed"
+   ],
+   "outOfVocab": [],
+   "expected": "promote",
+   "statePropInApi": null,
+   "statesCarried": [
+    "hover",
+    "active",
+    "focus-visible"
+   ],
+   "drawnDisabled": true,
+   "disabledBoolean": "disabled",
+   "nearMissNoteNamed": false,
+   "ok": true
+  },
+  {
+   "setName": "Icon Button-Neutral Primary",
+   "tier": "T3",
+   "axis": "state",
+   "axisValues": [
+    "default",
+    "disabled",
+    "focus",
+    "hover",
+    "pressed"
+   ],
+   "outOfVocab": [],
+   "expected": "promote",
+   "statePropInApi": null,
+   "statesCarried": [
+    "hover",
+    "active",
+    "focus-visible",
+    "disabled"
+   ],
+   "drawnDisabled": true,
+   "disabledBoolean": "disabled",
+   "nearMissNoteNamed": false,
+   "ok": true
+  },
+  {
+   "setName": "Icon Button-Neutral Secondary",
+   "tier": "T3",
+   "axis": "state",
+   "axisValues": [
+    "default",
+    "disabled",
+    "focus",
+    "hover",
+    "pressed"
+   ],
+   "outOfVocab": [],
+   "expected": "promote",
+   "statePropInApi": null,
+   "statesCarried": [
+    "hover",
+    "active",
+    "focus-visible",
+    "disabled"
+   ],
+   "drawnDisabled": true,
+   "disabledBoolean": "disabled",
+   "nearMissNoteNamed": false,
+   "ok": true
+  },
+  {
+   "setName": "Icon Button-Neutral Tertiary",
+   "tier": "T3",
+   "axis": "state",
+   "axisValues": [
+    "default",
+    "disabled",
+    "focus",
+    "hover",
+    "pressed"
+   ],
+   "outOfVocab": [],
+   "expected": "promote",
+   "statePropInApi": null,
+   "statesCarried": [
+    "hover",
+    "active",
+    "focus-visible"
+   ],
+   "drawnDisabled": true,
+   "disabledBoolean": "disabled",
+   "nearMissNoteNamed": false,
+   "ok": true
+  },
+  {
+   "setName": "Input Date",
+   "tier": "T4",
+   "axis": "state",
+   "axisValues": [
+    "active",
+    "default",
+    "disabled",
+    "error",
+    "filled",
+    "focus",
+    "hover"
+   ],
+   "outOfVocab": [
+    "error",
+    "filled"
+   ],
+   "expected": "near-miss-enum",
+   "statePropInApi": "state",
+   "statesCarried": [],
+   "drawnDisabled": true,
+   "disabledBoolean": null,
+   "nearMissNoteNamed": true,
+   "ok": true
+  },
+  {
+   "setName": "Input Number",
+   "tier": "T4",
+   "axis": "state",
+   "axisValues": [
+    "active",
+    "default",
+    "disabled",
+    "error",
+    "filled",
+    "focus",
+    "hover"
+   ],
+   "outOfVocab": [
+    "error",
+    "filled"
+   ],
+   "expected": "near-miss-enum",
+   "statePropInApi": "state",
+   "statesCarried": [],
+   "drawnDisabled": true,
+   "disabledBoolean": null,
+   "nearMissNoteNamed": true,
+   "ok": true
+  },
+  {
+   "setName": "Input Text",
+   "tier": "T4",
+   "axis": "state",
+   "axisValues": [
+    "active",
+    "default",
+    "disabled",
+    "error",
+    "filled",
+    "focus",
+    "hover"
+   ],
+   "outOfVocab": [
+    "error",
+    "filled"
+   ],
+   "expected": "near-miss-enum",
+   "statePropInApi": "state",
+   "statesCarried": [],
+   "drawnDisabled": true,
+   "disabledBoolean": null,
+   "nearMissNoteNamed": true,
+   "ok": true
+  },
+  {
+   "setName": "Link-Blue",
+   "tier": "T3",
+   "axis": "state",
+   "axisValues": [
+    "default",
+    "disabled",
+    "focus",
+    "hover"
+   ],
+   "outOfVocab": [],
+   "expected": "promote",
+   "statePropInApi": null,
+   "statesCarried": [
+    "focus-visible"
+   ],
+   "drawnDisabled": true,
+   "disabledBoolean": "disabled",
+   "nearMissNoteNamed": false,
+   "ok": true
+  },
+  {
+   "setName": "Link-Danger",
+   "tier": "T3",
+   "axis": "state",
+   "axisValues": [
+    "default",
+    "disabled",
+    "focus",
+    "hover"
+   ],
+   "outOfVocab": [],
+   "expected": "promote",
+   "statePropInApi": null,
+   "statesCarried": [
+    "focus-visible"
+   ],
+   "drawnDisabled": true,
+   "disabledBoolean": "disabled",
+   "nearMissNoteNamed": false,
+   "ok": true
+  },
+  {
+   "setName": "Link-Neutral",
+   "tier": "T3",
+   "axis": "state",
+   "axisValues": [
+    "default",
+    "disabled",
+    "focus",
+    "hover"
+   ],
+   "outOfVocab": [],
+   "expected": "promote",
+   "statePropInApi": null,
+   "statesCarried": [
+    "focus-visible"
+   ],
+   "drawnDisabled": true,
+   "disabledBoolean": "disabled",
+   "nearMissNoteNamed": false,
+   "ok": true
+  },
+  {
+   "setName": "List item",
+   "tier": "T5",
+   "axis": "state",
+   "axisValues": [
+    "default",
+    "disabled",
+    "focus",
+    "hover",
+    "selected"
+   ],
+   "outOfVocab": [
+    "selected"
+   ],
+   "expected": "near-miss-enum",
+   "statePropInApi": "state",
+   "statesCarried": [],
+   "drawnDisabled": true,
+   "disabledBoolean": null,
+   "nearMissNoteNamed": true,
+   "ok": true
+  },
+  {
+   "setName": "Radio button",
+   "tier": "T5",
+   "axis": "state",
+   "axisValues": [
+    "default",
+    "disabled",
+    "error"
+   ],
+   "outOfVocab": [
+    "error"
+   ],
+   "expected": "near-miss-enum",
+   "statePropInApi": "state",
+   "statesCarried": [],
+   "drawnDisabled": true,
+   "disabledBoolean": null,
+   "nearMissNoteNamed": true,
+   "ok": true
+  },
+  {
+   "setName": "Radio button-icon",
+   "tier": "T4",
+   "axis": "state",
+   "axisValues": [
+    "default",
+    "disabled",
+    "focus",
+    "hover"
+   ],
+   "outOfVocab": [],
+   "expected": "promote",
+   "statePropInApi": null,
+   "statesCarried": [
+    "focus-visible"
+   ],
+   "drawnDisabled": true,
+   "disabledBoolean": "disabled",
+   "nearMissNoteNamed": false,
+   "ok": true
+  },
+  {
+   "setName": "Search",
+   "tier": "T4",
+   "axis": "state",
+   "axisValues": [
+    "active",
+    "default",
+    "disabled",
+    "filled",
+    "focus",
+    "hover"
+   ],
+   "outOfVocab": [
+    "filled"
+   ],
+   "expected": "near-miss-enum",
+   "statePropInApi": "state",
+   "statesCarried": [],
+   "drawnDisabled": true,
+   "disabledBoolean": null,
+   "nearMissNoteNamed": true,
+   "ok": true
+  },
+  {
+   "setName": "Search-MultiSelect",
+   "tier": "T4",
+   "axis": "state",
+   "axisValues": [
+    "active",
+    "active-checkbox",
+    "default",
+    "disabled",
+    "filled",
+    "focus",
+    "hover"
+   ],
+   "outOfVocab": [
+    "active-checkbox",
+    "filled"
+   ],
+   "expected": "near-miss-enum",
+   "statePropInApi": "state",
+   "statesCarried": [],
+   "drawnDisabled": true,
+   "disabledBoolean": null,
+   "nearMissNoteNamed": true,
+   "ok": true
+  },
+  {
+   "setName": "Table-Data cell",
+   "tier": "T4",
+   "axis": "state",
+   "axisValues": [
+    "coloured",
+    "default",
+    "disabled",
+    "hover",
+    "selected"
+   ],
+   "outOfVocab": [
+    "coloured",
+    "selected"
+   ],
+   "expected": "near-miss-enum",
+   "statePropInApi": "state",
+   "statesCarried": [],
+   "drawnDisabled": true,
+   "disabledBoolean": null,
+   "nearMissNoteNamed": true,
+   "ok": true
+  },
+  {
+   "setName": "Text Area",
+   "tier": "T4",
+   "axis": "state",
+   "axisValues": [
+    "active",
+    "default",
+    "diabled",
+    "error",
+    "filled",
+    "focus",
+    "hover"
+   ],
+   "outOfVocab": [
+    "diabled",
+    "error",
+    "filled"
+   ],
+   "expected": "near-miss-enum",
+   "statePropInApi": "state",
+   "statesCarried": [],
+   "drawnDisabled": false,
+   "disabledBoolean": null,
+   "nearMissNoteNamed": true,
+   "ok": true
+  },
+  {
+   "setName": "Toggle",
+   "tier": "T4",
+   "axis": "state",
+   "axisValues": [
+    "default",
+    "disabled"
+   ],
+   "outOfVocab": [],
+   "expected": "promote",
+   "statePropInApi": null,
+   "statesCarried": [],
+   "drawnDisabled": true,
+   "disabledBoolean": "disabled",
+   "nearMissNoteNamed": false,
+   "ok": true
+  },
+  {
+   "setName": "Toggle-icon",
+   "tier": "T4",
+   "axis": "state",
+   "axisValues": [
+    "default",
+    "disabled",
+    "focus",
+    "hover"
+   ],
+   "outOfVocab": [],
+   "expected": "promote",
+   "statePropInApi": null,
+   "statesCarried": [
+    "focus-visible"
+   ],
+   "drawnDisabled": true,
+   "disabledBoolean": "disabled",
+   "nearMissNoteNamed": false,
+   "ok": true
+  }
+ ],
+ "sessionRecords": [
+  {
+   "setName": "_Breadcrumb item",
+   "tier": "T4",
+   "deps": [
+    "Placeholder",
+    "Icon",
+    "Badge Notification",
+    "_Avatar Indicator",
+    "Avatar",
+    "Badge",
+    "Button-Brand Primary",
+    "Button-Brand Secondary",
+    "_Error text",
+    "_Helper text",
+    "_Input label",
+    "Input Text",
+    "List item",
+    "Menu"
+   ],
+   "childrenFirst": {
+    "importedDeps": [
+     "Placeholder",
+     "Icon",
+     "Badge Notification",
+     "_Avatar Indicator",
+     "Avatar",
+     "Badge",
+     "Button-Brand Primary",
+     "Button-Brand Secondary",
+     "_Error text",
+     "_Helper text",
+     "_Input label",
+     "Input Text",
+     "List item",
+     "Menu"
+    ],
+    "failedDeps": [],
+    "parentOk": true,
+    "linkedSession": 3,
+    "linkedRepo": 0,
+    "stubbed": 0,
+    "unresolved": 0,
+    "stubbedDespiteImported": [],
+    "violations": []
+   },
+   "adversarial": {
+    "parentFirstStubs": 2,
+    "stubGeometryMints": 5,
+    "geometrySkipNotes": 4,
+    "healedAfterReimport": true,
+    "stillStubbedAfterHeal": [],
+    "firstChild": "Icon"
+   }
+  },
+  {
+   "setName": "_Button single-card",
+   "tier": "T4",
+   "deps": [
+    "Placeholder",
+    "Icon",
+    "Button-Brand Primary",
+    "Button-Danger Primary",
+    "Button-Neutral Primary"
+   ],
+   "childrenFirst": {
+    "importedDeps": [
+     "Placeholder",
+     "Icon",
+     "Button-Brand Primary",
+     "Button-Danger Primary",
+     "Button-Neutral Primary"
+    ],
+    "failedDeps": [],
+    "parentOk": true,
+    "linkedSession": 3,
+    "linkedRepo": 0,
+    "stubbed": 0,
+    "unresolved": 0,
+    "stubbedDespiteImported": [],
+    "violations": []
+   },
+   "adversarial": {
+    "parentFirstStubs": 3,
+    "stubGeometryMints": 6,
+    "geometrySkipNotes": 3,
+    "healedAfterReimport": true,
+    "stillStubbedAfterHeal": [],
+    "firstChild": "Button-Brand Primary"
+   }
+  },
+  {
+   "setName": "_Controls",
+   "tier": "T4",
+   "deps": [
+    "CaretDown",
+    "CaretUp"
+   ],
+   "childrenFirst": {
+    "importedDeps": [
+     "CaretDown",
+     "CaretUp"
+    ],
+    "failedDeps": [],
+    "parentOk": true,
+    "linkedSession": 2,
+    "linkedRepo": 0,
+    "stubbed": 0,
+    "unresolved": 0,
+    "stubbedDespiteImported": [],
+    "violations": [],
+    "crossImportMintedExposure": 0
+   },
+   "adversarial": {
+    "parentFirstStubs": 2,
+    "stubGeometryMints": 0,
+    "geometrySkipNotes": 4,
+    "healedAfterReimport": true,
+    "stillStubbedAfterHeal": [],
+    "firstChild": "CaretDown"
+   }
+  },
+  {
+   "setName": "_Nav-item-base-close",
+   "tier": "T4",
+   "deps": [
+    "Badge Notification",
+    "Placeholder",
+    "Icon"
+   ],
+   "childrenFirst": {
+    "importedDeps": [
+     "Badge Notification",
+     "Placeholder",
+     "Icon"
+    ],
+    "failedDeps": [],
+    "parentOk": true,
+    "linkedSession": 2,
+    "linkedRepo": 0,
+    "stubbed": 0,
+    "unresolved": 0,
+    "stubbedDespiteImported": [],
+    "violations": []
+   },
+   "adversarial": {
+    "parentFirstStubs": 2,
+    "stubGeometryMints": 5,
+    "geometrySkipNotes": 0,
+    "healedAfterReimport": true,
+    "stillStubbedAfterHeal": [],
+    "firstChild": "Badge Notification"
+   }
+  },
+  {
+   "setName": "_Nav-item-base-open",
+   "tier": "T4",
+   "deps": [
+    "Badge Notification",
+    "Placeholder",
+    "Icon"
+   ],
+   "childrenFirst": {
+    "importedDeps": [
+     "Badge Notification",
+     "Placeholder",
+     "Icon"
+    ],
+    "failedDeps": [],
+    "parentOk": true,
+    "linkedSession": 3,
+    "linkedRepo": 0,
+    "stubbed": 0,
+    "unresolved": 0,
+    "stubbedDespiteImported": [],
+    "violations": []
+   },
+   "adversarial": {
+    "parentFirstStubs": 2,
+    "stubGeometryMints": 5,
+    "geometrySkipNotes": 0,
+    "healedAfterReimport": true,
+    "stillStubbedAfterHeal": [],
+    "firstChild": "Badge Notification"
+   }
+  },
+  {
+   "setName": "_Nav-item-menu",
+   "tier": "T5",
+   "deps": [
+    "Badge Notification",
+    "Placeholder",
+    "Icon",
+    "_Nav-item-base-open"
+   ],
+   "childrenFirst": {
+    "importedDeps": [
+     "Badge Notification",
+     "Placeholder",
+     "Icon",
+     "_Nav-item-base-open"
+    ],
+    "failedDeps": [],
+    "parentOk": true,
+    "linkedSession": 1,
+    "linkedRepo": 0,
+    "stubbed": 0,
+    "unresolved": 0,
+    "stubbedDespiteImported": [],
+    "violations": []
+   },
+   "adversarial": {
+    "parentFirstStubs": 1,
+    "stubGeometryMints": 2,
+    "geometrySkipNotes": 1,
+    "healedAfterReimport": true,
+    "stillStubbedAfterHeal": [],
+    "firstChild": "_Nav-item-base-open"
+   }
+  },
+  {
+   "setName": "_Panel-Accordion",
+   "tier": "T4",
+   "deps": [
+    "Placeholder",
+    "Icon",
+    "_Text-block-Panel"
+   ],
+   "childrenFirst": {
+    "importedDeps": [
+     "Placeholder",
+     "Icon",
+     "_Text-block-Panel"
+    ],
+    "failedDeps": [],
+    "parentOk": true,
+    "linkedSession": 8,
+    "linkedRepo": 0,
+    "stubbed": 0,
+    "unresolved": 0,
+    "stubbedDespiteImported": [],
+    "violations": []
+   },
+   "adversarial": {
+    "parentFirstStubs": 1,
+    "stubGeometryMints": 3,
+    "geometrySkipNotes": 0,
+    "healedAfterReimport": true,
+    "stillStubbedAfterHeal": [],
+    "firstChild": "_Text-block-Panel"
+   }
+  },
+  {
+   "setName": "_Tab-item",
+   "tier": "T4",
+   "deps": [
+    "Badge Notification",
+    "Placeholder",
+    "Icon"
+   ],
+   "childrenFirst": {
+    "importedDeps": [
+     "Badge Notification",
+     "Placeholder",
+     "Icon"
+    ],
+    "failedDeps": [],
+    "parentOk": true,
+    "linkedSession": 3,
+    "linkedRepo": 0,
+    "stubbed": 0,
+    "unresolved": 0,
+    "stubbedDespiteImported": [],
+    "violations": []
+   },
+   "adversarial": {
+    "parentFirstStubs": 2,
+    "stubGeometryMints": 5,
+    "geometrySkipNotes": 1,
+    "healedAfterReimport": true,
+    "stillStubbedAfterHeal": [],
+    "firstChild": "Badge Notification"
+   }
+  },
+  {
+   "setName": "_Tab-item-pill",
+   "tier": "T4",
+   "deps": [
+    "Badge Notification",
+    "Placeholder",
+    "Icon"
+   ],
+   "childrenFirst": {
+    "importedDeps": [
+     "Badge Notification",
+     "Placeholder",
+     "Icon"
+    ],
+    "failedDeps": [],
+    "parentOk": true,
+    "linkedSession": 3,
+    "linkedRepo": 0,
+    "stubbed": 0,
+    "unresolved": 0,
+    "stubbedDespiteImported": [],
+    "violations": []
+   },
+   "adversarial": {
+    "parentFirstStubs": 2,
+    "stubGeometryMints": 5,
+    "geometrySkipNotes": 1,
+    "healedAfterReimport": true,
+    "stillStubbedAfterHeal": [],
+    "firstChild": "Badge Notification"
+   }
+  },
+  {
+   "setName": "_Tab-item-vertical-left",
+   "tier": "T4",
+   "deps": [
+    "Badge Notification",
+    "Placeholder",
+    "Icon"
+   ],
+   "childrenFirst": {
+    "importedDeps": [
+     "Badge Notification",
+     "Placeholder",
+     "Icon"
+    ],
+    "failedDeps": [],
+    "parentOk": true,
+    "linkedSession": 3,
+    "linkedRepo": 0,
+    "stubbed": 0,
+    "unresolved": 0,
+    "stubbedDespiteImported": [],
+    "violations": []
+   },
+   "adversarial": {
+    "parentFirstStubs": 2,
+    "stubGeometryMints": 5,
+    "geometrySkipNotes": 1,
+    "healedAfterReimport": true,
+    "stillStubbedAfterHeal": [],
+    "firstChild": "Badge Notification"
+   }
+  },
+  {
+   "setName": "_Tab-item-vertical-right",
+   "tier": "T4",
+   "deps": [
+    "Badge Notification",
+    "Placeholder",
+    "Icon"
+   ],
+   "childrenFirst": {
+    "importedDeps": [
+     "Badge Notification",
+     "Placeholder",
+     "Icon"
+    ],
+    "failedDeps": [],
+    "parentOk": true,
+    "linkedSession": 3,
+    "linkedRepo": 0,
+    "stubbed": 0,
+    "unresolved": 0,
+    "stubbedDespiteImported": [],
+    "violations": []
+   },
+   "adversarial": {
+    "parentFirstStubs": 2,
+    "stubGeometryMints": 5,
+    "geometrySkipNotes": 1,
+    "healedAfterReimport": true,
+    "stillStubbedAfterHeal": [],
+    "firstChild": "Badge Notification"
+   }
+  },
+  {
+   "setName": "_Text-block-Panel",
+   "tier": "T5",
+   "deps": [
+    "Placeholder",
+    "Icon"
+   ],
+   "childrenFirst": {
+    "importedDeps": [
+     "Placeholder",
+     "Icon"
+    ],
+    "failedDeps": [],
+    "parentOk": true,
+    "linkedSession": 0,
+    "linkedRepo": 0,
+    "stubbed": 0,
+    "unresolved": 0,
+    "stubbedDespiteImported": [],
+    "violations": []
+   },
+   "adversarial": {
+    "parentFirstStubs": 1,
+    "stubGeometryMints": 2,
+    "geometrySkipNotes": 0,
+    "healedAfterReimport": true,
+    "stillStubbedAfterHeal": [],
+    "firstChild": "Icon"
+   }
+  },
+  {
+   "setName": "Accordion",
+   "tier": "T4",
+   "deps": [
+    "Placeholder",
+    "Icon",
+    "_Text-block-Panel",
+    "_Panel-Accordion"
+   ],
+   "childrenFirst": {
+    "importedDeps": [
+     "Placeholder",
+     "Icon",
+     "_Text-block-Panel",
+     "_Panel-Accordion"
+    ],
+    "failedDeps": [],
+    "parentOk": true,
+    "linkedSession": 6,
+    "linkedRepo": 0,
+    "stubbed": 0,
+    "unresolved": 0,
+    "stubbedDespiteImported": [],
+    "violations": []
+   },
+   "adversarial": {
+    "parentFirstStubs": 2,
+    "stubGeometryMints": 4,
+    "geometrySkipNotes": 2,
+    "healedAfterReimport": true,
+    "stillStubbedAfterHeal": [],
+    "firstChild": "Icon"
+   }
+  },
+  {
+   "setName": "Alert",
+   "tier": "T4",
+   "deps": [
+    "Placeholder",
+    "Icon",
+    "Link-Blue"
+   ],
+   "childrenFirst": {
+    "importedDeps": [
+     "Placeholder",
+     "Icon",
+     "Link-Blue"
+    ],
+    "failedDeps": [],
+    "parentOk": true,
+    "linkedSession": 5,
+    "linkedRepo": 0,
+    "stubbed": 0,
+    "unresolved": 0,
+    "stubbedDespiteImported": [],
+    "violations": []
+   },
+   "adversarial": {
+    "parentFirstStubs": 2,
+    "stubGeometryMints": 4,
+    "geometrySkipNotes": 3,
+    "healedAfterReimport": true,
+    "stillStubbedAfterHeal": [],
+    "firstChild": "Icon"
+   }
+  },
+  {
+   "setName": "Avatar",
+   "tier": "T4",
+   "deps": [
+    "Badge Notification",
+    "Placeholder",
+    "Icon",
+    "_Avatar Indicator"
+   ],
+   "childrenFirst": {
+    "importedDeps": [
+     "Badge Notification",
+     "Placeholder",
+     "Icon",
+     "_Avatar Indicator"
+    ],
+    "failedDeps": [],
+    "parentOk": true,
+    "linkedSession": 3,
+    "linkedRepo": 0,
+    "stubbed": 0,
+    "unresolved": 0,
+    "stubbedDespiteImported": [],
+    "violations": []
+   },
+   "adversarial": {
+    "parentFirstStubs": 3,
+    "stubGeometryMints": 26,
+    "geometrySkipNotes": 6,
+    "healedAfterReimport": true,
+    "stillStubbedAfterHeal": [],
+    "firstChild": "Badge Notification"
+   }
+  },
+  {
+   "setName": "Avatar group",
+   "tier": "T4",
+   "deps": [
+    "Badge Notification",
+    "Placeholder",
+    "Icon",
+    "_Avatar Indicator",
+    "Avatar"
+   ],
+   "childrenFirst": {
+    "importedDeps": [
+     "Badge Notification",
+     "Placeholder",
+     "Icon",
+     "_Avatar Indicator",
+     "Avatar"
+    ],
+    "failedDeps": [],
+    "parentOk": true,
+    "linkedSession": 6,
+    "linkedRepo": 0,
+    "stubbed": 0,
+    "unresolved": 0,
+    "stubbedDespiteImported": [],
+    "violations": []
+   },
+   "adversarial": {
+    "parentFirstStubs": 1,
+    "stubGeometryMints": 12,
+    "geometrySkipNotes": 0,
+    "healedAfterReimport": null,
+    "stillStubbedAfterHeal": []
+   }
+  },
+  {
+   "setName": "Breadcrumb",
+   "tier": "T4",
+   "deps": [
+    "Placeholder",
+    "Icon",
+    "Badge Notification",
+    "_Avatar Indicator",
+    "Avatar",
+    "Badge",
+    "Button-Brand Primary",
+    "Button-Brand Secondary",
+    "_Error text",
+    "_Helper text",
+    "_Input label",
+    "Input Text",
+    "List item",
+    "Menu",
+    "_Breadcrumb item"
+   ],
+   "childrenFirst": {
+    "importedDeps": [
+     "Placeholder",
+     "Icon",
+     "Badge Notification",
+     "_Avatar Indicator",
+     "Avatar",
+     "Badge",
+     "Button-Brand Primary",
+     "Button-Brand Secondary",
+     "_Error text",
+     "_Helper text",
+     "_Input label",
+     "Input Text",
+     "List item",
+     "Menu",
+     "_Breadcrumb item"
+    ],
+    "failedDeps": [],
+    "parentOk": true,
+    "linkedSession": 1,
+    "linkedRepo": 0,
+    "stubbed": 0,
+    "unresolved": 0,
+    "stubbedDespiteImported": [],
+    "violations": []
+   },
+   "adversarial": {
+    "parentFirstStubs": 1,
+    "stubGeometryMints": 1,
+    "geometrySkipNotes": 1,
+    "healedAfterReimport": null,
+    "stillStubbedAfterHeal": []
+   }
+  },
+  {
+   "setName": "Card-Basic",
+   "tier": "T5",
+   "deps": [
+    "Badge Notification",
+    "Placeholder",
+    "Icon",
+    "_Avatar Indicator",
+    "Avatar",
+    "Badge",
+    "_Slot-card"
+   ],
+   "childrenFirst": {
+    "importedDeps": [
+     "Badge Notification",
+     "Placeholder",
+     "Icon",
+     "_Avatar Indicator",
+     "Avatar",
+     "Badge",
+     "_Slot-card"
+    ],
+    "failedDeps": [],
+    "parentOk": true,
+    "linkedSession": 4,
+    "linkedRepo": 0,
+    "stubbed": 0,
+    "unresolved": 0,
+    "stubbedDespiteImported": [],
+    "violations": []
+   },
+   "adversarial": {
+    "parentFirstStubs": 4,
+    "stubGeometryMints": 10,
+    "geometrySkipNotes": 0,
+    "healedAfterReimport": true,
+    "stillStubbedAfterHeal": [],
+    "firstChild": "Icon"
+   }
+  },
+  {
+   "setName": "Card-Image",
+   "tier": "T5",
+   "deps": [
+    "Badge Notification",
+    "Placeholder",
+    "Icon",
+    "_Avatar Indicator",
+    "Avatar",
+    "Badge",
+    "_Slot-card"
+   ],
+   "childrenFirst": {
+    "importedDeps": [
+     "Badge Notification",
+     "Placeholder",
+     "Icon",
+     "_Avatar Indicator",
+     "Avatar",
+     "Badge",
+     "_Slot-card"
+    ],
+    "failedDeps": [],
+    "parentOk": true,
+    "linkedSession": 12,
+    "linkedRepo": 0,
+    "stubbed": 0,
+    "unresolved": 0,
+    "stubbedDespiteImported": [],
+    "violations": []
+   },
+   "adversarial": {
+    "parentFirstStubs": 4,
+    "stubGeometryMints": 9,
+    "geometrySkipNotes": 1,
+    "healedAfterReimport": true,
+    "stillStubbedAfterHeal": [],
+    "firstChild": "Icon"
+   }
+  },
+  {
+   "setName": "Checkbox",
+   "tier": "T4",
+   "deps": [
+    "CheckSquare",
+    "MinusSquare",
+    "Square",
+    "Checkbox-icon",
+    "Placeholder",
+    "Icon"
+   ],
+   "childrenFirst": {
+    "importedDeps": [
+     "CheckSquare",
+     "MinusSquare",
+     "Square",
+     "Checkbox-icon",
+     "Placeholder",
+     "Icon"
+    ],
+    "failedDeps": [],
+    "parentOk": true,
+    "linkedSession": 3,
+    "linkedRepo": 0,
+    "stubbed": 0,
+    "unresolved": 0,
+    "stubbedDespiteImported": [],
+    "violations": []
+   },
+   "adversarial": {
+    "parentFirstStubs": 2,
+    "stubGeometryMints": 6,
+    "geometrySkipNotes": 2,
+    "healedAfterReimport": true,
+    "stillStubbedAfterHeal": [],
+    "firstChild": "Checkbox-icon"
+   }
+  },
+  {
+   "setName": "Checkbox-icon",
+   "tier": "T4",
+   "deps": [
+    "CheckSquare",
+    "MinusSquare",
+    "Square"
+   ],
+   "childrenFirst": {
+    "importedDeps": [
+     "CheckSquare",
+     "MinusSquare",
+     "Square"
+    ],
+    "failedDeps": [],
+    "parentOk": true,
+    "linkedSession": 2,
+    "linkedRepo": 0,
+    "stubbed": 1,
+    "unresolved": 0,
+    "stubbedDespiteImported": [],
+    "violations": []
+   },
+   "adversarial": {
+    "parentFirstStubs": 3,
+    "stubGeometryMints": 0,
+    "geometrySkipNotes": 6,
+    "healedAfterReimport": true,
+    "stillStubbedAfterHeal": [],
+    "firstChild": "CheckSquare"
+   }
+  },
+  {
+   "setName": "Chip",
+   "tier": "T4",
+   "deps": [
+    "Badge Notification",
+    "Placeholder",
+    "Icon",
+    "_Avatar Indicator",
+    "Avatar"
+   ],
+   "childrenFirst": {
+    "importedDeps": [
+     "Badge Notification",
+     "Placeholder",
+     "Icon",
+     "_Avatar Indicator",
+     "Avatar"
+    ],
+    "failedDeps": [],
+    "parentOk": true,
+    "linkedSession": 3,
+    "linkedRepo": 0,
+    "stubbed": 0,
+    "unresolved": 0,
+    "stubbedDespiteImported": [],
+    "violations": []
+   },
+   "adversarial": {
+    "parentFirstStubs": 2,
+    "stubGeometryMints": 6,
+    "geometrySkipNotes": 4,
+    "healedAfterReimport": true,
+    "stillStubbedAfterHeal": [],
+    "firstChild": "Icon"
+   }
+  },
+  {
+   "setName": "Dialog",
+   "tier": "T5",
+   "deps": [
+    "Placeholder",
+    "Icon",
+    "Button-Brand Primary",
+    "Button-Brand Secondary",
+    "Button-Danger Primary",
+    "Button-Neutral Tertiary",
+    "_Slot-Dialog"
+   ],
+   "childrenFirst": {
+    "importedDeps": [
+     "Placeholder",
+     "Icon",
+     "Button-Brand Primary",
+     "Button-Brand Secondary",
+     "Button-Danger Primary",
+     "Button-Neutral Tertiary",
+     "_Slot-Dialog"
+    ],
+    "failedDeps": [],
+    "parentOk": true,
+    "linkedSession": 6,
+    "linkedRepo": 0,
+    "stubbed": 0,
+    "unresolved": 0,
+    "stubbedDespiteImported": [],
+    "violations": []
+   },
+   "adversarial": {
+    "parentFirstStubs": 6,
+    "stubGeometryMints": 14,
+    "geometrySkipNotes": 6,
+    "healedAfterReimport": true,
+    "stillStubbedAfterHeal": [],
+    "firstChild": "Icon"
+   }
+  },
+  {
+   "setName": "Dropdown",
+   "tier": "T4",
+   "deps": [
+    "Placeholder",
+    "Icon",
+    "Badge Notification",
+    "_Avatar Indicator",
+    "Avatar",
+    "Badge",
+    "Button-Brand Primary",
+    "Button-Brand Secondary",
+    "_Error text",
+    "_Helper text",
+    "_Input label",
+    "Input Text",
+    "List item",
+    "Menu"
+   ],
+   "childrenFirst": {
+    "importedDeps": [
+     "Placeholder",
+     "Icon",
+     "Badge Notification",
+     "_Avatar Indicator",
+     "Avatar",
+     "Badge",
+     "Button-Brand Primary",
+     "Button-Brand Secondary",
+     "_Error text",
+     "_Helper text",
+     "_Input label",
+     "Input Text",
+     "List item",
+     "Menu"
+    ],
+    "failedDeps": [],
+    "parentOk": true,
+    "linkedSession": 7,
+    "linkedRepo": 0,
+    "stubbed": 0,
+    "unresolved": 0,
+    "stubbedDespiteImported": [],
+    "violations": []
+   },
+   "adversarial": {
+    "parentFirstStubs": 5,
+    "stubGeometryMints": 14,
+    "geometrySkipNotes": 1,
+    "healedAfterReimport": true,
+    "stillStubbedAfterHeal": [],
+    "firstChild": "Icon"
+   }
+  },
+  {
+   "setName": "Dropdown-MutliSelect",
+   "tier": "T4",
+   "deps": [
+    "Badge Notification",
+    "Placeholder",
+    "Icon",
+    "_Avatar Indicator",
+    "Avatar",
+    "Chip",
+    "Badge",
+    "Button-Brand Primary",
+    "Button-Brand Secondary",
+    "_Error text",
+    "_Helper text",
+    "_Input label",
+    "Input Text",
+    "List item",
+    "Menu"
+   ],
+   "childrenFirst": {
+    "importedDeps": [
+     "Badge Notification",
+     "Placeholder",
+     "Icon",
+     "_Avatar Indicator",
+     "Avatar",
+     "Chip",
+     "Badge",
+     "Button-Brand Primary",
+     "Button-Brand Secondary",
+     "_Error text",
+     "_Helper text",
+     "_Input label",
+     "Input Text",
+     "List item",
+     "Menu"
+    ],
+    "failedDeps": [],
+    "parentOk": true,
+    "linkedSession": 8,
+    "linkedRepo": 0,
+    "stubbed": 0,
+    "unresolved": 0,
+    "stubbedDespiteImported": [],
+    "violations": []
+   },
+   "adversarial": {
+    "parentFirstStubs": 6,
+    "stubGeometryMints": 16,
+    "geometrySkipNotes": 5,
+    "healedAfterReimport": true,
+    "stillStubbedAfterHeal": [],
+    "firstChild": "Icon"
+   }
+  },
+  {
+   "setName": "Icon",
+   "tier": "T5",
+   "deps": [
+    "Placeholder"
+   ],
+   "childrenFirst": {
+    "importedDeps": [
+     "Placeholder"
+    ],
+    "failedDeps": [],
+    "parentOk": true,
+    "linkedSession": 0,
+    "linkedRepo": 0,
+    "stubbed": 0,
+    "unresolved": 0,
+    "stubbedDespiteImported": [],
+    "violations": []
+   },
+   "adversarial": {
+    "parentFirstStubs": 1,
+    "stubGeometryMints": 0,
+    "geometrySkipNotes": 2,
+    "healedAfterReimport": true,
+    "stillStubbedAfterHeal": [],
+    "firstChild": "Placeholder"
+   }
+  },
+  {
+   "setName": "Input Date",
+   "tier": "T4",
+   "deps": [
+    "Placeholder",
+    "Icon",
+    "_Error text",
+    "_Helper text",
+    "_Input label"
+   ],
+   "childrenFirst": {
+    "importedDeps": [
+     "Placeholder",
+     "Icon",
+     "_Error text",
+     "_Helper text",
+     "_Input label"
+    ],
+    "failedDeps": [],
+    "parentOk": true,
+    "linkedSession": 6,
+    "linkedRepo": 0,
+    "stubbed": 0,
+    "unresolved": 0,
+    "stubbedDespiteImported": [],
+    "violations": []
+   },
+   "adversarial": {
+    "parentFirstStubs": 4,
+    "stubGeometryMints": 10,
+    "geometrySkipNotes": 1,
+    "healedAfterReimport": true,
+    "stillStubbedAfterHeal": [],
+    "firstChild": "Icon"
+   }
+  },
+  {
+   "setName": "Input Number",
+   "tier": "T4",
+   "deps": [
+    "Placeholder",
+    "Icon",
+    "CaretDown",
+    "CaretUp",
+    "_Controls",
+    "_Country code",
+    "_Error text",
+    "_Helper text",
+    "_Input label"
+   ],
+   "childrenFirst": {
+    "importedDeps": [
+     "Placeholder",
+     "Icon",
+     "CaretDown",
+     "CaretUp",
+     "_Controls",
+     "_Country code",
+     "_Error text",
+     "_Helper text",
+     "_Input label"
+    ],
+    "failedDeps": [],
+    "parentOk": true,
+    "linkedSession": 7,
+    "linkedRepo": 0,
+    "stubbed": 0,
+    "unresolved": 0,
+    "stubbedDespiteImported": [],
+    "violations": []
+   },
+   "adversarial": {
+    "parentFirstStubs": 6,
+    "stubGeometryMints": 17,
+    "geometrySkipNotes": 3,
+    "healedAfterReimport": true,
+    "stillStubbedAfterHeal": [],
+    "firstChild": "Icon"
+   }
+  },
+  {
+   "setName": "Input Text",
+   "tier": "T4",
+   "deps": [
+    "Placeholder",
+    "Icon",
+    "_Error text",
+    "_Helper text",
+    "_Input label"
+   ],
+   "childrenFirst": {
+    "importedDeps": [
+     "Placeholder",
+     "Icon",
+     "_Error text",
+     "_Helper text",
+     "_Input label"
+    ],
+    "failedDeps": [],
+    "parentOk": true,
+    "linkedSession": 5,
+    "linkedRepo": 0,
+    "stubbed": 0,
+    "unresolved": 0,
+    "stubbedDespiteImported": [],
+    "violations": []
+   },
+   "adversarial": {
+    "parentFirstStubs": 4,
+    "stubGeometryMints": 10,
+    "geometrySkipNotes": 1,
+    "healedAfterReimport": true,
+    "stillStubbedAfterHeal": [],
+    "firstChild": "Icon"
+   }
+  },
+  {
+   "setName": "List item",
+   "tier": "T5",
+   "deps": [
+    "Badge Notification",
+    "Placeholder",
+    "Icon",
+    "_Avatar Indicator",
+    "Avatar",
+    "Badge",
+    "Button-Brand Primary",
+    "Button-Brand Secondary",
+    "_Error text",
+    "_Helper text",
+    "_Input label",
+    "Input Text"
+   ],
+   "childrenFirst": {
+    "importedDeps": [
+     "Badge Notification",
+     "Placeholder",
+     "Icon",
+     "_Avatar Indicator",
+     "Avatar",
+     "Badge",
+     "Button-Brand Primary",
+     "Button-Brand Secondary",
+     "_Error text",
+     "_Helper text",
+     "_Input label",
+     "Input Text"
+    ],
+    "failedDeps": [],
+    "parentOk": true,
+    "linkedSession": 5,
+    "linkedRepo": 0,
+    "stubbed": 0,
+    "unresolved": 0,
+    "stubbedDespiteImported": [],
+    "violations": []
+   },
+   "adversarial": {
+    "parentFirstStubs": 6,
+    "stubGeometryMints": 15,
+    "geometrySkipNotes": 4,
+    "healedAfterReimport": true,
+    "stillStubbedAfterHeal": [],
+    "firstChild": "Icon"
+   }
+  },
+  {
+   "setName": "Menu",
+   "tier": "T4",
+   "deps": [
+    "Badge Notification",
+    "Placeholder",
+    "Icon",
+    "_Avatar Indicator",
+    "Avatar",
+    "Badge",
+    "Button-Brand Primary",
+    "Button-Brand Secondary",
+    "_Error text",
+    "_Helper text",
+    "_Input label",
+    "Input Text",
+    "List item"
+   ],
+   "childrenFirst": {
+    "importedDeps": [
+     "Badge Notification",
+     "Placeholder",
+     "Icon",
+     "_Avatar Indicator",
+     "Avatar",
+     "Badge",
+     "Button-Brand Primary",
+     "Button-Brand Secondary",
+     "_Error text",
+     "_Helper text",
+     "_Input label",
+     "Input Text",
+     "List item"
+    ],
+    "failedDeps": [],
+    "parentOk": true,
+    "linkedSession": 1,
+    "linkedRepo": 0,
+    "stubbed": 0,
+    "unresolved": 0,
+    "stubbedDespiteImported": [],
+    "violations": []
+   },
+   "adversarial": {
+    "parentFirstStubs": 1,
+    "stubGeometryMints": 4,
+    "geometrySkipNotes": 0,
+    "healedAfterReimport": null,
+    "stillStubbedAfterHeal": []
+   }
+  },
+  {
+   "setName": "Navigation-Header",
+   "tier": "T5",
+   "deps": [
+    "Badge Notification",
+    "Placeholder",
+    "Icon",
+    "_Avatar Indicator",
+    "Avatar",
+    "Button-Brand Primary",
+    "Button-Brand Secondary",
+    "Icon Button-Neutral Tertiary",
+    "Link-Neutral"
+   ],
+   "childrenFirst": {
+    "importedDeps": [
+     "Badge Notification",
+     "Placeholder",
+     "Icon",
+     "_Avatar Indicator",
+     "Avatar",
+     "Button-Brand Primary",
+     "Button-Brand Secondary",
+     "Icon Button-Neutral Tertiary",
+     "Link-Neutral"
+    ],
+    "failedDeps": [],
+    "parentOk": true,
+    "linkedSession": 7,
+    "linkedRepo": 0,
+    "stubbed": 0,
+    "unresolved": 0,
+    "stubbedDespiteImported": [],
+    "violations": []
+   },
+   "adversarial": {
+    "parentFirstStubs": 5,
+    "stubGeometryMints": 13,
+    "geometrySkipNotes": 1,
+    "healedAfterReimport": true,
+    "stillStubbedAfterHeal": [],
+    "firstChild": "Button-Brand Primary"
+   }
+  },
+  {
+   "setName": "Navigation-Side",
+   "tier": "T4",
+   "deps": [
+    "Badge Notification",
+    "Placeholder",
+    "Icon",
+    "_Avatar Indicator",
+    "Avatar",
+    "Badge",
+    "Button-Brand Primary",
+    "Button-Brand Secondary",
+    "_Error text",
+    "_Helper text",
+    "_Input label",
+    "Input Text",
+    "List item",
+    "Menu",
+    "Search",
+    "_Footer-Nav",
+    "_Header-Nav",
+    "_Nav-item-base-close",
+    "_Nav-item-base-open",
+    "_Nav-item-menu"
+   ],
+   "childrenFirst": {
+    "importedDeps": [
+     "Badge Notification",
+     "Placeholder",
+     "Icon",
+     "_Avatar Indicator",
+     "Avatar",
+     "Badge",
+     "Button-Brand Primary",
+     "Button-Brand Secondary",
+     "_Error text",
+     "_Helper text",
+     "_Input label",
+     "Input Text",
+     "List item",
+     "Menu",
+     "Search",
+     "_Footer-Nav",
+     "_Header-Nav",
+     "_Nav-item-base-close",
+     "_Nav-item-base-open",
+     "_Nav-item-menu"
+    ],
+    "failedDeps": [],
+    "parentOk": true,
+    "linkedSession": 25,
+    "linkedRepo": 0,
+    "stubbed": 0,
+    "unresolved": 0,
+    "stubbedDespiteImported": [],
+    "violations": []
+   },
+   "adversarial": {
+    "parentFirstStubs": 7,
+    "stubGeometryMints": 15,
+    "geometrySkipNotes": 5,
+    "healedAfterReimport": true,
+    "stillStubbedAfterHeal": [],
+    "firstChild": "Icon"
+   }
+  },
+  {
+   "setName": "Pagination-2",
+   "tier": "T4",
+   "deps": [
+    "Placeholder",
+    "Icon",
+    "Button-Neutral Secondary",
+    "_pagination-number"
+   ],
+   "childrenFirst": {
+    "importedDeps": [
+     "Placeholder",
+     "Icon",
+     "Button-Neutral Secondary",
+     "_pagination-number"
+    ],
+    "failedDeps": [],
+    "parentOk": true,
+    "linkedSession": 12,
+    "linkedRepo": 0,
+    "stubbed": 0,
+    "unresolved": 0,
+    "stubbedDespiteImported": [],
+    "violations": []
+   },
+   "adversarial": {
+    "parentFirstStubs": 2,
+    "stubGeometryMints": 5,
+    "geometrySkipNotes": 1,
+    "healedAfterReimport": true,
+    "stillStubbedAfterHeal": [],
+    "firstChild": "Button-Neutral Secondary"
+   }
+  },
+  {
+   "setName": "Pagination-3",
+   "tier": "T4",
+   "deps": [
+    "Placeholder",
+    "Icon",
+    "Icon Button-Neutral Secondary",
+    "_pagination-number"
+   ],
+   "childrenFirst": {
+    "importedDeps": [
+     "Placeholder",
+     "Icon",
+     "Icon Button-Neutral Secondary",
+     "_pagination-number"
+    ],
+    "failedDeps": [],
+    "parentOk": true,
+    "linkedSession": 12,
+    "linkedRepo": 0,
+    "stubbed": 0,
+    "unresolved": 0,
+    "stubbedDespiteImported": [],
+    "violations": []
+   },
+   "adversarial": {
+    "parentFirstStubs": 2,
+    "stubGeometryMints": 6,
+    "geometrySkipNotes": 0,
+    "healedAfterReimport": true,
+    "stillStubbedAfterHeal": [],
+    "firstChild": "Icon Button-Neutral Secondary"
+   }
+  },
+  {
+   "setName": "Radio button",
+   "tier": "T5",
+   "deps": [
+    "Placeholder",
+    "Icon",
+    "Circle",
+    "RadioButton",
+    "Radio button-icon"
+   ],
+   "childrenFirst": {
+    "importedDeps": [
+     "Placeholder",
+     "Icon",
+     "Circle",
+     "RadioButton",
+     "Radio button-icon"
+    ],
+    "failedDeps": [],
+    "parentOk": true,
+    "linkedSession": 3,
+    "linkedRepo": 0,
+    "stubbed": 0,
+    "unresolved": 0,
+    "stubbedDespiteImported": [],
+    "violations": [
+     "ds.radio-button: part \"radioButtonIcon\" component ref creates a cycle (ds.radio-button → ds.radio-button-icon → ds.radio-button) — a contract cannot compose itself",
+     "ds.radio-button: part \"radioButtonIcon2\" component ref creates a cycle (ds.radio-button → ds.radio-button-icon → ds.radio-button) — a contract cannot compose itself"
+    ]
+   },
+   "adversarial": {
+    "parentFirstStubs": 2,
+    "stubGeometryMints": 6,
+    "geometrySkipNotes": 2,
+    "healedAfterReimport": true,
+    "stillStubbedAfterHeal": [],
+    "firstChild": "Icon"
+   }
+  },
+  {
+   "setName": "Radio button-icon",
+   "tier": "T4",
+   "deps": [
+    "Circle",
+    "RadioButton"
+   ],
+   "childrenFirst": {
+    "importedDeps": [
+     "Circle",
+     "RadioButton"
+    ],
+    "failedDeps": [],
+    "parentOk": true,
+    "linkedSession": 1,
+    "linkedRepo": 0,
+    "stubbed": 1,
+    "unresolved": 0,
+    "stubbedDespiteImported": [],
+    "violations": []
+   },
+   "adversarial": {
+    "parentFirstStubs": 2,
+    "stubGeometryMints": 0,
+    "geometrySkipNotes": 4,
+    "healedAfterReimport": true,
+    "stillStubbedAfterHeal": [],
+    "firstChild": "Circle"
+   }
+  },
+  {
+   "setName": "Search",
+   "tier": "T4",
+   "deps": [
+    "Placeholder",
+    "Icon",
+    "Badge Notification",
+    "_Avatar Indicator",
+    "Avatar",
+    "Badge",
+    "Button-Brand Primary",
+    "Button-Brand Secondary",
+    "_Error text",
+    "_Helper text",
+    "_Input label",
+    "Input Text",
+    "List item",
+    "Menu"
+   ],
+   "childrenFirst": {
+    "importedDeps": [
+     "Placeholder",
+     "Icon",
+     "Badge Notification",
+     "_Avatar Indicator",
+     "Avatar",
+     "Badge",
+     "Button-Brand Primary",
+     "Button-Brand Secondary",
+     "_Error text",
+     "_Helper text",
+     "_Input label",
+     "Input Text",
+     "List item",
+     "Menu"
+    ],
+    "failedDeps": [],
+    "parentOk": true,
+    "linkedSession": 5,
+    "linkedRepo": 0,
+    "stubbed": 0,
+    "unresolved": 0,
+    "stubbedDespiteImported": [],
+    "violations": []
+   },
+   "adversarial": {
+    "parentFirstStubs": 4,
+    "stubGeometryMints": 12,
+    "geometrySkipNotes": 1,
+    "healedAfterReimport": true,
+    "stillStubbedAfterHeal": [],
+    "firstChild": "Icon"
+   }
+  },
+  {
+   "setName": "Search-MultiSelect",
+   "tier": "T4",
+   "deps": [
+    "Badge Notification",
+    "Placeholder",
+    "Icon",
+    "_Avatar Indicator",
+    "Avatar",
+    "Chip",
+    "Badge",
+    "Button-Brand Primary",
+    "Button-Brand Secondary",
+    "_Error text",
+    "_Helper text",
+    "_Input label",
+    "Input Text",
+    "List item",
+    "Menu"
+   ],
+   "childrenFirst": {
+    "importedDeps": [
+     "Badge Notification",
+     "Placeholder",
+     "Icon",
+     "_Avatar Indicator",
+     "Avatar",
+     "Chip",
+     "Badge",
+     "Button-Brand Primary",
+     "Button-Brand Secondary",
+     "_Error text",
+     "_Helper text",
+     "_Input label",
+     "Input Text",
+     "List item",
+     "Menu"
+    ],
+    "failedDeps": [],
+    "parentOk": true,
+    "linkedSession": 6,
+    "linkedRepo": 0,
+    "stubbed": 0,
+    "unresolved": 0,
+    "stubbedDespiteImported": [],
+    "violations": []
+   },
+   "adversarial": {
+    "parentFirstStubs": 5,
+    "stubGeometryMints": 14,
+    "geometrySkipNotes": 3,
+    "healedAfterReimport": true,
+    "stillStubbedAfterHeal": [],
+    "firstChild": "Icon"
+   }
+  },
+  {
+   "setName": "Tab-Line",
+   "tier": "T4",
+   "deps": [
+    "Badge Notification",
+    "Placeholder",
+    "Icon",
+    "_Tab-item",
+    "_Tab-item-vertical-left",
+    "_Tab-item-vertical-right"
+   ],
+   "childrenFirst": {
+    "importedDeps": [
+     "Badge Notification",
+     "Placeholder",
+     "Icon",
+     "_Tab-item",
+     "_Tab-item-vertical-left",
+     "_Tab-item-vertical-right"
+    ],
+    "failedDeps": [],
+    "parentOk": true,
+    "linkedSession": 18,
+    "linkedRepo": 0,
+    "stubbed": 0,
+    "unresolved": 0,
+    "stubbedDespiteImported": [],
+    "violations": []
+   },
+   "adversarial": {
+    "parentFirstStubs": 3,
+    "stubGeometryMints": 10,
+    "geometrySkipNotes": 0,
+    "healedAfterReimport": true,
+    "stillStubbedAfterHeal": [],
+    "firstChild": "_Tab-item"
+   }
+  },
+  {
+   "setName": "Tab-Pill",
+   "tier": "T4",
+   "deps": [
+    "Badge Notification",
+    "Placeholder",
+    "Icon",
+    "_Tab-item-pill"
+   ],
+   "childrenFirst": {
+    "importedDeps": [
+     "Badge Notification",
+     "Placeholder",
+     "Icon",
+     "_Tab-item-pill"
+    ],
+    "failedDeps": [],
+    "parentOk": true,
+    "linkedSession": 6,
+    "linkedRepo": 0,
+    "stubbed": 0,
+    "unresolved": 0,
+    "stubbedDespiteImported": [],
+    "violations": []
+   },
+   "adversarial": {
+    "parentFirstStubs": 1,
+    "stubGeometryMints": 4,
+    "geometrySkipNotes": 1,
+    "healedAfterReimport": true,
+    "stillStubbedAfterHeal": [],
+    "firstChild": "_Tab-item-pill"
+   }
+  },
+  {
+   "setName": "Table-Data cell",
+   "tier": "T4",
+   "deps": [
+    "Badge Notification",
+    "Placeholder",
+    "Icon",
+    "_Avatar Indicator",
+    "Avatar",
+    "Avatar group",
+    "Badge",
+    "Button-Brand Primary",
+    "CheckSquare",
+    "MinusSquare",
+    "Square",
+    "Checkbox-icon",
+    "_Error text",
+    "_Helper text",
+    "_Input label",
+    "Input Text",
+    "Link-Blue",
+    "Circle",
+    "RadioButton",
+    "Radio button-icon"
+   ],
+   "childrenFirst": {
+    "importedDeps": [
+     "Badge Notification",
+     "Placeholder",
+     "Icon",
+     "_Avatar Indicator",
+     "Avatar",
+     "Avatar group",
+     "Badge",
+     "Button-Brand Primary",
+     "CheckSquare",
+     "MinusSquare",
+     "Square",
+     "Checkbox-icon",
+     "_Error text",
+     "_Helper text",
+     "_Input label",
+     "Input Text",
+     "Link-Blue",
+     "Circle",
+     "RadioButton",
+     "Radio button-icon"
+    ],
+    "failedDeps": [],
+    "parentOk": true,
+    "linkedSession": 10,
+    "linkedRepo": 0,
+    "stubbed": 0,
+    "unresolved": 0,
+    "stubbedDespiteImported": [],
+    "violations": []
+   },
+   "adversarial": {
+    "parentFirstStubs": 9,
+    "stubGeometryMints": 34,
+    "geometrySkipNotes": 1,
+    "healedAfterReimport": true,
+    "stillStubbedAfterHeal": [],
+    "firstChild": "Icon"
+   }
+  },
+  {
+   "setName": "Text Area",
+   "tier": "T4",
+   "deps": [
+    "Placeholder",
+    "Icon",
+    "Notches",
+    "_Error text",
+    "_Helper text",
+    "_Input label"
+   ],
+   "childrenFirst": {
+    "importedDeps": [
+     "Placeholder",
+     "Icon",
+     "Notches",
+     "_Error text",
+     "_Helper text",
+     "_Input label"
+    ],
+    "failedDeps": [],
+    "parentOk": true,
+    "linkedSession": 4,
+    "linkedRepo": 0,
+    "stubbed": 4,
+    "unresolved": 0,
+    "stubbedDespiteImported": [],
+    "violations": []
+   },
+   "adversarial": {
+    "parentFirstStubs": 5,
+    "stubGeometryMints": 12,
+    "geometrySkipNotes": 3,
+    "healedAfterReimport": true,
+    "stillStubbedAfterHeal": [],
+    "firstChild": "Icon"
+   }
+  },
+  {
+   "setName": "Toggle",
+   "tier": "T4",
+   "deps": [
+    "ToggleLeft",
+    "ToggleRight",
+    "Toggle-icon"
+   ],
+   "childrenFirst": {
+    "importedDeps": [
+     "ToggleLeft",
+     "ToggleRight",
+     "Toggle-icon"
+    ],
+    "failedDeps": [],
+    "parentOk": true,
+    "linkedSession": 1,
+    "linkedRepo": 0,
+    "stubbed": 0,
+    "unresolved": 0,
+    "stubbedDespiteImported": [],
+    "violations": [],
+    "crossImportMintedExposure": 1
+   },
+   "adversarial": {
+    "parentFirstStubs": 1,
+    "stubGeometryMints": 4,
+    "geometrySkipNotes": 0,
+    "healedAfterReimport": true,
+    "stillStubbedAfterHeal": [],
+    "firstChild": "Toggle-icon"
+   }
+  },
+  {
+   "setName": "Toggle-icon",
+   "tier": "T4",
+   "deps": [
+    "ToggleLeft",
+    "ToggleRight"
+   ],
+   "childrenFirst": {
+    "importedDeps": [
+     "ToggleLeft",
+     "ToggleRight"
+    ],
+    "failedDeps": [],
+    "parentOk": true,
+    "linkedSession": 2,
+    "linkedRepo": 0,
+    "stubbed": 0,
+    "unresolved": 0,
+    "stubbedDespiteImported": [],
+    "violations": [],
+    "crossImportMintedExposure": 0
+   },
+   "adversarial": {
+    "parentFirstStubs": 2,
+    "stubGeometryMints": 0,
+    "geometrySkipNotes": 4,
+    "healedAfterReimport": true,
+    "stillStubbedAfterHeal": [],
+    "firstChild": "ToggleLeft"
+   }
+  }
+ ],
+ "keyContradictions": [
+  {
+   "setName": "Checkbox-icon",
+   "instanceOf": "Square",
+   "capturedKey": "520270221737b2c6d03883a1e7b1f3f4c2ea2838",
+   "dumpSetKey": "a903a89249d44ede5bb8d238136c8ff49ad5ce1a",
+   "occurrences": 14
+  },
+  {
+   "setName": "Icon",
+   "instanceOf": "Placeholder",
+   "capturedKey": "2a4fc81b3de2d664f9b15ba75f39e5bcc97938a6",
+   "dumpSetKey": "f6d31d4362230047d263f311561de85262279e39",
+   "occurrences": 6
+  },
+  {
+   "setName": "Radio button-icon",
+   "instanceOf": "Circle",
+   "capturedKey": "f0157cdbb576f3cae87ecba3df79041cad664aa2",
+   "dumpSetKey": "8df6d70031b5fb6bb3201841c7c8a3b1bdbfa9d3",
+   "occurrences": 14
+  },
+  {
+   "setName": "Text Area",
+   "instanceOf": "Notches",
+   "capturedKey": "079c5a9d60c1106b1432c8f6d3d16226a3771cfc",
+   "dumpSetKey": "e39a70fa7aab981c225211d9e71ab8f716dffa9a",
+   "occurrences": 36
+  }
+ ],
+ "t5Records": [
+  {
+   "exercise": "repeat:Navigation-Header",
+   "ok": true,
+   "detail": "repeat parts 1, arrayOf props [items]"
+  },
+  {
+   "exercise": "repeat:_Nav-item-menu",
+   "ok": true,
+   "detail": "repeat parts 1, arrayOf props [items]"
+  },
+  {
+   "exercise": "slot:Dialog",
+   "ok": true,
+   "detail": "2 slot part(s) [swapSlotItem1, swapSlotItem2], 0 with accepts; drawn prefer-keys on [swap-slot-item-1, swap-slot-item-2]"
+  },
+  {
+   "exercise": "slot:Card-Image",
+   "ok": true,
+   "detail": "2 slot part(s) [swapAction, swapAction], 0 with accepts; drawn prefer-keys on [swap action]"
+  },
+  {
+   "exercise": "slot:Card-Basic",
+   "ok": true,
+   "detail": "1 slot part(s) [swapAction], 0 with accepts; drawn prefer-keys on [↪️swap action]"
+  },
+  {
+   "exercise": "slot:List item",
+   "ok": true,
+   "detail": "2 slot part(s) [swapItemLeft, swapItemRight], 0 with accepts; drawn prefer-keys on [↪️swap-item-left, ↪️swap-item-right]"
+  },
+  {
+   "exercise": "slot:_Text-block-Panel",
+   "ok": true,
+   "detail": "2 slot part(s) [swapItemLeft, swapItemRight], 0 with accepts; drawn prefer-keys on [swap-item-left, swap-item-right]"
+  },
+  {
+   "exercise": "slot:Icon",
+   "ok": true,
+   "detail": "1 slot part(s) [children], 0 with accepts; drawn prefer-keys on [icon-swap]"
+  },
+  {
+   "exercise": "id-collision:RadioButton/Radio button",
+   "ok": true,
+   "detail": "named: \"contract id \"ds.radio-button\" is claimed by two sets in this dump (\"RadioButton\" and \"Radio button\") — their names sanitize to the same id; …\""
+  },
+  {
+   "exercise": "mega-session",
+   "ok": true,
+   "detail": "first pass: {\"List item\":{\"linkedSession\":0,\"stubbed\":5},\"Icon\":{\"linkedSession\":0,\"stubbed\":0},\"Button-Brand Primary\":{\"linkedSession\":2,\"stubbed\":0},\"Dialog\":{\"linkedSession\":3,\"stubbed\":3},\"Menu\":{\"linkedSession\":1,\"stubbed\":0},\"Avatar\":{\"linkedSession\":1,\"stubbed\":2},\"Badge\":{\"linkedSession\":2,\"stubbed\":0},\"Card-Image\":{\"linkedSession\":12,\"stubbed\":0},\"Chip\":{\"linkedSession\":3,\"stubbed\":0},\"Navigation-Header\":{\"linkedSession\":2,\"stubbed\":5}}; relink: {\"List item\":{\"linkedSession\":3,\"stubbed\":2,\"stubbedDespiteInScope\":[]},\"Icon\":{\"linkedSession\":0,\"stubbed\":0,\"stubbedDespiteInScope\":[]},\"Button-Brand Primary\":{\"linkedSession\":2,\"stubbed\":0,\"stubbedDespiteInScope\":[]},\"Dialog\":{\"linkedSession\":3,\"stubbed\":3,\"stubbedDespiteInScope\":[]},\"Menu\":{\"linkedSession\":1,\"stubbed\":0,\"stubbedDespiteInScope\":[]},\"Avatar\":{\"linkedSession\":1,\"stubbed\":2,\"stubbedDespiteInScope\":[]},\"Badge\":{\"linkedSession\":2,\"stubbed\":0,\"stubbedDespiteInScope\":[]},\"Card-Image\":{\"linkedSession\":12,\"stubbed\":0,\"stubbedDespiteInScope\":[]},\"Chip\":{\"linkedSession\":3,\"stubbed\":0,\"stubbedDespiteInScope\":[]},\"Navigation-Header\":{\"linkedSession\":2,\"stubbed\":5,\"stubbedDespiteInScope\":[]}}"
+  }
+ ],
+ "batchNotes": [
+  "contract id \"ds.radio-button\" is claimed by two sets in this dump (\"RadioButton\" and \"Radio button\") — their names sanitize to the same id; rename one set (or edit one id) before adopting both"
+ ],
+ "findings": [
+  {
+   "cls": "disabled-part-label-b7",
+   "set": "_Tab-item",
+   "evidence": "_Tab-item:root/Tab label: fill differs in state \"hover\" — part-level state overrides are outside the contract vocabulary (root states only, STYLE-FIDELITY B7); NAMED, not proposed (review)",
+   "where": "core/propose-figma.ts proposeStateDiffs — pre-P18 vocabulary (Part.states lands on the parallel worktree)",
+   "known": "fix-in-flight"
+  },
+  {
+   "cls": "disabled-part-label-b7",
+   "set": "_Tab-item-pill",
+   "evidence": "_Tab-item-pill:root/Tab label: fill differs in state \"hover\" — part-level state overrides are outside the contract vocabulary (root states only, STYLE-FIDELITY B7); NAMED, not proposed (review)",
+   "where": "core/propose-figma.ts proposeStateDiffs — pre-P18 vocabulary (Part.states lands on the parallel worktree)",
+   "known": "fix-in-flight"
+  },
+  {
+   "cls": "disabled-part-label-b7",
+   "set": "_Tab-item-vertical-left",
+   "evidence": "_Tab-item-vertical-left:root/Tab label: fill differs in state \"hover\" — part-level state overrides are outside the contract vocabulary (root states only, STYLE-FIDELITY B7); NAMED, not proposed (review)",
+   "where": "core/propose-figma.ts proposeStateDiffs — pre-P18 vocabulary (Part.states lands on the parallel worktree)",
+   "known": "fix-in-flight"
+  },
+  {
+   "cls": "disabled-part-label-b7",
+   "set": "_Tab-item-vertical-right",
+   "evidence": "_Tab-item-vertical-right:root/Tab label: fill differs in state \"hover\" — part-level state overrides are outside the contract vocabulary (root states only, STYLE-FIDELITY B7); NAMED, not proposed (review)",
+   "where": "core/propose-figma.ts proposeStateDiffs — pre-P18 vocabulary (Part.states lands on the parallel worktree)",
+   "known": "fix-in-flight"
+  },
+  {
+   "cls": "disabled-part-label-b7",
+   "set": "Accordion",
+   "evidence": "Accordion:root/Header: fill differs in state \"hover\" — part-level state overrides are outside the contract vocabulary (root states only, STYLE-FIDELITY B7); NAMED, not proposed (review)",
+   "where": "core/propose-figma.ts proposeStateDiffs — pre-P18 vocabulary (Part.states lands on the parallel worktree)",
+   "known": "fix-in-flight"
+  },
+  {
+   "cls": "disabled-part-label-b7",
+   "set": "Button-Brand Primary",
+   "evidence": "Button-Brand Primary:root/Button: fill differs in state \"disabled\" — part-level state overrides are outside the contract vocabulary (root states only, STYLE-FIDELITY B7); NAMED, not proposed (review)",
+   "where": "core/propose-figma.ts proposeStateDiffs — pre-P18 vocabulary (Part.states lands on the parallel worktree)",
+   "known": "fix-in-flight"
+  },
+  {
+   "cls": "disabled-part-label-b7",
+   "set": "Button-Brand Secondary",
+   "evidence": "Button-Brand Secondary:root/Button: fill differs in state \"hover\" — part-level state overrides are outside the contract vocabulary (root states only, STYLE-FIDELITY B7); NAMED, not proposed (review)",
+   "where": "core/propose-figma.ts proposeStateDiffs — pre-P18 vocabulary (Part.states lands on the parallel worktree)",
+   "known": "fix-in-flight"
+  },
+  {
+   "cls": "disabled-part-label-b7",
+   "set": "Button-Brand Tertiary",
+   "evidence": "Button-Brand Tertiary:root/Button: fill differs in state \"hover\" — part-level state overrides are outside the contract vocabulary (root states only, STYLE-FIDELITY B7); NAMED, not proposed (review)",
+   "where": "core/propose-figma.ts proposeStateDiffs — pre-P18 vocabulary (Part.states lands on the parallel worktree)",
+   "known": "fix-in-flight"
+  },
+  {
+   "cls": "disabled-part-label-b7",
+   "set": "Button-Danger Primary",
+   "evidence": "Button-Danger Primary:root/Button: fill differs in state \"disabled\" — part-level state overrides are outside the contract vocabulary (root states only, STYLE-FIDELITY B7); NAMED, not proposed (review)",
+   "where": "core/propose-figma.ts proposeStateDiffs — pre-P18 vocabulary (Part.states lands on the parallel worktree)",
+   "known": "fix-in-flight"
+  },
+  {
+   "cls": "disabled-part-label-b7",
+   "set": "Button-Danger Secondary",
+   "evidence": "Button-Danger Secondary:root/Button: fill differs in state \"hover\" — part-level state overrides are outside the contract vocabulary (root states only, STYLE-FIDELITY B7); NAMED, not proposed (review)",
+   "where": "core/propose-figma.ts proposeStateDiffs — pre-P18 vocabulary (Part.states lands on the parallel worktree)",
+   "known": "fix-in-flight"
+  },
+  {
+   "cls": "disabled-part-label-b7",
+   "set": "Button-Danger Tertiary",
+   "evidence": "Button-Danger Tertiary:root/Button: fill differs in state \"hover\" — part-level state overrides are outside the contract vocabulary (root states only, STYLE-FIDELITY B7); NAMED, not proposed (review)",
+   "where": "core/propose-figma.ts proposeStateDiffs — pre-P18 vocabulary (Part.states lands on the parallel worktree)",
+   "known": "fix-in-flight"
+  },
+  {
+   "cls": "disabled-part-label-b7",
+   "set": "Button-Neutral Primary",
+   "evidence": "Button-Neutral Primary:root/Button: fill differs in state \"disabled\" — part-level state overrides are outside the contract vocabulary (root states only, STYLE-FIDELITY B7); NAMED, not proposed (review)",
+   "where": "core/propose-figma.ts proposeStateDiffs — pre-P18 vocabulary (Part.states lands on the parallel worktree)",
+   "known": "fix-in-flight"
+  },
+  {
+   "cls": "disabled-part-label-b7",
+   "set": "Button-Neutral Secondary",
+   "evidence": "Button-Neutral Secondary:root/Button: fill differs in state \"hover\" — part-level state overrides are outside the contract vocabulary (root states only, STYLE-FIDELITY B7); NAMED, not proposed (review)",
+   "where": "core/propose-figma.ts proposeStateDiffs — pre-P18 vocabulary (Part.states lands on the parallel worktree)",
+   "known": "fix-in-flight"
+  },
+  {
+   "cls": "disabled-part-label-b7",
+   "set": "Button-Neutral Tertiary",
+   "evidence": "Button-Neutral Tertiary:root/Button: fill differs in state \"hover\" — part-level state overrides are outside the contract vocabulary (root states only, STYLE-FIDELITY B7); NAMED, not proposed (review)",
+   "where": "core/propose-figma.ts proposeStateDiffs — pre-P18 vocabulary (Part.states lands on the parallel worktree)",
+   "known": "fix-in-flight"
+  },
+  {
+   "cls": "disabled-part-label-b7",
+   "set": "Link-Blue",
+   "evidence": "Link-Blue:root/Link label: fill differs in state \"hover\" — part-level state overrides are outside the contract vocabulary (root states only, STYLE-FIDELITY B7); NAMED, not proposed (review)",
+   "where": "core/propose-figma.ts proposeStateDiffs — pre-P18 vocabulary (Part.states lands on the parallel worktree)",
+   "known": "fix-in-flight"
+  },
+  {
+   "cls": "disabled-part-label-b7",
+   "set": "Link-Danger",
+   "evidence": "Link-Danger:root/Link label: fill differs in state \"hover\" — part-level state overrides are outside the contract vocabulary (root states only, STYLE-FIDELITY B7); NAMED, not proposed (review)",
+   "where": "core/propose-figma.ts proposeStateDiffs — pre-P18 vocabulary (Part.states lands on the parallel worktree)",
+   "known": "fix-in-flight"
+  },
+  {
+   "cls": "disabled-part-label-b7",
+   "set": "Link-Neutral",
+   "evidence": "Link-Neutral:root/Link label: fill differs in state \"hover\" — part-level state overrides are outside the contract vocabulary (root states only, STYLE-FIDELITY B7); NAMED, not proposed (review)",
+   "where": "core/propose-figma.ts proposeStateDiffs — pre-P18 vocabulary (Part.states lands on the parallel worktree)",
+   "known": "fix-in-flight"
+  },
+  {
+   "cls": "disabled-part-label-b7",
+   "set": "Toggle",
+   "evidence": "Toggle:root/Toggle label: fill differs in state \"disabled\" — part-level state overrides are outside the contract vocabulary (root states only, STYLE-FIDELITY B7); NAMED, not proposed (review)",
+   "where": "core/propose-figma.ts proposeStateDiffs — pre-P18 vocabulary (Part.states lands on the parallel worktree)",
+   "known": "fix-in-flight"
+  },
+  {
+   "cls": "duplicate-name-key-contradiction",
+   "set": "Checkbox-icon",
+   "evidence": "nested \"Square\" ×14 carries key 5202702217… but the name-keyed dump kept the copy with key a903a89249… (the file draws duplicate-named components; the dump format collapses them last-wins, so the drawn parent of these instances is NOT in the dump and sessions stub honestly)",
+   "where": "capture convention: dump.plugin.js name-keyed records + resolveChildContract key refusal"
+  },
+  {
+   "cls": "duplicate-name-key-contradiction",
+   "set": "Icon",
+   "evidence": "nested \"Placeholder\" ×6 carries key 2a4fc81b3d… but the name-keyed dump kept the copy with key f6d31d4362… (the file draws duplicate-named components; the dump format collapses them last-wins, so the drawn parent of these instances is NOT in the dump and sessions stub honestly)",
+   "where": "capture convention: dump.plugin.js name-keyed records + resolveChildContract key refusal"
+  },
+  {
+   "cls": "duplicate-name-key-contradiction",
+   "set": "Radio button-icon",
+   "evidence": "nested \"Circle\" ×14 carries key f0157cdbb5… but the name-keyed dump kept the copy with key 8df6d70031… (the file draws duplicate-named components; the dump format collapses them last-wins, so the drawn parent of these instances is NOT in the dump and sessions stub honestly)",
+   "where": "capture convention: dump.plugin.js name-keyed records + resolveChildContract key refusal"
+  },
+  {
+   "cls": "duplicate-name-key-contradiction",
+   "set": "Text Area",
+   "evidence": "nested \"Notches\" ×36 carries key 079c5a9d60… but the name-keyed dump kept the copy with key e39a70fa7a… (the file draws duplicate-named components; the dump format collapses them last-wins, so the drawn parent of these instances is NOT in the dump and sessions stub honestly)",
+   "where": "capture convention: dump.plugin.js name-keyed records + resolveChildContract key refusal"
+  },
+  {
+   "cls": "stub-geometry-not-minted",
+   "set": "_Controls",
+   "evidence": "2 stub(s) mint ZERO observed-geometry tokens; 4 note(s) say values differ \"without correlating to any variant axis\" — yet e.g. Checkbox-icon's 24/16px track size=large/small EXACTLY (the correlation is with the PARENT's axis, which the stub mint pass does not consult)",
+   "where": "core/propose-figma.ts stub mint pass (197dd02 named limit, quantified live)",
+   "known": "named-limit"
+  },
+  {
+   "cls": "stub-geometry-not-minted",
+   "set": "Checkbox-icon",
+   "evidence": "3 stub(s) mint ZERO observed-geometry tokens; 6 note(s) say values differ \"without correlating to any variant axis\" — yet e.g. Checkbox-icon's 24/16px track size=large/small EXACTLY (the correlation is with the PARENT's axis, which the stub mint pass does not consult)",
+   "where": "core/propose-figma.ts stub mint pass (197dd02 named limit, quantified live)",
+   "known": "named-limit"
+  },
+  {
+   "cls": "stub-geometry-not-minted",
+   "set": "Icon",
+   "evidence": "1 stub(s) mint ZERO observed-geometry tokens; 2 note(s) say values differ \"without correlating to any variant axis\" — yet e.g. Checkbox-icon's 24/16px track size=large/small EXACTLY (the correlation is with the PARENT's axis, which the stub mint pass does not consult)",
+   "where": "core/propose-figma.ts stub mint pass (197dd02 named limit, quantified live)",
+   "known": "named-limit"
+  },
+  {
+   "cls": "session-id-collision-false-cycle",
+   "set": "Radio button",
+   "evidence": "ds.radio-button: part \"radioButtonIcon\" component ref creates a cycle (ds.radio-button → ds.radio-button-icon → ds.radio-button) — a contract cannot compose itself",
+   "where": "core/propose-figma.ts stubIdFor/selfContractId — cross-population id collision (RadioButton the COMPONENT vs \"Radio button\" the set claim ds.radio-button; the session newest-wins registry rebinds the child's ref onto the parent)"
+  },
+  {
+   "cls": "session-id-collision-false-cycle",
+   "set": "Radio button",
+   "evidence": "ds.radio-button: part \"radioButtonIcon2\" component ref creates a cycle (ds.radio-button → ds.radio-button-icon → ds.radio-button) — a contract cannot compose itself",
+   "where": "core/propose-figma.ts stubIdFor/selfContractId — cross-population id collision (RadioButton the COMPONENT vs \"Radio button\" the set claim ds.radio-button; the session newest-wins registry rebinds the child's ref onto the parent)"
+  },
+  {
+   "cls": "stub-geometry-not-minted",
+   "set": "Radio button-icon",
+   "evidence": "2 stub(s) mint ZERO observed-geometry tokens; 4 note(s) say values differ \"without correlating to any variant axis\" — yet e.g. Checkbox-icon's 24/16px track size=large/small EXACTLY (the correlation is with the PARENT's axis, which the stub mint pass does not consult)",
+   "where": "core/propose-figma.ts stub mint pass (197dd02 named limit, quantified live)",
+   "known": "named-limit"
+  },
+  {
+   "cls": "cross-import-minted-token-scope",
+   "set": "Toggle",
+   "evidence": "parent doc uses 1 imported.* var(s) only a session sibling's minted tree defines (e.g. --imported-toggle-icon-state-focus-visible-outline-width) — the playground's single on-screen minted layer would leave them unresolved",
+   "where": "playground token-source single minted layer (session-registry mintedTrees is the fix seam)",
+   "known": "fix-in-flight"
+  },
+  {
+   "cls": "stub-geometry-not-minted",
+   "set": "Toggle-icon",
+   "evidence": "2 stub(s) mint ZERO observed-geometry tokens; 4 note(s) say values differ \"without correlating to any variant axis\" — yet e.g. Checkbox-icon's 24/16px track size=large/small EXACTLY (the correlation is with the PARENT's axis, which the stub mint pass does not consult)",
+   "where": "core/propose-figma.ts stub mint pass (197dd02 named limit, quantified live)",
+   "known": "named-limit"
+  }
+ ],
+ "fixtures": [
+  {
+   "cls": "duplicate-name-key-contradiction",
+   "setName": "Checkbox-icon",
+   "file": "duplicate-name-key-contradiction-checkbox-icon.dump.json"
+  },
+  {
+   "cls": "session-id-collision-false-cycle",
+   "setName": "Radio button",
+   "file": "session-id-collision-false-cycle-radio-button.dump.json"
+  },
+  {
+   "cls": "session-id-collision-false-cycle",
+   "setName": "Radio button + Radio button-icon + RadioButton + Circle",
+   "file": "session-id-collision-false-cycle-radio-button.dump.json"
+  }
+ ],
+ "capturedLayer": {
+  "count": 126,
+  "registered": 113,
+  "skipped": 1
+ }
+}
