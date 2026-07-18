@@ -65,9 +65,12 @@ function svgOpen(theme: Theme, w: number, h: number, label: string, arrowIds: st
         `<marker id="${id}" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor"/></marker>`,
     )
     .join('');
-  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${w} ${h}" role="img" aria-label="${label.replaceAll('"', '&quot;')}" style="max-width:100%;height:auto;font-family:inherit">
+  // Explicit font stack: SVG inside an <img> cannot inherit the page font,
+  // so "inherit" would fall back to the browser serif default.
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${w} ${h}" role="img" aria-label="${label.replaceAll('"', '&quot;')}" style="max-width:100%;height:auto">
   <defs>${markers}</defs>
   <style>
+    text { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; }
     .box { fill: ${p.boxFill}; stroke: ${p.boxStroke}; stroke-width: 1.5; }
     .core { fill: ${p.coreFill}; }
     .t { fill: ${p.text}; font-size: 15px; font-weight: 600; }

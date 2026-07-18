@@ -9,7 +9,7 @@
  * Order matters: the coverage guard runs before any page is written — an
  * undocumented schema branch refuses the whole build, by name.
  */
-import { cpSync, mkdirSync, rmSync, writeFileSync } from 'node:fs';
+import { cpSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { checkCoverage } from './src/coverage.js';
 import { computeStats } from './src/stats.js';
@@ -84,13 +84,19 @@ writeFileSync(path.join(DIST, '404.html'), notFound);
 
 cpSync(path.join(SITE, 'src/styles.css'), path.join(DIST, 'styles.css'));
 mkdirSync(path.join(DIST, 'assets'), { recursive: true });
-for (const asset of [
-  'contract-flow-light.svg',
-  'contract-flow-dark.svg',
-  'logo-light.svg',
-  'logo-dark.svg',
-]) {
+for (const asset of ['logo-light.svg', 'logo-dark.svg']) {
   cpSync(path.join(ROOT, 'docs/assets', asset), path.join(DIST, 'assets', asset));
+}
+// The contract-flow pair declares font-family:inherit, which an SVG inside
+// an <img> cannot honor (it falls back to the browser serif). Patch the
+// COPIES at build with the site's font stack — the source assets in
+// docs/assets/ (used by the README) stay untouched.
+for (const asset of ['contract-flow-light.svg', 'contract-flow-dark.svg']) {
+  const svg = readFileSync(path.join(ROOT, 'docs/assets', asset), 'utf8').replace(
+    'font-family:inherit',
+    "font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif",
+  );
+  writeFileSync(path.join(DIST, 'assets', asset), svg);
 }
 
 // Build-time themed diagrams (the contract-flow-*.svg pattern): each is
