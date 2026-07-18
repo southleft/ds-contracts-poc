@@ -1,10 +1,10 @@
-# RFC-NNNN: <title>
+# RFC-NNNN: {title}
 
 - **Status:** draft <!-- draft | accepted | rejected | withdrawn | superseded by RFC-NNNN -->
-- **Author(s):** <name / handle>
+- **Author(s):** {name / handle}
 - **Date opened:** YYYY-MM-DD
-- **Discussion:** <link to the GitHub issue or PR>
-- **Schema round targeted:** <e.g. v14, or "none — process change">
+- **Discussion:** {link to the GitHub issue or PR}
+- **Schema round targeted:** {e.g. v14, or "none — process change"}
 
 ## The field case
 

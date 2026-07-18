@@ -982,6 +982,36 @@ tr:last-child td {
   margin-bottom: 0.6em;
 }
 
+/* ------------------------------------------- rendered governance template */
+
+#rfc-template h1 {
+  font-size: 1.25rem;
+  margin: 0 0 0.8em;
+}
+
+#rfc-template h2 {
+  font-size: 1.05rem;
+  margin-top: 1.6em;
+}
+
+#rfc-template table {
+  border: 1px solid var(--border);
+  margin-bottom: 1em;
+}
+
+#rfc-template p,
+#rfc-template li {
+  font-size: 14.5px;
+  color: var(--muted);
+}
+
+#rfc-template code {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 0.05em 0.3em;
+  font-size: 0.85em;
+}
+
 /* --------------------------------------------------------------- footer */
 
 .footer {
