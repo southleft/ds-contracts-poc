@@ -19,6 +19,15 @@ import { buildHowPages } from './src/pages/how.js';
 import { getStartedPage } from './src/pages/get-started.js';
 import { contributePage } from './src/pages/contribute.js';
 import { layout } from './src/html.js';
+import { loadHowReplays } from './src/how-replays.js';
+import {
+  dependencyGraphSvg,
+  instrumentsSvg,
+  propLifecycleSvg,
+  receiptsFlowSvg,
+  sessionLinkingSvg,
+  type Theme,
+} from './src/diagrams.js';
 
 const ROOT = process.cwd();
 const SITE = path.join(ROOT, 'site');
@@ -44,10 +53,14 @@ console.log(
 // ---------------------------------------------------------------- pages ----
 const stats = await computeStats();
 
+// Engine replays for the How-it-works question pages: real emitters, the
+// real parity differ (in a throwaway scratch), and the committed captures.
+const replays = await loadHowReplays();
+
 const pages: Array<{ route: string; html: string }> = [
   homePage(stats, receipt),
   ...(await buildSpecPages(receipt)),
-  ...buildHowPages(stats),
+  ...buildHowPages(stats, replays),
   getStartedPage(),
   contributePage(),
 ];
@@ -78,6 +91,22 @@ for (const asset of [
   'logo-dark.svg',
 ]) {
   cpSync(path.join(ROOT, 'docs/assets', asset), path.join(DIST, 'assets', asset));
+}
+
+// Build-time themed diagrams (the contract-flow-*.svg pattern): each is
+// emitted light + dark; the dependency graph is COMPUTED from the committed
+// whole-kit capture via the replays above.
+for (const theme of ['light', 'dark'] as Theme[]) {
+  const diagrams: Array<[string, string]> = [
+    ['prop-lifecycle', propLifecycleSvg(theme)],
+    ['session-linking', sessionLinkingSvg(theme)],
+    ['receipts-flow', receiptsFlowSvg(theme)],
+    ['instruments', instrumentsSvg(theme)],
+    ['dependency-graph', dependencyGraphSvg(theme, replays.scale.graph)],
+  ];
+  for (const [name, svg] of diagrams) {
+    writeFileSync(path.join(DIST, 'assets', `${name}-${theme}.svg`), svg);
+  }
 }
 
 writeFileSync(path.join(DIST, 'spec-coverage.json'), JSON.stringify(receipt, null, 2) + '\n');
