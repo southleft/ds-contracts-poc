@@ -9,7 +9,7 @@
  * Order matters: the coverage guard runs before any page is written — an
  * undocumented schema branch refuses the whole build, by name.
  */
-import { cpSync, mkdirSync, rmSync, writeFileSync } from 'node:fs';
+import { cpSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { checkCoverage } from './src/coverage.js';
 import { computeStats } from './src/stats.js';
@@ -19,6 +19,15 @@ import { buildHowPages } from './src/pages/how.js';
 import { getStartedPage } from './src/pages/get-started.js';
 import { contributePage } from './src/pages/contribute.js';
 import { layout } from './src/html.js';
+import { loadHowReplays } from './src/how-replays.js';
+import {
+  dependencyGraphSvg,
+  instrumentsSvg,
+  propLifecycleSvg,
+  receiptsFlowSvg,
+  sessionLinkingSvg,
+  type Theme,
+} from './src/diagrams.js';
 
 const ROOT = process.cwd();
 const SITE = path.join(ROOT, 'site');
@@ -44,10 +53,14 @@ console.log(
 // ---------------------------------------------------------------- pages ----
 const stats = await computeStats();
 
+// Engine replays for the How-it-works question pages: real emitters, the
+// real parity differ (in a throwaway scratch), and the committed captures.
+const replays = await loadHowReplays();
+
 const pages: Array<{ route: string; html: string }> = [
   homePage(stats, receipt),
   ...(await buildSpecPages(receipt)),
-  ...buildHowPages(stats),
+  ...buildHowPages(stats, replays),
   getStartedPage(),
   contributePage(),
 ];
@@ -71,13 +84,35 @@ writeFileSync(path.join(DIST, '404.html'), notFound);
 
 cpSync(path.join(SITE, 'src/styles.css'), path.join(DIST, 'styles.css'));
 mkdirSync(path.join(DIST, 'assets'), { recursive: true });
-for (const asset of [
-  'contract-flow-light.svg',
-  'contract-flow-dark.svg',
-  'logo-light.svg',
-  'logo-dark.svg',
-]) {
+for (const asset of ['logo-light.svg', 'logo-dark.svg']) {
   cpSync(path.join(ROOT, 'docs/assets', asset), path.join(DIST, 'assets', asset));
+}
+// The contract-flow pair declares font-family:inherit, which an SVG inside
+// an <img> cannot honor (it falls back to the browser serif). Patch the
+// COPIES at build with the site's font stack — the source assets in
+// docs/assets/ (used by the README) stay untouched.
+for (const asset of ['contract-flow-light.svg', 'contract-flow-dark.svg']) {
+  const svg = readFileSync(path.join(ROOT, 'docs/assets', asset), 'utf8').replace(
+    'font-family:inherit',
+    "font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif",
+  );
+  writeFileSync(path.join(DIST, 'assets', asset), svg);
+}
+
+// Build-time themed diagrams (the contract-flow-*.svg pattern): each is
+// emitted light + dark; the dependency graph is COMPUTED from the committed
+// whole-kit capture via the replays above.
+for (const theme of ['light', 'dark'] as Theme[]) {
+  const diagrams: Array<[string, string]> = [
+    ['prop-lifecycle', propLifecycleSvg(theme)],
+    ['session-linking', sessionLinkingSvg(theme)],
+    ['receipts-flow', receiptsFlowSvg(theme)],
+    ['instruments', instrumentsSvg(theme)],
+    ['dependency-graph', dependencyGraphSvg(theme, replays.scale.graph)],
+  ];
+  for (const [name, svg] of diagrams) {
+    writeFileSync(path.join(DIST, 'assets', `${name}-${theme}.svg`), svg);
+  }
 }
 
 writeFileSync(path.join(DIST, 'spec-coverage.json'), JSON.stringify(receipt, null, 2) + '\n');

@@ -153,9 +153,9 @@ export function layout(opts: PageOpts, body: string): string {
       <div>
         <p class="footer__label">Specification</p>
         <a href="/spec/">Reference</a>
-        <a href="/spec/versioning/">Versioning</a>
         <a href="/how-it-works/">How it works</a>
         <a href="/contribute/">Contribute</a>
+        <a href="/spec/versioning/">Versioning</a>
       </div>
       <div>
         <p class="footer__label">License</p>

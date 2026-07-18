@@ -97,7 +97,7 @@ body {
   background: var(--bg);
   color: var(--fg);
   font-family: var(--font);
-  font-size: 16px;
+  font-size: 17px;
   line-height: 1.65;
   color-scheme: light;
   -webkit-text-size-adjust: 100%;
@@ -352,7 +352,7 @@ figcaption code,
   display: block;
   padding: 4px 0 4px 10px;
   color: var(--muted);
-  font-size: 14px;
+  font-size: 14.5px;
   border-left: 2px solid transparent;
 }
 
@@ -448,7 +448,7 @@ li {
 }
 
 .lede {
-  font-size: 1.15rem;
+  font-size: 1.25rem;
   line-height: 1.6;
   color: var(--muted);
   max-width: 44rem;
@@ -497,7 +497,7 @@ hr {
 table {
   border-collapse: collapse;
   width: 100%;
-  font-size: 14px;
+  font-size: 15px;
 }
 
 th {
@@ -531,7 +531,7 @@ tr:last-child td {
 }
 
 .code-caption {
-  font-size: 12px;
+  font-size: 12.5px;
   font-family: var(--mono);
   color: var(--muted);
   background: var(--surface);
@@ -544,7 +544,7 @@ tr:last-child td {
   margin: 0;
   padding: 14px 16px;
   overflow-x: auto;
-  font-size: 13px;
+  font-size: 13.5px;
   line-height: 1.55;
   background: var(--surface-2);
   tab-size: 2;
@@ -707,7 +707,7 @@ tr:last-child td {
 
 .position p {
   margin: 0;
-  font-size: 14px;
+  font-size: 14.5px;
   color: var(--muted);
 }
 
@@ -737,7 +737,7 @@ tr:last-child td {
 }
 
 .number__label {
-  font-size: 12.5px;
+  font-size: 13px;
   color: var(--muted);
   margin-top: 2px;
 }
@@ -768,8 +768,23 @@ tr:last-child td {
   display: block;
 }
 
+/* Wide computed diagrams (the dependency graph) scroll at natural size in
+   their own container — shrinking 1,700px of labels to fit would make them
+   decorative, and decorative isn't the point. */
+.diagram--scroll {
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  max-width: 100%;
+}
+
+.diagram--scroll img {
+  width: auto;
+  max-width: none;
+  display: block;
+}
+
 .section-note {
-  font-size: 14px;
+  font-size: 14.5px;
   color: var(--muted);
 }
 
@@ -801,14 +816,14 @@ tr:last-child td {
 
 .card p {
   margin: 0;
-  font-size: 14px;
+  font-size: 14.5px;
   color: var(--muted);
 }
 
 .card .card__meta {
   display: block;
   margin-top: 10px;
-  font-size: 12px;
+  font-size: 12.5px;
   color: var(--faint);
   font-family: var(--mono);
 }
@@ -843,12 +858,12 @@ tr:last-child td {
 .field__name {
   font-family: var(--mono);
   font-weight: 600;
-  font-size: 14px;
+  font-size: 15px;
 }
 
 .field__type {
   font-family: var(--mono);
-  font-size: 12.5px;
+  font-size: 13px;
   color: var(--muted);
   overflow-wrap: anywhere;
 }
@@ -863,7 +878,7 @@ tr:last-child td {
 
 .field__desc {
   margin: 6px 0 0;
-  font-size: 14px;
+  font-size: 15px;
   color: var(--muted);
   max-width: var(--measure);
 }
@@ -875,7 +890,7 @@ tr:last-child td {
 }
 
 .refusals li {
-  font-size: 14px;
+  font-size: 15px;
   color: var(--muted);
 }
 
@@ -888,7 +903,7 @@ tr:last-child td {
   padding: 10px 18px;
   margin: 0 0 1.5em;
   background: var(--surface-2);
-  font-size: 14.5px;
+  font-size: 15px;
   max-width: var(--measure);
 }
 
@@ -907,7 +922,7 @@ tr:last-child td {
   border-top: 1px solid var(--border);
   margin-top: 64px;
   padding-top: 20px;
-  font-size: 14px;
+  font-size: 14.5px;
 }
 
 .prev-next span {
@@ -978,7 +993,7 @@ tr:last-child td {
 }
 
 .steps p {
-  font-size: 14.5px;
+  font-size: 15px;
   color: var(--muted);
   margin-bottom: 0.6em;
 }
@@ -1002,7 +1017,7 @@ tr:last-child td {
 
 #rfc-template p,
 #rfc-template li {
-  font-size: 14.5px;
+  font-size: 15px;
   color: var(--muted);
 }
 
@@ -1011,6 +1026,80 @@ tr:last-child td {
   border: 1px solid var(--border);
   padding: 0.05em 0.3em;
   font-size: 0.85em;
+}
+
+/* ---------------------------------------------------- diffs & receipts */
+
+/* Build-time line diffs of real emitter output. */
+.code-block .diff-add {
+  display: block;
+  background: color-mix(in srgb, var(--ok) 12%, transparent);
+}
+
+.code-block .diff-del {
+  display: block;
+  background: color-mix(in srgb, var(--danger) 10%, transparent);
+  text-decoration: none;
+}
+
+.code-block .diff-hunk {
+  display: block;
+  color: var(--faint);
+}
+
+/* Inline receipt chip — a computed number with its provenance. */
+.receipt-line {
+  font-size: 14.5px;
+  color: var(--muted);
+  border-left: 2px solid var(--ok);
+  padding: 8px 16px;
+  background: var(--surface-2);
+  max-width: var(--measure);
+  margin: 0 0 1.5em;
+}
+
+.receipt-line code {
+  color: var(--fg);
+}
+
+/* The three questions — the How-it-works index opens with these. */
+.qcards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+  margin: 28px 0;
+}
+
+.qcard {
+  display: block;
+  border: 1px solid var(--border-strong);
+  border-top: 3px solid var(--accent);
+  padding: 20px;
+  color: var(--fg);
+}
+
+.qcard:hover {
+  text-decoration: none;
+  background: var(--surface-2);
+}
+
+.qcard h3 {
+  margin: 0 0 8px;
+  font-size: 1.15rem;
+}
+
+.qcard p {
+  margin: 0;
+  font-size: 14.5px;
+  color: var(--muted);
+}
+
+.qcard .qcard__meta {
+  display: block;
+  margin-top: 12px;
+  font-size: 12.5px;
+  color: var(--faint);
+  font-family: var(--mono);
 }
 
 /* --------------------------------------------------------------- footer */
@@ -1036,7 +1125,7 @@ tr:last-child td {
 .footer__cols a {
   display: block;
   color: var(--muted);
-  font-size: 14px;
+  font-size: 14.5px;
   padding: 3px 0;
 }
 
@@ -1054,14 +1143,14 @@ tr:last-child td {
 }
 
 .footer__note {
-  font-size: 13px;
+  font-size: 13.5px;
   color: var(--muted);
   margin: 0;
   max-width: 34ch;
 }
 
 .footer__stamp {
-  font-size: 12.5px;
+  font-size: 13px;
   color: var(--faint);
   margin: 6px 0 0;
 }
