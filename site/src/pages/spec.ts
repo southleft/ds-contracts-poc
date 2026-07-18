@@ -51,9 +51,10 @@ function sideNav(activePath: string): string {
   return [
     `<p class="sidenav__group">Specification</p>`,
     link('/spec/', 'Overview'),
-    link(VERSIONING_ROUTE, 'Versioning'),
     `<p class="sidenav__group">Reference</p>`,
     ...SPEC_PAGES.map((p) => link(p.route, p.nav)),
+    // Deliberately last: versioning is policy, not vocabulary.
+    link(VERSIONING_ROUTE, 'Versioning'),
   ].join('');
 }
 
@@ -255,7 +256,7 @@ function propsPage(replays: Awaited<ReturnType<typeof loadReplays>>): { route: s
       'props',
       'The canonical API',
       ['curated'],
-      `<p>Each prop declares its canonical name, type, and default — and <em>bindings</em>, which describe how the one canonical prop manifests on each side. This is the Code Connect idea folded into the source of truth. The canonical value set lives here and only here: canvas spelling (<code>"Primary"</code>) and code spelling (<code>"primary"</code>) are renderings of the canonical value.</p>`,
+      `<p>Each prop declares its canonical name, type, and default — and <em>bindings</em>, which describe how the one canonical prop manifests on each side. The canonical value set lives here and only here: canvas spelling (<code>"Primary"</code>) and code spelling (<code>"primary"</code>) are renderings of the canonical value.</p>`,
     ),
     section(
       'prop-fields',
@@ -651,7 +652,7 @@ function compositionPage(replays: Awaited<ReturnType<typeof loadReplays>>): { ro
       'slots',
       'Slots — constrained insertion points',
       ['generated', 'curated'],
-      `<p>Nathan Curtis’s slot model, aligned with the canvas’s two-tier constraint design. A slot named <code>children</code> is the default slot (React children); any other name becomes a <code>ReactNode</code> prop. <code>accepts</code> lists contract IDs, resolved per surface through each referenced contract’s anchors — the constraint is what makes generation and parity checkable (CEM declares slots but cannot constrain them).</p>` +
+      `<p>A slot is a constrained insertion point, aligned with the canvas’s two-tier constraint design. A slot named <code>children</code> is the default slot (React children); any other name becomes a <code>ReactNode</code> prop. <code>accepts</code> lists contract IDs, resolved per surface through each referenced contract’s anchors — a declared slot without a checkable constraint would leave generation and parity nothing to verify, so the constraint is first-class.</p>` +
         fieldList(SlotSchema as AnySchema, {
           name: '<code>children</code> = the default slot; any other name becomes a ReactNode prop of that name.',
           accepts: 'Contract IDs this slot accepts. Omit = unconstrained.',
@@ -822,7 +823,7 @@ ${section(
     <li>${badge('curated')} — prose and constraint summaries, distilled from the schema’s own commentary and the refusal rules in <code>core/emit-react.ts</code> — hand-written, and kept honest by the coverage guard and review.</li>
     <li>${badge('example')} — real excerpts: shipping contracts from <code>contracts/</code>, or output of the actual import engine replayed over committed capture fixtures, at build time. Illustrative snippets (used only where no shipping contract exercises a branch yet) are schema-validated at build time and say so in their captions.</li>
   </ul>
-  <p>Two schema versions are in play and the pages name both: the <em>contract</em> carries its own semver (<code>version</code>); the <em>schema</em> advances as numbered vocabulary rounds (v13 current) — see <a href="${VERSIONING_ROUTE}">versioning</a>.</p>`,
+  <p>Two version lines are in play and the pages name both: the <em>contract</em> carries its own semver (<code>version</code>); the <em>schema</em> has a single current version (v13) — see <a href="${VERSIONING_ROUTE}">versioning</a>.</p>`,
 )}
 
 <section id="pages"><h2>Reference pages</h2><div class="cards">${cards}</div></section>
@@ -843,53 +844,30 @@ ${section(
 }
 
 function versioningPage(): { route: string; html: string } {
-  const rounds: Array<[string, string]> = [
-    ['v2', 'Composition — anatomy became a nested tree; slots with <code>accepts</code> constraints; nested component refs by contract id.'],
-    ['v4', 'Gap round — <code>visibleWhen</code> (G1), <code>attrs</code> (G2), icon parts (G6), <code>roleByProp</code> (G7).'],
-    ['v6', 'Events — the declared interaction surface: callbacks, triggers, generated toggles with ARIA state.'],
-    ['v7', 'Expressiveness — <code>elementByProp</code>, <code>layoutByProp</code>, <code>stylesWhen</code>, <code>overlay</code>, structured <code>arrayOf</code> props with the <code>NONE</code> binding.'],
-    ['v8', 'Canvas state previews — <code>figmaStatePreviews</code>, the generator-owned <code>State</code> axis.'],
-    ['v9', 'Shape parts — parametric vector decor from captured geometry (the tooltip-pointer field case).'],
-    ['v10', '<code>tokensByProp</code> — per-enum-value token overrides for foreign vocabularies that name tokens by scale step.'],
-    ['v11', '<code>roleException</code> — declared, reviewable exceptions to the native-semantics lint.'],
-    ['v12', '<code>repeat</code> item templates over arrayOf props (P9); <code>modes</code> receipt metadata for theme axes.'],
-    ['v13', 'Part-level <code>states</code> — color-kind state overrides on non-ref parts, rendered as descendant rules and inside canvas previews.'],
-  ];
-  const rows = rounds
-    .map(([v, d]) => `<tr><td><code>${v}</code></td><td>${d}</td></tr>`)
-    .join('');
   const body = `
 <p class="eyebrow">Spec reference</p>
 <h1>Versioning</h1>
-<p class="lede">Two version lines, deliberately separate: each <em>contract</em> carries semver; the <em>schema</em> advances in numbered vocabulary rounds. Both move only with receipts.</p>
+<p class="lede">Two version lines, deliberately separate: each <em>contract</em> carries semver; the <em>schema</em> has a single current version. The change-by-change history lives in the repository, not here.</p>
+
+${section(
+  'current',
+  'Current version',
+  ['curated'],
+  `<p>The schema is at <strong>v13</strong> — one live document, <code>scripts/contract-schema.ts</code>, reflected by <code>npm run schema</code> into the published JSON Schema (<code>contracts/contract.schema.json</code>). Every reference page on this site is generated from it at build time, so this site always documents the current version. What changed, when, and why is the repository’s history: see the <a href="${REPO_URL}/blob/main/CHANGELOG.md">CHANGELOG</a> and <a href="${REPO_URL}/blob/main/MILESTONES.md">MILESTONES.md</a> on GitHub.</p>`,
+)}
 
 ${section(
   'contract-versioning',
   'Contract versions (semver)',
   ['curated'],
-  `<p>Any change to <code>props</code>, <code>states</code>, <code>anatomy</code>, or <code>a11y</code> bumps the contract’s <code>version</code> — semver semantics: an added optional prop or a widened slot is <strong>minor</strong>; a removed or renamed prop or value, or a narrowed slot, is <strong>major</strong>. The version string is schema-enforced (<code>MAJOR.MINOR.PATCH</code> — a malformed version is refused).</p><p>Contract changes land as PRs. The PR diff <em>is</em> the design-system change review — one artifact, reviewable by designers and engineers alike. The promotion flow generates these PRs from drift detected on either surface: an engineer’s hand-added prop became Button v1.0.0 → v1.1.0 through exactly this door (<a href="/how-it-works/round-trips/">the executed round-trip</a>).</p>`,
+  `<p>Any change to <code>props</code>, <code>states</code>, <code>anatomy</code>, or <code>a11y</code> bumps the contract’s <code>version</code> — semver semantics: an added optional prop or a widened slot is <strong>minor</strong>; a removed or renamed prop or value, or a narrowed slot, is <strong>major</strong>. The version string is schema-enforced (<code>MAJOR.MINOR.PATCH</code> — a malformed version is refused).</p><p>Contract changes land as PRs. The PR diff <em>is</em> the design-system change review — one artifact, reviewable by designers and engineers alike. The promotion flow generates these PRs from drift detected on either surface: an engineer’s hand-added prop became Button v1.0.0 → v1.1.0 through exactly this door (<a href="/how-it-works/adding-a-prop/">the full lifecycle, replayed</a>).</p>`,
 )}
 
 ${section(
-  'schema-versioning',
-  'Schema rounds (v13 current)',
+  'breaking',
+  'How breaking changes are handled',
   ['curated'],
-  `<p>The schema itself grows by rounds, each shipped with a consuming contract or committed fixture, refusal rules, and eval coverage — the house rule: <a href="${REPO_URL}/blob/main/CONTRIBUTING.md">no capability claim without an eval behind it</a>. Changes happen in <code>scripts/contract-schema.ts</code>, are reflected by <code>npm run schema</code> into the published JSON Schema, and must keep existing contracts parsing: add optional fields, never repurpose existing ones.</p>
-  <div class="table-wrap"><table><thead><tr><th>Round</th><th>What it added</th></tr></thead><tbody>${rows}</tbody></table></div>
-  <p class="section-note">Round numbers are the schema’s internal history (documented in the schema source and <a href="${REPO_URL}/blob/main/MILESTONES.md">MILESTONES.md</a>); they are not the spec’s public version. The path from this reference implementation to a normative, independently implementable spec draft — with a conformance kit and a falsifiable exit criterion — is phase 4 of the <a href="${REPO_URL}/blob/main/ROADMAP.md">roadmap</a>.</p>`,
-)}
-
-${section(
-  'evolution',
-  'How a schema change happens',
-  ['curated'],
-  `<ol class="steps">
-    <li><h3>Fixture first</h3><p>A real field case — a shipping contract that needs the vocabulary, or a committed capture fixture from a brownfield system that exercises it.</p></li>
-    <li><h3>Refusal rules with it</h3><p>New vocabulary lands with its illegal states named: what the validator refuses, by message, so the feature cannot be half-used silently.</p></li>
-    <li><h3>Eval-locked</h3><p>An adversarial check in the eval suite backs the capability before any doc claims it.</p></li>
-    <li><h3>Then the claim</h3><p>The reference page appears — generated from the schema, so this site’s coverage guard forces the documentation step mechanically.</p></li>
-  </ol>
-  <p>To propose a change, see <a href="/contribute/">Contribute</a>.</p>`,
+  `<p>The schema grows by addition, never by repurposing: new vocabulary lands as <strong>optional fields</strong>, and every existing contract must keep parsing — a schema change that breaks a shipping contract does not merge. Each addition ships with its refusal rules (the illegal states, named) and an eval behind it, and this site’s <a href="/spec/#coverage">coverage guard</a> fails the build if a schema branch lands undocumented.</p><p>For contracts, breaking is a <strong>major</strong> version: removing or renaming a prop or value, or narrowing a slot’s <code>accepts</code>. Widening is minor. Consumers pin contract versions the way they pin package versions — the version field is the unit of change management.</p><p>To propose a change, see <a href="/contribute/">Contribute</a> — fixture first, refusals named, eval-locked, then the claim.</p>`,
 )}
 `;
   const html = layout(
