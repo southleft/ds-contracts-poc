@@ -12,7 +12,7 @@
   --bg: #ffffff;
   --fg: #161616;
   --muted: #525252;
-  --faint: #8d8d8d;
+  --faint: #6f6f6f;
   --border: #e0e0e0;
   --border-strong: #8d8d8d;
   --surface: #f4f4f4;
@@ -39,7 +39,7 @@
     --bg: #161616;
     --fg: #f4f4f4;
     --muted: #a8a8a8;
-    --faint: #6f6f6f;
+    --faint: #8d8d8d;
     --border: #393939;
     --border-strong: #6f6f6f;
     --surface: #262626;
@@ -61,7 +61,7 @@
   --bg: #161616;
   --fg: #f4f4f4;
   --muted: #a8a8a8;
-  --faint: #6f6f6f;
+  --faint: #8d8d8d;
   --border: #393939;
   --border-strong: #6f6f6f;
   --surface: #262626;
@@ -113,26 +113,27 @@ body {
   }
 }
 
-/* Theme-paired imagery */
+/* Theme-paired imagery. !important: these are a theming mechanism and must
+   win over any layout display rule (e.g. .diagram img { display: block }). */
 .only-dark {
-  display: none;
+  display: none !important;
 }
 
 :root[data-theme='dark'] .only-light {
-  display: none;
+  display: none !important;
 }
 
 :root[data-theme='dark'] .only-dark {
-  display: block;
+  display: block !important;
 }
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme='light']) .only-light {
-    display: none;
+    display: none !important;
   }
 
   :root:not([data-theme='light']) .only-dark {
-    display: block;
+    display: block !important;
   }
 }
 
@@ -301,6 +302,11 @@ figcaption code,
 
   .topbar__repo {
     display: none;
+  }
+
+  .topnav__link {
+    padding: 0 8px;
+    font-size: 14px;
   }
 }
 
