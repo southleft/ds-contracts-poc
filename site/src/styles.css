@@ -768,6 +768,21 @@ tr:last-child td {
   display: block;
 }
 
+/* Wide computed diagrams (the dependency graph) scroll at natural size in
+   their own container — shrinking 1,700px of labels to fit would make them
+   decorative, and decorative isn't the point. */
+.diagram--scroll {
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  max-width: 100%;
+}
+
+.diagram--scroll img {
+  width: auto;
+  max-width: none;
+  display: block;
+}
+
 .section-note {
   font-size: 14.5px;
   color: var(--muted);

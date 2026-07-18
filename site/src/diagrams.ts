@@ -23,6 +23,7 @@ interface Palette {
   back: string;
   danger: string;
   ok: string;
+  hub: string;
 }
 
 const PALETTES: Record<Theme, Palette> = {
@@ -38,6 +39,7 @@ const PALETTES: Record<Theme, Palette> = {
     back: '#6b7280',
     danger: '#dc2626',
     ok: '#198038',
+    hub: '#0f62fe',
   },
   dark: {
     boxFill: '#1f2937',
@@ -51,6 +53,7 @@ const PALETTES: Record<Theme, Palette> = {
     back: '#9ca3af',
     danger: '#f87171',
     ok: '#42be65',
+    hub: '#78a9ff',
   },
 };
 
@@ -106,7 +109,7 @@ export function propLifecycleSvg(theme: Theme): string {
     svgOpen(
       theme,
       960,
-      430,
+      470,
       'Lifecycle of an added property: a hand edit on one surface is flagged by the differ as code AHEAD with a complete proposed contract patch; a human promotes the patch into the contract, bumping its version; both surfaces regenerate from the contract; the differ verifies — a surface that skipped regeneration is named figma BEHIND until it catches up.',
     ),
   ];
@@ -130,11 +133,11 @@ export function propLifecycleSvg(theme: Theme): string {
   parts.push(box(340, 320, 280, 80, '5 · The differ verifies', ['npm run parity → clean', 'only when BOTH surfaces carry v1.1.0']));
   parts.push(`<line class="back" x1="480" y1="285" x2="480" y2="315" marker-end="url(#arrow)"/>`);
   parts.push(
-    `<path class="back bad" d="M 160 315 C 160 360, 240 360, 335 360" marker-end="url(#arrow)"/>`,
-    `<text class="lbl badt" x="150" y="345" text-anchor="start">a surface that skipped regeneration</text>`,
-    `<text class="lbl badt" x="150" y="361" text-anchor="start">is named: [figma BEHIND] Button.Loading</text>`,
+    `<path class="back bad" d="M 160 315 C 160 372, 230 372, 335 372" marker-end="url(#arrow)"/>`,
+    `<text class="lbl badt" x="20" y="404" text-anchor="start">a surface that skipped regeneration is named:</text>`,
+    `<text class="lbl badt" x="20" y="420" text-anchor="start">[figma BEHIND] Button.Loading</text>`,
   );
-  parts.push(`<text class="lbl2" x="480" y="420" text-anchor="middle">a change on either surface takes the same path — proposal → human promotion → regeneration; one arbiter, and a differ that names whichever surface lags</text>`);
+  parts.push(`<text class="lbl2" x="480" y="452" text-anchor="middle">a change on either surface takes the same path — proposal → human promotion → regeneration; one arbiter, and a differ that names whichever surface lags</text>`);
   return parts.join('\n  ') + CLOSE;
 }
 
@@ -204,7 +207,7 @@ export function receiptsFlowSvg(theme: Theme): string {
     ),
   ];
   parts.push(box(30, 150, 200, 110, 'THE CONTRACT', ['*.contract.json', '+ DTCG tokens'], true));
-  parts.push(box(310, 150, 240, 110, 'Four emitters', ['react · html · react-inline', '· figma — one interface,', 'pure functions']));
+  parts.push(box(310, 150, 240, 110, 'Four emitters', ['react · html · react-inline · figma', 'one interface, pure functions']));
   parts.push(box(640, 150, 280, 110, 'Emitted surfaces', ['byte-identical on every run', 'from the same contract']));
   parts.push(`<line class="flow" x1="230" y1="205" x2="305" y2="205" marker-end="url(#arrow)"/>`);
   parts.push(`<line class="flow" x1="550" y1="205" x2="635" y2="205" marker-end="url(#arrow)"/>`);
@@ -268,9 +271,18 @@ export interface GraphData {
   totalSets: number;
 }
 
+/** Natural size of the rendered graph — used by the page to set explicit
+ *  img dimensions (the graph scrolls at natural size instead of shrinking). */
+export function dependencyGraphSize(g: GraphData): { width: number; height: number } {
+  const svg = dependencyGraphSvg('light', g);
+  const m = svg.match(/viewBox="0 0 (\d+) (\d+)"/);
+  if (!m) throw new Error('dependencyGraphSize: no viewBox');
+  return { width: Number(m[1]), height: Number(m[2]) };
+}
+
 export function dependencyGraphSvg(theme: Theme, g: GraphData): string {
   const p = PALETTES[theme];
-  const NODE_W = 158;
+  const NODE_W = 176;
   const NODE_H = 21;
   const ROW_GAP = 7;
   const COL_GAP = 66;
@@ -347,11 +359,14 @@ export function dependencyGraphSvg(theme: Theme, g: GraphData): string {
     if (n.name === 'Icon') continue;
     const pos = placed.get(n.name)!;
     const dot = n.usesIcon
-      ? `<circle cx="${pos.x + NODE_W - 8}" cy="${pos.y + NODE_H / 2}" r="2.6" fill="${p.danger}"/>`
+      ? `<circle cx="${pos.x + NODE_W - 9}" cy="${pos.y + NODE_H / 2}" r="2.6" fill="${p.hub}"/>`
       : '';
+    // Keep labels clear of the hub marker; a truncation is visible, not silent.
+    const maxChars = n.usesIcon ? 23 : 25;
+    const label = n.name.length > maxChars ? `${n.name.slice(0, maxChars - 1)}…` : n.name;
     parts.push(
       `<rect class="box" x="${pos.x}" y="${pos.y}" width="${NODE_W}" height="${NODE_H}"/>
-  <text x="${pos.x + 7}" y="${pos.y + 15}" fill="${p.text}" font-size="10.5px" class="mono">${n.name.replaceAll('&', '&amp;').replaceAll('<', '&lt;')}</text>${dot}`,
+  <text x="${pos.x + 7}" y="${pos.y + 15}" fill="${p.text}" font-size="10.5px" class="mono">${label.replaceAll('&', '&amp;').replaceAll('<', '&lt;')}</text>${dot}`,
     );
   }
 
@@ -365,7 +380,7 @@ export function dependencyGraphSvg(theme: Theme, g: GraphData): string {
   // Legend.
   const legendY = hub.y + 14;
   parts.push(
-    `<circle cx="26" cy="${legendY}" r="2.6" fill="${p.danger}"/>
+    `<circle cx="26" cy="${legendY}" r="2.6" fill="${p.hub}"/>
   <text class="lbl2" x="36" y="${legendY + 4}">= instantiates Icon (${g.iconRefs} of ${g.compositeCount} composites do — those edges are aggregated here, not drawn)</text>
   <text class="lbl2" x="20" y="${legendY + 24}">elided: ${(g.totalSets - g.nodes.length).toLocaleString('en-US')} of ${g.totalSets.toLocaleString('en-US')} sets participate in no instance edge (icon glyphs and standalone components)</text>
   <text class="lbl2" x="20" y="${legendY + 44}">computed at site-build time from the committed capture — nodes, edges, and counts are read from the file, not drawn by hand</text>`,

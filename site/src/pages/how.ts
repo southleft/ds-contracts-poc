@@ -6,6 +6,7 @@
  * right; numbers link to their committed receipts.
  */
 import { layout, codeBlock, esc, themedImage, REPO_URL, PLAYGROUND_URL } from '../html.js';
+import { dependencyGraphSize } from '../diagrams.js';
 import type { SiteStats } from '../stats.js';
 import type { FileDiff, HowReplays, ImportStep, ParityFinding, RefResolution } from '../how-replays.js';
 
@@ -64,8 +65,8 @@ function howShell(page: HowPage | undefined, title: string, description: string,
   return { route, html };
 }
 
-const diagram = (name: string, alt: string): string =>
-  `<div class="diagram">${themedImage(`/assets/${name}-light.svg`, `/assets/${name}-dark.svg`, alt)}</div>`;
+const diagram = (name: string, alt: string, cls = 'diagram'): string =>
+  `<div class="${cls}">${themedImage(`/assets/${name}-light.svg`, `/assets/${name}-dark.svg`, alt)}</div>`;
 
 // ---------------------------------------------------------------------------
 // Render helpers for the replayed material
@@ -262,6 +263,7 @@ ${codeBlock(JSON.stringify(N.stubExcerpt, null, 2).slice(0, 1400) + '\n…', 'js
 <h2 id="session-linking">Children first: session linking</h2>
 <p>Now the same fixtures in a working session, children first — Icon (from the committed whole-kit capture), then Button-Brand Primary, then Dialog. Each import registers its contract in the session; later imports resolve drawn instances against it. Real engine, real captures, at build time:</p>
 ${stepsTable(N.steps)}
+<p class="section-note">Even the “leaf” is honest about its own edge: the Icon set itself draws a <code>Placeholder</code> instance, so the Icon import carries one stub of its own.</p>
 <p>Per-ref resolution of the Dialog import — its action button now <strong>links</strong> to the session’s real contract; only the never-imported children stay stubs:</p>
 ${refsTable(N.steps[2].refs)}
 ${codeBlock(JSON.stringify(N.dialogLinkedRef, null, 2), 'json', 'the Dialog proposal’s component ref after session linking — embedded by id, not by copy; proposed at site-build time')}
@@ -312,7 +314,13 @@ function atScalePage(replays: HowReplays, stats: SiteStats): { route: string; ht
 
 <h2 id="the-graph">The dependency graph of a real kit</h2>
 <p>This is not a stock illustration. At site-build time, the site reads the committed whole-kit capture — <strong>${fmt(S.totalSets)} component sets</strong> from a live enterprise kit — and renders every instance edge it finds: <strong>${fmt(S.composites)} sets draw instances of other sets</strong> (${fmt(S.multiVariantComposites)} of them multi-variant composites), ${fmt(S.pairEdges)} distinct dependency edges over ${fmt(S.instanceNodes)} drawn instances, nesting up to ${S.maxDepth} levels deep (${S.chainExample.join(' → ')} is the chain the <a href="/how-it-works/nested-components/">previous page</a> replays).</p>
-${diagram('dependency-graph', 'The dependency graph computed from the committed whole-kit capture: composites arranged by dependency depth with every instance edge drawn; edges into the Icon hub aggregated; sets with no instance edges elided, with counts stated in the legend.')}
+<div class="diagram diagram--scroll">${themedImage(
+    '/assets/dependency-graph-light.svg',
+    '/assets/dependency-graph-dark.svg',
+    'The dependency graph computed from the committed whole-kit capture: composites arranged by dependency depth with every instance edge drawn; edges into the Icon hub aggregated; sets with no instance edges elided, with counts stated in the legend.',
+    `width="${dependencyGraphSize(S.graph).width}" height="${dependencyGraphSize(S.graph).height}"`,
+  )}</div>
+<p class="section-note">The graph renders at natural size and scrolls sideways — shrinking ${fmt(dependencyGraphSize(S.graph).width)}&nbsp;px of real labels to fit the column would turn evidence into decoration.</p>
 <p class="section-note">What is elided, named: edges into <code>Icon</code> (in-degree ${S.iconInDegree} — drawing them makes wallpaper, so they are aggregated as a marker), and the ${fmt(S.totalSets - S.graph.nodes.length)} sets that participate in no instance edge (icon glyphs and standalone components). One drawn edge resolves to no set in the capture — <code>${esc(S.unresolvedEdges[0]?.[0] ?? '')}</code> → “${esc(S.unresolvedEdges[0]?.[1] ?? '')}” — because the file draws duplicate-named components and the name-keyed capture keeps one; the pipeline stubs it honestly rather than guessing, exactly the keyed-identity discipline of the <a href="/how-it-works/nested-components/#linked-by-key">previous page</a>.</p>
 <p>The shape is what design systems actually look like at scale: a handful of hubs — ${hubs} carry the highest in-degree — and composition concentrated in patterns: ${fanout} have the widest fan-out.</p>
 
