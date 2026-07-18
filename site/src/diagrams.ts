@@ -57,17 +57,34 @@ const PALETTES: Record<Theme, Palette> = {
   },
 };
 
-function svgOpen(theme: Theme, w: number, h: number, label: string, arrowIds: string[] = ['arrow']): string {
+function svgOpen(theme: Theme, w: number, h: number, label: string, arrowIds: string[] = ['arrow'], natural = false): string {
   const p = PALETTES[theme];
-  const markers = arrowIds
+  // Markers get EXPLICIT per-role fills: inside an <img>-loaded SVG,
+  // currentColor cannot see the page theme and resolves to the UA default —
+  // dark mode shipped mismatched arrowheads. One marker per line role, filled
+  // with that role's exact stroke color. (`arrowIds` kept for callers that
+  // declare extra ids; each extra id falls back to the flow color.)
+  const roleFills: Record<string, string> = { arrow: p.flow, arrowBack: p.back, arrowBad: p.danger, arrowOk: p.ok };
+  for (const id of arrowIds) if (!(id in roleFills)) roleFills[id] = p.flow;
+  const markers = Object.entries(roleFills)
     .map(
-      (id) =>
-        `<marker id="${id}" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor"/></marker>`,
+      ([id, fill]) =>
+        `<marker id="${id}" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="${fill}"/></marker>`,
     )
     .join('');
   // Explicit font stack: SVG inside an <img> cannot inherit the page font,
   // so "inherit" would fall back to the browser serif default.
-  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${w} ${h}" role="img" aria-label="${label.replaceAll('"', '&quot;')}" style="max-width:100%;height:auto">
+  //
+  // `natural`: wide computed diagrams (the dependency graph) must carry REAL
+  // intrinsic dimensions — the page's `width` attribute is only a
+  // presentational hint, and any stylesheet `width: auto` overrides it; with
+  // no intrinsic size the img then shrink-to-fits its column, turning the
+  // graph into wallpaper. width/height attrs on the root give the img a true
+  // intrinsic size, and the scroll container does the rest.
+  const sizing = natural
+    ? `width="${w}" height="${h}"`
+    : `style="max-width:100%;height:auto"`;
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${w} ${h}" ${sizing} role="img" aria-label="${label.replaceAll('"', '&quot;')}">
   <defs>${markers}</defs>
   <style>
     text { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; }
@@ -134,9 +151,9 @@ export function propLifecycleSvg(theme: Theme): string {
   parts.push(`<line class="flow" x1="335" y1="260" x2="305" y2="272" marker-end="url(#arrow)"/>`);
   // Differ verification row
   parts.push(box(340, 320, 280, 80, '5 · The differ verifies', ['npm run parity → clean', 'only when BOTH surfaces carry v1.1.0']));
-  parts.push(`<line class="back" x1="480" y1="285" x2="480" y2="315" marker-end="url(#arrow)"/>`);
+  parts.push(`<line class="back" x1="480" y1="285" x2="480" y2="315" marker-end="url(#arrowBack)"/>`);
   parts.push(
-    `<path class="back bad" d="M 160 315 C 160 372, 230 372, 335 372" marker-end="url(#arrow)"/>`,
+    `<path class="back bad" d="M 160 315 C 160 372, 230 372, 335 372" marker-end="url(#arrowBad)"/>`,
     `<text class="lbl badt" x="20" y="404" text-anchor="start">a surface that skipped regeneration is named:</text>`,
     `<text class="lbl badt" x="20" y="420" text-anchor="start">[figma BEHIND] Button.Loading</text>`,
   );
@@ -187,9 +204,9 @@ export function sessionLinkingSvg(theme: Theme): string {
   // Bottom: the upgrade path
   parts.push(box(370, 290, 250, 90, 'STUB in the parent', ['ds.button-brand-primary v0.1.0', '“Import the child set to', 'replace this stub.”']));
   parts.push(box(680, 290, 260, 90, 'LINK after re-import', ['the child set arrives in session;', 're-importing the parent resolves', 'the same ref to the real contract']));
-  parts.push(`<line class="back" x1="625" y1="335" x2="675" y2="335" marker-end="url(#arrow)"/>`);
+  parts.push(`<line class="back" x1="625" y1="335" x2="675" y2="335" marker-end="url(#arrowBack)"/>`);
   parts.push(`<text class="lbl" x="650" y="323" text-anchor="middle">upgrade</text>`);
-  parts.push(`<line class="back" x1="495" y1="180" x2="495" y2="285" marker-end="url(#arrow)"/>`);
+  parts.push(`<line class="back" x1="495" y1="180" x2="495" y2="285" marker-end="url(#arrowBack)"/>`);
   parts.push(`<text class="lbl2" x="505" y="240">child not in session yet</text>`);
   parts.push(`<text class="lbl2" x="480" y="440" text-anchor="middle">nothing is silently rewritten: the stub is named in its own description, and the upgrade is a re-import through the same door</text>`);
   parts.push(`<text class="lbl2" x="480" y="460" text-anchor="middle">replayed below from the committed Dialog / Button-Brand Primary / Icon captures — the numbers are the engine’s, not this page’s</text>`);
@@ -216,14 +233,14 @@ export function receiptsFlowSvg(theme: Theme): string {
   parts.push(`<line class="flow" x1="550" y1="205" x2="635" y2="205" marker-end="url(#arrow)"/>`);
   // Gates above
   parts.push(box(310, 30, 240, 80, 'Refusal, by name', ['validateContract — an illegal', 'contract never emits']));
-  parts.push(`<line class="back" x1="430" y1="110" x2="430" y2="145" marker-end="url(#arrow)"/>`);
+  parts.push(`<line class="back" x1="430" y1="110" x2="430" y2="145" marker-end="url(#arrowBack)"/>`);
   parts.push(box(30, 30, 200, 80, 'Integrity gate', ['every token ref must resolve', 'or the build fails, named']));
-  parts.push(`<line class="back" x1="130" y1="110" x2="130" y2="145" marker-end="url(#arrow)"/>`);
+  parts.push(`<line class="back" x1="130" y1="110" x2="130" y2="145" marker-end="url(#arrowBack)"/>`);
   // Gates below
   parts.push(box(640, 300, 280, 90, 'Golden manifest', ['evals/golden.json — SHA-256 over', 'every generated file; a changed', 'byte fails the eval by name']));
-  parts.push(`<line class="back" x1="780" y1="295" x2="780" y2="265" marker-end="url(#arrow)"/>`);
+  parts.push(`<line class="back" x1="780" y1="295" x2="780" y2="265" marker-end="url(#arrowBack)"/>`);
   parts.push(box(30, 300, 460, 90, 'Degradation codes (import direction)', ['every channel a capture reads but cannot carry is a named', 'receipt — counted per component set, never silently dropped']));
-  parts.push(`<line class="back" x1="130" y1="295" x2="130" y2="265" marker-end="url(#arrow)"/>`);
+  parts.push(`<line class="back" x1="130" y1="295" x2="130" y2="265" marker-end="url(#arrowBack)"/>`);
   parts.push(`<text class="lbl2" x="480" y="420" text-anchor="middle">every gate writes a committed receipt: golden.json · eval results · the census counts · the parity report</text>`);
   return parts.join('\n  ') + CLOSE;
 }
@@ -246,11 +263,11 @@ export function instrumentsSvg(theme: Theme): string {
   parts.push(`<line class="flow" x1="480" y1="120" x2="480" y2="175" marker-end="url(#arrow)"/>`);
   parts.push(`<text class="lbl" x="492" y="150">gates</text>`);
   parts.push(box(30, 180, 260, 110, 'Whole-kit census', ['an entire enterprise kit replayed', 'through the import pipeline —', 'clean rate + facts + degradations']));
-  parts.push(`<line class="back" x1="295" y1="235" x2="355" y2="235" marker-end="url(#arrow)"/>`);
+  parts.push(`<line class="back" x1="295" y1="235" x2="355" y2="235" marker-end="url(#arrowBack)"/>`);
   parts.push(box(670, 180, 260, 110, 'Visual parity', ['emitted previews diffed against', 'the design tool’s own renders —', 'worst-first queue + baseline gate']));
-  parts.push(`<line class="back" x1="665" y1="235" x2="605" y2="235" marker-end="url(#arrow)"/>`);
+  parts.push(`<line class="back" x1="665" y1="235" x2="605" y2="235" marker-end="url(#arrowBack)"/>`);
   parts.push(box(280, 330, 400, 90, 'Enterprise gauntlet', ['four external design systems at pinned SHAs through', 'the unmodified code extractor — every workaround named']));
-  parts.push(`<line class="back" x1="480" y1="325" x2="480" y2="295" marker-end="url(#arrow)"/>`);
+  parts.push(`<line class="back" x1="480" y1="325" x2="480" y2="295" marker-end="url(#arrowBack)"/>`);
   parts.push(`<text class="lbl2" x="480" y="450" text-anchor="middle">every instrument publishes a committed report with real numbers — measurement against material this project does not own</text>`);
   return parts.join('\n  ') + CLOSE;
 }
@@ -339,6 +356,8 @@ export function dependencyGraphSvg(theme: Theme, g: GraphData): string {
       height,
       `Dependency graph computed from the committed whole-kit capture: the ${g.compositeCount} component sets that draw instances of other sets, arranged by dependency depth (deepest composition on the left, leaf components on the right), with each instance edge drawn. Edges into the Icon set (${g.iconRefs} of them) are aggregated into one hub marker for legibility; the remaining ${g.totalSets - g.nodes.length} sets of the ${g.totalSets}-set kit participate in no instance edge and are elided.`,
       ['garrow'],
+      true, // natural: real intrinsic size — the scroll container needs it
+
     ),
   ];
 
