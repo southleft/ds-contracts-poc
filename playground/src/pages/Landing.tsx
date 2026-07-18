@@ -10,11 +10,13 @@ export function Landing() {
       <p className="landing__pitch">
         A component contract is a machine-readable agreement about a component&rsquo;s API,
         anatomy, and token bindings — one source of truth that both design tools and code
-        generate from. This playground runs the actual engine behind a{' '}
-        {contractsById.size}-component library: import a design or paste code, watch a contract
-        be proposed, edit it under schema governance, and generate React, static HTML, and a
-        Figma sync script from the same document. Everything runs client-side; nothing you
-        paste leaves your browser.
+        generate from, and are checked against. Bidirectional, deterministic, receipted, and
+        fully open: round-trips are proven rather than promised, nothing in the pipeline is
+        an AI guess, every gap is named on screen, and the schema has no gated tier. This
+        playground runs the actual engine behind a {contractsById.size}-component library:
+        import a design or paste code, watch a contract be proposed, edit it under schema
+        governance, and generate React, static HTML, and a Figma sync script from the same
+        document. Everything runs client-side; nothing you paste leaves your browser.
       </p>
 
       {/* The one-line thesis: it may wrap BETWEEN steps at narrow widths but
