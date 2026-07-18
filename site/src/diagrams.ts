@@ -198,8 +198,8 @@ export function sessionLinkingSvg(theme: Theme): string {
   parts.push(`<text class="s" x="712" y="220">absence is never evidence</text>`);
   parts.push(`<line class="flow" x1="625" y1="115" x2="675" y2="115" marker-end="url(#arrow)"/>`);
   parts.push(`<text class="lbl" x="650" y="103" text-anchor="middle">resolve</text>`);
-  parts.push(`<line class="flow" x1="295" y1="83" x2="365" y2="95" marker-end="url(#arrow)"/>`);
-  parts.push(`<text class="lbl" x="330" y="76" text-anchor="middle">import</text>`);
+  parts.push(`<line class="flow" x1="232" y1="83" x2="365" y2="95" marker-end="url(#arrow)"/>`);
+  parts.push(`<text class="lbl" x="298" y="74" text-anchor="middle">import</text>`);
 
   // Bottom: the upgrade path
   parts.push(box(370, 290, 250, 90, 'STUB in the parent', ['ds.button-brand-primary v0.1.0', '“Import the child set to', 'replace this stub.”']));
