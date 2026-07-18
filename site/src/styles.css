@@ -481,7 +481,8 @@ hr {
   text-decoration: none;
 }
 
-.anchor-heading:hover .anchor {
+.anchor-heading:hover .anchor,
+.anchor-heading .anchor:focus-visible {
   opacity: 1;
 }
 
