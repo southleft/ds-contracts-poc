@@ -100,9 +100,14 @@ function sha256Hex(str) {
 // so reports are flattened to plain JSON (the generated scripts return plain
 // object reports; anything non-serializable falls back to String()).
 // ---------------------------------------------------------------------------
-figma.showUI(__html__, { width: 460, height: 620, themeColors: true });
+figma.showUI(__html__, { width: 640, height: 680, themeColors: true });
 
 const post = (msg) => figma.ui.postMessage(msg);
+
+// The engine tabs override each generated script's WRONG FILE guard with the
+// key of the file the designer is looking at (null on unshared drafts —
+// which disables the guard, correctly: an unshared draft has no key).
+post({ type: 'init', fileKey: figma.fileKey || '' });
 
 function toPlain(value) {
   if (value === undefined) return null;
@@ -181,6 +186,39 @@ async function selectionSetNames() {
 
 figma.ui.onmessage = async (msg) => {
   if (!msg || !msg.type) return;
+  if (msg.type === 'ui-ready') {
+    post({ type: 'init', fileKey: figma.fileKey || '' });
+    return;
+  }
+  if (msg.type === 'bridge-poll') {
+    // Read-only network poll (Receive by code) — allowed anytime. Mirrors
+    // the playground's pollBridge: worker refusals render verbatim.
+    try {
+      const res = await fetch(BRIDGE_BASE + '/bridge/' + encodeURIComponent(String(msg.code || '')));
+      if (res.ok) {
+        const body = await res.json();
+        if (body && body.status === 'delivered') {
+          post({ type: 'bridge-poll-result', replyTo: msg.replyTo, status: 'delivered', kind: body.kind || 'dump', dump: body.dump });
+        } else {
+          post({ type: 'bridge-poll-result', replyTo: msg.replyTo, status: 'waiting' });
+        }
+      } else {
+        let workerMessage = null;
+        try {
+          const parsed = await res.json();
+          if (parsed && typeof parsed.error === 'string') workerMessage = parsed.error;
+        } catch (e) { /* non-JSON body */ }
+        post({
+          type: 'bridge-poll-result', replyTo: msg.replyTo, status: 'error',
+          message: workerMessage || ('The bridge answered HTTP ' + res.status + ' with no named message.'),
+        });
+      }
+    } catch (e) {
+      // Transient network blip — keep the UI polling.
+      post({ type: 'bridge-poll-result', replyTo: msg.replyTo, status: 'waiting' });
+    }
+    return;
+  }
   if (msg.type === 'query-selection-sets') {
     // Allowed anytime (read-only), like select-node.
     try {
@@ -206,6 +244,37 @@ figma.ui.onmessage = async (msg) => {
   }
   if (busy) {
     figma.notify('A run is already in progress.', { error: true });
+    return;
+  }
+  if (msg.type === 'engine-run') {
+    // The engine tabs' execution path — the SAME runScript machinery as the
+    // paste box; the ui supplies engine-emitted script text and correlates
+    // by id. `focus` asks for the paste tab's select+zoom on the result.
+    busy = true;
+    try {
+      const result = await runScript(String(msg.code || ''));
+      const plain = toPlain(result);
+      let focus = null;
+      if (msg.focus) {
+        try {
+          const subject = reportSubject(plain);
+          if (subject) {
+            const node = await figma.getNodeByIdAsync(subject.nodeId);
+            if (node && !subject.skipped && (await selectAndZoom(node))) {
+              focus = { kind: 'selected', nodeId: subject.nodeId, name: subject.name || node.name };
+            }
+          }
+        } catch (e) { /* focus is a courtesy */ }
+      }
+      post({ type: 'engine-result', id: msg.id, ok: true, result: plain, focus: focus });
+    } catch (e) {
+      post({
+        type: 'engine-result', id: msg.id, ok: false,
+        error: String(e && e.message ? e.message : e),
+        stack: e && e.stack ? String(e.stack) : null,
+      });
+    }
+    busy = false;
     return;
   }
   if (msg.type === 'run-paste') {

@@ -27,7 +27,8 @@
     ".storybook",
     "extract",
     "parity",
-    "evals"
+    "evals",
+    "figma-sync/plugin/engine"
   ],
   "exclude": [
     "extract/fixtures",

@@ -4,22 +4,34 @@
  * playground build/dev time via a tiny vite hook (playground/vite.config.ts)
  * and stands alone as `node scripts/build-plugin-zip.mjs`.
  *
- * Two jobs:
- *   1. DRIFT GUARD — ui.html embeds extract/figma/dump.plugin.js verbatim
- *      (the "Send to Playground" tab runs it through the same runScript path
- *      as the paste box). This build REFUSES to package when the embedded
- *      copy differs from the repo file, so the two can never drift silently.
- *   2. ZIP — dependency-free STORE-method zip (no compression; the plugin is
- *      ~40 KB of text) with a fixed timestamp, so identical inputs produce
- *      identical bytes.
+ * Three jobs:
+ *   1. DRIFT GUARD (dump) — ui.html embeds extract/figma/dump.plugin.js
+ *      verbatim (the "Send to Playground" tab runs it through the same
+ *      runScript path as the paste box). This build REFUSES to package when
+ *      the embedded copy differs from the repo file.
+ *   2. ENGINE BUNDLE + DRIFT GUARD (engine) — esbuild bundles the plugin
+ *      engine entry (figma-sync/plugin/engine/entry.ts → the core barrel)
+ *      with the repo's tokens, contracts and icons baked in, and injects it
+ *      into the packaged ui.html's #plugin-engine block (window.DSC). The
+ *      committed receipt (figma-sync/plugin/engine.receipt.json) records a
+ *      hash over every bundle input; when core (or tokens/contracts/icons)
+ *      changed and the receipt was not re-recorded, the build REFUSES by
+ *      name — run with --update-engine-receipt to record deliberately.
+ *      The receipt also records the bundle size (the zip cost is a number).
+ *   3. ZIP — dependency-free STORE-method zip with a fixed timestamp, so
+ *      identical inputs produce identical bytes.
  */
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
-import { dirname, join, resolve } from 'node:path';
+import { readdirSync, readFileSync } from 'node:fs';
+import { createHash } from 'node:crypto';
+import { dirname, join, relative, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const repoRoot = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const PLUGIN_DIR = join(repoRoot, 'figma-sync', 'plugin');
 const DUMP_SOURCE = join(repoRoot, 'extract', 'figma', 'dump.plugin.js');
+const ENGINE_ENTRY = join(PLUGIN_DIR, 'engine', 'entry.ts');
+const ENGINE_RECEIPT = join(PLUGIN_DIR, 'engine.receipt.json');
 export const ZIP_BASENAME = 'ds-contracts-sync-runner-plugin.zip';
 const DEFAULT_OUT = join(repoRoot, 'playground', 'public', ZIP_BASENAME);
 
@@ -103,6 +115,143 @@ function makeZip(entries) {
 }
 
 // ---------------------------------------------------------------------------
+// Engine bundle — the core barrel + baked repo data, bundled for the plugin
+// UI iframe. Pure esbuild output: deterministic for a given lockfile.
+// ---------------------------------------------------------------------------
+
+/** Repo data baked into the bundle (PluginEngineData in engine/entry.ts). */
+function collectEngineData() {
+  const readJson = (p) => JSON.parse(readFileSync(join(repoRoot, p), 'utf8'));
+  const brands = Object.fromEntries(
+    readdirSync(join(repoRoot, 'tokens', 'modes'))
+      .filter((f) => /^brand\.[a-z][a-z0-9-]*\.tokens\.json$/.test(f))
+      .sort()
+      .map((f) => [f.replace(/^brand\.|\.tokens\.json$/g, ''), readJson(`tokens/modes/${f}`)]),
+  );
+  const contracts = readdirSync(join(repoRoot, 'contracts'))
+    .filter((f) => f.endsWith('.contract.json'))
+    .sort()
+    .map((f) => readJson(`contracts/${f}`));
+  const icons = Object.fromEntries(
+    readdirSync(join(repoRoot, 'assets', 'icons'))
+      .filter((f) => f.endsWith('.svg'))
+      .sort()
+      .map((f) => [f.replace(/\.svg$/, ''), readFileSync(join(repoRoot, 'assets', 'icons', f), 'utf8')]),
+  );
+  return {
+    tokens: {
+      primitives: readJson('tokens/primitives.tokens.json'),
+      semantic: readJson('tokens/semantic.tokens.json'),
+      light: readJson('tokens/modes/semantic.light.tokens.json'),
+      dark: readJson('tokens/modes/semantic.dark.tokens.json'),
+      brands,
+    },
+    contracts,
+    icons,
+  };
+}
+
+/** esbuild the engine entry + data into one classic script (window.DSC). */
+export async function buildEngineBundle() {
+  const { build, version: esbuildVersion } = await import('esbuild');
+  const data = collectEngineData();
+  const dataJson = JSON.stringify(data);
+  const result = await build({
+    stdin: {
+      contents: `import { createPluginEngine } from ${JSON.stringify(ENGINE_ENTRY)};
+window.DSC = createPluginEngine(__DSC_DATA__);
+`,
+      resolveDir: repoRoot,
+      loader: 'ts',
+      sourcefile: 'plugin-engine-main.ts',
+    },
+    define: { __DSC_DATA__: dataJson },
+    bundle: true,
+    platform: 'browser',
+    format: 'iife',
+    target: 'es2018',
+    minify: true,
+    write: false,
+    metafile: true,
+    logLevel: 'silent',
+  });
+  if (result.errors.length > 0) {
+    throw new Error(`plugin-zip: engine bundle failed — ${result.errors.map((e) => e.text).join('; ')}`);
+  }
+  let code = result.outputFiles[0].text;
+  // The bundle lands inside a <script> block in ui.html — a literal
+  // "</script" inside any of the engine's strings would end the block early.
+  code = code.replace(/<\/script/gi, '<\\/script');
+  if (code.includes('</script')) throw new Error('plugin-zip: engine bundle still contains "</script" after escaping');
+
+  // Input hash: every module esbuild consumed (path + content hash, sorted)
+  // plus the baked data and the esbuild version — any change to core, the
+  // entry, tokens, contracts, or icons changes this hash.
+  const hasher = createHash('sha256');
+  const inputs = Object.keys(result.metafile.inputs)
+    // Real files only — the metafile also lists virtual entries (the stdin
+    // wrapper "plugin-engine-main.ts", "<define:…>" injections, esbuild's
+    // "(disabled):…" browser shims). The data JSON hashed below already
+    // covers everything the virtual entries carry.
+    .filter((p) => !p.startsWith('<') && !p.startsWith('(') && p !== 'plugin-engine-main.ts')
+    .sort();
+  for (const p of inputs) {
+    const abs = resolve(repoRoot, p);
+    hasher.update(relative(repoRoot, abs));
+    hasher.update('\0');
+    hasher.update(readFileSync(abs));
+    hasher.update('\0');
+  }
+  hasher.update(dataJson);
+  hasher.update(`esbuild@${esbuildVersion}`);
+  const inputHash = hasher.digest('hex');
+  return { code, inputHash, minifiedBytes: Buffer.byteLength(code), inputFiles: inputs.length, esbuildVersion };
+}
+
+/** Engine drift guard: the committed receipt must match a fresh build. */
+export async function verifyEngineReceipt(bundle, { update = false } = {}) {
+  const next = {
+    note:
+      'Engine-bundle drift guard — scripts/build-plugin-zip.mjs refuses to package when a fresh bundle of figma-sync/plugin/engine/entry.ts (core barrel + baked tokens/contracts/icons) no longer matches this receipt. Re-record deliberately: node scripts/build-plugin-zip.mjs --update-engine-receipt',
+    inputHash: bundle.inputHash,
+    minifiedBytes: bundle.minifiedBytes,
+    inputFiles: bundle.inputFiles,
+    esbuild: bundle.esbuildVersion,
+  };
+  if (update) {
+    await writeFile(ENGINE_RECEIPT, JSON.stringify(next, null, 2) + '\n');
+    return;
+  }
+  let recorded = null;
+  try {
+    recorded = JSON.parse(await readFile(ENGINE_RECEIPT, 'utf8'));
+  } catch {
+    throw new Error(
+      'plugin-zip: figma-sync/plugin/engine.receipt.json is missing — the engine bundle has no recorded receipt. Run `node scripts/build-plugin-zip.mjs --update-engine-receipt` and commit the receipt.',
+    );
+  }
+  if (recorded.inputHash !== bundle.inputHash || recorded.minifiedBytes !== bundle.minifiedBytes) {
+    throw new Error(
+      `plugin-zip: the plugin engine bundle is STALE vs core — a fresh bundle hashes ${bundle.inputHash.slice(0, 12)}… (${bundle.minifiedBytes} bytes) but the committed receipt records ${String(recorded.inputHash).slice(0, 12)}… (${recorded.minifiedBytes} bytes). Core (or tokens/contracts/icons) changed without re-recording. Review the change, then run \`node scripts/build-plugin-zip.mjs --update-engine-receipt\` and commit engine.receipt.json.`,
+    );
+  }
+}
+
+/** Inject the bundle into ui.html's #plugin-engine block (packaged copy
+ *  only — the repo file keeps the stub so the diff stays reviewable). */
+export function injectEngine(uiHtml, engineCode) {
+  const openTag = '<script id="plugin-engine">';
+  const start = uiHtml.indexOf(openTag);
+  if (start < 0) {
+    throw new Error(
+      'plugin-zip: figma-sync/plugin/ui.html has no #plugin-engine block — nowhere to inject the engine bundle',
+    );
+  }
+  const end = uiHtml.indexOf('</script>', start);
+  return uiHtml.slice(0, start + openTag.length) + '\n' + engineCode + '\n' + uiHtml.slice(end);
+}
+
+// ---------------------------------------------------------------------------
 // Drift guard + build.
 // ---------------------------------------------------------------------------
 export async function verifyEmbeddedDumpSource() {
@@ -125,20 +274,31 @@ export async function verifyEmbeddedDumpSource() {
   }
 }
 
-export async function buildPluginZip(outFile = DEFAULT_OUT) {
+export async function buildPluginZip(outFile = DEFAULT_OUT, { updateEngineReceipt = false } = {}) {
   await verifyEmbeddedDumpSource();
+  const engine = await buildEngineBundle();
+  await verifyEngineReceipt(engine, { update: updateEngineReceipt });
   const entries = [];
   for (const name of FILES) {
-    entries.push({ name: ZIP_PREFIX + name, data: await readFile(join(PLUGIN_DIR, name)) });
+    let data = await readFile(join(PLUGIN_DIR, name));
+    if (name === 'ui.html') {
+      data = Buffer.from(injectEngine(data.toString('utf8'), engine.code), 'utf8');
+    }
+    entries.push({ name: ZIP_PREFIX + name, data });
   }
   const zip = makeZip(entries);
   await mkdir(dirname(outFile), { recursive: true });
   await writeFile(outFile, zip);
-  return { outFile, bytes: zip.length, files: FILES.length };
+  return { outFile, bytes: zip.length, files: FILES.length, engineBytes: engine.minifiedBytes };
 }
 
-// CLI: node scripts/build-plugin-zip.mjs [outFile]
+// CLI: node scripts/build-plugin-zip.mjs [outFile] [--update-engine-receipt]
 if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
-  const { outFile, bytes, files } = await buildPluginZip(process.argv[2] ?? DEFAULT_OUT);
-  console.log(`plugin-zip: wrote ${outFile} (${files} files, ${bytes} bytes) — embedded dump script verified against extract/figma/dump.plugin.js`);
+  const args = process.argv.slice(2);
+  const updateEngineReceipt = args.includes('--update-engine-receipt');
+  const outArg = args.find((a) => !a.startsWith('--'));
+  const { outFile, bytes, files, engineBytes } = await buildPluginZip(outArg ?? DEFAULT_OUT, { updateEngineReceipt });
+  console.log(
+    `plugin-zip: wrote ${outFile} (${files} files, ${bytes} bytes; engine bundle ${(engineBytes / 1024 / 1024).toFixed(2)} MB minified) — dump script verified, engine receipt ${updateEngineReceipt ? 'RE-RECORDED' : 'verified'}`,
+  );
 }

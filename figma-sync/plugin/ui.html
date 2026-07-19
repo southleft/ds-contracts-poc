@@ -14,6 +14,7 @@
   }
   .tabs {
     display: flex;
+    flex-wrap: wrap;
     border-bottom: 1px solid var(--figma-color-border, #d9d9d9);
     flex: none;
   }
@@ -21,7 +22,7 @@
     appearance: none; background: none; border: none;
     border-bottom: 2px solid transparent;
     font: inherit; font-weight: 600; color: var(--figma-color-text-secondary, #6b6b6b);
-    padding: 10px 14px 8px; cursor: pointer; border-radius: 0;
+    padding: 10px 10px 8px; cursor: pointer; border-radius: 0;
   }
   .tab[aria-selected="true"] {
     color: var(--figma-color-text, #333);
@@ -94,15 +95,140 @@
     font-family: "SF Mono", Menlo, Consolas, monospace;
     font-size: 14px; letter-spacing: 3px; text-transform: uppercase;
   }
+  .pair-code {
+    font-family: "SF Mono", Menlo, Consolas, monospace;
+    font-size: 12px; letter-spacing: 2px; text-transform: uppercase;
+    width: 110px;
+  }
+  button.secondary {
+    appearance: none; font: inherit; font-weight: 600;
+    color: var(--figma-color-text, #333);
+    background: none;
+    border: 1px solid var(--figma-color-border, #d9d9d9); border-radius: 0;
+    padding: 6px 12px; cursor: pointer;
+  }
+  button.secondary:disabled { opacity: 0.5; cursor: default; }
+  input[type="password"] {
+    font: inherit; color: var(--figma-color-text, #333);
+    background: var(--figma-color-bg-secondary, #f5f5f5);
+    border: 1px solid var(--figma-color-border, #d9d9d9);
+    border-radius: 0; padding: 6px 8px; outline: none;
+  }
+  input[type="password"]:focus { border-color: var(--figma-color-border-selected, #0d99ff); }
+  .rows { display: flex; flex-direction: column; gap: 2px; margin: 6px 0; }
+  .rows label { display: flex; gap: 6px; align-items: baseline; cursor: pointer; }
+  .rows label.disabled { color: var(--figma-color-text-secondary, #6b6b6b); cursor: default; }
+  a.download {
+    color: var(--figma-color-text-brand, #007be5); font-weight: 600;
+  }
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; flex: none; }
 </style>
 
 <div class="tabs" role="tablist">
-  <button class="tab" id="tab-paste" role="tab" aria-selected="true" aria-controls="panel-paste">Paste a script</button>
+  <button class="tab" id="tab-generate" role="tab" aria-selected="true" aria-controls="panel-generate">Generate</button>
+  <button class="tab" id="tab-update" role="tab" aria-selected="false" aria-controls="panel-update">Update library</button>
+  <button class="tab" id="tab-propose" role="tab" aria-selected="false" aria-controls="panel-propose">Propose</button>
+  <button class="tab" id="tab-paste" role="tab" aria-selected="false" aria-controls="panel-paste">Paste a script</button>
   <button class="tab" id="tab-send" role="tab" aria-selected="false" aria-controls="panel-send">Send to Playground</button>
   <button class="tab" id="tab-runner" role="tab" aria-selected="false" aria-controls="panel-runner">Local runner</button>
 </div>
 
-<div class="panel active" id="panel-paste" role="tabpanel">
+<div class="panel active" id="panel-generate" role="tabpanel">
+  <div class="hint">
+    Paste a contract JSON (or a CONTRACTS-BUNDLE) and the plugin builds it in
+    THIS file — schema-checked, emitted and run locally, token-bound,
+    dependency-ordered. Or receive a bundle by pairing code
+    (<span class="mono">ds-contracts figma push &lt;file&gt; --code &lt;CODE&gt;</span>).
+  </div>
+  <div class="row">
+    <input type="text" class="pair-code" id="gen-code" maxlength="6" spellcheck="false" autocomplete="off" placeholder="ABC234" />
+    <button class="secondary" id="gen-receive">Receive by code</button>
+    <span class="status" id="gen-receive-status"></span>
+  </div>
+  <textarea id="gen-input" spellcheck="false"
+    placeholder='// Paste a contract document ({ "id": "…", … }) or a CONTRACTS-BUNDLE here.'></textarea>
+  <div class="row">
+    <label class="hint" style="display:flex;gap:6px;align-items:center;">
+      <input type="checkbox" id="gen-tokens" checked />
+      Sync token variables first (fresh files need it; re-running upserts)
+    </label>
+  </div>
+  <div class="row">
+    <button class="primary" id="gen-run">Generate in this file</button>
+    <span class="status" id="gen-status"></span>
+  </div>
+  <div class="result" id="gen-result" hidden></div>
+</div>
+
+<div class="panel" id="panel-update" role="tabpanel">
+  <div class="hint">
+    Receive a contracts bundle (a CI artifact via
+    <span class="mono">ds-contracts figma push</span>, or paste it), then
+    CHECK it against this file first: the plugin looks up each contract by its
+    identity marker and reports every change in plain words. Nothing is
+    applied until you review the report and press Apply.
+  </div>
+  <div class="row">
+    <input type="text" class="pair-code" id="upd-code" maxlength="6" spellcheck="false" autocomplete="off" placeholder="ABC234" />
+    <button class="secondary" id="upd-receive">Receive by code</button>
+    <span class="status" id="upd-receive-status"></span>
+  </div>
+  <textarea id="upd-input" spellcheck="false"
+    placeholder='// Paste a CONTRACTS-BUNDLE (or a single contract) here, or receive one by code above.'></textarea>
+  <div class="row">
+    <button class="primary" id="upd-check">Check against this file</button>
+    <button class="secondary" id="upd-apply" disabled>Apply selected</button>
+    <span class="status" id="upd-status"></span>
+  </div>
+  <div class="result" id="upd-result" hidden></div>
+</div>
+
+<div class="panel" id="panel-propose" role="tabpanel">
+  <div class="hint">
+    Select a generated set on the canvas (or name it), and the plugin reads it
+    back with the repo&rsquo;s dump script, proposes a contract from what is
+    drawn, and diffs it against the contract the set was generated from — a
+    reviewable change, exported as JSON or opened as a GitHub PR.
+  </div>
+  <div class="field">
+    <label for="prop-set">Component set name</label>
+    <input type="text" id="prop-set" spellcheck="false" autocomplete="off" placeholder="Badge (empty = your current selection)" />
+  </div>
+  <div class="field">
+    <label for="prop-base">Base contract (the contract this set was generated from)</label>
+    <textarea id="prop-base" spellcheck="false" style="min-height:70px;flex:none;"
+      placeholder='// Paste the base contract JSON. For sets generated from a repo contract the plugin pre-fills this after reading the set.'></textarea>
+  </div>
+  <div class="row">
+    <button class="primary" id="prop-run">Read the set &amp; diff</button>
+    <span class="status" id="prop-status"></span>
+  </div>
+  <div class="result" id="prop-result" hidden></div>
+  <div class="field" id="prop-pr-section" hidden>
+    <label>Open a GitHub PR (optional)</label>
+    <div class="grid2">
+      <input type="text" id="pr-repo" spellcheck="false" autocomplete="off" placeholder="owner/repo" />
+      <input type="text" id="pr-path" spellcheck="false" autocomplete="off" placeholder="contracts/badge.contract.json" />
+      <input type="text" id="pr-base" spellcheck="false" autocomplete="off" placeholder="base branch (empty = default)" />
+      <input type="password" id="pr-token" spellcheck="false" autocomplete="off" placeholder="fine-grained token (optional for dry run)" />
+    </div>
+    <label class="hint" style="display:flex;gap:6px;align-items:center;">
+      <input type="checkbox" id="pr-dry" checked />
+      Dry run — show the exact plan, send nothing
+    </label>
+    <div class="row">
+      <button class="secondary" id="pr-run">Open PR</button>
+      <span class="status" id="pr-status"></span>
+    </div>
+    <div class="result" id="pr-result" hidden style="flex:none;max-height:140px;"></div>
+    <span class="hint">The token is used for these requests only, kept in this
+      window&rsquo;s memory, and never stored — closing the plugin forgets it.
+      Use a fine-grained token scoped to ONE repo with Contents and Pull
+      requests read/write.</span>
+  </div>
+</div>
+
+<div class="panel" id="panel-paste" role="tabpanel">
   <div class="note">
     Runs the pasted script with full plugin permissions in THIS file —
     paste only scripts you generated yourself.
@@ -179,30 +305,60 @@
   </div>
 </div>
 
+<!-- PLUGIN ENGINE SLOT — scripts/build-plugin-zip.mjs replaces this block's
+     body with the bundled plugin engine (figma-sync/plugin/engine/entry.ts →
+     the core barrel + baked tokens/contracts/icons, landing on window.DSC).
+     The repo file keeps this stub so the diff stays reviewable; a direct
+     repo load without the zip build shows a named message instead of broken
+     tabs. The committed engine.receipt.json drift-guards the bundle. -->
+<script id="plugin-engine">/* injected at package time */</script>
+
 <script>
   var $ = function (id) { return document.getElementById(id); };
 
   // --- tabs -----------------------------------------------------------------
+  var TAB_NAMES = ['generate', 'update', 'propose', 'paste', 'send', 'runner'];
   function select(which) {
-    ['paste', 'send', 'runner'].forEach(function (name) {
+    TAB_NAMES.forEach(function (name) {
       var on = name === which;
       $('tab-' + name).setAttribute('aria-selected', String(on));
       $('panel-' + name).classList.toggle('active', on);
     });
   }
-  $('tab-paste').onclick = function () { select('paste'); };
-  $('tab-send').onclick = function () { select('send'); };
-  $('tab-runner').onclick = function () { select('runner'); };
+  TAB_NAMES.forEach(function (name) {
+    $('tab-' + name).onclick = function () { select(name); };
+  });
 
-  // --- paste mode -----------------------------------------------------------
+  // The engine bundle (window.DSC) is injected at package time — direct
+  // repo loads without the zip build get a named message, not broken tabs.
+  function engine() {
+    if (window.DSC) return window.DSC;
+    return null;
+  }
+  var NO_ENGINE =
+    'This copy of the plugin has no engine bundle — download the packaged zip from the playground (or run `node scripts/build-plugin-zip.mjs` and load the unzipped build).';
+
+  // The current file's key (posted by code.js on startup) — overrides each
+  // generated script's WRONG FILE guard so the set lands in THIS file.
+  var currentFileKey = '';
+
+  // --- busy handling --------------------------------------------------------
   var pasteRun = $('paste-run');
   var runnerRun = $('runner-run');
   var sendRun = $('send-run');
+  var genRun = $('gen-run');
+  var updCheck = $('upd-check');
+  var updApply = $('upd-apply');
+  var propRun = $('prop-run');
 
   function setBusy(on) {
     pasteRun.disabled = on;
     runnerRun.disabled = on;
     sendRun.disabled = on;
+    genRun.disabled = on;
+    updCheck.disabled = on;
+    propRun.disabled = on;
+    if (on) updApply.disabled = true;
   }
 
   pasteRun.onclick = function () {
@@ -393,15 +549,468 @@
     $('runner-result').scrollTop = $('runner-result').scrollHeight;
   }
 
+  // ==========================================================================
+  // Engine tabs (Generate / Update library / Propose) — window.DSC computes,
+  // code.js executes through the same run-script machinery as the paste tab.
+  // ==========================================================================
+
+  // --- engine-run correlation ----------------------------------------------
+  var enginePending = {}; // id → callback(msg)
+  var engineSeq = 0;
+  function engineRun(code, opts, cb) {
+    var id = 'e' + (++engineSeq);
+    enginePending[id] = cb;
+    parent.postMessage({ pluginMessage: {
+      type: 'engine-run', id: id, code: code,
+      focus: !!(opts && opts.focus), readOnly: !!(opts && opts.readOnly),
+    } }, '*');
+  }
+
+  /** Run steps sequentially; stop on first failure. done(ok, results). */
+  function runSteps(steps, log, done) {
+    var results = [];
+    var next = function (i) {
+      if (i >= steps.length) { done(true, results); return; }
+      var step = steps[i];
+      log('Running: ' + step.title + ' …');
+      engineRun(step.code, { focus: step.kind === 'component' && i >= steps.length - 2 }, function (msg) {
+        if (!msg.ok) {
+          log('FAILED: ' + step.title + ' — ' + msg.error, 'error');
+          results.push({ step: step, ok: false, error: msg.error });
+          done(false, results);
+          return;
+        }
+        results.push({ step: step, ok: true, result: msg.result, focus: msg.focus });
+        log('Done: ' + step.title, 'ok');
+        next(i + 1);
+      });
+    };
+    next(0);
+  }
+
+  // --- result-box helpers ---------------------------------------------------
+  function resultBox(id, ok, headline) {
+    var box = $(id);
+    box.hidden = false;
+    box.className = 'result ' + (ok === null ? '' : ok ? 'ok' : 'err');
+    box.textContent = '';
+    var h = document.createElement('div');
+    h.className = 'headline';
+    h.textContent = headline;
+    box.appendChild(h);
+    return box;
+  }
+  function addLine(box, text, level) {
+    var el = document.createElement('div');
+    if (level) el.className = 'log-line ' + level;
+    el.textContent = text;
+    box.appendChild(el);
+    box.scrollTop = box.scrollHeight;
+    return el;
+  }
+  function addIssues(box, issues) {
+    (issues || []).forEach(function (issue) {
+      addLine(box, issue.headline, 'error');
+      if (issue.detail) {
+        var pre = document.createElement('pre');
+        pre.textContent = issue.detail;
+        box.appendChild(pre);
+      }
+    });
+  }
+
+  // --- receive by pairing code (bridge GET via code.js) ---------------------
+  var pollTimers = {};
+  function receiveByCode(codeInputId, statusId, onBundle) {
+    var code = $(codeInputId).value.trim().toUpperCase();
+    if (!CODE_ALPHABET_RE.test(code)) {
+      $(statusId).textContent = 'That does not look like a pairing code (6 letters/digits).';
+      return;
+    }
+    if (pollTimers[codeInputId]) { clearInterval(pollTimers[codeInputId]); pollTimers[codeInputId] = null; }
+    $(statusId).textContent = 'Waiting for a push under ' + code + '… (ds-contracts figma push <file> --code ' + code + ')';
+    var poll = function () {
+      parent.postMessage({ pluginMessage: { type: 'bridge-poll', code: code, replyTo: codeInputId } }, '*');
+    };
+    bridgePollHandlers[codeInputId] = function (msg) {
+      if (msg.status === 'delivered') {
+        clearInterval(pollTimers[codeInputId]); pollTimers[codeInputId] = null;
+        if (msg.kind !== 'contracts-bundle') {
+          $(statusId).textContent = 'That code carried a canvas dump, not a contracts bundle — use Send to Playground for dumps.';
+          return;
+        }
+        $(statusId).textContent = 'Bundle received.';
+        onBundle(msg.dump);
+      } else if (msg.status === 'waiting') {
+        // keep polling
+      } else {
+        clearInterval(pollTimers[codeInputId]); pollTimers[codeInputId] = null;
+        $(statusId).textContent = msg.message || 'The bridge refused — try a fresh code.';
+      }
+    };
+    poll();
+    pollTimers[codeInputId] = setInterval(poll, 2500);
+    setTimeout(function () {
+      if (pollTimers[codeInputId]) {
+        clearInterval(pollTimers[codeInputId]); pollTimers[codeInputId] = null;
+        $(statusId).textContent = 'Stopped waiting (codes expire after 15 minutes) — push again and retry.';
+      }
+    }, 15 * 60 * 1000);
+  }
+  var bridgePollHandlers = {};
+
+  // --- Generate from contract ----------------------------------------------
+  $('gen-receive').onclick = function () {
+    receiveByCode('gen-code', 'gen-receive-status', function (bundle) {
+      $('gen-input').value = JSON.stringify(bundle, null, 2);
+      $('gen-receive-status').textContent = 'Bundle received — review it below, then press Generate.';
+    });
+  };
+
+  genRun.onclick = function () {
+    var DSC = engine();
+    if (!DSC) { resultBox('gen-result', false, 'No engine.'); addLine($('gen-result'), NO_ENGINE); return; }
+    var parsed = DSC.parseIncomingText($('gen-input').value);
+    if (!parsed.ok) {
+      var boxE = resultBox('gen-result', false, 'Nothing generated.');
+      addIssues(boxE, [parsed.issue]);
+      return;
+    }
+    var plan = DSC.planGenerate(parsed.contracts, {
+      withTokens: $('gen-tokens').checked,
+      fileKey: currentFileKey,
+    });
+    if (!plan.ok) {
+      var boxR = resultBox('gen-result', false, 'Refused — the contract did not pass the referee.');
+      addIssues(boxR, plan.issues);
+      return;
+    }
+    var box = resultBox('gen-result', null, 'Generating ' + parsed.contracts.length + ' contract(s)…');
+    plan.notes.forEach(function (n) { addLine(box, n, 'warn'); });
+    setBusy(true);
+    $('gen-status').textContent = 'Running…';
+    runSteps(plan.steps, function (line, level) { addLine(box, line, level); }, function (ok, results) {
+      setBusy(false);
+      $('gen-status').textContent = '';
+      box.className = 'result ' + (ok ? 'ok' : 'err');
+      var built = results.filter(function (r) { return r.ok && r.step.kind === 'component'; });
+      box.firstChild.textContent = ok
+        ? 'Done — ' + built.length + ' component(s) synced. The last one is selected on the canvas.'
+        : 'Stopped at the first failure — the report above names it. A thrown script commits nothing (Figma runs them atomically).';
+    });
+  };
+
+  // --- Update library -------------------------------------------------------
+  var updState = null; // { contracts, plan } after a check
+
+  $('upd-receive').onclick = function () {
+    receiveByCode('upd-code', 'upd-receive-status', function (bundle) {
+      $('upd-input').value = JSON.stringify(bundle, null, 2);
+      $('upd-receive-status').textContent = 'Bundle received — press “Check against this file”.';
+      updState = null;
+      updApply.disabled = true;
+    });
+  };
+
+  updCheck.onclick = function () {
+    var DSC = engine();
+    if (!DSC) { resultBox('upd-result', false, 'No engine.'); addLine($('upd-result'), NO_ENGINE); return; }
+    updState = null;
+    updApply.disabled = true;
+    var parsed = DSC.parseIncomingText($('upd-input').value);
+    if (!parsed.ok) {
+      addIssues(resultBox('upd-result', false, 'Nothing checked.'), [parsed.issue]);
+      return;
+    }
+    setBusy(true);
+    $('upd-status').textContent = 'Reading this file’s markers (read-only)…';
+    engineRun(DSC.inventoryScriptSource(), { readOnly: true }, function (msg) {
+      setBusy(false);
+      $('upd-status').textContent = '';
+      if (!msg.ok) {
+        addIssues(resultBox('upd-result', false, 'Could not read the file.'), [{ headline: msg.error }]);
+        return;
+      }
+      var inventory = (msg.result && msg.result.inventory) || [];
+      var plan = DSC.updatePlan(parsed.contracts, inventory);
+      var box = resultBox('upd-result', null, 'Change report — nothing applied yet:');
+      var rowsWrap = document.createElement('div');
+      rowsWrap.className = 'rows';
+      plan.rows.forEach(function (row) {
+        var label = document.createElement('label');
+        var cb = document.createElement('input');
+        cb.type = 'checkbox';
+        cb.dataset.contractId = row.contractId;
+        cb.checked = row.action === 'amend' || row.action === 'create';
+        cb.disabled = row.action === 'skip' || row.action === 'refused';
+        if (cb.disabled) label.className = 'disabled';
+        label.appendChild(cb);
+        var span = document.createElement('span');
+        span.textContent = row.line;
+        label.appendChild(span);
+        rowsWrap.appendChild(label);
+      });
+      box.appendChild(rowsWrap);
+      plan.lines.slice(plan.rows.length).forEach(function (l) { addLine(box, l); });
+      updState = { contracts: parsed.contracts, plan: plan, rowsWrap: rowsWrap };
+      updApply.disabled = !plan.rows.some(function (r) { return r.action === 'amend' || r.action === 'create'; });
+    });
+  };
+
+  updApply.onclick = function () {
+    var DSC = engine();
+    if (!DSC || !updState) return;
+    var selected = [];
+    updState.rowsWrap.querySelectorAll('input[type=checkbox]').forEach(function (cb) {
+      if (cb.checked && !cb.disabled) selected.push(cb.dataset.contractId);
+    });
+    var apply = DSC.updateApplySteps(updState.contracts, selected, { fileKey: currentFileKey });
+    if (!apply.ok) {
+      addIssues(resultBox('upd-result', false, 'Nothing applied.'), apply.issues);
+      return;
+    }
+    var box = resultBox('upd-result', null, 'Applying ' + selected.length + ' component(s)…');
+    apply.notes.forEach(function (n) { addLine(box, n, 'warn'); });
+    setBusy(true);
+    $('upd-status').textContent = 'Applying…';
+    runSteps(apply.steps, function (line, level) { addLine(box, line, level); }, function (ok, results) {
+      setBusy(false);
+      $('upd-status').textContent = '';
+      updApply.disabled = true;
+      box.className = 'result ' + (ok ? 'ok' : 'err');
+      var amended = 0, created = 0, skipped = 0;
+      results.forEach(function (r) {
+        if (!r.ok || r.step.kind !== 'component' || !r.result) return;
+        var rep = (r.result.results && r.result.results[0]) || r.result;
+        if (rep.skipped) skipped++;
+        else if (rep.amended) amended++;
+        else created++;
+      });
+      box.firstChild.textContent = ok
+        ? 'Applied — ' + amended + ' amended in place, ' + created + ' created, ' + skipped + ' already up to date. Instances keep their overrides (same nodes, same property ids).'
+        : 'Stopped at the first failure — nothing after it ran; the failed script committed nothing.';
+    });
+  };
+
+  // --- Propose change -------------------------------------------------------
+  var pendingProposeNames = null;
+
+  propRun.onclick = function () {
+    var DSC = engine();
+    if (!DSC) { resultBox('prop-result', false, 'No engine.'); addLine($('prop-result'), NO_ENGINE); return; }
+    var name = $('prop-set').value.trim();
+    if (name) { proposeFor(name); return; }
+    pendingProposeNames = true;
+    $('prop-status').textContent = 'Checking your selection…';
+    parent.postMessage({ pluginMessage: { type: 'query-selection-sets' } }, '*');
+  };
+
+  function proposeFor(setName) {
+    var DSC = engine();
+    var source = $('dump-source').textContent.replace(/^\n/, '');
+    var scoped = source.replace(/^const TARGET_SETS = \[[^\n]*\];$/m,
+      'const TARGET_SETS = ' + JSON.stringify([setName]) + ';');
+    if (scoped === source) {
+      addIssues(resultBox('prop-result', false, 'Broken build.'), [{ headline: 'Could not scope the dump script — re-download the plugin from the playground.' }]);
+      return;
+    }
+    setBusy(true);
+    $('prop-status').textContent = 'Reading ' + setName + ' (read-only)…';
+    // Read the file markers alongside the dump so a repo-generated set can
+    // pre-fill its own base contract.
+    engineRun(DSC.inventoryScriptSource(), { readOnly: true }, function (invMsg) {
+      var inventory = invMsg.ok && invMsg.result ? invMsg.result.inventory || [] : [];
+      engineRun(scoped, { readOnly: true }, function (msg) {
+        setBusy(false);
+        $('prop-status').textContent = '';
+        if (!msg.ok) {
+          addIssues(resultBox('prop-result', false, 'Could not read the set.'), [{ headline: msg.error }]);
+          return;
+        }
+        var dump = msg.result || {};
+        var baseText = $('prop-base').value.trim();
+        if (!baseText) {
+          var row = null;
+          inventory.forEach(function (r) { if (r.name === setName || (r.contractId && r.name.indexOf(setName) === 0)) row = row || r; });
+          var baked = row && row.contractId ? DSC.bakedContract(row.contractId) : null;
+          if (baked) {
+            $('prop-base').value = baked;
+            baseText = baked;
+          }
+        }
+        if (!baseText) {
+          addIssues(resultBox('prop-result', false, 'No base contract.'), [{
+            headline: 'Paste the contract this set was generated from into the base box — the diff needs both sides. (Sets generated by this plugin from a repo contract pre-fill automatically.)',
+          }]);
+          return;
+        }
+        var baseRaw;
+        try { baseRaw = JSON.parse(baseText); } catch (e) {
+          addIssues(resultBox('prop-result', false, 'No base contract.'), [{ headline: 'The base contract box is not valid JSON.', detail: String(e && e.message || e) }]);
+          return;
+        }
+        var diff = DSC.proposeDiff(dump, setName, baseRaw);
+        if (!diff.ok) {
+          addIssues(resultBox('prop-result', false, 'No proposal.'), [diff.issue]);
+          return;
+        }
+        lastProposal = diff;
+        var box = resultBox('prop-result', true, 'Proposed change — ' + diff.setName + ':');
+        diff.summaryLines.forEach(function (l) { addLine(box, l); });
+        var a = document.createElement('a');
+        a.className = 'download';
+        a.download = (baseRaw.id || 'contract') + '.proposal.json';
+        a.href = 'data:application/json;charset=utf-8,' + encodeURIComponent(diff.exportJson);
+        a.textContent = 'Download the proposed contract diff (JSON)';
+        a.style.display = 'block';
+        a.style.marginTop = '6px';
+        box.appendChild(a);
+        $('prop-pr-section').hidden = false;
+        if (!$('pr-path').value) {
+          $('pr-path').value = 'contracts/' + String(baseRaw.id || 'component').replace(/^[^.]+\./, '') + '.contract.json';
+        }
+      });
+    });
+  }
+
+  // --- GitHub PR (BYO fine-grained token, session-only) ---------------------
+  var lastProposal = null;
+
+  function prInput() {
+    var repoFull = $('pr-repo').value.trim();
+    var m = repoFull.match(/^([^\/\s]+)\/([^\/\s]+)$/);
+    if (!m) return { error: 'Repository must be owner/repo (e.g. acme/design-system).' };
+    var baseRaw = JSON.parse($('prop-base').value);
+    return {
+      owner: m[1], repo: m[2],
+      base: $('pr-base').value.trim(),
+      path: $('pr-path').value.trim() || ('contracts/' + String(baseRaw.id || 'component').replace(/^[^.]+\./, '') + '.contract.json'),
+      contractJson: JSON.stringify(lastProposal.proposal, null, 2) + '\n',
+      contractId: String(baseRaw.id || ''),
+      baseVersion: String(baseRaw.version || ''),
+      summaryLines: lastProposal.summaryLines,
+    };
+  }
+
+  $('pr-run').onclick = function () {
+    var DSC = engine();
+    if (!DSC || !lastProposal) return;
+    var input;
+    try { input = prInput(); } catch (e) { input = { error: 'The base contract box is not valid JSON.' }; }
+    if (input.error) {
+      addLine(resultBox('pr-result', false, 'Not started.'), input.error);
+      return;
+    }
+    var box;
+    if ($('pr-dry').checked) {
+      box = resultBox('pr-result', true, 'Dry run:');
+      DSC.prDryRunLines(input).forEach(function (l) { addLine(box, l); });
+      return;
+    }
+    var token = $('pr-token').value.trim();
+    if (!token) {
+      addLine(resultBox('pr-result', false, 'Not started.'), 'A live PR needs a fine-grained token — or keep Dry run checked to see the plan.');
+      return;
+    }
+    box = resultBox('pr-result', null, 'Opening the PR…');
+    runPrLive(DSC, input, token, box);
+  };
+
+  function ghFetch(token, method, url, body) {
+    return fetch(url, {
+      method: method,
+      headers: {
+        'Authorization': 'Bearer ' + token,
+        'Accept': 'application/vnd.github+json',
+        'Content-Type': 'application/json',
+      },
+      body: body ? JSON.stringify(body) : undefined,
+    }).then(function (res) {
+      return res.json().catch(function () { return {}; }).then(function (json) {
+        return { ok: res.ok, status: res.status, json: json };
+      });
+    });
+  }
+
+  function runPrLive(DSC, input, token, box) {
+    var api = 'https://api.github.com';
+    var repoUrl = api + '/repos/' + input.owner + '/' + input.repo;
+    var plan = DSC.prPlan(input);
+    var fail = function (step, r) {
+      box.className = 'result err';
+      box.firstChild.textContent = 'PR not opened.';
+      addLine(box, step + ' failed (HTTP ' + r.status + '): ' + ((r.json && r.json.message) || 'no message from GitHub'), 'error');
+      if (r.status === 404) addLine(box, 'A 404 usually means the token cannot see this repository — check the owner/repo spelling and the token’s repository access.');
+    };
+    var baseStep = input.base
+      ? ghFetch(token, 'GET', repoUrl + '/git/ref/heads/' + input.base).then(function (r) {
+          if (!r.ok) { fail('Confirming the base branch', r); return null; }
+          return { base: input.base, sha: r.json.object.sha };
+        })
+      : ghFetch(token, 'GET', repoUrl).then(function (r) {
+          if (!r.ok) { fail('Resolving the default branch', r); return null; }
+          var base = r.json.default_branch;
+          return ghFetch(token, 'GET', repoUrl + '/git/ref/heads/' + base).then(function (r2) {
+            if (!r2.ok) { fail('Reading the default branch head', r2); return null; }
+            return { base: base, sha: r2.json.object.sha };
+          });
+        });
+    baseStep.then(function (baseInfo) {
+      if (!baseInfo) return;
+      addLine(box, 'Base: ' + baseInfo.base + ' @ ' + baseInfo.sha.slice(0, 7), 'ok');
+      ghFetch(token, 'POST', repoUrl + '/git/refs', { ref: 'refs/heads/' + plan.branch, sha: baseInfo.sha }).then(function (r) {
+        if (!r.ok) { fail('Creating branch ' + plan.branch, r); return; }
+        addLine(box, 'Branch created: ' + plan.branch, 'ok');
+        // Existing file sha (update) vs new file (create).
+        ghFetch(token, 'GET', repoUrl + '/contents/' + input.path + '?ref=' + encodeURIComponent(baseInfo.base)).then(function (rf) {
+          var sha = rf.ok && rf.json && rf.json.sha ? rf.json.sha : undefined;
+          var content = btoa(unescape(encodeURIComponent(input.contractJson)));
+          var putBody = { message: 'propose: ' + input.contractId + ' contract change from Figma', branch: plan.branch, content: content };
+          if (sha) putBody.sha = sha;
+          ghFetch(token, 'PUT', repoUrl + '/contents/' + input.path, putBody).then(function (rc) {
+            if (!rc.ok) { fail('Committing ' + input.path, rc); return; }
+            addLine(box, 'Committed ' + input.path, 'ok');
+            ghFetch(token, 'POST', repoUrl + '/pulls', { title: plan.title, head: plan.branch, base: baseInfo.base, body: plan.body }).then(function (rp) {
+              if (!rp.ok) { fail('Opening the pull request', rp); return; }
+              box.className = 'result ok';
+              box.firstChild.textContent = 'PR opened.';
+              addLine(box, rp.json.html_url, 'ok');
+            });
+          });
+        });
+      });
+    });
+  }
+
   // --- messages from code.js --------------------------------------------------
   window.onmessage = function (event) {
     var msg = event.data && event.data.pluginMessage;
     if (!msg) return;
-    if (msg.type === 'paste-result') {
+    if (msg.type === 'init') {
+      currentFileKey = msg.fileKey || '';
+    } else if (msg.type === 'engine-result') {
+      var cb = enginePending[msg.id];
+      if (cb) { delete enginePending[msg.id]; cb(msg); }
+    } else if (msg.type === 'bridge-poll-result') {
+      var handler = bridgePollHandlers[msg.replyTo];
+      if (handler) handler(msg);
+    } else if (msg.type === 'paste-result') {
       setBusy(false);
       $('paste-status').textContent = '';
       showPasteResult(msg);
     } else if (msg.type === 'selection-sets') {
+      if (pendingProposeNames) {
+        pendingProposeNames = null;
+        var propNames = Array.isArray(msg.names) ? msg.names : [];
+        if (propNames.length === 0) {
+          $('prop-status').textContent = '';
+          addIssues(resultBox('prop-result', false, 'Nothing selected.'), [{ headline: 'Select the generated set on the canvas (or type its name) and try again.' }]);
+        } else {
+          $('prop-set').value = propNames[0];
+          proposeFor(propNames[0]);
+        }
+        return;
+      }
       if (pendingSendCode === null) return;
       var code = pendingSendCode;
       pendingSendCode = null;
@@ -426,6 +1035,10 @@
       $('runner-headline').textContent = msg.summary;
     }
   };
+
+  // Ask code.js for the current file's key (it also posts one unprompted at
+  // startup; this covers the race when the iframe loads after that post).
+  parent.postMessage({ pluginMessage: { type: 'ui-ready' } }, '*');
 </script>
 
 <!-- The repo's extract/figma/dump.plugin.js, embedded VERBATIM (read-only dump
