@@ -1,0 +1,47 @@
+/* TextField — from polaris.text-field v0.1.0 (core/emit-html.ts) */
+
+.text-field, .text-field *, .text-field *::before, .text-field *::after {
+  box-sizing: border-box;
+}
+
+.text-field {
+  display: flex;
+  align-items: center;
+  border: 0;
+  color: var(--p-color-text);
+}
+
+.text-field__input {
+  display: flex;
+  align-items: center;
+  color: var(--p-color-text);
+  padding-block: var(--p-space-150);
+  padding-inline: var(--p-space-300);
+  font-size: var(--p-font-size-400);
+  font-weight: var(--p-font-weight-regular);
+  line-height: var(--p-font-line-height-600);
+}
+
+.text-field--variant-borderless .text-field__input {
+  min-height: var(--p-space-800);
+}
+
+.text-field:disabled .text-field__input {
+  color: var(--p-color-text-disabled);
+}
+
+.text-field__backdrop {
+  background-color: var(--p-color-input-bg-surface);
+  border-radius: var(--p-border-radius-200);
+  border-width: var(--p-border-width-0165);
+  border-color: var(--p-color-input-border);
+  border-style: solid;
+}
+
+.text-field--variant-borderless .text-field__backdrop {
+  min-height: var(--p-space-800);
+}
+
+/* showcase chrome */
+.showcase { display: flex; flex-direction: column; gap: 24px; align-items: flex-start; font-family: sans-serif; }
+.showcase__label { margin: 0 0 8px; font: 12px/1 monospace; opacity: 0.6; }

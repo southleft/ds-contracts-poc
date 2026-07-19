@@ -1,0 +1,9 @@
+{
+  "code": {
+    "adapter": "react-tsx",
+    "root": "examples/polaris/.polaris-clone/polaris-react/src/components"
+  },
+  "tokens": ["examples/polaris/tokens/polaris-light.dtcg.json"],
+  "idPrefix": "polaris",
+  "out": "examples/polaris/out"
+}

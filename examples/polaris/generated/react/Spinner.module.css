@@ -1,0 +1,33 @@
+/* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/spinner.contract.json (polaris.spinner v0.1.0)
+ * Regenerate with: npm run generate
+ */
+
+.root {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+}
+
+.glyphLarge svg {
+  width: 44px;
+  height: 44px;
+}
+
+.glyphLarge {
+  display: inline-flex;
+  flex-shrink: 0;
+  fill: var(--p-color-bg-fill-brand);
+}
+
+.glyphSmall svg {
+  width: 20px;
+  height: 20px;
+}
+
+.glyphSmall {
+  display: inline-flex;
+  flex-shrink: 0;
+  fill: var(--p-color-bg-fill-brand);
+}

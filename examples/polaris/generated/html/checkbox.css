@@ -1,0 +1,40 @@
+/* Checkbox — from polaris.checkbox v0.1.0 (core/emit-html.ts) */
+
+.checkbox, .checkbox *, .checkbox *::before, .checkbox *::after {
+  box-sizing: border-box;
+}
+
+.checkbox {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+}
+
+.checkbox__input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.checkbox__backdrop {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  border-width: var(--p-border-width-0165);
+  border-color: var(--p-color-input-border);
+  border-style: solid;
+}
+
+.checkbox:hover:not(:disabled) .checkbox__backdrop {
+  border-color: var(--p-color-input-border-hover);
+}
+
+/* showcase chrome */
+.showcase { display: flex; flex-direction: column; gap: 24px; align-items: flex-start; font-family: sans-serif; }
+.showcase__label { margin: 0 0 8px; font: 12px/1 monospace; opacity: 0.6; }

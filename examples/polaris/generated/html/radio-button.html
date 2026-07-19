@@ -1,0 +1,38 @@
+<!--
+  RadioButton — static HTML+CSS emitted from contract polaris.radio-button v0.1.0 by core/emit-html.ts.
+  Token values arrive via CSS custom properties (the same custom-property names the CSS Modules
+  bind) — include the token stylesheet (src/styles/tokens.css) on the page or nothing resolves.
+  Fidelity: no events, no interactivity beyond CSS states (:hover/:focus-visible/:disabled).
+  Slots render their declared defaultContent; an empty slot renders its wrapper empty (absent content
+  is absent — named in an inline comment, never painted as placeholder text). Booleans render per showcase item.
+-->
+<section class="showcase showcase--radio-button">
+  <div class="showcase__item">
+    <p class="showcase__label">default</p>
+    <span class="radio-button">
+      <input class="radio-button__input" type="radio" name="" value="">
+      <div class="radio-button__backdrop"></div>
+    </span>
+  </div>
+  <div class="showcase__item">
+    <p class="showcase__label">labelHidden=true</p>
+    <span class="radio-button" data-label-hidden="true">
+      <input class="radio-button__input" type="radio" name="" value="">
+      <div class="radio-button__backdrop"></div>
+    </span>
+  </div>
+  <div class="showcase__item">
+    <p class="showcase__label">checked=true</p>
+    <span class="radio-button" data-checked="true">
+      <input class="radio-button__input" type="radio" name="" value="">
+      <div class="radio-button__backdrop"></div>
+    </span>
+  </div>
+  <div class="showcase__item">
+    <p class="showcase__label">disabled=true</p>
+    <span class="radio-button" data-disabled="true">
+      <input class="radio-button__input" type="radio" name="" value="">
+      <div class="radio-button__backdrop"></div>
+    </span>
+  </div>
+</section>

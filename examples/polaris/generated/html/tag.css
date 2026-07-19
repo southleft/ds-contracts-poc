@@ -1,0 +1,18 @@
+/* Tag — from polaris.tag v0.1.0 (core/emit-html.ts) */
+
+.tag, .tag *, .tag *::before, .tag *::after {
+  box-sizing: border-box;
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  border: 0;
+  background-color: var(--p-color-bg-fill-tertiary);
+  color: var(--p-color-text);
+  border-radius: var(--p-border-radius-200);
+}
+
+/* showcase chrome */
+.showcase { display: flex; flex-direction: column; gap: 24px; align-items: flex-start; font-family: sans-serif; }
+.showcase__label { margin: 0 0 8px; font: 12px/1 monospace; opacity: 0.6; }

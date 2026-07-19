@@ -1,0 +1,2771 @@
+# Polaris showcase — promotion ledger
+
+Extraction: Shopify/polaris @ `2b1ea88625e0613853ca8577c9acd1980a90f382` (polaris-react 13.10.1, MIT), 2026-07-18.
+
+Every committed contract in `examples/polaris/contracts/` is the mechanical extraction proposal
+(API surface verbatim — no dropped prop was re-added) plus the styling promotion recorded here.
+A "carried" line is a binding whose value was mechanically resolved from the component's own
+module.css (or a cited source map) to a single published Polaris token; a "refused" line is a
+styling fact the contract does NOT carry, with the reason. Nothing is silent.
+
+## Button (`polaris.button`)
+
+- source: `polaris-react/src/components/Button/Button.module.css` + extracted API (`out/contracts/button.contract.json`)
+- carried: 13 binding(s) · refused by name: 333 · curated decisions: 4
+
+### Curated decisions
+- NOTE: label: Polaris renders children through the Text primitive (variant bodySm, fontWeight medium) — children is platform API (named skip in extraction), so the showcase renders a static sample label and typography channels are NOT carried (they live in Text.module.css, another component's file)
+- NOTE: tone styling is conditioned on BOTH tone and variant classes (`.toneCritical:is(.variantPrimary)`) — a value conditioned on more than one axis is refused by name (the mint-code discipline), so tone carries no bindings
+- NOTE: primary/tertiary background pairs a gradient layer with the fill token (`var(--pc-button-bg-gradient), var(--p-color-bg-fill-brand)`) — a two-layer background is not a single binding; refused by name where it occurs
+- NOTE: icon/disclosure props are named extraction skips (composed types); the icon anatomy is not promoted
+
+### Carried bindings (each cites its CSS rule)
+- root (.Button): border-radius → `{p.border-radius-200}` (from `.Button { border-radius: var(--p-border-radius-200) }`)
+- root (.Button): gap → `{p.space-050}` (from `.Button { gap: var(--pc-button-gap) }` via --pc-button-gap)
+- root [variant=plain]: color → `{p.color-text-link}` (from `.Button { color: var(--pc-button-color) }` via --pc-button-color)
+- root [variant=primary]: background-color → `{p.color-bg-fill-brand}` (the COLOR layer of the multi-layer `.Button { background: var(--pc-button-bg) }` — CSS shorthand semantics)
+- root [variant=primary]: color → `{p.color-text-brand-on-bg-fill}` (from `.Button { color: var(--pc-button-color) }` via --pc-button-color)
+- root [variant=primary]: box-shadow → `{p.shadow-button-primary}` (from `.Button { box-shadow: var(--pc-button-box-shadow) }` via --pc-button-box-shadow)
+- root [variant=secondary]: background → `{p.color-bg-fill}` (from `.Button { background: var(--pc-button-bg) }` via --pc-button-bg)
+- root [variant=secondary]: color → `{p.color-text}` (from `.Button { color: var(--pc-button-color) }` via --pc-button-color)
+- root [variant=secondary]: box-shadow → `{p.shadow-button}` (from `.Button { box-shadow: var(--pc-button-box-shadow) }` via --pc-button-box-shadow)
+- root [variant=tertiary]: color → `{p.color-text}` (from `.Button { color: var(--pc-button-color) }` via --pc-button-color)
+- root :disabled: background → `{p.color-bg-fill-disabled}` (from `.Button:disabled, .Button[disabled], .disabled { background: var(--pc-button-bg_disabled) }` via --pc-button-bg_disabled)
+- root :disabled: color → `{p.color-text-disabled}` (from `.Button:disabled, .Button[disabled], .disabled { color: var(--pc-button-color_disabled) }` via --pc-button-color_disabled)
+- root :disabled: fill → `{p.color-icon-disabled}` (from `.Button.Button:disabled, .Button.Button[disabled], .disabled.disabled svg { fill: var(--pc-button-icon-fill_disabled) }` via --pc-button-icon-fill_disabled)
+
+### Refused by name
+- at-rule: `@media (--p-breakpoints-md-up) { .sizeMicro { min-height: var(--p-height-600) } }` — conditional styling is not a contract channel
+- at-rule: `@media (--p-breakpoints-md-up) { .sizeMicro { min-width: var(--p-width-600) } }` — conditional styling is not a contract channel
+- at-rule: `@media (--p-breakpoints-md-up) { .sizeSlim, .sizeMedium { min-height: var(--p-height-700) } }` — conditional styling is not a contract channel
+- at-rule: `@media (--p-breakpoints-md-up) { .sizeSlim, .sizeMedium { min-width: var(--p-width-700) } }` — conditional styling is not a contract channel
+- at-rule: `@media (--p-breakpoints-md-up) { .sizeLarge { min-height: var(--p-height-800) } }` — conditional styling is not a contract channel
+- at-rule: `@media (--p-breakpoints-md-up) { .sizeLarge { min-width: var(--p-width-800) } }` — conditional styling is not a contract channel
+- root (.Button): combinator in ".pressable:active:not(.variantTertiary, .variantPlain, .variantMonochromePlain)
+  > *" — only descendant part selectors are promoted
+- root (.Button): combinator in "[data-buttongroup-connected-top='true'] > *:first-child .Button" — only descendant part selectors are promoted
+- root (.Button): combinator in "[data-buttongroup-connected-top='true'] > *:last-child .Button" — only descendant part selectors are promoted
+- root (.Button): combinator in "[data-buttongroup-variant='segmented']
+  > *:not(:first-child)
+  .Button:is(.variantPrimary)" — only descendant part selectors are promoted
+- root (.Button): combinator in "[data-buttongroup-variant='segmented'] > *:not(:first-child) .Button" — only descendant part selectors are promoted
+- root (.Button): combinator in "[data-buttongroup-variant='segmented'] > *:not(:last-child) .Button" — only descendant part selectors are promoted
+- root (.Button): pseudo/attribute ":" in ".Button:focus-visible::after" — not promotable
+- root (.Button): selector ".toneCritical:is(.variantSecondary, .variantTertiary, .variantPlain)" nests deeper than root + one part
+- root (.Button): selector ".toneSuccess:is(.variantSecondary, .variantTertiary, .variantPlain)" nests deeper than root + one part
+- root (.Button): selector ".variantPlain:is(:hover, :active, :focus-visible):not(.removeUnderline)" nests deeper than root + one part
+- root (.Button): background — literal value "transparent" — a raw value is reported, never turned into an invented token (`.Button`)
+- root (.Button): color — literal value "inherit" — a raw value is reported, never turned into an invented token (`.Button`)
+- root (.Button): border — shorthand "none" is not `<width> solid <color>`; no per-part contract channel (`.Button`)
+- root (.Button): padding-block — var(--pc-button-padding-block) resolves to NO token and has no reachable definition in this class context (`.Button`)
+- root (.Button): padding-inline — var(--pc-button-padding-inline) resolves to NO token and has no reachable definition in this class context (`.Button`)
+- root (.Button): box-shadow — literal value "transparent" — a raw value is reported, never turned into an invented token (`.Button`)
+- root [variant=plain]: combinator in ".pressable:active:not(.variantTertiary, .variantPlain, .variantMonochromePlain)
+  > *" — only descendant part selectors are promoted
+- root [variant=plain]: combinator in "[data-buttongroup-connected-top='true'] > *:first-child .Button" — only descendant part selectors are promoted
+- root [variant=plain]: combinator in "[data-buttongroup-connected-top='true'] > *:last-child .Button" — only descendant part selectors are promoted
+- root [variant=plain]: combinator in "[data-buttongroup-variant='segmented']
+  > *:not(:first-child)
+  .Button:is(.variantPrimary)" — only descendant part selectors are promoted
+- root [variant=plain]: combinator in "[data-buttongroup-variant='segmented'] > *:not(:first-child) .Button" — only descendant part selectors are promoted
+- root [variant=plain]: combinator in "[data-buttongroup-variant='segmented'] > *:not(:last-child) .Button" — only descendant part selectors are promoted
+- root [variant=plain]: pseudo/attribute ":" in ".Button:focus-visible::after" — not promotable
+- root [variant=plain]: selector ".toneCritical:is(.variantSecondary, .variantTertiary, .variantPlain)" nests deeper than root + one part
+- root [variant=plain]: selector ".toneSuccess:is(.variantSecondary, .variantTertiary, .variantPlain)" nests deeper than root + one part
+- root [variant=plain]: selector ".variantPlain:is(:hover, :active, :focus-visible):not(.removeUnderline)" nests deeper than root + one part
+- root [variant=plain]: background — literal value "transparent" — a raw value is reported, never turned into an invented token (`.Button`)
+- root [variant=plain]: border — shorthand "none" is not `<width> solid <color>`; no per-part contract channel (`.Button`)
+- root [variant=plain]: padding-block — var(--pc-button-padding-block) resolves to NO token and has no reachable definition in this class context (`.Button`)
+- root [variant=plain]: padding-inline — var(--pc-button-padding-inline) resolves to NO token and has no reachable definition in this class context (`.Button`)
+- root [variant=plain]: box-shadow — literal value "transparent" — a raw value is reported, never turned into an invented token (`.Button`)
+- root [variant=primary]: combinator in ".pressable:active:not(.variantTertiary, .variantPlain, .variantMonochromePlain)
+  > *" — only descendant part selectors are promoted
+- root [variant=primary]: combinator in "[data-buttongroup-connected-top='true'] > *:first-child .Button" — only descendant part selectors are promoted
+- root [variant=primary]: combinator in "[data-buttongroup-connected-top='true'] > *:last-child .Button" — only descendant part selectors are promoted
+- root [variant=primary]: combinator in "[data-buttongroup-variant='segmented']
+  > *:not(:first-child)
+  .Button:is(.variantPrimary)" — only descendant part selectors are promoted
+- root [variant=primary]: combinator in "[data-buttongroup-variant='segmented'] > *:not(:first-child) .Button" — only descendant part selectors are promoted
+- root [variant=primary]: combinator in "[data-buttongroup-variant='segmented'] > *:not(:last-child) .Button" — only descendant part selectors are promoted
+- root [variant=primary]: pseudo/attribute ":" in ".Button:focus-visible::after" — not promotable
+- root [variant=primary]: selector ".toneCritical:is(.variantSecondary, .variantTertiary, .variantPlain)" nests deeper than root + one part
+- root [variant=primary]: selector ".toneSuccess:is(.variantSecondary, .variantTertiary, .variantPlain)" nests deeper than root + one part
+- root [variant=primary]: selector ".variantPlain:is(:hover, :active, :focus-visible):not(.removeUnderline)" nests deeper than root + one part
+- root [variant=primary]: background image layer `var(--pc-button-bg-gradient)` — a gradient/image overlay is not a single token binding; not carried (`.Button`)
+- root [variant=primary]: border — shorthand "none" is not `<width> solid <color>`; no per-part contract channel (`.Button`)
+- root [variant=primary]: padding-block — var(--pc-button-padding-block) resolves to NO token and has no reachable definition in this class context (`.Button`)
+- root [variant=primary]: padding-inline — var(--pc-button-padding-inline) resolves to NO token and has no reachable definition in this class context (`.Button`)
+- root [variant=secondary]: combinator in ".pressable:active:not(.variantTertiary, .variantPlain, .variantMonochromePlain)
+  > *" — only descendant part selectors are promoted
+- root [variant=secondary]: combinator in "[data-buttongroup-connected-top='true'] > *:first-child .Button" — only descendant part selectors are promoted
+- root [variant=secondary]: combinator in "[data-buttongroup-connected-top='true'] > *:last-child .Button" — only descendant part selectors are promoted
+- root [variant=secondary]: combinator in "[data-buttongroup-variant='segmented']
+  > *:not(:first-child)
+  .Button:is(.variantPrimary)" — only descendant part selectors are promoted
+- root [variant=secondary]: combinator in "[data-buttongroup-variant='segmented'] > *:not(:first-child) .Button" — only descendant part selectors are promoted
+- root [variant=secondary]: combinator in "[data-buttongroup-variant='segmented'] > *:not(:last-child) .Button" — only descendant part selectors are promoted
+- root [variant=secondary]: pseudo/attribute ":" in ".Button:focus-visible::after" — not promotable
+- root [variant=secondary]: selector ".toneCritical:is(.variantSecondary, .variantTertiary, .variantPlain)" nests deeper than root + one part
+- root [variant=secondary]: selector ".toneSuccess:is(.variantSecondary, .variantTertiary, .variantPlain)" nests deeper than root + one part
+- root [variant=secondary]: selector ".variantPlain:is(:hover, :active, :focus-visible):not(.removeUnderline)" nests deeper than root + one part
+- root [variant=secondary]: border — shorthand "none" is not `<width> solid <color>`; no per-part contract channel (`.Button`)
+- root [variant=secondary]: padding-block — var(--pc-button-padding-block) resolves to NO token and has no reachable definition in this class context (`.Button`)
+- root [variant=secondary]: padding-inline — var(--pc-button-padding-inline) resolves to NO token and has no reachable definition in this class context (`.Button`)
+- root [variant=tertiary]: combinator in ".pressable:active:not(.variantTertiary, .variantPlain, .variantMonochromePlain)
+  > *" — only descendant part selectors are promoted
+- root [variant=tertiary]: combinator in "[data-buttongroup-connected-top='true'] > *:first-child .Button" — only descendant part selectors are promoted
+- root [variant=tertiary]: combinator in "[data-buttongroup-connected-top='true'] > *:last-child .Button" — only descendant part selectors are promoted
+- root [variant=tertiary]: combinator in "[data-buttongroup-variant='segmented']
+  > *:not(:first-child)
+  .Button:is(.variantPrimary)" — only descendant part selectors are promoted
+- root [variant=tertiary]: combinator in "[data-buttongroup-variant='segmented'] > *:not(:first-child) .Button" — only descendant part selectors are promoted
+- root [variant=tertiary]: combinator in "[data-buttongroup-variant='segmented'] > *:not(:last-child) .Button" — only descendant part selectors are promoted
+- root [variant=tertiary]: pseudo/attribute ":" in ".Button:focus-visible::after" — not promotable
+- root [variant=tertiary]: selector ".toneCritical:is(.variantSecondary, .variantTertiary, .variantPlain)" nests deeper than root + one part
+- root [variant=tertiary]: selector ".toneSuccess:is(.variantSecondary, .variantTertiary, .variantPlain)" nests deeper than root + one part
+- root [variant=tertiary]: selector ".variantPlain:is(:hover, :active, :focus-visible):not(.removeUnderline)" nests deeper than root + one part
+- root [variant=tertiary]: background — literal value "transparent" — a raw value is reported, never turned into an invented token (`.Button`)
+- root [variant=tertiary]: border — shorthand "none" is not `<width> solid <color>`; no per-part contract channel (`.Button`)
+- root [variant=tertiary]: padding-block — var(--pc-button-padding-block) resolves to NO token and has no reachable definition in this class context (`.Button`)
+- root [variant=tertiary]: padding-inline — var(--pc-button-padding-inline) resolves to NO token and has no reachable definition in this class context (`.Button`)
+- root [variant=tertiary]: box-shadow — literal value "transparent" — a raw value is reported, never turned into an invented token (`.Button`)
+- root [variant=monochromePlain]: combinator in ".pressable:active:not(.variantTertiary, .variantPlain, .variantMonochromePlain)
+  > *" — only descendant part selectors are promoted
+- root [variant=monochromePlain]: combinator in "[data-buttongroup-connected-top='true'] > *:first-child .Button" — only descendant part selectors are promoted
+- root [variant=monochromePlain]: combinator in "[data-buttongroup-connected-top='true'] > *:last-child .Button" — only descendant part selectors are promoted
+- root [variant=monochromePlain]: combinator in "[data-buttongroup-variant='segmented']
+  > *:not(:first-child)
+  .Button:is(.variantPrimary)" — only descendant part selectors are promoted
+- root [variant=monochromePlain]: combinator in "[data-buttongroup-variant='segmented'] > *:not(:first-child) .Button" — only descendant part selectors are promoted
+- root [variant=monochromePlain]: combinator in "[data-buttongroup-variant='segmented'] > *:not(:last-child) .Button" — only descendant part selectors are promoted
+- root [variant=monochromePlain]: pseudo/attribute ":" in ".Button:focus-visible::after" — not promotable
+- root [variant=monochromePlain]: selector ".toneCritical:is(.variantSecondary, .variantTertiary, .variantPlain)" nests deeper than root + one part
+- root [variant=monochromePlain]: selector ".toneSuccess:is(.variantSecondary, .variantTertiary, .variantPlain)" nests deeper than root + one part
+- root [variant=monochromePlain]: selector ".variantPlain:is(:hover, :active, :focus-visible):not(.removeUnderline)" nests deeper than root + one part
+- root [variant=monochromePlain]: background — literal value "transparent" — a raw value is reported, never turned into an invented token (`.Button`)
+- root [variant=monochromePlain]: color — literal value "inherit" — a raw value is reported, never turned into an invented token (`.Button`)
+- root [variant=monochromePlain]: border — shorthand "none" is not `<width> solid <color>`; no per-part contract channel (`.Button`)
+- root [variant=monochromePlain]: padding-block — var(--pc-button-padding-block) resolves to NO token and has no reachable definition in this class context (`.Button`)
+- root [variant=monochromePlain]: padding-inline — var(--pc-button-padding-inline) resolves to NO token and has no reachable definition in this class context (`.Button`)
+- root [variant=monochromePlain]: box-shadow — literal value "transparent" — a raw value is reported, never turned into an invented token (`.Button`)
+- root [tone=critical]: combinator in ".pressable:active:not(.variantTertiary, .variantPlain, .variantMonochromePlain)
+  > *" — only descendant part selectors are promoted
+- root [tone=critical]: combinator in "[data-buttongroup-connected-top='true'] > *:first-child .Button" — only descendant part selectors are promoted
+- root [tone=critical]: combinator in "[data-buttongroup-connected-top='true'] > *:last-child .Button" — only descendant part selectors are promoted
+- root [tone=critical]: combinator in "[data-buttongroup-variant='segmented']
+  > *:not(:first-child)
+  .Button:is(.variantPrimary)" — only descendant part selectors are promoted
+- root [tone=critical]: combinator in "[data-buttongroup-variant='segmented'] > *:not(:first-child) .Button" — only descendant part selectors are promoted
+- root [tone=critical]: combinator in "[data-buttongroup-variant='segmented'] > *:not(:last-child) .Button" — only descendant part selectors are promoted
+- root [tone=critical]: pseudo/attribute ":" in ".Button:focus-visible::after" — not promotable
+- root [tone=critical]: selector ".toneCritical:is(.variantSecondary, .variantTertiary, .variantPlain)" nests deeper than root + one part
+- root [tone=critical]: selector ".toneSuccess:is(.variantSecondary, .variantTertiary, .variantPlain)" nests deeper than root + one part
+- root [tone=critical]: selector ".variantPlain:is(:hover, :active, :focus-visible):not(.removeUnderline)" nests deeper than root + one part
+- root [tone=critical]: background — literal value "transparent" — a raw value is reported, never turned into an invented token (`.Button`)
+- root [tone=critical]: color — literal value "inherit" — a raw value is reported, never turned into an invented token (`.Button`)
+- root [tone=critical]: border — shorthand "none" is not `<width> solid <color>`; no per-part contract channel (`.Button`)
+- root [tone=critical]: padding-block — var(--pc-button-padding-block) resolves to NO token and has no reachable definition in this class context (`.Button`)
+- root [tone=critical]: padding-inline — var(--pc-button-padding-inline) resolves to NO token and has no reachable definition in this class context (`.Button`)
+- root [tone=critical]: box-shadow — literal value "transparent" — a raw value is reported, never turned into an invented token (`.Button`)
+- root [tone=success]: combinator in ".pressable:active:not(.variantTertiary, .variantPlain, .variantMonochromePlain)
+  > *" — only descendant part selectors are promoted
+- root [tone=success]: combinator in "[data-buttongroup-connected-top='true'] > *:first-child .Button" — only descendant part selectors are promoted
+- root [tone=success]: combinator in "[data-buttongroup-connected-top='true'] > *:last-child .Button" — only descendant part selectors are promoted
+- root [tone=success]: combinator in "[data-buttongroup-variant='segmented']
+  > *:not(:first-child)
+  .Button:is(.variantPrimary)" — only descendant part selectors are promoted
+- root [tone=success]: combinator in "[data-buttongroup-variant='segmented'] > *:not(:first-child) .Button" — only descendant part selectors are promoted
+- root [tone=success]: combinator in "[data-buttongroup-variant='segmented'] > *:not(:last-child) .Button" — only descendant part selectors are promoted
+- root [tone=success]: pseudo/attribute ":" in ".Button:focus-visible::after" — not promotable
+- root [tone=success]: selector ".toneCritical:is(.variantSecondary, .variantTertiary, .variantPlain)" nests deeper than root + one part
+- root [tone=success]: selector ".toneSuccess:is(.variantSecondary, .variantTertiary, .variantPlain)" nests deeper than root + one part
+- root [tone=success]: selector ".variantPlain:is(:hover, :active, :focus-visible):not(.removeUnderline)" nests deeper than root + one part
+- root [tone=success]: background — literal value "transparent" — a raw value is reported, never turned into an invented token (`.Button`)
+- root [tone=success]: color — literal value "inherit" — a raw value is reported, never turned into an invented token (`.Button`)
+- root [tone=success]: border — shorthand "none" is not `<width> solid <color>`; no per-part contract channel (`.Button`)
+- root [tone=success]: padding-block — var(--pc-button-padding-block) resolves to NO token and has no reachable definition in this class context (`.Button`)
+- root [tone=success]: padding-inline — var(--pc-button-padding-inline) resolves to NO token and has no reachable definition in this class context (`.Button`)
+- root [tone=success]: box-shadow — literal value "transparent" — a raw value is reported, never turned into an invented token (`.Button`)
+- root [size=micro]: combinator in ".pressable:active:not(.variantTertiary, .variantPlain, .variantMonochromePlain)
+  > *" — only descendant part selectors are promoted
+- root [size=micro]: combinator in "[data-buttongroup-connected-top='true'] > *:first-child .Button" — only descendant part selectors are promoted
+- root [size=micro]: combinator in "[data-buttongroup-connected-top='true'] > *:last-child .Button" — only descendant part selectors are promoted
+- root [size=micro]: combinator in "[data-buttongroup-variant='segmented']
+  > *:not(:first-child)
+  .Button:is(.variantPrimary)" — only descendant part selectors are promoted
+- root [size=micro]: combinator in "[data-buttongroup-variant='segmented'] > *:not(:first-child) .Button" — only descendant part selectors are promoted
+- root [size=micro]: combinator in "[data-buttongroup-variant='segmented'] > *:not(:last-child) .Button" — only descendant part selectors are promoted
+- root [size=micro]: pseudo/attribute ":" in ".Button:focus-visible::after" — not promotable
+- root [size=micro]: selector ".toneCritical:is(.variantSecondary, .variantTertiary, .variantPlain)" nests deeper than root + one part
+- root [size=micro]: selector ".toneSuccess:is(.variantSecondary, .variantTertiary, .variantPlain)" nests deeper than root + one part
+- root [size=micro]: selector ".variantPlain:is(:hover, :active, :focus-visible):not(.removeUnderline)" nests deeper than root + one part
+- root [size=micro]: background — literal value "transparent" — a raw value is reported, never turned into an invented token (`.Button`)
+- root [size=micro]: color — literal value "inherit" — a raw value is reported, never turned into an invented token (`.Button`)
+- root [size=micro]: border — shorthand "none" is not `<width> solid <color>`; no per-part contract channel (`.Button`)
+- root [size=micro]: box-shadow — literal value "transparent" — a raw value is reported, never turned into an invented token (`.Button`)
+- root [size=slim]: combinator in ".pressable:active:not(.variantTertiary, .variantPlain, .variantMonochromePlain)
+  > *" — only descendant part selectors are promoted
+- root [size=slim]: combinator in "[data-buttongroup-connected-top='true'] > *:first-child .Button" — only descendant part selectors are promoted
+- root [size=slim]: combinator in "[data-buttongroup-connected-top='true'] > *:last-child .Button" — only descendant part selectors are promoted
+- root [size=slim]: combinator in "[data-buttongroup-variant='segmented']
+  > *:not(:first-child)
+  .Button:is(.variantPrimary)" — only descendant part selectors are promoted
+- root [size=slim]: combinator in "[data-buttongroup-variant='segmented'] > *:not(:first-child) .Button" — only descendant part selectors are promoted
+- root [size=slim]: combinator in "[data-buttongroup-variant='segmented'] > *:not(:last-child) .Button" — only descendant part selectors are promoted
+- root [size=slim]: pseudo/attribute ":" in ".Button:focus-visible::after" — not promotable
+- root [size=slim]: selector ".toneCritical:is(.variantSecondary, .variantTertiary, .variantPlain)" nests deeper than root + one part
+- root [size=slim]: selector ".toneSuccess:is(.variantSecondary, .variantTertiary, .variantPlain)" nests deeper than root + one part
+- root [size=slim]: selector ".variantPlain:is(:hover, :active, :focus-visible):not(.removeUnderline)" nests deeper than root + one part
+- root [size=slim]: background — literal value "transparent" — a raw value is reported, never turned into an invented token (`.Button`)
+- root [size=slim]: color — literal value "inherit" — a raw value is reported, never turned into an invented token (`.Button`)
+- root [size=slim]: border — shorthand "none" is not `<width> solid <color>`; no per-part contract channel (`.Button`)
+- root [size=slim]: box-shadow — literal value "transparent" — a raw value is reported, never turned into an invented token (`.Button`)
+- root [size=medium]: combinator in ".pressable:active:not(.variantTertiary, .variantPlain, .variantMonochromePlain)
+  > *" — only descendant part selectors are promoted
+- root [size=medium]: combinator in "[data-buttongroup-connected-top='true'] > *:first-child .Button" — only descendant part selectors are promoted
+- root [size=medium]: combinator in "[data-buttongroup-connected-top='true'] > *:last-child .Button" — only descendant part selectors are promoted
+- root [size=medium]: combinator in "[data-buttongroup-variant='segmented']
+  > *:not(:first-child)
+  .Button:is(.variantPrimary)" — only descendant part selectors are promoted
+- root [size=medium]: combinator in "[data-buttongroup-variant='segmented'] > *:not(:first-child) .Button" — only descendant part selectors are promoted
+- root [size=medium]: combinator in "[data-buttongroup-variant='segmented'] > *:not(:last-child) .Button" — only descendant part selectors are promoted
+- root [size=medium]: pseudo/attribute ":" in ".Button:focus-visible::after" — not promotable
+- root [size=medium]: selector ".toneCritical:is(.variantSecondary, .variantTertiary, .variantPlain)" nests deeper than root + one part
+- root [size=medium]: selector ".toneSuccess:is(.variantSecondary, .variantTertiary, .variantPlain)" nests deeper than root + one part
+- root [size=medium]: selector ".variantPlain:is(:hover, :active, :focus-visible):not(.removeUnderline)" nests deeper than root + one part
+- root [size=medium]: background — literal value "transparent" — a raw value is reported, never turned into an invented token (`.Button`)
+- root [size=medium]: color — literal value "inherit" — a raw value is reported, never turned into an invented token (`.Button`)
+- root [size=medium]: border — shorthand "none" is not `<width> solid <color>`; no per-part contract channel (`.Button`)
+- root [size=medium]: box-shadow — literal value "transparent" — a raw value is reported, never turned into an invented token (`.Button`)
+- root [size=large]: combinator in ".pressable:active:not(.variantTertiary, .variantPlain, .variantMonochromePlain)
+  > *" — only descendant part selectors are promoted
+- root [size=large]: combinator in "[data-buttongroup-connected-top='true'] > *:first-child .Button" — only descendant part selectors are promoted
+- root [size=large]: combinator in "[data-buttongroup-connected-top='true'] > *:last-child .Button" — only descendant part selectors are promoted
+- root [size=large]: combinator in "[data-buttongroup-variant='segmented']
+  > *:not(:first-child)
+  .Button:is(.variantPrimary)" — only descendant part selectors are promoted
+- root [size=large]: combinator in "[data-buttongroup-variant='segmented'] > *:not(:first-child) .Button" — only descendant part selectors are promoted
+- root [size=large]: combinator in "[data-buttongroup-variant='segmented'] > *:not(:last-child) .Button" — only descendant part selectors are promoted
+- root [size=large]: pseudo/attribute ":" in ".Button:focus-visible::after" — not promotable
+- root [size=large]: selector ".toneCritical:is(.variantSecondary, .variantTertiary, .variantPlain)" nests deeper than root + one part
+- root [size=large]: selector ".toneSuccess:is(.variantSecondary, .variantTertiary, .variantPlain)" nests deeper than root + one part
+- root [size=large]: selector ".variantPlain:is(:hover, :active, :focus-visible):not(.removeUnderline)" nests deeper than root + one part
+- root [size=large]: background — literal value "transparent" — a raw value is reported, never turned into an invented token (`.Button`)
+- root [size=large]: color — literal value "inherit" — a raw value is reported, never turned into an invented token (`.Button`)
+- root [size=large]: border — shorthand "none" is not `<width> solid <color>`; no per-part contract channel (`.Button`)
+- root [size=large]: box-shadow — literal value "transparent" — a raw value is reported, never turned into an invented token (`.Button`)
+- root: axis size also resolves per-value bindings (micro: padding-block → {p.space-100}, padding-inline → {p.space-200}, min-height → {p.height-700}, min-width → {p.width-700} · slim: padding-block → {p.space-150}, padding-inline → {p.space-300}, min-height → {p.height-800}, min-width → {p.width-800} · medium: padding-block → {p.space-150}, padding-inline → {p.space-300}, min-height → {p.height-800}, min-width → {p.width-800} · large: padding-block → {p.space-150}, padding-inline → {p.space-300}, min-height → {p.height-900}, min-width → {p.height-900}) but the schema carries ONE tokensByProp per part (axis "variant" won by curation order) — a NAMED SCHEMA LIMIT this showcase surfaces
+- root [textAlign=left]: combinator in ".pressable:active:not(.variantTertiary, .variantPlain, .variantMonochromePlain)
+  > *" — only descendant part selectors are promoted
+- root [textAlign=left]: combinator in "[data-buttongroup-connected-top='true'] > *:first-child .Button" — only descendant part selectors are promoted
+- root [textAlign=left]: combinator in "[data-buttongroup-connected-top='true'] > *:last-child .Button" — only descendant part selectors are promoted
+- root [textAlign=left]: combinator in "[data-buttongroup-variant='segmented']
+  > *:not(:first-child)
+  .Button:is(.variantPrimary)" — only descendant part selectors are promoted
+- root [textAlign=left]: combinator in "[data-buttongroup-variant='segmented'] > *:not(:first-child) .Button" — only descendant part selectors are promoted
+- root [textAlign=left]: combinator in "[data-buttongroup-variant='segmented'] > *:not(:last-child) .Button" — only descendant part selectors are promoted
+- root [textAlign=left]: pseudo/attribute ":" in ".Button:focus-visible::after" — not promotable
+- root [textAlign=left]: selector ".toneCritical:is(.variantSecondary, .variantTertiary, .variantPlain)" nests deeper than root + one part
+- root [textAlign=left]: selector ".toneSuccess:is(.variantSecondary, .variantTertiary, .variantPlain)" nests deeper than root + one part
+- root [textAlign=left]: selector ".variantPlain:is(:hover, :active, :focus-visible):not(.removeUnderline)" nests deeper than root + one part
+- root [textAlign=left]: background — literal value "transparent" — a raw value is reported, never turned into an invented token (`.Button`)
+- root [textAlign=left]: color — literal value "inherit" — a raw value is reported, never turned into an invented token (`.Button`)
+- root [textAlign=left]: border — shorthand "none" is not `<width> solid <color>`; no per-part contract channel (`.Button`)
+- root [textAlign=left]: padding-block — var(--pc-button-padding-block) resolves to NO token and has no reachable definition in this class context (`.Button`)
+- root [textAlign=left]: padding-inline — var(--pc-button-padding-inline) resolves to NO token and has no reachable definition in this class context (`.Button`)
+- root [textAlign=left]: box-shadow — literal value "transparent" — a raw value is reported, never turned into an invented token (`.Button`)
+- root [textAlign=right]: combinator in ".pressable:active:not(.variantTertiary, .variantPlain, .variantMonochromePlain)
+  > *" — only descendant part selectors are promoted
+- root [textAlign=right]: combinator in "[data-buttongroup-connected-top='true'] > *:first-child .Button" — only descendant part selectors are promoted
+- root [textAlign=right]: combinator in "[data-buttongroup-connected-top='true'] > *:last-child .Button" — only descendant part selectors are promoted
+- root [textAlign=right]: combinator in "[data-buttongroup-variant='segmented']
+  > *:not(:first-child)
+  .Button:is(.variantPrimary)" — only descendant part selectors are promoted
+- root [textAlign=right]: combinator in "[data-buttongroup-variant='segmented'] > *:not(:first-child) .Button" — only descendant part selectors are promoted
+- root [textAlign=right]: combinator in "[data-buttongroup-variant='segmented'] > *:not(:last-child) .Button" — only descendant part selectors are promoted
+- root [textAlign=right]: pseudo/attribute ":" in ".Button:focus-visible::after" — not promotable
+- root [textAlign=right]: selector ".toneCritical:is(.variantSecondary, .variantTertiary, .variantPlain)" nests deeper than root + one part
+- root [textAlign=right]: selector ".toneSuccess:is(.variantSecondary, .variantTertiary, .variantPlain)" nests deeper than root + one part
+- root [textAlign=right]: selector ".variantPlain:is(:hover, :active, :focus-visible):not(.removeUnderline)" nests deeper than root + one part
+- root [textAlign=right]: background — literal value "transparent" — a raw value is reported, never turned into an invented token (`.Button`)
+- root [textAlign=right]: color — literal value "inherit" — a raw value is reported, never turned into an invented token (`.Button`)
+- root [textAlign=right]: border — shorthand "none" is not `<width> solid <color>`; no per-part contract channel (`.Button`)
+- root [textAlign=right]: padding-block — var(--pc-button-padding-block) resolves to NO token and has no reachable definition in this class context (`.Button`)
+- root [textAlign=right]: padding-inline — var(--pc-button-padding-inline) resolves to NO token and has no reachable definition in this class context (`.Button`)
+- root [textAlign=right]: box-shadow — literal value "transparent" — a raw value is reported, never turned into an invented token (`.Button`)
+- root [textAlign=center]: combinator in ".pressable:active:not(.variantTertiary, .variantPlain, .variantMonochromePlain)
+  > *" — only descendant part selectors are promoted
+- root [textAlign=center]: combinator in "[data-buttongroup-connected-top='true'] > *:first-child .Button" — only descendant part selectors are promoted
+- root [textAlign=center]: combinator in "[data-buttongroup-connected-top='true'] > *:last-child .Button" — only descendant part selectors are promoted
+- root [textAlign=center]: combinator in "[data-buttongroup-variant='segmented']
+  > *:not(:first-child)
+  .Button:is(.variantPrimary)" — only descendant part selectors are promoted
+- root [textAlign=center]: combinator in "[data-buttongroup-variant='segmented'] > *:not(:first-child) .Button" — only descendant part selectors are promoted
+- root [textAlign=center]: combinator in "[data-buttongroup-variant='segmented'] > *:not(:last-child) .Button" — only descendant part selectors are promoted
+- root [textAlign=center]: pseudo/attribute ":" in ".Button:focus-visible::after" — not promotable
+- root [textAlign=center]: selector ".toneCritical:is(.variantSecondary, .variantTertiary, .variantPlain)" nests deeper than root + one part
+- root [textAlign=center]: selector ".toneSuccess:is(.variantSecondary, .variantTertiary, .variantPlain)" nests deeper than root + one part
+- root [textAlign=center]: selector ".variantPlain:is(:hover, :active, :focus-visible):not(.removeUnderline)" nests deeper than root + one part
+- root [textAlign=center]: background — literal value "transparent" — a raw value is reported, never turned into an invented token (`.Button`)
+- root [textAlign=center]: color — literal value "inherit" — a raw value is reported, never turned into an invented token (`.Button`)
+- root [textAlign=center]: border — shorthand "none" is not `<width> solid <color>`; no per-part contract channel (`.Button`)
+- root [textAlign=center]: padding-block — var(--pc-button-padding-block) resolves to NO token and has no reachable definition in this class context (`.Button`)
+- root [textAlign=center]: padding-inline — var(--pc-button-padding-inline) resolves to NO token and has no reachable definition in this class context (`.Button`)
+- root [textAlign=center]: box-shadow — literal value "transparent" — a raw value is reported, never turned into an invented token (`.Button`)
+- root [textAlign=start]: combinator in ".pressable:active:not(.variantTertiary, .variantPlain, .variantMonochromePlain)
+  > *" — only descendant part selectors are promoted
+- root [textAlign=start]: combinator in "[data-buttongroup-connected-top='true'] > *:first-child .Button" — only descendant part selectors are promoted
+- root [textAlign=start]: combinator in "[data-buttongroup-connected-top='true'] > *:last-child .Button" — only descendant part selectors are promoted
+- root [textAlign=start]: combinator in "[data-buttongroup-variant='segmented']
+  > *:not(:first-child)
+  .Button:is(.variantPrimary)" — only descendant part selectors are promoted
+- root [textAlign=start]: combinator in "[data-buttongroup-variant='segmented'] > *:not(:first-child) .Button" — only descendant part selectors are promoted
+- root [textAlign=start]: combinator in "[data-buttongroup-variant='segmented'] > *:not(:last-child) .Button" — only descendant part selectors are promoted
+- root [textAlign=start]: pseudo/attribute ":" in ".Button:focus-visible::after" — not promotable
+- root [textAlign=start]: selector ".toneCritical:is(.variantSecondary, .variantTertiary, .variantPlain)" nests deeper than root + one part
+- root [textAlign=start]: selector ".toneSuccess:is(.variantSecondary, .variantTertiary, .variantPlain)" nests deeper than root + one part
+- root [textAlign=start]: selector ".variantPlain:is(:hover, :active, :focus-visible):not(.removeUnderline)" nests deeper than root + one part
+- root [textAlign=start]: background — literal value "transparent" — a raw value is reported, never turned into an invented token (`.Button`)
+- root [textAlign=start]: color — literal value "inherit" — a raw value is reported, never turned into an invented token (`.Button`)
+- root [textAlign=start]: border — shorthand "none" is not `<width> solid <color>`; no per-part contract channel (`.Button`)
+- root [textAlign=start]: padding-block — var(--pc-button-padding-block) resolves to NO token and has no reachable definition in this class context (`.Button`)
+- root [textAlign=start]: padding-inline — var(--pc-button-padding-inline) resolves to NO token and has no reachable definition in this class context (`.Button`)
+- root [textAlign=start]: box-shadow — literal value "transparent" — a raw value is reported, never turned into an invented token (`.Button`)
+- root [textAlign=end]: combinator in ".pressable:active:not(.variantTertiary, .variantPlain, .variantMonochromePlain)
+  > *" — only descendant part selectors are promoted
+- root [textAlign=end]: combinator in "[data-buttongroup-connected-top='true'] > *:first-child .Button" — only descendant part selectors are promoted
+- root [textAlign=end]: combinator in "[data-buttongroup-connected-top='true'] > *:last-child .Button" — only descendant part selectors are promoted
+- root [textAlign=end]: combinator in "[data-buttongroup-variant='segmented']
+  > *:not(:first-child)
+  .Button:is(.variantPrimary)" — only descendant part selectors are promoted
+- root [textAlign=end]: combinator in "[data-buttongroup-variant='segmented'] > *:not(:first-child) .Button" — only descendant part selectors are promoted
+- root [textAlign=end]: combinator in "[data-buttongroup-variant='segmented'] > *:not(:last-child) .Button" — only descendant part selectors are promoted
+- root [textAlign=end]: pseudo/attribute ":" in ".Button:focus-visible::after" — not promotable
+- root [textAlign=end]: selector ".toneCritical:is(.variantSecondary, .variantTertiary, .variantPlain)" nests deeper than root + one part
+- root [textAlign=end]: selector ".toneSuccess:is(.variantSecondary, .variantTertiary, .variantPlain)" nests deeper than root + one part
+- root [textAlign=end]: selector ".variantPlain:is(:hover, :active, :focus-visible):not(.removeUnderline)" nests deeper than root + one part
+- root [textAlign=end]: background — literal value "transparent" — a raw value is reported, never turned into an invented token (`.Button`)
+- root [textAlign=end]: color — literal value "inherit" — a raw value is reported, never turned into an invented token (`.Button`)
+- root [textAlign=end]: border — shorthand "none" is not `<width> solid <color>`; no per-part contract channel (`.Button`)
+- root [textAlign=end]: padding-block — var(--pc-button-padding-block) resolves to NO token and has no reachable definition in this class context (`.Button`)
+- root [textAlign=end]: padding-inline — var(--pc-button-padding-inline) resolves to NO token and has no reachable definition in this class context (`.Button`)
+- root [textAlign=end]: box-shadow — literal value "transparent" — a raw value is reported, never turned into an invented token (`.Button`)
+- root :hover: combinator in ".pressable:active:not(.variantTertiary, .variantPlain, .variantMonochromePlain)
+  > *" — only descendant part selectors are promoted
+- root :hover: combinator in "[data-buttongroup-connected-top='true'] > *:first-child .Button" — only descendant part selectors are promoted
+- root :hover: combinator in "[data-buttongroup-connected-top='true'] > *:last-child .Button" — only descendant part selectors are promoted
+- root :hover: combinator in "[data-buttongroup-variant='segmented']
+  > *:not(:first-child)
+  .Button:is(.variantPrimary)" — only descendant part selectors are promoted
+- root :hover: combinator in "[data-buttongroup-variant='segmented'] > *:not(:first-child) .Button" — only descendant part selectors are promoted
+- root :hover: combinator in "[data-buttongroup-variant='segmented'] > *:not(:last-child) .Button" — only descendant part selectors are promoted
+- root :hover: pseudo/attribute ":" in ".Button:focus-visible::after" — not promotable
+- root :hover: selector ".toneCritical:is(.variantSecondary, .variantTertiary, .variantPlain)" nests deeper than root + one part
+- root :hover: selector ".toneSuccess:is(.variantSecondary, .variantTertiary, .variantPlain)" nests deeper than root + one part
+- root :hover: selector ".variantPlain:is(:hover, :active, :focus-visible):not(.removeUnderline)" nests deeper than root + one part
+- root :hover: background — literal value "transparent" — a raw value is reported, never turned into an invented token (`.Button:hover`)
+- root :hover: color — literal value "inherit" — a raw value is reported, never turned into an invented token (`.Button:hover`)
+- root :hover: box-shadow — literal value "transparent" — a raw value is reported, never turned into an invented token (`.Button:hover`)
+- root :active: combinator in ".pressable:active:not(.variantTertiary, .variantPlain, .variantMonochromePlain)
+  > *" — only descendant part selectors are promoted
+- root :active: combinator in "[data-buttongroup-connected-top='true'] > *:first-child .Button" — only descendant part selectors are promoted
+- root :active: combinator in "[data-buttongroup-connected-top='true'] > *:last-child .Button" — only descendant part selectors are promoted
+- root :active: combinator in "[data-buttongroup-variant='segmented']
+  > *:not(:first-child)
+  .Button:is(.variantPrimary)" — only descendant part selectors are promoted
+- root :active: combinator in "[data-buttongroup-variant='segmented'] > *:not(:first-child) .Button" — only descendant part selectors are promoted
+- root :active: combinator in "[data-buttongroup-variant='segmented'] > *:not(:last-child) .Button" — only descendant part selectors are promoted
+- root :active: pseudo/attribute ":" in ".Button:focus-visible::after" — not promotable
+- root :active: selector ".toneCritical:is(.variantSecondary, .variantTertiary, .variantPlain)" nests deeper than root + one part
+- root :active: selector ".toneSuccess:is(.variantSecondary, .variantTertiary, .variantPlain)" nests deeper than root + one part
+- root :active: selector ".variantPlain:is(:hover, :active, :focus-visible):not(.removeUnderline)" nests deeper than root + one part
+- root :active: background — literal value "transparent" — a raw value is reported, never turned into an invented token (`.Button:active, .Button[data-state='open']`)
+- root :active: color — literal value "inherit" — a raw value is reported, never turned into an invented token (`.Button:active, .Button[data-state='open']`)
+- root :active: fill — literal value "currentColor" — a raw value is reported, never turned into an invented token (`.Button.Button:active, .Button.Button[data-state='open'] svg`)
+- root :active: box-shadow — literal value "transparent" — a raw value is reported, never turned into an invented token (`.Button:active, .Button[data-state='open']`)
+- root :focus-visible: combinator in ".pressable:active:not(.variantTertiary, .variantPlain, .variantMonochromePlain)
+  > *" — only descendant part selectors are promoted
+- root :focus-visible: combinator in "[data-buttongroup-connected-top='true'] > *:first-child .Button" — only descendant part selectors are promoted
+- root :focus-visible: combinator in "[data-buttongroup-connected-top='true'] > *:last-child .Button" — only descendant part selectors are promoted
+- root :focus-visible: combinator in "[data-buttongroup-variant='segmented']
+  > *:not(:first-child)
+  .Button:is(.variantPrimary)" — only descendant part selectors are promoted
+- root :focus-visible: combinator in "[data-buttongroup-variant='segmented'] > *:not(:first-child) .Button" — only descendant part selectors are promoted
+- root :focus-visible: combinator in "[data-buttongroup-variant='segmented'] > *:not(:last-child) .Button" — only descendant part selectors are promoted
+- root :focus-visible: pseudo/attribute ":" in ".Button:focus-visible::after" — not promotable
+- root :focus-visible: selector ".toneCritical:is(.variantSecondary, .variantTertiary, .variantPlain)" nests deeper than root + one part
+- root :focus-visible: selector ".toneSuccess:is(.variantSecondary, .variantTertiary, .variantPlain)" nests deeper than root + one part
+- root :focus-visible: selector ".variantPlain:is(:hover, :active, :focus-visible):not(.removeUnderline)" nests deeper than root + one part
+- root :focus-visible: background — literal value "transparent" — a raw value is reported, never turned into an invented token (`.Button:focus-visible`)
+- root :focus-visible: color — literal value "inherit" — a raw value is reported, never turned into an invented token (`.Button:focus-visible`)
+- root :disabled: combinator in ".pressable:active:not(.variantTertiary, .variantPlain, .variantMonochromePlain)
+  > *" — only descendant part selectors are promoted
+- root :disabled: combinator in "[data-buttongroup-connected-top='true'] > *:first-child .Button" — only descendant part selectors are promoted
+- root :disabled: combinator in "[data-buttongroup-connected-top='true'] > *:last-child .Button" — only descendant part selectors are promoted
+- root :disabled: combinator in "[data-buttongroup-variant='segmented']
+  > *:not(:first-child)
+  .Button:is(.variantPrimary)" — only descendant part selectors are promoted
+- root :disabled: combinator in "[data-buttongroup-variant='segmented'] > *:not(:first-child) .Button" — only descendant part selectors are promoted
+- root :disabled: combinator in "[data-buttongroup-variant='segmented'] > *:not(:last-child) .Button" — only descendant part selectors are promoted
+- root :disabled: pseudo/attribute ":" in ".Button:focus-visible::after" — not promotable
+- root :disabled: selector ".toneCritical:is(.variantSecondary, .variantTertiary, .variantPlain)" nests deeper than root + one part
+- root :disabled: selector ".toneSuccess:is(.variantSecondary, .variantTertiary, .variantPlain)" nests deeper than root + one part
+- root :disabled: selector ".variantPlain:is(:hover, :active, :focus-visible):not(.removeUnderline)" nests deeper than root + one part
+- root :disabled: box-shadow — literal value "none" — a raw value is reported, never turned into an invented token (`.Button:disabled, .Button[disabled], .disabled`)
+- unmatched rule `.Button.Button svg` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 1 declaration(s) not carried
+- unmatched rule `.Button.Button:hover svg` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 1 declaration(s) not carried
+- unmatched rule `.pressed.pressed, .pressed.pressed:hover, .pressed.pressed:active, .pressed.pressed:focus-visible svg` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 1 declaration(s) not carried
+- unmatched rule `.pressed, .pressed:hover, .pressed:active, .pressed:focus-visible` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 3 declaration(s) not carried
+- unmatched rule `.variantPlain:focus-visible, .variantMonochromePlain:focus-visible` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 1 declaration(s) not carried
+- unmatched rule `.toneSuccess:is(.variantSecondary, .variantTertiary, .variantPlain)` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 4 declaration(s) not carried
+- unmatched rule `.toneCritical:is(.variantSecondary, .variantTertiary, .variantPlain)` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 4 declaration(s) not carried
+- unmatched rule `.toneSuccess:is(.variantPrimary)` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 6 declaration(s) not carried
+- unmatched rule `.toneCritical:is(.variantPrimary)` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 6 declaration(s) not carried
+- unmatched rule `.fullWidth` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 1 declaration(s) not carried
+- unmatched rule `.iconOnly` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 2 declaration(s) not carried
+- unmatched rule `.iconOnly:is(.sizeLarge)` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 2 declaration(s) not carried
+- unmatched rule `.iconOnly:is(.sizeMicro)` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 2 declaration(s) not carried
+- unmatched rule `.iconOnly:is(.variantTertiary, .variantPlain):not(.toneCritical)` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 4 declaration(s) not carried
+- unmatched rule `.iconOnly:is(.variantMonochromePlain)` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 4 declaration(s) not carried
+- unmatched rule `.iconOnly:is(.variantPlain, .variantMonochromePlain)` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 4 declaration(s) not carried
+- unmatched rule `.loading` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 1 declaration(s) not carried
+- unmatched rule `.Spinner svg` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 1 declaration(s) not carried
+- unmatched rule `[data-buttongroup-full-width='true'] .Button` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 1 declaration(s) not carried
+
+## Badge (`polaris.badge`)
+
+- source: `polaris-react/src/components/Badge/Badge.module.css` + extracted API (`out/contracts/badge.contract.json`)
+- carried: 6 binding(s) · refused by name: 37 · curated decisions: 3
+
+### Curated decisions
+- NOTE: tone / progress / icon / size props are NAMED extraction drops: BadgeProps is an intersection with a union of interfaces in the sibling types.ts — outside single-file scope. The committed contract carries the extracted API verbatim (1 prop), so only the DEFAULT badge is comparable; the tone axis is the showcase's clearest architecture-gap exhibit
+- NOTE: label typography rides the Text primitive (bodySm) inside the badge — not carried (another file); root-level font-weight IS carried (declared on .Badge itself)
+- sample label "Fulfilled" carried as a static text part — Polaris's children prop is platform API (named extraction skip); a static surface needs sample ink and both sides of the receipts render the same string
+
+### Carried bindings (each cites its CSS rule)
+- root (.Badge): background-color → `{p.color-bg-fill-transparent-secondary}` (from `.Badge { background-color: var(--p-color-bg-fill-transparent-secondary) }`)
+- root (.Badge): color → `{p.color-text-secondary}` (from `.Badge { color: var(--p-color-text-secondary) }`)
+- root (.Badge): border-radius → `{p.border-radius-200}` (from `.Badge { border-radius: var(--p-border-radius-200) }`)
+- root (.Badge): padding-block → `{p.space-050}` (from `.Badge { padding-block: var(--pc-badge-vertical-padding) }` via --pc-badge-vertical-padding)
+- root (.Badge): padding-inline → `{p.space-200}` (from `.Badge { padding-inline: var(--pc-badge-horizontal-padding) }` via --pc-badge-horizontal-padding)
+- root (.Badge): font-weight → `{p.font-weight-medium}` (from `.Badge { font-weight: var(--p-font-weight-medium) }`)
+
+### Refused by name
+- at-rule: `@media print { .Badge { border: solid var(--p-border-width-025) var(--p-color-border) } }` — conditional styling is not a contract channel
+- root (.Badge): combinator in ".Icon + *" — only descendant part selectors are promoted
+- root :hover: combinator in ".Icon + *" — only descendant part selectors are promoted
+- root :active: combinator in ".Icon + *" — only descendant part selectors are promoted
+- root :focus-visible: combinator in ".Icon + *" — only descendant part selectors are promoted
+- root :disabled: combinator in ".Icon + *" — only descendant part selectors are promoted
+- unmatched rule `.Badge svg` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 1 declaration(s) not carried
+- unmatched rule `.toneSuccess` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 2 declaration(s) not carried
+- unmatched rule `.toneSuccess svg` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 1 declaration(s) not carried
+- unmatched rule `.toneSuccess-strong` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 2 declaration(s) not carried
+- unmatched rule `.toneSuccess-strong svg` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 1 declaration(s) not carried
+- unmatched rule `.toneInfo` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 2 declaration(s) not carried
+- unmatched rule `.toneInfo svg` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 1 declaration(s) not carried
+- unmatched rule `.toneInfo-strong` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 2 declaration(s) not carried
+- unmatched rule `.toneInfo-strong svg` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 1 declaration(s) not carried
+- unmatched rule `.toneAttention` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 2 declaration(s) not carried
+- unmatched rule `.toneAttention svg` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 1 declaration(s) not carried
+- unmatched rule `.toneAttention-strong` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 2 declaration(s) not carried
+- unmatched rule `.toneAttention-strong svg` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 1 declaration(s) not carried
+- unmatched rule `.toneWarning` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 2 declaration(s) not carried
+- unmatched rule `.toneWarning svg` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 1 declaration(s) not carried
+- unmatched rule `.toneWarning-strong` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 2 declaration(s) not carried
+- unmatched rule `.toneWarning-strong svg` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 1 declaration(s) not carried
+- unmatched rule `.toneCritical` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 2 declaration(s) not carried
+- unmatched rule `.toneCritical svg` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 1 declaration(s) not carried
+- unmatched rule `.toneCritical-strong` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 2 declaration(s) not carried
+- unmatched rule `.toneCritical-strong svg` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 1 declaration(s) not carried
+- unmatched rule `.toneNew` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 5 declaration(s) not carried
+- unmatched rule `.toneNew svg` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 1 declaration(s) not carried
+- unmatched rule `.toneMagic` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 2 declaration(s) not carried
+- unmatched rule `.toneMagic svg` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 1 declaration(s) not carried
+- unmatched rule `.toneRead-only` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 2 declaration(s) not carried
+- unmatched rule `.toneRead-only svg` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 1 declaration(s) not carried
+- unmatched rule `.toneEnabled` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 1 declaration(s) not carried
+- unmatched rule `.toneEnabled svg` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 1 declaration(s) not carried
+- unmatched rule `.sizeLarge` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 1 declaration(s) not carried
+- unmatched rule `.withinFilter` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 1 declaration(s) not carried
+
+## Banner (`polaris.banner`)
+
+- source: `polaris-react/src/components/Banner/Banner.module.css` + extracted API (`out/contracts/banner.contract.json`)
+- carried: 9 binding(s) · refused by name: 27 · curated decisions: 6
+
+### Curated decisions
+- NOTE: tone → colors is a STYLING CHANNEL OUTSIDE CSS MODULES (prop-driven Box tokens) — the extractor cannot see it; the promotion cites Banner/utilities.ts and carries the withinPage variant (the default rendering context). The withinContentContainer palette is NOT carried (context-conditional, not a prop)
+- NOTE: the withinPage bevel/border-radius rides a postcss @mixin (shadow-bevel) behind a breakpoint custom-media query — named refusals (mixins and @media are not contract channels)
+- NOTE: title typography (headingSm) rides the Text primitive — not carried; the body sample text is a static showcase part (children is platform API)
+- NOTE: Polaris renders the tone surface on an inner Box, not the outer .Polaris-Banner (which stays bg-surface): the verify rows point at that inner Box by selector, and the structural difference is a named note
+- CITED PROMOTION (root): Banner/utilities.ts bannerAttributes[tone].withinPage — tone colors do NOT live in Banner.module.css; they thread through the Box primitive's background/color props as token aliases ('bg-fill-success' → --p-color-bg-fill-success). Promoted from that source map, alias names verbatim
+- semantics.roleByProp promoted — Banner.tsx: role={tone === 'warning' || tone === 'critical' ? 'alert' : 'status'}
+
+### Carried bindings (each cites its CSS rule)
+- root (.Banner): background-color → `{p.color-bg-surface}` (from `.Banner { background-color: var(--p-color-bg-surface) }`)
+- root [tone=success]: background-color → `{p.color-bg-fill-success}` (cited, see above)
+- root [tone=success]: color → `{p.color-text-success-on-bg-fill}` (cited, see above)
+- root [tone=warning]: background-color → `{p.color-bg-fill-warning}` (cited, see above)
+- root [tone=warning]: color → `{p.color-text-warning-on-bg-fill}` (cited, see above)
+- root [tone=critical]: background-color → `{p.color-bg-fill-critical}` (cited, see above)
+- root [tone=critical]: color → `{p.color-text-critical-on-bg-fill}` (cited, see above)
+- root [tone=info]: background-color → `{p.color-bg-fill-info}` (cited, see above)
+- root [tone=info]: color → `{p.color-text-info-on-bg-fill}` (cited, see above)
+
+### Refused by name
+- mixin: `@mixin shadow-bevel var(--p-shadow-200), var(--p-border-radius-0)` — postcss mixin, expands outside the promoted rule model
+- mixin: `@mixin shadow-bevel var(--p-shadow-200), var(--p-border-radius-300)` — postcss mixin, expands outside the promoted rule model
+- root (.Banner): combinator in ".withinContentContainer + .Banner" — only descendant part selectors are promoted
+- root (.Banner): combinator in ".withinPage + .Banner" — only descendant part selectors are promoted
+- root (.Banner): pseudo/attribute ":focus" in ".Banner:focus" — not promotable
+- root :hover: combinator in ".withinContentContainer + .Banner" — only descendant part selectors are promoted
+- root :hover: combinator in ".withinPage + .Banner" — only descendant part selectors are promoted
+- root :hover: pseudo/attribute ":focus" in ".Banner:focus" — not promotable
+- root :active: combinator in ".withinContentContainer + .Banner" — only descendant part selectors are promoted
+- root :active: combinator in ".withinPage + .Banner" — only descendant part selectors are promoted
+- root :active: pseudo/attribute ":focus" in ".Banner:focus" — not promotable
+- root :focus-visible: combinator in ".withinContentContainer + .Banner" — only descendant part selectors are promoted
+- root :focus-visible: combinator in ".withinPage + .Banner" — only descendant part selectors are promoted
+- root :focus-visible: pseudo/attribute ":focus" in ".Banner:focus" — not promotable
+- root :disabled: combinator in ".withinContentContainer + .Banner" — only descendant part selectors are promoted
+- root :disabled: combinator in ".withinPage + .Banner" — only descendant part selectors are promoted
+- root :disabled: pseudo/attribute ":focus" in ".Banner:focus" — not promotable
+- unmatched rule `.withinContentContainer` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 1 declaration(s) not carried
+- unmatched rule `.text-success-on-bg-fill.text-success-on-bg-fill.text-success-on-bg-fill svg, .text-success-on-bg-fill.text-success-on-bg-fill.text-success-on-bg-fill path` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 1 declaration(s) not carried
+- unmatched rule `.text-success.text-success.text-success svg, .text-success.text-success.text-success path` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 1 declaration(s) not carried
+- unmatched rule `.text-warning-on-bg-fill.text-warning-on-bg-fill.text-warning-on-bg-fill svg, .text-warning-on-bg-fill.text-warning-on-bg-fill.text-warning-on-bg-fill path` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 1 declaration(s) not carried
+- unmatched rule `.text-warning.text-warning.text-warning svg, .text-warning.text-warning.text-warning path` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 1 declaration(s) not carried
+- unmatched rule `.text-critical-on-bg-fill.text-critical-on-bg-fill.text-critical-on-bg-fill svg, .text-critical-on-bg-fill.text-critical-on-bg-fill.text-critical-on-bg-fill path` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 1 declaration(s) not carried
+- unmatched rule `.text-critical.text-critical.text-critical svg, .text-critical.text-critical.text-critical path` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 1 declaration(s) not carried
+- unmatched rule `.text-info-on-bg-fill.text-info-on-bg-fill.text-info-on-bg-fill svg, .text-info-on-bg-fill.text-info-on-bg-fill.text-info-on-bg-fill path` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 1 declaration(s) not carried
+- unmatched rule `.text-info.text-info.text-info svg, .text-info.text-info.text-info path` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 1 declaration(s) not carried
+- unmatched rule `.icon-secondary.icon-secondary.icon-secondary svg, .icon-secondary.icon-secondary.icon-secondary path` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 1 declaration(s) not carried
+
+## Checkbox (`polaris.checkbox`)
+
+- source: `polaris-react/src/components/Checkbox/Checkbox.module.css` + extracted API (`out/contracts/checkbox.contract.json`)
+- carried: 3 binding(s) · refused by name: 502 · curated decisions: 4
+
+### Curated decisions
+- NOTE: label is a ReactNode prop (named slot candidate in extraction) — not carried; the receipts show Polaris WITH its label and this surface without one, by declared scope
+- NOTE: checked/indeterminate visuals ride sibling combinators (`.Input:checked + .Backdrop`) and postcss mixins (control-backdrop) — combinators and mixins are named refusals, so the checked-state styling is not carried
+- NOTE: the Checkbox extraction carries no checked prop (it is controlled via the Choice wrapper) — base (unchecked) rendering is the comparable state
+- part backdrop: literal geometry carried as shape (20×20) — Choice.module.css .Control { --pc-choice-size: 18px; @media (--p-breakpoints-md-down) { --pc-choice-size: 20px } } — the control box is a component-private LITERAL, not a token; the showcase renders at a sub-md viewport, so the 20px value is carried as shape geometry (the schema's literal-decor channel), cited here
+
+### Carried bindings (each cites its CSS rule)
+- part backdrop (.Backdrop): border-width → `{p.border-width-0165}` (from `.Backdrop { border-width: var(--p-border-width-0165) }`)
+- part backdrop (.Backdrop): border-color → `{p.color-input-border}` (from `.Backdrop { border-color: var(--p-color-input-border) }`)
+- part backdrop :hover: border-color → `{p.color-input-border-hover}` (from `.Backdrop:hover { border-color: var(--p-color-input-border-hover) }`)
+
+### Refused by name
+- at-rule: `@media (-ms-high-contrast: active) { .Icon { fill: windowText } }` — conditional styling is not a contract channel
+- mixin: `@mixin focus-ring base, 0, focused` — postcss mixin, expands outside the promoted rule model
+- mixin: `@mixin control-backdrop active` — postcss mixin, expands outside the promoted rule model
+- mixin: `@mixin control-backdrop disabled` — postcss mixin, expands outside the promoted rule model
+- mixin: `@mixin control-backdrop` — postcss mixin, expands outside the promoted rule model
+- mixin: `@mixin control-backdrop error` — postcss mixin, expands outside the promoted rule model
+- root (.Checkbox): combinator in ".ChoiceLabel:hover .Input.toneMagic + .Backdrop" — only descendant part selectors are promoted
+- root (.Checkbox): combinator in ".ChoiceLabel:hover .Input.toneMagic.Input-indeterminate + .Backdrop" — only descendant part selectors are promoted
+- root (.Checkbox): combinator in ".ChoiceLabel:hover .Input.toneMagic:checked + .Backdrop" — only descendant part selectors are promoted
+- root (.Checkbox): combinator in ".ChoiceLabel:hover .error .Input:focus-visible + .Backdrop" — only descendant part selectors are promoted
+- root (.Checkbox): combinator in ".Input.Input-indeterminate + .Backdrop" — only descendant part selectors are promoted
+- root (.Checkbox): combinator in ".Input.Input-indeterminate ~ .Icon svg" — only descendant part selectors are promoted
+- root (.Checkbox): combinator in ".Input.Input-indeterminate ~ .Icon" — only descendant part selectors are promoted
+- root (.Checkbox): combinator in ".Input.Input-indeterminate ~ .Icon.animated" — only descendant part selectors are promoted
+- root (.Checkbox): combinator in ".Input.toneMagic + .Backdrop" — only descendant part selectors are promoted
+- root (.Checkbox): combinator in ".Input.toneMagic.Input-indeterminate + .Backdrop" — only descendant part selectors are promoted
+- root (.Checkbox): combinator in ".Input.toneMagic:checked + .Backdrop" — only descendant part selectors are promoted
+- root (.Checkbox): combinator in ".Input:checked + .Backdrop" — only descendant part selectors are promoted
+- root (.Checkbox): combinator in ".Input:checked ~ .Icon svg" — only descendant part selectors are promoted
+- root (.Checkbox): combinator in ".Input:checked ~ .Icon" — only descendant part selectors are promoted
+- root (.Checkbox): combinator in ".Input:checked ~ .Icon.animated" — only descendant part selectors are promoted
+- root (.Checkbox): combinator in ".Input:disabled + .Backdrop" — only descendant part selectors are promoted
+- root (.Checkbox): combinator in ".Input:disabled + .Backdrop::before" — only descendant part selectors are promoted
+- root (.Checkbox): combinator in ".Input:disabled ~ .Icon svg" — only descendant part selectors are promoted
+- root (.Checkbox): combinator in ".Input:disabled.Input-indeterminate + .Backdrop" — only descendant part selectors are promoted
+- root (.Checkbox): combinator in ".Input:disabled.Input-indeterminate + .Backdrop::before" — only descendant part selectors are promoted
+- root (.Checkbox): combinator in ".Input:disabled:checked + .Backdrop" — only descendant part selectors are promoted
+- root (.Checkbox): combinator in ".Input:disabled:checked + .Backdrop::before" — only descendant part selectors are promoted
+- root (.Checkbox): combinator in ".Input:focus-visible + .Backdrop" — only descendant part selectors are promoted
+- root (.Checkbox): combinator in ".animated svg > path" — only descendant part selectors are promoted
+- root (.Checkbox): combinator in ".animated svg > path.checked" — only descendant part selectors are promoted
+- root (.Checkbox): combinator in ".error .Input + .Backdrop" — only descendant part selectors are promoted
+- root (.Checkbox): combinator in ".error .Input.Input-indeterminate + .Backdrop" — only descendant part selectors are promoted
+- root (.Checkbox): combinator in ".error .Input:active + .Backdrop" — only descendant part selectors are promoted
+- root (.Checkbox): combinator in ".error .Input:checked + .Backdrop" — only descendant part selectors are promoted
+- root (.Checkbox): combinator in ".error .Input:focus-visible + .Backdrop" — only descendant part selectors are promoted
+- root (.Checkbox): selector ".error .Icon svg" nests deeper than root + one part
+- root :hover: combinator in ".ChoiceLabel:hover .Input.toneMagic + .Backdrop" — only descendant part selectors are promoted
+- root :hover: combinator in ".ChoiceLabel:hover .Input.toneMagic.Input-indeterminate + .Backdrop" — only descendant part selectors are promoted
+- root :hover: combinator in ".ChoiceLabel:hover .Input.toneMagic:checked + .Backdrop" — only descendant part selectors are promoted
+- root :hover: combinator in ".ChoiceLabel:hover .error .Input:focus-visible + .Backdrop" — only descendant part selectors are promoted
+- root :hover: combinator in ".Input.Input-indeterminate + .Backdrop" — only descendant part selectors are promoted
+- root :hover: combinator in ".Input.Input-indeterminate ~ .Icon svg" — only descendant part selectors are promoted
+- root :hover: combinator in ".Input.Input-indeterminate ~ .Icon" — only descendant part selectors are promoted
+- root :hover: combinator in ".Input.Input-indeterminate ~ .Icon.animated" — only descendant part selectors are promoted
+- root :hover: combinator in ".Input.toneMagic + .Backdrop" — only descendant part selectors are promoted
+- root :hover: combinator in ".Input.toneMagic.Input-indeterminate + .Backdrop" — only descendant part selectors are promoted
+- root :hover: combinator in ".Input.toneMagic:checked + .Backdrop" — only descendant part selectors are promoted
+- root :hover: combinator in ".Input:checked + .Backdrop" — only descendant part selectors are promoted
+- root :hover: combinator in ".Input:checked ~ .Icon svg" — only descendant part selectors are promoted
+- root :hover: combinator in ".Input:checked ~ .Icon" — only descendant part selectors are promoted
+- root :hover: combinator in ".Input:checked ~ .Icon.animated" — only descendant part selectors are promoted
+- root :hover: combinator in ".Input:disabled + .Backdrop" — only descendant part selectors are promoted
+- root :hover: combinator in ".Input:disabled + .Backdrop::before" — only descendant part selectors are promoted
+- root :hover: combinator in ".Input:disabled ~ .Icon svg" — only descendant part selectors are promoted
+- root :hover: combinator in ".Input:disabled.Input-indeterminate + .Backdrop" — only descendant part selectors are promoted
+- root :hover: combinator in ".Input:disabled.Input-indeterminate + .Backdrop::before" — only descendant part selectors are promoted
+- root :hover: combinator in ".Input:disabled:checked + .Backdrop" — only descendant part selectors are promoted
+- root :hover: combinator in ".Input:disabled:checked + .Backdrop::before" — only descendant part selectors are promoted
+- root :hover: combinator in ".Input:focus-visible + .Backdrop" — only descendant part selectors are promoted
+- root :hover: combinator in ".animated svg > path" — only descendant part selectors are promoted
+- root :hover: combinator in ".animated svg > path.checked" — only descendant part selectors are promoted
+- root :hover: combinator in ".error .Input + .Backdrop" — only descendant part selectors are promoted
+- root :hover: combinator in ".error .Input.Input-indeterminate + .Backdrop" — only descendant part selectors are promoted
+- root :hover: combinator in ".error .Input:active + .Backdrop" — only descendant part selectors are promoted
+- root :hover: combinator in ".error .Input:checked + .Backdrop" — only descendant part selectors are promoted
+- root :hover: combinator in ".error .Input:focus-visible + .Backdrop" — only descendant part selectors are promoted
+- root :hover: selector ".error .Icon svg" nests deeper than root + one part
+- root :active: combinator in ".ChoiceLabel:hover .Input.toneMagic + .Backdrop" — only descendant part selectors are promoted
+- root :active: combinator in ".ChoiceLabel:hover .Input.toneMagic.Input-indeterminate + .Backdrop" — only descendant part selectors are promoted
+- root :active: combinator in ".ChoiceLabel:hover .Input.toneMagic:checked + .Backdrop" — only descendant part selectors are promoted
+- root :active: combinator in ".ChoiceLabel:hover .error .Input:focus-visible + .Backdrop" — only descendant part selectors are promoted
+- root :active: combinator in ".Input.Input-indeterminate + .Backdrop" — only descendant part selectors are promoted
+- root :active: combinator in ".Input.Input-indeterminate ~ .Icon svg" — only descendant part selectors are promoted
+- root :active: combinator in ".Input.Input-indeterminate ~ .Icon" — only descendant part selectors are promoted
+- root :active: combinator in ".Input.Input-indeterminate ~ .Icon.animated" — only descendant part selectors are promoted
+- root :active: combinator in ".Input.toneMagic + .Backdrop" — only descendant part selectors are promoted
+- root :active: combinator in ".Input.toneMagic.Input-indeterminate + .Backdrop" — only descendant part selectors are promoted
+- root :active: combinator in ".Input.toneMagic:checked + .Backdrop" — only descendant part selectors are promoted
+- root :active: combinator in ".Input:checked + .Backdrop" — only descendant part selectors are promoted
+- root :active: combinator in ".Input:checked ~ .Icon svg" — only descendant part selectors are promoted
+- root :active: combinator in ".Input:checked ~ .Icon" — only descendant part selectors are promoted
+- root :active: combinator in ".Input:checked ~ .Icon.animated" — only descendant part selectors are promoted
+- root :active: combinator in ".Input:disabled + .Backdrop" — only descendant part selectors are promoted
+- root :active: combinator in ".Input:disabled + .Backdrop::before" — only descendant part selectors are promoted
+- root :active: combinator in ".Input:disabled ~ .Icon svg" — only descendant part selectors are promoted
+- root :active: combinator in ".Input:disabled.Input-indeterminate + .Backdrop" — only descendant part selectors are promoted
+- root :active: combinator in ".Input:disabled.Input-indeterminate + .Backdrop::before" — only descendant part selectors are promoted
+- root :active: combinator in ".Input:disabled:checked + .Backdrop" — only descendant part selectors are promoted
+- root :active: combinator in ".Input:disabled:checked + .Backdrop::before" — only descendant part selectors are promoted
+- root :active: combinator in ".Input:focus-visible + .Backdrop" — only descendant part selectors are promoted
+- root :active: combinator in ".animated svg > path" — only descendant part selectors are promoted
+- root :active: combinator in ".animated svg > path.checked" — only descendant part selectors are promoted
+- root :active: combinator in ".error .Input + .Backdrop" — only descendant part selectors are promoted
+- root :active: combinator in ".error .Input.Input-indeterminate + .Backdrop" — only descendant part selectors are promoted
+- root :active: combinator in ".error .Input:active + .Backdrop" — only descendant part selectors are promoted
+- root :active: combinator in ".error .Input:checked + .Backdrop" — only descendant part selectors are promoted
+- root :active: combinator in ".error .Input:focus-visible + .Backdrop" — only descendant part selectors are promoted
+- root :active: selector ".error .Icon svg" nests deeper than root + one part
+- root :focus-visible: combinator in ".ChoiceLabel:hover .Input.toneMagic + .Backdrop" — only descendant part selectors are promoted
+- root :focus-visible: combinator in ".ChoiceLabel:hover .Input.toneMagic.Input-indeterminate + .Backdrop" — only descendant part selectors are promoted
+- root :focus-visible: combinator in ".ChoiceLabel:hover .Input.toneMagic:checked + .Backdrop" — only descendant part selectors are promoted
+- root :focus-visible: combinator in ".ChoiceLabel:hover .error .Input:focus-visible + .Backdrop" — only descendant part selectors are promoted
+- root :focus-visible: combinator in ".Input.Input-indeterminate + .Backdrop" — only descendant part selectors are promoted
+- root :focus-visible: combinator in ".Input.Input-indeterminate ~ .Icon svg" — only descendant part selectors are promoted
+- root :focus-visible: combinator in ".Input.Input-indeterminate ~ .Icon" — only descendant part selectors are promoted
+- root :focus-visible: combinator in ".Input.Input-indeterminate ~ .Icon.animated" — only descendant part selectors are promoted
+- root :focus-visible: combinator in ".Input.toneMagic + .Backdrop" — only descendant part selectors are promoted
+- root :focus-visible: combinator in ".Input.toneMagic.Input-indeterminate + .Backdrop" — only descendant part selectors are promoted
+- root :focus-visible: combinator in ".Input.toneMagic:checked + .Backdrop" — only descendant part selectors are promoted
+- root :focus-visible: combinator in ".Input:checked + .Backdrop" — only descendant part selectors are promoted
+- root :focus-visible: combinator in ".Input:checked ~ .Icon svg" — only descendant part selectors are promoted
+- root :focus-visible: combinator in ".Input:checked ~ .Icon" — only descendant part selectors are promoted
+- root :focus-visible: combinator in ".Input:checked ~ .Icon.animated" — only descendant part selectors are promoted
+- root :focus-visible: combinator in ".Input:disabled + .Backdrop" — only descendant part selectors are promoted
+- root :focus-visible: combinator in ".Input:disabled + .Backdrop::before" — only descendant part selectors are promoted
+- root :focus-visible: combinator in ".Input:disabled ~ .Icon svg" — only descendant part selectors are promoted
+- root :focus-visible: combinator in ".Input:disabled.Input-indeterminate + .Backdrop" — only descendant part selectors are promoted
+- root :focus-visible: combinator in ".Input:disabled.Input-indeterminate + .Backdrop::before" — only descendant part selectors are promoted
+- root :focus-visible: combinator in ".Input:disabled:checked + .Backdrop" — only descendant part selectors are promoted
+- root :focus-visible: combinator in ".Input:disabled:checked + .Backdrop::before" — only descendant part selectors are promoted
+- root :focus-visible: combinator in ".Input:focus-visible + .Backdrop" — only descendant part selectors are promoted
+- root :focus-visible: combinator in ".animated svg > path" — only descendant part selectors are promoted
+- root :focus-visible: combinator in ".animated svg > path.checked" — only descendant part selectors are promoted
+- root :focus-visible: combinator in ".error .Input + .Backdrop" — only descendant part selectors are promoted
+- root :focus-visible: combinator in ".error .Input.Input-indeterminate + .Backdrop" — only descendant part selectors are promoted
+- root :focus-visible: combinator in ".error .Input:active + .Backdrop" — only descendant part selectors are promoted
+- root :focus-visible: combinator in ".error .Input:checked + .Backdrop" — only descendant part selectors are promoted
+- root :focus-visible: combinator in ".error .Input:focus-visible + .Backdrop" — only descendant part selectors are promoted
+- root :focus-visible: selector ".error .Icon svg" nests deeper than root + one part
+- root :disabled: combinator in ".ChoiceLabel:hover .Input.toneMagic + .Backdrop" — only descendant part selectors are promoted
+- root :disabled: combinator in ".ChoiceLabel:hover .Input.toneMagic.Input-indeterminate + .Backdrop" — only descendant part selectors are promoted
+- root :disabled: combinator in ".ChoiceLabel:hover .Input.toneMagic:checked + .Backdrop" — only descendant part selectors are promoted
+- root :disabled: combinator in ".ChoiceLabel:hover .error .Input:focus-visible + .Backdrop" — only descendant part selectors are promoted
+- root :disabled: combinator in ".Input.Input-indeterminate + .Backdrop" — only descendant part selectors are promoted
+- root :disabled: combinator in ".Input.Input-indeterminate ~ .Icon svg" — only descendant part selectors are promoted
+- root :disabled: combinator in ".Input.Input-indeterminate ~ .Icon" — only descendant part selectors are promoted
+- root :disabled: combinator in ".Input.Input-indeterminate ~ .Icon.animated" — only descendant part selectors are promoted
+- root :disabled: combinator in ".Input.toneMagic + .Backdrop" — only descendant part selectors are promoted
+- root :disabled: combinator in ".Input.toneMagic.Input-indeterminate + .Backdrop" — only descendant part selectors are promoted
+- root :disabled: combinator in ".Input.toneMagic:checked + .Backdrop" — only descendant part selectors are promoted
+- root :disabled: combinator in ".Input:checked + .Backdrop" — only descendant part selectors are promoted
+- root :disabled: combinator in ".Input:checked ~ .Icon svg" — only descendant part selectors are promoted
+- root :disabled: combinator in ".Input:checked ~ .Icon" — only descendant part selectors are promoted
+- root :disabled: combinator in ".Input:checked ~ .Icon.animated" — only descendant part selectors are promoted
+- root :disabled: combinator in ".Input:disabled + .Backdrop" — only descendant part selectors are promoted
+- root :disabled: combinator in ".Input:disabled + .Backdrop::before" — only descendant part selectors are promoted
+- root :disabled: combinator in ".Input:disabled ~ .Icon svg" — only descendant part selectors are promoted
+- root :disabled: combinator in ".Input:disabled.Input-indeterminate + .Backdrop" — only descendant part selectors are promoted
+- root :disabled: combinator in ".Input:disabled.Input-indeterminate + .Backdrop::before" — only descendant part selectors are promoted
+- root :disabled: combinator in ".Input:disabled:checked + .Backdrop" — only descendant part selectors are promoted
+- root :disabled: combinator in ".Input:disabled:checked + .Backdrop::before" — only descendant part selectors are promoted
+- root :disabled: combinator in ".Input:focus-visible + .Backdrop" — only descendant part selectors are promoted
+- root :disabled: combinator in ".animated svg > path" — only descendant part selectors are promoted
+- root :disabled: combinator in ".animated svg > path.checked" — only descendant part selectors are promoted
+- root :disabled: combinator in ".error .Input + .Backdrop" — only descendant part selectors are promoted
+- root :disabled: combinator in ".error .Input.Input-indeterminate + .Backdrop" — only descendant part selectors are promoted
+- root :disabled: combinator in ".error .Input:active + .Backdrop" — only descendant part selectors are promoted
+- root :disabled: combinator in ".error .Input:checked + .Backdrop" — only descendant part selectors are promoted
+- root :disabled: combinator in ".error .Input:focus-visible + .Backdrop" — only descendant part selectors are promoted
+- root :disabled: selector ".error .Icon svg" nests deeper than root + one part
+- part input (.Input): combinator in ".ChoiceLabel:hover .Input.toneMagic + .Backdrop" — only descendant part selectors are promoted
+- part input (.Input): combinator in ".ChoiceLabel:hover .Input.toneMagic.Input-indeterminate + .Backdrop" — only descendant part selectors are promoted
+- part input (.Input): combinator in ".ChoiceLabel:hover .Input.toneMagic:checked + .Backdrop" — only descendant part selectors are promoted
+- part input (.Input): combinator in ".ChoiceLabel:hover .error .Input:focus-visible + .Backdrop" — only descendant part selectors are promoted
+- part input (.Input): combinator in ".Input.Input-indeterminate + .Backdrop" — only descendant part selectors are promoted
+- part input (.Input): combinator in ".Input.Input-indeterminate ~ .Icon svg" — only descendant part selectors are promoted
+- part input (.Input): combinator in ".Input.Input-indeterminate ~ .Icon" — only descendant part selectors are promoted
+- part input (.Input): combinator in ".Input.Input-indeterminate ~ .Icon.animated" — only descendant part selectors are promoted
+- part input (.Input): combinator in ".Input.toneMagic + .Backdrop" — only descendant part selectors are promoted
+- part input (.Input): combinator in ".Input.toneMagic.Input-indeterminate + .Backdrop" — only descendant part selectors are promoted
+- part input (.Input): combinator in ".Input.toneMagic:checked + .Backdrop" — only descendant part selectors are promoted
+- part input (.Input): combinator in ".Input:checked + .Backdrop" — only descendant part selectors are promoted
+- part input (.Input): combinator in ".Input:checked ~ .Icon svg" — only descendant part selectors are promoted
+- part input (.Input): combinator in ".Input:checked ~ .Icon" — only descendant part selectors are promoted
+- part input (.Input): combinator in ".Input:checked ~ .Icon.animated" — only descendant part selectors are promoted
+- part input (.Input): combinator in ".Input:disabled + .Backdrop" — only descendant part selectors are promoted
+- part input (.Input): combinator in ".Input:disabled + .Backdrop::before" — only descendant part selectors are promoted
+- part input (.Input): combinator in ".Input:disabled ~ .Icon svg" — only descendant part selectors are promoted
+- part input (.Input): combinator in ".Input:disabled.Input-indeterminate + .Backdrop" — only descendant part selectors are promoted
+- part input (.Input): combinator in ".Input:disabled.Input-indeterminate + .Backdrop::before" — only descendant part selectors are promoted
+- part input (.Input): combinator in ".Input:disabled:checked + .Backdrop" — only descendant part selectors are promoted
+- part input (.Input): combinator in ".Input:disabled:checked + .Backdrop::before" — only descendant part selectors are promoted
+- part input (.Input): combinator in ".Input:focus-visible + .Backdrop" — only descendant part selectors are promoted
+- part input (.Input): combinator in ".animated svg > path" — only descendant part selectors are promoted
+- part input (.Input): combinator in ".animated svg > path.checked" — only descendant part selectors are promoted
+- part input (.Input): combinator in ".error .Input + .Backdrop" — only descendant part selectors are promoted
+- part input (.Input): combinator in ".error .Input.Input-indeterminate + .Backdrop" — only descendant part selectors are promoted
+- part input (.Input): combinator in ".error .Input:active + .Backdrop" — only descendant part selectors are promoted
+- part input (.Input): combinator in ".error .Input:checked + .Backdrop" — only descendant part selectors are promoted
+- part input (.Input): combinator in ".error .Input:focus-visible + .Backdrop" — only descendant part selectors are promoted
+- part input (.Input): selector ".error .Icon svg" nests deeper than root + one part
+- part input (.Input): height — literal value "100%" — a raw value is reported, never turned into an invented token (`.Input`)
+- part input (.Input): width — literal value "100%" — a raw value is reported, never turned into an invented token (`.Input`)
+- part input :hover: combinator in ".ChoiceLabel:hover .Input.toneMagic + .Backdrop" — only descendant part selectors are promoted
+- part input :hover: combinator in ".ChoiceLabel:hover .Input.toneMagic.Input-indeterminate + .Backdrop" — only descendant part selectors are promoted
+- part input :hover: combinator in ".ChoiceLabel:hover .Input.toneMagic:checked + .Backdrop" — only descendant part selectors are promoted
+- part input :hover: combinator in ".ChoiceLabel:hover .error .Input:focus-visible + .Backdrop" — only descendant part selectors are promoted
+- part input :hover: combinator in ".Input.Input-indeterminate + .Backdrop" — only descendant part selectors are promoted
+- part input :hover: combinator in ".Input.Input-indeterminate ~ .Icon svg" — only descendant part selectors are promoted
+- part input :hover: combinator in ".Input.Input-indeterminate ~ .Icon" — only descendant part selectors are promoted
+- part input :hover: combinator in ".Input.Input-indeterminate ~ .Icon.animated" — only descendant part selectors are promoted
+- part input :hover: combinator in ".Input.toneMagic + .Backdrop" — only descendant part selectors are promoted
+- part input :hover: combinator in ".Input.toneMagic.Input-indeterminate + .Backdrop" — only descendant part selectors are promoted
+- part input :hover: combinator in ".Input.toneMagic:checked + .Backdrop" — only descendant part selectors are promoted
+- part input :hover: combinator in ".Input:checked + .Backdrop" — only descendant part selectors are promoted
+- part input :hover: combinator in ".Input:checked ~ .Icon svg" — only descendant part selectors are promoted
+- part input :hover: combinator in ".Input:checked ~ .Icon" — only descendant part selectors are promoted
+- part input :hover: combinator in ".Input:checked ~ .Icon.animated" — only descendant part selectors are promoted
+- part input :hover: combinator in ".Input:disabled + .Backdrop" — only descendant part selectors are promoted
+- part input :hover: combinator in ".Input:disabled + .Backdrop::before" — only descendant part selectors are promoted
+- part input :hover: combinator in ".Input:disabled ~ .Icon svg" — only descendant part selectors are promoted
+- part input :hover: combinator in ".Input:disabled.Input-indeterminate + .Backdrop" — only descendant part selectors are promoted
+- part input :hover: combinator in ".Input:disabled.Input-indeterminate + .Backdrop::before" — only descendant part selectors are promoted
+- part input :hover: combinator in ".Input:disabled:checked + .Backdrop" — only descendant part selectors are promoted
+- part input :hover: combinator in ".Input:disabled:checked + .Backdrop::before" — only descendant part selectors are promoted
+- part input :hover: combinator in ".Input:focus-visible + .Backdrop" — only descendant part selectors are promoted
+- part input :hover: combinator in ".animated svg > path" — only descendant part selectors are promoted
+- part input :hover: combinator in ".animated svg > path.checked" — only descendant part selectors are promoted
+- part input :hover: combinator in ".error .Input + .Backdrop" — only descendant part selectors are promoted
+- part input :hover: combinator in ".error .Input.Input-indeterminate + .Backdrop" — only descendant part selectors are promoted
+- part input :hover: combinator in ".error .Input:active + .Backdrop" — only descendant part selectors are promoted
+- part input :hover: combinator in ".error .Input:checked + .Backdrop" — only descendant part selectors are promoted
+- part input :hover: combinator in ".error .Input:focus-visible + .Backdrop" — only descendant part selectors are promoted
+- part input :hover: selector ".error .Icon svg" nests deeper than root + one part
+- part input :active: combinator in ".ChoiceLabel:hover .Input.toneMagic + .Backdrop" — only descendant part selectors are promoted
+- part input :active: combinator in ".ChoiceLabel:hover .Input.toneMagic.Input-indeterminate + .Backdrop" — only descendant part selectors are promoted
+- part input :active: combinator in ".ChoiceLabel:hover .Input.toneMagic:checked + .Backdrop" — only descendant part selectors are promoted
+- part input :active: combinator in ".ChoiceLabel:hover .error .Input:focus-visible + .Backdrop" — only descendant part selectors are promoted
+- part input :active: combinator in ".Input.Input-indeterminate + .Backdrop" — only descendant part selectors are promoted
+- part input :active: combinator in ".Input.Input-indeterminate ~ .Icon svg" — only descendant part selectors are promoted
+- part input :active: combinator in ".Input.Input-indeterminate ~ .Icon" — only descendant part selectors are promoted
+- part input :active: combinator in ".Input.Input-indeterminate ~ .Icon.animated" — only descendant part selectors are promoted
+- part input :active: combinator in ".Input.toneMagic + .Backdrop" — only descendant part selectors are promoted
+- part input :active: combinator in ".Input.toneMagic.Input-indeterminate + .Backdrop" — only descendant part selectors are promoted
+- part input :active: combinator in ".Input.toneMagic:checked + .Backdrop" — only descendant part selectors are promoted
+- part input :active: combinator in ".Input:checked + .Backdrop" — only descendant part selectors are promoted
+- part input :active: combinator in ".Input:checked ~ .Icon svg" — only descendant part selectors are promoted
+- part input :active: combinator in ".Input:checked ~ .Icon" — only descendant part selectors are promoted
+- part input :active: combinator in ".Input:checked ~ .Icon.animated" — only descendant part selectors are promoted
+- part input :active: combinator in ".Input:disabled + .Backdrop" — only descendant part selectors are promoted
+- part input :active: combinator in ".Input:disabled + .Backdrop::before" — only descendant part selectors are promoted
+- part input :active: combinator in ".Input:disabled ~ .Icon svg" — only descendant part selectors are promoted
+- part input :active: combinator in ".Input:disabled.Input-indeterminate + .Backdrop" — only descendant part selectors are promoted
+- part input :active: combinator in ".Input:disabled.Input-indeterminate + .Backdrop::before" — only descendant part selectors are promoted
+- part input :active: combinator in ".Input:disabled:checked + .Backdrop" — only descendant part selectors are promoted
+- part input :active: combinator in ".Input:disabled:checked + .Backdrop::before" — only descendant part selectors are promoted
+- part input :active: combinator in ".Input:focus-visible + .Backdrop" — only descendant part selectors are promoted
+- part input :active: combinator in ".animated svg > path" — only descendant part selectors are promoted
+- part input :active: combinator in ".animated svg > path.checked" — only descendant part selectors are promoted
+- part input :active: combinator in ".error .Input + .Backdrop" — only descendant part selectors are promoted
+- part input :active: combinator in ".error .Input.Input-indeterminate + .Backdrop" — only descendant part selectors are promoted
+- part input :active: combinator in ".error .Input:active + .Backdrop" — only descendant part selectors are promoted
+- part input :active: combinator in ".error .Input:checked + .Backdrop" — only descendant part selectors are promoted
+- part input :active: combinator in ".error .Input:focus-visible + .Backdrop" — only descendant part selectors are promoted
+- part input :active: selector ".error .Icon svg" nests deeper than root + one part
+- part input :focus-visible: combinator in ".ChoiceLabel:hover .Input.toneMagic + .Backdrop" — only descendant part selectors are promoted
+- part input :focus-visible: combinator in ".ChoiceLabel:hover .Input.toneMagic.Input-indeterminate + .Backdrop" — only descendant part selectors are promoted
+- part input :focus-visible: combinator in ".ChoiceLabel:hover .Input.toneMagic:checked + .Backdrop" — only descendant part selectors are promoted
+- part input :focus-visible: combinator in ".ChoiceLabel:hover .error .Input:focus-visible + .Backdrop" — only descendant part selectors are promoted
+- part input :focus-visible: combinator in ".Input.Input-indeterminate + .Backdrop" — only descendant part selectors are promoted
+- part input :focus-visible: combinator in ".Input.Input-indeterminate ~ .Icon svg" — only descendant part selectors are promoted
+- part input :focus-visible: combinator in ".Input.Input-indeterminate ~ .Icon" — only descendant part selectors are promoted
+- part input :focus-visible: combinator in ".Input.Input-indeterminate ~ .Icon.animated" — only descendant part selectors are promoted
+- part input :focus-visible: combinator in ".Input.toneMagic + .Backdrop" — only descendant part selectors are promoted
+- part input :focus-visible: combinator in ".Input.toneMagic.Input-indeterminate + .Backdrop" — only descendant part selectors are promoted
+- part input :focus-visible: combinator in ".Input.toneMagic:checked + .Backdrop" — only descendant part selectors are promoted
+- part input :focus-visible: combinator in ".Input:checked + .Backdrop" — only descendant part selectors are promoted
+- part input :focus-visible: combinator in ".Input:checked ~ .Icon svg" — only descendant part selectors are promoted
+- part input :focus-visible: combinator in ".Input:checked ~ .Icon" — only descendant part selectors are promoted
+- part input :focus-visible: combinator in ".Input:checked ~ .Icon.animated" — only descendant part selectors are promoted
+- part input :focus-visible: combinator in ".Input:disabled + .Backdrop" — only descendant part selectors are promoted
+- part input :focus-visible: combinator in ".Input:disabled + .Backdrop::before" — only descendant part selectors are promoted
+- part input :focus-visible: combinator in ".Input:disabled ~ .Icon svg" — only descendant part selectors are promoted
+- part input :focus-visible: combinator in ".Input:disabled.Input-indeterminate + .Backdrop" — only descendant part selectors are promoted
+- part input :focus-visible: combinator in ".Input:disabled.Input-indeterminate + .Backdrop::before" — only descendant part selectors are promoted
+- part input :focus-visible: combinator in ".Input:disabled:checked + .Backdrop" — only descendant part selectors are promoted
+- part input :focus-visible: combinator in ".Input:disabled:checked + .Backdrop::before" — only descendant part selectors are promoted
+- part input :focus-visible: combinator in ".Input:focus-visible + .Backdrop" — only descendant part selectors are promoted
+- part input :focus-visible: combinator in ".animated svg > path" — only descendant part selectors are promoted
+- part input :focus-visible: combinator in ".animated svg > path.checked" — only descendant part selectors are promoted
+- part input :focus-visible: combinator in ".error .Input + .Backdrop" — only descendant part selectors are promoted
+- part input :focus-visible: combinator in ".error .Input.Input-indeterminate + .Backdrop" — only descendant part selectors are promoted
+- part input :focus-visible: combinator in ".error .Input:active + .Backdrop" — only descendant part selectors are promoted
+- part input :focus-visible: combinator in ".error .Input:checked + .Backdrop" — only descendant part selectors are promoted
+- part input :focus-visible: combinator in ".error .Input:focus-visible + .Backdrop" — only descendant part selectors are promoted
+- part input :focus-visible: selector ".error .Icon svg" nests deeper than root + one part
+- part input :disabled: combinator in ".ChoiceLabel:hover .Input.toneMagic + .Backdrop" — only descendant part selectors are promoted
+- part input :disabled: combinator in ".ChoiceLabel:hover .Input.toneMagic.Input-indeterminate + .Backdrop" — only descendant part selectors are promoted
+- part input :disabled: combinator in ".ChoiceLabel:hover .Input.toneMagic:checked + .Backdrop" — only descendant part selectors are promoted
+- part input :disabled: combinator in ".ChoiceLabel:hover .error .Input:focus-visible + .Backdrop" — only descendant part selectors are promoted
+- part input :disabled: combinator in ".Input.Input-indeterminate + .Backdrop" — only descendant part selectors are promoted
+- part input :disabled: combinator in ".Input.Input-indeterminate ~ .Icon svg" — only descendant part selectors are promoted
+- part input :disabled: combinator in ".Input.Input-indeterminate ~ .Icon" — only descendant part selectors are promoted
+- part input :disabled: combinator in ".Input.Input-indeterminate ~ .Icon.animated" — only descendant part selectors are promoted
+- part input :disabled: combinator in ".Input.toneMagic + .Backdrop" — only descendant part selectors are promoted
+- part input :disabled: combinator in ".Input.toneMagic.Input-indeterminate + .Backdrop" — only descendant part selectors are promoted
+- part input :disabled: combinator in ".Input.toneMagic:checked + .Backdrop" — only descendant part selectors are promoted
+- part input :disabled: combinator in ".Input:checked + .Backdrop" — only descendant part selectors are promoted
+- part input :disabled: combinator in ".Input:checked ~ .Icon svg" — only descendant part selectors are promoted
+- part input :disabled: combinator in ".Input:checked ~ .Icon" — only descendant part selectors are promoted
+- part input :disabled: combinator in ".Input:checked ~ .Icon.animated" — only descendant part selectors are promoted
+- part input :disabled: combinator in ".Input:disabled + .Backdrop" — only descendant part selectors are promoted
+- part input :disabled: combinator in ".Input:disabled + .Backdrop::before" — only descendant part selectors are promoted
+- part input :disabled: combinator in ".Input:disabled ~ .Icon svg" — only descendant part selectors are promoted
+- part input :disabled: combinator in ".Input:disabled.Input-indeterminate + .Backdrop" — only descendant part selectors are promoted
+- part input :disabled: combinator in ".Input:disabled.Input-indeterminate + .Backdrop::before" — only descendant part selectors are promoted
+- part input :disabled: combinator in ".Input:disabled:checked + .Backdrop" — only descendant part selectors are promoted
+- part input :disabled: combinator in ".Input:disabled:checked + .Backdrop::before" — only descendant part selectors are promoted
+- part input :disabled: combinator in ".Input:focus-visible + .Backdrop" — only descendant part selectors are promoted
+- part input :disabled: combinator in ".animated svg > path" — only descendant part selectors are promoted
+- part input :disabled: combinator in ".animated svg > path.checked" — only descendant part selectors are promoted
+- part input :disabled: combinator in ".error .Input + .Backdrop" — only descendant part selectors are promoted
+- part input :disabled: combinator in ".error .Input.Input-indeterminate + .Backdrop" — only descendant part selectors are promoted
+- part input :disabled: combinator in ".error .Input:active + .Backdrop" — only descendant part selectors are promoted
+- part input :disabled: combinator in ".error .Input:checked + .Backdrop" — only descendant part selectors are promoted
+- part input :disabled: combinator in ".error .Input:focus-visible + .Backdrop" — only descendant part selectors are promoted
+- part input :disabled: selector ".error .Icon svg" nests deeper than root + one part
+- part backdrop (.Backdrop): combinator in ".ChoiceLabel:hover .Input.toneMagic + .Backdrop" — only descendant part selectors are promoted
+- part backdrop (.Backdrop): combinator in ".ChoiceLabel:hover .Input.toneMagic.Input-indeterminate + .Backdrop" — only descendant part selectors are promoted
+- part backdrop (.Backdrop): combinator in ".ChoiceLabel:hover .Input.toneMagic:checked + .Backdrop" — only descendant part selectors are promoted
+- part backdrop (.Backdrop): combinator in ".ChoiceLabel:hover .error .Input:focus-visible + .Backdrop" — only descendant part selectors are promoted
+- part backdrop (.Backdrop): combinator in ".Input.Input-indeterminate + .Backdrop" — only descendant part selectors are promoted
+- part backdrop (.Backdrop): combinator in ".Input.Input-indeterminate ~ .Icon svg" — only descendant part selectors are promoted
+- part backdrop (.Backdrop): combinator in ".Input.Input-indeterminate ~ .Icon" — only descendant part selectors are promoted
+- part backdrop (.Backdrop): combinator in ".Input.Input-indeterminate ~ .Icon.animated" — only descendant part selectors are promoted
+- part backdrop (.Backdrop): combinator in ".Input.toneMagic + .Backdrop" — only descendant part selectors are promoted
+- part backdrop (.Backdrop): combinator in ".Input.toneMagic.Input-indeterminate + .Backdrop" — only descendant part selectors are promoted
+- part backdrop (.Backdrop): combinator in ".Input.toneMagic:checked + .Backdrop" — only descendant part selectors are promoted
+- part backdrop (.Backdrop): combinator in ".Input:checked + .Backdrop" — only descendant part selectors are promoted
+- part backdrop (.Backdrop): combinator in ".Input:checked ~ .Icon svg" — only descendant part selectors are promoted
+- part backdrop (.Backdrop): combinator in ".Input:checked ~ .Icon" — only descendant part selectors are promoted
+- part backdrop (.Backdrop): combinator in ".Input:checked ~ .Icon.animated" — only descendant part selectors are promoted
+- part backdrop (.Backdrop): combinator in ".Input:disabled + .Backdrop" — only descendant part selectors are promoted
+- part backdrop (.Backdrop): combinator in ".Input:disabled + .Backdrop::before" — only descendant part selectors are promoted
+- part backdrop (.Backdrop): combinator in ".Input:disabled ~ .Icon svg" — only descendant part selectors are promoted
+- part backdrop (.Backdrop): combinator in ".Input:disabled.Input-indeterminate + .Backdrop" — only descendant part selectors are promoted
+- part backdrop (.Backdrop): combinator in ".Input:disabled.Input-indeterminate + .Backdrop::before" — only descendant part selectors are promoted
+- part backdrop (.Backdrop): combinator in ".Input:disabled:checked + .Backdrop" — only descendant part selectors are promoted
+- part backdrop (.Backdrop): combinator in ".Input:disabled:checked + .Backdrop::before" — only descendant part selectors are promoted
+- part backdrop (.Backdrop): combinator in ".Input:focus-visible + .Backdrop" — only descendant part selectors are promoted
+- part backdrop (.Backdrop): combinator in ".animated svg > path" — only descendant part selectors are promoted
+- part backdrop (.Backdrop): combinator in ".animated svg > path.checked" — only descendant part selectors are promoted
+- part backdrop (.Backdrop): combinator in ".error .Input + .Backdrop" — only descendant part selectors are promoted
+- part backdrop (.Backdrop): combinator in ".error .Input.Input-indeterminate + .Backdrop" — only descendant part selectors are promoted
+- part backdrop (.Backdrop): combinator in ".error .Input:active + .Backdrop" — only descendant part selectors are promoted
+- part backdrop (.Backdrop): combinator in ".error .Input:checked + .Backdrop" — only descendant part selectors are promoted
+- part backdrop (.Backdrop): combinator in ".error .Input:focus-visible + .Backdrop" — only descendant part selectors are promoted
+- part backdrop (.Backdrop): pseudo/attribute ":checked" in ".ChoiceLabel:checked .Backdrop" — not promotable
+- part backdrop (.Backdrop): selector ".error .Icon svg" nests deeper than root + one part
+- part backdrop (.Backdrop): height — literal value "100%" — a raw value is reported, never turned into an invented token (`.Backdrop`)
+- part backdrop (.Backdrop): width — literal value "100%" — a raw value is reported, never turned into an invented token (`.Backdrop`)
+- part backdrop :hover: combinator in ".ChoiceLabel:hover .Input.toneMagic + .Backdrop" — only descendant part selectors are promoted
+- part backdrop :hover: combinator in ".ChoiceLabel:hover .Input.toneMagic.Input-indeterminate + .Backdrop" — only descendant part selectors are promoted
+- part backdrop :hover: combinator in ".ChoiceLabel:hover .Input.toneMagic:checked + .Backdrop" — only descendant part selectors are promoted
+- part backdrop :hover: combinator in ".ChoiceLabel:hover .error .Input:focus-visible + .Backdrop" — only descendant part selectors are promoted
+- part backdrop :hover: combinator in ".Input.Input-indeterminate + .Backdrop" — only descendant part selectors are promoted
+- part backdrop :hover: combinator in ".Input.Input-indeterminate ~ .Icon svg" — only descendant part selectors are promoted
+- part backdrop :hover: combinator in ".Input.Input-indeterminate ~ .Icon" — only descendant part selectors are promoted
+- part backdrop :hover: combinator in ".Input.Input-indeterminate ~ .Icon.animated" — only descendant part selectors are promoted
+- part backdrop :hover: combinator in ".Input.toneMagic + .Backdrop" — only descendant part selectors are promoted
+- part backdrop :hover: combinator in ".Input.toneMagic.Input-indeterminate + .Backdrop" — only descendant part selectors are promoted
+- part backdrop :hover: combinator in ".Input.toneMagic:checked + .Backdrop" — only descendant part selectors are promoted
+- part backdrop :hover: combinator in ".Input:checked + .Backdrop" — only descendant part selectors are promoted
+- part backdrop :hover: combinator in ".Input:checked ~ .Icon svg" — only descendant part selectors are promoted
+- part backdrop :hover: combinator in ".Input:checked ~ .Icon" — only descendant part selectors are promoted
+- part backdrop :hover: combinator in ".Input:checked ~ .Icon.animated" — only descendant part selectors are promoted
+- part backdrop :hover: combinator in ".Input:disabled + .Backdrop" — only descendant part selectors are promoted
+- part backdrop :hover: combinator in ".Input:disabled + .Backdrop::before" — only descendant part selectors are promoted
+- part backdrop :hover: combinator in ".Input:disabled ~ .Icon svg" — only descendant part selectors are promoted
+- part backdrop :hover: combinator in ".Input:disabled.Input-indeterminate + .Backdrop" — only descendant part selectors are promoted
+- part backdrop :hover: combinator in ".Input:disabled.Input-indeterminate + .Backdrop::before" — only descendant part selectors are promoted
+- part backdrop :hover: combinator in ".Input:disabled:checked + .Backdrop" — only descendant part selectors are promoted
+- part backdrop :hover: combinator in ".Input:disabled:checked + .Backdrop::before" — only descendant part selectors are promoted
+- part backdrop :hover: combinator in ".Input:focus-visible + .Backdrop" — only descendant part selectors are promoted
+- part backdrop :hover: combinator in ".animated svg > path" — only descendant part selectors are promoted
+- part backdrop :hover: combinator in ".animated svg > path.checked" — only descendant part selectors are promoted
+- part backdrop :hover: combinator in ".error .Input + .Backdrop" — only descendant part selectors are promoted
+- part backdrop :hover: combinator in ".error .Input.Input-indeterminate + .Backdrop" — only descendant part selectors are promoted
+- part backdrop :hover: combinator in ".error .Input:active + .Backdrop" — only descendant part selectors are promoted
+- part backdrop :hover: combinator in ".error .Input:checked + .Backdrop" — only descendant part selectors are promoted
+- part backdrop :hover: combinator in ".error .Input:focus-visible + .Backdrop" — only descendant part selectors are promoted
+- part backdrop :hover: pseudo/attribute ":checked" in ".ChoiceLabel:checked .Backdrop" — not promotable
+- part backdrop :hover: selector ".error .Icon svg" nests deeper than root + one part
+- part backdrop :active: combinator in ".ChoiceLabel:hover .Input.toneMagic + .Backdrop" — only descendant part selectors are promoted
+- part backdrop :active: combinator in ".ChoiceLabel:hover .Input.toneMagic.Input-indeterminate + .Backdrop" — only descendant part selectors are promoted
+- part backdrop :active: combinator in ".ChoiceLabel:hover .Input.toneMagic:checked + .Backdrop" — only descendant part selectors are promoted
+- part backdrop :active: combinator in ".ChoiceLabel:hover .error .Input:focus-visible + .Backdrop" — only descendant part selectors are promoted
+- part backdrop :active: combinator in ".Input.Input-indeterminate + .Backdrop" — only descendant part selectors are promoted
+- part backdrop :active: combinator in ".Input.Input-indeterminate ~ .Icon svg" — only descendant part selectors are promoted
+- part backdrop :active: combinator in ".Input.Input-indeterminate ~ .Icon" — only descendant part selectors are promoted
+- part backdrop :active: combinator in ".Input.Input-indeterminate ~ .Icon.animated" — only descendant part selectors are promoted
+- part backdrop :active: combinator in ".Input.toneMagic + .Backdrop" — only descendant part selectors are promoted
+- part backdrop :active: combinator in ".Input.toneMagic.Input-indeterminate + .Backdrop" — only descendant part selectors are promoted
+- part backdrop :active: combinator in ".Input.toneMagic:checked + .Backdrop" — only descendant part selectors are promoted
+- part backdrop :active: combinator in ".Input:checked + .Backdrop" — only descendant part selectors are promoted
+- part backdrop :active: combinator in ".Input:checked ~ .Icon svg" — only descendant part selectors are promoted
+- part backdrop :active: combinator in ".Input:checked ~ .Icon" — only descendant part selectors are promoted
+- part backdrop :active: combinator in ".Input:checked ~ .Icon.animated" — only descendant part selectors are promoted
+- part backdrop :active: combinator in ".Input:disabled + .Backdrop" — only descendant part selectors are promoted
+- part backdrop :active: combinator in ".Input:disabled + .Backdrop::before" — only descendant part selectors are promoted
+- part backdrop :active: combinator in ".Input:disabled ~ .Icon svg" — only descendant part selectors are promoted
+- part backdrop :active: combinator in ".Input:disabled.Input-indeterminate + .Backdrop" — only descendant part selectors are promoted
+- part backdrop :active: combinator in ".Input:disabled.Input-indeterminate + .Backdrop::before" — only descendant part selectors are promoted
+- part backdrop :active: combinator in ".Input:disabled:checked + .Backdrop" — only descendant part selectors are promoted
+- part backdrop :active: combinator in ".Input:disabled:checked + .Backdrop::before" — only descendant part selectors are promoted
+- part backdrop :active: combinator in ".Input:focus-visible + .Backdrop" — only descendant part selectors are promoted
+- part backdrop :active: combinator in ".animated svg > path" — only descendant part selectors are promoted
+- part backdrop :active: combinator in ".animated svg > path.checked" — only descendant part selectors are promoted
+- part backdrop :active: combinator in ".error .Input + .Backdrop" — only descendant part selectors are promoted
+- part backdrop :active: combinator in ".error .Input.Input-indeterminate + .Backdrop" — only descendant part selectors are promoted
+- part backdrop :active: combinator in ".error .Input:active + .Backdrop" — only descendant part selectors are promoted
+- part backdrop :active: combinator in ".error .Input:checked + .Backdrop" — only descendant part selectors are promoted
+- part backdrop :active: combinator in ".error .Input:focus-visible + .Backdrop" — only descendant part selectors are promoted
+- part backdrop :active: pseudo/attribute ":checked" in ".ChoiceLabel:checked .Backdrop" — not promotable
+- part backdrop :active: selector ".error .Icon svg" nests deeper than root + one part
+- part backdrop :focus-visible: combinator in ".ChoiceLabel:hover .Input.toneMagic + .Backdrop" — only descendant part selectors are promoted
+- part backdrop :focus-visible: combinator in ".ChoiceLabel:hover .Input.toneMagic.Input-indeterminate + .Backdrop" — only descendant part selectors are promoted
+- part backdrop :focus-visible: combinator in ".ChoiceLabel:hover .Input.toneMagic:checked + .Backdrop" — only descendant part selectors are promoted
+- part backdrop :focus-visible: combinator in ".ChoiceLabel:hover .error .Input:focus-visible + .Backdrop" — only descendant part selectors are promoted
+- part backdrop :focus-visible: combinator in ".Input.Input-indeterminate + .Backdrop" — only descendant part selectors are promoted
+- part backdrop :focus-visible: combinator in ".Input.Input-indeterminate ~ .Icon svg" — only descendant part selectors are promoted
+- part backdrop :focus-visible: combinator in ".Input.Input-indeterminate ~ .Icon" — only descendant part selectors are promoted
+- part backdrop :focus-visible: combinator in ".Input.Input-indeterminate ~ .Icon.animated" — only descendant part selectors are promoted
+- part backdrop :focus-visible: combinator in ".Input.toneMagic + .Backdrop" — only descendant part selectors are promoted
+- part backdrop :focus-visible: combinator in ".Input.toneMagic.Input-indeterminate + .Backdrop" — only descendant part selectors are promoted
+- part backdrop :focus-visible: combinator in ".Input.toneMagic:checked + .Backdrop" — only descendant part selectors are promoted
+- part backdrop :focus-visible: combinator in ".Input:checked + .Backdrop" — only descendant part selectors are promoted
+- part backdrop :focus-visible: combinator in ".Input:checked ~ .Icon svg" — only descendant part selectors are promoted
+- part backdrop :focus-visible: combinator in ".Input:checked ~ .Icon" — only descendant part selectors are promoted
+- part backdrop :focus-visible: combinator in ".Input:checked ~ .Icon.animated" — only descendant part selectors are promoted
+- part backdrop :focus-visible: combinator in ".Input:disabled + .Backdrop" — only descendant part selectors are promoted
+- part backdrop :focus-visible: combinator in ".Input:disabled + .Backdrop::before" — only descendant part selectors are promoted
+- part backdrop :focus-visible: combinator in ".Input:disabled ~ .Icon svg" — only descendant part selectors are promoted
+- part backdrop :focus-visible: combinator in ".Input:disabled.Input-indeterminate + .Backdrop" — only descendant part selectors are promoted
+- part backdrop :focus-visible: combinator in ".Input:disabled.Input-indeterminate + .Backdrop::before" — only descendant part selectors are promoted
+- part backdrop :focus-visible: combinator in ".Input:disabled:checked + .Backdrop" — only descendant part selectors are promoted
+- part backdrop :focus-visible: combinator in ".Input:disabled:checked + .Backdrop::before" — only descendant part selectors are promoted
+- part backdrop :focus-visible: combinator in ".Input:focus-visible + .Backdrop" — only descendant part selectors are promoted
+- part backdrop :focus-visible: combinator in ".animated svg > path" — only descendant part selectors are promoted
+- part backdrop :focus-visible: combinator in ".animated svg > path.checked" — only descendant part selectors are promoted
+- part backdrop :focus-visible: combinator in ".error .Input + .Backdrop" — only descendant part selectors are promoted
+- part backdrop :focus-visible: combinator in ".error .Input.Input-indeterminate + .Backdrop" — only descendant part selectors are promoted
+- part backdrop :focus-visible: combinator in ".error .Input:active + .Backdrop" — only descendant part selectors are promoted
+- part backdrop :focus-visible: combinator in ".error .Input:checked + .Backdrop" — only descendant part selectors are promoted
+- part backdrop :focus-visible: combinator in ".error .Input:focus-visible + .Backdrop" — only descendant part selectors are promoted
+- part backdrop :focus-visible: pseudo/attribute ":checked" in ".ChoiceLabel:checked .Backdrop" — not promotable
+- part backdrop :focus-visible: selector ".error .Icon svg" nests deeper than root + one part
+- part backdrop :disabled: combinator in ".ChoiceLabel:hover .Input.toneMagic + .Backdrop" — only descendant part selectors are promoted
+- part backdrop :disabled: combinator in ".ChoiceLabel:hover .Input.toneMagic.Input-indeterminate + .Backdrop" — only descendant part selectors are promoted
+- part backdrop :disabled: combinator in ".ChoiceLabel:hover .Input.toneMagic:checked + .Backdrop" — only descendant part selectors are promoted
+- part backdrop :disabled: combinator in ".ChoiceLabel:hover .error .Input:focus-visible + .Backdrop" — only descendant part selectors are promoted
+- part backdrop :disabled: combinator in ".Input.Input-indeterminate + .Backdrop" — only descendant part selectors are promoted
+- part backdrop :disabled: combinator in ".Input.Input-indeterminate ~ .Icon svg" — only descendant part selectors are promoted
+- part backdrop :disabled: combinator in ".Input.Input-indeterminate ~ .Icon" — only descendant part selectors are promoted
+- part backdrop :disabled: combinator in ".Input.Input-indeterminate ~ .Icon.animated" — only descendant part selectors are promoted
+- part backdrop :disabled: combinator in ".Input.toneMagic + .Backdrop" — only descendant part selectors are promoted
+- part backdrop :disabled: combinator in ".Input.toneMagic.Input-indeterminate + .Backdrop" — only descendant part selectors are promoted
+- part backdrop :disabled: combinator in ".Input.toneMagic:checked + .Backdrop" — only descendant part selectors are promoted
+- part backdrop :disabled: combinator in ".Input:checked + .Backdrop" — only descendant part selectors are promoted
+- part backdrop :disabled: combinator in ".Input:checked ~ .Icon svg" — only descendant part selectors are promoted
+- part backdrop :disabled: combinator in ".Input:checked ~ .Icon" — only descendant part selectors are promoted
+- part backdrop :disabled: combinator in ".Input:checked ~ .Icon.animated" — only descendant part selectors are promoted
+- part backdrop :disabled: combinator in ".Input:disabled + .Backdrop" — only descendant part selectors are promoted
+- part backdrop :disabled: combinator in ".Input:disabled + .Backdrop::before" — only descendant part selectors are promoted
+- part backdrop :disabled: combinator in ".Input:disabled ~ .Icon svg" — only descendant part selectors are promoted
+- part backdrop :disabled: combinator in ".Input:disabled.Input-indeterminate + .Backdrop" — only descendant part selectors are promoted
+- part backdrop :disabled: combinator in ".Input:disabled.Input-indeterminate + .Backdrop::before" — only descendant part selectors are promoted
+- part backdrop :disabled: combinator in ".Input:disabled:checked + .Backdrop" — only descendant part selectors are promoted
+- part backdrop :disabled: combinator in ".Input:disabled:checked + .Backdrop::before" — only descendant part selectors are promoted
+- part backdrop :disabled: combinator in ".Input:focus-visible + .Backdrop" — only descendant part selectors are promoted
+- part backdrop :disabled: combinator in ".animated svg > path" — only descendant part selectors are promoted
+- part backdrop :disabled: combinator in ".animated svg > path.checked" — only descendant part selectors are promoted
+- part backdrop :disabled: combinator in ".error .Input + .Backdrop" — only descendant part selectors are promoted
+- part backdrop :disabled: combinator in ".error .Input.Input-indeterminate + .Backdrop" — only descendant part selectors are promoted
+- part backdrop :disabled: combinator in ".error .Input:active + .Backdrop" — only descendant part selectors are promoted
+- part backdrop :disabled: combinator in ".error .Input:checked + .Backdrop" — only descendant part selectors are promoted
+- part backdrop :disabled: combinator in ".error .Input:focus-visible + .Backdrop" — only descendant part selectors are promoted
+- part backdrop :disabled: pseudo/attribute ":checked" in ".ChoiceLabel:checked .Backdrop" — not promotable
+- part backdrop :disabled: selector ".error .Icon svg" nests deeper than root + one part
+- unmatched rule `.ChoiceLabel .Backdrop` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 2 declaration(s) not carried
+- unmatched rule `.ChoiceLabel:hover .Backdrop` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 3 declaration(s) not carried
+- unmatched rule `.ChoiceLabel:active .Backdrop, .ChoiceLabel:checked .Backdrop` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 3 declaration(s) not carried
+- unmatched rule `.Input:focus-visible + .Backdrop` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 2 declaration(s) not carried
+- unmatched rule `.Input:checked + .Backdrop, .Input.Input-indeterminate + .Backdrop` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 3 declaration(s) not carried
+- unmatched rule `.Input:checked ~ .Icon svg, .Input.Input-indeterminate ~ .Icon svg` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 1 declaration(s) not carried
+- unmatched rule `.Input:disabled + .Backdrop` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 3 declaration(s) not carried
+- unmatched rule `.Input:disabled + .Backdrop::before` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 1 declaration(s) not carried
+- unmatched rule `.Input:disabled ~ .Icon svg` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 1 declaration(s) not carried
+- unmatched rule `.Input:disabled:checked + .Backdrop, .Input:disabled.Input-indeterminate + .Backdrop` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 1 declaration(s) not carried
+- unmatched rule `.Input:disabled:checked + .Backdrop::before, .Input:disabled.Input-indeterminate + .Backdrop::before` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 1 declaration(s) not carried
+- unmatched rule `.Input.toneMagic + .Backdrop` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 2 declaration(s) not carried
+- unmatched rule `.ChoiceLabel:hover .Input.toneMagic + .Backdrop` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 2 declaration(s) not carried
+- unmatched rule `.Input.toneMagic:checked + .Backdrop, .Input.toneMagic.Input-indeterminate + .Backdrop` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 3 declaration(s) not carried
+- unmatched rule `.ChoiceLabel:hover .Input.toneMagic:checked + .Backdrop, .ChoiceLabel:hover .Input.toneMagic.Input-indeterminate + .Backdrop` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 3 declaration(s) not carried
+- unmatched rule `.Icon svg` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 1 declaration(s) not carried
+- unmatched rule `.error .Icon svg` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 1 declaration(s) not carried
+- unmatched rule `.error .Input + .Backdrop` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 2 declaration(s) not carried
+- unmatched rule `.error .Backdrop:active` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 1 declaration(s) not carried
+- unmatched rule `.error .Input:checked + .Backdrop, .error .Input.Input-indeterminate + .Backdrop` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 2 declaration(s) not carried
+- unmatched rule `.error .Input:active + .Backdrop` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 2 declaration(s) not carried
+- unmatched rule `.error .Input:focus-visible + .Backdrop, .ChoiceLabel:hover .error .Input:focus-visible + .Backdrop` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 2 declaration(s) not carried
+
+## RadioButton (`polaris.radio-button`)
+
+- source: `polaris-react/src/components/RadioButton/RadioButton.module.css` + extracted API (`out/contracts/radio-button.contract.json`)
+- carried: 4 binding(s) · refused by name: 339 · curated decisions: 3
+
+### Curated decisions
+- NOTE: label rides the Choice wrapper (ReactNode — named slot candidate); not carried
+- NOTE: checked-dot and focus ring ride ::before/::after pseudo-elements and sibling combinators — named refusals
+- part backdrop: literal geometry carried as shape (20×20) — Choice.module.css .Control --pc-choice-size (18px, 20px below the md breakpoint) — literal control geometry carried as shape, same citation discipline as Checkbox
+
+### Carried bindings (each cites its CSS rule)
+- part backdrop (.Backdrop): background-color → `{p.color-input-bg-surface}` (from `.Backdrop { background-color: var(--p-color-input-bg-surface) }`)
+- part backdrop (.Backdrop): border-radius → `{p.border-radius-full}` (from `.Backdrop { border-radius: var(--p-border-radius-full) }`)
+- part backdrop (.Backdrop): border-width → `{p.border-width-0165}` (from `.Backdrop { border-width: var(--p-border-width-0165) }`)
+- part backdrop (.Backdrop): border-color → `{p.color-input-border}` (from `.Backdrop { border-color: var(--p-color-input-border) }`)
+
+### Refused by name
+- at-rule: `@media (--p-breakpoints-md-down) { .Backdrop { --pc-icon-size-small: 10px } }` — conditional styling is not a contract channel
+- at-rule: `@media (forced-colors: active) { .Backdrop::before { border: var(--p-border-width-100) solid transparent } }` — conditional styling is not a contract channel
+- mixin: `@mixin visually-hidden` — postcss mixin, expands outside the promoted rule model
+- mixin: `@mixin focus-ring base, var(--p-border-width-050)` — postcss mixin, expands outside the promoted rule model
+- root (.RadioButton): combinator in ".ChoiceLabel:active .Input + .Backdrop" — only descendant part selectors are promoted
+- root (.RadioButton): combinator in ".ChoiceLabel:hover .Input + .Backdrop" — only descendant part selectors are promoted
+- root (.RadioButton): combinator in ".ChoiceLabel:hover .Input.toneMagic:checked:not([disabled]) + .Backdrop" — only descendant part selectors are promoted
+- root (.RadioButton): combinator in ".ChoiceLabel:hover .Input.toneMagic:checked:not([disabled]) + .Backdrop::before" — only descendant part selectors are promoted
+- root (.RadioButton): combinator in ".ChoiceLabel:hover .Input:checked + .Backdrop" — only descendant part selectors are promoted
+- root (.RadioButton): combinator in ".ChoiceLabel:hover .Input:checked + .Backdrop::before" — only descendant part selectors are promoted
+- root (.RadioButton): combinator in ".ChoiceLabel:hover .Input:checked:not([disabled]) + .Backdrop" — only descendant part selectors are promoted
+- root (.RadioButton): combinator in ".ChoiceLabel:hover .Input:disabled + .Backdrop" — only descendant part selectors are promoted
+- root (.RadioButton): combinator in ".ChoiceLabel:hover .Input:disabled + .Backdrop::before" — only descendant part selectors are promoted
+- root (.RadioButton): combinator in ".ChoiceLabel:hover .Input:disabled:checked + .Backdrop::before" — only descendant part selectors are promoted
+- root (.RadioButton): combinator in ".Input.toneMagic:checked:not([disabled]) + .Backdrop" — only descendant part selectors are promoted
+- root (.RadioButton): combinator in ".Input.toneMagic:checked:not([disabled]) + .Backdrop::before" — only descendant part selectors are promoted
+- root (.RadioButton): combinator in ".Input:checked + .Backdrop" — only descendant part selectors are promoted
+- root (.RadioButton): combinator in ".Input:checked + .Backdrop::before" — only descendant part selectors are promoted
+- root (.RadioButton): combinator in ".Input:checked:not([disabled]) + .Backdrop" — only descendant part selectors are promoted
+- root (.RadioButton): combinator in ".Input:disabled + .Backdrop" — only descendant part selectors are promoted
+- root (.RadioButton): combinator in ".Input:disabled + .Backdrop::before" — only descendant part selectors are promoted
+- root (.RadioButton): combinator in ".Input:disabled:checked + .Backdrop::before" — only descendant part selectors are promoted
+- root (.RadioButton): combinator in ".Input:focus-visible + .Backdrop" — only descendant part selectors are promoted
+- root (.RadioButton): combinator in ".Input:focus-visible + .Backdrop::after" — only descendant part selectors are promoted
+- root (.RadioButton): pseudo/attribute ":" in ".Backdrop::after" — not promotable
+- root (.RadioButton): pseudo/attribute ":" in ".Backdrop::before" — not promotable
+- root :hover: combinator in ".ChoiceLabel:active .Input + .Backdrop" — only descendant part selectors are promoted
+- root :hover: combinator in ".ChoiceLabel:hover .Input + .Backdrop" — only descendant part selectors are promoted
+- root :hover: combinator in ".ChoiceLabel:hover .Input.toneMagic:checked:not([disabled]) + .Backdrop" — only descendant part selectors are promoted
+- root :hover: combinator in ".ChoiceLabel:hover .Input.toneMagic:checked:not([disabled]) + .Backdrop::before" — only descendant part selectors are promoted
+- root :hover: combinator in ".ChoiceLabel:hover .Input:checked + .Backdrop" — only descendant part selectors are promoted
+- root :hover: combinator in ".ChoiceLabel:hover .Input:checked + .Backdrop::before" — only descendant part selectors are promoted
+- root :hover: combinator in ".ChoiceLabel:hover .Input:checked:not([disabled]) + .Backdrop" — only descendant part selectors are promoted
+- root :hover: combinator in ".ChoiceLabel:hover .Input:disabled + .Backdrop" — only descendant part selectors are promoted
+- root :hover: combinator in ".ChoiceLabel:hover .Input:disabled + .Backdrop::before" — only descendant part selectors are promoted
+- root :hover: combinator in ".ChoiceLabel:hover .Input:disabled:checked + .Backdrop::before" — only descendant part selectors are promoted
+- root :hover: combinator in ".Input.toneMagic:checked:not([disabled]) + .Backdrop" — only descendant part selectors are promoted
+- root :hover: combinator in ".Input.toneMagic:checked:not([disabled]) + .Backdrop::before" — only descendant part selectors are promoted
+- root :hover: combinator in ".Input:checked + .Backdrop" — only descendant part selectors are promoted
+- root :hover: combinator in ".Input:checked + .Backdrop::before" — only descendant part selectors are promoted
+- root :hover: combinator in ".Input:checked:not([disabled]) + .Backdrop" — only descendant part selectors are promoted
+- root :hover: combinator in ".Input:disabled + .Backdrop" — only descendant part selectors are promoted
+- root :hover: combinator in ".Input:disabled + .Backdrop::before" — only descendant part selectors are promoted
+- root :hover: combinator in ".Input:disabled:checked + .Backdrop::before" — only descendant part selectors are promoted
+- root :hover: combinator in ".Input:focus-visible + .Backdrop" — only descendant part selectors are promoted
+- root :hover: combinator in ".Input:focus-visible + .Backdrop::after" — only descendant part selectors are promoted
+- root :hover: pseudo/attribute ":" in ".Backdrop::after" — not promotable
+- root :hover: pseudo/attribute ":" in ".Backdrop::before" — not promotable
+- root :active: combinator in ".ChoiceLabel:active .Input + .Backdrop" — only descendant part selectors are promoted
+- root :active: combinator in ".ChoiceLabel:hover .Input + .Backdrop" — only descendant part selectors are promoted
+- root :active: combinator in ".ChoiceLabel:hover .Input.toneMagic:checked:not([disabled]) + .Backdrop" — only descendant part selectors are promoted
+- root :active: combinator in ".ChoiceLabel:hover .Input.toneMagic:checked:not([disabled]) + .Backdrop::before" — only descendant part selectors are promoted
+- root :active: combinator in ".ChoiceLabel:hover .Input:checked + .Backdrop" — only descendant part selectors are promoted
+- root :active: combinator in ".ChoiceLabel:hover .Input:checked + .Backdrop::before" — only descendant part selectors are promoted
+- root :active: combinator in ".ChoiceLabel:hover .Input:checked:not([disabled]) + .Backdrop" — only descendant part selectors are promoted
+- root :active: combinator in ".ChoiceLabel:hover .Input:disabled + .Backdrop" — only descendant part selectors are promoted
+- root :active: combinator in ".ChoiceLabel:hover .Input:disabled + .Backdrop::before" — only descendant part selectors are promoted
+- root :active: combinator in ".ChoiceLabel:hover .Input:disabled:checked + .Backdrop::before" — only descendant part selectors are promoted
+- root :active: combinator in ".Input.toneMagic:checked:not([disabled]) + .Backdrop" — only descendant part selectors are promoted
+- root :active: combinator in ".Input.toneMagic:checked:not([disabled]) + .Backdrop::before" — only descendant part selectors are promoted
+- root :active: combinator in ".Input:checked + .Backdrop" — only descendant part selectors are promoted
+- root :active: combinator in ".Input:checked + .Backdrop::before" — only descendant part selectors are promoted
+- root :active: combinator in ".Input:checked:not([disabled]) + .Backdrop" — only descendant part selectors are promoted
+- root :active: combinator in ".Input:disabled + .Backdrop" — only descendant part selectors are promoted
+- root :active: combinator in ".Input:disabled + .Backdrop::before" — only descendant part selectors are promoted
+- root :active: combinator in ".Input:disabled:checked + .Backdrop::before" — only descendant part selectors are promoted
+- root :active: combinator in ".Input:focus-visible + .Backdrop" — only descendant part selectors are promoted
+- root :active: combinator in ".Input:focus-visible + .Backdrop::after" — only descendant part selectors are promoted
+- root :active: pseudo/attribute ":" in ".Backdrop::after" — not promotable
+- root :active: pseudo/attribute ":" in ".Backdrop::before" — not promotable
+- root :focus-visible: combinator in ".ChoiceLabel:active .Input + .Backdrop" — only descendant part selectors are promoted
+- root :focus-visible: combinator in ".ChoiceLabel:hover .Input + .Backdrop" — only descendant part selectors are promoted
+- root :focus-visible: combinator in ".ChoiceLabel:hover .Input.toneMagic:checked:not([disabled]) + .Backdrop" — only descendant part selectors are promoted
+- root :focus-visible: combinator in ".ChoiceLabel:hover .Input.toneMagic:checked:not([disabled]) + .Backdrop::before" — only descendant part selectors are promoted
+- root :focus-visible: combinator in ".ChoiceLabel:hover .Input:checked + .Backdrop" — only descendant part selectors are promoted
+- root :focus-visible: combinator in ".ChoiceLabel:hover .Input:checked + .Backdrop::before" — only descendant part selectors are promoted
+- root :focus-visible: combinator in ".ChoiceLabel:hover .Input:checked:not([disabled]) + .Backdrop" — only descendant part selectors are promoted
+- root :focus-visible: combinator in ".ChoiceLabel:hover .Input:disabled + .Backdrop" — only descendant part selectors are promoted
+- root :focus-visible: combinator in ".ChoiceLabel:hover .Input:disabled + .Backdrop::before" — only descendant part selectors are promoted
+- root :focus-visible: combinator in ".ChoiceLabel:hover .Input:disabled:checked + .Backdrop::before" — only descendant part selectors are promoted
+- root :focus-visible: combinator in ".Input.toneMagic:checked:not([disabled]) + .Backdrop" — only descendant part selectors are promoted
+- root :focus-visible: combinator in ".Input.toneMagic:checked:not([disabled]) + .Backdrop::before" — only descendant part selectors are promoted
+- root :focus-visible: combinator in ".Input:checked + .Backdrop" — only descendant part selectors are promoted
+- root :focus-visible: combinator in ".Input:checked + .Backdrop::before" — only descendant part selectors are promoted
+- root :focus-visible: combinator in ".Input:checked:not([disabled]) + .Backdrop" — only descendant part selectors are promoted
+- root :focus-visible: combinator in ".Input:disabled + .Backdrop" — only descendant part selectors are promoted
+- root :focus-visible: combinator in ".Input:disabled + .Backdrop::before" — only descendant part selectors are promoted
+- root :focus-visible: combinator in ".Input:disabled:checked + .Backdrop::before" — only descendant part selectors are promoted
+- root :focus-visible: combinator in ".Input:focus-visible + .Backdrop" — only descendant part selectors are promoted
+- root :focus-visible: combinator in ".Input:focus-visible + .Backdrop::after" — only descendant part selectors are promoted
+- root :focus-visible: pseudo/attribute ":" in ".Backdrop::after" — not promotable
+- root :focus-visible: pseudo/attribute ":" in ".Backdrop::before" — not promotable
+- root :disabled: combinator in ".ChoiceLabel:active .Input + .Backdrop" — only descendant part selectors are promoted
+- root :disabled: combinator in ".ChoiceLabel:hover .Input + .Backdrop" — only descendant part selectors are promoted
+- root :disabled: combinator in ".ChoiceLabel:hover .Input.toneMagic:checked:not([disabled]) + .Backdrop" — only descendant part selectors are promoted
+- root :disabled: combinator in ".ChoiceLabel:hover .Input.toneMagic:checked:not([disabled]) + .Backdrop::before" — only descendant part selectors are promoted
+- root :disabled: combinator in ".ChoiceLabel:hover .Input:checked + .Backdrop" — only descendant part selectors are promoted
+- root :disabled: combinator in ".ChoiceLabel:hover .Input:checked + .Backdrop::before" — only descendant part selectors are promoted
+- root :disabled: combinator in ".ChoiceLabel:hover .Input:checked:not([disabled]) + .Backdrop" — only descendant part selectors are promoted
+- root :disabled: combinator in ".ChoiceLabel:hover .Input:disabled + .Backdrop" — only descendant part selectors are promoted
+- root :disabled: combinator in ".ChoiceLabel:hover .Input:disabled + .Backdrop::before" — only descendant part selectors are promoted
+- root :disabled: combinator in ".ChoiceLabel:hover .Input:disabled:checked + .Backdrop::before" — only descendant part selectors are promoted
+- root :disabled: combinator in ".Input.toneMagic:checked:not([disabled]) + .Backdrop" — only descendant part selectors are promoted
+- root :disabled: combinator in ".Input.toneMagic:checked:not([disabled]) + .Backdrop::before" — only descendant part selectors are promoted
+- root :disabled: combinator in ".Input:checked + .Backdrop" — only descendant part selectors are promoted
+- root :disabled: combinator in ".Input:checked + .Backdrop::before" — only descendant part selectors are promoted
+- root :disabled: combinator in ".Input:checked:not([disabled]) + .Backdrop" — only descendant part selectors are promoted
+- root :disabled: combinator in ".Input:disabled + .Backdrop" — only descendant part selectors are promoted
+- root :disabled: combinator in ".Input:disabled + .Backdrop::before" — only descendant part selectors are promoted
+- root :disabled: combinator in ".Input:disabled:checked + .Backdrop::before" — only descendant part selectors are promoted
+- root :disabled: combinator in ".Input:focus-visible + .Backdrop" — only descendant part selectors are promoted
+- root :disabled: combinator in ".Input:focus-visible + .Backdrop::after" — only descendant part selectors are promoted
+- root :disabled: pseudo/attribute ":" in ".Backdrop::after" — not promotable
+- root :disabled: pseudo/attribute ":" in ".Backdrop::before" — not promotable
+- part input (.Input): combinator in ".ChoiceLabel:active .Input + .Backdrop" — only descendant part selectors are promoted
+- part input (.Input): combinator in ".ChoiceLabel:hover .Input + .Backdrop" — only descendant part selectors are promoted
+- part input (.Input): combinator in ".ChoiceLabel:hover .Input.toneMagic:checked:not([disabled]) + .Backdrop" — only descendant part selectors are promoted
+- part input (.Input): combinator in ".ChoiceLabel:hover .Input.toneMagic:checked:not([disabled]) + .Backdrop::before" — only descendant part selectors are promoted
+- part input (.Input): combinator in ".ChoiceLabel:hover .Input:checked + .Backdrop" — only descendant part selectors are promoted
+- part input (.Input): combinator in ".ChoiceLabel:hover .Input:checked + .Backdrop::before" — only descendant part selectors are promoted
+- part input (.Input): combinator in ".ChoiceLabel:hover .Input:checked:not([disabled]) + .Backdrop" — only descendant part selectors are promoted
+- part input (.Input): combinator in ".ChoiceLabel:hover .Input:disabled + .Backdrop" — only descendant part selectors are promoted
+- part input (.Input): combinator in ".ChoiceLabel:hover .Input:disabled + .Backdrop::before" — only descendant part selectors are promoted
+- part input (.Input): combinator in ".ChoiceLabel:hover .Input:disabled:checked + .Backdrop::before" — only descendant part selectors are promoted
+- part input (.Input): combinator in ".Input.toneMagic:checked:not([disabled]) + .Backdrop" — only descendant part selectors are promoted
+- part input (.Input): combinator in ".Input.toneMagic:checked:not([disabled]) + .Backdrop::before" — only descendant part selectors are promoted
+- part input (.Input): combinator in ".Input:checked + .Backdrop" — only descendant part selectors are promoted
+- part input (.Input): combinator in ".Input:checked + .Backdrop::before" — only descendant part selectors are promoted
+- part input (.Input): combinator in ".Input:checked:not([disabled]) + .Backdrop" — only descendant part selectors are promoted
+- part input (.Input): combinator in ".Input:disabled + .Backdrop" — only descendant part selectors are promoted
+- part input (.Input): combinator in ".Input:disabled + .Backdrop::before" — only descendant part selectors are promoted
+- part input (.Input): combinator in ".Input:disabled:checked + .Backdrop::before" — only descendant part selectors are promoted
+- part input (.Input): combinator in ".Input:focus-visible + .Backdrop" — only descendant part selectors are promoted
+- part input (.Input): combinator in ".Input:focus-visible + .Backdrop::after" — only descendant part selectors are promoted
+- part input :hover: combinator in ".ChoiceLabel:active .Input + .Backdrop" — only descendant part selectors are promoted
+- part input :hover: combinator in ".ChoiceLabel:hover .Input + .Backdrop" — only descendant part selectors are promoted
+- part input :hover: combinator in ".ChoiceLabel:hover .Input.toneMagic:checked:not([disabled]) + .Backdrop" — only descendant part selectors are promoted
+- part input :hover: combinator in ".ChoiceLabel:hover .Input.toneMagic:checked:not([disabled]) + .Backdrop::before" — only descendant part selectors are promoted
+- part input :hover: combinator in ".ChoiceLabel:hover .Input:checked + .Backdrop" — only descendant part selectors are promoted
+- part input :hover: combinator in ".ChoiceLabel:hover .Input:checked + .Backdrop::before" — only descendant part selectors are promoted
+- part input :hover: combinator in ".ChoiceLabel:hover .Input:checked:not([disabled]) + .Backdrop" — only descendant part selectors are promoted
+- part input :hover: combinator in ".ChoiceLabel:hover .Input:disabled + .Backdrop" — only descendant part selectors are promoted
+- part input :hover: combinator in ".ChoiceLabel:hover .Input:disabled + .Backdrop::before" — only descendant part selectors are promoted
+- part input :hover: combinator in ".ChoiceLabel:hover .Input:disabled:checked + .Backdrop::before" — only descendant part selectors are promoted
+- part input :hover: combinator in ".Input.toneMagic:checked:not([disabled]) + .Backdrop" — only descendant part selectors are promoted
+- part input :hover: combinator in ".Input.toneMagic:checked:not([disabled]) + .Backdrop::before" — only descendant part selectors are promoted
+- part input :hover: combinator in ".Input:checked + .Backdrop" — only descendant part selectors are promoted
+- part input :hover: combinator in ".Input:checked + .Backdrop::before" — only descendant part selectors are promoted
+- part input :hover: combinator in ".Input:checked:not([disabled]) + .Backdrop" — only descendant part selectors are promoted
+- part input :hover: combinator in ".Input:disabled + .Backdrop" — only descendant part selectors are promoted
+- part input :hover: combinator in ".Input:disabled + .Backdrop::before" — only descendant part selectors are promoted
+- part input :hover: combinator in ".Input:disabled:checked + .Backdrop::before" — only descendant part selectors are promoted
+- part input :hover: combinator in ".Input:focus-visible + .Backdrop" — only descendant part selectors are promoted
+- part input :hover: combinator in ".Input:focus-visible + .Backdrop::after" — only descendant part selectors are promoted
+- part input :active: combinator in ".ChoiceLabel:active .Input + .Backdrop" — only descendant part selectors are promoted
+- part input :active: combinator in ".ChoiceLabel:hover .Input + .Backdrop" — only descendant part selectors are promoted
+- part input :active: combinator in ".ChoiceLabel:hover .Input.toneMagic:checked:not([disabled]) + .Backdrop" — only descendant part selectors are promoted
+- part input :active: combinator in ".ChoiceLabel:hover .Input.toneMagic:checked:not([disabled]) + .Backdrop::before" — only descendant part selectors are promoted
+- part input :active: combinator in ".ChoiceLabel:hover .Input:checked + .Backdrop" — only descendant part selectors are promoted
+- part input :active: combinator in ".ChoiceLabel:hover .Input:checked + .Backdrop::before" — only descendant part selectors are promoted
+- part input :active: combinator in ".ChoiceLabel:hover .Input:checked:not([disabled]) + .Backdrop" — only descendant part selectors are promoted
+- part input :active: combinator in ".ChoiceLabel:hover .Input:disabled + .Backdrop" — only descendant part selectors are promoted
+- part input :active: combinator in ".ChoiceLabel:hover .Input:disabled + .Backdrop::before" — only descendant part selectors are promoted
+- part input :active: combinator in ".ChoiceLabel:hover .Input:disabled:checked + .Backdrop::before" — only descendant part selectors are promoted
+- part input :active: combinator in ".Input.toneMagic:checked:not([disabled]) + .Backdrop" — only descendant part selectors are promoted
+- part input :active: combinator in ".Input.toneMagic:checked:not([disabled]) + .Backdrop::before" — only descendant part selectors are promoted
+- part input :active: combinator in ".Input:checked + .Backdrop" — only descendant part selectors are promoted
+- part input :active: combinator in ".Input:checked + .Backdrop::before" — only descendant part selectors are promoted
+- part input :active: combinator in ".Input:checked:not([disabled]) + .Backdrop" — only descendant part selectors are promoted
+- part input :active: combinator in ".Input:disabled + .Backdrop" — only descendant part selectors are promoted
+- part input :active: combinator in ".Input:disabled + .Backdrop::before" — only descendant part selectors are promoted
+- part input :active: combinator in ".Input:disabled:checked + .Backdrop::before" — only descendant part selectors are promoted
+- part input :active: combinator in ".Input:focus-visible + .Backdrop" — only descendant part selectors are promoted
+- part input :active: combinator in ".Input:focus-visible + .Backdrop::after" — only descendant part selectors are promoted
+- part input :focus-visible: combinator in ".ChoiceLabel:active .Input + .Backdrop" — only descendant part selectors are promoted
+- part input :focus-visible: combinator in ".ChoiceLabel:hover .Input + .Backdrop" — only descendant part selectors are promoted
+- part input :focus-visible: combinator in ".ChoiceLabel:hover .Input.toneMagic:checked:not([disabled]) + .Backdrop" — only descendant part selectors are promoted
+- part input :focus-visible: combinator in ".ChoiceLabel:hover .Input.toneMagic:checked:not([disabled]) + .Backdrop::before" — only descendant part selectors are promoted
+- part input :focus-visible: combinator in ".ChoiceLabel:hover .Input:checked + .Backdrop" — only descendant part selectors are promoted
+- part input :focus-visible: combinator in ".ChoiceLabel:hover .Input:checked + .Backdrop::before" — only descendant part selectors are promoted
+- part input :focus-visible: combinator in ".ChoiceLabel:hover .Input:checked:not([disabled]) + .Backdrop" — only descendant part selectors are promoted
+- part input :focus-visible: combinator in ".ChoiceLabel:hover .Input:disabled + .Backdrop" — only descendant part selectors are promoted
+- part input :focus-visible: combinator in ".ChoiceLabel:hover .Input:disabled + .Backdrop::before" — only descendant part selectors are promoted
+- part input :focus-visible: combinator in ".ChoiceLabel:hover .Input:disabled:checked + .Backdrop::before" — only descendant part selectors are promoted
+- part input :focus-visible: combinator in ".Input.toneMagic:checked:not([disabled]) + .Backdrop" — only descendant part selectors are promoted
+- part input :focus-visible: combinator in ".Input.toneMagic:checked:not([disabled]) + .Backdrop::before" — only descendant part selectors are promoted
+- part input :focus-visible: combinator in ".Input:checked + .Backdrop" — only descendant part selectors are promoted
+- part input :focus-visible: combinator in ".Input:checked + .Backdrop::before" — only descendant part selectors are promoted
+- part input :focus-visible: combinator in ".Input:checked:not([disabled]) + .Backdrop" — only descendant part selectors are promoted
+- part input :focus-visible: combinator in ".Input:disabled + .Backdrop" — only descendant part selectors are promoted
+- part input :focus-visible: combinator in ".Input:disabled + .Backdrop::before" — only descendant part selectors are promoted
+- part input :focus-visible: combinator in ".Input:disabled:checked + .Backdrop::before" — only descendant part selectors are promoted
+- part input :focus-visible: combinator in ".Input:focus-visible + .Backdrop" — only descendant part selectors are promoted
+- part input :focus-visible: combinator in ".Input:focus-visible + .Backdrop::after" — only descendant part selectors are promoted
+- part input :disabled: combinator in ".ChoiceLabel:active .Input + .Backdrop" — only descendant part selectors are promoted
+- part input :disabled: combinator in ".ChoiceLabel:hover .Input + .Backdrop" — only descendant part selectors are promoted
+- part input :disabled: combinator in ".ChoiceLabel:hover .Input.toneMagic:checked:not([disabled]) + .Backdrop" — only descendant part selectors are promoted
+- part input :disabled: combinator in ".ChoiceLabel:hover .Input.toneMagic:checked:not([disabled]) + .Backdrop::before" — only descendant part selectors are promoted
+- part input :disabled: combinator in ".ChoiceLabel:hover .Input:checked + .Backdrop" — only descendant part selectors are promoted
+- part input :disabled: combinator in ".ChoiceLabel:hover .Input:checked + .Backdrop::before" — only descendant part selectors are promoted
+- part input :disabled: combinator in ".ChoiceLabel:hover .Input:checked:not([disabled]) + .Backdrop" — only descendant part selectors are promoted
+- part input :disabled: combinator in ".ChoiceLabel:hover .Input:disabled + .Backdrop" — only descendant part selectors are promoted
+- part input :disabled: combinator in ".ChoiceLabel:hover .Input:disabled + .Backdrop::before" — only descendant part selectors are promoted
+- part input :disabled: combinator in ".ChoiceLabel:hover .Input:disabled:checked + .Backdrop::before" — only descendant part selectors are promoted
+- part input :disabled: combinator in ".Input.toneMagic:checked:not([disabled]) + .Backdrop" — only descendant part selectors are promoted
+- part input :disabled: combinator in ".Input.toneMagic:checked:not([disabled]) + .Backdrop::before" — only descendant part selectors are promoted
+- part input :disabled: combinator in ".Input:checked + .Backdrop" — only descendant part selectors are promoted
+- part input :disabled: combinator in ".Input:checked + .Backdrop::before" — only descendant part selectors are promoted
+- part input :disabled: combinator in ".Input:checked:not([disabled]) + .Backdrop" — only descendant part selectors are promoted
+- part input :disabled: combinator in ".Input:disabled + .Backdrop" — only descendant part selectors are promoted
+- part input :disabled: combinator in ".Input:disabled + .Backdrop::before" — only descendant part selectors are promoted
+- part input :disabled: combinator in ".Input:disabled:checked + .Backdrop::before" — only descendant part selectors are promoted
+- part input :disabled: combinator in ".Input:focus-visible + .Backdrop" — only descendant part selectors are promoted
+- part input :disabled: combinator in ".Input:focus-visible + .Backdrop::after" — only descendant part selectors are promoted
+- part backdrop (.Backdrop): combinator in ".ChoiceLabel:active .Input + .Backdrop" — only descendant part selectors are promoted
+- part backdrop (.Backdrop): combinator in ".ChoiceLabel:hover .Input + .Backdrop" — only descendant part selectors are promoted
+- part backdrop (.Backdrop): combinator in ".ChoiceLabel:hover .Input.toneMagic:checked:not([disabled]) + .Backdrop" — only descendant part selectors are promoted
+- part backdrop (.Backdrop): combinator in ".ChoiceLabel:hover .Input.toneMagic:checked:not([disabled]) + .Backdrop::before" — only descendant part selectors are promoted
+- part backdrop (.Backdrop): combinator in ".ChoiceLabel:hover .Input:checked + .Backdrop" — only descendant part selectors are promoted
+- part backdrop (.Backdrop): combinator in ".ChoiceLabel:hover .Input:checked + .Backdrop::before" — only descendant part selectors are promoted
+- part backdrop (.Backdrop): combinator in ".ChoiceLabel:hover .Input:checked:not([disabled]) + .Backdrop" — only descendant part selectors are promoted
+- part backdrop (.Backdrop): combinator in ".ChoiceLabel:hover .Input:disabled + .Backdrop" — only descendant part selectors are promoted
+- part backdrop (.Backdrop): combinator in ".ChoiceLabel:hover .Input:disabled + .Backdrop::before" — only descendant part selectors are promoted
+- part backdrop (.Backdrop): combinator in ".ChoiceLabel:hover .Input:disabled:checked + .Backdrop::before" — only descendant part selectors are promoted
+- part backdrop (.Backdrop): combinator in ".Input.toneMagic:checked:not([disabled]) + .Backdrop" — only descendant part selectors are promoted
+- part backdrop (.Backdrop): combinator in ".Input.toneMagic:checked:not([disabled]) + .Backdrop::before" — only descendant part selectors are promoted
+- part backdrop (.Backdrop): combinator in ".Input:checked + .Backdrop" — only descendant part selectors are promoted
+- part backdrop (.Backdrop): combinator in ".Input:checked + .Backdrop::before" — only descendant part selectors are promoted
+- part backdrop (.Backdrop): combinator in ".Input:checked:not([disabled]) + .Backdrop" — only descendant part selectors are promoted
+- part backdrop (.Backdrop): combinator in ".Input:disabled + .Backdrop" — only descendant part selectors are promoted
+- part backdrop (.Backdrop): combinator in ".Input:disabled + .Backdrop::before" — only descendant part selectors are promoted
+- part backdrop (.Backdrop): combinator in ".Input:disabled:checked + .Backdrop::before" — only descendant part selectors are promoted
+- part backdrop (.Backdrop): combinator in ".Input:focus-visible + .Backdrop" — only descendant part selectors are promoted
+- part backdrop (.Backdrop): combinator in ".Input:focus-visible + .Backdrop::after" — only descendant part selectors are promoted
+- part backdrop (.Backdrop): part selector piece ":" in ".Backdrop::after" — not promotable
+- part backdrop (.Backdrop): part selector piece ":" in ".Backdrop::before" — not promotable
+- part backdrop (.Backdrop): height — literal value "100%" — a raw value is reported, never turned into an invented token (`.Backdrop`)
+- part backdrop (.Backdrop): width — literal value "100%" — a raw value is reported, never turned into an invented token (`.Backdrop`)
+- part backdrop :hover: combinator in ".ChoiceLabel:active .Input + .Backdrop" — only descendant part selectors are promoted
+- part backdrop :hover: combinator in ".ChoiceLabel:hover .Input + .Backdrop" — only descendant part selectors are promoted
+- part backdrop :hover: combinator in ".ChoiceLabel:hover .Input.toneMagic:checked:not([disabled]) + .Backdrop" — only descendant part selectors are promoted
+- part backdrop :hover: combinator in ".ChoiceLabel:hover .Input.toneMagic:checked:not([disabled]) + .Backdrop::before" — only descendant part selectors are promoted
+- part backdrop :hover: combinator in ".ChoiceLabel:hover .Input:checked + .Backdrop" — only descendant part selectors are promoted
+- part backdrop :hover: combinator in ".ChoiceLabel:hover .Input:checked + .Backdrop::before" — only descendant part selectors are promoted
+- part backdrop :hover: combinator in ".ChoiceLabel:hover .Input:checked:not([disabled]) + .Backdrop" — only descendant part selectors are promoted
+- part backdrop :hover: combinator in ".ChoiceLabel:hover .Input:disabled + .Backdrop" — only descendant part selectors are promoted
+- part backdrop :hover: combinator in ".ChoiceLabel:hover .Input:disabled + .Backdrop::before" — only descendant part selectors are promoted
+- part backdrop :hover: combinator in ".ChoiceLabel:hover .Input:disabled:checked + .Backdrop::before" — only descendant part selectors are promoted
+- part backdrop :hover: combinator in ".Input.toneMagic:checked:not([disabled]) + .Backdrop" — only descendant part selectors are promoted
+- part backdrop :hover: combinator in ".Input.toneMagic:checked:not([disabled]) + .Backdrop::before" — only descendant part selectors are promoted
+- part backdrop :hover: combinator in ".Input:checked + .Backdrop" — only descendant part selectors are promoted
+- part backdrop :hover: combinator in ".Input:checked + .Backdrop::before" — only descendant part selectors are promoted
+- part backdrop :hover: combinator in ".Input:checked:not([disabled]) + .Backdrop" — only descendant part selectors are promoted
+- part backdrop :hover: combinator in ".Input:disabled + .Backdrop" — only descendant part selectors are promoted
+- part backdrop :hover: combinator in ".Input:disabled + .Backdrop::before" — only descendant part selectors are promoted
+- part backdrop :hover: combinator in ".Input:disabled:checked + .Backdrop::before" — only descendant part selectors are promoted
+- part backdrop :hover: combinator in ".Input:focus-visible + .Backdrop" — only descendant part selectors are promoted
+- part backdrop :hover: combinator in ".Input:focus-visible + .Backdrop::after" — only descendant part selectors are promoted
+- part backdrop :hover: part selector piece ":" in ".Backdrop::after" — not promotable
+- part backdrop :hover: part selector piece ":" in ".Backdrop::before" — not promotable
+- part backdrop :active: combinator in ".ChoiceLabel:active .Input + .Backdrop" — only descendant part selectors are promoted
+- part backdrop :active: combinator in ".ChoiceLabel:hover .Input + .Backdrop" — only descendant part selectors are promoted
+- part backdrop :active: combinator in ".ChoiceLabel:hover .Input.toneMagic:checked:not([disabled]) + .Backdrop" — only descendant part selectors are promoted
+- part backdrop :active: combinator in ".ChoiceLabel:hover .Input.toneMagic:checked:not([disabled]) + .Backdrop::before" — only descendant part selectors are promoted
+- part backdrop :active: combinator in ".ChoiceLabel:hover .Input:checked + .Backdrop" — only descendant part selectors are promoted
+- part backdrop :active: combinator in ".ChoiceLabel:hover .Input:checked + .Backdrop::before" — only descendant part selectors are promoted
+- part backdrop :active: combinator in ".ChoiceLabel:hover .Input:checked:not([disabled]) + .Backdrop" — only descendant part selectors are promoted
+- part backdrop :active: combinator in ".ChoiceLabel:hover .Input:disabled + .Backdrop" — only descendant part selectors are promoted
+- part backdrop :active: combinator in ".ChoiceLabel:hover .Input:disabled + .Backdrop::before" — only descendant part selectors are promoted
+- part backdrop :active: combinator in ".ChoiceLabel:hover .Input:disabled:checked + .Backdrop::before" — only descendant part selectors are promoted
+- part backdrop :active: combinator in ".Input.toneMagic:checked:not([disabled]) + .Backdrop" — only descendant part selectors are promoted
+- part backdrop :active: combinator in ".Input.toneMagic:checked:not([disabled]) + .Backdrop::before" — only descendant part selectors are promoted
+- part backdrop :active: combinator in ".Input:checked + .Backdrop" — only descendant part selectors are promoted
+- part backdrop :active: combinator in ".Input:checked + .Backdrop::before" — only descendant part selectors are promoted
+- part backdrop :active: combinator in ".Input:checked:not([disabled]) + .Backdrop" — only descendant part selectors are promoted
+- part backdrop :active: combinator in ".Input:disabled + .Backdrop" — only descendant part selectors are promoted
+- part backdrop :active: combinator in ".Input:disabled + .Backdrop::before" — only descendant part selectors are promoted
+- part backdrop :active: combinator in ".Input:disabled:checked + .Backdrop::before" — only descendant part selectors are promoted
+- part backdrop :active: combinator in ".Input:focus-visible + .Backdrop" — only descendant part selectors are promoted
+- part backdrop :active: combinator in ".Input:focus-visible + .Backdrop::after" — only descendant part selectors are promoted
+- part backdrop :active: part selector piece ":" in ".Backdrop::after" — not promotable
+- part backdrop :active: part selector piece ":" in ".Backdrop::before" — not promotable
+- part backdrop :focus-visible: combinator in ".ChoiceLabel:active .Input + .Backdrop" — only descendant part selectors are promoted
+- part backdrop :focus-visible: combinator in ".ChoiceLabel:hover .Input + .Backdrop" — only descendant part selectors are promoted
+- part backdrop :focus-visible: combinator in ".ChoiceLabel:hover .Input.toneMagic:checked:not([disabled]) + .Backdrop" — only descendant part selectors are promoted
+- part backdrop :focus-visible: combinator in ".ChoiceLabel:hover .Input.toneMagic:checked:not([disabled]) + .Backdrop::before" — only descendant part selectors are promoted
+- part backdrop :focus-visible: combinator in ".ChoiceLabel:hover .Input:checked + .Backdrop" — only descendant part selectors are promoted
+- part backdrop :focus-visible: combinator in ".ChoiceLabel:hover .Input:checked + .Backdrop::before" — only descendant part selectors are promoted
+- part backdrop :focus-visible: combinator in ".ChoiceLabel:hover .Input:checked:not([disabled]) + .Backdrop" — only descendant part selectors are promoted
+- part backdrop :focus-visible: combinator in ".ChoiceLabel:hover .Input:disabled + .Backdrop" — only descendant part selectors are promoted
+- part backdrop :focus-visible: combinator in ".ChoiceLabel:hover .Input:disabled + .Backdrop::before" — only descendant part selectors are promoted
+- part backdrop :focus-visible: combinator in ".ChoiceLabel:hover .Input:disabled:checked + .Backdrop::before" — only descendant part selectors are promoted
+- part backdrop :focus-visible: combinator in ".Input.toneMagic:checked:not([disabled]) + .Backdrop" — only descendant part selectors are promoted
+- part backdrop :focus-visible: combinator in ".Input.toneMagic:checked:not([disabled]) + .Backdrop::before" — only descendant part selectors are promoted
+- part backdrop :focus-visible: combinator in ".Input:checked + .Backdrop" — only descendant part selectors are promoted
+- part backdrop :focus-visible: combinator in ".Input:checked + .Backdrop::before" — only descendant part selectors are promoted
+- part backdrop :focus-visible: combinator in ".Input:checked:not([disabled]) + .Backdrop" — only descendant part selectors are promoted
+- part backdrop :focus-visible: combinator in ".Input:disabled + .Backdrop" — only descendant part selectors are promoted
+- part backdrop :focus-visible: combinator in ".Input:disabled + .Backdrop::before" — only descendant part selectors are promoted
+- part backdrop :focus-visible: combinator in ".Input:disabled:checked + .Backdrop::before" — only descendant part selectors are promoted
+- part backdrop :focus-visible: combinator in ".Input:focus-visible + .Backdrop" — only descendant part selectors are promoted
+- part backdrop :focus-visible: combinator in ".Input:focus-visible + .Backdrop::after" — only descendant part selectors are promoted
+- part backdrop :focus-visible: part selector piece ":" in ".Backdrop::after" — not promotable
+- part backdrop :focus-visible: part selector piece ":" in ".Backdrop::before" — not promotable
+- part backdrop :disabled: combinator in ".ChoiceLabel:active .Input + .Backdrop" — only descendant part selectors are promoted
+- part backdrop :disabled: combinator in ".ChoiceLabel:hover .Input + .Backdrop" — only descendant part selectors are promoted
+- part backdrop :disabled: combinator in ".ChoiceLabel:hover .Input.toneMagic:checked:not([disabled]) + .Backdrop" — only descendant part selectors are promoted
+- part backdrop :disabled: combinator in ".ChoiceLabel:hover .Input.toneMagic:checked:not([disabled]) + .Backdrop::before" — only descendant part selectors are promoted
+- part backdrop :disabled: combinator in ".ChoiceLabel:hover .Input:checked + .Backdrop" — only descendant part selectors are promoted
+- part backdrop :disabled: combinator in ".ChoiceLabel:hover .Input:checked + .Backdrop::before" — only descendant part selectors are promoted
+- part backdrop :disabled: combinator in ".ChoiceLabel:hover .Input:checked:not([disabled]) + .Backdrop" — only descendant part selectors are promoted
+- part backdrop :disabled: combinator in ".ChoiceLabel:hover .Input:disabled + .Backdrop" — only descendant part selectors are promoted
+- part backdrop :disabled: combinator in ".ChoiceLabel:hover .Input:disabled + .Backdrop::before" — only descendant part selectors are promoted
+- part backdrop :disabled: combinator in ".ChoiceLabel:hover .Input:disabled:checked + .Backdrop::before" — only descendant part selectors are promoted
+- part backdrop :disabled: combinator in ".Input.toneMagic:checked:not([disabled]) + .Backdrop" — only descendant part selectors are promoted
+- part backdrop :disabled: combinator in ".Input.toneMagic:checked:not([disabled]) + .Backdrop::before" — only descendant part selectors are promoted
+- part backdrop :disabled: combinator in ".Input:checked + .Backdrop" — only descendant part selectors are promoted
+- part backdrop :disabled: combinator in ".Input:checked + .Backdrop::before" — only descendant part selectors are promoted
+- part backdrop :disabled: combinator in ".Input:checked:not([disabled]) + .Backdrop" — only descendant part selectors are promoted
+- part backdrop :disabled: combinator in ".Input:disabled + .Backdrop" — only descendant part selectors are promoted
+- part backdrop :disabled: combinator in ".Input:disabled + .Backdrop::before" — only descendant part selectors are promoted
+- part backdrop :disabled: combinator in ".Input:disabled:checked + .Backdrop::before" — only descendant part selectors are promoted
+- part backdrop :disabled: combinator in ".Input:focus-visible + .Backdrop" — only descendant part selectors are promoted
+- part backdrop :disabled: combinator in ".Input:focus-visible + .Backdrop::after" — only descendant part selectors are promoted
+- part backdrop :disabled: part selector piece ":" in ".Backdrop::after" — not promotable
+- part backdrop :disabled: part selector piece ":" in ".Backdrop::before" — not promotable
+- unmatched rule `.Input:focus-visible + .Backdrop::after` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 1 declaration(s) not carried
+- unmatched rule `.Input:checked + .Backdrop, .ChoiceLabel:hover .Input:checked + .Backdrop` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 1 declaration(s) not carried
+- unmatched rule `.Input:checked + .Backdrop::before, .ChoiceLabel:hover .Input:checked + .Backdrop::before` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 1 declaration(s) not carried
+- unmatched rule `.Input:checked:not([disabled]) + .Backdrop, .ChoiceLabel:hover .Input:checked:not([disabled]) + .Backdrop` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 2 declaration(s) not carried
+- unmatched rule `.Input.toneMagic:checked:not([disabled]) + .Backdrop, .ChoiceLabel:hover .Input.toneMagic:checked:not([disabled]) + .Backdrop` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 2 declaration(s) not carried
+- unmatched rule `.Input.toneMagic:checked:not([disabled]) + .Backdrop::before, .ChoiceLabel:hover .Input.toneMagic:checked:not([disabled]) + .Backdrop::before` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 1 declaration(s) not carried
+- unmatched rule `.ChoiceLabel:hover .Input + .Backdrop` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 2 declaration(s) not carried
+- unmatched rule `.ChoiceLabel:active .Input + .Backdrop` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 2 declaration(s) not carried
+- unmatched rule `.Input:disabled + .Backdrop, .ChoiceLabel:hover .Input:disabled + .Backdrop` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 2 declaration(s) not carried
+- unmatched rule `.Input:disabled + .Backdrop::before, .ChoiceLabel:hover .Input:disabled + .Backdrop::before` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 1 declaration(s) not carried
+- unmatched rule `.Input:disabled:checked + .Backdrop::before, .ChoiceLabel:hover .Input:disabled:checked + .Backdrop::before` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 1 declaration(s) not carried
+- unmatched rule `.Backdrop::before` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 4 declaration(s) not carried
+- unmatched rule `.Backdrop::after` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 1 declaration(s) not carried
+
+## TextField (`polaris.text-field`)
+
+- source: `polaris-react/src/components/TextField/TextField.module.css` + extracted API (`out/contracts/text-field.contract.json`)
+- carried: 14 binding(s) · refused by name: 908 · curated decisions: 6
+
+### Curated decisions
+- NOTE: the 34-prop API surface is the gauntlet's headline redemption: TextField extracted silently HOLLOW (0 props) in the 2026-07-12 run (intersection-of-named-refs, failure class C); the post-gauntlet fix carries the full surface with the composition note attached
+- NOTE: label/helpText/prefix/suffix are ReactNode props — named slot candidates, not carried; Polaris renders its label above the field and this surface does not
+- NOTE: the input's min-height rides the GLOBAL --pg-control-height custom property (not a published token) — named refusal
+- NOTE: the backdrop's border is a shorthand mixing two tokens (`var(--p-border-width-0165) solid var(--p-color-input-border)`) plus a hard-coded #898f94 border-top-color (Polaris's own a11y patch, polaris#7838) — both named refusals, both visible in the receipts as the hairline difference
+- NOTE: align/variant/size axes: only the classes that exist in the module.css are curated ('borderless', 'slim'); align has no styling classes (it styles the inner Input via a different class family — out of promoted scope by name)
+- prop `autoComplete`: showcase sample default 'off' added (required text prop; the generator needs a canvas/story sample) — Polaris itself declares NO default for it
+
+### Carried bindings (each cites its CSS rule)
+- root (.TextField): color → `{p.color-text}` (from `.TextField { color: var(--p-color-text) }`)
+- part input (.Input): color → `{p.color-text}` (from `.Input { color: var(--p-color-text) }`)
+- part input (.Input): padding-block → `{p.space-150}` (from `.Input { padding-block: var(--p-space-150) }`)
+- part input (.Input): padding-inline → `{p.space-300}` (from `.Input { padding-inline: var(--p-space-300) }`)
+- part input (.Input): font-size → `{p.font-size-400}` (from `.Input { font-size: var(--p-font-size-400) }`)
+- part input (.Input): font-weight → `{p.font-weight-regular}` (from `.Input { font-weight: var(--p-font-weight-regular) }`)
+- part input (.Input): line-height → `{p.font-line-height-600}` (from `.Input { line-height: var(--p-font-line-height-600) }`)
+- part input [variant=borderless]: min-height → `{p.space-800}` (from `.borderless .Input, .borderless .Backdrop { min-height: var(--p-space-800) }`)
+- part input :disabled: color → `{p.color-text-disabled}` (from `.Input:disabled { color: var(--p-color-text-disabled) }`)
+- part backdrop (.Backdrop): background-color → `{p.color-input-bg-surface}` (from `.Backdrop { background-color: var(--p-color-input-bg-surface) }`)
+- part backdrop (.Backdrop): border-radius → `{p.border-radius-200}` (from `.Backdrop { border-radius: var(--p-border-radius-200) }`)
+- part backdrop (.Backdrop): border-width → `{p.border-width-0165}` (from `.Backdrop { border-width: var(--p-border-width-0165) }`)
+- part backdrop (.Backdrop): border-color → `{p.color-input-border}` (from `.Backdrop { border-color: var(--p-color-input-border) }`)
+- part backdrop [variant=borderless]: min-height → `{p.space-800}` (from `.borderless .Input, .borderless .Backdrop { min-height: var(--p-space-800) }`)
+
+### Refused by name
+- at-rule: `@media (--p-breakpoints-md-up) { .AutoSizeWrapper::after, .AutoSizeWrapper input, .AutoSizeWrapper textarea { font-size: var(--p-font-size-325) } }` — conditional styling is not a contract channel
+- at-rule: `@media (--p-breakpoints-md-up) { .AutoSizeWrapper::after, .AutoSizeWrapper input, .AutoSizeWrapper textarea { line-height: var(--p-font-line-height-500) } }` — conditional styling is not a contract channel
+- at-rule: `@media (--p-breakpoints-md-up) { .Input { font-size: var(--p-font-size-325) } }` — conditional styling is not a contract channel
+- at-rule: `@media (--p-breakpoints-md-up) { .Input { line-height: var(--p-font-line-height-500) } }` — conditional styling is not a contract channel
+- mixin: `@mixin text-style-input` — postcss mixin, expands outside the promoted rule model
+- mixin: `@mixin no-focus-ring` — postcss mixin, expands outside the promoted rule model
+- mixin: `@mixin focus-ring base, 1px` — postcss mixin, expands outside the promoted rule model
+- mixin: `@mixin focus-ring base, 0, base` — postcss mixin, expands outside the promoted rule model
+- mixin: `@mixin unstyled-button` — postcss mixin, expands outside the promoted rule model
+- mixin: `@mixin focus-ring base, 0, focused` — postcss mixin, expands outside the promoted rule model
+- mixin: `@mixin text-breakword` — postcss mixin, expands outside the promoted rule model
+- root (.TextField): combinator in ".Input:focus-visible ~ .Backdrop" — only descendant part selectors are promoted
+- root (.TextField): combinator in ".Prefix + .Input" — only descendant part selectors are promoted
+- root (.TextField): combinator in ".Prefix + .InputAndSuffixWrapper .AutoSizeWrapper::after" — only descendant part selectors are promoted
+- root (.TextField): combinator in ".Prefix + .InputAndSuffixWrapper input" — only descendant part selectors are promoted
+- root (.TextField): combinator in ".Prefix + .InputAndSuffixWrapper textarea" — only descendant part selectors are promoted
+- root (.TextField): combinator in ".TextField:focus-within .Loading:has(+ .ClearButton)" — only descendant part selectors are promoted
+- root (.TextField): combinator in ".TextField:focus-within > .Input ~ .Backdrop" — only descendant part selectors are promoted
+- root (.TextField): combinator in ".TextField:focus-within > .Input" — only descendant part selectors are promoted
+- root (.TextField): combinator in ".TextField:not(.disabled):not(.error):not(.readOnly)
+    > .Input:hover:not(:focus-visible) ~ .Backdrop" — only descendant part selectors are promoted
+- root (.TextField): combinator in ".VerticalContent > .Input" — only descendant part selectors are promoted
+- root (.TextField): combinator in ".disabled > .Backdrop" — only descendant part selectors are promoted
+- root (.TextField): combinator in ".error .Input:active ~ .Backdrop" — only descendant part selectors are promoted
+- root (.TextField): combinator in ".error .Input:focus-visible ~ .Backdrop" — only descendant part selectors are promoted
+- root (.TextField): combinator in ".error .Input:hover ~ .Backdrop" — only descendant part selectors are promoted
+- root (.TextField): combinator in ".error > .Input ~ .Backdrop" — only descendant part selectors are promoted
+- root (.TextField): combinator in ".error > .Input ~ .Backdrop::after" — only descendant part selectors are promoted
+- root (.TextField): combinator in ".error > .InputAndSuffixWrapper ~ .Backdrop" — only descendant part selectors are promoted
+- root (.TextField): combinator in ".error > .InputAndSuffixWrapper ~ .Backdrop::after" — only descendant part selectors are promoted
+- root (.TextField): combinator in ".focus > .Input ~ .Backdrop" — only descendant part selectors are promoted
+- root (.TextField): combinator in ".focus > .Input" — only descendant part selectors are promoted
+- root (.TextField): combinator in ".focus > .InputAndSuffixWrapper ~ .Backdrop" — only descendant part selectors are promoted
+- root (.TextField): combinator in ".focus > .InputAndSuffixWrapper" — only descendant part selectors are promoted
+- root (.TextField): combinator in ".focus > .VerticalContent ~ .Backdrop" — only descendant part selectors are promoted
+- root (.TextField): combinator in ".focus > .VerticalContent" — only descendant part selectors are promoted
+- root (.TextField): combinator in ".multiline > .Input" — only descendant part selectors are promoted
+- root (.TextField): combinator in ".readOnly.readOnly > .Backdrop" — only descendant part selectors are promoted
+- root (.TextField): combinator in ".readOnly.readOnly > .Input" — only descendant part selectors are promoted
+- root (.TextField): combinator in ".readOnly.readOnly.focus > .Backdrop" — only descendant part selectors are promoted
+- root (.TextField): combinator in ".toneMagic > .Backdrop" — only descendant part selectors are promoted
+- root (.TextField): combinator in ".toneMagic > .Input" — only descendant part selectors are promoted
+- root (.TextField): combinator in ".toneMagic.TextField:focus-within > .Input" — only descendant part selectors are promoted
+- root (.TextField): combinator in ".toneMagic.focus > .Input" — only descendant part selectors are promoted
+- root (.TextField): combinator in ".toneMagic.focus > .VerticalContent" — only descendant part selectors are promoted
+- root (.TextField): combinator in ".toneMagic:not(.disabled):not(.error):not(.readOnly)
+    > .Input:hover:not(:focus-visible) ~ .Backdrop" — only descendant part selectors are promoted
+- root (.TextField): pseudo/attribute ":" in ".AutoSizeWrapper::after" — not promotable
+- root (.TextField): pseudo/attribute ":" in ".AutoSizeWrapperWithSuffix::after" — not promotable
+- root (.TextField): pseudo/attribute ":" in ".Input-hasClearButton[type='search']::-webkit-search-cancel-button" — not promotable
+- root (.TextField): pseudo/attribute ":" in ".Input.suggestion::selection" — not promotable
+- root (.TextField): pseudo/attribute ":" in ".Input::placeholder" — not promotable
+- root (.TextField): pseudo/attribute ":" in ".Input[type='number']::-webkit-inner-spin-button" — not promotable
+- root (.TextField): pseudo/attribute ":" in ".Input[type='number']::-webkit-outer-spin-button" — not promotable
+- root (.TextField): pseudo/attribute ":-webkit-autofill" in ".Input:-webkit-autofill" — not promotable
+- root (.TextField): pseudo/attribute ":first-child" in ".Segment:first-child" — not promotable
+- root (.TextField): pseudo/attribute ":focus" in ".Segment:focus" — not promotable
+- root (.TextField): pseudo/attribute ":invalid" in ".Input:invalid" — not promotable
+- root (.TextField): pseudo/attribute ":last-child" in ".Segment:last-child" — not promotable
+- root (.TextField): unsupported :not() contents in ".Segment:not(:first-child)"
+- root [variant=borderless]: combinator in ".Input:focus-visible ~ .Backdrop" — only descendant part selectors are promoted
+- root [variant=borderless]: combinator in ".Prefix + .Input" — only descendant part selectors are promoted
+- root [variant=borderless]: combinator in ".Prefix + .InputAndSuffixWrapper .AutoSizeWrapper::after" — only descendant part selectors are promoted
+- root [variant=borderless]: combinator in ".Prefix + .InputAndSuffixWrapper input" — only descendant part selectors are promoted
+- root [variant=borderless]: combinator in ".Prefix + .InputAndSuffixWrapper textarea" — only descendant part selectors are promoted
+- root [variant=borderless]: combinator in ".TextField:focus-within .Loading:has(+ .ClearButton)" — only descendant part selectors are promoted
+- root [variant=borderless]: combinator in ".TextField:focus-within > .Input ~ .Backdrop" — only descendant part selectors are promoted
+- root [variant=borderless]: combinator in ".TextField:focus-within > .Input" — only descendant part selectors are promoted
+- root [variant=borderless]: combinator in ".TextField:not(.disabled):not(.error):not(.readOnly)
+    > .Input:hover:not(:focus-visible) ~ .Backdrop" — only descendant part selectors are promoted
+- root [variant=borderless]: combinator in ".VerticalContent > .Input" — only descendant part selectors are promoted
+- root [variant=borderless]: combinator in ".disabled > .Backdrop" — only descendant part selectors are promoted
+- root [variant=borderless]: combinator in ".error .Input:active ~ .Backdrop" — only descendant part selectors are promoted
+- root [variant=borderless]: combinator in ".error .Input:focus-visible ~ .Backdrop" — only descendant part selectors are promoted
+- root [variant=borderless]: combinator in ".error .Input:hover ~ .Backdrop" — only descendant part selectors are promoted
+- root [variant=borderless]: combinator in ".error > .Input ~ .Backdrop" — only descendant part selectors are promoted
+- root [variant=borderless]: combinator in ".error > .Input ~ .Backdrop::after" — only descendant part selectors are promoted
+- root [variant=borderless]: combinator in ".error > .InputAndSuffixWrapper ~ .Backdrop" — only descendant part selectors are promoted
+- root [variant=borderless]: combinator in ".error > .InputAndSuffixWrapper ~ .Backdrop::after" — only descendant part selectors are promoted
+- root [variant=borderless]: combinator in ".focus > .Input ~ .Backdrop" — only descendant part selectors are promoted
+- root [variant=borderless]: combinator in ".focus > .Input" — only descendant part selectors are promoted
+- root [variant=borderless]: combinator in ".focus > .InputAndSuffixWrapper ~ .Backdrop" — only descendant part selectors are promoted
+- root [variant=borderless]: combinator in ".focus > .InputAndSuffixWrapper" — only descendant part selectors are promoted
+- root [variant=borderless]: combinator in ".focus > .VerticalContent ~ .Backdrop" — only descendant part selectors are promoted
+- root [variant=borderless]: combinator in ".focus > .VerticalContent" — only descendant part selectors are promoted
+- root [variant=borderless]: combinator in ".multiline > .Input" — only descendant part selectors are promoted
+- root [variant=borderless]: combinator in ".readOnly.readOnly > .Backdrop" — only descendant part selectors are promoted
+- root [variant=borderless]: combinator in ".readOnly.readOnly > .Input" — only descendant part selectors are promoted
+- root [variant=borderless]: combinator in ".readOnly.readOnly.focus > .Backdrop" — only descendant part selectors are promoted
+- root [variant=borderless]: combinator in ".toneMagic > .Backdrop" — only descendant part selectors are promoted
+- root [variant=borderless]: combinator in ".toneMagic > .Input" — only descendant part selectors are promoted
+- root [variant=borderless]: combinator in ".toneMagic.TextField:focus-within > .Input" — only descendant part selectors are promoted
+- root [variant=borderless]: combinator in ".toneMagic.focus > .Input" — only descendant part selectors are promoted
+- root [variant=borderless]: combinator in ".toneMagic.focus > .VerticalContent" — only descendant part selectors are promoted
+- root [variant=borderless]: combinator in ".toneMagic:not(.disabled):not(.error):not(.readOnly)
+    > .Input:hover:not(:focus-visible) ~ .Backdrop" — only descendant part selectors are promoted
+- root [variant=borderless]: pseudo/attribute ":" in ".AutoSizeWrapper::after" — not promotable
+- root [variant=borderless]: pseudo/attribute ":" in ".AutoSizeWrapperWithSuffix::after" — not promotable
+- root [variant=borderless]: pseudo/attribute ":" in ".Input-hasClearButton[type='search']::-webkit-search-cancel-button" — not promotable
+- root [variant=borderless]: pseudo/attribute ":" in ".Input.suggestion::selection" — not promotable
+- root [variant=borderless]: pseudo/attribute ":" in ".Input::placeholder" — not promotable
+- root [variant=borderless]: pseudo/attribute ":" in ".Input[type='number']::-webkit-inner-spin-button" — not promotable
+- root [variant=borderless]: pseudo/attribute ":" in ".Input[type='number']::-webkit-outer-spin-button" — not promotable
+- root [variant=borderless]: pseudo/attribute ":-webkit-autofill" in ".Input:-webkit-autofill" — not promotable
+- root [variant=borderless]: pseudo/attribute ":first-child" in ".Segment:first-child" — not promotable
+- root [variant=borderless]: pseudo/attribute ":focus" in ".Segment:focus" — not promotable
+- root [variant=borderless]: pseudo/attribute ":invalid" in ".Input:invalid" — not promotable
+- root [variant=borderless]: pseudo/attribute ":last-child" in ".Segment:last-child" — not promotable
+- root [variant=borderless]: unsupported :not() contents in ".Segment:not(:first-child)"
+- root [size=slim]: combinator in ".Input:focus-visible ~ .Backdrop" — only descendant part selectors are promoted
+- root [size=slim]: combinator in ".Prefix + .Input" — only descendant part selectors are promoted
+- root [size=slim]: combinator in ".Prefix + .InputAndSuffixWrapper .AutoSizeWrapper::after" — only descendant part selectors are promoted
+- root [size=slim]: combinator in ".Prefix + .InputAndSuffixWrapper input" — only descendant part selectors are promoted
+- root [size=slim]: combinator in ".Prefix + .InputAndSuffixWrapper textarea" — only descendant part selectors are promoted
+- root [size=slim]: combinator in ".TextField:focus-within .Loading:has(+ .ClearButton)" — only descendant part selectors are promoted
+- root [size=slim]: combinator in ".TextField:focus-within > .Input ~ .Backdrop" — only descendant part selectors are promoted
+- root [size=slim]: combinator in ".TextField:focus-within > .Input" — only descendant part selectors are promoted
+- root [size=slim]: combinator in ".TextField:not(.disabled):not(.error):not(.readOnly)
+    > .Input:hover:not(:focus-visible) ~ .Backdrop" — only descendant part selectors are promoted
+- root [size=slim]: combinator in ".VerticalContent > .Input" — only descendant part selectors are promoted
+- root [size=slim]: combinator in ".disabled > .Backdrop" — only descendant part selectors are promoted
+- root [size=slim]: combinator in ".error .Input:active ~ .Backdrop" — only descendant part selectors are promoted
+- root [size=slim]: combinator in ".error .Input:focus-visible ~ .Backdrop" — only descendant part selectors are promoted
+- root [size=slim]: combinator in ".error .Input:hover ~ .Backdrop" — only descendant part selectors are promoted
+- root [size=slim]: combinator in ".error > .Input ~ .Backdrop" — only descendant part selectors are promoted
+- root [size=slim]: combinator in ".error > .Input ~ .Backdrop::after" — only descendant part selectors are promoted
+- root [size=slim]: combinator in ".error > .InputAndSuffixWrapper ~ .Backdrop" — only descendant part selectors are promoted
+- root [size=slim]: combinator in ".error > .InputAndSuffixWrapper ~ .Backdrop::after" — only descendant part selectors are promoted
+- root [size=slim]: combinator in ".focus > .Input ~ .Backdrop" — only descendant part selectors are promoted
+- root [size=slim]: combinator in ".focus > .Input" — only descendant part selectors are promoted
+- root [size=slim]: combinator in ".focus > .InputAndSuffixWrapper ~ .Backdrop" — only descendant part selectors are promoted
+- root [size=slim]: combinator in ".focus > .InputAndSuffixWrapper" — only descendant part selectors are promoted
+- root [size=slim]: combinator in ".focus > .VerticalContent ~ .Backdrop" — only descendant part selectors are promoted
+- root [size=slim]: combinator in ".focus > .VerticalContent" — only descendant part selectors are promoted
+- root [size=slim]: combinator in ".multiline > .Input" — only descendant part selectors are promoted
+- root [size=slim]: combinator in ".readOnly.readOnly > .Backdrop" — only descendant part selectors are promoted
+- root [size=slim]: combinator in ".readOnly.readOnly > .Input" — only descendant part selectors are promoted
+- root [size=slim]: combinator in ".readOnly.readOnly.focus > .Backdrop" — only descendant part selectors are promoted
+- root [size=slim]: combinator in ".toneMagic > .Backdrop" — only descendant part selectors are promoted
+- root [size=slim]: combinator in ".toneMagic > .Input" — only descendant part selectors are promoted
+- root [size=slim]: combinator in ".toneMagic.TextField:focus-within > .Input" — only descendant part selectors are promoted
+- root [size=slim]: combinator in ".toneMagic.focus > .Input" — only descendant part selectors are promoted
+- root [size=slim]: combinator in ".toneMagic.focus > .VerticalContent" — only descendant part selectors are promoted
+- root [size=slim]: combinator in ".toneMagic:not(.disabled):not(.error):not(.readOnly)
+    > .Input:hover:not(:focus-visible) ~ .Backdrop" — only descendant part selectors are promoted
+- root [size=slim]: pseudo/attribute ":" in ".AutoSizeWrapper::after" — not promotable
+- root [size=slim]: pseudo/attribute ":" in ".AutoSizeWrapperWithSuffix::after" — not promotable
+- root [size=slim]: pseudo/attribute ":" in ".Input-hasClearButton[type='search']::-webkit-search-cancel-button" — not promotable
+- root [size=slim]: pseudo/attribute ":" in ".Input.suggestion::selection" — not promotable
+- root [size=slim]: pseudo/attribute ":" in ".Input::placeholder" — not promotable
+- root [size=slim]: pseudo/attribute ":" in ".Input[type='number']::-webkit-inner-spin-button" — not promotable
+- root [size=slim]: pseudo/attribute ":" in ".Input[type='number']::-webkit-outer-spin-button" — not promotable
+- root [size=slim]: pseudo/attribute ":-webkit-autofill" in ".Input:-webkit-autofill" — not promotable
+- root [size=slim]: pseudo/attribute ":first-child" in ".Segment:first-child" — not promotable
+- root [size=slim]: pseudo/attribute ":focus" in ".Segment:focus" — not promotable
+- root [size=slim]: pseudo/attribute ":invalid" in ".Input:invalid" — not promotable
+- root [size=slim]: pseudo/attribute ":last-child" in ".Segment:last-child" — not promotable
+- root [size=slim]: unsupported :not() contents in ".Segment:not(:first-child)"
+- root :hover: combinator in ".Input:focus-visible ~ .Backdrop" — only descendant part selectors are promoted
+- root :hover: combinator in ".Prefix + .Input" — only descendant part selectors are promoted
+- root :hover: combinator in ".Prefix + .InputAndSuffixWrapper .AutoSizeWrapper::after" — only descendant part selectors are promoted
+- root :hover: combinator in ".Prefix + .InputAndSuffixWrapper input" — only descendant part selectors are promoted
+- root :hover: combinator in ".Prefix + .InputAndSuffixWrapper textarea" — only descendant part selectors are promoted
+- root :hover: combinator in ".TextField:focus-within .Loading:has(+ .ClearButton)" — only descendant part selectors are promoted
+- root :hover: combinator in ".TextField:focus-within > .Input ~ .Backdrop" — only descendant part selectors are promoted
+- root :hover: combinator in ".TextField:focus-within > .Input" — only descendant part selectors are promoted
+- root :hover: combinator in ".TextField:not(.disabled):not(.error):not(.readOnly)
+    > .Input:hover:not(:focus-visible) ~ .Backdrop" — only descendant part selectors are promoted
+- root :hover: combinator in ".VerticalContent > .Input" — only descendant part selectors are promoted
+- root :hover: combinator in ".disabled > .Backdrop" — only descendant part selectors are promoted
+- root :hover: combinator in ".error .Input:active ~ .Backdrop" — only descendant part selectors are promoted
+- root :hover: combinator in ".error .Input:focus-visible ~ .Backdrop" — only descendant part selectors are promoted
+- root :hover: combinator in ".error .Input:hover ~ .Backdrop" — only descendant part selectors are promoted
+- root :hover: combinator in ".error > .Input ~ .Backdrop" — only descendant part selectors are promoted
+- root :hover: combinator in ".error > .Input ~ .Backdrop::after" — only descendant part selectors are promoted
+- root :hover: combinator in ".error > .InputAndSuffixWrapper ~ .Backdrop" — only descendant part selectors are promoted
+- root :hover: combinator in ".error > .InputAndSuffixWrapper ~ .Backdrop::after" — only descendant part selectors are promoted
+- root :hover: combinator in ".focus > .Input ~ .Backdrop" — only descendant part selectors are promoted
+- root :hover: combinator in ".focus > .Input" — only descendant part selectors are promoted
+- root :hover: combinator in ".focus > .InputAndSuffixWrapper ~ .Backdrop" — only descendant part selectors are promoted
+- root :hover: combinator in ".focus > .InputAndSuffixWrapper" — only descendant part selectors are promoted
+- root :hover: combinator in ".focus > .VerticalContent ~ .Backdrop" — only descendant part selectors are promoted
+- root :hover: combinator in ".focus > .VerticalContent" — only descendant part selectors are promoted
+- root :hover: combinator in ".multiline > .Input" — only descendant part selectors are promoted
+- root :hover: combinator in ".readOnly.readOnly > .Backdrop" — only descendant part selectors are promoted
+- root :hover: combinator in ".readOnly.readOnly > .Input" — only descendant part selectors are promoted
+- root :hover: combinator in ".readOnly.readOnly.focus > .Backdrop" — only descendant part selectors are promoted
+- root :hover: combinator in ".toneMagic > .Backdrop" — only descendant part selectors are promoted
+- root :hover: combinator in ".toneMagic > .Input" — only descendant part selectors are promoted
+- root :hover: combinator in ".toneMagic.TextField:focus-within > .Input" — only descendant part selectors are promoted
+- root :hover: combinator in ".toneMagic.focus > .Input" — only descendant part selectors are promoted
+- root :hover: combinator in ".toneMagic.focus > .VerticalContent" — only descendant part selectors are promoted
+- root :hover: combinator in ".toneMagic:not(.disabled):not(.error):not(.readOnly)
+    > .Input:hover:not(:focus-visible) ~ .Backdrop" — only descendant part selectors are promoted
+- root :hover: pseudo/attribute ":" in ".AutoSizeWrapper::after" — not promotable
+- root :hover: pseudo/attribute ":" in ".AutoSizeWrapperWithSuffix::after" — not promotable
+- root :hover: pseudo/attribute ":" in ".Input-hasClearButton[type='search']::-webkit-search-cancel-button" — not promotable
+- root :hover: pseudo/attribute ":" in ".Input.suggestion::selection" — not promotable
+- root :hover: pseudo/attribute ":" in ".Input::placeholder" — not promotable
+- root :hover: pseudo/attribute ":" in ".Input[type='number']::-webkit-inner-spin-button" — not promotable
+- root :hover: pseudo/attribute ":" in ".Input[type='number']::-webkit-outer-spin-button" — not promotable
+- root :hover: pseudo/attribute ":-webkit-autofill" in ".Input:-webkit-autofill" — not promotable
+- root :hover: pseudo/attribute ":first-child" in ".Segment:first-child" — not promotable
+- root :hover: pseudo/attribute ":focus" in ".Segment:focus" — not promotable
+- root :hover: pseudo/attribute ":invalid" in ".Input:invalid" — not promotable
+- root :hover: pseudo/attribute ":last-child" in ".Segment:last-child" — not promotable
+- root :hover: unsupported :not() contents in ".Segment:not(:first-child)"
+- root :active: combinator in ".Input:focus-visible ~ .Backdrop" — only descendant part selectors are promoted
+- root :active: combinator in ".Prefix + .Input" — only descendant part selectors are promoted
+- root :active: combinator in ".Prefix + .InputAndSuffixWrapper .AutoSizeWrapper::after" — only descendant part selectors are promoted
+- root :active: combinator in ".Prefix + .InputAndSuffixWrapper input" — only descendant part selectors are promoted
+- root :active: combinator in ".Prefix + .InputAndSuffixWrapper textarea" — only descendant part selectors are promoted
+- root :active: combinator in ".TextField:focus-within .Loading:has(+ .ClearButton)" — only descendant part selectors are promoted
+- root :active: combinator in ".TextField:focus-within > .Input ~ .Backdrop" — only descendant part selectors are promoted
+- root :active: combinator in ".TextField:focus-within > .Input" — only descendant part selectors are promoted
+- root :active: combinator in ".TextField:not(.disabled):not(.error):not(.readOnly)
+    > .Input:hover:not(:focus-visible) ~ .Backdrop" — only descendant part selectors are promoted
+- root :active: combinator in ".VerticalContent > .Input" — only descendant part selectors are promoted
+- root :active: combinator in ".disabled > .Backdrop" — only descendant part selectors are promoted
+- root :active: combinator in ".error .Input:active ~ .Backdrop" — only descendant part selectors are promoted
+- root :active: combinator in ".error .Input:focus-visible ~ .Backdrop" — only descendant part selectors are promoted
+- root :active: combinator in ".error .Input:hover ~ .Backdrop" — only descendant part selectors are promoted
+- root :active: combinator in ".error > .Input ~ .Backdrop" — only descendant part selectors are promoted
+- root :active: combinator in ".error > .Input ~ .Backdrop::after" — only descendant part selectors are promoted
+- root :active: combinator in ".error > .InputAndSuffixWrapper ~ .Backdrop" — only descendant part selectors are promoted
+- root :active: combinator in ".error > .InputAndSuffixWrapper ~ .Backdrop::after" — only descendant part selectors are promoted
+- root :active: combinator in ".focus > .Input ~ .Backdrop" — only descendant part selectors are promoted
+- root :active: combinator in ".focus > .Input" — only descendant part selectors are promoted
+- root :active: combinator in ".focus > .InputAndSuffixWrapper ~ .Backdrop" — only descendant part selectors are promoted
+- root :active: combinator in ".focus > .InputAndSuffixWrapper" — only descendant part selectors are promoted
+- root :active: combinator in ".focus > .VerticalContent ~ .Backdrop" — only descendant part selectors are promoted
+- root :active: combinator in ".focus > .VerticalContent" — only descendant part selectors are promoted
+- root :active: combinator in ".multiline > .Input" — only descendant part selectors are promoted
+- root :active: combinator in ".readOnly.readOnly > .Backdrop" — only descendant part selectors are promoted
+- root :active: combinator in ".readOnly.readOnly > .Input" — only descendant part selectors are promoted
+- root :active: combinator in ".readOnly.readOnly.focus > .Backdrop" — only descendant part selectors are promoted
+- root :active: combinator in ".toneMagic > .Backdrop" — only descendant part selectors are promoted
+- root :active: combinator in ".toneMagic > .Input" — only descendant part selectors are promoted
+- root :active: combinator in ".toneMagic.TextField:focus-within > .Input" — only descendant part selectors are promoted
+- root :active: combinator in ".toneMagic.focus > .Input" — only descendant part selectors are promoted
+- root :active: combinator in ".toneMagic.focus > .VerticalContent" — only descendant part selectors are promoted
+- root :active: combinator in ".toneMagic:not(.disabled):not(.error):not(.readOnly)
+    > .Input:hover:not(:focus-visible) ~ .Backdrop" — only descendant part selectors are promoted
+- root :active: pseudo/attribute ":" in ".AutoSizeWrapper::after" — not promotable
+- root :active: pseudo/attribute ":" in ".AutoSizeWrapperWithSuffix::after" — not promotable
+- root :active: pseudo/attribute ":" in ".Input-hasClearButton[type='search']::-webkit-search-cancel-button" — not promotable
+- root :active: pseudo/attribute ":" in ".Input.suggestion::selection" — not promotable
+- root :active: pseudo/attribute ":" in ".Input::placeholder" — not promotable
+- root :active: pseudo/attribute ":" in ".Input[type='number']::-webkit-inner-spin-button" — not promotable
+- root :active: pseudo/attribute ":" in ".Input[type='number']::-webkit-outer-spin-button" — not promotable
+- root :active: pseudo/attribute ":-webkit-autofill" in ".Input:-webkit-autofill" — not promotable
+- root :active: pseudo/attribute ":first-child" in ".Segment:first-child" — not promotable
+- root :active: pseudo/attribute ":focus" in ".Segment:focus" — not promotable
+- root :active: pseudo/attribute ":invalid" in ".Input:invalid" — not promotable
+- root :active: pseudo/attribute ":last-child" in ".Segment:last-child" — not promotable
+- root :active: unsupported :not() contents in ".Segment:not(:first-child)"
+- root :focus-visible: combinator in ".Input:focus-visible ~ .Backdrop" — only descendant part selectors are promoted
+- root :focus-visible: combinator in ".Prefix + .Input" — only descendant part selectors are promoted
+- root :focus-visible: combinator in ".Prefix + .InputAndSuffixWrapper .AutoSizeWrapper::after" — only descendant part selectors are promoted
+- root :focus-visible: combinator in ".Prefix + .InputAndSuffixWrapper input" — only descendant part selectors are promoted
+- root :focus-visible: combinator in ".Prefix + .InputAndSuffixWrapper textarea" — only descendant part selectors are promoted
+- root :focus-visible: combinator in ".TextField:focus-within .Loading:has(+ .ClearButton)" — only descendant part selectors are promoted
+- root :focus-visible: combinator in ".TextField:focus-within > .Input ~ .Backdrop" — only descendant part selectors are promoted
+- root :focus-visible: combinator in ".TextField:focus-within > .Input" — only descendant part selectors are promoted
+- root :focus-visible: combinator in ".TextField:not(.disabled):not(.error):not(.readOnly)
+    > .Input:hover:not(:focus-visible) ~ .Backdrop" — only descendant part selectors are promoted
+- root :focus-visible: combinator in ".VerticalContent > .Input" — only descendant part selectors are promoted
+- root :focus-visible: combinator in ".disabled > .Backdrop" — only descendant part selectors are promoted
+- root :focus-visible: combinator in ".error .Input:active ~ .Backdrop" — only descendant part selectors are promoted
+- root :focus-visible: combinator in ".error .Input:focus-visible ~ .Backdrop" — only descendant part selectors are promoted
+- root :focus-visible: combinator in ".error .Input:hover ~ .Backdrop" — only descendant part selectors are promoted
+- root :focus-visible: combinator in ".error > .Input ~ .Backdrop" — only descendant part selectors are promoted
+- root :focus-visible: combinator in ".error > .Input ~ .Backdrop::after" — only descendant part selectors are promoted
+- root :focus-visible: combinator in ".error > .InputAndSuffixWrapper ~ .Backdrop" — only descendant part selectors are promoted
+- root :focus-visible: combinator in ".error > .InputAndSuffixWrapper ~ .Backdrop::after" — only descendant part selectors are promoted
+- root :focus-visible: combinator in ".focus > .Input ~ .Backdrop" — only descendant part selectors are promoted
+- root :focus-visible: combinator in ".focus > .Input" — only descendant part selectors are promoted
+- root :focus-visible: combinator in ".focus > .InputAndSuffixWrapper ~ .Backdrop" — only descendant part selectors are promoted
+- root :focus-visible: combinator in ".focus > .InputAndSuffixWrapper" — only descendant part selectors are promoted
+- root :focus-visible: combinator in ".focus > .VerticalContent ~ .Backdrop" — only descendant part selectors are promoted
+- root :focus-visible: combinator in ".focus > .VerticalContent" — only descendant part selectors are promoted
+- root :focus-visible: combinator in ".multiline > .Input" — only descendant part selectors are promoted
+- root :focus-visible: combinator in ".readOnly.readOnly > .Backdrop" — only descendant part selectors are promoted
+- root :focus-visible: combinator in ".readOnly.readOnly > .Input" — only descendant part selectors are promoted
+- root :focus-visible: combinator in ".readOnly.readOnly.focus > .Backdrop" — only descendant part selectors are promoted
+- root :focus-visible: combinator in ".toneMagic > .Backdrop" — only descendant part selectors are promoted
+- root :focus-visible: combinator in ".toneMagic > .Input" — only descendant part selectors are promoted
+- root :focus-visible: combinator in ".toneMagic.TextField:focus-within > .Input" — only descendant part selectors are promoted
+- root :focus-visible: combinator in ".toneMagic.focus > .Input" — only descendant part selectors are promoted
+- root :focus-visible: combinator in ".toneMagic.focus > .VerticalContent" — only descendant part selectors are promoted
+- root :focus-visible: combinator in ".toneMagic:not(.disabled):not(.error):not(.readOnly)
+    > .Input:hover:not(:focus-visible) ~ .Backdrop" — only descendant part selectors are promoted
+- root :focus-visible: pseudo/attribute ":" in ".AutoSizeWrapper::after" — not promotable
+- root :focus-visible: pseudo/attribute ":" in ".AutoSizeWrapperWithSuffix::after" — not promotable
+- root :focus-visible: pseudo/attribute ":" in ".Input-hasClearButton[type='search']::-webkit-search-cancel-button" — not promotable
+- root :focus-visible: pseudo/attribute ":" in ".Input.suggestion::selection" — not promotable
+- root :focus-visible: pseudo/attribute ":" in ".Input::placeholder" — not promotable
+- root :focus-visible: pseudo/attribute ":" in ".Input[type='number']::-webkit-inner-spin-button" — not promotable
+- root :focus-visible: pseudo/attribute ":" in ".Input[type='number']::-webkit-outer-spin-button" — not promotable
+- root :focus-visible: pseudo/attribute ":-webkit-autofill" in ".Input:-webkit-autofill" — not promotable
+- root :focus-visible: pseudo/attribute ":first-child" in ".Segment:first-child" — not promotable
+- root :focus-visible: pseudo/attribute ":focus" in ".Segment:focus" — not promotable
+- root :focus-visible: pseudo/attribute ":invalid" in ".Input:invalid" — not promotable
+- root :focus-visible: pseudo/attribute ":last-child" in ".Segment:last-child" — not promotable
+- root :focus-visible: unsupported :not() contents in ".Segment:not(:first-child)"
+- root :disabled: combinator in ".Input:focus-visible ~ .Backdrop" — only descendant part selectors are promoted
+- root :disabled: combinator in ".Prefix + .Input" — only descendant part selectors are promoted
+- root :disabled: combinator in ".Prefix + .InputAndSuffixWrapper .AutoSizeWrapper::after" — only descendant part selectors are promoted
+- root :disabled: combinator in ".Prefix + .InputAndSuffixWrapper input" — only descendant part selectors are promoted
+- root :disabled: combinator in ".Prefix + .InputAndSuffixWrapper textarea" — only descendant part selectors are promoted
+- root :disabled: combinator in ".TextField:focus-within .Loading:has(+ .ClearButton)" — only descendant part selectors are promoted
+- root :disabled: combinator in ".TextField:focus-within > .Input ~ .Backdrop" — only descendant part selectors are promoted
+- root :disabled: combinator in ".TextField:focus-within > .Input" — only descendant part selectors are promoted
+- root :disabled: combinator in ".TextField:not(.disabled):not(.error):not(.readOnly)
+    > .Input:hover:not(:focus-visible) ~ .Backdrop" — only descendant part selectors are promoted
+- root :disabled: combinator in ".VerticalContent > .Input" — only descendant part selectors are promoted
+- root :disabled: combinator in ".disabled > .Backdrop" — only descendant part selectors are promoted
+- root :disabled: combinator in ".error .Input:active ~ .Backdrop" — only descendant part selectors are promoted
+- root :disabled: combinator in ".error .Input:focus-visible ~ .Backdrop" — only descendant part selectors are promoted
+- root :disabled: combinator in ".error .Input:hover ~ .Backdrop" — only descendant part selectors are promoted
+- root :disabled: combinator in ".error > .Input ~ .Backdrop" — only descendant part selectors are promoted
+- root :disabled: combinator in ".error > .Input ~ .Backdrop::after" — only descendant part selectors are promoted
+- root :disabled: combinator in ".error > .InputAndSuffixWrapper ~ .Backdrop" — only descendant part selectors are promoted
+- root :disabled: combinator in ".error > .InputAndSuffixWrapper ~ .Backdrop::after" — only descendant part selectors are promoted
+- root :disabled: combinator in ".focus > .Input ~ .Backdrop" — only descendant part selectors are promoted
+- root :disabled: combinator in ".focus > .Input" — only descendant part selectors are promoted
+- root :disabled: combinator in ".focus > .InputAndSuffixWrapper ~ .Backdrop" — only descendant part selectors are promoted
+- root :disabled: combinator in ".focus > .InputAndSuffixWrapper" — only descendant part selectors are promoted
+- root :disabled: combinator in ".focus > .VerticalContent ~ .Backdrop" — only descendant part selectors are promoted
+- root :disabled: combinator in ".focus > .VerticalContent" — only descendant part selectors are promoted
+- root :disabled: combinator in ".multiline > .Input" — only descendant part selectors are promoted
+- root :disabled: combinator in ".readOnly.readOnly > .Backdrop" — only descendant part selectors are promoted
+- root :disabled: combinator in ".readOnly.readOnly > .Input" — only descendant part selectors are promoted
+- root :disabled: combinator in ".readOnly.readOnly.focus > .Backdrop" — only descendant part selectors are promoted
+- root :disabled: combinator in ".toneMagic > .Backdrop" — only descendant part selectors are promoted
+- root :disabled: combinator in ".toneMagic > .Input" — only descendant part selectors are promoted
+- root :disabled: combinator in ".toneMagic.TextField:focus-within > .Input" — only descendant part selectors are promoted
+- root :disabled: combinator in ".toneMagic.focus > .Input" — only descendant part selectors are promoted
+- root :disabled: combinator in ".toneMagic.focus > .VerticalContent" — only descendant part selectors are promoted
+- root :disabled: combinator in ".toneMagic:not(.disabled):not(.error):not(.readOnly)
+    > .Input:hover:not(:focus-visible) ~ .Backdrop" — only descendant part selectors are promoted
+- root :disabled: pseudo/attribute ":" in ".AutoSizeWrapper::after" — not promotable
+- root :disabled: pseudo/attribute ":" in ".AutoSizeWrapperWithSuffix::after" — not promotable
+- root :disabled: pseudo/attribute ":" in ".Input-hasClearButton[type='search']::-webkit-search-cancel-button" — not promotable
+- root :disabled: pseudo/attribute ":" in ".Input.suggestion::selection" — not promotable
+- root :disabled: pseudo/attribute ":" in ".Input::placeholder" — not promotable
+- root :disabled: pseudo/attribute ":" in ".Input[type='number']::-webkit-inner-spin-button" — not promotable
+- root :disabled: pseudo/attribute ":" in ".Input[type='number']::-webkit-outer-spin-button" — not promotable
+- root :disabled: pseudo/attribute ":-webkit-autofill" in ".Input:-webkit-autofill" — not promotable
+- root :disabled: pseudo/attribute ":first-child" in ".Segment:first-child" — not promotable
+- root :disabled: pseudo/attribute ":focus" in ".Segment:focus" — not promotable
+- root :disabled: pseudo/attribute ":invalid" in ".Input:invalid" — not promotable
+- root :disabled: pseudo/attribute ":last-child" in ".Segment:last-child" — not promotable
+- root :disabled: unsupported :not() contents in ".Segment:not(:first-child)"
+- part input (.Input): combinator in ".Input:focus-visible ~ .Backdrop" — only descendant part selectors are promoted
+- part input (.Input): combinator in ".Prefix + .Input" — only descendant part selectors are promoted
+- part input (.Input): combinator in ".Prefix + .InputAndSuffixWrapper .AutoSizeWrapper::after" — only descendant part selectors are promoted
+- part input (.Input): combinator in ".Prefix + .InputAndSuffixWrapper input" — only descendant part selectors are promoted
+- part input (.Input): combinator in ".Prefix + .InputAndSuffixWrapper textarea" — only descendant part selectors are promoted
+- part input (.Input): combinator in ".TextField:focus-within .Loading:has(+ .ClearButton)" — only descendant part selectors are promoted
+- part input (.Input): combinator in ".TextField:focus-within > .Input ~ .Backdrop" — only descendant part selectors are promoted
+- part input (.Input): combinator in ".TextField:focus-within > .Input" — only descendant part selectors are promoted
+- part input (.Input): combinator in ".TextField:not(.disabled):not(.error):not(.readOnly)
+    > .Input:hover:not(:focus-visible) ~ .Backdrop" — only descendant part selectors are promoted
+- part input (.Input): combinator in ".VerticalContent > .Input" — only descendant part selectors are promoted
+- part input (.Input): combinator in ".disabled > .Backdrop" — only descendant part selectors are promoted
+- part input (.Input): combinator in ".error .Input:active ~ .Backdrop" — only descendant part selectors are promoted
+- part input (.Input): combinator in ".error .Input:focus-visible ~ .Backdrop" — only descendant part selectors are promoted
+- part input (.Input): combinator in ".error .Input:hover ~ .Backdrop" — only descendant part selectors are promoted
+- part input (.Input): combinator in ".error > .Input ~ .Backdrop" — only descendant part selectors are promoted
+- part input (.Input): combinator in ".error > .Input ~ .Backdrop::after" — only descendant part selectors are promoted
+- part input (.Input): combinator in ".error > .InputAndSuffixWrapper ~ .Backdrop" — only descendant part selectors are promoted
+- part input (.Input): combinator in ".error > .InputAndSuffixWrapper ~ .Backdrop::after" — only descendant part selectors are promoted
+- part input (.Input): combinator in ".focus > .Input ~ .Backdrop" — only descendant part selectors are promoted
+- part input (.Input): combinator in ".focus > .Input" — only descendant part selectors are promoted
+- part input (.Input): combinator in ".focus > .InputAndSuffixWrapper ~ .Backdrop" — only descendant part selectors are promoted
+- part input (.Input): combinator in ".focus > .InputAndSuffixWrapper" — only descendant part selectors are promoted
+- part input (.Input): combinator in ".focus > .VerticalContent ~ .Backdrop" — only descendant part selectors are promoted
+- part input (.Input): combinator in ".focus > .VerticalContent" — only descendant part selectors are promoted
+- part input (.Input): combinator in ".multiline > .Input" — only descendant part selectors are promoted
+- part input (.Input): combinator in ".readOnly.readOnly > .Backdrop" — only descendant part selectors are promoted
+- part input (.Input): combinator in ".readOnly.readOnly > .Input" — only descendant part selectors are promoted
+- part input (.Input): combinator in ".readOnly.readOnly.focus > .Backdrop" — only descendant part selectors are promoted
+- part input (.Input): combinator in ".toneMagic > .Backdrop" — only descendant part selectors are promoted
+- part input (.Input): combinator in ".toneMagic > .Input" — only descendant part selectors are promoted
+- part input (.Input): combinator in ".toneMagic.TextField:focus-within > .Input" — only descendant part selectors are promoted
+- part input (.Input): combinator in ".toneMagic.focus > .Input" — only descendant part selectors are promoted
+- part input (.Input): combinator in ".toneMagic.focus > .VerticalContent" — only descendant part selectors are promoted
+- part input (.Input): combinator in ".toneMagic:not(.disabled):not(.error):not(.readOnly)
+    > .Input:hover:not(:focus-visible) ~ .Backdrop" — only descendant part selectors are promoted
+- part input (.Input): part selector piece ".suggestion" in ".Input.suggestion::selection" — not promotable
+- part input (.Input): part selector piece ":" in ".Input::placeholder" — not promotable
+- part input (.Input): part selector piece ":-webkit-autofill" in ".Input:-webkit-autofill" — not promotable
+- part input (.Input): part selector piece ":invalid" in ".Input:invalid" — not promotable
+- part input (.Input): background — literal value "none" — a raw value is reported, never turned into an invented token (`.Input`)
+- part input (.Input): border — shorthand "none" is not `<width> solid <color>`; no per-part contract channel (`.Input`)
+- part input (.Input): letter-spacing — literal value "initial" — a raw value is reported, never turned into an invented token (`.Input`)
+- part input (.Input): min-height — var(--pg-control-height) resolves to NO token and has no reachable definition in this class context (`.Input`)
+- part input (.Input): min-width — literal value "0" — a raw value is reported, never turned into an invented token (`.Input`)
+- part input (.Input): width — literal value "100%" — a raw value is reported, never turned into an invented token (`.Input`)
+- part input [variant=borderless]: combinator in ".Input:focus-visible ~ .Backdrop" — only descendant part selectors are promoted
+- part input [variant=borderless]: combinator in ".Prefix + .Input" — only descendant part selectors are promoted
+- part input [variant=borderless]: combinator in ".Prefix + .InputAndSuffixWrapper .AutoSizeWrapper::after" — only descendant part selectors are promoted
+- part input [variant=borderless]: combinator in ".Prefix + .InputAndSuffixWrapper input" — only descendant part selectors are promoted
+- part input [variant=borderless]: combinator in ".Prefix + .InputAndSuffixWrapper textarea" — only descendant part selectors are promoted
+- part input [variant=borderless]: combinator in ".TextField:focus-within .Loading:has(+ .ClearButton)" — only descendant part selectors are promoted
+- part input [variant=borderless]: combinator in ".TextField:focus-within > .Input ~ .Backdrop" — only descendant part selectors are promoted
+- part input [variant=borderless]: combinator in ".TextField:focus-within > .Input" — only descendant part selectors are promoted
+- part input [variant=borderless]: combinator in ".TextField:not(.disabled):not(.error):not(.readOnly)
+    > .Input:hover:not(:focus-visible) ~ .Backdrop" — only descendant part selectors are promoted
+- part input [variant=borderless]: combinator in ".VerticalContent > .Input" — only descendant part selectors are promoted
+- part input [variant=borderless]: combinator in ".disabled > .Backdrop" — only descendant part selectors are promoted
+- part input [variant=borderless]: combinator in ".error .Input:active ~ .Backdrop" — only descendant part selectors are promoted
+- part input [variant=borderless]: combinator in ".error .Input:focus-visible ~ .Backdrop" — only descendant part selectors are promoted
+- part input [variant=borderless]: combinator in ".error .Input:hover ~ .Backdrop" — only descendant part selectors are promoted
+- part input [variant=borderless]: combinator in ".error > .Input ~ .Backdrop" — only descendant part selectors are promoted
+- part input [variant=borderless]: combinator in ".error > .Input ~ .Backdrop::after" — only descendant part selectors are promoted
+- part input [variant=borderless]: combinator in ".error > .InputAndSuffixWrapper ~ .Backdrop" — only descendant part selectors are promoted
+- part input [variant=borderless]: combinator in ".error > .InputAndSuffixWrapper ~ .Backdrop::after" — only descendant part selectors are promoted
+- part input [variant=borderless]: combinator in ".focus > .Input ~ .Backdrop" — only descendant part selectors are promoted
+- part input [variant=borderless]: combinator in ".focus > .Input" — only descendant part selectors are promoted
+- part input [variant=borderless]: combinator in ".focus > .InputAndSuffixWrapper ~ .Backdrop" — only descendant part selectors are promoted
+- part input [variant=borderless]: combinator in ".focus > .InputAndSuffixWrapper" — only descendant part selectors are promoted
+- part input [variant=borderless]: combinator in ".focus > .VerticalContent ~ .Backdrop" — only descendant part selectors are promoted
+- part input [variant=borderless]: combinator in ".focus > .VerticalContent" — only descendant part selectors are promoted
+- part input [variant=borderless]: combinator in ".multiline > .Input" — only descendant part selectors are promoted
+- part input [variant=borderless]: combinator in ".readOnly.readOnly > .Backdrop" — only descendant part selectors are promoted
+- part input [variant=borderless]: combinator in ".readOnly.readOnly > .Input" — only descendant part selectors are promoted
+- part input [variant=borderless]: combinator in ".readOnly.readOnly.focus > .Backdrop" — only descendant part selectors are promoted
+- part input [variant=borderless]: combinator in ".toneMagic > .Backdrop" — only descendant part selectors are promoted
+- part input [variant=borderless]: combinator in ".toneMagic > .Input" — only descendant part selectors are promoted
+- part input [variant=borderless]: combinator in ".toneMagic.TextField:focus-within > .Input" — only descendant part selectors are promoted
+- part input [variant=borderless]: combinator in ".toneMagic.focus > .Input" — only descendant part selectors are promoted
+- part input [variant=borderless]: combinator in ".toneMagic.focus > .VerticalContent" — only descendant part selectors are promoted
+- part input [variant=borderless]: combinator in ".toneMagic:not(.disabled):not(.error):not(.readOnly)
+    > .Input:hover:not(:focus-visible) ~ .Backdrop" — only descendant part selectors are promoted
+- part input [variant=borderless]: part selector piece ".suggestion" in ".Input.suggestion::selection" — not promotable
+- part input [variant=borderless]: part selector piece ":" in ".Input::placeholder" — not promotable
+- part input [variant=borderless]: part selector piece ":-webkit-autofill" in ".Input:-webkit-autofill" — not promotable
+- part input [variant=borderless]: part selector piece ":invalid" in ".Input:invalid" — not promotable
+- part input [variant=borderless]: background — literal value "none" — a raw value is reported, never turned into an invented token (`.Input`)
+- part input [variant=borderless]: border — shorthand "none" is not `<width> solid <color>`; no per-part contract channel (`.borderless .Input, .borderless .Backdrop`)
+- part input [variant=borderless]: letter-spacing — literal value "initial" — a raw value is reported, never turned into an invented token (`.Input`)
+- part input [variant=borderless]: min-width — literal value "0" — a raw value is reported, never turned into an invented token (`.Input`)
+- part input [variant=borderless]: width — literal value "100%" — a raw value is reported, never turned into an invented token (`.Input`)
+- part input [size=slim]: combinator in ".Input:focus-visible ~ .Backdrop" — only descendant part selectors are promoted
+- part input [size=slim]: combinator in ".Prefix + .Input" — only descendant part selectors are promoted
+- part input [size=slim]: combinator in ".Prefix + .InputAndSuffixWrapper .AutoSizeWrapper::after" — only descendant part selectors are promoted
+- part input [size=slim]: combinator in ".Prefix + .InputAndSuffixWrapper input" — only descendant part selectors are promoted
+- part input [size=slim]: combinator in ".Prefix + .InputAndSuffixWrapper textarea" — only descendant part selectors are promoted
+- part input [size=slim]: combinator in ".TextField:focus-within .Loading:has(+ .ClearButton)" — only descendant part selectors are promoted
+- part input [size=slim]: combinator in ".TextField:focus-within > .Input ~ .Backdrop" — only descendant part selectors are promoted
+- part input [size=slim]: combinator in ".TextField:focus-within > .Input" — only descendant part selectors are promoted
+- part input [size=slim]: combinator in ".TextField:not(.disabled):not(.error):not(.readOnly)
+    > .Input:hover:not(:focus-visible) ~ .Backdrop" — only descendant part selectors are promoted
+- part input [size=slim]: combinator in ".VerticalContent > .Input" — only descendant part selectors are promoted
+- part input [size=slim]: combinator in ".disabled > .Backdrop" — only descendant part selectors are promoted
+- part input [size=slim]: combinator in ".error .Input:active ~ .Backdrop" — only descendant part selectors are promoted
+- part input [size=slim]: combinator in ".error .Input:focus-visible ~ .Backdrop" — only descendant part selectors are promoted
+- part input [size=slim]: combinator in ".error .Input:hover ~ .Backdrop" — only descendant part selectors are promoted
+- part input [size=slim]: combinator in ".error > .Input ~ .Backdrop" — only descendant part selectors are promoted
+- part input [size=slim]: combinator in ".error > .Input ~ .Backdrop::after" — only descendant part selectors are promoted
+- part input [size=slim]: combinator in ".error > .InputAndSuffixWrapper ~ .Backdrop" — only descendant part selectors are promoted
+- part input [size=slim]: combinator in ".error > .InputAndSuffixWrapper ~ .Backdrop::after" — only descendant part selectors are promoted
+- part input [size=slim]: combinator in ".focus > .Input ~ .Backdrop" — only descendant part selectors are promoted
+- part input [size=slim]: combinator in ".focus > .Input" — only descendant part selectors are promoted
+- part input [size=slim]: combinator in ".focus > .InputAndSuffixWrapper ~ .Backdrop" — only descendant part selectors are promoted
+- part input [size=slim]: combinator in ".focus > .InputAndSuffixWrapper" — only descendant part selectors are promoted
+- part input [size=slim]: combinator in ".focus > .VerticalContent ~ .Backdrop" — only descendant part selectors are promoted
+- part input [size=slim]: combinator in ".focus > .VerticalContent" — only descendant part selectors are promoted
+- part input [size=slim]: combinator in ".multiline > .Input" — only descendant part selectors are promoted
+- part input [size=slim]: combinator in ".readOnly.readOnly > .Backdrop" — only descendant part selectors are promoted
+- part input [size=slim]: combinator in ".readOnly.readOnly > .Input" — only descendant part selectors are promoted
+- part input [size=slim]: combinator in ".readOnly.readOnly.focus > .Backdrop" — only descendant part selectors are promoted
+- part input [size=slim]: combinator in ".toneMagic > .Backdrop" — only descendant part selectors are promoted
+- part input [size=slim]: combinator in ".toneMagic > .Input" — only descendant part selectors are promoted
+- part input [size=slim]: combinator in ".toneMagic.TextField:focus-within > .Input" — only descendant part selectors are promoted
+- part input [size=slim]: combinator in ".toneMagic.focus > .Input" — only descendant part selectors are promoted
+- part input [size=slim]: combinator in ".toneMagic.focus > .VerticalContent" — only descendant part selectors are promoted
+- part input [size=slim]: combinator in ".toneMagic:not(.disabled):not(.error):not(.readOnly)
+    > .Input:hover:not(:focus-visible) ~ .Backdrop" — only descendant part selectors are promoted
+- part input [size=slim]: part selector piece ".suggestion" in ".Input.suggestion::selection" — not promotable
+- part input [size=slim]: part selector piece ":" in ".Input::placeholder" — not promotable
+- part input [size=slim]: part selector piece ":-webkit-autofill" in ".Input:-webkit-autofill" — not promotable
+- part input [size=slim]: part selector piece ":invalid" in ".Input:invalid" — not promotable
+- part input [size=slim]: background — literal value "none" — a raw value is reported, never turned into an invented token (`.Input`)
+- part input [size=slim]: border — shorthand "none" is not `<width> solid <color>`; no per-part contract channel (`.Input`)
+- part input [size=slim]: letter-spacing — literal value "initial" — a raw value is reported, never turned into an invented token (`.Input`)
+- part input [size=slim]: min-height — literal value "28px" — a raw value is reported, never turned into an invented token (`.slim .Input, .slim .Backdrop`)
+- part input [size=slim]: min-width — literal value "0" — a raw value is reported, never turned into an invented token (`.Input`)
+- part input [size=slim]: width — literal value "100%" — a raw value is reported, never turned into an invented token (`.Input`)
+- part input: axis size also resolves per-value bindings (slim: padding-block → {p.space-050}) but the schema carries ONE tokensByProp per part (axis "variant" won by curation order) — a NAMED SCHEMA LIMIT this showcase surfaces
+- part input :hover: combinator in ".Input:focus-visible ~ .Backdrop" — only descendant part selectors are promoted
+- part input :hover: combinator in ".Prefix + .Input" — only descendant part selectors are promoted
+- part input :hover: combinator in ".Prefix + .InputAndSuffixWrapper .AutoSizeWrapper::after" — only descendant part selectors are promoted
+- part input :hover: combinator in ".Prefix + .InputAndSuffixWrapper input" — only descendant part selectors are promoted
+- part input :hover: combinator in ".Prefix + .InputAndSuffixWrapper textarea" — only descendant part selectors are promoted
+- part input :hover: combinator in ".TextField:focus-within .Loading:has(+ .ClearButton)" — only descendant part selectors are promoted
+- part input :hover: combinator in ".TextField:focus-within > .Input ~ .Backdrop" — only descendant part selectors are promoted
+- part input :hover: combinator in ".TextField:focus-within > .Input" — only descendant part selectors are promoted
+- part input :hover: combinator in ".TextField:not(.disabled):not(.error):not(.readOnly)
+    > .Input:hover:not(:focus-visible) ~ .Backdrop" — only descendant part selectors are promoted
+- part input :hover: combinator in ".VerticalContent > .Input" — only descendant part selectors are promoted
+- part input :hover: combinator in ".disabled > .Backdrop" — only descendant part selectors are promoted
+- part input :hover: combinator in ".error .Input:active ~ .Backdrop" — only descendant part selectors are promoted
+- part input :hover: combinator in ".error .Input:focus-visible ~ .Backdrop" — only descendant part selectors are promoted
+- part input :hover: combinator in ".error .Input:hover ~ .Backdrop" — only descendant part selectors are promoted
+- part input :hover: combinator in ".error > .Input ~ .Backdrop" — only descendant part selectors are promoted
+- part input :hover: combinator in ".error > .Input ~ .Backdrop::after" — only descendant part selectors are promoted
+- part input :hover: combinator in ".error > .InputAndSuffixWrapper ~ .Backdrop" — only descendant part selectors are promoted
+- part input :hover: combinator in ".error > .InputAndSuffixWrapper ~ .Backdrop::after" — only descendant part selectors are promoted
+- part input :hover: combinator in ".focus > .Input ~ .Backdrop" — only descendant part selectors are promoted
+- part input :hover: combinator in ".focus > .Input" — only descendant part selectors are promoted
+- part input :hover: combinator in ".focus > .InputAndSuffixWrapper ~ .Backdrop" — only descendant part selectors are promoted
+- part input :hover: combinator in ".focus > .InputAndSuffixWrapper" — only descendant part selectors are promoted
+- part input :hover: combinator in ".focus > .VerticalContent ~ .Backdrop" — only descendant part selectors are promoted
+- part input :hover: combinator in ".focus > .VerticalContent" — only descendant part selectors are promoted
+- part input :hover: combinator in ".multiline > .Input" — only descendant part selectors are promoted
+- part input :hover: combinator in ".readOnly.readOnly > .Backdrop" — only descendant part selectors are promoted
+- part input :hover: combinator in ".readOnly.readOnly > .Input" — only descendant part selectors are promoted
+- part input :hover: combinator in ".readOnly.readOnly.focus > .Backdrop" — only descendant part selectors are promoted
+- part input :hover: combinator in ".toneMagic > .Backdrop" — only descendant part selectors are promoted
+- part input :hover: combinator in ".toneMagic > .Input" — only descendant part selectors are promoted
+- part input :hover: combinator in ".toneMagic.TextField:focus-within > .Input" — only descendant part selectors are promoted
+- part input :hover: combinator in ".toneMagic.focus > .Input" — only descendant part selectors are promoted
+- part input :hover: combinator in ".toneMagic.focus > .VerticalContent" — only descendant part selectors are promoted
+- part input :hover: combinator in ".toneMagic:not(.disabled):not(.error):not(.readOnly)
+    > .Input:hover:not(:focus-visible) ~ .Backdrop" — only descendant part selectors are promoted
+- part input :hover: part selector piece ".suggestion" in ".Input.suggestion::selection" — not promotable
+- part input :hover: part selector piece ":" in ".Input::placeholder" — not promotable
+- part input :hover: part selector piece ":-webkit-autofill" in ".Input:-webkit-autofill" — not promotable
+- part input :hover: part selector piece ":invalid" in ".Input:invalid" — not promotable
+- part input :active: combinator in ".Input:focus-visible ~ .Backdrop" — only descendant part selectors are promoted
+- part input :active: combinator in ".Prefix + .Input" — only descendant part selectors are promoted
+- part input :active: combinator in ".Prefix + .InputAndSuffixWrapper .AutoSizeWrapper::after" — only descendant part selectors are promoted
+- part input :active: combinator in ".Prefix + .InputAndSuffixWrapper input" — only descendant part selectors are promoted
+- part input :active: combinator in ".Prefix + .InputAndSuffixWrapper textarea" — only descendant part selectors are promoted
+- part input :active: combinator in ".TextField:focus-within .Loading:has(+ .ClearButton)" — only descendant part selectors are promoted
+- part input :active: combinator in ".TextField:focus-within > .Input ~ .Backdrop" — only descendant part selectors are promoted
+- part input :active: combinator in ".TextField:focus-within > .Input" — only descendant part selectors are promoted
+- part input :active: combinator in ".TextField:not(.disabled):not(.error):not(.readOnly)
+    > .Input:hover:not(:focus-visible) ~ .Backdrop" — only descendant part selectors are promoted
+- part input :active: combinator in ".VerticalContent > .Input" — only descendant part selectors are promoted
+- part input :active: combinator in ".disabled > .Backdrop" — only descendant part selectors are promoted
+- part input :active: combinator in ".error .Input:active ~ .Backdrop" — only descendant part selectors are promoted
+- part input :active: combinator in ".error .Input:focus-visible ~ .Backdrop" — only descendant part selectors are promoted
+- part input :active: combinator in ".error .Input:hover ~ .Backdrop" — only descendant part selectors are promoted
+- part input :active: combinator in ".error > .Input ~ .Backdrop" — only descendant part selectors are promoted
+- part input :active: combinator in ".error > .Input ~ .Backdrop::after" — only descendant part selectors are promoted
+- part input :active: combinator in ".error > .InputAndSuffixWrapper ~ .Backdrop" — only descendant part selectors are promoted
+- part input :active: combinator in ".error > .InputAndSuffixWrapper ~ .Backdrop::after" — only descendant part selectors are promoted
+- part input :active: combinator in ".focus > .Input ~ .Backdrop" — only descendant part selectors are promoted
+- part input :active: combinator in ".focus > .Input" — only descendant part selectors are promoted
+- part input :active: combinator in ".focus > .InputAndSuffixWrapper ~ .Backdrop" — only descendant part selectors are promoted
+- part input :active: combinator in ".focus > .InputAndSuffixWrapper" — only descendant part selectors are promoted
+- part input :active: combinator in ".focus > .VerticalContent ~ .Backdrop" — only descendant part selectors are promoted
+- part input :active: combinator in ".focus > .VerticalContent" — only descendant part selectors are promoted
+- part input :active: combinator in ".multiline > .Input" — only descendant part selectors are promoted
+- part input :active: combinator in ".readOnly.readOnly > .Backdrop" — only descendant part selectors are promoted
+- part input :active: combinator in ".readOnly.readOnly > .Input" — only descendant part selectors are promoted
+- part input :active: combinator in ".readOnly.readOnly.focus > .Backdrop" — only descendant part selectors are promoted
+- part input :active: combinator in ".toneMagic > .Backdrop" — only descendant part selectors are promoted
+- part input :active: combinator in ".toneMagic > .Input" — only descendant part selectors are promoted
+- part input :active: combinator in ".toneMagic.TextField:focus-within > .Input" — only descendant part selectors are promoted
+- part input :active: combinator in ".toneMagic.focus > .Input" — only descendant part selectors are promoted
+- part input :active: combinator in ".toneMagic.focus > .VerticalContent" — only descendant part selectors are promoted
+- part input :active: combinator in ".toneMagic:not(.disabled):not(.error):not(.readOnly)
+    > .Input:hover:not(:focus-visible) ~ .Backdrop" — only descendant part selectors are promoted
+- part input :active: part selector piece ".suggestion" in ".Input.suggestion::selection" — not promotable
+- part input :active: part selector piece ":" in ".Input::placeholder" — not promotable
+- part input :active: part selector piece ":-webkit-autofill" in ".Input:-webkit-autofill" — not promotable
+- part input :active: part selector piece ":invalid" in ".Input:invalid" — not promotable
+- part input :focus-visible: combinator in ".Input:focus-visible ~ .Backdrop" — only descendant part selectors are promoted
+- part input :focus-visible: combinator in ".Prefix + .Input" — only descendant part selectors are promoted
+- part input :focus-visible: combinator in ".Prefix + .InputAndSuffixWrapper .AutoSizeWrapper::after" — only descendant part selectors are promoted
+- part input :focus-visible: combinator in ".Prefix + .InputAndSuffixWrapper input" — only descendant part selectors are promoted
+- part input :focus-visible: combinator in ".Prefix + .InputAndSuffixWrapper textarea" — only descendant part selectors are promoted
+- part input :focus-visible: combinator in ".TextField:focus-within .Loading:has(+ .ClearButton)" — only descendant part selectors are promoted
+- part input :focus-visible: combinator in ".TextField:focus-within > .Input ~ .Backdrop" — only descendant part selectors are promoted
+- part input :focus-visible: combinator in ".TextField:focus-within > .Input" — only descendant part selectors are promoted
+- part input :focus-visible: combinator in ".TextField:not(.disabled):not(.error):not(.readOnly)
+    > .Input:hover:not(:focus-visible) ~ .Backdrop" — only descendant part selectors are promoted
+- part input :focus-visible: combinator in ".VerticalContent > .Input" — only descendant part selectors are promoted
+- part input :focus-visible: combinator in ".disabled > .Backdrop" — only descendant part selectors are promoted
+- part input :focus-visible: combinator in ".error .Input:active ~ .Backdrop" — only descendant part selectors are promoted
+- part input :focus-visible: combinator in ".error .Input:focus-visible ~ .Backdrop" — only descendant part selectors are promoted
+- part input :focus-visible: combinator in ".error .Input:hover ~ .Backdrop" — only descendant part selectors are promoted
+- part input :focus-visible: combinator in ".error > .Input ~ .Backdrop" — only descendant part selectors are promoted
+- part input :focus-visible: combinator in ".error > .Input ~ .Backdrop::after" — only descendant part selectors are promoted
+- part input :focus-visible: combinator in ".error > .InputAndSuffixWrapper ~ .Backdrop" — only descendant part selectors are promoted
+- part input :focus-visible: combinator in ".error > .InputAndSuffixWrapper ~ .Backdrop::after" — only descendant part selectors are promoted
+- part input :focus-visible: combinator in ".focus > .Input ~ .Backdrop" — only descendant part selectors are promoted
+- part input :focus-visible: combinator in ".focus > .Input" — only descendant part selectors are promoted
+- part input :focus-visible: combinator in ".focus > .InputAndSuffixWrapper ~ .Backdrop" — only descendant part selectors are promoted
+- part input :focus-visible: combinator in ".focus > .InputAndSuffixWrapper" — only descendant part selectors are promoted
+- part input :focus-visible: combinator in ".focus > .VerticalContent ~ .Backdrop" — only descendant part selectors are promoted
+- part input :focus-visible: combinator in ".focus > .VerticalContent" — only descendant part selectors are promoted
+- part input :focus-visible: combinator in ".multiline > .Input" — only descendant part selectors are promoted
+- part input :focus-visible: combinator in ".readOnly.readOnly > .Backdrop" — only descendant part selectors are promoted
+- part input :focus-visible: combinator in ".readOnly.readOnly > .Input" — only descendant part selectors are promoted
+- part input :focus-visible: combinator in ".readOnly.readOnly.focus > .Backdrop" — only descendant part selectors are promoted
+- part input :focus-visible: combinator in ".toneMagic > .Backdrop" — only descendant part selectors are promoted
+- part input :focus-visible: combinator in ".toneMagic > .Input" — only descendant part selectors are promoted
+- part input :focus-visible: combinator in ".toneMagic.TextField:focus-within > .Input" — only descendant part selectors are promoted
+- part input :focus-visible: combinator in ".toneMagic.focus > .Input" — only descendant part selectors are promoted
+- part input :focus-visible: combinator in ".toneMagic.focus > .VerticalContent" — only descendant part selectors are promoted
+- part input :focus-visible: combinator in ".toneMagic:not(.disabled):not(.error):not(.readOnly)
+    > .Input:hover:not(:focus-visible) ~ .Backdrop" — only descendant part selectors are promoted
+- part input :focus-visible: part selector piece ".suggestion" in ".Input.suggestion::selection" — not promotable
+- part input :focus-visible: part selector piece ":" in ".Input::placeholder" — not promotable
+- part input :focus-visible: part selector piece ":-webkit-autofill" in ".Input:-webkit-autofill" — not promotable
+- part input :focus-visible: part selector piece ":invalid" in ".Input:invalid" — not promotable
+- part input :disabled: combinator in ".Input:focus-visible ~ .Backdrop" — only descendant part selectors are promoted
+- part input :disabled: combinator in ".Prefix + .Input" — only descendant part selectors are promoted
+- part input :disabled: combinator in ".Prefix + .InputAndSuffixWrapper .AutoSizeWrapper::after" — only descendant part selectors are promoted
+- part input :disabled: combinator in ".Prefix + .InputAndSuffixWrapper input" — only descendant part selectors are promoted
+- part input :disabled: combinator in ".Prefix + .InputAndSuffixWrapper textarea" — only descendant part selectors are promoted
+- part input :disabled: combinator in ".TextField:focus-within .Loading:has(+ .ClearButton)" — only descendant part selectors are promoted
+- part input :disabled: combinator in ".TextField:focus-within > .Input ~ .Backdrop" — only descendant part selectors are promoted
+- part input :disabled: combinator in ".TextField:focus-within > .Input" — only descendant part selectors are promoted
+- part input :disabled: combinator in ".TextField:not(.disabled):not(.error):not(.readOnly)
+    > .Input:hover:not(:focus-visible) ~ .Backdrop" — only descendant part selectors are promoted
+- part input :disabled: combinator in ".VerticalContent > .Input" — only descendant part selectors are promoted
+- part input :disabled: combinator in ".disabled > .Backdrop" — only descendant part selectors are promoted
+- part input :disabled: combinator in ".error .Input:active ~ .Backdrop" — only descendant part selectors are promoted
+- part input :disabled: combinator in ".error .Input:focus-visible ~ .Backdrop" — only descendant part selectors are promoted
+- part input :disabled: combinator in ".error .Input:hover ~ .Backdrop" — only descendant part selectors are promoted
+- part input :disabled: combinator in ".error > .Input ~ .Backdrop" — only descendant part selectors are promoted
+- part input :disabled: combinator in ".error > .Input ~ .Backdrop::after" — only descendant part selectors are promoted
+- part input :disabled: combinator in ".error > .InputAndSuffixWrapper ~ .Backdrop" — only descendant part selectors are promoted
+- part input :disabled: combinator in ".error > .InputAndSuffixWrapper ~ .Backdrop::after" — only descendant part selectors are promoted
+- part input :disabled: combinator in ".focus > .Input ~ .Backdrop" — only descendant part selectors are promoted
+- part input :disabled: combinator in ".focus > .Input" — only descendant part selectors are promoted
+- part input :disabled: combinator in ".focus > .InputAndSuffixWrapper ~ .Backdrop" — only descendant part selectors are promoted
+- part input :disabled: combinator in ".focus > .InputAndSuffixWrapper" — only descendant part selectors are promoted
+- part input :disabled: combinator in ".focus > .VerticalContent ~ .Backdrop" — only descendant part selectors are promoted
+- part input :disabled: combinator in ".focus > .VerticalContent" — only descendant part selectors are promoted
+- part input :disabled: combinator in ".multiline > .Input" — only descendant part selectors are promoted
+- part input :disabled: combinator in ".readOnly.readOnly > .Backdrop" — only descendant part selectors are promoted
+- part input :disabled: combinator in ".readOnly.readOnly > .Input" — only descendant part selectors are promoted
+- part input :disabled: combinator in ".readOnly.readOnly.focus > .Backdrop" — only descendant part selectors are promoted
+- part input :disabled: combinator in ".toneMagic > .Backdrop" — only descendant part selectors are promoted
+- part input :disabled: combinator in ".toneMagic > .Input" — only descendant part selectors are promoted
+- part input :disabled: combinator in ".toneMagic.TextField:focus-within > .Input" — only descendant part selectors are promoted
+- part input :disabled: combinator in ".toneMagic.focus > .Input" — only descendant part selectors are promoted
+- part input :disabled: combinator in ".toneMagic.focus > .VerticalContent" — only descendant part selectors are promoted
+- part input :disabled: combinator in ".toneMagic:not(.disabled):not(.error):not(.readOnly)
+    > .Input:hover:not(:focus-visible) ~ .Backdrop" — only descendant part selectors are promoted
+- part input :disabled: part selector piece ".suggestion" in ".Input.suggestion::selection" — not promotable
+- part input :disabled: part selector piece ":" in ".Input::placeholder" — not promotable
+- part input :disabled: part selector piece ":-webkit-autofill" in ".Input:-webkit-autofill" — not promotable
+- part input :disabled: part selector piece ":invalid" in ".Input:invalid" — not promotable
+- part input :disabled: background — literal value "none" — a raw value is reported, never turned into an invented token (`.Input:disabled`)
+- part backdrop (.Backdrop): combinator in ".Input:focus-visible ~ .Backdrop" — only descendant part selectors are promoted
+- part backdrop (.Backdrop): combinator in ".Prefix + .Input" — only descendant part selectors are promoted
+- part backdrop (.Backdrop): combinator in ".Prefix + .InputAndSuffixWrapper .AutoSizeWrapper::after" — only descendant part selectors are promoted
+- part backdrop (.Backdrop): combinator in ".Prefix + .InputAndSuffixWrapper input" — only descendant part selectors are promoted
+- part backdrop (.Backdrop): combinator in ".Prefix + .InputAndSuffixWrapper textarea" — only descendant part selectors are promoted
+- part backdrop (.Backdrop): combinator in ".TextField:focus-within .Loading:has(+ .ClearButton)" — only descendant part selectors are promoted
+- part backdrop (.Backdrop): combinator in ".TextField:focus-within > .Input ~ .Backdrop" — only descendant part selectors are promoted
+- part backdrop (.Backdrop): combinator in ".TextField:focus-within > .Input" — only descendant part selectors are promoted
+- part backdrop (.Backdrop): combinator in ".TextField:not(.disabled):not(.error):not(.readOnly)
+    > .Input:hover:not(:focus-visible) ~ .Backdrop" — only descendant part selectors are promoted
+- part backdrop (.Backdrop): combinator in ".VerticalContent > .Input" — only descendant part selectors are promoted
+- part backdrop (.Backdrop): combinator in ".disabled > .Backdrop" — only descendant part selectors are promoted
+- part backdrop (.Backdrop): combinator in ".error .Input:active ~ .Backdrop" — only descendant part selectors are promoted
+- part backdrop (.Backdrop): combinator in ".error .Input:focus-visible ~ .Backdrop" — only descendant part selectors are promoted
+- part backdrop (.Backdrop): combinator in ".error .Input:hover ~ .Backdrop" — only descendant part selectors are promoted
+- part backdrop (.Backdrop): combinator in ".error > .Input ~ .Backdrop" — only descendant part selectors are promoted
+- part backdrop (.Backdrop): combinator in ".error > .Input ~ .Backdrop::after" — only descendant part selectors are promoted
+- part backdrop (.Backdrop): combinator in ".error > .InputAndSuffixWrapper ~ .Backdrop" — only descendant part selectors are promoted
+- part backdrop (.Backdrop): combinator in ".error > .InputAndSuffixWrapper ~ .Backdrop::after" — only descendant part selectors are promoted
+- part backdrop (.Backdrop): combinator in ".focus > .Input ~ .Backdrop" — only descendant part selectors are promoted
+- part backdrop (.Backdrop): combinator in ".focus > .Input" — only descendant part selectors are promoted
+- part backdrop (.Backdrop): combinator in ".focus > .InputAndSuffixWrapper ~ .Backdrop" — only descendant part selectors are promoted
+- part backdrop (.Backdrop): combinator in ".focus > .InputAndSuffixWrapper" — only descendant part selectors are promoted
+- part backdrop (.Backdrop): combinator in ".focus > .VerticalContent ~ .Backdrop" — only descendant part selectors are promoted
+- part backdrop (.Backdrop): combinator in ".focus > .VerticalContent" — only descendant part selectors are promoted
+- part backdrop (.Backdrop): combinator in ".multiline > .Input" — only descendant part selectors are promoted
+- part backdrop (.Backdrop): combinator in ".readOnly.readOnly > .Backdrop" — only descendant part selectors are promoted
+- part backdrop (.Backdrop): combinator in ".readOnly.readOnly > .Input" — only descendant part selectors are promoted
+- part backdrop (.Backdrop): combinator in ".readOnly.readOnly.focus > .Backdrop" — only descendant part selectors are promoted
+- part backdrop (.Backdrop): combinator in ".toneMagic > .Backdrop" — only descendant part selectors are promoted
+- part backdrop (.Backdrop): combinator in ".toneMagic > .Input" — only descendant part selectors are promoted
+- part backdrop (.Backdrop): combinator in ".toneMagic.TextField:focus-within > .Input" — only descendant part selectors are promoted
+- part backdrop (.Backdrop): combinator in ".toneMagic.focus > .Input" — only descendant part selectors are promoted
+- part backdrop (.Backdrop): combinator in ".toneMagic.focus > .VerticalContent" — only descendant part selectors are promoted
+- part backdrop (.Backdrop): combinator in ".toneMagic:not(.disabled):not(.error):not(.readOnly)
+    > .Input:hover:not(:focus-visible) ~ .Backdrop" — only descendant part selectors are promoted
+- part backdrop [variant=borderless]: combinator in ".Input:focus-visible ~ .Backdrop" — only descendant part selectors are promoted
+- part backdrop [variant=borderless]: combinator in ".Prefix + .Input" — only descendant part selectors are promoted
+- part backdrop [variant=borderless]: combinator in ".Prefix + .InputAndSuffixWrapper .AutoSizeWrapper::after" — only descendant part selectors are promoted
+- part backdrop [variant=borderless]: combinator in ".Prefix + .InputAndSuffixWrapper input" — only descendant part selectors are promoted
+- part backdrop [variant=borderless]: combinator in ".Prefix + .InputAndSuffixWrapper textarea" — only descendant part selectors are promoted
+- part backdrop [variant=borderless]: combinator in ".TextField:focus-within .Loading:has(+ .ClearButton)" — only descendant part selectors are promoted
+- part backdrop [variant=borderless]: combinator in ".TextField:focus-within > .Input ~ .Backdrop" — only descendant part selectors are promoted
+- part backdrop [variant=borderless]: combinator in ".TextField:focus-within > .Input" — only descendant part selectors are promoted
+- part backdrop [variant=borderless]: combinator in ".TextField:not(.disabled):not(.error):not(.readOnly)
+    > .Input:hover:not(:focus-visible) ~ .Backdrop" — only descendant part selectors are promoted
+- part backdrop [variant=borderless]: combinator in ".VerticalContent > .Input" — only descendant part selectors are promoted
+- part backdrop [variant=borderless]: combinator in ".disabled > .Backdrop" — only descendant part selectors are promoted
+- part backdrop [variant=borderless]: combinator in ".error .Input:active ~ .Backdrop" — only descendant part selectors are promoted
+- part backdrop [variant=borderless]: combinator in ".error .Input:focus-visible ~ .Backdrop" — only descendant part selectors are promoted
+- part backdrop [variant=borderless]: combinator in ".error .Input:hover ~ .Backdrop" — only descendant part selectors are promoted
+- part backdrop [variant=borderless]: combinator in ".error > .Input ~ .Backdrop" — only descendant part selectors are promoted
+- part backdrop [variant=borderless]: combinator in ".error > .Input ~ .Backdrop::after" — only descendant part selectors are promoted
+- part backdrop [variant=borderless]: combinator in ".error > .InputAndSuffixWrapper ~ .Backdrop" — only descendant part selectors are promoted
+- part backdrop [variant=borderless]: combinator in ".error > .InputAndSuffixWrapper ~ .Backdrop::after" — only descendant part selectors are promoted
+- part backdrop [variant=borderless]: combinator in ".focus > .Input ~ .Backdrop" — only descendant part selectors are promoted
+- part backdrop [variant=borderless]: combinator in ".focus > .Input" — only descendant part selectors are promoted
+- part backdrop [variant=borderless]: combinator in ".focus > .InputAndSuffixWrapper ~ .Backdrop" — only descendant part selectors are promoted
+- part backdrop [variant=borderless]: combinator in ".focus > .InputAndSuffixWrapper" — only descendant part selectors are promoted
+- part backdrop [variant=borderless]: combinator in ".focus > .VerticalContent ~ .Backdrop" — only descendant part selectors are promoted
+- part backdrop [variant=borderless]: combinator in ".focus > .VerticalContent" — only descendant part selectors are promoted
+- part backdrop [variant=borderless]: combinator in ".multiline > .Input" — only descendant part selectors are promoted
+- part backdrop [variant=borderless]: combinator in ".readOnly.readOnly > .Backdrop" — only descendant part selectors are promoted
+- part backdrop [variant=borderless]: combinator in ".readOnly.readOnly > .Input" — only descendant part selectors are promoted
+- part backdrop [variant=borderless]: combinator in ".readOnly.readOnly.focus > .Backdrop" — only descendant part selectors are promoted
+- part backdrop [variant=borderless]: combinator in ".toneMagic > .Backdrop" — only descendant part selectors are promoted
+- part backdrop [variant=borderless]: combinator in ".toneMagic > .Input" — only descendant part selectors are promoted
+- part backdrop [variant=borderless]: combinator in ".toneMagic.TextField:focus-within > .Input" — only descendant part selectors are promoted
+- part backdrop [variant=borderless]: combinator in ".toneMagic.focus > .Input" — only descendant part selectors are promoted
+- part backdrop [variant=borderless]: combinator in ".toneMagic.focus > .VerticalContent" — only descendant part selectors are promoted
+- part backdrop [variant=borderless]: combinator in ".toneMagic:not(.disabled):not(.error):not(.readOnly)
+    > .Input:hover:not(:focus-visible) ~ .Backdrop" — only descendant part selectors are promoted
+- part backdrop [variant=borderless]: border — shorthand "none" is not `<width> solid <color>`; no per-part contract channel (`.borderless .Input, .borderless .Backdrop`)
+- part backdrop [size=slim]: combinator in ".Input:focus-visible ~ .Backdrop" — only descendant part selectors are promoted
+- part backdrop [size=slim]: combinator in ".Prefix + .Input" — only descendant part selectors are promoted
+- part backdrop [size=slim]: combinator in ".Prefix + .InputAndSuffixWrapper .AutoSizeWrapper::after" — only descendant part selectors are promoted
+- part backdrop [size=slim]: combinator in ".Prefix + .InputAndSuffixWrapper input" — only descendant part selectors are promoted
+- part backdrop [size=slim]: combinator in ".Prefix + .InputAndSuffixWrapper textarea" — only descendant part selectors are promoted
+- part backdrop [size=slim]: combinator in ".TextField:focus-within .Loading:has(+ .ClearButton)" — only descendant part selectors are promoted
+- part backdrop [size=slim]: combinator in ".TextField:focus-within > .Input ~ .Backdrop" — only descendant part selectors are promoted
+- part backdrop [size=slim]: combinator in ".TextField:focus-within > .Input" — only descendant part selectors are promoted
+- part backdrop [size=slim]: combinator in ".TextField:not(.disabled):not(.error):not(.readOnly)
+    > .Input:hover:not(:focus-visible) ~ .Backdrop" — only descendant part selectors are promoted
+- part backdrop [size=slim]: combinator in ".VerticalContent > .Input" — only descendant part selectors are promoted
+- part backdrop [size=slim]: combinator in ".disabled > .Backdrop" — only descendant part selectors are promoted
+- part backdrop [size=slim]: combinator in ".error .Input:active ~ .Backdrop" — only descendant part selectors are promoted
+- part backdrop [size=slim]: combinator in ".error .Input:focus-visible ~ .Backdrop" — only descendant part selectors are promoted
+- part backdrop [size=slim]: combinator in ".error .Input:hover ~ .Backdrop" — only descendant part selectors are promoted
+- part backdrop [size=slim]: combinator in ".error > .Input ~ .Backdrop" — only descendant part selectors are promoted
+- part backdrop [size=slim]: combinator in ".error > .Input ~ .Backdrop::after" — only descendant part selectors are promoted
+- part backdrop [size=slim]: combinator in ".error > .InputAndSuffixWrapper ~ .Backdrop" — only descendant part selectors are promoted
+- part backdrop [size=slim]: combinator in ".error > .InputAndSuffixWrapper ~ .Backdrop::after" — only descendant part selectors are promoted
+- part backdrop [size=slim]: combinator in ".focus > .Input ~ .Backdrop" — only descendant part selectors are promoted
+- part backdrop [size=slim]: combinator in ".focus > .Input" — only descendant part selectors are promoted
+- part backdrop [size=slim]: combinator in ".focus > .InputAndSuffixWrapper ~ .Backdrop" — only descendant part selectors are promoted
+- part backdrop [size=slim]: combinator in ".focus > .InputAndSuffixWrapper" — only descendant part selectors are promoted
+- part backdrop [size=slim]: combinator in ".focus > .VerticalContent ~ .Backdrop" — only descendant part selectors are promoted
+- part backdrop [size=slim]: combinator in ".focus > .VerticalContent" — only descendant part selectors are promoted
+- part backdrop [size=slim]: combinator in ".multiline > .Input" — only descendant part selectors are promoted
+- part backdrop [size=slim]: combinator in ".readOnly.readOnly > .Backdrop" — only descendant part selectors are promoted
+- part backdrop [size=slim]: combinator in ".readOnly.readOnly > .Input" — only descendant part selectors are promoted
+- part backdrop [size=slim]: combinator in ".readOnly.readOnly.focus > .Backdrop" — only descendant part selectors are promoted
+- part backdrop [size=slim]: combinator in ".toneMagic > .Backdrop" — only descendant part selectors are promoted
+- part backdrop [size=slim]: combinator in ".toneMagic > .Input" — only descendant part selectors are promoted
+- part backdrop [size=slim]: combinator in ".toneMagic.TextField:focus-within > .Input" — only descendant part selectors are promoted
+- part backdrop [size=slim]: combinator in ".toneMagic.focus > .Input" — only descendant part selectors are promoted
+- part backdrop [size=slim]: combinator in ".toneMagic.focus > .VerticalContent" — only descendant part selectors are promoted
+- part backdrop [size=slim]: combinator in ".toneMagic:not(.disabled):not(.error):not(.readOnly)
+    > .Input:hover:not(:focus-visible) ~ .Backdrop" — only descendant part selectors are promoted
+- part backdrop [size=slim]: min-height — literal value "28px" — a raw value is reported, never turned into an invented token (`.slim .Input, .slim .Backdrop`)
+- part backdrop: axis size also resolves per-value bindings (slim: padding-block → {p.space-050}) but the schema carries ONE tokensByProp per part (axis "variant" won by curation order) — a NAMED SCHEMA LIMIT this showcase surfaces
+- part backdrop :hover: combinator in ".Input:focus-visible ~ .Backdrop" — only descendant part selectors are promoted
+- part backdrop :hover: combinator in ".Prefix + .Input" — only descendant part selectors are promoted
+- part backdrop :hover: combinator in ".Prefix + .InputAndSuffixWrapper .AutoSizeWrapper::after" — only descendant part selectors are promoted
+- part backdrop :hover: combinator in ".Prefix + .InputAndSuffixWrapper input" — only descendant part selectors are promoted
+- part backdrop :hover: combinator in ".Prefix + .InputAndSuffixWrapper textarea" — only descendant part selectors are promoted
+- part backdrop :hover: combinator in ".TextField:focus-within .Loading:has(+ .ClearButton)" — only descendant part selectors are promoted
+- part backdrop :hover: combinator in ".TextField:focus-within > .Input ~ .Backdrop" — only descendant part selectors are promoted
+- part backdrop :hover: combinator in ".TextField:focus-within > .Input" — only descendant part selectors are promoted
+- part backdrop :hover: combinator in ".TextField:not(.disabled):not(.error):not(.readOnly)
+    > .Input:hover:not(:focus-visible) ~ .Backdrop" — only descendant part selectors are promoted
+- part backdrop :hover: combinator in ".VerticalContent > .Input" — only descendant part selectors are promoted
+- part backdrop :hover: combinator in ".disabled > .Backdrop" — only descendant part selectors are promoted
+- part backdrop :hover: combinator in ".error .Input:active ~ .Backdrop" — only descendant part selectors are promoted
+- part backdrop :hover: combinator in ".error .Input:focus-visible ~ .Backdrop" — only descendant part selectors are promoted
+- part backdrop :hover: combinator in ".error .Input:hover ~ .Backdrop" — only descendant part selectors are promoted
+- part backdrop :hover: combinator in ".error > .Input ~ .Backdrop" — only descendant part selectors are promoted
+- part backdrop :hover: combinator in ".error > .Input ~ .Backdrop::after" — only descendant part selectors are promoted
+- part backdrop :hover: combinator in ".error > .InputAndSuffixWrapper ~ .Backdrop" — only descendant part selectors are promoted
+- part backdrop :hover: combinator in ".error > .InputAndSuffixWrapper ~ .Backdrop::after" — only descendant part selectors are promoted
+- part backdrop :hover: combinator in ".focus > .Input ~ .Backdrop" — only descendant part selectors are promoted
+- part backdrop :hover: combinator in ".focus > .Input" — only descendant part selectors are promoted
+- part backdrop :hover: combinator in ".focus > .InputAndSuffixWrapper ~ .Backdrop" — only descendant part selectors are promoted
+- part backdrop :hover: combinator in ".focus > .InputAndSuffixWrapper" — only descendant part selectors are promoted
+- part backdrop :hover: combinator in ".focus > .VerticalContent ~ .Backdrop" — only descendant part selectors are promoted
+- part backdrop :hover: combinator in ".focus > .VerticalContent" — only descendant part selectors are promoted
+- part backdrop :hover: combinator in ".multiline > .Input" — only descendant part selectors are promoted
+- part backdrop :hover: combinator in ".readOnly.readOnly > .Backdrop" — only descendant part selectors are promoted
+- part backdrop :hover: combinator in ".readOnly.readOnly > .Input" — only descendant part selectors are promoted
+- part backdrop :hover: combinator in ".readOnly.readOnly.focus > .Backdrop" — only descendant part selectors are promoted
+- part backdrop :hover: combinator in ".toneMagic > .Backdrop" — only descendant part selectors are promoted
+- part backdrop :hover: combinator in ".toneMagic > .Input" — only descendant part selectors are promoted
+- part backdrop :hover: combinator in ".toneMagic.TextField:focus-within > .Input" — only descendant part selectors are promoted
+- part backdrop :hover: combinator in ".toneMagic.focus > .Input" — only descendant part selectors are promoted
+- part backdrop :hover: combinator in ".toneMagic.focus > .VerticalContent" — only descendant part selectors are promoted
+- part backdrop :hover: combinator in ".toneMagic:not(.disabled):not(.error):not(.readOnly)
+    > .Input:hover:not(:focus-visible) ~ .Backdrop" — only descendant part selectors are promoted
+- part backdrop :active: combinator in ".Input:focus-visible ~ .Backdrop" — only descendant part selectors are promoted
+- part backdrop :active: combinator in ".Prefix + .Input" — only descendant part selectors are promoted
+- part backdrop :active: combinator in ".Prefix + .InputAndSuffixWrapper .AutoSizeWrapper::after" — only descendant part selectors are promoted
+- part backdrop :active: combinator in ".Prefix + .InputAndSuffixWrapper input" — only descendant part selectors are promoted
+- part backdrop :active: combinator in ".Prefix + .InputAndSuffixWrapper textarea" — only descendant part selectors are promoted
+- part backdrop :active: combinator in ".TextField:focus-within .Loading:has(+ .ClearButton)" — only descendant part selectors are promoted
+- part backdrop :active: combinator in ".TextField:focus-within > .Input ~ .Backdrop" — only descendant part selectors are promoted
+- part backdrop :active: combinator in ".TextField:focus-within > .Input" — only descendant part selectors are promoted
+- part backdrop :active: combinator in ".TextField:not(.disabled):not(.error):not(.readOnly)
+    > .Input:hover:not(:focus-visible) ~ .Backdrop" — only descendant part selectors are promoted
+- part backdrop :active: combinator in ".VerticalContent > .Input" — only descendant part selectors are promoted
+- part backdrop :active: combinator in ".disabled > .Backdrop" — only descendant part selectors are promoted
+- part backdrop :active: combinator in ".error .Input:active ~ .Backdrop" — only descendant part selectors are promoted
+- part backdrop :active: combinator in ".error .Input:focus-visible ~ .Backdrop" — only descendant part selectors are promoted
+- part backdrop :active: combinator in ".error .Input:hover ~ .Backdrop" — only descendant part selectors are promoted
+- part backdrop :active: combinator in ".error > .Input ~ .Backdrop" — only descendant part selectors are promoted
+- part backdrop :active: combinator in ".error > .Input ~ .Backdrop::after" — only descendant part selectors are promoted
+- part backdrop :active: combinator in ".error > .InputAndSuffixWrapper ~ .Backdrop" — only descendant part selectors are promoted
+- part backdrop :active: combinator in ".error > .InputAndSuffixWrapper ~ .Backdrop::after" — only descendant part selectors are promoted
+- part backdrop :active: combinator in ".focus > .Input ~ .Backdrop" — only descendant part selectors are promoted
+- part backdrop :active: combinator in ".focus > .Input" — only descendant part selectors are promoted
+- part backdrop :active: combinator in ".focus > .InputAndSuffixWrapper ~ .Backdrop" — only descendant part selectors are promoted
+- part backdrop :active: combinator in ".focus > .InputAndSuffixWrapper" — only descendant part selectors are promoted
+- part backdrop :active: combinator in ".focus > .VerticalContent ~ .Backdrop" — only descendant part selectors are promoted
+- part backdrop :active: combinator in ".focus > .VerticalContent" — only descendant part selectors are promoted
+- part backdrop :active: combinator in ".multiline > .Input" — only descendant part selectors are promoted
+- part backdrop :active: combinator in ".readOnly.readOnly > .Backdrop" — only descendant part selectors are promoted
+- part backdrop :active: combinator in ".readOnly.readOnly > .Input" — only descendant part selectors are promoted
+- part backdrop :active: combinator in ".readOnly.readOnly.focus > .Backdrop" — only descendant part selectors are promoted
+- part backdrop :active: combinator in ".toneMagic > .Backdrop" — only descendant part selectors are promoted
+- part backdrop :active: combinator in ".toneMagic > .Input" — only descendant part selectors are promoted
+- part backdrop :active: combinator in ".toneMagic.TextField:focus-within > .Input" — only descendant part selectors are promoted
+- part backdrop :active: combinator in ".toneMagic.focus > .Input" — only descendant part selectors are promoted
+- part backdrop :active: combinator in ".toneMagic.focus > .VerticalContent" — only descendant part selectors are promoted
+- part backdrop :active: combinator in ".toneMagic:not(.disabled):not(.error):not(.readOnly)
+    > .Input:hover:not(:focus-visible) ~ .Backdrop" — only descendant part selectors are promoted
+- part backdrop :focus-visible: combinator in ".Input:focus-visible ~ .Backdrop" — only descendant part selectors are promoted
+- part backdrop :focus-visible: combinator in ".Prefix + .Input" — only descendant part selectors are promoted
+- part backdrop :focus-visible: combinator in ".Prefix + .InputAndSuffixWrapper .AutoSizeWrapper::after" — only descendant part selectors are promoted
+- part backdrop :focus-visible: combinator in ".Prefix + .InputAndSuffixWrapper input" — only descendant part selectors are promoted
+- part backdrop :focus-visible: combinator in ".Prefix + .InputAndSuffixWrapper textarea" — only descendant part selectors are promoted
+- part backdrop :focus-visible: combinator in ".TextField:focus-within .Loading:has(+ .ClearButton)" — only descendant part selectors are promoted
+- part backdrop :focus-visible: combinator in ".TextField:focus-within > .Input ~ .Backdrop" — only descendant part selectors are promoted
+- part backdrop :focus-visible: combinator in ".TextField:focus-within > .Input" — only descendant part selectors are promoted
+- part backdrop :focus-visible: combinator in ".TextField:not(.disabled):not(.error):not(.readOnly)
+    > .Input:hover:not(:focus-visible) ~ .Backdrop" — only descendant part selectors are promoted
+- part backdrop :focus-visible: combinator in ".VerticalContent > .Input" — only descendant part selectors are promoted
+- part backdrop :focus-visible: combinator in ".disabled > .Backdrop" — only descendant part selectors are promoted
+- part backdrop :focus-visible: combinator in ".error .Input:active ~ .Backdrop" — only descendant part selectors are promoted
+- part backdrop :focus-visible: combinator in ".error .Input:focus-visible ~ .Backdrop" — only descendant part selectors are promoted
+- part backdrop :focus-visible: combinator in ".error .Input:hover ~ .Backdrop" — only descendant part selectors are promoted
+- part backdrop :focus-visible: combinator in ".error > .Input ~ .Backdrop" — only descendant part selectors are promoted
+- part backdrop :focus-visible: combinator in ".error > .Input ~ .Backdrop::after" — only descendant part selectors are promoted
+- part backdrop :focus-visible: combinator in ".error > .InputAndSuffixWrapper ~ .Backdrop" — only descendant part selectors are promoted
+- part backdrop :focus-visible: combinator in ".error > .InputAndSuffixWrapper ~ .Backdrop::after" — only descendant part selectors are promoted
+- part backdrop :focus-visible: combinator in ".focus > .Input ~ .Backdrop" — only descendant part selectors are promoted
+- part backdrop :focus-visible: combinator in ".focus > .Input" — only descendant part selectors are promoted
+- part backdrop :focus-visible: combinator in ".focus > .InputAndSuffixWrapper ~ .Backdrop" — only descendant part selectors are promoted
+- part backdrop :focus-visible: combinator in ".focus > .InputAndSuffixWrapper" — only descendant part selectors are promoted
+- part backdrop :focus-visible: combinator in ".focus > .VerticalContent ~ .Backdrop" — only descendant part selectors are promoted
+- part backdrop :focus-visible: combinator in ".focus > .VerticalContent" — only descendant part selectors are promoted
+- part backdrop :focus-visible: combinator in ".multiline > .Input" — only descendant part selectors are promoted
+- part backdrop :focus-visible: combinator in ".readOnly.readOnly > .Backdrop" — only descendant part selectors are promoted
+- part backdrop :focus-visible: combinator in ".readOnly.readOnly > .Input" — only descendant part selectors are promoted
+- part backdrop :focus-visible: combinator in ".readOnly.readOnly.focus > .Backdrop" — only descendant part selectors are promoted
+- part backdrop :focus-visible: combinator in ".toneMagic > .Backdrop" — only descendant part selectors are promoted
+- part backdrop :focus-visible: combinator in ".toneMagic > .Input" — only descendant part selectors are promoted
+- part backdrop :focus-visible: combinator in ".toneMagic.TextField:focus-within > .Input" — only descendant part selectors are promoted
+- part backdrop :focus-visible: combinator in ".toneMagic.focus > .Input" — only descendant part selectors are promoted
+- part backdrop :focus-visible: combinator in ".toneMagic.focus > .VerticalContent" — only descendant part selectors are promoted
+- part backdrop :focus-visible: combinator in ".toneMagic:not(.disabled):not(.error):not(.readOnly)
+    > .Input:hover:not(:focus-visible) ~ .Backdrop" — only descendant part selectors are promoted
+- part backdrop :disabled: combinator in ".Input:focus-visible ~ .Backdrop" — only descendant part selectors are promoted
+- part backdrop :disabled: combinator in ".Prefix + .Input" — only descendant part selectors are promoted
+- part backdrop :disabled: combinator in ".Prefix + .InputAndSuffixWrapper .AutoSizeWrapper::after" — only descendant part selectors are promoted
+- part backdrop :disabled: combinator in ".Prefix + .InputAndSuffixWrapper input" — only descendant part selectors are promoted
+- part backdrop :disabled: combinator in ".Prefix + .InputAndSuffixWrapper textarea" — only descendant part selectors are promoted
+- part backdrop :disabled: combinator in ".TextField:focus-within .Loading:has(+ .ClearButton)" — only descendant part selectors are promoted
+- part backdrop :disabled: combinator in ".TextField:focus-within > .Input ~ .Backdrop" — only descendant part selectors are promoted
+- part backdrop :disabled: combinator in ".TextField:focus-within > .Input" — only descendant part selectors are promoted
+- part backdrop :disabled: combinator in ".TextField:not(.disabled):not(.error):not(.readOnly)
+    > .Input:hover:not(:focus-visible) ~ .Backdrop" — only descendant part selectors are promoted
+- part backdrop :disabled: combinator in ".VerticalContent > .Input" — only descendant part selectors are promoted
+- part backdrop :disabled: combinator in ".disabled > .Backdrop" — only descendant part selectors are promoted
+- part backdrop :disabled: combinator in ".error .Input:active ~ .Backdrop" — only descendant part selectors are promoted
+- part backdrop :disabled: combinator in ".error .Input:focus-visible ~ .Backdrop" — only descendant part selectors are promoted
+- part backdrop :disabled: combinator in ".error .Input:hover ~ .Backdrop" — only descendant part selectors are promoted
+- part backdrop :disabled: combinator in ".error > .Input ~ .Backdrop" — only descendant part selectors are promoted
+- part backdrop :disabled: combinator in ".error > .Input ~ .Backdrop::after" — only descendant part selectors are promoted
+- part backdrop :disabled: combinator in ".error > .InputAndSuffixWrapper ~ .Backdrop" — only descendant part selectors are promoted
+- part backdrop :disabled: combinator in ".error > .InputAndSuffixWrapper ~ .Backdrop::after" — only descendant part selectors are promoted
+- part backdrop :disabled: combinator in ".focus > .Input ~ .Backdrop" — only descendant part selectors are promoted
+- part backdrop :disabled: combinator in ".focus > .Input" — only descendant part selectors are promoted
+- part backdrop :disabled: combinator in ".focus > .InputAndSuffixWrapper ~ .Backdrop" — only descendant part selectors are promoted
+- part backdrop :disabled: combinator in ".focus > .InputAndSuffixWrapper" — only descendant part selectors are promoted
+- part backdrop :disabled: combinator in ".focus > .VerticalContent ~ .Backdrop" — only descendant part selectors are promoted
+- part backdrop :disabled: combinator in ".focus > .VerticalContent" — only descendant part selectors are promoted
+- part backdrop :disabled: combinator in ".multiline > .Input" — only descendant part selectors are promoted
+- part backdrop :disabled: combinator in ".readOnly.readOnly > .Backdrop" — only descendant part selectors are promoted
+- part backdrop :disabled: combinator in ".readOnly.readOnly > .Input" — only descendant part selectors are promoted
+- part backdrop :disabled: combinator in ".readOnly.readOnly.focus > .Backdrop" — only descendant part selectors are promoted
+- part backdrop :disabled: combinator in ".toneMagic > .Backdrop" — only descendant part selectors are promoted
+- part backdrop :disabled: combinator in ".toneMagic > .Input" — only descendant part selectors are promoted
+- part backdrop :disabled: combinator in ".toneMagic.TextField:focus-within > .Input" — only descendant part selectors are promoted
+- part backdrop :disabled: combinator in ".toneMagic.focus > .Input" — only descendant part selectors are promoted
+- part backdrop :disabled: combinator in ".toneMagic.focus > .VerticalContent" — only descendant part selectors are promoted
+- part backdrop :disabled: combinator in ".toneMagic:not(.disabled):not(.error):not(.readOnly)
+    > .Input:hover:not(:focus-visible) ~ .Backdrop" — only descendant part selectors are promoted
+- unmatched rule `.TextField svg` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 1 declaration(s) not carried
+- unmatched rule `.TextField:not(.disabled):not(.error):not(.readOnly)
+    > .Input:hover:not(:focus-visible) ~ .Backdrop` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 2 declaration(s) not carried
+- unmatched rule `.multiline` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 1 declaration(s) not carried
+- unmatched rule `.hasValue` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 1 declaration(s) not carried
+- unmatched rule `.focus > .Input ~ .Backdrop, .focus > .VerticalContent ~ .Backdrop, .focus > .InputAndSuffixWrapper ~ .Backdrop, .TextField:focus-within > .Input ~ .Backdrop, .Input:focus-visible ~ .Backdrop` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 3 declaration(s) not carried
+- unmatched rule `.error .Input:hover ~ .Backdrop, .error .Input:focus-visible ~ .Backdrop` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 2 declaration(s) not carried
+- unmatched rule `.error .Input:active ~ .Backdrop, .error .Input:focus-visible ~ .Backdrop` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 1 declaration(s) not carried
+- unmatched rule `.error > .Input ~ .Backdrop, .error > .InputAndSuffixWrapper ~ .Backdrop` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 2 declaration(s) not carried
+- unmatched rule `.error > .Input ~ .Backdrop::after, .error > .InputAndSuffixWrapper ~ .Backdrop::after` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 1 declaration(s) not carried
+- unmatched rule `.readOnly.readOnly > .Input` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 1 declaration(s) not carried
+- unmatched rule `.readOnly.readOnly > .Backdrop` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 2 declaration(s) not carried
+- unmatched rule `.readOnly.readOnly.focus > .Backdrop` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 2 declaration(s) not carried
+- unmatched rule `.toneMagic .Prefix, .toneMagic .Suffix` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 1 declaration(s) not carried
+- unmatched rule `.toneMagic > .Input` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 1 declaration(s) not carried
+- unmatched rule `.toneMagic > .Backdrop` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 2 declaration(s) not carried
+- unmatched rule `.toneMagic svg` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 1 declaration(s) not carried
+- unmatched rule `.toneMagic:not(.disabled):not(.error):not(.readOnly)
+    > .Input:hover:not(:focus-visible) ~ .Backdrop` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 2 declaration(s) not carried
+- unmatched rule `.toneMagic.focus > .Input, .toneMagic.focus > .VerticalContent, .toneMagic.TextField:focus-within > .Input, .toneMagic.Input:focus-visible` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 1 declaration(s) not carried
+- unmatched rule `.toneMagic.focus .Prefix, .toneMagic.focus .Suffix` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 1 declaration(s) not carried
+- unmatched rule `.toneMagic.focus svg` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 1 declaration(s) not carried
+- unmatched rule `.disabled` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 1 declaration(s) not carried
+- unmatched rule `.disabled > .Backdrop` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 2 declaration(s) not carried
+- unmatched rule `.disabled svg` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 1 declaration(s) not carried
+- unmatched rule `.InputAndSuffixWrapper` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 1 declaration(s) not carried
+- unmatched rule `.AutoSizeWrapper::after, .AutoSizeWrapper input, .AutoSizeWrapper textarea` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 6 declaration(s) not carried
+- unmatched rule `.Input:invalid` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 1 declaration(s) not carried
+- unmatched rule `.Input::placeholder` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 1 declaration(s) not carried
+- unmatched rule `.Input:-webkit-autofill` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 1 declaration(s) not carried
+- unmatched rule `.Input.suggestion::selection` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 2 declaration(s) not carried
+- unmatched rule `.Input-autoSize` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 1 declaration(s) not carried
+- unmatched rule `.Prefix, .Suffix` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 1 declaration(s) not carried
+- unmatched rule `.VerticalContent` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 4 declaration(s) not carried
+- unmatched rule `.CharacterCount` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 1 declaration(s) not carried
+- unmatched rule `.AlignFieldBottom` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 1 declaration(s) not carried
+- unmatched rule `.Spinner` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 2 declaration(s) not carried
+- unmatched rule `.SpinnerIcon svg` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 1 declaration(s) not carried
+- unmatched rule `.Resizer` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 1 declaration(s) not carried
+- unmatched rule `.DummyInput` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 1 declaration(s) not carried
+- unmatched rule `.Segment` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 3 declaration(s) not carried
+- unmatched rule `.Segment:hover` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 1 declaration(s) not carried
+- unmatched rule `.Segment:active` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 1 declaration(s) not carried
+
+## Tag (`polaris.tag`)
+
+- source: `polaris-react/src/components/Tag/Tag.module.css` + extracted API (`out/contracts/tag.contract.json`)
+- carried: 3 binding(s) · refused by name: 48 · curated decisions: 5
+
+### Curated decisions
+- NOTE: disabled styling is a boolean-driven CLASS on a span (`&.disabled`), not a :disabled pseudo-state — boolean-conditional token bindings have no contract channel (stylesWhen is literal-only by design); named gap
+- NOTE: the size prop and onClick/onRemove/url interplay are named extraction notes (union-typed props); the default (non-interactive span) rendering is the comparable state
+- NOTE: padding-inline is `calc(var(--p-space-100) + var(--p-space-050))` — calc() over two tokens is not a single binding; named refusal
+- NOTE: label typography rides the Text primitive (bodySm, truncate) — not carried
+- sample label "Wholesale" carried as a static text part — Polaris's children prop is platform API (named extraction skip); a static surface needs sample ink and both sides of the receipts render the same string
+
+### Carried bindings (each cites its CSS rule)
+- root (.Tag): background-color → `{p.color-bg-fill-tertiary}` (from `.Tag { background-color: var(--p-color-bg-fill-tertiary) }`)
+- root (.Tag): color → `{p.color-text}` (from `.Tag { color: var(--p-color-text) }`)
+- root (.Tag): border-radius → `{p.border-radius-200}` (from `.Tag { border-radius: var(--p-border-radius-200) }`)
+
+### Refused by name
+- at-rule: `@media (hover: none) { .sizeLarge.removable.linkable .Button { background-color: var(--p-color-bg-fill-tertiary) } }` — conditional styling is not a contract channel
+- mixin: `@mixin unstyled-button` — postcss mixin, expands outside the promoted rule model
+- mixin: `@mixin focus-ring wide` — postcss mixin, expands outside the promoted rule model
+- mixin: `@mixin focus-ring base, 0, focused` — postcss mixin, expands outside the promoted rule model
+- root (.Tag): pseudo/attribute ":" in ".Link.segmented::after" — not promotable
+- root (.Tag): unsupported :not() contents in ".Link:focus-visible:not(:active)"
+- root (.Tag): padding-inline — value "calc(var(--p-space-100) + var(--p-space-050))" mixes var() with other content — not a single binding (`.Tag`)
+- root :hover: pseudo/attribute ":" in ".Link.segmented::after" — not promotable
+- root :hover: unsupported :not() contents in ".Link:focus-visible:not(:active)"
+- root :active: pseudo/attribute ":" in ".Link.segmented::after" — not promotable
+- root :active: unsupported :not() contents in ".Link:focus-visible:not(:active)"
+- root :focus-visible: pseudo/attribute ":" in ".Link.segmented::after" — not promotable
+- root :focus-visible: unsupported :not() contents in ".Link:focus-visible:not(:active)"
+- root :disabled: pseudo/attribute ":" in ".Link.segmented::after" — not promotable
+- root :disabled: unsupported :not() contents in ".Link:focus-visible:not(:active)"
+- unmatched rule `.Tag.disabled` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 2 declaration(s) not carried
+- unmatched rule `.Tag.disabled svg` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 1 declaration(s) not carried
+- unmatched rule `.Tag.clickable` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 2 declaration(s) not carried
+- unmatched rule `.Tag.clickable:hover` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 1 declaration(s) not carried
+- unmatched rule `.Tag.clickable:active` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 1 declaration(s) not carried
+- unmatched rule `.Tag.clickable:disabled` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 2 declaration(s) not carried
+- unmatched rule `.Tag.linkable:hover` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 1 declaration(s) not carried
+- unmatched rule `.Tag.linkable:active` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 1 declaration(s) not carried
+- unmatched rule `.Button` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 4 declaration(s) not carried
+- unmatched rule `.Button svg` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 1 declaration(s) not carried
+- unmatched rule `.Button:hover` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 2 declaration(s) not carried
+- unmatched rule `.Button:focus-visible` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 2 declaration(s) not carried
+- unmatched rule `.Button:active` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 1 declaration(s) not carried
+- unmatched rule `.Button:disabled svg` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 1 declaration(s) not carried
+- unmatched rule `.Link` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 2 declaration(s) not carried
+- unmatched rule `.Link:hover` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 1 declaration(s) not carried
+- unmatched rule `.Link.segmented:hover` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 1 declaration(s) not carried
+- unmatched rule `.Link:active` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 1 declaration(s) not carried
+- unmatched rule `.Text` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 1 declaration(s) not carried
+- unmatched rule `.linkable.removable:hover` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 1 declaration(s) not carried
+- unmatched rule `.linkable.removable:hover .Button` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 1 declaration(s) not carried
+- unmatched rule `.sizeLarge, .sizeLarge:is(.removable, .linkable)` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 2 declaration(s) not carried
+- unmatched rule `.sizeLarge .Button` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 3 declaration(s) not carried
+- unmatched rule `.sizeLarge .Button:hover` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 1 declaration(s) not carried
+- unmatched rule `.sizeLarge .Button:active, .sizeLarge .Button:focus` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 1 declaration(s) not carried
+- unmatched rule `.sizeLarge:hover .overlay` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 2 declaration(s) not carried
+- unmatched rule `.sizeLarge.removable.linkable .Button` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 1 declaration(s) not carried
+- unmatched rule `.sizeLarge.removable.linkable:hover .overlay` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 1 declaration(s) not carried
+
+## Avatar (`polaris.avatar`)
+
+- source: `polaris-react/src/components/Avatar/Avatar.module.css` + extracted API (`out/contracts/avatar.contract.json`)
+- carried: 4 binding(s) · refused by name: 57 · curated decisions: 3
+
+### Curated decisions
+- NOTE: per-size widths are component-private literals (--pc-avatar-*-size: 20…40px) — named refusals; the size axis carries no bindings and the receipts show the geometry gap
+- NOTE: Polaris renders initials as SVG <text> inside the avatar circle; this surface renders a styled span — the initials part's font bindings (.Text rule) carry, the SVG projection does not
+- NOTE: the name-hash background variations (styleOne…styleSeven) are driven by a hash of the name prop — value-derived styling has no contract channel; named gap (base avatar-bg-fill carries)
+
+### Carried bindings (each cites its CSS rule)
+- root (.Avatar): background → `{p.color-avatar-bg-fill}` (from `.Avatar { background: var(--p-color-avatar-bg-fill) }`)
+- root (.Avatar): color → `{p.color-avatar-text-on-bg-fill}` (from `.Avatar { color: var(--p-color-avatar-text-on-bg-fill) }`)
+- part initials (.Text): font-size → `{p.font-size-400}` (from `.Text { font-size: var(--p-font-size-400) }`)
+- part initials (.Text): font-weight → `{p.font-weight-regular}` (from `.Text { font-weight: var(--p-font-weight-regular) }`)
+
+### Refused by name
+- at-rule: `@media (forced-colors: active) { .Avatar { border: var(--p-border-width-025) solid transparent } }` — conditional styling is not a contract channel
+- root (.Avatar): pseudo/attribute ":" in ".Avatar::after" — not promotable
+- root (.Avatar): min-width — literal value "20px" — a raw value is reported, never turned into an invented token (`.Avatar`)
+- root [size=xs]: pseudo/attribute ":" in ".Avatar::after" — not promotable
+- root [size=xs]: border-radius — literal value "4px" — a raw value is reported, never turned into an invented token (`.sizeXs`)
+- root [size=xs]: min-width — literal value "20px" — a raw value is reported, never turned into an invented token (`.Avatar`)
+- root [size=xs]: width — literal value "20px" — a raw value is reported, never turned into an invented token (`.sizeXs`)
+- root [size=sm]: pseudo/attribute ":" in ".Avatar::after" — not promotable
+- root [size=sm]: border-radius — literal value "6px" — a raw value is reported, never turned into an invented token (`.sizeSm`)
+- root [size=sm]: min-width — literal value "20px" — a raw value is reported, never turned into an invented token (`.Avatar`)
+- root [size=sm]: width — literal value "24px" — a raw value is reported, never turned into an invented token (`.sizeSm`)
+- root [size=md]: pseudo/attribute ":" in ".Avatar::after" — not promotable
+- root [size=md]: border-radius — literal value "6px" — a raw value is reported, never turned into an invented token (`.sizeMd`)
+- root [size=md]: min-width — literal value "20px" — a raw value is reported, never turned into an invented token (`.Avatar`)
+- root [size=md]: width — literal value "28px" — a raw value is reported, never turned into an invented token (`.sizeMd`)
+- root [size=lg]: pseudo/attribute ":" in ".Avatar::after" — not promotable
+- root [size=lg]: border-radius — literal value "8px" — a raw value is reported, never turned into an invented token (`.sizeLg`)
+- root [size=lg]: min-width — literal value "20px" — a raw value is reported, never turned into an invented token (`.Avatar`)
+- root [size=lg]: width — literal value "32px" — a raw value is reported, never turned into an invented token (`.sizeLg`)
+- root [size=xl]: pseudo/attribute ":" in ".Avatar::after" — not promotable
+- root [size=xl]: border-radius — literal value "8px" — a raw value is reported, never turned into an invented token (`.sizeXl`)
+- root [size=xl]: min-width — literal value "20px" — a raw value is reported, never turned into an invented token (`.Avatar`)
+- root [size=xl]: width — literal value "40px" — a raw value is reported, never turned into an invented token (`.sizeXl`)
+- root :hover: pseudo/attribute ":" in ".Avatar::after" — not promotable
+- root :active: pseudo/attribute ":" in ".Avatar::after" — not promotable
+- root :focus-visible: pseudo/attribute ":" in ".Avatar::after" — not promotable
+- root :disabled: pseudo/attribute ":" in ".Avatar::after" — not promotable
+- part initials (.Text): part selector piece ".long" in ".Text.long" — not promotable
+- part initials [size=xs]: part selector piece ".long" in ".Text.long" — not promotable
+- part initials [size=sm]: part selector piece ".long" in ".Text.long" — not promotable
+- part initials [size=md]: part selector piece ".long" in ".Text.long" — not promotable
+- part initials [size=lg]: part selector piece ".long" in ".Text.long" — not promotable
+- part initials [size=xl]: part selector piece ".long" in ".Text.long" — not promotable
+- part initials :hover: part selector piece ".long" in ".Text.long" — not promotable
+- part initials :active: part selector piece ".long" in ".Text.long" — not promotable
+- part initials :focus-visible: part selector piece ".long" in ".Text.long" — not promotable
+- part initials :disabled: part selector piece ".long" in ".Text.long" — not promotable
+- unmatched rule `.Avatar.imageHasLoaded` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 1 declaration(s) not carried
+- unmatched rule `.Text.long` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 1 declaration(s) not carried
+- unmatched rule `.styleOne` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 2 declaration(s) not carried
+- unmatched rule `.styleOne svg, .styleOne text` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 1 declaration(s) not carried
+- unmatched rule `.styleTwo` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 2 declaration(s) not carried
+- unmatched rule `.styleTwo svg, .styleTwo text` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 1 declaration(s) not carried
+- unmatched rule `.styleThree` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 2 declaration(s) not carried
+- unmatched rule `.styleThree svg, .styleThree text` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 1 declaration(s) not carried
+- unmatched rule `.styleFour` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 2 declaration(s) not carried
+- unmatched rule `.styleFour svg, .styleFour text` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 1 declaration(s) not carried
+- unmatched rule `.styleFive` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 2 declaration(s) not carried
+- unmatched rule `.styleFive svg, .styleFive text` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 1 declaration(s) not carried
+- unmatched rule `.styleSix` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 2 declaration(s) not carried
+- unmatched rule `.styleSix svg, .styleSix text` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 1 declaration(s) not carried
+- unmatched rule `.styleSeven` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 2 declaration(s) not carried
+- unmatched rule `.styleSeven svg, .styleSeven text` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 1 declaration(s) not carried
+- unmatched rule `.imageHasLoaded` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 1 declaration(s) not carried
+- unmatched rule `.Image` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 3 declaration(s) not carried
+- unmatched rule `.Initials` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 2 declaration(s) not carried
+- unmatched rule `.Svg` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 2 declaration(s) not carried
+
+## Spinner (`polaris.spinner`)
+
+- source: `polaris-react/src/components/Spinner/Spinner.module.css` + extracted API (`out/contracts/spinner.contract.json`)
+- carried: 2 binding(s) · refused by name: 8 · curated decisions: 2
+
+### Curated decisions
+- NOTE: the spinner glyph is an inline SVG in Spinner.tsx (one per size) — both are carried verbatim as showcase icon assets (MIT, attributed); the 20/44px glyph sizes are the SVG viewBox literals from the same file, carried through the icon channel's size field
+- NOTE: the spin animation is a motion-token keyframe reference (var(--p-motion-keyframes-spin)) — the contract carries the schema's `animation: spin` channel instead; the duration/easing tokens are named refusals (animation shorthand)
+
+### Carried bindings (each cites its CSS rule)
+- part glyphLarge (svg): fill → `{p.color-bg-fill-brand}` (from `.Spinner svg { fill: var(--p-color-bg-fill-brand) }`)
+- part glyphSmall (svg): fill → `{p.color-bg-fill-brand}` (from `.Spinner svg { fill: var(--p-color-bg-fill-brand) }`)
+
+### Refused by name
+- part glyphLarge [size=small]: height — literal value "20px" — a raw value is reported, never turned into an invented token (`.sizeSmall svg`)
+- part glyphLarge [size=small]: width — literal value "20px" — a raw value is reported, never turned into an invented token (`.sizeSmall svg`)
+- part glyphLarge [size=large]: height — literal value "44px" — a raw value is reported, never turned into an invented token (`.sizeLarge svg`)
+- part glyphLarge [size=large]: width — literal value "44px" — a raw value is reported, never turned into an invented token (`.sizeLarge svg`)
+- part glyphSmall [size=small]: height — literal value "20px" — a raw value is reported, never turned into an invented token (`.sizeSmall svg`)
+- part glyphSmall [size=small]: width — literal value "20px" — a raw value is reported, never turned into an invented token (`.sizeSmall svg`)
+- part glyphSmall [size=large]: height — literal value "44px" — a raw value is reported, never turned into an invented token (`.sizeLarge svg`)
+- part glyphSmall [size=large]: width — literal value "44px" — a raw value is reported, never turned into an invented token (`.sizeLarge svg`)
+
+## ProgressBar (`polaris.progress-bar`)
+
+- source: `polaris-react/src/components/ProgressBar/ProgressBar.module.css` + extracted API (`out/contracts/progress-bar.contract.json`)
+- carried: 9 binding(s) · refused by name: 32 · curated decisions: 2
+
+### Curated decisions
+- NOTE: the bar heights are component-private literals with calc() scaling (--pc-progress-bar-height-base: 16px; small/large are calc() over it) — named refusals; the receipts show the missing height honestly
+- NOTE: the fill fraction is runtime behavior (CSSTransition + scaleX(progress/100)) — the schema's meter channel needs a max prop and Polaris's API has none (max is hard-coded 100), so the indicator is carried as a plain part and the verify combos pass animated={false} on the Polaris side (fill at 0 both sides)
+
+### Carried bindings (each cites its CSS rule)
+- root (.ProgressBar): border-radius → `{p.border-radius-100}` (from `.ProgressBar { border-radius: var(--p-border-radius-100) }`)
+- root [tone=highlight]: background-color → `{p.color-bg-fill-tertiary}` (from `.ProgressBar { background-color: var(--pc-progress-bar-background) }` via --pc-progress-bar-background)
+- root [tone=primary]: background-color → `{p.color-bg-fill-tertiary}` (from `.ProgressBar { background-color: var(--pc-progress-bar-background) }` via --pc-progress-bar-background)
+- root [tone=success]: background-color → `{p.color-bg-fill-tertiary}` (from `.ProgressBar { background-color: var(--pc-progress-bar-background) }` via --pc-progress-bar-background)
+- root [tone=critical]: background-color → `{p.color-bg-fill-tertiary}` (from `.ProgressBar { background-color: var(--pc-progress-bar-background) }` via --pc-progress-bar-background)
+- part indicator [tone=highlight]: background-color → `{p.color-bg-fill-info}` (from `.Indicator { background-color: var(--pc-progress-bar-indicator) }` via --pc-progress-bar-indicator)
+- part indicator [tone=primary]: background-color → `{p.color-bg-fill-brand}` (from `.Indicator { background-color: var(--pc-progress-bar-indicator) }` via --pc-progress-bar-indicator)
+- part indicator [tone=success]: background-color → `{p.color-bg-fill-success}` (from `.Indicator { background-color: var(--pc-progress-bar-indicator) }` via --pc-progress-bar-indicator)
+- part indicator [tone=critical]: background-color → `{p.color-bg-fill-critical}` (from `.Indicator { background-color: var(--pc-progress-bar-indicator) }` via --pc-progress-bar-indicator)
+
+### Refused by name
+- at-rule: `@media (forced-colors: active) { .ProgressBar { border: var(--p-border-width-025) solid transparent } }` — conditional styling is not a contract channel
+- at-rule: `@media screen and (-ms-high-contrast: active) { .Indicator { border: var(--pc-progress-bar-height-base) solid highlight } }` — conditional styling is not a contract channel
+- mixin: `@mixin scope-custom-property progress-bar, duration` — postcss mixin, expands outside the promoted rule model
+- mixin: `@mixin scope-custom-property progress-bar, percent` — postcss mixin, expands outside the promoted rule model
+- mixin: `@mixin visually-hidden` — postcss mixin, expands outside the promoted rule model
+- root (.ProgressBar): background-color — var(--pc-progress-bar-background) resolves to NO token and has no reachable definition in this class context (`.ProgressBar`)
+- root (.ProgressBar): width — literal value "100%" — a raw value is reported, never turned into an invented token (`.ProgressBar`)
+- root [tone=highlight]: width — literal value "100%" — a raw value is reported, never turned into an invented token (`.ProgressBar`)
+- root [tone=primary]: width — literal value "100%" — a raw value is reported, never turned into an invented token (`.ProgressBar`)
+- root [tone=success]: width — literal value "100%" — a raw value is reported, never turned into an invented token (`.ProgressBar`)
+- root [tone=critical]: width — literal value "100%" — a raw value is reported, never turned into an invented token (`.ProgressBar`)
+- root [size=small]: background-color — var(--pc-progress-bar-background) resolves to NO token and has no reachable definition in this class context (`.ProgressBar`)
+- root [size=small]: height — value "calc(
+    var(--pc-progress-bar-height-base) * 0.5
+  )" mixes var() with other content — not a single binding (`.sizeSmall`)
+- root [size=small]: width — literal value "100%" — a raw value is reported, never turned into an invented token (`.ProgressBar`)
+- root [size=medium]: background-color — var(--pc-progress-bar-background) resolves to NO token and has no reachable definition in this class context (`.ProgressBar`)
+- root [size=medium]: height — literal value "16px" — a raw value is reported, never turned into an invented token (`.sizeMedium`)
+- root [size=medium]: width — literal value "100%" — a raw value is reported, never turned into an invented token (`.ProgressBar`)
+- root [size=large]: background-color — var(--pc-progress-bar-background) resolves to NO token and has no reachable definition in this class context (`.ProgressBar`)
+- root [size=large]: height — value "calc(var(--pc-progress-bar-height-base) * 2)" mixes var() with other content — not a single binding (`.sizeLarge`)
+- root [size=large]: width — literal value "100%" — a raw value is reported, never turned into an invented token (`.ProgressBar`)
+- part indicator (.Indicator): background-color — var(--pc-progress-bar-indicator) resolves to NO token and has no reachable definition in this class context (`.Indicator`)
+- part indicator (.Indicator): height — literal value "inherit" — a raw value is reported, never turned into an invented token (`.Indicator`)
+- part indicator [tone=highlight]: height — literal value "inherit" — a raw value is reported, never turned into an invented token (`.Indicator`)
+- part indicator [tone=primary]: height — literal value "inherit" — a raw value is reported, never turned into an invented token (`.Indicator`)
+- part indicator [tone=success]: height — literal value "inherit" — a raw value is reported, never turned into an invented token (`.Indicator`)
+- part indicator [tone=critical]: height — literal value "inherit" — a raw value is reported, never turned into an invented token (`.Indicator`)
+- part indicator [size=small]: background-color — var(--pc-progress-bar-indicator) resolves to NO token and has no reachable definition in this class context (`.Indicator`)
+- part indicator [size=small]: height — literal value "inherit" — a raw value is reported, never turned into an invented token (`.Indicator`)
+- part indicator [size=medium]: background-color — var(--pc-progress-bar-indicator) resolves to NO token and has no reachable definition in this class context (`.Indicator`)
+- part indicator [size=medium]: height — literal value "inherit" — a raw value is reported, never turned into an invented token (`.Indicator`)
+- part indicator [size=large]: background-color — var(--pc-progress-bar-indicator) resolves to NO token and has no reachable definition in this class context (`.Indicator`)
+- part indicator [size=large]: height — literal value "inherit" — a raw value is reported, never turned into an invented token (`.Indicator`)
+
+## Text (`polaris.text`)
+
+- source: `polaris-react/src/components/Text/Text.module.css` + extracted API (`out/contracts/text.contract.json`)
+- carried: 44 binding(s) · refused by name: 17 · curated decisions: 4
+
+### Curated decisions
+- NOTE: the `as` axis maps values to HTML elements — three of Polaris's values (dt, dd, legend) are outside the contract element vocabulary, so elementByProp is NOT promoted (its coverage rule refuses partial maps); the root element is fixed to `p` and the gap is named
+- NOTE: tone values 'base' and 'inherit' have no styling class in the module.css — absent from the promoted map by construction
+- NOTE: the responsive variant classes step font-size at breakpoints via custom-media @media rules — named refusals; the carried bindings are the base (sub-md) values and verification renders sub-md
+- sample label "Online store dashboard" carried as a static text part — Polaris's children prop is platform API (named extraction skip); a static surface needs sample ink and both sides of the receipts render the same string
+
+### Carried bindings (each cites its CSS rule)
+- root [variant=headingXs]: font-size → `{p.text-heading-xs-font-size}` (from `.headingXs { font-size: var(--p-text-heading-xs-font-size) }`)
+- root [variant=headingXs]: font-weight → `{p.text-heading-xs-font-weight}` (from `.headingXs { font-weight: var(--p-text-heading-xs-font-weight) }`)
+- root [variant=headingXs]: line-height → `{p.text-heading-xs-font-line-height}` (from `.headingXs { line-height: var(--p-text-heading-xs-font-line-height) }`)
+- root [variant=headingXs]: letter-spacing → `{p.text-heading-xs-font-letter-spacing}` (from `.headingXs { letter-spacing: var(--p-text-heading-xs-font-letter-spacing) }`)
+- root [variant=headingSm]: font-size → `{p.text-heading-sm-font-size}` (from `.headingSm { font-size: var(--p-text-heading-sm-font-size) }`)
+- root [variant=headingSm]: font-weight → `{p.text-heading-sm-font-weight}` (from `.headingSm { font-weight: var(--p-text-heading-sm-font-weight) }`)
+- root [variant=headingSm]: line-height → `{p.text-heading-sm-font-line-height}` (from `.headingSm { line-height: var(--p-text-heading-sm-font-line-height) }`)
+- root [variant=headingSm]: letter-spacing → `{p.text-heading-sm-font-letter-spacing}` (from `.headingSm { letter-spacing: var(--p-text-heading-sm-font-letter-spacing) }`)
+- root [variant=headingMd]: font-size → `{p.text-heading-md-font-size}` (from `.headingMd { font-size: var(--p-text-heading-md-font-size) }`)
+- root [variant=headingMd]: font-weight → `{p.text-heading-md-font-weight}` (from `.headingMd { font-weight: var(--p-text-heading-md-font-weight) }`)
+- root [variant=headingMd]: line-height → `{p.text-heading-md-font-line-height}` (from `.headingMd { line-height: var(--p-text-heading-md-font-line-height) }`)
+- root [variant=headingMd]: letter-spacing → `{p.text-heading-md-font-letter-spacing}` (from `.headingMd { letter-spacing: var(--p-text-heading-md-font-letter-spacing) }`)
+- root [variant=headingLg]: font-size → `{p.text-heading-lg-font-size}` (from `.headingLg { font-size: var(--p-text-heading-lg-font-size) }`)
+- root [variant=headingLg]: font-weight → `{p.text-heading-lg-font-weight}` (from `.headingLg { font-weight: var(--p-text-heading-lg-font-weight) }`)
+- root [variant=headingLg]: line-height → `{p.text-heading-lg-font-line-height}` (from `.headingLg { line-height: var(--p-text-heading-lg-font-line-height) }`)
+- root [variant=headingLg]: letter-spacing → `{p.text-heading-lg-font-letter-spacing}` (from `.headingLg { letter-spacing: var(--p-text-heading-lg-font-letter-spacing) }`)
+- root [variant=headingXl]: font-size → `{p.font-size-500}` (from `.headingXl { font-size: var(--p-font-size-500) }`)
+- root [variant=headingXl]: font-weight → `{p.font-weight-semibold}` (from `.headingXl { font-weight: var(--p-font-weight-semibold) }`)
+- root [variant=headingXl]: line-height → `{p.font-line-height-600}` (from `.headingXl { line-height: var(--p-font-line-height-600) }`)
+- root [variant=headingXl]: letter-spacing → `{p.font-letter-spacing-dense}` (from `.headingXl { letter-spacing: var(--p-font-letter-spacing-dense) }`)
+- root [variant=heading2xl]: font-size → `{p.font-size-600}` (from `.heading2xl { font-size: var(--p-font-size-600) }`)
+- root [variant=heading2xl]: font-weight → `{p.font-weight-bold}` (from `.heading2xl { font-weight: var(--p-font-weight-bold) }`)
+- root [variant=heading2xl]: line-height → `{p.font-line-height-800}` (from `.heading2xl { line-height: var(--p-font-line-height-800) }`)
+- root [variant=heading2xl]: letter-spacing → `{p.font-letter-spacing-dense}` (from `.heading2xl { letter-spacing: var(--p-font-letter-spacing-dense) }`)
+- root [variant=heading3xl]: font-size → `{p.font-size-750}` (from `.heading3xl { font-size: var(--p-font-size-750) }`)
+- root [variant=heading3xl]: font-weight → `{p.font-weight-bold}` (from `.heading3xl { font-weight: var(--p-font-weight-bold) }`)
+- root [variant=heading3xl]: line-height → `{p.font-line-height-1000}` (from `.heading3xl { line-height: var(--p-font-line-height-1000) }`)
+- root [variant=heading3xl]: letter-spacing → `{p.font-letter-spacing-denser}` (from `.heading3xl { letter-spacing: var(--p-font-letter-spacing-denser) }`)
+- root [variant=bodyXs]: font-size → `{p.text-body-xs-font-size}` (from `.bodyXs { font-size: var(--p-text-body-xs-font-size) }`)
+- root [variant=bodyXs]: font-weight → `{p.text-body-xs-font-weight}` (from `.bodyXs { font-weight: var(--p-text-body-xs-font-weight) }`)
+- root [variant=bodyXs]: line-height → `{p.text-body-xs-font-line-height}` (from `.bodyXs { line-height: var(--p-text-body-xs-font-line-height) }`)
+- root [variant=bodyXs]: letter-spacing → `{p.text-body-xs-font-letter-spacing}` (from `.bodyXs { letter-spacing: var(--p-text-body-xs-font-letter-spacing) }`)
+- root [variant=bodySm]: font-size → `{p.text-body-sm-font-size}` (from `.bodySm { font-size: var(--p-text-body-sm-font-size) }`)
+- root [variant=bodySm]: font-weight → `{p.text-body-sm-font-weight}` (from `.bodySm { font-weight: var(--p-text-body-sm-font-weight) }`)
+- root [variant=bodySm]: line-height → `{p.text-body-sm-font-line-height}` (from `.bodySm { line-height: var(--p-text-body-sm-font-line-height) }`)
+- root [variant=bodySm]: letter-spacing → `{p.text-body-sm-font-letter-spacing}` (from `.bodySm { letter-spacing: var(--p-text-body-sm-font-letter-spacing) }`)
+- root [variant=bodyMd]: font-size → `{p.text-body-md-font-size}` (from `.bodyMd { font-size: var(--p-text-body-md-font-size) }`)
+- root [variant=bodyMd]: font-weight → `{p.text-body-sm-font-weight}` (from `.bodyMd { font-weight: var(--p-text-body-sm-font-weight) }`)
+- root [variant=bodyMd]: line-height → `{p.text-body-md-font-line-height}` (from `.bodyMd { line-height: var(--p-text-body-md-font-line-height) }`)
+- root [variant=bodyMd]: letter-spacing → `{p.text-body-md-font-letter-spacing}` (from `.bodyMd { letter-spacing: var(--p-text-body-md-font-letter-spacing) }`)
+- root [variant=bodyLg]: font-size → `{p.text-body-lg-font-size}` (from `.bodyLg { font-size: var(--p-text-body-lg-font-size) }`)
+- root [variant=bodyLg]: font-weight → `{p.text-body-sm-font-weight}` (from `.bodyLg { font-weight: var(--p-text-body-sm-font-weight) }`)
+- root [variant=bodyLg]: line-height → `{p.text-body-lg-font-line-height}` (from `.bodyLg { line-height: var(--p-text-body-lg-font-line-height) }`)
+- root [variant=bodyLg]: letter-spacing → `{p.text-body-lg-font-letter-spacing}` (from `.bodyLg { letter-spacing: var(--p-text-body-lg-font-letter-spacing) }`)
+
+### Refused by name
+- at-rule: `@media (--p-breakpoints-md-up) { .headingXl { font-size: var(--p-text-heading-xl-font-size) } }` — conditional styling is not a contract channel
+- at-rule: `@media (--p-breakpoints-md-up) { .headingXl { font-weight: var(--p-text-heading-xl-font-weight) } }` — conditional styling is not a contract channel
+- at-rule: `@media (--p-breakpoints-md-up) { .headingXl { letter-spacing: var(--p-text-heading-xl-font-letter-spacing) } }` — conditional styling is not a contract channel
+- at-rule: `@media (--p-breakpoints-md-up) { .headingXl { line-height: var(--p-text-heading-xl-font-line-height) } }` — conditional styling is not a contract channel
+- at-rule: `@media (--p-breakpoints-md-up) { .heading2xl { font-size: var(--p-text-heading-2xl-font-size) } }` — conditional styling is not a contract channel
+- at-rule: `@media (--p-breakpoints-md-up) { .heading2xl { font-weight: var(--p-text-heading-2xl-font-weight) } }` — conditional styling is not a contract channel
+- at-rule: `@media (--p-breakpoints-md-up) { .heading2xl { letter-spacing: var(--p-text-heading-2xl-font-letter-spacing) } }` — conditional styling is not a contract channel
+- at-rule: `@media (--p-breakpoints-md-up) { .heading2xl { line-height: var(--p-text-heading-2xl-font-line-height) } }` — conditional styling is not a contract channel
+- at-rule: `@media (--p-breakpoints-md-up) { .heading3xl { font-size: var(--p-text-heading-3xl-font-size) } }` — conditional styling is not a contract channel
+- at-rule: `@media (--p-breakpoints-md-up) { .heading3xl { font-weight: var(--p-text-heading-3xl-font-weight) } }` — conditional styling is not a contract channel
+- at-rule: `@media (--p-breakpoints-md-up) { .heading3xl { letter-spacing: var(--p-text-heading-3xl-font-letter-spacing) } }` — conditional styling is not a contract channel
+- at-rule: `@media (--p-breakpoints-md-up) { .heading3xl { line-height: var(--p-text-heading-3xl-font-line-height) } }` — conditional styling is not a contract channel
+- mixin: `@mixin visually-hidden` — postcss mixin, expands outside the promoted rule model
+- root: axis fontWeight also resolves per-value bindings (regular: font-weight → {p.font-weight-regular} · medium: font-weight → {p.font-weight-medium} · semibold: font-weight → {p.font-weight-semibold} · bold: font-weight → {p.font-weight-bold}) but the schema carries ONE tokensByProp per part (axis "variant" won by curation order) — a NAMED SCHEMA LIMIT this showcase surfaces
+- root: axis tone also resolves per-value bindings (success: color → {p.color-text-success} · critical: color → {p.color-text-critical} · caution: color → {p.color-text-caution} · subdued: color → {p.color-text-secondary} · disabled: color → {p.color-text-disabled} · magic: color → {p.color-text-magic} · magic-subdued: color → {p.color-text-magic-secondary} · text-inverse: color → {p.color-text-inverse} · text-inverse-secondary: color → {p.color-text-inverse-secondary}) but the schema carries ONE tokensByProp per part (axis "variant" won by curation order) — a NAMED SCHEMA LIMIT this showcase surfaces
+- unmatched rule `.base` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 1 declaration(s) not carried
+- unmatched rule `.inherit` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 1 declaration(s) not carried
+
+## Thumbnail (`polaris.thumbnail`)
+
+- source: `polaris-react/src/components/Thumbnail/Thumbnail.module.css` + extracted API (`out/contracts/thumbnail.contract.json`)
+- carried: 3 binding(s) · refused by name: 58 · curated decisions: 4
+
+### Curated decisions
+- NOTE: per-size widths are component-private literals (--pc-thumbnail-*-size: 24…80px) — named refusals; the size axis still carries the extraSmall border-radius override (border-radius-150), the showcase's cleanest tokensByProp exhibit
+- NOTE: the inset bevel rides an ::after pseudo-element (shadow-border-inset) — named refusal
+- NOTE: the image itself is the source prop (URL) — media content, not a styling channel
+- prop `alt`: showcase sample default 'Black choker necklace' added (required text prop; the generator needs a canvas/story sample) — Polaris itself declares NO default for it
+
+### Carried bindings (each cites its CSS rule)
+- root (.Thumbnail): background → `{p.color-bg-surface}` (from `.Thumbnail { background: var(--p-color-bg-surface) }`)
+- root (.Thumbnail): border-radius → `{p.border-radius-200}` (from `.Thumbnail { border-radius: var(--p-border-radius-200) }`)
+- root [size=extraSmall]: border-radius → `{p.border-radius-150}` (from `.Thumbnail.sizeExtraSmall, .Thumbnail.sizeExtraSmall::after { border-radius: var(--p-border-radius-150) }`)
+
+### Refused by name
+- root (.Thumbnail): combinator in ".Thumbnail > * svg" — only descendant part selectors are promoted
+- root (.Thumbnail): combinator in ".Thumbnail > *" — only descendant part selectors are promoted
+- root (.Thumbnail): pseudo/attribute ":" in ".Thumbnail.sizeExtraSmall::after" — not promotable
+- root (.Thumbnail): pseudo/attribute ":" in ".Thumbnail::after" — not promotable
+- root (.Thumbnail): pseudo/attribute ":" in ".Thumbnail::before" — not promotable
+- root (.Thumbnail): min-width — literal value "24px" — a raw value is reported, never turned into an invented token (`.Thumbnail`)
+- root [size=extraSmall]: combinator in ".Thumbnail > * svg" — only descendant part selectors are promoted
+- root [size=extraSmall]: combinator in ".Thumbnail > *" — only descendant part selectors are promoted
+- root [size=extraSmall]: pseudo/attribute ":" in ".Thumbnail.sizeExtraSmall::after" — not promotable
+- root [size=extraSmall]: pseudo/attribute ":" in ".Thumbnail::after" — not promotable
+- root [size=extraSmall]: pseudo/attribute ":" in ".Thumbnail::before" — not promotable
+- root [size=extraSmall]: min-width — literal value "24px" — a raw value is reported, never turned into an invented token (`.Thumbnail`)
+- root [size=extraSmall]: width — literal value "24px" — a raw value is reported, never turned into an invented token (`.sizeExtraSmall`)
+- root [size=small]: combinator in ".Thumbnail > * svg" — only descendant part selectors are promoted
+- root [size=small]: combinator in ".Thumbnail > *" — only descendant part selectors are promoted
+- root [size=small]: pseudo/attribute ":" in ".Thumbnail.sizeExtraSmall::after" — not promotable
+- root [size=small]: pseudo/attribute ":" in ".Thumbnail::after" — not promotable
+- root [size=small]: pseudo/attribute ":" in ".Thumbnail::before" — not promotable
+- root [size=small]: min-width — literal value "24px" — a raw value is reported, never turned into an invented token (`.Thumbnail`)
+- root [size=small]: width — literal value "40px" — a raw value is reported, never turned into an invented token (`.sizeSmall`)
+- root [size=medium]: combinator in ".Thumbnail > * svg" — only descendant part selectors are promoted
+- root [size=medium]: combinator in ".Thumbnail > *" — only descendant part selectors are promoted
+- root [size=medium]: pseudo/attribute ":" in ".Thumbnail.sizeExtraSmall::after" — not promotable
+- root [size=medium]: pseudo/attribute ":" in ".Thumbnail::after" — not promotable
+- root [size=medium]: pseudo/attribute ":" in ".Thumbnail::before" — not promotable
+- root [size=medium]: min-width — literal value "24px" — a raw value is reported, never turned into an invented token (`.Thumbnail`)
+- root [size=medium]: width — literal value "60px" — a raw value is reported, never turned into an invented token (`.sizeMedium`)
+- root [size=large]: combinator in ".Thumbnail > * svg" — only descendant part selectors are promoted
+- root [size=large]: combinator in ".Thumbnail > *" — only descendant part selectors are promoted
+- root [size=large]: pseudo/attribute ":" in ".Thumbnail.sizeExtraSmall::after" — not promotable
+- root [size=large]: pseudo/attribute ":" in ".Thumbnail::after" — not promotable
+- root [size=large]: pseudo/attribute ":" in ".Thumbnail::before" — not promotable
+- root [size=large]: min-width — literal value "24px" — a raw value is reported, never turned into an invented token (`.Thumbnail`)
+- root [size=large]: width — literal value "80px" — a raw value is reported, never turned into an invented token (`.sizeLarge`)
+- root :hover: combinator in ".Thumbnail > * svg" — only descendant part selectors are promoted
+- root :hover: combinator in ".Thumbnail > *" — only descendant part selectors are promoted
+- root :hover: pseudo/attribute ":" in ".Thumbnail.sizeExtraSmall::after" — not promotable
+- root :hover: pseudo/attribute ":" in ".Thumbnail::after" — not promotable
+- root :hover: pseudo/attribute ":" in ".Thumbnail::before" — not promotable
+- root :active: combinator in ".Thumbnail > * svg" — only descendant part selectors are promoted
+- root :active: combinator in ".Thumbnail > *" — only descendant part selectors are promoted
+- root :active: pseudo/attribute ":" in ".Thumbnail.sizeExtraSmall::after" — not promotable
+- root :active: pseudo/attribute ":" in ".Thumbnail::after" — not promotable
+- root :active: pseudo/attribute ":" in ".Thumbnail::before" — not promotable
+- root :focus-visible: combinator in ".Thumbnail > * svg" — only descendant part selectors are promoted
+- root :focus-visible: combinator in ".Thumbnail > *" — only descendant part selectors are promoted
+- root :focus-visible: pseudo/attribute ":" in ".Thumbnail.sizeExtraSmall::after" — not promotable
+- root :focus-visible: pseudo/attribute ":" in ".Thumbnail::after" — not promotable
+- root :focus-visible: pseudo/attribute ":" in ".Thumbnail::before" — not promotable
+- root :disabled: combinator in ".Thumbnail > * svg" — only descendant part selectors are promoted
+- root :disabled: combinator in ".Thumbnail > *" — only descendant part selectors are promoted
+- root :disabled: pseudo/attribute ":" in ".Thumbnail.sizeExtraSmall::after" — not promotable
+- root :disabled: pseudo/attribute ":" in ".Thumbnail::after" — not promotable
+- root :disabled: pseudo/attribute ":" in ".Thumbnail::before" — not promotable
+- unmatched rule `.Thumbnail::after` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 2 declaration(s) not carried
+- unmatched rule `.transparent` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 1 declaration(s) not carried
+- unmatched rule `.Thumbnail > *` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 1 declaration(s) not carried
+- unmatched rule `.Thumbnail > * svg` — outside the promoted class map (foreign class, multi-axis condition, combinator, or unmapped part); 1 declaration(s) not carried
+

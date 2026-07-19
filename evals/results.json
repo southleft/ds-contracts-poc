@@ -1,6 +1,6 @@
 {
-  "passed": 102,
-  "total": 102,
+  "passed": 103,
+  "total": 103,
   "results": [
     {
       "id": "refuse-unknown-token-reference",
@@ -510,6 +510,11 @@
     {
       "id": "negative-spacing-overlap",
       "claim": "C5-extraction",
+      "pass": true
+    },
+    {
+      "id": "polaris-showcase-reproducible",
+      "claim": "C1-determinism",
       "pass": true
     }
   ]

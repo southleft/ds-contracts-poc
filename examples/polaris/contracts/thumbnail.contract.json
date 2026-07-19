@@ -1,0 +1,98 @@
+{
+  "$schema": "../../../contracts/contract.schema.json",
+  "id": "polaris.thumbnail",
+  "name": "Thumbnail",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "PROPOSED contract extracted from examples/polaris/.polaris-clone/polaris-react/src/components/Thumbnail/Thumbnail.tsx (react-tsx + css-module adapters) — API surface AND anatomy (structure, token bindings, layout, states) read from source; design bindings await reconciliation and human review. PROMOTED showcase contract: API surface extracted mechanically from Shopify/polaris @ 2b1ea88625e0613853ca8577c9acd1980a90f382 (polaris-react 13.10.1, MIT © Shopify, extracted 2026-07-18); styling bindings promoted from the component's own module.css under the reviewed class map in examples/polaris/scripts/curation.ts — every carried binding and every named refusal is listed in examples/polaris/extraction/PROMOTION.md.",
+  "semantics": {
+    "element": "span"
+  },
+  "props": [
+    {
+      "name": "size",
+      "description": "Size of thumbnail",
+      "type": {
+        "enum": [
+          "extraSmall",
+          "small",
+          "medium",
+          "large"
+        ]
+      },
+      "default": "medium",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Size",
+          "values": {
+            "extraSmall": "Extra Small",
+            "small": "Small",
+            "medium": "Medium",
+            "large": "Large"
+          }
+        },
+        "code": {
+          "prop": "size"
+        }
+      }
+    },
+    {
+      "name": "alt",
+      "description": "Alt text for the thumbnail image",
+      "type": "text",
+      "default": "Black choker necklace",
+      "required": true,
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Alt"
+        },
+        "code": {
+          "prop": "alt"
+        }
+      }
+    },
+    {
+      "name": "transparent",
+      "description": "Transparent background",
+      "type": "boolean",
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Transparent"
+        },
+        "code": {
+          "prop": "transparent"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "tokens": {
+        "background": "{p.color-bg-surface}",
+        "border-radius": "{p.border-radius-200}"
+      },
+      "tokensByProp": {
+        "prop": "size",
+        "map": {
+          "extraSmall": {
+            "border-radius": "{p.border-radius-150}"
+          }
+        }
+      }
+    }
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "polaris-react/src/components/Thumbnail/Thumbnail",
+      "export": "Thumbnail"
+    }
+  }
+}

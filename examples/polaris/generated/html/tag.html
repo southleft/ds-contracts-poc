@@ -1,0 +1,22 @@
+<!--
+  Tag — static HTML+CSS emitted from contract polaris.tag v0.1.0 by core/emit-html.ts.
+  Token values arrive via CSS custom properties (the same custom-property names the CSS Modules
+  bind) — include the token stylesheet (src/styles/tokens.css) on the page or nothing resolves.
+  Fidelity: no events, no interactivity beyond CSS states (:hover/:focus-visible/:disabled).
+  Slots render their declared defaultContent; an empty slot renders its wrapper empty (absent content
+  is absent — named in an inline comment, never painted as placeholder text). Booleans render per showcase item.
+-->
+<section class="showcase showcase--tag">
+  <div class="showcase__item">
+    <p class="showcase__label">default</p>
+    <span class="tag">
+      <span class="tag__label">Wholesale</span>
+    </span>
+  </div>
+  <div class="showcase__item">
+    <p class="showcase__label">disabled=true</p>
+    <span class="tag" data-disabled="true">
+      <span class="tag__label">Wholesale</span>
+    </span>
+  </div>
+</section>

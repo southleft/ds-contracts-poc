@@ -1,0 +1,62 @@
+{
+  "polaris.button": {
+    "carried": 13,
+    "refused": 333,
+    "curated": 4
+  },
+  "polaris.badge": {
+    "carried": 6,
+    "refused": 37,
+    "curated": 3
+  },
+  "polaris.banner": {
+    "carried": 9,
+    "refused": 27,
+    "curated": 6
+  },
+  "polaris.checkbox": {
+    "carried": 3,
+    "refused": 502,
+    "curated": 4
+  },
+  "polaris.radio-button": {
+    "carried": 4,
+    "refused": 339,
+    "curated": 3
+  },
+  "polaris.text-field": {
+    "carried": 14,
+    "refused": 907,
+    "curated": 6
+  },
+  "polaris.tag": {
+    "carried": 3,
+    "refused": 43,
+    "curated": 5
+  },
+  "polaris.avatar": {
+    "carried": 4,
+    "refused": 57,
+    "curated": 3
+  },
+  "polaris.spinner": {
+    "carried": 2,
+    "refused": 8,
+    "curated": 2
+  },
+  "polaris.progress-bar": {
+    "carried": 9,
+    "refused": 32,
+    "curated": 2
+  },
+  "polaris.text": {
+    "carried": 44,
+    "refused": 17,
+    "curated": 4
+  },
+  "polaris.thumbnail": {
+    "carried": 3,
+    "refused": 58,
+    "curated": 4
+  }
+}

@@ -1,0 +1,18 @@
+/* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/avatar.contract.json (polaris.avatar v0.1.0)
+ * Regenerate with: npm run generate
+ */
+
+.root {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  background: var(--p-color-avatar-bg-fill);
+  color: var(--p-color-avatar-text-on-bg-fill);
+}
+
+.initials {
+  font-size: var(--p-font-size-400);
+  font-weight: var(--p-font-weight-regular);
+}

@@ -2476,6 +2476,30 @@ const cases: Case[] = [
       }
     },
   },
+
+  // -------------------------------------------------------------------------
+  // POLARIS SHOWCASE (examples/polaris) — the Phase A end-to-end artifact.
+  // -------------------------------------------------------------------------
+  {
+    // Re-running the showcase generation from the COMMITTED contracts +
+    // token wrap is byte-stable (every generated/react, generated/html and
+    // figma/ file re-emits identical), and the truth-table numbers quoted in
+    // SHOWCASE.md byte-match receipts/truth-table.json — prose can never
+    // drift from the measured data. Runs against the repo tree (read-only:
+    // --check writes nothing); needs no Polaris clone and no network.
+    id: 'polaris-showcase-reproducible',
+    claim: 'C1-determinism',
+    run: () => {
+      const r = spawnSync(TSX, ['examples/polaris/generate.ts', '--check'], {
+        cwd: ROOT,
+        encoding: 'utf8',
+      });
+      const out = `${r.stdout ?? ''}${r.stderr ?? ''}`;
+      if ((r.status ?? -1) !== 0) throw new Error(`showcase --check failed:\n${out}`);
+      if (!out.includes('byte-stable')) throw new Error(`missing byte-stability line:\n${out}`);
+      if (!out.includes('truth-table rows match')) throw new Error(`missing truth-table consistency line:\n${out}`);
+    },
+  },
 ];
 
 // ---------------------------------------------------------------------------

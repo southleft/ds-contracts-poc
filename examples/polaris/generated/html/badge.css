@@ -1,0 +1,21 @@
+/* Badge — from polaris.badge v0.1.0 (core/emit-html.ts) */
+
+.badge, .badge *, .badge *::before, .badge *::after {
+  box-sizing: border-box;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  border: 0;
+  background-color: var(--p-color-bg-fill-transparent-secondary);
+  color: var(--p-color-text-secondary);
+  border-radius: var(--p-border-radius-200);
+  padding-block: var(--p-space-050);
+  padding-inline: var(--p-space-200);
+  font-weight: var(--p-font-weight-medium);
+}
+
+/* showcase chrome */
+.showcase { display: flex; flex-direction: column; gap: 24px; align-items: flex-start; font-family: sans-serif; }
+.showcase__label { margin: 0 0 8px; font: 12px/1 monospace; opacity: 0.6; }

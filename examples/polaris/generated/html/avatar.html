@@ -1,0 +1,46 @@
+<!--
+  Avatar — static HTML+CSS emitted from contract polaris.avatar v0.1.0 by core/emit-html.ts.
+  Token values arrive via CSS custom properties (the same custom-property names the CSS Modules
+  bind) — include the token stylesheet (src/styles/tokens.css) on the page or nothing resolves.
+  Fidelity: no events, no interactivity beyond CSS states (:hover/:focus-visible/:disabled).
+  Slots render their declared defaultContent; an empty slot renders its wrapper empty (absent content
+  is absent — named in an inline comment, never painted as placeholder text). Booleans render per showcase item.
+-->
+<section class="showcase showcase--avatar">
+  <div class="showcase__item">
+    <p class="showcase__label">default</p>
+    <span class="avatar avatar--size-md">
+      <span class="avatar__initials">Avatar</span>
+    </span>
+  </div>
+  <div class="showcase__item">
+    <p class="showcase__label">size=xs</p>
+    <span class="avatar avatar--size-xs">
+      <span class="avatar__initials">Avatar</span>
+    </span>
+  </div>
+  <div class="showcase__item">
+    <p class="showcase__label">size=sm</p>
+    <span class="avatar avatar--size-sm">
+      <span class="avatar__initials">Avatar</span>
+    </span>
+  </div>
+  <div class="showcase__item">
+    <p class="showcase__label">size=lg</p>
+    <span class="avatar avatar--size-lg">
+      <span class="avatar__initials">Avatar</span>
+    </span>
+  </div>
+  <div class="showcase__item">
+    <p class="showcase__label">size=xl</p>
+    <span class="avatar avatar--size-xl">
+      <span class="avatar__initials">Avatar</span>
+    </span>
+  </div>
+  <div class="showcase__item">
+    <p class="showcase__label">customer=true</p>
+    <span class="avatar avatar--size-md" data-customer="true">
+      <span class="avatar__initials">Avatar</span>
+    </span>
+  </div>
+</section>

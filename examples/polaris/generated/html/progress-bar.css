@@ -1,0 +1,49 @@
+/* ProgressBar — from polaris.progress-bar v0.1.0 (core/emit-html.ts) */
+
+.progress-bar, .progress-bar *, .progress-bar *::before, .progress-bar *::after {
+  box-sizing: border-box;
+}
+
+.progress-bar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: var(--p-border-radius-100);
+}
+
+.progress-bar--tone-highlight {
+  background-color: var(--p-color-bg-fill-tertiary);
+}
+
+.progress-bar--tone-primary {
+  background-color: var(--p-color-bg-fill-tertiary);
+}
+
+.progress-bar--tone-success {
+  background-color: var(--p-color-bg-fill-tertiary);
+}
+
+.progress-bar--tone-critical {
+  background-color: var(--p-color-bg-fill-tertiary);
+}
+
+.progress-bar--tone-highlight .progress-bar__indicator {
+  background-color: var(--p-color-bg-fill-info);
+}
+
+.progress-bar--tone-primary .progress-bar__indicator {
+  background-color: var(--p-color-bg-fill-brand);
+}
+
+.progress-bar--tone-success .progress-bar__indicator {
+  background-color: var(--p-color-bg-fill-success);
+}
+
+.progress-bar--tone-critical .progress-bar__indicator {
+  background-color: var(--p-color-bg-fill-critical);
+}
+
+/* showcase chrome */
+.showcase { display: flex; flex-direction: column; gap: 24px; align-items: flex-start; font-family: sans-serif; }
+.showcase__label { margin: 0 0 8px; font: 12px/1 monospace; opacity: 0.6; }
