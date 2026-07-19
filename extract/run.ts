@@ -15,7 +15,6 @@
  */
 import { writeFileSync, mkdirSync, readFileSync, existsSync } from 'node:fs';
 import path from 'node:path';
-import { fileURLToPath } from 'node:url';
 import { loadConfig, outDir, idPrefix } from './config.js';
 import { extractReactTsx, type SkippedComponent } from './adapters/react-tsx.js';
 import { extractCem } from './adapters/cem.js';
@@ -112,7 +111,8 @@ export function runExtractCommand(command: string, configArg?: string): void {
 }
 
 // Direct-run shell: `tsx extract/run.ts code|reconcile [config]`.
-if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+// Filename-matched so bundling into the ds-contracts CLI never triggers it.
+if (process.argv[1] && /extract[\\/]run\.(m?[tj]s)$/.test(path.resolve(process.argv[1]))) {
   const [, , command, configArg] = process.argv;
   runExtractCommand(command, configArg);
 }

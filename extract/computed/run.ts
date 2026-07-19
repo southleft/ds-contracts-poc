@@ -78,12 +78,16 @@ import { kebab } from '../types.js';
 import { flatten, normalizeValue, type Capture, type CapturedNode, type FlatEl, type StyleMap } from './lib.js';
 
 const HERE = path.resolve(new URL('.', import.meta.url).pathname);
-const REPO = path.resolve(HERE, '..', '..');
 
 const arg = (name: string): string | null => {
   const i = process.argv.indexOf(`--${name}`);
   return i > -1 ? process.argv[i + 1] : null;
 };
+// --root/--out: the ds-contracts CLI seam (`extract --computed`) — config-
+// relative paths resolve against --root, artifacts land under --out. Defaults
+// are this repo's own layout, so `npm run extract:computed` is unchanged.
+const REPO = arg('root') ? path.resolve(arg('root')!) : path.resolve(HERE, '..', '..');
+const OUT_ROOT = arg('out') ? path.resolve(arg('out')!) : path.join(HERE, 'out');
 const CONFIG_PATH = path.resolve(arg('config') ?? path.join(HERE, 'configs', 'polaris.json'));
 const HARNESS = arg('harness') ? path.resolve(arg('harness')!) : null;
 const ONLY = arg('component');
@@ -139,7 +143,7 @@ async function main() {
   await page.evaluate('document.fonts.ready');
   await page.waitForTimeout(400);
 
-  const scratchShots = path.join(HERE, 'out', '.orig-shots');
+  const scratchShots = path.join(OUT_ROOT, '.orig-shots');
   rmSync(scratchShots, { recursive: true, force: true });
 
   console.log('phase 1 — capture sweep…');
@@ -221,7 +225,7 @@ async function main() {
 
   for (const { comp, space } of mounts) {
     console.log(`\n== ${comp.name}`);
-    const outDir = path.join(HERE, 'out', comp.name.toLowerCase());
+    const outDir = path.join(OUT_ROOT, comp.name.toLowerCase());
     // regenerate GENERATED artifacts only — decisions.json / decisions.md /
     // resolved.contract.json are HUMAN-DECISION artifacts (resolve.ts) and
     // survive regeneration.

@@ -28,7 +28,6 @@
  */
 import { mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
-import { fileURLToPath } from 'node:url';
 import { ContractSchema, sortByDependencies, type Contract } from './contract-schema.js';
 import { generateCss, generateStories, generateTsx, validateContract } from '../core/emit-react.js';
 import { formatCss, formatTsx } from '../core/format.js';
@@ -37,6 +36,10 @@ import { tokenInventoryFromJson } from '../core/tokens.js';
 export interface GenerateComponentsOptions {
   /** Directory of *.contract.json documents. */
   contractsDir?: string;
+  /** Explicit contract document paths — when present, these are the set
+   *  (contractsDir is not listed). The CLI's `generate <contracts..>` uses
+   *  this; the npm script keeps directory discovery. */
+  contractFiles?: string[];
   /** DTCG token files — the union is the token inventory. */
   tokenFiles?: string[];
   /** Directory of <name>.svg icon assets. */
@@ -95,13 +98,18 @@ export async function generateComponents(
   const stories = options.stories ?? true;
   const tokenInventory = loadTokenInventory(options.tokenFiles ?? defaultTokenFiles(root));
   const iconAssets = loadIconAssets(options.iconsDir ?? path.join(root, 'assets', 'icons'));
-  const contractFiles = readdirSync(contractsDir).filter((f) => f.endsWith('.contract.json'));
+  const contractFiles =
+    options.contractFiles ??
+    readdirSync(contractsDir)
+      .filter((f) => f.endsWith('.contract.json'))
+      .map((f) => path.join(contractsDir, f));
   const errors: string[] = [];
   const generated: string[] = [];
 
   const parsedContracts: Contract[] = [];
-  for (const file of contractFiles) {
-    const raw = JSON.parse(readFileSync(path.join(contractsDir, file), 'utf8'));
+  for (const filePath of contractFiles) {
+    const file = path.basename(filePath);
+    const raw = JSON.parse(readFileSync(filePath, 'utf8'));
     const parsed = ContractSchema.safeParse(raw);
     if (!parsed.success) {
       errors.push(
@@ -228,7 +236,9 @@ export function parseGenerateArgs(argv: string[]): GenerateComponentsOptions {
   return options;
 }
 
-// Direct-run shell: `tsx scripts/generate-components.ts [flags]` (npm run generate).
-if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+// Direct-run shell: `tsx scripts/generate-components.ts [flags]` (npm run
+// generate). Filename-matched (not import.meta.url-compared) so bundling this
+// module into the ds-contracts CLI can never trigger it at import time.
+if (process.argv[1] && /generate-components\.(m?[tj]s)$/.test(path.resolve(process.argv[1]))) {
   await runGenerateComponents(parseGenerateArgs(process.argv.slice(2)));
 }

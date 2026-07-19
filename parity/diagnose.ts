@@ -20,7 +20,6 @@
  */
 import { readFileSync, readdirSync, writeFileSync, mkdirSync, existsSync } from 'node:fs';
 import path from 'node:path';
-import { fileURLToPath } from 'node:url';
 import { ContractSchema, type Contract } from '../scripts/contract-schema.js';
 import { loadConfig, outDir } from '../extract/config.js';
 import { extractReactTsx } from '../extract/adapters/react-tsx.js';
@@ -264,7 +263,8 @@ export function runDiagnose(configArg?: string): number {
 }
 
 // Direct-run shell: `npm run diagnose [-- path/to/extract.config.json]`.
-if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+// Filename-matched so bundling into the ds-contracts CLI never triggers it.
+if (process.argv[1] && /diagnose\.(m?[tj]s)$/.test(path.resolve(process.argv[1]))) {
   const [, , configArg] = process.argv;
   process.exit(runDiagnose(configArg));
 }
