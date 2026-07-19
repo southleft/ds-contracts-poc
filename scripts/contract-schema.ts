@@ -144,6 +144,49 @@ export const TokensByPropSchema = z.strictObject({
   map: z.record(z.string(), z.record(z.string(), TokenRefSchema)),
 });
 
+/** v14 (Polaris coverage round): a part may carry MULTIPLE tokensByProp
+ *  entries — one per driving enum axis (Button: variant colors AND size
+ *  paddings; Text: variant scale AND fontWeight map). The single-object
+ *  spelling stays valid (every existing contract parses unchanged); an array
+ *  is ordered: when two entries (necessarily on DIFFERENT props — see the
+ *  refusal rule) override the same channel, the LATER entry wins, mirroring
+ *  the CSS source-order cascade the values were extracted from. Refusal
+ *  rules (validateContract): two entries may not share BOTH a prop and a
+ *  channel — a conflicting channel+prop pair is refused by name. */
+export const TokensByPropFieldSchema = z.union([
+  TokensByPropSchema,
+  z.array(TokensByPropSchema).min(1),
+]);
+
+/** v14: a literal styling value a contract may carry where the SOURCE style
+ *  is a component-private literal (Polaris `--pc-*` pixel geometry), resolved
+ *  deterministically through a var() chain — never invented, never minted
+ *  into a token. Bounded grammar: px/rem/em/unitless numbers, hex and
+ *  rgb()/rgba() colors, and the CSS keywords transparent/inherit/currentColor. */
+export const LITERAL_VALUE_RE =
+  /^(-?\d+(\.\d+)?(px|rem|em)?|transparent|inherit|currentColor|#[0-9a-fA-F]{3,8}|rgba?\([\d ,./%]+\))$/;
+export const LiteralValueSchema = z
+  .string()
+  .regex(LITERAL_VALUE_RE, 'Literal value must be a px/rem/em/number, hex or rgb()/rgba() color, or transparent/inherit/currentColor');
+
+/** v14: the channels a literal may ride — geometry and paint channels where
+ *  foreign systems keep component-private literals. Everything else refuses
+ *  by name (validateContract). */
+export const LITERAL_CHANNELS = new Set([
+  'background', 'background-color', 'color',
+  'height', 'width', 'min-width', 'min-height',
+  'padding-block', 'padding-inline', 'gap', 'border-radius', 'border-width',
+  'font-size', 'line-height', 'letter-spacing',
+]);
+
+/** v14: per-enum-value literal overrides — the literals sibling of
+ *  TokensByProp (ProgressBar's per-size `--pc-*` pixel heights, Avatar's
+ *  per-size widths). Array-ordered exactly like tokensByProp entries. */
+export const LiteralsByPropSchema = z.strictObject({
+  prop: z.string(),
+  map: z.record(z.string(), z.record(z.string(), LiteralValueSchema)),
+});
+
 /** v7 stylesWhen: the tight whitelist of literal CSS properties a
  *  conditional style may set. Deliberately NOT tokens — these are
  *  behavioral/positional properties with no token vocabulary (a color or a
@@ -336,8 +379,17 @@ export interface Part {
   /** CSS property → token reference. The CSS Module AND the Figma bindings
    *  are generated from these — there is no handwritten style layer. */
   tokens?: Record<string, string>;
-  /** v10: per-enum-value token overrides merged over `tokens`. */
-  tokensByProp?: z.infer<typeof TokensByPropSchema>;
+  /** v10: per-enum-value token overrides merged over `tokens`.
+   *  v14: a part may carry MULTIPLE entries (one per driving axis) — ordered,
+   *  later entries win per channel; conflicting channel+prop pairs refuse. */
+  tokensByProp?: z.infer<typeof TokensByPropFieldSchema>;
+  /** v14: literal styling values (channel → bounded literal) resolved
+   *  deterministically from component-private source literals — carried with
+   *  provenance at promotion, never minted into tokens. */
+  literals?: Record<string, string>;
+  /** v14: per-enum-value literal overrides merged over `literals` — the
+   *  literals sibling of tokensByProp (ordered entries, same refusal rules). */
+  literalsByProp?: Array<z.infer<typeof LiteralsByPropSchema>>;
   /** interaction state → (CSS property → token reference). On the ROOT:
    *  the full state vocabulary (background-color, outline-*, opacity, …).
    *  v13 (P18 second half): on a NON-ref part (text/icon/box — never a
@@ -392,7 +444,12 @@ export const PartSchema: z.ZodType<Part> = z.lazy(() =>
     shape: ShapeSchema.optional(),
     tokens: z.record(z.string(), TokenRefSchema).optional(),
     /** v10. */
-    tokensByProp: TokensByPropSchema.optional(),
+    /** v14: single entry OR ordered array of entries (see TokensByPropFieldSchema). */
+    tokensByProp: TokensByPropFieldSchema.optional(),
+    /** v14: bounded literal styling values with promotion-time provenance. */
+    literals: z.record(z.string(), LiteralValueSchema).optional(),
+    /** v14: ordered per-enum-value literal overrides. */
+    literalsByProp: z.array(LiteralsByPropSchema).min(1).optional(),
     /** Root: full state vocabulary. v13: non-ref parts, color-kind channels
      *  only — see the Part interface doc + emit-react validateContract. */
     states: z.record(z.string(), z.record(z.string(), TokenRefSchema)).optional(),
@@ -579,11 +636,36 @@ export function resolveLayout(
  *  the static CSS emitters render the map as enum-class/descendant rules
  *  instead. */
 export function resolveTokens(part: Part, subst: Record<string, string>): Record<string, string> {
-  const base = part.tokens ?? {};
-  const byProp = part.tokensByProp;
-  const override = byProp ? byProp.map[subst[byProp.prop] ?? ''] : undefined;
-  if (!override) return base;
-  return { ...base, ...override };
+  let out = part.tokens ?? {};
+  // v14: entries merge IN ORDER — later entries win per channel (the CSS
+  // source-order cascade the values were extracted from). An axis with no
+  // value in `subst` contributes nothing (a defaultless enum prop left unset
+  // applies no override — the same rule the React surface renders live).
+  for (const entry of tokensByPropEntries(part)) {
+    const override = entry.map[subst[entry.prop] ?? ''];
+    if (override) out = { ...out, ...override };
+  }
+  return out;
+}
+
+/** v14: normalize the single-or-array tokensByProp field to an ordered list.
+ *  The ONE reader every surface goes through — the single-object spelling
+ *  and the array spelling cannot diverge. */
+export function tokensByPropEntries(part: Part): Array<z.infer<typeof TokensByPropSchema>> {
+  const tbp = part.tokensByProp;
+  if (!tbp) return [];
+  return Array.isArray(tbp) ? tbp : [tbp];
+}
+
+/** v14: the literal record a part carries under one concrete variant combo —
+ *  literalsByProp overrides merged over `literals`, resolveTokens semantics. */
+export function resolveLiterals(part: Part, subst: Record<string, string>): Record<string, string> {
+  let out = part.literals ?? {};
+  for (const entry of part.literalsByProp ?? []) {
+    const override = entry.map[subst[entry.prop] ?? ''];
+    if (override) out = { ...out, ...override };
+  }
+  return out;
 }
 
 /** A native CHECKABLE control part — a real `<input type="checkbox|radio">`

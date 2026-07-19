@@ -152,7 +152,35 @@ function nodeStyle(spec: NodeSpec, ctx: RenderCtx): string {
   // construction; the canvas renders the same value or the row silently
   // loses its wash (field failure: Eventz disabled variants at opacity 0.4).
   if (typeof spec.opacity === 'number') d.push(`opacity: ${spec.opacity}`);
+  d.push(...litStyles(spec));
   return d.join('; ');
+}
+
+/** v14 literals (spec.lits): the same literal-fidelity channels the sync
+ *  runtime applies — rendered as plain CSS here. */
+function litStyles(spec: NodeSpec): string[] {
+  const li = spec.lits;
+  if (!li) return [];
+  const d: string[] = [];
+  if (li.fillClear) d.push('background-color: transparent');
+  else if (li.fillColor) {
+    const c = li.fillColor;
+    d.push(
+      `background-color: rgba(${Math.round(c.r * 255)}, ${Math.round(c.g * 255)}, ${Math.round(c.b * 255)}, ${c.a ?? 1})`,
+    );
+  }
+  if (li.width !== undefined) d.push(`width: ${li.width}px`);
+  if (li.height !== undefined) d.push(`height: ${li.height}px`);
+  if (li.minWidth !== undefined) d.push(`min-width: ${li.minWidth}px`);
+  if (li.minHeight !== undefined) d.push(`min-height: ${li.minHeight}px`);
+  if (li.paddingTop !== undefined) d.push(`padding-top: ${li.paddingTop}px`);
+  if (li.paddingBottom !== undefined) d.push(`padding-bottom: ${li.paddingBottom}px`);
+  if (li.paddingLeft !== undefined) d.push(`padding-left: ${li.paddingLeft}px`);
+  if (li.paddingRight !== undefined) d.push(`padding-right: ${li.paddingRight}px`);
+  if (li.itemSpacing !== undefined) d.push(`gap: ${li.itemSpacing}px`);
+  if (li.radius !== undefined) d.push(`border-radius: ${li.radius}px`);
+  if (li.strokeWeight !== undefined) d.push(`border-width: ${li.strokeWeight}px`, 'border-style: solid');
+  return d;
 }
 
 /** True when the node renders in this instance (visibleWhen booleans render
@@ -218,6 +246,18 @@ function shapeStyle(spec: NodeSpec, ctx: RenderCtx): string {
   if (sh.kind === 'polygon') d.push(`clip-path: ${polygonClipPath(sh.sides ?? 3)}`);
   if (sh.kind === 'ellipse') d.push('border-radius: 50%');
   if (spec.fill) d.push(`background-color: ${cssVarOf(spec.fill)}`);
+  // Shape specs carry stroke + bindings exactly like frames (the emitted
+  // sync runtime's shape branch applies them too — the Phase B deviation-2
+  // gap, fixed at the source on BOTH surfaces).
+  if (spec.stroke) {
+    d.push(`border-color: ${cssVarOf(spec.stroke)}`, 'border-style: solid');
+    if (!spec.bindings?.strokeWeight) d.push('border-width: 1px');
+  }
+  for (const [field, varName] of Object.entries(spec.bindings ?? {})) {
+    const cssProp = BINDING_CSS[field];
+    if (cssProp) d.push(`${cssProp}: ${cssVarOf(varName)}`);
+  }
+  d.push(...litStyles(spec));
   const transform: string[] = [];
   const a = spec.absolute;
   if (a) {
