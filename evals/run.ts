@@ -35,6 +35,9 @@ import {
   type Part as SchemaPart,
 } from '../scripts/contract-schema.js';
 import { validateContract as coreValidateContract } from '../core/emit-react.js';
+import { createFigmaEngine } from '../core/emit-figma-script.js';
+import { emitHtml as coreEmitHtml } from '../core/emit-html.js';
+import { tokenInventoryFromJson } from '../core/tokens.js';
 
 const ROOT = process.cwd();
 const SCRATCH = path.join(ROOT, 'evals', '.scratch');
@@ -85,6 +88,13 @@ interface ReportFinding {
 }
 const readReport = (): ReportFinding[] =>
   JSON.parse(readFileSync(path.join(SCRATCH, 'parity', 'report.json'), 'utf8')).findings;
+
+/** Per-component sync scripts are AMEND-CAPABLE since #60: they carry the
+ *  shared sync runtime with `const COMPONENTS = [<data>]` (variants ride
+ *  data.variants / data.stateVariants) instead of the old create-only
+ *  VARIANTS/STATE_VARIANTS constants. */
+const parseSyncComponent = (script: string): any =>
+  JSON.parse(script.match(/const COMPONENTS = (\[[\s\S]*?\n\]);/)![1])[0];
 
 function replaceInFile(rel: string, from: string | RegExp, to: string) {
   const p = path.join(SCRATCH, rel);
@@ -840,8 +850,8 @@ const cases: Case[] = [
       r = run(TSX, ['scripts/generate-figma.ts']);
       if (r.status !== 0) throw new Error(`figma:plan failed with 4-axis contract:\n${r.out.slice(0, 600)}`);
       const syncDir = path.join(SCRATCH, 'figma-sync');
-      const parseVariants = (file: string) => JSON.parse(
-        readFileSync(path.join(syncDir, file), 'utf8').match(/const VARIANTS = (\[[\s\S]*?\n\]);/)![1]);
+      const parseVariants = (file: string) =>
+        parseSyncComponent(readFileSync(path.join(syncDir, file), 'utf8')).variants;
       const v = parseVariants(readdirSync(syncDir).find((f) => /^\d+-fouraxis\.js$/.test(f))!);
       if (v.length !== 36) throw new Error(`Expected 36 variants (3×3×2×2), got ${v.length}`);
       if (v[0].name !== 'Variant=Primary, Size=Medium, Emphasis=Medium, Icon Position=Start')
@@ -1022,7 +1032,7 @@ const cases: Case[] = [
       if (!/\.sender-user \.body \{\n  align-items: flex-end;/.test(css)) throw new Error('body override rule missing');
       run(TSX, ['scripts/generate-figma.ts']);
       const f = readdirSync(path.join(SCRATCH, 'figma-sync')).find((n) => /-chatmessage\.js$/.test(n))!;
-      const variants = JSON.parse(readFileSync(path.join(SCRATCH, 'figma-sync', f), 'utf8').match(/const VARIANTS = (\[[\s\S]*?\n\])/)![1]);
+      const variants = parseSyncComponent(readFileSync(path.join(SCRATCH, 'figma-sync', f), 'utf8')).variants;
       const user = variants.find((v: any) => v.name.includes('Sender=User'));
       if (user.spec.children.map((c: any) => c.name).join(',') !== 'body,avatarSlot') throw new Error('canvas child order not reversed per variant');
     },
@@ -1068,7 +1078,7 @@ const cases: Case[] = [
       run(TSX, ['scripts/generate-figma.ts']);
       const f = readdirSync(path.join(SCRATCH, 'figma-sync')).find((n) => n.includes('crumbtrail'))!;
       const script = readFileSync(path.join(SCRATCH, 'figma-sync', f), 'utf8');
-      if (JSON.parse(script.match(/const TEXT_PROPS = (\[.*?\])/)![1]).length !== 0) throw new Error('NONE prop leaked onto the canvas');
+      if ((parseSyncComponent(script).textProps ?? []).length !== 0) throw new Error('NONE prop leaked onto the canvas');
       parity();
       const report = JSON.parse(readFileSync(path.join(SCRATCH, 'parity', 'report.json'), 'utf8'));
       if (report.findings.some((x: any) => x.subject.startsWith('CrumbTrail.'))) throw new Error('NONE prop reported as drift');
@@ -1123,10 +1133,10 @@ const cases: Case[] = [
       if (run(TSX, ['scripts/generate-figma.ts']).status !== 0) throw new Error('figma:plan failed');
       const f = readdirSync(path.join(SCRATCH, 'figma-sync')).find((n) => /^\d+-button\.js$/.test(n))!;
       const script = readFileSync(path.join(SCRATCH, 'figma-sync', f), 'utf8');
-      const base = JSON.parse(script.match(/const VARIANTS = (\[[\s\S]*?\n\]);/)![1]);
+      const base = parseSyncComponent(script).variants;
       if (base.length !== 12 || base[0].name !== 'Variant=Primary, Size=Medium')
         throw new Error('Base cartesian must stay the pure enum API (previews ride a separate overlay)');
-      const sv = JSON.parse(script.match(/const STATE_VARIANTS = (\[[\s\S]*?\n\]);/)![1]);
+      const sv = parseSyncComponent(script).stateVariants ?? [];
       if (sv.length !== 12) throw new Error(`Expected 12 previews (4 variants × 3 states, Size at default), got ${sv.length}`);
       const hover = sv.find((v: any) => v.name === 'Variant=Danger, Size=Medium, State=Hover');
       if (hover?.spec.fill !== 'color/action/danger/background-hover')
@@ -1195,7 +1205,7 @@ const cases: Case[] = [
         throw new Error('Text style upsert must reconcile by identity marker, never name');
       const f = readdirSync(path.join(SCRATCH, 'figma-sync')).find((n) => /^\d+-button\.js$/.test(n))!;
       const script = readFileSync(path.join(SCRATCH, 'figma-sync', f), 'utf8');
-      const variants = JSON.parse(script.match(/const VARIANTS = (\[[\s\S]*?\n\]);/)![1]);
+      const variants = parseSyncComponent(script).variants;
       const lg = variants.find((v: any) => v.name === 'Variant=Primary, Size=Large');
       if (lg.spec.children[1].textStyle !== 'control/lg')
         throw new Error('Large Button label must ride the control/lg text style');
@@ -2749,6 +2759,219 @@ const cases: Case[] = [
       if (!avatarScript.includes('"fill": "p/color-avatar-one-bg-fill"')) {
         throw new Error('avatar figma script must bind the background fill the HTML surface carries');
       }
+    },
+  },
+  {
+    // S4 ROUND 1 (north-star push): the v15 channel lifts land on the CANVAS
+    // emitter with the capability-matrix verdicts — per-corner radii and
+    // per-side widths BIND (each field is variable-bindable), gradients parse
+    // into native GRADIENT_LINEAR paints, shadow stacks (multi-layer + inset)
+    // become native effect lists, the A22 text channels draw natively
+    // (textCase/textDecoration/textAlignHorizontal/letterSpacing/fontFamily/
+    // textTruncation), layout.wrap becomes layoutWrap 'WRAP', and every
+    // 'annotate'-verdict declared fact lands as the matrix §b annotation copy
+    // in the component description — declared-not-drawn, never dropped. The
+    // CSS surfaces render the same facts verbatim.
+    id: 's4-canvas-channel-lifts',
+    claim: 'C1-determinism',
+    run: () => {
+      const fixture: any = {
+        id: 's4.lifts',
+        name: 'S4Lifts',
+        version: '1.0.0',
+        status: 'draft',
+        description: 'S4 channel-lift eval fixture.',
+        semantics: { element: 'button' },
+        props: [
+          { name: 'children', type: 'text', default: 'Lift', bindings: { figma: { kind: 'TEXT', property: 'Label' }, code: { prop: 'children' } } },
+          { name: 'variant', type: { enum: ['a', 'b'] }, default: 'a', bindings: { figma: { kind: 'VARIANT', property: 'Variant' }, code: { prop: 'variant' } } },
+        ],
+        states: ['disabled'],
+        anatomy: {
+          root: {
+            layout: { display: 'flex', wrap: true },
+            tokens: {
+              'border-top-left-radius': '{s4.radius-tl}',
+              'border-top-width': '{s4.bw-top}',
+              'border-color': '{s4.border}',
+              'background-image': '{s4.grad}',
+              'box-shadow': '{s4.shadow-stack}',
+            },
+            declared: { cursor: 'pointer', 'user-select': 'none', position: 'relative' },
+            declaredStates: { disabled: { cursor: 'pointer' } },
+            parts: {
+              label: {
+                content: { prop: 'children' },
+                tokens: { 'letter-spacing': '{s4.tracking}', 'font-family': '{s4.family}' },
+                declared: {
+                  'text-transform': 'uppercase',
+                  'text-decoration-line': 'underline',
+                  'text-align': 'center',
+                  'text-overflow': 'ellipsis',
+                },
+              },
+            },
+          },
+        },
+        anchors: { figma: { fileKey: null, componentSetKey: null }, code: { importPath: 'src/components/S4Lifts', export: 'S4Lifts' } },
+      };
+      const parsed = ContractSchema.parse(fixture); // v15 fields are schema vocabulary, not extensions
+      const errs: string[] = [];
+      coreValidateContract(parsed as any, new Map([[parsed.id, parsed as any]]), errs, new Map());
+      if (errs.length > 0) throw new Error('fixture must validate: ' + errs.join('; '));
+      // Grammar refusals stay refusals: position outside the relative class,
+      // channels outside the registry, values outside the bounded grammar.
+      const bad = structuredClone(fixture);
+      bad.anatomy.root.declared.position = 'fixed';
+      bad.anatomy.root.declared['z-index'] = '3';
+      const badErrs: string[] = [];
+      coreValidateContract(bad, new Map([[bad.id, bad]]), badErrs, new Map());
+      if (!badErrs.some((e) => e.includes('"position"') && e.includes('bounded grammar'))) {
+        throw new Error('position: fixed must refuse by grammar; got: ' + badErrs.join('; '));
+      }
+      if (!badErrs.some((e) => e.includes('"z-index"') && e.includes('not a declared channel'))) {
+        throw new Error('z-index must refuse as a non-registry channel; got: ' + badErrs.join('; '));
+      }
+      const engine = createFigmaEngine({
+        tokens: {
+          primitives: {
+            s4: {
+              'radius-tl': { $value: '4px', $type: 'dimension' },
+              'bw-top': { $value: '2px', $type: 'dimension' },
+              border: { $value: '#112233', $type: 'color' },
+              grad: { $value: 'linear-gradient(180deg, #ff0000 0%, rgba(0, 0, 255, 0.5) 100%)', $type: 'gradient' },
+              'shadow-stack': { $value: '0px 1px 2px 0px rgba(0, 0, 0, 0.5), inset 0px -1px 0px 1px #112233', $type: 'shadow' },
+              tracking: { $value: '0.5px', $type: 'dimension' },
+              family: { $value: '"Söhne", "Helvetica Neue", sans-serif', $type: 'fontFamily' },
+            },
+          },
+          semantic: {}, light: {}, dark: {}, brands: { default: {} },
+        },
+        icons: new Map(),
+      });
+      const script = engine.buildComponentScript(parsed as any, new Map([[parsed.id, parsed as any]]));
+      const comp = JSON.parse(script.match(/const COMPONENTS = (\[[\s\S]*?\n\]);/)![1])[0];
+      const va = comp.variants[0].spec;
+      if (va.bindings?.topLeftRadius !== 's4/radius-tl') throw new Error('per-corner radius must BIND topLeftRadius');
+      if (va.bindings?.strokeTopWeight !== 's4/bw-top') throw new Error('per-side width must BIND strokeTopWeight');
+      if (va.layout?.wrap !== true) throw new Error('layout.wrap must compile to LayoutSpec.wrap');
+      if (va.gradient?.angle !== 180 || va.gradient.stops.length !== 2) throw new Error('gradient must parse angle + stops: ' + JSON.stringify(va.gradient));
+      const stop2 = va.gradient.stops[1];
+      if (stop2.position !== 1 || stop2.color.b !== 1 || stop2.color.a !== 0.5) throw new Error('gradient stop 2 must carry rgba + position: ' + JSON.stringify(stop2));
+      if (va.effectStack?.length !== 2) throw new Error('shadow stack must parse BOTH layers: ' + JSON.stringify(va.effectStack));
+      if (va.effectStack[1].inner !== true || va.effectStack[1].spread !== 1) throw new Error('inset layer must carry inner + spread: ' + JSON.stringify(va.effectStack[1]));
+      const label = va.children[0];
+      if (label.letterSpacing !== 0.5) throw new Error('letter-spacing must ride the text node (px literal)');
+      if (label.textCase !== 'UPPER' || label.textDecoration !== 'UNDERLINE' || label.textAlignH !== 'CENTER') {
+        throw new Error('declared text facts must DRAW: ' + JSON.stringify({ c: label.textCase, d: label.textDecoration, a: label.textAlignH }));
+      }
+      if (label.fontFamily !== 'Söhne') throw new Error('font-family must carry the first stack entry, got ' + label.fontFamily);
+      if (label.textTruncation !== true) throw new Error('text-overflow: ellipsis must carry textTruncation');
+      for (const marker of ["layoutWrap = 'WRAP'", 'INNER_SHADOW', 'GRADIENT_LINEAR', 'node.textCase = spec.textCase', 'loadFontAsync({ family: spec.fontFamily']) {
+        if (!script.includes(marker)) throw new Error('emitted runtime missing: ' + marker);
+      }
+      if (!comp.description.includes('Cursor changes (pointer on hover) exist only in the coded component.')) {
+        throw new Error('annotate-verdict declared facts must land as description annotation copy');
+      }
+      if (!comp.description.includes('[disabled]')) throw new Error('state-plane declared facts must be annotated with their state');
+      // CSS surfaces render the same facts verbatim (and the declared cursor
+      // supersedes the emitter chrome — no invented not-allowed).
+      const html = coreEmitHtml(parsed as any, {
+        tokens: tokenInventoryFromJson([{ s4: { 'radius-tl': { $value: '4px', $type: 'dimension' } } }]),
+        icons: new Map(),
+        contracts: new Map([[parsed.id, parsed as any]]),
+      });
+      for (const rule of ['flex-wrap: wrap', 'cursor: pointer', 'text-transform: uppercase', 'text-decoration-line: underline', 'user-select: none']) {
+        if (!html.css.includes(rule)) throw new Error('emit-html missing declared/wrap rule: ' + rule);
+      }
+      if (html.css.includes('not-allowed')) throw new Error('declared cursor must supersede the built-in :disabled not-allowed chrome');
+    },
+  },
+  {
+    // #60 — the four named canvas-emitter defects, each pinned; the fillClear
+    // pin EXECUTES the emitted runtime (never just greps it).
+    //   1. fillClear precedence: a spec-carried fill is never trampled
+    //   2. per-component scripts are AMEND-CAPABLE (shared sync runtime)
+    //   3. standalone COMPONENTs amend in place (amendComponent)
+    //   4. empty-child runtime-sized geometry gets declared defaults (FILL)
+    id: 'figma-60-canvas-emitter-fixes',
+    claim: 'C1-determinism',
+    run: () => {
+      const fixture: any = {
+        id: 's4.fillclear',
+        name: 'FillClearFx',
+        version: '1.0.0',
+        status: 'draft',
+        description: '#60 fillClear precedence fixture.',
+        semantics: { element: 'div' },
+        props: [
+          { name: 'variant', type: { enum: ['a', 'b'] }, default: 'a', bindings: { figma: { kind: 'VARIANT', property: 'Variant' }, code: { prop: 'variant' } } },
+        ],
+        states: [],
+        anatomy: {
+          root: {
+            tokensByProp: { prop: 'variant', map: { a: { background: '{fx.bg}' } } },
+            literals: { background: 'transparent' },
+          },
+        },
+        anchors: { figma: { fileKey: null, componentSetKey: null }, code: { importPath: 'src/components/FillClearFx', export: 'FillClearFx' } },
+      };
+      const engine = createFigmaEngine({
+        tokens: { primitives: { fx: { bg: { $value: '#301050', $type: 'color' } } }, semantic: {}, light: {}, dark: {}, brands: { default: {} } },
+        icons: new Map(),
+      });
+      const script = engine.buildComponentScript(fixture, new Map([[fixture.id, fixture]]));
+      const comp = JSON.parse(script.match(/const COMPONENTS = (\[[\s\S]*?\n\]);/)![1])[0];
+      const specA = comp.variants.find((v: any) => v.name.includes('=a')).spec;
+      const specB = comp.variants.find((v: any) => v.name.includes('=b')).spec;
+      // (1) compile side: fill + fillClear on one spec = fill wins (fillClear
+      // is not compiled at all); the fill-less variant keeps its clear.
+      if (specA.fill !== 'fx/bg' || specA.lits?.fillClear) throw new Error('fix 1 (compile): fill variant must carry fill and NO fillClear: ' + JSON.stringify(specA.lits));
+      if (specB.fill !== undefined || specB.lits?.fillClear !== true) throw new Error('fix 1 (compile): fill-less variant must keep fillClear');
+      // (1) runtime side: EXECUTE the emitted applyFrameSpec against both
+      // orders — a hand-fed spec carrying BOTH must keep its fill.
+      const src = script.match(/function applyFrameSpec\(node, spec\) \{[\s\S]*?\n\}/)![0];
+      const applyFrameSpec = (new Function('need', 'boundPaint', src + '; return applyFrameSpec;'))(
+        () => ({}),
+        () => 'BOUND-PAINT',
+      ) as (node: any, spec: any) => void;
+      const layout = { mode: 'HORIZONTAL', primary: 'MIN', counter: 'MIN' };
+      const node1: any = { type: 'FRAME', setBoundVariable() {}, resize() {}, width: 0, height: 0 };
+      applyFrameSpec(node1, { layout, fill: 'fx/bg', lits: { fillClear: true } });
+      if (!Array.isArray(node1.fills) || node1.fills[0] !== 'BOUND-PAINT') {
+        throw new Error('fix 1 (runtime): executed applyFrameSpec trampled the spec-carried fill: ' + JSON.stringify(node1.fills));
+      }
+      const node2: any = { type: 'FRAME', setBoundVariable() {}, resize() {}, width: 0, height: 0 };
+      applyFrameSpec(node2, { layout, lits: { fillClear: true } });
+      if (!Array.isArray(node2.fills) || node2.fills.length !== 0) {
+        throw new Error('fix 1 (runtime): fill-less fillClear must clear: ' + JSON.stringify(node2.fills));
+      }
+      // (2) amend-capable per-component runtime — the create-only skip is gone.
+      for (const marker of ['async function amendSet', 'async function syncOne']) {
+        if (!script.includes(marker)) throw new Error('fix 2: per-component script missing ' + marker);
+      }
+      if (script.includes('return { skipped: true, nodeId: existing.id, key: existing.key };')) {
+        throw new Error('fix 2: create-only skip path still emitted');
+      }
+      // (3) standalone amend — the v1 refusal is retired, amendComponent routes.
+      if (!script.includes('async function amendComponent')) throw new Error('fix 3: amendComponent missing');
+      if (script.includes("reason: 'standalone component — amend supports variant sets in v1'")) {
+        throw new Error('fix 3: v1 standalone skip still emitted');
+      }
+      if (!script.includes("existing.type === 'COMPONENT' && !C.isSet")) throw new Error('fix 3: standalone routing missing');
+      // (4) empty-child declared defaults in ALL THREE build paths (create,
+      // set amend, standalone amend) — never Figma's 100×100 artifact.
+      const fillFixCount = script.split("childNode.layoutSizingVertical = 'FILL'").length - 1;
+      if (fillFixCount < 3) throw new Error('fix 4: empty-child FILL default missing from a build path (found ' + fillFixCount + '/3)');
+      // The COMMITTED polaris artifacts carry the fixes at source: Badge is
+      // the standalone class Phase B-2 had to delete+recreate; ProgressBar is
+      // finding 4's indicator.
+      const badge = readFileSync(path.join(ROOT, 'examples/polaris/figma/badge.figma.js'), 'utf8');
+      if (!badge.includes('amendComponent')) throw new Error('committed badge script must be standalone-amend-capable');
+      const pbar = readFileSync(path.join(ROOT, 'examples/polaris/figma/progress-bar.figma.js'), 'utf8');
+      if (!pbar.includes("layoutSizingVertical = 'FILL'")) throw new Error('committed progress-bar script must carry the empty-child default');
+      const button = readFileSync(path.join(ROOT, 'examples/polaris/figma/button.figma.js'), 'utf8');
+      if (!button.includes('li.fillClear && !spec.fill')) throw new Error('committed button script must carry the runtime fillClear guard');
     },
   },
   {

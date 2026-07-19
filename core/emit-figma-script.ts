@@ -30,6 +30,7 @@
  *   Figma's native SLOT property type + SlotSettings is the upgrade target.
  */
 import {
+  DECLARED_CHANNELS,
   STATE_PREVIEW_DEFAULT,
   STATE_PREVIEW_PROPERTY,
   isNativeCheckablePart,
@@ -55,6 +56,8 @@ export interface LayoutSpec {
   primary: 'MIN' | 'CENTER' | 'MAX' | 'SPACE_BETWEEN';
   counter: 'MIN' | 'CENTER' | 'MAX';
   stretchChildren?: boolean;
+  /** v15 (S4/matrix a.8): flex-wrap: wrap → layoutWrap 'WRAP' (native). */
+  wrap?: boolean;
 }
 
 export interface NodeSpec {
@@ -99,9 +102,47 @@ export interface NodeSpec {
    *  time from the resolved box-shadow token value — the runtime applies it
    *  as a native effect. color is 6- or 8-digit hex. */
   dropShadow?: { x: number; y: number; radius: number; spread?: number; color: string };
+  /** v15 (S4/matrix a.1): a FULL box-shadow stack — multi-layer and inset
+   *  layers included — parsed at compile time (parseShadowStack) when the
+   *  resolved value is outside the single-drop dump grammar. The runtime
+   *  applies the whole list as native DROP_SHADOW/INNER_SHADOW effects
+   *  (effects is an array; order preserved). */
+  effectStack?: Array<{
+    inner?: boolean;
+    x: number;
+    y: number;
+    radius: number;
+    spread?: number;
+    color: { r: number; g: number; b: number; a?: number };
+  }>;
+  /** v15 (S4/matrix a.3): a CSS linear-gradient background-image layer parsed
+   *  at compile time (parseCssGradient) → native GRADIENT_LINEAR paint,
+   *  appended OVER the fill paint (CSS lists the top layer first; Figma's
+   *  last paint renders topmost — the documented order inversion). Radial/
+   *  conic gradients stay a named description limit. Angle is CSS degrees
+   *  (0 = to top, clockwise); stops are 0–1 positions. */
+  gradient?: { angle: number; stops: Array<{ color: { r: number; g: number; b: number; a?: number }; position: number }> };
+  /** COMPILE-INTERNAL: a background-image whose resolved value did NOT parse
+   *  as a linear gradient (radial/conic/foreign grammar). Collected into a
+   *  named description limit by compileComponentData and STRIPPED before the
+   *  spec JSON is emitted — never a silent drop, never emitted noise. */
+  gradientMiss?: string;
   /** PIXEL line height (dump v1.3) — the runtime sets
    *  node.lineHeight = { unit: 'PIXELS', value }. */
   lineHeight?: number;
+  /** v15 (S4/matrix a.2): PIXEL letter spacing on text nodes — literal, the
+   *  lineHeight discipline (binding upgrade deferred by name). */
+  letterSpacing?: number;
+  /** v15 (S4): declared text facts with NATIVE canvas fields (the 'draw'
+   *  verdicts in DECLARED_CHANNELS): text-transform → textCase,
+   *  text-decoration-line → textDecoration, text-align →
+   *  textAlignHorizontal, font-family (first stack entry) → fontName.family,
+   *  text-overflow: ellipsis → textTruncation 'ENDING'. */
+  textCase?: 'UPPER' | 'LOWER' | 'TITLE' | 'ORIGINAL';
+  textDecoration?: 'UNDERLINE' | 'STRIKETHROUGH' | 'NONE';
+  textAlignH?: 'LEFT' | 'CENTER' | 'RIGHT' | 'JUSTIFIED';
+  fontFamily?: string;
+  textTruncation?: boolean;
   /** v14 literals: literal-fidelity channels resolved from component-private
    *  source literals (schema `literals`/`literalsByProp`) — there is no
    *  variable to bind, so the runtime applies plain values. Colors are
@@ -123,6 +164,10 @@ export interface NodeSpec {
     itemSpacing?: number;
     radius?: number;
     strokeWeight?: number;
+    /** v15 (S4/matrix a.4): per-corner literal radii. */
+    radiusCorners?: { tl?: number; tr?: number; bl?: number; br?: number };
+    /** v15 (S4/matrix a.5): per-side literal border widths. */
+    strokeSides?: { top?: number; right?: number; bottom?: number; left?: number };
   };
   // svg (icon parts) — markup with currentColor resolved to the variant's
   // literal foreground color (SVG paint is not variable-bindable on import)
@@ -563,6 +608,15 @@ interface TextCtx {
   fontSizePath?: string;
   /** PIXEL line height (dump v1.3) — resolved literal. */
   lineHeight?: number;
+  /** v15: PIXEL letter spacing — resolved literal (lineHeight discipline). */
+  letterSpacing?: number;
+  /** v15 declared text facts (draw verdicts) — inherited to text children
+   *  like every other text channel. */
+  textCase?: NodeSpec['textCase'];
+  textDecoration?: NodeSpec['textDecoration'];
+  textAlignH?: NodeSpec['textAlignH'];
+  fontFamily?: string;
+  textTruncation?: boolean;
 }
 
 /** The dump v1.2 single-DROP_SHADOW box-shadow grammar
@@ -575,6 +629,116 @@ function parseBoxShadow(value: string): NodeSpec['dropShadow'] | undefined {
   const out: NodeSpec['dropShadow'] = { x: parseFloat(m[1]), y: parseFloat(m[2]), radius: parseFloat(m[3]), color: m[5].toLowerCase() };
   if (m[4] !== undefined && parseFloat(m[4]) !== 0) out.spread = parseFloat(m[4]);
   return out;
+}
+
+/** Split a CSS value list on TOP-LEVEL commas (commas inside function
+ *  parentheses — rgba(), gradients — do not split). */
+function splitTopLevel(value: string): string[] {
+  const out: string[] = [];
+  let depth = 0;
+  let cur = '';
+  for (const ch of value) {
+    if (ch === '(') depth++;
+    if (ch === ')') depth--;
+    if (ch === ',' && depth === 0) {
+      out.push(cur.trim());
+      cur = '';
+    } else cur += ch;
+  }
+  if (cur.trim()) out.push(cur.trim());
+  return out;
+}
+
+/** A CSS color literal (hex / rgb() / rgba()) → RGBA floats. */
+function parseCssColor(v: string): { r: number; g: number; b: number; a?: number } | undefined {
+  return parseLitColor(v);
+}
+
+/** v15 (S4/matrix a.1): the FULL box-shadow stack grammar — multi-layer,
+ *  inset, hex OR rgb()/rgba() colors (browser-serialized values put the
+ *  color first; authored values may put it last — both accepted). Layers the
+ *  single-drop dump grammar already carries never reach here (parseBoxShadow
+ *  runs first, keeping existing emissions byte-identical). Unparseable
+ *  layers refuse the WHOLE stack (undefined) — a partial shadow would lie. */
+function parseShadowStack(value: string): NodeSpec['effectStack'] | undefined {
+  if (value.trim() === 'none') return [];
+  const layers = splitTopLevel(value.trim());
+  const out: NonNullable<NodeSpec['effectStack']> = [];
+  for (const layer of layers) {
+    let rest = layer.trim();
+    let inner = false;
+    if (/(^| )inset( |$)/.test(rest)) {
+      inner = true;
+      rest = rest.replace(/(^| )inset( |$)/, ' ').trim();
+    }
+    const colorMatch = rest.match(/(#[0-9a-fA-F]{3,8}|rgba?\([^)]*\))/);
+    if (!colorMatch) return undefined;
+    const color = parseCssColor(colorMatch[1]);
+    if (!color) return undefined;
+    rest = rest.replace(colorMatch[1], '').trim();
+    const lengths = rest.split(/\s+/).filter(Boolean);
+    if (lengths.length < 2 || lengths.length > 4) return undefined;
+    const px4 = lengths.map((l) => {
+      const m = l.match(/^(-?[\d.]+)px$/);
+      return m ? parseFloat(m[1]) : NaN;
+    });
+    if (px4.some(Number.isNaN)) return undefined;
+    const e: NonNullable<NodeSpec['effectStack']>[number] = {
+      ...(inner ? { inner: true } : {}),
+      x: px4[0],
+      y: px4[1],
+      radius: px4[2] ?? 0,
+      color,
+    };
+    if (px4[3] !== undefined && px4[3] !== 0) e.spread = px4[3];
+    out.push(e);
+  }
+  return out;
+}
+
+/** v15 (S4/matrix a.3): CSS linear-gradient() → angle + stops. Radial/conic
+ *  gradients and unparseable stops return undefined — the caller names the
+ *  limit in the component description, never drops it silently. */
+function parseCssGradient(value: string): NodeSpec['gradient'] | undefined {
+  const m = value.trim().match(/^linear-gradient\((.*)\)$/s);
+  if (!m) return undefined;
+  const args = splitTopLevel(m[1]);
+  if (args.length === 0) return undefined;
+  let angle = 180; // CSS default: to bottom
+  let stopArgs = args;
+  const first = args[0].trim();
+  const deg = first.match(/^(-?[\d.]+)deg$/);
+  if (deg) {
+    angle = parseFloat(deg[1]);
+    stopArgs = args.slice(1);
+  } else if (first.startsWith('to ')) {
+    const DIR: Record<string, number> = { 'to top': 0, 'to right': 90, 'to bottom': 180, 'to left': 270 };
+    if (!(first in DIR)) return undefined; // corner directions: box-ratio-dependent — named limit
+    angle = DIR[first];
+    stopArgs = args.slice(1);
+  }
+  if (stopArgs.length < 2) return undefined;
+  const stops: NonNullable<NodeSpec['gradient']>['stops'] = [];
+  for (const s of stopArgs) {
+    const parts = s.trim().match(/^(#[0-9a-fA-F]{3,8}|rgba?\([^)]*\))(?:\s+(-?[\d.]+)%)?$/);
+    if (!parts) return undefined; // double-position / length stops / hints — named limit
+    const color = parseCssColor(parts[1]);
+    if (!color) return undefined;
+    stops.push({ color, position: parts[2] !== undefined ? parseFloat(parts[2]) / 100 : -1 });
+  }
+  // Missing positions interpolate evenly (the CSS rule) between neighbors.
+  if (stops[0].position === -1) stops[0].position = 0;
+  if (stops[stops.length - 1].position === -1) stops[stops.length - 1].position = 1;
+  for (let i = 0; i < stops.length; i++) {
+    if (stops[i].position !== -1) continue;
+    let j = i;
+    while (stops[j].position === -1) j++;
+    const prev = stops[i - 1].position;
+    const step = (stops[j].position - prev) / (j - i + 1);
+    for (let k = i; k < j; k++) stops[k].position = prev + step * (k - i + 1);
+  }
+  for (const s of stops) s.position = Math.min(1, Math.max(0, s.position));
+  return { angle: ((angle % 360) + 360) % 360, stops };
 }
 
 const ALIGN_FIGMA: Record<string, 'MIN' | 'CENTER' | 'MAX'> = {
@@ -602,6 +766,8 @@ function layoutSpec(part: Part, isRoot: boolean, subst: Record<string, string> =
     primary: l?.justify ? JUSTIFY_FIGMA[l.justify] : 'MIN',
     counter: l?.align ? ALIGN_FIGMA[l.align] : 'MIN',
     stretchChildren: l?.align === 'stretch' || undefined,
+    // v15 (S4/matrix a.8): flex-wrap → native layoutWrap 'WRAP'.
+    ...(l?.wrap ? { wrap: true } : {}),
   };
 }
 
@@ -652,8 +818,14 @@ function applyTokens(
       case 'font-weight':
         next.fontStyle = FONT_STYLE_BY_WEIGHT[px(resolveLiteral(tokenPath))] ?? 'Medium';
         break;
-      case 'font-family':
-        break; // Inter (documented fidelity scope)
+      case 'font-family': {
+        // v15 (S4/matrix a.6): the first font-family stack entry rides the
+        // text node (retires the everything-renders-Inter fiat; the runtime
+        // falls back to Inter when the family is unavailable — named limit).
+        const family = firstFamily(String(resolveLiteral(tokenPath)));
+        if (family) next.fontFamily = family;
+        break;
+      }
       case 'padding-inline':
         spec.bindings = { ...spec.bindings, paddingLeft: varName, paddingRight: varName };
         break;
@@ -672,6 +844,49 @@ function applyTokens(
           bottomRightRadius: varName,
         };
         break;
+      // v15 (S4/matrix a.4): per-corner radii — each corner field is
+      // independently variable-bindable; the vocabulary now carries the four
+      // longhand keys.
+      case 'border-top-left-radius':
+        spec.bindings = { ...spec.bindings, topLeftRadius: varName };
+        break;
+      case 'border-top-right-radius':
+        spec.bindings = { ...spec.bindings, topRightRadius: varName };
+        break;
+      case 'border-bottom-left-radius':
+        spec.bindings = { ...spec.bindings, bottomLeftRadius: varName };
+        break;
+      case 'border-bottom-right-radius':
+        spec.bindings = { ...spec.bindings, bottomRightRadius: varName };
+        break;
+      // v15 (S4/matrix a.5): per-side border widths — strokeTopWeight etc.
+      // are independently bindable (per-side border COLORS stay CODE-ONLY:
+      // one strokes paint list serves all four sides — matrix §2).
+      case 'border-top-width':
+        spec.bindings = { ...spec.bindings, strokeTopWeight: varName };
+        break;
+      case 'border-right-width':
+        spec.bindings = { ...spec.bindings, strokeRightWeight: varName };
+        break;
+      case 'border-bottom-width':
+        spec.bindings = { ...spec.bindings, strokeBottomWeight: varName };
+        break;
+      case 'border-left-width':
+        spec.bindings = { ...spec.bindings, strokeLeftWeight: varName };
+        break;
+      // v15 (S4/matrix a.3): gradient background layer — parsed at compile
+      // time into a native GRADIENT_LINEAR paint appended over the fill.
+      // Radial/conic/unparseable values are a NAMED description limit
+      // (declaredNotes in compileComponentData), never a silent drop.
+      case 'background-image': {
+        const resolved = String(resolveLiteral(tokenPath));
+        if (resolved !== 'none') {
+          const g = parseCssGradient(resolved);
+          if (g) spec.gradient = g;
+          else spec.gradientMiss = resolved.slice(0, 60);
+        }
+        break;
+      }
       case 'width':
         spec.fixedWidth = { px: px(resolveLiteral(tokenPath)), varName };
         break;
@@ -702,15 +917,31 @@ function applyTokens(
       }
       case 'box-shadow': {
         // dump v1.3: the resolved single-DROP_SHADOW value projects as a
-        // native effect (runtime) / CSS box-shadow (canvas preview).
-        const shadow = parseBoxShadow(String(resolveLiteral(tokenPath)));
+        // native effect (runtime) / CSS box-shadow (canvas preview). v15
+        // (S4/matrix a.1): values outside that grammar — multi-layer stacks,
+        // inset layers, rgba() colors — parse as a FULL effect stack; the
+        // single-drop path stays first so existing emissions are
+        // byte-identical.
+        const value = String(resolveLiteral(tokenPath));
+        const shadow = parseBoxShadow(value);
         if (shadow) spec.dropShadow = shadow;
+        else {
+          const stack = parseShadowStack(value);
+          if (stack) spec.effectStack = stack;
+        }
         break;
       }
       case 'line-height':
         // dump v1.3: PIXEL line heights ride text nodes.
         next.lineHeight = px(resolveLiteral(tokenPath));
         break;
+      case 'letter-spacing': {
+        // v15 (S4/matrix a.2): PIXEL letter spacing — literal on the text
+        // node (the lineHeight discipline; binding upgrade deferred by name).
+        const v = px(resolveLiteral(tokenPath));
+        if (!Number.isNaN(v)) next.letterSpacing = v;
+        break;
+      }
       default:
         // outline-* are state/CSS concerns; min-height/max-height (dump
         // v1.4 style facts) are CSS-side — the canvas variant is drawn at
@@ -769,7 +1000,11 @@ function applyLiterals(spec: NodeSpec, lits: Record<string, string>, ctx: TextCt
     switch (cssProp) {
       case 'background':
       case 'background-color': {
-        if (value === 'transparent') { li().fillClear = true; break; }
+        // #60 fix 1 (compile side): fill + fillClear on one spec = fill wins.
+        // applyTokens runs first in applyStyling, so a token-bound fill is
+        // already on the spec here — the base transparent literal is the
+        // CSS-cascade LOSER and must not compile at all.
+        if (value === 'transparent') { if (!spec.fill) li().fillClear = true; break; }
         const c = parseLitColor(value);
         if (c) li().fillColor = c;
         break;
@@ -783,6 +1018,16 @@ function applyLiterals(spec: NodeSpec, lits: Record<string, string>, ctx: TextCt
       case 'gap': { const n = parseLitPx(value); if (n !== undefined) li().itemSpacing = n; break; }
       case 'border-radius': { const n = parseLitPx(value); if (n !== undefined) li().radius = n; break; }
       case 'border-width': { const n = parseLitPx(value); if (n !== undefined) li().strokeWeight = n; break; }
+      // v15 (S4): per-corner literal radii and per-side literal widths.
+      case 'border-top-left-radius': { const n = parseLitPx(value); if (n !== undefined) (li().radiusCorners ??= {}).tl = n; break; }
+      case 'border-top-right-radius': { const n = parseLitPx(value); if (n !== undefined) (li().radiusCorners ??= {}).tr = n; break; }
+      case 'border-bottom-left-radius': { const n = parseLitPx(value); if (n !== undefined) (li().radiusCorners ??= {}).bl = n; break; }
+      case 'border-bottom-right-radius': { const n = parseLitPx(value); if (n !== undefined) (li().radiusCorners ??= {}).br = n; break; }
+      case 'border-top-width': { const n = parseLitPx(value); if (n !== undefined) (li().strokeSides ??= {}).top = n; break; }
+      case 'border-right-width': { const n = parseLitPx(value); if (n !== undefined) (li().strokeSides ??= {}).right = n; break; }
+      case 'border-bottom-width': { const n = parseLitPx(value); if (n !== undefined) (li().strokeSides ??= {}).bottom = n; break; }
+      case 'border-left-width': { const n = parseLitPx(value); if (n !== undefined) (li().strokeSides ??= {}).left = n; break; }
+      case 'letter-spacing': { const n = parseLitPx(value); if (n !== undefined) next.letterSpacing = n; break; }
       case 'font-size': {
         const n = parseLitPx(value);
         if (n !== undefined) { next.fontSize = n; next.fontSizePath = undefined; }
@@ -797,8 +1042,60 @@ function applyLiterals(spec: NodeSpec, lits: Record<string, string>, ctx: TextCt
   return next;
 }
 
-/** Token bindings + literal channels for one part under one combo — the ONE
- *  styling entry point every part kind compiles through. */
+/** v15: first font-family stack entry, unquoted — the canvas family. */
+function firstFamily(stack: string): string | undefined {
+  const first = splitTopLevel(stack)[0]?.trim().replace(/^["']|["']$/g, '');
+  return first && !/^(sans-serif|serif|monospace|system-ui|ui-sans-serif|ui-serif|ui-monospace)$/.test(first)
+    ? first
+    : undefined;
+}
+
+/** v15 (S4): declared facts with a NATIVE canvas field (the 'draw' verdicts
+ *  in DECLARED_CHANNELS) compile into the text context; every 'annotate'
+ *  verdict lands in the component DESCRIPTION instead (declaredNotes in
+ *  compileComponentData) — declared-not-drawn, never silently dropped. */
+function applyDeclared(declared: Record<string, string> | undefined, ctx: TextCtx): TextCtx {
+  if (!declared) return ctx;
+  const next: TextCtx = { ...ctx };
+  for (const [prop, value] of Object.entries(declared)) {
+    switch (prop) {
+      case 'text-transform': {
+        const CASE: Record<string, NodeSpec['textCase']> = {
+          uppercase: 'UPPER', lowercase: 'LOWER', capitalize: 'TITLE', none: 'ORIGINAL',
+        };
+        if (CASE[value]) next.textCase = CASE[value];
+        break;
+      }
+      case 'text-decoration-line':
+        // overline has no textDecoration enum value — annotate verdict path.
+        if (value === 'underline') next.textDecoration = 'UNDERLINE';
+        else if (value === 'line-through') next.textDecoration = 'STRIKETHROUGH';
+        else if (value === 'none') next.textDecoration = 'NONE';
+        break;
+      case 'text-align': {
+        const ALIGN: Record<string, NodeSpec['textAlignH']> = {
+          left: 'LEFT', start: 'LEFT', center: 'CENTER', right: 'RIGHT', end: 'RIGHT', justify: 'JUSTIFIED',
+        };
+        if (ALIGN[value]) next.textAlignH = ALIGN[value];
+        break;
+      }
+      case 'font-family': {
+        const family = firstFamily(value);
+        if (family) next.fontFamily = family;
+        break;
+      }
+      case 'text-overflow':
+        if (value === 'ellipsis') next.textTruncation = true;
+        break;
+      default:
+        break; // annotate verdicts — description notes, not node fields
+    }
+  }
+  return next;
+}
+
+/** Token bindings + literal channels + declared facts for one part under one
+ *  combo — the ONE styling entry point every part kind compiles through. */
 function applyStyling(
   spec: NodeSpec,
   part: Part,
@@ -806,7 +1103,8 @@ function applyStyling(
   ctx: TextCtx,
 ): TextCtx {
   const t = applyTokens(spec, resolveTokens(part, subst), subst, ctx);
-  return applyLiterals(spec, resolveLiterals(part, subst), t);
+  const l = applyLiterals(spec, resolveLiterals(part, subst), t);
+  return applyDeclared(part.declared, l);
 }
 
 /** State-preview overrides pass through applyTokens with one honest
@@ -927,6 +1225,7 @@ function formControlSpec(
       fontSize: childCtx.fontSize ?? 16,
       fontStyle: childCtx.fontStyle ?? 'Medium',
       ...(childCtx.lineHeight !== undefined ? { lineHeight: childCtx.lineHeight } : {}),
+      ...textExtras(childCtx),
       textStyle: matchTextStyle(childCtx),
       textFill: 'color/input/placeholder',
       contentProp: prop?.bindings.figma.property,
@@ -1082,6 +1381,19 @@ function variantParts(
  *  instance per drawn sibling (the meter discipline: the canvas renders the
  *  collection's honest static state; the array prop is code-only, kind
  *  'NONE'). Every other part kind compiles to exactly one spec. */
+/** v15 text extras: conditional spread — absent facts add NO fields, so
+ *  contracts without them emit byte-identical specs (golden discipline). */
+function textExtras(ctx: TextCtx): Partial<NodeSpec> {
+  return {
+    ...(ctx.letterSpacing !== undefined ? { letterSpacing: ctx.letterSpacing } : {}),
+    ...(ctx.textCase !== undefined ? { textCase: ctx.textCase } : {}),
+    ...(ctx.textDecoration !== undefined ? { textDecoration: ctx.textDecoration } : {}),
+    ...(ctx.textAlignH !== undefined ? { textAlignH: ctx.textAlignH } : {}),
+    ...(ctx.fontFamily !== undefined ? { fontFamily: ctx.fontFamily } : {}),
+    ...(ctx.textTruncation ? { textTruncation: true } : {}),
+  };
+}
+
 function partToSpecs(
   name: string,
   part: Part,
@@ -1207,6 +1519,7 @@ function partToSpecInner(
     spec.textStyle = matchTextStyle(textCtx);
     spec.textFill = textCtx.textFill;
     if (textCtx.lineHeight !== undefined) spec.lineHeight = textCtx.lineHeight;
+    Object.assign(spec, textExtras(textCtx));
     applyVisibleWhen(spec, part, contract);
     return spec;
   }
@@ -1233,6 +1546,7 @@ function partToSpecInner(
     spec.textStyle = matchTextStyle(textCtx);
     spec.textFill = textCtx.textFill;
     if (textCtx.lineHeight !== undefined) spec.lineHeight = textCtx.lineHeight;
+    Object.assign(spec, textExtras(textCtx));
     spec.contentProp = prop.bindings.figma.property;
     applyVisibleWhen(spec, part, contract);
     return spec;
@@ -1383,6 +1697,7 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
           textStyle: matchTextStyle(ctx),
           textFill: ctx.textFill,
           ...(ctx.lineHeight !== undefined ? { lineHeight: ctx.lineHeight } : {}),
+          ...textExtras(ctx),
           contentProp: textProp.bindings.figma.property,
         },
       ];
@@ -1465,6 +1780,7 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
               textStyle: matchTextStyle(ctx),
               textFill: ctx.textFill,
               ...(ctx.lineHeight !== undefined ? { lineHeight: ctx.lineHeight } : {}),
+              ...textExtras(ctx),
               contentProp: textProp.bindings.figma.property,
             },
           ];
@@ -1498,6 +1814,46 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
         typeof p.default === 'string' ? p.default : typeof p.default === 'number' ? String(p.default) : '',
     }));
 
+  // v15 (S4): declared-not-drawn facts land ON the component as description
+  // text — the capability matrix's annotation copy, deduped and sorted for
+  // deterministic emission. 'draw'-verdict base facts render natively and
+  // need no note; state-plane declared facts are always annotated (state
+  // previews do not draw declared facts yet — a named limit).
+  const declaredNoteLines = new Set<string>();
+  for (const { name: partName, part } of walkAnatomy(contract)) {
+    const note = (channel: string, value: string, state?: string) => {
+      const reg = DECLARED_CHANNELS[channel];
+      if (!reg) return; // refused upstream by validateContract
+      const drawn =
+        reg.canvas === 'draw' && !state && !(channel === 'text-decoration-line' && value === 'overline');
+      if (drawn) return;
+      declaredNoteLines.add(
+        `\nDeclared (code): ${partName}.${channel}: ${value}${state ? ` [${state}]` : ''} — ${reg.note}`,
+      );
+    };
+    for (const [ch, v] of Object.entries(part.declared ?? {})) note(ch, v);
+    for (const [state, m] of Object.entries(part.declaredStates ?? {})) {
+      for (const [ch, v] of Object.entries(m)) note(ch, v, state);
+    }
+  }
+  // Gradient misses (radial/conic/unparsed): collected off the compiled
+  // specs, named in the description, and STRIPPED from the emitted JSON.
+  const gradientMissLines = new Set<string>();
+  const stripMisses = (spec: NodeSpec) => {
+    if (spec.gradientMiss !== undefined) {
+      gradientMissLines.add(
+        `\nGradient (code): ${spec.name}.background-image — "${spec.gradientMiss}…" has no linear-gradient projection; it renders only in the coded component.`,
+      );
+      delete spec.gradientMiss;
+    }
+    (spec.children ?? []).forEach(stripMisses);
+  };
+  for (const v of variants) stripMisses(v.spec);
+  for (const v of stateVariants) stripMisses(v.spec);
+  // #60 fix 4 companion note: meter parts are runtime-sized — the canvas
+  // shows the defaults' fraction; height follows the track (FILL).
+  const hasMeter = walkAnatomy(contract).some((w) => w.part.meter);
+
   return {
     setName: contract.name,
     contractId: contract.id,
@@ -1512,7 +1868,12 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
           const t = e.toggles ? ` Toggles ${e.toggles.prop}: ${e.toggles.between.join(' ⇄ ')}.` : '';
           return `\nEvent (code): ${e.bindings.code.prop} — fires on ${e.trigger} activation.${t}`;
         })
-        .join(''),
+        .join('') +
+      [...declaredNoteLines].sort().join('') +
+      [...gradientMissLines].sort().join('') +
+      (hasMeter
+        ? '\nRuntime-sized geometry: the meter fill renders the defaults\u2019 fraction; its height follows the track (FILL) — live sizing exists only in code.'
+        : ''),
     isSet: variants.length + stateVariants.length > 1,
     boolProps: boolPropsData,
     textProps: textOnlyProps,
@@ -1532,10 +1893,11 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
 function mintedPreamble(mintedTokens?: Record<string, unknown>): string {
   const minted = mintedTokens ? flatten(mintedTokens) : null;
   if (!minted || minted.size === 0) return '';
-  // Shadow-typed leaves (box-shadow values, dump v1.2) have no Figma
-  // variable projection — skipped here; the limit is NAMED at proposal.
+  // Shadow-typed leaves (box-shadow values, dump v1.2) and gradient-typed
+  // leaves (background-image stacks, v15) have no Figma variable projection —
+  // skipped here; the limit is NAMED at proposal.
   const vars = [...minted]
-    .filter(([, entry]) => entry.type !== 'shadow')
+    .filter(([, entry]) => entry.type !== 'shadow' && entry.type !== 'gradient')
     .map(([p, entry]) => ({
       name: figmaName(p),
       type: figmaType(entry),
@@ -1664,6 +2026,74 @@ const shadowRuntime = (has: boolean): string =>
   }`
     : '';
 
+/** v15 (S4/matrix a.1): full shadow stack — DROP_SHADOW + INNER_SHADOW list
+ *  (applyFrameSpec tail, conditional emission — the golden discipline). */
+const effectStackRuntime = (has: boolean): string =>
+  has
+    ? `
+  if (spec.effectStack) {
+    // v15: full box-shadow stack — multi-layer + inset as native effects.
+    node.effects = spec.effectStack.map((e) => ({
+      type: e.inner ? 'INNER_SHADOW' : 'DROP_SHADOW',
+      color: { r: e.color.r, g: e.color.g, b: e.color.b, a: e.color.a === undefined ? 1 : e.color.a },
+      offset: { x: e.x, y: e.y },
+      radius: e.radius,
+      spread: e.spread || 0,
+      visible: true,
+      blendMode: 'NORMAL',
+    }));
+  }`
+    : '';
+
+/** v15 (S4/matrix a.3): linear-gradient background layer as a native
+ *  GRADIENT_LINEAR paint appended over the fill (CSS top layer = Figma last
+ *  paint — the documented order inversion). Runs AFTER lits so a literal
+ *  fill/clear never tramples the gradient layer. */
+const gradientRuntime = (has: boolean): string =>
+  has
+    ? `
+  if (spec.gradient) {
+    // CSS angle: 0deg = to top, clockwise. Unit-square gradientTransform.
+    const ga = ((spec.gradient.angle - 90) * Math.PI) / 180;
+    const gc = Math.cos(ga), gs = Math.sin(ga);
+    const paint = {
+      type: 'GRADIENT_LINEAR',
+      gradientTransform: [[gc, gs, (1 - gc - gs) / 2], [-gs, gc, (1 + gs - gc) / 2]],
+      gradientStops: spec.gradient.stops.map((st) => ({ position: st.position, color: { r: st.color.r, g: st.color.g, b: st.color.b, a: st.color.a === undefined ? 1 : st.color.a } })),
+    };
+    const base = node.fills === figma.mixed ? [] : (node.fills || []);
+    node.fills = base.concat([paint]);
+  }`
+    : '';
+
+/** v15 (S4/matrix a.8): flex-wrap → native layoutWrap (auto-layout only). */
+const wrapRuntime = (has: boolean): string =>
+  has
+    ? `
+  if (l.wrap) node.layoutWrap = 'WRAP';`
+    : '';
+
+/** v15 (S4/matrix a.2/a.6/a.9): declared text facts with native fields —
+ *  letterSpacing, textCase, textDecoration, textAlignHorizontal, fontName
+ *  family (first stack entry; Inter stands when unavailable — named limit),
+ *  textTruncation. Conditional emission keeps unchanged contracts
+ *  byte-identical. */
+const textExtrasRuntime = (has: boolean): string =>
+  has
+    ? `
+    if (spec.fontFamily) {
+      try {
+        await figma.loadFontAsync({ family: spec.fontFamily, style: spec.fontStyle || 'Medium' });
+        node.fontName = { family: spec.fontFamily, style: spec.fontStyle || 'Medium' };
+      } catch (e) { /* family unavailable — Inter stands (named limit) */ }
+    }
+    if (typeof spec.letterSpacing === 'number') node.letterSpacing = { unit: 'PIXELS', value: spec.letterSpacing };
+    if (spec.textCase) node.textCase = spec.textCase;
+    if (spec.textDecoration) node.textDecoration = spec.textDecoration;
+    if (spec.textAlignH) node.textAlignHorizontal = spec.textAlignH;
+    if (spec.textTruncation) { try { node.textTruncation = 'ENDING'; } catch (e) { /* older API */ } }`
+    : '';
+
 /** v9 shape placement: layoutPositioning ABSOLUTE + constraints + exact
  *  offsets vs the parent box, AFTER append (mirrors applyOverlay). */
 const absoluteRuntime = (has: boolean): string =>
@@ -1722,8 +2152,27 @@ const litsRuntime = (has: boolean): string =>
     if (li.strokeWeight !== undefined) node.strokeWeight = li.strokeWeight;
     if (li.minWidth !== undefined) { try { node.minWidth = li.minWidth; } catch (e) { /* needs auto-layout */ } }
     if (li.minHeight !== undefined) { try { node.minHeight = li.minHeight; } catch (e) { /* needs auto-layout */ } }
-    if (li.fillClear) node.fills = [];
+    // #60 fix 1 (fillClear precedence): a spec-carried fill is NEVER
+    // trampled — fillClear only clears when no fill was spec'd. The compile
+    // side already drops fillClear when a fill binding exists (applyLiterals);
+    // this runtime guard makes the emitted script safe even for hand-fed
+    // specs carrying both.
+    if (li.fillClear && !spec.fill) node.fills = [];
     else if (li.fillColor) node.fills = [{ type: 'SOLID', color: { r: li.fillColor.r, g: li.fillColor.g, b: li.fillColor.b }, opacity: li.fillColor.a === undefined ? 1 : li.fillColor.a }];
+    if (li.radiusCorners) {
+      const rc = li.radiusCorners;
+      if (rc.tl !== undefined) node.topLeftRadius = rc.tl;
+      if (rc.tr !== undefined) node.topRightRadius = rc.tr;
+      if (rc.bl !== undefined) node.bottomLeftRadius = rc.bl;
+      if (rc.br !== undefined) node.bottomRightRadius = rc.br;
+    }
+    if (li.strokeSides) {
+      const sw = li.strokeSides;
+      if (sw.top !== undefined) node.strokeTopWeight = sw.top;
+      if (sw.right !== undefined) node.strokeRightWeight = sw.right;
+      if (sw.bottom !== undefined) node.strokeBottomWeight = sw.bottom;
+      if (sw.left !== undefined) node.strokeLeftWeight = sw.left;
+    }
     if (li.width !== undefined || li.height !== undefined) {
       node.resize(li.width !== undefined ? li.width : node.width, li.height !== undefined ? li.height : node.height);
       const horizontalIsPrimary = (spec.layout || { mode: 'HORIZONTAL' }).mode === 'HORIZONTAL';
@@ -1737,6 +2186,13 @@ const litsRuntime = (has: boolean): string =>
   }`
     : '';
 
+/** Contract → the single-component sync script text. #60 fix 2: the emitted
+ *  runtime is AMEND-CAPABLE — it shares the batch sync runtime (syncOne →
+ *  amendSet / amendComponent), so re-running a committed per-component
+ *  script reconciles an existing component (set) IN PLACE via the identity
+ *  markers instead of returning create-only `{ skipped }` (Phase B-2 named
+ *  finding 1). The minted-variable preamble and the referee validation are
+ *  unchanged from the create-only emitter. */
 function buildComponentScript(
   contract: Contract,
   byId: Map<string, Contract>,
@@ -1755,442 +2211,15 @@ function buildComponentScript(
     );
   }
   const data = compileComponentData(contract, byId);
-  const hasOpacity = dataHasOpacity(data);
-  const hasShape = dataSome(data, (x) => x.shape !== undefined);
-  const hasShadow = dataSome(data, (x) => x.dropShadow !== undefined);
-  const hasLineHeight = dataSome(data, (x) => x.lineHeight !== undefined);
-  const hasAbsolute = dataSome(data, (x) => x.absolute !== undefined);
-  const hasLits = dataSome(data, (x) => x.lits !== undefined);
-
-  return `// GENERATED by scripts/generate-figma.ts — DO NOT EDIT.
+  return buildSyncScript([data], fileKeyOverride ?? contract.anchors.figma.fileKey, {
+    header: `// GENERATED by scripts/generate-figma.ts — DO NOT EDIT.
 // Source of truth: contracts/${contract.id.replace(/^[^.]+\./, '')}.contract.json (${contract.id} v${contract.version})
-let SET_NAME = ${JSON.stringify(data.setName)};
-const CONTRACT_ID = ${JSON.stringify(data.contractId)};
-const DESCRIPTION = ${JSON.stringify(data.description)};
-const IS_SET = ${data.isSet};
-const BOOL_PROPS = ${JSON.stringify(data.boolProps)};
-const TEXT_PROPS = ${JSON.stringify(data.textProps)};
-const FONT_STYLES = ${JSON.stringify(data.fontStyles)};
-const VARIANTS = ${JSON.stringify(data.variants, null, 2)};
-// figmaStatePreviews (canvas-only): preview variants carrying the State axis.
-const STATE_VARIANTS = ${JSON.stringify(data.stateVariants ?? [], null, 2)};
-const COL_W = ${data.colW}, ROW_H = 240, PAD = 40;
-
-// State previews: merge the enum-API cartesian with the preview overlay;
-// base variants gain an explicit State=Default segment so every variant in
-// the set carries the axis (Figma derives variant properties from names).
-function withStateAxis(variants, stateVariants) {
-  if (!stateVariants || stateVariants.length === 0) return variants;
-  return variants.map((v) => {
-    const name = v.name.indexOf('=') >= 0 ? v.name + ', State=${STATE_PREVIEW_DEFAULT}' : 'State=${STATE_PREVIEW_DEFAULT}';
-    return Object.assign({}, v, { name: name, spec: Object.assign({}, v.spec, { name: name }) });
-  }).concat(stateVariants);
-}
-const ALL_VARIANTS = withStateAxis(VARIANTS, STATE_VARIANTS);
-
-// File guard: multi-file bridge routing has been observed to hit the wrong
-// file — never write without verifying the target.
-const EXPECTED_FILE_KEY = ${JSON.stringify(fileKeyOverride ?? contract.anchors.figma.fileKey)};
-if (EXPECTED_FILE_KEY && figma.fileKey && figma.fileKey !== EXPECTED_FILE_KEY) {
-  throw new Error('WRONG FILE: expected ' + EXPECTED_FILE_KEY + ', got ' + figma.fileKey);
+// Amend-capable (#60): an existing component (set) carrying our identity
+// marker is reconciled IN PLACE (same node id + key); unchanged specs skip.`,
+    preamble: mintedPreamble(mintedTokens),
+  });
 }
 
-await figma.loadAllPagesAsync();
-
-// Skip if OUR component (set) already exists on ANY page (idempotency guard).
-// Identity is the ds_contracts/contractId marker — a set NAME is not identity
-// in a brownfield file (CBDS pilot: a native 72-variant "Badge" name-matched).
-let existing = null;
-for (const page of figma.root.children) {
-  existing = page.findOne(
-    (n) => (n.type === 'COMPONENT_SET' || n.type === 'COMPONENT') &&
-      n.getSharedPluginData('ds_contracts', 'contractId') === CONTRACT_ID,
-  );
-  if (existing) break;
-}
-if (existing) return { skipped: true, nodeId: existing.id, key: existing.key };
-// A same-named set WITHOUT the marker is someone else's component: never touch
-// it — create ours under a disambiguated name alongside it.
-for (const page of figma.root.children) {
-  const foreign = page.findOne(
-    (n) => (n.type === 'COMPONENT_SET' || n.type === 'COMPONENT') && n.name === SET_NAME &&
-      !n.getSharedPluginData('ds_contracts', 'contractId'),
-  );
-  if (foreign) { SET_NAME = SET_NAME + ' (' + CONTRACT_ID + ')'; break; }
-}
-
-${mintedPreamble(mintedTokens)}const allVars = await figma.variables.getLocalVariablesAsync();
-const varByName = {};
-for (const v of allVars) varByName[v.name] = v;
-const need = (name) => {
-  const v = varByName[name];
-  if (!v) throw new Error('Missing variable: ' + name);
-  return v;
-};
-const boundPaint = (varName, consumer) => {
-  // Seed the base with the resolved value when a consumer node is known:
-  // Figma keeps rendering a reassigned bound paint's BASE color on
-  // pre-existing nodes (fresh nodes normalize at assignment) — without the
-  // seed, amended variants render black. The binding itself is unchanged.
-  const v = need(varName);
-  let base = { r: 0, g: 0, b: 0 };
-  if (consumer) {
-    try {
-      const r = v.resolveForConsumer(consumer);
-      if (r && r.value && r.value.r !== undefined) base = { r: r.value.r, g: r.value.g, b: r.value.b };
-    } catch (e) { /* fall back to black base */ }
-  }
-  return figma.variables.setBoundVariableForPaint({ type: 'SOLID', color: base }, 'color', v);
-};
-
-// Named text styles (synced by 01-tokens.js): consumers look up OUR styles
-// only — the ds_contracts/textStyleToken marker is identity, a foreign style
-// sharing a name is never used. Missing style (tokens script not run yet)
-// degrades gracefully: the raw fontName/fontSize already set on the node
-// stand until the next amend after the styles exist.
-let _textStyleMap = null;
-async function ourTextStyle(name) {
-  if (!_textStyleMap) {
-    _textStyleMap = {};
-    for (const s of await figma.getLocalTextStylesAsync()) {
-      if (s.getSharedPluginData('ds_contracts', 'textStyleToken')) _textStyleMap[s.name] = s;
-    }
-  }
-  return _textStyleMap[name] || null;
-}
-
-for (const style of FONT_STYLES) {
-  await figma.loadFontAsync({ family: 'Inter', style });
-}
-
-function findComponentByName(name) {
-  for (const page of figma.root.children) {
-    const hit = page.findOne(
-      (n) => (n.type === 'COMPONENT_SET' || n.type === 'COMPONENT') && n.name === name,
-    );
-    if (hit) return hit;
-  }
-  throw new Error('Dependency component not found in file: ' + name + ' (run its sync script first)');
-}
-
-function setInstanceProps(inst, props) {
-  const available = Object.keys(inst.componentProperties);
-  const resolved = {};
-  for (const [wanted, value] of Object.entries(props)) {
-    const key = available.find((k) => k === wanted || k.startsWith(wanted + '#'));
-    if (key) resolved[key] = value;
-  }
-  if (Object.keys(resolved).length > 0) inst.setProperties(resolved);
-}
-
-let _slotUtil = null;
-async function ensureSlotUtility() {
-  if (_slotUtil) return _slotUtil;
-  for (const page of figma.root.children) {
-    const hit = page.findOne((n) => n.type === 'COMPONENT' && n.name === 'Slot');
-    if (hit) { _slotUtil = hit; return hit; }
-  }
-  const util = figma.createComponent();
-  util.name = 'Slot';
-  util.layoutMode = 'HORIZONTAL';
-  util.primaryAxisAlignItems = 'CENTER';
-  util.counterAxisAlignItems = 'CENTER';
-  util.paddingLeft = util.paddingRight = 12;
-  util.paddingTop = util.paddingBottom = 8;
-  util.cornerRadius = 4;
-  util.fills = [];
-  util.strokes = [{ type: 'SOLID', color: { r: 0.6, g: 0.62, b: 0.68 } }];
-  util.dashPattern = [4, 4];
-  const t = figma.createText();
-  t.fontName = { family: 'Inter', style: 'Medium' };
-  t.fontSize = 12;
-  t.characters = 'Slot';
-  t.fills = [{ type: 'SOLID', color: { r: 0.6, g: 0.62, b: 0.68 } }];
-  util.appendChild(t);
-  let utilities = figma.currentPage.findOne((n) => n.type === 'SECTION' && n.name === 'Utilities');
-  if (!utilities) {
-    utilities = figma.createSection();
-    utilities.name = 'Utilities';
-    let maxX = 0;
-    for (const n of figma.currentPage.children) {
-      if (n !== utilities) maxX = Math.max(maxX, n.x + n.width);
-    }
-    utilities.x = maxX + 100;
-    utilities.y = 0;
-    utilities.resizeWithoutConstraints(240, 160);
-  }
-  utilities.appendChild(util);
-  util.x = 40; util.y = 40;
-  _slotUtil = util;
-  return util;
-}
-
-function applyFrameSpec(node, spec) {
-  const l = spec.layout || { mode: 'HORIZONTAL', primary: 'MIN', counter: 'MIN' };
-  node.layoutMode = l.mode;
-  node.primaryAxisAlignItems = l.primary;
-  node.counterAxisAlignItems = l.counter;
-  node.primaryAxisSizingMode = 'AUTO';
-  node.counterAxisSizingMode = 'AUTO';
-  if (node.type === 'FRAME') node.fills = [];
-  for (const [field, varName] of Object.entries(spec.bindings || {})) {
-    node.setBoundVariable(field, need(varName));
-  }
-  if (spec.fill) node.fills = [boundPaint(spec.fill, node)];
-  if (spec.stroke) {
-    node.strokes = [boundPaint(spec.stroke, node)];
-    node.strokeAlign = 'INSIDE';
-  }${shadowRuntime(hasShadow)}
-  if (spec.fixedWidth || spec.fixedHeight) {
-    const w = spec.fixedWidth ? spec.fixedWidth.px : node.width;
-    const h = spec.fixedHeight ? spec.fixedHeight.px : node.height;
-    node.resize(w, h);
-    const horizontalIsPrimary = l.mode === 'HORIZONTAL';
-    if (spec.fixedWidth) {
-      if (horizontalIsPrimary) node.primaryAxisSizingMode = 'FIXED';
-      else node.counterAxisSizingMode = 'FIXED';
-      node.setBoundVariable('width', need(spec.fixedWidth.varName));
-    }
-    if (spec.fixedHeight) {
-      if (horizontalIsPrimary) node.counterAxisSizingMode = 'FIXED';
-      else node.primaryAxisSizingMode = 'FIXED';
-      node.setBoundVariable('height', need(spec.fixedHeight.varName));
-    }
-  }${litsRuntime(hasLits)}
-}
-
-// v7 overlay: out-of-flow edge attachment. Must run AFTER appendChild —
-// layoutPositioning ABSOLUTE requires an auto-layout parent.
-function applyOverlay(parent, childNode, childSpec) {
-  if (!childSpec.overlay) return;
-  try {
-    childNode.layoutPositioning = 'ABSOLUTE';
-    const p = childSpec.overlay.placement;
-    childNode.constraints =
-      p === 'bottom' ? { horizontal: 'MIN', vertical: 'MAX' } :
-      p === 'end' ? { horizontal: 'MAX', vertical: 'MIN' } :
-      { horizontal: 'MIN', vertical: 'MIN' };
-    if (p === 'top') { childNode.x = 0; childNode.y = -childNode.height; }
-    else if (p === 'bottom') { childNode.x = 0; childNode.y = parent.height; }
-    else if (p === 'start') { childNode.x = -childNode.width; childNode.y = 0; }
-    else { childNode.x = parent.width; childNode.y = 0; }
-  } catch (e) { /* parent not auto-layout — leave in flow */ }
-}
-${absoluteRuntime(hasAbsolute)}
-async function buildNode(spec, registry) {
-  let node;
-  if (spec.type === 'svg') {
-    node = figma.createNodeFromSvg(spec.svg);
-    node.fills = [];
-    node.clipsContent = false;
-  } else if (spec.type === 'text') {
-    node = figma.createText();
-    node.fontName = { family: 'Inter', style: spec.fontStyle || 'Medium' };
-    node.fontSize = spec.fontSize || 16;
-    node.characters = spec.characters || '';${lineHeightRuntime(hasLineHeight)}
-    if (spec.textStyle) {
-      // Exact-definition match compiled in: ride the named style. Text
-      // styles own typography only — the bound fill paint below coexists.
-      const st = await ourTextStyle(spec.textStyle);
-      if (st) { try { await node.setTextStyleIdAsync(st.id); } catch (e) { /* raw props stand */ } }
-    }
-    if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
-    if (spec.contentProp) {
-      registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });
-    }
-    if (spec.fill || spec.fixedWidth || spec.fixedHeight || spec.bindings) {
-      // Styled static text (page chips, dots, thumbs): wrap in a frame so
-      // fills/dimensions/radius apply to a container, not the glyphs.
-      const wrap = figma.createFrame();
-      wrap.layoutMode = 'HORIZONTAL';
-      wrap.primaryAxisAlignItems = 'CENTER';
-      wrap.counterAxisAlignItems = 'CENTER';
-      wrap.primaryAxisSizingMode = 'AUTO';
-      wrap.counterAxisSizingMode = 'AUTO';
-      wrap.fills = [];
-      for (const [field, varName] of Object.entries(spec.bindings || {})) {
-        wrap.setBoundVariable(field, need(varName));
-      }
-      if (spec.fill) wrap.fills = [boundPaint(spec.fill, wrap)];
-      if (spec.stroke) { wrap.strokes = [boundPaint(spec.stroke, wrap)]; wrap.strokeAlign = 'INSIDE'; }
-      if (spec.characters) wrap.appendChild(node); else node.remove();
-      if (spec.fixedWidth || spec.fixedHeight) {
-        wrap.resize(spec.fixedWidth ? spec.fixedWidth.px : wrap.width, spec.fixedHeight ? spec.fixedHeight.px : wrap.height);
-        if (spec.fixedWidth) { wrap.primaryAxisSizingMode = 'FIXED'; wrap.setBoundVariable('width', need(spec.fixedWidth.varName)); }
-        if (spec.fixedHeight) { wrap.counterAxisSizingMode = 'FIXED'; wrap.setBoundVariable('height', need(spec.fixedHeight.varName)); }
-      }
-      wrap.name = spec.name;
-      node = wrap;
-    }
-  } else if (spec.type === 'instance') {
-    const target = findComponentByName(spec.dep);
-    const main = target.type === 'COMPONENT_SET' ? target.defaultVariant : target;
-    node = main.createInstance();
-    if (spec.depProps) setInstanceProps(node, spec.depProps);
-  } else if (spec.type === 'slot') {
-    node = figma.createFrame();
-    applyFrameSpec(node, spec);
-    const defaults = spec.slotDefault || [];
-    if (defaults.length === 0) {
-      const util = await ensureSlotUtility();
-      const inst = util.createInstance();
-      node.appendChild(inst);
-      registry.slots.push({ spec, wrapper: node, instance: inst, defaultId: null });
-    } else {
-      const instances = [];
-      for (const item of defaults) {
-        const target = findComponentByName(item.dep);
-        const main = target.type === 'COMPONENT_SET' ? target.defaultVariant : target;
-        const inst = main.createInstance();
-        if (item.props) setInstanceProps(inst, item.props);
-        node.appendChild(inst);
-        if (spec.layout && spec.layout.stretchChildren) {
-          try { inst.layoutSizingHorizontal = 'FILL'; } catch (e) { /* fixed-size deps */ }
-        }
-        instances.push({ inst, main });
-      }
-      if (defaults.length === 1) {
-        // Single default → still expressible as a swap property.
-        registry.slots.push({ spec, wrapper: node, instance: instances[0].inst, defaultId: instances[0].main.id });
-      }
-      // >1 → multi-child slot: content rendered directly, no swap property
-      // (INSTANCE_SWAP holds exactly one instance; native SLOT is the fix).
-    }
-  }${shapeRuntime(hasShape)} else {
-    node = spec.type === 'root' ? figma.createComponent() : figma.createFrame();
-    applyFrameSpec(node, spec);
-  }
-  node.name = spec.name;${opacityRuntime(hasOpacity)}
-  if (spec.visibleProp) {
-    registry.visibles.push({ node, prop: spec.visibleProp, default: spec.visibleDefault === true });
-  }
-  for (const child of spec.children || []) {
-    const childNode = await buildNode(child, registry);
-    node.appendChild(childNode);
-    applyOverlay(node, childNode, child);${absoluteCall(hasAbsolute, 'node, childNode, child')}
-    if (child.pct != null) {
-      try {
-        childNode.resize(Math.max(1, Math.round(node.width * child.pct)), childNode.height);
-        childNode.primaryAxisSizingMode = 'FIXED';
-      } catch (e) { /* track not fixed-width */ }
-    }
-    if (child.grow && 'layoutSizingHorizontal' in childNode) {
-      try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { /* HUG-only nodes */ }
-    } else if (
-      spec.layout && spec.layout.stretchChildren &&
-      !child.fixedWidth && child.type !== 'instance' &&
-      'layoutSizingHorizontal' in childNode
-    ) {
-      try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { /* HUG-only nodes */ }
-    }
-  }
-  return node;
-}
-
-// One page per component (see figma-sync/arrange.js for the file layout).
-let compPage = figma.root.children.find((p) => p.name === SET_NAME);
-if (!compPage) { compPage = figma.createPage(); compPage.name = SET_NAME; }
-
-// Build every variant, then add properties BEFORE combining.
-const built = [];
-for (const v of ALL_VARIANTS) {
-  const registry = { texts: [], slots: [], visibles: [] };
-  const comp = await buildNode(v.spec, registry);
-  built.push({ v, comp, registry });
-}
-for (const b of built) {
-  for (const t of b.registry.texts) {
-    const key = b.comp.addComponentProperty(t.prop, 'TEXT', t.default);
-    t.node.componentPropertyReferences = { characters: key };
-  }
-  for (const s of b.registry.slots) {
-    const util = await ensureSlotUtility();
-    const preferred = [];
-    for (const depName of s.spec.slotAccepts || []) {
-      const target = findComponentByName(depName);
-      preferred.push({
-        type: target.type === 'COMPONENT_SET' ? 'COMPONENT_SET' : 'COMPONENT',
-        key: target.key,
-      });
-    }
-    const key = b.comp.addComponentProperty(
-      s.spec.slotProperty,
-      'INSTANCE_SWAP',
-      s.defaultId || util.id,
-      preferred.length > 0 ? { preferredValues: preferred } : undefined,
-    );
-    s.instance.componentPropertyReferences = { mainComponent: key };
-    if (s.spec.slotOptional) {
-      const vkey = b.comp.addComponentProperty('Show ' + s.spec.slotProperty, 'BOOLEAN', true);
-      s.wrapper.componentPropertyReferences = { visible: vkey };
-    }
-  }
-  const boolKeys = {};
-  for (const bp of BOOL_PROPS) {
-    boolKeys[bp.property] = b.comp.addComponentProperty(bp.property, 'BOOLEAN', bp.default);
-  }
-  for (const tp of TEXT_PROPS) {
-    b.comp.addComponentProperty(tp.property, 'TEXT', tp.default);
-  }
-  // visibleWhen parts: visibility follows the BOOLEAN property, and the
-  // canvas default matches the contract default.
-  for (const vis of b.registry.visibles) {
-    const key = boolKeys[vis.prop];
-    if (!key) continue;
-    vis.node.componentPropertyReferences = { visible: key };
-    vis.node.visible = vis.default;
-  }
-}
-
-let target;
-if (IS_SET) {
-  // combineAsVariants requires the nodes to already be ON the parent page.
-  for (const b of built) compPage.appendChild(b.comp);
-  target = figma.combineAsVariants(built.map((b) => b.comp), compPage);
-  // Tight grid: rows = first axis, columns = second; per-track max sizing.
-  const specByName = new Map(ALL_VARIANTS.map((s) => [s.name, s]));
-  const rowsN = Math.max(...ALL_VARIANTS.map((v) => v.row)) + 1;
-  const colsN = Math.max(...ALL_VARIANTS.map((v) => v.col)) + 1;
-  const colWs = new Array(colsN).fill(0);
-  const rowHs = new Array(rowsN).fill(0);
-  for (const child of target.children) {
-    const spec = specByName.get(child.name);
-    if (!spec) continue;
-    colWs[spec.col] = Math.max(colWs[spec.col], child.width);
-    rowHs[spec.row] = Math.max(rowHs[spec.row], child.height);
-  }
-  for (const child of target.children) {
-    const spec = specByName.get(child.name);
-    if (!spec) continue;
-    let x = PAD, y = PAD;
-    for (let i = 0; i < spec.col; i++) x += colWs[i] + PAD;
-    for (let i = 0; i < spec.row; i++) y += rowHs[i] + PAD;
-    child.x = x;
-    child.y = y;
-  }
-  const totalW = colWs.reduce((a, b) => a + b, 0) + PAD * (colsN + 1);
-  const totalH = rowHs.reduce((a, b) => a + b, 0) + PAD * (rowsN + 1);
-  target.resizeWithoutConstraints(totalW, totalH);
-} else {
-  target = built[0].comp;
-  compPage.appendChild(target);
-}
-target.name = SET_NAME;
-target.setSharedPluginData('ds_contracts', 'contractId', CONTRACT_ID);
-target.description = DESCRIPTION;
-target.x = 100;
-target.y = 100;
-
-const propNames = Object.keys(target.componentPropertyDefinitions || {});
-return {
-  createdNodeIds: [target.id],
-  nodeId: target.id,
-  key: target.key,
-  variants: IS_SET ? target.children.length : 1,
-  properties: propNames,
-};
-`;
-}
 
 // ---------------------------------------------------------------------------
 // Batch script emission — several components per script (minified specs),
@@ -2199,15 +2228,40 @@ return {
 // ---------------------------------------------------------------------------
 
 function buildBatchScript(datas: ComponentData[], fileKey: string | null): string {
+  return buildSyncScript(datas, fileKey, {
+    header: `// GENERATED by scripts/generate-figma.ts — DO NOT EDIT.
+// Batch sync: ${datas.map((d) => d.setName).join(', ')} (unchanged components skip; changed ones amend in place).`,
+    preamble: '',
+  });
+}
+
+/** The ONE sync runtime (create + in-place amend), shared by the batch
+ *  script and (#60 fix 2) every per-component script. `preamble` carries the
+ *  minted-variable upsert for playground per-component emissions. */
+function buildSyncScript(
+  datas: ComponentData[],
+  fileKey: string | null,
+  opts: { header: string; preamble: string },
+): string {
   const hasOpacity = datas.some(dataHasOpacity);
   const hasShape = datas.some((d) => dataSome(d, (x) => x.shape !== undefined));
   const hasShadow = datas.some((d) => dataSome(d, (x) => x.dropShadow !== undefined));
   const hasLineHeight = datas.some((d) => dataSome(d, (x) => x.lineHeight !== undefined));
   const hasAbsolute = datas.some((d) => dataSome(d, (x) => x.absolute !== undefined));
   const hasLits = datas.some((d) => dataSome(d, (x) => x.lits !== undefined));
-  return `// GENERATED by scripts/generate-figma.ts — DO NOT EDIT.
-// Batch sync: ${datas.map((d) => d.setName).join(', ')} (existing components skip).
-const COMPONENTS = ${JSON.stringify(datas)};
+  const hasWrap = datas.some((d) => dataSome(d, (x) => x.layout?.wrap === true));
+  const hasEffectStack = datas.some((d) => dataSome(d, (x) => x.effectStack !== undefined));
+  const hasGradient = datas.some((d) => dataSome(d, (x) => x.gradient !== undefined));
+  const hasTextExtras = datas.some((d) =>
+    dataSome(
+      d,
+      (x) =>
+        x.letterSpacing !== undefined || x.textCase !== undefined || x.textDecoration !== undefined ||
+        x.textAlignH !== undefined || x.fontFamily !== undefined || x.textTruncation === true,
+    ),
+  );
+  return `${opts.header}
+const COMPONENTS = ${JSON.stringify(datas, null, 2)};
 const ROW_H = 240, PAD = 40;
 
 const EXPECTED_FILE_KEY = ${JSON.stringify(fileKey)};
@@ -2217,7 +2271,7 @@ if (EXPECTED_FILE_KEY && figma.fileKey && figma.fileKey !== EXPECTED_FILE_KEY) {
 
 await figma.loadAllPagesAsync();
 
-const allVars = await figma.variables.getLocalVariablesAsync();
+${opts.preamble}const allVars = await figma.variables.getLocalVariablesAsync();
 const varByName = {};
 for (const v of allVars) varByName[v.name] = v;
 const need = (name) => {
@@ -2335,7 +2389,7 @@ function applyFrameSpec(node, spec) {
   const l = spec.layout || { mode: 'HORIZONTAL', primary: 'MIN', counter: 'MIN' };
   node.layoutMode = l.mode;
   node.primaryAxisAlignItems = l.primary;
-  node.counterAxisAlignItems = l.counter;
+  node.counterAxisAlignItems = l.counter;${wrapRuntime(hasWrap)}
   node.primaryAxisSizingMode = 'AUTO';
   node.counterAxisSizingMode = 'AUTO';
   if (node.type === 'FRAME') node.fills = [];
@@ -2346,7 +2400,7 @@ function applyFrameSpec(node, spec) {
   if (spec.stroke) {
     node.strokes = [boundPaint(spec.stroke, node)];
     node.strokeAlign = 'INSIDE';
-  }${shadowRuntime(hasShadow)}
+  }${shadowRuntime(hasShadow)}${effectStackRuntime(hasEffectStack)}
   if (spec.fixedWidth || spec.fixedHeight) {
     const w = spec.fixedWidth ? spec.fixedWidth.px : node.width;
     const h = spec.fixedHeight ? spec.fixedHeight.px : node.height;
@@ -2362,7 +2416,7 @@ function applyFrameSpec(node, spec) {
       else node.primaryAxisSizingMode = 'FIXED';
       node.setBoundVariable('height', need(spec.fixedHeight.varName));
     }
-  }${litsRuntime(hasLits)}
+  }${litsRuntime(hasLits)}${gradientRuntime(hasGradient)}
 }
 
 // v7 overlay: out-of-flow edge attachment. Must run AFTER appendChild —
@@ -2393,7 +2447,7 @@ async function buildNode(spec, registry) {
     node = figma.createText();
     node.fontName = { family: 'Inter', style: spec.fontStyle || 'Medium' };
     node.fontSize = spec.fontSize || 16;
-    node.characters = spec.characters || '';${lineHeightRuntime(hasLineHeight)}
+    node.characters = spec.characters || '';${lineHeightRuntime(hasLineHeight)}${textExtrasRuntime(hasTextExtras)}
     if (spec.textStyle) {
       // Exact-definition match compiled in: ride the named style. Text
       // styles own typography only — the bound fill paint below coexists.
@@ -2476,6 +2530,18 @@ async function buildNode(spec, registry) {
         childNode.resize(Math.max(1, Math.round(node.width * child.pct)), childNode.height);
         childNode.primaryAxisSizingMode = 'FIXED';
       } catch (e) { /* track not fixed-width */ }
+    }
+    if (
+      child.type === 'frame' && (!child.children || child.children.length === 0) &&
+      !child.fixedHeight && !(child.lits && child.lits.height !== undefined) && !child.shape
+    ) {
+      // #60 fix 4: empty runtime-sized geometry gets DECLARED defaults —
+      // height follows the auto-layout parent (FILL), never Figma's 100×100
+      // createFrame artifact (Phase B-2 finding 4: ProgressBar indicators
+      // overflowed their fixed-height tracks). Width stays the spec'd
+      // fraction (meter pct) or the placeholder box, named in the component
+      // description.
+      try { childNode.layoutSizingVertical = 'FILL'; } catch (e) { /* parent not auto-layout */ }
     }
     if (child.grow && 'layoutSizingHorizontal' in childNode) {
       try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { /* HUG-only nodes */ }
@@ -2575,6 +2641,13 @@ async function amendSet(set, C) {
         if (childSpec.pct != null) {
           try { childNode.resize(Math.max(1, Math.round(comp.width * childSpec.pct)), childNode.height); childNode.primaryAxisSizingMode = 'FIXED'; } catch (e) {}
         }
+        if (
+          childSpec.type === 'frame' && (!childSpec.children || childSpec.children.length === 0) &&
+          !childSpec.fixedHeight && !(childSpec.lits && childSpec.lits.height !== undefined) && !childSpec.shape
+        ) {
+          // #60 fix 4 (amend path): same empty-child declared default.
+          try { childNode.layoutSizingVertical = 'FILL'; } catch (e) { /* parent not auto-layout */ }
+        }
         if (childSpec.grow && 'layoutSizingHorizontal' in childNode) {
           try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) {}
         } else if (v.spec.layout && v.spec.layout.stretchChildren && !childSpec.fixedWidth && childSpec.type !== 'instance' && 'layoutSizingHorizontal' in childNode) {
@@ -2650,6 +2723,98 @@ async function amendSet(set, C) {
   return report;
 }
 
+// #60 fix 3: IN-PLACE AMEND for standalone COMPONENTs (non-set: Badge/Tag
+// class) — the same identity-marker update semantics as amendSet: the
+// component node (and key) instances bind to is preserved; the interior is
+// contract-owned and rebuilt from spec; existing componentProperty IDs
+// survive via defKey. Unchanged specs skip on the stored specHash.
+async function amendComponent(comp, C) {
+  comp.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  const hash = specHash(C);
+  if (comp.getSharedPluginData('ds_contracts', 'specHash') === hash) {
+    return { name: C.setName, skipped: true, reason: 'unchanged', nodeId: comp.id, key: comp.key };
+  }
+  const report = { name: C.setName, amended: true, standalone: true, nodeId: comp.id, key: comp.key, addedProps: [], editedDefaults: [] };
+  const defs = comp.componentPropertyDefinitions;
+  const newKeys = {};
+  const defKey = (name) => newKeys[name] ||
+    Object.keys(defs).find((k) => k.split('#')[0] === name) || null;
+  for (const w of [
+    ...C.boolProps.map((bp) => ({ name: bp.property, type: 'BOOLEAN', def: bp.default })),
+    ...(C.textProps || []).map((tp) => ({ name: tp.property, type: 'TEXT', def: tp.default })),
+  ]) {
+    const k = defKey(w.name);
+    if (!k) { newKeys[w.name] = comp.addComponentProperty(w.name, w.type, w.def); report.addedProps.push(w.name); }
+    else if (defs[k].type === w.type && defs[k].defaultValue !== w.def) {
+      comp.editComponentProperty(k, { defaultValue: w.def });
+      report.editedDefaults.push(w.name);
+    }
+  }
+  const v = C.variants[0];
+  const registry = { texts: [], slots: [], visibles: [] };
+  for (const child of [...comp.children]) child.remove();
+  applyFrameSpec(comp, v.spec);
+  for (const childSpec of v.spec.children || []) {
+    const childNode = await buildNode(childSpec, registry);
+    comp.appendChild(childNode);
+    applyOverlay(comp, childNode, childSpec);${absoluteCall(hasAbsolute, 'comp, childNode, childSpec')}
+    if (childSpec.pct != null) {
+      try { childNode.resize(Math.max(1, Math.round(comp.width * childSpec.pct)), childNode.height); childNode.primaryAxisSizingMode = 'FIXED'; } catch (e) {}
+    }
+    if (
+      childSpec.type === 'frame' && (!childSpec.children || childSpec.children.length === 0) &&
+      !childSpec.fixedHeight && !(childSpec.lits && childSpec.lits.height !== undefined) && !childSpec.shape
+    ) {
+      // #60 fix 4 (standalone amend path): same empty-child declared default.
+      try { childNode.layoutSizingVertical = 'FILL'; } catch (e) { /* parent not auto-layout */ }
+    }
+    if (childSpec.grow && 'layoutSizingHorizontal' in childNode) {
+      try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) {}
+    } else if (v.spec.layout && v.spec.layout.stretchChildren && !childSpec.fixedWidth && childSpec.type !== 'instance' && 'layoutSizingHorizontal' in childNode) {
+      try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) {}
+    }
+  }
+  for (const t of registry.texts) {
+    let k = defKey(t.prop);
+    if (!k) { k = comp.addComponentProperty(t.prop, 'TEXT', t.default); newKeys[t.prop] = k; report.addedProps.push(t.prop); }
+    else if (defs[k] && defs[k].defaultValue !== t.default && !report.editedDefaults.includes(t.prop)) {
+      comp.editComponentProperty(k, { defaultValue: t.default });
+      report.editedDefaults.push(t.prop);
+    }
+    t.node.componentPropertyReferences = { characters: k };
+  }
+  for (const sl of registry.slots) {
+    const util = await ensureSlotUtility();
+    let k = defKey(sl.spec.slotProperty);
+    if (!k) {
+      const preferred = [];
+      for (const depName of sl.spec.slotAccepts || []) {
+        const target = findComponentByName(depName);
+        preferred.push({ type: target.type === 'COMPONENT_SET' ? 'COMPONENT_SET' : 'COMPONENT', key: target.key });
+      }
+      k = comp.addComponentProperty(sl.spec.slotProperty, 'INSTANCE_SWAP', sl.defaultId || util.id,
+        preferred.length > 0 ? { preferredValues: preferred } : undefined);
+      newKeys[sl.spec.slotProperty] = k;
+      report.addedProps.push(sl.spec.slotProperty);
+    }
+    sl.instance.componentPropertyReferences = { mainComponent: k };
+    if (sl.spec.slotOptional) {
+      let vk = defKey('Show ' + sl.spec.slotProperty);
+      if (!vk) { vk = comp.addComponentProperty('Show ' + sl.spec.slotProperty, 'BOOLEAN', true); newKeys['Show ' + sl.spec.slotProperty] = vk; }
+      sl.wrapper.componentPropertyReferences = { visible: vk };
+    }
+  }
+  for (const vis of registry.visibles) {
+    const k = defKey(vis.prop);
+    if (!k) continue;
+    vis.node.componentPropertyReferences = { visible: k };
+    vis.node.visible = vis.default;
+  }
+  comp.description = C.description;
+  comp.setSharedPluginData('ds_contracts', 'specHash', hash);
+  return report;
+}
+
 async function syncOne(C) {
   // Identity is the ds_contracts/contractId marker, NOT the set name — in a
   // brownfield file a name can belong to the host system's own component
@@ -2687,9 +2852,15 @@ async function syncOne(C) {
   if (existing && existing.type === 'COMPONENT_SET' && C.isSet) {
     return await amendSet(existing, C);
   }
+  // #60 fix 3: standalone COMPONENTs (Badge/Tag class) amend in place too —
+  // the "amend supports variant sets in v1" skip forced delete+recreate and
+  // re-minted node ids/keys (Phase B-2 named finding 2).
+  if (existing && existing.type === 'COMPONENT' && !C.isSet) {
+    return await amendComponent(existing, C);
+  }
   if (existing) {
     existing.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
-    return { name: C.setName, skipped: true, reason: 'standalone component — amend supports variant sets in v1', nodeId: existing.id, key: existing.key };
+    return { name: C.setName, skipped: true, reason: 'set/standalone shape mismatch (' + existing.type + ' vs isSet=' + C.isSet + ') — a human retires the old node', nodeId: existing.id, key: existing.key };
   }
 
   // A same-named unmarked set is foreign: leave it alone, disambiguate ours.

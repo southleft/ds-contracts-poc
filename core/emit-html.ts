@@ -100,6 +100,7 @@ function layoutDecls(part: Part): string[] {
   if (isStructural(part)) {
     d.push(`display: ${part.layout?.display ?? 'flex'}`);
     if (part.layout?.direction) d.push(`flex-direction: ${part.layout.direction}`);
+    if (part.layout?.wrap) d.push('flex-wrap: wrap');
     if (part.layout?.align) d.push(`align-items: ${ALIGN_CSS[part.layout.align]}`);
     if (part.layout?.justify) d.push(`justify-content: ${JUSTIFY_CSS[part.layout.justify]}`);
   }
@@ -137,6 +138,7 @@ function componentCss(contract: Contract): string[] {
   if (root.layout) {
     rootDecls.push(`display: ${root.layout.display ?? 'flex'}`);
     if (root.layout.direction) rootDecls.push(`flex-direction: ${root.layout.direction}`);
+    if (root.layout.wrap) rootDecls.push('flex-wrap: wrap');
     if (root.layout.align) rootDecls.push(`align-items: ${ALIGN_CSS[root.layout.align]}`);
     if (root.layout.justify) rootDecls.push(`justify-content: ${JUSTIFY_CSS[root.layout.justify]}`);
   } else {
@@ -151,7 +153,12 @@ function componentCss(contract: Contract): string[] {
   if ('border-width' in rootTokens || 'border-color' in rootTokens) rootDecls.push('border-style: solid');
   else rootDecls.push('border: 0');
   if ('max-width' in rootTokens) rootDecls.push('width: 100%', 'min-width: fit-content');
-  if (contract.semantics.element === 'button') rootDecls.push('cursor: pointer');
+  // v15: a declared cursor fact is authoritative — the emitter's own button
+  // chrome (cursor: pointer, :disabled not-allowed) yields to it (mirrors
+  // core/emit-react.ts generateCss).
+  const rootDeclaresCursor =
+    Boolean(root.declared?.['cursor']) || Boolean(root.declaredStates?.['disabled']?.['cursor']);
+  if (contract.semantics.element === 'button' && !rootDeclaresCursor) rootDecls.push('cursor: pointer');
   if (
     walkAnatomy(contract).some(
       (w) => w.part.overlay || (w.part.stylesWhen ?? []).some((sw) => sw.styles['position'] === 'absolute'),
@@ -242,6 +249,16 @@ function componentCss(contract: Contract): string[] {
   for (const [cssProp, lit] of Object.entries(root.literals ?? {})) {
     rootDecls.push(`${cssProp}: ${lit}`);
   }
+  // v15 declared facts on the root: verbatim base decls (registry-validated
+  // in validateContract). A declared `position` supersedes the emitter's own
+  // overlay-driven push — mirrors core/emit-react.ts generateCss.
+  for (const [cssProp, value] of Object.entries(root.declared ?? {})) {
+    if (cssProp === 'position' && rootDecls.includes('position: relative')) {
+      if (value === 'relative') continue;
+      rootDecls.splice(rootDecls.indexOf('position: relative'), 1);
+    }
+    rootDecls.push(`${cssProp}: ${value}`);
+  }
   for (const { prop: lbpProp, map } of root.literalsByProp ?? []) {
     for (const [value, overrides] of Object.entries(map)) {
       for (const [cssProp, lit] of Object.entries(overrides)) {
@@ -280,7 +297,7 @@ function componentCss(contract: Contract): string[] {
   if (contract.states.includes('focus-visible')) {
     rule(`${rootCls}:focus-visible`, ['outline-style: solid', 'outline-offset: 2px']);
   }
-  if (contract.states.includes('disabled') && contract.semantics.element === 'button') {
+  if (contract.states.includes('disabled') && contract.semantics.element === 'button' && !rootDeclaresCursor) {
     rule(`${rootCls}:disabled`, ['cursor: not-allowed']);
   }
   for (const { prop, value, decls } of enumRules.values()) {
@@ -311,6 +328,14 @@ function componentCss(contract: Contract): string[] {
         }
       }
     }
+  }
+  // v15 declaredStates on the root: verbatim state-selector rules, emitted
+  // after the token state rules (disjoint channels by the validateContract
+  // ambiguity rule) — mirrors core/emit-react.ts generateCss.
+  for (const [state, overrides] of Object.entries(root.declaredStates ?? {})) {
+    const sel = STATE_SELECTORS[state];
+    if (!sel) continue; // refused by validateContract
+    rule(`${rootCls}${sel}`, Object.entries(overrides).map(([cssProp, v]) => `${cssProp}: ${v}`));
   }
   // stylesWhen on the root (literal CSS behind a boolean data attribute or
   // an enum modifier class).
@@ -406,6 +431,19 @@ function componentCss(contract: Contract): string[] {
     // v14 literals on a nested part: base decls + per-value descendant rules.
     for (const [cssProp, lit] of Object.entries(part.literals ?? {})) {
       decls.push(`${cssProp}: ${lit}`);
+    }
+    // v15 declared facts on a nested part: verbatim base decls + per-state
+    // descendant rules under the root's state selector.
+    for (const [cssProp, value] of Object.entries(part.declared ?? {})) {
+      decls.push(`${cssProp}: ${value}`);
+    }
+    for (const [state, overrides] of Object.entries(part.declaredStates ?? {})) {
+      const sel = STATE_SELECTORS[state];
+      if (!sel) continue; // refused by validateContract
+      subRules.push([
+        `${rootCls}${sel} ${partCls(name)}`,
+        Object.entries(overrides).map(([cssProp, v]) => `${cssProp}: ${v}`),
+      ]);
     }
     for (const entry of part.literalsByProp ?? []) {
       for (const [value, overrides] of Object.entries(entry.map)) {

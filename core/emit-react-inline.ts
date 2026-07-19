@@ -155,6 +155,7 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
       if (part.layout) {
         s.display = part.layout.display ?? 'flex';
         if (part.layout.direction) s.flexDirection = part.layout.direction;
+        if (part.layout.wrap) s.flexWrap = 'wrap';
         if (part.layout.align) s.alignItems = ALIGN_CSS[part.layout.align];
         if (part.layout.justify) s.justifyContent = JUSTIFY_CSS[part.layout.justify];
       } else {
@@ -182,6 +183,7 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
       if (isStructural(part)) {
         s.display = part.layout?.display ?? 'flex';
         if (part.layout?.direction) s.flexDirection = part.layout.direction;
+        if (part.layout?.wrap) s.flexWrap = 'wrap';
         if (part.layout?.align) s.alignItems = ALIGN_CSS[part.layout.align];
         if (part.layout?.justify) s.justifyContent = JUSTIFY_CSS[part.layout.justify];
       }
@@ -281,6 +283,15 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
         addVariant(entry.prop, value, partName, decls);
       }
     }
+    // v15 declared facts: verbatim keyword/literal channels (registry-
+    // validated in validateContract). Assigned AFTER the emitter chrome so a
+    // declared cursor/position fact wins over the built-in conventions —
+    // mirrors the generateCss interplay rule. Per-state declared facts:
+    // only the disabled plane renders on this surface (see disabledStyle
+    // below) — hover/active/focus stay the surface's declared limit.
+    for (const [cssProp, value] of Object.entries(part.declared ?? {})) {
+      s[camel(cssProp)] = value;
+    }
     // layoutByProp: per-enum-value layout overrides merged over the base.
     if (part.layoutByProp) {
       for (const [value, _override] of Object.entries(part.layoutByProp.map)) {
@@ -310,6 +321,13 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
       if (placeholdersIn(refPath).length === 0 && !cssProp.startsWith('outline')) {
         disabledStyle[camel(cssProp)] = resolveValue(refPath);
       }
+    }
+    // v15: root disabled-plane declared facts render the same way (already
+    // literal values — no resolution).
+    for (const [cssProp, value] of Object.entries(
+      contract.anatomy.root.declaredStates?.disabled ?? {},
+    )) {
+      if (!cssProp.startsWith('outline')) disabledStyle[camel(cssProp)] = value;
     }
   }
 

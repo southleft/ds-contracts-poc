@@ -16,6 +16,7 @@
  *   - optional parts render conditionally on their slot prop
  */
 import {
+  DECLARED_CHANNELS,
   LITERAL_CHANNELS,
   STATE_PREVIEW_PROPERTY,
   STYLES_WHEN_ALLOWED,
@@ -438,6 +439,59 @@ export function validateContract(
     }
     if (part.literals && part.component) {
       errors.push(`${contract.id}: part "${name}" is a component instance — literals cannot restyle it (the child contract owns its styling)`);
+    }
+    // v15 declared facts (S4): registry channels only, each value inside the
+    // channel's bounded grammar; a channel carried by BOTH declared and
+    // tokens/literals is ambiguous — refused by name; component/slot parts
+    // refuse (the child contract / consumer owns styling). declaredStates:
+    // known state names, declared in the contract's `states`, same registry.
+    const checkDeclaredEntry = (cssProp: string, value: string, where: string) => {
+      const spec = DECLARED_CHANNELS[cssProp];
+      if (!spec) {
+        errors.push(
+          `${contract.id}: part "${name}" ${where} sets "${cssProp}" which is not a declared channel (DECLARED_CHANNELS registry — token/literal vocabulary channels belong in tokens/literals)`,
+        );
+        return;
+      }
+      if (!spec.value.test(value)) {
+        errors.push(
+          `${contract.id}: part "${name}" ${where} "${cssProp}" value ${JSON.stringify(value)} is outside the channel's bounded grammar (${spec.value})`,
+        );
+      }
+    };
+    if ((part.declared || part.declaredStates) && (part.component || part.slot)) {
+      errors.push(
+        `${contract.id}: part "${name}" is a ${part.component ? 'component instance' : 'slot'} — declared facts cannot restyle it (the child contract / consumer owns its styling)`,
+      );
+    }
+    for (const [cssProp, value] of Object.entries(part.declared ?? {})) {
+      checkDeclaredEntry(cssProp, value, 'declared');
+      if (part.tokens && cssProp in part.tokens) {
+        errors.push(
+          `${contract.id}: part "${name}" carries channel "${cssProp}" as BOTH a token binding and a declared fact — ambiguous, refused by name`,
+        );
+      }
+      if (part.literals && cssProp in part.literals) {
+        errors.push(
+          `${contract.id}: part "${name}" carries channel "${cssProp}" as BOTH a literal and a declared fact — ambiguous, refused by name`,
+        );
+      }
+    }
+    for (const [state, overrides] of Object.entries(part.declaredStates ?? {})) {
+      if (!(state in STATE_SELECTORS)) {
+        errors.push(
+          `${contract.id}: part "${name}" declaredStates declares unknown state "${state}" — must be one of ${Object.keys(STATE_SELECTORS).join(', ')}`,
+        );
+        continue;
+      }
+      if (!contract.states.includes(state as Contract['states'][number])) {
+        errors.push(
+          `${contract.id}: part "${name}" declaredStates declares "${state}" but the contract's \`states\` does not — declare it or drop the override`,
+        );
+      }
+      for (const [cssProp, value] of Object.entries(overrides)) {
+        checkDeclaredEntry(cssProp, value, `declaredStates.${state}`);
+      }
     }
     // v13 part-level states (P18 second half): per-state token overrides on
     // a NON-ref part — refusal-ruled, never silent: unknown state names
@@ -943,6 +997,7 @@ export function generateCss(contract: Contract, tokenInventory: Set<string>, err
   if (root.layout) {
     rootDecls.push(`display: ${root.layout.display ?? 'flex'}`);
     if (root.layout.direction) rootDecls.push(`flex-direction: ${root.layout.direction}`);
+    if (root.layout.wrap) rootDecls.push('flex-wrap: wrap');
     if (root.layout.align) rootDecls.push(`align-items: ${ALIGN_CSS[root.layout.align]}`);
     if (root.layout.justify) rootDecls.push(`justify-content: ${JUSTIFY_CSS[root.layout.justify]}`);
   } else {
@@ -964,7 +1019,12 @@ export function generateCss(contract: Contract, tokenInventory: Set<string>, err
   // component from collapsing below its content's floor (e.g. table cells'
   // min-widths); containers narrower than that should scroll.
   if ('max-width' in rootTokens) rootDecls.push('width: 100%', 'min-width: fit-content');
-  if (contract.semantics.element === 'button') rootDecls.push('cursor: pointer');
+  // v15: a declared cursor fact is authoritative — the emitter's own button
+  // chrome (cursor: pointer, and the :disabled not-allowed rule below) yields
+  // to it. The declared fact is captured truth; the chrome was a convention.
+  const rootDeclaresCursor =
+    Boolean(root.declared?.['cursor']) || Boolean(root.declaredStates?.['disabled']?.['cursor']);
+  if (contract.semantics.element === 'button' && !rootDeclaresCursor) rootDecls.push('cursor: pointer');
   // v7 overlay / v9 shape placement: any out-of-flow part (an overlay, or a
   // part whose stylesWhen carries position: absolute — the shape-placement
   // spelling) positions against the root.
@@ -1105,6 +1165,17 @@ export function generateCss(contract: Contract, tokenInventory: Set<string>, err
     }
   }
 
+  // v15 declared facts on the root: verbatim base decls (registry-validated
+  // in validateContract; refused channels never reach here). A declared
+  // `position` supersedes the emitter's own overlay-driven push.
+  for (const [cssProp, value] of Object.entries(root.declared ?? {})) {
+    if (cssProp === 'position' && rootDecls.includes('position: relative')) {
+      if (value === 'relative') continue; // already emitted by overlay chrome
+      rootDecls.splice(rootDecls.indexOf('position: relative'), 1);
+    }
+    rootDecls.push(`${cssProp}: ${value}`);
+  }
+
   // a11y.minHitArea: the declared floor is ENFORCED, not aspirational — the
   // standard non-visual hit-target extension (an absolutely centered ::before
   // at max(100%, floor) per axis; it paints nothing and never affects layout,
@@ -1140,7 +1211,7 @@ export function generateCss(contract: Contract, tokenInventory: Set<string>, err
   if (contract.states.includes('focus-visible')) {
     lines.push('', '.root:focus-visible {', '  outline-style: solid;', '  outline-offset: 2px;', '}');
   }
-  if (contract.states.includes('disabled') && contract.semantics.element === 'button') {
+  if (contract.states.includes('disabled') && contract.semantics.element === 'button' && !rootDeclaresCursor) {
     lines.push('', '.root:disabled {', '  cursor: not-allowed;', '}');
   }
 
@@ -1187,6 +1258,15 @@ export function generateCss(contract: Contract, tokenInventory: Set<string>, err
     }
   }
   lines.push(...stateRules);
+  // v15 declaredStates on the root: verbatim state-selector rules, emitted
+  // after the token state rules (a declared fact never shadows a binding —
+  // they carry disjoint channels by the validateContract ambiguity rule).
+  for (const [state, overrides] of Object.entries(root.declaredStates ?? {})) {
+    const sel = STATE_SELECTORS[state];
+    if (!sel) continue; // refused by validateContract
+    const decls = Object.entries(overrides).map(([cssProp, value]) => `  ${cssProp}: ${value};`);
+    if (decls.length > 0) lines.push('', `.root${sel} {`, ...decls, '}');
+  }
   // v7 stylesWhen on the root part (emitted last so the condition wins).
   lines.push(...stylesWhenRules(contract, 'root', root, true));
 
@@ -1199,6 +1279,7 @@ export function generateCss(contract: Contract, tokenInventory: Set<string>, err
     if (isStructural(part)) {
       decls.push(`display: ${part.layout?.display ?? 'flex'}`);
       if (part.layout?.direction) decls.push(`flex-direction: ${part.layout.direction}`);
+      if (part.layout?.wrap) decls.push('flex-wrap: wrap');
       if (part.layout?.align) decls.push(`align-items: ${ALIGN_CSS[part.layout.align]}`);
       if (part.layout?.justify) decls.push(`justify-content: ${JUSTIFY_CSS[part.layout.justify]}`);
     }
@@ -1344,6 +1425,17 @@ export function generateCss(contract: Contract, tokenInventory: Set<string>, err
         if (lDecls.length === 0) continue;
         nestedSubRules.push(`\n.${entry.prop}-${value} .${name} {\n${lDecls.join('\n')}\n}`);
       }
+    }
+    // v15 declared facts on a nested part: verbatim base decls + per-state
+    // descendant rules under the root's state selector.
+    for (const [cssProp, value] of Object.entries(part.declared ?? {})) {
+      decls.push(`${cssProp}: ${value}`);
+    }
+    for (const [state, overrides] of Object.entries(part.declaredStates ?? {})) {
+      const sel = STATE_SELECTORS[state];
+      if (!sel) continue; // refused by validateContract
+      const dDecls = Object.entries(overrides).map(([cssProp, value]) => `  ${cssProp}: ${value};`);
+      if (dDecls.length > 0) nestedSubRules.push(`\n.root${sel} .${name} {\n${dDecls.join('\n')}\n}`);
     }
     // v13 part-level states (P18 second half): descendant rules under the
     // root's STATE selector — .root:disabled .label { color: … } — the same

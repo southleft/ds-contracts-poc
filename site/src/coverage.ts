@@ -168,6 +168,8 @@ reg('layout', 'layout', [
   'layout.justify',
   'layout.grow',
   'layout.overlap',
+  // v15 (S4): flex-wrap — native on both surfaces.
+  'layout.wrap',
 ]);
 reg('layout', 'layout-by-prop', [
   'part.layoutByProp',
@@ -195,6 +197,10 @@ reg('tokens', 'literals', [
   'literalsByProp.prop',
   'literalsByProp.map',
 ]);
+// v15 (S4 channel lifts): declared facts — keyword/literal channels with no
+// token vocabulary, carried first-class (code renders; canvas draws or
+// annotates per the capability-matrix verdict).
+reg('tokens', 'declared-facts', ['part.declared', 'part.declaredStates']);
 
 // --- States ----------------------------------------------------------------
 reg('states', 'root-states', ['part.states']);

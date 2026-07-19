@@ -526,6 +526,9 @@
             },
             "overlap": {
               "type": "boolean"
+            },
+            "wrap": {
+              "type": "boolean"
             }
           },
           "additionalProperties": false
@@ -787,6 +790,32 @@
               "map"
             ],
             "additionalProperties": false
+          }
+        },
+        "declared": {
+          "type": "object",
+          "propertyNames": {
+            "type": "string"
+          },
+          "additionalProperties": {
+            "type": "string",
+            "pattern": "^[^;{}!]+$"
+          }
+        },
+        "declaredStates": {
+          "type": "object",
+          "propertyNames": {
+            "type": "string"
+          },
+          "additionalProperties": {
+            "type": "object",
+            "propertyNames": {
+              "type": "string"
+            },
+            "additionalProperties": {
+              "type": "string",
+              "pattern": "^[^;{}!]+$"
+            }
           }
         },
         "states": {

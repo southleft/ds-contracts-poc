@@ -27,8 +27,8 @@ Every committed `figma/*.figma.js` passed BOTH gates at generation time:
 
 ## Variant-explosion exclusions (compiled, verified, NOT committed)
 
-- `polaris.text-field`: 1344 variants (5 enum axes, full cartesian) — the script compiles headlessly and passed the referee, but a component set that size is not a buildable canvas artifact (and the 2.4MB script is not committed). Canvas modeling for this component needs AXIS CURATION (which axes become Figma variants vs. text-style/property choices) — a named Phase B owner decision, and a real finding: the canvas engine compiles the full cartesian by design.
-- `polaris.text`: 23232 variants (5 enum axes, full cartesian) — the script compiles headlessly and passed the referee, but a component set that size is not a buildable canvas artifact (and the 14.7MB script is not committed). Canvas modeling for this component needs AXIS CURATION (which axes become Figma variants vs. text-style/property choices) — a named Phase B owner decision, and a real finding: the canvas engine compiles the full cartesian by design.
+- `polaris.text-field`: 1344 variants (5 enum axes, full cartesian) — the script compiles headlessly and passed the referee, but a component set that size is not a buildable canvas artifact (and the 2.7MB script is not committed). Canvas modeling for this component needs AXIS CURATION (which axes become Figma variants vs. text-style/property choices) — a named Phase B owner decision, and a real finding: the canvas engine compiles the full cartesian by design.
+- `polaris.text`: 23232 variants (5 enum axes, full cartesian) — the script compiles headlessly and passed the referee, but a component set that size is not a buildable canvas artifact (and the 17.7MB script is not committed). Canvas modeling for this component needs AXIS CURATION (which axes become Figma variants vs. text-style/property choices) — a named Phase B owner decision, and a real finding: the canvas engine compiles the full cartesian by design.
 
 ## Token variable upsert — named BYO limits
 

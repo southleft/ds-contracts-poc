@@ -114,7 +114,17 @@ export function kindOf(prop: string, value: string): Kindled {
     const base = `${hex(+m[1])}${hex(+m[2])}${hex(+m[3])}`;
     return { kind: 'color', value: a >= 1 ? base : `${base}${hex(Math.round(a * 255))}` };
   }
-  if (prop === 'box-shadow' && value !== 'none') return { kind: 'shadow', value };
+  // v15 (S4): 'none' is a first-class shadow value — a disabled/active plane
+  // that CLEARS the shadow is a fact, not an unmintable shape (it minted
+  // nothing before, so state shadow-clears fell to the extension block).
+  if (prop === 'box-shadow') return { kind: 'shadow', value };
+  // v15 (S4/matrix a.3): gradient stacks ride background-image as a minted
+  // 'gradient' kind — whole-value string identity, correlated by the same
+  // uniform/per-axis/per-pair machinery ('none' is a first-class point: the
+  // non-gradient variants of a gradient-bearing axis).
+  if (prop === 'background-image' && (value === 'none' || /^(linear|radial|conic)-gradient\(/.test(value))) {
+    return { kind: 'gradient', value };
+  }
   const px = pxRe.exec(value);
   if (px) return { kind: 'px', value: Number(px[1]) };
   if (numRe.test(value)) return { kind: 'number', value: Number(value) };
@@ -141,6 +151,20 @@ export const CHANNEL_TO_COMPUTED: Record<string, string[]> = {
   'min-height': ['min-height'],
   'min-width': ['min-width'],
   'box-shadow': ['box-shadow'],
+  // v15 (S4 channel lifts): per-corner radii, per-side widths, gradient
+  // carriage, and the text channels are carried longhands — identity map.
+  'border-top-left-radius': ['border-top-left-radius'],
+  'border-top-right-radius': ['border-top-right-radius'],
+  'border-bottom-left-radius': ['border-bottom-left-radius'],
+  'border-bottom-right-radius': ['border-bottom-right-radius'],
+  'border-top-width': ['border-top-width'],
+  'border-right-width': ['border-right-width'],
+  'border-bottom-width': ['border-bottom-width'],
+  'border-left-width': ['border-left-width'],
+  'background-image': ['background-image'],
+  'font-family': ['font-family'],
+  'max-width': ['max-width'],
+  'max-height': ['max-height'],
 };
 
 // ---------------------------------------------------------------------------
