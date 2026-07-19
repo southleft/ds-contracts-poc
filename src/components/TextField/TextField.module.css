@@ -48,6 +48,15 @@
 }
 
 .input {
+  appearance: none;
+  border: none;
+  background: transparent;
+  font: inherit;
+  color: inherit;
+  letter-spacing: inherit;
+  margin: 0;
+  padding: 0;
+  outline: none;
   background-color: var(--color-input-background);
   border-color: var(--color-border-subtle);
   border-width: var(--border-width-100);
