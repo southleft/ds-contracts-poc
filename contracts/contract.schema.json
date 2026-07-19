@@ -681,33 +681,113 @@
           }
         },
         "tokensByProp": {
-          "type": "object",
-          "properties": {
-            "prop": {
-              "type": "string"
-            },
-            "map": {
+          "anyOf": [
+            {
               "type": "object",
-              "propertyNames": {
+              "properties": {
+                "prop": {
+                  "type": "string"
+                },
+                "map": {
+                  "type": "object",
+                  "propertyNames": {
+                    "type": "string"
+                  },
+                  "additionalProperties": {
+                    "type": "object",
+                    "propertyNames": {
+                      "type": "string"
+                    },
+                    "additionalProperties": {
+                      "type": "string",
+                      "pattern": "^\\{[a-z0-9.{}-]+\\}$"
+                    }
+                  }
+                }
+              },
+              "required": [
+                "prop",
+                "map"
+              ],
+              "additionalProperties": false
+            },
+            {
+              "minItems": 1,
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "prop": {
+                    "type": "string"
+                  },
+                  "map": {
+                    "type": "object",
+                    "propertyNames": {
+                      "type": "string"
+                    },
+                    "additionalProperties": {
+                      "type": "object",
+                      "propertyNames": {
+                        "type": "string"
+                      },
+                      "additionalProperties": {
+                        "type": "string",
+                        "pattern": "^\\{[a-z0-9.{}-]+\\}$"
+                      }
+                    }
+                  }
+                },
+                "required": [
+                  "prop",
+                  "map"
+                ],
+                "additionalProperties": false
+              }
+            }
+          ]
+        },
+        "literals": {
+          "type": "object",
+          "propertyNames": {
+            "type": "string"
+          },
+          "additionalProperties": {
+            "type": "string",
+            "pattern": "^(-?\\d+(\\.\\d+)?(px|rem|em)?|transparent|inherit|currentColor|#[0-9a-fA-F]{3,8}|rgba?\\([\\d ,./%]+\\))$"
+          }
+        },
+        "literalsByProp": {
+          "minItems": 1,
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "prop": {
                 "type": "string"
               },
-              "additionalProperties": {
+              "map": {
                 "type": "object",
                 "propertyNames": {
                   "type": "string"
                 },
                 "additionalProperties": {
-                  "type": "string",
-                  "pattern": "^\\{[a-z0-9.{}-]+\\}$"
+                  "type": "object",
+                  "propertyNames": {
+                    "type": "string"
+                  },
+                  "additionalProperties": {
+                    "type": "string",
+                    "pattern": "^(-?\\d+(\\.\\d+)?(px|rem|em)?|transparent|inherit|currentColor|#[0-9a-fA-F]{3,8}|rgba?\\([\\d ,./%]+\\))$"
+                  }
                 }
               }
-            }
-          },
-          "required": [
-            "prop",
-            "map"
-          ],
-          "additionalProperties": false
+            },
+            "required": [
+              "prop",
+              "map"
+            ],
+            "additionalProperties": false
+          }
         },
         "states": {
           "type": "object",
