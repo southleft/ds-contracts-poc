@@ -57,9 +57,14 @@ function resetScratch() {
   // runs in scratch via the root tsx — workers/assist has no own node_modules).
   // packages rides along because scripts/contract-schema.ts is a re-export
   // shim over packages/schema/src (the @ds-contracts/schema source) and the
-  // CLI evals run packages/cli from scratch.
+  // CLI evals run packages/cli from scratch. Build artifacts (dist/) are
+  // filtered out — the CLI evals rebuild in scratch, and copying ~24 MB of
+  // bundles per case would dominate the reset.
   for (const dir of ['contracts', 'tokens', 'scripts', 'core', 'parity', 'src', 'catalog', 'context', 'assets', 'extract', 'playground', 'workers', 'packages']) {
-    cpSync(path.join(ROOT, dir), path.join(SCRATCH, dir), { recursive: true });
+    cpSync(path.join(ROOT, dir), path.join(SCRATCH, dir), {
+      recursive: true,
+      filter: dir === 'packages' ? (src) => path.basename(src) !== 'dist' : undefined,
+    });
   }
   cpSync(path.join(ROOT, 'evals', 'fixtures'), path.join(SCRATCH, 'evals', 'fixtures'), {
     recursive: true,
@@ -152,7 +157,7 @@ const expectFinding = (
 
 interface Case {
   id: string;
-  claim: 'C1-determinism' | 'C2-refusal' | 'C3-detection' | 'C4-convergence' | 'C5-extraction' | 'C6-theming';
+  claim: 'C1-determinism' | 'C2-refusal' | 'C3-detection' | 'C4-convergence' | 'C5-extraction' | 'C6-theming' | 'C7-cli';
   run: () => void; // throws on failure
 }
 
@@ -3256,6 +3261,177 @@ const cases: Case[] = [
         if (!sc.acceptance.allCellsOver10Named) throw new Error(`${c}: cells over 10% without named causes`);
       }
       console.log(`canvas-pixel-gate: ${comps.length} scorecards present, summaries row-consistent, every >10% cell named`);
+    },
+  },
+  {
+    // PHASE 1 (@ds-contracts/cli) — the whole command surface, from a scratch
+    // work dir the way a consumer would run it: build the bundled CLI, then
+    // init → extract (the committed foreign-sibling fixture) → generate
+    // (the committed Polaris Badge contract, react target + stories) →
+    // figma (sync script) → diff (exit 0 clean, exit 1 on planted drift) →
+    // propose-pr --dry-run (REST plan, no token, no network). Generation is
+    // run TWICE and must be byte-stable.
+    id: 'cli-smoke',
+    claim: 'C7-cli',
+    run: () => {
+      const built = run(process.execPath, ['packages/cli/build.mjs']);
+      if (built.status !== 0) throw new Error(`CLI build failed:\n${built.out}`);
+      const cli = path.join(SCRATCH, 'packages', 'cli', 'dist', 'cli.js');
+      const work = path.join(SCRATCH, 'cliwork');
+      mkdirSync(work, { recursive: true });
+      const runCli = (args: string[], cwd = work): RunResult => {
+        const r = spawnSync(process.execPath, [cli, ...args], { cwd, encoding: 'utf8' });
+        return { status: r.status ?? -1, out: `${r.stdout ?? ''}${r.stderr ?? ''}` };
+      };
+
+      // Committed inputs: the foreign-sibling extraction fixture rides the
+      // scratch copy; the Polaris Badge contract + tokens + icons are
+      // committed showcase artifacts copied in from the repo root.
+      cpSync(path.join(SCRATCH, 'extract', 'fixtures', 'foreign-sibling'), path.join(work, 'lib'), { recursive: true });
+      mkdirSync(path.join(work, 'polaris', 'contracts'), { recursive: true });
+      cpSync(path.join(ROOT, 'examples', 'polaris', 'contracts', 'badge.contract.json'), path.join(work, 'polaris', 'contracts', 'badge.contract.json'));
+      cpSync(path.join(ROOT, 'examples', 'polaris', 'tokens'), path.join(work, 'polaris', 'tokens'), { recursive: true });
+      cpSync(path.join(ROOT, 'examples', 'polaris', 'assets', 'icons'), path.join(work, 'polaris', 'icons'), { recursive: true });
+
+      // init: writes the config; a second init refuses by name.
+      const init = runCli(['init']);
+      if (init.status !== 0 || !existsSync(path.join(work, 'ds-contracts.config.json'))) {
+        throw new Error(`init failed:\n${init.out}`);
+      }
+      const initAgain = runCli(['init']);
+      if (initAgain.status !== 2 || !initAgain.out.includes('already exists')) {
+        throw new Error(`second init must refuse by name (got ${initAgain.status}):\n${initAgain.out}`);
+      }
+
+      // extract over the committed foreign-sibling fixture.
+      writeFileSync(
+        path.join(work, 'extract.config.json'),
+        JSON.stringify({ code: { adapter: 'react-tsx', root: 'lib' }, idPrefix: 'acme', out: 'out' }, null, 2),
+      );
+      const extract = runCli(['extract', 'extract.config.json']);
+      if (extract.status !== 0 || !extract.out.includes('5 proposed contract(s)') || !extract.out.includes('2 component(s) seen but not extractable')) {
+        throw new Error(`extract must propose 5 contracts and NAME the 2 skips:\n${extract.out}`);
+      }
+
+      // generate (react + stories) and figma, twice each — byte-stable.
+      const tokens = 'polaris/tokens/polaris-light.dtcg.json,polaris/tokens/polaris-minted.dtcg.json';
+      for (const dir of ['gen-a', 'gen-b']) {
+        const g = runCli(['generate', 'polaris/contracts/badge.contract.json', '--out', `${dir}/react`, '--tokens', tokens, '--icons', 'polaris/icons', '--stories']);
+        if (g.status !== 0) throw new Error(`generate failed (${dir}):\n${g.out}`);
+        const f = runCli(['figma', 'polaris/contracts/badge.contract.json', '--out', `${dir}/figma`, '--tokens', tokens, '--icons', 'polaris/icons']);
+        if (f.status !== 0) throw new Error(`figma failed (${dir}):\n${f.out}`);
+      }
+      for (const rel of ['react', 'figma']) {
+        const a = hashTree(path.join('cliwork', 'gen-a', rel));
+        const b = hashTree(path.join('cliwork', 'gen-b', rel));
+        if (a !== b) throw new Error(`CLI ${rel} output is not byte-stable across two runs`);
+      }
+      for (const f of ['react/Badge/Badge.tsx', 'react/Badge/Badge.module.css', 'react/Badge/Badge.stories.tsx', 'react/Badge/index.ts', 'figma/badge.figma.js']) {
+        if (!existsSync(path.join(work, 'gen-a', f))) throw new Error(`expected output missing: ${f}`);
+      }
+
+      // diff: clean on the fresh extraction (exit 0), then a planted code
+      // prop drifts it (exit 1, [code AHEAD] named).
+      const clean = runCli(['diff', 'extract.config.json']);
+      if (clean.status !== 0 || !clean.out.includes('Diagnostic clean')) {
+        throw new Error(`diff must exit 0 clean right after extraction:\n${clean.out}`);
+      }
+      const pill = path.join(work, 'lib', 'Pill.tsx');
+      writeFileSync(pill, readFileSync(pill, 'utf8').replace('interface PillProps {', 'interface PillProps {\n  planted?: boolean;'));
+      const drift = runCli(['diff', 'extract.config.json']);
+      if (drift.status !== 1 || !drift.out.includes('[code AHEAD] Pill.planted')) {
+        throw new Error(`diff must exit 1 naming the planted [code AHEAD] drift (got ${drift.status}):\n${drift.out}`);
+      }
+
+      // propose-pr --dry-run: the exact REST plan, zero token, zero network.
+      const pr = runCli(['propose-pr', 'out/contracts/pill.contract.json', '--repo', 'acme/design-system', '--dry-run']);
+      if (
+        pr.status !== 0 ||
+        !pr.out.includes('DRY RUN') ||
+        !pr.out.includes('POST /repos/acme/design-system/pulls') ||
+        !pr.out.includes('contents/contracts/pill.contract.json') ||
+        !pr.out.includes('never persisted')
+      ) {
+        throw new Error(`propose-pr --dry-run must print the full REST plan without a token:\n${pr.out}`);
+      }
+
+      // extract --computed stays a LAZY, NAMED seam: the browser-dependent
+      // runner is a separate chunk, never imported by the other verbs.
+      if (!existsSync(path.join(SCRATCH, 'packages', 'cli', 'dist', 'computed.js'))) {
+        throw new Error('dist/computed.js (the lazy browser chunk) was not built');
+      }
+      const cliBundle = readFileSync(cli, 'utf8');
+      if (/from\s*["']playwright-core["']/.test(cliBundle)) {
+        throw new Error('dist/cli.js must not import playwright-core statically — the lazy boundary is broken');
+      }
+      const noConfig = runCli(['extract', '--computed', '--config', 'missing.json']);
+      if (noConfig.status !== 2 || !noConfig.out.includes('--config not found')) {
+        throw new Error(`extract --computed must refuse a missing config by name:\n${noConfig.out}`);
+      }
+
+      console.log('cli-smoke: init → extract(5+2 named) → generate/figma byte-stable ×2 → diff 0/1 → propose-pr dry-run plan → lazy computed seam intact');
+    },
+  },
+  {
+    // PHASE 1 (open emitter registry) — registerEmitter(): a foreign emitter
+    // module registers, appears in getEmitters() AND the live `emitters`
+    // array (the one every generic consumer iterates), name collisions and
+    // shape errors refuse by name, and the CLI's --emitter flag loads the
+    // same module so `generate --target test-emitter` emits its file.
+    id: 'emitter-plugin-loads',
+    claim: 'C7-cli',
+    run: () => {
+      const probe = run(TSX, ['-e', `
+        import { emitters, emitterByName, getEmitters, registerEmitter } from './core/emitter.ts';
+        import testEmitter from './evals/fixtures/test-emitter.mjs';
+        const before = emitters.map((e) => e.name).join(',');
+        if (before !== 'react,html,react-inline,figma-script') {
+          throw new Error('built-in emitter order changed (load-bearing): ' + before);
+        }
+        registerEmitter(testEmitter);
+        if (!getEmitters().some((e) => e.name === 'test-emitter')) throw new Error('not in getEmitters()');
+        if (!emitters.some((e) => e.name === 'test-emitter')) throw new Error('registry array is not live — generic consumers would miss plugins');
+        if (emitterByName.get('test-emitter') !== testEmitter) throw new Error('not in emitterByName');
+        // Collisions and shape errors refuse by name — including the built-ins.
+        for (const [bad, want] of [
+          [testEmitter, 'already registered'],
+          [{ name: 'react', label: 'x', emit: () => [] }, 'already registered'],
+          [{ name: '', label: 'x', emit: () => [] }, 'non-empty string'],
+          [{ name: 'no-emit', label: 'x' }, 'emit(contract, ctx) function'],
+        ]) {
+          let threw = '';
+          try { registerEmitter(bad); } catch (e) { threw = String(e); }
+          if (!threw.includes(want)) throw new Error('expected named refusal containing "' + want + '", got: ' + (threw || '(registered!)'));
+        }
+        console.log('registry probe ok: ' + getEmitters().map((e) => e.name).join(','));
+      `]);
+      if (probe.status !== 0 || !probe.out.includes('registry probe ok: react,html,react-inline,figma-script,test-emitter')) {
+        throw new Error(`registry probe failed:\n${probe.out}`);
+      }
+
+      // The CLI loads the same module via --emitter and emits through it.
+      const built = run(process.execPath, ['packages/cli/build.mjs']);
+      if (built.status !== 0) throw new Error(`CLI build failed:\n${built.out}`);
+      const cli = path.join(SCRATCH, 'packages', 'cli', 'dist', 'cli.js');
+      const r = spawnSync(
+        process.execPath,
+        [cli, 'generate', path.join(ROOT, 'examples', 'polaris', 'contracts', 'badge.contract.json'),
+          '--out', 'plugin-out', '--target', 'test-emitter',
+          '--emitter', 'evals/fixtures/test-emitter.mjs',
+          '--tokens', path.join(ROOT, 'examples', 'polaris', 'tokens', 'polaris-light.dtcg.json')],
+        { cwd: SCRATCH, encoding: 'utf8' },
+      );
+      const out = `${r.stdout ?? ''}${r.stderr ?? ''}`;
+      if (r.status !== 0 || !out.includes('Registered emitter "test-emitter"')) {
+        throw new Error(`CLI --emitter registration failed:\n${out}`);
+      }
+      const emitted = path.join(SCRATCH, 'plugin-out', 'badge.inventory.txt');
+      if (!existsSync(emitted)) throw new Error('plugin emitter file not written');
+      const contents = readFileSync(emitted, 'utf8');
+      if (!contents.startsWith('polaris.badge@') || !contents.includes('props: tone, progress')) {
+        throw new Error(`plugin emitter output wrong:\n${contents}`);
+      }
+      console.log('emitter-plugin-loads: registered (live array + getEmitters + byName), 4 named refusals, CLI --emitter emitted badge.inventory.txt');
     },
   },
 ];

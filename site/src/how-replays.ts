@@ -130,11 +130,20 @@ export interface ParityFinding {
 }
 
 /** Dirs parity/diff.ts actually reads (subset of the eval scratch list). */
-const SCRATCH_DIRS = ['contracts', 'tokens', 'scripts', 'core', 'parity', 'src'];
+// 'packages' rides along because scripts/contract-schema.ts is a re-export
+// shim over packages/schema/src (the @ds-contracts/schema source).
+const SCRATCH_DIRS = ['contracts', 'tokens', 'scripts', 'core', 'parity', 'src', 'packages'];
 
 function runRealDiffer(): { findings: (scratch: string) => ParityFinding[]; scratch: string; dispose: () => void } {
   const scratch = mkdtempSync(path.join(tmpdir(), 'dsc-site-parity-'));
-  for (const dir of SCRATCH_DIRS) cpSync(path.join(ROOT, dir), path.join(scratch, dir), { recursive: true });
+  for (const dir of SCRATCH_DIRS) {
+    cpSync(path.join(ROOT, dir), path.join(scratch, dir), {
+      recursive: true,
+      // packages/*/dist is a build artifact (up to ~24 MB of CLI bundles) —
+      // the differ only needs the schema SOURCE the scripts/ shim re-exports.
+      filter: dir === 'packages' ? (src) => path.basename(src) !== 'dist' : undefined,
+    });
+  }
   for (const file of ['package.json', 'tsconfig.json']) cpSync(path.join(ROOT, file), path.join(scratch, file));
   symlinkSync(path.join(ROOT, 'node_modules'), path.join(scratch, 'node_modules'), 'dir');
   const findings = (s: string): ParityFinding[] => {
