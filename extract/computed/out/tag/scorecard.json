@@ -198,7 +198,7 @@
     "code-only[active]: part-1.min-height — default-state values not kind-compatible for padding — cannot correlate",
     "code-only[active]: part-1.min-width — default-state values not kind-compatible for padding — cannot correlate",
     "code-only[active]: part-1.pointer-events — declared-channel state delta on 4/16 combos — partial coverage cannot carry as a state selector (v15); named residue",
-    "code-only[active]: part-1.position — value shape outside mintable kinds and outside the declared vocabulary",
+    "code-only[active]: part-1.position — declared-channel state delta on 4/16 combos — partial coverage cannot carry as a state selector (v15); named residue",
     "code-only[active]: part-1.right — default-state values not kind-compatible for padding — cannot correlate",
     "code-only[active]: part-1.top — default-state values not kind-compatible for padding — cannot correlate",
     "code-only[active]: root.outline-style — declared-channel state delta on 8/16 combos — partial coverage cannot carry as a state selector (v15); named residue",
@@ -262,7 +262,7 @@
     "code-only[hover]: part-1.min-height — default-state values not kind-compatible for padding — cannot correlate",
     "code-only[hover]: part-1.min-width — default-state values not kind-compatible for padding — cannot correlate",
     "code-only[hover]: part-1.pointer-events — declared-channel state delta on 4/16 combos — partial coverage cannot carry as a state selector (v15); named residue",
-    "code-only[hover]: part-1.position — value shape outside mintable kinds and outside the declared vocabulary",
+    "code-only[hover]: part-1.position — declared-channel state delta on 4/16 combos — partial coverage cannot carry as a state selector (v15); named residue",
     "code-only[hover]: part-1.right — default-state values not kind-compatible for padding — cannot correlate",
     "code-only[hover]: part-1.top — default-state values not kind-compatible for padding — cannot correlate"
   ],

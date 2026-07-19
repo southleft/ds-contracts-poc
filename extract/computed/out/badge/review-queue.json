@@ -1,0 +1,4623 @@
+{
+  "_marker": "CONTRADICTION REVIEW QUEUE — computed truth vs static bindings. Resolution is HUMAN-ACK ONLY: extract/computed/resolve.ts applies computed-wins per explicitly named item; nothing auto-resolves.",
+  "component": "Badge",
+  "contract": "examples/polaris/extraction/static-contracts/badge.contract.json",
+  "generatedBy": "extract/computed/run.ts",
+  "browser": "148.0.7778.96",
+  "items": [
+    {
+      "id": "none.none|label|font-size",
+      "combo": "none.none",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{p.text-body-sm-font-size}",
+      "computedProp": "font-size",
+      "expected": "",
+      "observed": "",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "none.none|label|font-weight",
+      "combo": "none.none",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{p.text-body-sm-font-weight}",
+      "computedProp": "font-weight",
+      "expected": "",
+      "observed": "",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "none.none|label|line-height",
+      "combo": "none.none",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{p.text-body-sm-font-line-height}",
+      "computedProp": "line-height",
+      "expected": "",
+      "observed": "",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "none.none|label|letter-spacing",
+      "combo": "none.none",
+      "part": "label",
+      "channel": "letter-spacing",
+      "ref": "{p.text-body-sm-font-letter-spacing}",
+      "computedProp": "letter-spacing",
+      "expected": "",
+      "observed": "",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "none.incomplete|label|font-size",
+      "combo": "none.incomplete",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{p.text-body-sm-font-size}",
+      "computedProp": "font-size",
+      "expected": "12px",
+      "observed": "13px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.font-size-325"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "none.incomplete|label|font-weight",
+      "combo": "none.incomplete",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{p.text-body-sm-font-weight}",
+      "computedProp": "font-weight",
+      "expected": "450",
+      "observed": "550",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.font-weight-medium"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "none.incomplete|label|line-height",
+      "combo": "none.incomplete",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{p.text-body-sm-font-line-height}",
+      "computedProp": "line-height",
+      "expected": "16px",
+      "observed": "20px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.border-radius-500",
+        "p.font-line-height-500",
+        "p.font-size-500",
+        "p.height-500",
+        "p.space-500",
+        "p.width-500"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "none.partiallyComplete|label|font-size",
+      "combo": "none.partiallyComplete",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{p.text-body-sm-font-size}",
+      "computedProp": "font-size",
+      "expected": "12px",
+      "observed": "13px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.font-size-325"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "none.partiallyComplete|label|font-weight",
+      "combo": "none.partiallyComplete",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{p.text-body-sm-font-weight}",
+      "computedProp": "font-weight",
+      "expected": "450",
+      "observed": "550",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.font-weight-medium"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "none.partiallyComplete|label|line-height",
+      "combo": "none.partiallyComplete",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{p.text-body-sm-font-line-height}",
+      "computedProp": "line-height",
+      "expected": "16px",
+      "observed": "20px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.border-radius-500",
+        "p.font-line-height-500",
+        "p.font-size-500",
+        "p.height-500",
+        "p.space-500",
+        "p.width-500"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "none.complete|label|font-size",
+      "combo": "none.complete",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{p.text-body-sm-font-size}",
+      "computedProp": "font-size",
+      "expected": "12px",
+      "observed": "13px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.font-size-325"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "none.complete|label|font-weight",
+      "combo": "none.complete",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{p.text-body-sm-font-weight}",
+      "computedProp": "font-weight",
+      "expected": "450",
+      "observed": "550",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.font-weight-medium"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "none.complete|label|line-height",
+      "combo": "none.complete",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{p.text-body-sm-font-line-height}",
+      "computedProp": "line-height",
+      "expected": "16px",
+      "observed": "20px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.border-radius-500",
+        "p.font-line-height-500",
+        "p.font-size-500",
+        "p.height-500",
+        "p.space-500",
+        "p.width-500"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "info.none|root|background-color",
+      "combo": "info.none",
+      "part": "root",
+      "channel": "background-color",
+      "ref": "{p.color-bg-fill-transparent-secondary}",
+      "computedProp": "background-color",
+      "expected": "rgba(0, 0, 0, 0.06)",
+      "observed": "rgba(213, 235, 255, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.color-bg-fill-info-secondary"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "info.none|root|color",
+      "combo": "info.none",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text-secondary}",
+      "computedProp": "color",
+      "expected": "rgba(97, 97, 97, 1)",
+      "observed": "rgba(0, 58, 90, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.color-text-info",
+        "p.color-text-info-hover"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "info.none|label|font-size",
+      "combo": "info.none",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{p.text-body-sm-font-size}",
+      "computedProp": "font-size",
+      "expected": "",
+      "observed": "",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "info.none|label|font-weight",
+      "combo": "info.none",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{p.text-body-sm-font-weight}",
+      "computedProp": "font-weight",
+      "expected": "",
+      "observed": "",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "info.none|label|line-height",
+      "combo": "info.none",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{p.text-body-sm-font-line-height}",
+      "computedProp": "line-height",
+      "expected": "",
+      "observed": "",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "info.none|label|letter-spacing",
+      "combo": "info.none",
+      "part": "label",
+      "channel": "letter-spacing",
+      "ref": "{p.text-body-sm-font-letter-spacing}",
+      "computedProp": "letter-spacing",
+      "expected": "",
+      "observed": "",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "info.incomplete|root|background-color",
+      "combo": "info.incomplete",
+      "part": "root",
+      "channel": "background-color",
+      "ref": "{p.color-bg-fill-transparent-secondary}",
+      "computedProp": "background-color",
+      "expected": "rgba(0, 0, 0, 0.06)",
+      "observed": "rgba(213, 235, 255, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.color-bg-fill-info-secondary"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "info.incomplete|root|color",
+      "combo": "info.incomplete",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text-secondary}",
+      "computedProp": "color",
+      "expected": "rgba(97, 97, 97, 1)",
+      "observed": "rgba(0, 58, 90, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.color-text-info",
+        "p.color-text-info-hover"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "info.incomplete|label|font-size",
+      "combo": "info.incomplete",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{p.text-body-sm-font-size}",
+      "computedProp": "font-size",
+      "expected": "12px",
+      "observed": "13px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.font-size-325"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "info.incomplete|label|font-weight",
+      "combo": "info.incomplete",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{p.text-body-sm-font-weight}",
+      "computedProp": "font-weight",
+      "expected": "450",
+      "observed": "550",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.font-weight-medium"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "info.incomplete|label|line-height",
+      "combo": "info.incomplete",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{p.text-body-sm-font-line-height}",
+      "computedProp": "line-height",
+      "expected": "16px",
+      "observed": "20px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.border-radius-500",
+        "p.font-line-height-500",
+        "p.font-size-500",
+        "p.height-500",
+        "p.space-500",
+        "p.width-500"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "info.partiallyComplete|root|background-color",
+      "combo": "info.partiallyComplete",
+      "part": "root",
+      "channel": "background-color",
+      "ref": "{p.color-bg-fill-transparent-secondary}",
+      "computedProp": "background-color",
+      "expected": "rgba(0, 0, 0, 0.06)",
+      "observed": "rgba(213, 235, 255, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.color-bg-fill-info-secondary"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "info.partiallyComplete|root|color",
+      "combo": "info.partiallyComplete",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text-secondary}",
+      "computedProp": "color",
+      "expected": "rgba(97, 97, 97, 1)",
+      "observed": "rgba(0, 58, 90, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.color-text-info",
+        "p.color-text-info-hover"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "info.partiallyComplete|label|font-size",
+      "combo": "info.partiallyComplete",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{p.text-body-sm-font-size}",
+      "computedProp": "font-size",
+      "expected": "12px",
+      "observed": "13px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.font-size-325"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "info.partiallyComplete|label|font-weight",
+      "combo": "info.partiallyComplete",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{p.text-body-sm-font-weight}",
+      "computedProp": "font-weight",
+      "expected": "450",
+      "observed": "550",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.font-weight-medium"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "info.partiallyComplete|label|line-height",
+      "combo": "info.partiallyComplete",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{p.text-body-sm-font-line-height}",
+      "computedProp": "line-height",
+      "expected": "16px",
+      "observed": "20px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.border-radius-500",
+        "p.font-line-height-500",
+        "p.font-size-500",
+        "p.height-500",
+        "p.space-500",
+        "p.width-500"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "info.complete|root|background-color",
+      "combo": "info.complete",
+      "part": "root",
+      "channel": "background-color",
+      "ref": "{p.color-bg-fill-transparent-secondary}",
+      "computedProp": "background-color",
+      "expected": "rgba(0, 0, 0, 0.06)",
+      "observed": "rgba(213, 235, 255, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.color-bg-fill-info-secondary"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "info.complete|root|color",
+      "combo": "info.complete",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text-secondary}",
+      "computedProp": "color",
+      "expected": "rgba(97, 97, 97, 1)",
+      "observed": "rgba(0, 58, 90, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.color-text-info",
+        "p.color-text-info-hover"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "info.complete|label|font-size",
+      "combo": "info.complete",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{p.text-body-sm-font-size}",
+      "computedProp": "font-size",
+      "expected": "12px",
+      "observed": "13px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.font-size-325"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "info.complete|label|font-weight",
+      "combo": "info.complete",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{p.text-body-sm-font-weight}",
+      "computedProp": "font-weight",
+      "expected": "450",
+      "observed": "550",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.font-weight-medium"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "info.complete|label|line-height",
+      "combo": "info.complete",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{p.text-body-sm-font-line-height}",
+      "computedProp": "line-height",
+      "expected": "16px",
+      "observed": "20px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.border-radius-500",
+        "p.font-line-height-500",
+        "p.font-size-500",
+        "p.height-500",
+        "p.space-500",
+        "p.width-500"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "success.none|root|background-color",
+      "combo": "success.none",
+      "part": "root",
+      "channel": "background-color",
+      "ref": "{p.color-bg-fill-transparent-secondary}",
+      "computedProp": "background-color",
+      "expected": "rgba(0, 0, 0, 0.06)",
+      "observed": "rgba(175, 254, 191, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.color-bg-fill-success-secondary",
+        "p.color-bg-surface-success-hover"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "success.none|root|color",
+      "combo": "success.none",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text-secondary}",
+      "computedProp": "color",
+      "expected": "rgba(97, 97, 97, 1)",
+      "observed": "rgba(1, 75, 64, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.color-avatar-two-text-on-bg-fill",
+        "p.color-bg-fill-success-active",
+        "p.color-text-success"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "success.none|label|font-size",
+      "combo": "success.none",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{p.text-body-sm-font-size}",
+      "computedProp": "font-size",
+      "expected": "",
+      "observed": "",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "success.none|label|font-weight",
+      "combo": "success.none",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{p.text-body-sm-font-weight}",
+      "computedProp": "font-weight",
+      "expected": "",
+      "observed": "",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "success.none|label|line-height",
+      "combo": "success.none",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{p.text-body-sm-font-line-height}",
+      "computedProp": "line-height",
+      "expected": "",
+      "observed": "",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "success.none|label|letter-spacing",
+      "combo": "success.none",
+      "part": "label",
+      "channel": "letter-spacing",
+      "ref": "{p.text-body-sm-font-letter-spacing}",
+      "computedProp": "letter-spacing",
+      "expected": "",
+      "observed": "",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "success.incomplete|root|background-color",
+      "combo": "success.incomplete",
+      "part": "root",
+      "channel": "background-color",
+      "ref": "{p.color-bg-fill-transparent-secondary}",
+      "computedProp": "background-color",
+      "expected": "rgba(0, 0, 0, 0.06)",
+      "observed": "rgba(175, 254, 191, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.color-bg-fill-success-secondary",
+        "p.color-bg-surface-success-hover"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "success.incomplete|root|color",
+      "combo": "success.incomplete",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text-secondary}",
+      "computedProp": "color",
+      "expected": "rgba(97, 97, 97, 1)",
+      "observed": "rgba(1, 75, 64, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.color-avatar-two-text-on-bg-fill",
+        "p.color-bg-fill-success-active",
+        "p.color-text-success"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "success.incomplete|label|font-size",
+      "combo": "success.incomplete",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{p.text-body-sm-font-size}",
+      "computedProp": "font-size",
+      "expected": "12px",
+      "observed": "13px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.font-size-325"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "success.incomplete|label|font-weight",
+      "combo": "success.incomplete",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{p.text-body-sm-font-weight}",
+      "computedProp": "font-weight",
+      "expected": "450",
+      "observed": "550",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.font-weight-medium"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "success.incomplete|label|line-height",
+      "combo": "success.incomplete",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{p.text-body-sm-font-line-height}",
+      "computedProp": "line-height",
+      "expected": "16px",
+      "observed": "20px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.border-radius-500",
+        "p.font-line-height-500",
+        "p.font-size-500",
+        "p.height-500",
+        "p.space-500",
+        "p.width-500"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "success.partiallyComplete|root|background-color",
+      "combo": "success.partiallyComplete",
+      "part": "root",
+      "channel": "background-color",
+      "ref": "{p.color-bg-fill-transparent-secondary}",
+      "computedProp": "background-color",
+      "expected": "rgba(0, 0, 0, 0.06)",
+      "observed": "rgba(175, 254, 191, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.color-bg-fill-success-secondary",
+        "p.color-bg-surface-success-hover"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "success.partiallyComplete|root|color",
+      "combo": "success.partiallyComplete",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text-secondary}",
+      "computedProp": "color",
+      "expected": "rgba(97, 97, 97, 1)",
+      "observed": "rgba(1, 75, 64, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.color-avatar-two-text-on-bg-fill",
+        "p.color-bg-fill-success-active",
+        "p.color-text-success"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "success.partiallyComplete|label|font-size",
+      "combo": "success.partiallyComplete",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{p.text-body-sm-font-size}",
+      "computedProp": "font-size",
+      "expected": "12px",
+      "observed": "13px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.font-size-325"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "success.partiallyComplete|label|font-weight",
+      "combo": "success.partiallyComplete",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{p.text-body-sm-font-weight}",
+      "computedProp": "font-weight",
+      "expected": "450",
+      "observed": "550",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.font-weight-medium"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "success.partiallyComplete|label|line-height",
+      "combo": "success.partiallyComplete",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{p.text-body-sm-font-line-height}",
+      "computedProp": "line-height",
+      "expected": "16px",
+      "observed": "20px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.border-radius-500",
+        "p.font-line-height-500",
+        "p.font-size-500",
+        "p.height-500",
+        "p.space-500",
+        "p.width-500"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "success.complete|root|background-color",
+      "combo": "success.complete",
+      "part": "root",
+      "channel": "background-color",
+      "ref": "{p.color-bg-fill-transparent-secondary}",
+      "computedProp": "background-color",
+      "expected": "rgba(0, 0, 0, 0.06)",
+      "observed": "rgba(175, 254, 191, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.color-bg-fill-success-secondary",
+        "p.color-bg-surface-success-hover"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "success.complete|root|color",
+      "combo": "success.complete",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text-secondary}",
+      "computedProp": "color",
+      "expected": "rgba(97, 97, 97, 1)",
+      "observed": "rgba(1, 75, 64, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.color-avatar-two-text-on-bg-fill",
+        "p.color-bg-fill-success-active",
+        "p.color-text-success"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "success.complete|label|font-size",
+      "combo": "success.complete",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{p.text-body-sm-font-size}",
+      "computedProp": "font-size",
+      "expected": "12px",
+      "observed": "13px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.font-size-325"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "success.complete|label|font-weight",
+      "combo": "success.complete",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{p.text-body-sm-font-weight}",
+      "computedProp": "font-weight",
+      "expected": "450",
+      "observed": "550",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.font-weight-medium"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "success.complete|label|line-height",
+      "combo": "success.complete",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{p.text-body-sm-font-line-height}",
+      "computedProp": "line-height",
+      "expected": "16px",
+      "observed": "20px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.border-radius-500",
+        "p.font-line-height-500",
+        "p.font-size-500",
+        "p.height-500",
+        "p.space-500",
+        "p.width-500"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "warning.none|root|background-color",
+      "combo": "warning.none",
+      "part": "root",
+      "channel": "background-color",
+      "ref": "{p.color-bg-fill-transparent-secondary}",
+      "computedProp": "background-color",
+      "expected": "rgba(0, 0, 0, 0.06)",
+      "observed": "rgba(255, 214, 164, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.color-bg-fill-warning-secondary"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "warning.none|root|color",
+      "combo": "warning.none",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text-secondary}",
+      "computedProp": "color",
+      "expected": "rgba(97, 97, 97, 1)",
+      "observed": "rgba(94, 66, 0, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.color-text-warning"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "warning.none|label|font-size",
+      "combo": "warning.none",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{p.text-body-sm-font-size}",
+      "computedProp": "font-size",
+      "expected": "",
+      "observed": "",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "warning.none|label|font-weight",
+      "combo": "warning.none",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{p.text-body-sm-font-weight}",
+      "computedProp": "font-weight",
+      "expected": "",
+      "observed": "",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "warning.none|label|line-height",
+      "combo": "warning.none",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{p.text-body-sm-font-line-height}",
+      "computedProp": "line-height",
+      "expected": "",
+      "observed": "",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "warning.none|label|letter-spacing",
+      "combo": "warning.none",
+      "part": "label",
+      "channel": "letter-spacing",
+      "ref": "{p.text-body-sm-font-letter-spacing}",
+      "computedProp": "letter-spacing",
+      "expected": "",
+      "observed": "",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "warning.incomplete|root|background-color",
+      "combo": "warning.incomplete",
+      "part": "root",
+      "channel": "background-color",
+      "ref": "{p.color-bg-fill-transparent-secondary}",
+      "computedProp": "background-color",
+      "expected": "rgba(0, 0, 0, 0.06)",
+      "observed": "rgba(255, 214, 164, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.color-bg-fill-warning-secondary"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "warning.incomplete|root|color",
+      "combo": "warning.incomplete",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text-secondary}",
+      "computedProp": "color",
+      "expected": "rgba(97, 97, 97, 1)",
+      "observed": "rgba(94, 66, 0, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.color-text-warning"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "warning.incomplete|label|font-size",
+      "combo": "warning.incomplete",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{p.text-body-sm-font-size}",
+      "computedProp": "font-size",
+      "expected": "12px",
+      "observed": "13px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.font-size-325"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "warning.incomplete|label|font-weight",
+      "combo": "warning.incomplete",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{p.text-body-sm-font-weight}",
+      "computedProp": "font-weight",
+      "expected": "450",
+      "observed": "550",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.font-weight-medium"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "warning.incomplete|label|line-height",
+      "combo": "warning.incomplete",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{p.text-body-sm-font-line-height}",
+      "computedProp": "line-height",
+      "expected": "16px",
+      "observed": "20px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.border-radius-500",
+        "p.font-line-height-500",
+        "p.font-size-500",
+        "p.height-500",
+        "p.space-500",
+        "p.width-500"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "warning.partiallyComplete|root|background-color",
+      "combo": "warning.partiallyComplete",
+      "part": "root",
+      "channel": "background-color",
+      "ref": "{p.color-bg-fill-transparent-secondary}",
+      "computedProp": "background-color",
+      "expected": "rgba(0, 0, 0, 0.06)",
+      "observed": "rgba(255, 214, 164, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.color-bg-fill-warning-secondary"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "warning.partiallyComplete|root|color",
+      "combo": "warning.partiallyComplete",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text-secondary}",
+      "computedProp": "color",
+      "expected": "rgba(97, 97, 97, 1)",
+      "observed": "rgba(94, 66, 0, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.color-text-warning"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "warning.partiallyComplete|label|font-size",
+      "combo": "warning.partiallyComplete",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{p.text-body-sm-font-size}",
+      "computedProp": "font-size",
+      "expected": "12px",
+      "observed": "13px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.font-size-325"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "warning.partiallyComplete|label|font-weight",
+      "combo": "warning.partiallyComplete",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{p.text-body-sm-font-weight}",
+      "computedProp": "font-weight",
+      "expected": "450",
+      "observed": "550",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.font-weight-medium"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "warning.partiallyComplete|label|line-height",
+      "combo": "warning.partiallyComplete",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{p.text-body-sm-font-line-height}",
+      "computedProp": "line-height",
+      "expected": "16px",
+      "observed": "20px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.border-radius-500",
+        "p.font-line-height-500",
+        "p.font-size-500",
+        "p.height-500",
+        "p.space-500",
+        "p.width-500"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "warning.complete|root|background-color",
+      "combo": "warning.complete",
+      "part": "root",
+      "channel": "background-color",
+      "ref": "{p.color-bg-fill-transparent-secondary}",
+      "computedProp": "background-color",
+      "expected": "rgba(0, 0, 0, 0.06)",
+      "observed": "rgba(255, 214, 164, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.color-bg-fill-warning-secondary"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "warning.complete|root|color",
+      "combo": "warning.complete",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text-secondary}",
+      "computedProp": "color",
+      "expected": "rgba(97, 97, 97, 1)",
+      "observed": "rgba(94, 66, 0, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.color-text-warning"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "warning.complete|label|font-size",
+      "combo": "warning.complete",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{p.text-body-sm-font-size}",
+      "computedProp": "font-size",
+      "expected": "12px",
+      "observed": "13px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.font-size-325"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "warning.complete|label|font-weight",
+      "combo": "warning.complete",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{p.text-body-sm-font-weight}",
+      "computedProp": "font-weight",
+      "expected": "450",
+      "observed": "550",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.font-weight-medium"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "warning.complete|label|line-height",
+      "combo": "warning.complete",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{p.text-body-sm-font-line-height}",
+      "computedProp": "line-height",
+      "expected": "16px",
+      "observed": "20px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.border-radius-500",
+        "p.font-line-height-500",
+        "p.font-size-500",
+        "p.height-500",
+        "p.space-500",
+        "p.width-500"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "critical.none|root|background-color",
+      "combo": "critical.none",
+      "part": "root",
+      "channel": "background-color",
+      "ref": "{p.color-bg-fill-transparent-secondary}",
+      "computedProp": "background-color",
+      "expected": "rgba(0, 0, 0, 0.06)",
+      "observed": "rgba(254, 209, 215, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.color-bg-fill-critical-secondary"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "critical.none|root|color",
+      "combo": "critical.none",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text-secondary}",
+      "computedProp": "color",
+      "expected": "rgba(97, 97, 97, 1)",
+      "observed": "rgba(142, 11, 33, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.color-bg-fill-critical-active",
+        "p.color-bg-fill-critical-selected",
+        "p.color-border-critical-secondary",
+        "p.color-text-critical"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "critical.none|label|font-size",
+      "combo": "critical.none",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{p.text-body-sm-font-size}",
+      "computedProp": "font-size",
+      "expected": "",
+      "observed": "",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "critical.none|label|font-weight",
+      "combo": "critical.none",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{p.text-body-sm-font-weight}",
+      "computedProp": "font-weight",
+      "expected": "",
+      "observed": "",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "critical.none|label|line-height",
+      "combo": "critical.none",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{p.text-body-sm-font-line-height}",
+      "computedProp": "line-height",
+      "expected": "",
+      "observed": "",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "critical.none|label|letter-spacing",
+      "combo": "critical.none",
+      "part": "label",
+      "channel": "letter-spacing",
+      "ref": "{p.text-body-sm-font-letter-spacing}",
+      "computedProp": "letter-spacing",
+      "expected": "",
+      "observed": "",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "critical.incomplete|root|background-color",
+      "combo": "critical.incomplete",
+      "part": "root",
+      "channel": "background-color",
+      "ref": "{p.color-bg-fill-transparent-secondary}",
+      "computedProp": "background-color",
+      "expected": "rgba(0, 0, 0, 0.06)",
+      "observed": "rgba(254, 209, 215, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.color-bg-fill-critical-secondary"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "critical.incomplete|root|color",
+      "combo": "critical.incomplete",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text-secondary}",
+      "computedProp": "color",
+      "expected": "rgba(97, 97, 97, 1)",
+      "observed": "rgba(142, 11, 33, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.color-bg-fill-critical-active",
+        "p.color-bg-fill-critical-selected",
+        "p.color-border-critical-secondary",
+        "p.color-text-critical"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "critical.incomplete|label|font-size",
+      "combo": "critical.incomplete",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{p.text-body-sm-font-size}",
+      "computedProp": "font-size",
+      "expected": "12px",
+      "observed": "13px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.font-size-325"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "critical.incomplete|label|font-weight",
+      "combo": "critical.incomplete",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{p.text-body-sm-font-weight}",
+      "computedProp": "font-weight",
+      "expected": "450",
+      "observed": "550",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.font-weight-medium"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "critical.incomplete|label|line-height",
+      "combo": "critical.incomplete",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{p.text-body-sm-font-line-height}",
+      "computedProp": "line-height",
+      "expected": "16px",
+      "observed": "20px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.border-radius-500",
+        "p.font-line-height-500",
+        "p.font-size-500",
+        "p.height-500",
+        "p.space-500",
+        "p.width-500"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "critical.partiallyComplete|root|background-color",
+      "combo": "critical.partiallyComplete",
+      "part": "root",
+      "channel": "background-color",
+      "ref": "{p.color-bg-fill-transparent-secondary}",
+      "computedProp": "background-color",
+      "expected": "rgba(0, 0, 0, 0.06)",
+      "observed": "rgba(254, 209, 215, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.color-bg-fill-critical-secondary"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "critical.partiallyComplete|root|color",
+      "combo": "critical.partiallyComplete",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text-secondary}",
+      "computedProp": "color",
+      "expected": "rgba(97, 97, 97, 1)",
+      "observed": "rgba(142, 11, 33, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.color-bg-fill-critical-active",
+        "p.color-bg-fill-critical-selected",
+        "p.color-border-critical-secondary",
+        "p.color-text-critical"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "critical.partiallyComplete|label|font-size",
+      "combo": "critical.partiallyComplete",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{p.text-body-sm-font-size}",
+      "computedProp": "font-size",
+      "expected": "12px",
+      "observed": "13px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.font-size-325"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "critical.partiallyComplete|label|font-weight",
+      "combo": "critical.partiallyComplete",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{p.text-body-sm-font-weight}",
+      "computedProp": "font-weight",
+      "expected": "450",
+      "observed": "550",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.font-weight-medium"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "critical.partiallyComplete|label|line-height",
+      "combo": "critical.partiallyComplete",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{p.text-body-sm-font-line-height}",
+      "computedProp": "line-height",
+      "expected": "16px",
+      "observed": "20px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.border-radius-500",
+        "p.font-line-height-500",
+        "p.font-size-500",
+        "p.height-500",
+        "p.space-500",
+        "p.width-500"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "critical.complete|root|background-color",
+      "combo": "critical.complete",
+      "part": "root",
+      "channel": "background-color",
+      "ref": "{p.color-bg-fill-transparent-secondary}",
+      "computedProp": "background-color",
+      "expected": "rgba(0, 0, 0, 0.06)",
+      "observed": "rgba(254, 209, 215, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.color-bg-fill-critical-secondary"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "critical.complete|root|color",
+      "combo": "critical.complete",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text-secondary}",
+      "computedProp": "color",
+      "expected": "rgba(97, 97, 97, 1)",
+      "observed": "rgba(142, 11, 33, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.color-bg-fill-critical-active",
+        "p.color-bg-fill-critical-selected",
+        "p.color-border-critical-secondary",
+        "p.color-text-critical"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "critical.complete|label|font-size",
+      "combo": "critical.complete",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{p.text-body-sm-font-size}",
+      "computedProp": "font-size",
+      "expected": "12px",
+      "observed": "13px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.font-size-325"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "critical.complete|label|font-weight",
+      "combo": "critical.complete",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{p.text-body-sm-font-weight}",
+      "computedProp": "font-weight",
+      "expected": "450",
+      "observed": "550",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.font-weight-medium"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "critical.complete|label|line-height",
+      "combo": "critical.complete",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{p.text-body-sm-font-line-height}",
+      "computedProp": "line-height",
+      "expected": "16px",
+      "observed": "20px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.border-radius-500",
+        "p.font-line-height-500",
+        "p.font-size-500",
+        "p.height-500",
+        "p.space-500",
+        "p.width-500"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "attention.none|root|background-color",
+      "combo": "attention.none",
+      "part": "root",
+      "channel": "background-color",
+      "ref": "{p.color-bg-fill-transparent-secondary}",
+      "computedProp": "background-color",
+      "expected": "rgba(0, 0, 0, 0.06)",
+      "observed": "rgba(255, 235, 120, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.color-bg-fill-caution-secondary",
+        "p.color-border-caution"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "attention.none|root|color",
+      "combo": "attention.none",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text-secondary}",
+      "computedProp": "color",
+      "expected": "rgba(97, 97, 97, 1)",
+      "observed": "rgba(79, 71, 0, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.color-text-caution"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "attention.none|label|font-size",
+      "combo": "attention.none",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{p.text-body-sm-font-size}",
+      "computedProp": "font-size",
+      "expected": "",
+      "observed": "",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "attention.none|label|font-weight",
+      "combo": "attention.none",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{p.text-body-sm-font-weight}",
+      "computedProp": "font-weight",
+      "expected": "",
+      "observed": "",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "attention.none|label|line-height",
+      "combo": "attention.none",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{p.text-body-sm-font-line-height}",
+      "computedProp": "line-height",
+      "expected": "",
+      "observed": "",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "attention.none|label|letter-spacing",
+      "combo": "attention.none",
+      "part": "label",
+      "channel": "letter-spacing",
+      "ref": "{p.text-body-sm-font-letter-spacing}",
+      "computedProp": "letter-spacing",
+      "expected": "",
+      "observed": "",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "attention.incomplete|root|background-color",
+      "combo": "attention.incomplete",
+      "part": "root",
+      "channel": "background-color",
+      "ref": "{p.color-bg-fill-transparent-secondary}",
+      "computedProp": "background-color",
+      "expected": "rgba(0, 0, 0, 0.06)",
+      "observed": "rgba(255, 235, 120, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.color-bg-fill-caution-secondary",
+        "p.color-border-caution"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "attention.incomplete|root|color",
+      "combo": "attention.incomplete",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text-secondary}",
+      "computedProp": "color",
+      "expected": "rgba(97, 97, 97, 1)",
+      "observed": "rgba(79, 71, 0, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.color-text-caution"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "attention.incomplete|label|font-size",
+      "combo": "attention.incomplete",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{p.text-body-sm-font-size}",
+      "computedProp": "font-size",
+      "expected": "12px",
+      "observed": "13px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.font-size-325"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "attention.incomplete|label|font-weight",
+      "combo": "attention.incomplete",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{p.text-body-sm-font-weight}",
+      "computedProp": "font-weight",
+      "expected": "450",
+      "observed": "550",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.font-weight-medium"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "attention.incomplete|label|line-height",
+      "combo": "attention.incomplete",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{p.text-body-sm-font-line-height}",
+      "computedProp": "line-height",
+      "expected": "16px",
+      "observed": "20px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.border-radius-500",
+        "p.font-line-height-500",
+        "p.font-size-500",
+        "p.height-500",
+        "p.space-500",
+        "p.width-500"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "attention.partiallyComplete|root|background-color",
+      "combo": "attention.partiallyComplete",
+      "part": "root",
+      "channel": "background-color",
+      "ref": "{p.color-bg-fill-transparent-secondary}",
+      "computedProp": "background-color",
+      "expected": "rgba(0, 0, 0, 0.06)",
+      "observed": "rgba(255, 235, 120, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.color-bg-fill-caution-secondary",
+        "p.color-border-caution"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "attention.partiallyComplete|root|color",
+      "combo": "attention.partiallyComplete",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text-secondary}",
+      "computedProp": "color",
+      "expected": "rgba(97, 97, 97, 1)",
+      "observed": "rgba(79, 71, 0, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.color-text-caution"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "attention.partiallyComplete|label|font-size",
+      "combo": "attention.partiallyComplete",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{p.text-body-sm-font-size}",
+      "computedProp": "font-size",
+      "expected": "12px",
+      "observed": "13px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.font-size-325"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "attention.partiallyComplete|label|font-weight",
+      "combo": "attention.partiallyComplete",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{p.text-body-sm-font-weight}",
+      "computedProp": "font-weight",
+      "expected": "450",
+      "observed": "550",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.font-weight-medium"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "attention.partiallyComplete|label|line-height",
+      "combo": "attention.partiallyComplete",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{p.text-body-sm-font-line-height}",
+      "computedProp": "line-height",
+      "expected": "16px",
+      "observed": "20px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.border-radius-500",
+        "p.font-line-height-500",
+        "p.font-size-500",
+        "p.height-500",
+        "p.space-500",
+        "p.width-500"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "attention.complete|root|background-color",
+      "combo": "attention.complete",
+      "part": "root",
+      "channel": "background-color",
+      "ref": "{p.color-bg-fill-transparent-secondary}",
+      "computedProp": "background-color",
+      "expected": "rgba(0, 0, 0, 0.06)",
+      "observed": "rgba(255, 235, 120, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.color-bg-fill-caution-secondary",
+        "p.color-border-caution"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "attention.complete|root|color",
+      "combo": "attention.complete",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text-secondary}",
+      "computedProp": "color",
+      "expected": "rgba(97, 97, 97, 1)",
+      "observed": "rgba(79, 71, 0, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.color-text-caution"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "attention.complete|label|font-size",
+      "combo": "attention.complete",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{p.text-body-sm-font-size}",
+      "computedProp": "font-size",
+      "expected": "12px",
+      "observed": "13px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.font-size-325"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "attention.complete|label|font-weight",
+      "combo": "attention.complete",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{p.text-body-sm-font-weight}",
+      "computedProp": "font-weight",
+      "expected": "450",
+      "observed": "550",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.font-weight-medium"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "attention.complete|label|line-height",
+      "combo": "attention.complete",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{p.text-body-sm-font-line-height}",
+      "computedProp": "line-height",
+      "expected": "16px",
+      "observed": "20px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.border-radius-500",
+        "p.font-line-height-500",
+        "p.font-size-500",
+        "p.height-500",
+        "p.space-500",
+        "p.width-500"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "new.none|root|font-weight",
+      "combo": "new.none",
+      "part": "root",
+      "channel": "font-weight",
+      "ref": "{p.font-weight-medium}",
+      "computedProp": "font-weight",
+      "expected": "550",
+      "observed": "700",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.font-weight-bold"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "new.none|label|font-size",
+      "combo": "new.none",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{p.text-body-sm-font-size}",
+      "computedProp": "font-size",
+      "expected": "",
+      "observed": "",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "new.none|label|font-weight",
+      "combo": "new.none",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{p.text-body-sm-font-weight}",
+      "computedProp": "font-weight",
+      "expected": "",
+      "observed": "",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "new.none|label|line-height",
+      "combo": "new.none",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{p.text-body-sm-font-line-height}",
+      "computedProp": "line-height",
+      "expected": "",
+      "observed": "",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "new.none|label|letter-spacing",
+      "combo": "new.none",
+      "part": "label",
+      "channel": "letter-spacing",
+      "ref": "{p.text-body-sm-font-letter-spacing}",
+      "computedProp": "letter-spacing",
+      "expected": "",
+      "observed": "",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "new.incomplete|root|font-weight",
+      "combo": "new.incomplete",
+      "part": "root",
+      "channel": "font-weight",
+      "ref": "{p.font-weight-medium}",
+      "computedProp": "font-weight",
+      "expected": "550",
+      "observed": "700",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.font-weight-bold"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "new.incomplete|label|font-size",
+      "combo": "new.incomplete",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{p.text-body-sm-font-size}",
+      "computedProp": "font-size",
+      "expected": "12px",
+      "observed": "13px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.font-size-325"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "new.incomplete|label|font-weight",
+      "combo": "new.incomplete",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{p.text-body-sm-font-weight}",
+      "computedProp": "font-weight",
+      "expected": "450",
+      "observed": "700",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.font-weight-bold"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "new.incomplete|label|line-height",
+      "combo": "new.incomplete",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{p.text-body-sm-font-line-height}",
+      "computedProp": "line-height",
+      "expected": "16px",
+      "observed": "20px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.border-radius-500",
+        "p.font-line-height-500",
+        "p.font-size-500",
+        "p.height-500",
+        "p.space-500",
+        "p.width-500"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "new.partiallyComplete|root|font-weight",
+      "combo": "new.partiallyComplete",
+      "part": "root",
+      "channel": "font-weight",
+      "ref": "{p.font-weight-medium}",
+      "computedProp": "font-weight",
+      "expected": "550",
+      "observed": "700",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.font-weight-bold"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "new.partiallyComplete|label|font-size",
+      "combo": "new.partiallyComplete",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{p.text-body-sm-font-size}",
+      "computedProp": "font-size",
+      "expected": "12px",
+      "observed": "13px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.font-size-325"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "new.partiallyComplete|label|font-weight",
+      "combo": "new.partiallyComplete",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{p.text-body-sm-font-weight}",
+      "computedProp": "font-weight",
+      "expected": "450",
+      "observed": "700",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.font-weight-bold"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "new.partiallyComplete|label|line-height",
+      "combo": "new.partiallyComplete",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{p.text-body-sm-font-line-height}",
+      "computedProp": "line-height",
+      "expected": "16px",
+      "observed": "20px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.border-radius-500",
+        "p.font-line-height-500",
+        "p.font-size-500",
+        "p.height-500",
+        "p.space-500",
+        "p.width-500"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "new.complete|root|font-weight",
+      "combo": "new.complete",
+      "part": "root",
+      "channel": "font-weight",
+      "ref": "{p.font-weight-medium}",
+      "computedProp": "font-weight",
+      "expected": "550",
+      "observed": "700",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.font-weight-bold"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "new.complete|label|font-size",
+      "combo": "new.complete",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{p.text-body-sm-font-size}",
+      "computedProp": "font-size",
+      "expected": "12px",
+      "observed": "13px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.font-size-325"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "new.complete|label|font-weight",
+      "combo": "new.complete",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{p.text-body-sm-font-weight}",
+      "computedProp": "font-weight",
+      "expected": "450",
+      "observed": "700",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.font-weight-bold"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "new.complete|label|line-height",
+      "combo": "new.complete",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{p.text-body-sm-font-line-height}",
+      "computedProp": "line-height",
+      "expected": "16px",
+      "observed": "20px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.border-radius-500",
+        "p.font-line-height-500",
+        "p.font-size-500",
+        "p.height-500",
+        "p.space-500",
+        "p.width-500"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "magic.none|root|background-color",
+      "combo": "magic.none",
+      "part": "root",
+      "channel": "background-color",
+      "ref": "{p.color-bg-fill-transparent-secondary}",
+      "computedProp": "background-color",
+      "expected": "rgba(0, 0, 0, 0.06)",
+      "observed": "rgba(233, 229, 255, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.color-bg-fill-magic-secondary",
+        "p.color-bg-surface-magic-active"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "magic.none|root|color",
+      "combo": "magic.none",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text-secondary}",
+      "computedProp": "color",
+      "expected": "rgba(97, 97, 97, 1)",
+      "observed": "rgba(87, 0, 209, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.color-text-magic"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "magic.none|label|font-size",
+      "combo": "magic.none",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{p.text-body-sm-font-size}",
+      "computedProp": "font-size",
+      "expected": "",
+      "observed": "",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "magic.none|label|font-weight",
+      "combo": "magic.none",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{p.text-body-sm-font-weight}",
+      "computedProp": "font-weight",
+      "expected": "",
+      "observed": "",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "magic.none|label|line-height",
+      "combo": "magic.none",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{p.text-body-sm-font-line-height}",
+      "computedProp": "line-height",
+      "expected": "",
+      "observed": "",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "magic.none|label|letter-spacing",
+      "combo": "magic.none",
+      "part": "label",
+      "channel": "letter-spacing",
+      "ref": "{p.text-body-sm-font-letter-spacing}",
+      "computedProp": "letter-spacing",
+      "expected": "",
+      "observed": "",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "magic.incomplete|root|background-color",
+      "combo": "magic.incomplete",
+      "part": "root",
+      "channel": "background-color",
+      "ref": "{p.color-bg-fill-transparent-secondary}",
+      "computedProp": "background-color",
+      "expected": "rgba(0, 0, 0, 0.06)",
+      "observed": "rgba(233, 229, 255, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.color-bg-fill-magic-secondary",
+        "p.color-bg-surface-magic-active"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "magic.incomplete|root|color",
+      "combo": "magic.incomplete",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text-secondary}",
+      "computedProp": "color",
+      "expected": "rgba(97, 97, 97, 1)",
+      "observed": "rgba(87, 0, 209, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.color-text-magic"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "magic.incomplete|label|font-size",
+      "combo": "magic.incomplete",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{p.text-body-sm-font-size}",
+      "computedProp": "font-size",
+      "expected": "12px",
+      "observed": "13px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.font-size-325"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "magic.incomplete|label|font-weight",
+      "combo": "magic.incomplete",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{p.text-body-sm-font-weight}",
+      "computedProp": "font-weight",
+      "expected": "450",
+      "observed": "550",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.font-weight-medium"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "magic.incomplete|label|line-height",
+      "combo": "magic.incomplete",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{p.text-body-sm-font-line-height}",
+      "computedProp": "line-height",
+      "expected": "16px",
+      "observed": "20px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.border-radius-500",
+        "p.font-line-height-500",
+        "p.font-size-500",
+        "p.height-500",
+        "p.space-500",
+        "p.width-500"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "magic.partiallyComplete|root|background-color",
+      "combo": "magic.partiallyComplete",
+      "part": "root",
+      "channel": "background-color",
+      "ref": "{p.color-bg-fill-transparent-secondary}",
+      "computedProp": "background-color",
+      "expected": "rgba(0, 0, 0, 0.06)",
+      "observed": "rgba(233, 229, 255, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.color-bg-fill-magic-secondary",
+        "p.color-bg-surface-magic-active"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "magic.partiallyComplete|root|color",
+      "combo": "magic.partiallyComplete",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text-secondary}",
+      "computedProp": "color",
+      "expected": "rgba(97, 97, 97, 1)",
+      "observed": "rgba(87, 0, 209, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.color-text-magic"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "magic.partiallyComplete|label|font-size",
+      "combo": "magic.partiallyComplete",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{p.text-body-sm-font-size}",
+      "computedProp": "font-size",
+      "expected": "12px",
+      "observed": "13px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.font-size-325"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "magic.partiallyComplete|label|font-weight",
+      "combo": "magic.partiallyComplete",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{p.text-body-sm-font-weight}",
+      "computedProp": "font-weight",
+      "expected": "450",
+      "observed": "550",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.font-weight-medium"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "magic.partiallyComplete|label|line-height",
+      "combo": "magic.partiallyComplete",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{p.text-body-sm-font-line-height}",
+      "computedProp": "line-height",
+      "expected": "16px",
+      "observed": "20px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.border-radius-500",
+        "p.font-line-height-500",
+        "p.font-size-500",
+        "p.height-500",
+        "p.space-500",
+        "p.width-500"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "magic.complete|root|background-color",
+      "combo": "magic.complete",
+      "part": "root",
+      "channel": "background-color",
+      "ref": "{p.color-bg-fill-transparent-secondary}",
+      "computedProp": "background-color",
+      "expected": "rgba(0, 0, 0, 0.06)",
+      "observed": "rgba(233, 229, 255, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.color-bg-fill-magic-secondary",
+        "p.color-bg-surface-magic-active"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "magic.complete|root|color",
+      "combo": "magic.complete",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text-secondary}",
+      "computedProp": "color",
+      "expected": "rgba(97, 97, 97, 1)",
+      "observed": "rgba(87, 0, 209, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.color-text-magic"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "magic.complete|label|font-size",
+      "combo": "magic.complete",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{p.text-body-sm-font-size}",
+      "computedProp": "font-size",
+      "expected": "12px",
+      "observed": "13px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.font-size-325"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "magic.complete|label|font-weight",
+      "combo": "magic.complete",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{p.text-body-sm-font-weight}",
+      "computedProp": "font-weight",
+      "expected": "450",
+      "observed": "550",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.font-weight-medium"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "magic.complete|label|line-height",
+      "combo": "magic.complete",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{p.text-body-sm-font-line-height}",
+      "computedProp": "line-height",
+      "expected": "16px",
+      "observed": "20px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.border-radius-500",
+        "p.font-line-height-500",
+        "p.font-size-500",
+        "p.height-500",
+        "p.space-500",
+        "p.width-500"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "info-strong.none|root|background-color",
+      "combo": "info-strong.none",
+      "part": "root",
+      "channel": "background-color",
+      "ref": "{p.color-bg-fill-transparent-secondary}",
+      "computedProp": "background-color",
+      "expected": "rgba(0, 0, 0, 0.06)",
+      "observed": "rgba(145, 208, 255, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.color-bg-fill-info"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "info-strong.none|root|color",
+      "combo": "info-strong.none",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text-secondary}",
+      "computedProp": "color",
+      "expected": "rgba(97, 97, 97, 1)",
+      "observed": "rgba(0, 33, 51, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.color-avatar-four-text-on-bg-fill",
+        "p.color-text-info-active",
+        "p.color-text-info-on-bg-fill"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "info-strong.none|label|font-size",
+      "combo": "info-strong.none",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{p.text-body-sm-font-size}",
+      "computedProp": "font-size",
+      "expected": "",
+      "observed": "",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "info-strong.none|label|font-weight",
+      "combo": "info-strong.none",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{p.text-body-sm-font-weight}",
+      "computedProp": "font-weight",
+      "expected": "",
+      "observed": "",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "info-strong.none|label|line-height",
+      "combo": "info-strong.none",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{p.text-body-sm-font-line-height}",
+      "computedProp": "line-height",
+      "expected": "",
+      "observed": "",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "info-strong.none|label|letter-spacing",
+      "combo": "info-strong.none",
+      "part": "label",
+      "channel": "letter-spacing",
+      "ref": "{p.text-body-sm-font-letter-spacing}",
+      "computedProp": "letter-spacing",
+      "expected": "",
+      "observed": "",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "info-strong.incomplete|root|background-color",
+      "combo": "info-strong.incomplete",
+      "part": "root",
+      "channel": "background-color",
+      "ref": "{p.color-bg-fill-transparent-secondary}",
+      "computedProp": "background-color",
+      "expected": "rgba(0, 0, 0, 0.06)",
+      "observed": "rgba(145, 208, 255, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.color-bg-fill-info"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "info-strong.incomplete|root|color",
+      "combo": "info-strong.incomplete",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text-secondary}",
+      "computedProp": "color",
+      "expected": "rgba(97, 97, 97, 1)",
+      "observed": "rgba(0, 33, 51, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.color-avatar-four-text-on-bg-fill",
+        "p.color-text-info-active",
+        "p.color-text-info-on-bg-fill"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "info-strong.incomplete|label|font-size",
+      "combo": "info-strong.incomplete",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{p.text-body-sm-font-size}",
+      "computedProp": "font-size",
+      "expected": "12px",
+      "observed": "13px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.font-size-325"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "info-strong.incomplete|label|font-weight",
+      "combo": "info-strong.incomplete",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{p.text-body-sm-font-weight}",
+      "computedProp": "font-weight",
+      "expected": "450",
+      "observed": "550",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.font-weight-medium"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "info-strong.incomplete|label|line-height",
+      "combo": "info-strong.incomplete",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{p.text-body-sm-font-line-height}",
+      "computedProp": "line-height",
+      "expected": "16px",
+      "observed": "20px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.border-radius-500",
+        "p.font-line-height-500",
+        "p.font-size-500",
+        "p.height-500",
+        "p.space-500",
+        "p.width-500"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "info-strong.partiallyComplete|root|background-color",
+      "combo": "info-strong.partiallyComplete",
+      "part": "root",
+      "channel": "background-color",
+      "ref": "{p.color-bg-fill-transparent-secondary}",
+      "computedProp": "background-color",
+      "expected": "rgba(0, 0, 0, 0.06)",
+      "observed": "rgba(145, 208, 255, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.color-bg-fill-info"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "info-strong.partiallyComplete|root|color",
+      "combo": "info-strong.partiallyComplete",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text-secondary}",
+      "computedProp": "color",
+      "expected": "rgba(97, 97, 97, 1)",
+      "observed": "rgba(0, 33, 51, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.color-avatar-four-text-on-bg-fill",
+        "p.color-text-info-active",
+        "p.color-text-info-on-bg-fill"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "info-strong.partiallyComplete|label|font-size",
+      "combo": "info-strong.partiallyComplete",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{p.text-body-sm-font-size}",
+      "computedProp": "font-size",
+      "expected": "12px",
+      "observed": "13px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.font-size-325"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "info-strong.partiallyComplete|label|font-weight",
+      "combo": "info-strong.partiallyComplete",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{p.text-body-sm-font-weight}",
+      "computedProp": "font-weight",
+      "expected": "450",
+      "observed": "550",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.font-weight-medium"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "info-strong.partiallyComplete|label|line-height",
+      "combo": "info-strong.partiallyComplete",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{p.text-body-sm-font-line-height}",
+      "computedProp": "line-height",
+      "expected": "16px",
+      "observed": "20px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.border-radius-500",
+        "p.font-line-height-500",
+        "p.font-size-500",
+        "p.height-500",
+        "p.space-500",
+        "p.width-500"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "info-strong.complete|root|background-color",
+      "combo": "info-strong.complete",
+      "part": "root",
+      "channel": "background-color",
+      "ref": "{p.color-bg-fill-transparent-secondary}",
+      "computedProp": "background-color",
+      "expected": "rgba(0, 0, 0, 0.06)",
+      "observed": "rgba(145, 208, 255, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.color-bg-fill-info"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "info-strong.complete|root|color",
+      "combo": "info-strong.complete",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text-secondary}",
+      "computedProp": "color",
+      "expected": "rgba(97, 97, 97, 1)",
+      "observed": "rgba(0, 33, 51, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.color-avatar-four-text-on-bg-fill",
+        "p.color-text-info-active",
+        "p.color-text-info-on-bg-fill"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "info-strong.complete|label|font-size",
+      "combo": "info-strong.complete",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{p.text-body-sm-font-size}",
+      "computedProp": "font-size",
+      "expected": "12px",
+      "observed": "13px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.font-size-325"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "info-strong.complete|label|font-weight",
+      "combo": "info-strong.complete",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{p.text-body-sm-font-weight}",
+      "computedProp": "font-weight",
+      "expected": "450",
+      "observed": "550",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.font-weight-medium"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "info-strong.complete|label|line-height",
+      "combo": "info-strong.complete",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{p.text-body-sm-font-line-height}",
+      "computedProp": "line-height",
+      "expected": "16px",
+      "observed": "20px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.border-radius-500",
+        "p.font-line-height-500",
+        "p.font-size-500",
+        "p.height-500",
+        "p.space-500",
+        "p.width-500"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "success-strong.none|root|background-color",
+      "combo": "success-strong.none",
+      "part": "root",
+      "channel": "background-color",
+      "ref": "{p.color-bg-fill-transparent-secondary}",
+      "computedProp": "background-color",
+      "expected": "rgba(0, 0, 0, 0.06)",
+      "observed": "rgba(4, 123, 93, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.color-bg-fill-success",
+        "p.color-icon-success",
+        "p.color-text-success-secondary"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "success-strong.none|root|color",
+      "combo": "success-strong.none",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text-secondary}",
+      "computedProp": "color",
+      "expected": "rgba(97, 97, 97, 1)",
+      "observed": "rgba(250, 255, 251, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.color-text-success-on-bg-fill"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "success-strong.none|label|font-size",
+      "combo": "success-strong.none",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{p.text-body-sm-font-size}",
+      "computedProp": "font-size",
+      "expected": "",
+      "observed": "",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "success-strong.none|label|font-weight",
+      "combo": "success-strong.none",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{p.text-body-sm-font-weight}",
+      "computedProp": "font-weight",
+      "expected": "",
+      "observed": "",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "success-strong.none|label|line-height",
+      "combo": "success-strong.none",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{p.text-body-sm-font-line-height}",
+      "computedProp": "line-height",
+      "expected": "",
+      "observed": "",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "success-strong.none|label|letter-spacing",
+      "combo": "success-strong.none",
+      "part": "label",
+      "channel": "letter-spacing",
+      "ref": "{p.text-body-sm-font-letter-spacing}",
+      "computedProp": "letter-spacing",
+      "expected": "",
+      "observed": "",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "success-strong.incomplete|root|background-color",
+      "combo": "success-strong.incomplete",
+      "part": "root",
+      "channel": "background-color",
+      "ref": "{p.color-bg-fill-transparent-secondary}",
+      "computedProp": "background-color",
+      "expected": "rgba(0, 0, 0, 0.06)",
+      "observed": "rgba(4, 123, 93, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.color-bg-fill-success",
+        "p.color-icon-success",
+        "p.color-text-success-secondary"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "success-strong.incomplete|root|color",
+      "combo": "success-strong.incomplete",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text-secondary}",
+      "computedProp": "color",
+      "expected": "rgba(97, 97, 97, 1)",
+      "observed": "rgba(250, 255, 251, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.color-text-success-on-bg-fill"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "success-strong.incomplete|label|font-size",
+      "combo": "success-strong.incomplete",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{p.text-body-sm-font-size}",
+      "computedProp": "font-size",
+      "expected": "12px",
+      "observed": "13px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.font-size-325"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "success-strong.incomplete|label|font-weight",
+      "combo": "success-strong.incomplete",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{p.text-body-sm-font-weight}",
+      "computedProp": "font-weight",
+      "expected": "450",
+      "observed": "550",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.font-weight-medium"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "success-strong.incomplete|label|line-height",
+      "combo": "success-strong.incomplete",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{p.text-body-sm-font-line-height}",
+      "computedProp": "line-height",
+      "expected": "16px",
+      "observed": "20px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.border-radius-500",
+        "p.font-line-height-500",
+        "p.font-size-500",
+        "p.height-500",
+        "p.space-500",
+        "p.width-500"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "success-strong.partiallyComplete|root|background-color",
+      "combo": "success-strong.partiallyComplete",
+      "part": "root",
+      "channel": "background-color",
+      "ref": "{p.color-bg-fill-transparent-secondary}",
+      "computedProp": "background-color",
+      "expected": "rgba(0, 0, 0, 0.06)",
+      "observed": "rgba(4, 123, 93, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.color-bg-fill-success",
+        "p.color-icon-success",
+        "p.color-text-success-secondary"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "success-strong.partiallyComplete|root|color",
+      "combo": "success-strong.partiallyComplete",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text-secondary}",
+      "computedProp": "color",
+      "expected": "rgba(97, 97, 97, 1)",
+      "observed": "rgba(250, 255, 251, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.color-text-success-on-bg-fill"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "success-strong.partiallyComplete|label|font-size",
+      "combo": "success-strong.partiallyComplete",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{p.text-body-sm-font-size}",
+      "computedProp": "font-size",
+      "expected": "12px",
+      "observed": "13px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.font-size-325"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "success-strong.partiallyComplete|label|font-weight",
+      "combo": "success-strong.partiallyComplete",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{p.text-body-sm-font-weight}",
+      "computedProp": "font-weight",
+      "expected": "450",
+      "observed": "550",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.font-weight-medium"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "success-strong.partiallyComplete|label|line-height",
+      "combo": "success-strong.partiallyComplete",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{p.text-body-sm-font-line-height}",
+      "computedProp": "line-height",
+      "expected": "16px",
+      "observed": "20px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.border-radius-500",
+        "p.font-line-height-500",
+        "p.font-size-500",
+        "p.height-500",
+        "p.space-500",
+        "p.width-500"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "success-strong.complete|root|background-color",
+      "combo": "success-strong.complete",
+      "part": "root",
+      "channel": "background-color",
+      "ref": "{p.color-bg-fill-transparent-secondary}",
+      "computedProp": "background-color",
+      "expected": "rgba(0, 0, 0, 0.06)",
+      "observed": "rgba(4, 123, 93, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.color-bg-fill-success",
+        "p.color-icon-success",
+        "p.color-text-success-secondary"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "success-strong.complete|root|color",
+      "combo": "success-strong.complete",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text-secondary}",
+      "computedProp": "color",
+      "expected": "rgba(97, 97, 97, 1)",
+      "observed": "rgba(250, 255, 251, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.color-text-success-on-bg-fill"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "success-strong.complete|label|font-size",
+      "combo": "success-strong.complete",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{p.text-body-sm-font-size}",
+      "computedProp": "font-size",
+      "expected": "12px",
+      "observed": "13px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.font-size-325"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "success-strong.complete|label|font-weight",
+      "combo": "success-strong.complete",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{p.text-body-sm-font-weight}",
+      "computedProp": "font-weight",
+      "expected": "450",
+      "observed": "550",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.font-weight-medium"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "success-strong.complete|label|line-height",
+      "combo": "success-strong.complete",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{p.text-body-sm-font-line-height}",
+      "computedProp": "line-height",
+      "expected": "16px",
+      "observed": "20px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.border-radius-500",
+        "p.font-line-height-500",
+        "p.font-size-500",
+        "p.height-500",
+        "p.space-500",
+        "p.width-500"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "warning-strong.none|root|background-color",
+      "combo": "warning-strong.none",
+      "part": "root",
+      "channel": "background-color",
+      "ref": "{p.color-bg-fill-transparent-secondary}",
+      "computedProp": "background-color",
+      "expected": "rgba(0, 0, 0, 0.06)",
+      "observed": "rgba(255, 184, 0, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.color-bg-fill-warning"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "warning-strong.none|root|color",
+      "combo": "warning-strong.none",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text-secondary}",
+      "computedProp": "color",
+      "expected": "rgba(97, 97, 97, 1)",
+      "observed": "rgba(37, 26, 0, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.color-text-warning-active",
+        "p.color-text-warning-on-bg-fill"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "warning-strong.none|label|font-size",
+      "combo": "warning-strong.none",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{p.text-body-sm-font-size}",
+      "computedProp": "font-size",
+      "expected": "",
+      "observed": "",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "warning-strong.none|label|font-weight",
+      "combo": "warning-strong.none",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{p.text-body-sm-font-weight}",
+      "computedProp": "font-weight",
+      "expected": "",
+      "observed": "",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "warning-strong.none|label|line-height",
+      "combo": "warning-strong.none",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{p.text-body-sm-font-line-height}",
+      "computedProp": "line-height",
+      "expected": "",
+      "observed": "",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "warning-strong.none|label|letter-spacing",
+      "combo": "warning-strong.none",
+      "part": "label",
+      "channel": "letter-spacing",
+      "ref": "{p.text-body-sm-font-letter-spacing}",
+      "computedProp": "letter-spacing",
+      "expected": "",
+      "observed": "",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "warning-strong.incomplete|root|background-color",
+      "combo": "warning-strong.incomplete",
+      "part": "root",
+      "channel": "background-color",
+      "ref": "{p.color-bg-fill-transparent-secondary}",
+      "computedProp": "background-color",
+      "expected": "rgba(0, 0, 0, 0.06)",
+      "observed": "rgba(255, 184, 0, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.color-bg-fill-warning"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "warning-strong.incomplete|root|color",
+      "combo": "warning-strong.incomplete",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text-secondary}",
+      "computedProp": "color",
+      "expected": "rgba(97, 97, 97, 1)",
+      "observed": "rgba(37, 26, 0, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.color-text-warning-active",
+        "p.color-text-warning-on-bg-fill"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "warning-strong.incomplete|label|font-size",
+      "combo": "warning-strong.incomplete",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{p.text-body-sm-font-size}",
+      "computedProp": "font-size",
+      "expected": "12px",
+      "observed": "13px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.font-size-325"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "warning-strong.incomplete|label|font-weight",
+      "combo": "warning-strong.incomplete",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{p.text-body-sm-font-weight}",
+      "computedProp": "font-weight",
+      "expected": "450",
+      "observed": "550",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.font-weight-medium"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "warning-strong.incomplete|label|line-height",
+      "combo": "warning-strong.incomplete",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{p.text-body-sm-font-line-height}",
+      "computedProp": "line-height",
+      "expected": "16px",
+      "observed": "20px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.border-radius-500",
+        "p.font-line-height-500",
+        "p.font-size-500",
+        "p.height-500",
+        "p.space-500",
+        "p.width-500"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "warning-strong.partiallyComplete|root|background-color",
+      "combo": "warning-strong.partiallyComplete",
+      "part": "root",
+      "channel": "background-color",
+      "ref": "{p.color-bg-fill-transparent-secondary}",
+      "computedProp": "background-color",
+      "expected": "rgba(0, 0, 0, 0.06)",
+      "observed": "rgba(255, 184, 0, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.color-bg-fill-warning"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "warning-strong.partiallyComplete|root|color",
+      "combo": "warning-strong.partiallyComplete",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text-secondary}",
+      "computedProp": "color",
+      "expected": "rgba(97, 97, 97, 1)",
+      "observed": "rgba(37, 26, 0, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.color-text-warning-active",
+        "p.color-text-warning-on-bg-fill"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "warning-strong.partiallyComplete|label|font-size",
+      "combo": "warning-strong.partiallyComplete",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{p.text-body-sm-font-size}",
+      "computedProp": "font-size",
+      "expected": "12px",
+      "observed": "13px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.font-size-325"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "warning-strong.partiallyComplete|label|font-weight",
+      "combo": "warning-strong.partiallyComplete",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{p.text-body-sm-font-weight}",
+      "computedProp": "font-weight",
+      "expected": "450",
+      "observed": "550",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.font-weight-medium"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "warning-strong.partiallyComplete|label|line-height",
+      "combo": "warning-strong.partiallyComplete",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{p.text-body-sm-font-line-height}",
+      "computedProp": "line-height",
+      "expected": "16px",
+      "observed": "20px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.border-radius-500",
+        "p.font-line-height-500",
+        "p.font-size-500",
+        "p.height-500",
+        "p.space-500",
+        "p.width-500"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "warning-strong.complete|root|background-color",
+      "combo": "warning-strong.complete",
+      "part": "root",
+      "channel": "background-color",
+      "ref": "{p.color-bg-fill-transparent-secondary}",
+      "computedProp": "background-color",
+      "expected": "rgba(0, 0, 0, 0.06)",
+      "observed": "rgba(255, 184, 0, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.color-bg-fill-warning"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "warning-strong.complete|root|color",
+      "combo": "warning-strong.complete",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text-secondary}",
+      "computedProp": "color",
+      "expected": "rgba(97, 97, 97, 1)",
+      "observed": "rgba(37, 26, 0, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.color-text-warning-active",
+        "p.color-text-warning-on-bg-fill"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "warning-strong.complete|label|font-size",
+      "combo": "warning-strong.complete",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{p.text-body-sm-font-size}",
+      "computedProp": "font-size",
+      "expected": "12px",
+      "observed": "13px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.font-size-325"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "warning-strong.complete|label|font-weight",
+      "combo": "warning-strong.complete",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{p.text-body-sm-font-weight}",
+      "computedProp": "font-weight",
+      "expected": "450",
+      "observed": "550",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.font-weight-medium"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "warning-strong.complete|label|line-height",
+      "combo": "warning-strong.complete",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{p.text-body-sm-font-line-height}",
+      "computedProp": "line-height",
+      "expected": "16px",
+      "observed": "20px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.border-radius-500",
+        "p.font-line-height-500",
+        "p.font-size-500",
+        "p.height-500",
+        "p.space-500",
+        "p.width-500"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "critical-strong.none|root|background-color",
+      "combo": "critical-strong.none",
+      "part": "root",
+      "channel": "background-color",
+      "ref": "{p.color-bg-fill-transparent-secondary}",
+      "computedProp": "background-color",
+      "expected": "rgba(0, 0, 0, 0.06)",
+      "observed": "rgba(199, 10, 36, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.color-bg-fill-critical",
+        "p.color-text-critical-secondary"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "critical-strong.none|root|color",
+      "combo": "critical-strong.none",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text-secondary}",
+      "computedProp": "color",
+      "expected": "rgba(97, 97, 97, 1)",
+      "observed": "rgba(255, 250, 251, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.color-text-critical-on-bg-fill"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "critical-strong.none|label|font-size",
+      "combo": "critical-strong.none",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{p.text-body-sm-font-size}",
+      "computedProp": "font-size",
+      "expected": "",
+      "observed": "",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "critical-strong.none|label|font-weight",
+      "combo": "critical-strong.none",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{p.text-body-sm-font-weight}",
+      "computedProp": "font-weight",
+      "expected": "",
+      "observed": "",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "critical-strong.none|label|line-height",
+      "combo": "critical-strong.none",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{p.text-body-sm-font-line-height}",
+      "computedProp": "line-height",
+      "expected": "",
+      "observed": "",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "critical-strong.none|label|letter-spacing",
+      "combo": "critical-strong.none",
+      "part": "label",
+      "channel": "letter-spacing",
+      "ref": "{p.text-body-sm-font-letter-spacing}",
+      "computedProp": "letter-spacing",
+      "expected": "",
+      "observed": "",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "critical-strong.incomplete|root|background-color",
+      "combo": "critical-strong.incomplete",
+      "part": "root",
+      "channel": "background-color",
+      "ref": "{p.color-bg-fill-transparent-secondary}",
+      "computedProp": "background-color",
+      "expected": "rgba(0, 0, 0, 0.06)",
+      "observed": "rgba(199, 10, 36, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.color-bg-fill-critical",
+        "p.color-text-critical-secondary"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "critical-strong.incomplete|root|color",
+      "combo": "critical-strong.incomplete",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text-secondary}",
+      "computedProp": "color",
+      "expected": "rgba(97, 97, 97, 1)",
+      "observed": "rgba(255, 250, 251, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.color-text-critical-on-bg-fill"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "critical-strong.incomplete|label|font-size",
+      "combo": "critical-strong.incomplete",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{p.text-body-sm-font-size}",
+      "computedProp": "font-size",
+      "expected": "12px",
+      "observed": "13px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.font-size-325"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "critical-strong.incomplete|label|font-weight",
+      "combo": "critical-strong.incomplete",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{p.text-body-sm-font-weight}",
+      "computedProp": "font-weight",
+      "expected": "450",
+      "observed": "550",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.font-weight-medium"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "critical-strong.incomplete|label|line-height",
+      "combo": "critical-strong.incomplete",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{p.text-body-sm-font-line-height}",
+      "computedProp": "line-height",
+      "expected": "16px",
+      "observed": "20px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.border-radius-500",
+        "p.font-line-height-500",
+        "p.font-size-500",
+        "p.height-500",
+        "p.space-500",
+        "p.width-500"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "critical-strong.partiallyComplete|root|background-color",
+      "combo": "critical-strong.partiallyComplete",
+      "part": "root",
+      "channel": "background-color",
+      "ref": "{p.color-bg-fill-transparent-secondary}",
+      "computedProp": "background-color",
+      "expected": "rgba(0, 0, 0, 0.06)",
+      "observed": "rgba(199, 10, 36, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.color-bg-fill-critical",
+        "p.color-text-critical-secondary"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "critical-strong.partiallyComplete|root|color",
+      "combo": "critical-strong.partiallyComplete",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text-secondary}",
+      "computedProp": "color",
+      "expected": "rgba(97, 97, 97, 1)",
+      "observed": "rgba(255, 250, 251, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.color-text-critical-on-bg-fill"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "critical-strong.partiallyComplete|label|font-size",
+      "combo": "critical-strong.partiallyComplete",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{p.text-body-sm-font-size}",
+      "computedProp": "font-size",
+      "expected": "12px",
+      "observed": "13px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.font-size-325"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "critical-strong.partiallyComplete|label|font-weight",
+      "combo": "critical-strong.partiallyComplete",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{p.text-body-sm-font-weight}",
+      "computedProp": "font-weight",
+      "expected": "450",
+      "observed": "550",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.font-weight-medium"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "critical-strong.partiallyComplete|label|line-height",
+      "combo": "critical-strong.partiallyComplete",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{p.text-body-sm-font-line-height}",
+      "computedProp": "line-height",
+      "expected": "16px",
+      "observed": "20px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.border-radius-500",
+        "p.font-line-height-500",
+        "p.font-size-500",
+        "p.height-500",
+        "p.space-500",
+        "p.width-500"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "critical-strong.complete|root|background-color",
+      "combo": "critical-strong.complete",
+      "part": "root",
+      "channel": "background-color",
+      "ref": "{p.color-bg-fill-transparent-secondary}",
+      "computedProp": "background-color",
+      "expected": "rgba(0, 0, 0, 0.06)",
+      "observed": "rgba(199, 10, 36, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.color-bg-fill-critical",
+        "p.color-text-critical-secondary"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "critical-strong.complete|root|color",
+      "combo": "critical-strong.complete",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text-secondary}",
+      "computedProp": "color",
+      "expected": "rgba(97, 97, 97, 1)",
+      "observed": "rgba(255, 250, 251, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.color-text-critical-on-bg-fill"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "critical-strong.complete|label|font-size",
+      "combo": "critical-strong.complete",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{p.text-body-sm-font-size}",
+      "computedProp": "font-size",
+      "expected": "12px",
+      "observed": "13px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.font-size-325"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "critical-strong.complete|label|font-weight",
+      "combo": "critical-strong.complete",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{p.text-body-sm-font-weight}",
+      "computedProp": "font-weight",
+      "expected": "450",
+      "observed": "550",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.font-weight-medium"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "critical-strong.complete|label|line-height",
+      "combo": "critical-strong.complete",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{p.text-body-sm-font-line-height}",
+      "computedProp": "line-height",
+      "expected": "16px",
+      "observed": "20px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.border-radius-500",
+        "p.font-line-height-500",
+        "p.font-size-500",
+        "p.height-500",
+        "p.space-500",
+        "p.width-500"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "attention-strong.none|root|background-color",
+      "combo": "attention-strong.none",
+      "part": "root",
+      "channel": "background-color",
+      "ref": "{p.color-bg-fill-transparent-secondary}",
+      "computedProp": "background-color",
+      "expected": "rgba(0, 0, 0, 0.06)",
+      "observed": "rgba(255, 230, 0, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.color-bg-fill-caution"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "attention-strong.none|root|color",
+      "combo": "attention-strong.none",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text-secondary}",
+      "computedProp": "color",
+      "expected": "rgba(97, 97, 97, 1)",
+      "observed": "rgba(51, 46, 0, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.color-text-caution-hover",
+        "p.color-text-caution-on-bg-fill"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "attention-strong.none|label|font-size",
+      "combo": "attention-strong.none",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{p.text-body-sm-font-size}",
+      "computedProp": "font-size",
+      "expected": "",
+      "observed": "",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "attention-strong.none|label|font-weight",
+      "combo": "attention-strong.none",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{p.text-body-sm-font-weight}",
+      "computedProp": "font-weight",
+      "expected": "",
+      "observed": "",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "attention-strong.none|label|line-height",
+      "combo": "attention-strong.none",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{p.text-body-sm-font-line-height}",
+      "computedProp": "line-height",
+      "expected": "",
+      "observed": "",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "attention-strong.none|label|letter-spacing",
+      "combo": "attention-strong.none",
+      "part": "label",
+      "channel": "letter-spacing",
+      "ref": "{p.text-body-sm-font-letter-spacing}",
+      "computedProp": "letter-spacing",
+      "expected": "",
+      "observed": "",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "attention-strong.incomplete|root|background-color",
+      "combo": "attention-strong.incomplete",
+      "part": "root",
+      "channel": "background-color",
+      "ref": "{p.color-bg-fill-transparent-secondary}",
+      "computedProp": "background-color",
+      "expected": "rgba(0, 0, 0, 0.06)",
+      "observed": "rgba(255, 230, 0, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.color-bg-fill-caution"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "attention-strong.incomplete|root|color",
+      "combo": "attention-strong.incomplete",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text-secondary}",
+      "computedProp": "color",
+      "expected": "rgba(97, 97, 97, 1)",
+      "observed": "rgba(51, 46, 0, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.color-text-caution-hover",
+        "p.color-text-caution-on-bg-fill"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "attention-strong.incomplete|label|font-size",
+      "combo": "attention-strong.incomplete",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{p.text-body-sm-font-size}",
+      "computedProp": "font-size",
+      "expected": "12px",
+      "observed": "13px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.font-size-325"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "attention-strong.incomplete|label|font-weight",
+      "combo": "attention-strong.incomplete",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{p.text-body-sm-font-weight}",
+      "computedProp": "font-weight",
+      "expected": "450",
+      "observed": "550",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.font-weight-medium"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "attention-strong.incomplete|label|line-height",
+      "combo": "attention-strong.incomplete",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{p.text-body-sm-font-line-height}",
+      "computedProp": "line-height",
+      "expected": "16px",
+      "observed": "20px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.border-radius-500",
+        "p.font-line-height-500",
+        "p.font-size-500",
+        "p.height-500",
+        "p.space-500",
+        "p.width-500"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "attention-strong.partiallyComplete|root|background-color",
+      "combo": "attention-strong.partiallyComplete",
+      "part": "root",
+      "channel": "background-color",
+      "ref": "{p.color-bg-fill-transparent-secondary}",
+      "computedProp": "background-color",
+      "expected": "rgba(0, 0, 0, 0.06)",
+      "observed": "rgba(255, 230, 0, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.color-bg-fill-caution"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "attention-strong.partiallyComplete|root|color",
+      "combo": "attention-strong.partiallyComplete",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text-secondary}",
+      "computedProp": "color",
+      "expected": "rgba(97, 97, 97, 1)",
+      "observed": "rgba(51, 46, 0, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.color-text-caution-hover",
+        "p.color-text-caution-on-bg-fill"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "attention-strong.partiallyComplete|label|font-size",
+      "combo": "attention-strong.partiallyComplete",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{p.text-body-sm-font-size}",
+      "computedProp": "font-size",
+      "expected": "12px",
+      "observed": "13px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.font-size-325"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "attention-strong.partiallyComplete|label|font-weight",
+      "combo": "attention-strong.partiallyComplete",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{p.text-body-sm-font-weight}",
+      "computedProp": "font-weight",
+      "expected": "450",
+      "observed": "550",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.font-weight-medium"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "attention-strong.partiallyComplete|label|line-height",
+      "combo": "attention-strong.partiallyComplete",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{p.text-body-sm-font-line-height}",
+      "computedProp": "line-height",
+      "expected": "16px",
+      "observed": "20px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.border-radius-500",
+        "p.font-line-height-500",
+        "p.font-size-500",
+        "p.height-500",
+        "p.space-500",
+        "p.width-500"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "attention-strong.complete|root|background-color",
+      "combo": "attention-strong.complete",
+      "part": "root",
+      "channel": "background-color",
+      "ref": "{p.color-bg-fill-transparent-secondary}",
+      "computedProp": "background-color",
+      "expected": "rgba(0, 0, 0, 0.06)",
+      "observed": "rgba(255, 230, 0, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.color-bg-fill-caution"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "attention-strong.complete|root|color",
+      "combo": "attention-strong.complete",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text-secondary}",
+      "computedProp": "color",
+      "expected": "rgba(97, 97, 97, 1)",
+      "observed": "rgba(51, 46, 0, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.color-text-caution-hover",
+        "p.color-text-caution-on-bg-fill"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "attention-strong.complete|label|font-size",
+      "combo": "attention-strong.complete",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{p.text-body-sm-font-size}",
+      "computedProp": "font-size",
+      "expected": "12px",
+      "observed": "13px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.font-size-325"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "attention-strong.complete|label|font-weight",
+      "combo": "attention-strong.complete",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{p.text-body-sm-font-weight}",
+      "computedProp": "font-weight",
+      "expected": "450",
+      "observed": "550",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.font-weight-medium"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "attention-strong.complete|label|line-height",
+      "combo": "attention-strong.complete",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{p.text-body-sm-font-line-height}",
+      "computedProp": "line-height",
+      "expected": "16px",
+      "observed": "20px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.border-radius-500",
+        "p.font-line-height-500",
+        "p.font-size-500",
+        "p.height-500",
+        "p.space-500",
+        "p.width-500"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "read-only.none|root|background-color",
+      "combo": "read-only.none",
+      "part": "root",
+      "channel": "background-color",
+      "ref": "{p.color-bg-fill-transparent-secondary}",
+      "computedProp": "background-color",
+      "expected": "rgba(0, 0, 0, 0.06)",
+      "observed": "rgba(0, 0, 0, 0)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.color-bg-surface-transparent"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "read-only.none|label|font-size",
+      "combo": "read-only.none",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{p.text-body-sm-font-size}",
+      "computedProp": "font-size",
+      "expected": "",
+      "observed": "",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "read-only.none|label|font-weight",
+      "combo": "read-only.none",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{p.text-body-sm-font-weight}",
+      "computedProp": "font-weight",
+      "expected": "",
+      "observed": "",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "read-only.none|label|line-height",
+      "combo": "read-only.none",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{p.text-body-sm-font-line-height}",
+      "computedProp": "line-height",
+      "expected": "",
+      "observed": "",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "read-only.none|label|letter-spacing",
+      "combo": "read-only.none",
+      "part": "label",
+      "channel": "letter-spacing",
+      "ref": "{p.text-body-sm-font-letter-spacing}",
+      "computedProp": "letter-spacing",
+      "expected": "",
+      "observed": "",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "read-only.incomplete|root|background-color",
+      "combo": "read-only.incomplete",
+      "part": "root",
+      "channel": "background-color",
+      "ref": "{p.color-bg-fill-transparent-secondary}",
+      "computedProp": "background-color",
+      "expected": "rgba(0, 0, 0, 0.06)",
+      "observed": "rgba(0, 0, 0, 0)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.color-bg-surface-transparent"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "read-only.incomplete|label|font-size",
+      "combo": "read-only.incomplete",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{p.text-body-sm-font-size}",
+      "computedProp": "font-size",
+      "expected": "12px",
+      "observed": "13px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.font-size-325"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "read-only.incomplete|label|font-weight",
+      "combo": "read-only.incomplete",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{p.text-body-sm-font-weight}",
+      "computedProp": "font-weight",
+      "expected": "450",
+      "observed": "550",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.font-weight-medium"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "read-only.incomplete|label|line-height",
+      "combo": "read-only.incomplete",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{p.text-body-sm-font-line-height}",
+      "computedProp": "line-height",
+      "expected": "16px",
+      "observed": "20px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.border-radius-500",
+        "p.font-line-height-500",
+        "p.font-size-500",
+        "p.height-500",
+        "p.space-500",
+        "p.width-500"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "read-only.partiallyComplete|root|background-color",
+      "combo": "read-only.partiallyComplete",
+      "part": "root",
+      "channel": "background-color",
+      "ref": "{p.color-bg-fill-transparent-secondary}",
+      "computedProp": "background-color",
+      "expected": "rgba(0, 0, 0, 0.06)",
+      "observed": "rgba(0, 0, 0, 0)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.color-bg-surface-transparent"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "read-only.partiallyComplete|label|font-size",
+      "combo": "read-only.partiallyComplete",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{p.text-body-sm-font-size}",
+      "computedProp": "font-size",
+      "expected": "12px",
+      "observed": "13px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.font-size-325"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "read-only.partiallyComplete|label|font-weight",
+      "combo": "read-only.partiallyComplete",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{p.text-body-sm-font-weight}",
+      "computedProp": "font-weight",
+      "expected": "450",
+      "observed": "550",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.font-weight-medium"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "read-only.partiallyComplete|label|line-height",
+      "combo": "read-only.partiallyComplete",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{p.text-body-sm-font-line-height}",
+      "computedProp": "line-height",
+      "expected": "16px",
+      "observed": "20px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.border-radius-500",
+        "p.font-line-height-500",
+        "p.font-size-500",
+        "p.height-500",
+        "p.space-500",
+        "p.width-500"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "read-only.complete|root|background-color",
+      "combo": "read-only.complete",
+      "part": "root",
+      "channel": "background-color",
+      "ref": "{p.color-bg-fill-transparent-secondary}",
+      "computedProp": "background-color",
+      "expected": "rgba(0, 0, 0, 0.06)",
+      "observed": "rgba(0, 0, 0, 0)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.color-bg-surface-transparent"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "read-only.complete|label|font-size",
+      "combo": "read-only.complete",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{p.text-body-sm-font-size}",
+      "computedProp": "font-size",
+      "expected": "12px",
+      "observed": "13px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.font-size-325"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "read-only.complete|label|font-weight",
+      "combo": "read-only.complete",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{p.text-body-sm-font-weight}",
+      "computedProp": "font-weight",
+      "expected": "450",
+      "observed": "550",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.font-weight-medium"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "read-only.complete|label|line-height",
+      "combo": "read-only.complete",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{p.text-body-sm-font-line-height}",
+      "computedProp": "line-height",
+      "expected": "16px",
+      "observed": "20px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.border-radius-500",
+        "p.font-line-height-500",
+        "p.font-size-500",
+        "p.height-500",
+        "p.space-500",
+        "p.width-500"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "enabled.none|root|color",
+      "combo": "enabled.none",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text-secondary}",
+      "computedProp": "color",
+      "expected": "rgba(97, 97, 97, 1)",
+      "observed": "rgba(48, 48, 48, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.color-bg-fill-brand",
+        "p.color-bg-fill-brand-selected",
+        "p.color-bg-fill-inverse",
+        "p.color-bg-surface-inverse",
+        "p.color-icon-hover",
+        "p.color-text"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "enabled.none|label|font-size",
+      "combo": "enabled.none",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{p.text-body-sm-font-size}",
+      "computedProp": "font-size",
+      "expected": "",
+      "observed": "",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "enabled.none|label|font-weight",
+      "combo": "enabled.none",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{p.text-body-sm-font-weight}",
+      "computedProp": "font-weight",
+      "expected": "",
+      "observed": "",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "enabled.none|label|line-height",
+      "combo": "enabled.none",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{p.text-body-sm-font-line-height}",
+      "computedProp": "line-height",
+      "expected": "",
+      "observed": "",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "enabled.none|label|letter-spacing",
+      "combo": "enabled.none",
+      "part": "label",
+      "channel": "letter-spacing",
+      "ref": "{p.text-body-sm-font-letter-spacing}",
+      "computedProp": "letter-spacing",
+      "expected": "",
+      "observed": "",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [],
+      "status": "open"
+    },
+    {
+      "id": "enabled.incomplete|root|color",
+      "combo": "enabled.incomplete",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text-secondary}",
+      "computedProp": "color",
+      "expected": "rgba(97, 97, 97, 1)",
+      "observed": "rgba(48, 48, 48, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.color-bg-fill-brand",
+        "p.color-bg-fill-brand-selected",
+        "p.color-bg-fill-inverse",
+        "p.color-bg-surface-inverse",
+        "p.color-icon-hover",
+        "p.color-text"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "enabled.incomplete|label|font-size",
+      "combo": "enabled.incomplete",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{p.text-body-sm-font-size}",
+      "computedProp": "font-size",
+      "expected": "12px",
+      "observed": "13px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.font-size-325"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "enabled.incomplete|label|font-weight",
+      "combo": "enabled.incomplete",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{p.text-body-sm-font-weight}",
+      "computedProp": "font-weight",
+      "expected": "450",
+      "observed": "550",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.font-weight-medium"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "enabled.incomplete|label|line-height",
+      "combo": "enabled.incomplete",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{p.text-body-sm-font-line-height}",
+      "computedProp": "line-height",
+      "expected": "16px",
+      "observed": "20px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.border-radius-500",
+        "p.font-line-height-500",
+        "p.font-size-500",
+        "p.height-500",
+        "p.space-500",
+        "p.width-500"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "enabled.partiallyComplete|root|color",
+      "combo": "enabled.partiallyComplete",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text-secondary}",
+      "computedProp": "color",
+      "expected": "rgba(97, 97, 97, 1)",
+      "observed": "rgba(48, 48, 48, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.color-bg-fill-brand",
+        "p.color-bg-fill-brand-selected",
+        "p.color-bg-fill-inverse",
+        "p.color-bg-surface-inverse",
+        "p.color-icon-hover",
+        "p.color-text"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "enabled.partiallyComplete|label|font-size",
+      "combo": "enabled.partiallyComplete",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{p.text-body-sm-font-size}",
+      "computedProp": "font-size",
+      "expected": "12px",
+      "observed": "13px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.font-size-325"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "enabled.partiallyComplete|label|font-weight",
+      "combo": "enabled.partiallyComplete",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{p.text-body-sm-font-weight}",
+      "computedProp": "font-weight",
+      "expected": "450",
+      "observed": "550",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.font-weight-medium"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "enabled.partiallyComplete|label|line-height",
+      "combo": "enabled.partiallyComplete",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{p.text-body-sm-font-line-height}",
+      "computedProp": "line-height",
+      "expected": "16px",
+      "observed": "20px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.border-radius-500",
+        "p.font-line-height-500",
+        "p.font-size-500",
+        "p.height-500",
+        "p.space-500",
+        "p.width-500"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "enabled.complete|root|color",
+      "combo": "enabled.complete",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text-secondary}",
+      "computedProp": "color",
+      "expected": "rgba(97, 97, 97, 1)",
+      "observed": "rgba(48, 48, 48, 1)",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.color-bg-fill-brand",
+        "p.color-bg-fill-brand-selected",
+        "p.color-bg-fill-inverse",
+        "p.color-bg-surface-inverse",
+        "p.color-icon-hover",
+        "p.color-text"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "enabled.complete|label|font-size",
+      "combo": "enabled.complete",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{p.text-body-sm-font-size}",
+      "computedProp": "font-size",
+      "expected": "12px",
+      "observed": "13px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.font-size-325"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "enabled.complete|label|font-weight",
+      "combo": "enabled.complete",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{p.text-body-sm-font-weight}",
+      "computedProp": "font-weight",
+      "expected": "450",
+      "observed": "550",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.font-weight-medium"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "enabled.complete|label|line-height",
+      "combo": "enabled.complete",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{p.text-body-sm-font-line-height}",
+      "computedProp": "line-height",
+      "expected": "16px",
+      "observed": "20px",
+      "cause": "UNTRIAGED — a defect until triaged",
+      "candidates": [
+        "p.border-radius-500",
+        "p.font-line-height-500",
+        "p.font-size-500",
+        "p.height-500",
+        "p.space-500",
+        "p.width-500"
+      ],
+      "status": "open"
+    }
+  ]
+}

@@ -952,7 +952,7 @@
       "part": "part-1",
       "channel": "position",
       "sample": "absolute",
-      "reason": "value shape outside mintable kinds and outside the declared vocabulary"
+      "reason": "declared-channel state delta on 4/16 combos — partial coverage cannot carry as a state selector (v15); named residue"
     },
     {
       "state": "active",
@@ -1400,7 +1400,7 @@
       "part": "part-1",
       "channel": "position",
       "sample": "absolute",
-      "reason": "value shape outside mintable kinds and outside the declared vocabulary"
+      "reason": "declared-channel state delta on 4/16 combos — partial coverage cannot carry as a state selector (v15); named residue"
     },
     {
       "state": "hover",

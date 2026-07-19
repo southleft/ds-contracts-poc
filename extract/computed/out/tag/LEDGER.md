@@ -286,7 +286,7 @@ Minted leaves WITHOUT folding: **48** → WITH folding: **51** (45 folded channe
   - [active] part-1.min-height — default-state values not kind-compatible for padding — cannot correlate (sample: `0px`)
   - [active] part-1.min-width — default-state values not kind-compatible for padding — cannot correlate (sample: `0px`)
   - [active] part-1.pointer-events — declared-channel state delta on 4/16 combos — partial coverage cannot carry as a state selector (v15); named residue (sample: `none`)
-  - [active] part-1.position — value shape outside mintable kinds and outside the declared vocabulary (sample: `absolute`)
+  - [active] part-1.position — declared-channel state delta on 4/16 combos — partial coverage cannot carry as a state selector (v15); named residue (sample: `absolute`)
   - [active] part-1.right — default-state values not kind-compatible for padding — cannot correlate (sample: `20px`)
   - [active] part-1.top — default-state values not kind-compatible for padding — cannot correlate (sample: `0px`)
   - [active] root.outline-style — declared-channel state delta on 8/16 combos — partial coverage cannot carry as a state selector (v15); named residue (sample: `none`)
@@ -350,7 +350,7 @@ Minted leaves WITHOUT folding: **48** → WITH folding: **51** (45 folded channe
   - [hover] part-1.min-height — default-state values not kind-compatible for padding — cannot correlate (sample: `0px`)
   - [hover] part-1.min-width — default-state values not kind-compatible for padding — cannot correlate (sample: `0px`)
   - [hover] part-1.pointer-events — declared-channel state delta on 4/16 combos — partial coverage cannot carry as a state selector (v15); named residue (sample: `none`)
-  - [hover] part-1.position — value shape outside mintable kinds and outside the declared vocabulary (sample: `absolute`)
+  - [hover] part-1.position — declared-channel state delta on 4/16 combos — partial coverage cannot carry as a state selector (v15); named residue (sample: `absolute`)
   - [hover] part-1.right — default-state values not kind-compatible for padding — cannot correlate (sample: `20px`)
   - [hover] part-1.top — default-state values not kind-compatible for padding — cannot correlate (sample: `0px`)
 - refused/overflow bindings: **16**

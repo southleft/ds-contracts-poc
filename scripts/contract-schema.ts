@@ -296,6 +296,16 @@ export const DECLARED_CHANNELS: Record<string, DeclaredChannelSpec> = {
     canvas: 'annotate',
     note: 'Positioning context (relative) or an inset overlay (absolute, lowered to absolute positioning on canvas); fixed/sticky have no carried spelling.',
   },
+  // -- intrinsic aspect (round 4): the real component keeps a square (or
+  //    fixed-ratio) box via pseudo-element padding hacks the anatomy cannot
+  //    carry — the RATIO is the fact (Avatar/Thumbnail 1:1), observed as
+  //    equal computed width/height in every combo. Code renders CSS
+  //    aspect-ratio; the canvas resolves height from the bound width. ------
+  'aspect-ratio': {
+    value: /^\d+(\.\d+)?( \/ \d+(\.\d+)?)?$/,
+    canvas: 'draw', // emit-figma-script sizes height = width / ratio when only width is bound
+    note: 'The intrinsic aspect ratio renders natively (height follows the bound width).',
+  },
   // -- box constraints outside the token grammar ----------------------------
   'max-width': {
     value: /^(none|-?\d+(\.\d+)?(px|rem|em|%)|fit-content|max-content|min-content)$/,

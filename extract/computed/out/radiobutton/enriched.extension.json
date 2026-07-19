@@ -343,6 +343,11 @@
       },
       {
         "part": "input",
+        "channel": "position",
+        "value": "absolute"
+      },
+      {
+        "part": "input",
         "channel": "text-rendering",
         "value": "auto"
       },
@@ -495,13 +500,6 @@
       "channel": "line-height",
       "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "sample": "normal",
-      "distinctValues": 1
-    },
-    {
-      "part": "input",
-      "channel": "position",
-      "reason": "declared-channel value outside the bounded grammar — named residue (v15)",
-      "sample": "absolute",
       "distinctValues": 1
     }
   ],
@@ -1050,6 +1048,7 @@
     ],
     "svgAssets": [],
     "receipts": [
+      "sr-only-carried-as-hidden: input is visually hidden in the real component (clip-path/1px box) — promoted with declared display:none (visual parity exact; AT semantics ride the contract's own semantics — NAMED downgrade)",
       "literal-text-carried: label = \"Accounts are disabled\" (no text prop sample matches — the mounted value is carried verbatim)"
     ],
     "refusals": []
@@ -1069,6 +1068,7 @@
     "declared fact carried: input.font-feature-settings = normal (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: input.overflow-x = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: input.overflow-y = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: input.position = absolute (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: input.text-rendering = auto (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: input.text-wrap-mode = nowrap (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: backdrop.border-bottom-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",

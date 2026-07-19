@@ -945,13 +945,6 @@
       "distinctValues": 1
     },
     {
-      "part": "input",
-      "channel": "position",
-      "reason": "declared-channel value outside the bounded grammar — named residue (v15)",
-      "sample": "absolute",
-      "distinctValues": 1
-    },
-    {
       "part": "backdrop",
       "channel": "transform",
       "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
@@ -963,13 +956,6 @@
       "channel": "transition-behavior",
       "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "sample": "normal, normal, normal",
-      "distinctValues": 1
-    },
-    {
-      "part": "icon",
-      "channel": "position",
-      "reason": "declared-channel value outside the bounded grammar — named residue (v15)",
-      "sample": "absolute",
       "distinctValues": 1
     },
     {
@@ -1491,6 +1477,7 @@
       "svg-viewbox-reconstructed: Checkbox.icon-2@indeterminate.enabled — 0 0 22 22 from computed size 22×22 (path extent 15.0; viewBox is not a computed style — named reconstruction)",
       "svg-viewbox-reconstructed: Checkbox.icon-4@unchecked.enabled — 0 0 14 14 from computed size 14×14 (path extent 10.5; viewBox is not a computed style — named reconstruction)",
       "svg-viewbox-reconstructed: Checkbox.icon-4@checked.enabled — 0 0 14 14 from computed size 14×14 (path extent 10.5; viewBox is not a computed style — named reconstruction)",
+      "aspect-carried: icon computed width == height in every enabled combo (14/22px) → declared aspect-ratio 1 / 1 (geometry evidence; the real square rides a pseudo-element padding hack)",
       "presence-carried: icon-2 (1/3 combos) →  hidden-when checked=unchecked, checked=checked, disabled",
       "presence-carried: icon-4 (2/3 combos) →  hidden-when checked=indeterminate, disabled",
       "literal-text-carried: label = \"Save this product\" (no text prop sample matches — the mounted value is carried verbatim)"

@@ -163,6 +163,7 @@
                   },
                   "declared": {
                     "display": "block",
+                    "position": "absolute",
                     "appearance": "auto",
                     "cursor": "default",
                     "font-family": "Arial",
@@ -277,6 +278,8 @@
                   "description": "Promoted from the computed floor (round 4): rendered anatomy span|Checkbox__Icon — this element exists in the real component's DOM; the static layer had no part for it.",
                   "declared": {
                     "display": "block",
+                    "position": "absolute",
+                    "aspect-ratio": "1 / 1",
                     "cursor": "pointer",
                     "pointer-events": "none"
                   },
@@ -327,7 +330,8 @@
                     "icon-4": {
                       "description": "Promoted from the computed floor (round 4): rendered anatomy svg| — this element exists in the real component's DOM; the static layer had no part for it.",
                       "declared": {
-                        "display": "block"
+                        "display": "block",
+                        "position": "absolute"
                       },
                       "stylesWhen": [
                         {

@@ -177,6 +177,11 @@
           "content": {
             "prop": "initials"
           },
+          "declared": {
+            "position": "absolute",
+            "aspect-ratio": "1 / 1",
+            "user-select": "none"
+          },
           "layout": {
             "display": "flex",
             "align": "center",
@@ -238,9 +243,6 @@
               },
               "description": "Per-value svg content promoted from the computed floor: the glyph drawn when size=xl."
             }
-          },
-          "declared": {
-            "user-select": "none"
           }
         }
       },

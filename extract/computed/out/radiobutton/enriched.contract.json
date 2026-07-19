@@ -132,13 +132,14 @@
                     "value": "{value}"
                   },
                   "declared": {
-                    "display": "block",
+                    "display": "none",
                     "appearance": "auto",
                     "cursor": "default",
                     "font-family": "Arial",
                     "font-feature-settings": "normal",
                     "overflow-x": "hidden",
                     "overflow-y": "hidden",
+                    "position": "absolute",
                     "text-rendering": "auto",
                     "text-wrap-mode": "nowrap"
                   },

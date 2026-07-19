@@ -90,11 +90,11 @@
     }
   },
   "declared": {
-    "base": 23,
+    "base": 24,
     "state": 12
   },
   "codeOnly": {
-    "base": 3,
+    "base": 2,
     "state": 0,
     "overflowBindings": 47
   },

@@ -16,9 +16,9 @@
     "pairs": 16,
     "perfectExact": 0,
     "perfectAA": 0,
-    "meanExact": 4.597066243489584,
-    "meanAA": 1.985677083333333,
-    "maxAA": 3.2023111979166665
+    "meanExact": 4.340311686197917,
+    "meanAA": 1.7289225260416663,
+    "maxAA": 2.2029622395833335
   },
   "fusion": {
     "boundConfirmed": 6,
@@ -28,34 +28,16 @@
     "mintedLeavesUnfolded": 37,
     "baseBindings": 39,
     "stateBindings": 51,
-    "codeOnlyChannels": 3,
+    "codeOnlyChannels": 2,
     "overflowBindings": 47,
     "folds": 8
   },
   "worstRows": [
     {
       "key": "checked.enabled__focus-visible",
-      "pctAA": 3.2023111979166665,
-      "pctExact": 5.703125,
+      "pctAA": 2.2029622395833335,
+      "pctExact": 4.703776041666667,
       "channelsMismatched": 4
-    },
-    {
-      "key": "unchecked.enabled__focus-visible",
-      "pctAA": 2.8572591145833335,
-      "pctExact": 5.113932291666667,
-      "channelsMismatched": 2
-    },
-    {
-      "key": "unchecked.disabled__focus-visible",
-      "pctAA": 2.6896158854166665,
-      "pctExact": 5.487467447916667,
-      "channelsMismatched": 30
-    },
-    {
-      "key": "checked.disabled__focus-visible",
-      "pctAA": 2.6863606770833335,
-      "pctExact": 5.474446614583333,
-      "channelsMismatched": 27
     },
     {
       "key": "checked.enabled__active",
@@ -76,10 +58,28 @@
       "channelsMismatched": 3
     },
     {
+      "key": "unchecked.enabled__focus-visible",
+      "pctAA": 1.85791015625,
+      "pctExact": 4.114583333333333,
+      "channelsMismatched": 2
+    },
+    {
       "key": "unchecked.enabled__active",
       "pctAA": 1.69189453125,
       "pctExact": 4.322102864583333,
       "channelsMismatched": 10
+    },
+    {
+      "key": "unchecked.disabled__default",
+      "pctAA": 1.6349283854166667,
+      "pctExact": 4.432779947916667,
+      "channelsMismatched": 30
+    },
+    {
+      "key": "unchecked.disabled__hover",
+      "pctAA": 1.6349283854166667,
+      "pctExact": 4.432779947916667,
+      "channelsMismatched": 30
     }
   ],
   "topMismatchedChannels": [
@@ -193,8 +193,7 @@
     "overflow: backdrop.border-right-color [hover] — v13 Part.states carries plain color-kind refs only on non-root parts",
     "overflow: backdrop.border-top-color [hover] — v13 Part.states carries plain color-kind refs only on non-root parts",
     "code-only: input.clip-path — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-    "code-only: input.line-height — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-    "code-only: input.position — declared-channel value outside the bounded grammar — named residue (v15)"
+    "code-only: input.line-height — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today"
   ],
   "rows": [
     {
@@ -261,8 +260,8 @@
       "key": "unchecked.enabled__focus-visible",
       "channelsCompared": 83,
       "channelsEqual": 81,
-      "pctExact": 5.113932291666667,
-      "pctAA": 2.8572591145833335,
+      "pctExact": 4.114583333333333,
+      "pctAA": 1.85791015625,
       "mismatches": [
         {
           "part": "input",
@@ -729,8 +728,8 @@
       "key": "unchecked.disabled__focus-visible",
       "channelsCompared": 83,
       "channelsEqual": 53,
-      "pctExact": 5.487467447916667,
-      "pctAA": 2.6896158854166665,
+      "pctExact": 4.432779947916667,
+      "pctAA": 1.6349283854166667,
       "mismatches": [
         {
           "part": "root",
@@ -1161,8 +1160,8 @@
       "key": "checked.enabled__focus-visible",
       "channelsCompared": 83,
       "channelsEqual": 79,
-      "pctExact": 5.703125,
-      "pctAA": 3.2023111979166665,
+      "pctExact": 4.703776041666667,
+      "pctAA": 2.2029622395833335,
       "mismatches": [
         {
           "part": "input",
@@ -1587,8 +1586,8 @@
       "key": "checked.disabled__focus-visible",
       "channelsCompared": 83,
       "channelsEqual": 56,
-      "pctExact": 5.474446614583333,
-      "pctAA": 2.6863606770833335,
+      "pctExact": 4.419759114583333,
+      "pctAA": 1.6316731770833333,
       "mismatches": [
         {
           "part": "root",

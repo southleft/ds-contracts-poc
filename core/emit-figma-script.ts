@@ -62,13 +62,15 @@ export interface LayoutSpec {
 
 export interface NodeSpec {
   type: 'root' | 'frame' | 'text' | 'instance' | 'slot' | 'svg' | 'shape';
+  /** Round 4: intrinsic glyph size for svg specs (contract icon.size). */
+  iconSize?: number;
   name: string;
   layout?: LayoutSpec;
   bindings?: Record<string, string>;
   fill?: string;
   stroke?: string;
   fixedWidth?: { px: number; varName: string };
-  fixedHeight?: { px: number; varName: string };
+  fixedHeight?: { px: number; varName?: string };
   /** CSS grow → layoutSizingHorizontal FILL after append. */
   grow?: boolean;
   /** visibleWhen on a boolean prop → node visibility bound to its BOOLEAN
@@ -854,6 +856,21 @@ function applyTokens(
       case 'padding-block':
         spec.bindings = { ...spec.bindings, paddingTop: varName, paddingBottom: varName };
         break;
+      // Round 4 (canvas-gate finding): padding LONGHANDS fell through this
+      // switch and were silently dropped — the floor-promoted contracts bind
+      // per-side paddings (Tag root 6px/0px), each independently bindable.
+      case 'padding-left':
+        spec.bindings = { ...spec.bindings, paddingLeft: varName };
+        break;
+      case 'padding-right':
+        spec.bindings = { ...spec.bindings, paddingRight: varName };
+        break;
+      case 'padding-top':
+        spec.bindings = { ...spec.bindings, paddingTop: varName };
+        break;
+      case 'padding-bottom':
+        spec.bindings = { ...spec.bindings, paddingBottom: varName };
+        break;
       case 'gap':
         spec.bindings = { ...spec.bindings, itemSpacing: varName };
         break;
@@ -1041,6 +1058,11 @@ function applyLiterals(spec: NodeSpec, lits: Record<string, string>, ctx: TextCt
       case 'min-height': { const n = parseLitPx(value); if (n !== undefined) li().minHeight = n; break; }
       case 'padding-block': { const n = parseLitPx(value); if (n !== undefined) { li().paddingTop = n; li().paddingBottom = n; } break; }
       case 'padding-inline': { const n = parseLitPx(value); if (n !== undefined) { li().paddingLeft = n; li().paddingRight = n; } break; }
+      // Round 4 (canvas-gate finding): literal padding longhands were dropped.
+      case 'padding-left': { const n = parseLitPx(value); if (n !== undefined) li().paddingLeft = n; break; }
+      case 'padding-right': { const n = parseLitPx(value); if (n !== undefined) li().paddingRight = n; break; }
+      case 'padding-top': { const n = parseLitPx(value); if (n !== undefined) li().paddingTop = n; break; }
+      case 'padding-bottom': { const n = parseLitPx(value); if (n !== undefined) li().paddingBottom = n; break; }
       case 'gap': { const n = parseLitPx(value); if (n !== undefined) li().itemSpacing = n; break; }
       case 'border-radius': { const n = parseLitPx(value); if (n !== undefined) li().radius = n; break; }
       case 'border-width': { const n = parseLitPx(value); if (n !== undefined) li().strokeWeight = n; break; }
@@ -1130,7 +1152,21 @@ function applyStyling(
 ): TextCtx {
   const t = applyTokens(spec, resolveTokens(part, subst), subst, ctx);
   const l = applyLiterals(spec, resolveLiterals(part, subst), t);
-  return applyDeclared(part.declared, l);
+  const d = applyDeclared(part.declared, l);
+  // Round 4: declared aspect-ratio draws natively — height follows the bound
+  // width when the contract carries no height channel (Avatar/Thumbnail
+  // squares whose real height rides a pseudo-element padding hack).
+  const aspect = part.declared?.['aspect-ratio'];
+  if (aspect && spec.fixedWidth && !spec.fixedHeight) {
+    const m = /^([\d.]+)(?: \/ ([\d.]+))?$/.exec(aspect);
+    if (m) {
+      const ratio = Number(m[1]) / Number(m[2] ?? '1');
+      if (ratio > 0 && Number.isFinite(spec.fixedWidth.px)) {
+        spec.fixedHeight = { px: spec.fixedWidth.px / ratio };
+      }
+    }
+  }
+  return d;
 }
 
 /** State-preview overrides pass through applyTokens with one honest
@@ -1436,6 +1472,16 @@ function variantParts(
         return false;
       }
     }
+    // Round 4 base-hidden presence: declared display:none is the BASE state
+    // (sr-only parts, defaultless-axis glyphs); a stylesWhen entry matching
+    // this combo RESTORES the part. Boolean-conditioned entries evaluate at
+    // the drawn cell's boolean defaults (false) — a named canvas limit.
+    if (p.declared?.['display'] === 'none') {
+      const restored = (p.stylesWhen ?? []).some(
+        (sw) => sw.equals !== undefined && subst[sw.prop] === sw.equals && sw.styles['display'] !== undefined && sw.styles['display'] !== 'none',
+      );
+      if (!restored) return false;
+    }
     return true;
   });
 }
@@ -1518,6 +1564,10 @@ function partToSpecInner(
       name,
       svg: iconSvg(part, subst, iconCtx),
       grow: part.layout?.grow || undefined,
+      // Round 4 (canvas-gate finding): a viewBox-only svg has no intrinsic
+      // size — the icon draws 0×0 in shrink-to-fit contexts. The contract's
+      // icon.size (captured glyph size) sizes the node on every surface.
+      ...(part.icon.size ? { iconSize: part.icon.size } : {}),
     };
     applyVisibleWhen(spec, part, contract);
     return spec;
@@ -2528,7 +2578,7 @@ function applyFrameSpec(node, spec) {
     if (spec.fixedHeight) {
       if (horizontalIsPrimary) node.counterAxisSizingMode = 'FIXED';
       else node.primaryAxisSizingMode = 'FIXED';
-      node.setBoundVariable('height', need(spec.fixedHeight.varName));
+      if (spec.fixedHeight.varName) node.setBoundVariable('height', need(spec.fixedHeight.varName));
     }
   }${litsRuntime(hasLits)}${gradientRuntime(hasGradient)}
 }
@@ -2557,6 +2607,7 @@ async function buildNode(spec, registry) {
     node = figma.createNodeFromSvg(spec.svg);
     node.fills = [];
     node.clipsContent = false;
+    if (spec.iconSize) node.resize(spec.iconSize, spec.iconSize);
   } else if (spec.type === 'text') {
     node = figma.createText();
     node.fontName = { family: 'Inter', style: spec.fontStyle || 'Medium' };
@@ -2591,7 +2642,7 @@ async function buildNode(spec, registry) {
       if (spec.fixedWidth || spec.fixedHeight) {
         wrap.resize(spec.fixedWidth ? spec.fixedWidth.px : wrap.width, spec.fixedHeight ? spec.fixedHeight.px : wrap.height);
         if (spec.fixedWidth) { wrap.primaryAxisSizingMode = 'FIXED'; wrap.setBoundVariable('width', need(spec.fixedWidth.varName)); }
-        if (spec.fixedHeight) { wrap.counterAxisSizingMode = 'FIXED'; wrap.setBoundVariable('height', need(spec.fixedHeight.varName)); }
+        if (spec.fixedHeight) { wrap.counterAxisSizingMode = 'FIXED'; if (spec.fixedHeight.varName) wrap.setBoundVariable('height', need(spec.fixedHeight.varName)); else wrap.resize(wrap.width, spec.fixedHeight.px); }
       }
       wrap.name = spec.name;
       node = wrap;

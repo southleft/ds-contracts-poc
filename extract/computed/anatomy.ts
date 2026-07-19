@@ -667,6 +667,34 @@ export function promoteAnatomy(
       }
     }
 
+    // Aspect fact (geometry evidence): computed width == height in EVERY
+    // enabled combo (>0, ≥2 distinct sizes or a sized axis) — the real
+    // component keeps the square via pseudo-element padding hacks (Avatar's
+    // ::after) that anatomy cannot carry; the RATIO is the carried fact.
+    {
+      const px = (v: string | undefined): number | null => {
+        const m = /^(-?\d+(?:\.\d+)?)px$/.exec(v ?? '');
+        return m ? Number(m[1]) : null;
+      };
+      let square = false;
+      const sizes = new Set<number>();
+      for (const combo of presentBy.get(i) ?? []) {
+        const el = union.alignedByKey.get(`${combo.key}__default`)![i];
+        if (!el) { square = false; break; }
+        const w = px(el.node.style['width']);
+        const h = px(el.node.style['height']);
+        if (w === null || h === null || w <= 0 || Math.abs(w - h) > 0.6) { square = false; break; }
+        sizes.add(Math.round(w));
+        square = true;
+      }
+      // require ≥2 observed sizes: a single square observation could be
+      // coincidence; a size axis driving both dimensions is the evidence.
+      if (square && sizes.size >= 2) {
+        part.declared = { ...part.declared, 'aspect-ratio': '1 / 1' };
+        receipts.push(`aspect-carried: ${e.partName} computed width == height in every enabled combo (${[...sizes].sort((a, b) => a - b).join('/')}px) → declared aspect-ratio 1 / 1 (geometry evidence; the real square rides a pseudo-element padding hack)`);
+      }
+    }
+
     // Full-width fact (geometry evidence): a part inside a ROW flex parent
     // whose computed width equals the parent's content width in EVERY
     // enabled combo spans the row — carried as layout.grow (flex: 1 1 auto),

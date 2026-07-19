@@ -7,8 +7,8 @@
   "interactions": 4,
   "computed": {
     "cellsCompared": 1840,
-    "cellsEqual": 1260,
-    "pctEqual": 68.47826086956522,
+    "cellsEqual": 1300,
+    "pctEqual": 70.65217391304348,
     "rowsFullyEqual": 0,
     "rows": 40
   },
@@ -16,9 +16,9 @@
     "pairs": 40,
     "perfectExact": 0,
     "perfectAA": 0,
-    "meanExact": 2.20068359375,
-    "meanAA": 1.7355143229166665,
-    "maxAA": 4.412434895833333
+    "meanExact": 2.760416666666667,
+    "meanAA": 2.4031575520833335,
+    "maxAA": 4.666341145833333
   },
   "fusion": {
     "boundConfirmed": 20,
@@ -28,58 +28,58 @@
     "mintedLeavesUnfolded": 59,
     "baseBindings": 15,
     "stateBindings": 0,
-    "codeOnlyChannels": 1,
+    "codeOnlyChannels": 0,
     "overflowBindings": 1,
     "folds": 54
   },
   "worstRows": [
     {
       "key": "xl.on__default",
-      "pctAA": 4.412434895833333,
+      "pctAA": 4.666341145833333,
       "pctExact": 5.065104166666667,
-      "channelsMismatched": 25
+      "channelsMismatched": 24
     },
     {
       "key": "xl.on__hover",
-      "pctAA": 4.412434895833333,
+      "pctAA": 4.666341145833333,
       "pctExact": 5.065104166666667,
-      "channelsMismatched": 25
+      "channelsMismatched": 24
     },
     {
       "key": "xl.on__focus-visible",
-      "pctAA": 4.412434895833333,
+      "pctAA": 4.666341145833333,
       "pctExact": 5.065104166666667,
-      "channelsMismatched": 25
+      "channelsMismatched": 24
     },
     {
       "key": "xl.on__active",
-      "pctAA": 4.412434895833333,
+      "pctAA": 4.666341145833333,
       "pctExact": 5.065104166666667,
-      "channelsMismatched": 25
+      "channelsMismatched": 24
     },
     {
-      "key": "lg.on__default",
-      "pctAA": 2.7018229166666665,
-      "pctExact": 3.1901041666666665,
-      "channelsMismatched": 25
+      "key": "xl.off__default",
+      "pctAA": 4.366861979166667,
+      "pctExact": 5.065104166666667,
+      "channelsMismatched": 3
     },
     {
-      "key": "lg.on__hover",
-      "pctAA": 2.7018229166666665,
-      "pctExact": 3.1901041666666665,
-      "channelsMismatched": 25
+      "key": "xl.off__hover",
+      "pctAA": 4.366861979166667,
+      "pctExact": 5.065104166666667,
+      "channelsMismatched": 3
     },
     {
-      "key": "lg.on__focus-visible",
-      "pctAA": 2.7018229166666665,
-      "pctExact": 3.1901041666666665,
-      "channelsMismatched": 25
+      "key": "xl.off__focus-visible",
+      "pctAA": 4.366861979166667,
+      "pctExact": 5.065104166666667,
+      "channelsMismatched": 3
     },
     {
-      "key": "lg.on__active",
-      "pctAA": 2.7018229166666665,
-      "pctExact": 3.1901041666666665,
-      "channelsMismatched": 25
+      "key": "xl.off__active",
+      "pctAA": 4.366861979166667,
+      "pctExact": 5.065104166666667,
+      "channelsMismatched": 3
     }
   ],
   "topMismatchedChannels": [
@@ -93,10 +93,6 @@
     ],
     [
       "initials.justify-content",
-      40
-    ],
-    [
-      "initials.position",
       40
     ],
     [
@@ -142,19 +138,22 @@
     [
       "root.text-emphasis-color",
       20
+    ],
+    [
+      "initials.border-bottom-color",
+      20
     ]
   ],
   "namedLosses": [
-    "overflow: initials.color — presence-prop-driven styling (withInitials) — boolean tokensByProp has no spelling (round 4 residue)",
-    "code-only: initials.position — declared-channel value outside the bounded grammar — named residue (v15)"
+    "overflow: initials.color — presence-prop-driven styling (withInitials) — boolean tokensByProp has no spelling (round 4 residue)"
   ],
   "rows": [
     {
       "key": "xs.off__default",
       "channelsCompared": 46,
-      "channelsEqual": 42,
-      "pctExact": 0.5265299479166666,
-      "pctAA": 0.2587890625,
+      "channelsEqual": 43,
+      "pctExact": 1.26953125,
+      "pctAA": 0.9879557291666666,
       "mismatches": [
         {
           "part": "initials",
@@ -173,21 +172,15 @@
           "channel": "justify-content",
           "ours": "normal",
           "theirs": "center"
-        },
-        {
-          "part": "initials",
-          "channel": "position",
-          "ours": "static",
-          "theirs": "absolute"
         }
       ]
     },
     {
       "key": "xs.off__hover",
       "channelsCompared": 46,
-      "channelsEqual": 42,
-      "pctExact": 0.5265299479166666,
-      "pctAA": 0.2587890625,
+      "channelsEqual": 43,
+      "pctExact": 1.26953125,
+      "pctAA": 0.9879557291666666,
       "mismatches": [
         {
           "part": "initials",
@@ -206,21 +199,16 @@
           "channel": "justify-content",
           "ours": "normal",
           "theirs": "center"
-        },
-        {
-          "part": "initials",
-          "channel": "position",
-          "ours": "static",
-          "theirs": "absolute"
         }
-      ]
+      ],
+      "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport"
     },
     {
       "key": "xs.off__focus-visible",
       "channelsCompared": 46,
-      "channelsEqual": 42,
-      "pctExact": 0.5265299479166666,
-      "pctAA": 0.2587890625,
+      "channelsEqual": 43,
+      "pctExact": 1.26953125,
+      "pctAA": 0.9879557291666666,
       "mismatches": [
         {
           "part": "initials",
@@ -239,21 +227,15 @@
           "channel": "justify-content",
           "ours": "normal",
           "theirs": "center"
-        },
-        {
-          "part": "initials",
-          "channel": "position",
-          "ours": "static",
-          "theirs": "absolute"
         }
       ]
     },
     {
       "key": "xs.off__active",
       "channelsCompared": 46,
-      "channelsEqual": 42,
-      "pctExact": 0.5265299479166666,
-      "pctAA": 0.2587890625,
+      "channelsEqual": 43,
+      "pctExact": 1.26953125,
+      "pctAA": 0.9879557291666666,
       "mismatches": [
         {
           "part": "initials",
@@ -272,21 +254,16 @@
           "channel": "justify-content",
           "ours": "normal",
           "theirs": "center"
-        },
-        {
-          "part": "initials",
-          "channel": "position",
-          "ours": "static",
-          "theirs": "absolute"
         }
-      ]
+      ],
+      "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport"
     },
     {
       "key": "xs.on__default",
       "channelsCompared": 46,
-      "channelsEqual": 21,
+      "channelsEqual": 22,
       "pctExact": 1.26953125,
-      "pctAA": 1.0384114583333333,
+      "pctAA": 1.1507161458333333,
       "mismatches": [
         {
           "part": "root",
@@ -419,12 +396,6 @@
           "channel": "outline-color",
           "ours": "rgba(253, 239, 253, 1)",
           "theirs": "rgba(255, 246, 248, 1)"
-        },
-        {
-          "part": "initials",
-          "channel": "position",
-          "ours": "static",
-          "theirs": "absolute"
         },
         {
           "part": "initials",
@@ -443,9 +414,9 @@
     {
       "key": "xs.on__hover",
       "channelsCompared": 46,
-      "channelsEqual": 21,
+      "channelsEqual": 22,
       "pctExact": 1.26953125,
-      "pctAA": 1.0384114583333333,
+      "pctAA": 1.1507161458333333,
       "mismatches": [
         {
           "part": "root",
@@ -578,12 +549,6 @@
           "channel": "outline-color",
           "ours": "rgba(253, 239, 253, 1)",
           "theirs": "rgba(255, 246, 248, 1)"
-        },
-        {
-          "part": "initials",
-          "channel": "position",
-          "ours": "static",
-          "theirs": "absolute"
         },
         {
           "part": "initials",
@@ -597,14 +562,15 @@
           "ours": "rgba(253, 239, 253, 1)",
           "theirs": "rgba(255, 246, 248, 1)"
         }
-      ]
+      ],
+      "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport"
     },
     {
       "key": "xs.on__focus-visible",
       "channelsCompared": 46,
-      "channelsEqual": 21,
+      "channelsEqual": 22,
       "pctExact": 1.26953125,
-      "pctAA": 1.0384114583333333,
+      "pctAA": 1.1507161458333333,
       "mismatches": [
         {
           "part": "root",
@@ -737,12 +703,6 @@
           "channel": "outline-color",
           "ours": "rgba(253, 239, 253, 1)",
           "theirs": "rgba(255, 246, 248, 1)"
-        },
-        {
-          "part": "initials",
-          "channel": "position",
-          "ours": "static",
-          "theirs": "absolute"
         },
         {
           "part": "initials",
@@ -761,9 +721,9 @@
     {
       "key": "xs.on__active",
       "channelsCompared": 46,
-      "channelsEqual": 21,
+      "channelsEqual": 22,
       "pctExact": 1.26953125,
-      "pctAA": 1.0384114583333333,
+      "pctAA": 1.1507161458333333,
       "mismatches": [
         {
           "part": "root",
@@ -899,12 +859,6 @@
         },
         {
           "part": "initials",
-          "channel": "position",
-          "ours": "static",
-          "theirs": "absolute"
-        },
-        {
-          "part": "initials",
           "channel": "text-decoration-color",
           "ours": "rgba(253, 239, 253, 1)",
           "theirs": "rgba(255, 246, 248, 1)"
@@ -915,14 +869,15 @@
           "ours": "rgba(253, 239, 253, 1)",
           "theirs": "rgba(255, 246, 248, 1)"
         }
-      ]
+      ],
+      "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport"
     },
     {
       "key": "sm.off__default",
       "channelsCompared": 46,
-      "channelsEqual": 42,
-      "pctExact": 0.9033203125,
-      "pctAA": 0.5680338541666666,
+      "channelsEqual": 43,
+      "pctExact": 1.8001302083333333,
+      "pctAA": 1.46484375,
       "mismatches": [
         {
           "part": "initials",
@@ -941,21 +896,15 @@
           "channel": "justify-content",
           "ours": "normal",
           "theirs": "center"
-        },
-        {
-          "part": "initials",
-          "channel": "position",
-          "ours": "static",
-          "theirs": "absolute"
         }
       ]
     },
     {
       "key": "sm.off__hover",
       "channelsCompared": 46,
-      "channelsEqual": 42,
-      "pctExact": 0.9033203125,
-      "pctAA": 0.5680338541666666,
+      "channelsEqual": 43,
+      "pctExact": 1.8001302083333333,
+      "pctAA": 1.46484375,
       "mismatches": [
         {
           "part": "initials",
@@ -974,21 +923,16 @@
           "channel": "justify-content",
           "ours": "normal",
           "theirs": "center"
-        },
-        {
-          "part": "initials",
-          "channel": "position",
-          "ours": "static",
-          "theirs": "absolute"
         }
-      ]
+      ],
+      "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport"
     },
     {
       "key": "sm.off__focus-visible",
       "channelsCompared": 46,
-      "channelsEqual": 42,
-      "pctExact": 0.9033203125,
-      "pctAA": 0.5680338541666666,
+      "channelsEqual": 43,
+      "pctExact": 1.8001302083333333,
+      "pctAA": 1.46484375,
       "mismatches": [
         {
           "part": "initials",
@@ -1007,21 +951,15 @@
           "channel": "justify-content",
           "ours": "normal",
           "theirs": "center"
-        },
-        {
-          "part": "initials",
-          "channel": "position",
-          "ours": "static",
-          "theirs": "absolute"
         }
       ]
     },
     {
       "key": "sm.off__active",
       "channelsCompared": 46,
-      "channelsEqual": 42,
-      "pctExact": 0.9033203125,
-      "pctAA": 0.5680338541666666,
+      "channelsEqual": 43,
+      "pctExact": 1.8001302083333333,
+      "pctAA": 1.46484375,
       "mismatches": [
         {
           "part": "initials",
@@ -1040,21 +978,16 @@
           "channel": "justify-content",
           "ours": "normal",
           "theirs": "center"
-        },
-        {
-          "part": "initials",
-          "channel": "position",
-          "ours": "static",
-          "theirs": "absolute"
         }
-      ]
+      ],
+      "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport"
     },
     {
       "key": "sm.on__default",
       "channelsCompared": 46,
-      "channelsEqual": 21,
+      "channelsEqual": 22,
       "pctExact": 1.8001302083333333,
-      "pctAA": 1.48193359375,
+      "pctAA": 1.6194661458333333,
       "mismatches": [
         {
           "part": "root",
@@ -1187,12 +1120,6 @@
           "channel": "outline-color",
           "ours": "rgba(253, 239, 253, 1)",
           "theirs": "rgba(255, 246, 248, 1)"
-        },
-        {
-          "part": "initials",
-          "channel": "position",
-          "ours": "static",
-          "theirs": "absolute"
         },
         {
           "part": "initials",
@@ -1211,9 +1138,9 @@
     {
       "key": "sm.on__hover",
       "channelsCompared": 46,
-      "channelsEqual": 21,
+      "channelsEqual": 22,
       "pctExact": 1.8001302083333333,
-      "pctAA": 1.48193359375,
+      "pctAA": 1.6194661458333333,
       "mismatches": [
         {
           "part": "root",
@@ -1346,12 +1273,6 @@
           "channel": "outline-color",
           "ours": "rgba(253, 239, 253, 1)",
           "theirs": "rgba(255, 246, 248, 1)"
-        },
-        {
-          "part": "initials",
-          "channel": "position",
-          "ours": "static",
-          "theirs": "absolute"
         },
         {
           "part": "initials",
@@ -1365,14 +1286,15 @@
           "ours": "rgba(253, 239, 253, 1)",
           "theirs": "rgba(255, 246, 248, 1)"
         }
-      ]
+      ],
+      "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport"
     },
     {
       "key": "sm.on__focus-visible",
       "channelsCompared": 46,
-      "channelsEqual": 21,
+      "channelsEqual": 22,
       "pctExact": 1.8001302083333333,
-      "pctAA": 1.48193359375,
+      "pctAA": 1.6194661458333333,
       "mismatches": [
         {
           "part": "root",
@@ -1505,12 +1427,6 @@
           "channel": "outline-color",
           "ours": "rgba(253, 239, 253, 1)",
           "theirs": "rgba(255, 246, 248, 1)"
-        },
-        {
-          "part": "initials",
-          "channel": "position",
-          "ours": "static",
-          "theirs": "absolute"
         },
         {
           "part": "initials",
@@ -1529,9 +1445,9 @@
     {
       "key": "sm.on__active",
       "channelsCompared": 46,
-      "channelsEqual": 21,
+      "channelsEqual": 22,
       "pctExact": 1.8001302083333333,
-      "pctAA": 1.48193359375,
+      "pctAA": 1.6194661458333333,
       "mismatches": [
         {
           "part": "root",
@@ -1667,12 +1583,6 @@
         },
         {
           "part": "initials",
-          "channel": "position",
-          "ours": "static",
-          "theirs": "absolute"
-        },
-        {
-          "part": "initials",
           "channel": "text-decoration-color",
           "ours": "rgba(253, 239, 253, 1)",
           "theirs": "rgba(255, 246, 248, 1)"
@@ -1683,14 +1593,15 @@
           "ours": "rgba(253, 239, 253, 1)",
           "theirs": "rgba(255, 246, 248, 1)"
         }
-      ]
+      ],
+      "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport"
     },
     {
       "key": "md.off__default",
       "channelsCompared": 46,
-      "channelsEqual": 42,
-      "pctExact": 1.376953125,
-      "pctAA": 0.8878580729166666,
+      "channelsEqual": 43,
+      "pctExact": 2.4772135416666665,
+      "pctAA": 2.0263671875,
       "mismatches": [
         {
           "part": "initials",
@@ -1709,21 +1620,15 @@
           "channel": "justify-content",
           "ours": "normal",
           "theirs": "center"
-        },
-        {
-          "part": "initials",
-          "channel": "position",
-          "ours": "static",
-          "theirs": "absolute"
         }
       ]
     },
     {
       "key": "md.off__hover",
       "channelsCompared": 46,
-      "channelsEqual": 42,
-      "pctExact": 1.376953125,
-      "pctAA": 0.8878580729166666,
+      "channelsEqual": 43,
+      "pctExact": 2.4772135416666665,
+      "pctAA": 2.0263671875,
       "mismatches": [
         {
           "part": "initials",
@@ -1742,21 +1647,16 @@
           "channel": "justify-content",
           "ours": "normal",
           "theirs": "center"
-        },
-        {
-          "part": "initials",
-          "channel": "position",
-          "ours": "static",
-          "theirs": "absolute"
         }
-      ]
+      ],
+      "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport"
     },
     {
       "key": "md.off__focus-visible",
       "channelsCompared": 46,
-      "channelsEqual": 42,
-      "pctExact": 1.376953125,
-      "pctAA": 0.8878580729166666,
+      "channelsEqual": 43,
+      "pctExact": 2.4772135416666665,
+      "pctAA": 2.0263671875,
       "mismatches": [
         {
           "part": "initials",
@@ -1775,21 +1675,15 @@
           "channel": "justify-content",
           "ours": "normal",
           "theirs": "center"
-        },
-        {
-          "part": "initials",
-          "channel": "position",
-          "ours": "static",
-          "theirs": "absolute"
         }
       ]
     },
     {
       "key": "md.off__active",
       "channelsCompared": 46,
-      "channelsEqual": 42,
-      "pctExact": 1.376953125,
-      "pctAA": 0.8878580729166666,
+      "channelsEqual": 43,
+      "pctExact": 2.4772135416666665,
+      "pctAA": 2.0263671875,
       "mismatches": [
         {
           "part": "initials",
@@ -1808,21 +1702,16 @@
           "channel": "justify-content",
           "ours": "normal",
           "theirs": "center"
-        },
-        {
-          "part": "initials",
-          "channel": "position",
-          "ours": "static",
-          "theirs": "absolute"
         }
-      ]
+      ],
+      "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport"
     },
     {
       "key": "md.on__default",
       "channelsCompared": 46,
-      "channelsEqual": 21,
+      "channelsEqual": 22,
       "pctExact": 2.4772135416666665,
-      "pctAA": 2.1061197916666665,
+      "pctAA": 2.2420247395833335,
       "mismatches": [
         {
           "part": "root",
@@ -1955,12 +1844,6 @@
           "channel": "outline-color",
           "ours": "rgba(253, 239, 253, 1)",
           "theirs": "rgba(255, 246, 248, 1)"
-        },
-        {
-          "part": "initials",
-          "channel": "position",
-          "ours": "static",
-          "theirs": "absolute"
         },
         {
           "part": "initials",
@@ -1979,9 +1862,9 @@
     {
       "key": "md.on__hover",
       "channelsCompared": 46,
-      "channelsEqual": 21,
+      "channelsEqual": 22,
       "pctExact": 2.4772135416666665,
-      "pctAA": 2.1061197916666665,
+      "pctAA": 2.2420247395833335,
       "mismatches": [
         {
           "part": "root",
@@ -2114,12 +1997,6 @@
           "channel": "outline-color",
           "ours": "rgba(253, 239, 253, 1)",
           "theirs": "rgba(255, 246, 248, 1)"
-        },
-        {
-          "part": "initials",
-          "channel": "position",
-          "ours": "static",
-          "theirs": "absolute"
         },
         {
           "part": "initials",
@@ -2133,14 +2010,15 @@
           "ours": "rgba(253, 239, 253, 1)",
           "theirs": "rgba(255, 246, 248, 1)"
         }
-      ]
+      ],
+      "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport"
     },
     {
       "key": "md.on__focus-visible",
       "channelsCompared": 46,
-      "channelsEqual": 21,
+      "channelsEqual": 22,
       "pctExact": 2.4772135416666665,
-      "pctAA": 2.1061197916666665,
+      "pctAA": 2.2420247395833335,
       "mismatches": [
         {
           "part": "root",
@@ -2273,12 +2151,6 @@
           "channel": "outline-color",
           "ours": "rgba(253, 239, 253, 1)",
           "theirs": "rgba(255, 246, 248, 1)"
-        },
-        {
-          "part": "initials",
-          "channel": "position",
-          "ours": "static",
-          "theirs": "absolute"
         },
         {
           "part": "initials",
@@ -2297,9 +2169,9 @@
     {
       "key": "md.on__active",
       "channelsCompared": 46,
-      "channelsEqual": 21,
+      "channelsEqual": 22,
       "pctExact": 2.4772135416666665,
-      "pctAA": 2.1061197916666665,
+      "pctAA": 2.2420247395833335,
       "mismatches": [
         {
           "part": "root",
@@ -2435,12 +2307,6 @@
         },
         {
           "part": "initials",
-          "channel": "position",
-          "ours": "static",
-          "theirs": "absolute"
-        },
-        {
-          "part": "initials",
           "channel": "text-decoration-color",
           "ours": "rgba(253, 239, 253, 1)",
           "theirs": "rgba(255, 246, 248, 1)"
@@ -2451,14 +2317,15 @@
           "ours": "rgba(253, 239, 253, 1)",
           "theirs": "rgba(255, 246, 248, 1)"
         }
-      ]
+      ],
+      "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport"
     },
     {
       "key": "lg.off__default",
       "channelsCompared": 46,
-      "channelsEqual": 42,
-      "pctExact": 1.9571940104166667,
-      "pctAA": 1.2923177083333333,
+      "channelsEqual": 43,
+      "pctExact": 3.1901041666666665,
+      "pctAA": 2.5960286458333335,
       "mismatches": [
         {
           "part": "initials",
@@ -2477,21 +2344,15 @@
           "channel": "justify-content",
           "ours": "normal",
           "theirs": "center"
-        },
-        {
-          "part": "initials",
-          "channel": "position",
-          "ours": "static",
-          "theirs": "absolute"
         }
       ]
     },
     {
       "key": "lg.off__hover",
       "channelsCompared": 46,
-      "channelsEqual": 42,
-      "pctExact": 1.9571940104166667,
-      "pctAA": 1.2923177083333333,
+      "channelsEqual": 43,
+      "pctExact": 3.1901041666666665,
+      "pctAA": 2.5960286458333335,
       "mismatches": [
         {
           "part": "initials",
@@ -2510,21 +2371,16 @@
           "channel": "justify-content",
           "ours": "normal",
           "theirs": "center"
-        },
-        {
-          "part": "initials",
-          "channel": "position",
-          "ours": "static",
-          "theirs": "absolute"
         }
-      ]
+      ],
+      "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport"
     },
     {
       "key": "lg.off__focus-visible",
       "channelsCompared": 46,
-      "channelsEqual": 42,
-      "pctExact": 1.9571940104166667,
-      "pctAA": 1.2923177083333333,
+      "channelsEqual": 43,
+      "pctExact": 3.1901041666666665,
+      "pctAA": 2.5960286458333335,
       "mismatches": [
         {
           "part": "initials",
@@ -2543,21 +2399,15 @@
           "channel": "justify-content",
           "ours": "normal",
           "theirs": "center"
-        },
-        {
-          "part": "initials",
-          "channel": "position",
-          "ours": "static",
-          "theirs": "absolute"
         }
       ]
     },
     {
       "key": "lg.off__active",
       "channelsCompared": 46,
-      "channelsEqual": 42,
-      "pctExact": 1.9571940104166667,
-      "pctAA": 1.2923177083333333,
+      "channelsEqual": 43,
+      "pctExact": 3.1901041666666665,
+      "pctAA": 2.5960286458333335,
       "mismatches": [
         {
           "part": "initials",
@@ -2576,21 +2426,16 @@
           "channel": "justify-content",
           "ours": "normal",
           "theirs": "center"
-        },
-        {
-          "part": "initials",
-          "channel": "position",
-          "ours": "static",
-          "theirs": "absolute"
         }
-      ]
+      ],
+      "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport"
     },
     {
       "key": "lg.on__default",
       "channelsCompared": 46,
-      "channelsEqual": 21,
+      "channelsEqual": 22,
       "pctExact": 3.1901041666666665,
-      "pctAA": 2.7018229166666665,
+      "pctAA": 2.9109700520833335,
       "mismatches": [
         {
           "part": "root",
@@ -2723,12 +2568,6 @@
           "channel": "outline-color",
           "ours": "rgba(253, 239, 253, 1)",
           "theirs": "rgba(255, 246, 248, 1)"
-        },
-        {
-          "part": "initials",
-          "channel": "position",
-          "ours": "static",
-          "theirs": "absolute"
         },
         {
           "part": "initials",
@@ -2747,9 +2586,9 @@
     {
       "key": "lg.on__hover",
       "channelsCompared": 46,
-      "channelsEqual": 21,
+      "channelsEqual": 22,
       "pctExact": 3.1901041666666665,
-      "pctAA": 2.7018229166666665,
+      "pctAA": 2.9109700520833335,
       "mismatches": [
         {
           "part": "root",
@@ -2882,12 +2721,6 @@
           "channel": "outline-color",
           "ours": "rgba(253, 239, 253, 1)",
           "theirs": "rgba(255, 246, 248, 1)"
-        },
-        {
-          "part": "initials",
-          "channel": "position",
-          "ours": "static",
-          "theirs": "absolute"
         },
         {
           "part": "initials",
@@ -2901,14 +2734,15 @@
           "ours": "rgba(253, 239, 253, 1)",
           "theirs": "rgba(255, 246, 248, 1)"
         }
-      ]
+      ],
+      "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport"
     },
     {
       "key": "lg.on__focus-visible",
       "channelsCompared": 46,
-      "channelsEqual": 21,
+      "channelsEqual": 22,
       "pctExact": 3.1901041666666665,
-      "pctAA": 2.7018229166666665,
+      "pctAA": 2.9109700520833335,
       "mismatches": [
         {
           "part": "root",
@@ -3041,12 +2875,6 @@
           "channel": "outline-color",
           "ours": "rgba(253, 239, 253, 1)",
           "theirs": "rgba(255, 246, 248, 1)"
-        },
-        {
-          "part": "initials",
-          "channel": "position",
-          "ours": "static",
-          "theirs": "absolute"
         },
         {
           "part": "initials",
@@ -3065,9 +2893,9 @@
     {
       "key": "lg.on__active",
       "channelsCompared": 46,
-      "channelsEqual": 21,
+      "channelsEqual": 22,
       "pctExact": 3.1901041666666665,
-      "pctAA": 2.7018229166666665,
+      "pctAA": 2.9109700520833335,
       "mismatches": [
         {
           "part": "root",
@@ -3203,12 +3031,6 @@
         },
         {
           "part": "initials",
-          "channel": "position",
-          "ours": "static",
-          "theirs": "absolute"
-        },
-        {
-          "part": "initials",
           "channel": "text-decoration-color",
           "ours": "rgba(253, 239, 253, 1)",
           "theirs": "rgba(255, 246, 248, 1)"
@@ -3219,14 +3041,15 @@
           "ours": "rgba(253, 239, 253, 1)",
           "theirs": "rgba(255, 246, 248, 1)"
         }
-      ]
+      ],
+      "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport"
     },
     {
       "key": "xl.off__default",
       "channelsCompared": 46,
-      "channelsEqual": 42,
-      "pctExact": 3.4407552083333335,
-      "pctAA": 2.607421875,
+      "channelsEqual": 43,
+      "pctExact": 5.065104166666667,
+      "pctAA": 4.366861979166667,
       "mismatches": [
         {
           "part": "initials",
@@ -3245,21 +3068,15 @@
           "channel": "justify-content",
           "ours": "normal",
           "theirs": "center"
-        },
-        {
-          "part": "initials",
-          "channel": "position",
-          "ours": "static",
-          "theirs": "absolute"
         }
       ]
     },
     {
       "key": "xl.off__hover",
       "channelsCompared": 46,
-      "channelsEqual": 42,
-      "pctExact": 3.4407552083333335,
-      "pctAA": 2.607421875,
+      "channelsEqual": 43,
+      "pctExact": 5.065104166666667,
+      "pctAA": 4.366861979166667,
       "mismatches": [
         {
           "part": "initials",
@@ -3278,21 +3095,16 @@
           "channel": "justify-content",
           "ours": "normal",
           "theirs": "center"
-        },
-        {
-          "part": "initials",
-          "channel": "position",
-          "ours": "static",
-          "theirs": "absolute"
         }
-      ]
+      ],
+      "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport"
     },
     {
       "key": "xl.off__focus-visible",
       "channelsCompared": 46,
-      "channelsEqual": 42,
-      "pctExact": 3.4407552083333335,
-      "pctAA": 2.607421875,
+      "channelsEqual": 43,
+      "pctExact": 5.065104166666667,
+      "pctAA": 4.366861979166667,
       "mismatches": [
         {
           "part": "initials",
@@ -3311,21 +3123,15 @@
           "channel": "justify-content",
           "ours": "normal",
           "theirs": "center"
-        },
-        {
-          "part": "initials",
-          "channel": "position",
-          "ours": "static",
-          "theirs": "absolute"
         }
       ]
     },
     {
       "key": "xl.off__active",
       "channelsCompared": 46,
-      "channelsEqual": 42,
-      "pctExact": 3.4407552083333335,
-      "pctAA": 2.607421875,
+      "channelsEqual": 43,
+      "pctExact": 5.065104166666667,
+      "pctAA": 4.366861979166667,
       "mismatches": [
         {
           "part": "initials",
@@ -3344,21 +3150,16 @@
           "channel": "justify-content",
           "ours": "normal",
           "theirs": "center"
-        },
-        {
-          "part": "initials",
-          "channel": "position",
-          "ours": "static",
-          "theirs": "absolute"
         }
-      ]
+      ],
+      "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport"
     },
     {
       "key": "xl.on__default",
       "channelsCompared": 46,
-      "channelsEqual": 21,
+      "channelsEqual": 22,
       "pctExact": 5.065104166666667,
-      "pctAA": 4.412434895833333,
+      "pctAA": 4.666341145833333,
       "mismatches": [
         {
           "part": "root",
@@ -3491,12 +3292,6 @@
           "channel": "outline-color",
           "ours": "rgba(253, 239, 253, 1)",
           "theirs": "rgba(255, 246, 248, 1)"
-        },
-        {
-          "part": "initials",
-          "channel": "position",
-          "ours": "static",
-          "theirs": "absolute"
         },
         {
           "part": "initials",
@@ -3515,9 +3310,9 @@
     {
       "key": "xl.on__hover",
       "channelsCompared": 46,
-      "channelsEqual": 21,
+      "channelsEqual": 22,
       "pctExact": 5.065104166666667,
-      "pctAA": 4.412434895833333,
+      "pctAA": 4.666341145833333,
       "mismatches": [
         {
           "part": "root",
@@ -3650,12 +3445,6 @@
           "channel": "outline-color",
           "ours": "rgba(253, 239, 253, 1)",
           "theirs": "rgba(255, 246, 248, 1)"
-        },
-        {
-          "part": "initials",
-          "channel": "position",
-          "ours": "static",
-          "theirs": "absolute"
         },
         {
           "part": "initials",
@@ -3669,14 +3458,15 @@
           "ours": "rgba(253, 239, 253, 1)",
           "theirs": "rgba(255, 246, 248, 1)"
         }
-      ]
+      ],
+      "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport"
     },
     {
       "key": "xl.on__focus-visible",
       "channelsCompared": 46,
-      "channelsEqual": 21,
+      "channelsEqual": 22,
       "pctExact": 5.065104166666667,
-      "pctAA": 4.412434895833333,
+      "pctAA": 4.666341145833333,
       "mismatches": [
         {
           "part": "root",
@@ -3809,12 +3599,6 @@
           "channel": "outline-color",
           "ours": "rgba(253, 239, 253, 1)",
           "theirs": "rgba(255, 246, 248, 1)"
-        },
-        {
-          "part": "initials",
-          "channel": "position",
-          "ours": "static",
-          "theirs": "absolute"
         },
         {
           "part": "initials",
@@ -3833,9 +3617,9 @@
     {
       "key": "xl.on__active",
       "channelsCompared": 46,
-      "channelsEqual": 21,
+      "channelsEqual": 22,
       "pctExact": 5.065104166666667,
-      "pctAA": 4.412434895833333,
+      "pctAA": 4.666341145833333,
       "mismatches": [
         {
           "part": "root",
@@ -3971,12 +3755,6 @@
         },
         {
           "part": "initials",
-          "channel": "position",
-          "ours": "static",
-          "theirs": "absolute"
-        },
-        {
-          "part": "initials",
           "channel": "text-decoration-color",
           "ours": "rgba(253, 239, 253, 1)",
           "theirs": "rgba(255, 246, 248, 1)"
@@ -3987,7 +3765,8 @@
           "ours": "rgba(253, 239, 253, 1)",
           "theirs": "rgba(255, 246, 248, 1)"
         }
-      ]
+      ],
+      "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport"
     }
   ]
 }

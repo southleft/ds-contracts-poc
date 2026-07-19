@@ -369,7 +369,7 @@
     "state": 0
   },
   "codeOnly": {
-    "base": 1,
+    "base": 0,
     "state": 0,
     "overflowBindings": 1
   },
@@ -468,7 +468,7 @@
     ]
   },
   "gate": {
-    "computedPctEqual": 68.47826086956522,
+    "computedPctEqual": 70.65217391304348,
     "rowsFullyEqual": 0,
     "rows": 40,
     "pixelPerfectExact": 0,

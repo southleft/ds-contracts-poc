@@ -121,6 +121,21 @@ function nodeStyle(spec: NodeSpec, ctx: RenderCtx): string {
     d.push(`align-items: ${spec.layout.stretchChildren ? 'stretch' : COUNTER_CSS[spec.layout.counter]}`);
   }
   if (spec.fill) d.push(`background-color: ${cssVarOf(spec.fill)}`);
+  if (spec.effectStack && spec.effectStack.length > 0) {
+    // Round 4 (canvas-gate finding): effect STACKS render — the runtime
+    // applies them as native effects; this preview renders the equivalent
+    // CSS box-shadow list (inset for INNER_SHADOW), like the code surfaces.
+    ctx.used.add('shadow');
+    const css = spec.effectStack
+      .map((e) => {
+        const c = e.color;
+        const a = c.a === undefined ? 1 : c.a;
+        const col = `rgba(${Math.round(c.r * 255)}, ${Math.round(c.g * 255)}, ${Math.round(c.b * 255)}, ${a})`;
+        return `${e.inner ? 'inset ' : ''}${e.x}px ${e.y}px ${e.radius}px${e.spread ? ` ${e.spread}px` : ''} ${col}`;
+      })
+      .join(', ');
+    d.push(`box-shadow: ${css}`);
+  }
   if (spec.dropShadow) {
     // dump v1.2 single DROP_SHADOW — the same value the CSS surfaces render.
     const sh = spec.dropShadow;
@@ -293,8 +308,19 @@ function renderNode(
 
   if (spec.type === 'svg') {
     ctx.used.add('svg');
-    const style = ['display: inline-flex', 'flex-shrink: 0', extraStyle].filter(Boolean).join('; ');
-    return `<span style="${style}">${spec.svg ?? ''}</span>`;
+    const size = (spec as { iconSize?: number }).iconSize;
+    const style = [
+      'display: inline-flex',
+      'flex-shrink: 0',
+      ...(size ? [`width: ${size}px`, `height: ${size}px`] : []),
+      extraStyle,
+    ].filter(Boolean).join('; ');
+    // size the inline svg itself: a viewBox-only svg otherwise renders at
+    // the UA default (or 0 in shrink-to-fit contexts) — canvas-gate finding.
+    const svgMarkup = size
+      ? String(spec.svg ?? '').replace(/^<svg /, `<svg width="${size}" height="${size}" `)
+      : (spec.svg ?? '');
+    return `<span style="${style}">${svgMarkup}</span>`;
   }
 
   if (spec.type === 'text') {

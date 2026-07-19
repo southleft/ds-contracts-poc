@@ -497,15 +497,7 @@
     ],
     "state": []
   },
-  "codeOnlyChannels": [
-    {
-      "part": "initials",
-      "channel": "position",
-      "reason": "declared-channel value outside the bounded grammar — named residue (v15)",
-      "sample": "absolute",
-      "distinctValues": 1
-    }
-  ],
+  "codeOnlyChannels": [],
   "stateOverflow": [],
   "overflowBindings": [
     {
@@ -927,7 +919,8 @@
       "svg-viewbox-bumped: Avatar.initials@lg.off — computed size 32 < path extent 33; viewBox reconstructed as 0 0 33 33 (named reconstruction)",
       "svg-child-outside-grammar: Avatar.initials@lg.on — <text> (v1 carries path/g only); asset refused",
       "svg-viewbox-reconstructed: Avatar.initials@xl.off — 0 0 40 40 from computed size 40×40 (path extent 33.0; viewBox is not a computed style — named reconstruction)",
-      "svg-child-outside-grammar: Avatar.initials@xl.on — <text> (v1 carries path/g only); asset refused"
+      "svg-child-outside-grammar: Avatar.initials@xl.on — <text> (v1 carries path/g only); asset refused",
+      "aspect-carried: initials computed width == height in every enabled combo (20/24/28/32/40px) → declared aspect-ratio 1 / 1 (geometry evidence; the real square rides a pseudo-element padding hack)"
     ],
     "refusals": []
   },
