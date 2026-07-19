@@ -2,9 +2,9 @@
   "$schema": "../../../contracts/contract.schema.json",
   "id": "polaris.button",
   "name": "Button",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "status": "draft",
-  "description": "PROPOSED contract extracted from examples/polaris/.polaris-clone/polaris-react/src/components/Button/Button.tsx (react-tsx adapter) — API surface only; anatomy, tokens, and design bindings await reconciliation and human review. PROMOTED showcase contract: API surface extracted mechanically from Shopify/polaris @ 2b1ea88625e0613853ca8577c9acd1980a90f382 (polaris-react 13.10.1, MIT © Shopify, extracted 2026-07-18); styling bindings promoted from the component's own module.css under the reviewed class map in examples/polaris/scripts/curation.ts — every carried binding and every named refusal is listed in examples/polaris/extraction/PROMOTION.md. COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @shopify/polaris@13.9.5 in headless Chromium 148.0.7778.96; overflow channels in the sibling extension file. FLOOR-PROMOTED v0.2.0 (extract/computed round 2): this contract is the computed-floor rebuild — complete browser truth captured from the real @shopify/polaris@13.9.5 npm package rendered in headless Chromium 148.0.7778.96 (every enumerated longhand per element incl. ::before/::after, full state sweep, double-run byte-identity), fused with the static semantic layer (BOUND bindings browser-confirmed, unlabeled channels MINTED as imported.* tokens in tokens/polaris-minted.dtcg.json, uniform registry channels DECLARED), contradictions resolved computed-wins per the decisions ledger (extract/computed/out/button/decisions.md, human-acked; source resolved.contract.json). Everything the vocabulary cannot carry is named in contracts/button.extension.json. Delta ledger: extract/computed/out/button/LEDGER.md (supersedes this component's section of extraction/PROMOTION.md).",
+  "description": "PROPOSED contract extracted from examples/polaris/.polaris-clone/polaris-react/src/components/Button/Button.tsx (react-tsx adapter) — API surface only; anatomy, tokens, and design bindings await reconciliation and human review. PROMOTED showcase contract: API surface extracted mechanically from Shopify/polaris @ 2b1ea88625e0613853ca8577c9acd1980a90f382 (polaris-react 13.10.1, MIT © Shopify, extracted 2026-07-18); styling bindings promoted from the component's own module.css under the reviewed class map in examples/polaris/scripts/curation.ts — every carried binding and every named refusal is listed in examples/polaris/extraction/PROMOTION.md. COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @shopify/polaris@13.9.5 in headless Chromium 148.0.7778.96; overflow channels in the sibling extension file. FLOOR-PROMOTED v0.3.0 (extract/computed round 4): this contract is the computed-floor rebuild — complete browser truth captured from the real @shopify/polaris@13.9.5 npm package rendered in headless Chromium 148.0.7778.96 (every enumerated longhand per element incl. ::before/::after, full state sweep, double-run byte-identity), fused with the static semantic layer (BOUND bindings browser-confirmed, unlabeled channels MINTED as imported.* tokens in tokens/polaris-minted.dtcg.json, uniform registry channels DECLARED), with the round-4 DOM-ANATOMY PROMOTION: every rendered element is a carried part, svg glyph content rides committed icon assets reconstructed from the captured d/fill channels, presence facts gate structure-creating props, contradictions resolved computed-wins per the decisions ledger (extract/computed/out/button/decisions.md, human-acked; source resolved.contract.json). Everything the vocabulary cannot carry is named in contracts/button.extension.json. Delta ledger: extract/computed/out/button/LEDGER.md (supersedes this component's section of extraction/PROMOTION.md).",
   "semantics": {
     "element": "button"
   },
@@ -161,6 +161,21 @@
           "prop": "variant"
         }
       }
+    },
+    {
+      "name": "withIcon",
+      "description": "Structure-creating optional prop promoted by the computed floor (round 4): ON mounts the library's `icon` ({\"$import\":\"@shopify/polaris-icons#PlusCircleIcon\"}); the created subtree is carried as parts gated on this prop.",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Show WithIcon"
+        },
+        "code": {
+          "prop": "withIcon"
+        }
+      }
     }
   ],
   "states": [
@@ -172,7 +187,7 @@
   "anatomy": {
     "root": {
       "layout": {
-        "display": "inline-flex",
+        "display": "flex",
         "align": "center",
         "justify": "center"
       },
@@ -326,6 +341,48 @@
         }
       },
       "parts": {
+        "icon": {
+          "element": "span",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy span|Button__Icon — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "block",
+            "cursor": "pointer",
+            "text-align": "center",
+            "user-select": "none"
+          },
+          "visibleWhen": {
+            "prop": "withIcon"
+          },
+          "parts": {
+            "icon-2": {
+              "element": "span",
+              "description": "Promoted from the computed floor (round 4): rendered anatomy span|Icon — this element exists in the real component's DOM; the static layer had no part for it.",
+              "declared": {
+                "display": "block",
+                "cursor": "pointer",
+                "max-height": "100%",
+                "max-width": "100%",
+                "text-align": "center",
+                "user-select": "none"
+              },
+              "visibleWhen": {
+                "prop": "withIcon"
+              },
+              "icon": {
+                "asset": "button-icon-2",
+                "size": 20
+              },
+              "tokens": {
+                "min-height": "{imported.shared.size-0}",
+                "min-width": "{imported.shared.size-0}"
+              }
+            }
+          },
+          "tokens": {
+            "margin-bottom": "{imported.button.icon.margin-bottom}",
+            "margin-top": "{imported.button.icon.margin-top}"
+          }
+        },
         "label": {
           "element": "span",
           "tokens": {
@@ -362,6 +419,7 @@
           ],
           "text": "Button",
           "declared": {
+            "display": "block",
             "cursor": "pointer",
             "text-align": "center",
             "user-select": "none"

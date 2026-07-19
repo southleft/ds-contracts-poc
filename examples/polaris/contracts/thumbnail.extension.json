@@ -162,6 +162,26 @@
         "part": "root",
         "channel": "position",
         "value": "relative"
+      },
+      {
+        "part": "part-0",
+        "channel": "max-height",
+        "value": "100%"
+      },
+      {
+        "part": "part-0",
+        "channel": "max-width",
+        "value": "100%"
+      },
+      {
+        "part": "part-0",
+        "channel": "overflow-x",
+        "value": "clip"
+      },
+      {
+        "part": "part-0",
+        "channel": "overflow-y",
+        "value": "clip"
       }
     ],
     "state": []
@@ -169,92 +189,14 @@
   "codeOnlyChannels": [
     {
       "part": "part-0",
-      "channel": "max-height",
-      "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
-      "sample": "100%",
-      "distinctValues": 1
-    },
-    {
-      "part": "part-0",
-      "channel": "max-width",
-      "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
-      "sample": "100%",
-      "distinctValues": 1
-    },
-    {
-      "part": "part-0",
       "channel": "overflow-clip-margin",
       "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "sample": "content-box",
       "distinctValues": 1
-    },
-    {
-      "part": "part-0",
-      "channel": "overflow-x",
-      "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
-      "sample": "clip",
-      "distinctValues": 1
-    },
-    {
-      "part": "part-0",
-      "channel": "overflow-y",
-      "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
-      "sample": "clip",
-      "distinctValues": 1
-    },
-    {
-      "part": "part-0",
-      "channel": "position",
-      "reason": "declared-channel value outside the bounded grammar — named residue (v15)",
-      "sample": "absolute",
-      "distinctValues": 1
     }
   ],
   "stateOverflow": [],
-  "overflowBindings": [
-    {
-      "part": "part-0",
-      "channel": "bottom",
-      "ref": "{imported.shared.size-0}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "part-0",
-      "channel": "color",
-      "ref": "{imported.thumbnail.part-0.color}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "part-0",
-      "channel": "left",
-      "ref": "{imported.shared.size-0}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "part-0",
-      "channel": "min-height",
-      "ref": "{imported.shared.size-0}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "part-0",
-      "channel": "min-width",
-      "ref": "{imported.shared.size-0}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "part-0",
-      "channel": "right",
-      "ref": "{imported.shared.size-0}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "part-0",
-      "channel": "top",
-      "ref": "{imported.shared.size-0}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    }
-  ],
+  "overflowBindings": [],
   "pairwiseRefusals": [],
   "pseudoParts": {
     "_reason": "S5 (DESIGN §5.4): pseudo-element decor has no anatomy spelling — captured, receipted, not carried",
@@ -353,10 +295,27 @@
     ],
     "staticOnly": []
   },
+  "anatomyPromotion": {
+    "_note": "Round 4 DOM-anatomy promotion: computed-only elements carried as REAL parts (extract/computed/anatomy.ts); svg subtrees carried as reconstructed icon assets; presence facts via visibleWhen/stylesWhen; refusals named.",
+    "partsCarried": [
+      "root",
+      "part-0"
+    ],
+    "svgAssets": [],
+    "receipts": [
+      "img-attrs-wired: part-0 src/alt bound by prop-name heuristic (alt={alt}) — the capture reads no attributes (named)",
+      "aspect-carried: part-0 computed width == height in every enabled combo (24/40/60/80px) → declared aspect-ratio 1 / 1 (geometry evidence; the real square rides a pseudo-element padding hack)"
+    ],
+    "refusals": []
+  },
   "enrichmentNotes": [
     "declared fact carried: root.max-width = 100% (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: root.overflow-x = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: root.overflow-y = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: root.position = relative (v15 declared vocabulary — declared-not-drawn on canvas)"
+    "declared fact carried: root.position = relative (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-0.max-height = 100% (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-0.max-width = 100% (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-0.overflow-x = clip (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-0.overflow-y = clip (v15 declared vocabulary — declared-not-drawn on canvas)"
   ]
 }

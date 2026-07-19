@@ -14,6 +14,14 @@
           "$value": "0px",
           "$type": "dimension"
         },
+        "size-12": {
+          "$value": "12px",
+          "$type": "dimension"
+        },
+        "size-7": {
+          "$value": "7px",
+          "$type": "dimension"
+        },
         "color-b5b5b5": {
           "$value": "#b5b5b5",
           "$type": "color"
@@ -21,44 +29,531 @@
       },
       "tag": {
         "root": {
-          "padding-left": {
-            "$value": "6px",
-            "$type": "dimension"
+          "font-weight": {
+            "off": {
+              "$value": "450",
+              "$type": "number"
+            },
+            "on": {
+              "$value": "400",
+              "$type": "number"
+            }
           },
-          "padding-right": {
-            "$value": "6px",
+          "outline-color": {
+            "off": {
+              "$value": "#303030",
+              "$type": "color"
+            },
+            "on": {
+              "$value": "#00000000",
+              "$type": "color"
+            }
+          },
+          "outline-width": {
+            "off": {
+              "$value": "3px",
+              "$type": "dimension"
+            },
+            "on": {
+              "$value": "1px",
+              "$type": "dimension"
+            }
+          },
+          "outline-color-state-active": {
+            "$value": "#303030",
+            "$type": "color"
+          },
+          "outline-width-state-active": {
+            "$value": "3px",
             "$type": "dimension"
           },
           "background-color-state-disabled": {
             "$value": "#0000000d",
             "$type": "color"
-          }
-        },
-        "text": {
-          "font-size": {
-            "$value": "12px",
+          },
+          "outline-color-state-disabled": {
+            "off": {
+              "$value": "#b5b5b5",
+              "$type": "color"
+            },
+            "on": {
+              "$value": "#00000000",
+              "$type": "color"
+            }
+          },
+          "outline-color-state-focus-visible": {
+            "$value": "#303030",
+            "$type": "color"
+          },
+          "outline-width-state-focus-visible": {
+            "$value": "3px",
             "$type": "dimension"
           },
+          "background-color-state-hover": {
+            "off": {
+              "on": {
+                "$value": "#d4d4d4",
+                "$type": "color"
+              },
+              "off": {
+                "$value": "#e3e3e3",
+                "$type": "color"
+              }
+            },
+            "on": {
+              "off": {
+                "$value": "#d4d4d4",
+                "$type": "color"
+              },
+              "on": {
+                "$value": "#d4d4d4",
+                "$type": "color"
+              }
+            }
+          }
+        },
+        "link": {
+          "color": {
+            "$value": "#303030",
+            "$type": "color"
+          },
+          "grid-template-columns": {
+            "$value": "59.9219px",
+            "$type": "dimension"
+          },
+          "grid-template-rows": {
+            "$value": "20px",
+            "$type": "dimension"
+          }
+        },
+        "text-2": {
           "line-height": {
             "$value": "16px",
             "$type": "dimension"
+          }
+        },
+        "text": {
+          "line-height": {
+            "$value": "16px",
+            "$type": "dimension"
+          }
+        },
+        "button": {
+          "bottom": {
+            "none": {
+              "$value": "0px",
+              "$type": "dimension"
+            },
+            "large": {
+              "$value": "2px",
+              "$type": "dimension"
+            }
+          },
+          "color": {
+            "$value": "#8a8a8a",
+            "$type": "color"
+          },
+          "flex-shrink": {
+            "$value": "0",
+            "$type": "number"
+          },
+          "font-size": {
+            "$value": "13px",
+            "$type": "dimension"
+          },
+          "left": {
+            "none": {
+              "$value": "0px",
+              "$type": "dimension"
+            },
+            "large": {
+              "$value": "53.9219px",
+              "$type": "dimension"
+            }
+          },
+          "line-height": {
+            "$value": "20px",
+            "$type": "dimension"
+          },
+          "margin-bottom": {
+            "none": {
+              "$value": "1px",
+              "$type": "dimension"
+            },
+            "large": {
+              "$value": "0px",
+              "$type": "dimension"
+            }
+          },
+          "margin-left": {
+            "none": {
+              "$value": "2px",
+              "$type": "dimension"
+            },
+            "large": {
+              "$value": "0px",
+              "$type": "dimension"
+            }
+          },
+          "margin-right": {
+            "none": {
+              "$value": "1px",
+              "$type": "dimension"
+            },
+            "large": {
+              "$value": "0px",
+              "$type": "dimension"
+            }
+          },
+          "margin-top": {
+            "none": {
+              "$value": "1px",
+              "$type": "dimension"
+            },
+            "large": {
+              "$value": "0px",
+              "$type": "dimension"
+            }
+          },
+          "opacity": {
+            "none": {
+              "$value": "1",
+              "$type": "number"
+            },
+            "large": {
+              "$value": "0",
+              "$type": "number"
+            }
+          },
+          "right": {
+            "none": {
+              "$value": "0px",
+              "$type": "dimension"
+            },
+            "large": {
+              "$value": "2px",
+              "$type": "dimension"
+            }
+          },
+          "top": {
+            "none": {
+              "$value": "0px",
+              "$type": "dimension"
+            },
+            "large": {
+              "$value": "2px",
+              "$type": "dimension"
+            }
+          }
+        },
+        "icon": {
+          "color": {
+            "$value": "#8a8a8a",
+            "$type": "color"
+          },
+          "font-weight": {
+            "$value": "400",
+            "$type": "number"
           }
         }
       }
     }
   },
-  "folds": [],
-  "foldedStateSkips": [],
+  "folds": [
+    {
+      "part": "link",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "link",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "link",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "link",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "link",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "link",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "link",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "link",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "link",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "button",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "button",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "button",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "button",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "button",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "button",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "button",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "button",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "button",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-2",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-2",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-2",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-2",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-2",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-2",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-2",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-2",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-2",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-0-0-0",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-0-0-0",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-0-0-0",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-0-0-0",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-0-0-0",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-0-0-0",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-0-0-0",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-0-0-0",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-0-0-0",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    }
+  ],
+  "foldedStateSkips": [
+    "fold-carries-state-delta: [focus-visible] button.border-bottom-color rides its source fact",
+    "fold-carries-state-delta: [focus-visible] button.border-left-color rides its source fact",
+    "fold-carries-state-delta: [focus-visible] button.border-right-color rides its source fact",
+    "fold-carries-state-delta: [focus-visible] button.border-top-color rides its source fact",
+    "fold-carries-state-delta: [focus-visible] button.caret-color rides its source fact",
+    "fold-carries-state-delta: [focus-visible] button.column-rule-color rides its source fact",
+    "fold-carries-state-delta: [focus-visible] button.outline-color rides its source fact",
+    "fold-carries-state-delta: [focus-visible] button.text-decoration-color rides its source fact",
+    "fold-carries-state-delta: [focus-visible] button.text-emphasis-color rides its source fact",
+    "fold-carries-state-delta: [focus-visible] icon.border-bottom-color rides its source fact",
+    "fold-carries-state-delta: [focus-visible] icon.border-left-color rides its source fact",
+    "fold-carries-state-delta: [focus-visible] icon.border-right-color rides its source fact",
+    "fold-carries-state-delta: [focus-visible] icon.border-top-color rides its source fact",
+    "fold-carries-state-delta: [focus-visible] icon.caret-color rides its source fact",
+    "fold-carries-state-delta: [focus-visible] icon.column-rule-color rides its source fact",
+    "fold-carries-state-delta: [focus-visible] icon.outline-color rides its source fact",
+    "fold-carries-state-delta: [focus-visible] icon.text-decoration-color rides its source fact",
+    "fold-carries-state-delta: [focus-visible] icon.text-emphasis-color rides its source fact"
+  ],
   "layout": {
     "enriched": [],
-    "contradictions": [
-      {
-        "part": "root",
-        "field": "display",
-        "carried": "inline-flex",
-        "observed": "flex"
-      }
-    ],
+    "contradictions": [],
     "receipts": [],
     "_note": "computed flex keywords carried via Part.layout (the schema's own vocabulary); carried-slot contradictions are receipts, never silent overrides"
   },
@@ -76,14 +571,109 @@
         "value": "relative"
       },
       {
-        "part": "label",
-        "channel": "display",
-        "value": "inline"
+        "part": "link",
+        "channel": "position",
+        "value": "relative"
       },
       {
-        "part": "label",
+        "part": "link",
+        "channel": "text-decoration-line",
+        "value": "none"
+      },
+      {
+        "part": "text-2",
+        "channel": "cursor",
+        "value": "pointer"
+      },
+      {
+        "part": "text-2",
+        "channel": "overflow-x",
+        "value": "hidden"
+      },
+      {
+        "part": "text-2",
+        "channel": "overflow-y",
+        "value": "hidden"
+      },
+      {
+        "part": "text-2",
+        "channel": "text-overflow",
+        "value": "ellipsis"
+      },
+      {
+        "part": "text-2",
         "channel": "text-wrap-mode",
         "value": "nowrap"
+      },
+      {
+        "part": "label-2",
+        "channel": "cursor",
+        "value": "pointer"
+      },
+      {
+        "part": "label-2",
+        "channel": "text-wrap-mode",
+        "value": "nowrap"
+      },
+      {
+        "part": "button",
+        "channel": "appearance",
+        "value": "none"
+      },
+      {
+        "part": "button",
+        "channel": "border-bottom-style",
+        "value": "none"
+      },
+      {
+        "part": "button",
+        "channel": "border-left-style",
+        "value": "none"
+      },
+      {
+        "part": "button",
+        "channel": "border-right-style",
+        "value": "none"
+      },
+      {
+        "part": "button",
+        "channel": "border-top-style",
+        "value": "none"
+      },
+      {
+        "part": "button",
+        "channel": "cursor",
+        "value": "pointer"
+      },
+      {
+        "part": "icon",
+        "channel": "cursor",
+        "value": "pointer"
+      },
+      {
+        "part": "icon",
+        "channel": "font-feature-settings",
+        "value": "normal"
+      },
+      {
+        "part": "icon",
+        "channel": "max-height",
+        "value": "100%"
+      },
+      {
+        "part": "icon",
+        "channel": "max-width",
+        "value": "100%"
+      },
+      {
+        "part": "icon",
+        "channel": "text-align",
+        "value": "center"
+      },
+      {
+        "part": "icon",
+        "channel": "text-rendering",
+        "value": "auto"
       }
     ],
     "state": [
@@ -96,6 +686,76 @@
     ]
   },
   "codeOnlyChannels": [
+    {
+      "part": "root",
+      "channel": "cursor",
+      "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
+      "sample": "auto",
+      "distinctValues": 2
+    },
+    {
+      "part": "root",
+      "channel": "font-feature-settings",
+      "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
+      "sample": "\"calt\" 0",
+      "distinctValues": 2
+    },
+    {
+      "part": "root",
+      "channel": "min-height",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "auto",
+      "distinctValues": 2
+    },
+    {
+      "part": "root",
+      "channel": "outline-style",
+      "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
+      "sample": "none",
+      "distinctValues": 2
+    },
+    {
+      "part": "root",
+      "channel": "text-align",
+      "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
+      "sample": "start",
+      "distinctValues": 2
+    },
+    {
+      "part": "root",
+      "channel": "text-rendering",
+      "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
+      "sample": "optimizelegibility",
+      "distinctValues": 2
+    },
+    {
+      "part": "link",
+      "channel": "display",
+      "reason": "declared-channel value outside the bounded grammar — named residue (v15)",
+      "sample": "grid",
+      "distinctValues": 1
+    },
+    {
+      "part": "link",
+      "channel": "text-decoration",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "none",
+      "distinctValues": 1
+    },
+    {
+      "part": "text",
+      "channel": "cursor",
+      "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
+      "sample": "auto",
+      "distinctValues": 2
+    },
+    {
+      "part": "text",
+      "channel": "font-feature-settings",
+      "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
+      "sample": "\"calt\" 0",
+      "distinctValues": 2
+    },
     {
       "part": "text",
       "channel": "overflow-x",
@@ -112,6 +772,13 @@
     },
     {
       "part": "text",
+      "channel": "text-align",
+      "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
+      "sample": "start",
+      "distinctValues": 2
+    },
+    {
+      "part": "text",
       "channel": "text-overflow",
       "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
       "sample": "ellipsis",
@@ -119,18 +786,663 @@
     },
     {
       "part": "text",
+      "channel": "text-rendering",
+      "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
+      "sample": "optimizelegibility",
+      "distinctValues": 2
+    },
+    {
+      "part": "text",
       "channel": "text-wrap-mode",
       "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
       "sample": "nowrap",
       "distinctValues": 1
+    },
+    {
+      "part": "label",
+      "channel": "cursor",
+      "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
+      "sample": "auto",
+      "distinctValues": 2
+    },
+    {
+      "part": "label",
+      "channel": "display",
+      "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
+      "sample": "inline",
+      "distinctValues": 1
+    },
+    {
+      "part": "label",
+      "channel": "font-feature-settings",
+      "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
+      "sample": "\"calt\" 0",
+      "distinctValues": 2
+    },
+    {
+      "part": "label",
+      "channel": "text-align",
+      "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
+      "sample": "start",
+      "distinctValues": 2
+    },
+    {
+      "part": "label",
+      "channel": "text-rendering",
+      "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
+      "sample": "optimizelegibility",
+      "distinctValues": 2
+    },
+    {
+      "part": "label",
+      "channel": "text-wrap-mode",
+      "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
+      "sample": "nowrap",
+      "distinctValues": 1
+    },
+    {
+      "part": "button",
+      "channel": "min-height",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "auto",
+      "distinctValues": 2
+    },
+    {
+      "part": "button",
+      "channel": "min-width",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "auto",
+      "distinctValues": 2
+    },
+    {
+      "part": "button",
+      "channel": "position",
+      "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
+      "sample": "relative",
+      "distinctValues": 2
     }
   ],
-  "stateOverflow": [],
+  "stateOverflow": [
+    {
+      "state": "active",
+      "part": "button",
+      "channel": "background-color",
+      "sample": "rgba(204, 204, 204, 1)",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    },
+    {
+      "state": "active",
+      "part": "button",
+      "channel": "opacity",
+      "sample": "1",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    },
+    {
+      "state": "active",
+      "part": "link",
+      "channel": "background-color",
+      "sample": "rgba(204, 204, 204, 1)",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    },
+    {
+      "state": "active",
+      "part": "link",
+      "channel": "text-decoration",
+      "sample": "underline",
+      "reason": "value shape outside mintable kinds and outside the declared vocabulary"
+    },
+    {
+      "state": "active",
+      "part": "link",
+      "channel": "text-decoration-line",
+      "sample": "underline",
+      "reason": "declared-channel state delta on 4/16 combos — partial coverage cannot carry as a state selector (v15); named residue"
+    },
+    {
+      "state": "active",
+      "part": "part-1",
+      "channel": "background-image",
+      "sample": "linear-gradient(to left, rgba(227, 227, 227, 1) 0%, rgba(0, 0, 0, 0) 100%)",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    },
+    {
+      "state": "active",
+      "part": "part-1",
+      "channel": "bottom",
+      "sample": "0px",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    },
+    {
+      "state": "active",
+      "part": "part-1",
+      "channel": "left",
+      "sample": "43.9219px",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    },
+    {
+      "state": "active",
+      "part": "part-1",
+      "channel": "min-height",
+      "sample": "0px",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    },
+    {
+      "state": "active",
+      "part": "part-1",
+      "channel": "min-width",
+      "sample": "0px",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    },
+    {
+      "state": "active",
+      "part": "part-1",
+      "channel": "pointer-events",
+      "sample": "none",
+      "reason": "declared-channel state delta on 4/16 combos — partial coverage cannot carry as a state selector (v15); named residue"
+    },
+    {
+      "state": "active",
+      "part": "part-1",
+      "channel": "position",
+      "sample": "absolute",
+      "reason": "declared-channel state delta on 4/16 combos — partial coverage cannot carry as a state selector (v15); named residue"
+    },
+    {
+      "state": "active",
+      "part": "part-1",
+      "channel": "right",
+      "sample": "20px",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    },
+    {
+      "state": "active",
+      "part": "part-1",
+      "channel": "top",
+      "sample": "0px",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    },
+    {
+      "state": "active",
+      "part": "root",
+      "channel": "outline-style",
+      "sample": "none",
+      "reason": "declared-channel state delta on 8/16 combos — partial coverage cannot carry as a state selector (v15); named residue"
+    },
+    {
+      "state": "disabled",
+      "part": "button",
+      "channel": "background-color",
+      "sample": "rgba(227, 227, 227, 1)",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    },
+    {
+      "state": "disabled",
+      "part": "button",
+      "channel": "cursor",
+      "sample": "default",
+      "reason": "declared-channel state delta on 4/16 combos — partial coverage cannot carry as a state selector (v15); named residue"
+    },
+    {
+      "state": "disabled",
+      "part": "button",
+      "channel": "pointer-events",
+      "sample": "none",
+      "reason": "declared-channel state delta on 4/16 combos — partial coverage cannot carry as a state selector (v15); named residue"
+    },
+    {
+      "state": "disabled",
+      "part": "icon",
+      "channel": "cursor",
+      "sample": "default",
+      "reason": "declared-channel state delta on 4/16 combos — partial coverage cannot carry as a state selector (v15); named residue"
+    },
+    {
+      "state": "disabled",
+      "part": "icon",
+      "channel": "pointer-events",
+      "sample": "none",
+      "reason": "declared-channel state delta on 4/16 combos — partial coverage cannot carry as a state selector (v15); named residue"
+    },
+    {
+      "state": "disabled",
+      "part": "label",
+      "channel": "border-bottom-color",
+      "sample": "rgba(181, 181, 181, 1)",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    },
+    {
+      "state": "disabled",
+      "part": "label",
+      "channel": "border-left-color",
+      "sample": "rgba(181, 181, 181, 1)",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    },
+    {
+      "state": "disabled",
+      "part": "label",
+      "channel": "border-right-color",
+      "sample": "rgba(181, 181, 181, 1)",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    },
+    {
+      "state": "disabled",
+      "part": "label",
+      "channel": "border-top-color",
+      "sample": "rgba(181, 181, 181, 1)",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    },
+    {
+      "state": "disabled",
+      "part": "label",
+      "channel": "caret-color",
+      "sample": "rgba(181, 181, 181, 1)",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    },
+    {
+      "state": "disabled",
+      "part": "label",
+      "channel": "color",
+      "sample": "rgba(181, 181, 181, 1)",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    },
+    {
+      "state": "disabled",
+      "part": "label",
+      "channel": "column-rule-color",
+      "sample": "rgba(181, 181, 181, 1)",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    },
+    {
+      "state": "disabled",
+      "part": "label",
+      "channel": "cursor",
+      "sample": "default",
+      "reason": "declared-channel state delta on 8/16 combos — partial coverage cannot carry as a state selector (v15); named residue"
+    },
+    {
+      "state": "disabled",
+      "part": "label",
+      "channel": "outline-color",
+      "sample": "rgba(181, 181, 181, 1)",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    },
+    {
+      "state": "disabled",
+      "part": "label",
+      "channel": "pointer-events",
+      "sample": "none",
+      "reason": "declared-channel state delta on 8/16 combos — partial coverage cannot carry as a state selector (v15); named residue"
+    },
+    {
+      "state": "disabled",
+      "part": "label",
+      "channel": "text-decoration-color",
+      "sample": "rgba(181, 181, 181, 1)",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    },
+    {
+      "state": "disabled",
+      "part": "label",
+      "channel": "text-emphasis-color",
+      "sample": "rgba(181, 181, 181, 1)",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    },
+    {
+      "state": "disabled",
+      "part": "part-1",
+      "channel": "border-bottom-color",
+      "sample": "rgba(181, 181, 181, 1)",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    },
+    {
+      "state": "disabled",
+      "part": "part-1",
+      "channel": "border-left-color",
+      "sample": "rgba(181, 181, 181, 1)",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    },
+    {
+      "state": "disabled",
+      "part": "part-1",
+      "channel": "border-right-color",
+      "sample": "rgba(181, 181, 181, 1)",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    },
+    {
+      "state": "disabled",
+      "part": "part-1",
+      "channel": "border-top-color",
+      "sample": "rgba(181, 181, 181, 1)",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    },
+    {
+      "state": "disabled",
+      "part": "part-1",
+      "channel": "caret-color",
+      "sample": "rgba(181, 181, 181, 1)",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    },
+    {
+      "state": "disabled",
+      "part": "part-1",
+      "channel": "color",
+      "sample": "rgba(181, 181, 181, 1)",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    },
+    {
+      "state": "disabled",
+      "part": "part-1",
+      "channel": "column-rule-color",
+      "sample": "rgba(181, 181, 181, 1)",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    },
+    {
+      "state": "disabled",
+      "part": "part-1",
+      "channel": "outline-color",
+      "sample": "rgba(181, 181, 181, 1)",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    },
+    {
+      "state": "disabled",
+      "part": "part-1",
+      "channel": "text-decoration-color",
+      "sample": "rgba(181, 181, 181, 1)",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    },
+    {
+      "state": "disabled",
+      "part": "part-1",
+      "channel": "text-emphasis-color",
+      "sample": "rgba(181, 181, 181, 1)",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    },
+    {
+      "state": "disabled",
+      "part": "root",
+      "channel": "cursor",
+      "sample": "default",
+      "reason": "declared-channel state delta on 8/16 combos — partial coverage cannot carry as a state selector (v15); named residue"
+    },
+    {
+      "state": "disabled",
+      "part": "root",
+      "channel": "pointer-events",
+      "sample": "none",
+      "reason": "declared-channel state delta on 8/16 combos — partial coverage cannot carry as a state selector (v15); named residue"
+    },
+    {
+      "state": "disabled",
+      "part": "text",
+      "channel": "border-bottom-color",
+      "sample": "rgba(181, 181, 181, 1)",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    },
+    {
+      "state": "disabled",
+      "part": "text",
+      "channel": "border-left-color",
+      "sample": "rgba(181, 181, 181, 1)",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    },
+    {
+      "state": "disabled",
+      "part": "text",
+      "channel": "border-right-color",
+      "sample": "rgba(181, 181, 181, 1)",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    },
+    {
+      "state": "disabled",
+      "part": "text",
+      "channel": "border-top-color",
+      "sample": "rgba(181, 181, 181, 1)",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    },
+    {
+      "state": "disabled",
+      "part": "text",
+      "channel": "caret-color",
+      "sample": "rgba(181, 181, 181, 1)",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    },
+    {
+      "state": "disabled",
+      "part": "text",
+      "channel": "color",
+      "sample": "rgba(181, 181, 181, 1)",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    },
+    {
+      "state": "disabled",
+      "part": "text",
+      "channel": "column-rule-color",
+      "sample": "rgba(181, 181, 181, 1)",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    },
+    {
+      "state": "disabled",
+      "part": "text",
+      "channel": "cursor",
+      "sample": "default",
+      "reason": "declared-channel state delta on 8/16 combos — partial coverage cannot carry as a state selector (v15); named residue"
+    },
+    {
+      "state": "disabled",
+      "part": "text",
+      "channel": "outline-color",
+      "sample": "rgba(181, 181, 181, 1)",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    },
+    {
+      "state": "disabled",
+      "part": "text",
+      "channel": "pointer-events",
+      "sample": "none",
+      "reason": "declared-channel state delta on 8/16 combos — partial coverage cannot carry as a state selector (v15); named residue"
+    },
+    {
+      "state": "disabled",
+      "part": "text",
+      "channel": "text-decoration-color",
+      "sample": "rgba(181, 181, 181, 1)",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    },
+    {
+      "state": "disabled",
+      "part": "text",
+      "channel": "text-emphasis-color",
+      "sample": "rgba(181, 181, 181, 1)",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    },
+    {
+      "state": "focus-visible",
+      "part": "button",
+      "channel": "background-color",
+      "sample": "rgba(212, 212, 212, 1)",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    },
+    {
+      "state": "focus-visible",
+      "part": "button",
+      "channel": "color",
+      "sample": "rgba(48, 48, 48, 1)",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    },
+    {
+      "state": "focus-visible",
+      "part": "button",
+      "channel": "opacity",
+      "sample": "1",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    },
+    {
+      "state": "focus-visible",
+      "part": "icon",
+      "channel": "color",
+      "sample": "rgba(48, 48, 48, 1)",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    },
+    {
+      "state": "focus-visible",
+      "part": "link",
+      "channel": "outline-offset",
+      "sample": "1px",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    },
+    {
+      "state": "focus-visible",
+      "part": "link",
+      "channel": "text-decoration",
+      "sample": "underline",
+      "reason": "value shape outside mintable kinds and outside the declared vocabulary"
+    },
+    {
+      "state": "focus-visible",
+      "part": "link",
+      "channel": "text-decoration-line",
+      "sample": "underline",
+      "reason": "declared-channel state delta on 4/16 combos — partial coverage cannot carry as a state selector (v15); named residue"
+    },
+    {
+      "state": "focus-visible",
+      "part": "root",
+      "channel": "outline-style",
+      "sample": "none",
+      "reason": "declared-channel state delta on 8/16 combos — partial coverage cannot carry as a state selector (v15); named residue"
+    },
+    {
+      "state": "hover",
+      "part": "button",
+      "channel": "background-color",
+      "sample": "rgba(204, 204, 204, 1)",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    },
+    {
+      "state": "hover",
+      "part": "button",
+      "channel": "opacity",
+      "sample": "1",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    },
+    {
+      "state": "hover",
+      "part": "link",
+      "channel": "background-color",
+      "sample": "rgba(212, 212, 212, 1)",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    },
+    {
+      "state": "hover",
+      "part": "link",
+      "channel": "text-decoration",
+      "sample": "underline",
+      "reason": "value shape outside mintable kinds and outside the declared vocabulary"
+    },
+    {
+      "state": "hover",
+      "part": "link",
+      "channel": "text-decoration-line",
+      "sample": "underline",
+      "reason": "declared-channel state delta on 4/16 combos — partial coverage cannot carry as a state selector (v15); named residue"
+    },
+    {
+      "state": "hover",
+      "part": "part-1",
+      "channel": "background-image",
+      "sample": "linear-gradient(to left, rgba(227, 227, 227, 1) 0%, rgba(0, 0, 0, 0) 100%)",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    },
+    {
+      "state": "hover",
+      "part": "part-1",
+      "channel": "bottom",
+      "sample": "0px",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    },
+    {
+      "state": "hover",
+      "part": "part-1",
+      "channel": "left",
+      "sample": "43.9219px",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    },
+    {
+      "state": "hover",
+      "part": "part-1",
+      "channel": "min-height",
+      "sample": "0px",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    },
+    {
+      "state": "hover",
+      "part": "part-1",
+      "channel": "min-width",
+      "sample": "0px",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    },
+    {
+      "state": "hover",
+      "part": "part-1",
+      "channel": "pointer-events",
+      "sample": "none",
+      "reason": "declared-channel state delta on 4/16 combos — partial coverage cannot carry as a state selector (v15); named residue"
+    },
+    {
+      "state": "hover",
+      "part": "part-1",
+      "channel": "position",
+      "sample": "absolute",
+      "reason": "declared-channel state delta on 4/16 combos — partial coverage cannot carry as a state selector (v15); named residue"
+    },
+    {
+      "state": "hover",
+      "part": "part-1",
+      "channel": "right",
+      "sample": "20px",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    },
+    {
+      "state": "hover",
+      "part": "part-1",
+      "channel": "top",
+      "sample": "0px",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    }
+  ],
   "overflowBindings": [
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "ref": "{imported.tag.root.font-weight.{clickable}}",
+      "refusal": "presence-prop-driven styling (clickable) — boolean tokensByProp has no spelling (round 4 residue)"
+    },
+    {
+      "part": "root",
+      "channel": "outline-color",
+      "ref": "{imported.tag.root.outline-color.{clickable}}",
+      "refusal": "presence-prop-driven styling (clickable) — boolean tokensByProp has no spelling (round 4 residue)"
+    },
+    {
+      "part": "root",
+      "channel": "outline-width",
+      "ref": "{imported.tag.root.outline-width.{clickable}}",
+      "refusal": "presence-prop-driven styling (clickable) — boolean tokensByProp has no spelling (round 4 residue)"
+    },
+    {
+      "part": "root",
+      "channel": "padding-left",
+      "refusal": "resolved values differ across variants without correlating to any variant axis (or axis pair) — nothing minted; bind manually"
+    },
+    {
+      "part": "root",
+      "channel": "padding-right",
+      "refusal": "resolved values differ across variants without correlating to any variant axis (or axis pair) — nothing minted; bind manually"
+    },
     {
       "part": "text",
       "channel": "font-size",
-      "ref": "{imported.tag.text.font-size}",
+      "ref": "{imported.shared.size-12}",
       "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
     },
     {
@@ -141,165 +1453,416 @@
     },
     {
       "part": "label",
-      "channel": "border-bottom-color",
-      "state": "disabled",
-      "ref": "{imported.shared.color-b5b5b5}",
-      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+      "channel": "font-size",
+      "ref": "{imported.shared.size-12}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
     },
     {
       "part": "label",
-      "channel": "border-left-color",
-      "state": "disabled",
-      "ref": "{imported.shared.color-b5b5b5}",
-      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+      "channel": "min-height",
+      "ref": "{imported.shared.size-0}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
     },
     {
       "part": "label",
-      "channel": "border-right-color",
-      "state": "disabled",
-      "ref": "{imported.shared.color-b5b5b5}",
-      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+      "channel": "min-width",
+      "ref": "{imported.shared.size-0}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
     },
     {
-      "part": "label",
-      "channel": "border-top-color",
-      "state": "disabled",
-      "ref": "{imported.shared.color-b5b5b5}",
-      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+      "part": "button",
+      "channel": "background-color",
+      "refusal": "resolved values differ across variants without correlating to any variant axis — nothing minted; bind manually"
     },
     {
-      "part": "label",
-      "channel": "caret-color",
-      "state": "disabled",
-      "ref": "{imported.shared.color-b5b5b5}",
-      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+      "part": "root",
+      "channel": "background-color",
+      "state": "active",
+      "refusal": "resolved values differ across variants without correlating to any variant axis (or axis pair) — nothing minted; bind manually"
     },
     {
-      "part": "label",
-      "channel": "column-rule-color",
-      "state": "disabled",
-      "ref": "{imported.shared.color-b5b5b5}",
-      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
-    },
-    {
-      "part": "label",
+      "part": "root",
       "channel": "outline-color",
       "state": "disabled",
-      "ref": "{imported.shared.color-b5b5b5}",
-      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+      "ref": "{imported.tag.root.outline-color-state-disabled.{clickable}}",
+      "refusal": "presence-prop state ref — boolean substitution has no spelling (round 4 residue)"
     },
     {
-      "part": "label",
-      "channel": "text-decoration-color",
+      "part": "root",
+      "channel": "padding-left",
       "state": "disabled",
-      "ref": "{imported.shared.color-b5b5b5}",
-      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+      "refusal": "resolved values differ across variants without correlating to any variant axis (or axis pair) — nothing minted; bind manually"
     },
     {
-      "part": "label",
-      "channel": "text-emphasis-color",
+      "part": "root",
+      "channel": "padding-right",
       "state": "disabled",
-      "ref": "{imported.shared.color-b5b5b5}",
-      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+      "refusal": "resolved values differ across variants without correlating to any variant axis (or axis pair) — nothing minted; bind manually"
     },
     {
-      "part": "text",
-      "channel": "border-bottom-color",
-      "state": "disabled",
-      "ref": "{imported.shared.color-b5b5b5}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "text",
-      "channel": "border-left-color",
-      "state": "disabled",
-      "ref": "{imported.shared.color-b5b5b5}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "text",
-      "channel": "border-right-color",
-      "state": "disabled",
-      "ref": "{imported.shared.color-b5b5b5}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "text",
-      "channel": "border-top-color",
-      "state": "disabled",
-      "ref": "{imported.shared.color-b5b5b5}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "text",
-      "channel": "caret-color",
-      "state": "disabled",
-      "ref": "{imported.shared.color-b5b5b5}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "text",
-      "channel": "color",
-      "state": "disabled",
-      "ref": "{imported.shared.color-b5b5b5}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "text",
-      "channel": "column-rule-color",
-      "state": "disabled",
-      "ref": "{imported.shared.color-b5b5b5}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "text",
-      "channel": "outline-color",
-      "state": "disabled",
-      "ref": "{imported.shared.color-b5b5b5}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "text",
-      "channel": "text-decoration-color",
-      "state": "disabled",
-      "ref": "{imported.shared.color-b5b5b5}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "text",
-      "channel": "text-emphasis-color",
-      "state": "disabled",
-      "ref": "{imported.shared.color-b5b5b5}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+      "part": "root",
+      "channel": "background-color",
+      "state": "hover",
+      "ref": "{imported.tag.root.background-color-state-hover.{clickable}.{linked}}",
+      "refusal": "presence-prop state ref — boolean substitution has no spelling (round 4 residue)"
     }
   ],
   "pairwiseRefusals": [],
   "pseudoParts": {
     "_reason": "S5 (DESIGN §5.4): pseudo-element decor has no anatomy spelling — captured, receipted, not carried",
-    "findings": [],
-    "totalFindings": 0
+    "findings": [
+      {
+        "combo": "none.off.off.on.enabled",
+        "interaction": "default",
+        "part": "link",
+        "pseudo": "::after",
+        "deltaVsDefault": {
+          "content": "\"\""
+        }
+      },
+      {
+        "combo": "none.off.off.on.enabled",
+        "interaction": "focus-visible",
+        "part": "link",
+        "pseudo": "::after",
+        "deltaVsDefault": {
+          "box-shadow": "rgba(0, 91, 211, 1) 0px 0px 0px 2px",
+          "outline-color": "rgba(0, 0, 0, 0)",
+          "outline-style": "solid",
+          "outline-width": "1px"
+        }
+      },
+      {
+        "combo": "none.off.on.off.enabled",
+        "interaction": "default",
+        "part": "root",
+        "pseudo": "::after",
+        "deltaVsDefault": {
+          "content": "\"\""
+        }
+      },
+      {
+        "combo": "none.off.on.off.enabled",
+        "interaction": "focus-visible",
+        "part": "root",
+        "pseudo": "::after",
+        "deltaVsDefault": {
+          "box-shadow": "rgba(0, 91, 211, 1) 0px 0px 0px 2px",
+          "outline-color": "rgba(0, 0, 0, 0)",
+          "outline-style": "solid",
+          "outline-width": "1px"
+        }
+      },
+      {
+        "combo": "none.off.on.off.disabled",
+        "interaction": "default",
+        "part": "root",
+        "pseudo": "::after",
+        "deltaVsDefault": {
+          "content": "\"\""
+        }
+      },
+      {
+        "combo": "none.off.on.on.enabled",
+        "interaction": "default",
+        "part": "root",
+        "pseudo": "::after",
+        "deltaVsDefault": {
+          "content": "\"\""
+        }
+      },
+      {
+        "combo": "none.off.on.on.enabled",
+        "interaction": "focus-visible",
+        "part": "root",
+        "pseudo": "::after",
+        "deltaVsDefault": {
+          "box-shadow": "rgba(0, 91, 211, 1) 0px 0px 0px 2px",
+          "outline-color": "rgba(0, 0, 0, 0)",
+          "outline-style": "solid",
+          "outline-width": "1px"
+        }
+      },
+      {
+        "combo": "none.off.on.on.disabled",
+        "interaction": "default",
+        "part": "root",
+        "pseudo": "::after",
+        "deltaVsDefault": {
+          "content": "\"\""
+        }
+      },
+      {
+        "combo": "none.on.off.off.enabled",
+        "interaction": "default",
+        "part": "label-2",
+        "pseudo": "::after",
+        "deltaVsDefault": {
+          "content": "\"\""
+        }
+      },
+      {
+        "combo": "none.on.off.off.enabled",
+        "interaction": "focus-visible",
+        "part": "label-2",
+        "pseudo": "::after",
+        "deltaVsDefault": {
+          "-webkit-text-fill-color": "rgba(48, 48, 48, 1)",
+          "-webkit-text-stroke-color": "rgba(48, 48, 48, 1)",
+          "border-block-end-color": "rgba(48, 48, 48, 1)",
+          "border-block-start-color": "rgba(48, 48, 48, 1)",
+          "border-bottom-color": "rgba(48, 48, 48, 1)",
+          "border-inline-end-color": "rgba(48, 48, 48, 1)",
+          "border-inline-start-color": "rgba(48, 48, 48, 1)",
+          "border-left-color": "rgba(48, 48, 48, 1)",
+          "border-right-color": "rgba(48, 48, 48, 1)",
+          "border-top-color": "rgba(48, 48, 48, 1)",
+          "box-shadow": "rgba(0, 91, 211, 1) 0px 0px 0px 2px",
+          "caret-color": "rgba(48, 48, 48, 1)",
+          "color": "rgba(48, 48, 48, 1)",
+          "column-rule-color": "rgba(48, 48, 48, 1)",
+          "outline-color": "rgba(0, 0, 0, 0)",
+          "outline-style": "solid",
+          "outline-width": "1px",
+          "text-decoration-color": "rgba(48, 48, 48, 1)",
+          "text-emphasis-color": "rgba(48, 48, 48, 1)"
+        }
+      },
+      {
+        "combo": "none.on.off.off.disabled",
+        "interaction": "default",
+        "part": "label-2",
+        "pseudo": "::after",
+        "deltaVsDefault": {
+          "content": "\"\""
+        }
+      },
+      {
+        "combo": "none.on.off.on.enabled",
+        "interaction": "default",
+        "part": "link",
+        "pseudo": "::after",
+        "deltaVsDefault": {
+          "content": "\"\""
+        }
+      }
+    ],
+    "totalFindings": 42
   },
-  "bindingContradictions": [
-    {
-      "combo": "enabled",
-      "part": "label",
-      "channel": "line-height",
-      "ref": "{p.text-body-sm-font-line-height}",
-      "computedProp": "line-height",
-      "expected": "16px",
-      "observed": "20px",
-      "verdict": "contradiction",
-      "cause": "REAL STALE BINDING caught by the floor: Tag.module.css sets line-height {p.font-line-height-500} (20px) on its own inner .Polaris-Tag__Text span, overriding the carried Text-primitive bodySm chain (16px) the promotion bound; the showcase's verify.ts compared the Text root element, not the inner span the floor names `label` — resolve via the review queue (--to {p.font-line-height-500}; six tokens share the 20px value, so the explicit ref is required)"
-    }
+  "bindingContradictions": [],
+  "interactionOnDisabled": [
+    "interaction-on-disabled-changed: large.off.off.off.disabled hover part-1.background-image",
+    "interaction-on-disabled-changed: large.off.off.off.disabled hover part-1.bottom",
+    "interaction-on-disabled-changed: large.off.off.off.disabled hover part-1.left",
+    "interaction-on-disabled-changed: large.off.off.off.disabled hover part-1.min-height",
+    "interaction-on-disabled-changed: large.off.off.off.disabled hover part-1.min-width",
+    "interaction-on-disabled-changed: large.off.off.off.disabled hover part-1.pointer-events",
+    "interaction-on-disabled-changed: large.off.off.off.disabled hover part-1.position",
+    "interaction-on-disabled-changed: large.off.off.off.disabled hover part-1.right",
+    "interaction-on-disabled-changed: large.off.off.off.disabled hover part-1.top",
+    "interaction-on-disabled-changed: large.off.off.off.disabled active part-1.background-image",
+    "interaction-on-disabled-changed: large.off.off.off.disabled active part-1.bottom",
+    "interaction-on-disabled-changed: large.off.off.off.disabled active part-1.left",
+    "interaction-on-disabled-changed: large.off.off.off.disabled active part-1.min-height",
+    "interaction-on-disabled-changed: large.off.off.off.disabled active part-1.min-width",
+    "interaction-on-disabled-changed: large.off.off.off.disabled active part-1.pointer-events",
+    "interaction-on-disabled-changed: large.off.off.off.disabled active part-1.position",
+    "interaction-on-disabled-changed: large.off.off.off.disabled active part-1.right",
+    "interaction-on-disabled-changed: large.off.off.off.disabled active part-1.top",
+    "interaction-on-disabled-changed: large.off.off.on.disabled hover part-1.background-image",
+    "interaction-on-disabled-changed: large.off.off.on.disabled hover part-1.bottom"
   ],
-  "interactionOnDisabled": [],
-  "structureReceipts": [],
-  "styledChannelReceipts": [],
+  "structureReceipts": [
+    "union-part-added: none.off.off.on.enabled__default @0 (a|Tag__Link)",
+    "union-part-added: none.off.off.on.enabled__default @0.0 (span|Text)",
+    "union-part-added: none.off.off.on.enabled__default @0.0.0 (span|Tag__Text)",
+    "root-signature-varies: none.off.on.off.enabled__default: span|Tag → button|Tag (element-varies receipt; root always aligns)",
+    "root-signature-varies: none.off.on.off.enabled__hover: span|Tag → button|Tag (element-varies receipt; root always aligns)",
+    "root-signature-varies: none.off.on.off.enabled__focus-visible: span|Tag → button|Tag (element-varies receipt; root always aligns)",
+    "root-signature-varies: none.off.on.off.enabled__active: span|Tag → button|Tag (element-varies receipt; root always aligns)",
+    "root-signature-varies: none.off.on.off.disabled__default: span|Tag → button|Tag (element-varies receipt; root always aligns)",
+    "root-signature-varies: none.off.on.off.disabled__hover: span|Tag → button|Tag (element-varies receipt; root always aligns)",
+    "root-signature-varies: none.off.on.off.disabled__focus-visible: span|Tag → button|Tag (element-varies receipt; root always aligns)",
+    "root-signature-varies: none.off.on.off.disabled__active: span|Tag → button|Tag (element-varies receipt; root always aligns)",
+    "root-signature-varies: none.off.on.on.enabled__default: span|Tag → button|Tag (element-varies receipt; root always aligns)",
+    "root-signature-varies: none.off.on.on.enabled__hover: span|Tag → button|Tag (element-varies receipt; root always aligns)",
+    "root-signature-varies: none.off.on.on.enabled__focus-visible: span|Tag → button|Tag (element-varies receipt; root always aligns)",
+    "root-signature-varies: none.off.on.on.enabled__active: span|Tag → button|Tag (element-varies receipt; root always aligns)",
+    "root-signature-varies: none.off.on.on.disabled__default: span|Tag → button|Tag (element-varies receipt; root always aligns)",
+    "root-signature-varies: none.off.on.on.disabled__hover: span|Tag → button|Tag (element-varies receipt; root always aligns)",
+    "root-signature-varies: none.off.on.on.disabled__focus-visible: span|Tag → button|Tag (element-varies receipt; root always aligns)",
+    "root-signature-varies: none.off.on.on.disabled__active: span|Tag → button|Tag (element-varies receipt; root always aligns)",
+    "union-part-added: none.on.off.off.enabled__default @1 (button|Tag__Button)",
+    "union-part-added: none.on.off.off.enabled__default @1.0 (span|Icon)",
+    "union-part-added: none.on.off.off.enabled__default @1.0.0 (svg|Icon__Svg)",
+    "union-part-added: none.on.off.off.enabled__default @1.0.0.0 (path|)",
+    "root-signature-varies: none.on.on.off.enabled__default: span|Tag → button|Tag (element-varies receipt; root always aligns)",
+    "root-signature-varies: none.on.on.off.enabled__hover: span|Tag → button|Tag (element-varies receipt; root always aligns)",
+    "root-signature-varies: none.on.on.off.enabled__focus-visible: span|Tag → button|Tag (element-varies receipt; root always aligns)",
+    "root-signature-varies: none.on.on.off.enabled__active: span|Tag → button|Tag (element-varies receipt; root always aligns)",
+    "root-signature-varies: none.on.on.off.disabled__default: span|Tag → button|Tag (element-varies receipt; root always aligns)",
+    "root-signature-varies: none.on.on.off.disabled__hover: span|Tag → button|Tag (element-varies receipt; root always aligns)",
+    "root-signature-varies: none.on.on.off.disabled__focus-visible: span|Tag → button|Tag (element-varies receipt; root always aligns)",
+    "root-signature-varies: none.on.on.off.disabled__active: span|Tag → button|Tag (element-varies receipt; root always aligns)",
+    "root-signature-varies: none.on.on.on.enabled__default: span|Tag → button|Tag (element-varies receipt; root always aligns)",
+    "root-signature-varies: none.on.on.on.enabled__hover: span|Tag → button|Tag (element-varies receipt; root always aligns)",
+    "root-signature-varies: none.on.on.on.enabled__focus-visible: span|Tag → button|Tag (element-varies receipt; root always aligns)",
+    "root-signature-varies: none.on.on.on.enabled__active: span|Tag → button|Tag (element-varies receipt; root always aligns)",
+    "root-signature-varies: none.on.on.on.disabled__default: span|Tag → button|Tag (element-varies receipt; root always aligns)",
+    "root-signature-varies: none.on.on.on.disabled__hover: span|Tag → button|Tag (element-varies receipt; root always aligns)",
+    "root-signature-varies: none.on.on.on.disabled__focus-visible: span|Tag → button|Tag (element-varies receipt; root always aligns)",
+    "root-signature-varies: none.on.on.on.disabled__active: span|Tag → button|Tag (element-varies receipt; root always aligns)",
+    "union-part-added: large.off.off.off.enabled__default @1 (span|)",
+    "root-signature-varies: large.off.on.off.enabled__default: span|Tag → button|Tag (element-varies receipt; root always aligns)",
+    "root-signature-varies: large.off.on.off.enabled__hover: span|Tag → button|Tag (element-varies receipt; root always aligns)",
+    "root-signature-varies: large.off.on.off.enabled__focus-visible: span|Tag → button|Tag (element-varies receipt; root always aligns)",
+    "root-signature-varies: large.off.on.off.enabled__active: span|Tag → button|Tag (element-varies receipt; root always aligns)",
+    "root-signature-varies: large.off.on.off.disabled__default: span|Tag → button|Tag (element-varies receipt; root always aligns)",
+    "root-signature-varies: large.off.on.off.disabled__hover: span|Tag → button|Tag (element-varies receipt; root always aligns)",
+    "root-signature-varies: large.off.on.off.disabled__focus-visible: span|Tag → button|Tag (element-varies receipt; root always aligns)",
+    "root-signature-varies: large.off.on.off.disabled__active: span|Tag → button|Tag (element-varies receipt; root always aligns)",
+    "root-signature-varies: large.off.on.on.enabled__default: span|Tag → button|Tag (element-varies receipt; root always aligns)",
+    "root-signature-varies: large.off.on.on.enabled__hover: span|Tag → button|Tag (element-varies receipt; root always aligns)",
+    "root-signature-varies: large.off.on.on.enabled__focus-visible: span|Tag → button|Tag (element-varies receipt; root always aligns)",
+    "root-signature-varies: large.off.on.on.enabled__active: span|Tag → button|Tag (element-varies receipt; root always aligns)",
+    "root-signature-varies: large.off.on.on.disabled__default: span|Tag → button|Tag (element-varies receipt; root always aligns)",
+    "root-signature-varies: large.off.on.on.disabled__hover: span|Tag → button|Tag (element-varies receipt; root always aligns)",
+    "root-signature-varies: large.off.on.on.disabled__focus-visible: span|Tag → button|Tag (element-varies receipt; root always aligns)",
+    "root-signature-varies: large.off.on.on.disabled__active: span|Tag → button|Tag (element-varies receipt; root always aligns)",
+    "root-signature-varies: large.on.on.off.enabled__default: span|Tag → button|Tag (element-varies receipt; root always aligns)",
+    "root-signature-varies: large.on.on.off.enabled__hover: span|Tag → button|Tag (element-varies receipt; root always aligns)",
+    "root-signature-varies: large.on.on.off.enabled__focus-visible: span|Tag → button|Tag (element-varies receipt; root always aligns)",
+    "root-signature-varies: large.on.on.off.enabled__active: span|Tag → button|Tag (element-varies receipt; root always aligns)",
+    "root-signature-varies: large.on.on.off.disabled__default: span|Tag → button|Tag (element-varies receipt; root always aligns)",
+    "root-signature-varies: large.on.on.off.disabled__hover: span|Tag → button|Tag (element-varies receipt; root always aligns)",
+    "root-signature-varies: large.on.on.off.disabled__focus-visible: span|Tag → button|Tag (element-varies receipt; root always aligns)",
+    "root-signature-varies: large.on.on.off.disabled__active: span|Tag → button|Tag (element-varies receipt; root always aligns)",
+    "root-signature-varies: large.on.on.on.enabled__default: span|Tag → button|Tag (element-varies receipt; root always aligns)",
+    "root-signature-varies: large.on.on.on.enabled__hover: span|Tag → button|Tag (element-varies receipt; root always aligns)",
+    "root-signature-varies: large.on.on.on.enabled__focus-visible: span|Tag → button|Tag (element-varies receipt; root always aligns)",
+    "root-signature-varies: large.on.on.on.enabled__active: span|Tag → button|Tag (element-varies receipt; root always aligns)",
+    "root-signature-varies: large.on.on.on.disabled__default: span|Tag → button|Tag (element-varies receipt; root always aligns)",
+    "root-signature-varies: large.on.on.on.disabled__hover: span|Tag → button|Tag (element-varies receipt; root always aligns)",
+    "root-signature-varies: large.on.on.on.disabled__focus-visible: span|Tag → button|Tag (element-varies receipt; root always aligns)",
+    "root-signature-varies: large.on.on.on.disabled__active: span|Tag → button|Tag (element-varies receipt; root always aligns)",
+    "part-missing: none.off.off.on.enabled__default text",
+    "part-missing: none.off.off.on.enabled__default label",
+    "part-missing: none.off.off.on.enabled__hover text",
+    "part-missing: none.off.off.on.enabled__hover label",
+    "part-missing: none.off.off.on.enabled__focus-visible text",
+    "part-missing: none.off.off.on.enabled__focus-visible label",
+    "part-missing: none.off.off.on.enabled__active text",
+    "part-missing: none.off.off.on.enabled__active label",
+    "signature-drift: none.off.on.off.enabled__default root: span|Tag → button|Tag",
+    "signature-drift: none.off.on.off.enabled__hover root: span|Tag → button|Tag",
+    "signature-drift: none.off.on.off.enabled__focus-visible root: span|Tag → button|Tag",
+    "signature-drift: none.off.on.off.enabled__active root: span|Tag → button|Tag",
+    "signature-drift: none.off.on.off.disabled__default root: span|Tag → button|Tag",
+    "signature-drift: none.off.on.off.disabled__hover root: span|Tag → button|Tag",
+    "signature-drift: none.off.on.off.disabled__focus-visible root: span|Tag → button|Tag",
+    "signature-drift: none.off.on.off.disabled__active root: span|Tag → button|Tag",
+    "signature-drift: none.off.on.on.enabled__default root: span|Tag → button|Tag",
+    "signature-drift: none.off.on.on.enabled__hover root: span|Tag → button|Tag",
+    "signature-drift: none.off.on.on.enabled__focus-visible root: span|Tag → button|Tag",
+    "signature-drift: none.off.on.on.enabled__active root: span|Tag → button|Tag",
+    "signature-drift: none.off.on.on.disabled__default root: span|Tag → button|Tag",
+    "signature-drift: none.off.on.on.disabled__hover root: span|Tag → button|Tag",
+    "signature-drift: none.off.on.on.disabled__focus-visible root: span|Tag → button|Tag",
+    "signature-drift: none.off.on.on.disabled__active root: span|Tag → button|Tag",
+    "part-missing: none.on.off.on.enabled__default text",
+    "part-missing: none.on.off.on.enabled__default label",
+    "part-missing: none.on.off.on.enabled__hover text",
+    "part-missing: none.on.off.on.enabled__hover label",
+    "part-missing: none.on.off.on.enabled__focus-visible text",
+    "part-missing: none.on.off.on.enabled__focus-visible label",
+    "part-missing: none.on.off.on.enabled__active text",
+    "part-missing: none.on.off.on.enabled__active label",
+    "signature-drift: none.on.on.off.enabled__default root: span|Tag → button|Tag",
+    "signature-drift: none.on.on.off.enabled__hover root: span|Tag → button|Tag",
+    "signature-drift: none.on.on.off.enabled__focus-visible root: span|Tag → button|Tag",
+    "signature-drift: none.on.on.off.enabled__active root: span|Tag → button|Tag",
+    "signature-drift: none.on.on.off.disabled__default root: span|Tag → button|Tag",
+    "signature-drift: none.on.on.off.disabled__hover root: span|Tag → button|Tag",
+    "signature-drift: none.on.on.off.disabled__focus-visible root: span|Tag → button|Tag",
+    "signature-drift: none.on.on.off.disabled__active root: span|Tag → button|Tag",
+    "signature-drift: none.on.on.on.enabled__default root: span|Tag → button|Tag",
+    "signature-drift: none.on.on.on.enabled__hover root: span|Tag → button|Tag",
+    "signature-drift: none.on.on.on.enabled__focus-visible root: span|Tag → button|Tag",
+    "signature-drift: none.on.on.on.enabled__active root: span|Tag → button|Tag",
+    "signature-drift: none.on.on.on.disabled__default root: span|Tag → button|Tag",
+    "signature-drift: none.on.on.on.disabled__hover root: span|Tag → button|Tag",
+    "signature-drift: none.on.on.on.disabled__focus-visible root: span|Tag → button|Tag",
+    "signature-drift: none.on.on.on.disabled__active root: span|Tag → button|Tag",
+    "part-missing: large.off.off.on.enabled__default text",
+    "part-missing: large.off.off.on.enabled__default label",
+    "part-missing: large.off.off.on.enabled__hover text",
+    "part-missing: large.off.off.on.enabled__hover label",
+    "part-missing: large.off.off.on.enabled__focus-visible text",
+    "part-missing: large.off.off.on.enabled__focus-visible label",
+    "part-missing: large.off.off.on.enabled__active text",
+    "part-missing: large.off.off.on.enabled__active label",
+    "signature-drift: large.off.on.off.enabled__default root: span|Tag → button|Tag",
+    "signature-drift: large.off.on.off.enabled__hover root: span|Tag → button|Tag",
+    "signature-drift: large.off.on.off.enabled__focus-visible root: span|Tag → button|Tag",
+    "signature-drift: large.off.on.off.enabled__active root: span|Tag → button|Tag",
+    "signature-drift: large.off.on.off.disabled__default root: span|Tag → button|Tag",
+    "signature-drift: large.off.on.off.disabled__hover root: span|Tag → button|Tag",
+    "signature-drift: large.off.on.off.disabled__focus-visible root: span|Tag → button|Tag",
+    "signature-drift: large.off.on.off.disabled__active root: span|Tag → button|Tag",
+    "signature-drift: large.off.on.on.enabled__default root: span|Tag → button|Tag",
+    "signature-drift: large.off.on.on.enabled__hover root: span|Tag → button|Tag",
+    "signature-drift: large.off.on.on.enabled__focus-visible root: span|Tag → button|Tag",
+    "signature-drift: large.off.on.on.enabled__active root: span|Tag → button|Tag",
+    "signature-drift: large.off.on.on.disabled__default root: span|Tag → button|Tag",
+    "signature-drift: large.off.on.on.disabled__hover root: span|Tag → button|Tag",
+    "signature-drift: large.off.on.on.disabled__focus-visible root: span|Tag → button|Tag",
+    "signature-drift: large.off.on.on.disabled__active root: span|Tag → button|Tag",
+    "part-missing: large.on.off.on.enabled__default text",
+    "part-missing: large.on.off.on.enabled__default label",
+    "part-missing: large.on.off.on.enabled__hover text",
+    "part-missing: large.on.off.on.enabled__hover label",
+    "part-missing: large.on.off.on.enabled__focus-visible text",
+    "part-missing: large.on.off.on.enabled__focus-visible label",
+    "part-missing: large.on.off.on.enabled__active text",
+    "part-missing: large.on.off.on.enabled__active label",
+    "signature-drift: large.on.on.off.enabled__default root: span|Tag → button|Tag",
+    "signature-drift: large.on.on.off.enabled__hover root: span|Tag → button|Tag",
+    "signature-drift: large.on.on.off.enabled__focus-visible root: span|Tag → button|Tag",
+    "signature-drift: large.on.on.off.enabled__active root: span|Tag → button|Tag",
+    "signature-drift: large.on.on.off.disabled__default root: span|Tag → button|Tag",
+    "signature-drift: large.on.on.off.disabled__hover root: span|Tag → button|Tag",
+    "signature-drift: large.on.on.off.disabled__focus-visible root: span|Tag → button|Tag",
+    "signature-drift: large.on.on.off.disabled__active root: span|Tag → button|Tag",
+    "signature-drift: large.on.on.on.enabled__default root: span|Tag → button|Tag",
+    "signature-drift: large.on.on.on.enabled__hover root: span|Tag → button|Tag",
+    "signature-drift: large.on.on.on.enabled__focus-visible root: span|Tag → button|Tag",
+    "signature-drift: large.on.on.on.enabled__active root: span|Tag → button|Tag",
+    "signature-drift: large.on.on.on.disabled__default root: span|Tag → button|Tag",
+    "signature-drift: large.on.on.on.disabled__hover root: span|Tag → button|Tag",
+    "signature-drift: large.on.on.on.disabled__focus-visible root: span|Tag → button|Tag",
+    "signature-drift: large.on.on.on.disabled__active root: span|Tag → button|Tag"
+  ],
+  "styledChannelReceipts": [
+    "control-fallback: no control for <svg> — span control used (part icon-2)",
+    "control-fallback: no control for <path> — span control used (part part-1-0-0-0)"
+  ],
   "anatomyJoin": {
     "computed": [
       {
         "part": "root",
         "join": "matched"
+      },
+      {
+        "part": "link",
+        "join": "computed-only"
+      },
+      {
+        "part": "text-2",
+        "join": "computed-only"
+      },
+      {
+        "part": "label-2",
+        "join": "computed-only"
       },
       {
         "part": "text",
@@ -308,15 +1871,94 @@
       {
         "part": "label",
         "join": "matched"
+      },
+      {
+        "part": "part-1",
+        "join": "computed-only"
+      },
+      {
+        "part": "button",
+        "join": "computed-only"
+      },
+      {
+        "part": "icon",
+        "join": "computed-only"
+      },
+      {
+        "part": "icon-2",
+        "join": "computed-only"
+      },
+      {
+        "part": "part-1-0-0-0",
+        "join": "computed-only"
       }
     ],
     "staticOnly": []
   },
+  "anatomyPromotion": {
+    "_note": "Round 4 DOM-anatomy promotion: computed-only elements carried as REAL parts (extract/computed/anatomy.ts); svg subtrees carried as reconstructed icon assets; presence facts via visibleWhen/stylesWhen; refusals named.",
+    "partsCarried": [
+      "root",
+      "link",
+      "text-2",
+      "label-2",
+      "part-1",
+      "button",
+      "icon"
+    ],
+    "svgAssets": [
+      "tag-icon-large",
+      "tag-icon-none"
+    ],
+    "receipts": [
+      "presence-prop-added: removable (boolean, default false; library prop onRemove)",
+      "presence-prop-added: clickable (boolean, default false; library prop onClick)",
+      "presence-prop-added: linked (boolean, default false; library prop url)",
+      "svg-viewbox-reconstructed: Tag.icon@none.on.off.off.enabled — 0 0 18 18 from computed size 18×18 (path extent 13.8; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Tag.icon@none.on.off.on.enabled — 0 0 18 18 from computed size 18×18 (path extent 13.8; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Tag.icon@large.on.off.off.enabled — 0 0 20 20 from computed size 20×20 (path extent 13.8; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Tag.icon@large.on.off.on.enabled — 0 0 20 20 from computed size 20×20 (path extent 13.8; viewBox is not a computed style — named reconstruction)",
+      "root-display-carried: flex (overrides reviewed \"inline-flex\" — computed truth wins display, receipted)",
+      "display-outside-vocabulary: link = \"grid\" — carried by neither layout nor the declared registry (named residue)",
+      "presence-carried: link (4/16 combos) → visibleWhen linked hidden-when clickable, disabled",
+      "presence-carried: text-2 (4/16 combos) → visibleWhen linked hidden-when clickable, disabled",
+      "literal-text-carried: label-2 = \"Wholesale\" (no text prop sample matches — the mounted value is carried verbatim)",
+      "presence-carried: label-2 (4/16 combos) → visibleWhen linked hidden-when clickable, disabled",
+      "presence-carried: part-1 (4/16 combos) →  base-hidden, shown-when size=large hidden-when clickable, disabled",
+      "aspect-carried: button computed width == height in every enabled combo (18/20px) → declared aspect-ratio 1 / 1 (geometry evidence; the real square rides a pseudo-element padding hack)",
+      "presence-carried: button (4/16 combos) → visibleWhen removable hidden-when clickable, disabled",
+      "aspect-carried: icon computed width == height in every enabled combo (18/20px) → declared aspect-ratio 1 / 1 (geometry evidence; the real square rides a pseudo-element padding hack)",
+      "presence-carried: icon (4/16 combos) → visibleWhen removable hidden-when clickable, disabled"
+    ],
+    "refusals": [
+      "part-presence-uncorrelated: text present in 12/16 enabled combos and the presence set does not factor per-axis — part NOT promoted (named refusal; a phantom always-drawn part would be worse)",
+      "static-part-unrendered: reviewed static part \"label\" has no rendered counterpart in ANY captured combo — dropped from the promoted anatomy (named; usually a conditional the sweep never triggered)"
+    ]
+  },
   "enrichmentNotes": [
     "declared fact carried: root.max-width = 100% (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: root.position = relative (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: label.display = inline (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: label.text-wrap-mode = nowrap (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: link.position = relative (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: link.text-decoration-line = none (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: text-2.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: text-2.overflow-x = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: text-2.overflow-y = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: text-2.text-overflow = ellipsis (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: text-2.text-wrap-mode = nowrap (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-2.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-2.text-wrap-mode = nowrap (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: button.appearance = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: button.border-bottom-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: button.border-left-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: button.border-right-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: button.border-top-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: button.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: icon.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: icon.font-feature-settings = normal (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: icon.max-height = 100% (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: icon.max-width = 100% (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: icon.text-align = center (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: icon.text-rendering = auto (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared state fact carried: [disabled] root.transition-property = none (v15 declared vocabulary)"
   ]
 }

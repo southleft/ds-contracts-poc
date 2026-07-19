@@ -172,7 +172,7 @@ for (const { dir, kebab } of PROMOTED) {
   );
   mergeInto(mintedMerged, (extension.mintedTokens ?? {}) as Record<string, unknown>);
   promotedIds.push(contract.id);
-  console.log(`✔ ${contract.id} v0.2.0 promoted from ${path.relative(REPO, src)}`);
+  console.log(`✔ ${contract.id} v${contract.version} promoted from ${path.relative(REPO, src)}`);
 }
 
 writeFileSync(
