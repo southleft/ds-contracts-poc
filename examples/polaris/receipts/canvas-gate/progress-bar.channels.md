@@ -1,6 +1,6 @@
 # ProgressBar — channel table (canvas-drawn vs captured browser truth)
 
-Contract: `polaris.progress-bar` v0.2.0. Canvas-drawn values are read directly off the
+Contract: `polaris.progress-bar` v0.3.0. Canvas-drawn values are read directly off the
 compiled variant node tree (`createFigmaEngine().compileComponentData`, bindings resolved through
 the engine token trees, v14 literals as-is). Captured-truth values come from
 `extract/computed/out/progressbar/captured-truth.json` — the computed styles of the REAL

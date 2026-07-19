@@ -428,6 +428,10 @@
           "transition-property": "none"
         }
       },
+      "literals": {
+        "padding-left": "6px",
+        "padding-right": "6px"
+      },
       "states": {
         "active": {
           "outline-color": "{imported.tag.root.outline-color-state-active}",

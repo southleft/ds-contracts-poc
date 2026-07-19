@@ -25,7 +25,8 @@ const COMPONENTS = [
           "layout": {
             "mode": "HORIZONTAL",
             "primary": "MIN",
-            "counter": "MIN"
+            "counter": "MIN",
+            "stretchChildren": true
           },
           "children": [
             {
@@ -63,7 +64,8 @@ const COMPONENTS = [
           "layout": {
             "mode": "HORIZONTAL",
             "primary": "MIN",
-            "counter": "MIN"
+            "counter": "MIN",
+            "stretchChildren": true
           },
           "children": [
             {
@@ -101,7 +103,8 @@ const COMPONENTS = [
           "layout": {
             "mode": "HORIZONTAL",
             "primary": "MIN",
-            "counter": "MIN"
+            "counter": "MIN",
+            "stretchChildren": true
           },
           "children": [
             {

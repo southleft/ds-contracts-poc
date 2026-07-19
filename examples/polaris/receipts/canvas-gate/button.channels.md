@@ -1,6 +1,6 @@
 # Button — channel table (canvas-drawn vs captured browser truth)
 
-Contract: `polaris.button` v0.2.0. Canvas-drawn values are read directly off the
+Contract: `polaris.button` v0.3.0. Canvas-drawn values are read directly off the
 compiled variant node tree (`createFigmaEngine().compileComponentData`, bindings resolved through
 the engine token trees, v14 literals as-is). Captured-truth values come from
 `extract/computed/out/button/captured-truth.json` — the computed styles of the REAL
@@ -45,6 +45,17 @@ applies (no binding, no literal). `gap` compares against computed `column-gap`; 
 | root | padding-right | 10 cells (e.g. `Size=Micro, Text Align=Center, Tone=Critical, Variant=Secondary`) | `8px` | `8px` | 0 |  |
 | root | padding-top | 10 cells (e.g. `Size=Micro, Text Align=Center, Tone=Critical, Variant=Secondary`) | `4px` | `4px` | 0 |  |
 | root | padding-top | 50 cells (e.g. `Size=Medium, Text Align=Center, Tone=Critical, Variant=Secondary`) | `6px` | `6px` | 0 |  |
+| icon | background-color | 60 cells (e.g. `Size=Medium, Text Align=Center, Tone=Critical, Variant=Secondary`) | `rgba(0, 0, 0, 0)` | `rgba(0, 0, 0, 0)` | match |  |
+| icon | border-bottom-left-radius | 60 cells (e.g. `Size=Medium, Text Align=Center, Tone=Critical, Variant=Secondary`) | `0px` | `0px` | 0 |  |
+| icon | border-bottom-right-radius | 60 cells (e.g. `Size=Medium, Text Align=Center, Tone=Critical, Variant=Secondary`) | `0px` | `0px` | 0 |  |
+| icon | border-top-left-radius | 60 cells (e.g. `Size=Medium, Text Align=Center, Tone=Critical, Variant=Secondary`) | `0px` | `0px` | 0 |  |
+| icon | border-top-right-radius | 60 cells (e.g. `Size=Medium, Text Align=Center, Tone=Critical, Variant=Secondary`) | `0px` | `0px` | 0 |  |
+| icon | border-width | 60 cells (e.g. `Size=Medium, Text Align=Center, Tone=Critical, Variant=Secondary`) | `0px` | `0px` | 0 |  |
+| icon | gap | 60 cells (e.g. `Size=Medium, Text Align=Center, Tone=Critical, Variant=Secondary`) | `0px` | `normal` | 0 |  |
+| icon | padding-bottom | 60 cells (e.g. `Size=Medium, Text Align=Center, Tone=Critical, Variant=Secondary`) | `0px` | `0px` | 0 |  |
+| icon | padding-left | 60 cells (e.g. `Size=Medium, Text Align=Center, Tone=Critical, Variant=Secondary`) | `0px` | `0px` | 0 |  |
+| icon | padding-right | 60 cells (e.g. `Size=Medium, Text Align=Center, Tone=Critical, Variant=Secondary`) | `0px` | `0px` | 0 |  |
+| icon | padding-top | 60 cells (e.g. `Size=Medium, Text Align=Center, Tone=Critical, Variant=Secondary`) | `0px` | `0px` | 0 |  |
 | label | background-color | 60 cells (e.g. `Size=Medium, Text Align=Center, Tone=Critical, Variant=Secondary`) | `rgba(0, 0, 0, 0)` | `rgba(0, 0, 0, 0)` | match |  |
 | label | border-bottom-left-radius | 60 cells (e.g. `Size=Medium, Text Align=Center, Tone=Critical, Variant=Secondary`) | `0px` | `0px` | 0 |  |
 | label | border-bottom-right-radius | 60 cells (e.g. `Size=Medium, Text Align=Center, Tone=Critical, Variant=Secondary`) | `0px` | `0px` | 0 |  |

@@ -59,7 +59,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "chevron",
-                  "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"14\" height=\"14\" fill=\"none\" stroke=\"#4B5563\" stroke-width=\"1.5\"><polyline points=\"7.8,5.5 12.3,10 7.8,14.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
+                  "svg": "<svg fill=\"#4B5563\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"14\" height=\"14\" fill=\"none\" stroke=\"#4B5563\" stroke-width=\"1.5\"><polyline points=\"7.8,5.5 12.3,10 7.8,14.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
                   "iconSize": 14
                 },
                 {
@@ -124,7 +124,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "chevron",
-                  "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"14\" height=\"14\" fill=\"none\" stroke=\"#4B5563\" stroke-width=\"1.5\"><polyline points=\"5.5,7.8 10,12.3 14.5,7.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
+                  "svg": "<svg fill=\"#4B5563\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"14\" height=\"14\" fill=\"none\" stroke=\"#4B5563\" stroke-width=\"1.5\"><polyline points=\"5.5,7.8 10,12.3 14.5,7.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
                   "iconSize": 14
                 },
                 {
@@ -616,7 +616,7 @@ const COMPONENTS = [
             {
               "type": "svg",
               "name": "loadingSpinner",
-              "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"14\" height=\"14\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"2\"><path d=\"M 10 2.5 A 7.5 7.5 0 0 1 17.5 10\" stroke-linecap=\"round\"/></svg>",
+              "svg": "<svg fill=\"#FFFFFF\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"14\" height=\"14\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"2\"><path d=\"M 10 2.5 A 7.5 7.5 0 0 1 17.5 10\" stroke-linecap=\"round\"/></svg>",
               "iconSize": 14,
               "visibleProp": "Loading",
               "visibleDefault": false
@@ -663,7 +663,7 @@ const COMPONENTS = [
             {
               "type": "svg",
               "name": "loadingSpinner",
-              "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"14\" height=\"14\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"2\"><path d=\"M 10 2.5 A 7.5 7.5 0 0 1 17.5 10\" stroke-linecap=\"round\"/></svg>",
+              "svg": "<svg fill=\"#FFFFFF\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"14\" height=\"14\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"2\"><path d=\"M 10 2.5 A 7.5 7.5 0 0 1 17.5 10\" stroke-linecap=\"round\"/></svg>",
               "iconSize": 14,
               "visibleProp": "Loading",
               "visibleDefault": false
@@ -710,7 +710,7 @@ const COMPONENTS = [
             {
               "type": "svg",
               "name": "loadingSpinner",
-              "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"14\" height=\"14\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"2\"><path d=\"M 10 2.5 A 7.5 7.5 0 0 1 17.5 10\" stroke-linecap=\"round\"/></svg>",
+              "svg": "<svg fill=\"#FFFFFF\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"14\" height=\"14\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"2\"><path d=\"M 10 2.5 A 7.5 7.5 0 0 1 17.5 10\" stroke-linecap=\"round\"/></svg>",
               "iconSize": 14,
               "visibleProp": "Loading",
               "visibleDefault": false
@@ -757,7 +757,7 @@ const COMPONENTS = [
             {
               "type": "svg",
               "name": "loadingSpinner",
-              "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"14\" height=\"14\" fill=\"none\" stroke=\"#111827\" stroke-width=\"2\"><path d=\"M 10 2.5 A 7.5 7.5 0 0 1 17.5 10\" stroke-linecap=\"round\"/></svg>",
+              "svg": "<svg fill=\"#111827\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"14\" height=\"14\" fill=\"none\" stroke=\"#111827\" stroke-width=\"2\"><path d=\"M 10 2.5 A 7.5 7.5 0 0 1 17.5 10\" stroke-linecap=\"round\"/></svg>",
               "iconSize": 14,
               "visibleProp": "Loading",
               "visibleDefault": false
@@ -804,7 +804,7 @@ const COMPONENTS = [
             {
               "type": "svg",
               "name": "loadingSpinner",
-              "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"14\" height=\"14\" fill=\"none\" stroke=\"#111827\" stroke-width=\"2\"><path d=\"M 10 2.5 A 7.5 7.5 0 0 1 17.5 10\" stroke-linecap=\"round\"/></svg>",
+              "svg": "<svg fill=\"#111827\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"14\" height=\"14\" fill=\"none\" stroke=\"#111827\" stroke-width=\"2\"><path d=\"M 10 2.5 A 7.5 7.5 0 0 1 17.5 10\" stroke-linecap=\"round\"/></svg>",
               "iconSize": 14,
               "visibleProp": "Loading",
               "visibleDefault": false
@@ -851,7 +851,7 @@ const COMPONENTS = [
             {
               "type": "svg",
               "name": "loadingSpinner",
-              "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"14\" height=\"14\" fill=\"none\" stroke=\"#111827\" stroke-width=\"2\"><path d=\"M 10 2.5 A 7.5 7.5 0 0 1 17.5 10\" stroke-linecap=\"round\"/></svg>",
+              "svg": "<svg fill=\"#111827\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"14\" height=\"14\" fill=\"none\" stroke=\"#111827\" stroke-width=\"2\"><path d=\"M 10 2.5 A 7.5 7.5 0 0 1 17.5 10\" stroke-linecap=\"round\"/></svg>",
               "iconSize": 14,
               "visibleProp": "Loading",
               "visibleDefault": false
@@ -898,7 +898,7 @@ const COMPONENTS = [
             {
               "type": "svg",
               "name": "loadingSpinner",
-              "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"14\" height=\"14\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"2\"><path d=\"M 10 2.5 A 7.5 7.5 0 0 1 17.5 10\" stroke-linecap=\"round\"/></svg>",
+              "svg": "<svg fill=\"#FFFFFF\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"14\" height=\"14\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"2\"><path d=\"M 10 2.5 A 7.5 7.5 0 0 1 17.5 10\" stroke-linecap=\"round\"/></svg>",
               "iconSize": 14,
               "visibleProp": "Loading",
               "visibleDefault": false
@@ -945,7 +945,7 @@ const COMPONENTS = [
             {
               "type": "svg",
               "name": "loadingSpinner",
-              "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"14\" height=\"14\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"2\"><path d=\"M 10 2.5 A 7.5 7.5 0 0 1 17.5 10\" stroke-linecap=\"round\"/></svg>",
+              "svg": "<svg fill=\"#FFFFFF\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"14\" height=\"14\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"2\"><path d=\"M 10 2.5 A 7.5 7.5 0 0 1 17.5 10\" stroke-linecap=\"round\"/></svg>",
               "iconSize": 14,
               "visibleProp": "Loading",
               "visibleDefault": false
@@ -992,7 +992,7 @@ const COMPONENTS = [
             {
               "type": "svg",
               "name": "loadingSpinner",
-              "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"14\" height=\"14\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"2\"><path d=\"M 10 2.5 A 7.5 7.5 0 0 1 17.5 10\" stroke-linecap=\"round\"/></svg>",
+              "svg": "<svg fill=\"#FFFFFF\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"14\" height=\"14\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"2\"><path d=\"M 10 2.5 A 7.5 7.5 0 0 1 17.5 10\" stroke-linecap=\"round\"/></svg>",
               "iconSize": 14,
               "visibleProp": "Loading",
               "visibleDefault": false
@@ -1039,7 +1039,7 @@ const COMPONENTS = [
             {
               "type": "svg",
               "name": "loadingSpinner",
-              "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"14\" height=\"14\" fill=\"none\" stroke=\"#374151\" stroke-width=\"2\"><path d=\"M 10 2.5 A 7.5 7.5 0 0 1 17.5 10\" stroke-linecap=\"round\"/></svg>",
+              "svg": "<svg fill=\"#374151\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"14\" height=\"14\" fill=\"none\" stroke=\"#374151\" stroke-width=\"2\"><path d=\"M 10 2.5 A 7.5 7.5 0 0 1 17.5 10\" stroke-linecap=\"round\"/></svg>",
               "iconSize": 14,
               "visibleProp": "Loading",
               "visibleDefault": false
@@ -1086,7 +1086,7 @@ const COMPONENTS = [
             {
               "type": "svg",
               "name": "loadingSpinner",
-              "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"14\" height=\"14\" fill=\"none\" stroke=\"#374151\" stroke-width=\"2\"><path d=\"M 10 2.5 A 7.5 7.5 0 0 1 17.5 10\" stroke-linecap=\"round\"/></svg>",
+              "svg": "<svg fill=\"#374151\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"14\" height=\"14\" fill=\"none\" stroke=\"#374151\" stroke-width=\"2\"><path d=\"M 10 2.5 A 7.5 7.5 0 0 1 17.5 10\" stroke-linecap=\"round\"/></svg>",
               "iconSize": 14,
               "visibleProp": "Loading",
               "visibleDefault": false
@@ -1133,7 +1133,7 @@ const COMPONENTS = [
             {
               "type": "svg",
               "name": "loadingSpinner",
-              "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"14\" height=\"14\" fill=\"none\" stroke=\"#374151\" stroke-width=\"2\"><path d=\"M 10 2.5 A 7.5 7.5 0 0 1 17.5 10\" stroke-linecap=\"round\"/></svg>",
+              "svg": "<svg fill=\"#374151\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"14\" height=\"14\" fill=\"none\" stroke=\"#374151\" stroke-width=\"2\"><path d=\"M 10 2.5 A 7.5 7.5 0 0 1 17.5 10\" stroke-linecap=\"round\"/></svg>",
               "iconSize": 14,
               "visibleProp": "Loading",
               "visibleDefault": false
@@ -1182,7 +1182,7 @@ const COMPONENTS = [
             {
               "type": "svg",
               "name": "loadingSpinner",
-              "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"14\" height=\"14\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"2\"><path d=\"M 10 2.5 A 7.5 7.5 0 0 1 17.5 10\" stroke-linecap=\"round\"/></svg>",
+              "svg": "<svg fill=\"#FFFFFF\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"14\" height=\"14\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"2\"><path d=\"M 10 2.5 A 7.5 7.5 0 0 1 17.5 10\" stroke-linecap=\"round\"/></svg>",
               "iconSize": 14,
               "visibleProp": "Loading",
               "visibleDefault": false
@@ -1229,7 +1229,7 @@ const COMPONENTS = [
             {
               "type": "svg",
               "name": "loadingSpinner",
-              "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"14\" height=\"14\" fill=\"none\" stroke=\"#111827\" stroke-width=\"2\"><path d=\"M 10 2.5 A 7.5 7.5 0 0 1 17.5 10\" stroke-linecap=\"round\"/></svg>",
+              "svg": "<svg fill=\"#111827\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"14\" height=\"14\" fill=\"none\" stroke=\"#111827\" stroke-width=\"2\"><path d=\"M 10 2.5 A 7.5 7.5 0 0 1 17.5 10\" stroke-linecap=\"round\"/></svg>",
               "iconSize": 14,
               "visibleProp": "Loading",
               "visibleDefault": false
@@ -1276,7 +1276,7 @@ const COMPONENTS = [
             {
               "type": "svg",
               "name": "loadingSpinner",
-              "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"14\" height=\"14\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"2\"><path d=\"M 10 2.5 A 7.5 7.5 0 0 1 17.5 10\" stroke-linecap=\"round\"/></svg>",
+              "svg": "<svg fill=\"#FFFFFF\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"14\" height=\"14\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"2\"><path d=\"M 10 2.5 A 7.5 7.5 0 0 1 17.5 10\" stroke-linecap=\"round\"/></svg>",
               "iconSize": 14,
               "visibleProp": "Loading",
               "visibleDefault": false
@@ -1323,7 +1323,7 @@ const COMPONENTS = [
             {
               "type": "svg",
               "name": "loadingSpinner",
-              "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"14\" height=\"14\" fill=\"none\" stroke=\"#374151\" stroke-width=\"2\"><path d=\"M 10 2.5 A 7.5 7.5 0 0 1 17.5 10\" stroke-linecap=\"round\"/></svg>",
+              "svg": "<svg fill=\"#374151\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"14\" height=\"14\" fill=\"none\" stroke=\"#374151\" stroke-width=\"2\"><path d=\"M 10 2.5 A 7.5 7.5 0 0 1 17.5 10\" stroke-linecap=\"round\"/></svg>",
               "iconSize": 14,
               "visibleProp": "Loading",
               "visibleDefault": false
@@ -1372,7 +1372,7 @@ const COMPONENTS = [
             {
               "type": "svg",
               "name": "loadingSpinner",
-              "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"14\" height=\"14\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"2\"><path d=\"M 10 2.5 A 7.5 7.5 0 0 1 17.5 10\" stroke-linecap=\"round\"/></svg>",
+              "svg": "<svg fill=\"#FFFFFF\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"14\" height=\"14\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"2\"><path d=\"M 10 2.5 A 7.5 7.5 0 0 1 17.5 10\" stroke-linecap=\"round\"/></svg>",
               "iconSize": 14,
               "visibleProp": "Loading",
               "visibleDefault": false
@@ -1421,7 +1421,7 @@ const COMPONENTS = [
             {
               "type": "svg",
               "name": "loadingSpinner",
-              "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"14\" height=\"14\" fill=\"none\" stroke=\"#111827\" stroke-width=\"2\"><path d=\"M 10 2.5 A 7.5 7.5 0 0 1 17.5 10\" stroke-linecap=\"round\"/></svg>",
+              "svg": "<svg fill=\"#111827\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"14\" height=\"14\" fill=\"none\" stroke=\"#111827\" stroke-width=\"2\"><path d=\"M 10 2.5 A 7.5 7.5 0 0 1 17.5 10\" stroke-linecap=\"round\"/></svg>",
               "iconSize": 14,
               "visibleProp": "Loading",
               "visibleDefault": false
@@ -1470,7 +1470,7 @@ const COMPONENTS = [
             {
               "type": "svg",
               "name": "loadingSpinner",
-              "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"14\" height=\"14\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"2\"><path d=\"M 10 2.5 A 7.5 7.5 0 0 1 17.5 10\" stroke-linecap=\"round\"/></svg>",
+              "svg": "<svg fill=\"#FFFFFF\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"14\" height=\"14\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"2\"><path d=\"M 10 2.5 A 7.5 7.5 0 0 1 17.5 10\" stroke-linecap=\"round\"/></svg>",
               "iconSize": 14,
               "visibleProp": "Loading",
               "visibleDefault": false
@@ -1519,7 +1519,7 @@ const COMPONENTS = [
             {
               "type": "svg",
               "name": "loadingSpinner",
-              "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"14\" height=\"14\" fill=\"none\" stroke=\"#374151\" stroke-width=\"2\"><path d=\"M 10 2.5 A 7.5 7.5 0 0 1 17.5 10\" stroke-linecap=\"round\"/></svg>",
+              "svg": "<svg fill=\"#374151\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"14\" height=\"14\" fill=\"none\" stroke=\"#374151\" stroke-width=\"2\"><path d=\"M 10 2.5 A 7.5 7.5 0 0 1 17.5 10\" stroke-linecap=\"round\"/></svg>",
               "iconSize": 14,
               "visibleProp": "Loading",
               "visibleDefault": false
@@ -1567,7 +1567,7 @@ const COMPONENTS = [
             {
               "type": "svg",
               "name": "loadingSpinner",
-              "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"14\" height=\"14\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"2\"><path d=\"M 10 2.5 A 7.5 7.5 0 0 1 17.5 10\" stroke-linecap=\"round\"/></svg>",
+              "svg": "<svg fill=\"#FFFFFF\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"14\" height=\"14\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"2\"><path d=\"M 10 2.5 A 7.5 7.5 0 0 1 17.5 10\" stroke-linecap=\"round\"/></svg>",
               "iconSize": 14,
               "visibleProp": "Loading",
               "visibleDefault": false
@@ -1615,7 +1615,7 @@ const COMPONENTS = [
             {
               "type": "svg",
               "name": "loadingSpinner",
-              "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"14\" height=\"14\" fill=\"none\" stroke=\"#111827\" stroke-width=\"2\"><path d=\"M 10 2.5 A 7.5 7.5 0 0 1 17.5 10\" stroke-linecap=\"round\"/></svg>",
+              "svg": "<svg fill=\"#111827\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"14\" height=\"14\" fill=\"none\" stroke=\"#111827\" stroke-width=\"2\"><path d=\"M 10 2.5 A 7.5 7.5 0 0 1 17.5 10\" stroke-linecap=\"round\"/></svg>",
               "iconSize": 14,
               "visibleProp": "Loading",
               "visibleDefault": false
@@ -1663,7 +1663,7 @@ const COMPONENTS = [
             {
               "type": "svg",
               "name": "loadingSpinner",
-              "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"14\" height=\"14\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"2\"><path d=\"M 10 2.5 A 7.5 7.5 0 0 1 17.5 10\" stroke-linecap=\"round\"/></svg>",
+              "svg": "<svg fill=\"#FFFFFF\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"14\" height=\"14\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"2\"><path d=\"M 10 2.5 A 7.5 7.5 0 0 1 17.5 10\" stroke-linecap=\"round\"/></svg>",
               "iconSize": 14,
               "visibleProp": "Loading",
               "visibleDefault": false
@@ -1711,7 +1711,7 @@ const COMPONENTS = [
             {
               "type": "svg",
               "name": "loadingSpinner",
-              "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"14\" height=\"14\" fill=\"none\" stroke=\"#374151\" stroke-width=\"2\"><path d=\"M 10 2.5 A 7.5 7.5 0 0 1 17.5 10\" stroke-linecap=\"round\"/></svg>",
+              "svg": "<svg fill=\"#374151\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"14\" height=\"14\" fill=\"none\" stroke=\"#374151\" stroke-width=\"2\"><path d=\"M 10 2.5 A 7.5 7.5 0 0 1 17.5 10\" stroke-linecap=\"round\"/></svg>",
               "iconSize": 14,
               "visibleProp": "Loading",
               "visibleDefault": false
@@ -1791,7 +1791,8 @@ const COMPONENTS = [
               "layout": {
                 "mode": "VERTICAL",
                 "primary": "MIN",
-                "counter": "MIN"
+                "counter": "MIN",
+                "stretchChildren": true
               },
               "grow": true,
               "bindings": {
@@ -1850,7 +1851,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "close",
-                  "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"#1D4ED8\" stroke-width=\"1.5\"><line x1=\"5\" y1=\"5\" x2=\"15\" y2=\"15\" stroke-linecap=\"round\"/><line x1=\"15\" y1=\"5\" x2=\"5\" y2=\"15\" stroke-linecap=\"round\"/></svg>",
+                  "svg": "<svg fill=\"#1D4ED8\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"#1D4ED8\" stroke-width=\"1.5\"><line x1=\"5\" y1=\"5\" x2=\"15\" y2=\"15\" stroke-linecap=\"round\"/><line x1=\"15\" y1=\"5\" x2=\"5\" y2=\"15\" stroke-linecap=\"round\"/></svg>",
                   "visibleProp": "Dismissable",
                   "visibleDefault": false
                 }
@@ -1899,7 +1900,8 @@ const COMPONENTS = [
               "layout": {
                 "mode": "VERTICAL",
                 "primary": "MIN",
-                "counter": "MIN"
+                "counter": "MIN",
+                "stretchChildren": true
               },
               "grow": true,
               "bindings": {
@@ -1958,7 +1960,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "close",
-                  "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"#1D4ED8\" stroke-width=\"1.5\"><line x1=\"5\" y1=\"5\" x2=\"15\" y2=\"15\" stroke-linecap=\"round\"/><line x1=\"15\" y1=\"5\" x2=\"5\" y2=\"15\" stroke-linecap=\"round\"/></svg>",
+                  "svg": "<svg fill=\"#1D4ED8\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"#1D4ED8\" stroke-width=\"1.5\"><line x1=\"5\" y1=\"5\" x2=\"15\" y2=\"15\" stroke-linecap=\"round\"/><line x1=\"15\" y1=\"5\" x2=\"5\" y2=\"15\" stroke-linecap=\"round\"/></svg>",
                   "visibleProp": "Dismissable",
                   "visibleDefault": false
                 }
@@ -1999,7 +2001,7 @@ const COMPONENTS = [
             {
               "type": "svg",
               "name": "statusIcon",
-              "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"#15803D\" stroke-width=\"1.5\"><circle cx=\"10\" cy=\"10\" r=\"7.5\"/><polyline points=\"6.6,10.2 9,12.6 13.4,7.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>"
+              "svg": "<svg fill=\"#15803D\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"#15803D\" stroke-width=\"1.5\"><circle cx=\"10\" cy=\"10\" r=\"7.5\"/><polyline points=\"6.6,10.2 9,12.6 13.4,7.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>"
             },
             {
               "type": "frame",
@@ -2007,7 +2009,8 @@ const COMPONENTS = [
               "layout": {
                 "mode": "VERTICAL",
                 "primary": "MIN",
-                "counter": "MIN"
+                "counter": "MIN",
+                "stretchChildren": true
               },
               "grow": true,
               "bindings": {
@@ -2066,7 +2069,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "close",
-                  "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"#15803D\" stroke-width=\"1.5\"><line x1=\"5\" y1=\"5\" x2=\"15\" y2=\"15\" stroke-linecap=\"round\"/><line x1=\"15\" y1=\"5\" x2=\"5\" y2=\"15\" stroke-linecap=\"round\"/></svg>",
+                  "svg": "<svg fill=\"#15803D\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"#15803D\" stroke-width=\"1.5\"><line x1=\"5\" y1=\"5\" x2=\"15\" y2=\"15\" stroke-linecap=\"round\"/><line x1=\"15\" y1=\"5\" x2=\"5\" y2=\"15\" stroke-linecap=\"round\"/></svg>",
                   "visibleProp": "Dismissable",
                   "visibleDefault": false
                 }
@@ -2107,7 +2110,7 @@ const COMPONENTS = [
             {
               "type": "svg",
               "name": "statusIcon",
-              "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"#15803D\" stroke-width=\"1.5\"><circle cx=\"10\" cy=\"10\" r=\"7.5\"/><polyline points=\"6.6,10.2 9,12.6 13.4,7.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>"
+              "svg": "<svg fill=\"#15803D\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"#15803D\" stroke-width=\"1.5\"><circle cx=\"10\" cy=\"10\" r=\"7.5\"/><polyline points=\"6.6,10.2 9,12.6 13.4,7.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>"
             },
             {
               "type": "frame",
@@ -2115,7 +2118,8 @@ const COMPONENTS = [
               "layout": {
                 "mode": "VERTICAL",
                 "primary": "MIN",
-                "counter": "MIN"
+                "counter": "MIN",
+                "stretchChildren": true
               },
               "grow": true,
               "bindings": {
@@ -2174,7 +2178,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "close",
-                  "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"#15803D\" stroke-width=\"1.5\"><line x1=\"5\" y1=\"5\" x2=\"15\" y2=\"15\" stroke-linecap=\"round\"/><line x1=\"15\" y1=\"5\" x2=\"5\" y2=\"15\" stroke-linecap=\"round\"/></svg>",
+                  "svg": "<svg fill=\"#15803D\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"#15803D\" stroke-width=\"1.5\"><line x1=\"5\" y1=\"5\" x2=\"15\" y2=\"15\" stroke-linecap=\"round\"/><line x1=\"15\" y1=\"5\" x2=\"5\" y2=\"15\" stroke-linecap=\"round\"/></svg>",
                   "visibleProp": "Dismissable",
                   "visibleDefault": false
                 }
@@ -2223,7 +2227,8 @@ const COMPONENTS = [
               "layout": {
                 "mode": "VERTICAL",
                 "primary": "MIN",
-                "counter": "MIN"
+                "counter": "MIN",
+                "stretchChildren": true
               },
               "grow": true,
               "bindings": {
@@ -2282,7 +2287,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "close",
-                  "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"#B45309\" stroke-width=\"1.5\"><line x1=\"5\" y1=\"5\" x2=\"15\" y2=\"15\" stroke-linecap=\"round\"/><line x1=\"15\" y1=\"5\" x2=\"5\" y2=\"15\" stroke-linecap=\"round\"/></svg>",
+                  "svg": "<svg fill=\"#B45309\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"#B45309\" stroke-width=\"1.5\"><line x1=\"5\" y1=\"5\" x2=\"15\" y2=\"15\" stroke-linecap=\"round\"/><line x1=\"15\" y1=\"5\" x2=\"5\" y2=\"15\" stroke-linecap=\"round\"/></svg>",
                   "visibleProp": "Dismissable",
                   "visibleDefault": false
                 }
@@ -2331,7 +2336,8 @@ const COMPONENTS = [
               "layout": {
                 "mode": "VERTICAL",
                 "primary": "MIN",
-                "counter": "MIN"
+                "counter": "MIN",
+                "stretchChildren": true
               },
               "grow": true,
               "bindings": {
@@ -2390,7 +2396,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "close",
-                  "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"#B45309\" stroke-width=\"1.5\"><line x1=\"5\" y1=\"5\" x2=\"15\" y2=\"15\" stroke-linecap=\"round\"/><line x1=\"15\" y1=\"5\" x2=\"5\" y2=\"15\" stroke-linecap=\"round\"/></svg>",
+                  "svg": "<svg fill=\"#B45309\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"#B45309\" stroke-width=\"1.5\"><line x1=\"5\" y1=\"5\" x2=\"15\" y2=\"15\" stroke-linecap=\"round\"/><line x1=\"15\" y1=\"5\" x2=\"5\" y2=\"15\" stroke-linecap=\"round\"/></svg>",
                   "visibleProp": "Dismissable",
                   "visibleDefault": false
                 }
@@ -2431,7 +2437,7 @@ const COMPONENTS = [
             {
               "type": "svg",
               "name": "statusIcon",
-              "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"#B91C1C\" stroke-width=\"1.5\"><circle cx=\"10\" cy=\"10\" r=\"7.5\"/><line x1=\"7.2\" y1=\"7.2\" x2=\"12.8\" y2=\"12.8\" stroke-linecap=\"round\"/><line x1=\"12.8\" y1=\"7.2\" x2=\"7.2\" y2=\"12.8\" stroke-linecap=\"round\"/></svg>"
+              "svg": "<svg fill=\"#B91C1C\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"#B91C1C\" stroke-width=\"1.5\"><circle cx=\"10\" cy=\"10\" r=\"7.5\"/><line x1=\"7.2\" y1=\"7.2\" x2=\"12.8\" y2=\"12.8\" stroke-linecap=\"round\"/><line x1=\"12.8\" y1=\"7.2\" x2=\"7.2\" y2=\"12.8\" stroke-linecap=\"round\"/></svg>"
             },
             {
               "type": "frame",
@@ -2439,7 +2445,8 @@ const COMPONENTS = [
               "layout": {
                 "mode": "VERTICAL",
                 "primary": "MIN",
-                "counter": "MIN"
+                "counter": "MIN",
+                "stretchChildren": true
               },
               "grow": true,
               "bindings": {
@@ -2498,7 +2505,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "close",
-                  "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"#B91C1C\" stroke-width=\"1.5\"><line x1=\"5\" y1=\"5\" x2=\"15\" y2=\"15\" stroke-linecap=\"round\"/><line x1=\"15\" y1=\"5\" x2=\"5\" y2=\"15\" stroke-linecap=\"round\"/></svg>",
+                  "svg": "<svg fill=\"#B91C1C\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"#B91C1C\" stroke-width=\"1.5\"><line x1=\"5\" y1=\"5\" x2=\"15\" y2=\"15\" stroke-linecap=\"round\"/><line x1=\"15\" y1=\"5\" x2=\"5\" y2=\"15\" stroke-linecap=\"round\"/></svg>",
                   "visibleProp": "Dismissable",
                   "visibleDefault": false
                 }
@@ -2539,7 +2546,7 @@ const COMPONENTS = [
             {
               "type": "svg",
               "name": "statusIcon",
-              "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"#B91C1C\" stroke-width=\"1.5\"><circle cx=\"10\" cy=\"10\" r=\"7.5\"/><line x1=\"7.2\" y1=\"7.2\" x2=\"12.8\" y2=\"12.8\" stroke-linecap=\"round\"/><line x1=\"12.8\" y1=\"7.2\" x2=\"7.2\" y2=\"12.8\" stroke-linecap=\"round\"/></svg>"
+              "svg": "<svg fill=\"#B91C1C\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"#B91C1C\" stroke-width=\"1.5\"><circle cx=\"10\" cy=\"10\" r=\"7.5\"/><line x1=\"7.2\" y1=\"7.2\" x2=\"12.8\" y2=\"12.8\" stroke-linecap=\"round\"/><line x1=\"12.8\" y1=\"7.2\" x2=\"7.2\" y2=\"12.8\" stroke-linecap=\"round\"/></svg>"
             },
             {
               "type": "frame",
@@ -2547,7 +2554,8 @@ const COMPONENTS = [
               "layout": {
                 "mode": "VERTICAL",
                 "primary": "MIN",
-                "counter": "MIN"
+                "counter": "MIN",
+                "stretchChildren": true
               },
               "grow": true,
               "bindings": {
@@ -2606,7 +2614,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "close",
-                  "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"#B91C1C\" stroke-width=\"1.5\"><line x1=\"5\" y1=\"5\" x2=\"15\" y2=\"15\" stroke-linecap=\"round\"/><line x1=\"15\" y1=\"5\" x2=\"5\" y2=\"15\" stroke-linecap=\"round\"/></svg>",
+                  "svg": "<svg fill=\"#B91C1C\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"#B91C1C\" stroke-width=\"1.5\"><line x1=\"5\" y1=\"5\" x2=\"15\" y2=\"15\" stroke-linecap=\"round\"/><line x1=\"15\" y1=\"5\" x2=\"5\" y2=\"15\" stroke-linecap=\"round\"/></svg>",
                   "visibleProp": "Dismissable",
                   "visibleDefault": false
                 }
@@ -2640,7 +2648,8 @@ const COMPONENTS = [
           "layout": {
             "mode": "VERTICAL",
             "primary": "MIN",
-            "counter": "MIN"
+            "counter": "MIN",
+            "stretchChildren": true
           },
           "bindings": {
             "strokeLeftWeight": "border/width/divider/strong",
@@ -2657,7 +2666,8 @@ const COMPONENTS = [
               "layout": {
                 "mode": "VERTICAL",
                 "primary": "MIN",
-                "counter": "MIN"
+                "counter": "MIN",
+                "stretchChildren": true
               },
               "slotProperty": "Children",
               "slotAccepts": []
@@ -2721,7 +2731,7 @@ const COMPONENTS = [
             {
               "type": "svg",
               "name": "separatorIcon",
-              "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"12\" height=\"12\" fill=\"none\" stroke=\"#4B5563\" stroke-width=\"1.5\"><polyline points=\"7.8,5.5 12.3,10 7.8,14.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
+              "svg": "<svg fill=\"#4B5563\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"12\" height=\"12\" fill=\"none\" stroke=\"#4B5563\" stroke-width=\"1.5\"><polyline points=\"7.8,5.5 12.3,10 7.8,14.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
               "iconSize": 12,
               "visibleProp": "Separator",
               "visibleDefault": true

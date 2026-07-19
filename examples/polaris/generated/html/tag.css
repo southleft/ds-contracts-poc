@@ -18,6 +18,8 @@
   left: var(--imported-shared-size-0);
   right: var(--imported-shared-size-0);
   top: var(--imported-shared-size-0);
+  padding-left: 6px;
+  padding-right: 6px;
   max-width: 100%;
   position: relative;
 }

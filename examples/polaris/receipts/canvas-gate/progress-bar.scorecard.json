@@ -1,7 +1,7 @@
 {
   "component": "ProgressBar",
   "contractId": "polaris.progress-bar",
-  "contractVersion": "0.2.0",
+  "contractVersion": "0.3.0",
   "generatedBy": "extract/figma/canvas-gate/run.ts",
   "sides": {
     "canvas": "createFigmaEngine().compileComponentData rendered by the playground canvas renderer (vendored), deviceScaleFactor 2",
@@ -25,7 +25,7 @@
       "pctAAMasked": 0,
       "maskCoveragePct": 0,
       "canvasPx": "96x128",
-      "realPx": "88x96",
+      "realPx": "88x128",
       "inkCanvasPct": 0,
       "inkRealPct": 0,
       "note": "BOTH SIDES BLANK (canvas ink 0%, real ink 0%): a 0-vs-0 comparison is VOID, not a pass — for the runtime-sized meter track both sides collapse to zero painted width in a hug container (the real ProgressBar is a 100%-width block; the canvas root hugs its empty indicator); the channel table carries the numeric verification for these cells"
@@ -51,7 +51,7 @@
       "pctAAMasked": 0,
       "maskCoveragePct": 0,
       "canvasPx": "96x128",
-      "realPx": "88x128",
+      "realPx": "88x96",
       "inkCanvasPct": 0,
       "inkRealPct": 0,
       "note": "BOTH SIDES BLANK (canvas ink 0%, real ink 0%): a 0-vs-0 comparison is VOID, not a pass — for the runtime-sized meter track both sides collapse to zero painted width in a hug container (the real ProgressBar is a 100%-width block; the canvas root hugs its empty indicator); the channel table carries the numeric verification for these cells"
@@ -142,7 +142,7 @@
       "pctAAMasked": 0,
       "maskCoveragePct": 0,
       "canvasPx": "96x160",
-      "realPx": "88x160",
+      "realPx": "88x128",
       "inkCanvasPct": 0,
       "inkRealPct": 0,
       "note": "BOTH SIDES BLANK (canvas ink 0%, real ink 0%): a 0-vs-0 comparison is VOID, not a pass — for the runtime-sized meter track both sides collapse to zero painted width in a hug container (the real ProgressBar is a 100%-width block; the canvas root hugs its empty indicator); the channel table carries the numeric verification for these cells"

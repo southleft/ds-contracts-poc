@@ -1,7 +1,7 @@
 {
   "component": "Badge",
   "contractId": "polaris.badge",
-  "contractVersion": "0.2.0",
+  "contractVersion": "0.3.0",
   "generatedBy": "extract/figma/canvas-gate/run.ts",
   "sides": {
     "canvas": "createFigmaEngine().compileComponentData rendered by the playground canvas renderer (vendored), deviceScaleFactor 2",
@@ -18,31 +18,689 @@
   },
   "cells": [
     {
-      "cell": "Badge",
+      "cell": "Tone=info, Progress=incomplete",
       "kind": "base",
-      "pctExactUnmasked": 11.64,
-      "pctAAUnmasked": 0.12,
-      "pctAAMasked": 0,
-      "maskCoveragePct": 77.09,
-      "canvasPx": "122x40",
-      "realPx": "122x40",
-      "inkCanvasPct": 95.66,
-      "inkRealPct": 95.66
+      "pctExactUnmasked": 45.1,
+      "pctAAUnmasked": 31.17,
+      "pctAAMasked": 53.1,
+      "maskCoveragePct": 52.29,
+      "canvasPx": "162x48",
+      "realPx": "146x40",
+      "inkCanvasPct": 97.63,
+      "inkRealPct": 72.74
+    },
+    {
+      "cell": "Tone=info, Progress=partiallyComplete",
+      "kind": "base",
+      "pctExactUnmasked": 45.95,
+      "pctAAUnmasked": 31.71,
+      "pctAAMasked": 54.23,
+      "maskCoveragePct": 52.29,
+      "canvasPx": "162x48",
+      "realPx": "146x40",
+      "inkCanvasPct": 97.63,
+      "inkRealPct": 72.74
+    },
+    {
+      "cell": "Tone=info, Progress=complete",
+      "kind": "base",
+      "pctExactUnmasked": 46.54,
+      "pctAAUnmasked": 33.28,
+      "pctAAMasked": 57.52,
+      "maskCoveragePct": 52.29,
+      "canvasPx": "162x48",
+      "realPx": "146x40",
+      "inkCanvasPct": 97.63,
+      "inkRealPct": 72.74
+    },
+    {
+      "cell": "Tone=success, Progress=incomplete",
+      "kind": "base",
+      "pctExactUnmasked": 45.1,
+      "pctAAUnmasked": 31.16,
+      "pctAAMasked": 53.1,
+      "maskCoveragePct": 52.29,
+      "canvasPx": "162x48",
+      "realPx": "146x40",
+      "inkCanvasPct": 97.63,
+      "inkRealPct": 72.74
+    },
+    {
+      "cell": "Tone=success, Progress=partiallyComplete",
+      "kind": "base",
+      "pctExactUnmasked": 45.95,
+      "pctAAUnmasked": 31.7,
+      "pctAAMasked": 54.23,
+      "maskCoveragePct": 52.29,
+      "canvasPx": "162x48",
+      "realPx": "146x40",
+      "inkCanvasPct": 97.63,
+      "inkRealPct": 72.74
+    },
+    {
+      "cell": "Tone=success, Progress=complete",
+      "kind": "base",
+      "pctExactUnmasked": 46.54,
+      "pctAAUnmasked": 33.27,
+      "pctAAMasked": 57.52,
+      "maskCoveragePct": 52.29,
+      "canvasPx": "162x48",
+      "realPx": "146x40",
+      "inkCanvasPct": 97.63,
+      "inkRealPct": 72.74
+    },
+    {
+      "cell": "Tone=warning, Progress=incomplete",
+      "kind": "base",
+      "pctExactUnmasked": 45.09,
+      "pctAAUnmasked": 31.11,
+      "pctAAMasked": 53.1,
+      "maskCoveragePct": 52.29,
+      "canvasPx": "162x48",
+      "realPx": "146x40",
+      "inkCanvasPct": 97.63,
+      "inkRealPct": 72.74
+    },
+    {
+      "cell": "Tone=warning, Progress=partiallyComplete",
+      "kind": "base",
+      "pctExactUnmasked": 45.94,
+      "pctAAUnmasked": 31.65,
+      "pctAAMasked": 54.23,
+      "maskCoveragePct": 52.29,
+      "canvasPx": "162x48",
+      "realPx": "146x40",
+      "inkCanvasPct": 97.63,
+      "inkRealPct": 72.74
+    },
+    {
+      "cell": "Tone=warning, Progress=complete",
+      "kind": "base",
+      "pctExactUnmasked": 46.53,
+      "pctAAUnmasked": 33.22,
+      "pctAAMasked": 57.52,
+      "maskCoveragePct": 52.29,
+      "canvasPx": "162x48",
+      "realPx": "146x40",
+      "inkCanvasPct": 97.63,
+      "inkRealPct": 72.74
+    },
+    {
+      "cell": "Tone=critical, Progress=incomplete",
+      "kind": "base",
+      "pctExactUnmasked": 45.1,
+      "pctAAUnmasked": 31.16,
+      "pctAAMasked": 53.1,
+      "maskCoveragePct": 52.29,
+      "canvasPx": "162x48",
+      "realPx": "146x40",
+      "inkCanvasPct": 97.63,
+      "inkRealPct": 72.74
+    },
+    {
+      "cell": "Tone=critical, Progress=partiallyComplete",
+      "kind": "base",
+      "pctExactUnmasked": 45.95,
+      "pctAAUnmasked": 31.7,
+      "pctAAMasked": 54.23,
+      "maskCoveragePct": 52.29,
+      "canvasPx": "162x48",
+      "realPx": "146x40",
+      "inkCanvasPct": 97.63,
+      "inkRealPct": 72.74
+    },
+    {
+      "cell": "Tone=critical, Progress=complete",
+      "kind": "base",
+      "pctExactUnmasked": 46.54,
+      "pctAAUnmasked": 33.27,
+      "pctAAMasked": 57.52,
+      "maskCoveragePct": 52.29,
+      "canvasPx": "162x48",
+      "realPx": "146x40",
+      "inkCanvasPct": 97.63,
+      "inkRealPct": 72.74
+    },
+    {
+      "cell": "Tone=attention, Progress=incomplete",
+      "kind": "base",
+      "pctExactUnmasked": 45.09,
+      "pctAAUnmasked": 31.11,
+      "pctAAMasked": 53.1,
+      "maskCoveragePct": 52.29,
+      "canvasPx": "162x48",
+      "realPx": "146x40",
+      "inkCanvasPct": 97.74,
+      "inkRealPct": 72.84
+    },
+    {
+      "cell": "Tone=attention, Progress=partiallyComplete",
+      "kind": "base",
+      "pctExactUnmasked": 45.94,
+      "pctAAUnmasked": 31.65,
+      "pctAAMasked": 54.23,
+      "maskCoveragePct": 52.29,
+      "canvasPx": "162x48",
+      "realPx": "146x40",
+      "inkCanvasPct": 97.74,
+      "inkRealPct": 72.84
+    },
+    {
+      "cell": "Tone=attention, Progress=complete",
+      "kind": "base",
+      "pctExactUnmasked": 46.53,
+      "pctAAUnmasked": 33.22,
+      "pctAAMasked": 57.52,
+      "maskCoveragePct": 52.29,
+      "canvasPx": "162x48",
+      "realPx": "146x40",
+      "inkCanvasPct": 97.74,
+      "inkRealPct": 72.84
+    },
+    {
+      "cell": "Tone=new, Progress=incomplete",
+      "kind": "base",
+      "pctExactUnmasked": 44.84,
+      "pctAAUnmasked": 8.24,
+      "pctAAMasked": 4.08,
+      "maskCoveragePct": 52.78,
+      "canvasPx": "162x48",
+      "realPx": "148x40",
+      "inkCanvasPct": 97.27,
+      "inkRealPct": 73.41
+    },
+    {
+      "cell": "Tone=new, Progress=partiallyComplete",
+      "kind": "base",
+      "pctExactUnmasked": 45.82,
+      "pctAAUnmasked": 8.91,
+      "pctAAMasked": 5.5,
+      "maskCoveragePct": 52.78,
+      "canvasPx": "162x48",
+      "realPx": "148x40",
+      "inkCanvasPct": 97.27,
+      "inkRealPct": 73.41
+    },
+    {
+      "cell": "Tone=new, Progress=complete",
+      "kind": "base",
+      "pctExactUnmasked": 46.44,
+      "pctAAUnmasked": 10.48,
+      "pctAAMasked": 8.82,
+      "maskCoveragePct": 52.78,
+      "canvasPx": "162x48",
+      "realPx": "148x40",
+      "inkCanvasPct": 97.27,
+      "inkRealPct": 73.41
+    },
+    {
+      "cell": "Tone=magic, Progress=incomplete",
+      "kind": "base",
+      "pctExactUnmasked": 45.1,
+      "pctAAUnmasked": 7.46,
+      "pctAAMasked": 4.1,
+      "maskCoveragePct": 52.29,
+      "canvasPx": "162x48",
+      "realPx": "146x40",
+      "inkCanvasPct": 97.43,
+      "inkRealPct": 72.53
+    },
+    {
+      "cell": "Tone=magic, Progress=partiallyComplete",
+      "kind": "base",
+      "pctExactUnmasked": 45.95,
+      "pctAAUnmasked": 8,
+      "pctAAMasked": 5.23,
+      "maskCoveragePct": 52.29,
+      "canvasPx": "162x48",
+      "realPx": "146x40",
+      "inkCanvasPct": 97.43,
+      "inkRealPct": 72.53
+    },
+    {
+      "cell": "Tone=magic, Progress=complete",
+      "kind": "base",
+      "pctExactUnmasked": 46.54,
+      "pctAAUnmasked": 9.57,
+      "pctAAMasked": 8.52,
+      "maskCoveragePct": 52.29,
+      "canvasPx": "162x48",
+      "realPx": "146x40",
+      "inkCanvasPct": 97.43,
+      "inkRealPct": 72.53
+    },
+    {
+      "cell": "Tone=info-strong, Progress=incomplete",
+      "kind": "base",
+      "pctExactUnmasked": 45.1,
+      "pctAAUnmasked": 31.16,
+      "pctAAMasked": 53.1,
+      "maskCoveragePct": 52.29,
+      "canvasPx": "162x48",
+      "realPx": "146x40",
+      "inkCanvasPct": 97.74,
+      "inkRealPct": 72.84
+    },
+    {
+      "cell": "Tone=info-strong, Progress=partiallyComplete",
+      "kind": "base",
+      "pctExactUnmasked": 45.95,
+      "pctAAUnmasked": 31.7,
+      "pctAAMasked": 54.23,
+      "maskCoveragePct": 52.29,
+      "canvasPx": "162x48",
+      "realPx": "146x40",
+      "inkCanvasPct": 97.74,
+      "inkRealPct": 72.84
+    },
+    {
+      "cell": "Tone=info-strong, Progress=complete",
+      "kind": "base",
+      "pctExactUnmasked": 46.54,
+      "pctAAUnmasked": 33.27,
+      "pctAAMasked": 57.52,
+      "maskCoveragePct": 52.29,
+      "canvasPx": "162x48",
+      "realPx": "146x40",
+      "inkCanvasPct": 97.74,
+      "inkRealPct": 72.84
+    },
+    {
+      "cell": "Tone=success-strong, Progress=incomplete",
+      "kind": "base",
+      "pctExactUnmasked": 45.1,
+      "pctAAUnmasked": 31.13,
+      "pctAAMasked": 53.1,
+      "maskCoveragePct": 52.29,
+      "canvasPx": "162x48",
+      "realPx": "146x40",
+      "inkCanvasPct": 92.03,
+      "inkRealPct": 66.91
+    },
+    {
+      "cell": "Tone=success-strong, Progress=partiallyComplete",
+      "kind": "base",
+      "pctExactUnmasked": 45.95,
+      "pctAAUnmasked": 31.67,
+      "pctAAMasked": 54.23,
+      "maskCoveragePct": 52.29,
+      "canvasPx": "162x48",
+      "realPx": "146x40",
+      "inkCanvasPct": 92.03,
+      "inkRealPct": 66.38
+    },
+    {
+      "cell": "Tone=success-strong, Progress=complete",
+      "kind": "base",
+      "pctExactUnmasked": 46.54,
+      "pctAAUnmasked": 33.24,
+      "pctAAMasked": 57.52,
+      "maskCoveragePct": 52.29,
+      "canvasPx": "162x48",
+      "realPx": "146x40",
+      "inkCanvasPct": 92.03,
+      "inkRealPct": 65.32
+    },
+    {
+      "cell": "Tone=warning-strong, Progress=incomplete",
+      "kind": "base",
+      "pctExactUnmasked": 45.1,
+      "pctAAUnmasked": 31.16,
+      "pctAAMasked": 53.1,
+      "maskCoveragePct": 52.29,
+      "canvasPx": "162x48",
+      "realPx": "146x40",
+      "inkCanvasPct": 97.74,
+      "inkRealPct": 72.84
+    },
+    {
+      "cell": "Tone=warning-strong, Progress=partiallyComplete",
+      "kind": "base",
+      "pctExactUnmasked": 45.95,
+      "pctAAUnmasked": 31.7,
+      "pctAAMasked": 54.23,
+      "maskCoveragePct": 52.29,
+      "canvasPx": "162x48",
+      "realPx": "146x40",
+      "inkCanvasPct": 97.74,
+      "inkRealPct": 72.84
+    },
+    {
+      "cell": "Tone=warning-strong, Progress=complete",
+      "kind": "base",
+      "pctExactUnmasked": 46.54,
+      "pctAAUnmasked": 33.27,
+      "pctAAMasked": 57.52,
+      "maskCoveragePct": 52.29,
+      "canvasPx": "162x48",
+      "realPx": "146x40",
+      "inkCanvasPct": 97.74,
+      "inkRealPct": 72.84
+    },
+    {
+      "cell": "Tone=critical-strong, Progress=incomplete",
+      "kind": "base",
+      "pctExactUnmasked": 45.1,
+      "pctAAUnmasked": 31.16,
+      "pctAAMasked": 53.1,
+      "maskCoveragePct": 52.29,
+      "canvasPx": "162x48",
+      "realPx": "146x40",
+      "inkCanvasPct": 92.03,
+      "inkRealPct": 66.91
+    },
+    {
+      "cell": "Tone=critical-strong, Progress=partiallyComplete",
+      "kind": "base",
+      "pctExactUnmasked": 45.95,
+      "pctAAUnmasked": 31.7,
+      "pctAAMasked": 54.23,
+      "maskCoveragePct": 52.29,
+      "canvasPx": "162x48",
+      "realPx": "146x40",
+      "inkCanvasPct": 92.03,
+      "inkRealPct": 66.38
+    },
+    {
+      "cell": "Tone=critical-strong, Progress=complete",
+      "kind": "base",
+      "pctExactUnmasked": 46.54,
+      "pctAAUnmasked": 33.27,
+      "pctAAMasked": 57.52,
+      "maskCoveragePct": 52.29,
+      "canvasPx": "162x48",
+      "realPx": "146x40",
+      "inkCanvasPct": 92.03,
+      "inkRealPct": 65.32
+    },
+    {
+      "cell": "Tone=attention-strong, Progress=incomplete",
+      "kind": "base",
+      "pctExactUnmasked": 45.1,
+      "pctAAUnmasked": 31.17,
+      "pctAAMasked": 53.1,
+      "maskCoveragePct": 52.29,
+      "canvasPx": "162x48",
+      "realPx": "146x40",
+      "inkCanvasPct": 97.74,
+      "inkRealPct": 72.84
+    },
+    {
+      "cell": "Tone=attention-strong, Progress=partiallyComplete",
+      "kind": "base",
+      "pctExactUnmasked": 45.95,
+      "pctAAUnmasked": 31.71,
+      "pctAAMasked": 54.23,
+      "maskCoveragePct": 52.29,
+      "canvasPx": "162x48",
+      "realPx": "146x40",
+      "inkCanvasPct": 97.74,
+      "inkRealPct": 72.84
+    },
+    {
+      "cell": "Tone=attention-strong, Progress=complete",
+      "kind": "base",
+      "pctExactUnmasked": 46.54,
+      "pctAAUnmasked": 33.28,
+      "pctAAMasked": 57.52,
+      "maskCoveragePct": 52.29,
+      "canvasPx": "162x48",
+      "realPx": "146x40",
+      "inkCanvasPct": 97.74,
+      "inkRealPct": 72.84
+    },
+    {
+      "cell": "Tone=read-only, Progress=incomplete",
+      "kind": "base",
+      "pctExactUnmasked": 30.09,
+      "pctAAUnmasked": 4.66,
+      "pctAAMasked": 17.5,
+      "maskCoveragePct": 79.49,
+      "canvasPx": "117x20",
+      "realPx": "117x20",
+      "inkCanvasPct": 45.38,
+      "inkRealPct": 42.78
+    },
+    {
+      "cell": "Tone=read-only, Progress=partiallyComplete",
+      "kind": "base",
+      "pctExactUnmasked": 32.48,
+      "pctAAUnmasked": 6.41,
+      "pctAAMasked": 26.04,
+      "maskCoveragePct": 79.49,
+      "canvasPx": "117x20",
+      "realPx": "117x20",
+      "inkCanvasPct": 47.78,
+      "inkRealPct": 45.17
+    },
+    {
+      "cell": "Tone=read-only, Progress=complete",
+      "kind": "base",
+      "pctExactUnmasked": 34.19,
+      "pctAAUnmasked": 9.96,
+      "pctAAMasked": 43.33,
+      "maskCoveragePct": 79.49,
+      "canvasPx": "117x20",
+      "realPx": "117x20",
+      "inkCanvasPct": 49.49,
+      "inkRealPct": 46.88
+    },
+    {
+      "cell": "Tone=enabled, Progress=incomplete",
+      "kind": "base",
+      "pctExactUnmasked": 45.1,
+      "pctAAUnmasked": 7.46,
+      "pctAAMasked": 4.1,
+      "maskCoveragePct": 52.29,
+      "canvasPx": "162x48",
+      "realPx": "146x40",
+      "inkCanvasPct": 97.27,
+      "inkRealPct": 72.38
+    },
+    {
+      "cell": "Tone=enabled, Progress=partiallyComplete",
+      "kind": "base",
+      "pctExactUnmasked": 45.95,
+      "pctAAUnmasked": 8,
+      "pctAAMasked": 5.23,
+      "maskCoveragePct": 52.29,
+      "canvasPx": "162x48",
+      "realPx": "146x40",
+      "inkCanvasPct": 97.27,
+      "inkRealPct": 72.38
+    },
+    {
+      "cell": "Tone=enabled, Progress=complete",
+      "kind": "base",
+      "pctExactUnmasked": 46.54,
+      "pctAAUnmasked": 9.57,
+      "pctAAMasked": 8.52,
+      "maskCoveragePct": 52.29,
+      "canvasPx": "162x48",
+      "realPx": "146x40",
+      "inkCanvasPct": 97.27,
+      "inkRealPct": 72.38
     }
   ],
   "summary": {
-    "cells": 1,
-    "meanExactUnmasked": 11.64,
-    "meanAAUnmasked": 0.12,
-    "meanAAMasked": 0,
-    "maxAAMasked": 0,
-    "worstCell": "Badge",
-    "cellsOver10Masked": [],
+    "cells": 42,
+    "meanExactUnmasked": 44.88,
+    "meanAAUnmasked": 25.23,
+    "meanAAMasked": 42.61,
+    "maxAAMasked": 57.52,
+    "worstCell": "Tone=info, Progress=complete",
+    "cellsOver10Masked": [
+      {
+        "cell": "Tone=info, Progress=incomplete",
+        "pctAAMasked": 53.1,
+        "note": "UNNAMED — defect until named"
+      },
+      {
+        "cell": "Tone=info, Progress=partiallyComplete",
+        "pctAAMasked": 54.23,
+        "note": "UNNAMED — defect until named"
+      },
+      {
+        "cell": "Tone=info, Progress=complete",
+        "pctAAMasked": 57.52,
+        "note": "UNNAMED — defect until named"
+      },
+      {
+        "cell": "Tone=success, Progress=incomplete",
+        "pctAAMasked": 53.1,
+        "note": "UNNAMED — defect until named"
+      },
+      {
+        "cell": "Tone=success, Progress=partiallyComplete",
+        "pctAAMasked": 54.23,
+        "note": "UNNAMED — defect until named"
+      },
+      {
+        "cell": "Tone=success, Progress=complete",
+        "pctAAMasked": 57.52,
+        "note": "UNNAMED — defect until named"
+      },
+      {
+        "cell": "Tone=warning, Progress=incomplete",
+        "pctAAMasked": 53.1,
+        "note": "UNNAMED — defect until named"
+      },
+      {
+        "cell": "Tone=warning, Progress=partiallyComplete",
+        "pctAAMasked": 54.23,
+        "note": "UNNAMED — defect until named"
+      },
+      {
+        "cell": "Tone=warning, Progress=complete",
+        "pctAAMasked": 57.52,
+        "note": "UNNAMED — defect until named"
+      },
+      {
+        "cell": "Tone=critical, Progress=incomplete",
+        "pctAAMasked": 53.1,
+        "note": "UNNAMED — defect until named"
+      },
+      {
+        "cell": "Tone=critical, Progress=partiallyComplete",
+        "pctAAMasked": 54.23,
+        "note": "UNNAMED — defect until named"
+      },
+      {
+        "cell": "Tone=critical, Progress=complete",
+        "pctAAMasked": 57.52,
+        "note": "UNNAMED — defect until named"
+      },
+      {
+        "cell": "Tone=attention, Progress=incomplete",
+        "pctAAMasked": 53.1,
+        "note": "UNNAMED — defect until named"
+      },
+      {
+        "cell": "Tone=attention, Progress=partiallyComplete",
+        "pctAAMasked": 54.23,
+        "note": "UNNAMED — defect until named"
+      },
+      {
+        "cell": "Tone=attention, Progress=complete",
+        "pctAAMasked": 57.52,
+        "note": "UNNAMED — defect until named"
+      },
+      {
+        "cell": "Tone=info-strong, Progress=incomplete",
+        "pctAAMasked": 53.1,
+        "note": "UNNAMED — defect until named"
+      },
+      {
+        "cell": "Tone=info-strong, Progress=partiallyComplete",
+        "pctAAMasked": 54.23,
+        "note": "UNNAMED — defect until named"
+      },
+      {
+        "cell": "Tone=info-strong, Progress=complete",
+        "pctAAMasked": 57.52,
+        "note": "UNNAMED — defect until named"
+      },
+      {
+        "cell": "Tone=success-strong, Progress=incomplete",
+        "pctAAMasked": 53.1,
+        "note": "UNNAMED — defect until named"
+      },
+      {
+        "cell": "Tone=success-strong, Progress=partiallyComplete",
+        "pctAAMasked": 54.23,
+        "note": "UNNAMED — defect until named"
+      },
+      {
+        "cell": "Tone=success-strong, Progress=complete",
+        "pctAAMasked": 57.52,
+        "note": "UNNAMED — defect until named"
+      },
+      {
+        "cell": "Tone=warning-strong, Progress=incomplete",
+        "pctAAMasked": 53.1,
+        "note": "UNNAMED — defect until named"
+      },
+      {
+        "cell": "Tone=warning-strong, Progress=partiallyComplete",
+        "pctAAMasked": 54.23,
+        "note": "UNNAMED — defect until named"
+      },
+      {
+        "cell": "Tone=warning-strong, Progress=complete",
+        "pctAAMasked": 57.52,
+        "note": "UNNAMED — defect until named"
+      },
+      {
+        "cell": "Tone=critical-strong, Progress=incomplete",
+        "pctAAMasked": 53.1,
+        "note": "UNNAMED — defect until named"
+      },
+      {
+        "cell": "Tone=critical-strong, Progress=partiallyComplete",
+        "pctAAMasked": 54.23,
+        "note": "UNNAMED — defect until named"
+      },
+      {
+        "cell": "Tone=critical-strong, Progress=complete",
+        "pctAAMasked": 57.52,
+        "note": "UNNAMED — defect until named"
+      },
+      {
+        "cell": "Tone=attention-strong, Progress=incomplete",
+        "pctAAMasked": 53.1,
+        "note": "UNNAMED — defect until named"
+      },
+      {
+        "cell": "Tone=attention-strong, Progress=partiallyComplete",
+        "pctAAMasked": 54.23,
+        "note": "UNNAMED — defect until named"
+      },
+      {
+        "cell": "Tone=attention-strong, Progress=complete",
+        "pctAAMasked": 57.52,
+        "note": "UNNAMED — defect until named"
+      },
+      {
+        "cell": "Tone=read-only, Progress=incomplete",
+        "pctAAMasked": 17.5,
+        "note": "UNNAMED — defect until named"
+      },
+      {
+        "cell": "Tone=read-only, Progress=partiallyComplete",
+        "pctAAMasked": 26.04,
+        "note": "UNNAMED — defect until named"
+      },
+      {
+        "cell": "Tone=read-only, Progress=complete",
+        "pctAAMasked": 43.33,
+        "note": "UNNAMED — defect until named"
+      }
+    ],
     "blankCanvasCells": []
   },
   "acceptance": {
-    "maskedMeanLE5": true,
-    "allCellsOver10Named": true,
+    "maskedMeanLE5": false,
+    "allCellsOver10Named": false,
     "noBlankCanvasCells": true
   }
 }

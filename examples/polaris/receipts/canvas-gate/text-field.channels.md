@@ -1,6 +1,6 @@
 # TextField — channel table (canvas-drawn vs captured browser truth)
 
-Contract: `polaris.text-field` v0.2.0. Canvas-drawn values are read directly off the
+Contract: `polaris.text-field` v0.3.0. Canvas-drawn values are read directly off the
 compiled variant node tree (`createFigmaEngine().compileComponentData`, bindings resolved through
 the engine token trees, v14 literals as-is). Captured-truth values come from
 `extract/computed/out/textfield/captured-truth.json` — the computed styles of the REAL
@@ -43,6 +43,39 @@ applies (no binding, no literal). `gap` compares against computed `column-gap`; 
 | backdrop | padding-right | 8 cells (e.g. `Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium`) | `0px` | `0px` | 0 |  |
 | backdrop | padding-top | 6 cells (e.g. `Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium`) | `0px` | `0px` | 0 |  |
 | backdrop | padding-top | `Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Slim`, `Type=Text, Input Mode=Text, Align=Left, Variant=Borderless, Size=Slim` | `2px` | `2px` | 0 |  |
+| clearbutton | background-color | 8 cells (e.g. `Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium`) | `rgba(0, 0, 0, 0)` | `rgba(253, 253, 253, 1)` | DIFFERS | contract binds #00000000 |
+| clearbutton | border-bottom-left-radius | 8 cells (e.g. `Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium`) | `0px` | `8px` | -8px |  |
+| clearbutton | border-bottom-right-radius | 8 cells (e.g. `Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium`) | `0px` | `8px` | -8px |  |
+| clearbutton | border-top-left-radius | 8 cells (e.g. `Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium`) | `0px` | `8px` | -8px |  |
+| clearbutton | border-top-right-radius | 8 cells (e.g. `Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium`) | `0px` | `8px` | -8px |  |
+| clearbutton | border-width | 8 cells (e.g. `Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium`) | `0px` | `1px` | -1px | contract binds 0px |
+| clearbutton | gap | 8 cells (e.g. `Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium`) | `0px` | `normal` | 0 |  |
+| clearbutton | padding-bottom | 8 cells (e.g. `Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium`) | `0px` | `0px` | 0 |  |
+| clearbutton | padding-left | 8 cells (e.g. `Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium`) | `0px` | `0px` | 0 |  |
+| clearbutton | padding-right | 8 cells (e.g. `Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium`) | `0px` | `0px` | 0 |  |
+| clearbutton | padding-top | 8 cells (e.g. `Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium`) | `0px` | `0px` | 0 |  |
+| connected | background-color | 8 cells (e.g. `Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium`) | `rgba(0, 0, 0, 0)` | `rgba(0, 0, 0, 0)` | match |  |
+| connected | border-bottom-left-radius | 8 cells (e.g. `Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium`) | `0px` | `0px` | 0 |  |
+| connected | border-bottom-right-radius | 8 cells (e.g. `Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium`) | `0px` | `0px` | 0 |  |
+| connected | border-top-left-radius | 8 cells (e.g. `Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium`) | `0px` | `0px` | 0 |  |
+| connected | border-top-right-radius | 8 cells (e.g. `Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium`) | `0px` | `0px` | 0 |  |
+| connected | border-width | 8 cells (e.g. `Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium`) | `0px` | `0px` | 0 |  |
+| connected | gap | 8 cells (e.g. `Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium`) | `0px` | `normal` | 0 |  |
+| connected | padding-bottom | 8 cells (e.g. `Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium`) | `0px` | `0px` | 0 |  |
+| connected | padding-left | 8 cells (e.g. `Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium`) | `0px` | `0px` | 0 |  |
+| connected | padding-right | 8 cells (e.g. `Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium`) | `0px` | `0px` | 0 |  |
+| connected | padding-top | 8 cells (e.g. `Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium`) | `0px` | `0px` | 0 |  |
+| connected__item | background-color | 8 cells (e.g. `Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium`) | `rgba(0, 0, 0, 0)` | `rgba(0, 0, 0, 0)` | match |  |
+| connected__item | border-bottom-left-radius | 8 cells (e.g. `Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium`) | `0px` | `0px` | 0 |  |
+| connected__item | border-bottom-right-radius | 8 cells (e.g. `Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium`) | `0px` | `0px` | 0 |  |
+| connected__item | border-top-left-radius | 8 cells (e.g. `Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium`) | `0px` | `0px` | 0 |  |
+| connected__item | border-top-right-radius | 8 cells (e.g. `Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium`) | `0px` | `0px` | 0 |  |
+| connected__item | border-width | 8 cells (e.g. `Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium`) | `0px` | `0px` | 0 |  |
+| connected__item | gap | 8 cells (e.g. `Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium`) | `0px` | `normal` | 0 |  |
+| connected__item | padding-bottom | 8 cells (e.g. `Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium`) | `0px` | `0px` | 0 |  |
+| connected__item | padding-left | 8 cells (e.g. `Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium`) | `0px` | `0px` | 0 |  |
+| connected__item | padding-right | 8 cells (e.g. `Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium`) | `0px` | `0px` | 0 |  |
+| connected__item | padding-top | 8 cells (e.g. `Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium`) | `0px` | `0px` | 0 |  |
 | input | background-color | 8 cells (e.g. `Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium`) | `rgba(0, 0, 0, 0)` | `rgba(0, 0, 0, 0)` | match |  |
 | input | border-bottom-left-radius | 8 cells (e.g. `Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium`) | `0px` | `0px` | 0 |  |
 | input | border-bottom-right-radius | 8 cells (e.g. `Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium`) | `0px` | `0px` | 0 |  |
@@ -56,3 +89,84 @@ applies (no binding, no literal). `gap` compares against computed `column-gap`; 
 | input | padding-right | 8 cells (e.g. `Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium`) | `12px` | `12px` | 0 |  |
 | input | padding-top | `Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Slim`, `Type=Text, Input Mode=Text, Align=Left, Variant=Borderless, Size=Slim` | `2px` | `2px` | 0 |  |
 | input | padding-top | 6 cells (e.g. `Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium`) | `6px` | `6px` | 0 |  |
+| label | background-color | 8 cells (e.g. `Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium`) | `rgba(0, 0, 0, 0)` | `rgba(0, 0, 0, 0)` | match |  |
+| label | border-bottom-left-radius | 8 cells (e.g. `Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium`) | `0px` | `0px` | 0 |  |
+| label | border-bottom-right-radius | 8 cells (e.g. `Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium`) | `0px` | `0px` | 0 |  |
+| label | border-top-left-radius | 8 cells (e.g. `Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium`) | `0px` | `0px` | 0 |  |
+| label | border-top-right-radius | 8 cells (e.g. `Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium`) | `0px` | `0px` | 0 |  |
+| label | border-width | 8 cells (e.g. `Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium`) | `0px` | `0px` | 0 |  |
+| label | gap | 8 cells (e.g. `Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium`) | `0px` | `normal` | 0 |  |
+| label | padding-bottom | 8 cells (e.g. `Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium`) | `0px` | `0px` | 0 |  |
+| label | padding-left | 8 cells (e.g. `Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium`) | `0px` | `0px` | 0 |  |
+| label | padding-right | 8 cells (e.g. `Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium`) | `0px` | `0px` | 0 |  |
+| label | padding-top | 8 cells (e.g. `Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium`) | `0px` | `0px` | 0 |  |
+| label__text | background-color | 8 cells (e.g. `Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium`) | `rgba(0, 0, 0, 0)` | `rgba(0, 0, 0, 0)` | match |  |
+| label__text | border-bottom-left-radius | 8 cells (e.g. `Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium`) | `0px` | `0px` | 0 |  |
+| label__text | border-bottom-right-radius | 8 cells (e.g. `Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium`) | `0px` | `0px` | 0 |  |
+| label__text | border-top-left-radius | 8 cells (e.g. `Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium`) | `0px` | `0px` | 0 |  |
+| label__text | border-top-right-radius | 8 cells (e.g. `Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium`) | `0px` | `0px` | 0 |  |
+| label__text | border-width | 8 cells (e.g. `Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium`) | `0px` | `0px` | 0 |  |
+| label__text | gap | 8 cells (e.g. `Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium`) | `0px` | `normal` | 0 |  |
+| label__text | padding-bottom | 8 cells (e.g. `Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium`) | `0px` | `0px` | 0 |  |
+| label__text | padding-left | 8 cells (e.g. `Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium`) | `0px` | `0px` | 0 |  |
+| label__text | padding-right | 8 cells (e.g. `Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium`) | `0px` | `0px` | 0 |  |
+| label__text | padding-top | 8 cells (e.g. `Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium`) | `0px` | `0px` | 0 |  |
+| label-2 | background-color | 8 cells (e.g. `Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium`) | `rgba(0, 0, 0, 0)` | `rgba(0, 0, 0, 0)` | match |  |
+| label-2 | border-bottom-left-radius | 8 cells (e.g. `Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium`) | `0px` | `0px` | 0 |  |
+| label-2 | border-bottom-right-radius | 8 cells (e.g. `Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium`) | `0px` | `0px` | 0 |  |
+| label-2 | border-top-left-radius | 8 cells (e.g. `Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium`) | `0px` | `0px` | 0 |  |
+| label-2 | border-top-right-radius | 8 cells (e.g. `Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium`) | `0px` | `0px` | 0 |  |
+| label-2 | border-width | 8 cells (e.g. `Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium`) | `0px` | `0px` | 0 |  |
+| label-2 | color | `Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium, State=Disabled` | `rgba(181, 181, 181, 1)` | `rgba(181, 181, 181, 1)` | match |  |
+| label-2 | color | 7 cells (e.g. `Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium`) | `rgba(48, 48, 48, 1)` | `rgba(48, 48, 48, 1)` | match |  |
+| label-2 | font-size | 8 cells (e.g. `Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium`) | `14px` | `13px` | +1px |  |
+| label-2 | gap | 8 cells (e.g. `Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium`) | `0px` | `normal` | 0 |  |
+| label-2 | line-height | 8 cells (e.g. `Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium`) | `(ratio 1.2)` | `20px` | DIFFERS |  |
+| label-2 | padding-bottom | 8 cells (e.g. `Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium`) | `0px` | `0px` | 0 |  |
+| label-2 | padding-left | 8 cells (e.g. `Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium`) | `0px` | `0px` | 0 |  |
+| label-2 | padding-right | 8 cells (e.g. `Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium`) | `0px` | `0px` | 0 |  |
+| label-2 | padding-top | 8 cells (e.g. `Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium`) | `0px` | `0px` | 0 |  |
+| labelled__labelwrapper | background-color | 8 cells (e.g. `Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium`) | `rgba(0, 0, 0, 0)` | `rgba(0, 0, 0, 0)` | match |  |
+| labelled__labelwrapper | border-bottom-left-radius | 8 cells (e.g. `Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium`) | `0px` | `0px` | 0 |  |
+| labelled__labelwrapper | border-bottom-right-radius | 8 cells (e.g. `Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium`) | `0px` | `0px` | 0 |  |
+| labelled__labelwrapper | border-top-left-radius | 8 cells (e.g. `Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium`) | `0px` | `0px` | 0 |  |
+| labelled__labelwrapper | border-top-right-radius | 8 cells (e.g. `Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium`) | `0px` | `0px` | 0 |  |
+| labelled__labelwrapper | border-width | 8 cells (e.g. `Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium`) | `0px` | `0px` | 0 |  |
+| labelled__labelwrapper | gap | 8 cells (e.g. `Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium`) | `0px` | `normal` | 0 |  |
+| labelled__labelwrapper | padding-bottom | 8 cells (e.g. `Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium`) | `0px` | `0px` | 0 |  |
+| labelled__labelwrapper | padding-left | 8 cells (e.g. `Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium`) | `0px` | `0px` | 0 |  |
+| labelled__labelwrapper | padding-right | 8 cells (e.g. `Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium`) | `0px` | `0px` | 0 |  |
+| labelled__labelwrapper | padding-top | 8 cells (e.g. `Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium`) | `0px` | `0px` | 0 |  |
+| prefix | background-color | 8 cells (e.g. `Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium`) | `rgba(0, 0, 0, 0)` | `rgba(0, 0, 0, 0)` | match |  |
+| prefix | border-bottom-left-radius | 8 cells (e.g. `Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium`) | `0px` | `0px` | 0 |  |
+| prefix | border-bottom-right-radius | 8 cells (e.g. `Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium`) | `0px` | `0px` | 0 |  |
+| prefix | border-top-left-radius | 8 cells (e.g. `Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium`) | `0px` | `0px` | 0 |  |
+| prefix | border-top-right-radius | 8 cells (e.g. `Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium`) | `0px` | `0px` | 0 |  |
+| prefix | border-width | 8 cells (e.g. `Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium`) | `0px` | `0px` | 0 |  |
+| prefix | gap | 8 cells (e.g. `Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium`) | `0px` | `normal` | 0 |  |
+| prefix | padding-bottom | 8 cells (e.g. `Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium`) | `0px` | `6px` | -6px |  |
+| prefix | padding-left | 8 cells (e.g. `Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium`) | `0px` | `12px` | -12px |  |
+| prefix | padding-right | 8 cells (e.g. `Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium`) | `0px` | `12px` | -12px |  |
+| prefix | padding-top | 8 cells (e.g. `Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium`) | `0px` | `6px` | -6px |  |
+| suffix | background-color | 8 cells (e.g. `Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium`) | `rgba(0, 0, 0, 0)` | `rgba(253, 253, 253, 1)` | DIFFERS |  |
+| suffix | border-bottom-left-radius | 8 cells (e.g. `Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium`) | `0px` | `8px` | -8px |  |
+| suffix | border-bottom-right-radius | 8 cells (e.g. `Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium`) | `0px` | `8px` | -8px |  |
+| suffix | border-top-left-radius | 8 cells (e.g. `Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium`) | `0px` | `8px` | -8px |  |
+| suffix | border-top-right-radius | 8 cells (e.g. `Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium`) | `0px` | `8px` | -8px |  |
+| suffix | border-width | 8 cells (e.g. `Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium`) | `0px` | `1px` | -1px |  |
+| suffix | gap | 8 cells (e.g. `Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium`) | `0px` | `normal` | 0 |  |
+| suffix | padding-bottom | 8 cells (e.g. `Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium`) | `0px` | `0px` | 0 |  |
+| suffix | padding-left | 8 cells (e.g. `Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium`) | `0px` | `0px` | 0 |  |
+| suffix | padding-right | 8 cells (e.g. `Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium`) | `0px` | `0px` | 0 |  |
+| suffix | padding-top | 8 cells (e.g. `Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium`) | `0px` | `0px` | 0 |  |
+| textfield | background-color | 8 cells (e.g. `Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium`) | `rgba(0, 0, 0, 0)` | `rgba(0, 0, 0, 0)` | match |  |
+| textfield | border-bottom-left-radius | 8 cells (e.g. `Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium`) | `0px` | `0px` | 0 |  |
+| textfield | border-bottom-right-radius | 8 cells (e.g. `Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium`) | `0px` | `0px` | 0 |  |
+| textfield | border-top-left-radius | 8 cells (e.g. `Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium`) | `0px` | `0px` | 0 |  |
+| textfield | border-top-right-radius | 8 cells (e.g. `Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium`) | `0px` | `0px` | 0 |  |
+| textfield | border-width | 8 cells (e.g. `Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium`) | `0px` | `0px` | 0 |  |
+| textfield | gap | 8 cells (e.g. `Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium`) | `0px` | `normal` | 0 |  |
+| textfield | padding-bottom | 8 cells (e.g. `Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium`) | `0px` | `0px` | 0 |  |
+| textfield | padding-left | 8 cells (e.g. `Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium`) | `0px` | `0px` | 0 |  |
+| textfield | padding-right | 8 cells (e.g. `Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium`) | `0px` | `0px` | 0 |  |
+| textfield | padding-top | 8 cells (e.g. `Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium`) | `0px` | `0px` | 0 |  |

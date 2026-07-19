@@ -1,7 +1,7 @@
 {
   "component": "Spinner",
   "contractId": "polaris.spinner",
-  "contractVersion": "0.2.0",
+  "contractVersion": "0.3.0",
   "generatedBy": "extract/figma/canvas-gate/run.ts",
   "sides": {
     "canvas": "createFigmaEngine().compileComponentData rendered by the playground canvas renderer (vendored), deviceScaleFactor 2",
@@ -20,36 +20,36 @@
     {
       "cell": "Size=Large",
       "kind": "base",
-      "pctExactUnmasked": 3.52,
-      "pctAAUnmasked": 2.77,
-      "pctAAMasked": 2.77,
+      "pctExactUnmasked": 12.39,
+      "pctAAUnmasked": 9.75,
+      "pctAAMasked": 9.75,
       "maskCoveragePct": 0,
-      "canvasPx": "180x180",
+      "canvasPx": "96x96",
       "realPx": "85x84",
       "inkCanvasPct": 0,
-      "inkRealPct": 3.52,
-      "note": "CANVAS SIDE (NEARLY) BLANK: canvas ink 0% vs real ink 3.52% of the union canvas — the masked % understates the miss; CANVAS SIDE BLANK — RENDERER DEFECT (verified in-page: svg computed 0x0): the icon svg is inlined with viewBox only, no width/height attributes, and an svg has no intrinsic size in a shrink-to-fit flex context — the glyph lays out at 0x0 and paints NOTHING; the low masked % is the blank-vs-thin-arc artifact, see the ink columns"
+      "inkRealPct": 12.39,
+      "note": "CANVAS SIDE (NEARLY) BLANK: canvas ink 0% vs real ink 12.39% of the union canvas — the masked % understates the miss; CANVAS SIDE BLANK — RENDERER DEFECT (verified in-page: svg computed 0x0): the icon svg is inlined with viewBox only, no width/height attributes, and an svg has no intrinsic size in a shrink-to-fit flex context — the glyph lays out at 0x0 and paints NOTHING; the low masked % is the blank-vs-thin-arc artifact, see the ink columns"
     },
     {
       "cell": "Size=Small",
       "kind": "base",
-      "pctExactUnmasked": 2.32,
-      "pctAAUnmasked": 1.66,
-      "pctAAMasked": 1.66,
+      "pctExactUnmasked": 4.39,
+      "pctAAUnmasked": 3.14,
+      "pctAAMasked": 3.14,
       "maskCoveragePct": 0,
-      "canvasPx": "132x132",
+      "canvasPx": "96x96",
       "realPx": "37x37",
       "inkCanvasPct": 0,
-      "inkRealPct": 2.32,
-      "note": "CANVAS SIDE (NEARLY) BLANK: canvas ink 0% vs real ink 2.32% of the union canvas — the masked % understates the miss; CANVAS SIDE BLANK — RENDERER DEFECT (verified in-page: svg computed 0x0): the icon svg is inlined with viewBox only, no width/height attributes, and an svg has no intrinsic size in a shrink-to-fit flex context — the glyph lays out at 0x0 and paints NOTHING; the low masked % is the blank-vs-thin-arc artifact, see the ink columns"
+      "inkRealPct": 4.39,
+      "note": "CANVAS SIDE (NEARLY) BLANK: canvas ink 0% vs real ink 4.39% of the union canvas — the masked % understates the miss; CANVAS SIDE BLANK — RENDERER DEFECT (verified in-page: svg computed 0x0): the icon svg is inlined with viewBox only, no width/height attributes, and an svg has no intrinsic size in a shrink-to-fit flex context — the glyph lays out at 0x0 and paints NOTHING; the low masked % is the blank-vs-thin-arc artifact, see the ink columns"
     }
   ],
   "summary": {
     "cells": 2,
-    "meanExactUnmasked": 2.92,
-    "meanAAUnmasked": 2.22,
-    "meanAAMasked": 2.22,
-    "maxAAMasked": 2.77,
+    "meanExactUnmasked": 8.39,
+    "meanAAUnmasked": 6.45,
+    "meanAAMasked": 6.45,
+    "maxAAMasked": 9.75,
     "worstCell": "Size=Large",
     "cellsOver10Masked": [],
     "blankCanvasCells": [
@@ -58,7 +58,7 @@
     ]
   },
   "acceptance": {
-    "maskedMeanLE5": true,
+    "maskedMeanLE5": false,
     "allCellsOver10Named": true,
     "noBlankCanvasCells": false
   }

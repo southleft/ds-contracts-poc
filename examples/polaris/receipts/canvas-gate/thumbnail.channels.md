@@ -1,6 +1,6 @@
 # Thumbnail — channel table (canvas-drawn vs captured browser truth)
 
-Contract: `polaris.thumbnail` v0.2.0. Canvas-drawn values are read directly off the
+Contract: `polaris.thumbnail` v0.3.0. Canvas-drawn values are read directly off the
 compiled variant node tree (`createFigmaEngine().compileComponentData`, bindings resolved through
 the engine token trees, v14 literals as-is). Captured-truth values come from
 `extract/computed/out/thumbnail/captured-truth.json` — the computed styles of the REAL
@@ -29,3 +29,14 @@ applies (no binding, no literal). `gap` compares against computed `column-gap`; 
 | root | padding-left | 4 cells (e.g. `Size=Medium`) | `0px` | `0px` | 0 |  |
 | root | padding-right | 4 cells (e.g. `Size=Medium`) | `0px` | `0px` | 0 |  |
 | root | padding-top | 4 cells (e.g. `Size=Medium`) | `0px` | `0px` | 0 |  |
+| part-0 | background-color | 4 cells (e.g. `Size=Medium`) | `rgba(0, 0, 0, 0)` | `rgba(0, 0, 0, 0)` | match |  |
+| part-0 | border-bottom-left-radius | 4 cells (e.g. `Size=Medium`) | `0px` | `0px` | 0 |  |
+| part-0 | border-bottom-right-radius | 4 cells (e.g. `Size=Medium`) | `0px` | `0px` | 0 |  |
+| part-0 | border-top-left-radius | 4 cells (e.g. `Size=Medium`) | `0px` | `0px` | 0 |  |
+| part-0 | border-top-right-radius | 4 cells (e.g. `Size=Medium`) | `0px` | `0px` | 0 |  |
+| part-0 | border-width | 4 cells (e.g. `Size=Medium`) | `0px` | `0px` | 0 |  |
+| part-0 | gap | 4 cells (e.g. `Size=Medium`) | `0px` | `normal` | 0 |  |
+| part-0 | padding-bottom | 4 cells (e.g. `Size=Medium`) | `0px` | `0px` | 0 |  |
+| part-0 | padding-left | 4 cells (e.g. `Size=Medium`) | `0px` | `0px` | 0 |  |
+| part-0 | padding-right | 4 cells (e.g. `Size=Medium`) | `0px` | `0px` | 0 |  |
+| part-0 | padding-top | 4 cells (e.g. `Size=Medium`) | `0px` | `0px` | 0 |  |

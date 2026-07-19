@@ -1,7 +1,7 @@
 {
   "component": "RadioButton",
   "contractId": "polaris.radio-button",
-  "contractVersion": "0.2.0",
+  "contractVersion": "0.3.0",
   "generatedBy": "extract/figma/canvas-gate/run.ts",
   "sides": {
     "canvas": "createFigmaEngine().compileComponentData rendered by the playground canvas renderer (vendored), deviceScaleFactor 2",
@@ -19,30 +19,48 @@
   "mountNote": "mounted labelHidden: contract anatomy carries no label part (see Checkbox note).",
   "cells": [
     {
-      "cell": "RadioButton",
+      "cell": "Checked=unchecked",
       "kind": "base",
-      "pctExactUnmasked": 45.5,
-      "pctAAUnmasked": 17.56,
-      "pctAAMasked": 17.56,
-      "maskCoveragePct": 0,
-      "canvasPx": "40x40",
+      "pctExactUnmasked": 37.64,
+      "pctAAUnmasked": 20.09,
+      "pctAAMasked": null,
+      "maskCoveragePct": 100,
+      "canvasPx": "296x23",
       "realPx": "32x32",
-      "inkCanvasPct": 21.5,
-      "inkRealPct": 17,
+      "inkCanvasPct": 31.58,
+      "inkRealPct": 7.05,
+      "note": "canvas renderer draws no effectStack — the real control edge is an inset box-shadow, absent on the canvas side"
+    },
+    {
+      "cell": "Checked=checked",
+      "kind": "base",
+      "pctExactUnmasked": 35.92,
+      "pctAAUnmasked": 22.61,
+      "pctAAMasked": 79.17,
+      "maskCoveragePct": 89.29,
+      "canvasPx": "336x40",
+      "realPx": "32x32",
+      "inkCanvasPct": 31.96,
+      "inkRealPct": 4.97,
       "note": "canvas renderer draws no effectStack — the real control edge is an inset box-shadow, absent on the canvas side"
     }
   ],
   "summary": {
-    "cells": 1,
-    "meanExactUnmasked": 45.5,
-    "meanAAUnmasked": 17.56,
-    "meanAAMasked": 17.56,
-    "maxAAMasked": 17.56,
-    "worstCell": "RadioButton",
+    "cells": 2,
+    "meanExactUnmasked": 36.78,
+    "meanAAUnmasked": 21.35,
+    "meanAAMasked": 49.63,
+    "maxAAMasked": 79.17,
+    "worstCell": "Checked=checked",
     "cellsOver10Masked": [
       {
-        "cell": "RadioButton",
-        "pctAAMasked": 17.56,
+        "cell": "Checked=unchecked",
+        "pctAAMasked": null,
+        "note": "canvas renderer draws no effectStack — the real control edge is an inset box-shadow, absent on the canvas side"
+      },
+      {
+        "cell": "Checked=checked",
+        "pctAAMasked": 79.17,
         "note": "canvas renderer draws no effectStack — the real control edge is an inset box-shadow, absent on the canvas side"
       }
     ],

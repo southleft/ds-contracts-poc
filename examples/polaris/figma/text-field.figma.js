@@ -156,7 +156,8 @@ const COMPONENTS = [
               "layout": {
                 "mode": "HORIZONTAL",
                 "primary": "SPACE_BETWEEN",
-                "counter": "MIN"
+                "counter": "MIN",
+                "stretchChildren": true
               },
               "bindings": {
                 "minWidth": "imported/shared/size-0"
@@ -218,7 +219,8 @@ const COMPONENTS = [
                   "layout": {
                     "mode": "HORIZONTAL",
                     "primary": "MIN",
-                    "counter": "MIN"
+                    "counter": "MIN",
+                    "stretchChildren": true
                   },
                   "grow": true,
                   "children": [
@@ -339,7 +341,7 @@ const COMPONENTS = [
                             {
                               "type": "svg",
                               "name": "icon",
-                              "svg": "<svg viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 13.03 6.97 A 0.75 0.75 0 0 1 13.03 8.03 L 11.06 10 L 13.03 11.97 A 0.75 0.75 0 1 1 11.97 13.03 L 10 11.06 L 8.03 13.03 A 0.75 0.75 0 0 1 6.97 11.97 L 8.94 10 L 6.97 8.03 A 0.75 0.75 0 0 1 8.03 6.97 L 10 8.94 L 11.97 6.97 A 0.75 0.75 0 0 1 13.03 6.97 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                              "svg": "<svg fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 13.03 6.97 A 0.75 0.75 0 0 1 13.03 8.03 L 11.06 10 L 13.03 11.97 A 0.75 0.75 0 1 1 11.97 13.03 L 10 11.06 L 8.03 13.03 A 0.75 0.75 0 0 1 6.97 11.97 L 8.94 10 L 6.97 8.03 A 0.75 0.75 0 0 1 8.03 6.97 L 10 8.94 L 11.97 6.97 A 0.75 0.75 0 0 1 13.03 6.97 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                               "iconSize": 20,
                               "visibleProp": "Clear Button",
                               "visibleDefault": false
@@ -354,7 +356,8 @@ const COMPONENTS = [
                           "layout": {
                             "mode": "HORIZONTAL",
                             "primary": "MIN",
-                            "counter": "MIN"
+                            "counter": "MIN",
+                            "stretchChildren": true
                           },
                           "grow": true,
                           "insetOverlay": true,
@@ -401,7 +404,8 @@ const COMPONENTS = [
               "layout": {
                 "mode": "HORIZONTAL",
                 "primary": "SPACE_BETWEEN",
-                "counter": "MIN"
+                "counter": "MIN",
+                "stretchChildren": true
               },
               "bindings": {
                 "minWidth": "imported/shared/size-0"
@@ -463,7 +467,8 @@ const COMPONENTS = [
                   "layout": {
                     "mode": "HORIZONTAL",
                     "primary": "MIN",
-                    "counter": "MIN"
+                    "counter": "MIN",
+                    "stretchChildren": true
                   },
                   "grow": true,
                   "children": [
@@ -584,7 +589,7 @@ const COMPONENTS = [
                             {
                               "type": "svg",
                               "name": "icon",
-                              "svg": "<svg viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 13.03 6.97 A 0.75 0.75 0 0 1 13.03 8.03 L 11.06 10 L 13.03 11.97 A 0.75 0.75 0 1 1 11.97 13.03 L 10 11.06 L 8.03 13.03 A 0.75 0.75 0 0 1 6.97 11.97 L 8.94 10 L 6.97 8.03 A 0.75 0.75 0 0 1 8.03 6.97 L 10 8.94 L 11.97 6.97 A 0.75 0.75 0 0 1 13.03 6.97 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                              "svg": "<svg fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 13.03 6.97 A 0.75 0.75 0 0 1 13.03 8.03 L 11.06 10 L 13.03 11.97 A 0.75 0.75 0 1 1 11.97 13.03 L 10 11.06 L 8.03 13.03 A 0.75 0.75 0 0 1 6.97 11.97 L 8.94 10 L 6.97 8.03 A 0.75 0.75 0 0 1 8.03 6.97 L 10 8.94 L 11.97 6.97 A 0.75 0.75 0 0 1 13.03 6.97 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                               "iconSize": 20,
                               "visibleProp": "Clear Button",
                               "visibleDefault": false
@@ -599,7 +604,8 @@ const COMPONENTS = [
                           "layout": {
                             "mode": "HORIZONTAL",
                             "primary": "MIN",
-                            "counter": "MIN"
+                            "counter": "MIN",
+                            "stretchChildren": true
                           },
                           "grow": true,
                           "insetOverlay": true,
@@ -648,7 +654,8 @@ const COMPONENTS = [
               "layout": {
                 "mode": "HORIZONTAL",
                 "primary": "SPACE_BETWEEN",
-                "counter": "MIN"
+                "counter": "MIN",
+                "stretchChildren": true
               },
               "bindings": {
                 "minWidth": "imported/shared/size-0"
@@ -710,7 +717,8 @@ const COMPONENTS = [
                   "layout": {
                     "mode": "HORIZONTAL",
                     "primary": "MIN",
-                    "counter": "MIN"
+                    "counter": "MIN",
+                    "stretchChildren": true
                   },
                   "grow": true,
                   "children": [
@@ -831,7 +839,7 @@ const COMPONENTS = [
                             {
                               "type": "svg",
                               "name": "icon",
-                              "svg": "<svg viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 13.03 6.97 A 0.75 0.75 0 0 1 13.03 8.03 L 11.06 10 L 13.03 11.97 A 0.75 0.75 0 1 1 11.97 13.03 L 10 11.06 L 8.03 13.03 A 0.75 0.75 0 0 1 6.97 11.97 L 8.94 10 L 6.97 8.03 A 0.75 0.75 0 0 1 8.03 6.97 L 10 8.94 L 11.97 6.97 A 0.75 0.75 0 0 1 13.03 6.97 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                              "svg": "<svg fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 13.03 6.97 A 0.75 0.75 0 0 1 13.03 8.03 L 11.06 10 L 13.03 11.97 A 0.75 0.75 0 1 1 11.97 13.03 L 10 11.06 L 8.03 13.03 A 0.75 0.75 0 0 1 6.97 11.97 L 8.94 10 L 6.97 8.03 A 0.75 0.75 0 0 1 8.03 6.97 L 10 8.94 L 11.97 6.97 A 0.75 0.75 0 0 1 13.03 6.97 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                               "iconSize": 20,
                               "visibleProp": "Clear Button",
                               "visibleDefault": false
@@ -846,7 +854,8 @@ const COMPONENTS = [
                           "layout": {
                             "mode": "HORIZONTAL",
                             "primary": "MIN",
-                            "counter": "MIN"
+                            "counter": "MIN",
+                            "stretchChildren": true
                           },
                           "grow": true,
                           "insetOverlay": true,
@@ -893,7 +902,8 @@ const COMPONENTS = [
               "layout": {
                 "mode": "HORIZONTAL",
                 "primary": "SPACE_BETWEEN",
-                "counter": "MIN"
+                "counter": "MIN",
+                "stretchChildren": true
               },
               "bindings": {
                 "minWidth": "imported/shared/size-0"
@@ -955,7 +965,8 @@ const COMPONENTS = [
                   "layout": {
                     "mode": "HORIZONTAL",
                     "primary": "MIN",
-                    "counter": "MIN"
+                    "counter": "MIN",
+                    "stretchChildren": true
                   },
                   "grow": true,
                   "children": [
@@ -1076,7 +1087,7 @@ const COMPONENTS = [
                             {
                               "type": "svg",
                               "name": "icon",
-                              "svg": "<svg viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 13.03 6.97 A 0.75 0.75 0 0 1 13.03 8.03 L 11.06 10 L 13.03 11.97 A 0.75 0.75 0 1 1 11.97 13.03 L 10 11.06 L 8.03 13.03 A 0.75 0.75 0 0 1 6.97 11.97 L 8.94 10 L 6.97 8.03 A 0.75 0.75 0 0 1 8.03 6.97 L 10 8.94 L 11.97 6.97 A 0.75 0.75 0 0 1 13.03 6.97 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                              "svg": "<svg fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 13.03 6.97 A 0.75 0.75 0 0 1 13.03 8.03 L 11.06 10 L 13.03 11.97 A 0.75 0.75 0 1 1 11.97 13.03 L 10 11.06 L 8.03 13.03 A 0.75 0.75 0 0 1 6.97 11.97 L 8.94 10 L 6.97 8.03 A 0.75 0.75 0 0 1 8.03 6.97 L 10 8.94 L 11.97 6.97 A 0.75 0.75 0 0 1 13.03 6.97 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                               "iconSize": 20,
                               "visibleProp": "Clear Button",
                               "visibleDefault": false
@@ -1091,7 +1102,8 @@ const COMPONENTS = [
                           "layout": {
                             "mode": "HORIZONTAL",
                             "primary": "MIN",
-                            "counter": "MIN"
+                            "counter": "MIN",
+                            "stretchChildren": true
                           },
                           "grow": true,
                           "insetOverlay": true,
@@ -1142,7 +1154,8 @@ const COMPONENTS = [
               "layout": {
                 "mode": "HORIZONTAL",
                 "primary": "SPACE_BETWEEN",
-                "counter": "MIN"
+                "counter": "MIN",
+                "stretchChildren": true
               },
               "bindings": {
                 "minWidth": "imported/shared/size-0"
@@ -1204,7 +1217,8 @@ const COMPONENTS = [
                   "layout": {
                     "mode": "HORIZONTAL",
                     "primary": "MIN",
-                    "counter": "MIN"
+                    "counter": "MIN",
+                    "stretchChildren": true
                   },
                   "grow": true,
                   "children": [
@@ -1325,7 +1339,7 @@ const COMPONENTS = [
                             {
                               "type": "svg",
                               "name": "icon",
-                              "svg": "<svg viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 13.03 6.97 A 0.75 0.75 0 0 1 13.03 8.03 L 11.06 10 L 13.03 11.97 A 0.75 0.75 0 1 1 11.97 13.03 L 10 11.06 L 8.03 13.03 A 0.75 0.75 0 0 1 6.97 11.97 L 8.94 10 L 6.97 8.03 A 0.75 0.75 0 0 1 8.03 6.97 L 10 8.94 L 11.97 6.97 A 0.75 0.75 0 0 1 13.03 6.97 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                              "svg": "<svg fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 13.03 6.97 A 0.75 0.75 0 0 1 13.03 8.03 L 11.06 10 L 13.03 11.97 A 0.75 0.75 0 1 1 11.97 13.03 L 10 11.06 L 8.03 13.03 A 0.75 0.75 0 0 1 6.97 11.97 L 8.94 10 L 6.97 8.03 A 0.75 0.75 0 0 1 8.03 6.97 L 10 8.94 L 11.97 6.97 A 0.75 0.75 0 0 1 13.03 6.97 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                               "iconSize": 20,
                               "visibleProp": "Clear Button",
                               "visibleDefault": false
@@ -1340,7 +1354,8 @@ const COMPONENTS = [
                           "layout": {
                             "mode": "HORIZONTAL",
                             "primary": "MIN",
-                            "counter": "MIN"
+                            "counter": "MIN",
+                            "stretchChildren": true
                           },
                           "grow": true,
                           "insetOverlay": true,
@@ -1387,7 +1402,8 @@ const COMPONENTS = [
               "layout": {
                 "mode": "HORIZONTAL",
                 "primary": "SPACE_BETWEEN",
-                "counter": "MIN"
+                "counter": "MIN",
+                "stretchChildren": true
               },
               "bindings": {
                 "minWidth": "imported/shared/size-0"
@@ -1449,7 +1465,8 @@ const COMPONENTS = [
                   "layout": {
                     "mode": "HORIZONTAL",
                     "primary": "MIN",
-                    "counter": "MIN"
+                    "counter": "MIN",
+                    "stretchChildren": true
                   },
                   "grow": true,
                   "children": [
@@ -1570,7 +1587,7 @@ const COMPONENTS = [
                             {
                               "type": "svg",
                               "name": "icon",
-                              "svg": "<svg viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 13.03 6.97 A 0.75 0.75 0 0 1 13.03 8.03 L 11.06 10 L 13.03 11.97 A 0.75 0.75 0 1 1 11.97 13.03 L 10 11.06 L 8.03 13.03 A 0.75 0.75 0 0 1 6.97 11.97 L 8.94 10 L 6.97 8.03 A 0.75 0.75 0 0 1 8.03 6.97 L 10 8.94 L 11.97 6.97 A 0.75 0.75 0 0 1 13.03 6.97 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                              "svg": "<svg fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 13.03 6.97 A 0.75 0.75 0 0 1 13.03 8.03 L 11.06 10 L 13.03 11.97 A 0.75 0.75 0 1 1 11.97 13.03 L 10 11.06 L 8.03 13.03 A 0.75 0.75 0 0 1 6.97 11.97 L 8.94 10 L 6.97 8.03 A 0.75 0.75 0 0 1 8.03 6.97 L 10 8.94 L 11.97 6.97 A 0.75 0.75 0 0 1 13.03 6.97 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                               "iconSize": 20,
                               "visibleProp": "Clear Button",
                               "visibleDefault": false
@@ -1585,7 +1602,8 @@ const COMPONENTS = [
                           "layout": {
                             "mode": "HORIZONTAL",
                             "primary": "MIN",
-                            "counter": "MIN"
+                            "counter": "MIN",
+                            "stretchChildren": true
                           },
                           "grow": true,
                           "insetOverlay": true,
@@ -1632,7 +1650,8 @@ const COMPONENTS = [
               "layout": {
                 "mode": "HORIZONTAL",
                 "primary": "SPACE_BETWEEN",
-                "counter": "MIN"
+                "counter": "MIN",
+                "stretchChildren": true
               },
               "bindings": {
                 "minWidth": "imported/shared/size-0"
@@ -1694,7 +1713,8 @@ const COMPONENTS = [
                   "layout": {
                     "mode": "HORIZONTAL",
                     "primary": "MIN",
-                    "counter": "MIN"
+                    "counter": "MIN",
+                    "stretchChildren": true
                   },
                   "grow": true,
                   "children": [
@@ -1815,7 +1835,7 @@ const COMPONENTS = [
                             {
                               "type": "svg",
                               "name": "icon",
-                              "svg": "<svg viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 13.03 6.97 A 0.75 0.75 0 0 1 13.03 8.03 L 11.06 10 L 13.03 11.97 A 0.75 0.75 0 1 1 11.97 13.03 L 10 11.06 L 8.03 13.03 A 0.75 0.75 0 0 1 6.97 11.97 L 8.94 10 L 6.97 8.03 A 0.75 0.75 0 0 1 8.03 6.97 L 10 8.94 L 11.97 6.97 A 0.75 0.75 0 0 1 13.03 6.97 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                              "svg": "<svg fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 13.03 6.97 A 0.75 0.75 0 0 1 13.03 8.03 L 11.06 10 L 13.03 11.97 A 0.75 0.75 0 1 1 11.97 13.03 L 10 11.06 L 8.03 13.03 A 0.75 0.75 0 0 1 6.97 11.97 L 8.94 10 L 6.97 8.03 A 0.75 0.75 0 0 1 8.03 6.97 L 10 8.94 L 11.97 6.97 A 0.75 0.75 0 0 1 13.03 6.97 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                               "iconSize": 20,
                               "visibleProp": "Clear Button",
                               "visibleDefault": false
@@ -1830,7 +1850,8 @@ const COMPONENTS = [
                           "layout": {
                             "mode": "HORIZONTAL",
                             "primary": "MIN",
-                            "counter": "MIN"
+                            "counter": "MIN",
+                            "stretchChildren": true
                           },
                           "grow": true,
                           "insetOverlay": true,
@@ -1877,7 +1898,8 @@ const COMPONENTS = [
               "layout": {
                 "mode": "HORIZONTAL",
                 "primary": "SPACE_BETWEEN",
-                "counter": "MIN"
+                "counter": "MIN",
+                "stretchChildren": true
               },
               "bindings": {
                 "minWidth": "imported/shared/size-0"
@@ -1939,7 +1961,8 @@ const COMPONENTS = [
                   "layout": {
                     "mode": "HORIZONTAL",
                     "primary": "MIN",
-                    "counter": "MIN"
+                    "counter": "MIN",
+                    "stretchChildren": true
                   },
                   "grow": true,
                   "children": [
@@ -2060,7 +2083,7 @@ const COMPONENTS = [
                             {
                               "type": "svg",
                               "name": "icon",
-                              "svg": "<svg viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 13.03 6.97 A 0.75 0.75 0 0 1 13.03 8.03 L 11.06 10 L 13.03 11.97 A 0.75 0.75 0 1 1 11.97 13.03 L 10 11.06 L 8.03 13.03 A 0.75 0.75 0 0 1 6.97 11.97 L 8.94 10 L 6.97 8.03 A 0.75 0.75 0 0 1 8.03 6.97 L 10 8.94 L 11.97 6.97 A 0.75 0.75 0 0 1 13.03 6.97 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                              "svg": "<svg fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 13.03 6.97 A 0.75 0.75 0 0 1 13.03 8.03 L 11.06 10 L 13.03 11.97 A 0.75 0.75 0 1 1 11.97 13.03 L 10 11.06 L 8.03 13.03 A 0.75 0.75 0 0 1 6.97 11.97 L 8.94 10 L 6.97 8.03 A 0.75 0.75 0 0 1 8.03 6.97 L 10 8.94 L 11.97 6.97 A 0.75 0.75 0 0 1 13.03 6.97 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                               "iconSize": 20,
                               "visibleProp": "Clear Button",
                               "visibleDefault": false
@@ -2075,7 +2098,8 @@ const COMPONENTS = [
                           "layout": {
                             "mode": "HORIZONTAL",
                             "primary": "MIN",
-                            "counter": "MIN"
+                            "counter": "MIN",
+                            "stretchChildren": true
                           },
                           "grow": true,
                           "insetOverlay": true,

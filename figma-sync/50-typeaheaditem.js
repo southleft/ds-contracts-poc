@@ -62,7 +62,8 @@ const COMPONENTS = [
               "layout": {
                 "mode": "VERTICAL",
                 "primary": "MIN",
-                "counter": "MIN"
+                "counter": "MIN",
+                "stretchChildren": true
               },
               "grow": true,
               "bindings": {

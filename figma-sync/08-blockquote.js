@@ -25,7 +25,8 @@ const COMPONENTS = [
           "layout": {
             "mode": "VERTICAL",
             "primary": "MIN",
-            "counter": "MIN"
+            "counter": "MIN",
+            "stretchChildren": true
           },
           "bindings": {
             "strokeLeftWeight": "border/width/divider/strong",
@@ -42,7 +43,8 @@ const COMPONENTS = [
               "layout": {
                 "mode": "VERTICAL",
                 "primary": "MIN",
-                "counter": "MIN"
+                "counter": "MIN",
+                "stretchChildren": true
               },
               "slotProperty": "Children",
               "slotAccepts": []
