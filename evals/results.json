@@ -1,6 +1,6 @@
 {
-  "passed": 108,
-  "total": 108,
+  "passed": 110,
+  "total": 110,
   "results": [
     {
       "id": "refuse-unknown-token-reference",
@@ -529,6 +529,16 @@
     },
     {
       "id": "rgba-stroke-emitter-fixes",
+      "claim": "C1-determinism",
+      "pass": true
+    },
+    {
+      "id": "s4-canvas-channel-lifts",
+      "claim": "C1-determinism",
+      "pass": true
+    },
+    {
+      "id": "figma-60-canvas-emitter-fixes",
       "claim": "C1-determinism",
       "pass": true
     },
