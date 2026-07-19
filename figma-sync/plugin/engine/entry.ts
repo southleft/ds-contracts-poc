@@ -420,8 +420,9 @@ return { inventory: rows };
     };
     for (const v of compiled.variants) collect(v.spec);
     for (const v of compiled.stateVariants ?? []) collect(v.spec);
-    // Variant axes ride the variant names ("Size=sm, Tone=critical").
-    for (const v of compiled.variants) {
+    // Variant axes ride the variant names ("Size=sm, Tone=critical") — the
+    // State preview axis included (stateVariants carry ", State=…").
+    for (const v of [...compiled.variants, ...(compiled.stateVariants ?? [])]) {
       for (const seg of v.name.split(',')) {
         const axis = seg.split('=')[0]?.trim();
         if (axis) names.add(axis);

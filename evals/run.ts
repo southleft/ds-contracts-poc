@@ -60,7 +60,10 @@ function resetScratch() {
   // CLI evals run packages/cli from scratch. Build artifacts (dist/) are
   // filtered out — the CLI evals rebuild in scratch, and copying ~24 MB of
   // bundles per case would dominate the reset.
-  for (const dir of ['contracts', 'tokens', 'scripts', 'core', 'parity', 'src', 'catalog', 'context', 'assets', 'extract', 'playground', 'workers', 'packages']) {
+  // figma-sync rides along for the plugin-engine evals: the engine entry,
+  // ui.html (embedded dump script + engine slot), and the committed
+  // engine.receipt.json the zip build drift-guards against.
+  for (const dir of ['contracts', 'tokens', 'scripts', 'core', 'parity', 'src', 'catalog', 'context', 'assets', 'extract', 'playground', 'workers', 'packages', 'figma-sync']) {
     cpSync(path.join(ROOT, dir), path.join(SCRATCH, dir), {
       recursive: true,
       filter: dir === 'packages' ? (src) => path.basename(src) !== 'dist' : undefined,
@@ -3432,6 +3435,90 @@ const cases: Case[] = [
         throw new Error(`plugin emitter output wrong:\n${contents}`);
       }
       console.log('emitter-plugin-loads: registered (live array + getEmitters + byName), 4 named refusals, CLI --emitter emitted badge.inventory.txt');
+    },
+  },
+  {
+    // PLUGIN ENGINE (Phase 2, plugin v2) — the Figma plugin's engine bundle:
+    // (a) a fresh esbuild of figma-sync/plugin/engine/entry.ts matches the
+    // committed drift-guard receipt and the headless harness EXECUTES the
+    // bundle's generate flow (tokens + Badge + version marker) against a
+    // mocked figma global — the stored ds_contracts/specHash must equal the
+    // engine's mirror, so the update report's "unchanged" detection can
+    // never silently drift from the emitted runtime; (b) mutating core makes
+    // the NEXT zip build refuse BY NAME (stale receipt) — the same
+    // discipline as the embedded-dump-script guard.
+    id: 'plugin-engine-bundle',
+    claim: 'C1-determinism',
+    run: () => {
+      const check = run(process.execPath, ['scripts/plugin-engine-check.mjs']);
+      if (check.status !== 0) throw new Error(`plugin-engine-check failed:\n${check.out}`);
+      for (const want of [
+        '✔ engine bundle fresh vs committed receipt',
+        '✔ headless generate: Badge v',
+        'stored specHash equals the engine mirror',
+        '✔ bundle order: ds.card plans 4 component scripts, dependencies first (ds.avatar → ds.button → ds.badge → ds.card)',
+        'plugin-engine-check: all flows green',
+      ]) {
+        if (!check.out.includes(want)) throw new Error(`missing "${want}" in:\n${check.out}`);
+      }
+      // Drift guard: a real core change (a string literal the minifier keeps)
+      // must make the zip build refuse by name until the receipt is
+      // re-recorded deliberately.
+      replaceInFile('core/emit-figma-script.ts', "'WRONG FILE: expected '", "'WRONG FILE!! expected '");
+      const stale = run(process.execPath, ['scripts/build-plugin-zip.mjs']);
+      if (stale.status === 0) throw new Error('zip build did NOT refuse after a core mutation — the engine drift guard is dead');
+      if (!stale.out.includes('STALE vs core') || !stale.out.includes('--update-engine-receipt')) {
+        throw new Error(`stale-engine refusal is not named:\n${stale.out}`);
+      }
+      console.log('plugin-engine-bundle: fresh bundle matches the receipt, headless generate green, core mutation → named STALE refusal');
+    },
+  },
+  {
+    // PLUGIN UPDATE REPORT (Phase 2, plugin v2) — the Update-library tab's
+    // mandatory report+confirm: the EXACT plain-words change report renders
+    // BEFORE anything applies (version → version with +prop, new-with-
+    // variant-count, unchanged-skip, counts, nothing-applied tail), a
+    // duplicate contract id refuses by name, and Apply then amends IN PLACE
+    // (same node id, props added, markers updated).
+    id: 'plugin-update-report',
+    claim: 'C3-detection',
+    run: () => {
+      const check = run(process.execPath, ['scripts/plugin-engine-check.mjs']);
+      if (check.status !== 0) throw new Error(`plugin-engine-check failed:\n${check.out}`);
+      for (const want of [
+        '✔ update report (before anything applies):',
+        '• Badge 1.1.0 → 9.9.9: +prop Experimental.',
+        '• Switch 2.0.0: new — will be created (2 variants).',
+        '1 to update · 1 new · 0 unchanged.',
+        'Nothing has been applied — review the list, then Apply.',
+        '• Badge 1.1.0: unchanged — will be skipped.',
+        '✔ apply: Badge amended in place (same node ',
+        '+prop Experimental, markers updated to v9.9.9',
+      ]) {
+        if (!check.out.includes(want)) throw new Error(`missing "${want}" in:\n${check.out}`);
+      }
+      console.log('plugin-update-report: exact plain-words report before apply, amend-in-place after');
+    },
+  },
+  {
+    // PLUGIN PROPOSE DRY-RUN (Phase 2, plugin v2) — the Propose tab: the
+    // ui.html-embedded dump script (drift-guarded verbatim copy) reads the
+    // mock-generated set back, proposeDiff yields a proposal + bounded
+    // API-level diff (a base missing a drawn prop surfaces "+prop <name>" by
+    // name), and the GitHub PR flow's DRY RUN prints its exact 4-step REST
+    // plan with the session-only token note — zero network.
+    id: 'plugin-propose-dry-run',
+    claim: 'C4-convergence',
+    run: () => {
+      const check = run(process.execPath, ['scripts/plugin-engine-check.mjs']);
+      if (check.status !== 0) throw new Error(`plugin-engine-check failed:\n${check.out}`);
+      for (const want of [
+        '✔ propose: mock canvas dumped through the embedded dump script → proposal + bounded diff; a base missing "variant" surfaces "+prop variant" by name',
+        '✔ PR dry-run plan: 4 named REST steps, deterministic branch, session-only token note — zero network',
+      ]) {
+        if (!check.out.includes(want)) throw new Error(`missing "${want}" in:\n${check.out}`);
+      }
+      console.log('plugin-propose-dry-run: dump→proposal→bounded diff round-trip + exact PR dry-run plan');
     },
   },
 ];

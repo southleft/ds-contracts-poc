@@ -186,7 +186,10 @@ window.DSC = createPluginEngine(__DSC_DATA__);
 
   // Input hash: every module esbuild consumed (path + content hash, sorted)
   // plus the baked data and the esbuild version — any change to core, the
-  // entry, tokens, contracts, or icons changes this hash.
+  // entry, tokens, contracts, or icons changes this hash. Dependency inputs
+  // (node_modules) are keyed by their PACKAGE-RELATIVE path so the hash is
+  // identical whether node_modules is local, a worktree symlink, or the
+  // evals scratch symlink (contents still hashed — a dep upgrade changes it).
   const hasher = createHash('sha256');
   const inputs = Object.keys(result.metafile.inputs)
     // Real files only — the metafile also lists virtual entries (the stdin
@@ -195,11 +198,15 @@ window.DSC = createPluginEngine(__DSC_DATA__);
     // covers everything the virtual entries carry.
     .filter((p) => !p.startsWith('<') && !p.startsWith('(') && p !== 'plugin-engine-main.ts')
     .sort();
-  for (const p of inputs) {
-    const abs = resolve(repoRoot, p);
-    hasher.update(relative(repoRoot, abs));
+  const stableKey = (p) => {
+    const norm = p.split('\\').join('/');
+    const i = norm.lastIndexOf('node_modules/');
+    return i >= 0 ? norm.slice(i) : relative(repoRoot, resolve(repoRoot, norm)).split('\\').join('/');
+  };
+  for (const p of [...inputs].sort((a, b) => (stableKey(a) < stableKey(b) ? -1 : 1))) {
+    hasher.update(stableKey(p));
     hasher.update('\0');
-    hasher.update(readFileSync(abs));
+    hasher.update(readFileSync(resolve(repoRoot, p)));
     hasher.update('\0');
   }
   hasher.update(dataJson);
