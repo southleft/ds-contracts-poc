@@ -1,0 +1,66 @@
+{
+  "library": {
+    "package": "@shopify/polaris",
+    "version": "13.9.5",
+    "framework": "react",
+    "classPrefix": "Polaris-"
+  },
+  "mount": {
+    "imports": [
+      "import { AppProvider } from '@shopify/polaris';",
+      "import en from '@shopify/polaris/locales/en.json';",
+      "import '@shopify/polaris/build/esm/styles.css';"
+    ],
+    "wrapperOpen": "<AppProvider i18n={en}>",
+    "wrapperClose": "</AppProvider>"
+  },
+  "tokens": {
+    "dtcg": ["examples/polaris/tokens/polaris-light.dtcg.json"],
+    "css": "examples/polaris/generated/html/polaris-tokens.css"
+  },
+  "browser": {
+    "viewport": { "width": 600, "height": 800 },
+    "deviceScaleFactor": 2,
+    "colorScheme": "light"
+  },
+  "stage": { "width": 320, "height": 96, "padding": 16 },
+  "enumeration": { "cartesianLimit": 512, "unsetLabel": "none" },
+  "components": [
+    {
+      "name": "Button",
+      "importName": "Button",
+      "contract": "examples/polaris/contracts/button.contract.json",
+      "sampleText": "Save changes",
+      "axes": ["variant", "tone", "size"],
+      "stateProps": [{ "prop": "disabled", "state": "disabled" }],
+      "triage": [
+        {
+          "part": "root",
+          "channels": ["color", "background-color", "box-shadow"],
+          "when": { "tone": { "notIn": ["none"] } },
+          "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+        },
+        {
+          "part": "label",
+          "channels": ["font-size", "line-height"],
+          "when": { "variant": { "in": ["plain", "monochromePlain"] } },
+          "cause": "composition-owned typography: the plain/monochromePlain variants render their label through the Text primitive at bodyMd (13px/20px); the carried binding is the bodySm default — child-component props conditioned on the parent variant, invisible to single-file static promotion"
+        },
+        {
+          "part": "label",
+          "channels": ["font-weight"],
+          "when": { "variant": { "in": ["primary"] } },
+          "cause": "composition-owned typography: the primary variant label renders Text fontWeight 650 (semibold); the carried binding is font-weight-medium (550) — same composition-owned class"
+        }
+      ]
+    },
+    {
+      "name": "Tag",
+      "importName": "Tag",
+      "contract": "examples/polaris/contracts/tag.contract.json",
+      "sampleText": "Wholesale",
+      "axes": [],
+      "stateProps": [{ "prop": "disabled", "state": "disabled" }]
+    }
+  ]
+}

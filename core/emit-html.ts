@@ -214,9 +214,26 @@ function componentCss(contract: Contract): string[] {
   for (const { prop: tbpProp, map } of tokensByPropEntries(root)) {
     for (const [value, overrides] of Object.entries(map)) {
       for (const [cssProp, ref] of Object.entries(overrides)) {
+        const refPath = stripBraces(ref);
+        // S2 capability lift (computed-capture floor): a map ref carrying
+        // ONE placeholder (a different declared enum prop — validated in
+        // emit-react validateContract) expands as compound enum-class rules,
+        // the two-placeholder root-token projection with one axis pinned by
+        // the map. Compound rules land with pairRules (after enum rules).
+        const phs = placeholdersIn(refPath);
+        if (phs.length === 1) {
+          for (const phValue of enums.get(phs[0]) ?? []) {
+            const resolved = refPath.replaceAll(`{${phs[0]}}`, phValue);
+            pairRules.push({
+              selector: `${enumCls(tbpProp, value)}${enumCls(phs[0], phValue)}`,
+              decls: [`${cssProp}: ${cssVar(resolved)}`],
+            });
+          }
+          continue;
+        }
         const key = `${tbpProp} ${value}`;
         const entry = enumRules.get(key) ?? { prop: tbpProp, value, decls: [] };
-        entry.decls.push(`${cssProp}: ${cssVar(stripBraces(ref))}`);
+        entry.decls.push(`${cssProp}: ${cssVar(refPath)}`);
         enumRules.set(key, entry);
       }
     }
@@ -415,10 +432,24 @@ function componentCss(contract: Contract): string[] {
     // v14: multiple entries in order (later entries win per channel).
     for (const entry of tokensByPropEntries(part)) {
       for (const [value, overrides] of Object.entries(entry.map)) {
-        rule(
-          `${enumCls(entry.prop, value)} ${partCls(name)}`,
-          Object.entries(overrides).map(([cssProp, ref]) => `${cssProp}: ${cssVar(stripBraces(ref))}`),
-        );
+        const plain: string[] = [];
+        for (const [cssProp, ref] of Object.entries(overrides)) {
+          const refPath = stripBraces(ref);
+          // S2 capability lift: one-placeholder map refs expand as compound
+          // enum-class descendant rules (both classes ride the root).
+          const phs = placeholdersIn(refPath);
+          if (phs.length === 1) {
+            for (const phValue of enums.get(phs[0]) ?? []) {
+              const resolved = refPath.replaceAll(`{${phs[0]}}`, phValue);
+              rule(`${enumCls(entry.prop, value)}${enumCls(phs[0], phValue)} ${partCls(name)}`, [
+                `${cssProp}: ${cssVar(resolved)}`,
+              ]);
+            }
+            continue;
+          }
+          plain.push(`${cssProp}: ${cssVar(refPath)}`);
+        }
+        if (plain.length > 0) rule(`${enumCls(entry.prop, value)} ${partCls(name)}`, plain);
       }
     }
     // v13 part-level states (P18 second half): descendant rules under the

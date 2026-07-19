@@ -342,9 +342,27 @@ export function validateContract(
             errors.push(`${contract.id}: part "${name}" tokensByProp map key "${k}" is not a value of prop "${tbp.prop}"`);
           }
           for (const ref of Object.values(overrides)) {
-            if (placeholdersIn(stripBraces(ref)).length > 0) {
+            // S2 capability lift (computed-capture floor): a per-value map
+            // ref may carry AT MOST ONE placeholder naming a DIFFERENT
+            // declared enum prop — the CSS emitters expand it as a compound
+            // enum-class rule (.variant-primary.tone-critical). Field case:
+            // a pair binding whose second axis is a defaultless enum (Button
+            // tone) — the unset plane rides the base/other-axis map, the set
+            // planes need the remaining axis substituted per value. More
+            // than one placeholder, an unknown prop, or the entry's own prop
+            // (double substitution) refuse by name, as before.
+            const phs = placeholdersIn(stripBraces(ref));
+            if (phs.length > 1) {
               errors.push(
-                `${contract.id}: part "${name}" tokensByProp ref "${ref}" carries a substitution placeholder — per-value maps hold plain refs only`,
+                `${contract.id}: part "${name}" tokensByProp ref "${ref}" carries ${phs.length} placeholders — per-value maps hold at most one`,
+              );
+            } else if (phs.length === 1 && phs[0] === tbp.prop) {
+              errors.push(
+                `${contract.id}: part "${name}" tokensByProp ref "${ref}" substitutes the entry's own prop "${tbp.prop}" — the per-value map IS that substitution`,
+              );
+            } else if (phs.length === 1 && !enumProps(contract).some((pr) => pr.name === phs[0])) {
+              errors.push(
+                `${contract.id}: part "${name}" tokensByProp ref "${ref}" substitutes unknown enum prop "${phs[0]}"`,
               );
             }
           }
@@ -1044,6 +1062,25 @@ export function generateCss(contract: Contract, tokenInventory: Set<string>, err
     for (const [value, overrides] of Object.entries(map)) {
       for (const [cssProp, ref] of Object.entries(overrides)) {
         const refPath = stripBraces(ref);
+        // S2 capability lift: a map ref carrying ONE placeholder (validated
+        // as a different declared enum prop) expands as compound enum-class
+        // rules — the two-placeholder root-token projection with one axis
+        // pinned by the map. Both single classes are claimed so the compound
+        // selector can match (the pair-binding discipline above).
+        const phs = placeholdersIn(refPath);
+        if (phs.length === 1) {
+          for (const phValue of enums.get(phs[0]) ?? []) {
+            const resolved = refPath.replaceAll(`{${phs[0]}}`, phValue);
+            if (!checkToken(resolved, `anatomy.root.tokensByProp.${value}.${cssProp}`)) continue;
+            for (const single of [`${tbpProp}-${value}`, `${phs[0]}-${phValue}`]) {
+              if (!enumRules.has(single)) enumRules.set(single, new Map());
+            }
+            const cls = `${tbpProp}-${value}.${phs[0]}-${phValue}`;
+            if (!enumRules.has(cls)) enumRules.set(cls, new Map());
+            enumRules.get(cls)!.set(cssProp, cssVar(resolved));
+          }
+          continue;
+        }
         if (!checkToken(refPath, `anatomy.root.tokensByProp.${value}.${cssProp}`)) continue;
         const cls = `${tbpProp}-${value}`;
         if (!enumRules.has(cls)) enumRules.set(cls, new Map());
@@ -1274,6 +1311,22 @@ export function generateCss(contract: Contract, tokenInventory: Set<string>, err
       for (const [value, overrides] of Object.entries(entry.map)) {
         for (const [cssProp, ref] of Object.entries(overrides)) {
           const refPath = stripBraces(ref);
+          // S2 capability lift: one-placeholder map refs expand as compound
+          // enum-class descendant rules (both classes ride the root).
+          const phs = placeholdersIn(refPath);
+          if (phs.length === 1) {
+            for (const phValue of enums.get(phs[0]) ?? []) {
+              const resolved = refPath.replaceAll(`{${phs[0]}}`, phValue);
+              if (!checkToken(resolved, `anatomy.${name}.tokensByProp.${value}.${cssProp}`)) continue;
+              for (const single of [`${entry.prop}-${value}`, `${phs[0]}-${phValue}`]) {
+                if (!enumRules.has(single)) enumRules.set(single, new Map());
+              }
+              nestedSubRules.push(
+                `\n.${entry.prop}-${value}.${phs[0]}-${phValue} .${name} {\n  ${cssProp}: ${cssVar(resolved)};\n}`,
+              );
+            }
+            continue;
+          }
           if (!checkToken(refPath, `anatomy.${name}.tokensByProp.${value}.${cssProp}`)) continue;
           nestedSubRules.push(
             `\n.${entry.prop}-${value} .${name} {\n  ${cssProp}: ${cssVar(refPath)};\n}`,
