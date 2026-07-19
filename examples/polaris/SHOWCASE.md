@@ -269,6 +269,59 @@ visual impact — the Round 3 canvas expectations):
 Every class is named per component in `extract/computed/out/<comp>/LEDGER.md` and the
 committed extension blocks; nothing was silently dropped.
 
+## Round 4 (v0.2.0 → v0.3.0): the one-to-one round — DOM anatomy promoted, both surfaces gated in pixels
+
+The owner's bar, verbatim: *"Please compare against the actual Polaris site… If
+they do not line up one-to-one then this is a failed project."* Round 4 turned
+that bar into two standing pixel instruments and collapsed the loudest gap:
+computed-only DOM elements (Banner's tone ribbon + icon + dismiss + action row,
+Checkbox's check/indeterminate glyphs, Tag's remove ×, Badge's progress pip,
+TextField's prefix/suffix) are now REAL contract parts — svg glyph content
+rides committed assets reconstructed from the captured `d`/`fill`/`stroke`
+channels; structure-creating optional props (`onDismiss`, `action`, `onRemove`,
+`prefix`, …) are boolean contract props gating the promoted subtrees.
+
+**Per-component gate table, BOTH surfaces** (html gate: enriched+resolved
+contract → `emit-html` vs the real `@shopify/polaris@13.9.5` render, per
+combo × state, pixelmatch exact / AA point; canvas gate: canvas-engine render
+vs the real package per curated cell, text-masked — `extract/figma/canvas-gate`,
+receipts + per-channel numeric tables in `receipts/canvas-gate/`):
+
+| component | computed-equality (html gate) | html-vs-real pixel exact/AA mean | canvas-vs-real (masked) |
+|---|---|---|---|
+| button | 89.4% | 4.65% / 2.21% (max 15.12%, n=960) | 22.29% masked mean (max 92.65%, n=220) FAIL |
+| badge | 97.3% | 2.68% / 1.52% (max 2.81%, n=240) | 39.57% masked mean (max 55.26%, n=42) FAIL |
+| tag | 80.2% | 5.15% / 2.22% (max 6.37%, n=128) | 50.05% masked mean (max 88.98%, n=4) FAIL |
+| banner | 96.8% | 4.46% / 2.03% (max 4.00%, n=64) | 37.65% masked mean (max 44.70%, n=8) FAIL |
+| checkbox | 83.7% | 3.81% / 1.95% (max 3.40%, n=24) | 62.42% masked mean (max 90.10%, n=3) FAIL |
+| radio-button | 81.0% | 4.23% / 1.89% (max 2.41%, n=16) | 44.62% masked mean (max 55.63%, n=2) FAIL |
+| avatar | 70.7% | 2.76% / 2.40% (max 4.67%, n=40) | 54.90% masked mean (max 91.63%, n=5) FAIL |
+| spinner | 100.0% | 1.31% / 0.76% (max 1.04%, n=8) | 6.45% masked mean (max 9.75%, n=2) FAIL |
+| progress-bar | 92.1% | 17.47% / 17.44% (max 29.94%, n=48) | 25.88% masked mean (max 39.41%, n=12) FAIL |
+| thumbnail | 100.0% | 9.78% / 9.66% (max 20.56%, n=16) | 41.76% masked mean (max 61.68%, n=4) FAIL |
+| text | 100.0% | 3.80% / 2.12% (max 7.91%, n=1516) | — |
+| text-field | 81.4% | 23.75% / 5.39% (max 14.65%, n=256) | — |
+
+Headline: **Banner 32.76% → 4.46% exact mean** with the full ribbon anatomy
+drawn (the round-2 number was measured on a smaller clipped stage; the round-4
+stage shows the whole card, dismiss and action included). Named residuals that
+a designer will still spot: RadioButton's selected dot (`::before` pseudo
+decor — not carried), ProgressBar's runtime-% indicator width, TextField's
+input-text antialiasing weight, Thumbnail's white-on-white surface.
+
+**The CANVAS side fails its ≤5% masked acceptance on all 10 scored
+components — quoted, not widened.** The v0.3.0 contracts now carry more
+anatomy than the canvas engine's sizing model draws (hug/stretch chains and
+glyph layout for deep promoted trees); every cell over 10% carries a named
+cause in its scorecard, and the live-canvas rebuild against these contracts is
+the next session's scoped work. The instrument stands so that number cannot
+silently regress — or silently claim victory.
+
+External validity: `receipts/site-calibration/` proves the harness reference
+side against the LIVE documented polaris-react.shopify.com examples
+(structural checklists pass both sides; banner-success 0.35% pixel vs the
+site's own render).
+
 ## Figma-ready (Phase B input)
 
 `figma/00-tokens.figma.js` upserts the wrapped token set as Figma variables in a **blank

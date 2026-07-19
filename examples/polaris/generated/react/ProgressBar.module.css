@@ -1,5 +1,5 @@
 /* GENERATED FILE — DO NOT EDIT.
- * Source of truth: contracts/progress-bar.contract.json (polaris.progress-bar v0.2.0)
+ * Source of truth: contracts/progress-bar.contract.json (polaris.progress-bar v0.3.0)
  * Regenerate with: npm run generate
  */
 
@@ -12,6 +12,7 @@
   border-bottom-left-radius: var(--imported-shared-size-4);
   border-bottom-right-radius: var(--imported-shared-size-4);
   border-top-right-radius: var(--imported-shared-size-4);
+  display: block;
   overflow-x: hidden;
   overflow-y: hidden;
 }
@@ -44,9 +45,27 @@
   height: 32px;
 }
 
-.indicator {
+.progress {
+  bottom: var(--imported-progress-bar-progress-bottom);
+  left: var(--imported-progress-bar-progress-left);
   min-height: var(--imported-shared-size-0);
   min-width: var(--imported-shared-size-0);
+  right: var(--imported-progress-bar-progress-right);
+  top: var(--imported-shared-size-0);
+  vertical-align: var(--imported-progress-bar-progress-vertical-align);
+  display: none;
+  appearance: auto;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  position: absolute;
+  text-wrap-mode: nowrap;
+}
+
+.indicator {
+  display: flex;
+  min-height: var(--imported-shared-size-0);
+  min-width: var(--imported-shared-size-0);
+  display: block;
   transition-duration: 0.5s;
   transition-property: transform;
   transition-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1);
@@ -66,4 +85,29 @@
 
 .tone-critical .indicator {
   background-color: var(--p-color-bg-fill-critical);
+}
+
+.label {
+  left: var(--imported-shared-size-0);
+  min-height: var(--imported-shared-size-0);
+  min-width: var(--imported-shared-size-0);
+  right: var(--imported-progress-bar-label-right);
+  top: var(--imported-shared-size-0);
+  display: none;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  position: absolute;
+  text-wrap-mode: nowrap;
+}
+
+.size-large .label {
+  bottom: var(--imported-progress-bar-label-bottom-large);
+}
+
+.size-medium .label {
+  bottom: var(--imported-progress-bar-label-bottom-medium);
+}
+
+.size-small .label {
+  bottom: var(--imported-progress-bar-label-bottom-small);
 }

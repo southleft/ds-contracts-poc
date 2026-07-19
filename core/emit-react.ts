@@ -1284,6 +1284,10 @@ export function generateCss(contract: Contract, tokenInventory: Set<string>, err
       if (part.layout?.justify) decls.push(`justify-content: ${JUSTIFY_CSS[part.layout.justify]}`);
     }
     if (part.layout?.grow) decls.push('flex: 1 1 auto', 'min-width: 0');
+    // UA-margin neutralization on NESTED parts (round 4): a promoted h2/p/ul
+    // part would leak UA margins the real component resets — same discipline
+    // as the root rule; captured nonzero margins arrive as minted overrides.
+    if (part.element && UA_MARGIN_ELEMENTS.has(part.element)) decls.push('margin: 0');
     // v7 overlay: out of flow, attached to the root's edge.
     if (part.overlay) decls.push('position: absolute', ...OVERLAY_CSS[part.overlay.placement]);
     // v9 shape: parametric leaf decor — the ONE shared projection
@@ -1304,6 +1308,13 @@ export function generateCss(contract: Contract, tokenInventory: Set<string>, err
         'text-align: inherit',
         'cursor: pointer',
       );
+    }
+    // Round 4: a promoted TEXT-entry control (input/textarea/select part
+    // that is not the checkable pattern) neutralizes UA chrome — mirrors
+    // core/emit-html.ts.
+    if (!isNativeCheckablePart(part) && (part.element === 'input' || part.element === 'textarea' || part.element === 'select')) {
+      decls.push('appearance: none', 'border: none', 'background: transparent',
+        'font: inherit', 'color: inherit', 'letter-spacing: inherit', 'margin: 0', 'padding: 0', 'outline: none');
     }
     // Native checkable inputs (input[type=checkbox|radio]): the REAL control
     // covers its presentational box invisibly — it stays the focusable,
@@ -1430,6 +1441,12 @@ export function generateCss(contract: Contract, tokenInventory: Set<string>, err
     // descendant rules under the root's state selector.
     for (const [cssProp, value] of Object.entries(part.declared ?? {})) {
       decls.push(`${cssProp}: ${value}`);
+    }
+    // Round 4: an absolutely-positioned REPLACED part (promoted Thumbnail
+    // img) fills its inset box — for replaced elements, auto width under
+    // inset-0 resolves to the intrinsic size, so the fill is emitter chrome.
+    if (part.element === 'img' && part.declared?.['position'] === 'absolute') {
+      decls.push('width: 100%', 'height: 100%');
     }
     for (const [state, overrides] of Object.entries(part.declaredStates ?? {})) {
       const sel = STATE_SELECTORS[state];

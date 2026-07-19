@@ -5,7 +5,7 @@ const COMPONENTS = [
     "setName": "Pagination",
     "contractId": "ds.pagination",
     "anchorKey": "51d18c28f5ef424142d682db4ec7fd35b9091257",
-    "description": "Steps through pages of content, below a table or list. API mirrors industry convention (Astryx Pagination) with three display variants; page math and click behavior are declared boundaries — the pages variant shows a representative trail. — governed by contract ds.pagination v1.0.0",
+    "description": "Pagination — generated from contract ds.pagination v1.0.0",
     "isSet": true,
     "boolProps": [],
     "textProps": [
@@ -38,7 +38,8 @@ const COMPONENTS = [
             {
               "type": "svg",
               "name": "prevButton",
-              "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"14\" height=\"14\" fill=\"none\" stroke=\"#4B5563\" stroke-width=\"1.5\"><polyline points=\"12.3,5.5 7.8,10 12.3,14.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>"
+              "svg": "<svg fill=\"#4B5563\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"14\" height=\"14\" fill=\"none\" stroke=\"#4B5563\" stroke-width=\"1.5\"><polyline points=\"12.3,5.5 7.8,10 12.3,14.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
+              "iconSize": 14
             },
             {
               "type": "frame",
@@ -147,7 +148,8 @@ const COMPONENTS = [
             {
               "type": "svg",
               "name": "nextButton",
-              "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"14\" height=\"14\" fill=\"none\" stroke=\"#4B5563\" stroke-width=\"1.5\"><polyline points=\"7.8,5.5 12.3,10 7.8,14.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>"
+              "svg": "<svg fill=\"#4B5563\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"14\" height=\"14\" fill=\"none\" stroke=\"#4B5563\" stroke-width=\"1.5\"><polyline points=\"7.8,5.5 12.3,10 7.8,14.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
+              "iconSize": 14
             }
           ]
         }
@@ -171,7 +173,8 @@ const COMPONENTS = [
             {
               "type": "svg",
               "name": "prevButton",
-              "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"14\" height=\"14\" fill=\"none\" stroke=\"#4B5563\" stroke-width=\"1.5\"><polyline points=\"12.3,5.5 7.8,10 12.3,14.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>"
+              "svg": "<svg fill=\"#4B5563\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"14\" height=\"14\" fill=\"none\" stroke=\"#4B5563\" stroke-width=\"1.5\"><polyline points=\"12.3,5.5 7.8,10 12.3,14.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
+              "iconSize": 14
             },
             {
               "type": "text",
@@ -187,7 +190,8 @@ const COMPONENTS = [
             {
               "type": "svg",
               "name": "nextButton",
-              "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"14\" height=\"14\" fill=\"none\" stroke=\"#4B5563\" stroke-width=\"1.5\"><polyline points=\"7.8,5.5 12.3,10 7.8,14.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>"
+              "svg": "<svg fill=\"#4B5563\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"14\" height=\"14\" fill=\"none\" stroke=\"#4B5563\" stroke-width=\"1.5\"><polyline points=\"7.8,5.5 12.3,10 7.8,14.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
+              "iconSize": 14
             }
           ]
         }
@@ -211,7 +215,8 @@ const COMPONENTS = [
             {
               "type": "svg",
               "name": "prevButton",
-              "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"14\" height=\"14\" fill=\"none\" stroke=\"#4B5563\" stroke-width=\"1.5\"><polyline points=\"12.3,5.5 7.8,10 12.3,14.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>"
+              "svg": "<svg fill=\"#4B5563\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"14\" height=\"14\" fill=\"none\" stroke=\"#4B5563\" stroke-width=\"1.5\"><polyline points=\"12.3,5.5 7.8,10 12.3,14.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
+              "iconSize": 14
             },
             {
               "type": "frame",
@@ -305,7 +310,8 @@ const COMPONENTS = [
             {
               "type": "svg",
               "name": "nextButton",
-              "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"14\" height=\"14\" fill=\"none\" stroke=\"#4B5563\" stroke-width=\"1.5\"><polyline points=\"7.8,5.5 12.3,10 7.8,14.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>"
+              "svg": "<svg fill=\"#4B5563\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"14\" height=\"14\" fill=\"none\" stroke=\"#4B5563\" stroke-width=\"1.5\"><polyline points=\"7.8,5.5 12.3,10 7.8,14.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
+              "iconSize": 14
             }
           ]
         }
@@ -317,7 +323,7 @@ const COMPONENTS = [
     "setName": "ProgressBar",
     "contractId": "ds.progress-bar",
     "anchorKey": "b18870547d3ca85fb933e46457fde0d02d782fb3",
-    "description": "Horizontal bar showing completion progress. API mirrors industry convention (Astryx ProgressBar): number-valued value/max drive the fill; the canvas renders the defaults' fraction as its honest static state. Indeterminate mode needs animation on the canvas — a documented boundary. — governed by contract ds.progress-bar v1.0.1\nRuntime-sized geometry: the meter fill renders the defaults’ fraction; its height follows the track (FILL) — live sizing exists only in code.",
+    "description": "ProgressBar — generated from contract ds.progress-bar v1.0.1 †",
     "isSet": true,
     "boolProps": [],
     "textProps": [
@@ -348,7 +354,8 @@ const COMPONENTS = [
           "layout": {
             "mode": "VERTICAL",
             "primary": "MIN",
-            "counter": "MIN"
+            "counter": "MIN",
+            "stretchChildren": true
           },
           "fixedWidth": {
             "px": 320,
@@ -416,7 +423,8 @@ const COMPONENTS = [
           "layout": {
             "mode": "VERTICAL",
             "primary": "MIN",
-            "counter": "MIN"
+            "counter": "MIN",
+            "stretchChildren": true
           },
           "fixedWidth": {
             "px": 320,
@@ -484,7 +492,8 @@ const COMPONENTS = [
           "layout": {
             "mode": "VERTICAL",
             "primary": "MIN",
-            "counter": "MIN"
+            "counter": "MIN",
+            "stretchChildren": true
           },
           "fixedWidth": {
             "px": 320,
@@ -552,7 +561,8 @@ const COMPONENTS = [
           "layout": {
             "mode": "VERTICAL",
             "primary": "MIN",
-            "counter": "MIN"
+            "counter": "MIN",
+            "stretchChildren": true
           },
           "fixedWidth": {
             "px": 320,
@@ -620,7 +630,8 @@ const COMPONENTS = [
           "layout": {
             "mode": "VERTICAL",
             "primary": "MIN",
-            "counter": "MIN"
+            "counter": "MIN",
+            "stretchChildren": true
           },
           "fixedWidth": {
             "px": 320,
@@ -685,7 +696,7 @@ const COMPONENTS = [
     "setName": "Section",
     "contractId": "ds.section",
     "anchorKey": "f47b739d72cc4bfc159e1b656f78e5dbceaf0200",
-    "description": "The standard way to create page regions and group related content — settings groups, form sections, sidebar areas. API mirrors industry convention (Astryx Section) at the variant level; the transparent variant needs transparent color tokens — a documented gap. — governed by contract ds.section v1.0.0",
+    "description": "Section — generated from contract ds.section v1.0.0",
     "isSet": true,
     "boolProps": [],
     "textProps": [],
@@ -800,7 +811,7 @@ const COMPONENTS = [
     "setName": "SideNavItem",
     "contractId": "ds.side-nav-item",
     "anchorKey": "155b665997cadb6f418aa74bdd0ad9b00e348e97",
-    "description": "A sidebar navigation row: icon, label, and trailing content, with a selected state. API mirrors industry convention (Astryx SideNavItem); nesting and collapse are behavior-layer boundaries. — governed by contract ds.side-nav-item v1.0.0",
+    "description": "SideNavItem — generated from contract ds.side-nav-item v1.0.0",
     "isSet": true,
     "boolProps": [],
     "textProps": [
@@ -958,7 +969,7 @@ const COMPONENTS = [
     "setName": "Skeleton",
     "contractId": "ds.skeleton",
     "anchorKey": "2da0d4e2438f9b37a9ce159eafb4477f622b10bb",
-    "description": "Pulsing placeholder previewing the shape of loading content. API mirrors industry convention (Astryx Skeleton) with the free-form width/height flattened to a shape variant; the pulse is CSS-only — the canvas shows the static shape. — governed by contract ds.skeleton v1.0.0",
+    "description": "Skeleton — generated from contract ds.skeleton v1.0.0",
     "isSet": true,
     "boolProps": [],
     "textProps": [],
@@ -976,7 +987,8 @@ const COMPONENTS = [
           "layout": {
             "mode": "HORIZONTAL",
             "primary": "MIN",
-            "counter": "MIN"
+            "counter": "MIN",
+            "stretchChildren": true
           },
           "children": [
             {
@@ -1014,7 +1026,8 @@ const COMPONENTS = [
           "layout": {
             "mode": "HORIZONTAL",
             "primary": "MIN",
-            "counter": "MIN"
+            "counter": "MIN",
+            "stretchChildren": true
           },
           "children": [
             {
@@ -1052,7 +1065,8 @@ const COMPONENTS = [
           "layout": {
             "mode": "HORIZONTAL",
             "primary": "MIN",
-            "counter": "MIN"
+            "counter": "MIN",
+            "stretchChildren": true
           },
           "children": [
             {
@@ -1087,7 +1101,7 @@ const COMPONENTS = [
     "setName": "Slider",
     "contractId": "ds.slider",
     "anchorKey": "8aac8c4b2be87b47b944650ec1a4c07bdfeb12f7",
-    "description": "Numeric selection within bounds — the static surface of a slider: label, filled track to the current value, and thumb. API mirrors industry convention (Astryx Slider); drag behavior and range mode are declared boundaries. — governed by contract ds.slider v1.0.0\nRuntime-sized geometry: the meter fill renders the defaults’ fraction; its height follows the track (FILL) — live sizing exists only in code.",
+    "description": "Slider — generated from contract ds.slider v1.0.0 †",
     "isSet": false,
     "boolProps": [],
     "textProps": [
@@ -1114,7 +1128,8 @@ const COMPONENTS = [
           "layout": {
             "mode": "VERTICAL",
             "primary": "MIN",
-            "counter": "MIN"
+            "counter": "MIN",
+            "stretchChildren": true
           },
           "fixedWidth": {
             "px": 320,
@@ -1202,7 +1217,8 @@ const COMPONENTS = [
                   "layout": {
                     "mode": "HORIZONTAL",
                     "primary": "MIN",
-                    "counter": "MIN"
+                    "counter": "MIN",
+                    "stretchChildren": true
                   },
                   "grow": true,
                   "fixedHeight": {
@@ -1230,7 +1246,7 @@ const COMPONENTS = [
     "setName": "Spinner",
     "contractId": "ds.spinner",
     "anchorKey": "3cb0569208b199ceccb18b4c4439add4f5fea661",
-    "description": "Animated loading indicator for processes of unknown duration. API mirrors industry convention (Astryx Spinner); the size scale needs per-variant icon sizing and the rotation itself is CSS-only — the canvas shows the static arc. — governed by contract ds.spinner v1.0.0",
+    "description": "Spinner — generated from contract ds.spinner v1.0.0",
     "isSet": false,
     "boolProps": [],
     "textProps": [
@@ -1259,7 +1275,7 @@ const COMPONENTS = [
             {
               "type": "svg",
               "name": "arc",
-              "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"#2563EB\" stroke-width=\"2\"><path d=\"M 10 2.5 A 7.5 7.5 0 0 1 17.5 10\" stroke-linecap=\"round\"/></svg>"
+              "svg": "<svg fill=\"#2563EB\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"#2563EB\" stroke-width=\"2\"><path d=\"M 10 2.5 A 7.5 7.5 0 0 1 17.5 10\" stroke-linecap=\"round\"/></svg>"
             }
           ]
         }
@@ -1271,7 +1287,7 @@ const COMPONENTS = [
     "setName": "StatusDot",
     "contractId": "ds.status-dot",
     "anchorKey": "f66c5a1c366d1d37292459b9b9a56d80bf2a5034",
-    "description": "Small colored dot communicating status — presence, severity, activity. API mirrors industry convention (Astryx StatusDot): five semantic variants with a required accessible label. — governed by contract ds.status-dot v1.0.0",
+    "description": "StatusDot — generated from contract ds.status-dot v1.0.0",
     "isSet": true,
     "boolProps": [],
     "textProps": [
@@ -1436,7 +1452,7 @@ const COMPONENTS = [
     "setName": "Switch",
     "contractId": "ds.switch",
     "anchorKey": "7936496ebfb63f0f4908a29b7edd6dae340e4e23",
-    "description": "Toggle for on/off settings that take effect immediately. API mirrors industry convention (Astryx Switch) with the boolean value flattened to an off/on enum so both surfaces render both states truthfully; toggle behavior is a declared boundary. v2.0.0 (breaking, DOM shape): the control is a NATIVE input[type=checkbox] with role=switch (the modern switch pattern) inside the wrapping label — checked is DOM state, not ARIA on a button; track and thumb are presentational. — governed by contract ds.switch v2.0.0\nEvent (code): onToggle — fires on input activation. Toggles value: off ⇄ on.",
+    "description": "Switch — generated from contract ds.switch v2.0.0 †",
     "isSet": true,
     "boolProps": [],
     "textProps": [],
@@ -1518,7 +1534,8 @@ const COMPONENTS = [
                   "layout": {
                     "mode": "HORIZONTAL",
                     "primary": "MIN",
-                    "counter": "MIN"
+                    "counter": "MIN",
+                    "stretchChildren": true
                   },
                   "grow": true,
                   "children": []
@@ -1531,7 +1548,8 @@ const COMPONENTS = [
               "layout": {
                 "mode": "VERTICAL",
                 "primary": "MIN",
-                "counter": "MIN"
+                "counter": "MIN",
+                "stretchChildren": true
               },
               "grow": true,
               "bindings": {
@@ -1615,7 +1633,8 @@ const COMPONENTS = [
                   "layout": {
                     "mode": "HORIZONTAL",
                     "primary": "MIN",
-                    "counter": "MIN"
+                    "counter": "MIN",
+                    "stretchChildren": true
                   },
                   "grow": true,
                   "children": []
@@ -1652,7 +1671,8 @@ const COMPONENTS = [
               "layout": {
                 "mode": "VERTICAL",
                 "primary": "MIN",
-                "counter": "MIN"
+                "counter": "MIN",
+                "stretchChildren": true
               },
               "grow": true,
               "bindings": {
@@ -1693,7 +1713,7 @@ const COMPONENTS = [
     "setName": "Tab",
     "contractId": "ds.tab",
     "anchorKey": "5f7bce1453ff86d3147e96d9249f9313497f3d68",
-    "description": "A single tab in a TabList. API mirrors industry convention (Astryx Tab) with selection flattened to a state enum so both surfaces render it truthfully; selection behavior itself is a declared boundary. — governed by contract ds.tab v1.0.0",
+    "description": "Tab — generated from contract ds.tab v1.0.0",
     "isSet": true,
     "boolProps": [],
     "textProps": [],
@@ -1840,7 +1860,7 @@ const COMPONENTS = [
     "setName": "TabList",
     "contractId": "ds.tab-list",
     "anchorKey": "21786b6e7ff33e3d9ede5edb8ca07a56f3dbb8af",
-    "description": "Tab-style navigation container holding Tab items. API mirrors industry convention (Astryx TabList); roving-tabindex keyboard behavior and controlled selection are declared boundaries. — governed by contract ds.tab-list v1.0.0",
+    "description": "TabList — generated from contract ds.tab-list v1.0.0",
     "isSet": false,
     "boolProps": [],
     "textProps": [],
@@ -1914,7 +1934,7 @@ const COMPONENTS = [
     "setName": "TableCell",
     "contractId": "ds.table-cell",
     "anchorKey": "b440cb0ab4bd83de2491b2302ab1ccb9c3e0f2d1",
-    "description": "A single data cell in a table row. — governed by contract ds.table-cell v1.1.0",
+    "description": "TableCell — generated from contract ds.table-cell v1.1.0",
     "isSet": true,
     "boolProps": [],
     "textProps": [],
@@ -1997,7 +2017,7 @@ const COMPONENTS = [
     "setName": "TableHeaderCell",
     "contractId": "ds.table-header-cell",
     "anchorKey": "91bf99af47cb2e09190eed770012e9c99661294f",
-    "description": "A column header cell. — governed by contract ds.table-header-cell v1.1.0",
+    "description": "TableHeaderCell — generated from contract ds.table-header-cell v1.1.0",
     "isSet": true,
     "boolProps": [],
     "textProps": [],
@@ -2079,7 +2099,7 @@ const COMPONENTS = [
     "setName": "TableRow",
     "contractId": "ds.table-row",
     "anchorKey": "2630a1f30455c0b4d906930e9b3815cc0437fe1f",
-    "description": "A selectable row of table cells. — governed by contract ds.table-row v1.1.0",
+    "description": "TableRow — generated from contract ds.table-row v1.1.0",
     "isSet": true,
     "boolProps": [],
     "textProps": [],
@@ -2196,7 +2216,7 @@ const COMPONENTS = [
     "setName": "Table",
     "contractId": "ds.table",
     "anchorKey": "d3e8c9c378ea2fd072c2eb08545a30565fa77614",
-    "description": "Structured data in rows and columns. Composes header cells (with the Table's density mapped into them), and a body slot of rows. — governed by contract ds.table v1.1.0",
+    "description": "Table — generated from contract ds.table v1.1.0",
     "isSet": true,
     "boolProps": [],
     "textProps": [],
@@ -2409,7 +2429,7 @@ const COMPONENTS = [
     "setName": "TextArea",
     "contractId": "ds.text-area",
     "anchorKey": "2cb4581bfc1e7d9b0b5e32260d783accaea973ef",
-    "description": "Multi-line text input for longer-form content — comments, descriptions, messages. API mirrors industry convention (Astryx TextArea); wrapping-label anatomy gives implicit association. — governed by contract ds.text-area v1.0.0",
+    "description": "TextArea — generated from contract ds.text-area v1.0.0",
     "isSet": true,
     "boolProps": [
       {
@@ -2469,7 +2489,8 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "requiredMark",
-                  "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"10\" height=\"10\" fill=\"none\" stroke=\"#DC2626\" stroke-width=\"1.5\"><line x1=\"10\" y1=\"4.5\" x2=\"10\" y2=\"15.5\" stroke-linecap=\"round\"/><line x1=\"5.2\" y1=\"7.2\" x2=\"14.8\" y2=\"12.8\" stroke-linecap=\"round\"/><line x1=\"14.8\" y1=\"7.2\" x2=\"5.2\" y2=\"12.8\" stroke-linecap=\"round\"/></svg>",
+                  "svg": "<svg fill=\"#DC2626\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"10\" height=\"10\" fill=\"none\" stroke=\"#DC2626\" stroke-width=\"1.5\"><line x1=\"10\" y1=\"4.5\" x2=\"10\" y2=\"15.5\" stroke-linecap=\"round\"/><line x1=\"5.2\" y1=\"7.2\" x2=\"14.8\" y2=\"12.8\" stroke-linecap=\"round\"/><line x1=\"14.8\" y1=\"7.2\" x2=\"5.2\" y2=\"12.8\" stroke-linecap=\"round\"/></svg>",
+                  "iconSize": 10,
                   "visibleProp": "Required",
                   "visibleDefault": false
                 }
@@ -2516,7 +2537,7 @@ const COMPONENTS = [
                   "fontStyle": "Medium",
                   "fontFamily": "Inter",
                   "textStyle": "control/md",
-                  "textFill": "color/input/placeholder",
+                  "textFill": "color/surface/foreground",
                   "contentProp": "Placeholder"
                 }
               ]
@@ -2571,7 +2592,8 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "requiredMark",
-                  "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"10\" height=\"10\" fill=\"none\" stroke=\"#DC2626\" stroke-width=\"1.5\"><line x1=\"10\" y1=\"4.5\" x2=\"10\" y2=\"15.5\" stroke-linecap=\"round\"/><line x1=\"5.2\" y1=\"7.2\" x2=\"14.8\" y2=\"12.8\" stroke-linecap=\"round\"/><line x1=\"14.8\" y1=\"7.2\" x2=\"5.2\" y2=\"12.8\" stroke-linecap=\"round\"/></svg>",
+                  "svg": "<svg fill=\"#DC2626\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"10\" height=\"10\" fill=\"none\" stroke=\"#DC2626\" stroke-width=\"1.5\"><line x1=\"10\" y1=\"4.5\" x2=\"10\" y2=\"15.5\" stroke-linecap=\"round\"/><line x1=\"5.2\" y1=\"7.2\" x2=\"14.8\" y2=\"12.8\" stroke-linecap=\"round\"/><line x1=\"14.8\" y1=\"7.2\" x2=\"5.2\" y2=\"12.8\" stroke-linecap=\"round\"/></svg>",
+                  "iconSize": 10,
                   "visibleProp": "Required",
                   "visibleDefault": false
                 }
@@ -2618,7 +2640,7 @@ const COMPONENTS = [
                   "fontStyle": "Medium",
                   "fontFamily": "Inter",
                   "textStyle": "control/sm",
-                  "textFill": "color/input/placeholder",
+                  "textFill": "color/surface/foreground",
                   "contentProp": "Placeholder"
                 }
               ]
@@ -2673,7 +2695,8 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "requiredMark",
-                  "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"10\" height=\"10\" fill=\"none\" stroke=\"#DC2626\" stroke-width=\"1.5\"><line x1=\"10\" y1=\"4.5\" x2=\"10\" y2=\"15.5\" stroke-linecap=\"round\"/><line x1=\"5.2\" y1=\"7.2\" x2=\"14.8\" y2=\"12.8\" stroke-linecap=\"round\"/><line x1=\"14.8\" y1=\"7.2\" x2=\"5.2\" y2=\"12.8\" stroke-linecap=\"round\"/></svg>",
+                  "svg": "<svg fill=\"#DC2626\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"10\" height=\"10\" fill=\"none\" stroke=\"#DC2626\" stroke-width=\"1.5\"><line x1=\"10\" y1=\"4.5\" x2=\"10\" y2=\"15.5\" stroke-linecap=\"round\"/><line x1=\"5.2\" y1=\"7.2\" x2=\"14.8\" y2=\"12.8\" stroke-linecap=\"round\"/><line x1=\"14.8\" y1=\"7.2\" x2=\"5.2\" y2=\"12.8\" stroke-linecap=\"round\"/></svg>",
+                  "iconSize": 10,
                   "visibleProp": "Required",
                   "visibleDefault": false
                 }
@@ -2720,7 +2743,7 @@ const COMPONENTS = [
                   "fontStyle": "Medium",
                   "fontFamily": "Inter",
                   "textStyle": "control/lg",
-                  "textFill": "color/input/placeholder",
+                  "textFill": "color/surface/foreground",
                   "contentProp": "Placeholder"
                 }
               ]
@@ -2735,7 +2758,7 @@ const COMPONENTS = [
     "setName": "TextField",
     "contractId": "ds.text-field",
     "anchorKey": "83b5ead2b038477a13c0647de71ee55bf458e0b3",
-    "description": "Single-line text input for short-form values — names, emails, search queries. API mirrors industry convention (Astryx TextInput): required label, description, size scale. The wrapping-label anatomy gives implicit label association. Disabled fields dim and drop pointer interaction via stylesWhen (code-side conditional styling; a declared canvas fidelity limit). — governed by contract ds.text-field v1.1.0",
+    "description": "TextField — generated from contract ds.text-field v1.1.0",
     "isSet": true,
     "boolProps": [
       {
@@ -2799,7 +2822,8 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "requiredMark",
-                  "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"10\" height=\"10\" fill=\"none\" stroke=\"#DC2626\" stroke-width=\"1.5\"><line x1=\"10\" y1=\"4.5\" x2=\"10\" y2=\"15.5\" stroke-linecap=\"round\"/><line x1=\"5.2\" y1=\"7.2\" x2=\"14.8\" y2=\"12.8\" stroke-linecap=\"round\"/><line x1=\"14.8\" y1=\"7.2\" x2=\"5.2\" y2=\"12.8\" stroke-linecap=\"round\"/></svg>",
+                  "svg": "<svg fill=\"#DC2626\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"10\" height=\"10\" fill=\"none\" stroke=\"#DC2626\" stroke-width=\"1.5\"><line x1=\"10\" y1=\"4.5\" x2=\"10\" y2=\"15.5\" stroke-linecap=\"round\"/><line x1=\"5.2\" y1=\"7.2\" x2=\"14.8\" y2=\"12.8\" stroke-linecap=\"round\"/><line x1=\"14.8\" y1=\"7.2\" x2=\"5.2\" y2=\"12.8\" stroke-linecap=\"round\"/></svg>",
+                  "iconSize": 10,
                   "visibleProp": "Required",
                   "visibleDefault": false
                 }
@@ -2846,7 +2870,7 @@ const COMPONENTS = [
                   "fontStyle": "Medium",
                   "fontFamily": "Inter",
                   "textStyle": "control/md",
-                  "textFill": "color/input/placeholder",
+                  "textFill": "color/surface/foreground",
                   "contentProp": "Placeholder"
                 }
               ]
@@ -2901,7 +2925,8 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "requiredMark",
-                  "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"10\" height=\"10\" fill=\"none\" stroke=\"#DC2626\" stroke-width=\"1.5\"><line x1=\"10\" y1=\"4.5\" x2=\"10\" y2=\"15.5\" stroke-linecap=\"round\"/><line x1=\"5.2\" y1=\"7.2\" x2=\"14.8\" y2=\"12.8\" stroke-linecap=\"round\"/><line x1=\"14.8\" y1=\"7.2\" x2=\"5.2\" y2=\"12.8\" stroke-linecap=\"round\"/></svg>",
+                  "svg": "<svg fill=\"#DC2626\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"10\" height=\"10\" fill=\"none\" stroke=\"#DC2626\" stroke-width=\"1.5\"><line x1=\"10\" y1=\"4.5\" x2=\"10\" y2=\"15.5\" stroke-linecap=\"round\"/><line x1=\"5.2\" y1=\"7.2\" x2=\"14.8\" y2=\"12.8\" stroke-linecap=\"round\"/><line x1=\"14.8\" y1=\"7.2\" x2=\"5.2\" y2=\"12.8\" stroke-linecap=\"round\"/></svg>",
+                  "iconSize": 10,
                   "visibleProp": "Required",
                   "visibleDefault": false
                 }
@@ -2948,7 +2973,7 @@ const COMPONENTS = [
                   "fontStyle": "Medium",
                   "fontFamily": "Inter",
                   "textStyle": "control/sm",
-                  "textFill": "color/input/placeholder",
+                  "textFill": "color/surface/foreground",
                   "contentProp": "Placeholder"
                 }
               ]
@@ -3003,7 +3028,8 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "requiredMark",
-                  "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"10\" height=\"10\" fill=\"none\" stroke=\"#DC2626\" stroke-width=\"1.5\"><line x1=\"10\" y1=\"4.5\" x2=\"10\" y2=\"15.5\" stroke-linecap=\"round\"/><line x1=\"5.2\" y1=\"7.2\" x2=\"14.8\" y2=\"12.8\" stroke-linecap=\"round\"/><line x1=\"14.8\" y1=\"7.2\" x2=\"5.2\" y2=\"12.8\" stroke-linecap=\"round\"/></svg>",
+                  "svg": "<svg fill=\"#DC2626\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"10\" height=\"10\" fill=\"none\" stroke=\"#DC2626\" stroke-width=\"1.5\"><line x1=\"10\" y1=\"4.5\" x2=\"10\" y2=\"15.5\" stroke-linecap=\"round\"/><line x1=\"5.2\" y1=\"7.2\" x2=\"14.8\" y2=\"12.8\" stroke-linecap=\"round\"/><line x1=\"14.8\" y1=\"7.2\" x2=\"5.2\" y2=\"12.8\" stroke-linecap=\"round\"/></svg>",
+                  "iconSize": 10,
                   "visibleProp": "Required",
                   "visibleDefault": false
                 }
@@ -3050,7 +3076,7 @@ const COMPONENTS = [
                   "fontStyle": "Medium",
                   "fontFamily": "Inter",
                   "textStyle": "control/lg",
-                  "textFill": "color/input/placeholder",
+                  "textFill": "color/surface/foreground",
                   "contentProp": "Placeholder"
                 }
               ]
@@ -3065,7 +3091,7 @@ const COMPONENTS = [
     "setName": "Toast",
     "contractId": "ds.toast",
     "anchorKey": "0abc553b16f20807f50d984a41dc6cb936958a93",
-    "description": "Brief non-blocking notification confirming an action. API mirrors industry convention (Astryx Toast): the visual element — positioning, stacking, and auto-dismiss belong to the behavior layer and are a declared boundary. — governed by contract ds.toast v1.0.0",
+    "description": "Toast — generated from contract ds.toast v1.0.0",
     "isSet": true,
     "boolProps": [],
     "textProps": [],
@@ -3213,15 +3239,22 @@ const boundPaint = (varName, consumer) => {
   // Figma keeps rendering a reassigned bound paint's BASE color on
   // pre-existing nodes (fresh nodes normalize at assignment) — without the
   // seed, amended variants render black. The binding itself is unchanged.
+  // B-3 finding 2: the resolved ALPHA rides the seed too (paint opacity) —
+  // discarding it rendered Badge's rgba(0,0,0,.06) pill as opaque black on
+  // amended nodes.
   const v = need(varName);
   let base = { r: 0, g: 0, b: 0 };
+  let alpha = 1;
   if (consumer) {
     try {
       const r = v.resolveForConsumer(consumer);
-      if (r && r.value && r.value.r !== undefined) base = { r: r.value.r, g: r.value.g, b: r.value.b };
+      if (r && r.value && r.value.r !== undefined) {
+        base = { r: r.value.r, g: r.value.g, b: r.value.b };
+        if (typeof r.value.a === 'number') alpha = r.value.a;
+      }
     } catch (e) { /* fall back to black base */ }
   }
-  return figma.variables.setBoundVariableForPaint({ type: 'SOLID', color: base }, 'color', v);
+  return figma.variables.setBoundVariableForPaint({ type: 'SOLID', color: base, opacity: alpha }, 'color', v);
 };
 
 // Named text styles (synced by 01-tokens.js): consumers look up OUR styles
@@ -3343,7 +3376,7 @@ function applyFrameSpec(node, spec) {
     if (spec.fixedHeight) {
       if (horizontalIsPrimary) node.counterAxisSizingMode = 'FIXED';
       else node.primaryAxisSizingMode = 'FIXED';
-      node.setBoundVariable('height', need(spec.fixedHeight.varName));
+      if (spec.fixedHeight.varName) node.setBoundVariable('height', need(spec.fixedHeight.varName));
     }
   }
 }
@@ -3372,6 +3405,7 @@ async function buildNode(spec, registry) {
     node = figma.createNodeFromSvg(spec.svg);
     node.fills = [];
     node.clipsContent = false;
+    if (spec.iconSize) node.resize(spec.iconSize, spec.iconSize);
   } else if (spec.type === 'text') {
     node = figma.createText();
     node.fontName = { family: 'Inter', style: spec.fontStyle || 'Medium' };
@@ -3417,7 +3451,7 @@ async function buildNode(spec, registry) {
       if (spec.fixedWidth || spec.fixedHeight) {
         wrap.resize(spec.fixedWidth ? spec.fixedWidth.px : wrap.width, spec.fixedHeight ? spec.fixedHeight.px : wrap.height);
         if (spec.fixedWidth) { wrap.primaryAxisSizingMode = 'FIXED'; wrap.setBoundVariable('width', need(spec.fixedWidth.varName)); }
-        if (spec.fixedHeight) { wrap.counterAxisSizingMode = 'FIXED'; wrap.setBoundVariable('height', need(spec.fixedHeight.varName)); }
+        if (spec.fixedHeight) { wrap.counterAxisSizingMode = 'FIXED'; if (spec.fixedHeight.varName) wrap.setBoundVariable('height', need(spec.fixedHeight.varName)); else wrap.resize(wrap.width, spec.fixedHeight.px); }
       }
       wrap.name = spec.name;
       node = wrap;
@@ -3657,6 +3691,21 @@ async function amendSet(set, C) {
     for (let i = 0; i < sp.col; i++) x += colWs[i] + PAD;
     for (let i = 0; i < sp.row; i++) y += rowHs[i] + PAD;
     child.x = x; child.y = y;
+  }
+  // B-3 finding 4: after re-gridding, the SET CONTAINER refits to the
+  // children's extent + grid padding (the create path's exact math) —
+  // without this, added variants/columns stayed clipped by stale bounds
+  // (Banner's Focus column, Button's 220-cell grid, ProgressBar's height).
+  // Extra (human-owned) variants may sit beyond the grid; never shrink
+  // below their extent.
+  {
+    let totalW = colWs.reduce((a, b) => a + b, 0) + PAD * (colsN + 1);
+    let totalH = rowHs.reduce((a, b) => a + b, 0) + PAD * (rowsN + 1);
+    for (const child of set.children) {
+      totalW = Math.max(totalW, child.x + child.width + PAD);
+      totalH = Math.max(totalH, child.y + child.height + PAD);
+    }
+    set.resizeWithoutConstraints(totalW, totalH);
   }
   set.description = C.description;
   set.setSharedPluginData('ds_contracts', 'specHash', hash);

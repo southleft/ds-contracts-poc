@@ -1,0 +1,65 @@
+{
+  "component": "Spinner",
+  "contractId": "polaris.spinner",
+  "contractVersion": "0.3.0",
+  "generatedBy": "extract/figma/canvas-gate/run.ts",
+  "sides": {
+    "canvas": "createFigmaEngine().compileComponentData rendered by the playground canvas renderer (vendored), deviceScaleFactor 2",
+    "real": "@shopify/polaris@13.9.5 in 148.0.7778.96 (playwright-core, headless), deviceScaleFactor 2"
+  },
+  "scoring": {
+    "pctExactUnmasked": "pixelmatch threshold 0, includeAA true — every differing pixel",
+    "pctAAUnmasked": "pixelmatch threshold 0.1, includeAA false — antialiased pixels excluded by the classifier",
+    "pctAAMasked": "the AA point with BOTH sides' DOM text rects (+4 device px) removed from numerator and denominator",
+    "sizePolicy": "content-trimmed crops center-padded onto the UNION canvas; a size delta stays in the diff (never cropped to match)"
+  },
+  "fonts": {
+    "interAvailableInBrowser": true
+  },
+  "cells": [
+    {
+      "cell": "Size=Large",
+      "kind": "base",
+      "pctExactUnmasked": 12.39,
+      "pctAAUnmasked": 9.75,
+      "pctAAMasked": 9.75,
+      "maskCoveragePct": 0,
+      "canvasPx": "96x96",
+      "realPx": "85x84",
+      "inkCanvasPct": 0,
+      "inkRealPct": 12.39,
+      "note": "CANVAS SIDE (NEARLY) BLANK: canvas ink 0% vs real ink 12.39% of the union canvas — the masked % understates the miss; CANVAS SIDE BLANK — RENDERER DEFECT (verified in-page: svg computed 0x0): the icon svg is inlined with viewBox only, no width/height attributes, and an svg has no intrinsic size in a shrink-to-fit flex context — the glyph lays out at 0x0 and paints NOTHING; the low masked % is the blank-vs-thin-arc artifact, see the ink columns"
+    },
+    {
+      "cell": "Size=Small",
+      "kind": "base",
+      "pctExactUnmasked": 4.39,
+      "pctAAUnmasked": 3.14,
+      "pctAAMasked": 3.14,
+      "maskCoveragePct": 0,
+      "canvasPx": "96x96",
+      "realPx": "37x37",
+      "inkCanvasPct": 0,
+      "inkRealPct": 4.39,
+      "note": "CANVAS SIDE (NEARLY) BLANK: canvas ink 0% vs real ink 4.39% of the union canvas — the masked % understates the miss; CANVAS SIDE BLANK — RENDERER DEFECT (verified in-page: svg computed 0x0): the icon svg is inlined with viewBox only, no width/height attributes, and an svg has no intrinsic size in a shrink-to-fit flex context — the glyph lays out at 0x0 and paints NOTHING; the low masked % is the blank-vs-thin-arc artifact, see the ink columns"
+    }
+  ],
+  "summary": {
+    "cells": 2,
+    "meanExactUnmasked": 8.39,
+    "meanAAUnmasked": 6.45,
+    "meanAAMasked": 6.45,
+    "maxAAMasked": 9.75,
+    "worstCell": "Size=Large",
+    "cellsOver10Masked": [],
+    "blankCanvasCells": [
+      "Size=Large",
+      "Size=Small"
+    ]
+  },
+  "acceptance": {
+    "maskedMeanLE5": false,
+    "allCellsOver10Named": true,
+    "noBlankCanvasCells": false
+  }
+}

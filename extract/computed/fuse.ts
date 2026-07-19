@@ -27,6 +27,8 @@
 import { mintTokens, type MintAxis, type MintObservation, type MintResult } from '../../core/mint-tokens.js';
 import {
   DECLARED_CHANNELS,
+  LITERAL_CHANNELS,
+  LITERAL_VALUE_RE,
   resolveLiterals,
   resolveTokens,
   tokensByPropEntries,
@@ -40,13 +42,13 @@ import {
   flatten,
   isFusable,
   kindOf,
-  nameParts,
   pairwiseCertificate,
   type Capture,
   type Combo,
   type FlatEl,
   type StyleMap,
 } from './lib.js';
+import { buildUnion, nameUnion, rejoinStaticParts } from './anatomy.js';
 
 // ---------------------------------------------------------------------------
 // Alignment across the sweep (§4)
@@ -56,8 +58,15 @@ export interface AlignedSweep {
   captures: Capture[];
   byKey: Map<string, Capture>;
   base: Capture;
+  /** Round 4: the UNION anatomy in DFS order — representative element per
+   *  union part (base capture's element when present there). Parts created
+   *  only under structure-creating props appear here with inBase=false. */
   baseFlat: FlatEl[];
+  /** Parallel to baseFlat: whether the part exists in the base capture. */
+  inBase: boolean[];
   partNames: string[];
+  /** Round 4: the union tree itself (promotion input). */
+  union: import('./anatomy.js').UnionResult;
   getAligned: (key: string) => (FlatEl | null)[];
   structureReceipts: string[];
   /** part-name → join vs the static anatomy: matched | computed-only;
@@ -79,36 +88,35 @@ export function alignSweep(
   const byKey = new Map<string, Capture>(captures.map((c) => [`${c.combo}__${c.interaction}`, c]));
   const base = byKey.get(`${space.baseComboKey}__default`);
   if (!base) throw new Error(`${comp.name}: base capture missing (${space.baseComboKey}__default)`);
-  const baseFlat = flatten(base.root, classPrefix);
-  nameParts(baseFlat, comp.name, classPrefix);
+
+  // Round 4: UNION alignment — hierarchical signature matching across ALL
+  // captures (structure-creating props add union parts the base combo never
+  // renders); replaces the base-tree path alignment.
+  const union = buildUnion(captures, base, classPrefix);
+  const structureReceipts = [...union.receipts];
+  nameUnion(union.entries, comp.name, classPrefix);
+  rejoinStaticParts(union.entries, space.contract, comp, structureReceipts);
+  const baseFlat: FlatEl[] = union.entries.map((e) => ({
+    path: e.repPath,
+    sig: e.sig,
+    partName: e.partName,
+    node: e.rep,
+  }));
+  const inBase = union.entries.map((e) => e.inBase);
   const partNames = baseFlat.map((e) => e.partName);
 
-  const structureReceipts: string[] = [];
-  const alignedCache = new Map<string, (FlatEl | null)[]>();
-  const aligned = (c: Capture): (FlatEl | null)[] => {
-    const flat = flatten(c.root, classPrefix);
-    const byPath = new Map(flat.map((e) => [e.path, e]));
-    const knownPaths = new Set(baseFlat.map((b) => b.path));
-    for (const e of flat) {
-      if (!knownPaths.has(e.path)) structureReceipts.push(`part-extra: ${c.combo} ${c.interaction} @${e.path} (${e.sig})`);
-    }
-    return baseFlat.map((b) => {
-      const el = byPath.get(b.path);
-      if (!el) {
-        structureReceipts.push(`part-missing: ${c.combo} ${c.interaction} ${b.partName}`);
-        return null;
-      }
-      if (el.sig !== b.sig) structureReceipts.push(`signature-drift: ${c.combo} ${c.interaction} ${b.partName}: ${b.sig} → ${el.sig}`);
-      return el;
+  // per-capture part-missing receipts (presence is the normal case now —
+  // receipted only for parts the BASE capture has)
+  for (const [key, els] of union.alignedByKey) {
+    els.forEach((el, i) => {
+      if (!el && inBase[i]) structureReceipts.push(`part-missing: ${key} ${partNames[i]}`);
+      if (el && el.sig !== baseFlat[i].sig) structureReceipts.push(`signature-drift: ${key} ${partNames[i]}: ${baseFlat[i].sig} → ${el.sig}`);
     });
-  };
-  const getAligned = (key: string) => {
-    let a = alignedCache.get(key);
-    if (!a) {
-      const c = byKey.get(key);
-      if (!c) throw new Error(`${comp.name}: no capture for ${key}`);
-      alignedCache.set(key, (a = aligned(c)));
-    }
+  }
+
+  const getAligned = (key: string): (FlatEl | null)[] => {
+    const a = union.alignedByKey.get(key);
+    if (!a) throw new Error(`${comp.name}: no capture for ${key}`);
     return a;
   };
 
@@ -121,7 +129,10 @@ export function alignSweep(
   }));
   const staticOnlyParts = [...staticParts].filter((p) => !partNames.includes(p));
 
-  return { captures, byKey, base, baseFlat, partNames, getAligned, structureReceipts, anatomyJoin, staticOnlyParts };
+  return {
+    captures, byKey, base, baseFlat, inBase, partNames, union, getAligned,
+    structureReceipts: [...new Set(structureReceipts)], anatomyJoin, staticOnlyParts,
+  };
 }
 
 // ---------------------------------------------------------------------------
@@ -260,8 +271,9 @@ export function enrichLayout(
   a: AlignedSweep,
   space: PropSpace,
   styled: Map<string, Set<string>>,
+  contract: Contract = space.contract,
 ): LayoutEnrichment {
-  const staticParts = new Map(walkAnatomy(space.contract).map((w) => [w.name, w.part] as const));
+  const staticParts = new Map(walkAnatomy(contract).map((w) => [w.name, w.part] as const));
   const out: LayoutEnrichment = { handled: new Map(), enriched: [], contradictions: [], receipts: [] };
   const enabled = space.enumeration.combos.filter(isEnabled);
   for (let pi = 0; pi < a.baseFlat.length; pi++) {
@@ -318,7 +330,7 @@ export interface BoundRow {
   computedProp: string;
   expected: string;
   observed: string;
-  verdict: 'confirmed' | 'contradiction' | 'part-missing';
+  verdict: 'confirmed' | 'contradiction' | 'part-absent';
   cause?: string;
 }
 
@@ -345,8 +357,9 @@ export async function boundCheck(
   comp: ComponentConfig,
   space: PropSpace,
   probeToken: (ref: string, computedProp: string) => Promise<string>,
+  contract: Contract = space.contract,
 ): Promise<{ rows: BoundRow[]; untriaged: BoundRow[] }> {
-  const partByName = new Map(walkAnatomy(space.contract).map((w) => [w.name, w.part] as const));
+  const partByName = new Map(walkAnatomy(contract).map((w) => [w.name, w.part] as const));
   const rows: BoundRow[] = [];
   for (const combo of space.enumeration.combos) {
     if (!isEnabled(combo)) continue; // state-prop planes are states, not bases
@@ -362,7 +375,9 @@ export async function boundCheck(
         if (!computedProps) continue;
         for (const cp of computedProps) {
           if (!el) {
-            rows.push({ combo: combo.key, part: a.partNames[pi], channel, ref, computedProp: cp, expected: '', observed: '', verdict: 'part-missing' });
+            // Round 4: a presence-gated part legitimately absent in this
+            // combo — the binding is untestable there, NOT contradicted.
+            rows.push({ combo: combo.key, part: a.partNames[pi], channel, ref, computedProp: cp, expected: '', observed: '', verdict: 'part-absent' });
             continue;
           }
           const expected = await probeToken(ref, cp);
@@ -376,8 +391,9 @@ export async function boundCheck(
       }
     }
   }
-  // Named-cause triage from config (the verify.ts curation discipline)
-  const contradicted = rows.filter((r) => r.verdict !== 'confirmed');
+  // Named-cause triage from config (the verify.ts curation discipline).
+  // part-absent rows are informational (presence-gated parts).
+  const contradicted = rows.filter((r) => r.verdict === 'contradiction');
   for (const r of contradicted) {
     const axisValues: Record<string, string> = {};
     space.axes.forEach((ax, i) => { axisValues[ax.prop] = r.combo.split('.')[i]; });
@@ -477,9 +493,12 @@ export function prepareMint(
   styled: Map<string, Set<string>>,
   folds: FoldReceipt[],
   layoutHandled?: Map<string, Set<string>>,
+  contract: Contract = space.contract,
+  /** Union part names whose channels are consumed by promoted svg assets. */
+  svgConsumedParts?: Set<string>,
 ): MintPrep {
   const axes: MintAxis[] = space.axes.map((ax) => ({ propName: ax.prop, values: [...ax.values] }));
-  const partByName = new Map(walkAnatomy(space.contract).map((w) => [w.name, w.part] as const));
+  const partByName = new Map(walkAnatomy(contract).map((w) => [w.name, w.part] as const));
   const foldedSet = new Set(folds.map((f) => `${f.part}|${f.channel}`));
   const enabledCombos = space.enumeration.combos.filter(isEnabled);
 
@@ -496,6 +515,7 @@ export function prepareMint(
     const pairwiseRefusals: string[] = [];
     for (let pi = 0; pi < a.baseFlat.length; pi++) {
       const partName = a.partNames[pi];
+      if (svgConsumedParts?.has(partName)) continue; // svg internals: carried by the promoted icon asset (round 4)
       const carried = carriedChannels(partByName.get(partName));
       for (const channel of [...(styled.get(partName) ?? [])].sort()) {
         if (carried.has(channel)) continue;
@@ -580,6 +600,7 @@ export function prepareMint(
     for (const interaction of ['hover', 'focus-visible', 'active'] as Interaction[]) {
       const els = a.getAligned(`${combo.key}__${interaction}`);
       for (let pi = 0; pi < a.baseFlat.length; pi++) {
+        if (svgConsumedParts?.has(a.partNames[pi])) continue;
         const d0 = defaults[pi];
         const d1 = els[pi];
         if (!d0 || !d1) continue;
@@ -610,6 +631,7 @@ export function prepareMint(
       const d0 = a.getAligned(`${twin.key}__default`);
       const d1 = a.getAligned(`${combo.key}__default`);
       for (let pi = 0; pi < a.baseFlat.length; pi++) {
+        if (svgConsumedParts?.has(a.partNames[pi])) continue;
         if (!d0[pi] || !d1[pi]) continue;
         for (const p of allProps) {
           if (!isFusable(p)) continue;
@@ -783,6 +805,38 @@ export function applyMintToContract(
       const channel = parsed ? parsed.channel : obs.cssProperty;
       const state = parsed?.state;
       if (b.ref === null) {
+        // Round 4 base-plane literal fallback: an UNCORRELATED base channel
+        // still has one exact truth at the BASE combo — carried as a literal
+        // (bounded LITERAL_CHANNELS grammar) so the default plane renders
+        // right on every surface; the set planes stay NAMED residue.
+        if (!state) {
+          // NON-INHERITED box geometry only: inherited channels (color,
+          // typography) are usually RIGHT via CSS inheritance when absent —
+          // a base literal would break that (Button's primary label went
+          // dark). Paddings/sizes/radii/borders have no inheritance to lean
+          // on; absence there is a raw UA default.
+          const BASE_FALLBACK_CHANNELS = new Set([
+            'padding-left', 'padding-right', 'padding-top', 'padding-bottom',
+            'padding-block', 'padding-inline', 'gap',
+            'height', 'width', 'min-width', 'min-height',
+            'border-radius', 'border-width',
+            'border-top-left-radius', 'border-top-right-radius',
+            'border-bottom-left-radius', 'border-bottom-right-radius',
+            'border-top-width', 'border-right-width', 'border-bottom-width', 'border-left-width',
+          ]);
+          const target0 = partByName.get(partName);
+          const baseOcc = obs.occurrences.find((o) => o.variant === space.baseComboKey);
+          if (target0 && baseOcc !== undefined && BASE_FALLBACK_CHANNELS.has(channel) && LITERAL_CHANNELS.has(channel)) {
+            const lit = obs.kind === 'px' ? `${baseOcc.value}px` : obs.kind === 'color' ? `#${baseOcc.value}` : obs.kind === 'number' ? String(baseOcc.value) : null;
+            if (lit !== null && LITERAL_VALUE_RE.test(lit)) {
+              target0.literals ??= {};
+              if (!(channel in target0.literals)) {
+                target0.literals[channel] = lit;
+                enrichmentNotes.push(`base-plane literal carried: ${partName}.${channel} = ${lit} (uncorrelated across planes — the base combo's exact value; set planes remain named residue)`);
+              }
+            }
+          }
+        }
         overflowBindings.push({ part: partName, channel, ...(state ? { state } : {}), refusal: b.reason ?? 'uncorrelated' });
         return;
       }
@@ -802,6 +856,10 @@ export function applyMintToContract(
         const declareState = () => {
           if (!(enriched.states as string[]).includes(state)) (enriched.states as string[]).push(state as never);
         };
+        if (phs.some((p) => space.presence.has(p))) {
+          overflowBindings.push({ part: partName, channel, state, ref: b.ref, refusal: 'presence-prop state ref — boolean substitution has no spelling (round 4 residue)' });
+          return;
+        }
         if (partName !== 'root') {
           // v13 Part.states: color-kind channels, plain refs only
           if (!['color', 'background-color', 'border-color'].includes(channel) || phs.length > 0) {
@@ -864,6 +922,13 @@ export function applyMintToContract(
           overflowBindings.push({ part: partName, channel, ref: b.ref, refusal: `substituted axis "${axisProp}" not an enumerated axis` });
           return;
         }
+        if (space.presence.has(axisProp)) {
+          // Round 4: presence axes are BOOLEAN contract props — tokensByProp
+          // has no boolean spelling; presence-driven styling is named residue
+          // (the created SUBTREE itself is carried via visibleWhen instead).
+          overflowBindings.push({ part: partName, channel, ref: b.ref, refusal: `presence-prop-driven styling (${axisProp}) — boolean tokensByProp has no spelling (round 4 residue)` });
+          return;
+        }
         const groupBase = inner.replace(`.{${axisProp}}`, '');
         if (axis.unset !== undefined) {
           // S2: the unset value's leaf is the BASE binding; set values ride
@@ -885,6 +950,10 @@ export function applyMintToContract(
           return;
         }
         const [pa, pb] = phs; // leaf-path order (mint axis discovery order)
+        if (space.presence.has(pa) || space.presence.has(pb)) {
+          overflowBindings.push({ part: partName, channel, ref: b.ref, refusal: 'presence-prop pair ref — boolean tokensByProp has no spelling (round 4 residue)' });
+          return;
+        }
         const ua = unsetAxes.get(pa);
         const ub = unsetAxes.get(pb);
         if (ua !== undefined && ub !== undefined) {

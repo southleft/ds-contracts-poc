@@ -362,6 +362,10 @@ function componentCss(contract: Contract): string[] {
     if (p[0] === 'root' && p.length === 1) continue;
     if (part.component) continue; // instances style themselves via their own contract
     const decls: string[] = layoutDecls(part);
+    // UA-margin neutralization on NESTED parts (round 4): a promoted h2/p/ul
+    // part would leak UA margins the real component resets — same discipline
+    // as the root rule; captured nonzero margins arrive as minted overrides.
+    if (part.element && UA_MARGIN_ELEMENTS.has(part.element)) decls.push('margin: 0');
     if (part.overlay) decls.push('position: absolute', ...OVERLAY_CSS[part.overlay.placement]);
     // v9 shape: the shared projection (scripts/contract-schema.ts).
     if (part.shape) decls.push(...shapeCssDecls(part.shape));
@@ -370,6 +374,14 @@ function componentCss(contract: Contract): string[] {
         'appearance: none', 'background: none', 'border: none', 'margin: 0', 'padding: 0',
         'font: inherit', 'color: inherit', 'text-align: inherit', 'cursor: pointer',
       );
+    }
+    // Round 4: a promoted TEXT-entry control (input/textarea/select part
+    // that is not the checkable pattern) neutralizes UA chrome — the real
+    // component resets it and the capture cannot see agreement-with-UA
+    // channels (control-baseline blind spot); carried facts then apply.
+    if (!isNativeCheckablePart(part) && (part.element === 'input' || part.element === 'textarea' || part.element === 'select')) {
+      decls.push('appearance: none', 'border: none', 'background: transparent',
+        'font: inherit', 'color: inherit', 'letter-spacing: inherit', 'margin: 0', 'padding: 0', 'outline: none');
     }
     // Native checkable inputs: the real control covers its presentational
     // box invisibly — mirrors core/emit-react.ts generateCss.
@@ -381,9 +393,13 @@ function componentCss(contract: Contract): string[] {
     }
     if (part.icon) {
       decls.push('display: inline-flex', 'flex-shrink: 0');
-      if (part.icon.size) {
-        rule(`${partCls(name)} svg`, [`width: ${part.icon.size}px`, `height: ${part.icon.size}px`]);
-      }
+      // the glyph svg renders block — an inline svg's baseline gap would
+      // inflate the icon box (round 4: promoted icon hosts carry their own
+      // captured display, which may be block; the glyph must not add ~4px).
+      rule(`${partCls(name)} svg`, [
+        'display: block',
+        ...(part.icon.size ? [`width: ${part.icon.size}px`, `height: ${part.icon.size}px`] : []),
+      ]);
       if (part.element === 'button') {
         decls.push('align-items: center', 'justify-content: center', 'background: none',
           'border: none', 'padding: 0', 'color: inherit', 'cursor: pointer');
@@ -436,6 +452,12 @@ function componentCss(contract: Contract): string[] {
     // descendant rules under the root's state selector.
     for (const [cssProp, value] of Object.entries(part.declared ?? {})) {
       decls.push(`${cssProp}: ${value}`);
+    }
+    // Round 4: an absolutely-positioned REPLACED part (promoted Thumbnail
+    // img) fills its inset box — for replaced elements, auto width under
+    // inset-0 resolves to the intrinsic size, so the fill is emitter chrome.
+    if (part.element === 'img' && part.declared?.['position'] === 'absolute') {
+      decls.push('width: 100%', 'height: 100%');
     }
     for (const [state, overrides] of Object.entries(part.declaredStates ?? {})) {
       const sel = STATE_SELECTORS[state];

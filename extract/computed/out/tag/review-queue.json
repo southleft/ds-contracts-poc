@@ -4,26 +4,5 @@
   "contract": "examples/polaris/extraction/static-contracts/tag.contract.json",
   "generatedBy": "extract/computed/run.ts",
   "browser": "148.0.7778.96",
-  "items": [
-    {
-      "id": "enabled|label|line-height",
-      "combo": "enabled",
-      "part": "label",
-      "channel": "line-height",
-      "ref": "{p.text-body-sm-font-line-height}",
-      "computedProp": "line-height",
-      "expected": "16px",
-      "observed": "20px",
-      "cause": "REAL STALE BINDING caught by the floor: Tag.module.css sets line-height {p.font-line-height-500} (20px) on its own inner .Polaris-Tag__Text span, overriding the carried Text-primitive bodySm chain (16px) the promotion bound; the showcase's verify.ts compared the Text root element, not the inner span the floor names `label` — resolve via the review queue (--to {p.font-line-height-500}; six tokens share the 20px value, so the explicit ref is required)",
-      "candidates": [
-        "p.border-radius-500",
-        "p.font-line-height-500",
-        "p.font-size-500",
-        "p.height-500",
-        "p.space-500",
-        "p.width-500"
-      ],
-      "status": "open"
-    }
-  ]
+  "items": []
 }

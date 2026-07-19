@@ -4,11 +4,62 @@
   "name": "Badge",
   "version": "0.1.0",
   "status": "draft",
-  "description": "PROPOSED contract extracted from examples/polaris/.polaris-clone/polaris-react/src/components/Badge/Badge.tsx (react-tsx + css-module adapters) — API surface AND anatomy (structure, token bindings, layout, states) read from source; design bindings await reconciliation and human review. PROMOTED showcase contract: API surface extracted mechanically from Shopify/polaris @ 2b1ea88625e0613853ca8577c9acd1980a90f382 (polaris-react 13.10.1, MIT © Shopify, extracted 2026-07-18); styling bindings promoted from the component's own module.css under the reviewed class map in examples/polaris/scripts/curation.ts — every carried binding and every named refusal is listed in examples/polaris/extraction/PROMOTION.md. COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @shopify/polaris@13.9.5 in headless Chromium 148.0.7778.96; overflow channels in the sibling extension file.",
+  "description": "PROPOSED contract extracted from examples/polaris/.polaris-clone/polaris-react/src/components/Badge/Badge.tsx (react-tsx + css-module adapters) — API surface AND anatomy (structure, token bindings, layout, states) read from source; design bindings await reconciliation and human review. PROMOTED showcase contract: API surface extracted mechanically from Shopify/polaris @ 2b1ea88625e0613853ca8577c9acd1980a90f382 (polaris-react 13.10.1, MIT © Shopify, extracted 2026-07-18); styling bindings promoted from the component's own module.css under the reviewed class map in examples/polaris/scripts/curation.ts — every carried binding and every named refusal is listed in examples/polaris/extraction/PROMOTION.md. ROUND 4: single-tone static bindings on root (background-color/color/font-weight) and label typography REMOVED — the real tone/progress axes contest them per value; the computed floor rebuilds these channels from browser truth (S2 base + per-axis mint). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @shopify/polaris@13.9.5 in headless Chromium 148.0.7778.96; overflow channels in the sibling extension file.",
   "semantics": {
     "element": "span"
   },
   "props": [
+    {
+      "name": "tone",
+      "description": "Colors and labels the badge with the given tone (round 4: enumerated from the real @shopify/polaris@13.9.5 Badge API — the static extraction had missed the styling axes entirely).",
+      "type": {
+        "enum": [
+          "info",
+          "success",
+          "warning",
+          "critical",
+          "attention",
+          "new",
+          "magic",
+          "info-strong",
+          "success-strong",
+          "warning-strong",
+          "critical-strong",
+          "attention-strong",
+          "read-only",
+          "enabled"
+        ]
+      },
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Tone"
+        },
+        "code": {
+          "prop": "tone"
+        }
+      }
+    },
+    {
+      "name": "progress",
+      "description": "Render a pip showing the progress of a given task (round 4: real Badge API axis).",
+      "type": {
+        "enum": [
+          "incomplete",
+          "partiallyComplete",
+          "complete"
+        ]
+      },
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Progress"
+        },
+        "code": {
+          "prop": "progress"
+        }
+      }
+    },
     {
       "name": "toneAndProgressLabelOverride",
       "description": "Pass a custom accessibilityLabel",
@@ -28,33 +79,633 @@
   "anatomy": {
     "root": {
       "layout": {
-        "display": "inline-flex",
+        "display": "flex",
         "align": "center"
       },
       "tokens": {
-        "background-color": "{p.color-bg-fill-transparent-secondary}",
-        "color": "{p.color-text-secondary}",
         "border-radius": "{p.border-radius-200}",
         "padding-block": "{p.space-050}",
         "padding-inline": "{p.space-200}",
-        "font-weight": "{p.font-weight-medium}",
+        "background-color": "{imported.badge.root.background-color.none}",
         "border-bottom-left-radius": "{imported.shared.size-8}",
         "border-bottom-right-radius": "{imported.shared.size-8}",
-        "border-top-right-radius": "{imported.shared.size-8}"
+        "border-top-right-radius": "{imported.shared.size-8}",
+        "color": "{imported.badge.root.color.none}",
+        "font-weight": "{imported.badge.root.font-weight.none}"
       },
       "parts": {
+        "label-2": {
+          "text": "Info",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy span|Text|sr-only — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "none",
+            "overflow-x": "hidden",
+            "overflow-y": "hidden",
+            "position": "absolute",
+            "text-wrap-mode": "nowrap"
+          },
+          "tokens": {
+            "bottom": "{imported.badge.label-2.bottom}",
+            "left": "{imported.badge.label-2.left}",
+            "min-height": "{imported.shared.size-0}",
+            "min-width": "{imported.shared.size-0}",
+            "right": "{imported.badge.label-2.right}",
+            "top": "{imported.shared.size-0}"
+          }
+        },
+        "icon": {
+          "element": "span",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy span|Badge__Icon — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "none"
+          },
+          "stylesWhen": [
+            {
+              "prop": "progress",
+              "equals": "incomplete",
+              "styles": {
+                "display": "block"
+              }
+            },
+            {
+              "prop": "progress",
+              "equals": "partiallyComplete",
+              "styles": {
+                "display": "block"
+              }
+            },
+            {
+              "prop": "progress",
+              "equals": "complete",
+              "styles": {
+                "display": "block"
+              }
+            }
+          ],
+          "parts": {
+            "icon-2": {
+              "element": "span",
+              "description": "Promoted from the computed floor (round 4): rendered anatomy span|Icon — this element exists in the real component's DOM; the static layer had no part for it.",
+              "declared": {
+                "display": "none",
+                "max-height": "100%",
+                "max-width": "100%"
+              },
+              "stylesWhen": [
+                {
+                  "prop": "progress",
+                  "equals": "incomplete",
+                  "styles": {
+                    "display": "block"
+                  }
+                },
+                {
+                  "prop": "progress",
+                  "equals": "partiallyComplete",
+                  "styles": {
+                    "display": "block"
+                  }
+                },
+                {
+                  "prop": "progress",
+                  "equals": "complete",
+                  "styles": {
+                    "display": "block"
+                  }
+                }
+              ],
+              "parts": {
+                "label-3": {
+                  "text": "Incomplete",
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy span|Text|sr-only — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "declared": {
+                    "display": "none",
+                    "overflow-x": "hidden",
+                    "overflow-y": "hidden",
+                    "position": "absolute",
+                    "text-wrap-mode": "nowrap"
+                  },
+                  "tokens": {
+                    "bottom": "{imported.badge.label-3.bottom}",
+                    "color": "{imported.badge.label-3.color.none}",
+                    "font-weight": "{imported.badge.label-3.font-weight.none}",
+                    "left": "{imported.badge.label-3.left}",
+                    "min-height": "{imported.shared.size-0}",
+                    "min-width": "{imported.shared.size-0}",
+                    "right": "{imported.badge.label-3.right}",
+                    "top": "{imported.shared.size-0}"
+                  },
+                  "tokensByProp": [
+                    {
+                      "prop": "tone",
+                      "map": {
+                        "attention": {
+                          "color": "{imported.badge.label-3.color.attention}",
+                          "font-weight": "{imported.badge.label-3.font-weight.attention}"
+                        },
+                        "attention-strong": {
+                          "color": "{imported.badge.label-3.color.attention-strong}",
+                          "font-weight": "{imported.badge.label-3.font-weight.attention-strong}"
+                        },
+                        "critical": {
+                          "color": "{imported.badge.label-3.color.critical}",
+                          "font-weight": "{imported.badge.label-3.font-weight.critical}"
+                        },
+                        "critical-strong": {
+                          "color": "{imported.badge.label-3.color.critical-strong}",
+                          "font-weight": "{imported.badge.label-3.font-weight.critical-strong}"
+                        },
+                        "enabled": {
+                          "color": "{imported.badge.label-3.color.enabled}",
+                          "font-weight": "{imported.badge.label-3.font-weight.enabled}"
+                        },
+                        "info": {
+                          "color": "{imported.badge.label-3.color.info}",
+                          "font-weight": "{imported.badge.label-3.font-weight.info}"
+                        },
+                        "info-strong": {
+                          "color": "{imported.badge.label-3.color.info-strong}",
+                          "font-weight": "{imported.badge.label-3.font-weight.info-strong}"
+                        },
+                        "magic": {
+                          "color": "{imported.badge.label-3.color.magic}",
+                          "font-weight": "{imported.badge.label-3.font-weight.magic}"
+                        },
+                        "new": {
+                          "color": "{imported.badge.label-3.color.new}",
+                          "font-weight": "{imported.badge.label-3.font-weight.new}"
+                        },
+                        "read-only": {
+                          "color": "{imported.badge.label-3.color.read-only}",
+                          "font-weight": "{imported.badge.label-3.font-weight.read-only}"
+                        },
+                        "success": {
+                          "color": "{imported.badge.label-3.color.success}",
+                          "font-weight": "{imported.badge.label-3.font-weight.success}"
+                        },
+                        "success-strong": {
+                          "color": "{imported.badge.label-3.color.success-strong}",
+                          "font-weight": "{imported.badge.label-3.font-weight.success-strong}"
+                        },
+                        "warning": {
+                          "color": "{imported.badge.label-3.color.warning}",
+                          "font-weight": "{imported.badge.label-3.font-weight.warning}"
+                        },
+                        "warning-strong": {
+                          "color": "{imported.badge.label-3.color.warning-strong}",
+                          "font-weight": "{imported.badge.label-3.font-weight.warning-strong}"
+                        }
+                      }
+                    }
+                  ]
+                },
+                "icon-3": {
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy svg| — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "declared": {
+                    "display": "none",
+                    "overflow-x": "hidden",
+                    "overflow-y": "hidden"
+                  },
+                  "stylesWhen": [
+                    {
+                      "prop": "progress",
+                      "equals": "incomplete",
+                      "styles": {
+                        "display": "inline-block"
+                      }
+                    },
+                    {
+                      "prop": "progress",
+                      "equals": "partiallyComplete",
+                      "styles": {
+                        "display": "inline-block"
+                      }
+                    },
+                    {
+                      "prop": "progress",
+                      "equals": "complete",
+                      "styles": {
+                        "display": "inline-block"
+                      }
+                    }
+                  ],
+                  "parts": {
+                    "icon-3-incomplete": {
+                      "icon": {
+                        "asset": "badge-icon-3-incomplete",
+                        "size": 20
+                      },
+                      "visibleWhen": {
+                        "prop": "progress",
+                        "equals": "incomplete"
+                      },
+                      "description": "Per-value svg content promoted from the computed floor: the glyph drawn when progress=incomplete."
+                    },
+                    "icon-3-partiallycomplete": {
+                      "icon": {
+                        "asset": "badge-icon-3-partiallycomplete",
+                        "size": 20
+                      },
+                      "visibleWhen": {
+                        "prop": "progress",
+                        "equals": "partiallyComplete"
+                      },
+                      "description": "Per-value svg content promoted from the computed floor: the glyph drawn when progress=partiallyComplete."
+                    },
+                    "icon-3-complete": {
+                      "icon": {
+                        "asset": "badge-icon-3-complete",
+                        "size": 20
+                      },
+                      "visibleWhen": {
+                        "prop": "progress",
+                        "equals": "complete"
+                      },
+                      "description": "Per-value svg content promoted from the computed floor: the glyph drawn when progress=complete."
+                    }
+                  },
+                  "tokens": {
+                    "color": "{imported.badge.icon-3.color.none}",
+                    "fill": "{imported.badge.icon-3.fill.none}",
+                    "font-weight": "{imported.badge.icon-3.font-weight.none}",
+                    "min-height": "{imported.shared.size-0}",
+                    "min-width": "{imported.shared.size-0}"
+                  },
+                  "tokensByProp": [
+                    {
+                      "prop": "tone",
+                      "map": {
+                        "attention": {
+                          "color": "{imported.badge.icon-3.color.attention}",
+                          "fill": "{imported.badge.icon-3.fill.attention}",
+                          "font-weight": "{imported.badge.icon-3.font-weight.attention}"
+                        },
+                        "attention-strong": {
+                          "color": "{imported.badge.icon-3.color.attention-strong}",
+                          "fill": "{imported.badge.icon-3.fill.attention-strong}",
+                          "font-weight": "{imported.badge.icon-3.font-weight.attention-strong}"
+                        },
+                        "critical": {
+                          "color": "{imported.badge.icon-3.color.critical}",
+                          "fill": "{imported.badge.icon-3.fill.critical}",
+                          "font-weight": "{imported.badge.icon-3.font-weight.critical}"
+                        },
+                        "critical-strong": {
+                          "color": "{imported.badge.icon-3.color.critical-strong}",
+                          "fill": "{imported.badge.icon-3.fill.critical-strong}",
+                          "font-weight": "{imported.badge.icon-3.font-weight.critical-strong}"
+                        },
+                        "enabled": {
+                          "color": "{imported.badge.icon-3.color.enabled}",
+                          "fill": "{imported.badge.icon-3.fill.enabled}",
+                          "font-weight": "{imported.badge.icon-3.font-weight.enabled}"
+                        },
+                        "info": {
+                          "color": "{imported.badge.icon-3.color.info}",
+                          "fill": "{imported.badge.icon-3.fill.info}",
+                          "font-weight": "{imported.badge.icon-3.font-weight.info}"
+                        },
+                        "info-strong": {
+                          "color": "{imported.badge.icon-3.color.info-strong}",
+                          "fill": "{imported.badge.icon-3.fill.info-strong}",
+                          "font-weight": "{imported.badge.icon-3.font-weight.info-strong}"
+                        },
+                        "magic": {
+                          "color": "{imported.badge.icon-3.color.magic}",
+                          "fill": "{imported.badge.icon-3.fill.magic}",
+                          "font-weight": "{imported.badge.icon-3.font-weight.magic}"
+                        },
+                        "new": {
+                          "color": "{imported.badge.icon-3.color.new}",
+                          "fill": "{imported.badge.icon-3.fill.new}",
+                          "font-weight": "{imported.badge.icon-3.font-weight.new}"
+                        },
+                        "read-only": {
+                          "color": "{imported.badge.icon-3.color.read-only}",
+                          "fill": "{imported.badge.icon-3.fill.read-only}",
+                          "font-weight": "{imported.badge.icon-3.font-weight.read-only}"
+                        },
+                        "success": {
+                          "color": "{imported.badge.icon-3.color.success}",
+                          "fill": "{imported.badge.icon-3.fill.success}",
+                          "font-weight": "{imported.badge.icon-3.font-weight.success}"
+                        },
+                        "success-strong": {
+                          "color": "{imported.badge.icon-3.color.success-strong}",
+                          "fill": "{imported.badge.icon-3.fill.success-strong}",
+                          "font-weight": "{imported.badge.icon-3.font-weight.success-strong}"
+                        },
+                        "warning": {
+                          "color": "{imported.badge.icon-3.color.warning}",
+                          "fill": "{imported.badge.icon-3.fill.warning}",
+                          "font-weight": "{imported.badge.icon-3.font-weight.warning}"
+                        },
+                        "warning-strong": {
+                          "color": "{imported.badge.icon-3.color.warning-strong}",
+                          "fill": "{imported.badge.icon-3.fill.warning-strong}",
+                          "font-weight": "{imported.badge.icon-3.font-weight.warning-strong}"
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "tokens": {
+                "color": "{imported.badge.icon-2.color.none}",
+                "font-weight": "{imported.badge.icon-2.font-weight.none}",
+                "min-height": "{imported.shared.size-0}",
+                "min-width": "{imported.shared.size-0}"
+              },
+              "tokensByProp": [
+                {
+                  "prop": "tone",
+                  "map": {
+                    "attention": {
+                      "color": "{imported.badge.icon-2.color.attention}",
+                      "font-weight": "{imported.badge.icon-2.font-weight.attention}"
+                    },
+                    "attention-strong": {
+                      "color": "{imported.badge.icon-2.color.attention-strong}",
+                      "font-weight": "{imported.badge.icon-2.font-weight.attention-strong}"
+                    },
+                    "critical": {
+                      "color": "{imported.badge.icon-2.color.critical}",
+                      "font-weight": "{imported.badge.icon-2.font-weight.critical}"
+                    },
+                    "critical-strong": {
+                      "color": "{imported.badge.icon-2.color.critical-strong}",
+                      "font-weight": "{imported.badge.icon-2.font-weight.critical-strong}"
+                    },
+                    "enabled": {
+                      "color": "{imported.badge.icon-2.color.enabled}",
+                      "font-weight": "{imported.badge.icon-2.font-weight.enabled}"
+                    },
+                    "info": {
+                      "color": "{imported.badge.icon-2.color.info}",
+                      "font-weight": "{imported.badge.icon-2.font-weight.info}"
+                    },
+                    "info-strong": {
+                      "color": "{imported.badge.icon-2.color.info-strong}",
+                      "font-weight": "{imported.badge.icon-2.font-weight.info-strong}"
+                    },
+                    "magic": {
+                      "color": "{imported.badge.icon-2.color.magic}",
+                      "font-weight": "{imported.badge.icon-2.font-weight.magic}"
+                    },
+                    "new": {
+                      "color": "{imported.badge.icon-2.color.new}",
+                      "font-weight": "{imported.badge.icon-2.font-weight.new}"
+                    },
+                    "read-only": {
+                      "color": "{imported.badge.icon-2.color.read-only}",
+                      "font-weight": "{imported.badge.icon-2.font-weight.read-only}"
+                    },
+                    "success": {
+                      "color": "{imported.badge.icon-2.color.success}",
+                      "font-weight": "{imported.badge.icon-2.font-weight.success}"
+                    },
+                    "success-strong": {
+                      "color": "{imported.badge.icon-2.color.success-strong}",
+                      "font-weight": "{imported.badge.icon-2.font-weight.success-strong}"
+                    },
+                    "warning": {
+                      "color": "{imported.badge.icon-2.color.warning}",
+                      "font-weight": "{imported.badge.icon-2.font-weight.warning}"
+                    },
+                    "warning-strong": {
+                      "color": "{imported.badge.icon-2.color.warning-strong}",
+                      "font-weight": "{imported.badge.icon-2.font-weight.warning-strong}"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "tokens": {
+            "color": "{imported.badge.icon.color.none}",
+            "font-weight": "{imported.badge.icon.font-weight.none}",
+            "margin-bottom": "{imported.badge.icon.margin-bottom}",
+            "margin-left": "{imported.badge.icon.margin-left}",
+            "margin-top": "{imported.badge.icon.margin-top}"
+          },
+          "tokensByProp": [
+            {
+              "prop": "tone",
+              "map": {
+                "attention": {
+                  "color": "{imported.badge.icon.color.attention}",
+                  "font-weight": "{imported.badge.icon.font-weight.attention}"
+                },
+                "attention-strong": {
+                  "color": "{imported.badge.icon.color.attention-strong}",
+                  "font-weight": "{imported.badge.icon.font-weight.attention-strong}"
+                },
+                "critical": {
+                  "color": "{imported.badge.icon.color.critical}",
+                  "font-weight": "{imported.badge.icon.font-weight.critical}"
+                },
+                "critical-strong": {
+                  "color": "{imported.badge.icon.color.critical-strong}",
+                  "font-weight": "{imported.badge.icon.font-weight.critical-strong}"
+                },
+                "enabled": {
+                  "color": "{imported.badge.icon.color.enabled}",
+                  "font-weight": "{imported.badge.icon.font-weight.enabled}"
+                },
+                "info": {
+                  "color": "{imported.badge.icon.color.info}",
+                  "font-weight": "{imported.badge.icon.font-weight.info}"
+                },
+                "info-strong": {
+                  "color": "{imported.badge.icon.color.info-strong}",
+                  "font-weight": "{imported.badge.icon.font-weight.info-strong}"
+                },
+                "magic": {
+                  "color": "{imported.badge.icon.color.magic}",
+                  "font-weight": "{imported.badge.icon.font-weight.magic}"
+                },
+                "new": {
+                  "color": "{imported.badge.icon.color.new}",
+                  "font-weight": "{imported.badge.icon.font-weight.new}"
+                },
+                "read-only": {
+                  "color": "{imported.badge.icon.color.read-only}",
+                  "font-weight": "{imported.badge.icon.font-weight.read-only}"
+                },
+                "success": {
+                  "color": "{imported.badge.icon.color.success}",
+                  "font-weight": "{imported.badge.icon.font-weight.success}"
+                },
+                "success-strong": {
+                  "color": "{imported.badge.icon.color.success-strong}",
+                  "font-weight": "{imported.badge.icon.font-weight.success-strong}"
+                },
+                "warning": {
+                  "color": "{imported.badge.icon.color.warning}",
+                  "font-weight": "{imported.badge.icon.font-weight.warning}"
+                },
+                "warning-strong": {
+                  "color": "{imported.badge.icon.color.warning-strong}",
+                  "font-weight": "{imported.badge.icon.font-weight.warning-strong}"
+                }
+              }
+            }
+          ]
+        },
         "label": {
           "element": "span",
           "tokens": {
-            "font-size": "{p.text-body-sm-font-size}",
-            "font-weight": "{p.text-body-sm-font-weight}",
-            "line-height": "{p.text-body-sm-font-line-height}",
-            "letter-spacing": "{p.text-body-sm-font-letter-spacing}",
-            "color": "{imported.badge.label.color}"
+            "color": "{imported.badge.label.color.none}",
+            "font-size": "{imported.badge.label.font-size}",
+            "font-weight": "{imported.badge.label.font-weight.none}",
+            "line-height": "{imported.badge.label.line-height}"
           },
-          "text": "Fulfilled"
+          "text": "Fulfilled",
+          "declared": {
+            "display": "block"
+          },
+          "tokensByProp": [
+            {
+              "prop": "tone",
+              "map": {
+                "attention": {
+                  "color": "{imported.badge.label.color.attention}",
+                  "font-weight": "{imported.badge.label.font-weight.attention}"
+                },
+                "attention-strong": {
+                  "color": "{imported.badge.label.color.attention-strong}",
+                  "font-weight": "{imported.badge.label.font-weight.attention-strong}"
+                },
+                "critical": {
+                  "color": "{imported.badge.label.color.critical}",
+                  "font-weight": "{imported.badge.label.font-weight.critical}"
+                },
+                "critical-strong": {
+                  "color": "{imported.badge.label.color.critical-strong}",
+                  "font-weight": "{imported.badge.label.font-weight.critical-strong}"
+                },
+                "enabled": {
+                  "color": "{imported.badge.label.color.enabled}",
+                  "font-weight": "{imported.badge.label.font-weight.enabled}"
+                },
+                "info": {
+                  "color": "{imported.badge.label.color.info}",
+                  "font-weight": "{imported.badge.label.font-weight.info}"
+                },
+                "info-strong": {
+                  "color": "{imported.badge.label.color.info-strong}",
+                  "font-weight": "{imported.badge.label.font-weight.info-strong}"
+                },
+                "magic": {
+                  "color": "{imported.badge.label.color.magic}",
+                  "font-weight": "{imported.badge.label.font-weight.magic}"
+                },
+                "new": {
+                  "color": "{imported.badge.label.color.new}",
+                  "font-weight": "{imported.badge.label.font-weight.new}"
+                },
+                "read-only": {
+                  "color": "{imported.badge.label.color.read-only}",
+                  "font-weight": "{imported.badge.label.font-weight.read-only}"
+                },
+                "success": {
+                  "color": "{imported.badge.label.color.success}",
+                  "font-weight": "{imported.badge.label.font-weight.success}"
+                },
+                "success-strong": {
+                  "color": "{imported.badge.label.color.success-strong}",
+                  "font-weight": "{imported.badge.label.font-weight.success-strong}"
+                },
+                "warning": {
+                  "color": "{imported.badge.label.color.warning}",
+                  "font-weight": "{imported.badge.label.font-weight.warning}"
+                },
+                "warning-strong": {
+                  "color": "{imported.badge.label.color.warning-strong}",
+                  "font-weight": "{imported.badge.label.font-weight.warning-strong}"
+                }
+              }
+            }
+          ]
         }
-      }
+      },
+      "tokensByProp": [
+        {
+          "prop": "tone",
+          "map": {
+            "attention": {
+              "background-color": "{imported.badge.root.background-color.attention}",
+              "color": "{imported.badge.root.color.attention}",
+              "font-weight": "{imported.badge.root.font-weight.attention}"
+            },
+            "attention-strong": {
+              "background-color": "{imported.badge.root.background-color.attention-strong}",
+              "color": "{imported.badge.root.color.attention-strong}",
+              "font-weight": "{imported.badge.root.font-weight.attention-strong}"
+            },
+            "critical": {
+              "background-color": "{imported.badge.root.background-color.critical}",
+              "color": "{imported.badge.root.color.critical}",
+              "font-weight": "{imported.badge.root.font-weight.critical}"
+            },
+            "critical-strong": {
+              "background-color": "{imported.badge.root.background-color.critical-strong}",
+              "color": "{imported.badge.root.color.critical-strong}",
+              "font-weight": "{imported.badge.root.font-weight.critical-strong}"
+            },
+            "enabled": {
+              "background-color": "{imported.badge.root.background-color.enabled}",
+              "color": "{imported.badge.root.color.enabled}",
+              "font-weight": "{imported.badge.root.font-weight.enabled}"
+            },
+            "info": {
+              "background-color": "{imported.badge.root.background-color.info}",
+              "color": "{imported.badge.root.color.info}",
+              "font-weight": "{imported.badge.root.font-weight.info}"
+            },
+            "info-strong": {
+              "background-color": "{imported.badge.root.background-color.info-strong}",
+              "color": "{imported.badge.root.color.info-strong}",
+              "font-weight": "{imported.badge.root.font-weight.info-strong}"
+            },
+            "magic": {
+              "background-color": "{imported.badge.root.background-color.magic}",
+              "color": "{imported.badge.root.color.magic}",
+              "font-weight": "{imported.badge.root.font-weight.magic}"
+            },
+            "new": {
+              "background-color": "{imported.badge.root.background-color.new}",
+              "color": "{imported.badge.root.color.new}",
+              "font-weight": "{imported.badge.root.font-weight.new}"
+            },
+            "read-only": {
+              "background-color": "{imported.badge.root.background-color.read-only}",
+              "color": "{imported.badge.root.color.read-only}",
+              "font-weight": "{imported.badge.root.font-weight.read-only}"
+            },
+            "success": {
+              "background-color": "{imported.badge.root.background-color.success}",
+              "color": "{imported.badge.root.color.success}",
+              "font-weight": "{imported.badge.root.font-weight.success}"
+            },
+            "success-strong": {
+              "background-color": "{imported.badge.root.background-color.success-strong}",
+              "color": "{imported.badge.root.color.success-strong}",
+              "font-weight": "{imported.badge.root.font-weight.success-strong}"
+            },
+            "warning": {
+              "background-color": "{imported.badge.root.background-color.warning}",
+              "color": "{imported.badge.root.color.warning}",
+              "font-weight": "{imported.badge.root.font-weight.warning}"
+            },
+            "warning-strong": {
+              "background-color": "{imported.badge.root.background-color.warning-strong}",
+              "color": "{imported.badge.root.color.warning-strong}",
+              "font-weight": "{imported.badge.root.font-weight.warning-strong}"
+            }
+          }
+        }
+      ]
     }
   },
   "anchors": {

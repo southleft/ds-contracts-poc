@@ -189,6 +189,10 @@ export const LITERAL_CHANNELS = new Set([
   'border-top-left-radius', 'border-top-right-radius',
   'border-bottom-left-radius', 'border-bottom-right-radius',
   'border-top-width', 'border-right-width', 'border-bottom-width', 'border-left-width',
+  // Round 4: padding longhands — the base-plane literal fallback carries the
+  // base combo's captured paddings when per-plane values refuse correlation
+  // (Tag's remove-×/link planes shift them; the base plane is exact).
+  'padding-left', 'padding-right', 'padding-top', 'padding-bottom',
 ]);
 
 /** v14: per-enum-value literal overrides — the literals sibling of
@@ -286,12 +290,25 @@ export const DECLARED_CHANNELS: Record<string, DeclaredChannelSpec> = {
     canvas: 'annotate',
     note: 'Motion (spin, pulse, easing) runs only in the coded component; the canvas shows one still frame.',
   },
-  // -- positioning context (the position:relative class ONLY — absolute/
-  //    fixed/sticky belong to overlay/stylesWhen and refuse here) -----------
+  // -- positioning context. Round 4: 'absolute' joins the grammar for
+  //    PROMOTED inset overlays (Thumbnail's img, TextField's backdrop) — the
+  //    part's inset channels ride minted tokens; the canvas lowers the
+  //    inset-0 pattern to layoutPositioning ABSOLUTE (emit-figma-script
+  //    isInsetOverlay). fixed/sticky still refuse. --------------------------
   position: {
-    value: kw('relative', 'static'),
+    value: kw('relative', 'static', 'absolute'),
     canvas: 'annotate',
-    note: 'This element is a positioning context (position: relative) in code; Figma frames need no equivalent.',
+    note: 'Positioning context (relative) or an inset overlay (absolute, lowered to absolute positioning on canvas); fixed/sticky have no carried spelling.',
+  },
+  // -- intrinsic aspect (round 4): the real component keeps a square (or
+  //    fixed-ratio) box via pseudo-element padding hacks the anatomy cannot
+  //    carry — the RATIO is the fact (Avatar/Thumbnail 1:1), observed as
+  //    equal computed width/height in every combo. Code renders CSS
+  //    aspect-ratio; the canvas resolves height from the bound width. ------
+  'aspect-ratio': {
+    value: /^\d+(\.\d+)?( \/ \d+(\.\d+)?)?$/,
+    canvas: 'draw', // emit-figma-script sizes height = width / ratio when only width is bound
+    note: 'The intrinsic aspect ratio renders natively (height follows the bound width).',
   },
   // -- box constraints outside the token grammar ----------------------------
   'max-width': {

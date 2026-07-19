@@ -1,6 +1,11 @@
 /**
- * FLOOR PROMOTION (Round 2) — computed-floor enriched contracts REPLACE the
- * static-promotion showcase contracts.
+ * FLOOR PROMOTION (Round 4 — v0.3.0) — computed-floor enriched contracts
+ * REPLACE the static-promotion showcase contracts. Round 4 adds the
+ * DOM-ANATOMY PROMOTION: computed-only elements are REAL parts (Banner's
+ * tone ribbon + icon + dismiss + action row, Checkbox/Radio glyphs, Tag's
+ * remove button), svg content rides committed icon assets reconstructed
+ * from captured computed truth (copied into assets/icons here), and
+ * structure-creating optional props are boolean contract props.
  *
  *   npx tsx examples/polaris/scripts/promote-floor.ts
  *
@@ -84,6 +89,7 @@ const mergeInto = (dst: Record<string, unknown>, src: Record<string, unknown>) =
 
 const mintedMerged: Record<string, unknown> = {};
 const promotedIds: string[] = [];
+const promotedAssets: string[] = [];
 
 for (const { dir, kebab } of PROMOTED) {
   const outDir = path.join(OUT, dir);
@@ -97,18 +103,33 @@ for (const { dir, kebab } of PROMOTED) {
   const contract = readJson(src) as unknown as Contract;
   const extension = readJson(extensionPath);
 
+  // Round 4: floor-reconstructed svg assets → committed icon assets (the
+  // generators' shared map). Byte-copied; re-running is byte-stable.
+  const floorAssets = path.join(outDir, 'assets');
+  if (existsSync(floorAssets)) {
+    for (const f of readdirSync(floorAssets).sort()) {
+      if (!f.endsWith('.svg')) continue;
+      const body = readFileSync(path.join(floorAssets, f), 'utf8');
+      writeFileSync(path.join(EXAMPLE, 'assets', 'icons', f), body);
+      icons.set(f.replace(/\.svg$/, ''), body.trim());
+      promotedAssets.push(f);
+    }
+  }
+
   const browser = String(extension.browser ?? 'unknown');
   const library = String(extension.library ?? 'unknown');
-  contract.version = '0.2.0';
+  contract.version = '0.3.0';
   const resolvedNote = src === resolvedPath
     ? `contradictions resolved computed-wins per the decisions ledger (extract/computed/out/${dir}/decisions.md, human-acked; source resolved.contract.json)`
     : `zero binding contradictions in the review queue (source enriched.contract.json)`;
   contract.description =
-    `${contract.description} FLOOR-PROMOTED v0.2.0 (extract/computed round 2): this contract is the computed-floor ` +
+    `${contract.description} FLOOR-PROMOTED v0.3.0 (extract/computed round 4): this contract is the computed-floor ` +
     `rebuild — complete browser truth captured from the real ${library} npm package rendered in headless Chromium ` +
     `${browser} (every enumerated longhand per element incl. ::before/::after, full state sweep, double-run ` +
     `byte-identity), fused with the static semantic layer (BOUND bindings browser-confirmed, unlabeled channels ` +
-    `MINTED as imported.* tokens in tokens/polaris-minted.dtcg.json, uniform registry channels DECLARED), ` +
+    `MINTED as imported.* tokens in tokens/polaris-minted.dtcg.json, uniform registry channels DECLARED), with the ` +
+    `round-4 DOM-ANATOMY PROMOTION: every rendered element is a carried part, svg glyph content rides committed ` +
+    `icon assets reconstructed from the captured d/fill channels, presence facts gate structure-creating props, ` +
     `${resolvedNote}. Everything the vocabulary cannot carry is named in ` +
     `contracts/${kebab}.extension.json. Delta ledger: extract/computed/out/${dir}/LEDGER.md (supersedes this ` +
     `component's section of extraction/PROMOTION.md).`;
@@ -151,11 +172,11 @@ for (const { dir, kebab } of PROMOTED) {
   );
   mergeInto(mintedMerged, (extension.mintedTokens ?? {}) as Record<string, unknown>);
   promotedIds.push(contract.id);
-  console.log(`✔ ${contract.id} v0.2.0 promoted from ${path.relative(REPO, src)}`);
+  console.log(`✔ ${contract.id} v${contract.version} promoted from ${path.relative(REPO, src)}`);
 }
 
 writeFileSync(
   path.join(EXAMPLE, 'tokens', 'polaris-minted.dtcg.json'),
   JSON.stringify(mintedMerged, null, 2) + '\n',
 );
-console.log(`✔ ${promotedIds.length} contracts promoted; minted token tree → tokens/polaris-minted.dtcg.json`);
+console.log(`✔ ${promotedIds.length} contracts promoted; minted token tree → tokens/polaris-minted.dtcg.json; ${promotedAssets.length} floor-reconstructed icon assets → assets/icons/`);

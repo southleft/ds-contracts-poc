@@ -1,12 +1,12 @@
 {
   "component": "Checkbox",
   "browser": "148.0.7778.96",
-  "captures": 8,
-  "combos": 2,
+  "captures": 24,
+  "combos": 6,
   "interactions": 4,
   "enumerationPolicy": "full-cartesian",
   "channelsEnumerated": 942,
-  "elementsPerCapture": 10,
+  "elementsPerCapture": 13,
   "determinism": "byte-identical across two full sweeps in one session",
   "styledChannels": {
     "root": 6,
@@ -14,14 +14,17 @@
     "checkbox": 10,
     "input": 27,
     "backdrop": 28,
-    "icon": 14,
-    "icon-2": 24,
-    "part-0.0.2.0.0": 27,
+    "icon": 19,
+    "icon-3": 8,
+    "icon-4": 25,
+    "part-0-0-2-0-0-0": 18,
+    "icon-2": 25,
+    "part-0-0-2-0-0": 31,
     "choice__label": 1,
     "label": 4
   },
   "folds": {
-    "count": 26,
+    "count": 44,
     "receipts": [
       {
         "part": "input",
@@ -72,6 +75,114 @@
         "class": "currentColor"
       },
       {
+        "part": "icon-4",
+        "channel": "border-bottom-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "icon-4",
+        "channel": "border-left-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "icon-4",
+        "channel": "border-right-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "icon-4",
+        "channel": "border-top-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "icon-4",
+        "channel": "caret-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "icon-4",
+        "channel": "column-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "icon-4",
+        "channel": "outline-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "icon-4",
+        "channel": "text-decoration-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "icon-4",
+        "channel": "text-emphasis-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "part-0-0-2-0-0-0",
+        "channel": "border-bottom-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "part-0-0-2-0-0-0",
+        "channel": "border-left-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "part-0-0-2-0-0-0",
+        "channel": "border-right-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "part-0-0-2-0-0-0",
+        "channel": "border-top-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "part-0-0-2-0-0-0",
+        "channel": "caret-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "part-0-0-2-0-0-0",
+        "channel": "column-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "part-0-0-2-0-0-0",
+        "channel": "outline-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "part-0-0-2-0-0-0",
+        "channel": "text-decoration-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "part-0-0-2-0-0-0",
+        "channel": "text-emphasis-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
         "part": "icon-2",
         "channel": "border-bottom-color",
         "foldedInto": "color",
@@ -126,96 +237,101 @@
         "class": "currentColor"
       },
       {
-        "part": "part-0.0.2.0.0",
+        "part": "part-0-0-2-0-0",
         "channel": "border-bottom-color",
         "foldedInto": "color",
         "class": "currentColor"
       },
       {
-        "part": "part-0.0.2.0.0",
+        "part": "part-0-0-2-0-0",
         "channel": "border-left-color",
         "foldedInto": "color",
         "class": "currentColor"
       },
       {
-        "part": "part-0.0.2.0.0",
+        "part": "part-0-0-2-0-0",
         "channel": "border-right-color",
         "foldedInto": "color",
         "class": "currentColor"
       },
       {
-        "part": "part-0.0.2.0.0",
+        "part": "part-0-0-2-0-0",
         "channel": "border-top-color",
         "foldedInto": "color",
         "class": "currentColor"
       },
       {
-        "part": "part-0.0.2.0.0",
+        "part": "part-0-0-2-0-0",
         "channel": "caret-color",
         "foldedInto": "color",
         "class": "currentColor"
       },
       {
-        "part": "part-0.0.2.0.0",
+        "part": "part-0-0-2-0-0",
         "channel": "column-rule-color",
         "foldedInto": "color",
         "class": "currentColor"
       },
       {
-        "part": "part-0.0.2.0.0",
+        "part": "part-0-0-2-0-0",
         "channel": "outline-color",
         "foldedInto": "color",
         "class": "currentColor"
       },
       {
-        "part": "part-0.0.2.0.0",
+        "part": "part-0-0-2-0-0",
         "channel": "text-decoration-color",
         "foldedInto": "color",
         "class": "currentColor"
       },
       {
-        "part": "part-0.0.2.0.0",
+        "part": "part-0-0-2-0-0",
         "channel": "text-emphasis-color",
         "foldedInto": "color",
         "class": "currentColor"
       }
     ],
-    "mintedLeavesUnfolded": 25,
-    "mintedLeavesFolded": 31
+    "mintedLeavesUnfolded": 90,
+    "mintedLeavesFolded": 94
   },
   "bound": {
-    "cellsChecked": 2,
-    "confirmed": 1,
-    "contradictions": 1,
+    "cellsChecked": 3,
+    "confirmed": 0,
+    "contradictions": 3,
     "untriaged": 0
   },
   "minted": {
-    "leaves": 31,
-    "baseBindings": 67,
+    "leaves": 94,
+    "baseBindings": 64,
     "stateBindings": 47,
     "byShape": {
-      "uniform": 114,
-      "perAxis": 0,
+      "uniform": 87,
+      "perAxis": 23,
       "perPair": 0,
-      "refused": 0
+      "refused": 1
     }
   },
   "declared": {
-    "base": 16,
-    "state": 4
+    "base": 32,
+    "state": 9
   },
   "codeOnly": {
-    "base": 33,
-    "state": 7,
-    "overflowBindings": 80
+    "base": 10,
+    "state": 2,
+    "overflowBindings": 44
   },
   "pseudoElementFindings": 0,
+  "anatomyPromotion": {
+    "partsCarried": 10,
+    "svgAssets": 3,
+    "refusals": 0
+  },
   "enrichedContractSchemaValid": true,
   "enrichedContractGeneratorValid": true,
   "replayComputedEquality": {
-    "cellsCompared": 75200,
-    "cellsMatched": 75136,
-    "pct": 99.91489361702128,
+    "cellsCompared": 233120,
+    "cellsMatched": 232928,
+    "pct": 99.91763898421414,
     "namedExclusions": [
       "app-region",
       "text-decoration"
@@ -223,93 +339,93 @@
     "topMismatchedChannels": [
       [
         "inline-size",
-        16
+        48
       ],
       [
         "width",
-        16
+        48
       ],
       [
         "overflow-block",
-        8
+        24
       ],
       [
         "overflow-inline",
-        8
+        24
       ],
       [
         "overflow-x",
-        8
+        24
       ],
       [
         "overflow-y",
-        8
+        24
       ]
     ]
   },
   "pixel": {
-    "pairs": 8,
+    "pairs": 24,
     "exact": {
-      "mean": 0.00732421875,
-      "max": 0.0390625,
+      "mean": 0.06429036458333333,
+      "max": 0.1318359375,
       "perfect": 5
     },
     "aa": {
-      "mean": 0,
-      "max": 0,
-      "perfect": 8
+      "mean": 0.01614040798611111,
+      "max": 0.057779947916666664,
+      "perfect": 16
     },
     "worst": [
       {
-        "key": "enabled__focus-visible",
-        "pctExact": 0.0390625,
-        "pctAA": 0
+        "key": "checked.enabled__focus-visible",
+        "pctExact": 0.1318359375,
+        "pctAA": 0.057779947916666664
       },
       {
-        "key": "enabled__default",
-        "pctExact": 0.013020833333333334,
-        "pctAA": 0
+        "key": "checked.enabled__default",
+        "pctExact": 0.09928385416666667,
+        "pctAA": 0.057779947916666664
       },
       {
-        "key": "enabled__active",
-        "pctExact": 0.006510416666666667,
-        "pctAA": 0
+        "key": "checked.enabled__hover",
+        "pctExact": 0.09928385416666667,
+        "pctAA": 0.057779947916666664
       },
       {
-        "key": "enabled__hover",
-        "pctExact": 0,
-        "pctAA": 0
+        "key": "checked.enabled__active",
+        "pctExact": 0.09928385416666667,
+        "pctAA": 0.057779947916666664
       },
       {
-        "key": "disabled__default",
-        "pctExact": 0,
-        "pctAA": 0
+        "key": "indeterminate.enabled__focus-visible",
+        "pctExact": 0.12044270833333333,
+        "pctAA": 0.0390625
       },
       {
-        "key": "disabled__hover",
-        "pctExact": 0,
-        "pctAA": 0
+        "key": "indeterminate.enabled__default",
+        "pctExact": 0.087890625,
+        "pctAA": 0.0390625
       },
       {
-        "key": "disabled__focus-visible",
-        "pctExact": 0,
-        "pctAA": 0
+        "key": "indeterminate.enabled__hover",
+        "pctExact": 0.087890625,
+        "pctAA": 0.0390625
       },
       {
-        "key": "disabled__active",
-        "pctExact": 0,
-        "pctAA": 0
+        "key": "indeterminate.enabled__active",
+        "pctExact": 0.087890625,
+        "pctAA": 0.0390625
       }
     ]
   },
   "gate": {
-    "computedPctEqual": 79.09836065573771,
+    "computedPctEqual": 83.67857142857143,
     "rowsFullyEqual": 0,
-    "rows": 8,
+    "rows": 24,
     "pixelPerfectExact": 0,
     "pixelPerfectAA": 0,
-    "pairs": 8
+    "pairs": 24
   },
   "focusVisibleDriverMatched": 0,
-  "focusVisibleDriverTotal": 2
+  "focusVisibleDriverTotal": 6
 }

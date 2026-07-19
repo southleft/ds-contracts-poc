@@ -65,33 +65,8 @@
   "states": [],
   "anatomy": {
     "root": {
-      "parts": {
-        "glyphLarge": {
-          "tokens": {
-            "fill": "{p.color-bg-fill-brand}"
-          },
-          "icon": {
-            "asset": "polaris-spinner-large",
-            "size": 44
-          },
-          "visibleWhen": {
-            "prop": "size",
-            "equals": "large"
-          }
-        },
-        "glyphSmall": {
-          "tokens": {
-            "fill": "{p.color-bg-fill-brand}"
-          },
-          "icon": {
-            "asset": "polaris-spinner-small",
-            "size": 20
-          },
-          "visibleWhen": {
-            "prop": "size",
-            "equals": "small"
-          }
-        }
+      "declared": {
+        "display": "block"
       }
     }
   },

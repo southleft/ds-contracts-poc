@@ -17,6 +17,22 @@
         "size-8": {
           "$value": "8px",
           "$type": "dimension"
+        },
+        "size-4": {
+          "$value": "4px",
+          "$type": "dimension"
+        },
+        "size-2": {
+          "$value": "2px",
+          "$type": "dimension"
+        },
+        "size-neg-4": {
+          "$value": "-4px",
+          "$type": "dimension"
+        },
+        "size-32": {
+          "$value": "32px",
+          "$type": "dimension"
         }
       },
       "banner": {
@@ -110,14 +126,6 @@
               "$value": "#fffafb",
               "$type": "color"
             }
-          },
-          "column-gap": {
-            "$value": "4px",
-            "$type": "dimension"
-          },
-          "row-gap": {
-            "$value": "4px",
-            "$type": "dimension"
           }
         },
         "part-0-0-0-0-0-0": {
@@ -160,26 +168,8 @@
             }
           }
         },
-        "icon-2": {
+        "title": {
           "color": {
-            "success": {
-              "$value": "#fafffb",
-              "$type": "color"
-            },
-            "info": {
-              "$value": "#002133",
-              "$type": "color"
-            },
-            "warning": {
-              "$value": "#251a00",
-              "$type": "color"
-            },
-            "critical": {
-              "$value": "#fffafb",
-              "$type": "color"
-            }
-          },
-          "fill": {
             "success": {
               "$value": "#fafffb",
               "$type": "color"
@@ -198,66 +188,90 @@
             }
           }
         },
-        "part-0-0-0-0-0-0-0-0-0": {
-          "color": {
-            "success": {
-              "$value": "#fafffb",
-              "$type": "color"
-            },
-            "info": {
-              "$value": "#002133",
-              "$type": "color"
-            },
-            "warning": {
-              "$value": "#251a00",
-              "$type": "color"
-            },
-            "critical": {
-              "$value": "#fffafb",
-              "$type": "color"
-            }
+        "button": {
+          "background-color": {
+            "$value": "#00000000",
+            "$type": "color"
           },
-          "fill": {
-            "success": {
-              "$value": "#fafffb",
-              "$type": "color"
-            },
-            "info": {
-              "$value": "#002133",
-              "$type": "color"
-            },
-            "warning": {
-              "$value": "#251a00",
-              "$type": "color"
-            },
-            "critical": {
-              "$value": "#fffafb",
-              "$type": "color"
-            }
-          }
-        },
-        "label": {
           "color": {
-            "success": {
-              "$value": "#fafffb",
-              "$type": "color"
-            },
-            "info": {
-              "$value": "#002133",
-              "$type": "color"
-            },
-            "warning": {
-              "$value": "#251a00",
-              "$type": "color"
-            },
-            "critical": {
-              "$value": "#fffafb",
-              "$type": "color"
-            }
+            "$value": "#303030",
+            "$type": "color"
+          },
+          "font-size": {
+            "$value": "13px",
+            "$type": "dimension"
           },
           "font-weight": {
-            "$value": "650",
+            "$value": "450",
             "$type": "number"
+          },
+          "line-height": {
+            "$value": "20px",
+            "$type": "dimension"
+          }
+        },
+        "button-icon": {
+          "margin-bottom": {
+            "$value": "-2px",
+            "$type": "dimension"
+          },
+          "margin-top": {
+            "$value": "-2px",
+            "$type": "dimension"
+          }
+        },
+        "buttongroup": {
+          "margin-left": {
+            "$value": "-8px",
+            "$type": "dimension"
+          },
+          "margin-top": {
+            "$value": "-8px",
+            "$type": "dimension"
+          }
+        },
+        "button-2": {
+          "background-color": {
+            "$value": "#ffffff",
+            "$type": "color"
+          },
+          "box-shadow": {
+            "$value": "rgba(181, 181, 181, 1) 0px -1px 0px 0px inset, rgba(0, 0, 0, 0.1) 0px 0px 0px 1px inset, rgba(255, 255, 255, 1) 0px 0.5px 0px 1.5px inset",
+            "$type": "shadow"
+          },
+          "color": {
+            "$value": "#303030",
+            "$type": "color"
+          },
+          "font-size": {
+            "$value": "13px",
+            "$type": "dimension"
+          },
+          "font-weight": {
+            "$value": "450",
+            "$type": "number"
+          },
+          "line-height": {
+            "$value": "20px",
+            "$type": "dimension"
+          },
+          "padding-bottom": {
+            "$value": "6px",
+            "$type": "dimension"
+          },
+          "padding-top": {
+            "$value": "6px",
+            "$type": "dimension"
+          }
+        },
+        "label-3": {
+          "font-weight": {
+            "$value": "550",
+            "$type": "number"
+          },
+          "line-height": {
+            "$value": "16px",
+            "$type": "dimension"
           }
         }
       }
@@ -427,55 +441,55 @@
       "class": "currentColor"
     },
     {
-      "part": "part-0.0.0.0.0.0",
+      "part": "part-0-0-0-0-0-0",
       "channel": "border-bottom-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "part-0.0.0.0.0.0",
+      "part": "part-0-0-0-0-0-0",
       "channel": "border-left-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "part-0.0.0.0.0.0",
+      "part": "part-0-0-0-0-0-0",
       "channel": "border-right-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "part-0.0.0.0.0.0",
+      "part": "part-0-0-0-0-0-0",
       "channel": "border-top-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "part-0.0.0.0.0.0",
+      "part": "part-0-0-0-0-0-0",
       "channel": "caret-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "part-0.0.0.0.0.0",
+      "part": "part-0-0-0-0-0-0",
       "channel": "column-rule-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "part-0.0.0.0.0.0",
+      "part": "part-0-0-0-0-0-0",
       "channel": "outline-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "part-0.0.0.0.0.0",
+      "part": "part-0-0-0-0-0-0",
       "channel": "text-decoration-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "part-0.0.0.0.0.0",
+      "part": "part-0-0-0-0-0-0",
       "channel": "text-emphasis-color",
       "foldedInto": "color",
       "class": "currentColor"
@@ -589,217 +603,325 @@
       "class": "currentColor"
     },
     {
-      "part": "part-0.0.0.0.0.0.0.0.0",
+      "part": "part-0-0-0-0-0-0-0-0-0",
       "channel": "border-bottom-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "part-0.0.0.0.0.0.0.0.0",
+      "part": "part-0-0-0-0-0-0-0-0-0",
       "channel": "border-left-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "part-0.0.0.0.0.0.0.0.0",
+      "part": "part-0-0-0-0-0-0-0-0-0",
       "channel": "border-right-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "part-0.0.0.0.0.0.0.0.0",
+      "part": "part-0-0-0-0-0-0-0-0-0",
       "channel": "border-top-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "part-0.0.0.0.0.0.0.0.0",
+      "part": "part-0-0-0-0-0-0-0-0-0",
       "channel": "caret-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "part-0.0.0.0.0.0.0.0.0",
+      "part": "part-0-0-0-0-0-0-0-0-0",
       "channel": "column-rule-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "part-0.0.0.0.0.0.0.0.0",
+      "part": "part-0-0-0-0-0-0-0-0-0",
       "channel": "outline-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "part-0.0.0.0.0.0.0.0.0",
+      "part": "part-0-0-0-0-0-0-0-0-0",
       "channel": "text-decoration-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "part-0.0.0.0.0.0.0.0.0",
+      "part": "part-0-0-0-0-0-0-0-0-0",
       "channel": "text-emphasis-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "part-0.0.0.0.0.0.0.0.1",
+      "part": "part-0-0-0-0-0-0-0-0-1",
       "channel": "border-bottom-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "part-0.0.0.0.0.0.0.0.1",
+      "part": "part-0-0-0-0-0-0-0-0-1",
       "channel": "border-left-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "part-0.0.0.0.0.0.0.0.1",
+      "part": "part-0-0-0-0-0-0-0-0-1",
       "channel": "border-right-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "part-0.0.0.0.0.0.0.0.1",
+      "part": "part-0-0-0-0-0-0-0-0-1",
       "channel": "border-top-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "part-0.0.0.0.0.0.0.0.1",
+      "part": "part-0-0-0-0-0-0-0-0-1",
       "channel": "caret-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "part-0.0.0.0.0.0.0.0.1",
+      "part": "part-0-0-0-0-0-0-0-0-1",
       "channel": "column-rule-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "part-0.0.0.0.0.0.0.0.1",
+      "part": "part-0-0-0-0-0-0-0-0-1",
       "channel": "outline-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "part-0.0.0.0.0.0.0.0.1",
+      "part": "part-0-0-0-0-0-0-0-0-1",
       "channel": "text-decoration-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "part-0.0.0.0.0.0.0.0.1",
+      "part": "part-0-0-0-0-0-0-0-0-1",
       "channel": "text-emphasis-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "part-0.0.0.0.0.0.0.0.2",
+      "part": "part-0-0-0-0-0-0-0-0-2",
       "channel": "border-bottom-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "part-0.0.0.0.0.0.0.0.2",
+      "part": "part-0-0-0-0-0-0-0-0-2",
       "channel": "border-left-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "part-0.0.0.0.0.0.0.0.2",
+      "part": "part-0-0-0-0-0-0-0-0-2",
       "channel": "border-right-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "part-0.0.0.0.0.0.0.0.2",
+      "part": "part-0-0-0-0-0-0-0-0-2",
       "channel": "border-top-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "part-0.0.0.0.0.0.0.0.2",
+      "part": "part-0-0-0-0-0-0-0-0-2",
       "channel": "caret-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "part-0.0.0.0.0.0.0.0.2",
+      "part": "part-0-0-0-0-0-0-0-0-2",
       "channel": "column-rule-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "part-0.0.0.0.0.0.0.0.2",
+      "part": "part-0-0-0-0-0-0-0-0-2",
       "channel": "outline-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "part-0.0.0.0.0.0.0.0.2",
+      "part": "part-0-0-0-0-0-0-0-0-2",
       "channel": "text-decoration-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "part-0.0.0.0.0.0.0.0.2",
+      "part": "part-0-0-0-0-0-0-0-0-2",
       "channel": "text-emphasis-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "label",
+      "part": "title",
       "channel": "border-bottom-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "label",
+      "part": "title",
       "channel": "border-left-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "label",
+      "part": "title",
       "channel": "border-right-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "label",
+      "part": "title",
       "channel": "border-top-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "label",
+      "part": "title",
       "channel": "caret-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "label",
+      "part": "title",
       "channel": "column-rule-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "label",
+      "part": "title",
       "channel": "outline-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "label",
+      "part": "title",
       "channel": "text-decoration-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "label",
+      "part": "title",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "button",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "button",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "button",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "button",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "button",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "button",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "button",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "button",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "button",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "button-2",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "button-2",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "button-2",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "button-2",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "button-2",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "button-2",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "button-2",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "button-2",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "button-2",
       "channel": "text-emphasis-color",
       "foldedInto": "color",
       "class": "currentColor"
@@ -807,7 +929,68 @@
   ],
   "foldedStateSkips": [],
   "layout": {
-    "enriched": [],
+    "enriched": [
+      {
+        "part": "blockstack",
+        "field": "direction",
+        "value": "column"
+      },
+      {
+        "part": "blockstack",
+        "field": "justify",
+        "value": "space-between"
+      },
+      {
+        "part": "inlinestack",
+        "field": "align",
+        "value": "center"
+      },
+      {
+        "part": "inlinestack",
+        "field": "justify",
+        "value": "space-between"
+      },
+      {
+        "part": "inlinestack-2",
+        "field": "align",
+        "value": "center"
+      },
+      {
+        "part": "inlinestack-2",
+        "field": "justify",
+        "value": "space-between"
+      },
+      {
+        "part": "button",
+        "field": "align",
+        "value": "center"
+      },
+      {
+        "part": "button",
+        "field": "justify",
+        "value": "center"
+      },
+      {
+        "part": "blockstack-2",
+        "field": "direction",
+        "value": "column"
+      },
+      {
+        "part": "buttongroup",
+        "field": "align",
+        "value": "center"
+      },
+      {
+        "part": "button-2",
+        "field": "align",
+        "value": "center"
+      },
+      {
+        "part": "button-2",
+        "field": "justify",
+        "value": "center"
+      }
+    ],
     "contradictions": [],
     "receipts": [],
     "_note": "computed flex keywords carried via Part.layout (the schema's own vocabulary); carried-slot contradictions are receipts, never silent overrides"
@@ -819,6 +1002,196 @@
         "part": "root",
         "channel": "position",
         "value": "relative"
+      },
+      {
+        "part": "icon",
+        "channel": "max-height",
+        "value": "100%"
+      },
+      {
+        "part": "icon",
+        "channel": "max-width",
+        "value": "100%"
+      },
+      {
+        "part": "button",
+        "channel": "appearance",
+        "value": "none"
+      },
+      {
+        "part": "button",
+        "channel": "border-bottom-style",
+        "value": "none"
+      },
+      {
+        "part": "button",
+        "channel": "border-left-style",
+        "value": "none"
+      },
+      {
+        "part": "button",
+        "channel": "border-right-style",
+        "value": "none"
+      },
+      {
+        "part": "button",
+        "channel": "border-top-style",
+        "value": "none"
+      },
+      {
+        "part": "button",
+        "channel": "cursor",
+        "value": "pointer"
+      },
+      {
+        "part": "button",
+        "channel": "font-feature-settings",
+        "value": "\"calt\" 0"
+      },
+      {
+        "part": "button",
+        "channel": "position",
+        "value": "relative"
+      },
+      {
+        "part": "button",
+        "channel": "text-rendering",
+        "value": "optimizelegibility"
+      },
+      {
+        "part": "button",
+        "channel": "touch-action",
+        "value": "manipulation"
+      },
+      {
+        "part": "button",
+        "channel": "user-select",
+        "value": "none"
+      },
+      {
+        "part": "button__icon",
+        "channel": "cursor",
+        "value": "pointer"
+      },
+      {
+        "part": "button__icon",
+        "channel": "text-align",
+        "value": "center"
+      },
+      {
+        "part": "button__icon",
+        "channel": "user-select",
+        "value": "none"
+      },
+      {
+        "part": "part-0-0-0-0-1-0-0",
+        "channel": "cursor",
+        "value": "pointer"
+      },
+      {
+        "part": "part-0-0-0-0-1-0-0",
+        "channel": "text-align",
+        "value": "center"
+      },
+      {
+        "part": "part-0-0-0-0-1-0-0",
+        "channel": "user-select",
+        "value": "none"
+      },
+      {
+        "part": "icon-3",
+        "channel": "cursor",
+        "value": "pointer"
+      },
+      {
+        "part": "icon-3",
+        "channel": "max-height",
+        "value": "100%"
+      },
+      {
+        "part": "icon-3",
+        "channel": "max-width",
+        "value": "100%"
+      },
+      {
+        "part": "icon-3",
+        "channel": "text-align",
+        "value": "center"
+      },
+      {
+        "part": "icon-3",
+        "channel": "user-select",
+        "value": "none"
+      },
+      {
+        "part": "button-2",
+        "channel": "appearance",
+        "value": "none"
+      },
+      {
+        "part": "button-2",
+        "channel": "border-bottom-style",
+        "value": "none"
+      },
+      {
+        "part": "button-2",
+        "channel": "border-left-style",
+        "value": "none"
+      },
+      {
+        "part": "button-2",
+        "channel": "border-right-style",
+        "value": "none"
+      },
+      {
+        "part": "button-2",
+        "channel": "border-top-style",
+        "value": "none"
+      },
+      {
+        "part": "button-2",
+        "channel": "cursor",
+        "value": "pointer"
+      },
+      {
+        "part": "button-2",
+        "channel": "font-feature-settings",
+        "value": "\"calt\" 0"
+      },
+      {
+        "part": "button-2",
+        "channel": "position",
+        "value": "relative"
+      },
+      {
+        "part": "button-2",
+        "channel": "text-rendering",
+        "value": "optimizelegibility"
+      },
+      {
+        "part": "button-2",
+        "channel": "touch-action",
+        "value": "manipulation"
+      },
+      {
+        "part": "button-2",
+        "channel": "user-select",
+        "value": "none"
+      },
+      {
+        "part": "label-3",
+        "channel": "cursor",
+        "value": "pointer"
+      },
+      {
+        "part": "label-3",
+        "channel": "text-align",
+        "value": "center"
+      },
+      {
+        "part": "label-3",
+        "channel": "user-select",
+        "value": "none"
       }
     ],
     "state": [
@@ -832,545 +1205,35 @@
   },
   "codeOnlyChannels": [
     {
-      "part": "blockstack",
-      "channel": "display",
-      "reason": "declared-channel value outside the bounded grammar — named residue (v15)",
-      "sample": "flex",
-      "distinctValues": 1
-    },
-    {
-      "part": "blockstack",
-      "channel": "flex-direction",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "sample": "column",
-      "distinctValues": 1
-    },
-    {
-      "part": "blockstack",
-      "channel": "justify-content",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "sample": "space-between",
-      "distinctValues": 1
-    },
-    {
-      "part": "inlinestack",
-      "channel": "align-items",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "sample": "center",
-      "distinctValues": 1
-    },
-    {
-      "part": "inlinestack",
-      "channel": "display",
-      "reason": "declared-channel value outside the bounded grammar — named residue (v15)",
-      "sample": "flex",
-      "distinctValues": 1
-    },
-    {
-      "part": "inlinestack",
-      "channel": "justify-content",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "sample": "space-between",
-      "distinctValues": 1
-    },
-    {
-      "part": "inlinestack-2",
-      "channel": "align-items",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "sample": "center",
-      "distinctValues": 1
-    },
-    {
-      "part": "inlinestack-2",
-      "channel": "display",
-      "reason": "declared-channel value outside the bounded grammar — named residue (v15)",
-      "sample": "flex",
-      "distinctValues": 1
-    },
-    {
-      "part": "inlinestack-2",
-      "channel": "justify-content",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "sample": "space-between",
-      "distinctValues": 1
-    },
-    {
-      "part": "icon",
-      "channel": "max-height",
-      "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
-      "sample": "100%",
-      "distinctValues": 1
-    },
-    {
-      "part": "icon",
-      "channel": "max-width",
-      "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
-      "sample": "100%",
-      "distinctValues": 1
-    },
-    {
-      "part": "icon-2",
-      "channel": "max-height",
-      "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
-      "sample": "100%",
-      "distinctValues": 1
-    },
-    {
-      "part": "icon-2",
-      "channel": "max-width",
-      "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
-      "sample": "100%",
-      "distinctValues": 1
-    },
-    {
-      "part": "icon-2",
-      "channel": "overflow-clip-margin",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "sample": "content-box",
-      "distinctValues": 1
-    },
-    {
-      "part": "icon-2",
-      "channel": "overflow-x",
-      "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
-      "sample": "hidden",
-      "distinctValues": 1
-    },
-    {
-      "part": "icon-2",
-      "channel": "overflow-y",
-      "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
-      "sample": "hidden",
-      "distinctValues": 1
-    },
-    {
-      "part": "icon-2",
-      "channel": "position",
-      "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
-      "sample": "relative",
-      "distinctValues": 1
-    },
-    {
-      "part": "part-0.0.0.0.0.0.0.0.0",
-      "channel": "d",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "sample": "path(\"M 15.78 5.97 A 0.75 0.75 0 0 1 15.78 7.03 L 9.28 13.53 A 0.75 0.75 0 0 1 8.22 13.53 L 4.97 10.28 A 0.75 0.75 0 1 1 6.03 9.22 L 8.75 11.94 L 14.72 5.97 A 0.75 0.75 0 0 1 15.78 5.97 Z\")",
-      "distinctValues": 4
-    },
-    {
-      "part": "part-0.0.0.0.0.0.0.0.0",
-      "channel": "display",
-      "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
-      "sample": "inline",
-      "distinctValues": 1
-    },
-    {
-      "part": "part-0.0.0.0.0.0.0.0.0",
-      "channel": "fill-rule",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "sample": "evenodd",
-      "distinctValues": 2
-    },
-    {
-      "part": "part-0.0.0.0.0.0.0.0.1",
-      "channel": "d",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "sample": "path(\"M 9 7 A 1 1 0 1 1 11 7 A 1 1 0 0 1 9 7 Z\")",
-      "distinctValues": 3
-    },
-    {
-      "part": "part-0.0.0.0.0.0.0.0.1",
-      "channel": "display",
-      "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
-      "sample": "inline",
-      "distinctValues": 1
-    },
-    {
-      "part": "part-0.0.0.0.0.0.0.0.2",
-      "channel": "d",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "sample": "path(\"M 17 10 A 7 7 0 1 1 3 10 A 7 7 0 0 1 17 10 Z M 15.5 10 A 5.5 5.5 0 1 1 4.5 10 A 5.5 5.5 0 0 1 15.5 10 Z\")",
-      "distinctValues": 3
-    },
-    {
-      "part": "part-0.0.0.0.0.0.0.0.2",
-      "channel": "display",
-      "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
-      "sample": "inline",
-      "distinctValues": 1
-    },
-    {
-      "part": "part-0.0.0.0.0.0.0.0.2",
-      "channel": "fill-rule",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "sample": "evenodd",
-      "distinctValues": 1
-    },
-    {
-      "part": "label",
+      "part": "title",
       "channel": "overflow-wrap",
       "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "sample": "anywhere",
       "distinctValues": 1
     },
     {
-      "part": "label",
+      "part": "title",
       "channel": "unicode-bidi",
       "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "sample": "isolate",
       "distinctValues": 1
     },
     {
-      "part": "blockstack-2",
-      "channel": "display",
-      "reason": "declared-channel value outside the bounded grammar — named residue (v15)",
-      "sample": "flex",
-      "distinctValues": 1
-    },
-    {
-      "part": "blockstack-2",
-      "channel": "flex-direction",
+      "part": "buttongroup",
+      "channel": "flex-wrap",
       "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "sample": "column",
-      "distinctValues": 1
-    },
-    {
-      "part": "label-2",
-      "channel": "display",
-      "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
-      "sample": "inline",
+      "sample": "wrap",
       "distinctValues": 1
     }
   ],
   "stateOverflow": [],
-  "overflowBindings": [
-    {
-      "part": "blockstack",
-      "channel": "min-height",
-      "ref": "{imported.shared.size-0}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "blockstack",
-      "channel": "min-width",
-      "ref": "{imported.shared.size-0}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "box-2",
-      "channel": "background-color",
-      "ref": "{imported.banner.box-2.background-color.{tone}}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "box-2",
-      "channel": "border-top-left-radius",
-      "ref": "{imported.shared.size-12}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "box-2",
-      "channel": "border-top-right-radius",
-      "ref": "{imported.shared.size-12}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "box-2",
-      "channel": "color",
-      "ref": "{imported.banner.box-2.color.{tone}}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "box-2",
-      "channel": "padding-bottom",
-      "ref": "{imported.shared.size-12}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "box-2",
-      "channel": "padding-left",
-      "ref": "{imported.shared.size-12}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "box-2",
-      "channel": "padding-right",
-      "ref": "{imported.shared.size-12}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "box-2",
-      "channel": "padding-top",
-      "ref": "{imported.shared.size-12}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "inlinestack",
-      "channel": "color",
-      "ref": "{imported.banner.inlinestack.color.{tone}}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "inlinestack",
-      "channel": "column-gap",
-      "ref": "{imported.shared.size-8}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "inlinestack",
-      "channel": "min-height",
-      "ref": "{imported.shared.size-0}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "inlinestack",
-      "channel": "min-width",
-      "ref": "{imported.shared.size-0}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "inlinestack",
-      "channel": "row-gap",
-      "ref": "{imported.shared.size-8}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "inlinestack-2",
-      "channel": "color",
-      "ref": "{imported.banner.inlinestack-2.color.{tone}}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "inlinestack-2",
-      "channel": "column-gap",
-      "ref": "{imported.banner.inlinestack-2.column-gap}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "inlinestack-2",
-      "channel": "row-gap",
-      "ref": "{imported.banner.inlinestack-2.row-gap}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "part-0.0.0.0.0.0",
-      "channel": "color",
-      "ref": "{imported.banner.part-0-0-0-0-0-0.color.{tone}}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "icon",
-      "channel": "color",
-      "ref": "{imported.banner.icon.color.{tone}}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "icon",
-      "channel": "min-height",
-      "ref": "{imported.shared.size-0}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "icon",
-      "channel": "min-width",
-      "ref": "{imported.shared.size-0}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "icon-2",
-      "channel": "bottom",
-      "ref": "{imported.shared.size-0}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "icon-2",
-      "channel": "color",
-      "ref": "{imported.banner.icon-2.color.{tone}}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "icon-2",
-      "channel": "fill",
-      "ref": "{imported.banner.icon-2.fill.{tone}}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "icon-2",
-      "channel": "left",
-      "ref": "{imported.shared.size-0}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "icon-2",
-      "channel": "min-height",
-      "ref": "{imported.shared.size-0}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "icon-2",
-      "channel": "min-width",
-      "ref": "{imported.shared.size-0}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "icon-2",
-      "channel": "right",
-      "ref": "{imported.shared.size-0}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "icon-2",
-      "channel": "top",
-      "ref": "{imported.shared.size-0}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "part-0.0.0.0.0.0.0.0.0",
-      "channel": "color",
-      "ref": "{imported.banner.part-0-0-0-0-0-0-0-0-0.color.{tone}}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "part-0.0.0.0.0.0.0.0.0",
-      "channel": "fill",
-      "ref": "{imported.banner.part-0-0-0-0-0-0-0-0-0.fill.{tone}}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "part-0.0.0.0.0.0.0.0.0",
-      "channel": "min-height",
-      "ref": "{imported.shared.size-0}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "part-0.0.0.0.0.0.0.0.0",
-      "channel": "min-width",
-      "ref": "{imported.shared.size-0}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "part-0.0.0.0.0.0.0.0.1",
-      "channel": "color",
-      "refusal": "resolved values differ across variants without correlating to any variant axis — nothing minted; bind manually"
-    },
-    {
-      "part": "part-0.0.0.0.0.0.0.0.1",
-      "channel": "fill",
-      "refusal": "resolved values differ across variants without correlating to any variant axis — nothing minted; bind manually"
-    },
-    {
-      "part": "part-0.0.0.0.0.0.0.0.1",
-      "channel": "min-height",
-      "ref": "{imported.shared.size-0}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "part-0.0.0.0.0.0.0.0.1",
-      "channel": "min-width",
-      "ref": "{imported.shared.size-0}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "part-0.0.0.0.0.0.0.0.2",
-      "channel": "color",
-      "refusal": "resolved values differ across variants without correlating to any variant axis — nothing minted; bind manually"
-    },
-    {
-      "part": "part-0.0.0.0.0.0.0.0.2",
-      "channel": "fill",
-      "refusal": "resolved values differ across variants without correlating to any variant axis — nothing minted; bind manually"
-    },
-    {
-      "part": "part-0.0.0.0.0.0.0.0.2",
-      "channel": "min-height",
-      "ref": "{imported.shared.size-0}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "part-0.0.0.0.0.0.0.0.2",
-      "channel": "min-width",
-      "ref": "{imported.shared.size-0}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "label",
-      "channel": "color",
-      "ref": "{imported.banner.label.color.{tone}}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "label",
-      "channel": "font-weight",
-      "ref": "{imported.banner.label.font-weight}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "box-3",
-      "channel": "padding-bottom",
-      "ref": "{imported.shared.size-12}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "box-3",
-      "channel": "padding-left",
-      "ref": "{imported.shared.size-12}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "box-3",
-      "channel": "padding-right",
-      "ref": "{imported.shared.size-12}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "box-3",
-      "channel": "padding-top",
-      "ref": "{imported.shared.size-12}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "blockstack-2",
-      "channel": "column-gap",
-      "ref": "{imported.shared.size-8}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "blockstack-2",
-      "channel": "min-height",
-      "ref": "{imported.shared.size-0}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "blockstack-2",
-      "channel": "min-width",
-      "ref": "{imported.shared.size-0}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "blockstack-2",
-      "channel": "row-gap",
-      "ref": "{imported.shared.size-8}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "label-2",
-      "channel": "min-height",
-      "ref": "{imported.shared.size-0}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "label-2",
-      "channel": "min-width",
-      "ref": "{imported.shared.size-0}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    }
-  ],
+  "overflowBindings": [],
   "pairwiseRefusals": [],
   "pseudoParts": {
     "_reason": "S5 (DESIGN §5.4): pseudo-element decor has no anatomy spelling — captured, receipted, not carried",
     "findings": [
       {
-        "combo": "success",
+        "combo": "success.off.off",
         "interaction": "default",
         "part": "root",
         "pseudo": "::before",
@@ -1379,7 +1242,7 @@
         }
       },
       {
-        "combo": "info",
+        "combo": "success.off.on",
         "interaction": "default",
         "part": "root",
         "pseudo": "::before",
@@ -1388,7 +1251,7 @@
         }
       },
       {
-        "combo": "warning",
+        "combo": "success.on.off",
         "interaction": "default",
         "part": "root",
         "pseudo": "::before",
@@ -1397,7 +1260,79 @@
         }
       },
       {
-        "combo": "critical",
+        "combo": "success.on.on",
+        "interaction": "default",
+        "part": "root",
+        "pseudo": "::before",
+        "deltaVsDefault": {
+          "content": "\"\""
+        }
+      },
+      {
+        "combo": "info.off.off",
+        "interaction": "default",
+        "part": "root",
+        "pseudo": "::before",
+        "deltaVsDefault": {
+          "content": "\"\""
+        }
+      },
+      {
+        "combo": "info.off.on",
+        "interaction": "default",
+        "part": "root",
+        "pseudo": "::before",
+        "deltaVsDefault": {
+          "content": "\"\""
+        }
+      },
+      {
+        "combo": "info.on.off",
+        "interaction": "default",
+        "part": "root",
+        "pseudo": "::before",
+        "deltaVsDefault": {
+          "content": "\"\""
+        }
+      },
+      {
+        "combo": "info.on.on",
+        "interaction": "default",
+        "part": "root",
+        "pseudo": "::before",
+        "deltaVsDefault": {
+          "content": "\"\""
+        }
+      },
+      {
+        "combo": "warning.off.off",
+        "interaction": "default",
+        "part": "root",
+        "pseudo": "::before",
+        "deltaVsDefault": {
+          "content": "\"\""
+        }
+      },
+      {
+        "combo": "warning.off.on",
+        "interaction": "default",
+        "part": "root",
+        "pseudo": "::before",
+        "deltaVsDefault": {
+          "content": "\"\""
+        }
+      },
+      {
+        "combo": "warning.on.off",
+        "interaction": "default",
+        "part": "root",
+        "pseudo": "::before",
+        "deltaVsDefault": {
+          "content": "\"\""
+        }
+      },
+      {
+        "combo": "warning.on.on",
         "interaction": "default",
         "part": "root",
         "pseudo": "::before",
@@ -1406,11 +1341,11 @@
         }
       }
     ],
-    "totalFindings": 4
+    "totalFindings": 16
   },
   "bindingContradictions": [
     {
-      "combo": "success",
+      "combo": "success.off.off",
       "part": "root",
       "channel": "background-color",
       "ref": "{p.color-bg-fill-success}",
@@ -1421,7 +1356,7 @@
       "cause": "composition-owned tone surface: Polaris 13's DefaultBanner renders the tone fill/text on an inner Box ribbon (Box background=bg-fill-<tone> color=text-<tone>-on-bg-fill — Banner/utilities.js bannerAttributes.withinPage), NOT on the .Polaris-Banner root where the promotion bound the tone maps; the root is the white card (.Polaris-Banner { background-color: var(--p-color-bg-surface) }) with body-inherited text (html,body { color: var(--p-color-text) }). Resolve via the review queue with explicit refs (--to {p.color-bg-surface} / {p.color-text} — mechanical: the defining CSS rules name the tokens; several tokens share the resolved values). The tone ribbon colors ride the minted per-axis leaves on the inner box part."
     },
     {
-      "combo": "success",
+      "combo": "success.off.off",
       "part": "root",
       "channel": "color",
       "ref": "{p.color-text-success-on-bg-fill}",
@@ -1432,7 +1367,73 @@
       "cause": "composition-owned tone surface: Polaris 13's DefaultBanner renders the tone fill/text on an inner Box ribbon (Box background=bg-fill-<tone> color=text-<tone>-on-bg-fill — Banner/utilities.js bannerAttributes.withinPage), NOT on the .Polaris-Banner root where the promotion bound the tone maps; the root is the white card (.Polaris-Banner { background-color: var(--p-color-bg-surface) }) with body-inherited text (html,body { color: var(--p-color-text) }). Resolve via the review queue with explicit refs (--to {p.color-bg-surface} / {p.color-text} — mechanical: the defining CSS rules name the tokens; several tokens share the resolved values). The tone ribbon colors ride the minted per-axis leaves on the inner box part."
     },
     {
-      "combo": "info",
+      "combo": "success.off.on",
+      "part": "root",
+      "channel": "background-color",
+      "ref": "{p.color-bg-fill-success}",
+      "computedProp": "background-color",
+      "expected": "rgba(4, 123, 93, 1)",
+      "observed": "rgba(255, 255, 255, 1)",
+      "verdict": "contradiction",
+      "cause": "composition-owned tone surface: Polaris 13's DefaultBanner renders the tone fill/text on an inner Box ribbon (Box background=bg-fill-<tone> color=text-<tone>-on-bg-fill — Banner/utilities.js bannerAttributes.withinPage), NOT on the .Polaris-Banner root where the promotion bound the tone maps; the root is the white card (.Polaris-Banner { background-color: var(--p-color-bg-surface) }) with body-inherited text (html,body { color: var(--p-color-text) }). Resolve via the review queue with explicit refs (--to {p.color-bg-surface} / {p.color-text} — mechanical: the defining CSS rules name the tokens; several tokens share the resolved values). The tone ribbon colors ride the minted per-axis leaves on the inner box part."
+    },
+    {
+      "combo": "success.off.on",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text-success-on-bg-fill}",
+      "computedProp": "color",
+      "expected": "rgba(250, 255, 251, 1)",
+      "observed": "rgba(48, 48, 48, 1)",
+      "verdict": "contradiction",
+      "cause": "composition-owned tone surface: Polaris 13's DefaultBanner renders the tone fill/text on an inner Box ribbon (Box background=bg-fill-<tone> color=text-<tone>-on-bg-fill — Banner/utilities.js bannerAttributes.withinPage), NOT on the .Polaris-Banner root where the promotion bound the tone maps; the root is the white card (.Polaris-Banner { background-color: var(--p-color-bg-surface) }) with body-inherited text (html,body { color: var(--p-color-text) }). Resolve via the review queue with explicit refs (--to {p.color-bg-surface} / {p.color-text} — mechanical: the defining CSS rules name the tokens; several tokens share the resolved values). The tone ribbon colors ride the minted per-axis leaves on the inner box part."
+    },
+    {
+      "combo": "success.on.off",
+      "part": "root",
+      "channel": "background-color",
+      "ref": "{p.color-bg-fill-success}",
+      "computedProp": "background-color",
+      "expected": "rgba(4, 123, 93, 1)",
+      "observed": "rgba(255, 255, 255, 1)",
+      "verdict": "contradiction",
+      "cause": "composition-owned tone surface: Polaris 13's DefaultBanner renders the tone fill/text on an inner Box ribbon (Box background=bg-fill-<tone> color=text-<tone>-on-bg-fill — Banner/utilities.js bannerAttributes.withinPage), NOT on the .Polaris-Banner root where the promotion bound the tone maps; the root is the white card (.Polaris-Banner { background-color: var(--p-color-bg-surface) }) with body-inherited text (html,body { color: var(--p-color-text) }). Resolve via the review queue with explicit refs (--to {p.color-bg-surface} / {p.color-text} — mechanical: the defining CSS rules name the tokens; several tokens share the resolved values). The tone ribbon colors ride the minted per-axis leaves on the inner box part."
+    },
+    {
+      "combo": "success.on.off",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text-success-on-bg-fill}",
+      "computedProp": "color",
+      "expected": "rgba(250, 255, 251, 1)",
+      "observed": "rgba(48, 48, 48, 1)",
+      "verdict": "contradiction",
+      "cause": "composition-owned tone surface: Polaris 13's DefaultBanner renders the tone fill/text on an inner Box ribbon (Box background=bg-fill-<tone> color=text-<tone>-on-bg-fill — Banner/utilities.js bannerAttributes.withinPage), NOT on the .Polaris-Banner root where the promotion bound the tone maps; the root is the white card (.Polaris-Banner { background-color: var(--p-color-bg-surface) }) with body-inherited text (html,body { color: var(--p-color-text) }). Resolve via the review queue with explicit refs (--to {p.color-bg-surface} / {p.color-text} — mechanical: the defining CSS rules name the tokens; several tokens share the resolved values). The tone ribbon colors ride the minted per-axis leaves on the inner box part."
+    },
+    {
+      "combo": "success.on.on",
+      "part": "root",
+      "channel": "background-color",
+      "ref": "{p.color-bg-fill-success}",
+      "computedProp": "background-color",
+      "expected": "rgba(4, 123, 93, 1)",
+      "observed": "rgba(255, 255, 255, 1)",
+      "verdict": "contradiction",
+      "cause": "composition-owned tone surface: Polaris 13's DefaultBanner renders the tone fill/text on an inner Box ribbon (Box background=bg-fill-<tone> color=text-<tone>-on-bg-fill — Banner/utilities.js bannerAttributes.withinPage), NOT on the .Polaris-Banner root where the promotion bound the tone maps; the root is the white card (.Polaris-Banner { background-color: var(--p-color-bg-surface) }) with body-inherited text (html,body { color: var(--p-color-text) }). Resolve via the review queue with explicit refs (--to {p.color-bg-surface} / {p.color-text} — mechanical: the defining CSS rules name the tokens; several tokens share the resolved values). The tone ribbon colors ride the minted per-axis leaves on the inner box part."
+    },
+    {
+      "combo": "success.on.on",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text-success-on-bg-fill}",
+      "computedProp": "color",
+      "expected": "rgba(250, 255, 251, 1)",
+      "observed": "rgba(48, 48, 48, 1)",
+      "verdict": "contradiction",
+      "cause": "composition-owned tone surface: Polaris 13's DefaultBanner renders the tone fill/text on an inner Box ribbon (Box background=bg-fill-<tone> color=text-<tone>-on-bg-fill — Banner/utilities.js bannerAttributes.withinPage), NOT on the .Polaris-Banner root where the promotion bound the tone maps; the root is the white card (.Polaris-Banner { background-color: var(--p-color-bg-surface) }) with body-inherited text (html,body { color: var(--p-color-text) }). Resolve via the review queue with explicit refs (--to {p.color-bg-surface} / {p.color-text} — mechanical: the defining CSS rules name the tokens; several tokens share the resolved values). The tone ribbon colors ride the minted per-axis leaves on the inner box part."
+    },
+    {
+      "combo": "info.off.off",
       "part": "root",
       "channel": "background-color",
       "ref": "{p.color-bg-fill-info}",
@@ -1443,7 +1444,7 @@
       "cause": "composition-owned tone surface: Polaris 13's DefaultBanner renders the tone fill/text on an inner Box ribbon (Box background=bg-fill-<tone> color=text-<tone>-on-bg-fill — Banner/utilities.js bannerAttributes.withinPage), NOT on the .Polaris-Banner root where the promotion bound the tone maps; the root is the white card (.Polaris-Banner { background-color: var(--p-color-bg-surface) }) with body-inherited text (html,body { color: var(--p-color-text) }). Resolve via the review queue with explicit refs (--to {p.color-bg-surface} / {p.color-text} — mechanical: the defining CSS rules name the tokens; several tokens share the resolved values). The tone ribbon colors ride the minted per-axis leaves on the inner box part."
     },
     {
-      "combo": "info",
+      "combo": "info.off.off",
       "part": "root",
       "channel": "color",
       "ref": "{p.color-text-info-on-bg-fill}",
@@ -1454,7 +1455,73 @@
       "cause": "composition-owned tone surface: Polaris 13's DefaultBanner renders the tone fill/text on an inner Box ribbon (Box background=bg-fill-<tone> color=text-<tone>-on-bg-fill — Banner/utilities.js bannerAttributes.withinPage), NOT on the .Polaris-Banner root where the promotion bound the tone maps; the root is the white card (.Polaris-Banner { background-color: var(--p-color-bg-surface) }) with body-inherited text (html,body { color: var(--p-color-text) }). Resolve via the review queue with explicit refs (--to {p.color-bg-surface} / {p.color-text} — mechanical: the defining CSS rules name the tokens; several tokens share the resolved values). The tone ribbon colors ride the minted per-axis leaves on the inner box part."
     },
     {
-      "combo": "warning",
+      "combo": "info.off.on",
+      "part": "root",
+      "channel": "background-color",
+      "ref": "{p.color-bg-fill-info}",
+      "computedProp": "background-color",
+      "expected": "rgba(145, 208, 255, 1)",
+      "observed": "rgba(255, 255, 255, 1)",
+      "verdict": "contradiction",
+      "cause": "composition-owned tone surface: Polaris 13's DefaultBanner renders the tone fill/text on an inner Box ribbon (Box background=bg-fill-<tone> color=text-<tone>-on-bg-fill — Banner/utilities.js bannerAttributes.withinPage), NOT on the .Polaris-Banner root where the promotion bound the tone maps; the root is the white card (.Polaris-Banner { background-color: var(--p-color-bg-surface) }) with body-inherited text (html,body { color: var(--p-color-text) }). Resolve via the review queue with explicit refs (--to {p.color-bg-surface} / {p.color-text} — mechanical: the defining CSS rules name the tokens; several tokens share the resolved values). The tone ribbon colors ride the minted per-axis leaves on the inner box part."
+    },
+    {
+      "combo": "info.off.on",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text-info-on-bg-fill}",
+      "computedProp": "color",
+      "expected": "rgba(0, 33, 51, 1)",
+      "observed": "rgba(48, 48, 48, 1)",
+      "verdict": "contradiction",
+      "cause": "composition-owned tone surface: Polaris 13's DefaultBanner renders the tone fill/text on an inner Box ribbon (Box background=bg-fill-<tone> color=text-<tone>-on-bg-fill — Banner/utilities.js bannerAttributes.withinPage), NOT on the .Polaris-Banner root where the promotion bound the tone maps; the root is the white card (.Polaris-Banner { background-color: var(--p-color-bg-surface) }) with body-inherited text (html,body { color: var(--p-color-text) }). Resolve via the review queue with explicit refs (--to {p.color-bg-surface} / {p.color-text} — mechanical: the defining CSS rules name the tokens; several tokens share the resolved values). The tone ribbon colors ride the minted per-axis leaves on the inner box part."
+    },
+    {
+      "combo": "info.on.off",
+      "part": "root",
+      "channel": "background-color",
+      "ref": "{p.color-bg-fill-info}",
+      "computedProp": "background-color",
+      "expected": "rgba(145, 208, 255, 1)",
+      "observed": "rgba(255, 255, 255, 1)",
+      "verdict": "contradiction",
+      "cause": "composition-owned tone surface: Polaris 13's DefaultBanner renders the tone fill/text on an inner Box ribbon (Box background=bg-fill-<tone> color=text-<tone>-on-bg-fill — Banner/utilities.js bannerAttributes.withinPage), NOT on the .Polaris-Banner root where the promotion bound the tone maps; the root is the white card (.Polaris-Banner { background-color: var(--p-color-bg-surface) }) with body-inherited text (html,body { color: var(--p-color-text) }). Resolve via the review queue with explicit refs (--to {p.color-bg-surface} / {p.color-text} — mechanical: the defining CSS rules name the tokens; several tokens share the resolved values). The tone ribbon colors ride the minted per-axis leaves on the inner box part."
+    },
+    {
+      "combo": "info.on.off",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text-info-on-bg-fill}",
+      "computedProp": "color",
+      "expected": "rgba(0, 33, 51, 1)",
+      "observed": "rgba(48, 48, 48, 1)",
+      "verdict": "contradiction",
+      "cause": "composition-owned tone surface: Polaris 13's DefaultBanner renders the tone fill/text on an inner Box ribbon (Box background=bg-fill-<tone> color=text-<tone>-on-bg-fill — Banner/utilities.js bannerAttributes.withinPage), NOT on the .Polaris-Banner root where the promotion bound the tone maps; the root is the white card (.Polaris-Banner { background-color: var(--p-color-bg-surface) }) with body-inherited text (html,body { color: var(--p-color-text) }). Resolve via the review queue with explicit refs (--to {p.color-bg-surface} / {p.color-text} — mechanical: the defining CSS rules name the tokens; several tokens share the resolved values). The tone ribbon colors ride the minted per-axis leaves on the inner box part."
+    },
+    {
+      "combo": "info.on.on",
+      "part": "root",
+      "channel": "background-color",
+      "ref": "{p.color-bg-fill-info}",
+      "computedProp": "background-color",
+      "expected": "rgba(145, 208, 255, 1)",
+      "observed": "rgba(255, 255, 255, 1)",
+      "verdict": "contradiction",
+      "cause": "composition-owned tone surface: Polaris 13's DefaultBanner renders the tone fill/text on an inner Box ribbon (Box background=bg-fill-<tone> color=text-<tone>-on-bg-fill — Banner/utilities.js bannerAttributes.withinPage), NOT on the .Polaris-Banner root where the promotion bound the tone maps; the root is the white card (.Polaris-Banner { background-color: var(--p-color-bg-surface) }) with body-inherited text (html,body { color: var(--p-color-text) }). Resolve via the review queue with explicit refs (--to {p.color-bg-surface} / {p.color-text} — mechanical: the defining CSS rules name the tokens; several tokens share the resolved values). The tone ribbon colors ride the minted per-axis leaves on the inner box part."
+    },
+    {
+      "combo": "info.on.on",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text-info-on-bg-fill}",
+      "computedProp": "color",
+      "expected": "rgba(0, 33, 51, 1)",
+      "observed": "rgba(48, 48, 48, 1)",
+      "verdict": "contradiction",
+      "cause": "composition-owned tone surface: Polaris 13's DefaultBanner renders the tone fill/text on an inner Box ribbon (Box background=bg-fill-<tone> color=text-<tone>-on-bg-fill — Banner/utilities.js bannerAttributes.withinPage), NOT on the .Polaris-Banner root where the promotion bound the tone maps; the root is the white card (.Polaris-Banner { background-color: var(--p-color-bg-surface) }) with body-inherited text (html,body { color: var(--p-color-text) }). Resolve via the review queue with explicit refs (--to {p.color-bg-surface} / {p.color-text} — mechanical: the defining CSS rules name the tokens; several tokens share the resolved values). The tone ribbon colors ride the minted per-axis leaves on the inner box part."
+    },
+    {
+      "combo": "warning.off.off",
       "part": "root",
       "channel": "background-color",
       "ref": "{p.color-bg-fill-warning}",
@@ -1465,7 +1532,7 @@
       "cause": "composition-owned tone surface: Polaris 13's DefaultBanner renders the tone fill/text on an inner Box ribbon (Box background=bg-fill-<tone> color=text-<tone>-on-bg-fill — Banner/utilities.js bannerAttributes.withinPage), NOT on the .Polaris-Banner root where the promotion bound the tone maps; the root is the white card (.Polaris-Banner { background-color: var(--p-color-bg-surface) }) with body-inherited text (html,body { color: var(--p-color-text) }). Resolve via the review queue with explicit refs (--to {p.color-bg-surface} / {p.color-text} — mechanical: the defining CSS rules name the tokens; several tokens share the resolved values). The tone ribbon colors ride the minted per-axis leaves on the inner box part."
     },
     {
-      "combo": "warning",
+      "combo": "warning.off.off",
       "part": "root",
       "channel": "color",
       "ref": "{p.color-text-warning-on-bg-fill}",
@@ -1476,7 +1543,73 @@
       "cause": "composition-owned tone surface: Polaris 13's DefaultBanner renders the tone fill/text on an inner Box ribbon (Box background=bg-fill-<tone> color=text-<tone>-on-bg-fill — Banner/utilities.js bannerAttributes.withinPage), NOT on the .Polaris-Banner root where the promotion bound the tone maps; the root is the white card (.Polaris-Banner { background-color: var(--p-color-bg-surface) }) with body-inherited text (html,body { color: var(--p-color-text) }). Resolve via the review queue with explicit refs (--to {p.color-bg-surface} / {p.color-text} — mechanical: the defining CSS rules name the tokens; several tokens share the resolved values). The tone ribbon colors ride the minted per-axis leaves on the inner box part."
     },
     {
-      "combo": "critical",
+      "combo": "warning.off.on",
+      "part": "root",
+      "channel": "background-color",
+      "ref": "{p.color-bg-fill-warning}",
+      "computedProp": "background-color",
+      "expected": "rgba(255, 184, 0, 1)",
+      "observed": "rgba(255, 255, 255, 1)",
+      "verdict": "contradiction",
+      "cause": "composition-owned tone surface: Polaris 13's DefaultBanner renders the tone fill/text on an inner Box ribbon (Box background=bg-fill-<tone> color=text-<tone>-on-bg-fill — Banner/utilities.js bannerAttributes.withinPage), NOT on the .Polaris-Banner root where the promotion bound the tone maps; the root is the white card (.Polaris-Banner { background-color: var(--p-color-bg-surface) }) with body-inherited text (html,body { color: var(--p-color-text) }). Resolve via the review queue with explicit refs (--to {p.color-bg-surface} / {p.color-text} — mechanical: the defining CSS rules name the tokens; several tokens share the resolved values). The tone ribbon colors ride the minted per-axis leaves on the inner box part."
+    },
+    {
+      "combo": "warning.off.on",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text-warning-on-bg-fill}",
+      "computedProp": "color",
+      "expected": "rgba(37, 26, 0, 1)",
+      "observed": "rgba(48, 48, 48, 1)",
+      "verdict": "contradiction",
+      "cause": "composition-owned tone surface: Polaris 13's DefaultBanner renders the tone fill/text on an inner Box ribbon (Box background=bg-fill-<tone> color=text-<tone>-on-bg-fill — Banner/utilities.js bannerAttributes.withinPage), NOT on the .Polaris-Banner root where the promotion bound the tone maps; the root is the white card (.Polaris-Banner { background-color: var(--p-color-bg-surface) }) with body-inherited text (html,body { color: var(--p-color-text) }). Resolve via the review queue with explicit refs (--to {p.color-bg-surface} / {p.color-text} — mechanical: the defining CSS rules name the tokens; several tokens share the resolved values). The tone ribbon colors ride the minted per-axis leaves on the inner box part."
+    },
+    {
+      "combo": "warning.on.off",
+      "part": "root",
+      "channel": "background-color",
+      "ref": "{p.color-bg-fill-warning}",
+      "computedProp": "background-color",
+      "expected": "rgba(255, 184, 0, 1)",
+      "observed": "rgba(255, 255, 255, 1)",
+      "verdict": "contradiction",
+      "cause": "composition-owned tone surface: Polaris 13's DefaultBanner renders the tone fill/text on an inner Box ribbon (Box background=bg-fill-<tone> color=text-<tone>-on-bg-fill — Banner/utilities.js bannerAttributes.withinPage), NOT on the .Polaris-Banner root where the promotion bound the tone maps; the root is the white card (.Polaris-Banner { background-color: var(--p-color-bg-surface) }) with body-inherited text (html,body { color: var(--p-color-text) }). Resolve via the review queue with explicit refs (--to {p.color-bg-surface} / {p.color-text} — mechanical: the defining CSS rules name the tokens; several tokens share the resolved values). The tone ribbon colors ride the minted per-axis leaves on the inner box part."
+    },
+    {
+      "combo": "warning.on.off",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text-warning-on-bg-fill}",
+      "computedProp": "color",
+      "expected": "rgba(37, 26, 0, 1)",
+      "observed": "rgba(48, 48, 48, 1)",
+      "verdict": "contradiction",
+      "cause": "composition-owned tone surface: Polaris 13's DefaultBanner renders the tone fill/text on an inner Box ribbon (Box background=bg-fill-<tone> color=text-<tone>-on-bg-fill — Banner/utilities.js bannerAttributes.withinPage), NOT on the .Polaris-Banner root where the promotion bound the tone maps; the root is the white card (.Polaris-Banner { background-color: var(--p-color-bg-surface) }) with body-inherited text (html,body { color: var(--p-color-text) }). Resolve via the review queue with explicit refs (--to {p.color-bg-surface} / {p.color-text} — mechanical: the defining CSS rules name the tokens; several tokens share the resolved values). The tone ribbon colors ride the minted per-axis leaves on the inner box part."
+    },
+    {
+      "combo": "warning.on.on",
+      "part": "root",
+      "channel": "background-color",
+      "ref": "{p.color-bg-fill-warning}",
+      "computedProp": "background-color",
+      "expected": "rgba(255, 184, 0, 1)",
+      "observed": "rgba(255, 255, 255, 1)",
+      "verdict": "contradiction",
+      "cause": "composition-owned tone surface: Polaris 13's DefaultBanner renders the tone fill/text on an inner Box ribbon (Box background=bg-fill-<tone> color=text-<tone>-on-bg-fill — Banner/utilities.js bannerAttributes.withinPage), NOT on the .Polaris-Banner root where the promotion bound the tone maps; the root is the white card (.Polaris-Banner { background-color: var(--p-color-bg-surface) }) with body-inherited text (html,body { color: var(--p-color-text) }). Resolve via the review queue with explicit refs (--to {p.color-bg-surface} / {p.color-text} — mechanical: the defining CSS rules name the tokens; several tokens share the resolved values). The tone ribbon colors ride the minted per-axis leaves on the inner box part."
+    },
+    {
+      "combo": "warning.on.on",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text-warning-on-bg-fill}",
+      "computedProp": "color",
+      "expected": "rgba(37, 26, 0, 1)",
+      "observed": "rgba(48, 48, 48, 1)",
+      "verdict": "contradiction",
+      "cause": "composition-owned tone surface: Polaris 13's DefaultBanner renders the tone fill/text on an inner Box ribbon (Box background=bg-fill-<tone> color=text-<tone>-on-bg-fill — Banner/utilities.js bannerAttributes.withinPage), NOT on the .Polaris-Banner root where the promotion bound the tone maps; the root is the white card (.Polaris-Banner { background-color: var(--p-color-bg-surface) }) with body-inherited text (html,body { color: var(--p-color-text) }). Resolve via the review queue with explicit refs (--to {p.color-bg-surface} / {p.color-text} — mechanical: the defining CSS rules name the tokens; several tokens share the resolved values). The tone ribbon colors ride the minted per-axis leaves on the inner box part."
+    },
+    {
+      "combo": "critical.off.off",
       "part": "root",
       "channel": "background-color",
       "ref": "{p.color-bg-fill-critical}",
@@ -1487,7 +1620,73 @@
       "cause": "composition-owned tone surface: Polaris 13's DefaultBanner renders the tone fill/text on an inner Box ribbon (Box background=bg-fill-<tone> color=text-<tone>-on-bg-fill — Banner/utilities.js bannerAttributes.withinPage), NOT on the .Polaris-Banner root where the promotion bound the tone maps; the root is the white card (.Polaris-Banner { background-color: var(--p-color-bg-surface) }) with body-inherited text (html,body { color: var(--p-color-text) }). Resolve via the review queue with explicit refs (--to {p.color-bg-surface} / {p.color-text} — mechanical: the defining CSS rules name the tokens; several tokens share the resolved values). The tone ribbon colors ride the minted per-axis leaves on the inner box part."
     },
     {
-      "combo": "critical",
+      "combo": "critical.off.off",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text-critical-on-bg-fill}",
+      "computedProp": "color",
+      "expected": "rgba(255, 250, 251, 1)",
+      "observed": "rgba(48, 48, 48, 1)",
+      "verdict": "contradiction",
+      "cause": "composition-owned tone surface: Polaris 13's DefaultBanner renders the tone fill/text on an inner Box ribbon (Box background=bg-fill-<tone> color=text-<tone>-on-bg-fill — Banner/utilities.js bannerAttributes.withinPage), NOT on the .Polaris-Banner root where the promotion bound the tone maps; the root is the white card (.Polaris-Banner { background-color: var(--p-color-bg-surface) }) with body-inherited text (html,body { color: var(--p-color-text) }). Resolve via the review queue with explicit refs (--to {p.color-bg-surface} / {p.color-text} — mechanical: the defining CSS rules name the tokens; several tokens share the resolved values). The tone ribbon colors ride the minted per-axis leaves on the inner box part."
+    },
+    {
+      "combo": "critical.off.on",
+      "part": "root",
+      "channel": "background-color",
+      "ref": "{p.color-bg-fill-critical}",
+      "computedProp": "background-color",
+      "expected": "rgba(199, 10, 36, 1)",
+      "observed": "rgba(255, 255, 255, 1)",
+      "verdict": "contradiction",
+      "cause": "composition-owned tone surface: Polaris 13's DefaultBanner renders the tone fill/text on an inner Box ribbon (Box background=bg-fill-<tone> color=text-<tone>-on-bg-fill — Banner/utilities.js bannerAttributes.withinPage), NOT on the .Polaris-Banner root where the promotion bound the tone maps; the root is the white card (.Polaris-Banner { background-color: var(--p-color-bg-surface) }) with body-inherited text (html,body { color: var(--p-color-text) }). Resolve via the review queue with explicit refs (--to {p.color-bg-surface} / {p.color-text} — mechanical: the defining CSS rules name the tokens; several tokens share the resolved values). The tone ribbon colors ride the minted per-axis leaves on the inner box part."
+    },
+    {
+      "combo": "critical.off.on",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text-critical-on-bg-fill}",
+      "computedProp": "color",
+      "expected": "rgba(255, 250, 251, 1)",
+      "observed": "rgba(48, 48, 48, 1)",
+      "verdict": "contradiction",
+      "cause": "composition-owned tone surface: Polaris 13's DefaultBanner renders the tone fill/text on an inner Box ribbon (Box background=bg-fill-<tone> color=text-<tone>-on-bg-fill — Banner/utilities.js bannerAttributes.withinPage), NOT on the .Polaris-Banner root where the promotion bound the tone maps; the root is the white card (.Polaris-Banner { background-color: var(--p-color-bg-surface) }) with body-inherited text (html,body { color: var(--p-color-text) }). Resolve via the review queue with explicit refs (--to {p.color-bg-surface} / {p.color-text} — mechanical: the defining CSS rules name the tokens; several tokens share the resolved values). The tone ribbon colors ride the minted per-axis leaves on the inner box part."
+    },
+    {
+      "combo": "critical.on.off",
+      "part": "root",
+      "channel": "background-color",
+      "ref": "{p.color-bg-fill-critical}",
+      "computedProp": "background-color",
+      "expected": "rgba(199, 10, 36, 1)",
+      "observed": "rgba(255, 255, 255, 1)",
+      "verdict": "contradiction",
+      "cause": "composition-owned tone surface: Polaris 13's DefaultBanner renders the tone fill/text on an inner Box ribbon (Box background=bg-fill-<tone> color=text-<tone>-on-bg-fill — Banner/utilities.js bannerAttributes.withinPage), NOT on the .Polaris-Banner root where the promotion bound the tone maps; the root is the white card (.Polaris-Banner { background-color: var(--p-color-bg-surface) }) with body-inherited text (html,body { color: var(--p-color-text) }). Resolve via the review queue with explicit refs (--to {p.color-bg-surface} / {p.color-text} — mechanical: the defining CSS rules name the tokens; several tokens share the resolved values). The tone ribbon colors ride the minted per-axis leaves on the inner box part."
+    },
+    {
+      "combo": "critical.on.off",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text-critical-on-bg-fill}",
+      "computedProp": "color",
+      "expected": "rgba(255, 250, 251, 1)",
+      "observed": "rgba(48, 48, 48, 1)",
+      "verdict": "contradiction",
+      "cause": "composition-owned tone surface: Polaris 13's DefaultBanner renders the tone fill/text on an inner Box ribbon (Box background=bg-fill-<tone> color=text-<tone>-on-bg-fill — Banner/utilities.js bannerAttributes.withinPage), NOT on the .Polaris-Banner root where the promotion bound the tone maps; the root is the white card (.Polaris-Banner { background-color: var(--p-color-bg-surface) }) with body-inherited text (html,body { color: var(--p-color-text) }). Resolve via the review queue with explicit refs (--to {p.color-bg-surface} / {p.color-text} — mechanical: the defining CSS rules name the tokens; several tokens share the resolved values). The tone ribbon colors ride the minted per-axis leaves on the inner box part."
+    },
+    {
+      "combo": "critical.on.on",
+      "part": "root",
+      "channel": "background-color",
+      "ref": "{p.color-bg-fill-critical}",
+      "computedProp": "background-color",
+      "expected": "rgba(199, 10, 36, 1)",
+      "observed": "rgba(255, 255, 255, 1)",
+      "verdict": "contradiction",
+      "cause": "composition-owned tone surface: Polaris 13's DefaultBanner renders the tone fill/text on an inner Box ribbon (Box background=bg-fill-<tone> color=text-<tone>-on-bg-fill — Banner/utilities.js bannerAttributes.withinPage), NOT on the .Polaris-Banner root where the promotion bound the tone maps; the root is the white card (.Polaris-Banner { background-color: var(--p-color-bg-surface) }) with body-inherited text (html,body { color: var(--p-color-text) }). Resolve via the review queue with explicit refs (--to {p.color-bg-surface} / {p.color-text} — mechanical: the defining CSS rules name the tokens; several tokens share the resolved values). The tone ribbon colors ride the minted per-axis leaves on the inner box part."
+    },
+    {
+      "combo": "critical.on.on",
       "part": "root",
       "channel": "color",
       "ref": "{p.color-text-critical-on-bg-fill}",
@@ -1500,21 +1699,58 @@
   ],
   "interactionOnDisabled": [],
   "structureReceipts": [
-    "part-missing: success default part-0.0.0.0.0.0.0.0.1",
-    "part-missing: success default part-0.0.0.0.0.0.0.0.2",
-    "part-missing: success hover part-0.0.0.0.0.0.0.0.1",
-    "part-missing: success hover part-0.0.0.0.0.0.0.0.2",
-    "part-missing: success focus-visible part-0.0.0.0.0.0.0.0.1",
-    "part-missing: success focus-visible part-0.0.0.0.0.0.0.0.2",
-    "part-missing: success active part-0.0.0.0.0.0.0.0.1",
-    "part-missing: success active part-0.0.0.0.0.0.0.0.2"
+    "union-part-added: success.off.on__default @0.0.1.0.1 (div|ButtonGroup)",
+    "union-part-added: success.off.on__default @0.0.1.0.1.0 (div|ButtonGroup__Item)",
+    "union-part-added: success.off.on__default @0.0.1.0.1.0.0 (button|Button)",
+    "union-part-added: success.off.on__default @0.0.1.0.1.0.0.0 (span|Text)",
+    "union-part-added: success.on.off__default @0.0.0.0.1 (button|Button)",
+    "union-part-added: success.on.off__default @0.0.0.0.1.0 (span|Button__Icon)",
+    "union-part-added: success.on.off__default @0.0.0.0.1.0.0 (span|)",
+    "union-part-added: success.on.off__default @0.0.0.0.1.0.0.0 (span|Icon)",
+    "union-part-added: success.on.off__default @0.0.0.0.1.0.0.0.0 (svg|Icon__Svg)",
+    "union-part-added: success.on.off__default @0.0.0.0.1.0.0.0.0.0 (path|)",
+    "static-rejoin: captured \"label\" renamed to reviewed static part \"title\" (element h2 + content \"Order archived\")",
+    "part-missing: success.off.off__default part-0-0-0-0-0-0-0-0-1",
+    "part-missing: success.off.off__default part-0-0-0-0-0-0-0-0-2",
+    "part-missing: success.off.off__hover part-0-0-0-0-0-0-0-0-1",
+    "part-missing: success.off.off__hover part-0-0-0-0-0-0-0-0-2",
+    "part-missing: success.off.off__focus-visible part-0-0-0-0-0-0-0-0-1",
+    "part-missing: success.off.off__focus-visible part-0-0-0-0-0-0-0-0-2",
+    "part-missing: success.off.off__active part-0-0-0-0-0-0-0-0-1",
+    "part-missing: success.off.off__active part-0-0-0-0-0-0-0-0-2",
+    "part-missing: success.off.on__default part-0-0-0-0-0-0-0-0-1",
+    "part-missing: success.off.on__default part-0-0-0-0-0-0-0-0-2",
+    "part-missing: success.off.on__hover part-0-0-0-0-0-0-0-0-1",
+    "part-missing: success.off.on__hover part-0-0-0-0-0-0-0-0-2",
+    "part-missing: success.off.on__focus-visible part-0-0-0-0-0-0-0-0-1",
+    "part-missing: success.off.on__focus-visible part-0-0-0-0-0-0-0-0-2",
+    "part-missing: success.off.on__active part-0-0-0-0-0-0-0-0-1",
+    "part-missing: success.off.on__active part-0-0-0-0-0-0-0-0-2",
+    "part-missing: success.on.off__default part-0-0-0-0-0-0-0-0-1",
+    "part-missing: success.on.off__default part-0-0-0-0-0-0-0-0-2",
+    "part-missing: success.on.off__hover part-0-0-0-0-0-0-0-0-1",
+    "part-missing: success.on.off__hover part-0-0-0-0-0-0-0-0-2",
+    "part-missing: success.on.off__focus-visible part-0-0-0-0-0-0-0-0-1",
+    "part-missing: success.on.off__focus-visible part-0-0-0-0-0-0-0-0-2",
+    "part-missing: success.on.off__active part-0-0-0-0-0-0-0-0-1",
+    "part-missing: success.on.off__active part-0-0-0-0-0-0-0-0-2",
+    "part-missing: success.on.on__default part-0-0-0-0-0-0-0-0-1",
+    "part-missing: success.on.on__default part-0-0-0-0-0-0-0-0-2",
+    "part-missing: success.on.on__hover part-0-0-0-0-0-0-0-0-1",
+    "part-missing: success.on.on__hover part-0-0-0-0-0-0-0-0-2",
+    "part-missing: success.on.on__focus-visible part-0-0-0-0-0-0-0-0-1",
+    "part-missing: success.on.on__focus-visible part-0-0-0-0-0-0-0-0-2",
+    "part-missing: success.on.on__active part-0-0-0-0-0-0-0-0-1",
+    "part-missing: success.on.on__active part-0-0-0-0-0-0-0-0-2"
   ],
   "styledChannelReceipts": [
     "control-fallback: no control for <svg> — span control used (part icon-2)",
-    "control-fallback: no control for <path> — span control used (part part-0.0.0.0.0.0.0.0.0)",
-    "control-fallback: no control for <path> — span control used (part part-0.0.0.0.0.0.0.0.1)",
-    "control-fallback: no control for <path> — span control used (part part-0.0.0.0.0.0.0.0.2)",
-    "control-fallback: no control for <h2> — span control used (part label)"
+    "control-fallback: no control for <path> — span control used (part part-0-0-0-0-0-0-0-0-0)",
+    "control-fallback: no control for <path> — span control used (part part-0-0-0-0-0-0-0-0-1)",
+    "control-fallback: no control for <path> — span control used (part part-0-0-0-0-0-0-0-0-2)",
+    "control-fallback: no control for <h2> — span control used (part title)",
+    "control-fallback: no control for <svg> — span control used (part icon-4)",
+    "control-fallback: no control for <path> — span control used (part part-0-0-0-0-1-0-0-0-0-0)"
   ],
   "anatomyJoin": {
     "computed": [
@@ -1543,7 +1779,7 @@
         "join": "computed-only"
       },
       {
-        "part": "part-0.0.0.0.0.0",
+        "part": "part-0-0-0-0-0-0",
         "join": "computed-only"
       },
       {
@@ -1555,19 +1791,43 @@
         "join": "computed-only"
       },
       {
-        "part": "part-0.0.0.0.0.0.0.0.0",
+        "part": "part-0-0-0-0-0-0-0-0-0",
         "join": "computed-only"
       },
       {
-        "part": "part-0.0.0.0.0.0.0.0.1",
+        "part": "part-0-0-0-0-0-0-0-0-1",
         "join": "computed-only"
       },
       {
-        "part": "part-0.0.0.0.0.0.0.0.2",
+        "part": "part-0-0-0-0-0-0-0-0-2",
         "join": "computed-only"
       },
       {
-        "part": "label",
+        "part": "title",
+        "join": "matched"
+      },
+      {
+        "part": "button",
+        "join": "computed-only"
+      },
+      {
+        "part": "button__icon",
+        "join": "computed-only"
+      },
+      {
+        "part": "part-0-0-0-0-1-0-0",
+        "join": "computed-only"
+      },
+      {
+        "part": "icon-3",
+        "join": "computed-only"
+      },
+      {
+        "part": "icon-4",
+        "join": "computed-only"
+      },
+      {
+        "part": "part-0-0-0-0-1-0-0-0-0-0",
         "join": "computed-only"
       },
       {
@@ -1579,21 +1839,162 @@
         "join": "computed-only"
       },
       {
-        "part": "part-0.0.1.0.0",
+        "part": "part-0-0-1-0-0",
         "join": "computed-only"
       },
       {
         "part": "label-2",
         "join": "computed-only"
+      },
+      {
+        "part": "buttongroup",
+        "join": "computed-only"
+      },
+      {
+        "part": "buttongroup__item",
+        "join": "computed-only"
+      },
+      {
+        "part": "button-2",
+        "join": "computed-only"
+      },
+      {
+        "part": "label-3",
+        "join": "computed-only"
       }
     ],
     "staticOnly": [
-      "title",
       "body"
     ]
   },
+  "anatomyPromotion": {
+    "_note": "Round 4 DOM-anatomy promotion: computed-only elements carried as REAL parts (extract/computed/anatomy.ts); svg subtrees carried as reconstructed icon assets; presence facts via visibleWhen/stylesWhen; refusals named.",
+    "partsCarried": [
+      "root",
+      "box",
+      "blockstack",
+      "box-2",
+      "inlinestack",
+      "inlinestack-2",
+      "part-0-0-0-0-0-0",
+      "icon",
+      "title",
+      "button",
+      "button__icon",
+      "part-0-0-0-0-1-0-0",
+      "icon-3",
+      "box-3",
+      "blockstack-2",
+      "part-0-0-1-0-0",
+      "label-2",
+      "buttongroup",
+      "buttongroup__item",
+      "button-2",
+      "label-3"
+    ],
+    "svgAssets": [
+      "banner-icon-3",
+      "banner-icon-critical",
+      "banner-icon-info",
+      "banner-icon-success",
+      "banner-icon-warning"
+    ],
+    "receipts": [
+      "presence-prop-added: dismissible (boolean, default false; library prop onDismiss)",
+      "presence-prop-added: withAction (boolean, default false; library prop action)",
+      "svg-viewbox-reconstructed: Banner.icon@success.off.off — 0 0 20 20 from computed size 20×20 (path extent 15.8; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Banner.icon@success.off.on — 0 0 20 20 from computed size 20×20 (path extent 15.8; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Banner.icon@success.on.off — 0 0 20 20 from computed size 20×20 (path extent 15.8; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Banner.icon@success.on.on — 0 0 20 20 from computed size 20×20 (path extent 15.8; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Banner.icon@info.off.off — 0 0 20 20 from computed size 20×20 (path extent 17.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Banner.icon@info.off.on — 0 0 20 20 from computed size 20×20 (path extent 17.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Banner.icon@info.on.off — 0 0 20 20 from computed size 20×20 (path extent 17.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Banner.icon@info.on.on — 0 0 20 20 from computed size 20×20 (path extent 17.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-bumped: Banner.icon@warning.off.off — computed size 20 < path extent 449.26; viewBox reconstructed as 0 0 450 450 (named reconstruction)",
+      "svg-viewbox-bumped: Banner.icon@warning.off.on — computed size 20 < path extent 449.26; viewBox reconstructed as 0 0 450 450 (named reconstruction)",
+      "svg-viewbox-bumped: Banner.icon@warning.on.off — computed size 20 < path extent 449.26; viewBox reconstructed as 0 0 450 450 (named reconstruction)",
+      "svg-viewbox-bumped: Banner.icon@warning.on.on — computed size 20 < path extent 449.26; viewBox reconstructed as 0 0 450 450 (named reconstruction)",
+      "svg-viewbox-reconstructed: Banner.icon@critical.off.off — 0 0 20 20 from computed size 20×20 (path extent 16.8; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Banner.icon@critical.off.on — 0 0 20 20 from computed size 20×20 (path extent 16.8; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Banner.icon@critical.on.off — 0 0 20 20 from computed size 20×20 (path extent 16.8; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Banner.icon@critical.on.on — 0 0 20 20 from computed size 20×20 (path extent 16.8; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Banner.icon-3@success.on.off — 0 0 20 20 from computed size 20×20 (path extent 15.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Banner.icon-3@success.on.on — 0 0 20 20 from computed size 20×20 (path extent 15.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Banner.icon-3@info.on.off — 0 0 20 20 from computed size 20×20 (path extent 15.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Banner.icon-3@info.on.on — 0 0 20 20 from computed size 20×20 (path extent 15.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Banner.icon-3@warning.on.off — 0 0 20 20 from computed size 20×20 (path extent 15.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Banner.icon-3@warning.on.on — 0 0 20 20 from computed size 20×20 (path extent 15.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Banner.icon-3@critical.on.off — 0 0 20 20 from computed size 20×20 (path extent 15.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Banner.icon-3@critical.on.on — 0 0 20 20 from computed size 20×20 (path extent 15.0; viewBox is not a computed style — named reconstruction)",
+      "full-width-carried: box spans its row parent's content width in every enabled combo → layout.grow (geometry evidence)",
+      "presence-carried: button (8/16 combos) → visibleWhen dismissible",
+      "presence-carried: button__icon (8/16 combos) → visibleWhen dismissible",
+      "presence-carried: part-0-0-0-0-1-0-0 (8/16 combos) → visibleWhen dismissible",
+      "presence-carried: icon-3 (8/16 combos) → visibleWhen dismissible",
+      "literal-text-carried: label-2 = \"Use your finance report to get detailed \" (no text prop sample matches — the mounted value is carried verbatim)",
+      "presence-carried: buttongroup (8/16 combos) → visibleWhen withAction",
+      "presence-carried: buttongroup__item (8/16 combos) → visibleWhen withAction",
+      "presence-carried: button-2 (8/16 combos) → visibleWhen withAction",
+      "literal-text-carried: label-3 = \"Print label\" (no text prop sample matches — the mounted value is carried verbatim)",
+      "full-width-carried: label-3 spans its row parent's content width in every enabled combo → layout.grow (geometry evidence)",
+      "presence-carried: label-3 (8/16 combos) → visibleWhen withAction"
+    ],
+    "refusals": [
+      "static-part-unrendered: reviewed static part \"body\" has no rendered counterpart in ANY captured combo — dropped from the promoted anatomy (named; usually a conditional the sweep never triggered)"
+    ]
+  },
   "enrichmentNotes": [
+    "layout enriched: blockstack.layout.direction = column (uniform computed keyword — the schema's own vocabulary)",
+    "layout enriched: blockstack.layout.justify = space-between (uniform computed keyword — the schema's own vocabulary)",
+    "layout enriched: inlinestack.layout.align = center (uniform computed keyword — the schema's own vocabulary)",
+    "layout enriched: inlinestack.layout.justify = space-between (uniform computed keyword — the schema's own vocabulary)",
+    "layout enriched: inlinestack-2.layout.align = center (uniform computed keyword — the schema's own vocabulary)",
+    "layout enriched: inlinestack-2.layout.justify = space-between (uniform computed keyword — the schema's own vocabulary)",
+    "layout enriched: button.layout.align = center (uniform computed keyword — the schema's own vocabulary)",
+    "layout enriched: button.layout.justify = center (uniform computed keyword — the schema's own vocabulary)",
+    "layout enriched: blockstack-2.layout.direction = column (uniform computed keyword — the schema's own vocabulary)",
+    "layout enriched: buttongroup.layout.align = center (uniform computed keyword — the schema's own vocabulary)",
+    "layout enriched: button-2.layout.align = center (uniform computed keyword — the schema's own vocabulary)",
+    "layout enriched: button-2.layout.justify = center (uniform computed keyword — the schema's own vocabulary)",
     "declared fact carried: root.position = relative (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: icon.max-height = 100% (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: icon.max-width = 100% (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: button.appearance = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: button.border-bottom-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: button.border-left-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: button.border-right-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: button.border-top-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: button.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: button.font-feature-settings = \"calt\" 0 (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: button.position = relative (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: button.text-rendering = optimizelegibility (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: button.touch-action = manipulation (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: button.user-select = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: button__icon.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: button__icon.text-align = center (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: button__icon.user-select = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-0-0-0-0-1-0-0.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-0-0-0-0-1-0-0.text-align = center (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: part-0-0-0-0-1-0-0.user-select = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: icon-3.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: icon-3.max-height = 100% (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: icon-3.max-width = 100% (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: icon-3.text-align = center (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: icon-3.user-select = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: button-2.appearance = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: button-2.border-bottom-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: button-2.border-left-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: button-2.border-right-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: button-2.border-top-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: button-2.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: button-2.font-feature-settings = \"calt\" 0 (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: button-2.position = relative (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: button-2.text-rendering = optimizelegibility (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: button-2.touch-action = manipulation (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: button-2.user-select = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-3.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-3.text-align = center (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: label-3.user-select = none (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared state fact carried: [focus-visible] root.outline-style = solid (v15 declared vocabulary)"
   ]
 }

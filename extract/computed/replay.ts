@@ -32,18 +32,38 @@ export interface TruthAnatomyEntry {
   tag: string;
   classes: string[];
   join: 'matched' | 'computed-only';
+  /** Round 4 (v2): false when the part exists only under structure-creating
+   *  props (never in the base combo). Absent = true. */
+  inBase?: boolean;
+  /** v2: full representative style for parts NOT in the base tree (delta
+   *  reference for off-base captures). */
+  repStyle?: StyleMap;
+  /** v2: child template — text runs and element children (by part name) in
+   *  the representative interleave. Present on every entry in v2 files.
+   *  NOTE: per-combo class-modifier variation is not stored (signatures use
+   *  class STEMS; modifier classes never enter fusion) — a named limit. */
+  nodes?: Array<{ t: 'text'; v: string } | { t: 'el'; part: string }>;
 }
 
 export interface TruthCaptureEntry {
   key: string; // `${combo}__${interaction}`
   focusVisibleMatched?: boolean;
-  /** Per base-part style delta over the base capture (null = part missing —
-   *  such captures carry fullRoot instead). */
+  /** Per part style delta over the base capture (v1: base parts only; null =
+   *  part missing — such captures carry fullRoot instead). With `offBase`
+   *  (v2): entries cover the UNION anatomy; delta is vs base style (in-base
+   *  parts) or repStyle (off-base parts); null = absent in this capture. */
   elements?: Array<{ part: string; delta: StyleMap | null }>;
+  /** v2: this capture's present-part set differs from the base tree — the
+   *  tree is rebuilt from the anatomy templates (see TruthAnatomyEntry). */
+  offBase?: boolean;
+  /** v2: per-part TEXT-RUN overrides (template order) — sr-only labels vary
+   *  per combo (Badge pip: "Incomplete" vs "Partially complete"). */
+  text?: Record<string, string[]>;
   /** `${part}${pseudo}` → full pseudo style map (present only when the
    *  pseudo element renders). */
   pseudo?: Record<string, StyleMap>;
-  /** Full tree for captures whose structure drifts from the base. */
+  /** Full tree for captures whose structure the template encoding cannot
+   *  reproduce byte-equal (verified at write time). */
   fullRoot?: CapturedNode;
 }
 
@@ -56,7 +76,8 @@ export interface CapturedTruthFile {
 }
 
 /** Rebuild every capture's full computed tree from the truth file (base +
- *  per-part deltas, or fullRoot for structure-drifted captures). */
+ *  per-part deltas; template rebuild for off-base captures (v2); fullRoot
+ *  for captures the template encoding cannot reproduce). */
 export function reconstructCaptures(truth: CapturedTruthFile): Capture[] {
   const out: Capture[] = [];
   const split = (key: string): { combo: string; interaction: string } => {
@@ -65,10 +86,60 @@ export function reconstructCaptures(truth: CapturedTruthFile): Capture[] {
   };
   out.push({ ...split(truth.base.key), root: truth.base.root });
   const pathByPart = new Map(truth.anatomy.map((a) => [a.part, a.path] as const));
+  const entryByPart = new Map(truth.anatomy.map((a) => [a.part, a] as const));
+  const baseByPath = new Map(flatten(truth.base.root).map((e) => [e.path, e.node] as const));
+
+  /** v2 off-base rebuild: anatomy templates + per-part deltas. */
+  const rebuildOffBase = (cap: TruthCaptureEntry): CapturedNode => {
+    const deltaByPart = new Map((cap.elements ?? []).map((e) => [e.part, e.delta] as const));
+    const present = (part: string): boolean => deltaByPart.get(part) !== null && deltaByPart.get(part) !== undefined;
+    const build = (part: string): CapturedNode => {
+      const a = entryByPart.get(part)!;
+      const baseStyle = a.inBase === false ? (a.repStyle ?? {}) : (baseByPath.get(a.path)?.style ?? {});
+      const style: StyleMap = { ...baseStyle, ...(deltaByPart.get(part) ?? {}) };
+      const nodes: CapturedNode['nodes'] = [];
+      const textOverrides = cap.text?.[part];
+      let ti = 0;
+      for (const n of a.nodes ?? []) {
+        if (n.t === 'text') {
+          const v = textOverrides?.[ti] ?? n.v;
+          ti++;
+          nodes.push({ t: 'text', v });
+        } else if (present(n.part)) nodes.push({ t: 'el', el: build(n.part) });
+      }
+      const node: CapturedNode = { tag: a.tag, classes: a.classes, nodes, style, pseudo: {} };
+      return node;
+    };
+    const root = build(truth.anatomy[0].part);
+    // pseudo maps are FULL per capture
+    const flatParts = new Map<string, CapturedNode>();
+    const walk = (part: string, node: CapturedNode) => {
+      flatParts.set(part, node);
+      const a = entryByPart.get(part)!;
+      let i = 0;
+      const elParts = (a.nodes ?? []).filter((n) => n.t === 'el' && present((n as { part: string }).part)) as Array<{ part: string }>;
+      for (const n of node.nodes) {
+        if (n.t === 'el') walk(elParts[i++].part, n.el);
+      }
+    };
+    walk(truth.anatomy[0].part, root);
+    for (const [key, style] of Object.entries(cap.pseudo ?? {})) {
+      const m = /^(.*)(::before|::after)$/.exec(key);
+      if (!m) continue;
+      const node = flatParts.get(m[1]);
+      if (node) node.pseudo[m[2] as '::before' | '::after'] = style;
+    }
+    return root;
+  };
+
   for (const cap of truth.captures) {
     const { combo, interaction } = split(cap.key);
     if (cap.fullRoot) {
       out.push({ combo, interaction, ...(cap.focusVisibleMatched !== undefined ? { focusVisibleMatched: cap.focusVisibleMatched } : {}), root: cap.fullRoot });
+      continue;
+    }
+    if (cap.offBase) {
+      out.push({ combo, interaction, ...(cap.focusVisibleMatched !== undefined ? { focusVisibleMatched: cap.focusVisibleMatched } : {}), root: rebuildOffBase(cap) });
       continue;
     }
     const root = structuredClone(truth.base.root);

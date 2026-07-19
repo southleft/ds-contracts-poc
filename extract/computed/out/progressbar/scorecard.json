@@ -6,9 +6,9 @@
   "combos": 12,
   "interactions": 4,
   "computed": {
-    "cellsCompared": 672,
-    "cellsEqual": 624,
-    "pctEqual": 92.85714285714286,
+    "cellsCompared": 1824,
+    "cellsEqual": 1680,
+    "pctEqual": 92.10526315789474,
     "rowsFullyEqual": 0,
     "rows": 48
   },
@@ -28,8 +28,8 @@
     "mintedLeavesUnfolded": 10,
     "baseBindings": 18,
     "stateBindings": 0,
-    "codeOnlyChannels": 12,
-    "overflowBindings": 13,
+    "codeOnlyChannels": 3,
+    "overflowBindings": 0,
     "folds": 0
   },
   "worstRows": [
@@ -37,825 +37,1387 @@
       "key": "large.highlight__default",
       "pctAA": 29.938151041666668,
       "pctExact": 29.967447916666668,
-      "channelsMismatched": 1
+      "channelsMismatched": 3
     },
     {
       "key": "large.highlight__hover",
       "pctAA": 29.938151041666668,
       "pctExact": 29.967447916666668,
-      "channelsMismatched": 1
+      "channelsMismatched": 3
     },
     {
       "key": "large.highlight__focus-visible",
       "pctAA": 29.938151041666668,
       "pctExact": 29.967447916666668,
-      "channelsMismatched": 1
+      "channelsMismatched": 3
     },
     {
       "key": "large.highlight__active",
       "pctAA": 29.938151041666668,
       "pctExact": 29.967447916666668,
-      "channelsMismatched": 1
+      "channelsMismatched": 3
     },
     {
       "key": "large.primary__default",
       "pctAA": 29.938151041666668,
       "pctExact": 29.967447916666668,
-      "channelsMismatched": 1
+      "channelsMismatched": 3
     },
     {
       "key": "large.primary__hover",
       "pctAA": 29.938151041666668,
       "pctExact": 29.967447916666668,
-      "channelsMismatched": 1
+      "channelsMismatched": 3
     },
     {
       "key": "large.primary__focus-visible",
       "pctAA": 29.938151041666668,
       "pctExact": 29.967447916666668,
-      "channelsMismatched": 1
+      "channelsMismatched": 3
     },
     {
       "key": "large.primary__active",
       "pctAA": 29.938151041666668,
       "pctExact": 29.967447916666668,
-      "channelsMismatched": 1
+      "channelsMismatched": 3
     }
   ],
   "topMismatchedChannels": [
     [
+      "progress.clip-path",
+      48
+    ],
+    [
       "indicator.transform",
+      48
+    ],
+    [
+      "label.clip-path",
       48
     ]
   ],
   "namedLosses": [
-    "overflow: progress.bottom — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-    "overflow: progress.left — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-    "overflow: progress.min-height — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-    "overflow: progress.min-width — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-    "overflow: progress.right — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-    "overflow: progress.top — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-    "overflow: progress.vertical-align — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-    "overflow: label.bottom — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-    "overflow: label.left — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-    "overflow: label.min-height — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-    "overflow: label.min-width — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-    "overflow: label.right — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-    "overflow: label.top — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-    "code-only: progress.appearance — declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
     "code-only: progress.clip-path — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-    "code-only: progress.overflow-x — declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
-    "code-only: progress.overflow-y — declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
-    "code-only: progress.position — declared-channel value outside the bounded grammar — named residue (v15)",
-    "code-only: progress.text-wrap-mode — declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
     "code-only: indicator.transform — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-    "code-only: label.clip-path — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-    "code-only: label.overflow-x — declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
-    "code-only: label.overflow-y — declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
-    "code-only: label.position — declared-channel value outside the bounded grammar — named residue (v15)",
-    "code-only: label.text-wrap-mode — declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision"
+    "code-only: label.clip-path — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today"
   ],
   "rows": [
     {
       "key": "small.highlight__default",
-      "channelsCompared": 14,
-      "channelsEqual": 13,
+      "channelsCompared": 38,
+      "channelsEqual": 35,
       "pctExact": 7.467447916666667,
       "pctAA": 7.438151041666667,
       "mismatches": [
+        {
+          "part": "progress",
+          "channel": "clip-path",
+          "ours": "none",
+          "theirs": "inset(50%)"
+        },
         {
           "part": "indicator",
           "channel": "transform",
           "ours": "none",
           "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+        },
+        {
+          "part": "label",
+          "channel": "clip-path",
+          "ours": "none",
+          "theirs": "inset(50%)"
         }
       ]
     },
     {
       "key": "small.highlight__hover",
-      "channelsCompared": 14,
-      "channelsEqual": 13,
+      "channelsCompared": 38,
+      "channelsEqual": 35,
       "pctExact": 7.467447916666667,
       "pctAA": 7.438151041666667,
       "mismatches": [
+        {
+          "part": "progress",
+          "channel": "clip-path",
+          "ours": "none",
+          "theirs": "inset(50%)"
+        },
         {
           "part": "indicator",
           "channel": "transform",
           "ours": "none",
           "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+        },
+        {
+          "part": "label",
+          "channel": "clip-path",
+          "ours": "none",
+          "theirs": "inset(50%)"
         }
       ],
       "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport"
     },
     {
       "key": "small.highlight__focus-visible",
-      "channelsCompared": 14,
-      "channelsEqual": 13,
+      "channelsCompared": 38,
+      "channelsEqual": 35,
       "pctExact": 7.467447916666667,
       "pctAA": 7.438151041666667,
       "mismatches": [
+        {
+          "part": "progress",
+          "channel": "clip-path",
+          "ours": "none",
+          "theirs": "inset(50%)"
+        },
         {
           "part": "indicator",
           "channel": "transform",
           "ours": "none",
           "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+        },
+        {
+          "part": "label",
+          "channel": "clip-path",
+          "ours": "none",
+          "theirs": "inset(50%)"
         }
       ]
     },
     {
       "key": "small.highlight__active",
-      "channelsCompared": 14,
-      "channelsEqual": 13,
+      "channelsCompared": 38,
+      "channelsEqual": 35,
       "pctExact": 7.467447916666667,
       "pctAA": 7.438151041666667,
       "mismatches": [
+        {
+          "part": "progress",
+          "channel": "clip-path",
+          "ours": "none",
+          "theirs": "inset(50%)"
+        },
         {
           "part": "indicator",
           "channel": "transform",
           "ours": "none",
           "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+        },
+        {
+          "part": "label",
+          "channel": "clip-path",
+          "ours": "none",
+          "theirs": "inset(50%)"
         }
       ],
       "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport"
     },
     {
       "key": "small.primary__default",
-      "channelsCompared": 14,
-      "channelsEqual": 13,
+      "channelsCompared": 38,
+      "channelsEqual": 35,
       "pctExact": 7.467447916666667,
       "pctAA": 7.438151041666667,
       "mismatches": [
+        {
+          "part": "progress",
+          "channel": "clip-path",
+          "ours": "none",
+          "theirs": "inset(50%)"
+        },
         {
           "part": "indicator",
           "channel": "transform",
           "ours": "none",
           "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+        },
+        {
+          "part": "label",
+          "channel": "clip-path",
+          "ours": "none",
+          "theirs": "inset(50%)"
         }
       ]
     },
     {
       "key": "small.primary__hover",
-      "channelsCompared": 14,
-      "channelsEqual": 13,
+      "channelsCompared": 38,
+      "channelsEqual": 35,
       "pctExact": 7.467447916666667,
       "pctAA": 7.438151041666667,
       "mismatches": [
+        {
+          "part": "progress",
+          "channel": "clip-path",
+          "ours": "none",
+          "theirs": "inset(50%)"
+        },
         {
           "part": "indicator",
           "channel": "transform",
           "ours": "none",
           "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+        },
+        {
+          "part": "label",
+          "channel": "clip-path",
+          "ours": "none",
+          "theirs": "inset(50%)"
         }
       ],
       "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport"
     },
     {
       "key": "small.primary__focus-visible",
-      "channelsCompared": 14,
-      "channelsEqual": 13,
+      "channelsCompared": 38,
+      "channelsEqual": 35,
       "pctExact": 7.467447916666667,
       "pctAA": 7.438151041666667,
       "mismatches": [
+        {
+          "part": "progress",
+          "channel": "clip-path",
+          "ours": "none",
+          "theirs": "inset(50%)"
+        },
         {
           "part": "indicator",
           "channel": "transform",
           "ours": "none",
           "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+        },
+        {
+          "part": "label",
+          "channel": "clip-path",
+          "ours": "none",
+          "theirs": "inset(50%)"
         }
       ]
     },
     {
       "key": "small.primary__active",
-      "channelsCompared": 14,
-      "channelsEqual": 13,
+      "channelsCompared": 38,
+      "channelsEqual": 35,
       "pctExact": 7.467447916666667,
       "pctAA": 7.438151041666667,
       "mismatches": [
+        {
+          "part": "progress",
+          "channel": "clip-path",
+          "ours": "none",
+          "theirs": "inset(50%)"
+        },
         {
           "part": "indicator",
           "channel": "transform",
           "ours": "none",
           "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+        },
+        {
+          "part": "label",
+          "channel": "clip-path",
+          "ours": "none",
+          "theirs": "inset(50%)"
         }
       ],
       "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport"
     },
     {
       "key": "small.success__default",
-      "channelsCompared": 14,
-      "channelsEqual": 13,
+      "channelsCompared": 38,
+      "channelsEqual": 35,
       "pctExact": 7.467447916666667,
       "pctAA": 7.438151041666667,
       "mismatches": [
+        {
+          "part": "progress",
+          "channel": "clip-path",
+          "ours": "none",
+          "theirs": "inset(50%)"
+        },
         {
           "part": "indicator",
           "channel": "transform",
           "ours": "none",
           "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+        },
+        {
+          "part": "label",
+          "channel": "clip-path",
+          "ours": "none",
+          "theirs": "inset(50%)"
         }
       ]
     },
     {
       "key": "small.success__hover",
-      "channelsCompared": 14,
-      "channelsEqual": 13,
+      "channelsCompared": 38,
+      "channelsEqual": 35,
       "pctExact": 7.467447916666667,
       "pctAA": 7.438151041666667,
       "mismatches": [
+        {
+          "part": "progress",
+          "channel": "clip-path",
+          "ours": "none",
+          "theirs": "inset(50%)"
+        },
         {
           "part": "indicator",
           "channel": "transform",
           "ours": "none",
           "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+        },
+        {
+          "part": "label",
+          "channel": "clip-path",
+          "ours": "none",
+          "theirs": "inset(50%)"
         }
       ],
       "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport"
     },
     {
       "key": "small.success__focus-visible",
-      "channelsCompared": 14,
-      "channelsEqual": 13,
+      "channelsCompared": 38,
+      "channelsEqual": 35,
       "pctExact": 7.467447916666667,
       "pctAA": 7.438151041666667,
       "mismatches": [
+        {
+          "part": "progress",
+          "channel": "clip-path",
+          "ours": "none",
+          "theirs": "inset(50%)"
+        },
         {
           "part": "indicator",
           "channel": "transform",
           "ours": "none",
           "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+        },
+        {
+          "part": "label",
+          "channel": "clip-path",
+          "ours": "none",
+          "theirs": "inset(50%)"
         }
       ]
     },
     {
       "key": "small.success__active",
-      "channelsCompared": 14,
-      "channelsEqual": 13,
+      "channelsCompared": 38,
+      "channelsEqual": 35,
       "pctExact": 7.467447916666667,
       "pctAA": 7.438151041666667,
       "mismatches": [
+        {
+          "part": "progress",
+          "channel": "clip-path",
+          "ours": "none",
+          "theirs": "inset(50%)"
+        },
         {
           "part": "indicator",
           "channel": "transform",
           "ours": "none",
           "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+        },
+        {
+          "part": "label",
+          "channel": "clip-path",
+          "ours": "none",
+          "theirs": "inset(50%)"
         }
       ],
       "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport"
     },
     {
       "key": "small.critical__default",
-      "channelsCompared": 14,
-      "channelsEqual": 13,
+      "channelsCompared": 38,
+      "channelsEqual": 35,
       "pctExact": 7.467447916666667,
       "pctAA": 7.438151041666667,
       "mismatches": [
+        {
+          "part": "progress",
+          "channel": "clip-path",
+          "ours": "none",
+          "theirs": "inset(50%)"
+        },
         {
           "part": "indicator",
           "channel": "transform",
           "ours": "none",
           "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+        },
+        {
+          "part": "label",
+          "channel": "clip-path",
+          "ours": "none",
+          "theirs": "inset(50%)"
         }
       ]
     },
     {
       "key": "small.critical__hover",
-      "channelsCompared": 14,
-      "channelsEqual": 13,
+      "channelsCompared": 38,
+      "channelsEqual": 35,
       "pctExact": 7.467447916666667,
       "pctAA": 7.438151041666667,
       "mismatches": [
+        {
+          "part": "progress",
+          "channel": "clip-path",
+          "ours": "none",
+          "theirs": "inset(50%)"
+        },
         {
           "part": "indicator",
           "channel": "transform",
           "ours": "none",
           "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+        },
+        {
+          "part": "label",
+          "channel": "clip-path",
+          "ours": "none",
+          "theirs": "inset(50%)"
         }
       ],
       "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport"
     },
     {
       "key": "small.critical__focus-visible",
-      "channelsCompared": 14,
-      "channelsEqual": 13,
+      "channelsCompared": 38,
+      "channelsEqual": 35,
       "pctExact": 7.467447916666667,
       "pctAA": 7.438151041666667,
       "mismatches": [
+        {
+          "part": "progress",
+          "channel": "clip-path",
+          "ours": "none",
+          "theirs": "inset(50%)"
+        },
         {
           "part": "indicator",
           "channel": "transform",
           "ours": "none",
           "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+        },
+        {
+          "part": "label",
+          "channel": "clip-path",
+          "ours": "none",
+          "theirs": "inset(50%)"
         }
       ]
     },
     {
       "key": "small.critical__active",
-      "channelsCompared": 14,
-      "channelsEqual": 13,
+      "channelsCompared": 38,
+      "channelsEqual": 35,
       "pctExact": 7.467447916666667,
       "pctAA": 7.438151041666667,
       "mismatches": [
+        {
+          "part": "progress",
+          "channel": "clip-path",
+          "ours": "none",
+          "theirs": "inset(50%)"
+        },
         {
           "part": "indicator",
           "channel": "transform",
           "ours": "none",
           "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+        },
+        {
+          "part": "label",
+          "channel": "clip-path",
+          "ours": "none",
+          "theirs": "inset(50%)"
         }
       ],
       "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport"
     },
     {
       "key": "medium.highlight__default",
-      "channelsCompared": 14,
-      "channelsEqual": 13,
+      "channelsCompared": 38,
+      "channelsEqual": 35,
       "pctExact": 14.967447916666666,
       "pctAA": 14.938151041666666,
       "mismatches": [
+        {
+          "part": "progress",
+          "channel": "clip-path",
+          "ours": "none",
+          "theirs": "inset(50%)"
+        },
         {
           "part": "indicator",
           "channel": "transform",
           "ours": "none",
           "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+        },
+        {
+          "part": "label",
+          "channel": "clip-path",
+          "ours": "none",
+          "theirs": "inset(50%)"
         }
       ]
     },
     {
       "key": "medium.highlight__hover",
-      "channelsCompared": 14,
-      "channelsEqual": 13,
+      "channelsCompared": 38,
+      "channelsEqual": 35,
       "pctExact": 14.967447916666666,
       "pctAA": 14.938151041666666,
       "mismatches": [
+        {
+          "part": "progress",
+          "channel": "clip-path",
+          "ours": "none",
+          "theirs": "inset(50%)"
+        },
         {
           "part": "indicator",
           "channel": "transform",
           "ours": "none",
           "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+        },
+        {
+          "part": "label",
+          "channel": "clip-path",
+          "ours": "none",
+          "theirs": "inset(50%)"
         }
       ],
       "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport"
     },
     {
       "key": "medium.highlight__focus-visible",
-      "channelsCompared": 14,
-      "channelsEqual": 13,
+      "channelsCompared": 38,
+      "channelsEqual": 35,
       "pctExact": 14.967447916666666,
       "pctAA": 14.938151041666666,
       "mismatches": [
+        {
+          "part": "progress",
+          "channel": "clip-path",
+          "ours": "none",
+          "theirs": "inset(50%)"
+        },
         {
           "part": "indicator",
           "channel": "transform",
           "ours": "none",
           "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+        },
+        {
+          "part": "label",
+          "channel": "clip-path",
+          "ours": "none",
+          "theirs": "inset(50%)"
         }
       ]
     },
     {
       "key": "medium.highlight__active",
-      "channelsCompared": 14,
-      "channelsEqual": 13,
+      "channelsCompared": 38,
+      "channelsEqual": 35,
       "pctExact": 14.967447916666666,
       "pctAA": 14.938151041666666,
       "mismatches": [
+        {
+          "part": "progress",
+          "channel": "clip-path",
+          "ours": "none",
+          "theirs": "inset(50%)"
+        },
         {
           "part": "indicator",
           "channel": "transform",
           "ours": "none",
           "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+        },
+        {
+          "part": "label",
+          "channel": "clip-path",
+          "ours": "none",
+          "theirs": "inset(50%)"
         }
       ],
       "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport"
     },
     {
       "key": "medium.primary__default",
-      "channelsCompared": 14,
-      "channelsEqual": 13,
+      "channelsCompared": 38,
+      "channelsEqual": 35,
       "pctExact": 14.967447916666666,
       "pctAA": 14.938151041666666,
       "mismatches": [
+        {
+          "part": "progress",
+          "channel": "clip-path",
+          "ours": "none",
+          "theirs": "inset(50%)"
+        },
         {
           "part": "indicator",
           "channel": "transform",
           "ours": "none",
           "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+        },
+        {
+          "part": "label",
+          "channel": "clip-path",
+          "ours": "none",
+          "theirs": "inset(50%)"
         }
       ]
     },
     {
       "key": "medium.primary__hover",
-      "channelsCompared": 14,
-      "channelsEqual": 13,
+      "channelsCompared": 38,
+      "channelsEqual": 35,
       "pctExact": 14.967447916666666,
       "pctAA": 14.938151041666666,
       "mismatches": [
+        {
+          "part": "progress",
+          "channel": "clip-path",
+          "ours": "none",
+          "theirs": "inset(50%)"
+        },
         {
           "part": "indicator",
           "channel": "transform",
           "ours": "none",
           "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+        },
+        {
+          "part": "label",
+          "channel": "clip-path",
+          "ours": "none",
+          "theirs": "inset(50%)"
         }
       ],
       "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport"
     },
     {
       "key": "medium.primary__focus-visible",
-      "channelsCompared": 14,
-      "channelsEqual": 13,
+      "channelsCompared": 38,
+      "channelsEqual": 35,
       "pctExact": 14.967447916666666,
       "pctAA": 14.938151041666666,
       "mismatches": [
+        {
+          "part": "progress",
+          "channel": "clip-path",
+          "ours": "none",
+          "theirs": "inset(50%)"
+        },
         {
           "part": "indicator",
           "channel": "transform",
           "ours": "none",
           "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+        },
+        {
+          "part": "label",
+          "channel": "clip-path",
+          "ours": "none",
+          "theirs": "inset(50%)"
         }
       ]
     },
     {
       "key": "medium.primary__active",
-      "channelsCompared": 14,
-      "channelsEqual": 13,
+      "channelsCompared": 38,
+      "channelsEqual": 35,
       "pctExact": 14.967447916666666,
       "pctAA": 14.938151041666666,
       "mismatches": [
+        {
+          "part": "progress",
+          "channel": "clip-path",
+          "ours": "none",
+          "theirs": "inset(50%)"
+        },
         {
           "part": "indicator",
           "channel": "transform",
           "ours": "none",
           "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+        },
+        {
+          "part": "label",
+          "channel": "clip-path",
+          "ours": "none",
+          "theirs": "inset(50%)"
         }
       ],
       "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport"
     },
     {
       "key": "medium.success__default",
-      "channelsCompared": 14,
-      "channelsEqual": 13,
+      "channelsCompared": 38,
+      "channelsEqual": 35,
       "pctExact": 14.967447916666666,
       "pctAA": 14.938151041666666,
       "mismatches": [
+        {
+          "part": "progress",
+          "channel": "clip-path",
+          "ours": "none",
+          "theirs": "inset(50%)"
+        },
         {
           "part": "indicator",
           "channel": "transform",
           "ours": "none",
           "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+        },
+        {
+          "part": "label",
+          "channel": "clip-path",
+          "ours": "none",
+          "theirs": "inset(50%)"
         }
       ]
     },
     {
       "key": "medium.success__hover",
-      "channelsCompared": 14,
-      "channelsEqual": 13,
+      "channelsCompared": 38,
+      "channelsEqual": 35,
       "pctExact": 14.967447916666666,
       "pctAA": 14.938151041666666,
       "mismatches": [
+        {
+          "part": "progress",
+          "channel": "clip-path",
+          "ours": "none",
+          "theirs": "inset(50%)"
+        },
         {
           "part": "indicator",
           "channel": "transform",
           "ours": "none",
           "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+        },
+        {
+          "part": "label",
+          "channel": "clip-path",
+          "ours": "none",
+          "theirs": "inset(50%)"
         }
       ],
       "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport"
     },
     {
       "key": "medium.success__focus-visible",
-      "channelsCompared": 14,
-      "channelsEqual": 13,
+      "channelsCompared": 38,
+      "channelsEqual": 35,
       "pctExact": 14.967447916666666,
       "pctAA": 14.938151041666666,
       "mismatches": [
+        {
+          "part": "progress",
+          "channel": "clip-path",
+          "ours": "none",
+          "theirs": "inset(50%)"
+        },
         {
           "part": "indicator",
           "channel": "transform",
           "ours": "none",
           "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+        },
+        {
+          "part": "label",
+          "channel": "clip-path",
+          "ours": "none",
+          "theirs": "inset(50%)"
         }
       ]
     },
     {
       "key": "medium.success__active",
-      "channelsCompared": 14,
-      "channelsEqual": 13,
+      "channelsCompared": 38,
+      "channelsEqual": 35,
       "pctExact": 14.967447916666666,
       "pctAA": 14.938151041666666,
       "mismatches": [
+        {
+          "part": "progress",
+          "channel": "clip-path",
+          "ours": "none",
+          "theirs": "inset(50%)"
+        },
         {
           "part": "indicator",
           "channel": "transform",
           "ours": "none",
           "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+        },
+        {
+          "part": "label",
+          "channel": "clip-path",
+          "ours": "none",
+          "theirs": "inset(50%)"
         }
       ],
       "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport"
     },
     {
       "key": "medium.critical__default",
-      "channelsCompared": 14,
-      "channelsEqual": 13,
+      "channelsCompared": 38,
+      "channelsEqual": 35,
       "pctExact": 14.967447916666666,
       "pctAA": 14.938151041666666,
       "mismatches": [
+        {
+          "part": "progress",
+          "channel": "clip-path",
+          "ours": "none",
+          "theirs": "inset(50%)"
+        },
         {
           "part": "indicator",
           "channel": "transform",
           "ours": "none",
           "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+        },
+        {
+          "part": "label",
+          "channel": "clip-path",
+          "ours": "none",
+          "theirs": "inset(50%)"
         }
       ]
     },
     {
       "key": "medium.critical__hover",
-      "channelsCompared": 14,
-      "channelsEqual": 13,
+      "channelsCompared": 38,
+      "channelsEqual": 35,
       "pctExact": 14.967447916666666,
       "pctAA": 14.938151041666666,
       "mismatches": [
+        {
+          "part": "progress",
+          "channel": "clip-path",
+          "ours": "none",
+          "theirs": "inset(50%)"
+        },
         {
           "part": "indicator",
           "channel": "transform",
           "ours": "none",
           "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+        },
+        {
+          "part": "label",
+          "channel": "clip-path",
+          "ours": "none",
+          "theirs": "inset(50%)"
         }
       ],
       "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport"
     },
     {
       "key": "medium.critical__focus-visible",
-      "channelsCompared": 14,
-      "channelsEqual": 13,
+      "channelsCompared": 38,
+      "channelsEqual": 35,
       "pctExact": 14.967447916666666,
       "pctAA": 14.938151041666666,
       "mismatches": [
+        {
+          "part": "progress",
+          "channel": "clip-path",
+          "ours": "none",
+          "theirs": "inset(50%)"
+        },
         {
           "part": "indicator",
           "channel": "transform",
           "ours": "none",
           "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+        },
+        {
+          "part": "label",
+          "channel": "clip-path",
+          "ours": "none",
+          "theirs": "inset(50%)"
         }
       ]
     },
     {
       "key": "medium.critical__active",
-      "channelsCompared": 14,
-      "channelsEqual": 13,
+      "channelsCompared": 38,
+      "channelsEqual": 35,
       "pctExact": 14.967447916666666,
       "pctAA": 14.938151041666666,
       "mismatches": [
+        {
+          "part": "progress",
+          "channel": "clip-path",
+          "ours": "none",
+          "theirs": "inset(50%)"
+        },
         {
           "part": "indicator",
           "channel": "transform",
           "ours": "none",
           "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+        },
+        {
+          "part": "label",
+          "channel": "clip-path",
+          "ours": "none",
+          "theirs": "inset(50%)"
         }
       ],
       "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport"
     },
     {
       "key": "large.highlight__default",
-      "channelsCompared": 14,
-      "channelsEqual": 13,
+      "channelsCompared": 38,
+      "channelsEqual": 35,
       "pctExact": 29.967447916666668,
       "pctAA": 29.938151041666668,
       "mismatches": [
+        {
+          "part": "progress",
+          "channel": "clip-path",
+          "ours": "none",
+          "theirs": "inset(50%)"
+        },
         {
           "part": "indicator",
           "channel": "transform",
           "ours": "none",
           "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+        },
+        {
+          "part": "label",
+          "channel": "clip-path",
+          "ours": "none",
+          "theirs": "inset(50%)"
         }
       ]
     },
     {
       "key": "large.highlight__hover",
-      "channelsCompared": 14,
-      "channelsEqual": 13,
+      "channelsCompared": 38,
+      "channelsEqual": 35,
       "pctExact": 29.967447916666668,
       "pctAA": 29.938151041666668,
       "mismatches": [
+        {
+          "part": "progress",
+          "channel": "clip-path",
+          "ours": "none",
+          "theirs": "inset(50%)"
+        },
         {
           "part": "indicator",
           "channel": "transform",
           "ours": "none",
           "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+        },
+        {
+          "part": "label",
+          "channel": "clip-path",
+          "ours": "none",
+          "theirs": "inset(50%)"
         }
       ],
       "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport"
     },
     {
       "key": "large.highlight__focus-visible",
-      "channelsCompared": 14,
-      "channelsEqual": 13,
+      "channelsCompared": 38,
+      "channelsEqual": 35,
       "pctExact": 29.967447916666668,
       "pctAA": 29.938151041666668,
       "mismatches": [
+        {
+          "part": "progress",
+          "channel": "clip-path",
+          "ours": "none",
+          "theirs": "inset(50%)"
+        },
         {
           "part": "indicator",
           "channel": "transform",
           "ours": "none",
           "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+        },
+        {
+          "part": "label",
+          "channel": "clip-path",
+          "ours": "none",
+          "theirs": "inset(50%)"
         }
       ]
     },
     {
       "key": "large.highlight__active",
-      "channelsCompared": 14,
-      "channelsEqual": 13,
+      "channelsCompared": 38,
+      "channelsEqual": 35,
       "pctExact": 29.967447916666668,
       "pctAA": 29.938151041666668,
       "mismatches": [
+        {
+          "part": "progress",
+          "channel": "clip-path",
+          "ours": "none",
+          "theirs": "inset(50%)"
+        },
         {
           "part": "indicator",
           "channel": "transform",
           "ours": "none",
           "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+        },
+        {
+          "part": "label",
+          "channel": "clip-path",
+          "ours": "none",
+          "theirs": "inset(50%)"
         }
       ],
       "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport"
     },
     {
       "key": "large.primary__default",
-      "channelsCompared": 14,
-      "channelsEqual": 13,
+      "channelsCompared": 38,
+      "channelsEqual": 35,
       "pctExact": 29.967447916666668,
       "pctAA": 29.938151041666668,
       "mismatches": [
+        {
+          "part": "progress",
+          "channel": "clip-path",
+          "ours": "none",
+          "theirs": "inset(50%)"
+        },
         {
           "part": "indicator",
           "channel": "transform",
           "ours": "none",
           "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+        },
+        {
+          "part": "label",
+          "channel": "clip-path",
+          "ours": "none",
+          "theirs": "inset(50%)"
         }
       ]
     },
     {
       "key": "large.primary__hover",
-      "channelsCompared": 14,
-      "channelsEqual": 13,
+      "channelsCompared": 38,
+      "channelsEqual": 35,
       "pctExact": 29.967447916666668,
       "pctAA": 29.938151041666668,
       "mismatches": [
+        {
+          "part": "progress",
+          "channel": "clip-path",
+          "ours": "none",
+          "theirs": "inset(50%)"
+        },
         {
           "part": "indicator",
           "channel": "transform",
           "ours": "none",
           "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+        },
+        {
+          "part": "label",
+          "channel": "clip-path",
+          "ours": "none",
+          "theirs": "inset(50%)"
         }
       ],
       "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport"
     },
     {
       "key": "large.primary__focus-visible",
-      "channelsCompared": 14,
-      "channelsEqual": 13,
+      "channelsCompared": 38,
+      "channelsEqual": 35,
       "pctExact": 29.967447916666668,
       "pctAA": 29.938151041666668,
       "mismatches": [
+        {
+          "part": "progress",
+          "channel": "clip-path",
+          "ours": "none",
+          "theirs": "inset(50%)"
+        },
         {
           "part": "indicator",
           "channel": "transform",
           "ours": "none",
           "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+        },
+        {
+          "part": "label",
+          "channel": "clip-path",
+          "ours": "none",
+          "theirs": "inset(50%)"
         }
       ]
     },
     {
       "key": "large.primary__active",
-      "channelsCompared": 14,
-      "channelsEqual": 13,
+      "channelsCompared": 38,
+      "channelsEqual": 35,
       "pctExact": 29.967447916666668,
       "pctAA": 29.938151041666668,
       "mismatches": [
+        {
+          "part": "progress",
+          "channel": "clip-path",
+          "ours": "none",
+          "theirs": "inset(50%)"
+        },
         {
           "part": "indicator",
           "channel": "transform",
           "ours": "none",
           "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+        },
+        {
+          "part": "label",
+          "channel": "clip-path",
+          "ours": "none",
+          "theirs": "inset(50%)"
         }
       ],
       "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport"
     },
     {
       "key": "large.success__default",
-      "channelsCompared": 14,
-      "channelsEqual": 13,
+      "channelsCompared": 38,
+      "channelsEqual": 35,
       "pctExact": 29.967447916666668,
       "pctAA": 29.938151041666668,
       "mismatches": [
+        {
+          "part": "progress",
+          "channel": "clip-path",
+          "ours": "none",
+          "theirs": "inset(50%)"
+        },
         {
           "part": "indicator",
           "channel": "transform",
           "ours": "none",
           "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+        },
+        {
+          "part": "label",
+          "channel": "clip-path",
+          "ours": "none",
+          "theirs": "inset(50%)"
         }
       ]
     },
     {
       "key": "large.success__hover",
-      "channelsCompared": 14,
-      "channelsEqual": 13,
+      "channelsCompared": 38,
+      "channelsEqual": 35,
       "pctExact": 29.967447916666668,
       "pctAA": 29.938151041666668,
       "mismatches": [
+        {
+          "part": "progress",
+          "channel": "clip-path",
+          "ours": "none",
+          "theirs": "inset(50%)"
+        },
         {
           "part": "indicator",
           "channel": "transform",
           "ours": "none",
           "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+        },
+        {
+          "part": "label",
+          "channel": "clip-path",
+          "ours": "none",
+          "theirs": "inset(50%)"
         }
       ],
       "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport"
     },
     {
       "key": "large.success__focus-visible",
-      "channelsCompared": 14,
-      "channelsEqual": 13,
+      "channelsCompared": 38,
+      "channelsEqual": 35,
       "pctExact": 29.967447916666668,
       "pctAA": 29.938151041666668,
       "mismatches": [
+        {
+          "part": "progress",
+          "channel": "clip-path",
+          "ours": "none",
+          "theirs": "inset(50%)"
+        },
         {
           "part": "indicator",
           "channel": "transform",
           "ours": "none",
           "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+        },
+        {
+          "part": "label",
+          "channel": "clip-path",
+          "ours": "none",
+          "theirs": "inset(50%)"
         }
       ]
     },
     {
       "key": "large.success__active",
-      "channelsCompared": 14,
-      "channelsEqual": 13,
+      "channelsCompared": 38,
+      "channelsEqual": 35,
       "pctExact": 29.967447916666668,
       "pctAA": 29.938151041666668,
       "mismatches": [
+        {
+          "part": "progress",
+          "channel": "clip-path",
+          "ours": "none",
+          "theirs": "inset(50%)"
+        },
         {
           "part": "indicator",
           "channel": "transform",
           "ours": "none",
           "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+        },
+        {
+          "part": "label",
+          "channel": "clip-path",
+          "ours": "none",
+          "theirs": "inset(50%)"
         }
       ],
       "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport"
     },
     {
       "key": "large.critical__default",
-      "channelsCompared": 14,
-      "channelsEqual": 13,
+      "channelsCompared": 38,
+      "channelsEqual": 35,
       "pctExact": 29.967447916666668,
       "pctAA": 29.938151041666668,
       "mismatches": [
+        {
+          "part": "progress",
+          "channel": "clip-path",
+          "ours": "none",
+          "theirs": "inset(50%)"
+        },
         {
           "part": "indicator",
           "channel": "transform",
           "ours": "none",
           "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+        },
+        {
+          "part": "label",
+          "channel": "clip-path",
+          "ours": "none",
+          "theirs": "inset(50%)"
         }
       ]
     },
     {
       "key": "large.critical__hover",
-      "channelsCompared": 14,
-      "channelsEqual": 13,
+      "channelsCompared": 38,
+      "channelsEqual": 35,
       "pctExact": 29.967447916666668,
       "pctAA": 29.938151041666668,
       "mismatches": [
+        {
+          "part": "progress",
+          "channel": "clip-path",
+          "ours": "none",
+          "theirs": "inset(50%)"
+        },
         {
           "part": "indicator",
           "channel": "transform",
           "ours": "none",
           "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+        },
+        {
+          "part": "label",
+          "channel": "clip-path",
+          "ours": "none",
+          "theirs": "inset(50%)"
         }
       ],
       "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport"
     },
     {
       "key": "large.critical__focus-visible",
-      "channelsCompared": 14,
-      "channelsEqual": 13,
+      "channelsCompared": 38,
+      "channelsEqual": 35,
       "pctExact": 29.967447916666668,
       "pctAA": 29.938151041666668,
       "mismatches": [
+        {
+          "part": "progress",
+          "channel": "clip-path",
+          "ours": "none",
+          "theirs": "inset(50%)"
+        },
         {
           "part": "indicator",
           "channel": "transform",
           "ours": "none",
           "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+        },
+        {
+          "part": "label",
+          "channel": "clip-path",
+          "ours": "none",
+          "theirs": "inset(50%)"
         }
       ]
     },
     {
       "key": "large.critical__active",
-      "channelsCompared": 14,
-      "channelsEqual": 13,
+      "channelsCompared": 38,
+      "channelsEqual": 35,
       "pctExact": 29.967447916666668,
       "pctAA": 29.938151041666668,
       "mismatches": [
+        {
+          "part": "progress",
+          "channel": "clip-path",
+          "ours": "none",
+          "theirs": "inset(50%)"
+        },
         {
           "part": "indicator",
           "channel": "transform",
           "ours": "none",
           "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+        },
+        {
+          "part": "label",
+          "channel": "clip-path",
+          "ours": "none",
+          "theirs": "inset(50%)"
         }
       ],
       "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport"

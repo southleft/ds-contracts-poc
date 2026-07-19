@@ -48,6 +48,8 @@ import {
 import { reconstructCaptures, type CapturedTruthFile } from './replay.js';
 import { normalizeValue } from './lib.js';
 import { runGate } from './gate.js';
+import { promoteAnatomy } from './anatomy.js';
+import { kebab } from '../types.js';
 
 const HERE = path.resolve(new URL('.', import.meta.url).pathname);
 const REPO = path.resolve(HERE, '..', '..');
@@ -131,16 +133,21 @@ async function main() {
     };
 
     const aligned = alignSweep(sweep, comp, space, cfg.library.classPrefix);
+    // Round 4: anatomy promotion in the offline path too (same code path as
+    // the harness run; assets stay in memory — files are the harness run's).
+    const promotion = promoteAnatomy(space, comp, aligned.union, kebab(space.contract.name));
+    const iconAssetsMerged = new Map([...iconAssets, ...promotion.assets]);
+    const svgConsumedParts = new Set([...promotion.consumed].map((i) => aligned.partNames[i]));
     const controlStyles = Object.fromEntries(Object.entries(truth.controls).map(([t, n]) => [t, n.style]));
     const styledReceipts: string[] = [];
     const styled = styledChannels(aligned, space, controlStyles, sweep.allProps, styledReceipts);
 
     const folds = detectFolds(aligned, styled);
-    const { rows: boundRows } = await boundCheck(aligned, comp, space, probeToken);
+    const { rows: boundRows } = await boundCheck(aligned, comp, space, probeToken, promotion.contract);
     const boundConfirmed = boundRows.filter((r) => r.verdict === 'confirmed').length;
-    const contradictions = boundRows.filter((r) => r.verdict !== 'confirmed');
-    const layout = enrichLayout(aligned, space, styled);
-    const prep = prepareMint(aligned, comp, space, styled, folds, layout.handled);
+    const contradictions = boundRows.filter((r) => r.verdict === 'contradiction');
+    const layout = enrichLayout(aligned, space, styled, promotion.contract);
+    const prep = prepareMint(aligned, comp, space, styled, folds, layout.handled, promotion.contract, svgConsumedParts);
     const mintBase = mintTokens(comp.name, prep.baseObs, prep.axes);
     const mintStates = mintTokens(comp.name, prep.stateObs, prep.axes);
     // `?? []` keeps the runner executable against pre-v15 fusion builds — the
@@ -149,7 +156,7 @@ async function main() {
     const declaredBase = prep.declared ?? [];
     const declaredState = prep.declaredStates ?? [];
     const { enriched, overflowBindings } = applyMintToContract(
-      space.contract, space, mintBase, prep.baseObs, mintStates, prep.stateObs, layout.enriched,
+      promotion.contract, space, mintBase, prep.baseObs, mintStates, prep.stateObs, layout.enriched,
       declaredBase, declaredState,
     );
     const mergedTree = structuredClone(mintBase.tree) as Record<string, unknown>;
@@ -164,12 +171,13 @@ async function main() {
 
     ContractSchema.parse(enriched);
     const errs: string[] = [];
-    validateContract(enriched as Contract, new Map([[enriched.id, enriched as Contract]]), errs, iconAssets);
+    validateContract(enriched as Contract, new Map([[enriched.id, enriched as Contract]]), errs, iconAssetsMerged);
     if (errs.length > 0) {
       throw new Error(`${comp.name}: re-fused enriched contract fails validateContract:\n${errs.slice(0, 8).map((e) => `  - ${e}`).join('\n')}`);
     }
 
     const namedLosses = [
+      ...promotion.refusals.map((r) => `promotion: ${r}`),
       ...overflowBindings.map((o) => `overflow: ${o.part}.${o.channel}${o.state ? ` [${o.state}]` : ''} — ${o.refusal}`),
       ...prep.codeOnly.map((c) => `code-only: ${c.part}.${c.channel} — ${c.reason}`),
       ...prep.stateCodeOnly.map((c) => `code-only[${c.state}]: ${c.part}.${c.channel} — ${c.reason}`),
@@ -202,7 +210,8 @@ async function main() {
         folds: folds.length,
       },
       namedLosses,
-      iconAssets,
+      iconAssets: iconAssetsMerged,
+      contextStyles: truth.controls['span']?.style ?? {},
     });
     await gatePage.close();
 

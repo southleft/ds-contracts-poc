@@ -6,8 +6,8 @@
   "combos": 4,
   "interactions": 4,
   "computed": {
-    "cellsCompared": 224,
-    "cellsEqual": 224,
+    "cellsCompared": 576,
+    "cellsEqual": 576,
     "pctEqual": 100,
     "rowsFullyEqual": 16,
     "rows": 16
@@ -16,9 +16,9 @@
     "pairs": 16,
     "perfectExact": 0,
     "perfectAA": 0,
-    "meanExact": 9.782511393229168,
-    "meanAA": 9.243774414062502,
-    "maxAA": 19.921061197916668
+    "meanExact": 9.78271484375,
+    "meanAA": 9.6612548828125,
+    "maxAA": 20.55908203125
   },
   "fusion": {
     "boundConfirmed": 8,
@@ -28,204 +28,200 @@
     "mintedLeavesUnfolded": 14,
     "baseBindings": 14,
     "stateBindings": 0,
-    "codeOnlyChannels": 6,
-    "overflowBindings": 7,
+    "codeOnlyChannels": 1,
+    "overflowBindings": 0,
     "folds": 9
   },
   "worstRows": [
     {
       "key": "large__default",
-      "pctAA": 19.921061197916668,
-      "pctExact": 20.689290364583332,
+      "pctAA": 20.55908203125,
+      "pctExact": 20.690104166666668,
       "channelsMismatched": 0
     },
     {
       "key": "large__hover",
-      "pctAA": 19.921061197916668,
-      "pctExact": 20.689290364583332,
+      "pctAA": 20.55908203125,
+      "pctExact": 20.690104166666668,
       "channelsMismatched": 0
     },
     {
       "key": "large__focus-visible",
-      "pctAA": 19.921061197916668,
-      "pctExact": 20.689290364583332,
+      "pctAA": 20.55908203125,
+      "pctExact": 20.690104166666668,
       "channelsMismatched": 0
     },
     {
       "key": "large__active",
-      "pctAA": 19.921061197916668,
-      "pctExact": 20.689290364583332,
+      "pctAA": 20.55908203125,
+      "pctExact": 20.690104166666668,
       "channelsMismatched": 0
     },
     {
       "key": "medium__default",
-      "pctAA": 10.952962239583334,
+      "pctAA": 11.442057291666666,
       "pctExact": 11.575520833333334,
       "channelsMismatched": 0
     },
     {
       "key": "medium__hover",
-      "pctAA": 10.952962239583334,
+      "pctAA": 11.442057291666666,
       "pctExact": 11.575520833333334,
       "channelsMismatched": 0
     },
     {
       "key": "medium__focus-visible",
-      "pctAA": 10.952962239583334,
+      "pctAA": 11.442057291666666,
       "pctExact": 11.575520833333334,
       "channelsMismatched": 0
     },
     {
       "key": "medium__active",
-      "pctAA": 10.952962239583334,
+      "pctAA": 11.442057291666666,
       "pctExact": 11.575520833333334,
       "channelsMismatched": 0
     }
   ],
   "topMismatchedChannels": [],
   "namedLosses": [
-    "overflow: part-0.bottom — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-    "overflow: part-0.color — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-    "overflow: part-0.left — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-    "overflow: part-0.min-height — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-    "overflow: part-0.min-width — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-    "overflow: part-0.right — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-    "overflow: part-0.top — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-    "code-only: part-0.max-height — declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
-    "code-only: part-0.max-width — declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
-    "code-only: part-0.overflow-clip-margin — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-    "code-only: part-0.overflow-x — declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
-    "code-only: part-0.overflow-y — declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
-    "code-only: part-0.position — declared-channel value outside the bounded grammar — named residue (v15)"
+    "code-only: part-0.overflow-clip-margin — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today"
   ],
   "rows": [
     {
       "key": "extraSmall__default",
-      "channelsCompared": 14,
-      "channelsEqual": 14,
+      "channelsCompared": 36,
+      "channelsEqual": 36,
       "pctExact": 1.8001302083333333,
-      "pctAA": 1.50146484375,
+      "pctAA": 1.7122395833333333,
       "mismatches": []
     },
     {
       "key": "extraSmall__hover",
-      "channelsCompared": 14,
-      "channelsEqual": 14,
+      "channelsCompared": 36,
+      "channelsEqual": 36,
       "pctExact": 1.8001302083333333,
-      "pctAA": 1.50146484375,
-      "mismatches": []
+      "pctAA": 1.7122395833333333,
+      "mismatches": [],
+      "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport"
     },
     {
       "key": "extraSmall__focus-visible",
-      "channelsCompared": 14,
-      "channelsEqual": 14,
+      "channelsCompared": 36,
+      "channelsEqual": 36,
       "pctExact": 1.8001302083333333,
-      "pctAA": 1.50146484375,
+      "pctAA": 1.7122395833333333,
       "mismatches": []
     },
     {
       "key": "extraSmall__active",
-      "channelsCompared": 14,
-      "channelsEqual": 14,
+      "channelsCompared": 36,
+      "channelsEqual": 36,
       "pctExact": 1.8001302083333333,
-      "pctAA": 1.50146484375,
-      "mismatches": []
+      "pctAA": 1.7122395833333333,
+      "mismatches": [],
+      "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport"
     },
     {
       "key": "small__default",
-      "channelsCompared": 14,
-      "channelsEqual": 14,
+      "channelsCompared": 36,
+      "channelsEqual": 36,
       "pctExact": 5.065104166666667,
-      "pctAA": 4.599609375,
+      "pctAA": 4.931640625,
       "mismatches": []
     },
     {
       "key": "small__hover",
-      "channelsCompared": 14,
-      "channelsEqual": 14,
+      "channelsCompared": 36,
+      "channelsEqual": 36,
       "pctExact": 5.065104166666667,
-      "pctAA": 4.599609375,
-      "mismatches": []
+      "pctAA": 4.931640625,
+      "mismatches": [],
+      "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport"
     },
     {
       "key": "small__focus-visible",
-      "channelsCompared": 14,
-      "channelsEqual": 14,
+      "channelsCompared": 36,
+      "channelsEqual": 36,
       "pctExact": 5.065104166666667,
-      "pctAA": 4.599609375,
+      "pctAA": 4.931640625,
       "mismatches": []
     },
     {
       "key": "small__active",
-      "channelsCompared": 14,
-      "channelsEqual": 14,
+      "channelsCompared": 36,
+      "channelsEqual": 36,
       "pctExact": 5.065104166666667,
-      "pctAA": 4.599609375,
-      "mismatches": []
+      "pctAA": 4.931640625,
+      "mismatches": [],
+      "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport"
     },
     {
       "key": "medium__default",
-      "channelsCompared": 14,
-      "channelsEqual": 14,
+      "channelsCompared": 36,
+      "channelsEqual": 36,
       "pctExact": 11.575520833333334,
-      "pctAA": 10.952962239583334,
+      "pctAA": 11.442057291666666,
       "mismatches": []
     },
     {
       "key": "medium__hover",
-      "channelsCompared": 14,
-      "channelsEqual": 14,
+      "channelsCompared": 36,
+      "channelsEqual": 36,
       "pctExact": 11.575520833333334,
-      "pctAA": 10.952962239583334,
-      "mismatches": []
+      "pctAA": 11.442057291666666,
+      "mismatches": [],
+      "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport"
     },
     {
       "key": "medium__focus-visible",
-      "channelsCompared": 14,
-      "channelsEqual": 14,
+      "channelsCompared": 36,
+      "channelsEqual": 36,
       "pctExact": 11.575520833333334,
-      "pctAA": 10.952962239583334,
+      "pctAA": 11.442057291666666,
       "mismatches": []
     },
     {
       "key": "medium__active",
-      "channelsCompared": 14,
-      "channelsEqual": 14,
+      "channelsCompared": 36,
+      "channelsEqual": 36,
       "pctExact": 11.575520833333334,
-      "pctAA": 10.952962239583334,
-      "mismatches": []
+      "pctAA": 11.442057291666666,
+      "mismatches": [],
+      "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport"
     },
     {
       "key": "large__default",
-      "channelsCompared": 14,
-      "channelsEqual": 14,
-      "pctExact": 20.689290364583332,
-      "pctAA": 19.921061197916668,
+      "channelsCompared": 36,
+      "channelsEqual": 36,
+      "pctExact": 20.690104166666668,
+      "pctAA": 20.55908203125,
       "mismatches": []
     },
     {
       "key": "large__hover",
-      "channelsCompared": 14,
-      "channelsEqual": 14,
-      "pctExact": 20.689290364583332,
-      "pctAA": 19.921061197916668,
-      "mismatches": []
+      "channelsCompared": 36,
+      "channelsEqual": 36,
+      "pctExact": 20.690104166666668,
+      "pctAA": 20.55908203125,
+      "mismatches": [],
+      "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport"
     },
     {
       "key": "large__focus-visible",
-      "channelsCompared": 14,
-      "channelsEqual": 14,
-      "pctExact": 20.689290364583332,
-      "pctAA": 19.921061197916668,
+      "channelsCompared": 36,
+      "channelsEqual": 36,
+      "pctExact": 20.690104166666668,
+      "pctAA": 20.55908203125,
       "mismatches": []
     },
     {
       "key": "large__active",
-      "channelsCompared": 14,
-      "channelsEqual": 14,
-      "pctExact": 20.689290364583332,
-      "pctAA": 19.921061197916668,
-      "mismatches": []
+      "channelsCompared": 36,
+      "channelsEqual": 36,
+      "pctExact": 20.690104166666668,
+      "pctAA": 20.55908203125,
+      "mismatches": [],
+      "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport"
     }
   ]
 }

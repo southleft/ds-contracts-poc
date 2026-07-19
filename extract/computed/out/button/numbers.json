@@ -1,19 +1,24 @@
 {
   "component": "Button",
   "browser": "148.0.7778.96",
-  "captures": 480,
-  "combos": 120,
+  "captures": 960,
+  "combos": 240,
   "interactions": 4,
   "enumerationPolicy": "full-cartesian",
   "channelsEnumerated": 942,
-  "elementsPerCapture": 2,
+  "elementsPerCapture": 7,
   "determinism": "byte-identical across two full sweeps in one session",
   "styledChannels": {
     "root": 61,
+    "icon": 15,
+    "icon-2": 17,
+    "icon-3": 26,
+    "part-0-0-0-0": 18,
+    "part-0-0-0-1": 19,
     "label": 16
   },
   "folds": {
-    "count": 17,
+    "count": 62,
     "receipts": [
       {
         "part": "root",
@@ -59,6 +64,276 @@
       },
       {
         "part": "root",
+        "channel": "text-emphasis-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "icon",
+        "channel": "border-bottom-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "icon",
+        "channel": "border-left-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "icon",
+        "channel": "border-right-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "icon",
+        "channel": "border-top-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "icon",
+        "channel": "caret-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "icon",
+        "channel": "column-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "icon",
+        "channel": "outline-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "icon",
+        "channel": "text-decoration-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "icon",
+        "channel": "text-emphasis-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "icon-2",
+        "channel": "border-bottom-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "icon-2",
+        "channel": "border-left-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "icon-2",
+        "channel": "border-right-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "icon-2",
+        "channel": "border-top-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "icon-2",
+        "channel": "caret-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "icon-2",
+        "channel": "column-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "icon-2",
+        "channel": "outline-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "icon-2",
+        "channel": "text-decoration-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "icon-2",
+        "channel": "text-emphasis-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "icon-3",
+        "channel": "border-bottom-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "icon-3",
+        "channel": "border-left-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "icon-3",
+        "channel": "border-right-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "icon-3",
+        "channel": "border-top-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "icon-3",
+        "channel": "caret-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "icon-3",
+        "channel": "column-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "icon-3",
+        "channel": "outline-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "icon-3",
+        "channel": "text-decoration-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "icon-3",
+        "channel": "text-emphasis-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "part-0-0-0-0",
+        "channel": "border-bottom-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "part-0-0-0-0",
+        "channel": "border-left-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "part-0-0-0-0",
+        "channel": "border-right-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "part-0-0-0-0",
+        "channel": "border-top-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "part-0-0-0-0",
+        "channel": "caret-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "part-0-0-0-0",
+        "channel": "column-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "part-0-0-0-0",
+        "channel": "outline-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "part-0-0-0-0",
+        "channel": "text-decoration-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "part-0-0-0-0",
+        "channel": "text-emphasis-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "part-0-0-0-1",
+        "channel": "border-bottom-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "part-0-0-0-1",
+        "channel": "border-left-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "part-0-0-0-1",
+        "channel": "border-right-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "part-0-0-0-1",
+        "channel": "border-top-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "part-0-0-0-1",
+        "channel": "caret-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "part-0-0-0-1",
+        "channel": "column-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "part-0-0-0-1",
+        "channel": "outline-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "part-0-0-0-1",
+        "channel": "text-decoration-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "part-0-0-0-1",
         "channel": "text-emphasis-color",
         "foldedInto": "color",
         "class": "currentColor"
@@ -118,42 +393,47 @@
         "class": "currentColor"
       }
     ],
-    "mintedLeavesUnfolded": 895,
-    "mintedLeavesFolded": 330
+    "mintedLeavesUnfolded": 897,
+    "mintedLeavesFolded": 332
   },
   "bound": {
-    "cellsChecked": 816,
-    "confirmed": 740,
-    "contradictions": 76,
-    "untriaged": 0
+    "cellsChecked": 1632,
+    "confirmed": 1444,
+    "contradictions": 188,
+    "untriaged": 36
   },
   "minted": {
-    "leaves": 330,
-    "baseBindings": 22,
+    "leaves": 332,
+    "baseBindings": 28,
     "stateBindings": 27,
     "byShape": {
-      "uniform": 19,
+      "uniform": 23,
       "perAxis": 8,
       "perPair": 17,
-      "refused": 5
+      "refused": 7
     }
   },
   "declared": {
-    "base": 14,
+    "base": 22,
     "state": 3
   },
   "codeOnly": {
     "base": 7,
-    "state": 14,
-    "overflowBindings": 17
+    "state": 27,
+    "overflowBindings": 19
   },
   "pseudoElementFindings": 0,
+  "anatomyPromotion": {
+    "partsCarried": 4,
+    "svgAssets": 1,
+    "refusals": 0
+  },
   "enrichedContractSchemaValid": true,
   "enrichedContractGeneratorValid": true,
   "replayComputedEquality": {
-    "cellsCompared": 902400,
-    "cellsMatched": 901920,
-    "pct": 99.94680851063829,
+    "cellsCompared": 4060800,
+    "cellsMatched": 4059780,
+    "pct": 99.97488179669031,
     "namedExclusions": [
       "app-region",
       "text-decoration"
@@ -161,81 +441,85 @@
     "topMismatchedChannels": [
       [
         "inline-size",
-        192
+        360
       ],
       [
         "width",
-        192
+        360
       ],
       [
         "perspective-origin",
-        96
+        192
+      ],
+      [
+        "-webkit-text-decorations-in-effect",
+        108
       ]
     ]
   },
   "pixel": {
-    "pairs": 480,
+    "pairs": 960,
     "exact": {
-      "mean": 0.017181396484374976,
-      "max": 1.1287434895833333,
-      "perfect": 369
+      "mean": 0.20582156711154517,
+      "max": 1.1458333333333333,
+      "perfect": 354
     },
     "aa": {
-      "mean": 0,
-      "max": 0,
+      "mean": 0.12070634629991397,
+      "max": 0.2652994791666667,
       "perfect": 480
     },
     "worst": [
       {
-        "key": "primary.none.micro.enabled__hover",
-        "pctExact": 1.1287434895833333,
-        "pctAA": 0
+        "key": "primary.none.slim.on.enabled__active",
+        "pctExact": 0.380859375,
+        "pctAA": 0.2652994791666667
       },
       {
-        "key": "primary.none.micro.enabled__focus-visible",
-        "pctExact": 1.1287434895833333,
-        "pctAA": 0
+        "key": "primary.none.medium.on.enabled__active",
+        "pctExact": 0.380859375,
+        "pctAA": 0.2652994791666667
       },
       {
-        "key": "primary.none.micro.enabled__active",
-        "pctExact": 0.966796875,
-        "pctAA": 0
+        "key": "primary.none.large.on.enabled__active",
+        "pctExact": 0.6412760416666666,
+        "pctAA": 0.2628580729166667
       },
       {
-        "key": "secondary.critical.large.enabled__active",
-        "pctExact": 0.3971354166666667,
-        "pctAA": 0
+        "key": "primary.none.micro.on.enabled__default",
+        "pctExact": 0.3816731770833333,
+        "pctAA": 0.2628580729166667
       },
       {
-        "key": "secondary.critical.micro.enabled__active",
-        "pctExact": 0.3963216145833333,
-        "pctAA": 0
+        "key": "primary.none.slim.on.enabled__focus-visible",
+        "pctExact": 0.4134114583333333,
+        "pctAA": 0.2587890625
       },
       {
-        "key": "secondary.critical.slim.enabled__active",
-        "pctExact": 0.3963216145833333,
-        "pctAA": 0
+        "key": "primary.none.medium.on.enabled__focus-visible",
+        "pctExact": 0.4117838541666667,
+        "pctAA": 0.2587890625
       },
       {
-        "key": "secondary.critical.medium.enabled__active",
-        "pctExact": 0.3963216145833333,
-        "pctAA": 0
+        "key": "primary.none.slim.on.enabled__hover",
+        "pctExact": 0.380859375,
+        "pctAA": 0.2587890625
       },
       {
-        "key": "secondary.success.micro.enabled__active",
-        "pctExact": 0.3531901041666667,
-        "pctAA": 0
+        "key": "primary.none.medium.on.enabled__hover",
+        "pctExact": 0.380859375,
+        "pctAA": 0.2587890625
       }
     ]
   },
   "gate": {
-    "computedPctEqual": 90.61688311688312,
-    "rowsFullyEqual": 192,
-    "rows": 480,
+    "computedPctEqual": 89.35897435897436,
+    "rowsFullyEqual": 280,
+    "rows": 960,
     "pixelPerfectExact": 0,
     "pixelPerfectAA": 0,
-    "pairs": 480
+    "pairs": 960
   },
-  "focusVisibleDriverMatched": 60,
-  "focusVisibleDriverTotal": 120
+  "focusVisibleDriverMatched": 120,
+  "focusVisibleDriverTotal": 240
 }

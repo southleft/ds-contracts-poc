@@ -1,0 +1,74 @@
+{
+  "component": "RadioButton",
+  "contractId": "polaris.radio-button",
+  "contractVersion": "0.3.0",
+  "generatedBy": "extract/figma/canvas-gate/run.ts",
+  "sides": {
+    "canvas": "createFigmaEngine().compileComponentData rendered by the playground canvas renderer (vendored), deviceScaleFactor 2",
+    "real": "@shopify/polaris@13.9.5 in 148.0.7778.96 (playwright-core, headless), deviceScaleFactor 2"
+  },
+  "scoring": {
+    "pctExactUnmasked": "pixelmatch threshold 0, includeAA true — every differing pixel",
+    "pctAAUnmasked": "pixelmatch threshold 0.1, includeAA false — antialiased pixels excluded by the classifier",
+    "pctAAMasked": "the AA point with BOTH sides' DOM text rects (+4 device px) removed from numerator and denominator",
+    "sizePolicy": "content-trimmed crops center-padded onto the UNION canvas; a size delta stays in the diff (never cropped to match)"
+  },
+  "fonts": {
+    "interAvailableInBrowser": true
+  },
+  "mountNote": "round 4: label mounted visible (promoted label anatomy — see Checkbox note).",
+  "cells": [
+    {
+      "cell": "Checked=unchecked",
+      "kind": "base",
+      "pctExactUnmasked": 44.58,
+      "pctAAUnmasked": 16.3,
+      "pctAAMasked": 55.63,
+      "maskCoveragePct": 96.92,
+      "canvasPx": "296x23",
+      "realPx": "325x32",
+      "inkCanvasPct": 28.76,
+      "inkRealPct": 29.52,
+      "note": "canvas renderer draws no effectStack — the real control edge is an inset box-shadow, absent on the canvas side"
+    },
+    {
+      "cell": "Checked=checked",
+      "kind": "base",
+      "pctExactUnmasked": 35.35,
+      "pctAAUnmasked": 13.78,
+      "pctAAMasked": 33.61,
+      "maskCoveragePct": 89.29,
+      "canvasPx": "336x40",
+      "realPx": "325x32",
+      "inkCanvasPct": 31.96,
+      "inkRealPct": 22.84,
+      "note": "canvas renderer draws no effectStack — the real control edge is an inset box-shadow, absent on the canvas side"
+    }
+  ],
+  "summary": {
+    "cells": 2,
+    "meanExactUnmasked": 39.97,
+    "meanAAUnmasked": 15.04,
+    "meanAAMasked": 44.62,
+    "maxAAMasked": 55.63,
+    "worstCell": "Checked=unchecked",
+    "cellsOver10Masked": [
+      {
+        "cell": "Checked=unchecked",
+        "pctAAMasked": 55.63,
+        "note": "canvas renderer draws no effectStack — the real control edge is an inset box-shadow, absent on the canvas side"
+      },
+      {
+        "cell": "Checked=checked",
+        "pctAAMasked": 33.61,
+        "note": "canvas renderer draws no effectStack — the real control edge is an inset box-shadow, absent on the canvas side"
+      }
+    ],
+    "blankCanvasCells": []
+  },
+  "acceptance": {
+    "maskedMeanLE5": false,
+    "allCellsOver10Named": true,
+    "noBlankCanvasCells": true
+  }
+}

@@ -1,4 +1,4 @@
-/* Spinner — from polaris.spinner v0.2.0 (core/emit-html.ts) */
+/* Spinner — from polaris.spinner v0.3.0 (core/emit-html.ts) */
 
 .spinner, .spinner *, .spinner *::before, .spinner *::after {
   box-sizing: border-box;
@@ -9,28 +9,7 @@
   align-items: center;
   justify-content: center;
   border: 0;
-}
-
-.spinner__glyphLarge svg {
-  width: 44px;
-  height: 44px;
-}
-
-.spinner__glyphLarge {
-  display: inline-flex;
-  flex-shrink: 0;
-  fill: var(--p-color-bg-fill-brand);
-}
-
-.spinner__glyphSmall svg {
-  width: 20px;
-  height: 20px;
-}
-
-.spinner__glyphSmall {
-  display: inline-flex;
-  flex-shrink: 0;
-  fill: var(--p-color-bg-fill-brand);
+  display: block;
 }
 
 /* showcase chrome */

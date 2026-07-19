@@ -108,6 +108,21 @@
           "prop": "accessibilityLabel"
         }
       }
+    },
+    {
+      "name": "withInitials",
+      "description": "Structure-creating optional prop promoted by the computed floor (round 4): ON mounts the library's `initials` (\"TP\"); the created subtree is carried as parts gated on this prop.",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Show WithInitials"
+        },
+        "code": {
+          "prop": "withInitials"
+        }
+      }
     }
   ],
   "states": [],
@@ -146,6 +161,14 @@
           }
         }
       ],
+      "declared": {
+        "display": "block",
+        "max-width": "100%",
+        "overflow-x": "hidden",
+        "overflow-y": "hidden",
+        "position": "relative",
+        "user-select": "none"
+      },
       "parts": {
         "initials": {
           "element": "span",
@@ -153,7 +176,6 @@
             "font-size": "{p.font-size-325}",
             "font-weight": "{p.font-weight-regular}",
             "bottom": "{imported.shared.size-0}",
-            "color": "{imported.shared.color-fdeffd}",
             "left": "{imported.shared.size-0}",
             "min-height": "{imported.shared.size-0}",
             "min-width": "{imported.shared.size-0}",
@@ -163,22 +185,74 @@
           "content": {
             "prop": "initials"
           },
+          "declared": {
+            "position": "absolute",
+            "aspect-ratio": "1 / 1",
+            "user-select": "none"
+          },
           "layout": {
             "display": "flex",
             "align": "center",
             "justify": "center"
           },
-          "declared": {
-            "user-select": "none"
+          "parts": {
+            "initials-xs": {
+              "icon": {
+                "asset": "avatar-initials-xs",
+                "size": 20
+              },
+              "visibleWhen": {
+                "prop": "size",
+                "equals": "xs"
+              },
+              "description": "Per-value svg content promoted from the computed floor: the glyph drawn when size=xs."
+            },
+            "initials-sm": {
+              "icon": {
+                "asset": "avatar-initials-sm",
+                "size": 24
+              },
+              "visibleWhen": {
+                "prop": "size",
+                "equals": "sm"
+              },
+              "description": "Per-value svg content promoted from the computed floor: the glyph drawn when size=sm."
+            },
+            "initials-md": {
+              "icon": {
+                "asset": "avatar-initials-md",
+                "size": 28
+              },
+              "visibleWhen": {
+                "prop": "size",
+                "equals": "md"
+              },
+              "description": "Per-value svg content promoted from the computed floor: the glyph drawn when size=md."
+            },
+            "initials-lg": {
+              "icon": {
+                "asset": "avatar-initials-lg",
+                "size": 32
+              },
+              "visibleWhen": {
+                "prop": "size",
+                "equals": "lg"
+              },
+              "description": "Per-value svg content promoted from the computed floor: the glyph drawn when size=lg."
+            },
+            "initials-xl": {
+              "icon": {
+                "asset": "avatar-initials-xl",
+                "size": 40
+              },
+              "visibleWhen": {
+                "prop": "size",
+                "equals": "xl"
+              },
+              "description": "Per-value svg content promoted from the computed floor: the glyph drawn when size=xl."
+            }
           }
         }
-      },
-      "declared": {
-        "max-width": "100%",
-        "overflow-x": "hidden",
-        "overflow-y": "hidden",
-        "position": "relative",
-        "user-select": "none"
       },
       "tokensByProp": [
         {

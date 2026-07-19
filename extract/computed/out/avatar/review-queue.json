@@ -6,8 +6,8 @@
   "browser": "148.0.7778.96",
   "items": [
     {
-      "id": "xs|initials|font-size",
-      "combo": "xs",
+      "id": "xs.off|initials|font-size",
+      "combo": "xs.off",
       "part": "initials",
       "channel": "font-size",
       "ref": "{p.font-size-400}",
@@ -21,8 +21,38 @@
       "status": "open"
     },
     {
-      "id": "sm|initials|font-size",
-      "combo": "sm",
+      "id": "xs.on|root|background",
+      "combo": "xs.on",
+      "part": "root",
+      "channel": "background",
+      "ref": "{p.color-avatar-one-bg-fill}",
+      "computedProp": "background-color",
+      "expected": "rgba(197, 48, 197, 1)",
+      "observed": "rgba(253, 75, 146, 1)",
+      "cause": "presence-prop-driven styling: Polaris hash-selects the avatar palette from the initials/name value — a boolean presence axis has no tokensByProp spelling (round 4 residue); the base (icon) palette stands",
+      "candidates": [
+        "p.color-avatar-five-bg-fill"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "xs.on|root|color",
+      "combo": "xs.on",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-avatar-one-text-on-bg-fill}",
+      "computedProp": "color",
+      "expected": "rgba(253, 239, 253, 1)",
+      "observed": "rgba(255, 246, 248, 1)",
+      "cause": "presence-prop-driven styling: Polaris hash-selects the avatar palette from the initials/name value — a boolean presence axis has no tokensByProp spelling (round 4 residue); the base (icon) palette stands",
+      "candidates": [
+        "p.color-avatar-five-text-on-bg-fill"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "xs.on|initials|font-size",
+      "combo": "xs.on",
       "part": "initials",
       "channel": "font-size",
       "ref": "{p.font-size-400}",
@@ -36,8 +66,8 @@
       "status": "open"
     },
     {
-      "id": "md|initials|font-size",
-      "combo": "md",
+      "id": "sm.off|initials|font-size",
+      "combo": "sm.off",
       "part": "initials",
       "channel": "font-size",
       "ref": "{p.font-size-400}",
@@ -51,8 +81,38 @@
       "status": "open"
     },
     {
-      "id": "lg|initials|font-size",
-      "combo": "lg",
+      "id": "sm.on|root|background",
+      "combo": "sm.on",
+      "part": "root",
+      "channel": "background",
+      "ref": "{p.color-avatar-one-bg-fill}",
+      "computedProp": "background-color",
+      "expected": "rgba(197, 48, 197, 1)",
+      "observed": "rgba(253, 75, 146, 1)",
+      "cause": "presence-prop-driven styling: Polaris hash-selects the avatar palette from the initials/name value — a boolean presence axis has no tokensByProp spelling (round 4 residue); the base (icon) palette stands",
+      "candidates": [
+        "p.color-avatar-five-bg-fill"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "sm.on|root|color",
+      "combo": "sm.on",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-avatar-one-text-on-bg-fill}",
+      "computedProp": "color",
+      "expected": "rgba(253, 239, 253, 1)",
+      "observed": "rgba(255, 246, 248, 1)",
+      "cause": "presence-prop-driven styling: Polaris hash-selects the avatar palette from the initials/name value — a boolean presence axis has no tokensByProp spelling (round 4 residue); the base (icon) palette stands",
+      "candidates": [
+        "p.color-avatar-five-text-on-bg-fill"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "sm.on|initials|font-size",
+      "combo": "sm.on",
       "part": "initials",
       "channel": "font-size",
       "ref": "{p.font-size-400}",
@@ -66,8 +126,173 @@
       "status": "open"
     },
     {
-      "id": "xl|initials|font-size",
-      "combo": "xl",
+      "id": "md.off|initials|font-size",
+      "combo": "md.off",
+      "part": "initials",
+      "channel": "font-size",
+      "ref": "{p.font-size-400}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "13px",
+      "cause": "content-conditioned element: .Polaris-Avatar__Text { font-size: var(--p-font-size-400) } styles the Text element Polaris renders only when initials/name are given; the default mount renders the empty .Polaris-Avatar__Initials wrapper, which inherits the provider's body typography (html,body { font-size: var(--p-font-size-325) } = 13px). Computed truth wins: resolve to the unique DTCG candidate {p.font-size-325}; the initials-present branch stays named residue (no contract channel can be a function of a text prop's value — the standing Avatar refusal class).",
+      "candidates": [
+        "p.font-size-325"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "md.on|root|background",
+      "combo": "md.on",
+      "part": "root",
+      "channel": "background",
+      "ref": "{p.color-avatar-one-bg-fill}",
+      "computedProp": "background-color",
+      "expected": "rgba(197, 48, 197, 1)",
+      "observed": "rgba(253, 75, 146, 1)",
+      "cause": "presence-prop-driven styling: Polaris hash-selects the avatar palette from the initials/name value — a boolean presence axis has no tokensByProp spelling (round 4 residue); the base (icon) palette stands",
+      "candidates": [
+        "p.color-avatar-five-bg-fill"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "md.on|root|color",
+      "combo": "md.on",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-avatar-one-text-on-bg-fill}",
+      "computedProp": "color",
+      "expected": "rgba(253, 239, 253, 1)",
+      "observed": "rgba(255, 246, 248, 1)",
+      "cause": "presence-prop-driven styling: Polaris hash-selects the avatar palette from the initials/name value — a boolean presence axis has no tokensByProp spelling (round 4 residue); the base (icon) palette stands",
+      "candidates": [
+        "p.color-avatar-five-text-on-bg-fill"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "md.on|initials|font-size",
+      "combo": "md.on",
+      "part": "initials",
+      "channel": "font-size",
+      "ref": "{p.font-size-400}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "13px",
+      "cause": "content-conditioned element: .Polaris-Avatar__Text { font-size: var(--p-font-size-400) } styles the Text element Polaris renders only when initials/name are given; the default mount renders the empty .Polaris-Avatar__Initials wrapper, which inherits the provider's body typography (html,body { font-size: var(--p-font-size-325) } = 13px). Computed truth wins: resolve to the unique DTCG candidate {p.font-size-325}; the initials-present branch stays named residue (no contract channel can be a function of a text prop's value — the standing Avatar refusal class).",
+      "candidates": [
+        "p.font-size-325"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "lg.off|initials|font-size",
+      "combo": "lg.off",
+      "part": "initials",
+      "channel": "font-size",
+      "ref": "{p.font-size-400}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "13px",
+      "cause": "content-conditioned element: .Polaris-Avatar__Text { font-size: var(--p-font-size-400) } styles the Text element Polaris renders only when initials/name are given; the default mount renders the empty .Polaris-Avatar__Initials wrapper, which inherits the provider's body typography (html,body { font-size: var(--p-font-size-325) } = 13px). Computed truth wins: resolve to the unique DTCG candidate {p.font-size-325}; the initials-present branch stays named residue (no contract channel can be a function of a text prop's value — the standing Avatar refusal class).",
+      "candidates": [
+        "p.font-size-325"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "lg.on|root|background",
+      "combo": "lg.on",
+      "part": "root",
+      "channel": "background",
+      "ref": "{p.color-avatar-one-bg-fill}",
+      "computedProp": "background-color",
+      "expected": "rgba(197, 48, 197, 1)",
+      "observed": "rgba(253, 75, 146, 1)",
+      "cause": "presence-prop-driven styling: Polaris hash-selects the avatar palette from the initials/name value — a boolean presence axis has no tokensByProp spelling (round 4 residue); the base (icon) palette stands",
+      "candidates": [
+        "p.color-avatar-five-bg-fill"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "lg.on|root|color",
+      "combo": "lg.on",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-avatar-one-text-on-bg-fill}",
+      "computedProp": "color",
+      "expected": "rgba(253, 239, 253, 1)",
+      "observed": "rgba(255, 246, 248, 1)",
+      "cause": "presence-prop-driven styling: Polaris hash-selects the avatar palette from the initials/name value — a boolean presence axis has no tokensByProp spelling (round 4 residue); the base (icon) palette stands",
+      "candidates": [
+        "p.color-avatar-five-text-on-bg-fill"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "lg.on|initials|font-size",
+      "combo": "lg.on",
+      "part": "initials",
+      "channel": "font-size",
+      "ref": "{p.font-size-400}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "13px",
+      "cause": "content-conditioned element: .Polaris-Avatar__Text { font-size: var(--p-font-size-400) } styles the Text element Polaris renders only when initials/name are given; the default mount renders the empty .Polaris-Avatar__Initials wrapper, which inherits the provider's body typography (html,body { font-size: var(--p-font-size-325) } = 13px). Computed truth wins: resolve to the unique DTCG candidate {p.font-size-325}; the initials-present branch stays named residue (no contract channel can be a function of a text prop's value — the standing Avatar refusal class).",
+      "candidates": [
+        "p.font-size-325"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "xl.off|initials|font-size",
+      "combo": "xl.off",
+      "part": "initials",
+      "channel": "font-size",
+      "ref": "{p.font-size-400}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "13px",
+      "cause": "content-conditioned element: .Polaris-Avatar__Text { font-size: var(--p-font-size-400) } styles the Text element Polaris renders only when initials/name are given; the default mount renders the empty .Polaris-Avatar__Initials wrapper, which inherits the provider's body typography (html,body { font-size: var(--p-font-size-325) } = 13px). Computed truth wins: resolve to the unique DTCG candidate {p.font-size-325}; the initials-present branch stays named residue (no contract channel can be a function of a text prop's value — the standing Avatar refusal class).",
+      "candidates": [
+        "p.font-size-325"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "xl.on|root|background",
+      "combo": "xl.on",
+      "part": "root",
+      "channel": "background",
+      "ref": "{p.color-avatar-one-bg-fill}",
+      "computedProp": "background-color",
+      "expected": "rgba(197, 48, 197, 1)",
+      "observed": "rgba(253, 75, 146, 1)",
+      "cause": "presence-prop-driven styling: Polaris hash-selects the avatar palette from the initials/name value — a boolean presence axis has no tokensByProp spelling (round 4 residue); the base (icon) palette stands",
+      "candidates": [
+        "p.color-avatar-five-bg-fill"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "xl.on|root|color",
+      "combo": "xl.on",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-avatar-one-text-on-bg-fill}",
+      "computedProp": "color",
+      "expected": "rgba(253, 239, 253, 1)",
+      "observed": "rgba(255, 246, 248, 1)",
+      "cause": "presence-prop-driven styling: Polaris hash-selects the avatar palette from the initials/name value — a boolean presence axis has no tokensByProp spelling (round 4 residue); the base (icon) palette stands",
+      "candidates": [
+        "p.color-avatar-five-text-on-bg-fill"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "xl.on|initials|font-size",
+      "combo": "xl.on",
       "part": "initials",
       "channel": "font-size",
       "ref": "{p.font-size-400}",

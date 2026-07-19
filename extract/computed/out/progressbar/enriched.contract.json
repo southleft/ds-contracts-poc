@@ -149,7 +149,33 @@
           }
         }
       ],
+      "declared": {
+        "display": "block",
+        "overflow-x": "hidden",
+        "overflow-y": "hidden"
+      },
       "parts": {
+        "progress": {
+          "element": "progress",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy progress|ProgressBar__Progress|sr-only — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "none",
+            "appearance": "auto",
+            "overflow-x": "hidden",
+            "overflow-y": "hidden",
+            "position": "absolute",
+            "text-wrap-mode": "nowrap"
+          },
+          "tokens": {
+            "bottom": "{imported.progress-bar.progress.bottom}",
+            "left": "{imported.progress-bar.progress.left}",
+            "min-height": "{imported.shared.size-0}",
+            "min-width": "{imported.shared.size-0}",
+            "right": "{imported.progress-bar.progress.right}",
+            "top": "{imported.shared.size-0}",
+            "vertical-align": "{imported.progress-bar.progress.vertical-align}"
+          }
+        },
         "indicator": {
           "element": "div",
           "tokensByProp": {
@@ -170,19 +196,52 @@
             }
           },
           "declared": {
+            "display": "block",
             "transition-duration": "0.5s",
             "transition-property": "transform",
             "transition-timing-function": "cubic-bezier(0.25, 0.1, 0.25, 1)"
+          },
+          "parts": {
+            "label": {
+              "text": "25%",
+              "description": "Promoted from the computed floor (round 4): rendered anatomy span|ProgressBar__Label|sr-only — this element exists in the real component's DOM; the static layer had no part for it.",
+              "declared": {
+                "display": "none",
+                "overflow-x": "hidden",
+                "overflow-y": "hidden",
+                "position": "absolute",
+                "text-wrap-mode": "nowrap"
+              },
+              "tokens": {
+                "left": "{imported.shared.size-0}",
+                "min-height": "{imported.shared.size-0}",
+                "min-width": "{imported.shared.size-0}",
+                "right": "{imported.progress-bar.label.right}",
+                "top": "{imported.shared.size-0}"
+              },
+              "tokensByProp": [
+                {
+                  "prop": "size",
+                  "map": {
+                    "large": {
+                      "bottom": "{imported.progress-bar.label.bottom.large}"
+                    },
+                    "medium": {
+                      "bottom": "{imported.progress-bar.label.bottom.medium}"
+                    },
+                    "small": {
+                      "bottom": "{imported.progress-bar.label.bottom.small}"
+                    }
+                  }
+                }
+              ]
+            }
           },
           "tokens": {
             "min-height": "{imported.shared.size-0}",
             "min-width": "{imported.shared.size-0}"
           }
         }
-      },
-      "declared": {
-        "overflow-x": "hidden",
-        "overflow-y": "hidden"
       }
     }
   },

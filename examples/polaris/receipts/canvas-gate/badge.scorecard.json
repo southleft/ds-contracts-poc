@@ -1,0 +1,721 @@
+{
+  "component": "Badge",
+  "contractId": "polaris.badge",
+  "contractVersion": "0.3.0",
+  "generatedBy": "extract/figma/canvas-gate/run.ts",
+  "sides": {
+    "canvas": "createFigmaEngine().compileComponentData rendered by the playground canvas renderer (vendored), deviceScaleFactor 2",
+    "real": "@shopify/polaris@13.9.5 in 148.0.7778.96 (playwright-core, headless), deviceScaleFactor 2"
+  },
+  "scoring": {
+    "pctExactUnmasked": "pixelmatch threshold 0, includeAA true — every differing pixel",
+    "pctAAUnmasked": "pixelmatch threshold 0.1, includeAA false — antialiased pixels excluded by the classifier",
+    "pctAAMasked": "the AA point with BOTH sides' DOM text rects (+4 device px) removed from numerator and denominator",
+    "sizePolicy": "content-trimmed crops center-padded onto the UNION canvas; a size delta stays in the diff (never cropped to match)"
+  },
+  "fonts": {
+    "interAvailableInBrowser": true
+  },
+  "cells": [
+    {
+      "cell": "Tone=info, Progress=incomplete",
+      "kind": "base",
+      "pctExactUnmasked": 45,
+      "pctAAUnmasked": 31.07,
+      "pctAAMasked": 52.88,
+      "maskCoveragePct": 52.29,
+      "canvasPx": "162x48",
+      "realPx": "146x40",
+      "inkCanvasPct": 97.63,
+      "inkRealPct": 72.74,
+      "note": "round-4 promoted-anatomy vs canvas-engine sizing model: the contract carries the full rendered tree (ribbon/glyph/label rows) and the engine's hug/stretch sizing for deep promoted anatomy lags it — scoped to the canvas rebuild session; acceptance stays FAILED until the engine catches up"
+    },
+    {
+      "cell": "Tone=info, Progress=partiallyComplete",
+      "kind": "base",
+      "pctExactUnmasked": 45.6,
+      "pctAAUnmasked": 31.38,
+      "pctAAMasked": 53.53,
+      "maskCoveragePct": 52.29,
+      "canvasPx": "162x48",
+      "realPx": "146x40",
+      "inkCanvasPct": 97.63,
+      "inkRealPct": 72.74,
+      "note": "round-4 promoted-anatomy vs canvas-engine sizing model: the contract carries the full rendered tree (ribbon/glyph/label rows) and the engine's hug/stretch sizing for deep promoted anatomy lags it — scoped to the canvas rebuild session; acceptance stays FAILED until the engine catches up"
+    },
+    {
+      "cell": "Tone=info, Progress=complete",
+      "kind": "base",
+      "pctExactUnmasked": 45.46,
+      "pctAAUnmasked": 32.2,
+      "pctAAMasked": 55.26,
+      "maskCoveragePct": 52.29,
+      "canvasPx": "162x48",
+      "realPx": "146x40",
+      "inkCanvasPct": 97.63,
+      "inkRealPct": 72.74,
+      "note": "round-4 promoted-anatomy vs canvas-engine sizing model: the contract carries the full rendered tree (ribbon/glyph/label rows) and the engine's hug/stretch sizing for deep promoted anatomy lags it — scoped to the canvas rebuild session; acceptance stays FAILED until the engine catches up"
+    },
+    {
+      "cell": "Tone=success, Progress=incomplete",
+      "kind": "base",
+      "pctExactUnmasked": 45,
+      "pctAAUnmasked": 31.06,
+      "pctAAMasked": 52.88,
+      "maskCoveragePct": 52.29,
+      "canvasPx": "162x48",
+      "realPx": "146x40",
+      "inkCanvasPct": 97.63,
+      "inkRealPct": 72.74,
+      "note": "round-4 promoted-anatomy vs canvas-engine sizing model: the contract carries the full rendered tree (ribbon/glyph/label rows) and the engine's hug/stretch sizing for deep promoted anatomy lags it — scoped to the canvas rebuild session; acceptance stays FAILED until the engine catches up"
+    },
+    {
+      "cell": "Tone=success, Progress=partiallyComplete",
+      "kind": "base",
+      "pctExactUnmasked": 45.6,
+      "pctAAUnmasked": 31.37,
+      "pctAAMasked": 53.53,
+      "maskCoveragePct": 52.29,
+      "canvasPx": "162x48",
+      "realPx": "146x40",
+      "inkCanvasPct": 97.63,
+      "inkRealPct": 72.74,
+      "note": "round-4 promoted-anatomy vs canvas-engine sizing model: the contract carries the full rendered tree (ribbon/glyph/label rows) and the engine's hug/stretch sizing for deep promoted anatomy lags it — scoped to the canvas rebuild session; acceptance stays FAILED until the engine catches up"
+    },
+    {
+      "cell": "Tone=success, Progress=complete",
+      "kind": "base",
+      "pctExactUnmasked": 45.46,
+      "pctAAUnmasked": 32.19,
+      "pctAAMasked": 55.26,
+      "maskCoveragePct": 52.29,
+      "canvasPx": "162x48",
+      "realPx": "146x40",
+      "inkCanvasPct": 97.63,
+      "inkRealPct": 72.74,
+      "note": "round-4 promoted-anatomy vs canvas-engine sizing model: the contract carries the full rendered tree (ribbon/glyph/label rows) and the engine's hug/stretch sizing for deep promoted anatomy lags it — scoped to the canvas rebuild session; acceptance stays FAILED until the engine catches up"
+    },
+    {
+      "cell": "Tone=warning, Progress=incomplete",
+      "kind": "base",
+      "pctExactUnmasked": 44.98,
+      "pctAAUnmasked": 31.01,
+      "pctAAMasked": 52.88,
+      "maskCoveragePct": 52.29,
+      "canvasPx": "162x48",
+      "realPx": "146x40",
+      "inkCanvasPct": 97.63,
+      "inkRealPct": 72.74,
+      "note": "round-4 promoted-anatomy vs canvas-engine sizing model: the contract carries the full rendered tree (ribbon/glyph/label rows) and the engine's hug/stretch sizing for deep promoted anatomy lags it — scoped to the canvas rebuild session; acceptance stays FAILED until the engine catches up"
+    },
+    {
+      "cell": "Tone=warning, Progress=partiallyComplete",
+      "kind": "base",
+      "pctExactUnmasked": 45.59,
+      "pctAAUnmasked": 31.3,
+      "pctAAMasked": 53.5,
+      "maskCoveragePct": 52.29,
+      "canvasPx": "162x48",
+      "realPx": "146x40",
+      "inkCanvasPct": 97.63,
+      "inkRealPct": 72.74,
+      "note": "round-4 promoted-anatomy vs canvas-engine sizing model: the contract carries the full rendered tree (ribbon/glyph/label rows) and the engine's hug/stretch sizing for deep promoted anatomy lags it — scoped to the canvas rebuild session; acceptance stays FAILED until the engine catches up"
+    },
+    {
+      "cell": "Tone=warning, Progress=complete",
+      "kind": "base",
+      "pctExactUnmasked": 45.45,
+      "pctAAUnmasked": 32.14,
+      "pctAAMasked": 55.26,
+      "maskCoveragePct": 52.29,
+      "canvasPx": "162x48",
+      "realPx": "146x40",
+      "inkCanvasPct": 97.63,
+      "inkRealPct": 72.74,
+      "note": "round-4 promoted-anatomy vs canvas-engine sizing model: the contract carries the full rendered tree (ribbon/glyph/label rows) and the engine's hug/stretch sizing for deep promoted anatomy lags it — scoped to the canvas rebuild session; acceptance stays FAILED until the engine catches up"
+    },
+    {
+      "cell": "Tone=critical, Progress=incomplete",
+      "kind": "base",
+      "pctExactUnmasked": 45,
+      "pctAAUnmasked": 31.06,
+      "pctAAMasked": 52.88,
+      "maskCoveragePct": 52.29,
+      "canvasPx": "162x48",
+      "realPx": "146x40",
+      "inkCanvasPct": 97.63,
+      "inkRealPct": 72.74,
+      "note": "round-4 promoted-anatomy vs canvas-engine sizing model: the contract carries the full rendered tree (ribbon/glyph/label rows) and the engine's hug/stretch sizing for deep promoted anatomy lags it — scoped to the canvas rebuild session; acceptance stays FAILED until the engine catches up"
+    },
+    {
+      "cell": "Tone=critical, Progress=partiallyComplete",
+      "kind": "base",
+      "pctExactUnmasked": 45.6,
+      "pctAAUnmasked": 31.37,
+      "pctAAMasked": 53.53,
+      "maskCoveragePct": 52.29,
+      "canvasPx": "162x48",
+      "realPx": "146x40",
+      "inkCanvasPct": 97.63,
+      "inkRealPct": 72.74,
+      "note": "round-4 promoted-anatomy vs canvas-engine sizing model: the contract carries the full rendered tree (ribbon/glyph/label rows) and the engine's hug/stretch sizing for deep promoted anatomy lags it — scoped to the canvas rebuild session; acceptance stays FAILED until the engine catches up"
+    },
+    {
+      "cell": "Tone=critical, Progress=complete",
+      "kind": "base",
+      "pctExactUnmasked": 45.46,
+      "pctAAUnmasked": 32.19,
+      "pctAAMasked": 55.26,
+      "maskCoveragePct": 52.29,
+      "canvasPx": "162x48",
+      "realPx": "146x40",
+      "inkCanvasPct": 97.63,
+      "inkRealPct": 72.74,
+      "note": "round-4 promoted-anatomy vs canvas-engine sizing model: the contract carries the full rendered tree (ribbon/glyph/label rows) and the engine's hug/stretch sizing for deep promoted anatomy lags it — scoped to the canvas rebuild session; acceptance stays FAILED until the engine catches up"
+    },
+    {
+      "cell": "Tone=attention, Progress=incomplete",
+      "kind": "base",
+      "pctExactUnmasked": 44.98,
+      "pctAAUnmasked": 31.01,
+      "pctAAMasked": 52.88,
+      "maskCoveragePct": 52.29,
+      "canvasPx": "162x48",
+      "realPx": "146x40",
+      "inkCanvasPct": 97.74,
+      "inkRealPct": 72.84,
+      "note": "round-4 promoted-anatomy vs canvas-engine sizing model: the contract carries the full rendered tree (ribbon/glyph/label rows) and the engine's hug/stretch sizing for deep promoted anatomy lags it — scoped to the canvas rebuild session; acceptance stays FAILED until the engine catches up"
+    },
+    {
+      "cell": "Tone=attention, Progress=partiallyComplete",
+      "kind": "base",
+      "pctExactUnmasked": 45.59,
+      "pctAAUnmasked": 31.3,
+      "pctAAMasked": 53.5,
+      "maskCoveragePct": 52.29,
+      "canvasPx": "162x48",
+      "realPx": "146x40",
+      "inkCanvasPct": 97.74,
+      "inkRealPct": 72.84,
+      "note": "round-4 promoted-anatomy vs canvas-engine sizing model: the contract carries the full rendered tree (ribbon/glyph/label rows) and the engine's hug/stretch sizing for deep promoted anatomy lags it — scoped to the canvas rebuild session; acceptance stays FAILED until the engine catches up"
+    },
+    {
+      "cell": "Tone=attention, Progress=complete",
+      "kind": "base",
+      "pctExactUnmasked": 45.45,
+      "pctAAUnmasked": 32.14,
+      "pctAAMasked": 55.26,
+      "maskCoveragePct": 52.29,
+      "canvasPx": "162x48",
+      "realPx": "146x40",
+      "inkCanvasPct": 97.74,
+      "inkRealPct": 72.84,
+      "note": "round-4 promoted-anatomy vs canvas-engine sizing model: the contract carries the full rendered tree (ribbon/glyph/label rows) and the engine's hug/stretch sizing for deep promoted anatomy lags it — scoped to the canvas rebuild session; acceptance stays FAILED until the engine catches up"
+    },
+    {
+      "cell": "Tone=new, Progress=incomplete",
+      "kind": "base",
+      "pctExactUnmasked": 44.71,
+      "pctAAUnmasked": 8.14,
+      "pctAAMasked": 3.87,
+      "maskCoveragePct": 52.78,
+      "canvasPx": "162x48",
+      "realPx": "148x40",
+      "inkCanvasPct": 97.27,
+      "inkRealPct": 73.41
+    },
+    {
+      "cell": "Tone=new, Progress=partiallyComplete",
+      "kind": "base",
+      "pctExactUnmasked": 45.51,
+      "pctAAUnmasked": 8.67,
+      "pctAAMasked": 4.98,
+      "maskCoveragePct": 52.78,
+      "canvasPx": "162x48",
+      "realPx": "148x40",
+      "inkCanvasPct": 97.27,
+      "inkRealPct": 73.41
+    },
+    {
+      "cell": "Tone=new, Progress=complete",
+      "kind": "base",
+      "pctExactUnmasked": 45.54,
+      "pctAAUnmasked": 9.58,
+      "pctAAMasked": 6.92,
+      "maskCoveragePct": 52.78,
+      "canvasPx": "162x48",
+      "realPx": "148x40",
+      "inkCanvasPct": 97.27,
+      "inkRealPct": 73.41
+    },
+    {
+      "cell": "Tone=magic, Progress=incomplete",
+      "kind": "base",
+      "pctExactUnmasked": 45,
+      "pctAAUnmasked": 7.36,
+      "pctAAMasked": 3.88,
+      "maskCoveragePct": 52.29,
+      "canvasPx": "162x48",
+      "realPx": "146x40",
+      "inkCanvasPct": 97.43,
+      "inkRealPct": 72.53
+    },
+    {
+      "cell": "Tone=magic, Progress=partiallyComplete",
+      "kind": "base",
+      "pctExactUnmasked": 45.6,
+      "pctAAUnmasked": 7.66,
+      "pctAAMasked": 4.53,
+      "maskCoveragePct": 52.29,
+      "canvasPx": "162x48",
+      "realPx": "146x40",
+      "inkCanvasPct": 97.43,
+      "inkRealPct": 72.53
+    },
+    {
+      "cell": "Tone=magic, Progress=complete",
+      "kind": "base",
+      "pctExactUnmasked": 45.46,
+      "pctAAUnmasked": 8.49,
+      "pctAAMasked": 6.25,
+      "maskCoveragePct": 52.29,
+      "canvasPx": "162x48",
+      "realPx": "146x40",
+      "inkCanvasPct": 97.43,
+      "inkRealPct": 72.53
+    },
+    {
+      "cell": "Tone=info-strong, Progress=incomplete",
+      "kind": "base",
+      "pctExactUnmasked": 45,
+      "pctAAUnmasked": 31.06,
+      "pctAAMasked": 52.88,
+      "maskCoveragePct": 52.29,
+      "canvasPx": "162x48",
+      "realPx": "146x40",
+      "inkCanvasPct": 97.74,
+      "inkRealPct": 72.84,
+      "note": "round-4 promoted-anatomy vs canvas-engine sizing model: the contract carries the full rendered tree (ribbon/glyph/label rows) and the engine's hug/stretch sizing for deep promoted anatomy lags it — scoped to the canvas rebuild session; acceptance stays FAILED until the engine catches up"
+    },
+    {
+      "cell": "Tone=info-strong, Progress=partiallyComplete",
+      "kind": "base",
+      "pctExactUnmasked": 45.6,
+      "pctAAUnmasked": 31.37,
+      "pctAAMasked": 53.53,
+      "maskCoveragePct": 52.29,
+      "canvasPx": "162x48",
+      "realPx": "146x40",
+      "inkCanvasPct": 97.74,
+      "inkRealPct": 72.84,
+      "note": "round-4 promoted-anatomy vs canvas-engine sizing model: the contract carries the full rendered tree (ribbon/glyph/label rows) and the engine's hug/stretch sizing for deep promoted anatomy lags it — scoped to the canvas rebuild session; acceptance stays FAILED until the engine catches up"
+    },
+    {
+      "cell": "Tone=info-strong, Progress=complete",
+      "kind": "base",
+      "pctExactUnmasked": 45.46,
+      "pctAAUnmasked": 32.19,
+      "pctAAMasked": 55.26,
+      "maskCoveragePct": 52.29,
+      "canvasPx": "162x48",
+      "realPx": "146x40",
+      "inkCanvasPct": 97.74,
+      "inkRealPct": 72.84,
+      "note": "round-4 promoted-anatomy vs canvas-engine sizing model: the contract carries the full rendered tree (ribbon/glyph/label rows) and the engine's hug/stretch sizing for deep promoted anatomy lags it — scoped to the canvas rebuild session; acceptance stays FAILED until the engine catches up"
+    },
+    {
+      "cell": "Tone=success-strong, Progress=incomplete",
+      "kind": "base",
+      "pctExactUnmasked": 45,
+      "pctAAUnmasked": 31.03,
+      "pctAAMasked": 52.88,
+      "maskCoveragePct": 52.29,
+      "canvasPx": "162x48",
+      "realPx": "146x40",
+      "inkCanvasPct": 90.95,
+      "inkRealPct": 66.91,
+      "note": "round-4 promoted-anatomy vs canvas-engine sizing model: the contract carries the full rendered tree (ribbon/glyph/label rows) and the engine's hug/stretch sizing for deep promoted anatomy lags it — scoped to the canvas rebuild session; acceptance stays FAILED until the engine catches up"
+    },
+    {
+      "cell": "Tone=success-strong, Progress=partiallyComplete",
+      "kind": "base",
+      "pctExactUnmasked": 45.6,
+      "pctAAUnmasked": 31.34,
+      "pctAAMasked": 53.53,
+      "maskCoveragePct": 52.29,
+      "canvasPx": "162x48",
+      "realPx": "146x40",
+      "inkCanvasPct": 90.42,
+      "inkRealPct": 66.38,
+      "note": "round-4 promoted-anatomy vs canvas-engine sizing model: the contract carries the full rendered tree (ribbon/glyph/label rows) and the engine's hug/stretch sizing for deep promoted anatomy lags it — scoped to the canvas rebuild session; acceptance stays FAILED until the engine catches up"
+    },
+    {
+      "cell": "Tone=success-strong, Progress=complete",
+      "kind": "base",
+      "pctExactUnmasked": 45.46,
+      "pctAAUnmasked": 32.16,
+      "pctAAMasked": 55.26,
+      "maskCoveragePct": 52.29,
+      "canvasPx": "162x48",
+      "realPx": "146x40",
+      "inkCanvasPct": 89.35,
+      "inkRealPct": 65.32,
+      "note": "round-4 promoted-anatomy vs canvas-engine sizing model: the contract carries the full rendered tree (ribbon/glyph/label rows) and the engine's hug/stretch sizing for deep promoted anatomy lags it — scoped to the canvas rebuild session; acceptance stays FAILED until the engine catches up"
+    },
+    {
+      "cell": "Tone=warning-strong, Progress=incomplete",
+      "kind": "base",
+      "pctExactUnmasked": 45,
+      "pctAAUnmasked": 31.06,
+      "pctAAMasked": 52.88,
+      "maskCoveragePct": 52.29,
+      "canvasPx": "162x48",
+      "realPx": "146x40",
+      "inkCanvasPct": 97.74,
+      "inkRealPct": 72.84,
+      "note": "round-4 promoted-anatomy vs canvas-engine sizing model: the contract carries the full rendered tree (ribbon/glyph/label rows) and the engine's hug/stretch sizing for deep promoted anatomy lags it — scoped to the canvas rebuild session; acceptance stays FAILED until the engine catches up"
+    },
+    {
+      "cell": "Tone=warning-strong, Progress=partiallyComplete",
+      "kind": "base",
+      "pctExactUnmasked": 45.6,
+      "pctAAUnmasked": 31.37,
+      "pctAAMasked": 53.53,
+      "maskCoveragePct": 52.29,
+      "canvasPx": "162x48",
+      "realPx": "146x40",
+      "inkCanvasPct": 97.74,
+      "inkRealPct": 72.84,
+      "note": "round-4 promoted-anatomy vs canvas-engine sizing model: the contract carries the full rendered tree (ribbon/glyph/label rows) and the engine's hug/stretch sizing for deep promoted anatomy lags it — scoped to the canvas rebuild session; acceptance stays FAILED until the engine catches up"
+    },
+    {
+      "cell": "Tone=warning-strong, Progress=complete",
+      "kind": "base",
+      "pctExactUnmasked": 45.46,
+      "pctAAUnmasked": 32.19,
+      "pctAAMasked": 55.26,
+      "maskCoveragePct": 52.29,
+      "canvasPx": "162x48",
+      "realPx": "146x40",
+      "inkCanvasPct": 97.74,
+      "inkRealPct": 72.84,
+      "note": "round-4 promoted-anatomy vs canvas-engine sizing model: the contract carries the full rendered tree (ribbon/glyph/label rows) and the engine's hug/stretch sizing for deep promoted anatomy lags it — scoped to the canvas rebuild session; acceptance stays FAILED until the engine catches up"
+    },
+    {
+      "cell": "Tone=critical-strong, Progress=incomplete",
+      "kind": "base",
+      "pctExactUnmasked": 45,
+      "pctAAUnmasked": 31.06,
+      "pctAAMasked": 52.88,
+      "maskCoveragePct": 52.29,
+      "canvasPx": "162x48",
+      "realPx": "146x40",
+      "inkCanvasPct": 90.95,
+      "inkRealPct": 66.91,
+      "note": "round-4 promoted-anatomy vs canvas-engine sizing model: the contract carries the full rendered tree (ribbon/glyph/label rows) and the engine's hug/stretch sizing for deep promoted anatomy lags it — scoped to the canvas rebuild session; acceptance stays FAILED until the engine catches up"
+    },
+    {
+      "cell": "Tone=critical-strong, Progress=partiallyComplete",
+      "kind": "base",
+      "pctExactUnmasked": 45.6,
+      "pctAAUnmasked": 31.37,
+      "pctAAMasked": 53.53,
+      "maskCoveragePct": 52.29,
+      "canvasPx": "162x48",
+      "realPx": "146x40",
+      "inkCanvasPct": 90.42,
+      "inkRealPct": 66.38,
+      "note": "round-4 promoted-anatomy vs canvas-engine sizing model: the contract carries the full rendered tree (ribbon/glyph/label rows) and the engine's hug/stretch sizing for deep promoted anatomy lags it — scoped to the canvas rebuild session; acceptance stays FAILED until the engine catches up"
+    },
+    {
+      "cell": "Tone=critical-strong, Progress=complete",
+      "kind": "base",
+      "pctExactUnmasked": 45.46,
+      "pctAAUnmasked": 32.19,
+      "pctAAMasked": 55.26,
+      "maskCoveragePct": 52.29,
+      "canvasPx": "162x48",
+      "realPx": "146x40",
+      "inkCanvasPct": 89.35,
+      "inkRealPct": 65.32,
+      "note": "round-4 promoted-anatomy vs canvas-engine sizing model: the contract carries the full rendered tree (ribbon/glyph/label rows) and the engine's hug/stretch sizing for deep promoted anatomy lags it — scoped to the canvas rebuild session; acceptance stays FAILED until the engine catches up"
+    },
+    {
+      "cell": "Tone=attention-strong, Progress=incomplete",
+      "kind": "base",
+      "pctExactUnmasked": 45,
+      "pctAAUnmasked": 31.07,
+      "pctAAMasked": 52.88,
+      "maskCoveragePct": 52.29,
+      "canvasPx": "162x48",
+      "realPx": "146x40",
+      "inkCanvasPct": 97.74,
+      "inkRealPct": 72.84,
+      "note": "round-4 promoted-anatomy vs canvas-engine sizing model: the contract carries the full rendered tree (ribbon/glyph/label rows) and the engine's hug/stretch sizing for deep promoted anatomy lags it — scoped to the canvas rebuild session; acceptance stays FAILED until the engine catches up"
+    },
+    {
+      "cell": "Tone=attention-strong, Progress=partiallyComplete",
+      "kind": "base",
+      "pctExactUnmasked": 45.6,
+      "pctAAUnmasked": 31.38,
+      "pctAAMasked": 53.53,
+      "maskCoveragePct": 52.29,
+      "canvasPx": "162x48",
+      "realPx": "146x40",
+      "inkCanvasPct": 97.74,
+      "inkRealPct": 72.84,
+      "note": "round-4 promoted-anatomy vs canvas-engine sizing model: the contract carries the full rendered tree (ribbon/glyph/label rows) and the engine's hug/stretch sizing for deep promoted anatomy lags it — scoped to the canvas rebuild session; acceptance stays FAILED until the engine catches up"
+    },
+    {
+      "cell": "Tone=attention-strong, Progress=complete",
+      "kind": "base",
+      "pctExactUnmasked": 45.46,
+      "pctAAUnmasked": 32.2,
+      "pctAAMasked": 55.26,
+      "maskCoveragePct": 52.29,
+      "canvasPx": "162x48",
+      "realPx": "146x40",
+      "inkCanvasPct": 97.74,
+      "inkRealPct": 72.84,
+      "note": "round-4 promoted-anatomy vs canvas-engine sizing model: the contract carries the full rendered tree (ribbon/glyph/label rows) and the engine's hug/stretch sizing for deep promoted anatomy lags it — scoped to the canvas rebuild session; acceptance stays FAILED until the engine catches up"
+    },
+    {
+      "cell": "Tone=read-only, Progress=incomplete",
+      "kind": "base",
+      "pctExactUnmasked": 24.27,
+      "pctAAUnmasked": 1.07,
+      "pctAAMasked": 0,
+      "maskCoveragePct": 79.49,
+      "canvasPx": "117x20",
+      "realPx": "117x20",
+      "inkCanvasPct": 45.38,
+      "inkRealPct": 42.78
+    },
+    {
+      "cell": "Tone=read-only, Progress=partiallyComplete",
+      "kind": "base",
+      "pctExactUnmasked": 24.27,
+      "pctAAUnmasked": 1.07,
+      "pctAAMasked": 0,
+      "maskCoveragePct": 79.49,
+      "canvasPx": "117x20",
+      "realPx": "117x20",
+      "inkCanvasPct": 47.78,
+      "inkRealPct": 45.17
+    },
+    {
+      "cell": "Tone=read-only, Progress=complete",
+      "kind": "base",
+      "pctExactUnmasked": 24.27,
+      "pctAAUnmasked": 1.07,
+      "pctAAMasked": 0,
+      "maskCoveragePct": 79.49,
+      "canvasPx": "117x20",
+      "realPx": "117x20",
+      "inkCanvasPct": 49.49,
+      "inkRealPct": 46.88
+    },
+    {
+      "cell": "Tone=enabled, Progress=incomplete",
+      "kind": "base",
+      "pctExactUnmasked": 45,
+      "pctAAUnmasked": 7.36,
+      "pctAAMasked": 3.88,
+      "maskCoveragePct": 52.29,
+      "canvasPx": "162x48",
+      "realPx": "146x40",
+      "inkCanvasPct": 97.27,
+      "inkRealPct": 72.38
+    },
+    {
+      "cell": "Tone=enabled, Progress=partiallyComplete",
+      "kind": "base",
+      "pctExactUnmasked": 45.6,
+      "pctAAUnmasked": 7.66,
+      "pctAAMasked": 4.53,
+      "maskCoveragePct": 52.29,
+      "canvasPx": "162x48",
+      "realPx": "146x40",
+      "inkCanvasPct": 97.27,
+      "inkRealPct": 72.38
+    },
+    {
+      "cell": "Tone=enabled, Progress=complete",
+      "kind": "base",
+      "pctExactUnmasked": 45.46,
+      "pctAAUnmasked": 8.49,
+      "pctAAMasked": 6.25,
+      "maskCoveragePct": 52.29,
+      "canvasPx": "162x48",
+      "realPx": "146x40",
+      "inkCanvasPct": 97.27,
+      "inkRealPct": 72.38
+    }
+  ],
+  "summary": {
+    "cells": 42,
+    "meanExactUnmasked": 43.84,
+    "meanAAUnmasked": 24.34,
+    "meanAAMasked": 39.57,
+    "maxAAMasked": 55.26,
+    "worstCell": "Tone=info, Progress=complete",
+    "cellsOver10Masked": [
+      {
+        "cell": "Tone=info, Progress=incomplete",
+        "pctAAMasked": 52.88,
+        "note": "round-4 promoted-anatomy vs canvas-engine sizing model: the contract carries the full rendered tree (ribbon/glyph/label rows) and the engine's hug/stretch sizing for deep promoted anatomy lags it — scoped to the canvas rebuild session; acceptance stays FAILED until the engine catches up"
+      },
+      {
+        "cell": "Tone=info, Progress=partiallyComplete",
+        "pctAAMasked": 53.53,
+        "note": "round-4 promoted-anatomy vs canvas-engine sizing model: the contract carries the full rendered tree (ribbon/glyph/label rows) and the engine's hug/stretch sizing for deep promoted anatomy lags it — scoped to the canvas rebuild session; acceptance stays FAILED until the engine catches up"
+      },
+      {
+        "cell": "Tone=info, Progress=complete",
+        "pctAAMasked": 55.26,
+        "note": "round-4 promoted-anatomy vs canvas-engine sizing model: the contract carries the full rendered tree (ribbon/glyph/label rows) and the engine's hug/stretch sizing for deep promoted anatomy lags it — scoped to the canvas rebuild session; acceptance stays FAILED until the engine catches up"
+      },
+      {
+        "cell": "Tone=success, Progress=incomplete",
+        "pctAAMasked": 52.88,
+        "note": "round-4 promoted-anatomy vs canvas-engine sizing model: the contract carries the full rendered tree (ribbon/glyph/label rows) and the engine's hug/stretch sizing for deep promoted anatomy lags it — scoped to the canvas rebuild session; acceptance stays FAILED until the engine catches up"
+      },
+      {
+        "cell": "Tone=success, Progress=partiallyComplete",
+        "pctAAMasked": 53.53,
+        "note": "round-4 promoted-anatomy vs canvas-engine sizing model: the contract carries the full rendered tree (ribbon/glyph/label rows) and the engine's hug/stretch sizing for deep promoted anatomy lags it — scoped to the canvas rebuild session; acceptance stays FAILED until the engine catches up"
+      },
+      {
+        "cell": "Tone=success, Progress=complete",
+        "pctAAMasked": 55.26,
+        "note": "round-4 promoted-anatomy vs canvas-engine sizing model: the contract carries the full rendered tree (ribbon/glyph/label rows) and the engine's hug/stretch sizing for deep promoted anatomy lags it — scoped to the canvas rebuild session; acceptance stays FAILED until the engine catches up"
+      },
+      {
+        "cell": "Tone=warning, Progress=incomplete",
+        "pctAAMasked": 52.88,
+        "note": "round-4 promoted-anatomy vs canvas-engine sizing model: the contract carries the full rendered tree (ribbon/glyph/label rows) and the engine's hug/stretch sizing for deep promoted anatomy lags it — scoped to the canvas rebuild session; acceptance stays FAILED until the engine catches up"
+      },
+      {
+        "cell": "Tone=warning, Progress=partiallyComplete",
+        "pctAAMasked": 53.5,
+        "note": "round-4 promoted-anatomy vs canvas-engine sizing model: the contract carries the full rendered tree (ribbon/glyph/label rows) and the engine's hug/stretch sizing for deep promoted anatomy lags it — scoped to the canvas rebuild session; acceptance stays FAILED until the engine catches up"
+      },
+      {
+        "cell": "Tone=warning, Progress=complete",
+        "pctAAMasked": 55.26,
+        "note": "round-4 promoted-anatomy vs canvas-engine sizing model: the contract carries the full rendered tree (ribbon/glyph/label rows) and the engine's hug/stretch sizing for deep promoted anatomy lags it — scoped to the canvas rebuild session; acceptance stays FAILED until the engine catches up"
+      },
+      {
+        "cell": "Tone=critical, Progress=incomplete",
+        "pctAAMasked": 52.88,
+        "note": "round-4 promoted-anatomy vs canvas-engine sizing model: the contract carries the full rendered tree (ribbon/glyph/label rows) and the engine's hug/stretch sizing for deep promoted anatomy lags it — scoped to the canvas rebuild session; acceptance stays FAILED until the engine catches up"
+      },
+      {
+        "cell": "Tone=critical, Progress=partiallyComplete",
+        "pctAAMasked": 53.53,
+        "note": "round-4 promoted-anatomy vs canvas-engine sizing model: the contract carries the full rendered tree (ribbon/glyph/label rows) and the engine's hug/stretch sizing for deep promoted anatomy lags it — scoped to the canvas rebuild session; acceptance stays FAILED until the engine catches up"
+      },
+      {
+        "cell": "Tone=critical, Progress=complete",
+        "pctAAMasked": 55.26,
+        "note": "round-4 promoted-anatomy vs canvas-engine sizing model: the contract carries the full rendered tree (ribbon/glyph/label rows) and the engine's hug/stretch sizing for deep promoted anatomy lags it — scoped to the canvas rebuild session; acceptance stays FAILED until the engine catches up"
+      },
+      {
+        "cell": "Tone=attention, Progress=incomplete",
+        "pctAAMasked": 52.88,
+        "note": "round-4 promoted-anatomy vs canvas-engine sizing model: the contract carries the full rendered tree (ribbon/glyph/label rows) and the engine's hug/stretch sizing for deep promoted anatomy lags it — scoped to the canvas rebuild session; acceptance stays FAILED until the engine catches up"
+      },
+      {
+        "cell": "Tone=attention, Progress=partiallyComplete",
+        "pctAAMasked": 53.5,
+        "note": "round-4 promoted-anatomy vs canvas-engine sizing model: the contract carries the full rendered tree (ribbon/glyph/label rows) and the engine's hug/stretch sizing for deep promoted anatomy lags it — scoped to the canvas rebuild session; acceptance stays FAILED until the engine catches up"
+      },
+      {
+        "cell": "Tone=attention, Progress=complete",
+        "pctAAMasked": 55.26,
+        "note": "round-4 promoted-anatomy vs canvas-engine sizing model: the contract carries the full rendered tree (ribbon/glyph/label rows) and the engine's hug/stretch sizing for deep promoted anatomy lags it — scoped to the canvas rebuild session; acceptance stays FAILED until the engine catches up"
+      },
+      {
+        "cell": "Tone=info-strong, Progress=incomplete",
+        "pctAAMasked": 52.88,
+        "note": "round-4 promoted-anatomy vs canvas-engine sizing model: the contract carries the full rendered tree (ribbon/glyph/label rows) and the engine's hug/stretch sizing for deep promoted anatomy lags it — scoped to the canvas rebuild session; acceptance stays FAILED until the engine catches up"
+      },
+      {
+        "cell": "Tone=info-strong, Progress=partiallyComplete",
+        "pctAAMasked": 53.53,
+        "note": "round-4 promoted-anatomy vs canvas-engine sizing model: the contract carries the full rendered tree (ribbon/glyph/label rows) and the engine's hug/stretch sizing for deep promoted anatomy lags it — scoped to the canvas rebuild session; acceptance stays FAILED until the engine catches up"
+      },
+      {
+        "cell": "Tone=info-strong, Progress=complete",
+        "pctAAMasked": 55.26,
+        "note": "round-4 promoted-anatomy vs canvas-engine sizing model: the contract carries the full rendered tree (ribbon/glyph/label rows) and the engine's hug/stretch sizing for deep promoted anatomy lags it — scoped to the canvas rebuild session; acceptance stays FAILED until the engine catches up"
+      },
+      {
+        "cell": "Tone=success-strong, Progress=incomplete",
+        "pctAAMasked": 52.88,
+        "note": "round-4 promoted-anatomy vs canvas-engine sizing model: the contract carries the full rendered tree (ribbon/glyph/label rows) and the engine's hug/stretch sizing for deep promoted anatomy lags it — scoped to the canvas rebuild session; acceptance stays FAILED until the engine catches up"
+      },
+      {
+        "cell": "Tone=success-strong, Progress=partiallyComplete",
+        "pctAAMasked": 53.53,
+        "note": "round-4 promoted-anatomy vs canvas-engine sizing model: the contract carries the full rendered tree (ribbon/glyph/label rows) and the engine's hug/stretch sizing for deep promoted anatomy lags it — scoped to the canvas rebuild session; acceptance stays FAILED until the engine catches up"
+      },
+      {
+        "cell": "Tone=success-strong, Progress=complete",
+        "pctAAMasked": 55.26,
+        "note": "round-4 promoted-anatomy vs canvas-engine sizing model: the contract carries the full rendered tree (ribbon/glyph/label rows) and the engine's hug/stretch sizing for deep promoted anatomy lags it — scoped to the canvas rebuild session; acceptance stays FAILED until the engine catches up"
+      },
+      {
+        "cell": "Tone=warning-strong, Progress=incomplete",
+        "pctAAMasked": 52.88,
+        "note": "round-4 promoted-anatomy vs canvas-engine sizing model: the contract carries the full rendered tree (ribbon/glyph/label rows) and the engine's hug/stretch sizing for deep promoted anatomy lags it — scoped to the canvas rebuild session; acceptance stays FAILED until the engine catches up"
+      },
+      {
+        "cell": "Tone=warning-strong, Progress=partiallyComplete",
+        "pctAAMasked": 53.53,
+        "note": "round-4 promoted-anatomy vs canvas-engine sizing model: the contract carries the full rendered tree (ribbon/glyph/label rows) and the engine's hug/stretch sizing for deep promoted anatomy lags it — scoped to the canvas rebuild session; acceptance stays FAILED until the engine catches up"
+      },
+      {
+        "cell": "Tone=warning-strong, Progress=complete",
+        "pctAAMasked": 55.26,
+        "note": "round-4 promoted-anatomy vs canvas-engine sizing model: the contract carries the full rendered tree (ribbon/glyph/label rows) and the engine's hug/stretch sizing for deep promoted anatomy lags it — scoped to the canvas rebuild session; acceptance stays FAILED until the engine catches up"
+      },
+      {
+        "cell": "Tone=critical-strong, Progress=incomplete",
+        "pctAAMasked": 52.88,
+        "note": "round-4 promoted-anatomy vs canvas-engine sizing model: the contract carries the full rendered tree (ribbon/glyph/label rows) and the engine's hug/stretch sizing for deep promoted anatomy lags it — scoped to the canvas rebuild session; acceptance stays FAILED until the engine catches up"
+      },
+      {
+        "cell": "Tone=critical-strong, Progress=partiallyComplete",
+        "pctAAMasked": 53.53,
+        "note": "round-4 promoted-anatomy vs canvas-engine sizing model: the contract carries the full rendered tree (ribbon/glyph/label rows) and the engine's hug/stretch sizing for deep promoted anatomy lags it — scoped to the canvas rebuild session; acceptance stays FAILED until the engine catches up"
+      },
+      {
+        "cell": "Tone=critical-strong, Progress=complete",
+        "pctAAMasked": 55.26,
+        "note": "round-4 promoted-anatomy vs canvas-engine sizing model: the contract carries the full rendered tree (ribbon/glyph/label rows) and the engine's hug/stretch sizing for deep promoted anatomy lags it — scoped to the canvas rebuild session; acceptance stays FAILED until the engine catches up"
+      },
+      {
+        "cell": "Tone=attention-strong, Progress=incomplete",
+        "pctAAMasked": 52.88,
+        "note": "round-4 promoted-anatomy vs canvas-engine sizing model: the contract carries the full rendered tree (ribbon/glyph/label rows) and the engine's hug/stretch sizing for deep promoted anatomy lags it — scoped to the canvas rebuild session; acceptance stays FAILED until the engine catches up"
+      },
+      {
+        "cell": "Tone=attention-strong, Progress=partiallyComplete",
+        "pctAAMasked": 53.53,
+        "note": "round-4 promoted-anatomy vs canvas-engine sizing model: the contract carries the full rendered tree (ribbon/glyph/label rows) and the engine's hug/stretch sizing for deep promoted anatomy lags it — scoped to the canvas rebuild session; acceptance stays FAILED until the engine catches up"
+      },
+      {
+        "cell": "Tone=attention-strong, Progress=complete",
+        "pctAAMasked": 55.26,
+        "note": "round-4 promoted-anatomy vs canvas-engine sizing model: the contract carries the full rendered tree (ribbon/glyph/label rows) and the engine's hug/stretch sizing for deep promoted anatomy lags it — scoped to the canvas rebuild session; acceptance stays FAILED until the engine catches up"
+      }
+    ],
+    "blankCanvasCells": []
+  },
+  "acceptance": {
+    "maskedMeanLE5": false,
+    "allCellsOver10Named": true,
+    "noBlankCanvasCells": true
+  }
+}

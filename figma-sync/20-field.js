@@ -7,7 +7,7 @@ const COMPONENTS = [
     "setName": "Field",
     "contractId": "ds.field",
     "anchorKey": "e690d926c7f929fb354ba4aa0d3b355db929c444",
-    "description": "Form field wrapper providing a label, description, and required indicator around any control. API mirrors industry convention (Astryx Field): the label targets the control via inputID; validation status needs structured-object props — a documented gap. — governed by contract ds.field v1.0.0",
+    "description": "Field — generated from contract ds.field v1.0.0",
     "isSet": false,
     "boolProps": [
       {
@@ -72,7 +72,8 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "requiredMark",
-                  "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"10\" height=\"10\" fill=\"none\" stroke=\"#DC2626\" stroke-width=\"1.5\"><line x1=\"10\" y1=\"4.5\" x2=\"10\" y2=\"15.5\" stroke-linecap=\"round\"/><line x1=\"5.2\" y1=\"7.2\" x2=\"14.8\" y2=\"12.8\" stroke-linecap=\"round\"/><line x1=\"14.8\" y1=\"7.2\" x2=\"5.2\" y2=\"12.8\" stroke-linecap=\"round\"/></svg>",
+                  "svg": "<svg fill=\"#DC2626\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"10\" height=\"10\" fill=\"none\" stroke=\"#DC2626\" stroke-width=\"1.5\"><line x1=\"10\" y1=\"4.5\" x2=\"10\" y2=\"15.5\" stroke-linecap=\"round\"/><line x1=\"5.2\" y1=\"7.2\" x2=\"14.8\" y2=\"12.8\" stroke-linecap=\"round\"/><line x1=\"14.8\" y1=\"7.2\" x2=\"5.2\" y2=\"12.8\" stroke-linecap=\"round\"/></svg>",
+                  "iconSize": 10,
                   "visibleProp": "Required",
                   "visibleDefault": false
                 }
@@ -130,15 +131,22 @@ const boundPaint = (varName, consumer) => {
   // Figma keeps rendering a reassigned bound paint's BASE color on
   // pre-existing nodes (fresh nodes normalize at assignment) — without the
   // seed, amended variants render black. The binding itself is unchanged.
+  // B-3 finding 2: the resolved ALPHA rides the seed too (paint opacity) —
+  // discarding it rendered Badge's rgba(0,0,0,.06) pill as opaque black on
+  // amended nodes.
   const v = need(varName);
   let base = { r: 0, g: 0, b: 0 };
+  let alpha = 1;
   if (consumer) {
     try {
       const r = v.resolveForConsumer(consumer);
-      if (r && r.value && r.value.r !== undefined) base = { r: r.value.r, g: r.value.g, b: r.value.b };
+      if (r && r.value && r.value.r !== undefined) {
+        base = { r: r.value.r, g: r.value.g, b: r.value.b };
+        if (typeof r.value.a === 'number') alpha = r.value.a;
+      }
     } catch (e) { /* fall back to black base */ }
   }
-  return figma.variables.setBoundVariableForPaint({ type: 'SOLID', color: base }, 'color', v);
+  return figma.variables.setBoundVariableForPaint({ type: 'SOLID', color: base, opacity: alpha }, 'color', v);
 };
 
 // Named text styles (synced by 01-tokens.js): consumers look up OUR styles
@@ -260,7 +268,7 @@ function applyFrameSpec(node, spec) {
     if (spec.fixedHeight) {
       if (horizontalIsPrimary) node.counterAxisSizingMode = 'FIXED';
       else node.primaryAxisSizingMode = 'FIXED';
-      node.setBoundVariable('height', need(spec.fixedHeight.varName));
+      if (spec.fixedHeight.varName) node.setBoundVariable('height', need(spec.fixedHeight.varName));
     }
   }
 }
@@ -289,6 +297,7 @@ async function buildNode(spec, registry) {
     node = figma.createNodeFromSvg(spec.svg);
     node.fills = [];
     node.clipsContent = false;
+    if (spec.iconSize) node.resize(spec.iconSize, spec.iconSize);
   } else if (spec.type === 'text') {
     node = figma.createText();
     node.fontName = { family: 'Inter', style: spec.fontStyle || 'Medium' };
@@ -334,7 +343,7 @@ async function buildNode(spec, registry) {
       if (spec.fixedWidth || spec.fixedHeight) {
         wrap.resize(spec.fixedWidth ? spec.fixedWidth.px : wrap.width, spec.fixedHeight ? spec.fixedHeight.px : wrap.height);
         if (spec.fixedWidth) { wrap.primaryAxisSizingMode = 'FIXED'; wrap.setBoundVariable('width', need(spec.fixedWidth.varName)); }
-        if (spec.fixedHeight) { wrap.counterAxisSizingMode = 'FIXED'; wrap.setBoundVariable('height', need(spec.fixedHeight.varName)); }
+        if (spec.fixedHeight) { wrap.counterAxisSizingMode = 'FIXED'; if (spec.fixedHeight.varName) wrap.setBoundVariable('height', need(spec.fixedHeight.varName)); else wrap.resize(wrap.width, spec.fixedHeight.px); }
       }
       wrap.name = spec.name;
       node = wrap;
@@ -574,6 +583,21 @@ async function amendSet(set, C) {
     for (let i = 0; i < sp.col; i++) x += colWs[i] + PAD;
     for (let i = 0; i < sp.row; i++) y += rowHs[i] + PAD;
     child.x = x; child.y = y;
+  }
+  // B-3 finding 4: after re-gridding, the SET CONTAINER refits to the
+  // children's extent + grid padding (the create path's exact math) —
+  // without this, added variants/columns stayed clipped by stale bounds
+  // (Banner's Focus column, Button's 220-cell grid, ProgressBar's height).
+  // Extra (human-owned) variants may sit beyond the grid; never shrink
+  // below their extent.
+  {
+    let totalW = colWs.reduce((a, b) => a + b, 0) + PAD * (colsN + 1);
+    let totalH = rowHs.reduce((a, b) => a + b, 0) + PAD * (rowsN + 1);
+    for (const child of set.children) {
+      totalW = Math.max(totalW, child.x + child.width + PAD);
+      totalH = Math.max(totalH, child.y + child.height + PAD);
+    }
+    set.resizeWithoutConstraints(totalW, totalH);
   }
   set.description = C.description;
   set.setSharedPluginData('ds_contracts', 'specHash', hash);

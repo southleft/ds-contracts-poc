@@ -5,30 +5,114 @@
   "browser": "148.0.7778.96",
   "mintedTokens": {
     "imported": {
+      "shared": {
+        "size-4": {
+          "$value": "4px",
+          "$type": "dimension"
+        },
+        "size-0": {
+          "$value": "0px",
+          "$type": "dimension"
+        },
+        "num-1": {
+          "$value": "1",
+          "$type": "number"
+        },
+        "num-20": {
+          "$value": "20",
+          "$type": "number"
+        },
+        "color-616161": {
+          "$value": "#616161",
+          "$type": "color"
+        },
+        "num-0": {
+          "$value": "0",
+          "$type": "number"
+        },
+        "size-12": {
+          "$value": "12px",
+          "$type": "dimension"
+        },
+        "size-8": {
+          "$value": "8px",
+          "$type": "dimension"
+        },
+        "color-1a1a1a": {
+          "$value": "#1a1a1a",
+          "$type": "color"
+        },
+        "color-b5b5b5": {
+          "$value": "#b5b5b5",
+          "$type": "color"
+        }
+      },
       "text-field": {
-        "labelled-labelwrapper": {
-          "margin-bottom": {
-            "$value": "4px",
+        "prefix": {
+          "margin-right": {
+            "$value": "6px",
             "$type": "dimension"
           }
         },
-        "connected-item": {
-          "z-index": {
-            "$value": "20",
-            "$type": "number"
+        "clearbutton": {
+          "background-color": {
+            "$value": "#00000000",
+            "$type": "color"
           },
-          "z-index-state-active": {
-            "$value": "30",
-            "$type": "number"
+          "bottom": {
+            "slim": {
+              "$value": "4px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "8px",
+              "$type": "dimension"
+            }
           },
-          "z-index-state-focus-visible": {
-            "$value": "30",
-            "$type": "number"
+          "color": {
+            "$value": "#303030",
+            "$type": "color"
+          },
+          "font-size": {
+            "$value": "13px",
+            "$type": "dimension"
+          },
+          "line-height": {
+            "$value": "20px",
+            "$type": "dimension"
+          },
+          "top": {
+            "slim": {
+              "$value": "4px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "8px",
+              "$type": "dimension"
+            }
           }
         },
-        "input": {
-          "z-index": {
-            "$value": "20",
+        "label-5": {
+          "bottom": {
+            "$value": "19px",
+            "$type": "dimension"
+          },
+          "font-weight": {
+            "$value": "400",
+            "$type": "number"
+          },
+          "left": {
+            "$value": "10px",
+            "$type": "dimension"
+          },
+          "right": {
+            "$value": "9px",
+            "$type": "dimension"
+          }
+        },
+        "icon": {
+          "font-weight": {
+            "$value": "400",
             "$type": "number"
           }
         },
@@ -129,47 +213,547 @@
             "$value": "#fafafa",
             "$type": "color"
           }
-        }
-      },
-      "shared": {
-        "size-0": {
-          "$value": "0px",
-          "$type": "dimension"
         },
-        "num-1": {
-          "$value": "1",
-          "$type": "number"
-        },
-        "size-8": {
-          "$value": "8px",
-          "$type": "dimension"
-        },
-        "color-1a1a1a": {
-          "$value": "#1a1a1a",
-          "$type": "color"
-        },
-        "color-b5b5b5": {
-          "$value": "#b5b5b5",
-          "$type": "color"
-        },
-        "color-616161": {
-          "$value": "#616161",
-          "$type": "color"
+        "connected-item": {
+          "z-index-state-active": {
+            "$value": "30",
+            "$type": "number"
+          },
+          "z-index-state-focus-visible": {
+            "$value": "30",
+            "$type": "number"
+          }
         }
       }
     }
   },
-  "folds": [],
-  "foldedStateSkips": [],
+  "folds": [
+    {
+      "part": "prefix",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "prefix",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "prefix",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "prefix",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "prefix",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "prefix",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "prefix",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "prefix",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "prefix",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-3",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-3",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-3",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-3",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-3",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-3",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-3",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-3",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-3",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "suffix",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "suffix",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "suffix",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "suffix",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "suffix",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "suffix",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "suffix",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "suffix",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "suffix",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-4",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-4",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-4",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-4",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-4",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-4",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-4",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-4",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-4",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "clearbutton",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "clearbutton",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "clearbutton",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "clearbutton",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "clearbutton",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "clearbutton",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "clearbutton",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "clearbutton",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "clearbutton",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-2",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-2",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-2",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-2",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-2",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-2",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-2",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-2",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-2",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-0-0-1-1-0-0",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-0-0-1-1-0-0",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-0-0-1-1-0-0",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-0-0-1-1-0-0",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-0-0-1-1-0-0",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-0-0-1-1-0-0",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-0-0-1-1-0-0",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-0-0-1-1-0-0",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-0-0-1-1-0-0",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-0-0-1-1-0-1",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-0-0-1-1-0-1",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-0-0-1-1-0-1",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-0-0-1-1-0-1",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-0-0-1-1-0-1",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-0-0-1-1-0-1",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-0-0-1-1-0-1",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-0-0-1-1-0-1",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-0-0-1-1-0-1",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    }
+  ],
+  "foldedStateSkips": [
+    "fold-carries-state-delta: [disabled] clearbutton.border-bottom-color rides its source fact",
+    "fold-carries-state-delta: [disabled] clearbutton.border-left-color rides its source fact",
+    "fold-carries-state-delta: [disabled] clearbutton.border-right-color rides its source fact",
+    "fold-carries-state-delta: [disabled] clearbutton.border-top-color rides its source fact",
+    "fold-carries-state-delta: [disabled] clearbutton.caret-color rides its source fact",
+    "fold-carries-state-delta: [disabled] clearbutton.column-rule-color rides its source fact",
+    "fold-carries-state-delta: [disabled] clearbutton.outline-color rides its source fact",
+    "fold-carries-state-delta: [disabled] clearbutton.text-decoration-color rides its source fact",
+    "fold-carries-state-delta: [disabled] clearbutton.text-emphasis-color rides its source fact"
+  ],
   "layout": {
-    "enriched": [],
+    "enriched": [
+      {
+        "part": "labelled__labelwrapper",
+        "field": "justify",
+        "value": "space-between"
+      },
+      {
+        "part": "connected",
+        "field": "align",
+        "value": "center"
+      },
+      {
+        "part": "textfield",
+        "field": "align",
+        "value": "center"
+      }
+    ],
     "contradictions": [],
-    "receipts": [],
+    "receipts": [
+      "layout-value-outside-vocabulary: labelled__labelwrapper.align-items = \"baseline\" — stays code-only"
+    ],
     "_note": "computed flex keywords carried via Part.layout (the schema's own vocabulary); carried-slot contradictions are receipts, never silent overrides"
   },
   "declaredFacts": {
     "_note": "v15 (S4): uniform registry-channel facts carried as Part.declared / Part.declaredStates — first-class contract vocabulary, listed here as the enrichment receipt",
     "base": [
+      {
+        "part": "label__text",
+        "channel": "cursor",
+        "value": "default"
+      },
+      {
+        "part": "label-2",
+        "channel": "cursor",
+        "value": "default"
+      },
+      {
+        "part": "connected",
+        "channel": "position",
+        "value": "relative"
+      },
+      {
+        "part": "connected__item",
+        "channel": "position",
+        "value": "relative"
+      },
+      {
+        "part": "textfield",
+        "channel": "cursor",
+        "value": "text"
+      },
+      {
+        "part": "textfield",
+        "channel": "position",
+        "value": "relative"
+      },
+      {
+        "part": "prefix",
+        "channel": "cursor",
+        "value": "text"
+      },
+      {
+        "part": "prefix",
+        "channel": "position",
+        "value": "relative"
+      },
+      {
+        "part": "prefix",
+        "channel": "user-select",
+        "value": "none"
+      },
+      {
+        "part": "label-3",
+        "channel": "cursor",
+        "value": "text"
+      },
+      {
+        "part": "label-3",
+        "channel": "user-select",
+        "value": "none"
+      },
       {
         "part": "input",
         "channel": "cursor",
@@ -197,6 +781,151 @@
       },
       {
         "part": "input",
+        "channel": "text-rendering",
+        "value": "auto"
+      },
+      {
+        "part": "suffix",
+        "channel": "cursor",
+        "value": "text"
+      },
+      {
+        "part": "suffix",
+        "channel": "position",
+        "value": "relative"
+      },
+      {
+        "part": "suffix",
+        "channel": "user-select",
+        "value": "none"
+      },
+      {
+        "part": "label-4",
+        "channel": "cursor",
+        "value": "text"
+      },
+      {
+        "part": "label-4",
+        "channel": "user-select",
+        "value": "none"
+      },
+      {
+        "part": "clearbutton",
+        "channel": "appearance",
+        "value": "none"
+      },
+      {
+        "part": "clearbutton",
+        "channel": "border-bottom-style",
+        "value": "none"
+      },
+      {
+        "part": "clearbutton",
+        "channel": "border-left-style",
+        "value": "none"
+      },
+      {
+        "part": "clearbutton",
+        "channel": "border-right-style",
+        "value": "none"
+      },
+      {
+        "part": "clearbutton",
+        "channel": "border-top-style",
+        "value": "none"
+      },
+      {
+        "part": "clearbutton",
+        "channel": "cursor",
+        "value": "pointer"
+      },
+      {
+        "part": "clearbutton",
+        "channel": "transition-delay",
+        "value": "0s, 0s"
+      },
+      {
+        "part": "clearbutton",
+        "channel": "transition-duration",
+        "value": "0.1s, 0.1s"
+      },
+      {
+        "part": "clearbutton",
+        "channel": "transition-property",
+        "value": "visibility, opacity"
+      },
+      {
+        "part": "clearbutton",
+        "channel": "transition-timing-function",
+        "value": "cubic-bezier(0.19, 0.91, 0.38, 1), cubic-bezier(0.19, 0.91, 0.38, 1)"
+      },
+      {
+        "part": "label-5",
+        "channel": "cursor",
+        "value": "pointer"
+      },
+      {
+        "part": "label-5",
+        "channel": "font-feature-settings",
+        "value": "normal"
+      },
+      {
+        "part": "label-5",
+        "channel": "overflow-x",
+        "value": "hidden"
+      },
+      {
+        "part": "label-5",
+        "channel": "overflow-y",
+        "value": "hidden"
+      },
+      {
+        "part": "label-5",
+        "channel": "position",
+        "value": "absolute"
+      },
+      {
+        "part": "label-5",
+        "channel": "text-align",
+        "value": "center"
+      },
+      {
+        "part": "label-5",
+        "channel": "text-rendering",
+        "value": "auto"
+      },
+      {
+        "part": "label-5",
+        "channel": "text-wrap-mode",
+        "value": "nowrap"
+      },
+      {
+        "part": "icon",
+        "channel": "cursor",
+        "value": "pointer"
+      },
+      {
+        "part": "icon",
+        "channel": "font-feature-settings",
+        "value": "normal"
+      },
+      {
+        "part": "icon",
+        "channel": "max-height",
+        "value": "100%"
+      },
+      {
+        "part": "icon",
+        "channel": "max-width",
+        "value": "100%"
+      },
+      {
+        "part": "icon",
+        "channel": "text-align",
+        "value": "center"
+      },
+      {
+        "part": "icon",
         "channel": "text-rendering",
         "value": "auto"
       },
@@ -231,6 +960,12 @@
         "value": "default"
       },
       {
+        "state": "disabled",
+        "part": "textfield",
+        "channel": "cursor",
+        "value": "auto"
+      },
+      {
         "state": "focus-visible",
         "part": "backdrop",
         "channel": "outline-style",
@@ -248,13 +983,6 @@
     },
     {
       "part": "labelled__labelwrapper",
-      "channel": "display",
-      "reason": "declared-channel value outside the bounded grammar — named residue (v15)",
-      "sample": "flex",
-      "distinctValues": 1
-    },
-    {
-      "part": "labelled__labelwrapper",
       "channel": "flex-wrap",
       "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "sample": "wrap",
@@ -262,13 +990,6 @@
     },
     {
       "part": "labelled__labelwrapper",
-      "channel": "justify-content",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "sample": "space-between",
-      "distinctValues": 1
-    },
-    {
-      "part": "labelled__labelwrapper",
       "channel": "overflow-wrap",
       "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "sample": "break-word",
@@ -297,13 +1018,6 @@
     },
     {
       "part": "label__text",
-      "channel": "cursor",
-      "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
-      "sample": "default",
-      "distinctValues": 1
-    },
-    {
-      "part": "label__text",
       "channel": "overflow-wrap",
       "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "sample": "break-word",
@@ -318,20 +1032,6 @@
     },
     {
       "part": "label-2",
-      "channel": "cursor",
-      "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
-      "sample": "default",
-      "distinctValues": 1
-    },
-    {
-      "part": "label-2",
-      "channel": "display",
-      "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
-      "sample": "inline",
-      "distinctValues": 1
-    },
-    {
-      "part": "label-2",
       "channel": "overflow-wrap",
       "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "sample": "break-word",
@@ -342,62 +1042,6 @@
       "channel": "word-break",
       "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "sample": "break-word",
-      "distinctValues": 1
-    },
-    {
-      "part": "connected",
-      "channel": "align-items",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "sample": "center",
-      "distinctValues": 1
-    },
-    {
-      "part": "connected",
-      "channel": "display",
-      "reason": "declared-channel value outside the bounded grammar — named residue (v15)",
-      "sample": "flex",
-      "distinctValues": 1
-    },
-    {
-      "part": "connected",
-      "channel": "position",
-      "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
-      "sample": "relative",
-      "distinctValues": 1
-    },
-    {
-      "part": "connected__item",
-      "channel": "position",
-      "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
-      "sample": "relative",
-      "distinctValues": 1
-    },
-    {
-      "part": "textfield",
-      "channel": "align-items",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "sample": "center",
-      "distinctValues": 1
-    },
-    {
-      "part": "textfield",
-      "channel": "cursor",
-      "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
-      "sample": "text",
-      "distinctValues": 1
-    },
-    {
-      "part": "textfield",
-      "channel": "display",
-      "reason": "declared-channel value outside the bounded grammar — named residue (v15)",
-      "sample": "flex",
-      "distinctValues": 1
-    },
-    {
-      "part": "textfield",
-      "channel": "position",
-      "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
-      "sample": "relative",
       "distinctValues": 1
     },
     {
@@ -408,6 +1052,41 @@
       "distinctValues": 1
     },
     {
+      "part": "clearbutton",
+      "channel": "transition-behavior",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "normal, normal",
+      "distinctValues": 1
+    },
+    {
+      "part": "clearbutton",
+      "channel": "visibility",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "hidden",
+      "distinctValues": 1
+    },
+    {
+      "part": "label-5",
+      "channel": "clip-path",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "inset(50%)",
+      "distinctValues": 1
+    },
+    {
+      "part": "label-5",
+      "channel": "visibility",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "hidden",
+      "distinctValues": 1
+    },
+    {
+      "part": "icon",
+      "channel": "visibility",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "hidden",
+      "distinctValues": 1
+    },
+    {
       "part": "backdrop",
       "channel": "border-bottom-style",
       "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
@@ -434,208 +1113,379 @@
       "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
       "sample": "solid",
       "distinctValues": 2
-    },
-    {
-      "part": "backdrop",
-      "channel": "position",
-      "reason": "declared-channel value outside the bounded grammar — named residue (v15)",
-      "sample": "absolute",
-      "distinctValues": 1
     }
   ],
   "stateOverflow": [
     {
+      "state": "active",
+      "part": "clearbutton",
+      "channel": "bottom",
+      "sample": "0px",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    },
+    {
+      "state": "active",
+      "part": "clearbutton",
+      "channel": "left",
+      "sample": "0px",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    },
+    {
+      "state": "active",
+      "part": "clearbutton",
+      "channel": "min-height",
+      "sample": "auto",
+      "reason": "value shape outside mintable kinds and outside the declared vocabulary"
+    },
+    {
+      "state": "active",
+      "part": "clearbutton",
+      "channel": "min-width",
+      "sample": "auto",
+      "reason": "value shape outside mintable kinds and outside the declared vocabulary"
+    },
+    {
+      "state": "active",
+      "part": "clearbutton",
+      "channel": "opacity",
+      "sample": "1",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    },
+    {
+      "state": "active",
+      "part": "clearbutton",
+      "channel": "position",
+      "sample": "relative",
+      "reason": "declared-channel state delta on 16/32 combos — partial coverage cannot carry as a state selector (v15); named residue"
+    },
+    {
+      "state": "active",
+      "part": "clearbutton",
+      "channel": "top",
+      "sample": "0px",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    },
+    {
+      "state": "active",
+      "part": "clearbutton",
+      "channel": "visibility",
+      "sample": "visible",
+      "reason": "value shape outside mintable kinds and outside the declared vocabulary"
+    },
+    {
+      "state": "active",
+      "part": "icon",
+      "channel": "visibility",
+      "sample": "visible",
+      "reason": "value shape outside mintable kinds and outside the declared vocabulary"
+    },
+    {
+      "state": "active",
+      "part": "label-5",
+      "channel": "visibility",
+      "sample": "visible",
+      "reason": "value shape outside mintable kinds and outside the declared vocabulary"
+    },
+    {
       "state": "disabled",
       "part": "backdrop",
       "channel": "border-bottom-style",
       "sample": "none",
-      "reason": "declared-channel state delta on 2/4 combos — partial coverage cannot carry as a state selector (v15); named residue"
+      "reason": "declared-channel state delta on 16/32 combos — partial coverage cannot carry as a state selector (v15); named residue"
     },
     {
       "state": "disabled",
       "part": "backdrop",
       "channel": "border-left-style",
       "sample": "none",
-      "reason": "declared-channel state delta on 2/4 combos — partial coverage cannot carry as a state selector (v15); named residue"
+      "reason": "declared-channel state delta on 16/32 combos — partial coverage cannot carry as a state selector (v15); named residue"
     },
     {
       "state": "disabled",
       "part": "backdrop",
       "channel": "border-right-style",
       "sample": "none",
-      "reason": "declared-channel state delta on 2/4 combos — partial coverage cannot carry as a state selector (v15); named residue"
+      "reason": "declared-channel state delta on 16/32 combos — partial coverage cannot carry as a state selector (v15); named residue"
     },
     {
       "state": "disabled",
       "part": "backdrop",
       "channel": "border-top-style",
       "sample": "none",
-      "reason": "declared-channel state delta on 2/4 combos — partial coverage cannot carry as a state selector (v15); named residue"
+      "reason": "declared-channel state delta on 16/32 combos — partial coverage cannot carry as a state selector (v15); named residue"
     },
     {
       "state": "disabled",
-      "part": "textfield",
+      "part": "clearbutton",
+      "channel": "color",
+      "sample": "rgba(181, 181, 181, 1)",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    },
+    {
+      "state": "disabled",
+      "part": "clearbutton",
+      "channel": "cursor",
+      "sample": "default",
+      "reason": "declared-channel state delta on 16/32 combos — partial coverage cannot carry as a state selector (v15); named residue"
+    },
+    {
+      "state": "disabled",
+      "part": "icon",
+      "channel": "border-bottom-color",
+      "sample": "rgba(181, 181, 181, 1)",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    },
+    {
+      "state": "disabled",
+      "part": "icon",
+      "channel": "border-left-color",
+      "sample": "rgba(181, 181, 181, 1)",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    },
+    {
+      "state": "disabled",
+      "part": "icon",
+      "channel": "border-right-color",
+      "sample": "rgba(181, 181, 181, 1)",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    },
+    {
+      "state": "disabled",
+      "part": "icon",
+      "channel": "border-top-color",
+      "sample": "rgba(181, 181, 181, 1)",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    },
+    {
+      "state": "disabled",
+      "part": "icon",
+      "channel": "caret-color",
+      "sample": "rgba(181, 181, 181, 1)",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    },
+    {
+      "state": "disabled",
+      "part": "icon",
+      "channel": "color",
+      "sample": "rgba(181, 181, 181, 1)",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    },
+    {
+      "state": "disabled",
+      "part": "icon",
+      "channel": "column-rule-color",
+      "sample": "rgba(181, 181, 181, 1)",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    },
+    {
+      "state": "disabled",
+      "part": "icon",
+      "channel": "cursor",
+      "sample": "default",
+      "reason": "declared-channel state delta on 16/32 combos — partial coverage cannot carry as a state selector (v15); named residue"
+    },
+    {
+      "state": "disabled",
+      "part": "icon",
+      "channel": "outline-color",
+      "sample": "rgba(181, 181, 181, 1)",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    },
+    {
+      "state": "disabled",
+      "part": "icon",
+      "channel": "text-decoration-color",
+      "sample": "rgba(181, 181, 181, 1)",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    },
+    {
+      "state": "disabled",
+      "part": "icon",
+      "channel": "text-emphasis-color",
+      "sample": "rgba(181, 181, 181, 1)",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    },
+    {
+      "state": "disabled",
+      "part": "label-3",
       "channel": "cursor",
       "sample": "auto",
+      "reason": "declared-channel state delta on 16/32 combos — partial coverage cannot carry as a state selector (v15); named residue"
+    },
+    {
+      "state": "disabled",
+      "part": "label-4",
+      "channel": "cursor",
+      "sample": "auto",
+      "reason": "declared-channel state delta on 16/32 combos — partial coverage cannot carry as a state selector (v15); named residue"
+    },
+    {
+      "state": "disabled",
+      "part": "label-5",
+      "channel": "border-bottom-color",
+      "sample": "rgba(181, 181, 181, 1)",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    },
+    {
+      "state": "disabled",
+      "part": "label-5",
+      "channel": "border-left-color",
+      "sample": "rgba(181, 181, 181, 1)",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    },
+    {
+      "state": "disabled",
+      "part": "label-5",
+      "channel": "border-right-color",
+      "sample": "rgba(181, 181, 181, 1)",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    },
+    {
+      "state": "disabled",
+      "part": "label-5",
+      "channel": "border-top-color",
+      "sample": "rgba(181, 181, 181, 1)",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    },
+    {
+      "state": "disabled",
+      "part": "label-5",
+      "channel": "caret-color",
+      "sample": "rgba(181, 181, 181, 1)",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    },
+    {
+      "state": "disabled",
+      "part": "label-5",
+      "channel": "color",
+      "sample": "rgba(181, 181, 181, 1)",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    },
+    {
+      "state": "disabled",
+      "part": "label-5",
+      "channel": "column-rule-color",
+      "sample": "rgba(181, 181, 181, 1)",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    },
+    {
+      "state": "disabled",
+      "part": "label-5",
+      "channel": "cursor",
+      "sample": "default",
+      "reason": "declared-channel state delta on 16/32 combos — partial coverage cannot carry as a state selector (v15); named residue"
+    },
+    {
+      "state": "disabled",
+      "part": "label-5",
+      "channel": "outline-color",
+      "sample": "rgba(181, 181, 181, 1)",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    },
+    {
+      "state": "disabled",
+      "part": "label-5",
+      "channel": "text-decoration-color",
+      "sample": "rgba(181, 181, 181, 1)",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    },
+    {
+      "state": "disabled",
+      "part": "label-5",
+      "channel": "text-emphasis-color",
+      "sample": "rgba(181, 181, 181, 1)",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    },
+    {
+      "state": "disabled",
+      "part": "prefix",
+      "channel": "cursor",
+      "sample": "auto",
+      "reason": "declared-channel state delta on 16/32 combos — partial coverage cannot carry as a state selector (v15); named residue"
+    },
+    {
+      "state": "disabled",
+      "part": "suffix",
+      "channel": "cursor",
+      "sample": "auto",
+      "reason": "declared-channel state delta on 16/32 combos — partial coverage cannot carry as a state selector (v15); named residue"
+    },
+    {
+      "state": "focus-visible",
+      "part": "clearbutton",
+      "channel": "bottom",
+      "sample": "0px",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    },
+    {
+      "state": "focus-visible",
+      "part": "clearbutton",
+      "channel": "left",
+      "sample": "0px",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    },
+    {
+      "state": "focus-visible",
+      "part": "clearbutton",
+      "channel": "min-height",
+      "sample": "auto",
+      "reason": "value shape outside mintable kinds and outside the declared vocabulary"
+    },
+    {
+      "state": "focus-visible",
+      "part": "clearbutton",
+      "channel": "min-width",
+      "sample": "auto",
+      "reason": "value shape outside mintable kinds and outside the declared vocabulary"
+    },
+    {
+      "state": "focus-visible",
+      "part": "clearbutton",
+      "channel": "opacity",
+      "sample": "1",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    },
+    {
+      "state": "focus-visible",
+      "part": "clearbutton",
+      "channel": "position",
+      "sample": "relative",
+      "reason": "declared-channel state delta on 16/32 combos — partial coverage cannot carry as a state selector (v15); named residue"
+    },
+    {
+      "state": "focus-visible",
+      "part": "clearbutton",
+      "channel": "top",
+      "sample": "0px",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    },
+    {
+      "state": "focus-visible",
+      "part": "clearbutton",
+      "channel": "visibility",
+      "sample": "visible",
+      "reason": "value shape outside mintable kinds and outside the declared vocabulary"
+    },
+    {
+      "state": "focus-visible",
+      "part": "icon",
+      "channel": "visibility",
+      "sample": "visible",
+      "reason": "value shape outside mintable kinds and outside the declared vocabulary"
+    },
+    {
+      "state": "focus-visible",
+      "part": "label-5",
+      "channel": "visibility",
+      "sample": "visible",
       "reason": "value shape outside mintable kinds and outside the declared vocabulary"
     }
   ],
   "overflowBindings": [
     {
-      "part": "labelled__labelwrapper",
-      "channel": "margin-bottom",
-      "ref": "{imported.text-field.labelled-labelwrapper.margin-bottom}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "labelled__labelwrapper",
-      "channel": "min-height",
-      "ref": "{imported.shared.size-0}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "labelled__labelwrapper",
-      "channel": "min-width",
-      "ref": "{imported.shared.size-0}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "label__text",
-      "channel": "flex-grow",
-      "ref": "{imported.shared.num-1}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "label__text",
-      "channel": "min-height",
-      "ref": "{imported.shared.size-0}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "label__text",
-      "channel": "min-width",
-      "ref": "{imported.shared.size-0}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "label-2",
-      "channel": "min-height",
-      "ref": "{imported.shared.size-0}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "label-2",
-      "channel": "min-width",
-      "ref": "{imported.shared.size-0}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "connected",
-      "channel": "bottom",
-      "ref": "{imported.shared.size-0}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "connected",
+      "part": "clearbutton",
       "channel": "left",
-      "ref": "{imported.shared.size-0}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "connected",
-      "channel": "min-height",
-      "ref": "{imported.shared.size-0}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "connected",
-      "channel": "min-width",
-      "ref": "{imported.shared.size-0}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "connected",
-      "channel": "right",
-      "ref": "{imported.shared.size-0}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "connected",
-      "channel": "top",
-      "ref": "{imported.shared.size-0}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "connected__item",
-      "channel": "bottom",
-      "ref": "{imported.shared.size-0}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "connected__item",
-      "channel": "flex-grow",
-      "ref": "{imported.shared.num-1}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "connected__item",
-      "channel": "left",
-      "ref": "{imported.shared.size-0}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "connected__item",
-      "channel": "right",
-      "ref": "{imported.shared.size-0}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "connected__item",
-      "channel": "top",
-      "ref": "{imported.shared.size-0}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "connected__item",
-      "channel": "z-index",
-      "ref": "{imported.text-field.connected-item.z-index}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "textfield",
-      "channel": "bottom",
-      "ref": "{imported.shared.size-0}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "textfield",
-      "channel": "left",
-      "ref": "{imported.shared.size-0}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "textfield",
-      "channel": "min-height",
-      "ref": "{imported.shared.size-0}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "textfield",
-      "channel": "min-width",
-      "ref": "{imported.shared.size-0}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "textfield",
-      "channel": "right",
-      "ref": "{imported.shared.size-0}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "textfield",
-      "channel": "top",
-      "ref": "{imported.shared.size-0}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+      "refusal": "resolved values differ across variants without correlating to any variant axis — nothing minted; bind manually"
     },
     {
       "part": "backdrop",
@@ -690,7 +1540,7 @@
       "channel": "z-index",
       "state": "active",
       "ref": "{imported.text-field.connected-item.z-index-state-active}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
     },
     {
       "part": "backdrop",
@@ -844,350 +1694,315 @@
       "channel": "border-bottom-color",
       "state": "disabled",
       "ref": "{imported.shared.color-b5b5b5}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
     },
     {
       "part": "label__text",
       "channel": "border-left-color",
       "state": "disabled",
       "ref": "{imported.shared.color-b5b5b5}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
     },
     {
       "part": "label__text",
       "channel": "border-right-color",
       "state": "disabled",
       "ref": "{imported.shared.color-b5b5b5}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
     },
     {
       "part": "label__text",
       "channel": "border-top-color",
       "state": "disabled",
       "ref": "{imported.shared.color-b5b5b5}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
     },
     {
       "part": "label__text",
       "channel": "caret-color",
       "state": "disabled",
       "ref": "{imported.shared.color-b5b5b5}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "label__text",
-      "channel": "color",
-      "state": "disabled",
-      "ref": "{imported.shared.color-b5b5b5}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
     },
     {
       "part": "label__text",
       "channel": "column-rule-color",
       "state": "disabled",
       "ref": "{imported.shared.color-b5b5b5}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
     },
     {
       "part": "label__text",
       "channel": "outline-color",
       "state": "disabled",
       "ref": "{imported.shared.color-b5b5b5}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
     },
     {
       "part": "label__text",
       "channel": "text-decoration-color",
       "state": "disabled",
       "ref": "{imported.shared.color-b5b5b5}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
     },
     {
       "part": "label__text",
       "channel": "text-emphasis-color",
       "state": "disabled",
       "ref": "{imported.shared.color-b5b5b5}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
     },
     {
       "part": "label-2",
       "channel": "border-bottom-color",
       "state": "disabled",
       "ref": "{imported.shared.color-b5b5b5}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
     },
     {
       "part": "label-2",
       "channel": "border-left-color",
       "state": "disabled",
       "ref": "{imported.shared.color-b5b5b5}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
     },
     {
       "part": "label-2",
       "channel": "border-right-color",
       "state": "disabled",
       "ref": "{imported.shared.color-b5b5b5}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
     },
     {
       "part": "label-2",
       "channel": "border-top-color",
       "state": "disabled",
       "ref": "{imported.shared.color-b5b5b5}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
     },
     {
       "part": "label-2",
       "channel": "caret-color",
       "state": "disabled",
       "ref": "{imported.shared.color-b5b5b5}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "label-2",
-      "channel": "color",
-      "state": "disabled",
-      "ref": "{imported.shared.color-b5b5b5}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
     },
     {
       "part": "label-2",
       "channel": "column-rule-color",
       "state": "disabled",
       "ref": "{imported.shared.color-b5b5b5}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
     },
     {
       "part": "label-2",
       "channel": "outline-color",
       "state": "disabled",
       "ref": "{imported.shared.color-b5b5b5}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
     },
     {
       "part": "label-2",
       "channel": "text-decoration-color",
       "state": "disabled",
       "ref": "{imported.shared.color-b5b5b5}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
     },
     {
       "part": "label-2",
       "channel": "text-emphasis-color",
       "state": "disabled",
       "ref": "{imported.shared.color-b5b5b5}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
     },
     {
       "part": "label",
       "channel": "border-bottom-color",
       "state": "disabled",
       "ref": "{imported.shared.color-b5b5b5}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
     },
     {
       "part": "label",
       "channel": "border-left-color",
       "state": "disabled",
       "ref": "{imported.shared.color-b5b5b5}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
     },
     {
       "part": "label",
       "channel": "border-right-color",
       "state": "disabled",
       "ref": "{imported.shared.color-b5b5b5}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
     },
     {
       "part": "label",
       "channel": "border-top-color",
       "state": "disabled",
       "ref": "{imported.shared.color-b5b5b5}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
     },
     {
       "part": "label",
       "channel": "caret-color",
       "state": "disabled",
       "ref": "{imported.shared.color-b5b5b5}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "label",
-      "channel": "color",
-      "state": "disabled",
-      "ref": "{imported.shared.color-b5b5b5}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
     },
     {
       "part": "label",
       "channel": "column-rule-color",
       "state": "disabled",
       "ref": "{imported.shared.color-b5b5b5}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
     },
     {
       "part": "label",
       "channel": "outline-color",
       "state": "disabled",
       "ref": "{imported.shared.color-b5b5b5}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
     },
     {
       "part": "label",
       "channel": "text-decoration-color",
       "state": "disabled",
       "ref": "{imported.shared.color-b5b5b5}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
     },
     {
       "part": "label",
       "channel": "text-emphasis-color",
       "state": "disabled",
       "ref": "{imported.shared.color-b5b5b5}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
     },
     {
       "part": "labelled__labelwrapper",
       "channel": "border-bottom-color",
       "state": "disabled",
       "ref": "{imported.shared.color-b5b5b5}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
     },
     {
       "part": "labelled__labelwrapper",
       "channel": "border-left-color",
       "state": "disabled",
       "ref": "{imported.shared.color-b5b5b5}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
     },
     {
       "part": "labelled__labelwrapper",
       "channel": "border-right-color",
       "state": "disabled",
       "ref": "{imported.shared.color-b5b5b5}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
     },
     {
       "part": "labelled__labelwrapper",
       "channel": "border-top-color",
       "state": "disabled",
       "ref": "{imported.shared.color-b5b5b5}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
     },
     {
       "part": "labelled__labelwrapper",
       "channel": "caret-color",
       "state": "disabled",
       "ref": "{imported.shared.color-b5b5b5}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "labelled__labelwrapper",
-      "channel": "color",
-      "state": "disabled",
-      "ref": "{imported.shared.color-b5b5b5}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
     },
     {
       "part": "labelled__labelwrapper",
       "channel": "column-rule-color",
       "state": "disabled",
       "ref": "{imported.shared.color-b5b5b5}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
     },
     {
       "part": "labelled__labelwrapper",
       "channel": "outline-color",
       "state": "disabled",
       "ref": "{imported.shared.color-b5b5b5}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
     },
     {
       "part": "labelled__labelwrapper",
       "channel": "text-decoration-color",
       "state": "disabled",
       "ref": "{imported.shared.color-b5b5b5}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
     },
     {
       "part": "labelled__labelwrapper",
       "channel": "text-emphasis-color",
       "state": "disabled",
       "ref": "{imported.shared.color-b5b5b5}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
     },
     {
       "part": "textfield",
       "channel": "border-bottom-color",
       "state": "disabled",
       "ref": "{imported.shared.color-b5b5b5}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
     },
     {
       "part": "textfield",
       "channel": "border-left-color",
       "state": "disabled",
       "ref": "{imported.shared.color-b5b5b5}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
     },
     {
       "part": "textfield",
       "channel": "border-right-color",
       "state": "disabled",
       "ref": "{imported.shared.color-b5b5b5}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
     },
     {
       "part": "textfield",
       "channel": "border-top-color",
       "state": "disabled",
       "ref": "{imported.shared.color-b5b5b5}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
     },
     {
       "part": "textfield",
       "channel": "caret-color",
       "state": "disabled",
       "ref": "{imported.shared.color-b5b5b5}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "textfield",
-      "channel": "color",
-      "state": "disabled",
-      "ref": "{imported.shared.color-b5b5b5}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
     },
     {
       "part": "textfield",
       "channel": "column-rule-color",
       "state": "disabled",
       "ref": "{imported.shared.color-b5b5b5}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
     },
     {
       "part": "textfield",
       "channel": "outline-color",
       "state": "disabled",
       "ref": "{imported.shared.color-b5b5b5}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
     },
     {
       "part": "textfield",
       "channel": "text-decoration-color",
       "state": "disabled",
       "ref": "{imported.shared.color-b5b5b5}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
     },
     {
       "part": "textfield",
       "channel": "text-emphasis-color",
       "state": "disabled",
       "ref": "{imported.shared.color-b5b5b5}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
     },
     {
       "part": "backdrop",
@@ -1242,7 +2057,7 @@
       "channel": "z-index",
       "state": "focus-visible",
       "ref": "{imported.text-field.connected-item.z-index-state-focus-visible}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
     },
     {
       "part": "backdrop",
@@ -1278,83 +2093,279 @@
     "_reason": "S5 (DESIGN §5.4): pseudo-element decor has no anatomy spelling — captured, receipted, not carried",
     "findings": [
       {
-        "combo": "inherit.slim.enabled",
+        "combo": "inherit.slim.off.off.off.enabled",
         "interaction": "default",
-        "part": "backdrop",
+        "part": "label-3",
         "pseudo": "::after",
         "deltaVsDefault": {
           "content": "\"\""
         }
       },
       {
-        "combo": "inherit.slim.disabled",
+        "combo": "inherit.slim.off.off.off.disabled",
         "interaction": "default",
-        "part": "backdrop",
+        "part": "label-3",
         "pseudo": "::after",
         "deltaVsDefault": {
           "content": "\"\""
         }
       },
       {
-        "combo": "inherit.medium.enabled",
+        "combo": "inherit.slim.off.off.on.enabled",
         "interaction": "default",
-        "part": "backdrop",
+        "part": "label-3",
         "pseudo": "::after",
         "deltaVsDefault": {
           "content": "\"\""
         }
       },
       {
-        "combo": "inherit.medium.disabled",
+        "combo": "inherit.slim.off.off.on.enabled",
         "interaction": "default",
-        "part": "backdrop",
+        "part": "icon",
         "pseudo": "::after",
         "deltaVsDefault": {
           "content": "\"\""
         }
       },
       {
-        "combo": "borderless.slim.enabled",
+        "combo": "inherit.slim.off.off.on.enabled",
+        "interaction": "focus-visible",
+        "part": "label-3",
+        "pseudo": "::after",
+        "deltaVsDefault": {
+          "visibility": "visible"
+        }
+      },
+      {
+        "combo": "inherit.slim.off.off.on.enabled",
+        "interaction": "active",
+        "part": "label-3",
+        "pseudo": "::after",
+        "deltaVsDefault": {
+          "visibility": "visible"
+        }
+      },
+      {
+        "combo": "inherit.slim.off.off.on.disabled",
         "interaction": "default",
-        "part": "backdrop",
+        "part": "label-3",
         "pseudo": "::after",
         "deltaVsDefault": {
           "content": "\"\""
         }
       },
       {
-        "combo": "borderless.slim.disabled",
+        "combo": "inherit.slim.off.off.on.disabled",
         "interaction": "default",
-        "part": "backdrop",
+        "part": "icon",
         "pseudo": "::after",
         "deltaVsDefault": {
           "content": "\"\""
         }
       },
       {
-        "combo": "borderless.medium.enabled",
+        "combo": "inherit.slim.off.on.off.enabled",
         "interaction": "default",
-        "part": "backdrop",
+        "part": "suffix",
         "pseudo": "::after",
         "deltaVsDefault": {
           "content": "\"\""
         }
       },
       {
-        "combo": "borderless.medium.disabled",
+        "combo": "inherit.slim.off.on.off.disabled",
         "interaction": "default",
-        "part": "backdrop",
+        "part": "suffix",
+        "pseudo": "::after",
+        "deltaVsDefault": {
+          "content": "\"\""
+        }
+      },
+      {
+        "combo": "inherit.slim.off.on.on.enabled",
+        "interaction": "default",
+        "part": "suffix",
+        "pseudo": "::after",
+        "deltaVsDefault": {
+          "content": "\"\""
+        }
+      },
+      {
+        "combo": "inherit.slim.off.on.on.enabled",
+        "interaction": "default",
+        "part": "part-1-0-0-1-1-0-0",
         "pseudo": "::after",
         "deltaVsDefault": {
           "content": "\"\""
         }
       }
     ],
-    "totalFindings": 8
+    "totalFindings": 128
   },
   "bindingContradictions": [
     {
-      "combo": "borderless.slim.enabled",
+      "combo": "inherit.slim.off.on.off.enabled",
+      "part": "input",
+      "channel": "padding-inline",
+      "ref": "{p.space-300}",
+      "computedProp": "padding-right",
+      "expected": "12px",
+      "observed": "0px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "inherit.slim.off.on.on.enabled",
+      "part": "input",
+      "channel": "padding-inline",
+      "ref": "{p.space-300}",
+      "computedProp": "padding-right",
+      "expected": "12px",
+      "observed": "0px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "inherit.slim.on.off.off.enabled",
+      "part": "input",
+      "channel": "padding-inline",
+      "ref": "{p.space-300}",
+      "computedProp": "padding-left",
+      "expected": "12px",
+      "observed": "0px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "inherit.slim.on.off.on.enabled",
+      "part": "input",
+      "channel": "padding-inline",
+      "ref": "{p.space-300}",
+      "computedProp": "padding-left",
+      "expected": "12px",
+      "observed": "0px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "inherit.slim.on.on.off.enabled",
+      "part": "input",
+      "channel": "padding-inline",
+      "ref": "{p.space-300}",
+      "computedProp": "padding-left",
+      "expected": "12px",
+      "observed": "0px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "inherit.slim.on.on.off.enabled",
+      "part": "input",
+      "channel": "padding-inline",
+      "ref": "{p.space-300}",
+      "computedProp": "padding-right",
+      "expected": "12px",
+      "observed": "0px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "inherit.slim.on.on.on.enabled",
+      "part": "input",
+      "channel": "padding-inline",
+      "ref": "{p.space-300}",
+      "computedProp": "padding-left",
+      "expected": "12px",
+      "observed": "0px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "inherit.slim.on.on.on.enabled",
+      "part": "input",
+      "channel": "padding-inline",
+      "ref": "{p.space-300}",
+      "computedProp": "padding-right",
+      "expected": "12px",
+      "observed": "0px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "inherit.medium.off.on.off.enabled",
+      "part": "input",
+      "channel": "padding-inline",
+      "ref": "{p.space-300}",
+      "computedProp": "padding-right",
+      "expected": "12px",
+      "observed": "0px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "inherit.medium.off.on.on.enabled",
+      "part": "input",
+      "channel": "padding-inline",
+      "ref": "{p.space-300}",
+      "computedProp": "padding-right",
+      "expected": "12px",
+      "observed": "0px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "inherit.medium.on.off.off.enabled",
+      "part": "input",
+      "channel": "padding-inline",
+      "ref": "{p.space-300}",
+      "computedProp": "padding-left",
+      "expected": "12px",
+      "observed": "0px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "inherit.medium.on.off.on.enabled",
+      "part": "input",
+      "channel": "padding-inline",
+      "ref": "{p.space-300}",
+      "computedProp": "padding-left",
+      "expected": "12px",
+      "observed": "0px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "inherit.medium.on.on.off.enabled",
+      "part": "input",
+      "channel": "padding-inline",
+      "ref": "{p.space-300}",
+      "computedProp": "padding-left",
+      "expected": "12px",
+      "observed": "0px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "inherit.medium.on.on.off.enabled",
+      "part": "input",
+      "channel": "padding-inline",
+      "ref": "{p.space-300}",
+      "computedProp": "padding-right",
+      "expected": "12px",
+      "observed": "0px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "inherit.medium.on.on.on.enabled",
+      "part": "input",
+      "channel": "padding-inline",
+      "ref": "{p.space-300}",
+      "computedProp": "padding-left",
+      "expected": "12px",
+      "observed": "0px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "inherit.medium.on.on.on.enabled",
+      "part": "input",
+      "channel": "padding-inline",
+      "ref": "{p.space-300}",
+      "computedProp": "padding-right",
+      "expected": "12px",
+      "observed": "0px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "borderless.slim.off.off.off.enabled",
       "part": "input",
       "channel": "min-height",
       "ref": "{p.space-800}",
@@ -1365,7 +2376,7 @@
       "cause": "equal-specificity cascade across two axes: .Polaris-TextField--slim's min-height (p.height-700 = 28px) source-orders after .Polaris-TextField--borderless's (p.space-800 = 32px), so borderless+slim renders 28px — a variant×size condition, refused from single-axis resolution by the mint discipline; named residue (capture-only component)"
     },
     {
-      "combo": "borderless.slim.enabled",
+      "combo": "borderless.slim.off.off.off.enabled",
       "part": "backdrop",
       "channel": "border-width",
       "ref": "{p.border-width-0165}",
@@ -1376,7 +2387,7 @@
       "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-width is 0 for the borderless variant while the carried base binding paints 1px on the inherit variant. Single-axis partition (variant) — resolve via the review queue (--to {p.border-width-0}; several zero-valued tokens share 0px, border-width-0 is the exact name-class match)"
     },
     {
-      "combo": "borderless.slim.enabled",
+      "combo": "borderless.slim.off.off.off.enabled",
       "part": "backdrop",
       "channel": "border-color",
       "ref": "{p.color-input-border}",
@@ -1387,7 +2398,7 @@
       "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-color falls back to the element's currentColor (the p.color-text body chain), not the carried p.color-input-border; the real fact is 'no border' (border-width 0), and a color rebind would dress a vacuous channel as a binding — named residue (the border-width channel resolves to {p.border-width-0} instead)"
     },
     {
-      "combo": "borderless.slim.enabled",
+      "combo": "borderless.slim.off.off.off.enabled",
       "part": "backdrop",
       "channel": "min-height",
       "ref": "{p.space-800}",
@@ -1398,7 +2409,18 @@
       "cause": "equal-specificity cascade across two axes: .Polaris-TextField--slim's min-height (p.height-700 = 28px) source-orders after .Polaris-TextField--borderless's (p.space-800 = 32px), so borderless+slim renders 28px — a variant×size condition, refused from single-axis resolution by the mint discipline; named residue (capture-only component)"
     },
     {
-      "combo": "borderless.medium.enabled",
+      "combo": "borderless.slim.off.off.on.enabled",
+      "part": "input",
+      "channel": "min-height",
+      "ref": "{p.space-800}",
+      "computedProp": "min-height",
+      "expected": "32px",
+      "observed": "28px",
+      "verdict": "contradiction",
+      "cause": "equal-specificity cascade across two axes: .Polaris-TextField--slim's min-height (p.height-700 = 28px) source-orders after .Polaris-TextField--borderless's (p.space-800 = 32px), so borderless+slim renders 28px — a variant×size condition, refused from single-axis resolution by the mint discipline; named residue (capture-only component)"
+    },
+    {
+      "combo": "borderless.slim.off.off.on.enabled",
       "part": "backdrop",
       "channel": "border-width",
       "ref": "{p.border-width-0165}",
@@ -1409,7 +2431,618 @@
       "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-width is 0 for the borderless variant while the carried base binding paints 1px on the inherit variant. Single-axis partition (variant) — resolve via the review queue (--to {p.border-width-0}; several zero-valued tokens share 0px, border-width-0 is the exact name-class match)"
     },
     {
-      "combo": "borderless.medium.enabled",
+      "combo": "borderless.slim.off.off.on.enabled",
+      "part": "backdrop",
+      "channel": "border-color",
+      "ref": "{p.color-input-border}",
+      "computedProp": "border-bottom-color",
+      "expected": "rgba(138, 138, 138, 1)",
+      "observed": "rgba(48, 48, 48, 1)",
+      "verdict": "contradiction",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-color falls back to the element's currentColor (the p.color-text body chain), not the carried p.color-input-border; the real fact is 'no border' (border-width 0), and a color rebind would dress a vacuous channel as a binding — named residue (the border-width channel resolves to {p.border-width-0} instead)"
+    },
+    {
+      "combo": "borderless.slim.off.off.on.enabled",
+      "part": "backdrop",
+      "channel": "min-height",
+      "ref": "{p.space-800}",
+      "computedProp": "min-height",
+      "expected": "32px",
+      "observed": "28px",
+      "verdict": "contradiction",
+      "cause": "equal-specificity cascade across two axes: .Polaris-TextField--slim's min-height (p.height-700 = 28px) source-orders after .Polaris-TextField--borderless's (p.space-800 = 32px), so borderless+slim renders 28px — a variant×size condition, refused from single-axis resolution by the mint discipline; named residue (capture-only component)"
+    },
+    {
+      "combo": "borderless.slim.off.on.off.enabled",
+      "part": "input",
+      "channel": "padding-inline",
+      "ref": "{p.space-300}",
+      "computedProp": "padding-right",
+      "expected": "12px",
+      "observed": "0px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "borderless.slim.off.on.off.enabled",
+      "part": "input",
+      "channel": "min-height",
+      "ref": "{p.space-800}",
+      "computedProp": "min-height",
+      "expected": "32px",
+      "observed": "28px",
+      "verdict": "contradiction",
+      "cause": "equal-specificity cascade across two axes: .Polaris-TextField--slim's min-height (p.height-700 = 28px) source-orders after .Polaris-TextField--borderless's (p.space-800 = 32px), so borderless+slim renders 28px — a variant×size condition, refused from single-axis resolution by the mint discipline; named residue (capture-only component)"
+    },
+    {
+      "combo": "borderless.slim.off.on.off.enabled",
+      "part": "backdrop",
+      "channel": "border-width",
+      "ref": "{p.border-width-0165}",
+      "computedProp": "border-bottom-width",
+      "expected": "1px",
+      "observed": "0px",
+      "verdict": "contradiction",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-width is 0 for the borderless variant while the carried base binding paints 1px on the inherit variant. Single-axis partition (variant) — resolve via the review queue (--to {p.border-width-0}; several zero-valued tokens share 0px, border-width-0 is the exact name-class match)"
+    },
+    {
+      "combo": "borderless.slim.off.on.off.enabled",
+      "part": "backdrop",
+      "channel": "border-color",
+      "ref": "{p.color-input-border}",
+      "computedProp": "border-bottom-color",
+      "expected": "rgba(138, 138, 138, 1)",
+      "observed": "rgba(48, 48, 48, 1)",
+      "verdict": "contradiction",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-color falls back to the element's currentColor (the p.color-text body chain), not the carried p.color-input-border; the real fact is 'no border' (border-width 0), and a color rebind would dress a vacuous channel as a binding — named residue (the border-width channel resolves to {p.border-width-0} instead)"
+    },
+    {
+      "combo": "borderless.slim.off.on.off.enabled",
+      "part": "backdrop",
+      "channel": "min-height",
+      "ref": "{p.space-800}",
+      "computedProp": "min-height",
+      "expected": "32px",
+      "observed": "28px",
+      "verdict": "contradiction",
+      "cause": "equal-specificity cascade across two axes: .Polaris-TextField--slim's min-height (p.height-700 = 28px) source-orders after .Polaris-TextField--borderless's (p.space-800 = 32px), so borderless+slim renders 28px — a variant×size condition, refused from single-axis resolution by the mint discipline; named residue (capture-only component)"
+    },
+    {
+      "combo": "borderless.slim.off.on.on.enabled",
+      "part": "input",
+      "channel": "padding-inline",
+      "ref": "{p.space-300}",
+      "computedProp": "padding-right",
+      "expected": "12px",
+      "observed": "0px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "borderless.slim.off.on.on.enabled",
+      "part": "input",
+      "channel": "min-height",
+      "ref": "{p.space-800}",
+      "computedProp": "min-height",
+      "expected": "32px",
+      "observed": "28px",
+      "verdict": "contradiction",
+      "cause": "equal-specificity cascade across two axes: .Polaris-TextField--slim's min-height (p.height-700 = 28px) source-orders after .Polaris-TextField--borderless's (p.space-800 = 32px), so borderless+slim renders 28px — a variant×size condition, refused from single-axis resolution by the mint discipline; named residue (capture-only component)"
+    },
+    {
+      "combo": "borderless.slim.off.on.on.enabled",
+      "part": "backdrop",
+      "channel": "border-width",
+      "ref": "{p.border-width-0165}",
+      "computedProp": "border-bottom-width",
+      "expected": "1px",
+      "observed": "0px",
+      "verdict": "contradiction",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-width is 0 for the borderless variant while the carried base binding paints 1px on the inherit variant. Single-axis partition (variant) — resolve via the review queue (--to {p.border-width-0}; several zero-valued tokens share 0px, border-width-0 is the exact name-class match)"
+    },
+    {
+      "combo": "borderless.slim.off.on.on.enabled",
+      "part": "backdrop",
+      "channel": "border-color",
+      "ref": "{p.color-input-border}",
+      "computedProp": "border-bottom-color",
+      "expected": "rgba(138, 138, 138, 1)",
+      "observed": "rgba(48, 48, 48, 1)",
+      "verdict": "contradiction",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-color falls back to the element's currentColor (the p.color-text body chain), not the carried p.color-input-border; the real fact is 'no border' (border-width 0), and a color rebind would dress a vacuous channel as a binding — named residue (the border-width channel resolves to {p.border-width-0} instead)"
+    },
+    {
+      "combo": "borderless.slim.off.on.on.enabled",
+      "part": "backdrop",
+      "channel": "min-height",
+      "ref": "{p.space-800}",
+      "computedProp": "min-height",
+      "expected": "32px",
+      "observed": "28px",
+      "verdict": "contradiction",
+      "cause": "equal-specificity cascade across two axes: .Polaris-TextField--slim's min-height (p.height-700 = 28px) source-orders after .Polaris-TextField--borderless's (p.space-800 = 32px), so borderless+slim renders 28px — a variant×size condition, refused from single-axis resolution by the mint discipline; named residue (capture-only component)"
+    },
+    {
+      "combo": "borderless.slim.on.off.off.enabled",
+      "part": "input",
+      "channel": "padding-inline",
+      "ref": "{p.space-300}",
+      "computedProp": "padding-left",
+      "expected": "12px",
+      "observed": "0px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "borderless.slim.on.off.off.enabled",
+      "part": "input",
+      "channel": "min-height",
+      "ref": "{p.space-800}",
+      "computedProp": "min-height",
+      "expected": "32px",
+      "observed": "28px",
+      "verdict": "contradiction",
+      "cause": "equal-specificity cascade across two axes: .Polaris-TextField--slim's min-height (p.height-700 = 28px) source-orders after .Polaris-TextField--borderless's (p.space-800 = 32px), so borderless+slim renders 28px — a variant×size condition, refused from single-axis resolution by the mint discipline; named residue (capture-only component)"
+    },
+    {
+      "combo": "borderless.slim.on.off.off.enabled",
+      "part": "backdrop",
+      "channel": "border-width",
+      "ref": "{p.border-width-0165}",
+      "computedProp": "border-bottom-width",
+      "expected": "1px",
+      "observed": "0px",
+      "verdict": "contradiction",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-width is 0 for the borderless variant while the carried base binding paints 1px on the inherit variant. Single-axis partition (variant) — resolve via the review queue (--to {p.border-width-0}; several zero-valued tokens share 0px, border-width-0 is the exact name-class match)"
+    },
+    {
+      "combo": "borderless.slim.on.off.off.enabled",
+      "part": "backdrop",
+      "channel": "border-color",
+      "ref": "{p.color-input-border}",
+      "computedProp": "border-bottom-color",
+      "expected": "rgba(138, 138, 138, 1)",
+      "observed": "rgba(48, 48, 48, 1)",
+      "verdict": "contradiction",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-color falls back to the element's currentColor (the p.color-text body chain), not the carried p.color-input-border; the real fact is 'no border' (border-width 0), and a color rebind would dress a vacuous channel as a binding — named residue (the border-width channel resolves to {p.border-width-0} instead)"
+    },
+    {
+      "combo": "borderless.slim.on.off.off.enabled",
+      "part": "backdrop",
+      "channel": "min-height",
+      "ref": "{p.space-800}",
+      "computedProp": "min-height",
+      "expected": "32px",
+      "observed": "28px",
+      "verdict": "contradiction",
+      "cause": "equal-specificity cascade across two axes: .Polaris-TextField--slim's min-height (p.height-700 = 28px) source-orders after .Polaris-TextField--borderless's (p.space-800 = 32px), so borderless+slim renders 28px — a variant×size condition, refused from single-axis resolution by the mint discipline; named residue (capture-only component)"
+    },
+    {
+      "combo": "borderless.slim.on.off.on.enabled",
+      "part": "input",
+      "channel": "padding-inline",
+      "ref": "{p.space-300}",
+      "computedProp": "padding-left",
+      "expected": "12px",
+      "observed": "0px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "borderless.slim.on.off.on.enabled",
+      "part": "input",
+      "channel": "min-height",
+      "ref": "{p.space-800}",
+      "computedProp": "min-height",
+      "expected": "32px",
+      "observed": "28px",
+      "verdict": "contradiction",
+      "cause": "equal-specificity cascade across two axes: .Polaris-TextField--slim's min-height (p.height-700 = 28px) source-orders after .Polaris-TextField--borderless's (p.space-800 = 32px), so borderless+slim renders 28px — a variant×size condition, refused from single-axis resolution by the mint discipline; named residue (capture-only component)"
+    },
+    {
+      "combo": "borderless.slim.on.off.on.enabled",
+      "part": "backdrop",
+      "channel": "border-width",
+      "ref": "{p.border-width-0165}",
+      "computedProp": "border-bottom-width",
+      "expected": "1px",
+      "observed": "0px",
+      "verdict": "contradiction",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-width is 0 for the borderless variant while the carried base binding paints 1px on the inherit variant. Single-axis partition (variant) — resolve via the review queue (--to {p.border-width-0}; several zero-valued tokens share 0px, border-width-0 is the exact name-class match)"
+    },
+    {
+      "combo": "borderless.slim.on.off.on.enabled",
+      "part": "backdrop",
+      "channel": "border-color",
+      "ref": "{p.color-input-border}",
+      "computedProp": "border-bottom-color",
+      "expected": "rgba(138, 138, 138, 1)",
+      "observed": "rgba(48, 48, 48, 1)",
+      "verdict": "contradiction",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-color falls back to the element's currentColor (the p.color-text body chain), not the carried p.color-input-border; the real fact is 'no border' (border-width 0), and a color rebind would dress a vacuous channel as a binding — named residue (the border-width channel resolves to {p.border-width-0} instead)"
+    },
+    {
+      "combo": "borderless.slim.on.off.on.enabled",
+      "part": "backdrop",
+      "channel": "min-height",
+      "ref": "{p.space-800}",
+      "computedProp": "min-height",
+      "expected": "32px",
+      "observed": "28px",
+      "verdict": "contradiction",
+      "cause": "equal-specificity cascade across two axes: .Polaris-TextField--slim's min-height (p.height-700 = 28px) source-orders after .Polaris-TextField--borderless's (p.space-800 = 32px), so borderless+slim renders 28px — a variant×size condition, refused from single-axis resolution by the mint discipline; named residue (capture-only component)"
+    },
+    {
+      "combo": "borderless.slim.on.on.off.enabled",
+      "part": "input",
+      "channel": "padding-inline",
+      "ref": "{p.space-300}",
+      "computedProp": "padding-left",
+      "expected": "12px",
+      "observed": "0px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "borderless.slim.on.on.off.enabled",
+      "part": "input",
+      "channel": "padding-inline",
+      "ref": "{p.space-300}",
+      "computedProp": "padding-right",
+      "expected": "12px",
+      "observed": "0px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "borderless.slim.on.on.off.enabled",
+      "part": "input",
+      "channel": "min-height",
+      "ref": "{p.space-800}",
+      "computedProp": "min-height",
+      "expected": "32px",
+      "observed": "28px",
+      "verdict": "contradiction",
+      "cause": "equal-specificity cascade across two axes: .Polaris-TextField--slim's min-height (p.height-700 = 28px) source-orders after .Polaris-TextField--borderless's (p.space-800 = 32px), so borderless+slim renders 28px — a variant×size condition, refused from single-axis resolution by the mint discipline; named residue (capture-only component)"
+    },
+    {
+      "combo": "borderless.slim.on.on.off.enabled",
+      "part": "backdrop",
+      "channel": "border-width",
+      "ref": "{p.border-width-0165}",
+      "computedProp": "border-bottom-width",
+      "expected": "1px",
+      "observed": "0px",
+      "verdict": "contradiction",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-width is 0 for the borderless variant while the carried base binding paints 1px on the inherit variant. Single-axis partition (variant) — resolve via the review queue (--to {p.border-width-0}; several zero-valued tokens share 0px, border-width-0 is the exact name-class match)"
+    },
+    {
+      "combo": "borderless.slim.on.on.off.enabled",
+      "part": "backdrop",
+      "channel": "border-color",
+      "ref": "{p.color-input-border}",
+      "computedProp": "border-bottom-color",
+      "expected": "rgba(138, 138, 138, 1)",
+      "observed": "rgba(48, 48, 48, 1)",
+      "verdict": "contradiction",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-color falls back to the element's currentColor (the p.color-text body chain), not the carried p.color-input-border; the real fact is 'no border' (border-width 0), and a color rebind would dress a vacuous channel as a binding — named residue (the border-width channel resolves to {p.border-width-0} instead)"
+    },
+    {
+      "combo": "borderless.slim.on.on.off.enabled",
+      "part": "backdrop",
+      "channel": "min-height",
+      "ref": "{p.space-800}",
+      "computedProp": "min-height",
+      "expected": "32px",
+      "observed": "28px",
+      "verdict": "contradiction",
+      "cause": "equal-specificity cascade across two axes: .Polaris-TextField--slim's min-height (p.height-700 = 28px) source-orders after .Polaris-TextField--borderless's (p.space-800 = 32px), so borderless+slim renders 28px — a variant×size condition, refused from single-axis resolution by the mint discipline; named residue (capture-only component)"
+    },
+    {
+      "combo": "borderless.slim.on.on.on.enabled",
+      "part": "input",
+      "channel": "padding-inline",
+      "ref": "{p.space-300}",
+      "computedProp": "padding-left",
+      "expected": "12px",
+      "observed": "0px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "borderless.slim.on.on.on.enabled",
+      "part": "input",
+      "channel": "padding-inline",
+      "ref": "{p.space-300}",
+      "computedProp": "padding-right",
+      "expected": "12px",
+      "observed": "0px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "borderless.slim.on.on.on.enabled",
+      "part": "input",
+      "channel": "min-height",
+      "ref": "{p.space-800}",
+      "computedProp": "min-height",
+      "expected": "32px",
+      "observed": "28px",
+      "verdict": "contradiction",
+      "cause": "equal-specificity cascade across two axes: .Polaris-TextField--slim's min-height (p.height-700 = 28px) source-orders after .Polaris-TextField--borderless's (p.space-800 = 32px), so borderless+slim renders 28px — a variant×size condition, refused from single-axis resolution by the mint discipline; named residue (capture-only component)"
+    },
+    {
+      "combo": "borderless.slim.on.on.on.enabled",
+      "part": "backdrop",
+      "channel": "border-width",
+      "ref": "{p.border-width-0165}",
+      "computedProp": "border-bottom-width",
+      "expected": "1px",
+      "observed": "0px",
+      "verdict": "contradiction",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-width is 0 for the borderless variant while the carried base binding paints 1px on the inherit variant. Single-axis partition (variant) — resolve via the review queue (--to {p.border-width-0}; several zero-valued tokens share 0px, border-width-0 is the exact name-class match)"
+    },
+    {
+      "combo": "borderless.slim.on.on.on.enabled",
+      "part": "backdrop",
+      "channel": "border-color",
+      "ref": "{p.color-input-border}",
+      "computedProp": "border-bottom-color",
+      "expected": "rgba(138, 138, 138, 1)",
+      "observed": "rgba(48, 48, 48, 1)",
+      "verdict": "contradiction",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-color falls back to the element's currentColor (the p.color-text body chain), not the carried p.color-input-border; the real fact is 'no border' (border-width 0), and a color rebind would dress a vacuous channel as a binding — named residue (the border-width channel resolves to {p.border-width-0} instead)"
+    },
+    {
+      "combo": "borderless.slim.on.on.on.enabled",
+      "part": "backdrop",
+      "channel": "min-height",
+      "ref": "{p.space-800}",
+      "computedProp": "min-height",
+      "expected": "32px",
+      "observed": "28px",
+      "verdict": "contradiction",
+      "cause": "equal-specificity cascade across two axes: .Polaris-TextField--slim's min-height (p.height-700 = 28px) source-orders after .Polaris-TextField--borderless's (p.space-800 = 32px), so borderless+slim renders 28px — a variant×size condition, refused from single-axis resolution by the mint discipline; named residue (capture-only component)"
+    },
+    {
+      "combo": "borderless.medium.off.off.off.enabled",
+      "part": "backdrop",
+      "channel": "border-width",
+      "ref": "{p.border-width-0165}",
+      "computedProp": "border-bottom-width",
+      "expected": "1px",
+      "observed": "0px",
+      "verdict": "contradiction",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-width is 0 for the borderless variant while the carried base binding paints 1px on the inherit variant. Single-axis partition (variant) — resolve via the review queue (--to {p.border-width-0}; several zero-valued tokens share 0px, border-width-0 is the exact name-class match)"
+    },
+    {
+      "combo": "borderless.medium.off.off.off.enabled",
+      "part": "backdrop",
+      "channel": "border-color",
+      "ref": "{p.color-input-border}",
+      "computedProp": "border-bottom-color",
+      "expected": "rgba(138, 138, 138, 1)",
+      "observed": "rgba(48, 48, 48, 1)",
+      "verdict": "contradiction",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-color falls back to the element's currentColor (the p.color-text body chain), not the carried p.color-input-border; the real fact is 'no border' (border-width 0), and a color rebind would dress a vacuous channel as a binding — named residue (the border-width channel resolves to {p.border-width-0} instead)"
+    },
+    {
+      "combo": "borderless.medium.off.off.on.enabled",
+      "part": "backdrop",
+      "channel": "border-width",
+      "ref": "{p.border-width-0165}",
+      "computedProp": "border-bottom-width",
+      "expected": "1px",
+      "observed": "0px",
+      "verdict": "contradiction",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-width is 0 for the borderless variant while the carried base binding paints 1px on the inherit variant. Single-axis partition (variant) — resolve via the review queue (--to {p.border-width-0}; several zero-valued tokens share 0px, border-width-0 is the exact name-class match)"
+    },
+    {
+      "combo": "borderless.medium.off.off.on.enabled",
+      "part": "backdrop",
+      "channel": "border-color",
+      "ref": "{p.color-input-border}",
+      "computedProp": "border-bottom-color",
+      "expected": "rgba(138, 138, 138, 1)",
+      "observed": "rgba(48, 48, 48, 1)",
+      "verdict": "contradiction",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-color falls back to the element's currentColor (the p.color-text body chain), not the carried p.color-input-border; the real fact is 'no border' (border-width 0), and a color rebind would dress a vacuous channel as a binding — named residue (the border-width channel resolves to {p.border-width-0} instead)"
+    },
+    {
+      "combo": "borderless.medium.off.on.off.enabled",
+      "part": "input",
+      "channel": "padding-inline",
+      "ref": "{p.space-300}",
+      "computedProp": "padding-right",
+      "expected": "12px",
+      "observed": "0px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "borderless.medium.off.on.off.enabled",
+      "part": "backdrop",
+      "channel": "border-width",
+      "ref": "{p.border-width-0165}",
+      "computedProp": "border-bottom-width",
+      "expected": "1px",
+      "observed": "0px",
+      "verdict": "contradiction",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-width is 0 for the borderless variant while the carried base binding paints 1px on the inherit variant. Single-axis partition (variant) — resolve via the review queue (--to {p.border-width-0}; several zero-valued tokens share 0px, border-width-0 is the exact name-class match)"
+    },
+    {
+      "combo": "borderless.medium.off.on.off.enabled",
+      "part": "backdrop",
+      "channel": "border-color",
+      "ref": "{p.color-input-border}",
+      "computedProp": "border-bottom-color",
+      "expected": "rgba(138, 138, 138, 1)",
+      "observed": "rgba(48, 48, 48, 1)",
+      "verdict": "contradiction",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-color falls back to the element's currentColor (the p.color-text body chain), not the carried p.color-input-border; the real fact is 'no border' (border-width 0), and a color rebind would dress a vacuous channel as a binding — named residue (the border-width channel resolves to {p.border-width-0} instead)"
+    },
+    {
+      "combo": "borderless.medium.off.on.on.enabled",
+      "part": "input",
+      "channel": "padding-inline",
+      "ref": "{p.space-300}",
+      "computedProp": "padding-right",
+      "expected": "12px",
+      "observed": "0px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "borderless.medium.off.on.on.enabled",
+      "part": "backdrop",
+      "channel": "border-width",
+      "ref": "{p.border-width-0165}",
+      "computedProp": "border-bottom-width",
+      "expected": "1px",
+      "observed": "0px",
+      "verdict": "contradiction",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-width is 0 for the borderless variant while the carried base binding paints 1px on the inherit variant. Single-axis partition (variant) — resolve via the review queue (--to {p.border-width-0}; several zero-valued tokens share 0px, border-width-0 is the exact name-class match)"
+    },
+    {
+      "combo": "borderless.medium.off.on.on.enabled",
+      "part": "backdrop",
+      "channel": "border-color",
+      "ref": "{p.color-input-border}",
+      "computedProp": "border-bottom-color",
+      "expected": "rgba(138, 138, 138, 1)",
+      "observed": "rgba(48, 48, 48, 1)",
+      "verdict": "contradiction",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-color falls back to the element's currentColor (the p.color-text body chain), not the carried p.color-input-border; the real fact is 'no border' (border-width 0), and a color rebind would dress a vacuous channel as a binding — named residue (the border-width channel resolves to {p.border-width-0} instead)"
+    },
+    {
+      "combo": "borderless.medium.on.off.off.enabled",
+      "part": "input",
+      "channel": "padding-inline",
+      "ref": "{p.space-300}",
+      "computedProp": "padding-left",
+      "expected": "12px",
+      "observed": "0px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "borderless.medium.on.off.off.enabled",
+      "part": "backdrop",
+      "channel": "border-width",
+      "ref": "{p.border-width-0165}",
+      "computedProp": "border-bottom-width",
+      "expected": "1px",
+      "observed": "0px",
+      "verdict": "contradiction",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-width is 0 for the borderless variant while the carried base binding paints 1px on the inherit variant. Single-axis partition (variant) — resolve via the review queue (--to {p.border-width-0}; several zero-valued tokens share 0px, border-width-0 is the exact name-class match)"
+    },
+    {
+      "combo": "borderless.medium.on.off.off.enabled",
+      "part": "backdrop",
+      "channel": "border-color",
+      "ref": "{p.color-input-border}",
+      "computedProp": "border-bottom-color",
+      "expected": "rgba(138, 138, 138, 1)",
+      "observed": "rgba(48, 48, 48, 1)",
+      "verdict": "contradiction",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-color falls back to the element's currentColor (the p.color-text body chain), not the carried p.color-input-border; the real fact is 'no border' (border-width 0), and a color rebind would dress a vacuous channel as a binding — named residue (the border-width channel resolves to {p.border-width-0} instead)"
+    },
+    {
+      "combo": "borderless.medium.on.off.on.enabled",
+      "part": "input",
+      "channel": "padding-inline",
+      "ref": "{p.space-300}",
+      "computedProp": "padding-left",
+      "expected": "12px",
+      "observed": "0px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "borderless.medium.on.off.on.enabled",
+      "part": "backdrop",
+      "channel": "border-width",
+      "ref": "{p.border-width-0165}",
+      "computedProp": "border-bottom-width",
+      "expected": "1px",
+      "observed": "0px",
+      "verdict": "contradiction",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-width is 0 for the borderless variant while the carried base binding paints 1px on the inherit variant. Single-axis partition (variant) — resolve via the review queue (--to {p.border-width-0}; several zero-valued tokens share 0px, border-width-0 is the exact name-class match)"
+    },
+    {
+      "combo": "borderless.medium.on.off.on.enabled",
+      "part": "backdrop",
+      "channel": "border-color",
+      "ref": "{p.color-input-border}",
+      "computedProp": "border-bottom-color",
+      "expected": "rgba(138, 138, 138, 1)",
+      "observed": "rgba(48, 48, 48, 1)",
+      "verdict": "contradiction",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-color falls back to the element's currentColor (the p.color-text body chain), not the carried p.color-input-border; the real fact is 'no border' (border-width 0), and a color rebind would dress a vacuous channel as a binding — named residue (the border-width channel resolves to {p.border-width-0} instead)"
+    },
+    {
+      "combo": "borderless.medium.on.on.off.enabled",
+      "part": "input",
+      "channel": "padding-inline",
+      "ref": "{p.space-300}",
+      "computedProp": "padding-left",
+      "expected": "12px",
+      "observed": "0px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "borderless.medium.on.on.off.enabled",
+      "part": "input",
+      "channel": "padding-inline",
+      "ref": "{p.space-300}",
+      "computedProp": "padding-right",
+      "expected": "12px",
+      "observed": "0px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "borderless.medium.on.on.off.enabled",
+      "part": "backdrop",
+      "channel": "border-width",
+      "ref": "{p.border-width-0165}",
+      "computedProp": "border-bottom-width",
+      "expected": "1px",
+      "observed": "0px",
+      "verdict": "contradiction",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-width is 0 for the borderless variant while the carried base binding paints 1px on the inherit variant. Single-axis partition (variant) — resolve via the review queue (--to {p.border-width-0}; several zero-valued tokens share 0px, border-width-0 is the exact name-class match)"
+    },
+    {
+      "combo": "borderless.medium.on.on.off.enabled",
+      "part": "backdrop",
+      "channel": "border-color",
+      "ref": "{p.color-input-border}",
+      "computedProp": "border-bottom-color",
+      "expected": "rgba(138, 138, 138, 1)",
+      "observed": "rgba(48, 48, 48, 1)",
+      "verdict": "contradiction",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-color falls back to the element's currentColor (the p.color-text body chain), not the carried p.color-input-border; the real fact is 'no border' (border-width 0), and a color rebind would dress a vacuous channel as a binding — named residue (the border-width channel resolves to {p.border-width-0} instead)"
+    },
+    {
+      "combo": "borderless.medium.on.on.on.enabled",
+      "part": "input",
+      "channel": "padding-inline",
+      "ref": "{p.space-300}",
+      "computedProp": "padding-left",
+      "expected": "12px",
+      "observed": "0px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "borderless.medium.on.on.on.enabled",
+      "part": "input",
+      "channel": "padding-inline",
+      "ref": "{p.space-300}",
+      "computedProp": "padding-right",
+      "expected": "12px",
+      "observed": "0px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "borderless.medium.on.on.on.enabled",
+      "part": "backdrop",
+      "channel": "border-width",
+      "ref": "{p.border-width-0165}",
+      "computedProp": "border-bottom-width",
+      "expected": "1px",
+      "observed": "0px",
+      "verdict": "contradiction",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-width is 0 for the borderless variant while the carried base binding paints 1px on the inherit variant. Single-axis partition (variant) — resolve via the review queue (--to {p.border-width-0}; several zero-valued tokens share 0px, border-width-0 is the exact name-class match)"
+    },
+    {
+      "combo": "borderless.medium.on.on.on.enabled",
       "part": "backdrop",
       "channel": "border-color",
       "ref": "{p.color-input-border}",
@@ -1421,10 +3054,24 @@
     }
   ],
   "interactionOnDisabled": [],
-  "structureReceipts": [],
+  "structureReceipts": [
+    "union-part-added: inherit.slim.off.off.on.enabled__default @1.0.0.1 (button|TextField__ClearButton)",
+    "union-part-added: inherit.slim.off.off.on.enabled__default @1.0.0.1.0 (span|Text|sr-only)",
+    "union-part-added: inherit.slim.off.off.on.enabled__default @1.0.0.1.1 (span|Icon)",
+    "union-part-added: inherit.slim.off.off.on.enabled__default @1.0.0.1.1.0 (svg|Icon__Svg)",
+    "union-part-added: inherit.slim.off.off.on.enabled__default @1.0.0.1.1.0.0 (path|)",
+    "union-part-added: inherit.slim.off.off.on.enabled__default @1.0.0.1.1.0.1 (path|)",
+    "union-part-added: inherit.slim.off.on.off.enabled__default @1.0.0.1 (div|TextField__Suffix)",
+    "union-part-added: inherit.slim.off.on.off.enabled__default @1.0.0.1.0 (span|Text)",
+    "union-part-added: inherit.slim.on.off.off.enabled__default @1.0.0.0 (div|TextField__Prefix)",
+    "union-part-added: inherit.slim.on.off.off.enabled__default @1.0.0.0.0 (span|Text)"
+  ],
   "styledChannelReceipts": [
     "control-fallback: no control for <label> — span control used (part label__text)",
-    "control-fallback: no control for <input> — span control used (part input)"
+    "control-fallback: no control for <input> — span control used (part input)",
+    "control-fallback: no control for <svg> — span control used (part icon-2)",
+    "control-fallback: no control for <path> — span control used (part part-1-0-0-1-1-0-0)",
+    "control-fallback: no control for <path> — span control used (part part-1-0-0-1-1-0-1)"
   ],
   "anatomyJoin": {
     "computed": [
@@ -1461,8 +3108,48 @@
         "join": "computed-only"
       },
       {
+        "part": "prefix",
+        "join": "computed-only"
+      },
+      {
+        "part": "label-3",
+        "join": "computed-only"
+      },
+      {
         "part": "input",
         "join": "matched"
+      },
+      {
+        "part": "suffix",
+        "join": "computed-only"
+      },
+      {
+        "part": "label-4",
+        "join": "computed-only"
+      },
+      {
+        "part": "clearbutton",
+        "join": "computed-only"
+      },
+      {
+        "part": "label-5",
+        "join": "computed-only"
+      },
+      {
+        "part": "icon",
+        "join": "computed-only"
+      },
+      {
+        "part": "icon-2",
+        "join": "computed-only"
+      },
+      {
+        "part": "part-1-0-0-1-1-0-0",
+        "join": "computed-only"
+      },
+      {
+        "part": "part-1-0-0-1-1-0-1",
+        "join": "computed-only"
       },
       {
         "part": "backdrop",
@@ -1471,18 +3158,122 @@
     ],
     "staticOnly": []
   },
+  "anatomyPromotion": {
+    "_note": "Round 4 DOM-anatomy promotion: computed-only elements carried as REAL parts (extract/computed/anatomy.ts); svg subtrees carried as reconstructed icon assets; presence facts via visibleWhen/stylesWhen; refusals named.",
+    "partsCarried": [
+      "root",
+      "labelled__labelwrapper",
+      "label",
+      "label__text",
+      "label-2",
+      "connected",
+      "connected__item",
+      "textfield",
+      "prefix",
+      "label-3",
+      "input",
+      "suffix",
+      "label-4",
+      "clearbutton",
+      "label-5",
+      "icon",
+      "backdrop"
+    ],
+    "svgAssets": [
+      "text-field-icon"
+    ],
+    "receipts": [
+      "presence-prop-added: withPrefix (boolean, default false; library prop prefix)",
+      "presence-prop-added: withSuffix (boolean, default false; library prop suffix)",
+      "svg-viewbox-reconstructed: TextField.icon@inherit.slim.off.off.on.enabled — 0 0 20 20 from computed size 20×20 (path extent 17.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: TextField.icon@inherit.slim.off.on.on.enabled — 0 0 20 20 from computed size 20×20 (path extent 17.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: TextField.icon@inherit.slim.on.off.on.enabled — 0 0 20 20 from computed size 20×20 (path extent 17.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: TextField.icon@inherit.slim.on.on.on.enabled — 0 0 20 20 from computed size 20×20 (path extent 17.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: TextField.icon@inherit.medium.off.off.on.enabled — 0 0 20 20 from computed size 20×20 (path extent 17.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: TextField.icon@inherit.medium.off.on.on.enabled — 0 0 20 20 from computed size 20×20 (path extent 17.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: TextField.icon@inherit.medium.on.off.on.enabled — 0 0 20 20 from computed size 20×20 (path extent 17.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: TextField.icon@inherit.medium.on.on.on.enabled — 0 0 20 20 from computed size 20×20 (path extent 17.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: TextField.icon@borderless.slim.off.off.on.enabled — 0 0 20 20 from computed size 20×20 (path extent 17.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: TextField.icon@borderless.slim.off.on.on.enabled — 0 0 20 20 from computed size 20×20 (path extent 17.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: TextField.icon@borderless.slim.on.off.on.enabled — 0 0 20 20 from computed size 20×20 (path extent 17.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: TextField.icon@borderless.slim.on.on.on.enabled — 0 0 20 20 from computed size 20×20 (path extent 17.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: TextField.icon@borderless.medium.off.off.on.enabled — 0 0 20 20 from computed size 20×20 (path extent 17.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: TextField.icon@borderless.medium.off.on.on.enabled — 0 0 20 20 from computed size 20×20 (path extent 17.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: TextField.icon@borderless.medium.on.off.on.enabled — 0 0 20 20 from computed size 20×20 (path extent 17.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: TextField.icon@borderless.medium.on.on.on.enabled — 0 0 20 20 from computed size 20×20 (path extent 17.0; viewBox is not a computed style — named reconstruction)",
+      "root-display-carried: block via declared (overrides reviewed layout.display \"flex\" — computed truth wins display, receipted)",
+      "literal-text-carried: label-2 = \"Store name\" (no text prop sample matches — the mounted value is carried verbatim)",
+      "full-width-carried: connected__item spans its row parent's content width in every enabled combo → layout.grow (geometry evidence)",
+      "presence-carried: prefix (16/32 combos) → visibleWhen withPrefix hidden-when disabled",
+      "literal-text-carried: label-3 = \"$\" (no text prop sample matches — the mounted value is carried verbatim)",
+      "presence-carried: label-3 (16/32 combos) → visibleWhen withPrefix hidden-when disabled",
+      "presence-carried: suffix (16/32 combos) → visibleWhen withSuffix hidden-when disabled",
+      "literal-text-carried: label-4 = \"USD\" (no text prop sample matches — the mounted value is carried verbatim)",
+      "presence-carried: label-4 (16/32 combos) → visibleWhen withSuffix hidden-when disabled",
+      "presence-carried: clearbutton (16/32 combos) → visibleWhen clearButton hidden-when disabled",
+      "literal-text-carried: label-5 = \"Clear\" (no text prop sample matches — the mounted value is carried verbatim)",
+      "sr-only-carried-as-hidden: label-5 is visually hidden in the real component (clip-path/1px box) — promoted with declared display:none (visual parity exact; AT semantics ride the contract's own semantics — NAMED downgrade)",
+      "presence-carried: icon (16/32 combos) → visibleWhen clearButton hidden-when disabled",
+      "full-width-carried: backdrop spans its row parent's content width in every enabled combo → layout.grow (geometry evidence)"
+    ],
+    "refusals": []
+  },
   "enrichmentNotes": [
+    "layout enriched: labelled__labelwrapper.layout.justify = space-between (uniform computed keyword — the schema's own vocabulary)",
+    "layout enriched: connected.layout.align = center (uniform computed keyword — the schema's own vocabulary)",
+    "layout enriched: textfield.layout.align = center (uniform computed keyword — the schema's own vocabulary)",
+    "declared fact carried: label__text.cursor = default (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-2.cursor = default (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: connected.position = relative (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: connected__item.position = relative (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: textfield.cursor = text (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: textfield.position = relative (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: prefix.cursor = text (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: prefix.position = relative (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: prefix.user-select = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-3.cursor = text (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-3.user-select = none (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: input.cursor = text (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: input.font-feature-settings = normal (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: input.overflow-x = clip (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: input.overflow-y = clip (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: input.position = relative (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: input.text-rendering = auto (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: suffix.cursor = text (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: suffix.position = relative (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: suffix.user-select = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-4.cursor = text (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-4.user-select = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: clearbutton.appearance = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: clearbutton.border-bottom-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: clearbutton.border-left-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: clearbutton.border-right-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: clearbutton.border-top-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: clearbutton.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: clearbutton.transition-delay = 0s, 0s (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: clearbutton.transition-duration = 0.1s, 0.1s (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: clearbutton.transition-property = visibility, opacity (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: clearbutton.transition-timing-function = cubic-bezier(0.19, 0.91, 0.38, 1), cubic-bezier(0.19, 0.91, 0.38, 1) (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-5.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-5.font-feature-settings = normal (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-5.overflow-x = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-5.overflow-y = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-5.position = absolute (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-5.text-align = center (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: label-5.text-rendering = auto (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-5.text-wrap-mode = nowrap (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: icon.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: icon.font-feature-settings = normal (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: icon.max-height = 100% (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: icon.max-width = 100% (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: icon.text-align = center (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: icon.text-rendering = auto (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: backdrop.cursor = text (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: backdrop.pointer-events = none (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared state fact carried: [active] backdrop.outline-style = solid (v15 declared vocabulary)",
     "declared state fact carried: [disabled] backdrop.cursor = auto (v15 declared vocabulary)",
     "declared state fact carried: [disabled] input.cursor = default (v15 declared vocabulary)",
+    "declared state fact carried: [disabled] textfield.cursor = auto (v15 declared vocabulary)",
     "declared state fact carried: [focus-visible] backdrop.outline-style = solid (v15 declared vocabulary)"
   ]
 }

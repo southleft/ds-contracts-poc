@@ -1,8 +1,8 @@
 {
   "component": "RadioButton",
   "browser": "148.0.7778.96",
-  "captures": 8,
-  "combos": 2,
+  "captures": 16,
+  "combos": 4,
   "interactions": 4,
   "enumerationPolicy": "full-cartesian",
   "channelsEnumerated": 942,
@@ -69,8 +69,8 @@
         "class": "currentColor"
       }
     ],
-    "mintedLeavesUnfolded": 23,
-    "mintedLeavesFolded": 28
+    "mintedLeavesUnfolded": 41,
+    "mintedLeavesFolded": 46
   },
   "bound": {
     "cellsChecked": 4,
@@ -79,31 +79,36 @@
     "untriaged": 0
   },
   "minted": {
-    "leaves": 28,
-    "baseBindings": 39,
+    "leaves": 46,
+    "baseBindings": 41,
     "stateBindings": 51,
     "byShape": {
-      "uniform": 90,
-      "perAxis": 0,
+      "uniform": 81,
+      "perAxis": 11,
       "perPair": 0,
       "refused": 0
     }
   },
   "declared": {
-    "base": 18,
-    "state": 8
+    "base": 24,
+    "state": 12
   },
   "codeOnly": {
-    "base": 11,
-    "state": 4,
-    "overflowBindings": 59
+    "base": 2,
+    "state": 0,
+    "overflowBindings": 47
   },
-  "pseudoElementFindings": 6,
+  "pseudoElementFindings": 12,
+  "anatomyPromotion": {
+    "partsCarried": 7,
+    "svgAssets": 0,
+    "refusals": 0
+  },
   "enrichedContractSchemaValid": true,
   "enrichedContractGeneratorValid": true,
   "replayComputedEquality": {
-    "cellsCompared": 52640,
-    "cellsMatched": 52560,
+    "cellsCompared": 105280,
+    "cellsMatched": 105120,
     "pct": 99.84802431610942,
     "namedExclusions": [
       "app-region",
@@ -112,97 +117,97 @@
     "topMismatchedChannels": [
       [
         "inline-size",
-        16
+        32
       ],
       [
         "perspective-origin",
-        16
+        32
       ],
       [
         "width",
-        16
+        32
       ],
       [
         "overflow-block",
-        8
+        16
       ],
       [
         "overflow-inline",
-        8
+        16
       ],
       [
         "overflow-x",
-        8
+        16
       ],
       [
         "overflow-y",
-        8
+        16
       ]
     ]
   },
   "pixel": {
-    "pairs": 8,
+    "pairs": 16,
     "exact": {
       "mean": 0,
       "max": 0,
-      "perfect": 8
+      "perfect": 16
     },
     "aa": {
       "mean": 0,
       "max": 0,
-      "perfect": 8
+      "perfect": 16
     },
     "worst": [
       {
-        "key": "enabled__default",
+        "key": "unchecked.enabled__default",
         "pctExact": 0,
         "pctAA": 0
       },
       {
-        "key": "enabled__hover",
+        "key": "unchecked.enabled__hover",
         "pctExact": 0,
         "pctAA": 0
       },
       {
-        "key": "enabled__focus-visible",
+        "key": "unchecked.enabled__focus-visible",
         "pctExact": 0,
         "pctAA": 0
       },
       {
-        "key": "enabled__active",
+        "key": "unchecked.enabled__active",
         "pctExact": 0,
         "pctAA": 0
       },
       {
-        "key": "disabled__default",
+        "key": "unchecked.disabled__default",
         "pctExact": 0,
         "pctAA": 0
       },
       {
-        "key": "disabled__hover",
+        "key": "unchecked.disabled__hover",
         "pctExact": 0,
         "pctAA": 0
       },
       {
-        "key": "disabled__focus-visible",
+        "key": "unchecked.disabled__focus-visible",
         "pctExact": 0,
         "pctAA": 0
       },
       {
-        "key": "disabled__active",
+        "key": "unchecked.disabled__active",
         "pctExact": 0,
         "pctAA": 0
       }
     ]
   },
   "gate": {
-    "computedPctEqual": 75.5952380952381,
+    "computedPctEqual": 81.02409638554217,
     "rowsFullyEqual": 0,
-    "rows": 8,
+    "rows": 16,
     "pixelPerfectExact": 0,
     "pixelPerfectAA": 0,
-    "pairs": 8
+    "pairs": 16
   },
   "focusVisibleDriverMatched": 0,
-  "focusVisibleDriverTotal": 2
+  "focusVisibleDriverTotal": 4
 }

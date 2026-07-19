@@ -1,10 +1,10 @@
 /* GENERATED FILE — DO NOT EDIT.
- * Source of truth: contracts/button.contract.json (polaris.button v0.2.0)
+ * Source of truth: contracts/button.contract.json (polaris.button v0.3.0)
  * Regenerate with: npm run generate
  */
 
 .root {
-  display: inline-flex;
+  display: flex;
   align-items: center;
   justify-content: center;
   border: 0;
@@ -657,11 +657,44 @@
   outline-style: solid;
 }
 
+.icon {
+  display: flex;
+  margin-bottom: var(--imported-button-icon-margin-bottom);
+  margin-top: var(--imported-button-icon-margin-top);
+  display: block;
+  cursor: pointer;
+  text-align: center;
+  user-select: none;
+}
+
+.icon-2 svg {
+  width: 20px;
+  height: 20px;
+}
+
+.icon-2 {
+  display: inline-flex;
+  flex-shrink: 0;
+  min-height: var(--imported-shared-size-0);
+  min-width: var(--imported-shared-size-0);
+  display: block;
+  cursor: pointer;
+  max-height: 100%;
+  max-width: 100%;
+  text-align: center;
+  user-select: none;
+}
+
+.icon-2Glyph {
+  display: inline-flex;
+}
+
 .label {
   font-size: var(--p-text-body-sm-font-size);
   font-weight: var(--p-font-weight-medium);
   line-height: var(--p-text-body-sm-font-line-height);
   letter-spacing: var(--p-text-body-sm-font-letter-spacing);
+  display: block;
   cursor: pointer;
   text-align: center;
   user-select: none;

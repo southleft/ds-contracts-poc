@@ -1,5 +1,5 @@
 /* GENERATED FILE — DO NOT EDIT.
- * Source of truth: contracts/thumbnail.contract.json (polaris.thumbnail v0.2.0)
+ * Source of truth: contracts/thumbnail.contract.json (polaris.thumbnail v0.3.0)
  * Regenerate with: npm run generate
  */
 
@@ -15,6 +15,7 @@
   right: var(--imported-shared-size-0);
   top: var(--imported-shared-size-0);
   min-width: 24px;
+  display: block;
   max-width: 100%;
   overflow-x: hidden;
   overflow-y: hidden;
@@ -48,4 +49,23 @@
   border-bottom-right-radius: var(--imported-thumbnail-root-border-bottom-right-radius-small);
   border-top-right-radius: var(--imported-thumbnail-root-border-top-right-radius-small);
   width: 40px;
+}
+
+.part-0 {
+  bottom: var(--imported-shared-size-0);
+  color: var(--imported-thumbnail-part-0-color);
+  left: var(--imported-shared-size-0);
+  min-height: var(--imported-shared-size-0);
+  min-width: var(--imported-shared-size-0);
+  right: var(--imported-shared-size-0);
+  top: var(--imported-shared-size-0);
+  display: block;
+  position: absolute;
+  aspect-ratio: 1 / 1;
+  max-height: 100%;
+  max-width: 100%;
+  overflow-x: clip;
+  overflow-y: clip;
+  width: 100%;
+  height: 100%;
 }

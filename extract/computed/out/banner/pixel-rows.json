@@ -1,82 +1,322 @@
 [
   {
-    "key": "success__default",
-    "pctExact": 0.1025390625,
-    "pctAA": 0.0634765625
+    "key": "success.off.off__default",
+    "pctExact": 0.021169354838709676,
+    "pctAA": 0.01310483870967742
   },
   {
-    "key": "success__hover",
-    "pctExact": 41.663411458333336,
-    "pctAA": 35.387369791666664
+    "key": "success.off.off__hover",
+    "pctExact": 0.021169354838709676,
+    "pctAA": 0.01310483870967742
   },
   {
-    "key": "success__focus-visible",
-    "pctExact": 42.0166015625,
-    "pctAA": 35.67626953125
+    "key": "success.off.off__focus-visible",
+    "pctExact": 0.021337365591397848,
+    "pctAA": 0.01310483870967742
   },
   {
-    "key": "success__active",
-    "pctExact": 41.663411458333336,
-    "pctAA": 35.387369791666664
+    "key": "success.off.off__active",
+    "pctExact": 0.021169354838709676,
+    "pctAA": 0.01310483870967742
   },
   {
-    "key": "info__default",
-    "pctExact": 0.3377278645833333,
-    "pctAA": 0.21321614583333334
+    "key": "success.off.on__default",
+    "pctExact": 0.021169354838709676,
+    "pctAA": 0.01310483870967742
   },
   {
-    "key": "info__hover",
-    "pctExact": 41.822916666666664,
-    "pctAA": 34.646809895833336
+    "key": "success.off.on__hover",
+    "pctExact": 0.021169354838709676,
+    "pctAA": 0.01310483870967742
   },
   {
-    "key": "info__focus-visible",
-    "pctExact": 42.176106770833336,
-    "pctAA": 34.860026041666664
+    "key": "success.off.on__focus-visible",
+    "pctExact": 0.021673387096774195,
+    "pctAA": 0.01310483870967742
   },
   {
-    "key": "info__active",
-    "pctExact": 41.822916666666664,
-    "pctAA": 34.646809895833336
+    "key": "success.off.on__active",
+    "pctExact": 0.021169354838709676,
+    "pctAA": 0.01310483870967742
   },
   {
-    "key": "warning__default",
-    "pctExact": 0.3157552083333333,
-    "pctAA": 0.20670572916666666
+    "key": "success.on.off__default",
+    "pctExact": 0.05678763440860215,
+    "pctAA": 0.03393817204301075
   },
   {
-    "key": "warning__hover",
-    "pctExact": 41.844889322916664,
-    "pctAA": 34.66796875
+    "key": "success.on.off__hover",
+    "pctExact": 0.057459677419354836,
+    "pctAA": 0.03393817204301075
   },
   {
-    "key": "warning__focus-visible",
-    "pctExact": 42.198079427083336,
-    "pctAA": 34.886067708333336
+    "key": "success.on.off__focus-visible",
+    "pctExact": 0.05779569892473118,
+    "pctAA": 0.03393817204301075
   },
   {
-    "key": "warning__active",
-    "pctExact": 41.844889322916664,
-    "pctAA": 34.66796875
+    "key": "success.on.off__active",
+    "pctExact": 0.057459677419354836,
+    "pctAA": 0.03393817204301075
   },
   {
-    "key": "critical__default",
-    "pctExact": 0.3409830729166667,
-    "pctAA": 0.2197265625
+    "key": "success.on.on__default",
+    "pctExact": 0.057459677419354836,
+    "pctAA": 0.03393817204301075
   },
   {
-    "key": "critical__hover",
-    "pctExact": 41.851399739583336,
-    "pctAA": 35.477701822916664
+    "key": "success.on.on__hover",
+    "pctExact": 0.057459677419354836,
+    "pctAA": 0.03393817204301075
   },
   {
-    "key": "critical__focus-visible",
-    "pctExact": 42.20458984375,
-    "pctAA": 35.806477864583336
+    "key": "success.on.on__focus-visible",
+    "pctExact": 0.05779569892473118,
+    "pctAA": 0.03393817204301075
   },
   {
-    "key": "critical__active",
-    "pctExact": 41.851399739583336,
-    "pctAA": 35.477701822916664
+    "key": "success.on.on__active",
+    "pctExact": 0.057459677419354836,
+    "pctAA": 0.03393817204301075
+  },
+  {
+    "key": "info.off.off__default",
+    "pctExact": 0.06972446236559139,
+    "pctAA": 0.04401881720430108
+  },
+  {
+    "key": "info.off.off__hover",
+    "pctExact": 0.06989247311827956,
+    "pctAA": 0.04401881720430108
+  },
+  {
+    "key": "info.off.off__focus-visible",
+    "pctExact": 0.06972446236559139,
+    "pctAA": 0.04401881720430108
+  },
+  {
+    "key": "info.off.off__active",
+    "pctExact": 0.06989247311827956,
+    "pctAA": 0.04401881720430108
+  },
+  {
+    "key": "info.off.on__default",
+    "pctExact": 0.06989247311827956,
+    "pctAA": 0.04401881720430108
+  },
+  {
+    "key": "info.off.on__hover",
+    "pctExact": 0.06989247311827956,
+    "pctAA": 0.04401881720430108
+  },
+  {
+    "key": "info.off.on__focus-visible",
+    "pctExact": 0.06972446236559139,
+    "pctAA": 0.04401881720430108
+  },
+  {
+    "key": "info.off.on__active",
+    "pctExact": 0.06989247311827956,
+    "pctAA": 0.04401881720430108
+  },
+  {
+    "key": "info.on.off__default",
+    "pctExact": 0.10551075268817205,
+    "pctAA": 0.0648521505376344
+  },
+  {
+    "key": "info.on.off__hover",
+    "pctExact": 0.10551075268817205,
+    "pctAA": 0.0648521505376344
+  },
+  {
+    "key": "info.on.off__focus-visible",
+    "pctExact": 0.10534274193548387,
+    "pctAA": 0.0648521505376344
+  },
+  {
+    "key": "info.on.off__active",
+    "pctExact": 0.10551075268817205,
+    "pctAA": 0.0648521505376344
+  },
+  {
+    "key": "info.on.on__default",
+    "pctExact": 0.10551075268817205,
+    "pctAA": 0.0648521505376344
+  },
+  {
+    "key": "info.on.on__hover",
+    "pctExact": 0.10551075268817205,
+    "pctAA": 0.0648521505376344
+  },
+  {
+    "key": "info.on.on__focus-visible",
+    "pctExact": 0.10534274193548387,
+    "pctAA": 0.0648521505376344
+  },
+  {
+    "key": "info.on.on__active",
+    "pctExact": 0.10551075268817205,
+    "pctAA": 0.0648521505376344
+  },
+  {
+    "key": "warning.off.off__default",
+    "pctExact": 0.06569220430107527,
+    "pctAA": 0.042674731182795696
+  },
+  {
+    "key": "warning.off.off__hover",
+    "pctExact": 0.06569220430107527,
+    "pctAA": 0.042674731182795696
+  },
+  {
+    "key": "warning.off.off__focus-visible",
+    "pctExact": 0.06653225806451613,
+    "pctAA": 0.042674731182795696
+  },
+  {
+    "key": "warning.off.off__active",
+    "pctExact": 0.06569220430107527,
+    "pctAA": 0.042674731182795696
+  },
+  {
+    "key": "warning.off.on__default",
+    "pctExact": 0.06569220430107527,
+    "pctAA": 0.042674731182795696
+  },
+  {
+    "key": "warning.off.on__hover",
+    "pctExact": 0.06569220430107527,
+    "pctAA": 0.042674731182795696
+  },
+  {
+    "key": "warning.off.on__focus-visible",
+    "pctExact": 0.06636424731182795,
+    "pctAA": 0.042674731182795696
+  },
+  {
+    "key": "warning.off.on__active",
+    "pctExact": 0.06569220430107527,
+    "pctAA": 0.042674731182795696
+  },
+  {
+    "key": "warning.on.off__default",
+    "pctExact": 0.10131048387096774,
+    "pctAA": 0.06350806451612903
+  },
+  {
+    "key": "warning.on.off__hover",
+    "pctExact": 0.10131048387096774,
+    "pctAA": 0.06350806451612903
+  },
+  {
+    "key": "warning.on.off__focus-visible",
+    "pctExact": 0.10198252688172044,
+    "pctAA": 0.06350806451612903
+  },
+  {
+    "key": "warning.on.off__active",
+    "pctExact": 0.10131048387096774,
+    "pctAA": 0.06350806451612903
+  },
+  {
+    "key": "warning.on.on__default",
+    "pctExact": 0.10131048387096774,
+    "pctAA": 0.06350806451612903
+  },
+  {
+    "key": "warning.on.on__hover",
+    "pctExact": 0.10131048387096774,
+    "pctAA": 0.06350806451612903
+  },
+  {
+    "key": "warning.on.on__focus-visible",
+    "pctExact": 0.10181451612903226,
+    "pctAA": 0.06350806451612903
+  },
+  {
+    "key": "warning.on.on__active",
+    "pctExact": 0.10131048387096774,
+    "pctAA": 0.06350806451612903
+  },
+  {
+    "key": "critical.off.off__default",
+    "pctExact": 0.07090053763440861,
+    "pctAA": 0.04536290322580645
+  },
+  {
+    "key": "critical.off.off__hover",
+    "pctExact": 0.07090053763440861,
+    "pctAA": 0.04536290322580645
+  },
+  {
+    "key": "critical.off.off__focus-visible",
+    "pctExact": 0.07123655913978495,
+    "pctAA": 0.04536290322580645
+  },
+  {
+    "key": "critical.off.off__active",
+    "pctExact": 0.07090053763440861,
+    "pctAA": 0.04536290322580645
+  },
+  {
+    "key": "critical.off.on__default",
+    "pctExact": 0.07090053763440861,
+    "pctAA": 0.04536290322580645
+  },
+  {
+    "key": "critical.off.on__hover",
+    "pctExact": 0.07090053763440861,
+    "pctAA": 0.04536290322580645
+  },
+  {
+    "key": "critical.off.on__focus-visible",
+    "pctExact": 0.07140456989247312,
+    "pctAA": 0.04536290322580645
+  },
+  {
+    "key": "critical.off.on__active",
+    "pctExact": 0.07090053763440861,
+    "pctAA": 0.04536290322580645
+  },
+  {
+    "key": "critical.on.off__default",
+    "pctExact": 0.10651881720430108,
+    "pctAA": 0.06619623655913978
+  },
+  {
+    "key": "critical.on.off__hover",
+    "pctExact": 0.10651881720430108,
+    "pctAA": 0.06619623655913978
+  },
+  {
+    "key": "critical.on.off__focus-visible",
+    "pctExact": 0.1070228494623656,
+    "pctAA": 0.06619623655913978
+  },
+  {
+    "key": "critical.on.off__active",
+    "pctExact": 0.10651881720430108,
+    "pctAA": 0.06619623655913978
+  },
+  {
+    "key": "critical.on.on__default",
+    "pctExact": 0.10651881720430108,
+    "pctAA": 0.06619623655913978
+  },
+  {
+    "key": "critical.on.on__hover",
+    "pctExact": 0.10651881720430108,
+    "pctAA": 0.06619623655913978
+  },
+  {
+    "key": "critical.on.on__focus-visible",
+    "pctExact": 0.1070228494623656,
+    "pctAA": 0.06619623655913978
+  },
+  {
+    "key": "critical.on.on__active",
+    "pctExact": 0.10651881720430108,
+    "pctAA": 0.06619623655913978
   }
 ]

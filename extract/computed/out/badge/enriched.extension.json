@@ -5,18 +5,942 @@
   "browser": "148.0.7778.96",
   "mintedTokens": {
     "imported": {
+      "badge": {
+        "root": {
+          "background-color": {
+            "none": {
+              "$value": "#0000000f",
+              "$type": "color"
+            },
+            "info": {
+              "$value": "#d5ebff",
+              "$type": "color"
+            },
+            "success": {
+              "$value": "#affebf",
+              "$type": "color"
+            },
+            "warning": {
+              "$value": "#ffd6a4",
+              "$type": "color"
+            },
+            "critical": {
+              "$value": "#fed1d7",
+              "$type": "color"
+            },
+            "attention": {
+              "$value": "#ffeb78",
+              "$type": "color"
+            },
+            "new": {
+              "$value": "#0000000f",
+              "$type": "color"
+            },
+            "magic": {
+              "$value": "#e9e5ff",
+              "$type": "color"
+            },
+            "info-strong": {
+              "$value": "#91d0ff",
+              "$type": "color"
+            },
+            "success-strong": {
+              "$value": "#047b5d",
+              "$type": "color"
+            },
+            "warning-strong": {
+              "$value": "#ffb800",
+              "$type": "color"
+            },
+            "critical-strong": {
+              "$value": "#c70a24",
+              "$type": "color"
+            },
+            "attention-strong": {
+              "$value": "#ffe600",
+              "$type": "color"
+            },
+            "read-only": {
+              "$value": "#00000000",
+              "$type": "color"
+            },
+            "enabled": {
+              "$value": "#0000000f",
+              "$type": "color"
+            }
+          },
+          "color": {
+            "none": {
+              "$value": "#616161",
+              "$type": "color"
+            },
+            "info": {
+              "$value": "#003a5a",
+              "$type": "color"
+            },
+            "success": {
+              "$value": "#014b40",
+              "$type": "color"
+            },
+            "warning": {
+              "$value": "#5e4200",
+              "$type": "color"
+            },
+            "critical": {
+              "$value": "#8e0b21",
+              "$type": "color"
+            },
+            "attention": {
+              "$value": "#4f4700",
+              "$type": "color"
+            },
+            "new": {
+              "$value": "#616161",
+              "$type": "color"
+            },
+            "magic": {
+              "$value": "#5700d1",
+              "$type": "color"
+            },
+            "info-strong": {
+              "$value": "#002133",
+              "$type": "color"
+            },
+            "success-strong": {
+              "$value": "#fafffb",
+              "$type": "color"
+            },
+            "warning-strong": {
+              "$value": "#251a00",
+              "$type": "color"
+            },
+            "critical-strong": {
+              "$value": "#fffafb",
+              "$type": "color"
+            },
+            "attention-strong": {
+              "$value": "#332e00",
+              "$type": "color"
+            },
+            "read-only": {
+              "$value": "#616161",
+              "$type": "color"
+            },
+            "enabled": {
+              "$value": "#303030",
+              "$type": "color"
+            }
+          },
+          "font-weight": {
+            "none": {
+              "$value": "550",
+              "$type": "number"
+            },
+            "info": {
+              "$value": "550",
+              "$type": "number"
+            },
+            "success": {
+              "$value": "550",
+              "$type": "number"
+            },
+            "warning": {
+              "$value": "550",
+              "$type": "number"
+            },
+            "critical": {
+              "$value": "550",
+              "$type": "number"
+            },
+            "attention": {
+              "$value": "550",
+              "$type": "number"
+            },
+            "new": {
+              "$value": "700",
+              "$type": "number"
+            },
+            "magic": {
+              "$value": "550",
+              "$type": "number"
+            },
+            "info-strong": {
+              "$value": "550",
+              "$type": "number"
+            },
+            "success-strong": {
+              "$value": "550",
+              "$type": "number"
+            },
+            "warning-strong": {
+              "$value": "550",
+              "$type": "number"
+            },
+            "critical-strong": {
+              "$value": "550",
+              "$type": "number"
+            },
+            "attention-strong": {
+              "$value": "550",
+              "$type": "number"
+            },
+            "read-only": {
+              "$value": "550",
+              "$type": "number"
+            },
+            "enabled": {
+              "$value": "550",
+              "$type": "number"
+            }
+          }
+        },
+        "label-2": {
+          "bottom": {
+            "$value": "799px",
+            "$type": "dimension"
+          },
+          "left": {
+            "$value": "24px",
+            "$type": "dimension"
+          },
+          "right": {
+            "$value": "575px",
+            "$type": "dimension"
+          }
+        },
+        "icon": {
+          "color": {
+            "none": {
+              "$value": "#616161",
+              "$type": "color"
+            },
+            "info": {
+              "$value": "#003a5a",
+              "$type": "color"
+            },
+            "success": {
+              "$value": "#014b40",
+              "$type": "color"
+            },
+            "warning": {
+              "$value": "#5e4200",
+              "$type": "color"
+            },
+            "critical": {
+              "$value": "#8e0b21",
+              "$type": "color"
+            },
+            "attention": {
+              "$value": "#4f4700",
+              "$type": "color"
+            },
+            "new": {
+              "$value": "#616161",
+              "$type": "color"
+            },
+            "magic": {
+              "$value": "#5700d1",
+              "$type": "color"
+            },
+            "info-strong": {
+              "$value": "#002133",
+              "$type": "color"
+            },
+            "success-strong": {
+              "$value": "#fafffb",
+              "$type": "color"
+            },
+            "warning-strong": {
+              "$value": "#251a00",
+              "$type": "color"
+            },
+            "critical-strong": {
+              "$value": "#fffafb",
+              "$type": "color"
+            },
+            "attention-strong": {
+              "$value": "#332e00",
+              "$type": "color"
+            },
+            "read-only": {
+              "$value": "#616161",
+              "$type": "color"
+            },
+            "enabled": {
+              "$value": "#303030",
+              "$type": "color"
+            }
+          },
+          "font-weight": {
+            "none": {
+              "$value": "550",
+              "$type": "number"
+            },
+            "info": {
+              "$value": "550",
+              "$type": "number"
+            },
+            "success": {
+              "$value": "550",
+              "$type": "number"
+            },
+            "warning": {
+              "$value": "550",
+              "$type": "number"
+            },
+            "critical": {
+              "$value": "550",
+              "$type": "number"
+            },
+            "attention": {
+              "$value": "550",
+              "$type": "number"
+            },
+            "new": {
+              "$value": "700",
+              "$type": "number"
+            },
+            "magic": {
+              "$value": "550",
+              "$type": "number"
+            },
+            "info-strong": {
+              "$value": "550",
+              "$type": "number"
+            },
+            "success-strong": {
+              "$value": "550",
+              "$type": "number"
+            },
+            "warning-strong": {
+              "$value": "550",
+              "$type": "number"
+            },
+            "critical-strong": {
+              "$value": "550",
+              "$type": "number"
+            },
+            "attention-strong": {
+              "$value": "550",
+              "$type": "number"
+            },
+            "read-only": {
+              "$value": "550",
+              "$type": "number"
+            },
+            "enabled": {
+              "$value": "550",
+              "$type": "number"
+            }
+          },
+          "margin-bottom": {
+            "$value": "-2px",
+            "$type": "dimension"
+          },
+          "margin-left": {
+            "$value": "-8px",
+            "$type": "dimension"
+          },
+          "margin-top": {
+            "$value": "-2px",
+            "$type": "dimension"
+          }
+        },
+        "icon-2": {
+          "color": {
+            "none": {
+              "$value": "#616161",
+              "$type": "color"
+            },
+            "info": {
+              "$value": "#003a5a",
+              "$type": "color"
+            },
+            "success": {
+              "$value": "#014b40",
+              "$type": "color"
+            },
+            "warning": {
+              "$value": "#5e4200",
+              "$type": "color"
+            },
+            "critical": {
+              "$value": "#8e0b21",
+              "$type": "color"
+            },
+            "attention": {
+              "$value": "#4f4700",
+              "$type": "color"
+            },
+            "new": {
+              "$value": "#616161",
+              "$type": "color"
+            },
+            "magic": {
+              "$value": "#5700d1",
+              "$type": "color"
+            },
+            "info-strong": {
+              "$value": "#002133",
+              "$type": "color"
+            },
+            "success-strong": {
+              "$value": "#fafffb",
+              "$type": "color"
+            },
+            "warning-strong": {
+              "$value": "#251a00",
+              "$type": "color"
+            },
+            "critical-strong": {
+              "$value": "#fffafb",
+              "$type": "color"
+            },
+            "attention-strong": {
+              "$value": "#332e00",
+              "$type": "color"
+            },
+            "read-only": {
+              "$value": "#616161",
+              "$type": "color"
+            },
+            "enabled": {
+              "$value": "#303030",
+              "$type": "color"
+            }
+          },
+          "font-weight": {
+            "none": {
+              "$value": "550",
+              "$type": "number"
+            },
+            "info": {
+              "$value": "550",
+              "$type": "number"
+            },
+            "success": {
+              "$value": "550",
+              "$type": "number"
+            },
+            "warning": {
+              "$value": "550",
+              "$type": "number"
+            },
+            "critical": {
+              "$value": "550",
+              "$type": "number"
+            },
+            "attention": {
+              "$value": "550",
+              "$type": "number"
+            },
+            "new": {
+              "$value": "700",
+              "$type": "number"
+            },
+            "magic": {
+              "$value": "550",
+              "$type": "number"
+            },
+            "info-strong": {
+              "$value": "550",
+              "$type": "number"
+            },
+            "success-strong": {
+              "$value": "550",
+              "$type": "number"
+            },
+            "warning-strong": {
+              "$value": "550",
+              "$type": "number"
+            },
+            "critical-strong": {
+              "$value": "550",
+              "$type": "number"
+            },
+            "attention-strong": {
+              "$value": "550",
+              "$type": "number"
+            },
+            "read-only": {
+              "$value": "550",
+              "$type": "number"
+            },
+            "enabled": {
+              "$value": "550",
+              "$type": "number"
+            }
+          }
+        },
+        "label-3": {
+          "bottom": {
+            "$value": "799px",
+            "$type": "dimension"
+          },
+          "color": {
+            "none": {
+              "$value": "#616161",
+              "$type": "color"
+            },
+            "info": {
+              "$value": "#003a5a",
+              "$type": "color"
+            },
+            "success": {
+              "$value": "#014b40",
+              "$type": "color"
+            },
+            "warning": {
+              "$value": "#5e4200",
+              "$type": "color"
+            },
+            "critical": {
+              "$value": "#8e0b21",
+              "$type": "color"
+            },
+            "attention": {
+              "$value": "#4f4700",
+              "$type": "color"
+            },
+            "new": {
+              "$value": "#616161",
+              "$type": "color"
+            },
+            "magic": {
+              "$value": "#5700d1",
+              "$type": "color"
+            },
+            "info-strong": {
+              "$value": "#002133",
+              "$type": "color"
+            },
+            "success-strong": {
+              "$value": "#fafffb",
+              "$type": "color"
+            },
+            "warning-strong": {
+              "$value": "#251a00",
+              "$type": "color"
+            },
+            "critical-strong": {
+              "$value": "#fffafb",
+              "$type": "color"
+            },
+            "attention-strong": {
+              "$value": "#332e00",
+              "$type": "color"
+            },
+            "read-only": {
+              "$value": "#616161",
+              "$type": "color"
+            },
+            "enabled": {
+              "$value": "#303030",
+              "$type": "color"
+            }
+          },
+          "font-weight": {
+            "none": {
+              "$value": "550",
+              "$type": "number"
+            },
+            "info": {
+              "$value": "550",
+              "$type": "number"
+            },
+            "success": {
+              "$value": "550",
+              "$type": "number"
+            },
+            "warning": {
+              "$value": "550",
+              "$type": "number"
+            },
+            "critical": {
+              "$value": "550",
+              "$type": "number"
+            },
+            "attention": {
+              "$value": "550",
+              "$type": "number"
+            },
+            "new": {
+              "$value": "700",
+              "$type": "number"
+            },
+            "magic": {
+              "$value": "550",
+              "$type": "number"
+            },
+            "info-strong": {
+              "$value": "550",
+              "$type": "number"
+            },
+            "success-strong": {
+              "$value": "550",
+              "$type": "number"
+            },
+            "warning-strong": {
+              "$value": "550",
+              "$type": "number"
+            },
+            "critical-strong": {
+              "$value": "550",
+              "$type": "number"
+            },
+            "attention-strong": {
+              "$value": "550",
+              "$type": "number"
+            },
+            "read-only": {
+              "$value": "550",
+              "$type": "number"
+            },
+            "enabled": {
+              "$value": "550",
+              "$type": "number"
+            }
+          },
+          "left": {
+            "$value": "16px",
+            "$type": "dimension"
+          },
+          "right": {
+            "$value": "583px",
+            "$type": "dimension"
+          }
+        },
+        "icon-3": {
+          "color": {
+            "none": {
+              "$value": "#616161",
+              "$type": "color"
+            },
+            "info": {
+              "$value": "#003a5a",
+              "$type": "color"
+            },
+            "success": {
+              "$value": "#014b40",
+              "$type": "color"
+            },
+            "warning": {
+              "$value": "#5e4200",
+              "$type": "color"
+            },
+            "critical": {
+              "$value": "#8e0b21",
+              "$type": "color"
+            },
+            "attention": {
+              "$value": "#4f4700",
+              "$type": "color"
+            },
+            "new": {
+              "$value": "#616161",
+              "$type": "color"
+            },
+            "magic": {
+              "$value": "#5700d1",
+              "$type": "color"
+            },
+            "info-strong": {
+              "$value": "#002133",
+              "$type": "color"
+            },
+            "success-strong": {
+              "$value": "#fafffb",
+              "$type": "color"
+            },
+            "warning-strong": {
+              "$value": "#251a00",
+              "$type": "color"
+            },
+            "critical-strong": {
+              "$value": "#fffafb",
+              "$type": "color"
+            },
+            "attention-strong": {
+              "$value": "#332e00",
+              "$type": "color"
+            },
+            "read-only": {
+              "$value": "#616161",
+              "$type": "color"
+            },
+            "enabled": {
+              "$value": "#303030",
+              "$type": "color"
+            }
+          },
+          "fill": {
+            "none": {
+              "$value": "#616161",
+              "$type": "color"
+            },
+            "info": {
+              "$value": "#0094d5",
+              "$type": "color"
+            },
+            "success": {
+              "$value": "#047b5d",
+              "$type": "color"
+            },
+            "warning": {
+              "$value": "#b28400",
+              "$type": "color"
+            },
+            "critical": {
+              "$value": "#e22c38",
+              "$type": "color"
+            },
+            "attention": {
+              "$value": "#998a00",
+              "$type": "color"
+            },
+            "new": {
+              "$value": "#616161",
+              "$type": "color"
+            },
+            "magic": {
+              "$value": "#5700d1",
+              "$type": "color"
+            },
+            "info-strong": {
+              "$value": "#002133",
+              "$type": "color"
+            },
+            "success-strong": {
+              "$value": "#fafffb",
+              "$type": "color"
+            },
+            "warning-strong": {
+              "$value": "#251a00",
+              "$type": "color"
+            },
+            "critical-strong": {
+              "$value": "#fffafb",
+              "$type": "color"
+            },
+            "attention-strong": {
+              "$value": "#332e00",
+              "$type": "color"
+            },
+            "read-only": {
+              "$value": "#8a8a8a",
+              "$type": "color"
+            },
+            "enabled": {
+              "$value": "#047b5d",
+              "$type": "color"
+            }
+          },
+          "font-weight": {
+            "none": {
+              "$value": "550",
+              "$type": "number"
+            },
+            "info": {
+              "$value": "550",
+              "$type": "number"
+            },
+            "success": {
+              "$value": "550",
+              "$type": "number"
+            },
+            "warning": {
+              "$value": "550",
+              "$type": "number"
+            },
+            "critical": {
+              "$value": "550",
+              "$type": "number"
+            },
+            "attention": {
+              "$value": "550",
+              "$type": "number"
+            },
+            "new": {
+              "$value": "700",
+              "$type": "number"
+            },
+            "magic": {
+              "$value": "550",
+              "$type": "number"
+            },
+            "info-strong": {
+              "$value": "550",
+              "$type": "number"
+            },
+            "success-strong": {
+              "$value": "550",
+              "$type": "number"
+            },
+            "warning-strong": {
+              "$value": "550",
+              "$type": "number"
+            },
+            "critical-strong": {
+              "$value": "550",
+              "$type": "number"
+            },
+            "attention-strong": {
+              "$value": "550",
+              "$type": "number"
+            },
+            "read-only": {
+              "$value": "550",
+              "$type": "number"
+            },
+            "enabled": {
+              "$value": "550",
+              "$type": "number"
+            }
+          }
+        },
+        "label": {
+          "color": {
+            "none": {
+              "$value": "#616161",
+              "$type": "color"
+            },
+            "info": {
+              "$value": "#003a5a",
+              "$type": "color"
+            },
+            "success": {
+              "$value": "#014b40",
+              "$type": "color"
+            },
+            "warning": {
+              "$value": "#5e4200",
+              "$type": "color"
+            },
+            "critical": {
+              "$value": "#8e0b21",
+              "$type": "color"
+            },
+            "attention": {
+              "$value": "#4f4700",
+              "$type": "color"
+            },
+            "new": {
+              "$value": "#616161",
+              "$type": "color"
+            },
+            "magic": {
+              "$value": "#5700d1",
+              "$type": "color"
+            },
+            "info-strong": {
+              "$value": "#002133",
+              "$type": "color"
+            },
+            "success-strong": {
+              "$value": "#fafffb",
+              "$type": "color"
+            },
+            "warning-strong": {
+              "$value": "#251a00",
+              "$type": "color"
+            },
+            "critical-strong": {
+              "$value": "#fffafb",
+              "$type": "color"
+            },
+            "attention-strong": {
+              "$value": "#332e00",
+              "$type": "color"
+            },
+            "read-only": {
+              "$value": "#616161",
+              "$type": "color"
+            },
+            "enabled": {
+              "$value": "#303030",
+              "$type": "color"
+            }
+          },
+          "font-size": {
+            "$value": "12px",
+            "$type": "dimension"
+          },
+          "font-weight": {
+            "none": {
+              "$value": "450",
+              "$type": "number"
+            },
+            "info": {
+              "$value": "450",
+              "$type": "number"
+            },
+            "success": {
+              "$value": "450",
+              "$type": "number"
+            },
+            "warning": {
+              "$value": "450",
+              "$type": "number"
+            },
+            "critical": {
+              "$value": "450",
+              "$type": "number"
+            },
+            "attention": {
+              "$value": "450",
+              "$type": "number"
+            },
+            "new": {
+              "$value": "550",
+              "$type": "number"
+            },
+            "magic": {
+              "$value": "450",
+              "$type": "number"
+            },
+            "info-strong": {
+              "$value": "450",
+              "$type": "number"
+            },
+            "success-strong": {
+              "$value": "450",
+              "$type": "number"
+            },
+            "warning-strong": {
+              "$value": "450",
+              "$type": "number"
+            },
+            "critical-strong": {
+              "$value": "450",
+              "$type": "number"
+            },
+            "attention-strong": {
+              "$value": "450",
+              "$type": "number"
+            },
+            "read-only": {
+              "$value": "450",
+              "$type": "number"
+            },
+            "enabled": {
+              "$value": "450",
+              "$type": "number"
+            }
+          },
+          "line-height": {
+            "$value": "16px",
+            "$type": "dimension"
+          }
+        }
+      },
       "shared": {
         "size-8": {
           "$value": "8px",
           "$type": "dimension"
-        }
-      },
-      "badge": {
-        "label": {
-          "color": {
-            "$value": "#616161",
-            "$type": "color"
-          }
+        },
+        "size-0": {
+          "$value": "0px",
+          "$type": "dimension"
         }
       }
     }
@@ -72,6 +996,330 @@
     },
     {
       "part": "root",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-2",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-2",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-2",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-2",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-2",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-2",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-2",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-2",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-2",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-3",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-3",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-3",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-3",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-3",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-3",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-3",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-3",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-3",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-3",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-3",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-3",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-3",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-3",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-3",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-3",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-3",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-3",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-1-0",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-1-0",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-1-0",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-1-0",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-1-0",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-1-0",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-1-0",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-1-0",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-1-0",
       "channel": "text-emphasis-color",
       "foldedInto": "color",
       "class": "currentColor"
@@ -134,25 +1382,119 @@
   "foldedStateSkips": [],
   "layout": {
     "enriched": [],
-    "contradictions": [
-      {
-        "part": "root",
-        "field": "display",
-        "carried": "inline-flex",
-        "observed": "flex"
-      }
-    ],
+    "contradictions": [],
     "receipts": [],
     "_note": "computed flex keywords carried via Part.layout (the schema's own vocabulary); carried-slot contradictions are receipts, never silent overrides"
   },
   "declaredFacts": {
     "_note": "v15 (S4): uniform registry-channel facts carried as Part.declared / Part.declaredStates — first-class contract vocabulary, listed here as the enrichment receipt",
-    "base": [],
+    "base": [
+      {
+        "part": "label-2",
+        "channel": "overflow-x",
+        "value": "hidden"
+      },
+      {
+        "part": "label-2",
+        "channel": "overflow-y",
+        "value": "hidden"
+      },
+      {
+        "part": "label-2",
+        "channel": "position",
+        "value": "absolute"
+      },
+      {
+        "part": "label-2",
+        "channel": "text-wrap-mode",
+        "value": "nowrap"
+      },
+      {
+        "part": "icon-2",
+        "channel": "max-height",
+        "value": "100%"
+      },
+      {
+        "part": "icon-2",
+        "channel": "max-width",
+        "value": "100%"
+      },
+      {
+        "part": "label-3",
+        "channel": "overflow-x",
+        "value": "hidden"
+      },
+      {
+        "part": "label-3",
+        "channel": "overflow-y",
+        "value": "hidden"
+      },
+      {
+        "part": "label-3",
+        "channel": "position",
+        "value": "absolute"
+      },
+      {
+        "part": "label-3",
+        "channel": "text-wrap-mode",
+        "value": "nowrap"
+      },
+      {
+        "part": "icon-3",
+        "channel": "overflow-x",
+        "value": "hidden"
+      },
+      {
+        "part": "icon-3",
+        "channel": "overflow-y",
+        "value": "hidden"
+      }
+    ],
     "state": []
   },
-  "codeOnlyChannels": [],
+  "codeOnlyChannels": [
+    {
+      "part": "label-2",
+      "channel": "clip-path",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "inset(50%)",
+      "distinctValues": 1
+    },
+    {
+      "part": "label-3",
+      "channel": "clip-path",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "inset(50%)",
+      "distinctValues": 1
+    },
+    {
+      "part": "icon-3",
+      "channel": "overflow-clip-margin",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "content-box",
+      "distinctValues": 1
+    },
+    {
+      "part": "icon-3",
+      "channel": "vertical-align",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "top",
+      "distinctValues": 1
+    }
+  ],
   "stateOverflow": [],
-  "overflowBindings": [],
+  "overflowBindings": [
+    {
+      "part": "label-2",
+      "channel": "color",
+      "refusal": "resolved values differ across variants without correlating to any variant axis — nothing minted; bind manually"
+    },
+    {
+      "part": "label-2",
+      "channel": "font-weight",
+      "refusal": "resolved values differ across variants without correlating to any variant axis — nothing minted; bind manually"
+    }
+  ],
   "pairwiseRefusals": [],
   "pseudoParts": {
     "_reason": "S5 (DESIGN §5.4): pseudo-element decor has no anatomy spelling — captured, receipted, not carried",
@@ -161,13 +1503,47 @@
   },
   "bindingContradictions": [],
   "interactionOnDisabled": [],
-  "structureReceipts": [],
-  "styledChannelReceipts": [],
+  "structureReceipts": [
+    "union-part-added: none.incomplete__default @0 (span|Badge__Icon)",
+    "union-part-added: none.incomplete__default @0.0 (span|Icon)",
+    "union-part-added: none.incomplete__default @0.0.0 (span|Text|sr-only)",
+    "union-part-added: none.incomplete__default @0.0.1 (svg|)",
+    "union-part-added: none.incomplete__default @0.0.1.0 (path|)",
+    "union-part-added: info.none__default @0 (span|Text|sr-only)"
+  ],
+  "styledChannelReceipts": [
+    "control-fallback: no control for <svg> — span control used (part icon-3)",
+    "control-fallback: no control for <path> — span control used (part part-0-0-1-0)"
+  ],
   "anatomyJoin": {
     "computed": [
       {
         "part": "root",
         "join": "matched"
+      },
+      {
+        "part": "label-2",
+        "join": "computed-only"
+      },
+      {
+        "part": "icon",
+        "join": "computed-only"
+      },
+      {
+        "part": "icon-2",
+        "join": "computed-only"
+      },
+      {
+        "part": "label-3",
+        "join": "computed-only"
+      },
+      {
+        "part": "icon-3",
+        "join": "computed-only"
+      },
+      {
+        "part": "part-0-0-1-0",
+        "join": "computed-only"
       },
       {
         "part": "label",
@@ -176,5 +1552,91 @@
     ],
     "staticOnly": []
   },
-  "enrichmentNotes": []
+  "anatomyPromotion": {
+    "_note": "Round 4 DOM-anatomy promotion: computed-only elements carried as REAL parts (extract/computed/anatomy.ts); svg subtrees carried as reconstructed icon assets; presence facts via visibleWhen/stylesWhen; refusals named.",
+    "partsCarried": [
+      "root",
+      "label-2",
+      "icon",
+      "icon-2",
+      "label-3",
+      "icon-3",
+      "label"
+    ],
+    "svgAssets": [
+      "badge-icon-3-complete",
+      "badge-icon-3-incomplete",
+      "badge-icon-3-partiallycomplete"
+    ],
+    "receipts": [
+      "svg-viewbox-reconstructed: Badge.icon-3@none.incomplete — 0 0 20 20 from computed size 20×20 (path extent 14.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Badge.icon-3@none.partiallyComplete — 0 0 20 20 from computed size 20×20 (path extent 14.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Badge.icon-3@none.complete — 0 0 20 20 from computed size 20×20 (path extent 14.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Badge.icon-3@info.incomplete — 0 0 20 20 from computed size 20×20 (path extent 14.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Badge.icon-3@info.partiallyComplete — 0 0 20 20 from computed size 20×20 (path extent 14.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Badge.icon-3@info.complete — 0 0 20 20 from computed size 20×20 (path extent 14.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Badge.icon-3@success.incomplete — 0 0 20 20 from computed size 20×20 (path extent 14.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Badge.icon-3@success.partiallyComplete — 0 0 20 20 from computed size 20×20 (path extent 14.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Badge.icon-3@success.complete — 0 0 20 20 from computed size 20×20 (path extent 14.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Badge.icon-3@warning.incomplete — 0 0 20 20 from computed size 20×20 (path extent 14.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Badge.icon-3@warning.partiallyComplete — 0 0 20 20 from computed size 20×20 (path extent 14.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Badge.icon-3@warning.complete — 0 0 20 20 from computed size 20×20 (path extent 14.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Badge.icon-3@critical.incomplete — 0 0 20 20 from computed size 20×20 (path extent 14.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Badge.icon-3@critical.partiallyComplete — 0 0 20 20 from computed size 20×20 (path extent 14.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Badge.icon-3@critical.complete — 0 0 20 20 from computed size 20×20 (path extent 14.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Badge.icon-3@attention.incomplete — 0 0 20 20 from computed size 20×20 (path extent 14.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Badge.icon-3@attention.partiallyComplete — 0 0 20 20 from computed size 20×20 (path extent 14.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Badge.icon-3@attention.complete — 0 0 20 20 from computed size 20×20 (path extent 14.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Badge.icon-3@new.incomplete — 0 0 20 20 from computed size 20×20 (path extent 14.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Badge.icon-3@new.partiallyComplete — 0 0 20 20 from computed size 20×20 (path extent 14.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Badge.icon-3@new.complete — 0 0 20 20 from computed size 20×20 (path extent 14.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Badge.icon-3@magic.incomplete — 0 0 20 20 from computed size 20×20 (path extent 14.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Badge.icon-3@magic.partiallyComplete — 0 0 20 20 from computed size 20×20 (path extent 14.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Badge.icon-3@magic.complete — 0 0 20 20 from computed size 20×20 (path extent 14.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Badge.icon-3@info-strong.incomplete — 0 0 20 20 from computed size 20×20 (path extent 14.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Badge.icon-3@info-strong.partiallyComplete — 0 0 20 20 from computed size 20×20 (path extent 14.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Badge.icon-3@info-strong.complete — 0 0 20 20 from computed size 20×20 (path extent 14.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Badge.icon-3@success-strong.incomplete — 0 0 20 20 from computed size 20×20 (path extent 14.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Badge.icon-3@success-strong.partiallyComplete — 0 0 20 20 from computed size 20×20 (path extent 14.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Badge.icon-3@success-strong.complete — 0 0 20 20 from computed size 20×20 (path extent 14.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Badge.icon-3@warning-strong.incomplete — 0 0 20 20 from computed size 20×20 (path extent 14.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Badge.icon-3@warning-strong.partiallyComplete — 0 0 20 20 from computed size 20×20 (path extent 14.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Badge.icon-3@warning-strong.complete — 0 0 20 20 from computed size 20×20 (path extent 14.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Badge.icon-3@critical-strong.incomplete — 0 0 20 20 from computed size 20×20 (path extent 14.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Badge.icon-3@critical-strong.partiallyComplete — 0 0 20 20 from computed size 20×20 (path extent 14.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Badge.icon-3@critical-strong.complete — 0 0 20 20 from computed size 20×20 (path extent 14.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Badge.icon-3@attention-strong.incomplete — 0 0 20 20 from computed size 20×20 (path extent 14.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Badge.icon-3@attention-strong.partiallyComplete — 0 0 20 20 from computed size 20×20 (path extent 14.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Badge.icon-3@attention-strong.complete — 0 0 20 20 from computed size 20×20 (path extent 14.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Badge.icon-3@read-only.incomplete — 0 0 20 20 from computed size 20×20 (path extent 14.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Badge.icon-3@read-only.partiallyComplete — 0 0 20 20 from computed size 20×20 (path extent 14.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Badge.icon-3@read-only.complete — 0 0 20 20 from computed size 20×20 (path extent 14.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Badge.icon-3@enabled.incomplete — 0 0 20 20 from computed size 20×20 (path extent 14.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Badge.icon-3@enabled.partiallyComplete — 0 0 20 20 from computed size 20×20 (path extent 14.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Badge.icon-3@enabled.complete — 0 0 20 20 from computed size 20×20 (path extent 14.0; viewBox is not a computed style — named reconstruction)",
+      "root-display-carried: flex (overrides reviewed \"inline-flex\" — computed truth wins display, receipted)",
+      "literal-text-carried: label-2 = \"Info\" (no text prop sample matches — the mounted value is carried verbatim)",
+      "sr-only-carried-as-hidden: label-2 is visually hidden in the real component (clip-path/1px box) — promoted with declared display:none (visual parity exact; AT semantics ride the contract's own semantics — NAMED downgrade)",
+      "presence-carried: icon (45/60 combos) →  base-hidden, shown-when progress=incomplete, progress=partiallyComplete, progress=complete",
+      "presence-carried: icon-2 (45/60 combos) →  base-hidden, shown-when progress=incomplete, progress=partiallyComplete, progress=complete",
+      "literal-text-carried: label-3 = \"Incomplete\" (no text prop sample matches — the mounted value is carried verbatim)",
+      "sr-only-carried-as-hidden: label-3 is visually hidden in the real component (clip-path/1px box) — promoted with declared display:none (visual parity exact; AT semantics ride the contract's own semantics — NAMED downgrade)",
+      "presence-carried: icon-3 (45/60 combos) →  base-hidden, shown-when progress=incomplete, progress=partiallyComplete, progress=complete"
+    ],
+    "refusals": []
+  },
+  "enrichmentNotes": [
+    "declared fact carried: label-2.overflow-x = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-2.overflow-y = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-2.position = absolute (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-2.text-wrap-mode = nowrap (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: icon-2.max-height = 100% (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: icon-2.max-width = 100% (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-3.overflow-x = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-3.overflow-y = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-3.position = absolute (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-3.text-wrap-mode = nowrap (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: icon-3.overflow-x = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: icon-3.overflow-y = hidden (v15 declared vocabulary — declared-not-drawn on canvas)"
+  ]
 }

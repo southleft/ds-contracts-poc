@@ -161,6 +161,21 @@
           "prop": "variant"
         }
       }
+    },
+    {
+      "name": "withIcon",
+      "description": "Structure-creating optional prop promoted by the computed floor (round 4): ON mounts the library's `icon` ({\"$import\":\"@shopify/polaris-icons#PlusCircleIcon\"}); the created subtree is carried as parts gated on this prop.",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Show WithIcon"
+        },
+        "code": {
+          "prop": "withIcon"
+        }
+      }
     }
   ],
   "states": [
@@ -172,7 +187,7 @@
   "anatomy": {
     "root": {
       "layout": {
-        "display": "inline-flex",
+        "display": "flex",
         "align": "center",
         "justify": "center"
       },
@@ -326,6 +341,48 @@
         }
       },
       "parts": {
+        "icon": {
+          "element": "span",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy span|Button__Icon — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "block",
+            "cursor": "pointer",
+            "text-align": "center",
+            "user-select": "none"
+          },
+          "visibleWhen": {
+            "prop": "withIcon"
+          },
+          "parts": {
+            "icon-2": {
+              "element": "span",
+              "description": "Promoted from the computed floor (round 4): rendered anatomy span|Icon — this element exists in the real component's DOM; the static layer had no part for it.",
+              "declared": {
+                "display": "block",
+                "cursor": "pointer",
+                "max-height": "100%",
+                "max-width": "100%",
+                "text-align": "center",
+                "user-select": "none"
+              },
+              "visibleWhen": {
+                "prop": "withIcon"
+              },
+              "icon": {
+                "asset": "button-icon-2",
+                "size": 20
+              },
+              "tokens": {
+                "min-height": "{imported.shared.size-0}",
+                "min-width": "{imported.shared.size-0}"
+              }
+            }
+          },
+          "tokens": {
+            "margin-bottom": "{imported.button.icon.margin-bottom}",
+            "margin-top": "{imported.button.icon.margin-top}"
+          }
+        },
         "label": {
           "element": "span",
           "tokens": {
@@ -362,6 +419,7 @@
           ],
           "text": "Button",
           "declared": {
+            "display": "block",
             "cursor": "pointer",
             "text-align": "center",
             "user-select": "none"

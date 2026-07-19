@@ -4,7 +4,7 @@
   "name": "RadioButton",
   "version": "0.1.0",
   "status": "draft",
-  "description": "PROPOSED contract extracted from examples/polaris/.polaris-clone/polaris-react/src/components/RadioButton/RadioButton.tsx (react-tsx + css-module adapters) — API surface AND anatomy (structure, token bindings, layout, states) read from source; design bindings await reconciliation and human review. PROMOTED showcase contract: API surface extracted mechanically from Shopify/polaris @ 2b1ea88625e0613853ca8577c9acd1980a90f382 (polaris-react 13.10.1, MIT © Shopify, extracted 2026-07-18); styling bindings promoted from the component's own module.css under the reviewed class map in examples/polaris/scripts/curation.ts — every carried binding and every named refusal is listed in examples/polaris/extraction/PROMOTION.md. COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @shopify/polaris@13.9.5 in headless Chromium 148.0.7778.96; overflow channels in the sibling extension file.",
+  "description": "PROPOSED contract extracted from examples/polaris/.polaris-clone/polaris-react/src/components/RadioButton/RadioButton.tsx (react-tsx + css-module adapters) — API surface AND anatomy (structure, token bindings, layout, states) read from source; design bindings await reconciliation and human review. PROMOTED showcase contract: API surface extracted mechanically from Shopify/polaris @ 2b1ea88625e0613853ca8577c9acd1980a90f382 (polaris-react 13.10.1, MIT © Shopify, extracted 2026-07-18); styling bindings promoted from the component's own module.css under the reviewed class map in examples/polaris/scripts/curation.ts — every carried binding and every named refusal is listed in examples/polaris/extraction/PROMOTION.md. ROUND 4: static backdrop bindings (border-color, background-color) removed — the checked axis contests them per value; the floor rebuilds from browser truth. COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @shopify/polaris@13.9.5 in headless Chromium 148.0.7778.96; overflow channels in the sibling extension file.",
   "semantics": {
     "element": "span"
   },
@@ -39,11 +39,17 @@
     },
     {
       "name": "checked",
-      "description": "Radio button is selected",
-      "type": "boolean",
+      "description": "Checked state (round 4: enumerated as a contract enum over the real boolean API — capture maps unchecked→false, checked→true). The selected dot and checked backdrop ride this axis; the generated code surface spells it as the enum (named deviation from the boolean library prop).",
+      "type": {
+        "enum": [
+          "unchecked",
+          "checked"
+        ]
+      },
+      "default": "unchecked",
       "bindings": {
         "figma": {
-          "kind": "BOOLEAN",
+          "kind": "VARIANT",
           "property": "Checked"
         },
         "code": {
@@ -96,120 +102,221 @@
   ],
   "states": [
     "disabled",
-    "focus-visible",
-    "active",
-    "hover"
+    "focus-visible"
   ],
   "anatomy": {
     "root": {
-      "parts": {
-        "input": {
-          "element": "input",
-          "attrs": {
-            "type": "radio",
-            "name": "{name}",
-            "value": "{value}"
-          },
-          "declared": {
-            "appearance": "auto",
-            "cursor": "default",
-            "font-family": "Arial",
-            "font-feature-settings": "normal",
-            "overflow-x": "hidden",
-            "overflow-y": "hidden",
-            "text-rendering": "auto",
-            "text-wrap-mode": "nowrap"
-          },
-          "declaredStates": {
-            "focus-visible": {
-              "outline-style": "auto"
-            }
-          },
-          "tokens": {
-            "bottom": "{imported.radio-button.input.bottom}",
-            "color": "{imported.radio-button.input.color}",
-            "font-size": "{imported.radio-button.input.font-size}",
-            "font-weight": "{imported.radio-button.input.font-weight}",
-            "left": "{imported.shared.size-0}",
-            "min-height": "{imported.shared.size-0}",
-            "min-width": "{imported.shared.size-0}",
-            "outline-color": "{imported.radio-button.input.outline-color}",
-            "right": "{imported.radio-button.input.right}",
-            "top": "{imported.shared.size-0}"
-          },
-          "states": {
-            "disabled": {
-              "color": "{imported.radio-button.input.color-state-disabled}"
-            }
-          }
-        },
-        "backdrop": {
-          "shape": {
-            "kind": "rect",
-            "width": 20,
-            "height": 20
-          },
-          "tokens": {
-            "background-color": "{p.color-input-bg-surface}",
-            "border-radius": "{p.border-radius-full}",
-            "border-width": "{p.border-width-0165}",
-            "border-color": "{p.color-input-border}",
-            "border-bottom-left-radius": "{imported.shared.size-9999}",
-            "border-bottom-right-radius": "{imported.shared.size-9999}",
-            "border-left-color": "{imported.shared.color-8a8a8a}",
-            "border-left-width": "{imported.shared.size-1}",
-            "border-right-color": "{imported.shared.color-8a8a8a}",
-            "border-right-width": "{imported.shared.size-1}",
-            "border-top-color": "{imported.shared.color-8a8a8a}",
-            "border-top-right-radius": "{imported.shared.size-9999}",
-            "border-top-width": "{imported.shared.size-1}",
-            "bottom": "{imported.shared.size-0}",
-            "left": "{imported.shared.size-0}",
-            "min-height": "{imported.shared.size-0}",
-            "min-width": "{imported.shared.size-0}",
-            "right": "{imported.shared.size-0}",
-            "top": "{imported.shared.size-0}"
-          },
-          "declared": {
-            "border-bottom-style": "solid",
-            "border-left-style": "solid",
-            "border-right-style": "solid",
-            "border-top-style": "solid",
-            "cursor": "pointer",
-            "position": "relative",
-            "transition-duration": "0.1s",
-            "transition-property": "border-color",
-            "transition-timing-function": "cubic-bezier(0.19, 0.91, 0.38, 1)"
-          },
-          "declaredStates": {
-            "disabled": {
-              "border-bottom-style": "none",
-              "border-left-style": "none",
-              "border-right-style": "none",
-              "border-top-style": "none",
-              "cursor": "default"
-            },
-            "focus-visible": {
-              "outline-style": "solid"
-            }
-          },
-          "states": {
-            "active": {
-              "background-color": "{imported.radio-button.backdrop.background-color-state-active}"
-            },
-            "disabled": {
-              "background-color": "{imported.radio-button.backdrop.background-color-state-disabled}"
-            },
-            "hover": {
-              "background-color": "{imported.radio-button.backdrop.background-color-state-hover}"
-            }
-          }
-        }
-      },
       "layout": {
         "display": "flex",
         "align": "center",
         "justify": "start"
+      },
+      "parts": {
+        "choice__control": {
+          "element": "span",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy span|Choice__Control — this element exists in the real component's DOM; the static layer had no part for it.",
+          "layout": {
+            "display": "flex",
+            "align": "stretch"
+          },
+          "parts": {
+            "radiobutton": {
+              "element": "span",
+              "description": "Promoted from the computed floor (round 4): rendered anatomy span|RadioButton — this element exists in the real component's DOM; the static layer had no part for it.",
+              "declared": {
+                "display": "block",
+                "cursor": "pointer",
+                "position": "relative"
+              },
+              "parts": {
+                "input": {
+                  "element": "input",
+                  "attrs": {
+                    "type": "radio",
+                    "name": "{name}",
+                    "value": "{value}"
+                  },
+                  "declared": {
+                    "display": "none",
+                    "appearance": "auto",
+                    "cursor": "default",
+                    "font-family": "Arial",
+                    "font-feature-settings": "normal",
+                    "overflow-x": "hidden",
+                    "overflow-y": "hidden",
+                    "position": "absolute",
+                    "text-rendering": "auto",
+                    "text-wrap-mode": "nowrap"
+                  },
+                  "declaredStates": {
+                    "focus-visible": {
+                      "outline-style": "auto"
+                    }
+                  },
+                  "tokens": {
+                    "bottom": "{imported.radio-button.input.bottom}",
+                    "color": "{imported.radio-button.input.color}",
+                    "font-size": "{imported.radio-button.input.font-size}",
+                    "font-weight": "{imported.radio-button.input.font-weight}",
+                    "left": "{imported.shared.size-0}",
+                    "min-height": "{imported.shared.size-0}",
+                    "min-width": "{imported.shared.size-0}",
+                    "outline-color": "{imported.radio-button.input.outline-color}",
+                    "right": "{imported.radio-button.input.right}",
+                    "top": "{imported.shared.size-0}"
+                  },
+                  "states": {
+                    "disabled": {
+                      "color": "{imported.radio-button.input.color-state-disabled}"
+                    }
+                  }
+                },
+                "backdrop": {
+                  "shape": {
+                    "kind": "rect",
+                    "width": 20,
+                    "height": 20
+                  },
+                  "tokens": {
+                    "border-radius": "{p.border-radius-full}",
+                    "border-width": "{p.border-width-0165}",
+                    "border-bottom-left-radius": "{imported.shared.size-9999}",
+                    "border-bottom-right-radius": "{imported.shared.size-9999}",
+                    "border-left-width": "{imported.shared.size-1}",
+                    "border-right-width": "{imported.shared.size-1}",
+                    "border-top-right-radius": "{imported.shared.size-9999}",
+                    "border-top-width": "{imported.shared.size-1}",
+                    "bottom": "{imported.shared.size-0}",
+                    "left": "{imported.shared.size-0}",
+                    "min-height": "{imported.shared.size-0}",
+                    "min-width": "{imported.shared.size-0}",
+                    "right": "{imported.shared.size-0}",
+                    "top": "{imported.shared.size-0}"
+                  },
+                  "declared": {
+                    "display": "block",
+                    "border-bottom-style": "solid",
+                    "border-left-style": "solid",
+                    "border-right-style": "solid",
+                    "border-top-style": "solid",
+                    "cursor": "pointer",
+                    "position": "relative",
+                    "transition-duration": "0.1s",
+                    "transition-property": "border-color",
+                    "transition-timing-function": "cubic-bezier(0.19, 0.91, 0.38, 1)"
+                  },
+                  "declaredStates": {
+                    "disabled": {
+                      "border-bottom-style": "none",
+                      "border-left-style": "none",
+                      "border-right-style": "none",
+                      "border-top-style": "none",
+                      "cursor": "default"
+                    },
+                    "focus-visible": {
+                      "outline-style": "solid"
+                    }
+                  },
+                  "states": {
+                    "disabled": {
+                      "background-color": "{imported.radio-button.backdrop.background-color-state-disabled}"
+                    }
+                  },
+                  "tokensByProp": [
+                    {
+                      "prop": "checked",
+                      "map": {
+                        "checked": {
+                          "background-color": "{imported.radio-button.backdrop.background-color.checked}",
+                          "border-bottom-color": "{imported.radio-button.backdrop.border-bottom-color.checked}",
+                          "border-left-color": "{imported.radio-button.backdrop.border-left-color.checked}",
+                          "border-right-color": "{imported.radio-button.backdrop.border-right-color.checked}",
+                          "border-top-color": "{imported.radio-button.backdrop.border-top-color.checked}"
+                        },
+                        "unchecked": {
+                          "background-color": "{imported.radio-button.backdrop.background-color.unchecked}",
+                          "border-bottom-color": "{imported.radio-button.backdrop.border-bottom-color.unchecked}",
+                          "border-left-color": "{imported.radio-button.backdrop.border-left-color.unchecked}",
+                          "border-right-color": "{imported.radio-button.backdrop.border-right-color.unchecked}",
+                          "border-top-color": "{imported.radio-button.backdrop.border-top-color.unchecked}"
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "declaredStates": {
+                "disabled": {
+                  "cursor": "default"
+                }
+              },
+              "tokens": {
+                "bottom": "{imported.shared.size-0}",
+                "left": "{imported.shared.size-0}",
+                "margin-bottom": "{imported.shared.size-1}",
+                "margin-left": "{imported.shared.size-1}",
+                "margin-right": "{imported.shared.size-1}",
+                "margin-top": "{imported.shared.size-1}",
+                "right": "{imported.shared.size-0}",
+                "top": "{imported.shared.size-0}"
+              }
+            }
+          },
+          "declared": {
+            "cursor": "pointer"
+          },
+          "declaredStates": {
+            "disabled": {
+              "cursor": "default"
+            }
+          },
+          "tokens": {
+            "flex-shrink": "{imported.radio-button.choice-control.flex-shrink}",
+            "margin-right": "{imported.radio-button.choice-control.margin-right}"
+          }
+        },
+        "choice__label": {
+          "element": "span",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy span|Choice__Label — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "block",
+            "cursor": "pointer"
+          },
+          "parts": {
+            "label": {
+              "text": "Accounts are disabled",
+              "description": "Promoted from the computed floor (round 4): rendered anatomy span|Text — this element exists in the real component's DOM; the static layer had no part for it.",
+              "declared": {
+                "display": "inline",
+                "cursor": "pointer"
+              },
+              "declaredStates": {
+                "disabled": {
+                  "cursor": "default"
+                }
+              },
+              "tokens": {
+                "min-height": "{imported.shared.size-0}",
+                "min-width": "{imported.shared.size-0}"
+              },
+              "states": {
+                "disabled": {
+                  "color": "{imported.shared.color-b5b5b5}"
+                }
+              }
+            }
+          },
+          "declaredStates": {
+            "disabled": {
+              "cursor": "default"
+            }
+          },
+          "states": {
+            "disabled": {
+              "color": "{imported.shared.color-b5b5b5}"
+            }
+          }
+        }
       },
       "declared": {
         "cursor": "pointer"

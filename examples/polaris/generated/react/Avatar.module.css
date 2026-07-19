@@ -1,5 +1,5 @@
 /* GENERATED FILE — DO NOT EDIT.
- * Source of truth: contracts/avatar.contract.json (polaris.avatar v0.2.0)
+ * Source of truth: contracts/avatar.contract.json (polaris.avatar v0.3.0)
  * Regenerate with: npm run generate
  */
 
@@ -15,6 +15,7 @@
   right: var(--imported-shared-size-0);
   top: var(--imported-shared-size-0);
   min-width: 20px;
+  display: block;
   max-width: 100%;
   overflow-x: hidden;
   overflow-y: hidden;
@@ -66,11 +67,62 @@
   font-size: var(--p-font-size-325);
   font-weight: var(--p-font-weight-regular);
   bottom: var(--imported-shared-size-0);
-  color: var(--imported-shared-color-fdeffd);
   left: var(--imported-shared-size-0);
   min-height: var(--imported-shared-size-0);
   min-width: var(--imported-shared-size-0);
   right: var(--imported-shared-size-0);
   top: var(--imported-shared-size-0);
+  position: absolute;
+  aspect-ratio: 1 / 1;
   user-select: none;
+}
+
+.initials-xs svg {
+  width: 20px;
+  height: 20px;
+}
+
+.initials-xs {
+  display: inline-flex;
+  flex-shrink: 0;
+}
+
+.initials-sm svg {
+  width: 24px;
+  height: 24px;
+}
+
+.initials-sm {
+  display: inline-flex;
+  flex-shrink: 0;
+}
+
+.initials-md svg {
+  width: 28px;
+  height: 28px;
+}
+
+.initials-md {
+  display: inline-flex;
+  flex-shrink: 0;
+}
+
+.initials-lg svg {
+  width: 32px;
+  height: 32px;
+}
+
+.initials-lg {
+  display: inline-flex;
+  flex-shrink: 0;
+}
+
+.initials-xl svg {
+  width: 40px;
+  height: 40px;
+}
+
+.initials-xl {
+  display: inline-flex;
+  flex-shrink: 0;
 }

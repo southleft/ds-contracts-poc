@@ -104,6 +104,7 @@
 }
 
 .button__loadingSpinner svg {
+  display: block;
   width: 14px;
   height: 14px;
 }

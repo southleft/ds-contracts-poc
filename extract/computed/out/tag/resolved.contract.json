@@ -51,15 +51,80 @@
           "prop": "url"
         }
       }
+    },
+    {
+      "name": "size",
+      "description": "Tag size (round 4: real Tag API — only 'large' exists; unset renders the default compact size).",
+      "type": {
+        "enum": [
+          "large"
+        ]
+      },
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Size"
+        },
+        "code": {
+          "prop": "size"
+        }
+      }
+    },
+    {
+      "name": "removable",
+      "description": "Structure-creating optional prop promoted by the computed floor (round 4): ON mounts the library's `onRemove` ({\"$callback\":true}); the created subtree is carried as parts gated on this prop.",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Show Removable"
+        },
+        "code": {
+          "prop": "removable"
+        }
+      }
+    },
+    {
+      "name": "clickable",
+      "description": "Structure-creating optional prop promoted by the computed floor (round 4): ON mounts the library's `onClick` ({\"$callback\":true}); the created subtree is carried as parts gated on this prop.",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Show Clickable"
+        },
+        "code": {
+          "prop": "clickable"
+        }
+      }
+    },
+    {
+      "name": "linked",
+      "description": "Structure-creating optional prop promoted by the computed floor (round 4): ON mounts the library's `url` (\"https://example.com\"); the created subtree is carried as parts gated on this prop.",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Show Linked"
+        },
+        "code": {
+          "prop": "linked"
+        }
+      }
     }
   ],
   "states": [
-    "disabled"
+    "disabled",
+    "active",
+    "focus-visible"
   ],
   "anatomy": {
     "root": {
       "layout": {
-        "display": "inline-flex",
+        "display": "flex",
         "align": "center"
       },
       "tokens": {
@@ -71,32 +136,287 @@
         "border-top-right-radius": "{imported.shared.size-8}",
         "bottom": "{imported.shared.size-0}",
         "left": "{imported.shared.size-0}",
-        "padding-left": "{imported.tag.root.padding-left}",
-        "padding-right": "{imported.tag.root.padding-right}",
         "right": "{imported.shared.size-0}",
         "top": "{imported.shared.size-0}"
       },
       "parts": {
-        "label": {
-          "element": "span",
-          "tokens": {
-            "font-size": "{p.text-body-sm-font-size}",
-            "font-weight": "{p.text-body-sm-font-weight}",
-            "line-height": "{p.font-line-height-500}",
-            "letter-spacing": "{p.text-body-sm-font-letter-spacing}",
-            "min-height": "{imported.shared.size-0}",
-            "min-width": "{imported.shared.size-0}"
+        "link": {
+          "element": "a",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy a|Tag__Link — this element exists in the real component's DOM; the static layer had no part for it.",
+          "visibleWhen": {
+            "prop": "linked"
           },
-          "text": "Wholesale",
-          "declared": {
-            "display": "inline",
-            "text-wrap-mode": "nowrap"
-          },
-          "states": {
-            "disabled": {
-              "color": "{imported.shared.color-b5b5b5}"
+          "stylesWhen": [
+            {
+              "prop": "clickable",
+              "styles": {
+                "display": "none"
+              }
+            },
+            {
+              "prop": "disabled",
+              "styles": {
+                "display": "none"
+              }
             }
+          ],
+          "parts": {
+            "text-2": {
+              "element": "span",
+              "description": "Promoted from the computed floor (round 4): rendered anatomy span|Text — this element exists in the real component's DOM; the static layer had no part for it.",
+              "declared": {
+                "display": "block",
+                "cursor": "pointer",
+                "overflow-x": "hidden",
+                "overflow-y": "hidden",
+                "text-overflow": "ellipsis",
+                "text-wrap-mode": "nowrap"
+              },
+              "visibleWhen": {
+                "prop": "linked"
+              },
+              "stylesWhen": [
+                {
+                  "prop": "clickable",
+                  "styles": {
+                    "display": "none"
+                  }
+                },
+                {
+                  "prop": "disabled",
+                  "styles": {
+                    "display": "none"
+                  }
+                }
+              ],
+              "parts": {
+                "label-2": {
+                  "text": "Wholesale",
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy span|Tag__Text — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "declared": {
+                    "display": "inline",
+                    "cursor": "pointer",
+                    "text-wrap-mode": "nowrap"
+                  },
+                  "visibleWhen": {
+                    "prop": "linked"
+                  },
+                  "stylesWhen": [
+                    {
+                      "prop": "clickable",
+                      "styles": {
+                        "display": "none"
+                      }
+                    },
+                    {
+                      "prop": "disabled",
+                      "styles": {
+                        "display": "none"
+                      }
+                    }
+                  ],
+                  "tokens": {
+                    "font-size": "{imported.shared.size-12}",
+                    "min-height": "{imported.shared.size-0}",
+                    "min-width": "{imported.shared.size-0}"
+                  }
+                }
+              },
+              "tokens": {
+                "font-size": "{imported.shared.size-12}",
+                "line-height": "{imported.tag.text-2.line-height}"
+              }
+            }
+          },
+          "declared": {
+            "position": "relative",
+            "text-decoration-line": "none"
+          },
+          "tokens": {
+            "border-bottom-left-radius": "{imported.shared.size-8}",
+            "border-bottom-right-radius": "{imported.shared.size-8}",
+            "border-top-left-radius": "{imported.shared.size-8}",
+            "border-top-right-radius": "{imported.shared.size-8}",
+            "bottom": "{imported.shared.size-0}",
+            "color": "{imported.tag.link.color}",
+            "grid-template-columns": "{imported.tag.link.grid-template-columns}",
+            "grid-template-rows": "{imported.tag.link.grid-template-rows}",
+            "left": "{imported.shared.size-0}",
+            "right": "{imported.shared.size-0}",
+            "top": "{imported.shared.size-0}"
           }
+        },
+        "part-1": {
+          "element": "span",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy span| — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "none"
+          },
+          "stylesWhen": [
+            {
+              "prop": "size",
+              "equals": "large",
+              "styles": {
+                "display": "block"
+              }
+            },
+            {
+              "prop": "clickable",
+              "styles": {
+                "display": "none"
+              }
+            },
+            {
+              "prop": "disabled",
+              "styles": {
+                "display": "none"
+              }
+            }
+          ]
+        },
+        "button": {
+          "element": "button",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy button|Tag__Button — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "block",
+            "aspect-ratio": "1 / 1",
+            "appearance": "none",
+            "border-bottom-style": "none",
+            "border-left-style": "none",
+            "border-right-style": "none",
+            "border-top-style": "none",
+            "cursor": "pointer"
+          },
+          "visibleWhen": {
+            "prop": "removable"
+          },
+          "stylesWhen": [
+            {
+              "prop": "clickable",
+              "styles": {
+                "display": "none"
+              }
+            },
+            {
+              "prop": "disabled",
+              "styles": {
+                "display": "none"
+              }
+            }
+          ],
+          "parts": {
+            "icon": {
+              "element": "span",
+              "description": "Promoted from the computed floor (round 4): rendered anatomy span|Icon — this element exists in the real component's DOM; the static layer had no part for it.",
+              "declared": {
+                "display": "block",
+                "aspect-ratio": "1 / 1",
+                "cursor": "pointer",
+                "font-feature-settings": "normal",
+                "max-height": "100%",
+                "max-width": "100%",
+                "text-align": "center",
+                "text-rendering": "auto"
+              },
+              "visibleWhen": {
+                "prop": "removable"
+              },
+              "stylesWhen": [
+                {
+                  "prop": "clickable",
+                  "styles": {
+                    "display": "none"
+                  }
+                },
+                {
+                  "prop": "disabled",
+                  "styles": {
+                    "display": "none"
+                  }
+                }
+              ],
+              "parts": {
+                "icon-none": {
+                  "icon": {
+                    "asset": "tag-icon-none",
+                    "size": 18
+                  },
+                  "stylesWhen": [
+                    {
+                      "prop": "size",
+                      "equals": "large",
+                      "styles": {
+                        "display": "none"
+                      }
+                    }
+                  ],
+                  "description": "Per-value svg content promoted from the computed floor: the glyph drawn when size=unset (default)."
+                },
+                "icon-large": {
+                  "icon": {
+                    "asset": "tag-icon-large",
+                    "size": 20
+                  },
+                  "visibleWhen": {
+                    "prop": "size",
+                    "equals": "large"
+                  },
+                  "description": "Per-value svg content promoted from the computed floor: the glyph drawn when size=large."
+                }
+              },
+              "tokens": {
+                "color": "{imported.tag.icon.color}",
+                "font-weight": "{imported.tag.icon.font-weight}",
+                "min-height": "{imported.shared.size-0}",
+                "min-width": "{imported.shared.size-0}"
+              }
+            }
+          },
+          "tokens": {
+            "border-bottom-left-radius": "{imported.shared.size-7}",
+            "border-bottom-right-radius": "{imported.shared.size-7}",
+            "border-bottom-width": "{imported.shared.size-0}",
+            "border-left-width": "{imported.shared.size-0}",
+            "border-right-width": "{imported.shared.size-0}",
+            "border-top-left-radius": "{imported.shared.size-7}",
+            "border-top-right-radius": "{imported.shared.size-7}",
+            "border-top-width": "{imported.shared.size-0}",
+            "bottom": "{imported.tag.button.bottom.none}",
+            "color": "{imported.tag.button.color}",
+            "flex-shrink": "{imported.tag.button.flex-shrink}",
+            "font-size": "{imported.tag.button.font-size}",
+            "left": "{imported.tag.button.left.none}",
+            "line-height": "{imported.tag.button.line-height}",
+            "margin-bottom": "{imported.tag.button.margin-bottom.none}",
+            "margin-left": "{imported.tag.button.margin-left.none}",
+            "margin-right": "{imported.tag.button.margin-right.none}",
+            "margin-top": "{imported.tag.button.margin-top.none}",
+            "opacity": "{imported.tag.button.opacity.none}",
+            "padding-bottom": "{imported.shared.size-0}",
+            "padding-left": "{imported.shared.size-0}",
+            "padding-right": "{imported.shared.size-0}",
+            "padding-top": "{imported.shared.size-0}",
+            "right": "{imported.tag.button.right.none}",
+            "top": "{imported.tag.button.top.none}"
+          },
+          "tokensByProp": [
+            {
+              "prop": "size",
+              "map": {
+                "large": {
+                  "bottom": "{imported.tag.button.bottom.large}",
+                  "left": "{imported.tag.button.left.large}",
+                  "margin-bottom": "{imported.tag.button.margin-bottom.large}",
+                  "margin-left": "{imported.tag.button.margin-left.large}",
+                  "margin-right": "{imported.tag.button.margin-right.large}",
+                  "margin-top": "{imported.tag.button.margin-top.large}",
+                  "opacity": "{imported.tag.button.opacity.large}",
+                  "right": "{imported.tag.button.right.large}",
+                  "top": "{imported.tag.button.top.large}"
+                }
+              }
+            }
+          ]
         }
       },
       "declared": {
@@ -108,7 +428,15 @@
           "transition-property": "none"
         }
       },
+      "literals": {
+        "padding-left": "6px",
+        "padding-right": "6px"
+      },
       "states": {
+        "active": {
+          "outline-color": "{imported.tag.root.outline-color-state-active}",
+          "outline-width": "{imported.tag.root.outline-width-state-active}"
+        },
         "disabled": {
           "background-color": "{imported.tag.root.background-color-state-disabled}",
           "border-bottom-color": "{imported.shared.color-b5b5b5}",
@@ -118,9 +446,12 @@
           "caret-color": "{imported.shared.color-b5b5b5}",
           "color": "{imported.shared.color-b5b5b5}",
           "column-rule-color": "{imported.shared.color-b5b5b5}",
-          "outline-color": "{imported.shared.color-b5b5b5}",
           "text-decoration-color": "{imported.shared.color-b5b5b5}",
           "text-emphasis-color": "{imported.shared.color-b5b5b5}"
+        },
+        "focus-visible": {
+          "outline-color": "{imported.tag.root.outline-color-state-focus-visible}",
+          "outline-width": "{imported.tag.root.outline-width-state-focus-visible}"
         }
       }
     }

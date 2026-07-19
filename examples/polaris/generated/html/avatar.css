@@ -1,4 +1,4 @@
-/* Avatar — from polaris.avatar v0.2.0 (core/emit-html.ts) */
+/* Avatar — from polaris.avatar v0.3.0 (core/emit-html.ts) */
 
 .avatar, .avatar *, .avatar *::before, .avatar *::after {
   box-sizing: border-box;
@@ -16,6 +16,7 @@
   right: var(--imported-shared-size-0);
   top: var(--imported-shared-size-0);
   min-width: 20px;
+  display: block;
   max-width: 100%;
   overflow-x: hidden;
   overflow-y: hidden;
@@ -67,13 +68,69 @@
   font-size: var(--p-font-size-325);
   font-weight: var(--p-font-weight-regular);
   bottom: var(--imported-shared-size-0);
-  color: var(--imported-shared-color-fdeffd);
   left: var(--imported-shared-size-0);
   min-height: var(--imported-shared-size-0);
   min-width: var(--imported-shared-size-0);
   right: var(--imported-shared-size-0);
   top: var(--imported-shared-size-0);
+  position: absolute;
+  aspect-ratio: 1 / 1;
   user-select: none;
+}
+
+.avatar__initials-xs svg {
+  display: block;
+  width: 20px;
+  height: 20px;
+}
+
+.avatar__initials-xs {
+  display: inline-flex;
+  flex-shrink: 0;
+}
+
+.avatar__initials-sm svg {
+  display: block;
+  width: 24px;
+  height: 24px;
+}
+
+.avatar__initials-sm {
+  display: inline-flex;
+  flex-shrink: 0;
+}
+
+.avatar__initials-md svg {
+  display: block;
+  width: 28px;
+  height: 28px;
+}
+
+.avatar__initials-md {
+  display: inline-flex;
+  flex-shrink: 0;
+}
+
+.avatar__initials-lg svg {
+  display: block;
+  width: 32px;
+  height: 32px;
+}
+
+.avatar__initials-lg {
+  display: inline-flex;
+  flex-shrink: 0;
+}
+
+.avatar__initials-xl svg {
+  display: block;
+  width: 40px;
+  height: 40px;
+}
+
+.avatar__initials-xl {
+  display: inline-flex;
+  flex-shrink: 0;
 }
 
 /* showcase chrome */

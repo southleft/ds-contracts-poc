@@ -106,5 +106,16 @@
       "label"
     ]
   },
+  "anatomyPromotion": {
+    "_note": "Round 4 DOM-anatomy promotion: computed-only elements carried as REAL parts (extract/computed/anatomy.ts); svg subtrees carried as reconstructed icon assets; presence facts via visibleWhen/stylesWhen; refusals named.",
+    "partsCarried": [
+      "root"
+    ],
+    "svgAssets": [],
+    "receipts": [],
+    "refusals": [
+      "static-part-unrendered: reviewed static part \"label\" has no rendered counterpart in ANY captured combo — dropped from the promoted anatomy (named; usually a conditional the sweep never triggered)"
+    ]
+  },
   "enrichmentNotes": []
 }

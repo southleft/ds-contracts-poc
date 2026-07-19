@@ -91,15 +91,20 @@
     }
   },
   "declared": {
-    "base": 4,
+    "base": 8,
     "state": 0
   },
   "codeOnly": {
-    "base": 6,
+    "base": 1,
     "state": 0,
-    "overflowBindings": 7
+    "overflowBindings": 0
   },
   "pseudoElementFindings": 8,
+  "anatomyPromotion": {
+    "partsCarried": 2,
+    "svgAssets": 0,
+    "refusals": 0
+  },
   "enrichedContractSchemaValid": true,
   "enrichedContractGeneratorValid": true,
   "replayComputedEquality": {

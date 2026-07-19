@@ -11,13 +11,13 @@
   "styledChannels": {
     "root": 0,
     "icon": 12,
-    "part-0.0": 5
+    "part-0-0": 5
   },
   "folds": {
     "count": 0,
     "receipts": [],
-    "mintedLeavesUnfolded": 3,
-    "mintedLeavesFolded": 3
+    "mintedLeavesUnfolded": 0,
+    "mintedLeavesFolded": 0
   },
   "bound": {
     "cellsChecked": 0,
@@ -26,11 +26,11 @@
     "untriaged": 0
   },
   "minted": {
-    "leaves": 3,
-    "baseBindings": 6,
+    "leaves": 0,
+    "baseBindings": 0,
     "stateBindings": 0,
     "byShape": {
-      "uniform": 6,
+      "uniform": 0,
       "perAxis": 0,
       "perPair": 0,
       "refused": 0
@@ -41,11 +41,16 @@
     "state": 0
   },
   "codeOnly": {
-    "base": 11,
+    "base": 0,
     "state": 0,
-    "overflowBindings": 6
+    "overflowBindings": 0
   },
   "pseudoElementFindings": 0,
+  "anatomyPromotion": {
+    "partsCarried": 1,
+    "svgAssets": 2,
+    "refusals": 2
+  },
   "enrichedContractSchemaValid": true,
   "enrichedContractGeneratorValid": true,
   "replayComputedEquality": {
@@ -118,7 +123,7 @@
     "rowsFullyEqual": 0,
     "rows": 8,
     "pixelPerfectExact": 0,
-    "pixelPerfectAA": 8,
+    "pixelPerfectAA": 0,
     "pairs": 8
   },
   "focusVisibleDriverMatched": 0,

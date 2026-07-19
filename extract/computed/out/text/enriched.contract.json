@@ -373,11 +373,8 @@
           }
         }
       ],
-      "parts": {
-        "label": {
-          "element": "span",
-          "text": "Online store dashboard"
-        }
+      "declared": {
+        "display": "block"
       }
     }
   },

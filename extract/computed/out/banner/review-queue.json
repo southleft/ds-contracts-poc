@@ -6,8 +6,8 @@
   "browser": "148.0.7778.96",
   "items": [
     {
-      "id": "success|root|background-color",
-      "combo": "success",
+      "id": "success.off.off|root|background-color",
+      "combo": "success.off.off",
       "part": "root",
       "channel": "background-color",
       "ref": "{p.color-bg-fill-success}",
@@ -26,8 +26,8 @@
       "status": "open"
     },
     {
-      "id": "success|root|color",
-      "combo": "success",
+      "id": "success.off.off|root|color",
+      "combo": "success.off.off",
       "part": "root",
       "channel": "color",
       "ref": "{p.color-text-success-on-bg-fill}",
@@ -46,8 +46,128 @@
       "status": "open"
     },
     {
-      "id": "info|root|background-color",
-      "combo": "info",
+      "id": "success.off.on|root|background-color",
+      "combo": "success.off.on",
+      "part": "root",
+      "channel": "background-color",
+      "ref": "{p.color-bg-fill-success}",
+      "computedProp": "background-color",
+      "expected": "rgba(4, 123, 93, 1)",
+      "observed": "rgba(255, 255, 255, 1)",
+      "cause": "composition-owned tone surface: Polaris 13's DefaultBanner renders the tone fill/text on an inner Box ribbon (Box background=bg-fill-<tone> color=text-<tone>-on-bg-fill — Banner/utilities.js bannerAttributes.withinPage), NOT on the .Polaris-Banner root where the promotion bound the tone maps; the root is the white card (.Polaris-Banner { background-color: var(--p-color-bg-surface) }) with body-inherited text (html,body { color: var(--p-color-text) }). Resolve via the review queue with explicit refs (--to {p.color-bg-surface} / {p.color-text} — mechanical: the defining CSS rules name the tokens; several tokens share the resolved values). The tone ribbon colors ride the minted per-axis leaves on the inner box part.",
+      "candidates": [
+        "p.color-avatar-text-on-bg-fill",
+        "p.color-bg-fill",
+        "p.color-bg-surface",
+        "p.color-checkbox-icon-disabled",
+        "p.color-radio-button-icon-disabled",
+        "p.color-text-brand-on-bg-fill"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "success.off.on|root|color",
+      "combo": "success.off.on",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text-success-on-bg-fill}",
+      "computedProp": "color",
+      "expected": "rgba(250, 255, 251, 1)",
+      "observed": "rgba(48, 48, 48, 1)",
+      "cause": "composition-owned tone surface: Polaris 13's DefaultBanner renders the tone fill/text on an inner Box ribbon (Box background=bg-fill-<tone> color=text-<tone>-on-bg-fill — Banner/utilities.js bannerAttributes.withinPage), NOT on the .Polaris-Banner root where the promotion bound the tone maps; the root is the white card (.Polaris-Banner { background-color: var(--p-color-bg-surface) }) with body-inherited text (html,body { color: var(--p-color-text) }). Resolve via the review queue with explicit refs (--to {p.color-bg-surface} / {p.color-text} — mechanical: the defining CSS rules name the tokens; several tokens share the resolved values). The tone ribbon colors ride the minted per-axis leaves on the inner box part.",
+      "candidates": [
+        "p.color-bg-fill-brand",
+        "p.color-bg-fill-brand-selected",
+        "p.color-bg-fill-inverse",
+        "p.color-bg-surface-inverse",
+        "p.color-icon-hover",
+        "p.color-text"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "success.on.off|root|background-color",
+      "combo": "success.on.off",
+      "part": "root",
+      "channel": "background-color",
+      "ref": "{p.color-bg-fill-success}",
+      "computedProp": "background-color",
+      "expected": "rgba(4, 123, 93, 1)",
+      "observed": "rgba(255, 255, 255, 1)",
+      "cause": "composition-owned tone surface: Polaris 13's DefaultBanner renders the tone fill/text on an inner Box ribbon (Box background=bg-fill-<tone> color=text-<tone>-on-bg-fill — Banner/utilities.js bannerAttributes.withinPage), NOT on the .Polaris-Banner root where the promotion bound the tone maps; the root is the white card (.Polaris-Banner { background-color: var(--p-color-bg-surface) }) with body-inherited text (html,body { color: var(--p-color-text) }). Resolve via the review queue with explicit refs (--to {p.color-bg-surface} / {p.color-text} — mechanical: the defining CSS rules name the tokens; several tokens share the resolved values). The tone ribbon colors ride the minted per-axis leaves on the inner box part.",
+      "candidates": [
+        "p.color-avatar-text-on-bg-fill",
+        "p.color-bg-fill",
+        "p.color-bg-surface",
+        "p.color-checkbox-icon-disabled",
+        "p.color-radio-button-icon-disabled",
+        "p.color-text-brand-on-bg-fill"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "success.on.off|root|color",
+      "combo": "success.on.off",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text-success-on-bg-fill}",
+      "computedProp": "color",
+      "expected": "rgba(250, 255, 251, 1)",
+      "observed": "rgba(48, 48, 48, 1)",
+      "cause": "composition-owned tone surface: Polaris 13's DefaultBanner renders the tone fill/text on an inner Box ribbon (Box background=bg-fill-<tone> color=text-<tone>-on-bg-fill — Banner/utilities.js bannerAttributes.withinPage), NOT on the .Polaris-Banner root where the promotion bound the tone maps; the root is the white card (.Polaris-Banner { background-color: var(--p-color-bg-surface) }) with body-inherited text (html,body { color: var(--p-color-text) }). Resolve via the review queue with explicit refs (--to {p.color-bg-surface} / {p.color-text} — mechanical: the defining CSS rules name the tokens; several tokens share the resolved values). The tone ribbon colors ride the minted per-axis leaves on the inner box part.",
+      "candidates": [
+        "p.color-bg-fill-brand",
+        "p.color-bg-fill-brand-selected",
+        "p.color-bg-fill-inverse",
+        "p.color-bg-surface-inverse",
+        "p.color-icon-hover",
+        "p.color-text"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "success.on.on|root|background-color",
+      "combo": "success.on.on",
+      "part": "root",
+      "channel": "background-color",
+      "ref": "{p.color-bg-fill-success}",
+      "computedProp": "background-color",
+      "expected": "rgba(4, 123, 93, 1)",
+      "observed": "rgba(255, 255, 255, 1)",
+      "cause": "composition-owned tone surface: Polaris 13's DefaultBanner renders the tone fill/text on an inner Box ribbon (Box background=bg-fill-<tone> color=text-<tone>-on-bg-fill — Banner/utilities.js bannerAttributes.withinPage), NOT on the .Polaris-Banner root where the promotion bound the tone maps; the root is the white card (.Polaris-Banner { background-color: var(--p-color-bg-surface) }) with body-inherited text (html,body { color: var(--p-color-text) }). Resolve via the review queue with explicit refs (--to {p.color-bg-surface} / {p.color-text} — mechanical: the defining CSS rules name the tokens; several tokens share the resolved values). The tone ribbon colors ride the minted per-axis leaves on the inner box part.",
+      "candidates": [
+        "p.color-avatar-text-on-bg-fill",
+        "p.color-bg-fill",
+        "p.color-bg-surface",
+        "p.color-checkbox-icon-disabled",
+        "p.color-radio-button-icon-disabled",
+        "p.color-text-brand-on-bg-fill"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "success.on.on|root|color",
+      "combo": "success.on.on",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text-success-on-bg-fill}",
+      "computedProp": "color",
+      "expected": "rgba(250, 255, 251, 1)",
+      "observed": "rgba(48, 48, 48, 1)",
+      "cause": "composition-owned tone surface: Polaris 13's DefaultBanner renders the tone fill/text on an inner Box ribbon (Box background=bg-fill-<tone> color=text-<tone>-on-bg-fill — Banner/utilities.js bannerAttributes.withinPage), NOT on the .Polaris-Banner root where the promotion bound the tone maps; the root is the white card (.Polaris-Banner { background-color: var(--p-color-bg-surface) }) with body-inherited text (html,body { color: var(--p-color-text) }). Resolve via the review queue with explicit refs (--to {p.color-bg-surface} / {p.color-text} — mechanical: the defining CSS rules name the tokens; several tokens share the resolved values). The tone ribbon colors ride the minted per-axis leaves on the inner box part.",
+      "candidates": [
+        "p.color-bg-fill-brand",
+        "p.color-bg-fill-brand-selected",
+        "p.color-bg-fill-inverse",
+        "p.color-bg-surface-inverse",
+        "p.color-icon-hover",
+        "p.color-text"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "info.off.off|root|background-color",
+      "combo": "info.off.off",
       "part": "root",
       "channel": "background-color",
       "ref": "{p.color-bg-fill-info}",
@@ -66,8 +186,8 @@
       "status": "open"
     },
     {
-      "id": "info|root|color",
-      "combo": "info",
+      "id": "info.off.off|root|color",
+      "combo": "info.off.off",
       "part": "root",
       "channel": "color",
       "ref": "{p.color-text-info-on-bg-fill}",
@@ -86,8 +206,128 @@
       "status": "open"
     },
     {
-      "id": "warning|root|background-color",
-      "combo": "warning",
+      "id": "info.off.on|root|background-color",
+      "combo": "info.off.on",
+      "part": "root",
+      "channel": "background-color",
+      "ref": "{p.color-bg-fill-info}",
+      "computedProp": "background-color",
+      "expected": "rgba(145, 208, 255, 1)",
+      "observed": "rgba(255, 255, 255, 1)",
+      "cause": "composition-owned tone surface: Polaris 13's DefaultBanner renders the tone fill/text on an inner Box ribbon (Box background=bg-fill-<tone> color=text-<tone>-on-bg-fill — Banner/utilities.js bannerAttributes.withinPage), NOT on the .Polaris-Banner root where the promotion bound the tone maps; the root is the white card (.Polaris-Banner { background-color: var(--p-color-bg-surface) }) with body-inherited text (html,body { color: var(--p-color-text) }). Resolve via the review queue with explicit refs (--to {p.color-bg-surface} / {p.color-text} — mechanical: the defining CSS rules name the tokens; several tokens share the resolved values). The tone ribbon colors ride the minted per-axis leaves on the inner box part.",
+      "candidates": [
+        "p.color-avatar-text-on-bg-fill",
+        "p.color-bg-fill",
+        "p.color-bg-surface",
+        "p.color-checkbox-icon-disabled",
+        "p.color-radio-button-icon-disabled",
+        "p.color-text-brand-on-bg-fill"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "info.off.on|root|color",
+      "combo": "info.off.on",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text-info-on-bg-fill}",
+      "computedProp": "color",
+      "expected": "rgba(0, 33, 51, 1)",
+      "observed": "rgba(48, 48, 48, 1)",
+      "cause": "composition-owned tone surface: Polaris 13's DefaultBanner renders the tone fill/text on an inner Box ribbon (Box background=bg-fill-<tone> color=text-<tone>-on-bg-fill — Banner/utilities.js bannerAttributes.withinPage), NOT on the .Polaris-Banner root where the promotion bound the tone maps; the root is the white card (.Polaris-Banner { background-color: var(--p-color-bg-surface) }) with body-inherited text (html,body { color: var(--p-color-text) }). Resolve via the review queue with explicit refs (--to {p.color-bg-surface} / {p.color-text} — mechanical: the defining CSS rules name the tokens; several tokens share the resolved values). The tone ribbon colors ride the minted per-axis leaves on the inner box part.",
+      "candidates": [
+        "p.color-bg-fill-brand",
+        "p.color-bg-fill-brand-selected",
+        "p.color-bg-fill-inverse",
+        "p.color-bg-surface-inverse",
+        "p.color-icon-hover",
+        "p.color-text"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "info.on.off|root|background-color",
+      "combo": "info.on.off",
+      "part": "root",
+      "channel": "background-color",
+      "ref": "{p.color-bg-fill-info}",
+      "computedProp": "background-color",
+      "expected": "rgba(145, 208, 255, 1)",
+      "observed": "rgba(255, 255, 255, 1)",
+      "cause": "composition-owned tone surface: Polaris 13's DefaultBanner renders the tone fill/text on an inner Box ribbon (Box background=bg-fill-<tone> color=text-<tone>-on-bg-fill — Banner/utilities.js bannerAttributes.withinPage), NOT on the .Polaris-Banner root where the promotion bound the tone maps; the root is the white card (.Polaris-Banner { background-color: var(--p-color-bg-surface) }) with body-inherited text (html,body { color: var(--p-color-text) }). Resolve via the review queue with explicit refs (--to {p.color-bg-surface} / {p.color-text} — mechanical: the defining CSS rules name the tokens; several tokens share the resolved values). The tone ribbon colors ride the minted per-axis leaves on the inner box part.",
+      "candidates": [
+        "p.color-avatar-text-on-bg-fill",
+        "p.color-bg-fill",
+        "p.color-bg-surface",
+        "p.color-checkbox-icon-disabled",
+        "p.color-radio-button-icon-disabled",
+        "p.color-text-brand-on-bg-fill"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "info.on.off|root|color",
+      "combo": "info.on.off",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text-info-on-bg-fill}",
+      "computedProp": "color",
+      "expected": "rgba(0, 33, 51, 1)",
+      "observed": "rgba(48, 48, 48, 1)",
+      "cause": "composition-owned tone surface: Polaris 13's DefaultBanner renders the tone fill/text on an inner Box ribbon (Box background=bg-fill-<tone> color=text-<tone>-on-bg-fill — Banner/utilities.js bannerAttributes.withinPage), NOT on the .Polaris-Banner root where the promotion bound the tone maps; the root is the white card (.Polaris-Banner { background-color: var(--p-color-bg-surface) }) with body-inherited text (html,body { color: var(--p-color-text) }). Resolve via the review queue with explicit refs (--to {p.color-bg-surface} / {p.color-text} — mechanical: the defining CSS rules name the tokens; several tokens share the resolved values). The tone ribbon colors ride the minted per-axis leaves on the inner box part.",
+      "candidates": [
+        "p.color-bg-fill-brand",
+        "p.color-bg-fill-brand-selected",
+        "p.color-bg-fill-inverse",
+        "p.color-bg-surface-inverse",
+        "p.color-icon-hover",
+        "p.color-text"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "info.on.on|root|background-color",
+      "combo": "info.on.on",
+      "part": "root",
+      "channel": "background-color",
+      "ref": "{p.color-bg-fill-info}",
+      "computedProp": "background-color",
+      "expected": "rgba(145, 208, 255, 1)",
+      "observed": "rgba(255, 255, 255, 1)",
+      "cause": "composition-owned tone surface: Polaris 13's DefaultBanner renders the tone fill/text on an inner Box ribbon (Box background=bg-fill-<tone> color=text-<tone>-on-bg-fill — Banner/utilities.js bannerAttributes.withinPage), NOT on the .Polaris-Banner root where the promotion bound the tone maps; the root is the white card (.Polaris-Banner { background-color: var(--p-color-bg-surface) }) with body-inherited text (html,body { color: var(--p-color-text) }). Resolve via the review queue with explicit refs (--to {p.color-bg-surface} / {p.color-text} — mechanical: the defining CSS rules name the tokens; several tokens share the resolved values). The tone ribbon colors ride the minted per-axis leaves on the inner box part.",
+      "candidates": [
+        "p.color-avatar-text-on-bg-fill",
+        "p.color-bg-fill",
+        "p.color-bg-surface",
+        "p.color-checkbox-icon-disabled",
+        "p.color-radio-button-icon-disabled",
+        "p.color-text-brand-on-bg-fill"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "info.on.on|root|color",
+      "combo": "info.on.on",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text-info-on-bg-fill}",
+      "computedProp": "color",
+      "expected": "rgba(0, 33, 51, 1)",
+      "observed": "rgba(48, 48, 48, 1)",
+      "cause": "composition-owned tone surface: Polaris 13's DefaultBanner renders the tone fill/text on an inner Box ribbon (Box background=bg-fill-<tone> color=text-<tone>-on-bg-fill — Banner/utilities.js bannerAttributes.withinPage), NOT on the .Polaris-Banner root where the promotion bound the tone maps; the root is the white card (.Polaris-Banner { background-color: var(--p-color-bg-surface) }) with body-inherited text (html,body { color: var(--p-color-text) }). Resolve via the review queue with explicit refs (--to {p.color-bg-surface} / {p.color-text} — mechanical: the defining CSS rules name the tokens; several tokens share the resolved values). The tone ribbon colors ride the minted per-axis leaves on the inner box part.",
+      "candidates": [
+        "p.color-bg-fill-brand",
+        "p.color-bg-fill-brand-selected",
+        "p.color-bg-fill-inverse",
+        "p.color-bg-surface-inverse",
+        "p.color-icon-hover",
+        "p.color-text"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "warning.off.off|root|background-color",
+      "combo": "warning.off.off",
       "part": "root",
       "channel": "background-color",
       "ref": "{p.color-bg-fill-warning}",
@@ -106,8 +346,8 @@
       "status": "open"
     },
     {
-      "id": "warning|root|color",
-      "combo": "warning",
+      "id": "warning.off.off|root|color",
+      "combo": "warning.off.off",
       "part": "root",
       "channel": "color",
       "ref": "{p.color-text-warning-on-bg-fill}",
@@ -126,8 +366,128 @@
       "status": "open"
     },
     {
-      "id": "critical|root|background-color",
-      "combo": "critical",
+      "id": "warning.off.on|root|background-color",
+      "combo": "warning.off.on",
+      "part": "root",
+      "channel": "background-color",
+      "ref": "{p.color-bg-fill-warning}",
+      "computedProp": "background-color",
+      "expected": "rgba(255, 184, 0, 1)",
+      "observed": "rgba(255, 255, 255, 1)",
+      "cause": "composition-owned tone surface: Polaris 13's DefaultBanner renders the tone fill/text on an inner Box ribbon (Box background=bg-fill-<tone> color=text-<tone>-on-bg-fill — Banner/utilities.js bannerAttributes.withinPage), NOT on the .Polaris-Banner root where the promotion bound the tone maps; the root is the white card (.Polaris-Banner { background-color: var(--p-color-bg-surface) }) with body-inherited text (html,body { color: var(--p-color-text) }). Resolve via the review queue with explicit refs (--to {p.color-bg-surface} / {p.color-text} — mechanical: the defining CSS rules name the tokens; several tokens share the resolved values). The tone ribbon colors ride the minted per-axis leaves on the inner box part.",
+      "candidates": [
+        "p.color-avatar-text-on-bg-fill",
+        "p.color-bg-fill",
+        "p.color-bg-surface",
+        "p.color-checkbox-icon-disabled",
+        "p.color-radio-button-icon-disabled",
+        "p.color-text-brand-on-bg-fill"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "warning.off.on|root|color",
+      "combo": "warning.off.on",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text-warning-on-bg-fill}",
+      "computedProp": "color",
+      "expected": "rgba(37, 26, 0, 1)",
+      "observed": "rgba(48, 48, 48, 1)",
+      "cause": "composition-owned tone surface: Polaris 13's DefaultBanner renders the tone fill/text on an inner Box ribbon (Box background=bg-fill-<tone> color=text-<tone>-on-bg-fill — Banner/utilities.js bannerAttributes.withinPage), NOT on the .Polaris-Banner root where the promotion bound the tone maps; the root is the white card (.Polaris-Banner { background-color: var(--p-color-bg-surface) }) with body-inherited text (html,body { color: var(--p-color-text) }). Resolve via the review queue with explicit refs (--to {p.color-bg-surface} / {p.color-text} — mechanical: the defining CSS rules name the tokens; several tokens share the resolved values). The tone ribbon colors ride the minted per-axis leaves on the inner box part.",
+      "candidates": [
+        "p.color-bg-fill-brand",
+        "p.color-bg-fill-brand-selected",
+        "p.color-bg-fill-inverse",
+        "p.color-bg-surface-inverse",
+        "p.color-icon-hover",
+        "p.color-text"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "warning.on.off|root|background-color",
+      "combo": "warning.on.off",
+      "part": "root",
+      "channel": "background-color",
+      "ref": "{p.color-bg-fill-warning}",
+      "computedProp": "background-color",
+      "expected": "rgba(255, 184, 0, 1)",
+      "observed": "rgba(255, 255, 255, 1)",
+      "cause": "composition-owned tone surface: Polaris 13's DefaultBanner renders the tone fill/text on an inner Box ribbon (Box background=bg-fill-<tone> color=text-<tone>-on-bg-fill — Banner/utilities.js bannerAttributes.withinPage), NOT on the .Polaris-Banner root where the promotion bound the tone maps; the root is the white card (.Polaris-Banner { background-color: var(--p-color-bg-surface) }) with body-inherited text (html,body { color: var(--p-color-text) }). Resolve via the review queue with explicit refs (--to {p.color-bg-surface} / {p.color-text} — mechanical: the defining CSS rules name the tokens; several tokens share the resolved values). The tone ribbon colors ride the minted per-axis leaves on the inner box part.",
+      "candidates": [
+        "p.color-avatar-text-on-bg-fill",
+        "p.color-bg-fill",
+        "p.color-bg-surface",
+        "p.color-checkbox-icon-disabled",
+        "p.color-radio-button-icon-disabled",
+        "p.color-text-brand-on-bg-fill"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "warning.on.off|root|color",
+      "combo": "warning.on.off",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text-warning-on-bg-fill}",
+      "computedProp": "color",
+      "expected": "rgba(37, 26, 0, 1)",
+      "observed": "rgba(48, 48, 48, 1)",
+      "cause": "composition-owned tone surface: Polaris 13's DefaultBanner renders the tone fill/text on an inner Box ribbon (Box background=bg-fill-<tone> color=text-<tone>-on-bg-fill — Banner/utilities.js bannerAttributes.withinPage), NOT on the .Polaris-Banner root where the promotion bound the tone maps; the root is the white card (.Polaris-Banner { background-color: var(--p-color-bg-surface) }) with body-inherited text (html,body { color: var(--p-color-text) }). Resolve via the review queue with explicit refs (--to {p.color-bg-surface} / {p.color-text} — mechanical: the defining CSS rules name the tokens; several tokens share the resolved values). The tone ribbon colors ride the minted per-axis leaves on the inner box part.",
+      "candidates": [
+        "p.color-bg-fill-brand",
+        "p.color-bg-fill-brand-selected",
+        "p.color-bg-fill-inverse",
+        "p.color-bg-surface-inverse",
+        "p.color-icon-hover",
+        "p.color-text"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "warning.on.on|root|background-color",
+      "combo": "warning.on.on",
+      "part": "root",
+      "channel": "background-color",
+      "ref": "{p.color-bg-fill-warning}",
+      "computedProp": "background-color",
+      "expected": "rgba(255, 184, 0, 1)",
+      "observed": "rgba(255, 255, 255, 1)",
+      "cause": "composition-owned tone surface: Polaris 13's DefaultBanner renders the tone fill/text on an inner Box ribbon (Box background=bg-fill-<tone> color=text-<tone>-on-bg-fill — Banner/utilities.js bannerAttributes.withinPage), NOT on the .Polaris-Banner root where the promotion bound the tone maps; the root is the white card (.Polaris-Banner { background-color: var(--p-color-bg-surface) }) with body-inherited text (html,body { color: var(--p-color-text) }). Resolve via the review queue with explicit refs (--to {p.color-bg-surface} / {p.color-text} — mechanical: the defining CSS rules name the tokens; several tokens share the resolved values). The tone ribbon colors ride the minted per-axis leaves on the inner box part.",
+      "candidates": [
+        "p.color-avatar-text-on-bg-fill",
+        "p.color-bg-fill",
+        "p.color-bg-surface",
+        "p.color-checkbox-icon-disabled",
+        "p.color-radio-button-icon-disabled",
+        "p.color-text-brand-on-bg-fill"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "warning.on.on|root|color",
+      "combo": "warning.on.on",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text-warning-on-bg-fill}",
+      "computedProp": "color",
+      "expected": "rgba(37, 26, 0, 1)",
+      "observed": "rgba(48, 48, 48, 1)",
+      "cause": "composition-owned tone surface: Polaris 13's DefaultBanner renders the tone fill/text on an inner Box ribbon (Box background=bg-fill-<tone> color=text-<tone>-on-bg-fill — Banner/utilities.js bannerAttributes.withinPage), NOT on the .Polaris-Banner root where the promotion bound the tone maps; the root is the white card (.Polaris-Banner { background-color: var(--p-color-bg-surface) }) with body-inherited text (html,body { color: var(--p-color-text) }). Resolve via the review queue with explicit refs (--to {p.color-bg-surface} / {p.color-text} — mechanical: the defining CSS rules name the tokens; several tokens share the resolved values). The tone ribbon colors ride the minted per-axis leaves on the inner box part.",
+      "candidates": [
+        "p.color-bg-fill-brand",
+        "p.color-bg-fill-brand-selected",
+        "p.color-bg-fill-inverse",
+        "p.color-bg-surface-inverse",
+        "p.color-icon-hover",
+        "p.color-text"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "critical.off.off|root|background-color",
+      "combo": "critical.off.off",
       "part": "root",
       "channel": "background-color",
       "ref": "{p.color-bg-fill-critical}",
@@ -146,8 +506,128 @@
       "status": "open"
     },
     {
-      "id": "critical|root|color",
-      "combo": "critical",
+      "id": "critical.off.off|root|color",
+      "combo": "critical.off.off",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text-critical-on-bg-fill}",
+      "computedProp": "color",
+      "expected": "rgba(255, 250, 251, 1)",
+      "observed": "rgba(48, 48, 48, 1)",
+      "cause": "composition-owned tone surface: Polaris 13's DefaultBanner renders the tone fill/text on an inner Box ribbon (Box background=bg-fill-<tone> color=text-<tone>-on-bg-fill — Banner/utilities.js bannerAttributes.withinPage), NOT on the .Polaris-Banner root where the promotion bound the tone maps; the root is the white card (.Polaris-Banner { background-color: var(--p-color-bg-surface) }) with body-inherited text (html,body { color: var(--p-color-text) }). Resolve via the review queue with explicit refs (--to {p.color-bg-surface} / {p.color-text} — mechanical: the defining CSS rules name the tokens; several tokens share the resolved values). The tone ribbon colors ride the minted per-axis leaves on the inner box part.",
+      "candidates": [
+        "p.color-bg-fill-brand",
+        "p.color-bg-fill-brand-selected",
+        "p.color-bg-fill-inverse",
+        "p.color-bg-surface-inverse",
+        "p.color-icon-hover",
+        "p.color-text"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "critical.off.on|root|background-color",
+      "combo": "critical.off.on",
+      "part": "root",
+      "channel": "background-color",
+      "ref": "{p.color-bg-fill-critical}",
+      "computedProp": "background-color",
+      "expected": "rgba(199, 10, 36, 1)",
+      "observed": "rgba(255, 255, 255, 1)",
+      "cause": "composition-owned tone surface: Polaris 13's DefaultBanner renders the tone fill/text on an inner Box ribbon (Box background=bg-fill-<tone> color=text-<tone>-on-bg-fill — Banner/utilities.js bannerAttributes.withinPage), NOT on the .Polaris-Banner root where the promotion bound the tone maps; the root is the white card (.Polaris-Banner { background-color: var(--p-color-bg-surface) }) with body-inherited text (html,body { color: var(--p-color-text) }). Resolve via the review queue with explicit refs (--to {p.color-bg-surface} / {p.color-text} — mechanical: the defining CSS rules name the tokens; several tokens share the resolved values). The tone ribbon colors ride the minted per-axis leaves on the inner box part.",
+      "candidates": [
+        "p.color-avatar-text-on-bg-fill",
+        "p.color-bg-fill",
+        "p.color-bg-surface",
+        "p.color-checkbox-icon-disabled",
+        "p.color-radio-button-icon-disabled",
+        "p.color-text-brand-on-bg-fill"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "critical.off.on|root|color",
+      "combo": "critical.off.on",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text-critical-on-bg-fill}",
+      "computedProp": "color",
+      "expected": "rgba(255, 250, 251, 1)",
+      "observed": "rgba(48, 48, 48, 1)",
+      "cause": "composition-owned tone surface: Polaris 13's DefaultBanner renders the tone fill/text on an inner Box ribbon (Box background=bg-fill-<tone> color=text-<tone>-on-bg-fill — Banner/utilities.js bannerAttributes.withinPage), NOT on the .Polaris-Banner root where the promotion bound the tone maps; the root is the white card (.Polaris-Banner { background-color: var(--p-color-bg-surface) }) with body-inherited text (html,body { color: var(--p-color-text) }). Resolve via the review queue with explicit refs (--to {p.color-bg-surface} / {p.color-text} — mechanical: the defining CSS rules name the tokens; several tokens share the resolved values). The tone ribbon colors ride the minted per-axis leaves on the inner box part.",
+      "candidates": [
+        "p.color-bg-fill-brand",
+        "p.color-bg-fill-brand-selected",
+        "p.color-bg-fill-inverse",
+        "p.color-bg-surface-inverse",
+        "p.color-icon-hover",
+        "p.color-text"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "critical.on.off|root|background-color",
+      "combo": "critical.on.off",
+      "part": "root",
+      "channel": "background-color",
+      "ref": "{p.color-bg-fill-critical}",
+      "computedProp": "background-color",
+      "expected": "rgba(199, 10, 36, 1)",
+      "observed": "rgba(255, 255, 255, 1)",
+      "cause": "composition-owned tone surface: Polaris 13's DefaultBanner renders the tone fill/text on an inner Box ribbon (Box background=bg-fill-<tone> color=text-<tone>-on-bg-fill — Banner/utilities.js bannerAttributes.withinPage), NOT on the .Polaris-Banner root where the promotion bound the tone maps; the root is the white card (.Polaris-Banner { background-color: var(--p-color-bg-surface) }) with body-inherited text (html,body { color: var(--p-color-text) }). Resolve via the review queue with explicit refs (--to {p.color-bg-surface} / {p.color-text} — mechanical: the defining CSS rules name the tokens; several tokens share the resolved values). The tone ribbon colors ride the minted per-axis leaves on the inner box part.",
+      "candidates": [
+        "p.color-avatar-text-on-bg-fill",
+        "p.color-bg-fill",
+        "p.color-bg-surface",
+        "p.color-checkbox-icon-disabled",
+        "p.color-radio-button-icon-disabled",
+        "p.color-text-brand-on-bg-fill"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "critical.on.off|root|color",
+      "combo": "critical.on.off",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text-critical-on-bg-fill}",
+      "computedProp": "color",
+      "expected": "rgba(255, 250, 251, 1)",
+      "observed": "rgba(48, 48, 48, 1)",
+      "cause": "composition-owned tone surface: Polaris 13's DefaultBanner renders the tone fill/text on an inner Box ribbon (Box background=bg-fill-<tone> color=text-<tone>-on-bg-fill — Banner/utilities.js bannerAttributes.withinPage), NOT on the .Polaris-Banner root where the promotion bound the tone maps; the root is the white card (.Polaris-Banner { background-color: var(--p-color-bg-surface) }) with body-inherited text (html,body { color: var(--p-color-text) }). Resolve via the review queue with explicit refs (--to {p.color-bg-surface} / {p.color-text} — mechanical: the defining CSS rules name the tokens; several tokens share the resolved values). The tone ribbon colors ride the minted per-axis leaves on the inner box part.",
+      "candidates": [
+        "p.color-bg-fill-brand",
+        "p.color-bg-fill-brand-selected",
+        "p.color-bg-fill-inverse",
+        "p.color-bg-surface-inverse",
+        "p.color-icon-hover",
+        "p.color-text"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "critical.on.on|root|background-color",
+      "combo": "critical.on.on",
+      "part": "root",
+      "channel": "background-color",
+      "ref": "{p.color-bg-fill-critical}",
+      "computedProp": "background-color",
+      "expected": "rgba(199, 10, 36, 1)",
+      "observed": "rgba(255, 255, 255, 1)",
+      "cause": "composition-owned tone surface: Polaris 13's DefaultBanner renders the tone fill/text on an inner Box ribbon (Box background=bg-fill-<tone> color=text-<tone>-on-bg-fill — Banner/utilities.js bannerAttributes.withinPage), NOT on the .Polaris-Banner root where the promotion bound the tone maps; the root is the white card (.Polaris-Banner { background-color: var(--p-color-bg-surface) }) with body-inherited text (html,body { color: var(--p-color-text) }). Resolve via the review queue with explicit refs (--to {p.color-bg-surface} / {p.color-text} — mechanical: the defining CSS rules name the tokens; several tokens share the resolved values). The tone ribbon colors ride the minted per-axis leaves on the inner box part.",
+      "candidates": [
+        "p.color-avatar-text-on-bg-fill",
+        "p.color-bg-fill",
+        "p.color-bg-surface",
+        "p.color-checkbox-icon-disabled",
+        "p.color-radio-button-icon-disabled",
+        "p.color-text-brand-on-bg-fill"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "critical.on.on|root|color",
+      "combo": "critical.on.on",
       "part": "root",
       "channel": "color",
       "ref": "{p.color-text-critical-on-bg-fill}",

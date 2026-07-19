@@ -1,41 +1,81 @@
 [
   {
-    "key": "enabled__default",
+    "key": "unchecked.enabled__default",
     "pctExact": 0,
     "pctAA": 0
   },
   {
-    "key": "enabled__hover",
+    "key": "unchecked.enabled__hover",
     "pctExact": 0,
     "pctAA": 0
   },
   {
-    "key": "enabled__focus-visible",
+    "key": "unchecked.enabled__focus-visible",
     "pctExact": 0,
     "pctAA": 0
   },
   {
-    "key": "enabled__active",
+    "key": "unchecked.enabled__active",
     "pctExact": 0,
     "pctAA": 0
   },
   {
-    "key": "disabled__default",
+    "key": "unchecked.disabled__default",
     "pctExact": 0,
     "pctAA": 0
   },
   {
-    "key": "disabled__hover",
+    "key": "unchecked.disabled__hover",
     "pctExact": 0,
     "pctAA": 0
   },
   {
-    "key": "disabled__focus-visible",
+    "key": "unchecked.disabled__focus-visible",
     "pctExact": 0,
     "pctAA": 0
   },
   {
-    "key": "disabled__active",
+    "key": "unchecked.disabled__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "checked.enabled__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "checked.enabled__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "checked.enabled__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "checked.enabled__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "checked.disabled__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "checked.disabled__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "checked.disabled__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "checked.disabled__active",
     "pctExact": 0,
     "pctAA": 0
   }
