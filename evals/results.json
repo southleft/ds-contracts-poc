@@ -1,6 +1,6 @@
 {
-  "passed": 113,
-  "total": 113,
+  "passed": 115,
+  "total": 115,
   "results": [
     {
       "id": "refuse-unknown-token-reference",
@@ -565,6 +565,16 @@
     {
       "id": "canvas-pixel-gate-receipts",
       "claim": "C3-detection",
+      "pass": true
+    },
+    {
+      "id": "cli-smoke",
+      "claim": "C7-cli",
+      "pass": true
+    },
+    {
+      "id": "emitter-plugin-loads",
+      "claim": "C7-cli",
       "pass": true
     }
   ]

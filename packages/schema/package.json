@@ -1,0 +1,31 @@
+{
+  "name": "@ds-contracts/schema",
+  "version": "15.0.0",
+  "description": "The ds-contracts component contract schema — the single Zod document (spec v15), its generated JSON Schema, and the schema-level validateContract referee.",
+  "license": "MIT",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./contract.schema.json": "./contract.schema.json"
+  },
+  "files": [
+    "dist",
+    "contract.schema.json",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json && node emit-json-schema.mjs",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "dependencies": {
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "typescript": "^6.0.3"
+  }
+}

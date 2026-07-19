@@ -2,6 +2,9 @@
   "name": "ds-contracts-poc",
   "version": "0.6.0",
   "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
   "type": "module",
   "description": "Proof of concept: a machine-readable component contract as the single source of truth between the Figma canvas and code.",
   "scripts": {
