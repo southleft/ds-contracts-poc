@@ -1,5 +1,5 @@
 <!--
-  ProgressBar — static HTML+CSS emitted from contract polaris.progress-bar v0.2.0 by core/emit-html.ts.
+  ProgressBar — static HTML+CSS emitted from contract polaris.progress-bar v0.3.0 by core/emit-html.ts.
   Token values arrive via CSS custom properties (the same custom-property names the CSS Modules
   bind) — include the token stylesheet (src/styles/tokens.css) on the page or nothing resolves.
   Fidelity: no events, no interactivity beyond CSS states (:hover/:focus-visible/:disabled).
@@ -10,43 +10,64 @@
   <div class="showcase__item">
     <p class="showcase__label">default</p>
     <div class="progress-bar progress-bar--size-medium progress-bar--tone-highlight">
-      <div class="progress-bar__indicator"></div>
+      <progress class="progress-bar__progress"></progress>
+      <div class="progress-bar__indicator">
+        <span class="progress-bar__label">25%</span>
+      </div>
     </div>
   </div>
   <div class="showcase__item">
     <p class="showcase__label">size=small</p>
     <div class="progress-bar progress-bar--size-small progress-bar--tone-highlight">
-      <div class="progress-bar__indicator"></div>
+      <progress class="progress-bar__progress"></progress>
+      <div class="progress-bar__indicator">
+        <span class="progress-bar__label">25%</span>
+      </div>
     </div>
   </div>
   <div class="showcase__item">
     <p class="showcase__label">size=large</p>
     <div class="progress-bar progress-bar--size-large progress-bar--tone-highlight">
-      <div class="progress-bar__indicator"></div>
+      <progress class="progress-bar__progress"></progress>
+      <div class="progress-bar__indicator">
+        <span class="progress-bar__label">25%</span>
+      </div>
     </div>
   </div>
   <div class="showcase__item">
     <p class="showcase__label">tone=primary</p>
     <div class="progress-bar progress-bar--size-medium progress-bar--tone-primary">
-      <div class="progress-bar__indicator"></div>
+      <progress class="progress-bar__progress"></progress>
+      <div class="progress-bar__indicator">
+        <span class="progress-bar__label">25%</span>
+      </div>
     </div>
   </div>
   <div class="showcase__item">
     <p class="showcase__label">tone=success</p>
     <div class="progress-bar progress-bar--size-medium progress-bar--tone-success">
-      <div class="progress-bar__indicator"></div>
+      <progress class="progress-bar__progress"></progress>
+      <div class="progress-bar__indicator">
+        <span class="progress-bar__label">25%</span>
+      </div>
     </div>
   </div>
   <div class="showcase__item">
     <p class="showcase__label">tone=critical</p>
     <div class="progress-bar progress-bar--size-medium progress-bar--tone-critical">
-      <div class="progress-bar__indicator"></div>
+      <progress class="progress-bar__progress"></progress>
+      <div class="progress-bar__indicator">
+        <span class="progress-bar__label">25%</span>
+      </div>
     </div>
   </div>
   <div class="showcase__item">
     <p class="showcase__label">animated=true</p>
     <div class="progress-bar progress-bar--size-medium progress-bar--tone-highlight" data-animated="true">
-      <div class="progress-bar__indicator"></div>
+      <progress class="progress-bar__progress"></progress>
+      <div class="progress-bar__indicator">
+        <span class="progress-bar__label">25%</span>
+      </div>
     </div>
   </div>
 </section>

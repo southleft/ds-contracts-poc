@@ -1,5 +1,5 @@
 <!--
-  Checkbox — static HTML+CSS emitted from contract polaris.checkbox v0.2.0 by core/emit-html.ts.
+  Checkbox — static HTML+CSS emitted from contract polaris.checkbox v0.3.0 by core/emit-html.ts.
   Token values arrive via CSS custom properties (the same custom-property names the CSS Modules
   bind) — include the token stylesheet (src/styles/tokens.css) on the page or nothing resolves.
   Fidelity: no events, no interactivity beyond CSS states (:hover/:focus-visible/:disabled).
@@ -9,23 +9,100 @@
 <section class="showcase showcase--checkbox">
   <div class="showcase__item">
     <p class="showcase__label">default</p>
-    <span class="checkbox">
-      <input class="checkbox__input" type="checkbox" name="" value="">
-      <div class="checkbox__backdrop"></div>
+    <span class="checkbox checkbox--checked-unchecked">
+      <span class="checkbox__choice__control">
+        <span class="checkbox__checkbox">
+          <input class="checkbox__input" type="checkbox" name="" value="">
+          <div class="checkbox__backdrop"></div>
+          <span class="checkbox__icon">
+            <span class="checkbox__icon-3"><span class="checkbox__icon-3-glyph" aria-hidden="true"><svg viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg"><path d="M 5 10 C 5 9.586 5.336 9.25 5.75 9.25 H 14.25 C 14.664 9.25 15 9.586 15 10 S 14.664 10.75 14.25 10.75 H 5.75 C 5.336 10.75 5 10.414 5 10 Z" fill-rule="evenodd"/></svg></span></span>
+            <div class="checkbox__icon-2">
+              <span class="checkbox__icon-2-unchecked" aria-hidden="true"><svg viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg"><path d="M 1.5 5.5 L 3.44655 8.22517 C 3.72862 8.62007 4.30578 8.64717 4.62362 8.28044 L 10.5 1.5" fill="none" opacity="0" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="2" stroke-dashoffset="2"/></svg></span>
+            </div>
+          </span>
+        </span>
+      </span>
+      <span class="checkbox__choice__label">
+        <span class="checkbox__label">Save this product</span>
+      </span>
+    </span>
+  </div>
+  <div class="showcase__item">
+    <p class="showcase__label">checked=checked</p>
+    <span class="checkbox checkbox--checked-checked">
+      <span class="checkbox__choice__control">
+        <span class="checkbox__checkbox">
+          <input class="checkbox__input" type="checkbox" name="" value="">
+          <div class="checkbox__backdrop"></div>
+          <span class="checkbox__icon">
+            <span class="checkbox__icon-3"><span class="checkbox__icon-3-glyph" aria-hidden="true"><svg viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg"><path d="M 5 10 C 5 9.586 5.336 9.25 5.75 9.25 H 14.25 C 14.664 9.25 15 9.586 15 10 S 14.664 10.75 14.25 10.75 H 5.75 C 5.336 10.75 5 10.414 5 10 Z" fill-rule="evenodd"/></svg></span></span>
+            <div class="checkbox__icon-2">
+              <span class="checkbox__icon-2-checked" aria-hidden="true"><svg viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg"><path d="M 1.5 5.5 L 3.44655 8.22517 C 3.72862 8.62007 4.30578 8.64717 4.62362 8.28044 L 10.5 1.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="2"/></svg></span>
+            </div>
+          </span>
+        </span>
+      </span>
+      <span class="checkbox__choice__label">
+        <span class="checkbox__label">Save this product</span>
+      </span>
+    </span>
+  </div>
+  <div class="showcase__item">
+    <p class="showcase__label">checked=indeterminate</p>
+    <span class="checkbox checkbox--checked-indeterminate">
+      <span class="checkbox__choice__control">
+        <span class="checkbox__checkbox">
+          <input class="checkbox__input" type="checkbox" name="" value="">
+          <div class="checkbox__backdrop"></div>
+          <span class="checkbox__icon">
+            <span class="checkbox__icon-3"><span class="checkbox__icon-3-glyph" aria-hidden="true"><svg viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg"><path d="M 5 10 C 5 9.586 5.336 9.25 5.75 9.25 H 14.25 C 14.664 9.25 15 9.586 15 10 S 14.664 10.75 14.25 10.75 H 5.75 C 5.336 10.75 5 10.414 5 10 Z" fill-rule="evenodd"/></svg></span></span>
+            <div class="checkbox__icon-2"></div>
+          </span>
+        </span>
+      </span>
+      <span class="checkbox__choice__label">
+        <span class="checkbox__label">Save this product</span>
+      </span>
     </span>
   </div>
   <div class="showcase__item">
     <p class="showcase__label">labelHidden=true</p>
-    <span class="checkbox" data-label-hidden="true">
-      <input class="checkbox__input" type="checkbox" name="" value="">
-      <div class="checkbox__backdrop"></div>
+    <span class="checkbox checkbox--checked-unchecked" data-label-hidden="true">
+      <span class="checkbox__choice__control">
+        <span class="checkbox__checkbox">
+          <input class="checkbox__input" type="checkbox" name="" value="">
+          <div class="checkbox__backdrop"></div>
+          <span class="checkbox__icon">
+            <span class="checkbox__icon-3"><span class="checkbox__icon-3-glyph" aria-hidden="true"><svg viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg"><path d="M 5 10 C 5 9.586 5.336 9.25 5.75 9.25 H 14.25 C 14.664 9.25 15 9.586 15 10 S 14.664 10.75 14.25 10.75 H 5.75 C 5.336 10.75 5 10.414 5 10 Z" fill-rule="evenodd"/></svg></span></span>
+            <div class="checkbox__icon-2">
+              <span class="checkbox__icon-2-unchecked" aria-hidden="true"><svg viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg"><path d="M 1.5 5.5 L 3.44655 8.22517 C 3.72862 8.62007 4.30578 8.64717 4.62362 8.28044 L 10.5 1.5" fill="none" opacity="0" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="2" stroke-dashoffset="2"/></svg></span>
+            </div>
+          </span>
+        </span>
+      </span>
+      <span class="checkbox__choice__label">
+        <span class="checkbox__label">Save this product</span>
+      </span>
     </span>
   </div>
   <div class="showcase__item">
     <p class="showcase__label">disabled=true</p>
-    <span class="checkbox" data-disabled="true">
-      <input class="checkbox__input" type="checkbox" name="" value="">
-      <div class="checkbox__backdrop"></div>
+    <span class="checkbox checkbox--checked-unchecked" data-disabled="true">
+      <span class="checkbox__choice__control">
+        <span class="checkbox__checkbox">
+          <input class="checkbox__input" type="checkbox" name="" value="">
+          <div class="checkbox__backdrop"></div>
+          <span class="checkbox__icon">
+            <span class="checkbox__icon-3"><span class="checkbox__icon-3-glyph" aria-hidden="true"><svg viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg"><path d="M 5 10 C 5 9.586 5.336 9.25 5.75 9.25 H 14.25 C 14.664 9.25 15 9.586 15 10 S 14.664 10.75 14.25 10.75 H 5.75 C 5.336 10.75 5 10.414 5 10 Z" fill-rule="evenodd"/></svg></span></span>
+            <div class="checkbox__icon-2">
+              <span class="checkbox__icon-2-unchecked" aria-hidden="true"><svg viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg"><path d="M 1.5 5.5 L 3.44655 8.22517 C 3.72862 8.62007 4.30578 8.64717 4.62362 8.28044 L 10.5 1.5" fill="none" opacity="0" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="2" stroke-dashoffset="2"/></svg></span>
+            </div>
+          </span>
+        </span>
+      </span>
+      <span class="checkbox__choice__label">
+        <span class="checkbox__label">Save this product</span>
+      </span>
     </span>
   </div>
 </section>

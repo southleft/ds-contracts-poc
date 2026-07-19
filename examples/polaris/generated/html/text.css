@@ -1,4 +1,4 @@
-/* Text — from polaris.text v0.2.0 (core/emit-html.ts) */
+/* Text — from polaris.text v0.3.0 (core/emit-html.ts) */
 
 .text, .text *, .text *::before, .text *::after {
   box-sizing: border-box;
@@ -10,6 +10,7 @@
   justify-content: center;
   margin: 0;
   border: 0;
+  display: block;
 }
 
 .text--tone-success {

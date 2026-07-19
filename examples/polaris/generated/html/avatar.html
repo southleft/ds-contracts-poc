@@ -1,5 +1,5 @@
 <!--
-  Avatar — static HTML+CSS emitted from contract polaris.avatar v0.2.0 by core/emit-html.ts.
+  Avatar — static HTML+CSS emitted from contract polaris.avatar v0.3.0 by core/emit-html.ts.
   Token values arrive via CSS custom properties (the same custom-property names the CSS Modules
   bind) — include the token stylesheet (src/styles/tokens.css) on the page or nothing resolves.
   Fidelity: no events, no interactivity beyond CSS states (:hover/:focus-visible/:disabled).
@@ -40,6 +40,12 @@
   <div class="showcase__item">
     <p class="showcase__label">customer=true</p>
     <span class="avatar avatar--size-md" data-customer="true">
+      <span class="avatar__initials">Avatar</span>
+    </span>
+  </div>
+  <div class="showcase__item">
+    <p class="showcase__label">withInitials=true</p>
+    <span class="avatar avatar--size-md" data-with-initials="true">
       <span class="avatar__initials">Avatar</span>
     </span>
   </div>

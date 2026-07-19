@@ -1,4 +1,4 @@
-/* ProgressBar — from polaris.progress-bar v0.2.0 (core/emit-html.ts) */
+/* ProgressBar — from polaris.progress-bar v0.3.0 (core/emit-html.ts) */
 
 .progress-bar, .progress-bar *, .progress-bar *::before, .progress-bar *::after {
   box-sizing: border-box;
@@ -13,6 +13,7 @@
   border-bottom-left-radius: var(--imported-shared-size-4);
   border-bottom-right-radius: var(--imported-shared-size-4);
   border-top-right-radius: var(--imported-shared-size-4);
+  display: block;
   overflow-x: hidden;
   overflow-y: hidden;
 }
@@ -45,9 +46,27 @@
   height: 32px;
 }
 
-.progress-bar__indicator {
+.progress-bar__progress {
+  bottom: var(--imported-progress-bar-progress-bottom);
+  left: var(--imported-progress-bar-progress-left);
   min-height: var(--imported-shared-size-0);
   min-width: var(--imported-shared-size-0);
+  right: var(--imported-progress-bar-progress-right);
+  top: var(--imported-shared-size-0);
+  vertical-align: var(--imported-progress-bar-progress-vertical-align);
+  display: none;
+  appearance: auto;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  position: absolute;
+  text-wrap-mode: nowrap;
+}
+
+.progress-bar__indicator {
+  display: flex;
+  min-height: var(--imported-shared-size-0);
+  min-width: var(--imported-shared-size-0);
+  display: block;
   transition-duration: 0.5s;
   transition-property: transform;
   transition-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1);
@@ -67,6 +86,31 @@
 
 .progress-bar--tone-critical .progress-bar__indicator {
   background-color: var(--p-color-bg-fill-critical);
+}
+
+.progress-bar__label {
+  left: var(--imported-shared-size-0);
+  min-height: var(--imported-shared-size-0);
+  min-width: var(--imported-shared-size-0);
+  right: var(--imported-progress-bar-label-right);
+  top: var(--imported-shared-size-0);
+  display: none;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  position: absolute;
+  text-wrap-mode: nowrap;
+}
+
+.progress-bar--size-large .progress-bar__label {
+  bottom: var(--imported-progress-bar-label-bottom-large);
+}
+
+.progress-bar--size-medium .progress-bar__label {
+  bottom: var(--imported-progress-bar-label-bottom-medium);
+}
+
+.progress-bar--size-small .progress-bar__label {
+  bottom: var(--imported-progress-bar-label-bottom-small);
 }
 
 /* showcase chrome */

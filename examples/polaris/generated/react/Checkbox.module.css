@@ -1,5 +1,5 @@
 /* GENERATED FILE — DO NOT EDIT.
- * Source of truth: contracts/checkbox.contract.json (polaris.checkbox v0.2.0)
+ * Source of truth: contracts/checkbox.contract.json (polaris.checkbox v0.3.0)
  * Regenerate with: npm run generate
  */
 
@@ -22,6 +22,43 @@
   cursor: default;
 }
 
+.choice__control {
+  display: flex;
+  align-items: stretch;
+  flex-shrink: var(--imported-checkbox-choice-control-flex-shrink);
+  margin-right: var(--imported-checkbox-choice-control-margin-right);
+  cursor: pointer;
+}
+
+.root:disabled .choice__control {
+  cursor: default;
+}
+
+.checkbox {
+  display: flex;
+  bottom: var(--imported-shared-size-0);
+  left: var(--imported-shared-size-0);
+  margin-bottom: var(--imported-shared-size-1);
+  margin-left: var(--imported-shared-size-1);
+  margin-right: var(--imported-shared-size-1);
+  margin-top: var(--imported-shared-size-1);
+  right: var(--imported-shared-size-0);
+  top: var(--imported-shared-size-0);
+  display: block;
+  cursor: pointer;
+  position: relative;
+  position: relative;
+}
+
+.root:disabled .checkbox {
+  cursor: default;
+}
+
+.checkbox:has(> .input:focus-visible) {
+  outline-style: solid;
+  outline-offset: 2px;
+}
+
 .input {
   position: absolute;
   inset: 0;
@@ -38,11 +75,13 @@
   left: var(--imported-shared-size-0);
   min-height: var(--imported-shared-size-0);
   min-width: var(--imported-shared-size-0);
-  opacity: var(--imported-shared-num-0);
+  opacity: var(--imported-checkbox-input-opacity);
   outline-color: var(--imported-checkbox-input-outline-color);
   right: var(--imported-shared-size-0);
   top: var(--imported-shared-size-0);
   z-index: var(--imported-checkbox-input-z-index);
+  display: block;
+  position: absolute;
   appearance: auto;
   cursor: default;
   font-family: Arial;
@@ -63,23 +102,18 @@
   height: 20px;
   flex-shrink: 0;
   border-width: var(--p-border-width-0);
-  border-color: var(--p-color-input-border);
-  background-color: var(--imported-shared-color-ffffff);
   border-bottom-left-radius: var(--imported-shared-size-4);
   border-bottom-right-radius: var(--imported-shared-size-4);
-  border-left-color: var(--imported-shared-color-8a8a8a);
-  border-right-color: var(--imported-shared-color-8a8a8a);
-  border-top-color: var(--imported-shared-color-8a8a8a);
   border-top-left-radius: var(--imported-shared-size-4);
   border-top-right-radius: var(--imported-shared-size-4);
   bottom: var(--imported-shared-size-0);
-  box-shadow: var(--imported-checkbox-backdrop-box-shadow);
   left: var(--imported-shared-size-0);
   min-height: var(--imported-shared-size-0);
   min-width: var(--imported-shared-size-0);
   right: var(--imported-shared-size-0);
   top: var(--imported-shared-size-0);
   border-style: solid;
+  display: block;
   border-bottom-style: solid;
   border-left-style: solid;
   border-right-style: solid;
@@ -90,6 +124,66 @@
   transition-duration: 0.1s, 0.1s, 0.1s;
   transition-property: border-color, border-width, box-shadow;
   transition-timing-function: cubic-bezier(0.19, 0.91, 0.38, 1), cubic-bezier(0.19, 0.91, 0.38, 1), cubic-bezier(0.19, 0.91, 0.38, 1);
+}
+
+.checked-checked .backdrop {
+  background-color: var(--imported-checkbox-backdrop-background-color-checked);
+}
+
+.checked-checked .backdrop {
+  border-left-color: var(--imported-checkbox-backdrop-border-left-color-checked);
+}
+
+.checked-checked .backdrop {
+  border-right-color: var(--imported-checkbox-backdrop-border-right-color-checked);
+}
+
+.checked-checked .backdrop {
+  border-top-color: var(--imported-checkbox-backdrop-border-top-color-checked);
+}
+
+.checked-checked .backdrop {
+  box-shadow: var(--imported-checkbox-backdrop-box-shadow-checked);
+}
+
+.checked-indeterminate .backdrop {
+  background-color: var(--imported-checkbox-backdrop-background-color-indeterminate);
+}
+
+.checked-indeterminate .backdrop {
+  border-left-color: var(--imported-checkbox-backdrop-border-left-color-indeterminate);
+}
+
+.checked-indeterminate .backdrop {
+  border-right-color: var(--imported-checkbox-backdrop-border-right-color-indeterminate);
+}
+
+.checked-indeterminate .backdrop {
+  border-top-color: var(--imported-checkbox-backdrop-border-top-color-indeterminate);
+}
+
+.checked-indeterminate .backdrop {
+  box-shadow: var(--imported-checkbox-backdrop-box-shadow-indeterminate);
+}
+
+.checked-unchecked .backdrop {
+  background-color: var(--imported-checkbox-backdrop-background-color-unchecked);
+}
+
+.checked-unchecked .backdrop {
+  border-left-color: var(--imported-checkbox-backdrop-border-left-color-unchecked);
+}
+
+.checked-unchecked .backdrop {
+  border-right-color: var(--imported-checkbox-backdrop-border-right-color-unchecked);
+}
+
+.checked-unchecked .backdrop {
+  border-top-color: var(--imported-checkbox-backdrop-border-top-color-unchecked);
+}
+
+.checked-unchecked .backdrop {
+  box-shadow: var(--imported-checkbox-backdrop-box-shadow-unchecked);
 }
 
 .root:disabled .backdrop {
@@ -104,18 +198,239 @@
   border-color: var(--p-color-input-border-hover);
 }
 
-.root:hover:not(:disabled) .backdrop {
-  background-color: var(--imported-shared-color-fafafa);
-}
-
-.root:active:not(:disabled) .backdrop {
-  background-color: var(--imported-shared-color-fafafa);
-}
-
 .root:disabled .backdrop {
   background-color: var(--imported-checkbox-backdrop-background-color-state-disabled);
 }
 
-.root:focus-visible .backdrop {
-  background-color: var(--imported-shared-color-fafafa);
+.icon {
+  display: flex;
+  min-height: var(--imported-shared-size-0);
+  min-width: var(--imported-shared-size-0);
+  display: block;
+  position: absolute;
+  aspect-ratio: 1 / 1;
+  cursor: pointer;
+  pointer-events: none;
+}
+
+.checked-checked .icon {
+  bottom: var(--imported-checkbox-icon-bottom-checked);
+}
+
+.checked-checked .icon {
+  left: var(--imported-checkbox-icon-left-checked);
+}
+
+.checked-checked .icon {
+  margin-bottom: var(--imported-checkbox-icon-margin-bottom-checked);
+}
+
+.checked-checked .icon {
+  margin-left: var(--imported-checkbox-icon-margin-left-checked);
+}
+
+.checked-checked .icon {
+  margin-right: var(--imported-checkbox-icon-margin-right-checked);
+}
+
+.checked-checked .icon {
+  margin-top: var(--imported-checkbox-icon-margin-top-checked);
+}
+
+.checked-checked .icon {
+  opacity: var(--imported-checkbox-icon-opacity-checked);
+}
+
+.checked-checked .icon {
+  right: var(--imported-checkbox-icon-right-checked);
+}
+
+.checked-checked .icon {
+  top: var(--imported-checkbox-icon-top-checked);
+}
+
+.checked-indeterminate .icon {
+  bottom: var(--imported-checkbox-icon-bottom-indeterminate);
+}
+
+.checked-indeterminate .icon {
+  left: var(--imported-checkbox-icon-left-indeterminate);
+}
+
+.checked-indeterminate .icon {
+  margin-bottom: var(--imported-checkbox-icon-margin-bottom-indeterminate);
+}
+
+.checked-indeterminate .icon {
+  margin-left: var(--imported-checkbox-icon-margin-left-indeterminate);
+}
+
+.checked-indeterminate .icon {
+  margin-right: var(--imported-checkbox-icon-margin-right-indeterminate);
+}
+
+.checked-indeterminate .icon {
+  margin-top: var(--imported-checkbox-icon-margin-top-indeterminate);
+}
+
+.checked-indeterminate .icon {
+  opacity: var(--imported-checkbox-icon-opacity-indeterminate);
+}
+
+.checked-indeterminate .icon {
+  right: var(--imported-checkbox-icon-right-indeterminate);
+}
+
+.checked-indeterminate .icon {
+  top: var(--imported-checkbox-icon-top-indeterminate);
+}
+
+.checked-unchecked .icon {
+  bottom: var(--imported-checkbox-icon-bottom-unchecked);
+}
+
+.checked-unchecked .icon {
+  left: var(--imported-checkbox-icon-left-unchecked);
+}
+
+.checked-unchecked .icon {
+  margin-bottom: var(--imported-checkbox-icon-margin-bottom-unchecked);
+}
+
+.checked-unchecked .icon {
+  margin-left: var(--imported-checkbox-icon-margin-left-unchecked);
+}
+
+.checked-unchecked .icon {
+  margin-right: var(--imported-checkbox-icon-margin-right-unchecked);
+}
+
+.checked-unchecked .icon {
+  margin-top: var(--imported-checkbox-icon-margin-top-unchecked);
+}
+
+.checked-unchecked .icon {
+  opacity: var(--imported-checkbox-icon-opacity-unchecked);
+}
+
+.checked-unchecked .icon {
+  right: var(--imported-checkbox-icon-right-unchecked);
+}
+
+.checked-unchecked .icon {
+  top: var(--imported-checkbox-icon-top-unchecked);
+}
+
+.root:disabled .icon {
+  cursor: default;
+}
+
+.icon-3 svg {
+  width: 22px;
+  height: 22px;
+}
+
+.icon-3 {
+  display: inline-flex;
+  flex-shrink: 0;
+  margin-left: var(--imported-shared-size-1);
+  margin-right: var(--imported-shared-size-1);
+  min-height: var(--imported-shared-size-0);
+  min-width: var(--imported-shared-size-0);
+  display: block;
+  cursor: pointer;
+  max-height: 100%;
+  max-width: 100%;
+  pointer-events: none;
+}
+
+.checked-unchecked .icon-3 {
+  display: none;
+}
+
+.checked-checked .icon-3 {
+  display: none;
+}
+
+.root[data-disabled] .icon-3 {
+  display: none;
+}
+
+.icon-3Glyph {
+  display: inline-flex;
+}
+
+.icon-2 {
+  display: flex;
+  bottom: var(--imported-shared-size-0);
+  color: var(--imported-checkbox-icon-2-color);
+  left: var(--imported-shared-size-0);
+  min-height: var(--imported-shared-size-0);
+  min-width: var(--imported-shared-size-0);
+  right: var(--imported-shared-size-0);
+  top: var(--imported-shared-size-0);
+  display: block;
+  position: absolute;
+  cursor: pointer;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  pointer-events: none;
+  text-rendering: geometricprecision;
+}
+
+.checked-indeterminate .icon-2 {
+  display: none;
+}
+
+.root[data-disabled] .icon-2 {
+  display: none;
+}
+
+.icon-2-unchecked svg {
+  width: 14px;
+  height: 14px;
+}
+
+.icon-2-unchecked {
+  display: inline-flex;
+  flex-shrink: 0;
+}
+
+.icon-2-checked svg {
+  width: 14px;
+  height: 14px;
+}
+
+.icon-2-checked {
+  display: inline-flex;
+  flex-shrink: 0;
+}
+
+.choice__label {
+  display: flex;
+  display: block;
+  cursor: pointer;
+}
+
+.root:disabled .choice__label {
+  cursor: default;
+}
+
+.root:disabled .choice__label {
+  color: var(--imported-shared-color-b5b5b5);
+}
+
+.label {
+  min-height: var(--imported-shared-size-0);
+  min-width: var(--imported-shared-size-0);
+  display: inline;
+  cursor: pointer;
+}
+
+.root:disabled .label {
+  cursor: default;
+}
+
+.root:disabled .label {
+  color: var(--imported-shared-color-b5b5b5);
 }
