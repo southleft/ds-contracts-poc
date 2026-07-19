@@ -20,95 +20,65 @@
     {
       "cell": "Size=Medium",
       "kind": "base",
-      "pctExactUnmasked": 54.88,
-      "pctAAUnmasked": 54.27,
-      "pctAAMasked": 54.27,
+      "pctExactUnmasked": 100,
+      "pctAAUnmasked": 1.22,
+      "pctAAMasked": 1.22,
       "maskCoveragePct": 0,
-      "canvasPx": "216x96",
+      "canvasPx": "120x120",
       "realPx": "120x120",
-      "inkCanvasPct": 0,
-      "inkRealPct": 54.85,
-      "note": "CANVAS SIDE (NEARLY) BLANK: canvas ink 0% vs real ink 54.85% of the union canvas — the masked % understates the miss; CONTRACT/EMITTER GAP (channel table: fill/radius match): the img part is not in the compiled spec (raster content has no canvas projection) and the root carries width but no height — the canvas draws a white-on-white box with nothing visible; realPx quotes the real 24-80px CSS card"
+      "inkCanvasPct": 100,
+      "inkRealPct": 98.72
     },
     {
       "cell": "Size=Extra Small",
       "kind": "base",
-      "pctExactUnmasked": 16,
-      "pctAAUnmasked": 15.22,
-      "pctAAMasked": 15.22,
+      "pctExactUnmasked": 100,
+      "pctAAUnmasked": 3.99,
+      "pctAAMasked": 3.99,
       "maskCoveragePct": 0,
-      "canvasPx": "144x96",
+      "canvasPx": "48x48",
       "realPx": "48x48",
-      "inkCanvasPct": 0,
-      "inkRealPct": 16,
-      "note": "CANVAS SIDE (NEARLY) BLANK: canvas ink 0% vs real ink 16% of the union canvas — the masked % understates the miss; CONTRACT/EMITTER GAP (channel table: fill/radius match): the img part is not in the compiled spec (raster content has no canvas projection) and the root carries width but no height — the canvas draws a white-on-white box with nothing visible; realPx quotes the real 24-80px CSS card"
+      "inkCanvasPct": 100,
+      "inkRealPct": 96.01
     },
     {
       "cell": "Size=Small",
       "kind": "base",
-      "pctExactUnmasked": 36.84,
-      "pctAAUnmasked": 35.87,
-      "pctAAMasked": 35.87,
+      "pctExactUnmasked": 100,
+      "pctAAUnmasked": 2.75,
+      "pctAAMasked": 2.75,
       "maskCoveragePct": 0,
-      "canvasPx": "176x96",
+      "canvasPx": "80x80",
       "realPx": "80x80",
-      "inkCanvasPct": 0,
-      "inkRealPct": 36.79,
-      "note": "CANVAS SIDE (NEARLY) BLANK: canvas ink 0% vs real ink 36.79% of the union canvas — the masked % understates the miss; CONTRACT/EMITTER GAP (channel table: fill/radius match): the img part is not in the compiled spec (raster content has no canvas projection) and the root carries width but no height — the canvas draws a white-on-white box with nothing visible; realPx quotes the real 24-80px CSS card"
+      "inkCanvasPct": 100,
+      "inkRealPct": 97.13
     },
     {
       "cell": "Size=Large",
       "kind": "base",
-      "pctExactUnmasked": 62.07,
-      "pctAAUnmasked": 61.68,
-      "pctAAMasked": 61.68,
+      "pctExactUnmasked": 100,
+      "pctAAUnmasked": 0.69,
+      "pctAAMasked": 0.69,
       "maskCoveragePct": 0,
-      "canvasPx": "256x96",
+      "canvasPx": "160x160",
       "realPx": "160x160",
-      "inkCanvasPct": 0,
-      "inkRealPct": 62.05,
-      "note": "CANVAS SIDE (NEARLY) BLANK: canvas ink 0% vs real ink 62.05% of the union canvas — the masked % understates the miss; CONTRACT/EMITTER GAP (channel table: fill/radius match): the img part is not in the compiled spec (raster content has no canvas projection) and the root carries width but no height — the canvas draws a white-on-white box with nothing visible; realPx quotes the real 24-80px CSS card"
+      "inkCanvasPct": 100,
+      "inkRealPct": 99.28
     }
   ],
   "summary": {
     "cells": 4,
-    "meanExactUnmasked": 42.45,
-    "meanAAUnmasked": 41.76,
-    "meanAAMasked": 41.76,
-    "maxAAMasked": 61.68,
-    "worstCell": "Size=Large",
-    "cellsOver10Masked": [
-      {
-        "cell": "Size=Medium",
-        "pctAAMasked": 54.27,
-        "note": "CANVAS SIDE (NEARLY) BLANK: canvas ink 0% vs real ink 54.85% of the union canvas — the masked % understates the miss; CONTRACT/EMITTER GAP (channel table: fill/radius match): the img part is not in the compiled spec (raster content has no canvas projection) and the root carries width but no height — the canvas draws a white-on-white box with nothing visible; realPx quotes the real 24-80px CSS card"
-      },
-      {
-        "cell": "Size=Extra Small",
-        "pctAAMasked": 15.22,
-        "note": "CANVAS SIDE (NEARLY) BLANK: canvas ink 0% vs real ink 16% of the union canvas — the masked % understates the miss; CONTRACT/EMITTER GAP (channel table: fill/radius match): the img part is not in the compiled spec (raster content has no canvas projection) and the root carries width but no height — the canvas draws a white-on-white box with nothing visible; realPx quotes the real 24-80px CSS card"
-      },
-      {
-        "cell": "Size=Small",
-        "pctAAMasked": 35.87,
-        "note": "CANVAS SIDE (NEARLY) BLANK: canvas ink 0% vs real ink 36.79% of the union canvas — the masked % understates the miss; CONTRACT/EMITTER GAP (channel table: fill/radius match): the img part is not in the compiled spec (raster content has no canvas projection) and the root carries width but no height — the canvas draws a white-on-white box with nothing visible; realPx quotes the real 24-80px CSS card"
-      },
-      {
-        "cell": "Size=Large",
-        "pctAAMasked": 61.68,
-        "note": "CANVAS SIDE (NEARLY) BLANK: canvas ink 0% vs real ink 62.05% of the union canvas — the masked % understates the miss; CONTRACT/EMITTER GAP (channel table: fill/radius match): the img part is not in the compiled spec (raster content has no canvas projection) and the root carries width but no height — the canvas draws a white-on-white box with nothing visible; realPx quotes the real 24-80px CSS card"
-      }
-    ],
-    "blankCanvasCells": [
-      "Size=Medium",
-      "Size=Extra Small",
-      "Size=Small",
-      "Size=Large"
-    ]
+    "meanExactUnmasked": 100,
+    "meanAAUnmasked": 2.16,
+    "meanAAMasked": 2.16,
+    "maxAAMasked": 3.99,
+    "worstCell": "Size=Extra Small",
+    "cellsOver10Masked": [],
+    "blankCanvasCells": []
   },
   "acceptance": {
-    "maskedMeanLE5": false,
+    "maskedMeanLE5": true,
     "allCellsOver10Named": true,
-    "noBlankCanvasCells": false
+    "noBlankCanvasCells": true
   }
 }

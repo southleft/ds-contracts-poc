@@ -71,6 +71,9 @@ const COMPONENTS = [
                 "counter": "MIN",
                 "stretchChildren": true
               },
+              "margins": {
+                "right": 8
+              },
               "children": [
                 {
                   "type": "frame",
@@ -79,6 +82,12 @@ const COMPONENTS = [
                     "mode": "HORIZONTAL",
                     "primary": "MIN",
                     "counter": "MIN"
+                  },
+                  "margins": {
+                    "bottom": 1,
+                    "left": 1,
+                    "right": 1,
+                    "top": 1
                   },
                   "children": [
                     {
@@ -95,6 +104,7 @@ const COMPONENTS = [
                         "bottomRightRadius": "imported/shared/size-4",
                         "topLeftRadius": "imported/shared/size-4",
                         "topRightRadius": "imported/shared/size-4",
+                        "minHeight": "imported/shared/size-0",
                         "minWidth": "imported/shared/size-0"
                       },
                       "fill": "imported/checkbox/backdrop/background-color/unchecked",
@@ -124,7 +134,14 @@ const COMPONENTS = [
                       },
                       "insetOverlay": true,
                       "bindings": {
+                        "minHeight": "imported/shared/size-0",
                         "minWidth": "imported/shared/size-0"
+                      },
+                      "margins": {
+                        "bottom": 2,
+                        "left": 2,
+                        "right": 2,
+                        "top": 2
                       },
                       "opacity": 0,
                       "children": [
@@ -138,13 +155,14 @@ const COMPONENTS = [
                           },
                           "insetOverlay": true,
                           "bindings": {
+                            "minHeight": "imported/shared/size-0",
                             "minWidth": "imported/shared/size-0"
                           },
                           "children": [
                             {
                               "type": "svg",
                               "name": "icon-2-unchecked",
-                              "svg": "<svg viewBox=\"0 0 14 14\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 1.5 5.5 L 3.44655 8.22517 C 3.72862 8.62007 4.30578 8.64717 4.62362 8.28044 L 10.5 1.5\" fill=\"none\" opacity=\"0\" stroke=\"#ffffff\" stroke-width=\"14\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-dasharray=\"2\" stroke-dashoffset=\"2\"/></svg>",
+                              "svg": "<svg viewBox=\"0 0 14 14\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 1.5 5.5 L 3.44655 8.22517 C 3.72862 8.62007 4.30578 8.64717 4.62362 8.28044 L 10.5 1.5\" fill=\"none\" opacity=\"0\" stroke=\"#ffffff\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-dasharray=\"2\" stroke-dashoffset=\"2\"/></svg>",
                               "iconSize": 14
                             }
                           ]
@@ -168,6 +186,7 @@ const COMPONENTS = [
                   "type": "text",
                   "name": "label",
                   "bindings": {
+                    "minHeight": "imported/shared/size-0",
                     "minWidth": "imported/shared/size-0"
                   },
                   "characters": "Save this product",
@@ -205,6 +224,9 @@ const COMPONENTS = [
                 "counter": "MIN",
                 "stretchChildren": true
               },
+              "margins": {
+                "right": 8
+              },
               "children": [
                 {
                   "type": "frame",
@@ -213,6 +235,12 @@ const COMPONENTS = [
                     "mode": "HORIZONTAL",
                     "primary": "MIN",
                     "counter": "MIN"
+                  },
+                  "margins": {
+                    "bottom": 1,
+                    "left": 1,
+                    "right": 1,
+                    "top": 1
                   },
                   "children": [
                     {
@@ -229,6 +257,7 @@ const COMPONENTS = [
                         "bottomRightRadius": "imported/shared/size-4",
                         "topLeftRadius": "imported/shared/size-4",
                         "topRightRadius": "imported/shared/size-4",
+                        "minHeight": "imported/shared/size-0",
                         "minWidth": "imported/shared/size-0"
                       },
                       "fill": "imported/checkbox/backdrop/background-color/checked",
@@ -258,7 +287,14 @@ const COMPONENTS = [
                       },
                       "insetOverlay": true,
                       "bindings": {
+                        "minHeight": "imported/shared/size-0",
                         "minWidth": "imported/shared/size-0"
+                      },
+                      "margins": {
+                        "bottom": 2,
+                        "left": 2,
+                        "right": 2,
+                        "top": 2
                       },
                       "opacity": 1,
                       "children": [
@@ -272,13 +308,14 @@ const COMPONENTS = [
                           },
                           "insetOverlay": true,
                           "bindings": {
+                            "minHeight": "imported/shared/size-0",
                             "minWidth": "imported/shared/size-0"
                           },
                           "children": [
                             {
                               "type": "svg",
                               "name": "icon-2-checked",
-                              "svg": "<svg viewBox=\"0 0 14 14\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 1.5 5.5 L 3.44655 8.22517 C 3.72862 8.62007 4.30578 8.64717 4.62362 8.28044 L 10.5 1.5\" fill=\"none\" stroke=\"#ffffff\" stroke-width=\"14\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-dasharray=\"2\"/></svg>",
+                              "svg": "<svg viewBox=\"0 0 14 14\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 1.5 5.5 L 3.44655 8.22517 C 3.72862 8.62007 4.30578 8.64717 4.62362 8.28044 L 10.5 1.5\" fill=\"none\" stroke=\"#ffffff\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-dasharray=\"2\"/></svg>",
                               "iconSize": 14
                             }
                           ]
@@ -302,6 +339,7 @@ const COMPONENTS = [
                   "type": "text",
                   "name": "label",
                   "bindings": {
+                    "minHeight": "imported/shared/size-0",
                     "minWidth": "imported/shared/size-0"
                   },
                   "characters": "Save this product",
@@ -339,6 +377,9 @@ const COMPONENTS = [
                 "counter": "MIN",
                 "stretchChildren": true
               },
+              "margins": {
+                "right": 8
+              },
               "children": [
                 {
                   "type": "frame",
@@ -347,6 +388,12 @@ const COMPONENTS = [
                     "mode": "HORIZONTAL",
                     "primary": "MIN",
                     "counter": "MIN"
+                  },
+                  "margins": {
+                    "bottom": 1,
+                    "left": 1,
+                    "right": 1,
+                    "top": 1
                   },
                   "children": [
                     {
@@ -363,6 +410,7 @@ const COMPONENTS = [
                         "bottomRightRadius": "imported/shared/size-4",
                         "topLeftRadius": "imported/shared/size-4",
                         "topRightRadius": "imported/shared/size-4",
+                        "minHeight": "imported/shared/size-0",
                         "minWidth": "imported/shared/size-0"
                       },
                       "fill": "imported/checkbox/backdrop/background-color/indeterminate",
@@ -390,8 +438,22 @@ const COMPONENTS = [
                         "primary": "MIN",
                         "counter": "MIN"
                       },
+                      "insetOverlay": true,
+                      "insetOffsets": {
+                        "top": -2,
+                        "right": -2,
+                        "bottom": -2,
+                        "left": -2
+                      },
                       "bindings": {
+                        "minHeight": "imported/shared/size-0",
                         "minWidth": "imported/shared/size-0"
+                      },
+                      "margins": {
+                        "bottom": 0,
+                        "left": 0,
+                        "right": 0,
+                        "top": 0
                       },
                       "opacity": 1,
                       "children": [
@@ -420,6 +482,7 @@ const COMPONENTS = [
                   "type": "text",
                   "name": "label",
                   "bindings": {
+                    "minHeight": "imported/shared/size-0",
                     "minWidth": "imported/shared/size-0"
                   },
                   "characters": "Save this product",
@@ -676,9 +739,13 @@ function applyInsetOverlay(parent, childNode, childSpec) {
     parent.insertChild(0, childNode);
     childNode.layoutPositioning = 'ABSOLUTE';
     childNode.constraints = { horizontal: 'STRETCH', vertical: 'STRETCH' };
-    childNode.x = 0;
-    childNode.y = 0;
-    childNode.resize(Math.max(1, parent.width), Math.max(1, parent.height));
+    const o = childSpec.insetOffsets || { top: 0, right: 0, bottom: 0, left: 0 };
+    childNode.x = o.left;
+    childNode.y = o.top;
+    childNode.resize(
+      Math.max(1, parent.width - o.left - o.right),
+      Math.max(1, parent.height - o.top - o.bottom),
+    );
   } catch (e) { /* parent not auto-layout — leave in flow */ }
 }
 

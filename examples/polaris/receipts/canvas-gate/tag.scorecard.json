@@ -28,7 +28,7 @@
       "realPx": "152x48",
       "inkCanvasPct": 0,
       "inkRealPct": 48.63,
-      "note": "CANVAS SIDE (NEARLY) BLANK: canvas ink 0% vs real ink 48.63% of the union canvas — the masked % understates the miss; EMITTER-DEFECT (channel table confirms): contract binds root padding-left/right = {imported.tag.root.padding-left} = 6px, but emit-figma-script applyTokens handles only the padding-inline/padding-block shorthands — longhand padding channels are silently dropped, so the canvas pill draws 12px narrower than the real Tag"
+      "note": "CANVAS SIDE (NEARLY) BLANK: canvas ink 0% vs real ink 48.63% of the union canvas — the masked % understates the miss; NAMED PROMOTION REFUSAL (tag LEDGER: part-presence-uncorrelated): the default label subtree (text > label, inBase) is present in 12/16 combos and the presence set does not factor per-axis — the parts were NOT promoted, so the contract carries no default-state label at all; the canvas pill draws label-less while the real Tag renders \"Wholesale\". The engine draws everything the contract carries"
     },
     {
       "cell": "Size=large, State=Disabled",
@@ -42,7 +42,7 @@
       "realPx": "152x48",
       "inkCanvasPct": 0,
       "inkRealPct": 48.55,
-      "note": "CANVAS SIDE (NEARLY) BLANK: canvas ink 0% vs real ink 48.55% of the union canvas — the masked % understates the miss; EMITTER-DEFECT (channel table confirms): contract binds root padding-left/right = {imported.tag.root.padding-left} = 6px, but emit-figma-script applyTokens handles only the padding-inline/padding-block shorthands — longhand padding channels are silently dropped, so the canvas pill draws 12px narrower than the real Tag"
+      "note": "CANVAS SIDE (NEARLY) BLANK: canvas ink 0% vs real ink 48.55% of the union canvas — the masked % understates the miss; NAMED PROMOTION REFUSAL (tag LEDGER: part-presence-uncorrelated): the default label subtree (text > label, inBase) is present in 12/16 combos and the presence set does not factor per-axis — the parts were NOT promoted, so the contract carries no default-state label at all; the canvas pill draws label-less while the real Tag renders \"Wholesale\". The engine draws everything the contract carries"
     },
     {
       "cell": "Size=large, State=Active",
@@ -56,7 +56,7 @@
       "realPx": "152x48",
       "inkCanvasPct": 5.65,
       "inkRealPct": 97.26,
-      "note": "CANVAS SIDE (NEARLY) BLANK: canvas ink 5.65% vs real ink 97.26% of the union canvas — the masked % understates the miss; EMITTER-DEFECT (channel table confirms): contract binds root padding-left/right = {imported.tag.root.padding-left} = 6px, but emit-figma-script applyTokens handles only the padding-inline/padding-block shorthands — longhand padding channels are silently dropped, so the canvas pill draws 12px narrower than the real Tag"
+      "note": "CANVAS SIDE (NEARLY) BLANK: canvas ink 5.65% vs real ink 97.26% of the union canvas — the masked % understates the miss; NAMED PROMOTION REFUSAL (tag LEDGER: part-presence-uncorrelated): the default label subtree (text > label, inBase) is present in 12/16 combos and the presence set does not factor per-axis — the parts were NOT promoted, so the contract carries no default-state label at all; the canvas pill draws label-less while the real Tag renders \"Wholesale\". The engine draws everything the contract carries"
     },
     {
       "cell": "Size=large, State=Focus Visible",
@@ -70,7 +70,7 @@
       "realPx": "152x48",
       "inkCanvasPct": 5.65,
       "inkRealPct": 97.26,
-      "note": "CANVAS SIDE (NEARLY) BLANK: canvas ink 5.65% vs real ink 97.26% of the union canvas — the masked % understates the miss; real side :focus-visible did not match (component root is not keyboard-focusable in this mount) — the canvas draws the contract's focus preview; the real side shows the resting paint; outline→stroke approximation (documented canvas fidelity note): the web focus ring is an outline OUTSIDE the border box; the canvas draws it as a bound stroke inside layout — geometry shifts by the ring width; EMITTER-DEFECT (channel table confirms): contract binds root padding-left/right = {imported.tag.root.padding-left} = 6px, but emit-figma-script applyTokens handles only the padding-inline/padding-block shorthands — longhand padding channels are silently dropped, so the canvas pill draws 12px narrower than the real Tag"
+      "note": "CANVAS SIDE (NEARLY) BLANK: canvas ink 5.65% vs real ink 97.26% of the union canvas — the masked % understates the miss; real side :focus-visible did not match (component root is not keyboard-focusable in this mount) — the canvas draws the contract's focus preview; the real side shows the resting paint; outline→stroke approximation (documented canvas fidelity note): the web focus ring is an outline OUTSIDE the border box; the canvas draws it as a bound stroke inside layout — geometry shifts by the ring width; NAMED PROMOTION REFUSAL (tag LEDGER: part-presence-uncorrelated): the default label subtree (text > label, inBase) is present in 12/16 combos and the presence set does not factor per-axis — the parts were NOT promoted, so the contract carries no default-state label at all; the canvas pill draws label-less while the real Tag renders \"Wholesale\". The engine draws everything the contract carries"
     }
   ],
   "summary": {
@@ -84,17 +84,17 @@
       {
         "cell": "Size=large",
         "pctAAMasked": 22.25,
-        "note": "CANVAS SIDE (NEARLY) BLANK: canvas ink 0% vs real ink 48.63% of the union canvas — the masked % understates the miss; EMITTER-DEFECT (channel table confirms): contract binds root padding-left/right = {imported.tag.root.padding-left} = 6px, but emit-figma-script applyTokens handles only the padding-inline/padding-block shorthands — longhand padding channels are silently dropped, so the canvas pill draws 12px narrower than the real Tag"
+        "note": "CANVAS SIDE (NEARLY) BLANK: canvas ink 0% vs real ink 48.63% of the union canvas — the masked % understates the miss; NAMED PROMOTION REFUSAL (tag LEDGER: part-presence-uncorrelated): the default label subtree (text > label, inBase) is present in 12/16 combos and the presence set does not factor per-axis — the parts were NOT promoted, so the contract carries no default-state label at all; the canvas pill draws label-less while the real Tag renders \"Wholesale\". The engine draws everything the contract carries"
       },
       {
         "cell": "Size=large, State=Active",
         "pctAAMasked": 88.98,
-        "note": "CANVAS SIDE (NEARLY) BLANK: canvas ink 5.65% vs real ink 97.26% of the union canvas — the masked % understates the miss; EMITTER-DEFECT (channel table confirms): contract binds root padding-left/right = {imported.tag.root.padding-left} = 6px, but emit-figma-script applyTokens handles only the padding-inline/padding-block shorthands — longhand padding channels are silently dropped, so the canvas pill draws 12px narrower than the real Tag"
+        "note": "CANVAS SIDE (NEARLY) BLANK: canvas ink 5.65% vs real ink 97.26% of the union canvas — the masked % understates the miss; NAMED PROMOTION REFUSAL (tag LEDGER: part-presence-uncorrelated): the default label subtree (text > label, inBase) is present in 12/16 combos and the presence set does not factor per-axis — the parts were NOT promoted, so the contract carries no default-state label at all; the canvas pill draws label-less while the real Tag renders \"Wholesale\". The engine draws everything the contract carries"
       },
       {
         "cell": "Size=large, State=Focus Visible",
         "pctAAMasked": 88.98,
-        "note": "CANVAS SIDE (NEARLY) BLANK: canvas ink 5.65% vs real ink 97.26% of the union canvas — the masked % understates the miss; real side :focus-visible did not match (component root is not keyboard-focusable in this mount) — the canvas draws the contract's focus preview; the real side shows the resting paint; outline→stroke approximation (documented canvas fidelity note): the web focus ring is an outline OUTSIDE the border box; the canvas draws it as a bound stroke inside layout — geometry shifts by the ring width; EMITTER-DEFECT (channel table confirms): contract binds root padding-left/right = {imported.tag.root.padding-left} = 6px, but emit-figma-script applyTokens handles only the padding-inline/padding-block shorthands — longhand padding channels are silently dropped, so the canvas pill draws 12px narrower than the real Tag"
+        "note": "CANVAS SIDE (NEARLY) BLANK: canvas ink 5.65% vs real ink 97.26% of the union canvas — the masked % understates the miss; real side :focus-visible did not match (component root is not keyboard-focusable in this mount) — the canvas draws the contract's focus preview; the real side shows the resting paint; outline→stroke approximation (documented canvas fidelity note): the web focus ring is an outline OUTSIDE the border box; the canvas draws it as a bound stroke inside layout — geometry shifts by the ring width; NAMED PROMOTION REFUSAL (tag LEDGER: part-presence-uncorrelated): the default label subtree (text > label, inBase) is present in 12/16 combos and the presence set does not factor per-axis — the parts were NOT promoted, so the contract carries no default-state label at all; the canvas pill draws label-less while the real Tag renders \"Wholesale\". The engine draws everything the contract carries"
       }
     ],
     "blankCanvasCells": [

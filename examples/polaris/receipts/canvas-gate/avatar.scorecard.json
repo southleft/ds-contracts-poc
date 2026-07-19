@@ -20,101 +20,96 @@
     {
       "cell": "Size=Md",
       "kind": "base",
-      "pctExactUnmasked": 52.34,
-      "pctAAUnmasked": 37.14,
-      "pctAAMasked": 59.22,
-      "maskCoveragePct": 71.43,
-      "canvasPx": "80x32",
+      "pctExactUnmasked": 28.76,
+      "pctAAUnmasked": 18.85,
+      "pctAAMasked": 18.85,
+      "maskCoveragePct": 0,
+      "canvasPx": "56x56",
       "realPx": "56x56",
-      "inkCanvasPct": 42.37,
-      "inkRealPct": 67.95,
-      "note": "EMITTER/CONTRACT GAP (channel table: fill/radius/font all match): the root carries width but NO height channel — the canvas draws a text-hugging box (md 40x16 CSS) vs the real square (md 28x28); the 6-char initials placeholder overflows the fixed width. Real fill additionally rides the hash-selected palette (initials-keyed at runtime)"
+      "inkCanvasPct": 97.42,
+      "inkRealPct": 97.07,
+      "note": "RECONSTRUCTED GLYPH ASSET (promotion receipts: svg-viewbox-reconstructed): the per-size silhouette assets carry viewBoxes rebuilt from computed path extents (md 0 0 33 33) while the package draws one fixed-viewBox svg — the glyph scales a few px differently per size. Real fill additionally rides the hash-selected palette (initials-keyed at runtime)"
     },
     {
       "cell": "Size=Xs",
       "kind": "base",
-      "pctExactUnmasked": 39.43,
-      "pctAAUnmasked": 23.4,
-      "pctAAMasked": 11.84,
-      "maskCoveragePct": 57.75,
-      "canvasPx": "80x79",
+      "pctExactUnmasked": 33.38,
+      "pctAAUnmasked": 18.31,
+      "pctAAMasked": 18.31,
+      "maskCoveragePct": 0,
+      "canvasPx": "40x40",
       "realPx": "40x40",
-      "inkCanvasPct": 24.57,
-      "inkRealPct": 24.68,
-      "note": "EMITTER/CONTRACT GAP (channel table: fill/radius/font all match): the root carries width but NO height channel — the canvas draws a text-hugging box (md 40x16 CSS) vs the real square (md 28x28); the 6-char initials placeholder overflows the fixed width. Real fill additionally rides the hash-selected palette (initials-keyed at runtime)"
+      "inkCanvasPct": 97.88,
+      "inkRealPct": 97.5,
+      "note": "RECONSTRUCTED GLYPH ASSET (promotion receipts: svg-viewbox-reconstructed): the per-size silhouette assets carry viewBoxes rebuilt from computed path extents (md 0 0 33 33) while the package draws one fixed-viewBox svg — the glyph scales a few px differently per size. Real fill additionally rides the hash-selected palette (initials-keyed at runtime)"
     },
     {
       "cell": "Size=Sm",
       "kind": "base",
-      "pctExactUnmasked": 45.42,
-      "pctAAUnmasked": 26.38,
-      "pctAAMasked": 45.16,
-      "maskCoveragePct": 83.33,
-      "canvasPx": "80x32",
+      "pctExactUnmasked": 28.47,
+      "pctAAUnmasked": 17.45,
+      "pctAAMasked": 17.45,
+      "maskCoveragePct": 0,
+      "canvasPx": "48x48",
       "realPx": "48x48",
-      "inkCanvasPct": 45.16,
-      "inkRealPct": 57.6,
-      "note": "EMITTER/CONTRACT GAP (channel table: fill/radius/font all match): the root carries width but NO height channel — the canvas draws a text-hugging box (md 40x16 CSS) vs the real square (md 28x28); the 6-char initials placeholder overflows the fixed width. Real fill additionally rides the hash-selected palette (initials-keyed at runtime)"
+      "inkCanvasPct": 96.48,
+      "inkRealPct": 96.01,
+      "note": "RECONSTRUCTED GLYPH ASSET (promotion receipts: svg-viewbox-reconstructed): the per-size silhouette assets carry viewBoxes rebuilt from computed path extents (md 0 0 33 33) while the package draws one fixed-viewBox svg — the glyph scales a few px differently per size. Real fill additionally rides the hash-selected palette (initials-keyed at runtime)"
     },
     {
       "cell": "Size=Lg",
       "kind": "base",
-      "pctExactUnmasked": 61.25,
-      "pctAAUnmasked": 46.86,
-      "pctAAMasked": 66.67,
-      "maskCoveragePct": 62.5,
-      "canvasPx": "80x30",
+      "pctExactUnmasked": 28.81,
+      "pctAAUnmasked": 18.31,
+      "pctAAMasked": 18.31,
+      "maskCoveragePct": 0,
+      "canvasPx": "64x64",
       "realPx": "64x64",
-      "inkCanvasPct": 37.19,
-      "inkRealPct": 76.56,
-      "note": "EMITTER/CONTRACT GAP (channel table: fill/radius/font all match): the root carries width but NO height channel — the canvas draws a text-hugging box (md 40x16 CSS) vs the real square (md 28x28); the 6-char initials placeholder overflows the fixed width. Real fill additionally rides the hash-selected palette (initials-keyed at runtime)"
+      "inkCanvasPct": 96.26,
+      "inkRealPct": 95.7,
+      "note": "RECONSTRUCTED GLYPH ASSET (promotion receipts: svg-viewbox-reconstructed): the per-size silhouette assets carry viewBoxes rebuilt from computed path extents (md 0 0 33 33) while the package draws one fixed-viewBox svg — the glyph scales a few px differently per size. Real fill additionally rides the hash-selected palette (initials-keyed at runtime)"
     },
     {
       "cell": "Size=Xl",
       "kind": "base",
-      "pctExactUnmasked": 74.42,
-      "pctAAUnmasked": 62.13,
-      "pctAAMasked": 91.63,
-      "maskCoveragePct": 50,
-      "canvasPx": "80x32",
+      "pctExactUnmasked": 0,
+      "pctAAUnmasked": 0,
+      "pctAAMasked": 0,
+      "maskCoveragePct": 0,
+      "canvasPx": "80x80",
       "realPx": "80x80",
-      "inkCanvasPct": 37.28,
+      "inkCanvasPct": 97.25,
       "inkRealPct": 97.25,
-      "note": "EMITTER/CONTRACT GAP (channel table: fill/radius/font all match): the root carries width but NO height channel — the canvas draws a text-hugging box (md 40x16 CSS) vs the real square (md 28x28); the 6-char initials placeholder overflows the fixed width. Real fill additionally rides the hash-selected palette (initials-keyed at runtime)"
+      "note": "RECONSTRUCTED GLYPH ASSET (promotion receipts: svg-viewbox-reconstructed): the per-size silhouette assets carry viewBoxes rebuilt from computed path extents (md 0 0 33 33) while the package draws one fixed-viewBox svg — the glyph scales a few px differently per size. Real fill additionally rides the hash-selected palette (initials-keyed at runtime)"
     }
   ],
   "summary": {
     "cells": 5,
-    "meanExactUnmasked": 54.57,
-    "meanAAUnmasked": 39.18,
-    "meanAAMasked": 54.9,
-    "maxAAMasked": 91.63,
-    "worstCell": "Size=Xl",
+    "meanExactUnmasked": 23.88,
+    "meanAAUnmasked": 14.58,
+    "meanAAMasked": 14.58,
+    "maxAAMasked": 18.85,
+    "worstCell": "Size=Md",
     "cellsOver10Masked": [
       {
         "cell": "Size=Md",
-        "pctAAMasked": 59.22,
-        "note": "EMITTER/CONTRACT GAP (channel table: fill/radius/font all match): the root carries width but NO height channel — the canvas draws a text-hugging box (md 40x16 CSS) vs the real square (md 28x28); the 6-char initials placeholder overflows the fixed width. Real fill additionally rides the hash-selected palette (initials-keyed at runtime)"
+        "pctAAMasked": 18.85,
+        "note": "RECONSTRUCTED GLYPH ASSET (promotion receipts: svg-viewbox-reconstructed): the per-size silhouette assets carry viewBoxes rebuilt from computed path extents (md 0 0 33 33) while the package draws one fixed-viewBox svg — the glyph scales a few px differently per size. Real fill additionally rides the hash-selected palette (initials-keyed at runtime)"
       },
       {
         "cell": "Size=Xs",
-        "pctAAMasked": 11.84,
-        "note": "EMITTER/CONTRACT GAP (channel table: fill/radius/font all match): the root carries width but NO height channel — the canvas draws a text-hugging box (md 40x16 CSS) vs the real square (md 28x28); the 6-char initials placeholder overflows the fixed width. Real fill additionally rides the hash-selected palette (initials-keyed at runtime)"
+        "pctAAMasked": 18.31,
+        "note": "RECONSTRUCTED GLYPH ASSET (promotion receipts: svg-viewbox-reconstructed): the per-size silhouette assets carry viewBoxes rebuilt from computed path extents (md 0 0 33 33) while the package draws one fixed-viewBox svg — the glyph scales a few px differently per size. Real fill additionally rides the hash-selected palette (initials-keyed at runtime)"
       },
       {
         "cell": "Size=Sm",
-        "pctAAMasked": 45.16,
-        "note": "EMITTER/CONTRACT GAP (channel table: fill/radius/font all match): the root carries width but NO height channel — the canvas draws a text-hugging box (md 40x16 CSS) vs the real square (md 28x28); the 6-char initials placeholder overflows the fixed width. Real fill additionally rides the hash-selected palette (initials-keyed at runtime)"
+        "pctAAMasked": 17.45,
+        "note": "RECONSTRUCTED GLYPH ASSET (promotion receipts: svg-viewbox-reconstructed): the per-size silhouette assets carry viewBoxes rebuilt from computed path extents (md 0 0 33 33) while the package draws one fixed-viewBox svg — the glyph scales a few px differently per size. Real fill additionally rides the hash-selected palette (initials-keyed at runtime)"
       },
       {
         "cell": "Size=Lg",
-        "pctAAMasked": 66.67,
-        "note": "EMITTER/CONTRACT GAP (channel table: fill/radius/font all match): the root carries width but NO height channel — the canvas draws a text-hugging box (md 40x16 CSS) vs the real square (md 28x28); the 6-char initials placeholder overflows the fixed width. Real fill additionally rides the hash-selected palette (initials-keyed at runtime)"
-      },
-      {
-        "cell": "Size=Xl",
-        "pctAAMasked": 91.63,
-        "note": "EMITTER/CONTRACT GAP (channel table: fill/radius/font all match): the root carries width but NO height channel — the canvas draws a text-hugging box (md 40x16 CSS) vs the real square (md 28x28); the 6-char initials placeholder overflows the fixed width. Real fill additionally rides the hash-selected palette (initials-keyed at runtime)"
+        "pctAAMasked": 18.31,
+        "note": "RECONSTRUCTED GLYPH ASSET (promotion receipts: svg-viewbox-reconstructed): the per-size silhouette assets carry viewBoxes rebuilt from computed path extents (md 0 0 33 33) while the package draws one fixed-viewBox svg — the glyph scales a few px differently per size. Real fill additionally rides the hash-selected palette (initials-keyed at runtime)"
       }
     ],
     "blankCanvasCells": []

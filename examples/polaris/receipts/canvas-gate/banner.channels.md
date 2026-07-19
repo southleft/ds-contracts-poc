@@ -43,7 +43,7 @@ applies (no binding, no literal). `gap` compares against computed `column-gap`; 
 | blockstack-2 | border-top-left-radius | 8 cells (e.g. `Tone=Info`) | `0px` | `0px` | 0 |  |
 | blockstack-2 | border-top-right-radius | 8 cells (e.g. `Tone=Info`) | `0px` | `0px` | 0 |  |
 | blockstack-2 | border-width | 8 cells (e.g. `Tone=Info`) | `0px` | `0px` | 0 |  |
-| blockstack-2 | gap | 8 cells (e.g. `Tone=Info`) | `0px` | `8px` | -8px |  |
+| blockstack-2 | gap | 8 cells (e.g. `Tone=Info`) | `8px` | `8px` | 0 |  |
 | blockstack-2 | padding-bottom | 8 cells (e.g. `Tone=Info`) | `0px` | `0px` | 0 |  |
 | blockstack-2 | padding-left | 8 cells (e.g. `Tone=Info`) | `0px` | `0px` | 0 |  |
 | blockstack-2 | padding-right | 8 cells (e.g. `Tone=Info`) | `0px` | `0px` | 0 |  |
@@ -101,7 +101,7 @@ applies (no binding, no literal). `gap` compares against computed `column-gap`; 
 | inlinestack | border-top-left-radius | 8 cells (e.g. `Tone=Info`) | `0px` | `0px` | 0 |  |
 | inlinestack | border-top-right-radius | 8 cells (e.g. `Tone=Info`) | `0px` | `0px` | 0 |  |
 | inlinestack | border-width | 8 cells (e.g. `Tone=Info`) | `0px` | `0px` | 0 |  |
-| inlinestack | gap | 8 cells (e.g. `Tone=Info`) | `0px` | `8px` | -8px |  |
+| inlinestack | gap | 8 cells (e.g. `Tone=Info`) | `8px` | `8px` | 0 |  |
 | inlinestack | padding-bottom | 8 cells (e.g. `Tone=Info`) | `0px` | `0px` | 0 |  |
 | inlinestack | padding-left | 8 cells (e.g. `Tone=Info`) | `0px` | `0px` | 0 |  |
 | inlinestack | padding-right | 8 cells (e.g. `Tone=Info`) | `0px` | `0px` | 0 |  |
@@ -112,7 +112,7 @@ applies (no binding, no literal). `gap` compares against computed `column-gap`; 
 | inlinestack-2 | border-top-left-radius | 8 cells (e.g. `Tone=Info`) | `0px` | `0px` | 0 |  |
 | inlinestack-2 | border-top-right-radius | 8 cells (e.g. `Tone=Info`) | `0px` | `0px` | 0 |  |
 | inlinestack-2 | border-width | 8 cells (e.g. `Tone=Info`) | `0px` | `0px` | 0 |  |
-| inlinestack-2 | gap | 8 cells (e.g. `Tone=Info`) | `0px` | `4px` | -4px |  |
+| inlinestack-2 | gap | 8 cells (e.g. `Tone=Info`) | `4px` | `4px` | 0 |  |
 | inlinestack-2 | padding-bottom | 8 cells (e.g. `Tone=Info`) | `0px` | `0px` | 0 |  |
 | inlinestack-2 | padding-left | 8 cells (e.g. `Tone=Info`) | `0px` | `0px` | 0 |  |
 | inlinestack-2 | padding-right | 8 cells (e.g. `Tone=Info`) | `0px` | `0px` | 0 |  |

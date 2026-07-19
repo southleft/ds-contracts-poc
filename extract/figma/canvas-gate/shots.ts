@@ -48,7 +48,14 @@ export async function launchGateBrowser(): Promise<Browser> {
 
 export async function newGatePage(browser: Browser): Promise<{ context: BrowserContext; page: Page }> {
   const context = await browser.newContext({
-    viewport: { width: 1000, height: 900 },
+    // STAGE PARITY (Round 5 finding): the floor capture ran at 600×800
+    // (extract/computed/configs/polaris.json browser.viewport) and Polaris
+    // sizes controls BY BREAKPOINT — at ≥768px (md) the Checkbox/RadioButton
+    // backdrop is 16px, below it 20px. The gate's old 1000px viewport put
+    // the REAL side in a different breakpoint bucket than the captured
+    // truth the contracts carry (backdrop 20×20), so every control compared
+    // against a smaller-than-captured render. Same bucket, same truth.
+    viewport: { width: 600, height: 800 },
     deviceScaleFactor: DPR,
     colorScheme: 'light',
   });
@@ -56,7 +63,13 @@ export async function newGatePage(browser: Browser): Promise<{ context: BrowserC
   return { context, page };
 }
 
-/** capture.ts pinInfiniteAnimations, verbatim (idempotent). */
+/** capture.ts pinInfiniteAnimations + Round 5: FINITE animations settle to
+ *  their END state. The page CSS pauses every animation for determinism,
+ *  which froze finite ENTRANCE animations at t=0 — the real Checkbox's
+ *  check draw-in (stroke-dashoffset keyframes) never rendered, so the real
+ *  side compared as a glyph-less box against the contract's carried glyph.
+ *  finish() renders the settled final frame; infinite animations stay
+ *  pinned at t=0 (idempotent). */
 const PIN_ANIMATIONS_JS = `(() => {
   const names = [];
   for (const a of document.getAnimations()) {
@@ -65,6 +78,8 @@ const PIN_ANIMATIONS_JS = `(() => {
     if (t && t.iterations === Infinity) {
       if (a.playState !== 'paused') { a.pause(); a.currentTime = 0; }
       names.push(a.animationName || a.id || '(unnamed)');
+    } else {
+      try { a.finish(); } catch {}
     }
   }
   return names.sort();

@@ -52,6 +52,11 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "MIN"
               },
+              "margins": {
+                "bottom": -2,
+                "left": -8,
+                "top": -2
+              },
               "children": [
                 {
                   "type": "frame",
@@ -62,6 +67,7 @@ const COMPONENTS = [
                     "counter": "MIN"
                   },
                   "bindings": {
+                    "minHeight": "imported/shared/size-0",
                     "minWidth": "imported/shared/size-0"
                   },
                   "children": [
@@ -74,6 +80,7 @@ const COMPONENTS = [
                         "counter": "MIN"
                       },
                       "bindings": {
+                        "minHeight": "imported/shared/size-0",
                         "minWidth": "imported/shared/size-0"
                       },
                       "children": [
@@ -133,6 +140,11 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "MIN"
               },
+              "margins": {
+                "bottom": -2,
+                "left": -8,
+                "top": -2
+              },
               "children": [
                 {
                   "type": "frame",
@@ -143,6 +155,7 @@ const COMPONENTS = [
                     "counter": "MIN"
                   },
                   "bindings": {
+                    "minHeight": "imported/shared/size-0",
                     "minWidth": "imported/shared/size-0"
                   },
                   "children": [
@@ -155,6 +168,7 @@ const COMPONENTS = [
                         "counter": "MIN"
                       },
                       "bindings": {
+                        "minHeight": "imported/shared/size-0",
                         "minWidth": "imported/shared/size-0"
                       },
                       "children": [
@@ -214,6 +228,11 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "MIN"
               },
+              "margins": {
+                "bottom": -2,
+                "left": -8,
+                "top": -2
+              },
               "children": [
                 {
                   "type": "frame",
@@ -224,6 +243,7 @@ const COMPONENTS = [
                     "counter": "MIN"
                   },
                   "bindings": {
+                    "minHeight": "imported/shared/size-0",
                     "minWidth": "imported/shared/size-0"
                   },
                   "children": [
@@ -236,6 +256,7 @@ const COMPONENTS = [
                         "counter": "MIN"
                       },
                       "bindings": {
+                        "minHeight": "imported/shared/size-0",
                         "minWidth": "imported/shared/size-0"
                       },
                       "children": [
@@ -295,6 +316,11 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "MIN"
               },
+              "margins": {
+                "bottom": -2,
+                "left": -8,
+                "top": -2
+              },
               "children": [
                 {
                   "type": "frame",
@@ -305,6 +331,7 @@ const COMPONENTS = [
                     "counter": "MIN"
                   },
                   "bindings": {
+                    "minHeight": "imported/shared/size-0",
                     "minWidth": "imported/shared/size-0"
                   },
                   "children": [
@@ -317,6 +344,7 @@ const COMPONENTS = [
                         "counter": "MIN"
                       },
                       "bindings": {
+                        "minHeight": "imported/shared/size-0",
                         "minWidth": "imported/shared/size-0"
                       },
                       "children": [
@@ -376,6 +404,11 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "MIN"
               },
+              "margins": {
+                "bottom": -2,
+                "left": -8,
+                "top": -2
+              },
               "children": [
                 {
                   "type": "frame",
@@ -386,6 +419,7 @@ const COMPONENTS = [
                     "counter": "MIN"
                   },
                   "bindings": {
+                    "minHeight": "imported/shared/size-0",
                     "minWidth": "imported/shared/size-0"
                   },
                   "children": [
@@ -398,6 +432,7 @@ const COMPONENTS = [
                         "counter": "MIN"
                       },
                       "bindings": {
+                        "minHeight": "imported/shared/size-0",
                         "minWidth": "imported/shared/size-0"
                       },
                       "children": [
@@ -457,6 +492,11 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "MIN"
               },
+              "margins": {
+                "bottom": -2,
+                "left": -8,
+                "top": -2
+              },
               "children": [
                 {
                   "type": "frame",
@@ -467,6 +507,7 @@ const COMPONENTS = [
                     "counter": "MIN"
                   },
                   "bindings": {
+                    "minHeight": "imported/shared/size-0",
                     "minWidth": "imported/shared/size-0"
                   },
                   "children": [
@@ -479,6 +520,7 @@ const COMPONENTS = [
                         "counter": "MIN"
                       },
                       "bindings": {
+                        "minHeight": "imported/shared/size-0",
                         "minWidth": "imported/shared/size-0"
                       },
                       "children": [
@@ -538,6 +580,11 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "MIN"
               },
+              "margins": {
+                "bottom": -2,
+                "left": -8,
+                "top": -2
+              },
               "children": [
                 {
                   "type": "frame",
@@ -548,6 +595,7 @@ const COMPONENTS = [
                     "counter": "MIN"
                   },
                   "bindings": {
+                    "minHeight": "imported/shared/size-0",
                     "minWidth": "imported/shared/size-0"
                   },
                   "children": [
@@ -560,6 +608,7 @@ const COMPONENTS = [
                         "counter": "MIN"
                       },
                       "bindings": {
+                        "minHeight": "imported/shared/size-0",
                         "minWidth": "imported/shared/size-0"
                       },
                       "children": [
@@ -619,6 +668,11 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "MIN"
               },
+              "margins": {
+                "bottom": -2,
+                "left": -8,
+                "top": -2
+              },
               "children": [
                 {
                   "type": "frame",
@@ -629,6 +683,7 @@ const COMPONENTS = [
                     "counter": "MIN"
                   },
                   "bindings": {
+                    "minHeight": "imported/shared/size-0",
                     "minWidth": "imported/shared/size-0"
                   },
                   "children": [
@@ -641,6 +696,7 @@ const COMPONENTS = [
                         "counter": "MIN"
                       },
                       "bindings": {
+                        "minHeight": "imported/shared/size-0",
                         "minWidth": "imported/shared/size-0"
                       },
                       "children": [
@@ -700,6 +756,11 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "MIN"
               },
+              "margins": {
+                "bottom": -2,
+                "left": -8,
+                "top": -2
+              },
               "children": [
                 {
                   "type": "frame",
@@ -710,6 +771,7 @@ const COMPONENTS = [
                     "counter": "MIN"
                   },
                   "bindings": {
+                    "minHeight": "imported/shared/size-0",
                     "minWidth": "imported/shared/size-0"
                   },
                   "children": [
@@ -722,6 +784,7 @@ const COMPONENTS = [
                         "counter": "MIN"
                       },
                       "bindings": {
+                        "minHeight": "imported/shared/size-0",
                         "minWidth": "imported/shared/size-0"
                       },
                       "children": [
@@ -781,6 +844,11 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "MIN"
               },
+              "margins": {
+                "bottom": -2,
+                "left": -8,
+                "top": -2
+              },
               "children": [
                 {
                   "type": "frame",
@@ -791,6 +859,7 @@ const COMPONENTS = [
                     "counter": "MIN"
                   },
                   "bindings": {
+                    "minHeight": "imported/shared/size-0",
                     "minWidth": "imported/shared/size-0"
                   },
                   "children": [
@@ -803,6 +872,7 @@ const COMPONENTS = [
                         "counter": "MIN"
                       },
                       "bindings": {
+                        "minHeight": "imported/shared/size-0",
                         "minWidth": "imported/shared/size-0"
                       },
                       "children": [
@@ -862,6 +932,11 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "MIN"
               },
+              "margins": {
+                "bottom": -2,
+                "left": -8,
+                "top": -2
+              },
               "children": [
                 {
                   "type": "frame",
@@ -872,6 +947,7 @@ const COMPONENTS = [
                     "counter": "MIN"
                   },
                   "bindings": {
+                    "minHeight": "imported/shared/size-0",
                     "minWidth": "imported/shared/size-0"
                   },
                   "children": [
@@ -884,6 +960,7 @@ const COMPONENTS = [
                         "counter": "MIN"
                       },
                       "bindings": {
+                        "minHeight": "imported/shared/size-0",
                         "minWidth": "imported/shared/size-0"
                       },
                       "children": [
@@ -943,6 +1020,11 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "MIN"
               },
+              "margins": {
+                "bottom": -2,
+                "left": -8,
+                "top": -2
+              },
               "children": [
                 {
                   "type": "frame",
@@ -953,6 +1035,7 @@ const COMPONENTS = [
                     "counter": "MIN"
                   },
                   "bindings": {
+                    "minHeight": "imported/shared/size-0",
                     "minWidth": "imported/shared/size-0"
                   },
                   "children": [
@@ -965,6 +1048,7 @@ const COMPONENTS = [
                         "counter": "MIN"
                       },
                       "bindings": {
+                        "minHeight": "imported/shared/size-0",
                         "minWidth": "imported/shared/size-0"
                       },
                       "children": [
@@ -1024,6 +1108,11 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "MIN"
               },
+              "margins": {
+                "bottom": -2,
+                "left": -8,
+                "top": -2
+              },
               "children": [
                 {
                   "type": "frame",
@@ -1034,6 +1123,7 @@ const COMPONENTS = [
                     "counter": "MIN"
                   },
                   "bindings": {
+                    "minHeight": "imported/shared/size-0",
                     "minWidth": "imported/shared/size-0"
                   },
                   "children": [
@@ -1046,6 +1136,7 @@ const COMPONENTS = [
                         "counter": "MIN"
                       },
                       "bindings": {
+                        "minHeight": "imported/shared/size-0",
                         "minWidth": "imported/shared/size-0"
                       },
                       "children": [
@@ -1105,6 +1196,11 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "MIN"
               },
+              "margins": {
+                "bottom": -2,
+                "left": -8,
+                "top": -2
+              },
               "children": [
                 {
                   "type": "frame",
@@ -1115,6 +1211,7 @@ const COMPONENTS = [
                     "counter": "MIN"
                   },
                   "bindings": {
+                    "minHeight": "imported/shared/size-0",
                     "minWidth": "imported/shared/size-0"
                   },
                   "children": [
@@ -1127,6 +1224,7 @@ const COMPONENTS = [
                         "counter": "MIN"
                       },
                       "bindings": {
+                        "minHeight": "imported/shared/size-0",
                         "minWidth": "imported/shared/size-0"
                       },
                       "children": [
@@ -1186,6 +1284,11 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "MIN"
               },
+              "margins": {
+                "bottom": -2,
+                "left": -8,
+                "top": -2
+              },
               "children": [
                 {
                   "type": "frame",
@@ -1196,6 +1299,7 @@ const COMPONENTS = [
                     "counter": "MIN"
                   },
                   "bindings": {
+                    "minHeight": "imported/shared/size-0",
                     "minWidth": "imported/shared/size-0"
                   },
                   "children": [
@@ -1208,6 +1312,7 @@ const COMPONENTS = [
                         "counter": "MIN"
                       },
                       "bindings": {
+                        "minHeight": "imported/shared/size-0",
                         "minWidth": "imported/shared/size-0"
                       },
                       "children": [
@@ -1267,6 +1372,11 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "MIN"
               },
+              "margins": {
+                "bottom": -2,
+                "left": -8,
+                "top": -2
+              },
               "children": [
                 {
                   "type": "frame",
@@ -1277,6 +1387,7 @@ const COMPONENTS = [
                     "counter": "MIN"
                   },
                   "bindings": {
+                    "minHeight": "imported/shared/size-0",
                     "minWidth": "imported/shared/size-0"
                   },
                   "children": [
@@ -1289,6 +1400,7 @@ const COMPONENTS = [
                         "counter": "MIN"
                       },
                       "bindings": {
+                        "minHeight": "imported/shared/size-0",
                         "minWidth": "imported/shared/size-0"
                       },
                       "children": [
@@ -1348,6 +1460,11 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "MIN"
               },
+              "margins": {
+                "bottom": -2,
+                "left": -8,
+                "top": -2
+              },
               "children": [
                 {
                   "type": "frame",
@@ -1358,6 +1475,7 @@ const COMPONENTS = [
                     "counter": "MIN"
                   },
                   "bindings": {
+                    "minHeight": "imported/shared/size-0",
                     "minWidth": "imported/shared/size-0"
                   },
                   "children": [
@@ -1370,6 +1488,7 @@ const COMPONENTS = [
                         "counter": "MIN"
                       },
                       "bindings": {
+                        "minHeight": "imported/shared/size-0",
                         "minWidth": "imported/shared/size-0"
                       },
                       "children": [
@@ -1429,6 +1548,11 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "MIN"
               },
+              "margins": {
+                "bottom": -2,
+                "left": -8,
+                "top": -2
+              },
               "children": [
                 {
                   "type": "frame",
@@ -1439,6 +1563,7 @@ const COMPONENTS = [
                     "counter": "MIN"
                   },
                   "bindings": {
+                    "minHeight": "imported/shared/size-0",
                     "minWidth": "imported/shared/size-0"
                   },
                   "children": [
@@ -1451,6 +1576,7 @@ const COMPONENTS = [
                         "counter": "MIN"
                       },
                       "bindings": {
+                        "minHeight": "imported/shared/size-0",
                         "minWidth": "imported/shared/size-0"
                       },
                       "children": [
@@ -1510,6 +1636,11 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "MIN"
               },
+              "margins": {
+                "bottom": -2,
+                "left": -8,
+                "top": -2
+              },
               "children": [
                 {
                   "type": "frame",
@@ -1520,6 +1651,7 @@ const COMPONENTS = [
                     "counter": "MIN"
                   },
                   "bindings": {
+                    "minHeight": "imported/shared/size-0",
                     "minWidth": "imported/shared/size-0"
                   },
                   "children": [
@@ -1532,6 +1664,7 @@ const COMPONENTS = [
                         "counter": "MIN"
                       },
                       "bindings": {
+                        "minHeight": "imported/shared/size-0",
                         "minWidth": "imported/shared/size-0"
                       },
                       "children": [
@@ -1591,6 +1724,11 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "MIN"
               },
+              "margins": {
+                "bottom": -2,
+                "left": -8,
+                "top": -2
+              },
               "children": [
                 {
                   "type": "frame",
@@ -1601,6 +1739,7 @@ const COMPONENTS = [
                     "counter": "MIN"
                   },
                   "bindings": {
+                    "minHeight": "imported/shared/size-0",
                     "minWidth": "imported/shared/size-0"
                   },
                   "children": [
@@ -1613,6 +1752,7 @@ const COMPONENTS = [
                         "counter": "MIN"
                       },
                       "bindings": {
+                        "minHeight": "imported/shared/size-0",
                         "minWidth": "imported/shared/size-0"
                       },
                       "children": [
@@ -1672,6 +1812,11 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "MIN"
               },
+              "margins": {
+                "bottom": -2,
+                "left": -8,
+                "top": -2
+              },
               "children": [
                 {
                   "type": "frame",
@@ -1682,6 +1827,7 @@ const COMPONENTS = [
                     "counter": "MIN"
                   },
                   "bindings": {
+                    "minHeight": "imported/shared/size-0",
                     "minWidth": "imported/shared/size-0"
                   },
                   "children": [
@@ -1694,6 +1840,7 @@ const COMPONENTS = [
                         "counter": "MIN"
                       },
                       "bindings": {
+                        "minHeight": "imported/shared/size-0",
                         "minWidth": "imported/shared/size-0"
                       },
                       "children": [
@@ -1753,6 +1900,11 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "MIN"
               },
+              "margins": {
+                "bottom": -2,
+                "left": -8,
+                "top": -2
+              },
               "children": [
                 {
                   "type": "frame",
@@ -1763,6 +1915,7 @@ const COMPONENTS = [
                     "counter": "MIN"
                   },
                   "bindings": {
+                    "minHeight": "imported/shared/size-0",
                     "minWidth": "imported/shared/size-0"
                   },
                   "children": [
@@ -1775,6 +1928,7 @@ const COMPONENTS = [
                         "counter": "MIN"
                       },
                       "bindings": {
+                        "minHeight": "imported/shared/size-0",
                         "minWidth": "imported/shared/size-0"
                       },
                       "children": [
@@ -1834,6 +1988,11 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "MIN"
               },
+              "margins": {
+                "bottom": -2,
+                "left": -8,
+                "top": -2
+              },
               "children": [
                 {
                   "type": "frame",
@@ -1844,6 +2003,7 @@ const COMPONENTS = [
                     "counter": "MIN"
                   },
                   "bindings": {
+                    "minHeight": "imported/shared/size-0",
                     "minWidth": "imported/shared/size-0"
                   },
                   "children": [
@@ -1856,6 +2016,7 @@ const COMPONENTS = [
                         "counter": "MIN"
                       },
                       "bindings": {
+                        "minHeight": "imported/shared/size-0",
                         "minWidth": "imported/shared/size-0"
                       },
                       "children": [
@@ -1915,6 +2076,11 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "MIN"
               },
+              "margins": {
+                "bottom": -2,
+                "left": -8,
+                "top": -2
+              },
               "children": [
                 {
                   "type": "frame",
@@ -1925,6 +2091,7 @@ const COMPONENTS = [
                     "counter": "MIN"
                   },
                   "bindings": {
+                    "minHeight": "imported/shared/size-0",
                     "minWidth": "imported/shared/size-0"
                   },
                   "children": [
@@ -1937,6 +2104,7 @@ const COMPONENTS = [
                         "counter": "MIN"
                       },
                       "bindings": {
+                        "minHeight": "imported/shared/size-0",
                         "minWidth": "imported/shared/size-0"
                       },
                       "children": [
@@ -1996,6 +2164,11 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "MIN"
               },
+              "margins": {
+                "bottom": -2,
+                "left": -8,
+                "top": -2
+              },
               "children": [
                 {
                   "type": "frame",
@@ -2006,6 +2179,7 @@ const COMPONENTS = [
                     "counter": "MIN"
                   },
                   "bindings": {
+                    "minHeight": "imported/shared/size-0",
                     "minWidth": "imported/shared/size-0"
                   },
                   "children": [
@@ -2018,6 +2192,7 @@ const COMPONENTS = [
                         "counter": "MIN"
                       },
                       "bindings": {
+                        "minHeight": "imported/shared/size-0",
                         "minWidth": "imported/shared/size-0"
                       },
                       "children": [
@@ -2077,6 +2252,11 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "MIN"
               },
+              "margins": {
+                "bottom": -2,
+                "left": -8,
+                "top": -2
+              },
               "children": [
                 {
                   "type": "frame",
@@ -2087,6 +2267,7 @@ const COMPONENTS = [
                     "counter": "MIN"
                   },
                   "bindings": {
+                    "minHeight": "imported/shared/size-0",
                     "minWidth": "imported/shared/size-0"
                   },
                   "children": [
@@ -2099,6 +2280,7 @@ const COMPONENTS = [
                         "counter": "MIN"
                       },
                       "bindings": {
+                        "minHeight": "imported/shared/size-0",
                         "minWidth": "imported/shared/size-0"
                       },
                       "children": [
@@ -2158,6 +2340,11 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "MIN"
               },
+              "margins": {
+                "bottom": -2,
+                "left": -8,
+                "top": -2
+              },
               "children": [
                 {
                   "type": "frame",
@@ -2168,6 +2355,7 @@ const COMPONENTS = [
                     "counter": "MIN"
                   },
                   "bindings": {
+                    "minHeight": "imported/shared/size-0",
                     "minWidth": "imported/shared/size-0"
                   },
                   "children": [
@@ -2180,6 +2368,7 @@ const COMPONENTS = [
                         "counter": "MIN"
                       },
                       "bindings": {
+                        "minHeight": "imported/shared/size-0",
                         "minWidth": "imported/shared/size-0"
                       },
                       "children": [
@@ -2239,6 +2428,11 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "MIN"
               },
+              "margins": {
+                "bottom": -2,
+                "left": -8,
+                "top": -2
+              },
               "children": [
                 {
                   "type": "frame",
@@ -2249,6 +2443,7 @@ const COMPONENTS = [
                     "counter": "MIN"
                   },
                   "bindings": {
+                    "minHeight": "imported/shared/size-0",
                     "minWidth": "imported/shared/size-0"
                   },
                   "children": [
@@ -2261,6 +2456,7 @@ const COMPONENTS = [
                         "counter": "MIN"
                       },
                       "bindings": {
+                        "minHeight": "imported/shared/size-0",
                         "minWidth": "imported/shared/size-0"
                       },
                       "children": [
@@ -2320,6 +2516,11 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "MIN"
               },
+              "margins": {
+                "bottom": -2,
+                "left": -8,
+                "top": -2
+              },
               "children": [
                 {
                   "type": "frame",
@@ -2330,6 +2531,7 @@ const COMPONENTS = [
                     "counter": "MIN"
                   },
                   "bindings": {
+                    "minHeight": "imported/shared/size-0",
                     "minWidth": "imported/shared/size-0"
                   },
                   "children": [
@@ -2342,6 +2544,7 @@ const COMPONENTS = [
                         "counter": "MIN"
                       },
                       "bindings": {
+                        "minHeight": "imported/shared/size-0",
                         "minWidth": "imported/shared/size-0"
                       },
                       "children": [
@@ -2401,6 +2604,11 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "MIN"
               },
+              "margins": {
+                "bottom": -2,
+                "left": -8,
+                "top": -2
+              },
               "children": [
                 {
                   "type": "frame",
@@ -2411,6 +2619,7 @@ const COMPONENTS = [
                     "counter": "MIN"
                   },
                   "bindings": {
+                    "minHeight": "imported/shared/size-0",
                     "minWidth": "imported/shared/size-0"
                   },
                   "children": [
@@ -2423,6 +2632,7 @@ const COMPONENTS = [
                         "counter": "MIN"
                       },
                       "bindings": {
+                        "minHeight": "imported/shared/size-0",
                         "minWidth": "imported/shared/size-0"
                       },
                       "children": [
@@ -2482,6 +2692,11 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "MIN"
               },
+              "margins": {
+                "bottom": -2,
+                "left": -8,
+                "top": -2
+              },
               "children": [
                 {
                   "type": "frame",
@@ -2492,6 +2707,7 @@ const COMPONENTS = [
                     "counter": "MIN"
                   },
                   "bindings": {
+                    "minHeight": "imported/shared/size-0",
                     "minWidth": "imported/shared/size-0"
                   },
                   "children": [
@@ -2504,6 +2720,7 @@ const COMPONENTS = [
                         "counter": "MIN"
                       },
                       "bindings": {
+                        "minHeight": "imported/shared/size-0",
                         "minWidth": "imported/shared/size-0"
                       },
                       "children": [
@@ -2563,6 +2780,11 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "MIN"
               },
+              "margins": {
+                "bottom": -2,
+                "left": -8,
+                "top": -2
+              },
               "children": [
                 {
                   "type": "frame",
@@ -2573,6 +2795,7 @@ const COMPONENTS = [
                     "counter": "MIN"
                   },
                   "bindings": {
+                    "minHeight": "imported/shared/size-0",
                     "minWidth": "imported/shared/size-0"
                   },
                   "children": [
@@ -2585,6 +2808,7 @@ const COMPONENTS = [
                         "counter": "MIN"
                       },
                       "bindings": {
+                        "minHeight": "imported/shared/size-0",
                         "minWidth": "imported/shared/size-0"
                       },
                       "children": [
@@ -2644,6 +2868,11 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "MIN"
               },
+              "margins": {
+                "bottom": -2,
+                "left": -8,
+                "top": -2
+              },
               "children": [
                 {
                   "type": "frame",
@@ -2654,6 +2883,7 @@ const COMPONENTS = [
                     "counter": "MIN"
                   },
                   "bindings": {
+                    "minHeight": "imported/shared/size-0",
                     "minWidth": "imported/shared/size-0"
                   },
                   "children": [
@@ -2666,6 +2896,7 @@ const COMPONENTS = [
                         "counter": "MIN"
                       },
                       "bindings": {
+                        "minHeight": "imported/shared/size-0",
                         "minWidth": "imported/shared/size-0"
                       },
                       "children": [
@@ -2725,6 +2956,11 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "MIN"
               },
+              "margins": {
+                "bottom": -2,
+                "left": -8,
+                "top": -2
+              },
               "children": [
                 {
                   "type": "frame",
@@ -2735,6 +2971,7 @@ const COMPONENTS = [
                     "counter": "MIN"
                   },
                   "bindings": {
+                    "minHeight": "imported/shared/size-0",
                     "minWidth": "imported/shared/size-0"
                   },
                   "children": [
@@ -2747,6 +2984,7 @@ const COMPONENTS = [
                         "counter": "MIN"
                       },
                       "bindings": {
+                        "minHeight": "imported/shared/size-0",
                         "minWidth": "imported/shared/size-0"
                       },
                       "children": [
@@ -2806,6 +3044,11 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "MIN"
               },
+              "margins": {
+                "bottom": -2,
+                "left": -8,
+                "top": -2
+              },
               "children": [
                 {
                   "type": "frame",
@@ -2816,6 +3059,7 @@ const COMPONENTS = [
                     "counter": "MIN"
                   },
                   "bindings": {
+                    "minHeight": "imported/shared/size-0",
                     "minWidth": "imported/shared/size-0"
                   },
                   "children": [
@@ -2828,6 +3072,7 @@ const COMPONENTS = [
                         "counter": "MIN"
                       },
                       "bindings": {
+                        "minHeight": "imported/shared/size-0",
                         "minWidth": "imported/shared/size-0"
                       },
                       "children": [
@@ -2887,6 +3132,11 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "MIN"
               },
+              "margins": {
+                "bottom": -2,
+                "left": -8,
+                "top": -2
+              },
               "children": [
                 {
                   "type": "frame",
@@ -2897,6 +3147,7 @@ const COMPONENTS = [
                     "counter": "MIN"
                   },
                   "bindings": {
+                    "minHeight": "imported/shared/size-0",
                     "minWidth": "imported/shared/size-0"
                   },
                   "children": [
@@ -2909,6 +3160,7 @@ const COMPONENTS = [
                         "counter": "MIN"
                       },
                       "bindings": {
+                        "minHeight": "imported/shared/size-0",
                         "minWidth": "imported/shared/size-0"
                       },
                       "children": [
@@ -2968,6 +3220,11 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "MIN"
               },
+              "margins": {
+                "bottom": -2,
+                "left": -8,
+                "top": -2
+              },
               "children": [
                 {
                   "type": "frame",
@@ -2978,6 +3235,7 @@ const COMPONENTS = [
                     "counter": "MIN"
                   },
                   "bindings": {
+                    "minHeight": "imported/shared/size-0",
                     "minWidth": "imported/shared/size-0"
                   },
                   "children": [
@@ -2990,6 +3248,7 @@ const COMPONENTS = [
                         "counter": "MIN"
                       },
                       "bindings": {
+                        "minHeight": "imported/shared/size-0",
                         "minWidth": "imported/shared/size-0"
                       },
                       "children": [
@@ -3049,6 +3308,11 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "MIN"
               },
+              "margins": {
+                "bottom": -2,
+                "left": -8,
+                "top": -2
+              },
               "children": [
                 {
                   "type": "frame",
@@ -3059,6 +3323,7 @@ const COMPONENTS = [
                     "counter": "MIN"
                   },
                   "bindings": {
+                    "minHeight": "imported/shared/size-0",
                     "minWidth": "imported/shared/size-0"
                   },
                   "children": [
@@ -3071,6 +3336,7 @@ const COMPONENTS = [
                         "counter": "MIN"
                       },
                       "bindings": {
+                        "minHeight": "imported/shared/size-0",
                         "minWidth": "imported/shared/size-0"
                       },
                       "children": [
@@ -3130,6 +3396,11 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "MIN"
               },
+              "margins": {
+                "bottom": -2,
+                "left": -8,
+                "top": -2
+              },
               "children": [
                 {
                   "type": "frame",
@@ -3140,6 +3411,7 @@ const COMPONENTS = [
                     "counter": "MIN"
                   },
                   "bindings": {
+                    "minHeight": "imported/shared/size-0",
                     "minWidth": "imported/shared/size-0"
                   },
                   "children": [
@@ -3152,6 +3424,7 @@ const COMPONENTS = [
                         "counter": "MIN"
                       },
                       "bindings": {
+                        "minHeight": "imported/shared/size-0",
                         "minWidth": "imported/shared/size-0"
                       },
                       "children": [
@@ -3211,6 +3484,11 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "MIN"
               },
+              "margins": {
+                "bottom": -2,
+                "left": -8,
+                "top": -2
+              },
               "children": [
                 {
                   "type": "frame",
@@ -3221,6 +3499,7 @@ const COMPONENTS = [
                     "counter": "MIN"
                   },
                   "bindings": {
+                    "minHeight": "imported/shared/size-0",
                     "minWidth": "imported/shared/size-0"
                   },
                   "children": [
@@ -3233,6 +3512,7 @@ const COMPONENTS = [
                         "counter": "MIN"
                       },
                       "bindings": {
+                        "minHeight": "imported/shared/size-0",
                         "minWidth": "imported/shared/size-0"
                       },
                       "children": [
@@ -3292,6 +3572,11 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "MIN"
               },
+              "margins": {
+                "bottom": -2,
+                "left": -8,
+                "top": -2
+              },
               "children": [
                 {
                   "type": "frame",
@@ -3302,6 +3587,7 @@ const COMPONENTS = [
                     "counter": "MIN"
                   },
                   "bindings": {
+                    "minHeight": "imported/shared/size-0",
                     "minWidth": "imported/shared/size-0"
                   },
                   "children": [
@@ -3314,6 +3600,7 @@ const COMPONENTS = [
                         "counter": "MIN"
                       },
                       "bindings": {
+                        "minHeight": "imported/shared/size-0",
                         "minWidth": "imported/shared/size-0"
                       },
                       "children": [
@@ -3373,6 +3660,11 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "MIN"
               },
+              "margins": {
+                "bottom": -2,
+                "left": -8,
+                "top": -2
+              },
               "children": [
                 {
                   "type": "frame",
@@ -3383,6 +3675,7 @@ const COMPONENTS = [
                     "counter": "MIN"
                   },
                   "bindings": {
+                    "minHeight": "imported/shared/size-0",
                     "minWidth": "imported/shared/size-0"
                   },
                   "children": [
@@ -3395,6 +3688,7 @@ const COMPONENTS = [
                         "counter": "MIN"
                       },
                       "bindings": {
+                        "minHeight": "imported/shared/size-0",
                         "minWidth": "imported/shared/size-0"
                       },
                       "children": [

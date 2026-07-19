@@ -63,6 +63,9 @@ const COMPONENTS = [
                 "counter": "MIN",
                 "stretchChildren": true
               },
+              "margins": {
+                "right": 8
+              },
               "children": [
                 {
                   "type": "frame",
@@ -71,6 +74,12 @@ const COMPONENTS = [
                     "mode": "HORIZONTAL",
                     "primary": "MIN",
                     "counter": "MIN"
+                  },
+                  "margins": {
+                    "bottom": 1,
+                    "left": 1,
+                    "right": 1,
+                    "top": 1
                   },
                   "children": [
                     {
@@ -90,6 +99,7 @@ const COMPONENTS = [
                         "strokeLeftWeight": "imported/shared/size-1",
                         "strokeRightWeight": "imported/shared/size-1",
                         "strokeTopWeight": "imported/shared/size-1",
+                        "minHeight": "imported/shared/size-0",
                         "minWidth": "imported/shared/size-0"
                       },
                       "fill": "imported/radio-button/backdrop/background-color/unchecked"
@@ -111,6 +121,7 @@ const COMPONENTS = [
                   "type": "text",
                   "name": "label",
                   "bindings": {
+                    "minHeight": "imported/shared/size-0",
                     "minWidth": "imported/shared/size-0"
                   },
                   "characters": "Accounts are disabled",
@@ -148,6 +159,9 @@ const COMPONENTS = [
                 "counter": "MIN",
                 "stretchChildren": true
               },
+              "margins": {
+                "right": 8
+              },
               "children": [
                 {
                   "type": "frame",
@@ -156,6 +170,12 @@ const COMPONENTS = [
                     "mode": "HORIZONTAL",
                     "primary": "MIN",
                     "counter": "MIN"
+                  },
+                  "margins": {
+                    "bottom": 1,
+                    "left": 1,
+                    "right": 1,
+                    "top": 1
                   },
                   "children": [
                     {
@@ -175,6 +195,7 @@ const COMPONENTS = [
                         "strokeLeftWeight": "imported/shared/size-1",
                         "strokeRightWeight": "imported/shared/size-1",
                         "strokeTopWeight": "imported/shared/size-1",
+                        "minHeight": "imported/shared/size-0",
                         "minWidth": "imported/shared/size-0"
                       },
                       "fill": "imported/radio-button/backdrop/background-color/checked"
@@ -196,6 +217,7 @@ const COMPONENTS = [
                   "type": "text",
                   "name": "label",
                   "bindings": {
+                    "minHeight": "imported/shared/size-0",
                     "minWidth": "imported/shared/size-0"
                   },
                   "characters": "Accounts are disabled",

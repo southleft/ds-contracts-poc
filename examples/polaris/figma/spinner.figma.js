@@ -36,7 +36,8 @@ const COMPONENTS = [
             "mode": "HORIZONTAL",
             "primary": "CENTER",
             "counter": "CENTER"
-          }
+          },
+          "blockRoot": true
         }
       },
       {
@@ -50,7 +51,8 @@ const COMPONENTS = [
             "mode": "HORIZONTAL",
             "primary": "CENTER",
             "counter": "CENTER"
-          }
+          },
+          "blockRoot": true
         }
       }
     ],

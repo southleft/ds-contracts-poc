@@ -29,7 +29,7 @@ applies (no binding, no literal). `gap` compares against computed `column-gap`; 
 | root | padding-left | 4 cells (e.g. `Size=Medium`) | `0px` | `0px` | 0 |  |
 | root | padding-right | 4 cells (e.g. `Size=Medium`) | `0px` | `0px` | 0 |  |
 | root | padding-top | 4 cells (e.g. `Size=Medium`) | `0px` | `0px` | 0 |  |
-| part-0 | background-color | 4 cells (e.g. `Size=Medium`) | `rgba(0, 0, 0, 0)` | `rgba(0, 0, 0, 0)` | match |  |
+| part-0 | background-color | 4 cells (e.g. `Size=Medium`) | `rgba(217, 217, 217, 1)` | `rgba(0, 0, 0, 0)` | DIFFERS |  |
 | part-0 | border-bottom-left-radius | 4 cells (e.g. `Size=Medium`) | `0px` | `0px` | 0 |  |
 | part-0 | border-bottom-right-radius | 4 cells (e.g. `Size=Medium`) | `0px` | `0px` | 0 |  |
 | part-0 | border-top-left-radius | 4 cells (e.g. `Size=Medium`) | `0px` | `0px` | 0 |  |

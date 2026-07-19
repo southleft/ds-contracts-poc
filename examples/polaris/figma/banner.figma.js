@@ -88,6 +88,7 @@ const COMPONENTS = [
                     "stretchChildren": true
                   },
                   "bindings": {
+                    "minHeight": "imported/shared/size-0",
                     "minWidth": "imported/shared/size-0"
                   },
                   "children": [
@@ -118,6 +119,8 @@ const COMPONENTS = [
                             "counter": "CENTER"
                           },
                           "bindings": {
+                            "itemSpacing": "imported/shared/size-8",
+                            "minHeight": "imported/shared/size-0",
                             "minWidth": "imported/shared/size-0"
                           },
                           "children": [
@@ -128,6 +131,9 @@ const COMPONENTS = [
                                 "mode": "HORIZONTAL",
                                 "primary": "SPACE_BETWEEN",
                                 "counter": "CENTER"
+                              },
+                              "bindings": {
+                                "itemSpacing": "imported/shared/size-4"
                               },
                               "children": [
                                 {
@@ -148,6 +154,7 @@ const COMPONENTS = [
                                         "counter": "MIN"
                                       },
                                       "bindings": {
+                                        "minHeight": "imported/shared/size-0",
                                         "minWidth": "imported/shared/size-0"
                                       },
                                       "children": [
@@ -192,11 +199,19 @@ const COMPONENTS = [
                                 "topLeftRadius": "imported/shared/size-8",
                                 "topRightRadius": "imported/shared/size-8",
                                 "strokeTopWeight": "imported/shared/size-0",
+                                "itemSpacing": "imported/shared/size-2",
+                                "minHeight": "imported/shared/size-32",
                                 "minWidth": "imported/shared/size-32",
                                 "paddingBottom": "imported/shared/size-4",
                                 "paddingLeft": "imported/shared/size-4",
                                 "paddingRight": "imported/shared/size-4",
                                 "paddingTop": "imported/shared/size-4"
+                              },
+                              "margins": {
+                                "bottom": -4,
+                                "left": -4,
+                                "right": -4,
+                                "top": -4
                               },
                               "children": [
                                 {
@@ -206,6 +221,10 @@ const COMPONENTS = [
                                     "mode": "HORIZONTAL",
                                     "primary": "MIN",
                                     "counter": "MIN"
+                                  },
+                                  "margins": {
+                                    "bottom": -2,
+                                    "top": -2
                                   },
                                   "children": [
                                     {
@@ -217,6 +236,7 @@ const COMPONENTS = [
                                         "counter": "MIN"
                                       },
                                       "bindings": {
+                                        "minHeight": "imported/shared/size-0",
                                         "minWidth": "imported/shared/size-0"
                                       },
                                       "children": [
@@ -269,7 +289,9 @@ const COMPONENTS = [
                             "stretchChildren": true
                           },
                           "bindings": {
-                            "minWidth": "imported/shared/size-0"
+                            "minHeight": "imported/shared/size-0",
+                            "minWidth": "imported/shared/size-0",
+                            "itemSpacing": "imported/shared/size-8"
                           },
                           "children": [
                             {
@@ -285,6 +307,7 @@ const COMPONENTS = [
                                   "type": "text",
                                   "name": "label-2",
                                   "bindings": {
+                                    "minHeight": "imported/shared/size-0",
                                     "minWidth": "imported/shared/size-0"
                                   },
                                   "characters": "Use your finance report to get detailed insights.",
@@ -302,6 +325,10 @@ const COMPONENTS = [
                                 "primary": "MIN",
                                 "counter": "CENTER"
                               },
+                              "margins": {
+                                "left": -8,
+                                "top": -8
+                              },
                               "children": [
                                 {
                                   "type": "frame",
@@ -310,6 +337,10 @@ const COMPONENTS = [
                                     "mode": "HORIZONTAL",
                                     "primary": "MIN",
                                     "counter": "MIN"
+                                  },
+                                  "margins": {
+                                    "left": 8,
+                                    "top": 8
                                   },
                                   "children": [
                                     {
@@ -330,6 +361,8 @@ const COMPONENTS = [
                                         "topLeftRadius": "imported/shared/size-8",
                                         "topRightRadius": "imported/shared/size-8",
                                         "strokeTopWeight": "imported/shared/size-0",
+                                        "itemSpacing": "imported/shared/size-2",
+                                        "minHeight": "imported/shared/size-32",
                                         "minWidth": "imported/shared/size-32",
                                         "paddingBottom": "imported/banner/button-2/padding-bottom",
                                         "paddingLeft": "imported/shared/size-12",
@@ -468,6 +501,7 @@ const COMPONENTS = [
                     "stretchChildren": true
                   },
                   "bindings": {
+                    "minHeight": "imported/shared/size-0",
                     "minWidth": "imported/shared/size-0"
                   },
                   "children": [
@@ -498,6 +532,8 @@ const COMPONENTS = [
                             "counter": "CENTER"
                           },
                           "bindings": {
+                            "itemSpacing": "imported/shared/size-8",
+                            "minHeight": "imported/shared/size-0",
                             "minWidth": "imported/shared/size-0"
                           },
                           "children": [
@@ -508,6 +544,9 @@ const COMPONENTS = [
                                 "mode": "HORIZONTAL",
                                 "primary": "SPACE_BETWEEN",
                                 "counter": "CENTER"
+                              },
+                              "bindings": {
+                                "itemSpacing": "imported/shared/size-4"
                               },
                               "children": [
                                 {
@@ -528,6 +567,7 @@ const COMPONENTS = [
                                         "counter": "MIN"
                                       },
                                       "bindings": {
+                                        "minHeight": "imported/shared/size-0",
                                         "minWidth": "imported/shared/size-0"
                                       },
                                       "children": [
@@ -572,11 +612,19 @@ const COMPONENTS = [
                                 "topLeftRadius": "imported/shared/size-8",
                                 "topRightRadius": "imported/shared/size-8",
                                 "strokeTopWeight": "imported/shared/size-0",
+                                "itemSpacing": "imported/shared/size-2",
+                                "minHeight": "imported/shared/size-32",
                                 "minWidth": "imported/shared/size-32",
                                 "paddingBottom": "imported/shared/size-4",
                                 "paddingLeft": "imported/shared/size-4",
                                 "paddingRight": "imported/shared/size-4",
                                 "paddingTop": "imported/shared/size-4"
+                              },
+                              "margins": {
+                                "bottom": -4,
+                                "left": -4,
+                                "right": -4,
+                                "top": -4
                               },
                               "children": [
                                 {
@@ -586,6 +634,10 @@ const COMPONENTS = [
                                     "mode": "HORIZONTAL",
                                     "primary": "MIN",
                                     "counter": "MIN"
+                                  },
+                                  "margins": {
+                                    "bottom": -2,
+                                    "top": -2
                                   },
                                   "children": [
                                     {
@@ -597,6 +649,7 @@ const COMPONENTS = [
                                         "counter": "MIN"
                                       },
                                       "bindings": {
+                                        "minHeight": "imported/shared/size-0",
                                         "minWidth": "imported/shared/size-0"
                                       },
                                       "children": [
@@ -649,7 +702,9 @@ const COMPONENTS = [
                             "stretchChildren": true
                           },
                           "bindings": {
-                            "minWidth": "imported/shared/size-0"
+                            "minHeight": "imported/shared/size-0",
+                            "minWidth": "imported/shared/size-0",
+                            "itemSpacing": "imported/shared/size-8"
                           },
                           "children": [
                             {
@@ -665,6 +720,7 @@ const COMPONENTS = [
                                   "type": "text",
                                   "name": "label-2",
                                   "bindings": {
+                                    "minHeight": "imported/shared/size-0",
                                     "minWidth": "imported/shared/size-0"
                                   },
                                   "characters": "Use your finance report to get detailed insights.",
@@ -682,6 +738,10 @@ const COMPONENTS = [
                                 "primary": "MIN",
                                 "counter": "CENTER"
                               },
+                              "margins": {
+                                "left": -8,
+                                "top": -8
+                              },
                               "children": [
                                 {
                                   "type": "frame",
@@ -690,6 +750,10 @@ const COMPONENTS = [
                                     "mode": "HORIZONTAL",
                                     "primary": "MIN",
                                     "counter": "MIN"
+                                  },
+                                  "margins": {
+                                    "left": 8,
+                                    "top": 8
                                   },
                                   "children": [
                                     {
@@ -710,6 +774,8 @@ const COMPONENTS = [
                                         "topLeftRadius": "imported/shared/size-8",
                                         "topRightRadius": "imported/shared/size-8",
                                         "strokeTopWeight": "imported/shared/size-0",
+                                        "itemSpacing": "imported/shared/size-2",
+                                        "minHeight": "imported/shared/size-32",
                                         "minWidth": "imported/shared/size-32",
                                         "paddingBottom": "imported/banner/button-2/padding-bottom",
                                         "paddingLeft": "imported/shared/size-12",
@@ -848,6 +914,7 @@ const COMPONENTS = [
                     "stretchChildren": true
                   },
                   "bindings": {
+                    "minHeight": "imported/shared/size-0",
                     "minWidth": "imported/shared/size-0"
                   },
                   "children": [
@@ -878,6 +945,8 @@ const COMPONENTS = [
                             "counter": "CENTER"
                           },
                           "bindings": {
+                            "itemSpacing": "imported/shared/size-8",
+                            "minHeight": "imported/shared/size-0",
                             "minWidth": "imported/shared/size-0"
                           },
                           "children": [
@@ -888,6 +957,9 @@ const COMPONENTS = [
                                 "mode": "HORIZONTAL",
                                 "primary": "SPACE_BETWEEN",
                                 "counter": "CENTER"
+                              },
+                              "bindings": {
+                                "itemSpacing": "imported/shared/size-4"
                               },
                               "children": [
                                 {
@@ -908,6 +980,7 @@ const COMPONENTS = [
                                         "counter": "MIN"
                                       },
                                       "bindings": {
+                                        "minHeight": "imported/shared/size-0",
                                         "minWidth": "imported/shared/size-0"
                                       },
                                       "children": [
@@ -952,11 +1025,19 @@ const COMPONENTS = [
                                 "topLeftRadius": "imported/shared/size-8",
                                 "topRightRadius": "imported/shared/size-8",
                                 "strokeTopWeight": "imported/shared/size-0",
+                                "itemSpacing": "imported/shared/size-2",
+                                "minHeight": "imported/shared/size-32",
                                 "minWidth": "imported/shared/size-32",
                                 "paddingBottom": "imported/shared/size-4",
                                 "paddingLeft": "imported/shared/size-4",
                                 "paddingRight": "imported/shared/size-4",
                                 "paddingTop": "imported/shared/size-4"
+                              },
+                              "margins": {
+                                "bottom": -4,
+                                "left": -4,
+                                "right": -4,
+                                "top": -4
                               },
                               "children": [
                                 {
@@ -966,6 +1047,10 @@ const COMPONENTS = [
                                     "mode": "HORIZONTAL",
                                     "primary": "MIN",
                                     "counter": "MIN"
+                                  },
+                                  "margins": {
+                                    "bottom": -2,
+                                    "top": -2
                                   },
                                   "children": [
                                     {
@@ -977,6 +1062,7 @@ const COMPONENTS = [
                                         "counter": "MIN"
                                       },
                                       "bindings": {
+                                        "minHeight": "imported/shared/size-0",
                                         "minWidth": "imported/shared/size-0"
                                       },
                                       "children": [
@@ -1029,7 +1115,9 @@ const COMPONENTS = [
                             "stretchChildren": true
                           },
                           "bindings": {
-                            "minWidth": "imported/shared/size-0"
+                            "minHeight": "imported/shared/size-0",
+                            "minWidth": "imported/shared/size-0",
+                            "itemSpacing": "imported/shared/size-8"
                           },
                           "children": [
                             {
@@ -1045,6 +1133,7 @@ const COMPONENTS = [
                                   "type": "text",
                                   "name": "label-2",
                                   "bindings": {
+                                    "minHeight": "imported/shared/size-0",
                                     "minWidth": "imported/shared/size-0"
                                   },
                                   "characters": "Use your finance report to get detailed insights.",
@@ -1062,6 +1151,10 @@ const COMPONENTS = [
                                 "primary": "MIN",
                                 "counter": "CENTER"
                               },
+                              "margins": {
+                                "left": -8,
+                                "top": -8
+                              },
                               "children": [
                                 {
                                   "type": "frame",
@@ -1070,6 +1163,10 @@ const COMPONENTS = [
                                     "mode": "HORIZONTAL",
                                     "primary": "MIN",
                                     "counter": "MIN"
+                                  },
+                                  "margins": {
+                                    "left": 8,
+                                    "top": 8
                                   },
                                   "children": [
                                     {
@@ -1090,6 +1187,8 @@ const COMPONENTS = [
                                         "topLeftRadius": "imported/shared/size-8",
                                         "topRightRadius": "imported/shared/size-8",
                                         "strokeTopWeight": "imported/shared/size-0",
+                                        "itemSpacing": "imported/shared/size-2",
+                                        "minHeight": "imported/shared/size-32",
                                         "minWidth": "imported/shared/size-32",
                                         "paddingBottom": "imported/banner/button-2/padding-bottom",
                                         "paddingLeft": "imported/shared/size-12",
@@ -1228,6 +1327,7 @@ const COMPONENTS = [
                     "stretchChildren": true
                   },
                   "bindings": {
+                    "minHeight": "imported/shared/size-0",
                     "minWidth": "imported/shared/size-0"
                   },
                   "children": [
@@ -1258,6 +1358,8 @@ const COMPONENTS = [
                             "counter": "CENTER"
                           },
                           "bindings": {
+                            "itemSpacing": "imported/shared/size-8",
+                            "minHeight": "imported/shared/size-0",
                             "minWidth": "imported/shared/size-0"
                           },
                           "children": [
@@ -1268,6 +1370,9 @@ const COMPONENTS = [
                                 "mode": "HORIZONTAL",
                                 "primary": "SPACE_BETWEEN",
                                 "counter": "CENTER"
+                              },
+                              "bindings": {
+                                "itemSpacing": "imported/shared/size-4"
                               },
                               "children": [
                                 {
@@ -1288,6 +1393,7 @@ const COMPONENTS = [
                                         "counter": "MIN"
                                       },
                                       "bindings": {
+                                        "minHeight": "imported/shared/size-0",
                                         "minWidth": "imported/shared/size-0"
                                       },
                                       "children": [
@@ -1332,11 +1438,19 @@ const COMPONENTS = [
                                 "topLeftRadius": "imported/shared/size-8",
                                 "topRightRadius": "imported/shared/size-8",
                                 "strokeTopWeight": "imported/shared/size-0",
+                                "itemSpacing": "imported/shared/size-2",
+                                "minHeight": "imported/shared/size-32",
                                 "minWidth": "imported/shared/size-32",
                                 "paddingBottom": "imported/shared/size-4",
                                 "paddingLeft": "imported/shared/size-4",
                                 "paddingRight": "imported/shared/size-4",
                                 "paddingTop": "imported/shared/size-4"
+                              },
+                              "margins": {
+                                "bottom": -4,
+                                "left": -4,
+                                "right": -4,
+                                "top": -4
                               },
                               "children": [
                                 {
@@ -1346,6 +1460,10 @@ const COMPONENTS = [
                                     "mode": "HORIZONTAL",
                                     "primary": "MIN",
                                     "counter": "MIN"
+                                  },
+                                  "margins": {
+                                    "bottom": -2,
+                                    "top": -2
                                   },
                                   "children": [
                                     {
@@ -1357,6 +1475,7 @@ const COMPONENTS = [
                                         "counter": "MIN"
                                       },
                                       "bindings": {
+                                        "minHeight": "imported/shared/size-0",
                                         "minWidth": "imported/shared/size-0"
                                       },
                                       "children": [
@@ -1409,7 +1528,9 @@ const COMPONENTS = [
                             "stretchChildren": true
                           },
                           "bindings": {
-                            "minWidth": "imported/shared/size-0"
+                            "minHeight": "imported/shared/size-0",
+                            "minWidth": "imported/shared/size-0",
+                            "itemSpacing": "imported/shared/size-8"
                           },
                           "children": [
                             {
@@ -1425,6 +1546,7 @@ const COMPONENTS = [
                                   "type": "text",
                                   "name": "label-2",
                                   "bindings": {
+                                    "minHeight": "imported/shared/size-0",
                                     "minWidth": "imported/shared/size-0"
                                   },
                                   "characters": "Use your finance report to get detailed insights.",
@@ -1442,6 +1564,10 @@ const COMPONENTS = [
                                 "primary": "MIN",
                                 "counter": "CENTER"
                               },
+                              "margins": {
+                                "left": -8,
+                                "top": -8
+                              },
                               "children": [
                                 {
                                   "type": "frame",
@@ -1450,6 +1576,10 @@ const COMPONENTS = [
                                     "mode": "HORIZONTAL",
                                     "primary": "MIN",
                                     "counter": "MIN"
+                                  },
+                                  "margins": {
+                                    "left": 8,
+                                    "top": 8
                                   },
                                   "children": [
                                     {
@@ -1470,6 +1600,8 @@ const COMPONENTS = [
                                         "topLeftRadius": "imported/shared/size-8",
                                         "topRightRadius": "imported/shared/size-8",
                                         "strokeTopWeight": "imported/shared/size-0",
+                                        "itemSpacing": "imported/shared/size-2",
+                                        "minHeight": "imported/shared/size-32",
                                         "minWidth": "imported/shared/size-32",
                                         "paddingBottom": "imported/banner/button-2/padding-bottom",
                                         "paddingLeft": "imported/shared/size-12",
@@ -1612,6 +1744,7 @@ const COMPONENTS = [
                     "stretchChildren": true
                   },
                   "bindings": {
+                    "minHeight": "imported/shared/size-0",
                     "minWidth": "imported/shared/size-0"
                   },
                   "children": [
@@ -1642,6 +1775,8 @@ const COMPONENTS = [
                             "counter": "CENTER"
                           },
                           "bindings": {
+                            "itemSpacing": "imported/shared/size-8",
+                            "minHeight": "imported/shared/size-0",
                             "minWidth": "imported/shared/size-0"
                           },
                           "children": [
@@ -1652,6 +1787,9 @@ const COMPONENTS = [
                                 "mode": "HORIZONTAL",
                                 "primary": "SPACE_BETWEEN",
                                 "counter": "CENTER"
+                              },
+                              "bindings": {
+                                "itemSpacing": "imported/shared/size-4"
                               },
                               "children": [
                                 {
@@ -1672,6 +1810,7 @@ const COMPONENTS = [
                                         "counter": "MIN"
                                       },
                                       "bindings": {
+                                        "minHeight": "imported/shared/size-0",
                                         "minWidth": "imported/shared/size-0"
                                       },
                                       "children": [
@@ -1716,11 +1855,19 @@ const COMPONENTS = [
                                 "topLeftRadius": "imported/shared/size-8",
                                 "topRightRadius": "imported/shared/size-8",
                                 "strokeTopWeight": "imported/shared/size-0",
+                                "itemSpacing": "imported/shared/size-2",
+                                "minHeight": "imported/shared/size-32",
                                 "minWidth": "imported/shared/size-32",
                                 "paddingBottom": "imported/shared/size-4",
                                 "paddingLeft": "imported/shared/size-4",
                                 "paddingRight": "imported/shared/size-4",
                                 "paddingTop": "imported/shared/size-4"
+                              },
+                              "margins": {
+                                "bottom": -4,
+                                "left": -4,
+                                "right": -4,
+                                "top": -4
                               },
                               "children": [
                                 {
@@ -1730,6 +1877,10 @@ const COMPONENTS = [
                                     "mode": "HORIZONTAL",
                                     "primary": "MIN",
                                     "counter": "MIN"
+                                  },
+                                  "margins": {
+                                    "bottom": -2,
+                                    "top": -2
                                   },
                                   "children": [
                                     {
@@ -1741,6 +1892,7 @@ const COMPONENTS = [
                                         "counter": "MIN"
                                       },
                                       "bindings": {
+                                        "minHeight": "imported/shared/size-0",
                                         "minWidth": "imported/shared/size-0"
                                       },
                                       "children": [
@@ -1793,7 +1945,9 @@ const COMPONENTS = [
                             "stretchChildren": true
                           },
                           "bindings": {
-                            "minWidth": "imported/shared/size-0"
+                            "minHeight": "imported/shared/size-0",
+                            "minWidth": "imported/shared/size-0",
+                            "itemSpacing": "imported/shared/size-8"
                           },
                           "children": [
                             {
@@ -1809,6 +1963,7 @@ const COMPONENTS = [
                                   "type": "text",
                                   "name": "label-2",
                                   "bindings": {
+                                    "minHeight": "imported/shared/size-0",
                                     "minWidth": "imported/shared/size-0"
                                   },
                                   "characters": "Use your finance report to get detailed insights.",
@@ -1826,6 +1981,10 @@ const COMPONENTS = [
                                 "primary": "MIN",
                                 "counter": "CENTER"
                               },
+                              "margins": {
+                                "left": -8,
+                                "top": -8
+                              },
                               "children": [
                                 {
                                   "type": "frame",
@@ -1834,6 +1993,10 @@ const COMPONENTS = [
                                     "mode": "HORIZONTAL",
                                     "primary": "MIN",
                                     "counter": "MIN"
+                                  },
+                                  "margins": {
+                                    "left": 8,
+                                    "top": 8
                                   },
                                   "children": [
                                     {
@@ -1854,6 +2017,8 @@ const COMPONENTS = [
                                         "topLeftRadius": "imported/shared/size-8",
                                         "topRightRadius": "imported/shared/size-8",
                                         "strokeTopWeight": "imported/shared/size-0",
+                                        "itemSpacing": "imported/shared/size-2",
+                                        "minHeight": "imported/shared/size-32",
                                         "minWidth": "imported/shared/size-32",
                                         "paddingBottom": "imported/banner/button-2/padding-bottom",
                                         "paddingLeft": "imported/shared/size-12",
@@ -1994,6 +2159,7 @@ const COMPONENTS = [
                     "stretchChildren": true
                   },
                   "bindings": {
+                    "minHeight": "imported/shared/size-0",
                     "minWidth": "imported/shared/size-0"
                   },
                   "children": [
@@ -2024,6 +2190,8 @@ const COMPONENTS = [
                             "counter": "CENTER"
                           },
                           "bindings": {
+                            "itemSpacing": "imported/shared/size-8",
+                            "minHeight": "imported/shared/size-0",
                             "minWidth": "imported/shared/size-0"
                           },
                           "children": [
@@ -2034,6 +2202,9 @@ const COMPONENTS = [
                                 "mode": "HORIZONTAL",
                                 "primary": "SPACE_BETWEEN",
                                 "counter": "CENTER"
+                              },
+                              "bindings": {
+                                "itemSpacing": "imported/shared/size-4"
                               },
                               "children": [
                                 {
@@ -2054,6 +2225,7 @@ const COMPONENTS = [
                                         "counter": "MIN"
                                       },
                                       "bindings": {
+                                        "minHeight": "imported/shared/size-0",
                                         "minWidth": "imported/shared/size-0"
                                       },
                                       "children": [
@@ -2098,11 +2270,19 @@ const COMPONENTS = [
                                 "topLeftRadius": "imported/shared/size-8",
                                 "topRightRadius": "imported/shared/size-8",
                                 "strokeTopWeight": "imported/shared/size-0",
+                                "itemSpacing": "imported/shared/size-2",
+                                "minHeight": "imported/shared/size-32",
                                 "minWidth": "imported/shared/size-32",
                                 "paddingBottom": "imported/shared/size-4",
                                 "paddingLeft": "imported/shared/size-4",
                                 "paddingRight": "imported/shared/size-4",
                                 "paddingTop": "imported/shared/size-4"
+                              },
+                              "margins": {
+                                "bottom": -4,
+                                "left": -4,
+                                "right": -4,
+                                "top": -4
                               },
                               "children": [
                                 {
@@ -2112,6 +2292,10 @@ const COMPONENTS = [
                                     "mode": "HORIZONTAL",
                                     "primary": "MIN",
                                     "counter": "MIN"
+                                  },
+                                  "margins": {
+                                    "bottom": -2,
+                                    "top": -2
                                   },
                                   "children": [
                                     {
@@ -2123,6 +2307,7 @@ const COMPONENTS = [
                                         "counter": "MIN"
                                       },
                                       "bindings": {
+                                        "minHeight": "imported/shared/size-0",
                                         "minWidth": "imported/shared/size-0"
                                       },
                                       "children": [
@@ -2175,7 +2360,9 @@ const COMPONENTS = [
                             "stretchChildren": true
                           },
                           "bindings": {
-                            "minWidth": "imported/shared/size-0"
+                            "minHeight": "imported/shared/size-0",
+                            "minWidth": "imported/shared/size-0",
+                            "itemSpacing": "imported/shared/size-8"
                           },
                           "children": [
                             {
@@ -2191,6 +2378,7 @@ const COMPONENTS = [
                                   "type": "text",
                                   "name": "label-2",
                                   "bindings": {
+                                    "minHeight": "imported/shared/size-0",
                                     "minWidth": "imported/shared/size-0"
                                   },
                                   "characters": "Use your finance report to get detailed insights.",
@@ -2208,6 +2396,10 @@ const COMPONENTS = [
                                 "primary": "MIN",
                                 "counter": "CENTER"
                               },
+                              "margins": {
+                                "left": -8,
+                                "top": -8
+                              },
                               "children": [
                                 {
                                   "type": "frame",
@@ -2216,6 +2408,10 @@ const COMPONENTS = [
                                     "mode": "HORIZONTAL",
                                     "primary": "MIN",
                                     "counter": "MIN"
+                                  },
+                                  "margins": {
+                                    "left": 8,
+                                    "top": 8
                                   },
                                   "children": [
                                     {
@@ -2236,6 +2432,8 @@ const COMPONENTS = [
                                         "topLeftRadius": "imported/shared/size-8",
                                         "topRightRadius": "imported/shared/size-8",
                                         "strokeTopWeight": "imported/shared/size-0",
+                                        "itemSpacing": "imported/shared/size-2",
+                                        "minHeight": "imported/shared/size-32",
                                         "minWidth": "imported/shared/size-32",
                                         "paddingBottom": "imported/banner/button-2/padding-bottom",
                                         "paddingLeft": "imported/shared/size-12",
@@ -2376,6 +2574,7 @@ const COMPONENTS = [
                     "stretchChildren": true
                   },
                   "bindings": {
+                    "minHeight": "imported/shared/size-0",
                     "minWidth": "imported/shared/size-0"
                   },
                   "children": [
@@ -2406,6 +2605,8 @@ const COMPONENTS = [
                             "counter": "CENTER"
                           },
                           "bindings": {
+                            "itemSpacing": "imported/shared/size-8",
+                            "minHeight": "imported/shared/size-0",
                             "minWidth": "imported/shared/size-0"
                           },
                           "children": [
@@ -2416,6 +2617,9 @@ const COMPONENTS = [
                                 "mode": "HORIZONTAL",
                                 "primary": "SPACE_BETWEEN",
                                 "counter": "CENTER"
+                              },
+                              "bindings": {
+                                "itemSpacing": "imported/shared/size-4"
                               },
                               "children": [
                                 {
@@ -2436,6 +2640,7 @@ const COMPONENTS = [
                                         "counter": "MIN"
                                       },
                                       "bindings": {
+                                        "minHeight": "imported/shared/size-0",
                                         "minWidth": "imported/shared/size-0"
                                       },
                                       "children": [
@@ -2480,11 +2685,19 @@ const COMPONENTS = [
                                 "topLeftRadius": "imported/shared/size-8",
                                 "topRightRadius": "imported/shared/size-8",
                                 "strokeTopWeight": "imported/shared/size-0",
+                                "itemSpacing": "imported/shared/size-2",
+                                "minHeight": "imported/shared/size-32",
                                 "minWidth": "imported/shared/size-32",
                                 "paddingBottom": "imported/shared/size-4",
                                 "paddingLeft": "imported/shared/size-4",
                                 "paddingRight": "imported/shared/size-4",
                                 "paddingTop": "imported/shared/size-4"
+                              },
+                              "margins": {
+                                "bottom": -4,
+                                "left": -4,
+                                "right": -4,
+                                "top": -4
                               },
                               "children": [
                                 {
@@ -2494,6 +2707,10 @@ const COMPONENTS = [
                                     "mode": "HORIZONTAL",
                                     "primary": "MIN",
                                     "counter": "MIN"
+                                  },
+                                  "margins": {
+                                    "bottom": -2,
+                                    "top": -2
                                   },
                                   "children": [
                                     {
@@ -2505,6 +2722,7 @@ const COMPONENTS = [
                                         "counter": "MIN"
                                       },
                                       "bindings": {
+                                        "minHeight": "imported/shared/size-0",
                                         "minWidth": "imported/shared/size-0"
                                       },
                                       "children": [
@@ -2557,7 +2775,9 @@ const COMPONENTS = [
                             "stretchChildren": true
                           },
                           "bindings": {
-                            "minWidth": "imported/shared/size-0"
+                            "minHeight": "imported/shared/size-0",
+                            "minWidth": "imported/shared/size-0",
+                            "itemSpacing": "imported/shared/size-8"
                           },
                           "children": [
                             {
@@ -2573,6 +2793,7 @@ const COMPONENTS = [
                                   "type": "text",
                                   "name": "label-2",
                                   "bindings": {
+                                    "minHeight": "imported/shared/size-0",
                                     "minWidth": "imported/shared/size-0"
                                   },
                                   "characters": "Use your finance report to get detailed insights.",
@@ -2590,6 +2811,10 @@ const COMPONENTS = [
                                 "primary": "MIN",
                                 "counter": "CENTER"
                               },
+                              "margins": {
+                                "left": -8,
+                                "top": -8
+                              },
                               "children": [
                                 {
                                   "type": "frame",
@@ -2598,6 +2823,10 @@ const COMPONENTS = [
                                     "mode": "HORIZONTAL",
                                     "primary": "MIN",
                                     "counter": "MIN"
+                                  },
+                                  "margins": {
+                                    "left": 8,
+                                    "top": 8
                                   },
                                   "children": [
                                     {
@@ -2618,6 +2847,8 @@ const COMPONENTS = [
                                         "topLeftRadius": "imported/shared/size-8",
                                         "topRightRadius": "imported/shared/size-8",
                                         "strokeTopWeight": "imported/shared/size-0",
+                                        "itemSpacing": "imported/shared/size-2",
+                                        "minHeight": "imported/shared/size-32",
                                         "minWidth": "imported/shared/size-32",
                                         "paddingBottom": "imported/banner/button-2/padding-bottom",
                                         "paddingLeft": "imported/shared/size-12",
@@ -2758,6 +2989,7 @@ const COMPONENTS = [
                     "stretchChildren": true
                   },
                   "bindings": {
+                    "minHeight": "imported/shared/size-0",
                     "minWidth": "imported/shared/size-0"
                   },
                   "children": [
@@ -2788,6 +3020,8 @@ const COMPONENTS = [
                             "counter": "CENTER"
                           },
                           "bindings": {
+                            "itemSpacing": "imported/shared/size-8",
+                            "minHeight": "imported/shared/size-0",
                             "minWidth": "imported/shared/size-0"
                           },
                           "children": [
@@ -2798,6 +3032,9 @@ const COMPONENTS = [
                                 "mode": "HORIZONTAL",
                                 "primary": "SPACE_BETWEEN",
                                 "counter": "CENTER"
+                              },
+                              "bindings": {
+                                "itemSpacing": "imported/shared/size-4"
                               },
                               "children": [
                                 {
@@ -2818,6 +3055,7 @@ const COMPONENTS = [
                                         "counter": "MIN"
                                       },
                                       "bindings": {
+                                        "minHeight": "imported/shared/size-0",
                                         "minWidth": "imported/shared/size-0"
                                       },
                                       "children": [
@@ -2862,11 +3100,19 @@ const COMPONENTS = [
                                 "topLeftRadius": "imported/shared/size-8",
                                 "topRightRadius": "imported/shared/size-8",
                                 "strokeTopWeight": "imported/shared/size-0",
+                                "itemSpacing": "imported/shared/size-2",
+                                "minHeight": "imported/shared/size-32",
                                 "minWidth": "imported/shared/size-32",
                                 "paddingBottom": "imported/shared/size-4",
                                 "paddingLeft": "imported/shared/size-4",
                                 "paddingRight": "imported/shared/size-4",
                                 "paddingTop": "imported/shared/size-4"
+                              },
+                              "margins": {
+                                "bottom": -4,
+                                "left": -4,
+                                "right": -4,
+                                "top": -4
                               },
                               "children": [
                                 {
@@ -2876,6 +3122,10 @@ const COMPONENTS = [
                                     "mode": "HORIZONTAL",
                                     "primary": "MIN",
                                     "counter": "MIN"
+                                  },
+                                  "margins": {
+                                    "bottom": -2,
+                                    "top": -2
                                   },
                                   "children": [
                                     {
@@ -2887,6 +3137,7 @@ const COMPONENTS = [
                                         "counter": "MIN"
                                       },
                                       "bindings": {
+                                        "minHeight": "imported/shared/size-0",
                                         "minWidth": "imported/shared/size-0"
                                       },
                                       "children": [
@@ -2939,7 +3190,9 @@ const COMPONENTS = [
                             "stretchChildren": true
                           },
                           "bindings": {
-                            "minWidth": "imported/shared/size-0"
+                            "minHeight": "imported/shared/size-0",
+                            "minWidth": "imported/shared/size-0",
+                            "itemSpacing": "imported/shared/size-8"
                           },
                           "children": [
                             {
@@ -2955,6 +3208,7 @@ const COMPONENTS = [
                                   "type": "text",
                                   "name": "label-2",
                                   "bindings": {
+                                    "minHeight": "imported/shared/size-0",
                                     "minWidth": "imported/shared/size-0"
                                   },
                                   "characters": "Use your finance report to get detailed insights.",
@@ -2972,6 +3226,10 @@ const COMPONENTS = [
                                 "primary": "MIN",
                                 "counter": "CENTER"
                               },
+                              "margins": {
+                                "left": -8,
+                                "top": -8
+                              },
                               "children": [
                                 {
                                   "type": "frame",
@@ -2980,6 +3238,10 @@ const COMPONENTS = [
                                     "mode": "HORIZONTAL",
                                     "primary": "MIN",
                                     "counter": "MIN"
+                                  },
+                                  "margins": {
+                                    "left": 8,
+                                    "top": 8
                                   },
                                   "children": [
                                     {
@@ -3000,6 +3262,8 @@ const COMPONENTS = [
                                         "topLeftRadius": "imported/shared/size-8",
                                         "topRightRadius": "imported/shared/size-8",
                                         "strokeTopWeight": "imported/shared/size-0",
+                                        "itemSpacing": "imported/shared/size-2",
+                                        "minHeight": "imported/shared/size-32",
                                         "minWidth": "imported/shared/size-32",
                                         "paddingBottom": "imported/banner/button-2/padding-bottom",
                                         "paddingLeft": "imported/shared/size-12",
