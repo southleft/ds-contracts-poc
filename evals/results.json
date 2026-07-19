@@ -1,6 +1,6 @@
 {
-  "passed": 107,
-  "total": 107,
+  "passed": 108,
+  "total": 108,
   "results": [
     {
       "id": "refuse-unknown-token-reference",
@@ -534,6 +534,11 @@
     },
     {
       "id": "polaris-showcase-reproducible",
+      "claim": "C1-determinism",
+      "pass": true
+    },
+    {
+      "id": "computed-floor-gate",
       "claim": "C1-determinism",
       "pass": true
     }

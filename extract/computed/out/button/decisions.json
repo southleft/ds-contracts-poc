@@ -1,0 +1,27 @@
+[
+  {
+    "ids": [
+      "primary.critical.large.enabled|label|font-weight",
+      "primary.critical.medium.enabled|label|font-weight",
+      "primary.critical.micro.enabled|label|font-weight",
+      "primary.critical.slim.enabled|label|font-weight",
+      "primary.none.large.enabled|label|font-weight",
+      "primary.none.medium.enabled|label|font-weight",
+      "primary.none.micro.enabled|label|font-weight",
+      "primary.none.slim.enabled|label|font-weight",
+      "primary.success.large.enabled|label|font-weight",
+      "primary.success.medium.enabled|label|font-weight",
+      "primary.success.micro.enabled|label|font-weight",
+      "primary.success.slim.enabled|label|font-weight"
+    ],
+    "part": "label",
+    "channel": "font-weight",
+    "scope": "axis:variant=primary",
+    "from": "{p.font-weight-medium}",
+    "to": "{p.font-weight-semibold}",
+    "observed": "650",
+    "expected": "550",
+    "cause": "composition-owned typography: the primary variant label renders Text fontWeight 650 (semibold); the carried binding is font-weight-medium (550) — same composition-owned class",
+    "ack": "explicit CLI --apply"
+  }
+]
