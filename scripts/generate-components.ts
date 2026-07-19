@@ -16,29 +16,65 @@
  *
  * Generated files are never edited by hand. To change a component, change
  * its contract and re-run `npm run generate`.
+ *
+ * PARAMETERIZED (Phase 1, @ds-contracts/cli): every path is now an option —
+ *   --contracts <dir>   contract documents        (default: <cwd>/contracts)
+ *   --tokens <files>    comma-separated DTCG files (default: the repo's 4-file layout)
+ *   --icons <dir>       SVG icon assets           (default: <cwd>/assets/icons)
+ *   --out <dir>         output root               (default: <cwd>/src/components)
+ * Defaults are the repo paths, so `npm run generate` is byte-identical to
+ * the pre-parameterization script. The `ds-contracts generate` verb calls
+ * the same exported generateComponents() — one code path, two shells.
  */
 import { mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { ContractSchema, sortByDependencies, type Contract } from './contract-schema.js';
 import { generateCss, generateStories, generateTsx, validateContract } from '../core/emit-react.js';
 import { formatCss, formatTsx } from '../core/format.js';
 import { tokenInventoryFromJson } from '../core/tokens.js';
 
-const ROOT = process.cwd();
-const CONTRACTS_DIR = path.join(ROOT, 'contracts');
-const TOKENS_DIR = path.join(ROOT, 'tokens');
-const OUT_DIR = path.join(ROOT, 'src', 'components');
+export interface GenerateComponentsOptions {
+  /** Directory of *.contract.json documents. */
+  contractsDir?: string;
+  /** DTCG token files — the union is the token inventory. */
+  tokenFiles?: string[];
+  /** Directory of <name>.svg icon assets. */
+  iconsDir?: string;
+  /** Output root — one directory per component is written under it. */
+  outDir?: string;
+  /** Emit <Name>.stories.tsx per component (default true — the repo path). */
+  stories?: boolean;
+}
 
-/** Icon assets are SOURCE (like tokens): assets/icons/<name>.svg, inlined by
+/** Named refusal — the caller prints `header` then one `  - line` per error
+ *  and exits 1 (both shells keep the exact historical wording). */
+export class ContractViolationError extends Error {
+  constructor(
+    public header: string,
+    public violations: string[],
+  ) {
+    super(`${header}\n${violations.map((e) => `  - ${e}`).join('\n')}`);
+  }
+}
+
+const defaultTokenFiles = (root: string) => [
+  path.join(root, 'tokens', 'primitives.tokens.json'),
+  path.join(root, 'tokens', 'semantic.tokens.json'),
+  path.join(root, 'tokens', 'modes', 'semantic.light.tokens.json'),
+  path.join(root, 'tokens', 'modes', 'semantic.dark.tokens.json'),
+];
+
+/** Icon assets are SOURCE (like tokens): <iconsDir>/<name>.svg, inlined by
  *  the generator on the code side and rendered as vectors in Figma. */
-function loadIconAssets(): Map<string, string> {
+function loadIconAssets(iconsDir: string): Map<string, string> {
   try {
     return new Map(
-      readdirSync(path.join(ROOT, 'assets', 'icons'))
+      readdirSync(iconsDir)
         .filter((f) => f.endsWith('.svg'))
         .map((f) => [
           f.replace(/\.svg$/, ''),
-          readFileSync(path.join(ROOT, 'assets', 'icons', f), 'utf8').trim(),
+          readFileSync(path.join(iconsDir, f), 'utf8').trim(),
         ]),
     );
   } catch {
@@ -46,26 +82,26 @@ function loadIconAssets(): Map<string, string> {
   }
 }
 
-function loadTokenInventory(): Set<string> {
-  const files = [
-    path.join(TOKENS_DIR, 'primitives.tokens.json'),
-    path.join(TOKENS_DIR, 'semantic.tokens.json'),
-    path.join(TOKENS_DIR, 'modes', 'semantic.light.tokens.json'),
-    path.join(TOKENS_DIR, 'modes', 'semantic.dark.tokens.json'),
-  ];
-  return tokenInventoryFromJson(files.map((file) => JSON.parse(readFileSync(file, 'utf8'))));
+function loadTokenInventory(tokenFiles: string[]): Set<string> {
+  return tokenInventoryFromJson(tokenFiles.map((file) => JSON.parse(readFileSync(file, 'utf8'))));
 }
 
-async function main() {
-  const tokenInventory = loadTokenInventory();
-  const iconAssets = loadIconAssets();
-  const contractFiles = readdirSync(CONTRACTS_DIR).filter((f) => f.endsWith('.contract.json'));
+export async function generateComponents(
+  options: GenerateComponentsOptions = {},
+): Promise<{ generated: string[]; outDir: string }> {
+  const root = process.cwd();
+  const contractsDir = options.contractsDir ?? path.join(root, 'contracts');
+  const outDir = options.outDir ?? path.join(root, 'src', 'components');
+  const stories = options.stories ?? true;
+  const tokenInventory = loadTokenInventory(options.tokenFiles ?? defaultTokenFiles(root));
+  const iconAssets = loadIconAssets(options.iconsDir ?? path.join(root, 'assets', 'icons'));
+  const contractFiles = readdirSync(contractsDir).filter((f) => f.endsWith('.contract.json'));
   const errors: string[] = [];
   const generated: string[] = [];
 
   const parsedContracts: Contract[] = [];
   for (const file of contractFiles) {
-    const raw = JSON.parse(readFileSync(path.join(CONTRACTS_DIR, file), 'utf8'));
+    const raw = JSON.parse(readFileSync(path.join(contractsDir, file), 'utf8'));
     const parsed = ContractSchema.safeParse(raw);
     if (!parsed.success) {
       errors.push(
@@ -108,9 +144,7 @@ async function main() {
   // crashes with an unnamed TypeError INSTEAD of the named refusal — the
   // exact opposite of C2. Name the violations and stop.
   if (errors.length > 0) {
-    console.error(`✘ Refused — ${errors.length} contract violation(s):`);
-    for (const e of errors) console.error(`  - ${e}`);
-    process.exit(1);
+    throw new ContractViolationError(`✘ Refused — ${errors.length} contract violation(s):`, errors);
   }
 
   for (const contract of ordered) {
@@ -120,7 +154,7 @@ async function main() {
     const css = generateCss(contract, tokenInventory, errors);
     if (errors.some((e) => e.startsWith(contract.id))) continue;
 
-    const dir = path.join(OUT_DIR, contract.name);
+    const dir = path.join(outDir, contract.name);
     mkdirSync(dir, { recursive: true });
 
     writeFileSync(path.join(dir, `${contract.name}.module.css`), await formatCss(css));
@@ -128,10 +162,12 @@ async function main() {
       path.join(dir, `${contract.name}.tsx`),
       await formatTsx(generateTsx(contract, byId, iconAssets)),
     );
-    writeFileSync(
-      path.join(dir, `${contract.name}.stories.tsx`),
-      await formatTsx(generateStories(contract, byId)),
-    );
+    if (stories) {
+      writeFileSync(
+        path.join(dir, `${contract.name}.stories.tsx`),
+        await formatTsx(generateStories(contract, byId)),
+      );
+    }
     writeFileSync(
       path.join(dir, 'index.ts'),
       `export { ${contract.name} } from './${contract.name}';\nexport type { ${contract.name}Props } from './${contract.name}';\n`,
@@ -140,21 +176,59 @@ async function main() {
   }
 
   if (errors.length > 0) {
-    console.error('✖ Contract validation failed:\n');
-    for (const e of errors) console.error(`  - ${e}`);
-    process.exit(1);
+    throw new ContractViolationError('✖ Contract validation failed:\n', errors);
   }
 
-  mkdirSync(OUT_DIR, { recursive: true });
+  mkdirSync(outDir, { recursive: true });
   writeFileSync(
-    path.join(OUT_DIR, 'index.ts'),
+    path.join(outDir, 'index.ts'),
     generated
       .sort()
       .map((n) => `export * from './${n}';`)
       .join('\n') + '\n',
   );
 
-  console.log(`✔ Generated ${generated.length} component(s) from contracts: ${generated.sort().join(', ')}`);
+  return { generated, outDir };
 }
 
-await main();
+/** Shared by both shells (this script and the ds-contracts CLI): run, print
+ *  the historical success/refusal wording, exit non-zero on violations. */
+export async function runGenerateComponents(options: GenerateComponentsOptions = {}): Promise<void> {
+  try {
+    const { generated } = await generateComponents(options);
+    console.log(`✔ Generated ${generated.length} component(s) from contracts: ${generated.sort().join(', ')}`);
+  } catch (err) {
+    if (err instanceof ContractViolationError) {
+      console.error(err.header);
+      for (const e of err.violations) console.error(`  - ${e}`);
+      process.exit(1);
+    }
+    throw err;
+  }
+}
+
+/** Minimal flag parsing for the script shell — no CLI framework, repo culture. */
+export function parseGenerateArgs(argv: string[]): GenerateComponentsOptions {
+  const options: GenerateComponentsOptions = {};
+  for (let i = 0; i < argv.length; i++) {
+    const arg = argv[i];
+    const next = () => {
+      const v = argv[++i];
+      if (v === undefined) throw new Error(`${arg} needs a value`);
+      return v;
+    };
+    if (arg === '--contracts') options.contractsDir = next();
+    else if (arg === '--tokens') options.tokenFiles = next().split(',').filter(Boolean);
+    else if (arg === '--icons') options.iconsDir = next();
+    else if (arg === '--out') options.outDir = next();
+    else if (arg === '--no-stories') options.stories = false;
+    else if (arg === '--stories') options.stories = true;
+    else throw new Error(`Unknown argument "${arg}" — flags: --contracts <dir> --tokens <f,f,…> --icons <dir> --out <dir> [--no-stories]`);
+  }
+  return options;
+}
+
+// Direct-run shell: `tsx scripts/generate-components.ts [flags]` (npm run generate).
+if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+  await runGenerateComponents(parseGenerateArgs(process.argv.slice(2)));
+}
