@@ -1,0 +1,52 @@
+<!--
+  Banner — static HTML+CSS emitted from contract polaris.banner v0.1.0 by core/emit-html.ts.
+  Token values arrive via CSS custom properties (the same custom-property names the CSS Modules
+  bind) — include the token stylesheet (src/styles/tokens.css) on the page or nothing resolves.
+  Fidelity: no events, no interactivity beyond CSS states (:hover/:focus-visible/:disabled).
+  Slots render their declared defaultContent; an empty slot renders its wrapper empty (absent content
+  is absent — named in an inline comment, never painted as placeholder text). Booleans render per showcase item.
+-->
+<section class="showcase showcase--banner">
+  <div class="showcase__item">
+    <p class="showcase__label">default</p>
+    <div class="banner banner--tone-info" role="status">
+      <h2 class="banner__title">Banner</h2>
+      <span class="banner__body">Your order has shipped.</span>
+    </div>
+  </div>
+  <div class="showcase__item">
+    <p class="showcase__label">tone=success</p>
+    <div class="banner banner--tone-success" role="status">
+      <h2 class="banner__title">Banner</h2>
+      <span class="banner__body">Your order has shipped.</span>
+    </div>
+  </div>
+  <div class="showcase__item">
+    <p class="showcase__label">tone=warning</p>
+    <div class="banner banner--tone-warning" role="alert">
+      <h2 class="banner__title">Banner</h2>
+      <span class="banner__body">Your order has shipped.</span>
+    </div>
+  </div>
+  <div class="showcase__item">
+    <p class="showcase__label">tone=critical</p>
+    <div class="banner banner--tone-critical" role="alert">
+      <h2 class="banner__title">Banner</h2>
+      <span class="banner__body">Your order has shipped.</span>
+    </div>
+  </div>
+  <div class="showcase__item">
+    <p class="showcase__label">hideIcon=true</p>
+    <div class="banner banner--tone-info" data-hide-icon="true" role="status">
+      <h2 class="banner__title">Banner</h2>
+      <span class="banner__body">Your order has shipped.</span>
+    </div>
+  </div>
+  <div class="showcase__item">
+    <p class="showcase__label">stopAnnouncements=true</p>
+    <div class="banner banner--tone-info" data-stop-announcements="true" role="status">
+      <h2 class="banner__title">Banner</h2>
+      <span class="banner__body">Your order has shipped.</span>
+    </div>
+  </div>
+</section>

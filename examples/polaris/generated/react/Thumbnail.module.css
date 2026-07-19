@@ -1,0 +1,17 @@
+/* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/thumbnail.contract.json (polaris.thumbnail v0.1.0)
+ * Regenerate with: npm run generate
+ */
+
+.root {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  background: var(--p-color-bg-surface);
+  border-radius: var(--p-border-radius-200);
+}
+
+.size-extraSmall {
+  border-radius: var(--p-border-radius-150);
+}

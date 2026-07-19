@@ -1,0 +1,49 @@
+/* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/button.contract.json (polaris.button v0.1.0)
+ * Regenerate with: npm run generate
+ */
+
+.root {
+  display: inline-flex;
+  align-items: center;
+  border: 0;
+  cursor: pointer;
+  border-radius: var(--p-border-radius-200);
+  gap: var(--p-space-050);
+}
+
+.root:disabled {
+  cursor: not-allowed;
+}
+
+.variant-plain {
+  color: var(--p-color-text-link);
+}
+
+.variant-primary {
+  background-color: var(--p-color-bg-fill-brand);
+  color: var(--p-color-text-brand-on-bg-fill);
+  box-shadow: var(--p-shadow-button-primary);
+}
+
+.variant-secondary {
+  background: var(--p-color-bg-fill);
+  color: var(--p-color-text);
+  box-shadow: var(--p-shadow-button);
+}
+
+.variant-tertiary {
+  color: var(--p-color-text);
+}
+
+.root:disabled {
+  background: var(--p-color-bg-fill-disabled);
+}
+
+.root:disabled {
+  color: var(--p-color-text-disabled);
+}
+
+.root:disabled {
+  fill: var(--p-color-icon-disabled);
+}

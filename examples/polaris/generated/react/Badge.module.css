@@ -1,0 +1,16 @@
+/* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/badge.contract.json (polaris.badge v0.1.0)
+ * Regenerate with: npm run generate
+ */
+
+.root {
+  display: inline-flex;
+  align-items: center;
+  border: 0;
+  background-color: var(--p-color-bg-fill-transparent-secondary);
+  color: var(--p-color-text-secondary);
+  border-radius: var(--p-border-radius-200);
+  padding-block: var(--p-space-050);
+  padding-inline: var(--p-space-200);
+  font-weight: var(--p-font-weight-medium);
+}

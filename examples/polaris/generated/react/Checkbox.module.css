@@ -1,0 +1,35 @@
+/* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/checkbox.contract.json (polaris.checkbox v0.1.0)
+ * Regenerate with: npm run generate
+ */
+
+.root {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+}
+
+.input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.backdrop {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  border-width: var(--p-border-width-0165);
+  border-color: var(--p-color-input-border);
+  border-style: solid;
+}
+
+.root:hover:not(:disabled) .backdrop {
+  border-color: var(--p-color-input-border-hover);
+}

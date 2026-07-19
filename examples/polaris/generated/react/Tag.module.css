@@ -1,0 +1,13 @@
+/* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/tag.contract.json (polaris.tag v0.1.0)
+ * Regenerate with: npm run generate
+ */
+
+.root {
+  display: inline-flex;
+  align-items: center;
+  border: 0;
+  background-color: var(--p-color-bg-fill-tertiary);
+  color: var(--p-color-text);
+  border-radius: var(--p-border-radius-200);
+}

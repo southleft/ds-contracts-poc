@@ -1,0 +1,30 @@
+/* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/banner.contract.json (polaris.banner v0.1.0)
+ * Regenerate with: npm run generate
+ */
+
+.root {
+  display: flex;
+  border: 0;
+  background-color: var(--p-color-bg-surface);
+}
+
+.tone-success {
+  background-color: var(--p-color-bg-fill-success);
+  color: var(--p-color-text-success-on-bg-fill);
+}
+
+.tone-warning {
+  background-color: var(--p-color-bg-fill-warning);
+  color: var(--p-color-text-warning-on-bg-fill);
+}
+
+.tone-critical {
+  background-color: var(--p-color-bg-fill-critical);
+  color: var(--p-color-text-critical-on-bg-fill);
+}
+
+.tone-info {
+  background-color: var(--p-color-bg-fill-info);
+  color: var(--p-color-text-info-on-bg-fill);
+}

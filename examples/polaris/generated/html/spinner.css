@@ -1,0 +1,38 @@
+/* Spinner — from polaris.spinner v0.1.0 (core/emit-html.ts) */
+
+.spinner, .spinner *, .spinner *::before, .spinner *::after {
+  box-sizing: border-box;
+}
+
+.spinner {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+}
+
+.spinner__glyphLarge svg {
+  width: 44px;
+  height: 44px;
+}
+
+.spinner__glyphLarge {
+  display: inline-flex;
+  flex-shrink: 0;
+  fill: var(--p-color-bg-fill-brand);
+}
+
+.spinner__glyphSmall svg {
+  width: 20px;
+  height: 20px;
+}
+
+.spinner__glyphSmall {
+  display: inline-flex;
+  flex-shrink: 0;
+  fill: var(--p-color-bg-fill-brand);
+}
+
+/* showcase chrome */
+.showcase { display: flex; flex-direction: column; gap: 24px; align-items: flex-start; font-family: sans-serif; }
+.showcase__label { margin: 0 0 8px; font: 12px/1 monospace; opacity: 0.6; }

@@ -1,0 +1,42 @@
+/* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/text-field.contract.json (polaris.text-field v0.1.0)
+ * Regenerate with: npm run generate
+ */
+
+.root {
+  display: flex;
+  align-items: center;
+  border: 0;
+  color: var(--p-color-text);
+}
+
+.input {
+  display: flex;
+  align-items: center;
+  color: var(--p-color-text);
+  padding-block: var(--p-space-150);
+  padding-inline: var(--p-space-300);
+  font-size: var(--p-font-size-400);
+  font-weight: var(--p-font-weight-regular);
+  line-height: var(--p-font-line-height-600);
+}
+
+.variant-borderless .input {
+  min-height: var(--p-space-800);
+}
+
+.root:disabled .input {
+  color: var(--p-color-text-disabled);
+}
+
+.backdrop {
+  background-color: var(--p-color-input-bg-surface);
+  border-radius: var(--p-border-radius-200);
+  border-width: var(--p-border-width-0165);
+  border-color: var(--p-color-input-border);
+  border-style: solid;
+}
+
+.variant-borderless .backdrop {
+  min-height: var(--p-space-800);
+}
