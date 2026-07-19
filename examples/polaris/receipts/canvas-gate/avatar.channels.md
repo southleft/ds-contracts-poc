@@ -39,10 +39,7 @@ applies (no binding, no literal). `gap` compares against computed `column-gap`; 
 | initials | border-top-left-radius | 5 cells (e.g. `Size=Md`) | `0px` | `0px` | 0 |  |
 | initials | border-top-right-radius | 5 cells (e.g. `Size=Md`) | `0px` | `0px` | 0 |  |
 | initials | border-width | 5 cells (e.g. `Size=Md`) | `0px` | `0px` | 0 |  |
-| initials | color | 5 cells (e.g. `Size=Md`) | `rgba(253, 239, 253, 1)` | `rgba(253, 239, 253, 1)` | match |  |
-| initials | font-size | 5 cells (e.g. `Size=Md`) | `13px` | `13px` | 0 |  |
 | initials | gap | 5 cells (e.g. `Size=Md`) | `0px` | `normal` | 0 |  |
-| initials | line-height | 5 cells (e.g. `Size=Md`) | `(ratio 1.2)` | `20px` | DIFFERS |  |
 | initials | padding-bottom | 5 cells (e.g. `Size=Md`) | `0px` | `0px` | 0 |  |
 | initials | padding-left | 5 cells (e.g. `Size=Md`) | `0px` | `0px` | 0 |  |
 | initials | padding-right | 5 cells (e.g. `Size=Md`) | `0px` | `0px` | 0 |  |

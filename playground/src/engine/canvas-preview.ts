@@ -82,6 +82,8 @@ const BINDING_CSS: Record<string, string> = {
   strokeBottomWeight: 'border-bottom-width',
   strokeLeftWeight: 'border-left-width',
   minWidth: 'min-width',
+  // Round 5: min-height binds (the floor Button's sub-768 sizing fact).
+  minHeight: 'min-height',
   opacity: 'opacity',
 };
 
@@ -195,19 +197,42 @@ function nodeStyle(spec: NodeSpec, ctx: RenderCtx): string {
   }
   if (spec.insetOverlay) {
     // B-3 finding 5 companion (Round 5 canvas-gate finding): the sync
-    // runtime lowers inset-0 overlay parts out of flow (applyInsetOverlay —
+    // runtime lowers inset overlay parts out of flow (applyInsetOverlay —
     // ABSOLUTE, stretched to the parent); this renderer flowed them as
     // auto-layout siblings, so the Checkbox glyph overlay drew BESIDE its
-    // backdrop instead of over it. Plain CSS semantics: absolute + inset 0.
+    // backdrop instead of over it. Plain CSS semantics: absolute + the
+    // carried inset offsets (0 when none — the compiled default).
     ctx.used.add('overlay');
-    d.push('position: absolute', 'top: 0', 'right: 0', 'bottom: 0', 'left: 0');
+    const o = spec.insetOffsets ?? { top: 0, right: 0, bottom: 0, left: 0 };
+    d.push('position: absolute', `top: ${o.top}px`, `right: ${o.right}px`, `bottom: ${o.bottom}px`, `left: ${o.left}px`);
   }
   // NODE opacity (dump v1.2 channel) — the runtime sets node.opacity after
   // construction; the canvas renders the same value or the row silently
   // loses its wash (field failure: Eventz disabled variants at opacity 0.4).
   if (typeof spec.opacity === 'number') d.push(`opacity: ${spec.opacity}`);
+  if (spec.imgPlaceholder) ctx.used.add('img');
+  d.push(...marginStyles(spec, ctx));
+  // Round 5: a block-display root with no width channel fills its container
+  // (CSS block truth — the ProgressBar track); auto-layout keeps hug sizing,
+  // a named preview note.
+  if (spec.blockRoot) d.push('width: 100%');
   d.push(...litStyles(spec));
   return d.join('; ');
+}
+
+/** Round 5: margin channels the floor-promoted contracts carry, compiled to
+ *  literal px. CSS-true here; auto-layout has NO per-child margin field, so
+ *  the sync runtime does not apply them — a named fidelity note. */
+function marginStyles(spec: NodeSpec, ctx: RenderCtx): string[] {
+  const m = spec.margins;
+  if (!m) return [];
+  ctx.used.add('margin');
+  const d: string[] = [];
+  if (m.top !== undefined) d.push(`margin-top: ${m.top}px`);
+  if (m.right !== undefined) d.push(`margin-right: ${m.right}px`);
+  if (m.bottom !== undefined) d.push(`margin-bottom: ${m.bottom}px`);
+  if (m.left !== undefined) d.push(`margin-left: ${m.left}px`);
+  return d;
 }
 
 /** v14 literals (spec.lits): the same literal-fidelity channels the sync
@@ -333,6 +358,7 @@ function shapeStyle(spec: NodeSpec, ctx: RenderCtx): string {
     const cssProp = BINDING_CSS[field];
     if (cssProp) d.push(`${cssProp}: ${cssVarOf(varName)}`);
   }
+  d.push(...marginStyles(spec, ctx));
   d.push(...litStyles(spec));
   const transform: string[] = [];
   const a = spec.absolute;
@@ -438,11 +464,15 @@ function renderNode(
     return `<div class="cv-slot" style="${style}">${inner}</div>`;
   }
 
-  // root / frame
+  // root / frame. An overlay child needs a positioned parent — but a parent
+  // that is ITSELF an overlay is already positioned; appending 'relative'
+  // would OVERRIDE its 'absolute' (CSS last-wins — Round 5 finding: the
+  // Checkbox glyph host fell back into flow).
   const hasOverlayChild = (spec.children ?? []).some((c) => c.overlay || c.absolute || c.insetOverlay);
+  const selfPositioned = spec.insetOverlay === true || spec.overlay !== undefined || spec.absolute !== undefined;
   const style = [
     nodeStyle(spec, ctx),
-    hasOverlayChild ? 'position: relative' : '',
+    hasOverlayChild && !selfPositioned ? 'position: relative' : '',
     extraStyle,
   ]
     .filter(Boolean)
@@ -508,6 +538,16 @@ function fidelityNotes(contract: Contract, data: ComponentData, used: Set<string
   }
   if (used.has('overlay')) {
     notes.push('overlay parts — absolute placement mirrors the runtime’s constraints, not canvas pixel positions.');
+  }
+  if (used.has('margin')) {
+    notes.push(
+      'margin channels — drawn as CSS margins (contract-carried); auto-layout has no per-child margin field, so the synced Figma nodes flow without them (code-only fact, †).',
+    );
+  }
+  if (used.has('img')) {
+    notes.push(
+      'image parts — raster content is runtime data; the canvas draws the standard image-placeholder wash (#D9D9D9).',
+    );
   }
   notes.push(
     'grid — variant cells sit in the same row/column grid the sync script lays out; auto-layout renders as CSS flexbox, not canvas geometry.',

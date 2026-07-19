@@ -61,6 +61,8 @@ const BINDING_CSS: Record<string, string> = {
   strokeBottomWeight: 'border-bottom-width',
   strokeLeftWeight: 'border-left-width',
   minWidth: 'min-width',
+  // Round 5: min-height binds (the floor Button's sub-768 sizing fact).
+  minHeight: 'min-height',
   opacity: 'opacity',
 };
 
@@ -164,16 +166,39 @@ function nodeStyle(spec: NodeSpec, ctx: RenderCtx): string {
   }
   if (spec.insetOverlay) {
     // B-3 finding 5 companion (Round 5 canvas-gate finding): the sync
-    // runtime lowers inset-0 overlay parts out of flow (applyInsetOverlay —
+    // runtime lowers inset overlay parts out of flow (applyInsetOverlay —
     // ABSOLUTE, stretched to the parent); this renderer flowed them as
     // auto-layout siblings, so the Checkbox glyph overlay drew BESIDE its
-    // backdrop instead of over it. Plain CSS semantics: absolute + inset 0.
+    // backdrop instead of over it. Plain CSS semantics: absolute + the
+    // carried inset offsets (0 when none — the compiled default).
     ctx.used.add('overlay');
-    d.push('position: absolute', 'top: 0', 'right: 0', 'bottom: 0', 'left: 0');
+    const o = spec.insetOffsets ?? { top: 0, right: 0, bottom: 0, left: 0 };
+    d.push('position: absolute', `top: ${o.top}px`, `right: ${o.right}px`, `bottom: ${o.bottom}px`, `left: ${o.left}px`);
   }
   if (typeof spec.opacity === 'number') d.push(`opacity: ${spec.opacity}`);
+  if (spec.imgPlaceholder) ctx.used.add('img');
+  d.push(...marginStyles(spec, ctx));
+  // Round 5: a block-display root with no width channel fills its container
+  // (CSS block truth — the ProgressBar track); auto-layout keeps hug sizing,
+  // a named preview note.
+  if (spec.blockRoot) d.push('width: 100%');
   d.push(...litStyles(spec));
   return d.join('; ');
+}
+
+/** Round 5: margin channels the floor-promoted contracts carry, compiled to
+ *  literal px. CSS-true here; auto-layout has NO per-child margin field, so
+ *  the sync runtime does not apply them — a named fidelity note. */
+function marginStyles(spec: NodeSpec, ctx: RenderCtx): string[] {
+  const m = spec.margins;
+  if (!m) return [];
+  ctx.used.add('margin');
+  const d: string[] = [];
+  if (m.top !== undefined) d.push(`margin-top: ${m.top}px`);
+  if (m.right !== undefined) d.push(`margin-right: ${m.right}px`);
+  if (m.bottom !== undefined) d.push(`margin-bottom: ${m.bottom}px`);
+  if (m.left !== undefined) d.push(`margin-left: ${m.left}px`);
+  return d;
 }
 
 function litStyles(spec: NodeSpec): string[] {
@@ -283,6 +308,7 @@ function shapeStyle(spec: NodeSpec, ctx: RenderCtx): string {
     const cssProp = BINDING_CSS[field];
     if (cssProp) d.push(`${cssProp}: ${cssVarOf(varName)}`);
   }
+  d.push(...marginStyles(spec, ctx));
   d.push(...litStyles(spec));
   const transform: string[] = [];
   const a = spec.absolute;
@@ -381,8 +407,13 @@ function renderNode(
     return `<div class="cv-slot" style="${style}">${inner}</div>`;
   }
 
+  // An overlay child needs a positioned parent — but a parent that is ITSELF
+  // an overlay is already positioned; appending 'relative' would OVERRIDE
+  // its 'absolute' (CSS last-wins — Round 5 finding: the Checkbox glyph
+  // host fell back into flow).
   const hasOverlayChild = (spec.children ?? []).some((c) => c.overlay || c.absolute || c.insetOverlay);
-  const style = [nodeStyle(spec, ctx), hasOverlayChild ? 'position: relative' : '', extraStyle]
+  const selfPositioned = spec.insetOverlay === true || spec.overlay !== undefined || spec.absolute !== undefined;
+  const style = [nodeStyle(spec, ctx), hasOverlayChild && !selfPositioned ? 'position: relative' : '', extraStyle]
     .filter(Boolean)
     .join('; ');
   const inner = (spec.children ?? []).map((c) => renderNode(c, ctx, overrides)).join('');
@@ -403,8 +434,12 @@ const GATE_CSS = `
   html { color-scheme: light; }
   body { margin: 0; padding: 24px; background: #ffffff; color: #1e1e1e;
          font-family: Inter, system-ui, sans-serif; }
+  /* Cell separation MUST exceed the shot's clip margin (24px) or the
+     previous cell's bottom edge bleeds into the next crop and survives the
+     near-white trim (Round 5 finding: every non-first Banner cell carried a
+     fragment of its neighbor, +24 CSS px of phantom height). */
   .gate-cell { display: flex; align-items: flex-start; width: max-content;
-               margin: 0 0 24px 0; }
+               margin: 0 0 64px 0; }
   .cv-slot { min-width: 24px; min-height: 24px; }
   .cv-slot__ph { border: 1px dashed #b3b3b3; color: #7b7b7b; font-size: 11px;
                  padding: 6px 10px; white-space: nowrap; }
@@ -420,11 +455,16 @@ export function buildCanvasGateDoc(
   /** Global index of cells[0] — pages are CHUNKED below Chromium's 16384px
    *  capture ceiling; data-cell keys stay global. */
   startIndex = 0,
+  /** Round 5 stage parity: the SAME definite container width the real side
+   *  mounts (MOUNT_PLAN.stageWidth — ProgressBar's 288px floor stage). A
+   *  block root (width:100%) resolves against it; hug components ignore it. */
+  stageWidth?: number,
 ): { doc: string; used: Set<string> } {
   const ctx: RenderCtx = { dataFor, used: new Set<string>() };
   const noOverrides: InstanceOverrides = { bools: {}, texts: {} };
+  const cellStyle = stageWidth ? ` style="width: ${stageWidth}px"` : '';
   const cellHtml = cells
-    .map((cell, i) => `<div class="gate-cell" data-cell="${startIndex + i}">${renderNode(cell.spec, ctx, noOverrides)}</div>`)
+    .map((cell, i) => `<div class="gate-cell" data-cell="${startIndex + i}"${cellStyle}>${renderNode(cell.spec, ctx, noOverrides)}</div>`)
     .join('\n');
   const doc = [
     '<!doctype html>',

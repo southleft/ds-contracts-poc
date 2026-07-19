@@ -143,11 +143,14 @@ const CELL_CAUSES: Array<{ component?: string; test: (cell: Cell, shots: { real:
   {
     component: 'Checkbox',
     test: () =>
-      'CANVAS SIDE BLANK (see ink columns): the backdrop compiles white fill + border-width {p.border-width-0} = 0 and the renderer draws no effectStack — the real control edge is an inset box-shadow (Polaris\'s Choice wrapper zeroes the border and repaints it as an inset shadow, see the config triage), so the canvas draws a white-on-white box',
+      'CURATED CONTRACT GEOMETRY (curation.ts, reviewed round 2): the backdrop shape is the hand-curated 20×20 rect while the package renders 18×18 (--pc-choice-size 1.125rem/1.25rem by breakpoint) — a 2px box delta at every cell edge; label typography is composition-owned (Text at bodyMd 13px/20px vs the compiled 14px default — named config-triage class); the check/indeterminate glyph assets are floor-reconstructed with the at-rest animation attrs (stroke-dasharray) baked in',
   },
   {
     component: 'RadioButton',
-    test: () => 'canvas renderer draws no effectStack — the real control edge is an inset box-shadow, absent on the canvas side',
+    test: (cell) =>
+      cell.subst['checked'] === 'checked'
+        ? 'NAMED ROUND-4 LOSS (::before pseudo decor): the real selected dot is a ::before pseudo-element the promotion cannot carry — the canvas draws the backdrop\'s captured checked fill as a solid disc while the real control renders ring + dot; plus the curated 20×20 backdrop vs the package\'s 18×18 (see Checkbox)'
+        : 'CURATED CONTRACT GEOMETRY: hand-curated 20×20 backdrop vs the package\'s 18×18 (--pc-choice-size — see Checkbox); label typography is composition-owned (Text at bodyMd)',
   },
   {
     component: 'Banner',
@@ -157,11 +160,12 @@ const CELL_CAUSES: Array<{ component?: string; test: (cell: Cell, shots: { real:
   {
     component: 'Avatar',
     test: () =>
-      'EMITTER/CONTRACT GAP (channel table: fill/radius/font all match): the root carries width but NO height channel — the canvas draws a text-hugging box (md 40x16 CSS) vs the real square (md 28x28); the 6-char initials placeholder overflows the fixed width. Real fill additionally rides the hash-selected palette (initials-keyed at runtime)',
+      'RECONSTRUCTED GLYPH ASSET (promotion receipts: svg-viewbox-reconstructed): the per-size silhouette assets carry viewBoxes rebuilt from computed path extents (md 0 0 33 33) while the package draws one fixed-viewBox svg — the glyph scales a few px differently per size. Real fill additionally rides the hash-selected palette (initials-keyed at runtime)',
   },
   {
     component: 'ProgressBar',
-    test: (cell) => (cell.spec.children?.some((c) => c.pct !== undefined) ? 'runtime-% meter width: the canvas draws the defaults\' fraction' : null),
+    test: () =>
+      'runtime-% indicator (named since round 4): the real side mounts the floor sample progress=25 and paints the indicator at 25% of the track; the contract carries NO width fact for the indicator (the % is runtime data) — the canvas draws the empty track, and the indicator region is the whole remaining diff',
   },
   {
     component: 'Button',
@@ -170,13 +174,9 @@ const CELL_CAUSES: Array<{ component?: string; test: (cell: Cell, shots: { real:
         ? 'NAMED CONTRACT REFUSAL (channel table quotes both colors): tone×variant multi-axis paint (.tone*:is(.variant*)) was refused by name in the static promotion — the canvas draws the neutral variant paint while the real critical/success Button repaints fill/label. The tone axis is also DEFAULTLESS, so the canvas cartesian contains no neutral-tone cell at all'
         : null,
   },
-  {
-    component: 'Button',
-    test: (cell) =>
-      cell.state === 'disabled'
-        ? 'EMITTER-DEFECT (channel table: border-width +1px): the disabled override carries border colors only; the compile materializes spec.stroke and the renderer defaults border-width 1px — the real disabled Button keeps border-width 0'
-        : null,
-  },
+  // (Round 5: the disabled border-width EMITTER-DEFECT note is retired —
+  // per-side size-0 stroke weights now render and the 1px default only
+  // fires with no width source; State=Disabled cells sit under 10%.)
   {
     component: 'Button',
     test: (cell) =>
@@ -187,24 +187,12 @@ const CELL_CAUSES: Array<{ component?: string; test: (cell: Cell, shots: { real:
   {
     component: 'Spinner',
     test: () =>
-      'CANVAS SIDE BLANK — RENDERER DEFECT (verified in-page: svg computed 0x0): the icon svg is inlined with viewBox only, no width/height attributes, and an svg has no intrinsic size in a shrink-to-fit flex context — the glyph lays out at 0x0 and paints NOTHING; the low masked % is the blank-vs-thin-arc artifact, see the ink columns',
-  },
-  {
-    component: 'Thumbnail',
-    test: () =>
-      'CONTRACT/EMITTER GAP (channel table: fill/radius match): the img part is not in the compiled spec (raster content has no canvas projection) and the root carries width but no height — the canvas draws a white-on-white box with nothing visible; realPx quotes the real 24-80px CSS card',
+      'CANVAS SIDE BLANK — NAMED PROMOTION GAP (contract carries NO glyph): the captured anatomy has the arc svg (root > icon, inBase) and the assets were reconstructed and committed (spinner-root-large/small.svg), but the per-value svg plan targeted the ROOT part, which the anatomy promotion builds outside buildPart — the plan was dropped and the promoted contract carries an empty root. The engine draws everything the contract carries: nothing',
   },
   {
     component: 'Tag',
     test: () =>
-      'EMITTER-DEFECT (channel table confirms): contract binds root padding-left/right = {imported.tag.root.padding-left} = 6px, but emit-figma-script applyTokens handles only the padding-inline/padding-block shorthands — longhand padding channels are silently dropped, so the canvas pill draws 12px narrower than the real Tag',
-  },
-  {
-    component: 'Tag',
-    test: (cell) =>
-      cell.state === 'disabled' && cell.spec.stroke
-        ? 'EMITTER-DEFECT (channel table confirms): the disabled state override carries border-*-color only; the compile materializes spec.stroke and the renderer defaults border-width to 1px — the real disabled Tag keeps border-width 0 (no ring)'
-        : null,
+      'NAMED PROMOTION REFUSAL (tag LEDGER: part-presence-uncorrelated): the default label subtree (text > label, inBase) is present in 12/16 combos and the presence set does not factor per-axis — the parts were NOT promoted, so the contract carries no default-state label at all; the canvas pill draws label-less while the real Tag renders "Wholesale". The engine draws everything the contract carries',
   },
 ];
 
@@ -273,6 +261,9 @@ async function main(): Promise<void> {
         world.tokenCss,
         dataFor,
         start,
+        // Round 5 stage parity: the canvas side draws in the SAME definite
+        // container width the real side mounts (block roots resolve 100%).
+        MOUNT_PLAN[comp.name]?.stageWidth,
       );
       const p = path.join(SCRATCH, `canvas-${kebab(comp.name)}-${start / CHUNK}.html`);
       writeFileSync(p, doc);
@@ -413,20 +404,27 @@ async function main(): Promise<void> {
             `CANVAS SIDE (NEARLY) BLANK: canvas ink ${r2(s.inkCanvasPct)}% vs real ink ${r2(s.inkRealPct)}% of the union canvas — the masked % understates the miss`,
           );
         }
+        // FULLY-MASKED cells (text-only crops — Tertiary/Plain Buttons):
+        // pctAAMasked is null and the quoted number is the raw AA point,
+        // which is dominated by the named runtime font difference (the
+        // canvas draws Inter; the package resolves its own system stack).
+        if (s.pctAAMasked === null && s.maskCoveragePct >= 95 && s.pctAAUnmasked > 10) {
+          causes.push(
+            `FULLY-MASKED CELL (mask coverage ${r2(s.maskCoveragePct)}%): the crop is all text, the masked point is void, and the quoted number is the raw AA diff of glyph rendering — the named runtime font difference (canvas Inter vs the package's system stack)`,
+          );
+        }
         for (const rule of CELL_CAUSES) {
           if (rule.component && rule.component !== comp.name) continue;
           const c = rule.test(cell, { real: b });
           if (c) causes.push(c);
         }
-        // ROUND 4 last-resort NAMED mechanism (never an unnamed >10% cell):
-        // the v0.3.0 promotion carries the full DOM tree; the canvas
-        // engine's sizing model (hug/stretch chains, glyph baking for deep
-        // promoted anatomy) lags it — the live-canvas rebuild is the NEXT
-        // session's scoped work (owner directive). The ≤5% acceptance keeps
-        // FAILING loudly; this cause makes the mechanism reviewable.
+        // Last-resort guard (never an unnamed >10% cell): Round 5 closed the
+        // engine sizing classes (inset overlays, margins, min-height, gap
+        // longhands, aspect lowering, glyph sizing) — a cell landing here is
+        // an UNNAMED defect and must be investigated, not tolerated.
         if (causes.length === 0 && s.pctAAMasked !== null && s.pctAAMasked > 10) {
           causes.push(
-            'round-4 promoted-anatomy vs canvas-engine sizing model: the contract carries the full rendered tree (ribbon/glyph/label rows) and the engine\'s hug/stretch sizing for deep promoted anatomy lags it — scoped to the canvas rebuild session; acceptance stays FAILED until the engine catches up',
+            'UNNAMED residual — defect until named (round-5 engine classes are closed; investigate before accepting)',
           );
         }
         rows.push({

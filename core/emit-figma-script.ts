@@ -141,8 +141,34 @@ export interface NodeSpec {
    *  runtime pulls the node out of flow — layoutPositioning ABSOLUTE, x/y 0,
    *  STRETCH/STRETCH constraints, sized to the parent — and places it BEHIND
    *  the in-flow siblings (insert index 0), matching the declared anatomy
-   *  and the paired HTML render. */
+   *  and the paired HTML render. Round 5: a part DECLARING position:absolute
+   *  with NO carried inset channels whose box is parent-bound (declared
+   *  aspect-ratio, or max-width/max-height 100%) lowers the same way — the
+   *  floor-promoted Checkbox glyph overlay (real CSS centers it with a 50%
+   *  translate the capture cannot carry; the parent-square lowering is the
+   *  honest approximation, receipted in the canvas fidelity notes). */
   insetOverlay?: boolean;
+  /** Round 5: NON-ZERO inset offsets for an inset overlay (the Checkbox
+   *  indeterminate glyph rides inset -2px — the 22px dash overhangs its
+   *  parent square). Absent = inset 0 (byte-stable for existing specs). */
+  insetOffsets?: { top: number; right: number; bottom: number; left: number };
+  /** Round 5 (canvas-gate): margin channels the floor-promoted contracts
+   *  carry (Badge pip -2/-2/-8, Checkbox control spacing), resolved to
+   *  literal px at compile. The CANVAS PREVIEW renders them as CSS margins;
+   *  auto-layout has no per-child margin field, so the sync runtime does NOT
+   *  apply them — a code-only fact (†), named in the preview fidelity notes,
+   *  never a silent drop. */
+  margins?: { top?: number; right?: number; bottom?: number; left?: number };
+  /** Round 5: an `img` element part — raster content is runtime data with no
+   *  canvas projection; the part draws the standard image-placeholder wash
+   *  (compiled into lits.fillColor) and this flag names it in the preview
+   *  fidelity notes. */
+  imgPlaceholder?: boolean;
+  /** Round 5: a block-display root with no width channel fills its container
+   *  in CSS (the real ProgressBar track is a width-auto block). The canvas
+   *  preview renders width:100%; the sync runtime keeps hug sizing — a named
+   *  preview-only stage fact (the component has no intrinsic width). */
+  blockRoot?: boolean;
   /** PIXEL line height (dump v1.3) — the runtime sets
    *  node.lineHeight = { unit: 'PIXELS', value }. */
   lineHeight?: number;
@@ -888,6 +914,46 @@ function applyTokens(
       case 'gap':
         spec.bindings = { ...spec.bindings, itemSpacing: varName };
         break;
+      // Round 5 (canvas-gate finding): the floor promotion carries the gap
+      // LONGHANDS (column-gap/row-gap — Banner's InlineStack icon–title gap
+      // rode column-gap and was silently dropped). The main-axis longhand
+      // maps to itemSpacing; the cross-axis one only matters under wrap and
+      // stays CSS-side.
+      case 'column-gap':
+        if ((spec.layout?.mode ?? 'HORIZONTAL') === 'HORIZONTAL') {
+          spec.bindings = { ...spec.bindings, itemSpacing: varName };
+        }
+        break;
+      case 'row-gap':
+        if (spec.layout?.mode === 'VERTICAL') {
+          spec.bindings = { ...spec.bindings, itemSpacing: varName };
+        }
+        break;
+      // Round 5 (canvas-gate finding): margin channels — the floor-promoted
+      // contracts carry them (Badge pip margin -2/-2/-8 is what keeps the
+      // real pill 20px tall) and this switch silently dropped them. Resolved
+      // to literal px (auto-layout has no margin field to bind); the canvas
+      // preview draws them, the sync runtime names the limit (†).
+      case 'margin-top': {
+        const v = px(resolveLiteral(tokenPath));
+        if (!Number.isNaN(v)) spec.margins = { ...spec.margins, top: v };
+        break;
+      }
+      case 'margin-right': {
+        const v = px(resolveLiteral(tokenPath));
+        if (!Number.isNaN(v)) spec.margins = { ...spec.margins, right: v };
+        break;
+      }
+      case 'margin-bottom': {
+        const v = px(resolveLiteral(tokenPath));
+        if (!Number.isNaN(v)) spec.margins = { ...spec.margins, bottom: v };
+        break;
+      }
+      case 'margin-left': {
+        const v = px(resolveLiteral(tokenPath));
+        if (!Number.isNaN(v)) spec.margins = { ...spec.margins, left: v };
+        break;
+      }
       case 'border-radius':
         spec.bindings = {
           ...spec.bindings,
@@ -951,6 +1017,15 @@ function applyTokens(
       case 'min-width':
         spec.bindings = { ...spec.bindings, minWidth: varName };
         break;
+      // Round 5 (canvas-gate finding): min-height is NOT redundant chrome —
+      // the floor-promoted Button carries min-height {p.height-800} (32px)
+      // and the real package's sub-768px bucket (the floor capture's own
+      // viewport) sizes the control BY IT: dropping the channel drew every
+      // canvas Button 4px shorter than the captured truth. minHeight is a
+      // bindable field, exactly like minWidth.
+      case 'min-height':
+        spec.bindings = { ...spec.bindings, minHeight: varName };
+        break;
       case 'height':
         spec.fixedHeight = { px: px(resolveLiteral(tokenPath)), varName };
         break;
@@ -1000,10 +1075,9 @@ function applyTokens(
         break;
       }
       default:
-        // outline-* are state/CSS concerns; min-height/max-height (dump
-        // v1.4 style facts) are CSS-side — the canvas variant is drawn at
-        // its real per-variant height, so a min/max binding would be
-        // redundant chrome there (and the sync scripts are golden-pinned).
+        // outline-* are state/CSS concerns; max-height (dump v1.4 style
+        // fact) stays CSS-side (min-height binds since Round 5 — see the
+        // case above; the sync scripts' golden was regenerated with it).
         break;
     }
   }
@@ -1078,6 +1152,22 @@ function applyLiterals(spec: NodeSpec, lits: Record<string, string>, ctx: TextCt
       case 'padding-top': { const n = parseLitPx(value); if (n !== undefined) li().paddingTop = n; break; }
       case 'padding-bottom': { const n = parseLitPx(value); if (n !== undefined) li().paddingBottom = n; break; }
       case 'gap': { const n = parseLitPx(value); if (n !== undefined) li().itemSpacing = n; break; }
+      // Round 5: gap longhands (see the token side) — main-axis only.
+      case 'column-gap': {
+        const n = parseLitPx(value);
+        if (n !== undefined && (spec.layout?.mode ?? 'HORIZONTAL') === 'HORIZONTAL') li().itemSpacing = n;
+        break;
+      }
+      case 'row-gap': {
+        const n = parseLitPx(value);
+        if (n !== undefined && spec.layout?.mode === 'VERTICAL') li().itemSpacing = n;
+        break;
+      }
+      // Round 5: literal margin channels — same lowering as the token side.
+      case 'margin-top': { const n = parseLitPx(value); if (n !== undefined) spec.margins = { ...spec.margins, top: n }; break; }
+      case 'margin-right': { const n = parseLitPx(value); if (n !== undefined) spec.margins = { ...spec.margins, right: n }; break; }
+      case 'margin-bottom': { const n = parseLitPx(value); if (n !== undefined) spec.margins = { ...spec.margins, bottom: n }; break; }
+      case 'margin-left': { const n = parseLitPx(value); if (n !== undefined) spec.margins = { ...spec.margins, left: n }; break; }
       case 'border-radius': { const n = parseLitPx(value); if (n !== undefined) li().radius = n; break; }
       case 'border-width': { const n = parseLitPx(value); if (n !== undefined) li().strokeWeight = n; break; }
       // v15 (S4): per-corner literal radii and per-side literal widths.
@@ -1170,17 +1260,44 @@ function applyStyling(
   // Round 4: declared aspect-ratio draws natively — height follows the bound
   // width when the contract carries no height channel (Avatar/Thumbnail
   // squares whose real height rides a pseudo-element padding hack).
+  // Round 5: the LITERAL width channel (v14 lits — Avatar/Thumbnail carry
+  // per-size width literals, not token widths) lowers the same way.
   const aspect = part.declared?.['aspect-ratio'];
-  if (aspect && spec.fixedWidth && !spec.fixedHeight) {
+  if (aspect && !spec.fixedHeight && spec.lits?.height === undefined) {
     const m = /^([\d.]+)(?: \/ ([\d.]+))?$/.exec(aspect);
     if (m) {
       const ratio = Number(m[1]) / Number(m[2] ?? '1');
-      if (ratio > 0 && Number.isFinite(spec.fixedWidth.px)) {
+      if (ratio > 0 && spec.fixedWidth && Number.isFinite(spec.fixedWidth.px)) {
         spec.fixedHeight = { px: spec.fixedWidth.px / ratio };
+      } else if (ratio > 0 && spec.lits?.width !== undefined) {
+        spec.lits.height = spec.lits.width / ratio;
       }
     }
   }
   return d;
+}
+
+/** Round 5 (canvas-gate): parent aspect lowering. A frame with a known width
+ *  and NO height whose ABSOLUTE child declares aspect-ratio takes its height
+ *  from that child — the promoted Avatar/Thumbnail pattern: the root carries
+ *  the per-size width literal; the real square rides the inset-0 child's
+ *  aspect-ratio (the root's own height is a pseudo-element padding hack the
+ *  capture cannot carry). Applied AFTER applyStyling, before children build. */
+function applyChildAspect(spec: NodeSpec, part: Part): void {
+  const w = spec.fixedWidth?.px ?? spec.lits?.width;
+  if (w === undefined || !Number.isFinite(w)) return;
+  if (spec.fixedHeight || spec.lits?.height !== undefined) return;
+  for (const child of Object.values(part.parts ?? {})) {
+    const aspect = child.declared?.['aspect-ratio'];
+    if (!aspect || child.declared?.['position'] !== 'absolute') continue;
+    const m = /^([\d.]+)(?: \/ ([\d.]+))?$/.exec(aspect);
+    if (!m) continue;
+    const ratio = Number(m[1]) / Number(m[2] ?? '1');
+    if (ratio > 0) {
+      (spec.lits ??= {}).height = w / ratio;
+      return;
+    }
+  }
 }
 
 /** State-preview overrides pass through applyTokens with one honest
@@ -1266,9 +1383,17 @@ function iconSvg(part: Part, subst: Record<string, string>, ctx: TextCtx): strin
     out = out.replace(/^<svg /, `<svg fill="${hex}" `);
   }
   if (part.icon!.size) {
+    // Round 5 (canvas-gate finding): anchor the size rewrite to the ROOT
+    // <svg> tag's OWN width/height attributes. The old unanchored regex hit
+    // the FIRST width-ish match anywhere — on viewBox-only assets (the 22
+    // floor-reconstructed glyphs) that was a path's stroke-width, so the
+    // Checkbox check drew at stroke-width 14 (a blob) and the Avatar xl
+    // silhouette at stroke-width 40 (a filled square). Assets without a
+    // root width/height keep their markup; the renderers/runtime size the
+    // node from iconSize.
     out = out
-      .replace(/width="\d+"/, `width="${part.icon!.size}"`)
-      .replace(/height="\d+"/, `height="${part.icon!.size}"`);
+      .replace(/^(<svg\b[^>]*?)\swidth="[^"]*"/, `$1 width="${part.icon!.size}"`)
+      .replace(/^(<svg\b[^>]*?)\sheight="[^"]*"/, `$1 height="${part.icon!.size}"`);
   }
   return out;
 }
@@ -1448,11 +1573,17 @@ function shapePlacement(
  *  sibling. A part that itself declares `position: relative` (the in-flow
  *  element the overlay sits behind — TextField's input) is excluded: its
  *  inset channels are inert in CSS too. */
-function isInsetOverlay(part: Part, subst: Record<string, string>): boolean {
-  if (part.declared?.['position'] === 'relative') return false;
+function insetOverlayOffsets(
+  part: Part,
+  subst: Record<string, string>,
+): { top: number; right: number; bottom: number; left: number } | null {
+  if (part.declared?.['position'] === 'relative') return null;
   const tokens = resolveTokens(part, subst);
   const lits = resolveLiterals(part, subst);
-  for (const ch of ['top', 'right', 'bottom', 'left']) {
+  const offsets = { top: 0, right: 0, bottom: 0, left: 0 };
+  let carried = 0;
+  let numeric = true;
+  for (const ch of ['top', 'right', 'bottom', 'left'] as const) {
     let value: string | undefined;
     const ref = tokens[ch];
     if (ref) {
@@ -1464,11 +1595,32 @@ function isInsetOverlay(part: Part, subst: Record<string, string>): boolean {
     } else if (lits[ch] !== undefined) {
       value = String(lits[ch]);
     }
-    if (value === undefined) return false;
+    if (value === undefined) continue;
+    carried++;
     const n = parseLitPx(value);
-    if (n === undefined || Math.abs(n) > 0.5) return false;
+    if (n === undefined) numeric = false;
+    else offsets[ch] = n;
   }
-  return true;
+  // All four inset channels carried and numeric → an inset overlay at those
+  // offsets (Round 5: offsets generalized beyond 0 — the Checkbox
+  // indeterminate glyph rides inset -2px; B-3 finding 5 was the 0 case).
+  if (carried === 4 && numeric) return offsets;
+  // Round 5: a DECLARED position:absolute part with NO carried inset
+  // channels whose box is parent-bound (declared aspect-ratio, or max
+  // dimensions 100%) lowers to the inset-0 overlay — the floor-promoted
+  // Checkbox glyph host (real CSS centers it via a 50% translate the
+  // computed capture cannot carry; parent attachment is the honest
+  // approximation, named in the canvas fidelity notes).
+  if (
+    carried === 0 &&
+    part.declared?.['position'] === 'absolute' &&
+    (part.declared?.['aspect-ratio'] !== undefined ||
+      part.declared?.['max-width'] === '100%' ||
+      part.declared?.['max-height'] === '100%')
+  ) {
+    return { top: 0, right: 0, bottom: 0, left: 0 };
+  }
+  return null;
 }
 
 function variantParts(
@@ -1668,7 +1820,21 @@ function partToSpecInner(
     applyVisibleWhen(spec, part, contract);
     return spec;
   }
-  if (part.content) {
+  // Round 5: a content part with fallback anatomy (per-value glyph children)
+  // and NO prop default draws the CONTRACT'S OWN unset state — the children —
+  // instead of fabricating a component-name placeholder (the Avatar initials
+  // pattern: unset initials render the promoted person-silhouette glyphs; the
+  // name placeholder forced a 6-char overflow no real mount shows). The TEXT
+  // property still reaches the Figma surface via textProps (unbound). A
+  // content part WITHOUT children keeps the design-time name placeholder.
+  const contentFallsThrough =
+    part.content !== undefined &&
+    part.parts !== undefined &&
+    Object.keys(part.parts).length > 0 &&
+    typeof contract.props.find(
+      (p) => p.type === 'text' && p.bindings.code.prop === part.content!.prop,
+    )?.default !== 'string';
+  if (part.content && !contentFallsThrough) {
     const prop = contract.props.find(
       (p) => p.type === 'text' && p.bindings.code.prop === part.content!.prop,
     )!;
@@ -1691,10 +1857,28 @@ function partToSpecInner(
     layout: layoutSpec(part, false, subst),
     grow: part.layout?.grow || undefined,
   };
-  // B-3 finding 5: inset-0 overlay parts lower to ABSOLUTE + STRETCH behind
-  // the in-flow siblings instead of flowing as one.
-  if (isInsetOverlay(part, subst)) spec.insetOverlay = true;
+  // B-3 finding 5: inset overlay parts lower to ABSOLUTE + STRETCH behind
+  // the in-flow siblings instead of flowing as one (Round 5: non-zero
+  // offsets carried too).
+  {
+    const io = insetOverlayOffsets(part, subst);
+    if (io) {
+      spec.insetOverlay = true;
+      if (io.top !== 0 || io.right !== 0 || io.bottom !== 0 || io.left !== 0) spec.insetOffsets = io;
+    }
+  }
   const childCtx = applyStyling(spec, part, subst, ctx);
+  // Round 5: `img` parts — raster content is runtime data; the frame draws
+  // the standard image-placeholder wash (#D9D9D9), named in the fidelity
+  // notes via the flag. A contract-carried fill always wins.
+  if (part.element === 'img') {
+    spec.imgPlaceholder = true;
+    if (!spec.fill && spec.lits?.fillColor === undefined && spec.lits?.fillClear === undefined) {
+      (spec.lits ??= {}).fillColor = { r: 217 / 255, g: 217 / 255, b: 217 / 255 };
+    }
+  }
+  // Round 5: parent aspect lowering (Avatar/Thumbnail square roots).
+  applyChildAspect(spec, part);
   spec.children = variantParts(part.parts ?? {}, subst).flatMap(([childName, child]) =>
     partToSpecs(childName, child, contract, byId, childCtx, subst),
   );
@@ -1818,6 +2002,15 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
     // without tokensByProp (resolveTokens returns the base map unchanged).
     const ctx = applyStyling(rootSpec, root, subst, {});
     applyStylesWhenOpacity(rootSpec, root, contract, subst);
+    // Round 5: parent aspect lowering + block-root width fact (see NodeSpec).
+    applyChildAspect(rootSpec, root);
+    if (
+      root.declared?.['display'] === 'block' &&
+      !rootSpec.fixedWidth &&
+      rootSpec.lits?.width === undefined
+    ) {
+      rootSpec.blockRoot = true;
+    }
     if (root.parts) {
       rootSpec.children = variantParts(root.parts, subst).flatMap(([childName, child]) =>
         partToSpecs(childName, child, contract, byId, ctx, subst),
@@ -1896,6 +2089,15 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
           baseCtx,
         );
         applyStylesWhenOpacity(rootSpec, root, contract, subst);
+        // Round 5: same parent-aspect + block-root facts as the base loop.
+        applyChildAspect(rootSpec, root);
+        if (
+          root.declared?.['display'] === 'block' &&
+          !rootSpec.fixedWidth &&
+          rootSpec.lits?.width === undefined
+        ) {
+          rootSpec.blockRoot = true;
+        }
         if (root.parts) {
           // v13: part-level state overrides apply INSIDE the preview variant
           // (withPartStateOverrides) — the State=Disabled cell draws the
@@ -1995,6 +2197,13 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
   // Meter parts are runtime-sized (the canvas shows the defaults' fraction;
   // height follows the track) — a code-only fact like the rest.
   const hasMeter = walkAnatomy(contract).some((w) => w.part.meter);
+  // Round 5: compiled facts the SYNC RUNTIME cannot apply natively — margin
+  // channels (no auto-layout margin field), the image-placeholder wash
+  // (raster content is runtime data), the block-root width fact (no
+  // intrinsic width) — join the code-only footnote, never a silent drop.
+  const hasPreviewOnlyFacts = [...variants, ...stateVariants].some((v) =>
+    specSome(v.spec, (x) => x.margins !== undefined || x.imgPlaceholder === true || x.blockRoot === true),
+  );
   // Part D (owner directive): every code-only fact — events, declared-not-
   // drawn channels, gradient/shadow misses, runtime-sized meters — leaves
   // exactly ONE canvas trace: a single trailing † on the caption line.
@@ -2003,7 +2212,8 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
     declaredNoteLines.size > 0 ||
     gradientMissLines.size > 0 ||
     shadowMissLines.size > 0 ||
-    hasMeter;
+    hasMeter ||
+    hasPreviewOnlyFacts;
 
   return {
     setName: contract.name,
@@ -2299,9 +2509,13 @@ function applyInsetOverlay(parent, childNode, childSpec) {
     parent.insertChild(0, childNode);
     childNode.layoutPositioning = 'ABSOLUTE';
     childNode.constraints = { horizontal: 'STRETCH', vertical: 'STRETCH' };
-    childNode.x = 0;
-    childNode.y = 0;
-    childNode.resize(Math.max(1, parent.width), Math.max(1, parent.height));
+    const o = childSpec.insetOffsets || { top: 0, right: 0, bottom: 0, left: 0 };
+    childNode.x = o.left;
+    childNode.y = o.top;
+    childNode.resize(
+      Math.max(1, parent.width - o.left - o.right),
+      Math.max(1, parent.height - o.top - o.bottom),
+    );
   } catch (e) { /* parent not auto-layout — leave in flow */ }
 }
 `

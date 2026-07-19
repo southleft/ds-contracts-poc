@@ -28,7 +28,7 @@
       "realPx": "85x84",
       "inkCanvasPct": 0,
       "inkRealPct": 12.39,
-      "note": "CANVAS SIDE (NEARLY) BLANK: canvas ink 0% vs real ink 12.39% of the union canvas — the masked % understates the miss; CANVAS SIDE BLANK — RENDERER DEFECT (verified in-page: svg computed 0x0): the icon svg is inlined with viewBox only, no width/height attributes, and an svg has no intrinsic size in a shrink-to-fit flex context — the glyph lays out at 0x0 and paints NOTHING; the low masked % is the blank-vs-thin-arc artifact, see the ink columns"
+      "note": "CANVAS SIDE (NEARLY) BLANK: canvas ink 0% vs real ink 12.39% of the union canvas — the masked % understates the miss; CANVAS SIDE BLANK — NAMED PROMOTION GAP (contract carries NO glyph): the captured anatomy has the arc svg (root > icon, inBase) and the assets were reconstructed and committed (spinner-root-large/small.svg), but the per-value svg plan targeted the ROOT part, which the anatomy promotion builds outside buildPart — the plan was dropped and the promoted contract carries an empty root. The engine draws everything the contract carries: nothing"
     },
     {
       "cell": "Size=Small",
@@ -41,7 +41,7 @@
       "realPx": "37x37",
       "inkCanvasPct": 0,
       "inkRealPct": 4.39,
-      "note": "CANVAS SIDE (NEARLY) BLANK: canvas ink 0% vs real ink 4.39% of the union canvas — the masked % understates the miss; CANVAS SIDE BLANK — RENDERER DEFECT (verified in-page: svg computed 0x0): the icon svg is inlined with viewBox only, no width/height attributes, and an svg has no intrinsic size in a shrink-to-fit flex context — the glyph lays out at 0x0 and paints NOTHING; the low masked % is the blank-vs-thin-arc artifact, see the ink columns"
+      "note": "CANVAS SIDE (NEARLY) BLANK: canvas ink 0% vs real ink 4.39% of the union canvas — the masked % understates the miss; CANVAS SIDE BLANK — NAMED PROMOTION GAP (contract carries NO glyph): the captured anatomy has the arc svg (root > icon, inBase) and the assets were reconstructed and committed (spinner-root-large/small.svg), but the per-value svg plan targeted the ROOT part, which the anatomy promotion builds outside buildPart — the plan was dropped and the promoted contract carries an empty root. The engine draws everything the contract carries: nothing"
     }
   ],
   "summary": {

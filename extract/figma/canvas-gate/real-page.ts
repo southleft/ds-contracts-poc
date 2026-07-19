@@ -62,7 +62,10 @@ const COMPONENTS = { ${importNames.join(', ')} };
 const ALL_SPECS = ${JSON.stringify(specs)};
 const CHUNK = Number(new URLSearchParams(window.location.search).get('chunk') || '0');
 const SPECS = ALL_SPECS.filter((s) => s.chunk === CHUNK);
-const stage = { display: 'flex', alignItems: 'flex-start', width: 'max-content', background: 'transparent', margin: 12, padding: 8 };
+// Stage separation MUST exceed the shot's 24px clip margin — the sentinel
+// button (#eee, below the near-white trim threshold) and the previous
+// stage's edge otherwise bleed into the next cell's crop (Round 5 finding).
+const stage = { display: 'flex', alignItems: 'flex-start', width: 'max-content', background: 'transparent', margin: '28px 12px', padding: 8 };
 
 function App() {
   return (

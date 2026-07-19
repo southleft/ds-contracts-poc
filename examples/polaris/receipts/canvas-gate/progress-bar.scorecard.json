@@ -21,247 +21,234 @@
     {
       "cell": "Size=Medium, Tone=Highlight",
       "kind": "base",
-      "pctExactUnmasked": 24.94,
-      "pctAAUnmasked": 24.89,
-      "pctAAMasked": 24.34,
-      "maskCoveragePct": 1.09,
-      "canvasPx": "96x128",
+      "pctExactUnmasked": 29.16,
+      "pctAAUnmasked": 28.77,
+      "pctAAMasked": 25.9,
+      "maskCoveragePct": 3.99,
+      "canvasPx": "576x32",
       "realPx": "544x32",
-      "inkCanvasPct": 0,
-      "inkRealPct": 24.94,
-      "note": "CANVAS SIDE (NEARLY) BLANK: canvas ink 0% vs real ink 24.94% of the union canvas — the masked % understates the miss"
+      "inkCanvasPct": 99.78,
+      "inkRealPct": 94.23,
+      "note": "runtime-% indicator (named since round 4): the real side mounts the floor sample progress=25 and paints the indicator at 25% of the track; the contract carries NO width fact for the indicator (the % is runtime data) — the canvas draws the empty track, and the indicator region is the whole remaining diff"
     },
     {
       "cell": "Size=Medium, Tone=Primary",
       "kind": "base",
-      "pctExactUnmasked": 24.94,
-      "pctAAUnmasked": 24.89,
-      "pctAAMasked": 24.34,
-      "maskCoveragePct": 1.09,
-      "canvasPx": "96x128",
+      "pctExactUnmasked": 29.16,
+      "pctAAUnmasked": 28.77,
+      "pctAAMasked": 25.9,
+      "maskCoveragePct": 3.99,
+      "canvasPx": "576x32",
       "realPx": "544x32",
-      "inkCanvasPct": 0,
-      "inkRealPct": 24.94,
-      "note": "CANVAS SIDE (NEARLY) BLANK: canvas ink 0% vs real ink 24.94% of the union canvas — the masked % understates the miss"
+      "inkCanvasPct": 99.78,
+      "inkRealPct": 94.23,
+      "note": "runtime-% indicator (named since round 4): the real side mounts the floor sample progress=25 and paints the indicator at 25% of the track; the contract carries NO width fact for the indicator (the % is runtime data) — the canvas draws the empty track, and the indicator region is the whole remaining diff"
     },
     {
       "cell": "Size=Medium, Tone=Success",
       "kind": "base",
-      "pctExactUnmasked": 24.94,
-      "pctAAUnmasked": 24.89,
-      "pctAAMasked": 24.34,
-      "maskCoveragePct": 1.09,
-      "canvasPx": "96x128",
+      "pctExactUnmasked": 29.16,
+      "pctAAUnmasked": 28.77,
+      "pctAAMasked": 25.9,
+      "maskCoveragePct": 3.99,
+      "canvasPx": "576x32",
       "realPx": "544x32",
-      "inkCanvasPct": 0,
-      "inkRealPct": 24.94,
-      "note": "CANVAS SIDE (NEARLY) BLANK: canvas ink 0% vs real ink 24.94% of the union canvas — the masked % understates the miss"
+      "inkCanvasPct": 99.78,
+      "inkRealPct": 94.23,
+      "note": "runtime-% indicator (named since round 4): the real side mounts the floor sample progress=25 and paints the indicator at 25% of the track; the contract carries NO width fact for the indicator (the % is runtime data) — the canvas draws the empty track, and the indicator region is the whole remaining diff"
     },
     {
       "cell": "Size=Medium, Tone=Critical",
       "kind": "base",
-      "pctExactUnmasked": 24.94,
-      "pctAAUnmasked": 24.89,
-      "pctAAMasked": 24.34,
-      "maskCoveragePct": 1.09,
-      "canvasPx": "96x128",
+      "pctExactUnmasked": 29.16,
+      "pctAAUnmasked": 28.77,
+      "pctAAMasked": 25.9,
+      "maskCoveragePct": 3.99,
+      "canvasPx": "576x32",
       "realPx": "544x32",
-      "inkCanvasPct": 0,
-      "inkRealPct": 24.94,
-      "note": "CANVAS SIDE (NEARLY) BLANK: canvas ink 0% vs real ink 24.94% of the union canvas — the masked % understates the miss"
+      "inkCanvasPct": 99.78,
+      "inkRealPct": 94.23,
+      "note": "runtime-% indicator (named since round 4): the real side mounts the floor sample progress=25 and paints the indicator at 25% of the track; the contract carries NO width fact for the indicator (the % is runtime data) — the canvas draws the empty track, and the indicator region is the whole remaining diff"
     },
     {
       "cell": "Size=Small, Tone=Highlight",
       "kind": "base",
-      "pctExactUnmasked": 14.22,
-      "pctAAUnmasked": 14.16,
-      "pctAAMasked": 13.9,
-      "maskCoveragePct": 1.25,
-      "canvasPx": "96x112",
+      "pctExactUnmasked": 29.14,
+      "pctAAUnmasked": 28.36,
+      "pctAAMasked": 25.59,
+      "maskCoveragePct": 3.99,
+      "canvasPx": "576x16",
       "realPx": "544x16",
-      "inkCanvasPct": 0,
-      "inkRealPct": 14.22,
-      "note": "CANVAS SIDE (NEARLY) BLANK: canvas ink 0% vs real ink 14.22% of the union canvas — the masked % understates the miss"
+      "inkCanvasPct": 99.57,
+      "inkRealPct": 94.01,
+      "note": "runtime-% indicator (named since round 4): the real side mounts the floor sample progress=25 and paints the indicator at 25% of the track; the contract carries NO width fact for the indicator (the % is runtime data) — the canvas draws the empty track, and the indicator region is the whole remaining diff"
     },
     {
       "cell": "Size=Small, Tone=Primary",
       "kind": "base",
-      "pctExactUnmasked": 14.22,
-      "pctAAUnmasked": 14.16,
-      "pctAAMasked": 13.9,
-      "maskCoveragePct": 1.25,
-      "canvasPx": "96x112",
+      "pctExactUnmasked": 29.14,
+      "pctAAUnmasked": 28.36,
+      "pctAAMasked": 25.59,
+      "maskCoveragePct": 3.99,
+      "canvasPx": "576x16",
       "realPx": "544x16",
-      "inkCanvasPct": 0,
-      "inkRealPct": 14.22,
-      "note": "CANVAS SIDE (NEARLY) BLANK: canvas ink 0% vs real ink 14.22% of the union canvas — the masked % understates the miss"
+      "inkCanvasPct": 99.57,
+      "inkRealPct": 94.01,
+      "note": "runtime-% indicator (named since round 4): the real side mounts the floor sample progress=25 and paints the indicator at 25% of the track; the contract carries NO width fact for the indicator (the % is runtime data) — the canvas draws the empty track, and the indicator region is the whole remaining diff"
     },
     {
       "cell": "Size=Small, Tone=Success",
       "kind": "base",
-      "pctExactUnmasked": 14.22,
-      "pctAAUnmasked": 14.16,
-      "pctAAMasked": 13.9,
-      "maskCoveragePct": 1.25,
-      "canvasPx": "96x112",
+      "pctExactUnmasked": 29.14,
+      "pctAAUnmasked": 28.36,
+      "pctAAMasked": 25.59,
+      "maskCoveragePct": 3.99,
+      "canvasPx": "576x16",
       "realPx": "544x16",
-      "inkCanvasPct": 0,
-      "inkRealPct": 14.22,
-      "note": "CANVAS SIDE (NEARLY) BLANK: canvas ink 0% vs real ink 14.22% of the union canvas — the masked % understates the miss"
+      "inkCanvasPct": 99.57,
+      "inkRealPct": 94.01,
+      "note": "runtime-% indicator (named since round 4): the real side mounts the floor sample progress=25 and paints the indicator at 25% of the track; the contract carries NO width fact for the indicator (the % is runtime data) — the canvas draws the empty track, and the indicator region is the whole remaining diff"
     },
     {
       "cell": "Size=Small, Tone=Critical",
       "kind": "base",
-      "pctExactUnmasked": 14.22,
-      "pctAAUnmasked": 14.16,
-      "pctAAMasked": 13.9,
-      "maskCoveragePct": 1.25,
-      "canvasPx": "96x112",
+      "pctExactUnmasked": 29.14,
+      "pctAAUnmasked": 28.36,
+      "pctAAMasked": 25.59,
+      "maskCoveragePct": 3.99,
+      "canvasPx": "576x16",
       "realPx": "544x16",
-      "inkCanvasPct": 0,
-      "inkRealPct": 14.22,
-      "note": "CANVAS SIDE (NEARLY) BLANK: canvas ink 0% vs real ink 14.22% of the union canvas — the masked % understates the miss"
+      "inkCanvasPct": 99.57,
+      "inkRealPct": 94.01,
+      "note": "runtime-% indicator (named since round 4): the real side mounts the floor sample progress=25 and paints the indicator at 25% of the track; the contract carries NO width fact for the indicator (the % is runtime data) — the canvas draws the empty track, and the indicator region is the whole remaining diff"
     },
     {
       "cell": "Size=Large, Tone=Highlight",
       "kind": "base",
-      "pctExactUnmasked": 39.95,
-      "pctAAUnmasked": 39.91,
-      "pctAAMasked": 39.41,
-      "maskCoveragePct": 0.87,
-      "canvasPx": "96x160",
+      "pctExactUnmasked": 29.16,
+      "pctAAUnmasked": 28.97,
+      "pctAAMasked": 27.17,
+      "maskCoveragePct": 2.5,
+      "canvasPx": "576x64",
       "realPx": "544x64",
-      "inkCanvasPct": 0,
-      "inkRealPct": 39.95,
-      "note": "CANVAS SIDE (NEARLY) BLANK: canvas ink 0% vs real ink 39.95% of the union canvas — the masked % understates the miss"
+      "inkCanvasPct": 99.89,
+      "inkRealPct": 94.34,
+      "note": "runtime-% indicator (named since round 4): the real side mounts the floor sample progress=25 and paints the indicator at 25% of the track; the contract carries NO width fact for the indicator (the % is runtime data) — the canvas draws the empty track, and the indicator region is the whole remaining diff"
     },
     {
       "cell": "Size=Large, Tone=Primary",
       "kind": "base",
-      "pctExactUnmasked": 39.95,
-      "pctAAUnmasked": 39.91,
-      "pctAAMasked": 39.41,
-      "maskCoveragePct": 0.87,
-      "canvasPx": "96x160",
+      "pctExactUnmasked": 29.16,
+      "pctAAUnmasked": 28.97,
+      "pctAAMasked": 27.17,
+      "maskCoveragePct": 2.5,
+      "canvasPx": "576x64",
       "realPx": "544x64",
-      "inkCanvasPct": 0,
-      "inkRealPct": 39.95,
-      "note": "CANVAS SIDE (NEARLY) BLANK: canvas ink 0% vs real ink 39.95% of the union canvas — the masked % understates the miss"
+      "inkCanvasPct": 99.89,
+      "inkRealPct": 94.34,
+      "note": "runtime-% indicator (named since round 4): the real side mounts the floor sample progress=25 and paints the indicator at 25% of the track; the contract carries NO width fact for the indicator (the % is runtime data) — the canvas draws the empty track, and the indicator region is the whole remaining diff"
     },
     {
       "cell": "Size=Large, Tone=Success",
       "kind": "base",
-      "pctExactUnmasked": 39.95,
-      "pctAAUnmasked": 39.91,
-      "pctAAMasked": 39.41,
-      "maskCoveragePct": 0.87,
-      "canvasPx": "96x160",
+      "pctExactUnmasked": 29.16,
+      "pctAAUnmasked": 28.97,
+      "pctAAMasked": 27.17,
+      "maskCoveragePct": 2.5,
+      "canvasPx": "576x64",
       "realPx": "544x64",
-      "inkCanvasPct": 0,
-      "inkRealPct": 39.95,
-      "note": "CANVAS SIDE (NEARLY) BLANK: canvas ink 0% vs real ink 39.95% of the union canvas — the masked % understates the miss"
+      "inkCanvasPct": 99.89,
+      "inkRealPct": 94.34,
+      "note": "runtime-% indicator (named since round 4): the real side mounts the floor sample progress=25 and paints the indicator at 25% of the track; the contract carries NO width fact for the indicator (the % is runtime data) — the canvas draws the empty track, and the indicator region is the whole remaining diff"
     },
     {
       "cell": "Size=Large, Tone=Critical",
       "kind": "base",
-      "pctExactUnmasked": 39.95,
-      "pctAAUnmasked": 39.91,
-      "pctAAMasked": 39.41,
-      "maskCoveragePct": 0.87,
-      "canvasPx": "96x160",
+      "pctExactUnmasked": 29.16,
+      "pctAAUnmasked": 28.97,
+      "pctAAMasked": 27.17,
+      "maskCoveragePct": 2.5,
+      "canvasPx": "576x64",
       "realPx": "544x64",
-      "inkCanvasPct": 0,
-      "inkRealPct": 39.95,
-      "note": "CANVAS SIDE (NEARLY) BLANK: canvas ink 0% vs real ink 39.95% of the union canvas — the masked % understates the miss"
+      "inkCanvasPct": 99.89,
+      "inkRealPct": 94.34,
+      "note": "runtime-% indicator (named since round 4): the real side mounts the floor sample progress=25 and paints the indicator at 25% of the track; the contract carries NO width fact for the indicator (the % is runtime data) — the canvas draws the empty track, and the indicator region is the whole remaining diff"
     }
   ],
   "summary": {
     "cells": 12,
-    "meanExactUnmasked": 26.37,
-    "meanAAUnmasked": 26.32,
-    "meanAAMasked": 25.88,
-    "maxAAMasked": 39.41,
+    "meanExactUnmasked": 29.15,
+    "meanAAUnmasked": 28.7,
+    "meanAAMasked": 26.22,
+    "maxAAMasked": 27.17,
     "worstCell": "Size=Large, Tone=Highlight",
     "cellsOver10Masked": [
       {
         "cell": "Size=Medium, Tone=Highlight",
-        "pctAAMasked": 24.34,
-        "note": "CANVAS SIDE (NEARLY) BLANK: canvas ink 0% vs real ink 24.94% of the union canvas — the masked % understates the miss"
+        "pctAAMasked": 25.9,
+        "note": "runtime-% indicator (named since round 4): the real side mounts the floor sample progress=25 and paints the indicator at 25% of the track; the contract carries NO width fact for the indicator (the % is runtime data) — the canvas draws the empty track, and the indicator region is the whole remaining diff"
       },
       {
         "cell": "Size=Medium, Tone=Primary",
-        "pctAAMasked": 24.34,
-        "note": "CANVAS SIDE (NEARLY) BLANK: canvas ink 0% vs real ink 24.94% of the union canvas — the masked % understates the miss"
+        "pctAAMasked": 25.9,
+        "note": "runtime-% indicator (named since round 4): the real side mounts the floor sample progress=25 and paints the indicator at 25% of the track; the contract carries NO width fact for the indicator (the % is runtime data) — the canvas draws the empty track, and the indicator region is the whole remaining diff"
       },
       {
         "cell": "Size=Medium, Tone=Success",
-        "pctAAMasked": 24.34,
-        "note": "CANVAS SIDE (NEARLY) BLANK: canvas ink 0% vs real ink 24.94% of the union canvas — the masked % understates the miss"
+        "pctAAMasked": 25.9,
+        "note": "runtime-% indicator (named since round 4): the real side mounts the floor sample progress=25 and paints the indicator at 25% of the track; the contract carries NO width fact for the indicator (the % is runtime data) — the canvas draws the empty track, and the indicator region is the whole remaining diff"
       },
       {
         "cell": "Size=Medium, Tone=Critical",
-        "pctAAMasked": 24.34,
-        "note": "CANVAS SIDE (NEARLY) BLANK: canvas ink 0% vs real ink 24.94% of the union canvas — the masked % understates the miss"
+        "pctAAMasked": 25.9,
+        "note": "runtime-% indicator (named since round 4): the real side mounts the floor sample progress=25 and paints the indicator at 25% of the track; the contract carries NO width fact for the indicator (the % is runtime data) — the canvas draws the empty track, and the indicator region is the whole remaining diff"
       },
       {
         "cell": "Size=Small, Tone=Highlight",
-        "pctAAMasked": 13.9,
-        "note": "CANVAS SIDE (NEARLY) BLANK: canvas ink 0% vs real ink 14.22% of the union canvas — the masked % understates the miss"
+        "pctAAMasked": 25.59,
+        "note": "runtime-% indicator (named since round 4): the real side mounts the floor sample progress=25 and paints the indicator at 25% of the track; the contract carries NO width fact for the indicator (the % is runtime data) — the canvas draws the empty track, and the indicator region is the whole remaining diff"
       },
       {
         "cell": "Size=Small, Tone=Primary",
-        "pctAAMasked": 13.9,
-        "note": "CANVAS SIDE (NEARLY) BLANK: canvas ink 0% vs real ink 14.22% of the union canvas — the masked % understates the miss"
+        "pctAAMasked": 25.59,
+        "note": "runtime-% indicator (named since round 4): the real side mounts the floor sample progress=25 and paints the indicator at 25% of the track; the contract carries NO width fact for the indicator (the % is runtime data) — the canvas draws the empty track, and the indicator region is the whole remaining diff"
       },
       {
         "cell": "Size=Small, Tone=Success",
-        "pctAAMasked": 13.9,
-        "note": "CANVAS SIDE (NEARLY) BLANK: canvas ink 0% vs real ink 14.22% of the union canvas — the masked % understates the miss"
+        "pctAAMasked": 25.59,
+        "note": "runtime-% indicator (named since round 4): the real side mounts the floor sample progress=25 and paints the indicator at 25% of the track; the contract carries NO width fact for the indicator (the % is runtime data) — the canvas draws the empty track, and the indicator region is the whole remaining diff"
       },
       {
         "cell": "Size=Small, Tone=Critical",
-        "pctAAMasked": 13.9,
-        "note": "CANVAS SIDE (NEARLY) BLANK: canvas ink 0% vs real ink 14.22% of the union canvas — the masked % understates the miss"
+        "pctAAMasked": 25.59,
+        "note": "runtime-% indicator (named since round 4): the real side mounts the floor sample progress=25 and paints the indicator at 25% of the track; the contract carries NO width fact for the indicator (the % is runtime data) — the canvas draws the empty track, and the indicator region is the whole remaining diff"
       },
       {
         "cell": "Size=Large, Tone=Highlight",
-        "pctAAMasked": 39.41,
-        "note": "CANVAS SIDE (NEARLY) BLANK: canvas ink 0% vs real ink 39.95% of the union canvas — the masked % understates the miss"
+        "pctAAMasked": 27.17,
+        "note": "runtime-% indicator (named since round 4): the real side mounts the floor sample progress=25 and paints the indicator at 25% of the track; the contract carries NO width fact for the indicator (the % is runtime data) — the canvas draws the empty track, and the indicator region is the whole remaining diff"
       },
       {
         "cell": "Size=Large, Tone=Primary",
-        "pctAAMasked": 39.41,
-        "note": "CANVAS SIDE (NEARLY) BLANK: canvas ink 0% vs real ink 39.95% of the union canvas — the masked % understates the miss"
+        "pctAAMasked": 27.17,
+        "note": "runtime-% indicator (named since round 4): the real side mounts the floor sample progress=25 and paints the indicator at 25% of the track; the contract carries NO width fact for the indicator (the % is runtime data) — the canvas draws the empty track, and the indicator region is the whole remaining diff"
       },
       {
         "cell": "Size=Large, Tone=Success",
-        "pctAAMasked": 39.41,
-        "note": "CANVAS SIDE (NEARLY) BLANK: canvas ink 0% vs real ink 39.95% of the union canvas — the masked % understates the miss"
+        "pctAAMasked": 27.17,
+        "note": "runtime-% indicator (named since round 4): the real side mounts the floor sample progress=25 and paints the indicator at 25% of the track; the contract carries NO width fact for the indicator (the % is runtime data) — the canvas draws the empty track, and the indicator region is the whole remaining diff"
       },
       {
         "cell": "Size=Large, Tone=Critical",
-        "pctAAMasked": 39.41,
-        "note": "CANVAS SIDE (NEARLY) BLANK: canvas ink 0% vs real ink 39.95% of the union canvas — the masked % understates the miss"
+        "pctAAMasked": 27.17,
+        "note": "runtime-% indicator (named since round 4): the real side mounts the floor sample progress=25 and paints the indicator at 25% of the track; the contract carries NO width fact for the indicator (the % is runtime data) — the canvas draws the empty track, and the indicator region is the whole remaining diff"
       }
     ],
-    "blankCanvasCells": [
-      "Size=Medium, Tone=Highlight",
-      "Size=Medium, Tone=Primary",
-      "Size=Medium, Tone=Success",
-      "Size=Medium, Tone=Critical",
-      "Size=Small, Tone=Highlight",
-      "Size=Small, Tone=Primary",
-      "Size=Small, Tone=Success",
-      "Size=Small, Tone=Critical",
-      "Size=Large, Tone=Highlight",
-      "Size=Large, Tone=Primary",
-      "Size=Large, Tone=Success",
-      "Size=Large, Tone=Critical"
-    ]
+    "blankCanvasCells": []
   },
   "acceptance": {
     "maskedMeanLE5": false,
     "allCellsOver10Named": true,
-    "noBlankCanvasCells": false
+    "noBlankCanvasCells": true
   }
 }
