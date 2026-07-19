@@ -1747,12 +1747,12 @@
       "combo": "tone-info",
       "part": "root",
       "channel": "background-color",
-      "ref": "{p.color-bg-fill-info}",
+      "ref": "{p.color-bg-surface}",
       "ours": {
-        "background-color": "rgb(145, 208, 255)"
+        "background-color": "rgb(255, 255, 255)"
       },
       "theirs": {
-        "background-color": "rgb(145, 208, 255)"
+        "background-color": "rgb(255, 255, 255)"
       },
       "match": true
     },
@@ -1775,12 +1775,12 @@
       "combo": "tone-info",
       "part": "root",
       "channel": "color",
-      "ref": "{p.color-text-info-on-bg-fill}",
+      "ref": "{p.color-text}",
       "ours": {
-        "color": "rgb(0, 33, 51)"
+        "color": "rgb(48, 48, 48)"
       },
       "theirs": {
-        "color": "rgb(0, 33, 51)"
+        "color": "rgb(48, 48, 48)"
       },
       "match": true
     },
@@ -1901,12 +1901,12 @@
       "combo": "tone-success",
       "part": "root",
       "channel": "background-color",
-      "ref": "{p.color-bg-fill-success}",
+      "ref": "{p.color-bg-surface}",
       "ours": {
-        "background-color": "rgb(4, 123, 93)"
+        "background-color": "rgb(255, 255, 255)"
       },
       "theirs": {
-        "background-color": "rgb(4, 123, 93)"
+        "background-color": "rgb(255, 255, 255)"
       },
       "match": true
     },
@@ -1929,12 +1929,12 @@
       "combo": "tone-success",
       "part": "root",
       "channel": "color",
-      "ref": "{p.color-text-success-on-bg-fill}",
+      "ref": "{p.color-text}",
       "ours": {
-        "color": "rgb(250, 255, 251)"
+        "color": "rgb(48, 48, 48)"
       },
       "theirs": {
-        "color": "rgb(250, 255, 251)"
+        "color": "rgb(48, 48, 48)"
       },
       "match": true
     },
@@ -2055,12 +2055,12 @@
       "combo": "tone-warning",
       "part": "root",
       "channel": "background-color",
-      "ref": "{p.color-bg-fill-warning}",
+      "ref": "{p.color-bg-surface}",
       "ours": {
-        "background-color": "rgb(255, 184, 0)"
+        "background-color": "rgb(255, 255, 255)"
       },
       "theirs": {
-        "background-color": "rgb(255, 184, 0)"
+        "background-color": "rgb(255, 255, 255)"
       },
       "match": true
     },
@@ -2083,12 +2083,12 @@
       "combo": "tone-warning",
       "part": "root",
       "channel": "color",
-      "ref": "{p.color-text-warning-on-bg-fill}",
+      "ref": "{p.color-text}",
       "ours": {
-        "color": "rgb(37, 26, 0)"
+        "color": "rgb(48, 48, 48)"
       },
       "theirs": {
-        "color": "rgb(37, 26, 0)"
+        "color": "rgb(48, 48, 48)"
       },
       "match": true
     },
@@ -2209,12 +2209,12 @@
       "combo": "tone-critical",
       "part": "root",
       "channel": "background-color",
-      "ref": "{p.color-bg-fill-critical}",
+      "ref": "{p.color-bg-surface}",
       "ours": {
-        "background-color": "rgb(199, 10, 36)"
+        "background-color": "rgb(255, 255, 255)"
       },
       "theirs": {
-        "background-color": "rgb(199, 10, 36)"
+        "background-color": "rgb(255, 255, 255)"
       },
       "match": true
     },
@@ -2237,12 +2237,12 @@
       "combo": "tone-critical",
       "part": "root",
       "channel": "color",
-      "ref": "{p.color-text-critical-on-bg-fill}",
+      "ref": "{p.color-text}",
       "ours": {
-        "color": "rgb(255, 250, 251)"
+        "color": "rgb(48, 48, 48)"
       },
       "theirs": {
-        "color": "rgb(255, 250, 251)"
+        "color": "rgb(48, 48, 48)"
       },
       "match": true
     },

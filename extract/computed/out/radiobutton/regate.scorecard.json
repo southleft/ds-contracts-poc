@@ -4,7 +4,98 @@
   "config": "extract/computed/configs/polaris.json",
   "capturedBrowser": "Chromium 148.0.7778.96 (playwright-core, headless)",
   "declared": {
-    "base": [],
+    "base": [
+      {
+        "part": "root",
+        "channel": "cursor",
+        "value": "pointer"
+      },
+      {
+        "part": "input",
+        "channel": "appearance",
+        "value": "auto"
+      },
+      {
+        "part": "input",
+        "channel": "cursor",
+        "value": "default"
+      },
+      {
+        "part": "input",
+        "channel": "font-family",
+        "value": "Arial"
+      },
+      {
+        "part": "input",
+        "channel": "font-feature-settings",
+        "value": "normal"
+      },
+      {
+        "part": "input",
+        "channel": "overflow-x",
+        "value": "hidden"
+      },
+      {
+        "part": "input",
+        "channel": "overflow-y",
+        "value": "hidden"
+      },
+      {
+        "part": "input",
+        "channel": "text-rendering",
+        "value": "auto"
+      },
+      {
+        "part": "input",
+        "channel": "text-wrap-mode",
+        "value": "nowrap"
+      },
+      {
+        "part": "backdrop",
+        "channel": "border-bottom-style",
+        "value": "solid"
+      },
+      {
+        "part": "backdrop",
+        "channel": "border-left-style",
+        "value": "solid"
+      },
+      {
+        "part": "backdrop",
+        "channel": "border-right-style",
+        "value": "solid"
+      },
+      {
+        "part": "backdrop",
+        "channel": "border-top-style",
+        "value": "solid"
+      },
+      {
+        "part": "backdrop",
+        "channel": "cursor",
+        "value": "pointer"
+      },
+      {
+        "part": "backdrop",
+        "channel": "position",
+        "value": "relative"
+      },
+      {
+        "part": "backdrop",
+        "channel": "transition-duration",
+        "value": "0.1s"
+      },
+      {
+        "part": "backdrop",
+        "channel": "transition-property",
+        "value": "border-color"
+      },
+      {
+        "part": "backdrop",
+        "channel": "transition-timing-function",
+        "value": "cubic-bezier(0.19, 0.91, 0.38, 1)"
+      }
+    ],
     "state": [
       {
         "state": "disabled",
@@ -65,8 +156,8 @@
     "interactions": 4,
     "computed": {
       "cellsCompared": 504,
-      "cellsEqual": 349,
-      "pctEqual": 69.24603174603175,
+      "cellsEqual": 381,
+      "pctEqual": 75.5952380952381,
       "rowsFullyEqual": 0,
       "rows": 8
     },
@@ -79,12 +170,12 @@
       "maxAA": 0
     },
     "fusion": {
-      "boundConfirmed": 10,
-      "boundCells": 17,
-      "contradictions": 7,
-      "mintedLeaves": 24,
-      "mintedLeavesUnfolded": 20,
-      "baseBindings": 26,
+      "boundConfirmed": 4,
+      "boundCells": 4,
+      "contradictions": 0,
+      "mintedLeaves": 28,
+      "mintedLeavesUnfolded": 23,
+      "baseBindings": 39,
       "stateBindings": 51,
       "codeOnlyChannels": 15,
       "overflowBindings": 59,
@@ -95,70 +186,54 @@
         "key": "disabled__default",
         "pctAA": 100,
         "pctExact": 100,
-        "channelsMismatched": 30
+        "channelsMismatched": 26
       },
       {
         "key": "disabled__hover",
         "pctAA": 100,
         "pctExact": 100,
-        "channelsMismatched": 30
+        "channelsMismatched": 26
       },
       {
         "key": "disabled__focus-visible",
         "pctAA": 100,
         "pctExact": 100,
-        "channelsMismatched": 30
+        "channelsMismatched": 26
       },
       {
         "key": "disabled__active",
         "pctAA": 100,
         "pctExact": 100,
-        "channelsMismatched": 30
+        "channelsMismatched": 26
       },
       {
         "key": "enabled__active",
         "pctAA": 100,
         "pctExact": 100,
-        "channelsMismatched": 14
+        "channelsMismatched": 10
       },
       {
         "key": "enabled__hover",
         "pctAA": 100,
         "pctExact": 100,
-        "channelsMismatched": 10
+        "channelsMismatched": 6
       },
       {
         "key": "enabled__focus-visible",
         "pctAA": 100,
         "pctExact": 100,
-        "channelsMismatched": 6
+        "channelsMismatched": 2
       },
       {
         "key": "enabled__default",
         "pctAA": 100,
         "pctExact": 100,
-        "channelsMismatched": 5
+        "channelsMismatched": 1
       }
     ],
     "topMismatchedChannels": [
       [
         "input.clip-path",
-        8
-      ],
-      [
-        "input.font-size",
-        8
-      ],
-      [
-        "backdrop.border-bottom-left-radius",
-        8
-      ],
-      [
-        "backdrop.border-bottom-right-radius",
-        8
-      ],
-      [
-        "backdrop.border-top-right-radius",
         8
       ],
       [
@@ -200,6 +275,22 @@
       [
         "backdrop.border-top-width",
         5
+      ],
+      [
+        "root.cursor",
+        4
+      ],
+      [
+        "input.border-bottom-color",
+        4
+      ],
+      [
+        "input.border-left-color",
+        4
+      ],
+      [
+        "input.border-right-color",
+        4
       ]
     ],
     "namedLosses": [
@@ -282,7 +373,7 @@
       {
         "key": "enabled__default",
         "channelsCompared": 63,
-        "channelsEqual": 58,
+        "channelsEqual": 62,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
@@ -291,30 +382,6 @@
             "channel": "clip-path",
             "ours": "none",
             "theirs": "inset(50%)"
-          },
-          {
-            "part": "input",
-            "channel": "font-size",
-            "ours": "16px",
-            "theirs": "13.3333px"
-          },
-          {
-            "part": "backdrop",
-            "channel": "border-bottom-left-radius",
-            "ours": "0px",
-            "theirs": "9999px"
-          },
-          {
-            "part": "backdrop",
-            "channel": "border-bottom-right-radius",
-            "ours": "0px",
-            "theirs": "9999px"
-          },
-          {
-            "part": "backdrop",
-            "channel": "border-top-right-radius",
-            "ours": "0px",
-            "theirs": "9999px"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -322,7 +389,7 @@
       {
         "key": "enabled__hover",
         "channelsCompared": 63,
-        "channelsEqual": 53,
+        "channelsEqual": 57,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
@@ -331,12 +398,6 @@
             "channel": "clip-path",
             "ours": "none",
             "theirs": "inset(50%)"
-          },
-          {
-            "part": "input",
-            "channel": "font-size",
-            "ours": "16px",
-            "theirs": "13.3333px"
           },
           {
             "part": "backdrop",
@@ -349,18 +410,6 @@
             "channel": "border-bottom-color",
             "ours": "rgba(138, 138, 138, 1)",
             "theirs": "rgba(97, 97, 97, 1)"
-          },
-          {
-            "part": "backdrop",
-            "channel": "border-bottom-left-radius",
-            "ours": "0px",
-            "theirs": "9999px"
-          },
-          {
-            "part": "backdrop",
-            "channel": "border-bottom-right-radius",
-            "ours": "0px",
-            "theirs": "9999px"
           },
           {
             "part": "backdrop",
@@ -379,12 +428,6 @@
             "channel": "border-top-color",
             "ours": "rgba(138, 138, 138, 1)",
             "theirs": "rgba(97, 97, 97, 1)"
-          },
-          {
-            "part": "backdrop",
-            "channel": "border-top-right-radius",
-            "ours": "0px",
-            "theirs": "9999px"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -392,7 +435,7 @@
       {
         "key": "enabled__focus-visible",
         "channelsCompared": 63,
-        "channelsEqual": 57,
+        "channelsEqual": 61,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
@@ -404,33 +447,9 @@
           },
           {
             "part": "input",
-            "channel": "font-size",
-            "ours": "16px",
-            "theirs": "13.3333px"
-          },
-          {
-            "part": "input",
             "channel": "outline-color",
             "ours": "rgba(0, 0, 0, 1)",
             "theirs": "rgba(0, 95, 204, 1)"
-          },
-          {
-            "part": "backdrop",
-            "channel": "border-bottom-left-radius",
-            "ours": "0px",
-            "theirs": "9999px"
-          },
-          {
-            "part": "backdrop",
-            "channel": "border-bottom-right-radius",
-            "ours": "0px",
-            "theirs": "9999px"
-          },
-          {
-            "part": "backdrop",
-            "channel": "border-top-right-radius",
-            "ours": "0px",
-            "theirs": "9999px"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -438,7 +457,7 @@
       {
         "key": "enabled__active",
         "channelsCompared": 63,
-        "channelsEqual": 49,
+        "channelsEqual": 53,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
@@ -447,12 +466,6 @@
             "channel": "clip-path",
             "ours": "none",
             "theirs": "inset(50%)"
-          },
-          {
-            "part": "input",
-            "channel": "font-size",
-            "ours": "16px",
-            "theirs": "13.3333px"
           },
           {
             "part": "backdrop",
@@ -465,18 +478,6 @@
             "channel": "border-bottom-color",
             "ours": "rgba(138, 138, 138, 1)",
             "theirs": "rgba(48, 48, 48, 1)"
-          },
-          {
-            "part": "backdrop",
-            "channel": "border-bottom-left-radius",
-            "ours": "0px",
-            "theirs": "9999px"
-          },
-          {
-            "part": "backdrop",
-            "channel": "border-bottom-right-radius",
-            "ours": "0px",
-            "theirs": "9999px"
           },
           {
             "part": "backdrop",
@@ -516,12 +517,6 @@
           },
           {
             "part": "backdrop",
-            "channel": "border-top-right-radius",
-            "ours": "0px",
-            "theirs": "9999px"
-          },
-          {
-            "part": "backdrop",
             "channel": "border-top-width",
             "ours": "1px",
             "theirs": "2px"
@@ -532,7 +527,7 @@
       {
         "key": "disabled__default",
         "channelsCompared": 63,
-        "channelsEqual": 33,
+        "channelsEqual": 37,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
@@ -592,12 +587,6 @@
           },
           {
             "part": "input",
-            "channel": "font-size",
-            "ours": "16px",
-            "theirs": "13.3333px"
-          },
-          {
-            "part": "input",
             "channel": "outline-color",
             "ours": "rgba(0, 0, 0, 1)",
             "theirs": "rgba(84, 84, 84, 1)"
@@ -625,18 +614,6 @@
             "channel": "border-bottom-color",
             "ours": "rgba(138, 138, 138, 1)",
             "theirs": "rgba(48, 48, 48, 1)"
-          },
-          {
-            "part": "backdrop",
-            "channel": "border-bottom-left-radius",
-            "ours": "0px",
-            "theirs": "9999px"
-          },
-          {
-            "part": "backdrop",
-            "channel": "border-bottom-right-radius",
-            "ours": "0px",
-            "theirs": "9999px"
           },
           {
             "part": "backdrop",
@@ -691,12 +668,6 @@
             "channel": "border-top-color",
             "ours": "rgba(138, 138, 138, 1)",
             "theirs": "rgba(48, 48, 48, 1)"
-          },
-          {
-            "part": "backdrop",
-            "channel": "border-top-right-radius",
-            "ours": "0px",
-            "theirs": "9999px"
           },
           {
             "part": "backdrop",
@@ -722,7 +693,7 @@
       {
         "key": "disabled__hover",
         "channelsCompared": 63,
-        "channelsEqual": 33,
+        "channelsEqual": 37,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
@@ -782,12 +753,6 @@
           },
           {
             "part": "input",
-            "channel": "font-size",
-            "ours": "16px",
-            "theirs": "13.3333px"
-          },
-          {
-            "part": "input",
             "channel": "outline-color",
             "ours": "rgba(0, 0, 0, 1)",
             "theirs": "rgba(84, 84, 84, 1)"
@@ -815,18 +780,6 @@
             "channel": "border-bottom-color",
             "ours": "rgba(138, 138, 138, 1)",
             "theirs": "rgba(48, 48, 48, 1)"
-          },
-          {
-            "part": "backdrop",
-            "channel": "border-bottom-left-radius",
-            "ours": "0px",
-            "theirs": "9999px"
-          },
-          {
-            "part": "backdrop",
-            "channel": "border-bottom-right-radius",
-            "ours": "0px",
-            "theirs": "9999px"
           },
           {
             "part": "backdrop",
@@ -881,12 +834,6 @@
             "channel": "border-top-color",
             "ours": "rgba(138, 138, 138, 1)",
             "theirs": "rgba(48, 48, 48, 1)"
-          },
-          {
-            "part": "backdrop",
-            "channel": "border-top-right-radius",
-            "ours": "0px",
-            "theirs": "9999px"
           },
           {
             "part": "backdrop",
@@ -912,7 +859,7 @@
       {
         "key": "disabled__focus-visible",
         "channelsCompared": 63,
-        "channelsEqual": 33,
+        "channelsEqual": 37,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
@@ -972,12 +919,6 @@
           },
           {
             "part": "input",
-            "channel": "font-size",
-            "ours": "16px",
-            "theirs": "13.3333px"
-          },
-          {
-            "part": "input",
             "channel": "outline-color",
             "ours": "rgba(0, 0, 0, 1)",
             "theirs": "rgba(84, 84, 84, 1)"
@@ -1005,18 +946,6 @@
             "channel": "border-bottom-color",
             "ours": "rgba(138, 138, 138, 1)",
             "theirs": "rgba(48, 48, 48, 1)"
-          },
-          {
-            "part": "backdrop",
-            "channel": "border-bottom-left-radius",
-            "ours": "0px",
-            "theirs": "9999px"
-          },
-          {
-            "part": "backdrop",
-            "channel": "border-bottom-right-radius",
-            "ours": "0px",
-            "theirs": "9999px"
           },
           {
             "part": "backdrop",
@@ -1071,12 +1000,6 @@
             "channel": "border-top-color",
             "ours": "rgba(138, 138, 138, 1)",
             "theirs": "rgba(48, 48, 48, 1)"
-          },
-          {
-            "part": "backdrop",
-            "channel": "border-top-right-radius",
-            "ours": "0px",
-            "theirs": "9999px"
           },
           {
             "part": "backdrop",
@@ -1102,7 +1025,7 @@
       {
         "key": "disabled__active",
         "channelsCompared": 63,
-        "channelsEqual": 33,
+        "channelsEqual": 37,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
@@ -1162,12 +1085,6 @@
           },
           {
             "part": "input",
-            "channel": "font-size",
-            "ours": "16px",
-            "theirs": "13.3333px"
-          },
-          {
-            "part": "input",
             "channel": "outline-color",
             "ours": "rgba(0, 0, 0, 1)",
             "theirs": "rgba(84, 84, 84, 1)"
@@ -1195,18 +1112,6 @@
             "channel": "border-bottom-color",
             "ours": "rgba(138, 138, 138, 1)",
             "theirs": "rgba(48, 48, 48, 1)"
-          },
-          {
-            "part": "backdrop",
-            "channel": "border-bottom-left-radius",
-            "ours": "0px",
-            "theirs": "9999px"
-          },
-          {
-            "part": "backdrop",
-            "channel": "border-bottom-right-radius",
-            "ours": "0px",
-            "theirs": "9999px"
           },
           {
             "part": "backdrop",
@@ -1261,12 +1166,6 @@
             "channel": "border-top-color",
             "ours": "rgba(138, 138, 138, 1)",
             "theirs": "rgba(48, 48, 48, 1)"
-          },
-          {
-            "part": "backdrop",
-            "channel": "border-top-right-radius",
-            "ours": "0px",
-            "theirs": "9999px"
           },
           {
             "part": "backdrop",

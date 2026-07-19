@@ -25,26 +25,6 @@
   outline-offset: 2px;
 }
 
-.tone-success {
-  background-color: var(--p-color-bg-fill-success);
-  color: var(--p-color-text-success-on-bg-fill);
-}
-
-.tone-warning {
-  background-color: var(--p-color-bg-fill-warning);
-  color: var(--p-color-text-warning-on-bg-fill);
-}
-
-.tone-critical {
-  background-color: var(--p-color-bg-fill-critical);
-  color: var(--p-color-text-critical-on-bg-fill);
-}
-
-.tone-info {
-  background-color: var(--p-color-bg-fill-info);
-  color: var(--p-color-text-info-on-bg-fill);
-}
-
 .root:focus-visible {
   outline-color: var(--imported-banner-root-outline-color-state-focus-visible);
 }

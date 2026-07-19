@@ -111,27 +111,6 @@
         "top": "{imported.shared.size-0}",
         "color": "{p.color-text}"
       },
-      "tokensByProp": {
-        "prop": "tone",
-        "map": {
-          "success": {
-            "background-color": "{p.color-bg-fill-success}",
-            "color": "{p.color-text-success-on-bg-fill}"
-          },
-          "warning": {
-            "background-color": "{p.color-bg-fill-warning}",
-            "color": "{p.color-text-warning-on-bg-fill}"
-          },
-          "critical": {
-            "background-color": "{p.color-bg-fill-critical}",
-            "color": "{p.color-text-critical-on-bg-fill}"
-          },
-          "info": {
-            "background-color": "{p.color-bg-fill-info}",
-            "color": "{p.color-text-info-on-bg-fill}"
-          }
-        }
-      },
       "parts": {
         "title": {
           "element": "h2",

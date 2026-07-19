@@ -4,7 +4,28 @@
   "config": "extract/computed/configs/polaris.json",
   "capturedBrowser": "Chromium 148.0.7778.96 (playwright-core, headless)",
   "declared": {
-    "base": [],
+    "base": [
+      {
+        "part": "root",
+        "channel": "max-width",
+        "value": "100%"
+      },
+      {
+        "part": "root",
+        "channel": "overflow-x",
+        "value": "hidden"
+      },
+      {
+        "part": "root",
+        "channel": "overflow-y",
+        "value": "hidden"
+      },
+      {
+        "part": "root",
+        "channel": "position",
+        "value": "relative"
+      }
+    ],
     "state": []
   },
   "scorecard": {
@@ -16,9 +37,9 @@
     "interactions": 4,
     "computed": {
       "cellsCompared": 224,
-      "cellsEqual": 176,
-      "pctEqual": 78.57142857142857,
-      "rowsFullyEqual": 0,
+      "cellsEqual": 224,
+      "pctEqual": 100,
+      "rowsFullyEqual": 16,
       "rows": 16
     },
     "pixel": {
@@ -31,11 +52,11 @@
     },
     "fusion": {
       "boundConfirmed": 8,
-      "boundCells": 20,
-      "contradictions": 12,
-      "mintedLeaves": 2,
-      "mintedLeavesUnfolded": 2,
-      "baseBindings": 11,
+      "boundCells": 8,
+      "contradictions": 0,
+      "mintedLeaves": 14,
+      "mintedLeavesUnfolded": 14,
+      "baseBindings": 14,
       "stateBindings": 0,
       "codeOnlyChannels": 6,
       "overflowBindings": 7,
@@ -46,65 +67,52 @@
         "key": "extraSmall__default",
         "pctAA": 100,
         "pctExact": 100,
-        "channelsMismatched": 3
+        "channelsMismatched": 0
       },
       {
         "key": "extraSmall__hover",
         "pctAA": 100,
         "pctExact": 100,
-        "channelsMismatched": 3
+        "channelsMismatched": 0
       },
       {
         "key": "extraSmall__focus-visible",
         "pctAA": 100,
         "pctExact": 100,
-        "channelsMismatched": 3
+        "channelsMismatched": 0
       },
       {
         "key": "extraSmall__active",
         "pctAA": 100,
         "pctExact": 100,
-        "channelsMismatched": 3
+        "channelsMismatched": 0
       },
       {
         "key": "small__default",
         "pctAA": 100,
         "pctExact": 100,
-        "channelsMismatched": 3
+        "channelsMismatched": 0
       },
       {
         "key": "small__hover",
         "pctAA": 100,
         "pctExact": 100,
-        "channelsMismatched": 3
+        "channelsMismatched": 0
       },
       {
         "key": "small__focus-visible",
         "pctAA": 100,
         "pctExact": 100,
-        "channelsMismatched": 3
+        "channelsMismatched": 0
       },
       {
         "key": "small__active",
         "pctAA": 100,
         "pctExact": 100,
-        "channelsMismatched": 3
+        "channelsMismatched": 0
       }
     ],
-    "topMismatchedChannels": [
-      [
-        "root.border-bottom-left-radius",
-        16
-      ],
-      [
-        "root.border-bottom-right-radius",
-        16
-      ],
-      [
-        "root.border-top-right-radius",
-        16
-      ]
-    ],
+    "topMismatchedChannels": [],
     "namedLosses": [
       "overflow: part-0.bottom — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
       "overflow: part-0.color — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
@@ -124,449 +132,145 @@
       {
         "key": "extraSmall__default",
         "channelsCompared": 14,
-        "channelsEqual": 11,
+        "channelsEqual": 14,
         "pctExact": 100,
         "pctAA": 100,
-        "mismatches": [
-          {
-            "part": "root",
-            "channel": "border-bottom-left-radius",
-            "ours": "0px",
-            "theirs": "6px"
-          },
-          {
-            "part": "root",
-            "channel": "border-bottom-right-radius",
-            "ours": "0px",
-            "theirs": "6px"
-          },
-          {
-            "part": "root",
-            "channel": "border-top-right-radius",
-            "ours": "0px",
-            "theirs": "6px"
-          }
-        ],
+        "mismatches": [],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "extraSmall__hover",
         "channelsCompared": 14,
-        "channelsEqual": 11,
+        "channelsEqual": 14,
         "pctExact": 100,
         "pctAA": 100,
-        "mismatches": [
-          {
-            "part": "root",
-            "channel": "border-bottom-left-radius",
-            "ours": "0px",
-            "theirs": "6px"
-          },
-          {
-            "part": "root",
-            "channel": "border-bottom-right-radius",
-            "ours": "0px",
-            "theirs": "6px"
-          },
-          {
-            "part": "root",
-            "channel": "border-top-right-radius",
-            "ours": "0px",
-            "theirs": "6px"
-          }
-        ],
+        "mismatches": [],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "extraSmall__focus-visible",
         "channelsCompared": 14,
-        "channelsEqual": 11,
+        "channelsEqual": 14,
         "pctExact": 100,
         "pctAA": 100,
-        "mismatches": [
-          {
-            "part": "root",
-            "channel": "border-bottom-left-radius",
-            "ours": "0px",
-            "theirs": "6px"
-          },
-          {
-            "part": "root",
-            "channel": "border-bottom-right-radius",
-            "ours": "0px",
-            "theirs": "6px"
-          },
-          {
-            "part": "root",
-            "channel": "border-top-right-radius",
-            "ours": "0px",
-            "theirs": "6px"
-          }
-        ],
+        "mismatches": [],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "extraSmall__active",
         "channelsCompared": 14,
-        "channelsEqual": 11,
+        "channelsEqual": 14,
         "pctExact": 100,
         "pctAA": 100,
-        "mismatches": [
-          {
-            "part": "root",
-            "channel": "border-bottom-left-radius",
-            "ours": "0px",
-            "theirs": "6px"
-          },
-          {
-            "part": "root",
-            "channel": "border-bottom-right-radius",
-            "ours": "0px",
-            "theirs": "6px"
-          },
-          {
-            "part": "root",
-            "channel": "border-top-right-radius",
-            "ours": "0px",
-            "theirs": "6px"
-          }
-        ],
+        "mismatches": [],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "small__default",
         "channelsCompared": 14,
-        "channelsEqual": 11,
+        "channelsEqual": 14,
         "pctExact": 100,
         "pctAA": 100,
-        "mismatches": [
-          {
-            "part": "root",
-            "channel": "border-bottom-left-radius",
-            "ours": "0px",
-            "theirs": "8px"
-          },
-          {
-            "part": "root",
-            "channel": "border-bottom-right-radius",
-            "ours": "0px",
-            "theirs": "8px"
-          },
-          {
-            "part": "root",
-            "channel": "border-top-right-radius",
-            "ours": "0px",
-            "theirs": "8px"
-          }
-        ],
+        "mismatches": [],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "small__hover",
         "channelsCompared": 14,
-        "channelsEqual": 11,
+        "channelsEqual": 14,
         "pctExact": 100,
         "pctAA": 100,
-        "mismatches": [
-          {
-            "part": "root",
-            "channel": "border-bottom-left-radius",
-            "ours": "0px",
-            "theirs": "8px"
-          },
-          {
-            "part": "root",
-            "channel": "border-bottom-right-radius",
-            "ours": "0px",
-            "theirs": "8px"
-          },
-          {
-            "part": "root",
-            "channel": "border-top-right-radius",
-            "ours": "0px",
-            "theirs": "8px"
-          }
-        ],
+        "mismatches": [],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "small__focus-visible",
         "channelsCompared": 14,
-        "channelsEqual": 11,
+        "channelsEqual": 14,
         "pctExact": 100,
         "pctAA": 100,
-        "mismatches": [
-          {
-            "part": "root",
-            "channel": "border-bottom-left-radius",
-            "ours": "0px",
-            "theirs": "8px"
-          },
-          {
-            "part": "root",
-            "channel": "border-bottom-right-radius",
-            "ours": "0px",
-            "theirs": "8px"
-          },
-          {
-            "part": "root",
-            "channel": "border-top-right-radius",
-            "ours": "0px",
-            "theirs": "8px"
-          }
-        ],
+        "mismatches": [],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "small__active",
         "channelsCompared": 14,
-        "channelsEqual": 11,
+        "channelsEqual": 14,
         "pctExact": 100,
         "pctAA": 100,
-        "mismatches": [
-          {
-            "part": "root",
-            "channel": "border-bottom-left-radius",
-            "ours": "0px",
-            "theirs": "8px"
-          },
-          {
-            "part": "root",
-            "channel": "border-bottom-right-radius",
-            "ours": "0px",
-            "theirs": "8px"
-          },
-          {
-            "part": "root",
-            "channel": "border-top-right-radius",
-            "ours": "0px",
-            "theirs": "8px"
-          }
-        ],
+        "mismatches": [],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "medium__default",
         "channelsCompared": 14,
-        "channelsEqual": 11,
+        "channelsEqual": 14,
         "pctExact": 100,
         "pctAA": 100,
-        "mismatches": [
-          {
-            "part": "root",
-            "channel": "border-bottom-left-radius",
-            "ours": "0px",
-            "theirs": "8px"
-          },
-          {
-            "part": "root",
-            "channel": "border-bottom-right-radius",
-            "ours": "0px",
-            "theirs": "8px"
-          },
-          {
-            "part": "root",
-            "channel": "border-top-right-radius",
-            "ours": "0px",
-            "theirs": "8px"
-          }
-        ],
+        "mismatches": [],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "medium__hover",
         "channelsCompared": 14,
-        "channelsEqual": 11,
+        "channelsEqual": 14,
         "pctExact": 100,
         "pctAA": 100,
-        "mismatches": [
-          {
-            "part": "root",
-            "channel": "border-bottom-left-radius",
-            "ours": "0px",
-            "theirs": "8px"
-          },
-          {
-            "part": "root",
-            "channel": "border-bottom-right-radius",
-            "ours": "0px",
-            "theirs": "8px"
-          },
-          {
-            "part": "root",
-            "channel": "border-top-right-radius",
-            "ours": "0px",
-            "theirs": "8px"
-          }
-        ],
+        "mismatches": [],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "medium__focus-visible",
         "channelsCompared": 14,
-        "channelsEqual": 11,
+        "channelsEqual": 14,
         "pctExact": 100,
         "pctAA": 100,
-        "mismatches": [
-          {
-            "part": "root",
-            "channel": "border-bottom-left-radius",
-            "ours": "0px",
-            "theirs": "8px"
-          },
-          {
-            "part": "root",
-            "channel": "border-bottom-right-radius",
-            "ours": "0px",
-            "theirs": "8px"
-          },
-          {
-            "part": "root",
-            "channel": "border-top-right-radius",
-            "ours": "0px",
-            "theirs": "8px"
-          }
-        ],
+        "mismatches": [],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "medium__active",
         "channelsCompared": 14,
-        "channelsEqual": 11,
+        "channelsEqual": 14,
         "pctExact": 100,
         "pctAA": 100,
-        "mismatches": [
-          {
-            "part": "root",
-            "channel": "border-bottom-left-radius",
-            "ours": "0px",
-            "theirs": "8px"
-          },
-          {
-            "part": "root",
-            "channel": "border-bottom-right-radius",
-            "ours": "0px",
-            "theirs": "8px"
-          },
-          {
-            "part": "root",
-            "channel": "border-top-right-radius",
-            "ours": "0px",
-            "theirs": "8px"
-          }
-        ],
+        "mismatches": [],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "large__default",
         "channelsCompared": 14,
-        "channelsEqual": 11,
+        "channelsEqual": 14,
         "pctExact": 100,
         "pctAA": 100,
-        "mismatches": [
-          {
-            "part": "root",
-            "channel": "border-bottom-left-radius",
-            "ours": "0px",
-            "theirs": "8px"
-          },
-          {
-            "part": "root",
-            "channel": "border-bottom-right-radius",
-            "ours": "0px",
-            "theirs": "8px"
-          },
-          {
-            "part": "root",
-            "channel": "border-top-right-radius",
-            "ours": "0px",
-            "theirs": "8px"
-          }
-        ],
+        "mismatches": [],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "large__hover",
         "channelsCompared": 14,
-        "channelsEqual": 11,
+        "channelsEqual": 14,
         "pctExact": 100,
         "pctAA": 100,
-        "mismatches": [
-          {
-            "part": "root",
-            "channel": "border-bottom-left-radius",
-            "ours": "0px",
-            "theirs": "8px"
-          },
-          {
-            "part": "root",
-            "channel": "border-bottom-right-radius",
-            "ours": "0px",
-            "theirs": "8px"
-          },
-          {
-            "part": "root",
-            "channel": "border-top-right-radius",
-            "ours": "0px",
-            "theirs": "8px"
-          }
-        ],
+        "mismatches": [],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "large__focus-visible",
         "channelsCompared": 14,
-        "channelsEqual": 11,
+        "channelsEqual": 14,
         "pctExact": 100,
         "pctAA": 100,
-        "mismatches": [
-          {
-            "part": "root",
-            "channel": "border-bottom-left-radius",
-            "ours": "0px",
-            "theirs": "8px"
-          },
-          {
-            "part": "root",
-            "channel": "border-bottom-right-radius",
-            "ours": "0px",
-            "theirs": "8px"
-          },
-          {
-            "part": "root",
-            "channel": "border-top-right-radius",
-            "ours": "0px",
-            "theirs": "8px"
-          }
-        ],
+        "mismatches": [],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "large__active",
         "channelsCompared": 14,
-        "channelsEqual": 11,
+        "channelsEqual": 14,
         "pctExact": 100,
         "pctAA": 100,
-        "mismatches": [
-          {
-            "part": "root",
-            "channel": "border-bottom-left-radius",
-            "ours": "0px",
-            "theirs": "8px"
-          },
-          {
-            "part": "root",
-            "channel": "border-bottom-right-radius",
-            "ours": "0px",
-            "theirs": "8px"
-          },
-          {
-            "part": "root",
-            "channel": "border-top-right-radius",
-            "ours": "0px",
-            "theirs": "8px"
-          }
-        ],
+        "mismatches": [],
         "note": "original screenshot unavailable — pixel not scored"
       }
     ]

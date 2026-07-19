@@ -16,9 +16,9 @@
     "interactions": 4,
     "computed": {
       "cellsCompared": 136,
-      "cellsEqual": 124,
-      "pctEqual": 91.17647058823529,
-      "rowsFullyEqual": 0,
+      "cellsEqual": 136,
+      "pctEqual": 100,
+      "rowsFullyEqual": 4,
       "rows": 4
     },
     "pixel": {
@@ -31,11 +31,11 @@
     },
     "fusion": {
       "boundConfirmed": 12,
-      "boundCells": 16,
-      "contradictions": 4,
-      "mintedLeaves": 0,
-      "mintedLeavesUnfolded": 1,
-      "baseBindings": 0,
+      "boundCells": 12,
+      "contradictions": 0,
+      "mintedLeaves": 2,
+      "mintedLeavesUnfolded": 2,
+      "baseBindings": 4,
       "stateBindings": 0,
       "codeOnlyChannels": 0,
       "overflowBindings": 0,
@@ -46,153 +46,64 @@
         "key": "__default",
         "pctAA": 100,
         "pctExact": 100,
-        "channelsMismatched": 3
+        "channelsMismatched": 0
       },
       {
         "key": "__hover",
         "pctAA": 100,
         "pctExact": 100,
-        "channelsMismatched": 3
+        "channelsMismatched": 0
       },
       {
         "key": "__focus-visible",
         "pctAA": 100,
         "pctExact": 100,
-        "channelsMismatched": 3
+        "channelsMismatched": 0
       },
       {
         "key": "__active",
         "pctAA": 100,
         "pctExact": 100,
-        "channelsMismatched": 3
+        "channelsMismatched": 0
       }
     ],
-    "topMismatchedChannels": [
-      [
-        "root.border-bottom-left-radius",
-        4
-      ],
-      [
-        "root.border-bottom-right-radius",
-        4
-      ],
-      [
-        "root.border-top-right-radius",
-        4
-      ]
-    ],
+    "topMismatchedChannels": [],
     "namedLosses": [],
     "rows": [
       {
         "key": "__default",
         "channelsCompared": 34,
-        "channelsEqual": 31,
+        "channelsEqual": 34,
         "pctExact": 100,
         "pctAA": 100,
-        "mismatches": [
-          {
-            "part": "root",
-            "channel": "border-bottom-left-radius",
-            "ours": "0px",
-            "theirs": "8px"
-          },
-          {
-            "part": "root",
-            "channel": "border-bottom-right-radius",
-            "ours": "0px",
-            "theirs": "8px"
-          },
-          {
-            "part": "root",
-            "channel": "border-top-right-radius",
-            "ours": "0px",
-            "theirs": "8px"
-          }
-        ],
+        "mismatches": [],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "__hover",
         "channelsCompared": 34,
-        "channelsEqual": 31,
+        "channelsEqual": 34,
         "pctExact": 100,
         "pctAA": 100,
-        "mismatches": [
-          {
-            "part": "root",
-            "channel": "border-bottom-left-radius",
-            "ours": "0px",
-            "theirs": "8px"
-          },
-          {
-            "part": "root",
-            "channel": "border-bottom-right-radius",
-            "ours": "0px",
-            "theirs": "8px"
-          },
-          {
-            "part": "root",
-            "channel": "border-top-right-radius",
-            "ours": "0px",
-            "theirs": "8px"
-          }
-        ],
+        "mismatches": [],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "__focus-visible",
         "channelsCompared": 34,
-        "channelsEqual": 31,
+        "channelsEqual": 34,
         "pctExact": 100,
         "pctAA": 100,
-        "mismatches": [
-          {
-            "part": "root",
-            "channel": "border-bottom-left-radius",
-            "ours": "0px",
-            "theirs": "8px"
-          },
-          {
-            "part": "root",
-            "channel": "border-bottom-right-radius",
-            "ours": "0px",
-            "theirs": "8px"
-          },
-          {
-            "part": "root",
-            "channel": "border-top-right-radius",
-            "ours": "0px",
-            "theirs": "8px"
-          }
-        ],
+        "mismatches": [],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "__active",
         "channelsCompared": 34,
-        "channelsEqual": 31,
+        "channelsEqual": 34,
         "pctExact": 100,
         "pctAA": 100,
-        "mismatches": [
-          {
-            "part": "root",
-            "channel": "border-bottom-left-radius",
-            "ours": "0px",
-            "theirs": "8px"
-          },
-          {
-            "part": "root",
-            "channel": "border-bottom-right-radius",
-            "ours": "0px",
-            "theirs": "8px"
-          },
-          {
-            "part": "root",
-            "channel": "border-top-right-radius",
-            "ours": "0px",
-            "theirs": "8px"
-          }
-        ],
+        "mismatches": [],
         "note": "original screenshot unavailable — pixel not scored"
       }
     ]

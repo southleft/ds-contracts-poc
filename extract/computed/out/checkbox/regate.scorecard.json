@@ -4,7 +4,88 @@
   "config": "extract/computed/configs/polaris.json",
   "capturedBrowser": "Chromium 148.0.7778.96 (playwright-core, headless)",
   "declared": {
-    "base": [],
+    "base": [
+      {
+        "part": "root",
+        "channel": "cursor",
+        "value": "pointer"
+      },
+      {
+        "part": "input",
+        "channel": "appearance",
+        "value": "auto"
+      },
+      {
+        "part": "input",
+        "channel": "cursor",
+        "value": "default"
+      },
+      {
+        "part": "input",
+        "channel": "font-family",
+        "value": "Arial"
+      },
+      {
+        "part": "input",
+        "channel": "font-feature-settings",
+        "value": "normal"
+      },
+      {
+        "part": "input",
+        "channel": "text-rendering",
+        "value": "auto"
+      },
+      {
+        "part": "backdrop",
+        "channel": "border-bottom-style",
+        "value": "solid"
+      },
+      {
+        "part": "backdrop",
+        "channel": "border-left-style",
+        "value": "solid"
+      },
+      {
+        "part": "backdrop",
+        "channel": "border-right-style",
+        "value": "solid"
+      },
+      {
+        "part": "backdrop",
+        "channel": "border-top-style",
+        "value": "solid"
+      },
+      {
+        "part": "backdrop",
+        "channel": "cursor",
+        "value": "pointer"
+      },
+      {
+        "part": "backdrop",
+        "channel": "position",
+        "value": "relative"
+      },
+      {
+        "part": "backdrop",
+        "channel": "transition-delay",
+        "value": "0s, 0s, 0s"
+      },
+      {
+        "part": "backdrop",
+        "channel": "transition-duration",
+        "value": "0.1s, 0.1s, 0.1s"
+      },
+      {
+        "part": "backdrop",
+        "channel": "transition-property",
+        "value": "border-color, border-width, box-shadow"
+      },
+      {
+        "part": "backdrop",
+        "channel": "transition-timing-function",
+        "value": "cubic-bezier(0.19, 0.91, 0.38, 1), cubic-bezier(0.19, 0.91, 0.38, 1), cubic-bezier(0.19, 0.91, 0.38, 1)"
+      }
+    ],
     "state": [
       {
         "state": "disabled",
@@ -41,8 +122,8 @@
     "interactions": 4,
     "computed": {
       "cellsCompared": 488,
-      "cellsEqual": 332,
-      "pctEqual": 68.0327868852459,
+      "cellsEqual": 386,
+      "pctEqual": 79.09836065573771,
       "rowsFullyEqual": 0,
       "rows": 8
     },
@@ -55,12 +136,12 @@
       "maxAA": 0
     },
     "fusion": {
-      "boundConfirmed": 8,
-      "boundCells": 15,
-      "contradictions": 7,
-      "mintedLeaves": 28,
-      "mintedLeavesUnfolded": 23,
-      "baseBindings": 54,
+      "boundConfirmed": 1,
+      "boundCells": 2,
+      "contradictions": 1,
+      "mintedLeaves": 31,
+      "mintedLeavesUnfolded": 25,
+      "baseBindings": 67,
       "stateBindings": 47,
       "codeOnlyChannels": 40,
       "overflowBindings": 80,
@@ -71,80 +152,52 @@
         "key": "disabled__default",
         "pctAA": 100,
         "pctExact": 100,
-        "channelsMismatched": 26
+        "channelsMismatched": 20
       },
       {
         "key": "disabled__hover",
         "pctAA": 100,
         "pctExact": 100,
-        "channelsMismatched": 26
+        "channelsMismatched": 20
       },
       {
         "key": "disabled__focus-visible",
         "pctAA": 100,
         "pctExact": 100,
-        "channelsMismatched": 26
+        "channelsMismatched": 20
       },
       {
         "key": "disabled__active",
         "pctAA": 100,
         "pctExact": 100,
-        "channelsMismatched": 26
+        "channelsMismatched": 20
       },
       {
         "key": "enabled__hover",
         "pctAA": 100,
         "pctExact": 100,
-        "channelsMismatched": 15
+        "channelsMismatched": 8
       },
       {
         "key": "enabled__active",
         "pctAA": 100,
         "pctExact": 100,
-        "channelsMismatched": 15
+        "channelsMismatched": 8
       },
       {
         "key": "enabled__focus-visible",
         "pctAA": 100,
         "pctExact": 100,
-        "channelsMismatched": 12
+        "channelsMismatched": 4
       },
       {
         "key": "enabled__default",
         "pctAA": 100,
         "pctExact": 100,
-        "channelsMismatched": 10
+        "channelsMismatched": 2
       }
     ],
     "topMismatchedChannels": [
-      [
-        "root.padding-bottom",
-        8
-      ],
-      [
-        "root.padding-top",
-        8
-      ],
-      [
-        "input.font-size",
-        8
-      ],
-      [
-        "backdrop.border-bottom-left-radius",
-        8
-      ],
-      [
-        "backdrop.border-bottom-right-radius",
-        8
-      ],
-      [
-        "backdrop.border-top-left-radius",
-        8
-      ],
-      [
-        "backdrop.border-top-right-radius",
-        8
-      ],
       [
         "backdrop.transform",
         8
@@ -174,8 +227,36 @@
         6
       ],
       [
+        "backdrop.box-shadow",
+        6
+      ],
+      [
         "input.outline-color",
         5
+      ],
+      [
+        "root.cursor",
+        4
+      ],
+      [
+        "input.border-bottom-color",
+        4
+      ],
+      [
+        "input.border-left-color",
+        4
+      ],
+      [
+        "input.border-right-color",
+        4
+      ],
+      [
+        "input.border-top-color",
+        4
+      ],
+      [
+        "input.caret-color",
+        4
       ]
     ],
     "namedLosses": [
@@ -304,58 +385,10 @@
       {
         "key": "enabled__default",
         "channelsCompared": 61,
-        "channelsEqual": 51,
+        "channelsEqual": 59,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "padding-bottom",
-            "ours": "0px",
-            "theirs": "4px"
-          },
-          {
-            "part": "root",
-            "channel": "padding-top",
-            "ours": "0px",
-            "theirs": "4px"
-          },
-          {
-            "part": "input",
-            "channel": "font-size",
-            "ours": "16px",
-            "theirs": "13.3333px"
-          },
-          {
-            "part": "backdrop",
-            "channel": "border-bottom-left-radius",
-            "ours": "0px",
-            "theirs": "4px"
-          },
-          {
-            "part": "backdrop",
-            "channel": "border-bottom-right-radius",
-            "ours": "0px",
-            "theirs": "4px"
-          },
-          {
-            "part": "backdrop",
-            "channel": "border-top-left-radius",
-            "ours": "0px",
-            "theirs": "4px"
-          },
-          {
-            "part": "backdrop",
-            "channel": "border-top-right-radius",
-            "ours": "0px",
-            "theirs": "4px"
-          },
-          {
-            "part": "backdrop",
-            "channel": "box-shadow",
-            "ours": "none",
-            "theirs": "rgba(138, 138, 138, 1) 0px 0px 0px 0.66px inset"
-          },
           {
             "part": "backdrop",
             "channel": "transform",
@@ -374,28 +407,10 @@
       {
         "key": "enabled__hover",
         "channelsCompared": 61,
-        "channelsEqual": 46,
+        "channelsEqual": 53,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "padding-bottom",
-            "ours": "0px",
-            "theirs": "4px"
-          },
-          {
-            "part": "root",
-            "channel": "padding-top",
-            "ours": "0px",
-            "theirs": "4px"
-          },
-          {
-            "part": "input",
-            "channel": "font-size",
-            "ours": "16px",
-            "theirs": "13.3333px"
-          },
           {
             "part": "backdrop",
             "channel": "background-color",
@@ -407,18 +422,6 @@
             "channel": "border-bottom-color",
             "ours": "rgba(138, 138, 138, 1)",
             "theirs": "rgba(97, 97, 97, 1)"
-          },
-          {
-            "part": "backdrop",
-            "channel": "border-bottom-left-radius",
-            "ours": "0px",
-            "theirs": "4px"
-          },
-          {
-            "part": "backdrop",
-            "channel": "border-bottom-right-radius",
-            "ours": "0px",
-            "theirs": "4px"
           },
           {
             "part": "backdrop",
@@ -440,20 +443,8 @@
           },
           {
             "part": "backdrop",
-            "channel": "border-top-left-radius",
-            "ours": "0px",
-            "theirs": "4px"
-          },
-          {
-            "part": "backdrop",
-            "channel": "border-top-right-radius",
-            "ours": "0px",
-            "theirs": "4px"
-          },
-          {
-            "part": "backdrop",
             "channel": "box-shadow",
-            "ours": "none",
+            "ours": "rgba(138, 138, 138, 1) 0px 0px 0px 0.66px inset",
             "theirs": "rgba(97, 97, 97, 1) 0px 0px 0px 0.66px inset"
           },
           {
@@ -474,28 +465,10 @@
       {
         "key": "enabled__focus-visible",
         "channelsCompared": 61,
-        "channelsEqual": 49,
+        "channelsEqual": 57,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "padding-bottom",
-            "ours": "0px",
-            "theirs": "4px"
-          },
-          {
-            "part": "root",
-            "channel": "padding-top",
-            "ours": "0px",
-            "theirs": "4px"
-          },
-          {
-            "part": "input",
-            "channel": "font-size",
-            "ours": "16px",
-            "theirs": "13.3333px"
-          },
           {
             "part": "input",
             "channel": "outline-color",
@@ -507,36 +480,6 @@
             "channel": "background-color",
             "ours": "rgba(255, 255, 255, 1)",
             "theirs": "rgba(250, 250, 250, 1)"
-          },
-          {
-            "part": "backdrop",
-            "channel": "border-bottom-left-radius",
-            "ours": "0px",
-            "theirs": "4px"
-          },
-          {
-            "part": "backdrop",
-            "channel": "border-bottom-right-radius",
-            "ours": "0px",
-            "theirs": "4px"
-          },
-          {
-            "part": "backdrop",
-            "channel": "border-top-left-radius",
-            "ours": "0px",
-            "theirs": "4px"
-          },
-          {
-            "part": "backdrop",
-            "channel": "border-top-right-radius",
-            "ours": "0px",
-            "theirs": "4px"
-          },
-          {
-            "part": "backdrop",
-            "channel": "box-shadow",
-            "ours": "none",
-            "theirs": "rgba(138, 138, 138, 1) 0px 0px 0px 0.66px inset"
           },
           {
             "part": "backdrop",
@@ -556,28 +499,10 @@
       {
         "key": "enabled__active",
         "channelsCompared": 61,
-        "channelsEqual": 46,
+        "channelsEqual": 53,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "padding-bottom",
-            "ours": "0px",
-            "theirs": "4px"
-          },
-          {
-            "part": "root",
-            "channel": "padding-top",
-            "ours": "0px",
-            "theirs": "4px"
-          },
-          {
-            "part": "input",
-            "channel": "font-size",
-            "ours": "16px",
-            "theirs": "13.3333px"
-          },
           {
             "part": "backdrop",
             "channel": "background-color",
@@ -589,18 +514,6 @@
             "channel": "border-bottom-color",
             "ours": "rgba(138, 138, 138, 1)",
             "theirs": "rgba(48, 48, 48, 1)"
-          },
-          {
-            "part": "backdrop",
-            "channel": "border-bottom-left-radius",
-            "ours": "0px",
-            "theirs": "4px"
-          },
-          {
-            "part": "backdrop",
-            "channel": "border-bottom-right-radius",
-            "ours": "0px",
-            "theirs": "4px"
           },
           {
             "part": "backdrop",
@@ -622,20 +535,8 @@
           },
           {
             "part": "backdrop",
-            "channel": "border-top-left-radius",
-            "ours": "0px",
-            "theirs": "4px"
-          },
-          {
-            "part": "backdrop",
-            "channel": "border-top-right-radius",
-            "ours": "0px",
-            "theirs": "4px"
-          },
-          {
-            "part": "backdrop",
             "channel": "box-shadow",
-            "ours": "none",
+            "ours": "rgba(138, 138, 138, 1) 0px 0px 0px 0.66px inset",
             "theirs": "rgba(48, 48, 48, 1) 0px 0px 0px 2px inset"
           },
           {
@@ -656,7 +557,7 @@
       {
         "key": "disabled__default",
         "channelsCompared": 61,
-        "channelsEqual": 35,
+        "channelsEqual": 41,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
@@ -665,18 +566,6 @@
             "channel": "cursor",
             "ours": "pointer",
             "theirs": "default"
-          },
-          {
-            "part": "root",
-            "channel": "padding-bottom",
-            "ours": "0px",
-            "theirs": "4px"
-          },
-          {
-            "part": "root",
-            "channel": "padding-top",
-            "ours": "0px",
-            "theirs": "4px"
           },
           {
             "part": "input",
@@ -722,12 +611,6 @@
           },
           {
             "part": "input",
-            "channel": "font-size",
-            "ours": "16px",
-            "theirs": "13.3333px"
-          },
-          {
-            "part": "input",
             "channel": "outline-color",
             "ours": "rgba(0, 0, 0, 1)",
             "theirs": "rgba(84, 84, 84, 1)"
@@ -758,18 +641,6 @@
           },
           {
             "part": "backdrop",
-            "channel": "border-bottom-left-radius",
-            "ours": "0px",
-            "theirs": "4px"
-          },
-          {
-            "part": "backdrop",
-            "channel": "border-bottom-right-radius",
-            "ours": "0px",
-            "theirs": "4px"
-          },
-          {
-            "part": "backdrop",
             "channel": "border-left-color",
             "ours": "rgba(97, 97, 97, 1)",
             "theirs": "rgba(0, 0, 0, 0)"
@@ -788,15 +659,9 @@
           },
           {
             "part": "backdrop",
-            "channel": "border-top-left-radius",
-            "ours": "0px",
-            "theirs": "4px"
-          },
-          {
-            "part": "backdrop",
-            "channel": "border-top-right-radius",
-            "ours": "0px",
-            "theirs": "4px"
+            "channel": "box-shadow",
+            "ours": "rgba(138, 138, 138, 1) 0px 0px 0px 0.66px inset",
+            "theirs": "none"
           },
           {
             "part": "backdrop",
@@ -822,7 +687,7 @@
       {
         "key": "disabled__hover",
         "channelsCompared": 61,
-        "channelsEqual": 35,
+        "channelsEqual": 41,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
@@ -831,18 +696,6 @@
             "channel": "cursor",
             "ours": "pointer",
             "theirs": "default"
-          },
-          {
-            "part": "root",
-            "channel": "padding-bottom",
-            "ours": "0px",
-            "theirs": "4px"
-          },
-          {
-            "part": "root",
-            "channel": "padding-top",
-            "ours": "0px",
-            "theirs": "4px"
           },
           {
             "part": "input",
@@ -888,12 +741,6 @@
           },
           {
             "part": "input",
-            "channel": "font-size",
-            "ours": "16px",
-            "theirs": "13.3333px"
-          },
-          {
-            "part": "input",
             "channel": "outline-color",
             "ours": "rgba(0, 0, 0, 1)",
             "theirs": "rgba(84, 84, 84, 1)"
@@ -924,18 +771,6 @@
           },
           {
             "part": "backdrop",
-            "channel": "border-bottom-left-radius",
-            "ours": "0px",
-            "theirs": "4px"
-          },
-          {
-            "part": "backdrop",
-            "channel": "border-bottom-right-radius",
-            "ours": "0px",
-            "theirs": "4px"
-          },
-          {
-            "part": "backdrop",
             "channel": "border-left-color",
             "ours": "rgba(97, 97, 97, 1)",
             "theirs": "rgba(0, 0, 0, 0)"
@@ -954,15 +789,9 @@
           },
           {
             "part": "backdrop",
-            "channel": "border-top-left-radius",
-            "ours": "0px",
-            "theirs": "4px"
-          },
-          {
-            "part": "backdrop",
-            "channel": "border-top-right-radius",
-            "ours": "0px",
-            "theirs": "4px"
+            "channel": "box-shadow",
+            "ours": "rgba(138, 138, 138, 1) 0px 0px 0px 0.66px inset",
+            "theirs": "none"
           },
           {
             "part": "backdrop",
@@ -988,7 +817,7 @@
       {
         "key": "disabled__focus-visible",
         "channelsCompared": 61,
-        "channelsEqual": 35,
+        "channelsEqual": 41,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
@@ -997,18 +826,6 @@
             "channel": "cursor",
             "ours": "pointer",
             "theirs": "default"
-          },
-          {
-            "part": "root",
-            "channel": "padding-bottom",
-            "ours": "0px",
-            "theirs": "4px"
-          },
-          {
-            "part": "root",
-            "channel": "padding-top",
-            "ours": "0px",
-            "theirs": "4px"
           },
           {
             "part": "input",
@@ -1054,12 +871,6 @@
           },
           {
             "part": "input",
-            "channel": "font-size",
-            "ours": "16px",
-            "theirs": "13.3333px"
-          },
-          {
-            "part": "input",
             "channel": "outline-color",
             "ours": "rgba(0, 0, 0, 1)",
             "theirs": "rgba(84, 84, 84, 1)"
@@ -1090,18 +901,6 @@
           },
           {
             "part": "backdrop",
-            "channel": "border-bottom-left-radius",
-            "ours": "0px",
-            "theirs": "4px"
-          },
-          {
-            "part": "backdrop",
-            "channel": "border-bottom-right-radius",
-            "ours": "0px",
-            "theirs": "4px"
-          },
-          {
-            "part": "backdrop",
             "channel": "border-left-color",
             "ours": "rgba(97, 97, 97, 1)",
             "theirs": "rgba(0, 0, 0, 0)"
@@ -1120,15 +919,9 @@
           },
           {
             "part": "backdrop",
-            "channel": "border-top-left-radius",
-            "ours": "0px",
-            "theirs": "4px"
-          },
-          {
-            "part": "backdrop",
-            "channel": "border-top-right-radius",
-            "ours": "0px",
-            "theirs": "4px"
+            "channel": "box-shadow",
+            "ours": "rgba(138, 138, 138, 1) 0px 0px 0px 0.66px inset",
+            "theirs": "none"
           },
           {
             "part": "backdrop",
@@ -1154,7 +947,7 @@
       {
         "key": "disabled__active",
         "channelsCompared": 61,
-        "channelsEqual": 35,
+        "channelsEqual": 41,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
@@ -1163,18 +956,6 @@
             "channel": "cursor",
             "ours": "pointer",
             "theirs": "default"
-          },
-          {
-            "part": "root",
-            "channel": "padding-bottom",
-            "ours": "0px",
-            "theirs": "4px"
-          },
-          {
-            "part": "root",
-            "channel": "padding-top",
-            "ours": "0px",
-            "theirs": "4px"
           },
           {
             "part": "input",
@@ -1220,12 +1001,6 @@
           },
           {
             "part": "input",
-            "channel": "font-size",
-            "ours": "16px",
-            "theirs": "13.3333px"
-          },
-          {
-            "part": "input",
             "channel": "outline-color",
             "ours": "rgba(0, 0, 0, 1)",
             "theirs": "rgba(84, 84, 84, 1)"
@@ -1256,18 +1031,6 @@
           },
           {
             "part": "backdrop",
-            "channel": "border-bottom-left-radius",
-            "ours": "0px",
-            "theirs": "4px"
-          },
-          {
-            "part": "backdrop",
-            "channel": "border-bottom-right-radius",
-            "ours": "0px",
-            "theirs": "4px"
-          },
-          {
-            "part": "backdrop",
             "channel": "border-left-color",
             "ours": "rgba(97, 97, 97, 1)",
             "theirs": "rgba(0, 0, 0, 0)"
@@ -1286,15 +1049,9 @@
           },
           {
             "part": "backdrop",
-            "channel": "border-top-left-radius",
-            "ours": "0px",
-            "theirs": "4px"
-          },
-          {
-            "part": "backdrop",
-            "channel": "border-top-right-radius",
-            "ours": "0px",
-            "theirs": "4px"
+            "channel": "box-shadow",
+            "ours": "rgba(138, 138, 138, 1) 0px 0px 0px 0.66px inset",
+            "theirs": "none"
           },
           {
             "part": "backdrop",

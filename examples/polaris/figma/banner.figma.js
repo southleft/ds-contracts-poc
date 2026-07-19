@@ -36,7 +36,7 @@ const COMPONENTS = [
             "primary": "MIN",
             "counter": "MIN"
           },
-          "fill": "p/color-bg-fill-info",
+          "fill": "p/color-bg-surface",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-12",
             "bottomRightRadius": "imported/shared/size-12",
@@ -64,7 +64,7 @@ const COMPONENTS = [
               "characters": "Banner",
               "fontSize": 13,
               "fontStyle": "Medium",
-              "textFill": "p/color-text-info-on-bg-fill",
+              "textFill": "p/color-text",
               "lineHeight": 20,
               "letterSpacing": 0,
               "contentProp": "Title"
@@ -75,7 +75,7 @@ const COMPONENTS = [
               "characters": "Your order has shipped.",
               "fontSize": 13,
               "fontStyle": "Medium",
-              "textFill": "p/color-text-info-on-bg-fill",
+              "textFill": "p/color-text",
               "lineHeight": 20,
               "letterSpacing": 0
             }
@@ -94,7 +94,7 @@ const COMPONENTS = [
             "primary": "MIN",
             "counter": "MIN"
           },
-          "fill": "p/color-bg-fill-success",
+          "fill": "p/color-bg-surface",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-12",
             "bottomRightRadius": "imported/shared/size-12",
@@ -122,7 +122,7 @@ const COMPONENTS = [
               "characters": "Banner",
               "fontSize": 13,
               "fontStyle": "Medium",
-              "textFill": "p/color-text-success-on-bg-fill",
+              "textFill": "p/color-text",
               "lineHeight": 20,
               "letterSpacing": 0,
               "contentProp": "Title"
@@ -133,7 +133,7 @@ const COMPONENTS = [
               "characters": "Your order has shipped.",
               "fontSize": 13,
               "fontStyle": "Medium",
-              "textFill": "p/color-text-success-on-bg-fill",
+              "textFill": "p/color-text",
               "lineHeight": 20,
               "letterSpacing": 0
             }
@@ -152,7 +152,7 @@ const COMPONENTS = [
             "primary": "MIN",
             "counter": "MIN"
           },
-          "fill": "p/color-bg-fill-warning",
+          "fill": "p/color-bg-surface",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-12",
             "bottomRightRadius": "imported/shared/size-12",
@@ -180,7 +180,7 @@ const COMPONENTS = [
               "characters": "Banner",
               "fontSize": 13,
               "fontStyle": "Medium",
-              "textFill": "p/color-text-warning-on-bg-fill",
+              "textFill": "p/color-text",
               "lineHeight": 20,
               "letterSpacing": 0,
               "contentProp": "Title"
@@ -191,7 +191,7 @@ const COMPONENTS = [
               "characters": "Your order has shipped.",
               "fontSize": 13,
               "fontStyle": "Medium",
-              "textFill": "p/color-text-warning-on-bg-fill",
+              "textFill": "p/color-text",
               "lineHeight": 20,
               "letterSpacing": 0
             }
@@ -210,7 +210,7 @@ const COMPONENTS = [
             "primary": "MIN",
             "counter": "MIN"
           },
-          "fill": "p/color-bg-fill-critical",
+          "fill": "p/color-bg-surface",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-12",
             "bottomRightRadius": "imported/shared/size-12",
@@ -238,7 +238,7 @@ const COMPONENTS = [
               "characters": "Banner",
               "fontSize": 13,
               "fontStyle": "Medium",
-              "textFill": "p/color-text-critical-on-bg-fill",
+              "textFill": "p/color-text",
               "lineHeight": 20,
               "letterSpacing": 0,
               "contentProp": "Title"
@@ -249,7 +249,7 @@ const COMPONENTS = [
               "characters": "Your order has shipped.",
               "fontSize": 13,
               "fontStyle": "Medium",
-              "textFill": "p/color-text-critical-on-bg-fill",
+              "textFill": "p/color-text",
               "lineHeight": 20,
               "letterSpacing": 0
             }
@@ -270,7 +270,7 @@ const COMPONENTS = [
             "primary": "MIN",
             "counter": "MIN"
           },
-          "fill": "p/color-bg-fill-info",
+          "fill": "p/color-bg-surface",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-12",
             "bottomRightRadius": "imported/shared/size-12",
@@ -300,7 +300,7 @@ const COMPONENTS = [
               "characters": "Banner",
               "fontSize": 13,
               "fontStyle": "Medium",
-              "textFill": "p/color-text-info-on-bg-fill",
+              "textFill": "p/color-text",
               "lineHeight": 20,
               "letterSpacing": 0,
               "contentProp": "Title"
@@ -311,7 +311,7 @@ const COMPONENTS = [
               "characters": "Your order has shipped.",
               "fontSize": 13,
               "fontStyle": "Medium",
-              "textFill": "p/color-text-info-on-bg-fill",
+              "textFill": "p/color-text",
               "lineHeight": 20,
               "letterSpacing": 0
             }
@@ -330,7 +330,7 @@ const COMPONENTS = [
             "primary": "MIN",
             "counter": "MIN"
           },
-          "fill": "p/color-bg-fill-success",
+          "fill": "p/color-bg-surface",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-12",
             "bottomRightRadius": "imported/shared/size-12",
@@ -360,7 +360,7 @@ const COMPONENTS = [
               "characters": "Banner",
               "fontSize": 13,
               "fontStyle": "Medium",
-              "textFill": "p/color-text-success-on-bg-fill",
+              "textFill": "p/color-text",
               "lineHeight": 20,
               "letterSpacing": 0,
               "contentProp": "Title"
@@ -371,7 +371,7 @@ const COMPONENTS = [
               "characters": "Your order has shipped.",
               "fontSize": 13,
               "fontStyle": "Medium",
-              "textFill": "p/color-text-success-on-bg-fill",
+              "textFill": "p/color-text",
               "lineHeight": 20,
               "letterSpacing": 0
             }
@@ -390,7 +390,7 @@ const COMPONENTS = [
             "primary": "MIN",
             "counter": "MIN"
           },
-          "fill": "p/color-bg-fill-warning",
+          "fill": "p/color-bg-surface",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-12",
             "bottomRightRadius": "imported/shared/size-12",
@@ -420,7 +420,7 @@ const COMPONENTS = [
               "characters": "Banner",
               "fontSize": 13,
               "fontStyle": "Medium",
-              "textFill": "p/color-text-warning-on-bg-fill",
+              "textFill": "p/color-text",
               "lineHeight": 20,
               "letterSpacing": 0,
               "contentProp": "Title"
@@ -431,7 +431,7 @@ const COMPONENTS = [
               "characters": "Your order has shipped.",
               "fontSize": 13,
               "fontStyle": "Medium",
-              "textFill": "p/color-text-warning-on-bg-fill",
+              "textFill": "p/color-text",
               "lineHeight": 20,
               "letterSpacing": 0
             }
@@ -450,7 +450,7 @@ const COMPONENTS = [
             "primary": "MIN",
             "counter": "MIN"
           },
-          "fill": "p/color-bg-fill-critical",
+          "fill": "p/color-bg-surface",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-12",
             "bottomRightRadius": "imported/shared/size-12",
@@ -480,7 +480,7 @@ const COMPONENTS = [
               "characters": "Banner",
               "fontSize": 13,
               "fontStyle": "Medium",
-              "textFill": "p/color-text-critical-on-bg-fill",
+              "textFill": "p/color-text",
               "lineHeight": 20,
               "letterSpacing": 0,
               "contentProp": "Title"
@@ -491,7 +491,7 @@ const COMPONENTS = [
               "characters": "Your order has shipped.",
               "fontSize": 13,
               "fontStyle": "Medium",
-              "textFill": "p/color-text-critical-on-bg-fill",
+              "textFill": "p/color-text",
               "lineHeight": 20,
               "letterSpacing": 0
             }

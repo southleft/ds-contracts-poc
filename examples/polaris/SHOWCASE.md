@@ -240,8 +240,9 @@ both quoted, never widened:
 The vocabulary-independent capture floor itself (truth replay — every captured longhand
 applied verbatim to a reconstructed tree): computed re-read equality ≥ 99.68% on every
 component (100.000% on four), and 8/8 … 1516/1516 pixel-AA-perfect pairs wherever the
-replayed tree carries no SVG geometry (svg path data is DOM structure, not computed style —
-a named replay limit for the icon-bearing components).
+replayed tree carries no SVG geometry or form-control state (svg path data and an input's
+value are DOM structure/state, not computed style — the named replay limits for the
+icon-bearing components and TextField).
 
 **Honest remaining-loss classes** (what the contract-mediated gate still loses, ranked by
 visual impact — the Round 3 canvas expectations):
