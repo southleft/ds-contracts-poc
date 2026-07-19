@@ -35,3 +35,4 @@ extract/computed/out/**/.replay-shots/
 extract/computed/out/**/gate.html
 extract/computed/out/**/replay.html
 evals/.computed-replay.html
+extract/computed/out/.regate-probe.html

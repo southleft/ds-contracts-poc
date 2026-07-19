@@ -79,9 +79,13 @@ export interface MintObservation {
   cssProperty: string;
   /** 'color' → '#rrggbb' / $type color; 'px' → '<n>px' / $type dimension;
    *  'number' → unitless '<n>' / $type number (node opacity, dump v1.2);
-   *  'shadow' → a preformatted CSS box-shadow value / $type shadow (single
-   *  DROP_SHADOW, dump v1.2 — literal-fidelity stand-in, CSS surfaces only). */
-  kind: 'color' | 'px' | 'number' | 'shadow';
+   *  'shadow' → a preformatted CSS box-shadow value / $type shadow (a full
+   *  shadow stack incl. inset layers and 'none' since v15 — literal-fidelity
+   *  stand-in; the canvas emitter parses the stack into native effects);
+   *  'gradient' → a CSS gradient value or 'none' (v15/S4 — background-image
+   *  carriage; CSS surfaces render it verbatim, the canvas emitter parses
+   *  linear-gradient stops into a native GRADIENT_LINEAR paint). */
+  kind: 'color' | 'px' | 'number' | 'shadow' | 'gradient';
   /** One entry per variant the node occurs in. */
   occurrences: MintOccurrence[];
 }
@@ -161,6 +165,7 @@ const DTCG_TYPE: Record<MintKind, string> = {
   px: 'dimension',
   number: 'number',
   shadow: 'shadow',
+  gradient: 'gradient',
 };
 
 /** Shared-leaf name for a deduped literal: color-1f2937 / size-4 / size-0-5 /
@@ -168,8 +173,8 @@ const DTCG_TYPE: Record<MintKind, string> = {
 const sharedName = (kind: MintKind, value: string | number): string =>
   kind === 'color'
     ? `color-${String(value).replace(/^#/, '').toLowerCase()}`
-    : kind === 'shadow'
-      ? `shadow-${sanitizeSegment(String(value))}`
+    : kind === 'shadow' || kind === 'gradient'
+      ? `${kind}-${sanitizeSegment(String(value))}`
       : `${kind === 'number' ? 'num' : 'size'}-${String(value).replace(/^-/, 'neg-').replace(/\./g, '-')}`;
 
 // ---------------------------------------------------------------------------

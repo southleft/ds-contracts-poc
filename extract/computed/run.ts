@@ -234,6 +234,7 @@ async function main() {
     const mintStates = mintTokens(comp.name, prep.stateObs, prep.axes);
     const { enriched, overflowBindings, enrichmentNotes } = applyMintToContract(
       space.contract, space, mintBase, prep.baseObs, mintStates, prep.stateObs, layout.enriched,
+      prep.declared, prep.declaredStates,
     );
 
     const mergedTree = structuredClone(mintBase.tree) as Record<string, unknown>;
@@ -305,6 +306,11 @@ async function main() {
         contradictions: layout.contradictions,
         receipts: layout.receipts,
         _note: 'computed flex keywords carried via Part.layout (the schema\'s own vocabulary); carried-slot contradictions are receipts, never silent overrides',
+      },
+      declaredFacts: {
+        _note: 'v15 (S4): uniform registry-channel facts carried as Part.declared / Part.declaredStates — first-class contract vocabulary, listed here as the enrichment receipt',
+        base: prep.declared,
+        state: prep.declaredStates,
       },
       codeOnlyChannels: prep.codeOnly,
       stateOverflow: prep.stateCodeOnly,
@@ -544,6 +550,7 @@ async function main() {
         stateBindings: mintStates.bindings.length,
         byShape: mintKinds,
       },
+      declared: { base: prep.declared.length, state: prep.declaredStates.length },
       codeOnly: { base: prep.codeOnly.length, state: prep.stateCodeOnly.length, overflowBindings: overflowBindings.length },
       pseudoElementFindings: pseudo.length,
       enrichedContractSchemaValid: true,
@@ -615,6 +622,13 @@ async function main() {
       '',
       `- leaves: **${numbers.minted.leaves}** · bindings: ${numbers.minted.baseBindings} base + ${numbers.minted.stateBindings} state`,
       `- shape: ${mintKinds.uniform} uniform · ${mintKinds.perAxis} per-axis · ${mintKinds.perPair} per-axis-pair · ${mintKinds.refused} refused (uncorrelated — nothing minted, named)`,
+      '',
+      '## Declared facts (v15 — carried, first-class)',
+      '',
+      `- base declared facts: **${prep.declared.length}**`,
+      ...prep.declared.map((d) => `  - ${d.part}.${d.channel} = \`${d.value}\``),
+      `- state declared facts: **${prep.declaredStates.length}**`,
+      ...prep.declaredStates.map((d) => `  - [${d.state}] ${d.part}.${d.channel} = \`${d.value}\``),
       '',
       '## Code-only / overflow (named, in the extension file)',
       '',

@@ -53,6 +53,7 @@
     "extract:figma:mcp": "tsx extract/figma/mcp/cli.ts",
     "extract:figma:mcp:receipt": "tsx extract/figma/mcp/receipt.ts",
     "extract:computed": "tsx extract/computed/run.ts",
+    "extract:computed:regate": "tsx extract/computed/regate.ts",
     "extract:computed:resolve": "tsx extract/computed/resolve.ts",
     "reconcile": "tsx extract/run.ts reconcile",
     "diagnose": "tsx parity/diagnose.ts",

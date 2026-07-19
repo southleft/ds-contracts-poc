@@ -26,6 +26,7 @@
  */
 import { mintTokens, type MintAxis, type MintObservation, type MintResult } from '../../core/mint-tokens.js';
 import {
+  DECLARED_CHANNELS,
   resolveLiterals,
   resolveTokens,
   tokensByPropEntries,
@@ -409,6 +410,14 @@ export function carriedChannels(part: Part | undefined): Set<string> {
   for (const e of part.literalsByProp ?? []) for (const m of Object.values(e.map)) addAll(m);
   for (const m of Object.values(part.states ?? {})) addAll(m);
   addAll(resolveLiterals(part, {}));
+  // v15 declared facts: declared channels ARE computed longhands — a part
+  // already carrying one never re-detects it.
+  for (const ch of Object.keys(part.declared ?? {})) {
+    for (const cp of CHANNEL_TO_COMPUTED[ch] ?? [ch]) out.add(cp);
+  }
+  for (const m of Object.values(part.declaredStates ?? {})) {
+    for (const ch of Object.keys(m)) for (const cp of CHANNEL_TO_COMPUTED[ch] ?? [ch]) out.add(cp);
+  }
   return out;
 }
 
@@ -424,12 +433,27 @@ export interface CodeOnlyEntry {
   state?: string;
 }
 
+/** v15 declared facts detected by fusion: a uniform unmintable value on a
+ *  registry channel is a FACT the schema now carries, not extension residue. */
+export interface DeclaredEnrichment {
+  part: string;
+  channel: string;
+  value: string;
+}
+export interface DeclaredStateEnrichment extends DeclaredEnrichment {
+  state: string;
+}
+
 export interface MintPrep {
   axes: MintAxis[];
   baseObs: MintObservation[];
   stateObs: MintObservation[];
   codeOnly: CodeOnlyEntry[];
   stateCodeOnly: CodeOnlyEntry[];
+  /** v15: uniform declared facts (base plane) → Part.declared. */
+  declared: DeclaredEnrichment[];
+  /** v15: full-coverage uniform declared state deltas → Part.declaredStates. */
+  declaredStates: DeclaredStateEnrichment[];
   inertOnDisabled: string[];
   pairwiseRefusals: string[];
   /** leaf-count comparison: mint run WITHOUT the folding pass. */
@@ -459,9 +483,16 @@ export function prepareMint(
   const foldedSet = new Set(folds.map((f) => `${f.part}|${f.channel}`));
   const enabledCombos = space.enumeration.combos.filter(isEnabled);
 
-  const buildBaseObs = (skipFolds: boolean): { obs: MintObservation[]; codeOnly: CodeOnlyEntry[]; pairwiseRefusals: string[] } => {
+  const declarablePart = (partName: string): Part | undefined => {
+    const p = partByName.get(partName);
+    if (!p || p.component || p.slot) return undefined; // ref/slot parts never carry declared facts
+    return p;
+  };
+
+  const buildBaseObs = (skipFolds: boolean): { obs: MintObservation[]; codeOnly: CodeOnlyEntry[]; declared: DeclaredEnrichment[]; pairwiseRefusals: string[] } => {
     const obs: MintObservation[] = [];
     const codeOnly: CodeOnlyEntry[] = [];
+    const declared: DeclaredEnrichment[] = [];
     const pairwiseRefusals: string[] = [];
     for (let pi = 0; pi < a.baseFlat.length; pi++) {
       const partName = a.partNames[pi];
@@ -481,11 +512,29 @@ export function prepareMint(
           values.add(v);
           rows.push({ axisValues: combo.axisValues, value: v });
           const k = kindOf(channel, v);
-          if (!k) { unk = v; break; }
+          if (!k) { unk ??= v; continue; } // no break: declared detection needs the full value set
           occurrences.push({ variant: combo.key, axisValues: combo.axisValues, value: k.value });
         }
         if (unk !== null) {
-          codeOnly.push({ part: partName, channel, reason: 'value shape outside mintable kinds (color/px/number/shadow) — no schema channel today', sample: unk, distinctValues: values.size });
+          // v15 declared facts: a registry channel whose observed value is
+          // UNIFORM across combos and inside the channel's bounded grammar is
+          // carried (Part.declared), not extension residue. Everything else
+          // stays code-only with the refusal spelled out.
+          const spec = DECLARED_CHANNELS[channel];
+          const uniform = values.size === 1 ? [...values][0] : null;
+          if (spec && uniform !== null && spec.value.test(uniform)) {
+            if (declarablePart(partName)) {
+              declared.push({ part: partName, channel, value: uniform });
+            } else {
+              codeOnly.push({ part: partName, channel, reason: 'declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision', sample: uniform, distinctValues: values.size });
+            }
+          } else if (spec && uniform !== null) {
+            codeOnly.push({ part: partName, channel, reason: 'declared-channel value outside the bounded grammar — named residue (v15)', sample: uniform, distinctValues: values.size });
+          } else if (spec) {
+            codeOnly.push({ part: partName, channel, reason: 'declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue', sample: unk, distinctValues: values.size });
+          } else {
+            codeOnly.push({ part: partName, channel, reason: 'value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today', sample: unk, distinctValues: values.size });
+          }
           continue;
         }
         if (space.enumeration.policy === 'per-axis+pairwise') {
@@ -498,25 +547,27 @@ export function prepareMint(
         obs.push({ nodePath: `${comp.name}:${partName}`, part: partName === 'root' ? '' : partName, cssProperty: channel, kind: kindOf(channel, [...values][0])!.kind, occurrences });
       }
     }
-    return { obs, codeOnly, pairwiseRefusals };
+    return { obs, codeOnly, declared, pairwiseRefusals };
   };
 
   const folded = buildBaseObs(true);
   const unfolded = buildBaseObs(false);
 
   // ---- state deltas (§2 / §5.2 state minting) ----
-  interface StateDelta { state: string; part: string; channel: string; occurrences: MintObservation['occurrences']; kinds: Set<string>; samples: Set<string> }
+  interface StateDelta { state: string; part: string; channel: string; occurrences: MintObservation['occurrences']; kinds: Set<string>; samples: Set<string>; combosSeen: Set<string> }
   const stateDeltaChannels = new Map<string, StateDelta>();
   const stateCodeOnly: CodeOnlyEntry[] = [];
+  const declaredStates: DeclaredStateEnrichment[] = [];
   const inertOnDisabled: string[] = [];
   const foldedStateSkips: string[] = [];
 
   const pushStateValue = (state: string, part: string, channel: string, combo: Combo, v: string) => {
     const key = `${state}|${part}|${channel}`;
     let d = stateDeltaChannels.get(key);
-    if (!d) stateDeltaChannels.set(key, (d = { state, part, channel, occurrences: [], kinds: new Set(), samples: new Set() }));
+    if (!d) stateDeltaChannels.set(key, (d = { state, part, channel, occurrences: [], kinds: new Set(), samples: new Set(), combosSeen: new Set() }));
     const k = kindOf(channel, v);
     d.samples.add(v);
+    d.combosSeen.add(combo.key);
     if (k) {
       d.kinds.add(k.kind);
       d.occurrences.push({ variant: combo.key, axisValues: combo.axisValues, value: k.value });
@@ -581,7 +632,21 @@ export function prepareMint(
     const foldedChannel = foldedSet.has(`${d.part}|${d.channel}`);
     if (foldedChannel) foldedStateSkips.push(`fold-carries-state-delta: [${d.state}] ${d.part}.${d.channel} rides its source fact`);
     if (d.kinds.has('unmintable') || d.kinds.size !== 1) {
-      if (!foldedChannel) stateCodeOnly.push({ state: d.state, part: d.part, channel: d.channel, sample: [...d.samples][0], reason: d.kinds.has('unmintable') ? 'value shape outside mintable kinds' : 'mixed value kinds across combos' });
+      if (!foldedChannel) {
+        // v15 declared state facts: a registry channel whose delta is
+        // UNIFORM and observed on EVERY enabled combo (a partial delta would
+        // misapply to non-delta variants under a state selector) carries as
+        // Part.declaredStates. Everything else stays named residue.
+        const spec = DECLARED_CHANNELS[d.channel];
+        const uniform = d.samples.size === 1 ? [...d.samples][0] : null;
+        if (spec && uniform !== null && spec.value.test(uniform) && d.combosSeen.size === expectedEnabled && declarablePart(d.part)) {
+          declaredStates.push({ state: d.state, part: d.part, channel: d.channel, value: uniform });
+        } else if (spec && uniform !== null && spec.value.test(uniform) && d.combosSeen.size !== expectedEnabled) {
+          stateCodeOnly.push({ state: d.state, part: d.part, channel: d.channel, sample: uniform, reason: `declared-channel state delta on ${d.combosSeen.size}/${expectedEnabled} combos — partial coverage cannot carry as a state selector (v15); named residue` });
+        } else {
+          stateCodeOnly.push({ state: d.state, part: d.part, channel: d.channel, sample: [...d.samples][0], reason: d.kinds.has('unmintable') ? 'value shape outside mintable kinds and outside the declared vocabulary' : 'mixed value kinds across combos' });
+        }
+      }
       continue;
     }
     if (d.occurrences.length < expectedEnabled) {
@@ -625,6 +690,8 @@ export function prepareMint(
     stateObs,
     codeOnly: folded.codeOnly,
     stateCodeOnly,
+    declared: folded.declared,
+    declaredStates,
     inertOnDisabled,
     pairwiseRefusals: folded.pairwiseRefusals,
     unfoldedLeafCount: unfoldedMint.count,
@@ -659,6 +726,8 @@ export function applyMintToContract(
   mintStates: MintResult,
   stateObs: MintObservation[],
   layoutEnrichments: LayoutEnrichment['enriched'] = [],
+  declaredEnrichments: DeclaredEnrichment[] = [],
+  declaredStateEnrichments: DeclaredStateEnrichment[] = [],
 ): ApplyResult {
   const enriched = structuredClone(contract) as Contract & Record<string, unknown>;
   const overflowBindings: OverflowBinding[] = [];
@@ -670,6 +739,29 @@ export function applyMintToContract(
     target.layout ??= {};
     (target.layout as Record<string, string>)[le.field] = le.value;
     enrichmentNotes.push(`layout enriched: ${le.part}.layout.${le.field} = ${le.value} (uniform computed keyword — the schema's own vocabulary)`);
+  }
+  // v15 declared facts (S4): uniform registry-channel values → Part.declared;
+  // full-coverage uniform state deltas → Part.declaredStates. The reviewed
+  // static layer wins on collision (??=), like every other enrichment.
+  for (const de of declaredEnrichments) {
+    const target = partByName.get(de.part);
+    if (!target || target.component || target.slot) continue; // guarded upstream; belt and braces
+    target.declared ??= {};
+    if (!(de.channel in target.declared)) {
+      target.declared[de.channel] = de.value;
+      enrichmentNotes.push(`declared fact carried: ${de.part}.${de.channel} = ${de.value} (v15 declared vocabulary — ${DECLARED_CHANNELS[de.channel]?.canvas === 'draw' ? 'canvas-drawable' : 'declared-not-drawn on canvas'})`);
+    }
+  }
+  for (const de of declaredStateEnrichments) {
+    const target = partByName.get(de.part);
+    if (!target || target.component || target.slot) continue;
+    target.declaredStates ??= {};
+    target.declaredStates[de.state] ??= {};
+    if (!(de.channel in target.declaredStates[de.state])) {
+      target.declaredStates[de.state][de.channel] = de.value;
+      if (!(enriched.states as string[]).includes(de.state)) (enriched.states as string[]).push(de.state as never);
+      enrichmentNotes.push(`declared state fact carried: [${de.state}] ${de.part}.${de.channel} = ${de.value} (v15 declared vocabulary)`);
+    }
   }
   const unsetAxes = new Map(space.axes.filter((ax) => ax.unset !== undefined).map((ax) => [ax.prop, ax.unset!] as const));
 

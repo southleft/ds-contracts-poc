@@ -1,0 +1,314 @@
+{
+  "_marker": "OFFLINE GATE RE-RUN (extract/computed/regate.ts) — committed captured truth replayed through the CURRENT fusion + emitters. Pixel pairs are NOT scored offline (original screenshots are session artifacts); computed-equality is the instrument. The committed scorecard.json (harness run) is untouched.",
+  "component": "Tag",
+  "config": "extract/computed/configs/polaris.json",
+  "capturedBrowser": "Chromium 148.0.7778.96 (playwright-core, headless)",
+  "declared": {
+    "base": [
+      {
+        "part": "root",
+        "channel": "max-width",
+        "value": "100%"
+      },
+      {
+        "part": "root",
+        "channel": "position",
+        "value": "relative"
+      },
+      {
+        "part": "label",
+        "channel": "display",
+        "value": "inline"
+      },
+      {
+        "part": "label",
+        "channel": "text-wrap-mode",
+        "value": "nowrap"
+      }
+    ],
+    "state": [
+      {
+        "state": "disabled",
+        "part": "root",
+        "channel": "transition-property",
+        "value": "none"
+      }
+    ]
+  },
+  "scorecard": {
+    "component": "Tag",
+    "generatedBy": "extract/computed/gate.ts",
+    "browser": "Chromium 148.0.7778.96 (playwright-core, headless)",
+    "method": "enriched contract → core/emit-html (wrapped library tokens + minted token custom properties) vs the ORIGINAL npm package rendering, same pinned Chromium, per combo × interaction; computed-equality over the styled channel set (exact string, no tolerance) + pixelmatch at threshold 0 (AA counted) and 0.1 (AA excluded) — both quoted, never widened",
+    "combos": 2,
+    "interactions": 4,
+    "computed": {
+      "cellsCompared": 160,
+      "cellsEqual": 148,
+      "pctEqual": 92.5,
+      "rowsFullyEqual": 0,
+      "rows": 8
+    },
+    "pixel": {
+      "pairs": 0,
+      "perfectExact": 0,
+      "perfectAA": 0,
+      "meanExact": 0,
+      "meanAA": 0,
+      "maxAA": 0
+    },
+    "fusion": {
+      "boundConfirmed": 6,
+      "boundCells": 7,
+      "contradictions": 1,
+      "mintedLeaves": 8,
+      "mintedLeavesUnfolded": 8,
+      "baseBindings": 13,
+      "stateBindings": 31,
+      "codeOnlyChannels": 4,
+      "overflowBindings": 21,
+      "folds": 0
+    },
+    "worstRows": [
+      {
+        "key": "disabled__default",
+        "pctAA": 100,
+        "pctExact": 100,
+        "channelsMismatched": 2
+      },
+      {
+        "key": "disabled__hover",
+        "pctAA": 100,
+        "pctExact": 100,
+        "channelsMismatched": 2
+      },
+      {
+        "key": "disabled__focus-visible",
+        "pctAA": 100,
+        "pctExact": 100,
+        "channelsMismatched": 2
+      },
+      {
+        "key": "disabled__active",
+        "pctAA": 100,
+        "pctExact": 100,
+        "channelsMismatched": 2
+      },
+      {
+        "key": "enabled__default",
+        "pctAA": 100,
+        "pctExact": 100,
+        "channelsMismatched": 1
+      },
+      {
+        "key": "enabled__hover",
+        "pctAA": 100,
+        "pctExact": 100,
+        "channelsMismatched": 1
+      },
+      {
+        "key": "enabled__focus-visible",
+        "pctAA": 100,
+        "pctExact": 100,
+        "channelsMismatched": 1
+      },
+      {
+        "key": "enabled__active",
+        "pctAA": 100,
+        "pctExact": 100,
+        "channelsMismatched": 1
+      }
+    ],
+    "topMismatchedChannels": [
+      [
+        "label.display",
+        8
+      ],
+      [
+        "root.background-color",
+        4
+      ]
+    ],
+    "namedLosses": [
+      "overflow: text.font-size — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+      "overflow: text.line-height — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+      "overflow: label.border-bottom-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
+      "overflow: label.border-left-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
+      "overflow: label.border-right-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
+      "overflow: label.border-top-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
+      "overflow: label.caret-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
+      "overflow: label.column-rule-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
+      "overflow: label.outline-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
+      "overflow: label.text-decoration-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
+      "overflow: label.text-emphasis-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
+      "overflow: text.border-bottom-color [disabled] — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+      "overflow: text.border-left-color [disabled] — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+      "overflow: text.border-right-color [disabled] — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+      "overflow: text.border-top-color [disabled] — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+      "overflow: text.caret-color [disabled] — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+      "overflow: text.color [disabled] — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+      "overflow: text.column-rule-color [disabled] — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+      "overflow: text.outline-color [disabled] — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+      "overflow: text.text-decoration-color [disabled] — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+      "overflow: text.text-emphasis-color [disabled] — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+      "code-only: text.overflow-x — declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
+      "code-only: text.overflow-y — declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
+      "code-only: text.text-overflow — declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
+      "code-only: text.text-wrap-mode — declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision"
+    ],
+    "rows": [
+      {
+        "key": "enabled__default",
+        "channelsCompared": 20,
+        "channelsEqual": 19,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "display",
+            "ours": "block",
+            "theirs": "inline"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "enabled__hover",
+        "channelsCompared": 20,
+        "channelsEqual": 19,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "display",
+            "ours": "block",
+            "theirs": "inline"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "enabled__focus-visible",
+        "channelsCompared": 20,
+        "channelsEqual": 19,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "display",
+            "ours": "block",
+            "theirs": "inline"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "enabled__active",
+        "channelsCompared": 20,
+        "channelsEqual": 19,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "label",
+            "channel": "display",
+            "ours": "block",
+            "theirs": "inline"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "disabled__default",
+        "channelsCompared": 20,
+        "channelsEqual": 18,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "background-color",
+            "ours": "rgba(227, 227, 227, 1)",
+            "theirs": "rgba(0, 0, 0, 0.05)"
+          },
+          {
+            "part": "label",
+            "channel": "display",
+            "ours": "block",
+            "theirs": "inline"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "disabled__hover",
+        "channelsCompared": 20,
+        "channelsEqual": 18,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "background-color",
+            "ours": "rgba(227, 227, 227, 1)",
+            "theirs": "rgba(0, 0, 0, 0.05)"
+          },
+          {
+            "part": "label",
+            "channel": "display",
+            "ours": "block",
+            "theirs": "inline"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "disabled__focus-visible",
+        "channelsCompared": 20,
+        "channelsEqual": 18,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "background-color",
+            "ours": "rgba(227, 227, 227, 1)",
+            "theirs": "rgba(0, 0, 0, 0.05)"
+          },
+          {
+            "part": "label",
+            "channel": "display",
+            "ours": "block",
+            "theirs": "inline"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "disabled__active",
+        "channelsCompared": 20,
+        "channelsEqual": 18,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "background-color",
+            "ours": "rgba(227, 227, 227, 1)",
+            "theirs": "rgba(0, 0, 0, 0.05)"
+          },
+          {
+            "part": "label",
+            "channel": "display",
+            "ours": "block",
+            "theirs": "inline"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      }
+    ]
+  }
+}

@@ -82,6 +82,14 @@ capture tool never re-derives the API:
      capability lift (one-placeholder map refs → compound enum-class rules);
      per-axis state refs land in root `states` (the emitters expand them);
      state×pair and state×unset set-planes are NAMED overflow (S3 residue).
+   - **DECLARED (v15/S4)**: a registry channel (`DECLARED_CHANNELS`,
+     scripts/contract-schema.ts) whose observed value is UNIFORM across
+     combos — or whose state delta is uniform with FULL combo coverage —
+     carries as `Part.declared` / `Part.declaredStates`: first-class contract
+     vocabulary, rendered verbatim by every code emitter and declared (drawn
+     or annotated per the capability-matrix verdict) on the canvas. Partial
+     coverage, out-of-grammar values, and computed-only parts stay named
+     residue.
    - **CODE-ONLY**: everything else lands in the extension block with a
      machine-readable reason. Nothing is dropped.
 3. **REPLAY** — captured truth applied verbatim to a reconstructed DOM →
@@ -92,6 +100,26 @@ capture tool never re-derives the API:
    contract → `emit-html` (wrapped library tokens + minted token custom
    properties) vs the original rendering, per combo×state. Every fusion loss
    shows up here as an honest mismatch row.
+
+## Offline gate re-run (`regate.ts` — the vocabulary-lift instrument)
+
+```bash
+npm run extract:computed:regate [-- --component Button]
+```
+
+Replays the COMMITTED captured-truth fixtures through the CURRENT fusion +
+emitters and re-scores the contract-mediated gate — no harness needed; only
+Chromium. Writes `out/<component>/regate.scorecard.json` and prints the
+committed-vs-rerun computed-equality %. Pixel pairs are NOT re-scored offline
+(original screenshots are session artifacts) and the token probe resolves
+against the wrapped token stylesheet instead of the live library page — both
+named in the runner header; a probe-context drift prints as a
+contradiction-count mismatch. Instrument fidelity receipt (S4 round 1): run
+at the pre-lift commit, the re-run reproduced the committed harness numbers
+EXACTLY (Button 79.578% = 29412/36960, Tag 77.500% = 124/160, contradictions
+76/1); after the v15 lifts the same committed captures gate at **Button
+90.617%** (33492/36960; 192/480 rows fully equal) and **Tag 92.500%**
+(148/160).
 
 ## Contradiction resolution (item 3 — human-ack, never automatic)
 

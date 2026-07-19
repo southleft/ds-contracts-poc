@@ -1532,10 +1532,11 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
 function mintedPreamble(mintedTokens?: Record<string, unknown>): string {
   const minted = mintedTokens ? flatten(mintedTokens) : null;
   if (!minted || minted.size === 0) return '';
-  // Shadow-typed leaves (box-shadow values, dump v1.2) have no Figma
-  // variable projection — skipped here; the limit is NAMED at proposal.
+  // Shadow-typed leaves (box-shadow values, dump v1.2) and gradient-typed
+  // leaves (background-image stacks, v15) have no Figma variable projection —
+  // skipped here; the limit is NAMED at proposal.
   const vars = [...minted]
-    .filter(([, entry]) => entry.type !== 'shadow')
+    .filter(([, entry]) => entry.type !== 'shadow' && entry.type !== 'gradient')
     .map(([p, entry]) => ({
       name: figmaName(p),
       type: figmaType(entry),
