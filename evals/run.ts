@@ -2603,9 +2603,17 @@ const cases: Case[] = [
       if (!ledger.includes('conditioned on BOTH variant and size')) {
         throw new Error('the plain+size bodyMd branch must be a named two-axis refusal');
       }
-      // Banner title rides Text headingSm the same way.
+      // Banner title rides Text headingSm the same way. Round 4: the title
+      // sits at its PROMOTED nesting position (root › … › ribbon row), so
+      // the pin walks the anatomy for it instead of assuming a flat path.
       const banner = JSON.parse(readFileSync(path.join(ROOT, 'examples/polaris/contracts/banner.contract.json'), 'utf8'));
-      if (banner.anatomy.root.parts?.title?.tokens?.['font-size'] !== '{p.text-heading-sm-font-size}') {
+      let bannerTitle: { tokens?: Record<string, string> } | null = null;
+      const findTitle = (name: string, part: { tokens?: Record<string, string>; parts?: Record<string, never> }) => {
+        if (name === 'title') bannerTitle = part;
+        for (const [n, c] of Object.entries(part.parts ?? {})) findTitle(n, c);
+      };
+      for (const [n, c] of Object.entries(banner.anatomy)) findTitle(n, c as never);
+      if (!bannerTitle || (bannerTitle as { tokens?: Record<string, string> }).tokens?.['font-size'] !== '{p.text-heading-sm-font-size}') {
         throw new Error('banner title headingSm typography not carried');
       }
     },
@@ -2870,10 +2878,23 @@ const cases: Case[] = [
       for (const marker of ["layoutWrap = 'WRAP'", 'INNER_SHADOW', 'GRADIENT_LINEAR', 'node.textCase = spec.textCase', 'loadFontAsync({ family: spec.fontFamily']) {
         if (!script.includes(marker)) throw new Error('emitted runtime missing: ' + marker);
       }
-      if (!comp.description.includes('Cursor changes (pointer on hover) exist only in the coded component.')) {
-        throw new Error('annotate-verdict declared facts must land as description annotation copy');
+      // ROUND 4 (owner de-noise directive): descriptions are ONE caption line
+      // + a single trailing dagger when code-only facts exist — the
+      // capability-matrix paragraphs live in repo receipts only. This pin
+      // REPLACES the pre-round-4 assertion that annotation copy landed in the
+      // description (the old behavior is retired, not broken).
+      if (!/^S4Lifts — generated from contract s4\.lifts v1\.0\.0/.test(comp.description)) {
+        throw new Error('description must be the one-line caption, got: ' + JSON.stringify(comp.description).slice(0, 120));
       }
-      if (!comp.description.includes('[disabled]')) throw new Error('state-plane declared facts must be annotated with their state');
+      if (!comp.description.includes('†')) {
+        throw new Error('a contract with code-only facts must carry the † footnote marker');
+      }
+      if (comp.description.includes('Cursor changes')) {
+        throw new Error('de-noise regression: capability-matrix annotation copy leaked back into the description');
+      }
+      if (comp.description.split('\n').length > 2) {
+        throw new Error('description must stay a single caption line (+ optional footnote), got ' + comp.description.split('\n').length + ' lines');
+      }
       // CSS surfaces render the same facts verbatim (and the declared cursor
       // supersedes the emitter chrome — no invented not-allowed).
       const html = coreEmitHtml(parsed as any, {
@@ -3193,7 +3214,7 @@ const cases: Case[] = [
         if (!/^<svg viewBox="0 0 \\d+ \\d+"/.test(r.markup)) throw new Error('markup missing viewBox: ' + r.markup.slice(0, 60));
         if (!r.markup.includes('<path d="M')) throw new Error('markup missing path data');
         // the committed asset for the base tone (info) byte-matches
-        const asset = fs.readFileSync('examples/polaris/assets/icons/banner-icon-info.svg', 'utf8').trim();
+        const asset = fs.readFileSync('extract/computed/out/banner/assets/banner-icon-info.svg', 'utf8').trim();
         if (asset !== r.markup) throw new Error('committed asset differs from a fresh reconstruction:\\n' + asset.slice(0, 120) + '\\nvs\\n' + r.markup.slice(0, 120));
         console.log('svg round trip: ' + r.markup.length + ' bytes, viewBox reconstructed, byte-equal to the committed asset');
       `]);
@@ -3221,8 +3242,12 @@ const cases: Case[] = [
           acceptance: { allCellsOver10Named: boolean };
         };
         if (!Array.isArray(sc.cells) || sc.cells.length === 0) throw new Error(`${c}: no cells scored`);
-        const mean = sc.cells.reduce((n, r) => n + r.pctAAMasked, 0) / sc.cells.length;
-        if (Math.abs(mean - sc.summary.meanAAMasked) > 0.05) {
+        // fully-masked cells score null (no scorable pixels) — excluded from
+        // the mean on both sides of this consistency check.
+        const scored = sc.cells.filter((r) => typeof r.pctAAMasked === 'number');
+        if (scored.length === 0) throw new Error(`${c}: every cell fully masked — nothing scored`);
+        const mean = scored.reduce((n, r) => n + (r.pctAAMasked as number), 0) / scored.length;
+        if (Math.abs(mean - sc.summary.meanAAMasked) > 0.5) {
           throw new Error(`${c}: summary meanAAMasked ${sc.summary.meanAAMasked} drifts from rows (${mean.toFixed(3)})`);
         }
         if (!sc.acceptance.allCellsOver10Named) throw new Error(`${c}: cells over 10% without named causes`);

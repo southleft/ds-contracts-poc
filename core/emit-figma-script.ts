@@ -617,6 +617,9 @@ interface TextCtx {
   textFill?: string;
   /** Token dot-path behind textFill — icon parts resolve it to a literal hex. */
   textFillPath?: string;
+  /** Round 4: token dot-path behind a part's CSS `fill` channel — promoted
+   *  svg hosts' glyph paint (attribute-less paths inherit it). */
+  glyphFillPath?: string;
   fontSize?: number;
   fontStyle?: string;
   /** Token dot-path behind fontSize — text nodes whose bindings exactly match
@@ -789,7 +792,11 @@ function layoutSpec(part: Part, isRoot: boolean, subst: Record<string, string> =
     mode: l?.direction?.startsWith('column') ? 'VERTICAL' : 'HORIZONTAL',
     primary: l?.justify ? JUSTIFY_FIGMA[l.justify] : 'MIN',
     counter: l?.align ? ALIGN_FIGMA[l.align] : 'MIN',
-    stretchChildren: l?.align === 'stretch' || undefined,
+    // Round 4 (CSS truth): flex align-items DEFAULTS to stretch — an
+    // align-unset flex container stretches children on the counter axis
+    // (the Banner ribbon spans the card). Explicit align values behave as
+    // before.
+    stretchChildren: (l?.align === 'stretch' || (l !== undefined && l.align === undefined)) || undefined,
     // v15 (S4/matrix a.8): flex-wrap → native layoutWrap 'WRAP'.
     ...(l?.wrap ? { wrap: true } : {}),
   };
@@ -834,6 +841,13 @@ function applyTokens(
       case 'color':
         next.textFill = varName;
         next.textFillPath = tokenPath;
+        break;
+      // Round 4 (canvas-gate finding): the CSS `fill` channel — promoted svg
+      // hosts carry per-axis glyph paint as `fill` (attribute-less paths
+      // inherit it in CSS); the canvas bakes it into the glyph markup
+      // (iconSvg) exactly like currentColor bakes the text color.
+      case 'fill':
+        next.glyphFillPath = tokenPath;
         break;
       case 'font-size':
         next.fontSize = px(resolveLiteral(tokenPath));
@@ -1242,8 +1256,15 @@ function iconSvg(part: Part, subst: Record<string, string>, ctx: TextCtx): strin
   }
   const svg = iconAssets.get(asset);
   if (!svg) throw new Error(`Unknown icon asset "${asset}" (expected assets/icons/${asset}.svg)`);
-  const hex = ctx.textFillPath ? String(resolveLiteral(ctx.textFillPath)) : '#000000';
+  // Round 4: glyph paint priority — the part's own `fill` channel (promoted
+  // svg hosts), else the text color; currentColor AND attribute-less paths
+  // (CSS-inherited fill) both bake to the resolved literal.
+  const paintPath = ctx.glyphFillPath ?? ctx.textFillPath;
+  const hex = paintPath ? String(resolveLiteral(paintPath)) : '#000000';
   let out = svg.replaceAll('currentColor', hex);
+  if (paintPath && !/<(path|circle|rect|polygon|ellipse|g)[^>]*\sfill=/.test(out)) {
+    out = out.replace(/^<svg /, `<svg fill="${hex}" `);
+  }
   if (part.icon!.size) {
     out = out
       .replace(/width="\d+"/, `width="${part.icon!.size}"`)

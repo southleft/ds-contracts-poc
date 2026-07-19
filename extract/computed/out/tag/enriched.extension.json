@@ -1959,6 +1959,8 @@
     "declared fact carried: icon.max-width = 100% (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: icon.text-align = center (v15 declared vocabulary — canvas-drawable)",
     "declared fact carried: icon.text-rendering = auto (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared state fact carried: [disabled] root.transition-property = none (v15 declared vocabulary)"
+    "declared state fact carried: [disabled] root.transition-property = none (v15 declared vocabulary)",
+    "base-plane literal carried: root.padding-left = 6px (uncorrelated across planes — the base combo's exact value; set planes remain named residue)",
+    "base-plane literal carried: root.padding-right = 6px (uncorrelated across planes — the base combo's exact value; set planes remain named residue)"
   ]
 }

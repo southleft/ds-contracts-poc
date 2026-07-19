@@ -23,7 +23,7 @@
  *   examples/polaris/receipts/canvas-gate/<kebab>.channels.md
  *   examples/polaris/receipts/canvas-gate/<kebab>--worst.png / --representative.png
  */
-import { mkdirSync, writeFileSync, existsSync } from 'node:fs';
+import { mkdirSync, writeFileSync, existsSync, readFileSync } from 'node:fs';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 import type { Page } from 'playwright-core';
@@ -73,27 +73,46 @@ interface MountPlan {
   callbacks?: string[];
   mountNote?: string;
 }
-const MOUNT_PLAN: Record<string, MountPlan> = {
+interface MountPlanExt extends MountPlan {
+  /** Definite container width (px) — components that size to their
+   *  container (ProgressBar width:100%) collapse in a max-content stage. */
+  stageWidth?: number;
+}
+const MOUNT_PLAN: Record<string, MountPlanExt> = {
+  // ROUND 4: the real side mounts the FLOOR'S OWN samples (sampleText /
+  // fixedProps from extract/computed/configs/polaris.json, loaded at run
+  // time below) — the ground truth the contracts were captured against.
+  // childrenFrom names still derive text from the compiled spec when the
+  // node exists; the floor sample is the fallback.
   Button: { childrenFrom: 'label' },
   Badge: { childrenFrom: 'label' },
   Tag: { childrenFrom: 'label' },
-  Banner: { childrenFrom: 'body', textProps: { title: 'title' } },
+  Banner: { childrenFrom: 'label-2', textProps: { title: 'title' } },
   Checkbox: {
-    fixed: { label: 'Checkbox', labelHidden: true },
     callbacks: ['onChange'],
     mountNote:
-      'mounted labelHidden: the contract anatomy carries no label part (input+backdrop only), so the real mount is scoped to the anatomy the canvas draws — named alignment, not a fudge.',
+      'round 4: the promoted anatomy CARRIES the label part — the real mount shows the label (floor fixedProps), retiring the round-3 labelHidden scoping.',
   },
   RadioButton: {
-    fixed: { label: 'RadioButton', labelHidden: true },
     callbacks: ['onChange'],
-    mountNote: 'mounted labelHidden: contract anatomy carries no label part (see Checkbox note).',
+    mountNote: 'round 4: label mounted visible (promoted label anatomy — see Checkbox note).',
   },
   Avatar: { textProps: { initials: 'initials' } },
-  ProgressBar: {},
+  ProgressBar: {
+    stageWidth: 288,
+    mountNote:
+      'mounted in a 288px container (floor stage content width): the real track is width:100% and collapses in a max-content stage; the canvas root is runtime-sized — width deltas are the named runtime-% cause.',
+  },
   Spinner: {},
   Thumbnail: { fixed: { source: GRAY_SQUARE } },
 };
+
+/** Floor capture config — the prop samples the contracts were captured
+ *  against (sampleText + fixedProps per component). */
+const FLOOR_CONFIG = JSON.parse(
+  readFileSync(path.join(EXAMPLE, '..', '..', 'extract', 'computed', 'configs', 'polaris.json'), 'utf8'),
+) as { components: Array<{ name: string; sampleText: string; fixedProps?: Record<string, unknown> }> };
+const floorComp = (name: string) => FLOOR_CONFIG.components.find((c) => c.name === name);
 
 /** Named causes attached to cells AFTER measurement — every rule quotes a
  *  mechanism a designer (or the channel table) can check, never a tolerance. */
@@ -266,7 +285,8 @@ async function main(): Promise<void> {
   for (const comp of pixelComps) {
     const plan = MOUNT_PLAN[comp.name] ?? {};
     comp.cells.forEach((cell, i) => {
-      const props: Record<string, unknown> = { ...(plan.fixed ?? {}) };
+      const floor = floorComp(comp.name);
+      const props: Record<string, unknown> = { ...(floor?.fixedProps ?? {}), ...(plan.fixed ?? {}) };
       for (const p of comp.contract.props) {
         const codeProp = p.bindings.code.prop;
         if (codeProp === 'children' || codeProp in props) continue;
@@ -283,13 +303,16 @@ async function main(): Promise<void> {
         if (t !== null && t !== '') props[propName] = t;
       }
       if (cell.state === 'disabled') props['disabled'] = true;
-      const children = plan.childrenFrom ? (textOf(cell.spec, plan.childrenFrom) ?? '') : '';
+      const children = plan.childrenFrom
+        ? (textOf(cell.spec, plan.childrenFrom) ?? floor?.sampleText ?? '')
+        : '';
       mounts.push({
         key: cellKey(comp.name, i),
         component: comp.name,
         props,
         callbacks: plan.callbacks ?? [],
         children,
+        ...(plan.stageWidth ? { stageWidth: plan.stageWidth } : {}),
         chunk: 0, // assigned below
       });
     });

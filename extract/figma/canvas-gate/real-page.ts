@@ -31,7 +31,8 @@ export interface MountSpec {
   children: string;
   /** Page chunk (?chunk=N) — a chunk's mounts must render below Chromium's
    *  16384px screenshot-capture ceiling. */
-  chunk: number;
+  chunk: number;  /** Round 4: definite container width for container-sized components. */
+  stageWidth?: number;
 }
 
 const MOUNT_IMPORTS = [
@@ -49,6 +50,7 @@ export function buildRealPage(harness: string, mounts: MountSpec[]): string {
     callbacks: m.callbacks,
     text: m.children,
     chunk: m.chunk,
+    stageWidth: m.stageWidth ?? null,
   }));
   const entry = `import React from 'react';
 import { createRoot } from 'react-dom/client';
@@ -72,7 +74,7 @@ function App() {
         return (
           <React.Fragment key={s.key}>
             <button data-sentinel={s.key} style={{ width: 8, height: 8, padding: 0, border: 0, margin: 2, background: '#eee' }} aria-label="sentinel" />
-            <div data-cell={s.key} style={stage}>{s.text === '' ? <C {...props} /> : <C {...props}>{s.text}</C>}</div>
+            <div data-cell={s.key} style={s.stageWidth ? { ...stage, display: 'block', width: s.stageWidth } : stage}>{s.text === '' ? <C {...props} /> : <C {...props}>{s.text}</C>}</div>
           </React.Fragment>
         );
       })}

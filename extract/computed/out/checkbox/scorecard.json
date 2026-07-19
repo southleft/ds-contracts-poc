@@ -402,19 +402,19 @@
         {
           "part": "backdrop",
           "channel": "border-left-color",
-          "ours": "rgba(104, 104, 104, 1)",
+          "ours": "rgba(103, 103, 103, 1)",
           "theirs": "rgba(48, 48, 48, 1)"
         },
         {
           "part": "backdrop",
           "channel": "border-right-color",
-          "ours": "rgba(104, 104, 104, 1)",
+          "ours": "rgba(103, 103, 103, 1)",
           "theirs": "rgba(48, 48, 48, 1)"
         },
         {
           "part": "backdrop",
           "channel": "border-top-color",
-          "ours": "rgba(104, 104, 104, 1)",
+          "ours": "rgba(103, 103, 103, 1)",
           "theirs": "rgba(48, 48, 48, 1)"
         },
         {
@@ -726,19 +726,19 @@
         {
           "part": "backdrop",
           "channel": "border-left-color",
-          "ours": "rgba(104, 104, 104, 1)",
+          "ours": "rgba(103, 103, 103, 1)",
           "theirs": "rgba(0, 0, 0, 0)"
         },
         {
           "part": "backdrop",
           "channel": "border-right-color",
-          "ours": "rgba(104, 104, 104, 1)",
+          "ours": "rgba(103, 103, 103, 1)",
           "theirs": "rgba(0, 0, 0, 0)"
         },
         {
           "part": "backdrop",
           "channel": "border-top-color",
-          "ours": "rgba(104, 104, 104, 1)",
+          "ours": "rgba(103, 103, 103, 1)",
           "theirs": "rgba(0, 0, 0, 0)"
         },
         {
@@ -903,19 +903,19 @@
         {
           "part": "backdrop",
           "channel": "border-left-color",
-          "ours": "rgba(136, 136, 136, 1)",
+          "ours": "rgba(135, 135, 135, 1)",
           "theirs": "rgba(0, 0, 0, 0)"
         },
         {
           "part": "backdrop",
           "channel": "border-right-color",
-          "ours": "rgba(136, 136, 136, 1)",
+          "ours": "rgba(135, 135, 135, 1)",
           "theirs": "rgba(0, 0, 0, 0)"
         },
         {
           "part": "backdrop",
           "channel": "border-top-color",
-          "ours": "rgba(136, 136, 136, 1)",
+          "ours": "rgba(135, 135, 135, 1)",
           "theirs": "rgba(0, 0, 0, 0)"
         },
         {
@@ -1074,25 +1074,25 @@
         {
           "part": "backdrop",
           "channel": "border-bottom-color",
-          "ours": "rgba(89, 89, 89, 1)",
+          "ours": "rgba(84, 84, 84, 1)",
           "theirs": "rgba(0, 0, 0, 0)"
         },
         {
           "part": "backdrop",
           "channel": "border-left-color",
-          "ours": "rgba(104, 104, 104, 1)",
+          "ours": "rgba(108, 108, 108, 1)",
           "theirs": "rgba(0, 0, 0, 0)"
         },
         {
           "part": "backdrop",
           "channel": "border-right-color",
-          "ours": "rgba(104, 104, 104, 1)",
+          "ours": "rgba(108, 108, 108, 1)",
           "theirs": "rgba(0, 0, 0, 0)"
         },
         {
           "part": "backdrop",
           "channel": "border-top-color",
-          "ours": "rgba(104, 104, 104, 1)",
+          "ours": "rgba(108, 108, 108, 1)",
           "theirs": "rgba(0, 0, 0, 0)"
         },
         {

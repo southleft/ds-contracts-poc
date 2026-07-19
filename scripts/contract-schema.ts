@@ -189,6 +189,10 @@ export const LITERAL_CHANNELS = new Set([
   'border-top-left-radius', 'border-top-right-radius',
   'border-bottom-left-radius', 'border-bottom-right-radius',
   'border-top-width', 'border-right-width', 'border-bottom-width', 'border-left-width',
+  // Round 4: padding longhands — the base-plane literal fallback carries the
+  // base combo's captured paddings when per-plane values refuse correlation
+  // (Tag's remove-×/link planes shift them; the base plane is exact).
+  'padding-left', 'padding-right', 'padding-top', 'padding-bottom',
 ]);
 
 /** v14: per-enum-value literal overrides — the literals sibling of
