@@ -1,0 +1,5562 @@
+{
+  "_marker": "NON-SCHEMA EXTENSION BLOCK — computed-capture overflow. Nothing here is contract vocabulary; every entry names why it does not fit (DESIGN.md §5.4).",
+  "generatedBy": "extract/computed-spike/run.ts",
+  "browser": "148.0.7778.96",
+  "mintedTokens": {
+    "imported": {
+      "button": {
+        "root": {
+          "border-bottom-color": {
+            "plain": {
+              "none": {
+                "$value": "#005bd3",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#8e0b21",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#014b40",
+                "$type": "color"
+              }
+            },
+            "primary": {
+              "none": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#ffffff",
+                "$type": "color"
+              }
+            },
+            "secondary": {
+              "none": {
+                "$value": "#303030",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#8e0b21",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#014b40",
+                "$type": "color"
+              }
+            },
+            "tertiary": {
+              "none": {
+                "$value": "#303030",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#8e0b21",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#014b40",
+                "$type": "color"
+              }
+            },
+            "monochromePlain": {
+              "none": {
+                "$value": "#303030",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#303030",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#303030",
+                "$type": "color"
+              }
+            }
+          },
+          "border-left-color": {
+            "plain": {
+              "none": {
+                "$value": "#005bd3",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#8e0b21",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#014b40",
+                "$type": "color"
+              }
+            },
+            "primary": {
+              "none": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#ffffff",
+                "$type": "color"
+              }
+            },
+            "secondary": {
+              "none": {
+                "$value": "#303030",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#8e0b21",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#014b40",
+                "$type": "color"
+              }
+            },
+            "tertiary": {
+              "none": {
+                "$value": "#303030",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#8e0b21",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#014b40",
+                "$type": "color"
+              }
+            },
+            "monochromePlain": {
+              "none": {
+                "$value": "#303030",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#303030",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#303030",
+                "$type": "color"
+              }
+            }
+          },
+          "border-right-color": {
+            "plain": {
+              "none": {
+                "$value": "#005bd3",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#8e0b21",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#014b40",
+                "$type": "color"
+              }
+            },
+            "primary": {
+              "none": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#ffffff",
+                "$type": "color"
+              }
+            },
+            "secondary": {
+              "none": {
+                "$value": "#303030",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#8e0b21",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#014b40",
+                "$type": "color"
+              }
+            },
+            "tertiary": {
+              "none": {
+                "$value": "#303030",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#8e0b21",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#014b40",
+                "$type": "color"
+              }
+            },
+            "monochromePlain": {
+              "none": {
+                "$value": "#303030",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#303030",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#303030",
+                "$type": "color"
+              }
+            }
+          },
+          "border-top-color": {
+            "plain": {
+              "none": {
+                "$value": "#005bd3",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#8e0b21",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#014b40",
+                "$type": "color"
+              }
+            },
+            "primary": {
+              "none": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#ffffff",
+                "$type": "color"
+              }
+            },
+            "secondary": {
+              "none": {
+                "$value": "#303030",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#8e0b21",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#014b40",
+                "$type": "color"
+              }
+            },
+            "tertiary": {
+              "none": {
+                "$value": "#303030",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#8e0b21",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#014b40",
+                "$type": "color"
+              }
+            },
+            "monochromePlain": {
+              "none": {
+                "$value": "#303030",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#303030",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#303030",
+                "$type": "color"
+              }
+            }
+          },
+          "caret-color": {
+            "plain": {
+              "none": {
+                "$value": "#005bd3",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#8e0b21",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#014b40",
+                "$type": "color"
+              }
+            },
+            "primary": {
+              "none": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#ffffff",
+                "$type": "color"
+              }
+            },
+            "secondary": {
+              "none": {
+                "$value": "#303030",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#8e0b21",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#014b40",
+                "$type": "color"
+              }
+            },
+            "tertiary": {
+              "none": {
+                "$value": "#303030",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#8e0b21",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#014b40",
+                "$type": "color"
+              }
+            },
+            "monochromePlain": {
+              "none": {
+                "$value": "#303030",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#303030",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#303030",
+                "$type": "color"
+              }
+            }
+          },
+          "column-rule-color": {
+            "plain": {
+              "none": {
+                "$value": "#005bd3",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#8e0b21",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#014b40",
+                "$type": "color"
+              }
+            },
+            "primary": {
+              "none": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#ffffff",
+                "$type": "color"
+              }
+            },
+            "secondary": {
+              "none": {
+                "$value": "#303030",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#8e0b21",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#014b40",
+                "$type": "color"
+              }
+            },
+            "tertiary": {
+              "none": {
+                "$value": "#303030",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#8e0b21",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#014b40",
+                "$type": "color"
+              }
+            },
+            "monochromePlain": {
+              "none": {
+                "$value": "#303030",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#303030",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#303030",
+                "$type": "color"
+              }
+            }
+          },
+          "font-size": {
+            "$value": "13px",
+            "$type": "dimension"
+          },
+          "font-weight": {
+            "$value": "450",
+            "$type": "number"
+          },
+          "line-height": {
+            "$value": "20px",
+            "$type": "dimension"
+          },
+          "margin-bottom": {
+            "plain": {
+              "micro": {
+                "$value": "-4px",
+                "$type": "dimension"
+              },
+              "slim": {
+                "$value": "-6px",
+                "$type": "dimension"
+              },
+              "medium": {
+                "$value": "-6px",
+                "$type": "dimension"
+              },
+              "large": {
+                "$value": "-6px",
+                "$type": "dimension"
+              }
+            },
+            "primary": {
+              "micro": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "slim": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "medium": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "large": {
+                "$value": "0px",
+                "$type": "dimension"
+              }
+            },
+            "secondary": {
+              "micro": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "slim": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "medium": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "large": {
+                "$value": "0px",
+                "$type": "dimension"
+              }
+            },
+            "tertiary": {
+              "micro": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "slim": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "medium": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "large": {
+                "$value": "0px",
+                "$type": "dimension"
+              }
+            },
+            "monochromePlain": {
+              "micro": {
+                "$value": "-4px",
+                "$type": "dimension"
+              },
+              "slim": {
+                "$value": "-6px",
+                "$type": "dimension"
+              },
+              "medium": {
+                "$value": "-6px",
+                "$type": "dimension"
+              },
+              "large": {
+                "$value": "-6px",
+                "$type": "dimension"
+              }
+            }
+          },
+          "margin-left": {
+            "plain": {
+              "micro": {
+                "$value": "-8px",
+                "$type": "dimension"
+              },
+              "slim": {
+                "$value": "-12px",
+                "$type": "dimension"
+              },
+              "medium": {
+                "$value": "-12px",
+                "$type": "dimension"
+              },
+              "large": {
+                "$value": "-12px",
+                "$type": "dimension"
+              }
+            },
+            "primary": {
+              "micro": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "slim": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "medium": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "large": {
+                "$value": "0px",
+                "$type": "dimension"
+              }
+            },
+            "secondary": {
+              "micro": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "slim": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "medium": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "large": {
+                "$value": "0px",
+                "$type": "dimension"
+              }
+            },
+            "tertiary": {
+              "micro": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "slim": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "medium": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "large": {
+                "$value": "0px",
+                "$type": "dimension"
+              }
+            },
+            "monochromePlain": {
+              "micro": {
+                "$value": "-8px",
+                "$type": "dimension"
+              },
+              "slim": {
+                "$value": "-12px",
+                "$type": "dimension"
+              },
+              "medium": {
+                "$value": "-12px",
+                "$type": "dimension"
+              },
+              "large": {
+                "$value": "-12px",
+                "$type": "dimension"
+              }
+            }
+          },
+          "margin-right": {
+            "plain": {
+              "micro": {
+                "$value": "-8px",
+                "$type": "dimension"
+              },
+              "slim": {
+                "$value": "-12px",
+                "$type": "dimension"
+              },
+              "medium": {
+                "$value": "-12px",
+                "$type": "dimension"
+              },
+              "large": {
+                "$value": "-12px",
+                "$type": "dimension"
+              }
+            },
+            "primary": {
+              "micro": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "slim": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "medium": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "large": {
+                "$value": "0px",
+                "$type": "dimension"
+              }
+            },
+            "secondary": {
+              "micro": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "slim": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "medium": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "large": {
+                "$value": "0px",
+                "$type": "dimension"
+              }
+            },
+            "tertiary": {
+              "micro": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "slim": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "medium": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "large": {
+                "$value": "0px",
+                "$type": "dimension"
+              }
+            },
+            "monochromePlain": {
+              "micro": {
+                "$value": "-8px",
+                "$type": "dimension"
+              },
+              "slim": {
+                "$value": "-12px",
+                "$type": "dimension"
+              },
+              "medium": {
+                "$value": "-12px",
+                "$type": "dimension"
+              },
+              "large": {
+                "$value": "-12px",
+                "$type": "dimension"
+              }
+            }
+          },
+          "margin-top": {
+            "plain": {
+              "micro": {
+                "$value": "-4px",
+                "$type": "dimension"
+              },
+              "slim": {
+                "$value": "-6px",
+                "$type": "dimension"
+              },
+              "medium": {
+                "$value": "-6px",
+                "$type": "dimension"
+              },
+              "large": {
+                "$value": "-6px",
+                "$type": "dimension"
+              }
+            },
+            "primary": {
+              "micro": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "slim": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "medium": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "large": {
+                "$value": "0px",
+                "$type": "dimension"
+              }
+            },
+            "secondary": {
+              "micro": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "slim": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "medium": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "large": {
+                "$value": "0px",
+                "$type": "dimension"
+              }
+            },
+            "tertiary": {
+              "micro": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "slim": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "medium": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "large": {
+                "$value": "0px",
+                "$type": "dimension"
+              }
+            },
+            "monochromePlain": {
+              "micro": {
+                "$value": "-4px",
+                "$type": "dimension"
+              },
+              "slim": {
+                "$value": "-6px",
+                "$type": "dimension"
+              },
+              "medium": {
+                "$value": "-6px",
+                "$type": "dimension"
+              },
+              "large": {
+                "$value": "-6px",
+                "$type": "dimension"
+              }
+            }
+          },
+          "outline-color": {
+            "plain": {
+              "none": {
+                "$value": "#005bd3",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#8e0b21",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#014b40",
+                "$type": "color"
+              }
+            },
+            "primary": {
+              "none": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#ffffff",
+                "$type": "color"
+              }
+            },
+            "secondary": {
+              "none": {
+                "$value": "#303030",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#8e0b21",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#014b40",
+                "$type": "color"
+              }
+            },
+            "tertiary": {
+              "none": {
+                "$value": "#303030",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#8e0b21",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#014b40",
+                "$type": "color"
+              }
+            },
+            "monochromePlain": {
+              "none": {
+                "$value": "#303030",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#303030",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#303030",
+                "$type": "color"
+              }
+            }
+          },
+          "row-gap": {
+            "$value": "2px",
+            "$type": "dimension"
+          },
+          "text-decoration-color": {
+            "plain": {
+              "none": {
+                "$value": "#005bd3",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#8e0b21",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#014b40",
+                "$type": "color"
+              }
+            },
+            "primary": {
+              "none": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#ffffff",
+                "$type": "color"
+              }
+            },
+            "secondary": {
+              "none": {
+                "$value": "#303030",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#8e0b21",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#014b40",
+                "$type": "color"
+              }
+            },
+            "tertiary": {
+              "none": {
+                "$value": "#303030",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#8e0b21",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#014b40",
+                "$type": "color"
+              }
+            },
+            "monochromePlain": {
+              "none": {
+                "$value": "#303030",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#303030",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#303030",
+                "$type": "color"
+              }
+            }
+          },
+          "text-emphasis-color": {
+            "plain": {
+              "none": {
+                "$value": "#005bd3",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#8e0b21",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#014b40",
+                "$type": "color"
+              }
+            },
+            "primary": {
+              "none": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#ffffff",
+                "$type": "color"
+              }
+            },
+            "secondary": {
+              "none": {
+                "$value": "#303030",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#8e0b21",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#014b40",
+                "$type": "color"
+              }
+            },
+            "tertiary": {
+              "none": {
+                "$value": "#303030",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#8e0b21",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#014b40",
+                "$type": "color"
+              }
+            },
+            "monochromePlain": {
+              "none": {
+                "$value": "#303030",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#303030",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#303030",
+                "$type": "color"
+              }
+            }
+          },
+          "border-bottom-color-state-hover": {
+            "plain": {
+              "none": {
+                "$value": "#004299",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#5f0716",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#073630",
+                "$type": "color"
+              }
+            },
+            "secondary": {
+              "critical": {
+                "$value": "#5f0716",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#073630",
+                "$type": "color"
+              },
+              "none": {
+                "$value": "#303030",
+                "$type": "color"
+              }
+            },
+            "tertiary": {
+              "critical": {
+                "$value": "#5f0716",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#073630",
+                "$type": "color"
+              },
+              "none": {
+                "$value": "#303030",
+                "$type": "color"
+              }
+            },
+            "primary": {
+              "none": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#ffffff",
+                "$type": "color"
+              }
+            },
+            "monochromePlain": {
+              "none": {
+                "$value": "#303030",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#303030",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#303030",
+                "$type": "color"
+              }
+            }
+          },
+          "border-left-color-state-hover": {
+            "plain": {
+              "none": {
+                "$value": "#004299",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#5f0716",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#073630",
+                "$type": "color"
+              }
+            },
+            "secondary": {
+              "critical": {
+                "$value": "#5f0716",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#073630",
+                "$type": "color"
+              },
+              "none": {
+                "$value": "#303030",
+                "$type": "color"
+              }
+            },
+            "tertiary": {
+              "critical": {
+                "$value": "#5f0716",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#073630",
+                "$type": "color"
+              },
+              "none": {
+                "$value": "#303030",
+                "$type": "color"
+              }
+            },
+            "primary": {
+              "none": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#ffffff",
+                "$type": "color"
+              }
+            },
+            "monochromePlain": {
+              "none": {
+                "$value": "#303030",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#303030",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#303030",
+                "$type": "color"
+              }
+            }
+          },
+          "border-right-color-state-hover": {
+            "plain": {
+              "none": {
+                "$value": "#004299",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#5f0716",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#073630",
+                "$type": "color"
+              }
+            },
+            "secondary": {
+              "critical": {
+                "$value": "#5f0716",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#073630",
+                "$type": "color"
+              },
+              "none": {
+                "$value": "#303030",
+                "$type": "color"
+              }
+            },
+            "tertiary": {
+              "critical": {
+                "$value": "#5f0716",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#073630",
+                "$type": "color"
+              },
+              "none": {
+                "$value": "#303030",
+                "$type": "color"
+              }
+            },
+            "primary": {
+              "none": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#ffffff",
+                "$type": "color"
+              }
+            },
+            "monochromePlain": {
+              "none": {
+                "$value": "#303030",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#303030",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#303030",
+                "$type": "color"
+              }
+            }
+          },
+          "border-top-color-state-hover": {
+            "plain": {
+              "none": {
+                "$value": "#004299",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#5f0716",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#073630",
+                "$type": "color"
+              }
+            },
+            "secondary": {
+              "critical": {
+                "$value": "#5f0716",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#073630",
+                "$type": "color"
+              },
+              "none": {
+                "$value": "#303030",
+                "$type": "color"
+              }
+            },
+            "tertiary": {
+              "critical": {
+                "$value": "#5f0716",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#073630",
+                "$type": "color"
+              },
+              "none": {
+                "$value": "#303030",
+                "$type": "color"
+              }
+            },
+            "primary": {
+              "none": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#ffffff",
+                "$type": "color"
+              }
+            },
+            "monochromePlain": {
+              "none": {
+                "$value": "#303030",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#303030",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#303030",
+                "$type": "color"
+              }
+            }
+          },
+          "caret-color-state-hover": {
+            "plain": {
+              "none": {
+                "$value": "#004299",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#5f0716",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#073630",
+                "$type": "color"
+              }
+            },
+            "secondary": {
+              "critical": {
+                "$value": "#5f0716",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#073630",
+                "$type": "color"
+              },
+              "none": {
+                "$value": "#303030",
+                "$type": "color"
+              }
+            },
+            "tertiary": {
+              "critical": {
+                "$value": "#5f0716",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#073630",
+                "$type": "color"
+              },
+              "none": {
+                "$value": "#303030",
+                "$type": "color"
+              }
+            },
+            "primary": {
+              "none": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#ffffff",
+                "$type": "color"
+              }
+            },
+            "monochromePlain": {
+              "none": {
+                "$value": "#303030",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#303030",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#303030",
+                "$type": "color"
+              }
+            }
+          },
+          "color-state-hover": {
+            "plain": {
+              "none": {
+                "$value": "#004299",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#5f0716",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#073630",
+                "$type": "color"
+              }
+            },
+            "secondary": {
+              "critical": {
+                "$value": "#5f0716",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#073630",
+                "$type": "color"
+              },
+              "none": {
+                "$value": "#303030",
+                "$type": "color"
+              }
+            },
+            "tertiary": {
+              "critical": {
+                "$value": "#5f0716",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#073630",
+                "$type": "color"
+              },
+              "none": {
+                "$value": "#303030",
+                "$type": "color"
+              }
+            },
+            "primary": {
+              "none": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#ffffff",
+                "$type": "color"
+              }
+            },
+            "monochromePlain": {
+              "none": {
+                "$value": "#303030",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#303030",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#303030",
+                "$type": "color"
+              }
+            }
+          },
+          "column-rule-color-state-hover": {
+            "plain": {
+              "none": {
+                "$value": "#004299",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#5f0716",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#073630",
+                "$type": "color"
+              }
+            },
+            "secondary": {
+              "critical": {
+                "$value": "#5f0716",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#073630",
+                "$type": "color"
+              },
+              "none": {
+                "$value": "#303030",
+                "$type": "color"
+              }
+            },
+            "tertiary": {
+              "critical": {
+                "$value": "#5f0716",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#073630",
+                "$type": "color"
+              },
+              "none": {
+                "$value": "#303030",
+                "$type": "color"
+              }
+            },
+            "primary": {
+              "none": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#ffffff",
+                "$type": "color"
+              }
+            },
+            "monochromePlain": {
+              "none": {
+                "$value": "#303030",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#303030",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#303030",
+                "$type": "color"
+              }
+            }
+          },
+          "outline-color-state-hover": {
+            "plain": {
+              "none": {
+                "$value": "#004299",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#5f0716",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#073630",
+                "$type": "color"
+              }
+            },
+            "secondary": {
+              "critical": {
+                "$value": "#5f0716",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#073630",
+                "$type": "color"
+              },
+              "none": {
+                "$value": "#303030",
+                "$type": "color"
+              }
+            },
+            "tertiary": {
+              "critical": {
+                "$value": "#5f0716",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#073630",
+                "$type": "color"
+              },
+              "none": {
+                "$value": "#303030",
+                "$type": "color"
+              }
+            },
+            "primary": {
+              "none": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#ffffff",
+                "$type": "color"
+              }
+            },
+            "monochromePlain": {
+              "none": {
+                "$value": "#303030",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#303030",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#303030",
+                "$type": "color"
+              }
+            }
+          },
+          "text-decoration-color-state-hover": {
+            "plain": {
+              "none": {
+                "$value": "#004299",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#5f0716",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#073630",
+                "$type": "color"
+              }
+            },
+            "secondary": {
+              "critical": {
+                "$value": "#5f0716",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#073630",
+                "$type": "color"
+              },
+              "none": {
+                "$value": "#303030",
+                "$type": "color"
+              }
+            },
+            "tertiary": {
+              "critical": {
+                "$value": "#5f0716",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#073630",
+                "$type": "color"
+              },
+              "none": {
+                "$value": "#303030",
+                "$type": "color"
+              }
+            },
+            "primary": {
+              "none": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#ffffff",
+                "$type": "color"
+              }
+            },
+            "monochromePlain": {
+              "none": {
+                "$value": "#303030",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#303030",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#303030",
+                "$type": "color"
+              }
+            }
+          },
+          "text-emphasis-color-state-hover": {
+            "plain": {
+              "none": {
+                "$value": "#004299",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#5f0716",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#073630",
+                "$type": "color"
+              }
+            },
+            "secondary": {
+              "critical": {
+                "$value": "#5f0716",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#073630",
+                "$type": "color"
+              },
+              "none": {
+                "$value": "#303030",
+                "$type": "color"
+              }
+            },
+            "tertiary": {
+              "critical": {
+                "$value": "#5f0716",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#073630",
+                "$type": "color"
+              },
+              "none": {
+                "$value": "#303030",
+                "$type": "color"
+              }
+            },
+            "primary": {
+              "none": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#ffffff",
+                "$type": "color"
+              }
+            },
+            "monochromePlain": {
+              "none": {
+                "$value": "#303030",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#303030",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#303030",
+                "$type": "color"
+              }
+            }
+          },
+          "border-bottom-color-state-focus-visible": {
+            "plain": {
+              "none": {
+                "$value": "#004299",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#5f0716",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#073630",
+                "$type": "color"
+              }
+            },
+            "secondary": {
+              "critical": {
+                "$value": "#5f0716",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#073630",
+                "$type": "color"
+              },
+              "none": {
+                "$value": "#303030",
+                "$type": "color"
+              }
+            },
+            "tertiary": {
+              "critical": {
+                "$value": "#5f0716",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#073630",
+                "$type": "color"
+              },
+              "none": {
+                "$value": "#303030",
+                "$type": "color"
+              }
+            },
+            "primary": {
+              "none": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#ffffff",
+                "$type": "color"
+              }
+            },
+            "monochromePlain": {
+              "none": {
+                "$value": "#303030",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#303030",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#303030",
+                "$type": "color"
+              }
+            }
+          },
+          "border-bottom-left-radius-state-focus-visible": {
+            "plain": {
+              "$value": "12px",
+              "$type": "dimension"
+            },
+            "monochromePlain": {
+              "$value": "12px",
+              "$type": "dimension"
+            },
+            "primary": {
+              "$value": "8px",
+              "$type": "dimension"
+            },
+            "secondary": {
+              "$value": "8px",
+              "$type": "dimension"
+            },
+            "tertiary": {
+              "$value": "8px",
+              "$type": "dimension"
+            }
+          },
+          "border-bottom-right-radius-state-focus-visible": {
+            "plain": {
+              "$value": "12px",
+              "$type": "dimension"
+            },
+            "monochromePlain": {
+              "$value": "12px",
+              "$type": "dimension"
+            },
+            "primary": {
+              "$value": "8px",
+              "$type": "dimension"
+            },
+            "secondary": {
+              "$value": "8px",
+              "$type": "dimension"
+            },
+            "tertiary": {
+              "$value": "8px",
+              "$type": "dimension"
+            }
+          },
+          "border-left-color-state-focus-visible": {
+            "plain": {
+              "none": {
+                "$value": "#004299",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#5f0716",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#073630",
+                "$type": "color"
+              }
+            },
+            "secondary": {
+              "critical": {
+                "$value": "#5f0716",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#073630",
+                "$type": "color"
+              },
+              "none": {
+                "$value": "#303030",
+                "$type": "color"
+              }
+            },
+            "tertiary": {
+              "critical": {
+                "$value": "#5f0716",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#073630",
+                "$type": "color"
+              },
+              "none": {
+                "$value": "#303030",
+                "$type": "color"
+              }
+            },
+            "primary": {
+              "none": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#ffffff",
+                "$type": "color"
+              }
+            },
+            "monochromePlain": {
+              "none": {
+                "$value": "#303030",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#303030",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#303030",
+                "$type": "color"
+              }
+            }
+          },
+          "border-right-color-state-focus-visible": {
+            "plain": {
+              "none": {
+                "$value": "#004299",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#5f0716",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#073630",
+                "$type": "color"
+              }
+            },
+            "secondary": {
+              "critical": {
+                "$value": "#5f0716",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#073630",
+                "$type": "color"
+              },
+              "none": {
+                "$value": "#303030",
+                "$type": "color"
+              }
+            },
+            "tertiary": {
+              "critical": {
+                "$value": "#5f0716",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#073630",
+                "$type": "color"
+              },
+              "none": {
+                "$value": "#303030",
+                "$type": "color"
+              }
+            },
+            "primary": {
+              "none": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#ffffff",
+                "$type": "color"
+              }
+            },
+            "monochromePlain": {
+              "none": {
+                "$value": "#303030",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#303030",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#303030",
+                "$type": "color"
+              }
+            }
+          },
+          "border-top-color-state-focus-visible": {
+            "plain": {
+              "none": {
+                "$value": "#004299",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#5f0716",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#073630",
+                "$type": "color"
+              }
+            },
+            "secondary": {
+              "critical": {
+                "$value": "#5f0716",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#073630",
+                "$type": "color"
+              },
+              "none": {
+                "$value": "#303030",
+                "$type": "color"
+              }
+            },
+            "tertiary": {
+              "critical": {
+                "$value": "#5f0716",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#073630",
+                "$type": "color"
+              },
+              "none": {
+                "$value": "#303030",
+                "$type": "color"
+              }
+            },
+            "primary": {
+              "none": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#ffffff",
+                "$type": "color"
+              }
+            },
+            "monochromePlain": {
+              "none": {
+                "$value": "#303030",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#303030",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#303030",
+                "$type": "color"
+              }
+            }
+          },
+          "border-top-left-radius-state-focus-visible": {
+            "plain": {
+              "$value": "12px",
+              "$type": "dimension"
+            },
+            "monochromePlain": {
+              "$value": "12px",
+              "$type": "dimension"
+            },
+            "primary": {
+              "$value": "8px",
+              "$type": "dimension"
+            },
+            "secondary": {
+              "$value": "8px",
+              "$type": "dimension"
+            },
+            "tertiary": {
+              "$value": "8px",
+              "$type": "dimension"
+            }
+          },
+          "border-top-right-radius-state-focus-visible": {
+            "plain": {
+              "$value": "12px",
+              "$type": "dimension"
+            },
+            "monochromePlain": {
+              "$value": "12px",
+              "$type": "dimension"
+            },
+            "primary": {
+              "$value": "8px",
+              "$type": "dimension"
+            },
+            "secondary": {
+              "$value": "8px",
+              "$type": "dimension"
+            },
+            "tertiary": {
+              "$value": "8px",
+              "$type": "dimension"
+            }
+          },
+          "caret-color-state-focus-visible": {
+            "plain": {
+              "none": {
+                "$value": "#004299",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#5f0716",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#073630",
+                "$type": "color"
+              }
+            },
+            "secondary": {
+              "critical": {
+                "$value": "#5f0716",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#073630",
+                "$type": "color"
+              },
+              "none": {
+                "$value": "#303030",
+                "$type": "color"
+              }
+            },
+            "tertiary": {
+              "critical": {
+                "$value": "#5f0716",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#073630",
+                "$type": "color"
+              },
+              "none": {
+                "$value": "#303030",
+                "$type": "color"
+              }
+            },
+            "primary": {
+              "none": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#ffffff",
+                "$type": "color"
+              }
+            },
+            "monochromePlain": {
+              "none": {
+                "$value": "#303030",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#303030",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#303030",
+                "$type": "color"
+              }
+            }
+          },
+          "color-state-focus-visible": {
+            "plain": {
+              "none": {
+                "$value": "#004299",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#5f0716",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#073630",
+                "$type": "color"
+              }
+            },
+            "secondary": {
+              "critical": {
+                "$value": "#5f0716",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#073630",
+                "$type": "color"
+              },
+              "none": {
+                "$value": "#303030",
+                "$type": "color"
+              }
+            },
+            "tertiary": {
+              "critical": {
+                "$value": "#5f0716",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#073630",
+                "$type": "color"
+              },
+              "none": {
+                "$value": "#303030",
+                "$type": "color"
+              }
+            },
+            "primary": {
+              "none": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#ffffff",
+                "$type": "color"
+              }
+            },
+            "monochromePlain": {
+              "none": {
+                "$value": "#303030",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#303030",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#303030",
+                "$type": "color"
+              }
+            }
+          },
+          "column-rule-color-state-focus-visible": {
+            "plain": {
+              "none": {
+                "$value": "#004299",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#5f0716",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#073630",
+                "$type": "color"
+              }
+            },
+            "secondary": {
+              "critical": {
+                "$value": "#5f0716",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#073630",
+                "$type": "color"
+              },
+              "none": {
+                "$value": "#303030",
+                "$type": "color"
+              }
+            },
+            "tertiary": {
+              "critical": {
+                "$value": "#5f0716",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#073630",
+                "$type": "color"
+              },
+              "none": {
+                "$value": "#303030",
+                "$type": "color"
+              }
+            },
+            "primary": {
+              "none": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#ffffff",
+                "$type": "color"
+              }
+            },
+            "monochromePlain": {
+              "none": {
+                "$value": "#303030",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#303030",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#303030",
+                "$type": "color"
+              }
+            }
+          },
+          "outline-offset-state-focus-visible": {
+            "plain": {
+              "micro": {
+                "$value": "-4px",
+                "$type": "dimension"
+              },
+              "slim": {
+                "$value": "-6px",
+                "$type": "dimension"
+              },
+              "medium": {
+                "$value": "-6px",
+                "$type": "dimension"
+              },
+              "large": {
+                "$value": "-6px",
+                "$type": "dimension"
+              }
+            },
+            "primary": {
+              "micro": {
+                "$value": "1px",
+                "$type": "dimension"
+              },
+              "slim": {
+                "$value": "1px",
+                "$type": "dimension"
+              },
+              "medium": {
+                "$value": "1px",
+                "$type": "dimension"
+              },
+              "large": {
+                "$value": "1px",
+                "$type": "dimension"
+              }
+            },
+            "secondary": {
+              "micro": {
+                "$value": "1px",
+                "$type": "dimension"
+              },
+              "slim": {
+                "$value": "1px",
+                "$type": "dimension"
+              },
+              "medium": {
+                "$value": "1px",
+                "$type": "dimension"
+              },
+              "large": {
+                "$value": "1px",
+                "$type": "dimension"
+              }
+            },
+            "tertiary": {
+              "micro": {
+                "$value": "1px",
+                "$type": "dimension"
+              },
+              "slim": {
+                "$value": "1px",
+                "$type": "dimension"
+              },
+              "medium": {
+                "$value": "1px",
+                "$type": "dimension"
+              },
+              "large": {
+                "$value": "1px",
+                "$type": "dimension"
+              }
+            },
+            "monochromePlain": {
+              "micro": {
+                "$value": "-4px",
+                "$type": "dimension"
+              },
+              "slim": {
+                "$value": "-6px",
+                "$type": "dimension"
+              },
+              "medium": {
+                "$value": "-6px",
+                "$type": "dimension"
+              },
+              "large": {
+                "$value": "-6px",
+                "$type": "dimension"
+              }
+            }
+          },
+          "outline-width-state-focus-visible": {
+            "$value": "2px",
+            "$type": "dimension"
+          },
+          "text-decoration-color-state-focus-visible": {
+            "plain": {
+              "none": {
+                "$value": "#004299",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#5f0716",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#073630",
+                "$type": "color"
+              }
+            },
+            "secondary": {
+              "critical": {
+                "$value": "#5f0716",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#073630",
+                "$type": "color"
+              },
+              "none": {
+                "$value": "#303030",
+                "$type": "color"
+              }
+            },
+            "tertiary": {
+              "critical": {
+                "$value": "#5f0716",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#073630",
+                "$type": "color"
+              },
+              "none": {
+                "$value": "#303030",
+                "$type": "color"
+              }
+            },
+            "primary": {
+              "none": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#ffffff",
+                "$type": "color"
+              }
+            },
+            "monochromePlain": {
+              "none": {
+                "$value": "#303030",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#303030",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#303030",
+                "$type": "color"
+              }
+            }
+          },
+          "text-emphasis-color-state-focus-visible": {
+            "plain": {
+              "none": {
+                "$value": "#004299",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#5f0716",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#073630",
+                "$type": "color"
+              }
+            },
+            "secondary": {
+              "critical": {
+                "$value": "#5f0716",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#073630",
+                "$type": "color"
+              },
+              "none": {
+                "$value": "#303030",
+                "$type": "color"
+              }
+            },
+            "tertiary": {
+              "critical": {
+                "$value": "#5f0716",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#073630",
+                "$type": "color"
+              },
+              "none": {
+                "$value": "#303030",
+                "$type": "color"
+              }
+            },
+            "primary": {
+              "none": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#ffffff",
+                "$type": "color"
+              }
+            },
+            "monochromePlain": {
+              "none": {
+                "$value": "#303030",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#303030",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#303030",
+                "$type": "color"
+              }
+            }
+          },
+          "border-bottom-color-state-active": {
+            "plain": {
+              "none": {
+                "$value": "#002e6a",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#2f040b",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#022622",
+                "$type": "color"
+              }
+            },
+            "secondary": {
+              "critical": {
+                "$value": "#2f040b",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#022622",
+                "$type": "color"
+              },
+              "none": {
+                "$value": "#303030",
+                "$type": "color"
+              }
+            },
+            "tertiary": {
+              "critical": {
+                "$value": "#2f040b",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#022622",
+                "$type": "color"
+              },
+              "none": {
+                "$value": "#303030",
+                "$type": "color"
+              }
+            },
+            "primary": {
+              "none": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#ffffff",
+                "$type": "color"
+              }
+            },
+            "monochromePlain": {
+              "none": {
+                "$value": "#303030",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#303030",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#303030",
+                "$type": "color"
+              }
+            }
+          },
+          "border-left-color-state-active": {
+            "plain": {
+              "none": {
+                "$value": "#002e6a",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#2f040b",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#022622",
+                "$type": "color"
+              }
+            },
+            "secondary": {
+              "critical": {
+                "$value": "#2f040b",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#022622",
+                "$type": "color"
+              },
+              "none": {
+                "$value": "#303030",
+                "$type": "color"
+              }
+            },
+            "tertiary": {
+              "critical": {
+                "$value": "#2f040b",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#022622",
+                "$type": "color"
+              },
+              "none": {
+                "$value": "#303030",
+                "$type": "color"
+              }
+            },
+            "primary": {
+              "none": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#ffffff",
+                "$type": "color"
+              }
+            },
+            "monochromePlain": {
+              "none": {
+                "$value": "#303030",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#303030",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#303030",
+                "$type": "color"
+              }
+            }
+          },
+          "border-right-color-state-active": {
+            "plain": {
+              "none": {
+                "$value": "#002e6a",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#2f040b",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#022622",
+                "$type": "color"
+              }
+            },
+            "secondary": {
+              "critical": {
+                "$value": "#2f040b",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#022622",
+                "$type": "color"
+              },
+              "none": {
+                "$value": "#303030",
+                "$type": "color"
+              }
+            },
+            "tertiary": {
+              "critical": {
+                "$value": "#2f040b",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#022622",
+                "$type": "color"
+              },
+              "none": {
+                "$value": "#303030",
+                "$type": "color"
+              }
+            },
+            "primary": {
+              "none": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#ffffff",
+                "$type": "color"
+              }
+            },
+            "monochromePlain": {
+              "none": {
+                "$value": "#303030",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#303030",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#303030",
+                "$type": "color"
+              }
+            }
+          },
+          "border-top-color-state-active": {
+            "plain": {
+              "none": {
+                "$value": "#002e6a",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#2f040b",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#022622",
+                "$type": "color"
+              }
+            },
+            "secondary": {
+              "critical": {
+                "$value": "#2f040b",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#022622",
+                "$type": "color"
+              },
+              "none": {
+                "$value": "#303030",
+                "$type": "color"
+              }
+            },
+            "tertiary": {
+              "critical": {
+                "$value": "#2f040b",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#022622",
+                "$type": "color"
+              },
+              "none": {
+                "$value": "#303030",
+                "$type": "color"
+              }
+            },
+            "primary": {
+              "none": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#ffffff",
+                "$type": "color"
+              }
+            },
+            "monochromePlain": {
+              "none": {
+                "$value": "#303030",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#303030",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#303030",
+                "$type": "color"
+              }
+            }
+          },
+          "caret-color-state-active": {
+            "plain": {
+              "none": {
+                "$value": "#002e6a",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#2f040b",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#022622",
+                "$type": "color"
+              }
+            },
+            "secondary": {
+              "critical": {
+                "$value": "#2f040b",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#022622",
+                "$type": "color"
+              },
+              "none": {
+                "$value": "#303030",
+                "$type": "color"
+              }
+            },
+            "tertiary": {
+              "critical": {
+                "$value": "#2f040b",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#022622",
+                "$type": "color"
+              },
+              "none": {
+                "$value": "#303030",
+                "$type": "color"
+              }
+            },
+            "primary": {
+              "none": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#ffffff",
+                "$type": "color"
+              }
+            },
+            "monochromePlain": {
+              "none": {
+                "$value": "#303030",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#303030",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#303030",
+                "$type": "color"
+              }
+            }
+          },
+          "color-state-active": {
+            "plain": {
+              "none": {
+                "$value": "#002e6a",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#2f040b",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#022622",
+                "$type": "color"
+              }
+            },
+            "secondary": {
+              "critical": {
+                "$value": "#2f040b",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#022622",
+                "$type": "color"
+              },
+              "none": {
+                "$value": "#303030",
+                "$type": "color"
+              }
+            },
+            "tertiary": {
+              "critical": {
+                "$value": "#2f040b",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#022622",
+                "$type": "color"
+              },
+              "none": {
+                "$value": "#303030",
+                "$type": "color"
+              }
+            },
+            "primary": {
+              "none": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#ffffff",
+                "$type": "color"
+              }
+            },
+            "monochromePlain": {
+              "none": {
+                "$value": "#303030",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#303030",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#303030",
+                "$type": "color"
+              }
+            }
+          },
+          "column-rule-color-state-active": {
+            "plain": {
+              "none": {
+                "$value": "#002e6a",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#2f040b",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#022622",
+                "$type": "color"
+              }
+            },
+            "secondary": {
+              "critical": {
+                "$value": "#2f040b",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#022622",
+                "$type": "color"
+              },
+              "none": {
+                "$value": "#303030",
+                "$type": "color"
+              }
+            },
+            "tertiary": {
+              "critical": {
+                "$value": "#2f040b",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#022622",
+                "$type": "color"
+              },
+              "none": {
+                "$value": "#303030",
+                "$type": "color"
+              }
+            },
+            "primary": {
+              "none": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#ffffff",
+                "$type": "color"
+              }
+            },
+            "monochromePlain": {
+              "none": {
+                "$value": "#303030",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#303030",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#303030",
+                "$type": "color"
+              }
+            }
+          },
+          "fill-state-active": {
+            "plain": {
+              "none": {
+                "$value": "#002e6a",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#2f040b",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#022622",
+                "$type": "color"
+              }
+            },
+            "primary": {
+              "none": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#ffffff",
+                "$type": "color"
+              }
+            },
+            "secondary": {
+              "none": {
+                "$value": "#4a4a4a",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#2f040b",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#022622",
+                "$type": "color"
+              }
+            },
+            "tertiary": {
+              "none": {
+                "$value": "#4a4a4a",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#2f040b",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#022622",
+                "$type": "color"
+              }
+            },
+            "monochromePlain": {
+              "none": {
+                "$value": "#303030",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#303030",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#303030",
+                "$type": "color"
+              }
+            }
+          },
+          "outline-color-state-active": {
+            "plain": {
+              "none": {
+                "$value": "#002e6a",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#2f040b",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#022622",
+                "$type": "color"
+              }
+            },
+            "secondary": {
+              "critical": {
+                "$value": "#2f040b",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#022622",
+                "$type": "color"
+              },
+              "none": {
+                "$value": "#303030",
+                "$type": "color"
+              }
+            },
+            "tertiary": {
+              "critical": {
+                "$value": "#2f040b",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#022622",
+                "$type": "color"
+              },
+              "none": {
+                "$value": "#303030",
+                "$type": "color"
+              }
+            },
+            "primary": {
+              "none": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#ffffff",
+                "$type": "color"
+              }
+            },
+            "monochromePlain": {
+              "none": {
+                "$value": "#303030",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#303030",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#303030",
+                "$type": "color"
+              }
+            }
+          },
+          "text-decoration-color-state-active": {
+            "plain": {
+              "none": {
+                "$value": "#002e6a",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#2f040b",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#022622",
+                "$type": "color"
+              }
+            },
+            "secondary": {
+              "critical": {
+                "$value": "#2f040b",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#022622",
+                "$type": "color"
+              },
+              "none": {
+                "$value": "#303030",
+                "$type": "color"
+              }
+            },
+            "tertiary": {
+              "critical": {
+                "$value": "#2f040b",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#022622",
+                "$type": "color"
+              },
+              "none": {
+                "$value": "#303030",
+                "$type": "color"
+              }
+            },
+            "primary": {
+              "none": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#ffffff",
+                "$type": "color"
+              }
+            },
+            "monochromePlain": {
+              "none": {
+                "$value": "#303030",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#303030",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#303030",
+                "$type": "color"
+              }
+            }
+          },
+          "text-emphasis-color-state-active": {
+            "plain": {
+              "none": {
+                "$value": "#002e6a",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#2f040b",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#022622",
+                "$type": "color"
+              }
+            },
+            "secondary": {
+              "critical": {
+                "$value": "#2f040b",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#022622",
+                "$type": "color"
+              },
+              "none": {
+                "$value": "#303030",
+                "$type": "color"
+              }
+            },
+            "tertiary": {
+              "critical": {
+                "$value": "#2f040b",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#022622",
+                "$type": "color"
+              },
+              "none": {
+                "$value": "#303030",
+                "$type": "color"
+              }
+            },
+            "primary": {
+              "none": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#ffffff",
+                "$type": "color"
+              }
+            },
+            "monochromePlain": {
+              "none": {
+                "$value": "#303030",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#303030",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#303030",
+                "$type": "color"
+              }
+            }
+          },
+          "outline-color-state-focus-visible": {
+            "$value": "#005bd3",
+            "$type": "color"
+          },
+          "background-color-state-hover": {
+            "primary": {
+              "none": {
+                "$value": "#1a1a1a",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#a30a24",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#035e4c",
+                "$type": "color"
+              }
+            },
+            "secondary": {
+              "none": {
+                "$value": "#fafafa",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#fafafa",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#fafafa",
+                "$type": "color"
+              }
+            },
+            "tertiary": {
+              "none": {
+                "$value": "#0000000d",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#0000000d",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#0000000d",
+                "$type": "color"
+              }
+            },
+            "plain": {
+              "none": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#00000000",
+                "$type": "color"
+              }
+            },
+            "monochromePlain": {
+              "none": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#00000000",
+                "$type": "color"
+              }
+            }
+          },
+          "background-color-state-focus-visible": {
+            "primary": {
+              "none": {
+                "$value": "#1a1a1a",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#a30a24",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#035e4c",
+                "$type": "color"
+              }
+            },
+            "secondary": {
+              "none": {
+                "$value": "#fafafa",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#fafafa",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#fafafa",
+                "$type": "color"
+              }
+            },
+            "tertiary": {
+              "none": {
+                "$value": "#0000000d",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#0000000d",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#0000000d",
+                "$type": "color"
+              }
+            },
+            "plain": {
+              "none": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#00000000",
+                "$type": "color"
+              }
+            },
+            "monochromePlain": {
+              "none": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#00000000",
+                "$type": "color"
+              }
+            }
+          },
+          "background-color-state-active": {
+            "primary": {
+              "none": {
+                "$value": "#1a1a1a",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#8e0b21",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#014b40",
+                "$type": "color"
+              }
+            },
+            "secondary": {
+              "none": {
+                "$value": "#f7f7f7",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#f7f7f7",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#f7f7f7",
+                "$type": "color"
+              }
+            },
+            "tertiary": {
+              "none": {
+                "$value": "#00000014",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#00000014",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#00000014",
+                "$type": "color"
+              }
+            },
+            "plain": {
+              "none": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#00000000",
+                "$type": "color"
+              }
+            },
+            "monochromePlain": {
+              "none": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#00000000",
+                "$type": "color"
+              }
+            }
+          },
+          "border-bottom-color-state-disabled": {
+            "plain": {
+              "$value": "#b5b5b5",
+              "$type": "color"
+            },
+            "secondary": {
+              "$value": "#b5b5b5",
+              "$type": "color"
+            },
+            "tertiary": {
+              "$value": "#b5b5b5",
+              "$type": "color"
+            },
+            "monochromePlain": {
+              "$value": "#b5b5b5",
+              "$type": "color"
+            },
+            "primary": {
+              "$value": "#ffffff",
+              "$type": "color"
+            }
+          },
+          "border-left-color-state-disabled": {
+            "plain": {
+              "$value": "#b5b5b5",
+              "$type": "color"
+            },
+            "secondary": {
+              "$value": "#b5b5b5",
+              "$type": "color"
+            },
+            "tertiary": {
+              "$value": "#b5b5b5",
+              "$type": "color"
+            },
+            "monochromePlain": {
+              "$value": "#b5b5b5",
+              "$type": "color"
+            },
+            "primary": {
+              "$value": "#ffffff",
+              "$type": "color"
+            }
+          },
+          "border-right-color-state-disabled": {
+            "plain": {
+              "$value": "#b5b5b5",
+              "$type": "color"
+            },
+            "secondary": {
+              "$value": "#b5b5b5",
+              "$type": "color"
+            },
+            "tertiary": {
+              "$value": "#b5b5b5",
+              "$type": "color"
+            },
+            "monochromePlain": {
+              "$value": "#b5b5b5",
+              "$type": "color"
+            },
+            "primary": {
+              "$value": "#ffffff",
+              "$type": "color"
+            }
+          },
+          "border-top-color-state-disabled": {
+            "plain": {
+              "$value": "#b5b5b5",
+              "$type": "color"
+            },
+            "secondary": {
+              "$value": "#b5b5b5",
+              "$type": "color"
+            },
+            "tertiary": {
+              "$value": "#b5b5b5",
+              "$type": "color"
+            },
+            "monochromePlain": {
+              "$value": "#b5b5b5",
+              "$type": "color"
+            },
+            "primary": {
+              "$value": "#ffffff",
+              "$type": "color"
+            }
+          },
+          "caret-color-state-disabled": {
+            "plain": {
+              "$value": "#b5b5b5",
+              "$type": "color"
+            },
+            "secondary": {
+              "$value": "#b5b5b5",
+              "$type": "color"
+            },
+            "tertiary": {
+              "$value": "#b5b5b5",
+              "$type": "color"
+            },
+            "monochromePlain": {
+              "$value": "#b5b5b5",
+              "$type": "color"
+            },
+            "primary": {
+              "$value": "#ffffff",
+              "$type": "color"
+            }
+          },
+          "color-state-disabled": {
+            "plain": {
+              "$value": "#b5b5b5",
+              "$type": "color"
+            },
+            "secondary": {
+              "$value": "#b5b5b5",
+              "$type": "color"
+            },
+            "tertiary": {
+              "$value": "#b5b5b5",
+              "$type": "color"
+            },
+            "monochromePlain": {
+              "$value": "#b5b5b5",
+              "$type": "color"
+            },
+            "primary": {
+              "$value": "#ffffff",
+              "$type": "color"
+            }
+          },
+          "column-rule-color-state-disabled": {
+            "plain": {
+              "$value": "#b5b5b5",
+              "$type": "color"
+            },
+            "secondary": {
+              "$value": "#b5b5b5",
+              "$type": "color"
+            },
+            "tertiary": {
+              "$value": "#b5b5b5",
+              "$type": "color"
+            },
+            "monochromePlain": {
+              "$value": "#b5b5b5",
+              "$type": "color"
+            },
+            "primary": {
+              "$value": "#ffffff",
+              "$type": "color"
+            }
+          },
+          "outline-color-state-disabled": {
+            "plain": {
+              "$value": "#b5b5b5",
+              "$type": "color"
+            },
+            "secondary": {
+              "$value": "#b5b5b5",
+              "$type": "color"
+            },
+            "tertiary": {
+              "$value": "#b5b5b5",
+              "$type": "color"
+            },
+            "monochromePlain": {
+              "$value": "#b5b5b5",
+              "$type": "color"
+            },
+            "primary": {
+              "$value": "#ffffff",
+              "$type": "color"
+            }
+          },
+          "text-decoration-color-state-disabled": {
+            "plain": {
+              "$value": "#b5b5b5",
+              "$type": "color"
+            },
+            "secondary": {
+              "$value": "#b5b5b5",
+              "$type": "color"
+            },
+            "tertiary": {
+              "$value": "#b5b5b5",
+              "$type": "color"
+            },
+            "monochromePlain": {
+              "$value": "#b5b5b5",
+              "$type": "color"
+            },
+            "primary": {
+              "$value": "#ffffff",
+              "$type": "color"
+            }
+          },
+          "text-emphasis-color-state-disabled": {
+            "plain": {
+              "$value": "#b5b5b5",
+              "$type": "color"
+            },
+            "secondary": {
+              "$value": "#b5b5b5",
+              "$type": "color"
+            },
+            "tertiary": {
+              "$value": "#b5b5b5",
+              "$type": "color"
+            },
+            "monochromePlain": {
+              "$value": "#b5b5b5",
+              "$type": "color"
+            },
+            "primary": {
+              "$value": "#ffffff",
+              "$type": "color"
+            }
+          },
+          "background-color-state-disabled": {
+            "primary": {
+              "$value": "#0000002b",
+              "$type": "color"
+            },
+            "secondary": {
+              "$value": "#0000000d",
+              "$type": "color"
+            },
+            "plain": {
+              "$value": "#00000000",
+              "$type": "color"
+            },
+            "tertiary": {
+              "$value": "#00000000",
+              "$type": "color"
+            },
+            "monochromePlain": {
+              "$value": "#00000000",
+              "$type": "color"
+            }
+          }
+        },
+        "label": {
+          "border-bottom-color-state-disabled": {
+            "plain": {
+              "$value": "#b5b5b5",
+              "$type": "color"
+            },
+            "secondary": {
+              "$value": "#b5b5b5",
+              "$type": "color"
+            },
+            "tertiary": {
+              "$value": "#b5b5b5",
+              "$type": "color"
+            },
+            "monochromePlain": {
+              "$value": "#b5b5b5",
+              "$type": "color"
+            },
+            "primary": {
+              "$value": "#ffffff",
+              "$type": "color"
+            }
+          },
+          "border-left-color-state-disabled": {
+            "plain": {
+              "$value": "#b5b5b5",
+              "$type": "color"
+            },
+            "secondary": {
+              "$value": "#b5b5b5",
+              "$type": "color"
+            },
+            "tertiary": {
+              "$value": "#b5b5b5",
+              "$type": "color"
+            },
+            "monochromePlain": {
+              "$value": "#b5b5b5",
+              "$type": "color"
+            },
+            "primary": {
+              "$value": "#ffffff",
+              "$type": "color"
+            }
+          },
+          "border-right-color-state-disabled": {
+            "plain": {
+              "$value": "#b5b5b5",
+              "$type": "color"
+            },
+            "secondary": {
+              "$value": "#b5b5b5",
+              "$type": "color"
+            },
+            "tertiary": {
+              "$value": "#b5b5b5",
+              "$type": "color"
+            },
+            "monochromePlain": {
+              "$value": "#b5b5b5",
+              "$type": "color"
+            },
+            "primary": {
+              "$value": "#ffffff",
+              "$type": "color"
+            }
+          },
+          "border-top-color-state-disabled": {
+            "plain": {
+              "$value": "#b5b5b5",
+              "$type": "color"
+            },
+            "secondary": {
+              "$value": "#b5b5b5",
+              "$type": "color"
+            },
+            "tertiary": {
+              "$value": "#b5b5b5",
+              "$type": "color"
+            },
+            "monochromePlain": {
+              "$value": "#b5b5b5",
+              "$type": "color"
+            },
+            "primary": {
+              "$value": "#ffffff",
+              "$type": "color"
+            }
+          },
+          "caret-color-state-disabled": {
+            "plain": {
+              "$value": "#b5b5b5",
+              "$type": "color"
+            },
+            "secondary": {
+              "$value": "#b5b5b5",
+              "$type": "color"
+            },
+            "tertiary": {
+              "$value": "#b5b5b5",
+              "$type": "color"
+            },
+            "monochromePlain": {
+              "$value": "#b5b5b5",
+              "$type": "color"
+            },
+            "primary": {
+              "$value": "#ffffff",
+              "$type": "color"
+            }
+          },
+          "color-state-disabled": {
+            "plain": {
+              "$value": "#b5b5b5",
+              "$type": "color"
+            },
+            "secondary": {
+              "$value": "#b5b5b5",
+              "$type": "color"
+            },
+            "tertiary": {
+              "$value": "#b5b5b5",
+              "$type": "color"
+            },
+            "monochromePlain": {
+              "$value": "#b5b5b5",
+              "$type": "color"
+            },
+            "primary": {
+              "$value": "#ffffff",
+              "$type": "color"
+            }
+          },
+          "column-rule-color-state-disabled": {
+            "plain": {
+              "$value": "#b5b5b5",
+              "$type": "color"
+            },
+            "secondary": {
+              "$value": "#b5b5b5",
+              "$type": "color"
+            },
+            "tertiary": {
+              "$value": "#b5b5b5",
+              "$type": "color"
+            },
+            "monochromePlain": {
+              "$value": "#b5b5b5",
+              "$type": "color"
+            },
+            "primary": {
+              "$value": "#ffffff",
+              "$type": "color"
+            }
+          },
+          "outline-color-state-disabled": {
+            "plain": {
+              "$value": "#b5b5b5",
+              "$type": "color"
+            },
+            "secondary": {
+              "$value": "#b5b5b5",
+              "$type": "color"
+            },
+            "tertiary": {
+              "$value": "#b5b5b5",
+              "$type": "color"
+            },
+            "monochromePlain": {
+              "$value": "#b5b5b5",
+              "$type": "color"
+            },
+            "primary": {
+              "$value": "#ffffff",
+              "$type": "color"
+            }
+          },
+          "text-decoration-color-state-disabled": {
+            "plain": {
+              "$value": "#b5b5b5",
+              "$type": "color"
+            },
+            "secondary": {
+              "$value": "#b5b5b5",
+              "$type": "color"
+            },
+            "tertiary": {
+              "$value": "#b5b5b5",
+              "$type": "color"
+            },
+            "monochromePlain": {
+              "$value": "#b5b5b5",
+              "$type": "color"
+            },
+            "primary": {
+              "$value": "#ffffff",
+              "$type": "color"
+            }
+          },
+          "text-emphasis-color-state-disabled": {
+            "plain": {
+              "$value": "#b5b5b5",
+              "$type": "color"
+            },
+            "secondary": {
+              "$value": "#b5b5b5",
+              "$type": "color"
+            },
+            "tertiary": {
+              "$value": "#b5b5b5",
+              "$type": "color"
+            },
+            "monochromePlain": {
+              "$value": "#b5b5b5",
+              "$type": "color"
+            },
+            "primary": {
+              "$value": "#ffffff",
+              "$type": "color"
+            }
+          }
+        }
+      },
+      "shared": {
+        "size-8": {
+          "$value": "8px",
+          "$type": "dimension"
+        },
+        "size-0": {
+          "$value": "0px",
+          "$type": "dimension"
+        }
+      }
+    }
+  },
+  "codeOnlyChannels": [
+    {
+      "part": "root",
+      "channel": "align-items",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow) — no schema channel today",
+      "sample": "center",
+      "distinctValues": 1
+    },
+    {
+      "part": "root",
+      "channel": "appearance",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow) — no schema channel today",
+      "sample": "none",
+      "distinctValues": 1
+    },
+    {
+      "part": "root",
+      "channel": "background-attachment",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow) — no schema channel today",
+      "sample": "scroll",
+      "distinctValues": 1
+    },
+    {
+      "part": "root",
+      "channel": "background-blend-mode",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow) — no schema channel today",
+      "sample": "normal",
+      "distinctValues": 1
+    },
+    {
+      "part": "root",
+      "channel": "background-clip",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow) — no schema channel today",
+      "sample": "border-box",
+      "distinctValues": 1
+    },
+    {
+      "part": "root",
+      "channel": "background-image",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow) — no schema channel today",
+      "sample": "none",
+      "distinctValues": 1
+    },
+    {
+      "part": "root",
+      "channel": "background-origin",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow) — no schema channel today",
+      "sample": "padding-box",
+      "distinctValues": 1
+    },
+    {
+      "part": "root",
+      "channel": "background-position",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow) — no schema channel today",
+      "sample": "0% 0%",
+      "distinctValues": 1
+    },
+    {
+      "part": "root",
+      "channel": "background-repeat",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow) — no schema channel today",
+      "sample": "repeat",
+      "distinctValues": 1
+    },
+    {
+      "part": "root",
+      "channel": "background-size",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow) — no schema channel today",
+      "sample": "auto",
+      "distinctValues": 1
+    },
+    {
+      "part": "root",
+      "channel": "border-bottom-style",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow) — no schema channel today",
+      "sample": "none",
+      "distinctValues": 1
+    },
+    {
+      "part": "root",
+      "channel": "border-left-style",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow) — no schema channel today",
+      "sample": "none",
+      "distinctValues": 1
+    },
+    {
+      "part": "root",
+      "channel": "border-right-style",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow) — no schema channel today",
+      "sample": "none",
+      "distinctValues": 1
+    },
+    {
+      "part": "root",
+      "channel": "border-top-style",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow) — no schema channel today",
+      "sample": "none",
+      "distinctValues": 1
+    },
+    {
+      "part": "root",
+      "channel": "cursor",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow) — no schema channel today",
+      "sample": "pointer",
+      "distinctValues": 1
+    },
+    {
+      "part": "root",
+      "channel": "display",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow) — no schema channel today",
+      "sample": "flex",
+      "distinctValues": 1
+    },
+    {
+      "part": "root",
+      "channel": "font-feature-settings",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow) — no schema channel today",
+      "sample": "\"calt\" 0",
+      "distinctValues": 1
+    },
+    {
+      "part": "root",
+      "channel": "justify-content",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow) — no schema channel today",
+      "sample": "center",
+      "distinctValues": 1
+    },
+    {
+      "part": "root",
+      "channel": "position",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow) — no schema channel today",
+      "sample": "relative",
+      "distinctValues": 1
+    },
+    {
+      "part": "root",
+      "channel": "text-rendering",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow) — no schema channel today",
+      "sample": "optimizelegibility",
+      "distinctValues": 1
+    },
+    {
+      "part": "root",
+      "channel": "touch-action",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow) — no schema channel today",
+      "sample": "manipulation",
+      "distinctValues": 1
+    },
+    {
+      "part": "root",
+      "channel": "user-select",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow) — no schema channel today",
+      "sample": "none",
+      "distinctValues": 1
+    },
+    {
+      "part": "label",
+      "channel": "cursor",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow) — no schema channel today",
+      "sample": "pointer",
+      "distinctValues": 1
+    },
+    {
+      "part": "label",
+      "channel": "text-align",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow) — no schema channel today",
+      "sample": "center",
+      "distinctValues": 1
+    },
+    {
+      "part": "label",
+      "channel": "user-select",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow) — no schema channel today",
+      "sample": "none",
+      "distinctValues": 1
+    }
+  ],
+  "stateOverflow": [
+    {
+      "state": "hover",
+      "part": "root",
+      "channel": "text-decoration",
+      "sample": "underline",
+      "reason": "value shape outside mintable kinds"
+    },
+    {
+      "state": "hover",
+      "part": "root",
+      "channel": "text-decoration-line",
+      "sample": "underline",
+      "reason": "value shape outside mintable kinds"
+    },
+    {
+      "state": "focus-visible",
+      "part": "root",
+      "channel": "outline-style",
+      "sample": "solid",
+      "reason": "value shape outside mintable kinds"
+    },
+    {
+      "state": "focus-visible",
+      "part": "root",
+      "channel": "text-decoration",
+      "sample": "underline",
+      "reason": "value shape outside mintable kinds"
+    },
+    {
+      "state": "focus-visible",
+      "part": "root",
+      "channel": "text-decoration-line",
+      "sample": "underline",
+      "reason": "value shape outside mintable kinds"
+    },
+    {
+      "state": "active",
+      "part": "root",
+      "channel": "text-decoration",
+      "sample": "underline",
+      "reason": "value shape outside mintable kinds"
+    },
+    {
+      "state": "active",
+      "part": "root",
+      "channel": "text-decoration-line",
+      "sample": "underline",
+      "reason": "value shape outside mintable kinds"
+    },
+    {
+      "state": "active",
+      "part": "root",
+      "channel": "box-shadow",
+      "sample": "rgba(0, 0, 0, 1) 0px 3px 0px 0px inset",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    },
+    {
+      "state": "active",
+      "part": "label",
+      "channel": "transform",
+      "sample": "matrix(1, 0, 0, 1, 0, 1)",
+      "reason": "value shape outside mintable kinds"
+    },
+    {
+      "state": "disabled",
+      "part": "root",
+      "channel": "pointer-events",
+      "sample": "none",
+      "reason": "value shape outside mintable kinds"
+    },
+    {
+      "state": "disabled",
+      "part": "label",
+      "channel": "pointer-events",
+      "sample": "none",
+      "reason": "value shape outside mintable kinds"
+    },
+    {
+      "state": "disabled",
+      "part": "root",
+      "channel": "background-attachment",
+      "sample": "scroll",
+      "reason": "value shape outside mintable kinds"
+    },
+    {
+      "state": "disabled",
+      "part": "root",
+      "channel": "background-blend-mode",
+      "sample": "normal",
+      "reason": "value shape outside mintable kinds"
+    },
+    {
+      "state": "disabled",
+      "part": "root",
+      "channel": "background-clip",
+      "sample": "border-box",
+      "reason": "value shape outside mintable kinds"
+    },
+    {
+      "state": "disabled",
+      "part": "root",
+      "channel": "background-image",
+      "sample": "none",
+      "reason": "value shape outside mintable kinds"
+    },
+    {
+      "state": "disabled",
+      "part": "root",
+      "channel": "background-origin",
+      "sample": "padding-box",
+      "reason": "value shape outside mintable kinds"
+    },
+    {
+      "state": "disabled",
+      "part": "root",
+      "channel": "background-position",
+      "sample": "0% 0%",
+      "reason": "value shape outside mintable kinds"
+    },
+    {
+      "state": "disabled",
+      "part": "root",
+      "channel": "background-repeat",
+      "sample": "repeat",
+      "reason": "value shape outside mintable kinds"
+    },
+    {
+      "state": "disabled",
+      "part": "root",
+      "channel": "background-size",
+      "sample": "auto",
+      "reason": "value shape outside mintable kinds"
+    },
+    {
+      "state": "disabled",
+      "part": "root",
+      "channel": "box-shadow",
+      "sample": "none",
+      "reason": "value shape outside mintable kinds"
+    }
+  ],
+  "overflowBindings": [
+    {
+      "part": "label",
+      "channel": "border-bottom-color",
+      "refusal": "resolved values differ across variants without correlating to any variant axis — nothing minted; bind manually"
+    },
+    {
+      "part": "label",
+      "channel": "border-left-color",
+      "refusal": "resolved values differ across variants without correlating to any variant axis — nothing minted; bind manually"
+    },
+    {
+      "part": "label",
+      "channel": "border-right-color",
+      "refusal": "resolved values differ across variants without correlating to any variant axis — nothing minted; bind manually"
+    },
+    {
+      "part": "label",
+      "channel": "border-top-color",
+      "refusal": "resolved values differ across variants without correlating to any variant axis — nothing minted; bind manually"
+    },
+    {
+      "part": "label",
+      "channel": "caret-color",
+      "refusal": "resolved values differ across variants without correlating to any variant axis — nothing minted; bind manually"
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "refusal": "resolved values differ across variants without correlating to any variant axis — nothing minted; bind manually"
+    },
+    {
+      "part": "label",
+      "channel": "column-rule-color",
+      "refusal": "resolved values differ across variants without correlating to any variant axis — nothing minted; bind manually"
+    },
+    {
+      "part": "label",
+      "channel": "outline-color",
+      "refusal": "resolved values differ across variants without correlating to any variant axis — nothing minted; bind manually"
+    },
+    {
+      "part": "label",
+      "channel": "text-decoration-color",
+      "refusal": "resolved values differ across variants without correlating to any variant axis — nothing minted; bind manually"
+    },
+    {
+      "part": "label",
+      "channel": "text-emphasis-color",
+      "refusal": "resolved values differ across variants without correlating to any variant axis — nothing minted; bind manually"
+    },
+    {
+      "part": "label",
+      "channel": "border-bottom-color",
+      "state": "hover",
+      "refusal": "resolved values differ across variants without correlating to any variant axis — nothing minted; bind manually"
+    },
+    {
+      "part": "label",
+      "channel": "border-left-color",
+      "state": "hover",
+      "refusal": "resolved values differ across variants without correlating to any variant axis — nothing minted; bind manually"
+    },
+    {
+      "part": "label",
+      "channel": "border-right-color",
+      "state": "hover",
+      "refusal": "resolved values differ across variants without correlating to any variant axis — nothing minted; bind manually"
+    },
+    {
+      "part": "label",
+      "channel": "border-top-color",
+      "state": "hover",
+      "refusal": "resolved values differ across variants without correlating to any variant axis — nothing minted; bind manually"
+    },
+    {
+      "part": "label",
+      "channel": "caret-color",
+      "state": "hover",
+      "refusal": "resolved values differ across variants without correlating to any variant axis — nothing minted; bind manually"
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "state": "hover",
+      "refusal": "resolved values differ across variants without correlating to any variant axis — nothing minted; bind manually"
+    },
+    {
+      "part": "label",
+      "channel": "column-rule-color",
+      "state": "hover",
+      "refusal": "resolved values differ across variants without correlating to any variant axis — nothing minted; bind manually"
+    },
+    {
+      "part": "label",
+      "channel": "outline-color",
+      "state": "hover",
+      "refusal": "resolved values differ across variants without correlating to any variant axis — nothing minted; bind manually"
+    },
+    {
+      "part": "label",
+      "channel": "text-decoration-color",
+      "state": "hover",
+      "refusal": "resolved values differ across variants without correlating to any variant axis — nothing minted; bind manually"
+    },
+    {
+      "part": "label",
+      "channel": "text-emphasis-color",
+      "state": "hover",
+      "refusal": "resolved values differ across variants without correlating to any variant axis — nothing minted; bind manually"
+    },
+    {
+      "part": "label",
+      "channel": "border-bottom-color",
+      "state": "focus-visible",
+      "refusal": "resolved values differ across variants without correlating to any variant axis — nothing minted; bind manually"
+    },
+    {
+      "part": "label",
+      "channel": "border-left-color",
+      "state": "focus-visible",
+      "refusal": "resolved values differ across variants without correlating to any variant axis — nothing minted; bind manually"
+    },
+    {
+      "part": "label",
+      "channel": "border-right-color",
+      "state": "focus-visible",
+      "refusal": "resolved values differ across variants without correlating to any variant axis — nothing minted; bind manually"
+    },
+    {
+      "part": "label",
+      "channel": "border-top-color",
+      "state": "focus-visible",
+      "refusal": "resolved values differ across variants without correlating to any variant axis — nothing minted; bind manually"
+    },
+    {
+      "part": "label",
+      "channel": "caret-color",
+      "state": "focus-visible",
+      "refusal": "resolved values differ across variants without correlating to any variant axis — nothing minted; bind manually"
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "state": "focus-visible",
+      "refusal": "resolved values differ across variants without correlating to any variant axis — nothing minted; bind manually"
+    },
+    {
+      "part": "label",
+      "channel": "column-rule-color",
+      "state": "focus-visible",
+      "refusal": "resolved values differ across variants without correlating to any variant axis — nothing minted; bind manually"
+    },
+    {
+      "part": "label",
+      "channel": "outline-color",
+      "state": "focus-visible",
+      "refusal": "resolved values differ across variants without correlating to any variant axis — nothing minted; bind manually"
+    },
+    {
+      "part": "label",
+      "channel": "text-decoration-color",
+      "state": "focus-visible",
+      "refusal": "resolved values differ across variants without correlating to any variant axis — nothing minted; bind manually"
+    },
+    {
+      "part": "label",
+      "channel": "text-emphasis-color",
+      "state": "focus-visible",
+      "refusal": "resolved values differ across variants without correlating to any variant axis — nothing minted; bind manually"
+    },
+    {
+      "part": "label",
+      "channel": "border-bottom-color",
+      "state": "active",
+      "refusal": "resolved values differ across variants without correlating to any variant axis — nothing minted; bind manually"
+    },
+    {
+      "part": "label",
+      "channel": "border-left-color",
+      "state": "active",
+      "refusal": "resolved values differ across variants without correlating to any variant axis — nothing minted; bind manually"
+    },
+    {
+      "part": "label",
+      "channel": "border-right-color",
+      "state": "active",
+      "refusal": "resolved values differ across variants without correlating to any variant axis — nothing minted; bind manually"
+    },
+    {
+      "part": "label",
+      "channel": "border-top-color",
+      "state": "active",
+      "refusal": "resolved values differ across variants without correlating to any variant axis — nothing minted; bind manually"
+    },
+    {
+      "part": "label",
+      "channel": "caret-color",
+      "state": "active",
+      "refusal": "resolved values differ across variants without correlating to any variant axis — nothing minted; bind manually"
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "state": "active",
+      "refusal": "resolved values differ across variants without correlating to any variant axis — nothing minted; bind manually"
+    },
+    {
+      "part": "label",
+      "channel": "column-rule-color",
+      "state": "active",
+      "refusal": "resolved values differ across variants without correlating to any variant axis — nothing minted; bind manually"
+    },
+    {
+      "part": "label",
+      "channel": "fill",
+      "state": "active",
+      "refusal": "resolved values differ across variants without correlating to any variant axis — nothing minted; bind manually"
+    },
+    {
+      "part": "label",
+      "channel": "outline-color",
+      "state": "active",
+      "refusal": "resolved values differ across variants without correlating to any variant axis — nothing minted; bind manually"
+    },
+    {
+      "part": "label",
+      "channel": "text-decoration-color",
+      "state": "active",
+      "refusal": "resolved values differ across variants without correlating to any variant axis — nothing minted; bind manually"
+    },
+    {
+      "part": "label",
+      "channel": "text-emphasis-color",
+      "state": "active",
+      "refusal": "resolved values differ across variants without correlating to any variant axis — nothing minted; bind manually"
+    },
+    {
+      "part": "label",
+      "channel": "border-bottom-color",
+      "state": "disabled",
+      "ref": "{imported.button.label.border-bottom-color-state-disabled.{variant}}",
+      "refusal": "v13 Part.states carries color-kind channels only on non-root parts"
+    },
+    {
+      "part": "label",
+      "channel": "border-left-color",
+      "state": "disabled",
+      "ref": "{imported.button.label.border-left-color-state-disabled.{variant}}",
+      "refusal": "v13 Part.states carries color-kind channels only on non-root parts"
+    },
+    {
+      "part": "label",
+      "channel": "border-right-color",
+      "state": "disabled",
+      "ref": "{imported.button.label.border-right-color-state-disabled.{variant}}",
+      "refusal": "v13 Part.states carries color-kind channels only on non-root parts"
+    },
+    {
+      "part": "label",
+      "channel": "border-top-color",
+      "state": "disabled",
+      "ref": "{imported.button.label.border-top-color-state-disabled.{variant}}",
+      "refusal": "v13 Part.states carries color-kind channels only on non-root parts"
+    },
+    {
+      "part": "label",
+      "channel": "caret-color",
+      "state": "disabled",
+      "ref": "{imported.button.label.caret-color-state-disabled.{variant}}",
+      "refusal": "v13 Part.states carries color-kind channels only on non-root parts"
+    },
+    {
+      "part": "label",
+      "channel": "column-rule-color",
+      "state": "disabled",
+      "ref": "{imported.button.label.column-rule-color-state-disabled.{variant}}",
+      "refusal": "v13 Part.states carries color-kind channels only on non-root parts"
+    },
+    {
+      "part": "label",
+      "channel": "outline-color",
+      "state": "disabled",
+      "ref": "{imported.button.label.outline-color-state-disabled.{variant}}",
+      "refusal": "v13 Part.states carries color-kind channels only on non-root parts"
+    },
+    {
+      "part": "label",
+      "channel": "text-decoration-color",
+      "state": "disabled",
+      "ref": "{imported.button.label.text-decoration-color-state-disabled.{variant}}",
+      "refusal": "v13 Part.states carries color-kind channels only on non-root parts"
+    },
+    {
+      "part": "label",
+      "channel": "text-emphasis-color",
+      "state": "disabled",
+      "ref": "{imported.button.label.text-emphasis-color-state-disabled.{variant}}",
+      "refusal": "v13 Part.states carries color-kind channels only on non-root parts"
+    }
+  ],
+  "pseudoParts": {
+    "_reason": "S5 (DESIGN.md §5.4): pseudo-element decor (the Polaris focus ring rides .Button:focus-visible::after) has no anatomy spelling — captured, receipted, not carried",
+    "findings": [],
+    "totalFindings": 0
+  },
+  "bindingContradictions": [
+    {
+      "combo": "plain.none.slim.enabled",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{p.text-body-sm-font-size}",
+      "computedProp": "font-size",
+      "expected": "12px",
+      "observed": "13px",
+      "verdict": "contradiction",
+      "cause": "composition-owned typography: the plain variant renders its label through the Text primitive at bodyMd (13px/20px); the carried binding is the bodySm default — child-component props conditioned on the parent variant, invisible to single-file static promotion"
+    },
+    {
+      "combo": "plain.none.slim.enabled",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{p.text-body-sm-font-line-height}",
+      "computedProp": "line-height",
+      "expected": "16px",
+      "observed": "20px",
+      "verdict": "contradiction",
+      "cause": "composition-owned typography: the plain variant renders its label through the Text primitive at bodyMd (13px/20px); the carried binding is the bodySm default — child-component props conditioned on the parent variant, invisible to single-file static promotion"
+    },
+    {
+      "combo": "plain.none.medium.enabled",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{p.text-body-sm-font-size}",
+      "computedProp": "font-size",
+      "expected": "12px",
+      "observed": "13px",
+      "verdict": "contradiction",
+      "cause": "composition-owned typography: the plain variant renders its label through the Text primitive at bodyMd (13px/20px); the carried binding is the bodySm default — child-component props conditioned on the parent variant, invisible to single-file static promotion"
+    },
+    {
+      "combo": "plain.none.medium.enabled",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{p.text-body-sm-font-line-height}",
+      "computedProp": "line-height",
+      "expected": "16px",
+      "observed": "20px",
+      "verdict": "contradiction",
+      "cause": "composition-owned typography: the plain variant renders its label through the Text primitive at bodyMd (13px/20px); the carried binding is the bodySm default — child-component props conditioned on the parent variant, invisible to single-file static promotion"
+    },
+    {
+      "combo": "plain.critical.micro.enabled",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text-link}",
+      "computedProp": "color",
+      "expected": "rgba(0, 91, 211, 1)",
+      "observed": "rgba(142, 11, 33, 1)",
+      "verdict": "contradiction",
+      "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+    },
+    {
+      "combo": "plain.critical.slim.enabled",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text-link}",
+      "computedProp": "color",
+      "expected": "rgba(0, 91, 211, 1)",
+      "observed": "rgba(142, 11, 33, 1)",
+      "verdict": "contradiction",
+      "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+    },
+    {
+      "combo": "plain.critical.slim.enabled",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{p.text-body-sm-font-size}",
+      "computedProp": "font-size",
+      "expected": "12px",
+      "observed": "13px",
+      "verdict": "contradiction",
+      "cause": "composition-owned typography: the plain variant renders its label through the Text primitive at bodyMd (13px/20px); the carried binding is the bodySm default — child-component props conditioned on the parent variant, invisible to single-file static promotion"
+    },
+    {
+      "combo": "plain.critical.slim.enabled",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{p.text-body-sm-font-line-height}",
+      "computedProp": "line-height",
+      "expected": "16px",
+      "observed": "20px",
+      "verdict": "contradiction",
+      "cause": "composition-owned typography: the plain variant renders its label through the Text primitive at bodyMd (13px/20px); the carried binding is the bodySm default — child-component props conditioned on the parent variant, invisible to single-file static promotion"
+    },
+    {
+      "combo": "plain.critical.medium.enabled",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text-link}",
+      "computedProp": "color",
+      "expected": "rgba(0, 91, 211, 1)",
+      "observed": "rgba(142, 11, 33, 1)",
+      "verdict": "contradiction",
+      "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+    },
+    {
+      "combo": "plain.critical.medium.enabled",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{p.text-body-sm-font-size}",
+      "computedProp": "font-size",
+      "expected": "12px",
+      "observed": "13px",
+      "verdict": "contradiction",
+      "cause": "composition-owned typography: the plain variant renders its label through the Text primitive at bodyMd (13px/20px); the carried binding is the bodySm default — child-component props conditioned on the parent variant, invisible to single-file static promotion"
+    },
+    {
+      "combo": "plain.critical.medium.enabled",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{p.text-body-sm-font-line-height}",
+      "computedProp": "line-height",
+      "expected": "16px",
+      "observed": "20px",
+      "verdict": "contradiction",
+      "cause": "composition-owned typography: the plain variant renders its label through the Text primitive at bodyMd (13px/20px); the carried binding is the bodySm default — child-component props conditioned on the parent variant, invisible to single-file static promotion"
+    },
+    {
+      "combo": "plain.critical.large.enabled",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text-link}",
+      "computedProp": "color",
+      "expected": "rgba(0, 91, 211, 1)",
+      "observed": "rgba(142, 11, 33, 1)",
+      "verdict": "contradiction",
+      "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+    },
+    {
+      "combo": "plain.success.micro.enabled",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text-link}",
+      "computedProp": "color",
+      "expected": "rgba(0, 91, 211, 1)",
+      "observed": "rgba(1, 75, 64, 1)",
+      "verdict": "contradiction",
+      "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+    },
+    {
+      "combo": "plain.success.slim.enabled",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text-link}",
+      "computedProp": "color",
+      "expected": "rgba(0, 91, 211, 1)",
+      "observed": "rgba(1, 75, 64, 1)",
+      "verdict": "contradiction",
+      "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+    },
+    {
+      "combo": "plain.success.slim.enabled",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{p.text-body-sm-font-size}",
+      "computedProp": "font-size",
+      "expected": "12px",
+      "observed": "13px",
+      "verdict": "contradiction",
+      "cause": "composition-owned typography: the plain variant renders its label through the Text primitive at bodyMd (13px/20px); the carried binding is the bodySm default — child-component props conditioned on the parent variant, invisible to single-file static promotion"
+    },
+    {
+      "combo": "plain.success.slim.enabled",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{p.text-body-sm-font-line-height}",
+      "computedProp": "line-height",
+      "expected": "16px",
+      "observed": "20px",
+      "verdict": "contradiction",
+      "cause": "composition-owned typography: the plain variant renders its label through the Text primitive at bodyMd (13px/20px); the carried binding is the bodySm default — child-component props conditioned on the parent variant, invisible to single-file static promotion"
+    },
+    {
+      "combo": "plain.success.medium.enabled",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text-link}",
+      "computedProp": "color",
+      "expected": "rgba(0, 91, 211, 1)",
+      "observed": "rgba(1, 75, 64, 1)",
+      "verdict": "contradiction",
+      "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+    },
+    {
+      "combo": "plain.success.medium.enabled",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{p.text-body-sm-font-size}",
+      "computedProp": "font-size",
+      "expected": "12px",
+      "observed": "13px",
+      "verdict": "contradiction",
+      "cause": "composition-owned typography: the plain variant renders its label through the Text primitive at bodyMd (13px/20px); the carried binding is the bodySm default — child-component props conditioned on the parent variant, invisible to single-file static promotion"
+    },
+    {
+      "combo": "plain.success.medium.enabled",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{p.text-body-sm-font-line-height}",
+      "computedProp": "line-height",
+      "expected": "16px",
+      "observed": "20px",
+      "verdict": "contradiction",
+      "cause": "composition-owned typography: the plain variant renders its label through the Text primitive at bodyMd (13px/20px); the carried binding is the bodySm default — child-component props conditioned on the parent variant, invisible to single-file static promotion"
+    },
+    {
+      "combo": "plain.success.large.enabled",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text-link}",
+      "computedProp": "color",
+      "expected": "rgba(0, 91, 211, 1)",
+      "observed": "rgba(1, 75, 64, 1)",
+      "verdict": "contradiction",
+      "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+    },
+    {
+      "combo": "primary.none.micro.enabled",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{p.font-weight-medium}",
+      "computedProp": "font-weight",
+      "expected": "550",
+      "observed": "650",
+      "verdict": "contradiction",
+      "cause": "composition-owned typography: the primary variant label renders Text fontWeight 650 (semibold); the carried binding is font-weight-medium (550) — same composition-owned class"
+    },
+    {
+      "combo": "primary.none.slim.enabled",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{p.font-weight-medium}",
+      "computedProp": "font-weight",
+      "expected": "550",
+      "observed": "650",
+      "verdict": "contradiction",
+      "cause": "composition-owned typography: the primary variant label renders Text fontWeight 650 (semibold); the carried binding is font-weight-medium (550) — same composition-owned class"
+    },
+    {
+      "combo": "primary.none.medium.enabled",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{p.font-weight-medium}",
+      "computedProp": "font-weight",
+      "expected": "550",
+      "observed": "650",
+      "verdict": "contradiction",
+      "cause": "composition-owned typography: the primary variant label renders Text fontWeight 650 (semibold); the carried binding is font-weight-medium (550) — same composition-owned class"
+    },
+    {
+      "combo": "primary.none.large.enabled",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{p.font-weight-medium}",
+      "computedProp": "font-weight",
+      "expected": "550",
+      "observed": "650",
+      "verdict": "contradiction",
+      "cause": "composition-owned typography: the primary variant label renders Text fontWeight 650 (semibold); the carried binding is font-weight-medium (550) — same composition-owned class"
+    },
+    {
+      "combo": "primary.critical.micro.enabled",
+      "part": "root",
+      "channel": "background-color",
+      "ref": "{p.color-bg-fill-brand}",
+      "computedProp": "background-color",
+      "expected": "rgba(48, 48, 48, 1)",
+      "observed": "rgba(199, 10, 36, 1)",
+      "verdict": "contradiction",
+      "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+    },
+    {
+      "combo": "primary.critical.micro.enabled",
+      "part": "root",
+      "channel": "box-shadow",
+      "ref": "{p.shadow-button-primary}",
+      "computedProp": "box-shadow",
+      "expected": "rgba(0, 0, 0, 0.8) 0px -1px 0px 1px inset, rgba(48, 48, 48, 1) 0px 0px 0px 1px inset, rgba(255, 255, 255, 0.25) 0px 0.5px 0px 1.5px inset",
+      "observed": "rgba(142, 31, 11, 0.8) 0px -1px 0px 1px inset, rgba(181, 38, 11, 0.8) 0px 0px 0px 1px inset, rgba(255, 255, 255, 0.35) 0px 0.5px 0px 1.5px inset",
+      "verdict": "contradiction",
+      "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+    },
+    {
+      "combo": "primary.critical.micro.enabled",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{p.font-weight-medium}",
+      "computedProp": "font-weight",
+      "expected": "550",
+      "observed": "650",
+      "verdict": "contradiction",
+      "cause": "composition-owned typography: the primary variant label renders Text fontWeight 650 (semibold); the carried binding is font-weight-medium (550) — same composition-owned class"
+    },
+    {
+      "combo": "primary.critical.slim.enabled",
+      "part": "root",
+      "channel": "background-color",
+      "ref": "{p.color-bg-fill-brand}",
+      "computedProp": "background-color",
+      "expected": "rgba(48, 48, 48, 1)",
+      "observed": "rgba(199, 10, 36, 1)",
+      "verdict": "contradiction",
+      "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+    },
+    {
+      "combo": "primary.critical.slim.enabled",
+      "part": "root",
+      "channel": "box-shadow",
+      "ref": "{p.shadow-button-primary}",
+      "computedProp": "box-shadow",
+      "expected": "rgba(0, 0, 0, 0.8) 0px -1px 0px 1px inset, rgba(48, 48, 48, 1) 0px 0px 0px 1px inset, rgba(255, 255, 255, 0.25) 0px 0.5px 0px 1.5px inset",
+      "observed": "rgba(142, 31, 11, 0.8) 0px -1px 0px 1px inset, rgba(181, 38, 11, 0.8) 0px 0px 0px 1px inset, rgba(255, 255, 255, 0.35) 0px 0.5px 0px 1.5px inset",
+      "verdict": "contradiction",
+      "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+    },
+    {
+      "combo": "primary.critical.slim.enabled",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{p.font-weight-medium}",
+      "computedProp": "font-weight",
+      "expected": "550",
+      "observed": "650",
+      "verdict": "contradiction",
+      "cause": "composition-owned typography: the primary variant label renders Text fontWeight 650 (semibold); the carried binding is font-weight-medium (550) — same composition-owned class"
+    },
+    {
+      "combo": "primary.critical.medium.enabled",
+      "part": "root",
+      "channel": "background-color",
+      "ref": "{p.color-bg-fill-brand}",
+      "computedProp": "background-color",
+      "expected": "rgba(48, 48, 48, 1)",
+      "observed": "rgba(199, 10, 36, 1)",
+      "verdict": "contradiction",
+      "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+    },
+    {
+      "combo": "primary.critical.medium.enabled",
+      "part": "root",
+      "channel": "box-shadow",
+      "ref": "{p.shadow-button-primary}",
+      "computedProp": "box-shadow",
+      "expected": "rgba(0, 0, 0, 0.8) 0px -1px 0px 1px inset, rgba(48, 48, 48, 1) 0px 0px 0px 1px inset, rgba(255, 255, 255, 0.25) 0px 0.5px 0px 1.5px inset",
+      "observed": "rgba(142, 31, 11, 0.8) 0px -1px 0px 1px inset, rgba(181, 38, 11, 0.8) 0px 0px 0px 1px inset, rgba(255, 255, 255, 0.35) 0px 0.5px 0px 1.5px inset",
+      "verdict": "contradiction",
+      "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+    },
+    {
+      "combo": "primary.critical.medium.enabled",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{p.font-weight-medium}",
+      "computedProp": "font-weight",
+      "expected": "550",
+      "observed": "650",
+      "verdict": "contradiction",
+      "cause": "composition-owned typography: the primary variant label renders Text fontWeight 650 (semibold); the carried binding is font-weight-medium (550) — same composition-owned class"
+    },
+    {
+      "combo": "primary.critical.large.enabled",
+      "part": "root",
+      "channel": "background-color",
+      "ref": "{p.color-bg-fill-brand}",
+      "computedProp": "background-color",
+      "expected": "rgba(48, 48, 48, 1)",
+      "observed": "rgba(199, 10, 36, 1)",
+      "verdict": "contradiction",
+      "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+    },
+    {
+      "combo": "primary.critical.large.enabled",
+      "part": "root",
+      "channel": "box-shadow",
+      "ref": "{p.shadow-button-primary}",
+      "computedProp": "box-shadow",
+      "expected": "rgba(0, 0, 0, 0.8) 0px -1px 0px 1px inset, rgba(48, 48, 48, 1) 0px 0px 0px 1px inset, rgba(255, 255, 255, 0.25) 0px 0.5px 0px 1.5px inset",
+      "observed": "rgba(142, 31, 11, 0.8) 0px -1px 0px 1px inset, rgba(181, 38, 11, 0.8) 0px 0px 0px 1px inset, rgba(255, 255, 255, 0.35) 0px 0.5px 0px 1.5px inset",
+      "verdict": "contradiction",
+      "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+    },
+    {
+      "combo": "primary.critical.large.enabled",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{p.font-weight-medium}",
+      "computedProp": "font-weight",
+      "expected": "550",
+      "observed": "650",
+      "verdict": "contradiction",
+      "cause": "composition-owned typography: the primary variant label renders Text fontWeight 650 (semibold); the carried binding is font-weight-medium (550) — same composition-owned class"
+    },
+    {
+      "combo": "primary.success.micro.enabled",
+      "part": "root",
+      "channel": "background-color",
+      "ref": "{p.color-bg-fill-brand}",
+      "computedProp": "background-color",
+      "expected": "rgba(48, 48, 48, 1)",
+      "observed": "rgba(4, 123, 93, 1)",
+      "verdict": "contradiction",
+      "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+    },
+    {
+      "combo": "primary.success.micro.enabled",
+      "part": "root",
+      "channel": "box-shadow",
+      "ref": "{p.shadow-button-primary}",
+      "computedProp": "box-shadow",
+      "expected": "rgba(0, 0, 0, 0.8) 0px -1px 0px 1px inset, rgba(48, 48, 48, 1) 0px 0px 0px 1px inset, rgba(255, 255, 255, 0.25) 0px 0.5px 0px 1.5px inset",
+      "observed": "rgba(12, 81, 50, 0.8) 0px -1px 0px 1px inset, rgba(19, 111, 69, 0.8) 0px 0px 0px 1px inset, rgba(255, 255, 255, 0.25) 0px 0.5px 0px 1.5px inset",
+      "verdict": "contradiction",
+      "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+    },
+    {
+      "combo": "primary.success.micro.enabled",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{p.font-weight-medium}",
+      "computedProp": "font-weight",
+      "expected": "550",
+      "observed": "650",
+      "verdict": "contradiction",
+      "cause": "composition-owned typography: the primary variant label renders Text fontWeight 650 (semibold); the carried binding is font-weight-medium (550) — same composition-owned class"
+    },
+    {
+      "combo": "primary.success.slim.enabled",
+      "part": "root",
+      "channel": "background-color",
+      "ref": "{p.color-bg-fill-brand}",
+      "computedProp": "background-color",
+      "expected": "rgba(48, 48, 48, 1)",
+      "observed": "rgba(4, 123, 93, 1)",
+      "verdict": "contradiction",
+      "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+    },
+    {
+      "combo": "primary.success.slim.enabled",
+      "part": "root",
+      "channel": "box-shadow",
+      "ref": "{p.shadow-button-primary}",
+      "computedProp": "box-shadow",
+      "expected": "rgba(0, 0, 0, 0.8) 0px -1px 0px 1px inset, rgba(48, 48, 48, 1) 0px 0px 0px 1px inset, rgba(255, 255, 255, 0.25) 0px 0.5px 0px 1.5px inset",
+      "observed": "rgba(12, 81, 50, 0.8) 0px -1px 0px 1px inset, rgba(19, 111, 69, 0.8) 0px 0px 0px 1px inset, rgba(255, 255, 255, 0.25) 0px 0.5px 0px 1.5px inset",
+      "verdict": "contradiction",
+      "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+    },
+    {
+      "combo": "primary.success.slim.enabled",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{p.font-weight-medium}",
+      "computedProp": "font-weight",
+      "expected": "550",
+      "observed": "650",
+      "verdict": "contradiction",
+      "cause": "composition-owned typography: the primary variant label renders Text fontWeight 650 (semibold); the carried binding is font-weight-medium (550) — same composition-owned class"
+    },
+    {
+      "combo": "primary.success.medium.enabled",
+      "part": "root",
+      "channel": "background-color",
+      "ref": "{p.color-bg-fill-brand}",
+      "computedProp": "background-color",
+      "expected": "rgba(48, 48, 48, 1)",
+      "observed": "rgba(4, 123, 93, 1)",
+      "verdict": "contradiction",
+      "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+    },
+    {
+      "combo": "primary.success.medium.enabled",
+      "part": "root",
+      "channel": "box-shadow",
+      "ref": "{p.shadow-button-primary}",
+      "computedProp": "box-shadow",
+      "expected": "rgba(0, 0, 0, 0.8) 0px -1px 0px 1px inset, rgba(48, 48, 48, 1) 0px 0px 0px 1px inset, rgba(255, 255, 255, 0.25) 0px 0.5px 0px 1.5px inset",
+      "observed": "rgba(12, 81, 50, 0.8) 0px -1px 0px 1px inset, rgba(19, 111, 69, 0.8) 0px 0px 0px 1px inset, rgba(255, 255, 255, 0.25) 0px 0.5px 0px 1.5px inset",
+      "verdict": "contradiction",
+      "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+    },
+    {
+      "combo": "primary.success.medium.enabled",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{p.font-weight-medium}",
+      "computedProp": "font-weight",
+      "expected": "550",
+      "observed": "650",
+      "verdict": "contradiction",
+      "cause": "composition-owned typography: the primary variant label renders Text fontWeight 650 (semibold); the carried binding is font-weight-medium (550) — same composition-owned class"
+    },
+    {
+      "combo": "primary.success.large.enabled",
+      "part": "root",
+      "channel": "background-color",
+      "ref": "{p.color-bg-fill-brand}",
+      "computedProp": "background-color",
+      "expected": "rgba(48, 48, 48, 1)",
+      "observed": "rgba(4, 123, 93, 1)",
+      "verdict": "contradiction",
+      "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+    },
+    {
+      "combo": "primary.success.large.enabled",
+      "part": "root",
+      "channel": "box-shadow",
+      "ref": "{p.shadow-button-primary}",
+      "computedProp": "box-shadow",
+      "expected": "rgba(0, 0, 0, 0.8) 0px -1px 0px 1px inset, rgba(48, 48, 48, 1) 0px 0px 0px 1px inset, rgba(255, 255, 255, 0.25) 0px 0.5px 0px 1.5px inset",
+      "observed": "rgba(12, 81, 50, 0.8) 0px -1px 0px 1px inset, rgba(19, 111, 69, 0.8) 0px 0px 0px 1px inset, rgba(255, 255, 255, 0.25) 0px 0.5px 0px 1.5px inset",
+      "verdict": "contradiction",
+      "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+    },
+    {
+      "combo": "primary.success.large.enabled",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{p.font-weight-medium}",
+      "computedProp": "font-weight",
+      "expected": "550",
+      "observed": "650",
+      "verdict": "contradiction",
+      "cause": "composition-owned typography: the primary variant label renders Text fontWeight 650 (semibold); the carried binding is font-weight-medium (550) — same composition-owned class"
+    },
+    {
+      "combo": "secondary.critical.micro.enabled",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text}",
+      "computedProp": "color",
+      "expected": "rgba(48, 48, 48, 1)",
+      "observed": "rgba(142, 11, 33, 1)",
+      "verdict": "contradiction",
+      "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+    },
+    {
+      "combo": "secondary.critical.slim.enabled",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text}",
+      "computedProp": "color",
+      "expected": "rgba(48, 48, 48, 1)",
+      "observed": "rgba(142, 11, 33, 1)",
+      "verdict": "contradiction",
+      "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+    },
+    {
+      "combo": "secondary.critical.medium.enabled",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text}",
+      "computedProp": "color",
+      "expected": "rgba(48, 48, 48, 1)",
+      "observed": "rgba(142, 11, 33, 1)",
+      "verdict": "contradiction",
+      "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+    },
+    {
+      "combo": "secondary.critical.large.enabled",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text}",
+      "computedProp": "color",
+      "expected": "rgba(48, 48, 48, 1)",
+      "observed": "rgba(142, 11, 33, 1)",
+      "verdict": "contradiction",
+      "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+    },
+    {
+      "combo": "secondary.success.micro.enabled",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text}",
+      "computedProp": "color",
+      "expected": "rgba(48, 48, 48, 1)",
+      "observed": "rgba(1, 75, 64, 1)",
+      "verdict": "contradiction",
+      "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+    },
+    {
+      "combo": "secondary.success.slim.enabled",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text}",
+      "computedProp": "color",
+      "expected": "rgba(48, 48, 48, 1)",
+      "observed": "rgba(1, 75, 64, 1)",
+      "verdict": "contradiction",
+      "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+    },
+    {
+      "combo": "secondary.success.medium.enabled",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text}",
+      "computedProp": "color",
+      "expected": "rgba(48, 48, 48, 1)",
+      "observed": "rgba(1, 75, 64, 1)",
+      "verdict": "contradiction",
+      "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+    },
+    {
+      "combo": "secondary.success.large.enabled",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text}",
+      "computedProp": "color",
+      "expected": "rgba(48, 48, 48, 1)",
+      "observed": "rgba(1, 75, 64, 1)",
+      "verdict": "contradiction",
+      "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+    },
+    {
+      "combo": "tertiary.critical.micro.enabled",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text}",
+      "computedProp": "color",
+      "expected": "rgba(48, 48, 48, 1)",
+      "observed": "rgba(142, 11, 33, 1)",
+      "verdict": "contradiction",
+      "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+    },
+    {
+      "combo": "tertiary.critical.slim.enabled",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text}",
+      "computedProp": "color",
+      "expected": "rgba(48, 48, 48, 1)",
+      "observed": "rgba(142, 11, 33, 1)",
+      "verdict": "contradiction",
+      "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+    },
+    {
+      "combo": "tertiary.critical.medium.enabled",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text}",
+      "computedProp": "color",
+      "expected": "rgba(48, 48, 48, 1)",
+      "observed": "rgba(142, 11, 33, 1)",
+      "verdict": "contradiction",
+      "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+    },
+    {
+      "combo": "tertiary.critical.large.enabled",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text}",
+      "computedProp": "color",
+      "expected": "rgba(48, 48, 48, 1)",
+      "observed": "rgba(142, 11, 33, 1)",
+      "verdict": "contradiction",
+      "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+    },
+    {
+      "combo": "tertiary.success.micro.enabled",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text}",
+      "computedProp": "color",
+      "expected": "rgba(48, 48, 48, 1)",
+      "observed": "rgba(1, 75, 64, 1)",
+      "verdict": "contradiction",
+      "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+    },
+    {
+      "combo": "tertiary.success.slim.enabled",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text}",
+      "computedProp": "color",
+      "expected": "rgba(48, 48, 48, 1)",
+      "observed": "rgba(1, 75, 64, 1)",
+      "verdict": "contradiction",
+      "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+    },
+    {
+      "combo": "tertiary.success.medium.enabled",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text}",
+      "computedProp": "color",
+      "expected": "rgba(48, 48, 48, 1)",
+      "observed": "rgba(1, 75, 64, 1)",
+      "verdict": "contradiction",
+      "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+    },
+    {
+      "combo": "tertiary.success.large.enabled",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text}",
+      "computedProp": "color",
+      "expected": "rgba(48, 48, 48, 1)",
+      "observed": "rgba(1, 75, 64, 1)",
+      "verdict": "contradiction",
+      "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+    },
+    {
+      "combo": "monochromePlain.none.slim.enabled",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{p.text-body-sm-font-size}",
+      "computedProp": "font-size",
+      "expected": "12px",
+      "observed": "13px",
+      "verdict": "contradiction",
+      "cause": "composition-owned typography: the monochromePlain variant renders its label through the Text primitive at bodyMd (13px/20px); the carried binding is the bodySm default — child-component props conditioned on the parent variant, invisible to single-file static promotion"
+    },
+    {
+      "combo": "monochromePlain.none.slim.enabled",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{p.text-body-sm-font-line-height}",
+      "computedProp": "line-height",
+      "expected": "16px",
+      "observed": "20px",
+      "verdict": "contradiction",
+      "cause": "composition-owned typography: the monochromePlain variant renders its label through the Text primitive at bodyMd (13px/20px); the carried binding is the bodySm default — child-component props conditioned on the parent variant, invisible to single-file static promotion"
+    },
+    {
+      "combo": "monochromePlain.none.medium.enabled",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{p.text-body-sm-font-size}",
+      "computedProp": "font-size",
+      "expected": "12px",
+      "observed": "13px",
+      "verdict": "contradiction",
+      "cause": "composition-owned typography: the monochromePlain variant renders its label through the Text primitive at bodyMd (13px/20px); the carried binding is the bodySm default — child-component props conditioned on the parent variant, invisible to single-file static promotion"
+    },
+    {
+      "combo": "monochromePlain.none.medium.enabled",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{p.text-body-sm-font-line-height}",
+      "computedProp": "line-height",
+      "expected": "16px",
+      "observed": "20px",
+      "verdict": "contradiction",
+      "cause": "composition-owned typography: the monochromePlain variant renders its label through the Text primitive at bodyMd (13px/20px); the carried binding is the bodySm default — child-component props conditioned on the parent variant, invisible to single-file static promotion"
+    },
+    {
+      "combo": "monochromePlain.critical.slim.enabled",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{p.text-body-sm-font-size}",
+      "computedProp": "font-size",
+      "expected": "12px",
+      "observed": "13px",
+      "verdict": "contradiction",
+      "cause": "composition-owned typography: the monochromePlain variant renders its label through the Text primitive at bodyMd (13px/20px); the carried binding is the bodySm default — child-component props conditioned on the parent variant, invisible to single-file static promotion"
+    },
+    {
+      "combo": "monochromePlain.critical.slim.enabled",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{p.text-body-sm-font-line-height}",
+      "computedProp": "line-height",
+      "expected": "16px",
+      "observed": "20px",
+      "verdict": "contradiction",
+      "cause": "composition-owned typography: the monochromePlain variant renders its label through the Text primitive at bodyMd (13px/20px); the carried binding is the bodySm default — child-component props conditioned on the parent variant, invisible to single-file static promotion"
+    },
+    {
+      "combo": "monochromePlain.critical.medium.enabled",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{p.text-body-sm-font-size}",
+      "computedProp": "font-size",
+      "expected": "12px",
+      "observed": "13px",
+      "verdict": "contradiction",
+      "cause": "composition-owned typography: the monochromePlain variant renders its label through the Text primitive at bodyMd (13px/20px); the carried binding is the bodySm default — child-component props conditioned on the parent variant, invisible to single-file static promotion"
+    },
+    {
+      "combo": "monochromePlain.critical.medium.enabled",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{p.text-body-sm-font-line-height}",
+      "computedProp": "line-height",
+      "expected": "16px",
+      "observed": "20px",
+      "verdict": "contradiction",
+      "cause": "composition-owned typography: the monochromePlain variant renders its label through the Text primitive at bodyMd (13px/20px); the carried binding is the bodySm default — child-component props conditioned on the parent variant, invisible to single-file static promotion"
+    },
+    {
+      "combo": "monochromePlain.success.slim.enabled",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{p.text-body-sm-font-size}",
+      "computedProp": "font-size",
+      "expected": "12px",
+      "observed": "13px",
+      "verdict": "contradiction",
+      "cause": "composition-owned typography: the monochromePlain variant renders its label through the Text primitive at bodyMd (13px/20px); the carried binding is the bodySm default — child-component props conditioned on the parent variant, invisible to single-file static promotion"
+    },
+    {
+      "combo": "monochromePlain.success.slim.enabled",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{p.text-body-sm-font-line-height}",
+      "computedProp": "line-height",
+      "expected": "16px",
+      "observed": "20px",
+      "verdict": "contradiction",
+      "cause": "composition-owned typography: the monochromePlain variant renders its label through the Text primitive at bodyMd (13px/20px); the carried binding is the bodySm default — child-component props conditioned on the parent variant, invisible to single-file static promotion"
+    },
+    {
+      "combo": "monochromePlain.success.medium.enabled",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{p.text-body-sm-font-size}",
+      "computedProp": "font-size",
+      "expected": "12px",
+      "observed": "13px",
+      "verdict": "contradiction",
+      "cause": "composition-owned typography: the monochromePlain variant renders its label through the Text primitive at bodyMd (13px/20px); the carried binding is the bodySm default — child-component props conditioned on the parent variant, invisible to single-file static promotion"
+    },
+    {
+      "combo": "monochromePlain.success.medium.enabled",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{p.text-body-sm-font-line-height}",
+      "computedProp": "line-height",
+      "expected": "16px",
+      "observed": "20px",
+      "verdict": "contradiction",
+      "cause": "composition-owned typography: the monochromePlain variant renders its label through the Text primitive at bodyMd (13px/20px); the carried binding is the bodySm default — child-component props conditioned on the parent variant, invisible to single-file static promotion"
+    }
+  ],
+  "geometryChannels": {
+    "_reason": "environment-dependent (font metrics / layout-derived) — captured, excluded from fusion by name (DESIGN.md §3.3)",
+    "channels": [
+      "block-size",
+      "height",
+      "inline-size",
+      "perspective-origin",
+      "transform-origin",
+      "webkit-logical-height",
+      "webkit-logical-width",
+      "width"
+    ]
+  },
+  "interactionOnDisabled": [],
+  "structureReceipts": [],
+  "enrichmentNotes": []
+}

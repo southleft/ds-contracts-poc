@@ -1,0 +1,955 @@
+{
+  "browser": "148.0.7778.96",
+  "captures": 480,
+  "combos": 120,
+  "interactions": 4,
+  "channelsEnumerated": 942,
+  "elementsPerCapture": 2,
+  "determinism": "byte-identical across two full sweeps in one session",
+  "styledChannels": {
+    "root": 61,
+    "label": 16
+  },
+  "bound": {
+    "cellsChecked": 816,
+    "confirmed": 740,
+    "contradictions": 76,
+    "contradictionRows": [
+      {
+        "combo": "plain.none.slim.enabled",
+        "part": "label",
+        "channel": "font-size",
+        "ref": "{p.text-body-sm-font-size}",
+        "computedProp": "font-size",
+        "expected": "12px",
+        "observed": "13px",
+        "verdict": "contradiction",
+        "cause": "composition-owned typography: the plain variant renders its label through the Text primitive at bodyMd (13px/20px); the carried binding is the bodySm default — child-component props conditioned on the parent variant, invisible to single-file static promotion"
+      },
+      {
+        "combo": "plain.none.slim.enabled",
+        "part": "label",
+        "channel": "line-height",
+        "ref": "{p.text-body-sm-font-line-height}",
+        "computedProp": "line-height",
+        "expected": "16px",
+        "observed": "20px",
+        "verdict": "contradiction",
+        "cause": "composition-owned typography: the plain variant renders its label through the Text primitive at bodyMd (13px/20px); the carried binding is the bodySm default — child-component props conditioned on the parent variant, invisible to single-file static promotion"
+      },
+      {
+        "combo": "plain.none.medium.enabled",
+        "part": "label",
+        "channel": "font-size",
+        "ref": "{p.text-body-sm-font-size}",
+        "computedProp": "font-size",
+        "expected": "12px",
+        "observed": "13px",
+        "verdict": "contradiction",
+        "cause": "composition-owned typography: the plain variant renders its label through the Text primitive at bodyMd (13px/20px); the carried binding is the bodySm default — child-component props conditioned on the parent variant, invisible to single-file static promotion"
+      },
+      {
+        "combo": "plain.none.medium.enabled",
+        "part": "label",
+        "channel": "line-height",
+        "ref": "{p.text-body-sm-font-line-height}",
+        "computedProp": "line-height",
+        "expected": "16px",
+        "observed": "20px",
+        "verdict": "contradiction",
+        "cause": "composition-owned typography: the plain variant renders its label through the Text primitive at bodyMd (13px/20px); the carried binding is the bodySm default — child-component props conditioned on the parent variant, invisible to single-file static promotion"
+      },
+      {
+        "combo": "plain.critical.micro.enabled",
+        "part": "root",
+        "channel": "color",
+        "ref": "{p.color-text-link}",
+        "computedProp": "color",
+        "expected": "rgba(0, 91, 211, 1)",
+        "observed": "rgba(142, 11, 33, 1)",
+        "verdict": "contradiction",
+        "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+      },
+      {
+        "combo": "plain.critical.slim.enabled",
+        "part": "root",
+        "channel": "color",
+        "ref": "{p.color-text-link}",
+        "computedProp": "color",
+        "expected": "rgba(0, 91, 211, 1)",
+        "observed": "rgba(142, 11, 33, 1)",
+        "verdict": "contradiction",
+        "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+      },
+      {
+        "combo": "plain.critical.slim.enabled",
+        "part": "label",
+        "channel": "font-size",
+        "ref": "{p.text-body-sm-font-size}",
+        "computedProp": "font-size",
+        "expected": "12px",
+        "observed": "13px",
+        "verdict": "contradiction",
+        "cause": "composition-owned typography: the plain variant renders its label through the Text primitive at bodyMd (13px/20px); the carried binding is the bodySm default — child-component props conditioned on the parent variant, invisible to single-file static promotion"
+      },
+      {
+        "combo": "plain.critical.slim.enabled",
+        "part": "label",
+        "channel": "line-height",
+        "ref": "{p.text-body-sm-font-line-height}",
+        "computedProp": "line-height",
+        "expected": "16px",
+        "observed": "20px",
+        "verdict": "contradiction",
+        "cause": "composition-owned typography: the plain variant renders its label through the Text primitive at bodyMd (13px/20px); the carried binding is the bodySm default — child-component props conditioned on the parent variant, invisible to single-file static promotion"
+      },
+      {
+        "combo": "plain.critical.medium.enabled",
+        "part": "root",
+        "channel": "color",
+        "ref": "{p.color-text-link}",
+        "computedProp": "color",
+        "expected": "rgba(0, 91, 211, 1)",
+        "observed": "rgba(142, 11, 33, 1)",
+        "verdict": "contradiction",
+        "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+      },
+      {
+        "combo": "plain.critical.medium.enabled",
+        "part": "label",
+        "channel": "font-size",
+        "ref": "{p.text-body-sm-font-size}",
+        "computedProp": "font-size",
+        "expected": "12px",
+        "observed": "13px",
+        "verdict": "contradiction",
+        "cause": "composition-owned typography: the plain variant renders its label through the Text primitive at bodyMd (13px/20px); the carried binding is the bodySm default — child-component props conditioned on the parent variant, invisible to single-file static promotion"
+      },
+      {
+        "combo": "plain.critical.medium.enabled",
+        "part": "label",
+        "channel": "line-height",
+        "ref": "{p.text-body-sm-font-line-height}",
+        "computedProp": "line-height",
+        "expected": "16px",
+        "observed": "20px",
+        "verdict": "contradiction",
+        "cause": "composition-owned typography: the plain variant renders its label through the Text primitive at bodyMd (13px/20px); the carried binding is the bodySm default — child-component props conditioned on the parent variant, invisible to single-file static promotion"
+      },
+      {
+        "combo": "plain.critical.large.enabled",
+        "part": "root",
+        "channel": "color",
+        "ref": "{p.color-text-link}",
+        "computedProp": "color",
+        "expected": "rgba(0, 91, 211, 1)",
+        "observed": "rgba(142, 11, 33, 1)",
+        "verdict": "contradiction",
+        "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+      },
+      {
+        "combo": "plain.success.micro.enabled",
+        "part": "root",
+        "channel": "color",
+        "ref": "{p.color-text-link}",
+        "computedProp": "color",
+        "expected": "rgba(0, 91, 211, 1)",
+        "observed": "rgba(1, 75, 64, 1)",
+        "verdict": "contradiction",
+        "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+      },
+      {
+        "combo": "plain.success.slim.enabled",
+        "part": "root",
+        "channel": "color",
+        "ref": "{p.color-text-link}",
+        "computedProp": "color",
+        "expected": "rgba(0, 91, 211, 1)",
+        "observed": "rgba(1, 75, 64, 1)",
+        "verdict": "contradiction",
+        "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+      },
+      {
+        "combo": "plain.success.slim.enabled",
+        "part": "label",
+        "channel": "font-size",
+        "ref": "{p.text-body-sm-font-size}",
+        "computedProp": "font-size",
+        "expected": "12px",
+        "observed": "13px",
+        "verdict": "contradiction",
+        "cause": "composition-owned typography: the plain variant renders its label through the Text primitive at bodyMd (13px/20px); the carried binding is the bodySm default — child-component props conditioned on the parent variant, invisible to single-file static promotion"
+      },
+      {
+        "combo": "plain.success.slim.enabled",
+        "part": "label",
+        "channel": "line-height",
+        "ref": "{p.text-body-sm-font-line-height}",
+        "computedProp": "line-height",
+        "expected": "16px",
+        "observed": "20px",
+        "verdict": "contradiction",
+        "cause": "composition-owned typography: the plain variant renders its label through the Text primitive at bodyMd (13px/20px); the carried binding is the bodySm default — child-component props conditioned on the parent variant, invisible to single-file static promotion"
+      },
+      {
+        "combo": "plain.success.medium.enabled",
+        "part": "root",
+        "channel": "color",
+        "ref": "{p.color-text-link}",
+        "computedProp": "color",
+        "expected": "rgba(0, 91, 211, 1)",
+        "observed": "rgba(1, 75, 64, 1)",
+        "verdict": "contradiction",
+        "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+      },
+      {
+        "combo": "plain.success.medium.enabled",
+        "part": "label",
+        "channel": "font-size",
+        "ref": "{p.text-body-sm-font-size}",
+        "computedProp": "font-size",
+        "expected": "12px",
+        "observed": "13px",
+        "verdict": "contradiction",
+        "cause": "composition-owned typography: the plain variant renders its label through the Text primitive at bodyMd (13px/20px); the carried binding is the bodySm default — child-component props conditioned on the parent variant, invisible to single-file static promotion"
+      },
+      {
+        "combo": "plain.success.medium.enabled",
+        "part": "label",
+        "channel": "line-height",
+        "ref": "{p.text-body-sm-font-line-height}",
+        "computedProp": "line-height",
+        "expected": "16px",
+        "observed": "20px",
+        "verdict": "contradiction",
+        "cause": "composition-owned typography: the plain variant renders its label through the Text primitive at bodyMd (13px/20px); the carried binding is the bodySm default — child-component props conditioned on the parent variant, invisible to single-file static promotion"
+      },
+      {
+        "combo": "plain.success.large.enabled",
+        "part": "root",
+        "channel": "color",
+        "ref": "{p.color-text-link}",
+        "computedProp": "color",
+        "expected": "rgba(0, 91, 211, 1)",
+        "observed": "rgba(1, 75, 64, 1)",
+        "verdict": "contradiction",
+        "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+      },
+      {
+        "combo": "primary.none.micro.enabled",
+        "part": "label",
+        "channel": "font-weight",
+        "ref": "{p.font-weight-medium}",
+        "computedProp": "font-weight",
+        "expected": "550",
+        "observed": "650",
+        "verdict": "contradiction",
+        "cause": "composition-owned typography: the primary variant label renders Text fontWeight 650 (semibold); the carried binding is font-weight-medium (550) — same composition-owned class"
+      },
+      {
+        "combo": "primary.none.slim.enabled",
+        "part": "label",
+        "channel": "font-weight",
+        "ref": "{p.font-weight-medium}",
+        "computedProp": "font-weight",
+        "expected": "550",
+        "observed": "650",
+        "verdict": "contradiction",
+        "cause": "composition-owned typography: the primary variant label renders Text fontWeight 650 (semibold); the carried binding is font-weight-medium (550) — same composition-owned class"
+      },
+      {
+        "combo": "primary.none.medium.enabled",
+        "part": "label",
+        "channel": "font-weight",
+        "ref": "{p.font-weight-medium}",
+        "computedProp": "font-weight",
+        "expected": "550",
+        "observed": "650",
+        "verdict": "contradiction",
+        "cause": "composition-owned typography: the primary variant label renders Text fontWeight 650 (semibold); the carried binding is font-weight-medium (550) — same composition-owned class"
+      },
+      {
+        "combo": "primary.none.large.enabled",
+        "part": "label",
+        "channel": "font-weight",
+        "ref": "{p.font-weight-medium}",
+        "computedProp": "font-weight",
+        "expected": "550",
+        "observed": "650",
+        "verdict": "contradiction",
+        "cause": "composition-owned typography: the primary variant label renders Text fontWeight 650 (semibold); the carried binding is font-weight-medium (550) — same composition-owned class"
+      },
+      {
+        "combo": "primary.critical.micro.enabled",
+        "part": "root",
+        "channel": "background-color",
+        "ref": "{p.color-bg-fill-brand}",
+        "computedProp": "background-color",
+        "expected": "rgba(48, 48, 48, 1)",
+        "observed": "rgba(199, 10, 36, 1)",
+        "verdict": "contradiction",
+        "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+      },
+      {
+        "combo": "primary.critical.micro.enabled",
+        "part": "root",
+        "channel": "box-shadow",
+        "ref": "{p.shadow-button-primary}",
+        "computedProp": "box-shadow",
+        "expected": "rgba(0, 0, 0, 0.8) 0px -1px 0px 1px inset, rgba(48, 48, 48, 1) 0px 0px 0px 1px inset, rgba(255, 255, 255, 0.25) 0px 0.5px 0px 1.5px inset",
+        "observed": "rgba(142, 31, 11, 0.8) 0px -1px 0px 1px inset, rgba(181, 38, 11, 0.8) 0px 0px 0px 1px inset, rgba(255, 255, 255, 0.35) 0px 0.5px 0px 1.5px inset",
+        "verdict": "contradiction",
+        "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+      },
+      {
+        "combo": "primary.critical.micro.enabled",
+        "part": "label",
+        "channel": "font-weight",
+        "ref": "{p.font-weight-medium}",
+        "computedProp": "font-weight",
+        "expected": "550",
+        "observed": "650",
+        "verdict": "contradiction",
+        "cause": "composition-owned typography: the primary variant label renders Text fontWeight 650 (semibold); the carried binding is font-weight-medium (550) — same composition-owned class"
+      },
+      {
+        "combo": "primary.critical.slim.enabled",
+        "part": "root",
+        "channel": "background-color",
+        "ref": "{p.color-bg-fill-brand}",
+        "computedProp": "background-color",
+        "expected": "rgba(48, 48, 48, 1)",
+        "observed": "rgba(199, 10, 36, 1)",
+        "verdict": "contradiction",
+        "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+      },
+      {
+        "combo": "primary.critical.slim.enabled",
+        "part": "root",
+        "channel": "box-shadow",
+        "ref": "{p.shadow-button-primary}",
+        "computedProp": "box-shadow",
+        "expected": "rgba(0, 0, 0, 0.8) 0px -1px 0px 1px inset, rgba(48, 48, 48, 1) 0px 0px 0px 1px inset, rgba(255, 255, 255, 0.25) 0px 0.5px 0px 1.5px inset",
+        "observed": "rgba(142, 31, 11, 0.8) 0px -1px 0px 1px inset, rgba(181, 38, 11, 0.8) 0px 0px 0px 1px inset, rgba(255, 255, 255, 0.35) 0px 0.5px 0px 1.5px inset",
+        "verdict": "contradiction",
+        "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+      },
+      {
+        "combo": "primary.critical.slim.enabled",
+        "part": "label",
+        "channel": "font-weight",
+        "ref": "{p.font-weight-medium}",
+        "computedProp": "font-weight",
+        "expected": "550",
+        "observed": "650",
+        "verdict": "contradiction",
+        "cause": "composition-owned typography: the primary variant label renders Text fontWeight 650 (semibold); the carried binding is font-weight-medium (550) — same composition-owned class"
+      },
+      {
+        "combo": "primary.critical.medium.enabled",
+        "part": "root",
+        "channel": "background-color",
+        "ref": "{p.color-bg-fill-brand}",
+        "computedProp": "background-color",
+        "expected": "rgba(48, 48, 48, 1)",
+        "observed": "rgba(199, 10, 36, 1)",
+        "verdict": "contradiction",
+        "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+      },
+      {
+        "combo": "primary.critical.medium.enabled",
+        "part": "root",
+        "channel": "box-shadow",
+        "ref": "{p.shadow-button-primary}",
+        "computedProp": "box-shadow",
+        "expected": "rgba(0, 0, 0, 0.8) 0px -1px 0px 1px inset, rgba(48, 48, 48, 1) 0px 0px 0px 1px inset, rgba(255, 255, 255, 0.25) 0px 0.5px 0px 1.5px inset",
+        "observed": "rgba(142, 31, 11, 0.8) 0px -1px 0px 1px inset, rgba(181, 38, 11, 0.8) 0px 0px 0px 1px inset, rgba(255, 255, 255, 0.35) 0px 0.5px 0px 1.5px inset",
+        "verdict": "contradiction",
+        "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+      },
+      {
+        "combo": "primary.critical.medium.enabled",
+        "part": "label",
+        "channel": "font-weight",
+        "ref": "{p.font-weight-medium}",
+        "computedProp": "font-weight",
+        "expected": "550",
+        "observed": "650",
+        "verdict": "contradiction",
+        "cause": "composition-owned typography: the primary variant label renders Text fontWeight 650 (semibold); the carried binding is font-weight-medium (550) — same composition-owned class"
+      },
+      {
+        "combo": "primary.critical.large.enabled",
+        "part": "root",
+        "channel": "background-color",
+        "ref": "{p.color-bg-fill-brand}",
+        "computedProp": "background-color",
+        "expected": "rgba(48, 48, 48, 1)",
+        "observed": "rgba(199, 10, 36, 1)",
+        "verdict": "contradiction",
+        "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+      },
+      {
+        "combo": "primary.critical.large.enabled",
+        "part": "root",
+        "channel": "box-shadow",
+        "ref": "{p.shadow-button-primary}",
+        "computedProp": "box-shadow",
+        "expected": "rgba(0, 0, 0, 0.8) 0px -1px 0px 1px inset, rgba(48, 48, 48, 1) 0px 0px 0px 1px inset, rgba(255, 255, 255, 0.25) 0px 0.5px 0px 1.5px inset",
+        "observed": "rgba(142, 31, 11, 0.8) 0px -1px 0px 1px inset, rgba(181, 38, 11, 0.8) 0px 0px 0px 1px inset, rgba(255, 255, 255, 0.35) 0px 0.5px 0px 1.5px inset",
+        "verdict": "contradiction",
+        "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+      },
+      {
+        "combo": "primary.critical.large.enabled",
+        "part": "label",
+        "channel": "font-weight",
+        "ref": "{p.font-weight-medium}",
+        "computedProp": "font-weight",
+        "expected": "550",
+        "observed": "650",
+        "verdict": "contradiction",
+        "cause": "composition-owned typography: the primary variant label renders Text fontWeight 650 (semibold); the carried binding is font-weight-medium (550) — same composition-owned class"
+      },
+      {
+        "combo": "primary.success.micro.enabled",
+        "part": "root",
+        "channel": "background-color",
+        "ref": "{p.color-bg-fill-brand}",
+        "computedProp": "background-color",
+        "expected": "rgba(48, 48, 48, 1)",
+        "observed": "rgba(4, 123, 93, 1)",
+        "verdict": "contradiction",
+        "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+      },
+      {
+        "combo": "primary.success.micro.enabled",
+        "part": "root",
+        "channel": "box-shadow",
+        "ref": "{p.shadow-button-primary}",
+        "computedProp": "box-shadow",
+        "expected": "rgba(0, 0, 0, 0.8) 0px -1px 0px 1px inset, rgba(48, 48, 48, 1) 0px 0px 0px 1px inset, rgba(255, 255, 255, 0.25) 0px 0.5px 0px 1.5px inset",
+        "observed": "rgba(12, 81, 50, 0.8) 0px -1px 0px 1px inset, rgba(19, 111, 69, 0.8) 0px 0px 0px 1px inset, rgba(255, 255, 255, 0.25) 0px 0.5px 0px 1.5px inset",
+        "verdict": "contradiction",
+        "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+      },
+      {
+        "combo": "primary.success.micro.enabled",
+        "part": "label",
+        "channel": "font-weight",
+        "ref": "{p.font-weight-medium}",
+        "computedProp": "font-weight",
+        "expected": "550",
+        "observed": "650",
+        "verdict": "contradiction",
+        "cause": "composition-owned typography: the primary variant label renders Text fontWeight 650 (semibold); the carried binding is font-weight-medium (550) — same composition-owned class"
+      },
+      {
+        "combo": "primary.success.slim.enabled",
+        "part": "root",
+        "channel": "background-color",
+        "ref": "{p.color-bg-fill-brand}",
+        "computedProp": "background-color",
+        "expected": "rgba(48, 48, 48, 1)",
+        "observed": "rgba(4, 123, 93, 1)",
+        "verdict": "contradiction",
+        "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+      },
+      {
+        "combo": "primary.success.slim.enabled",
+        "part": "root",
+        "channel": "box-shadow",
+        "ref": "{p.shadow-button-primary}",
+        "computedProp": "box-shadow",
+        "expected": "rgba(0, 0, 0, 0.8) 0px -1px 0px 1px inset, rgba(48, 48, 48, 1) 0px 0px 0px 1px inset, rgba(255, 255, 255, 0.25) 0px 0.5px 0px 1.5px inset",
+        "observed": "rgba(12, 81, 50, 0.8) 0px -1px 0px 1px inset, rgba(19, 111, 69, 0.8) 0px 0px 0px 1px inset, rgba(255, 255, 255, 0.25) 0px 0.5px 0px 1.5px inset",
+        "verdict": "contradiction",
+        "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+      },
+      {
+        "combo": "primary.success.slim.enabled",
+        "part": "label",
+        "channel": "font-weight",
+        "ref": "{p.font-weight-medium}",
+        "computedProp": "font-weight",
+        "expected": "550",
+        "observed": "650",
+        "verdict": "contradiction",
+        "cause": "composition-owned typography: the primary variant label renders Text fontWeight 650 (semibold); the carried binding is font-weight-medium (550) — same composition-owned class"
+      },
+      {
+        "combo": "primary.success.medium.enabled",
+        "part": "root",
+        "channel": "background-color",
+        "ref": "{p.color-bg-fill-brand}",
+        "computedProp": "background-color",
+        "expected": "rgba(48, 48, 48, 1)",
+        "observed": "rgba(4, 123, 93, 1)",
+        "verdict": "contradiction",
+        "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+      },
+      {
+        "combo": "primary.success.medium.enabled",
+        "part": "root",
+        "channel": "box-shadow",
+        "ref": "{p.shadow-button-primary}",
+        "computedProp": "box-shadow",
+        "expected": "rgba(0, 0, 0, 0.8) 0px -1px 0px 1px inset, rgba(48, 48, 48, 1) 0px 0px 0px 1px inset, rgba(255, 255, 255, 0.25) 0px 0.5px 0px 1.5px inset",
+        "observed": "rgba(12, 81, 50, 0.8) 0px -1px 0px 1px inset, rgba(19, 111, 69, 0.8) 0px 0px 0px 1px inset, rgba(255, 255, 255, 0.25) 0px 0.5px 0px 1.5px inset",
+        "verdict": "contradiction",
+        "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+      },
+      {
+        "combo": "primary.success.medium.enabled",
+        "part": "label",
+        "channel": "font-weight",
+        "ref": "{p.font-weight-medium}",
+        "computedProp": "font-weight",
+        "expected": "550",
+        "observed": "650",
+        "verdict": "contradiction",
+        "cause": "composition-owned typography: the primary variant label renders Text fontWeight 650 (semibold); the carried binding is font-weight-medium (550) — same composition-owned class"
+      },
+      {
+        "combo": "primary.success.large.enabled",
+        "part": "root",
+        "channel": "background-color",
+        "ref": "{p.color-bg-fill-brand}",
+        "computedProp": "background-color",
+        "expected": "rgba(48, 48, 48, 1)",
+        "observed": "rgba(4, 123, 93, 1)",
+        "verdict": "contradiction",
+        "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+      },
+      {
+        "combo": "primary.success.large.enabled",
+        "part": "root",
+        "channel": "box-shadow",
+        "ref": "{p.shadow-button-primary}",
+        "computedProp": "box-shadow",
+        "expected": "rgba(0, 0, 0, 0.8) 0px -1px 0px 1px inset, rgba(48, 48, 48, 1) 0px 0px 0px 1px inset, rgba(255, 255, 255, 0.25) 0px 0.5px 0px 1.5px inset",
+        "observed": "rgba(12, 81, 50, 0.8) 0px -1px 0px 1px inset, rgba(19, 111, 69, 0.8) 0px 0px 0px 1px inset, rgba(255, 255, 255, 0.25) 0px 0.5px 0px 1.5px inset",
+        "verdict": "contradiction",
+        "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+      },
+      {
+        "combo": "primary.success.large.enabled",
+        "part": "label",
+        "channel": "font-weight",
+        "ref": "{p.font-weight-medium}",
+        "computedProp": "font-weight",
+        "expected": "550",
+        "observed": "650",
+        "verdict": "contradiction",
+        "cause": "composition-owned typography: the primary variant label renders Text fontWeight 650 (semibold); the carried binding is font-weight-medium (550) — same composition-owned class"
+      },
+      {
+        "combo": "secondary.critical.micro.enabled",
+        "part": "root",
+        "channel": "color",
+        "ref": "{p.color-text}",
+        "computedProp": "color",
+        "expected": "rgba(48, 48, 48, 1)",
+        "observed": "rgba(142, 11, 33, 1)",
+        "verdict": "contradiction",
+        "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+      },
+      {
+        "combo": "secondary.critical.slim.enabled",
+        "part": "root",
+        "channel": "color",
+        "ref": "{p.color-text}",
+        "computedProp": "color",
+        "expected": "rgba(48, 48, 48, 1)",
+        "observed": "rgba(142, 11, 33, 1)",
+        "verdict": "contradiction",
+        "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+      },
+      {
+        "combo": "secondary.critical.medium.enabled",
+        "part": "root",
+        "channel": "color",
+        "ref": "{p.color-text}",
+        "computedProp": "color",
+        "expected": "rgba(48, 48, 48, 1)",
+        "observed": "rgba(142, 11, 33, 1)",
+        "verdict": "contradiction",
+        "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+      },
+      {
+        "combo": "secondary.critical.large.enabled",
+        "part": "root",
+        "channel": "color",
+        "ref": "{p.color-text}",
+        "computedProp": "color",
+        "expected": "rgba(48, 48, 48, 1)",
+        "observed": "rgba(142, 11, 33, 1)",
+        "verdict": "contradiction",
+        "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+      },
+      {
+        "combo": "secondary.success.micro.enabled",
+        "part": "root",
+        "channel": "color",
+        "ref": "{p.color-text}",
+        "computedProp": "color",
+        "expected": "rgba(48, 48, 48, 1)",
+        "observed": "rgba(1, 75, 64, 1)",
+        "verdict": "contradiction",
+        "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+      },
+      {
+        "combo": "secondary.success.slim.enabled",
+        "part": "root",
+        "channel": "color",
+        "ref": "{p.color-text}",
+        "computedProp": "color",
+        "expected": "rgba(48, 48, 48, 1)",
+        "observed": "rgba(1, 75, 64, 1)",
+        "verdict": "contradiction",
+        "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+      },
+      {
+        "combo": "secondary.success.medium.enabled",
+        "part": "root",
+        "channel": "color",
+        "ref": "{p.color-text}",
+        "computedProp": "color",
+        "expected": "rgba(48, 48, 48, 1)",
+        "observed": "rgba(1, 75, 64, 1)",
+        "verdict": "contradiction",
+        "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+      },
+      {
+        "combo": "secondary.success.large.enabled",
+        "part": "root",
+        "channel": "color",
+        "ref": "{p.color-text}",
+        "computedProp": "color",
+        "expected": "rgba(48, 48, 48, 1)",
+        "observed": "rgba(1, 75, 64, 1)",
+        "verdict": "contradiction",
+        "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+      },
+      {
+        "combo": "tertiary.critical.micro.enabled",
+        "part": "root",
+        "channel": "color",
+        "ref": "{p.color-text}",
+        "computedProp": "color",
+        "expected": "rgba(48, 48, 48, 1)",
+        "observed": "rgba(142, 11, 33, 1)",
+        "verdict": "contradiction",
+        "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+      },
+      {
+        "combo": "tertiary.critical.slim.enabled",
+        "part": "root",
+        "channel": "color",
+        "ref": "{p.color-text}",
+        "computedProp": "color",
+        "expected": "rgba(48, 48, 48, 1)",
+        "observed": "rgba(142, 11, 33, 1)",
+        "verdict": "contradiction",
+        "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+      },
+      {
+        "combo": "tertiary.critical.medium.enabled",
+        "part": "root",
+        "channel": "color",
+        "ref": "{p.color-text}",
+        "computedProp": "color",
+        "expected": "rgba(48, 48, 48, 1)",
+        "observed": "rgba(142, 11, 33, 1)",
+        "verdict": "contradiction",
+        "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+      },
+      {
+        "combo": "tertiary.critical.large.enabled",
+        "part": "root",
+        "channel": "color",
+        "ref": "{p.color-text}",
+        "computedProp": "color",
+        "expected": "rgba(48, 48, 48, 1)",
+        "observed": "rgba(142, 11, 33, 1)",
+        "verdict": "contradiction",
+        "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+      },
+      {
+        "combo": "tertiary.success.micro.enabled",
+        "part": "root",
+        "channel": "color",
+        "ref": "{p.color-text}",
+        "computedProp": "color",
+        "expected": "rgba(48, 48, 48, 1)",
+        "observed": "rgba(1, 75, 64, 1)",
+        "verdict": "contradiction",
+        "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+      },
+      {
+        "combo": "tertiary.success.slim.enabled",
+        "part": "root",
+        "channel": "color",
+        "ref": "{p.color-text}",
+        "computedProp": "color",
+        "expected": "rgba(48, 48, 48, 1)",
+        "observed": "rgba(1, 75, 64, 1)",
+        "verdict": "contradiction",
+        "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+      },
+      {
+        "combo": "tertiary.success.medium.enabled",
+        "part": "root",
+        "channel": "color",
+        "ref": "{p.color-text}",
+        "computedProp": "color",
+        "expected": "rgba(48, 48, 48, 1)",
+        "observed": "rgba(1, 75, 64, 1)",
+        "verdict": "contradiction",
+        "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+      },
+      {
+        "combo": "tertiary.success.large.enabled",
+        "part": "root",
+        "channel": "color",
+        "ref": "{p.color-text}",
+        "computedProp": "color",
+        "expected": "rgba(48, 48, 48, 1)",
+        "observed": "rgba(1, 75, 64, 1)",
+        "verdict": "contradiction",
+        "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+      },
+      {
+        "combo": "monochromePlain.none.slim.enabled",
+        "part": "label",
+        "channel": "font-size",
+        "ref": "{p.text-body-sm-font-size}",
+        "computedProp": "font-size",
+        "expected": "12px",
+        "observed": "13px",
+        "verdict": "contradiction",
+        "cause": "composition-owned typography: the monochromePlain variant renders its label through the Text primitive at bodyMd (13px/20px); the carried binding is the bodySm default — child-component props conditioned on the parent variant, invisible to single-file static promotion"
+      },
+      {
+        "combo": "monochromePlain.none.slim.enabled",
+        "part": "label",
+        "channel": "line-height",
+        "ref": "{p.text-body-sm-font-line-height}",
+        "computedProp": "line-height",
+        "expected": "16px",
+        "observed": "20px",
+        "verdict": "contradiction",
+        "cause": "composition-owned typography: the monochromePlain variant renders its label through the Text primitive at bodyMd (13px/20px); the carried binding is the bodySm default — child-component props conditioned on the parent variant, invisible to single-file static promotion"
+      },
+      {
+        "combo": "monochromePlain.none.medium.enabled",
+        "part": "label",
+        "channel": "font-size",
+        "ref": "{p.text-body-sm-font-size}",
+        "computedProp": "font-size",
+        "expected": "12px",
+        "observed": "13px",
+        "verdict": "contradiction",
+        "cause": "composition-owned typography: the monochromePlain variant renders its label through the Text primitive at bodyMd (13px/20px); the carried binding is the bodySm default — child-component props conditioned on the parent variant, invisible to single-file static promotion"
+      },
+      {
+        "combo": "monochromePlain.none.medium.enabled",
+        "part": "label",
+        "channel": "line-height",
+        "ref": "{p.text-body-sm-font-line-height}",
+        "computedProp": "line-height",
+        "expected": "16px",
+        "observed": "20px",
+        "verdict": "contradiction",
+        "cause": "composition-owned typography: the monochromePlain variant renders its label through the Text primitive at bodyMd (13px/20px); the carried binding is the bodySm default — child-component props conditioned on the parent variant, invisible to single-file static promotion"
+      },
+      {
+        "combo": "monochromePlain.critical.slim.enabled",
+        "part": "label",
+        "channel": "font-size",
+        "ref": "{p.text-body-sm-font-size}",
+        "computedProp": "font-size",
+        "expected": "12px",
+        "observed": "13px",
+        "verdict": "contradiction",
+        "cause": "composition-owned typography: the monochromePlain variant renders its label through the Text primitive at bodyMd (13px/20px); the carried binding is the bodySm default — child-component props conditioned on the parent variant, invisible to single-file static promotion"
+      },
+      {
+        "combo": "monochromePlain.critical.slim.enabled",
+        "part": "label",
+        "channel": "line-height",
+        "ref": "{p.text-body-sm-font-line-height}",
+        "computedProp": "line-height",
+        "expected": "16px",
+        "observed": "20px",
+        "verdict": "contradiction",
+        "cause": "composition-owned typography: the monochromePlain variant renders its label through the Text primitive at bodyMd (13px/20px); the carried binding is the bodySm default — child-component props conditioned on the parent variant, invisible to single-file static promotion"
+      },
+      {
+        "combo": "monochromePlain.critical.medium.enabled",
+        "part": "label",
+        "channel": "font-size",
+        "ref": "{p.text-body-sm-font-size}",
+        "computedProp": "font-size",
+        "expected": "12px",
+        "observed": "13px",
+        "verdict": "contradiction",
+        "cause": "composition-owned typography: the monochromePlain variant renders its label through the Text primitive at bodyMd (13px/20px); the carried binding is the bodySm default — child-component props conditioned on the parent variant, invisible to single-file static promotion"
+      },
+      {
+        "combo": "monochromePlain.critical.medium.enabled",
+        "part": "label",
+        "channel": "line-height",
+        "ref": "{p.text-body-sm-font-line-height}",
+        "computedProp": "line-height",
+        "expected": "16px",
+        "observed": "20px",
+        "verdict": "contradiction",
+        "cause": "composition-owned typography: the monochromePlain variant renders its label through the Text primitive at bodyMd (13px/20px); the carried binding is the bodySm default — child-component props conditioned on the parent variant, invisible to single-file static promotion"
+      },
+      {
+        "combo": "monochromePlain.success.slim.enabled",
+        "part": "label",
+        "channel": "font-size",
+        "ref": "{p.text-body-sm-font-size}",
+        "computedProp": "font-size",
+        "expected": "12px",
+        "observed": "13px",
+        "verdict": "contradiction",
+        "cause": "composition-owned typography: the monochromePlain variant renders its label through the Text primitive at bodyMd (13px/20px); the carried binding is the bodySm default — child-component props conditioned on the parent variant, invisible to single-file static promotion"
+      },
+      {
+        "combo": "monochromePlain.success.slim.enabled",
+        "part": "label",
+        "channel": "line-height",
+        "ref": "{p.text-body-sm-font-line-height}",
+        "computedProp": "line-height",
+        "expected": "16px",
+        "observed": "20px",
+        "verdict": "contradiction",
+        "cause": "composition-owned typography: the monochromePlain variant renders its label through the Text primitive at bodyMd (13px/20px); the carried binding is the bodySm default — child-component props conditioned on the parent variant, invisible to single-file static promotion"
+      },
+      {
+        "combo": "monochromePlain.success.medium.enabled",
+        "part": "label",
+        "channel": "font-size",
+        "ref": "{p.text-body-sm-font-size}",
+        "computedProp": "font-size",
+        "expected": "12px",
+        "observed": "13px",
+        "verdict": "contradiction",
+        "cause": "composition-owned typography: the monochromePlain variant renders its label through the Text primitive at bodyMd (13px/20px); the carried binding is the bodySm default — child-component props conditioned on the parent variant, invisible to single-file static promotion"
+      },
+      {
+        "combo": "monochromePlain.success.medium.enabled",
+        "part": "label",
+        "channel": "line-height",
+        "ref": "{p.text-body-sm-font-line-height}",
+        "computedProp": "line-height",
+        "expected": "16px",
+        "observed": "20px",
+        "verdict": "contradiction",
+        "cause": "composition-owned typography: the monochromePlain variant renders its label through the Text primitive at bodyMd (13px/20px); the carried binding is the bodySm default — child-component props conditioned on the parent variant, invisible to single-file static promotion"
+      }
+    ]
+  },
+  "minted": {
+    "leaves": 863,
+    "baseBindings": 38,
+    "stateBindings": 92,
+    "byShape": {
+      "uniform": 17,
+      "perAxis": 25,
+      "perPair": 47,
+      "refused": 41
+    }
+  },
+  "codeOnly": {
+    "base": 25,
+    "state": 20,
+    "overflowBindings": 50
+  },
+  "pseudoElementFindings": 0,
+  "enrichedContractSchemaValid": true,
+  "replayComputedEquality": {
+    "cellsCompared": 902400,
+    "cellsMatched": 901920,
+    "pct": 99.94680851063829,
+    "namedExclusions": [
+      "app-region",
+      "text-decoration"
+    ],
+    "topMismatchedChannels": [
+      [
+        "inline-size",
+        192
+      ],
+      [
+        "width",
+        192
+      ],
+      [
+        "perspective-origin",
+        96
+      ]
+    ]
+  },
+  "pixel": {
+    "pairs": 480,
+    "exact": {
+      "mean": 0.017181396484374976,
+      "max": 1.1287434895833333,
+      "perfect": 369
+    },
+    "aa": {
+      "mean": 0,
+      "max": 0,
+      "perfect": 480
+    },
+    "worst": [
+      {
+        "key": "primary.none.micro.enabled__hover",
+        "pctExact": 1.1287434895833333,
+        "pctAA": 0
+      },
+      {
+        "key": "primary.none.micro.enabled__focus-visible",
+        "pctExact": 1.1287434895833333,
+        "pctAA": 0
+      },
+      {
+        "key": "primary.none.micro.enabled__active",
+        "pctExact": 0.966796875,
+        "pctAA": 0
+      },
+      {
+        "key": "secondary.critical.large.enabled__active",
+        "pctExact": 0.3971354166666667,
+        "pctAA": 0
+      },
+      {
+        "key": "secondary.critical.micro.enabled__active",
+        "pctExact": 0.3963216145833333,
+        "pctAA": 0
+      },
+      {
+        "key": "secondary.critical.slim.enabled__active",
+        "pctExact": 0.3963216145833333,
+        "pctAA": 0
+      },
+      {
+        "key": "secondary.critical.medium.enabled__active",
+        "pctExact": 0.3963216145833333,
+        "pctAA": 0
+      },
+      {
+        "key": "secondary.success.micro.enabled__active",
+        "pctExact": 0.3531901041666667,
+        "pctAA": 0
+      }
+    ]
+  },
+  "focusVisibleDriverMatched": 60,
+  "focusVisibleDriverTotal": 120,
+  "runtimeSeconds": 143
+}
