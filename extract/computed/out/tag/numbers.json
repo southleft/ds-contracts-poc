@@ -66,9 +66,9 @@
   "pixel": {
     "pairs": 8,
     "exact": {
-      "mean": 0.001220703125,
-      "max": 0.00244140625,
-      "perfect": 4
+      "mean": 0,
+      "max": 0,
+      "perfect": 8
     },
     "aa": {
       "mean": 0,
@@ -78,22 +78,22 @@
     "worst": [
       {
         "key": "enabled__default",
-        "pctExact": 0.00244140625,
+        "pctExact": 0,
         "pctAA": 0
       },
       {
         "key": "enabled__hover",
-        "pctExact": 0.00244140625,
+        "pctExact": 0,
         "pctAA": 0
       },
       {
         "key": "enabled__focus-visible",
-        "pctExact": 0.00244140625,
+        "pctExact": 0,
         "pctAA": 0
       },
       {
         "key": "enabled__active",
-        "pctExact": 0.00244140625,
+        "pctExact": 0,
         "pctAA": 0
       },
       {
