@@ -26,3 +26,12 @@ playground/public/ds-contracts-sync-runner-plugin.zip
 # replay offline; manifest is written alongside, also ignored)
 extract/figma/gauntlet/live/out/
 .gauntlet-live-cache/
+
+# computed-capture floor: transient render surfaces + per-pair screenshots
+# (the committed artifacts are the JSON receipts + a few paired receipts)
+extract/computed/out/.orig-shots/
+extract/computed/out/**/gate-shots/
+extract/computed/out/**/.replay-shots/
+extract/computed/out/**/gate.html
+extract/computed/out/**/replay.html
+evals/.computed-replay.html

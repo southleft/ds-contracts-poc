@@ -54,6 +54,7 @@ import {
   applyMintToContract,
   boundCheck,
   detectFolds,
+  enrichLayout,
   prepareMint,
   pseudoFindings,
   styledChannels,
@@ -192,6 +193,10 @@ async function main() {
       const a = hex[2] ? Math.round((parseInt(hex[2], 16) / 255) * 10000) / 10000 : 1;
       return `rgba(${(n >> 16) & 255}, ${(n >> 8) & 255}, ${n & 255}, ${a})`;
     }
+    // rem → px at the capture context's 16px root (html font-size is never
+    // overridden by the harness — pinned in provenance)
+    const rem = /^(-?\d+(?:\.\d+)?)rem$/.exec(v);
+    if (rem) return `${Number((Number(rem[1]) * 16).toFixed(4)).toString()}px`;
     return v;
   };
   const candidatesFor = (observed: string): string[] =>
@@ -223,11 +228,12 @@ async function main() {
     const contradictions = boundRows.filter((r) => r.verdict !== 'confirmed');
     console.log(`    bound: ${boundConfirmed}/${boundRows.length} confirmed · ${contradictions.length} contradictions (${untriaged.length} untriaged) · ${folds.length} folds`);
 
-    const prep = prepareMint(aligned, comp, space, styled, folds);
+    const layout = enrichLayout(aligned, space, styled);
+    const prep = prepareMint(aligned, comp, space, styled, folds, layout.handled);
     const mintBase = mintTokens(comp.name, prep.baseObs, prep.axes);
     const mintStates = mintTokens(comp.name, prep.stateObs, prep.axes);
     const { enriched, overflowBindings, enrichmentNotes } = applyMintToContract(
-      space.contract, space, mintBase, prep.baseObs, mintStates, prep.stateObs,
+      space.contract, space, mintBase, prep.baseObs, mintStates, prep.stateObs, layout.enriched,
     );
 
     const mergedTree = structuredClone(mintBase.tree) as Record<string, unknown>;
@@ -294,6 +300,12 @@ async function main() {
       mintedTokens: mergedTree,
       folds,
       foldedStateSkips: prep.foldedStateSkips,
+      layout: {
+        enriched: layout.enriched,
+        contradictions: layout.contradictions,
+        receipts: layout.receipts,
+        _note: 'computed flex keywords carried via Part.layout (the schema\'s own vocabulary); carried-slot contradictions are receipts, never silent overrides',
+      },
       codeOnlyChannels: prep.codeOnly,
       stateOverflow: prep.stateCodeOnly,
       overflowBindings,

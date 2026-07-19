@@ -231,6 +231,81 @@ export function detectFolds(a: AlignedSweep, styled: Map<string, Set<string>>): 
 }
 
 // ---------------------------------------------------------------------------
+// LAYOUT enrichment: computed flex keywords → the contract's OWN layout
+// vocabulary (Part.layout). These channels are keyword-valued, so they can
+// never mint — but the schema already has slots for them. Uniform observed
+// values enrich absent slots; a carried slot that CONTRADICTS the computed
+// truth becomes a named receipt (never silently overridden — the reviewed
+// static layer wins values, the floor wins truth).
+// ---------------------------------------------------------------------------
+const LAYOUT_CHANNEL_TO_FIELD: Record<string, { field: 'display' | 'direction' | 'align' | 'justify'; map: Record<string, string> }> = {
+  display: { field: 'display', map: { flex: 'flex', 'inline-flex': 'inline-flex' } },
+  'flex-direction': { field: 'direction', map: { row: 'row', column: 'column' } },
+  'align-items': { field: 'align', map: { 'flex-start': 'start', center: 'center', 'flex-end': 'end', stretch: 'stretch' } },
+  'justify-content': { field: 'justify', map: { 'flex-start': 'start', center: 'center', 'flex-end': 'end', 'space-between': 'space-between' } },
+};
+
+export interface LayoutEnrichment {
+  /** per part: layout channels consumed here (excluded from minting). */
+  handled: Map<string, Set<string>>;
+  enriched: Array<{ part: string; field: string; value: string }>;
+  contradictions: Array<{ part: string; field: string; carried: string; observed: string }>;
+  receipts: string[];
+}
+
+/** DETECTION ONLY (pure): reads the STATIC contract's layout slots; the
+ *  enrichments are applied to the enriched clone by applyMintToContract. */
+export function enrichLayout(
+  a: AlignedSweep,
+  space: PropSpace,
+  styled: Map<string, Set<string>>,
+): LayoutEnrichment {
+  const staticParts = new Map(walkAnatomy(space.contract).map((w) => [w.name, w.part] as const));
+  const out: LayoutEnrichment = { handled: new Map(), enriched: [], contradictions: [], receipts: [] };
+  const enabled = space.enumeration.combos.filter(isEnabled);
+  for (let pi = 0; pi < a.baseFlat.length; pi++) {
+    const partName = a.partNames[pi];
+    const target = staticParts.get(partName);
+    const channels = styled.get(partName);
+    if (!target || !channels) continue;
+    // only flex containers speak the layout vocabulary
+    const baseDisplay = a.baseFlat[pi].node.style['display'];
+    if (baseDisplay !== 'flex' && baseDisplay !== 'inline-flex') continue;
+    for (const [channel, spec] of Object.entries(LAYOUT_CHANNEL_TO_FIELD)) {
+      if (!channels.has(channel)) continue;
+      const values = new Set<string>();
+      for (const combo of enabled) {
+        const el = a.getAligned(`${combo.key}__default`)[pi];
+        if (el) values.add(el.node.style[channel]);
+      }
+      if (values.size !== 1) {
+        out.receipts.push(`layout-not-uniform: ${partName}.${channel} varies across combos — stays code-only`);
+        continue;
+      }
+      const observed = [...values][0];
+      const canonical = spec.map[observed];
+      const handledSet = out.handled.get(partName) ?? new Set<string>();
+      out.handled.set(partName, handledSet);
+      const carried = target.layout?.[spec.field];
+      if (carried !== undefined) {
+        handledSet.add(channel);
+        if (canonical !== carried) {
+          out.contradictions.push({ part: partName, field: spec.field, carried: String(carried), observed });
+        }
+        continue;
+      }
+      if (canonical === undefined) {
+        out.receipts.push(`layout-value-outside-vocabulary: ${partName}.${channel} = "${observed}" — stays code-only`);
+        continue;
+      }
+      handledSet.add(channel);
+      out.enriched.push({ part: partName, field: spec.field, value: canonical });
+    }
+  }
+  return out;
+}
+
+// ---------------------------------------------------------------------------
 // BOUND (§5.1): the static layer's carried bindings, browser-probed to
 // canonical values, confirmed or contradicted per combo.
 // ---------------------------------------------------------------------------
@@ -377,6 +452,7 @@ export function prepareMint(
   space: PropSpace,
   styled: Map<string, Set<string>>,
   folds: FoldReceipt[],
+  layoutHandled?: Map<string, Set<string>>,
 ): MintPrep {
   const axes: MintAxis[] = space.axes.map((ax) => ({ propName: ax.prop, values: [...ax.values] }));
   const partByName = new Map(walkAnatomy(space.contract).map((w) => [w.name, w.part] as const));
@@ -392,6 +468,7 @@ export function prepareMint(
       const carried = carriedChannels(partByName.get(partName));
       for (const channel of [...(styled.get(partName) ?? [])].sort()) {
         if (carried.has(channel)) continue;
+        if (layoutHandled?.get(partName)?.has(channel)) continue; // carried by Part.layout (enrichLayout)
         if (skipFolds && foldedSet.has(`${partName}|${channel}`)) continue;
         const occurrences: MintObservation['occurrences'] = [];
         const rows: Array<{ axisValues: Record<string, string>; value: string }> = [];
@@ -581,11 +658,19 @@ export function applyMintToContract(
   baseObs: MintObservation[],
   mintStates: MintResult,
   stateObs: MintObservation[],
+  layoutEnrichments: LayoutEnrichment['enriched'] = [],
 ): ApplyResult {
   const enriched = structuredClone(contract) as Contract & Record<string, unknown>;
   const overflowBindings: OverflowBinding[] = [];
   const enrichmentNotes: string[] = [];
   const partByName = new Map(walkAnatomy(enriched).map((w) => [w.name, w.part] as const));
+  for (const le of layoutEnrichments) {
+    const target = partByName.get(le.part);
+    if (!target) continue;
+    target.layout ??= {};
+    (target.layout as Record<string, string>)[le.field] = le.value;
+    enrichmentNotes.push(`layout enriched: ${le.part}.layout.${le.field} = ${le.value} (uniform computed keyword — the schema's own vocabulary)`);
+  }
   const unsetAxes = new Map(space.axes.filter((ax) => ax.unset !== undefined).map((ax) => [ax.prop, ax.unset!] as const));
 
   const perAxisAdditions = new Map<string, Map<string, Record<string, Record<string, string>>>>(); // part → prop → value → channel → ref
@@ -653,19 +738,21 @@ export function applyMintToContract(
           return;
         }
         if (unsetPh) {
-          // unset-axis state ref: carry the BASE (unset) plane; the set
-          // planes are S3 residue, named — root states cannot spell "axis
-          // value AND state" beyond one substitution today.
+          // unset-axis state ref: carry the BASE (unset) plane — after
+          // pinning the unset slot the ref has ≤1 remaining placeholder,
+          // which root states DO carry (the emitters expand it per enum
+          // class). The set planes are S3 residue, named — root states
+          // cannot spell "axis value AND state" beyond one substitution.
           const reduced = `{${inner.replaceAll(`{${unsetPh}}`, unsetAxes.get(unsetPh)!)}}`;
           const remaining = placeholdersOf(reduced.slice(1, -1));
-          if (remaining.length === 0) {
+          if (remaining.length <= 1) {
             target.states ??= {};
             target.states[state] ??= {};
             if (!(channel in target.states[state])) { target.states[state][channel] = reduced; declareState(); }
             overflowBindings.push({ part: partName, channel, state, ref: b.ref, refusal: `state×${unsetPh} set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)` });
             return;
           }
-          overflowBindings.push({ part: partName, channel, state, ref: b.ref, refusal: 'state pair ref with unset axis — root states carry ≤1 placeholder (S3 residue)' });
+          overflowBindings.push({ part: partName, channel, state, ref: b.ref, refusal: 'state ref with >1 placeholder after unset pinning — beyond root-state vocabulary (S3 residue)' });
           return;
         }
         overflowBindings.push({ part: partName, channel, state, ref: b.ref, refusal: 'state pair ref — root states carry ≤1 placeholder (S3 residue)' });
