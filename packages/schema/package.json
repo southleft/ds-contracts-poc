@@ -1,7 +1,7 @@
 {
   "name": "@ds-contracts/schema",
   "version": "15.0.0",
-  "description": "The ds-contracts component contract schema — the single Zod document (spec v15), its generated JSON Schema, and the schema-level validateContract referee.",
+  "description": "The ds-contracts component contract schema \u2014 the single Zod document (spec v15), its generated JSON Schema, and the schema-level validateContract referee.",
   "license": "MIT",
   "type": "module",
   "main": "./dist/index.js",
@@ -27,5 +27,12 @@
   },
   "devDependencies": {
     "typescript": "^6.0.3"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/southleft/ds-contracts-poc.git",
+    "directory": "packages/schema"
+  },
+  "homepage": "https://ds-contracts-spec.pages.dev",
+  "bugs": "https://github.com/southleft/ds-contracts-poc/issues"
 }

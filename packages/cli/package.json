@@ -1,7 +1,7 @@
 {
   "name": "@ds-contracts/cli",
   "version": "0.1.0",
-  "description": "ds-contracts — contracts as the deterministic bridge between design and code. init / extract / generate / figma / diff / propose-pr over the same engine the reference repo ships.",
+  "description": "ds-contracts \u2014 contracts as the deterministic bridge between design and code. init / extract / generate / figma / diff / propose-pr over the same engine the reference repo ships.",
   "license": "MIT",
   "type": "module",
   "bin": {
@@ -20,5 +20,12 @@
   },
   "optionalDependencies": {
     "playwright-core": "^1.61.1"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/southleft/ds-contracts-poc.git",
+    "directory": "packages/cli"
+  },
+  "homepage": "https://ds-contracts-spec.pages.dev",
+  "bugs": "https://github.com/southleft/ds-contracts-poc/issues"
 }
