@@ -1,0 +1,819 @@
+{
+  "_marker": "NON-SCHEMA EXTENSION BLOCK — computed-capture overflow. Nothing here is contract vocabulary; every entry names why it does not fit (DESIGN §5.4).",
+  "generatedBy": "extract/computed/run.ts",
+  "library": "@shopify/polaris@13.9.5",
+  "browser": "148.0.7778.96",
+  "mintedTokens": {
+    "imported": {
+      "avatar": {
+        "root": {
+          "border-bottom-left-radius": {
+            "xs": {
+              "$value": "4px",
+              "$type": "dimension"
+            },
+            "sm": {
+              "$value": "6px",
+              "$type": "dimension"
+            },
+            "md": {
+              "$value": "6px",
+              "$type": "dimension"
+            },
+            "lg": {
+              "$value": "8px",
+              "$type": "dimension"
+            },
+            "xl": {
+              "$value": "8px",
+              "$type": "dimension"
+            }
+          },
+          "border-bottom-right-radius": {
+            "xs": {
+              "$value": "4px",
+              "$type": "dimension"
+            },
+            "sm": {
+              "$value": "6px",
+              "$type": "dimension"
+            },
+            "md": {
+              "$value": "6px",
+              "$type": "dimension"
+            },
+            "lg": {
+              "$value": "8px",
+              "$type": "dimension"
+            },
+            "xl": {
+              "$value": "8px",
+              "$type": "dimension"
+            }
+          },
+          "border-top-left-radius": {
+            "xs": {
+              "$value": "4px",
+              "$type": "dimension"
+            },
+            "sm": {
+              "$value": "6px",
+              "$type": "dimension"
+            },
+            "md": {
+              "$value": "6px",
+              "$type": "dimension"
+            },
+            "lg": {
+              "$value": "8px",
+              "$type": "dimension"
+            },
+            "xl": {
+              "$value": "8px",
+              "$type": "dimension"
+            }
+          },
+          "border-top-right-radius": {
+            "xs": {
+              "$value": "4px",
+              "$type": "dimension"
+            },
+            "sm": {
+              "$value": "6px",
+              "$type": "dimension"
+            },
+            "md": {
+              "$value": "6px",
+              "$type": "dimension"
+            },
+            "lg": {
+              "$value": "8px",
+              "$type": "dimension"
+            },
+            "xl": {
+              "$value": "8px",
+              "$type": "dimension"
+            }
+          }
+        },
+        "part-0-0-0": {
+          "stroke-width": {
+            "xs": {
+              "$value": "3px",
+              "$type": "dimension"
+            },
+            "sm": {
+              "$value": "2.5px",
+              "$type": "dimension"
+            },
+            "md": {
+              "$value": "2.5px",
+              "$type": "dimension"
+            },
+            "lg": {
+              "$value": "2.5px",
+              "$type": "dimension"
+            },
+            "xl": {
+              "$value": "2px",
+              "$type": "dimension"
+            }
+          }
+        },
+        "part-0-0-1": {
+          "stroke-width": {
+            "xs": {
+              "$value": "3px",
+              "$type": "dimension"
+            },
+            "sm": {
+              "$value": "2.5px",
+              "$type": "dimension"
+            },
+            "md": {
+              "$value": "2.5px",
+              "$type": "dimension"
+            },
+            "lg": {
+              "$value": "2.5px",
+              "$type": "dimension"
+            },
+            "xl": {
+              "$value": "2px",
+              "$type": "dimension"
+            }
+          }
+        }
+      },
+      "shared": {
+        "size-0": {
+          "$value": "0px",
+          "$type": "dimension"
+        },
+        "color-fdeffd": {
+          "$value": "#fdeffd",
+          "$type": "color"
+        }
+      }
+    }
+  },
+  "folds": [
+    {
+      "part": "root",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "initials",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "initials",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "initials",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "initials",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "initials",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "initials",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "initials",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "initials",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "initials",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0.0.0",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0.0.0",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0.0.0",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0.0.0",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0.0.0",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0.0.0",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0.0.0",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0.0.0",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0.0.0",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0.0.1",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0.0.1",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0.0.1",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0.0.1",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0.0.1",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0.0.1",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0.0.1",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0.0.1",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0.0.1",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    }
+  ],
+  "foldedStateSkips": [],
+  "layout": {
+    "enriched": [
+      {
+        "part": "initials",
+        "field": "display",
+        "value": "flex"
+      },
+      {
+        "part": "initials",
+        "field": "align",
+        "value": "center"
+      },
+      {
+        "part": "initials",
+        "field": "justify",
+        "value": "center"
+      }
+    ],
+    "contradictions": [],
+    "receipts": [],
+    "_note": "computed flex keywords carried via Part.layout (the schema's own vocabulary); carried-slot contradictions are receipts, never silent overrides"
+  },
+  "declaredFacts": {
+    "_note": "v15 (S4): uniform registry-channel facts carried as Part.declared / Part.declaredStates — first-class contract vocabulary, listed here as the enrichment receipt",
+    "base": [
+      {
+        "part": "root",
+        "channel": "max-width",
+        "value": "100%"
+      },
+      {
+        "part": "root",
+        "channel": "overflow-x",
+        "value": "hidden"
+      },
+      {
+        "part": "root",
+        "channel": "overflow-y",
+        "value": "hidden"
+      },
+      {
+        "part": "root",
+        "channel": "position",
+        "value": "relative"
+      },
+      {
+        "part": "root",
+        "channel": "user-select",
+        "value": "none"
+      },
+      {
+        "part": "initials",
+        "channel": "user-select",
+        "value": "none"
+      }
+    ],
+    "state": []
+  },
+  "codeOnlyChannels": [
+    {
+      "part": "initials",
+      "channel": "position",
+      "reason": "declared-channel value outside the bounded grammar — named residue (v15)",
+      "sample": "absolute",
+      "distinctValues": 1
+    },
+    {
+      "part": "icon",
+      "channel": "overflow-clip-margin",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "content-box",
+      "distinctValues": 1
+    },
+    {
+      "part": "icon",
+      "channel": "overflow-x",
+      "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
+      "sample": "hidden",
+      "distinctValues": 1
+    },
+    {
+      "part": "icon",
+      "channel": "overflow-y",
+      "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
+      "sample": "hidden",
+      "distinctValues": 1
+    },
+    {
+      "part": "icon",
+      "channel": "user-select",
+      "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
+      "sample": "none",
+      "distinctValues": 1
+    },
+    {
+      "part": "part-0.0.0",
+      "channel": "d",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "path(\"M 25.5 13.5 C 25.5 16.5376 23.0376 19 20 19 C 16.9624 19 14.5 16.5376 14.5 13.5 C 14.5 10.4624 16.9624 8 20 8 C 23.0376 8 25.5 10.4624 25.5 13.5 Z\")",
+      "distinctValues": 1
+    },
+    {
+      "part": "part-0.0.0",
+      "channel": "display",
+      "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
+      "sample": "inline",
+      "distinctValues": 1
+    },
+    {
+      "part": "part-0.0.0",
+      "channel": "fill",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "none",
+      "distinctValues": 1
+    },
+    {
+      "part": "part-0.0.0",
+      "channel": "user-select",
+      "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
+      "sample": "none",
+      "distinctValues": 1
+    },
+    {
+      "part": "part-0.0.1",
+      "channel": "d",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "path(\"M 10.3433 29.682 L 9.47 31.254 C 9.03481 32.0373 9.60125 33 10.4974 33 H 29.5026 C 30.3988 33 30.9652 32.0373 30.53 31.254 L 29.6567 29.682 C 27.7084 26.175 24.0119 24 20 24 C 15.9882 24 12.2916 26.175 10.3433 29.682 Z\")",
+      "distinctValues": 1
+    },
+    {
+      "part": "part-0.0.1",
+      "channel": "display",
+      "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
+      "sample": "inline",
+      "distinctValues": 1
+    },
+    {
+      "part": "part-0.0.1",
+      "channel": "fill",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "none",
+      "distinctValues": 1
+    },
+    {
+      "part": "part-0.0.1",
+      "channel": "stroke-linecap",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "round",
+      "distinctValues": 1
+    },
+    {
+      "part": "part-0.0.1",
+      "channel": "stroke-linejoin",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "round",
+      "distinctValues": 1
+    },
+    {
+      "part": "part-0.0.1",
+      "channel": "user-select",
+      "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
+      "sample": "none",
+      "distinctValues": 1
+    }
+  ],
+  "stateOverflow": [],
+  "overflowBindings": [
+    {
+      "part": "icon",
+      "channel": "color",
+      "ref": "{imported.shared.color-fdeffd}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "part-0.0.0",
+      "channel": "color",
+      "ref": "{imported.shared.color-fdeffd}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "part-0.0.0",
+      "channel": "min-height",
+      "ref": "{imported.shared.size-0}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "part-0.0.0",
+      "channel": "min-width",
+      "ref": "{imported.shared.size-0}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "part-0.0.0",
+      "channel": "stroke",
+      "ref": "{imported.shared.color-fdeffd}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "part-0.0.0",
+      "channel": "stroke-width",
+      "ref": "{imported.avatar.part-0-0-0.stroke-width.{size}}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "part-0.0.1",
+      "channel": "color",
+      "ref": "{imported.shared.color-fdeffd}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "part-0.0.1",
+      "channel": "min-height",
+      "ref": "{imported.shared.size-0}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "part-0.0.1",
+      "channel": "min-width",
+      "ref": "{imported.shared.size-0}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "part-0.0.1",
+      "channel": "stroke",
+      "ref": "{imported.shared.color-fdeffd}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "part-0.0.1",
+      "channel": "stroke-width",
+      "ref": "{imported.avatar.part-0-0-1.stroke-width.{size}}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    }
+  ],
+  "pairwiseRefusals": [],
+  "pseudoParts": {
+    "_reason": "S5 (DESIGN §5.4): pseudo-element decor has no anatomy spelling — captured, receipted, not carried",
+    "findings": [
+      {
+        "combo": "xs",
+        "interaction": "default",
+        "part": "root",
+        "pseudo": "::after",
+        "deltaVsDefault": {
+          "content": "\"\""
+        }
+      },
+      {
+        "combo": "sm",
+        "interaction": "default",
+        "part": "root",
+        "pseudo": "::after",
+        "deltaVsDefault": {
+          "content": "\"\""
+        }
+      },
+      {
+        "combo": "md",
+        "interaction": "default",
+        "part": "root",
+        "pseudo": "::after",
+        "deltaVsDefault": {
+          "content": "\"\""
+        }
+      },
+      {
+        "combo": "lg",
+        "interaction": "default",
+        "part": "root",
+        "pseudo": "::after",
+        "deltaVsDefault": {
+          "content": "\"\""
+        }
+      },
+      {
+        "combo": "xl",
+        "interaction": "default",
+        "part": "root",
+        "pseudo": "::after",
+        "deltaVsDefault": {
+          "content": "\"\""
+        }
+      }
+    ],
+    "totalFindings": 5
+  },
+  "bindingContradictions": [
+    {
+      "combo": "xs",
+      "part": "initials",
+      "channel": "font-size",
+      "ref": "{p.font-size-400}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "13px",
+      "verdict": "contradiction",
+      "cause": "content-conditioned element: .Polaris-Avatar__Text { font-size: var(--p-font-size-400) } styles the Text element Polaris renders only when initials/name are given; the default mount renders the empty .Polaris-Avatar__Initials wrapper, which inherits the provider's body typography (html,body { font-size: var(--p-font-size-325) } = 13px). Computed truth wins: resolve to the unique DTCG candidate {p.font-size-325}; the initials-present branch stays named residue (no contract channel can be a function of a text prop's value — the standing Avatar refusal class)."
+    },
+    {
+      "combo": "sm",
+      "part": "initials",
+      "channel": "font-size",
+      "ref": "{p.font-size-400}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "13px",
+      "verdict": "contradiction",
+      "cause": "content-conditioned element: .Polaris-Avatar__Text { font-size: var(--p-font-size-400) } styles the Text element Polaris renders only when initials/name are given; the default mount renders the empty .Polaris-Avatar__Initials wrapper, which inherits the provider's body typography (html,body { font-size: var(--p-font-size-325) } = 13px). Computed truth wins: resolve to the unique DTCG candidate {p.font-size-325}; the initials-present branch stays named residue (no contract channel can be a function of a text prop's value — the standing Avatar refusal class)."
+    },
+    {
+      "combo": "md",
+      "part": "initials",
+      "channel": "font-size",
+      "ref": "{p.font-size-400}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "13px",
+      "verdict": "contradiction",
+      "cause": "content-conditioned element: .Polaris-Avatar__Text { font-size: var(--p-font-size-400) } styles the Text element Polaris renders only when initials/name are given; the default mount renders the empty .Polaris-Avatar__Initials wrapper, which inherits the provider's body typography (html,body { font-size: var(--p-font-size-325) } = 13px). Computed truth wins: resolve to the unique DTCG candidate {p.font-size-325}; the initials-present branch stays named residue (no contract channel can be a function of a text prop's value — the standing Avatar refusal class)."
+    },
+    {
+      "combo": "lg",
+      "part": "initials",
+      "channel": "font-size",
+      "ref": "{p.font-size-400}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "13px",
+      "verdict": "contradiction",
+      "cause": "content-conditioned element: .Polaris-Avatar__Text { font-size: var(--p-font-size-400) } styles the Text element Polaris renders only when initials/name are given; the default mount renders the empty .Polaris-Avatar__Initials wrapper, which inherits the provider's body typography (html,body { font-size: var(--p-font-size-325) } = 13px). Computed truth wins: resolve to the unique DTCG candidate {p.font-size-325}; the initials-present branch stays named residue (no contract channel can be a function of a text prop's value — the standing Avatar refusal class)."
+    },
+    {
+      "combo": "xl",
+      "part": "initials",
+      "channel": "font-size",
+      "ref": "{p.font-size-400}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "13px",
+      "verdict": "contradiction",
+      "cause": "content-conditioned element: .Polaris-Avatar__Text { font-size: var(--p-font-size-400) } styles the Text element Polaris renders only when initials/name are given; the default mount renders the empty .Polaris-Avatar__Initials wrapper, which inherits the provider's body typography (html,body { font-size: var(--p-font-size-325) } = 13px). Computed truth wins: resolve to the unique DTCG candidate {p.font-size-325}; the initials-present branch stays named residue (no contract channel can be a function of a text prop's value — the standing Avatar refusal class)."
+    }
+  ],
+  "interactionOnDisabled": [],
+  "structureReceipts": [],
+  "styledChannelReceipts": [
+    "control-fallback: no control for <svg> — span control used (part icon)",
+    "control-fallback: no control for <path> — span control used (part part-0.0.0)",
+    "control-fallback: no control for <path> — span control used (part part-0.0.1)"
+  ],
+  "anatomyJoin": {
+    "computed": [
+      {
+        "part": "root",
+        "join": "matched"
+      },
+      {
+        "part": "initials",
+        "join": "matched"
+      },
+      {
+        "part": "icon",
+        "join": "computed-only"
+      },
+      {
+        "part": "part-0.0.0",
+        "join": "computed-only"
+      },
+      {
+        "part": "part-0.0.1",
+        "join": "computed-only"
+      }
+    ],
+    "staticOnly": []
+  },
+  "enrichmentNotes": [
+    "layout enriched: initials.layout.display = flex (uniform computed keyword — the schema's own vocabulary)",
+    "layout enriched: initials.layout.align = center (uniform computed keyword — the schema's own vocabulary)",
+    "layout enriched: initials.layout.justify = center (uniform computed keyword — the schema's own vocabulary)",
+    "declared fact carried: root.max-width = 100% (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: root.overflow-x = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: root.overflow-y = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: root.position = relative (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: root.user-select = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: initials.user-select = none (v15 declared vocabulary — declared-not-drawn on canvas)"
+  ]
+}

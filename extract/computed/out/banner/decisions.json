@@ -1,0 +1,36 @@
+[
+  {
+    "ids": [
+      "critical|root|background-color",
+      "info|root|background-color",
+      "success|root|background-color",
+      "warning|root|background-color"
+    ],
+    "part": "root",
+    "channel": "background-color",
+    "scope": "base",
+    "from": "{p.color-bg-fill-success}",
+    "to": "{p.color-bg-surface}",
+    "observed": "rgba(255, 255, 255, 1)",
+    "expected": "rgba(4, 123, 93, 1)",
+    "cause": "composition-owned tone surface: Polaris 13's DefaultBanner renders the tone fill/text on an inner Box ribbon (Box background=bg-fill-<tone> color=text-<tone>-on-bg-fill — Banner/utilities.js bannerAttributes.withinPage), NOT on the .Polaris-Banner root where the promotion bound the tone maps; the root is the white card (.Polaris-Banner { background-color: var(--p-color-bg-surface) }) with body-inherited text (html,body { color: var(--p-color-text) }). Resolve via the review queue with explicit refs (--to {p.color-bg-surface} / {p.color-text} — mechanical: the defining CSS rules name the tokens; several tokens share the resolved values). The tone ribbon colors ride the minted per-axis leaves on the inner box part.",
+    "ack": "explicit CLI --apply"
+  },
+  {
+    "ids": [
+      "critical|root|color",
+      "info|root|color",
+      "success|root|color",
+      "warning|root|color"
+    ],
+    "part": "root",
+    "channel": "color",
+    "scope": "base",
+    "from": "{p.color-text-success-on-bg-fill}",
+    "to": "{p.color-text}",
+    "observed": "rgba(48, 48, 48, 1)",
+    "expected": "rgba(250, 255, 251, 1)",
+    "cause": "composition-owned tone surface: Polaris 13's DefaultBanner renders the tone fill/text on an inner Box ribbon (Box background=bg-fill-<tone> color=text-<tone>-on-bg-fill — Banner/utilities.js bannerAttributes.withinPage), NOT on the .Polaris-Banner root where the promotion bound the tone maps; the root is the white card (.Polaris-Banner { background-color: var(--p-color-bg-surface) }) with body-inherited text (html,body { color: var(--p-color-text) }). Resolve via the review queue with explicit refs (--to {p.color-bg-surface} / {p.color-text} — mechanical: the defining CSS rules name the tokens; several tokens share the resolved values). The tone ribbon colors ride the minted per-axis leaves on the inner box part.",
+    "ack": "explicit CLI --apply"
+  }
+]

@@ -1,0 +1,159 @@
+{
+  "$schema": "../../../contracts/contract.schema.json",
+  "id": "polaris.banner",
+  "name": "Banner",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "PROPOSED contract extracted from examples/polaris/.polaris-clone/polaris-react/src/components/Banner/Banner.tsx (react-tsx + css-module adapters) — API surface AND anatomy (structure, token bindings, layout, states) read from source; design bindings await reconciliation and human review. PROMOTED showcase contract: API surface extracted mechanically from Shopify/polaris @ 2b1ea88625e0613853ca8577c9acd1980a90f382 (polaris-react 13.10.1, MIT © Shopify, extracted 2026-07-18); styling bindings promoted from the component's own module.css under the reviewed class map in examples/polaris/scripts/curation.ts — every carried binding and every named refusal is listed in examples/polaris/extraction/PROMOTION.md.",
+  "semantics": {
+    "element": "div",
+    "role": "status",
+    "roleByProp": {
+      "prop": "tone",
+      "map": {
+        "success": "status",
+        "info": "status",
+        "warning": "alert",
+        "critical": "alert"
+      }
+    }
+  },
+  "props": [
+    {
+      "name": "title",
+      "description": "Title content for the banner.",
+      "type": "text",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Title"
+        },
+        "code": {
+          "prop": "title"
+        }
+      }
+    },
+    {
+      "name": "hideIcon",
+      "description": "Renders the banner without a status icon.",
+      "type": "boolean",
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Hide Icon"
+        },
+        "code": {
+          "prop": "hideIcon"
+        }
+      }
+    },
+    {
+      "name": "tone",
+      "description": "Sets the status of the banner.",
+      "type": {
+        "enum": [
+          "success",
+          "info",
+          "warning",
+          "critical"
+        ]
+      },
+      "default": "info",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Tone",
+          "values": {
+            "success": "Success",
+            "info": "Info",
+            "warning": "Warning",
+            "critical": "Critical"
+          }
+        },
+        "code": {
+          "prop": "tone"
+        }
+      }
+    },
+    {
+      "name": "stopAnnouncements",
+      "description": "Disables screen reader announcements when changing the content of the banner",
+      "type": "boolean",
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Stop Announcements"
+        },
+        "code": {
+          "prop": "stopAnnouncements"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "flex"
+      },
+      "tokens": {
+        "background-color": "{p.color-bg-surface}"
+      },
+      "tokensByProp": {
+        "prop": "tone",
+        "map": {
+          "success": {
+            "background-color": "{p.color-bg-fill-success}",
+            "color": "{p.color-text-success-on-bg-fill}"
+          },
+          "warning": {
+            "background-color": "{p.color-bg-fill-warning}",
+            "color": "{p.color-text-warning-on-bg-fill}"
+          },
+          "critical": {
+            "background-color": "{p.color-bg-fill-critical}",
+            "color": "{p.color-text-critical-on-bg-fill}"
+          },
+          "info": {
+            "background-color": "{p.color-bg-fill-info}",
+            "color": "{p.color-text-info-on-bg-fill}"
+          }
+        }
+      },
+      "parts": {
+        "title": {
+          "element": "h2",
+          "tokens": {
+            "font-size": "{p.text-heading-sm-font-size}",
+            "font-weight": "{p.text-heading-sm-font-weight}",
+            "line-height": "{p.text-heading-sm-font-line-height}",
+            "letter-spacing": "{p.text-heading-sm-font-letter-spacing}"
+          },
+          "content": {
+            "prop": "title"
+          }
+        },
+        "body": {
+          "element": "span",
+          "tokens": {
+            "font-size": "{p.text-body-md-font-size}",
+            "font-weight": "{p.text-body-sm-font-weight}",
+            "line-height": "{p.text-body-md-font-line-height}",
+            "letter-spacing": "{p.text-body-md-font-letter-spacing}"
+          },
+          "text": "Your order has shipped."
+        }
+      }
+    }
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "polaris-react/src/components/Banner/Banner",
+      "export": "Banner"
+    }
+  }
+}

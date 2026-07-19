@@ -1,0 +1,242 @@
+[
+  {
+    "key": "small.highlight__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "small.highlight__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "small.highlight__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "small.highlight__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "small.primary__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "small.primary__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "small.primary__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "small.primary__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "small.success__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "small.success__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "small.success__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "small.success__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "small.critical__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "small.critical__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "small.critical__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "small.critical__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "medium.highlight__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "medium.highlight__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "medium.highlight__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "medium.highlight__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "medium.primary__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "medium.primary__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "medium.primary__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "medium.primary__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "medium.success__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "medium.success__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "medium.success__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "medium.success__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "medium.critical__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "medium.critical__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "medium.critical__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "medium.critical__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "large.highlight__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "large.highlight__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "large.highlight__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "large.highlight__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "large.primary__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "large.primary__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "large.primary__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "large.primary__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "large.success__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "large.success__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "large.success__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "large.success__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "large.critical__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "large.critical__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "large.critical__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "large.critical__active",
+    "pctExact": 0,
+    "pctAA": 0
+  }
+]

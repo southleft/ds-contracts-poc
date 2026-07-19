@@ -36,9 +36,13 @@
       "refused": 0
     }
   },
+  "declared": {
+    "base": 4,
+    "state": 1
+  },
   "codeOnly": {
-    "base": 8,
-    "state": 1,
+    "base": 4,
+    "state": 0,
     "overflowBindings": 21
   },
   "pseudoElementFindings": 0,
@@ -62,9 +66,9 @@
   "pixel": {
     "pairs": 8,
     "exact": {
-      "mean": 0.001220703125,
-      "max": 0.00244140625,
-      "perfect": 4
+      "mean": 0,
+      "max": 0,
+      "perfect": 8
     },
     "aa": {
       "mean": 0,
@@ -74,22 +78,22 @@
     "worst": [
       {
         "key": "enabled__default",
-        "pctExact": 0.00244140625,
+        "pctExact": 0,
         "pctAA": 0
       },
       {
         "key": "enabled__hover",
-        "pctExact": 0.00244140625,
+        "pctExact": 0,
         "pctAA": 0
       },
       {
         "key": "enabled__focus-visible",
-        "pctExact": 0.00244140625,
+        "pctExact": 0,
         "pctAA": 0
       },
       {
         "key": "enabled__active",
-        "pctExact": 0.00244140625,
+        "pctExact": 0,
         "pctAA": 0
       },
       {
@@ -115,7 +119,7 @@
     ]
   },
   "gate": {
-    "computedPctEqual": 77.5,
+    "computedPctEqual": 92.5,
     "rowsFullyEqual": 0,
     "rows": 8,
     "pixelPerfectExact": 0,

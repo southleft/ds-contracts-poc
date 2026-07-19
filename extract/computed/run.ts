@@ -28,7 +28,7 @@
  * `computed-floor-gate` replays the committed Button capture offline through
  * replay.ts (fixtures committed; browser required, named if absent).
  */
-import { existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { chromium, type Browser, type Page } from 'playwright-core';
 import { PNG } from 'pngjs';
@@ -96,6 +96,15 @@ async function main() {
   if (libPkg.version !== cfg.library.version) {
     console.error(`harness has ${cfg.library.package}@${libPkg.version}, config pins ${cfg.library.version} — refusing (version drift would silently change every number)`);
     process.exit(1);
+  }
+
+  // committed icon assets (the showcase generators' own map) — contracts
+  // carrying icon.asset refs (Spinner) validate/emit against it
+  const iconAssets = new Map<string, string>();
+  if (cfg.icons) {
+    for (const f of readdirSync(path.join(REPO, cfg.icons)).sort()) {
+      if (f.endsWith('.svg')) iconAssets.set(f.slice(0, -4), readFileSync(path.join(REPO, cfg.icons, f), 'utf8').trim());
+    }
   }
 
   const components = cfg.components.filter((c) => !ONLY || c.name === ONLY);
@@ -167,6 +176,9 @@ async function main() {
     const js = `(() => {
       const el = document.createElement('div');
       el.style.position = 'absolute'; el.style.visibility = 'hidden';
+      // border/outline widths compute to 0 when the matching style is 'none'
+      // — give the probe a solid style so width tokens read their real value
+      el.style.borderStyle = 'solid'; el.style.outlineStyle = 'solid';
       el.style.setProperty(${JSON.stringify(computedProp)}, 'var(${refToVar(ref)})');
       document.body.appendChild(el);
       const v = getComputedStyle(el).getPropertyValue(${JSON.stringify(computedProp)});
@@ -252,7 +264,7 @@ async function main() {
     // contract, not schema-shaped output
     ContractSchema.parse(enriched);
     const validationErrors: string[] = [];
-    validateContract(enriched as Contract, new Map([[enriched.id, enriched as Contract]]), validationErrors, new Map());
+    validateContract(enriched as Contract, new Map([[enriched.id, enriched as Contract]]), validationErrors, iconAssets);
     if (validationErrors.length > 0) {
       console.log(`    ✖ validateContract: ${validationErrors.length} error(s)`);
       for (const e of validationErrors.slice(0, 8)) console.log(`      - ${e}`);
@@ -376,8 +388,15 @@ async function main() {
         channels: run1.allProps,
         fontChecks: run1.fontChecks,
         determinism: determinismDetail,
-        steadyState: 'transitions left ENABLED (freezing would alter captured transition-* channels); paint channels polled to stability, bounded 600ms',
+        steadyState: 'transitions left ENABLED (freezing would alter captured transition-* channels); paint channels polled to stability across every stage element, bounded 600ms',
+        ...(run1.pinnedAnimations.length > 0
+          ? {
+              animationPinning: `infinite CSS animations pinned at currentTime 0 (paused) — the captured value is each animation's own 0% keyframe, a deterministic point of the declared animation; finite animations/transitions untouched. Pinned: ${run1.pinnedAnimations.join(', ')}`,
+            }
+          : {}),
         interactionDrivers: {
+          formStateReset:
+            'after every interaction capture, native input state mutated by the interaction itself (a click on an uncontrolled radio/checkbox checks it) is reset to mount defaults — interaction-caused form state never leaks across captures',
           hover: 'playwright locator.hover({force:true}) — pointer to element center',
           'focus-visible': 'sentinel.focus() + keyboard Tab (keyboard modality; matched state recorded per capture)',
           active: 'hover + mouse.down (held during capture) — honestly hover+active, what a user sees mid-press',
@@ -503,6 +522,7 @@ async function main() {
       origShotsDir: scratchShots,
       outDir,
       browserVersion: run1.browserVersion,
+      iconAssets,
       fusionCounts: {
         boundConfirmed,
         boundCells: boundRows.length,

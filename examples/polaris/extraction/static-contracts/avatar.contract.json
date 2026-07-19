@@ -1,0 +1,169 @@
+{
+  "$schema": "../../../contracts/contract.schema.json",
+  "id": "polaris.avatar",
+  "name": "Avatar",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "PROPOSED contract extracted from examples/polaris/.polaris-clone/polaris-react/src/components/Avatar/Avatar.tsx (react-tsx + css-module adapters) — API surface AND anatomy (structure, token bindings, layout, states) read from source; design bindings await reconciliation and human review. PROMOTED showcase contract: API surface extracted mechanically from Shopify/polaris @ 2b1ea88625e0613853ca8577c9acd1980a90f382 (polaris-react 13.10.1, MIT © Shopify, extracted 2026-07-18); styling bindings promoted from the component's own module.css under the reviewed class map in examples/polaris/scripts/curation.ts — every carried binding and every named refusal is listed in examples/polaris/extraction/PROMOTION.md.",
+  "semantics": {
+    "element": "span"
+  },
+  "props": [
+    {
+      "name": "size",
+      "description": "Size of avatar",
+      "type": {
+        "enum": [
+          "xs",
+          "sm",
+          "md",
+          "lg",
+          "xl"
+        ]
+      },
+      "default": "md",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Size",
+          "values": {
+            "xs": "Xs",
+            "sm": "Sm",
+            "md": "Md",
+            "lg": "Lg",
+            "xl": "Xl"
+          }
+        },
+        "code": {
+          "prop": "size"
+        }
+      }
+    },
+    {
+      "name": "name",
+      "description": "The name of the person",
+      "type": "text",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Name"
+        },
+        "code": {
+          "prop": "name"
+        }
+      }
+    },
+    {
+      "name": "initials",
+      "description": "Initials of person to display",
+      "type": "text",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Initials"
+        },
+        "code": {
+          "prop": "initials"
+        }
+      }
+    },
+    {
+      "name": "customer",
+      "description": "Whether the avatar is for a customer",
+      "type": "boolean",
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Customer"
+        },
+        "code": {
+          "prop": "customer"
+        }
+      }
+    },
+    {
+      "name": "source",
+      "description": "URL of the avatar image which falls back to initials if the image fails to load",
+      "type": "text",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Source"
+        },
+        "code": {
+          "prop": "source"
+        }
+      }
+    },
+    {
+      "name": "accessibilityLabel",
+      "description": "Accessible label for the avatar image",
+      "type": "text",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Accessibility Label"
+        },
+        "code": {
+          "prop": "accessibilityLabel"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "tokens": {
+        "background": "{p.color-avatar-one-bg-fill}",
+        "color": "{p.color-avatar-one-text-on-bg-fill}"
+      },
+      "literals": {
+        "min-width": "20px"
+      },
+      "literalsByProp": [
+        {
+          "prop": "size",
+          "map": {
+            "xs": {
+              "width": "20px"
+            },
+            "sm": {
+              "width": "24px"
+            },
+            "md": {
+              "width": "28px"
+            },
+            "lg": {
+              "width": "32px"
+            },
+            "xl": {
+              "width": "40px"
+            }
+          }
+        }
+      ],
+      "parts": {
+        "initials": {
+          "element": "span",
+          "tokens": {
+            "font-size": "{p.font-size-400}",
+            "font-weight": "{p.font-weight-regular}"
+          },
+          "content": {
+            "prop": "initials"
+          }
+        }
+      }
+    }
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "polaris-react/src/components/Avatar/Avatar",
+      "export": "Avatar"
+    }
+  }
+}

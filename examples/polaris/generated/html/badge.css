@@ -1,4 +1,4 @@
-/* Badge — from polaris.badge v0.1.0 (core/emit-html.ts) */
+/* Badge — from polaris.badge v0.2.0 (core/emit-html.ts) */
 
 .badge, .badge *, .badge *::before, .badge *::after {
   box-sizing: border-box;
@@ -14,6 +14,9 @@
   padding-block: var(--p-space-050);
   padding-inline: var(--p-space-200);
   font-weight: var(--p-font-weight-medium);
+  border-bottom-left-radius: var(--imported-shared-size-8);
+  border-bottom-right-radius: var(--imported-shared-size-8);
+  border-top-right-radius: var(--imported-shared-size-8);
 }
 
 .badge__label {
@@ -21,6 +24,7 @@
   font-weight: var(--p-text-body-sm-font-weight);
   line-height: var(--p-text-body-sm-font-line-height);
   letter-spacing: var(--p-text-body-sm-font-letter-spacing);
+  color: var(--imported-badge-label-color);
 }
 
 /* showcase chrome */

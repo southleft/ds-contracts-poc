@@ -112,8 +112,11 @@ export async function runGate(opts: {
   browserVersion: string;
   fusionCounts: Scorecard['fusion'];
   namedLosses: string[];
+  /** Committed icon assets (config `icons` dir) — empty map when none. */
+  iconAssets?: Map<string, string>;
 }): Promise<Scorecard> {
   const { page, repoRoot, cfg, comp, space, aligned, enriched, mintedTree, styled, origShotsDir, outDir } = opts;
+  const iconAssets = opts.iconAssets ?? new Map<string, string>();
   const k = kebab(enriched.name);
   const tokensCss = readFileSync(path.join(repoRoot, cfg.tokens.css), 'utf8');
   const inventory = tokenInventoryFromJson([
@@ -125,7 +128,7 @@ export async function runGate(opts: {
   const contracts = new Map<string, Contract>([[enriched.id, enriched]]);
   const first = emitHtml(withComboAsDefaults(enriched, space, space.enumeration.combos[0]), {
     tokens: inventory,
-    icons: new Map(),
+    icons: iconAssets,
     contracts,
   });
   const stages: string[] = [];
@@ -133,7 +136,7 @@ export async function runGate(opts: {
     const emitted =
       combo === space.enumeration.combos[0]
         ? first
-        : emitHtml(withComboAsDefaults(enriched, space, combo), { tokens: inventory, icons: new Map(), contracts });
+        : emitHtml(withComboAsDefaults(enriched, space, combo), { tokens: inventory, icons: iconAssets, contracts });
     stages.push(
       `<button data-sentinel="${combo.key}" style="width:8px;height:8px;padding:0;border:0;margin:2px;background:#eee" aria-label="sentinel"></button>
 <div data-combo="${combo.key}" class="gate-stage">${emitted.html}</div>`,
@@ -198,22 +201,33 @@ ${stages.join('\n')}
       await page.mouse.move(0, 0);
       await page.evaluate(`document.activeElement && document.activeElement.blur && document.activeElement.blur()`);
       await page.locator(stageSel).scrollIntoViewIfNeeded();
-      if (interaction === 'hover') {
-        await rootLoc.hover({ force: true });
-      } else if (interaction === 'focus-visible') {
-        await page.evaluate(`document.querySelector('[data-sentinel="${combo.key}"]').focus()`);
-        await page.keyboard.press('Tab');
-      } else if (interaction === 'active') {
-        await rootLoc.hover({ force: true });
-        await page.mouse.down();
+      let interactionNote: string | undefined;
+      let mouseDown = false;
+      try {
+        if (interaction === 'hover') {
+          await rootLoc.hover({ force: true, timeout: 5_000 });
+        } else if (interaction === 'focus-visible') {
+          await page.evaluate(`document.querySelector('[data-sentinel="${combo.key}"]').focus()`);
+          await page.keyboard.press('Tab');
+        } else if (interaction === 'active') {
+          await rootLoc.hover({ force: true, timeout: 5_000 });
+          await page.mouse.down();
+          mouseDown = true;
+        }
+      } catch (e) {
+        // e.g. a zero-area emitted root (width is a geometry channel the
+        // vocabulary never carries — ProgressBar) cannot be hovered; the row
+        // still scores, with the un-driven state, under a NAMED note.
+        interactionNote = `interaction-driver-failed (${interaction}): ${String(e instanceof Error ? e.message : e).split('\n')[0].trim()}`;
       }
       await page.waitForTimeout(30);
 
       const key = `${combo.key}__${interaction}`;
       const truthCap = aligned.byKey.get(key);
       const row: GateRow = { key, channelsCompared: 0, channelsEqual: 0, pctExact: 100, pctAA: 100, mismatches: [] };
+      if (interactionNote) row.note = interactionNote;
       if (!truthCap) {
-        row.note = 'no captured truth for this combo×state';
+        row.note = [row.note, 'no captured truth for this combo×state'].filter(Boolean).join('; ');
         rows.push(row);
         continue;
       }
@@ -254,7 +268,7 @@ ${stages.join('\n')}
         if (a.width !== b.width || a.height !== b.height) {
           row.pctExact = 100;
           row.pctAA = 100;
-          row.note = `size mismatch ours ${b.width}x${b.height} vs orig ${a.width}x${a.height}`;
+          row.note = [row.note, `size mismatch ours ${b.width}x${b.height} vs orig ${a.width}x${a.height}`].filter(Boolean).join('; ');
         } else {
           const total = a.width * a.height;
           const diffExact = pixelmatch(a.data, b.data, undefined, a.width, a.height, { threshold: 0, includeAA: true });
@@ -263,9 +277,9 @@ ${stages.join('\n')}
           row.pctAA = (100 * diffAA) / total;
         }
       } else {
-        row.note = 'original screenshot unavailable — pixel not scored';
+        row.note = [row.note, 'original screenshot unavailable — pixel not scored'].filter(Boolean).join('; ');
       }
-      if (interaction === 'active') await page.mouse.up();
+      if (mouseDown) await page.mouse.up();
       rows.push(row);
     }
   }

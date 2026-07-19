@@ -1,0 +1,42 @@
+[
+  {
+    "key": "small__default",
+    "pctExact": 0.32958984375,
+    "pctAA": 0.23518880208333334
+  },
+  {
+    "key": "small__hover",
+    "pctExact": 0.32958984375,
+    "pctAA": 0.23518880208333334
+  },
+  {
+    "key": "small__focus-visible",
+    "pctExact": 0.32958984375,
+    "pctAA": 0.23518880208333334
+  },
+  {
+    "key": "small__active",
+    "pctExact": 0.32958984375,
+    "pctAA": 0.23518880208333334
+  },
+  {
+    "key": "large__default",
+    "pctExact": 0.9293619791666666,
+    "pctAA": 0.7316080729166666
+  },
+  {
+    "key": "large__hover",
+    "pctExact": 0.9293619791666666,
+    "pctAA": 0.7316080729166666
+  },
+  {
+    "key": "large__focus-visible",
+    "pctExact": 0.9293619791666666,
+    "pctAA": 0.7316080729166666
+  },
+  {
+    "key": "large__active",
+    "pctExact": 0.9293619791666666,
+    "pctAA": 0.7316080729166666
+  }
+]

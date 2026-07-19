@@ -1,5 +1,5 @@
 /* GENERATED FILE — DO NOT EDIT.
- * Source of truth: contracts/avatar.contract.json (polaris.avatar v0.1.0)
+ * Source of truth: contracts/avatar.contract.json (polaris.avatar v0.2.0)
  * Regenerate with: npm run generate
  */
 
@@ -10,30 +10,67 @@
   border: 0;
   background: var(--p-color-avatar-one-bg-fill);
   color: var(--p-color-avatar-one-text-on-bg-fill);
+  bottom: var(--imported-shared-size-0);
+  left: var(--imported-shared-size-0);
+  right: var(--imported-shared-size-0);
+  top: var(--imported-shared-size-0);
   min-width: 20px;
-}
-
-.size-xs {
-  width: 20px;
-}
-
-.size-sm {
-  width: 24px;
-}
-
-.size-md {
-  width: 28px;
+  max-width: 100%;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  position: relative;
+  user-select: none;
 }
 
 .size-lg {
+  border-bottom-left-radius: var(--imported-avatar-root-border-bottom-left-radius-lg);
+  border-bottom-right-radius: var(--imported-avatar-root-border-bottom-right-radius-lg);
+  border-top-left-radius: var(--imported-avatar-root-border-top-left-radius-lg);
+  border-top-right-radius: var(--imported-avatar-root-border-top-right-radius-lg);
   width: 32px;
 }
 
+.size-md {
+  border-bottom-left-radius: var(--imported-avatar-root-border-bottom-left-radius-md);
+  border-bottom-right-radius: var(--imported-avatar-root-border-bottom-right-radius-md);
+  border-top-left-radius: var(--imported-avatar-root-border-top-left-radius-md);
+  border-top-right-radius: var(--imported-avatar-root-border-top-right-radius-md);
+  width: 28px;
+}
+
+.size-sm {
+  border-bottom-left-radius: var(--imported-avatar-root-border-bottom-left-radius-sm);
+  border-bottom-right-radius: var(--imported-avatar-root-border-bottom-right-radius-sm);
+  border-top-left-radius: var(--imported-avatar-root-border-top-left-radius-sm);
+  border-top-right-radius: var(--imported-avatar-root-border-top-right-radius-sm);
+  width: 24px;
+}
+
 .size-xl {
+  border-bottom-left-radius: var(--imported-avatar-root-border-bottom-left-radius-xl);
+  border-bottom-right-radius: var(--imported-avatar-root-border-bottom-right-radius-xl);
+  border-top-left-radius: var(--imported-avatar-root-border-top-left-radius-xl);
+  border-top-right-radius: var(--imported-avatar-root-border-top-right-radius-xl);
   width: 40px;
 }
 
+.size-xs {
+  border-bottom-left-radius: var(--imported-avatar-root-border-bottom-left-radius-xs);
+  border-bottom-right-radius: var(--imported-avatar-root-border-bottom-right-radius-xs);
+  border-top-left-radius: var(--imported-avatar-root-border-top-left-radius-xs);
+  border-top-right-radius: var(--imported-avatar-root-border-top-right-radius-xs);
+  width: 20px;
+}
+
 .initials {
-  font-size: var(--p-font-size-400);
+  font-size: var(--p-font-size-325);
   font-weight: var(--p-font-weight-regular);
+  bottom: var(--imported-shared-size-0);
+  color: var(--imported-shared-color-fdeffd);
+  left: var(--imported-shared-size-0);
+  min-height: var(--imported-shared-size-0);
+  min-width: var(--imported-shared-size-0);
+  right: var(--imported-shared-size-0);
+  top: var(--imported-shared-size-0);
+  user-select: none;
 }

@@ -343,10 +343,13 @@ export const CURATION: ComponentCuration[] = [
       component: 'Banner',
       rootSelector: '.Polaris-Banner',
       childrenText: 'Your order has shipped.',
-      rootRowSelector: {
-        'background-color': '.Polaris-Box[style*="--pc-box-background"]',
-        color: '.Polaris-Box[style*="--pc-box-background"]',
-      },
+      // v0.2.0 (computed floor): the root background/color rows compare
+      // root↔root — the floor proved the .Polaris-Banner root is the white
+      // card surface (bg-surface) with body-inherited text, and the
+      // resolution rebased the contract accordingly (decisions ledger). The
+      // old override compared our (wrongly root-painted) tone fill against
+      // the inner Box ribbon; the ribbon is computed-only anatomy now, a
+      // named loss in the extension block.
     },
   },
   {
@@ -481,7 +484,13 @@ export const CURATION: ComponentCuration[] = [
         name: 'label',
         element: 'span',
         text: 'Wholesale',
-        polarisSelector: '.Polaris-Text--root',
+        // v0.2.0 (computed floor): the floor's `label` part is Tag's own
+        // inner .Polaris-Tag__Text span — the element Tag.module.css
+        // restyles (line-height 20px, min-height/min-width 0) — NOT the
+        // Text-primitive root the static promotion compared. Comparing the
+        // Text root was exactly the blind spot that hid the stale
+        // line-height binding the floor caught (Tag decisions ledger).
+        polarisSelector: '.Polaris-Tag__Text',
         typographyFrom: {
           child: 'Text',
           base: { variant: 'bodySm' },
@@ -553,6 +562,18 @@ export const CURATION: ComponentCuration[] = [
         channel: 'color',
         cause:
           'same name-hash palette selection as background — the cited default (styleOne) text color is carried; the hashed one is not derivable from a prop',
+      },
+      {
+        part: 'initials',
+        channel: 'font-size',
+        cause:
+          "content-conditioned typography measured by the computed floor (v0.2.0): the floor's default mount renders Avatar WITHOUT initials, so the initials wrapper inherits the provider's body font-size — the resolved binding {p.font-size-325} = 13px (decisions ledger, extract/computed/out/avatar/decisions.md); with initials provided (this combo's 'TP'), Polaris renders the svg text at font-size-400 (16px) — a branch conditioned on a text prop's VALUE, the same no-contract-channel class as the name-hash palette",
+      },
+      {
+        part: 'initials',
+        channel: 'color',
+        cause:
+          'same name-hash palette selection as the root rows — the initials text color follows the hashed styleFive palette; the carried styleOne default renders on our side',
       },
     ],
     polaris: { component: 'Avatar', rootSelector: 'span.Polaris-Avatar', fixedProps: { initials: 'TP' } },

@@ -41,7 +41,18 @@ self-check breaks (unstable channels are named, never hidden).
 Config-driven per DESIGN §1: the **library mount recipe** (package, provider
 imports/wrapper, class prefix), the **component list**, and per component the
 **prop-space source** — always a static-extraction contract/proposal; the
-capture tool never re-derives the API:
+capture tool never re-derives the API.
+
+**The prop-space source must be the STATIC layer, never the floor's own
+output.** After the round-2 floor promotion replaced the showcase contracts
+with enriched v0.2.0 rebuilds, the Polaris config pins the committed v0.1.0
+static-promotion contracts at
+`examples/polaris/extraction/static-contracts/` — re-running fusion against
+an already-enriched contract would double-enrich (bound-check every minted
+ref, re-mint on top of minted bindings) and skew every number. The regate
+instrument-fidelity check catches exactly this class of drift.
+
+Per component:
 
 - `axes`: enum props that enumerate. A **defaultless enum** gets the
   `enumeration.unsetLabel` pseudo-value prepended — unset is a first-class

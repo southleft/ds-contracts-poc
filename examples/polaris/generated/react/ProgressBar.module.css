@@ -1,5 +1,5 @@
 /* GENERATED FILE — DO NOT EDIT.
- * Source of truth: contracts/progress-bar.contract.json (polaris.progress-bar v0.1.0)
+ * Source of truth: contracts/progress-bar.contract.json (polaris.progress-bar v0.2.0)
  * Regenerate with: npm run generate
  */
 
@@ -9,6 +9,11 @@
   justify-content: center;
   border: 0;
   border-radius: var(--p-border-radius-100);
+  border-bottom-left-radius: var(--imported-shared-size-4);
+  border-bottom-right-radius: var(--imported-shared-size-4);
+  border-top-right-radius: var(--imported-shared-size-4);
+  overflow-x: hidden;
+  overflow-y: hidden;
 }
 
 .tone-highlight {
@@ -37,6 +42,14 @@
 
 .size-large {
   height: 32px;
+}
+
+.indicator {
+  min-height: var(--imported-shared-size-0);
+  min-width: var(--imported-shared-size-0);
+  transition-duration: 0.5s;
+  transition-property: transform;
+  transition-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1);
 }
 
 .tone-highlight .indicator {

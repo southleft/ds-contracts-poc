@@ -1,0 +1,102 @@
+[
+  {
+    "key": "xs__default",
+    "pctExact": 0.2685546875,
+    "pctAA": 0.146484375
+  },
+  {
+    "key": "xs__hover",
+    "pctExact": 0.2685546875,
+    "pctAA": 0.146484375
+  },
+  {
+    "key": "xs__focus-visible",
+    "pctExact": 0.2685546875,
+    "pctAA": 0.146484375
+  },
+  {
+    "key": "xs__active",
+    "pctExact": 0.2685546875,
+    "pctAA": 0.146484375
+  },
+  {
+    "key": "sm__default",
+    "pctExact": 0.2864583333333333,
+    "pctAA": 0.20182291666666666
+  },
+  {
+    "key": "sm__hover",
+    "pctExact": 0.2864583333333333,
+    "pctAA": 0.20182291666666666
+  },
+  {
+    "key": "sm__focus-visible",
+    "pctExact": 0.2864583333333333,
+    "pctAA": 0.20182291666666666
+  },
+  {
+    "key": "sm__active",
+    "pctExact": 0.2864583333333333,
+    "pctAA": 0.20182291666666666
+  },
+  {
+    "key": "md__default",
+    "pctExact": 0.40283203125,
+    "pctAA": 0.2742513020833333
+  },
+  {
+    "key": "md__hover",
+    "pctExact": 0.40283203125,
+    "pctAA": 0.2742513020833333
+  },
+  {
+    "key": "md__focus-visible",
+    "pctExact": 0.40283203125,
+    "pctAA": 0.2742513020833333
+  },
+  {
+    "key": "md__active",
+    "pctExact": 0.40283203125,
+    "pctAA": 0.2742513020833333
+  },
+  {
+    "key": "lg__default",
+    "pctExact": 0.5192057291666666,
+    "pctAA": 0.3523763020833333
+  },
+  {
+    "key": "lg__hover",
+    "pctExact": 0.5192057291666666,
+    "pctAA": 0.3523763020833333
+  },
+  {
+    "key": "lg__focus-visible",
+    "pctExact": 0.5192057291666666,
+    "pctAA": 0.3523763020833333
+  },
+  {
+    "key": "lg__active",
+    "pctExact": 0.5192057291666666,
+    "pctAA": 0.3523763020833333
+  },
+  {
+    "key": "xl__default",
+    "pctExact": 0.6233723958333334,
+    "pctAA": 0.4695638020833333
+  },
+  {
+    "key": "xl__hover",
+    "pctExact": 0.6233723958333334,
+    "pctAA": 0.4695638020833333
+  },
+  {
+    "key": "xl__focus-visible",
+    "pctExact": 0.6233723958333334,
+    "pctAA": 0.4695638020833333
+  },
+  {
+    "key": "xl__active",
+    "pctExact": 0.6233723958333334,
+    "pctAA": 0.4695638020833333
+  }
+]

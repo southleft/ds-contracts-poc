@@ -1,4 +1,4 @@
-/* Banner — from polaris.banner v0.1.0 (core/emit-html.ts) */
+/* Banner — from polaris.banner v0.2.0 (core/emit-html.ts) */
 
 .banner, .banner *, .banner *::before, .banner *::after {
   box-sizing: border-box;
@@ -8,26 +8,34 @@
   display: flex;
   border: 0;
   background-color: var(--p-color-bg-surface);
+  border-bottom-left-radius: var(--imported-shared-size-12);
+  border-bottom-right-radius: var(--imported-shared-size-12);
+  border-top-left-radius: var(--imported-shared-size-12);
+  border-top-right-radius: var(--imported-shared-size-12);
+  bottom: var(--imported-shared-size-0);
+  box-shadow: var(--imported-banner-root-box-shadow);
+  left: var(--imported-shared-size-0);
+  right: var(--imported-shared-size-0);
+  top: var(--imported-shared-size-0);
+  color: var(--p-color-text);
+  position: relative;
 }
 
-.banner--tone-success {
-  background-color: var(--p-color-bg-fill-success);
-  color: var(--p-color-text-success-on-bg-fill);
+.banner:focus-visible {
+  outline-style: solid;
+  outline-offset: 2px;
 }
 
-.banner--tone-warning {
-  background-color: var(--p-color-bg-fill-warning);
-  color: var(--p-color-text-warning-on-bg-fill);
+.banner:focus-visible {
+  outline-color: var(--imported-banner-root-outline-color-state-focus-visible);
 }
 
-.banner--tone-critical {
-  background-color: var(--p-color-bg-fill-critical);
-  color: var(--p-color-text-critical-on-bg-fill);
+.banner:focus-visible {
+  outline-width: var(--imported-banner-root-outline-width-state-focus-visible);
 }
 
-.banner--tone-info {
-  background-color: var(--p-color-bg-fill-info);
-  color: var(--p-color-text-info-on-bg-fill);
+.banner:focus-visible {
+  outline-style: solid;
 }
 
 .banner__title {

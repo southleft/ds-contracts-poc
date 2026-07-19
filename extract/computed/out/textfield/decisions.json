@@ -1,0 +1,17 @@
+[
+  {
+    "ids": [
+      "borderless.medium.enabled|backdrop|border-width",
+      "borderless.slim.enabled|backdrop|border-width"
+    ],
+    "part": "backdrop",
+    "channel": "border-width",
+    "scope": "axis:variant=borderless",
+    "from": "{p.border-width-0165}",
+    "to": "{p.border-width-0}",
+    "observed": "0px",
+    "expected": "1px",
+    "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-width is 0 for the borderless variant while the carried base binding paints 1px on the inherit variant. Single-axis partition (variant) — resolve via the review queue (--to {p.border-width-0}; several zero-valued tokens share 0px, border-width-0 is the exact name-class match)",
+    "ack": "explicit CLI --apply"
+  }
+]

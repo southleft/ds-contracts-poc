@@ -27,7 +27,7 @@
  * the committed scorecard's computed % vs the re-run. Committed harness
  * artifacts (scorecard.json, numbers.json, …) are never touched.
  */
-import { existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { chromium, type Browser } from 'playwright-core';
 import { chromiumExecutable } from '../figma/visual-parity/render.js';
@@ -61,6 +61,12 @@ const ONLY = arg('component');
 
 async function main() {
   const cfg = loadConfig(REPO, CONFIG_PATH);
+  const iconAssets = new Map<string, string>();
+  if (cfg.icons) {
+    for (const f of readdirSync(path.join(REPO, cfg.icons)).sort()) {
+      if (f.endsWith('.svg')) iconAssets.set(f.slice(0, -4), readFileSync(path.join(REPO, cfg.icons, f), 'utf8').trim());
+    }
+  }
   const components = cfg.components.filter(
     (c) => (!ONLY || c.name === ONLY) && existsSync(path.join(HERE, 'out', c.name.toLowerCase(), 'captured-truth.json')),
   );
@@ -93,6 +99,9 @@ async function main() {
     const js = `(() => {
       const el = document.createElement('div');
       el.style.position = 'absolute'; el.style.visibility = 'hidden';
+      // border/outline widths compute to 0 when the matching style is 'none'
+      // — give the probe a solid style so width tokens read their real value
+      el.style.borderStyle = 'solid'; el.style.outlineStyle = 'solid';
       el.style.setProperty(${JSON.stringify(computedProp)}, 'var(${refToVar(ref)})');
       document.body.appendChild(el);
       const v = getComputedStyle(el).getPropertyValue(${JSON.stringify(computedProp)});
@@ -118,6 +127,7 @@ async function main() {
       allProps: truth._provenance.channels,
       browserVersion: String(truth._provenance.browser ?? 'committed'),
       fontChecks: {},
+      pinnedAnimations: [],
     };
 
     const aligned = alignSweep(sweep, comp, space, cfg.library.classPrefix);
@@ -154,7 +164,7 @@ async function main() {
 
     ContractSchema.parse(enriched);
     const errs: string[] = [];
-    validateContract(enriched as Contract, new Map([[enriched.id, enriched as Contract]]), errs, new Map());
+    validateContract(enriched as Contract, new Map([[enriched.id, enriched as Contract]]), errs, iconAssets);
     if (errs.length > 0) {
       throw new Error(`${comp.name}: re-fused enriched contract fails validateContract:\n${errs.slice(0, 8).map((e) => `  - ${e}`).join('\n')}`);
     }
@@ -192,6 +202,7 @@ async function main() {
         folds: folds.length,
       },
       namedLosses,
+      iconAssets,
     });
     await gatePage.close();
 

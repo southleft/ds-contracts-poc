@@ -1,0 +1,1488 @@
+{
+  "_marker": "NON-SCHEMA EXTENSION BLOCK — computed-capture overflow. Nothing here is contract vocabulary; every entry names why it does not fit (DESIGN §5.4).",
+  "generatedBy": "extract/computed/run.ts",
+  "library": "@shopify/polaris@13.9.5",
+  "browser": "148.0.7778.96",
+  "mintedTokens": {
+    "imported": {
+      "text-field": {
+        "labelled-labelwrapper": {
+          "margin-bottom": {
+            "$value": "4px",
+            "$type": "dimension"
+          }
+        },
+        "connected-item": {
+          "z-index": {
+            "$value": "20",
+            "$type": "number"
+          },
+          "z-index-state-active": {
+            "$value": "30",
+            "$type": "number"
+          },
+          "z-index-state-focus-visible": {
+            "$value": "30",
+            "$type": "number"
+          }
+        },
+        "input": {
+          "z-index": {
+            "$value": "20",
+            "$type": "number"
+          }
+        },
+        "backdrop": {
+          "border-left-color": {
+            "inherit": {
+              "$value": "#8a8a8a",
+              "$type": "color"
+            },
+            "borderless": {
+              "$value": "#303030",
+              "$type": "color"
+            }
+          },
+          "border-left-width": {
+            "inherit": {
+              "$value": "1px",
+              "$type": "dimension"
+            },
+            "borderless": {
+              "$value": "0px",
+              "$type": "dimension"
+            }
+          },
+          "border-right-color": {
+            "inherit": {
+              "$value": "#8a8a8a",
+              "$type": "color"
+            },
+            "borderless": {
+              "$value": "#303030",
+              "$type": "color"
+            }
+          },
+          "border-right-width": {
+            "inherit": {
+              "$value": "1px",
+              "$type": "dimension"
+            },
+            "borderless": {
+              "$value": "0px",
+              "$type": "dimension"
+            }
+          },
+          "border-top-color": {
+            "inherit": {
+              "$value": "#898f94",
+              "$type": "color"
+            },
+            "borderless": {
+              "$value": "#303030",
+              "$type": "color"
+            }
+          },
+          "border-top-width": {
+            "inherit": {
+              "$value": "1px",
+              "$type": "dimension"
+            },
+            "borderless": {
+              "$value": "0px",
+              "$type": "dimension"
+            }
+          },
+          "z-index": {
+            "$value": "10",
+            "$type": "number"
+          },
+          "background-color-state-active": {
+            "$value": "#f7f7f7",
+            "$type": "color"
+          },
+          "outline-color-state-active": {
+            "$value": "#005bd3",
+            "$type": "color"
+          },
+          "outline-width-state-active": {
+            "$value": "2px",
+            "$type": "dimension"
+          },
+          "background-color-state-disabled": {
+            "$value": "#0000000d",
+            "$type": "color"
+          },
+          "background-color-state-focus-visible": {
+            "$value": "#f7f7f7",
+            "$type": "color"
+          },
+          "outline-color-state-focus-visible": {
+            "$value": "#005bd3",
+            "$type": "color"
+          },
+          "outline-width-state-focus-visible": {
+            "$value": "2px",
+            "$type": "dimension"
+          },
+          "background-color-state-hover": {
+            "$value": "#fafafa",
+            "$type": "color"
+          }
+        }
+      },
+      "shared": {
+        "size-0": {
+          "$value": "0px",
+          "$type": "dimension"
+        },
+        "num-1": {
+          "$value": "1",
+          "$type": "number"
+        },
+        "size-8": {
+          "$value": "8px",
+          "$type": "dimension"
+        },
+        "color-1a1a1a": {
+          "$value": "#1a1a1a",
+          "$type": "color"
+        },
+        "color-b5b5b5": {
+          "$value": "#b5b5b5",
+          "$type": "color"
+        },
+        "color-616161": {
+          "$value": "#616161",
+          "$type": "color"
+        }
+      }
+    }
+  },
+  "folds": [],
+  "foldedStateSkips": [],
+  "layout": {
+    "enriched": [],
+    "contradictions": [],
+    "receipts": [],
+    "_note": "computed flex keywords carried via Part.layout (the schema's own vocabulary); carried-slot contradictions are receipts, never silent overrides"
+  },
+  "declaredFacts": {
+    "_note": "v15 (S4): uniform registry-channel facts carried as Part.declared / Part.declaredStates — first-class contract vocabulary, listed here as the enrichment receipt",
+    "base": [
+      {
+        "part": "input",
+        "channel": "cursor",
+        "value": "text"
+      },
+      {
+        "part": "input",
+        "channel": "font-feature-settings",
+        "value": "normal"
+      },
+      {
+        "part": "input",
+        "channel": "overflow-x",
+        "value": "clip"
+      },
+      {
+        "part": "input",
+        "channel": "overflow-y",
+        "value": "clip"
+      },
+      {
+        "part": "input",
+        "channel": "position",
+        "value": "relative"
+      },
+      {
+        "part": "input",
+        "channel": "text-rendering",
+        "value": "auto"
+      },
+      {
+        "part": "backdrop",
+        "channel": "cursor",
+        "value": "text"
+      },
+      {
+        "part": "backdrop",
+        "channel": "pointer-events",
+        "value": "none"
+      }
+    ],
+    "state": [
+      {
+        "state": "active",
+        "part": "backdrop",
+        "channel": "outline-style",
+        "value": "solid"
+      },
+      {
+        "state": "disabled",
+        "part": "backdrop",
+        "channel": "cursor",
+        "value": "auto"
+      },
+      {
+        "state": "disabled",
+        "part": "input",
+        "channel": "cursor",
+        "value": "default"
+      },
+      {
+        "state": "focus-visible",
+        "part": "backdrop",
+        "channel": "outline-style",
+        "value": "solid"
+      }
+    ]
+  },
+  "codeOnlyChannels": [
+    {
+      "part": "labelled__labelwrapper",
+      "channel": "align-items",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "baseline",
+      "distinctValues": 1
+    },
+    {
+      "part": "labelled__labelwrapper",
+      "channel": "display",
+      "reason": "declared-channel value outside the bounded grammar — named residue (v15)",
+      "sample": "flex",
+      "distinctValues": 1
+    },
+    {
+      "part": "labelled__labelwrapper",
+      "channel": "flex-wrap",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "wrap",
+      "distinctValues": 1
+    },
+    {
+      "part": "labelled__labelwrapper",
+      "channel": "justify-content",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "space-between",
+      "distinctValues": 1
+    },
+    {
+      "part": "labelled__labelwrapper",
+      "channel": "overflow-wrap",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "break-word",
+      "distinctValues": 1
+    },
+    {
+      "part": "labelled__labelwrapper",
+      "channel": "word-break",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "break-word",
+      "distinctValues": 1
+    },
+    {
+      "part": "label",
+      "channel": "overflow-wrap",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "break-word",
+      "distinctValues": 1
+    },
+    {
+      "part": "label",
+      "channel": "word-break",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "break-word",
+      "distinctValues": 1
+    },
+    {
+      "part": "label__text",
+      "channel": "cursor",
+      "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
+      "sample": "default",
+      "distinctValues": 1
+    },
+    {
+      "part": "label__text",
+      "channel": "overflow-wrap",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "break-word",
+      "distinctValues": 1
+    },
+    {
+      "part": "label__text",
+      "channel": "word-break",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "break-word",
+      "distinctValues": 1
+    },
+    {
+      "part": "label-2",
+      "channel": "cursor",
+      "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
+      "sample": "default",
+      "distinctValues": 1
+    },
+    {
+      "part": "label-2",
+      "channel": "display",
+      "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
+      "sample": "inline",
+      "distinctValues": 1
+    },
+    {
+      "part": "label-2",
+      "channel": "overflow-wrap",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "break-word",
+      "distinctValues": 1
+    },
+    {
+      "part": "label-2",
+      "channel": "word-break",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "break-word",
+      "distinctValues": 1
+    },
+    {
+      "part": "connected",
+      "channel": "align-items",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "center",
+      "distinctValues": 1
+    },
+    {
+      "part": "connected",
+      "channel": "display",
+      "reason": "declared-channel value outside the bounded grammar — named residue (v15)",
+      "sample": "flex",
+      "distinctValues": 1
+    },
+    {
+      "part": "connected",
+      "channel": "position",
+      "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
+      "sample": "relative",
+      "distinctValues": 1
+    },
+    {
+      "part": "connected__item",
+      "channel": "position",
+      "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
+      "sample": "relative",
+      "distinctValues": 1
+    },
+    {
+      "part": "textfield",
+      "channel": "align-items",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "center",
+      "distinctValues": 1
+    },
+    {
+      "part": "textfield",
+      "channel": "cursor",
+      "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
+      "sample": "text",
+      "distinctValues": 1
+    },
+    {
+      "part": "textfield",
+      "channel": "display",
+      "reason": "declared-channel value outside the bounded grammar — named residue (v15)",
+      "sample": "flex",
+      "distinctValues": 1
+    },
+    {
+      "part": "textfield",
+      "channel": "position",
+      "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
+      "sample": "relative",
+      "distinctValues": 1
+    },
+    {
+      "part": "input",
+      "channel": "flex-basis",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "0%",
+      "distinctValues": 1
+    },
+    {
+      "part": "backdrop",
+      "channel": "border-bottom-style",
+      "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
+      "sample": "solid",
+      "distinctValues": 2
+    },
+    {
+      "part": "backdrop",
+      "channel": "border-left-style",
+      "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
+      "sample": "solid",
+      "distinctValues": 2
+    },
+    {
+      "part": "backdrop",
+      "channel": "border-right-style",
+      "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
+      "sample": "solid",
+      "distinctValues": 2
+    },
+    {
+      "part": "backdrop",
+      "channel": "border-top-style",
+      "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
+      "sample": "solid",
+      "distinctValues": 2
+    },
+    {
+      "part": "backdrop",
+      "channel": "position",
+      "reason": "declared-channel value outside the bounded grammar — named residue (v15)",
+      "sample": "absolute",
+      "distinctValues": 1
+    }
+  ],
+  "stateOverflow": [
+    {
+      "state": "disabled",
+      "part": "backdrop",
+      "channel": "border-bottom-style",
+      "sample": "none",
+      "reason": "declared-channel state delta on 2/4 combos — partial coverage cannot carry as a state selector (v15); named residue"
+    },
+    {
+      "state": "disabled",
+      "part": "backdrop",
+      "channel": "border-left-style",
+      "sample": "none",
+      "reason": "declared-channel state delta on 2/4 combos — partial coverage cannot carry as a state selector (v15); named residue"
+    },
+    {
+      "state": "disabled",
+      "part": "backdrop",
+      "channel": "border-right-style",
+      "sample": "none",
+      "reason": "declared-channel state delta on 2/4 combos — partial coverage cannot carry as a state selector (v15); named residue"
+    },
+    {
+      "state": "disabled",
+      "part": "backdrop",
+      "channel": "border-top-style",
+      "sample": "none",
+      "reason": "declared-channel state delta on 2/4 combos — partial coverage cannot carry as a state selector (v15); named residue"
+    },
+    {
+      "state": "disabled",
+      "part": "textfield",
+      "channel": "cursor",
+      "sample": "auto",
+      "reason": "value shape outside mintable kinds and outside the declared vocabulary"
+    }
+  ],
+  "overflowBindings": [
+    {
+      "part": "labelled__labelwrapper",
+      "channel": "margin-bottom",
+      "ref": "{imported.text-field.labelled-labelwrapper.margin-bottom}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "labelled__labelwrapper",
+      "channel": "min-height",
+      "ref": "{imported.shared.size-0}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "labelled__labelwrapper",
+      "channel": "min-width",
+      "ref": "{imported.shared.size-0}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "label__text",
+      "channel": "flex-grow",
+      "ref": "{imported.shared.num-1}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "label__text",
+      "channel": "min-height",
+      "ref": "{imported.shared.size-0}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "label__text",
+      "channel": "min-width",
+      "ref": "{imported.shared.size-0}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "label-2",
+      "channel": "min-height",
+      "ref": "{imported.shared.size-0}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "label-2",
+      "channel": "min-width",
+      "ref": "{imported.shared.size-0}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "connected",
+      "channel": "bottom",
+      "ref": "{imported.shared.size-0}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "connected",
+      "channel": "left",
+      "ref": "{imported.shared.size-0}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "connected",
+      "channel": "min-height",
+      "ref": "{imported.shared.size-0}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "connected",
+      "channel": "min-width",
+      "ref": "{imported.shared.size-0}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "connected",
+      "channel": "right",
+      "ref": "{imported.shared.size-0}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "connected",
+      "channel": "top",
+      "ref": "{imported.shared.size-0}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "connected__item",
+      "channel": "bottom",
+      "ref": "{imported.shared.size-0}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "connected__item",
+      "channel": "flex-grow",
+      "ref": "{imported.shared.num-1}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "connected__item",
+      "channel": "left",
+      "ref": "{imported.shared.size-0}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "connected__item",
+      "channel": "right",
+      "ref": "{imported.shared.size-0}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "connected__item",
+      "channel": "top",
+      "ref": "{imported.shared.size-0}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "connected__item",
+      "channel": "z-index",
+      "ref": "{imported.text-field.connected-item.z-index}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "textfield",
+      "channel": "bottom",
+      "ref": "{imported.shared.size-0}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "textfield",
+      "channel": "left",
+      "ref": "{imported.shared.size-0}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "textfield",
+      "channel": "min-height",
+      "ref": "{imported.shared.size-0}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "textfield",
+      "channel": "min-width",
+      "ref": "{imported.shared.size-0}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "textfield",
+      "channel": "right",
+      "ref": "{imported.shared.size-0}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "textfield",
+      "channel": "top",
+      "ref": "{imported.shared.size-0}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "backdrop",
+      "channel": "border-bottom-color",
+      "state": "active",
+      "ref": "{imported.shared.color-1a1a1a}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "backdrop",
+      "channel": "border-left-color",
+      "state": "active",
+      "ref": "{imported.shared.color-1a1a1a}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "backdrop",
+      "channel": "border-right-color",
+      "state": "active",
+      "ref": "{imported.shared.color-1a1a1a}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "backdrop",
+      "channel": "border-top-color",
+      "state": "active",
+      "ref": "{imported.shared.color-1a1a1a}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "backdrop",
+      "channel": "outline-color",
+      "state": "active",
+      "ref": "{imported.text-field.backdrop.outline-color-state-active}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "backdrop",
+      "channel": "outline-offset",
+      "state": "active",
+      "refusal": "resolved values differ across variants without correlating to any variant axis — nothing minted; bind manually"
+    },
+    {
+      "part": "backdrop",
+      "channel": "outline-width",
+      "state": "active",
+      "ref": "{imported.text-field.backdrop.outline-width-state-active}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "connected__item",
+      "channel": "z-index",
+      "state": "active",
+      "ref": "{imported.text-field.connected-item.z-index-state-active}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "backdrop",
+      "channel": "border-bottom-color",
+      "state": "disabled",
+      "ref": "{imported.shared.color-b5b5b5}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "backdrop",
+      "channel": "border-bottom-width",
+      "state": "disabled",
+      "ref": "{imported.shared.size-0}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "backdrop",
+      "channel": "border-left-color",
+      "state": "disabled",
+      "ref": "{imported.shared.color-b5b5b5}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "backdrop",
+      "channel": "border-left-width",
+      "state": "disabled",
+      "ref": "{imported.shared.size-0}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "backdrop",
+      "channel": "border-right-color",
+      "state": "disabled",
+      "ref": "{imported.shared.color-b5b5b5}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "backdrop",
+      "channel": "border-right-width",
+      "state": "disabled",
+      "ref": "{imported.shared.size-0}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "backdrop",
+      "channel": "border-top-color",
+      "state": "disabled",
+      "ref": "{imported.shared.color-b5b5b5}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "backdrop",
+      "channel": "border-top-width",
+      "state": "disabled",
+      "ref": "{imported.shared.size-0}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "backdrop",
+      "channel": "caret-color",
+      "state": "disabled",
+      "ref": "{imported.shared.color-b5b5b5}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "backdrop",
+      "channel": "column-rule-color",
+      "state": "disabled",
+      "ref": "{imported.shared.color-b5b5b5}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "backdrop",
+      "channel": "outline-color",
+      "state": "disabled",
+      "ref": "{imported.shared.color-b5b5b5}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "backdrop",
+      "channel": "text-decoration-color",
+      "state": "disabled",
+      "ref": "{imported.shared.color-b5b5b5}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "backdrop",
+      "channel": "text-emphasis-color",
+      "state": "disabled",
+      "ref": "{imported.shared.color-b5b5b5}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "input",
+      "channel": "border-bottom-color",
+      "state": "disabled",
+      "ref": "{imported.shared.color-b5b5b5}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "input",
+      "channel": "border-left-color",
+      "state": "disabled",
+      "ref": "{imported.shared.color-b5b5b5}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "input",
+      "channel": "border-right-color",
+      "state": "disabled",
+      "ref": "{imported.shared.color-b5b5b5}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "input",
+      "channel": "border-top-color",
+      "state": "disabled",
+      "ref": "{imported.shared.color-b5b5b5}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "input",
+      "channel": "column-rule-color",
+      "state": "disabled",
+      "ref": "{imported.shared.color-b5b5b5}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "input",
+      "channel": "outline-color",
+      "state": "disabled",
+      "ref": "{imported.shared.color-b5b5b5}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "input",
+      "channel": "text-decoration-color",
+      "state": "disabled",
+      "ref": "{imported.shared.color-b5b5b5}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "input",
+      "channel": "text-emphasis-color",
+      "state": "disabled",
+      "ref": "{imported.shared.color-b5b5b5}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "label__text",
+      "channel": "border-bottom-color",
+      "state": "disabled",
+      "ref": "{imported.shared.color-b5b5b5}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "label__text",
+      "channel": "border-left-color",
+      "state": "disabled",
+      "ref": "{imported.shared.color-b5b5b5}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "label__text",
+      "channel": "border-right-color",
+      "state": "disabled",
+      "ref": "{imported.shared.color-b5b5b5}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "label__text",
+      "channel": "border-top-color",
+      "state": "disabled",
+      "ref": "{imported.shared.color-b5b5b5}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "label__text",
+      "channel": "caret-color",
+      "state": "disabled",
+      "ref": "{imported.shared.color-b5b5b5}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "label__text",
+      "channel": "color",
+      "state": "disabled",
+      "ref": "{imported.shared.color-b5b5b5}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "label__text",
+      "channel": "column-rule-color",
+      "state": "disabled",
+      "ref": "{imported.shared.color-b5b5b5}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "label__text",
+      "channel": "outline-color",
+      "state": "disabled",
+      "ref": "{imported.shared.color-b5b5b5}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "label__text",
+      "channel": "text-decoration-color",
+      "state": "disabled",
+      "ref": "{imported.shared.color-b5b5b5}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "label__text",
+      "channel": "text-emphasis-color",
+      "state": "disabled",
+      "ref": "{imported.shared.color-b5b5b5}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "label-2",
+      "channel": "border-bottom-color",
+      "state": "disabled",
+      "ref": "{imported.shared.color-b5b5b5}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "label-2",
+      "channel": "border-left-color",
+      "state": "disabled",
+      "ref": "{imported.shared.color-b5b5b5}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "label-2",
+      "channel": "border-right-color",
+      "state": "disabled",
+      "ref": "{imported.shared.color-b5b5b5}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "label-2",
+      "channel": "border-top-color",
+      "state": "disabled",
+      "ref": "{imported.shared.color-b5b5b5}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "label-2",
+      "channel": "caret-color",
+      "state": "disabled",
+      "ref": "{imported.shared.color-b5b5b5}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "label-2",
+      "channel": "color",
+      "state": "disabled",
+      "ref": "{imported.shared.color-b5b5b5}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "label-2",
+      "channel": "column-rule-color",
+      "state": "disabled",
+      "ref": "{imported.shared.color-b5b5b5}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "label-2",
+      "channel": "outline-color",
+      "state": "disabled",
+      "ref": "{imported.shared.color-b5b5b5}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "label-2",
+      "channel": "text-decoration-color",
+      "state": "disabled",
+      "ref": "{imported.shared.color-b5b5b5}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "label-2",
+      "channel": "text-emphasis-color",
+      "state": "disabled",
+      "ref": "{imported.shared.color-b5b5b5}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "label",
+      "channel": "border-bottom-color",
+      "state": "disabled",
+      "ref": "{imported.shared.color-b5b5b5}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "label",
+      "channel": "border-left-color",
+      "state": "disabled",
+      "ref": "{imported.shared.color-b5b5b5}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "label",
+      "channel": "border-right-color",
+      "state": "disabled",
+      "ref": "{imported.shared.color-b5b5b5}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "label",
+      "channel": "border-top-color",
+      "state": "disabled",
+      "ref": "{imported.shared.color-b5b5b5}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "label",
+      "channel": "caret-color",
+      "state": "disabled",
+      "ref": "{imported.shared.color-b5b5b5}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "state": "disabled",
+      "ref": "{imported.shared.color-b5b5b5}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "label",
+      "channel": "column-rule-color",
+      "state": "disabled",
+      "ref": "{imported.shared.color-b5b5b5}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "label",
+      "channel": "outline-color",
+      "state": "disabled",
+      "ref": "{imported.shared.color-b5b5b5}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "label",
+      "channel": "text-decoration-color",
+      "state": "disabled",
+      "ref": "{imported.shared.color-b5b5b5}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "label",
+      "channel": "text-emphasis-color",
+      "state": "disabled",
+      "ref": "{imported.shared.color-b5b5b5}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "labelled__labelwrapper",
+      "channel": "border-bottom-color",
+      "state": "disabled",
+      "ref": "{imported.shared.color-b5b5b5}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "labelled__labelwrapper",
+      "channel": "border-left-color",
+      "state": "disabled",
+      "ref": "{imported.shared.color-b5b5b5}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "labelled__labelwrapper",
+      "channel": "border-right-color",
+      "state": "disabled",
+      "ref": "{imported.shared.color-b5b5b5}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "labelled__labelwrapper",
+      "channel": "border-top-color",
+      "state": "disabled",
+      "ref": "{imported.shared.color-b5b5b5}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "labelled__labelwrapper",
+      "channel": "caret-color",
+      "state": "disabled",
+      "ref": "{imported.shared.color-b5b5b5}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "labelled__labelwrapper",
+      "channel": "color",
+      "state": "disabled",
+      "ref": "{imported.shared.color-b5b5b5}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "labelled__labelwrapper",
+      "channel": "column-rule-color",
+      "state": "disabled",
+      "ref": "{imported.shared.color-b5b5b5}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "labelled__labelwrapper",
+      "channel": "outline-color",
+      "state": "disabled",
+      "ref": "{imported.shared.color-b5b5b5}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "labelled__labelwrapper",
+      "channel": "text-decoration-color",
+      "state": "disabled",
+      "ref": "{imported.shared.color-b5b5b5}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "labelled__labelwrapper",
+      "channel": "text-emphasis-color",
+      "state": "disabled",
+      "ref": "{imported.shared.color-b5b5b5}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "textfield",
+      "channel": "border-bottom-color",
+      "state": "disabled",
+      "ref": "{imported.shared.color-b5b5b5}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "textfield",
+      "channel": "border-left-color",
+      "state": "disabled",
+      "ref": "{imported.shared.color-b5b5b5}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "textfield",
+      "channel": "border-right-color",
+      "state": "disabled",
+      "ref": "{imported.shared.color-b5b5b5}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "textfield",
+      "channel": "border-top-color",
+      "state": "disabled",
+      "ref": "{imported.shared.color-b5b5b5}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "textfield",
+      "channel": "caret-color",
+      "state": "disabled",
+      "ref": "{imported.shared.color-b5b5b5}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "textfield",
+      "channel": "color",
+      "state": "disabled",
+      "ref": "{imported.shared.color-b5b5b5}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "textfield",
+      "channel": "column-rule-color",
+      "state": "disabled",
+      "ref": "{imported.shared.color-b5b5b5}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "textfield",
+      "channel": "outline-color",
+      "state": "disabled",
+      "ref": "{imported.shared.color-b5b5b5}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "textfield",
+      "channel": "text-decoration-color",
+      "state": "disabled",
+      "ref": "{imported.shared.color-b5b5b5}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "textfield",
+      "channel": "text-emphasis-color",
+      "state": "disabled",
+      "ref": "{imported.shared.color-b5b5b5}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "backdrop",
+      "channel": "border-bottom-color",
+      "state": "focus-visible",
+      "ref": "{imported.shared.color-1a1a1a}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "backdrop",
+      "channel": "border-left-color",
+      "state": "focus-visible",
+      "ref": "{imported.shared.color-1a1a1a}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "backdrop",
+      "channel": "border-right-color",
+      "state": "focus-visible",
+      "ref": "{imported.shared.color-1a1a1a}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "backdrop",
+      "channel": "border-top-color",
+      "state": "focus-visible",
+      "ref": "{imported.shared.color-1a1a1a}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "backdrop",
+      "channel": "outline-color",
+      "state": "focus-visible",
+      "ref": "{imported.text-field.backdrop.outline-color-state-focus-visible}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "backdrop",
+      "channel": "outline-offset",
+      "state": "focus-visible",
+      "refusal": "resolved values differ across variants without correlating to any variant axis — nothing minted; bind manually"
+    },
+    {
+      "part": "backdrop",
+      "channel": "outline-width",
+      "state": "focus-visible",
+      "ref": "{imported.text-field.backdrop.outline-width-state-focus-visible}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "connected__item",
+      "channel": "z-index",
+      "state": "focus-visible",
+      "ref": "{imported.text-field.connected-item.z-index-state-focus-visible}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "backdrop",
+      "channel": "border-bottom-color",
+      "state": "hover",
+      "ref": "{imported.shared.color-616161}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "backdrop",
+      "channel": "border-left-color",
+      "state": "hover",
+      "ref": "{imported.shared.color-616161}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "backdrop",
+      "channel": "border-right-color",
+      "state": "hover",
+      "ref": "{imported.shared.color-616161}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "backdrop",
+      "channel": "border-top-color",
+      "state": "hover",
+      "ref": "{imported.shared.color-616161}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    }
+  ],
+  "pairwiseRefusals": [],
+  "pseudoParts": {
+    "_reason": "S5 (DESIGN §5.4): pseudo-element decor has no anatomy spelling — captured, receipted, not carried",
+    "findings": [
+      {
+        "combo": "inherit.slim.enabled",
+        "interaction": "default",
+        "part": "backdrop",
+        "pseudo": "::after",
+        "deltaVsDefault": {
+          "content": "\"\""
+        }
+      },
+      {
+        "combo": "inherit.slim.disabled",
+        "interaction": "default",
+        "part": "backdrop",
+        "pseudo": "::after",
+        "deltaVsDefault": {
+          "content": "\"\""
+        }
+      },
+      {
+        "combo": "inherit.medium.enabled",
+        "interaction": "default",
+        "part": "backdrop",
+        "pseudo": "::after",
+        "deltaVsDefault": {
+          "content": "\"\""
+        }
+      },
+      {
+        "combo": "inherit.medium.disabled",
+        "interaction": "default",
+        "part": "backdrop",
+        "pseudo": "::after",
+        "deltaVsDefault": {
+          "content": "\"\""
+        }
+      },
+      {
+        "combo": "borderless.slim.enabled",
+        "interaction": "default",
+        "part": "backdrop",
+        "pseudo": "::after",
+        "deltaVsDefault": {
+          "content": "\"\""
+        }
+      },
+      {
+        "combo": "borderless.slim.disabled",
+        "interaction": "default",
+        "part": "backdrop",
+        "pseudo": "::after",
+        "deltaVsDefault": {
+          "content": "\"\""
+        }
+      },
+      {
+        "combo": "borderless.medium.enabled",
+        "interaction": "default",
+        "part": "backdrop",
+        "pseudo": "::after",
+        "deltaVsDefault": {
+          "content": "\"\""
+        }
+      },
+      {
+        "combo": "borderless.medium.disabled",
+        "interaction": "default",
+        "part": "backdrop",
+        "pseudo": "::after",
+        "deltaVsDefault": {
+          "content": "\"\""
+        }
+      }
+    ],
+    "totalFindings": 8
+  },
+  "bindingContradictions": [
+    {
+      "combo": "borderless.slim.enabled",
+      "part": "input",
+      "channel": "min-height",
+      "ref": "{p.space-800}",
+      "computedProp": "min-height",
+      "expected": "32px",
+      "observed": "28px",
+      "verdict": "contradiction",
+      "cause": "equal-specificity cascade across two axes: .Polaris-TextField--slim's min-height (p.height-700 = 28px) source-orders after .Polaris-TextField--borderless's (p.space-800 = 32px), so borderless+slim renders 28px — a variant×size condition, refused from single-axis resolution by the mint discipline; named residue (capture-only component)"
+    },
+    {
+      "combo": "borderless.slim.enabled",
+      "part": "backdrop",
+      "channel": "border-width",
+      "ref": "{p.border-width-0165}",
+      "computedProp": "border-bottom-width",
+      "expected": "1px",
+      "observed": "0px",
+      "verdict": "contradiction",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-width is 0 for the borderless variant while the carried base binding paints 1px on the inherit variant. Single-axis partition (variant) — resolve via the review queue (--to {p.border-width-0}; several zero-valued tokens share 0px, border-width-0 is the exact name-class match)"
+    },
+    {
+      "combo": "borderless.slim.enabled",
+      "part": "backdrop",
+      "channel": "border-color",
+      "ref": "{p.color-input-border}",
+      "computedProp": "border-bottom-color",
+      "expected": "rgba(138, 138, 138, 1)",
+      "observed": "rgba(48, 48, 48, 1)",
+      "verdict": "contradiction",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-color falls back to the element's currentColor (the p.color-text body chain), not the carried p.color-input-border; the real fact is 'no border' (border-width 0), and a color rebind would dress a vacuous channel as a binding — named residue (the border-width channel resolves to {p.border-width-0} instead)"
+    },
+    {
+      "combo": "borderless.slim.enabled",
+      "part": "backdrop",
+      "channel": "min-height",
+      "ref": "{p.space-800}",
+      "computedProp": "min-height",
+      "expected": "32px",
+      "observed": "28px",
+      "verdict": "contradiction",
+      "cause": "equal-specificity cascade across two axes: .Polaris-TextField--slim's min-height (p.height-700 = 28px) source-orders after .Polaris-TextField--borderless's (p.space-800 = 32px), so borderless+slim renders 28px — a variant×size condition, refused from single-axis resolution by the mint discipline; named residue (capture-only component)"
+    },
+    {
+      "combo": "borderless.medium.enabled",
+      "part": "backdrop",
+      "channel": "border-width",
+      "ref": "{p.border-width-0165}",
+      "computedProp": "border-bottom-width",
+      "expected": "1px",
+      "observed": "0px",
+      "verdict": "contradiction",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-width is 0 for the borderless variant while the carried base binding paints 1px on the inherit variant. Single-axis partition (variant) — resolve via the review queue (--to {p.border-width-0}; several zero-valued tokens share 0px, border-width-0 is the exact name-class match)"
+    },
+    {
+      "combo": "borderless.medium.enabled",
+      "part": "backdrop",
+      "channel": "border-color",
+      "ref": "{p.color-input-border}",
+      "computedProp": "border-bottom-color",
+      "expected": "rgba(138, 138, 138, 1)",
+      "observed": "rgba(48, 48, 48, 1)",
+      "verdict": "contradiction",
+      "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-color falls back to the element's currentColor (the p.color-text body chain), not the carried p.color-input-border; the real fact is 'no border' (border-width 0), and a color rebind would dress a vacuous channel as a binding — named residue (the border-width channel resolves to {p.border-width-0} instead)"
+    }
+  ],
+  "interactionOnDisabled": [],
+  "structureReceipts": [],
+  "styledChannelReceipts": [
+    "control-fallback: no control for <label> — span control used (part label__text)",
+    "control-fallback: no control for <input> — span control used (part input)"
+  ],
+  "anatomyJoin": {
+    "computed": [
+      {
+        "part": "root",
+        "join": "matched"
+      },
+      {
+        "part": "labelled__labelwrapper",
+        "join": "computed-only"
+      },
+      {
+        "part": "label",
+        "join": "computed-only"
+      },
+      {
+        "part": "label__text",
+        "join": "computed-only"
+      },
+      {
+        "part": "label-2",
+        "join": "computed-only"
+      },
+      {
+        "part": "connected",
+        "join": "computed-only"
+      },
+      {
+        "part": "connected__item",
+        "join": "computed-only"
+      },
+      {
+        "part": "textfield",
+        "join": "computed-only"
+      },
+      {
+        "part": "input",
+        "join": "matched"
+      },
+      {
+        "part": "backdrop",
+        "join": "matched"
+      }
+    ],
+    "staticOnly": []
+  },
+  "enrichmentNotes": [
+    "declared fact carried: input.cursor = text (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: input.font-feature-settings = normal (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: input.overflow-x = clip (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: input.overflow-y = clip (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: input.position = relative (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: input.text-rendering = auto (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: backdrop.cursor = text (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: backdrop.pointer-events = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared state fact carried: [active] backdrop.outline-style = solid (v15 declared vocabulary)",
+    "declared state fact carried: [disabled] backdrop.cursor = auto (v15 declared vocabulary)",
+    "declared state fact carried: [disabled] input.cursor = default (v15 declared vocabulary)",
+    "declared state fact carried: [focus-visible] backdrop.outline-style = solid (v15 declared vocabulary)"
+  ]
+}

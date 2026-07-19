@@ -1,0 +1,42 @@
+[
+  {
+    "key": "enabled__default",
+    "pctExact": 0.013020833333333334,
+    "pctAA": 0
+  },
+  {
+    "key": "enabled__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "enabled__focus-visible",
+    "pctExact": 0.0390625,
+    "pctAA": 0
+  },
+  {
+    "key": "enabled__active",
+    "pctExact": 0.006510416666666667,
+    "pctAA": 0
+  },
+  {
+    "key": "disabled__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "disabled__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "disabled__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "disabled__active",
+    "pctExact": 0,
+    "pctAA": 0
+  }
+]

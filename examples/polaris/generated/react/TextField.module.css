@@ -1,5 +1,5 @@
 /* GENERATED FILE — DO NOT EDIT.
- * Source of truth: contracts/text-field.contract.json (polaris.text-field v0.1.0)
+ * Source of truth: contracts/text-field.contract.json (polaris.text-field v0.2.0)
  * Regenerate with: npm run generate
  */
 
@@ -8,6 +8,11 @@
   align-items: center;
   border: 0;
   color: var(--p-color-text);
+}
+
+.root:focus-visible {
+  outline-style: solid;
+  outline-offset: 2px;
 }
 
 .input {
@@ -19,6 +24,19 @@
   font-size: var(--p-font-size-400);
   font-weight: var(--p-font-weight-regular);
   line-height: var(--p-font-line-height-600);
+  bottom: var(--imported-shared-size-0);
+  flex-grow: var(--imported-shared-num-1);
+  left: var(--imported-shared-size-0);
+  min-width: var(--imported-shared-size-0);
+  right: var(--imported-shared-size-0);
+  top: var(--imported-shared-size-0);
+  z-index: var(--imported-text-field-input-z-index);
+  cursor: text;
+  font-feature-settings: normal;
+  overflow-x: clip;
+  overflow-y: clip;
+  position: relative;
+  text-rendering: auto;
 }
 
 .variant-borderless .input {
@@ -30,6 +48,10 @@
 }
 
 .root:disabled .input {
+  cursor: default;
+}
+
+.root:disabled .input {
   color: var(--p-color-text-disabled);
 }
 
@@ -38,7 +60,18 @@
   border-radius: var(--p-border-radius-200);
   border-width: var(--p-border-width-0165);
   border-color: var(--p-color-input-border);
+  border-bottom-left-radius: var(--imported-shared-size-8);
+  border-bottom-right-radius: var(--imported-shared-size-8);
+  border-top-right-radius: var(--imported-shared-size-8);
+  bottom: var(--imported-shared-size-0);
+  left: var(--imported-shared-size-0);
+  min-width: var(--imported-shared-size-0);
+  right: var(--imported-shared-size-0);
+  top: var(--imported-shared-size-0);
+  z-index: var(--imported-text-field-backdrop-z-index);
   border-style: solid;
+  cursor: text;
+  pointer-events: none;
 }
 
 .variant-borderless .backdrop {
@@ -47,4 +80,88 @@
 
 .size-slim .backdrop {
   padding-block: var(--p-space-050);
+}
+
+.variant-borderless .backdrop {
+  border-left-color: var(--imported-text-field-backdrop-border-left-color-borderless);
+}
+
+.variant-borderless .backdrop {
+  border-left-width: var(--imported-text-field-backdrop-border-left-width-borderless);
+}
+
+.variant-borderless .backdrop {
+  border-right-color: var(--imported-text-field-backdrop-border-right-color-borderless);
+}
+
+.variant-borderless .backdrop {
+  border-right-width: var(--imported-text-field-backdrop-border-right-width-borderless);
+}
+
+.variant-borderless .backdrop {
+  border-top-color: var(--imported-text-field-backdrop-border-top-color-borderless);
+}
+
+.variant-borderless .backdrop {
+  border-top-width: var(--imported-text-field-backdrop-border-top-width-borderless);
+}
+
+.variant-inherit .backdrop {
+  border-left-color: var(--imported-text-field-backdrop-border-left-color-inherit);
+}
+
+.variant-inherit .backdrop {
+  border-left-width: var(--imported-text-field-backdrop-border-left-width-inherit);
+}
+
+.variant-inherit .backdrop {
+  border-right-color: var(--imported-text-field-backdrop-border-right-color-inherit);
+}
+
+.variant-inherit .backdrop {
+  border-right-width: var(--imported-text-field-backdrop-border-right-width-inherit);
+}
+
+.variant-inherit .backdrop {
+  border-top-color: var(--imported-text-field-backdrop-border-top-color-inherit);
+}
+
+.variant-inherit .backdrop {
+  border-top-width: var(--imported-text-field-backdrop-border-top-width-inherit);
+}
+
+.variant-borderless .backdrop {
+  border-width: var(--p-border-width-0);
+}
+
+.root:active:not(:disabled) .backdrop {
+  outline-style: solid;
+}
+
+.root:disabled .backdrop {
+  cursor: auto;
+}
+
+.root:focus-visible .backdrop {
+  outline-style: solid;
+}
+
+.root:active:not(:disabled) .backdrop {
+  background-color: var(--imported-text-field-backdrop-background-color-state-active);
+}
+
+.root:disabled .backdrop {
+  background-color: var(--imported-text-field-backdrop-background-color-state-disabled);
+}
+
+.root:disabled .backdrop {
+  color: var(--imported-shared-color-b5b5b5);
+}
+
+.root:focus-visible .backdrop {
+  background-color: var(--imported-text-field-backdrop-background-color-state-focus-visible);
+}
+
+.root:hover:not(:disabled) .backdrop {
+  background-color: var(--imported-text-field-backdrop-background-color-state-hover);
 }

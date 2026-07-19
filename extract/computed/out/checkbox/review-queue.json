@@ -1,0 +1,29 @@
+{
+  "_marker": "CONTRADICTION REVIEW QUEUE — computed truth vs static bindings. Resolution is HUMAN-ACK ONLY: extract/computed/resolve.ts applies computed-wins per explicitly named item; nothing auto-resolves.",
+  "component": "Checkbox",
+  "contract": "examples/polaris/extraction/static-contracts/checkbox.contract.json",
+  "generatedBy": "extract/computed/run.ts",
+  "browser": "148.0.7778.96",
+  "items": [
+    {
+      "id": "enabled|backdrop|border-width",
+      "combo": "enabled",
+      "part": "backdrop",
+      "channel": "border-width",
+      "ref": "{p.border-width-0165}",
+      "computedProp": "border-bottom-width",
+      "expected": "1px",
+      "observed": "0px",
+      "cause": "cross-component zeroing (the showcase's own named Checkbox gap, now measured): Polaris's Choice wrapper CSS zeroes the checkbox backdrop border and repaints the control edge as an inset box-shadow, so the carried Checkbox.module.css border-width binding loses the cascade — computed border-width is 0. Computed truth wins: resolve via the review queue (--to {p.border-width-0}; several zero-valued tokens share 0px, border-width-0 is the exact name-class match). The edge itself rides the minted box-shadow channel.",
+      "candidates": [
+        "p.border-radius-0",
+        "p.border-width-0",
+        "p.breakpoints-xs",
+        "p.font-letter-spacing-normal",
+        "p.height-0",
+        "p.space-0"
+      ],
+      "status": "open"
+    }
+  ]
+}

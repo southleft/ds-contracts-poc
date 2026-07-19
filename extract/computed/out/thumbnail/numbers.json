@@ -1,0 +1,180 @@
+{
+  "component": "Thumbnail",
+  "browser": "148.0.7778.96",
+  "captures": 16,
+  "combos": 4,
+  "interactions": 4,
+  "enumerationPolicy": "full-cartesian",
+  "channelsEnumerated": 942,
+  "elementsPerCapture": 2,
+  "determinism": "byte-identical across two full sweeps in one session",
+  "styledChannels": {
+    "root": 14,
+    "part-0": 22
+  },
+  "folds": {
+    "count": 9,
+    "receipts": [
+      {
+        "part": "part-0",
+        "channel": "border-bottom-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "part-0",
+        "channel": "border-left-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "part-0",
+        "channel": "border-right-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "part-0",
+        "channel": "border-top-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "part-0",
+        "channel": "caret-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "part-0",
+        "channel": "column-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "part-0",
+        "channel": "outline-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "part-0",
+        "channel": "text-decoration-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "part-0",
+        "channel": "text-emphasis-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      }
+    ],
+    "mintedLeavesUnfolded": 14,
+    "mintedLeavesFolded": 14
+  },
+  "bound": {
+    "cellsChecked": 8,
+    "confirmed": 8,
+    "contradictions": 0,
+    "untriaged": 0
+  },
+  "minted": {
+    "leaves": 14,
+    "baseBindings": 14,
+    "stateBindings": 0,
+    "byShape": {
+      "uniform": 11,
+      "perAxis": 3,
+      "perPair": 0,
+      "refused": 0
+    }
+  },
+  "declared": {
+    "base": 4,
+    "state": 0
+  },
+  "codeOnly": {
+    "base": 6,
+    "state": 0,
+    "overflowBindings": 7
+  },
+  "pseudoElementFindings": 8,
+  "enrichedContractSchemaValid": true,
+  "enrichedContractGeneratorValid": true,
+  "replayComputedEquality": {
+    "cellsCompared": 30080,
+    "cellsMatched": 30080,
+    "pct": 100,
+    "namedExclusions": [
+      "app-region",
+      "text-decoration"
+    ],
+    "topMismatchedChannels": []
+  },
+  "pixel": {
+    "pairs": 16,
+    "exact": {
+      "mean": 9.78271484375,
+      "max": 20.690104166666668,
+      "perfect": 0
+    },
+    "aa": {
+      "mean": 9.141438802083332,
+      "max": 19.671223958333332,
+      "perfect": 0
+    },
+    "worst": [
+      {
+        "key": "large__default",
+        "pctExact": 20.690104166666668,
+        "pctAA": 19.671223958333332
+      },
+      {
+        "key": "large__hover",
+        "pctExact": 20.690104166666668,
+        "pctAA": 19.671223958333332
+      },
+      {
+        "key": "large__focus-visible",
+        "pctExact": 20.690104166666668,
+        "pctAA": 19.671223958333332
+      },
+      {
+        "key": "large__active",
+        "pctExact": 20.690104166666668,
+        "pctAA": 19.671223958333332
+      },
+      {
+        "key": "medium__default",
+        "pctExact": 11.575520833333334,
+        "pctAA": 10.817057291666666
+      },
+      {
+        "key": "medium__hover",
+        "pctExact": 11.575520833333334,
+        "pctAA": 10.817057291666666
+      },
+      {
+        "key": "medium__focus-visible",
+        "pctExact": 11.575520833333334,
+        "pctAA": 10.817057291666666
+      },
+      {
+        "key": "medium__active",
+        "pctExact": 11.575520833333334,
+        "pctAA": 10.817057291666666
+      }
+    ]
+  },
+  "gate": {
+    "computedPctEqual": 100,
+    "rowsFullyEqual": 16,
+    "rows": 16,
+    "pixelPerfectExact": 0,
+    "pixelPerfectAA": 0,
+    "pairs": 16
+  },
+  "focusVisibleDriverMatched": 0,
+  "focusVisibleDriverTotal": 4
+}

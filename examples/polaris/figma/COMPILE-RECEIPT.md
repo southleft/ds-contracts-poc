@@ -12,23 +12,52 @@ Every committed `figma/*.figma.js` passed BOTH gates at generation time:
 
 | contract | variants compiled | variant axes | distinct bound variable names | script committed |
 |---|---|---|---|---|
-| `polaris.avatar` | 5 | 1 | 2 | yes |
-| `polaris.badge` | 1 | 0 | 5 | yes |
-| `polaris.banner` | 4 | 1 | 8 | yes |
-| `polaris.button` | 200 | 4 | 14 | yes |
-| `polaris.checkbox` | 1 | 0 | 2 | yes |
+| `polaris.avatar` | 5 | 1 | 1 | yes |
+| `polaris.badge` | 1 | 0 | 4 | yes |
+| `polaris.banner` | 4 | 1 | 2 | yes |
+| `polaris.button` | 200 | 4 | 15 | yes |
+| `polaris.checkbox` | 1 | 0 | 3 | yes |
 | `polaris.progress-bar` | 12 | 2 | 6 | yes |
 | `polaris.radio-button` | 1 | 0 | 4 | yes |
 | `polaris.spinner` | 2 | 1 | 0 | yes |
 | `polaris.tag` | 1 | 0 | 3 | yes |
-| `polaris.text-field` | 1344 | 5 | 7 | NO — variant explosion (see below) |
-| `polaris.text` | 23232 | 5 | 9 | NO — variant explosion (see below) |
+| `polaris.text-field` | 4 | 5 | 8 | yes (canvas projection, see below) |
+| `polaris.text` | 55 | 5 | 4 | yes (canvas projection, see below) |
 | `polaris.thumbnail` | 4 | 1 | 3 | yes |
 
-## Variant-explosion exclusions (compiled, verified, NOT committed)
+## Canvas projections (owner ruling, floor round 2)
 
-- `polaris.text-field`: 1344 variants (5 enum axes, full cartesian) — the script compiles headlessly and passed the referee, but a component set that size is not a buildable canvas artifact (and the 2.7MB script is not committed). Canvas modeling for this component needs AXIS CURATION (which axes become Figma variants vs. text-style/property choices) — a named Phase B owner decision, and a real finding: the canvas engine compiles the full cartesian by design.
-- `polaris.text`: 23232 variants (5 enum axes, full cartesian) — the script compiles headlessly and passed the referee, but a component set that size is not a buildable canvas artifact (and the 17.7MB script is not committed). Canvas modeling for this component needs AXIS CURATION (which axes become Figma variants vs. text-style/property choices) — a named Phase B owner decision, and a real finding: the canvas engine compiles the full cartesian by design.
+The CONTRACT keeps the full prop space; the committed script draws a NAMED curated
+projection (generate.ts CANVAS_PROJECTIONS). Booleans are BOOLEAN properties (never
+variant axes); interaction states ride the State-preview axis where the contract
+declares them.
+
+- `polaris.text-field`: CANVAS PROJECTION (named curation): the drawn set is variant (2) × size (2) = 4 cells; type/inputMode/align are pinned to one representative value each (text/text/left — they parameterize input behavior and text alignment, not component form). Booleans are BOOLEAN properties; disabled rides the state-preview vocabulary where the contract declares it. The full 1,344-cell cartesian stays intact in the contract and both code surfaces.
+- `polaris.text`: CANVAS PROJECTION (named curation): the drawn set is variant (all 11) × tone (5 of 11 — base, success, critical, caution, subdued) = 55 sample cells; fontWeight/alignment/as are pinned to one representative value each (regular/start/p — fontWeight and alignment restyle text a designer sets per instance, `as` is a semantics-only tag swap). The full 23,232-cell cartesian stays intact in the contract and both code surfaces; the Polaris type scale itself ships as MINTED FIGMA TEXT STYLES (see the token script receipt below).
+
+## Minted Figma text styles (Polaris type scale)
+
+`00-tokens.figma.js` upserts **11 named text styles** — one per Polaris text role
+(`p.text-<role>-font-size` → semantic `font.<role>.size` alias → text style with identity
+marker `ds_contracts/textStyleToken`, rename-safe, idempotent):
+
+- `body-lg`
+- `body-md`
+- `body-sm`
+- `body-xs`
+- `heading-2xl`
+- `heading-3xl`
+- `heading-lg`
+- `heading-md`
+- `heading-sm`
+- `heading-xl`
+- `heading-xs`
+
+NAMED LIMITS: sample text cells keep raw font props — style attachment is an exact
+identity match on the node's bound token path, and the floor-promoted contracts bind
+Polaris's own primitives (`p.text-*`), which is the honest binding. Polaris's 450/550/650
+font weights have no Inter style mapping in the shared weight table, so minted styles
+carry the 'Medium' runtime fallback.
 
 ## Token variable upsert — named BYO limits
 

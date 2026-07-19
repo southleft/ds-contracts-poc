@@ -1,0 +1,250 @@
+{
+  "$schema": "../../../contracts/contract.schema.json",
+  "id": "polaris.checkbox",
+  "name": "Checkbox",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "PROPOSED contract extracted from examples/polaris/.polaris-clone/polaris-react/src/components/Checkbox/Checkbox.tsx (react-tsx + css-module adapters) — API surface AND anatomy (structure, token bindings, layout, states) read from source; design bindings await reconciliation and human review. PROMOTED showcase contract: API surface extracted mechanically from Shopify/polaris @ 2b1ea88625e0613853ca8577c9acd1980a90f382 (polaris-react 13.10.1, MIT © Shopify, extracted 2026-07-18); styling bindings promoted from the component's own module.css under the reviewed class map in examples/polaris/scripts/curation.ts — every carried binding and every named refusal is listed in examples/polaris/extraction/PROMOTION.md. COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @shopify/polaris@13.9.5 in headless Chromium 148.0.7778.96; overflow channels in the sibling extension file.",
+  "semantics": {
+    "element": "span"
+  },
+  "props": [
+    {
+      "name": "ariaControls",
+      "description": "Indicates the ID of the element that is controlled by the checkbox",
+      "type": "text",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Aria Controls"
+        },
+        "code": {
+          "prop": "ariaControls"
+        }
+      }
+    },
+    {
+      "name": "ariaDescribedBy",
+      "description": "Indicates the ID of the element that describes the checkbox",
+      "type": "text",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Aria Described By"
+        },
+        "code": {
+          "prop": "ariaDescribedBy"
+        }
+      }
+    },
+    {
+      "name": "labelHidden",
+      "description": "Visually hide the label",
+      "type": "boolean",
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Label Hidden"
+        },
+        "code": {
+          "prop": "labelHidden"
+        }
+      }
+    },
+    {
+      "name": "disabled",
+      "description": "Disable input",
+      "type": "boolean",
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Disabled"
+        },
+        "code": {
+          "prop": "disabled"
+        }
+      }
+    },
+    {
+      "name": "name",
+      "description": "Name for form input",
+      "type": "text",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Name"
+        },
+        "code": {
+          "prop": "name"
+        }
+      }
+    },
+    {
+      "name": "value",
+      "description": "Value for form input",
+      "type": "text",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Value"
+        },
+        "code": {
+          "prop": "value"
+        }
+      }
+    },
+    {
+      "name": "labelClassName",
+      "description": "Added to the wrapping label",
+      "type": "text",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Label Class Name"
+        },
+        "code": {
+          "prop": "labelClassName"
+        }
+      }
+    }
+  ],
+  "states": [
+    "hover",
+    "disabled",
+    "focus-visible",
+    "active"
+  ],
+  "anatomy": {
+    "root": {
+      "parts": {
+        "input": {
+          "element": "input",
+          "attrs": {
+            "type": "checkbox",
+            "name": "{name}",
+            "value": "{value}"
+          },
+          "declared": {
+            "appearance": "auto",
+            "cursor": "default",
+            "font-family": "Arial",
+            "font-feature-settings": "normal",
+            "text-rendering": "auto"
+          },
+          "declaredStates": {
+            "focus-visible": {
+              "outline-style": "auto"
+            }
+          },
+          "tokens": {
+            "bottom": "{imported.shared.size-0}",
+            "color": "{imported.checkbox.input.color}",
+            "font-size": "{imported.checkbox.input.font-size}",
+            "font-weight": "{imported.checkbox.input.font-weight}",
+            "left": "{imported.shared.size-0}",
+            "min-height": "{imported.shared.size-0}",
+            "min-width": "{imported.shared.size-0}",
+            "opacity": "{imported.shared.num-0}",
+            "outline-color": "{imported.checkbox.input.outline-color}",
+            "right": "{imported.shared.size-0}",
+            "top": "{imported.shared.size-0}",
+            "z-index": "{imported.checkbox.input.z-index}"
+          },
+          "states": {
+            "disabled": {
+              "color": "{imported.checkbox.input.color-state-disabled}"
+            }
+          }
+        },
+        "backdrop": {
+          "shape": {
+            "kind": "rect",
+            "width": 20,
+            "height": 20
+          },
+          "tokens": {
+            "border-width": "{p.border-width-0}",
+            "border-color": "{p.color-input-border}",
+            "background-color": "{imported.shared.color-ffffff}",
+            "border-bottom-left-radius": "{imported.shared.size-4}",
+            "border-bottom-right-radius": "{imported.shared.size-4}",
+            "border-left-color": "{imported.shared.color-8a8a8a}",
+            "border-right-color": "{imported.shared.color-8a8a8a}",
+            "border-top-color": "{imported.shared.color-8a8a8a}",
+            "border-top-left-radius": "{imported.shared.size-4}",
+            "border-top-right-radius": "{imported.shared.size-4}",
+            "bottom": "{imported.shared.size-0}",
+            "box-shadow": "{imported.checkbox.backdrop.box-shadow}",
+            "left": "{imported.shared.size-0}",
+            "min-height": "{imported.shared.size-0}",
+            "min-width": "{imported.shared.size-0}",
+            "right": "{imported.shared.size-0}",
+            "top": "{imported.shared.size-0}"
+          },
+          "states": {
+            "hover": {
+              "border-color": "{p.color-input-border-hover}",
+              "background-color": "{imported.shared.color-fafafa}"
+            },
+            "active": {
+              "background-color": "{imported.shared.color-fafafa}"
+            },
+            "disabled": {
+              "background-color": "{imported.checkbox.backdrop.background-color-state-disabled}"
+            },
+            "focus-visible": {
+              "background-color": "{imported.shared.color-fafafa}"
+            }
+          },
+          "declared": {
+            "border-bottom-style": "solid",
+            "border-left-style": "solid",
+            "border-right-style": "solid",
+            "border-top-style": "solid",
+            "cursor": "pointer",
+            "position": "relative",
+            "transition-delay": "0s, 0s, 0s",
+            "transition-duration": "0.1s, 0.1s, 0.1s",
+            "transition-property": "border-color, border-width, box-shadow",
+            "transition-timing-function": "cubic-bezier(0.19, 0.91, 0.38, 1), cubic-bezier(0.19, 0.91, 0.38, 1), cubic-bezier(0.19, 0.91, 0.38, 1)"
+          },
+          "declaredStates": {
+            "disabled": {
+              "cursor": "default"
+            },
+            "focus-visible": {
+              "outline-style": "solid"
+            }
+          }
+        }
+      },
+      "layout": {
+        "display": "flex",
+        "align": "center",
+        "justify": "start"
+      },
+      "declared": {
+        "cursor": "pointer"
+      },
+      "declaredStates": {
+        "disabled": {
+          "cursor": "default"
+        }
+      },
+      "tokens": {
+        "padding-bottom": "{imported.shared.size-4}",
+        "padding-top": "{imported.shared.size-4}"
+      }
+    }
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "polaris-react/src/components/Checkbox/Checkbox",
+      "export": "Checkbox"
+    }
+  }
+}

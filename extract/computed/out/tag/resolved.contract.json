@@ -88,11 +88,24 @@
             "min-width": "{imported.shared.size-0}"
           },
           "text": "Wholesale",
+          "declared": {
+            "display": "inline",
+            "text-wrap-mode": "nowrap"
+          },
           "states": {
             "disabled": {
               "color": "{imported.shared.color-b5b5b5}"
             }
           }
+        }
+      },
+      "declared": {
+        "max-width": "100%",
+        "position": "relative"
+      },
+      "declaredStates": {
+        "disabled": {
+          "transition-property": "none"
         }
       },
       "states": {

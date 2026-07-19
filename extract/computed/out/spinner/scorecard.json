@@ -1,0 +1,171 @@
+{
+  "component": "Spinner",
+  "generatedBy": "extract/computed/gate.ts",
+  "browser": "148.0.7778.96",
+  "method": "enriched contract → core/emit-html (wrapped library tokens + minted token custom properties) vs the ORIGINAL npm package rendering, same pinned Chromium, per combo × interaction; computed-equality over the styled channel set (exact string, no tolerance) + pixelmatch at threshold 0 (AA counted) and 0.1 (AA excluded) — both quoted, never widened",
+  "combos": 2,
+  "interactions": 4,
+  "computed": {
+    "cellsCompared": 0,
+    "cellsEqual": 0,
+    "pctEqual": 100,
+    "rowsFullyEqual": 0,
+    "rows": 8
+  },
+  "pixel": {
+    "pairs": 8,
+    "perfectExact": 0,
+    "perfectAA": 8,
+    "meanExact": 0.068359375,
+    "meanAA": 0,
+    "maxAA": 0
+  },
+  "fusion": {
+    "boundConfirmed": 0,
+    "boundCells": 0,
+    "contradictions": 0,
+    "mintedLeaves": 3,
+    "mintedLeavesUnfolded": 3,
+    "baseBindings": 6,
+    "stateBindings": 0,
+    "codeOnlyChannels": 11,
+    "overflowBindings": 6,
+    "folds": 0
+  },
+  "worstRows": [
+    {
+      "key": "large__default",
+      "pctAA": 0,
+      "pctExact": 0.09195963541666667,
+      "channelsMismatched": 0
+    },
+    {
+      "key": "large__hover",
+      "pctAA": 0,
+      "pctExact": 0.09195963541666667,
+      "channelsMismatched": 0
+    },
+    {
+      "key": "large__focus-visible",
+      "pctAA": 0,
+      "pctExact": 0.09195963541666667,
+      "channelsMismatched": 0
+    },
+    {
+      "key": "large__active",
+      "pctAA": 0,
+      "pctExact": 0.09195963541666667,
+      "channelsMismatched": 0
+    },
+    {
+      "key": "small__default",
+      "pctAA": 0,
+      "pctExact": 0.044759114583333336,
+      "channelsMismatched": 0
+    },
+    {
+      "key": "small__hover",
+      "pctAA": 0,
+      "pctExact": 0.044759114583333336,
+      "channelsMismatched": 0
+    },
+    {
+      "key": "small__focus-visible",
+      "pctAA": 0,
+      "pctExact": 0.044759114583333336,
+      "channelsMismatched": 0
+    },
+    {
+      "key": "small__active",
+      "pctAA": 0,
+      "pctExact": 0.044759114583333336,
+      "channelsMismatched": 0
+    }
+  ],
+  "topMismatchedChannels": [],
+  "namedLosses": [
+    "overflow: icon.fill — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+    "overflow: icon.min-height — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+    "overflow: icon.min-width — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+    "overflow: part-0.0.fill — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+    "overflow: part-0.0.min-height — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+    "overflow: part-0.0.min-width — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+    "code-only: icon.animation-duration — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: icon.animation-iteration-count — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: icon.animation-name — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: icon.animation-timing-function — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: icon.display — declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
+    "code-only: icon.overflow-clip-margin — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: icon.overflow-x — declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
+    "code-only: icon.overflow-y — declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
+    "code-only: icon.transform — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: part-0.0.d — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: part-0.0.display — declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision"
+  ],
+  "rows": [
+    {
+      "key": "small__default",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 0.044759114583333336,
+      "pctAA": 0,
+      "mismatches": []
+    },
+    {
+      "key": "small__hover",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 0.044759114583333336,
+      "pctAA": 0,
+      "mismatches": []
+    },
+    {
+      "key": "small__focus-visible",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 0.044759114583333336,
+      "pctAA": 0,
+      "mismatches": []
+    },
+    {
+      "key": "small__active",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 0.044759114583333336,
+      "pctAA": 0,
+      "mismatches": []
+    },
+    {
+      "key": "large__default",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 0.09195963541666667,
+      "pctAA": 0,
+      "mismatches": []
+    },
+    {
+      "key": "large__hover",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 0.09195963541666667,
+      "pctAA": 0,
+      "mismatches": []
+    },
+    {
+      "key": "large__focus-visible",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 0.09195963541666667,
+      "pctAA": 0,
+      "mismatches": []
+    },
+    {
+      "key": "large__active",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 0.09195963541666667,
+      "pctAA": 0,
+      "mismatches": []
+    }
+  ]
+}

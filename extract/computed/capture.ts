@@ -89,6 +89,10 @@ export interface CaptureConfig {
   /** DTCG token files whose custom-property spellings the bound-probe and
    *  the fidelity gate resolve against (repo-relative). */
   tokens: { dtcg: string[]; css: string };
+  /** Optional repo-relative dir of committed icon assets (`<name>.svg`) —
+   *  contracts whose anatomy carries `icon.asset` refs (Spinner) need the
+   *  same asset map the showcase generators use for validation + the gate. */
+  icons?: string;
   browser: {
     viewport: { width: number; height: number };
     deviceScaleFactor: number;
@@ -298,6 +302,29 @@ const captureJs = (selector: string) => `(() => {
 export const INTERACTIONS = ['default', 'hover', 'focus-visible', 'active'] as const;
 export type Interaction = (typeof INTERACTIONS)[number];
 
+/** Infinite CSS animations (Spinner's `animation: …spin … infinite`) never
+ *  reach a steady state — their animated computed channels (`transform`)
+ *  would fail the double-run byte-identity gate on every run. The capture
+ *  PINS every infinite-iteration animation at `currentTime 0` (paused): the
+ *  captured value is the animation's own 0% keyframe — a real, deterministic
+ *  point of the declared animation, recorded in provenance by keyframe name.
+ *  Finite animations and transitions are NOT touched (freezing a running
+ *  transition would capture its start value instead of its target — the
+ *  steady-state poll handles those). Idempotent; re-applied before every
+ *  capture so late-starting animations are caught. */
+const pinInfiniteAnimationsJs = `(() => {
+  const names = [];
+  for (const a of document.getAnimations()) {
+    let t = null;
+    try { t = a.effect && a.effect.getTiming ? a.effect.getTiming() : null; } catch {}
+    if (t && t.iterations === Infinity) {
+      if (a.playState !== 'paused') { a.pause(); a.currentTime = 0; }
+      names.push(a.animationName || a.id || '(unnamed)');
+    }
+  }
+  return names.sort();
+})()`;
+
 export interface SweepResult {
   /** keyed `${component}:${combo}` per capture. */
   captures: Capture[];
@@ -305,6 +332,9 @@ export interface SweepResult {
   allProps: string[];
   browserVersion: string;
   fontChecks: Record<string, boolean>;
+  /** Keyframe names of infinite CSS animations pinned at currentTime 0
+   *  (deterministic capture point; empty when the page has none). */
+  pinnedAnimations: string[];
 }
 
 /** The state sweep (§2): real browser states, driven exactly as
@@ -329,12 +359,15 @@ export async function sweep(
   const captures: Capture[] = [];
   if (opts.screenshots) mkdirSync(opts.screenshots, { recursive: true });
 
+  const pinnedAnimations = new Set<string>();
   for (const { comp, space } of mounts) {
     for (const combo of space.enumeration.combos) {
       const key = `${comp.name}:${combo.key}`;
       const stageSel = `[data-combo="${key}"]`;
       const rootLoc = page.locator(`${stageSel} > *`).first();
       for (const interaction of INTERACTIONS) {
+        // pin infinite animations at a deterministic time point (idempotent)
+        for (const n of (await page.evaluate(pinInfiniteAnimationsJs)) as string[]) pinnedAnimations.add(n);
         // neutralize residual pointer + focus state (render.ts discipline)
         await page.mouse.move(0, 0);
         await page.evaluate(`document.activeElement && document.activeElement.blur && document.activeElement.blur()`);
@@ -356,7 +389,10 @@ export async function sweep(
           await page.mouse.down();
         }
 
-        const probe = `(() => { const el = document.querySelector('${stageSel} > *'); if (!el) return ''; const cs = getComputedStyle(el); return [cs.backgroundColor, cs.color, cs.boxShadow, cs.transform].join('|'); })()`;
+        // steady-state probe over EVERY stage element (root-only polling let
+        // inner-element transitions — Checkbox/RadioButton backdrop border
+        // colors — get captured mid-flight and fail double-run byte-identity)
+        const probe = `(() => { const els = document.querySelectorAll('${stageSel}, ${stageSel} *'); const parts = []; for (const el of els) { const cs = getComputedStyle(el); parts.push(cs.backgroundColor, cs.color, cs.boxShadow, cs.transform, cs.borderTopColor, cs.borderRightColor, cs.borderBottomColor, cs.borderLeftColor, cs.opacity, cs.outlineColor, cs.fill); } return parts.join('|'); })()`;
         let prev = await page.evaluate(probe);
         for (let i = 0; i < 10; i++) {
           await page.waitForTimeout(60);
@@ -379,6 +415,15 @@ export async function sweep(
           writeFileSync(path.join(opts.screenshots, `${key.replace(/:/g, '--')}__${interaction}.png`), png);
         }
         if (interaction === 'active') await page.mouse.up();
+        // Undo form-state mutation the interaction itself caused: a real
+        // click on an UNCONTROLLED radio/checkbox CHECKS it (the click fires
+        // on mouse.up), and that state would leak into every subsequent
+        // capture — the RadioButton double-run instability. Reset to the
+        // mount defaults; controlled inputs are unaffected (React re-asserts
+        // their props). Named in provenance (formStateReset).
+        await page.evaluate(
+          `(() => { const stage = document.querySelector('${stageSel}'); if (!stage) return; for (const inp of stage.querySelectorAll('input')) { if (inp.checked !== inp.defaultChecked) { inp.checked = inp.defaultChecked; inp.dispatchEvent(new Event('change', { bubbles: true })); } if (inp.value !== inp.defaultValue) inp.value = inp.defaultValue; } })()`,
+        );
       }
     }
   }
@@ -390,5 +435,12 @@ export async function sweep(
     controls[t] = normalizeNode(raw);
   }
 
-  return { captures, controls, allProps, browserVersion: page.context().browser()!.version(), fontChecks };
+  return {
+    captures,
+    controls,
+    allProps,
+    browserVersion: page.context().browser()!.version(),
+    fontChecks,
+    pinnedAnimations: [...pinnedAnimations].sort(),
+  };
 }

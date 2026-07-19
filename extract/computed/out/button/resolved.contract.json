@@ -165,8 +165,8 @@
   ],
   "states": [
     "disabled",
-    "active",
     "focus-visible",
+    "active",
     "hover"
   ],
   "anatomy": {
@@ -254,9 +254,11 @@
           "prop": "tone",
           "map": {
             "critical": {
+              "background-image": "{imported.button.root.background-image.{variant}.critical}",
               "outline-color": "{imported.button.root.outline-color.{variant}.critical}"
             },
             "success": {
+              "background-image": "{imported.button.root.background-image.{variant}.success}",
               "outline-color": "{imported.button.root.outline-color.{variant}.success}"
             }
           }
@@ -265,18 +267,23 @@
           "prop": "variant",
           "map": {
             "monochromePlain": {
+              "background-image": "{imported.button.root.background-image.monochromePlain.none}",
               "outline-color": "{imported.button.root.outline-color.monochromePlain.none}"
             },
             "plain": {
+              "background-image": "{imported.button.root.background-image.plain.none}",
               "outline-color": "{imported.button.root.outline-color.plain.none}"
             },
             "primary": {
+              "background-image": "{imported.button.root.background-image.primary.none}",
               "outline-color": "{imported.button.root.outline-color.primary.none}"
             },
             "secondary": {
+              "background-image": "{imported.button.root.background-image.secondary.none}",
               "outline-color": "{imported.button.root.outline-color.secondary.none}"
             },
             "tertiary": {
+              "background-image": "{imported.button.root.background-image.tertiary.none}",
               "outline-color": "{imported.button.root.outline-color.tertiary.none}"
             }
           }
@@ -291,10 +298,13 @@
           "color": "{p.color-text-disabled}",
           "fill": "{p.color-icon-disabled}",
           "background-color": "{imported.button.root.background-color-state-disabled.{variant}}",
+          "background-image": "{imported.button.root.background-image-state-disabled}",
+          "box-shadow": "{imported.button.root.box-shadow-state-disabled}",
           "outline-color": "{imported.button.root.outline-color-state-disabled.{variant}}"
         },
         "active": {
           "background-color": "{imported.button.root.background-color-state-active.{variant}.none}",
+          "box-shadow": "{imported.button.root.box-shadow-state-active.{variant}.none}",
           "color": "{imported.button.root.color-state-active.{variant}.none}",
           "fill": "{imported.button.root.fill-state-active.{variant}.none}",
           "outline-color": "{imported.button.root.outline-color-state-active.{variant}.none}"
@@ -350,7 +360,38 @@
               }
             }
           ],
-          "text": "Button"
+          "text": "Button",
+          "declared": {
+            "cursor": "pointer",
+            "text-align": "center",
+            "user-select": "none"
+          },
+          "declaredStates": {
+            "disabled": {
+              "pointer-events": "none"
+            }
+          }
+        }
+      },
+      "declared": {
+        "appearance": "none",
+        "border-bottom-style": "none",
+        "border-left-style": "none",
+        "border-right-style": "none",
+        "border-top-style": "none",
+        "cursor": "pointer",
+        "font-feature-settings": "\"calt\" 0",
+        "position": "relative",
+        "text-rendering": "optimizelegibility",
+        "touch-action": "manipulation",
+        "user-select": "none"
+      },
+      "declaredStates": {
+        "disabled": {
+          "pointer-events": "none"
+        },
+        "focus-visible": {
+          "outline-style": "solid"
         }
       }
     }

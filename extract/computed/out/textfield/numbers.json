@@ -1,0 +1,138 @@
+{
+  "component": "TextField",
+  "browser": "148.0.7778.96",
+  "captures": 32,
+  "combos": 8,
+  "interactions": 4,
+  "enumerationPolicy": "full-cartesian",
+  "channelsEnumerated": 942,
+  "elementsPerCapture": 10,
+  "determinism": "byte-identical across two full sweeps in one session",
+  "styledChannels": {
+    "root": 0,
+    "labelled__labelwrapper": 9,
+    "label": 2,
+    "label__text": 6,
+    "label-2": 6,
+    "connected": 9,
+    "connected__item": 7,
+    "textfield": 10,
+    "input": 23,
+    "backdrop": 29
+  },
+  "folds": {
+    "count": 0,
+    "receipts": [],
+    "mintedLeavesUnfolded": 32,
+    "mintedLeavesFolded": 33
+  },
+  "bound": {
+    "cellsChecked": 60,
+    "confirmed": 54,
+    "contradictions": 6,
+    "untriaged": 0
+  },
+  "minted": {
+    "leaves": 33,
+    "baseBindings": 48,
+    "stateBindings": 97,
+    "byShape": {
+      "uniform": 137,
+      "perAxis": 6,
+      "perPair": 0,
+      "refused": 2
+    }
+  },
+  "declared": {
+    "base": 8,
+    "state": 4
+  },
+  "codeOnly": {
+    "base": 29,
+    "state": 5,
+    "overflowBindings": 117
+  },
+  "pseudoElementFindings": 8,
+  "enrichedContractSchemaValid": true,
+  "enrichedContractGeneratorValid": true,
+  "replayComputedEquality": {
+    "cellsCompared": 300800,
+    "cellsMatched": 300736,
+    "pct": 99.97872340425532,
+    "namedExclusions": [
+      "app-region",
+      "text-decoration"
+    ],
+    "topMismatchedChannels": [
+      [
+        "perspective-origin",
+        64
+      ]
+    ]
+  },
+  "pixel": {
+    "pairs": 32,
+    "exact": {
+      "mean": 2.81934102376302,
+      "max": 6.79931640625,
+      "perfect": 0
+    },
+    "aa": {
+      "mean": 2.049560546875,
+      "max": 5.987955729166667,
+      "perfect": 0
+    },
+    "worst": [
+      {
+        "key": "inherit.medium.enabled__active",
+        "pctExact": 6.79931640625,
+        "pctAA": 5.987955729166667
+      },
+      {
+        "key": "borderless.medium.enabled__focus-visible",
+        "pctExact": 6.79931640625,
+        "pctAA": 5.987955729166667
+      },
+      {
+        "key": "borderless.medium.enabled__active",
+        "pctExact": 6.79931640625,
+        "pctAA": 5.987955729166667
+      },
+      {
+        "key": "inherit.medium.enabled__focus-visible",
+        "pctExact": 6.798502604166667,
+        "pctAA": 5.987955729166667
+      },
+      {
+        "key": "inherit.slim.enabled__focus-visible",
+        "pctExact": 6.797688802083333,
+        "pctAA": 5.987955729166667
+      },
+      {
+        "key": "inherit.slim.enabled__active",
+        "pctExact": 6.797688802083333,
+        "pctAA": 5.987955729166667
+      },
+      {
+        "key": "borderless.slim.enabled__focus-visible",
+        "pctExact": 6.796875,
+        "pctAA": 5.987955729166667
+      },
+      {
+        "key": "borderless.slim.enabled__active",
+        "pctExact": 6.796875,
+        "pctAA": 5.987955729166667
+      }
+    ]
+  },
+  "gate": {
+    "computedPctEqual": 74.39903846153847,
+    "rowsFullyEqual": 0,
+    "rows": 32,
+    "pixelPerfectExact": 0,
+    "pixelPerfectAA": 0,
+    "pairs": 32
+  },
+  "focusVisibleDriverMatched": 0,
+  "focusVisibleDriverTotal": 8
+}

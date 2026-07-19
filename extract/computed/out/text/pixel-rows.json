@@ -1,0 +1,7582 @@
+[
+  {
+    "key": "none.none.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.none.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.none.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.none.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXs.none.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXs.none.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXs.none.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXs.none.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingSm.none.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingSm.none.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingSm.none.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingSm.none.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingMd.none.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingMd.none.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingMd.none.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingMd.none.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingLg.none.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingLg.none.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingLg.none.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingLg.none.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXl.none.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXl.none.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXl.none.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXl.none.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading2xl.none.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading2xl.none.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading2xl.none.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading2xl.none.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading3xl.none.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading3xl.none.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading3xl.none.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading3xl.none.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyXs.none.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyXs.none.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyXs.none.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyXs.none.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodySm.none.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodySm.none.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodySm.none.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodySm.none.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyMd.none.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyMd.none.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyMd.none.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyMd.none.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyLg.none.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyLg.none.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyLg.none.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyLg.none.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.base.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.base.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.base.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.base.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.disabled.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.disabled.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.disabled.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.disabled.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.inherit.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.inherit.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.inherit.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.inherit.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.success.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.success.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.success.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.success.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.critical.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.critical.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.critical.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.critical.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.caution.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.caution.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.caution.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.caution.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.subdued.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.subdued.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.subdued.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.subdued.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.text-inverse.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.text-inverse.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.text-inverse.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.text-inverse.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.text-inverse-secondary.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.text-inverse-secondary.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.text-inverse-secondary.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.text-inverse-secondary.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.magic.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.magic.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.magic.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.magic.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.magic-subdued.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.magic-subdued.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.magic-subdued.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.magic-subdued.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.none.regular__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.none.regular__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.none.regular__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.none.regular__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.none.medium__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.none.medium__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.none.medium__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.none.medium__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.none.semibold__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.none.semibold__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.none.semibold__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.none.semibold__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.none.bold__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.none.bold__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.none.bold__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.none.bold__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.base.medium__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.base.medium__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.base.medium__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.base.medium__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.disabled.semibold__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.disabled.semibold__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.disabled.semibold__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.disabled.semibold__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.inherit.bold__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.inherit.bold__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.inherit.bold__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.inherit.bold__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.critical.regular__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.critical.regular__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.critical.regular__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.critical.regular__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.caution.medium__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.caution.medium__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.caution.medium__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.caution.medium__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.subdued.semibold__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.subdued.semibold__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.subdued.semibold__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.subdued.semibold__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.text-inverse.bold__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.text-inverse.bold__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.text-inverse.bold__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.text-inverse.bold__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.magic.regular__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.magic.regular__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.magic.regular__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.magic.regular__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.magic-subdued.medium__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.magic-subdued.medium__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.magic-subdued.medium__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.magic-subdued.medium__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXs.none.semibold__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXs.none.semibold__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXs.none.semibold__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXs.none.semibold__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXs.base.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXs.base.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXs.base.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXs.base.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXs.base.bold__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXs.base.bold__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXs.base.bold__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXs.base.bold__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXs.disabled.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXs.disabled.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXs.disabled.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXs.disabled.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXs.inherit.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXs.inherit.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXs.inherit.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXs.inherit.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXs.inherit.regular__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXs.inherit.regular__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXs.inherit.regular__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXs.inherit.regular__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXs.success.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXs.success.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXs.success.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXs.success.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXs.success.medium__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXs.success.medium__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXs.success.medium__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXs.success.medium__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXs.critical.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXs.critical.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXs.critical.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXs.critical.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXs.critical.semibold__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXs.critical.semibold__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXs.critical.semibold__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXs.critical.semibold__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXs.caution.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXs.caution.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXs.caution.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXs.caution.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXs.caution.bold__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXs.caution.bold__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXs.caution.bold__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXs.caution.bold__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXs.subdued.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXs.subdued.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXs.subdued.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXs.subdued.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXs.text-inverse.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXs.text-inverse.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXs.text-inverse.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXs.text-inverse.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXs.text-inverse.regular__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXs.text-inverse.regular__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXs.text-inverse.regular__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXs.text-inverse.regular__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXs.text-inverse-secondary.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXs.text-inverse-secondary.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXs.text-inverse-secondary.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXs.text-inverse-secondary.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXs.text-inverse-secondary.medium__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXs.text-inverse-secondary.medium__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXs.text-inverse-secondary.medium__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXs.text-inverse-secondary.medium__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXs.magic.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXs.magic.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXs.magic.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXs.magic.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXs.magic.semibold__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXs.magic.semibold__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXs.magic.semibold__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXs.magic.semibold__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXs.magic-subdued.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXs.magic-subdued.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXs.magic-subdued.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXs.magic-subdued.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXs.magic-subdued.bold__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXs.magic-subdued.bold__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXs.magic-subdued.bold__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXs.magic-subdued.bold__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingSm.base.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingSm.base.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingSm.base.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingSm.base.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingSm.base.regular__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingSm.base.regular__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingSm.base.regular__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingSm.base.regular__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingSm.disabled.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingSm.disabled.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingSm.disabled.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingSm.disabled.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingSm.disabled.medium__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingSm.disabled.medium__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingSm.disabled.medium__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingSm.disabled.medium__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingSm.inherit.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingSm.inherit.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingSm.inherit.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingSm.inherit.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingSm.inherit.semibold__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingSm.inherit.semibold__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingSm.inherit.semibold__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingSm.inherit.semibold__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingSm.success.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingSm.success.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingSm.success.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingSm.success.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingSm.success.bold__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingSm.success.bold__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingSm.success.bold__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingSm.success.bold__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingSm.critical.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingSm.critical.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingSm.critical.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingSm.critical.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingSm.caution.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingSm.caution.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingSm.caution.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingSm.caution.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingSm.caution.regular__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingSm.caution.regular__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingSm.caution.regular__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingSm.caution.regular__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingSm.subdued.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingSm.subdued.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingSm.subdued.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingSm.subdued.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingSm.subdued.medium__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingSm.subdued.medium__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingSm.subdued.medium__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingSm.subdued.medium__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingSm.text-inverse.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingSm.text-inverse.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingSm.text-inverse.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingSm.text-inverse.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingSm.text-inverse.semibold__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingSm.text-inverse.semibold__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingSm.text-inverse.semibold__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingSm.text-inverse.semibold__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingSm.text-inverse-secondary.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingSm.text-inverse-secondary.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingSm.text-inverse-secondary.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingSm.text-inverse-secondary.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingSm.text-inverse-secondary.bold__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingSm.text-inverse-secondary.bold__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingSm.text-inverse-secondary.bold__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingSm.text-inverse-secondary.bold__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingSm.magic.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingSm.magic.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingSm.magic.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingSm.magic.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingSm.magic-subdued.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingSm.magic-subdued.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingSm.magic-subdued.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingSm.magic-subdued.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingSm.magic-subdued.regular__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingSm.magic-subdued.regular__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingSm.magic-subdued.regular__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingSm.magic-subdued.regular__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingMd.none.medium__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingMd.none.medium__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingMd.none.medium__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingMd.none.medium__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingMd.base.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingMd.base.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingMd.base.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingMd.base.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingMd.base.semibold__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingMd.base.semibold__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingMd.base.semibold__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingMd.base.semibold__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingMd.disabled.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingMd.disabled.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingMd.disabled.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingMd.disabled.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingMd.disabled.bold__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingMd.disabled.bold__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingMd.disabled.bold__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingMd.disabled.bold__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingMd.inherit.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingMd.inherit.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingMd.inherit.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingMd.inherit.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingMd.success.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingMd.success.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingMd.success.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingMd.success.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingMd.success.regular__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingMd.success.regular__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingMd.success.regular__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingMd.success.regular__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingMd.critical.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingMd.critical.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingMd.critical.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingMd.critical.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingMd.critical.medium__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingMd.critical.medium__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingMd.critical.medium__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingMd.critical.medium__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingMd.caution.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingMd.caution.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingMd.caution.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingMd.caution.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingMd.caution.semibold__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingMd.caution.semibold__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingMd.caution.semibold__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingMd.caution.semibold__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingMd.subdued.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingMd.subdued.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingMd.subdued.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingMd.subdued.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingMd.subdued.bold__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingMd.subdued.bold__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingMd.subdued.bold__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingMd.subdued.bold__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingMd.text-inverse.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingMd.text-inverse.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingMd.text-inverse.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingMd.text-inverse.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingMd.text-inverse-secondary.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingMd.text-inverse-secondary.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingMd.text-inverse-secondary.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingMd.text-inverse-secondary.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingMd.text-inverse-secondary.regular__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingMd.text-inverse-secondary.regular__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingMd.text-inverse-secondary.regular__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingMd.text-inverse-secondary.regular__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingMd.magic.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingMd.magic.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingMd.magic.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingMd.magic.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingMd.magic.medium__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingMd.magic.medium__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingMd.magic.medium__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingMd.magic.medium__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingMd.magic-subdued.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingMd.magic-subdued.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingMd.magic-subdued.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingMd.magic-subdued.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingMd.magic-subdued.semibold__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingMd.magic-subdued.semibold__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingMd.magic-subdued.semibold__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingMd.magic-subdued.semibold__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingLg.none.bold__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingLg.none.bold__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingLg.none.bold__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingLg.none.bold__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingLg.base.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingLg.base.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingLg.base.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingLg.base.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingLg.disabled.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingLg.disabled.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingLg.disabled.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingLg.disabled.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingLg.disabled.regular__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingLg.disabled.regular__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingLg.disabled.regular__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingLg.disabled.regular__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingLg.inherit.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingLg.inherit.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingLg.inherit.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingLg.inherit.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingLg.inherit.medium__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingLg.inherit.medium__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingLg.inherit.medium__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingLg.inherit.medium__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingLg.success.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingLg.success.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingLg.success.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingLg.success.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingLg.success.semibold__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingLg.success.semibold__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingLg.success.semibold__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingLg.success.semibold__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingLg.critical.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingLg.critical.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingLg.critical.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingLg.critical.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingLg.critical.bold__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingLg.critical.bold__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingLg.critical.bold__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingLg.critical.bold__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingLg.caution.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingLg.caution.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingLg.caution.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingLg.caution.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingLg.subdued.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingLg.subdued.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingLg.subdued.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingLg.subdued.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingLg.subdued.regular__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingLg.subdued.regular__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingLg.subdued.regular__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingLg.subdued.regular__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingLg.text-inverse.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingLg.text-inverse.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingLg.text-inverse.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingLg.text-inverse.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingLg.text-inverse.medium__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingLg.text-inverse.medium__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingLg.text-inverse.medium__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingLg.text-inverse.medium__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingLg.text-inverse-secondary.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingLg.text-inverse-secondary.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingLg.text-inverse-secondary.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingLg.text-inverse-secondary.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingLg.text-inverse-secondary.semibold__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingLg.text-inverse-secondary.semibold__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingLg.text-inverse-secondary.semibold__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingLg.text-inverse-secondary.semibold__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingLg.magic.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingLg.magic.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingLg.magic.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingLg.magic.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingLg.magic.bold__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingLg.magic.bold__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingLg.magic.bold__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingLg.magic.bold__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingLg.magic-subdued.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingLg.magic-subdued.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingLg.magic-subdued.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingLg.magic-subdued.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXl.none.regular__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXl.none.regular__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXl.none.regular__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXl.none.regular__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXl.base.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXl.base.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXl.base.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXl.base.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXl.base.medium__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXl.base.medium__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXl.base.medium__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXl.base.medium__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXl.disabled.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXl.disabled.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXl.disabled.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXl.disabled.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXl.disabled.semibold__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXl.disabled.semibold__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXl.disabled.semibold__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXl.disabled.semibold__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXl.inherit.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXl.inherit.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXl.inherit.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXl.inherit.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXl.inherit.bold__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXl.inherit.bold__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXl.inherit.bold__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXl.inherit.bold__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXl.success.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXl.success.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXl.success.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXl.success.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXl.critical.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXl.critical.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXl.critical.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXl.critical.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXl.critical.regular__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXl.critical.regular__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXl.critical.regular__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXl.critical.regular__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXl.caution.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXl.caution.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXl.caution.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXl.caution.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXl.caution.medium__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXl.caution.medium__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXl.caution.medium__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXl.caution.medium__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXl.subdued.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXl.subdued.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXl.subdued.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXl.subdued.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXl.subdued.semibold__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXl.subdued.semibold__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXl.subdued.semibold__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXl.subdued.semibold__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXl.text-inverse.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXl.text-inverse.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXl.text-inverse.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXl.text-inverse.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXl.text-inverse.bold__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXl.text-inverse.bold__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXl.text-inverse.bold__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXl.text-inverse.bold__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXl.text-inverse-secondary.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXl.text-inverse-secondary.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXl.text-inverse-secondary.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXl.text-inverse-secondary.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXl.magic.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXl.magic.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXl.magic.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXl.magic.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXl.magic.regular__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXl.magic.regular__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXl.magic.regular__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXl.magic.regular__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXl.magic-subdued.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXl.magic-subdued.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXl.magic-subdued.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXl.magic-subdued.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXl.magic-subdued.medium__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXl.magic-subdued.medium__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXl.magic-subdued.medium__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXl.magic-subdued.medium__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading2xl.none.semibold__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading2xl.none.semibold__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading2xl.none.semibold__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading2xl.none.semibold__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading2xl.base.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading2xl.base.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading2xl.base.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading2xl.base.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading2xl.base.bold__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading2xl.base.bold__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading2xl.base.bold__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading2xl.base.bold__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading2xl.disabled.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading2xl.disabled.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading2xl.disabled.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading2xl.disabled.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading2xl.inherit.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading2xl.inherit.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading2xl.inherit.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading2xl.inherit.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading2xl.inherit.regular__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading2xl.inherit.regular__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading2xl.inherit.regular__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading2xl.inherit.regular__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading2xl.success.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading2xl.success.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading2xl.success.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading2xl.success.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading2xl.success.medium__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading2xl.success.medium__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading2xl.success.medium__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading2xl.success.medium__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading2xl.critical.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading2xl.critical.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading2xl.critical.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading2xl.critical.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading2xl.critical.semibold__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading2xl.critical.semibold__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading2xl.critical.semibold__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading2xl.critical.semibold__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading2xl.caution.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading2xl.caution.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading2xl.caution.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading2xl.caution.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading2xl.caution.bold__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading2xl.caution.bold__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading2xl.caution.bold__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading2xl.caution.bold__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading2xl.subdued.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading2xl.subdued.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading2xl.subdued.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading2xl.subdued.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading2xl.text-inverse.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading2xl.text-inverse.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading2xl.text-inverse.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading2xl.text-inverse.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading2xl.text-inverse.regular__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading2xl.text-inverse.regular__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading2xl.text-inverse.regular__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading2xl.text-inverse.regular__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading2xl.text-inverse-secondary.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading2xl.text-inverse-secondary.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading2xl.text-inverse-secondary.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading2xl.text-inverse-secondary.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading2xl.text-inverse-secondary.medium__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading2xl.text-inverse-secondary.medium__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading2xl.text-inverse-secondary.medium__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading2xl.text-inverse-secondary.medium__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading2xl.magic.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading2xl.magic.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading2xl.magic.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading2xl.magic.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading2xl.magic.semibold__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading2xl.magic.semibold__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading2xl.magic.semibold__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading2xl.magic.semibold__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading2xl.magic-subdued.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading2xl.magic-subdued.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading2xl.magic-subdued.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading2xl.magic-subdued.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading2xl.magic-subdued.bold__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading2xl.magic-subdued.bold__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading2xl.magic-subdued.bold__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading2xl.magic-subdued.bold__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading3xl.base.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading3xl.base.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading3xl.base.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading3xl.base.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading3xl.base.regular__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading3xl.base.regular__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading3xl.base.regular__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading3xl.base.regular__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading3xl.disabled.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading3xl.disabled.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading3xl.disabled.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading3xl.disabled.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading3xl.disabled.medium__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading3xl.disabled.medium__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading3xl.disabled.medium__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading3xl.disabled.medium__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading3xl.inherit.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading3xl.inherit.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading3xl.inherit.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading3xl.inherit.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading3xl.inherit.semibold__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading3xl.inherit.semibold__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading3xl.inherit.semibold__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading3xl.inherit.semibold__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading3xl.success.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading3xl.success.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading3xl.success.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading3xl.success.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading3xl.success.bold__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading3xl.success.bold__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading3xl.success.bold__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading3xl.success.bold__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading3xl.critical.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading3xl.critical.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading3xl.critical.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading3xl.critical.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading3xl.caution.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading3xl.caution.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading3xl.caution.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading3xl.caution.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading3xl.caution.regular__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading3xl.caution.regular__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading3xl.caution.regular__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading3xl.caution.regular__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading3xl.subdued.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading3xl.subdued.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading3xl.subdued.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading3xl.subdued.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading3xl.subdued.medium__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading3xl.subdued.medium__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading3xl.subdued.medium__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading3xl.subdued.medium__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading3xl.text-inverse.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading3xl.text-inverse.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading3xl.text-inverse.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading3xl.text-inverse.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading3xl.text-inverse.semibold__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading3xl.text-inverse.semibold__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading3xl.text-inverse.semibold__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading3xl.text-inverse.semibold__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading3xl.text-inverse-secondary.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading3xl.text-inverse-secondary.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading3xl.text-inverse-secondary.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading3xl.text-inverse-secondary.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading3xl.text-inverse-secondary.bold__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading3xl.text-inverse-secondary.bold__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading3xl.text-inverse-secondary.bold__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading3xl.text-inverse-secondary.bold__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading3xl.magic.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading3xl.magic.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading3xl.magic.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading3xl.magic.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading3xl.magic-subdued.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading3xl.magic-subdued.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading3xl.magic-subdued.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading3xl.magic-subdued.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading3xl.magic-subdued.regular__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading3xl.magic-subdued.regular__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading3xl.magic-subdued.regular__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading3xl.magic-subdued.regular__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyXs.none.medium__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyXs.none.medium__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyXs.none.medium__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyXs.none.medium__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyXs.base.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyXs.base.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyXs.base.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyXs.base.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyXs.base.semibold__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyXs.base.semibold__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyXs.base.semibold__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyXs.base.semibold__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyXs.disabled.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyXs.disabled.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyXs.disabled.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyXs.disabled.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyXs.disabled.bold__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyXs.disabled.bold__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyXs.disabled.bold__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyXs.disabled.bold__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyXs.inherit.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyXs.inherit.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyXs.inherit.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyXs.inherit.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyXs.success.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyXs.success.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyXs.success.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyXs.success.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyXs.success.regular__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyXs.success.regular__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyXs.success.regular__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyXs.success.regular__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyXs.critical.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyXs.critical.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyXs.critical.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyXs.critical.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyXs.critical.medium__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyXs.critical.medium__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyXs.critical.medium__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyXs.critical.medium__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyXs.caution.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyXs.caution.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyXs.caution.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyXs.caution.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyXs.caution.semibold__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyXs.caution.semibold__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyXs.caution.semibold__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyXs.caution.semibold__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyXs.subdued.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyXs.subdued.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyXs.subdued.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyXs.subdued.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyXs.subdued.bold__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyXs.subdued.bold__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyXs.subdued.bold__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyXs.subdued.bold__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyXs.text-inverse.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyXs.text-inverse.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyXs.text-inverse.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyXs.text-inverse.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyXs.text-inverse-secondary.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyXs.text-inverse-secondary.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyXs.text-inverse-secondary.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyXs.text-inverse-secondary.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyXs.text-inverse-secondary.regular__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyXs.text-inverse-secondary.regular__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyXs.text-inverse-secondary.regular__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyXs.text-inverse-secondary.regular__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyXs.magic.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyXs.magic.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyXs.magic.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyXs.magic.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyXs.magic.medium__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyXs.magic.medium__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyXs.magic.medium__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyXs.magic.medium__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyXs.magic-subdued.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyXs.magic-subdued.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyXs.magic-subdued.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyXs.magic-subdued.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyXs.magic-subdued.semibold__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyXs.magic-subdued.semibold__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyXs.magic-subdued.semibold__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyXs.magic-subdued.semibold__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodySm.none.bold__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodySm.none.bold__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodySm.none.bold__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodySm.none.bold__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodySm.base.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodySm.base.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodySm.base.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodySm.base.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodySm.disabled.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodySm.disabled.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodySm.disabled.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodySm.disabled.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodySm.disabled.regular__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodySm.disabled.regular__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodySm.disabled.regular__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodySm.disabled.regular__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodySm.inherit.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodySm.inherit.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodySm.inherit.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodySm.inherit.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodySm.inherit.medium__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodySm.inherit.medium__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodySm.inherit.medium__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodySm.inherit.medium__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodySm.success.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodySm.success.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodySm.success.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodySm.success.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodySm.success.semibold__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodySm.success.semibold__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodySm.success.semibold__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodySm.success.semibold__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodySm.critical.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodySm.critical.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodySm.critical.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodySm.critical.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodySm.critical.bold__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodySm.critical.bold__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodySm.critical.bold__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodySm.critical.bold__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodySm.caution.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodySm.caution.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodySm.caution.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodySm.caution.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodySm.subdued.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodySm.subdued.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodySm.subdued.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodySm.subdued.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodySm.subdued.regular__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodySm.subdued.regular__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodySm.subdued.regular__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodySm.subdued.regular__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodySm.text-inverse.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodySm.text-inverse.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodySm.text-inverse.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodySm.text-inverse.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodySm.text-inverse.medium__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodySm.text-inverse.medium__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodySm.text-inverse.medium__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodySm.text-inverse.medium__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodySm.text-inverse-secondary.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodySm.text-inverse-secondary.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodySm.text-inverse-secondary.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodySm.text-inverse-secondary.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodySm.text-inverse-secondary.semibold__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodySm.text-inverse-secondary.semibold__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodySm.text-inverse-secondary.semibold__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodySm.text-inverse-secondary.semibold__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodySm.magic.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodySm.magic.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodySm.magic.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodySm.magic.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodySm.magic.bold__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodySm.magic.bold__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodySm.magic.bold__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodySm.magic.bold__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodySm.magic-subdued.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodySm.magic-subdued.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodySm.magic-subdued.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodySm.magic-subdued.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyMd.none.regular__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyMd.none.regular__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyMd.none.regular__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyMd.none.regular__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyMd.base.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyMd.base.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyMd.base.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyMd.base.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyMd.base.medium__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyMd.base.medium__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyMd.base.medium__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyMd.base.medium__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyMd.disabled.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyMd.disabled.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyMd.disabled.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyMd.disabled.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyMd.disabled.semibold__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyMd.disabled.semibold__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyMd.disabled.semibold__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyMd.disabled.semibold__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyMd.inherit.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyMd.inherit.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyMd.inherit.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyMd.inherit.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyMd.inherit.bold__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyMd.inherit.bold__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyMd.inherit.bold__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyMd.inherit.bold__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyMd.success.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyMd.success.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyMd.success.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyMd.success.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyMd.critical.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyMd.critical.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyMd.critical.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyMd.critical.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyMd.critical.regular__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyMd.critical.regular__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyMd.critical.regular__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyMd.critical.regular__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyMd.caution.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyMd.caution.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyMd.caution.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyMd.caution.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyMd.caution.medium__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyMd.caution.medium__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyMd.caution.medium__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyMd.caution.medium__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyMd.subdued.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyMd.subdued.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyMd.subdued.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyMd.subdued.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyMd.subdued.semibold__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyMd.subdued.semibold__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyMd.subdued.semibold__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyMd.subdued.semibold__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyMd.text-inverse.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyMd.text-inverse.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyMd.text-inverse.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyMd.text-inverse.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyMd.text-inverse.bold__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyMd.text-inverse.bold__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyMd.text-inverse.bold__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyMd.text-inverse.bold__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyMd.text-inverse-secondary.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyMd.text-inverse-secondary.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyMd.text-inverse-secondary.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyMd.text-inverse-secondary.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyMd.magic.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyMd.magic.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyMd.magic.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyMd.magic.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyMd.magic.regular__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyMd.magic.regular__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyMd.magic.regular__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyMd.magic.regular__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyMd.magic-subdued.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyMd.magic-subdued.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyMd.magic-subdued.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyMd.magic-subdued.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyMd.magic-subdued.medium__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyMd.magic-subdued.medium__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyMd.magic-subdued.medium__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyMd.magic-subdued.medium__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyLg.none.semibold__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyLg.none.semibold__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyLg.none.semibold__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyLg.none.semibold__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyLg.base.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyLg.base.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyLg.base.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyLg.base.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyLg.base.bold__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyLg.base.bold__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyLg.base.bold__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyLg.base.bold__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyLg.disabled.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyLg.disabled.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyLg.disabled.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyLg.disabled.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyLg.inherit.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyLg.inherit.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyLg.inherit.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyLg.inherit.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyLg.inherit.regular__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyLg.inherit.regular__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyLg.inherit.regular__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyLg.inherit.regular__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyLg.success.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyLg.success.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyLg.success.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyLg.success.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyLg.success.medium__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyLg.success.medium__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyLg.success.medium__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyLg.success.medium__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyLg.critical.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyLg.critical.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyLg.critical.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyLg.critical.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyLg.critical.semibold__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyLg.critical.semibold__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyLg.critical.semibold__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyLg.critical.semibold__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyLg.caution.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyLg.caution.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyLg.caution.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyLg.caution.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyLg.caution.bold__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyLg.caution.bold__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyLg.caution.bold__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyLg.caution.bold__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyLg.subdued.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyLg.subdued.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyLg.subdued.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyLg.subdued.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyLg.text-inverse.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyLg.text-inverse.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyLg.text-inverse.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyLg.text-inverse.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyLg.text-inverse.regular__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyLg.text-inverse.regular__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyLg.text-inverse.regular__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyLg.text-inverse.regular__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyLg.text-inverse-secondary.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyLg.text-inverse-secondary.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyLg.text-inverse-secondary.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyLg.text-inverse-secondary.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyLg.text-inverse-secondary.medium__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyLg.text-inverse-secondary.medium__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyLg.text-inverse-secondary.medium__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyLg.text-inverse-secondary.medium__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyLg.magic.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyLg.magic.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyLg.magic.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyLg.magic.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyLg.magic.semibold__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyLg.magic.semibold__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyLg.magic.semibold__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyLg.magic.semibold__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyLg.magic-subdued.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyLg.magic-subdued.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyLg.magic-subdued.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyLg.magic-subdued.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyLg.magic-subdued.bold__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyLg.magic-subdued.bold__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyLg.magic-subdued.bold__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyLg.magic-subdued.bold__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.disabled.regular__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.disabled.regular__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.disabled.regular__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.disabled.regular__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.inherit.medium__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.inherit.medium__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.inherit.medium__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.inherit.medium__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.success.semibold__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.success.semibold__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.success.semibold__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.success.semibold__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.critical.bold__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.critical.bold__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.critical.bold__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.critical.bold__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXs.none.regular__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXs.none.regular__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXs.none.regular__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXs.none.regular__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXs.subdued.regular__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXs.subdued.regular__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXs.subdued.regular__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXs.subdued.regular__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXs.none.medium__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXs.none.medium__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXs.none.medium__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXs.none.medium__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXs.text-inverse.medium__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXs.text-inverse.medium__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXs.text-inverse.medium__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXs.text-inverse.medium__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXs.text-inverse-secondary.semibold__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXs.text-inverse-secondary.semibold__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXs.text-inverse-secondary.semibold__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXs.text-inverse-secondary.semibold__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXs.none.bold__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXs.none.bold__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXs.none.bold__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXs.none.bold__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXs.magic.bold__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXs.magic.bold__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXs.magic.bold__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXs.magic.bold__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingSm.none.regular__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingSm.none.regular__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingSm.none.regular__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingSm.none.regular__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingSm.none.medium__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingSm.none.medium__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingSm.none.medium__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingSm.none.medium__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingSm.base.medium__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingSm.base.medium__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingSm.base.medium__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingSm.base.medium__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingSm.none.semibold__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingSm.none.semibold__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingSm.none.semibold__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingSm.none.semibold__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingSm.disabled.semibold__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingSm.disabled.semibold__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingSm.disabled.semibold__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingSm.disabled.semibold__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingSm.none.bold__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingSm.none.bold__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingSm.none.bold__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingSm.none.bold__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingSm.inherit.bold__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingSm.inherit.bold__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingSm.inherit.bold__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingSm.inherit.bold__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingMd.none.regular__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingMd.none.regular__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingMd.none.regular__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingMd.none.regular__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingMd.critical.regular__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingMd.critical.regular__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingMd.critical.regular__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingMd.critical.regular__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingMd.caution.medium__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingMd.caution.medium__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingMd.caution.medium__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingMd.caution.medium__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingMd.none.semibold__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingMd.none.semibold__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingMd.none.semibold__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingMd.none.semibold__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingMd.subdued.semibold__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingMd.subdued.semibold__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingMd.subdued.semibold__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingMd.subdued.semibold__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingMd.none.bold__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingMd.none.bold__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingMd.none.bold__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingMd.none.bold__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingMd.text-inverse.bold__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingMd.text-inverse.bold__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingMd.text-inverse.bold__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingMd.text-inverse.bold__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingLg.none.regular__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingLg.none.regular__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingLg.none.regular__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingLg.none.regular__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingLg.magic.regular__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingLg.magic.regular__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingLg.magic.regular__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingLg.magic.regular__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingLg.none.medium__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingLg.none.medium__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingLg.none.medium__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingLg.none.medium__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingLg.magic-subdued.medium__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingLg.magic-subdued.medium__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingLg.magic-subdued.medium__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingLg.magic-subdued.medium__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingLg.none.semibold__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingLg.none.semibold__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingLg.none.semibold__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingLg.none.semibold__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingLg.base.bold__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingLg.base.bold__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingLg.base.bold__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingLg.base.bold__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXl.inherit.regular__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXl.inherit.regular__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXl.inherit.regular__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXl.inherit.regular__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXl.none.medium__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXl.none.medium__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXl.none.medium__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXl.none.medium__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXl.success.medium__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXl.success.medium__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXl.success.medium__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXl.success.medium__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXl.none.semibold__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXl.none.semibold__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXl.none.semibold__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXl.none.semibold__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXl.critical.semibold__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXl.critical.semibold__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXl.critical.semibold__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXl.critical.semibold__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXl.none.bold__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXl.none.bold__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXl.none.bold__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXl.none.bold__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXl.caution.bold__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXl.caution.bold__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXl.caution.bold__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXl.caution.bold__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading2xl.none.regular__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading2xl.none.regular__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading2xl.none.regular__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading2xl.none.regular__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading2xl.none.medium__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading2xl.none.medium__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading2xl.none.medium__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading2xl.none.medium__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading2xl.none.bold__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading2xl.none.bold__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading2xl.none.bold__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading2xl.none.bold__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading3xl.none.regular__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading3xl.none.regular__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading3xl.none.regular__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading3xl.none.regular__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading3xl.none.medium__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading3xl.none.medium__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading3xl.none.medium__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading3xl.none.medium__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading3xl.none.semibold__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading3xl.none.semibold__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading3xl.none.semibold__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading3xl.none.semibold__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading3xl.none.bold__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading3xl.none.bold__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading3xl.none.bold__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading3xl.none.bold__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyXs.none.regular__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyXs.none.regular__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyXs.none.regular__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyXs.none.regular__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyXs.caution.regular__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyXs.caution.regular__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyXs.caution.regular__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyXs.caution.regular__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyXs.subdued.medium__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyXs.subdued.medium__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyXs.subdued.medium__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyXs.subdued.medium__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyXs.none.semibold__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyXs.none.semibold__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyXs.none.semibold__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyXs.none.semibold__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyXs.text-inverse.semibold__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyXs.text-inverse.semibold__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyXs.text-inverse.semibold__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyXs.text-inverse.semibold__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyXs.none.bold__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyXs.none.bold__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyXs.none.bold__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyXs.none.bold__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyXs.text-inverse-secondary.bold__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyXs.text-inverse-secondary.bold__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyXs.text-inverse-secondary.bold__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyXs.text-inverse-secondary.bold__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodySm.none.regular__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodySm.none.regular__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodySm.none.regular__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodySm.none.regular__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodySm.magic-subdued.regular__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodySm.magic-subdued.regular__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodySm.magic-subdued.regular__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodySm.magic-subdued.regular__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodySm.none.medium__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodySm.none.medium__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodySm.none.medium__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodySm.none.medium__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodySm.none.semibold__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodySm.none.semibold__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodySm.none.semibold__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodySm.none.semibold__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodySm.base.semibold__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodySm.base.semibold__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodySm.base.semibold__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodySm.base.semibold__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodySm.disabled.bold__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodySm.disabled.bold__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodySm.disabled.bold__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodySm.disabled.bold__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyMd.success.regular__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyMd.success.regular__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyMd.success.regular__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyMd.success.regular__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyMd.none.medium__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyMd.none.medium__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyMd.none.medium__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyMd.none.medium__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyMd.critical.medium__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyMd.critical.medium__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyMd.critical.medium__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyMd.critical.medium__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyMd.none.semibold__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyMd.none.semibold__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyMd.none.semibold__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyMd.none.semibold__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyMd.caution.semibold__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyMd.caution.semibold__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyMd.caution.semibold__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyMd.caution.semibold__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyMd.none.bold__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyMd.none.bold__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyMd.none.bold__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyMd.none.bold__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyMd.subdued.bold__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyMd.subdued.bold__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyMd.subdued.bold__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyMd.subdued.bold__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyLg.none.regular__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyLg.none.regular__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyLg.none.regular__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyLg.none.regular__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyLg.text-inverse-secondary.regular__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyLg.text-inverse-secondary.regular__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyLg.text-inverse-secondary.regular__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyLg.text-inverse-secondary.regular__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyLg.none.medium__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyLg.none.medium__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyLg.none.medium__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyLg.none.medium__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyLg.magic.medium__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyLg.magic.medium__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyLg.magic.medium__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyLg.magic.medium__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyLg.magic-subdued.semibold__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyLg.magic-subdued.semibold__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyLg.magic-subdued.semibold__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyLg.magic-subdued.semibold__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyLg.none.bold__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyLg.none.bold__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyLg.none.bold__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyLg.none.bold__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.base.regular__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.base.regular__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.base.regular__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.base.regular__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyXs.base.medium__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyXs.base.medium__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyXs.base.medium__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyXs.base.medium__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.base.semibold__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.base.semibold__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.base.semibold__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.base.semibold__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.base.bold__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.base.bold__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.base.bold__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.base.bold__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyMd.base.bold__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyMd.base.bold__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyMd.base.bold__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyMd.base.bold__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.disabled.medium__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.disabled.medium__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.disabled.medium__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.disabled.medium__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXs.disabled.medium__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXs.disabled.medium__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXs.disabled.medium__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXs.disabled.medium__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.disabled.bold__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.disabled.bold__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.disabled.bold__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.disabled.bold__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.inherit.regular__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.inherit.regular__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.inherit.regular__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.inherit.regular__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading2xl.inherit.medium__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading2xl.inherit.medium__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading2xl.inherit.medium__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading2xl.inherit.medium__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.inherit.semibold__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.inherit.semibold__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.inherit.semibold__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.inherit.semibold__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyXs.inherit.bold__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyXs.inherit.bold__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyXs.inherit.bold__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodyXs.inherit.bold__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.success.regular__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.success.regular__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.success.regular__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.success.regular__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.success.medium__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.success.medium__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.success.medium__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.success.medium__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.success.bold__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.success.bold__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.success.bold__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.success.bold__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXs.success.bold__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXs.success.bold__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXs.success.bold__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXs.success.bold__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.critical.medium__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.critical.medium__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.critical.medium__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.critical.medium__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingLg.critical.medium__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingLg.critical.medium__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingLg.critical.medium__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingLg.critical.medium__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.critical.semibold__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.critical.semibold__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.critical.semibold__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.critical.semibold__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading2xl.critical.bold__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading2xl.critical.bold__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading2xl.critical.bold__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading2xl.critical.bold__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.caution.regular__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.caution.regular__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.caution.regular__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.caution.regular__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodySm.caution.medium__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodySm.caution.medium__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodySm.caution.medium__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodySm.caution.medium__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.caution.semibold__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.caution.semibold__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.caution.semibold__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.caution.semibold__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.caution.bold__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.caution.bold__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.caution.bold__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.caution.bold__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.subdued.regular__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.subdued.regular__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.subdued.regular__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.subdued.regular__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.subdued.medium__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.subdued.medium__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.subdued.medium__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.subdued.medium__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.subdued.bold__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.subdued.bold__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.subdued.bold__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.subdued.bold__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingLg.subdued.bold__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingLg.subdued.bold__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingLg.subdued.bold__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingLg.subdued.bold__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.text-inverse.regular__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.text-inverse.regular__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.text-inverse.regular__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.text-inverse.regular__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.text-inverse.medium__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.text-inverse.medium__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.text-inverse.medium__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.text-inverse.medium__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading3xl.text-inverse.medium__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading3xl.text-inverse.medium__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading3xl.text-inverse.medium__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading3xl.text-inverse.medium__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.text-inverse.semibold__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.text-inverse.semibold__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.text-inverse.semibold__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.text-inverse.semibold__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodySm.text-inverse.bold__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodySm.text-inverse.bold__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodySm.text-inverse.bold__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "bodySm.text-inverse.bold__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.text-inverse-secondary.regular__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.text-inverse-secondary.regular__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.text-inverse-secondary.regular__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.text-inverse-secondary.regular__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.text-inverse-secondary.medium__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.text-inverse-secondary.medium__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.text-inverse-secondary.medium__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.text-inverse-secondary.medium__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.text-inverse-secondary.semibold__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.text-inverse-secondary.semibold__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.text-inverse-secondary.semibold__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.text-inverse-secondary.semibold__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.text-inverse-secondary.bold__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.text-inverse-secondary.bold__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.text-inverse-secondary.bold__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.text-inverse-secondary.bold__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.magic.medium__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.magic.medium__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.magic.medium__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.magic.medium__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXl.magic.medium__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXl.magic.medium__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXl.magic.medium__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "headingXl.magic.medium__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.magic.semibold__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.magic.semibold__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.magic.semibold__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.magic.semibold__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.magic.bold__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.magic.bold__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.magic.bold__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.magic.bold__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading3xl.magic.bold__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading3xl.magic.bold__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading3xl.magic.bold__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "heading3xl.magic.bold__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.magic-subdued.regular__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.magic-subdued.regular__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.magic-subdued.regular__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.magic-subdued.regular__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.magic-subdued.semibold__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.magic-subdued.semibold__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.magic-subdued.semibold__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.magic-subdued.semibold__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.magic-subdued.bold__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.magic-subdued.bold__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.magic-subdued.bold__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none.magic-subdued.bold__active",
+    "pctExact": 0,
+    "pctAA": 0
+  }
+]
