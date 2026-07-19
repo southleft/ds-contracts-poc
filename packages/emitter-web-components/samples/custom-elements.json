@@ -1,0 +1,419 @@
+{
+  "schemaVersion": "1.0.0",
+  "readme": "",
+  "modules": [
+    {
+      "kind": "javascript-module",
+      "path": "ds-badge.ts",
+      "description": "Generated from contract ds.badge v1.1.0 by @ds-contracts/emitter-web-components.",
+      "declarations": [
+        {
+          "kind": "class",
+          "customElement": true,
+          "name": "BadgeElement",
+          "tagName": "ds-badge",
+          "description": "Communicates status or categorization at a glance. Non-interactive.",
+          "attributes": [
+            {
+              "name": "variant",
+              "fieldName": "variant",
+              "type": {
+                "text": "'info' | 'success' | 'warning' | 'danger' | 'error'"
+              },
+              "default": "'info'",
+              "description": "The feedback tone being communicated."
+            }
+          ],
+          "members": [],
+          "events": [],
+          "slots": [
+            {
+              "name": "",
+              "description": "Badge label."
+            }
+          ],
+          "cssParts": [
+            {
+              "name": "root"
+            }
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "BadgeElement",
+          "declaration": {
+            "name": "BadgeElement",
+            "module": "ds-badge.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "ds-badge",
+          "declaration": {
+            "name": "BadgeElement",
+            "module": "ds-badge.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "ds-button.ts",
+      "description": "Generated from contract ds.button v1.5.0 by @ds-contracts/emitter-web-components.",
+      "declarations": [
+        {
+          "kind": "class",
+          "customElement": true,
+          "name": "ButtonElement",
+          "tagName": "ds-button",
+          "description": "Triggers an action or event. Use one primary button per context.",
+          "attributes": [
+            {
+              "name": "variant",
+              "fieldName": "variant",
+              "type": {
+                "text": "'primary' | 'secondary' | 'danger' | 'ghost'"
+              },
+              "default": "'primary'",
+              "description": "Visual prominence of the action."
+            },
+            {
+              "name": "size",
+              "fieldName": "size",
+              "type": {
+                "text": "'sm' | 'md' | 'lg'"
+              },
+              "default": "'md'",
+              "description": "Control density."
+            },
+            {
+              "name": "disabled",
+              "fieldName": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Prevents interaction and communicates unavailability."
+            },
+            {
+              "name": "loading",
+              "fieldName": "loading",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Shows a spinning busy indicator beside the label while an async action resolves."
+            }
+          ],
+          "members": [],
+          "events": [],
+          "slots": [
+            {
+              "name": "",
+              "description": "Button label."
+            }
+          ],
+          "cssParts": [
+            {
+              "name": "root"
+            },
+            {
+              "name": "loadingSpinner"
+            },
+            {
+              "name": "label"
+            }
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "ButtonElement",
+          "declaration": {
+            "name": "ButtonElement",
+            "module": "ds-button.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "ds-button",
+          "declaration": {
+            "name": "ButtonElement",
+            "module": "ds-button.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "ds-switch.ts",
+      "description": "Generated from contract ds.switch v2.0.0 by @ds-contracts/emitter-web-components.",
+      "declarations": [
+        {
+          "kind": "class",
+          "customElement": true,
+          "name": "SwitchElement",
+          "tagName": "ds-switch",
+          "description": "Toggle for on/off settings that take effect immediately. API mirrors industry convention (Astryx Switch) with the boolean value flattened to an off/on enum so both surfaces render both states truthfully; toggle behavior is a declared boundary. v2.0.0 (breaking, DOM shape): the control is a NATIVE input[type=checkbox] with role=switch (the modern switch pattern) inside the wrapping label — checked is DOM state, not ARIA on a button; track and thumb are presentational.",
+          "attributes": [
+            {
+              "name": "value",
+              "fieldName": "value",
+              "type": {
+                "text": "'off' | 'on'"
+              },
+              "default": "'off'",
+              "description": "On or off — drives the track color and thumb position."
+            },
+            {
+              "name": "label",
+              "fieldName": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Enable notifications'",
+              "description": "Always rendered — users must know what they are toggling."
+            },
+            {
+              "name": "description",
+              "fieldName": "description",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Takes effect immediately.'",
+              "description": "Secondary text below the label."
+            }
+          ],
+          "members": [],
+          "events": [
+            {
+              "name": "toggle",
+              "type": {
+                "text": "CustomEvent<{ value: string }>"
+              },
+              "description": "Fires when the input is toggled; uncontrolled instances flip value off/on themselves."
+            }
+          ],
+          "slots": [],
+          "cssParts": [
+            {
+              "name": "root"
+            },
+            {
+              "name": "track"
+            },
+            {
+              "name": "input"
+            },
+            {
+              "name": "spacerStart"
+            },
+            {
+              "name": "thumb"
+            },
+            {
+              "name": "spacerEnd"
+            },
+            {
+              "name": "textCol"
+            },
+            {
+              "name": "labelText"
+            },
+            {
+              "name": "descriptionText"
+            }
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "SwitchElement",
+          "declaration": {
+            "name": "SwitchElement",
+            "module": "ds-switch.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "ds-switch",
+          "declaration": {
+            "name": "SwitchElement",
+            "module": "ds-switch.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "ds-card.ts",
+      "description": "Generated from contract ds.card v1.1.0 by @ds-contracts/emitter-web-components.",
+      "declarations": [
+        {
+          "kind": "class",
+          "customElement": true,
+          "name": "CardElement",
+          "tagName": "ds-card",
+          "description": "Groups related content behind one subject. Composes an Avatar, a bound title, a default body slot, and a constrained actions slot.",
+          "attributes": [
+            {
+              "name": "title",
+              "fieldName": "title",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Card title'",
+              "description": "Card heading, bound to the header title part on both surfaces."
+            }
+          ],
+          "members": [],
+          "events": [],
+          "slots": [
+            {
+              "name": ""
+            },
+            {
+              "name": "actions",
+              "description": "Accepts: ds.button, ds.badge (prefer)"
+            }
+          ],
+          "cssParts": [
+            {
+              "name": "root"
+            },
+            {
+              "name": "header"
+            },
+            {
+              "name": "avatar"
+            },
+            {
+              "name": "title"
+            },
+            {
+              "name": "body"
+            },
+            {
+              "name": "footer"
+            }
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "CardElement",
+          "declaration": {
+            "name": "CardElement",
+            "module": "ds-card.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "ds-card",
+          "declaration": {
+            "name": "CardElement",
+            "module": "ds-card.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "polaris-badge.ts",
+      "description": "Generated from contract polaris.badge v0.3.0 by @ds-contracts/emitter-web-components.",
+      "declarations": [
+        {
+          "kind": "class",
+          "customElement": true,
+          "name": "BadgeElement",
+          "tagName": "polaris-badge",
+          "description": "PROPOSED contract extracted from examples/polaris/.polaris-clone/polaris-react/src/components/Badge/Badge.tsx (react-tsx + css-module adapters) — API surface AND anatomy (structure, token bindings, layout, states) read from source; design bindings await reconciliation and human review. PROMOTED showcase contract: API surface extracted mechanically from Shopify/polaris @ 2b1ea88625e0613853ca8577c9acd1980a90f382 (polaris-react 13.10.1, MIT © Shopify, extracted 2026-07-18); styling bindings promoted from the component's own module.css under the reviewed class map in examples/polaris/scripts/curation.ts — every carried binding and every named refusal is listed in examples/polaris/extraction/PROMOTION.md. ROUND 4: single-tone static bindings on root (background-color/color/font-weight) and label typography REMOVED — the real tone/progress axes contest them per value; the computed floor rebuilds these channels from browser truth (S2 base + per-axis mint). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @shopify/polaris@13.9.5 in headless Chromium 148.0.7778.96; overflow channels in the sibling extension file. FLOOR-PROMOTED v0.3.0 (extract/computed round 4): this contract is the computed-floor rebuild — complete browser truth captured from the real @shopify/polaris@13.9.5 npm package rendered in headless Chromium 148.0.7778.96 (every enumerated longhand per element incl. ::before/::after, full state sweep, double-run byte-identity), fused with the static semantic layer (BOUND bindings browser-confirmed, unlabeled channels MINTED as imported.* tokens in tokens/polaris-minted.dtcg.json, uniform registry channels DECLARED), with the round-4 DOM-ANATOMY PROMOTION: every rendered element is a carried part, svg glyph content rides committed icon assets reconstructed from the captured d/fill channels, presence facts gate structure-creating props, zero binding contradictions in the review queue (source enriched.contract.json). Everything the vocabulary cannot carry is named in contracts/badge.extension.json. Delta ledger: extract/computed/out/badge/LEDGER.md (supersedes this component's section of extraction/PROMOTION.md).",
+          "attributes": [
+            {
+              "name": "tone",
+              "fieldName": "tone",
+              "type": {
+                "text": "'info' | 'success' | 'warning' | 'critical' | 'attention' | 'new' | 'magic' | 'info-strong' | 'success-strong' | 'warning-strong' | 'critical-strong' | 'attention-strong' | 'read-only' | 'enabled'"
+              },
+              "description": "Colors and labels the badge with the given tone (round 4: enumerated from the real @shopify/polaris@13.9.5 Badge API — the static extraction had missed the styling axes entirely)."
+            },
+            {
+              "name": "progress",
+              "fieldName": "progress",
+              "type": {
+                "text": "'incomplete' | 'partiallyComplete' | 'complete'"
+              },
+              "description": "Render a pip showing the progress of a given task (round 4: real Badge API axis)."
+            },
+            {
+              "name": "tone-and-progress-label-override",
+              "fieldName": "toneAndProgressLabelOverride",
+              "type": {
+                "text": "string"
+              },
+              "description": "Pass a custom accessibilityLabel"
+            }
+          ],
+          "members": [],
+          "events": [],
+          "slots": [],
+          "cssParts": [
+            {
+              "name": "root"
+            },
+            {
+              "name": "label-2"
+            },
+            {
+              "name": "icon"
+            },
+            {
+              "name": "icon-2"
+            },
+            {
+              "name": "label-3"
+            },
+            {
+              "name": "icon-3"
+            },
+            {
+              "name": "icon-3-incomplete"
+            },
+            {
+              "name": "icon-3-partiallycomplete"
+            },
+            {
+              "name": "icon-3-complete"
+            },
+            {
+              "name": "label"
+            }
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "BadgeElement",
+          "declaration": {
+            "name": "BadgeElement",
+            "module": "polaris-badge.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "polaris-badge",
+          "declaration": {
+            "name": "BadgeElement",
+            "module": "polaris-badge.ts"
+          }
+        }
+      ]
+    }
+  ]
+}

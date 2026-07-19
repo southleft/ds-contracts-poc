@@ -1,0 +1,80 @@
+{
+  "schemaVersion": "1.0.0",
+  "readme": "",
+  "modules": [
+    {
+      "kind": "javascript-module",
+      "path": "ds-card.ts",
+      "description": "Generated from contract ds.card v1.1.0 by @ds-contracts/emitter-web-components.",
+      "declarations": [
+        {
+          "kind": "class",
+          "customElement": true,
+          "name": "CardElement",
+          "tagName": "ds-card",
+          "description": "Groups related content behind one subject. Composes an Avatar, a bound title, a default body slot, and a constrained actions slot.",
+          "attributes": [
+            {
+              "name": "title",
+              "fieldName": "title",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Card title'",
+              "description": "Card heading, bound to the header title part on both surfaces."
+            }
+          ],
+          "members": [],
+          "events": [],
+          "slots": [
+            {
+              "name": ""
+            },
+            {
+              "name": "actions",
+              "description": "Accepts: ds.button, ds.badge (prefer)"
+            }
+          ],
+          "cssParts": [
+            {
+              "name": "root"
+            },
+            {
+              "name": "header"
+            },
+            {
+              "name": "avatar"
+            },
+            {
+              "name": "title"
+            },
+            {
+              "name": "body"
+            },
+            {
+              "name": "footer"
+            }
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "CardElement",
+          "declaration": {
+            "name": "CardElement",
+            "module": "ds-card.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "ds-card",
+          "declaration": {
+            "name": "CardElement",
+            "module": "ds-card.ts"
+          }
+        }
+      ]
+    }
+  ]
+}
