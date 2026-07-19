@@ -1,6 +1,6 @@
 {
-  "passed": 110,
-  "total": 110,
+  "passed": 113,
+  "total": 113,
   "results": [
     {
       "id": "refuse-unknown-token-reference",
@@ -550,6 +550,21 @@
     {
       "id": "computed-floor-gate",
       "claim": "C1-determinism",
+      "pass": true
+    },
+    {
+      "id": "dom-anatomy-promotion",
+      "claim": "C3-detection",
+      "pass": true
+    },
+    {
+      "id": "svg-content-round-trip",
+      "claim": "C1-determinism",
+      "pass": true
+    },
+    {
+      "id": "canvas-pixel-gate-receipts",
+      "claim": "C3-detection",
       "pass": true
     }
   ]

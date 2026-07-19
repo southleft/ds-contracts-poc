@@ -24,8 +24,8 @@ applies (no binding, no literal). `gap` compares against computed `column-gap`; 
 | root | border-width | `Size=large, State=Active`, `Size=large, State=Focus Visible` | `3px` | `0px` | +3px |  |
 | root | gap | 4 cells (e.g. `Size=large`) | `0px` | `normal` | 0 |  |
 | root | padding-bottom | 4 cells (e.g. `Size=large`) | `0px` | `0px` | 0 |  |
-| root | padding-left | 4 cells (e.g. `Size=large`) | `0px` | `8px` | -8px |  |
-| root | padding-right | 4 cells (e.g. `Size=large`) | `0px` | `8px` | -8px |  |
+| root | padding-left | 4 cells (e.g. `Size=large`) | `6px` | `8px` | -2px | contract binds 6px |
+| root | padding-right | 4 cells (e.g. `Size=large`) | `6px` | `8px` | -2px | contract binds 6px |
 | root | padding-top | 4 cells (e.g. `Size=large`) | `0px` | `0px` | 0 |  |
 | link | background-color | 4 cells (e.g. `Size=large`) | `rgba(0, 0, 0, 0)` | `rgba(0, 0, 0, 0)` | match |  |
 | link | border-bottom-left-radius | 4 cells (e.g. `Size=large`) | `8px` | `0px` | +8px | contract binds 8px |

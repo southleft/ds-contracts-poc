@@ -20,81 +20,81 @@
     {
       "cell": "Size=large",
       "kind": "base",
-      "pctExactUnmasked": 14.76,
-      "pctAAUnmasked": 13.76,
-      "pctAAMasked": 13.76,
-      "maskCoveragePct": 0,
-      "canvasPx": "96x96",
-      "realPx": "32x48",
+      "pctExactUnmasked": 48.79,
+      "pctAAUnmasked": 43.4,
+      "pctAAMasked": 22.25,
+      "maskCoveragePct": 33.33,
+      "canvasPx": "120x96",
+      "realPx": "152x48",
       "inkCanvasPct": 0,
-      "inkRealPct": 14.5,
-      "note": "CANVAS SIDE (NEARLY) BLANK: canvas ink 0% vs real ink 14.5% of the union canvas — the masked % understates the miss; EMITTER-DEFECT (channel table confirms): contract binds root padding-left/right = {imported.tag.root.padding-left} = 6px, but emit-figma-script applyTokens handles only the padding-inline/padding-block shorthands — longhand padding channels are silently dropped, so the canvas pill draws 12px narrower than the real Tag"
+      "inkRealPct": 48.63,
+      "note": "CANVAS SIDE (NEARLY) BLANK: canvas ink 0% vs real ink 48.63% of the union canvas — the masked % understates the miss; EMITTER-DEFECT (channel table confirms): contract binds root padding-left/right = {imported.tag.root.padding-left} = 6px, but emit-figma-script applyTokens handles only the padding-inline/padding-block shorthands — longhand padding channels are silently dropped, so the canvas pill draws 12px narrower than the real Tag"
     },
     {
       "cell": "Size=large, State=Disabled",
       "kind": "state",
       "state": "disabled",
-      "pctExactUnmasked": 14.76,
-      "pctAAUnmasked": 0,
+      "pctExactUnmasked": 48.79,
+      "pctAAUnmasked": 3,
       "pctAAMasked": 0,
-      "maskCoveragePct": 0,
-      "canvasPx": "96x96",
-      "realPx": "32x48",
+      "maskCoveragePct": 33.33,
+      "canvasPx": "120x96",
+      "realPx": "152x48",
       "inkCanvasPct": 0,
-      "inkRealPct": 14.37,
-      "note": "CANVAS SIDE (NEARLY) BLANK: canvas ink 0% vs real ink 14.37% of the union canvas — the masked % understates the miss; EMITTER-DEFECT (channel table confirms): contract binds root padding-left/right = {imported.tag.root.padding-left} = 6px, but emit-figma-script applyTokens handles only the padding-inline/padding-block shorthands — longhand padding channels are silently dropped, so the canvas pill draws 12px narrower than the real Tag"
+      "inkRealPct": 48.55,
+      "note": "CANVAS SIDE (NEARLY) BLANK: canvas ink 0% vs real ink 48.55% of the union canvas — the masked % understates the miss; EMITTER-DEFECT (channel table confirms): contract binds root padding-left/right = {imported.tag.root.padding-left} = 6px, but emit-figma-script applyTokens handles only the padding-inline/padding-block shorthands — longhand padding channels are silently dropped, so the canvas pill draws 12px narrower than the real Tag"
     },
     {
       "cell": "Size=large, State=Active",
       "kind": "state",
       "state": "active",
-      "pctExactUnmasked": 81.81,
-      "pctAAUnmasked": 45.63,
-      "pctAAMasked": 45.63,
-      "maskCoveragePct": 0,
-      "canvasPx": "12x12",
-      "realPx": "60x48",
-      "inkCanvasPct": 4.31,
-      "inkRealPct": 78.89,
-      "note": "CANVAS SIDE (NEARLY) BLANK: canvas ink 4.31% vs real ink 78.89% of the union canvas — the masked % understates the miss; EMITTER-DEFECT (channel table confirms): contract binds root padding-left/right = {imported.tag.root.padding-left} = 6px, but emit-figma-script applyTokens handles only the padding-inline/padding-block shorthands — longhand padding channels are silently dropped, so the canvas pill draws 12px narrower than the real Tag"
+      "pctExactUnmasked": 96.49,
+      "pctAAUnmasked": 85.5,
+      "pctAAMasked": 88.98,
+      "maskCoveragePct": 66.67,
+      "canvasPx": "36x12",
+      "realPx": "152x48",
+      "inkCanvasPct": 5.65,
+      "inkRealPct": 97.26,
+      "note": "CANVAS SIDE (NEARLY) BLANK: canvas ink 5.65% vs real ink 97.26% of the union canvas — the masked % understates the miss; EMITTER-DEFECT (channel table confirms): contract binds root padding-left/right = {imported.tag.root.padding-left} = 6px, but emit-figma-script applyTokens handles only the padding-inline/padding-block shorthands — longhand padding channels are silently dropped, so the canvas pill draws 12px narrower than the real Tag"
     },
     {
       "cell": "Size=large, State=Focus Visible",
       "kind": "state",
       "state": "focus-visible",
-      "pctExactUnmasked": 88.28,
-      "pctAAUnmasked": 80.73,
-      "pctAAMasked": 80.73,
-      "maskCoveragePct": 0,
-      "canvasPx": "12x12",
-      "realPx": "32x48",
-      "inkCanvasPct": 8.07,
-      "inkRealPct": 86.98,
-      "note": "CANVAS SIDE (NEARLY) BLANK: canvas ink 8.07% vs real ink 86.98% of the union canvas — the masked % understates the miss; real side :focus-visible did not match (component root is not keyboard-focusable in this mount) — the canvas draws the contract's focus preview; the real side shows the resting paint; outline→stroke approximation (documented canvas fidelity note): the web focus ring is an outline OUTSIDE the border box; the canvas draws it as a bound stroke inside layout — geometry shifts by the ring width; EMITTER-DEFECT (channel table confirms): contract binds root padding-left/right = {imported.tag.root.padding-left} = 6px, but emit-figma-script applyTokens handles only the padding-inline/padding-block shorthands — longhand padding channels are silently dropped, so the canvas pill draws 12px narrower than the real Tag"
+      "pctExactUnmasked": 96.4,
+      "pctAAUnmasked": 85.47,
+      "pctAAMasked": 88.98,
+      "maskCoveragePct": 66.67,
+      "canvasPx": "36x12",
+      "realPx": "152x48",
+      "inkCanvasPct": 5.65,
+      "inkRealPct": 97.26,
+      "note": "CANVAS SIDE (NEARLY) BLANK: canvas ink 5.65% vs real ink 97.26% of the union canvas — the masked % understates the miss; real side :focus-visible did not match (component root is not keyboard-focusable in this mount) — the canvas draws the contract's focus preview; the real side shows the resting paint; outline→stroke approximation (documented canvas fidelity note): the web focus ring is an outline OUTSIDE the border box; the canvas draws it as a bound stroke inside layout — geometry shifts by the ring width; EMITTER-DEFECT (channel table confirms): contract binds root padding-left/right = {imported.tag.root.padding-left} = 6px, but emit-figma-script applyTokens handles only the padding-inline/padding-block shorthands — longhand padding channels are silently dropped, so the canvas pill draws 12px narrower than the real Tag"
     }
   ],
   "summary": {
     "cells": 4,
-    "meanExactUnmasked": 49.9,
-    "meanAAUnmasked": 35.03,
-    "meanAAMasked": 35.03,
-    "maxAAMasked": 80.73,
-    "worstCell": "Size=large, State=Focus Visible",
+    "meanExactUnmasked": 72.62,
+    "meanAAUnmasked": 54.34,
+    "meanAAMasked": 50.05,
+    "maxAAMasked": 88.98,
+    "worstCell": "Size=large, State=Active",
     "cellsOver10Masked": [
       {
         "cell": "Size=large",
-        "pctAAMasked": 13.76,
-        "note": "CANVAS SIDE (NEARLY) BLANK: canvas ink 0% vs real ink 14.5% of the union canvas — the masked % understates the miss; EMITTER-DEFECT (channel table confirms): contract binds root padding-left/right = {imported.tag.root.padding-left} = 6px, but emit-figma-script applyTokens handles only the padding-inline/padding-block shorthands — longhand padding channels are silently dropped, so the canvas pill draws 12px narrower than the real Tag"
+        "pctAAMasked": 22.25,
+        "note": "CANVAS SIDE (NEARLY) BLANK: canvas ink 0% vs real ink 48.63% of the union canvas — the masked % understates the miss; EMITTER-DEFECT (channel table confirms): contract binds root padding-left/right = {imported.tag.root.padding-left} = 6px, but emit-figma-script applyTokens handles only the padding-inline/padding-block shorthands — longhand padding channels are silently dropped, so the canvas pill draws 12px narrower than the real Tag"
       },
       {
         "cell": "Size=large, State=Active",
-        "pctAAMasked": 45.63,
-        "note": "CANVAS SIDE (NEARLY) BLANK: canvas ink 4.31% vs real ink 78.89% of the union canvas — the masked % understates the miss; EMITTER-DEFECT (channel table confirms): contract binds root padding-left/right = {imported.tag.root.padding-left} = 6px, but emit-figma-script applyTokens handles only the padding-inline/padding-block shorthands — longhand padding channels are silently dropped, so the canvas pill draws 12px narrower than the real Tag"
+        "pctAAMasked": 88.98,
+        "note": "CANVAS SIDE (NEARLY) BLANK: canvas ink 5.65% vs real ink 97.26% of the union canvas — the masked % understates the miss; EMITTER-DEFECT (channel table confirms): contract binds root padding-left/right = {imported.tag.root.padding-left} = 6px, but emit-figma-script applyTokens handles only the padding-inline/padding-block shorthands — longhand padding channels are silently dropped, so the canvas pill draws 12px narrower than the real Tag"
       },
       {
         "cell": "Size=large, State=Focus Visible",
-        "pctAAMasked": 80.73,
-        "note": "CANVAS SIDE (NEARLY) BLANK: canvas ink 8.07% vs real ink 86.98% of the union canvas — the masked % understates the miss; real side :focus-visible did not match (component root is not keyboard-focusable in this mount) — the canvas draws the contract's focus preview; the real side shows the resting paint; outline→stroke approximation (documented canvas fidelity note): the web focus ring is an outline OUTSIDE the border box; the canvas draws it as a bound stroke inside layout — geometry shifts by the ring width; EMITTER-DEFECT (channel table confirms): contract binds root padding-left/right = {imported.tag.root.padding-left} = 6px, but emit-figma-script applyTokens handles only the padding-inline/padding-block shorthands — longhand padding channels are silently dropped, so the canvas pill draws 12px narrower than the real Tag"
+        "pctAAMasked": 88.98,
+        "note": "CANVAS SIDE (NEARLY) BLANK: canvas ink 5.65% vs real ink 97.26% of the union canvas — the masked % understates the miss; real side :focus-visible did not match (component root is not keyboard-focusable in this mount) — the canvas draws the contract's focus preview; the real side shows the resting paint; outline→stroke approximation (documented canvas fidelity note): the web focus ring is an outline OUTSIDE the border box; the canvas draws it as a bound stroke inside layout — geometry shifts by the ring width; EMITTER-DEFECT (channel table confirms): contract binds root padding-left/right = {imported.tag.root.padding-left} = 6px, but emit-figma-script applyTokens handles only the padding-inline/padding-block shorthands — longhand padding channels are silently dropped, so the canvas pill draws 12px narrower than the real Tag"
       }
     ],
     "blankCanvasCells": [

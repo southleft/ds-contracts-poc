@@ -13,7 +13,7 @@ computed sweep never mounted): 0. A drawn value of `0px` means the renderer's de
 applies (no binding, no literal). `gap` compares against computed `column-gap`; captured `normal` = 0px.
 
 Notes:
-- mounted labelHidden: the contract anatomy carries no label part (input+backdrop only), so the real mount is scoped to the anatomy the canvas draws — named alignment, not a fudge.
+- round 4: the promoted anatomy CARRIES the label part — the real mount shows the label (floor fixedProps), retiring the round-3 labelHidden scoping.
 
 | part | channel | cell(s) | canvas-drawn | captured-truth (real Polaris computed) | delta | flag |
 |---|---|---|---|---|---|---|

@@ -12,6 +12,9 @@ Cells with a capture match: 12; cells with no captured combo (axis value or stat
 computed sweep never mounted): 0. A drawn value of `0px` means the renderer's default
 applies (no binding, no literal). `gap` compares against computed `column-gap`; captured `normal` = 0px.
 
+Notes:
+- mounted in a 288px container (floor stage content width): the real track is width:100% and collapses in a max-content stage; the canvas root is runtime-sized — width deltas are the named runtime-% cause.
+
 | part | channel | cell(s) | canvas-drawn | captured-truth (real Polaris computed) | delta | flag |
 |---|---|---|---|---|---|---|
 | root | background-color | 12 cells (e.g. `Size=Medium, Tone=Highlight`) | `rgba(227, 227, 227, 1)` | `rgba(227, 227, 227, 1)` | match |  |

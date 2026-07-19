@@ -16,69 +16,69 @@
   "fonts": {
     "interAvailableInBrowser": true
   },
-  "mountNote": "mounted labelHidden: the contract anatomy carries no label part (input+backdrop only), so the real mount is scoped to the anatomy the canvas draws — named alignment, not a fudge.",
+  "mountNote": "round 4: the promoted anatomy CARRIES the label part — the real mount shows the label (floor fixedProps), retiring the round-3 labelHidden scoping.",
   "cells": [
     {
       "cell": "Checked=unchecked",
       "kind": "base",
-      "pctExactUnmasked": 40.96,
-      "pctAAUnmasked": 22.87,
-      "pctAAMasked": null,
-      "maskCoveragePct": 100,
+      "pctExactUnmasked": 51.06,
+      "pctAAUnmasked": 25.25,
+      "pctAAMasked": 90.1,
+      "maskCoveragePct": 95.49,
       "canvasPx": "232x28",
-      "realPx": "32x32",
-      "inkCanvasPct": 31.03,
-      "inkRealPct": 13.25,
+      "realPx": "266x32",
+      "inkCanvasPct": 27.07,
+      "inkRealPct": 33.22,
       "note": "CANVAS SIDE BLANK (see ink columns): the backdrop compiles white fill + border-width {p.border-width-0} = 0 and the renderer draws no effectStack — the real control edge is an inset box-shadow (Polaris's Choice wrapper zeroes the border and repaints it as an inset shadow, see the config triage), so the canvas draws a white-on-white box"
     },
     {
       "cell": "Checked=checked",
       "kind": "base",
-      "pctExactUnmasked": 38.38,
-      "pctAAUnmasked": 26.94,
-      "pctAAMasked": 59.53,
-      "maskCoveragePct": 78.74,
+      "pctExactUnmasked": 36.2,
+      "pctAAUnmasked": 18.18,
+      "pctAAMasked": 42.22,
+      "maskCoveragePct": 79.07,
       "canvasPx": "301x40",
-      "realPx": "32x32",
+      "realPx": "266x32",
       "inkCanvasPct": 32.09,
-      "inkRealPct": 8.17,
+      "inkRealPct": 23.49,
       "note": "CANVAS SIDE BLANK (see ink columns): the backdrop compiles white fill + border-width {p.border-width-0} = 0 and the renderer draws no effectStack — the real control edge is an inset box-shadow (Polaris's Choice wrapper zeroes the border and repaints it as an inset shadow, see the config triage), so the canvas draws a white-on-white box"
     },
     {
       "cell": "Checked=indeterminate",
       "kind": "base",
-      "pctExactUnmasked": 36.83,
-      "pctAAUnmasked": 25.51,
-      "pctAAMasked": 48.75,
-      "maskCoveragePct": 74.76,
+      "pctExactUnmasked": 39.86,
+      "pctAAUnmasked": 22.37,
+      "pctAAMasked": 54.93,
+      "maskCoveragePct": 77.6,
       "canvasPx": "317x40",
-      "realPx": "32x32",
+      "realPx": "266x32",
       "inkCanvasPct": 31.09,
-      "inkRealPct": 7.48,
+      "inkRealPct": 22.02,
       "note": "CANVAS SIDE BLANK (see ink columns): the backdrop compiles white fill + border-width {p.border-width-0} = 0 and the renderer draws no effectStack — the real control edge is an inset box-shadow (Polaris's Choice wrapper zeroes the border and repaints it as an inset shadow, see the config triage), so the canvas draws a white-on-white box"
     }
   ],
   "summary": {
     "cells": 3,
-    "meanExactUnmasked": 38.72,
-    "meanAAUnmasked": 25.11,
-    "meanAAMasked": 43.72,
-    "maxAAMasked": 59.53,
-    "worstCell": "Checked=checked",
+    "meanExactUnmasked": 42.37,
+    "meanAAUnmasked": 21.93,
+    "meanAAMasked": 62.42,
+    "maxAAMasked": 90.1,
+    "worstCell": "Checked=unchecked",
     "cellsOver10Masked": [
       {
         "cell": "Checked=unchecked",
-        "pctAAMasked": null,
+        "pctAAMasked": 90.1,
         "note": "CANVAS SIDE BLANK (see ink columns): the backdrop compiles white fill + border-width {p.border-width-0} = 0 and the renderer draws no effectStack — the real control edge is an inset box-shadow (Polaris's Choice wrapper zeroes the border and repaints it as an inset shadow, see the config triage), so the canvas draws a white-on-white box"
       },
       {
         "cell": "Checked=checked",
-        "pctAAMasked": 59.53,
+        "pctAAMasked": 42.22,
         "note": "CANVAS SIDE BLANK (see ink columns): the backdrop compiles white fill + border-width {p.border-width-0} = 0 and the renderer draws no effectStack — the real control edge is an inset box-shadow (Polaris's Choice wrapper zeroes the border and repaints it as an inset shadow, see the config triage), so the canvas draws a white-on-white box"
       },
       {
         "cell": "Checked=indeterminate",
-        "pctAAMasked": 48.75,
+        "pctAAMasked": 54.93,
         "note": "CANVAS SIDE BLANK (see ink columns): the backdrop compiles white fill + border-width {p.border-width-0} = 0 and the renderer draws no effectStack — the real control edge is an inset box-shadow (Polaris's Choice wrapper zeroes the border and repaints it as an inset shadow, see the config triage), so the canvas draws a white-on-white box"
       }
     ],

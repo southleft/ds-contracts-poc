@@ -16,172 +16,234 @@
   "fonts": {
     "interAvailableInBrowser": true
   },
+  "mountNote": "mounted in a 288px container (floor stage content width): the real track is width:100% and collapses in a max-content stage; the canvas root is runtime-sized — width deltas are the named runtime-% cause.",
   "cells": [
     {
       "cell": "Size=Medium, Tone=Highlight",
       "kind": "base",
-      "pctExactUnmasked": 0,
-      "pctAAUnmasked": 0,
-      "pctAAMasked": 0,
-      "maskCoveragePct": 0,
+      "pctExactUnmasked": 24.94,
+      "pctAAUnmasked": 24.89,
+      "pctAAMasked": 24.34,
+      "maskCoveragePct": 1.09,
       "canvasPx": "96x128",
-      "realPx": "88x128",
+      "realPx": "544x32",
       "inkCanvasPct": 0,
-      "inkRealPct": 0,
-      "note": "BOTH SIDES BLANK (canvas ink 0%, real ink 0%): a 0-vs-0 comparison is VOID, not a pass — for the runtime-sized meter track both sides collapse to zero painted width in a hug container (the real ProgressBar is a 100%-width block; the canvas root hugs its empty indicator); the channel table carries the numeric verification for these cells"
+      "inkRealPct": 24.94,
+      "note": "CANVAS SIDE (NEARLY) BLANK: canvas ink 0% vs real ink 24.94% of the union canvas — the masked % understates the miss"
     },
     {
       "cell": "Size=Medium, Tone=Primary",
       "kind": "base",
-      "pctExactUnmasked": 0,
-      "pctAAUnmasked": 0,
-      "pctAAMasked": 0,
-      "maskCoveragePct": 0,
+      "pctExactUnmasked": 24.94,
+      "pctAAUnmasked": 24.89,
+      "pctAAMasked": 24.34,
+      "maskCoveragePct": 1.09,
       "canvasPx": "96x128",
-      "realPx": "88x128",
+      "realPx": "544x32",
       "inkCanvasPct": 0,
-      "inkRealPct": 0,
-      "note": "BOTH SIDES BLANK (canvas ink 0%, real ink 0%): a 0-vs-0 comparison is VOID, not a pass — for the runtime-sized meter track both sides collapse to zero painted width in a hug container (the real ProgressBar is a 100%-width block; the canvas root hugs its empty indicator); the channel table carries the numeric verification for these cells"
+      "inkRealPct": 24.94,
+      "note": "CANVAS SIDE (NEARLY) BLANK: canvas ink 0% vs real ink 24.94% of the union canvas — the masked % understates the miss"
     },
     {
       "cell": "Size=Medium, Tone=Success",
       "kind": "base",
-      "pctExactUnmasked": 0,
-      "pctAAUnmasked": 0,
-      "pctAAMasked": 0,
-      "maskCoveragePct": 0,
+      "pctExactUnmasked": 24.94,
+      "pctAAUnmasked": 24.89,
+      "pctAAMasked": 24.34,
+      "maskCoveragePct": 1.09,
       "canvasPx": "96x128",
-      "realPx": "88x96",
+      "realPx": "544x32",
       "inkCanvasPct": 0,
-      "inkRealPct": 0,
-      "note": "BOTH SIDES BLANK (canvas ink 0%, real ink 0%): a 0-vs-0 comparison is VOID, not a pass — for the runtime-sized meter track both sides collapse to zero painted width in a hug container (the real ProgressBar is a 100%-width block; the canvas root hugs its empty indicator); the channel table carries the numeric verification for these cells"
+      "inkRealPct": 24.94,
+      "note": "CANVAS SIDE (NEARLY) BLANK: canvas ink 0% vs real ink 24.94% of the union canvas — the masked % understates the miss"
     },
     {
       "cell": "Size=Medium, Tone=Critical",
       "kind": "base",
-      "pctExactUnmasked": 0,
-      "pctAAUnmasked": 0,
-      "pctAAMasked": 0,
-      "maskCoveragePct": 0,
+      "pctExactUnmasked": 24.94,
+      "pctAAUnmasked": 24.89,
+      "pctAAMasked": 24.34,
+      "maskCoveragePct": 1.09,
       "canvasPx": "96x128",
-      "realPx": "88x128",
+      "realPx": "544x32",
       "inkCanvasPct": 0,
-      "inkRealPct": 0,
-      "note": "BOTH SIDES BLANK (canvas ink 0%, real ink 0%): a 0-vs-0 comparison is VOID, not a pass — for the runtime-sized meter track both sides collapse to zero painted width in a hug container (the real ProgressBar is a 100%-width block; the canvas root hugs its empty indicator); the channel table carries the numeric verification for these cells"
+      "inkRealPct": 24.94,
+      "note": "CANVAS SIDE (NEARLY) BLANK: canvas ink 0% vs real ink 24.94% of the union canvas — the masked % understates the miss"
     },
     {
       "cell": "Size=Small, Tone=Highlight",
       "kind": "base",
-      "pctExactUnmasked": 0,
-      "pctAAUnmasked": 0,
-      "pctAAMasked": 0,
-      "maskCoveragePct": 0,
+      "pctExactUnmasked": 14.22,
+      "pctAAUnmasked": 14.16,
+      "pctAAMasked": 13.9,
+      "maskCoveragePct": 1.25,
       "canvasPx": "96x112",
-      "realPx": "88x112",
+      "realPx": "544x16",
       "inkCanvasPct": 0,
-      "inkRealPct": 0,
-      "note": "BOTH SIDES BLANK (canvas ink 0%, real ink 0%): a 0-vs-0 comparison is VOID, not a pass — for the runtime-sized meter track both sides collapse to zero painted width in a hug container (the real ProgressBar is a 100%-width block; the canvas root hugs its empty indicator); the channel table carries the numeric verification for these cells"
+      "inkRealPct": 14.22,
+      "note": "CANVAS SIDE (NEARLY) BLANK: canvas ink 0% vs real ink 14.22% of the union canvas — the masked % understates the miss"
     },
     {
       "cell": "Size=Small, Tone=Primary",
       "kind": "base",
-      "pctExactUnmasked": 0,
-      "pctAAUnmasked": 0,
-      "pctAAMasked": 0,
-      "maskCoveragePct": 0,
+      "pctExactUnmasked": 14.22,
+      "pctAAUnmasked": 14.16,
+      "pctAAMasked": 13.9,
+      "maskCoveragePct": 1.25,
       "canvasPx": "96x112",
-      "realPx": "88x112",
+      "realPx": "544x16",
       "inkCanvasPct": 0,
-      "inkRealPct": 0,
-      "note": "BOTH SIDES BLANK (canvas ink 0%, real ink 0%): a 0-vs-0 comparison is VOID, not a pass — for the runtime-sized meter track both sides collapse to zero painted width in a hug container (the real ProgressBar is a 100%-width block; the canvas root hugs its empty indicator); the channel table carries the numeric verification for these cells"
+      "inkRealPct": 14.22,
+      "note": "CANVAS SIDE (NEARLY) BLANK: canvas ink 0% vs real ink 14.22% of the union canvas — the masked % understates the miss"
     },
     {
       "cell": "Size=Small, Tone=Success",
       "kind": "base",
-      "pctExactUnmasked": 0,
-      "pctAAUnmasked": 0,
-      "pctAAMasked": 0,
-      "maskCoveragePct": 0,
+      "pctExactUnmasked": 14.22,
+      "pctAAUnmasked": 14.16,
+      "pctAAMasked": 13.9,
+      "maskCoveragePct": 1.25,
       "canvasPx": "96x112",
-      "realPx": "88x112",
+      "realPx": "544x16",
       "inkCanvasPct": 0,
-      "inkRealPct": 0,
-      "note": "BOTH SIDES BLANK (canvas ink 0%, real ink 0%): a 0-vs-0 comparison is VOID, not a pass — for the runtime-sized meter track both sides collapse to zero painted width in a hug container (the real ProgressBar is a 100%-width block; the canvas root hugs its empty indicator); the channel table carries the numeric verification for these cells"
+      "inkRealPct": 14.22,
+      "note": "CANVAS SIDE (NEARLY) BLANK: canvas ink 0% vs real ink 14.22% of the union canvas — the masked % understates the miss"
     },
     {
       "cell": "Size=Small, Tone=Critical",
       "kind": "base",
-      "pctExactUnmasked": 0,
-      "pctAAUnmasked": 0,
-      "pctAAMasked": 0,
-      "maskCoveragePct": 0,
+      "pctExactUnmasked": 14.22,
+      "pctAAUnmasked": 14.16,
+      "pctAAMasked": 13.9,
+      "maskCoveragePct": 1.25,
       "canvasPx": "96x112",
-      "realPx": "88x112",
+      "realPx": "544x16",
       "inkCanvasPct": 0,
-      "inkRealPct": 0,
-      "note": "BOTH SIDES BLANK (canvas ink 0%, real ink 0%): a 0-vs-0 comparison is VOID, not a pass — for the runtime-sized meter track both sides collapse to zero painted width in a hug container (the real ProgressBar is a 100%-width block; the canvas root hugs its empty indicator); the channel table carries the numeric verification for these cells"
+      "inkRealPct": 14.22,
+      "note": "CANVAS SIDE (NEARLY) BLANK: canvas ink 0% vs real ink 14.22% of the union canvas — the masked % understates the miss"
     },
     {
       "cell": "Size=Large, Tone=Highlight",
       "kind": "base",
-      "pctExactUnmasked": 0,
-      "pctAAUnmasked": 0,
-      "pctAAMasked": 0,
-      "maskCoveragePct": 0,
+      "pctExactUnmasked": 39.95,
+      "pctAAUnmasked": 39.91,
+      "pctAAMasked": 39.41,
+      "maskCoveragePct": 0.87,
       "canvasPx": "96x160",
-      "realPx": "88x160",
+      "realPx": "544x64",
       "inkCanvasPct": 0,
-      "inkRealPct": 0,
-      "note": "BOTH SIDES BLANK (canvas ink 0%, real ink 0%): a 0-vs-0 comparison is VOID, not a pass — for the runtime-sized meter track both sides collapse to zero painted width in a hug container (the real ProgressBar is a 100%-width block; the canvas root hugs its empty indicator); the channel table carries the numeric verification for these cells"
+      "inkRealPct": 39.95,
+      "note": "CANVAS SIDE (NEARLY) BLANK: canvas ink 0% vs real ink 39.95% of the union canvas — the masked % understates the miss"
     },
     {
       "cell": "Size=Large, Tone=Primary",
       "kind": "base",
-      "pctExactUnmasked": 0,
-      "pctAAUnmasked": 0,
-      "pctAAMasked": 0,
-      "maskCoveragePct": 0,
+      "pctExactUnmasked": 39.95,
+      "pctAAUnmasked": 39.91,
+      "pctAAMasked": 39.41,
+      "maskCoveragePct": 0.87,
       "canvasPx": "96x160",
-      "realPx": "88x128",
+      "realPx": "544x64",
       "inkCanvasPct": 0,
-      "inkRealPct": 0,
-      "note": "BOTH SIDES BLANK (canvas ink 0%, real ink 0%): a 0-vs-0 comparison is VOID, not a pass — for the runtime-sized meter track both sides collapse to zero painted width in a hug container (the real ProgressBar is a 100%-width block; the canvas root hugs its empty indicator); the channel table carries the numeric verification for these cells"
+      "inkRealPct": 39.95,
+      "note": "CANVAS SIDE (NEARLY) BLANK: canvas ink 0% vs real ink 39.95% of the union canvas — the masked % understates the miss"
     },
     {
       "cell": "Size=Large, Tone=Success",
       "kind": "base",
-      "pctExactUnmasked": 0,
-      "pctAAUnmasked": 0,
-      "pctAAMasked": 0,
-      "maskCoveragePct": 0,
+      "pctExactUnmasked": 39.95,
+      "pctAAUnmasked": 39.91,
+      "pctAAMasked": 39.41,
+      "maskCoveragePct": 0.87,
       "canvasPx": "96x160",
-      "realPx": "88x160",
+      "realPx": "544x64",
       "inkCanvasPct": 0,
-      "inkRealPct": 0,
-      "note": "BOTH SIDES BLANK (canvas ink 0%, real ink 0%): a 0-vs-0 comparison is VOID, not a pass — for the runtime-sized meter track both sides collapse to zero painted width in a hug container (the real ProgressBar is a 100%-width block; the canvas root hugs its empty indicator); the channel table carries the numeric verification for these cells"
+      "inkRealPct": 39.95,
+      "note": "CANVAS SIDE (NEARLY) BLANK: canvas ink 0% vs real ink 39.95% of the union canvas — the masked % understates the miss"
     },
     {
       "cell": "Size=Large, Tone=Critical",
       "kind": "base",
-      "pctExactUnmasked": 0,
-      "pctAAUnmasked": 0,
-      "pctAAMasked": 0,
-      "maskCoveragePct": 0,
+      "pctExactUnmasked": 39.95,
+      "pctAAUnmasked": 39.91,
+      "pctAAMasked": 39.41,
+      "maskCoveragePct": 0.87,
       "canvasPx": "96x160",
-      "realPx": "88x160",
+      "realPx": "544x64",
       "inkCanvasPct": 0,
-      "inkRealPct": 0,
-      "note": "BOTH SIDES BLANK (canvas ink 0%, real ink 0%): a 0-vs-0 comparison is VOID, not a pass — for the runtime-sized meter track both sides collapse to zero painted width in a hug container (the real ProgressBar is a 100%-width block; the canvas root hugs its empty indicator); the channel table carries the numeric verification for these cells"
+      "inkRealPct": 39.95,
+      "note": "CANVAS SIDE (NEARLY) BLANK: canvas ink 0% vs real ink 39.95% of the union canvas — the masked % understates the miss"
     }
   ],
   "summary": {
     "cells": 12,
-    "meanExactUnmasked": 0,
-    "meanAAUnmasked": 0,
-    "meanAAMasked": 0,
-    "maxAAMasked": 0,
-    "worstCell": "Size=Medium, Tone=Highlight",
-    "cellsOver10Masked": [],
+    "meanExactUnmasked": 26.37,
+    "meanAAUnmasked": 26.32,
+    "meanAAMasked": 25.88,
+    "maxAAMasked": 39.41,
+    "worstCell": "Size=Large, Tone=Highlight",
+    "cellsOver10Masked": [
+      {
+        "cell": "Size=Medium, Tone=Highlight",
+        "pctAAMasked": 24.34,
+        "note": "CANVAS SIDE (NEARLY) BLANK: canvas ink 0% vs real ink 24.94% of the union canvas — the masked % understates the miss"
+      },
+      {
+        "cell": "Size=Medium, Tone=Primary",
+        "pctAAMasked": 24.34,
+        "note": "CANVAS SIDE (NEARLY) BLANK: canvas ink 0% vs real ink 24.94% of the union canvas — the masked % understates the miss"
+      },
+      {
+        "cell": "Size=Medium, Tone=Success",
+        "pctAAMasked": 24.34,
+        "note": "CANVAS SIDE (NEARLY) BLANK: canvas ink 0% vs real ink 24.94% of the union canvas — the masked % understates the miss"
+      },
+      {
+        "cell": "Size=Medium, Tone=Critical",
+        "pctAAMasked": 24.34,
+        "note": "CANVAS SIDE (NEARLY) BLANK: canvas ink 0% vs real ink 24.94% of the union canvas — the masked % understates the miss"
+      },
+      {
+        "cell": "Size=Small, Tone=Highlight",
+        "pctAAMasked": 13.9,
+        "note": "CANVAS SIDE (NEARLY) BLANK: canvas ink 0% vs real ink 14.22% of the union canvas — the masked % understates the miss"
+      },
+      {
+        "cell": "Size=Small, Tone=Primary",
+        "pctAAMasked": 13.9,
+        "note": "CANVAS SIDE (NEARLY) BLANK: canvas ink 0% vs real ink 14.22% of the union canvas — the masked % understates the miss"
+      },
+      {
+        "cell": "Size=Small, Tone=Success",
+        "pctAAMasked": 13.9,
+        "note": "CANVAS SIDE (NEARLY) BLANK: canvas ink 0% vs real ink 14.22% of the union canvas — the masked % understates the miss"
+      },
+      {
+        "cell": "Size=Small, Tone=Critical",
+        "pctAAMasked": 13.9,
+        "note": "CANVAS SIDE (NEARLY) BLANK: canvas ink 0% vs real ink 14.22% of the union canvas — the masked % understates the miss"
+      },
+      {
+        "cell": "Size=Large, Tone=Highlight",
+        "pctAAMasked": 39.41,
+        "note": "CANVAS SIDE (NEARLY) BLANK: canvas ink 0% vs real ink 39.95% of the union canvas — the masked % understates the miss"
+      },
+      {
+        "cell": "Size=Large, Tone=Primary",
+        "pctAAMasked": 39.41,
+        "note": "CANVAS SIDE (NEARLY) BLANK: canvas ink 0% vs real ink 39.95% of the union canvas — the masked % understates the miss"
+      },
+      {
+        "cell": "Size=Large, Tone=Success",
+        "pctAAMasked": 39.41,
+        "note": "CANVAS SIDE (NEARLY) BLANK: canvas ink 0% vs real ink 39.95% of the union canvas — the masked % understates the miss"
+      },
+      {
+        "cell": "Size=Large, Tone=Critical",
+        "pctAAMasked": 39.41,
+        "note": "CANVAS SIDE (NEARLY) BLANK: canvas ink 0% vs real ink 39.95% of the union canvas — the masked % understates the miss"
+      }
+    ],
     "blankCanvasCells": [
       "Size=Medium, Tone=Highlight",
       "Size=Medium, Tone=Primary",
@@ -198,7 +260,7 @@
     ]
   },
   "acceptance": {
-    "maskedMeanLE5": true,
+    "maskedMeanLE5": false,
     "allCellsOver10Named": true,
     "noBlankCanvasCells": false
   }

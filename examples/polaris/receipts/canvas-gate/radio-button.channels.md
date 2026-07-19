@@ -13,7 +13,7 @@ computed sweep never mounted): 0. A drawn value of `0px` means the renderer's de
 applies (no binding, no literal). `gap` compares against computed `column-gap`; captured `normal` = 0px.
 
 Notes:
-- mounted labelHidden: contract anatomy carries no label part (see Checkbox note).
+- round 4: label mounted visible (promoted label anatomy — see Checkbox note).
 
 | part | channel | cell(s) | canvas-drawn | captured-truth (real Polaris computed) | delta | flag |
 |---|---|---|---|---|---|---|

@@ -163,14 +163,14 @@
     {
       "cell": "Size=Medium, Text Align=Left, Tone=Critical, Variant=Plain",
       "kind": "base",
-      "pctExactUnmasked": 8.19,
-      "pctAAUnmasked": 3.03,
+      "pctExactUnmasked": 16.11,
+      "pctAAUnmasked": 6.65,
       "pctAAMasked": 0,
-      "maskCoveragePct": 21.38,
+      "maskCoveragePct": 52.33,
       "canvasPx": "73x19",
-      "realPx": "116x160",
-      "inkCanvasPct": 4.04,
-      "inkRealPct": 5.51,
+      "realPx": "116x91",
+      "inkCanvasPct": 7.1,
+      "inkRealPct": 8.77,
       "note": "NAMED CONTRACT REFUSAL (channel table quotes both colors): tone×variant multi-axis paint (.tone*:is(.variant*)) was refused by name in the static promotion — the canvas draws the neutral variant paint while the real critical/success Button repaints fill/label. The tone axis is also DEFAULTLESS, so the canvas cartesian contains no neutral-tone cell at all; composition-owned typography (named in the config triage; channel table: label 12px/16px vs real 13px/20px): plain/monochromePlain render their label through the Text primitive at bodyMd — invisible to single-file static promotion"
     },
     {
@@ -267,14 +267,14 @@
     {
       "cell": "Size=Medium, Text Align=Left, Tone=Success, Variant=Monochrome Plain",
       "kind": "base",
-      "pctExactUnmasked": 16.11,
-      "pctAAUnmasked": 6.65,
+      "pctExactUnmasked": 8.19,
+      "pctAAUnmasked": 2.79,
       "pctAAMasked": 0,
-      "maskCoveragePct": 52.33,
+      "maskCoveragePct": 21.38,
       "canvasPx": "73x19",
-      "realPx": "116x91",
-      "inkCanvasPct": 7.09,
-      "inkRealPct": 8.74,
+      "realPx": "116x160",
+      "inkCanvasPct": 4.03,
+      "inkRealPct": 5.49,
       "note": "NAMED CONTRACT REFUSAL (channel table quotes both colors): tone×variant multi-axis paint (.tone*:is(.variant*)) was refused by name in the static promotion — the canvas draws the neutral variant paint while the real critical/success Button repaints fill/label. The tone axis is also DEFAULTLESS, so the canvas cartesian contains no neutral-tone cell at all; composition-owned typography (named in the config triage; channel table: label 12px/16px vs real 13px/20px): plain/monochromePlain render their label through the Text primitive at bodyMd — invisible to single-file static promotion"
     },
     {
@@ -437,8 +437,8 @@
       "cell": "Size=Medium, Text Align=Start, Tone=Critical, Variant=Primary",
       "kind": "base",
       "pctExactUnmasked": 93.15,
-      "pctAAUnmasked": 83.31,
-      "pctAAMasked": 90.74,
+      "pctAAUnmasked": 83.08,
+      "pctAAMasked": 90.31,
       "maskCoveragePct": 46.51,
       "canvasPx": "124x56",
       "realPx": "124x56",
@@ -567,8 +567,8 @@
       "cell": "Size=Medium, Text Align=End, Tone=Critical, Variant=Primary",
       "kind": "base",
       "pctExactUnmasked": 93.15,
-      "pctAAUnmasked": 83.09,
-      "pctAAMasked": 90.33,
+      "pctAAUnmasked": 83.31,
+      "pctAAMasked": 90.74,
       "maskCoveragePct": 46.51,
       "canvasPx": "124x56",
       "realPx": "124x56",
@@ -1997,8 +1997,8 @@
       "cell": "Size=Large, Text Align=Center, Tone=Critical, Variant=Primary",
       "kind": "base",
       "pctExactUnmasked": 93.98,
-      "pctAAUnmasked": 84.1,
-      "pctAAMasked": 92.16,
+      "pctAAUnmasked": 84.09,
+      "pctAAMasked": 92.14,
       "maskCoveragePct": 43.75,
       "canvasPx": "130x64",
       "realPx": "130x64",
@@ -2127,8 +2127,8 @@
       "cell": "Size=Large, Text Align=Left, Tone=Critical, Variant=Primary",
       "kind": "base",
       "pctExactUnmasked": 93.98,
-      "pctAAUnmasked": 84.1,
-      "pctAAMasked": 92.16,
+      "pctAAUnmasked": 84.38,
+      "pctAAMasked": 92.65,
       "maskCoveragePct": 43.75,
       "canvasPx": "130x64",
       "realPx": "130x64",
@@ -2387,8 +2387,8 @@
       "cell": "Size=Large, Text Align=Start, Tone=Critical, Variant=Primary",
       "kind": "base",
       "pctExactUnmasked": 93.98,
-      "pctAAUnmasked": 84.38,
-      "pctAAMasked": 92.65,
+      "pctAAUnmasked": 83.59,
+      "pctAAMasked": 91.26,
       "maskCoveragePct": 43.75,
       "canvasPx": "130x64",
       "realPx": "130x64",
@@ -2902,9 +2902,9 @@
     "cells": 220,
     "meanExactUnmasked": 37,
     "meanAAUnmasked": 23.13,
-    "meanAAMasked": 22.3,
+    "meanAAMasked": 22.29,
     "maxAAMasked": 92.65,
-    "worstCell": "Size=Large, Text Align=Right, Tone=Critical, Variant=Primary",
+    "worstCell": "Size=Large, Text Align=Left, Tone=Critical, Variant=Primary",
     "cellsOver10Masked": [
       {
         "cell": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Primary",
@@ -2968,7 +2968,7 @@
       },
       {
         "cell": "Size=Medium, Text Align=Start, Tone=Critical, Variant=Primary",
-        "pctAAMasked": 90.74,
+        "pctAAMasked": 90.31,
         "note": "NAMED CONTRACT REFUSAL (channel table quotes both colors): tone×variant multi-axis paint (.tone*:is(.variant*)) was refused by name in the static promotion — the canvas draws the neutral variant paint while the real critical/success Button repaints fill/label. The tone axis is also DEFAULTLESS, so the canvas cartesian contains no neutral-tone cell at all"
       },
       {
@@ -2988,7 +2988,7 @@
       },
       {
         "cell": "Size=Medium, Text Align=End, Tone=Critical, Variant=Primary",
-        "pctAAMasked": 90.33,
+        "pctAAMasked": 90.74,
         "note": "NAMED CONTRACT REFUSAL (channel table quotes both colors): tone×variant multi-axis paint (.tone*:is(.variant*)) was refused by name in the static promotion — the canvas draws the neutral variant paint while the real critical/success Button repaints fill/label. The tone axis is also DEFAULTLESS, so the canvas cartesian contains no neutral-tone cell at all"
       },
       {
@@ -3208,7 +3208,7 @@
       },
       {
         "cell": "Size=Large, Text Align=Center, Tone=Critical, Variant=Primary",
-        "pctAAMasked": 92.16,
+        "pctAAMasked": 92.14,
         "note": "NAMED CONTRACT REFUSAL (channel table quotes both colors): tone×variant multi-axis paint (.tone*:is(.variant*)) was refused by name in the static promotion — the canvas draws the neutral variant paint while the real critical/success Button repaints fill/label. The tone axis is also DEFAULTLESS, so the canvas cartesian contains no neutral-tone cell at all"
       },
       {
@@ -3228,7 +3228,7 @@
       },
       {
         "cell": "Size=Large, Text Align=Left, Tone=Critical, Variant=Primary",
-        "pctAAMasked": 92.16,
+        "pctAAMasked": 92.65,
         "note": "NAMED CONTRACT REFUSAL (channel table quotes both colors): tone×variant multi-axis paint (.tone*:is(.variant*)) was refused by name in the static promotion — the canvas draws the neutral variant paint while the real critical/success Button repaints fill/label. The tone axis is also DEFAULTLESS, so the canvas cartesian contains no neutral-tone cell at all"
       },
       {
@@ -3268,7 +3268,7 @@
       },
       {
         "cell": "Size=Large, Text Align=Start, Tone=Critical, Variant=Primary",
-        "pctAAMasked": 92.65,
+        "pctAAMasked": 91.26,
         "note": "NAMED CONTRACT REFUSAL (channel table quotes both colors): tone×variant multi-axis paint (.tone*:is(.variant*)) was refused by name in the static promotion — the canvas draws the neutral variant paint while the real critical/success Button repaints fill/label. The tone axis is also DEFAULTLESS, so the canvas cartesian contains no neutral-tone cell at all"
       },
       {
