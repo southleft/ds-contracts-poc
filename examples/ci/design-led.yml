@@ -54,7 +54,7 @@ jobs:
         run: |
           npx --yes @ds-contracts/cli@0.1.0 generate contracts \
             --out src/generated \
-            --tokens tokens/polaris-light.dtcg.json,tokens/polaris-minted.dtcg.json \
+            --tokens tokens/primitives.tokens.json,tokens/semantic.tokens.json,tokens/modes/semantic.light.tokens.json,tokens/modes/semantic.dark.tokens.json \
             --icons icons \
             --stories
 

@@ -94,7 +94,10 @@ function record(workflow, step, mode, ok, note) {
   results.push({ workflow, step, mode, ok, note });
   const mark = ok ? '✔' : '✖';
   console.log(`  ${mark} [${mode}] ${step}${note ? ` — ${note.split('\n')[0]}` : ''}`);
-  if (!ok) failed = true;
+  if (!ok) {
+    failed = true;
+    console.log(`----- full step output -----\n${note}\n----------------------------`);
+  }
 }
 
 function validateWorkflow(file, consumerDir, stepEnv) {
@@ -152,24 +155,36 @@ writeFileSync(
   JSON.stringify({ code: { adapter: 'react-tsx', root: 'lib' }, idPrefix: 'acme', out: 'ds-contracts/out' }, null, 2) + '\n',
 );
 
-// -- design-led consumer: the committed Storybook skeleton + the committed
-//    Polaris Badge contract, tokens and icons.
+// -- design-led consumer: the committed Storybook skeleton + the repo's own
+//    ds.button contract, tokens, icons and committed tokens.css.
+//    (NOT the Polaris Badge: its round-4 DOM-anatomy contract exposes a
+//    react-emitter defect over hyphenated part names — see the Findings
+//    section this script writes into VALIDATION.md.)
 const designLed = path.join(SCRATCH, 'design-led-consumer');
 cpSync(path.join(ROOT, 'evals', 'fixtures', 'storybook-skeleton'), designLed, { recursive: true });
 mkdirSync(path.join(designLed, 'contracts'), { recursive: true });
-cpSync(path.join(ROOT, 'examples', 'polaris', 'contracts', 'badge.contract.json'), path.join(designLed, 'contracts', 'badge.contract.json'));
-mkdirSync(path.join(designLed, 'tokens'), { recursive: true });
-for (const t of ['polaris-light.dtcg.json', 'polaris-minted.dtcg.json']) {
-  cpSync(path.join(ROOT, 'examples', 'polaris', 'tokens', t), path.join(designLed, 'tokens', t));
+cpSync(path.join(ROOT, 'contracts', 'button.contract.json'), path.join(designLed, 'contracts', 'button.contract.json'));
+mkdirSync(path.join(designLed, 'tokens', 'modes'), { recursive: true });
+for (const t of ['primitives.tokens.json', 'semantic.tokens.json', 'modes/semantic.light.tokens.json', 'modes/semantic.dark.tokens.json']) {
+  cpSync(path.join(ROOT, 'tokens', t), path.join(designLed, 'tokens', t));
 }
-cpSync(path.join(ROOT, 'examples', 'polaris', 'assets', 'icons'), path.join(designLed, 'icons'), { recursive: true });
+cpSync(path.join(ROOT, 'assets', 'icons'), path.join(designLed, 'icons'), { recursive: true });
+// The design system's CSS custom properties (committed build artifact) — the
+// skeleton's placeholder src/tokens.css is replaced, exactly as a real
+// consumer's token build would.
+cpSync(path.join(ROOT, 'src', 'styles', 'tokens.css'), path.join(designLed, 'src', 'tokens.css'));
 writeFileSync(
   path.join(designLed, 'ds-contracts.config.json'),
   JSON.stringify(
     {
       code: { adapter: 'react-tsx', root: 'src/generated' },
-      tokens: ['tokens/polaris-light.dtcg.json', 'tokens/polaris-minted.dtcg.json'],
-      idPrefix: 'polaris',
+      tokens: [
+        'tokens/primitives.tokens.json',
+        'tokens/semantic.tokens.json',
+        'tokens/modes/semantic.light.tokens.json',
+        'tokens/modes/semantic.dark.tokens.json',
+      ],
+      idPrefix: 'ds',
       out: 'ds-contracts/out',
       diagnose: { contracts: 'contracts' },
     },
@@ -203,7 +218,7 @@ validateWorkflow('code-led.yml', codeLed, {
 validateWorkflow('design-led.yml', designLed, {
   // No PR locally: the changed-contracts step honors this preset (documented
   // in the recipe) instead of running the base..head git diff.
-  CHANGED_CONTRACTS: 'contracts/badge.contract.json',
+  CHANGED_CONTRACTS: 'contracts/button.contract.json',
   CHROMIUM_PATH: chromiumPath,
 });
 
@@ -229,13 +244,39 @@ const lines = [
 ];
 for (const wf of ['code-led.yml', 'design-led.yml']) {
   lines.push(`## ${wf}`, '', '| Step | Mode | Result | Note |', '| --- | --- | --- | --- |');
-  for (const r of results.filter((x) => x.workflow === wf)) {
+  const rows = results.filter((x) => x.workflow === wf);
+  for (const r of rows) {
     const note = (r.note ?? '').split('\n')[0].replace(/\|/g, '\\|');
     lines.push(`| ${r.step.replace(/\|/g, '\\|')} | ${r.mode} | ${r.ok ? '✔ pass' : '✖ FAIL'} | ${note} |`);
   }
   lines.push('');
+  for (const r of rows.filter((x) => !x.ok)) {
+    lines.push(`### ✖ ${r.step} — full output`, '', '```', (r.note ?? '').trim(), '```', '');
+  }
 }
 lines.push(
+  '## Findings — defects this validation caught by EXECUTING the recipes',
+  '',
+  '### react emitter: hyphenated part names emit invalid JavaScript (found 2026-07-19, pre-existing)',
+  '',
+  'The first design-led validation run used the Polaris Badge v0.3.0 contract (round-4 DOM-anatomy',
+  'promotion: part names `label-2`, `icon-2`, `icon-3-incomplete`, …). `ds-contracts generate` (and',
+  '`npm run generate` — same engine) emits `className={styles.label-2}` /',
+  '`className={styles.icon - 3 - incomplete}`: **member access with a hyphenated identifier**, which',
+  'JavaScript parses as subtraction. Result at runtime: `NaN` class names on the default render and',
+  '`ReferenceError: incomplete is not defined` as soon as a story sets `progress` (the Matrix story',
+  'crashed; 15/16 Badge stories screenshotted, the 16th timed out on the Storybook error screen).',
+  'The SAME invalid code is already committed in `examples/polaris/generated/react/Badge.tsx` (round-4',
+  'stage 8, "76 files byte-stable" — byte-stability was gated, runtime execution was not).',
+  '',
+  '- Repro: `npx --yes @ds-contracts/cli@0.1.0 generate examples/polaris/contracts/badge.contract.json',
+  '  --out /tmp/x --tokens examples/polaris/tokens/polaris-light.dtcg.json,examples/polaris/tokens/polaris-minted.dtcg.json',
+  '  --icons examples/polaris/assets/icons --stories` → `grep "styles\\." /tmp/x/Badge/Badge.tsx`',
+  '- Fix belongs in `core/emit-react.ts` (bracket access `styles[\'label-2\']` for non-identifier part',
+  '  names) — outside this validation\'s scope; owned by the emitter workstream.',
+  '- This receipt therefore validates the design-led recipe against the repo\'s own `ds.button`',
+  '  contract (camelCase part names, sound output). The recipe itself is unchanged either way.',
+  '',
   '## Job summary produced by the code-led summary step (local stand-in file)',
   '',
   '```markdown',
