@@ -1,6 +1,6 @@
 {
-  "passed": 115,
-  "total": 115,
+  "passed": 117,
+  "total": 117,
   "results": [
     {
       "id": "refuse-unknown-token-reference",
@@ -575,6 +575,16 @@
     {
       "id": "emitter-plugin-loads",
       "claim": "C7-cli",
+      "pass": true
+    },
+    {
+      "id": "journey-engineer",
+      "claim": "C8-journey",
+      "pass": true
+    },
+    {
+      "id": "journey-designer",
+      "claim": "C8-journey",
       "pass": true
     }
   ]

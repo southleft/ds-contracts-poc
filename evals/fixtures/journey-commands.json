@@ -1,0 +1,33 @@
+{
+  "$comment": "SINGLE SOURCE OF TRUTH for the two journeys' command lines — the docs-drift guard seam. The journey-engineer and journey-designer evals (evals/run.ts) EXECUTE these commands against the locally built packages/cli bundle (the published CLI's exact source, network-free); the docs (site, Phase 5) RENDER the same file. Edit here and both surfaces move together — documented commands and tested commands cannot diverge. Rules: every command starts with 'npx @ds-contracts/cli ' (the evals swap that prefix for the local build), is a single line, contains no quoted/spaced arguments, and <CODE> is the pairing-code placeholder the designer reads from the Figma plugin's Receive panel (the evals substitute a live in-process code).",
+  "cliPrefix": "npx @ds-contracts/cli",
+  "journeys": {
+    "engineer": {
+      "persona": "Engineer on a design-led team — Figma is truth; he never opens Figma.",
+      "eval": "journey-engineer",
+      "steps": [
+        {
+          "id": "generate-stories",
+          "doc": "The design's contract (proposed from the Figma dump, with the captured + minted token layers) generates React + CSS Modules + Storybook stories straight into the repo.",
+          "command": "npx @ds-contracts/cli generate contracts --out src/generated --tokens tokens/captured.dtcg.json,tokens/minted.dtcg.json --stories"
+        }
+      ]
+    },
+    "designer": {
+      "persona": "Designer on a code-led team — code is truth; she never touches a terminal (CI and a colleague's push do).",
+      "eval": "journey-designer",
+      "steps": [
+        {
+          "id": "figma-emit",
+          "doc": "The contract compiles to a Figma Plugin API sync script — the component set appears on canvas, styled and token-bound.",
+          "command": "npx @ds-contracts/cli figma contracts/badge.contract.json --out figma-sync --tokens tokens/polaris-light.dtcg.json,tokens/polaris-minted.dtcg.json --icons icons"
+        },
+        {
+          "id": "figma-push",
+          "doc": "The CONTRACTS-BUNDLE (the code-led CI artifact) travels to the plugin over the bridge under a pairing code — deliver-once, 15-minute TTL.",
+          "command": "npx @ds-contracts/cli figma push contracts-bundle.json --code <CODE>"
+        }
+      ]
+    }
+  }
+}

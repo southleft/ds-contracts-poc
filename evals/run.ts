@@ -157,7 +157,7 @@ const expectFinding = (
 
 interface Case {
   id: string;
-  claim: 'C1-determinism' | 'C2-refusal' | 'C3-detection' | 'C4-convergence' | 'C5-extraction' | 'C6-theming' | 'C7-cli';
+  claim: 'C1-determinism' | 'C2-refusal' | 'C3-detection' | 'C4-convergence' | 'C5-extraction' | 'C6-theming' | 'C7-cli' | 'C8-journey';
   run: () => void; // throws on failure
 }
 
@@ -3432,6 +3432,302 @@ const cases: Case[] = [
         throw new Error(`plugin emitter output wrong:\n${contents}`);
       }
       console.log('emitter-plugin-loads: registered (live array + getEmitters + byName), 4 named refusals, CLI --emitter emitted badge.inventory.txt');
+    },
+  },
+  {
+    // PHASE 4 (Two Journeys) — J-ENGINEER standing gate. Figma is truth: the
+    // committed CBDS plugin dump (the owner's live Button-Brand Primary send)
+    // replays through the REAL propose path (proposeBatchFromDump — the same
+    // function the playground receive path runs), the proposed contract plus
+    // the captured/minted token layers land in the committed Storybook
+    // skeleton (evals/fixtures/storybook-skeleton), the LOCAL packages/cli
+    // build (the published CLI's exact source — network-free) generates
+    // React + stories from the manifest command line
+    // (evals/fixtures/journey-commands.json — the docs render the SAME file,
+    // so documented and tested commands cannot diverge), and the emitted
+    // story module renders in the real-browser harness with computed-style
+    // spot checks against the committed Figma ground truth (the
+    // cbds-bridge-check receipt numbers: #0e61ba background, #fcfeff label,
+    // 48px height, 44px min-height tap target, 16px→12px padding-inline and
+    // 48px→32px height across the size axis, 8px radius). Full Storybook is
+    // deliberately NOT run (package install/network, tens of seconds); the
+    // eval instead asserts the emitted stories land inside the committed
+    // main.ts glob and renders the story module itself
+    // (evals/fixtures/journey-engineer.entry.tsx, esbuild-bundled).
+    id: 'journey-engineer',
+    claim: 'C8-journey',
+    run: () => {
+      // The manifest is the ONLY place this eval's CLI command line lives.
+      const manifest = JSON.parse(
+        readFileSync(path.join(SCRATCH, 'evals', 'fixtures', 'journey-commands.json'), 'utf8'),
+      ) as { cliPrefix: string; journeys: Record<string, { steps: Array<{ id: string; command: string }> }> };
+      const argvOf = (journey: string, stepId: string): string[] => {
+        const step = manifest.journeys[journey]?.steps.find((s) => s.id === stepId);
+        if (!step) throw new Error(`journey-commands.json: missing step ${journey}/${stepId}`);
+        const prefix = `${manifest.cliPrefix} `;
+        if (!step.command.startsWith(prefix)) {
+          throw new Error(`manifest command must start with "${prefix}": ${step.command}`);
+        }
+        return step.command.slice(prefix.length).split(/\s+/);
+      };
+
+      // 1. Replay the committed dump through the real propose path and lay
+      //    the engineer's repo out in the committed Storybook skeleton.
+      const setup = run(TSX, ['-e', `
+        import fs from 'node:fs';
+        import path from 'node:path';
+        import { loadTokenCorpus } from './extract/figma/tokens.ts';
+        import { loadContracts } from './extract/figma/propose.ts';
+        import { proposeBatchFromDump } from './core/propose-figma.ts';
+        import { capturedTokensFromDump } from './core/captured-tokens.ts';
+        import { flattenTokens } from './core/tokens.ts';
+        const WORK = 'jwork';
+        const dump = JSON.parse(fs.readFileSync('extract/figma/fixtures/cbds-plugin-button-brand-primary.dump.json', 'utf8'));
+        const loaded = loadContracts(path.resolve('contracts'));
+        const batch = proposeBatchFromDump(dump, { corpus: loadTokenCorpus(process.cwd()), contractIdByName: loaded.byName, contractsById: loaded.byId, fileKey: 'WofZT8xaxXuc2Q6Je9S4XE', mintUnbound: true });
+        if (batch.proposals.length !== 1 || batch.skipped.length !== 0) throw new Error('dump replay must propose exactly 1 with 0 skips (got ' + batch.proposals.length + '/' + batch.skipped.length + ')');
+        const proposal = batch.proposals[0];
+        const c = proposal.contract;
+        if (c.name !== 'ButtonBrandPrimary') throw new Error('unexpected proposal name: ' + c.name);
+        fs.cpSync('evals/fixtures/storybook-skeleton', WORK, { recursive: true });
+        fs.mkdirSync(path.join(WORK, 'contracts'), { recursive: true });
+        fs.writeFileSync(path.join(WORK, 'contracts', 'button-brand-primary.contract.json'), JSON.stringify(c, null, 2) + '\\n');
+        for (const s of proposal.childStubs ?? []) {
+          fs.writeFileSync(path.join(WORK, 'contracts', s.id.split('.').pop() + '.contract.json'), JSON.stringify(s, null, 2) + '\\n');
+        }
+        const captured = capturedTokensFromDump(dump);
+        if (!captured || captured.count !== 18) throw new Error('captured layer must carry the 18 dump variables (got ' + (captured && captured.count) + ')');
+        fs.mkdirSync(path.join(WORK, 'tokens'), { recursive: true });
+        fs.writeFileSync(path.join(WORK, 'tokens', 'captured.dtcg.json'), JSON.stringify(captured.tree, null, 2) + '\\n');
+        fs.writeFileSync(path.join(WORK, 'tokens', 'minted.dtcg.json'), JSON.stringify((proposal.mintedTokens && proposal.mintedTokens.tree) || {}, null, 2) + '\\n');
+        // The consumer's token build: captured + minted values as CSS custom
+        // properties (token dots -> hyphens, the generateCss naming rule).
+        const vars = [];
+        for (const e of captured.entries) vars.push('  --' + e.path.split('.').join('-') + ': ' + e.value + ';');
+        for (const [p, entry] of flattenTokens((proposal.mintedTokens && proposal.mintedTokens.tree) || {})) vars.push('  --' + p.split('.').join('-') + ': ' + entry.value + ';');
+        fs.writeFileSync(path.join(WORK, 'src', 'tokens.css'), ':root {\\n' + vars.join('\\n') + '\\n}\\n');
+        console.log('setup ok: contract + ' + ((proposal.childStubs || []).length) + ' stub(s), ' + vars.length + ' css vars');
+      `]);
+      if (setup.status !== 0 || !setup.out.includes('setup ok:')) {
+        throw new Error(`dump replay / skeleton setup failed:\n${setup.out}`);
+      }
+
+      // 2. The manifest command, executed by the LOCAL CLI build in the
+      //    engineer's repo (published-CLI-equivalent; the published bundle is
+      //    npx-verified separately in examples/ci/VALIDATION.md).
+      const built = run(process.execPath, ['packages/cli/build.mjs']);
+      if (built.status !== 0) throw new Error(`CLI build failed:\n${built.out}`);
+      const cli = path.join(SCRATCH, 'packages', 'cli', 'dist', 'cli.js');
+      const jwork = path.join(SCRATCH, 'jwork');
+      const gen = spawnSync(process.execPath, [cli, ...argvOf('engineer', 'generate-stories')], {
+        cwd: jwork,
+        encoding: 'utf8',
+      });
+      const genOut = `${gen.stdout ?? ''}${gen.stderr ?? ''}`;
+      if ((gen.status ?? -1) !== 0 || !genOut.includes('ButtonBrandPrimary')) {
+        throw new Error(`manifest generate command failed:\n${genOut}`);
+      }
+
+      // 3. Glob conformance: the emitted story file sits inside the
+      //    committed skeleton's main.ts stories glob — a real
+      //    `npm run storybook` over this exact layout picks it up.
+      const mainTs = readFileSync(path.join(jwork, '.storybook', 'main.ts'), 'utf8');
+      if (!mainTs.includes("stories: ['../src/generated/**/*.stories.@(ts|tsx)']")) {
+        throw new Error('storybook-skeleton main.ts glob changed — update this eval AND the layout docs together');
+      }
+      const storyFile = path.join(jwork, 'src', 'generated', 'ButtonBrandPrimary', 'ButtonBrandPrimary.stories.tsx');
+      if (!existsSync(storyFile)) {
+        throw new Error('emitted story missing from the skeleton glob target: src/generated/ButtonBrandPrimary/ButtonBrandPrimary.stories.tsx');
+      }
+
+      // 4. Render the story module in the real browser; computed styles must
+      //    equal the committed Figma ground truth (bridge receipt numbers).
+      const probe = run(TSX, ['-e', `
+        import fs from 'node:fs';
+        import { build } from 'esbuild';
+        import { chromium } from 'playwright-core';
+        import { chromiumExecutable } from './extract/figma/visual-parity/render.ts';
+        (async () => {
+          fs.copyFileSync('evals/fixtures/journey-engineer.entry.tsx', 'jwork/__eval-entry.tsx');
+          await build({ entryPoints: ['jwork/__eval-entry.tsx'], bundle: true, outfile: 'jwork/__eval-bundle/entry.js', format: 'iife', platform: 'browser', jsx: 'automatic', logLevel: 'silent' });
+          const doc = '<!doctype html><html><head><meta charset="utf-8"><style>' + fs.readFileSync('jwork/src/tokens.css', 'utf8') + '</style><style>' + fs.readFileSync('jwork/__eval-bundle/entry.css', 'utf8') + '</style></head><body><div id="root-default"></div><div id="root-small"></div><script>' + fs.readFileSync('jwork/__eval-bundle/entry.js', 'utf8') + '</script></body></html>';
+          const browser = await chromium.launch({ executablePath: chromiumExecutable(), headless: true });
+          try {
+            const page = await browser.newPage();
+            page.on('pageerror', (e) => { console.error('pageerror: ' + String(e)); process.exitCode = 1; });
+            await page.setContent(doc, { waitUntil: 'load' });
+            await page.waitForSelector('#root-default button', { timeout: 15000 });
+            await page.waitForSelector('#root-small button', { timeout: 15000 });
+            const r = await page.evaluate("(() => { const btn = document.querySelector('#root-default button'); const cs = getComputedStyle(btn); const label = Array.from(btn.querySelectorAll('span')).find((n) => n.textContent.trim() === 'Button'); const small = document.querySelector('#root-small button'); const scs = getComputedStyle(small); return { csf: window.__CSF__, text: btn.textContent.trim(), bg: cs.backgroundColor, height: cs.height, minHeight: cs.minHeight, padLeft: cs.paddingLeft, padRight: cs.paddingRight, padTop: cs.paddingTop, radius: cs.borderRadius, labelColor: label ? getComputedStyle(label).color : null, smallHeight: scs.height, smallPadLeft: scs.paddingLeft }; })()");
+            // Ground truth = the committed dump's numbers, receipted in
+            // extract/figma/cbds-bridge-check.ts (npm run extract:figma:cbds:bridge:check).
+            const expect = {
+              text: 'Button',
+              bg: 'rgb(14, 97, 186)',        // {bg.brand.default} #0e61ba
+              labelColor: 'rgb(252, 254, 255)', // {text.inverse-primary} #fcfeff on the label part
+              height: '48px',                 // {component-size.xlarge} (size=large default)
+              minHeight: '44px',              // minted tap-target literal
+              padLeft: '16px', padRight: '16px', // {spacing.200}
+              padTop: '8px',                  // {spacing.100} padding-block
+              radius: '8px',                  // {corner-radius.100}
+              smallHeight: '44px',            // size=small height token is 32px ({component-size.medium},
+                                              // tokensByProp) but the carried 44px min-height tap target
+                                              // clamps the rendered box — the same clamp the canvas shows
+              smallPadLeft: '12px',           // tokensByProp size=small -> {spacing.150}
+            };
+            const bad = Object.entries(expect).filter(([k, v]) => r[k] !== v);
+            if (bad.length > 0) throw new Error('computed-style drift vs Figma ground truth: ' + bad.map(([k, v]) => k + ' expected ' + v + ' got ' + r[k]).join('; '));
+            if (!r.csf || r.csf.title !== 'Components/ButtonBrandPrimary') throw new Error('CSF meta title wrong: ' + JSON.stringify(r.csf));
+            if (!r.csf.stories.includes('Playground') || r.csf.stories.length < 4) throw new Error('CSF stories missing: ' + JSON.stringify(r.csf.stories));
+            console.log('journey-engineer render ok: ' + r.csf.stories.length + ' stories, all ' + Object.keys(expect).length + ' computed spot checks equal the dump truth');
+          } finally { await browser.close(); }
+        })().catch((e) => { console.error(e); process.exit(1); });
+      `]);
+      if (probe.status !== 0 || !probe.out.includes('journey-engineer render ok:')) {
+        throw new Error(`story render probe failed:\n${probe.out}`);
+      }
+      console.log('journey-engineer: dump → propose (1/0) → manifest generate (local CLI build) → skeleton glob hit → browser render matches the 11-point Figma ground truth');
+    },
+  },
+  {
+    // PHASE 4 (Two Journeys) — J-DESIGNER standing gate. Code is truth: the
+    // committed Polaris Badge contract (the showcase artifact) compiles to a
+    // Figma sync script through the LOCAL CLI build using the manifest
+    // command line (evals/fixtures/journey-commands.json — the docs-drift
+    // guard seam, same file the docs render), the emitted script's compiled
+    // COMPONENTS payload (createFigmaEngine's build product — the
+    // emitters-check/canvas pattern, headless) is asserted on variant counts
+    // and spot-checked bound values, and the `figma push` leg runs DRY: the
+    // CONTRACTS-BUNDLE the CLI would post (toBundle — the exact function the
+    // push verb runs) travels through the REAL worker pipeline
+    // (workers/assist handleRequest over a Map-backed KV, fetchImpl throws —
+    // zero network) and must arrive byte-identical, kind-tagged,
+    // deliver-once; a malformed envelope must refuse by name. The live HTTP
+    // transport itself is pinned by workers/assist/test/bridge.test.ts.
+    id: 'journey-designer',
+    claim: 'C8-journey',
+    run: () => {
+      const manifest = JSON.parse(
+        readFileSync(path.join(SCRATCH, 'evals', 'fixtures', 'journey-commands.json'), 'utf8'),
+      ) as { cliPrefix: string; journeys: Record<string, { steps: Array<{ id: string; command: string }> }> };
+      const argvOf = (journey: string, stepId: string): string[] => {
+        const step = manifest.journeys[journey]?.steps.find((s) => s.id === stepId);
+        if (!step) throw new Error(`journey-commands.json: missing step ${journey}/${stepId}`);
+        const prefix = `${manifest.cliPrefix} `;
+        if (!step.command.startsWith(prefix)) {
+          throw new Error(`manifest command must start with "${prefix}": ${step.command}`);
+        }
+        return step.command.slice(prefix.length).split(/\s+/);
+      };
+
+      // The designer-side repo: committed showcase artifacts, laid out the
+      // way the manifest commands expect (same inputs as cli-smoke).
+      const work = path.join(SCRATCH, 'jd-work');
+      mkdirSync(path.join(work, 'contracts'), { recursive: true });
+      mkdirSync(path.join(work, 'tokens'), { recursive: true });
+      cpSync(path.join(ROOT, 'examples', 'polaris', 'contracts', 'badge.contract.json'), path.join(work, 'contracts', 'badge.contract.json'));
+      for (const t of ['polaris-light.dtcg.json', 'polaris-minted.dtcg.json']) {
+        cpSync(path.join(ROOT, 'examples', 'polaris', 'tokens', t), path.join(work, 'tokens', t));
+      }
+      cpSync(path.join(ROOT, 'examples', 'polaris', 'assets', 'icons'), path.join(work, 'icons'), { recursive: true });
+
+      // 1. figma-emit: the manifest command through the local CLI build.
+      const built = run(process.execPath, ['packages/cli/build.mjs']);
+      if (built.status !== 0) throw new Error(`CLI build failed:\n${built.out}`);
+      const cli = path.join(SCRATCH, 'packages', 'cli', 'dist', 'cli.js');
+      const emit = spawnSync(process.execPath, [cli, ...argvOf('designer', 'figma-emit')], { cwd: work, encoding: 'utf8' });
+      const emitOut = `${emit.stdout ?? ''}${emit.stderr ?? ''}`;
+      if ((emit.status ?? -1) !== 0 || !emitOut.includes('badge.figma.js')) {
+        throw new Error(`manifest figma-emit command failed:\n${emitOut}`);
+      }
+
+      // 2. Headless canvas-engine compile: the sync script's COMPONENTS
+      //    payload IS createFigmaEngine's compiled build product — variant
+      //    counts and bound values, asserted against the contract's axes.
+      const comp = parseSyncComponent(readFileSync(path.join(work, 'figma-sync', 'badge.figma.js'), 'utf8'));
+      if (comp.setName !== 'Badge' || comp.contractId !== 'polaris.badge' || comp.isSet !== true) {
+        throw new Error(`compiled set identity wrong: ${JSON.stringify({ setName: comp.setName, contractId: comp.contractId, isSet: comp.isSet })}`);
+      }
+      if (comp.variants.length !== 42) throw new Error(`Badge must compile 14 tones × 3 progress = 42 variants, got ${comp.variants.length}`);
+      const tones = new Set<string>();
+      const progresses = new Set<string>();
+      for (const v of comp.variants) {
+        const m = /^Tone=([^,]+), Progress=(.+)$/.exec(v.name);
+        if (!m) throw new Error(`variant name grammar broke: ${v.name}`);
+        tones.add(m[1]);
+        progresses.add(m[2]);
+      }
+      if (tones.size !== 14 || progresses.size !== 3) {
+        throw new Error(`variant grid wrong: ${tones.size} tones × ${progresses.size} progress values`);
+      }
+      // Spot checks: per-tone fill substitution + literal token bindings
+      // (variable names use SLASHES on the canvas — the emitter's mapping).
+      const v0 = comp.variants[0];
+      if (v0.name !== 'Tone=info, Progress=incomplete') throw new Error(`default combo must compile first, got ${v0.name}`);
+      if (v0.spec.fill !== 'imported/badge/root/background-color/info') {
+        throw new Error(`tone-substituted fill binding wrong on v0: ${v0.spec.fill}`);
+      }
+      const success = comp.variants.find((v: { name: string }) => v.name === 'Tone=success, Progress=complete');
+      if (!success || success.spec.fill !== 'imported/badge/root/background-color/success') {
+        throw new Error(`tone-substituted fill binding wrong on success: ${success?.spec.fill}`);
+      }
+      if (v0.spec.bindings?.topLeftRadius !== 'p/border-radius-200' || v0.spec.bindings?.paddingLeft !== 'p/space-200') {
+        throw new Error(`literal token bindings wrong: ${JSON.stringify(v0.spec.bindings)}`);
+      }
+      const childKinds = (v0.spec.children ?? []).map((ch: { type: string; name: string }) => `${ch.type}:${ch.name}`);
+      if (!childKinds.includes('frame:icon') || !childKinds.includes('text:label')) {
+        throw new Error(`compiled anatomy children wrong: ${childKinds.join(', ')}`);
+      }
+
+      // 3. figma push, DRY: the code-led CI artifact shape, the CLI's own
+      //    toBundle, the REAL worker pipeline in-process — no network.
+      const badge = JSON.parse(readFileSync(path.join(work, 'contracts', 'badge.contract.json'), 'utf8'));
+      writeFileSync(
+        path.join(work, 'contracts-bundle.json'),
+        JSON.stringify({ type: 'CONTRACTS-BUNDLE', version: 1, contracts: [badge] }, null, 2) + '\n',
+      );
+      const pushArgv = argvOf('designer', 'figma-push');
+      if (pushArgv[0] !== 'figma' || pushArgv[1] !== 'push' || pushArgv[2] !== 'contracts-bundle.json' || pushArgv[3] !== '--code' || pushArgv[4] !== '<CODE>') {
+        throw new Error(`manifest figma-push command shape changed: ${pushArgv.join(' ')}`);
+      }
+      const push = run(TSX, ['-e', `
+        import fs from 'node:fs';
+        import { handleRequest } from './workers/assist/src/index.ts';
+        import { toBundle, CONTRACTS_BUNDLE_TYPE } from './packages/cli/src/commands/figma.ts';
+        (async () => {
+          const bundle = toBundle('jd-work/contracts-bundle.json');
+          if (bundle.type !== CONTRACTS_BUNDLE_TYPE || bundle.version !== 1 || bundle.contracts.length !== 1) throw new Error('toBundle envelope wrong: ' + JSON.stringify({ type: bundle.type, version: bundle.version, n: bundle.contracts.length }));
+          const store = new Map();
+          const env = { ANTHROPIC_API_KEY: 'x', ASSIST_KV: { get: async (k) => (store.has(k) ? store.get(k) : null), put: async (k, v) => { store.set(k, v); }, delete: async (k) => { store.delete(k); } }, ASSIST_ENABLED: 'true', BRIDGE_ENABLED: 'true' };
+          const deps = { fetchImpl: () => { throw new Error('bridge routes must not fetch'); }, now: () => new Date() };
+          const req = (p, o) => { o = o || {}; const h = new Headers(); if (o.origin !== null) h.set('origin', o.origin || 'https://ds-contracts-playground.pages.dev'); h.set('cf-connecting-ip', '203.0.113.7'); const m = o.method || 'POST'; return new Request('https://assist.example' + p, { method: m, headers: h, body: m === 'GET' ? undefined : (o.body || '{}') }); };
+          const created = await handleRequest(req('/bridge/session'), env, deps);
+          if (created.status !== 200) throw new Error('session mint failed: ' + created.status);
+          const code = (await created.json()).code;
+          // The push body, exactly as the CLI posts it: no Origin header.
+          const sent = await handleRequest(req('/bridge/' + code, { origin: null, body: JSON.stringify(bundle) }), env, deps);
+          const sentBody = await sent.json();
+          if (sent.status !== 200 || sentBody.ok !== true) throw new Error('bridge refused the push: ' + sent.status + ' ' + JSON.stringify(sentBody));
+          if (store.get('bridge:kind:' + code) !== 'contracts-bundle') throw new Error('payload kind not recorded as contracts-bundle');
+          const delivered = await handleRequest(req('/bridge/' + code, { method: 'GET' }), env, deps);
+          const body = await delivered.json();
+          if (body.status !== 'delivered' || body.kind !== 'contracts-bundle') throw new Error('delivery wrong: ' + JSON.stringify(body).slice(0, 200));
+          if (JSON.stringify(body.dump) !== JSON.stringify(bundle)) throw new Error('bundle not byte-identical through the bridge');
+          if (body.dump.contracts[0].id !== 'polaris.badge') throw new Error('wrong contract delivered: ' + body.dump.contracts[0].id);
+          if (store.has('bridge:dump:' + code) || store.has('bridge:sess:' + code)) throw new Error('deliver-once keys not deleted after delivery');
+          // Referee: a malformed envelope refuses BY NAME (the bridge schema).
+          const s2 = await handleRequest(req('/bridge/session'), env, deps);
+          const code2 = (await s2.json()).code;
+          const refused = await handleRequest(req('/bridge/' + code2, { origin: null, body: JSON.stringify({ type: CONTRACTS_BUNDLE_TYPE, version: 1, contracts: [] }) }), env, deps);
+          const rb = await refused.json();
+          if (refused.status !== 400 || !String(rb.error).includes('non-empty "contracts" array')) throw new Error('empty bundle must refuse 400 naming the schema, got ' + refused.status + ': ' + rb.error);
+          console.log('push-dry ok: ' + JSON.stringify(bundle).length + ' bytes under code ' + code + ', kind-tagged, byte-identical, deliver-once, malformed envelope refused by name');
+        })().catch((e) => { console.error(e); process.exit(1); });
+      `]);
+      if (push.status !== 0 || !push.out.includes('push-dry ok:')) {
+        throw new Error(`figma push DRY failed:\n${push.out}`);
+      }
+      console.log('journey-designer: manifest figma-emit (local CLI build) → 42-variant compiled set (14×3, tone-substituted fills, slash-bound tokens, icon+label anatomy) → push DRY through the real worker pipeline (zero network)');
     },
   },
 ];
