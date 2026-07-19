@@ -64,7 +64,11 @@
   ],
   "states": [],
   "anatomy": {
-    "root": {}
+    "root": {
+      "declared": {
+        "display": "block"
+      }
+    }
   },
   "anchors": {
     "figma": {

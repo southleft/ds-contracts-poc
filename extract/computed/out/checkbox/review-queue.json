@@ -46,26 +46,6 @@
       "status": "open"
     },
     {
-      "id": "checked.enabled|backdrop|border-color",
-      "combo": "checked.enabled",
-      "part": "backdrop",
-      "channel": "border-color",
-      "ref": "{p.color-input-border}",
-      "computedProp": "border-bottom-color",
-      "expected": "rgba(138, 138, 138, 1)",
-      "observed": "rgba(48, 48, 48, 1)",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "p.color-bg-fill-brand",
-        "p.color-bg-fill-brand-selected",
-        "p.color-bg-fill-inverse",
-        "p.color-bg-surface-inverse",
-        "p.color-icon-hover",
-        "p.color-text"
-      ],
-      "status": "open"
-    },
-    {
       "id": "indeterminate.enabled|backdrop|border-width",
       "combo": "indeterminate.enabled",
       "part": "backdrop",
@@ -82,26 +62,6 @@
         "p.font-letter-spacing-normal",
         "p.height-0",
         "p.space-0"
-      ],
-      "status": "open"
-    },
-    {
-      "id": "indeterminate.enabled|backdrop|border-color",
-      "combo": "indeterminate.enabled",
-      "part": "backdrop",
-      "channel": "border-color",
-      "ref": "{p.color-input-border}",
-      "computedProp": "border-bottom-color",
-      "expected": "rgba(138, 138, 138, 1)",
-      "observed": "rgba(48, 48, 48, 1)",
-      "cause": "UNTRIAGED — a defect until triaged",
-      "candidates": [
-        "p.color-bg-fill-brand",
-        "p.color-bg-fill-brand-selected",
-        "p.color-bg-fill-inverse",
-        "p.color-bg-surface-inverse",
-        "p.color-icon-hover",
-        "p.color-text"
       ],
       "status": "open"
     }

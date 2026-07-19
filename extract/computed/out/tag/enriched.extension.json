@@ -112,6 +112,26 @@
             }
           }
         },
+        "link": {
+          "color": {
+            "$value": "#303030",
+            "$type": "color"
+          },
+          "grid-template-columns": {
+            "$value": "59.9219px",
+            "$type": "dimension"
+          },
+          "grid-template-rows": {
+            "$value": "20px",
+            "$type": "dimension"
+          }
+        },
+        "text-2": {
+          "line-height": {
+            "$value": "16px",
+            "$type": "dimension"
+          }
+        },
         "text": {
           "line-height": {
             "$value": "16px",
@@ -235,32 +255,66 @@
             "$value": "400",
             "$type": "number"
           }
-        },
-        "link": {
-          "color": {
-            "$value": "#303030",
-            "$type": "color"
-          },
-          "grid-template-columns": {
-            "$value": "59.9219px",
-            "$type": "dimension"
-          },
-          "grid-template-rows": {
-            "$value": "20px",
-            "$type": "dimension"
-          }
-        },
-        "text-2": {
-          "line-height": {
-            "$value": "16px",
-            "$type": "dimension"
-          }
         }
       }
     }
   },
   "folds": [
     {
+      "part": "link",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "link",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "link",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "link",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "link",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "link",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "link",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "link",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "link",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
       "part": "button",
       "channel": "border-bottom-color",
       "foldedInto": "color",
@@ -472,60 +526,6 @@
     },
     {
       "part": "part-1-0-0-0",
-      "channel": "text-emphasis-color",
-      "foldedInto": "color",
-      "class": "currentColor"
-    },
-    {
-      "part": "link",
-      "channel": "border-bottom-color",
-      "foldedInto": "color",
-      "class": "currentColor"
-    },
-    {
-      "part": "link",
-      "channel": "border-left-color",
-      "foldedInto": "color",
-      "class": "currentColor"
-    },
-    {
-      "part": "link",
-      "channel": "border-right-color",
-      "foldedInto": "color",
-      "class": "currentColor"
-    },
-    {
-      "part": "link",
-      "channel": "border-top-color",
-      "foldedInto": "color",
-      "class": "currentColor"
-    },
-    {
-      "part": "link",
-      "channel": "caret-color",
-      "foldedInto": "color",
-      "class": "currentColor"
-    },
-    {
-      "part": "link",
-      "channel": "column-rule-color",
-      "foldedInto": "color",
-      "class": "currentColor"
-    },
-    {
-      "part": "link",
-      "channel": "outline-color",
-      "foldedInto": "color",
-      "class": "currentColor"
-    },
-    {
-      "part": "link",
-      "channel": "text-decoration-color",
-      "foldedInto": "color",
-      "class": "currentColor"
-    },
-    {
-      "part": "link",
       "channel": "text-emphasis-color",
       "foldedInto": "color",
       "class": "currentColor"
@@ -569,6 +569,51 @@
         "part": "root",
         "channel": "position",
         "value": "relative"
+      },
+      {
+        "part": "link",
+        "channel": "position",
+        "value": "relative"
+      },
+      {
+        "part": "link",
+        "channel": "text-decoration-line",
+        "value": "none"
+      },
+      {
+        "part": "text-2",
+        "channel": "cursor",
+        "value": "pointer"
+      },
+      {
+        "part": "text-2",
+        "channel": "overflow-x",
+        "value": "hidden"
+      },
+      {
+        "part": "text-2",
+        "channel": "overflow-y",
+        "value": "hidden"
+      },
+      {
+        "part": "text-2",
+        "channel": "text-overflow",
+        "value": "ellipsis"
+      },
+      {
+        "part": "text-2",
+        "channel": "text-wrap-mode",
+        "value": "nowrap"
+      },
+      {
+        "part": "label-2",
+        "channel": "cursor",
+        "value": "pointer"
+      },
+      {
+        "part": "label-2",
+        "channel": "text-wrap-mode",
+        "value": "nowrap"
       },
       {
         "part": "button",
@@ -629,51 +674,6 @@
         "part": "icon",
         "channel": "text-rendering",
         "value": "auto"
-      },
-      {
-        "part": "link",
-        "channel": "position",
-        "value": "relative"
-      },
-      {
-        "part": "link",
-        "channel": "text-decoration-line",
-        "value": "none"
-      },
-      {
-        "part": "text-2",
-        "channel": "cursor",
-        "value": "pointer"
-      },
-      {
-        "part": "text-2",
-        "channel": "overflow-x",
-        "value": "hidden"
-      },
-      {
-        "part": "text-2",
-        "channel": "overflow-y",
-        "value": "hidden"
-      },
-      {
-        "part": "text-2",
-        "channel": "text-overflow",
-        "value": "ellipsis"
-      },
-      {
-        "part": "text-2",
-        "channel": "text-wrap-mode",
-        "value": "nowrap"
-      },
-      {
-        "part": "label-2",
-        "channel": "cursor",
-        "value": "pointer"
-      },
-      {
-        "part": "label-2",
-        "channel": "text-wrap-mode",
-        "value": "nowrap"
       }
     ],
     "state": [
@@ -727,6 +727,20 @@
       "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
       "sample": "optimizelegibility",
       "distinctValues": 2
+    },
+    {
+      "part": "link",
+      "channel": "display",
+      "reason": "declared-channel value outside the bounded grammar — named residue (v15)",
+      "sample": "grid",
+      "distinctValues": 1
+    },
+    {
+      "part": "link",
+      "channel": "text-decoration",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "none",
+      "distinctValues": 1
     },
     {
       "part": "text",
@@ -846,20 +860,6 @@
       "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
       "sample": "relative",
       "distinctValues": 2
-    },
-    {
-      "part": "link",
-      "channel": "display",
-      "reason": "declared-channel value outside the bounded grammar — named residue (v15)",
-      "sample": "grid",
-      "distinctValues": 1
-    },
-    {
-      "part": "link",
-      "channel": "text-decoration",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "sample": "none",
-      "distinctValues": 1
     }
   ],
   "stateOverflow": [
@@ -1514,7 +1514,7 @@
       {
         "combo": "none.off.off.on.enabled",
         "interaction": "default",
-        "part": "text",
+        "part": "link",
         "pseudo": "::after",
         "deltaVsDefault": {
           "content": "\"\""
@@ -1523,7 +1523,7 @@
       {
         "combo": "none.off.off.on.enabled",
         "interaction": "focus-visible",
-        "part": "text",
+        "part": "link",
         "pseudo": "::after",
         "deltaVsDefault": {
           "box-shadow": "rgba(0, 91, 211, 1) 0px 0px 0px 2px",
@@ -1595,7 +1595,7 @@
       {
         "combo": "none.on.off.off.enabled",
         "interaction": "default",
-        "part": "part-1",
+        "part": "label-2",
         "pseudo": "::after",
         "deltaVsDefault": {
           "content": "\"\""
@@ -1604,7 +1604,7 @@
       {
         "combo": "none.on.off.off.enabled",
         "interaction": "focus-visible",
-        "part": "part-1",
+        "part": "label-2",
         "pseudo": "::after",
         "deltaVsDefault": {
           "-webkit-text-fill-color": "rgba(48, 48, 48, 1)",
@@ -1631,7 +1631,7 @@
       {
         "combo": "none.on.off.off.disabled",
         "interaction": "default",
-        "part": "part-1",
+        "part": "label-2",
         "pseudo": "::after",
         "deltaVsDefault": {
           "content": "\"\""
@@ -1640,7 +1640,7 @@
       {
         "combo": "none.on.off.on.enabled",
         "interaction": "default",
-        "part": "text",
+        "part": "link",
         "pseudo": "::after",
         "deltaVsDefault": {
           "content": "\"\""
@@ -1853,6 +1853,18 @@
         "join": "matched"
       },
       {
+        "part": "link",
+        "join": "computed-only"
+      },
+      {
+        "part": "text-2",
+        "join": "computed-only"
+      },
+      {
+        "part": "label-2",
+        "join": "computed-only"
+      },
+      {
         "part": "text",
         "join": "computed-only"
       },
@@ -1879,18 +1891,6 @@
       {
         "part": "part-1-0-0-0",
         "join": "computed-only"
-      },
-      {
-        "part": "link",
-        "join": "computed-only"
-      },
-      {
-        "part": "text-2",
-        "join": "computed-only"
-      },
-      {
-        "part": "label-2",
-        "join": "computed-only"
       }
     ],
     "staticOnly": []
@@ -1899,12 +1899,12 @@
     "_note": "Round 4 DOM-anatomy promotion: computed-only elements carried as REAL parts (extract/computed/anatomy.ts); svg subtrees carried as reconstructed icon assets; presence facts via visibleWhen/stylesWhen; refusals named.",
     "partsCarried": [
       "root",
-      "part-1",
-      "button",
-      "icon",
       "link",
       "text-2",
-      "label-2"
+      "label-2",
+      "part-1",
+      "button",
+      "icon"
     ],
     "svgAssets": [
       "tag-icon-large",
@@ -1919,16 +1919,16 @@
       "svg-viewbox-reconstructed: Tag.icon@large.on.off.off.enabled — 0 0 20 20 from computed size 20×20 (path extent 13.8; viewBox is not a computed style — named reconstruction)",
       "svg-viewbox-reconstructed: Tag.icon@large.on.off.on.enabled — 0 0 20 20 from computed size 20×20 (path extent 13.8; viewBox is not a computed style — named reconstruction)",
       "root-display-carried: flex (overrides reviewed \"inline-flex\" — computed truth wins display, receipted)",
-      "presence-carried: part-1 (4/16 combos) →  base-hidden, shown-when size=large hidden-when clickable, disabled",
-      "aspect-carried: button computed width == height in every enabled combo (18/20px) → declared aspect-ratio 1 / 1 (geometry evidence; the real square rides a pseudo-element padding hack)",
-      "presence-carried: button (4/16 combos) → visibleWhen removable hidden-when clickable, disabled",
-      "aspect-carried: icon computed width == height in every enabled combo (18/20px) → declared aspect-ratio 1 / 1 (geometry evidence; the real square rides a pseudo-element padding hack)",
-      "presence-carried: icon (4/16 combos) → visibleWhen removable hidden-when clickable, disabled",
       "display-outside-vocabulary: link = \"grid\" — carried by neither layout nor the declared registry (named residue)",
       "presence-carried: link (4/16 combos) → visibleWhen linked hidden-when clickable, disabled",
       "presence-carried: text-2 (4/16 combos) → visibleWhen linked hidden-when clickable, disabled",
       "literal-text-carried: label-2 = \"Wholesale\" (no text prop sample matches — the mounted value is carried verbatim)",
-      "presence-carried: label-2 (4/16 combos) → visibleWhen linked hidden-when clickable, disabled"
+      "presence-carried: label-2 (4/16 combos) → visibleWhen linked hidden-when clickable, disabled",
+      "presence-carried: part-1 (4/16 combos) →  base-hidden, shown-when size=large hidden-when clickable, disabled",
+      "aspect-carried: button computed width == height in every enabled combo (18/20px) → declared aspect-ratio 1 / 1 (geometry evidence; the real square rides a pseudo-element padding hack)",
+      "presence-carried: button (4/16 combos) → visibleWhen removable hidden-when clickable, disabled",
+      "aspect-carried: icon computed width == height in every enabled combo (18/20px) → declared aspect-ratio 1 / 1 (geometry evidence; the real square rides a pseudo-element padding hack)",
+      "presence-carried: icon (4/16 combos) → visibleWhen removable hidden-when clickable, disabled"
     ],
     "refusals": [
       "part-presence-uncorrelated: text present in 12/16 enabled combos and the presence set does not factor per-axis — part NOT promoted (named refusal; a phantom always-drawn part would be worse)",
@@ -1938,6 +1938,15 @@
   "enrichmentNotes": [
     "declared fact carried: root.max-width = 100% (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: root.position = relative (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: link.position = relative (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: link.text-decoration-line = none (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: text-2.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: text-2.overflow-x = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: text-2.overflow-y = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: text-2.text-overflow = ellipsis (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: text-2.text-wrap-mode = nowrap (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-2.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-2.text-wrap-mode = nowrap (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: button.appearance = none (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: button.border-bottom-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: button.border-left-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
@@ -1950,15 +1959,6 @@
     "declared fact carried: icon.max-width = 100% (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: icon.text-align = center (v15 declared vocabulary — canvas-drawable)",
     "declared fact carried: icon.text-rendering = auto (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: link.position = relative (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: link.text-decoration-line = none (v15 declared vocabulary — canvas-drawable)",
-    "declared fact carried: text-2.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: text-2.overflow-x = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: text-2.overflow-y = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: text-2.text-overflow = ellipsis (v15 declared vocabulary — canvas-drawable)",
-    "declared fact carried: text-2.text-wrap-mode = nowrap (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: label-2.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: label-2.text-wrap-mode = nowrap (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared state fact carried: [disabled] root.transition-property = none (v15 declared vocabulary)"
   ]
 }

@@ -398,51 +398,9 @@
                                       "visibleWhen": {
                                         "prop": "dismissible"
                                       },
-                                      "parts": {
-                                        "icon-3-success": {
-                                          "icon": {
-                                            "asset": "banner-icon-3-success",
-                                            "size": 20
-                                          },
-                                          "visibleWhen": {
-                                            "prop": "tone",
-                                            "equals": "success"
-                                          },
-                                          "description": "Per-value svg content promoted from the computed floor: the glyph drawn when tone=success."
-                                        },
-                                        "icon-3-info": {
-                                          "icon": {
-                                            "asset": "banner-icon-3-info",
-                                            "size": 20
-                                          },
-                                          "visibleWhen": {
-                                            "prop": "tone",
-                                            "equals": "info"
-                                          },
-                                          "description": "Per-value svg content promoted from the computed floor: the glyph drawn when tone=info."
-                                        },
-                                        "icon-3-warning": {
-                                          "icon": {
-                                            "asset": "banner-icon-3-warning",
-                                            "size": 20
-                                          },
-                                          "visibleWhen": {
-                                            "prop": "tone",
-                                            "equals": "warning"
-                                          },
-                                          "description": "Per-value svg content promoted from the computed floor: the glyph drawn when tone=warning."
-                                        },
-                                        "icon-3-critical": {
-                                          "icon": {
-                                            "asset": "banner-icon-3-critical",
-                                            "size": 20
-                                          },
-                                          "visibleWhen": {
-                                            "prop": "tone",
-                                            "equals": "critical"
-                                          },
-                                          "description": "Per-value svg content promoted from the computed floor: the glyph drawn when tone=critical."
-                                        }
+                                      "icon": {
+                                        "asset": "banner-icon-3",
+                                        "size": 20
                                       },
                                       "tokens": {
                                         "min-height": "{imported.shared.size-0}",

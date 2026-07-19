@@ -149,10 +149,15 @@
           }
         }
       ],
+      "declared": {
+        "display": "block",
+        "overflow-x": "hidden",
+        "overflow-y": "hidden"
+      },
       "parts": {
         "progress": {
           "element": "progress",
-          "description": "Promoted from the computed floor (round 4): rendered anatomy progress|ProgressBar__Progress — this element exists in the real component's DOM; the static layer had no part for it.",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy progress|ProgressBar__Progress|sr-only — this element exists in the real component's DOM; the static layer had no part for it.",
           "declared": {
             "display": "none",
             "appearance": "auto",
@@ -199,7 +204,7 @@
           "parts": {
             "label": {
               "text": "25%",
-              "description": "Promoted from the computed floor (round 4): rendered anatomy span|ProgressBar__Label — this element exists in the real component's DOM; the static layer had no part for it.",
+              "description": "Promoted from the computed floor (round 4): rendered anatomy span|ProgressBar__Label|sr-only — this element exists in the real component's DOM; the static layer had no part for it.",
               "declared": {
                 "display": "none",
                 "overflow-x": "hidden",
@@ -237,10 +242,6 @@
             "min-width": "{imported.shared.size-0}"
           }
         }
-      },
-      "declared": {
-        "overflow-x": "hidden",
-        "overflow-y": "hidden"
       }
     }
   },

@@ -29,7 +29,7 @@
       "computedProp": "background-color",
       "expected": "rgba(197, 48, 197, 1)",
       "observed": "rgba(253, 75, 146, 1)",
-      "cause": "UNTRIAGED — a defect until triaged",
+      "cause": "presence-prop-driven styling: Polaris hash-selects the avatar palette from the initials/name value — a boolean presence axis has no tokensByProp spelling (round 4 residue); the base (icon) palette stands",
       "candidates": [
         "p.color-avatar-five-bg-fill"
       ],
@@ -44,7 +44,7 @@
       "computedProp": "color",
       "expected": "rgba(253, 239, 253, 1)",
       "observed": "rgba(255, 246, 248, 1)",
-      "cause": "UNTRIAGED — a defect until triaged",
+      "cause": "presence-prop-driven styling: Polaris hash-selects the avatar palette from the initials/name value — a boolean presence axis has no tokensByProp spelling (round 4 residue); the base (icon) palette stands",
       "candidates": [
         "p.color-avatar-five-text-on-bg-fill"
       ],
@@ -89,7 +89,7 @@
       "computedProp": "background-color",
       "expected": "rgba(197, 48, 197, 1)",
       "observed": "rgba(253, 75, 146, 1)",
-      "cause": "UNTRIAGED — a defect until triaged",
+      "cause": "presence-prop-driven styling: Polaris hash-selects the avatar palette from the initials/name value — a boolean presence axis has no tokensByProp spelling (round 4 residue); the base (icon) palette stands",
       "candidates": [
         "p.color-avatar-five-bg-fill"
       ],
@@ -104,7 +104,7 @@
       "computedProp": "color",
       "expected": "rgba(253, 239, 253, 1)",
       "observed": "rgba(255, 246, 248, 1)",
-      "cause": "UNTRIAGED — a defect until triaged",
+      "cause": "presence-prop-driven styling: Polaris hash-selects the avatar palette from the initials/name value — a boolean presence axis has no tokensByProp spelling (round 4 residue); the base (icon) palette stands",
       "candidates": [
         "p.color-avatar-five-text-on-bg-fill"
       ],
@@ -149,7 +149,7 @@
       "computedProp": "background-color",
       "expected": "rgba(197, 48, 197, 1)",
       "observed": "rgba(253, 75, 146, 1)",
-      "cause": "UNTRIAGED — a defect until triaged",
+      "cause": "presence-prop-driven styling: Polaris hash-selects the avatar palette from the initials/name value — a boolean presence axis has no tokensByProp spelling (round 4 residue); the base (icon) palette stands",
       "candidates": [
         "p.color-avatar-five-bg-fill"
       ],
@@ -164,7 +164,7 @@
       "computedProp": "color",
       "expected": "rgba(253, 239, 253, 1)",
       "observed": "rgba(255, 246, 248, 1)",
-      "cause": "UNTRIAGED — a defect until triaged",
+      "cause": "presence-prop-driven styling: Polaris hash-selects the avatar palette from the initials/name value — a boolean presence axis has no tokensByProp spelling (round 4 residue); the base (icon) palette stands",
       "candidates": [
         "p.color-avatar-five-text-on-bg-fill"
       ],
@@ -209,7 +209,7 @@
       "computedProp": "background-color",
       "expected": "rgba(197, 48, 197, 1)",
       "observed": "rgba(253, 75, 146, 1)",
-      "cause": "UNTRIAGED — a defect until triaged",
+      "cause": "presence-prop-driven styling: Polaris hash-selects the avatar palette from the initials/name value — a boolean presence axis has no tokensByProp spelling (round 4 residue); the base (icon) palette stands",
       "candidates": [
         "p.color-avatar-five-bg-fill"
       ],
@@ -224,7 +224,7 @@
       "computedProp": "color",
       "expected": "rgba(253, 239, 253, 1)",
       "observed": "rgba(255, 246, 248, 1)",
-      "cause": "UNTRIAGED — a defect until triaged",
+      "cause": "presence-prop-driven styling: Polaris hash-selects the avatar palette from the initials/name value — a boolean presence axis has no tokensByProp spelling (round 4 residue); the base (icon) palette stands",
       "candidates": [
         "p.color-avatar-five-text-on-bg-fill"
       ],
@@ -269,7 +269,7 @@
       "computedProp": "background-color",
       "expected": "rgba(197, 48, 197, 1)",
       "observed": "rgba(253, 75, 146, 1)",
-      "cause": "UNTRIAGED — a defect until triaged",
+      "cause": "presence-prop-driven styling: Polaris hash-selects the avatar palette from the initials/name value — a boolean presence axis has no tokensByProp spelling (round 4 residue); the base (icon) palette stands",
       "candidates": [
         "p.color-avatar-five-bg-fill"
       ],
@@ -284,7 +284,7 @@
       "computedProp": "color",
       "expected": "rgba(253, 239, 253, 1)",
       "observed": "rgba(255, 246, 248, 1)",
-      "cause": "UNTRIAGED — a defect until triaged",
+      "cause": "presence-prop-driven styling: Polaris hash-selects the avatar palette from the initials/name value — a boolean presence axis has no tokensByProp spelling (round 4 residue); the base (icon) palette stands",
       "candidates": [
         "p.color-avatar-five-text-on-bg-fill"
       ],

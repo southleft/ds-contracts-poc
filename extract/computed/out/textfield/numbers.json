@@ -582,7 +582,7 @@
     ]
   },
   "gate": {
-    "computedPctEqual": 81.30597014925372,
+    "computedPctEqual": 81.36194029850746,
     "rowsFullyEqual": 0,
     "rows": 256,
     "pixelPerfectExact": 0,

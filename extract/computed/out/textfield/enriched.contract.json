@@ -626,11 +626,13 @@
   "anatomy": {
     "root": {
       "layout": {
-        "display": "flex",
         "align": "center"
       },
       "tokens": {
         "color": "{p.color-text}"
+      },
+      "declared": {
+        "display": "block"
       },
       "parts": {
         "labelled__labelwrapper": {
@@ -936,7 +938,7 @@
                       "parts": {
                         "label-5": {
                           "text": "Clear",
-                          "description": "Promoted from the computed floor (round 4): rendered anatomy span|Text — this element exists in the real component's DOM; the static layer had no part for it.",
+                          "description": "Promoted from the computed floor (round 4): rendered anatomy span|Text|sr-only — this element exists in the real component's DOM; the static layer had no part for it.",
                           "declared": {
                             "display": "none",
                             "cursor": "pointer",

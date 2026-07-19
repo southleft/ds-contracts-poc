@@ -10,21 +10,75 @@
   "determinism": "byte-identical across two full sweeps in one session",
   "styledChannels": {
     "root": 24,
+    "link": 24,
+    "text-2": 7,
+    "label-2": 6,
     "text": 10,
     "label": 9,
     "part-1": 0,
     "button": 44,
     "icon": 19,
     "icon-2": 28,
-    "part-1-0-0-0": 20,
-    "link": 24,
-    "text-2": 7,
-    "label-2": 6
+    "part-1-0-0-0": 20
   },
   "folds": {
     "count": 45,
     "receipts": [
       {
+        "part": "link",
+        "channel": "border-bottom-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "link",
+        "channel": "border-left-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "link",
+        "channel": "border-right-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "link",
+        "channel": "border-top-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "link",
+        "channel": "caret-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "link",
+        "channel": "column-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "link",
+        "channel": "outline-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "link",
+        "channel": "text-decoration-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "link",
+        "channel": "text-emphasis-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
         "part": "button",
         "channel": "border-bottom-color",
         "foldedInto": "color",
@@ -236,60 +290,6 @@
       },
       {
         "part": "part-1-0-0-0",
-        "channel": "text-emphasis-color",
-        "foldedInto": "color",
-        "class": "currentColor"
-      },
-      {
-        "part": "link",
-        "channel": "border-bottom-color",
-        "foldedInto": "color",
-        "class": "currentColor"
-      },
-      {
-        "part": "link",
-        "channel": "border-left-color",
-        "foldedInto": "color",
-        "class": "currentColor"
-      },
-      {
-        "part": "link",
-        "channel": "border-right-color",
-        "foldedInto": "color",
-        "class": "currentColor"
-      },
-      {
-        "part": "link",
-        "channel": "border-top-color",
-        "foldedInto": "color",
-        "class": "currentColor"
-      },
-      {
-        "part": "link",
-        "channel": "caret-color",
-        "foldedInto": "color",
-        "class": "currentColor"
-      },
-      {
-        "part": "link",
-        "channel": "column-rule-color",
-        "foldedInto": "color",
-        "class": "currentColor"
-      },
-      {
-        "part": "link",
-        "channel": "outline-color",
-        "foldedInto": "color",
-        "class": "currentColor"
-      },
-      {
-        "part": "link",
-        "channel": "text-decoration-color",
-        "foldedInto": "color",
-        "class": "currentColor"
-      },
-      {
-        "part": "link",
         "channel": "text-emphasis-color",
         "foldedInto": "color",
         "class": "currentColor"

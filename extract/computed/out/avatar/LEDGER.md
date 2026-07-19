@@ -95,46 +95,46 @@ Minted leaves WITHOUT folding: **59** → WITH folding: **23** (54 folded channe
 
 20/40 carried-binding cells string-equal to the browser-probed token value (no tolerance).
 
-### Binding contradictions (20 — the review queue, see review-queue.json; 10 untriaged)
+### Binding contradictions (20 — the review queue, see review-queue.json; 0 untriaged)
 
 - `xs.off` initials.font-size (font-size) {p.font-size-400}: expected `16px` observed `13px`
   - NAMED CAUSE: content-conditioned element: .Polaris-Avatar__Text { font-size: var(--p-font-size-400) } styles the Text element Polaris renders only when initials/name are given; the default mount renders the empty .Polaris-Avatar__Initials wrapper, which inherits the provider's body typography (html,body { font-size: var(--p-font-size-325) } = 13px). Computed truth wins: resolve to the unique DTCG candidate {p.font-size-325}; the initials-present branch stays named residue (no contract channel can be a function of a text prop's value — the standing Avatar refusal class).
 - `xs.on` root.background (background-color) {p.color-avatar-one-bg-fill}: expected `rgba(197, 48, 197, 1)` observed `rgba(253, 75, 146, 1)`
-  - **UNTRIAGED** — a defect until triaged
+  - NAMED CAUSE: presence-prop-driven styling: Polaris hash-selects the avatar palette from the initials/name value — a boolean presence axis has no tokensByProp spelling (round 4 residue); the base (icon) palette stands
 - `xs.on` root.color (color) {p.color-avatar-one-text-on-bg-fill}: expected `rgba(253, 239, 253, 1)` observed `rgba(255, 246, 248, 1)`
-  - **UNTRIAGED** — a defect until triaged
+  - NAMED CAUSE: presence-prop-driven styling: Polaris hash-selects the avatar palette from the initials/name value — a boolean presence axis has no tokensByProp spelling (round 4 residue); the base (icon) palette stands
 - `xs.on` initials.font-size (font-size) {p.font-size-400}: expected `16px` observed `13px`
   - NAMED CAUSE: content-conditioned element: .Polaris-Avatar__Text { font-size: var(--p-font-size-400) } styles the Text element Polaris renders only when initials/name are given; the default mount renders the empty .Polaris-Avatar__Initials wrapper, which inherits the provider's body typography (html,body { font-size: var(--p-font-size-325) } = 13px). Computed truth wins: resolve to the unique DTCG candidate {p.font-size-325}; the initials-present branch stays named residue (no contract channel can be a function of a text prop's value — the standing Avatar refusal class).
 - `sm.off` initials.font-size (font-size) {p.font-size-400}: expected `16px` observed `13px`
   - NAMED CAUSE: content-conditioned element: .Polaris-Avatar__Text { font-size: var(--p-font-size-400) } styles the Text element Polaris renders only when initials/name are given; the default mount renders the empty .Polaris-Avatar__Initials wrapper, which inherits the provider's body typography (html,body { font-size: var(--p-font-size-325) } = 13px). Computed truth wins: resolve to the unique DTCG candidate {p.font-size-325}; the initials-present branch stays named residue (no contract channel can be a function of a text prop's value — the standing Avatar refusal class).
 - `sm.on` root.background (background-color) {p.color-avatar-one-bg-fill}: expected `rgba(197, 48, 197, 1)` observed `rgba(253, 75, 146, 1)`
-  - **UNTRIAGED** — a defect until triaged
+  - NAMED CAUSE: presence-prop-driven styling: Polaris hash-selects the avatar palette from the initials/name value — a boolean presence axis has no tokensByProp spelling (round 4 residue); the base (icon) palette stands
 - `sm.on` root.color (color) {p.color-avatar-one-text-on-bg-fill}: expected `rgba(253, 239, 253, 1)` observed `rgba(255, 246, 248, 1)`
-  - **UNTRIAGED** — a defect until triaged
+  - NAMED CAUSE: presence-prop-driven styling: Polaris hash-selects the avatar palette from the initials/name value — a boolean presence axis has no tokensByProp spelling (round 4 residue); the base (icon) palette stands
 - `sm.on` initials.font-size (font-size) {p.font-size-400}: expected `16px` observed `13px`
   - NAMED CAUSE: content-conditioned element: .Polaris-Avatar__Text { font-size: var(--p-font-size-400) } styles the Text element Polaris renders only when initials/name are given; the default mount renders the empty .Polaris-Avatar__Initials wrapper, which inherits the provider's body typography (html,body { font-size: var(--p-font-size-325) } = 13px). Computed truth wins: resolve to the unique DTCG candidate {p.font-size-325}; the initials-present branch stays named residue (no contract channel can be a function of a text prop's value — the standing Avatar refusal class).
 - `md.off` initials.font-size (font-size) {p.font-size-400}: expected `16px` observed `13px`
   - NAMED CAUSE: content-conditioned element: .Polaris-Avatar__Text { font-size: var(--p-font-size-400) } styles the Text element Polaris renders only when initials/name are given; the default mount renders the empty .Polaris-Avatar__Initials wrapper, which inherits the provider's body typography (html,body { font-size: var(--p-font-size-325) } = 13px). Computed truth wins: resolve to the unique DTCG candidate {p.font-size-325}; the initials-present branch stays named residue (no contract channel can be a function of a text prop's value — the standing Avatar refusal class).
 - `md.on` root.background (background-color) {p.color-avatar-one-bg-fill}: expected `rgba(197, 48, 197, 1)` observed `rgba(253, 75, 146, 1)`
-  - **UNTRIAGED** — a defect until triaged
+  - NAMED CAUSE: presence-prop-driven styling: Polaris hash-selects the avatar palette from the initials/name value — a boolean presence axis has no tokensByProp spelling (round 4 residue); the base (icon) palette stands
 - `md.on` root.color (color) {p.color-avatar-one-text-on-bg-fill}: expected `rgba(253, 239, 253, 1)` observed `rgba(255, 246, 248, 1)`
-  - **UNTRIAGED** — a defect until triaged
+  - NAMED CAUSE: presence-prop-driven styling: Polaris hash-selects the avatar palette from the initials/name value — a boolean presence axis has no tokensByProp spelling (round 4 residue); the base (icon) palette stands
 - `md.on` initials.font-size (font-size) {p.font-size-400}: expected `16px` observed `13px`
   - NAMED CAUSE: content-conditioned element: .Polaris-Avatar__Text { font-size: var(--p-font-size-400) } styles the Text element Polaris renders only when initials/name are given; the default mount renders the empty .Polaris-Avatar__Initials wrapper, which inherits the provider's body typography (html,body { font-size: var(--p-font-size-325) } = 13px). Computed truth wins: resolve to the unique DTCG candidate {p.font-size-325}; the initials-present branch stays named residue (no contract channel can be a function of a text prop's value — the standing Avatar refusal class).
 - `lg.off` initials.font-size (font-size) {p.font-size-400}: expected `16px` observed `13px`
   - NAMED CAUSE: content-conditioned element: .Polaris-Avatar__Text { font-size: var(--p-font-size-400) } styles the Text element Polaris renders only when initials/name are given; the default mount renders the empty .Polaris-Avatar__Initials wrapper, which inherits the provider's body typography (html,body { font-size: var(--p-font-size-325) } = 13px). Computed truth wins: resolve to the unique DTCG candidate {p.font-size-325}; the initials-present branch stays named residue (no contract channel can be a function of a text prop's value — the standing Avatar refusal class).
 - `lg.on` root.background (background-color) {p.color-avatar-one-bg-fill}: expected `rgba(197, 48, 197, 1)` observed `rgba(253, 75, 146, 1)`
-  - **UNTRIAGED** — a defect until triaged
+  - NAMED CAUSE: presence-prop-driven styling: Polaris hash-selects the avatar palette from the initials/name value — a boolean presence axis has no tokensByProp spelling (round 4 residue); the base (icon) palette stands
 - `lg.on` root.color (color) {p.color-avatar-one-text-on-bg-fill}: expected `rgba(253, 239, 253, 1)` observed `rgba(255, 246, 248, 1)`
-  - **UNTRIAGED** — a defect until triaged
+  - NAMED CAUSE: presence-prop-driven styling: Polaris hash-selects the avatar palette from the initials/name value — a boolean presence axis has no tokensByProp spelling (round 4 residue); the base (icon) palette stands
 - `lg.on` initials.font-size (font-size) {p.font-size-400}: expected `16px` observed `13px`
   - NAMED CAUSE: content-conditioned element: .Polaris-Avatar__Text { font-size: var(--p-font-size-400) } styles the Text element Polaris renders only when initials/name are given; the default mount renders the empty .Polaris-Avatar__Initials wrapper, which inherits the provider's body typography (html,body { font-size: var(--p-font-size-325) } = 13px). Computed truth wins: resolve to the unique DTCG candidate {p.font-size-325}; the initials-present branch stays named residue (no contract channel can be a function of a text prop's value — the standing Avatar refusal class).
 - `xl.off` initials.font-size (font-size) {p.font-size-400}: expected `16px` observed `13px`
   - NAMED CAUSE: content-conditioned element: .Polaris-Avatar__Text { font-size: var(--p-font-size-400) } styles the Text element Polaris renders only when initials/name are given; the default mount renders the empty .Polaris-Avatar__Initials wrapper, which inherits the provider's body typography (html,body { font-size: var(--p-font-size-325) } = 13px). Computed truth wins: resolve to the unique DTCG candidate {p.font-size-325}; the initials-present branch stays named residue (no contract channel can be a function of a text prop's value — the standing Avatar refusal class).
 - `xl.on` root.background (background-color) {p.color-avatar-one-bg-fill}: expected `rgba(197, 48, 197, 1)` observed `rgba(253, 75, 146, 1)`
-  - **UNTRIAGED** — a defect until triaged
+  - NAMED CAUSE: presence-prop-driven styling: Polaris hash-selects the avatar palette from the initials/name value — a boolean presence axis has no tokensByProp spelling (round 4 residue); the base (icon) palette stands
 - `xl.on` root.color (color) {p.color-avatar-one-text-on-bg-fill}: expected `rgba(253, 239, 253, 1)` observed `rgba(255, 246, 248, 1)`
-  - **UNTRIAGED** — a defect until triaged
+  - NAMED CAUSE: presence-prop-driven styling: Polaris hash-selects the avatar palette from the initials/name value — a boolean presence axis has no tokensByProp spelling (round 4 residue); the base (icon) palette stands
 - `xl.on` initials.font-size (font-size) {p.font-size-400}: expected `16px` observed `13px`
   - NAMED CAUSE: content-conditioned element: .Polaris-Avatar__Text { font-size: var(--p-font-size-400) } styles the Text element Polaris renders only when initials/name are given; the default mount renders the empty .Polaris-Avatar__Initials wrapper, which inherits the provider's body typography (html,body { font-size: var(--p-font-size-325) } = 13px). Computed truth wins: resolve to the unique DTCG candidate {p.font-size-325}; the initials-present branch stays named residue (no contract channel can be a function of a text prop's value — the standing Avatar refusal class).
 

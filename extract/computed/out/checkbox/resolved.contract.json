@@ -4,7 +4,7 @@
   "name": "Checkbox",
   "version": "0.1.0",
   "status": "draft",
-  "description": "PROPOSED contract extracted from examples/polaris/.polaris-clone/polaris-react/src/components/Checkbox/Checkbox.tsx (react-tsx + css-module adapters) — API surface AND anatomy (structure, token bindings, layout, states) read from source; design bindings await reconciliation and human review. PROMOTED showcase contract: API surface extracted mechanically from Shopify/polaris @ 2b1ea88625e0613853ca8577c9acd1980a90f382 (polaris-react 13.10.1, MIT © Shopify, extracted 2026-07-18); styling bindings promoted from the component's own module.css under the reviewed class map in examples/polaris/scripts/curation.ts — every carried binding and every named refusal is listed in examples/polaris/extraction/PROMOTION.md. COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @shopify/polaris@13.9.5 in headless Chromium 148.0.7778.96; overflow channels in the sibling extension file.",
+  "description": "PROPOSED contract extracted from examples/polaris/.polaris-clone/polaris-react/src/components/Checkbox/Checkbox.tsx (react-tsx + css-module adapters) — API surface AND anatomy (structure, token bindings, layout, states) read from source; design bindings await reconciliation and human review. PROMOTED showcase contract: API surface extracted mechanically from Shopify/polaris @ 2b1ea88625e0613853ca8577c9acd1980a90f382 (polaris-react 13.10.1, MIT © Shopify, extracted 2026-07-18); styling bindings promoted from the component's own module.css under the reviewed class map in examples/polaris/scripts/curation.ts — every carried binding and every named refusal is listed in examples/polaris/extraction/PROMOTION.md. ROUND 4: static backdrop bindings (border-color) removed — the checked axis contests them per value; the floor rebuilds from browser truth. COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @shopify/polaris@13.9.5 in headless Chromium 148.0.7778.96; overflow channels in the sibling extension file.",
   "semantics": {
     "element": "span"
   },
@@ -136,6 +136,11 @@
   ],
   "anatomy": {
     "root": {
+      "layout": {
+        "display": "flex",
+        "align": "center",
+        "justify": "start"
+      },
       "parts": {
         "choice__control": {
           "element": "span",
@@ -203,7 +208,6 @@
                   },
                   "tokens": {
                     "border-width": "{p.border-width-0}",
-                    "border-color": "{p.color-input-border}",
                     "border-bottom-left-radius": "{imported.shared.size-4}",
                     "border-bottom-right-radius": "{imported.shared.size-4}",
                     "border-top-left-radius": "{imported.shared.size-4}",
@@ -284,7 +288,7 @@
                     "pointer-events": "none"
                   },
                   "parts": {
-                    "icon-2": {
+                    "icon-3": {
                       "element": "span",
                       "description": "Promoted from the computed floor (round 4): rendered anatomy span|Icon — this element exists in the real component's DOM; the static layer had no part for it.",
                       "declared": {
@@ -317,7 +321,7 @@
                         }
                       ],
                       "icon": {
-                        "asset": "checkbox-icon-2",
+                        "asset": "checkbox-icon-3",
                         "size": 22
                       },
                       "tokens": {
@@ -327,11 +331,16 @@
                         "min-width": "{imported.shared.size-0}"
                       }
                     },
-                    "icon-4": {
+                    "icon-2": {
                       "description": "Promoted from the computed floor (round 4): rendered anatomy svg| — this element exists in the real component's DOM; the static layer had no part for it.",
                       "declared": {
                         "display": "block",
-                        "position": "absolute"
+                        "position": "absolute",
+                        "cursor": "pointer",
+                        "overflow-x": "hidden",
+                        "overflow-y": "hidden",
+                        "pointer-events": "none",
+                        "text-rendering": "geometricprecision"
                       },
                       "stylesWhen": [
                         {
@@ -349,9 +358,9 @@
                         }
                       ],
                       "parts": {
-                        "icon-4-unchecked": {
+                        "icon-2-unchecked": {
                           "icon": {
-                            "asset": "checkbox-icon-4-unchecked",
+                            "asset": "checkbox-icon-2-unchecked",
                             "size": 14
                           },
                           "visibleWhen": {
@@ -360,9 +369,9 @@
                           },
                           "description": "Per-value svg content promoted from the computed floor: the glyph drawn when checked=unchecked."
                         },
-                        "icon-4-checked": {
+                        "icon-2-checked": {
                           "icon": {
-                            "asset": "checkbox-icon-4-checked",
+                            "asset": "checkbox-icon-2-checked",
                             "size": 14
                           },
                           "visibleWhen": {
@@ -371,6 +380,15 @@
                           },
                           "description": "Per-value svg content promoted from the computed floor: the glyph drawn when checked=checked."
                         }
+                      },
+                      "tokens": {
+                        "bottom": "{imported.shared.size-0}",
+                        "color": "{imported.checkbox.icon-2.color}",
+                        "left": "{imported.shared.size-0}",
+                        "min-height": "{imported.shared.size-0}",
+                        "min-width": "{imported.shared.size-0}",
+                        "right": "{imported.shared.size-0}",
+                        "top": "{imported.shared.size-0}"
                       }
                     }
                   },
@@ -497,11 +515,6 @@
             }
           }
         }
-      },
-      "layout": {
-        "display": "flex",
-        "align": "center",
-        "justify": "start"
       },
       "declared": {
         "cursor": "pointer"

@@ -433,6 +433,12 @@
               "$type": "dimension"
             }
           }
+        },
+        "icon-2": {
+          "color": {
+            "$value": "#ffffff",
+            "$type": "color"
+          }
         }
       }
     }
@@ -487,55 +493,55 @@
       "class": "currentColor"
     },
     {
-      "part": "icon-3",
+      "part": "icon-4",
       "channel": "border-bottom-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "icon-3",
+      "part": "icon-4",
       "channel": "border-left-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "icon-3",
+      "part": "icon-4",
       "channel": "border-right-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "icon-3",
+      "part": "icon-4",
       "channel": "border-top-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "icon-3",
+      "part": "icon-4",
       "channel": "caret-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "icon-3",
+      "part": "icon-4",
       "channel": "column-rule-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "icon-3",
+      "part": "icon-4",
       "channel": "outline-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "icon-3",
+      "part": "icon-4",
       "channel": "text-decoration-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "icon-3",
+      "part": "icon-4",
       "channel": "text-emphasis-color",
       "foldedInto": "color",
       "class": "currentColor"
@@ -595,55 +601,55 @@
       "class": "currentColor"
     },
     {
-      "part": "icon-4",
+      "part": "icon-2",
       "channel": "border-bottom-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "icon-4",
+      "part": "icon-2",
       "channel": "border-left-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "icon-4",
+      "part": "icon-2",
       "channel": "border-right-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "icon-4",
+      "part": "icon-2",
       "channel": "border-top-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "icon-4",
+      "part": "icon-2",
       "channel": "caret-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "icon-4",
+      "part": "icon-2",
       "channel": "column-rule-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "icon-4",
+      "part": "icon-2",
       "channel": "outline-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "icon-4",
+      "part": "icon-2",
       "channel": "text-decoration-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "icon-4",
+      "part": "icon-2",
       "channel": "text-emphasis-color",
       "foldedInto": "color",
       "class": "currentColor"
@@ -715,11 +721,6 @@
   ],
   "layout": {
     "enriched": [
-      {
-        "part": "root",
-        "field": "display",
-        "value": "flex"
-      },
       {
         "part": "root",
         "field": "align",
@@ -849,24 +850,49 @@
         "value": "none"
       },
       {
+        "part": "icon-3",
+        "channel": "cursor",
+        "value": "pointer"
+      },
+      {
+        "part": "icon-3",
+        "channel": "max-height",
+        "value": "100%"
+      },
+      {
+        "part": "icon-3",
+        "channel": "max-width",
+        "value": "100%"
+      },
+      {
+        "part": "icon-3",
+        "channel": "pointer-events",
+        "value": "none"
+      },
+      {
         "part": "icon-2",
         "channel": "cursor",
         "value": "pointer"
       },
       {
         "part": "icon-2",
-        "channel": "max-height",
-        "value": "100%"
+        "channel": "overflow-x",
+        "value": "hidden"
       },
       {
         "part": "icon-2",
-        "channel": "max-width",
-        "value": "100%"
+        "channel": "overflow-y",
+        "value": "hidden"
       },
       {
         "part": "icon-2",
         "channel": "pointer-events",
         "value": "none"
+      },
+      {
+        "part": "icon-2",
+        "channel": "text-rendering",
+        "value": "geometricprecision"
       },
       {
         "part": "choice__label",
@@ -992,6 +1018,20 @@
       "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
       "sample": "ease",
       "distinctValues": 2
+    },
+    {
+      "part": "icon-2",
+      "channel": "overflow-clip-margin",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "content-box",
+      "distinctValues": 1
+    },
+    {
+      "part": "icon-2",
+      "channel": "shape-rendering",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "geometricprecision",
+      "distinctValues": 1
     }
   ],
   "stateOverflow": [
@@ -1000,10 +1040,22 @@
       "part": "icon-2",
       "channel": "cursor",
       "sample": "default",
+      "reason": "declared-channel state delta on 2/3 combos — partial coverage cannot carry as a state selector (v15); named residue"
+    },
+    {
+      "state": "disabled",
+      "part": "icon-3",
+      "channel": "cursor",
+      "sample": "default",
       "reason": "declared-channel state delta on 1/3 combos — partial coverage cannot carry as a state selector (v15); named residue"
     }
   ],
   "overflowBindings": [
+    {
+      "part": "icon-2",
+      "channel": "fill",
+      "refusal": "resolved values differ across variants without correlating to any variant axis — nothing minted; bind manually"
+    },
     {
       "part": "backdrop",
       "channel": "background-color",
@@ -1336,16 +1388,6 @@
       "cause": "cross-component zeroing (the showcase's own named Checkbox gap, now measured): Polaris's Choice wrapper CSS zeroes the checkbox backdrop border and repaints the control edge as an inset box-shadow, so the carried Checkbox.module.css border-width binding loses the cascade — computed border-width is 0. Computed truth wins: resolve via the review queue (--to {p.border-width-0}; several zero-valued tokens share 0px, border-width-0 is the exact name-class match). The edge itself rides the minted box-shadow channel."
     },
     {
-      "combo": "checked.enabled",
-      "part": "backdrop",
-      "channel": "border-color",
-      "ref": "{p.color-input-border}",
-      "computedProp": "border-bottom-color",
-      "expected": "rgba(138, 138, 138, 1)",
-      "observed": "rgba(48, 48, 48, 1)",
-      "verdict": "contradiction"
-    },
-    {
       "combo": "indeterminate.enabled",
       "part": "backdrop",
       "channel": "border-width",
@@ -1355,16 +1397,6 @@
       "observed": "0px",
       "verdict": "contradiction",
       "cause": "cross-component zeroing (the showcase's own named Checkbox gap, now measured): Polaris's Choice wrapper CSS zeroes the checkbox backdrop border and repaints the control edge as an inset box-shadow, so the carried Checkbox.module.css border-width binding loses the cascade — computed border-width is 0. Computed truth wins: resolve via the review queue (--to {p.border-width-0}; several zero-valued tokens share 0px, border-width-0 is the exact name-class match). The edge itself rides the minted box-shadow channel."
-    },
-    {
-      "combo": "indeterminate.enabled",
-      "part": "backdrop",
-      "channel": "border-color",
-      "ref": "{p.color-input-border}",
-      "computedProp": "border-bottom-color",
-      "expected": "rgba(138, 138, 138, 1)",
-      "observed": "rgba(48, 48, 48, 1)",
-      "verdict": "contradiction"
     }
   ],
   "interactionOnDisabled": [],
@@ -1372,29 +1404,29 @@
     "union-part-added: indeterminate.enabled__default @0.0.2.0 (span|Icon)",
     "union-part-added: indeterminate.enabled__default @0.0.2.0.0 (svg|Icon__Svg)",
     "union-part-added: indeterminate.enabled__default @0.0.2.0.0.0 (path|)",
-    "part-missing: indeterminate.enabled__default icon-4",
+    "part-missing: indeterminate.enabled__default icon-2",
     "part-missing: indeterminate.enabled__default part-0-0-2-0-0",
-    "part-missing: indeterminate.enabled__hover icon-4",
+    "part-missing: indeterminate.enabled__hover icon-2",
     "part-missing: indeterminate.enabled__hover part-0-0-2-0-0",
-    "part-missing: indeterminate.enabled__focus-visible icon-4",
+    "part-missing: indeterminate.enabled__focus-visible icon-2",
     "part-missing: indeterminate.enabled__focus-visible part-0-0-2-0-0",
-    "part-missing: indeterminate.enabled__active icon-4",
+    "part-missing: indeterminate.enabled__active icon-2",
     "part-missing: indeterminate.enabled__active part-0-0-2-0-0",
-    "part-missing: indeterminate.disabled__default icon-4",
+    "part-missing: indeterminate.disabled__default icon-2",
     "part-missing: indeterminate.disabled__default part-0-0-2-0-0",
-    "part-missing: indeterminate.disabled__hover icon-4",
+    "part-missing: indeterminate.disabled__hover icon-2",
     "part-missing: indeterminate.disabled__hover part-0-0-2-0-0",
-    "part-missing: indeterminate.disabled__focus-visible icon-4",
+    "part-missing: indeterminate.disabled__focus-visible icon-2",
     "part-missing: indeterminate.disabled__focus-visible part-0-0-2-0-0",
-    "part-missing: indeterminate.disabled__active icon-4",
+    "part-missing: indeterminate.disabled__active icon-2",
     "part-missing: indeterminate.disabled__active part-0-0-2-0-0"
   ],
   "styledChannelReceipts": [
     "control-fallback: no control for <label> — span control used (part root)",
     "control-fallback: no control for <input> — span control used (part input)",
-    "control-fallback: no control for <svg> — span control used (part icon-3)",
-    "control-fallback: no control for <path> — span control used (part part-0-0-2-0-0-0)",
     "control-fallback: no control for <svg> — span control used (part icon-4)",
+    "control-fallback: no control for <path> — span control used (part part-0-0-2-0-0-0)",
+    "control-fallback: no control for <svg> — span control used (part icon-2)",
     "control-fallback: no control for <path> — span control used (part part-0-0-2-0-0)"
   ],
   "anatomyJoin": {
@@ -1424,11 +1456,11 @@
         "join": "computed-only"
       },
       {
-        "part": "icon-2",
+        "part": "icon-3",
         "join": "computed-only"
       },
       {
-        "part": "icon-3",
+        "part": "icon-4",
         "join": "computed-only"
       },
       {
@@ -1436,7 +1468,7 @@
         "join": "computed-only"
       },
       {
-        "part": "icon-4",
+        "part": "icon-2",
         "join": "computed-only"
       },
       {
@@ -1463,29 +1495,29 @@
       "input",
       "backdrop",
       "icon",
+      "icon-3",
       "icon-2",
-      "icon-4",
       "choice__label",
       "label"
     ],
     "svgAssets": [
-      "checkbox-icon-2",
-      "checkbox-icon-4-checked",
-      "checkbox-icon-4-unchecked"
+      "checkbox-icon-2-checked",
+      "checkbox-icon-2-unchecked",
+      "checkbox-icon-3"
     ],
     "receipts": [
-      "svg-viewbox-reconstructed: Checkbox.icon-2@indeterminate.enabled — 0 0 22 22 from computed size 22×22 (path extent 15.0; viewBox is not a computed style — named reconstruction)",
-      "svg-viewbox-reconstructed: Checkbox.icon-4@unchecked.enabled — 0 0 14 14 from computed size 14×14 (path extent 10.5; viewBox is not a computed style — named reconstruction)",
-      "svg-viewbox-reconstructed: Checkbox.icon-4@checked.enabled — 0 0 14 14 from computed size 14×14 (path extent 10.5; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Checkbox.icon-3@indeterminate.enabled — 0 0 22 22 from computed size 22×22 (path extent 15.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Checkbox.icon-2@unchecked.enabled — 0 0 14 14 from computed size 14×14 (path extent 10.5; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Checkbox.icon-2@checked.enabled — 0 0 14 14 from computed size 14×14 (path extent 10.5; viewBox is not a computed style — named reconstruction)",
+      "root-display-carried: flex",
       "aspect-carried: icon computed width == height in every enabled combo (14/22px) → declared aspect-ratio 1 / 1 (geometry evidence; the real square rides a pseudo-element padding hack)",
-      "presence-carried: icon-2 (1/3 combos) →  hidden-when checked=unchecked, checked=checked, disabled",
-      "presence-carried: icon-4 (2/3 combos) →  hidden-when checked=indeterminate, disabled",
+      "presence-carried: icon-3 (1/3 combos) →  hidden-when checked=unchecked, checked=checked, disabled",
+      "presence-carried: icon-2 (2/3 combos) →  hidden-when checked=indeterminate, disabled",
       "literal-text-carried: label = \"Save this product\" (no text prop sample matches — the mounted value is carried verbatim)"
     ],
     "refusals": []
   },
   "enrichmentNotes": [
-    "layout enriched: root.layout.display = flex (uniform computed keyword — the schema's own vocabulary)",
     "layout enriched: root.layout.align = center (uniform computed keyword — the schema's own vocabulary)",
     "layout enriched: root.layout.justify = start (uniform computed keyword — the schema's own vocabulary)",
     "layout enriched: choice__control.layout.align = stretch (uniform computed keyword — the schema's own vocabulary)",
@@ -1510,10 +1542,15 @@
     "declared fact carried: backdrop.transition-timing-function = cubic-bezier(0.19, 0.91, 0.38, 1), cubic-bezier(0.19, 0.91, 0.38, 1), cubic-bezier(0.19, 0.91, 0.38, 1) (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: icon.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: icon.pointer-events = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: icon-3.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: icon-3.max-height = 100% (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: icon-3.max-width = 100% (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: icon-3.pointer-events = none (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: icon-2.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: icon-2.max-height = 100% (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: icon-2.max-width = 100% (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: icon-2.overflow-x = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: icon-2.overflow-y = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: icon-2.pointer-events = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: icon-2.text-rendering = geometricprecision (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: choice__label.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: label.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared state fact carried: [disabled] backdrop.cursor = default (v15 declared vocabulary)",

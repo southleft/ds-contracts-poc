@@ -624,7 +624,8 @@
       "computedProp": "background-color",
       "expected": "rgba(197, 48, 197, 1)",
       "observed": "rgba(253, 75, 146, 1)",
-      "verdict": "contradiction"
+      "verdict": "contradiction",
+      "cause": "presence-prop-driven styling: Polaris hash-selects the avatar palette from the initials/name value — a boolean presence axis has no tokensByProp spelling (round 4 residue); the base (icon) palette stands"
     },
     {
       "combo": "xs.on",
@@ -634,7 +635,8 @@
       "computedProp": "color",
       "expected": "rgba(253, 239, 253, 1)",
       "observed": "rgba(255, 246, 248, 1)",
-      "verdict": "contradiction"
+      "verdict": "contradiction",
+      "cause": "presence-prop-driven styling: Polaris hash-selects the avatar palette from the initials/name value — a boolean presence axis has no tokensByProp spelling (round 4 residue); the base (icon) palette stands"
     },
     {
       "combo": "xs.on",
@@ -666,7 +668,8 @@
       "computedProp": "background-color",
       "expected": "rgba(197, 48, 197, 1)",
       "observed": "rgba(253, 75, 146, 1)",
-      "verdict": "contradiction"
+      "verdict": "contradiction",
+      "cause": "presence-prop-driven styling: Polaris hash-selects the avatar palette from the initials/name value — a boolean presence axis has no tokensByProp spelling (round 4 residue); the base (icon) palette stands"
     },
     {
       "combo": "sm.on",
@@ -676,7 +679,8 @@
       "computedProp": "color",
       "expected": "rgba(253, 239, 253, 1)",
       "observed": "rgba(255, 246, 248, 1)",
-      "verdict": "contradiction"
+      "verdict": "contradiction",
+      "cause": "presence-prop-driven styling: Polaris hash-selects the avatar palette from the initials/name value — a boolean presence axis has no tokensByProp spelling (round 4 residue); the base (icon) palette stands"
     },
     {
       "combo": "sm.on",
@@ -708,7 +712,8 @@
       "computedProp": "background-color",
       "expected": "rgba(197, 48, 197, 1)",
       "observed": "rgba(253, 75, 146, 1)",
-      "verdict": "contradiction"
+      "verdict": "contradiction",
+      "cause": "presence-prop-driven styling: Polaris hash-selects the avatar palette from the initials/name value — a boolean presence axis has no tokensByProp spelling (round 4 residue); the base (icon) palette stands"
     },
     {
       "combo": "md.on",
@@ -718,7 +723,8 @@
       "computedProp": "color",
       "expected": "rgba(253, 239, 253, 1)",
       "observed": "rgba(255, 246, 248, 1)",
-      "verdict": "contradiction"
+      "verdict": "contradiction",
+      "cause": "presence-prop-driven styling: Polaris hash-selects the avatar palette from the initials/name value — a boolean presence axis has no tokensByProp spelling (round 4 residue); the base (icon) palette stands"
     },
     {
       "combo": "md.on",
@@ -750,7 +756,8 @@
       "computedProp": "background-color",
       "expected": "rgba(197, 48, 197, 1)",
       "observed": "rgba(253, 75, 146, 1)",
-      "verdict": "contradiction"
+      "verdict": "contradiction",
+      "cause": "presence-prop-driven styling: Polaris hash-selects the avatar palette from the initials/name value — a boolean presence axis has no tokensByProp spelling (round 4 residue); the base (icon) palette stands"
     },
     {
       "combo": "lg.on",
@@ -760,7 +767,8 @@
       "computedProp": "color",
       "expected": "rgba(253, 239, 253, 1)",
       "observed": "rgba(255, 246, 248, 1)",
-      "verdict": "contradiction"
+      "verdict": "contradiction",
+      "cause": "presence-prop-driven styling: Polaris hash-selects the avatar palette from the initials/name value — a boolean presence axis has no tokensByProp spelling (round 4 residue); the base (icon) palette stands"
     },
     {
       "combo": "lg.on",
@@ -792,7 +800,8 @@
       "computedProp": "background-color",
       "expected": "rgba(197, 48, 197, 1)",
       "observed": "rgba(253, 75, 146, 1)",
-      "verdict": "contradiction"
+      "verdict": "contradiction",
+      "cause": "presence-prop-driven styling: Polaris hash-selects the avatar palette from the initials/name value — a boolean presence axis has no tokensByProp spelling (round 4 residue); the base (icon) palette stands"
     },
     {
       "combo": "xl.on",
@@ -802,7 +811,8 @@
       "computedProp": "color",
       "expected": "rgba(253, 239, 253, 1)",
       "observed": "rgba(255, 246, 248, 1)",
-      "verdict": "contradiction"
+      "verdict": "contradiction",
+      "cause": "presence-prop-driven styling: Polaris hash-selects the avatar palette from the initials/name value — a boolean presence axis has no tokensByProp spelling (round 4 residue); the base (icon) palette stands"
     },
     {
       "combo": "xl.on",

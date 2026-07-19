@@ -136,6 +136,13 @@
           }
         }
       ],
+      "declared": {
+        "display": "block",
+        "max-width": "100%",
+        "overflow-x": "hidden",
+        "overflow-y": "hidden",
+        "position": "relative"
+      },
       "parts": {
         "part-0": {
           "element": "img",
@@ -143,6 +150,7 @@
           "declared": {
             "display": "block",
             "position": "absolute",
+            "aspect-ratio": "1 / 1",
             "max-height": "100%",
             "max-width": "100%",
             "overflow-x": "clip",
@@ -161,12 +169,6 @@
             "top": "{imported.shared.size-0}"
           }
         }
-      },
-      "declared": {
-        "max-width": "100%",
-        "overflow-x": "hidden",
-        "overflow-y": "hidden",
-        "position": "relative"
       }
     }
   },

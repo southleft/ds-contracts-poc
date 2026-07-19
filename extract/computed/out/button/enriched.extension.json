@@ -1,0 +1,4795 @@
+{
+  "_marker": "NON-SCHEMA EXTENSION BLOCK — computed-capture overflow. Nothing here is contract vocabulary; every entry names why it does not fit (DESIGN §5.4).",
+  "generatedBy": "extract/computed/run.ts",
+  "library": "@shopify/polaris@13.9.5",
+  "browser": "148.0.7778.96",
+  "mintedTokens": {
+    "imported": {
+      "button": {
+        "root": {
+          "background-image": {
+            "plain": {
+              "none": {
+                "$value": "none",
+                "$type": "gradient"
+              },
+              "critical": {
+                "$value": "none",
+                "$type": "gradient"
+              },
+              "success": {
+                "$value": "none",
+                "$type": "gradient"
+              }
+            },
+            "primary": {
+              "none": {
+                "$value": "linear-gradient(rgba(48, 48, 48, 0) 63.53%, rgba(255, 255, 255, 0.15) 100%), none",
+                "$type": "gradient"
+              },
+              "critical": {
+                "$value": "none",
+                "$type": "gradient"
+              },
+              "success": {
+                "$value": "none",
+                "$type": "gradient"
+              }
+            },
+            "secondary": {
+              "none": {
+                "$value": "none",
+                "$type": "gradient"
+              },
+              "critical": {
+                "$value": "none",
+                "$type": "gradient"
+              },
+              "success": {
+                "$value": "none",
+                "$type": "gradient"
+              }
+            },
+            "tertiary": {
+              "none": {
+                "$value": "none",
+                "$type": "gradient"
+              },
+              "critical": {
+                "$value": "none",
+                "$type": "gradient"
+              },
+              "success": {
+                "$value": "none",
+                "$type": "gradient"
+              }
+            },
+            "monochromePlain": {
+              "none": {
+                "$value": "none",
+                "$type": "gradient"
+              },
+              "critical": {
+                "$value": "none",
+                "$type": "gradient"
+              },
+              "success": {
+                "$value": "none",
+                "$type": "gradient"
+              }
+            }
+          },
+          "font-size": {
+            "$value": "13px",
+            "$type": "dimension"
+          },
+          "font-weight": {
+            "$value": "450",
+            "$type": "number"
+          },
+          "line-height": {
+            "$value": "20px",
+            "$type": "dimension"
+          },
+          "margin-bottom": {
+            "plain": {
+              "micro": {
+                "$value": "-4px",
+                "$type": "dimension"
+              },
+              "slim": {
+                "$value": "-6px",
+                "$type": "dimension"
+              },
+              "medium": {
+                "$value": "-6px",
+                "$type": "dimension"
+              },
+              "large": {
+                "$value": "-6px",
+                "$type": "dimension"
+              }
+            },
+            "primary": {
+              "micro": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "slim": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "medium": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "large": {
+                "$value": "0px",
+                "$type": "dimension"
+              }
+            },
+            "secondary": {
+              "micro": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "slim": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "medium": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "large": {
+                "$value": "0px",
+                "$type": "dimension"
+              }
+            },
+            "tertiary": {
+              "micro": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "slim": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "medium": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "large": {
+                "$value": "0px",
+                "$type": "dimension"
+              }
+            },
+            "monochromePlain": {
+              "micro": {
+                "$value": "-4px",
+                "$type": "dimension"
+              },
+              "slim": {
+                "$value": "-6px",
+                "$type": "dimension"
+              },
+              "medium": {
+                "$value": "-6px",
+                "$type": "dimension"
+              },
+              "large": {
+                "$value": "-6px",
+                "$type": "dimension"
+              }
+            }
+          },
+          "margin-left": {
+            "plain": {
+              "micro": {
+                "$value": "-8px",
+                "$type": "dimension"
+              },
+              "slim": {
+                "$value": "-12px",
+                "$type": "dimension"
+              },
+              "medium": {
+                "$value": "-12px",
+                "$type": "dimension"
+              },
+              "large": {
+                "$value": "-12px",
+                "$type": "dimension"
+              }
+            },
+            "primary": {
+              "micro": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "slim": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "medium": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "large": {
+                "$value": "0px",
+                "$type": "dimension"
+              }
+            },
+            "secondary": {
+              "micro": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "slim": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "medium": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "large": {
+                "$value": "0px",
+                "$type": "dimension"
+              }
+            },
+            "tertiary": {
+              "micro": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "slim": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "medium": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "large": {
+                "$value": "0px",
+                "$type": "dimension"
+              }
+            },
+            "monochromePlain": {
+              "micro": {
+                "$value": "-8px",
+                "$type": "dimension"
+              },
+              "slim": {
+                "$value": "-12px",
+                "$type": "dimension"
+              },
+              "medium": {
+                "$value": "-12px",
+                "$type": "dimension"
+              },
+              "large": {
+                "$value": "-12px",
+                "$type": "dimension"
+              }
+            }
+          },
+          "margin-right": {
+            "plain": {
+              "micro": {
+                "$value": "-8px",
+                "$type": "dimension"
+              },
+              "slim": {
+                "$value": "-12px",
+                "$type": "dimension"
+              },
+              "medium": {
+                "$value": "-12px",
+                "$type": "dimension"
+              },
+              "large": {
+                "$value": "-12px",
+                "$type": "dimension"
+              }
+            },
+            "primary": {
+              "micro": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "slim": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "medium": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "large": {
+                "$value": "0px",
+                "$type": "dimension"
+              }
+            },
+            "secondary": {
+              "micro": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "slim": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "medium": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "large": {
+                "$value": "0px",
+                "$type": "dimension"
+              }
+            },
+            "tertiary": {
+              "micro": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "slim": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "medium": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "large": {
+                "$value": "0px",
+                "$type": "dimension"
+              }
+            },
+            "monochromePlain": {
+              "micro": {
+                "$value": "-8px",
+                "$type": "dimension"
+              },
+              "slim": {
+                "$value": "-12px",
+                "$type": "dimension"
+              },
+              "medium": {
+                "$value": "-12px",
+                "$type": "dimension"
+              },
+              "large": {
+                "$value": "-12px",
+                "$type": "dimension"
+              }
+            }
+          },
+          "margin-top": {
+            "plain": {
+              "micro": {
+                "$value": "-4px",
+                "$type": "dimension"
+              },
+              "slim": {
+                "$value": "-6px",
+                "$type": "dimension"
+              },
+              "medium": {
+                "$value": "-6px",
+                "$type": "dimension"
+              },
+              "large": {
+                "$value": "-6px",
+                "$type": "dimension"
+              }
+            },
+            "primary": {
+              "micro": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "slim": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "medium": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "large": {
+                "$value": "0px",
+                "$type": "dimension"
+              }
+            },
+            "secondary": {
+              "micro": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "slim": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "medium": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "large": {
+                "$value": "0px",
+                "$type": "dimension"
+              }
+            },
+            "tertiary": {
+              "micro": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "slim": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "medium": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "large": {
+                "$value": "0px",
+                "$type": "dimension"
+              }
+            },
+            "monochromePlain": {
+              "micro": {
+                "$value": "-4px",
+                "$type": "dimension"
+              },
+              "slim": {
+                "$value": "-6px",
+                "$type": "dimension"
+              },
+              "medium": {
+                "$value": "-6px",
+                "$type": "dimension"
+              },
+              "large": {
+                "$value": "-6px",
+                "$type": "dimension"
+              }
+            }
+          },
+          "outline-color": {
+            "plain": {
+              "none": {
+                "$value": "#005bd3",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#8e0b21",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#014b40",
+                "$type": "color"
+              }
+            },
+            "primary": {
+              "none": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#ffffff",
+                "$type": "color"
+              }
+            },
+            "secondary": {
+              "none": {
+                "$value": "#303030",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#8e0b21",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#014b40",
+                "$type": "color"
+              }
+            },
+            "tertiary": {
+              "none": {
+                "$value": "#303030",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#8e0b21",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#014b40",
+                "$type": "color"
+              }
+            },
+            "monochromePlain": {
+              "none": {
+                "$value": "#303030",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#303030",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#303030",
+                "$type": "color"
+              }
+            }
+          },
+          "row-gap": {
+            "$value": "2px",
+            "$type": "dimension"
+          },
+          "background-color-state-active": {
+            "primary": {
+              "none": {
+                "$value": "#1a1a1a",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#8e0b21",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#014b40",
+                "$type": "color"
+              }
+            },
+            "secondary": {
+              "none": {
+                "$value": "#f7f7f7",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#f7f7f7",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#f7f7f7",
+                "$type": "color"
+              }
+            },
+            "tertiary": {
+              "none": {
+                "$value": "#00000014",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#00000014",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#00000014",
+                "$type": "color"
+              }
+            },
+            "plain": {
+              "none": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#00000000",
+                "$type": "color"
+              }
+            },
+            "monochromePlain": {
+              "none": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#00000000",
+                "$type": "color"
+              }
+            }
+          },
+          "box-shadow-state-active": {
+            "primary": {
+              "none": {
+                "$value": "rgba(0, 0, 0, 1) 0px 3px 0px 0px inset",
+                "$type": "shadow"
+              },
+              "critical": {
+                "$value": "rgba(0, 0, 0, 0.2) -1px 0px 1px 0px inset, rgba(0, 0, 0, 0.2) 1px 0px 1px 0px inset, rgba(0, 0, 0, 0.6) 0px 2px 0px 0px inset",
+                "$type": "shadow"
+              },
+              "success": {
+                "$value": "rgba(0, 0, 0, 0.2) -1px 0px 1px 0px inset, rgba(0, 0, 0, 0.2) 1px 0px 1px 0px inset, rgba(0, 0, 0, 0.6) 0px 2px 0px 0px inset",
+                "$type": "shadow"
+              }
+            },
+            "secondary": {
+              "none": {
+                "$value": "rgba(26, 26, 26, 0.12) -1px 0px 1px 0px inset, rgba(26, 26, 26, 0.12) 1px 0px 1px 0px inset, rgba(26, 26, 26, 0.2) 0px 2px 1px 0px inset",
+                "$type": "shadow"
+              },
+              "critical": {
+                "$value": "rgba(26, 26, 26, 0.12) -1px 0px 1px 0px inset, rgba(26, 26, 26, 0.12) 1px 0px 1px 0px inset, rgba(26, 26, 26, 0.2) 0px 2px 1px 0px inset",
+                "$type": "shadow"
+              },
+              "success": {
+                "$value": "rgba(26, 26, 26, 0.12) -1px 0px 1px 0px inset, rgba(26, 26, 26, 0.12) 1px 0px 1px 0px inset, rgba(26, 26, 26, 0.2) 0px 2px 1px 0px inset",
+                "$type": "shadow"
+              }
+            },
+            "plain": {
+              "none": {
+                "$value": "none",
+                "$type": "shadow"
+              },
+              "critical": {
+                "$value": "none",
+                "$type": "shadow"
+              },
+              "success": {
+                "$value": "none",
+                "$type": "shadow"
+              }
+            },
+            "tertiary": {
+              "none": {
+                "$value": "none",
+                "$type": "shadow"
+              },
+              "critical": {
+                "$value": "none",
+                "$type": "shadow"
+              },
+              "success": {
+                "$value": "none",
+                "$type": "shadow"
+              }
+            },
+            "monochromePlain": {
+              "none": {
+                "$value": "none",
+                "$type": "shadow"
+              },
+              "critical": {
+                "$value": "none",
+                "$type": "shadow"
+              },
+              "success": {
+                "$value": "none",
+                "$type": "shadow"
+              }
+            }
+          },
+          "color-state-active": {
+            "plain": {
+              "none": {
+                "$value": "#002e6a",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#2f040b",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#022622",
+                "$type": "color"
+              }
+            },
+            "secondary": {
+              "critical": {
+                "$value": "#2f040b",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#022622",
+                "$type": "color"
+              },
+              "none": {
+                "$value": "#303030",
+                "$type": "color"
+              }
+            },
+            "tertiary": {
+              "critical": {
+                "$value": "#2f040b",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#022622",
+                "$type": "color"
+              },
+              "none": {
+                "$value": "#303030",
+                "$type": "color"
+              }
+            },
+            "primary": {
+              "none": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#ffffff",
+                "$type": "color"
+              }
+            },
+            "monochromePlain": {
+              "none": {
+                "$value": "#303030",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#303030",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#303030",
+                "$type": "color"
+              }
+            }
+          },
+          "fill-state-active": {
+            "plain": {
+              "none": {
+                "$value": "#002e6a",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#2f040b",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#022622",
+                "$type": "color"
+              }
+            },
+            "primary": {
+              "none": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#ffffff",
+                "$type": "color"
+              }
+            },
+            "secondary": {
+              "none": {
+                "$value": "#4a4a4a",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#2f040b",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#022622",
+                "$type": "color"
+              }
+            },
+            "tertiary": {
+              "none": {
+                "$value": "#4a4a4a",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#2f040b",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#022622",
+                "$type": "color"
+              }
+            },
+            "monochromePlain": {
+              "none": {
+                "$value": "#303030",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#303030",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#303030",
+                "$type": "color"
+              }
+            }
+          },
+          "outline-color-state-active": {
+            "plain": {
+              "none": {
+                "$value": "#002e6a",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#2f040b",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#022622",
+                "$type": "color"
+              }
+            },
+            "secondary": {
+              "critical": {
+                "$value": "#2f040b",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#022622",
+                "$type": "color"
+              },
+              "none": {
+                "$value": "#303030",
+                "$type": "color"
+              }
+            },
+            "tertiary": {
+              "critical": {
+                "$value": "#2f040b",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#022622",
+                "$type": "color"
+              },
+              "none": {
+                "$value": "#303030",
+                "$type": "color"
+              }
+            },
+            "primary": {
+              "none": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#ffffff",
+                "$type": "color"
+              }
+            },
+            "monochromePlain": {
+              "none": {
+                "$value": "#303030",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#303030",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#303030",
+                "$type": "color"
+              }
+            }
+          },
+          "background-color-state-disabled": {
+            "primary": {
+              "$value": "#0000002b",
+              "$type": "color"
+            },
+            "secondary": {
+              "$value": "#0000000d",
+              "$type": "color"
+            },
+            "plain": {
+              "$value": "#00000000",
+              "$type": "color"
+            },
+            "tertiary": {
+              "$value": "#00000000",
+              "$type": "color"
+            },
+            "monochromePlain": {
+              "$value": "#00000000",
+              "$type": "color"
+            }
+          },
+          "background-image-state-disabled": {
+            "$value": "none",
+            "$type": "gradient"
+          },
+          "box-shadow-state-disabled": {
+            "$value": "none",
+            "$type": "shadow"
+          },
+          "color-state-disabled": {
+            "plain": {
+              "$value": "#b5b5b5",
+              "$type": "color"
+            },
+            "secondary": {
+              "$value": "#b5b5b5",
+              "$type": "color"
+            },
+            "tertiary": {
+              "$value": "#b5b5b5",
+              "$type": "color"
+            },
+            "monochromePlain": {
+              "$value": "#b5b5b5",
+              "$type": "color"
+            },
+            "primary": {
+              "$value": "#ffffff",
+              "$type": "color"
+            }
+          },
+          "outline-color-state-disabled": {
+            "plain": {
+              "$value": "#b5b5b5",
+              "$type": "color"
+            },
+            "secondary": {
+              "$value": "#b5b5b5",
+              "$type": "color"
+            },
+            "tertiary": {
+              "$value": "#b5b5b5",
+              "$type": "color"
+            },
+            "monochromePlain": {
+              "$value": "#b5b5b5",
+              "$type": "color"
+            },
+            "primary": {
+              "$value": "#ffffff",
+              "$type": "color"
+            }
+          },
+          "background-color-state-focus-visible": {
+            "primary": {
+              "none": {
+                "$value": "#1a1a1a",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#a30a24",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#035e4c",
+                "$type": "color"
+              }
+            },
+            "secondary": {
+              "none": {
+                "$value": "#fafafa",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#fafafa",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#fafafa",
+                "$type": "color"
+              }
+            },
+            "tertiary": {
+              "none": {
+                "$value": "#0000000d",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#0000000d",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#0000000d",
+                "$type": "color"
+              }
+            },
+            "plain": {
+              "none": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#00000000",
+                "$type": "color"
+              }
+            },
+            "monochromePlain": {
+              "none": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#00000000",
+                "$type": "color"
+              }
+            }
+          },
+          "border-bottom-left-radius-state-focus-visible": {
+            "plain": {
+              "$value": "12px",
+              "$type": "dimension"
+            },
+            "monochromePlain": {
+              "$value": "12px",
+              "$type": "dimension"
+            },
+            "primary": {
+              "$value": "8px",
+              "$type": "dimension"
+            },
+            "secondary": {
+              "$value": "8px",
+              "$type": "dimension"
+            },
+            "tertiary": {
+              "$value": "8px",
+              "$type": "dimension"
+            }
+          },
+          "border-bottom-right-radius-state-focus-visible": {
+            "plain": {
+              "$value": "12px",
+              "$type": "dimension"
+            },
+            "monochromePlain": {
+              "$value": "12px",
+              "$type": "dimension"
+            },
+            "primary": {
+              "$value": "8px",
+              "$type": "dimension"
+            },
+            "secondary": {
+              "$value": "8px",
+              "$type": "dimension"
+            },
+            "tertiary": {
+              "$value": "8px",
+              "$type": "dimension"
+            }
+          },
+          "border-top-left-radius-state-focus-visible": {
+            "plain": {
+              "$value": "12px",
+              "$type": "dimension"
+            },
+            "monochromePlain": {
+              "$value": "12px",
+              "$type": "dimension"
+            },
+            "primary": {
+              "$value": "8px",
+              "$type": "dimension"
+            },
+            "secondary": {
+              "$value": "8px",
+              "$type": "dimension"
+            },
+            "tertiary": {
+              "$value": "8px",
+              "$type": "dimension"
+            }
+          },
+          "border-top-right-radius-state-focus-visible": {
+            "plain": {
+              "$value": "12px",
+              "$type": "dimension"
+            },
+            "monochromePlain": {
+              "$value": "12px",
+              "$type": "dimension"
+            },
+            "primary": {
+              "$value": "8px",
+              "$type": "dimension"
+            },
+            "secondary": {
+              "$value": "8px",
+              "$type": "dimension"
+            },
+            "tertiary": {
+              "$value": "8px",
+              "$type": "dimension"
+            }
+          },
+          "color-state-focus-visible": {
+            "plain": {
+              "none": {
+                "$value": "#004299",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#5f0716",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#073630",
+                "$type": "color"
+              }
+            },
+            "secondary": {
+              "critical": {
+                "$value": "#5f0716",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#073630",
+                "$type": "color"
+              },
+              "none": {
+                "$value": "#303030",
+                "$type": "color"
+              }
+            },
+            "tertiary": {
+              "critical": {
+                "$value": "#5f0716",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#073630",
+                "$type": "color"
+              },
+              "none": {
+                "$value": "#303030",
+                "$type": "color"
+              }
+            },
+            "primary": {
+              "none": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#ffffff",
+                "$type": "color"
+              }
+            },
+            "monochromePlain": {
+              "none": {
+                "$value": "#303030",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#303030",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#303030",
+                "$type": "color"
+              }
+            }
+          },
+          "outline-color-state-focus-visible": {
+            "$value": "#005bd3",
+            "$type": "color"
+          },
+          "outline-offset-state-focus-visible": {
+            "plain": {
+              "micro": {
+                "$value": "-4px",
+                "$type": "dimension"
+              },
+              "slim": {
+                "$value": "-6px",
+                "$type": "dimension"
+              },
+              "medium": {
+                "$value": "-6px",
+                "$type": "dimension"
+              },
+              "large": {
+                "$value": "-6px",
+                "$type": "dimension"
+              }
+            },
+            "primary": {
+              "micro": {
+                "$value": "1px",
+                "$type": "dimension"
+              },
+              "slim": {
+                "$value": "1px",
+                "$type": "dimension"
+              },
+              "medium": {
+                "$value": "1px",
+                "$type": "dimension"
+              },
+              "large": {
+                "$value": "1px",
+                "$type": "dimension"
+              }
+            },
+            "secondary": {
+              "micro": {
+                "$value": "1px",
+                "$type": "dimension"
+              },
+              "slim": {
+                "$value": "1px",
+                "$type": "dimension"
+              },
+              "medium": {
+                "$value": "1px",
+                "$type": "dimension"
+              },
+              "large": {
+                "$value": "1px",
+                "$type": "dimension"
+              }
+            },
+            "tertiary": {
+              "micro": {
+                "$value": "1px",
+                "$type": "dimension"
+              },
+              "slim": {
+                "$value": "1px",
+                "$type": "dimension"
+              },
+              "medium": {
+                "$value": "1px",
+                "$type": "dimension"
+              },
+              "large": {
+                "$value": "1px",
+                "$type": "dimension"
+              }
+            },
+            "monochromePlain": {
+              "micro": {
+                "$value": "-4px",
+                "$type": "dimension"
+              },
+              "slim": {
+                "$value": "-6px",
+                "$type": "dimension"
+              },
+              "medium": {
+                "$value": "-6px",
+                "$type": "dimension"
+              },
+              "large": {
+                "$value": "-6px",
+                "$type": "dimension"
+              }
+            }
+          },
+          "outline-width-state-focus-visible": {
+            "$value": "2px",
+            "$type": "dimension"
+          },
+          "background-color-state-hover": {
+            "primary": {
+              "none": {
+                "$value": "#1a1a1a",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#a30a24",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#035e4c",
+                "$type": "color"
+              }
+            },
+            "secondary": {
+              "none": {
+                "$value": "#fafafa",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#fafafa",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#fafafa",
+                "$type": "color"
+              }
+            },
+            "tertiary": {
+              "none": {
+                "$value": "#0000000d",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#0000000d",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#0000000d",
+                "$type": "color"
+              }
+            },
+            "plain": {
+              "none": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#00000000",
+                "$type": "color"
+              }
+            },
+            "monochromePlain": {
+              "none": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#00000000",
+                "$type": "color"
+              }
+            }
+          },
+          "color-state-hover": {
+            "plain": {
+              "none": {
+                "$value": "#004299",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#5f0716",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#073630",
+                "$type": "color"
+              }
+            },
+            "secondary": {
+              "critical": {
+                "$value": "#5f0716",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#073630",
+                "$type": "color"
+              },
+              "none": {
+                "$value": "#303030",
+                "$type": "color"
+              }
+            },
+            "tertiary": {
+              "critical": {
+                "$value": "#5f0716",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#073630",
+                "$type": "color"
+              },
+              "none": {
+                "$value": "#303030",
+                "$type": "color"
+              }
+            },
+            "primary": {
+              "none": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#ffffff",
+                "$type": "color"
+              }
+            },
+            "monochromePlain": {
+              "none": {
+                "$value": "#303030",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#303030",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#303030",
+                "$type": "color"
+              }
+            }
+          },
+          "outline-color-state-hover": {
+            "plain": {
+              "none": {
+                "$value": "#004299",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#5f0716",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#073630",
+                "$type": "color"
+              }
+            },
+            "secondary": {
+              "critical": {
+                "$value": "#5f0716",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#073630",
+                "$type": "color"
+              },
+              "none": {
+                "$value": "#303030",
+                "$type": "color"
+              }
+            },
+            "tertiary": {
+              "critical": {
+                "$value": "#5f0716",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#073630",
+                "$type": "color"
+              },
+              "none": {
+                "$value": "#303030",
+                "$type": "color"
+              }
+            },
+            "primary": {
+              "none": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#ffffff",
+                "$type": "color"
+              }
+            },
+            "monochromePlain": {
+              "none": {
+                "$value": "#303030",
+                "$type": "color"
+              },
+              "critical": {
+                "$value": "#303030",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#303030",
+                "$type": "color"
+              }
+            }
+          }
+        },
+        "icon": {
+          "margin-bottom": {
+            "$value": "-2px",
+            "$type": "dimension"
+          },
+          "margin-top": {
+            "$value": "-2px",
+            "$type": "dimension"
+          }
+        },
+        "label": {
+          "color-state-disabled": {
+            "plain": {
+              "$value": "#b5b5b5",
+              "$type": "color"
+            },
+            "secondary": {
+              "$value": "#b5b5b5",
+              "$type": "color"
+            },
+            "tertiary": {
+              "$value": "#b5b5b5",
+              "$type": "color"
+            },
+            "monochromePlain": {
+              "$value": "#b5b5b5",
+              "$type": "color"
+            },
+            "primary": {
+              "$value": "#ffffff",
+              "$type": "color"
+            }
+          }
+        }
+      },
+      "shared": {
+        "size-8": {
+          "$value": "8px",
+          "$type": "dimension"
+        },
+        "size-0": {
+          "$value": "0px",
+          "$type": "dimension"
+        }
+      }
+    }
+  },
+  "folds": [
+    {
+      "part": "root",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-2",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-2",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-2",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-2",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-2",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-2",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-2",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-2",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-2",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-3",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-3",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-3",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-3",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-3",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-3",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-3",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-3",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-3",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-0-0",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-0-0",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-0-0",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-0-0",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-0-0",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-0-0",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-0-0",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-0-0",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-0-0",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-0-1",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-0-1",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-0-1",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-0-1",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-0-1",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-0-1",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-0-1",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-0-1",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-0-1",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    }
+  ],
+  "foldedStateSkips": [
+    "fold-carries-state-delta: [active] icon-2.border-bottom-color rides its source fact",
+    "fold-carries-state-delta: [active] icon-2.border-left-color rides its source fact",
+    "fold-carries-state-delta: [active] icon-2.border-right-color rides its source fact",
+    "fold-carries-state-delta: [active] icon-2.border-top-color rides its source fact",
+    "fold-carries-state-delta: [active] icon-2.caret-color rides its source fact",
+    "fold-carries-state-delta: [active] icon-2.column-rule-color rides its source fact",
+    "fold-carries-state-delta: [active] icon-2.outline-color rides its source fact",
+    "fold-carries-state-delta: [active] icon-2.text-decoration-color rides its source fact",
+    "fold-carries-state-delta: [active] icon-2.text-emphasis-color rides its source fact",
+    "fold-carries-state-delta: [active] icon.border-bottom-color rides its source fact",
+    "fold-carries-state-delta: [active] icon.border-left-color rides its source fact",
+    "fold-carries-state-delta: [active] icon.border-right-color rides its source fact",
+    "fold-carries-state-delta: [active] icon.border-top-color rides its source fact",
+    "fold-carries-state-delta: [active] icon.caret-color rides its source fact",
+    "fold-carries-state-delta: [active] icon.column-rule-color rides its source fact",
+    "fold-carries-state-delta: [active] icon.outline-color rides its source fact",
+    "fold-carries-state-delta: [active] icon.text-decoration-color rides its source fact",
+    "fold-carries-state-delta: [active] icon.text-emphasis-color rides its source fact",
+    "fold-carries-state-delta: [active] label.border-bottom-color rides its source fact",
+    "fold-carries-state-delta: [active] label.border-left-color rides its source fact",
+    "fold-carries-state-delta: [active] label.border-right-color rides its source fact",
+    "fold-carries-state-delta: [active] label.border-top-color rides its source fact",
+    "fold-carries-state-delta: [active] label.caret-color rides its source fact",
+    "fold-carries-state-delta: [active] label.column-rule-color rides its source fact",
+    "fold-carries-state-delta: [active] label.outline-color rides its source fact",
+    "fold-carries-state-delta: [active] label.text-decoration-color rides its source fact",
+    "fold-carries-state-delta: [active] label.text-emphasis-color rides its source fact",
+    "fold-carries-state-delta: [active] root.border-bottom-color rides its source fact",
+    "fold-carries-state-delta: [active] root.border-left-color rides its source fact",
+    "fold-carries-state-delta: [active] root.border-right-color rides its source fact",
+    "fold-carries-state-delta: [active] root.border-top-color rides its source fact",
+    "fold-carries-state-delta: [active] root.caret-color rides its source fact",
+    "fold-carries-state-delta: [active] root.column-rule-color rides its source fact",
+    "fold-carries-state-delta: [active] root.text-decoration-color rides its source fact",
+    "fold-carries-state-delta: [active] root.text-emphasis-color rides its source fact",
+    "fold-carries-state-delta: [disabled] icon-2.border-bottom-color rides its source fact",
+    "fold-carries-state-delta: [disabled] icon-2.border-left-color rides its source fact",
+    "fold-carries-state-delta: [disabled] icon-2.border-right-color rides its source fact",
+    "fold-carries-state-delta: [disabled] icon-2.border-top-color rides its source fact",
+    "fold-carries-state-delta: [disabled] icon-2.caret-color rides its source fact",
+    "fold-carries-state-delta: [disabled] icon-2.column-rule-color rides its source fact",
+    "fold-carries-state-delta: [disabled] icon-2.outline-color rides its source fact",
+    "fold-carries-state-delta: [disabled] icon-2.text-decoration-color rides its source fact",
+    "fold-carries-state-delta: [disabled] icon-2.text-emphasis-color rides its source fact",
+    "fold-carries-state-delta: [disabled] icon.border-bottom-color rides its source fact",
+    "fold-carries-state-delta: [disabled] icon.border-left-color rides its source fact",
+    "fold-carries-state-delta: [disabled] icon.border-right-color rides its source fact",
+    "fold-carries-state-delta: [disabled] icon.border-top-color rides its source fact",
+    "fold-carries-state-delta: [disabled] icon.caret-color rides its source fact",
+    "fold-carries-state-delta: [disabled] icon.column-rule-color rides its source fact",
+    "fold-carries-state-delta: [disabled] icon.outline-color rides its source fact",
+    "fold-carries-state-delta: [disabled] icon.text-decoration-color rides its source fact",
+    "fold-carries-state-delta: [disabled] icon.text-emphasis-color rides its source fact",
+    "fold-carries-state-delta: [disabled] label.border-bottom-color rides its source fact",
+    "fold-carries-state-delta: [disabled] label.border-left-color rides its source fact",
+    "fold-carries-state-delta: [disabled] label.border-right-color rides its source fact",
+    "fold-carries-state-delta: [disabled] label.border-top-color rides its source fact",
+    "fold-carries-state-delta: [disabled] label.caret-color rides its source fact",
+    "fold-carries-state-delta: [disabled] label.column-rule-color rides its source fact",
+    "fold-carries-state-delta: [disabled] label.outline-color rides its source fact",
+    "fold-carries-state-delta: [disabled] label.text-decoration-color rides its source fact",
+    "fold-carries-state-delta: [disabled] label.text-emphasis-color rides its source fact",
+    "fold-carries-state-delta: [disabled] root.border-bottom-color rides its source fact",
+    "fold-carries-state-delta: [disabled] root.border-left-color rides its source fact",
+    "fold-carries-state-delta: [disabled] root.border-right-color rides its source fact",
+    "fold-carries-state-delta: [disabled] root.border-top-color rides its source fact",
+    "fold-carries-state-delta: [disabled] root.caret-color rides its source fact",
+    "fold-carries-state-delta: [disabled] root.column-rule-color rides its source fact",
+    "fold-carries-state-delta: [disabled] root.text-decoration-color rides its source fact",
+    "fold-carries-state-delta: [disabled] root.text-emphasis-color rides its source fact",
+    "fold-carries-state-delta: [focus-visible] icon-2.border-bottom-color rides its source fact",
+    "fold-carries-state-delta: [focus-visible] icon-2.border-left-color rides its source fact",
+    "fold-carries-state-delta: [focus-visible] icon-2.border-right-color rides its source fact",
+    "fold-carries-state-delta: [focus-visible] icon-2.border-top-color rides its source fact",
+    "fold-carries-state-delta: [focus-visible] icon-2.caret-color rides its source fact",
+    "fold-carries-state-delta: [focus-visible] icon-2.column-rule-color rides its source fact",
+    "fold-carries-state-delta: [focus-visible] icon-2.outline-color rides its source fact",
+    "fold-carries-state-delta: [focus-visible] icon-2.text-decoration-color rides its source fact",
+    "fold-carries-state-delta: [focus-visible] icon-2.text-emphasis-color rides its source fact",
+    "fold-carries-state-delta: [focus-visible] icon.border-bottom-color rides its source fact",
+    "fold-carries-state-delta: [focus-visible] icon.border-left-color rides its source fact",
+    "fold-carries-state-delta: [focus-visible] icon.border-right-color rides its source fact",
+    "fold-carries-state-delta: [focus-visible] icon.border-top-color rides its source fact",
+    "fold-carries-state-delta: [focus-visible] icon.caret-color rides its source fact",
+    "fold-carries-state-delta: [focus-visible] icon.column-rule-color rides its source fact",
+    "fold-carries-state-delta: [focus-visible] icon.outline-color rides its source fact",
+    "fold-carries-state-delta: [focus-visible] icon.text-decoration-color rides its source fact",
+    "fold-carries-state-delta: [focus-visible] icon.text-emphasis-color rides its source fact",
+    "fold-carries-state-delta: [focus-visible] label.border-bottom-color rides its source fact",
+    "fold-carries-state-delta: [focus-visible] label.border-left-color rides its source fact",
+    "fold-carries-state-delta: [focus-visible] label.border-right-color rides its source fact",
+    "fold-carries-state-delta: [focus-visible] label.border-top-color rides its source fact",
+    "fold-carries-state-delta: [focus-visible] label.caret-color rides its source fact",
+    "fold-carries-state-delta: [focus-visible] label.column-rule-color rides its source fact",
+    "fold-carries-state-delta: [focus-visible] label.outline-color rides its source fact",
+    "fold-carries-state-delta: [focus-visible] label.text-decoration-color rides its source fact",
+    "fold-carries-state-delta: [focus-visible] label.text-emphasis-color rides its source fact",
+    "fold-carries-state-delta: [focus-visible] root.border-bottom-color rides its source fact",
+    "fold-carries-state-delta: [focus-visible] root.border-left-color rides its source fact",
+    "fold-carries-state-delta: [focus-visible] root.border-right-color rides its source fact",
+    "fold-carries-state-delta: [focus-visible] root.border-top-color rides its source fact",
+    "fold-carries-state-delta: [focus-visible] root.caret-color rides its source fact",
+    "fold-carries-state-delta: [focus-visible] root.column-rule-color rides its source fact",
+    "fold-carries-state-delta: [focus-visible] root.text-decoration-color rides its source fact",
+    "fold-carries-state-delta: [focus-visible] root.text-emphasis-color rides its source fact",
+    "fold-carries-state-delta: [hover] icon-2.border-bottom-color rides its source fact",
+    "fold-carries-state-delta: [hover] icon-2.border-left-color rides its source fact",
+    "fold-carries-state-delta: [hover] icon-2.border-right-color rides its source fact",
+    "fold-carries-state-delta: [hover] icon-2.border-top-color rides its source fact",
+    "fold-carries-state-delta: [hover] icon-2.caret-color rides its source fact",
+    "fold-carries-state-delta: [hover] icon-2.column-rule-color rides its source fact",
+    "fold-carries-state-delta: [hover] icon-2.outline-color rides its source fact",
+    "fold-carries-state-delta: [hover] icon-2.text-decoration-color rides its source fact",
+    "fold-carries-state-delta: [hover] icon-2.text-emphasis-color rides its source fact",
+    "fold-carries-state-delta: [hover] icon.border-bottom-color rides its source fact",
+    "fold-carries-state-delta: [hover] icon.border-left-color rides its source fact",
+    "fold-carries-state-delta: [hover] icon.border-right-color rides its source fact",
+    "fold-carries-state-delta: [hover] icon.border-top-color rides its source fact",
+    "fold-carries-state-delta: [hover] icon.caret-color rides its source fact",
+    "fold-carries-state-delta: [hover] icon.column-rule-color rides its source fact",
+    "fold-carries-state-delta: [hover] icon.outline-color rides its source fact",
+    "fold-carries-state-delta: [hover] icon.text-decoration-color rides its source fact",
+    "fold-carries-state-delta: [hover] icon.text-emphasis-color rides its source fact",
+    "fold-carries-state-delta: [hover] label.border-bottom-color rides its source fact",
+    "fold-carries-state-delta: [hover] label.border-left-color rides its source fact",
+    "fold-carries-state-delta: [hover] label.border-right-color rides its source fact",
+    "fold-carries-state-delta: [hover] label.border-top-color rides its source fact",
+    "fold-carries-state-delta: [hover] label.caret-color rides its source fact",
+    "fold-carries-state-delta: [hover] label.column-rule-color rides its source fact",
+    "fold-carries-state-delta: [hover] label.outline-color rides its source fact",
+    "fold-carries-state-delta: [hover] label.text-decoration-color rides its source fact",
+    "fold-carries-state-delta: [hover] label.text-emphasis-color rides its source fact",
+    "fold-carries-state-delta: [hover] root.border-bottom-color rides its source fact",
+    "fold-carries-state-delta: [hover] root.border-left-color rides its source fact",
+    "fold-carries-state-delta: [hover] root.border-right-color rides its source fact",
+    "fold-carries-state-delta: [hover] root.border-top-color rides its source fact",
+    "fold-carries-state-delta: [hover] root.caret-color rides its source fact",
+    "fold-carries-state-delta: [hover] root.column-rule-color rides its source fact",
+    "fold-carries-state-delta: [hover] root.text-decoration-color rides its source fact",
+    "fold-carries-state-delta: [hover] root.text-emphasis-color rides its source fact"
+  ],
+  "layout": {
+    "enriched": [
+      {
+        "part": "root",
+        "field": "justify",
+        "value": "center"
+      }
+    ],
+    "contradictions": [],
+    "receipts": [],
+    "_note": "computed flex keywords carried via Part.layout (the schema's own vocabulary); carried-slot contradictions are receipts, never silent overrides"
+  },
+  "declaredFacts": {
+    "_note": "v15 (S4): uniform registry-channel facts carried as Part.declared / Part.declaredStates — first-class contract vocabulary, listed here as the enrichment receipt",
+    "base": [
+      {
+        "part": "root",
+        "channel": "appearance",
+        "value": "none"
+      },
+      {
+        "part": "root",
+        "channel": "border-bottom-style",
+        "value": "none"
+      },
+      {
+        "part": "root",
+        "channel": "border-left-style",
+        "value": "none"
+      },
+      {
+        "part": "root",
+        "channel": "border-right-style",
+        "value": "none"
+      },
+      {
+        "part": "root",
+        "channel": "border-top-style",
+        "value": "none"
+      },
+      {
+        "part": "root",
+        "channel": "cursor",
+        "value": "pointer"
+      },
+      {
+        "part": "root",
+        "channel": "font-feature-settings",
+        "value": "\"calt\" 0"
+      },
+      {
+        "part": "root",
+        "channel": "position",
+        "value": "relative"
+      },
+      {
+        "part": "root",
+        "channel": "text-rendering",
+        "value": "optimizelegibility"
+      },
+      {
+        "part": "root",
+        "channel": "touch-action",
+        "value": "manipulation"
+      },
+      {
+        "part": "root",
+        "channel": "user-select",
+        "value": "none"
+      },
+      {
+        "part": "icon",
+        "channel": "cursor",
+        "value": "pointer"
+      },
+      {
+        "part": "icon",
+        "channel": "text-align",
+        "value": "center"
+      },
+      {
+        "part": "icon",
+        "channel": "user-select",
+        "value": "none"
+      },
+      {
+        "part": "icon-2",
+        "channel": "cursor",
+        "value": "pointer"
+      },
+      {
+        "part": "icon-2",
+        "channel": "max-height",
+        "value": "100%"
+      },
+      {
+        "part": "icon-2",
+        "channel": "max-width",
+        "value": "100%"
+      },
+      {
+        "part": "icon-2",
+        "channel": "text-align",
+        "value": "center"
+      },
+      {
+        "part": "icon-2",
+        "channel": "user-select",
+        "value": "none"
+      },
+      {
+        "part": "label",
+        "channel": "cursor",
+        "value": "pointer"
+      },
+      {
+        "part": "label",
+        "channel": "text-align",
+        "value": "center"
+      },
+      {
+        "part": "label",
+        "channel": "user-select",
+        "value": "none"
+      }
+    ],
+    "state": [
+      {
+        "state": "disabled",
+        "part": "label",
+        "channel": "pointer-events",
+        "value": "none"
+      },
+      {
+        "state": "disabled",
+        "part": "root",
+        "channel": "pointer-events",
+        "value": "none"
+      },
+      {
+        "state": "focus-visible",
+        "part": "root",
+        "channel": "outline-style",
+        "value": "solid"
+      }
+    ]
+  },
+  "codeOnlyChannels": [
+    {
+      "part": "root",
+      "channel": "background-attachment",
+      "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
+      "sample": "scroll",
+      "distinctValues": 2
+    },
+    {
+      "part": "root",
+      "channel": "background-blend-mode",
+      "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
+      "sample": "normal",
+      "distinctValues": 2
+    },
+    {
+      "part": "root",
+      "channel": "background-clip",
+      "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
+      "sample": "border-box",
+      "distinctValues": 2
+    },
+    {
+      "part": "root",
+      "channel": "background-origin",
+      "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
+      "sample": "padding-box",
+      "distinctValues": 2
+    },
+    {
+      "part": "root",
+      "channel": "background-position",
+      "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
+      "sample": "0% 0%",
+      "distinctValues": 2
+    },
+    {
+      "part": "root",
+      "channel": "background-repeat",
+      "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
+      "sample": "repeat",
+      "distinctValues": 2
+    },
+    {
+      "part": "root",
+      "channel": "background-size",
+      "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
+      "sample": "auto",
+      "distinctValues": 2
+    }
+  ],
+  "stateOverflow": [
+    {
+      "state": "active",
+      "part": "icon-2",
+      "channel": "color",
+      "sample": "rgba(0, 46, 106, 1)",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    },
+    {
+      "state": "active",
+      "part": "icon-2",
+      "channel": "fill",
+      "sample": "rgba(0, 46, 106, 1)",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    },
+    {
+      "state": "active",
+      "part": "icon",
+      "channel": "color",
+      "sample": "rgba(0, 46, 106, 1)",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    },
+    {
+      "state": "active",
+      "part": "icon",
+      "channel": "fill",
+      "sample": "rgba(0, 46, 106, 1)",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    },
+    {
+      "state": "active",
+      "part": "icon",
+      "channel": "transform",
+      "sample": "matrix(1, 0, 0, 1, 0, 1)",
+      "reason": "value shape outside mintable kinds and outside the declared vocabulary"
+    },
+    {
+      "state": "active",
+      "part": "label",
+      "channel": "transform",
+      "sample": "matrix(1, 0, 0, 1, 0, 1)",
+      "reason": "value shape outside mintable kinds and outside the declared vocabulary"
+    },
+    {
+      "state": "active",
+      "part": "root",
+      "channel": "text-decoration",
+      "sample": "underline",
+      "reason": "value shape outside mintable kinds and outside the declared vocabulary"
+    },
+    {
+      "state": "active",
+      "part": "root",
+      "channel": "text-decoration-line",
+      "sample": "underline",
+      "reason": "declared-channel state delta on 24/120 combos — partial coverage cannot carry as a state selector (v15); named residue"
+    },
+    {
+      "state": "disabled",
+      "part": "icon-2",
+      "channel": "color",
+      "sample": "rgba(181, 181, 181, 1)",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    },
+    {
+      "state": "disabled",
+      "part": "icon-2",
+      "channel": "pointer-events",
+      "sample": "none",
+      "reason": "declared-channel state delta on 60/120 combos — partial coverage cannot carry as a state selector (v15); named residue"
+    },
+    {
+      "state": "disabled",
+      "part": "icon",
+      "channel": "color",
+      "sample": "rgba(181, 181, 181, 1)",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    },
+    {
+      "state": "disabled",
+      "part": "icon",
+      "channel": "pointer-events",
+      "sample": "none",
+      "reason": "declared-channel state delta on 60/120 combos — partial coverage cannot carry as a state selector (v15); named residue"
+    },
+    {
+      "state": "disabled",
+      "part": "root",
+      "channel": "background-attachment",
+      "sample": "scroll",
+      "reason": "declared-channel state delta on 8/120 combos — partial coverage cannot carry as a state selector (v15); named residue"
+    },
+    {
+      "state": "disabled",
+      "part": "root",
+      "channel": "background-blend-mode",
+      "sample": "normal",
+      "reason": "declared-channel state delta on 8/120 combos — partial coverage cannot carry as a state selector (v15); named residue"
+    },
+    {
+      "state": "disabled",
+      "part": "root",
+      "channel": "background-clip",
+      "sample": "border-box",
+      "reason": "declared-channel state delta on 8/120 combos — partial coverage cannot carry as a state selector (v15); named residue"
+    },
+    {
+      "state": "disabled",
+      "part": "root",
+      "channel": "background-origin",
+      "sample": "padding-box",
+      "reason": "declared-channel state delta on 8/120 combos — partial coverage cannot carry as a state selector (v15); named residue"
+    },
+    {
+      "state": "disabled",
+      "part": "root",
+      "channel": "background-position",
+      "sample": "0% 0%",
+      "reason": "declared-channel state delta on 8/120 combos — partial coverage cannot carry as a state selector (v15); named residue"
+    },
+    {
+      "state": "disabled",
+      "part": "root",
+      "channel": "background-repeat",
+      "sample": "repeat",
+      "reason": "declared-channel state delta on 8/120 combos — partial coverage cannot carry as a state selector (v15); named residue"
+    },
+    {
+      "state": "disabled",
+      "part": "root",
+      "channel": "background-size",
+      "sample": "auto",
+      "reason": "declared-channel state delta on 8/120 combos — partial coverage cannot carry as a state selector (v15); named residue"
+    },
+    {
+      "state": "focus-visible",
+      "part": "icon-2",
+      "channel": "color",
+      "sample": "rgba(0, 66, 153, 1)",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    },
+    {
+      "state": "focus-visible",
+      "part": "icon",
+      "channel": "color",
+      "sample": "rgba(0, 66, 153, 1)",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    },
+    {
+      "state": "focus-visible",
+      "part": "root",
+      "channel": "text-decoration",
+      "sample": "underline",
+      "reason": "value shape outside mintable kinds and outside the declared vocabulary"
+    },
+    {
+      "state": "focus-visible",
+      "part": "root",
+      "channel": "text-decoration-line",
+      "sample": "underline",
+      "reason": "declared-channel state delta on 24/120 combos — partial coverage cannot carry as a state selector (v15); named residue"
+    },
+    {
+      "state": "hover",
+      "part": "icon-2",
+      "channel": "color",
+      "sample": "rgba(0, 66, 153, 1)",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    },
+    {
+      "state": "hover",
+      "part": "icon",
+      "channel": "color",
+      "sample": "rgba(0, 66, 153, 1)",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    },
+    {
+      "state": "hover",
+      "part": "root",
+      "channel": "text-decoration",
+      "sample": "underline",
+      "reason": "value shape outside mintable kinds and outside the declared vocabulary"
+    },
+    {
+      "state": "hover",
+      "part": "root",
+      "channel": "text-decoration-line",
+      "sample": "underline",
+      "reason": "declared-channel state delta on 24/120 combos — partial coverage cannot carry as a state selector (v15); named residue"
+    }
+  ],
+  "overflowBindings": [
+    {
+      "part": "icon",
+      "channel": "color",
+      "refusal": "resolved values differ across variants without correlating to any variant axis — nothing minted; bind manually"
+    },
+    {
+      "part": "icon-2",
+      "channel": "color",
+      "refusal": "resolved values differ across variants without correlating to any variant axis — nothing minted; bind manually"
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "refusal": "resolved values differ across variants without correlating to any variant axis — nothing minted; bind manually"
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "state": "active",
+      "refusal": "resolved values differ across variants without correlating to any variant axis — nothing minted; bind manually"
+    },
+    {
+      "part": "label",
+      "channel": "fill",
+      "state": "active",
+      "refusal": "resolved values differ across variants without correlating to any variant axis — nothing minted; bind manually"
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "state": "active",
+      "ref": "{imported.button.root.background-color-state-active.{variant}.{tone}}",
+      "refusal": "state×tone set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)"
+    },
+    {
+      "part": "root",
+      "channel": "box-shadow",
+      "state": "active",
+      "ref": "{imported.button.root.box-shadow-state-active.{variant}.{tone}}",
+      "refusal": "state×tone set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)"
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "state": "active",
+      "ref": "{imported.button.root.color-state-active.{variant}.{tone}}",
+      "refusal": "state×tone set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)"
+    },
+    {
+      "part": "root",
+      "channel": "fill",
+      "state": "active",
+      "ref": "{imported.button.root.fill-state-active.{variant}.{tone}}",
+      "refusal": "state×tone set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)"
+    },
+    {
+      "part": "root",
+      "channel": "outline-color",
+      "state": "active",
+      "ref": "{imported.button.root.outline-color-state-active.{variant}.{tone}}",
+      "refusal": "state×tone set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)"
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "state": "disabled",
+      "ref": "{imported.button.label.color-state-disabled.{variant}}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "state": "focus-visible",
+      "refusal": "resolved values differ across variants without correlating to any variant axis — nothing minted; bind manually"
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "state": "focus-visible",
+      "ref": "{imported.button.root.background-color-state-focus-visible.{variant}.{tone}}",
+      "refusal": "state×tone set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)"
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "state": "focus-visible",
+      "ref": "{imported.button.root.color-state-focus-visible.{variant}.{tone}}",
+      "refusal": "state×tone set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)"
+    },
+    {
+      "part": "root",
+      "channel": "outline-offset",
+      "state": "focus-visible",
+      "ref": "{imported.button.root.outline-offset-state-focus-visible.{variant}.{size}}",
+      "refusal": "state pair ref — root states carry ≤1 placeholder (S3 residue)"
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "state": "hover",
+      "refusal": "resolved values differ across variants without correlating to any variant axis — nothing minted; bind manually"
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "state": "hover",
+      "ref": "{imported.button.root.background-color-state-hover.{variant}.{tone}}",
+      "refusal": "state×tone set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)"
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "state": "hover",
+      "ref": "{imported.button.root.color-state-hover.{variant}.{tone}}",
+      "refusal": "state×tone set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)"
+    },
+    {
+      "part": "root",
+      "channel": "outline-color",
+      "state": "hover",
+      "ref": "{imported.button.root.outline-color-state-hover.{variant}.{tone}}",
+      "refusal": "state×tone set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)"
+    }
+  ],
+  "pairwiseRefusals": [],
+  "pseudoParts": {
+    "_reason": "S5 (DESIGN §5.4): pseudo-element decor has no anatomy spelling — captured, receipted, not carried",
+    "findings": [],
+    "totalFindings": 0
+  },
+  "bindingContradictions": [
+    {
+      "combo": "plain.none.slim.off.enabled",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{p.text-body-sm-font-size}",
+      "computedProp": "font-size",
+      "expected": "12px",
+      "observed": "13px",
+      "verdict": "contradiction",
+      "cause": "composition-owned typography: the plain/monochromePlain variants render their label through the Text primitive at bodyMd (13px/20px); the carried binding is the bodySm default — child-component props conditioned on the parent variant, invisible to single-file static promotion"
+    },
+    {
+      "combo": "plain.none.slim.off.enabled",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{p.text-body-sm-font-line-height}",
+      "computedProp": "line-height",
+      "expected": "16px",
+      "observed": "20px",
+      "verdict": "contradiction",
+      "cause": "composition-owned typography: the plain/monochromePlain variants render their label through the Text primitive at bodyMd (13px/20px); the carried binding is the bodySm default — child-component props conditioned on the parent variant, invisible to single-file static promotion"
+    },
+    {
+      "combo": "plain.none.slim.on.enabled",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{p.text-body-sm-font-size}",
+      "computedProp": "font-size",
+      "expected": "12px",
+      "observed": "13px",
+      "verdict": "contradiction",
+      "cause": "composition-owned typography: the plain/monochromePlain variants render their label through the Text primitive at bodyMd (13px/20px); the carried binding is the bodySm default — child-component props conditioned on the parent variant, invisible to single-file static promotion"
+    },
+    {
+      "combo": "plain.none.slim.on.enabled",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{p.text-body-sm-font-line-height}",
+      "computedProp": "line-height",
+      "expected": "16px",
+      "observed": "20px",
+      "verdict": "contradiction",
+      "cause": "composition-owned typography: the plain/monochromePlain variants render their label through the Text primitive at bodyMd (13px/20px); the carried binding is the bodySm default — child-component props conditioned on the parent variant, invisible to single-file static promotion"
+    },
+    {
+      "combo": "plain.none.medium.off.enabled",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{p.text-body-sm-font-size}",
+      "computedProp": "font-size",
+      "expected": "12px",
+      "observed": "13px",
+      "verdict": "contradiction",
+      "cause": "composition-owned typography: the plain/monochromePlain variants render their label through the Text primitive at bodyMd (13px/20px); the carried binding is the bodySm default — child-component props conditioned on the parent variant, invisible to single-file static promotion"
+    },
+    {
+      "combo": "plain.none.medium.off.enabled",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{p.text-body-sm-font-line-height}",
+      "computedProp": "line-height",
+      "expected": "16px",
+      "observed": "20px",
+      "verdict": "contradiction",
+      "cause": "composition-owned typography: the plain/monochromePlain variants render their label through the Text primitive at bodyMd (13px/20px); the carried binding is the bodySm default — child-component props conditioned on the parent variant, invisible to single-file static promotion"
+    },
+    {
+      "combo": "plain.none.medium.on.enabled",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{p.text-body-sm-font-size}",
+      "computedProp": "font-size",
+      "expected": "12px",
+      "observed": "13px",
+      "verdict": "contradiction",
+      "cause": "composition-owned typography: the plain/monochromePlain variants render their label through the Text primitive at bodyMd (13px/20px); the carried binding is the bodySm default — child-component props conditioned on the parent variant, invisible to single-file static promotion"
+    },
+    {
+      "combo": "plain.none.medium.on.enabled",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{p.text-body-sm-font-line-height}",
+      "computedProp": "line-height",
+      "expected": "16px",
+      "observed": "20px",
+      "verdict": "contradiction",
+      "cause": "composition-owned typography: the plain/monochromePlain variants render their label through the Text primitive at bodyMd (13px/20px); the carried binding is the bodySm default — child-component props conditioned on the parent variant, invisible to single-file static promotion"
+    },
+    {
+      "combo": "plain.critical.micro.off.enabled",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text-link}",
+      "computedProp": "color",
+      "expected": "rgba(0, 91, 211, 1)",
+      "observed": "rgba(142, 11, 33, 1)",
+      "verdict": "contradiction",
+      "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+    },
+    {
+      "combo": "plain.critical.micro.on.enabled",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text-link}",
+      "computedProp": "color",
+      "expected": "rgba(0, 91, 211, 1)",
+      "observed": "rgba(142, 11, 33, 1)",
+      "verdict": "contradiction",
+      "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+    },
+    {
+      "combo": "plain.critical.slim.off.enabled",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text-link}",
+      "computedProp": "color",
+      "expected": "rgba(0, 91, 211, 1)",
+      "observed": "rgba(142, 11, 33, 1)",
+      "verdict": "contradiction",
+      "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+    },
+    {
+      "combo": "plain.critical.slim.off.enabled",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{p.text-body-sm-font-size}",
+      "computedProp": "font-size",
+      "expected": "12px",
+      "observed": "13px",
+      "verdict": "contradiction",
+      "cause": "composition-owned typography: the plain/monochromePlain variants render their label through the Text primitive at bodyMd (13px/20px); the carried binding is the bodySm default — child-component props conditioned on the parent variant, invisible to single-file static promotion"
+    },
+    {
+      "combo": "plain.critical.slim.off.enabled",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{p.text-body-sm-font-line-height}",
+      "computedProp": "line-height",
+      "expected": "16px",
+      "observed": "20px",
+      "verdict": "contradiction",
+      "cause": "composition-owned typography: the plain/monochromePlain variants render their label through the Text primitive at bodyMd (13px/20px); the carried binding is the bodySm default — child-component props conditioned on the parent variant, invisible to single-file static promotion"
+    },
+    {
+      "combo": "plain.critical.slim.on.enabled",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text-link}",
+      "computedProp": "color",
+      "expected": "rgba(0, 91, 211, 1)",
+      "observed": "rgba(142, 11, 33, 1)",
+      "verdict": "contradiction",
+      "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+    },
+    {
+      "combo": "plain.critical.slim.on.enabled",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{p.text-body-sm-font-size}",
+      "computedProp": "font-size",
+      "expected": "12px",
+      "observed": "13px",
+      "verdict": "contradiction",
+      "cause": "composition-owned typography: the plain/monochromePlain variants render their label through the Text primitive at bodyMd (13px/20px); the carried binding is the bodySm default — child-component props conditioned on the parent variant, invisible to single-file static promotion"
+    },
+    {
+      "combo": "plain.critical.slim.on.enabled",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{p.text-body-sm-font-line-height}",
+      "computedProp": "line-height",
+      "expected": "16px",
+      "observed": "20px",
+      "verdict": "contradiction",
+      "cause": "composition-owned typography: the plain/monochromePlain variants render their label through the Text primitive at bodyMd (13px/20px); the carried binding is the bodySm default — child-component props conditioned on the parent variant, invisible to single-file static promotion"
+    },
+    {
+      "combo": "plain.critical.medium.off.enabled",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text-link}",
+      "computedProp": "color",
+      "expected": "rgba(0, 91, 211, 1)",
+      "observed": "rgba(142, 11, 33, 1)",
+      "verdict": "contradiction",
+      "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+    },
+    {
+      "combo": "plain.critical.medium.off.enabled",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{p.text-body-sm-font-size}",
+      "computedProp": "font-size",
+      "expected": "12px",
+      "observed": "13px",
+      "verdict": "contradiction",
+      "cause": "composition-owned typography: the plain/monochromePlain variants render their label through the Text primitive at bodyMd (13px/20px); the carried binding is the bodySm default — child-component props conditioned on the parent variant, invisible to single-file static promotion"
+    },
+    {
+      "combo": "plain.critical.medium.off.enabled",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{p.text-body-sm-font-line-height}",
+      "computedProp": "line-height",
+      "expected": "16px",
+      "observed": "20px",
+      "verdict": "contradiction",
+      "cause": "composition-owned typography: the plain/monochromePlain variants render their label through the Text primitive at bodyMd (13px/20px); the carried binding is the bodySm default — child-component props conditioned on the parent variant, invisible to single-file static promotion"
+    },
+    {
+      "combo": "plain.critical.medium.on.enabled",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text-link}",
+      "computedProp": "color",
+      "expected": "rgba(0, 91, 211, 1)",
+      "observed": "rgba(142, 11, 33, 1)",
+      "verdict": "contradiction",
+      "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+    },
+    {
+      "combo": "plain.critical.medium.on.enabled",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{p.text-body-sm-font-size}",
+      "computedProp": "font-size",
+      "expected": "12px",
+      "observed": "13px",
+      "verdict": "contradiction",
+      "cause": "composition-owned typography: the plain/monochromePlain variants render their label through the Text primitive at bodyMd (13px/20px); the carried binding is the bodySm default — child-component props conditioned on the parent variant, invisible to single-file static promotion"
+    },
+    {
+      "combo": "plain.critical.medium.on.enabled",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{p.text-body-sm-font-line-height}",
+      "computedProp": "line-height",
+      "expected": "16px",
+      "observed": "20px",
+      "verdict": "contradiction",
+      "cause": "composition-owned typography: the plain/monochromePlain variants render their label through the Text primitive at bodyMd (13px/20px); the carried binding is the bodySm default — child-component props conditioned on the parent variant, invisible to single-file static promotion"
+    },
+    {
+      "combo": "plain.critical.large.off.enabled",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text-link}",
+      "computedProp": "color",
+      "expected": "rgba(0, 91, 211, 1)",
+      "observed": "rgba(142, 11, 33, 1)",
+      "verdict": "contradiction",
+      "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+    },
+    {
+      "combo": "plain.critical.large.on.enabled",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text-link}",
+      "computedProp": "color",
+      "expected": "rgba(0, 91, 211, 1)",
+      "observed": "rgba(142, 11, 33, 1)",
+      "verdict": "contradiction",
+      "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+    },
+    {
+      "combo": "plain.success.micro.off.enabled",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text-link}",
+      "computedProp": "color",
+      "expected": "rgba(0, 91, 211, 1)",
+      "observed": "rgba(1, 75, 64, 1)",
+      "verdict": "contradiction",
+      "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+    },
+    {
+      "combo": "plain.success.micro.on.enabled",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text-link}",
+      "computedProp": "color",
+      "expected": "rgba(0, 91, 211, 1)",
+      "observed": "rgba(1, 75, 64, 1)",
+      "verdict": "contradiction",
+      "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+    },
+    {
+      "combo": "plain.success.slim.off.enabled",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text-link}",
+      "computedProp": "color",
+      "expected": "rgba(0, 91, 211, 1)",
+      "observed": "rgba(1, 75, 64, 1)",
+      "verdict": "contradiction",
+      "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+    },
+    {
+      "combo": "plain.success.slim.off.enabled",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{p.text-body-sm-font-size}",
+      "computedProp": "font-size",
+      "expected": "12px",
+      "observed": "13px",
+      "verdict": "contradiction",
+      "cause": "composition-owned typography: the plain/monochromePlain variants render their label through the Text primitive at bodyMd (13px/20px); the carried binding is the bodySm default — child-component props conditioned on the parent variant, invisible to single-file static promotion"
+    },
+    {
+      "combo": "plain.success.slim.off.enabled",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{p.text-body-sm-font-line-height}",
+      "computedProp": "line-height",
+      "expected": "16px",
+      "observed": "20px",
+      "verdict": "contradiction",
+      "cause": "composition-owned typography: the plain/monochromePlain variants render their label through the Text primitive at bodyMd (13px/20px); the carried binding is the bodySm default — child-component props conditioned on the parent variant, invisible to single-file static promotion"
+    },
+    {
+      "combo": "plain.success.slim.on.enabled",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text-link}",
+      "computedProp": "color",
+      "expected": "rgba(0, 91, 211, 1)",
+      "observed": "rgba(1, 75, 64, 1)",
+      "verdict": "contradiction",
+      "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+    },
+    {
+      "combo": "plain.success.slim.on.enabled",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{p.text-body-sm-font-size}",
+      "computedProp": "font-size",
+      "expected": "12px",
+      "observed": "13px",
+      "verdict": "contradiction",
+      "cause": "composition-owned typography: the plain/monochromePlain variants render their label through the Text primitive at bodyMd (13px/20px); the carried binding is the bodySm default — child-component props conditioned on the parent variant, invisible to single-file static promotion"
+    },
+    {
+      "combo": "plain.success.slim.on.enabled",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{p.text-body-sm-font-line-height}",
+      "computedProp": "line-height",
+      "expected": "16px",
+      "observed": "20px",
+      "verdict": "contradiction",
+      "cause": "composition-owned typography: the plain/monochromePlain variants render their label through the Text primitive at bodyMd (13px/20px); the carried binding is the bodySm default — child-component props conditioned on the parent variant, invisible to single-file static promotion"
+    },
+    {
+      "combo": "plain.success.medium.off.enabled",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text-link}",
+      "computedProp": "color",
+      "expected": "rgba(0, 91, 211, 1)",
+      "observed": "rgba(1, 75, 64, 1)",
+      "verdict": "contradiction",
+      "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+    },
+    {
+      "combo": "plain.success.medium.off.enabled",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{p.text-body-sm-font-size}",
+      "computedProp": "font-size",
+      "expected": "12px",
+      "observed": "13px",
+      "verdict": "contradiction",
+      "cause": "composition-owned typography: the plain/monochromePlain variants render their label through the Text primitive at bodyMd (13px/20px); the carried binding is the bodySm default — child-component props conditioned on the parent variant, invisible to single-file static promotion"
+    },
+    {
+      "combo": "plain.success.medium.off.enabled",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{p.text-body-sm-font-line-height}",
+      "computedProp": "line-height",
+      "expected": "16px",
+      "observed": "20px",
+      "verdict": "contradiction",
+      "cause": "composition-owned typography: the plain/monochromePlain variants render their label through the Text primitive at bodyMd (13px/20px); the carried binding is the bodySm default — child-component props conditioned on the parent variant, invisible to single-file static promotion"
+    },
+    {
+      "combo": "plain.success.medium.on.enabled",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text-link}",
+      "computedProp": "color",
+      "expected": "rgba(0, 91, 211, 1)",
+      "observed": "rgba(1, 75, 64, 1)",
+      "verdict": "contradiction",
+      "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+    },
+    {
+      "combo": "plain.success.medium.on.enabled",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{p.text-body-sm-font-size}",
+      "computedProp": "font-size",
+      "expected": "12px",
+      "observed": "13px",
+      "verdict": "contradiction",
+      "cause": "composition-owned typography: the plain/monochromePlain variants render their label through the Text primitive at bodyMd (13px/20px); the carried binding is the bodySm default — child-component props conditioned on the parent variant, invisible to single-file static promotion"
+    },
+    {
+      "combo": "plain.success.medium.on.enabled",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{p.text-body-sm-font-line-height}",
+      "computedProp": "line-height",
+      "expected": "16px",
+      "observed": "20px",
+      "verdict": "contradiction",
+      "cause": "composition-owned typography: the plain/monochromePlain variants render their label through the Text primitive at bodyMd (13px/20px); the carried binding is the bodySm default — child-component props conditioned on the parent variant, invisible to single-file static promotion"
+    },
+    {
+      "combo": "plain.success.large.off.enabled",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text-link}",
+      "computedProp": "color",
+      "expected": "rgba(0, 91, 211, 1)",
+      "observed": "rgba(1, 75, 64, 1)",
+      "verdict": "contradiction",
+      "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+    },
+    {
+      "combo": "plain.success.large.on.enabled",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text-link}",
+      "computedProp": "color",
+      "expected": "rgba(0, 91, 211, 1)",
+      "observed": "rgba(1, 75, 64, 1)",
+      "verdict": "contradiction",
+      "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+    },
+    {
+      "combo": "primary.none.micro.off.enabled",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{p.font-weight-medium}",
+      "computedProp": "font-weight",
+      "expected": "550",
+      "observed": "650",
+      "verdict": "contradiction",
+      "cause": "composition-owned typography: the primary variant label renders Text fontWeight 650 (semibold); the carried binding is font-weight-medium (550) — same composition-owned class"
+    },
+    {
+      "combo": "primary.none.micro.on.enabled",
+      "part": "root",
+      "channel": "padding-inline",
+      "ref": "{p.space-200}",
+      "computedProp": "padding-left",
+      "expected": "8px",
+      "observed": "4px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "primary.none.micro.on.enabled",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{p.font-weight-medium}",
+      "computedProp": "font-weight",
+      "expected": "550",
+      "observed": "650",
+      "verdict": "contradiction",
+      "cause": "composition-owned typography: the primary variant label renders Text fontWeight 650 (semibold); the carried binding is font-weight-medium (550) — same composition-owned class"
+    },
+    {
+      "combo": "primary.none.slim.off.enabled",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{p.font-weight-medium}",
+      "computedProp": "font-weight",
+      "expected": "550",
+      "observed": "650",
+      "verdict": "contradiction",
+      "cause": "composition-owned typography: the primary variant label renders Text fontWeight 650 (semibold); the carried binding is font-weight-medium (550) — same composition-owned class"
+    },
+    {
+      "combo": "primary.none.slim.on.enabled",
+      "part": "root",
+      "channel": "padding-inline",
+      "ref": "{p.space-300}",
+      "computedProp": "padding-left",
+      "expected": "12px",
+      "observed": "6px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "primary.none.slim.on.enabled",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{p.font-weight-medium}",
+      "computedProp": "font-weight",
+      "expected": "550",
+      "observed": "650",
+      "verdict": "contradiction",
+      "cause": "composition-owned typography: the primary variant label renders Text fontWeight 650 (semibold); the carried binding is font-weight-medium (550) — same composition-owned class"
+    },
+    {
+      "combo": "primary.none.medium.off.enabled",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{p.font-weight-medium}",
+      "computedProp": "font-weight",
+      "expected": "550",
+      "observed": "650",
+      "verdict": "contradiction",
+      "cause": "composition-owned typography: the primary variant label renders Text fontWeight 650 (semibold); the carried binding is font-weight-medium (550) — same composition-owned class"
+    },
+    {
+      "combo": "primary.none.medium.on.enabled",
+      "part": "root",
+      "channel": "padding-inline",
+      "ref": "{p.space-300}",
+      "computedProp": "padding-left",
+      "expected": "12px",
+      "observed": "6px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "primary.none.medium.on.enabled",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{p.font-weight-medium}",
+      "computedProp": "font-weight",
+      "expected": "550",
+      "observed": "650",
+      "verdict": "contradiction",
+      "cause": "composition-owned typography: the primary variant label renders Text fontWeight 650 (semibold); the carried binding is font-weight-medium (550) — same composition-owned class"
+    },
+    {
+      "combo": "primary.none.large.off.enabled",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{p.font-weight-medium}",
+      "computedProp": "font-weight",
+      "expected": "550",
+      "observed": "650",
+      "verdict": "contradiction",
+      "cause": "composition-owned typography: the primary variant label renders Text fontWeight 650 (semibold); the carried binding is font-weight-medium (550) — same composition-owned class"
+    },
+    {
+      "combo": "primary.none.large.on.enabled",
+      "part": "root",
+      "channel": "padding-inline",
+      "ref": "{p.space-300}",
+      "computedProp": "padding-left",
+      "expected": "12px",
+      "observed": "6px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "primary.none.large.on.enabled",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{p.font-weight-medium}",
+      "computedProp": "font-weight",
+      "expected": "550",
+      "observed": "650",
+      "verdict": "contradiction",
+      "cause": "composition-owned typography: the primary variant label renders Text fontWeight 650 (semibold); the carried binding is font-weight-medium (550) — same composition-owned class"
+    },
+    {
+      "combo": "primary.critical.micro.off.enabled",
+      "part": "root",
+      "channel": "background-color",
+      "ref": "{p.color-bg-fill-brand}",
+      "computedProp": "background-color",
+      "expected": "rgba(48, 48, 48, 1)",
+      "observed": "rgba(199, 10, 36, 1)",
+      "verdict": "contradiction",
+      "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+    },
+    {
+      "combo": "primary.critical.micro.off.enabled",
+      "part": "root",
+      "channel": "box-shadow",
+      "ref": "{p.shadow-button-primary}",
+      "computedProp": "box-shadow",
+      "expected": "rgba(0, 0, 0, 0.8) 0px -1px 0px 1px inset, rgba(48, 48, 48, 1) 0px 0px 0px 1px inset, rgba(255, 255, 255, 0.25) 0px 0.5px 0px 1.5px inset",
+      "observed": "rgba(142, 31, 11, 0.8) 0px -1px 0px 1px inset, rgba(181, 38, 11, 0.8) 0px 0px 0px 1px inset, rgba(255, 255, 255, 0.35) 0px 0.5px 0px 1.5px inset",
+      "verdict": "contradiction",
+      "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+    },
+    {
+      "combo": "primary.critical.micro.off.enabled",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{p.font-weight-medium}",
+      "computedProp": "font-weight",
+      "expected": "550",
+      "observed": "650",
+      "verdict": "contradiction",
+      "cause": "composition-owned typography: the primary variant label renders Text fontWeight 650 (semibold); the carried binding is font-weight-medium (550) — same composition-owned class"
+    },
+    {
+      "combo": "primary.critical.micro.on.enabled",
+      "part": "root",
+      "channel": "background-color",
+      "ref": "{p.color-bg-fill-brand}",
+      "computedProp": "background-color",
+      "expected": "rgba(48, 48, 48, 1)",
+      "observed": "rgba(199, 10, 36, 1)",
+      "verdict": "contradiction",
+      "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+    },
+    {
+      "combo": "primary.critical.micro.on.enabled",
+      "part": "root",
+      "channel": "box-shadow",
+      "ref": "{p.shadow-button-primary}",
+      "computedProp": "box-shadow",
+      "expected": "rgba(0, 0, 0, 0.8) 0px -1px 0px 1px inset, rgba(48, 48, 48, 1) 0px 0px 0px 1px inset, rgba(255, 255, 255, 0.25) 0px 0.5px 0px 1.5px inset",
+      "observed": "rgba(142, 31, 11, 0.8) 0px -1px 0px 1px inset, rgba(181, 38, 11, 0.8) 0px 0px 0px 1px inset, rgba(255, 255, 255, 0.35) 0px 0.5px 0px 1.5px inset",
+      "verdict": "contradiction",
+      "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+    },
+    {
+      "combo": "primary.critical.micro.on.enabled",
+      "part": "root",
+      "channel": "padding-inline",
+      "ref": "{p.space-200}",
+      "computedProp": "padding-left",
+      "expected": "8px",
+      "observed": "4px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "primary.critical.micro.on.enabled",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{p.font-weight-medium}",
+      "computedProp": "font-weight",
+      "expected": "550",
+      "observed": "650",
+      "verdict": "contradiction",
+      "cause": "composition-owned typography: the primary variant label renders Text fontWeight 650 (semibold); the carried binding is font-weight-medium (550) — same composition-owned class"
+    },
+    {
+      "combo": "primary.critical.slim.off.enabled",
+      "part": "root",
+      "channel": "background-color",
+      "ref": "{p.color-bg-fill-brand}",
+      "computedProp": "background-color",
+      "expected": "rgba(48, 48, 48, 1)",
+      "observed": "rgba(199, 10, 36, 1)",
+      "verdict": "contradiction",
+      "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+    },
+    {
+      "combo": "primary.critical.slim.off.enabled",
+      "part": "root",
+      "channel": "box-shadow",
+      "ref": "{p.shadow-button-primary}",
+      "computedProp": "box-shadow",
+      "expected": "rgba(0, 0, 0, 0.8) 0px -1px 0px 1px inset, rgba(48, 48, 48, 1) 0px 0px 0px 1px inset, rgba(255, 255, 255, 0.25) 0px 0.5px 0px 1.5px inset",
+      "observed": "rgba(142, 31, 11, 0.8) 0px -1px 0px 1px inset, rgba(181, 38, 11, 0.8) 0px 0px 0px 1px inset, rgba(255, 255, 255, 0.35) 0px 0.5px 0px 1.5px inset",
+      "verdict": "contradiction",
+      "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+    },
+    {
+      "combo": "primary.critical.slim.off.enabled",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{p.font-weight-medium}",
+      "computedProp": "font-weight",
+      "expected": "550",
+      "observed": "650",
+      "verdict": "contradiction",
+      "cause": "composition-owned typography: the primary variant label renders Text fontWeight 650 (semibold); the carried binding is font-weight-medium (550) — same composition-owned class"
+    },
+    {
+      "combo": "primary.critical.slim.on.enabled",
+      "part": "root",
+      "channel": "background-color",
+      "ref": "{p.color-bg-fill-brand}",
+      "computedProp": "background-color",
+      "expected": "rgba(48, 48, 48, 1)",
+      "observed": "rgba(199, 10, 36, 1)",
+      "verdict": "contradiction",
+      "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+    },
+    {
+      "combo": "primary.critical.slim.on.enabled",
+      "part": "root",
+      "channel": "box-shadow",
+      "ref": "{p.shadow-button-primary}",
+      "computedProp": "box-shadow",
+      "expected": "rgba(0, 0, 0, 0.8) 0px -1px 0px 1px inset, rgba(48, 48, 48, 1) 0px 0px 0px 1px inset, rgba(255, 255, 255, 0.25) 0px 0.5px 0px 1.5px inset",
+      "observed": "rgba(142, 31, 11, 0.8) 0px -1px 0px 1px inset, rgba(181, 38, 11, 0.8) 0px 0px 0px 1px inset, rgba(255, 255, 255, 0.35) 0px 0.5px 0px 1.5px inset",
+      "verdict": "contradiction",
+      "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+    },
+    {
+      "combo": "primary.critical.slim.on.enabled",
+      "part": "root",
+      "channel": "padding-inline",
+      "ref": "{p.space-300}",
+      "computedProp": "padding-left",
+      "expected": "12px",
+      "observed": "6px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "primary.critical.slim.on.enabled",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{p.font-weight-medium}",
+      "computedProp": "font-weight",
+      "expected": "550",
+      "observed": "650",
+      "verdict": "contradiction",
+      "cause": "composition-owned typography: the primary variant label renders Text fontWeight 650 (semibold); the carried binding is font-weight-medium (550) — same composition-owned class"
+    },
+    {
+      "combo": "primary.critical.medium.off.enabled",
+      "part": "root",
+      "channel": "background-color",
+      "ref": "{p.color-bg-fill-brand}",
+      "computedProp": "background-color",
+      "expected": "rgba(48, 48, 48, 1)",
+      "observed": "rgba(199, 10, 36, 1)",
+      "verdict": "contradiction",
+      "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+    },
+    {
+      "combo": "primary.critical.medium.off.enabled",
+      "part": "root",
+      "channel": "box-shadow",
+      "ref": "{p.shadow-button-primary}",
+      "computedProp": "box-shadow",
+      "expected": "rgba(0, 0, 0, 0.8) 0px -1px 0px 1px inset, rgba(48, 48, 48, 1) 0px 0px 0px 1px inset, rgba(255, 255, 255, 0.25) 0px 0.5px 0px 1.5px inset",
+      "observed": "rgba(142, 31, 11, 0.8) 0px -1px 0px 1px inset, rgba(181, 38, 11, 0.8) 0px 0px 0px 1px inset, rgba(255, 255, 255, 0.35) 0px 0.5px 0px 1.5px inset",
+      "verdict": "contradiction",
+      "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+    },
+    {
+      "combo": "primary.critical.medium.off.enabled",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{p.font-weight-medium}",
+      "computedProp": "font-weight",
+      "expected": "550",
+      "observed": "650",
+      "verdict": "contradiction",
+      "cause": "composition-owned typography: the primary variant label renders Text fontWeight 650 (semibold); the carried binding is font-weight-medium (550) — same composition-owned class"
+    },
+    {
+      "combo": "primary.critical.medium.on.enabled",
+      "part": "root",
+      "channel": "background-color",
+      "ref": "{p.color-bg-fill-brand}",
+      "computedProp": "background-color",
+      "expected": "rgba(48, 48, 48, 1)",
+      "observed": "rgba(199, 10, 36, 1)",
+      "verdict": "contradiction",
+      "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+    },
+    {
+      "combo": "primary.critical.medium.on.enabled",
+      "part": "root",
+      "channel": "box-shadow",
+      "ref": "{p.shadow-button-primary}",
+      "computedProp": "box-shadow",
+      "expected": "rgba(0, 0, 0, 0.8) 0px -1px 0px 1px inset, rgba(48, 48, 48, 1) 0px 0px 0px 1px inset, rgba(255, 255, 255, 0.25) 0px 0.5px 0px 1.5px inset",
+      "observed": "rgba(142, 31, 11, 0.8) 0px -1px 0px 1px inset, rgba(181, 38, 11, 0.8) 0px 0px 0px 1px inset, rgba(255, 255, 255, 0.35) 0px 0.5px 0px 1.5px inset",
+      "verdict": "contradiction",
+      "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+    },
+    {
+      "combo": "primary.critical.medium.on.enabled",
+      "part": "root",
+      "channel": "padding-inline",
+      "ref": "{p.space-300}",
+      "computedProp": "padding-left",
+      "expected": "12px",
+      "observed": "6px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "primary.critical.medium.on.enabled",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{p.font-weight-medium}",
+      "computedProp": "font-weight",
+      "expected": "550",
+      "observed": "650",
+      "verdict": "contradiction",
+      "cause": "composition-owned typography: the primary variant label renders Text fontWeight 650 (semibold); the carried binding is font-weight-medium (550) — same composition-owned class"
+    },
+    {
+      "combo": "primary.critical.large.off.enabled",
+      "part": "root",
+      "channel": "background-color",
+      "ref": "{p.color-bg-fill-brand}",
+      "computedProp": "background-color",
+      "expected": "rgba(48, 48, 48, 1)",
+      "observed": "rgba(199, 10, 36, 1)",
+      "verdict": "contradiction",
+      "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+    },
+    {
+      "combo": "primary.critical.large.off.enabled",
+      "part": "root",
+      "channel": "box-shadow",
+      "ref": "{p.shadow-button-primary}",
+      "computedProp": "box-shadow",
+      "expected": "rgba(0, 0, 0, 0.8) 0px -1px 0px 1px inset, rgba(48, 48, 48, 1) 0px 0px 0px 1px inset, rgba(255, 255, 255, 0.25) 0px 0.5px 0px 1.5px inset",
+      "observed": "rgba(142, 31, 11, 0.8) 0px -1px 0px 1px inset, rgba(181, 38, 11, 0.8) 0px 0px 0px 1px inset, rgba(255, 255, 255, 0.35) 0px 0.5px 0px 1.5px inset",
+      "verdict": "contradiction",
+      "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+    },
+    {
+      "combo": "primary.critical.large.off.enabled",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{p.font-weight-medium}",
+      "computedProp": "font-weight",
+      "expected": "550",
+      "observed": "650",
+      "verdict": "contradiction",
+      "cause": "composition-owned typography: the primary variant label renders Text fontWeight 650 (semibold); the carried binding is font-weight-medium (550) — same composition-owned class"
+    },
+    {
+      "combo": "primary.critical.large.on.enabled",
+      "part": "root",
+      "channel": "background-color",
+      "ref": "{p.color-bg-fill-brand}",
+      "computedProp": "background-color",
+      "expected": "rgba(48, 48, 48, 1)",
+      "observed": "rgba(199, 10, 36, 1)",
+      "verdict": "contradiction",
+      "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+    },
+    {
+      "combo": "primary.critical.large.on.enabled",
+      "part": "root",
+      "channel": "box-shadow",
+      "ref": "{p.shadow-button-primary}",
+      "computedProp": "box-shadow",
+      "expected": "rgba(0, 0, 0, 0.8) 0px -1px 0px 1px inset, rgba(48, 48, 48, 1) 0px 0px 0px 1px inset, rgba(255, 255, 255, 0.25) 0px 0.5px 0px 1.5px inset",
+      "observed": "rgba(142, 31, 11, 0.8) 0px -1px 0px 1px inset, rgba(181, 38, 11, 0.8) 0px 0px 0px 1px inset, rgba(255, 255, 255, 0.35) 0px 0.5px 0px 1.5px inset",
+      "verdict": "contradiction",
+      "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+    },
+    {
+      "combo": "primary.critical.large.on.enabled",
+      "part": "root",
+      "channel": "padding-inline",
+      "ref": "{p.space-300}",
+      "computedProp": "padding-left",
+      "expected": "12px",
+      "observed": "6px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "primary.critical.large.on.enabled",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{p.font-weight-medium}",
+      "computedProp": "font-weight",
+      "expected": "550",
+      "observed": "650",
+      "verdict": "contradiction",
+      "cause": "composition-owned typography: the primary variant label renders Text fontWeight 650 (semibold); the carried binding is font-weight-medium (550) — same composition-owned class"
+    },
+    {
+      "combo": "primary.success.micro.off.enabled",
+      "part": "root",
+      "channel": "background-color",
+      "ref": "{p.color-bg-fill-brand}",
+      "computedProp": "background-color",
+      "expected": "rgba(48, 48, 48, 1)",
+      "observed": "rgba(4, 123, 93, 1)",
+      "verdict": "contradiction",
+      "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+    },
+    {
+      "combo": "primary.success.micro.off.enabled",
+      "part": "root",
+      "channel": "box-shadow",
+      "ref": "{p.shadow-button-primary}",
+      "computedProp": "box-shadow",
+      "expected": "rgba(0, 0, 0, 0.8) 0px -1px 0px 1px inset, rgba(48, 48, 48, 1) 0px 0px 0px 1px inset, rgba(255, 255, 255, 0.25) 0px 0.5px 0px 1.5px inset",
+      "observed": "rgba(12, 81, 50, 0.8) 0px -1px 0px 1px inset, rgba(19, 111, 69, 0.8) 0px 0px 0px 1px inset, rgba(255, 255, 255, 0.25) 0px 0.5px 0px 1.5px inset",
+      "verdict": "contradiction",
+      "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+    },
+    {
+      "combo": "primary.success.micro.off.enabled",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{p.font-weight-medium}",
+      "computedProp": "font-weight",
+      "expected": "550",
+      "observed": "650",
+      "verdict": "contradiction",
+      "cause": "composition-owned typography: the primary variant label renders Text fontWeight 650 (semibold); the carried binding is font-weight-medium (550) — same composition-owned class"
+    },
+    {
+      "combo": "primary.success.micro.on.enabled",
+      "part": "root",
+      "channel": "background-color",
+      "ref": "{p.color-bg-fill-brand}",
+      "computedProp": "background-color",
+      "expected": "rgba(48, 48, 48, 1)",
+      "observed": "rgba(4, 123, 93, 1)",
+      "verdict": "contradiction",
+      "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+    },
+    {
+      "combo": "primary.success.micro.on.enabled",
+      "part": "root",
+      "channel": "box-shadow",
+      "ref": "{p.shadow-button-primary}",
+      "computedProp": "box-shadow",
+      "expected": "rgba(0, 0, 0, 0.8) 0px -1px 0px 1px inset, rgba(48, 48, 48, 1) 0px 0px 0px 1px inset, rgba(255, 255, 255, 0.25) 0px 0.5px 0px 1.5px inset",
+      "observed": "rgba(12, 81, 50, 0.8) 0px -1px 0px 1px inset, rgba(19, 111, 69, 0.8) 0px 0px 0px 1px inset, rgba(255, 255, 255, 0.25) 0px 0.5px 0px 1.5px inset",
+      "verdict": "contradiction",
+      "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+    },
+    {
+      "combo": "primary.success.micro.on.enabled",
+      "part": "root",
+      "channel": "padding-inline",
+      "ref": "{p.space-200}",
+      "computedProp": "padding-left",
+      "expected": "8px",
+      "observed": "4px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "primary.success.micro.on.enabled",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{p.font-weight-medium}",
+      "computedProp": "font-weight",
+      "expected": "550",
+      "observed": "650",
+      "verdict": "contradiction",
+      "cause": "composition-owned typography: the primary variant label renders Text fontWeight 650 (semibold); the carried binding is font-weight-medium (550) — same composition-owned class"
+    },
+    {
+      "combo": "primary.success.slim.off.enabled",
+      "part": "root",
+      "channel": "background-color",
+      "ref": "{p.color-bg-fill-brand}",
+      "computedProp": "background-color",
+      "expected": "rgba(48, 48, 48, 1)",
+      "observed": "rgba(4, 123, 93, 1)",
+      "verdict": "contradiction",
+      "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+    },
+    {
+      "combo": "primary.success.slim.off.enabled",
+      "part": "root",
+      "channel": "box-shadow",
+      "ref": "{p.shadow-button-primary}",
+      "computedProp": "box-shadow",
+      "expected": "rgba(0, 0, 0, 0.8) 0px -1px 0px 1px inset, rgba(48, 48, 48, 1) 0px 0px 0px 1px inset, rgba(255, 255, 255, 0.25) 0px 0.5px 0px 1.5px inset",
+      "observed": "rgba(12, 81, 50, 0.8) 0px -1px 0px 1px inset, rgba(19, 111, 69, 0.8) 0px 0px 0px 1px inset, rgba(255, 255, 255, 0.25) 0px 0.5px 0px 1.5px inset",
+      "verdict": "contradiction",
+      "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+    },
+    {
+      "combo": "primary.success.slim.off.enabled",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{p.font-weight-medium}",
+      "computedProp": "font-weight",
+      "expected": "550",
+      "observed": "650",
+      "verdict": "contradiction",
+      "cause": "composition-owned typography: the primary variant label renders Text fontWeight 650 (semibold); the carried binding is font-weight-medium (550) — same composition-owned class"
+    },
+    {
+      "combo": "primary.success.slim.on.enabled",
+      "part": "root",
+      "channel": "background-color",
+      "ref": "{p.color-bg-fill-brand}",
+      "computedProp": "background-color",
+      "expected": "rgba(48, 48, 48, 1)",
+      "observed": "rgba(4, 123, 93, 1)",
+      "verdict": "contradiction",
+      "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+    },
+    {
+      "combo": "primary.success.slim.on.enabled",
+      "part": "root",
+      "channel": "box-shadow",
+      "ref": "{p.shadow-button-primary}",
+      "computedProp": "box-shadow",
+      "expected": "rgba(0, 0, 0, 0.8) 0px -1px 0px 1px inset, rgba(48, 48, 48, 1) 0px 0px 0px 1px inset, rgba(255, 255, 255, 0.25) 0px 0.5px 0px 1.5px inset",
+      "observed": "rgba(12, 81, 50, 0.8) 0px -1px 0px 1px inset, rgba(19, 111, 69, 0.8) 0px 0px 0px 1px inset, rgba(255, 255, 255, 0.25) 0px 0.5px 0px 1.5px inset",
+      "verdict": "contradiction",
+      "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+    },
+    {
+      "combo": "primary.success.slim.on.enabled",
+      "part": "root",
+      "channel": "padding-inline",
+      "ref": "{p.space-300}",
+      "computedProp": "padding-left",
+      "expected": "12px",
+      "observed": "6px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "primary.success.slim.on.enabled",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{p.font-weight-medium}",
+      "computedProp": "font-weight",
+      "expected": "550",
+      "observed": "650",
+      "verdict": "contradiction",
+      "cause": "composition-owned typography: the primary variant label renders Text fontWeight 650 (semibold); the carried binding is font-weight-medium (550) — same composition-owned class"
+    },
+    {
+      "combo": "primary.success.medium.off.enabled",
+      "part": "root",
+      "channel": "background-color",
+      "ref": "{p.color-bg-fill-brand}",
+      "computedProp": "background-color",
+      "expected": "rgba(48, 48, 48, 1)",
+      "observed": "rgba(4, 123, 93, 1)",
+      "verdict": "contradiction",
+      "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+    },
+    {
+      "combo": "primary.success.medium.off.enabled",
+      "part": "root",
+      "channel": "box-shadow",
+      "ref": "{p.shadow-button-primary}",
+      "computedProp": "box-shadow",
+      "expected": "rgba(0, 0, 0, 0.8) 0px -1px 0px 1px inset, rgba(48, 48, 48, 1) 0px 0px 0px 1px inset, rgba(255, 255, 255, 0.25) 0px 0.5px 0px 1.5px inset",
+      "observed": "rgba(12, 81, 50, 0.8) 0px -1px 0px 1px inset, rgba(19, 111, 69, 0.8) 0px 0px 0px 1px inset, rgba(255, 255, 255, 0.25) 0px 0.5px 0px 1.5px inset",
+      "verdict": "contradiction",
+      "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+    },
+    {
+      "combo": "primary.success.medium.off.enabled",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{p.font-weight-medium}",
+      "computedProp": "font-weight",
+      "expected": "550",
+      "observed": "650",
+      "verdict": "contradiction",
+      "cause": "composition-owned typography: the primary variant label renders Text fontWeight 650 (semibold); the carried binding is font-weight-medium (550) — same composition-owned class"
+    },
+    {
+      "combo": "primary.success.medium.on.enabled",
+      "part": "root",
+      "channel": "background-color",
+      "ref": "{p.color-bg-fill-brand}",
+      "computedProp": "background-color",
+      "expected": "rgba(48, 48, 48, 1)",
+      "observed": "rgba(4, 123, 93, 1)",
+      "verdict": "contradiction",
+      "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+    },
+    {
+      "combo": "primary.success.medium.on.enabled",
+      "part": "root",
+      "channel": "box-shadow",
+      "ref": "{p.shadow-button-primary}",
+      "computedProp": "box-shadow",
+      "expected": "rgba(0, 0, 0, 0.8) 0px -1px 0px 1px inset, rgba(48, 48, 48, 1) 0px 0px 0px 1px inset, rgba(255, 255, 255, 0.25) 0px 0.5px 0px 1.5px inset",
+      "observed": "rgba(12, 81, 50, 0.8) 0px -1px 0px 1px inset, rgba(19, 111, 69, 0.8) 0px 0px 0px 1px inset, rgba(255, 255, 255, 0.25) 0px 0.5px 0px 1.5px inset",
+      "verdict": "contradiction",
+      "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+    },
+    {
+      "combo": "primary.success.medium.on.enabled",
+      "part": "root",
+      "channel": "padding-inline",
+      "ref": "{p.space-300}",
+      "computedProp": "padding-left",
+      "expected": "12px",
+      "observed": "6px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "primary.success.medium.on.enabled",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{p.font-weight-medium}",
+      "computedProp": "font-weight",
+      "expected": "550",
+      "observed": "650",
+      "verdict": "contradiction",
+      "cause": "composition-owned typography: the primary variant label renders Text fontWeight 650 (semibold); the carried binding is font-weight-medium (550) — same composition-owned class"
+    },
+    {
+      "combo": "primary.success.large.off.enabled",
+      "part": "root",
+      "channel": "background-color",
+      "ref": "{p.color-bg-fill-brand}",
+      "computedProp": "background-color",
+      "expected": "rgba(48, 48, 48, 1)",
+      "observed": "rgba(4, 123, 93, 1)",
+      "verdict": "contradiction",
+      "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+    },
+    {
+      "combo": "primary.success.large.off.enabled",
+      "part": "root",
+      "channel": "box-shadow",
+      "ref": "{p.shadow-button-primary}",
+      "computedProp": "box-shadow",
+      "expected": "rgba(0, 0, 0, 0.8) 0px -1px 0px 1px inset, rgba(48, 48, 48, 1) 0px 0px 0px 1px inset, rgba(255, 255, 255, 0.25) 0px 0.5px 0px 1.5px inset",
+      "observed": "rgba(12, 81, 50, 0.8) 0px -1px 0px 1px inset, rgba(19, 111, 69, 0.8) 0px 0px 0px 1px inset, rgba(255, 255, 255, 0.25) 0px 0.5px 0px 1.5px inset",
+      "verdict": "contradiction",
+      "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+    },
+    {
+      "combo": "primary.success.large.off.enabled",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{p.font-weight-medium}",
+      "computedProp": "font-weight",
+      "expected": "550",
+      "observed": "650",
+      "verdict": "contradiction",
+      "cause": "composition-owned typography: the primary variant label renders Text fontWeight 650 (semibold); the carried binding is font-weight-medium (550) — same composition-owned class"
+    },
+    {
+      "combo": "primary.success.large.on.enabled",
+      "part": "root",
+      "channel": "background-color",
+      "ref": "{p.color-bg-fill-brand}",
+      "computedProp": "background-color",
+      "expected": "rgba(48, 48, 48, 1)",
+      "observed": "rgba(4, 123, 93, 1)",
+      "verdict": "contradiction",
+      "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+    },
+    {
+      "combo": "primary.success.large.on.enabled",
+      "part": "root",
+      "channel": "box-shadow",
+      "ref": "{p.shadow-button-primary}",
+      "computedProp": "box-shadow",
+      "expected": "rgba(0, 0, 0, 0.8) 0px -1px 0px 1px inset, rgba(48, 48, 48, 1) 0px 0px 0px 1px inset, rgba(255, 255, 255, 0.25) 0px 0.5px 0px 1.5px inset",
+      "observed": "rgba(12, 81, 50, 0.8) 0px -1px 0px 1px inset, rgba(19, 111, 69, 0.8) 0px 0px 0px 1px inset, rgba(255, 255, 255, 0.25) 0px 0.5px 0px 1.5px inset",
+      "verdict": "contradiction",
+      "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+    },
+    {
+      "combo": "primary.success.large.on.enabled",
+      "part": "root",
+      "channel": "padding-inline",
+      "ref": "{p.space-300}",
+      "computedProp": "padding-left",
+      "expected": "12px",
+      "observed": "6px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "primary.success.large.on.enabled",
+      "part": "label",
+      "channel": "font-weight",
+      "ref": "{p.font-weight-medium}",
+      "computedProp": "font-weight",
+      "expected": "550",
+      "observed": "650",
+      "verdict": "contradiction",
+      "cause": "composition-owned typography: the primary variant label renders Text fontWeight 650 (semibold); the carried binding is font-weight-medium (550) — same composition-owned class"
+    },
+    {
+      "combo": "secondary.none.micro.on.enabled",
+      "part": "root",
+      "channel": "padding-inline",
+      "ref": "{p.space-200}",
+      "computedProp": "padding-left",
+      "expected": "8px",
+      "observed": "4px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "secondary.none.slim.on.enabled",
+      "part": "root",
+      "channel": "padding-inline",
+      "ref": "{p.space-300}",
+      "computedProp": "padding-left",
+      "expected": "12px",
+      "observed": "6px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "secondary.none.medium.on.enabled",
+      "part": "root",
+      "channel": "padding-inline",
+      "ref": "{p.space-300}",
+      "computedProp": "padding-left",
+      "expected": "12px",
+      "observed": "6px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "secondary.none.large.on.enabled",
+      "part": "root",
+      "channel": "padding-inline",
+      "ref": "{p.space-300}",
+      "computedProp": "padding-left",
+      "expected": "12px",
+      "observed": "6px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "secondary.critical.micro.off.enabled",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text}",
+      "computedProp": "color",
+      "expected": "rgba(48, 48, 48, 1)",
+      "observed": "rgba(142, 11, 33, 1)",
+      "verdict": "contradiction",
+      "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+    },
+    {
+      "combo": "secondary.critical.micro.on.enabled",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text}",
+      "computedProp": "color",
+      "expected": "rgba(48, 48, 48, 1)",
+      "observed": "rgba(142, 11, 33, 1)",
+      "verdict": "contradiction",
+      "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+    },
+    {
+      "combo": "secondary.critical.micro.on.enabled",
+      "part": "root",
+      "channel": "padding-inline",
+      "ref": "{p.space-200}",
+      "computedProp": "padding-left",
+      "expected": "8px",
+      "observed": "4px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "secondary.critical.slim.off.enabled",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text}",
+      "computedProp": "color",
+      "expected": "rgba(48, 48, 48, 1)",
+      "observed": "rgba(142, 11, 33, 1)",
+      "verdict": "contradiction",
+      "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+    },
+    {
+      "combo": "secondary.critical.slim.on.enabled",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text}",
+      "computedProp": "color",
+      "expected": "rgba(48, 48, 48, 1)",
+      "observed": "rgba(142, 11, 33, 1)",
+      "verdict": "contradiction",
+      "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+    },
+    {
+      "combo": "secondary.critical.slim.on.enabled",
+      "part": "root",
+      "channel": "padding-inline",
+      "ref": "{p.space-300}",
+      "computedProp": "padding-left",
+      "expected": "12px",
+      "observed": "6px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "secondary.critical.medium.off.enabled",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text}",
+      "computedProp": "color",
+      "expected": "rgba(48, 48, 48, 1)",
+      "observed": "rgba(142, 11, 33, 1)",
+      "verdict": "contradiction",
+      "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+    },
+    {
+      "combo": "secondary.critical.medium.on.enabled",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text}",
+      "computedProp": "color",
+      "expected": "rgba(48, 48, 48, 1)",
+      "observed": "rgba(142, 11, 33, 1)",
+      "verdict": "contradiction",
+      "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+    },
+    {
+      "combo": "secondary.critical.medium.on.enabled",
+      "part": "root",
+      "channel": "padding-inline",
+      "ref": "{p.space-300}",
+      "computedProp": "padding-left",
+      "expected": "12px",
+      "observed": "6px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "secondary.critical.large.off.enabled",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text}",
+      "computedProp": "color",
+      "expected": "rgba(48, 48, 48, 1)",
+      "observed": "rgba(142, 11, 33, 1)",
+      "verdict": "contradiction",
+      "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+    },
+    {
+      "combo": "secondary.critical.large.on.enabled",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text}",
+      "computedProp": "color",
+      "expected": "rgba(48, 48, 48, 1)",
+      "observed": "rgba(142, 11, 33, 1)",
+      "verdict": "contradiction",
+      "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+    },
+    {
+      "combo": "secondary.critical.large.on.enabled",
+      "part": "root",
+      "channel": "padding-inline",
+      "ref": "{p.space-300}",
+      "computedProp": "padding-left",
+      "expected": "12px",
+      "observed": "6px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "secondary.success.micro.off.enabled",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text}",
+      "computedProp": "color",
+      "expected": "rgba(48, 48, 48, 1)",
+      "observed": "rgba(1, 75, 64, 1)",
+      "verdict": "contradiction",
+      "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+    },
+    {
+      "combo": "secondary.success.micro.on.enabled",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text}",
+      "computedProp": "color",
+      "expected": "rgba(48, 48, 48, 1)",
+      "observed": "rgba(1, 75, 64, 1)",
+      "verdict": "contradiction",
+      "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+    },
+    {
+      "combo": "secondary.success.micro.on.enabled",
+      "part": "root",
+      "channel": "padding-inline",
+      "ref": "{p.space-200}",
+      "computedProp": "padding-left",
+      "expected": "8px",
+      "observed": "4px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "secondary.success.slim.off.enabled",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text}",
+      "computedProp": "color",
+      "expected": "rgba(48, 48, 48, 1)",
+      "observed": "rgba(1, 75, 64, 1)",
+      "verdict": "contradiction",
+      "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+    },
+    {
+      "combo": "secondary.success.slim.on.enabled",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text}",
+      "computedProp": "color",
+      "expected": "rgba(48, 48, 48, 1)",
+      "observed": "rgba(1, 75, 64, 1)",
+      "verdict": "contradiction",
+      "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+    },
+    {
+      "combo": "secondary.success.slim.on.enabled",
+      "part": "root",
+      "channel": "padding-inline",
+      "ref": "{p.space-300}",
+      "computedProp": "padding-left",
+      "expected": "12px",
+      "observed": "6px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "secondary.success.medium.off.enabled",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text}",
+      "computedProp": "color",
+      "expected": "rgba(48, 48, 48, 1)",
+      "observed": "rgba(1, 75, 64, 1)",
+      "verdict": "contradiction",
+      "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+    },
+    {
+      "combo": "secondary.success.medium.on.enabled",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text}",
+      "computedProp": "color",
+      "expected": "rgba(48, 48, 48, 1)",
+      "observed": "rgba(1, 75, 64, 1)",
+      "verdict": "contradiction",
+      "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+    },
+    {
+      "combo": "secondary.success.medium.on.enabled",
+      "part": "root",
+      "channel": "padding-inline",
+      "ref": "{p.space-300}",
+      "computedProp": "padding-left",
+      "expected": "12px",
+      "observed": "6px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "secondary.success.large.off.enabled",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text}",
+      "computedProp": "color",
+      "expected": "rgba(48, 48, 48, 1)",
+      "observed": "rgba(1, 75, 64, 1)",
+      "verdict": "contradiction",
+      "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+    },
+    {
+      "combo": "secondary.success.large.on.enabled",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text}",
+      "computedProp": "color",
+      "expected": "rgba(48, 48, 48, 1)",
+      "observed": "rgba(1, 75, 64, 1)",
+      "verdict": "contradiction",
+      "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+    },
+    {
+      "combo": "secondary.success.large.on.enabled",
+      "part": "root",
+      "channel": "padding-inline",
+      "ref": "{p.space-300}",
+      "computedProp": "padding-left",
+      "expected": "12px",
+      "observed": "6px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "tertiary.none.micro.on.enabled",
+      "part": "root",
+      "channel": "padding-inline",
+      "ref": "{p.space-200}",
+      "computedProp": "padding-left",
+      "expected": "8px",
+      "observed": "4px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "tertiary.none.slim.on.enabled",
+      "part": "root",
+      "channel": "padding-inline",
+      "ref": "{p.space-300}",
+      "computedProp": "padding-left",
+      "expected": "12px",
+      "observed": "6px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "tertiary.none.medium.on.enabled",
+      "part": "root",
+      "channel": "padding-inline",
+      "ref": "{p.space-300}",
+      "computedProp": "padding-left",
+      "expected": "12px",
+      "observed": "6px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "tertiary.none.large.on.enabled",
+      "part": "root",
+      "channel": "padding-inline",
+      "ref": "{p.space-300}",
+      "computedProp": "padding-left",
+      "expected": "12px",
+      "observed": "6px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "tertiary.critical.micro.off.enabled",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text}",
+      "computedProp": "color",
+      "expected": "rgba(48, 48, 48, 1)",
+      "observed": "rgba(142, 11, 33, 1)",
+      "verdict": "contradiction",
+      "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+    },
+    {
+      "combo": "tertiary.critical.micro.on.enabled",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text}",
+      "computedProp": "color",
+      "expected": "rgba(48, 48, 48, 1)",
+      "observed": "rgba(142, 11, 33, 1)",
+      "verdict": "contradiction",
+      "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+    },
+    {
+      "combo": "tertiary.critical.micro.on.enabled",
+      "part": "root",
+      "channel": "padding-inline",
+      "ref": "{p.space-200}",
+      "computedProp": "padding-left",
+      "expected": "8px",
+      "observed": "4px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "tertiary.critical.slim.off.enabled",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text}",
+      "computedProp": "color",
+      "expected": "rgba(48, 48, 48, 1)",
+      "observed": "rgba(142, 11, 33, 1)",
+      "verdict": "contradiction",
+      "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+    },
+    {
+      "combo": "tertiary.critical.slim.on.enabled",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text}",
+      "computedProp": "color",
+      "expected": "rgba(48, 48, 48, 1)",
+      "observed": "rgba(142, 11, 33, 1)",
+      "verdict": "contradiction",
+      "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+    },
+    {
+      "combo": "tertiary.critical.slim.on.enabled",
+      "part": "root",
+      "channel": "padding-inline",
+      "ref": "{p.space-300}",
+      "computedProp": "padding-left",
+      "expected": "12px",
+      "observed": "6px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "tertiary.critical.medium.off.enabled",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text}",
+      "computedProp": "color",
+      "expected": "rgba(48, 48, 48, 1)",
+      "observed": "rgba(142, 11, 33, 1)",
+      "verdict": "contradiction",
+      "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+    },
+    {
+      "combo": "tertiary.critical.medium.on.enabled",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text}",
+      "computedProp": "color",
+      "expected": "rgba(48, 48, 48, 1)",
+      "observed": "rgba(142, 11, 33, 1)",
+      "verdict": "contradiction",
+      "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+    },
+    {
+      "combo": "tertiary.critical.medium.on.enabled",
+      "part": "root",
+      "channel": "padding-inline",
+      "ref": "{p.space-300}",
+      "computedProp": "padding-left",
+      "expected": "12px",
+      "observed": "6px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "tertiary.critical.large.off.enabled",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text}",
+      "computedProp": "color",
+      "expected": "rgba(48, 48, 48, 1)",
+      "observed": "rgba(142, 11, 33, 1)",
+      "verdict": "contradiction",
+      "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+    },
+    {
+      "combo": "tertiary.critical.large.on.enabled",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text}",
+      "computedProp": "color",
+      "expected": "rgba(48, 48, 48, 1)",
+      "observed": "rgba(142, 11, 33, 1)",
+      "verdict": "contradiction",
+      "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+    },
+    {
+      "combo": "tertiary.critical.large.on.enabled",
+      "part": "root",
+      "channel": "padding-inline",
+      "ref": "{p.space-300}",
+      "computedProp": "padding-left",
+      "expected": "12px",
+      "observed": "6px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "tertiary.success.micro.off.enabled",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text}",
+      "computedProp": "color",
+      "expected": "rgba(48, 48, 48, 1)",
+      "observed": "rgba(1, 75, 64, 1)",
+      "verdict": "contradiction",
+      "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+    },
+    {
+      "combo": "tertiary.success.micro.on.enabled",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text}",
+      "computedProp": "color",
+      "expected": "rgba(48, 48, 48, 1)",
+      "observed": "rgba(1, 75, 64, 1)",
+      "verdict": "contradiction",
+      "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+    },
+    {
+      "combo": "tertiary.success.micro.on.enabled",
+      "part": "root",
+      "channel": "padding-inline",
+      "ref": "{p.space-200}",
+      "computedProp": "padding-left",
+      "expected": "8px",
+      "observed": "4px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "tertiary.success.slim.off.enabled",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text}",
+      "computedProp": "color",
+      "expected": "rgba(48, 48, 48, 1)",
+      "observed": "rgba(1, 75, 64, 1)",
+      "verdict": "contradiction",
+      "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+    },
+    {
+      "combo": "tertiary.success.slim.on.enabled",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text}",
+      "computedProp": "color",
+      "expected": "rgba(48, 48, 48, 1)",
+      "observed": "rgba(1, 75, 64, 1)",
+      "verdict": "contradiction",
+      "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+    },
+    {
+      "combo": "tertiary.success.slim.on.enabled",
+      "part": "root",
+      "channel": "padding-inline",
+      "ref": "{p.space-300}",
+      "computedProp": "padding-left",
+      "expected": "12px",
+      "observed": "6px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "tertiary.success.medium.off.enabled",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text}",
+      "computedProp": "color",
+      "expected": "rgba(48, 48, 48, 1)",
+      "observed": "rgba(1, 75, 64, 1)",
+      "verdict": "contradiction",
+      "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+    },
+    {
+      "combo": "tertiary.success.medium.on.enabled",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text}",
+      "computedProp": "color",
+      "expected": "rgba(48, 48, 48, 1)",
+      "observed": "rgba(1, 75, 64, 1)",
+      "verdict": "contradiction",
+      "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+    },
+    {
+      "combo": "tertiary.success.medium.on.enabled",
+      "part": "root",
+      "channel": "padding-inline",
+      "ref": "{p.space-300}",
+      "computedProp": "padding-left",
+      "expected": "12px",
+      "observed": "6px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "tertiary.success.large.off.enabled",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text}",
+      "computedProp": "color",
+      "expected": "rgba(48, 48, 48, 1)",
+      "observed": "rgba(1, 75, 64, 1)",
+      "verdict": "contradiction",
+      "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+    },
+    {
+      "combo": "tertiary.success.large.on.enabled",
+      "part": "root",
+      "channel": "color",
+      "ref": "{p.color-text}",
+      "computedProp": "color",
+      "expected": "rgba(48, 48, 48, 1)",
+      "observed": "rgba(1, 75, 64, 1)",
+      "verdict": "contradiction",
+      "cause": "tone×variant multi-axis condition (.tone*:is(.variant*)) — refused by name in the static promotion; the computed floor observes the resolved value and the mint pass carries it per-axis-pair"
+    },
+    {
+      "combo": "tertiary.success.large.on.enabled",
+      "part": "root",
+      "channel": "padding-inline",
+      "ref": "{p.space-300}",
+      "computedProp": "padding-left",
+      "expected": "12px",
+      "observed": "6px",
+      "verdict": "contradiction"
+    },
+    {
+      "combo": "monochromePlain.none.slim.off.enabled",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{p.text-body-sm-font-size}",
+      "computedProp": "font-size",
+      "expected": "12px",
+      "observed": "13px",
+      "verdict": "contradiction",
+      "cause": "composition-owned typography: the plain/monochromePlain variants render their label through the Text primitive at bodyMd (13px/20px); the carried binding is the bodySm default — child-component props conditioned on the parent variant, invisible to single-file static promotion"
+    },
+    {
+      "combo": "monochromePlain.none.slim.off.enabled",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{p.text-body-sm-font-line-height}",
+      "computedProp": "line-height",
+      "expected": "16px",
+      "observed": "20px",
+      "verdict": "contradiction",
+      "cause": "composition-owned typography: the plain/monochromePlain variants render their label through the Text primitive at bodyMd (13px/20px); the carried binding is the bodySm default — child-component props conditioned on the parent variant, invisible to single-file static promotion"
+    },
+    {
+      "combo": "monochromePlain.none.slim.on.enabled",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{p.text-body-sm-font-size}",
+      "computedProp": "font-size",
+      "expected": "12px",
+      "observed": "13px",
+      "verdict": "contradiction",
+      "cause": "composition-owned typography: the plain/monochromePlain variants render their label through the Text primitive at bodyMd (13px/20px); the carried binding is the bodySm default — child-component props conditioned on the parent variant, invisible to single-file static promotion"
+    },
+    {
+      "combo": "monochromePlain.none.slim.on.enabled",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{p.text-body-sm-font-line-height}",
+      "computedProp": "line-height",
+      "expected": "16px",
+      "observed": "20px",
+      "verdict": "contradiction",
+      "cause": "composition-owned typography: the plain/monochromePlain variants render their label through the Text primitive at bodyMd (13px/20px); the carried binding is the bodySm default — child-component props conditioned on the parent variant, invisible to single-file static promotion"
+    },
+    {
+      "combo": "monochromePlain.none.medium.off.enabled",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{p.text-body-sm-font-size}",
+      "computedProp": "font-size",
+      "expected": "12px",
+      "observed": "13px",
+      "verdict": "contradiction",
+      "cause": "composition-owned typography: the plain/monochromePlain variants render their label through the Text primitive at bodyMd (13px/20px); the carried binding is the bodySm default — child-component props conditioned on the parent variant, invisible to single-file static promotion"
+    },
+    {
+      "combo": "monochromePlain.none.medium.off.enabled",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{p.text-body-sm-font-line-height}",
+      "computedProp": "line-height",
+      "expected": "16px",
+      "observed": "20px",
+      "verdict": "contradiction",
+      "cause": "composition-owned typography: the plain/monochromePlain variants render their label through the Text primitive at bodyMd (13px/20px); the carried binding is the bodySm default — child-component props conditioned on the parent variant, invisible to single-file static promotion"
+    },
+    {
+      "combo": "monochromePlain.none.medium.on.enabled",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{p.text-body-sm-font-size}",
+      "computedProp": "font-size",
+      "expected": "12px",
+      "observed": "13px",
+      "verdict": "contradiction",
+      "cause": "composition-owned typography: the plain/monochromePlain variants render their label through the Text primitive at bodyMd (13px/20px); the carried binding is the bodySm default — child-component props conditioned on the parent variant, invisible to single-file static promotion"
+    },
+    {
+      "combo": "monochromePlain.none.medium.on.enabled",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{p.text-body-sm-font-line-height}",
+      "computedProp": "line-height",
+      "expected": "16px",
+      "observed": "20px",
+      "verdict": "contradiction",
+      "cause": "composition-owned typography: the plain/monochromePlain variants render their label through the Text primitive at bodyMd (13px/20px); the carried binding is the bodySm default — child-component props conditioned on the parent variant, invisible to single-file static promotion"
+    },
+    {
+      "combo": "monochromePlain.critical.slim.off.enabled",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{p.text-body-sm-font-size}",
+      "computedProp": "font-size",
+      "expected": "12px",
+      "observed": "13px",
+      "verdict": "contradiction",
+      "cause": "composition-owned typography: the plain/monochromePlain variants render their label through the Text primitive at bodyMd (13px/20px); the carried binding is the bodySm default — child-component props conditioned on the parent variant, invisible to single-file static promotion"
+    },
+    {
+      "combo": "monochromePlain.critical.slim.off.enabled",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{p.text-body-sm-font-line-height}",
+      "computedProp": "line-height",
+      "expected": "16px",
+      "observed": "20px",
+      "verdict": "contradiction",
+      "cause": "composition-owned typography: the plain/monochromePlain variants render their label through the Text primitive at bodyMd (13px/20px); the carried binding is the bodySm default — child-component props conditioned on the parent variant, invisible to single-file static promotion"
+    },
+    {
+      "combo": "monochromePlain.critical.slim.on.enabled",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{p.text-body-sm-font-size}",
+      "computedProp": "font-size",
+      "expected": "12px",
+      "observed": "13px",
+      "verdict": "contradiction",
+      "cause": "composition-owned typography: the plain/monochromePlain variants render their label through the Text primitive at bodyMd (13px/20px); the carried binding is the bodySm default — child-component props conditioned on the parent variant, invisible to single-file static promotion"
+    },
+    {
+      "combo": "monochromePlain.critical.slim.on.enabled",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{p.text-body-sm-font-line-height}",
+      "computedProp": "line-height",
+      "expected": "16px",
+      "observed": "20px",
+      "verdict": "contradiction",
+      "cause": "composition-owned typography: the plain/monochromePlain variants render their label through the Text primitive at bodyMd (13px/20px); the carried binding is the bodySm default — child-component props conditioned on the parent variant, invisible to single-file static promotion"
+    },
+    {
+      "combo": "monochromePlain.critical.medium.off.enabled",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{p.text-body-sm-font-size}",
+      "computedProp": "font-size",
+      "expected": "12px",
+      "observed": "13px",
+      "verdict": "contradiction",
+      "cause": "composition-owned typography: the plain/monochromePlain variants render their label through the Text primitive at bodyMd (13px/20px); the carried binding is the bodySm default — child-component props conditioned on the parent variant, invisible to single-file static promotion"
+    },
+    {
+      "combo": "monochromePlain.critical.medium.off.enabled",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{p.text-body-sm-font-line-height}",
+      "computedProp": "line-height",
+      "expected": "16px",
+      "observed": "20px",
+      "verdict": "contradiction",
+      "cause": "composition-owned typography: the plain/monochromePlain variants render their label through the Text primitive at bodyMd (13px/20px); the carried binding is the bodySm default — child-component props conditioned on the parent variant, invisible to single-file static promotion"
+    },
+    {
+      "combo": "monochromePlain.critical.medium.on.enabled",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{p.text-body-sm-font-size}",
+      "computedProp": "font-size",
+      "expected": "12px",
+      "observed": "13px",
+      "verdict": "contradiction",
+      "cause": "composition-owned typography: the plain/monochromePlain variants render their label through the Text primitive at bodyMd (13px/20px); the carried binding is the bodySm default — child-component props conditioned on the parent variant, invisible to single-file static promotion"
+    },
+    {
+      "combo": "monochromePlain.critical.medium.on.enabled",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{p.text-body-sm-font-line-height}",
+      "computedProp": "line-height",
+      "expected": "16px",
+      "observed": "20px",
+      "verdict": "contradiction",
+      "cause": "composition-owned typography: the plain/monochromePlain variants render their label through the Text primitive at bodyMd (13px/20px); the carried binding is the bodySm default — child-component props conditioned on the parent variant, invisible to single-file static promotion"
+    },
+    {
+      "combo": "monochromePlain.success.slim.off.enabled",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{p.text-body-sm-font-size}",
+      "computedProp": "font-size",
+      "expected": "12px",
+      "observed": "13px",
+      "verdict": "contradiction",
+      "cause": "composition-owned typography: the plain/monochromePlain variants render their label through the Text primitive at bodyMd (13px/20px); the carried binding is the bodySm default — child-component props conditioned on the parent variant, invisible to single-file static promotion"
+    },
+    {
+      "combo": "monochromePlain.success.slim.off.enabled",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{p.text-body-sm-font-line-height}",
+      "computedProp": "line-height",
+      "expected": "16px",
+      "observed": "20px",
+      "verdict": "contradiction",
+      "cause": "composition-owned typography: the plain/monochromePlain variants render their label through the Text primitive at bodyMd (13px/20px); the carried binding is the bodySm default — child-component props conditioned on the parent variant, invisible to single-file static promotion"
+    },
+    {
+      "combo": "monochromePlain.success.slim.on.enabled",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{p.text-body-sm-font-size}",
+      "computedProp": "font-size",
+      "expected": "12px",
+      "observed": "13px",
+      "verdict": "contradiction",
+      "cause": "composition-owned typography: the plain/monochromePlain variants render their label through the Text primitive at bodyMd (13px/20px); the carried binding is the bodySm default — child-component props conditioned on the parent variant, invisible to single-file static promotion"
+    },
+    {
+      "combo": "monochromePlain.success.slim.on.enabled",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{p.text-body-sm-font-line-height}",
+      "computedProp": "line-height",
+      "expected": "16px",
+      "observed": "20px",
+      "verdict": "contradiction",
+      "cause": "composition-owned typography: the plain/monochromePlain variants render their label through the Text primitive at bodyMd (13px/20px); the carried binding is the bodySm default — child-component props conditioned on the parent variant, invisible to single-file static promotion"
+    },
+    {
+      "combo": "monochromePlain.success.medium.off.enabled",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{p.text-body-sm-font-size}",
+      "computedProp": "font-size",
+      "expected": "12px",
+      "observed": "13px",
+      "verdict": "contradiction",
+      "cause": "composition-owned typography: the plain/monochromePlain variants render their label through the Text primitive at bodyMd (13px/20px); the carried binding is the bodySm default — child-component props conditioned on the parent variant, invisible to single-file static promotion"
+    },
+    {
+      "combo": "monochromePlain.success.medium.off.enabled",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{p.text-body-sm-font-line-height}",
+      "computedProp": "line-height",
+      "expected": "16px",
+      "observed": "20px",
+      "verdict": "contradiction",
+      "cause": "composition-owned typography: the plain/monochromePlain variants render their label through the Text primitive at bodyMd (13px/20px); the carried binding is the bodySm default — child-component props conditioned on the parent variant, invisible to single-file static promotion"
+    },
+    {
+      "combo": "monochromePlain.success.medium.on.enabled",
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{p.text-body-sm-font-size}",
+      "computedProp": "font-size",
+      "expected": "12px",
+      "observed": "13px",
+      "verdict": "contradiction",
+      "cause": "composition-owned typography: the plain/monochromePlain variants render their label through the Text primitive at bodyMd (13px/20px); the carried binding is the bodySm default — child-component props conditioned on the parent variant, invisible to single-file static promotion"
+    },
+    {
+      "combo": "monochromePlain.success.medium.on.enabled",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{p.text-body-sm-font-line-height}",
+      "computedProp": "line-height",
+      "expected": "16px",
+      "observed": "20px",
+      "verdict": "contradiction",
+      "cause": "composition-owned typography: the plain/monochromePlain variants render their label through the Text primitive at bodyMd (13px/20px); the carried binding is the bodySm default — child-component props conditioned on the parent variant, invisible to single-file static promotion"
+    }
+  ],
+  "interactionOnDisabled": [],
+  "structureReceipts": [
+    "union-part-added: plain.none.micro.on.enabled__default @0 (span|Button__Icon)",
+    "union-part-added: plain.none.micro.on.enabled__default @0.0 (span|Icon)",
+    "union-part-added: plain.none.micro.on.enabled__default @0.0.0 (svg|Icon__Svg)",
+    "union-part-added: plain.none.micro.on.enabled__default @0.0.0.0 (path|)",
+    "union-part-added: plain.none.micro.on.enabled__default @0.0.0.1 (path|)"
+  ],
+  "styledChannelReceipts": [
+    "control-fallback: no control for <svg> — span control used (part icon-3)",
+    "control-fallback: no control for <path> — span control used (part part-0-0-0-0)",
+    "control-fallback: no control for <path> — span control used (part part-0-0-0-1)"
+  ],
+  "anatomyJoin": {
+    "computed": [
+      {
+        "part": "root",
+        "join": "matched"
+      },
+      {
+        "part": "icon",
+        "join": "computed-only"
+      },
+      {
+        "part": "icon-2",
+        "join": "computed-only"
+      },
+      {
+        "part": "icon-3",
+        "join": "computed-only"
+      },
+      {
+        "part": "part-0-0-0-0",
+        "join": "computed-only"
+      },
+      {
+        "part": "part-0-0-0-1",
+        "join": "computed-only"
+      },
+      {
+        "part": "label",
+        "join": "matched"
+      }
+    ],
+    "staticOnly": []
+  },
+  "anatomyPromotion": {
+    "_note": "Round 4 DOM-anatomy promotion: computed-only elements carried as REAL parts (extract/computed/anatomy.ts); svg subtrees carried as reconstructed icon assets; presence facts via visibleWhen/stylesWhen; refusals named.",
+    "partsCarried": [
+      "root",
+      "icon",
+      "icon-2",
+      "label"
+    ],
+    "svgAssets": [
+      "button-icon-2"
+    ],
+    "receipts": [
+      "presence-prop-added: withIcon (boolean, default false; library prop icon)",
+      "svg-viewbox-reconstructed: Button.icon-2@plain.none.micro.on.enabled — 0 0 20 20 from computed size 20×20 (path extent 17.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Button.icon-2@plain.none.slim.on.enabled — 0 0 20 20 from computed size 20×20 (path extent 17.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Button.icon-2@plain.none.medium.on.enabled — 0 0 20 20 from computed size 20×20 (path extent 17.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Button.icon-2@plain.none.large.on.enabled — 0 0 20 20 from computed size 20×20 (path extent 17.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Button.icon-2@plain.critical.micro.on.enabled — 0 0 20 20 from computed size 20×20 (path extent 17.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Button.icon-2@plain.critical.slim.on.enabled — 0 0 20 20 from computed size 20×20 (path extent 17.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Button.icon-2@plain.critical.medium.on.enabled — 0 0 20 20 from computed size 20×20 (path extent 17.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Button.icon-2@plain.critical.large.on.enabled — 0 0 20 20 from computed size 20×20 (path extent 17.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Button.icon-2@plain.success.micro.on.enabled — 0 0 20 20 from computed size 20×20 (path extent 17.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Button.icon-2@plain.success.slim.on.enabled — 0 0 20 20 from computed size 20×20 (path extent 17.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Button.icon-2@plain.success.medium.on.enabled — 0 0 20 20 from computed size 20×20 (path extent 17.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Button.icon-2@plain.success.large.on.enabled — 0 0 20 20 from computed size 20×20 (path extent 17.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Button.icon-2@primary.none.micro.on.enabled — 0 0 20 20 from computed size 20×20 (path extent 17.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Button.icon-2@primary.none.slim.on.enabled — 0 0 20 20 from computed size 20×20 (path extent 17.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Button.icon-2@primary.none.medium.on.enabled — 0 0 20 20 from computed size 20×20 (path extent 17.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Button.icon-2@primary.none.large.on.enabled — 0 0 20 20 from computed size 20×20 (path extent 17.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Button.icon-2@primary.critical.micro.on.enabled — 0 0 20 20 from computed size 20×20 (path extent 17.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Button.icon-2@primary.critical.slim.on.enabled — 0 0 20 20 from computed size 20×20 (path extent 17.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Button.icon-2@primary.critical.medium.on.enabled — 0 0 20 20 from computed size 20×20 (path extent 17.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Button.icon-2@primary.critical.large.on.enabled — 0 0 20 20 from computed size 20×20 (path extent 17.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Button.icon-2@primary.success.micro.on.enabled — 0 0 20 20 from computed size 20×20 (path extent 17.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Button.icon-2@primary.success.slim.on.enabled — 0 0 20 20 from computed size 20×20 (path extent 17.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Button.icon-2@primary.success.medium.on.enabled — 0 0 20 20 from computed size 20×20 (path extent 17.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Button.icon-2@primary.success.large.on.enabled — 0 0 20 20 from computed size 20×20 (path extent 17.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Button.icon-2@secondary.none.micro.on.enabled — 0 0 20 20 from computed size 20×20 (path extent 17.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Button.icon-2@secondary.none.slim.on.enabled — 0 0 20 20 from computed size 20×20 (path extent 17.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Button.icon-2@secondary.none.medium.on.enabled — 0 0 20 20 from computed size 20×20 (path extent 17.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Button.icon-2@secondary.none.large.on.enabled — 0 0 20 20 from computed size 20×20 (path extent 17.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Button.icon-2@secondary.critical.micro.on.enabled — 0 0 20 20 from computed size 20×20 (path extent 17.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Button.icon-2@secondary.critical.slim.on.enabled — 0 0 20 20 from computed size 20×20 (path extent 17.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Button.icon-2@secondary.critical.medium.on.enabled — 0 0 20 20 from computed size 20×20 (path extent 17.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Button.icon-2@secondary.critical.large.on.enabled — 0 0 20 20 from computed size 20×20 (path extent 17.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Button.icon-2@secondary.success.micro.on.enabled — 0 0 20 20 from computed size 20×20 (path extent 17.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Button.icon-2@secondary.success.slim.on.enabled — 0 0 20 20 from computed size 20×20 (path extent 17.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Button.icon-2@secondary.success.medium.on.enabled — 0 0 20 20 from computed size 20×20 (path extent 17.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Button.icon-2@secondary.success.large.on.enabled — 0 0 20 20 from computed size 20×20 (path extent 17.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Button.icon-2@tertiary.none.micro.on.enabled — 0 0 20 20 from computed size 20×20 (path extent 17.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Button.icon-2@tertiary.none.slim.on.enabled — 0 0 20 20 from computed size 20×20 (path extent 17.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Button.icon-2@tertiary.none.medium.on.enabled — 0 0 20 20 from computed size 20×20 (path extent 17.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Button.icon-2@tertiary.none.large.on.enabled — 0 0 20 20 from computed size 20×20 (path extent 17.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Button.icon-2@tertiary.critical.micro.on.enabled — 0 0 20 20 from computed size 20×20 (path extent 17.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Button.icon-2@tertiary.critical.slim.on.enabled — 0 0 20 20 from computed size 20×20 (path extent 17.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Button.icon-2@tertiary.critical.medium.on.enabled — 0 0 20 20 from computed size 20×20 (path extent 17.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Button.icon-2@tertiary.critical.large.on.enabled — 0 0 20 20 from computed size 20×20 (path extent 17.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Button.icon-2@tertiary.success.micro.on.enabled — 0 0 20 20 from computed size 20×20 (path extent 17.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Button.icon-2@tertiary.success.slim.on.enabled — 0 0 20 20 from computed size 20×20 (path extent 17.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Button.icon-2@tertiary.success.medium.on.enabled — 0 0 20 20 from computed size 20×20 (path extent 17.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Button.icon-2@tertiary.success.large.on.enabled — 0 0 20 20 from computed size 20×20 (path extent 17.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Button.icon-2@monochromePlain.none.micro.on.enabled — 0 0 20 20 from computed size 20×20 (path extent 17.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Button.icon-2@monochromePlain.none.slim.on.enabled — 0 0 20 20 from computed size 20×20 (path extent 17.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Button.icon-2@monochromePlain.none.medium.on.enabled — 0 0 20 20 from computed size 20×20 (path extent 17.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Button.icon-2@monochromePlain.none.large.on.enabled — 0 0 20 20 from computed size 20×20 (path extent 17.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Button.icon-2@monochromePlain.critical.micro.on.enabled — 0 0 20 20 from computed size 20×20 (path extent 17.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Button.icon-2@monochromePlain.critical.slim.on.enabled — 0 0 20 20 from computed size 20×20 (path extent 17.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Button.icon-2@monochromePlain.critical.medium.on.enabled — 0 0 20 20 from computed size 20×20 (path extent 17.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Button.icon-2@monochromePlain.critical.large.on.enabled — 0 0 20 20 from computed size 20×20 (path extent 17.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Button.icon-2@monochromePlain.success.micro.on.enabled — 0 0 20 20 from computed size 20×20 (path extent 17.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Button.icon-2@monochromePlain.success.slim.on.enabled — 0 0 20 20 from computed size 20×20 (path extent 17.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Button.icon-2@monochromePlain.success.medium.on.enabled — 0 0 20 20 from computed size 20×20 (path extent 17.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Button.icon-2@monochromePlain.success.large.on.enabled — 0 0 20 20 from computed size 20×20 (path extent 17.0; viewBox is not a computed style — named reconstruction)",
+      "root-display-carried: flex (overrides reviewed \"inline-flex\" — computed truth wins display, receipted)",
+      "state-axis-presence-dropped: icon absent under disabled but the contract has no \"disabled\" prop — factor dropped, part renders in that plane (named residue)",
+      "presence-carried: icon (60/120 combos) → visibleWhen withIcon",
+      "state-axis-presence-dropped: icon-2 absent under disabled but the contract has no \"disabled\" prop — factor dropped, part renders in that plane (named residue)",
+      "presence-carried: icon-2 (60/120 combos) → visibleWhen withIcon"
+    ],
+    "refusals": []
+  },
+  "enrichmentNotes": [
+    "layout enriched: root.layout.justify = center (uniform computed keyword — the schema's own vocabulary)",
+    "declared fact carried: root.appearance = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: root.border-bottom-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: root.border-left-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: root.border-right-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: root.border-top-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: root.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: root.font-feature-settings = \"calt\" 0 (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: root.position = relative (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: root.text-rendering = optimizelegibility (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: root.touch-action = manipulation (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: root.user-select = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: icon.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: icon.text-align = center (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: icon.user-select = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: icon-2.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: icon-2.max-height = 100% (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: icon-2.max-width = 100% (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: icon-2.text-align = center (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: icon-2.user-select = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label.text-align = center (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: label.user-select = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared state fact carried: [disabled] label.pointer-events = none (v15 declared vocabulary)",
+    "declared state fact carried: [disabled] root.pointer-events = none (v15 declared vocabulary)",
+    "declared state fact carried: [focus-visible] root.outline-style = solid (v15 declared vocabulary)",
+    "pair-with-unset carried: root.background-image = base plane per variant + placeholder maps per tone (emitter capability lift)",
+    "pair-with-unset carried: root.outline-color = base plane per variant + placeholder maps per tone (emitter capability lift)"
+  ]
+}

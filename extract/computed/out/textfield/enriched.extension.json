@@ -3056,7 +3056,7 @@
   "interactionOnDisabled": [],
   "structureReceipts": [
     "union-part-added: inherit.slim.off.off.on.enabled__default @1.0.0.1 (button|TextField__ClearButton)",
-    "union-part-added: inherit.slim.off.off.on.enabled__default @1.0.0.1.0 (span|Text)",
+    "union-part-added: inherit.slim.off.off.on.enabled__default @1.0.0.1.0 (span|Text|sr-only)",
     "union-part-added: inherit.slim.off.off.on.enabled__default @1.0.0.1.1 (span|Icon)",
     "union-part-added: inherit.slim.off.off.on.enabled__default @1.0.0.1.1.0 (svg|Icon__Svg)",
     "union-part-added: inherit.slim.off.off.on.enabled__default @1.0.0.1.1.0.0 (path|)",
@@ -3201,6 +3201,7 @@
       "svg-viewbox-reconstructed: TextField.icon@borderless.medium.off.on.on.enabled — 0 0 20 20 from computed size 20×20 (path extent 17.0; viewBox is not a computed style — named reconstruction)",
       "svg-viewbox-reconstructed: TextField.icon@borderless.medium.on.off.on.enabled — 0 0 20 20 from computed size 20×20 (path extent 17.0; viewBox is not a computed style — named reconstruction)",
       "svg-viewbox-reconstructed: TextField.icon@borderless.medium.on.on.on.enabled — 0 0 20 20 from computed size 20×20 (path extent 17.0; viewBox is not a computed style — named reconstruction)",
+      "root-display-carried: block via declared (overrides reviewed layout.display \"flex\" — computed truth wins display, receipted)",
       "literal-text-carried: label-2 = \"Store name\" (no text prop sample matches — the mounted value is carried verbatim)",
       "full-width-carried: connected__item spans its row parent's content width in every enabled combo → layout.grow (geometry evidence)",
       "presence-carried: prefix (16/32 combos) → visibleWhen withPrefix hidden-when disabled",

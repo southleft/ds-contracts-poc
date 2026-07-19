@@ -303,7 +303,8 @@
     ],
     "svgAssets": [],
     "receipts": [
-      "img-attrs-wired: part-0 src/alt bound by prop-name heuristic (alt={alt}) — the capture reads no attributes (named)"
+      "img-attrs-wired: part-0 src/alt bound by prop-name heuristic (alt={alt}) — the capture reads no attributes (named)",
+      "aspect-carried: part-0 computed width == height in every enabled combo (24/40/60/80px) → declared aspect-ratio 1 / 1 (geometry evidence; the real square rides a pseudo-element padding hack)"
     ],
     "refusals": []
   },
