@@ -17,6 +17,11 @@
 > their FULL prop spaces; their canvas projections (the drawn Figma subset) are the
 > named curation in `generate.ts` CANVAS_PROJECTIONS, quoted in
 > `figma/COMPILE-RECEIPT.md`.
+>
+> The v0.1.0 static-promotion contracts this ledger produced stay committed verbatim
+> at `extraction/static-contracts/` — they are the computed floor's PROP-SPACE AND
+> CARRIED-BINDING INPUT (`extract/computed/configs/polaris.json`); the floor must
+> never consume its own enriched output as the static layer.
 
 Extraction: Shopify/polaris @ `2b1ea88625e0613853ca8577c9acd1980a90f382` (polaris-react 13.10.1, MIT), 2026-07-18.
 

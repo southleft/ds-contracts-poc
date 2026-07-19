@@ -171,9 +171,28 @@ for (const g of groups.values()) {
 
   let scope: Decision['scope'];
   if (confirmingCombos.length === 0) {
-    // uniform contradiction → computed wins at the BASE binding
+    // uniform contradiction → computed wins at the BASE binding. Per-value
+    // overrides of this channel are removed too: base scope is only reached
+    // when EVERY combo contradicts, so every per-value override of the
+    // channel is contradicted by definition — leaving them in place would
+    // let the (wrong) overrides beat the (resolved) base in the cascade
+    // (the Banner tone map was exactly this).
     target.tokens ??= {};
     target.tokens[g.channel] = to;
+    for (const field of ['tokensByProp', 'literalsByProp'] as const) {
+      const raw = target[field] as Array<{ prop: string; map: Record<string, Record<string, unknown>> }> | { prop: string; map: Record<string, Record<string, unknown>> } | undefined;
+      if (!raw) continue;
+      const list = Array.isArray(raw) ? raw : [raw];
+      for (const e of list) {
+        for (const [value, m] of Object.entries(e.map)) {
+          delete m[g.channel];
+          if (Object.keys(m).length === 0) delete e.map[value];
+        }
+      }
+      const kept = list.filter((e) => Object.keys(e.map).length > 0);
+      if (kept.length === 0) delete target[field];
+      else (target as Record<string, unknown>)[field] = Array.isArray(raw) ? kept : kept[0];
+    }
     scope = 'base';
   } else {
     // find the single axis that cleanly partitions the combos

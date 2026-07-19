@@ -1,0 +1,200 @@
+{
+  "_marker": "OFFLINE GATE RE-RUN (extract/computed/regate.ts) — committed captured truth replayed through the CURRENT fusion + emitters. Pixel pairs are NOT scored offline (original screenshots are session artifacts); computed-equality is the instrument. The committed scorecard.json (harness run) is untouched.",
+  "component": "Badge",
+  "config": "extract/computed/configs/polaris.json",
+  "capturedBrowser": "Chromium 148.0.7778.96 (playwright-core, headless)",
+  "declared": {
+    "base": [],
+    "state": []
+  },
+  "scorecard": {
+    "component": "Badge",
+    "generatedBy": "extract/computed/gate.ts",
+    "browser": "Chromium 148.0.7778.96 (playwright-core, headless)",
+    "method": "enriched contract → core/emit-html (wrapped library tokens + minted token custom properties) vs the ORIGINAL npm package rendering, same pinned Chromium, per combo × interaction; computed-equality over the styled channel set (exact string, no tolerance) + pixelmatch at threshold 0 (AA counted) and 0.1 (AA excluded) — both quoted, never widened",
+    "combos": 1,
+    "interactions": 4,
+    "computed": {
+      "cellsCompared": 136,
+      "cellsEqual": 124,
+      "pctEqual": 91.17647058823529,
+      "rowsFullyEqual": 0,
+      "rows": 4
+    },
+    "pixel": {
+      "pairs": 0,
+      "perfectExact": 0,
+      "perfectAA": 0,
+      "meanExact": 0,
+      "meanAA": 0,
+      "maxAA": 0
+    },
+    "fusion": {
+      "boundConfirmed": 12,
+      "boundCells": 16,
+      "contradictions": 4,
+      "mintedLeaves": 0,
+      "mintedLeavesUnfolded": 1,
+      "baseBindings": 0,
+      "stateBindings": 0,
+      "codeOnlyChannels": 0,
+      "overflowBindings": 0,
+      "folds": 18
+    },
+    "worstRows": [
+      {
+        "key": "__default",
+        "pctAA": 100,
+        "pctExact": 100,
+        "channelsMismatched": 3
+      },
+      {
+        "key": "__hover",
+        "pctAA": 100,
+        "pctExact": 100,
+        "channelsMismatched": 3
+      },
+      {
+        "key": "__focus-visible",
+        "pctAA": 100,
+        "pctExact": 100,
+        "channelsMismatched": 3
+      },
+      {
+        "key": "__active",
+        "pctAA": 100,
+        "pctExact": 100,
+        "channelsMismatched": 3
+      }
+    ],
+    "topMismatchedChannels": [
+      [
+        "root.border-bottom-left-radius",
+        4
+      ],
+      [
+        "root.border-bottom-right-radius",
+        4
+      ],
+      [
+        "root.border-top-right-radius",
+        4
+      ]
+    ],
+    "namedLosses": [],
+    "rows": [
+      {
+        "key": "__default",
+        "channelsCompared": 34,
+        "channelsEqual": 31,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "border-bottom-left-radius",
+            "ours": "0px",
+            "theirs": "8px"
+          },
+          {
+            "part": "root",
+            "channel": "border-bottom-right-radius",
+            "ours": "0px",
+            "theirs": "8px"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-right-radius",
+            "ours": "0px",
+            "theirs": "8px"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "__hover",
+        "channelsCompared": 34,
+        "channelsEqual": 31,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "border-bottom-left-radius",
+            "ours": "0px",
+            "theirs": "8px"
+          },
+          {
+            "part": "root",
+            "channel": "border-bottom-right-radius",
+            "ours": "0px",
+            "theirs": "8px"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-right-radius",
+            "ours": "0px",
+            "theirs": "8px"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "__focus-visible",
+        "channelsCompared": 34,
+        "channelsEqual": 31,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "border-bottom-left-radius",
+            "ours": "0px",
+            "theirs": "8px"
+          },
+          {
+            "part": "root",
+            "channel": "border-bottom-right-radius",
+            "ours": "0px",
+            "theirs": "8px"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-right-radius",
+            "ours": "0px",
+            "theirs": "8px"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "__active",
+        "channelsCompared": 34,
+        "channelsEqual": 31,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "border-bottom-left-radius",
+            "ours": "0px",
+            "theirs": "8px"
+          },
+          {
+            "part": "root",
+            "channel": "border-bottom-right-radius",
+            "ours": "0px",
+            "theirs": "8px"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-right-radius",
+            "ours": "0px",
+            "theirs": "8px"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      }
+    ]
+  }
+}

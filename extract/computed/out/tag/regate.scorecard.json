@@ -4,28 +4,7 @@
   "config": "extract/computed/configs/polaris.json",
   "capturedBrowser": "Chromium 148.0.7778.96 (playwright-core, headless)",
   "declared": {
-    "base": [
-      {
-        "part": "root",
-        "channel": "max-width",
-        "value": "100%"
-      },
-      {
-        "part": "root",
-        "channel": "position",
-        "value": "relative"
-      },
-      {
-        "part": "label",
-        "channel": "display",
-        "value": "inline"
-      },
-      {
-        "part": "label",
-        "channel": "text-wrap-mode",
-        "value": "nowrap"
-      }
-    ],
+    "base": [],
     "state": [
       {
         "state": "disabled",
@@ -44,8 +23,8 @@
     "interactions": 4,
     "computed": {
       "cellsCompared": 160,
-      "cellsEqual": 148,
-      "pctEqual": 92.5,
+      "cellsEqual": 124,
+      "pctEqual": 77.5,
       "rowsFullyEqual": 0,
       "rows": 8
     },
@@ -58,12 +37,12 @@
       "maxAA": 0
     },
     "fusion": {
-      "boundConfirmed": 6,
-      "boundCells": 7,
-      "contradictions": 1,
-      "mintedLeaves": 8,
-      "mintedLeavesUnfolded": 8,
-      "baseBindings": 13,
+      "boundConfirmed": 9,
+      "boundCells": 12,
+      "contradictions": 3,
+      "mintedLeaves": 7,
+      "mintedLeavesUnfolded": 7,
+      "baseBindings": 8,
       "stateBindings": 31,
       "codeOnlyChannels": 4,
       "overflowBindings": 21,
@@ -74,52 +53,64 @@
         "key": "disabled__default",
         "pctAA": 100,
         "pctExact": 100,
-        "channelsMismatched": 2
+        "channelsMismatched": 5
       },
       {
         "key": "disabled__hover",
         "pctAA": 100,
         "pctExact": 100,
-        "channelsMismatched": 2
+        "channelsMismatched": 5
       },
       {
         "key": "disabled__focus-visible",
         "pctAA": 100,
         "pctExact": 100,
-        "channelsMismatched": 2
+        "channelsMismatched": 5
       },
       {
         "key": "disabled__active",
         "pctAA": 100,
         "pctExact": 100,
-        "channelsMismatched": 2
+        "channelsMismatched": 5
       },
       {
         "key": "enabled__default",
         "pctAA": 100,
         "pctExact": 100,
-        "channelsMismatched": 1
+        "channelsMismatched": 4
       },
       {
         "key": "enabled__hover",
         "pctAA": 100,
         "pctExact": 100,
-        "channelsMismatched": 1
+        "channelsMismatched": 4
       },
       {
         "key": "enabled__focus-visible",
         "pctAA": 100,
         "pctExact": 100,
-        "channelsMismatched": 1
+        "channelsMismatched": 4
       },
       {
         "key": "enabled__active",
         "pctAA": 100,
         "pctExact": 100,
-        "channelsMismatched": 1
+        "channelsMismatched": 4
       }
     ],
     "topMismatchedChannels": [
+      [
+        "root.border-bottom-left-radius",
+        8
+      ],
+      [
+        "root.border-bottom-right-radius",
+        8
+      ],
+      [
+        "root.border-top-right-radius",
+        8
+      ],
       [
         "label.display",
         8
@@ -160,10 +151,28 @@
       {
         "key": "enabled__default",
         "channelsCompared": 20,
-        "channelsEqual": 19,
+        "channelsEqual": 16,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "border-bottom-left-radius",
+            "ours": "0px",
+            "theirs": "8px"
+          },
+          {
+            "part": "root",
+            "channel": "border-bottom-right-radius",
+            "ours": "0px",
+            "theirs": "8px"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-right-radius",
+            "ours": "0px",
+            "theirs": "8px"
+          },
           {
             "part": "label",
             "channel": "display",
@@ -176,10 +185,28 @@
       {
         "key": "enabled__hover",
         "channelsCompared": 20,
-        "channelsEqual": 19,
+        "channelsEqual": 16,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "border-bottom-left-radius",
+            "ours": "0px",
+            "theirs": "8px"
+          },
+          {
+            "part": "root",
+            "channel": "border-bottom-right-radius",
+            "ours": "0px",
+            "theirs": "8px"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-right-radius",
+            "ours": "0px",
+            "theirs": "8px"
+          },
           {
             "part": "label",
             "channel": "display",
@@ -192,10 +219,28 @@
       {
         "key": "enabled__focus-visible",
         "channelsCompared": 20,
-        "channelsEqual": 19,
+        "channelsEqual": 16,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "border-bottom-left-radius",
+            "ours": "0px",
+            "theirs": "8px"
+          },
+          {
+            "part": "root",
+            "channel": "border-bottom-right-radius",
+            "ours": "0px",
+            "theirs": "8px"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-right-radius",
+            "ours": "0px",
+            "theirs": "8px"
+          },
           {
             "part": "label",
             "channel": "display",
@@ -208,10 +253,28 @@
       {
         "key": "enabled__active",
         "channelsCompared": 20,
-        "channelsEqual": 19,
+        "channelsEqual": 16,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "border-bottom-left-radius",
+            "ours": "0px",
+            "theirs": "8px"
+          },
+          {
+            "part": "root",
+            "channel": "border-bottom-right-radius",
+            "ours": "0px",
+            "theirs": "8px"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-right-radius",
+            "ours": "0px",
+            "theirs": "8px"
+          },
           {
             "part": "label",
             "channel": "display",
@@ -224,7 +287,7 @@
       {
         "key": "disabled__default",
         "channelsCompared": 20,
-        "channelsEqual": 18,
+        "channelsEqual": 15,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
@@ -233,6 +296,24 @@
             "channel": "background-color",
             "ours": "rgba(227, 227, 227, 1)",
             "theirs": "rgba(0, 0, 0, 0.05)"
+          },
+          {
+            "part": "root",
+            "channel": "border-bottom-left-radius",
+            "ours": "0px",
+            "theirs": "8px"
+          },
+          {
+            "part": "root",
+            "channel": "border-bottom-right-radius",
+            "ours": "0px",
+            "theirs": "8px"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-right-radius",
+            "ours": "0px",
+            "theirs": "8px"
           },
           {
             "part": "label",
@@ -246,7 +327,7 @@
       {
         "key": "disabled__hover",
         "channelsCompared": 20,
-        "channelsEqual": 18,
+        "channelsEqual": 15,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
@@ -255,6 +336,24 @@
             "channel": "background-color",
             "ours": "rgba(227, 227, 227, 1)",
             "theirs": "rgba(0, 0, 0, 0.05)"
+          },
+          {
+            "part": "root",
+            "channel": "border-bottom-left-radius",
+            "ours": "0px",
+            "theirs": "8px"
+          },
+          {
+            "part": "root",
+            "channel": "border-bottom-right-radius",
+            "ours": "0px",
+            "theirs": "8px"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-right-radius",
+            "ours": "0px",
+            "theirs": "8px"
           },
           {
             "part": "label",
@@ -268,7 +367,7 @@
       {
         "key": "disabled__focus-visible",
         "channelsCompared": 20,
-        "channelsEqual": 18,
+        "channelsEqual": 15,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
@@ -277,6 +376,24 @@
             "channel": "background-color",
             "ours": "rgba(227, 227, 227, 1)",
             "theirs": "rgba(0, 0, 0, 0.05)"
+          },
+          {
+            "part": "root",
+            "channel": "border-bottom-left-radius",
+            "ours": "0px",
+            "theirs": "8px"
+          },
+          {
+            "part": "root",
+            "channel": "border-bottom-right-radius",
+            "ours": "0px",
+            "theirs": "8px"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-right-radius",
+            "ours": "0px",
+            "theirs": "8px"
           },
           {
             "part": "label",
@@ -290,7 +407,7 @@
       {
         "key": "disabled__active",
         "channelsCompared": 20,
-        "channelsEqual": 18,
+        "channelsEqual": 15,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
@@ -299,6 +416,24 @@
             "channel": "background-color",
             "ours": "rgba(227, 227, 227, 1)",
             "theirs": "rgba(0, 0, 0, 0.05)"
+          },
+          {
+            "part": "root",
+            "channel": "border-bottom-left-radius",
+            "ours": "0px",
+            "theirs": "8px"
+          },
+          {
+            "part": "root",
+            "channel": "border-bottom-right-radius",
+            "ours": "0px",
+            "theirs": "8px"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-right-radius",
+            "ours": "0px",
+            "theirs": "8px"
           },
           {
             "part": "label",

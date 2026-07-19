@@ -48,6 +48,14 @@ npx tsx examples/polaris/generate.ts --check   # byte-stability + SHOWCASE-numbe
 # 5) verification vs Polaris's own rendering → receipts/
 #    (harness dir: npm i @shopify/polaris@13.9.5 react@18 react-dom@18 esbuild)
 npx tsx examples/polaris/scripts/verify.ts --harness <harness-dir>
+
+# 6) THE FLOOR ROUND (v0.2.0 — the committed contracts' actual provenance):
+#    computed-capture floor over the same harness (prop-space source = the
+#    committed v0.1.0 static contracts in extraction/static-contracts/),
+#    contradiction resolutions via the explicit-ack CLI, then re-promotion.
+npm run extract:computed -- --harness <harness-dir>
+npm run extract:computed:resolve -- --dir extract/computed/out/<comp> --apply "<ids>" [--to "{ref}"]
+npx tsx examples/polaris/scripts/promote-floor.ts
 ```
 
 Steps 4 and the eval run from the COMMITTED artifacts alone — that is the point of a contract.

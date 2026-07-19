@@ -100,14 +100,16 @@ for (const { dir, kebab } of PROMOTED) {
   const browser = String(extension.browser ?? 'unknown');
   const library = String(extension.library ?? 'unknown');
   contract.version = '0.2.0';
+  const resolvedNote = src === resolvedPath
+    ? `contradictions resolved computed-wins per the decisions ledger (extract/computed/out/${dir}/decisions.md, human-acked; source resolved.contract.json)`
+    : `zero binding contradictions in the review queue (source enriched.contract.json)`;
   contract.description =
     `${contract.description} FLOOR-PROMOTED v0.2.0 (extract/computed round 2): this contract is the computed-floor ` +
     `rebuild — complete browser truth captured from the real ${library} npm package rendered in headless Chromium ` +
     `${browser} (every enumerated longhand per element incl. ::before/::after, full state sweep, double-run ` +
     `byte-identity), fused with the static semantic layer (BOUND bindings browser-confirmed, unlabeled channels ` +
     `MINTED as imported.* tokens in tokens/polaris-minted.dtcg.json, uniform registry channels DECLARED), ` +
-    `contradictions resolved computed-wins per the decisions ledger (extract/computed/out/${dir}/decisions.md, ` +
-    `human-acked; source ${path.basename(src)}). Everything the vocabulary cannot carry is named in ` +
+    `${resolvedNote}. Everything the vocabulary cannot carry is named in ` +
     `contracts/${kebab}.extension.json. Delta ledger: extract/computed/out/${dir}/LEDGER.md (supersedes this ` +
     `component's section of extraction/PROMOTION.md).`;
 

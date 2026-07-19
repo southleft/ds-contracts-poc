@@ -1,0 +1,1774 @@
+{
+  "_marker": "OFFLINE GATE RE-RUN (extract/computed/regate.ts) — committed captured truth replayed through the CURRENT fusion + emitters. Pixel pairs are NOT scored offline (original screenshots are session artifacts); computed-equality is the instrument. The committed scorecard.json (harness run) is untouched.",
+  "component": "ProgressBar",
+  "config": "extract/computed/configs/polaris.json",
+  "capturedBrowser": "Chromium 148.0.7778.96 (playwright-core, headless)",
+  "declared": {
+    "base": [],
+    "state": []
+  },
+  "scorecard": {
+    "component": "ProgressBar",
+    "generatedBy": "extract/computed/gate.ts",
+    "browser": "Chromium 148.0.7778.96 (playwright-core, headless)",
+    "method": "enriched contract → core/emit-html (wrapped library tokens + minted token custom properties) vs the ORIGINAL npm package rendering, same pinned Chromium, per combo × interaction; computed-equality over the styled channel set (exact string, no tolerance) + pixelmatch at threshold 0 (AA counted) and 0.1 (AA excluded) — both quoted, never widened",
+    "combos": 12,
+    "interactions": 4,
+    "computed": {
+      "cellsCompared": 672,
+      "cellsEqual": 480,
+      "pctEqual": 71.42857142857143,
+      "rowsFullyEqual": 0,
+      "rows": 48
+    },
+    "pixel": {
+      "pairs": 24,
+      "perfectExact": 0,
+      "perfectAA": 0,
+      "meanExact": 100,
+      "meanAA": 100,
+      "maxAA": 100
+    },
+    "fusion": {
+      "boundConfirmed": 60,
+      "boundCells": 96,
+      "contradictions": 36,
+      "mintedLeaves": 9,
+      "mintedLeavesUnfolded": 9,
+      "baseBindings": 13,
+      "stateBindings": 0,
+      "codeOnlyChannels": 12,
+      "overflowBindings": 13,
+      "folds": 0
+    },
+    "worstRows": [
+      {
+        "key": "small.highlight__default",
+        "pctAA": 100,
+        "pctExact": 100,
+        "channelsMismatched": 4
+      },
+      {
+        "key": "small.highlight__hover",
+        "pctAA": 100,
+        "pctExact": 100,
+        "channelsMismatched": 4
+      },
+      {
+        "key": "small.highlight__focus-visible",
+        "pctAA": 100,
+        "pctExact": 100,
+        "channelsMismatched": 4
+      },
+      {
+        "key": "small.highlight__active",
+        "pctAA": 100,
+        "pctExact": 100,
+        "channelsMismatched": 4
+      },
+      {
+        "key": "small.primary__default",
+        "pctAA": 100,
+        "pctExact": 100,
+        "channelsMismatched": 4
+      },
+      {
+        "key": "small.primary__hover",
+        "pctAA": 100,
+        "pctExact": 100,
+        "channelsMismatched": 4
+      },
+      {
+        "key": "small.primary__focus-visible",
+        "pctAA": 100,
+        "pctExact": 100,
+        "channelsMismatched": 4
+      },
+      {
+        "key": "small.primary__active",
+        "pctAA": 100,
+        "pctExact": 100,
+        "channelsMismatched": 4
+      }
+    ],
+    "topMismatchedChannels": [
+      [
+        "root.border-bottom-left-radius",
+        48
+      ],
+      [
+        "root.border-bottom-right-radius",
+        48
+      ],
+      [
+        "root.border-top-right-radius",
+        48
+      ],
+      [
+        "indicator.transform",
+        48
+      ]
+    ],
+    "namedLosses": [
+      "overflow: progress.bottom — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+      "overflow: progress.left — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+      "overflow: progress.min-height — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+      "overflow: progress.min-width — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+      "overflow: progress.right — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+      "overflow: progress.top — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+      "overflow: progress.vertical-align — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+      "overflow: label.bottom — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+      "overflow: label.left — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+      "overflow: label.min-height — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+      "overflow: label.min-width — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+      "overflow: label.right — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+      "overflow: label.top — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+      "code-only: progress.appearance — declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
+      "code-only: progress.clip-path — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: progress.overflow-x — declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
+      "code-only: progress.overflow-y — declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
+      "code-only: progress.position — declared-channel value outside the bounded grammar — named residue (v15)",
+      "code-only: progress.text-wrap-mode — declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
+      "code-only: indicator.transform — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: label.clip-path — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: label.overflow-x — declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
+      "code-only: label.overflow-y — declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
+      "code-only: label.position — declared-channel value outside the bounded grammar — named residue (v15)",
+      "code-only: label.text-wrap-mode — declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision"
+    ],
+    "rows": [
+      {
+        "key": "small.highlight__default",
+        "channelsCompared": 14,
+        "channelsEqual": 10,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "border-bottom-left-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "root",
+            "channel": "border-bottom-right-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-right-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "indicator",
+            "channel": "transform",
+            "ours": "none",
+            "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "small.highlight__hover",
+        "channelsCompared": 14,
+        "channelsEqual": 10,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "border-bottom-left-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "root",
+            "channel": "border-bottom-right-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-right-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "indicator",
+            "channel": "transform",
+            "ours": "none",
+            "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+          }
+        ],
+        "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "small.highlight__focus-visible",
+        "channelsCompared": 14,
+        "channelsEqual": 10,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "border-bottom-left-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "root",
+            "channel": "border-bottom-right-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-right-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "indicator",
+            "channel": "transform",
+            "ours": "none",
+            "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "small.highlight__active",
+        "channelsCompared": 14,
+        "channelsEqual": 10,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "border-bottom-left-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "root",
+            "channel": "border-bottom-right-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-right-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "indicator",
+            "channel": "transform",
+            "ours": "none",
+            "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+          }
+        ],
+        "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "small.primary__default",
+        "channelsCompared": 14,
+        "channelsEqual": 10,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "border-bottom-left-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "root",
+            "channel": "border-bottom-right-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-right-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "indicator",
+            "channel": "transform",
+            "ours": "none",
+            "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "small.primary__hover",
+        "channelsCompared": 14,
+        "channelsEqual": 10,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "border-bottom-left-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "root",
+            "channel": "border-bottom-right-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-right-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "indicator",
+            "channel": "transform",
+            "ours": "none",
+            "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+          }
+        ],
+        "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "small.primary__focus-visible",
+        "channelsCompared": 14,
+        "channelsEqual": 10,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "border-bottom-left-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "root",
+            "channel": "border-bottom-right-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-right-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "indicator",
+            "channel": "transform",
+            "ours": "none",
+            "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "small.primary__active",
+        "channelsCompared": 14,
+        "channelsEqual": 10,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "border-bottom-left-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "root",
+            "channel": "border-bottom-right-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-right-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "indicator",
+            "channel": "transform",
+            "ours": "none",
+            "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+          }
+        ],
+        "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "small.success__default",
+        "channelsCompared": 14,
+        "channelsEqual": 10,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "border-bottom-left-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "root",
+            "channel": "border-bottom-right-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-right-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "indicator",
+            "channel": "transform",
+            "ours": "none",
+            "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "small.success__hover",
+        "channelsCompared": 14,
+        "channelsEqual": 10,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "border-bottom-left-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "root",
+            "channel": "border-bottom-right-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-right-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "indicator",
+            "channel": "transform",
+            "ours": "none",
+            "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+          }
+        ],
+        "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "small.success__focus-visible",
+        "channelsCompared": 14,
+        "channelsEqual": 10,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "border-bottom-left-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "root",
+            "channel": "border-bottom-right-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-right-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "indicator",
+            "channel": "transform",
+            "ours": "none",
+            "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "small.success__active",
+        "channelsCompared": 14,
+        "channelsEqual": 10,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "border-bottom-left-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "root",
+            "channel": "border-bottom-right-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-right-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "indicator",
+            "channel": "transform",
+            "ours": "none",
+            "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+          }
+        ],
+        "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "small.critical__default",
+        "channelsCompared": 14,
+        "channelsEqual": 10,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "border-bottom-left-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "root",
+            "channel": "border-bottom-right-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-right-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "indicator",
+            "channel": "transform",
+            "ours": "none",
+            "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "small.critical__hover",
+        "channelsCompared": 14,
+        "channelsEqual": 10,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "border-bottom-left-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "root",
+            "channel": "border-bottom-right-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-right-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "indicator",
+            "channel": "transform",
+            "ours": "none",
+            "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+          }
+        ],
+        "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "small.critical__focus-visible",
+        "channelsCompared": 14,
+        "channelsEqual": 10,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "border-bottom-left-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "root",
+            "channel": "border-bottom-right-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-right-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "indicator",
+            "channel": "transform",
+            "ours": "none",
+            "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "small.critical__active",
+        "channelsCompared": 14,
+        "channelsEqual": 10,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "border-bottom-left-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "root",
+            "channel": "border-bottom-right-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-right-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "indicator",
+            "channel": "transform",
+            "ours": "none",
+            "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+          }
+        ],
+        "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "medium.highlight__default",
+        "channelsCompared": 14,
+        "channelsEqual": 10,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "border-bottom-left-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "root",
+            "channel": "border-bottom-right-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-right-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "indicator",
+            "channel": "transform",
+            "ours": "none",
+            "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "medium.highlight__hover",
+        "channelsCompared": 14,
+        "channelsEqual": 10,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "border-bottom-left-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "root",
+            "channel": "border-bottom-right-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-right-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "indicator",
+            "channel": "transform",
+            "ours": "none",
+            "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+          }
+        ],
+        "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "medium.highlight__focus-visible",
+        "channelsCompared": 14,
+        "channelsEqual": 10,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "border-bottom-left-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "root",
+            "channel": "border-bottom-right-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-right-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "indicator",
+            "channel": "transform",
+            "ours": "none",
+            "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "medium.highlight__active",
+        "channelsCompared": 14,
+        "channelsEqual": 10,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "border-bottom-left-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "root",
+            "channel": "border-bottom-right-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-right-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "indicator",
+            "channel": "transform",
+            "ours": "none",
+            "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+          }
+        ],
+        "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "medium.primary__default",
+        "channelsCompared": 14,
+        "channelsEqual": 10,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "border-bottom-left-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "root",
+            "channel": "border-bottom-right-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-right-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "indicator",
+            "channel": "transform",
+            "ours": "none",
+            "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "medium.primary__hover",
+        "channelsCompared": 14,
+        "channelsEqual": 10,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "border-bottom-left-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "root",
+            "channel": "border-bottom-right-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-right-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "indicator",
+            "channel": "transform",
+            "ours": "none",
+            "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+          }
+        ],
+        "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "medium.primary__focus-visible",
+        "channelsCompared": 14,
+        "channelsEqual": 10,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "border-bottom-left-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "root",
+            "channel": "border-bottom-right-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-right-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "indicator",
+            "channel": "transform",
+            "ours": "none",
+            "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "medium.primary__active",
+        "channelsCompared": 14,
+        "channelsEqual": 10,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "border-bottom-left-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "root",
+            "channel": "border-bottom-right-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-right-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "indicator",
+            "channel": "transform",
+            "ours": "none",
+            "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+          }
+        ],
+        "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "medium.success__default",
+        "channelsCompared": 14,
+        "channelsEqual": 10,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "border-bottom-left-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "root",
+            "channel": "border-bottom-right-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-right-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "indicator",
+            "channel": "transform",
+            "ours": "none",
+            "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "medium.success__hover",
+        "channelsCompared": 14,
+        "channelsEqual": 10,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "border-bottom-left-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "root",
+            "channel": "border-bottom-right-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-right-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "indicator",
+            "channel": "transform",
+            "ours": "none",
+            "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+          }
+        ],
+        "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "medium.success__focus-visible",
+        "channelsCompared": 14,
+        "channelsEqual": 10,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "border-bottom-left-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "root",
+            "channel": "border-bottom-right-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-right-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "indicator",
+            "channel": "transform",
+            "ours": "none",
+            "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "medium.success__active",
+        "channelsCompared": 14,
+        "channelsEqual": 10,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "border-bottom-left-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "root",
+            "channel": "border-bottom-right-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-right-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "indicator",
+            "channel": "transform",
+            "ours": "none",
+            "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+          }
+        ],
+        "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "medium.critical__default",
+        "channelsCompared": 14,
+        "channelsEqual": 10,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "border-bottom-left-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "root",
+            "channel": "border-bottom-right-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-right-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "indicator",
+            "channel": "transform",
+            "ours": "none",
+            "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "medium.critical__hover",
+        "channelsCompared": 14,
+        "channelsEqual": 10,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "border-bottom-left-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "root",
+            "channel": "border-bottom-right-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-right-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "indicator",
+            "channel": "transform",
+            "ours": "none",
+            "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+          }
+        ],
+        "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "medium.critical__focus-visible",
+        "channelsCompared": 14,
+        "channelsEqual": 10,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "border-bottom-left-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "root",
+            "channel": "border-bottom-right-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-right-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "indicator",
+            "channel": "transform",
+            "ours": "none",
+            "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "medium.critical__active",
+        "channelsCompared": 14,
+        "channelsEqual": 10,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "border-bottom-left-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "root",
+            "channel": "border-bottom-right-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-right-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "indicator",
+            "channel": "transform",
+            "ours": "none",
+            "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+          }
+        ],
+        "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "large.highlight__default",
+        "channelsCompared": 14,
+        "channelsEqual": 10,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "border-bottom-left-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "root",
+            "channel": "border-bottom-right-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-right-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "indicator",
+            "channel": "transform",
+            "ours": "none",
+            "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "large.highlight__hover",
+        "channelsCompared": 14,
+        "channelsEqual": 10,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "border-bottom-left-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "root",
+            "channel": "border-bottom-right-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-right-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "indicator",
+            "channel": "transform",
+            "ours": "none",
+            "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+          }
+        ],
+        "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "large.highlight__focus-visible",
+        "channelsCompared": 14,
+        "channelsEqual": 10,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "border-bottom-left-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "root",
+            "channel": "border-bottom-right-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-right-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "indicator",
+            "channel": "transform",
+            "ours": "none",
+            "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "large.highlight__active",
+        "channelsCompared": 14,
+        "channelsEqual": 10,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "border-bottom-left-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "root",
+            "channel": "border-bottom-right-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-right-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "indicator",
+            "channel": "transform",
+            "ours": "none",
+            "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+          }
+        ],
+        "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "large.primary__default",
+        "channelsCompared": 14,
+        "channelsEqual": 10,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "border-bottom-left-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "root",
+            "channel": "border-bottom-right-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-right-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "indicator",
+            "channel": "transform",
+            "ours": "none",
+            "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "large.primary__hover",
+        "channelsCompared": 14,
+        "channelsEqual": 10,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "border-bottom-left-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "root",
+            "channel": "border-bottom-right-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-right-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "indicator",
+            "channel": "transform",
+            "ours": "none",
+            "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+          }
+        ],
+        "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "large.primary__focus-visible",
+        "channelsCompared": 14,
+        "channelsEqual": 10,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "border-bottom-left-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "root",
+            "channel": "border-bottom-right-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-right-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "indicator",
+            "channel": "transform",
+            "ours": "none",
+            "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "large.primary__active",
+        "channelsCompared": 14,
+        "channelsEqual": 10,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "border-bottom-left-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "root",
+            "channel": "border-bottom-right-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-right-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "indicator",
+            "channel": "transform",
+            "ours": "none",
+            "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+          }
+        ],
+        "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "large.success__default",
+        "channelsCompared": 14,
+        "channelsEqual": 10,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "border-bottom-left-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "root",
+            "channel": "border-bottom-right-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-right-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "indicator",
+            "channel": "transform",
+            "ours": "none",
+            "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "large.success__hover",
+        "channelsCompared": 14,
+        "channelsEqual": 10,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "border-bottom-left-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "root",
+            "channel": "border-bottom-right-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-right-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "indicator",
+            "channel": "transform",
+            "ours": "none",
+            "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+          }
+        ],
+        "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "large.success__focus-visible",
+        "channelsCompared": 14,
+        "channelsEqual": 10,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "border-bottom-left-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "root",
+            "channel": "border-bottom-right-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-right-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "indicator",
+            "channel": "transform",
+            "ours": "none",
+            "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "large.success__active",
+        "channelsCompared": 14,
+        "channelsEqual": 10,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "border-bottom-left-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "root",
+            "channel": "border-bottom-right-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-right-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "indicator",
+            "channel": "transform",
+            "ours": "none",
+            "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+          }
+        ],
+        "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "large.critical__default",
+        "channelsCompared": 14,
+        "channelsEqual": 10,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "border-bottom-left-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "root",
+            "channel": "border-bottom-right-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-right-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "indicator",
+            "channel": "transform",
+            "ours": "none",
+            "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "large.critical__hover",
+        "channelsCompared": 14,
+        "channelsEqual": 10,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "border-bottom-left-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "root",
+            "channel": "border-bottom-right-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-right-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "indicator",
+            "channel": "transform",
+            "ours": "none",
+            "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+          }
+        ],
+        "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "large.critical__focus-visible",
+        "channelsCompared": 14,
+        "channelsEqual": 10,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "border-bottom-left-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "root",
+            "channel": "border-bottom-right-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-right-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "indicator",
+            "channel": "transform",
+            "ours": "none",
+            "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "large.critical__active",
+        "channelsCompared": 14,
+        "channelsEqual": 10,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "border-bottom-left-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "root",
+            "channel": "border-bottom-right-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-right-radius",
+            "ours": "0px",
+            "theirs": "4px"
+          },
+          {
+            "part": "indicator",
+            "channel": "transform",
+            "ours": "none",
+            "theirs": "matrix(0.25, 0, 0, 1, 0, 0)"
+          }
+        ],
+        "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+      }
+    ]
+  }
+}

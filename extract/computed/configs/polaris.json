@@ -30,7 +30,7 @@
     {
       "name": "Button",
       "importName": "Button",
-      "contract": "examples/polaris/contracts/button.contract.json",
+      "contract": "examples/polaris/extraction/static-contracts/button.contract.json",
       "sampleText": "Save changes",
       "axes": ["variant", "tone", "size"],
       "stateProps": [{ "prop": "disabled", "state": "disabled" }],
@@ -58,7 +58,7 @@
     {
       "name": "Tag",
       "importName": "Tag",
-      "contract": "examples/polaris/contracts/tag.contract.json",
+      "contract": "examples/polaris/extraction/static-contracts/tag.contract.json",
       "sampleText": "Wholesale",
       "axes": [],
       "stateProps": [{ "prop": "disabled", "state": "disabled" }],
@@ -73,14 +73,14 @@
     {
       "name": "Badge",
       "importName": "Badge",
-      "contract": "examples/polaris/contracts/badge.contract.json",
+      "contract": "examples/polaris/extraction/static-contracts/badge.contract.json",
       "sampleText": "Fulfilled",
       "axes": []
     },
     {
       "name": "Banner",
       "importName": "Banner",
-      "contract": "examples/polaris/contracts/banner.contract.json",
+      "contract": "examples/polaris/extraction/static-contracts/banner.contract.json",
       "sampleText": "Use your finance report to get detailed insights.",
       "axes": ["tone"],
       "fixedProps": { "title": "Order archived" },
@@ -95,7 +95,7 @@
     {
       "name": "Checkbox",
       "importName": "Checkbox",
-      "contract": "examples/polaris/contracts/checkbox.contract.json",
+      "contract": "examples/polaris/extraction/static-contracts/checkbox.contract.json",
       "sampleText": "",
       "axes": [],
       "stateProps": [{ "prop": "disabled", "state": "disabled" }],
@@ -112,7 +112,7 @@
     {
       "name": "RadioButton",
       "importName": "RadioButton",
-      "contract": "examples/polaris/contracts/radio-button.contract.json",
+      "contract": "examples/polaris/extraction/static-contracts/radio-button.contract.json",
       "sampleText": "",
       "axes": [],
       "stateProps": [{ "prop": "disabled", "state": "disabled" }],
@@ -122,7 +122,7 @@
     {
       "name": "Avatar",
       "importName": "Avatar",
-      "contract": "examples/polaris/contracts/avatar.contract.json",
+      "contract": "examples/polaris/extraction/static-contracts/avatar.contract.json",
       "sampleText": "",
       "axes": ["size"],
       "triage": [
@@ -136,14 +136,14 @@
     {
       "name": "Spinner",
       "importName": "Spinner",
-      "contract": "examples/polaris/contracts/spinner.contract.json",
+      "contract": "examples/polaris/extraction/static-contracts/spinner.contract.json",
       "sampleText": "",
       "axes": ["size"]
     },
     {
       "name": "ProgressBar",
       "importName": "ProgressBar",
-      "contract": "examples/polaris/contracts/progress-bar.contract.json",
+      "contract": "examples/polaris/extraction/static-contracts/progress-bar.contract.json",
       "sampleText": "",
       "axes": ["size", "tone"],
       "fixedProps": { "progress": 25 }
@@ -151,7 +151,7 @@
     {
       "name": "Thumbnail",
       "importName": "Thumbnail",
-      "contract": "examples/polaris/contracts/thumbnail.contract.json",
+      "contract": "examples/polaris/extraction/static-contracts/thumbnail.contract.json",
       "sampleText": "",
       "axes": ["size"],
       "fixedProps": {
@@ -162,14 +162,14 @@
     {
       "name": "Text",
       "importName": "Text",
-      "contract": "examples/polaris/contracts/text.contract.json",
+      "contract": "examples/polaris/extraction/static-contracts/text.contract.json",
       "sampleText": "Online store dashboard",
       "axes": ["variant", "tone", "fontWeight"]
     },
     {
       "name": "TextField",
       "importName": "TextField",
-      "contract": "examples/polaris/contracts/text-field.contract.json",
+      "contract": "examples/polaris/extraction/static-contracts/text-field.contract.json",
       "sampleText": "",
       "axes": ["variant", "size"],
       "stateProps": [{ "prop": "disabled", "state": "disabled" }],

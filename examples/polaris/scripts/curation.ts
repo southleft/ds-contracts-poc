@@ -343,10 +343,13 @@ export const CURATION: ComponentCuration[] = [
       component: 'Banner',
       rootSelector: '.Polaris-Banner',
       childrenText: 'Your order has shipped.',
-      rootRowSelector: {
-        'background-color': '.Polaris-Box[style*="--pc-box-background"]',
-        color: '.Polaris-Box[style*="--pc-box-background"]',
-      },
+      // v0.2.0 (computed floor): the root background/color rows compare
+      // root↔root — the floor proved the .Polaris-Banner root is the white
+      // card surface (bg-surface) with body-inherited text, and the
+      // resolution rebased the contract accordingly (decisions ledger). The
+      // old override compared our (wrongly root-painted) tone fill against
+      // the inner Box ribbon; the ribbon is computed-only anatomy now, a
+      // named loss in the extension block.
     },
   },
   {
