@@ -26,19 +26,24 @@ Minted leaves WITHOUT folding: **8** → WITH folding: **8** (0 folded channels;
 - leaves: **8** · bindings: 13 base + 31 state
 - shape: 44 uniform · 0 per-axis · 0 per-axis-pair · 0 refused (uncorrelated — nothing minted, named)
 
+## Declared facts (v15 — carried, first-class)
+
+- base declared facts: **4**
+  - root.max-width = `100%`
+  - root.position = `relative`
+  - label.display = `inline`
+  - label.text-wrap-mode = `nowrap`
+- state declared facts: **1**
+  - [disabled] root.transition-property = `none`
+
 ## Code-only / overflow (named, in the extension file)
 
-- base channels outside mintable kinds: **8**
-  - root.max-width — value shape outside mintable kinds (color/px/number/shadow) — no schema channel today (sample: `100%`, 1 distinct value(s))
-  - root.position — value shape outside mintable kinds (color/px/number/shadow) — no schema channel today (sample: `relative`, 1 distinct value(s))
-  - text.overflow-x — value shape outside mintable kinds (color/px/number/shadow) — no schema channel today (sample: `hidden`, 1 distinct value(s))
-  - text.overflow-y — value shape outside mintable kinds (color/px/number/shadow) — no schema channel today (sample: `hidden`, 1 distinct value(s))
-  - text.text-overflow — value shape outside mintable kinds (color/px/number/shadow) — no schema channel today (sample: `ellipsis`, 1 distinct value(s))
-  - text.text-wrap-mode — value shape outside mintable kinds (color/px/number/shadow) — no schema channel today (sample: `nowrap`, 1 distinct value(s))
-  - label.display — value shape outside mintable kinds (color/px/number/shadow) — no schema channel today (sample: `inline`, 1 distinct value(s))
-  - label.text-wrap-mode — value shape outside mintable kinds (color/px/number/shadow) — no schema channel today (sample: `nowrap`, 1 distinct value(s))
-- state channels outside mintable kinds: **1**
-  - [disabled] root.transition-property — value shape outside mintable kinds (sample: `none`)
+- base channels outside mintable kinds: **4**
+  - text.overflow-x — declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision (sample: `hidden`, 1 distinct value(s))
+  - text.overflow-y — declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision (sample: `hidden`, 1 distinct value(s))
+  - text.text-overflow — declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision (sample: `ellipsis`, 1 distinct value(s))
+  - text.text-wrap-mode — declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision (sample: `nowrap`, 1 distinct value(s))
+- state channels outside mintable kinds: **0**
 - refused/overflow bindings: **21**
   - {"part":"text","channel":"font-size","ref":"{imported.tag.text.font-size}","refusal":"computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"}
   - {"part":"text","channel":"line-height","ref":"{imported.tag.text.line-height}","refusal":"computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"}
@@ -64,6 +69,6 @@ Minted leaves WITHOUT folding: **8** → WITH folding: **8** (0 folded channels;
 
 ## Fidelity gate (scorecard.json)
 
-- computed-equality (styled channels, contract-mediated): **77.500%** (124/160 cells; 0/8 combo×state rows fully equal)
+- computed-equality (styled channels, contract-mediated): **92.500%** (148/160 cells; 0/8 combo×state rows fully equal)
 - pixel: 0/8 pairs perfect at threshold 0 · 0/8 at the AA point (mean AA 1.090%, max 1.611%)
 

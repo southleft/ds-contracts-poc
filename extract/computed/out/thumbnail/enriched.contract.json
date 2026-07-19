@@ -1,0 +1,157 @@
+{
+  "$schema": "../../../contracts/contract.schema.json",
+  "id": "polaris.thumbnail",
+  "name": "Thumbnail",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "PROPOSED contract extracted from examples/polaris/.polaris-clone/polaris-react/src/components/Thumbnail/Thumbnail.tsx (react-tsx + css-module adapters) — API surface AND anatomy (structure, token bindings, layout, states) read from source; design bindings await reconciliation and human review. PROMOTED showcase contract: API surface extracted mechanically from Shopify/polaris @ 2b1ea88625e0613853ca8577c9acd1980a90f382 (polaris-react 13.10.1, MIT © Shopify, extracted 2026-07-18); styling bindings promoted from the component's own module.css under the reviewed class map in examples/polaris/scripts/curation.ts — every carried binding and every named refusal is listed in examples/polaris/extraction/PROMOTION.md. COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @shopify/polaris@13.9.5 in headless Chromium 148.0.7778.96; overflow channels in the sibling extension file.",
+  "semantics": {
+    "element": "span"
+  },
+  "props": [
+    {
+      "name": "size",
+      "description": "Size of thumbnail",
+      "type": {
+        "enum": [
+          "extraSmall",
+          "small",
+          "medium",
+          "large"
+        ]
+      },
+      "default": "medium",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Size",
+          "values": {
+            "extraSmall": "Extra Small",
+            "small": "Small",
+            "medium": "Medium",
+            "large": "Large"
+          }
+        },
+        "code": {
+          "prop": "size"
+        }
+      }
+    },
+    {
+      "name": "alt",
+      "description": "Alt text for the thumbnail image",
+      "type": "text",
+      "default": "Black choker necklace",
+      "required": true,
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Alt"
+        },
+        "code": {
+          "prop": "alt"
+        }
+      }
+    },
+    {
+      "name": "transparent",
+      "description": "Transparent background",
+      "type": "boolean",
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Transparent"
+        },
+        "code": {
+          "prop": "transparent"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "tokens": {
+        "background": "{p.color-bg-surface}",
+        "border-radius": "{p.border-radius-200}",
+        "bottom": "{imported.shared.size-0}",
+        "left": "{imported.shared.size-0}",
+        "right": "{imported.shared.size-0}",
+        "top": "{imported.shared.size-0}"
+      },
+      "tokensByProp": [
+        {
+          "prop": "size",
+          "map": {
+            "extraSmall": {
+              "border-radius": "{p.border-radius-150}"
+            }
+          }
+        },
+        {
+          "prop": "size",
+          "map": {
+            "extraSmall": {
+              "border-bottom-left-radius": "{imported.thumbnail.root.border-bottom-left-radius.extraSmall}",
+              "border-bottom-right-radius": "{imported.thumbnail.root.border-bottom-right-radius.extraSmall}",
+              "border-top-right-radius": "{imported.thumbnail.root.border-top-right-radius.extraSmall}"
+            },
+            "large": {
+              "border-bottom-left-radius": "{imported.thumbnail.root.border-bottom-left-radius.large}",
+              "border-bottom-right-radius": "{imported.thumbnail.root.border-bottom-right-radius.large}",
+              "border-top-right-radius": "{imported.thumbnail.root.border-top-right-radius.large}"
+            },
+            "medium": {
+              "border-bottom-left-radius": "{imported.thumbnail.root.border-bottom-left-radius.medium}",
+              "border-bottom-right-radius": "{imported.thumbnail.root.border-bottom-right-radius.medium}",
+              "border-top-right-radius": "{imported.thumbnail.root.border-top-right-radius.medium}"
+            },
+            "small": {
+              "border-bottom-left-radius": "{imported.thumbnail.root.border-bottom-left-radius.small}",
+              "border-bottom-right-radius": "{imported.thumbnail.root.border-bottom-right-radius.small}",
+              "border-top-right-radius": "{imported.thumbnail.root.border-top-right-radius.small}"
+            }
+          }
+        }
+      ],
+      "literals": {
+        "min-width": "24px"
+      },
+      "literalsByProp": [
+        {
+          "prop": "size",
+          "map": {
+            "extraSmall": {
+              "width": "24px"
+            },
+            "small": {
+              "width": "40px"
+            },
+            "medium": {
+              "width": "60px"
+            },
+            "large": {
+              "width": "80px"
+            }
+          }
+        }
+      ],
+      "declared": {
+        "max-width": "100%",
+        "overflow-x": "hidden",
+        "overflow-y": "hidden",
+        "position": "relative"
+      }
+    }
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "polaris-react/src/components/Thumbnail/Thumbnail",
+      "export": "Thumbnail"
+    }
+  }
+}

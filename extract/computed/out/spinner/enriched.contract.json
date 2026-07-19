@@ -1,0 +1,108 @@
+{
+  "$schema": "../../../contracts/contract.schema.json",
+  "id": "polaris.spinner",
+  "name": "Spinner",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "PROPOSED contract extracted from examples/polaris/.polaris-clone/polaris-react/src/components/Spinner/Spinner.tsx (react-tsx + css-module adapters) — API surface AND anatomy (structure, token bindings, layout, states) read from source; design bindings await reconciliation and human review. PROMOTED showcase contract: API surface extracted mechanically from Shopify/polaris @ 2b1ea88625e0613853ca8577c9acd1980a90f382 (polaris-react 13.10.1, MIT © Shopify, extracted 2026-07-18); styling bindings promoted from the component's own module.css under the reviewed class map in examples/polaris/scripts/curation.ts — every carried binding and every named refusal is listed in examples/polaris/extraction/PROMOTION.md. COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @shopify/polaris@13.9.5 in headless Chromium 148.0.7778.96; overflow channels in the sibling extension file.",
+  "semantics": {
+    "element": "span"
+  },
+  "props": [
+    {
+      "name": "size",
+      "description": "Size of spinner",
+      "type": {
+        "enum": [
+          "small",
+          "large"
+        ]
+      },
+      "default": "large",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Size",
+          "values": {
+            "small": "Small",
+            "large": "Large"
+          }
+        },
+        "code": {
+          "prop": "size"
+        }
+      }
+    },
+    {
+      "name": "accessibilityLabel",
+      "description": "Accessible label for the spinner",
+      "type": "text",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Accessibility Label"
+        },
+        "code": {
+          "prop": "accessibilityLabel"
+        }
+      }
+    },
+    {
+      "name": "hasFocusableParent",
+      "description": "Allows the component to apply the correct accessibility roles based on focus",
+      "type": "boolean",
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Has Focusable Parent"
+        },
+        "code": {
+          "prop": "hasFocusableParent"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "parts": {
+        "glyphLarge": {
+          "tokens": {
+            "fill": "{p.color-bg-fill-brand}"
+          },
+          "icon": {
+            "asset": "polaris-spinner-large",
+            "size": 44
+          },
+          "visibleWhen": {
+            "prop": "size",
+            "equals": "large"
+          }
+        },
+        "glyphSmall": {
+          "tokens": {
+            "fill": "{p.color-bg-fill-brand}"
+          },
+          "icon": {
+            "asset": "polaris-spinner-small",
+            "size": 20
+          },
+          "visibleWhen": {
+            "prop": "size",
+            "equals": "small"
+          }
+        }
+      }
+    }
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "polaris-react/src/components/Spinner/Spinner",
+      "export": "Spinner"
+    }
+  }
+}

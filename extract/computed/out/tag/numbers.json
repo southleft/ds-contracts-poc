@@ -36,9 +36,13 @@
       "refused": 0
     }
   },
+  "declared": {
+    "base": 4,
+    "state": 1
+  },
   "codeOnly": {
-    "base": 8,
-    "state": 1,
+    "base": 4,
+    "state": 0,
     "overflowBindings": 21
   },
   "pseudoElementFindings": 0,
@@ -115,7 +119,7 @@
     ]
   },
   "gate": {
-    "computedPctEqual": 77.5,
+    "computedPctEqual": 92.5,
     "rowsFullyEqual": 0,
     "rows": 8,
     "pixelPerfectExact": 0,

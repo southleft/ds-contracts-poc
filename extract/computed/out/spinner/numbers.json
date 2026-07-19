@@ -1,0 +1,126 @@
+{
+  "component": "Spinner",
+  "browser": "148.0.7778.96",
+  "captures": 8,
+  "combos": 2,
+  "interactions": 4,
+  "enumerationPolicy": "full-cartesian",
+  "channelsEnumerated": 942,
+  "elementsPerCapture": 3,
+  "determinism": "byte-identical across two full sweeps in one session",
+  "styledChannels": {
+    "root": 0,
+    "icon": 12,
+    "part-0.0": 5
+  },
+  "folds": {
+    "count": 0,
+    "receipts": [],
+    "mintedLeavesUnfolded": 3,
+    "mintedLeavesFolded": 3
+  },
+  "bound": {
+    "cellsChecked": 0,
+    "confirmed": 0,
+    "contradictions": 0,
+    "untriaged": 0
+  },
+  "minted": {
+    "leaves": 3,
+    "baseBindings": 6,
+    "stateBindings": 0,
+    "byShape": {
+      "uniform": 6,
+      "perAxis": 0,
+      "perPair": 0,
+      "refused": 0
+    }
+  },
+  "declared": {
+    "base": 0,
+    "state": 0
+  },
+  "codeOnly": {
+    "base": 11,
+    "state": 0,
+    "overflowBindings": 6
+  },
+  "pseudoElementFindings": 0,
+  "enrichedContractSchemaValid": true,
+  "enrichedContractGeneratorValid": true,
+  "replayComputedEquality": {
+    "cellsCompared": 22560,
+    "cellsMatched": 22560,
+    "pct": 100,
+    "namedExclusions": [
+      "app-region",
+      "text-decoration"
+    ],
+    "topMismatchedChannels": []
+  },
+  "pixel": {
+    "pairs": 8,
+    "exact": {
+      "mean": 0.6294759114583334,
+      "max": 0.9293619791666666,
+      "perfect": 0
+    },
+    "aa": {
+      "mean": 0.48339843749999994,
+      "max": 0.7316080729166666,
+      "perfect": 0
+    },
+    "worst": [
+      {
+        "key": "large__default",
+        "pctExact": 0.9293619791666666,
+        "pctAA": 0.7316080729166666
+      },
+      {
+        "key": "large__hover",
+        "pctExact": 0.9293619791666666,
+        "pctAA": 0.7316080729166666
+      },
+      {
+        "key": "large__focus-visible",
+        "pctExact": 0.9293619791666666,
+        "pctAA": 0.7316080729166666
+      },
+      {
+        "key": "large__active",
+        "pctExact": 0.9293619791666666,
+        "pctAA": 0.7316080729166666
+      },
+      {
+        "key": "small__default",
+        "pctExact": 0.32958984375,
+        "pctAA": 0.23518880208333334
+      },
+      {
+        "key": "small__hover",
+        "pctExact": 0.32958984375,
+        "pctAA": 0.23518880208333334
+      },
+      {
+        "key": "small__focus-visible",
+        "pctExact": 0.32958984375,
+        "pctAA": 0.23518880208333334
+      },
+      {
+        "key": "small__active",
+        "pctExact": 0.32958984375,
+        "pctAA": 0.23518880208333334
+      }
+    ]
+  },
+  "gate": {
+    "computedPctEqual": 100,
+    "rowsFullyEqual": 0,
+    "rows": 8,
+    "pixelPerfectExact": 0,
+    "pixelPerfectAA": 8,
+    "pairs": 8
+  },
+  "focusVisibleDriverMatched": 0,
+  "focusVisibleDriverTotal": 2
+}

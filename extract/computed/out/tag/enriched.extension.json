@@ -62,73 +62,70 @@
     "receipts": [],
     "_note": "computed flex keywords carried via Part.layout (the schema's own vocabulary); carried-slot contradictions are receipts, never silent overrides"
   },
+  "declaredFacts": {
+    "_note": "v15 (S4): uniform registry-channel facts carried as Part.declared / Part.declaredStates — first-class contract vocabulary, listed here as the enrichment receipt",
+    "base": [
+      {
+        "part": "root",
+        "channel": "max-width",
+        "value": "100%"
+      },
+      {
+        "part": "root",
+        "channel": "position",
+        "value": "relative"
+      },
+      {
+        "part": "label",
+        "channel": "display",
+        "value": "inline"
+      },
+      {
+        "part": "label",
+        "channel": "text-wrap-mode",
+        "value": "nowrap"
+      }
+    ],
+    "state": [
+      {
+        "state": "disabled",
+        "part": "root",
+        "channel": "transition-property",
+        "value": "none"
+      }
+    ]
+  },
   "codeOnlyChannels": [
-    {
-      "part": "root",
-      "channel": "max-width",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow) — no schema channel today",
-      "sample": "100%",
-      "distinctValues": 1
-    },
-    {
-      "part": "root",
-      "channel": "position",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow) — no schema channel today",
-      "sample": "relative",
-      "distinctValues": 1
-    },
     {
       "part": "text",
       "channel": "overflow-x",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow) — no schema channel today",
+      "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
       "sample": "hidden",
       "distinctValues": 1
     },
     {
       "part": "text",
       "channel": "overflow-y",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow) — no schema channel today",
+      "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
       "sample": "hidden",
       "distinctValues": 1
     },
     {
       "part": "text",
       "channel": "text-overflow",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow) — no schema channel today",
+      "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
       "sample": "ellipsis",
       "distinctValues": 1
     },
     {
       "part": "text",
       "channel": "text-wrap-mode",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow) — no schema channel today",
-      "sample": "nowrap",
-      "distinctValues": 1
-    },
-    {
-      "part": "label",
-      "channel": "display",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow) — no schema channel today",
-      "sample": "inline",
-      "distinctValues": 1
-    },
-    {
-      "part": "label",
-      "channel": "text-wrap-mode",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow) — no schema channel today",
+      "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
       "sample": "nowrap",
       "distinctValues": 1
     }
   ],
-  "stateOverflow": [
-    {
-      "state": "disabled",
-      "part": "root",
-      "channel": "transition-property",
-      "sample": "none",
-      "reason": "value shape outside mintable kinds"
-    }
-  ],
+  "stateOverflow": [],
   "overflowBindings": [
     {
       "part": "text",
@@ -315,5 +312,11 @@
     ],
     "staticOnly": []
   },
-  "enrichmentNotes": []
+  "enrichmentNotes": [
+    "declared fact carried: root.max-width = 100% (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: root.position = relative (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label.display = inline (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label.text-wrap-mode = nowrap (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared state fact carried: [disabled] root.transition-property = none (v15 declared vocabulary)"
+  ]
 }

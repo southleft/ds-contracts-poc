@@ -5,18 +5,80 @@
   "browser": "148.0.7778.96",
   "mintedTokens": {
     "imported": {
-      "shared": {
-        "size-8": {
-          "$value": "8px",
-          "$type": "dimension"
-        },
-        "size-0": {
-          "$value": "0px",
-          "$type": "dimension"
-        }
-      },
       "button": {
         "root": {
+          "background-image": {
+            "plain": {
+              "none": {
+                "$value": "none",
+                "$type": "gradient"
+              },
+              "critical": {
+                "$value": "none",
+                "$type": "gradient"
+              },
+              "success": {
+                "$value": "none",
+                "$type": "gradient"
+              }
+            },
+            "primary": {
+              "none": {
+                "$value": "linear-gradient(rgba(48, 48, 48, 0) 63.53%, rgba(255, 255, 255, 0.15) 100%), none",
+                "$type": "gradient"
+              },
+              "critical": {
+                "$value": "none",
+                "$type": "gradient"
+              },
+              "success": {
+                "$value": "none",
+                "$type": "gradient"
+              }
+            },
+            "secondary": {
+              "none": {
+                "$value": "none",
+                "$type": "gradient"
+              },
+              "critical": {
+                "$value": "none",
+                "$type": "gradient"
+              },
+              "success": {
+                "$value": "none",
+                "$type": "gradient"
+              }
+            },
+            "tertiary": {
+              "none": {
+                "$value": "none",
+                "$type": "gradient"
+              },
+              "critical": {
+                "$value": "none",
+                "$type": "gradient"
+              },
+              "success": {
+                "$value": "none",
+                "$type": "gradient"
+              }
+            },
+            "monochromePlain": {
+              "none": {
+                "$value": "none",
+                "$type": "gradient"
+              },
+              "critical": {
+                "$value": "none",
+                "$type": "gradient"
+              },
+              "success": {
+                "$value": "none",
+                "$type": "gradient"
+              }
+            }
+          },
           "font-size": {
             "$value": "13px",
             "$type": "dimension"
@@ -545,6 +607,78 @@
               }
             }
           },
+          "box-shadow-state-active": {
+            "primary": {
+              "none": {
+                "$value": "rgba(0, 0, 0, 1) 0px 3px 0px 0px inset",
+                "$type": "shadow"
+              },
+              "critical": {
+                "$value": "rgba(0, 0, 0, 0.2) -1px 0px 1px 0px inset, rgba(0, 0, 0, 0.2) 1px 0px 1px 0px inset, rgba(0, 0, 0, 0.6) 0px 2px 0px 0px inset",
+                "$type": "shadow"
+              },
+              "success": {
+                "$value": "rgba(0, 0, 0, 0.2) -1px 0px 1px 0px inset, rgba(0, 0, 0, 0.2) 1px 0px 1px 0px inset, rgba(0, 0, 0, 0.6) 0px 2px 0px 0px inset",
+                "$type": "shadow"
+              }
+            },
+            "secondary": {
+              "none": {
+                "$value": "rgba(26, 26, 26, 0.12) -1px 0px 1px 0px inset, rgba(26, 26, 26, 0.12) 1px 0px 1px 0px inset, rgba(26, 26, 26, 0.2) 0px 2px 1px 0px inset",
+                "$type": "shadow"
+              },
+              "critical": {
+                "$value": "rgba(26, 26, 26, 0.12) -1px 0px 1px 0px inset, rgba(26, 26, 26, 0.12) 1px 0px 1px 0px inset, rgba(26, 26, 26, 0.2) 0px 2px 1px 0px inset",
+                "$type": "shadow"
+              },
+              "success": {
+                "$value": "rgba(26, 26, 26, 0.12) -1px 0px 1px 0px inset, rgba(26, 26, 26, 0.12) 1px 0px 1px 0px inset, rgba(26, 26, 26, 0.2) 0px 2px 1px 0px inset",
+                "$type": "shadow"
+              }
+            },
+            "plain": {
+              "none": {
+                "$value": "none",
+                "$type": "shadow"
+              },
+              "critical": {
+                "$value": "none",
+                "$type": "shadow"
+              },
+              "success": {
+                "$value": "none",
+                "$type": "shadow"
+              }
+            },
+            "tertiary": {
+              "none": {
+                "$value": "none",
+                "$type": "shadow"
+              },
+              "critical": {
+                "$value": "none",
+                "$type": "shadow"
+              },
+              "success": {
+                "$value": "none",
+                "$type": "shadow"
+              }
+            },
+            "monochromePlain": {
+              "none": {
+                "$value": "none",
+                "$type": "shadow"
+              },
+              "critical": {
+                "$value": "none",
+                "$type": "shadow"
+              },
+              "success": {
+                "$value": "none",
+                "$type": "shadow"
+              }
+            }
+          },
           "color-state-active": {
             "plain": {
               "none": {
@@ -782,6 +916,14 @@
               "$value": "#00000000",
               "$type": "color"
             }
+          },
+          "background-image-state-disabled": {
+            "$value": "none",
+            "$type": "gradient"
+          },
+          "box-shadow-state-disabled": {
+            "$value": "none",
+            "$type": "shadow"
           },
           "color-state-disabled": {
             "plain": {
@@ -1400,6 +1542,16 @@
             }
           }
         }
+      },
+      "shared": {
+        "size-8": {
+          "$value": "8px",
+          "$type": "dimension"
+        },
+        "size-0": {
+          "$value": "0px",
+          "$type": "dimension"
+        }
       }
     }
   },
@@ -1596,160 +1748,150 @@
     "receipts": [],
     "_note": "computed flex keywords carried via Part.layout (the schema's own vocabulary); carried-slot contradictions are receipts, never silent overrides"
   },
+  "declaredFacts": {
+    "_note": "v15 (S4): uniform registry-channel facts carried as Part.declared / Part.declaredStates — first-class contract vocabulary, listed here as the enrichment receipt",
+    "base": [
+      {
+        "part": "root",
+        "channel": "appearance",
+        "value": "none"
+      },
+      {
+        "part": "root",
+        "channel": "border-bottom-style",
+        "value": "none"
+      },
+      {
+        "part": "root",
+        "channel": "border-left-style",
+        "value": "none"
+      },
+      {
+        "part": "root",
+        "channel": "border-right-style",
+        "value": "none"
+      },
+      {
+        "part": "root",
+        "channel": "border-top-style",
+        "value": "none"
+      },
+      {
+        "part": "root",
+        "channel": "cursor",
+        "value": "pointer"
+      },
+      {
+        "part": "root",
+        "channel": "font-feature-settings",
+        "value": "\"calt\" 0"
+      },
+      {
+        "part": "root",
+        "channel": "position",
+        "value": "relative"
+      },
+      {
+        "part": "root",
+        "channel": "text-rendering",
+        "value": "optimizelegibility"
+      },
+      {
+        "part": "root",
+        "channel": "touch-action",
+        "value": "manipulation"
+      },
+      {
+        "part": "root",
+        "channel": "user-select",
+        "value": "none"
+      },
+      {
+        "part": "label",
+        "channel": "cursor",
+        "value": "pointer"
+      },
+      {
+        "part": "label",
+        "channel": "text-align",
+        "value": "center"
+      },
+      {
+        "part": "label",
+        "channel": "user-select",
+        "value": "none"
+      }
+    ],
+    "state": [
+      {
+        "state": "disabled",
+        "part": "label",
+        "channel": "pointer-events",
+        "value": "none"
+      },
+      {
+        "state": "disabled",
+        "part": "root",
+        "channel": "pointer-events",
+        "value": "none"
+      },
+      {
+        "state": "focus-visible",
+        "part": "root",
+        "channel": "outline-style",
+        "value": "solid"
+      }
+    ]
+  },
   "codeOnlyChannels": [
     {
       "part": "root",
-      "channel": "appearance",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow) — no schema channel today",
-      "sample": "none",
-      "distinctValues": 1
-    },
-    {
-      "part": "root",
       "channel": "background-attachment",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow) — no schema channel today",
+      "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
       "sample": "scroll",
-      "distinctValues": 1
+      "distinctValues": 2
     },
     {
       "part": "root",
       "channel": "background-blend-mode",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow) — no schema channel today",
+      "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
       "sample": "normal",
-      "distinctValues": 1
+      "distinctValues": 2
     },
     {
       "part": "root",
       "channel": "background-clip",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow) — no schema channel today",
+      "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
       "sample": "border-box",
-      "distinctValues": 1
-    },
-    {
-      "part": "root",
-      "channel": "background-image",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow) — no schema channel today",
-      "sample": "none",
-      "distinctValues": 1
+      "distinctValues": 2
     },
     {
       "part": "root",
       "channel": "background-origin",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow) — no schema channel today",
+      "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
       "sample": "padding-box",
-      "distinctValues": 1
+      "distinctValues": 2
     },
     {
       "part": "root",
       "channel": "background-position",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow) — no schema channel today",
+      "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
       "sample": "0% 0%",
-      "distinctValues": 1
+      "distinctValues": 2
     },
     {
       "part": "root",
       "channel": "background-repeat",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow) — no schema channel today",
+      "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
       "sample": "repeat",
-      "distinctValues": 1
+      "distinctValues": 2
     },
     {
       "part": "root",
       "channel": "background-size",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow) — no schema channel today",
+      "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
       "sample": "auto",
-      "distinctValues": 1
-    },
-    {
-      "part": "root",
-      "channel": "border-bottom-style",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow) — no schema channel today",
-      "sample": "none",
-      "distinctValues": 1
-    },
-    {
-      "part": "root",
-      "channel": "border-left-style",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow) — no schema channel today",
-      "sample": "none",
-      "distinctValues": 1
-    },
-    {
-      "part": "root",
-      "channel": "border-right-style",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow) — no schema channel today",
-      "sample": "none",
-      "distinctValues": 1
-    },
-    {
-      "part": "root",
-      "channel": "border-top-style",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow) — no schema channel today",
-      "sample": "none",
-      "distinctValues": 1
-    },
-    {
-      "part": "root",
-      "channel": "cursor",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow) — no schema channel today",
-      "sample": "pointer",
-      "distinctValues": 1
-    },
-    {
-      "part": "root",
-      "channel": "font-feature-settings",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow) — no schema channel today",
-      "sample": "\"calt\" 0",
-      "distinctValues": 1
-    },
-    {
-      "part": "root",
-      "channel": "position",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow) — no schema channel today",
-      "sample": "relative",
-      "distinctValues": 1
-    },
-    {
-      "part": "root",
-      "channel": "text-rendering",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow) — no schema channel today",
-      "sample": "optimizelegibility",
-      "distinctValues": 1
-    },
-    {
-      "part": "root",
-      "channel": "touch-action",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow) — no schema channel today",
-      "sample": "manipulation",
-      "distinctValues": 1
-    },
-    {
-      "part": "root",
-      "channel": "user-select",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow) — no schema channel today",
-      "sample": "none",
-      "distinctValues": 1
-    },
-    {
-      "part": "label",
-      "channel": "cursor",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow) — no schema channel today",
-      "sample": "pointer",
-      "distinctValues": 1
-    },
-    {
-      "part": "label",
-      "channel": "text-align",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow) — no schema channel today",
-      "sample": "center",
-      "distinctValues": 1
-    },
-    {
-      "part": "label",
-      "channel": "user-select",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow) — no schema channel today",
-      "sample": "none",
-      "distinctValues": 1
+      "distinctValues": 2
     }
   ],
   "stateOverflow": [
@@ -1758,140 +1900,98 @@
       "part": "label",
       "channel": "transform",
       "sample": "matrix(1, 0, 0, 1, 0, 1)",
-      "reason": "value shape outside mintable kinds"
-    },
-    {
-      "state": "active",
-      "part": "root",
-      "channel": "box-shadow",
-      "sample": "rgba(0, 0, 0, 1) 0px 3px 0px 0px inset",
-      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+      "reason": "value shape outside mintable kinds and outside the declared vocabulary"
     },
     {
       "state": "active",
       "part": "root",
       "channel": "text-decoration",
       "sample": "underline",
-      "reason": "value shape outside mintable kinds"
+      "reason": "value shape outside mintable kinds and outside the declared vocabulary"
     },
     {
       "state": "active",
       "part": "root",
       "channel": "text-decoration-line",
       "sample": "underline",
-      "reason": "value shape outside mintable kinds"
-    },
-    {
-      "state": "disabled",
-      "part": "label",
-      "channel": "pointer-events",
-      "sample": "none",
-      "reason": "value shape outside mintable kinds"
+      "reason": "declared-channel state delta on 12/60 combos — partial coverage cannot carry as a state selector (v15); named residue"
     },
     {
       "state": "disabled",
       "part": "root",
       "channel": "background-attachment",
       "sample": "scroll",
-      "reason": "value shape outside mintable kinds"
+      "reason": "declared-channel state delta on 4/60 combos — partial coverage cannot carry as a state selector (v15); named residue"
     },
     {
       "state": "disabled",
       "part": "root",
       "channel": "background-blend-mode",
       "sample": "normal",
-      "reason": "value shape outside mintable kinds"
+      "reason": "declared-channel state delta on 4/60 combos — partial coverage cannot carry as a state selector (v15); named residue"
     },
     {
       "state": "disabled",
       "part": "root",
       "channel": "background-clip",
       "sample": "border-box",
-      "reason": "value shape outside mintable kinds"
-    },
-    {
-      "state": "disabled",
-      "part": "root",
-      "channel": "background-image",
-      "sample": "none",
-      "reason": "value shape outside mintable kinds"
+      "reason": "declared-channel state delta on 4/60 combos — partial coverage cannot carry as a state selector (v15); named residue"
     },
     {
       "state": "disabled",
       "part": "root",
       "channel": "background-origin",
       "sample": "padding-box",
-      "reason": "value shape outside mintable kinds"
+      "reason": "declared-channel state delta on 4/60 combos — partial coverage cannot carry as a state selector (v15); named residue"
     },
     {
       "state": "disabled",
       "part": "root",
       "channel": "background-position",
       "sample": "0% 0%",
-      "reason": "value shape outside mintable kinds"
+      "reason": "declared-channel state delta on 4/60 combos — partial coverage cannot carry as a state selector (v15); named residue"
     },
     {
       "state": "disabled",
       "part": "root",
       "channel": "background-repeat",
       "sample": "repeat",
-      "reason": "value shape outside mintable kinds"
+      "reason": "declared-channel state delta on 4/60 combos — partial coverage cannot carry as a state selector (v15); named residue"
     },
     {
       "state": "disabled",
       "part": "root",
       "channel": "background-size",
       "sample": "auto",
-      "reason": "value shape outside mintable kinds"
-    },
-    {
-      "state": "disabled",
-      "part": "root",
-      "channel": "box-shadow",
-      "sample": "none",
-      "reason": "value shape outside mintable kinds"
-    },
-    {
-      "state": "disabled",
-      "part": "root",
-      "channel": "pointer-events",
-      "sample": "none",
-      "reason": "value shape outside mintable kinds"
-    },
-    {
-      "state": "focus-visible",
-      "part": "root",
-      "channel": "outline-style",
-      "sample": "solid",
-      "reason": "value shape outside mintable kinds"
+      "reason": "declared-channel state delta on 4/60 combos — partial coverage cannot carry as a state selector (v15); named residue"
     },
     {
       "state": "focus-visible",
       "part": "root",
       "channel": "text-decoration",
       "sample": "underline",
-      "reason": "value shape outside mintable kinds"
+      "reason": "value shape outside mintable kinds and outside the declared vocabulary"
     },
     {
       "state": "focus-visible",
       "part": "root",
       "channel": "text-decoration-line",
       "sample": "underline",
-      "reason": "value shape outside mintable kinds"
+      "reason": "declared-channel state delta on 12/60 combos — partial coverage cannot carry as a state selector (v15); named residue"
     },
     {
       "state": "hover",
       "part": "root",
       "channel": "text-decoration",
       "sample": "underline",
-      "reason": "value shape outside mintable kinds"
+      "reason": "value shape outside mintable kinds and outside the declared vocabulary"
     },
     {
       "state": "hover",
       "part": "root",
       "channel": "text-decoration-line",
       "sample": "underline",
-      "reason": "value shape outside mintable kinds"
+      "reason": "declared-channel state delta on 12/60 combos — partial coverage cannot carry as a state selector (v15); named residue"
     }
   ],
   "overflowBindings": [
@@ -1917,6 +2017,13 @@
       "channel": "background-color",
       "state": "active",
       "ref": "{imported.button.root.background-color-state-active.{variant}.{tone}}",
+      "refusal": "state×tone set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)"
+    },
+    {
+      "part": "root",
+      "channel": "box-shadow",
+      "state": "active",
+      "ref": "{imported.button.root.box-shadow-state-active.{variant}.{tone}}",
       "refusal": "state×tone set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)"
     },
     {
@@ -2864,6 +2971,24 @@
   },
   "enrichmentNotes": [
     "layout enriched: root.layout.justify = center (uniform computed keyword — the schema's own vocabulary)",
+    "declared fact carried: root.appearance = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: root.border-bottom-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: root.border-left-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: root.border-right-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: root.border-top-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: root.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: root.font-feature-settings = \"calt\" 0 (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: root.position = relative (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: root.text-rendering = optimizelegibility (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: root.touch-action = manipulation (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: root.user-select = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label.text-align = center (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: label.user-select = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared state fact carried: [disabled] label.pointer-events = none (v15 declared vocabulary)",
+    "declared state fact carried: [disabled] root.pointer-events = none (v15 declared vocabulary)",
+    "declared state fact carried: [focus-visible] root.outline-style = solid (v15 declared vocabulary)",
+    "pair-with-unset carried: root.background-image = base plane per variant + placeholder maps per tone (emitter capability lift)",
     "pair-with-unset carried: root.outline-color = base plane per variant + placeholder maps per tone (emitter capability lift)"
   ]
 }

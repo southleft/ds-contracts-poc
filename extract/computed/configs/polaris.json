@@ -100,7 +100,14 @@
       "axes": [],
       "stateProps": [{ "prop": "disabled", "state": "disabled" }],
       "fixedProps": { "label": "Save this product" },
-      "callbackProps": ["onChange"]
+      "callbackProps": ["onChange"],
+      "triage": [
+        {
+          "part": "backdrop",
+          "channels": ["border-width"],
+          "cause": "cross-component zeroing (the showcase's own named Checkbox gap, now measured): Polaris's Choice wrapper CSS zeroes the checkbox backdrop border and repaints the control edge as an inset box-shadow, so the carried Checkbox.module.css border-width binding loses the cascade — computed border-width is 0. Computed truth wins: resolve via the review queue (--to {p.border-width-0}; several zero-valued tokens share 0px, border-width-0 is the exact name-class match). The edge itself rides the minted box-shadow channel."
+        }
+      ]
     },
     {
       "name": "RadioButton",
@@ -173,7 +180,13 @@
           "part": "backdrop",
           "channels": ["border-color"],
           "when": { "variant": { "in": ["borderless"] } },
-          "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-color falls back to the element's currentColor (the p.color-text body chain), not the carried p.color-input-border; the real fact is 'no border' (border-width 0), and a color rebind would dress a vacuous channel as a binding — named residue (capture-only component, not promoted)"
+          "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-color falls back to the element's currentColor (the p.color-text body chain), not the carried p.color-input-border; the real fact is 'no border' (border-width 0), and a color rebind would dress a vacuous channel as a binding — named residue (the border-width channel resolves to {p.border-width-0} instead)"
+        },
+        {
+          "part": "backdrop",
+          "channels": ["border-width"],
+          "when": { "variant": { "in": ["borderless"] } },
+          "cause": "variant-conditioned border removal: .Polaris-TextField--borderless sets border:none on the backdrop — computed border-width is 0 for the borderless variant while the carried base binding paints 1px on the inherit variant. Single-axis partition (variant) — resolve via the review queue (--to {p.border-width-0}; several zero-valued tokens share 0px, border-width-0 is the exact name-class match)"
         },
         {
           "part": "backdrop",

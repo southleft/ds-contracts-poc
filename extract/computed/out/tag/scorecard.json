@@ -7,8 +7,8 @@
   "interactions": 4,
   "computed": {
     "cellsCompared": 160,
-    "cellsEqual": 124,
-    "pctEqual": 77.5,
+    "cellsEqual": 148,
+    "pctEqual": 92.5,
     "rowsFullyEqual": 0,
     "rows": 8
   },
@@ -28,7 +28,7 @@
     "mintedLeavesUnfolded": 8,
     "baseBindings": 13,
     "stateBindings": 31,
-    "codeOnlyChannels": 9,
+    "codeOnlyChannels": 4,
     "overflowBindings": 21,
     "folds": 0
   },
@@ -37,66 +37,54 @@
       "key": "enabled__default",
       "pctAA": 1.611328125,
       "pctExact": 2.5260416666666665,
-      "channelsMismatched": 4
+      "channelsMismatched": 1
     },
     {
       "key": "enabled__hover",
       "pctAA": 1.611328125,
       "pctExact": 2.5260416666666665,
-      "channelsMismatched": 4
+      "channelsMismatched": 1
     },
     {
       "key": "enabled__focus-visible",
       "pctAA": 1.611328125,
       "pctExact": 2.5260416666666665,
-      "channelsMismatched": 4
+      "channelsMismatched": 1
     },
     {
       "key": "enabled__active",
       "pctAA": 1.611328125,
       "pctExact": 2.5260416666666665,
-      "channelsMismatched": 4
+      "channelsMismatched": 1
     },
     {
       "key": "disabled__default",
       "pctAA": 0.56884765625,
       "pctExact": 4.536946614583333,
-      "channelsMismatched": 5
+      "channelsMismatched": 2
     },
     {
       "key": "disabled__hover",
       "pctAA": 0.56884765625,
       "pctExact": 4.536946614583333,
-      "channelsMismatched": 5
+      "channelsMismatched": 2
     },
     {
       "key": "disabled__focus-visible",
       "pctAA": 0.56884765625,
       "pctExact": 4.536946614583333,
-      "channelsMismatched": 5
+      "channelsMismatched": 2
     },
     {
       "key": "disabled__active",
       "pctAA": 0.56884765625,
       "pctExact": 4.536946614583333,
-      "channelsMismatched": 5
+      "channelsMismatched": 2
     }
   ],
   "topMismatchedChannels": [
     [
-      "root.max-width",
-      8
-    ],
-    [
-      "root.position",
-      8
-    ],
-    [
       "label.display",
-      8
-    ],
-    [
-      "label.text-wrap-mode",
       8
     ],
     [
@@ -126,153 +114,76 @@
     "overflow: text.outline-color [disabled] — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
     "overflow: text.text-decoration-color [disabled] — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
     "overflow: text.text-emphasis-color [disabled] — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-    "code-only: root.max-width — value shape outside mintable kinds (color/px/number/shadow) — no schema channel today",
-    "code-only: root.position — value shape outside mintable kinds (color/px/number/shadow) — no schema channel today",
-    "code-only: text.overflow-x — value shape outside mintable kinds (color/px/number/shadow) — no schema channel today",
-    "code-only: text.overflow-y — value shape outside mintable kinds (color/px/number/shadow) — no schema channel today",
-    "code-only: text.text-overflow — value shape outside mintable kinds (color/px/number/shadow) — no schema channel today",
-    "code-only: text.text-wrap-mode — value shape outside mintable kinds (color/px/number/shadow) — no schema channel today",
-    "code-only: label.display — value shape outside mintable kinds (color/px/number/shadow) — no schema channel today",
-    "code-only: label.text-wrap-mode — value shape outside mintable kinds (color/px/number/shadow) — no schema channel today",
-    "code-only[disabled]: root.transition-property — value shape outside mintable kinds"
+    "code-only: text.overflow-x — declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
+    "code-only: text.overflow-y — declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
+    "code-only: text.text-overflow — declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
+    "code-only: text.text-wrap-mode — declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision"
   ],
   "rows": [
     {
       "key": "enabled__default",
       "channelsCompared": 20,
-      "channelsEqual": 16,
+      "channelsEqual": 19,
       "pctExact": 2.5260416666666665,
       "pctAA": 1.611328125,
       "mismatches": [
-        {
-          "part": "root",
-          "channel": "max-width",
-          "ours": "none",
-          "theirs": "100%"
-        },
-        {
-          "part": "root",
-          "channel": "position",
-          "ours": "static",
-          "theirs": "relative"
-        },
         {
           "part": "label",
           "channel": "display",
           "ours": "block",
           "theirs": "inline"
-        },
-        {
-          "part": "label",
-          "channel": "text-wrap-mode",
-          "ours": "wrap",
-          "theirs": "nowrap"
         }
       ]
     },
     {
       "key": "enabled__hover",
       "channelsCompared": 20,
-      "channelsEqual": 16,
+      "channelsEqual": 19,
       "pctExact": 2.5260416666666665,
       "pctAA": 1.611328125,
       "mismatches": [
-        {
-          "part": "root",
-          "channel": "max-width",
-          "ours": "none",
-          "theirs": "100%"
-        },
-        {
-          "part": "root",
-          "channel": "position",
-          "ours": "static",
-          "theirs": "relative"
-        },
         {
           "part": "label",
           "channel": "display",
           "ours": "block",
           "theirs": "inline"
-        },
-        {
-          "part": "label",
-          "channel": "text-wrap-mode",
-          "ours": "wrap",
-          "theirs": "nowrap"
         }
       ]
     },
     {
       "key": "enabled__focus-visible",
       "channelsCompared": 20,
-      "channelsEqual": 16,
+      "channelsEqual": 19,
       "pctExact": 2.5260416666666665,
       "pctAA": 1.611328125,
       "mismatches": [
-        {
-          "part": "root",
-          "channel": "max-width",
-          "ours": "none",
-          "theirs": "100%"
-        },
-        {
-          "part": "root",
-          "channel": "position",
-          "ours": "static",
-          "theirs": "relative"
-        },
         {
           "part": "label",
           "channel": "display",
           "ours": "block",
           "theirs": "inline"
-        },
-        {
-          "part": "label",
-          "channel": "text-wrap-mode",
-          "ours": "wrap",
-          "theirs": "nowrap"
         }
       ]
     },
     {
       "key": "enabled__active",
       "channelsCompared": 20,
-      "channelsEqual": 16,
+      "channelsEqual": 19,
       "pctExact": 2.5260416666666665,
       "pctAA": 1.611328125,
       "mismatches": [
-        {
-          "part": "root",
-          "channel": "max-width",
-          "ours": "none",
-          "theirs": "100%"
-        },
-        {
-          "part": "root",
-          "channel": "position",
-          "ours": "static",
-          "theirs": "relative"
-        },
         {
           "part": "label",
           "channel": "display",
           "ours": "block",
           "theirs": "inline"
-        },
-        {
-          "part": "label",
-          "channel": "text-wrap-mode",
-          "ours": "wrap",
-          "theirs": "nowrap"
         }
       ]
     },
     {
       "key": "disabled__default",
       "channelsCompared": 20,
-      "channelsEqual": 15,
+      "channelsEqual": 18,
       "pctExact": 4.536946614583333,
       "pctAA": 0.56884765625,
       "mismatches": [
@@ -283,35 +194,17 @@
           "theirs": "rgba(0, 0, 0, 0.05)"
         },
         {
-          "part": "root",
-          "channel": "max-width",
-          "ours": "none",
-          "theirs": "100%"
-        },
-        {
-          "part": "root",
-          "channel": "position",
-          "ours": "static",
-          "theirs": "relative"
-        },
-        {
           "part": "label",
           "channel": "display",
           "ours": "block",
           "theirs": "inline"
-        },
-        {
-          "part": "label",
-          "channel": "text-wrap-mode",
-          "ours": "wrap",
-          "theirs": "nowrap"
         }
       ]
     },
     {
       "key": "disabled__hover",
       "channelsCompared": 20,
-      "channelsEqual": 15,
+      "channelsEqual": 18,
       "pctExact": 4.536946614583333,
       "pctAA": 0.56884765625,
       "mismatches": [
@@ -322,35 +215,17 @@
           "theirs": "rgba(0, 0, 0, 0.05)"
         },
         {
-          "part": "root",
-          "channel": "max-width",
-          "ours": "none",
-          "theirs": "100%"
-        },
-        {
-          "part": "root",
-          "channel": "position",
-          "ours": "static",
-          "theirs": "relative"
-        },
-        {
           "part": "label",
           "channel": "display",
           "ours": "block",
           "theirs": "inline"
-        },
-        {
-          "part": "label",
-          "channel": "text-wrap-mode",
-          "ours": "wrap",
-          "theirs": "nowrap"
         }
       ]
     },
     {
       "key": "disabled__focus-visible",
       "channelsCompared": 20,
-      "channelsEqual": 15,
+      "channelsEqual": 18,
       "pctExact": 4.536946614583333,
       "pctAA": 0.56884765625,
       "mismatches": [
@@ -361,35 +236,17 @@
           "theirs": "rgba(0, 0, 0, 0.05)"
         },
         {
-          "part": "root",
-          "channel": "max-width",
-          "ours": "none",
-          "theirs": "100%"
-        },
-        {
-          "part": "root",
-          "channel": "position",
-          "ours": "static",
-          "theirs": "relative"
-        },
-        {
           "part": "label",
           "channel": "display",
           "ours": "block",
           "theirs": "inline"
-        },
-        {
-          "part": "label",
-          "channel": "text-wrap-mode",
-          "ours": "wrap",
-          "theirs": "nowrap"
         }
       ]
     },
     {
       "key": "disabled__active",
       "channelsCompared": 20,
-      "channelsEqual": 15,
+      "channelsEqual": 18,
       "pctExact": 4.536946614583333,
       "pctAA": 0.56884765625,
       "mismatches": [
@@ -400,28 +257,10 @@
           "theirs": "rgba(0, 0, 0, 0.05)"
         },
         {
-          "part": "root",
-          "channel": "max-width",
-          "ours": "none",
-          "theirs": "100%"
-        },
-        {
-          "part": "root",
-          "channel": "position",
-          "ours": "static",
-          "theirs": "relative"
-        },
-        {
           "part": "label",
           "channel": "display",
           "ours": "block",
           "theirs": "inline"
-        },
-        {
-          "part": "label",
-          "channel": "text-wrap-mode",
-          "ours": "wrap",
-          "theirs": "nowrap"
         }
       ]
     }

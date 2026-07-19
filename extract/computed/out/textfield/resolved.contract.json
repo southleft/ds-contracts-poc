@@ -1,0 +1,777 @@
+{
+  "$schema": "../../../contracts/contract.schema.json",
+  "id": "polaris.text-field",
+  "name": "TextField",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "PROPOSED contract extracted from examples/polaris/.polaris-clone/polaris-react/src/components/TextField/TextField.tsx (react-tsx + css-module adapters) — API surface AND anatomy (structure, token bindings, layout, states) read from source; design bindings await reconciliation and human review. PROMOTED showcase contract: API surface extracted mechanically from Shopify/polaris @ 2b1ea88625e0613853ca8577c9acd1980a90f382 (polaris-react 13.10.1, MIT © Shopify, extracted 2026-07-18); styling bindings promoted from the component's own module.css under the reviewed class map in examples/polaris/scripts/curation.ts — every carried binding and every named refusal is listed in examples/polaris/extraction/PROMOTION.md. COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @shopify/polaris@13.9.5 in headless Chromium 148.0.7778.96; overflow channels in the sibling extension file.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "placeholder",
+      "description": "Hint text to display",
+      "type": "text",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Placeholder"
+        },
+        "code": {
+          "prop": "placeholder"
+        }
+      }
+    },
+    {
+      "name": "value",
+      "description": "Initial value for the input",
+      "type": "text",
+      "default": "",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Value"
+        },
+        "code": {
+          "prop": "value"
+        }
+      }
+    },
+    {
+      "name": "labelHidden",
+      "description": "Visually hide the label",
+      "type": "boolean",
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Label Hidden"
+        },
+        "code": {
+          "prop": "labelHidden"
+        }
+      }
+    },
+    {
+      "name": "disabled",
+      "description": "Disable the input",
+      "type": "boolean",
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Disabled"
+        },
+        "code": {
+          "prop": "disabled"
+        }
+      }
+    },
+    {
+      "name": "clearButton",
+      "description": "Show a clear text button in the input",
+      "type": "boolean",
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Clear Button"
+        },
+        "code": {
+          "prop": "clearButton"
+        }
+      }
+    },
+    {
+      "name": "selectTextOnFocus",
+      "description": "Indicates whether or not the entire value should be selected on focus.",
+      "type": "boolean",
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Select Text On Focus"
+        },
+        "code": {
+          "prop": "selectTextOnFocus"
+        }
+      }
+    },
+    {
+      "name": "suggestion",
+      "description": "An inline autocomplete suggestion containing the input value. The characters that complete the input value are selected for ease of deletion on input change or keypress of Backspace/Delete. The selected substring is visually highlighted with subdued styling.",
+      "type": "text",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Suggestion"
+        },
+        "code": {
+          "prop": "suggestion"
+        }
+      }
+    },
+    {
+      "name": "readOnly",
+      "description": "Disable editing of the input",
+      "type": "boolean",
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Read Only"
+        },
+        "code": {
+          "prop": "readOnly"
+        }
+      }
+    },
+    {
+      "name": "autoFocus",
+      "description": "Automatically focus the input",
+      "type": "boolean",
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Auto Focus"
+        },
+        "code": {
+          "prop": "autoFocus"
+        }
+      }
+    },
+    {
+      "name": "focused",
+      "description": "Force the focus state on the input",
+      "type": "boolean",
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Focused"
+        },
+        "code": {
+          "prop": "focused"
+        }
+      }
+    },
+    {
+      "name": "type",
+      "description": "Determine type of input",
+      "type": {
+        "enum": [
+          "text",
+          "email",
+          "number",
+          "integer",
+          "password",
+          "search",
+          "tel",
+          "url",
+          "date",
+          "datetime-local",
+          "month",
+          "time",
+          "week",
+          "currency"
+        ]
+      },
+      "default": "text",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Type",
+          "values": {
+            "text": "Text",
+            "email": "Email",
+            "number": "Number",
+            "integer": "Integer",
+            "password": "Password",
+            "search": "Search",
+            "tel": "Tel",
+            "url": "Url",
+            "date": "Date",
+            "datetime-local": "Datetime Local",
+            "month": "Month",
+            "time": "Time",
+            "week": "Week",
+            "currency": "Currency"
+          }
+        },
+        "code": {
+          "prop": "type"
+        }
+      }
+    },
+    {
+      "name": "name",
+      "description": "Name of the input",
+      "type": "text",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Name"
+        },
+        "code": {
+          "prop": "name"
+        }
+      }
+    },
+    {
+      "name": "role",
+      "description": "Defines a specific role attribute for the input",
+      "type": "text",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Role"
+        },
+        "code": {
+          "prop": "role"
+        }
+      }
+    },
+    {
+      "name": "step",
+      "description": "Limit increment value for numeric and date-time inputs",
+      "type": "number",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Step"
+        },
+        "code": {
+          "prop": "step"
+        }
+      }
+    },
+    {
+      "name": "largeStep",
+      "description": "Increment value for numeric and date-time inputs when using Page Up or Page Down",
+      "type": "number",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Large Step"
+        },
+        "code": {
+          "prop": "largeStep"
+        }
+      }
+    },
+    {
+      "name": "autoComplete",
+      "description": "Enable automatic completion by the browser. Set to \"off\" when you do not want the browser to fill in info",
+      "type": "text",
+      "default": "off",
+      "required": true,
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Auto Complete"
+        },
+        "code": {
+          "prop": "autoComplete"
+        }
+      }
+    },
+    {
+      "name": "maxLength",
+      "description": "Maximum character length for an input",
+      "type": "number",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Max Length"
+        },
+        "code": {
+          "prop": "maxLength"
+        }
+      }
+    },
+    {
+      "name": "minLength",
+      "description": "Minimum character length for an input",
+      "type": "number",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Min Length"
+        },
+        "code": {
+          "prop": "minLength"
+        }
+      }
+    },
+    {
+      "name": "pattern",
+      "description": "A regular expression to check the value against",
+      "type": "text",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Pattern"
+        },
+        "code": {
+          "prop": "pattern"
+        }
+      }
+    },
+    {
+      "name": "inputMode",
+      "description": "Choose the keyboard that should be used on mobile devices",
+      "type": {
+        "enum": [
+          "none",
+          "text",
+          "decimal",
+          "numeric",
+          "tel",
+          "search",
+          "email",
+          "url"
+        ]
+      },
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Input Mode",
+          "values": {
+            "none": "None",
+            "text": "Text",
+            "decimal": "Decimal",
+            "numeric": "Numeric",
+            "tel": "Tel",
+            "search": "Search",
+            "email": "Email",
+            "url": "Url"
+          }
+        },
+        "code": {
+          "prop": "inputMode"
+        }
+      }
+    },
+    {
+      "name": "spellCheck",
+      "description": "Indicate whether value should have spelling checked",
+      "type": "boolean",
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Spell Check"
+        },
+        "code": {
+          "prop": "spellCheck"
+        }
+      }
+    },
+    {
+      "name": "ariaOwns",
+      "description": "Indicates the id of a component owned by the input",
+      "type": "text",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Aria Owns"
+        },
+        "code": {
+          "prop": "ariaOwns"
+        }
+      }
+    },
+    {
+      "name": "ariaExpanded",
+      "description": "Indicates whether or not a Popover is displayed",
+      "type": "boolean",
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Aria Expanded"
+        },
+        "code": {
+          "prop": "ariaExpanded"
+        }
+      }
+    },
+    {
+      "name": "ariaControls",
+      "description": "Indicates the id of a component controlled by the input",
+      "type": "text",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Aria Controls"
+        },
+        "code": {
+          "prop": "ariaControls"
+        }
+      }
+    },
+    {
+      "name": "ariaActiveDescendant",
+      "description": "Indicates the id of a related component’s visually focused element to the input",
+      "type": "text",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Aria Active Descendant"
+        },
+        "code": {
+          "prop": "ariaActiveDescendant"
+        }
+      }
+    },
+    {
+      "name": "ariaAutocomplete",
+      "description": "Indicates what kind of user input completion suggestions are provided",
+      "type": "text",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Aria Autocomplete"
+        },
+        "code": {
+          "prop": "ariaAutocomplete"
+        }
+      }
+    },
+    {
+      "name": "showCharacterCount",
+      "description": "Indicates whether or not the character count should be displayed",
+      "type": "boolean",
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Show Character Count"
+        },
+        "code": {
+          "prop": "showCharacterCount"
+        }
+      }
+    },
+    {
+      "name": "align",
+      "description": "Determines the alignment of the text in the input",
+      "type": {
+        "enum": [
+          "left",
+          "center",
+          "right"
+        ]
+      },
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Align",
+          "values": {
+            "left": "Left",
+            "center": "Center",
+            "right": "Right"
+          }
+        },
+        "code": {
+          "prop": "align"
+        }
+      }
+    },
+    {
+      "name": "requiredIndicator",
+      "description": "Visual required indicator, adds an asterisk to label",
+      "type": "boolean",
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Required Indicator"
+        },
+        "code": {
+          "prop": "requiredIndicator"
+        }
+      }
+    },
+    {
+      "name": "monospaced",
+      "description": "Indicates whether or not a monospaced font should be used",
+      "type": "boolean",
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Monospaced"
+        },
+        "code": {
+          "prop": "monospaced"
+        }
+      }
+    },
+    {
+      "name": "variant",
+      "description": "Visual styling options for the TextField",
+      "type": {
+        "enum": [
+          "inherit",
+          "borderless"
+        ]
+      },
+      "default": "inherit",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Variant",
+          "values": {
+            "inherit": "Inherit",
+            "borderless": "Borderless"
+          }
+        },
+        "code": {
+          "prop": "variant"
+        }
+      }
+    },
+    {
+      "name": "size",
+      "description": "Changes the size of the input, giving it more or less padding",
+      "type": {
+        "enum": [
+          "slim",
+          "medium"
+        ]
+      },
+      "default": "medium",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Size",
+          "values": {
+            "slim": "Slim",
+            "medium": "Medium"
+          }
+        },
+        "code": {
+          "prop": "size"
+        }
+      }
+    },
+    {
+      "name": "autoSize",
+      "description": "Whether the TextField will grow as the text within the input changes",
+      "type": "boolean",
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Auto Size"
+        },
+        "code": {
+          "prop": "autoSize"
+        }
+      }
+    },
+    {
+      "name": "loading",
+      "description": "Indicates the loading state",
+      "type": "boolean",
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Loading"
+        },
+        "code": {
+          "prop": "loading"
+        }
+      }
+    }
+  ],
+  "events": [
+    {
+      "name": "focus",
+      "description": "Callback fired when input is focused",
+      "bindings": {
+        "code": {
+          "prop": "onFocus"
+        }
+      },
+      "trigger": "root"
+    }
+  ],
+  "states": [
+    "disabled",
+    "active",
+    "focus-visible",
+    "hover"
+  ],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "flex",
+        "align": "center"
+      },
+      "tokens": {
+        "color": "{p.color-text}"
+      },
+      "parts": {
+        "input": {
+          "element": "input",
+          "layout": {
+            "display": "flex",
+            "align": "center"
+          },
+          "tokens": {
+            "color": "{p.color-text}",
+            "padding-block": "{p.space-150}",
+            "padding-inline": "{p.space-300}",
+            "font-size": "{p.font-size-400}",
+            "font-weight": "{p.font-weight-regular}",
+            "line-height": "{p.font-line-height-600}",
+            "bottom": "{imported.shared.size-0}",
+            "flex-grow": "{imported.shared.num-1}",
+            "left": "{imported.shared.size-0}",
+            "min-width": "{imported.shared.size-0}",
+            "right": "{imported.shared.size-0}",
+            "top": "{imported.shared.size-0}",
+            "z-index": "{imported.text-field.input.z-index}"
+          },
+          "tokensByProp": [
+            {
+              "prop": "variant",
+              "map": {
+                "borderless": {
+                  "min-height": "{p.space-800}"
+                }
+              }
+            },
+            {
+              "prop": "size",
+              "map": {
+                "slim": {
+                  "padding-block": "{p.space-050}"
+                }
+              }
+            }
+          ],
+          "states": {
+            "disabled": {
+              "color": "{p.color-text-disabled}"
+            }
+          },
+          "attrs": {
+            "name": "{name}",
+            "value": "{value}",
+            "placeholder": "{placeholder}"
+          },
+          "declared": {
+            "cursor": "text",
+            "font-feature-settings": "normal",
+            "overflow-x": "clip",
+            "overflow-y": "clip",
+            "position": "relative",
+            "text-rendering": "auto"
+          },
+          "declaredStates": {
+            "disabled": {
+              "cursor": "default"
+            }
+          }
+        },
+        "backdrop": {
+          "element": "div",
+          "tokens": {
+            "background-color": "{p.color-input-bg-surface}",
+            "border-radius": "{p.border-radius-200}",
+            "border-width": "{p.border-width-0165}",
+            "border-color": "{p.color-input-border}",
+            "border-bottom-left-radius": "{imported.shared.size-8}",
+            "border-bottom-right-radius": "{imported.shared.size-8}",
+            "border-top-right-radius": "{imported.shared.size-8}",
+            "bottom": "{imported.shared.size-0}",
+            "left": "{imported.shared.size-0}",
+            "min-width": "{imported.shared.size-0}",
+            "right": "{imported.shared.size-0}",
+            "top": "{imported.shared.size-0}",
+            "z-index": "{imported.text-field.backdrop.z-index}"
+          },
+          "tokensByProp": [
+            {
+              "prop": "variant",
+              "map": {
+                "borderless": {
+                  "min-height": "{p.space-800}"
+                }
+              }
+            },
+            {
+              "prop": "size",
+              "map": {
+                "slim": {
+                  "padding-block": "{p.space-050}"
+                }
+              }
+            },
+            {
+              "prop": "variant",
+              "map": {
+                "borderless": {
+                  "border-left-color": "{imported.text-field.backdrop.border-left-color.borderless}",
+                  "border-left-width": "{imported.text-field.backdrop.border-left-width.borderless}",
+                  "border-right-color": "{imported.text-field.backdrop.border-right-color.borderless}",
+                  "border-right-width": "{imported.text-field.backdrop.border-right-width.borderless}",
+                  "border-top-color": "{imported.text-field.backdrop.border-top-color.borderless}",
+                  "border-top-width": "{imported.text-field.backdrop.border-top-width.borderless}"
+                },
+                "inherit": {
+                  "border-left-color": "{imported.text-field.backdrop.border-left-color.inherit}",
+                  "border-left-width": "{imported.text-field.backdrop.border-left-width.inherit}",
+                  "border-right-color": "{imported.text-field.backdrop.border-right-color.inherit}",
+                  "border-right-width": "{imported.text-field.backdrop.border-right-width.inherit}",
+                  "border-top-color": "{imported.text-field.backdrop.border-top-color.inherit}",
+                  "border-top-width": "{imported.text-field.backdrop.border-top-width.inherit}"
+                }
+              }
+            },
+            {
+              "prop": "variant",
+              "map": {
+                "borderless": {
+                  "border-width": "{p.border-width-0}"
+                }
+              }
+            }
+          ],
+          "declared": {
+            "cursor": "text",
+            "pointer-events": "none"
+          },
+          "declaredStates": {
+            "active": {
+              "outline-style": "solid"
+            },
+            "disabled": {
+              "cursor": "auto"
+            },
+            "focus-visible": {
+              "outline-style": "solid"
+            }
+          },
+          "states": {
+            "active": {
+              "background-color": "{imported.text-field.backdrop.background-color-state-active}"
+            },
+            "disabled": {
+              "background-color": "{imported.text-field.backdrop.background-color-state-disabled}",
+              "color": "{imported.shared.color-b5b5b5}"
+            },
+            "focus-visible": {
+              "background-color": "{imported.text-field.backdrop.background-color-state-focus-visible}"
+            },
+            "hover": {
+              "background-color": "{imported.text-field.backdrop.background-color-state-hover}"
+            }
+          }
+        }
+      }
+    }
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "polaris-react/src/components/TextField/TextField",
+      "export": "TextField"
+    }
+  }
+}

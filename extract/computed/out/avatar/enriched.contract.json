@@ -1,0 +1,232 @@
+{
+  "$schema": "../../../contracts/contract.schema.json",
+  "id": "polaris.avatar",
+  "name": "Avatar",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "PROPOSED contract extracted from examples/polaris/.polaris-clone/polaris-react/src/components/Avatar/Avatar.tsx (react-tsx + css-module adapters) — API surface AND anatomy (structure, token bindings, layout, states) read from source; design bindings await reconciliation and human review. PROMOTED showcase contract: API surface extracted mechanically from Shopify/polaris @ 2b1ea88625e0613853ca8577c9acd1980a90f382 (polaris-react 13.10.1, MIT © Shopify, extracted 2026-07-18); styling bindings promoted from the component's own module.css under the reviewed class map in examples/polaris/scripts/curation.ts — every carried binding and every named refusal is listed in examples/polaris/extraction/PROMOTION.md. COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @shopify/polaris@13.9.5 in headless Chromium 148.0.7778.96; overflow channels in the sibling extension file.",
+  "semantics": {
+    "element": "span"
+  },
+  "props": [
+    {
+      "name": "size",
+      "description": "Size of avatar",
+      "type": {
+        "enum": [
+          "xs",
+          "sm",
+          "md",
+          "lg",
+          "xl"
+        ]
+      },
+      "default": "md",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Size",
+          "values": {
+            "xs": "Xs",
+            "sm": "Sm",
+            "md": "Md",
+            "lg": "Lg",
+            "xl": "Xl"
+          }
+        },
+        "code": {
+          "prop": "size"
+        }
+      }
+    },
+    {
+      "name": "name",
+      "description": "The name of the person",
+      "type": "text",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Name"
+        },
+        "code": {
+          "prop": "name"
+        }
+      }
+    },
+    {
+      "name": "initials",
+      "description": "Initials of person to display",
+      "type": "text",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Initials"
+        },
+        "code": {
+          "prop": "initials"
+        }
+      }
+    },
+    {
+      "name": "customer",
+      "description": "Whether the avatar is for a customer",
+      "type": "boolean",
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Customer"
+        },
+        "code": {
+          "prop": "customer"
+        }
+      }
+    },
+    {
+      "name": "source",
+      "description": "URL of the avatar image which falls back to initials if the image fails to load",
+      "type": "text",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Source"
+        },
+        "code": {
+          "prop": "source"
+        }
+      }
+    },
+    {
+      "name": "accessibilityLabel",
+      "description": "Accessible label for the avatar image",
+      "type": "text",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Accessibility Label"
+        },
+        "code": {
+          "prop": "accessibilityLabel"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "tokens": {
+        "background": "{p.color-avatar-one-bg-fill}",
+        "color": "{p.color-avatar-one-text-on-bg-fill}",
+        "bottom": "{imported.shared.size-0}",
+        "left": "{imported.shared.size-0}",
+        "right": "{imported.shared.size-0}",
+        "top": "{imported.shared.size-0}"
+      },
+      "literals": {
+        "min-width": "20px"
+      },
+      "literalsByProp": [
+        {
+          "prop": "size",
+          "map": {
+            "xs": {
+              "width": "20px"
+            },
+            "sm": {
+              "width": "24px"
+            },
+            "md": {
+              "width": "28px"
+            },
+            "lg": {
+              "width": "32px"
+            },
+            "xl": {
+              "width": "40px"
+            }
+          }
+        }
+      ],
+      "parts": {
+        "initials": {
+          "element": "span",
+          "tokens": {
+            "font-size": "{p.font-size-400}",
+            "font-weight": "{p.font-weight-regular}",
+            "bottom": "{imported.shared.size-0}",
+            "color": "{imported.shared.color-fdeffd}",
+            "left": "{imported.shared.size-0}",
+            "min-height": "{imported.shared.size-0}",
+            "min-width": "{imported.shared.size-0}",
+            "right": "{imported.shared.size-0}",
+            "top": "{imported.shared.size-0}"
+          },
+          "content": {
+            "prop": "initials"
+          },
+          "layout": {
+            "display": "flex",
+            "align": "center",
+            "justify": "center"
+          },
+          "declared": {
+            "user-select": "none"
+          }
+        }
+      },
+      "declared": {
+        "max-width": "100%",
+        "overflow-x": "hidden",
+        "overflow-y": "hidden",
+        "position": "relative",
+        "user-select": "none"
+      },
+      "tokensByProp": [
+        {
+          "prop": "size",
+          "map": {
+            "lg": {
+              "border-bottom-left-radius": "{imported.avatar.root.border-bottom-left-radius.lg}",
+              "border-bottom-right-radius": "{imported.avatar.root.border-bottom-right-radius.lg}",
+              "border-top-left-radius": "{imported.avatar.root.border-top-left-radius.lg}",
+              "border-top-right-radius": "{imported.avatar.root.border-top-right-radius.lg}"
+            },
+            "md": {
+              "border-bottom-left-radius": "{imported.avatar.root.border-bottom-left-radius.md}",
+              "border-bottom-right-radius": "{imported.avatar.root.border-bottom-right-radius.md}",
+              "border-top-left-radius": "{imported.avatar.root.border-top-left-radius.md}",
+              "border-top-right-radius": "{imported.avatar.root.border-top-right-radius.md}"
+            },
+            "sm": {
+              "border-bottom-left-radius": "{imported.avatar.root.border-bottom-left-radius.sm}",
+              "border-bottom-right-radius": "{imported.avatar.root.border-bottom-right-radius.sm}",
+              "border-top-left-radius": "{imported.avatar.root.border-top-left-radius.sm}",
+              "border-top-right-radius": "{imported.avatar.root.border-top-right-radius.sm}"
+            },
+            "xl": {
+              "border-bottom-left-radius": "{imported.avatar.root.border-bottom-left-radius.xl}",
+              "border-bottom-right-radius": "{imported.avatar.root.border-bottom-right-radius.xl}",
+              "border-top-left-radius": "{imported.avatar.root.border-top-left-radius.xl}",
+              "border-top-right-radius": "{imported.avatar.root.border-top-right-radius.xl}"
+            },
+            "xs": {
+              "border-bottom-left-radius": "{imported.avatar.root.border-bottom-left-radius.xs}",
+              "border-bottom-right-radius": "{imported.avatar.root.border-bottom-right-radius.xs}",
+              "border-top-left-radius": "{imported.avatar.root.border-top-left-radius.xs}",
+              "border-top-right-radius": "{imported.avatar.root.border-top-right-radius.xs}"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "polaris-react/src/components/Avatar/Avatar",
+      "export": "Avatar"
+    }
+  }
+}

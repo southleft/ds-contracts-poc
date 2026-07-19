@@ -1,0 +1,419 @@
+{
+  "component": "Banner",
+  "generatedBy": "extract/computed/gate.ts",
+  "browser": "148.0.7778.96",
+  "method": "enriched contract → core/emit-html (wrapped library tokens + minted token custom properties) vs the ORIGINAL npm package rendering, same pinned Chromium, per combo × interaction; computed-equality over the styled channel set (exact string, no tolerance) + pixelmatch at threshold 0 (AA counted) and 0.1 (AA excluded) — both quoted, never widened",
+  "combos": 4,
+  "interactions": 4,
+  "computed": {
+    "cellsCompared": 192,
+    "cellsEqual": 176,
+    "pctEqual": 91.66666666666667,
+    "rowsFullyEqual": 0,
+    "rows": 16
+  },
+  "pixel": {
+    "pairs": 16,
+    "perfectExact": 0,
+    "perfectAA": 0,
+    "meanExact": 39.20710245768229,
+    "meanAA": 32.764078776041664,
+    "maxAA": 37.838541666666664
+  },
+  "fusion": {
+    "boundConfirmed": 0,
+    "boundCells": 8,
+    "contradictions": 8,
+    "mintedLeaves": 53,
+    "mintedLeavesUnfolded": 341,
+    "baseBindings": 63,
+    "stateBindings": 2,
+    "codeOnlyChannels": 30,
+    "overflowBindings": 54,
+    "folds": 90
+  },
+  "worstRows": [
+    {
+      "key": "critical__focus-visible",
+      "pctAA": 37.838541666666664,
+      "pctExact": 44.564615885416664,
+      "channelsMismatched": 1
+    },
+    {
+      "key": "warning__focus-visible",
+      "pctAA": 37.82958984375,
+      "pctExact": 44.554850260416664,
+      "channelsMismatched": 1
+    },
+    {
+      "key": "info__focus-visible",
+      "pctAA": 37.803548177083336,
+      "pctExact": 44.5458984375,
+      "channelsMismatched": 1
+    },
+    {
+      "key": "success__focus-visible",
+      "pctAA": 37.720540364583336,
+      "pctExact": 44.357096354166664,
+      "channelsMismatched": 1
+    },
+    {
+      "key": "warning__hover",
+      "pctAA": 36.607259114583336,
+      "pctExact": 43.265787760416664,
+      "channelsMismatched": 1
+    },
+    {
+      "key": "warning__active",
+      "pctAA": 36.607259114583336,
+      "pctExact": 43.265787760416664,
+      "channelsMismatched": 1
+    },
+    {
+      "key": "info__hover",
+      "pctAA": 36.586100260416664,
+      "pctExact": 43.2568359375,
+      "channelsMismatched": 1
+    },
+    {
+      "key": "info__active",
+      "pctAA": 36.586100260416664,
+      "pctExact": 43.2568359375,
+      "channelsMismatched": 1
+    }
+  ],
+  "topMismatchedChannels": [
+    [
+      "root.background-color",
+      16
+    ]
+  ],
+  "namedLosses": [
+    "overflow: blockstack.min-height — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+    "overflow: blockstack.min-width — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+    "overflow: box-2.background-color — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+    "overflow: box-2.border-top-left-radius — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+    "overflow: box-2.border-top-right-radius — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+    "overflow: box-2.color — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+    "overflow: box-2.padding-bottom — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+    "overflow: box-2.padding-left — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+    "overflow: box-2.padding-right — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+    "overflow: box-2.padding-top — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+    "overflow: inlinestack.color — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+    "overflow: inlinestack.column-gap — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+    "overflow: inlinestack.min-height — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+    "overflow: inlinestack.min-width — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+    "overflow: inlinestack.row-gap — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+    "overflow: inlinestack-2.color — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+    "overflow: inlinestack-2.column-gap — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+    "overflow: inlinestack-2.row-gap — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+    "overflow: part-0.0.0.0.0.0.color — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+    "overflow: icon.color — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+    "overflow: icon.min-height — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+    "overflow: icon.min-width — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+    "overflow: icon-2.bottom — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+    "overflow: icon-2.color — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+    "overflow: icon-2.fill — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+    "overflow: icon-2.left — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+    "overflow: icon-2.min-height — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+    "overflow: icon-2.min-width — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+    "overflow: icon-2.right — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+    "overflow: icon-2.top — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+    "overflow: part-0.0.0.0.0.0.0.0.0.color — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+    "overflow: part-0.0.0.0.0.0.0.0.0.fill — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+    "overflow: part-0.0.0.0.0.0.0.0.0.min-height — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+    "overflow: part-0.0.0.0.0.0.0.0.0.min-width — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+    "overflow: part-0.0.0.0.0.0.0.0.1.color — resolved values differ across variants without correlating to any variant axis — nothing minted; bind manually",
+    "overflow: part-0.0.0.0.0.0.0.0.1.fill — resolved values differ across variants without correlating to any variant axis — nothing minted; bind manually",
+    "overflow: part-0.0.0.0.0.0.0.0.1.min-height — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+    "overflow: part-0.0.0.0.0.0.0.0.1.min-width — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+    "overflow: part-0.0.0.0.0.0.0.0.2.color — resolved values differ across variants without correlating to any variant axis — nothing minted; bind manually",
+    "overflow: part-0.0.0.0.0.0.0.0.2.fill — resolved values differ across variants without correlating to any variant axis — nothing minted; bind manually",
+    "overflow: part-0.0.0.0.0.0.0.0.2.min-height — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+    "overflow: part-0.0.0.0.0.0.0.0.2.min-width — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+    "overflow: label.color — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+    "overflow: label.font-weight — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+    "overflow: box-3.padding-bottom — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+    "overflow: box-3.padding-left — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+    "overflow: box-3.padding-right — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+    "overflow: box-3.padding-top — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+    "overflow: blockstack-2.column-gap — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+    "overflow: blockstack-2.min-height — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+    "overflow: blockstack-2.min-width — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+    "overflow: blockstack-2.row-gap — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+    "overflow: label-2.min-height — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+    "overflow: label-2.min-width — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+    "code-only: blockstack.display — declared-channel value outside the bounded grammar — named residue (v15)",
+    "code-only: blockstack.flex-direction — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: blockstack.justify-content — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: inlinestack.align-items — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: inlinestack.display — declared-channel value outside the bounded grammar — named residue (v15)",
+    "code-only: inlinestack.justify-content — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: inlinestack-2.align-items — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: inlinestack-2.display — declared-channel value outside the bounded grammar — named residue (v15)",
+    "code-only: inlinestack-2.justify-content — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: icon.max-height — declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
+    "code-only: icon.max-width — declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
+    "code-only: icon-2.max-height — declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
+    "code-only: icon-2.max-width — declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
+    "code-only: icon-2.overflow-clip-margin — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: icon-2.overflow-x — declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
+    "code-only: icon-2.overflow-y — declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
+    "code-only: icon-2.position — declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
+    "code-only: part-0.0.0.0.0.0.0.0.0.d — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: part-0.0.0.0.0.0.0.0.0.display — declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
+    "code-only: part-0.0.0.0.0.0.0.0.0.fill-rule — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: part-0.0.0.0.0.0.0.0.1.d — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: part-0.0.0.0.0.0.0.0.1.display — declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
+    "code-only: part-0.0.0.0.0.0.0.0.2.d — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: part-0.0.0.0.0.0.0.0.2.display — declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
+    "code-only: part-0.0.0.0.0.0.0.0.2.fill-rule — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: label.overflow-wrap — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: label.unicode-bidi — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: blockstack-2.display — declared-channel value outside the bounded grammar — named residue (v15)",
+    "code-only: blockstack-2.flex-direction — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: label-2.display — declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision"
+  ],
+  "rows": [
+    {
+      "key": "success__default",
+      "channelsCompared": 12,
+      "channelsEqual": 11,
+      "pctExact": 25.762532552083332,
+      "pctAA": 20.336100260416668,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "background-color",
+          "ours": "rgba(4, 123, 93, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        }
+      ]
+    },
+    {
+      "key": "success__hover",
+      "channelsCompared": 12,
+      "channelsEqual": 11,
+      "pctExact": 43.068033854166664,
+      "pctAA": 36.451009114583336,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "background-color",
+          "ours": "rgba(4, 123, 93, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        }
+      ]
+    },
+    {
+      "key": "success__focus-visible",
+      "channelsCompared": 12,
+      "channelsEqual": 11,
+      "pctExact": 44.357096354166664,
+      "pctAA": 37.720540364583336,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "background-color",
+          "ours": "rgba(4, 123, 93, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        }
+      ]
+    },
+    {
+      "key": "success__active",
+      "channelsCompared": 12,
+      "channelsEqual": 11,
+      "pctExact": 43.068033854166664,
+      "pctAA": 36.451009114583336,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "background-color",
+          "ours": "rgba(4, 123, 93, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        }
+      ]
+    },
+    {
+      "key": "info__default",
+      "channelsCompared": 12,
+      "channelsEqual": 11,
+      "pctExact": 25.952962239583332,
+      "pctAA": 19.94384765625,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "background-color",
+          "ours": "rgba(145, 208, 255, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        }
+      ]
+    },
+    {
+      "key": "info__hover",
+      "channelsCompared": 12,
+      "channelsEqual": 11,
+      "pctExact": 43.2568359375,
+      "pctAA": 36.586100260416664,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "background-color",
+          "ours": "rgba(145, 208, 255, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        }
+      ]
+    },
+    {
+      "key": "info__focus-visible",
+      "channelsCompared": 12,
+      "channelsEqual": 11,
+      "pctExact": 44.5458984375,
+      "pctAA": 37.803548177083336,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "background-color",
+          "ours": "rgba(145, 208, 255, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        }
+      ]
+    },
+    {
+      "key": "info__active",
+      "channelsCompared": 12,
+      "channelsEqual": 11,
+      "pctExact": 43.2568359375,
+      "pctAA": 36.586100260416664,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "background-color",
+          "ours": "rgba(145, 208, 255, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        }
+      ]
+    },
+    {
+      "key": "warning__default",
+      "channelsCompared": 12,
+      "channelsEqual": 11,
+      "pctExact": 25.91796875,
+      "pctAA": 19.915364583333332,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "background-color",
+          "ours": "rgba(255, 184, 0, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        }
+      ]
+    },
+    {
+      "key": "warning__hover",
+      "channelsCompared": 12,
+      "channelsEqual": 11,
+      "pctExact": 43.265787760416664,
+      "pctAA": 36.607259114583336,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "background-color",
+          "ours": "rgba(255, 184, 0, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        }
+      ]
+    },
+    {
+      "key": "warning__focus-visible",
+      "channelsCompared": 12,
+      "channelsEqual": 11,
+      "pctExact": 44.554850260416664,
+      "pctAA": 37.82958984375,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "background-color",
+          "ours": "rgba(255, 184, 0, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        }
+      ]
+    },
+    {
+      "key": "warning__active",
+      "channelsCompared": 12,
+      "channelsEqual": 11,
+      "pctExact": 43.265787760416664,
+      "pctAA": 36.607259114583336,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "background-color",
+          "ours": "rgba(255, 184, 0, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        }
+      ]
+    },
+    {
+      "key": "critical__default",
+      "channelsCompared": 12,
+      "channelsEqual": 11,
+      "pctExact": 25.92529296875,
+      "pctAA": 20.430501302083332,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "background-color",
+          "ours": "rgba(199, 10, 36, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        }
+      ]
+    },
+    {
+      "key": "critical__hover",
+      "channelsCompared": 12,
+      "channelsEqual": 11,
+      "pctExact": 43.275553385416664,
+      "pctAA": 36.559244791666664,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "background-color",
+          "ours": "rgba(199, 10, 36, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        }
+      ]
+    },
+    {
+      "key": "critical__focus-visible",
+      "channelsCompared": 12,
+      "channelsEqual": 11,
+      "pctExact": 44.564615885416664,
+      "pctAA": 37.838541666666664,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "background-color",
+          "ours": "rgba(199, 10, 36, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        }
+      ]
+    },
+    {
+      "key": "critical__active",
+      "channelsCompared": 12,
+      "channelsEqual": 11,
+      "pctExact": 43.275553385416664,
+      "pctAA": 36.559244791666664,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "background-color",
+          "ours": "rgba(199, 10, 36, 1)",
+          "theirs": "rgba(255, 255, 255, 1)"
+        }
+      ]
+    }
+  ]
+}

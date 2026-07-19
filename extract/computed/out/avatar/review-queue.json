@@ -1,0 +1,84 @@
+{
+  "_marker": "CONTRADICTION REVIEW QUEUE — computed truth vs static bindings. Resolution is HUMAN-ACK ONLY: extract/computed/resolve.ts applies computed-wins per explicitly named item; nothing auto-resolves.",
+  "component": "Avatar",
+  "contract": "examples/polaris/contracts/avatar.contract.json",
+  "generatedBy": "extract/computed/run.ts",
+  "browser": "148.0.7778.96",
+  "items": [
+    {
+      "id": "xs|initials|font-size",
+      "combo": "xs",
+      "part": "initials",
+      "channel": "font-size",
+      "ref": "{p.font-size-400}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "13px",
+      "cause": "content-conditioned element: .Polaris-Avatar__Text { font-size: var(--p-font-size-400) } styles the Text element Polaris renders only when initials/name are given; the default mount renders the empty .Polaris-Avatar__Initials wrapper, which inherits the provider's body typography (html,body { font-size: var(--p-font-size-325) } = 13px). Computed truth wins: resolve to the unique DTCG candidate {p.font-size-325}; the initials-present branch stays named residue (no contract channel can be a function of a text prop's value — the standing Avatar refusal class).",
+      "candidates": [
+        "p.font-size-325"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "sm|initials|font-size",
+      "combo": "sm",
+      "part": "initials",
+      "channel": "font-size",
+      "ref": "{p.font-size-400}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "13px",
+      "cause": "content-conditioned element: .Polaris-Avatar__Text { font-size: var(--p-font-size-400) } styles the Text element Polaris renders only when initials/name are given; the default mount renders the empty .Polaris-Avatar__Initials wrapper, which inherits the provider's body typography (html,body { font-size: var(--p-font-size-325) } = 13px). Computed truth wins: resolve to the unique DTCG candidate {p.font-size-325}; the initials-present branch stays named residue (no contract channel can be a function of a text prop's value — the standing Avatar refusal class).",
+      "candidates": [
+        "p.font-size-325"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "md|initials|font-size",
+      "combo": "md",
+      "part": "initials",
+      "channel": "font-size",
+      "ref": "{p.font-size-400}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "13px",
+      "cause": "content-conditioned element: .Polaris-Avatar__Text { font-size: var(--p-font-size-400) } styles the Text element Polaris renders only when initials/name are given; the default mount renders the empty .Polaris-Avatar__Initials wrapper, which inherits the provider's body typography (html,body { font-size: var(--p-font-size-325) } = 13px). Computed truth wins: resolve to the unique DTCG candidate {p.font-size-325}; the initials-present branch stays named residue (no contract channel can be a function of a text prop's value — the standing Avatar refusal class).",
+      "candidates": [
+        "p.font-size-325"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "lg|initials|font-size",
+      "combo": "lg",
+      "part": "initials",
+      "channel": "font-size",
+      "ref": "{p.font-size-400}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "13px",
+      "cause": "content-conditioned element: .Polaris-Avatar__Text { font-size: var(--p-font-size-400) } styles the Text element Polaris renders only when initials/name are given; the default mount renders the empty .Polaris-Avatar__Initials wrapper, which inherits the provider's body typography (html,body { font-size: var(--p-font-size-325) } = 13px). Computed truth wins: resolve to the unique DTCG candidate {p.font-size-325}; the initials-present branch stays named residue (no contract channel can be a function of a text prop's value — the standing Avatar refusal class).",
+      "candidates": [
+        "p.font-size-325"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "xl|initials|font-size",
+      "combo": "xl",
+      "part": "initials",
+      "channel": "font-size",
+      "ref": "{p.font-size-400}",
+      "computedProp": "font-size",
+      "expected": "16px",
+      "observed": "13px",
+      "cause": "content-conditioned element: .Polaris-Avatar__Text { font-size: var(--p-font-size-400) } styles the Text element Polaris renders only when initials/name are given; the default mount renders the empty .Polaris-Avatar__Initials wrapper, which inherits the provider's body typography (html,body { font-size: var(--p-font-size-325) } = 13px). Computed truth wins: resolve to the unique DTCG candidate {p.font-size-325}; the initials-present branch stays named residue (no contract channel can be a function of a text prop's value — the standing Avatar refusal class).",
+      "candidates": [
+        "p.font-size-325"
+      ],
+      "status": "open"
+    }
+  ]
+}

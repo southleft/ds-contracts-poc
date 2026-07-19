@@ -1,0 +1,16 @@
+[
+  {
+    "ids": [
+      "enabled|backdrop|border-width"
+    ],
+    "part": "backdrop",
+    "channel": "border-width",
+    "scope": "base",
+    "from": "{p.border-width-0165}",
+    "to": "{p.border-width-0}",
+    "observed": "0px",
+    "expected": "1px",
+    "cause": "cross-component zeroing (the showcase's own named Checkbox gap, now measured): Polaris's Choice wrapper CSS zeroes the checkbox backdrop border and repaints the control edge as an inset box-shadow, so the carried Checkbox.module.css border-width binding loses the cascade — computed border-width is 0. Computed truth wins: resolve via the review queue (--to {p.border-width-0}; several zero-valued tokens share 0px, border-width-0 is the exact name-class match). The edge itself rides the minted box-shadow channel.",
+    "ack": "explicit CLI --apply"
+  }
+]
