@@ -237,8 +237,9 @@ const lines = [
   '`act` is not assumed. Every `run:` step below was parsed out of the workflow YAML and executed',
   "verbatim with GitHub's own step shell (`bash --noprofile --norc -e -o pipefail`) in a scratch",
   'consumer repo — **code-led**: the committed foreign-sibling extraction fixture as the component',
-  'library; **design-led**: the committed `evals/fixtures/storybook-skeleton` + the Polaris Badge',
-  'contract/tokens/icons. Steps that need live GitHub context are CI-ONLY by name (shell still',
+  "library; **design-led**: the committed `evals/fixtures/storybook-skeleton` + the repo's own",
+  '`ds.button` contract/tokens/icons/tokens.css (see Findings for why not the Polaris Badge).',
+  'Steps that need live GitHub context are CI-ONLY by name (shell still',
   '`bash -n`-checked); `uses:` steps have no shell to run — the YAML lint covers them.',
   '',
 ];
