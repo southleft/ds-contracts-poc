@@ -1,6 +1,6 @@
 {
-  "passed": 113,
-  "total": 113,
+  "passed": 114,
+  "total": 114,
   "results": [
     {
       "id": "refuse-unknown-token-reference",
@@ -564,6 +564,11 @@
     },
     {
       "id": "canvas-pixel-gate-receipts",
+      "claim": "C3-detection",
+      "pass": true
+    },
+    {
+      "id": "canvas-gate-standing-pin",
       "claim": "C3-detection",
       "pass": true
     }

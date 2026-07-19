@@ -475,7 +475,7 @@
     {
       "cell": "Size=Medium, Text Align=Start, Tone=Success, Variant=Secondary",
       "kind": "base",
-      "pctExactUnmasked": 10.35,
+      "pctExactUnmasked": 10.38,
       "pctAAUnmasked": 3.92,
       "pctAAMasked": 0,
       "maskCoveragePct": 40.7,
@@ -670,7 +670,7 @@
     {
       "cell": "Size=Micro, Text Align=Center, Tone=Critical, Variant=Secondary",
       "kind": "base",
-      "pctExactUnmasked": 13.57,
+      "pctExactUnmasked": 13.62,
       "pctAAUnmasked": 5.14,
       "pctAAMasked": 0,
       "maskCoveragePct": 53.41,
@@ -2902,7 +2902,7 @@
     "cells": 220,
     "meanExactUnmasked": 57.09,
     "meanAAUnmasked": 28.81,
-    "meanAAMasked": 29.7,
+    "meanAAMasked": 44.06,
     "maxAAMasked": 94.1,
     "worstCell": "Size=Large, Text Align=Left, Tone=Critical, Variant=Primary",
     "cellsOver10Masked": [

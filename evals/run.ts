@@ -3255,6 +3255,55 @@ const cases: Case[] = [
       console.log(`canvas-pixel-gate: ${comps.length} scorecards present, summaries row-consistent, every >10% cell named`);
     },
   },
+  {
+    // ROUND 5a — CANVAS GATE STANDING PIN: the committed scorecards carry
+    // the round-5 numbers (the engine draws everything the v0.3.0 contracts
+    // carry). Badge + Thumbnail PASS the ≤5% masked-mean acceptance; every
+    // other component's mean is pinned exactly, its >10% cells all carry
+    // named causes, and a silent regression (any mean drifting UP past its
+    // pin) fails this eval by name. Re-earning the numbers needs the
+    // harnessed gate run (extract/figma/canvas-gate/run.ts); this pin
+    // guards the committed receipts between runs.
+    id: 'canvas-gate-standing-pin',
+    claim: 'C3-detection',
+    run: () => {
+      const dir = path.join(ROOT, 'examples/polaris/receipts/canvas-gate');
+      // meanAAMasked pinned per component (round-5 final run, 2026-07-19).
+      const PIN: Record<string, { mean: number; accept: boolean }> = {
+        avatar: { mean: 14.58, accept: false },
+        badge: { mean: 0.07, accept: true },
+        banner: { mean: 12.1, accept: false },
+        // Button's mean is dominated by the 40 Primary cells at ~91% — the
+        // NAMED tone×variant promotion refusal (defaultless tone axis).
+        button: { mean: 44.06, accept: false },
+        checkbox: { mean: 26.65, accept: false },
+        'progress-bar': { mean: 26.22, accept: false },
+        'radio-button': { mean: 27.32, accept: false },
+        spinner: { mean: 6.45, accept: false },
+        tag: { mean: 50.05, accept: false },
+        thumbnail: { mean: 2.16, accept: true },
+      };
+      // Pixel-scoring nondeterminism headroom (AA classifier at 2x DSF):
+      // observed byte-stable across consecutive runs; 0.75pp guards against
+      // font-rasterization jitter without hiding a real regression.
+      const TOL = 0.75;
+      for (const [comp, pin] of Object.entries(PIN)) {
+        const sc = JSON.parse(readFileSync(path.join(dir, `${comp}.scorecard.json`), 'utf8')) as {
+          summary: { meanAAMasked: number };
+          acceptance: { maskedMeanLE5: boolean; allCellsOver10Named: boolean; noBlankCanvasCells: boolean };
+        };
+        if (sc.summary.meanAAMasked > pin.mean + TOL) {
+          throw new Error(`${comp}: masked mean ${sc.summary.meanAAMasked}% regressed past the round-5 pin ${pin.mean}%`);
+        }
+        if (!sc.acceptance.allCellsOver10Named) throw new Error(`${comp}: unnamed >10% cells`);
+        const accepted = sc.acceptance.maskedMeanLE5 && sc.acceptance.noBlankCanvasCells;
+        if (pin.accept && !accepted) {
+          throw new Error(`${comp}: round-5 PASSING component no longer passes (mean≤5 ∧ noBlank)`);
+        }
+      }
+      console.log('canvas-gate-standing-pin: Badge+Thumbnail PASS pinned; 10/10 means at or under their round-5 pins, all >10% cells named');
+    },
+  },
 ];
 
 // ---------------------------------------------------------------------------

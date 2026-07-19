@@ -444,7 +444,16 @@ async function main(): Promise<void> {
         receipts.push({ i, masked: s.pctAAMasked ?? s.pctAAUnmasked });
       });
 
-      const maskedVals = rows.map((r) => r.pctAAMasked ?? r.pctAAUnmasked);
+      // Round 5 (stage-4 pin alignment): the SUMMARY means/max are computed
+      // over SCORED cells only — a fully-masked cell (text-only crop) has no
+      // masked pixels to score, and averaging its UNMASKED fallback under a
+      // "masked" label was a mislabeling the round-4 eval already excluded.
+      // Fully-masked cells keep their per-cell fallback number AND their
+      // named cause (font-rendering), and still count toward over10 naming.
+      const maskedVals = rows
+        .filter((r) => r.pctAAMasked !== null)
+        .map((r) => r.pctAAMasked as number);
+      if (maskedVals.length === 0) maskedVals.push(...rows.map((r) => r.pctAAUnmasked));
       const mean = (xs: number[]) => xs.reduce((a, b) => a + b, 0) / Math.max(1, xs.length);
       const maxMasked = Math.max(...maskedVals);
       const worst = receipts.slice().sort((x, y) => y.masked - x.masked)[0];

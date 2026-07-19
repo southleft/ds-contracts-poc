@@ -1022,9 +1022,15 @@ function applyTokens(
       // and the real package's sub-768px bucket (the floor capture's own
       // viewport) sizes the control BY IT: dropping the channel drew every
       // canvas Button 4px shorter than the captured truth. minHeight is a
-      // bindable field, exactly like minWidth.
+      // bindable field, exactly like minWidth — but ONLY when the part
+      // carries no height channel: a FIXED height is the drawn design truth
+      // (the repo Button's captured Figma boxes are 32/40/48 while its
+      // min-height 44 is a code-side a11y fact — the reviewed canvas-box
+      // parity pin, evals design-canvas-box-parity).
       case 'min-height':
-        spec.bindings = { ...spec.bindings, minHeight: varName };
+        if (tokens['height'] === undefined) {
+          spec.bindings = { ...spec.bindings, minHeight: varName };
+        }
         break;
       case 'height':
         spec.fixedHeight = { px: px(resolveLiteral(tokenPath)), varName };
