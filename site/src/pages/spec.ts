@@ -421,6 +421,7 @@ function layoutPage(): { route: string; html: string } {
           justify: 'Main-axis distribution.',
           grow: 'The part takes remaining space — code: <code>flex: 1 1 auto</code>; canvas: fill container.',
           overlap: 'Children overlap (AvatarGroup): the gap token is applied as a <em>negative</em> child margin in CSS and as negative item spacing on the canvas.',
+          wrap: 'v15: children wrap (tag groups, chip rows) — code: <code>flex-wrap: wrap</code>; canvas: native <code>layoutWrap: WRAP</code>.',
         }) +
         shippingExample('avatar-group.contract.json', { paths: ['anatomy.root.parts.stack.layout', 'anatomy.root.parts.stack.tokens'] }, 'overlap — the negative-spacing projection'),
     ),
@@ -507,6 +508,28 @@ function tokensPage(): { route: string; html: string } {
             ],
           },
           'per-size literal track heights (schema v14 — the Polaris ProgressBar shape)',
+        ),
+    ),
+    section(
+      'declared-facts',
+      'Declared facts',
+      ['generated', 'curated'],
+      `<p><code>declared</code> and <code>declaredStates</code> (v15, the S4 channel lifts) carry the keyword/literal styling channels that have <em>no token vocabulary</em> — <code>cursor</code>, <code>user-select</code>, <code>appearance</code>, <code>text-rendering</code>, <code>font-feature-settings</code>, transitions, <code>touch-action</code>, the <code>position: relative</code> class, the A22 text channels (<code>text-transform</code>, <code>text-decoration-line</code>, <code>text-align</code>, <code>text-overflow</code>), <code>font-family</code> stacks, and the background sub-channels. Before v15 these were extension-block residue; now they are first-class facts: every code emitter renders them verbatim, and the canvas either <strong>draws</strong> them natively (text case, decoration, alignment, truncation, first font-family stack entry — the capability matrix’s <em>draw</em> verdicts) or <strong>declares</strong> them without drawing (the matrix §b annotation copy lands in the component description — declared-not-drawn, never silently dropped).</p><p><code>declared</code> is <code>Record&lt;cssProperty, value&gt;</code> on any non-ref part; <code>declaredStates</code> is the per-state form (<code>Record&lt;state, Record&lt;cssProperty, value&gt;&gt;</code>) — cursor staying <code>pointer</code> on <code>:disabled</code>, <code>text-decoration-line: underline</code> on <code>:hover</code>. A declared <code>cursor</code> or <code>position</code> fact is authoritative: the emitters’ own button chrome (<code>cursor: pointer</code>, the <code>:disabled</code> not-allowed rule) yields to it. The computed-capture floor promotes uniform observed values (and full-coverage uniform state deltas) into these fields automatically — see <code>extract/computed/</code>.</p>` +
+        refusals('Refusals:', [
+          'a channel outside the <code>DECLARED_CHANNELS</code> registry — token/literal-vocabulary channels belong in <code>tokens</code>/<code>literals</code>',
+          'a value outside the channel’s bounded grammar (e.g. <code>position</code> admits only <code>relative</code>/<code>static</code> — absolute placement belongs to <code>overlay</code>/<code>stylesWhen</code>)',
+          'a channel carried as BOTH a token binding (or literal) and a declared fact on the same part — ambiguous',
+          'a state outside the contract’s declared <code>states</code>, or outside the state vocabulary',
+          'a component-instance or slot part — the child contract / consumer owns its styling',
+        ]) +
+        illustrativeExample(
+          PartSchema,
+          {
+            element: 'button',
+            declared: { cursor: 'pointer', 'user-select': 'none', 'text-rendering': 'optimizelegibility' },
+            declaredStates: { disabled: { cursor: 'pointer' } },
+          },
+          'declared facts (schema v15 — the Polaris Button shape the computed floor promotes)',
         ),
     ),
   ].join('');
