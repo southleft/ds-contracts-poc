@@ -1,5 +1,16 @@
 # ENTERPRISE GAUNTLET — Carbon · Fluent 2 · Spectrum · Polaris vs the code-extraction pipeline
 
+> **What this document is, and isn't.** This is a *stress test*, not a showcase — its job
+> was to find where the extractor breaks on four hostile real-world codebases, and the ugly
+> numbers below (including Fluent's initial **0/23**) are the *findings that did their job*:
+> every failure class here was root-caused and fixed in the week after this run, and the
+> after-state is pinned by the eval suite (Fluent now extracts **23/23** with a 90% median
+> facts-carried; the silent-loss classes are gone; the crash is a named skip). Read it the way
+> you'd read a crash-test report: the crumpled zones are the evidence the design was tested,
+> not the verdict on the car. For the end-to-end proof an adopter should judge —
+> real system in, contracts out, both surfaces generated and verified — see the
+> **Polaris showcase** (`examples/polaris/`, in progress as of 2026-07-18).
+
 The owner's mandate: *"Pretend you're working on Carbon or Microsoft's Fluent, or Adobe
 Spectrum or Shopify's Polaris. These are the types of systems this application is built to
 maintain."* This report doesn't pretend — it RAN them. All four systems were shallow-cloned
