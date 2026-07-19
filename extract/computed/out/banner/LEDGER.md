@@ -254,7 +254,7 @@ Minted leaves WITHOUT folding: **271** → WITH folding: **57** (108 folded chan
 
 ## Declared facts (v15 — carried, first-class)
 
-- base declared facts: **41**
+- base declared facts: **39**
   - root.position = `relative`
   - icon.max-height = `100%`
   - icon.max-width = `100%`
@@ -273,7 +273,6 @@ Minted leaves WITHOUT folding: **271** → WITH folding: **57** (108 folded chan
   - button__icon.text-align = `center`
   - button__icon.user-select = `none`
   - part-0-0-0-0-1-0-0.cursor = `pointer`
-  - part-0-0-0-0-1-0-0.display = `inline`
   - part-0-0-0-0-1-0-0.text-align = `center`
   - part-0-0-0-0-1-0-0.user-select = `none`
   - icon-3.cursor = `pointer`
@@ -281,7 +280,6 @@ Minted leaves WITHOUT folding: **271** → WITH folding: **57** (108 folded chan
   - icon-3.max-width = `100%`
   - icon-3.text-align = `center`
   - icon-3.user-select = `none`
-  - label-2.display = `inline`
   - button-2.appearance = `none`
   - button-2.border-bottom-style = `none`
   - button-2.border-left-style = `none`
@@ -310,6 +308,6 @@ Minted leaves WITHOUT folding: **271** → WITH folding: **57** (108 folded chan
 
 ## Fidelity gate (scorecard.json)
 
-- computed-equality (styled channels, contract-mediated): **95.776%** (11156/11648 cells; 0/64 combo×state rows fully equal)
-- pixel: 0/64 pairs perfect at threshold 0 · 0/64 at the AA point (mean AA 7.940%, max 9.506%)
+- computed-equality (styled channels, contract-mediated): **96.875%** (11284/11648 cells; 0/64 combo×state rows fully equal)
+- pixel: 0/64 pairs perfect at threshold 0 · 0/64 at the AA point (mean AA 2.021%, max 3.979%)
 

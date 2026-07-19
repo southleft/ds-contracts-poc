@@ -932,11 +932,6 @@
     "enriched": [
       {
         "part": "blockstack",
-        "field": "display",
-        "value": "flex"
-      },
-      {
-        "part": "blockstack",
         "field": "direction",
         "value": "column"
       },
@@ -947,11 +942,6 @@
       },
       {
         "part": "inlinestack",
-        "field": "display",
-        "value": "flex"
-      },
-      {
-        "part": "inlinestack",
         "field": "align",
         "value": "center"
       },
@@ -962,11 +952,6 @@
       },
       {
         "part": "inlinestack-2",
-        "field": "display",
-        "value": "flex"
-      },
-      {
-        "part": "inlinestack-2",
         "field": "align",
         "value": "center"
       },
@@ -974,11 +959,6 @@
         "part": "inlinestack-2",
         "field": "justify",
         "value": "space-between"
-      },
-      {
-        "part": "button",
-        "field": "display",
-        "value": "flex"
       },
       {
         "part": "button",
@@ -992,28 +972,13 @@
       },
       {
         "part": "blockstack-2",
-        "field": "display",
-        "value": "flex"
-      },
-      {
-        "part": "blockstack-2",
         "field": "direction",
         "value": "column"
       },
       {
         "part": "buttongroup",
-        "field": "display",
-        "value": "flex"
-      },
-      {
-        "part": "buttongroup",
         "field": "align",
         "value": "center"
-      },
-      {
-        "part": "button-2",
-        "field": "display",
-        "value": "inline-flex"
       },
       {
         "part": "button-2",
@@ -1125,11 +1090,6 @@
       },
       {
         "part": "part-0-0-0-0-1-0-0",
-        "channel": "display",
-        "value": "inline"
-      },
-      {
-        "part": "part-0-0-0-0-1-0-0",
         "channel": "text-align",
         "value": "center"
       },
@@ -1162,11 +1122,6 @@
         "part": "icon-3",
         "channel": "user-select",
         "value": "none"
-      },
-      {
-        "part": "label-2",
-        "channel": "display",
-        "value": "inline"
       },
       {
         "part": "button-2",
@@ -1992,23 +1947,16 @@
     ]
   },
   "enrichmentNotes": [
-    "layout enriched: blockstack.layout.display = flex (uniform computed keyword — the schema's own vocabulary)",
     "layout enriched: blockstack.layout.direction = column (uniform computed keyword — the schema's own vocabulary)",
     "layout enriched: blockstack.layout.justify = space-between (uniform computed keyword — the schema's own vocabulary)",
-    "layout enriched: inlinestack.layout.display = flex (uniform computed keyword — the schema's own vocabulary)",
     "layout enriched: inlinestack.layout.align = center (uniform computed keyword — the schema's own vocabulary)",
     "layout enriched: inlinestack.layout.justify = space-between (uniform computed keyword — the schema's own vocabulary)",
-    "layout enriched: inlinestack-2.layout.display = flex (uniform computed keyword — the schema's own vocabulary)",
     "layout enriched: inlinestack-2.layout.align = center (uniform computed keyword — the schema's own vocabulary)",
     "layout enriched: inlinestack-2.layout.justify = space-between (uniform computed keyword — the schema's own vocabulary)",
-    "layout enriched: button.layout.display = flex (uniform computed keyword — the schema's own vocabulary)",
     "layout enriched: button.layout.align = center (uniform computed keyword — the schema's own vocabulary)",
     "layout enriched: button.layout.justify = center (uniform computed keyword — the schema's own vocabulary)",
-    "layout enriched: blockstack-2.layout.display = flex (uniform computed keyword — the schema's own vocabulary)",
     "layout enriched: blockstack-2.layout.direction = column (uniform computed keyword — the schema's own vocabulary)",
-    "layout enriched: buttongroup.layout.display = flex (uniform computed keyword — the schema's own vocabulary)",
     "layout enriched: buttongroup.layout.align = center (uniform computed keyword — the schema's own vocabulary)",
-    "layout enriched: button-2.layout.display = inline-flex (uniform computed keyword — the schema's own vocabulary)",
     "layout enriched: button-2.layout.align = center (uniform computed keyword — the schema's own vocabulary)",
     "layout enriched: button-2.layout.justify = center (uniform computed keyword — the schema's own vocabulary)",
     "declared fact carried: root.position = relative (v15 declared vocabulary — declared-not-drawn on canvas)",
@@ -2029,7 +1977,6 @@
     "declared fact carried: button__icon.text-align = center (v15 declared vocabulary — canvas-drawable)",
     "declared fact carried: button__icon.user-select = none (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: part-0-0-0-0-1-0-0.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-0-0-0-0-1-0-0.display = inline (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: part-0-0-0-0-1-0-0.text-align = center (v15 declared vocabulary — canvas-drawable)",
     "declared fact carried: part-0-0-0-0-1-0-0.user-select = none (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: icon-3.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
@@ -2037,7 +1984,6 @@
     "declared fact carried: icon-3.max-width = 100% (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: icon-3.text-align = center (v15 declared vocabulary — canvas-drawable)",
     "declared fact carried: icon-3.user-select = none (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: label-2.display = inline (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: button-2.appearance = none (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: button-2.border-bottom-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: button-2.border-left-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",

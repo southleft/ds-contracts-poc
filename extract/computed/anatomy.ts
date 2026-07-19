@@ -574,6 +574,33 @@ export function promoteAnatomy(
       part.description = `Promoted from the computed floor (round 4): rendered anatomy ${e.sig} — this element exists in the real component's DOM; the static layer had no part for it.`;
     }
 
+    // Display fact: every promoted part carries its computed display
+    // EXPLICITLY — the emitters default structural parts to flex, but the
+    // real tree mixes block/inline containers, and a wrong container display
+    // cascades (flex-item blockification turned Banner's body span into a
+    // block and let a block Box render as a flex row). flex/inline-flex ride
+    // Part.layout (the schema's own vocabulary; enrichLayout adds
+    // direction/align/justify); other uniform keywords ride Part.declared.
+    {
+      const displays = new Set<string>();
+      for (const combo of presentBy.get(i) ?? []) {
+        const el = union.alignedByKey.get(`${combo.key}__default`)![i];
+        if (el) displays.add(el.node.style['display']);
+      }
+      if (displays.size === 1) {
+        const d = [...displays][0];
+        if (d === 'flex' || d === 'inline-flex') {
+          part.layout = { display: d as 'flex' | 'inline-flex', ...part.layout };
+        } else if (/^(inline|inline-block|block|contents|none)$/.test(d)) {
+          part.declared = { display: d, ...part.declared };
+        } else {
+          receipts.push(`display-outside-vocabulary: ${e.partName} = "${d}" — carried by neither layout nor the declared registry (named residue)`);
+        }
+      } else if (displays.size > 1) {
+        receipts.push(`display-varies: ${e.partName} = {${[...displays].sort().join(', ')}} across combos — no per-axis display spelling (named residue)`);
+      }
+    }
+
     // Full-width fact (geometry evidence): a part inside a ROW flex parent
     // whose computed width equals the parent's content width in EVERY
     // enabled combo spans the row — carried as layout.grow (flex: 1 1 auto),

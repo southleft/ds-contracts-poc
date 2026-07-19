@@ -710,7 +710,7 @@
     }
   },
   "declared": {
-    "base": 41,
+    "base": 39,
     "state": 1
   },
   "codeOnly": {
@@ -805,7 +805,7 @@
     ]
   },
   "gate": {
-    "computedPctEqual": 95.7760989010989,
+    "computedPctEqual": 96.875,
     "rowsFullyEqual": 0,
     "rows": 64,
     "pixelPerfectExact": 0,

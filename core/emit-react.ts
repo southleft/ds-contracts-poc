@@ -1284,6 +1284,10 @@ export function generateCss(contract: Contract, tokenInventory: Set<string>, err
       if (part.layout?.justify) decls.push(`justify-content: ${JUSTIFY_CSS[part.layout.justify]}`);
     }
     if (part.layout?.grow) decls.push('flex: 1 1 auto', 'min-width: 0');
+    // UA-margin neutralization on NESTED parts (round 4): a promoted h2/p/ul
+    // part would leak UA margins the real component resets — same discipline
+    // as the root rule; captured nonzero margins arrive as minted overrides.
+    if (part.element && UA_MARGIN_ELEMENTS.has(part.element)) decls.push('margin: 0');
     // v7 overlay: out of flow, attached to the root's edge.
     if (part.overlay) decls.push('position: absolute', ...OVERLAY_CSS[part.overlay.placement]);
     // v9 shape: parametric leaf decor — the ONE shared projection

@@ -164,29 +164,58 @@
       "parts": {
         "box": {
           "description": "Promoted from the computed floor (round 4): rendered anatomy div|Box — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "block"
+          },
           "layout": {
             "grow": true
           },
           "parts": {
             "blockstack": {
               "description": "Promoted from the computed floor (round 4): rendered anatomy div|BlockStack — this element exists in the real component's DOM; the static layer had no part for it.",
+              "layout": {
+                "display": "flex",
+                "direction": "column",
+                "justify": "space-between"
+              },
               "parts": {
                 "box-2": {
                   "description": "Promoted from the computed floor (round 4): rendered anatomy div|Box — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "declared": {
+                    "display": "block"
+                  },
                   "parts": {
                     "inlinestack": {
                       "description": "Promoted from the computed floor (round 4): rendered anatomy div|InlineStack — this element exists in the real component's DOM; the static layer had no part for it.",
+                      "layout": {
+                        "display": "flex",
+                        "align": "center",
+                        "justify": "space-between"
+                      },
                       "parts": {
                         "inlinestack-2": {
                           "description": "Promoted from the computed floor (round 4): rendered anatomy div|InlineStack — this element exists in the real component's DOM; the static layer had no part for it.",
+                          "layout": {
+                            "display": "flex",
+                            "align": "center",
+                            "justify": "space-between"
+                          },
                           "parts": {
                             "part-0-0-0-0-0-0": {
                               "element": "span",
                               "description": "Promoted from the computed floor (round 4): rendered anatomy span| — this element exists in the real component's DOM; the static layer had no part for it.",
+                              "declared": {
+                                "display": "block"
+                              },
                               "parts": {
                                 "icon": {
                                   "element": "span",
                                   "description": "Promoted from the computed floor (round 4): rendered anatomy span|Icon — this element exists in the real component's DOM; the static layer had no part for it.",
+                                  "declared": {
+                                    "display": "block",
+                                    "max-height": "100%",
+                                    "max-width": "100%"
+                                  },
                                   "parts": {
                                     "icon-success": {
                                       "icon": {
@@ -232,10 +261,6 @@
                                       },
                                       "description": "Per-value svg content promoted from the computed floor: the glyph drawn when tone=critical."
                                     }
-                                  },
-                                  "declared": {
-                                    "max-height": "100%",
-                                    "max-width": "100%"
                                   },
                                   "tokens": {
                                     "min-height": "{imported.shared.size-0}",
@@ -293,6 +318,9 @@
                               "content": {
                                 "prop": "title"
                               },
+                              "declared": {
+                                "display": "block"
+                              },
                               "tokensByProp": [
                                 {
                                   "prop": "tone",
@@ -313,11 +341,6 @@
                                 }
                               ]
                             }
-                          },
-                          "layout": {
-                            "display": "flex",
-                            "align": "center",
-                            "justify": "space-between"
                           },
                           "tokens": {
                             "column-gap": "{imported.shared.size-4}",
@@ -346,6 +369,11 @@
                         "button": {
                           "element": "button",
                           "description": "Promoted from the computed floor (round 4): rendered anatomy button|Button — this element exists in the real component's DOM; the static layer had no part for it.",
+                          "layout": {
+                            "display": "flex",
+                            "align": "center",
+                            "justify": "center"
+                          },
                           "visibleWhen": {
                             "prop": "dismissible"
                           },
@@ -353,6 +381,12 @@
                             "button__icon": {
                               "element": "span",
                               "description": "Promoted from the computed floor (round 4): rendered anatomy span|Button__Icon — this element exists in the real component's DOM; the static layer had no part for it.",
+                              "declared": {
+                                "display": "block",
+                                "cursor": "pointer",
+                                "text-align": "center",
+                                "user-select": "none"
+                              },
                               "visibleWhen": {
                                 "prop": "dismissible"
                               },
@@ -360,6 +394,12 @@
                                 "part-0-0-0-0-1-0-0": {
                                   "element": "span",
                                   "description": "Promoted from the computed floor (round 4): rendered anatomy span| — this element exists in the real component's DOM; the static layer had no part for it.",
+                                  "declared": {
+                                    "display": "inline",
+                                    "cursor": "pointer",
+                                    "text-align": "center",
+                                    "user-select": "none"
+                                  },
                                   "visibleWhen": {
                                     "prop": "dismissible"
                                   },
@@ -367,6 +407,14 @@
                                     "icon-3": {
                                       "element": "span",
                                       "description": "Promoted from the computed floor (round 4): rendered anatomy span|Icon — this element exists in the real component's DOM; the static layer had no part for it.",
+                                      "declared": {
+                                        "display": "block",
+                                        "cursor": "pointer",
+                                        "max-height": "100%",
+                                        "max-width": "100%",
+                                        "text-align": "center",
+                                        "user-select": "none"
+                                      },
                                       "visibleWhen": {
                                         "prop": "dismissible"
                                       },
@@ -416,24 +464,11 @@
                                           "description": "Per-value svg content promoted from the computed floor: the glyph drawn when tone=critical."
                                         }
                                       },
-                                      "declared": {
-                                        "cursor": "pointer",
-                                        "max-height": "100%",
-                                        "max-width": "100%",
-                                        "text-align": "center",
-                                        "user-select": "none"
-                                      },
                                       "tokens": {
                                         "min-height": "{imported.shared.size-0}",
                                         "min-width": "{imported.shared.size-0}"
                                       }
                                     }
-                                  },
-                                  "declared": {
-                                    "cursor": "pointer",
-                                    "display": "inline",
-                                    "text-align": "center",
-                                    "user-select": "none"
                                   },
                                   "tokens": {
                                     "min-height": "{imported.shared.size-0}",
@@ -441,21 +476,11 @@
                                   }
                                 }
                               },
-                              "declared": {
-                                "cursor": "pointer",
-                                "text-align": "center",
-                                "user-select": "none"
-                              },
                               "tokens": {
                                 "margin-bottom": "{imported.banner.button-icon.margin-bottom}",
                                 "margin-top": "{imported.banner.button-icon.margin-top}"
                               }
                             }
-                          },
-                          "layout": {
-                            "display": "flex",
-                            "align": "center",
-                            "justify": "center"
                           },
                           "declared": {
                             "appearance": "none",
@@ -502,11 +527,6 @@
                             "top": "{imported.shared.size-0}"
                           }
                         }
-                      },
-                      "layout": {
-                        "display": "flex",
-                        "align": "center",
-                        "justify": "space-between"
                       },
                       "tokens": {
                         "column-gap": "{imported.shared.size-8}",
@@ -569,12 +589,22 @@
                 },
                 "box-3": {
                   "description": "Promoted from the computed floor (round 4): rendered anatomy div|Box — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "declared": {
+                    "display": "block"
+                  },
                   "parts": {
                     "blockstack-2": {
                       "description": "Promoted from the computed floor (round 4): rendered anatomy div|BlockStack — this element exists in the real component's DOM; the static layer had no part for it.",
+                      "layout": {
+                        "display": "flex",
+                        "direction": "column"
+                      },
                       "parts": {
                         "part-0-0-1-0-0": {
                           "description": "Promoted from the computed floor (round 4): rendered anatomy div| — this element exists in the real component's DOM; the static layer had no part for it.",
+                          "declared": {
+                            "display": "block"
+                          },
                           "parts": {
                             "label-2": {
                               "text": "Use your finance report to get detailed insights.",
@@ -591,12 +621,19 @@
                         },
                         "buttongroup": {
                           "description": "Promoted from the computed floor (round 4): rendered anatomy div|ButtonGroup — this element exists in the real component's DOM; the static layer had no part for it.",
+                          "layout": {
+                            "display": "flex",
+                            "align": "center"
+                          },
                           "visibleWhen": {
                             "prop": "withAction"
                           },
                           "parts": {
                             "buttongroup__item": {
                               "description": "Promoted from the computed floor (round 4): rendered anatomy div|ButtonGroup__Item — this element exists in the real component's DOM; the static layer had no part for it.",
+                              "declared": {
+                                "display": "block"
+                              },
                               "visibleWhen": {
                                 "prop": "withAction"
                               },
@@ -604,6 +641,11 @@
                                 "button-2": {
                                   "element": "button",
                                   "description": "Promoted from the computed floor (round 4): rendered anatomy button|Button — this element exists in the real component's DOM; the static layer had no part for it.",
+                                  "layout": {
+                                    "display": "inline-flex",
+                                    "align": "center",
+                                    "justify": "center"
+                                  },
                                   "visibleWhen": {
                                     "prop": "withAction"
                                   },
@@ -611,16 +653,17 @@
                                     "label-3": {
                                       "text": "Print label",
                                       "description": "Promoted from the computed floor (round 4): rendered anatomy span|Text — this element exists in the real component's DOM; the static layer had no part for it.",
+                                      "declared": {
+                                        "display": "block",
+                                        "cursor": "pointer",
+                                        "text-align": "center",
+                                        "user-select": "none"
+                                      },
                                       "layout": {
                                         "grow": true
                                       },
                                       "visibleWhen": {
                                         "prop": "withAction"
-                                      },
-                                      "declared": {
-                                        "cursor": "pointer",
-                                        "text-align": "center",
-                                        "user-select": "none"
                                       },
                                       "tokens": {
                                         "font-size": "{imported.shared.size-12}",
@@ -628,11 +671,6 @@
                                         "line-height": "{imported.banner.label-3.line-height}"
                                       }
                                     }
-                                  },
-                                  "layout": {
-                                    "display": "inline-flex",
-                                    "align": "center",
-                                    "justify": "center"
                                   },
                                   "declared": {
                                     "appearance": "none",
@@ -683,19 +721,11 @@
                               }
                             }
                           },
-                          "layout": {
-                            "display": "flex",
-                            "align": "center"
-                          },
                           "tokens": {
                             "margin-left": "{imported.banner.buttongroup.margin-left}",
                             "margin-top": "{imported.banner.buttongroup.margin-top}"
                           }
                         }
-                      },
-                      "layout": {
-                        "display": "flex",
-                        "direction": "column"
                       },
                       "tokens": {
                         "column-gap": "{imported.shared.size-8}",
@@ -712,11 +742,6 @@
                     "padding-top": "{imported.shared.size-12}"
                   }
                 }
-              },
-              "layout": {
-                "display": "flex",
-                "direction": "column",
-                "justify": "space-between"
               },
               "tokens": {
                 "min-height": "{imported.shared.size-0}",

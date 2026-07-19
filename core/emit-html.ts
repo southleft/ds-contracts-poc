@@ -362,6 +362,10 @@ function componentCss(contract: Contract): string[] {
     if (p[0] === 'root' && p.length === 1) continue;
     if (part.component) continue; // instances style themselves via their own contract
     const decls: string[] = layoutDecls(part);
+    // UA-margin neutralization on NESTED parts (round 4): a promoted h2/p/ul
+    // part would leak UA margins the real component resets — same discipline
+    // as the root rule; captured nonzero margins arrive as minted overrides.
+    if (part.element && UA_MARGIN_ELEMENTS.has(part.element)) decls.push('margin: 0');
     if (part.overlay) decls.push('position: absolute', ...OVERLAY_CSS[part.overlay.placement]);
     // v9 shape: the shared projection (scripts/contract-schema.ts).
     if (part.shape) decls.push(...shapeCssDecls(part.shape));
@@ -381,9 +385,13 @@ function componentCss(contract: Contract): string[] {
     }
     if (part.icon) {
       decls.push('display: inline-flex', 'flex-shrink: 0');
-      if (part.icon.size) {
-        rule(`${partCls(name)} svg`, [`width: ${part.icon.size}px`, `height: ${part.icon.size}px`]);
-      }
+      // the glyph svg renders block — an inline svg's baseline gap would
+      // inflate the icon box (round 4: promoted icon hosts carry their own
+      // captured display, which may be block; the glyph must not add ~4px).
+      rule(`${partCls(name)} svg`, [
+        'display: block',
+        ...(part.icon.size ? [`width: ${part.icon.size}px`, `height: ${part.icon.size}px`] : []),
+      ]);
       if (part.element === 'button') {
         decls.push('align-items: center', 'justify-content: center', 'background: none',
           'border: none', 'padding: 0', 'color: inherit', 'cursor: pointer');

@@ -672,6 +672,7 @@ async function main() {
         folds: folds.length,
       },
       namedLosses,
+      contextStyles: run1.controls['span']?.style ?? {},
     });
     await gatePage.close();
 

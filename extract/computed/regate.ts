@@ -211,6 +211,7 @@ async function main() {
       },
       namedLosses,
       iconAssets: iconAssetsMerged,
+      contextStyles: truth.controls['span']?.style ?? {},
     });
     await gatePage.close();
 

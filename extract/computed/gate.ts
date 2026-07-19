@@ -130,6 +130,11 @@ export async function runGate(opts: {
   namedLosses: string[];
   /** Committed icon assets (config `icons` dir) — empty map when none. */
   iconAssets?: Map<string, string>;
+  /** Round 4: the capture page's INHERITED text context (the control span's
+   *  captured computed style) — the gate stage must recreate it (Polaris's
+   *  AppProvider sets a 13px body; without it every inherited-only channel
+   *  renders the UA default and the pixel diff scores the page chrome). */
+  contextStyles?: Record<string, string>;
 }): Promise<Scorecard> {
   const { page, repoRoot, cfg, comp, space, aligned, enriched, mintedTree, styled, origShotsDir, outDir } = opts;
   const iconAssets = opts.iconAssets ?? new Map<string, string>();
@@ -167,8 +172,14 @@ ${first.css}
    display:contents so the component root is the stage's flex item. */
 html { color-scheme: ${cfg.browser.colorScheme}; font-family: var(--p-font-family-sans); }
 body { margin: 0; background: #ddd; }
+/* capture-page inherited context (round 4): the control span's captured
+   computed text channels — same provenance as the capture stage. */
+.gate-stage { ${['font-family', 'font-size', 'line-height', 'font-weight', 'letter-spacing', 'color']
+    .filter((ch) => opts.contextStyles?.[ch])
+    .map((ch) => `${ch}: ${opts.contextStyles![ch]};`)
+    .join(' ')} }
 .gate-stage { display: flex; align-items: flex-start; width: ${stageFor(cfg, comp).width}px; height: ${stageFor(cfg, comp).height}px; padding: ${stageFor(cfg, comp).padding}px; box-sizing: border-box; background: #fff; overflow: hidden; }
-.gate-stage .showcase, .gate-stage .showcase__item:first-of-type { display: contents; }
+.gate-stage .showcase, .gate-stage .showcase__item:first-of-type { display: contents; font-family: inherit; }
 .gate-stage .showcase__item:not(:first-of-type) { display: none; }
 .gate-stage .showcase__label { display: none; }
 </style></head><body>

@@ -7,8 +7,8 @@
   "interactions": 4,
   "computed": {
     "cellsCompared": 11648,
-    "cellsEqual": 11156,
-    "pctEqual": 95.7760989010989,
+    "cellsEqual": 11284,
+    "pctEqual": 96.875,
     "rowsFullyEqual": 0,
     "rows": 64
   },
@@ -16,9 +16,9 @@
     "pairs": 64,
     "perfectExact": 0,
     "perfectAA": 0,
-    "meanExact": 10.96786269321236,
-    "meanAA": 7.939846900201618,
-    "maxAA": 9.505880376344086
+    "meanExact": 4.452169438844088,
+    "meanAA": 2.021116851478495,
+    "maxAA": 3.979334677419355
   },
   "fusion": {
     "boundConfirmed": 64,
@@ -35,60 +35,56 @@
   "worstRows": [
     {
       "key": "critical.off.on__focus-visible",
-      "pctAA": 9.505880376344086,
-      "pctExact": 12.332157258064516,
-      "channelsMismatched": 9
+      "pctAA": 3.979334677419355,
+      "pctExact": 6.446740591397849,
+      "channelsMismatched": 7
     },
     {
       "key": "success.off.on__focus-visible",
-      "pctAA": 9.461693548387096,
-      "pctExact": 12.26008064516129,
-      "channelsMismatched": 9
-    },
-    {
-      "key": "info.off.on__focus-visible",
-      "pctAA": 9.302755376344086,
-      "pctExact": 12.33450940860215,
-      "channelsMismatched": 9
+      "pctAA": 3.966733870967742,
+      "pctExact": 6.404065860215054,
+      "channelsMismatched": 7
     },
     {
       "key": "warning.off.on__focus-visible",
-      "pctAA": 9.274529569892474,
-      "pctExact": 12.283770161290322,
-      "channelsMismatched": 9
+      "pctAA": 3.807459677419355,
+      "pctExact": 6.455981182795699,
+      "channelsMismatched": 7
     },
     {
-      "key": "critical.on.on__focus-visible",
-      "pctAA": 8.934307795698924,
-      "pctExact": 11.878192204301076,
-      "channelsMismatched": 14
+      "key": "info.off.on__focus-visible",
+      "pctAA": 3.7867943548387095,
+      "pctExact": 6.455477150537634,
+      "channelsMismatched": 7
     },
     {
-      "key": "success.on.on__focus-visible",
-      "pctAA": 8.893985215053764,
-      "pctExact": 11.810147849462366,
-      "channelsMismatched": 14
+      "key": "critical.off.off__focus-visible",
+      "pctAA": 3.358366935483871,
+      "pctExact": 5.539986559139785,
+      "channelsMismatched": 1
     },
     {
-      "key": "info.on.on__focus-visible",
-      "pctAA": 8.731854838709678,
-      "pctExact": 11.88138440860215,
-      "channelsMismatched": 14
+      "key": "success.off.off__focus-visible",
+      "pctAA": 3.345766129032258,
+      "pctExact": 5.496975806451613,
+      "channelsMismatched": 1
     },
     {
-      "key": "warning.on.on__focus-visible",
-      "pctAA": 8.70682123655914,
-      "pctExact": 11.834173387096774,
-      "channelsMismatched": 14
+      "key": "warning.off.off__focus-visible",
+      "pctAA": 3.186491935483871,
+      "pctExact": 5.549563172043011,
+      "channelsMismatched": 1
+    },
+    {
+      "key": "info.off.off__focus-visible",
+      "pctAA": 3.165826612903226,
+      "pctExact": 5.54872311827957,
+      "channelsMismatched": 1
     }
   ],
   "topMismatchedChannels": [
     [
       "title.overflow-wrap",
-      64
-    ],
-    [
-      "label-2.display",
       64
     ],
     [
@@ -112,10 +108,6 @@
       32
     ],
     [
-      "button-2.display",
-      32
-    ],
-    [
       "button.border-bottom-color",
       32
     ],
@@ -129,10 +121,6 @@
     ],
     [
       "button.border-top-color",
-      32
-    ],
-    [
-      "part-0-0-0-0-1-0-0.display",
       32
     ],
     [
@@ -154,105 +142,75 @@
     {
       "key": "success.off.off__default",
       "channelsCompared": 116,
-      "channelsEqual": 114,
-      "pctExact": 10.379032258064516,
-      "pctAA": 7.807459677419355,
+      "channelsEqual": 115,
+      "pctExact": 4.853158602150538,
+      "pctAA": 2.3071236559139785,
       "mismatches": [
         {
           "part": "title",
           "channel": "overflow-wrap",
           "ours": "normal",
           "theirs": "anywhere"
-        },
-        {
-          "part": "label-2",
-          "channel": "display",
-          "ours": "block",
-          "theirs": "inline"
         }
       ]
     },
     {
       "key": "success.off.off__hover",
       "channelsCompared": 116,
-      "channelsEqual": 114,
-      "pctExact": 10.379032258064516,
-      "pctAA": 7.807459677419355,
+      "channelsEqual": 115,
+      "pctExact": 4.853158602150538,
+      "pctAA": 2.3071236559139785,
       "mismatches": [
         {
           "part": "title",
           "channel": "overflow-wrap",
           "ours": "normal",
           "theirs": "anywhere"
-        },
-        {
-          "part": "label-2",
-          "channel": "display",
-          "ours": "block",
-          "theirs": "inline"
         }
       ]
     },
     {
       "key": "success.off.off__focus-visible",
       "channelsCompared": 116,
-      "channelsEqual": 114,
-      "pctExact": 10.930443548387096,
-      "pctAA": 8.52200940860215,
+      "channelsEqual": 115,
+      "pctExact": 5.496975806451613,
+      "pctAA": 3.345766129032258,
       "mismatches": [
         {
           "part": "title",
           "channel": "overflow-wrap",
           "ours": "normal",
           "theirs": "anywhere"
-        },
-        {
-          "part": "label-2",
-          "channel": "display",
-          "ours": "block",
-          "theirs": "inline"
         }
       ]
     },
     {
       "key": "success.off.off__active",
       "channelsCompared": 116,
-      "channelsEqual": 114,
-      "pctExact": 10.379032258064516,
-      "pctAA": 7.807459677419355,
+      "channelsEqual": 115,
+      "pctExact": 4.853158602150538,
+      "pctAA": 2.3071236559139785,
       "mismatches": [
         {
           "part": "title",
           "channel": "overflow-wrap",
           "ours": "normal",
           "theirs": "anywhere"
-        },
-        {
-          "part": "label-2",
-          "channel": "display",
-          "ours": "block",
-          "theirs": "inline"
         }
       ]
     },
     {
       "key": "success.off.on__default",
       "channelsCompared": 178,
-      "channelsEqual": 170,
-      "pctExact": 11.491263440860216,
-      "pctAA": 8.232022849462366,
+      "channelsEqual": 172,
+      "pctExact": 5.491431451612903,
+      "pctAA": 2.601478494623656,
       "mismatches": [
         {
           "part": "title",
           "channel": "overflow-wrap",
           "ours": "normal",
           "theirs": "anywhere"
-        },
-        {
-          "part": "label-2",
-          "channel": "display",
-          "ours": "block",
-          "theirs": "inline"
         },
         {
           "part": "buttongroup",
@@ -283,33 +241,21 @@
           "channel": "border-top-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(48, 48, 48, 1)"
-        },
-        {
-          "part": "button-2",
-          "channel": "display",
-          "ours": "flex",
-          "theirs": "inline-flex"
         }
       ]
     },
     {
       "key": "success.off.on__hover",
       "channelsCompared": 178,
-      "channelsEqual": 170,
-      "pctExact": 11.491263440860216,
-      "pctAA": 8.232022849462366,
+      "channelsEqual": 172,
+      "pctExact": 5.491431451612903,
+      "pctAA": 2.601478494623656,
       "mismatches": [
         {
           "part": "title",
           "channel": "overflow-wrap",
           "ours": "normal",
           "theirs": "anywhere"
-        },
-        {
-          "part": "label-2",
-          "channel": "display",
-          "ours": "block",
-          "theirs": "inline"
         },
         {
           "part": "buttongroup",
@@ -340,33 +286,21 @@
           "channel": "border-top-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(48, 48, 48, 1)"
-        },
-        {
-          "part": "button-2",
-          "channel": "display",
-          "ours": "flex",
-          "theirs": "inline-flex"
         }
       ]
     },
     {
       "key": "success.off.on__focus-visible",
       "channelsCompared": 178,
-      "channelsEqual": 169,
-      "pctExact": 12.26008064516129,
-      "pctAA": 9.461693548387096,
+      "channelsEqual": 171,
+      "pctExact": 6.404065860215054,
+      "pctAA": 3.966733870967742,
       "mismatches": [
         {
           "part": "title",
           "channel": "overflow-wrap",
           "ours": "normal",
           "theirs": "anywhere"
-        },
-        {
-          "part": "label-2",
-          "channel": "display",
-          "ours": "block",
-          "theirs": "inline"
         },
         {
           "part": "buttongroup",
@@ -397,12 +331,6 @@
           "channel": "border-top-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(48, 48, 48, 1)"
-        },
-        {
-          "part": "button-2",
-          "channel": "display",
-          "ours": "flex",
-          "theirs": "inline-flex"
         },
         {
           "part": "button-2",
@@ -415,21 +343,15 @@
     {
       "key": "success.off.on__active",
       "channelsCompared": 178,
-      "channelsEqual": 170,
-      "pctExact": 11.491263440860216,
-      "pctAA": 8.232022849462366,
+      "channelsEqual": 172,
+      "pctExact": 5.491431451612903,
+      "pctAA": 2.601478494623656,
       "mismatches": [
         {
           "part": "title",
           "channel": "overflow-wrap",
           "ours": "normal",
           "theirs": "anywhere"
-        },
-        {
-          "part": "label-2",
-          "channel": "display",
-          "ours": "block",
-          "theirs": "inline"
         },
         {
           "part": "buttongroup",
@@ -460,21 +382,15 @@
           "channel": "border-top-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(48, 48, 48, 1)"
-        },
-        {
-          "part": "button-2",
-          "channel": "display",
-          "ours": "flex",
-          "theirs": "inline-flex"
         }
       ]
     },
     {
       "key": "success.on.off__default",
       "channelsCompared": 186,
-      "channelsEqual": 179,
-      "pctExact": 10.143649193548388,
-      "pctAA": 7.275369623655914,
+      "channelsEqual": 181,
+      "pctExact": 2.9808467741935485,
+      "pctAA": 1.0218413978494623,
       "mismatches": [
         {
           "part": "title",
@@ -505,27 +421,15 @@
           "channel": "border-top-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(48, 48, 48, 1)"
-        },
-        {
-          "part": "part-0-0-0-0-1-0-0",
-          "channel": "display",
-          "ours": "block",
-          "theirs": "inline"
-        },
-        {
-          "part": "label-2",
-          "channel": "display",
-          "ours": "block",
-          "theirs": "inline"
         }
       ]
     },
     {
       "key": "success.on.off__hover",
       "channelsCompared": 186,
-      "channelsEqual": 179,
-      "pctExact": 10.143649193548388,
-      "pctAA": 7.275369623655914,
+      "channelsEqual": 181,
+      "pctExact": 2.9808467741935485,
+      "pctAA": 1.0218413978494623,
       "mismatches": [
         {
           "part": "title",
@@ -556,27 +460,15 @@
           "channel": "border-top-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(48, 48, 48, 1)"
-        },
-        {
-          "part": "part-0-0-0-0-1-0-0",
-          "channel": "display",
-          "ours": "block",
-          "theirs": "inline"
-        },
-        {
-          "part": "label-2",
-          "channel": "display",
-          "ours": "block",
-          "theirs": "inline"
         }
       ]
     },
     {
       "key": "success.on.off__focus-visible",
       "channelsCompared": 186,
-      "channelsEqual": 178,
-      "pctExact": 10.886424731182796,
-      "pctAA": 8.323252688172044,
+      "channelsEqual": 180,
+      "pctExact": 3.8958333333333335,
+      "pctAA": 2.2857862903225805,
       "mismatches": [
         {
           "part": "title",
@@ -613,27 +505,15 @@
           "channel": "outline-color",
           "ours": "rgba(0, 95, 204, 1)",
           "theirs": "rgba(48, 48, 48, 1)"
-        },
-        {
-          "part": "part-0-0-0-0-1-0-0",
-          "channel": "display",
-          "ours": "block",
-          "theirs": "inline"
-        },
-        {
-          "part": "label-2",
-          "channel": "display",
-          "ours": "block",
-          "theirs": "inline"
         }
       ]
     },
     {
       "key": "success.on.off__active",
       "channelsCompared": 186,
-      "channelsEqual": 179,
-      "pctExact": 10.143649193548388,
-      "pctAA": 7.275369623655914,
+      "channelsEqual": 181,
+      "pctExact": 2.9808467741935485,
+      "pctAA": 1.0218413978494623,
       "mismatches": [
         {
           "part": "title",
@@ -664,27 +544,15 @@
           "channel": "border-top-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(48, 48, 48, 1)"
-        },
-        {
-          "part": "part-0-0-0-0-1-0-0",
-          "channel": "display",
-          "ours": "block",
-          "theirs": "inline"
-        },
-        {
-          "part": "label-2",
-          "channel": "display",
-          "ours": "block",
-          "theirs": "inline"
         }
       ]
     },
     {
       "key": "success.on.on__default",
       "channelsCompared": 248,
-      "channelsEqual": 235,
-      "pctExact": 10.96236559139785,
-      "pctAA": 7.701444892473118,
+      "channelsEqual": 238,
+      "pctExact": 3.471438172043011,
+      "pctAA": 1.2286626344086022,
       "mismatches": [
         {
           "part": "title",
@@ -717,18 +585,6 @@
           "theirs": "rgba(48, 48, 48, 1)"
         },
         {
-          "part": "part-0-0-0-0-1-0-0",
-          "channel": "display",
-          "ours": "block",
-          "theirs": "inline"
-        },
-        {
-          "part": "label-2",
-          "channel": "display",
-          "ours": "block",
-          "theirs": "inline"
-        },
-        {
           "part": "buttongroup",
           "channel": "flex-wrap",
           "ours": "nowrap",
@@ -757,21 +613,15 @@
           "channel": "border-top-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(48, 48, 48, 1)"
-        },
-        {
-          "part": "button-2",
-          "channel": "display",
-          "ours": "flex",
-          "theirs": "inline-flex"
         }
       ]
     },
     {
       "key": "success.on.on__hover",
       "channelsCompared": 248,
-      "channelsEqual": 235,
-      "pctExact": 10.96236559139785,
-      "pctAA": 7.701444892473118,
+      "channelsEqual": 238,
+      "pctExact": 3.471438172043011,
+      "pctAA": 1.2286626344086022,
       "mismatches": [
         {
           "part": "title",
@@ -804,18 +654,6 @@
           "theirs": "rgba(48, 48, 48, 1)"
         },
         {
-          "part": "part-0-0-0-0-1-0-0",
-          "channel": "display",
-          "ours": "block",
-          "theirs": "inline"
-        },
-        {
-          "part": "label-2",
-          "channel": "display",
-          "ours": "block",
-          "theirs": "inline"
-        },
-        {
           "part": "buttongroup",
           "channel": "flex-wrap",
           "ours": "nowrap",
@@ -844,21 +682,15 @@
           "channel": "border-top-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(48, 48, 48, 1)"
-        },
-        {
-          "part": "button-2",
-          "channel": "display",
-          "ours": "flex",
-          "theirs": "inline-flex"
         }
       ]
     },
     {
       "key": "success.on.on__focus-visible",
       "channelsCompared": 248,
-      "channelsEqual": 234,
-      "pctExact": 11.810147849462366,
-      "pctAA": 8.893985215053764,
+      "channelsEqual": 237,
+      "pctExact": 4.493951612903226,
+      "pctAA": 2.6001344086021505,
       "mismatches": [
         {
           "part": "title",
@@ -897,18 +729,6 @@
           "theirs": "rgba(48, 48, 48, 1)"
         },
         {
-          "part": "part-0-0-0-0-1-0-0",
-          "channel": "display",
-          "ours": "block",
-          "theirs": "inline"
-        },
-        {
-          "part": "label-2",
-          "channel": "display",
-          "ours": "block",
-          "theirs": "inline"
-        },
-        {
           "part": "buttongroup",
           "channel": "flex-wrap",
           "ours": "nowrap",
@@ -937,21 +757,15 @@
           "channel": "border-top-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(48, 48, 48, 1)"
-        },
-        {
-          "part": "button-2",
-          "channel": "display",
-          "ours": "flex",
-          "theirs": "inline-flex"
         }
       ]
     },
     {
       "key": "success.on.on__active",
       "channelsCompared": 248,
-      "channelsEqual": 235,
-      "pctExact": 10.96236559139785,
-      "pctAA": 7.701444892473118,
+      "channelsEqual": 238,
+      "pctExact": 3.471438172043011,
+      "pctAA": 1.2286626344086022,
       "mismatches": [
         {
           "part": "title",
@@ -984,18 +798,6 @@
           "theirs": "rgba(48, 48, 48, 1)"
         },
         {
-          "part": "part-0-0-0-0-1-0-0",
-          "channel": "display",
-          "ours": "block",
-          "theirs": "inline"
-        },
-        {
-          "part": "label-2",
-          "channel": "display",
-          "ours": "block",
-          "theirs": "inline"
-        },
-        {
           "part": "buttongroup",
           "channel": "flex-wrap",
           "ours": "nowrap",
@@ -1024,117 +826,81 @@
           "channel": "border-top-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(48, 48, 48, 1)"
-        },
-        {
-          "part": "button-2",
-          "channel": "display",
-          "ours": "flex",
-          "theirs": "inline-flex"
         }
       ]
     },
     {
       "key": "info.off.off__default",
       "channelsCompared": 116,
-      "channelsEqual": 114,
-      "pctExact": 10.45396505376344,
-      "pctAA": 7.651041666666667,
+      "channelsEqual": 115,
+      "pctExact": 4.905241935483871,
+      "pctAA": 2.128024193548387,
       "mismatches": [
         {
           "part": "title",
           "channel": "overflow-wrap",
           "ours": "normal",
           "theirs": "anywhere"
-        },
-        {
-          "part": "label-2",
-          "channel": "display",
-          "ours": "block",
-          "theirs": "inline"
         }
       ]
     },
     {
       "key": "info.off.off__hover",
       "channelsCompared": 116,
-      "channelsEqual": 114,
-      "pctExact": 10.45396505376344,
-      "pctAA": 7.651041666666667,
+      "channelsEqual": 115,
+      "pctExact": 4.905241935483871,
+      "pctAA": 2.128024193548387,
       "mismatches": [
         {
           "part": "title",
           "channel": "overflow-wrap",
           "ours": "normal",
           "theirs": "anywhere"
-        },
-        {
-          "part": "label-2",
-          "channel": "display",
-          "ours": "block",
-          "theirs": "inline"
         }
       ]
     },
     {
       "key": "info.off.off__focus-visible",
       "channelsCompared": 116,
-      "channelsEqual": 114,
-      "pctExact": 11.005208333333334,
-      "pctAA": 8.36307123655914,
+      "channelsEqual": 115,
+      "pctExact": 5.54872311827957,
+      "pctAA": 3.165826612903226,
       "mismatches": [
         {
           "part": "title",
           "channel": "overflow-wrap",
           "ours": "normal",
           "theirs": "anywhere"
-        },
-        {
-          "part": "label-2",
-          "channel": "display",
-          "ours": "block",
-          "theirs": "inline"
         }
       ]
     },
     {
       "key": "info.off.off__active",
       "channelsCompared": 116,
-      "channelsEqual": 114,
-      "pctExact": 10.45396505376344,
-      "pctAA": 7.651041666666667,
+      "channelsEqual": 115,
+      "pctExact": 4.905241935483871,
+      "pctAA": 2.128024193548387,
       "mismatches": [
         {
           "part": "title",
           "channel": "overflow-wrap",
           "ours": "normal",
           "theirs": "anywhere"
-        },
-        {
-          "part": "label-2",
-          "channel": "display",
-          "ours": "block",
-          "theirs": "inline"
         }
       ]
     },
     {
       "key": "info.off.on__default",
       "channelsCompared": 178,
-      "channelsEqual": 170,
-      "pctExact": 11.56619623655914,
-      "pctAA": 8.075604838709678,
+      "channelsEqual": 172,
+      "pctExact": 5.543514784946237,
+      "pctAA": 2.4223790322580645,
       "mismatches": [
         {
           "part": "title",
           "channel": "overflow-wrap",
           "ours": "normal",
           "theirs": "anywhere"
-        },
-        {
-          "part": "label-2",
-          "channel": "display",
-          "ours": "block",
-          "theirs": "inline"
         },
         {
           "part": "buttongroup",
@@ -1165,33 +931,21 @@
           "channel": "border-top-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(48, 48, 48, 1)"
-        },
-        {
-          "part": "button-2",
-          "channel": "display",
-          "ours": "flex",
-          "theirs": "inline-flex"
         }
       ]
     },
     {
       "key": "info.off.on__hover",
       "channelsCompared": 178,
-      "channelsEqual": 170,
-      "pctExact": 11.56619623655914,
-      "pctAA": 8.075604838709678,
+      "channelsEqual": 172,
+      "pctExact": 5.543514784946237,
+      "pctAA": 2.4223790322580645,
       "mismatches": [
         {
           "part": "title",
           "channel": "overflow-wrap",
           "ours": "normal",
           "theirs": "anywhere"
-        },
-        {
-          "part": "label-2",
-          "channel": "display",
-          "ours": "block",
-          "theirs": "inline"
         },
         {
           "part": "buttongroup",
@@ -1222,33 +976,21 @@
           "channel": "border-top-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(48, 48, 48, 1)"
-        },
-        {
-          "part": "button-2",
-          "channel": "display",
-          "ours": "flex",
-          "theirs": "inline-flex"
         }
       ]
     },
     {
       "key": "info.off.on__focus-visible",
       "channelsCompared": 178,
-      "channelsEqual": 169,
-      "pctExact": 12.33450940860215,
-      "pctAA": 9.302755376344086,
+      "channelsEqual": 171,
+      "pctExact": 6.455477150537634,
+      "pctAA": 3.7867943548387095,
       "mismatches": [
         {
           "part": "title",
           "channel": "overflow-wrap",
           "ours": "normal",
           "theirs": "anywhere"
-        },
-        {
-          "part": "label-2",
-          "channel": "display",
-          "ours": "block",
-          "theirs": "inline"
         },
         {
           "part": "buttongroup",
@@ -1279,12 +1021,6 @@
           "channel": "border-top-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(48, 48, 48, 1)"
-        },
-        {
-          "part": "button-2",
-          "channel": "display",
-          "ours": "flex",
-          "theirs": "inline-flex"
         },
         {
           "part": "button-2",
@@ -1297,21 +1033,15 @@
     {
       "key": "info.off.on__active",
       "channelsCompared": 178,
-      "channelsEqual": 170,
-      "pctExact": 11.56619623655914,
-      "pctAA": 8.075604838709678,
+      "channelsEqual": 172,
+      "pctExact": 5.543514784946237,
+      "pctAA": 2.4223790322580645,
       "mismatches": [
         {
           "part": "title",
           "channel": "overflow-wrap",
           "ours": "normal",
           "theirs": "anywhere"
-        },
-        {
-          "part": "label-2",
-          "channel": "display",
-          "ours": "block",
-          "theirs": "inline"
         },
         {
           "part": "buttongroup",
@@ -1342,21 +1072,15 @@
           "channel": "border-top-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(48, 48, 48, 1)"
-        },
-        {
-          "part": "button-2",
-          "channel": "display",
-          "ours": "flex",
-          "theirs": "inline-flex"
         }
       ]
     },
     {
       "key": "info.on.off__default",
       "channelsCompared": 186,
-      "channelsEqual": 179,
-      "pctExact": 10.21505376344086,
-      "pctAA": 7.115759408602151,
+      "channelsEqual": 181,
+      "pctExact": 3.030073924731183,
+      "pctAA": 0.8419018817204301,
       "mismatches": [
         {
           "part": "title",
@@ -1387,27 +1111,15 @@
           "channel": "border-top-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(48, 48, 48, 1)"
-        },
-        {
-          "part": "part-0-0-0-0-1-0-0",
-          "channel": "display",
-          "ours": "block",
-          "theirs": "inline"
-        },
-        {
-          "part": "label-2",
-          "channel": "display",
-          "ours": "block",
-          "theirs": "inline"
         }
       ]
     },
     {
       "key": "info.on.off__hover",
       "channelsCompared": 186,
-      "channelsEqual": 179,
-      "pctExact": 10.21505376344086,
-      "pctAA": 7.115759408602151,
+      "channelsEqual": 181,
+      "pctExact": 3.030073924731183,
+      "pctAA": 0.8419018817204301,
       "mismatches": [
         {
           "part": "title",
@@ -1438,27 +1150,15 @@
           "channel": "border-top-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(48, 48, 48, 1)"
-        },
-        {
-          "part": "part-0-0-0-0-1-0-0",
-          "channel": "display",
-          "ours": "block",
-          "theirs": "inline"
-        },
-        {
-          "part": "label-2",
-          "channel": "display",
-          "ours": "block",
-          "theirs": "inline"
         }
       ]
     },
     {
       "key": "info.on.off__focus-visible",
       "channelsCompared": 186,
-      "channelsEqual": 178,
-      "pctExact": 10.95766129032258,
-      "pctAA": 8.161122311827956,
+      "channelsEqual": 180,
+      "pctExact": 3.9447244623655915,
+      "pctAA": 2.1050067204301075,
       "mismatches": [
         {
           "part": "title",
@@ -1495,27 +1195,15 @@
           "channel": "outline-color",
           "ours": "rgba(0, 95, 204, 1)",
           "theirs": "rgba(48, 48, 48, 1)"
-        },
-        {
-          "part": "part-0-0-0-0-1-0-0",
-          "channel": "display",
-          "ours": "block",
-          "theirs": "inline"
-        },
-        {
-          "part": "label-2",
-          "channel": "display",
-          "ours": "block",
-          "theirs": "inline"
         }
       ]
     },
     {
       "key": "info.on.off__active",
       "channelsCompared": 186,
-      "channelsEqual": 179,
-      "pctExact": 10.21505376344086,
-      "pctAA": 7.115759408602151,
+      "channelsEqual": 181,
+      "pctExact": 3.030073924731183,
+      "pctAA": 0.8419018817204301,
       "mismatches": [
         {
           "part": "title",
@@ -1546,27 +1234,15 @@
           "channel": "border-top-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(48, 48, 48, 1)"
-        },
-        {
-          "part": "part-0-0-0-0-1-0-0",
-          "channel": "display",
-          "ours": "block",
-          "theirs": "inline"
-        },
-        {
-          "part": "label-2",
-          "channel": "display",
-          "ours": "block",
-          "theirs": "inline"
         }
       ]
     },
     {
       "key": "info.on.on__default",
       "channelsCompared": 248,
-      "channelsEqual": 235,
-      "pctExact": 11.033770161290322,
-      "pctAA": 7.541834677419355,
+      "channelsEqual": 238,
+      "pctExact": 3.520665322580645,
+      "pctAA": 1.04872311827957,
       "mismatches": [
         {
           "part": "title",
@@ -1599,18 +1275,6 @@
           "theirs": "rgba(48, 48, 48, 1)"
         },
         {
-          "part": "part-0-0-0-0-1-0-0",
-          "channel": "display",
-          "ours": "block",
-          "theirs": "inline"
-        },
-        {
-          "part": "label-2",
-          "channel": "display",
-          "ours": "block",
-          "theirs": "inline"
-        },
-        {
           "part": "buttongroup",
           "channel": "flex-wrap",
           "ours": "nowrap",
@@ -1639,21 +1303,15 @@
           "channel": "border-top-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(48, 48, 48, 1)"
-        },
-        {
-          "part": "button-2",
-          "channel": "display",
-          "ours": "flex",
-          "theirs": "inline-flex"
         }
       ]
     },
     {
       "key": "info.on.on__hover",
       "channelsCompared": 248,
-      "channelsEqual": 235,
-      "pctExact": 11.033770161290322,
-      "pctAA": 7.541834677419355,
+      "channelsEqual": 238,
+      "pctExact": 3.520665322580645,
+      "pctAA": 1.04872311827957,
       "mismatches": [
         {
           "part": "title",
@@ -1686,18 +1344,6 @@
           "theirs": "rgba(48, 48, 48, 1)"
         },
         {
-          "part": "part-0-0-0-0-1-0-0",
-          "channel": "display",
-          "ours": "block",
-          "theirs": "inline"
-        },
-        {
-          "part": "label-2",
-          "channel": "display",
-          "ours": "block",
-          "theirs": "inline"
-        },
-        {
           "part": "buttongroup",
           "channel": "flex-wrap",
           "ours": "nowrap",
@@ -1726,21 +1372,15 @@
           "channel": "border-top-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(48, 48, 48, 1)"
-        },
-        {
-          "part": "button-2",
-          "channel": "display",
-          "ours": "flex",
-          "theirs": "inline-flex"
         }
       ]
     },
     {
       "key": "info.on.on__focus-visible",
       "channelsCompared": 248,
-      "channelsEqual": 234,
-      "pctExact": 11.88138440860215,
-      "pctAA": 8.731854838709678,
+      "channelsEqual": 237,
+      "pctExact": 4.542842741935484,
+      "pctAA": 2.4193548387096775,
       "mismatches": [
         {
           "part": "title",
@@ -1779,18 +1419,6 @@
           "theirs": "rgba(48, 48, 48, 1)"
         },
         {
-          "part": "part-0-0-0-0-1-0-0",
-          "channel": "display",
-          "ours": "block",
-          "theirs": "inline"
-        },
-        {
-          "part": "label-2",
-          "channel": "display",
-          "ours": "block",
-          "theirs": "inline"
-        },
-        {
           "part": "buttongroup",
           "channel": "flex-wrap",
           "ours": "nowrap",
@@ -1819,21 +1447,15 @@
           "channel": "border-top-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(48, 48, 48, 1)"
-        },
-        {
-          "part": "button-2",
-          "channel": "display",
-          "ours": "flex",
-          "theirs": "inline-flex"
         }
       ]
     },
     {
       "key": "info.on.on__active",
       "channelsCompared": 248,
-      "channelsEqual": 235,
-      "pctExact": 11.033770161290322,
-      "pctAA": 7.541834677419355,
+      "channelsEqual": 238,
+      "pctExact": 3.520665322580645,
+      "pctAA": 1.04872311827957,
       "mismatches": [
         {
           "part": "title",
@@ -1866,18 +1488,6 @@
           "theirs": "rgba(48, 48, 48, 1)"
         },
         {
-          "part": "part-0-0-0-0-1-0-0",
-          "channel": "display",
-          "ours": "block",
-          "theirs": "inline"
-        },
-        {
-          "part": "label-2",
-          "channel": "display",
-          "ours": "block",
-          "theirs": "inline"
-        },
-        {
           "part": "buttongroup",
           "channel": "flex-wrap",
           "ours": "nowrap",
@@ -1906,117 +1516,81 @@
           "channel": "border-top-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(48, 48, 48, 1)"
-        },
-        {
-          "part": "button-2",
-          "channel": "display",
-          "ours": "flex",
-          "theirs": "inline-flex"
         }
       ]
     },
     {
       "key": "warning.off.off__default",
       "channelsCompared": 116,
-      "channelsEqual": 114,
-      "pctExact": 10.403225806451612,
-      "pctAA": 7.622647849462366,
+      "channelsEqual": 115,
+      "pctExact": 4.905745967741935,
+      "pctAA": 2.1486895161290325,
       "mismatches": [
         {
           "part": "title",
           "channel": "overflow-wrap",
           "ours": "normal",
           "theirs": "anywhere"
-        },
-        {
-          "part": "label-2",
-          "channel": "display",
-          "ours": "block",
-          "theirs": "inline"
         }
       ]
     },
     {
       "key": "warning.off.off__hover",
       "channelsCompared": 116,
-      "channelsEqual": 114,
-      "pctExact": 10.403225806451612,
-      "pctAA": 7.622647849462366,
+      "channelsEqual": 115,
+      "pctExact": 4.905745967741935,
+      "pctAA": 2.1486895161290325,
       "mismatches": [
         {
           "part": "title",
           "channel": "overflow-wrap",
           "ours": "normal",
           "theirs": "anywhere"
-        },
-        {
-          "part": "label-2",
-          "channel": "display",
-          "ours": "block",
-          "theirs": "inline"
         }
       ]
     },
     {
       "key": "warning.off.off__focus-visible",
       "channelsCompared": 116,
-      "channelsEqual": 114,
-      "pctExact": 10.954469086021506,
-      "pctAA": 8.33450940860215,
+      "channelsEqual": 115,
+      "pctExact": 5.549563172043011,
+      "pctAA": 3.186491935483871,
       "mismatches": [
         {
           "part": "title",
           "channel": "overflow-wrap",
           "ours": "normal",
           "theirs": "anywhere"
-        },
-        {
-          "part": "label-2",
-          "channel": "display",
-          "ours": "block",
-          "theirs": "inline"
         }
       ]
     },
     {
       "key": "warning.off.off__active",
       "channelsCompared": 116,
-      "channelsEqual": 114,
-      "pctExact": 10.403225806451612,
-      "pctAA": 7.622647849462366,
+      "channelsEqual": 115,
+      "pctExact": 4.905745967741935,
+      "pctAA": 2.1486895161290325,
       "mismatches": [
         {
           "part": "title",
           "channel": "overflow-wrap",
           "ours": "normal",
           "theirs": "anywhere"
-        },
-        {
-          "part": "label-2",
-          "channel": "display",
-          "ours": "block",
-          "theirs": "inline"
         }
       ]
     },
     {
       "key": "warning.off.on__default",
       "channelsCompared": 178,
-      "channelsEqual": 170,
-      "pctExact": 11.515456989247312,
-      "pctAA": 8.047211021505376,
+      "channelsEqual": 172,
+      "pctExact": 5.544018817204301,
+      "pctAA": 2.4430443548387095,
       "mismatches": [
         {
           "part": "title",
           "channel": "overflow-wrap",
           "ours": "normal",
           "theirs": "anywhere"
-        },
-        {
-          "part": "label-2",
-          "channel": "display",
-          "ours": "block",
-          "theirs": "inline"
         },
         {
           "part": "buttongroup",
@@ -2047,33 +1621,21 @@
           "channel": "border-top-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(48, 48, 48, 1)"
-        },
-        {
-          "part": "button-2",
-          "channel": "display",
-          "ours": "flex",
-          "theirs": "inline-flex"
         }
       ]
     },
     {
       "key": "warning.off.on__hover",
       "channelsCompared": 178,
-      "channelsEqual": 170,
-      "pctExact": 11.515456989247312,
-      "pctAA": 8.047211021505376,
+      "channelsEqual": 172,
+      "pctExact": 5.544018817204301,
+      "pctAA": 2.4430443548387095,
       "mismatches": [
         {
           "part": "title",
           "channel": "overflow-wrap",
           "ours": "normal",
           "theirs": "anywhere"
-        },
-        {
-          "part": "label-2",
-          "channel": "display",
-          "ours": "block",
-          "theirs": "inline"
         },
         {
           "part": "buttongroup",
@@ -2104,33 +1666,21 @@
           "channel": "border-top-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(48, 48, 48, 1)"
-        },
-        {
-          "part": "button-2",
-          "channel": "display",
-          "ours": "flex",
-          "theirs": "inline-flex"
         }
       ]
     },
     {
       "key": "warning.off.on__focus-visible",
       "channelsCompared": 178,
-      "channelsEqual": 169,
-      "pctExact": 12.283770161290322,
-      "pctAA": 9.274529569892474,
+      "channelsEqual": 171,
+      "pctExact": 6.455981182795699,
+      "pctAA": 3.807459677419355,
       "mismatches": [
         {
           "part": "title",
           "channel": "overflow-wrap",
           "ours": "normal",
           "theirs": "anywhere"
-        },
-        {
-          "part": "label-2",
-          "channel": "display",
-          "ours": "block",
-          "theirs": "inline"
         },
         {
           "part": "buttongroup",
@@ -2161,12 +1711,6 @@
           "channel": "border-top-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(48, 48, 48, 1)"
-        },
-        {
-          "part": "button-2",
-          "channel": "display",
-          "ours": "flex",
-          "theirs": "inline-flex"
         },
         {
           "part": "button-2",
@@ -2179,21 +1723,15 @@
     {
       "key": "warning.off.on__active",
       "channelsCompared": 178,
-      "channelsEqual": 170,
-      "pctExact": 11.515456989247312,
-      "pctAA": 8.047211021505376,
+      "channelsEqual": 172,
+      "pctExact": 5.544018817204301,
+      "pctAA": 2.4430443548387095,
       "mismatches": [
         {
           "part": "title",
           "channel": "overflow-wrap",
           "ours": "normal",
           "theirs": "anywhere"
-        },
-        {
-          "part": "label-2",
-          "channel": "display",
-          "ours": "block",
-          "theirs": "inline"
         },
         {
           "part": "buttongroup",
@@ -2224,21 +1762,15 @@
           "channel": "border-top-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(48, 48, 48, 1)"
-        },
-        {
-          "part": "button-2",
-          "channel": "display",
-          "ours": "flex",
-          "theirs": "inline-flex"
         }
       ]
     },
     {
       "key": "warning.on.off__default",
       "channelsCompared": 186,
-      "channelsEqual": 179,
-      "pctExact": 10.167842741935484,
-      "pctAA": 7.090557795698925,
+      "channelsEqual": 181,
+      "pctExact": 3.0084005376344085,
+      "pctAA": 0.837869623655914,
       "mismatches": [
         {
           "part": "title",
@@ -2269,27 +1801,15 @@
           "channel": "border-top-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(48, 48, 48, 1)"
-        },
-        {
-          "part": "part-0-0-0-0-1-0-0",
-          "channel": "display",
-          "ours": "block",
-          "theirs": "inline"
-        },
-        {
-          "part": "label-2",
-          "channel": "display",
-          "ours": "block",
-          "theirs": "inline"
         }
       ]
     },
     {
       "key": "warning.on.off__hover",
       "channelsCompared": 186,
-      "channelsEqual": 179,
-      "pctExact": 10.167842741935484,
-      "pctAA": 7.090557795698925,
+      "channelsEqual": 181,
+      "pctExact": 3.0084005376344085,
+      "pctAA": 0.837869623655914,
       "mismatches": [
         {
           "part": "title",
@@ -2320,27 +1840,15 @@
           "channel": "border-top-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(48, 48, 48, 1)"
-        },
-        {
-          "part": "part-0-0-0-0-1-0-0",
-          "channel": "display",
-          "ours": "block",
-          "theirs": "inline"
-        },
-        {
-          "part": "label-2",
-          "channel": "display",
-          "ours": "block",
-          "theirs": "inline"
         }
       ]
     },
     {
       "key": "warning.on.off__focus-visible",
       "channelsCompared": 186,
-      "channelsEqual": 178,
-      "pctExact": 10.910450268817204,
-      "pctAA": 8.13608870967742,
+      "channelsEqual": 180,
+      "pctExact": 3.923051075268817,
+      "pctAA": 2.1009744623655915,
       "mismatches": [
         {
           "part": "title",
@@ -2377,27 +1885,15 @@
           "channel": "outline-color",
           "ours": "rgba(0, 95, 204, 1)",
           "theirs": "rgba(48, 48, 48, 1)"
-        },
-        {
-          "part": "part-0-0-0-0-1-0-0",
-          "channel": "display",
-          "ours": "block",
-          "theirs": "inline"
-        },
-        {
-          "part": "label-2",
-          "channel": "display",
-          "ours": "block",
-          "theirs": "inline"
         }
       ]
     },
     {
       "key": "warning.on.off__active",
       "channelsCompared": 186,
-      "channelsEqual": 179,
-      "pctExact": 10.167842741935484,
-      "pctAA": 7.090557795698925,
+      "channelsEqual": 181,
+      "pctExact": 3.0084005376344085,
+      "pctAA": 0.837869623655914,
       "mismatches": [
         {
           "part": "title",
@@ -2428,27 +1924,15 @@
           "channel": "border-top-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(48, 48, 48, 1)"
-        },
-        {
-          "part": "part-0-0-0-0-1-0-0",
-          "channel": "display",
-          "ours": "block",
-          "theirs": "inline"
-        },
-        {
-          "part": "label-2",
-          "channel": "display",
-          "ours": "block",
-          "theirs": "inline"
         }
       ]
     },
     {
       "key": "warning.on.on__default",
       "channelsCompared": 248,
-      "channelsEqual": 235,
-      "pctExact": 10.986559139784946,
-      "pctAA": 7.516633064516129,
+      "channelsEqual": 238,
+      "pctExact": 3.498991935483871,
+      "pctAA": 1.0446908602150538,
       "mismatches": [
         {
           "part": "title",
@@ -2481,18 +1965,6 @@
           "theirs": "rgba(48, 48, 48, 1)"
         },
         {
-          "part": "part-0-0-0-0-1-0-0",
-          "channel": "display",
-          "ours": "block",
-          "theirs": "inline"
-        },
-        {
-          "part": "label-2",
-          "channel": "display",
-          "ours": "block",
-          "theirs": "inline"
-        },
-        {
           "part": "buttongroup",
           "channel": "flex-wrap",
           "ours": "nowrap",
@@ -2521,21 +1993,15 @@
           "channel": "border-top-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(48, 48, 48, 1)"
-        },
-        {
-          "part": "button-2",
-          "channel": "display",
-          "ours": "flex",
-          "theirs": "inline-flex"
         }
       ]
     },
     {
       "key": "warning.on.on__hover",
       "channelsCompared": 248,
-      "channelsEqual": 235,
-      "pctExact": 10.986559139784946,
-      "pctAA": 7.516633064516129,
+      "channelsEqual": 238,
+      "pctExact": 3.498991935483871,
+      "pctAA": 1.0446908602150538,
       "mismatches": [
         {
           "part": "title",
@@ -2568,18 +2034,6 @@
           "theirs": "rgba(48, 48, 48, 1)"
         },
         {
-          "part": "part-0-0-0-0-1-0-0",
-          "channel": "display",
-          "ours": "block",
-          "theirs": "inline"
-        },
-        {
-          "part": "label-2",
-          "channel": "display",
-          "ours": "block",
-          "theirs": "inline"
-        },
-        {
           "part": "buttongroup",
           "channel": "flex-wrap",
           "ours": "nowrap",
@@ -2608,21 +2062,15 @@
           "channel": "border-top-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(48, 48, 48, 1)"
-        },
-        {
-          "part": "button-2",
-          "channel": "display",
-          "ours": "flex",
-          "theirs": "inline-flex"
         }
       ]
     },
     {
       "key": "warning.on.on__focus-visible",
       "channelsCompared": 248,
-      "channelsEqual": 234,
-      "pctExact": 11.834173387096774,
-      "pctAA": 8.70682123655914,
+      "channelsEqual": 237,
+      "pctExact": 4.52116935483871,
+      "pctAA": 2.4153225806451615,
       "mismatches": [
         {
           "part": "title",
@@ -2661,18 +2109,6 @@
           "theirs": "rgba(48, 48, 48, 1)"
         },
         {
-          "part": "part-0-0-0-0-1-0-0",
-          "channel": "display",
-          "ours": "block",
-          "theirs": "inline"
-        },
-        {
-          "part": "label-2",
-          "channel": "display",
-          "ours": "block",
-          "theirs": "inline"
-        },
-        {
           "part": "buttongroup",
           "channel": "flex-wrap",
           "ours": "nowrap",
@@ -2701,21 +2137,15 @@
           "channel": "border-top-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(48, 48, 48, 1)"
-        },
-        {
-          "part": "button-2",
-          "channel": "display",
-          "ours": "flex",
-          "theirs": "inline-flex"
         }
       ]
     },
     {
       "key": "warning.on.on__active",
       "channelsCompared": 248,
-      "channelsEqual": 235,
-      "pctExact": 10.986559139784946,
-      "pctAA": 7.516633064516129,
+      "channelsEqual": 238,
+      "pctExact": 3.498991935483871,
+      "pctAA": 1.0446908602150538,
       "mismatches": [
         {
           "part": "title",
@@ -2748,18 +2178,6 @@
           "theirs": "rgba(48, 48, 48, 1)"
         },
         {
-          "part": "part-0-0-0-0-1-0-0",
-          "channel": "display",
-          "ours": "block",
-          "theirs": "inline"
-        },
-        {
-          "part": "label-2",
-          "channel": "display",
-          "ours": "block",
-          "theirs": "inline"
-        },
-        {
           "part": "buttongroup",
           "channel": "flex-wrap",
           "ours": "nowrap",
@@ -2788,117 +2206,81 @@
           "channel": "border-top-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(48, 48, 48, 1)"
-        },
-        {
-          "part": "button-2",
-          "channel": "display",
-          "ours": "flex",
-          "theirs": "inline-flex"
         }
       ]
     },
     {
       "key": "critical.off.off__default",
       "channelsCompared": 116,
-      "channelsEqual": 114,
-      "pctExact": 10.451444892473118,
-      "pctAA": 7.849966397849462,
+      "channelsEqual": 115,
+      "pctExact": 4.89616935483871,
+      "pctAA": 2.318548387096774,
       "mismatches": [
         {
           "part": "title",
           "channel": "overflow-wrap",
           "ours": "normal",
           "theirs": "anywhere"
-        },
-        {
-          "part": "label-2",
-          "channel": "display",
-          "ours": "block",
-          "theirs": "inline"
         }
       ]
     },
     {
       "key": "critical.off.off__hover",
       "channelsCompared": 116,
-      "channelsEqual": 114,
-      "pctExact": 10.451444892473118,
-      "pctAA": 7.849966397849462,
+      "channelsEqual": 115,
+      "pctExact": 4.89616935483871,
+      "pctAA": 2.318548387096774,
       "mismatches": [
         {
           "part": "title",
           "channel": "overflow-wrap",
           "ours": "normal",
           "theirs": "anywhere"
-        },
-        {
-          "part": "label-2",
-          "channel": "display",
-          "ours": "block",
-          "theirs": "inline"
         }
       ]
     },
     {
       "key": "critical.off.off__focus-visible",
       "channelsCompared": 116,
-      "channelsEqual": 114,
-      "pctExact": 11.002856182795698,
-      "pctAA": 8.56619623655914,
+      "channelsEqual": 115,
+      "pctExact": 5.539986559139785,
+      "pctAA": 3.358366935483871,
       "mismatches": [
         {
           "part": "title",
           "channel": "overflow-wrap",
           "ours": "normal",
           "theirs": "anywhere"
-        },
-        {
-          "part": "label-2",
-          "channel": "display",
-          "ours": "block",
-          "theirs": "inline"
         }
       ]
     },
     {
       "key": "critical.off.off__active",
       "channelsCompared": 116,
-      "channelsEqual": 114,
-      "pctExact": 10.451444892473118,
-      "pctAA": 7.849966397849462,
+      "channelsEqual": 115,
+      "pctExact": 4.89616935483871,
+      "pctAA": 2.318548387096774,
       "mismatches": [
         {
           "part": "title",
           "channel": "overflow-wrap",
           "ours": "normal",
           "theirs": "anywhere"
-        },
-        {
-          "part": "label-2",
-          "channel": "display",
-          "ours": "block",
-          "theirs": "inline"
         }
       ]
     },
     {
       "key": "critical.off.on__default",
       "channelsCompared": 178,
-      "channelsEqual": 170,
-      "pctExact": 11.563676075268818,
-      "pctAA": 8.274529569892474,
+      "channelsEqual": 172,
+      "pctExact": 5.534442204301075,
+      "pctAA": 2.6129032258064515,
       "mismatches": [
         {
           "part": "title",
           "channel": "overflow-wrap",
           "ours": "normal",
           "theirs": "anywhere"
-        },
-        {
-          "part": "label-2",
-          "channel": "display",
-          "ours": "block",
-          "theirs": "inline"
         },
         {
           "part": "buttongroup",
@@ -2929,33 +2311,21 @@
           "channel": "border-top-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(48, 48, 48, 1)"
-        },
-        {
-          "part": "button-2",
-          "channel": "display",
-          "ours": "flex",
-          "theirs": "inline-flex"
         }
       ]
     },
     {
       "key": "critical.off.on__hover",
       "channelsCompared": 178,
-      "channelsEqual": 170,
-      "pctExact": 11.563676075268818,
-      "pctAA": 8.274529569892474,
+      "channelsEqual": 172,
+      "pctExact": 5.534442204301075,
+      "pctAA": 2.6129032258064515,
       "mismatches": [
         {
           "part": "title",
           "channel": "overflow-wrap",
           "ours": "normal",
           "theirs": "anywhere"
-        },
-        {
-          "part": "label-2",
-          "channel": "display",
-          "ours": "block",
-          "theirs": "inline"
         },
         {
           "part": "buttongroup",
@@ -2986,33 +2356,21 @@
           "channel": "border-top-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(48, 48, 48, 1)"
-        },
-        {
-          "part": "button-2",
-          "channel": "display",
-          "ours": "flex",
-          "theirs": "inline-flex"
         }
       ]
     },
     {
       "key": "critical.off.on__focus-visible",
       "channelsCompared": 178,
-      "channelsEqual": 169,
-      "pctExact": 12.332157258064516,
-      "pctAA": 9.505880376344086,
+      "channelsEqual": 171,
+      "pctExact": 6.446740591397849,
+      "pctAA": 3.979334677419355,
       "mismatches": [
         {
           "part": "title",
           "channel": "overflow-wrap",
           "ours": "normal",
           "theirs": "anywhere"
-        },
-        {
-          "part": "label-2",
-          "channel": "display",
-          "ours": "block",
-          "theirs": "inline"
         },
         {
           "part": "buttongroup",
@@ -3043,12 +2401,6 @@
           "channel": "border-top-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(48, 48, 48, 1)"
-        },
-        {
-          "part": "button-2",
-          "channel": "display",
-          "ours": "flex",
-          "theirs": "inline-flex"
         },
         {
           "part": "button-2",
@@ -3061,21 +2413,15 @@
     {
       "key": "critical.off.on__active",
       "channelsCompared": 178,
-      "channelsEqual": 170,
-      "pctExact": 11.563676075268818,
-      "pctAA": 8.274529569892474,
+      "channelsEqual": 172,
+      "pctExact": 5.534442204301075,
+      "pctAA": 2.6129032258064515,
       "mismatches": [
         {
           "part": "title",
           "channel": "overflow-wrap",
           "ours": "normal",
           "theirs": "anywhere"
-        },
-        {
-          "part": "label-2",
-          "channel": "display",
-          "ours": "block",
-          "theirs": "inline"
         },
         {
           "part": "buttongroup",
@@ -3106,21 +2452,15 @@
           "channel": "border-top-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(48, 48, 48, 1)"
-        },
-        {
-          "part": "button-2",
-          "channel": "display",
-          "ours": "flex",
-          "theirs": "inline-flex"
         }
       ]
     },
     {
       "key": "critical.on.off__default",
       "channelsCompared": 186,
-      "channelsEqual": 179,
-      "pctExact": 10.211693548387096,
-      "pctAA": 7.314012096774194,
+      "channelsEqual": 181,
+      "pctExact": 3.033434139784946,
+      "pctAA": 1.0431787634408602,
       "mismatches": [
         {
           "part": "title",
@@ -3151,27 +2491,15 @@
           "channel": "border-top-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(48, 48, 48, 1)"
-        },
-        {
-          "part": "part-0-0-0-0-1-0-0",
-          "channel": "display",
-          "ours": "block",
-          "theirs": "inline"
-        },
-        {
-          "part": "label-2",
-          "channel": "display",
-          "ours": "block",
-          "theirs": "inline"
         }
       ]
     },
     {
       "key": "critical.on.off__hover",
       "channelsCompared": 186,
-      "channelsEqual": 179,
-      "pctExact": 10.211693548387096,
-      "pctAA": 7.314012096774194,
+      "channelsEqual": 181,
+      "pctExact": 3.033434139784946,
+      "pctAA": 1.0431787634408602,
       "mismatches": [
         {
           "part": "title",
@@ -3202,27 +2530,15 @@
           "channel": "border-top-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(48, 48, 48, 1)"
-        },
-        {
-          "part": "part-0-0-0-0-1-0-0",
-          "channel": "display",
-          "ours": "block",
-          "theirs": "inline"
-        },
-        {
-          "part": "label-2",
-          "channel": "display",
-          "ours": "block",
-          "theirs": "inline"
         }
       ]
     },
     {
       "key": "critical.on.off__focus-visible",
       "channelsCompared": 186,
-      "channelsEqual": 178,
-      "pctExact": 10.954469086021506,
-      "pctAA": 8.363575268817204,
+      "channelsEqual": 180,
+      "pctExact": 3.948420698924731,
+      "pctAA": 2.3082997311827955,
       "mismatches": [
         {
           "part": "title",
@@ -3259,27 +2575,15 @@
           "channel": "outline-color",
           "ours": "rgba(0, 95, 204, 1)",
           "theirs": "rgba(48, 48, 48, 1)"
-        },
-        {
-          "part": "part-0-0-0-0-1-0-0",
-          "channel": "display",
-          "ours": "block",
-          "theirs": "inline"
-        },
-        {
-          "part": "label-2",
-          "channel": "display",
-          "ours": "block",
-          "theirs": "inline"
         }
       ]
     },
     {
       "key": "critical.on.off__active",
       "channelsCompared": 186,
-      "channelsEqual": 179,
-      "pctExact": 10.211693548387096,
-      "pctAA": 7.314012096774194,
+      "channelsEqual": 181,
+      "pctExact": 3.033434139784946,
+      "pctAA": 1.0431787634408602,
       "mismatches": [
         {
           "part": "title",
@@ -3310,27 +2614,15 @@
           "channel": "border-top-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(48, 48, 48, 1)"
-        },
-        {
-          "part": "part-0-0-0-0-1-0-0",
-          "channel": "display",
-          "ours": "block",
-          "theirs": "inline"
-        },
-        {
-          "part": "label-2",
-          "channel": "display",
-          "ours": "block",
-          "theirs": "inline"
         }
       ]
     },
     {
       "key": "critical.on.on__default",
       "channelsCompared": 248,
-      "channelsEqual": 235,
-      "pctExact": 11.03040994623656,
-      "pctAA": 7.740087365591398,
+      "channelsEqual": 238,
+      "pctExact": 3.5240255376344085,
+      "pctAA": 1.25,
       "mismatches": [
         {
           "part": "title",
@@ -3363,18 +2655,6 @@
           "theirs": "rgba(48, 48, 48, 1)"
         },
         {
-          "part": "part-0-0-0-0-1-0-0",
-          "channel": "display",
-          "ours": "block",
-          "theirs": "inline"
-        },
-        {
-          "part": "label-2",
-          "channel": "display",
-          "ours": "block",
-          "theirs": "inline"
-        },
-        {
           "part": "buttongroup",
           "channel": "flex-wrap",
           "ours": "nowrap",
@@ -3403,21 +2683,15 @@
           "channel": "border-top-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(48, 48, 48, 1)"
-        },
-        {
-          "part": "button-2",
-          "channel": "display",
-          "ours": "flex",
-          "theirs": "inline-flex"
         }
       ]
     },
     {
       "key": "critical.on.on__hover",
       "channelsCompared": 248,
-      "channelsEqual": 235,
-      "pctExact": 11.03040994623656,
-      "pctAA": 7.740087365591398,
+      "channelsEqual": 238,
+      "pctExact": 3.5240255376344085,
+      "pctAA": 1.25,
       "mismatches": [
         {
           "part": "title",
@@ -3450,18 +2724,6 @@
           "theirs": "rgba(48, 48, 48, 1)"
         },
         {
-          "part": "part-0-0-0-0-1-0-0",
-          "channel": "display",
-          "ours": "block",
-          "theirs": "inline"
-        },
-        {
-          "part": "label-2",
-          "channel": "display",
-          "ours": "block",
-          "theirs": "inline"
-        },
-        {
           "part": "buttongroup",
           "channel": "flex-wrap",
           "ours": "nowrap",
@@ -3490,21 +2752,15 @@
           "channel": "border-top-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(48, 48, 48, 1)"
-        },
-        {
-          "part": "button-2",
-          "channel": "display",
-          "ours": "flex",
-          "theirs": "inline-flex"
         }
       ]
     },
     {
       "key": "critical.on.on__focus-visible",
       "channelsCompared": 248,
-      "channelsEqual": 234,
-      "pctExact": 11.878192204301076,
-      "pctAA": 8.934307795698924,
+      "channelsEqual": 237,
+      "pctExact": 4.546538978494624,
+      "pctAA": 2.6226478494623655,
       "mismatches": [
         {
           "part": "title",
@@ -3543,18 +2799,6 @@
           "theirs": "rgba(48, 48, 48, 1)"
         },
         {
-          "part": "part-0-0-0-0-1-0-0",
-          "channel": "display",
-          "ours": "block",
-          "theirs": "inline"
-        },
-        {
-          "part": "label-2",
-          "channel": "display",
-          "ours": "block",
-          "theirs": "inline"
-        },
-        {
           "part": "buttongroup",
           "channel": "flex-wrap",
           "ours": "nowrap",
@@ -3583,21 +2827,15 @@
           "channel": "border-top-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(48, 48, 48, 1)"
-        },
-        {
-          "part": "button-2",
-          "channel": "display",
-          "ours": "flex",
-          "theirs": "inline-flex"
         }
       ]
     },
     {
       "key": "critical.on.on__active",
       "channelsCompared": 248,
-      "channelsEqual": 235,
-      "pctExact": 11.03040994623656,
-      "pctAA": 7.740087365591398,
+      "channelsEqual": 238,
+      "pctExact": 3.5240255376344085,
+      "pctAA": 1.25,
       "mismatches": [
         {
           "part": "title",
@@ -3630,18 +2868,6 @@
           "theirs": "rgba(48, 48, 48, 1)"
         },
         {
-          "part": "part-0-0-0-0-1-0-0",
-          "channel": "display",
-          "ours": "block",
-          "theirs": "inline"
-        },
-        {
-          "part": "label-2",
-          "channel": "display",
-          "ours": "block",
-          "theirs": "inline"
-        },
-        {
           "part": "buttongroup",
           "channel": "flex-wrap",
           "ours": "nowrap",
@@ -3670,12 +2896,6 @@
           "channel": "border-top-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(48, 48, 48, 1)"
-        },
-        {
-          "part": "button-2",
-          "channel": "display",
-          "ours": "flex",
-          "theirs": "inline-flex"
         }
       ]
     }
