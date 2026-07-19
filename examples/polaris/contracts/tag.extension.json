@@ -1,0 +1,322 @@
+{
+  "_marker": "NON-SCHEMA EXTENSION BLOCK — computed-capture overflow. Nothing here is contract vocabulary; every entry names why it does not fit (DESIGN §5.4).",
+  "generatedBy": "extract/computed/run.ts",
+  "library": "@shopify/polaris@13.9.5",
+  "browser": "148.0.7778.96",
+  "mintedTokens": {
+    "imported": {
+      "shared": {
+        "size-8": {
+          "$value": "8px",
+          "$type": "dimension"
+        },
+        "size-0": {
+          "$value": "0px",
+          "$type": "dimension"
+        },
+        "color-b5b5b5": {
+          "$value": "#b5b5b5",
+          "$type": "color"
+        }
+      },
+      "tag": {
+        "root": {
+          "padding-left": {
+            "$value": "6px",
+            "$type": "dimension"
+          },
+          "padding-right": {
+            "$value": "6px",
+            "$type": "dimension"
+          },
+          "background-color-state-disabled": {
+            "$value": "#0000000d",
+            "$type": "color"
+          }
+        },
+        "text": {
+          "font-size": {
+            "$value": "12px",
+            "$type": "dimension"
+          },
+          "line-height": {
+            "$value": "16px",
+            "$type": "dimension"
+          }
+        }
+      }
+    }
+  },
+  "folds": [],
+  "foldedStateSkips": [],
+  "layout": {
+    "enriched": [],
+    "contradictions": [
+      {
+        "part": "root",
+        "field": "display",
+        "carried": "inline-flex",
+        "observed": "flex"
+      }
+    ],
+    "receipts": [],
+    "_note": "computed flex keywords carried via Part.layout (the schema's own vocabulary); carried-slot contradictions are receipts, never silent overrides"
+  },
+  "declaredFacts": {
+    "_note": "v15 (S4): uniform registry-channel facts carried as Part.declared / Part.declaredStates — first-class contract vocabulary, listed here as the enrichment receipt",
+    "base": [
+      {
+        "part": "root",
+        "channel": "max-width",
+        "value": "100%"
+      },
+      {
+        "part": "root",
+        "channel": "position",
+        "value": "relative"
+      },
+      {
+        "part": "label",
+        "channel": "display",
+        "value": "inline"
+      },
+      {
+        "part": "label",
+        "channel": "text-wrap-mode",
+        "value": "nowrap"
+      }
+    ],
+    "state": [
+      {
+        "state": "disabled",
+        "part": "root",
+        "channel": "transition-property",
+        "value": "none"
+      }
+    ]
+  },
+  "codeOnlyChannels": [
+    {
+      "part": "text",
+      "channel": "overflow-x",
+      "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
+      "sample": "hidden",
+      "distinctValues": 1
+    },
+    {
+      "part": "text",
+      "channel": "overflow-y",
+      "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
+      "sample": "hidden",
+      "distinctValues": 1
+    },
+    {
+      "part": "text",
+      "channel": "text-overflow",
+      "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
+      "sample": "ellipsis",
+      "distinctValues": 1
+    },
+    {
+      "part": "text",
+      "channel": "text-wrap-mode",
+      "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
+      "sample": "nowrap",
+      "distinctValues": 1
+    }
+  ],
+  "stateOverflow": [],
+  "overflowBindings": [
+    {
+      "part": "text",
+      "channel": "font-size",
+      "ref": "{imported.tag.text.font-size}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "text",
+      "channel": "line-height",
+      "ref": "{imported.tag.text.line-height}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "label",
+      "channel": "border-bottom-color",
+      "state": "disabled",
+      "ref": "{imported.shared.color-b5b5b5}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "label",
+      "channel": "border-left-color",
+      "state": "disabled",
+      "ref": "{imported.shared.color-b5b5b5}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "label",
+      "channel": "border-right-color",
+      "state": "disabled",
+      "ref": "{imported.shared.color-b5b5b5}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "label",
+      "channel": "border-top-color",
+      "state": "disabled",
+      "ref": "{imported.shared.color-b5b5b5}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "label",
+      "channel": "caret-color",
+      "state": "disabled",
+      "ref": "{imported.shared.color-b5b5b5}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "label",
+      "channel": "column-rule-color",
+      "state": "disabled",
+      "ref": "{imported.shared.color-b5b5b5}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "label",
+      "channel": "outline-color",
+      "state": "disabled",
+      "ref": "{imported.shared.color-b5b5b5}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "label",
+      "channel": "text-decoration-color",
+      "state": "disabled",
+      "ref": "{imported.shared.color-b5b5b5}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "label",
+      "channel": "text-emphasis-color",
+      "state": "disabled",
+      "ref": "{imported.shared.color-b5b5b5}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "text",
+      "channel": "border-bottom-color",
+      "state": "disabled",
+      "ref": "{imported.shared.color-b5b5b5}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "text",
+      "channel": "border-left-color",
+      "state": "disabled",
+      "ref": "{imported.shared.color-b5b5b5}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "text",
+      "channel": "border-right-color",
+      "state": "disabled",
+      "ref": "{imported.shared.color-b5b5b5}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "text",
+      "channel": "border-top-color",
+      "state": "disabled",
+      "ref": "{imported.shared.color-b5b5b5}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "text",
+      "channel": "caret-color",
+      "state": "disabled",
+      "ref": "{imported.shared.color-b5b5b5}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "text",
+      "channel": "color",
+      "state": "disabled",
+      "ref": "{imported.shared.color-b5b5b5}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "text",
+      "channel": "column-rule-color",
+      "state": "disabled",
+      "ref": "{imported.shared.color-b5b5b5}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "text",
+      "channel": "outline-color",
+      "state": "disabled",
+      "ref": "{imported.shared.color-b5b5b5}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "text",
+      "channel": "text-decoration-color",
+      "state": "disabled",
+      "ref": "{imported.shared.color-b5b5b5}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "text",
+      "channel": "text-emphasis-color",
+      "state": "disabled",
+      "ref": "{imported.shared.color-b5b5b5}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    }
+  ],
+  "pairwiseRefusals": [],
+  "pseudoParts": {
+    "_reason": "S5 (DESIGN §5.4): pseudo-element decor has no anatomy spelling — captured, receipted, not carried",
+    "findings": [],
+    "totalFindings": 0
+  },
+  "bindingContradictions": [
+    {
+      "combo": "enabled",
+      "part": "label",
+      "channel": "line-height",
+      "ref": "{p.text-body-sm-font-line-height}",
+      "computedProp": "line-height",
+      "expected": "16px",
+      "observed": "20px",
+      "verdict": "contradiction",
+      "cause": "REAL STALE BINDING caught by the floor: Tag.module.css sets line-height {p.font-line-height-500} (20px) on its own inner .Polaris-Tag__Text span, overriding the carried Text-primitive bodySm chain (16px) the promotion bound; the showcase's verify.ts compared the Text root element, not the inner span the floor names `label` — resolve via the review queue (--to {p.font-line-height-500}; six tokens share the 20px value, so the explicit ref is required)"
+    }
+  ],
+  "interactionOnDisabled": [],
+  "structureReceipts": [],
+  "styledChannelReceipts": [],
+  "anatomyJoin": {
+    "computed": [
+      {
+        "part": "root",
+        "join": "matched"
+      },
+      {
+        "part": "text",
+        "join": "computed-only"
+      },
+      {
+        "part": "label",
+        "join": "matched"
+      }
+    ],
+    "staticOnly": []
+  },
+  "enrichmentNotes": [
+    "declared fact carried: root.max-width = 100% (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: root.position = relative (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label.display = inline (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label.text-wrap-mode = nowrap (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared state fact carried: [disabled] root.transition-property = none (v15 declared vocabulary)"
+  ]
+}

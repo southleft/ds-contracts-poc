@@ -18,11 +18,12 @@
  * No Polaris clone required: this step runs from the COMMITTED contracts +
  * COMMITTED token wrap alone (that is the point of a contract).
  */
-import { mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { ContractSchema, type Contract } from '../../scripts/contract-schema.js';
 import { emitHtml, emitReact } from '../../core/index.js';
 import { createFigmaEngine, emitFigmaScript } from '../../core/emit-figma-script.js';
+import { mintedTokenCss } from '../../core/mint-tokens.js';
 
 import { aliasTarget, flattenTokens, tokenInventoryFromJson, type TokenTreeInput } from '../../core/tokens.js';
 import { kebab } from '../../extract/types.js';
@@ -33,6 +34,15 @@ const CHECK = process.argv.includes('--check');
 const readJson = (p: string) => JSON.parse(readFileSync(p, 'utf8')) as Record<string, unknown>;
 
 const tokensTree = readJson(path.join(EXAMPLE, 'tokens', 'polaris-light.dtcg.json'));
+
+/** Minted provisional tokens from the computed-floor promotion (round 2):
+ *  `imported.*` leaves minted by extract/computed for styled channels with
+ *  no recoverable Polaris token name (see scripts/promote-floor.ts). The
+ *  v0.2.0 contracts reference them; absent file (pre-promotion tree) → empty
+ *  layer, byte-identical output. */
+const mintedPath = path.join(EXAMPLE, 'tokens', 'polaris-minted.dtcg.json');
+const mintedTree = existsSync(mintedPath) ? readJson(mintedPath) : {};
+const hasMinted = Object.keys(mintedTree).length > 0;
 
 /** The canvas engine computes in px (Figma's unit). Polaris publishes rem
  *  dimensions on its own documented 1rem = 16px base — the conversion is
@@ -109,9 +119,46 @@ const figmaTree = filterRepresentable(
 // enterprise gauntlet, unchanged here.
 const engineTree = resolveAliases(remToPx(tokensTree) as Record<string, unknown>) as Record<string, unknown>;
 const emptyTrees = { semantic: {}, light: {}, dark: {}, brands: { default: {} } };
-const trees: TokenTreeInput = { primitives: engineTree, ...emptyTrees };
-const upsertTrees: TokenTreeInput = { primitives: figmaTree, ...emptyTrees };
-const inventory = tokenInventoryFromJson([tokensTree]);
+// The minted `imported.*` layer rides the semantic slot for the canvas
+// engine (the playground token-source pattern: the MINT_NAMESPACE root never
+// collides with a real semantic group). Minted values are browser-computed
+// px/hex literals — no rem conversion applies.
+// Polaris type scale → MINTED FIGMA TEXT STYLES (owner ruling, round 2).
+// Mechanical derivation from the wrapped token set's own names: every
+// `p.text-<role>-font-size` mints one semantic `font.<role>.size` ALIAS (plus
+// `font.<role>.weight` when Polaris publishes one) — the existing text-style
+// machinery derives one named Figma text style per role from exactly this
+// shape (identity marker ds_contracts/textStyleToken = font.<role>.size),
+// upserted by 00-tokens.figma.js. NAMED LIMITS: (1) sample text cells keep
+// raw font props — style ATTACHMENT is an exact identity match on the node's
+// bound token path, and the floor-promoted contracts bind Polaris's own
+// primitives (p.text-*), which is the honest binding; (2) Polaris's 450/550/
+// 650 weights have no Inter style mapping in the shared weight table, so the
+// styles carry the 'Medium' runtime fallback (quoted in the receipt).
+const textStyleTree = (() => {
+  const flat = flattenTokens(tokensTree);
+  const roles: Array<[string, { sizePath: string; weightPath?: string }]> = [];
+  for (const [p] of flat) {
+    const m = /^p\.text-(.+)-font-size$/.exec(p);
+    if (!m) continue;
+    const weightPath = `p.text-${m[1]}-font-weight`;
+    roles.push([m[1], { sizePath: p, ...(flat.has(weightPath) ? { weightPath } : {}) }]);
+  }
+  roles.sort((a, b) => a[0].localeCompare(b[0]));
+  const font: Record<string, unknown> = {};
+  for (const [role, r] of roles) {
+    font[role] = {
+      size: { $value: `{${r.sizePath}}`, $type: 'dimension' },
+      ...(r.weightPath ? { weight: { $value: `{${r.weightPath}}`, $type: 'number' } } : {}),
+    };
+  }
+  return roles.length > 0 ? { font } : {};
+})();
+const textStyleRoles = Object.keys((textStyleTree as { font?: Record<string, unknown> }).font ?? {});
+
+const trees: TokenTreeInput = { primitives: engineTree, ...emptyTrees, ...(hasMinted ? { semantic: mintedTree } : {}) };
+const upsertTrees: TokenTreeInput = { primitives: figmaTree, ...emptyTrees, semantic: textStyleTree };
+const inventory = tokenInventoryFromJson([tokensTree, ...(hasMinted ? [mintedTree] : [])]);
 const icons = new Map<string, string>(
   readdirSync(path.join(EXAMPLE, 'assets', 'icons'))
     .filter((f) => f.endsWith('.svg'))
@@ -124,6 +171,92 @@ const contracts = readdirSync(path.join(EXAMPLE, 'contracts'))
   .sort()
   .map((f) => ContractSchema.parse(readJson(path.join(EXAMPLE, 'contracts', f))));
 const byId = new Map<string, Contract>(contracts.map((c) => [c.id, c]));
+
+// ---------------------------------------------------------------------------
+// Canvas axis curation (owner ruling, floor round 2). The CONTRACT keeps the
+// full prop space — these projections shape ONLY the emitted Figma scripts
+// (the canvas is a curated visual reference, not the API): enum axes that do
+// not change visual form a designer picks per instance are pinned to a
+// single representative value, and oversized designer-facing axes draw a
+// named SUBSET. Booleans are already BOOLEAN properties (never variant
+// axes); the code surfaces and the truth gates always run the full space.
+// ---------------------------------------------------------------------------
+interface CanvasProjection {
+  /** enum prop → kept values ('*' = all). Unlisted enum props keep all. */
+  keep: Record<string, string[] | '*'>;
+  note: string;
+}
+const CANVAS_PROJECTIONS: Record<string, CanvasProjection> = {
+  'polaris.text': {
+    keep: {
+      variant: '*',
+      tone: ['base', 'success', 'critical', 'caution', 'subdued'],
+      fontWeight: ['regular'],
+      alignment: ['start'],
+      as: ['p'],
+    },
+    note:
+      'CANVAS PROJECTION (named curation): the drawn set is variant (all 11) × tone (5 of 11 — base, success, critical, ' +
+      'caution, subdued) = 55 sample cells; fontWeight/alignment/as are pinned to one representative value each ' +
+      '(regular/start/p — fontWeight and alignment restyle text a designer sets per instance, `as` is a semantics-only ' +
+      'tag swap). The full 23,232-cell cartesian stays intact in the contract and both code surfaces; the Polaris type ' +
+      'scale itself ships as MINTED FIGMA TEXT STYLES (see the token script receipt below).',
+  },
+  'polaris.text-field': {
+    keep: {
+      type: ['text'],
+      inputMode: ['text'],
+      align: ['left'],
+      variant: '*',
+      size: '*',
+    },
+    note:
+      'CANVAS PROJECTION (named curation): the drawn set is variant (2) × size (2) = 4 cells; type/inputMode/align are ' +
+      'pinned to one representative value each (text/text/left — they parameterize input behavior and text alignment, ' +
+      'not component form). Booleans are BOOLEAN properties; disabled rides the state-preview vocabulary where the ' +
+      'contract declares it. The full 1,344-cell cartesian stays intact in the contract and both code surfaces.',
+  },
+};
+
+/** Apply a canvas projection to a CLONE: shrink enum value lists (the
+ *  contract default always survives) and prune per-value maps to the kept
+ *  values so the projected contract still passes the shared referee. */
+function projectForCanvas(contract: Contract): { contract: Contract; projection?: CanvasProjection } {
+  const projection = CANVAS_PROJECTIONS[contract.id];
+  if (!projection) return { contract };
+  const clone = structuredClone(contract);
+  const keptByProp = new Map<string, Set<string>>();
+  for (const p of clone.props) {
+    if (typeof p.type !== 'object' || !('enum' in p.type)) continue;
+    const keep = projection.keep[p.name];
+    if (!keep || keep === '*') continue;
+    const kept = [...keep];
+    if (p.default !== undefined && !kept.includes(String(p.default))) kept.unshift(String(p.default));
+    p.type.enum = p.type.enum.filter((v: string) => kept.includes(v));
+    if (p.type.enum.length === 0) throw new Error(`${contract.id}: canvas projection empties enum "${p.name}"`);
+    keptByProp.set(p.name, new Set(p.type.enum));
+    if (p.bindings.figma.values) {
+      p.bindings.figma.values = Object.fromEntries(
+        Object.entries(p.bindings.figma.values).filter(([k]) => keptByProp.get(p.name)!.has(k)),
+      );
+    }
+  }
+  const pruneMaps = (part: Record<string, unknown>) => {
+    for (const field of ['tokensByProp', 'literalsByProp', 'layoutByProp'] as const) {
+      const entries = part[field];
+      if (!Array.isArray(entries)) continue;
+      for (const e of entries as Array<{ prop: string; map: Record<string, unknown> }>) {
+        const kept = keptByProp.get(e.prop);
+        if (!kept) continue;
+        e.map = Object.fromEntries(Object.entries(e.map).filter(([k]) => kept.has(k)));
+      }
+    }
+    for (const child of Object.values((part.parts as Record<string, Record<string, unknown>>) ?? {})) pruneMaps(child);
+  };
+  pruneMaps(clone.anatomy.root as unknown as Record<string, unknown>);
+  ContractSchema.parse(clone);
+  return { contract: clone, projection };
+}
 
 interface OutFile {
   path: string; // relative to examples/polaris/
@@ -172,6 +305,22 @@ for (const c of contracts) {
   });
 }
 
+// Minted provisional tokens (computed-floor promotion) as custom properties —
+// the second stylesheet the static HTML surface needs once v0.2.0 contracts
+// reference `imported.*` bindings. Values are browser-computed literals.
+if (hasMinted) {
+  files.push({
+    path: 'generated/html/polaris-minted-tokens.css',
+    contents:
+      '/* Minted provisional tokens (imported.*) — computed-floor capture of @shopify/polaris\n' +
+      ' * (extract/computed; see tokens/polaris-minted.dtcg.json). Literal fidelity: values are\n' +
+      ' * the browser\'s own computed results; no Polaris token name was recoverable for these\n' +
+      ' * channels (every mint is receipted in the per-component LEDGER.md). */\n' +
+      mintedTokenCss(mintedTree) +
+      '\n',
+  });
+}
+
 // ---------------------------------------------------------------------------
 // Figma sync scripts: referee-gated emission + headless canvas-engine compile
 // ---------------------------------------------------------------------------
@@ -198,11 +347,13 @@ const receipt: string[] = [
  *  committed and not queued for Phase B. Named per contract below. */
 const VARIANT_COMMIT_LIMIT = 500;
 const explosions: string[] = [];
+const projectionNotes: string[] = [];
 for (const c of contracts) {
-  const script = emitFigmaScript(c, { tokens: trees, icons, contracts: byId });
-  const data = engine.compileComponentData(c, byId);
+  const { contract: canvasContract, projection } = projectForCanvas(c);
+  const script = emitFigmaScript(canvasContract, { tokens: trees, icons, contracts: byId, ...(hasMinted ? { mintedTokens: mintedTree } : {}) });
+  const data = engine.compileComponentData(canvasContract, byId);
   const variants = (data as { variants: unknown[] }).variants;
-  const axes = c.props.filter((p) => typeof p.type === 'object' && 'enum' in p.type).length;
+  const axes = canvasContract.props.filter((p) => typeof p.type === 'object' && 'enum' in p.type).length;
   const boundRefs = new Set(script.match(/"p\/[A-Za-z0-9/-]+"/g) ?? []).size;
   const committed = variants.length <= VARIANT_COMMIT_LIMIT;
   if (committed) {
@@ -216,12 +367,44 @@ for (const c of contracts) {
         `a named Phase B owner decision, and a real finding: the canvas engine compiles the full cartesian by design.`,
     );
   }
+  if (projection) projectionNotes.push(`- \`${c.id}\`: ${projection.note}`);
   receipt.push(
-    `| \`${c.id}\` | ${variants.length} | ${axes} | ${boundRefs} | ${committed ? 'yes' : 'NO — variant explosion (see below)'} |`,
+    `| \`${c.id}\` | ${variants.length} | ${axes} | ${boundRefs} | ${committed ? (projection ? 'yes (canvas projection, see below)' : 'yes') : 'NO — variant explosion (see below)'} |`,
   );
 }
 if (explosions.length > 0) {
   receipt.push('', '## Variant-explosion exclusions (compiled, verified, NOT committed)', '', ...explosions);
+}
+if (projectionNotes.length > 0) {
+  receipt.push(
+    '',
+    '## Canvas projections (owner ruling, floor round 2)',
+    '',
+    'The CONTRACT keeps the full prop space; the committed script draws a NAMED curated',
+    'projection (generate.ts CANVAS_PROJECTIONS). Booleans are BOOLEAN properties (never',
+    'variant axes); interaction states ride the State-preview axis where the contract',
+    'declares them.',
+    '',
+    ...projectionNotes,
+  );
+}
+if (textStyleRoles.length > 0) {
+  receipt.push(
+    '',
+    '## Minted Figma text styles (Polaris type scale)',
+    '',
+    `\`00-tokens.figma.js\` upserts **${textStyleRoles.length} named text styles** — one per Polaris text role`,
+    '(`p.text-<role>-font-size` → semantic `font.<role>.size` alias → text style with identity',
+    'marker `ds_contracts/textStyleToken`, rename-safe, idempotent):',
+    '',
+    ...textStyleRoles.map((r) => `- \`${r}\``),
+    '',
+    'NAMED LIMITS: sample text cells keep raw font props — style attachment is an exact',
+    'identity match on the node\'s bound token path, and the floor-promoted contracts bind',
+    'Polaris\'s own primitives (`p.text-*`), which is the honest binding. Polaris\'s 450/550/650',
+    'font weights have no Inter style mapping in the shared weight table, so minted styles',
+    'carry the \'Medium\' runtime fallback.',
+  );
 }
 receipt.push(
   '',

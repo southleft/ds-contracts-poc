@@ -9,7 +9,7 @@ props, its structure, and which design token styles each part), generated workin
 plain-HTML implementations from those contracts, and then rendered our generated HTML
 **side by side with Shopify's own published package in the same browser**. On the styled
 properties the contracts carry, the computed styles match Shopify's rendering exactly in
-**212 of 222 measured comparisons — and all 10 mismatches have committed, named causes**
+**262 of 276 measured comparisons — and all 14 mismatches have committed, named causes**
 (no tolerance was applied anywhere; a mismatch without a named cause would fail the report).
 Everything the pipeline could NOT carry — a runtime-set variable here, a gradient there, a
 breakpoint rule, a prop typed in a sibling file — is refused **by name** in a committed
@@ -32,7 +32,8 @@ or number drifts from what this document claims.
 
 ## What came out (the 12-component showcase)
 
-**12 committed contracts** (version 0.1.0, status draft) carrying **88 extracted props,
+**12 committed contracts** (now version 0.2.0 after the floor round below; the static
+promotion described in this section produced their v0.1.0 ancestors) carrying **88 extracted props,
 1 extracted event, and 185 carried styling facts** (token bindings plus provenance-cited
 literals — see the coverage round below) promoted from Polaris's own CSS: Button, Badge,
 Banner, Checkbox, RadioButton, TextField, Tag, Avatar, Spinner, ProgressBar, Text, Thumbnail.
@@ -76,30 +77,31 @@ under [receipts/](./receipts/).
 
 | component | prop combos | rows compared | rows matched exactly | named refusal lines |
 |---|---|---|---|---|
-| `polaris.button` | 6 | 77 | 74 | 316 |
-| `polaris.badge` | 1 | 10 | 10 | 38 |
-| `polaris.banner` | 4 | 40 | 40 | 27 |
-| `polaris.checkbox` | 1 | 2 | 1 | 502 |
-| `polaris.radio-button` | 1 | 4 | 4 | 339 |
-| `polaris.text-field` | 1 | 11 | 11 | 905 |
-| `polaris.tag` | 1 | 7 | 7 | 43 |
-| `polaris.avatar` | 3 | 18 | 12 | 46 |
+| `polaris.button` | 6 | 95 | 93 | 316 |
+| `polaris.badge` | 1 | 11 | 11 | 38 |
+| `polaris.banner` | 4 | 44 | 44 | 27 |
+| `polaris.checkbox` | 1 | 6 | 6 | 502 |
+| `polaris.radio-button` | 1 | 6 | 6 | 339 |
+| `polaris.text-field` | 1 | 13 | 13 | 905 |
+| `polaris.tag` | 1 | 9 | 9 | 43 |
+| `polaris.avatar` | 3 | 27 | 15 | 46 |
 | `polaris.spinner` | 2 | 4 | 4 | 8 |
-| `polaris.progress-bar` | 6 | 24 | 24 | 29 |
+| `polaris.progress-bar` | 6 | 36 | 36 | 29 |
 | `polaris.text` | 4 | 17 | 17 | 15 |
 | `polaris.thumbnail` | 2 | 8 | 8 | 49 |
 
-**Total: 212/222 rows matched exactly across 32 prop combinations.** The 10 mismatches each
-carry a committed named cause in [receipts/RECEIPTS.md](./receipts/RECEIPTS.md): Avatar's
-name-hash palette (6 rows over 3 combos — Polaris hashes the initials into one of seven
-palette classes; the contract carries Polaris's own name-less default, `styleOne`, cited from
-`Avatar.tsx`, and the hash SELECTION stays a named refusal), Button's label typography
-branches (3 rows — the primary label's weight is a media-dependent runtime branch and the
-plain label's bodyMd upgrade is conditioned on two axes; both refused by name, the carried
-base renders), and Checkbox's border width (1 row — Polaris's Choice wrapper zeroes the border
-and repaints it as an inset shadow, a cross-component rule outside the promoted scope). "Named
-refusal lines" counts the promotion ledger's refusals for that component (one styling fact can
-refuse in several contexts, so lines ≥ declarations; every line is in PROMOTION.md).
+**Total: 262/276 rows matched exactly across 32 prop combinations** (v0.2.0 floor-promoted
+contracts — the v0.1.0 static-promotion table was 212/222; see the floor round below). The 14
+mismatches each carry a committed named cause in [receipts/RECEIPTS.md](./receipts/RECEIPTS.md):
+Avatar's name-hash palette and content-conditioned initials typography (12 rows over 3 combos —
+Polaris hashes the initials into one of seven palette classes and upgrades the initials text to
+`font-size-400` only when initials are given; value-derived styling has no contract channel, so
+the contract carries Polaris's own name-less default, `styleOne`, plus the floor-resolved
+empty-initials typography), and Button's plain-label bodyMd upgrade (2 rows — conditioned on
+two axes, refused by name; the carried bodySm base renders). "Named refusal lines" counts the
+STATIC promotion ledger's refusals for that component (one styling fact can refuse in several
+contexts, so lines ≥ declarations; every line is in PROMOTION.md — superseded per component by
+the floor's generated ledgers, see below).
 
 ## The coverage round (before → after)
 
@@ -176,6 +178,95 @@ The styled channels their architecture does NOT expose to this pipeline, and wha
   no standalone fact; refused by name.
 - **Gradient overlays**: the primary button's gradient layer is named-not-carried; its color
   layer carries (CSS's own shorthand semantics) and matches exactly.
+
+## The floor round (v0.1.0 → v0.2.0): contracts rebuilt from complete browser truth
+
+The coverage round above still read **source CSS** — what was written. The floor round
+re-promoted every showcase contract from **computed-style truth on the real rendered
+components**: the production computed-capture floor (`extract/computed/`, the productionized
+spike) mounted the real `@shopify/polaris@13.9.5` npm package per enumerated prop combination
+inside its own `AppProvider` in headless Chromium 148.0.7778.96, drove the full interaction
+sweep (default / hover / focus-visible / active, plus prop-driven disabled), read **every
+longhand the browser enumerates (942 channels) per element including `::before`/`::after`**,
+and required double-run byte-identity (2,164 captures per sweep, byte-identical across two
+full sweeps). Fusion classified every styled channel: **BOUND** (carried bindings
+browser-confirmed by exact string equality — a mismatch is a contradiction receipt, resolved
+computed-wins through the human-acked decisions ledger), **MINTED** (`imported.*` provisional
+tokens, committed in `tokens/polaris-minted.dtcg.json`), **DECLARED** (uniform registry
+channels), and **CODE-ONLY** (named overflow in `contracts/<kebab>.extension.json`). The
+v0.2.0 contracts REPLACED the static-promotion contracts; the per-component generated
+ledgers (`extract/computed/out/<comp>/LEDGER.md`) supersede this component's PROMOTION.md
+sections. Text and TextField are promoted with full prop spaces; their Figma scripts draw
+named canvas projections (owner ruling — see `figma/COMPILE-RECEIPT.md`).
+
+Coverage, before → after (static carried ledger lines → floor carried facts):
+
+| component | static carried (v0.1.0) | floor carried (v0.2.0): bound + minted + declared | code-only/overflow (named) | contradictions (all named) | resolved (ledger) |
+|---|---|---|---|---|---|
+| `polaris.button` | 39 | 740 bound-cells confirmed · 330 minted leaves · 17 declared | 21 + 17 | 76 | 1 group (12 items) |
+| `polaris.tag` | 7 | 6/7 · 8 minted · 5 declared | 4 + 21 | 1 | 1 |
+| `polaris.badge` | 10 | 12/12 · 2 minted · 0 declared | 0 + 0 | 0 | — |
+| `polaris.banner` | 17 | 0/8 · 53 minted · 2 declared | 30 + 54 | 8 | 2 groups |
+| `polaris.checkbox` | 3 | 1/2 · 31 minted · 20 declared | 40 + 80 | 1 | 1 |
+| `polaris.radio-button` | 4 | 4/4 · 28 minted · 26 declared | 15 + 59 | 0 | — |
+| `polaris.avatar` | 10 | 15/20 · 32 minted · 6 declared | 15 + 11 | 5 | 1 |
+| `polaris.spinner` | 2 | 0/0 · 3 minted · 0 declared | 11 + 6 | 0 | — |
+| `polaris.progress-bar` | 12 | 36/36 · 10 minted · 5 declared | 12 + 13 | 0 | — |
+| `polaris.thumbnail` | 8 | 8/8 · 14 minted · 4 declared | 6 + 7 | 0 | — |
+| `polaris.text` | 57 | 1584/1584 · 0 minted · 0 declared | 1 + 0 | 0 | — |
+| `polaris.text-field` | 16 | 54/60 · 33 minted · 12 declared | 34 + 117 | 6 | 1 |
+
+The fidelity gate (`extract/computed/out/<comp>/scorecard.json`): the enriched contract →
+`emit-html` (wrapped Polaris tokens + minted custom properties) vs the ORIGINAL npm package
+rendering, same pinned Chromium, per combo × interaction — computed equality on the styled
+channel set (exact string, no tolerance) and pixelmatch at threshold 0 AND the AA point,
+both quoted, never widened:
+
+| component | combo×state rows | contract-mediated computed equality | rows fully equal | pixel perfect (AA point) | mean AA diff |
+|---|---|---|---|---|---|
+| `polaris.button` | 480 | **90.617%** (33492/36960) | 192/480 | 0/480 | 1.941% |
+| `polaris.tag` | 8 | **92.500%** (148/160) | 0/8 | 0/8 | 1.090% |
+| `polaris.badge` | 4 | **100.000%** (136/136) | 4/4 | 0/4 | 0.258% |
+| `polaris.banner` | 16 | **91.667%** (176/192) | 0/16 | 0/16 | 32.764% |
+| `polaris.checkbox` | 8 | **79.098%** (386/488) | 0/8 | 0/8 | 0.932% |
+| `polaris.radio-button` | 8 | **75.595%** (381/504) | 0/8 | 0/8 | 1.060% |
+| `polaris.avatar` | 20 | **91.304%** (840/920) | 0/20 | 0/20 | 1.288% |
+| `polaris.spinner` | 8 | **100.000%** (0 compared — all styling rides the committed glyph assets) | — | 8/8 | 0.000% |
+| `polaris.progress-bar` | 48 | **92.857%** (624/672) | 0/48 | 0/48 | 17.438% |
+| `polaris.thumbnail` | 16 | **100.000%** (224/224) | 16/16 | 0/16 | 9.244% |
+| `polaris.text` | 1516 | **76.746%** (17452/22740) | 860/1516 | 0/1516 | 2.110% |
+| `polaris.text-field` | 32 | **74.399%** (1238/1664) | 0/32 | 0/32 | 5.589% |
+
+The vocabulary-independent capture floor itself (truth replay — every captured longhand
+applied verbatim to a reconstructed tree): computed re-read equality ≥ 99.68% on every
+component (100.000% on four), and 8/8 … 1516/1516 pixel-AA-perfect pairs wherever the
+replayed tree carries no SVG geometry (svg path data is DOM structure, not computed style —
+a named replay limit for the icon-bearing components).
+
+**Honest remaining-loss classes** (what the contract-mediated gate still loses, ranked by
+visual impact — the Round 3 canvas expectations):
+
+1. **Computed-only anatomy** (Banner: mean AA diff 32.8%): the floor observed 17 rendered
+   elements in Banner — the tone ribbon Box, the icon span, the layout stacks — that the
+   static anatomy never named. Their styling is captured (extension block, minted leaves)
+   but parts the contract's anatomy does not declare are not emitted; the biggest visual
+   gap on the canvas.
+2. **Geometry channels** (ProgressBar 17.4%, Thumbnail 9.2% mean AA): `width: 100%`-class
+   facts are environment-dependent computed geometry, excluded from fusion by name — a
+   zero-width progress track is the visible result.
+3. **State residue on structure-bearing states** (Checkbox 79.1%, RadioButton 75.6%,
+   TextField 74.4%): state planes whose deltas are not uniform or not color-kind
+   (S3 set-plane residue), plus interaction styling on inner parts the static anatomy
+   lacks (backdrop bevels, focus rings on `::after`).
+4. **Pseudo-element decor** (Button focus ring, Checkbox/RadioButton check dot):
+   captured and receipted (`pseudoParts`), no anatomy spelling (S5) — focus-visible rows
+   dominate Button's 288 not-fully-equal rows.
+5. **Composition-owned text defaults** (Text 76.7%): the Text primitive's own tone/weight
+   cascade interplay across the pairwise space — per-axis-pair set-planes the mint
+   discipline refuses to value at unvisited points.
+
+Every class is named per component in `extract/computed/out/<comp>/LEDGER.md` and the
+committed extension blocks; nothing was silently dropped.
 
 ## Figma-ready (Phase B input)
 

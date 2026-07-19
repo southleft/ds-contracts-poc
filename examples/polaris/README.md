@@ -15,7 +15,7 @@ them. Everything here regenerates from the committed inputs with the commands be
 | path | what it is |
 |---|---|
 | `SHOWCASE.md` | the verdict, the numbers, the named gaps, how to reproduce |
-| `contracts/*.contract.json` | 12 committed contracts (v0.1.0, draft) — extracted API + promoted styling |
+| `contracts/*.contract.json` | 12 committed contracts (v0.2.0 — computed-floor promoted, `scripts/promote-floor.ts`) + `*.extension.json` overflow blocks |
 | `tokens/polaris-light.dtcg.json` | Polaris's default-theme tokens, mechanically wrapped to DTCG (453, values verbatim) |
 | `extraction/PROMOTION.md` | the complete promotion ledger — every carried binding cites its CSS rule, every refusal is named |
 | `extraction/VERSION-PARITY.md` | proof that `@shopify/polaris@13.9.5` renders the pinned SHA's styling |

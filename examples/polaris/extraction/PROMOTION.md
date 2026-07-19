@@ -1,5 +1,23 @@
 # Polaris showcase — promotion ledger
 
+> **SUPERSEDED for the 12 floor-promoted components (v0.2.0, computed-floor round 2).**
+> This ledger records the STATIC promotion (source-CSS inversion under the reviewed class
+> map) that produced the v0.1.0 contracts. Those contracts have since been rebuilt from
+> complete browser truth by the production computed floor (`extract/computed/`) and
+> re-promoted at v0.2.0 by `scripts/promote-floor.ts`. The authoritative per-component
+> ledgers are now the GENERATED delta ledgers — every bound/minted/declared/code-only
+> fact and every refusal, with the fidelity-gate numbers:
+>
+> - `extract/computed/out/<component>/LEDGER.md` (button, tag, badge, banner, checkbox,
+>   radiobutton, avatar, spinner, progressbar, thumbnail, text, textfield)
+> - contradiction resolutions: `extract/computed/out/<component>/decisions.md`
+> - vocabulary overflow: `examples/polaris/contracts/<kebab>.extension.json`
+>
+> Text and TextField are promoted with the rest (owner ruling): the contracts keep
+> their FULL prop spaces; their canvas projections (the drawn Figma subset) are the
+> named curation in `generate.ts` CANVAS_PROJECTIONS, quoted in
+> `figma/COMPILE-RECEIPT.md`.
+
 Extraction: Shopify/polaris @ `2b1ea88625e0613853ca8577c9acd1980a90f382` (polaris-react 13.10.1, MIT), 2026-07-18.
 
 Every committed contract in `examples/polaris/contracts/` is the mechanical extraction proposal

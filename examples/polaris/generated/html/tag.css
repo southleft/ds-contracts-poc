@@ -1,4 +1,4 @@
-/* Tag — from polaris.tag v0.1.0 (core/emit-html.ts) */
+/* Tag — from polaris.tag v0.2.0 (core/emit-html.ts) */
 
 .tag, .tag *, .tag *::before, .tag *::after {
   box-sizing: border-box;
@@ -11,13 +11,80 @@
   background-color: var(--p-color-bg-fill-tertiary);
   color: var(--p-color-text);
   border-radius: var(--p-border-radius-200);
+  border-bottom-left-radius: var(--imported-shared-size-8);
+  border-bottom-right-radius: var(--imported-shared-size-8);
+  border-top-right-radius: var(--imported-shared-size-8);
+  bottom: var(--imported-shared-size-0);
+  left: var(--imported-shared-size-0);
+  padding-left: var(--imported-tag-root-padding-left);
+  padding-right: var(--imported-tag-root-padding-right);
+  right: var(--imported-shared-size-0);
+  top: var(--imported-shared-size-0);
+  max-width: 100%;
+  position: relative;
+}
+
+.tag:disabled {
+  background-color: var(--imported-tag-root-background-color-state-disabled);
+}
+
+.tag:disabled {
+  border-bottom-color: var(--imported-shared-color-b5b5b5);
+}
+
+.tag:disabled {
+  border-left-color: var(--imported-shared-color-b5b5b5);
+}
+
+.tag:disabled {
+  border-right-color: var(--imported-shared-color-b5b5b5);
+}
+
+.tag:disabled {
+  border-top-color: var(--imported-shared-color-b5b5b5);
+}
+
+.tag:disabled {
+  caret-color: var(--imported-shared-color-b5b5b5);
+}
+
+.tag:disabled {
+  color: var(--imported-shared-color-b5b5b5);
+}
+
+.tag:disabled {
+  column-rule-color: var(--imported-shared-color-b5b5b5);
+}
+
+.tag:disabled {
+  outline-color: var(--imported-shared-color-b5b5b5);
+}
+
+.tag:disabled {
+  text-decoration-color: var(--imported-shared-color-b5b5b5);
+}
+
+.tag:disabled {
+  text-emphasis-color: var(--imported-shared-color-b5b5b5);
+}
+
+.tag:disabled {
+  transition-property: none;
 }
 
 .tag__label {
   font-size: var(--p-text-body-sm-font-size);
   font-weight: var(--p-text-body-sm-font-weight);
-  line-height: var(--p-text-body-sm-font-line-height);
+  line-height: var(--p-font-line-height-500);
   letter-spacing: var(--p-text-body-sm-font-letter-spacing);
+  min-height: var(--imported-shared-size-0);
+  min-width: var(--imported-shared-size-0);
+  display: inline;
+  text-wrap-mode: nowrap;
+}
+
+.tag:disabled .tag__label {
+  color: var(--imported-shared-color-b5b5b5);
 }
 
 /* showcase chrome */

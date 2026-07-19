@@ -1,13 +1,25 @@
 /* GENERATED FILE — DO NOT EDIT.
- * Source of truth: contracts/radio-button.contract.json (polaris.radio-button v0.1.0)
+ * Source of truth: contracts/radio-button.contract.json (polaris.radio-button v0.2.0)
  * Regenerate with: npm run generate
  */
 
 .root {
-  display: inline-flex;
+  display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   border: 0;
+  padding-bottom: var(--imported-radio-button-root-padding-bottom);
+  padding-top: var(--imported-radio-button-root-padding-top);
+  cursor: pointer;
+}
+
+.root:focus-visible {
+  outline-style: solid;
+  outline-offset: 2px;
+}
+
+.root:disabled {
+  cursor: default;
 }
 
 .input {
@@ -19,6 +31,32 @@
   padding: 0;
   opacity: 0;
   cursor: pointer;
+  bottom: var(--imported-radio-button-input-bottom);
+  color: var(--imported-radio-button-input-color);
+  font-size: var(--imported-radio-button-input-font-size);
+  font-weight: var(--imported-radio-button-input-font-weight);
+  left: var(--imported-shared-size-0);
+  min-height: var(--imported-shared-size-0);
+  min-width: var(--imported-shared-size-0);
+  outline-color: var(--imported-radio-button-input-outline-color);
+  right: var(--imported-radio-button-input-right);
+  top: var(--imported-shared-size-0);
+  appearance: auto;
+  cursor: default;
+  font-family: Arial;
+  font-feature-settings: normal;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  text-rendering: auto;
+  text-wrap-mode: nowrap;
+}
+
+.root:focus-visible .input {
+  outline-style: auto;
+}
+
+.root:disabled .input {
+  color: var(--imported-radio-button-input-color-state-disabled);
 }
 
 .backdrop {
@@ -29,5 +67,53 @@
   border-radius: var(--p-border-radius-full);
   border-width: var(--p-border-width-0165);
   border-color: var(--p-color-input-border);
+  border-bottom-left-radius: var(--imported-shared-size-9999);
+  border-bottom-right-radius: var(--imported-shared-size-9999);
+  border-left-color: var(--imported-shared-color-8a8a8a);
+  border-left-width: var(--imported-shared-size-1);
+  border-right-color: var(--imported-shared-color-8a8a8a);
+  border-right-width: var(--imported-shared-size-1);
+  border-top-color: var(--imported-shared-color-8a8a8a);
+  border-top-right-radius: var(--imported-shared-size-9999);
+  border-top-width: var(--imported-shared-size-1);
+  bottom: var(--imported-shared-size-0);
+  left: var(--imported-shared-size-0);
+  min-height: var(--imported-shared-size-0);
+  min-width: var(--imported-shared-size-0);
+  right: var(--imported-shared-size-0);
+  top: var(--imported-shared-size-0);
   border-style: solid;
+  border-bottom-style: solid;
+  border-left-style: solid;
+  border-right-style: solid;
+  border-top-style: solid;
+  cursor: pointer;
+  position: relative;
+  transition-duration: 0.1s;
+  transition-property: border-color;
+  transition-timing-function: cubic-bezier(0.19, 0.91, 0.38, 1);
+}
+
+.root:disabled .backdrop {
+  border-bottom-style: none;
+  border-left-style: none;
+  border-right-style: none;
+  border-top-style: none;
+  cursor: default;
+}
+
+.root:focus-visible .backdrop {
+  outline-style: solid;
+}
+
+.root:active:not(:disabled) .backdrop {
+  background-color: var(--imported-radio-button-backdrop-background-color-state-active);
+}
+
+.root:disabled .backdrop {
+  background-color: var(--imported-radio-button-backdrop-background-color-state-disabled);
+}
+
+.root:hover:not(:disabled) .backdrop {
+  background-color: var(--imported-radio-button-backdrop-background-color-state-hover);
 }

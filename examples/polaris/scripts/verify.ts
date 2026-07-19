@@ -73,8 +73,18 @@ const contracts = new Map<string, Contract>(
       return [c.id, c] as const;
     }),
 );
-const tokensCss = readFileSync(path.join(EXAMPLE, 'generated', 'html', 'polaris-tokens.css'), 'utf8');
-const inventory = tokenInventoryFromJson([readJson(path.join(EXAMPLE, 'tokens', 'polaris-light.dtcg.json'))]);
+// Round 2 (computed-floor promotion): v0.2.0 contracts reference minted
+// `imported.*` tokens — the minted stylesheet + inventory layer ride along
+// when present (absent pre-promotion → byte-identical behavior).
+const mintedCssPath = path.join(EXAMPLE, 'generated', 'html', 'polaris-minted-tokens.css');
+const mintedTreePath = path.join(EXAMPLE, 'tokens', 'polaris-minted.dtcg.json');
+const tokensCss =
+  readFileSync(path.join(EXAMPLE, 'generated', 'html', 'polaris-tokens.css'), 'utf8') +
+  (existsSync(mintedCssPath) ? `\n${readFileSync(mintedCssPath, 'utf8')}` : '');
+const inventory = tokenInventoryFromJson([
+  readJson(path.join(EXAMPLE, 'tokens', 'polaris-light.dtcg.json')),
+  ...(existsSync(mintedTreePath) ? [readJson(mintedTreePath)] : []),
+]);
 const icons = new Map<string, string>(
   readdirSync(path.join(EXAMPLE, 'assets', 'icons'))
     .filter((f) => f.endsWith('.svg'))

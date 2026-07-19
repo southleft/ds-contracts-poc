@@ -5,18 +5,10 @@
     {
       "id": "polaris.button",
       "combos": 6,
-      "rowsCompared": 77,
-      "rowsMatched": 74,
+      "rowsCompared": 95,
+      "rowsMatched": 93,
       "namedNotCarried": 316,
       "mismatches": [
-        {
-          "combo": "variant-primary",
-          "part": "label",
-          "channel": "font-weight",
-          "ours": "font-weight: 550",
-          "theirs": "font-weight: 650",
-          "cause": "Polaris computes the primary label's fontWeight as `mdUp ? 'medium' : 'semibold'` (Button.tsx 172-177) — a media-dependent runtime branch, refused by name in PROMOTION.md; the carried base 'medium' renders on our side while sub-md Polaris renders semibold"
-        },
         {
           "combo": "variant-plain",
           "part": "label",
@@ -38,65 +30,56 @@
     {
       "id": "polaris.badge",
       "combos": 1,
-      "rowsCompared": 10,
-      "rowsMatched": 10,
+      "rowsCompared": 11,
+      "rowsMatched": 11,
       "namedNotCarried": 38,
       "mismatches": []
     },
     {
       "id": "polaris.banner",
       "combos": 4,
-      "rowsCompared": 40,
-      "rowsMatched": 40,
+      "rowsCompared": 44,
+      "rowsMatched": 44,
       "namedNotCarried": 27,
       "mismatches": []
     },
     {
       "id": "polaris.checkbox",
       "combos": 1,
-      "rowsCompared": 2,
-      "rowsMatched": 1,
+      "rowsCompared": 6,
+      "rowsMatched": 6,
       "namedNotCarried": 502,
-      "mismatches": [
-        {
-          "combo": "default",
-          "part": "backdrop",
-          "channel": "border-width",
-          "ours": "border-bottom-width: 1px",
-          "theirs": "border-bottom-width: 0px",
-          "cause": "in Polaris's real composition the Choice wrapper's `.ChoiceLabel .Backdrop` rule sets border-width: 0 and repaints the outline as an inset box-shadow — a foreign-class descendant rule (named unmatched in PROMOTION.md); the carried binding renders the component's own standalone `.Backdrop` base rule"
-        }
-      ]
+      "mismatches": []
     },
     {
       "id": "polaris.radio-button",
       "combos": 1,
-      "rowsCompared": 4,
-      "rowsMatched": 4,
+      "rowsCompared": 6,
+      "rowsMatched": 6,
       "namedNotCarried": 339,
       "mismatches": []
     },
     {
       "id": "polaris.text-field",
       "combos": 1,
-      "rowsCompared": 11,
-      "rowsMatched": 11,
+      "rowsCompared": 13,
+      "rowsMatched": 13,
       "namedNotCarried": 905,
       "mismatches": []
     },
     {
       "id": "polaris.tag",
       "combos": 1,
-      "rowsCompared": 7,
-      "rowsMatched": 7,
+      "rowsCompared": 9,
+      "rowsMatched": 9,
       "namedNotCarried": 43,
       "mismatches": []
     },
     {
       "id": "polaris.avatar",
       "combos": 3,
-      "rowsCompared": 18,
-      "rowsMatched": 12,
+      "rowsCompared": 27,
+      "rowsMatched": 15,
       "namedNotCarried": 46,
       "mismatches": [
         {
@@ -116,6 +99,22 @@
           "cause": "same name-hash palette selection as background — the cited default (styleOne) text color is carried; the hashed one is not derivable from a prop"
         },
         {
+          "combo": "default",
+          "part": "initials",
+          "channel": "font-size",
+          "ours": "font-size: 13px",
+          "theirs": "font-size: 16px",
+          "cause": "content-conditioned typography measured by the computed floor (v0.2.0): the floor's default mount renders Avatar WITHOUT initials, so the initials wrapper inherits the provider's body font-size — the resolved binding {p.font-size-325} = 13px (decisions ledger, extract/computed/out/avatar/decisions.md); with initials provided (this combo's 'TP'), Polaris renders the svg text at font-size-400 (16px) — a branch conditioned on a text prop's VALUE, the same no-contract-channel class as the name-hash palette"
+        },
+        {
+          "combo": "default",
+          "part": "initials",
+          "channel": "color",
+          "ours": "color: rgb(253, 239, 253)",
+          "theirs": "color: rgb(255, 246, 248)",
+          "cause": "same name-hash palette selection as the root rows — the initials text color follows the hashed styleFive palette; the carried styleOne default renders on our side"
+        },
+        {
           "combo": "size-xs",
           "part": "root",
           "channel": "background",
@@ -132,6 +131,22 @@
           "cause": "same name-hash palette selection as background — the cited default (styleOne) text color is carried; the hashed one is not derivable from a prop"
         },
         {
+          "combo": "size-xs",
+          "part": "initials",
+          "channel": "font-size",
+          "ours": "font-size: 13px",
+          "theirs": "font-size: 16px",
+          "cause": "content-conditioned typography measured by the computed floor (v0.2.0): the floor's default mount renders Avatar WITHOUT initials, so the initials wrapper inherits the provider's body font-size — the resolved binding {p.font-size-325} = 13px (decisions ledger, extract/computed/out/avatar/decisions.md); with initials provided (this combo's 'TP'), Polaris renders the svg text at font-size-400 (16px) — a branch conditioned on a text prop's VALUE, the same no-contract-channel class as the name-hash palette"
+        },
+        {
+          "combo": "size-xs",
+          "part": "initials",
+          "channel": "color",
+          "ours": "color: rgb(253, 239, 253)",
+          "theirs": "color: rgb(255, 246, 248)",
+          "cause": "same name-hash palette selection as the root rows — the initials text color follows the hashed styleFive palette; the carried styleOne default renders on our side"
+        },
+        {
           "combo": "size-xl",
           "part": "root",
           "channel": "background",
@@ -146,6 +161,22 @@
           "ours": "color: rgb(253, 239, 253)",
           "theirs": "color: rgb(255, 246, 248)",
           "cause": "same name-hash palette selection as background — the cited default (styleOne) text color is carried; the hashed one is not derivable from a prop"
+        },
+        {
+          "combo": "size-xl",
+          "part": "initials",
+          "channel": "font-size",
+          "ours": "font-size: 13px",
+          "theirs": "font-size: 16px",
+          "cause": "content-conditioned typography measured by the computed floor (v0.2.0): the floor's default mount renders Avatar WITHOUT initials, so the initials wrapper inherits the provider's body font-size — the resolved binding {p.font-size-325} = 13px (decisions ledger, extract/computed/out/avatar/decisions.md); with initials provided (this combo's 'TP'), Polaris renders the svg text at font-size-400 (16px) — a branch conditioned on a text prop's VALUE, the same no-contract-channel class as the name-hash palette"
+        },
+        {
+          "combo": "size-xl",
+          "part": "initials",
+          "channel": "color",
+          "ours": "color: rgb(253, 239, 253)",
+          "theirs": "color: rgb(255, 246, 248)",
+          "cause": "same name-hash palette selection as the root rows — the initials text color follows the hashed styleFive palette; the carried styleOne default renders on our side"
         }
       ]
     },
@@ -160,8 +191,8 @@
     {
       "id": "polaris.progress-bar",
       "combos": 6,
-      "rowsCompared": 24,
-      "rowsMatched": 24,
+      "rowsCompared": 36,
+      "rowsMatched": 36,
       "namedNotCarried": 29,
       "mismatches": []
     },
@@ -210,6 +241,48 @@
       },
       "theirs": {
         "column-gap": "2px"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.button",
+      "combo": "default",
+      "part": "root",
+      "channel": "font-size",
+      "ref": "{imported.button.root.font-size}",
+      "ours": {
+        "font-size": "13px"
+      },
+      "theirs": {
+        "font-size": "13px"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.button",
+      "combo": "default",
+      "part": "root",
+      "channel": "font-weight",
+      "ref": "{imported.button.root.font-weight}",
+      "ours": {
+        "font-weight": "450"
+      },
+      "theirs": {
+        "font-weight": "450"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.button",
+      "combo": "default",
+      "part": "root",
+      "channel": "line-height",
+      "ref": "{imported.button.root.line-height}",
+      "ours": {
+        "line-height": "20px"
+      },
+      "theirs": {
+        "line-height": "20px"
       },
       "match": true
     },
@@ -405,6 +478,48 @@
       "component": "polaris.button",
       "combo": "variant-primary",
       "part": "root",
+      "channel": "font-size",
+      "ref": "{imported.button.root.font-size}",
+      "ours": {
+        "font-size": "13px"
+      },
+      "theirs": {
+        "font-size": "13px"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.button",
+      "combo": "variant-primary",
+      "part": "root",
+      "channel": "font-weight",
+      "ref": "{imported.button.root.font-weight}",
+      "ours": {
+        "font-weight": "450"
+      },
+      "theirs": {
+        "font-weight": "450"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.button",
+      "combo": "variant-primary",
+      "part": "root",
+      "channel": "line-height",
+      "ref": "{imported.button.root.line-height}",
+      "ours": {
+        "line-height": "20px"
+      },
+      "theirs": {
+        "line-height": "20px"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.button",
+      "combo": "variant-primary",
+      "part": "root",
       "channel": "background",
       "ref": "literal transparent",
       "ours": {
@@ -536,15 +651,14 @@
       "combo": "variant-primary",
       "part": "label",
       "channel": "font-weight",
-      "ref": "{p.font-weight-medium}",
+      "ref": "{p.font-weight-semibold}",
       "ours": {
-        "font-weight": "550"
+        "font-weight": "650"
       },
       "theirs": {
         "font-weight": "650"
       },
-      "match": false,
-      "cause": "Polaris computes the primary label's fontWeight as `mdUp ? 'medium' : 'semibold'` (Button.tsx 172-177) — a media-dependent runtime branch, refused by name in PROMOTION.md; the carried base 'medium' renders on our side while sub-md Polaris renders semibold"
+      "match": true
     },
     {
       "component": "polaris.button",
@@ -601,6 +715,48 @@
       },
       "theirs": {
         "column-gap": "2px"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.button",
+      "combo": "variant-tertiary",
+      "part": "root",
+      "channel": "font-size",
+      "ref": "{imported.button.root.font-size}",
+      "ours": {
+        "font-size": "13px"
+      },
+      "theirs": {
+        "font-size": "13px"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.button",
+      "combo": "variant-tertiary",
+      "part": "root",
+      "channel": "font-weight",
+      "ref": "{imported.button.root.font-weight}",
+      "ours": {
+        "font-weight": "450"
+      },
+      "theirs": {
+        "font-weight": "450"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.button",
+      "combo": "variant-tertiary",
+      "part": "root",
+      "channel": "line-height",
+      "ref": "{imported.button.root.line-height}",
+      "ours": {
+        "line-height": "20px"
+      },
+      "theirs": {
+        "line-height": "20px"
       },
       "match": true
     },
@@ -782,6 +938,48 @@
       "component": "polaris.button",
       "combo": "variant-plain",
       "part": "root",
+      "channel": "font-size",
+      "ref": "{imported.button.root.font-size}",
+      "ours": {
+        "font-size": "13px"
+      },
+      "theirs": {
+        "font-size": "13px"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.button",
+      "combo": "variant-plain",
+      "part": "root",
+      "channel": "font-weight",
+      "ref": "{imported.button.root.font-weight}",
+      "ours": {
+        "font-weight": "450"
+      },
+      "theirs": {
+        "font-weight": "450"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.button",
+      "combo": "variant-plain",
+      "part": "root",
+      "channel": "line-height",
+      "ref": "{imported.button.root.line-height}",
+      "ours": {
+        "line-height": "20px"
+      },
+      "theirs": {
+        "line-height": "20px"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.button",
+      "combo": "variant-plain",
+      "part": "root",
       "channel": "background",
       "ref": "literal transparent",
       "ours": {
@@ -951,6 +1149,48 @@
       },
       "theirs": {
         "column-gap": "2px"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.button",
+      "combo": "size-micro",
+      "part": "root",
+      "channel": "font-size",
+      "ref": "{imported.button.root.font-size}",
+      "ours": {
+        "font-size": "13px"
+      },
+      "theirs": {
+        "font-size": "13px"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.button",
+      "combo": "size-micro",
+      "part": "root",
+      "channel": "font-weight",
+      "ref": "{imported.button.root.font-weight}",
+      "ours": {
+        "font-weight": "450"
+      },
+      "theirs": {
+        "font-weight": "450"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.button",
+      "combo": "size-micro",
+      "part": "root",
+      "channel": "line-height",
+      "ref": "{imported.button.root.line-height}",
+      "ours": {
+        "line-height": "20px"
+      },
+      "theirs": {
+        "line-height": "20px"
       },
       "match": true
     },
@@ -1139,6 +1379,48 @@
       },
       "theirs": {
         "column-gap": "2px"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.button",
+      "combo": "size-large",
+      "part": "root",
+      "channel": "font-size",
+      "ref": "{imported.button.root.font-size}",
+      "ours": {
+        "font-size": "13px"
+      },
+      "theirs": {
+        "font-size": "13px"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.button",
+      "combo": "size-large",
+      "part": "root",
+      "channel": "font-weight",
+      "ref": "{imported.button.root.font-weight}",
+      "ours": {
+        "font-weight": "450"
+      },
+      "theirs": {
+        "font-weight": "450"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.button",
+      "combo": "size-large",
+      "part": "root",
+      "channel": "line-height",
+      "ref": "{imported.button.root.line-height}",
+      "ours": {
+        "line-height": "20px"
+      },
+      "theirs": {
+        "line-height": "20px"
       },
       "match": true
     },
@@ -1447,6 +1729,20 @@
       "match": true
     },
     {
+      "component": "polaris.badge",
+      "combo": "default",
+      "part": "label",
+      "channel": "color",
+      "ref": "{imported.badge.label.color}",
+      "ours": {
+        "color": "rgb(97, 97, 97)"
+      },
+      "theirs": {
+        "color": "rgb(97, 97, 97)"
+      },
+      "match": true
+    },
+    {
       "component": "polaris.banner",
       "combo": "tone-info",
       "part": "root",
@@ -1457,6 +1753,20 @@
       },
       "theirs": {
         "background-color": "rgb(145, 208, 255)"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.banner",
+      "combo": "tone-info",
+      "part": "root",
+      "channel": "box-shadow",
+      "ref": "{imported.banner.root.box-shadow}",
+      "ours": {
+        "box-shadow": "rgba(26, 26, 26, 0.07) 0px 3px 1px -1px"
+      },
+      "theirs": {
+        "box-shadow": "rgba(26, 26, 26, 0.07) 0px 3px 1px -1px"
       },
       "match": true
     },
@@ -1604,6 +1914,20 @@
       "component": "polaris.banner",
       "combo": "tone-success",
       "part": "root",
+      "channel": "box-shadow",
+      "ref": "{imported.banner.root.box-shadow}",
+      "ours": {
+        "box-shadow": "rgba(26, 26, 26, 0.07) 0px 3px 1px -1px"
+      },
+      "theirs": {
+        "box-shadow": "rgba(26, 26, 26, 0.07) 0px 3px 1px -1px"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.banner",
+      "combo": "tone-success",
+      "part": "root",
       "channel": "color",
       "ref": "{p.color-text-success-on-bg-fill}",
       "ours": {
@@ -1737,6 +2061,20 @@
       },
       "theirs": {
         "background-color": "rgb(255, 184, 0)"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.banner",
+      "combo": "tone-warning",
+      "part": "root",
+      "channel": "box-shadow",
+      "ref": "{imported.banner.root.box-shadow}",
+      "ours": {
+        "box-shadow": "rgba(26, 26, 26, 0.07) 0px 3px 1px -1px"
+      },
+      "theirs": {
+        "box-shadow": "rgba(26, 26, 26, 0.07) 0px 3px 1px -1px"
       },
       "match": true
     },
@@ -1884,6 +2222,20 @@
       "component": "polaris.banner",
       "combo": "tone-critical",
       "part": "root",
+      "channel": "box-shadow",
+      "ref": "{imported.banner.root.box-shadow}",
+      "ours": {
+        "box-shadow": "rgba(26, 26, 26, 0.07) 0px 3px 1px -1px"
+      },
+      "theirs": {
+        "box-shadow": "rgba(26, 26, 26, 0.07) 0px 3px 1px -1px"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.banner",
+      "combo": "tone-critical",
+      "part": "root",
       "channel": "color",
       "ref": "{p.color-text-critical-on-bg-fill}",
       "ours": {
@@ -2011,15 +2363,14 @@
       "combo": "default",
       "part": "backdrop",
       "channel": "border-width",
-      "ref": "{p.border-width-0165}",
+      "ref": "{p.border-width-0}",
       "ours": {
-        "border-bottom-width": "1px"
+        "border-bottom-width": "0px"
       },
       "theirs": {
         "border-bottom-width": "0px"
       },
-      "match": false,
-      "cause": "in Polaris's real composition the Choice wrapper's `.ChoiceLabel .Backdrop` rule sets border-width: 0 and repaints the outline as an inset box-shadow — a foreign-class descendant rule (named unmatched in PROMOTION.md); the carried binding renders the component's own standalone `.Backdrop` base rule"
+      "match": true
     },
     {
       "component": "polaris.checkbox",
@@ -2032,6 +2383,62 @@
       },
       "theirs": {
         "border-bottom-color": "rgb(138, 138, 138)"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.checkbox",
+      "combo": "default",
+      "part": "backdrop",
+      "channel": "background-color",
+      "ref": "{imported.shared.color-ffffff}",
+      "ours": {
+        "background-color": "rgb(255, 255, 255)"
+      },
+      "theirs": {
+        "background-color": "rgb(255, 255, 255)"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.checkbox",
+      "combo": "default",
+      "part": "backdrop",
+      "channel": "box-shadow",
+      "ref": "{imported.checkbox.backdrop.box-shadow}",
+      "ours": {
+        "box-shadow": "rgb(138, 138, 138) 0px 0px 0px 0.66px inset"
+      },
+      "theirs": {
+        "box-shadow": "rgb(138, 138, 138) 0px 0px 0px 0.66px inset"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.checkbox",
+      "combo": "default",
+      "part": "backdrop",
+      "channel": "min-height",
+      "ref": "{imported.shared.size-0}",
+      "ours": {
+        "min-height": "0px"
+      },
+      "theirs": {
+        "min-height": "0px"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.checkbox",
+      "combo": "default",
+      "part": "backdrop",
+      "channel": "min-width",
+      "ref": "{imported.shared.size-0}",
+      "ours": {
+        "min-width": "0px"
+      },
+      "theirs": {
+        "min-width": "0px"
       },
       "match": true
     },
@@ -2090,6 +2497,34 @@
       },
       "theirs": {
         "border-bottom-color": "rgb(138, 138, 138)"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.radio-button",
+      "combo": "default",
+      "part": "backdrop",
+      "channel": "min-height",
+      "ref": "{imported.shared.size-0}",
+      "ours": {
+        "min-height": "0px"
+      },
+      "theirs": {
+        "min-height": "0px"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.radio-button",
+      "combo": "default",
+      "part": "backdrop",
+      "channel": "min-width",
+      "ref": "{imported.shared.size-0}",
+      "ours": {
+        "min-width": "0px"
+      },
+      "theirs": {
+        "min-width": "0px"
       },
       "match": true
     },
@@ -2198,6 +2633,20 @@
     {
       "component": "polaris.text-field",
       "combo": "default",
+      "part": "input",
+      "channel": "min-width",
+      "ref": "{imported.shared.size-0}",
+      "ours": {
+        "min-width": "0px"
+      },
+      "theirs": {
+        "min-width": "0px"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.text-field",
+      "combo": "default",
       "part": "backdrop",
       "channel": "background-color",
       "ref": "{p.color-input-bg-surface}",
@@ -2250,6 +2699,20 @@
       },
       "theirs": {
         "border-bottom-color": "rgb(138, 138, 138)"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.text-field",
+      "combo": "default",
+      "part": "backdrop",
+      "channel": "min-width",
+      "ref": "{imported.shared.size-0}",
+      "ours": {
+        "min-width": "0px"
+      },
+      "theirs": {
+        "min-width": "0px"
       },
       "match": true
     },
@@ -2330,12 +2793,12 @@
       "combo": "default",
       "part": "label",
       "channel": "line-height",
-      "ref": "{p.text-body-sm-font-line-height}",
+      "ref": "{p.font-line-height-500}",
       "ours": {
-        "line-height": "16px"
+        "line-height": "20px"
       },
       "theirs": {
-        "line-height": "16px"
+        "line-height": "20px"
       },
       "match": true
     },
@@ -2350,6 +2813,34 @@
       },
       "theirs": {
         "letter-spacing": "normal"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.tag",
+      "combo": "default",
+      "part": "label",
+      "channel": "min-height",
+      "ref": "{imported.shared.size-0}",
+      "ours": {
+        "min-height": "0px"
+      },
+      "theirs": {
+        "min-height": "0px"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.tag",
+      "combo": "default",
+      "part": "label",
+      "channel": "min-width",
+      "ref": "{imported.shared.size-0}",
+      "ours": {
+        "min-width": "0px"
+      },
+      "theirs": {
+        "min-width": "0px"
       },
       "match": true
     },
@@ -2416,14 +2907,15 @@
       "combo": "default",
       "part": "initials",
       "channel": "font-size",
-      "ref": "{p.font-size-400}",
+      "ref": "{p.font-size-325}",
       "ours": {
-        "font-size": "16px"
+        "font-size": "13px"
       },
       "theirs": {
         "font-size": "16px"
       },
-      "match": true
+      "match": false,
+      "cause": "content-conditioned typography measured by the computed floor (v0.2.0): the floor's default mount renders Avatar WITHOUT initials, so the initials wrapper inherits the provider's body font-size — the resolved binding {p.font-size-325} = 13px (decisions ledger, extract/computed/out/avatar/decisions.md); with initials provided (this combo's 'TP'), Polaris renders the svg text at font-size-400 (16px) — a branch conditioned on a text prop's VALUE, the same no-contract-channel class as the name-hash palette"
     },
     {
       "component": "polaris.avatar",
@@ -2436,6 +2928,49 @@
       },
       "theirs": {
         "font-weight": "450"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.avatar",
+      "combo": "default",
+      "part": "initials",
+      "channel": "color",
+      "ref": "{imported.shared.color-fdeffd}",
+      "ours": {
+        "color": "rgb(253, 239, 253)"
+      },
+      "theirs": {
+        "color": "rgb(255, 246, 248)"
+      },
+      "match": false,
+      "cause": "same name-hash palette selection as the root rows — the initials text color follows the hashed styleFive palette; the carried styleOne default renders on our side"
+    },
+    {
+      "component": "polaris.avatar",
+      "combo": "default",
+      "part": "initials",
+      "channel": "min-height",
+      "ref": "{imported.shared.size-0}",
+      "ours": {
+        "min-height": "0px"
+      },
+      "theirs": {
+        "min-height": "0px"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.avatar",
+      "combo": "default",
+      "part": "initials",
+      "channel": "min-width",
+      "ref": "{imported.shared.size-0}",
+      "ours": {
+        "min-width": "0px"
+      },
+      "theirs": {
+        "min-width": "0px"
       },
       "match": true
     },
@@ -2502,14 +3037,15 @@
       "combo": "size-xs",
       "part": "initials",
       "channel": "font-size",
-      "ref": "{p.font-size-400}",
+      "ref": "{p.font-size-325}",
       "ours": {
-        "font-size": "16px"
+        "font-size": "13px"
       },
       "theirs": {
         "font-size": "16px"
       },
-      "match": true
+      "match": false,
+      "cause": "content-conditioned typography measured by the computed floor (v0.2.0): the floor's default mount renders Avatar WITHOUT initials, so the initials wrapper inherits the provider's body font-size — the resolved binding {p.font-size-325} = 13px (decisions ledger, extract/computed/out/avatar/decisions.md); with initials provided (this combo's 'TP'), Polaris renders the svg text at font-size-400 (16px) — a branch conditioned on a text prop's VALUE, the same no-contract-channel class as the name-hash palette"
     },
     {
       "component": "polaris.avatar",
@@ -2522,6 +3058,49 @@
       },
       "theirs": {
         "font-weight": "450"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.avatar",
+      "combo": "size-xs",
+      "part": "initials",
+      "channel": "color",
+      "ref": "{imported.shared.color-fdeffd}",
+      "ours": {
+        "color": "rgb(253, 239, 253)"
+      },
+      "theirs": {
+        "color": "rgb(255, 246, 248)"
+      },
+      "match": false,
+      "cause": "same name-hash palette selection as the root rows — the initials text color follows the hashed styleFive palette; the carried styleOne default renders on our side"
+    },
+    {
+      "component": "polaris.avatar",
+      "combo": "size-xs",
+      "part": "initials",
+      "channel": "min-height",
+      "ref": "{imported.shared.size-0}",
+      "ours": {
+        "min-height": "0px"
+      },
+      "theirs": {
+        "min-height": "0px"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.avatar",
+      "combo": "size-xs",
+      "part": "initials",
+      "channel": "min-width",
+      "ref": "{imported.shared.size-0}",
+      "ours": {
+        "min-width": "0px"
+      },
+      "theirs": {
+        "min-width": "0px"
       },
       "match": true
     },
@@ -2588,14 +3167,15 @@
       "combo": "size-xl",
       "part": "initials",
       "channel": "font-size",
-      "ref": "{p.font-size-400}",
+      "ref": "{p.font-size-325}",
       "ours": {
-        "font-size": "16px"
+        "font-size": "13px"
       },
       "theirs": {
         "font-size": "16px"
       },
-      "match": true
+      "match": false,
+      "cause": "content-conditioned typography measured by the computed floor (v0.2.0): the floor's default mount renders Avatar WITHOUT initials, so the initials wrapper inherits the provider's body font-size — the resolved binding {p.font-size-325} = 13px (decisions ledger, extract/computed/out/avatar/decisions.md); with initials provided (this combo's 'TP'), Polaris renders the svg text at font-size-400 (16px) — a branch conditioned on a text prop's VALUE, the same no-contract-channel class as the name-hash palette"
     },
     {
       "component": "polaris.avatar",
@@ -2608,6 +3188,49 @@
       },
       "theirs": {
         "font-weight": "450"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.avatar",
+      "combo": "size-xl",
+      "part": "initials",
+      "channel": "color",
+      "ref": "{imported.shared.color-fdeffd}",
+      "ours": {
+        "color": "rgb(253, 239, 253)"
+      },
+      "theirs": {
+        "color": "rgb(255, 246, 248)"
+      },
+      "match": false,
+      "cause": "same name-hash palette selection as the root rows — the initials text color follows the hashed styleFive palette; the carried styleOne default renders on our side"
+    },
+    {
+      "component": "polaris.avatar",
+      "combo": "size-xl",
+      "part": "initials",
+      "channel": "min-height",
+      "ref": "{imported.shared.size-0}",
+      "ours": {
+        "min-height": "0px"
+      },
+      "theirs": {
+        "min-height": "0px"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.avatar",
+      "combo": "size-xl",
+      "part": "initials",
+      "channel": "min-width",
+      "ref": "{imported.shared.size-0}",
+      "ours": {
+        "min-width": "0px"
+      },
+      "theirs": {
+        "min-width": "0px"
       },
       "match": true
     },
@@ -2708,6 +3331,34 @@
       },
       "theirs": {
         "height": "16px"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.progress-bar",
+      "combo": "default",
+      "part": "indicator",
+      "channel": "min-height",
+      "ref": "{imported.shared.size-0}",
+      "ours": {
+        "min-height": "0px"
+      },
+      "theirs": {
+        "min-height": "0px"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.progress-bar",
+      "combo": "default",
+      "part": "indicator",
+      "channel": "min-width",
+      "ref": "{imported.shared.size-0}",
+      "ours": {
+        "min-width": "0px"
+      },
+      "theirs": {
+        "min-width": "0px"
       },
       "match": true
     },
@@ -2773,6 +3424,34 @@
       "component": "polaris.progress-bar",
       "combo": "tone-primary",
       "part": "indicator",
+      "channel": "min-height",
+      "ref": "{imported.shared.size-0}",
+      "ours": {
+        "min-height": "0px"
+      },
+      "theirs": {
+        "min-height": "0px"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.progress-bar",
+      "combo": "tone-primary",
+      "part": "indicator",
+      "channel": "min-width",
+      "ref": "{imported.shared.size-0}",
+      "ours": {
+        "min-width": "0px"
+      },
+      "theirs": {
+        "min-width": "0px"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.progress-bar",
+      "combo": "tone-primary",
+      "part": "indicator",
       "channel": "background-color",
       "ref": "{p.color-bg-fill-brand}",
       "ours": {
@@ -2824,6 +3503,34 @@
       },
       "theirs": {
         "height": "16px"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.progress-bar",
+      "combo": "tone-success",
+      "part": "indicator",
+      "channel": "min-height",
+      "ref": "{imported.shared.size-0}",
+      "ours": {
+        "min-height": "0px"
+      },
+      "theirs": {
+        "min-height": "0px"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.progress-bar",
+      "combo": "tone-success",
+      "part": "indicator",
+      "channel": "min-width",
+      "ref": "{imported.shared.size-0}",
+      "ours": {
+        "min-width": "0px"
+      },
+      "theirs": {
+        "min-width": "0px"
       },
       "match": true
     },
@@ -2889,6 +3596,34 @@
       "component": "polaris.progress-bar",
       "combo": "tone-critical",
       "part": "indicator",
+      "channel": "min-height",
+      "ref": "{imported.shared.size-0}",
+      "ours": {
+        "min-height": "0px"
+      },
+      "theirs": {
+        "min-height": "0px"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.progress-bar",
+      "combo": "tone-critical",
+      "part": "indicator",
+      "channel": "min-width",
+      "ref": "{imported.shared.size-0}",
+      "ours": {
+        "min-width": "0px"
+      },
+      "theirs": {
+        "min-width": "0px"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.progress-bar",
+      "combo": "tone-critical",
+      "part": "indicator",
       "channel": "background-color",
       "ref": "{p.color-bg-fill-critical}",
       "ours": {
@@ -2947,6 +3682,34 @@
       "component": "polaris.progress-bar",
       "combo": "size-small",
       "part": "indicator",
+      "channel": "min-height",
+      "ref": "{imported.shared.size-0}",
+      "ours": {
+        "min-height": "0px"
+      },
+      "theirs": {
+        "min-height": "0px"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.progress-bar",
+      "combo": "size-small",
+      "part": "indicator",
+      "channel": "min-width",
+      "ref": "{imported.shared.size-0}",
+      "ours": {
+        "min-width": "0px"
+      },
+      "theirs": {
+        "min-width": "0px"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.progress-bar",
+      "combo": "size-small",
+      "part": "indicator",
       "channel": "background-color",
       "ref": "{p.color-bg-fill-info}",
       "ours": {
@@ -2998,6 +3761,34 @@
       },
       "theirs": {
         "height": "32px"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.progress-bar",
+      "combo": "size-large",
+      "part": "indicator",
+      "channel": "min-height",
+      "ref": "{imported.shared.size-0}",
+      "ours": {
+        "min-height": "0px"
+      },
+      "theirs": {
+        "min-height": "0px"
+      },
+      "match": true
+    },
+    {
+      "component": "polaris.progress-bar",
+      "combo": "size-large",
+      "part": "indicator",
+      "channel": "min-width",
+      "ref": "{imported.shared.size-0}",
+      "ours": {
+        "min-width": "0px"
+      },
+      "theirs": {
+        "min-width": "0px"
       },
       "match": true
     },

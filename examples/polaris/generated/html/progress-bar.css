@@ -1,4 +1,4 @@
-/* ProgressBar — from polaris.progress-bar v0.1.0 (core/emit-html.ts) */
+/* ProgressBar — from polaris.progress-bar v0.2.0 (core/emit-html.ts) */
 
 .progress-bar, .progress-bar *, .progress-bar *::before, .progress-bar *::after {
   box-sizing: border-box;
@@ -10,6 +10,11 @@
   justify-content: center;
   border: 0;
   border-radius: var(--p-border-radius-100);
+  border-bottom-left-radius: var(--imported-shared-size-4);
+  border-bottom-right-radius: var(--imported-shared-size-4);
+  border-top-right-radius: var(--imported-shared-size-4);
+  overflow-x: hidden;
+  overflow-y: hidden;
 }
 
 .progress-bar--tone-highlight {
@@ -38,6 +43,14 @@
 
 .progress-bar--size-large {
   height: 32px;
+}
+
+.progress-bar__indicator {
+  min-height: var(--imported-shared-size-0);
+  min-width: var(--imported-shared-size-0);
+  transition-duration: 0.5s;
+  transition-property: transform;
+  transition-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1);
 }
 
 .progress-bar--tone-highlight .progress-bar__indicator {

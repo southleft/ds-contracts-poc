@@ -2,9 +2,9 @@
   "$schema": "../../../contracts/contract.schema.json",
   "id": "polaris.text-field",
   "name": "TextField",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "status": "draft",
-  "description": "PROPOSED contract extracted from examples/polaris/.polaris-clone/polaris-react/src/components/TextField/TextField.tsx (react-tsx + css-module adapters) — API surface AND anatomy (structure, token bindings, layout, states) read from source; design bindings await reconciliation and human review. PROMOTED showcase contract: API surface extracted mechanically from Shopify/polaris @ 2b1ea88625e0613853ca8577c9acd1980a90f382 (polaris-react 13.10.1, MIT © Shopify, extracted 2026-07-18); styling bindings promoted from the component's own module.css under the reviewed class map in examples/polaris/scripts/curation.ts — every carried binding and every named refusal is listed in examples/polaris/extraction/PROMOTION.md.",
+  "description": "PROPOSED contract extracted from examples/polaris/.polaris-clone/polaris-react/src/components/TextField/TextField.tsx (react-tsx + css-module adapters) — API surface AND anatomy (structure, token bindings, layout, states) read from source; design bindings await reconciliation and human review. PROMOTED showcase contract: API surface extracted mechanically from Shopify/polaris @ 2b1ea88625e0613853ca8577c9acd1980a90f382 (polaris-react 13.10.1, MIT © Shopify, extracted 2026-07-18); styling bindings promoted from the component's own module.css under the reviewed class map in examples/polaris/scripts/curation.ts — every carried binding and every named refusal is listed in examples/polaris/extraction/PROMOTION.md. COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @shopify/polaris@13.9.5 in headless Chromium 148.0.7778.96; overflow channels in the sibling extension file. FLOOR-PROMOTED v0.2.0 (extract/computed round 2): this contract is the computed-floor rebuild — complete browser truth captured from the real @shopify/polaris@13.9.5 npm package rendered in headless Chromium 148.0.7778.96 (every enumerated longhand per element incl. ::before/::after, full state sweep, double-run byte-identity), fused with the static semantic layer (BOUND bindings browser-confirmed, unlabeled channels MINTED as imported.* tokens in tokens/polaris-minted.dtcg.json, uniform registry channels DECLARED), contradictions resolved computed-wins per the decisions ledger (extract/computed/out/textfield/decisions.md, human-acked; source resolved.contract.json). Everything the vocabulary cannot carry is named in contracts/text-field.extension.json. Delta ledger: extract/computed/out/textfield/LEDGER.md (supersedes this component's section of extraction/PROMOTION.md).",
   "semantics": {
     "element": "div"
   },
@@ -588,7 +588,10 @@
     }
   ],
   "states": [
-    "disabled"
+    "disabled",
+    "active",
+    "focus-visible",
+    "hover"
   ],
   "anatomy": {
     "root": {
@@ -612,7 +615,14 @@
             "padding-inline": "{p.space-300}",
             "font-size": "{p.font-size-400}",
             "font-weight": "{p.font-weight-regular}",
-            "line-height": "{p.font-line-height-600}"
+            "line-height": "{p.font-line-height-600}",
+            "bottom": "{imported.shared.size-0}",
+            "flex-grow": "{imported.shared.num-1}",
+            "left": "{imported.shared.size-0}",
+            "min-width": "{imported.shared.size-0}",
+            "right": "{imported.shared.size-0}",
+            "top": "{imported.shared.size-0}",
+            "z-index": "{imported.text-field.input.z-index}"
           },
           "tokensByProp": [
             {
@@ -641,6 +651,19 @@
             "name": "{name}",
             "value": "{value}",
             "placeholder": "{placeholder}"
+          },
+          "declared": {
+            "cursor": "text",
+            "font-feature-settings": "normal",
+            "overflow-x": "clip",
+            "overflow-y": "clip",
+            "position": "relative",
+            "text-rendering": "auto"
+          },
+          "declaredStates": {
+            "disabled": {
+              "cursor": "default"
+            }
           }
         },
         "backdrop": {
@@ -649,7 +672,16 @@
             "background-color": "{p.color-input-bg-surface}",
             "border-radius": "{p.border-radius-200}",
             "border-width": "{p.border-width-0165}",
-            "border-color": "{p.color-input-border}"
+            "border-color": "{p.color-input-border}",
+            "border-bottom-left-radius": "{imported.shared.size-8}",
+            "border-bottom-right-radius": "{imported.shared.size-8}",
+            "border-top-right-radius": "{imported.shared.size-8}",
+            "bottom": "{imported.shared.size-0}",
+            "left": "{imported.shared.size-0}",
+            "min-width": "{imported.shared.size-0}",
+            "right": "{imported.shared.size-0}",
+            "top": "{imported.shared.size-0}",
+            "z-index": "{imported.text-field.backdrop.z-index}"
           },
           "tokensByProp": [
             {
@@ -667,8 +699,67 @@
                   "padding-block": "{p.space-050}"
                 }
               }
+            },
+            {
+              "prop": "variant",
+              "map": {
+                "borderless": {
+                  "border-left-color": "{imported.text-field.backdrop.border-left-color.borderless}",
+                  "border-left-width": "{imported.text-field.backdrop.border-left-width.borderless}",
+                  "border-right-color": "{imported.text-field.backdrop.border-right-color.borderless}",
+                  "border-right-width": "{imported.text-field.backdrop.border-right-width.borderless}",
+                  "border-top-color": "{imported.text-field.backdrop.border-top-color.borderless}",
+                  "border-top-width": "{imported.text-field.backdrop.border-top-width.borderless}"
+                },
+                "inherit": {
+                  "border-left-color": "{imported.text-field.backdrop.border-left-color.inherit}",
+                  "border-left-width": "{imported.text-field.backdrop.border-left-width.inherit}",
+                  "border-right-color": "{imported.text-field.backdrop.border-right-color.inherit}",
+                  "border-right-width": "{imported.text-field.backdrop.border-right-width.inherit}",
+                  "border-top-color": "{imported.text-field.backdrop.border-top-color.inherit}",
+                  "border-top-width": "{imported.text-field.backdrop.border-top-width.inherit}"
+                }
+              }
+            },
+            {
+              "prop": "variant",
+              "map": {
+                "borderless": {
+                  "border-width": "{p.border-width-0}"
+                }
+              }
             }
-          ]
+          ],
+          "declared": {
+            "cursor": "text",
+            "pointer-events": "none"
+          },
+          "declaredStates": {
+            "active": {
+              "outline-style": "solid"
+            },
+            "disabled": {
+              "cursor": "auto"
+            },
+            "focus-visible": {
+              "outline-style": "solid"
+            }
+          },
+          "states": {
+            "active": {
+              "background-color": "{imported.text-field.backdrop.background-color-state-active}"
+            },
+            "disabled": {
+              "background-color": "{imported.text-field.backdrop.background-color-state-disabled}",
+              "color": "{imported.shared.color-b5b5b5}"
+            },
+            "focus-visible": {
+              "background-color": "{imported.text-field.backdrop.background-color-state-focus-visible}"
+            },
+            "hover": {
+              "background-color": "{imported.text-field.backdrop.background-color-state-hover}"
+            }
+          }
         }
       }
     }
@@ -682,5 +773,6 @@
       "importPath": "polaris-react/src/components/TextField/TextField",
       "export": "TextField"
     }
-  }
+  },
+  "figmaStatePreviews": true
 }

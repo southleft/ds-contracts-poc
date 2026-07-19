@@ -1,0 +1,306 @@
+{
+  "_marker": "NON-SCHEMA EXTENSION BLOCK — computed-capture overflow. Nothing here is contract vocabulary; every entry names why it does not fit (DESIGN §5.4).",
+  "generatedBy": "extract/computed/run.ts",
+  "library": "@shopify/polaris@13.9.5",
+  "browser": "148.0.7778.96",
+  "mintedTokens": {
+    "imported": {
+      "shared": {
+        "size-4": {
+          "$value": "4px",
+          "$type": "dimension"
+        },
+        "size-0": {
+          "$value": "0px",
+          "$type": "dimension"
+        }
+      },
+      "progress-bar": {
+        "progress": {
+          "bottom": {
+            "$value": "799px",
+            "$type": "dimension"
+          },
+          "left": {
+            "$value": "16px",
+            "$type": "dimension"
+          },
+          "right": {
+            "$value": "583px",
+            "$type": "dimension"
+          },
+          "vertical-align": {
+            "$value": "-2.6px",
+            "$type": "dimension"
+          }
+        },
+        "label": {
+          "bottom": {
+            "small": {
+              "$value": "7px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "15px",
+              "$type": "dimension"
+            },
+            "large": {
+              "$value": "31px",
+              "$type": "dimension"
+            }
+          },
+          "right": {
+            "$value": "287px",
+            "$type": "dimension"
+          }
+        }
+      }
+    }
+  },
+  "folds": [],
+  "foldedStateSkips": [],
+  "layout": {
+    "enriched": [],
+    "contradictions": [],
+    "receipts": [],
+    "_note": "computed flex keywords carried via Part.layout (the schema's own vocabulary); carried-slot contradictions are receipts, never silent overrides"
+  },
+  "declaredFacts": {
+    "_note": "v15 (S4): uniform registry-channel facts carried as Part.declared / Part.declaredStates — first-class contract vocabulary, listed here as the enrichment receipt",
+    "base": [
+      {
+        "part": "root",
+        "channel": "overflow-x",
+        "value": "hidden"
+      },
+      {
+        "part": "root",
+        "channel": "overflow-y",
+        "value": "hidden"
+      },
+      {
+        "part": "indicator",
+        "channel": "transition-duration",
+        "value": "0.5s"
+      },
+      {
+        "part": "indicator",
+        "channel": "transition-property",
+        "value": "transform"
+      },
+      {
+        "part": "indicator",
+        "channel": "transition-timing-function",
+        "value": "cubic-bezier(0.25, 0.1, 0.25, 1)"
+      }
+    ],
+    "state": []
+  },
+  "codeOnlyChannels": [
+    {
+      "part": "progress",
+      "channel": "appearance",
+      "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
+      "sample": "auto",
+      "distinctValues": 1
+    },
+    {
+      "part": "progress",
+      "channel": "clip-path",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "inset(50%)",
+      "distinctValues": 1
+    },
+    {
+      "part": "progress",
+      "channel": "overflow-x",
+      "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
+      "sample": "hidden",
+      "distinctValues": 1
+    },
+    {
+      "part": "progress",
+      "channel": "overflow-y",
+      "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
+      "sample": "hidden",
+      "distinctValues": 1
+    },
+    {
+      "part": "progress",
+      "channel": "position",
+      "reason": "declared-channel value outside the bounded grammar — named residue (v15)",
+      "sample": "absolute",
+      "distinctValues": 1
+    },
+    {
+      "part": "progress",
+      "channel": "text-wrap-mode",
+      "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
+      "sample": "nowrap",
+      "distinctValues": 1
+    },
+    {
+      "part": "indicator",
+      "channel": "transform",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "matrix(0.25, 0, 0, 1, 0, 0)",
+      "distinctValues": 1
+    },
+    {
+      "part": "label",
+      "channel": "clip-path",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "inset(50%)",
+      "distinctValues": 1
+    },
+    {
+      "part": "label",
+      "channel": "overflow-x",
+      "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
+      "sample": "hidden",
+      "distinctValues": 1
+    },
+    {
+      "part": "label",
+      "channel": "overflow-y",
+      "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
+      "sample": "hidden",
+      "distinctValues": 1
+    },
+    {
+      "part": "label",
+      "channel": "position",
+      "reason": "declared-channel value outside the bounded grammar — named residue (v15)",
+      "sample": "absolute",
+      "distinctValues": 1
+    },
+    {
+      "part": "label",
+      "channel": "text-wrap-mode",
+      "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
+      "sample": "nowrap",
+      "distinctValues": 1
+    }
+  ],
+  "stateOverflow": [],
+  "overflowBindings": [
+    {
+      "part": "progress",
+      "channel": "bottom",
+      "ref": "{imported.progress-bar.progress.bottom}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "progress",
+      "channel": "left",
+      "ref": "{imported.progress-bar.progress.left}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "progress",
+      "channel": "min-height",
+      "ref": "{imported.shared.size-0}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "progress",
+      "channel": "min-width",
+      "ref": "{imported.shared.size-0}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "progress",
+      "channel": "right",
+      "ref": "{imported.progress-bar.progress.right}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "progress",
+      "channel": "top",
+      "ref": "{imported.shared.size-0}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "progress",
+      "channel": "vertical-align",
+      "ref": "{imported.progress-bar.progress.vertical-align}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "label",
+      "channel": "bottom",
+      "ref": "{imported.progress-bar.label.bottom.{size}}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "label",
+      "channel": "left",
+      "ref": "{imported.shared.size-0}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "label",
+      "channel": "min-height",
+      "ref": "{imported.shared.size-0}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "label",
+      "channel": "min-width",
+      "ref": "{imported.shared.size-0}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "label",
+      "channel": "right",
+      "ref": "{imported.progress-bar.label.right}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "label",
+      "channel": "top",
+      "ref": "{imported.shared.size-0}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    }
+  ],
+  "pairwiseRefusals": [],
+  "pseudoParts": {
+    "_reason": "S5 (DESIGN §5.4): pseudo-element decor has no anatomy spelling — captured, receipted, not carried",
+    "findings": [],
+    "totalFindings": 0
+  },
+  "bindingContradictions": [],
+  "interactionOnDisabled": [],
+  "structureReceipts": [],
+  "styledChannelReceipts": [
+    "control-fallback: no control for <progress> — span control used (part progress)"
+  ],
+  "anatomyJoin": {
+    "computed": [
+      {
+        "part": "root",
+        "join": "matched"
+      },
+      {
+        "part": "progress",
+        "join": "computed-only"
+      },
+      {
+        "part": "indicator",
+        "join": "matched"
+      },
+      {
+        "part": "label",
+        "join": "computed-only"
+      }
+    ],
+    "staticOnly": []
+  },
+  "enrichmentNotes": [
+    "declared fact carried: root.overflow-x = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: root.overflow-y = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: indicator.transition-duration = 0.5s (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: indicator.transition-property = transform (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: indicator.transition-timing-function = cubic-bezier(0.25, 0.1, 0.25, 1) (v15 declared vocabulary — declared-not-drawn on canvas)"
+  ]
+}

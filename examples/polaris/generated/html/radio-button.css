@@ -1,14 +1,26 @@
-/* RadioButton — from polaris.radio-button v0.1.0 (core/emit-html.ts) */
+/* RadioButton — from polaris.radio-button v0.2.0 (core/emit-html.ts) */
 
 .radio-button, .radio-button *, .radio-button *::before, .radio-button *::after {
   box-sizing: border-box;
 }
 
 .radio-button {
-  display: inline-flex;
+  display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   border: 0;
+  padding-bottom: var(--imported-radio-button-root-padding-bottom);
+  padding-top: var(--imported-radio-button-root-padding-top);
+  cursor: pointer;
+}
+
+.radio-button:focus-visible {
+  outline-style: solid;
+  outline-offset: 2px;
+}
+
+.radio-button:disabled {
+  cursor: default;
 }
 
 .radio-button__input {
@@ -20,6 +32,32 @@
   padding: 0;
   opacity: 0;
   cursor: pointer;
+  bottom: var(--imported-radio-button-input-bottom);
+  color: var(--imported-radio-button-input-color);
+  font-size: var(--imported-radio-button-input-font-size);
+  font-weight: var(--imported-radio-button-input-font-weight);
+  left: var(--imported-shared-size-0);
+  min-height: var(--imported-shared-size-0);
+  min-width: var(--imported-shared-size-0);
+  outline-color: var(--imported-radio-button-input-outline-color);
+  right: var(--imported-radio-button-input-right);
+  top: var(--imported-shared-size-0);
+  appearance: auto;
+  cursor: default;
+  font-family: Arial;
+  font-feature-settings: normal;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  text-rendering: auto;
+  text-wrap-mode: nowrap;
+}
+
+.radio-button:focus-visible .radio-button__input {
+  outline-style: auto;
+}
+
+.radio-button:disabled .radio-button__input {
+  color: var(--imported-radio-button-input-color-state-disabled);
 }
 
 .radio-button__backdrop {
@@ -30,7 +68,55 @@
   border-radius: var(--p-border-radius-full);
   border-width: var(--p-border-width-0165);
   border-color: var(--p-color-input-border);
+  border-bottom-left-radius: var(--imported-shared-size-9999);
+  border-bottom-right-radius: var(--imported-shared-size-9999);
+  border-left-color: var(--imported-shared-color-8a8a8a);
+  border-left-width: var(--imported-shared-size-1);
+  border-right-color: var(--imported-shared-color-8a8a8a);
+  border-right-width: var(--imported-shared-size-1);
+  border-top-color: var(--imported-shared-color-8a8a8a);
+  border-top-right-radius: var(--imported-shared-size-9999);
+  border-top-width: var(--imported-shared-size-1);
+  bottom: var(--imported-shared-size-0);
+  left: var(--imported-shared-size-0);
+  min-height: var(--imported-shared-size-0);
+  min-width: var(--imported-shared-size-0);
+  right: var(--imported-shared-size-0);
+  top: var(--imported-shared-size-0);
   border-style: solid;
+  border-bottom-style: solid;
+  border-left-style: solid;
+  border-right-style: solid;
+  border-top-style: solid;
+  cursor: pointer;
+  position: relative;
+  transition-duration: 0.1s;
+  transition-property: border-color;
+  transition-timing-function: cubic-bezier(0.19, 0.91, 0.38, 1);
+}
+
+.radio-button:disabled .radio-button__backdrop {
+  border-bottom-style: none;
+  border-left-style: none;
+  border-right-style: none;
+  border-top-style: none;
+  cursor: default;
+}
+
+.radio-button:focus-visible .radio-button__backdrop {
+  outline-style: solid;
+}
+
+.radio-button:active:not(:disabled) .radio-button__backdrop {
+  background-color: var(--imported-radio-button-backdrop-background-color-state-active);
+}
+
+.radio-button:disabled .radio-button__backdrop {
+  background-color: var(--imported-radio-button-backdrop-background-color-state-disabled);
+}
+
+.radio-button:hover:not(:disabled) .radio-button__backdrop {
+  background-color: var(--imported-radio-button-backdrop-background-color-state-hover);
 }
 
 /* showcase chrome */

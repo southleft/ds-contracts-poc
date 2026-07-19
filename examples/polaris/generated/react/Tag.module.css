@@ -1,5 +1,5 @@
 /* GENERATED FILE — DO NOT EDIT.
- * Source of truth: contracts/tag.contract.json (polaris.tag v0.1.0)
+ * Source of truth: contracts/tag.contract.json (polaris.tag v0.2.0)
  * Regenerate with: npm run generate
  */
 
@@ -10,11 +10,78 @@
   background-color: var(--p-color-bg-fill-tertiary);
   color: var(--p-color-text);
   border-radius: var(--p-border-radius-200);
+  border-bottom-left-radius: var(--imported-shared-size-8);
+  border-bottom-right-radius: var(--imported-shared-size-8);
+  border-top-right-radius: var(--imported-shared-size-8);
+  bottom: var(--imported-shared-size-0);
+  left: var(--imported-shared-size-0);
+  padding-left: var(--imported-tag-root-padding-left);
+  padding-right: var(--imported-tag-root-padding-right);
+  right: var(--imported-shared-size-0);
+  top: var(--imported-shared-size-0);
+  max-width: 100%;
+  position: relative;
+}
+
+.root:disabled {
+  background-color: var(--imported-tag-root-background-color-state-disabled);
+}
+
+.root:disabled {
+  border-bottom-color: var(--imported-shared-color-b5b5b5);
+}
+
+.root:disabled {
+  border-left-color: var(--imported-shared-color-b5b5b5);
+}
+
+.root:disabled {
+  border-right-color: var(--imported-shared-color-b5b5b5);
+}
+
+.root:disabled {
+  border-top-color: var(--imported-shared-color-b5b5b5);
+}
+
+.root:disabled {
+  caret-color: var(--imported-shared-color-b5b5b5);
+}
+
+.root:disabled {
+  color: var(--imported-shared-color-b5b5b5);
+}
+
+.root:disabled {
+  column-rule-color: var(--imported-shared-color-b5b5b5);
+}
+
+.root:disabled {
+  outline-color: var(--imported-shared-color-b5b5b5);
+}
+
+.root:disabled {
+  text-decoration-color: var(--imported-shared-color-b5b5b5);
+}
+
+.root:disabled {
+  text-emphasis-color: var(--imported-shared-color-b5b5b5);
+}
+
+.root:disabled {
+  transition-property: none;
 }
 
 .label {
   font-size: var(--p-text-body-sm-font-size);
   font-weight: var(--p-text-body-sm-font-weight);
-  line-height: var(--p-text-body-sm-font-line-height);
+  line-height: var(--p-font-line-height-500);
   letter-spacing: var(--p-text-body-sm-font-letter-spacing);
+  min-height: var(--imported-shared-size-0);
+  min-width: var(--imported-shared-size-0);
+  display: inline;
+  text-wrap-mode: nowrap;
+}
+
+.root:disabled .label {
+  color: var(--imported-shared-color-b5b5b5);
 }
